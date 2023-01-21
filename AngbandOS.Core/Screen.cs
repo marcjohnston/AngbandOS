@@ -32,8 +32,10 @@ namespace AngbandOS.Core
         /// </summary>
         private int Width;
 
-        private readonly int[] A; // Represents fast character index into Va for each row.  0, 80, 160 etc ...  // Was a pointer to part of va, now an index into it // TODO: not sure if this is needed anymore
-        private readonly int[] C; // Was a pointer to part of va, now an index into it
+        /// <summary>
+        /// Represents fast character index into the color and character array for each row.  0, 80, 160 etc
+        /// </summary>
+        private readonly int[] RowStartingIndexArray; 
 
         /// <summary>
         /// True, if a clear command was issued.  This flag forces a screen clear event to be emitted to the client and all screen contents redrawn when the UpdateScreen method runs.
@@ -61,12 +63,10 @@ namespace AngbandOS.Core
             TotalErase = true;
 
             // Initialize A, C, Va and Vc.  A and C are character indexes for each row so that we do not have to multiply.
-            A = new int[h];
-            C = new int[h];
+            RowStartingIndexArray = new int[h];
             for (int y = 0; y < h; y++)
             {
-                A[y] = w * y;
-                C[y] = w * y;
+                RowStartingIndexArray[y] = w * y;
             }
         }
 
@@ -104,12 +104,11 @@ namespace AngbandOS.Core
             buffer.Cy = 0;
             for (int y = 0; y < Height; y++)
             {
-                int scrAa = A[y];
-                int scrCc = C[y];
+                int scrAa = RowStartingIndexArray[y];
                 for (int x = 0; x < Width; x++)
                 {
                     buffer.Va[scrAa + x] = AttrBlank;
-                    buffer.Vc[scrCc + x] = CharBlank;
+                    buffer.Vc[scrAa + x] = CharBlank;
                 }
             }
         }
@@ -141,14 +140,12 @@ namespace AngbandOS.Core
             ScreenBuffer f = new ScreenBuffer(Width, Height);
             for (int y = 0; y < Height; y++)
             {
-                int fAa = A[y];
-                int fCc = C[y];
-                int sAa = A[y];
-                int sCc = C[y];
+                int fAa = RowStartingIndexArray[y];
                 for (int x = 0; x < Width; x++)
                 {
-                    f.Va[sAa++] = ActiveScreen.Va[fAa++];
-                    f.Vc[sCc++] = ActiveScreen.Vc[fCc++];
+                    f.Va[fAa] = ActiveScreen.Va[fAa];
+                    f.Vc[fAa] = ActiveScreen.Vc[fAa];
+                    fAa++;
                 }
             }
             f.Cx = ActiveScreen.Cx;
@@ -164,14 +161,12 @@ namespace AngbandOS.Core
         {
             for (int y = 0; y < Height; y++)
             {
-                int fAa = A[y];
-                int fCc = C[y];
-                int sAa = A[y];
-                int sCc = C[y];
+                int fAa = RowStartingIndexArray[y];
                 for (int x = 0; x < Width; x++)
                 {
-                    ActiveScreen.Va[sAa++] = f.Va[fAa++];
-                    ActiveScreen.Vc[sCc++] = f.Vc[fCc++];
+                    ActiveScreen.Va[fAa] = f.Va[fAa];
+                    ActiveScreen.Vc[fAa] = f.Vc[fAa];
+                    fAa++;
                 }
             }
             ActiveScreen.Cx = f.Cx;
@@ -214,7 +209,7 @@ namespace AngbandOS.Core
             if (OldScreen.CursorVisible && (!CursorVisible || OldScreen.Cx != ActiveScreen.Cx || OldScreen.Cy != ActiveScreen.Cy))
             {
                 // Turn off the old cursor position.
-                int indexForOldCursor = C[OldScreen.Cy] + OldScreen.Cx; // This is the index to the row of characters in the screen array.
+                int indexForOldCursor = RowStartingIndexArray[OldScreen.Cy] + OldScreen.Cx; // This is the index to the row of characters in the screen array.
                 batchPrintLines.Add(new PrintLine(OldScreen.Cy, OldScreen.Cx, OldScreen.Vc[indexForOldCursor].ToString(), OldScreen.Va[indexForOldCursor], Colour.Background));
             }
 
@@ -225,35 +220,32 @@ namespace AngbandOS.Core
                 int x2 = UpdateWindow.X2[y];
                 if (x1 <= x2)
                 {
-                    int oldARowArrayIndex = A[y];
-                    int oldCRowArrayIndex = C[y];
-                    int screenARowArrayIndex = A[y];
-                    int screenCRowArrayIndex = C[y];
+                    int rowStartingIndex = RowStartingIndexArray[y];
                     int currentMatchingLength = 0;
                     int currentMatchStartingIndex = 0;
                     Colour currentMatchingColor = AttrBlank;
                     for (int x = x1; x <= x2; x++)
                     {
-                        Colour oa = OldScreen.Va[oldARowArrayIndex + x];
-                        char oc = OldScreen.Vc[oldCRowArrayIndex + x];
-                        Colour na = ActiveScreen.Va[screenARowArrayIndex + x];
-                        char nc = ActiveScreen.Vc[screenCRowArrayIndex + x];
+                        Colour oa = OldScreen.Va[rowStartingIndex + x];
+                        char oc = OldScreen.Vc[rowStartingIndex + x];
+                        Colour na = ActiveScreen.Va[rowStartingIndex + x];
+                        char nc = ActiveScreen.Vc[rowStartingIndex + x];
                         if (na == oa && nc == oc)
                         {
                             if (currentMatchingLength != 0)
                             {
-                                batchPrintLines.Add(new PrintLine(y, currentMatchStartingIndex, new string(ActiveScreen.Vc, screenCRowArrayIndex + currentMatchStartingIndex, currentMatchingLength), currentMatchingColor, Colour.Background));
+                                batchPrintLines.Add(new PrintLine(y, currentMatchStartingIndex, new string(ActiveScreen.Vc, rowStartingIndex + currentMatchStartingIndex, currentMatchingLength), currentMatchingColor, Colour.Background));
                                 currentMatchingLength = 0;
                             }
                             continue;
                         }
-                        OldScreen.Va[oldARowArrayIndex + x] = na;
-                        OldScreen.Vc[oldCRowArrayIndex + x] = nc;
+                        OldScreen.Va[rowStartingIndex + x] = na;
+                        OldScreen.Vc[rowStartingIndex + x] = nc;
                         if (currentMatchingColor != na)
                         {
                             if (currentMatchingLength != 0)
                             {
-                                batchPrintLines.Add(new PrintLine(y, currentMatchStartingIndex, new string(ActiveScreen.Vc, screenCRowArrayIndex + currentMatchStartingIndex, currentMatchingLength), currentMatchingColor, Colour.Background));
+                                batchPrintLines.Add(new PrintLine(y, currentMatchStartingIndex, new string(ActiveScreen.Vc, rowStartingIndex + currentMatchStartingIndex, currentMatchingLength), currentMatchingColor, Colour.Background));
                                 currentMatchingLength = 0;
                             }
                             currentMatchingColor = na;
@@ -265,7 +257,7 @@ namespace AngbandOS.Core
                     }
                     if (currentMatchingLength != 0)
                     {
-                        batchPrintLines.Add(new PrintLine(y, currentMatchStartingIndex, new string(ActiveScreen.Vc, screenCRowArrayIndex + currentMatchStartingIndex, currentMatchingLength), currentMatchingColor, Colour.Background));
+                        batchPrintLines.Add(new PrintLine(y, currentMatchStartingIndex, new string(ActiveScreen.Vc, rowStartingIndex + currentMatchStartingIndex, currentMatchingLength), currentMatchingColor, Colour.Background));
                     }
 
                     UpdateWindow.X1[y] = Width;
@@ -279,7 +271,7 @@ namespace AngbandOS.Core
             if (CursorVisible)
             {
                 // Turn on the new cursor position.
-                int indexForNewCursor = C[ActiveScreen.Cy] + ActiveScreen.Cx; // This is the index to the row of characters in the screen array.
+                int indexForNewCursor = RowStartingIndexArray[ActiveScreen.Cy] + ActiveScreen.Cx; // This is the index to the row of characters in the screen array.
                 batchPrintLines.Add(new PrintLine(ActiveScreen.Cy, ActiveScreen.Cx, ActiveScreen.Vc[indexForNewCursor].ToString(), ActiveScreen.Va[indexForNewCursor], Colour.Purple));
             }
 
@@ -305,20 +297,19 @@ namespace AngbandOS.Core
             // Loop through each row of the entire display.  It may be smaller than the full 45 rows.
             for (int y = 0; y < Height; ++y)
             {
-                int scrAa = A[y];
-                int scrCc = C[y];
+                int scrAa = RowStartingIndexArray[y];
                 int fn = 0;
                 int fx = 0;
                 Colour currentColor = AttrBlank;
                 for (int x = 0; x < Width; x++)
                 {
                     Colour na = ActiveScreen.Va[scrAa + x];
-                    char nc = ActiveScreen.Vc[scrCc + x];
+                    char nc = ActiveScreen.Vc[scrAa + x];
                     if (currentColor != na)
                     {
                         if (fn != 0)
                         {
-                            batchPrintLines.Add(new PrintLine(y, fx, new string(ActiveScreen.Vc, scrCc + fx, fn), currentColor, Colour.Background));
+                            batchPrintLines.Add(new PrintLine(y, fx, new string(ActiveScreen.Vc, scrAa + fx, fn), currentColor, Colour.Background));
                             fn = 0;
                         }
                         currentColor = na;
@@ -330,13 +321,13 @@ namespace AngbandOS.Core
                 }
                 if (fn != 0)
                 {
-                    batchPrintLines.Add(new PrintLine(y, fx, new string(ActiveScreen.Vc, scrCc + fx, fn), currentColor, Colour.Background));
+                    batchPrintLines.Add(new PrintLine(y, fx, new string(ActiveScreen.Vc, scrAa + fx, fn), currentColor, Colour.Background));
                 }
             }
 
             if (CursorVisible)
             {
-                int scrCc = C[ActiveScreen.Cy]; // This is the index to the row of characters in the screen array.
+                int scrCc = RowStartingIndexArray[ActiveScreen.Cy]; // This is the index to the row of characters in the screen array.
                 batchPrintLines.Add(new PrintLine(ActiveScreen.Cy, ActiveScreen.Cx, ActiveScreen.Vc[scrCc + ActiveScreen.Cx].ToString(), ActiveScreen.Va[scrCc + ActiveScreen.Cx], Colour.Purple));
             }
 
@@ -367,18 +358,17 @@ namespace AngbandOS.Core
             {
                 length = w - col;
             }
-            int scrAa = A[row];
-            int scrCc = C[row];
+            int scrAa = RowStartingIndexArray[row];
             for (int i = 0; i < length; i++, col++)
             {
                 Colour oa = ActiveScreen.Va[scrAa + col];
-                int oc = ActiveScreen.Vc[scrCc + col];
+                int oc = ActiveScreen.Vc[scrAa + col];
                 if (oa == na && oc == nc)
                 {
                     continue;
                 }
                 ActiveScreen.Va[scrAa + col] = na;
-                ActiveScreen.Vc[scrCc + col] = nc;
+                ActiveScreen.Vc[scrAa + col] = nc;
                 if (x1 < 0)
                 {
                     x1 = col;
@@ -570,19 +560,18 @@ namespace AngbandOS.Core
         {
             int? x1 = null;
             int? x2 = null;
-            int scrAa = A[y];
-            int scrCc = C[y];
+            int scrAa = RowStartingIndexArray[y];
             foreach (char c in s)
             {
                 Colour oa = ActiveScreen.Va[scrAa + x];
-                int oc = ActiveScreen.Vc[scrCc + x];
+                int oc = ActiveScreen.Vc[scrAa + x];
                 if (oa == a && oc == c)
                 {
                     x++;
                     continue;
                 }
                 ActiveScreen.Va[scrAa + x] = a;
-                ActiveScreen.Vc[scrCc + x] = c;
+                ActiveScreen.Vc[scrAa + x] = c;
                 if (x1 == null)
                 {
                     x1 = x;
