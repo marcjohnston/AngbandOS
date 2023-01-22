@@ -7026,7 +7026,8 @@ namespace AngbandOS
         public void CreatePhlogiston()
         {
             int maxPhlogiston;
-            Item item = Player.Inventory[InventorySlot.Lightsource];
+            LightsourceInventorySlot lightsourceInventorySlot = SingletonRepository.InventorySlots.Get<LightsourceInventorySlot>();
+            Item item = Player.Inventory[lightsourceInventorySlot.WeightedRandom.Choose()];
             // Maximum phlogiston is the capacity of the light source
             if (item.Category == ItemTypeEnum.Light && item.ItemSubCategory == LightType.Lantern)
             {
