@@ -20,5 +20,46 @@ namespace AngbandOS.Core.InventorySlots
         public override bool ProvidesLight => true;
         public override int SortOrder => 7;
         public override string TakeOffMessage => "You were holding";
+
+        public override void ProcessWorld(ProcessWorldEventArgs processWorldEventArgs)
+        {
+            // Consume a turn of light.  The number of available turns of light is reduced by one for every item of light being wielded.
+            bool hadLight = false; // True, if the player had light during the turn.
+            int maxLight = 0; // The amount of light remaining on the lightsource with the most light.
+            foreach (int index in InventorySlots)
+            {
+                Item oPtr = SaveGame.Player.Inventory[index];
+                if (oPtr.Category == ItemTypeEnum.Light)
+                {
+                    if ((oPtr.ItemSubCategory == LightType.Torch || oPtr.ItemSubCategory == LightType.Lantern) && oPtr.TypeSpecificValue > 0)
+                    {
+                        hadLight = true;
+                        oPtr.TypeSpecificValue--;
+
+                        // If the player is blind, do not allow the light to go out completely.
+                        if (SaveGame.Player.TimedBlindness.TimeRemaining != 0)
+                        {
+                            if (oPtr.TypeSpecificValue == 0)
+                            {
+                                oPtr.TypeSpecificValue++;
+                            }
+                        }
+                        if (oPtr.TypeSpecificValue > maxLight)
+                        {
+                            maxLight = oPtr.TypeSpecificValue;
+                        }
+                    }
+                }
+            }
+            if (hadLight && maxLight == 0)
+            {
+                SaveGame.Disturb(true);
+                SaveGame.MsgPrint("Your light has gone out!");
+            }
+            else if (hadLight && maxLight < 100 && maxLight % 10 == 0)
+            {
+                SaveGame.MsgPrint("Your light is growing faint.");
+            }
+        }
     }
 }

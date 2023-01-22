@@ -2715,45 +2715,6 @@ namespace AngbandOS
             Player.TimedBleeding.ProcessWorld();
             Player.TimedHallucinations.ProcessWorld();
 
-            // Consume a turn of light.  The number of available turns of light is reduced by one for every item of light being wielded.
-            bool hadLight = false; // True, if the player had light during the turn.
-            int maxLight = 0; // The amount of light remaining on the lightsource with the most light.
-            BaseInventorySlot lightsourceInventorySlot = SingletonRepository.InventorySlots.Get<LightsourceInventorySlot>();
-            foreach (int index in lightsourceInventorySlot)
-            {
-                oPtr = Player.Inventory[index];
-                if (oPtr.Category == ItemTypeEnum.Light)
-                {
-                    if ((oPtr.ItemSubCategory == LightType.Torch || oPtr.ItemSubCategory == LightType.Lantern) && oPtr.TypeSpecificValue > 0)
-                    {
-                        hadLight = true;
-                        oPtr.TypeSpecificValue--;
-
-                        // If the player is blind, do not allow the light to go out completely.
-                        if (Player.TimedBlindness.TimeRemaining != 0)
-                        {
-                            if (oPtr.TypeSpecificValue == 0)
-                            {
-                                oPtr.TypeSpecificValue++;
-                            }
-                        }
-                        if (oPtr.TypeSpecificValue > maxLight)
-                        {
-                            maxLight = oPtr.TypeSpecificValue;
-                        }
-                    }
-                }
-            }
-            if (hadLight && maxLight == 0)
-            {
-                Disturb(true);
-                MsgPrint("Your light has gone out!");
-            }
-            else if (hadLight && maxLight < 100 && maxLight % 10 == 0)
-            {
-                MsgPrint("Your light is growing faint.");
-            }
-
             UpdateTorchRadiusFlaggedAction.Set();
             if (Player.HasExperienceDrain)
             {
