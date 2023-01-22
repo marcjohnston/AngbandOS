@@ -15130,7 +15130,8 @@ namespace AngbandOS
                 item.BecomeKnown();
                 Player.InvenCarry(item, false);
                 Item carried = item.Clone(1);
-                Player.Inventory[InventorySlot.Lightsource] = carried;
+                LightsourceInventorySlot lightsourceInventorySlot = SingletonRepository.InventorySlots.Get<LightsourceInventorySlot>();
+                Player.Inventory[lightsourceInventorySlot.WeightedRandom.Choose()] = carried;
                 Player.WeightCarried += carried.Weight;
             }
 
