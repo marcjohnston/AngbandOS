@@ -24,5 +24,20 @@ namespace AngbandOS.Core.InventorySlots
         /// Returns true, to sense the identity of items in the pack only 20% of the time.
         /// </summary>
         public override bool IdentitySenseChanceTest => Program.Rng.RandomLessThan(5) == 0;
+
+        /// <summary>
+        /// Allows items being carried in a pack to hook into the ProcessWorld event.  By default, this method initiates the hook for all items in the inventory slot to perform processing 
+        /// during the ProcessWorld event through the PackProcessWorld method.
+        /// </summary>
+        public override void ProcessWorldHook(ProcessWorldEventArgs processWorldEventArgs)
+        {
+            base.ProcessWorldHook(processWorldEventArgs);
+
+            foreach (int index in InventorySlots)
+            {
+                Item oPtr = SaveGame.Player.Inventory[index];
+                oPtr.PackProcessWorldHook(SaveGame);
+            }
+        }
     }
 }

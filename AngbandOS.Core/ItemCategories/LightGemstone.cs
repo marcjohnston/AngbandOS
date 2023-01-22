@@ -15,9 +15,21 @@ namespace AngbandOS.Core.ItemCategories
         public override string FriendlyName => "& Gemstone~"; // TODO: This appears to cause a defect in identification
         public override bool InstaArt => true;
         public override int Level => 60;
-        public override int? SubCategory => 6;
+        public override int? SubCategory => LightType.Thrain;
         public override int Weight => 5;
 
         public override bool ProvidesSunlight => true;
+
+        public override void EquipmentProcessWorld(SaveGame saveGame, Item item)
+        {
+            if (Program.Rng.DieRoll(999) == 1 && !saveGame.Player.HasAntiMagic)
+            {
+                if (saveGame.Player.TimedInvulnerability.TimeRemaining == 0)
+                {
+                    saveGame.MsgPrint("The Jewel of Judgement drains life from you!");
+                    saveGame.Player.TakeHit(Math.Min(saveGame.Player.Level, 50), "the Jewel of Judgement");
+                }
+            }
+        }
     }
 }

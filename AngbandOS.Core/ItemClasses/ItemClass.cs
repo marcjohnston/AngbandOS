@@ -20,6 +20,20 @@ namespace AngbandOS.Core.ItemClasses
         }
 
         /// <summary>
+        /// Hook into the ProcessWorld event, when an item of this class is being worn/wielded.  Does nothing, by default.
+        /// </summary>
+        /// <param name="saveGame"></param>
+        /// <param name="item"></param>
+        public virtual void EquipmentProcessWorld(SaveGame saveGame, Item item) { }
+
+        /// <summary>
+        /// Hook into the ProcessWorld event, when an item of this class is being carried in a pack inventory slot.  Does nothing, by default.
+        /// </summary>
+        /// <param name="saveGame"></param>
+        /// <param name="item"></param>
+        public virtual void PackProcessWorld(SaveGame saveGame, Item item) { }
+
+        /// <summary>
         /// Returns the inventory slot where the item is wielded.  Returns the pack, by default.
         /// </summary>
         public virtual int WieldSlot => InventorySlot.Pack;

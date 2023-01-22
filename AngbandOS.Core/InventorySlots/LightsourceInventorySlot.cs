@@ -21,8 +21,15 @@ namespace AngbandOS.Core.InventorySlots
         public override int SortOrder => 7;
         public override string TakeOffMessage => "You were holding";
 
-        public override void ProcessWorld(ProcessWorldEventArgs processWorldEventArgs)
+        /// <summary>
+        /// Consumes a turn of light during the ProcessWorldHook event.  Base inventory slot ProcessWorldHook processing occurs first, allowing light source items to process the event first.
+        /// </summary>
+        /// <param name="processWorldEventArgs"></param>
+        public override void ProcessWorldHook(ProcessWorldEventArgs processWorldEventArgs)
         {
+            // Allow base processing to process the event.
+            base.ProcessWorldHook(processWorldEventArgs);
+
             // Consume a turn of light.  The number of available turns of light is reduced by one for every item of light being wielded.
             bool hadLight = false; // True, if the player had light during the turn.
             int maxLight = 0; // The amount of light remaining on the lightsource with the most light.

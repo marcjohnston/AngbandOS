@@ -4,6 +4,30 @@ namespace AngbandOS
     internal class Item
     {
         /// <summary>
+        /// Hook into the ProcessWorld, when the item is being worn/wielded.  By default, the item forwards the event to the base ItemClass for processing.
+        /// </summary>
+        /// <param name="saveGame"></param>
+        public virtual void EquipmentProcessWorldHook(SaveGame saveGame)
+        {
+            if (BaseItemCategory != null)
+            {
+                BaseItemCategory.EquipmentProcessWorld(saveGame, this);
+            }
+        }
+
+        /// <summary>
+        /// Hook into the ProcessWorld, when the item is being carried in a pack inventory slot.  By default, the item forwards the event to the base ItemClass for processing.
+        /// </summary>
+        /// <param name="saveGame"></param>
+        public virtual void PackProcessWorldHook(SaveGame saveGame)
+        {
+            if (BaseItemCategory != null)
+            {
+                BaseItemCategory.PackProcessWorld(saveGame, this);
+            }
+        }
+
+        /// <summary>
         /// Returns true, if the item has already been identify sensed.  This property used to be a flag in the IdentifyFlags.
         /// </summary>
         public bool IdentSense;

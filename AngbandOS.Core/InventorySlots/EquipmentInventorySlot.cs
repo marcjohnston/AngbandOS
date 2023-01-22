@@ -18,11 +18,21 @@ namespace AngbandOS.Core.InventorySlots
         public override bool IsEquipment => true;
 
         /// <summary>
-        /// Allows wielded equipment items to process world.
+        /// Allows wielded equipment items to process world.  By default, initiates the hook for all items in the inventory slot to perform processing during the ProcessWorld event through
+        /// the EquipmentProcessWorld method.
         /// </summary>
-        public override void ProcessWorld(ProcessWorldEventArgs processWorldEventArgs)
+        public override void ProcessWorldHook(ProcessWorldEventArgs processWorldEventArgs)
         {
-            if (processWorldEventArgs.SaveGame.Player.Race.IsBurnedBySunlight)
+            base.ProcessWorldHook(processWorldEventArgs);
+
+            // Allow the base functionality to process items.
+            foreach (int index in InventorySlots)
+            {
+                Item oPtr = SaveGame.Player.Inventory[index];
+                oPtr.EquipmentProcessWorldHook(SaveGame);
+            }
+
+            if (processWorldEventArgs.SaveGame.Player.Race.IsBurnedBySunlight) // TODO: This needs to use a hook.
             {
                 foreach (int index in InventorySlots)
                 {

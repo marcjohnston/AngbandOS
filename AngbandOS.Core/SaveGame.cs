@@ -2516,7 +2516,7 @@ namespace AngbandOS
             foreach (BaseInventorySlot inventorySlot in SingletonRepository.InventorySlots)
             {
                 ProcessWorldEventArgs inventorySlotProcessWorldEventArgs = new ProcessWorldEventArgs(this);
-                inventorySlot.ProcessWorld(inventorySlotProcessWorldEventArgs);
+                inventorySlot.ProcessWorldHook(inventorySlotProcessWorldEventArgs);
                 if (inventorySlotProcessWorldEventArgs.DisableRegeneration)
                 {
                     caveNoRegen = true;
@@ -2723,15 +2723,6 @@ namespace AngbandOS
                     Player.ExperiencePoints--;
                     Player.MaxExperienceGained--;
                     Player.CheckExperience();
-                }
-            }
-            if (Program.Rng.DieRoll(999) == 1 && !Player.HasAntiMagic)
-            {
-                if (Player.Inventory[InventorySlot.Lightsource].Category != 0 && Player.TimedInvulnerability.TimeRemaining == 0 &&
-                    Player.Inventory[InventorySlot.Lightsource].ItemSubCategory == LightType.Thrain)
-                {
-                    MsgPrint("The Jewel of Judgement drains life from you!");
-                    Player.TakeHit(Math.Min(Player.Level, 50), "the Jewel of Judgement");
                 }
             }
             int j;
