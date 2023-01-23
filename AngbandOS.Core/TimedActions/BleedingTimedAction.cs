@@ -144,6 +144,9 @@
             return true;
         }
 
+        /// <summary>
+        /// Processes the timed bleeding.  A mortal wound (time remaining > 1000) will not heal over time.
+        /// </summary>
         public override void ProcessWorld()
         {
             if (TimeRemaining > 0)
