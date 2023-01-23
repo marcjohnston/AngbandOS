@@ -26,7 +26,7 @@ namespace AngbandOS.Projection
             bool obvious = false;
             int doStun = 0;
             string note = null;
-            string noteDies = NoteDiesOrIsDestroyed(rPtr);
+            string noteDies = rPtr.DeathNote();
             string mName = mPtr.Name;
             bool resistTele = false;
             if (seen)

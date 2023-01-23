@@ -31,6 +31,23 @@ namespace AngbandOS.Core.MonsterRaces
         public MonsterKnowledge Knowledge;
 
         /// <summary>
+        /// Returns a standard message note for a monster of either it 'dies' or is 'destroyed' based on whether
+        /// or not the monster is already dead.  If it is already dead, a 'destroyed' message is returned and it 'dies'
+        /// is returned for all living monsters.  Other variations are that dispel projectiles will dissolve and
+        /// PSI will "collapses, a mindless husk".
+        /// </summary>
+        /// <param name="rPtr"></param>
+        /// <returns></returns>
+        public virtual string DeathNote()
+        {
+            if (Demon || Undead || Cthuloid || Stupid || Nonliving || "Evg".Contains(Character.ToString()))
+            {
+                return " is destroyed.";
+            }
+            return " dies.";
+        }
+
+        /// <summary>
         /// The character to render the monster as.
         /// </summary>
         public abstract char Character { get; }

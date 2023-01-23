@@ -33,7 +33,7 @@ namespace AngbandOS.Projection
             bool obvious = false;
             int doDist = 0;
             string note = null;
-            string noteDies = NoteDiesOrIsDestroyed(rPtr);
+            string noteDies = rPtr.DeathNote();
             string mName = mPtr.Name;
             bool resistsTele = false;
             if (rPtr.ResistTeleport)

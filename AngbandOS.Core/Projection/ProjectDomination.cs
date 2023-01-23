@@ -35,7 +35,7 @@ namespace AngbandOS.Projection
             int doStun = 0;
             int doFear = 0;
             string note = null;
-            string noteDies = NoteDiesOrIsDestroyed(rPtr);
+            string noteDies = rPtr.DeathNote();
             string mName = mPtr.Name;
             if (seen)
             {

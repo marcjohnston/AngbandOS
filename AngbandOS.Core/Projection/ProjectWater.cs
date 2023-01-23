@@ -24,7 +24,7 @@ namespace AngbandOS.Projection
             bool obvious = false;
             string note = null;
             MonsterRace rPtr = mPtr.Race;
-            string noteDies = NoteDiesOrIsDestroyed(rPtr);
+            string noteDies = rPtr.DeathNote();
             string name = rPtr.Name;
             bool seen = mPtr.IsVisible;
             string mName = mPtr.Name;

@@ -466,26 +466,6 @@ namespace AngbandOS.Projection
         }
 
         /// <summary>
-        /// Returns a standard message note for a monster of either it 'dies' or is 'destroyed' based on whether
-        /// or not the monster is already dead.  If it is already dead, a 'destroyed' message is returned and it 'dies'
-        /// is returned for all living monsters.  Other variations are that dispel projectiles will dissolve and
-        /// PSI will "collapses, a mindless husk".
-        /// </summary>
-        /// <param name="rPtr"></param>
-        /// <returns></returns>
-        protected string NoteDiesOrIsDestroyed(MonsterRace rPtr)
-        {
-            string noteDies = " dies.";
-            if (rPtr.Demon || rPtr.Undead ||
-                rPtr.Cthuloid || rPtr.Stupid ||
-                rPtr.Nonliving || "Evg".Contains(rPtr.Character.ToString()))
-            {
-                noteDies = " is destroyed.";
-            }
-            return noteDies;
-        }
-
-        /// <summary>
         /// Performs a reflection test of the projectile on the player and returns true, if the projectile is reflected.
         /// </summary>
         /// <param name="who"></param>
