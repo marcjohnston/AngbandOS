@@ -19,7 +19,8 @@ namespace AngbandOS.Core.AttackEffects
             saveGame.Player.TakeHit(damage, monsterDescription);
             for (int k = 0; k < 10; k++)
             {
-                int i = Program.Rng.RandomLessThan(InventorySlot.PackCount);
+                BaseInventorySlot packInventorySlot = saveGame.SingletonRepository.InventorySlots.Get<PackInventorySlot>();
+                int i = packInventorySlot.WeightedRandom.Choose();
                 Item item = saveGame.Player.Inventory[i];
                 if (item.BaseItemCategory != null)
                 {

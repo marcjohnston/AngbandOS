@@ -31,7 +31,7 @@ namespace AngbandOS.Core.InventorySlots
         public virtual void ProcessWorldHook(ProcessWorldEventArgs processWorldEventArgs) { }
 
         /// <summary>
-        /// Returns the sort order when displayed in a list with other inventory slots.  Lower numbers show before higher numbers.
+        /// Returns the zero-based sort order when displayed in a list with other inventory slots.  Lower numbers show before higher numbers.
         /// </summary>
         public abstract int SortOrder { get; }
 

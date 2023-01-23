@@ -108,32 +108,43 @@ namespace AngbandOS
 
         private void DisplayStat(string title, int row, int col, Func<IItemCharacteristics, bool> getStat)
         {
-            // Determine if the stat is granted via any equipment.
+            // Determine if the stat is granted via any equipment.  This allows us to choose the color before rendering any of the inventory slots.
             bool hasStat = false;
-            for (int i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
+            foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsEquipment))
             {
-                Item oPtr = SaveGame.Player.Inventory[i];
-                IItemCharacteristics itemCharacteristics = oPtr.ObjectFlagsKnown();
-                if (getStat(itemCharacteristics))
-                    hasStat = true;
+                foreach (int i in inventorySlot.InventorySlots)
+                {
+                    Item oPtr = SaveGame.Player.Inventory[i];
+                    IItemCharacteristics itemCharacteristics = oPtr.ObjectFlagsKnown();
+                    if (getStat(itemCharacteristics))
+                        hasStat = true;
+                }
             }
 
             Colour baseColour = hasStat ? Colour.Green : Colour.Blue; // Blue default color for missing stat, green when stat is possessed.
             SaveGame.Screen.Print(baseColour, title, row, col);
             SaveGame.Screen.Print(baseColour, ':', row, col + 10); // Right aligned
-            for (int i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
+
+            // Now render all of the inventory slots.
+            int index = 0;
+            foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsEquipment).OrderBy(_inventorySlot => _inventorySlot.SortOrder))
             {
-                Item oPtr = SaveGame.Player.Inventory[i];
-                IItemCharacteristics itemCharacteristics = oPtr.ObjectFlagsKnown();
-                if (getStat(itemCharacteristics))
+                foreach (int i in inventorySlot.InventorySlots)
                 {
-                    SaveGame.Screen.Print(baseColour, "+", row, col + 10 + i - InventorySlot.MeleeWeapon + 1);
-                }
-                else
-                {
-                    SaveGame.Screen.Print(Colour.Grey, ".", row, col + 10 + i - InventorySlot.MeleeWeapon + 1);
+                    Item oPtr = SaveGame.Player.Inventory[i];
+                    IItemCharacteristics itemCharacteristics = oPtr.ObjectFlagsKnown();
+                    if (getStat(itemCharacteristics))
+                    {
+                        SaveGame.Screen.Print(baseColour, "+", row, col + 10 + index + 1);
+                    }
+                    else
+                    {
+                        SaveGame.Screen.Print(Colour.Grey, ".", row, col + 10 + index + 1);
+                    }
+                    index++;
                 }
             }
+
             ItemCharacteristics playerCharacteristics = SaveGame.Player.GetAbilitiesAsItemFlags();
             if (getStat(playerCharacteristics))
             {

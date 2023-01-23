@@ -19,7 +19,8 @@ namespace AngbandOS.Core.AttackEffects
             // Have ten tries at grabbing a food item from the player
             for (int k = 0; k < 10; k++)
             {
-                int i = Program.Rng.RandomLessThan(InventorySlot.PackCount);
+                BaseInventorySlot packInventorySlot = saveGame.SingletonRepository.InventorySlots.Get<PackInventorySlot>();
+                int i = packInventorySlot.WeightedRandom.Choose();
                 Item item = saveGame.Player.Inventory[i];
                 if (item.BaseItemCategory != null)
                 {

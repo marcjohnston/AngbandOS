@@ -2512,7 +2512,7 @@ namespace AngbandOS
             Item oPtr;
             bool caveNoRegen = false;
 
-            // Allow inventory slots access to the process world.
+            // Allow all inventory slots access to the process world.
             foreach (BaseInventorySlot inventorySlot in SingletonRepository.InventorySlots)
             {
                 ProcessWorldEventArgs inventorySlotProcessWorldEventArgs = new ProcessWorldEventArgs(this);

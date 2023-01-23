@@ -28,18 +28,23 @@ namespace AngbandOS
         /// <param name="screenCol"> The column in which to start printing the characters </param>
         public static void DisplayPlayerEquippy(SaveGame saveGame, int screenRow, int screenCol)
         {
-            for (int i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
+            int column = 0;
+            foreach (BaseInventorySlot inventorySlot in saveGame.SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsEquipment).OrderBy(_inventorySlot => _inventorySlot.SortOrder))
             {
-                Item item = saveGame.Player.Inventory[i];
-                Colour colour = Colour.Background;
-                char character = ' ';
-                // Only print items that exist
-                if (item.BaseItemCategory != null)
+                foreach (int index in inventorySlot.InventorySlots)
                 {
-                    colour = item.BaseItemCategory.FlavorColour;
-                    character = item.BaseItemCategory.FlavorCharacter;
+                    Item item = saveGame.Player.Inventory[index];
+                    Colour colour = Colour.Background;
+                    char character = ' ';
+                    // Only print items that exist
+                    if (item.BaseItemCategory != null)
+                    {
+                        colour = item.BaseItemCategory.FlavorColour;
+                        character = item.BaseItemCategory.FlavorCharacter;
+                    }
+                    saveGame.Screen.Print(colour, character, screenRow, screenCol + column);
+                    column++;
                 }
-                saveGame.Screen.Print(colour, character, screenRow, screenCol + i - InventorySlot.MeleeWeapon);
             }
         }
 
@@ -238,7 +243,6 @@ namespace AngbandOS
         /// </summary>
         private void DisplayPlayerAbilityScoresWithModifiers()
         {
-            int i;
             Colour a;
             char c;
             const int statCol = 1;
@@ -248,7 +252,7 @@ namespace AngbandOS
             SaveGame.Screen.Print(Colour.Green, "Actual", row - 1, statCol + 29);
             SaveGame.Screen.Print(Colour.Red, "Reduced", row - 1, statCol + 36);
             // Loop through the scores
-            for (i = 0; i < 6; i++)
+            for (int i = 0; i < 6; i++)
             {
                 // Reverse engineer our equipment bonuses from our score
                 int equipmentBonuses = 0;
@@ -294,18 +298,21 @@ namespace AngbandOS
             int col = statCol + 44;
             SaveGame.Screen.Print(Colour.Blue, "abcdefghijklm@", row - 1, col);
             SaveGame.Screen.Print(Colour.Blue, "Modifications", row + 6, col);
-            for (i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
+            foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsEquipment))
             {
-                Item item = SaveGame.Player.Inventory[i];
-                // Only extract known bonuses, not full bonuses
-                ItemCharacteristics itemCharacteristics = item.ObjectFlagsKnown();
-                ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Str, item.TypeSpecificValue, row + 0, col);
-                ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Int, item.TypeSpecificValue, row + 1, col);
-                ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Wis, item.TypeSpecificValue, row + 2, col);
-                ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Dex, item.TypeSpecificValue, row + 3, col);
-                ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Con, item.TypeSpecificValue, row + 4, col);
-                ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Cha, item.TypeSpecificValue, row + 5, col);
-                col++;
+                foreach (int i in inventorySlot.InventorySlots)
+                {
+                    Item item = SaveGame.Player.Inventory[i];
+                    // Only extract known bonuses, not full bonuses
+                    ItemCharacteristics itemCharacteristics = item.ObjectFlagsKnown();
+                    ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Str, item.TypeSpecificValue, row + 0, col);
+                    ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Int, item.TypeSpecificValue, row + 1, col);
+                    ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Wis, item.TypeSpecificValue, row + 2, col);
+                    ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Dex, item.TypeSpecificValue, row + 3, col);
+                    ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Con, item.TypeSpecificValue, row + 4, col);
+                    ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Cha, item.TypeSpecificValue, row + 5, col);
+                    col++;
+                }
             }
 
             ItemCharacteristics playerCharacteristics = SaveGame.Player.GetAbilitiesAsItemFlags();
@@ -356,7 +363,8 @@ namespace AngbandOS
         {
             int showTohit = SaveGame.Player.DisplayedAttackBonus;
             int showTodam = SaveGame.Player.DisplayedDamageBonus;
-            Item item = SaveGame.Player.Inventory[InventorySlot.MeleeWeapon];
+            MeleeWeaponInventorySlot meeleeWeaponInventorySlot = SaveGame.SingletonRepository.InventorySlots.Get<MeleeWeaponInventorySlot>();
+            Item item = SaveGame.Player.Inventory[meeleeWeaponInventorySlot.WeightedRandom.Choose()];
             // Only show bonuses if we know them
             if (item.IsKnown())
             {
@@ -432,10 +440,12 @@ namespace AngbandOS
         /// </summary>
         private void DisplayPlayerSkills()
         {
-            Item item = SaveGame.Player.Inventory[InventorySlot.MeleeWeapon];
+            MeleeWeaponInventorySlot meeleeWeaponInventorySlot = SaveGame.SingletonRepository.InventorySlots.Get<MeleeWeaponInventorySlot>();
+            Item item = SaveGame.Player.Inventory[meeleeWeaponInventorySlot.WeightedRandom.Choose()];
             int tmp = SaveGame.Player.AttackBonus + item.BonusToHit;
             int fighting = SaveGame.Player.SkillMelee + (tmp * Constants.BthPlusAdj);
-            item = SaveGame.Player.Inventory[InventorySlot.RangedWeapon];
+            RangedWeaponInventorySlot rangedWeaponInventorySlot = SaveGame.SingletonRepository.InventorySlots.Get<RangedWeaponInventorySlot>();
+            item = SaveGame.Player.Inventory[rangedWeaponInventorySlot.WeightedRandom.Choose()];
             tmp = SaveGame.Player.AttackBonus + item.BonusToHit;
             int shooting = SaveGame.Player.SkillRanged + (tmp * Constants.BthPlusAdj);
             item = SaveGame.Player.Inventory[InventorySlot.MeleeWeapon];
