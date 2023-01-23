@@ -56,8 +56,7 @@ namespace AngbandOS.Projection
             {
                 obvious = true;
             }
-            if (rPtr.BreatheDark || rPtr.Orc ||
-                rPtr.HurtByLight)
+            if (rPtr.BreatheDark || rPtr.Orc || rPtr.HurtByLight)
             {
                 note = " resists.";
                 dam *= 2;
