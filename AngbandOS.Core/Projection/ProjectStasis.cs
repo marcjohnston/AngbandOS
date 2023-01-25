@@ -20,18 +20,15 @@ namespace AngbandOS.Projection
 
         protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
         {
-            GridTile cPtr = SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX];
             MonsterRace rPtr = mPtr.Race;
             bool seen = mPtr.IsVisible;
             bool obvious = false;
             int doSleep = 0;
-            string noteDies = rPtr.DeathNote();
-            string mName = mPtr.Name;
             if (seen)
             {
                 obvious = true;
             }
-            string note;
+            string? note = null;
             if (rPtr.Unique ||
                 rPtr.Level > Program.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
             {
@@ -44,87 +41,11 @@ namespace AngbandOS.Projection
                 doSleep = 500;
             }
             dam = 0;
-            if (rPtr.Guardian)
+            ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+            // Put the monster to sleep, if not dead.
+            if (mPtr.Health >= 0 && doSleep != 0)
             {
-                if (who != 0 && dam > mPtr.Health)
-                {
-                    dam = mPtr.Health;
-                }
-            }
-            if (rPtr.Guardian)
-            {
-                if (who > 0 && dam > mPtr.Health)
-                {
-                    dam = mPtr.Health;
-                }
-            }
-            if (dam > mPtr.Health)
-            {
-                note = noteDies;
-            }
-            if (who != 0)
-            {
-                if (SaveGame.TrackedMonsterIndex == cPtr.MonsterIndex)
-                {
-                    SaveGame.RedrawHealthFlaggedAction.Set();
-                }
-                mPtr.SleepLevel = 0;
-                mPtr.Health -= dam;
-                if (mPtr.Health < 0)
-                {
-                    bool sad = mPtr.SmFriendly && !mPtr.IsVisible;
-                    SaveGame.MonsterDeath(cPtr.MonsterIndex);
-                    SaveGame.Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
-                    if (string.IsNullOrEmpty(note) == false)
-                    {
-                        SaveGame.MsgPrint($"{mName}{note}");
-                    }
-                    if (sad)
-                    {
-                        SaveGame.MsgPrint("You feel sad for a moment.");
-                    }
-                }
-                else
-                {
-                    if (string.IsNullOrEmpty(note) == false && seen)
-                    {
-                        SaveGame.MsgPrint($"{mName}{note}");
-                    }
-                    else if (dam > 0)
-                    {
-                        SaveGame.Level.Monsters.MessagePain(cPtr.MonsterIndex, dam);
-                    }
-                    if (doSleep != 0)
-                    {
-                        mPtr.SleepLevel = doSleep;
-                    }
-                }
-            }
-            else
-            {
-                if (SaveGame.Level.Monsters.DamageMonster(cPtr.MonsterIndex, dam, out bool fear, noteDies))
-                {
-                }
-                else
-                {
-                    if (string.IsNullOrEmpty(note) == false && seen)
-                    {
-                        SaveGame.MsgPrint($"{mName}{note}");
-                    }
-                    else if (dam > 0)
-                    {
-                        SaveGame.Level.Monsters.MessagePain(cPtr.MonsterIndex, dam);
-                    }
-                    if (fear && mPtr.IsVisible)
-                    {
-                        SaveGame.PlaySound(SoundEffect.MonsterFlees);
-                        SaveGame.MsgPrint($"{mName} flees in terror!");
-                    }
-                    if (doSleep != 0)
-                    {
-                        mPtr.SleepLevel = doSleep;
-                    }
-                }
+                mPtr.SleepLevel = doSleep;
             }
             return obvious;
         }

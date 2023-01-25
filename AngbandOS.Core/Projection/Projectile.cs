@@ -466,6 +466,8 @@ namespace AngbandOS.Projection
         }
 
         /// <summary>
+
+        /// <summary>
         /// Performs a reflection test of the projectile on the player and returns true, if the projectile is reflected.
         /// </summary>
         /// <param name="who"></param>
@@ -621,6 +623,108 @@ namespace AngbandOS.Projection
                 return '\\';
             }
             return '*';
+        }
+
+        protected void ApplyProjectileDamageToMonster(int who, Monster mPtr, int dam, string? note)
+        {
+            ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
+        }
+        protected void ApplyProjectileDamageToMonster(int who, Monster mPtr, int dam, string? note, string noteDies)
+        {
+            ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies, 0);
+        }
+        protected void ApplyProjectileDamageToMonster(int who, Monster mPtr, int dam, string? note, int addFear)
+        {
+            ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, addFear);
+        }
+
+        /// <summary>
+        /// Attempt to join all of the projectile affect monsters with common framework.
+        /// </summary>
+        /// <param name="who"></param>
+        /// <param name="mPtr"></param>
+        /// <param name="dam"></param>
+        /// <param name="note"></param>
+        protected void ApplyProjectileDamageToMonster(int who, Monster mPtr, int dam, string? note, string? noteDies, int addFear)
+        {
+            if (addFear != 0)
+            {
+                int tmp = mPtr.FearLevel + addFear;
+                mPtr.FearLevel = tmp < 200 ? tmp : 200;
+            }
+
+            string mName = mPtr.Name;
+            GridTile cPtr = SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX];
+            MonsterRace rPtr = mPtr.Race;
+
+            if (noteDies == null)
+            {
+                noteDies = rPtr.DeathNote();
+            }
+            if (rPtr.Guardian && who != 0 && dam > mPtr.Health)
+            { 
+                dam = mPtr.Health;
+            }
+            if (dam > mPtr.Health)
+            {
+                note = noteDies;
+            }
+            if (who != 0)
+            {
+                if (SaveGame.TrackedMonsterIndex == cPtr.MonsterIndex)
+                {
+                    SaveGame.RedrawHealthFlaggedAction.Set();
+                }
+                mPtr.SleepLevel = 0;
+                mPtr.Health -= dam;
+                if (mPtr.Health < 0)
+                {
+                    bool sad = mPtr.SmFriendly && !mPtr.IsVisible;
+                    SaveGame.MonsterDeath(cPtr.MonsterIndex);
+                    SaveGame.Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
+                    if (string.IsNullOrEmpty(note) == false)
+                    {
+                        SaveGame.MsgPrint($"{mName}{note}");
+                    }
+                    if (sad)
+                    {
+                        SaveGame.MsgPrint("You feel sad for a moment.");
+                    }
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(note) == false && mPtr.IsVisible)
+                    {
+                        SaveGame.MsgPrint($"{mName}{note}");
+                    }
+                    else if (dam > 0)
+                    {
+                        SaveGame.Level.Monsters.MessagePain(cPtr.MonsterIndex, dam);
+                    }
+                }
+            }
+            else
+            {
+                if (SaveGame.Level.Monsters.DamageMonster(cPtr.MonsterIndex, dam, out bool fear, noteDies))
+                {
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(note) == false && mPtr.IsVisible)
+                    {
+                        SaveGame.MsgPrint($"{mName}{note}");
+                    }
+                    else if (dam > 0)
+                    {
+                        SaveGame.Level.Monsters.MessagePain(cPtr.MonsterIndex, dam);
+                    }
+                    if ((fear || addFear > 0) && mPtr.IsVisible)
+                    {
+                        SaveGame.PlaySound(SoundEffect.MonsterFlees);
+                        SaveGame.MsgPrint($"{mName} flees in terror!");
+                    }
+                }
+            }
         }
     }
 }

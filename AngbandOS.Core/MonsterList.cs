@@ -193,6 +193,14 @@ namespace AngbandOS
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mIdx"></param>
+        /// <param name="dam"></param>
+        /// <param name="fear"></param>
+        /// <param name="note"></param>
+        /// <returns>True, if the monster dies; false, otherwise.</returns>
         public bool DamageMonster(int mIdx, int dam, out bool fear, string note)
         {
             fear = false;
@@ -309,12 +317,10 @@ namespace AngbandOS
             if (mPtr.FearLevel == 0 && !rPtr.ImmuneFear)
             {
                 int percentage = 100 * mPtr.Health / mPtr.MaxHealth;
-                if ((percentage <= 10 && Program.Rng.RandomLessThan(10) < percentage) ||
-                    (dam >= mPtr.Health && Program.Rng.RandomLessThan(100) < 80))
+                if ((percentage <= 10 && Program.Rng.RandomLessThan(10) < percentage) || (dam >= mPtr.Health && Program.Rng.RandomLessThan(100) < 80))
                 {
                     fear = true;
-                    mPtr.FearLevel = Program.Rng.DieRoll(10) +
-                                   (dam >= mPtr.Health && percentage > 7 ? 20 : (11 - percentage) * 5);
+                    mPtr.FearLevel = Program.Rng.DieRoll(10) + (dam >= mPtr.Health && percentage > 7 ? 20 : (11 - percentage) * 5);
                 }
             }
             return false;

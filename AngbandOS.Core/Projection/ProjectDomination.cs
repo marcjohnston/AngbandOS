@@ -27,22 +27,19 @@ namespace AngbandOS.Projection
 
         protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
         {
-            GridTile cPtr = SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX];
             MonsterRace rPtr = mPtr.Race;
             bool seen = mPtr.IsVisible;
             bool obvious = false;
             int doConf = 0;
             int doStun = 0;
             int doFear = 0;
-            string note = null;
-            string noteDies = rPtr.DeathNote();
+            string? note = null;
             string mName = mPtr.Name;
             if (seen)
             {
                 obvious = true;
             }
-            if (rPtr.Unique || rPtr.ImmuneConfusion ||
-                rPtr.Level > Program.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+            if (rPtr.Unique || rPtr.ImmuneConfusion || rPtr.Level > Program.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
             {
                 if (rPtr.ImmuneConfusion)
                 {
@@ -52,8 +49,7 @@ namespace AngbandOS.Projection
                     }
                 }
                 doConf = 0;
-                if ((rPtr.Undead || rPtr.Demon) &&
-                    rPtr.Level > SaveGame.Player.Level / 2 && Program.Rng.DieRoll(2) == 1)
+                if ((rPtr.Undead || rPtr.Demon) && rPtr.Level > SaveGame.Player.Level / 2 && Program.Rng.DieRoll(2) == 1)
                 {
                     string s = seen ? "'s" : "s";
                     SaveGame.MsgPrint($"{mName}{s} corrupted mind backlashes your attack!");
@@ -127,32 +123,13 @@ namespace AngbandOS.Projection
                 }
             }
             dam = 0;
-            if (rPtr.Guardian)
-            {
-                if (who != 0 && dam > mPtr.Health)
-                {
-                    dam = mPtr.Health;
-                }
-            }
-            if (rPtr.Guardian)
-            {
-                if (who > 0 && dam > mPtr.Health)
-                {
-                    dam = mPtr.Health;
-                }
-            }
-            int tmp;
-            if (dam > mPtr.Health)
-            {
-                note = noteDies;
-            }
-            else if (doStun != 0 && !rPtr.BreatheSound &&
-                     !rPtr.BreatheForce)
+            if (doStun != 0 && !rPtr.BreatheSound && !rPtr.BreatheForce)
             {
                 if (seen)
                 {
                     obvious = true;
                 }
+                int tmp;
                 if (mPtr.StunLevel != 0)
                 {
                     note = " is more dazed.";
@@ -165,13 +142,13 @@ namespace AngbandOS.Projection
                 }
                 mPtr.StunLevel = tmp < 200 ? tmp : 200;
             }
-            else if (doConf != 0 && !rPtr.ImmuneConfusion &&
-                     !rPtr.BreatheConfusion && !rPtr.BreatheChaos)
+            else if (doConf != 0 && !rPtr.ImmuneConfusion && !rPtr.BreatheConfusion && !rPtr.BreatheChaos)
             {
                 if (seen)
                 {
                     obvious = true;
                 }
+                int tmp;
                 if (mPtr.ConfusionLevel != 0)
                 {
                     note = " looks more confused.";
@@ -184,67 +161,7 @@ namespace AngbandOS.Projection
                 }
                 mPtr.ConfusionLevel = tmp < 200 ? tmp : 200;
             }
-            if (doFear != 0)
-            {
-                tmp = mPtr.FearLevel + doFear;
-                mPtr.FearLevel = tmp < 200 ? tmp : 200;
-            }
-            if (who != 0)
-            {
-                if (SaveGame.TrackedMonsterIndex == cPtr.MonsterIndex)
-                {
-                    SaveGame.RedrawHealthFlaggedAction.Set();
-                }
-                mPtr.SleepLevel = 0;
-                mPtr.Health -= dam;
-                if (mPtr.Health < 0)
-                {
-                    bool sad = mPtr.SmFriendly && !mPtr.IsVisible;
-                    SaveGame.MonsterDeath(cPtr.MonsterIndex);
-                    SaveGame.Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
-                    if (string.IsNullOrEmpty(note) == false)
-                    {
-                        SaveGame.MsgPrint($"{mName}{note}");
-                    }
-                    if (sad)
-                    {
-                        SaveGame.MsgPrint("You feel sad for a moment.");
-                    }
-                }
-                else
-                {
-                    if (string.IsNullOrEmpty(note) == false && seen)
-                    {
-                        SaveGame.MsgPrint($"{mName}{note}");
-                    }
-                    else if (dam > 0)
-                    {
-                        SaveGame.Level.Monsters.MessagePain(cPtr.MonsterIndex, dam);
-                    }
-                }
-            }
-            else
-            {
-                if (SaveGame.Level.Monsters.DamageMonster(cPtr.MonsterIndex, dam, out bool fear, noteDies))
-                {
-                }
-                else
-                {
-                    if (string.IsNullOrEmpty(note) == false && seen)
-                    {
-                        SaveGame.MsgPrint($"{mName}{note}");
-                    }
-                    else if (dam > 0)
-                    {
-                        SaveGame.Level.Monsters.MessagePain(cPtr.MonsterIndex, dam);
-                    }
-                    if ((fear || doFear != 0) && mPtr.IsVisible)
-                    {
-                        SaveGame.PlaySound(SoundEffect.MonsterFlees);
-                        SaveGame.MsgPrint($"{mName} flees in terror!");
-                    }
-                }
-            }
+            ApplyProjectileDamageToMonster(who, mPtr, dam, note, doFear);
             return obvious;
         }
     }
