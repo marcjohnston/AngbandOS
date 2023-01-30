@@ -25,11 +25,11 @@ namespace AngbandOS.Core.FlaggedActions
             {
                 colour = Colour.BrightGreen;
             }
-            else if (SaveGame.Player.Mana > SaveGame.Player.MaxMana * GlobalData.HitpointWarn / 5)
+            else if (SaveGame.Player.Mana > SaveGame.Player.MaxMana * Constants.HitpointWarn / 5)
             {
                 colour = Colour.BrightYellow;
             }
-            else if (SaveGame.Player.Mana > SaveGame.Player.MaxMana * GlobalData.HitpointWarn / 10)
+            else if (SaveGame.Player.Mana > SaveGame.Player.MaxMana * Constants.HitpointWarn / 10)
             {
                 colour = Colour.Orange;
             }

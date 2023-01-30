@@ -123,6 +123,76 @@ namespace AngbandOS.Core
         public const int WildernessHeight = 44;
         public const int WildernessWidth = 66;
 
+        public const int DelayFactorInMilliseconds = 64;
+        public const int HitpointWarn = 2;
+
+        /// <summary>
+        /// Spell flags for each book
+        /// </summary>
+        public static readonly uint[] BookSpellFlags = { 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000 };
+
+        public static readonly string[] DescStatNeg = { "weak", "stupid", "naive", "clumsy", "sickly", "ugly" };
+        public static readonly string[] DescStatPos = { "strong", "smart", "wise", "dextrous", "healthy", "cute" };
+
+        public static readonly int[] ExtractEnergy =
+        {
+	/* Slow */     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
+	/* Slow */     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
+	/* Slow */     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
+	/* Slow */     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
+	/* Slow */     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
+	/* Slow */     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
+	/* S-50 */     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
+	/* S-40 */     2,  2,  2,  2,  2,  2,  2,  2,  2,  2,
+	/* S-30 */     2,  2,  2,  2,  2,  2,  2,  3,  3,  3,
+	/* S-20 */     3,  3,  3,  3,  3,  4,  4,  4,  4,  4,
+	/* S-10 */     5,  5,  5,  5,  6,  6,  7,  7,  8,  9,
+	/* Norm */    10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+	/* F+10 */    20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
+	/* F+20 */    30, 31, 32, 33, 34, 35, 36, 36, 37, 37,
+	/* F+30 */    38, 38, 39, 39, 40, 40, 40, 41, 41, 41,
+	/* F+40 */    42, 42, 42, 43, 43, 43, 44, 44, 44, 44,
+	/* F+50 */    45, 45, 45, 45, 45, 46, 46, 46, 46, 46,
+	/* F+60 */    47, 47, 47, 47, 47, 48, 48, 48, 48, 48,
+	/* F+70 */    49, 49, 49, 49, 49, 49, 49, 49, 49, 49,
+	/* Fast */    49, 49, 49, 49, 49, 49, 49, 49, 49, 49
+        };
+
+        public static readonly int[] PlayerExp =
+        {
+            10, 25, 45, 70, 100, 140, 200, 280, 380, 500, 650, 850, 1100, 1400, 1800, 2300, 2900, 3600, 4400, 5400,
+            6800, 8400, 10200, 12500, 17500, 25000, 35000, 50000, 75000, 100000, 150000, 200000, 275000, 350000, 450000,
+            550000, 700000, 850000, 1000000, 1250000, 1500000, 1800000, 2100000, 2400000, 2700000, 3000000, 3500000,
+            4000000, 4500000, 5000000
+        };
+
+        public static readonly string[] StatNames = { "STR: ", "INT: ", "WIS: ", "DEX: ", "CON: ", "CHA: " };
+
+        public static readonly string[] StatNamesReduced = { "str: ", "int: ", "wis: ", "dex: ", "con: ", "cha: " };
+
+        public static readonly string[] SymbolIdentification =
+                                                                {
+            " :A dark grid", "!:A potion (or oil)", "\":An amulet (or necklace)", "#:A wall (or secret door)",
+            "$:Treasure (gold or gems)", "%:A vein (magma or quartz)", "&:Entrance to Inn", "':An open door",
+            "(:Soft armour", "):A shield", "*:A vein with treasure", "+:A closed door", ",:Food (or mushroom patch)",
+            "-:A wand (or rod)", ".:Floor", "/:A polearm (Axe/Pike/etc)", "0:Entrance to Pawnbrokers",
+            "1:Entrance to General Store", "2:Entrance to Armoury", "3:Entrance to Weaponsmith", "4:Entrance to Temple",
+            "5:Entrance to Alchemy shop", "6:Entrance to Magic Stores", "7:Entrance to Black Market",
+            "8:Entrance to Hall of Records", "9:Entrance to Bookstore", "::Rubble",
+            ";:An Elder Sign / Yellow Sign", "<:An up staircase", "=:A ring", ">:A down staircase",
+            "?:A scroll", "@:You (or the entrance to your home)", "A:Abomination", "B:Bird", "C:Canine",
+            "D:Ancient Dragon/Wyrm", "E:Elemental", "F:Dragon Fly", "G:Ghost", "H:Hybrid", "I:Insect", "J:Snake",
+            "K:Killer Beetle", "L:Lich", "M:Multi-Headed Reptile", "O:Ogre", "P:Giant Humanoid",
+            "Q:Quylthulg (Pulsing Flesh Mound)", "R:Reptile/Amphibian", "S:Spider/Scorpion/Tick", "T:Troll",
+            "U:Major Demon", "V:Vampire", "W:Wight/Wraith/etc", "X:Extradimensional Entity", "Y:Yeti", "Z:Zephyr Hound",
+            "[:Hard armour", "\\:A hafted weapon (mace/whip/etc)", "]:Misc. armour", "^:A trap", "_:A staff", "a:Ant",
+            "b:Bat", "c:Centipede", "d:Dragon", "e:Floating Eye", "f:Feline", "g:Golem", "h:Hobbit/Elf/Dwarf",
+            "i:Icky Thing", "j:Jelly", "k:Kobold", "l:Louse", "m:Mold", "n:Naga", "o:Orc", "p:Person/Human",
+            "q:Quadruped", "r:Rodent", "s:Skeleton", "t:Townsperson", "u:Minor Demon", "v:Vortex", "w:Worm/Worm-Mass",
+            "x:Xorn/Xaren/etc", "y:Yeek", "z:Zombie/Mummy", "{:A missile (arrow/bolt/shot)", "|:An edged weapon (sword/dagger/etc)",
+            "}:A launcher (bow/crossbow/sling)", "~:A tool (or miscellaneous item)", null
+        };
+
         public static readonly int VersionMajor = Assembly.GetExecutingAssembly().GetName().Version.Major;
         public static readonly int VersionMinor = Assembly.GetExecutingAssembly().GetName().Version.Minor;
         public static readonly string VersionName = Assembly.GetExecutingAssembly().GetName().Name;

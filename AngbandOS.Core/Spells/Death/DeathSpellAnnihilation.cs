@@ -38,7 +38,7 @@ namespace AngbandOS.Spells.Death
                 saveGame.RedrawManaFlaggedAction.Set();
                 saveGame.HandleStuff();
                 saveGame.UpdateScreen();
-                saveGame.Pause(GlobalData.DelayFactor * GlobalData.DelayFactor * GlobalData.DelayFactor);
+                saveGame.Pause(Constants.DelayFactorInMilliseconds);
             }
             saveGame.Player.Mana += 100;
         }

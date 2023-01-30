@@ -222,6 +222,24 @@ namespace AngbandOS
         /// <returns> The number as a Roman numeral </returns>
         public static string ToRoman(this int number, bool forGeneration)
         {
+            Dictionary<int, string> NumberRomanDictionary = new Dictionary<int, string>
+            {
+                { 1000, "M" },
+                { 900, "CM" },
+                { 500, "D" },
+                { 400, "CD" },
+                { 100, "C" },
+                { 90, "XC" },
+                { 50, "L" },
+                { 40, "XL" },
+                { 10, "X" },
+                { 9, "IX" },
+                { 5, "V" },
+                { 4, "IV" },
+                { 1, "I" },
+            };
+
+
             StringBuilder roman = new StringBuilder();
             // If we're for a generation, we want to skip 'I' (you're simply "John", not "John I")
             // and prefix with a space if not 'I')
@@ -238,7 +256,7 @@ namespace AngbandOS
             }
             // Roman numerals are not positional, so simply start with the highest number and keep
             // appending and subtracting until we can't
-            foreach (KeyValuePair<int, string> item in GlobalData.NumberRomanDictionary)
+            foreach (KeyValuePair<int, string> item in NumberRomanDictionary)
             {
                 while (number >= item.Key)
                 {

@@ -20,11 +20,11 @@
             {
                 colour = Colour.BrightGreen;
             }
-            else if (SaveGame.Player.Health > SaveGame.Player.MaxHealth * GlobalData.HitpointWarn / 5)
+            else if (SaveGame.Player.Health > SaveGame.Player.MaxHealth * Constants.HitpointWarn / 5)
             {
                 colour = Colour.BrightYellow;
             }
-            else if (SaveGame.Player.Health > SaveGame.Player.MaxHealth * GlobalData.HitpointWarn / 10)
+            else if (SaveGame.Player.Health > SaveGame.Player.MaxHealth * Constants.HitpointWarn / 10)
             {
                 colour = Colour.Orange;
             }

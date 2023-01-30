@@ -182,7 +182,7 @@ namespace AngbandOS
                 // If they've been drained, make them visually distinct
                 if (SaveGame.Player.AbilityScores[i].Innate < SaveGame.Player.AbilityScores[i].InnateMax)
                 {
-                    SaveGame.Screen.Print(Colour.Blue, GlobalData.StatNamesReduced[i], 14 + i, 1);
+                    SaveGame.Screen.Print(Colour.Blue, Constants.StatNamesReduced[i], 14 + i, 1);
                     int value = SaveGame.Player.AbilityScores[i].Adjusted;
                     buf = value.StatToString();
                     SaveGame.Screen.Print(Colour.Grey, buf, 14 + i, 6);
@@ -191,7 +191,7 @@ namespace AngbandOS
                 }
                 else
                 {
-                    SaveGame.Screen.Print(Colour.Blue, GlobalData.StatNames[i], 14 + i, 1);
+                    SaveGame.Screen.Print(Colour.Blue, Constants.StatNames[i], 14 + i, 1);
                     buf = SaveGame.Player.AbilityScores[i].Adjusted.StatToString();
                     SaveGame.Screen.Print(Colour.Green, buf, 14 + i, 6);
                     buf = AbilitySummary(i);
@@ -276,7 +276,7 @@ namespace AngbandOS
                 equipmentBonuses -= SaveGame.Player.Race.AbilityBonus[i];
                 equipmentBonuses -= SaveGame.Player.Profession.AbilityBonus[i];
                 // Print each of the scores and bonuses
-                SaveGame.Screen.Print(Colour.Blue, GlobalData.StatNames[i], row + i, statCol);
+                SaveGame.Screen.Print(Colour.Blue, Constants.StatNames[i], row + i, statCol);
                 string buf = SaveGame.Player.AbilityScores[i].InnateMax.StatToString();
                 SaveGame.Screen.Print(Colour.Purple, buf, row + i, statCol + 4);
                 buf = SaveGame.Player.Race.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
@@ -391,7 +391,7 @@ namespace AngbandOS
             }
             else
             {
-                PrintLongScore("Exp to Adv.", (int)(GlobalData.PlayerExp[SaveGame.Player.Level - 1] * SaveGame.Player.ExperienceMultiplier / 100L), 33, 28,
+                PrintLongScore("Exp to Adv.", (int)(Constants.PlayerExp[SaveGame.Player.Level - 1] * SaveGame.Player.ExperienceMultiplier / 100L), 33, 28,
                     Colour.Green);
             }
             PrintLongScore("Exp Factor ", SaveGame.Player.ExperienceMultiplier, 34, 28, Colour.Green);
@@ -400,7 +400,7 @@ namespace AngbandOS
             {
                 PrintShortScore("Cur Hit Points ", SaveGame.Player.Health, 31, 52, Colour.Green);
             }
-            else if (SaveGame.Player.Health > SaveGame.Player.MaxHealth * GlobalData.HitpointWarn / 10)
+            else if (SaveGame.Player.Health > SaveGame.Player.MaxHealth * Constants.HitpointWarn / 10)
             {
                 PrintShortScore("Cur Hit Points ", SaveGame.Player.Health, 31, 52, Colour.BrightYellow);
             }
@@ -413,7 +413,7 @@ namespace AngbandOS
             {
                 PrintShortScore("Cur SP (Mana)  ", SaveGame.Player.Mana, 33, 52, Colour.Green);
             }
-            else if (SaveGame.Player.Mana > SaveGame.Player.MaxMana * GlobalData.HitpointWarn / 10)
+            else if (SaveGame.Player.Mana > SaveGame.Player.MaxMana * Constants.HitpointWarn / 10)
             {
                 PrintShortScore("Cur SP (Mana)  ", SaveGame.Player.Mana, 33, 52, Colour.BrightYellow);
             }
@@ -562,7 +562,7 @@ namespace AngbandOS
                 string buf;
                 if (SaveGame.Player.AbilityScores[i].Innate < SaveGame.Player.AbilityScores[i].InnateMax)
                 {
-                    SaveGame.Screen.Print(Colour.Blue, GlobalData.StatNamesReduced[i], 2 + i, 61);
+                    SaveGame.Screen.Print(Colour.Blue, Constants.StatNamesReduced[i], 2 + i, 61);
                     int value = SaveGame.Player.AbilityScores[i].Adjusted;
                     buf = value.StatToString();
                     SaveGame.Screen.Print(Colour.Red, buf, 2 + i, 66);
@@ -572,7 +572,7 @@ namespace AngbandOS
                 }
                 else
                 {
-                    SaveGame.Screen.Print(Colour.Blue, GlobalData.StatNames[i], 2 + i, 61);
+                    SaveGame.Screen.Print(Colour.Blue, Constants.StatNames[i], 2 + i, 61);
                     buf = SaveGame.Player.AbilityScores[i].Adjusted.StatToString();
                     SaveGame.Screen.Print(Colour.Green, buf, 2 + i, 66);
                 }

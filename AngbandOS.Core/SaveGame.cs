@@ -2259,7 +2259,7 @@ namespace AngbandOS
                 Player.Dna.GainMutation(this);
                 Player.GetFirstLevelMutation = false;
             }
-            Player.Energy += GlobalData.ExtractEnergy[Player.Speed];
+            Player.Energy += Constants.ExtractEnergy[Player.Speed];
             if (Player.Energy < 100)
             {
                 return;
@@ -2572,7 +2572,7 @@ namespace AngbandOS
             {
                 if (Player.GameTime.IsTurnHundred)
                 {
-                    i = GlobalData.ExtractEnergy[Player.Speed] * 2;
+                    i = Constants.ExtractEnergy[Player.Speed] * 2;
                     if (Player.HasRegeneration)
                     {
                         i += 30;
@@ -3492,7 +3492,7 @@ namespace AngbandOS
 
         public void Carnage(bool playerCast)
         {
-            int msec = GlobalData.DelayFactor * GlobalData.DelayFactor * GlobalData.DelayFactor;
+            int msec = Constants.DelayFactorInMilliseconds;
             GetCom("Choose a monster race (by symbol) to carnage: ", out char typ);
             for (int i = 1; i < Level.MMax; i++)
             {
@@ -4426,6 +4426,8 @@ namespace AngbandOS
 
         public bool Enchant(Item oPtr, int n, int eflag)
         {
+            int[] EnchantTable = {0, 10, 50, 100, 200, 300, 400, 500, 650, 800, 950, 987, 993, 995, 998, 1000};
+
             bool res = false;
             bool a = oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false;
             oPtr.RefreshFlagBasedProperties();
@@ -4453,7 +4455,7 @@ namespace AngbandOS
                     }
                     else
                     {
-                        chance = GlobalData.EnchantTable[oPtr.BonusToHit];
+                        chance = EnchantTable[oPtr.BonusToHit];
                     }
                     if (Program.Rng.DieRoll(1000) > chance && (!a || Program.Rng.RandomLessThan(100) < 50))
                     {
@@ -4488,7 +4490,7 @@ namespace AngbandOS
                     }
                     else
                     {
-                        chance = GlobalData.EnchantTable[oPtr.BonusDamage];
+                        chance = EnchantTable[oPtr.BonusDamage];
                     }
                     if (Program.Rng.DieRoll(1000) > chance && (!a || Program.Rng.RandomLessThan(100) < 50))
                     {
@@ -4523,7 +4525,7 @@ namespace AngbandOS
                     }
                     else
                     {
-                        chance = GlobalData.EnchantTable[oPtr.BonusArmourClass];
+                        chance = EnchantTable[oPtr.BonusArmourClass];
                     }
                     if (Program.Rng.DieRoll(1000) > chance && (!a || Program.Rng.RandomLessThan(100) < 50))
                     {
@@ -4846,7 +4848,7 @@ namespace AngbandOS
 
         public void MassCarnage(bool playerCast)
         {
-            int msec = GlobalData.DelayFactor * GlobalData.DelayFactor * GlobalData.DelayFactor;
+            int msec = Constants.DelayFactorInMilliseconds;
             for (int i = 1; i < Level.MMax; i++)
             {
                 Monster mPtr = Level.Monsters[i];
@@ -5061,6 +5063,12 @@ namespace AngbandOS
 
         public void ReportMagics()
         {
+            string[] ReportMagicDurations =
+            {
+                "for a short time", "for a little while", "for a while", "for a long while", "for a long time",
+                "for a very long time", "for an incredibly long time", "until you hit a monster"
+            };
+
             int i = 0, j, k;
             string[] info = new string[128];
             int[] info2 = new int[128];
@@ -5167,7 +5175,7 @@ namespace AngbandOS
             Screen.PrintLine("     Your Current Magic:", 1, 15);
             for (k = 2, j = 0; j < i; j++)
             {
-                string dummy = $"{info[j]} {GlobalData.ReportMagicDurations[info2[j]]}.";
+                string dummy = $"{info[j]} {ReportMagicDurations[info2[j]]}.";
                 Screen.PrintLine(dummy, k++, 15);
                 if (k == 22 && j + 1 < i)
                 {
@@ -7924,6 +7932,28 @@ namespace AngbandOS
         /// <param name="x"> The x coordinate of the location being attacked </param>
         public void PlayerAttackMonster(int y, int x)
         {
+            MartialArtsAttack[] MaBlows =
+            {
+                new MartialArtsAttack("You punch {0}.", 1, 0, 1, 4, 0),
+                new MartialArtsAttack("You kick {0}.", 2, 0, 1, 6, 0),
+                new MartialArtsAttack("You strike {0}.", 3, 0, 1, 7, 0),
+                new MartialArtsAttack("You hit {0} with your knee.", 5, 5, 2, 3, Constants.MaKnee),
+                new MartialArtsAttack("You hit {0} with your elbow.", 7, 5, 1, 8, 0),
+                new MartialArtsAttack("You butt {0}.", 9, 10, 2, 5, 0),
+                new MartialArtsAttack("You kick {0}.", 11, 10, 3, 4, Constants.MaSlow),
+                new MartialArtsAttack("You uppercut {0}.", 13, 12, 4, 4, 6),
+                new MartialArtsAttack("You double-kick {0}.", 16, 15, 5, 4, 8),
+                new MartialArtsAttack("You hit {0} with a Cat's Claw.", 20, 20, 5, 5, 0),
+                new MartialArtsAttack("You hit {0} with a jump kick.", 25, 25, 5, 6, 10),
+                new MartialArtsAttack("You hit {0} with an Eagle's Claw.", 29, 25, 6, 6, 0),
+                new MartialArtsAttack("You hit {0} with a circle kick.", 33, 30, 6, 8, 10),
+                new MartialArtsAttack("You hit {0} with an Iron Fist.", 37, 35, 8, 8, 10),
+                new MartialArtsAttack("You hit {0} with a flying kick.", 41, 35, 8, 10, 12),
+                new MartialArtsAttack("You hit {0} with a Dragon Fist.", 45, 35, 10, 10, 16),
+                new MartialArtsAttack("You hit {0} with a Crushing Blow.", 48, 35, 10, 12, 18)
+            };
+
+
             GridTile tile = Level.Grid[y][x];
             Monster monster = Level.Monsters[tile.MonsterIndex];
             MonsterRace race = monster.Race;
@@ -8026,8 +8056,8 @@ namespace AngbandOS
                         int specialEffect = 0;
                         int stunEffect = 0;
                         int times;
-                        MartialArtsAttack martialArtsAttack = GlobalData.MaBlows[0];
-                        MartialArtsAttack oldMartialArtsAttack = GlobalData.MaBlows[0];
+                        MartialArtsAttack martialArtsAttack = MaBlows[0];
+                        MartialArtsAttack oldMartialArtsAttack = MaBlows[0];
                         // Monsters of various types resist being stunned by martial arts
                         int resistStun = 0;
                         if (race.Unique)
@@ -8053,7 +8083,7 @@ namespace AngbandOS
                             // high level or we fail a chance roll
                             do
                             {
-                                martialArtsAttack = GlobalData.MaBlows[Program.Rng.DieRoll(Constants.MaxMa) - 1];
+                                martialArtsAttack = MaBlows[Program.Rng.DieRoll(Constants.MaxMa) - 1];
                             } while (martialArtsAttack.MinLevel > Player.Level || Program.Rng.DieRoll(Player.Level) < martialArtsAttack.Chance);
                             // We've chosen an attack, use it if it's better than the previous
                             // choice (unless we're stunned or confused in which case we're stuck
@@ -8764,7 +8794,7 @@ namespace AngbandOS
             string p = player.Spellcasting.Type == CastingType.Divine ? "prayer" : "spell";
             for (spell = 0; spell < 32; spell++)
             {
-                if ((GlobalData.BookSpellFlags[sval] & (1u << spell)) != 0)
+                if ((Constants.BookSpellFlags[sval] & (1u << spell)) != 0)
                 {
                     spells[num++] = spell;
                 }
@@ -9070,16 +9100,16 @@ namespace AngbandOS
                 return;
             }
             // Run through the identification array till we find the symbol
-            for (index = 0; GlobalData.SymbolIdentification[index] != null; ++index)
+            for (index = 0; Constants.SymbolIdentification[index] != null; ++index)
             {
-                if (symbol == GlobalData.SymbolIdentification[index][0])
+                if (symbol == Constants.SymbolIdentification[index][0])
                 {
                     break;
                 }
             }
             // Display the symbol and its idenfitication
-            string buf = GlobalData.SymbolIdentification[index] != null
-                ? $"{symbol} - {GlobalData.SymbolIdentification[index].Substring(2)}."
+            string buf = Constants.SymbolIdentification[index] != null
+                ? $"{symbol} - {Constants.SymbolIdentification[index].Substring(2)}."
                 : $"{symbol} - Unknown Symbol";
             MsgPrint(buf);
         }
@@ -9584,7 +9614,7 @@ namespace AngbandOS
                 curDis++;
                 x = newX;
                 y = newY;
-                const int msec = GlobalData.DelayFactor * GlobalData.DelayFactor * GlobalData.DelayFactor;
+                const int msec = Constants.DelayFactorInMilliseconds;
                 // If we can see, display the thrown item with a suitable delay
                 if (Level.PanelContains(y, x) && Level.PlayerCanSeeBold(y, x))
                 {
@@ -10722,7 +10752,7 @@ namespace AngbandOS
                 curDis++;
                 x = newX;
                 y = newY;
-                int msec = GlobalData.DelayFactor * GlobalData.DelayFactor * GlobalData.DelayFactor;
+                int msec = Constants.DelayFactorInMilliseconds;
                 // If we can see the current projectile location, show it briefly
                 if (Level.PanelContains(y, x) && Level.PlayerCanSeeBold(y, x))
                 {
@@ -10971,6 +11001,24 @@ namespace AngbandOS
 
         public void DoCmdFeeling(bool feelingOnly)
         {
+            string[] DangerFeelingText =
+            {
+                "You're not sure about this level yet", "You feel there is something special about this level.",
+                "You nearly faint as horrible visions of death fill your mind", "This level looks very dangerous",
+                "You have a very bad feeling", "You have a bad feeling", "You feel nervous",
+                "You feel unsafe", "You don't like the look of this place",
+                "This level looks reasonably safe", "What a boring place"
+            };
+
+
+            string[] TreasureFeelingText = {
+                "You're not sure about this level yet.", "you feel it contains something special",
+                "treasure galore!", "with a veritable hoard.",
+                "powerful magic can be found here.", "there's magic in the air.", "there's wealth to be found.",
+                "with significant treasure.", "there's not much of value here.",
+                "with nothing of worth.", "what meagre pickings..."
+            };
+    
             // Some sanity checks
             if (Level.DangerFeeling < 0)
             {
@@ -11021,8 +11069,8 @@ namespace AngbandOS
             // Special feeling overrides the normal two-part feeling
             if (Level.DangerFeeling == 1 || Level.TreasureFeeling == 1)
             {
-                string message = GlobalData.DangerFeelingText[1];
-                MsgPrint(Player.GameTime.LevelFeel ? message : GlobalData.DangerFeelingText[0]);
+                string message = DangerFeelingText[1];
+                MsgPrint(Player.GameTime.LevelFeel ? message : DangerFeelingText[0]);
             }
             else
             {
@@ -11032,8 +11080,8 @@ namespace AngbandOS
                 {
                     conjunction = ", but ";
                 }
-                string message = GlobalData.DangerFeelingText[Level.DangerFeeling] + conjunction + GlobalData.TreasureFeelingText[Level.TreasureFeeling];
-                MsgPrint(Player.GameTime.LevelFeel ? message : GlobalData.DangerFeelingText[0]);
+                string message = DangerFeelingText[Level.DangerFeeling] + conjunction + TreasureFeelingText[Level.TreasureFeeling];
+                MsgPrint(Player.GameTime.LevelFeel ? message : DangerFeelingText[0]);
             }
         }
 
@@ -11359,7 +11407,7 @@ namespace AngbandOS
             // Find all spells in the book and add them to the array
             for (spell = 0; spell < 32; spell++)
             {
-                if ((GlobalData.BookSpellFlags[bookSubCategory] & (1u << spell)) != 0)
+                if ((Constants.BookSpellFlags[bookSubCategory] & (1u << spell)) != 0)
                 {
                     spells[spellIndex++] = spell;
                 }
@@ -12862,7 +12910,7 @@ namespace AngbandOS
                     continue;
                 }
                 // Check the monster's speed to see if it should get a turn
-                monster.Energy += GlobalData.ExtractEnergy[monster.Speed];
+                monster.Energy += Constants.ExtractEnergy[monster.Speed];
                 if (monster.Energy < 100)
                 {
                     continue;

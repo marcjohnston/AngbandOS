@@ -19,7 +19,7 @@ namespace AngbandOS.Core
 
         public void Animate(SaveGame saveGame, Level level, int[] y, int[] x)
         {
-            int msec = GlobalData.DelayFactor * GlobalData.DelayFactor * GlobalData.DelayFactor;
+            int msec = Constants.DelayFactorInMilliseconds;
             int grids = x.Length;
             bool drawn = false;
             bool oddFrame = true;

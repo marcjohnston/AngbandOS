@@ -159,11 +159,11 @@ namespace AngbandOS
 
         private void DisplayMonster(int rIdx, int num, int of)
         {
-            for (int i = 0; GlobalData.SymbolIdentification[i] != null; i++)
+            for (int i = 0; Constants.SymbolIdentification[i] != null; i++)
             {
-                if (GlobalData.SymbolIdentification[i][0] == SaveGame.SingletonRepository.MonsterRaces[rIdx].Character)
+                if (Constants.SymbolIdentification[i][0] == SaveGame.SingletonRepository.MonsterRaces[rIdx].Character)
                 {
-                    string name = GlobalData.SymbolIdentification[i].Substring(2);
+                    string name = Constants.SymbolIdentification[i].Substring(2);
                     string buf = $"Monster Type: {name} ({num + 1} of {of})";
                     SaveGame.Screen.Print(Colour.Blue, buf, 3, 0);
                     break;

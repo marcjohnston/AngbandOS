@@ -538,7 +538,7 @@ namespace AngbandOS
             int sval = oPtr.ItemSubCategory;
             for (int spell = 0; spell < 32; spell++)
             {
-                if ((GlobalData.BookSpellFlags[sval] & (1u << spell)) != 0)
+                if ((Constants.BookSpellFlags[sval] & (1u << spell)) != 0)
                 {
                     spells[num++] = spell;
                 }
@@ -1467,7 +1467,7 @@ namespace AngbandOS
                 // Gather the potential spells from the book
                 for (spellIndex = 0; spellIndex < 32; spellIndex++)
                 {
-                    if ((GlobalData.BookSpellFlags[itemSubCategory] & (1u << spellIndex)) != 0)
+                    if ((Constants.BookSpellFlags[itemSubCategory] & (1u << spellIndex)) != 0)
                     {
                         if (!SaveGame.Player.SpellOkay(spellIndex, false, useSetTwo))
                         {

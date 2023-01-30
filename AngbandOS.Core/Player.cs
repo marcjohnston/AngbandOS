@@ -381,7 +381,7 @@ namespace AngbandOS
             }
             SaveGame.RedrawExpFlaggedAction.Set();
             SaveGame.HandleStuff();
-            while (Level > 1 && ExperiencePoints < GlobalData.PlayerExp[Level - 2] * ExperienceMultiplier / 100L)
+            while (Level > 1 && ExperiencePoints < Constants.PlayerExp[Level - 2] * ExperienceMultiplier / 100L)
             {
                 Level--;
                 SaveGame.Level.RedrawSingleLocation(MapY, MapX);
@@ -393,7 +393,7 @@ namespace AngbandOS
                 SaveGame.RedrawLevelFlaggedAction.Set();
                 SaveGame.HandleStuff();
             }
-            while (Level < Constants.PyMaxLevel && ExperiencePoints >= GlobalData.PlayerExp[Level - 1] * ExperienceMultiplier / 100L)
+            while (Level < Constants.PyMaxLevel && ExperiencePoints >= Constants.PlayerExp[Level - 1] * ExperienceMultiplier / 100L)
             {
                 Level++;
                 SaveGame.Level.RedrawSingleLocation(MapY, MapX);
@@ -876,9 +876,9 @@ namespace AngbandOS
                 int prev = 0;
                 if (MaxLevelGained > 1)
                 {
-                    prev = GlobalData.PlayerExp[MaxLevelGained - 2] * ExperienceMultiplier / 100;
+                    prev = Constants.PlayerExp[MaxLevelGained - 2] * ExperienceMultiplier / 100;
                 }
-                int next = GlobalData.PlayerExp[MaxLevelGained - 1] * ExperienceMultiplier / 100;
+                int next = Constants.PlayerExp[MaxLevelGained - 1] * ExperienceMultiplier / 100;
                 int numerator = MaxExperienceGained - prev;
                 int denominator = next - prev;
                 int fraction = 100 * numerator / denominator;
@@ -1474,7 +1474,7 @@ namespace AngbandOS
         public void TakeHit(int damage, string hitFrom)
         {
             bool penInvuln = false;
-            int warning = MaxHealth * GlobalData.HitpointWarn / 10;
+            int warning = MaxHealth * Constants.HitpointWarn / 10;
             if (IsDead)
             {
                 return;
@@ -1606,17 +1606,17 @@ namespace AngbandOS
             if (sust)
             {
                 SaveGame.MsgPrint(
-                    $"You feel {GlobalData.DescStatNeg[stat]} for a moment, but the feeling passes.");
+                    $"You feel {Constants.DescStatNeg[stat]} for a moment, but the feeling passes.");
                 return true;
             }
             if (Program.Rng.DieRoll(10) <= Religion.GetNamedDeity(GodName.Lobon).AdjustedFavour)
             {
-                SaveGame.MsgPrint($"You feel {GlobalData.DescStatNeg[stat]} for a moment, but Lobon's favour protects you.");
+                SaveGame.MsgPrint($"You feel {Constants.DescStatNeg[stat]} for a moment, but Lobon's favour protects you.");
                 return true;
             }
             if (DecreaseAbilityScore(stat, 10, false))
             {
-                SaveGame.MsgPrint($"You feel very {GlobalData.DescStatNeg[stat]}.");
+                SaveGame.MsgPrint($"You feel very {Constants.DescStatNeg[stat]}.");
                 return true;
             }
             return false;
@@ -1627,12 +1627,12 @@ namespace AngbandOS
             bool res = RestoreAbilityScore(stat);
             if (IncreaseAbilityScore(stat))
             {
-                SaveGame.MsgPrint($"Wow!  You feel very {GlobalData.DescStatPos[stat]}!");
+                SaveGame.MsgPrint($"Wow!  You feel very {Constants.DescStatPos[stat]}!");
                 return true;
             }
             if (res)
             {
-                SaveGame.MsgPrint($"You feel less {GlobalData.DescStatNeg[stat]}.");
+                SaveGame.MsgPrint($"You feel less {Constants.DescStatNeg[stat]}.");
                 return true;
             }
             return false;
@@ -1642,7 +1642,7 @@ namespace AngbandOS
         {
             if (RestoreAbilityScore(stat))
             {
-                SaveGame.MsgPrint($"You feel less {GlobalData.DescStatNeg[stat]}.");
+                SaveGame.MsgPrint($"You feel less {Constants.DescStatNeg[stat]}.");
                 return true;
             }
             return false;

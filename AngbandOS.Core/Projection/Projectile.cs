@@ -40,7 +40,7 @@ namespace AngbandOS.Projection
         {
             int i, dist;
             int y1, x1;
-            int msec = GlobalData.DelayFactor * GlobalData.DelayFactor * GlobalData.DelayFactor;
+            int msec = Constants.DelayFactorInMilliseconds;
             GridTile cPtr;
             bool notice = false;
             bool visual = false;

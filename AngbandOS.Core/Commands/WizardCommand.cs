@@ -341,7 +341,7 @@
             int tmpInt;
             for (int i = 0; i < 6; i++)
             {
-                string ppp = $"{GlobalData.StatNames[i]} (3-118): ";
+                string ppp = $"{Constants.StatNames[i]} (3-118): ";
                 if (!saveGame.GetString(ppp, out tmpVal, $"{saveGame.Player.AbilityScores[i].InnateMax}", 3))
                 {
                     return;

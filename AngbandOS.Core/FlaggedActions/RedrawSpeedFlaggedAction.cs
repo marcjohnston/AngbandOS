@@ -16,7 +16,7 @@ namespace AngbandOS.Core.FlaggedActions
             {
                 i += 10;
             }
-            int energy = GlobalData.ExtractEnergy[i];
+            int energy = Constants.ExtractEnergy[i];
             if (i > 110)
             {
                 attr = Colour.BrightGreen;

@@ -1322,7 +1322,7 @@ namespace AngbandOS
             mPtr.Speed = rPtr.Speed;
             if (!rPtr.Unique)
             {
-                int i = GlobalData.ExtractEnergy[rPtr.Speed] / 10;
+                int i = Constants.ExtractEnergy[rPtr.Speed] / 10;
                 if (i != 0)
                 {
                     mPtr.Speed += Program.Rng.RandomSpread(0, i);

@@ -20,7 +20,7 @@
             }
             else
             {
-                string outVal = ((GlobalData.PlayerExp[SaveGame.Player.Level - 1] * SaveGame.Player.ExperienceMultiplier / 100) - SaveGame.Player.ExperiencePoints).ToString()
+                string outVal = ((Constants.PlayerExp[SaveGame.Player.Level - 1] * SaveGame.Player.ExperienceMultiplier / 100) - SaveGame.Player.ExperiencePoints).ToString()
                     .PadLeft(8);
                 SaveGame.Screen.Print(colour, outVal, RowExp, ColExp + 4);
             }

@@ -238,7 +238,7 @@ namespace AngbandOS
                     _description.Append(" very");
                 }
                 _description.Append(" quickly");
-                _description.Append(" (").Append(GlobalData.ExtractEnergy[_monsterType.Speed] / 10.0).Append(" actions per turn)");
+                _description.Append(" (").Append(Constants.ExtractEnergy[_monsterType.Speed] / 10.0).Append(" actions per turn)");
             }
             else if (_monsterType.Speed < 110)
             {
@@ -251,7 +251,7 @@ namespace AngbandOS
                     _description.Append(" very");
                 }
                 _description.Append(" slowly");
-                _description.Append(" (").Append(GlobalData.ExtractEnergy[_monsterType.Speed] / 10.0).Append(" actions per turn)");
+                _description.Append(" (").Append(Constants.ExtractEnergy[_monsterType.Speed] / 10.0).Append(" actions per turn)");
             }
             else
             {

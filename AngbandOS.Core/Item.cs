@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace AngbandOS
 {
     [Serializable]
@@ -2907,11 +2909,6 @@ namespace AngbandOS
             IdentCursed = true;
         }
 
-        private string GetRndLineInternal(string[] list)
-        {
-            return list[Program.Rng.RandomLessThan(list.Length)];
-        }
-
         private string GetTableName()
         {
             int testcounter = Program.Rng.DieRoll(3) + 1;
@@ -2928,7 +2925,7 @@ namespace AngbandOS
                 testcounter = Program.Rng.DieRoll(2) + 1;
                 while (testcounter-- != 0)
                 {
-                    outString += GetRndLineInternal(GlobalData.TextElvish);
+                    outString += new ElvishTextWeightedRandom().Choose();
                 }
             }
             return "'" + outString.Substring(0, 1).ToUpper() + outString.Substring(1) + "'";
