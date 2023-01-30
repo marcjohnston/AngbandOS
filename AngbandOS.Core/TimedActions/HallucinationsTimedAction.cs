@@ -5,36 +5,19 @@
     {
         public HallucinationsTimedAction(SaveGame saveGame) : base(saveGame) { }
 
-        public override bool SetTimer(int value)
+        protected override void EffectStopped()
         {
-            bool notice = false;
-            value = value > 10000 ? 10000 : value < 0 ? 0 : value;
-            if (value != 0)
-            {
-                if (TimeRemaining == 0)
-                {
-                    SaveGame.MsgPrint("Oh, wow! Everything looks so cosmic now!");
-                    notice = true;
-                }
-            }
-            else
-            {
-                if (TimeRemaining != 0)
-                {
-                    SaveGame.MsgPrint("You can see clearly again.");
-                    notice = true;
-                }
-            }
-            _timer = value;
-            if (!notice)
-            {
-                return false;
-            }
-            SaveGame.Disturb(false);
+            SaveGame.MsgPrint("You can see clearly again.");
+        }
+        protected override void EffectIncreased(int newRate, int currentRate)
+        {
+            SaveGame.MsgPrint("Oh, wow! Everything looks so cosmic now!");
+        }
+        protected override void Noticed()
+        {
             SaveGame.RedrawMapFlaggedAction.Set();
             SaveGame.UpdateMonstersFlaggedAction.Set();
-            SaveGame.HandleStuff();
-            return true;
+            base.Noticed();
         }
     }
 }

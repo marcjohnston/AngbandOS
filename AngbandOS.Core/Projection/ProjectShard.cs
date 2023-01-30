@@ -40,7 +40,7 @@ namespace AngbandOS.Projection
 
         protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
         {
-            bool blind = SaveGame.Player.TimedBlindness.TimeRemaining != 0;
+            bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
             if (dam > 1600)
             {
                 dam = 1600;
@@ -54,7 +54,7 @@ namespace AngbandOS.Projection
             }
             if (!SaveGame.Player.HasSoundResistance)
             {
-                SaveGame.Player.TimedStun.SetTimer(SaveGame.Player.TimedStun.TimeRemaining + Program.Rng.DieRoll(20));
+                SaveGame.Player.TimedStun.AddTimer(Program.Rng.DieRoll(20));
             }
             if (SaveGame.Player.HasShardResistance)
             {
@@ -62,7 +62,7 @@ namespace AngbandOS.Projection
             }
             else
             {
-                SaveGame.Player.TimedBleeding.SetTimer(SaveGame.Player.TimedBleeding.TimeRemaining + (dam / 2));
+                SaveGame.Player.TimedBleeding.AddTimer((dam / 2));
             }
             if (!SaveGame.Player.HasShardResistance || Program.Rng.DieRoll(12) == 1)
             {

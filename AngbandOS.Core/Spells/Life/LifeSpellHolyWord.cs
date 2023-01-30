@@ -15,10 +15,10 @@ namespace AngbandOS.Spells.Life
         {
             saveGame.DispelEvil(saveGame.Player.Level * 4);
             saveGame.Player.RestoreHealth(1000);
-            saveGame.Player.TimedFear.SetTimer(0);
-            saveGame.Player.TimedPoison.SetTimer(0);
-            saveGame.Player.TimedStun.SetTimer(0);
-            saveGame.Player.TimedBleeding.SetTimer(0);
+            saveGame.Player.TimedFear.ResetTimer();
+            saveGame.Player.TimedPoison.ResetTimer();
+            saveGame.Player.TimedStun.ResetTimer();
+            saveGame.Player.TimedBleeding.ResetTimer();
         }
 
         public override void Initialise(int characterClass)

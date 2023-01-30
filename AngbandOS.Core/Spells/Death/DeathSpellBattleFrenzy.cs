@@ -13,16 +13,16 @@ namespace AngbandOS.Spells.Death
     {
         public override void Cast(SaveGame saveGame)
         {
-            saveGame.Player.TimedSuperheroism.SetTimer(saveGame.Player.TimedSuperheroism.TimeRemaining + Program.Rng.DieRoll(25) + 25);
+            saveGame.Player.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(25) + 25);
             saveGame.Player.RestoreHealth(30);
-            saveGame.Player.TimedFear.SetTimer(0);
-            if (saveGame.Player.TimedHaste.TimeRemaining == 0)
+            saveGame.Player.TimedFear.ResetTimer();
+            if (saveGame.Player.TimedHaste.TurnsRemaining == 0)
             {
                 saveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(20 + (saveGame.Player.Level / 2)) + (saveGame.Player.Level / 2));
             }
             else
             {
-                saveGame.Player.TimedHaste.SetTimer(saveGame.Player.TimedHaste.TimeRemaining + Program.Rng.DieRoll(5));
+                saveGame.Player.TimedHaste.AddTimer(Program.Rng.DieRoll(5));
             }
         }
 

@@ -8,7 +8,7 @@
             {
                 monster.SmResElec = true;
             }
-            if (saveGame.Player.TimedLightningResistance.TimeRemaining != 0)
+            if (saveGame.Player.TimedLightningResistance.TurnsRemaining != 0)
             {
                 monster.SmOppElec = true;
             }

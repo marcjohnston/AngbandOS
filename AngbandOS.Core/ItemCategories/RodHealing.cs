@@ -24,11 +24,11 @@ namespace AngbandOS.Core.ItemCategories
             {
                 zapRodEvent.Identified = true;
             }
-            if (SaveGame.Player.TimedStun.SetTimer(0))
+            if (SaveGame.Player.TimedStun.ResetTimer())
             {
                 zapRodEvent.Identified = true;
             }
-            if (SaveGame.Player.TimedBleeding.SetTimer(0))
+            if (SaveGame.Player.TimedBleeding.ResetTimer())
             {
                 zapRodEvent.Identified = true;
             }

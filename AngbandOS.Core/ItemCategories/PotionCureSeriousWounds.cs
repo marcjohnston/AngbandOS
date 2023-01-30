@@ -28,15 +28,15 @@ namespace AngbandOS.Core.ItemCategories
             {
                 identified = true;
             }
-            if (saveGame.Player.TimedBlindness.SetTimer(0))
+            if (saveGame.Player.TimedBlindness.ResetTimer())
             {
                 identified = true;
             }
-            if (saveGame.Player.TimedConfusion.SetTimer(0))
+            if (saveGame.Player.TimedConfusion.ResetTimer())
             {
                 identified = true;
             }
-            if (saveGame.Player.TimedBleeding.SetTimer((saveGame.Player.TimedBleeding.TimeRemaining / 2) - 50))
+            if (saveGame.Player.TimedBleeding.SetTimer((saveGame.Player.TimedBleeding.TurnsRemaining / 2) - 50))
             {
                 identified = true;
             }

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FlaggedActions
         {
             Colour attr = Colour.White;
             string text;
-            if (SaveGame.Player.TimedParalysis.TimeRemaining > 0)
+            if (SaveGame.Player.TimedParalysis.TurnsRemaining > 0)
             {
                 attr = Colour.Red;
                 text = "Paralyzed!";

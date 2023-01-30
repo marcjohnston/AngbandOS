@@ -13,7 +13,7 @@ namespace AngbandOS.Spells.Sorcery
     {
         public override void Cast(SaveGame saveGame)
         {
-            saveGame.Player.TimedTelepathy.SetTimer(saveGame.Player.TimedTelepathy.TimeRemaining + Program.Rng.DieRoll(30) + 25);
+            saveGame.Player.TimedTelepathy.AddTimer(Program.Rng.DieRoll(30) + 25);
         }
 
         public override void Initialise(int characterClass)

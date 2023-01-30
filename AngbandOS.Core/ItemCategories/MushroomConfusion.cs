@@ -20,7 +20,7 @@ namespace AngbandOS.Core.ItemCategories
         {
             if (!saveGame.Player.HasConfusionResistance)
             {
-                if (saveGame.Player.TimedConfusion.SetTimer(saveGame.Player.TimedConfusion.TimeRemaining + Program.Rng.RandomLessThan(10) + 10))
+                if (saveGame.Player.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(10) + 10))
                 {
                     return true;
                 }

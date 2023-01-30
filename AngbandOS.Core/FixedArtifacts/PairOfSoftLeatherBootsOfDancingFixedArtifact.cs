@@ -13,8 +13,8 @@ internal class PairOfSoftLeatherBootsOfDancingFixedArtifact : BaseFixedArtifact,
     public void ActivateItem(SaveGame saveGame, Item item)
     {
         saveGame.MsgPrint("Your boots glow deep blue...");
-        saveGame.Player.TimedFear.SetTimer(0);
-        saveGame.Player.TimedPoison.SetTimer(0);
+        saveGame.Player.TimedFear.ResetTimer();
+        saveGame.Player.TimedPoison.ResetTimer();
         item.RechargeTimeLeft = 5;
     }
     public string DescribeActivationEffect() => "remove fear and cure poison every 5 turns";

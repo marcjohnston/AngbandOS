@@ -16,7 +16,7 @@ namespace AngbandOS.Spells.Folk
             saveGame.Level.WizLight();
             if (!saveGame.Player.HasTelepathy)
             {
-                saveGame.Player.TimedTelepathy.SetTimer(saveGame.Player.TimedTelepathy.TimeRemaining + Program.Rng.DieRoll(30) + 25);
+                saveGame.Player.TimedTelepathy.AddTimer(Program.Rng.DieRoll(30) + 25);
             }
         }
 

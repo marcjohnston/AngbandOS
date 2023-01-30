@@ -20,7 +20,7 @@ namespace AngbandOS.Core.ItemCategories
         public override bool Quaff(SaveGame saveGame)
         {
             // Cure poison removes any poison you have
-            return saveGame.Player.TimedPoison.SetTimer(0);
+            return saveGame.Player.TimedPoison.ResetTimer();
         }
     }
 }

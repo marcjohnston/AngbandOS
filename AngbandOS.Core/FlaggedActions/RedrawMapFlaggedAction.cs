@@ -16,11 +16,11 @@
                 for (int x = SaveGame.Level.PanelColMin; x <= SaveGame.Level.PanelColMax; x++)
                 {
                     SaveGame.Level.MapInfo(y, x, out Colour a, out char c);
-                    if (SaveGame.Player.TimedInvulnerability.TimeRemaining != 0)
+                    if (SaveGame.Player.TimedInvulnerability.TurnsRemaining != 0)
                     {
                         a = Colour.White;
                     }
-                    else if (SaveGame.Player.TimedEtherealness.TimeRemaining != 0)
+                    else if (SaveGame.Player.TimedEtherealness.TurnsRemaining != 0)
                     {
                         a = Colour.Black;
                     }

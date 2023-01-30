@@ -21,7 +21,7 @@
         {
             bool resistsTele = false;
             string targetName = target.Name;
-            bool blind = saveGame.Player.TimedBlindness.TimeRemaining != 0;
+            bool blind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
             bool seeTarget = !blind && target.IsVisible;
             MonsterRace targetRace = target.Race;
 

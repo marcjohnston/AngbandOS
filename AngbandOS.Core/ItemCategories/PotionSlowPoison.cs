@@ -20,7 +20,7 @@ namespace AngbandOS.Core.ItemCategories
         public override bool Quaff(SaveGame saveGame)
         {
             // Slow poison halves the remaining duration of any poison you have
-            return saveGame.Player.TimedPoison.SetTimer(saveGame.Player.TimedPoison.TimeRemaining / 2);
+            return saveGame.Player.TimedPoison.SetTimer(saveGame.Player.TimedPoison.TurnsRemaining / 2);
         }
     }
 }

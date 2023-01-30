@@ -19,8 +19,8 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 4;
         public override bool Quaff(SaveGame saveGame)
         {
-            // Speed temporarily hastes you
-            if (saveGame.Player.TimedHaste.TimeRemaining == 0)
+            // Speed temporarily hastes you.  But it is not additive.
+            if (saveGame.Player.TimedHaste.TurnsRemaining == 0)
             {
                 if (saveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(25) + 15))
                 {
@@ -29,7 +29,7 @@ namespace AngbandOS.Core.ItemCategories
             }
             else
             {
-                saveGame.Player.TimedHaste.SetTimer(saveGame.Player.TimedHaste.TimeRemaining + 5);
+                saveGame.Player.TimedHaste.AddTimer(5);
             }
             return false;
         }

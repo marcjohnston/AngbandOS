@@ -14,7 +14,7 @@
         {
             saveGame.MsgPrint("You feel much better...");
             saveGame.Player.RestoreHealth(1000);
-            saveGame.Player.TimedBleeding.SetTimer(0);
+            saveGame.Player.TimedBleeding.ResetTimer();
             return true;
         }
 

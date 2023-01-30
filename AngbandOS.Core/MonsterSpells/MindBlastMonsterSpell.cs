@@ -27,11 +27,11 @@
                 saveGame.MsgPrint("Your mind is blasted by psionic energy.");
                 if (!saveGame.Player.HasConfusionResistance)
                 {
-                    saveGame.Player.TimedConfusion.SetTimer(saveGame.Player.TimedConfusion.TimeRemaining + Program.Rng.RandomLessThan(4) + 4);
+                    saveGame.Player.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(4) + 4);
                 }
                 if (!saveGame.Player.HasChaosResistance && Program.Rng.DieRoll(3) == 1)
                 {
-                    saveGame.Player.TimedHallucinations.SetTimer(saveGame.Player.TimedHallucinations.TimeRemaining + Program.Rng.RandomLessThan(250) + 150);
+                    saveGame.Player.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(250) + 150);
                 }
 
                 string monsterDescription = monster.IndefiniteVisibleName;
@@ -42,11 +42,11 @@
         public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
         {
             int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-            bool playerIsBlind = saveGame.Player.TimedBlindness.TimeRemaining != 0;
+            bool playerIsBlind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
             bool seen = !playerIsBlind && monster.IsVisible;
             string monsterName = monster.Name;
             string targetName = target.Name;
-            bool blind = saveGame.Player.TimedBlindness.TimeRemaining != 0;
+            bool blind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
             MonsterRace targetRace = target.Race;
 
             if (targetRace.Unique || targetRace.ImmuneConfusion || targetRace.Level > Program.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)

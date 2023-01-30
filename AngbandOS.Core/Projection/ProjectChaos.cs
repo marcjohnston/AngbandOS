@@ -146,7 +146,7 @@ namespace AngbandOS.Projection
 
         protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
         {
-            bool blind = SaveGame.Player.TimedBlindness.TimeRemaining != 0;
+            bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
             if (dam > 1600)
             {
                 dam = 1600;
@@ -165,11 +165,11 @@ namespace AngbandOS.Projection
             }
             if (!SaveGame.Player.HasConfusionResistance)
             {
-                SaveGame.Player.TimedConfusion.SetTimer(SaveGame.Player.TimedConfusion.TimeRemaining + Program.Rng.RandomLessThan(20) + 10);
+                SaveGame.Player.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(20) + 10);
             }
             if (!SaveGame.Player.HasChaosResistance)
             {
-                SaveGame.Player.TimedHallucinations.SetTimer(SaveGame.Player.TimedHallucinations.TimeRemaining + Program.Rng.DieRoll(10));
+                SaveGame.Player.TimedHallucinations.AddTimer(Program.Rng.DieRoll(10));
                 if (Program.Rng.DieRoll(3) == 1)
                 {
                     SaveGame.MsgPrint("Your body is twisted by chaos!");

@@ -22,7 +22,7 @@ namespace AngbandOS.Core.ItemCategories
 
         public override void UseStaff(UseStaffEvent eventArgs)
         {
-            if (eventArgs.SaveGame.Player.TimedHaste.TimeRemaining == 0)
+            if (eventArgs.SaveGame.Player.TimedHaste.TurnsRemaining == 0)
             {
                 if (eventArgs.SaveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(30) + 15))
                 {
@@ -31,7 +31,7 @@ namespace AngbandOS.Core.ItemCategories
             }
             else
             {
-                eventArgs.SaveGame.Player.TimedHaste.SetTimer(eventArgs.SaveGame.Player.TimedHaste.TimeRemaining + 5);
+                eventArgs.SaveGame.Player.TimedHaste.AddTimer(5);
             }
         }
     }

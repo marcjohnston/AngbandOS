@@ -4,35 +4,18 @@
     internal class ParalysisTimedAction : TimedAction
     {
         public ParalysisTimedAction(SaveGame saveGame) : base(saveGame) { }
-        public override bool SetTimer(int value)
+        protected override void EffectStopped()
         {
-            bool notice = false;
-            value = value > 10000 ? 10000 : value < 0 ? 0 : value;
-            if (value != 0)
-            {
-                if (TimeRemaining == 0)
-                {
-                    SaveGame.MsgPrint("You are paralyzed!");
-                    notice = true;
-                }
-            }
-            else
-            {
-                if (TimeRemaining != 0)
-                {
-                    SaveGame.MsgPrint("You can move again.");
-                    notice = true;
-                }
-            }
-            _timer = value;
-            if (!notice)
-            {
-                return false;
-            }
-            SaveGame.Disturb(false);
+            SaveGame.MsgPrint("You can move again.");
+        }
+        protected override void EffectIncreased(int newRate, int currentRate)
+        {
+            SaveGame.MsgPrint("You are paralyzed!");
+        }
+        protected override void Noticed()
+        {
             SaveGame.RedrawStateFlaggedAction.Set();
-            SaveGame.HandleStuff();
-            return true;
+            base.Noticed();
         }
     }
 }

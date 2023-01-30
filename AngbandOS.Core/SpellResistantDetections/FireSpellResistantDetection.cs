@@ -8,7 +8,7 @@
             {
                 monster.SmResFire = true;
             }
-            if (saveGame.Player.TimedFireResistance.TimeRemaining != 0)
+            if (saveGame.Player.TimedFireResistance.TurnsRemaining != 0)
             {
                 monster.SmOppFire = true;
             }

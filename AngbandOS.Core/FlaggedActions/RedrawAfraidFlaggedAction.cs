@@ -9,7 +9,7 @@ namespace AngbandOS.Core.FlaggedActions
         public RedrawAfraidFlaggedAction(SaveGame saveGame) : base(saveGame) { }
         protected override void Execute()
         {
-            if (SaveGame.Player.TimedFear.TimeRemaining > 0)
+            if (SaveGame.Player.TimedFear.TurnsRemaining > 0)
             {
                 SaveGame.Screen.Print(Colour.Orange, "Afraid", RowAfraid, ColAfraid);
             }

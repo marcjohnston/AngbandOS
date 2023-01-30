@@ -13,7 +13,7 @@
         public override bool Activate(SaveGame saveGame)
         {
             saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8));
-            saveGame.Player.TimedBleeding.SetTimer((saveGame.Player.TimedBleeding.TimeRemaining / 2) - 50);
+            saveGame.Player.TimedBleeding.SetTimer((saveGame.Player.TimedBleeding.TurnsRemaining / 2) - 50);
             return true;
         }
 

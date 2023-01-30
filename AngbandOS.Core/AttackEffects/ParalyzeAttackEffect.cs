@@ -32,7 +32,7 @@ namespace AngbandOS.Core.AttackEffects
             }
             else
             {
-                if (saveGame.Player.TimedParalysis.SetTimer(saveGame.Player.TimedParalysis.TimeRemaining + 3 + Program.Rng.DieRoll(monsterLevel)))
+                if (saveGame.Player.TimedParalysis.AddTimer(3 + Program.Rng.DieRoll(monsterLevel)))
                 {
                     obvious = true;
                 }

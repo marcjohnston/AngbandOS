@@ -21,7 +21,7 @@ namespace AngbandOS.Core.ItemCategories
 
         public override void UseStaff(UseStaffEvent eventArgs)
         {
-            if (eventArgs.SaveGame.Player.TimedSlow.SetTimer(eventArgs.SaveGame.Player.TimedSlow.TimeRemaining + Program.Rng.DieRoll(30) + 15))
+            if (eventArgs.SaveGame.Player.TimedSlow.AddTimer(Program.Rng.DieRoll(30) + 15))
             {
                 eventArgs.Identified = true;
             }

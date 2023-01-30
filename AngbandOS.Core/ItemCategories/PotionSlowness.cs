@@ -21,7 +21,7 @@ namespace AngbandOS.Core.ItemCategories
         public override bool Quaff(SaveGame saveGame)
         {
             // Slowness slows you down.
-            return saveGame.Player.TimedSlow.SetTimer(saveGame.Player.TimedSlow.TimeRemaining + Program.Rng.DieRoll(25) + 15);
+            return saveGame.Player.TimedSlow.AddTimer(Program.Rng.DieRoll(25) + 15);
         }
 
         public override bool Smash(SaveGame saveGame, int who, int y, int x)

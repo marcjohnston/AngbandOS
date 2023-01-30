@@ -12,11 +12,11 @@
             {
                 mhp = SaveGame.Player.Level + 1;
             }
-            if (SaveGame.Player.TimedHeroism.TimeRemaining != 0)
+            if (SaveGame.Player.TimedHeroism.TurnsRemaining != 0)
             {
                 mhp += 10;
             }
-            if (SaveGame.Player.TimedSuperheroism.TimeRemaining != 0)
+            if (SaveGame.Player.TimedSuperheroism.TurnsRemaining != 0)
             {
                 mhp += 30;
             }

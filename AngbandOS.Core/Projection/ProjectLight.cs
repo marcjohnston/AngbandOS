@@ -73,7 +73,7 @@ namespace AngbandOS.Projection
 
         protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
         {
-            bool blind = SaveGame.Player.TimedBlindness.TimeRemaining != 0;
+            bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
             if (dam > 1600)
             {
                 dam = 1600;
@@ -92,7 +92,7 @@ namespace AngbandOS.Projection
             }
             else if (!blind && !SaveGame.Player.HasBlindnessResistance)
             {
-                SaveGame.Player.TimedBlindness.SetTimer(SaveGame.Player.TimedBlindness.TimeRemaining + Program.Rng.DieRoll(5) + 2);
+                SaveGame.Player.TimedBlindness.AddTimer(Program.Rng.DieRoll(5) + 2);
             }
             if (SaveGame.Player.Race.IsBurnedBySunlight)
             {
@@ -100,9 +100,9 @@ namespace AngbandOS.Projection
                 dam *= 2;
             }
             SaveGame.Player.TakeHit(dam, killer);
-            if (SaveGame.Player.TimedEtherealness.TimeRemaining != 0)
+            if (SaveGame.Player.TimedEtherealness.TurnsRemaining != 0)
             {
-                SaveGame.Player.TimedEtherealness.Reset();
+                SaveGame.Player.TimedEtherealness.SetValue();
                 SaveGame.MsgPrint("The light forces you out of your incorporeal shadow form.");
                 SaveGame.RedrawMapFlaggedAction.Set();
                 SaveGame.UpdateMonstersFlaggedAction.Set();

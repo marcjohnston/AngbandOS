@@ -13,7 +13,7 @@ namespace AngbandOS.Spells.Death
     {
         public override void Cast(SaveGame saveGame)
         {
-            saveGame.Player.TimedEtherealness.SetTimer(saveGame.Player.TimedEtherealness.TimeRemaining + Program.Rng.DieRoll(saveGame.Player.Level / 2) + (saveGame.Player.Level / 2));
+            saveGame.Player.TimedEtherealness.AddTimer(Program.Rng.DieRoll(saveGame.Player.Level / 2) + (saveGame.Player.Level / 2));
         }
 
         public override void Initialise(int characterClass)

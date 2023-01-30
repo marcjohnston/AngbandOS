@@ -406,15 +406,15 @@
             saveGame.Player.FractionalHealth = 0;
             saveGame.Player.Mana = saveGame.Player.MaxMana;
             saveGame.Player.FractionalMana = 0;
-            saveGame.Player.TimedBlindness.SetTimer(0);
-            saveGame.Player.TimedConfusion.SetTimer(0);
-            saveGame.Player.TimedPoison.SetTimer(0);
-            saveGame.Player.TimedFear.SetTimer(0);
-            saveGame.Player.TimedParalysis.SetTimer(0);
-            saveGame.Player.TimedHallucinations.SetTimer(0);
-            saveGame.Player.TimedStun.SetTimer(0);
-            saveGame.Player.TimedBleeding.SetTimer(0);
-            saveGame.Player.TimedSlow.SetTimer(0);
+            saveGame.Player.TimedBlindness.ResetTimer();
+            saveGame.Player.TimedConfusion.ResetTimer();
+            saveGame.Player.TimedPoison.ResetTimer();
+            saveGame.Player.TimedFear.ResetTimer();
+            saveGame.Player.TimedParalysis.ResetTimer();
+            saveGame.Player.TimedHallucinations.ResetTimer();
+            saveGame.Player.TimedStun.ResetTimer();
+            saveGame.Player.TimedBleeding.ResetTimer();
+            saveGame.Player.TimedSlow.ResetTimer();
             saveGame.Player.SetFood(Constants.PyFoodMax - 1);
             DoCmdRedraw(saveGame);
         }

@@ -46,7 +46,7 @@ namespace AngbandOS.Projection
             bool visual = false;
             bool drawn = false;
             bool breath = false;
-            bool blind = SaveGame.Player.TimedBlindness.TimeRemaining != 0;
+            bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
             int grids = 0;
             int[] gx = new int[256];
             int[] gy = new int[256];
@@ -478,7 +478,7 @@ namespace AngbandOS.Projection
         {
             if (SaveGame.Player.HasReflection && aRad == 0 && Program.Rng.DieRoll(10) != 1)
             {
-                bool blind = SaveGame.Player.TimedBlindness.TimeRemaining != 0;
+                bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
                 SaveGame.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
 
                 int tY;

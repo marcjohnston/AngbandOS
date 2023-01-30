@@ -141,7 +141,7 @@ namespace AngbandOS
             }
             string desc;
             string name = Race.Name;
-            if (SaveGame.Player.TimedHallucinations.TimeRemaining != 0)
+            if (SaveGame.Player.TimedHallucinations.TurnsRemaining != 0)
             {
                 MonsterRace halluRace;
                 do
@@ -286,7 +286,7 @@ namespace AngbandOS
             }
             else
             {
-                if (Race.Unique && SaveGame.Player.TimedHallucinations.TimeRemaining == 0)
+                if (Race.Unique && SaveGame.Player.TimedHallucinations.TurnsRemaining == 0)
                 {
                     desc = name;
                 }
@@ -352,13 +352,13 @@ namespace AngbandOS
                 {
                     return;
                 }
-                if (player.TimedHallucinations.TimeRemaining != 0)
+                if (player.TimedHallucinations.TurnsRemaining != 0)
                 {
                     SaveGame.MsgPrint($"You behold the {new FunnyDescriptions().Choose()} visage of {mName}!");
                     if (Program.Rng.DieRoll(3) == 1)
                     {
                         SaveGame.MsgPrint(new FunnyComments().Choose());
-                        player.TimedHallucinations.SetTimer(player.TimedHallucinations.TimeRemaining + Program.Rng.DieRoll(Race.Level));
+                        player.TimedHallucinations.AddTimer(Program.Rng.DieRoll(Race.Level));
                     }
                     return;
                 }
@@ -375,11 +375,11 @@ namespace AngbandOS
             {
                 if (!player.HasConfusionResistance)
                 {
-                    player.TimedConfusion.SetTimer(player.TimedConfusion.TimeRemaining + Program.Rng.RandomLessThan(4) + 4);
+                    player.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(4) + 4);
                 }
                 if (!player.HasChaosResistance && Program.Rng.DieRoll(3) == 1)
                 {
-                    player.TimedHallucinations.SetTimer(player.TimedHallucinations.TimeRemaining + Program.Rng.RandomLessThan(250) + 150);
+                    player.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(250) + 150);
                 }
                 return;
             }
@@ -393,11 +393,11 @@ namespace AngbandOS
             {
                 if (!player.HasConfusionResistance)
                 {
-                    player.TimedConfusion.SetTimer(player.TimedConfusion.TimeRemaining + Program.Rng.RandomLessThan(4) + 4);
+                    player.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(4) + 4);
                 }
                 if (!player.HasFreeAction)
                 {
-                    player.TimedParalysis.SetTimer(player.TimedParalysis.TimeRemaining + Program.Rng.RandomLessThan(4) + 4);
+                    player.TimedParalysis.AddTimer(Program.Rng.RandomLessThan(4) + 4);
                 }
                 while (Program.Rng.RandomLessThan(100) > player.SkillSavingThrow)
                 {
@@ -409,7 +409,7 @@ namespace AngbandOS
                 }
                 if (!player.HasChaosResistance)
                 {
-                    player.TimedHallucinations.SetTimer(player.TimedHallucinations.TimeRemaining + Program.Rng.RandomLessThan(250) + 150);
+                    player.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(250) + 150);
                 }
                 return;
             }
@@ -1456,7 +1456,7 @@ namespace AngbandOS
             saveGame.Disturb(true);
 
             // Render a message to the player.
-            bool playerIsBlind = saveGame.Player.TimedBlindness.TimeRemaining != 0;
+            bool playerIsBlind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
             string? message = playerIsBlind ? thrownSpell.VsPlayerBlindMessage : thrownSpell.VsPlayerActionMessage(this);
             if (message != null)
             {
@@ -1593,7 +1593,7 @@ namespace AngbandOS
 
                 // Against other monsters we pick spells randomly
                 MonsterSpell thrownSpell = Race.Spells.ChooseRandom();
-                bool blind = saveGame.Player.TimedBlindness.TimeRemaining != 0;
+                bool blind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
                 bool seeTarget = !blind && target.IsVisible;
                 bool seen = !blind && IsVisible;
                 bool seeEither = seen || seeTarget;
@@ -2663,7 +2663,7 @@ namespace AngbandOS
                     {
                         saveGame.Disturb(true);
                         // Protection From Evil might repel the attack
-                        if (saveGame.Player.TimedProtectionFromEvil.TimeRemaining > 0 && Race.Evil && saveGame.Player.Level >= monsterLevel && Program.Rng.RandomLessThan(100) + saveGame.Player.Level > 50)
+                        if (saveGame.Player.TimedProtectionFromEvil.TurnsRemaining > 0 && Race.Evil && saveGame.Player.Level >= monsterLevel && Program.Rng.RandomLessThan(100) + saveGame.Player.Level > 50)
                         {
                             if (IsVisible)
                             {
@@ -2748,7 +2748,7 @@ namespace AngbandOS
                             }
                             if (k != 0)
                             {
-                                saveGame.Player.TimedBleeding.SetTimer(saveGame.Player.TimedBleeding.TimeRemaining + k);
+                                saveGame.Player.TimedBleeding.AddTimer(k);
                             }
                         }
                         if (doStun)
@@ -2792,7 +2792,7 @@ namespace AngbandOS
                             }
                             if (k != 0)
                             {
-                                saveGame.Player.TimedStun.SetTimer(saveGame.Player.TimedStun.TimeRemaining + k);
+                                saveGame.Player.TimedStun.AddTimer(k);
                             }
                         }
                         // If the monster touched us then it may take damage from our defensive abilities

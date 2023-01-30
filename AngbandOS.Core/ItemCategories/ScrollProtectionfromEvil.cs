@@ -21,7 +21,7 @@ namespace AngbandOS.Core.ItemCategories
         public override void Read(ReadScrollEvent eventArgs)
         {
             int i = 3 * eventArgs.SaveGame.Player.Level;
-            if (eventArgs.SaveGame.Player.TimedProtectionFromEvil.SetTimer(eventArgs.SaveGame.Player.TimedProtectionFromEvil.TimeRemaining + Program.Rng.DieRoll(25) + i))
+            if (eventArgs.SaveGame.Player.TimedProtectionFromEvil.AddTimer(Program.Rng.DieRoll(25) + i))
             {
                 eventArgs.Identified = true;
             }

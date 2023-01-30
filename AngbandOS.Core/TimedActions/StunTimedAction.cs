@@ -4,123 +4,88 @@
     internal class StunTimedAction : TimedAction
     {
         public StunTimedAction(SaveGame saveGame) : base(saveGame) { }
-        public override void ProcessWorld()
+        protected override void EffectStopped()
         {
-            if (TimeRemaining != 0)
+            SaveGame.MsgPrint("You are no longer stunned.");
+        }
+        protected override void EffectIncreased(int newRate, int currentRate) 
+        {
+            switch (newRate)
             {
-                int adjust = SaveGame.Player.AbilityScores[Ability.Constitution].ConRecoverySpeed + 1;
-                SetTimer(TimeRemaining - adjust);
+                case 1:
+                    SaveGame.MsgPrint("You have been stunned.");
+                    break;
+
+                case 2:
+                    SaveGame.MsgPrint("You have been heavily stunned.");
+                    break;
+
+                case 3:
+                    SaveGame.MsgPrint("You have been knocked out.");
+                    break;
+            }
+            if (Program.Rng.DieRoll(1000) < newRate || Program.Rng.DieRoll(16) == 1)
+            {
+                SaveGame.MsgPrint("A vicious Attack hits your head.");
+                if (Program.Rng.DieRoll(3) == 1)
+                {
+                    if (!SaveGame.Player.HasSustainIntelligence)
+                    {
+                        SaveGame.Player.TryDecreasingAbilityScore(Ability.Intelligence);
+                    }
+                    if (!SaveGame.Player.HasSustainWisdom)
+                    {
+                        SaveGame.Player.TryDecreasingAbilityScore(Ability.Wisdom);
+                    }
+                }
+                else if (Program.Rng.DieRoll(2) == 1)
+                {
+                    if (!SaveGame.Player.HasSustainIntelligence)
+                    {
+                        SaveGame.Player.TryDecreasingAbilityScore(Ability.Intelligence);
+                    }
+                }
+                else
+                {
+                    if (!SaveGame.Player.HasSustainWisdom)
+                    {
+                        SaveGame.Player.TryDecreasingAbilityScore(Ability.Wisdom);
+                    }
+                }
             }
         }
-        public override bool SetTimer(int value)
+        public override void ProcessWorld()
         {
-            int oldAux, newAux;
-            bool notice = false;
-            value = value > 10000 ? 10000 : value < 0 ? 0 : value;
-            if (!SaveGame.Player.Race.CanBeStunned)
+            if (TurnsRemaining != 0)
             {
-                value = 0;
+                int adjust = SaveGame.Player.AbilityScores[Ability.Constitution].ConRecoverySpeed + 1;
+                AddTimer(-adjust);
             }
-            if (TimeRemaining > 100)
+        }
+        protected override int GetRate(int turns)
+        {
+            if (turns > 100)
             {
-                oldAux = 3;
+                return 3;
             }
-            else if (TimeRemaining > 50)
+            else if (turns > 50)
             {
-                oldAux = 2;
+                return 2;
             }
-            else if (TimeRemaining > 0)
+            else if (turns > 0)
             {
-                oldAux = 1;
-            }
-            else
-            {
-                oldAux = 0;
-            }
-            if (value > 100)
-            {
-                newAux = 3;
-            }
-            else if (value > 50)
-            {
-                newAux = 2;
-            }
-            else if (value > 0)
-            {
-                newAux = 1;
+                return 1;
             }
             else
             {
-                newAux = 0;
+                return 0;
             }
-            if (newAux > oldAux)
-            {
-                switch (newAux)
-                {
-                    case 1:
-                        SaveGame.MsgPrint("You have been stunned.");
-                        break;
-
-                    case 2:
-                        SaveGame.MsgPrint("You have been heavily stunned.");
-                        break;
-
-                    case 3:
-                        SaveGame.MsgPrint("You have been knocked out.");
-                        break;
-                }
-                if (Program.Rng.DieRoll(1000) < value || Program.Rng.DieRoll(16) == 1)
-                {
-                    SaveGame.MsgPrint("A vicious Attack hits your head.");
-                    if (Program.Rng.DieRoll(3) == 1)
-                    {
-                        if (!SaveGame.Player.HasSustainIntelligence)
-                        {
-                            SaveGame.Player.TryDecreasingAbilityScore(Ability.Intelligence);
-                        }
-                        if (!SaveGame.Player.HasSustainWisdom)
-                        {
-                            SaveGame.Player.TryDecreasingAbilityScore(Ability.Wisdom);
-                        }
-                    }
-                    else if (Program.Rng.DieRoll(2) == 1)
-                    {
-                        if (!SaveGame.Player.HasSustainIntelligence)
-                        {
-                            SaveGame.Player.TryDecreasingAbilityScore(Ability.Intelligence);
-                        }
-                    }
-                    else
-                    {
-                        if (!SaveGame.Player.HasSustainWisdom)
-                        {
-                            SaveGame.Player.TryDecreasingAbilityScore(Ability.Wisdom);
-                        }
-                    }
-                }
-                notice = true;
-            }
-            else if (newAux < oldAux)
-            {
-                switch (newAux)
-                {
-                    case 0:
-                        SaveGame.MsgPrint("You are no longer stunned.");
-                        SaveGame.Disturb(false);
-                        break;
-                }
-                notice = true;
-            }
-            _timer = value;
-            if (!notice)
-            {
-                return false;
-            }
-            SaveGame.Disturb(false);
+        }
+        protected override void Noticed()
+        {
             SaveGame.UpdateBonusesFlaggedAction.Set();
             SaveGame.RedrawStunFlaggedAction.Set();
-            SaveGame.HandleStuff();
-            return true;
+            base.Noticed();
         }
     }
 }

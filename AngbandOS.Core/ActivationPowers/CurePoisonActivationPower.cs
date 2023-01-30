@@ -12,8 +12,8 @@
 
         public override bool Activate(SaveGame saveGame)
         {
-            saveGame.Player.TimedFear.SetTimer(0);
-            saveGame.Player.TimedPoison.SetTimer(0);
+            saveGame.Player.TimedFear.ResetTimer();
+            saveGame.Player.TimedPoison.ResetTimer();
             return true;
         }
 

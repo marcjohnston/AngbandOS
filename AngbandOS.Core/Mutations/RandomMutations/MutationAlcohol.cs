@@ -52,12 +52,12 @@ namespace AngbandOS.Mutations.RandomMutations
             {
                 if (!saveGame.Player.HasConfusionResistance)
                 {
-                    saveGame.Player.TimedConfusion.SetTimer(saveGame.Player.TimedConfusion.TimeRemaining + Program.Rng.RandomLessThan(20) + 15);
+                    saveGame.Player.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(20) + 15);
                 }
                 if (Program.Rng.DieRoll(3) == 1 && !saveGame.Player.HasChaosResistance)
                 {
                     saveGame.MsgPrint("Thishcischs GooDSChtuff!");
-                    saveGame.Player.TimedHallucinations.SetTimer(saveGame.Player.TimedHallucinations.TimeRemaining + Program.Rng.RandomLessThan(150) + 150);
+                    saveGame.Player.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(150) + 150);
                 }
             }
         }

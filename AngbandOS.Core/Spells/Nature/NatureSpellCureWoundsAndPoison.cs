@@ -13,8 +13,8 @@ namespace AngbandOS.Spells.Nature
     {
         public override void Cast(SaveGame saveGame)
         {
-            saveGame.Player.TimedBleeding.SetTimer(0);
-            saveGame.Player.TimedPoison.SetTimer(0);
+            saveGame.Player.TimedBleeding.ResetTimer();
+            saveGame.Player.TimedPoison.ResetTimer();
         }
 
         public override void Initialise(int characterClass)

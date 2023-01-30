@@ -13,7 +13,7 @@ namespace AngbandOS.Spells.Folk
     {
         public override void Cast(SaveGame saveGame)
         {
-            saveGame.Player.TimedFireResistance.SetTimer(saveGame.Player.TimedFireResistance.TimeRemaining + Program.Rng.DieRoll(20) + 20);
+            saveGame.Player.TimedFireResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
         }
 
         public override void Initialise(int characterClass)

@@ -21,7 +21,7 @@ namespace AngbandOS.Core.ItemCategories
             // Sleep paralyses you
             if (!saveGame.Player.HasFreeAction)
             {
-                if (saveGame.Player.TimedParalysis.SetTimer(saveGame.Player.TimedParalysis.TimeRemaining + Program.Rng.RandomLessThan(4) + 4))
+                if (saveGame.Player.TimedParalysis.AddTimer(Program.Rng.RandomLessThan(4) + 4))
                 {
                     return true;
                 }

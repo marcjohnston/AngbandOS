@@ -21,11 +21,11 @@ namespace AngbandOS.Core.ItemCategories
         {
             bool identified = false;
             // Heroism removes fear, cures 10 health, and gives you timed heroism
-            if (saveGame.Player.TimedFear.SetTimer(0))
+            if (saveGame.Player.TimedFear.ResetTimer())
             {
                 identified = true;
             }
-            if (saveGame.Player.TimedHeroism.SetTimer(saveGame.Player.TimedHeroism.TimeRemaining + Program.Rng.DieRoll(25) + 25))
+            if (saveGame.Player.TimedHeroism.AddTimer(Program.Rng.DieRoll(25) + 25))
             {
                 identified = true;
             }

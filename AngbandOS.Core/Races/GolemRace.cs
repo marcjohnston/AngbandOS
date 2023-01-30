@@ -89,7 +89,7 @@ namespace AngbandOS.Core.Races
             // Golems can harden their skin
             if (saveGame.CheckIfRacialPowerWorks(20, 15, Ability.Constitution, 8))
             {
-                saveGame.Player.TimedStoneskin.SetTimer(saveGame.Player.TimedStoneskin.TimeRemaining + Program.Rng.DieRoll(20) + 30);
+                saveGame.Player.TimedStoneskin.AddTimer(Program.Rng.DieRoll(20) + 30);
             }
         }
         public override bool OutfitsWithScrollsOfSatisfyHunger => true;

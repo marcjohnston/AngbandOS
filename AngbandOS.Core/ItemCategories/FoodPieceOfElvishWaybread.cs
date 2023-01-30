@@ -20,7 +20,7 @@ namespace AngbandOS.Core.ItemCategories
         public override bool Eat(SaveGame saveGame)
         {
             saveGame.MsgPrint("That tastes good.");
-            saveGame.Player.TimedPoison.SetTimer(0);
+            saveGame.Player.TimedPoison.ResetTimer();
             saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8));
             return true;
         }

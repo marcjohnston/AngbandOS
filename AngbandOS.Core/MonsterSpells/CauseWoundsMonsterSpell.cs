@@ -46,7 +46,7 @@
 
                 if (TimedBleeding > 0)
                 {
-                    saveGame.Player.TimedBleeding.SetTimer(saveGame.Player.TimedBleeding.TimeRemaining + TimedBleeding);
+                    saveGame.Player.TimedBleeding.AddTimer(TimedBleeding);
                 }
             }
         }
@@ -55,7 +55,7 @@
         {
             int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
             string targetName = target.Name;
-            bool blind = saveGame.Player.TimedBlindness.TimeRemaining != 0;
+            bool blind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
             bool seeTarget = !blind && target.IsVisible;
             MonsterRace targetRace = target.Race;
 

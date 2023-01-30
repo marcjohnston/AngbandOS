@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Core.InventorySlots;
+using AngbandOS.Core.TimedActions;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -776,11 +777,11 @@ namespace AngbandOS
                             MsgPrint("You feel like a statue!");
                             if (Player.HasFreeAction)
                             {
-                                Player.TimedParalysis.SetTimer(Player.TimedParalysis.TimeRemaining + Program.Rng.DieRoll(3));
+                                Player.TimedParalysis.AddTimer(Program.Rng.DieRoll(3));
                             }
                             else
                             {
-                                Player.TimedParalysis.SetTimer(Player.TimedParalysis.TimeRemaining + Program.Rng.DieRoll(13));
+                                Player.TimedParalysis.AddTimer(Program.Rng.DieRoll(13));
                             }
                         }
                         break;
@@ -2274,9 +2275,9 @@ namespace AngbandOS
                 }
                 else if (Resting == -2)
                 {
-                    if (Player.Health == Player.MaxHealth && Player.Mana == Player.MaxMana && Player.TimedBlindness.TimeRemaining == 0 &&
-                        Player.TimedConfusion.TimeRemaining == 0 && Player.TimedPoison.TimeRemaining == 0 && Player.TimedFear.TimeRemaining == 0 && Player.TimedStun.TimeRemaining == 0 &&
-                        Player.TimedBleeding.TimeRemaining == 0 && Player.TimedSlow.TimeRemaining == 0 && Player.TimedParalysis.TimeRemaining == 0 && Player.TimedHallucinations.TimeRemaining == 0 &&
+                    if (Player.Health == Player.MaxHealth && Player.Mana == Player.MaxMana && Player.TimedBlindness.TurnsRemaining == 0 &&
+                        Player.TimedConfusion.TurnsRemaining == 0 && Player.TimedPoison.TurnsRemaining == 0 && Player.TimedFear.TurnsRemaining == 0 && Player.TimedStun.TurnsRemaining == 0 &&
+                        Player.TimedBleeding.TurnsRemaining == 0 && Player.TimedSlow.TurnsRemaining == 0 && Player.TimedParalysis.TurnsRemaining == 0 && Player.TimedHallucinations.TurnsRemaining == 0 &&
                         Player.WordOfRecallDelay == 0)
                     {
                         Disturb(false);
@@ -2321,7 +2322,7 @@ namespace AngbandOS
                     ViewingItemList = false;
                 }
                 EnergyUse = 0;
-                if (Player.TimedParalysis.TimeRemaining != 0 || Player.TimedStun.TimeRemaining >= 100)
+                if (Player.TimedParalysis.TurnsRemaining != 0 || Player.TimedStun.TurnsRemaining >= 100)
                 {
                     EnergyUse = 100;
                 }
@@ -2505,7 +2506,7 @@ namespace AngbandOS
             {
                 RegenMonsters();
             }
-            if (Player.TimedPoison.TimeRemaining != 0 && Player.TimedInvulnerability.TimeRemaining == 0)
+            if (Player.TimedPoison.TurnsRemaining != 0 && Player.TimedInvulnerability.TurnsRemaining == 0)
             {
                 Player.TakeHit(1, "poison");
             }
@@ -2534,7 +2535,7 @@ namespace AngbandOS
             if (!Level.GridPassable(Player.MapY, Player.MapX))
             {
                 caveNoRegen = true;
-                if (Player.TimedInvulnerability.TimeRemaining == 0 && Player.TimedEtherealness.TimeRemaining == 0 && (Player.Health > Player.Level / 5 || Player.Race.IsEthereal))
+                if (Player.TimedInvulnerability.TurnsRemaining == 0 && Player.TimedEtherealness.TurnsRemaining == 0 && (Player.Health > Player.Level / 5 || Player.Race.IsEthereal))
                 {
                     string damDesc;
                     if (Player.Race.IsEthereal)
@@ -2551,13 +2552,13 @@ namespace AngbandOS
                 }
             }
             int i;
-            if (Player.TimedBleeding.TimeRemaining != 0 && Player.TimedInvulnerability.TimeRemaining == 0)
+            if (Player.TimedBleeding.TurnsRemaining != 0 && Player.TimedInvulnerability.TurnsRemaining == 0)
             {
-                if (Player.TimedBleeding.TimeRemaining > 200)
+                if (Player.TimedBleeding.TurnsRemaining > 200)
                 {
                     i = 3;
                 }
-                else if (Player.TimedBleeding.TimeRemaining > 100)
+                else if (Player.TimedBleeding.TurnsRemaining > 100)
                 {
                     i = 2;
                 }
@@ -2594,7 +2595,7 @@ namespace AngbandOS
             if (Player.Food < Constants.PyFoodStarve)
             {
                 i = (Constants.PyFoodStarve - Player.Food) / 10;
-                if (Player.TimedInvulnerability.TimeRemaining == 0)
+                if (Player.TimedInvulnerability.TurnsRemaining == 0)
                 {
                     Player.TakeHit(i, "starvation");
                 }
@@ -2616,11 +2617,11 @@ namespace AngbandOS
                 }
                 if (Player.Food < Constants.PyFoodFaint)
                 {
-                    if (Player.TimedParalysis.TimeRemaining == 0 && Program.Rng.RandomLessThan(100) < 10)
+                    if (Player.TimedParalysis.TurnsRemaining == 0 && Program.Rng.RandomLessThan(100) < 10)
                     {
                         MsgPrint("You faint from the lack of food.");
                         Disturb(true);
-                        Player.TimedParalysis.SetTimer(Player.TimedParalysis.TimeRemaining + 1 + Program.Rng.RandomLessThan(5));
+                        Player.TimedParalysis.AddTimer(1 + Program.Rng.RandomLessThan(5));
                     }
                 }
             }
@@ -2669,11 +2670,11 @@ namespace AngbandOS
                     Player.RegenerateMana(regenAmount);
                 }
             }
-            if (Player.TimedPoison.TimeRemaining != 0)
+            if (Player.TimedPoison.TurnsRemaining != 0)
             {
                 regenAmount = 0;
             }
-            if (Player.TimedBleeding.TimeRemaining != 0)
+            if (Player.TimedBleeding.TurnsRemaining != 0)
             {
                 regenAmount = 0;
             }
@@ -2689,6 +2690,10 @@ namespace AngbandOS
             {
                 Player.GooPatron.MultiRew = false;
             }
+            //foreach (TimedAction timedAction in SingletonRepository.TimedActions)
+            //{
+            //    timedAction.ProcessWorld();
+            //}
             Player.TimedBlindness.ProcessWorld();
             Player.TimedSeeInvisibility.ProcessWorld();
             Player.TimedTelepathy.ProcessWorld();
@@ -2944,11 +2949,11 @@ namespace AngbandOS
             {
                 dam = (dam + 2) / 3;
             }
-            if (Player.TimedAcidResistance.TimeRemaining != 0)
+            if (Player.TimedAcidResistance.TurnsRemaining != 0)
             {
                 dam = (dam + 2) / 3;
             }
-            if (!(Player.TimedAcidResistance.TimeRemaining != 0 || Player.HasAcidResistance) && Program.Rng.DieRoll(HurtChance) == 1)
+            if (!(Player.TimedAcidResistance.TurnsRemaining != 0 || Player.HasAcidResistance) && Program.Rng.DieRoll(HurtChance) == 1)
             {
                 Player.TryDecreasingAbilityScore(Ability.Charisma);
             }
@@ -2957,7 +2962,7 @@ namespace AngbandOS
                 dam = (dam + 1) / 2;
             }
             Player.TakeHit(dam, kbStr);
-            if (!(Player.TimedAcidResistance.TimeRemaining != 0 && Player.HasAcidResistance))
+            if (!(Player.TimedAcidResistance.TurnsRemaining != 0 && Player.HasAcidResistance))
             {
                 Player.InvenDamage(SetAcidDestroy, inv);
             }
@@ -3565,16 +3570,16 @@ namespace AngbandOS
             {
                 dam = (dam + 2) / 3;
             }
-            if (Player.TimedColdResistance.TimeRemaining != 0)
+            if (Player.TimedColdResistance.TurnsRemaining != 0)
             {
                 dam = (dam + 2) / 3;
             }
-            if (!(Player.TimedColdResistance.TimeRemaining != 0 || Player.HasColdResistance) && Program.Rng.DieRoll(HurtChance) == 1)
+            if (!(Player.TimedColdResistance.TurnsRemaining != 0 || Player.HasColdResistance) && Program.Rng.DieRoll(HurtChance) == 1)
             {
                 Player.TryDecreasingAbilityScore(Ability.Strength);
             }
             Player.TakeHit(dam, kbStr);
-            if (!(Player.HasColdResistance && Player.TimedColdResistance.TimeRemaining != 0))
+            if (!(Player.HasColdResistance && Player.TimedColdResistance.TurnsRemaining != 0))
             {
                 Player.InvenDamage(SetColdDestroy, inv);
             }
@@ -3661,7 +3666,7 @@ namespace AngbandOS
                 MsgPrint("There is a searing blast of light!");
                 if (!Player.HasBlindnessResistance && !Player.HasLightResistance)
                 {
-                    Player.TimedBlindness.SetTimer(Player.TimedBlindness.TimeRemaining + 10 + Program.Rng.DieRoll(10));
+                    Player.TimedBlindness.AddTimer(10 + Program.Rng.DieRoll(10));
                 }
             }
             RemoveLightFlaggedAction.Set();
@@ -3844,7 +3849,7 @@ namespace AngbandOS
                 {
                     continue;
                 }
-                if (!rPtr.Invisible || Player.HasSeeInvisibility || Player.TimedSeeInvisibility.TimeRemaining != 0)
+                if (!rPtr.Invisible || Player.HasSeeInvisibility || Player.TimedSeeInvisibility.TurnsRemaining != 0)
                 {
                     Level.Monsters.RepairMonsters = true;
                     mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
@@ -4224,14 +4229,14 @@ namespace AngbandOS
                             {
                                 MsgPrint("You are bashed by rubble!");
                                 damage = Program.Rng.DiceRoll(10, 4);
-                                Player.TimedStun.SetTimer(Player.TimedStun.TimeRemaining + Program.Rng.DieRoll(50));
+                                Player.TimedStun.AddTimer(Program.Rng.DieRoll(50));
                                 break;
                             }
                         case 3:
                             {
                                 MsgPrint("You are crushed between the floor and ceiling!");
                                 damage = Program.Rng.DiceRoll(10, 4);
-                                Player.TimedStun.SetTimer(Player.TimedStun.TimeRemaining + Program.Rng.DieRoll(50));
+                                Player.TimedStun.AddTimer(Program.Rng.DieRoll(50));
                                 break;
                             }
                     }
@@ -4400,7 +4405,7 @@ namespace AngbandOS
             {
                 dam *= 2;
             }
-            if (Player.TimedLightningResistance.TimeRemaining != 0)
+            if (Player.TimedLightningResistance.TurnsRemaining != 0)
             {
                 dam = (dam + 2) / 3;
             }
@@ -4408,12 +4413,12 @@ namespace AngbandOS
             {
                 dam = (dam + 2) / 3;
             }
-            if (!(Player.TimedLightningResistance.TimeRemaining != 0 || Player.HasLightningResistance) && Program.Rng.DieRoll(HurtChance) == 1)
+            if (!(Player.TimedLightningResistance.TurnsRemaining != 0 || Player.HasLightningResistance) && Program.Rng.DieRoll(HurtChance) == 1)
             {
                 Player.TryDecreasingAbilityScore(Ability.Dexterity);
             }
             Player.TakeHit(dam, kbStr);
-            if (!(Player.TimedLightningResistance.TimeRemaining != 0 && Player.HasLightningResistance))
+            if (!(Player.TimedLightningResistance.TurnsRemaining != 0 && Player.HasLightningResistance))
             {
                 Player.InvenDamage(SetElecDestroy, inv);
             }
@@ -4646,16 +4651,16 @@ namespace AngbandOS
             {
                 dam = (dam + 2) / 3;
             }
-            if (Player.TimedFireResistance.TimeRemaining != 0)
+            if (Player.TimedFireResistance.TurnsRemaining != 0)
             {
                 dam = (dam + 2) / 3;
             }
-            if (!(Player.TimedFireResistance.TimeRemaining != 0 || Player.HasFireResistance) && Program.Rng.DieRoll(HurtChance) == 1)
+            if (!(Player.TimedFireResistance.TurnsRemaining != 0 || Player.HasFireResistance) && Program.Rng.DieRoll(HurtChance) == 1)
             {
                 Player.TryDecreasingAbilityScore(Ability.Strength);
             }
             Player.TakeHit(dam, kbStr);
-            if (!(Player.HasFireResistance && Player.TimedFireResistance.TimeRemaining != 0))
+            if (!(Player.HasFireResistance && Player.TimedFireResistance.TurnsRemaining != 0))
             {
                 Player.InvenDamage(SetFireDestroy, inv);
             }
@@ -4792,7 +4797,7 @@ namespace AngbandOS
         public bool LightArea(int dam, int rad)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill;
-            if (Player.TimedBlindness.TimeRemaining == 0)
+            if (Player.TimedBlindness.TurnsRemaining == 0)
             {
                 MsgPrint("You are surrounded by a white light.");
             }
@@ -5059,64 +5064,64 @@ namespace AngbandOS
             int i = 0, j, k;
             string[] info = new string[128];
             int[] info2 = new int[128];
-            if (Player.TimedBlindness.TimeRemaining != 0)
+            if (Player.TimedBlindness.TurnsRemaining != 0)
             {
-                info2[i] = ReportMagicsAux(Player.TimedBlindness.TimeRemaining);
+                info2[i] = ReportMagicsAux(Player.TimedBlindness.TurnsRemaining);
                 info[i++] = "You cannot see";
             }
-            if (Player.TimedConfusion.TimeRemaining != 0)
+            if (Player.TimedConfusion.TurnsRemaining != 0)
             {
-                info2[i] = ReportMagicsAux(Player.TimedConfusion.TimeRemaining);
+                info2[i] = ReportMagicsAux(Player.TimedConfusion.TurnsRemaining);
                 info[i++] = "You are confused";
             }
-            if (Player.TimedFear.TimeRemaining != 0)
+            if (Player.TimedFear.TurnsRemaining != 0)
             {
-                info2[i] = ReportMagicsAux(Player.TimedFear.TimeRemaining);
+                info2[i] = ReportMagicsAux(Player.TimedFear.TurnsRemaining);
                 info[i++] = "You are terrified";
             }
-            if (Player.TimedPoison.TimeRemaining != 0)
+            if (Player.TimedPoison.TurnsRemaining != 0)
             {
-                info2[i] = ReportMagicsAux(Player.TimedPoison.TimeRemaining);
+                info2[i] = ReportMagicsAux(Player.TimedPoison.TurnsRemaining);
                 info[i++] = "You are poisoned";
             }
-            if (Player.TimedHallucinations.TimeRemaining != 0)
+            if (Player.TimedHallucinations.TurnsRemaining != 0)
             {
-                info2[i] = ReportMagicsAux(Player.TimedHallucinations.TimeRemaining);
+                info2[i] = ReportMagicsAux(Player.TimedHallucinations.TurnsRemaining);
                 info[i++] = "You are hallucinating";
             }
-            if (Player.TimedBlessing.TimeRemaining != 0)
+            if (Player.TimedBlessing.TurnsRemaining != 0)
             {
-                info2[i] = ReportMagicsAux(Player.TimedBlessing.TimeRemaining);
+                info2[i] = ReportMagicsAux(Player.TimedBlessing.TurnsRemaining);
                 info[i++] = "You feel rightous";
             }
-            if (Player.TimedHeroism.TimeRemaining != 0)
+            if (Player.TimedHeroism.TurnsRemaining != 0)
             {
-                info2[i] = ReportMagicsAux(Player.TimedHeroism.TimeRemaining);
+                info2[i] = ReportMagicsAux(Player.TimedHeroism.TurnsRemaining);
                 info[i++] = "You feel heroic";
             }
-            if (Player.TimedSuperheroism.TimeRemaining != 0)
+            if (Player.TimedSuperheroism.TurnsRemaining != 0)
             {
-                info2[i] = ReportMagicsAux(Player.TimedSuperheroism.TimeRemaining);
+                info2[i] = ReportMagicsAux(Player.TimedSuperheroism.TurnsRemaining);
                 info[i++] = "You are in a battle rage";
             }
-            if (Player.TimedProtectionFromEvil.TimeRemaining != 0)
+            if (Player.TimedProtectionFromEvil.TurnsRemaining != 0)
             {
-                info2[i] = ReportMagicsAux(Player.TimedProtectionFromEvil.TimeRemaining);
+                info2[i] = ReportMagicsAux(Player.TimedProtectionFromEvil.TurnsRemaining);
                 info[i++] = "You are protected from evil";
             }
-            if (Player.TimedStoneskin.TimeRemaining != 0)
+            if (Player.TimedStoneskin.TurnsRemaining != 0)
             {
-                info2[i] = ReportMagicsAux(Player.TimedStoneskin.TimeRemaining);
+                info2[i] = ReportMagicsAux(Player.TimedStoneskin.TurnsRemaining);
                 info[i++] = "You are protected by a mystic shield";
             }
-            if (Player.TimedInvulnerability.TimeRemaining != 0)
+            if (Player.TimedInvulnerability.TurnsRemaining != 0)
             {
-                info2[i] = ReportMagicsAux(Player.TimedInvulnerability.TimeRemaining);
+                info2[i] = ReportMagicsAux(Player.TimedInvulnerability.TurnsRemaining);
                 info[i++] = "You are invulnerable";
             }
-            if (Player.TimedEtherealness.TimeRemaining != 0)
+            if (Player.TimedEtherealness.TurnsRemaining != 0)
             {
-                info2[i] = ReportMagicsAux(Player.TimedEtherealness.TimeRemaining);
+                info2[i] = ReportMagicsAux(Player.TimedEtherealness.TurnsRemaining);
                 info[i++] = "You are incorporeal";
             }
             if (Player.HasConfusingTouch)
@@ -5129,29 +5134,29 @@ namespace AngbandOS
                 info2[i] = ReportMagicsAux(Player.WordOfRecallDelay);
                 info[i++] = "You waiting to be recalled";
             }
-            if (Player.TimedAcidResistance.TimeRemaining != 0)
+            if (Player.TimedAcidResistance.TurnsRemaining != 0)
             {
-                info2[i] = ReportMagicsAux(Player.TimedAcidResistance.TimeRemaining);
+                info2[i] = ReportMagicsAux(Player.TimedAcidResistance.TurnsRemaining);
                 info[i++] = "You are resistant to acid";
             }
-            if (Player.TimedLightningResistance.TimeRemaining != 0)
+            if (Player.TimedLightningResistance.TurnsRemaining != 0)
             {
-                info2[i] = ReportMagicsAux(Player.TimedLightningResistance.TimeRemaining);
+                info2[i] = ReportMagicsAux(Player.TimedLightningResistance.TurnsRemaining);
                 info[i++] = "You are resistant to lightning";
             }
-            if (Player.TimedFireResistance.TimeRemaining != 0)
+            if (Player.TimedFireResistance.TurnsRemaining != 0)
             {
-                info2[i] = ReportMagicsAux(Player.TimedFireResistance.TimeRemaining);
+                info2[i] = ReportMagicsAux(Player.TimedFireResistance.TurnsRemaining);
                 info[i++] = "You are resistant to fire";
             }
-            if (Player.TimedColdResistance.TimeRemaining != 0)
+            if (Player.TimedColdResistance.TurnsRemaining != 0)
             {
-                info2[i] = ReportMagicsAux(Player.TimedColdResistance.TimeRemaining);
+                info2[i] = ReportMagicsAux(Player.TimedColdResistance.TurnsRemaining);
                 info[i++] = "You are resistant to cold";
             }
-            if (Player.TimedPoisonResistance.TimeRemaining != 0)
+            if (Player.TimedPoisonResistance.TurnsRemaining != 0)
             {
-                info2[i] = ReportMagicsAux(Player.TimedPoisonResistance.TimeRemaining);
+                info2[i] = ReportMagicsAux(Player.TimedPoisonResistance.TurnsRemaining);
                 info[i++] = "You are resistant to poison";
             }
             ScreenBuffer savedScreen = Screen.Clone();
@@ -5213,31 +5218,31 @@ namespace AngbandOS
                     info[i++] = m;
                 }
             }
-            if (Player.TimedBlindness.TimeRemaining != 0)
+            if (Player.TimedBlindness.TurnsRemaining != 0)
             {
                 info[i++] = "You cannot see.";
             }
-            if (Player.TimedConfusion.TimeRemaining != 0)
+            if (Player.TimedConfusion.TurnsRemaining != 0)
             {
                 info[i++] = "You are confused.";
             }
-            if (Player.TimedFear.TimeRemaining != 0)
+            if (Player.TimedFear.TurnsRemaining != 0)
             {
                 info[i++] = "You are terrified.";
             }
-            if (Player.TimedBleeding.TimeRemaining != 0)
+            if (Player.TimedBleeding.TurnsRemaining != 0)
             {
                 info[i++] = "You are bleeding.";
             }
-            if (Player.TimedStun.TimeRemaining != 0)
+            if (Player.TimedStun.TurnsRemaining != 0)
             {
                 info[i++] = "You are stunned.";
             }
-            if (Player.TimedPoison.TimeRemaining != 0)
+            if (Player.TimedPoison.TurnsRemaining != 0)
             {
                 info[i++] = "You are poisoned.";
             }
-            if (Player.TimedHallucinations.TimeRemaining != 0)
+            if (Player.TimedHallucinations.TurnsRemaining != 0)
             {
                 info[i++] = "You are hallucinating.";
             }
@@ -5249,31 +5254,31 @@ namespace AngbandOS
             {
                 info[i++] = "Your position is very uncertain.";
             }
-            if (Player.TimedBlessing.TimeRemaining != 0)
+            if (Player.TimedBlessing.TurnsRemaining != 0)
             {
                 info[i++] = "You feel rightous.";
             }
-            if (Player.TimedHeroism.TimeRemaining != 0)
+            if (Player.TimedHeroism.TurnsRemaining != 0)
             {
                 info[i++] = "You feel heroic.";
             }
-            if (Player.TimedSuperheroism.TimeRemaining != 0)
+            if (Player.TimedSuperheroism.TurnsRemaining != 0)
             {
                 info[i++] = "You are in a battle rage.";
             }
-            if (Player.TimedProtectionFromEvil.TimeRemaining != 0)
+            if (Player.TimedProtectionFromEvil.TurnsRemaining != 0)
             {
                 info[i++] = "You are protected from evil.";
             }
-            if (Player.TimedStoneskin.TimeRemaining != 0)
+            if (Player.TimedStoneskin.TurnsRemaining != 0)
             {
                 info[i++] = "You are protected by a mystic shield.";
             }
-            if (Player.TimedInvulnerability.TimeRemaining != 0)
+            if (Player.TimedInvulnerability.TurnsRemaining != 0)
             {
                 info[i++] = "You are temporarily invulnerable.";
             }
-            if (Player.TimedEtherealness.TimeRemaining != 0)
+            if (Player.TimedEtherealness.TurnsRemaining != 0)
             {
                 info[i++] = "You are temporarily incorporeal.";
             }
@@ -5353,11 +5358,11 @@ namespace AngbandOS
             {
                 info[i++] = "You are completely immune to acid.";
             }
-            else if (Player.HasAcidResistance && Player.TimedAcidResistance.TimeRemaining != 0)
+            else if (Player.HasAcidResistance && Player.TimedAcidResistance.TurnsRemaining != 0)
             {
                 info[i++] = "You resist acid exceptionally well.";
             }
-            else if (Player.HasAcidResistance || Player.TimedAcidResistance.TimeRemaining != 0)
+            else if (Player.HasAcidResistance || Player.TimedAcidResistance.TurnsRemaining != 0)
             {
                 info[i++] = "You are resistant to acid.";
             }
@@ -5365,11 +5370,11 @@ namespace AngbandOS
             {
                 info[i++] = "You are completely immune to lightning.";
             }
-            else if (Player.HasLightningResistance && Player.TimedLightningResistance.TimeRemaining != 0)
+            else if (Player.HasLightningResistance && Player.TimedLightningResistance.TurnsRemaining != 0)
             {
                 info[i++] = "You resist lightning exceptionally well.";
             }
-            else if (Player.HasLightningResistance || Player.TimedLightningResistance.TimeRemaining != 0)
+            else if (Player.HasLightningResistance || Player.TimedLightningResistance.TurnsRemaining != 0)
             {
                 info[i++] = "You are resistant to lightning.";
             }
@@ -5377,11 +5382,11 @@ namespace AngbandOS
             {
                 info[i++] = "You are completely immune to fire.";
             }
-            else if (Player.HasFireResistance && Player.TimedFireResistance.TimeRemaining != 0)
+            else if (Player.HasFireResistance && Player.TimedFireResistance.TurnsRemaining != 0)
             {
                 info[i++] = "You resist fire exceptionally well.";
             }
-            else if (Player.HasFireResistance || Player.TimedFireResistance.TimeRemaining != 0)
+            else if (Player.HasFireResistance || Player.TimedFireResistance.TurnsRemaining != 0)
             {
                 info[i++] = "You are resistant to fire.";
             }
@@ -5389,19 +5394,19 @@ namespace AngbandOS
             {
                 info[i++] = "You are completely immune to cold.";
             }
-            else if (Player.HasColdResistance && Player.TimedColdResistance.TimeRemaining != 0)
+            else if (Player.HasColdResistance && Player.TimedColdResistance.TurnsRemaining != 0)
             {
                 info[i++] = "You resist cold exceptionally well.";
             }
-            else if (Player.HasColdResistance || Player.TimedColdResistance.TimeRemaining != 0)
+            else if (Player.HasColdResistance || Player.TimedColdResistance.TurnsRemaining != 0)
             {
                 info[i++] = "You are resistant to cold.";
             }
-            if (Player.HasPoisonResistance && Player.TimedPoisonResistance.TimeRemaining != 0)
+            if (Player.HasPoisonResistance && Player.TimedPoisonResistance.TurnsRemaining != 0)
             {
                 info[i++] = "You resist poison exceptionally well.";
             }
-            else if (Player.HasPoisonResistance || Player.TimedPoisonResistance.TimeRemaining != 0)
+            else if (Player.HasPoisonResistance || Player.TimedPoisonResistance.TurnsRemaining != 0)
             {
                 info[i++] = "You are resistant to poison.";
             }
@@ -6031,7 +6036,7 @@ namespace AngbandOS
         public bool UnlightArea(int dam, int rad)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill;
-            if (Player.TimedBlindness.TimeRemaining == 0)
+            if (Player.TimedBlindness.TurnsRemaining == 0)
             {
                 MsgPrint("Darkness surrounds you.");
             }
@@ -6616,7 +6621,7 @@ namespace AngbandOS
             else
             {
                 MsgPrint("You are off-balance.");
-                Player.TimedParalysis.SetTimer(Player.TimedParalysis.TimeRemaining + 2 + Program.Rng.RandomLessThan(2));
+                Player.TimedParalysis.AddTimer(2 + Program.Rng.RandomLessThan(2));
             }
             return more;
         }
@@ -6793,7 +6798,7 @@ namespace AngbandOS
                 return false;
             }
             // Can't use it if we're confused
-            if (Player.TimedConfusion.TimeRemaining != 0)
+            if (Player.TimedConfusion.TurnsRemaining != 0)
             {
                 MsgPrint("You are too confused to use this power.");
                 EnergyUse = 0;
@@ -6809,9 +6814,9 @@ namespace AngbandOS
                 }
             }
             // Harder to use powers when you're stunned
-            if (Player.TimedStun.TimeRemaining != 0)
+            if (Player.TimedStun.TurnsRemaining != 0)
             {
-                difficulty += Player.TimedStun.TimeRemaining;
+                difficulty += Player.TimedStun.TurnsRemaining;
             }
             // Easier to use powers if you're higher level than you need to be
             else if (Player.Level > minLevel)
@@ -7167,12 +7172,12 @@ namespace AngbandOS
             EnergyUse = 100;
             int i = Player.SkillDisarmTraps;
             // Disarming is tricky when you can't see
-            if (Player.TimedBlindness.TimeRemaining != 0 || Level.NoLight())
+            if (Player.TimedBlindness.TurnsRemaining != 0 || Level.NoLight())
             {
                 i /= 10;
             }
             // Disarming is tricky when confused
-            if (Player.TimedConfusion.TimeRemaining != 0 || Player.TimedHallucinations.TimeRemaining != 0)
+            if (Player.TimedConfusion.TurnsRemaining != 0 || Player.TimedHallucinations.TurnsRemaining != 0)
             {
                 i /= 10;
             }
@@ -7234,12 +7239,12 @@ namespace AngbandOS
             string trapName = tile.FeatureType.Description;
             int i = Player.SkillDisarmTraps;
             // Difficult, but possible, to disarm by feel
-            if (Player.TimedBlindness.TimeRemaining != 0 || Level.NoLight())
+            if (Player.TimedBlindness.TurnsRemaining != 0 || Level.NoLight())
             {
                 i /= 10;
             }
             // Difficult to disarm when we're confused
-            if (Player.TimedConfusion.TimeRemaining != 0 || Player.TimedHallucinations.TimeRemaining != 0)
+            if (Player.TimedConfusion.TurnsRemaining != 0 || Player.TimedHallucinations.TurnsRemaining != 0)
             {
                 i /= 10;
             }
@@ -7488,7 +7493,7 @@ namespace AngbandOS
             GridTile tile = Level.Grid[newY][newX];
             Monster monster = Level.Monsters[tile.MonsterIndex];
             // Check if we can pass through walls
-            if (Player.TimedEtherealness.TimeRemaining != 0 || Player.Race.IsEthereal)
+            if (Player.TimedEtherealness.TurnsRemaining != 0 || Player.Race.IsEthereal)
             {
                 canPassWalls = true;
                 // Permanent features can't be passed through even if we could otherwise
@@ -7502,7 +7507,7 @@ namespace AngbandOS
             if (tile.MonsterIndex != 0 && (monster.IsVisible || Level.GridPassable(newY, newX) || canPassWalls))
             {
                 // Check if it's a friend, and if we are in a fit state to distinguish friend from foe
-                if (monster.SmFriendly && !(Player.TimedConfusion.TimeRemaining != 0 || Player.TimedHallucinations.TimeRemaining != 0 || !monster.IsVisible || Player.TimedStun.TimeRemaining != 0) &&
+                if (monster.SmFriendly && !(Player.TimedConfusion.TurnsRemaining != 0 || Player.TimedHallucinations.TurnsRemaining != 0 || !monster.IsVisible || Player.TimedStun.TurnsRemaining != 0) &&
                     (Level.GridPassable(newY, newX) || canPassWalls))
                 {
                     // Wake up the monster, and track it
@@ -7551,7 +7556,7 @@ namespace AngbandOS
                 Disturb(false);
                 // If we can't see it and haven't memories it, tell us what we bumped into
                 if (tile.TileFlags.IsClear(GridTile.PlayerMemorised) &&
-                    (Player.TimedBlindness.TimeRemaining != 0 || tile.TileFlags.IsClear(GridTile.PlayerLit)))
+                    (Player.TimedBlindness.TurnsRemaining != 0 || tile.TileFlags.IsClear(GridTile.PlayerLit)))
                 {
                     if (tile.FeatureType.Name == "Rubble")
                     {
@@ -7635,7 +7640,7 @@ namespace AngbandOS
                     if (tile.FeatureType.Name == "Rubble")
                     {
                         MsgPrint("There is rubble blocking your way.");
-                        if (!(Player.TimedConfusion.TimeRemaining != 0 || Player.TimedStun.TimeRemaining != 0 || Player.TimedHallucinations.TimeRemaining != 0))
+                        if (!(Player.TimedConfusion.TurnsRemaining != 0 || Player.TimedStun.TurnsRemaining != 0 || Player.TimedHallucinations.TurnsRemaining != 0))
                         {
                             EnergyUse = 0;
                         }
@@ -7709,7 +7714,7 @@ namespace AngbandOS
                     else
                     {
                         MsgPrint($"There is a {tile.FeatureType.Description} blocking your way.");
-                        if (!(Player.TimedConfusion.TimeRemaining != 0 || Player.TimedStun.TimeRemaining != 0 || Player.TimedHallucinations.TimeRemaining != 0))
+                        if (!(Player.TimedConfusion.TurnsRemaining != 0 || Player.TimedStun.TurnsRemaining != 0 || Player.TimedHallucinations.TurnsRemaining != 0))
                         {
                             EnergyUse = 0;
                         }
@@ -7730,7 +7735,7 @@ namespace AngbandOS
             // If we're leaving an area where we've detected traps at a run, then stop running
             if (Running != 0 && oldTrapsDetected && !newTrapsDetected)
             {
-                if (!(Player.TimedConfusion.TimeRemaining != 0 || Player.TimedStun.TimeRemaining != 0 || Player.TimedHallucinations.TimeRemaining != 0))
+                if (!(Player.TimedConfusion.TurnsRemaining != 0 || Player.TimedStun.TurnsRemaining != 0 || Player.TimedHallucinations.TurnsRemaining != 0))
                 {
                     EnergyUse = 0;
                 }
@@ -7811,12 +7816,12 @@ namespace AngbandOS
                 // Our disarm traps skill doubles up as a lockpicking skill
                 int i = Player.SkillDisarmTraps;
                 // Hard to pick locks when you can't see
-                if (Player.TimedBlindness.TimeRemaining != 0 || Level.NoLight())
+                if (Player.TimedBlindness.TurnsRemaining != 0 || Level.NoLight())
                 {
                     i /= 10;
                 }
                 // Hard to pick locks when you're confused or hallucinating
-                if (Player.TimedConfusion.TimeRemaining != 0 || Player.TimedHallucinations.TimeRemaining != 0)
+                if (Player.TimedConfusion.TurnsRemaining != 0 || Player.TimedHallucinations.TurnsRemaining != 0)
                 {
                     i /= 10;
                 }
@@ -7953,13 +7958,13 @@ namespace AngbandOS
                 HealthTrack(tile.MonsterIndex);
             }
             // if the monster is our friend and we're not confused, we can avoid hitting it
-            if (monster.SmFriendly && !(Player.TimedStun.TimeRemaining != 0 || Player.TimedConfusion.TimeRemaining != 0 || Player.TimedHallucinations.TimeRemaining != 0 || !monster.IsVisible))
+            if (monster.SmFriendly && !(Player.TimedStun.TurnsRemaining != 0 || Player.TimedConfusion.TurnsRemaining != 0 || Player.TimedHallucinations.TurnsRemaining != 0 || !monster.IsVisible))
             {
                 MsgPrint($"You stop to avoid hitting {monsterName}.");
                 return;
             }
             // Can't attack if we're afraid
-            if (Player.TimedFear.TimeRemaining != 0)
+            if (Player.TimedFear.TurnsRemaining != 0)
             {
                 MsgPrint(monster.IsVisible ? $"You are too afraid to attack {monsterName}!" : "There is something scary in your way!");
                 return;
@@ -8053,7 +8058,7 @@ namespace AngbandOS
                             // We've chosen an attack, use it if it's better than the previous
                             // choice (unless we're stunned or confused in which case we're stuck
                             // with the weakest attack type
-                            if (martialArtsAttack.MinLevel > oldMartialArtsAttack.MinLevel && !(Player.TimedStun.TimeRemaining != 0 || Player.TimedConfusion.TimeRemaining != 0))
+                            if (martialArtsAttack.MinLevel > oldMartialArtsAttack.MinLevel && !(Player.TimedStun.TurnsRemaining != 0 || Player.TimedConfusion.TurnsRemaining != 0))
                             {
                                 oldMartialArtsAttack = martialArtsAttack;
                             }
@@ -8526,7 +8531,7 @@ namespace AngbandOS
             // Work out the chance of using the item successfully based on its level and the
             // player's skill
             int chance = Player.SkillUseDevice;
-            if (Player.TimedConfusion.TimeRemaining != 0)
+            if (Player.TimedConfusion.TurnsRemaining != 0)
             {
                 chance /= 2;
             }
@@ -8725,21 +8730,21 @@ namespace AngbandOS
                     case RingType.Acid:
                         {
                             FireBall(new ProjectAcid(this), dir, 50, 2);
-                            Player.TimedAcidResistance.SetTimer(Player.TimedAcidResistance.TimeRemaining + Program.Rng.DieRoll(20) + 20);
+                            Player.TimedAcidResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
                             break;
                         }
                     case RingType.Ice:
                         {
                             FireBall(new ProjectCold(this), dir, 50, 2);
-                            Player.TimedColdResistance.SetTimer(Player.TimedColdResistance.TimeRemaining + Program.Rng.DieRoll(20) + 20);
+                            Player.TimedColdResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
                             break;
                         }
                     case RingType.Flames:
                         {
                             FireBall(new ProjectFire(this), dir, 50, 2);
-                            Player.TimedFireResistance.SetTimer(Player.TimedFireResistance.TimeRemaining + Program.Rng.DieRoll(20) + 20);
+                            Player.TimedFireResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
                             break;
                         }
@@ -9207,7 +9212,7 @@ namespace AngbandOS
             int itemLevel = item.BaseItemCategory.Level;
             // Chance to successfully use it is skill (halved if confused) - rod level (capped at 50)
             int chance = Player.SkillUseDevice;
-            if (Player.TimedConfusion.TimeRemaining != 0)
+            if (Player.TimedConfusion.TurnsRemaining != 0)
             {
                 chance /= 2;
             }
@@ -9803,7 +9808,7 @@ namespace AngbandOS
                 powerDesc[num] = "";
             }
             num = 0;
-            if (Player.TimedConfusion.TimeRemaining != 0)
+            if (Player.TimedConfusion.TurnsRemaining != 0)
             {
                 MsgPrint("You are too confused to use any powers!");
                 EnergyUse = 0;
@@ -10235,7 +10240,7 @@ namespace AngbandOS
         public void DoCmdRun()
         {
             // Can't run if we're confused
-            if (Player.TimedConfusion.TimeRemaining != 0)
+            if (Player.TimedConfusion.TurnsRemaining != 0)
             {
                 MsgPrint("You are too confused!");
                 return;
@@ -10288,7 +10293,7 @@ namespace AngbandOS
             // We have a chance of the device working equal to skill (halved if confused) - item
             // level (capped at 50)
             int chance = Player.SkillUseDevice;
-            if (Player.TimedConfusion.TimeRemaining != 0)
+            if (Player.TimedConfusion.TurnsRemaining != 0)
             {
                 chance /= 2;
             }
@@ -10459,7 +10464,7 @@ namespace AngbandOS
 
             int i;
             // Make sure we're in a situation where we can read
-            if (Player.TimedBlindness.TimeRemaining != 0)
+            if (Player.TimedBlindness.TurnsRemaining != 0)
             {
                 MsgPrint("You can't see anything.");
                 return;
@@ -10469,7 +10474,7 @@ namespace AngbandOS
                 MsgPrint("You have no light to read by.");
                 return;
             }
-            if (Player.TimedConfusion.TimeRemaining != 0)
+            if (Player.TimedConfusion.TurnsRemaining != 0)
             {
                 MsgPrint("You are too confused!");
                 return;
@@ -10591,12 +10596,12 @@ namespace AngbandOS
                 // Our disable traps skill also doubles up as a lockpicking skill
                 int i = Player.SkillDisarmTraps;
                 // Hard to pick locks in the dark
-                if (Player.TimedBlindness.TimeRemaining != 0 || Level.NoLight())
+                if (Player.TimedBlindness.TurnsRemaining != 0 || Level.NoLight())
                 {
                     i /= 10;
                 }
                 // Hard to pick locks when you're confused or hallucinating
-                if (Player.TimedConfusion.TimeRemaining != 0 || Player.TimedHallucinations.TimeRemaining != 0)
+                if (Player.TimedConfusion.TurnsRemaining != 0 || Player.TimedHallucinations.TurnsRemaining != 0)
                 {
                     i /= 10;
                 }
@@ -11443,12 +11448,12 @@ namespace AngbandOS
                 MsgPrint("You cannot cast spells!");
                 return;
             }
-            if (Player.TimedBlindness.TimeRemaining != 0 || Level.NoLight())
+            if (Player.TimedBlindness.TurnsRemaining != 0 || Level.NoLight())
             {
                 MsgPrint("You cannot see!");
                 return;
             }
-            if (Player.TimedConfusion.TimeRemaining != 0)
+            if (Player.TimedConfusion.TurnsRemaining != 0)
             {
                 MsgPrint("You are too confused!");
                 return;
@@ -11530,7 +11535,7 @@ namespace AngbandOS
                 Player.Mana = 0;
                 Player.FractionalMana = 0;
                 MsgPrint("You faint from the effort!");
-                Player.TimedParalysis.SetTimer(Player.TimedParalysis.TimeRemaining + Program.Rng.DieRoll((5 * oops) + 1));
+                Player.TimedParalysis.AddTimer(Program.Rng.DieRoll((5 * oops) + 1));
                 if (Program.Rng.RandomLessThan(100) < 50)
                 {
                     bool perm = Program.Rng.RandomLessThan(100) < 25;
@@ -11544,7 +11549,7 @@ namespace AngbandOS
         public void DoCmdMentalism()
         {
             int plev = Player.Level;
-            if (Player.TimedConfusion.TimeRemaining != 0)
+            if (Player.TimedConfusion.TurnsRemaining != 0)
             {
                 MsgPrint("You are too confused!");
                 return;
@@ -11577,24 +11582,21 @@ namespace AngbandOS
                     else if (i < 15)
                     {
                         MsgPrint("Weird visions seem to dance before your eyes...");
-                        Player.TimedHallucinations.SetTimer(Player.TimedHallucinations.TimeRemaining + 5 + Program.Rng.DieRoll(10));
+                        Player.TimedHallucinations.AddTimer(5 + Program.Rng.DieRoll(10));
                     }
                     else if (i < 45)
                     {
                         MsgPrint("Your brain is addled!");
-                        Player.TimedConfusion.SetTimer(Player.TimedConfusion.TimeRemaining + Program.Rng.DieRoll(8));
+                        Player.TimedConfusion.AddTimer(Program.Rng.DieRoll(8));
                     }
                     else if (i < 90)
                     {
-                        Player.TimedStun.SetTimer(Player.TimedStun.TimeRemaining + Program.Rng.DieRoll(8));
+                        Player.TimedStun.AddTimer(Program.Rng.DieRoll(8));
                     }
                     else
                     {
                         MsgPrint("Your mind unleashes its power in an uncontrollable storm!");
-                        Project(1, 2 + (plev / 10), Player.MapY, Player.MapX, plev * 2,
-                            new ProjectMana(this),
-                            ProjectionFlag.ProjectJump | ProjectionFlag.ProjectKill | ProjectionFlag.ProjectGrid |
-                            ProjectionFlag.ProjectItem);
+                        Project(1, 2 + (plev / 10), Player.MapY, Player.MapX, plev * 2, new ProjectMana(this), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectKill | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem);
                         Player.Mana = Math.Max(0, Player.Mana - (plev * Math.Max(1, plev / 10)));
                     }
                 }
@@ -11614,7 +11616,7 @@ namespace AngbandOS
                 Player.Mana = 0;
                 Player.FractionalMana = 0;
                 MsgPrint("You faint from the effort!");
-                Player.TimedParalysis.SetTimer(Player.TimedParalysis.TimeRemaining + Program.Rng.DieRoll((5 * oops) + 1));
+                Player.TimedParalysis.AddTimer(Program.Rng.DieRoll((5 * oops) + 1));
                 if (Program.Rng.RandomLessThan(100) < 50)
                 {
                     bool perm = Program.Rng.RandomLessThan(100) < 25;
@@ -11858,7 +11860,7 @@ namespace AngbandOS
             // Chance of success is your skill - item level, with item level capped at 50 and your
             // skill halved if you're confused
             int chance = Player.SkillUseDevice;
-            if (Player.TimedConfusion.TimeRemaining != 0)
+            if (Player.TimedConfusion.TurnsRemaining != 0)
             {
                 chance /= 2;
             }
@@ -11936,12 +11938,12 @@ namespace AngbandOS
             // The basic chance is equal to our searching skill
             int chance = Player.SkillSearching;
             // If we can't see it's hard to search
-            if (Player.TimedBlindness.TimeRemaining != 0 || Level.NoLight())
+            if (Player.TimedBlindness.TurnsRemaining != 0 || Level.NoLight())
             {
                 chance /= 10;
             }
             // If we're confused it's hard to search
-            if (Player.TimedConfusion.TimeRemaining != 0 || Player.TimedHallucinations.TimeRemaining != 0)
+            if (Player.TimedConfusion.TurnsRemaining != 0 || Player.TimedHallucinations.TurnsRemaining != 0)
             {
                 chance /= 10;
             }
@@ -12261,12 +12263,12 @@ namespace AngbandOS
             {
                 int skill = Player.SkillDisarmTraps;
                 // Lockpicking is hard in the dark
-                if (Player.TimedBlindness.TimeRemaining != 0 || Level.NoLight())
+                if (Player.TimedBlindness.TurnsRemaining != 0 || Level.NoLight())
                 {
                     skill /= 10;
                 }
                 // Lockpicking is hard when you're confused
-                if (Player.TimedConfusion.TimeRemaining != 0 || Player.TimedHallucinations.TimeRemaining != 0)
+                if (Player.TimedConfusion.TurnsRemaining != 0 || Player.TimedHallucinations.TurnsRemaining != 0)
                 {
                     skill /= 10;
                 }
@@ -12549,7 +12551,7 @@ namespace AngbandOS
                                 MsgPrint("You are impaled!");
                                 name = "a spiked pit";
                                 damage *= 2;
-                                Player.TimedBleeding.SetTimer(Player.TimedBleeding.TimeRemaining + Program.Rng.DieRoll(damage));
+                                Player.TimedBleeding.AddTimer(Program.Rng.DieRoll(damage));
                             }
                             Player.TakeHit(damage, name);
                         }
@@ -12574,9 +12576,9 @@ namespace AngbandOS
                                 MsgPrint("You are impaled on poisonous spikes!");
                                 name = "a spiked pit";
                                 damage *= 2;
-                                Player.TimedBleeding.SetTimer(Player.TimedBleeding.TimeRemaining + Program.Rng.DieRoll(damage));
+                                Player.TimedBleeding.AddTimer(Program.Rng.DieRoll(damage));
                                 // Hagarg Ryonis can save us from the poison
-                                if (Player.HasPoisonResistance || Player.TimedPoisonResistance.TimeRemaining != 0)
+                                if (Player.HasPoisonResistance || Player.TimedPoisonResistance.TurnsRemaining != 0)
                                 {
                                     MsgPrint("The poison does not affect you!");
                                 }
@@ -12587,7 +12589,7 @@ namespace AngbandOS
                                 else
                                 {
                                     damage *= 2;
-                                    Player.TimedPoison.SetTimer(Player.TimedPoison.TimeRemaining + Program.Rng.DieRoll(damage));
+                                    Player.TimedPoison.AddTimer(Program.Rng.DieRoll(damage));
                                 }
                             }
                             Player.TakeHit(damage, name);
@@ -12648,7 +12650,7 @@ namespace AngbandOS
                             // Do 1d4 damage plus slow
                             damage = Program.Rng.DiceRoll(1, 4);
                             Player.TakeHit(damage, name);
-                            Player.TimedSlow.SetTimer(Player.TimedSlow.TimeRemaining + Program.Rng.RandomLessThan(20) + 20);
+                            Player.TimedSlow.AddTimer(Program.Rng.RandomLessThan(20) + 20);
                         }
                         else
                         {
@@ -12713,7 +12715,7 @@ namespace AngbandOS
                         MsgPrint("A black gas surrounds you!");
                         if (!Player.HasBlindnessResistance)
                         {
-                            Player.TimedBlindness.SetTimer(Player.TimedBlindness.TimeRemaining + Program.Rng.RandomLessThan(50) + 25);
+                            Player.TimedBlindness.AddTimer(Program.Rng.RandomLessThan(50) + 25);
                         }
                         break;
                     }
@@ -12723,7 +12725,7 @@ namespace AngbandOS
                         MsgPrint("A gas of scintillating colours surrounds you!");
                         if (!Player.HasConfusionResistance)
                         {
-                            Player.TimedConfusion.SetTimer(Player.TimedConfusion.TimeRemaining + Program.Rng.RandomLessThan(20) + 10);
+                            Player.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(20) + 10);
                         }
                         break;
                     }
@@ -12731,7 +12733,7 @@ namespace AngbandOS
                     {
                         // Poison the player
                         MsgPrint("A pungent green gas surrounds you!");
-                        if (!Player.HasPoisonResistance && Player.TimedPoisonResistance.TimeRemaining == 0)
+                        if (!Player.HasPoisonResistance && Player.TimedPoisonResistance.TurnsRemaining == 0)
                         {
                             // Hagarg Ryonis may save you from the poison
                             if (Program.Rng.DieRoll(10) <= Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
@@ -12740,7 +12742,7 @@ namespace AngbandOS
                             }
                             else
                             {
-                                Player.TimedPoison.SetTimer(Player.TimedPoison.TimeRemaining + Program.Rng.RandomLessThan(20) + 10);
+                                Player.TimedPoison.AddTimer(Program.Rng.RandomLessThan(20) + 10);
                             }
                         }
                         break;
@@ -12751,7 +12753,7 @@ namespace AngbandOS
                         MsgPrint("A strange white mist surrounds you!");
                         if (!Player.HasFreeAction)
                         {
-                            Player.TimedParalysis.SetTimer(Player.TimedParalysis.TimeRemaining + Program.Rng.RandomLessThan(10) + 5);
+                            Player.TimedParalysis.AddTimer(Program.Rng.RandomLessThan(10) + 5);
                         }
                         break;
                     }
@@ -12774,7 +12776,7 @@ namespace AngbandOS
                     auraDamage = Program.Rng.DiceRoll(1 + (race.Level / 26), 1 + (race.Level / 17));
                     string auraDam = monster.IndefiniteVisibleName;
                     MsgPrint("You are suddenly very hot!");
-                    if (Player.TimedFireResistance.TimeRemaining != 0)
+                    if (Player.TimedFireResistance.TurnsRemaining != 0)
                     {
                         auraDamage = (auraDamage + 2) / 3;
                     }
@@ -12792,7 +12794,7 @@ namespace AngbandOS
             {
                 auraDamage = Program.Rng.DiceRoll(1 + (race.Level / 26), 1 + (race.Level / 17));
                 string auraDam = monster.IndefiniteVisibleName;
-                if (Player.TimedLightningResistance.TimeRemaining != 0)
+                if (Player.TimedLightningResistance.TurnsRemaining != 0)
                 {
                     auraDamage = (auraDamage + 2) / 3;
                 }
@@ -18538,7 +18540,7 @@ namespace AngbandOS
                 return false;
             }
             CommandDirection = dir;
-            if (Player.TimedConfusion.TimeRemaining != 0)
+            if (Player.TimedConfusion.TurnsRemaining != 0)
             {
                 if (Program.Rng.RandomLessThan(100) < 75)
                 {
@@ -18601,7 +18603,7 @@ namespace AngbandOS
                 return;
             }
             CommandDirection = dir;
-            if (Player.TimedConfusion.TimeRemaining != 0)
+            if (Player.TimedConfusion.TurnsRemaining != 0)
             {
                 dir = Level.OrderedDirection[Program.Rng.RandomLessThan(8)];
             }
@@ -18664,7 +18666,7 @@ namespace AngbandOS
                 return false;
             }
             CommandDirection = dir;
-            if (Player.TimedConfusion.TimeRemaining != 0)
+            if (Player.TimedConfusion.TurnsRemaining != 0)
             {
                 dir = Level.OrderedDirection[Program.Rng.RandomLessThan(8)];
             }
@@ -18907,7 +18909,7 @@ namespace AngbandOS
             {
                 return false;
             }
-            if (Player.TimedHallucinations.TimeRemaining != 0)
+            if (Player.TimedHallucinations.TurnsRemaining != 0)
             {
                 return false;
             }
@@ -18921,7 +18923,7 @@ namespace AngbandOS
             {
                 return true;
             }
-            if (Player.TimedHallucinations.TimeRemaining != 0)
+            if (Player.TimedHallucinations.TurnsRemaining != 0)
             {
                 return false;
             }
@@ -18967,7 +18969,7 @@ namespace AngbandOS
                     s2 = "on ";
                 }
                 string outVal;
-                if (Player.TimedHallucinations.TimeRemaining != 0)
+                if (Player.TimedHallucinations.TurnsRemaining != 0)
                 {
                     const string name = "something strange";
                     outVal = $"{s1}{s2}{s3}{name} [{info}]";

@@ -20,7 +20,7 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 15;
         public override void Execute(ZapRodEvent zapRodEvent)
         {
-            if (SaveGame.Player.TimedHaste.TimeRemaining == 0)
+            if (SaveGame.Player.TimedHaste.TurnsRemaining == 0)
             {
                 if (SaveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(30) + 15))
                 {
@@ -29,7 +29,7 @@ namespace AngbandOS.Core.ItemCategories
             }
             else
             {
-                SaveGame.Player.TimedHaste.SetTimer(SaveGame.Player.TimedHaste.TimeRemaining + 5);
+                SaveGame.Player.TimedHaste.AddTimer(5);
             }
             zapRodEvent.Item.TypeSpecificValue = 99;
         }

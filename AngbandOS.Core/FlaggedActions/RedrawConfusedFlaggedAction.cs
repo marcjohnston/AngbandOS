@@ -9,7 +9,7 @@ namespace AngbandOS.Core.FlaggedActions
         public RedrawConfusedFlaggedAction(SaveGame saveGame) : base(saveGame) { }
         protected override void Execute()
         {
-            if (SaveGame.Player.TimedConfusion.TimeRemaining > 0)
+            if (SaveGame.Player.TimedConfusion.TurnsRemaining > 0)
             {
                 SaveGame.Screen.Print(Colour.Orange, "Confused", RowConfused, ColConfused);
             }

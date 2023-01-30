@@ -34,11 +34,11 @@
             {
                 chance = minfail;
             }
-            if (player.TimedStun.TimeRemaining > 50)
+            if (player.TimedStun.TurnsRemaining > 50)
             {
                 chance += 25;
             }
-            else if (player.TimedStun.TimeRemaining != 0)
+            else if (player.TimedStun.TurnsRemaining != 0)
             {
                 chance += 15;
             }

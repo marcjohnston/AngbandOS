@@ -54,7 +54,7 @@
 
         public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
         {
-            bool playerIsBlind = saveGame.Player.TimedBlindness.TimeRemaining != 0;
+            bool playerIsBlind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
             int count = 0;
 
             for (int k = 0; k < MaximumSummonCount(saveGame); k++)
@@ -78,7 +78,7 @@
 
         public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
         {
-            bool playerIsBlind = saveGame.Player.TimedBlindness.TimeRemaining != 0;
+            bool playerIsBlind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
             bool friendly = monster.SmFriendly;
             int count = 0;
 

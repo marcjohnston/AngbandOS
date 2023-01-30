@@ -13,7 +13,7 @@
         public override bool Activate(SaveGame saveGame)
         {
             int k = 3 * saveGame.Player.Level;
-            saveGame.Player.TimedProtectionFromEvil.SetTimer(saveGame.Player.TimedProtectionFromEvil.TimeRemaining + Program.Rng.DieRoll(25) + k);
+            saveGame.Player.TimedProtectionFromEvil.AddTimer(Program.Rng.DieRoll(25) + k);
             return true;
         }
 

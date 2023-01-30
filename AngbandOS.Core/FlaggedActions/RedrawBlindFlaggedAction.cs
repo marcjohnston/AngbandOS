@@ -9,7 +9,7 @@ namespace AngbandOS.Core.FlaggedActions
         public RedrawBlindFlaggedAction(SaveGame saveGame) : base(saveGame) { }
         protected override void Execute()
         {
-            if (SaveGame.Player.TimedBlindness.TimeRemaining > 0)
+            if (SaveGame.Player.TimedBlindness.TurnsRemaining > 0)
             {
                 SaveGame.Screen.Print(Colour.Orange, "Blind", RowBlind, ColBlind);
             }

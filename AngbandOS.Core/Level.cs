@@ -388,11 +388,11 @@ namespace AngbandOS
                 {
                     ta = ma[y][x];
                     tc = mc[y][x];
-                    if (SaveGame.Player.TimedInvulnerability.TimeRemaining != 0)
+                    if (SaveGame.Player.TimedInvulnerability.TurnsRemaining != 0)
                     {
                         ta = Colour.White;
                     }
-                    else if (SaveGame.Player.TimedEtherealness.TimeRemaining != 0)
+                    else if (SaveGame.Player.TimedEtherealness.TurnsRemaining != 0)
                     {
                         ta = Colour.Black;
                     }
@@ -957,7 +957,7 @@ namespace AngbandOS
         {
             GridTile cPtr = Grid[y][x];
             int nextOIdx;
-            if (SaveGame.Player.TimedBlindness.TimeRemaining != 0)
+            if (SaveGame.Player.TimedBlindness.TurnsRemaining != 0)
             {
                 return;
             }
@@ -1200,7 +1200,7 @@ namespace AngbandOS
 
         public bool PlayerCanSeeBold(int y, int x)
         {
-            if (SaveGame.Player.TimedBlindness.TimeRemaining != 0)
+            if (SaveGame.Player.TimedBlindness.TurnsRemaining != 0)
             {
                 return false;
             }
@@ -1235,11 +1235,11 @@ namespace AngbandOS
         {
             if (PanelContains(y, x))
             {
-                if (SaveGame.Player.TimedInvulnerability.TimeRemaining != 0)
+                if (SaveGame.Player.TimedInvulnerability.TurnsRemaining != 0)
                 {
                     a = Colour.White;
                 }
-                else if (SaveGame.Player.TimedEtherealness.TimeRemaining != 0)
+                else if (SaveGame.Player.TimedEtherealness.TurnsRemaining != 0)
                 {
                     a = Colour.Black;
                 }
@@ -1303,11 +1303,11 @@ namespace AngbandOS
                 {
                     MapInfo(y, x, out a, out c);
                 }
-                if (SaveGame.Player.TimedInvulnerability.TimeRemaining != 0)
+                if (SaveGame.Player.TimedInvulnerability.TurnsRemaining != 0)
                 {
                     a = Colour.White;
                 }
-                else if (SaveGame.Player.TimedEtherealness.TimeRemaining != 0)
+                else if (SaveGame.Player.TimedEtherealness.TurnsRemaining != 0)
                 {
                     a = Colour.Black;
                 }
@@ -1631,13 +1631,13 @@ namespace AngbandOS
             {
                 if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorised) ||
                     ((cPtr.TileFlags.IsSet(GridTile.PlayerLit) || (cPtr.TileFlags.IsSet(GridTile.SelfLit) &&
-                     cPtr.TileFlags.IsSet(GridTile.IsVisible))) && SaveGame.Player.TimedBlindness.TimeRemaining == 0))
+                     cPtr.TileFlags.IsSet(GridTile.IsVisible))) && SaveGame.Player.TimedBlindness.TurnsRemaining == 0))
                 {
                     c = feat.Character;
                     a = feat.Colour;
                     if (feat.DimsOutsideLOS)
                     {
-                        if (SaveGame.Player.TimedBlindness.TimeRemaining != 0)
+                        if (SaveGame.Player.TimedBlindness.TurnsRemaining != 0)
                         {
                             a = Colour.Black;
                         }
@@ -1699,7 +1699,7 @@ namespace AngbandOS
                     a = feat.Colour;
                     if (feat.DimsOutsideLOS)
                     {
-                        if (SaveGame.Player.TimedBlindness.TimeRemaining != 0)
+                        if (SaveGame.Player.TimedBlindness.TurnsRemaining != 0)
                         {
                             a = Colour.Black;
                         }
@@ -1738,7 +1738,7 @@ namespace AngbandOS
                     c = ObjectRepository.FloorTileTypes["Nothing"].Character;
                 }
             }
-            if (SaveGame.Player.TimedHallucinations.TimeRemaining != 0 && Program.Rng.RandomLessThan(256) == 0 && (!cPtr.FeatureType.IsWall))
+            if (SaveGame.Player.TimedHallucinations.TurnsRemaining != 0 && Program.Rng.RandomLessThan(256) == 0 && (!cPtr.FeatureType.IsWall))
             {
                 ImageRandom(out ap, out cp);
             }
@@ -1755,7 +1755,7 @@ namespace AngbandOS
                 {
                     cp = oPtr.BaseItemCategory.FlavorCharacter;
                     ap = oPtr.BaseItemCategory.FlavorColour;
-                    if (SaveGame.Player.TimedHallucinations.TimeRemaining != 0)
+                    if (SaveGame.Player.TimedHallucinations.TurnsRemaining != 0)
                     {
                         ImageObject(out ap, out cp);
                     }
@@ -1836,7 +1836,7 @@ namespace AngbandOS
                             ap = a;
                         }
                     }
-                    if (SaveGame.Player.TimedHallucinations.TimeRemaining != 0)
+                    if (SaveGame.Player.TimedHallucinations.TurnsRemaining != 0)
                     {
                         ImageMonster(out ap, out cp);
                     }

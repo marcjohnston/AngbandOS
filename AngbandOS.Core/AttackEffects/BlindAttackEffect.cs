@@ -18,7 +18,7 @@ namespace AngbandOS.Core.AttackEffects
             saveGame.Player.TakeHit(damage, monsterDescription);
             if (!saveGame.Player.HasBlindnessResistance)
             {
-                if (saveGame.Player.TimedBlindness.SetTimer(saveGame.Player.TimedBlindness.TimeRemaining + 10 + Program.Rng.DieRoll(monsterLevel)))
+                if (saveGame.Player.TimedBlindness.AddTimer(10 + Program.Rng.DieRoll(monsterLevel)))
                 {
                     obvious = true;
                 }

@@ -12,8 +12,8 @@
 
         public override bool Activate(SaveGame saveGame)
         {
-            saveGame.Player.TimedSuperheroism.SetTimer(saveGame.Player.TimedSuperheroism.TimeRemaining + Program.Rng.DieRoll(50) + 50);
-            saveGame.Player.TimedBlessing.SetTimer(saveGame.Player.TimedBlessing.TimeRemaining + Program.Rng.DieRoll(50) + 50);
+            saveGame.Player.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(50) + 50);
+            saveGame.Player.TimedBlessing.AddTimer(Program.Rng.DieRoll(50) + 50);
             return true;
         }
 

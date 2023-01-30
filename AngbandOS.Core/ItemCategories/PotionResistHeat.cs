@@ -20,7 +20,7 @@ namespace AngbandOS.Core.ItemCategories
         public override bool Quaff(SaveGame saveGame)
         {
             // Resist heat gives you timed fire resistance
-            return saveGame.Player.TimedFireResistance.SetTimer(saveGame.Player.TimedFireResistance.TimeRemaining + Program.Rng.DieRoll(10) + 10);
+            return saveGame.Player.TimedFireResistance.AddTimer(Program.Rng.DieRoll(10) + 10);
         }
     }
 }

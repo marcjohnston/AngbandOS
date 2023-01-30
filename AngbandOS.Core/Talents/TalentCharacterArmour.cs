@@ -21,26 +21,26 @@ namespace AngbandOS.Talents
 
         public override void Use(SaveGame saveGame)
         {
-            saveGame.Player.TimedStoneskin.SetTimer(saveGame.Player.TimedStoneskin.TimeRemaining + saveGame.Player.Level);
+            saveGame.Player.TimedStoneskin.AddTimer(saveGame.Player.Level);
             if (saveGame.Player.Level > 14)
             {
-                saveGame.Player.TimedAcidResistance.SetTimer(saveGame.Player.TimedAcidResistance.TimeRemaining + saveGame.Player.Level);
+                saveGame.Player.TimedAcidResistance.AddTimer(saveGame.Player.Level);
             }
             if (saveGame.Player.Level > 19)
             {
-                saveGame.Player.TimedFireResistance.SetTimer(saveGame.Player.TimedFireResistance.TimeRemaining + saveGame.Player.Level);
+                saveGame.Player.TimedFireResistance.AddTimer(saveGame.Player.Level);
             }
             if (saveGame.Player.Level > 24)
             {
-                saveGame.Player.TimedColdResistance.SetTimer(saveGame.Player.TimedColdResistance.TimeRemaining + saveGame.Player.Level);
+                saveGame.Player.TimedColdResistance.AddTimer(saveGame.Player.Level);
             }
             if (saveGame.Player.Level > 29)
             {
-                saveGame.Player.TimedLightningResistance.SetTimer(saveGame.Player.TimedLightningResistance.TimeRemaining + saveGame.Player.Level);
+                saveGame.Player.TimedLightningResistance.AddTimer(saveGame.Player.Level);
             }
             if (saveGame.Player.Level > 34)
             {
-                saveGame.Player.TimedPoisonResistance.SetTimer(saveGame.Player.TimedPoisonResistance.TimeRemaining + saveGame.Player.Level);
+                saveGame.Player.TimedPoisonResistance.AddTimer(saveGame.Player.Level);
             }
         }
 

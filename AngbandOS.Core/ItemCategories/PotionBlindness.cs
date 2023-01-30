@@ -19,7 +19,7 @@ namespace AngbandOS.Core.ItemCategories
         {
             // Blindness makes you blind
             if (!saveGame.Player.HasBlindnessResistance)
-                return saveGame.Player.TimedBlindness.SetTimer(saveGame.Player.TimedBlindness.TimeRemaining + Program.Rng.RandomLessThan(100) + 100);
+                return saveGame.Player.TimedBlindness.AddTimer(Program.Rng.RandomLessThan(100) + 100);
             return false;
         }
 

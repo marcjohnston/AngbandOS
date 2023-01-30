@@ -8,7 +8,7 @@
         public RedrawCutFlaggedAction(SaveGame saveGame) : base(saveGame) { }
         protected override void Execute()
         {
-            int c = SaveGame.Player.TimedBleeding.TimeRemaining;
+            int c = SaveGame.Player.TimedBleeding.TurnsRemaining;
             if (c > 1000)
             {
                 SaveGame.Screen.Print(Colour.BrightRed, "Mortal wound", RowCut, ColCut);

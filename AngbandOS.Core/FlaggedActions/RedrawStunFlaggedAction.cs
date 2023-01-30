@@ -9,7 +9,7 @@ namespace AngbandOS.Core.FlaggedActions
         public RedrawStunFlaggedAction(SaveGame saveGame) : base(saveGame) { }
         protected override void Execute()
         {
-            int s = SaveGame.Player.TimedStun.TimeRemaining;
+            int s = SaveGame.Player.TimedStun.TurnsRemaining;
             if (s > 100)
             {
                 SaveGame.Screen.Print(Colour.Red, "Knocked out ", RowStun, ColStun);

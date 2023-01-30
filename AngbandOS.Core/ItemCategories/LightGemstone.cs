@@ -24,7 +24,7 @@ namespace AngbandOS.Core.ItemCategories
         {
             if (Program.Rng.DieRoll(999) == 1 && !saveGame.Player.HasAntiMagic)
             {
-                if (saveGame.Player.TimedInvulnerability.TimeRemaining == 0)
+                if (saveGame.Player.TimedInvulnerability.TurnsRemaining == 0)
                 {
                     saveGame.MsgPrint("The Jewel of Judgement drains life from you!");
                     saveGame.Player.TakeHit(Math.Min(saveGame.Player.Level, 50), "the Jewel of Judgement");

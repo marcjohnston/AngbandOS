@@ -9,7 +9,7 @@ namespace AngbandOS.Core.FlaggedActions
         public RedrawPoisonedFlaggedAction(SaveGame saveGame) : base(saveGame) { }
         protected override void Execute()
         {
-            if (SaveGame.Player.TimedPoison.TimeRemaining > 0)
+            if (SaveGame.Player.TimedPoison.TurnsRemaining > 0)
             {
                 SaveGame.Screen.Print(Colour.Orange, "Poisoned", RowPoisoned, ColPoisoned);
             }

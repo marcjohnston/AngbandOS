@@ -13,13 +13,13 @@ internal class MaceThunderFixedArtifact : BaseFixedArtifact, IActivatible
     public void ActivateItem(SaveGame saveGame, Item item)
     {
         saveGame.MsgPrint("Your mace glows bright green...");
-        if (saveGame.Player.TimedHaste.TimeRemaining == 0)
+        if (saveGame.Player.TimedHaste.TurnsRemaining == 0)
         {
             saveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(20) + 20);
         }
         else
         {
-            saveGame.Player.TimedHaste.SetTimer(saveGame.Player.TimedHaste.TimeRemaining + 5);
+            saveGame.Player.TimedHaste.AddTimer(5);
         }
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(100) + 100;
     }

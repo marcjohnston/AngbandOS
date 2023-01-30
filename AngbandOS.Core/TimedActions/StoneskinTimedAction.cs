@@ -4,35 +4,18 @@
     internal class StoneskinTimedAction : TimedAction
     {
         public StoneskinTimedAction(SaveGame saveGame) : base(saveGame) { }
-        public override bool SetTimer(int value)
+        protected override void EffectStopped()
         {
-            bool notice = false;
-            value = value > 10000 ? 10000 : value < 0 ? 0 : value;
-            if (value != 0)
-            {
-                if (TimeRemaining == 0)
-                {
-                    SaveGame.MsgPrint("Your skin turns to stone.");
-                    notice = true;
-                }
-            }
-            else
-            {
-                if (TimeRemaining != 0)
-                {
-                    SaveGame.MsgPrint("Your skin returns to normal.");
-                    notice = true;
-                }
-            }
-            _timer = value;
-            if (!notice)
-            {
-                return false;
-            }
-            SaveGame.Disturb(false);
+            SaveGame.MsgPrint("Your skin returns to normal.");
+        }
+        protected override void EffectIncreased(int newRate, int currentRate)
+        {
+            SaveGame.MsgPrint("Your skin turns to stone.");
+        }
+        protected override void Noticed()
+        {
             SaveGame.UpdateBonusesFlaggedAction.Set();
-            SaveGame.HandleStuff();
-            return true;
+            base.Noticed();
         }
     }
 }

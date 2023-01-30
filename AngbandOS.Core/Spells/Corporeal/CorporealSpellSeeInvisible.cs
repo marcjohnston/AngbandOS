@@ -13,7 +13,7 @@ namespace AngbandOS.Spells.Corporeal
     {
         public override void Cast(SaveGame saveGame)
         {
-            saveGame.Player.TimedSeeInvisibility.SetTimer(saveGame.Player.TimedSeeInvisibility.TimeRemaining + Program.Rng.DieRoll(24) + 24);
+            saveGame.Player.TimedSeeInvisibility.AddTimer(Program.Rng.DieRoll(24) + 24);
         }
 
         public override void Initialise(int characterClass)

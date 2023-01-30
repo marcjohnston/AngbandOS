@@ -21,7 +21,7 @@ namespace AngbandOS.Core.ItemCategories
         {
             if (!eventArgs.SaveGame.Player.HasBlindnessResistance && !eventArgs.SaveGame.Player.HasDarkResistance)
             {
-                eventArgs.SaveGame.Player.TimedBlindness.SetTimer(eventArgs.SaveGame.Player.TimedBlindness.TimeRemaining + 3 + Program.Rng.DieRoll(5));
+                eventArgs.SaveGame.Player.TimedBlindness.AddTimer(3 + Program.Rng.DieRoll(5));
             }
             if (eventArgs.SaveGame.UnlightArea(10, 3))
             {

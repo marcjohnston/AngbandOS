@@ -20,7 +20,7 @@ namespace AngbandOS.Core.ItemCategories
 
         public override void Read(ReadScrollEvent eventArgs)
         {
-            if (eventArgs.SaveGame.Player.TimedBlessing.SetTimer(eventArgs.SaveGame.Player.TimedBlessing.TimeRemaining + Program.Rng.DieRoll(12) + 6))
+            if (eventArgs.SaveGame.Player.TimedBlessing.AddTimer(Program.Rng.DieRoll(12) + 6))
             {
                 eventArgs.Identified = true;
             }

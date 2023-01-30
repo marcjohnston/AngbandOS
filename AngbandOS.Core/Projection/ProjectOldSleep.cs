@@ -62,7 +62,7 @@ namespace AngbandOS.Projection
 
         protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
         {
-            bool blind = SaveGame.Player.TimedBlindness.TimeRemaining != 0;
+            bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
             if (dam > 1600)
             {
                 dam = 1600;
@@ -76,7 +76,7 @@ namespace AngbandOS.Projection
             {
                 SaveGame.MsgPrint("You fall asleep!");
             }
-            SaveGame.Player.TimedParalysis.SetTimer(SaveGame.Player.TimedParalysis.TimeRemaining + dam);
+            SaveGame.Player.TimedParalysis.AddTimer(dam);
             return true;
         }
     }

@@ -20,7 +20,7 @@ namespace AngbandOS.Core.ItemCategories
         public override bool Quaff(SaveGame saveGame)
         {
             // Infravision gives you timed infravision
-            return saveGame.Player.TimedInfravision.SetTimer(saveGame.Player.TimedInfravision.TimeRemaining + 100 + Program.Rng.DieRoll(100));
+            return saveGame.Player.TimedInfravision.AddTimer(100 + Program.Rng.DieRoll(100));
         }
     }
 }

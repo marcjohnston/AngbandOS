@@ -20,14 +20,14 @@ namespace AngbandOS.Core.ItemCategories
         public override bool Quaff(SaveGame saveGame)
         {
             // Poison simply poisons you
-            if (!(saveGame.Player.HasPoisonResistance || saveGame.Player.TimedPoisonResistance.TimeRemaining != 0))
+            if (!(saveGame.Player.HasPoisonResistance || saveGame.Player.TimedPoisonResistance.TurnsRemaining != 0))
             {
                 // Hagarg Ryonis can protect you against poison
                 if (Program.Rng.DieRoll(10) <= saveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
                 {
                     saveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
                 }
-                else if (saveGame.Player.TimedPoison.SetTimer(saveGame.Player.TimedPoison.TimeRemaining + Program.Rng.RandomLessThan(15) + 10))
+                else if (saveGame.Player.TimedPoison.AddTimer(Program.Rng.RandomLessThan(15) + 10))
                 {
                     return true;
                 }

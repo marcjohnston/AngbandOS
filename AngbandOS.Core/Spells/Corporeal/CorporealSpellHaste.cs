@@ -13,13 +13,13 @@ namespace AngbandOS.Spells.Corporeal
     {
         public override void Cast(SaveGame saveGame)
         {
-            if (saveGame.Player.TimedHaste.TimeRemaining == 0)
+            if (saveGame.Player.TimedHaste.TurnsRemaining == 0)
             {
                 saveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(20 + saveGame.Player.Level) + saveGame.Player.Level);
             }
             else
             {
-                saveGame.Player.TimedHaste.SetTimer(saveGame.Player.TimedHaste.TimeRemaining + Program.Rng.DieRoll(5));
+                saveGame.Player.TimedHaste.AddTimer(Program.Rng.DieRoll(5));
             }
         }
 

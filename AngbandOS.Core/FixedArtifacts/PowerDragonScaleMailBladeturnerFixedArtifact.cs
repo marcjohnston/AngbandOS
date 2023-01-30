@@ -19,15 +19,15 @@ internal class PowerDragonScaleMailBladeturnerFixedArtifact : BaseFixedArtifact,
         saveGame.MsgPrint("You breathe the elements.");
         saveGame.FireBall(new ProjectMissile(saveGame), dir, 300, 4);
         saveGame.MsgPrint("Your armor glows many colors...");
-        saveGame.Player.TimedFear.SetTimer(0);
-        saveGame.Player.TimedSuperheroism.SetTimer(saveGame.Player.TimedSuperheroism.TimeRemaining + Program.Rng.DieRoll(50) + 50);
+        saveGame.Player.TimedFear.ResetTimer();
+        saveGame.Player.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(50) + 50);
         saveGame.Player.RestoreHealth(30);
-        saveGame.Player.TimedBlessing.SetTimer(saveGame.Player.TimedBlessing.TimeRemaining + Program.Rng.DieRoll(50) + 50);
-        saveGame.Player.TimedAcidResistance.SetTimer(saveGame.Player.TimedAcidResistance.TimeRemaining + Program.Rng.DieRoll(50) + 50);
-        saveGame.Player.TimedLightningResistance.SetTimer(saveGame.Player.TimedLightningResistance.TimeRemaining + Program.Rng.DieRoll(50) + 50);
-        saveGame.Player.TimedFireResistance.SetTimer(saveGame.Player.TimedFireResistance.TimeRemaining + Program.Rng.DieRoll(50) + 50);
-        saveGame.Player.TimedColdResistance.SetTimer(saveGame.Player.TimedColdResistance.TimeRemaining + Program.Rng.DieRoll(50) + 50);
-        saveGame.Player.TimedPoisonResistance.SetTimer(saveGame.Player.TimedPoisonResistance.TimeRemaining + Program.Rng.DieRoll(50) + 50);
+        saveGame.Player.TimedBlessing.AddTimer(Program.Rng.DieRoll(50) + 50);
+        saveGame.Player.TimedAcidResistance.AddTimer(Program.Rng.DieRoll(50) + 50);
+        saveGame.Player.TimedLightningResistance.AddTimer(Program.Rng.DieRoll(50) + 50);
+        saveGame.Player.TimedFireResistance.AddTimer(Program.Rng.DieRoll(50) + 50);
+        saveGame.Player.TimedColdResistance.AddTimer(Program.Rng.DieRoll(50) + 50);
+        saveGame.Player.TimedPoisonResistance.AddTimer(Program.Rng.DieRoll(50) + 50);
         item.RechargeTimeLeft = 400;
     }
     public string DescribeActivationEffect() => "breathe elements (300), berserk rage, bless, and resistance";

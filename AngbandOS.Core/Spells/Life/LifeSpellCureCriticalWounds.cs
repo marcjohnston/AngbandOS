@@ -14,8 +14,8 @@ namespace AngbandOS.Spells.Life
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(8, 10));
-            saveGame.Player.TimedStun.SetTimer(0);
-            saveGame.Player.TimedBleeding.SetTimer(0);
+            saveGame.Player.TimedStun.ResetTimer();
+            saveGame.Player.TimedBleeding.ResetTimer();
         }
 
         public override void Initialise(int characterClass)

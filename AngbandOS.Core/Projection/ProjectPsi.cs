@@ -68,11 +68,11 @@ namespace AngbandOS.Projection
                             switch (Program.Rng.DieRoll(4))
                             {
                                 case 1:
-                                    SaveGame.Player.TimedConfusion.SetTimer(SaveGame.Player.TimedConfusion.TimeRemaining + 3 + Program.Rng.DieRoll(dam));
+                                    SaveGame.Player.TimedConfusion.AddTimer(3 + Program.Rng.DieRoll(dam));
                                     break;
 
                                 case 2:
-                                    SaveGame.Player.TimedStun.SetTimer(SaveGame.Player.TimedStun.TimeRemaining + Program.Rng.DieRoll(dam));
+                                    SaveGame.Player.TimedStun.AddTimer(Program.Rng.DieRoll(dam));
                                     break;
 
                                 case 3:
@@ -83,7 +83,7 @@ namespace AngbandOS.Projection
                                         }
                                         else
                                         {
-                                            SaveGame.Player.TimedFear.SetTimer(SaveGame.Player.TimedFear.TimeRemaining + 3 + Program.Rng.DieRoll(dam));
+                                            SaveGame.Player.TimedFear.AddTimer(3 + Program.Rng.DieRoll(dam));
                                         }
                                     }
                                     break;
@@ -91,7 +91,7 @@ namespace AngbandOS.Projection
                                 default:
                                     if (!SaveGame.Player.HasFreeAction)
                                     {
-                                        SaveGame.Player.TimedParalysis.SetTimer(SaveGame.Player.TimedParalysis.TimeRemaining + Program.Rng.DieRoll(dam));
+                                        SaveGame.Player.TimedParalysis.AddTimer(Program.Rng.DieRoll(dam));
                                     }
                                     break;
                             }

@@ -25,10 +25,10 @@ namespace AngbandOS.Mutations.RandomMutations
             {
                 return;
             }
-            if (saveGame.Player.TimedTelepathy.TimeRemaining > 0)
+            if (saveGame.Player.TimedTelepathy.TurnsRemaining > 0)
             {
                 saveGame.MsgPrint("Your mind feels cloudy!");
-                saveGame.Player.TimedTelepathy.SetTimer(0);
+                saveGame.Player.TimedTelepathy.ResetTimer();
             }
             else
             {

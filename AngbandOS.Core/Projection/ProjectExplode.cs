@@ -103,7 +103,7 @@ namespace AngbandOS.Projection
 
         protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
         {
-            bool blind = SaveGame.Player.TimedBlindness.TimeRemaining != 0;
+            bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
             if (dam > 1600)
             {
                 dam = 1600;
@@ -122,7 +122,7 @@ namespace AngbandOS.Projection
             }
             else
             {
-                SaveGame.Player.TimedBleeding.SetTimer(SaveGame.Player.TimedBleeding.TimeRemaining + dam);
+                SaveGame.Player.TimedBleeding.AddTimer(dam);
             }
             if (!SaveGame.Player.HasShardResistance || Program.Rng.DieRoll(13) == 1)
             {

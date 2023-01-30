@@ -66,7 +66,7 @@ namespace AngbandOS.Core.Races
             if (saveGame.CheckIfRacialPowerWorks(3, 5, Ability.Wisdom, saveGame.Player.ProfessionIndex == CharacterClass.Warrior ? 5 : 10))
             {
                 saveGame.MsgPrint("You play tough.");
-                saveGame.Player.TimedFear.SetTimer(0);
+                saveGame.Player.TimedFear.ResetTimer();
             }
         }
     }

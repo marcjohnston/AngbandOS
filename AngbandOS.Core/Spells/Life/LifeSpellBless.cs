@@ -13,7 +13,7 @@ namespace AngbandOS.Spells.Life
     {
         public override void Cast(SaveGame saveGame)
         {
-            saveGame.Player.TimedBlessing.SetTimer(saveGame.Player.TimedBlessing.TimeRemaining + Program.Rng.DieRoll(12) + 12);
+            saveGame.Player.TimedBlessing.AddTimer(Program.Rng.DieRoll(12) + 12);
         }
 
         public override void Initialise(int characterClass)

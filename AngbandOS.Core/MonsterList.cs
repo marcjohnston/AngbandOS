@@ -933,7 +933,7 @@ namespace AngbandOS
             else if (_level.PanelContains(fy, fx))
             {
                 GridTile cPtr = _level.Grid[fy][fx];
-                if (cPtr.TileFlags.IsSet(GridTile.IsVisible) && SaveGame.Player.TimedBlindness.TimeRemaining == 0)
+                if (cPtr.TileFlags.IsSet(GridTile.IsVisible) && SaveGame.Player.TimedBlindness.TurnsRemaining == 0)
                 {
                     if (mPtr.DistanceFromPlayer <= SaveGame.Player.InfravisionRange)
                     {

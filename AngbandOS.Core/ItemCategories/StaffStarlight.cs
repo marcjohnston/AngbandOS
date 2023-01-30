@@ -22,7 +22,7 @@ namespace AngbandOS.Core.ItemCategories
 
         public override void UseStaff(UseStaffEvent eventArgs)
         {
-            if (eventArgs.SaveGame.Player.TimedBlindness.TimeRemaining == 0)
+            if (eventArgs.SaveGame.Player.TimedBlindness.TurnsRemaining == 0)
             {
                 eventArgs.SaveGame.MsgPrint("The end of the staff glows brightly...");
             }

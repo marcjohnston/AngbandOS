@@ -14,7 +14,7 @@
         {
             saveGame.MsgPrint("You feel a warm tingling inside...");
             saveGame.Player.RestoreHealth(700);
-            saveGame.Player.TimedBleeding.SetTimer(0);
+            saveGame.Player.TimedBleeding.ResetTimer();
             return true;
         }
 

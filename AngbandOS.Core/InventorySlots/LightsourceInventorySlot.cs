@@ -44,7 +44,7 @@ namespace AngbandOS.Core.InventorySlots
                         oPtr.TypeSpecificValue--;
 
                         // If the player is blind, do not allow the light to go out completely.
-                        if (SaveGame.Player.TimedBlindness.TimeRemaining != 0)
+                        if (SaveGame.Player.TimedBlindness.TurnsRemaining != 0)
                         {
                             if (oPtr.TypeSpecificValue == 0)
                             {

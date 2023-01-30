@@ -12,7 +12,7 @@
 
         public override bool Activate(SaveGame saveGame)
         {
-            saveGame.Player.TimedFear.SetTimer(0);
+            saveGame.Player.TimedFear.ResetTimer();
             saveGame.Player.RestoreHealth(30);
             return true;
         }

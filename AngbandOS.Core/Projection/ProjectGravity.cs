@@ -115,7 +115,7 @@ namespace AngbandOS.Projection
 
         protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
         {
-            bool blind = SaveGame.Player.TimedBlindness.TimeRemaining != 0;
+            bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
             if (dam > 1600)
             {
                 dam = 1600;
@@ -131,12 +131,12 @@ namespace AngbandOS.Projection
             SaveGame.TeleportPlayer(5);
             if (!SaveGame.Player.HasFeatherFall)
             {
-                SaveGame.Player.TimedSlow.SetTimer(SaveGame.Player.TimedSlow.TimeRemaining + Program.Rng.RandomLessThan(4) + 4);
+                SaveGame.Player.TimedSlow.AddTimer(Program.Rng.RandomLessThan(4) + 4);
             }
             if (!(SaveGame.Player.HasSoundResistance || SaveGame.Player.HasFeatherFall))
             {
                 int kk = Program.Rng.DieRoll(dam > 90 ? 35 : (dam / 3) + 5);
-                SaveGame.Player.TimedStun.SetTimer(SaveGame.Player.TimedStun.TimeRemaining + kk);
+                SaveGame.Player.TimedStun.AddTimer(kk);
             }
             if (SaveGame.Player.HasFeatherFall)
             {

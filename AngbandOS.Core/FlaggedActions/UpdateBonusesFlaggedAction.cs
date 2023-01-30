@@ -463,7 +463,7 @@ namespace AngbandOS.Core.FlaggedActions
                 }
                 if (oPtr.Characteristics.Wraith)
                 {
-                    SaveGame.Player.TimedEtherealness.Reset(Math.Max(SaveGame.Player.TimedEtherealness.TimeRemaining, 20));
+                    SaveGame.Player.TimedEtherealness.SetValue(Math.Max(SaveGame.Player.TimedEtherealness.TurnsRemaining, 20));
                 }
                 if (oPtr.Characteristics.ImFire)
                 {
@@ -700,60 +700,60 @@ namespace AngbandOS.Core.FlaggedActions
                     }
                 }
             }
-            if (SaveGame.Player.TimedStun.TimeRemaining > 50)
+            if (SaveGame.Player.TimedStun.TurnsRemaining > 50)
             {
                 SaveGame.Player.AttackBonus -= 20;
                 SaveGame.Player.DisplayedAttackBonus -= 20;
                 SaveGame.Player.DamageBonus -= 20;
                 SaveGame.Player.DisplayedDamageBonus -= 20;
             }
-            else if (SaveGame.Player.TimedStun.TimeRemaining != 0)
+            else if (SaveGame.Player.TimedStun.TurnsRemaining != 0)
             {
                 SaveGame.Player.AttackBonus -= 5;
                 SaveGame.Player.DisplayedAttackBonus -= 5;
                 SaveGame.Player.DamageBonus -= 5;
                 SaveGame.Player.DisplayedDamageBonus -= 5;
             }
-            if (SaveGame.Player.TimedInvulnerability.TimeRemaining != 0)
+            if (SaveGame.Player.TimedInvulnerability.TurnsRemaining != 0)
             {
                 SaveGame.Player.ArmourClassBonus += 100;
                 SaveGame.Player.DisplayedArmourClassBonus += 100;
             }
-            if (SaveGame.Player.TimedEtherealness.TimeRemaining != 0)
+            if (SaveGame.Player.TimedEtherealness.TurnsRemaining != 0)
             {
                 SaveGame.Player.ArmourClassBonus += 100;
                 SaveGame.Player.DisplayedArmourClassBonus += 100;
                 SaveGame.Player.HasReflection = true;
             }
-            if (SaveGame.Player.TimedBlessing.TimeRemaining != 0)
+            if (SaveGame.Player.TimedBlessing.TurnsRemaining != 0)
             {
                 SaveGame.Player.ArmourClassBonus += 5;
                 SaveGame.Player.DisplayedArmourClassBonus += 5;
                 SaveGame.Player.AttackBonus += 10;
                 SaveGame.Player.DisplayedAttackBonus += 10;
             }
-            if (SaveGame.Player.TimedStoneskin.TimeRemaining != 0)
+            if (SaveGame.Player.TimedStoneskin.TurnsRemaining != 0)
             {
                 SaveGame.Player.ArmourClassBonus += 50;
                 SaveGame.Player.DisplayedArmourClassBonus += 50;
             }
-            if (SaveGame.Player.TimedHeroism.TimeRemaining != 0)
+            if (SaveGame.Player.TimedHeroism.TurnsRemaining != 0)
             {
                 SaveGame.Player.AttackBonus += 12;
                 SaveGame.Player.DisplayedAttackBonus += 12;
             }
-            if (SaveGame.Player.TimedSuperheroism.TimeRemaining != 0)
+            if (SaveGame.Player.TimedSuperheroism.TurnsRemaining != 0)
             {
                 SaveGame.Player.AttackBonus += 24;
                 SaveGame.Player.DisplayedAttackBonus += 24;
                 SaveGame.Player.ArmourClassBonus -= 10;
                 SaveGame.Player.DisplayedArmourClassBonus -= 10;
             }
-            if (SaveGame.Player.TimedHaste.TimeRemaining != 0)
+            if (SaveGame.Player.TimedHaste.TurnsRemaining != 0)
             {
                 SaveGame.Player.Speed += 10;
             }
-            if (SaveGame.Player.TimedSlow.TimeRemaining != 0)
+            if (SaveGame.Player.TimedSlow.TurnsRemaining != 0)
             {
                 SaveGame.Player.Speed -= 10;
             }
@@ -761,15 +761,15 @@ namespace AngbandOS.Core.FlaggedActions
             {
                 SaveGame.Player.Speed += SaveGame.Player.Level / 10;
             }
-            if (SaveGame.Player.TimedTelepathy.TimeRemaining != 0)
+            if (SaveGame.Player.TimedTelepathy.TurnsRemaining != 0)
             {
                 SaveGame.Player.HasTelepathy = true;
             }
-            if (SaveGame.Player.TimedSeeInvisibility.TimeRemaining != 0)
+            if (SaveGame.Player.TimedSeeInvisibility.TurnsRemaining != 0)
             {
                 SaveGame.Player.HasSeeInvisibility = true;
             }
-            if (SaveGame.Player.TimedInfravision.TimeRemaining != 0)
+            if (SaveGame.Player.TimedInfravision.TurnsRemaining != 0)
             {
                 SaveGame.Player.InfravisionRange++;
             }
@@ -777,7 +777,7 @@ namespace AngbandOS.Core.FlaggedActions
             {
                 SaveGame.Player.HasConfusionResistance = true;
             }
-            if (SaveGame.Player.TimedHeroism.TimeRemaining != 0 || SaveGame.Player.TimedSuperheroism.TimeRemaining != 0)
+            if (SaveGame.Player.TimedHeroism.TurnsRemaining != 0 || SaveGame.Player.TimedSuperheroism.TurnsRemaining != 0)
             {
                 SaveGame.Player.HasFearResistance = true;
             }

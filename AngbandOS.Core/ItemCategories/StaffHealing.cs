@@ -25,11 +25,11 @@ namespace AngbandOS.Core.ItemCategories
             {
                 eventArgs.Identified = true;
             }
-            if (eventArgs.SaveGame.Player.TimedStun.SetTimer(0))
+            if (eventArgs.SaveGame.Player.TimedStun.ResetTimer())
             {
                 eventArgs.Identified = true;
             }
-            if (eventArgs.SaveGame.Player.TimedBleeding.SetTimer(0))
+            if (eventArgs.SaveGame.Player.TimedBleeding.ResetTimer())
             {
                 eventArgs.Identified = true;
             }

@@ -20,27 +20,27 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 15;
         public override void Execute(ZapRodEvent zapRodEvent)
         {
-            if (SaveGame.Player.TimedBlindness.SetTimer(0))
+            if (SaveGame.Player.TimedBlindness.ResetTimer())
             {
                 zapRodEvent.Identified = true;
             }
-            if (SaveGame.Player.TimedPoison.SetTimer(0))
+            if (SaveGame.Player.TimedPoison.ResetTimer())
             {
                 zapRodEvent.Identified = true;
             }
-            if (SaveGame.Player.TimedConfusion.SetTimer(0))
+            if (SaveGame.Player.TimedConfusion.ResetTimer())
             {
                 zapRodEvent.Identified = true;
             }
-            if (SaveGame.Player.TimedStun.SetTimer(0))
+            if (SaveGame.Player.TimedStun.ResetTimer())
             {
                 zapRodEvent.Identified = true;
             }
-            if (SaveGame.Player.TimedBleeding.SetTimer(0))
+            if (SaveGame.Player.TimedBleeding.ResetTimer())
             {
                 zapRodEvent.Identified = true;
             }
-            if (SaveGame.Player.TimedHallucinations.SetTimer(0))
+            if (SaveGame.Player.TimedHallucinations.ResetTimer())
             {
                 zapRodEvent.Identified = true;
             }

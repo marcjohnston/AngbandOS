@@ -26,7 +26,7 @@
             }
             else
             {
-                saveGame.Player.TimedFear.SetTimer(saveGame.Player.TimedFear.TimeRemaining + Program.Rng.RandomLessThan(4) + 4);
+                saveGame.Player.TimedFear.AddTimer(Program.Rng.RandomLessThan(4) + 4);
             }
             saveGame.Level.Monsters.UpdateSmartLearn(monster, new FearSpellResistantDetection());
         }
@@ -34,7 +34,7 @@
         public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
         {
             MonsterRace targetRace = target.Race;
-            bool playerIsBlind = saveGame.Player.TimedBlindness.TimeRemaining != 0;
+            bool playerIsBlind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
             bool seeTarget = !playerIsBlind && target.IsVisible;
             string targetName = target.Name;
             int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;

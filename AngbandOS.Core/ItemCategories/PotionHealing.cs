@@ -27,23 +27,23 @@ namespace AngbandOS.Core.ItemCategories
             {
                 identified = true;
             }
-            if (saveGame.Player.TimedBlindness.SetTimer(0))
+            if (saveGame.Player.TimedBlindness.ResetTimer())
             {
                 identified = true;
             }
-            if (saveGame.Player.TimedConfusion.SetTimer(0))
+            if (saveGame.Player.TimedConfusion.ResetTimer())
             {
                 identified = true;
             }
-            if (saveGame.Player.TimedPoison.SetTimer(0))
+            if (saveGame.Player.TimedPoison.ResetTimer())
             {
                 identified = true;
             }
-            if (saveGame.Player.TimedStun.SetTimer(0))
+            if (saveGame.Player.TimedStun.ResetTimer())
             {
                 identified = true;
             }
-            if (saveGame.Player.TimedBleeding.SetTimer(0))
+            if (saveGame.Player.TimedBleeding.ResetTimer())
             {
                 identified = true;
             }

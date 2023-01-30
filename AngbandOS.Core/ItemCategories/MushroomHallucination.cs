@@ -20,7 +20,7 @@ namespace AngbandOS.Core.ItemCategories
         {
             if (!saveGame.Player.HasChaosResistance)
             {
-                if (saveGame.Player.TimedHallucinations.SetTimer(saveGame.Player.TimedHallucinations.TimeRemaining + Program.Rng.RandomLessThan(250) + 250))
+                if (saveGame.Player.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(250) + 250))
                 {
                     return true;
                 }

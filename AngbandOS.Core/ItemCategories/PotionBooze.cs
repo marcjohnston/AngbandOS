@@ -22,14 +22,14 @@ namespace AngbandOS.Core.ItemCategories
             // Confusion makes you confused and possibly other effects
             if (!(saveGame.Player.HasConfusionResistance || saveGame.Player.HasChaosResistance))
             {
-                if (saveGame.Player.TimedConfusion.SetTimer(saveGame.Player.TimedConfusion.TimeRemaining + Program.Rng.RandomLessThan(20) + 15))
+                if (saveGame.Player.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(20) + 15))
                 {
                     identified = true;
                 }
                 // 50% chance of having hallucinations
                 if (Program.Rng.DieRoll(2) == 1)
                 {
-                    if (saveGame.Player.TimedHallucinations.SetTimer(saveGame.Player.TimedHallucinations.TimeRemaining + Program.Rng.RandomLessThan(150) + 150))
+                    if (saveGame.Player.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(150) + 150))
                     {
                         identified = true;
                     }

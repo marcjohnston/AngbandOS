@@ -134,7 +134,7 @@ namespace AngbandOS.Core.Races
         {
             if (processWorldEventArgs.SaveGame.CurrentDepth <= 0 && 
                 !processWorldEventArgs.SaveGame.Player.HasLightResistance &&
-                processWorldEventArgs.SaveGame.Player.TimedInvulnerability.TimeRemaining == 0 &&
+                processWorldEventArgs.SaveGame.Player.TimedInvulnerability.TurnsRemaining == 0 &&
                 processWorldEventArgs.SaveGame.Player.GameTime.IsLight)
             {
                 if (processWorldEventArgs.SaveGame.Level.Grid[processWorldEventArgs.SaveGame.Player.MapY][processWorldEventArgs.SaveGame.Player.MapX].TileFlags.IsSet(GridTile.SelfLit))

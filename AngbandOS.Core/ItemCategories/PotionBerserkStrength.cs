@@ -22,11 +22,11 @@ namespace AngbandOS.Core.ItemCategories
             bool identified = false;
 
             // Berserk strength removes fear, heals 30 health, and gives you timed super heroism
-            if (saveGame.Player.TimedFear.SetTimer(0))
+            if (saveGame.Player.TimedFear.ResetTimer())
             {
                 identified = true;
             }
-            if (saveGame.Player.TimedSuperheroism.SetTimer(saveGame.Player.TimedSuperheroism.TimeRemaining + Program.Rng.DieRoll(25) + 25))
+            if (saveGame.Player.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(25) + 25))
             {
                 identified = true;
             }

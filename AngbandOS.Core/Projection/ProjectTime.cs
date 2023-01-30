@@ -41,7 +41,7 @@ namespace AngbandOS.Projection
         protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
         {
             int k = 0;
-            bool blind = SaveGame.Player.TimedBlindness.TimeRemaining != 0;
+            bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
             string act = null;
             if (dam > 1600)
             {

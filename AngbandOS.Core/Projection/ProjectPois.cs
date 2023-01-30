@@ -45,7 +45,7 @@ namespace AngbandOS.Projection
 
         protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
         {
-            bool blind = SaveGame.Player.TimedBlindness.TimeRemaining != 0;
+            bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
             if (dam > 1600)
             {
                 dam = 1600;
@@ -61,17 +61,17 @@ namespace AngbandOS.Projection
             {
                 dam = (dam + 2) / 3;
             }
-            if (SaveGame.Player.TimedPoisonResistance.TimeRemaining != 0)
+            if (SaveGame.Player.TimedPoisonResistance.TurnsRemaining != 0)
             {
                 dam = (dam + 2) / 3;
             }
-            if (!(SaveGame.Player.TimedPoisonResistance.TimeRemaining != 0 || SaveGame.Player.HasPoisonResistance) &&
+            if (!(SaveGame.Player.TimedPoisonResistance.TurnsRemaining != 0 || SaveGame.Player.HasPoisonResistance) &&
                 Program.Rng.DieRoll(SaveGame.HurtChance) == 1)
             {
                 SaveGame.Player.TryDecreasingAbilityScore(Ability.Constitution);
             }
             SaveGame.Player.TakeHit(dam, killer);
-            if (!(SaveGame.Player.HasPoisonResistance || SaveGame.Player.TimedPoisonResistance.TimeRemaining != 0))
+            if (!(SaveGame.Player.HasPoisonResistance || SaveGame.Player.TimedPoisonResistance.TurnsRemaining != 0))
             {
                 if (Program.Rng.DieRoll(10) <= SaveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
                 {
@@ -79,7 +79,7 @@ namespace AngbandOS.Projection
                 }
                 else
                 {
-                    SaveGame.Player.TimedPoison.SetTimer(SaveGame.Player.TimedPoison.TimeRemaining + Program.Rng.RandomLessThan(dam) + 10);
+                    SaveGame.Player.TimedPoison.AddTimer(Program.Rng.RandomLessThan(dam) + 10);
                 }
             }
             return true;

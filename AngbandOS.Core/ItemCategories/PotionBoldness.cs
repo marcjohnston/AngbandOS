@@ -20,7 +20,7 @@ namespace AngbandOS.Core.ItemCategories
         public override bool Quaff(SaveGame saveGame)
         {
             // Boldness stops you being afraid
-            return saveGame.Player.TimedFear.SetTimer(0);
+            return saveGame.Player.TimedFear.ResetTimer();
         }
     }
 }

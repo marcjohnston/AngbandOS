@@ -4,36 +4,19 @@
     internal class HeroismTimedAction : TimedAction
     {
         public HeroismTimedAction(SaveGame saveGame) : base(saveGame) { }
-        public override bool SetTimer(int value)
+        protected override void EffectStopped()
         {
-            bool notice = false;
-            value = value > 10000 ? 10000 : value < 0 ? 0 : value;
-            if (value != 0)
-            {
-                if (TimeRemaining == 0)
-                {
-                    SaveGame.MsgPrint("You feel like a hero!");
-                    notice = true;
-                }
-            }
-            else
-            {
-                if (TimeRemaining != 0)
-                {
-                    SaveGame.MsgPrint("The heroism wears off.");
-                    notice = true;
-                }
-            }
-            _timer = value;
-            if (!notice)
-            {
-                return false;
-            }
-            SaveGame.Disturb(false);
+            SaveGame.MsgPrint("The heroism wears off.");
+        }
+        protected override void EffectIncreased(int newRate, int currentRate)
+        {
+            SaveGame.MsgPrint("You feel like a hero!");
+        }
+        protected override void Noticed()
+        {
             SaveGame.UpdateBonusesFlaggedAction.Set();
             SaveGame.UpdateHealthFlaggedAction.Set();
-            SaveGame.HandleStuff();
-            return true;
+            base.Noticed();
         }
     }
 }

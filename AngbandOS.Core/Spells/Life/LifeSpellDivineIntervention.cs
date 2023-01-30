@@ -22,17 +22,17 @@ namespace AngbandOS.Spells.Life
             saveGame.TurnMonsters(saveGame.Player.Level * 4);
             saveGame.StasisMonsters(saveGame.Player.Level * 4);
             saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new CthuloidMonsterSelector(), true);
-            saveGame.Player.TimedSuperheroism.SetTimer(saveGame.Player.TimedSuperheroism.TimeRemaining + Program.Rng.DieRoll(25) + 25);
+            saveGame.Player.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(25) + 25);
             saveGame.Player.RestoreHealth(300);
-            if (saveGame.Player.TimedHaste.TimeRemaining == 0)
+            if (saveGame.Player.TimedHaste.TurnsRemaining == 0)
             {
                 saveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(20 + saveGame.Player.Level) + saveGame.Player.Level);
             }
             else
             {
-                saveGame.Player.TimedHaste.SetTimer(saveGame.Player.TimedHaste.TimeRemaining + Program.Rng.DieRoll(5));
+                saveGame.Player.TimedHaste.AddTimer(Program.Rng.DieRoll(5));
             }
-            saveGame.Player.TimedFear.SetTimer(0);
+            saveGame.Player.TimedFear.ResetTimer();
         }
 
         public override void Initialise(int characterClass)

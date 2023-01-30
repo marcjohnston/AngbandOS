@@ -19,7 +19,7 @@
             {
                 SaveGame.Screen.Print(Colour.White, "[----------]", RowInfo, ColInfo);
             }
-            else if (SaveGame.Player.TimedHallucinations.TimeRemaining != 0)
+            else if (SaveGame.Player.TimedHallucinations.TurnsRemaining != 0)
             {
                 SaveGame.Screen.Print(Colour.White, "[----------]", RowInfo, ColInfo);
             }

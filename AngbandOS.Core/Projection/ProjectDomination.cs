@@ -62,11 +62,11 @@ namespace AngbandOS.Projection
                         switch (Program.Rng.DieRoll(4))
                         {
                             case 1:
-                                SaveGame.Player.TimedStun.SetTimer(SaveGame.Player.TimedStun.TimeRemaining + (dam / 2));
+                                SaveGame.Player.TimedStun.AddTimer((dam / 2));
                                 break;
 
                             case 2:
-                                SaveGame.Player.TimedConfusion.SetTimer(SaveGame.Player.TimedConfusion.TimeRemaining + (dam / 2));
+                                SaveGame.Player.TimedConfusion.AddTimer((dam / 2));
                                 break;
 
                             default:
@@ -77,7 +77,7 @@ namespace AngbandOS.Projection
                                     }
                                     else
                                     {
-                                        SaveGame.Player.TimedFear.SetTimer(SaveGame.Player.TimedFear.TimeRemaining + dam);
+                                        SaveGame.Player.TimedFear.AddTimer(dam);
                                     }
                                     break;
                                 }

@@ -985,7 +985,7 @@ namespace AngbandOS
 
         public void PolymorphWounds()
         {
-            int wounds = TimedBleeding.TimeRemaining;
+            int wounds = TimedBleeding.TurnsRemaining;
             int hitP = MaxHealth - Health;
             int change = Program.Rng.DiceRoll(Level, 5);
             bool nastyEffect = Program.Rng.DieRoll(5) == 1;
@@ -1003,7 +1003,7 @@ namespace AngbandOS
             {
                 SaveGame.MsgPrint("Your wounds are polymorphed into less serious ones.");
                 RestoreHealth(change);
-                TimedBleeding.SetTimer(TimedBleeding.TimeRemaining - (change / 2));
+                TimedBleeding.SetTimer(TimedBleeding.TurnsRemaining - (change / 2));
             }
         }
 
@@ -1172,7 +1172,7 @@ namespace AngbandOS
         {
             int playerLevel = Level;
             bool detailed = false;
-            if (TimedConfusion.TimeRemaining != 0)
+            if (TimedConfusion.TurnsRemaining != 0)
             {
                 return;
             }
@@ -1480,7 +1480,7 @@ namespace AngbandOS
                 return;
             }
             SaveGame.Disturb(true);
-            if (TimedInvulnerability.TimeRemaining != 0 && damage < 9000)
+            if (TimedInvulnerability.TurnsRemaining != 0 && damage < 9000)
             {
                 if (Program.Rng.DieRoll(Constants.PenetrateInvulnerability) == 1)
                 {
@@ -1491,7 +1491,7 @@ namespace AngbandOS
                     return;
                 }
             }
-            if (TimedEtherealness.TimeRemaining != 0)
+            if (TimedEtherealness.TurnsRemaining != 0)
             {
                 damage /= 10;
                 if (damage == 0 && Program.Rng.DieRoll(10) == 1)
@@ -1524,7 +1524,7 @@ namespace AngbandOS
                         SaveGame.MsgPrint("You die.");
                         SaveGame.MsgPrint(null);
                         SaveGame.DiedFrom = hitFrom;
-                        if (TimedHallucinations.TimeRemaining != 0)
+                        if (TimedHallucinations.TurnsRemaining != 0)
                         {
                             SaveGame.DiedFrom += "(?)";
                         }

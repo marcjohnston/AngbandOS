@@ -30,3 +30,4 @@ global using AngbandOS.Core.ChestTrapConfigurations;
 global using AngbandOS.Core.EventArgs;
 global using AngbandOS.Core.AlterActions;
 global using AngbandOS.Core.FlaggedActions;
+global using AngbandOS.Core.TimedActions;
