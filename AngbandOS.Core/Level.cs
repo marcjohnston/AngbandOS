@@ -1129,7 +1129,7 @@ namespace AngbandOS
                 return;
             }
             Item qPtr = new Item(SaveGame);
-            if (!qPtr.MakeGold(0))
+            if (!qPtr.MakeGold())
             {
                 return;
             }

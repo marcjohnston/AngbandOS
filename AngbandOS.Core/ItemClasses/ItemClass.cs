@@ -881,7 +881,7 @@ namespace AngbandOS.Core.ItemClasses
         /// <summary>
         /// Returns a 1-in-chance for a random artifact to have activation applied.  Returns 3 by default.  Armour returns double the default.
         /// </summary>
-        public virtual int RandartActivationChance => Constants.ActivationChance;
+        public virtual int RandartActivationChance => 3;
 
         /// <summary>
         /// Applies an additional bonus to random artifacts.  Does nothing by default.

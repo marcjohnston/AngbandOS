@@ -4,9 +4,6 @@ namespace AngbandOS.Core
 {
     internal static class Constants
     {
-        public const int ActivationChance = 3;
-        public const int ArifactCurseChance = 13;
-        public const int BreakElderSign = 550;
         public const int BreakYellowSign = 99;
         public const int BthPlusAdj = 3;
         public const int ConsoleHeight = 45;
@@ -39,7 +36,6 @@ namespace AngbandOS.Core
         public const int MaxColors = 66;
         public const int MaxDepth = 128;
         public const int MaxGenders = 3;
-        public const int MaxGold = 18;
         public const int MaxMa = 17;
         public const int MaxMAllocChance = 160;
         public const int MaxMetals = 39;
@@ -99,8 +95,6 @@ namespace AngbandOS.Core
         public const int SexMale = 1;
         public const int StoreObjLevel = 5;
         public const int StoreShuffle = 21;
-        public const int StoreTurns = 1000;
-        public const int TableName = 45;
         public const int TargetGrid = 0x08;
         public const int TargetKill = 0x01;
         public const int TargetLook = 0x02;

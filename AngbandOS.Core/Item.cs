@@ -1578,26 +1578,25 @@ namespace AngbandOS
             return RareItemTypeIndex != 0;
         }
 
-        public bool MakeGold(int coinType)
+        public bool MakeGold(int? goldType = null)
         {
-            int i = ((Program.Rng.DieRoll(SaveGame.Level.ObjectLevel + 2) + 2) / 2) - 1;
-            if (Program.Rng.RandomLessThan(Constants.GreatObj) == 0)
+            if (goldType == null)
             {
-                i += Program.Rng.DieRoll(SaveGame.Level.ObjectLevel + 1);
+                goldType = ((Program.Rng.DieRoll(SaveGame.Level.ObjectLevel + 2) + 2) / 2) - 1;
+                if (Program.Rng.RandomLessThan(Constants.GreatObj) == 0)
+                {
+                    goldType += Program.Rng.DieRoll(SaveGame.Level.ObjectLevel + 1);
+                }
             }
-            if (coinType != 0)
+            if (goldType > 17)
             {
-                i = coinType;
-            }
-            if (i >= Constants.MaxGold)
-            {
-                i = Constants.MaxGold - 1;
+                goldType = 17;
             }
             ItemClass? kPtr = null;
-            switch (i)
+            switch (goldType.Value)
             {
                 case 0:
-                    kPtr = SaveGame.SingletonRepository.ItemCategories.Get<GoldCopper>();
+                    kPtr = SaveGame.SingletonRepository.ItemCategories.Get<GoldCopper>(); // TODO: Use a property on item for GoldValue
                     break;
 
                 case 1:
@@ -2307,6 +2306,7 @@ namespace AngbandOS
 
         public bool CreateRandart(bool fromScroll)
         {
+            const int ArtifactCurseChance = 13;
             bool hasPval = false;
             int powers = Program.Rng.DieRoll(5) + 1;
             bool aCursed = false;
@@ -2376,7 +2376,7 @@ namespace AngbandOS
                 artifactBias = new WarriorArtifactBias();
             }
             string newName;
-            if (!fromScroll && Program.Rng.DieRoll(Constants.ArifactCurseChance) == 1)
+            if (!fromScroll && Program.Rng.DieRoll(ArtifactCurseChance) == 1)
             {
                 aCursed = true;
             }

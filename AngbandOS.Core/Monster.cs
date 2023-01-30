@@ -450,6 +450,8 @@ namespace AngbandOS
         /// <param name="noise"> The amount of noise the player is making </param>
         public void ProcessMonster(SaveGame saveGame, uint noise)
         {
+            const int BreakElderSign = 550;
+
             // Is the monster asleep?
             if (SleepLevel != 0)
             {
@@ -863,7 +865,7 @@ namespace AngbandOS
                     // Assume we're not moving
                     doMove = false;
                     // We have a chance of breaking the sign based on our saveGame.Level
-                    if (Program.Rng.DieRoll(Constants.BreakElderSign) < Race.Level)
+                    if (Program.Rng.DieRoll(BreakElderSign) < Race.Level)
                     {
                         // If the player knows the sign is there, let them know it was broken
                         if (tile.TileFlags.IsSet(GridTile.PlayerMemorised))

@@ -1463,7 +1463,7 @@ namespace AngbandOS
                 Item qPtr = new Item(this);
                 if (small && Program.Rng.RandomLessThan(100) < 75)
                 {
-                    if (!qPtr.MakeGold(0))
+                    if (!qPtr.MakeGold())
                     {
                         continue;
                     }
