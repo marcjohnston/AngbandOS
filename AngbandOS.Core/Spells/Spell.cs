@@ -38,7 +38,7 @@ namespace AngbandOS.Spells
 
         public abstract void Cast(SaveGame saveGame);
 
-        public int FailureChance(Player player)
+        public int FailureChance(Player player) // TODO: Player to SaveGame
         {
             if (player.Spellcasting.Type == CastingType.None)
             {
@@ -52,20 +52,20 @@ namespace AngbandOS.Spells
                 chance += 5 * (ManaCost - player.Mana);
             }
             int minfail = player.AbilityScores[player.Spellcasting.SpellStat].SpellMinFailChance;
-            if (player.CharacterClassID != CharacterClass.Priest && player.CharacterClassID != CharacterClass.Druid &&
-                player.CharacterClassID != CharacterClass.Mage && player.CharacterClassID != CharacterClass.HighMage &&
-                player.CharacterClassID != CharacterClass.Cultist)
+            if (player.BaseCharacterClass.ID != CharacterClass.Priest && player.BaseCharacterClass.ID != CharacterClass.Druid &&
+                player.BaseCharacterClass.ID != CharacterClass.Mage && player.BaseCharacterClass.ID != CharacterClass.HighMage &&
+                player.BaseCharacterClass.ID != CharacterClass.Cultist)
             {
                 if (minfail < 5)
                 {
                     minfail = 5;
                 }
             }
-            if ((player.CharacterClassID == CharacterClass.Priest || player.CharacterClassID == CharacterClass.Druid) && player.HasUnpriestlyWeapon)
+            if ((player.BaseCharacterClass.ID == CharacterClass.Priest || player.BaseCharacterClass.ID == CharacterClass.Druid) && player.HasUnpriestlyWeapon)
             {
                 chance += 25;
             }
-            if (player.CharacterClassID == CharacterClass.Cultist && player.HasUnpriestlyWeapon)
+            if (player.BaseCharacterClass.ID == CharacterClass.Cultist && player.HasUnpriestlyWeapon)
             {
                 chance += 25;
             }
@@ -88,7 +88,7 @@ namespace AngbandOS.Spells
             return chance;
         }
 
-        public string GetComment(Player player)
+        public string GetComment(Player player) // TODO: Player to SaveGame
         {
             if (Forgotten)
             {
@@ -103,7 +103,7 @@ namespace AngbandOS.Spells
 
         public abstract void Initialise(int characterClass);
 
-        public string SummaryLine(Player player)
+        public string SummaryLine(Player player) // TODO: Player to SaveGame
         {
             return Level >= 99
                 ? "(illegible)"
@@ -115,6 +115,6 @@ namespace AngbandOS.Spells
             return $"{Name} ({Level}, {ManaCost}, {BaseFailure}, {FirstCastExperience})";
         }
 
-        protected abstract string Comment(Player player);
+        protected abstract string Comment(Player player); // TODO: Player to SaveGame
     }
 }

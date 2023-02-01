@@ -25,10 +25,10 @@ namespace AngbandOS.Spells
 
         public Spellcasting(Player player)
         {
-            Spells[0] = new SpellList(player.Realm1, player.CharacterClassID);
-            Spells[1] = new SpellList(player.Realm2, player.CharacterClassID);
-            Talents = new TalentList(player.CharacterClassID);
-            switch (player.CharacterClassID)
+            Spells[0] = new SpellList(player.Realm1, player.BaseCharacterClass.ID);
+            Spells[1] = new SpellList(player.Realm2, player.BaseCharacterClass.ID);
+            Talents = new TalentList(player.BaseCharacterClass.ID);
+            switch (player.BaseCharacterClass.ID)
             {
                 case CharacterClass.Mage:
                 case CharacterClass.HighMage:
@@ -60,7 +60,7 @@ namespace AngbandOS.Spells
                     Type = CastingType.None;
                     break;
             }
-            switch (player.CharacterClassID)
+            switch (player.BaseCharacterClass.ID)
             {
                 case CharacterClass.Mage:
                 case CharacterClass.HighMage:
@@ -89,7 +89,7 @@ namespace AngbandOS.Spells
                     SpellStat = Ability.Strength;
                     break;
             }
-            switch (player.CharacterClassID)
+            switch (player.BaseCharacterClass.ID)
             {
                 case CharacterClass.Mage:
                 case CharacterClass.Monk:

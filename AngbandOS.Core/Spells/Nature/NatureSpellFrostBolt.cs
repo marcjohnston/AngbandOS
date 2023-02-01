@@ -14,7 +14,7 @@ namespace AngbandOS.Spells.Nature
         public override void Cast(SaveGame saveGame)
         {
             int beam;
-            switch (saveGame.Player.CharacterClassID)
+            switch (saveGame.Player.BaseCharacterClass.ID)
             {
                 case CharacterClass.Mage:
                     beam = saveGame.Player.Level;

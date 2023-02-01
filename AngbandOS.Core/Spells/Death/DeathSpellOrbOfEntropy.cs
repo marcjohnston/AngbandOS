@@ -19,7 +19,7 @@ namespace AngbandOS.Spells.Death
             }
             saveGame.FireBall(new ProjectOldDrain(saveGame), dir,
                 Program.Rng.DiceRoll(3, 6) + saveGame.Player.Level + (saveGame.Player.Level /
-                (saveGame.Player.CharacterClassID == CharacterClass.Mage || saveGame.Player.CharacterClassID == CharacterClass.HighMage ? 2 : 4)),
+                (saveGame.Player.BaseCharacterClass.ID == CharacterClass.Mage || saveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)),
                 saveGame.Player.Level < 30 ? 2 : 3);
         }
 
@@ -89,8 +89,7 @@ namespace AngbandOS.Spells.Death
 
         protected override string Comment(Player player)
         {
-            int s = player.Level + (player.Level /
-                    (player.CharacterClassID == CharacterClass.Mage || player.CharacterClassID == CharacterClass.HighMage ? 2 : 4));
+            int s = player.Level + (player.Level / (player.BaseCharacterClass.ID == CharacterClass.Mage || player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4));
             return $"dam 3d6+{s}";
         }
     }

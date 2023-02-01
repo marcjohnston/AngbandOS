@@ -150,9 +150,8 @@ namespace AngbandOS
         public Profession Profession = new Profession();
 
         /// <summary>
-        /// Represents the ID of the character class.  Deprecated.  Use BaseCharacterClass/CharacterClass.
+        /// Represents the character class of the player.
         /// </summary>
-        public int CharacterClassID;
         public BaseCharacterClass BaseCharacterClass;
 
         /// <summary>
@@ -403,7 +402,7 @@ namespace AngbandOS
                 if (Level > MaxLevelGained)
                 {
                     MaxLevelGained = Level;
-                    if (CharacterClassID == CharacterClass.Fanatic || CharacterClassID == CharacterClass.Cultist)
+                    if (BaseCharacterClass.ID == CharacterClass.Fanatic || BaseCharacterClass.ID == CharacterClass.Cultist)
                     {
                         levelReward = true;
                     }
@@ -621,27 +620,27 @@ namespace AngbandOS
         public ItemCharacteristics GetAbilitiesAsItemFlags()
         {
             ItemCharacteristics itemCharacteristics = new ItemCharacteristics();
-            if ((CharacterClassID == CharacterClass.Warrior && Level > 29) || (CharacterClassID == CharacterClass.Paladin && Level > 39) || (CharacterClassID == CharacterClass.Fanatic && Level > 39))
+            if ((BaseCharacterClass.ID == CharacterClass.Warrior && Level > 29) || (BaseCharacterClass.ID == CharacterClass.Paladin && Level > 39) || (BaseCharacterClass.ID == CharacterClass.Fanatic && Level > 39))
             {
                 itemCharacteristics.ResFear = true;
             }
-            if (CharacterClassID == CharacterClass.Fanatic && Level > 29)
+            if (BaseCharacterClass.ID == CharacterClass.Fanatic && Level > 29)
             {
                 itemCharacteristics.ResChaos = true;
             }
-            if (CharacterClassID == CharacterClass.Cultist && Level > 19)
+            if (BaseCharacterClass.ID == CharacterClass.Cultist && Level > 19)
             {
                 itemCharacteristics.ResChaos = true;
             }
-            if (CharacterClassID == CharacterClass.Monk && Level > 9 && !SaveGame.MartialArtistHeavyArmour())
+            if (BaseCharacterClass.ID == CharacterClass.Monk && Level > 9 && !SaveGame.MartialArtistHeavyArmour())
             {
                 itemCharacteristics.Speed = true;
             }
-            if (CharacterClassID == CharacterClass.Monk && Level > 24 && !SaveGame.MartialArtistHeavyArmour())
+            if (BaseCharacterClass.ID == CharacterClass.Monk && Level > 24 && !SaveGame.MartialArtistHeavyArmour())
             {
                 itemCharacteristics.FreeAct = true;
             }
-            if (CharacterClassID == CharacterClass.Mindcrafter)
+            if (BaseCharacterClass.ID == CharacterClass.Mindcrafter)
             {
                 if (Level > 9)
                 {
@@ -660,7 +659,7 @@ namespace AngbandOS
                     itemCharacteristics.Telepathy = true;
                 }
             }
-            if (CharacterClassID == CharacterClass.Mystic)
+            if (BaseCharacterClass.ID == CharacterClass.Mystic)
             {
                 if (Level > 9)
                 {
@@ -683,7 +682,7 @@ namespace AngbandOS
                     itemCharacteristics.Telepathy = true;
                 }
             }
-            if (CharacterClassID == CharacterClass.ChosenOne)
+            if (BaseCharacterClass.ID == CharacterClass.ChosenOne)
             {
                 itemCharacteristics.Lightsource = true;
                 if (Level >= 2)
@@ -1179,7 +1178,7 @@ namespace AngbandOS
             {
                 return;
             }
-            switch (CharacterClassID)
+            switch (BaseCharacterClass.ID)
             {
                 case CharacterClass.Warrior:
                 case CharacterClass.ChosenOne:

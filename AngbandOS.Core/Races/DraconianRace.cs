@@ -115,7 +115,7 @@ namespace AngbandOS.Core.Races
             // Chance of replacing the default fire/cold element with a special one
             if (Program.Rng.DieRoll(100) < saveGame.Player.Level)
             {
-                switch (saveGame.Player.CharacterClassID)
+                switch (saveGame.Player.BaseCharacterClass.ID)
                 {
                     case CharacterClass.Warrior:
                     case CharacterClass.Ranger:

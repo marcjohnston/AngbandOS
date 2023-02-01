@@ -108,21 +108,21 @@ namespace AngbandOS.Core.FlaggedActions
             SaveGame.Player.SkillRanged = SaveGame.Player.Race.BaseRangedAttackBonus + SaveGame.Player.Profession.BaseRangedAttackBonus;
             SaveGame.Player.SkillThrowing = SaveGame.Player.Race.BaseRangedAttackBonus + SaveGame.Player.Profession.BaseRangedAttackBonus;
             SaveGame.Player.SkillDigging = 0;
-            if ((SaveGame.Player.CharacterClassID == CharacterClass.Warrior && SaveGame.Player.Level > 29) ||
-                (SaveGame.Player.CharacterClassID == CharacterClass.Paladin && SaveGame.Player.Level > 39) ||
-                (SaveGame.Player.CharacterClassID == CharacterClass.Fanatic && SaveGame.Player.Level > 39))
+            if ((SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Warrior && SaveGame.Player.Level > 29) ||
+                (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Paladin && SaveGame.Player.Level > 39) ||
+                (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Fanatic && SaveGame.Player.Level > 39))
             {
                 SaveGame.Player.HasFearResistance = true;
             }
-            if (SaveGame.Player.CharacterClassID == CharacterClass.Fanatic && SaveGame.Player.Level > 29)
+            if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Fanatic && SaveGame.Player.Level > 29)
             {
                 SaveGame.Player.HasChaosResistance = true;
             }
-            if (SaveGame.Player.CharacterClassID == CharacterClass.Cultist && SaveGame.Player.Level > 19)
+            if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Cultist && SaveGame.Player.Level > 19)
             {
                 SaveGame.Player.HasChaosResistance = true;
             }
-            if (SaveGame.Player.CharacterClassID == CharacterClass.Mindcrafter)
+            if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mindcrafter)
             {
                 if (SaveGame.Player.Level > 9)
                 {
@@ -141,11 +141,11 @@ namespace AngbandOS.Core.FlaggedActions
                     SaveGame.Player.HasTelepathy = true;
                 }
             }
-            if (SaveGame.Player.CharacterClassID == CharacterClass.Monk && SaveGame.Player.Level > 24 && !SaveGame.MartialArtistHeavyArmour())
+            if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Monk && SaveGame.Player.Level > 24 && !SaveGame.MartialArtistHeavyArmour())
             {
                 SaveGame.Player.HasFreeAction = true;
             }
-            if (SaveGame.Player.CharacterClassID == CharacterClass.Mystic)
+            if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mystic)
             {
                 if (SaveGame.Player.Level > 9)
                 {
@@ -164,7 +164,7 @@ namespace AngbandOS.Core.FlaggedActions
                     SaveGame.Player.HasTelepathy = true;
                 }
             }
-            if (SaveGame.Player.CharacterClassID == CharacterClass.ChosenOne)
+            if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.ChosenOne)
             {
                 SaveGame.Player.HasGlow = true;
                 if (SaveGame.Player.Level >= 2)
@@ -613,7 +613,7 @@ namespace AngbandOS.Core.FlaggedActions
                     }
                 }
             }
-            if ((SaveGame.Player.CharacterClassID == CharacterClass.Monk || SaveGame.Player.CharacterClassID == CharacterClass.Mystic) && !SaveGame.MartialArtistHeavyArmour())
+            if ((SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Monk || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mystic) && !SaveGame.MartialArtistHeavyArmour())
             {
                 foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots)
                 {
@@ -755,7 +755,7 @@ namespace AngbandOS.Core.FlaggedActions
             {
                 SaveGame.Player.Speed -= 10;
             }
-            if ((SaveGame.Player.CharacterClassID == CharacterClass.Monk || SaveGame.Player.CharacterClassID == CharacterClass.Mystic) && !SaveGame.MartialArtistHeavyArmour())
+            if ((SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Monk || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mystic) && !SaveGame.MartialArtistHeavyArmour())
             {
                 SaveGame.Player.Speed += SaveGame.Player.Level / 10;
             }
@@ -838,7 +838,7 @@ namespace AngbandOS.Core.FlaggedActions
                         // Since this came from the ranged weapon, we know it is a missile weapon type/bow.
                         BowWeaponItemClass missileWeaponItemCategory = (BowWeaponItemClass)oPtr.BaseItemCategory;
                         SaveGame.Player.AmmunitionItemCategory = missileWeaponItemCategory.AmmunitionItemCategory;
-                        if (SaveGame.Player.CharacterClassID == CharacterClass.Ranger && SaveGame.Player.AmmunitionItemCategory == ItemTypeEnum.Arrow)
+                        if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Ranger && SaveGame.Player.AmmunitionItemCategory == ItemTypeEnum.Arrow)
                         {
                             if (SaveGame.Player.Level >= 20)
                             {
@@ -849,7 +849,7 @@ namespace AngbandOS.Core.FlaggedActions
                                 SaveGame.Player.MissileAttacksPerRound++;
                             }
                         }
-                        if (SaveGame.Player.CharacterClassID == CharacterClass.Warrior && SaveGame.Player.AmmunitionItemCategory <= ItemTypeEnum.Bolt &&
+                        if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Warrior && SaveGame.Player.AmmunitionItemCategory <= ItemTypeEnum.Bolt &&
                             SaveGame.Player.AmmunitionItemCategory >= ItemTypeEnum.Shot)
                         {
                             if (SaveGame.Player.Level >= 25)
@@ -885,7 +885,7 @@ namespace AngbandOS.Core.FlaggedActions
                     if (oPtr.BaseItemCategory != null && !SaveGame.Player.HasHeavyWeapon)
                     {
                         int num = 0, wgt = 0, mul = 0;
-                        switch (SaveGame.Player.CharacterClassID)
+                        switch (SaveGame.Player.BaseCharacterClass.ID)
                         {
                             case CharacterClass.Warrior:
                                 num = 6;
@@ -965,7 +965,7 @@ namespace AngbandOS.Core.FlaggedActions
                             SaveGame.Player.MeleeAttacksPerRound = num;
                         }
                         SaveGame.Player.MeleeAttacksPerRound += extraBlows;
-                        if (SaveGame.Player.CharacterClassID == CharacterClass.Warrior)
+                        if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Warrior)
                         {
                             SaveGame.Player.MeleeAttacksPerRound += SaveGame.Player.Level / 15;
                         }
@@ -975,7 +975,7 @@ namespace AngbandOS.Core.FlaggedActions
                         }
                         SaveGame.Player.SkillDigging += oPtr.Weight / 10;
                     }
-                    else if ((SaveGame.Player.CharacterClassID == CharacterClass.Monk || SaveGame.Player.CharacterClassID == CharacterClass.Mystic) && SaveGame.MartialArtistEmptyHands())
+                    else if ((SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Monk || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mystic) && SaveGame.MartialArtistEmptyHands())
                     {
                         SaveGame.Player.MeleeAttacksPerRound = 0;
                         if (SaveGame.Player.Level > 9)
@@ -1022,14 +1022,14 @@ namespace AngbandOS.Core.FlaggedActions
 
                     SaveGame.Player.HasUnpriestlyWeapon = false;
                     MartialArtistArmourAux = false;
-                    if (SaveGame.Player.CharacterClassID == CharacterClass.Warrior)
+                    if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Warrior)
                     {
                         SaveGame.Player.AttackBonus += SaveGame.Player.Level / 5;
                         SaveGame.Player.DamageBonus += SaveGame.Player.Level / 5;
                         SaveGame.Player.DisplayedAttackBonus += SaveGame.Player.Level / 5;
                         SaveGame.Player.DisplayedDamageBonus += SaveGame.Player.Level / 5;
                     }
-                    if ((SaveGame.Player.CharacterClassID == CharacterClass.Priest || SaveGame.Player.CharacterClassID == CharacterClass.Druid) &&
+                    if ((SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Priest || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Druid) &&
                         !SaveGame.Player.HasBlessedBlade && (oPtr.Category == ItemTypeEnum.Sword ||
                                                 oPtr.Category == ItemTypeEnum.Polearm))
                     {
@@ -1042,7 +1042,7 @@ namespace AngbandOS.Core.FlaggedActions
 
                     // Cultists that are NOT wielding the blade of chaos lose bonuses for being an unpriestly weapon.
                     // todo: this should by characterclass
-                    if (SaveGame.Player.CharacterClassID == CharacterClass.Cultist &&
+                    if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Cultist &&
                         SaveGame.Player.Inventory[InventorySlot.MeleeWeapon].BaseItemCategory != null &&
                         !typeof(SwordBladeofChaos).IsAssignableFrom(oPtr.BaseItemCategory.GetType()))
                     {
@@ -1134,7 +1134,7 @@ namespace AngbandOS.Core.FlaggedActions
             {
                 if (SaveGame.Player.HasUnpriestlyWeapon)
                 {
-                    SaveGame.MsgPrint(SaveGame.Player.CharacterClassID == CharacterClass.Cultist
+                    SaveGame.MsgPrint(SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Cultist
                         ? "Your weapon restricts the flow of chaos through you."
                         : "You do not feel comfortable with your weapon.");
                 }
@@ -1144,13 +1144,13 @@ namespace AngbandOS.Core.FlaggedActions
                 }
                 else
                 {
-                    SaveGame.MsgPrint(SaveGame.Player.CharacterClassID == CharacterClass.Cultist
+                    SaveGame.MsgPrint(SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Cultist
                         ? "Chaos flows freely through you again."
                         : "You feel more comfortable after removing your weapon.");
                 }
                 OldUnpriestlyWeapon = SaveGame.Player.HasUnpriestlyWeapon;
             }
-            if ((SaveGame.Player.CharacterClassID == CharacterClass.Monk || SaveGame.Player.CharacterClassID == CharacterClass.Mystic) && MartialArtistArmourAux != MartialArtistNotifyAux) // TODO: This should be moved to the wield action
+            if ((SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Monk || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mystic) && MartialArtistArmourAux != MartialArtistNotifyAux) // TODO: This should be moved to the wield action
             {
                 SaveGame.MsgPrint(SaveGame.MartialArtistHeavyArmour()
                     ? "The weight of your armour disrupts your balance."

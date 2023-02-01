@@ -65,7 +65,7 @@ namespace AngbandOS.Core.Races
         public override void UseRacialPower(SaveGame saveGame)
         {
             // Half-Ogres can go berserk
-            if (saveGame.CheckIfRacialPowerWorks(8, 10, Ability.Wisdom, saveGame.Player.CharacterClassID == CharacterClass.Warrior ? 6 : 12))
+            if (saveGame.CheckIfRacialPowerWorks(8, 10, Ability.Wisdom, saveGame.Player.BaseCharacterClass.ID == CharacterClass.Warrior ? 6 : 12))
             {
                 saveGame.MsgPrint("Raaagh!");
                 saveGame.Player.TimedFear.ResetTimer();
