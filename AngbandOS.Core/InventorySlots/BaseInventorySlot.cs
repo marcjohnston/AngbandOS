@@ -69,15 +69,27 @@ namespace AngbandOS.Core.InventorySlots
         public virtual bool CanBeCursed => false;
 
         /// <summary>
-        /// Returns true, if the inventory slot is a melee item; false, otherwise.  Melee and ranged return true.
+        /// Returns true, if the inventory slot is a weapon; false, otherwise.  Melee and ranged inventory slots return true.
         /// </summary>
-        public virtual bool IsMelee => false;
+        public bool IsWeapon => IsRangedWeapon || IsMeleeWeapon;
+
+        /// <summary>
+        /// Returns true, if the inventory slot is a ranged weapon; false, otherwise.  The ranged inventory slots returns true.
+        /// </summary>
+        /// <value><c>true</c> if this instance is ranged weapon; otherwise, <c>false</c>.</value>
+        public virtual bool IsRangedWeapon => false;
+
+        /// <summary>
+        /// Returns true, if the inventory slot is a melee weapon; false, otherwise.  The melee inventory slots returns true.
+        /// </summary>
+        /// <value><c>true</c> if this instance is ranged weapon; otherwise, <c>false</c>.</value>
+        public virtual bool IsMeleeWeapon => false;
 
         /// <summary>
         /// Returns true, if the item in the inventory slot can be disenchanted; false, otherwise.  All armour (Body, head, cloak, arms, hands and feet) and
         /// melee (melee and ranged) positions, return true.
         /// </summary>
-        public virtual bool CanBeDisenchanted => IsArmour || IsMelee;
+        public virtual bool CanBeDisenchanted => IsArmour || IsWeapon;
 
         /// <summary>
         /// Returns true, if the inventory slot is considered armour that the player is wearing.  Body, head, cloak, arms, hands and feet

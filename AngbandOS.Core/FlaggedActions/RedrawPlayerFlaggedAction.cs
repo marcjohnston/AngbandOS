@@ -20,7 +20,7 @@ namespace AngbandOS.Core.FlaggedActions
         {
             PrtField(SaveGame.Player.Name, RowName, ColName);
             PrtField(SaveGame.Player.Race.Title, RowRace, ColRace);
-            PrtField(Profession.ClassSubName(SaveGame.Player.ProfessionIndex, SaveGame.Player.Realm1), RowClass, ColClass);
+            PrtField(Profession.ClassSubName(SaveGame.Player.CharacterClassID, SaveGame.Player.Realm1), RowClass, ColClass);
         }
     }
 }

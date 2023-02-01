@@ -2314,7 +2314,7 @@ namespace AngbandOS
             IArtifactBias artifactBias = null;
             if (fromScroll && Program.Rng.DieRoll(4) == 1)
             {
-                switch (SaveGame.Player.ProfessionIndex)
+                switch (SaveGame.Player.CharacterClassID)
                 {
                     case CharacterClass.Warrior:
                     case CharacterClass.ChosenOne:
@@ -2902,7 +2902,7 @@ namespace AngbandOS
             {
                 RandartItemCharacteristics.NoTele = true;
             }
-            if (SaveGame.Player.ProfessionIndex != CharacterClass.Warrior && Program.Rng.DieRoll(3) == 1)
+            if (SaveGame.Player.CharacterClassID != CharacterClass.Warrior && Program.Rng.DieRoll(3) == 1)
             {
                 RandartItemCharacteristics.NoMagic = true;
             }

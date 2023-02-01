@@ -42,7 +42,7 @@ namespace AngbandOS.Core.FlaggedActions
             {
                 msp++;
             }
-            if (msp != 0 && SaveGame.Player.ProfessionIndex == CharacterClass.HighMage)
+            if (msp != 0 && SaveGame.Player.CharacterClassID == CharacterClass.HighMage)
             {
                 msp += msp / 4;
             }

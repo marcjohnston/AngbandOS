@@ -150,7 +150,7 @@ namespace AngbandOS
         }
         public int OldSpareSpellSlots;
         public Profession Profession = new Profession();
-        public int ProfessionIndex;
+        public int CharacterClassID;
 
         /// <summary>
         /// Returns the current race of the character.  Will be null before the player is birthed.
@@ -400,7 +400,7 @@ namespace AngbandOS
                 if (Level > MaxLevelGained)
                 {
                     MaxLevelGained = Level;
-                    if (ProfessionIndex == CharacterClass.Fanatic || ProfessionIndex == CharacterClass.Cultist)
+                    if (CharacterClassID == CharacterClass.Fanatic || CharacterClassID == CharacterClass.Cultist)
                     {
                         levelReward = true;
                     }
@@ -618,27 +618,27 @@ namespace AngbandOS
         public ItemCharacteristics GetAbilitiesAsItemFlags()
         {
             ItemCharacteristics itemCharacteristics = new ItemCharacteristics();
-            if ((ProfessionIndex == CharacterClass.Warrior && Level > 29) || (ProfessionIndex == CharacterClass.Paladin && Level > 39) || (ProfessionIndex == CharacterClass.Fanatic && Level > 39))
+            if ((CharacterClassID == CharacterClass.Warrior && Level > 29) || (CharacterClassID == CharacterClass.Paladin && Level > 39) || (CharacterClassID == CharacterClass.Fanatic && Level > 39))
             {
                 itemCharacteristics.ResFear = true;
             }
-            if (ProfessionIndex == CharacterClass.Fanatic && Level > 29)
+            if (CharacterClassID == CharacterClass.Fanatic && Level > 29)
             {
                 itemCharacteristics.ResChaos = true;
             }
-            if (ProfessionIndex == CharacterClass.Cultist && Level > 19)
+            if (CharacterClassID == CharacterClass.Cultist && Level > 19)
             {
                 itemCharacteristics.ResChaos = true;
             }
-            if (ProfessionIndex == CharacterClass.Monk && Level > 9 && !SaveGame.MartialArtistHeavyArmour())
+            if (CharacterClassID == CharacterClass.Monk && Level > 9 && !SaveGame.MartialArtistHeavyArmour())
             {
                 itemCharacteristics.Speed = true;
             }
-            if (ProfessionIndex == CharacterClass.Monk && Level > 24 && !SaveGame.MartialArtistHeavyArmour())
+            if (CharacterClassID == CharacterClass.Monk && Level > 24 && !SaveGame.MartialArtistHeavyArmour())
             {
                 itemCharacteristics.FreeAct = true;
             }
-            if (ProfessionIndex == CharacterClass.Mindcrafter)
+            if (CharacterClassID == CharacterClass.Mindcrafter)
             {
                 if (Level > 9)
                 {
@@ -657,7 +657,7 @@ namespace AngbandOS
                     itemCharacteristics.Telepathy = true;
                 }
             }
-            if (ProfessionIndex == CharacterClass.Mystic)
+            if (CharacterClassID == CharacterClass.Mystic)
             {
                 if (Level > 9)
                 {
@@ -680,7 +680,7 @@ namespace AngbandOS
                     itemCharacteristics.Telepathy = true;
                 }
             }
-            if (ProfessionIndex == CharacterClass.ChosenOne)
+            if (CharacterClassID == CharacterClass.ChosenOne)
             {
                 itemCharacteristics.Lightsource = true;
                 if (Level >= 2)
@@ -1176,7 +1176,7 @@ namespace AngbandOS
             {
                 return;
             }
-            switch (ProfessionIndex)
+            switch (CharacterClassID)
             {
                 case CharacterClass.Warrior:
                 case CharacterClass.ChosenOne:

@@ -11,7 +11,7 @@ internal class IronHelmTerrorMaskFixedArtifact : BaseFixedArtifact, IActivatible
 
     public override void ApplyResistances(SaveGame saveGame, Item item)
     {
-        if (saveGame.Player.ProfessionIndex == CharacterClass.Warrior)
+        if (saveGame.Player.CharacterClassID == CharacterClass.Warrior)
         {
             item.BonusPowerType = Enumerations.RareItemType.SpecialAbility;
             item.BonusPowerSubType = ActivationPowerManager.GetRandom();

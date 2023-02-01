@@ -142,8 +142,8 @@ namespace AngbandOS
                 // Casting abilities only have one or two inherent bonuses, so it's safe to start at three
                 bonus3 = mana % 2 == 0 ? $", {mana / 2} SP/lvl" : $", {mana / 2}.5 SP/lvl";
                 // Not all casting classes have actual spells
-                if (SaveGame.Player.ProfessionIndex != CharacterClass.Mindcrafter && SaveGame.Player.ProfessionIndex != CharacterClass.Mystic
-                    && SaveGame.Player.ProfessionIndex != CharacterClass.Channeler)
+                if (SaveGame.Player.CharacterClassID != CharacterClass.Mindcrafter && SaveGame.Player.CharacterClassID != CharacterClass.Mystic
+                    && SaveGame.Player.CharacterClassID != CharacterClass.Channeler)
                 {
                     int spells = ability.HalfSpellsPerLevel;
                     if (spells == 2)
@@ -160,7 +160,7 @@ namespace AngbandOS
                     }
                 }
                 // Almost all casting classes have a failure chance
-                if (SaveGame.Player.ProfessionIndex != CharacterClass.Channeler)
+                if (SaveGame.Player.CharacterClassID != CharacterClass.Channeler)
                 {
                     int fail = ability.SpellMinFailChance;
                     bonus5 = $", {fail}% min fail";
@@ -519,7 +519,7 @@ namespace AngbandOS
             SaveGame.Screen.Print(Colour.Brown, SaveGame.Player.Name, 2, 15);
             SaveGame.Screen.Print(Colour.Brown, SaveGame.Player.Gender.Title, 3, 15);
             SaveGame.Screen.Print(Colour.Brown, SaveGame.Player.Race.Title, 4, 15);
-            SaveGame.Screen.Print(Colour.Brown, Profession.ClassSubName(SaveGame.Player.ProfessionIndex, SaveGame.Player.Realm1), 5, 15);
+            SaveGame.Screen.Print(Colour.Brown, Profession.ClassSubName(SaveGame.Player.CharacterClassID, SaveGame.Player.Realm1), 5, 15);
             // Only print realms if we have them
             if (SaveGame.Player.Realm1 != 0)
             {
@@ -537,7 +537,7 @@ namespace AngbandOS
                 SaveGame.Screen.Print(Colour.Brown, realmBuff, 6, 15);
             }
             // Fanatics and Cultists get a patron
-            if (SaveGame.Player.ProfessionIndex == CharacterClass.Fanatic || SaveGame.Player.ProfessionIndex == CharacterClass.Cultist)
+            if (SaveGame.Player.CharacterClassID == CharacterClass.Fanatic || SaveGame.Player.CharacterClassID == CharacterClass.Cultist)
             {
                 SaveGame.Screen.Print(Colour.Blue, "Patron      :", 7, 1);
                 SaveGame.Screen.Print(Colour.Brown, SaveGame.Player.GooPatron.LongName, 7, 15);

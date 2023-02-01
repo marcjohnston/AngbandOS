@@ -2239,7 +2239,7 @@ namespace AngbandOS
                     buf += " the Magnificent";
                 }
                 Screen.Print(buf, 39, 1);
-                buf = $"Level {corpse.Level} {Profession.ClassSubName(corpse.ProfessionIndex, corpse.Realm1)}";
+                buf = $"Level {corpse.Level} {Profession.ClassSubName(corpse.CharacterClassID, corpse.Realm1)}";
                 Screen.Print(buf, 40, 1);
                 string tmp = $"Killed on Level {CurrentDepth}".PadLeft(45);
                 Screen.Print(tmp, 39, 34);
@@ -2637,11 +2637,11 @@ namespace AngbandOS
             if (TotalFriends != 0)
             {
                 int upkeepDivider = 20;
-                if (Player.ProfessionIndex == CharacterClass.Mage)
+                if (Player.CharacterClassID == CharacterClass.Mage)
                 {
                     upkeepDivider = 15;
                 }
-                else if (Player.ProfessionIndex == CharacterClass.HighMage)
+                else if (Player.CharacterClassID == CharacterClass.HighMage)
                 {
                     upkeepDivider = 12;
                 }
@@ -7967,7 +7967,7 @@ namespace AngbandOS
             bool noExtra = false;
             Disturb(false);
             // If we're a rogue then we can backstab monsters
-            if (Player.ProfessionIndex == CharacterClass.Rogue)
+            if (Player.CharacterClassID == CharacterClass.Rogue)
             {
                 if (monster.SleepLevel != 0 && monster.IsVisible)
                 {
@@ -8015,7 +8015,7 @@ namespace AngbandOS
                     // Tell the player they hit it with the appropriate message
                     if (!(backstab || stabFleeing))
                     {
-                        if (!((Player.ProfessionIndex == CharacterClass.Monk || Player.ProfessionIndex == CharacterClass.Mystic) && MartialArtistEmptyHands()))
+                        if (!((Player.CharacterClassID == CharacterClass.Monk || Player.CharacterClassID == CharacterClass.Mystic) && MartialArtistEmptyHands()))
                         {
                             MsgPrint($"You hit {monsterName}.");
                         }
@@ -8051,7 +8051,7 @@ namespace AngbandOS
                     // Vorpal weapons have a chance of a deep cut
                     bool vorpalCut = item.Characteristics.Vorpal && Program.Rng.DieRoll(item.FixedArtifactIndex == FixedArtifactId.SwordVorpalBlade ? 3 : 6) == 1;
                     // If we're a martial artist then we have special attacks
-                    if ((Player.ProfessionIndex == CharacterClass.Monk || Player.ProfessionIndex == CharacterClass.Mystic) && MartialArtistEmptyHands())
+                    if ((Player.CharacterClassID == CharacterClass.Monk || Player.CharacterClassID == CharacterClass.Mystic) && MartialArtistEmptyHands())
                     {
                         int specialEffect = 0;
                         int stunEffect = 0;
@@ -9011,11 +9011,11 @@ namespace AngbandOS
             if (ItemFilterHighLevelBook(item))
             {
                 bool gainExpr = false;
-                if (Player.ProfessionIndex == CharacterClass.Warrior)
+                if (Player.CharacterClassID == CharacterClass.Warrior)
                 {
                     gainExpr = true;
                 }
-                else if (Player.ProfessionIndex == CharacterClass.Paladin)
+                else if (Player.CharacterClassID == CharacterClass.Paladin)
                 {
                     if (Player.Realm1 == Realm.Life)
                     {
@@ -11464,7 +11464,7 @@ namespace AngbandOS
             if (Player.HasAntiMagic)
             {
                 string whichMagicType = "magic";
-                if (Player.ProfessionIndex == CharacterClass.Mindcrafter || Player.ProfessionIndex == CharacterClass.Mystic)
+                if (Player.CharacterClassID == CharacterClass.Mindcrafter || Player.CharacterClassID == CharacterClass.Mystic)
                 {
                     whichMagicType = "psychic talents";
                 }
@@ -13874,7 +13874,7 @@ namespace AngbandOS
             }
             else
             {
-                Player.Profession = Profession.ClassInfo[Player.ProfessionIndex];
+                Player.Profession = Profession.ClassInfo[Player.CharacterClassID];
                 str = Player.Profession.Title;
             }
             Screen.Print(Colour.Brown, str, 5, 15);
@@ -14008,7 +14008,7 @@ namespace AngbandOS
             Screen.Print(Colour.Purple, "CHA:", 41, 21);
             for (int i = 0; i < 6; i++)
             {
-                int bonus = race.AbilityBonus[i] + Profession.ClassInfo[Player.ProfessionIndex].AbilityBonus[i];
+                int bonus = race.AbilityBonus[i] + Profession.ClassInfo[Player.CharacterClassID].AbilityBonus[i];
                 DisplayStatBonus(26, 36 + i, bonus);
             }
             Screen.Print(Colour.Purple, "Disarming   :", 36, 53);
@@ -14022,14 +14022,14 @@ namespace AngbandOS
             Screen.Print(Colour.Purple, "Infravision :", 38, 31);
             Screen.Print(Colour.Purple, "Searching   :", 39, 31);
             Screen.Print(Colour.Purple, "Perception  :", 40, 31);
-            DisplayAPlusB(67, 36, Profession.ClassInfo[Player.ProfessionIndex].BaseDisarmBonus + race.BaseDisarmBonus, Profession.ClassInfo[Player.ProfessionIndex].DisarmBonusPerLevel);
-            DisplayAPlusB(67, 37, Profession.ClassInfo[Player.ProfessionIndex].BaseDeviceBonus + race.BaseDeviceBonus, Profession.ClassInfo[Player.ProfessionIndex].DeviceBonusPerLevel);
-            DisplayAPlusB(67, 38, Profession.ClassInfo[Player.ProfessionIndex].BaseSaveBonus + race.BaseSaveBonus, Profession.ClassInfo[Player.ProfessionIndex].SaveBonusPerLevel);
-            DisplayAPlusB(67, 39, (Profession.ClassInfo[Player.ProfessionIndex].BaseStealthBonus * 4) + (race.BaseStealthBonus * 4), Profession.ClassInfo[Player.ProfessionIndex].StealthBonusPerLevel * 4);
-            DisplayAPlusB(67, 40, Profession.ClassInfo[Player.ProfessionIndex].BaseMeleeAttackBonus + race.BaseMeleeAttackBonus, Profession.ClassInfo[Player.ProfessionIndex].MeleeAttackBonusPerLevel);
-            DisplayAPlusB(67, 41, Profession.ClassInfo[Player.ProfessionIndex].BaseRangedAttackBonus + race.BaseRangedAttackBonus, Profession.ClassInfo[Player.ProfessionIndex].RangedAttackBonusPerLevel);
-            Screen.Print(Colour.Black, race.ExperienceFactor + Profession.ClassInfo[Player.ProfessionIndex].ExperienceFactor + "%", 36, 45);
-            Screen.Print(Colour.Black, "1d" + (race.HitDieBonus + Profession.ClassInfo[Player.ProfessionIndex].HitDieBonus), 37, 45);
+            DisplayAPlusB(67, 36, Profession.ClassInfo[Player.CharacterClassID].BaseDisarmBonus + race.BaseDisarmBonus, Profession.ClassInfo[Player.CharacterClassID].DisarmBonusPerLevel);
+            DisplayAPlusB(67, 37, Profession.ClassInfo[Player.CharacterClassID].BaseDeviceBonus + race.BaseDeviceBonus, Profession.ClassInfo[Player.CharacterClassID].DeviceBonusPerLevel);
+            DisplayAPlusB(67, 38, Profession.ClassInfo[Player.CharacterClassID].BaseSaveBonus + race.BaseSaveBonus, Profession.ClassInfo[Player.CharacterClassID].SaveBonusPerLevel);
+            DisplayAPlusB(67, 39, (Profession.ClassInfo[Player.CharacterClassID].BaseStealthBonus * 4) + (race.BaseStealthBonus * 4), Profession.ClassInfo[Player.CharacterClassID].StealthBonusPerLevel * 4);
+            DisplayAPlusB(67, 40, Profession.ClassInfo[Player.CharacterClassID].BaseMeleeAttackBonus + race.BaseMeleeAttackBonus, Profession.ClassInfo[Player.CharacterClassID].MeleeAttackBonusPerLevel);
+            DisplayAPlusB(67, 41, Profession.ClassInfo[Player.CharacterClassID].BaseRangedAttackBonus + race.BaseRangedAttackBonus, Profession.ClassInfo[Player.CharacterClassID].RangedAttackBonusPerLevel);
+            Screen.Print(Colour.Black, race.ExperienceFactor + Profession.ClassInfo[Player.CharacterClassID].ExperienceFactor + "%", 36, 45);
+            Screen.Print(Colour.Black, "1d" + (race.HitDieBonus + Profession.ClassInfo[Player.CharacterClassID].HitDieBonus), 37, 45);
             if (race.Infravision == 0)
             {
                 Screen.Print(Colour.Black, "nil", 38, 45);
@@ -14038,8 +14038,8 @@ namespace AngbandOS
             {
                 Screen.Print(Colour.Green, race.Infravision + "0 feet", 38, 45);
             }
-            Screen.Print(Colour.Black, $"{race.BaseSearchBonus + Profession.ClassInfo[Player.ProfessionIndex].BaseSearchBonus:00}%", 39, 45);
-            Screen.Print(Colour.Black, $"{race.BaseSearchFrequency + Profession.ClassInfo[Player.ProfessionIndex].BaseSearchFrequency:00}%", 40, 45);
+            Screen.Print(Colour.Black, $"{race.BaseSearchBonus + Profession.ClassInfo[Player.CharacterClassID].BaseSearchBonus:00}%", 39, 45);
+            Screen.Print(Colour.Black, $"{race.BaseSearchFrequency + Profession.ClassInfo[Player.CharacterClassID].BaseSearchFrequency:00}%", 40, 45);
 
             // Retrieve the description for the race and split the description into lines.
             string[] description = race.Description.Split("\n");
@@ -14223,7 +14223,7 @@ namespace AngbandOS
 
         private void GetRealmsRandomly()
         {
-            int pclas = Player.ProfessionIndex;
+            int pclas = Player.CharacterClassID;
             Player.Realm1 = Realm.None;
             Player.Realm2 = Realm.None;
             if (_realmChoices[pclas] == RealmChoice.None)
@@ -14267,7 +14267,7 @@ namespace AngbandOS
                 return;
             }
             Player.Realm2 = ChooseRealmRandomly(_realmChoices[pclas]);
-            if (Player.ProfessionIndex == CharacterClass.Priest)
+            if (Player.CharacterClassID == CharacterClass.Priest)
             {
                 switch (Player.Realm2)
                 {
@@ -14318,7 +14318,7 @@ namespace AngbandOS
                     Player.AbilityScores[i].Innate = Player.AbilityScores[i].InnateMax;
                     Player.AbilityScores[i].Adjusted = Player.AbilityScores[i].ModifyStatValue(Player.AbilityScores[i].InnateMax, bonus);
                 }
-                if (Player.AbilityScores[Profession.PrimeStat(Player.ProfessionIndex)].InnateMax > 13)
+                if (Player.AbilityScores[Profession.PrimeStat(Player.CharacterClassID)].InnateMax > 13)
                 {
                     break;
                 }
@@ -14475,16 +14475,16 @@ namespace AngbandOS
                         if (menu[0] == Constants.GenerateReplay)
                         {
                             autoChose[stage] = true;
-                            Player.ProfessionIndex = _prevClass;
-                            Player.Profession = Profession.ClassInfo[Player.ProfessionIndex];
+                            Player.CharacterClassID = _prevClass;
+                            Player.Profession = Profession.ClassInfo[Player.CharacterClassID];
                             stage++;
                             break;
                         }
                         if (menu[0] == Constants.GenerateRandom)
                         {
                             autoChose[stage] = true;
-                            Player.ProfessionIndex = Program.Rng.RandomLessThan(Constants.MaxClass);
-                            Player.Profession = Profession.ClassInfo[Player.ProfessionIndex];
+                            Player.CharacterClassID = Program.Rng.RandomLessThan(Constants.MaxClass);
+                            Player.Profession = Profession.ClassInfo[Player.CharacterClassID];
                             stage++;
                             break;
                         }
@@ -14542,8 +14542,8 @@ namespace AngbandOS
                         }
                         if (stage > BirthStage.ClassSelection)
                         {
-                            Player.ProfessionIndex = _classMenu[menu[BirthStage.ClassSelection]].Item;
-                            Player.Profession = Profession.ClassInfo[Player.ProfessionIndex];
+                            Player.CharacterClassID = _classMenu[menu[BirthStage.ClassSelection]].Item;
+                            Player.Profession = Profession.ClassInfo[Player.CharacterClassID];
                         }
                         break;
 
@@ -14565,7 +14565,7 @@ namespace AngbandOS
                                 Player.Race = SingletonRepository.Races[raceIndex];
                                 Player.GetFirstLevelMutation = Player.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
                             }
-                            while ((Player.Race.Choice & (1L << Player.ProfessionIndex)) == 0);
+                            while ((Player.Race.Choice & (1L << Player.CharacterClassID)) == 0);
                             stage++;
                             break;
                         }
@@ -14648,7 +14648,7 @@ namespace AngbandOS
                             stage++;
                             break;
                         }
-                        switch (Player.ProfessionIndex)
+                        switch (Player.CharacterClassID)
                         {
                             case CharacterClass.Cultist:
                             case CharacterClass.Fanatic:
@@ -14782,7 +14782,7 @@ namespace AngbandOS
                         {
                             autoChose[stage] = true;
                             Player.Realm2 = _prevRealm2;
-                            if (Player.ProfessionIndex == CharacterClass.Priest)
+                            if (Player.CharacterClassID == CharacterClass.Priest)
                             {
                                 switch (Player.Realm2)
                                 {
@@ -14825,7 +14825,7 @@ namespace AngbandOS
                             break;
                         }
                         Player.Realm2 = Realm.None;
-                        switch (Player.ProfessionIndex)
+                        switch (Player.CharacterClassID)
                         {
                             case CharacterClass.ChosenOne:
                             case CharacterClass.Channeler:
@@ -14849,7 +14849,7 @@ namespace AngbandOS
                             case CharacterClass.Priest:
                             case CharacterClass.Mage:
                                 _menuLength = 0;
-                                int realmFilter = _realmChoices[Player.ProfessionIndex];
+                                int realmFilter = _realmChoices[Player.CharacterClassID];
                                 if ((realmFilter & RealmChoice.Life) != 0 && Player.Realm1 != Realm.Life)
                                 {
                                     realmChoice[_menuLength] = Realm.Life;
@@ -14951,7 +14951,7 @@ namespace AngbandOS
                         if (stage > BirthStage.RealmSelection2)
                         {
                             Player.Realm2 = realmChoice[menu[BirthStage.RealmSelection2]];
-                            if (Player.ProfessionIndex == CharacterClass.Priest)
+                            if (Player.CharacterClassID == CharacterClass.Priest)
                             {
                                 switch (Player.Realm2)
                                 {
@@ -15163,7 +15163,7 @@ namespace AngbandOS
                 Player.InvenCarry(item, false);
                 item = new Item(this);
             }
-            if (Player.Race.OutfitsWithScrollsOfLight || Player.ProfessionIndex == CharacterClass.ChosenOne)
+            if (Player.Race.OutfitsWithScrollsOfLight || Player.CharacterClassID == CharacterClass.ChosenOne)
             {
                 item.AssignItemType(SingletonRepository.ItemCategories.Get<ScrollLight>());
                 item.Count = Program.Rng.RandomBetween(3, 7);
@@ -15284,7 +15284,7 @@ namespace AngbandOS
                 SingletonRepository.ItemCategories.Get<SoftArmorSoftLeatherArmour>()
             };
 
-            ItemClass[] startingItems = _playerInit[Player.ProfessionIndex];
+            ItemClass[] startingItems = _playerInit[Player.CharacterClassID];
             for (int i = 0; i < startingItems.Length; i++)
             {
                 ItemClass itemClass = startingItems[i];
@@ -15292,7 +15292,7 @@ namespace AngbandOS
                 itemClass = Player.Race.OutfitItem(this, itemClass);
                 item = new Item(this);
                 item.AssignItemType(itemClass);
-                if (itemClass.CategoryEnum == ItemTypeEnum.Sword && Player.ProfessionIndex == CharacterClass.Rogue && Player.Realm1 == Realm.Death)
+                if (itemClass.CategoryEnum == ItemTypeEnum.Sword && Player.CharacterClassID == CharacterClass.Rogue && Player.Realm1 == Realm.Death)
                 {
                     item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfPoisoning;
                 }
@@ -19229,7 +19229,7 @@ namespace AngbandOS
 
         public bool MartialArtistEmptyHands()
         {
-            if (Player.ProfessionIndex != CharacterClass.Monk && Player.ProfessionIndex != CharacterClass.Mystic)
+            if (Player.CharacterClassID != CharacterClass.Monk && Player.CharacterClassID != CharacterClass.Mystic)
             {
                 return false;
             }
@@ -19239,7 +19239,7 @@ namespace AngbandOS
         public bool MartialArtistHeavyArmour()
         {
             int martialArtistArmWgt = 0;
-            if (Player.ProfessionIndex != CharacterClass.Monk && Player.ProfessionIndex != CharacterClass.Mystic)
+            if (Player.CharacterClassID != CharacterClass.Monk && Player.CharacterClassID != CharacterClass.Mystic)
             {
                 return false;
             }

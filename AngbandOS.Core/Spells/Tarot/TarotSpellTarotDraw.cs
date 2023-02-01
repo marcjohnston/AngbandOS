@@ -15,7 +15,7 @@ namespace AngbandOS.Spells.Tarot
         {
             bool noneCame = false;
             int die = Program.Rng.DieRoll(120);
-            if (saveGame.Player.ProfessionIndex == CharacterClass.Rogue || saveGame.Player.ProfessionIndex == CharacterClass.HighMage)
+            if (saveGame.Player.CharacterClassID == CharacterClass.Rogue || saveGame.Player.CharacterClassID == CharacterClass.HighMage)
             {
                 die = Program.Rng.DieRoll(110) + (saveGame.Player.Level / 5);
             }

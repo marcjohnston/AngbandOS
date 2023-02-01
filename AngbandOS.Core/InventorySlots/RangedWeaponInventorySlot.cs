@@ -14,7 +14,7 @@ namespace AngbandOS.Core.InventorySlots
         private RangedWeaponInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override string Label(int index) => "b";
         public override int[] InventorySlots => new int[] { InventorySlot.RangedWeapon };
-        public override bool IsMelee => true;
+        public override bool IsRangedWeapon => true;
         public override string WieldPhrase => "You are shooting with";
         public override int SortOrder => 2;
         public override string TakeOffMessage => "You were holding";

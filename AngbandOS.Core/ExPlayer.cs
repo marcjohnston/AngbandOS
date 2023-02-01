@@ -69,7 +69,7 @@ namespace AngbandOS
             GenderIndex = player.GenderIndex;
             Race = player.Race;
             RaceAtBirth = player.RaceAtBirth;
-            ProfessionIndex = player.ProfessionIndex;
+            ProfessionIndex = player.CharacterClassID;
             Realm1 = player.Realm1;
             Realm2 = player.Realm2;
             Name = player.Name;

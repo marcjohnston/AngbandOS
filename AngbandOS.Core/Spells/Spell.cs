@@ -52,20 +52,20 @@ namespace AngbandOS.Spells
                 chance += 5 * (ManaCost - player.Mana);
             }
             int minfail = player.AbilityScores[player.Spellcasting.SpellStat].SpellMinFailChance;
-            if (player.ProfessionIndex != CharacterClass.Priest && player.ProfessionIndex != CharacterClass.Druid &&
-                player.ProfessionIndex != CharacterClass.Mage && player.ProfessionIndex != CharacterClass.HighMage &&
-                player.ProfessionIndex != CharacterClass.Cultist)
+            if (player.CharacterClassID != CharacterClass.Priest && player.CharacterClassID != CharacterClass.Druid &&
+                player.CharacterClassID != CharacterClass.Mage && player.CharacterClassID != CharacterClass.HighMage &&
+                player.CharacterClassID != CharacterClass.Cultist)
             {
                 if (minfail < 5)
                 {
                     minfail = 5;
                 }
             }
-            if ((player.ProfessionIndex == CharacterClass.Priest || player.ProfessionIndex == CharacterClass.Druid) && player.HasUnpriestlyWeapon)
+            if ((player.CharacterClassID == CharacterClass.Priest || player.CharacterClassID == CharacterClass.Druid) && player.HasUnpriestlyWeapon)
             {
                 chance += 25;
             }
-            if (player.ProfessionIndex == CharacterClass.Cultist && player.HasUnpriestlyWeapon)
+            if (player.CharacterClassID == CharacterClass.Cultist && player.HasUnpriestlyWeapon)
             {
                 chance += 25;
             }

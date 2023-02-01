@@ -14,7 +14,7 @@ namespace AngbandOS.Spells.Tarot
         public override void Cast(SaveGame saveGame)
         {
             int beam;
-            switch (saveGame.Player.ProfessionIndex)
+            switch (saveGame.Player.CharacterClassID)
             {
                 case CharacterClass.Mage:
                     beam = saveGame.Player.Level;

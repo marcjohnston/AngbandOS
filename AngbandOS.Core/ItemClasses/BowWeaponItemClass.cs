@@ -3,7 +3,7 @@
 namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class BowWeaponItemClass : WeaponItemClass
+    internal abstract class BowWeaponItemClass : WeaponItemClass // TODO: Should be renamed to RangedWeaponItemClass
     {
         public BowWeaponItemClass(SaveGame saveGame) : base(saveGame) { }
         public override int WieldSlot => InventorySlot.RangedWeapon;
