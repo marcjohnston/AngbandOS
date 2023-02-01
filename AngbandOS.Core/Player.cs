@@ -147,12 +147,12 @@ namespace AngbandOS
             }
         }
         public int OldSpareSpellSlots;
-        public Profession Profession = new Profession();
+        public Profession Profession = null; // TODO: This is a duplicate for BaseCharacterClass.
 
         /// <summary>
-        /// Represents the character class of the player.
+        /// Represents the character class of the player.  Will be null prior to the character class birth selection.
         /// </summary>
-        public BaseCharacterClass BaseCharacterClass;
+        public BaseCharacterClass? BaseCharacterClass = null;
 
         /// <summary>
         /// Returns the current race of the character.  Will be null before the player is birthed.
