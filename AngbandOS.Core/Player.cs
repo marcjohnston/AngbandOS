@@ -1,5 +1,3 @@
-using AngbandOS.Core.TimedActions;
-
 namespace AngbandOS
 {
     [Serializable]
@@ -150,7 +148,12 @@ namespace AngbandOS
         }
         public int OldSpareSpellSlots;
         public Profession Profession = new Profession();
+
+        /// <summary>
+        /// Represents the ID of the character class.  Deprecated.  Use BaseCharacterClass/CharacterClass.
+        /// </summary>
         public int CharacterClassID;
+        public BaseCharacterClass BaseCharacterClass;
 
         /// <summary>
         /// Returns the current race of the character.  Will be null before the player is birthed.

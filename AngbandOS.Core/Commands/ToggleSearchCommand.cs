@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualBasic;
-
-namespace AngbandOS.Commands
+﻿namespace AngbandOS.Commands
 {
     /// <summary>
     /// Toggle whether we're automatically searching while moving

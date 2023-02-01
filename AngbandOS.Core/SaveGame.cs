@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core.InventorySlots;
-using AngbandOS.Core.TimedActions;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace AngbandOS
@@ -13582,7 +13580,12 @@ namespace AngbandOS
 
         private readonly Gender[] _sexInfo = { new Gender("Female", "Queen"), new Gender("Male", "King"), new Gender("Other", "Monarch") };
         private int _menuLength;
-        private int _prevClass;
+
+        /// <summary>
+        /// Represents the previous character class.
+        /// </summary>
+        private BaseCharacterClass _prevCharacterClass;
+
         private int _prevGeneration;
         private string _prevName;
 
@@ -13865,7 +13868,7 @@ namespace AngbandOS
             Screen.Print(Colour.Blue, "Class       :", 5, 1);
             if (stage == 0)
             {
-                Player.Profession = Profession.ClassInfo[_prevClass];
+                Player.Profession = Profession.ClassInfo[_prevCharacterClass.ID];
                 str = Player.Profession.Title;
             }
             else if (stage < 2)
@@ -14350,7 +14353,7 @@ namespace AngbandOS
             {
                 _prevSex = Constants.SexFemale;
                 _prevRace = SingletonRepository.Races.Get<HumanRace>();
-                _prevClass = CharacterClass.Warrior;
+                _prevCharacterClass = SingletonRepository.CharacterClasses.Get<WarriorCharacterClass>();
                 _prevRealm1 = Realm.None;
                 _prevRealm2 = Realm.None;
                 _prevName = "Xena";
@@ -14360,7 +14363,7 @@ namespace AngbandOS
             {
                 _prevSex = ex.GenderIndex;
                 _prevRace = ex.RaceAtBirth;
-                _prevClass = ex.ProfessionIndex;
+                _prevCharacterClass = SingletonRepository.CharacterClasses.Get(ex.CharacterClassName);
                 _prevRealm1 = ex.Realm1;
                 _prevRealm2 = ex.Realm2;
                 _prevName = ex.Name;
@@ -14475,7 +14478,8 @@ namespace AngbandOS
                         if (menu[0] == Constants.GenerateReplay)
                         {
                             autoChose[stage] = true;
-                            Player.CharacterClassID = _prevClass;
+                            Player.CharacterClassID = _prevCharacterClass.ID;
+                            Player.BaseCharacterClass = _prevCharacterClass;
                             Player.Profession = Profession.ClassInfo[Player.CharacterClassID];
                             stage++;
                             break;
@@ -14484,6 +14488,7 @@ namespace AngbandOS
                         {
                             autoChose[stage] = true;
                             Player.CharacterClassID = Program.Rng.RandomLessThan(Constants.MaxClass);
+                            Player.BaseCharacterClass = SingletonRepository.CharacterClasses.WeightedRandom().Choose();
                             Player.Profession = Profession.ClassInfo[Player.CharacterClassID];
                             stage++;
                             break;
@@ -14543,6 +14548,7 @@ namespace AngbandOS
                         if (stage > BirthStage.ClassSelection)
                         {
                             Player.CharacterClassID = _classMenu[menu[BirthStage.ClassSelection]].Item;
+                            Player.BaseCharacterClass = SingletonRepository.CharacterClasses.Single(_characterClass => _characterClass.ID == _classMenu[menu[BirthStage.ClassSelection]].Item);
                             Player.Profession = Profession.ClassInfo[Player.CharacterClassID];
                         }
                         break;

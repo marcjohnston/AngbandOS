@@ -18,11 +18,16 @@ namespace AngbandOS.Core
 
         public int Count => list.Count;
 
-        public WeightedRandom<T> WeightedRandom(Func<T, bool> predicate) => new WeightedRandom<T>(this, predicate);
+        public WeightedRandom<T> WeightedRandom(Func<T, bool>? predicate = null) => new WeightedRandom<T>(this, predicate);
 
         public U Get<U>() where U:T
         {
             return (U)dictionary[typeof(U).Name];
+        }
+
+        public T Get(string typename)
+        {
+            return dictionary[typename];
         }
 
         public IEnumerator<T> GetEnumerator()

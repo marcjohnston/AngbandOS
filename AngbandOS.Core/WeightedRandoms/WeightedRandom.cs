@@ -6,11 +6,11 @@
 
         public WeightedRandom() { }
 
-        public WeightedRandom(IEnumerable<T> values, Func<T, bool> predicate)
+        public WeightedRandom(IEnumerable<T> values, Func<T, bool>? predicate)
         {
             foreach (T value in values)
             {
-                if (predicate(value))
+                if (predicate == null || predicate(value))
                 {
                     Add(1, value);
                 }

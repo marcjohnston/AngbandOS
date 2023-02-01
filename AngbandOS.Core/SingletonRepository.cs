@@ -17,6 +17,7 @@ namespace AngbandOS.Core
         public SingletonFactory<Race> Races;
         public SingletonFactory<BaseStoreCommand> StoreCommands;
         public SingletonFactory<TimedAction> TimedActions;
+        public SingletonFactory<BaseCharacterClass> CharacterClasses;
 
         public void Initialize(SaveGame saveGame)
         {
@@ -25,7 +26,8 @@ namespace AngbandOS.Core
             BaseFixedArtifacts = new SingletonFactory<BaseFixedArtifact>(saveGame);
             InventorySlots = new SingletonFactory<BaseInventorySlot>(saveGame);
             StoreCommands = new SingletonFactory<BaseStoreCommand>(saveGame);
-//            TimedActions = new SingletonFactory<TimedAction>(saveGame);
+            CharacterClasses = new SingletonFactory<BaseCharacterClass>(saveGame);
+            //            TimedActions = new SingletonFactory<TimedAction>(saveGame);
 
             Dictionary<FixedArtifactId, FixedArtifact> dictionary = new Dictionary<FixedArtifactId, FixedArtifact>();
             foreach (BaseFixedArtifact baseFixedArtifact in BaseFixedArtifacts)

@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace AngbandOS.Commands
+﻿namespace AngbandOS.Commands
 {
     /// <summary>
     /// Print the version number and build info of the game

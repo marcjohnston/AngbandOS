@@ -1,5 +1,3 @@
-using AngbandOS.Core.EventArgs;
-
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]

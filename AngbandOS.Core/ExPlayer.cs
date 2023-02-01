@@ -36,9 +36,14 @@ namespace AngbandOS
         public readonly string Name;
 
         /// <summary>
-        /// The profession of the character
+        /// The profession of the character.  Deprecated.  Use CharacterClass.
         /// </summary>
-        public readonly int ProfessionIndex;
+        public readonly int CharacterClassID;
+
+        /// <summary>
+        /// Represents the name of the previous character class.
+        /// </summary>
+        public readonly string CharacterClassName;
 
         /// <summary>
         /// The race of the character
@@ -69,7 +74,7 @@ namespace AngbandOS
             GenderIndex = player.GenderIndex;
             Race = player.Race;
             RaceAtBirth = player.RaceAtBirth;
-            ProfessionIndex = player.CharacterClassID;
+            CharacterClassName = player.BaseCharacterClass.GetType().Name;
             Realm1 = player.Realm1;
             Realm2 = player.Realm2;
             Name = player.Name;

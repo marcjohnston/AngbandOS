@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-namespace AngbandOS.Core.ConsoleElements
+﻿namespace AngbandOS.Core.ConsoleElements
 {
     internal class ConsoleTable : ConsoleElement
     {

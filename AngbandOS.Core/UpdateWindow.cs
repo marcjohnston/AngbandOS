@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-namespace AngbandOS.Core
+﻿namespace AngbandOS.Core
 {
     /// <summary>
     /// Represents a window into the screen that has been modified.  This window limits how much of the double buffer screen needs to be checked.
