@@ -38,41 +38,5 @@ namespace AngbandOS.Spells
                 SpellOrder[i] = 99;
             }
         }
-
-        public static string RealmName(Realm realm)
-        {
-            switch (realm)
-            {
-                case Realm.None:
-                    return "None";
-
-                case Realm.Life:
-                    return "Life";
-
-                case Realm.Sorcery:
-                    return "Sorcery";
-
-                case Realm.Nature:
-                    return "Nature";
-
-                case Realm.Chaos:
-                    return "Chaos";
-
-                case Realm.Death:
-                    return "Death";
-
-                case Realm.Tarot:
-                    return "Tarot";
-
-                case Realm.Folk:
-                    return "Folk";
-
-                case Realm.Corporeal:
-                    return "Corporeal";
-
-                default:
-                    return "Unknown Realm";
-            }
-        }
     }
 }
