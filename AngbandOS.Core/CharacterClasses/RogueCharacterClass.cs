@@ -58,5 +58,7 @@ namespace AngbandOS.Core.CharacterClasses
         public override int MaximumWeight => 30;
         public override IArtifactBias? ArtifactBias => new RogueArtifactBias();
         public override int FromScrollWarriorArtifactBiasPercentageChance => 25;
+        public override bool SenseInventoryTest(int level) => (0 != Program.Rng.RandomLessThan(20000 / ((level * level) + 40)));
+        public override bool DetailedSenseInventory => true;
     }
 }

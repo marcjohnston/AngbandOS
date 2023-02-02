@@ -75,5 +75,7 @@
         public virtual int AttackSpeedMultiplier => 3;
         public virtual IArtifactBias? ArtifactBias => null;
         public virtual int FromScrollWarriorArtifactBiasPercentageChance => 0;
+        public virtual bool SenseInventoryTest(int level) => false;
+        public virtual bool DetailedSenseInventory => false;
     }
 }

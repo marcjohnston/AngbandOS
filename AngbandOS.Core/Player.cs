@@ -1171,105 +1171,15 @@ namespace AngbandOS
         public void SenseInventory()
         {
             int playerLevel = Level;
-            bool detailed = false;
             if (TimedConfusion.TurnsRemaining != 0)
             {
                 return;
             }
-            switch (BaseCharacterClass.ID)
+            if (!BaseCharacterClass.SenseInventoryTest(Level))
             {
-                case CharacterClass.Warrior:
-                case CharacterClass.ChosenOne:
-                case CharacterClass.Channeler:
-                    {
-                        if (0 != Program.Rng.RandomLessThan(9000 / ((playerLevel * playerLevel) + 40)))
-                        {
-                            return;
-                        }
-                        detailed = true;
-                        break;
-                    }
-                case CharacterClass.Mage:
-                case CharacterClass.HighMage:
-                case CharacterClass.Cultist:
-                    {
-                        if (0 != Program.Rng.RandomLessThan(240000 / (playerLevel + 5)))
-                        {
-                            return;
-                        }
-                        break;
-                    }
-                case CharacterClass.Priest:
-                case CharacterClass.Druid:
-                    {
-                        if (0 != Program.Rng.RandomLessThan(10000 / ((playerLevel * playerLevel) + 40)))
-                        {
-                            return;
-                        }
-                        break;
-                    }
-                case CharacterClass.Rogue:
-                    {
-                        if (0 != Program.Rng.RandomLessThan(20000 / ((playerLevel * playerLevel) + 40)))
-                        {
-                            return;
-                        }
-                        detailed = true;
-                        break;
-                    }
-                case CharacterClass.Ranger:
-                    {
-                        if (0 != Program.Rng.RandomLessThan(95000 / ((playerLevel * playerLevel) + 40)))
-                        {
-                            return;
-                        }
-                        detailed = true;
-                        break;
-                    }
-                case CharacterClass.Paladin:
-                    {
-                        if (0 != Program.Rng.RandomLessThan(77777 / ((playerLevel * playerLevel) + 40)))
-                        {
-                            return;
-                        }
-                        detailed = true;
-                        break;
-                    }
-                case CharacterClass.WarriorMage:
-                    {
-                        if (0 != Program.Rng.RandomLessThan(75000 / ((playerLevel * playerLevel) + 40)))
-                        {
-                            return;
-                        }
-                        break;
-                    }
-                case CharacterClass.Mindcrafter:
-                case CharacterClass.Mystic:
-                    {
-                        if (0 != Program.Rng.RandomLessThan(55000 / ((playerLevel * playerLevel) + 40)))
-                        {
-                            return;
-                        }
-                        break;
-                    }
-                case CharacterClass.Fanatic:
-                    {
-                        if (0 != Program.Rng.RandomLessThan(80000 / ((playerLevel * playerLevel) + 40)))
-                        {
-                            return;
-                        }
-                        detailed = true;
-                        break;
-                    }
-                case CharacterClass.Monk:
-                    {
-                        if (0 != Program.Rng.RandomLessThan(20000 / ((playerLevel * playerLevel) + 40)))
-                        {
-                            return;
-                        }
-                        break;
-                    }
+                return;
             }
+            bool detailed = BaseCharacterClass.DetailedSenseInventory;
 
             // Enumerate each of the inventory slots.
             foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots)

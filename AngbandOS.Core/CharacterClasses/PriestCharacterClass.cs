@@ -42,5 +42,6 @@ namespace AngbandOS.Core.CharacterClasses
         public override CastingType SpellCastingType => CastingType.Divine;
         public override int SpellStat => Ability.Wisdom;
         public override IArtifactBias? ArtifactBias => new PriestlyArtifactBias();
+        public override bool SenseInventoryTest(int level) => (0 != Program.Rng.RandomLessThan(10000 / ((level * level) + 40)));
     }
 }

@@ -40,5 +40,6 @@ namespace AngbandOS.Core.CharacterClasses
         public override int SpellStat => Ability.Intelligence;
         public override IArtifactBias? ArtifactBias => new MageArtifactBias();
         public override int FromScrollWarriorArtifactBiasPercentageChance => 40;
+        public override bool SenseInventoryTest(int level) => (0 != Program.Rng.RandomLessThan(75000 / ((level * level) + 40)));
     }
 }

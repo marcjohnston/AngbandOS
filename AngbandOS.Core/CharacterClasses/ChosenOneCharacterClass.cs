@@ -34,5 +34,7 @@ namespace AngbandOS.Core.CharacterClasses
             "to list here) as they increase in level."
         };
         public override IArtifactBias? ArtifactBias => new WarriorArtifactBias();
+        public override bool SenseInventoryTest(int level) => (0 != Program.Rng.RandomLessThan(9000 / ((level * level) + 40)));
+        public override bool DetailedSenseInventory => true;
     }
 }
