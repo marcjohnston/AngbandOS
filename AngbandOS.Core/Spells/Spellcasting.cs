@@ -14,7 +14,6 @@ namespace AngbandOS.Spells
         public readonly int SpellFirst;
         public readonly int[] SpellOrder = new int[64];
         public readonly SpellList[] Spells = new SpellList[2];
-        public readonly int SpellStat;
 
         public readonly TalentList Talents;
 
