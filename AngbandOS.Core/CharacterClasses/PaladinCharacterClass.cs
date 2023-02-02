@@ -41,5 +41,6 @@ namespace AngbandOS.Core.CharacterClasses
             "(at lvl 40)."
         };
         public override int SpellWeight => 400;
+        public override CastingType SpellCastingType => CastingType.Divine;
     }
 }

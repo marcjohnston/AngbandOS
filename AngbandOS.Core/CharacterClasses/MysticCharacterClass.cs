@@ -36,5 +36,6 @@ namespace AngbandOS.Core.CharacterClasses
             "and while not wielding a weapon they do increased damage."
         };
         public override int SpellWeight => 300;
+        public override CastingType SpellCastingType => CastingType.Mentalism;
     }
 }

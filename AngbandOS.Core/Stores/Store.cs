@@ -1409,7 +1409,7 @@ namespace AngbandOS
 
         private void DoCmdStudy()
         {
-            string spellType = SaveGame.Player.Spellcasting.Type == CastingType.Arcane ? "spell" : "prayer";
+            string spellType = SaveGame.Player.BaseCharacterClass.SpellCastingType == CastingType.Arcane ? "spell" : "prayer";
             // If we don't have a realm then we can't do anything
             if (SaveGame.Player.Realm1 == 0)
             {
@@ -1452,7 +1452,7 @@ namespace AngbandOS
             SaveGame.HandleStuff();
             int spellIndex;
             // Arcane casters can choose their spell
-            if (SaveGame.Player.Spellcasting.Type != CastingType.Divine)
+            if (SaveGame.Player.BaseCharacterClass.SpellCastingType != CastingType.Divine)
             {
                 if (!SaveGame.GetSpell(out spellIndex, "study", itemSubCategory, false, useSetTwo, SaveGame.Player) && spellIndex == -1)
                 {

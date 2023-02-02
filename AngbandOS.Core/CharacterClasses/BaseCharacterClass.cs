@@ -65,5 +65,7 @@
         /// </summary>
         /// <value>The spell weight.</value>
         public virtual int SpellWeight => 0;
+
+        public virtual CastingType SpellCastingType => CastingType.None;
     }
 }

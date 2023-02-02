@@ -35,5 +35,6 @@ namespace AngbandOS.Core.CharacterClasses
             "wear heavy armour without it disrupting their casting."
         };
         public override int SpellWeight => 350;
+        public override CastingType SpellCastingType => CastingType.Divine;
     }
 }

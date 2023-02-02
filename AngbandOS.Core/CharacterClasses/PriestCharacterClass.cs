@@ -39,5 +39,6 @@ namespace AngbandOS.Core.CharacterClasses
             "weapons unless they are blessed, but can use any armour."
         };
         public override int SpellWeight => 350;
+        public override CastingType SpellCastingType => CastingType.Divine;
     }
 }

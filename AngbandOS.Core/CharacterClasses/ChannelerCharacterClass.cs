@@ -35,5 +35,6 @@ namespace AngbandOS.Core.CharacterClasses
             "without depleting them."
         };
         public override int SpellWeight => 400;
+        public override CastingType SpellCastingType => CastingType.Channeling;
     }
 }

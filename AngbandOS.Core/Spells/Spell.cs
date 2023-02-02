@@ -40,7 +40,7 @@ namespace AngbandOS.Spells
 
         public int FailureChance(Player player) // TODO: Player to SaveGame
         {
-            if (player.Spellcasting.Type == CastingType.None)
+            if (player.BaseCharacterClass.SpellCastingType == CastingType.None)
             {
                 return 100;
             }

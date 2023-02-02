@@ -6774,8 +6774,8 @@ namespace AngbandOS
             else
             {
                 // We were too close to a wall, so earthquake instead
-                string cast = Player.Spellcasting.Type == CastingType.Divine ? "recite" : "cast";
-                string spell = Player.Spellcasting.Type == CastingType.Divine ? "prayer" : "spell";
+                string cast = Player.BaseCharacterClass.SpellCastingType == CastingType.Divine ? "recite" : "cast";
+                string spell = Player.BaseCharacterClass.SpellCastingType == CastingType.Divine ? "prayer" : "spell";
                 MsgPrint($"You {cast} the {spell} too close to a wall!");
                 MsgPrint("There is a loud explosion!");
                 DestroyArea(Player.MapY, Player.MapX, 20 + Player.Level);
@@ -8789,7 +8789,7 @@ namespace AngbandOS
             int num = 0;
             int[] spells = new int[64];
             Realm useRealm = realm2 ? player.Realm2 : player.Realm1;
-            string p = player.Spellcasting.Type == CastingType.Divine ? "prayer" : "spell";
+            string p = player.BaseCharacterClass.SpellCastingType == CastingType.Divine ? "prayer" : "spell";
             for (spell = 0; spell < 32; spell++)
             {
                 if ((Constants.BookSpellFlags[sval] & (1u << spell)) != 0)
@@ -9284,7 +9284,7 @@ namespace AngbandOS
             }
             // Channelers can spend mana instead of a charge
             bool channeled = false;
-            if (Player.Spellcasting.Type == CastingType.Channeling)
+            if (Player.BaseCharacterClass.SpellCastingType == CastingType.Channeling)
             {
                 channeled = DoCmdChannel(item);
                 if (channeled)
@@ -9485,7 +9485,7 @@ namespace AngbandOS
             Player.SetFood(Player.Food + item.TypeSpecificValue);
             bool channeled = false;
             // If we're a channeler, we might be able to spend mana instead of using it up
-            if (Player.Spellcasting.Type == CastingType.Channeling)
+            if (Player.BaseCharacterClass.SpellCastingType == CastingType.Channeling)
             {
                 channeled = DoCmdChannel(item);
             }
@@ -10365,7 +10365,7 @@ namespace AngbandOS
             }
             // Channelers can use mana instead of a charge
             bool channeled = false;
-            if (Player.Spellcasting.Type == CastingType.Channeling)
+            if (Player.BaseCharacterClass.SpellCastingType == CastingType.Channeling)
             {
                 channeled = DoCmdChannel(item);
             }
@@ -10546,7 +10546,7 @@ namespace AngbandOS
             }
             bool channeled = false;
             // Channelers can use mana instead of the scroll being used up
-            if (Player.Spellcasting.Type == CastingType.Channeling)
+            if (Player.BaseCharacterClass.SpellCastingType == CastingType.Channeling)
             {
                 channeled = DoCmdChannel(item);
             }
@@ -11466,7 +11466,7 @@ namespace AngbandOS
                 {
                     whichMagicType = "psychic talents";
                 }
-                else if (Player.Spellcasting.Type == CastingType.Divine)
+                else if (Player.BaseCharacterClass.SpellCastingType == CastingType.Divine)
                 {
                     whichMagicType = "prayer";
                 }
@@ -11475,7 +11475,7 @@ namespace AngbandOS
             }
             else
             {
-                if (Player.Spellcasting.Type == CastingType.Mentalism)
+                if (Player.BaseCharacterClass.SpellCastingType == CastingType.Mentalism)
                 {
                     DoCmdMentalism();
                 }
@@ -11488,7 +11488,7 @@ namespace AngbandOS
 
         private void DoCmdCast()
         {
-            string prayer = Player.Spellcasting.Type == CastingType.Divine ? "prayer" : "spell";
+            string prayer = Player.BaseCharacterClass.SpellCastingType == CastingType.Divine ? "prayer" : "spell";
             if (Player.Realm1 == 0)
             {
                 MsgPrint("You cannot cast spells!");
@@ -11516,7 +11516,7 @@ namespace AngbandOS
             int sval = oPtr.ItemSubCategory;
             bool useSetTwo = oPtr.Category == Player.Realm2.ToSpellBookItemCategory();
             HandleStuff();
-            if (!GetSpell(out int spell, Player.Spellcasting.Type == CastingType.Divine ? "recite" : "cast", sval, true, useSetTwo, Player))
+            if (!GetSpell(out int spell, Player.BaseCharacterClass.SpellCastingType == CastingType.Divine ? "recite" : "cast", sval, true, useSetTwo, Player))
             {
                 if (spell == -2)
                 {
@@ -11527,7 +11527,7 @@ namespace AngbandOS
             Spell sPtr = useSetTwo ? Player.Spellcasting.Spells[1][spell] : Player.Spellcasting.Spells[0][spell];
             if (sPtr.ManaCost > Player.Mana)
             {
-                string cast = Player.Spellcasting.Type == CastingType.Divine ? "recite" : "cast";
+                string cast = Player.BaseCharacterClass.SpellCastingType == CastingType.Divine ? "recite" : "cast";
                 MsgPrint($"You do not have enough mana to {cast} this {prayer}.");
                 if (!GetCheck("Attempt it anyway? "))
                 {
@@ -11946,7 +11946,7 @@ namespace AngbandOS
             }
             // If we're a channeler then we should be using mana instead of charges
             bool channeled = false;
-            if (Player.Spellcasting.Type == CastingType.Channeling)
+            if (Player.BaseCharacterClass.SpellCastingType == CastingType.Channeling)
             {
                 channeled = DoCmdChannel(item);
             }

@@ -34,5 +34,6 @@ namespace AngbandOS.Core.CharacterClasses
             "much armour before it starts disrupting their casting."
         };
         public override int SpellWeight => 300;
+        public override CastingType SpellCastingType => CastingType.Arcane;
     }
 }

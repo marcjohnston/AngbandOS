@@ -35,5 +35,6 @@ namespace AngbandOS.Core.CharacterClasses
             "choice from Death, Corporeal, Tarot, Chaos, and Folk."
         };
         public override int SpellWeight => 400;
+        public override CastingType SpellCastingType => CastingType.Divine;
     }
 }

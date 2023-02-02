@@ -36,5 +36,6 @@ namespace AngbandOS.Core.CharacterClasses
             "flexibility by increasing in level only slowly."
         };
         public override int SpellWeight => 350;
+        public override CastingType SpellCastingType => CastingType.Arcane;
     }
 }

@@ -35,5 +35,6 @@ namespace AngbandOS.Core.CharacterClasses
             "(at lvl 30) and fear (at lvl 40)."
         };
         public override int SpellWeight => 400;
+        public override CastingType SpellCastingType => CastingType.Divine;
     }
 }

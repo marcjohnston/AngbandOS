@@ -53,5 +53,6 @@ namespace AngbandOS.Core.CharacterClasses
             "from the Tarot, Sorcery, Death, or Folk realms."
        };
         public override int SpellWeight => 350;
+        public override CastingType SpellCastingType => CastingType.Arcane;
     }
 }

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FlaggedActions
         public RedrawManaFlaggedAction(SaveGame saveGame) : base(saveGame) { }
         protected override void Execute()
         {
-            if (SaveGame.Player.Spellcasting.Type == CastingType.None)
+            if (SaveGame.Player.BaseCharacterClass.SpellCastingType == CastingType.None)
             {
                 return;
             }

@@ -9,7 +9,7 @@ namespace AngbandOS.Core.ItemClasses
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.LifeBook;
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
-            string name = item.SaveGame.Player.Spellcasting.Type == CastingType.Divine ? $"{Pluralize("Book", item.Count)} of Life Magic" : $"Life {Pluralize("Spellbook", item.Count)}";
+            string name = item.SaveGame.Player.BaseCharacterClass.SpellCastingType == CastingType.Divine ? $"{Pluralize("Book", item.Count)} of Life Magic" : $"Life {Pluralize("Spellbook", item.Count)}";
             name = $"{name} {item.BaseItemCategory.FriendlyName}";
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
         }

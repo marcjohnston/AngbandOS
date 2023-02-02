@@ -36,5 +36,6 @@ namespace AngbandOS.Core.CharacterClasses
             "punishments as they increase in level."
         };
         public override int SpellWeight => 300;
+        public override CastingType SpellCastingType => CastingType.Arcane;
     }
 }

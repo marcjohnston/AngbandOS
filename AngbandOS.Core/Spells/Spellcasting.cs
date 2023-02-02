@@ -17,45 +17,12 @@ namespace AngbandOS.Spells
         public readonly int SpellStat;
 
         public readonly TalentList Talents;
-        public readonly CastingType Type;
 
         public Spellcasting(Player player)
         {
             Spells[0] = new SpellList(player.Realm1, player.BaseCharacterClass.ID);
             Spells[1] = new SpellList(player.Realm2, player.BaseCharacterClass.ID);
             Talents = new TalentList(player.BaseCharacterClass.ID);
-            switch (player.BaseCharacterClass.ID)
-            {
-                case CharacterClass.Mage:
-                case CharacterClass.HighMage:
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Rogue:
-                case CharacterClass.Cultist:
-                    Type = CastingType.Arcane;
-                    break;
-
-                case CharacterClass.Priest:
-                case CharacterClass.Paladin:
-                case CharacterClass.Ranger:
-                case CharacterClass.Druid:
-                case CharacterClass.Fanatic:
-                case CharacterClass.Monk:
-                    Type = CastingType.Divine;
-                    break;
-
-                case CharacterClass.Mindcrafter:
-                case CharacterClass.Mystic:
-                    Type = CastingType.Mentalism;
-                    break;
-
-                case CharacterClass.Channeler:
-                    Type = CastingType.Channeling;
-                    break;
-
-                default:
-                    Type = CastingType.None;
-                    break;
-            }
             switch (player.BaseCharacterClass.ID)
             {
                 case CharacterClass.Mage:

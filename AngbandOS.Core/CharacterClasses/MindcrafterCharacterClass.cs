@@ -36,5 +36,6 @@ namespace AngbandOS.Core.CharacterClasses
             "(at lvl 30), and gain telepathy (at lvl 40)."
         };
         public override int SpellWeight => 300;
+        public override CastingType SpellCastingType => CastingType.Mentalism;
     }
 }

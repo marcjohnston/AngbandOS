@@ -69,5 +69,6 @@ namespace AngbandOS.Core.CharacterClasses
             "Wearing too much armour disrupts their casting."
         };
         public override int SpellWeight => 300;
+        public override CastingType SpellCastingType => CastingType.Arcane;
     }
 }

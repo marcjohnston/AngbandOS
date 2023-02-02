@@ -15,7 +15,7 @@ namespace AngbandOS.Core.FlaggedActions
         protected override void Execute()
         {
             int levels;
-            switch (SaveGame.Player.Spellcasting.Type)
+            switch (SaveGame.Player.BaseCharacterClass.SpellCastingType)
             {
                 case CastingType.None:
                     return;
@@ -54,7 +54,7 @@ namespace AngbandOS.Core.FlaggedActions
                 msp = inventorySlot.CalcMana(SaveGame, msp);
             }
 
-            if (SaveGame.Player.Spellcasting.Type == CastingType.Arcane)
+            if (SaveGame.Player.BaseCharacterClass.SpellCastingType == CastingType.Arcane)
             {
                 int curWgt = 0;
                 foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots)

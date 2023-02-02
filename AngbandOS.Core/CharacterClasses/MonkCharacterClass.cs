@@ -54,5 +54,6 @@ namespace AngbandOS.Core.CharacterClasses
             "WIS based casters using Chaos, Tarot or Corporeal magic."
         };
         public override int SpellWeight => 300;
+        public override CastingType SpellCastingType => CastingType.Divine;
     }
 }

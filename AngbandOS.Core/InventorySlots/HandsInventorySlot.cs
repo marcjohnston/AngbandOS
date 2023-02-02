@@ -24,7 +24,7 @@ namespace AngbandOS.Core.InventorySlots
 
         public override int CalcMana(SaveGame saveGame, int msp)
         {
-            if (SaveGame.Player.Spellcasting.Type == CastingType.Arcane)
+            if (SaveGame.Player.BaseCharacterClass.SpellCastingType == CastingType.Arcane)
             {
                 foreach (int index in InventorySlots)
                 {
