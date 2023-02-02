@@ -22,7 +22,7 @@ namespace AngbandOS.Core.FlaggedActions
 
                 case CastingType.Arcane:
                 case CastingType.Divine:
-                    levels = SaveGame.Player.Level - SaveGame.Player.Spellcasting.SpellFirst + 1;
+                    levels = SaveGame.Player.Level - SaveGame.SpellFirst + 1;
                     break;
 
                 case CastingType.Mentalism:

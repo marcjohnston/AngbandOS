@@ -178,7 +178,6 @@ namespace AngbandOS
         public int SocialClass;
         public int SpareSpellSlots;
         public int Speed;
-        public Spellcasting Spellcasting;
         public TimedAction TimedAcidResistance;
         public TimedAction TimedBleeding;
         public TimedAction TimedBlessing;
@@ -1018,7 +1017,7 @@ namespace AngbandOS
             for (i = 0; i < num; i++)
             {
                 int spell = spells[i];
-                Spell sPtr = Spellcasting.Spells[set][spell];
+                Spell sPtr = SaveGame.Spells[set][spell];
                 SaveGame.Screen.PrintLine($"{i.IndexToLetter()}) {sPtr.SummaryLine(this)}", y + i + 1, x);
             }
             SaveGame.Screen.PrintLine("", y + i + 1, x);
@@ -1456,7 +1455,7 @@ namespace AngbandOS
         public bool SpellOkay(int spell, bool known, bool realm2)
         {
             int set = realm2 ? 1 : 0;
-            Spell sPtr = Spellcasting.Spells[set][spell % 32];
+            Spell sPtr = SaveGame.Spells[set][spell % 32];
             if (sPtr.Level > Level)
             {
                 return false;

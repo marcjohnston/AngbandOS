@@ -25,7 +25,7 @@
             {
                 return;
             }
-            int levels = SaveGame.Player.Level - SaveGame.Player.Spellcasting.SpellFirst + 1; // TODO: This should be moved to an action so that CharacterXtra isn't needed
+            int levels = SaveGame.Player.Level - SaveGame.SpellFirst + 1; // TODO: This should be moved to an action so that CharacterXtra isn't needed
             if (levels < 0)
             {
                 levels = 0;
@@ -34,7 +34,7 @@
             int numKnown = 0;
             for (j = 0; j < 64; j++)
             {
-                if (SaveGame.Player.Spellcasting.Spells[j / 32][j % 32].Learned)
+                if (SaveGame.Spells[j / 32][j % 32].Learned)
                 {
                     numKnown++;
                 }
@@ -46,12 +46,12 @@
                 {
                     break;
                 }
-                j = SaveGame.Player.Spellcasting.SpellOrder[i];
+                j = SaveGame.SpellOrder[i];
                 if (j >= 99)
                 {
                     continue;
                 }
-                sPtr = SaveGame.Player.Spellcasting.Spells[j / 32][j % 32];
+                sPtr = SaveGame.Spells[j / 32][j % 32];
                 if (sPtr.Level <= SaveGame.Player.Level)
                 {
                     continue;
@@ -76,12 +76,12 @@
                 {
                     break;
                 }
-                j = SaveGame.Player.Spellcasting.SpellOrder[i];
+                j = SaveGame.SpellOrder[i];
                 if (j >= 99)
                 {
                     continue;
                 }
-                sPtr = SaveGame.Player.Spellcasting.Spells[j / 32][j % 32];
+                sPtr = SaveGame.Spells[j / 32][j % 32];
                 if (!sPtr.Learned)
                 {
                     continue;
@@ -95,7 +95,7 @@
             int forgottenTotal = 0;
             for (int l = 0; l < 64; l++)
             {
-                if (SaveGame.Player.Spellcasting.Spells[l / 32][l % 32].Forgotten)
+                if (SaveGame.Spells[l / 32][l % 32].Forgotten)
                 {
                     forgottenTotal++;
                 }
@@ -110,12 +110,12 @@
                 {
                     break;
                 }
-                j = SaveGame.Player.Spellcasting.SpellOrder[i];
+                j = SaveGame.SpellOrder[i];
                 if (j >= 99)
                 {
                     break;
                 }
-                sPtr = SaveGame.Player.Spellcasting.Spells[j / 32][j % 32];
+                sPtr = SaveGame.Spells[j / 32][j % 32];
                 if (sPtr.Level > SaveGame.Player.Level)
                 {
                     continue;
@@ -137,7 +137,7 @@
             int limit = SaveGame.Player.Realm2 == Realm.None ? 32 : 64;
             for (j = 0; j < limit; j++)
             {
-                sPtr = SaveGame.Player.Spellcasting.Spells[j / 32][j % 32];
+                sPtr = SaveGame.Spells[j / 32][j % 32];
                 if (sPtr.Level > SaveGame.Player.Level)
                 {
                     continue;

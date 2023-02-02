@@ -1491,18 +1491,18 @@ namespace AngbandOS
             // Learning a spell takes a turn (although that's not very relevant)
             SaveGame.EnergyUse = 100;
             // Mark the spell as learned
-            Spell spell = useSetTwo ? SaveGame.Player.Spellcasting.Spells[1][spellIndex] : SaveGame.Player.Spellcasting.Spells[0][spellIndex];
+            Spell spell = useSetTwo ? SaveGame.Spells[1][spellIndex] : SaveGame.Spells[0][spellIndex];
             spell.Learned = true;
             int i;
             // Mark the spell as the last spell learned, in case we need to start forgetting them
             for (i = 0; i < 64; i++)
             {
-                if (SaveGame.Player.Spellcasting.SpellOrder[i] == 99)
+                if (SaveGame.SpellOrder[i] == 99)
                 {
                     break;
                 }
             }
-            SaveGame.Player.Spellcasting.SpellOrder[i] = spellIndex;
+            SaveGame.SpellOrder[i] = spellIndex;
             // Let the player know they've learned a spell
             SaveGame.MsgPrint($"You have learned the {spellType} of {spell.Name}.");
             SaveGame.PlaySound(SoundEffect.Study);

@@ -122,6 +122,11 @@ namespace AngbandOS
         private int _msgPrintP;
         public bool MsgFlag;
 
+        public int SpellFirst;
+        public readonly int[] SpellOrder = new int[64];
+        public readonly SpellList[] Spells = new SpellList[2];
+        public TalentList Talents;
+
         [NonSerialized]
         private ICorePersistentStorage PersistentStorage;
 
@@ -8848,7 +8853,7 @@ namespace AngbandOS
                 }
                 if (ask)
                 {
-                    Spell sPtr = player.Spellcasting.Spells[realm2 ? 1 : 0][spell % 32];
+                    Spell sPtr = Spells[realm2 ? 1 : 0][spell % 32];
                     string tmpVal = $"{prompt} {sPtr.Name} ({sPtr.ManaCost} mana, {sPtr.FailureChance(player)}% fail)? ";
                     if (!GetCheck(tmpVal))
                     {
@@ -11524,7 +11529,7 @@ namespace AngbandOS
                 }
                 return;
             }
-            Spell sPtr = useSetTwo ? Player.Spellcasting.Spells[1][spell] : Player.Spellcasting.Spells[0][spell];
+            Spell sPtr = useSetTwo ? Spells[1][spell] : Spells[0][spell];
             if (sPtr.ManaCost > Player.Mana)
             {
                 string cast = Player.BaseCharacterClass.SpellCastingType == CastingType.Divine ? "recite" : "cast";
@@ -11600,11 +11605,11 @@ namespace AngbandOS
                 MsgPrint("You are too confused!");
                 return;
             }
-            if (!GetMentalismTalent(out int n, Player))
+            if (!GetMentalismTalent(out int n))
             {
                 return;
             }
-            Talents.Talent talent = Player.Spellcasting.Talents[n];
+            Talents.Talent talent = Talents[n];
             if (talent.ManaCost > Player.Mana)
             {
                 MsgPrint("You do not have enough mana to use this talent.");
@@ -11673,18 +11678,18 @@ namespace AngbandOS
             RedrawManaFlaggedAction.Set();
         }
 
-        private bool GetMentalismTalent(out int sn, Player player)
+        private bool GetMentalismTalent(out int sn)
         {
             int i;
             int num = 0;
             int y = 1;
             int x = 20;
-            int plev = player.Level;
+            int plev = Player.Level;
             string p = "talent";
             sn = -1;
             bool flag = false;
             ScreenBuffer? savedScreen = null;
-            TalentList talents = player.Spellcasting.Talents;
+            TalentList talents = Talents;
             for (i = 0; i < talents.Count; i++)
             {
                 if (talents[i].Level <= plev)
@@ -11710,7 +11715,7 @@ namespace AngbandOS
                             {
                                 break;
                             }
-                            string psiDesc = $"  {i.IndexToLetter()}) {talent.SummaryLine(player)}";
+                            string psiDesc = $"  {i.IndexToLetter()}) {talent.SummaryLine(Player)}";
                             Screen.PrintLine(psiDesc, y + i + 1, x);
                         }
                         Screen.PrintLine("", y + i + 1, x);
@@ -14952,7 +14957,26 @@ namespace AngbandOS
                         GetAhw();
                         GetHistory(Player);
                         GetMoney();
-                        Player.Spellcasting = new Spellcasting(Player);
+
+                        Spells[0] = new SpellList(Player.Realm1, Player.BaseCharacterClass.ID);
+                        Spells[1] = new SpellList(Player.Realm2, Player.BaseCharacterClass.ID);
+                        Talents = new TalentList(Player.BaseCharacterClass.ID);
+                        SpellFirst = 100;
+                        foreach (SpellList bookset in Spells)
+                        {
+                            foreach (Spell spell in bookset)
+                            {
+                                if (spell.Level < SpellFirst)
+                                {
+                                    SpellFirst = spell.Level;
+                                }
+                            }
+                        }
+                        for (int ii = 0; ii < 64; ii++)
+                        {
+                            SpellOrder[ii] = 99;
+                        }
+
                         Player.GooPatron = PatronList[Program.Rng.DieRoll(PatronList.Length) - 1];
                         UpdateHealthFlaggedAction.Set();
                         UpdateBonusesFlaggedAction.Set();
