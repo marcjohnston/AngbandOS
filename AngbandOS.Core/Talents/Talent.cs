@@ -24,12 +24,12 @@
         {
             int chance = BaseFailure;
             chance -= 3 * (player.Level - Level);
-            chance -= 3 * (player.AbilityScores[player.Spellcasting.SpellStat].SpellFailureReduction - 1);
+            chance -= 3 * (player.AbilityScores[player.BaseCharacterClass.SpellStat].SpellFailureReduction - 1);
             if (ManaCost > player.Mana)
             {
                 chance += 5 * (ManaCost - player.Mana);
             }
-            int minfail = player.AbilityScores[player.Spellcasting.SpellStat].SpellMinFailChance;
+            int minfail = player.AbilityScores[player.BaseCharacterClass.SpellStat].SpellMinFailChance;
             if (chance < minfail)
             {
                 chance = minfail;

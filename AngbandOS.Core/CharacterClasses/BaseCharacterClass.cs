@@ -67,5 +67,7 @@
         public virtual int SpellWeight => 0;
 
         public virtual CastingType SpellCastingType => CastingType.None;
+
+        public virtual int SpellStat => Ability.Strength;
     }
 }

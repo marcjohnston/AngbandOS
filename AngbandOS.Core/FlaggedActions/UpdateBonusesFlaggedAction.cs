@@ -674,7 +674,7 @@ namespace AngbandOS.Core.FlaggedActions
                     }
                     else if (i == Ability.Intelligence)
                     {
-                        if (SaveGame.Player.Spellcasting.SpellStat == Ability.Intelligence)
+                        if (SaveGame.Player.BaseCharacterClass.SpellStat == Ability.Intelligence)
                         {
                             SaveGame.UpdateManaFlaggedAction.Set();
                             SaveGame.UpdateSpellsFlaggedAction.Set();
@@ -682,7 +682,7 @@ namespace AngbandOS.Core.FlaggedActions
                     }
                     else if (i == Ability.Wisdom)
                     {
-                        if (SaveGame.Player.Spellcasting.SpellStat == Ability.Wisdom)
+                        if (SaveGame.Player.BaseCharacterClass.SpellStat == Ability.Wisdom)
                         {
                             SaveGame.UpdateManaFlaggedAction.Set();
                             SaveGame.UpdateSpellsFlaggedAction.Set();
@@ -690,7 +690,7 @@ namespace AngbandOS.Core.FlaggedActions
                     }
                     else if (i == Ability.Charisma)
                     {
-                        if (SaveGame.Player.Spellcasting.SpellStat == Ability.Charisma)
+                        if (SaveGame.Player.BaseCharacterClass.SpellStat == Ability.Charisma)
                         {
                             SaveGame.UpdateManaFlaggedAction.Set();
                             SaveGame.UpdateSpellsFlaggedAction.Set();

@@ -37,7 +37,7 @@ namespace AngbandOS.Core.FlaggedActions
             {
                 levels = 0;
             }
-            int msp = SaveGame.Player.AbilityScores[SaveGame.Player.Spellcasting.SpellStat].ManaBonus * levels / 2;
+            int msp = SaveGame.Player.AbilityScores[SaveGame.Player.BaseCharacterClass.SpellStat].ManaBonus * levels / 2;
             if (msp != 0)
             {
                 msp++;

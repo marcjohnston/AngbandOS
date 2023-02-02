@@ -46,12 +46,12 @@ namespace AngbandOS.Spells
             }
             int chance = BaseFailure;
             chance -= 3 * (player.Level - Level);
-            chance -= 3 * (player.AbilityScores[player.Spellcasting.SpellStat].SpellFailureReduction - 1);
+            chance -= 3 * (player.AbilityScores[player.BaseCharacterClass.SpellStat].SpellFailureReduction - 1);
             if (ManaCost > player.Mana)
             {
                 chance += 5 * (ManaCost - player.Mana);
             }
-            int minfail = player.AbilityScores[player.Spellcasting.SpellStat].SpellMinFailChance;
+            int minfail = player.AbilityScores[player.BaseCharacterClass.SpellStat].SpellMinFailChance;
             if (player.BaseCharacterClass.ID != CharacterClass.Priest && player.BaseCharacterClass.ID != CharacterClass.Druid &&
                 player.BaseCharacterClass.ID != CharacterClass.Mage && player.BaseCharacterClass.ID != CharacterClass.HighMage &&
                 player.BaseCharacterClass.ID != CharacterClass.Cultist)

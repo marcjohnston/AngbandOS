@@ -23,35 +23,6 @@ namespace AngbandOS.Spells
             Spells[0] = new SpellList(player.Realm1, player.BaseCharacterClass.ID);
             Spells[1] = new SpellList(player.Realm2, player.BaseCharacterClass.ID);
             Talents = new TalentList(player.BaseCharacterClass.ID);
-            switch (player.BaseCharacterClass.ID)
-            {
-                case CharacterClass.Mage:
-                case CharacterClass.HighMage:
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Rogue:
-                case CharacterClass.Ranger:
-                case CharacterClass.Cultist:
-                case CharacterClass.Fanatic:
-                    SpellStat = Ability.Intelligence;
-                    break;
-
-                case CharacterClass.Priest:
-                case CharacterClass.Paladin:
-                case CharacterClass.Druid:
-                case CharacterClass.Monk:
-                case CharacterClass.Mindcrafter:
-                case CharacterClass.Mystic:
-                    SpellStat = Ability.Wisdom;
-                    break;
-
-                case CharacterClass.Channeler:
-                    SpellStat = Ability.Charisma;
-                    break;
-
-                default:
-                    SpellStat = Ability.Strength;
-                    break;
-            }
             SpellFirst = 100;
             foreach (SpellList bookset in Spells)
             {

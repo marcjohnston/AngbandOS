@@ -30,7 +30,7 @@
             {
                 levels = 0;
             }
-            int numAllowed = SaveGame.Player.AbilityScores[SaveGame.Player.Spellcasting.SpellStat].HalfSpellsPerLevel * levels / 2;
+            int numAllowed = SaveGame.Player.AbilityScores[SaveGame.Player.BaseCharacterClass.SpellStat].HalfSpellsPerLevel * levels / 2;
             int numKnown = 0;
             for (j = 0; j < 64; j++)
             {

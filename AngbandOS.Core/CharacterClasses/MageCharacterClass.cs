@@ -35,5 +35,6 @@ namespace AngbandOS.Core.CharacterClasses
         };
         public override int SpellWeight => 300;
         public override CastingType SpellCastingType => CastingType.Arcane;
+        public override int SpellStat => Ability.Intelligence;
     }
 }
