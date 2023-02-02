@@ -1,7 +1,7 @@
 # AngbandOS
-This is the Cthangband roguelike game. It's a 'classic' roguelike in that it uses ASCII characters rather than graphics.
-![Cthangband](https://user-images.githubusercontent.com/99888526/158896436-0872cd7f-840c-41a7-87af-c0c875a72540.png)
+This is the AngbandOS roguelike game. It's a 'classic' roguelike in that it uses ASCII characters rather than graphics.
+![image](https://user-images.githubusercontent.com/8724403/216423168-49db9fb6-da17-459d-bb6b-97da14e89654.png)
 
-It works on any computer running Windows 7, 8, or 10 (although if you are running on Windows 7 or 8 you may need to download the .NET Framework 4.5.2 first).
+Developed using ASP.NET 6, it is compatible with Windows, Linux and MAC.  AngbandOS is a heavily refactored forked of Cthangband and broken down into a "core" library that provides all game functionality and separate UI's.  The primary UI is an HTTP interface which is currently available to the public via http://angbandos.skarstech.com.  The original Cthangband fork UI (WPF) is also being maintained.
 
-Cthangband started off as a variant of the Angband game, although since it is over two decades since they forked (the first Cthangband release was in 1998) the two have drifted apart over the years. While they still have a lot in common in broad gameplay concepts, much of the detail is different between the two (and, in fact, the two are no longer even written in the same programming language).
+The goal for AngbandOS is to make the game extensible.  The pie-in-the-sky goal will be to have an HTTP UI designer that allows players/users to create their own flavor with no development experience/skills needed.
