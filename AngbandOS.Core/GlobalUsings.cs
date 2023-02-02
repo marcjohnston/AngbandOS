@@ -20,6 +20,7 @@ global using AngbandOS.Core.ItemFilters;
 global using AngbandOS.Core.MonsterRaces;
 global using AngbandOS.Core.MonsterSelectors;
 global using AngbandOS.Core.Races;
+global using AngbandOS.Core.Realms;
 global using AngbandOS.Core.RoomTypes;
 global using AngbandOS.Core.SpellResistantDetections;
 global using AngbandOS.Core.TimedActions;
