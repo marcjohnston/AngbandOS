@@ -28,5 +28,10 @@ namespace AngbandOS.Core.CharacterClasses
         public override int HitDieBonus => 0;
         public override int ExperienceFactor => 30;
         public override int PrimeStat => Ability.Intelligence;
+        public override string[] Info => new string[] {
+            "Flexible INT based spell casters who can cast magic from",
+            "any two realms of their choice. However, they can't wear",
+            "much armour before it starts disrupting their casting."
+        };
     }
 }

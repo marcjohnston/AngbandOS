@@ -28,5 +28,12 @@ namespace AngbandOS.Core.CharacterClasses
         public override int HitDieBonus => 6;
         public override int ExperienceFactor => 40;
         public override int PrimeStat => Ability.Wisdom;
+        public override string[] Info => new string[] {
+            "Mystics master both martial and psionic arts, which they",
+            "power using WIS. Can resist confusion (at lvl 10), fear",
+            "(lvl 25), paralysis (lvl 30). Telepathy (lvl 40). While",
+            "wearing only light armour they can move faster and dodge,",
+            "and while not wielding a weapon they do increased damage."
+        };
     }
 }

@@ -28,5 +28,12 @@ namespace AngbandOS.Core.CharacterClasses
         public override int HitDieBonus => 4;
         public override int ExperienceFactor => 50;
         public override int PrimeStat => Ability.Intelligence;
+        public override string[] Info => new string[] {
+            "A blend of both warrior and mage, getting the abilities of",
+            "both but not being the best at either. They use INT based",
+            "spell casting, getting access to the Folk realm plus a",
+            "second realm of their choice. They pay for their extreme",
+            "flexibility by increasing in level only slowly."
+        };
     }
 }

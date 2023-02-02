@@ -32,5 +32,11 @@ namespace AngbandOS.Core.CharacterClasses
             return realm == Realm.Death ? "Exorcist" : "Priest";
         }
         public override int PrimeStat => Ability.Wisdom;
+        public override string[] Info => new string[] {
+            "Devout followers of the Great Ones, Priests use WIS based",
+            "spell casting. They may choose either Life or Death magic,",
+            "and another realm of their choice. Priests can't use edged",
+            "weapons unless they are blessed, but can use any armour."
+        };
     }
 }

@@ -28,5 +28,10 @@ namespace AngbandOS.Core.CharacterClasses
         public override int HitDieBonus => 4;
         public override int ExperienceFactor => 20;
         public override int PrimeStat => Ability.Strength;
+        public override string[] Info => new string[] {
+            "Warriors of fate, who have no spell casting abilities but",
+            "gain a large number of passive magical abilities (too long",
+            "to list here) as they increase in level."
+        };
     }
 }

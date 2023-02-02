@@ -28,5 +28,11 @@ namespace AngbandOS.Core.CharacterClasses
         public override int HitDieBonus => 4;
         public override int ExperienceFactor => 30;
         public override int PrimeStat => Ability.Intelligence;
+        public override string[] Info => new string[] {
+            "Masters of ranged combat, especiallly using bows. Rangers",
+            "supplement their shooting and stealth with INT based spell",
+            "casting from the Nature realm plus another realm of their",
+            "choice from Death, Corporeal, Tarot, Chaos, and Folk."
+        };
     }
 }

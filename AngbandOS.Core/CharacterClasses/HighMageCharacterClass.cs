@@ -61,5 +61,12 @@ namespace AngbandOS.Core.CharacterClasses
             }
         }
         public override int PrimeStat => Ability.Intelligence;
+        public override string[] Info => new string[] {
+            "INT based spell casters who specialise in a single realm",
+            "of magic. They may choose any realm, and are better at",
+            "casting spells from that realm than a normal mage. High",
+            "mages also get more mana than other spell casters do.",
+            "Wearing too much armour disrupts their casting."
+        };
     }
 }

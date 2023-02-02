@@ -33,5 +33,12 @@ namespace AngbandOS.Core.CharacterClasses
             return realm == Realm.Death ? "Death Knight" : "Paladin";
         }
         public override int PrimeStat => Ability.Wisdom;
+        public override string[] Info => new string[] {
+            "Holy warriors who use WIS based spell casting to supplement",
+            "their fighting skills. Paladins can specialise in either",
+            "Life or Death magic, but their spell casting is weak in",
+            "comparison to a full priest. Paladins learn to resist fear",
+            "(at lvl 40)."
+        };
     }
 }

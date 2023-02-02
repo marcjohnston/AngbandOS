@@ -28,5 +28,12 @@ namespace AngbandOS.Core.CharacterClasses
         public override int HitDieBonus => 0;
         public override int ExperienceFactor => 30;
         public override int PrimeStat => Ability.Intelligence;
+        public override string[] Info => new string[] {
+            "INT based spell casters, who use Chaos and another realm",
+            "of their choice. Can't wield weapons except for powerful",
+            "chaos blades. Learn to resist chaos (at lvl 20). Have a",
+            "cult patron who will randomly give them rewards or",
+            "punishments as they increase in level."
+        };
     }
 }

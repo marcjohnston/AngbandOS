@@ -26,5 +26,11 @@
         public override int HitDieBonus => 9;
         public override int ExperienceFactor => 0;
         public override int PrimeStat => Ability.Strength;
+        public override string[] Info => new string[] {
+            "Straightforward, no-nonsense fighters. They are the best",
+            "characters at melee combat, and require the least amount",
+            "of experience to increase in level. They can learn to",
+            "resist fear (at lvl 30). The ideal class for novices."
+        };
     }
 }

@@ -28,5 +28,11 @@ namespace AngbandOS.Core.CharacterClasses
         public override int HitDieBonus => 3;
         public override int ExperienceFactor => 20;
         public override int PrimeStat => Ability.Wisdom;
+        public override string[] Info => new string[] {
+            "Nature priests who use WIS based spell casting and who are",
+            "limited to the Nature realm. As priests, they can't use",
+            "edged weapons unless those weapons are holy; but they can",
+            "wear heavy armour without it disrupting their casting."
+        };
     }
 }

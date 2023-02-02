@@ -28,5 +28,11 @@ namespace AngbandOS.Core.CharacterClasses
         public override int HitDieBonus => 1;
         public override int ExperienceFactor => 30;
         public override int PrimeStat => Ability.Charisma;
+        public override string[] Info => new string[] {
+            "Similar to a spell caster, but rather than casting spells",
+            "from a book, they can use their CHA to channel mana into",
+            "most types of item, powering the effects of the items",
+            "without depleting them."
+        };
     }
 }

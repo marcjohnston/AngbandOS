@@ -28,5 +28,12 @@ namespace AngbandOS.Core.CharacterClasses
         public override int HitDieBonus => 2;
         public override int ExperienceFactor => 25;
         public override int PrimeStat => Ability.Wisdom;
+        public override string[] Info => new string[] {
+            "Disciples of the psionic arts, Mindcrafters learn a range",
+            "of mental abilities; which they power using WIS. As well",
+            "as their powers, they learn to resist fear (at lvl 10),",
+            "prevent wis drain (at lvl 20), resist confusion",
+            "(at lvl 30), and gain telepathy (at lvl 40)."
+        };
     }
 }

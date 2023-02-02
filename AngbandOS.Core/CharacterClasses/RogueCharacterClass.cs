@@ -45,5 +45,12 @@ namespace AngbandOS.Core.CharacterClasses
             }
         }
         public override int PrimeStat => Ability.Dexterity;
+        public override string[] Info => new string[] {
+            "Stealth based characters who are adept at picking locks,",
+            "searching, and disarming traps. Rogues can use stealth to",
+            "their advantage in order to backstab sleeping or fleeing",
+            "foes. They also dabble in INT based magic, learning spells",
+            "from the Tarot, Sorcery, Death, or Folk realms."
+       };
     }
 }

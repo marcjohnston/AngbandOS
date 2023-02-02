@@ -28,5 +28,11 @@ namespace AngbandOS.Core.CharacterClasses
         public override int HitDieBonus => 6;
         public override int ExperienceFactor => 35;
         public override int PrimeStat => Ability.Intelligence;
+        public override string[] Info => new string[] {
+            "Warriors who dabble in INT based Chaos magic. Have a cult",
+            "patron who will randomly give them rewards or punishments",
+            "as they increase in level. Learn to resist chaos",
+            "(at lvl 30) and fear (at lvl 40)."
+        };
     }
 }
