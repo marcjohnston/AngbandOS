@@ -13755,11 +13755,11 @@ namespace AngbandOS
                 {
                     if (_prevRealm2 != Realm.None)
                     {
-                        buf = Spellcasting.RealmName(_prevRealm1) + "/" + Spellcasting.RealmName(_prevRealm2);
+                        buf = RealmName(_prevRealm1) + "/" + RealmName(_prevRealm2);
                     }
                     else
                     {
-                        buf = Spellcasting.RealmName(_prevRealm1);
+                        buf = RealmName(_prevRealm1);
                     }
                 }
                 if (_prevRealm1 != Realm.None || _prevRealm2 != Realm.None)
@@ -13784,11 +13784,11 @@ namespace AngbandOS
                 {
                     if (Player.Realm2 != Realm.None)
                     {
-                        buf = Spellcasting.RealmName(Player.Realm1) + "/" + Spellcasting.RealmName(Player.Realm2);
+                        buf = RealmName(Player.Realm1) + "/" + RealmName(Player.Realm2);
                     }
                     else
                     {
-                        buf = Spellcasting.RealmName(Player.Realm1);
+                        buf = RealmName(Player.Realm1);
                     }
                 }
                 if (Player.Realm1 != Realm.None || Player.Realm2 != Realm.None)
@@ -14594,7 +14594,7 @@ namespace AngbandOS
                         autoChose[stage] = false;
                         for (i = 0; i < _menuLength; i++)
                         {
-                            _menuItem[i] = Spellcasting.RealmName(realmChoice[i]);
+                            _menuItem[i] = RealmName(realmChoice[i]);
                         }
                         DisplayPartialCharacter(stage);
                         if (menu[stage] >= _menuLength)
@@ -14771,7 +14771,7 @@ namespace AngbandOS
                         autoChose[stage] = false;
                         for (i = 0; i < _menuLength; i++)
                         {
-                            _menuItem[i] = Spellcasting.RealmName(realmChoice[i]);
+                            _menuItem[i] = RealmName(realmChoice[i]);
                         }
                         DisplayPartialCharacter(stage);
                         if (menu[stage] >= _menuLength)
@@ -19134,6 +19134,42 @@ namespace AngbandOS
                 }
             }
             return martialArtistArmWgt > 100 + (Player.Level * 4);
+        }
+
+        public string RealmName(Realm realm)
+        {
+            switch (realm)
+            {
+                case Realm.None:
+                    return "None";
+
+                case Realm.Life:
+                    return "Life";
+
+                case Realm.Sorcery:
+                    return "Sorcery";
+
+                case Realm.Nature:
+                    return "Nature";
+
+                case Realm.Chaos:
+                    return "Chaos";
+
+                case Realm.Death:
+                    return "Death";
+
+                case Realm.Tarot:
+                    return "Tarot";
+
+                case Realm.Folk:
+                    return "Folk";
+
+                case Realm.Corporeal:
+                    return "Corporeal";
+
+                default:
+                    return "Unknown Realm";
+            }
         }
     }
 }

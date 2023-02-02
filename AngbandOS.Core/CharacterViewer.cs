@@ -524,11 +524,11 @@ namespace AngbandOS
             {
                 if (SaveGame.Player.Realm2 != 0)
                 {
-                    realmBuff = Spellcasting.RealmName(SaveGame.Player.Realm1) + "/" + Spellcasting.RealmName(SaveGame.Player.Realm2);
+                    realmBuff = SaveGame.RealmName(SaveGame.Player.Realm1) + "/" + SaveGame.RealmName(SaveGame.Player.Realm2);
                 }
                 else
                 {
-                    realmBuff = Spellcasting.RealmName(SaveGame.Player.Realm1);
+                    realmBuff = SaveGame.RealmName(SaveGame.Player.Realm1);
                 }
             }
             if (SaveGame.Player.Realm1 != 0)
