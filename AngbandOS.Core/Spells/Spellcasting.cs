@@ -16,10 +16,6 @@ namespace AngbandOS.Spells
         public readonly SpellList[] Spells = new SpellList[2];
         public readonly int SpellStat;
 
-        /// <summary>
-        /// Returns the maximum amount of armour weight that the player carry before it affects spellcasting.
-        /// </summary>
-        public readonly int SpellWeight;
         public readonly TalentList Talents;
         public readonly CastingType Type;
 
@@ -87,35 +83,6 @@ namespace AngbandOS.Spells
 
                 default:
                     SpellStat = Ability.Strength;
-                    break;
-            }
-            switch (player.BaseCharacterClass.ID)
-            {
-                case CharacterClass.Mage:
-                case CharacterClass.Monk:
-                case CharacterClass.Mindcrafter:
-                case CharacterClass.Mystic:
-                case CharacterClass.HighMage:
-                case CharacterClass.Cultist:
-                    SpellWeight = 300;
-                    break;
-
-                case CharacterClass.Priest:
-                case CharacterClass.Rogue:
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Druid:
-                    SpellWeight = 350;
-                    break;
-
-                case CharacterClass.Ranger:
-                case CharacterClass.Paladin:
-                case CharacterClass.Fanatic:
-                case CharacterClass.Channeler:
-                    SpellWeight = 400;
-                    break;
-
-                default:
-                    SpellWeight = 0;
                     break;
             }
             SpellFirst = 100;

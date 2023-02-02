@@ -34,5 +34,6 @@ namespace AngbandOS.Core.CharacterClasses
             "as they increase in level. Learn to resist chaos",
             "(at lvl 30) and fear (at lvl 40)."
         };
+        public override int SpellWeight => 400;
     }
 }

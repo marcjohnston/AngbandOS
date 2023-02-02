@@ -34,5 +34,6 @@ namespace AngbandOS.Core.CharacterClasses
             "edged weapons unless those weapons are holy; but they can",
             "wear heavy armour without it disrupting their casting."
         };
+        public override int SpellWeight => 350;
     }
 }

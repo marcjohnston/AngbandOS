@@ -35,5 +35,6 @@ namespace AngbandOS.Core.CharacterClasses
             "cult patron who will randomly give them rewards or",
             "punishments as they increase in level."
         };
+        public override int SpellWeight => 300;
     }
 }

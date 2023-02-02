@@ -35,5 +35,6 @@ namespace AngbandOS.Core.CharacterClasses
             "second realm of their choice. They pay for their extreme",
             "flexibility by increasing in level only slowly."
         };
+        public override int SpellWeight => 350;
     }
 }

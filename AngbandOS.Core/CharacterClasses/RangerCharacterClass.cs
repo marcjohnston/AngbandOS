@@ -34,5 +34,6 @@ namespace AngbandOS.Core.CharacterClasses
             "casting from the Nature realm plus another realm of their",
             "choice from Death, Corporeal, Tarot, Chaos, and Folk."
         };
+        public override int SpellWeight => 400;
     }
 }

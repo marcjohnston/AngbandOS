@@ -34,5 +34,6 @@ namespace AngbandOS.Core.CharacterClasses
             "most types of item, powering the effects of the items",
             "without depleting them."
         };
+        public override int SpellWeight => 400;
     }
 }

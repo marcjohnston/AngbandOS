@@ -40,5 +40,6 @@ namespace AngbandOS.Core.CharacterClasses
             "comparison to a full priest. Paladins learn to resist fear",
             "(at lvl 40)."
         };
+        public override int SpellWeight => 400;
     }
 }

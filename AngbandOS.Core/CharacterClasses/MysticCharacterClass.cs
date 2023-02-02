@@ -35,5 +35,6 @@ namespace AngbandOS.Core.CharacterClasses
             "wearing only light armour they can move faster and dodge,",
             "and while not wielding a weapon they do increased damage."
         };
+        public override int SpellWeight => 300;
     }
 }

@@ -71,7 +71,7 @@ namespace AngbandOS.Core.FlaggedActions
                         }
                     }
                 }
-                int maxWgt = SaveGame.Player.Spellcasting.SpellWeight;
+                int maxWgt = SaveGame.Player.BaseCharacterClass.SpellWeight;
                 if ((curWgt - maxWgt) / 10 > 0)
                 {
                     msp -= (curWgt - maxWgt) / 10;

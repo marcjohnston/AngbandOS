@@ -68,5 +68,6 @@ namespace AngbandOS.Core.CharacterClasses
             "mages also get more mana than other spell casters do.",
             "Wearing too much armour disrupts their casting."
         };
+        public override int SpellWeight => 300;
     }
 }

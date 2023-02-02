@@ -33,5 +33,6 @@ namespace AngbandOS.Core.CharacterClasses
             "any two realms of their choice. However, they can't wear",
             "much armour before it starts disrupting their casting."
         };
+        public override int SpellWeight => 300;
     }
 }

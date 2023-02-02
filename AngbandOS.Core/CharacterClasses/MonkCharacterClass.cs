@@ -53,5 +53,6 @@ namespace AngbandOS.Core.CharacterClasses
             "they have extra attacks and do increased damage. They are",
             "WIS based casters using Chaos, Tarot or Corporeal magic."
         };
+        public override int SpellWeight => 300;
     }
 }

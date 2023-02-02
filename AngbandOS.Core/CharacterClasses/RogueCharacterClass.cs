@@ -52,5 +52,6 @@ namespace AngbandOS.Core.CharacterClasses
             "foes. They also dabble in INT based magic, learning spells",
             "from the Tarot, Sorcery, Death, or Folk realms."
        };
+        public override int SpellWeight => 350;
     }
 }

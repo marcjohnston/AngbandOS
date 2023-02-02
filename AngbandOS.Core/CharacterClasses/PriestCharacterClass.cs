@@ -38,5 +38,6 @@ namespace AngbandOS.Core.CharacterClasses
             "and another realm of their choice. Priests can't use edged",
             "weapons unless they are blessed, but can use any armour."
         };
+        public override int SpellWeight => 350;
     }
 }

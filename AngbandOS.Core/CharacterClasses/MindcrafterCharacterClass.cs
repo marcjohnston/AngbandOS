@@ -35,5 +35,6 @@ namespace AngbandOS.Core.CharacterClasses
             "prevent wis drain (at lvl 20), resist confusion",
             "(at lvl 30), and gain telepathy (at lvl 40)."
         };
+        public override int SpellWeight => 300;
     }
 }
