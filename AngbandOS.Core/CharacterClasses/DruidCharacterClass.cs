@@ -37,5 +37,6 @@ namespace AngbandOS.Core.CharacterClasses
         public override int SpellWeight => 350;
         public override CastingType SpellCastingType => CastingType.Divine;
         public override int SpellStat => Ability.Wisdom;
+        public override IArtifactBias? ArtifactBias => new PriestlyArtifactBias();
     }
 }

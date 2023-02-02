@@ -43,5 +43,9 @@ namespace AngbandOS.Core.CharacterClasses
         public override int SpellWeight => 400;
         public override CastingType SpellCastingType => CastingType.Divine;
         public override int SpellStat => Ability.Wisdom;
+        public override int MaximumWeight => 30;
+        public override int AttackSpeedMultiplier => 4;
+        public override IArtifactBias? ArtifactBias => new PriestlyArtifactBias();
+        public override int FromScrollWarriorArtifactBiasPercentageChance => 40;
     }
 }

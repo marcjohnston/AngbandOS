@@ -36,5 +36,9 @@ namespace AngbandOS.Core.CharacterClasses
         public override int SpellWeight => 300;
         public override CastingType SpellCastingType => CastingType.Arcane;
         public override int SpellStat => Ability.Intelligence;
+        public override int MaximumMeleeAttacksPerRound(int level) => 4;
+        public override int MaximumWeight => 40;
+        public override int AttackSpeedMultiplier => 2;
+        public override IArtifactBias? ArtifactBias => new MageArtifactBias();
     }
 }

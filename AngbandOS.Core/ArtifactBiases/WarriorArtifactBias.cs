@@ -1,6 +1,6 @@
 ﻿namespace AngbandOS.ArtifactBiases
 {
-    internal class WarriorArtifactBias : ArtifactBias
+    internal class WarriorArtifactBias : ArtifactBias // TODO: These can/should be singletons
     {
         public override bool ApplyBonuses(Item item)
         {

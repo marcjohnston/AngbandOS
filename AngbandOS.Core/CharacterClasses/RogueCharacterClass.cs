@@ -55,5 +55,8 @@ namespace AngbandOS.Core.CharacterClasses
         public override int SpellWeight => 350;
         public override CastingType SpellCastingType => CastingType.Arcane;
         public override int SpellStat => Ability.Intelligence;
+        public override int MaximumWeight => 30;
+        public override IArtifactBias? ArtifactBias => new RogueArtifactBias();
+        public override int FromScrollWarriorArtifactBiasPercentageChance => 25;
     }
 }

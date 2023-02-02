@@ -32,5 +32,9 @@
             "of experience to increase in level. They can learn to",
             "resist fear (at lvl 30). The ideal class for novices."
         };
+        public override int MaximumMeleeAttacksPerRound(int level) => 6;
+        public override int MaximumWeight => 30;
+        public override int AttackSpeedMultiplier => 5;
+        public override IArtifactBias? ArtifactBias => new WarriorArtifactBias();
     }
 }

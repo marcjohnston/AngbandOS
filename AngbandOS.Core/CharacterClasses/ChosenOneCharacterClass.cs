@@ -33,5 +33,6 @@ namespace AngbandOS.Core.CharacterClasses
             "gain a large number of passive magical abilities (too long",
             "to list here) as they increase in level."
         };
+        public override IArtifactBias? ArtifactBias => new WarriorArtifactBias();
     }
 }

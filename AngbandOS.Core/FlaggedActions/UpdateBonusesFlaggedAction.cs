@@ -884,70 +884,9 @@ namespace AngbandOS.Core.FlaggedActions
                     }
                     if (oPtr.BaseItemCategory != null && !SaveGame.Player.HasHeavyWeapon)
                     {
-                        int num = 0, wgt = 0, mul = 0;
-                        switch (SaveGame.Player.BaseCharacterClass.ID)
-                        {
-                            case CharacterClass.Warrior:
-                                num = 6;
-                                wgt = 30;
-                                mul = 5;
-                                break;
-
-                            case CharacterClass.Mage:
-                            case CharacterClass.HighMage:
-                            case CharacterClass.Cultist:
-                            case CharacterClass.Channeler:
-                                num = 4;
-                                wgt = 40;
-                                mul = 2;
-                                break;
-
-                            case CharacterClass.Priest:
-                            case CharacterClass.Mindcrafter:
-                            case CharacterClass.Druid:
-                            case CharacterClass.ChosenOne:
-                                num = 5;
-                                wgt = 35;
-                                mul = 3;
-                                break;
-
-                            case CharacterClass.Rogue:
-                                num = 5;
-                                wgt = 30;
-                                mul = 3;
-                                break;
-
-                            case CharacterClass.Ranger:
-                                num = 5;
-                                wgt = 35;
-                                mul = 4;
-                                break;
-
-                            case CharacterClass.Paladin:
-                                num = 5;
-                                wgt = 30;
-                                mul = 4;
-                                break;
-
-                            case CharacterClass.WarriorMage:
-                                num = 5;
-                                wgt = 35;
-                                mul = 3;
-                                break;
-
-                            case CharacterClass.Fanatic:
-                                num = 5;
-                                wgt = 30;
-                                mul = 4;
-                                break;
-
-                            case CharacterClass.Monk:
-                            case CharacterClass.Mystic:
-                                num = SaveGame.Player.Level < 40 ? 3 : 4;
-                                wgt = 40;
-                                mul = 4;
-                                break;
-                        }
+                        int num = SaveGame.Player.BaseCharacterClass.MaximumMeleeAttacksPerRound(SaveGame.Player.Level);
+                        int wgt = SaveGame.Player.BaseCharacterClass.MaximumWeight;
+                        int mul = SaveGame.Player.BaseCharacterClass.AttackSpeedMultiplier;
                         int div = oPtr.Weight < wgt ? wgt : oPtr.Weight;
                         int strIndex = SaveGame.Player.AbilityScores[Ability.Strength].StrAttackSpeedComponent * mul / div;
                         if (strIndex > 11)

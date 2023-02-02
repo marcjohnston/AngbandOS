@@ -69,5 +69,11 @@
         public virtual CastingType SpellCastingType => CastingType.None;
 
         public virtual int SpellStat => Ability.Strength;
+
+        public virtual int MaximumMeleeAttacksPerRound(int level) => 5;
+        public virtual int MaximumWeight => 35;
+        public virtual int AttackSpeedMultiplier => 3;
+        public virtual IArtifactBias? ArtifactBias => null;
+        public virtual int FromScrollWarriorArtifactBiasPercentageChance => 0;
     }
 }

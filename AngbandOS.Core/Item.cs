@@ -2309,65 +2309,11 @@ namespace AngbandOS
             int powers = Program.Rng.DieRoll(5) + 1;
             bool aCursed = false;
             int warriorArtifactBias = 0;
-            IArtifactBias artifactBias = null;
+            IArtifactBias? artifactBias = null;
             if (fromScroll && Program.Rng.DieRoll(4) == 1)
             {
-                switch (SaveGame.Player.BaseCharacterClass.ID)
-                {
-                    case CharacterClass.Warrior:
-                    case CharacterClass.ChosenOne:
-                        artifactBias = new WarriorArtifactBias();
-                        break;
-
-                    case CharacterClass.Mage:
-                    case CharacterClass.HighMage:
-                    case CharacterClass.Cultist:
-                    case CharacterClass.Channeler:
-                        artifactBias = new MageArtifactBias();
-                        break;
-
-                    case CharacterClass.Priest:
-                    case CharacterClass.Druid:
-                        artifactBias = new PriestlyArtifactBias();
-                        break;
-
-                    case CharacterClass.Rogue:
-                        artifactBias = new RogueArtifactBias();
-                        warriorArtifactBias = 25;
-                        break;
-
-                    case CharacterClass.Ranger:
-                        artifactBias = new RangerArtifactBias();
-                        warriorArtifactBias = 30;
-                        break;
-
-                    case CharacterClass.Paladin:
-                        artifactBias = new PriestlyArtifactBias();
-                        warriorArtifactBias = 40;
-                        break;
-
-                    case CharacterClass.WarriorMage:
-                        artifactBias = new MageArtifactBias();
-                        warriorArtifactBias = 40;
-                        break;
-
-                    case CharacterClass.Fanatic:
-                        artifactBias = new ChaosArtifactBias();
-                        warriorArtifactBias = 40;
-                        break;
-
-                    case CharacterClass.Monk:
-                    case CharacterClass.Mystic:
-                        artifactBias = new PriestlyArtifactBias();
-                        break;
-
-                    case CharacterClass.Mindcrafter:
-                        if (Program.Rng.DieRoll(5) > 2)
-                        {
-                            artifactBias = new PriestlyArtifactBias();
-                        }
-                        break;
-                }
+                artifactBias = SaveGame.Player.BaseCharacterClass.ArtifactBias;
+                warriorArtifactBias = SaveGame.Player.BaseCharacterClass.FromScrollWarriorArtifactBiasPercentageChance;
             }
             if (Program.Rng.DieRoll(100) <= warriorArtifactBias && fromScroll)
             {
