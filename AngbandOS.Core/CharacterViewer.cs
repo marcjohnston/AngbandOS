@@ -273,14 +273,14 @@ namespace AngbandOS
                 }
                 // Take out the bonuses we got for our our race and profession
                 equipmentBonuses -= SaveGame.Player.Race.AbilityBonus[i];
-                equipmentBonuses -= SaveGame.Player.Profession.AbilityBonus[i];
+                equipmentBonuses -= SaveGame.Player.BaseCharacterClass.AbilityBonus[i];
                 // Print each of the scores and bonuses
                 SaveGame.Screen.Print(Colour.Blue, Constants.StatNames[i], row + i, statCol);
                 string buf = SaveGame.Player.AbilityScores[i].InnateMax.StatToString();
                 SaveGame.Screen.Print(Colour.Purple, buf, row + i, statCol + 4);
                 buf = SaveGame.Player.Race.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
                 SaveGame.Screen.Print(Colour.Brown, buf, row + i, statCol + 13);
-                buf = SaveGame.Player.Profession.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
+                buf = SaveGame.Player.BaseCharacterClass.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
                 SaveGame.Screen.Print(Colour.Brown, buf, row + i, statCol + 19);
                 buf = equipmentBonuses.ToString("+0;-0;+0").PadLeft(3);
                 SaveGame.Screen.Print(Colour.Brown, buf, row + i, statCol + 24);
@@ -518,7 +518,7 @@ namespace AngbandOS
             SaveGame.Screen.Print(Colour.Brown, SaveGame.Player.Name, 2, 15);
             SaveGame.Screen.Print(Colour.Brown, SaveGame.Player.Gender.Title, 3, 15);
             SaveGame.Screen.Print(Colour.Brown, SaveGame.Player.Race.Title, 4, 15);
-            SaveGame.Screen.Print(Colour.Brown, Profession.ClassSubName(SaveGame.Player.BaseCharacterClass.ID, SaveGame.Player.Realm1), 5, 15);
+            SaveGame.Screen.Print(Colour.Brown, SaveGame.Player.BaseCharacterClass.ClassSubName(SaveGame.Player.Realm1), 5, 15);
             // Only print realms if we have them
             if (SaveGame.Player.Realm1 != 0)
             {

@@ -27,5 +27,39 @@ namespace AngbandOS.Core.CharacterClasses
         public override int RangedAttackBonusPerLevel => 15;
         public override int HitDieBonus => 0;
         public override int ExperienceFactor => 30;
+
+        public override string ClassSubName(Realm realm)
+        {
+            switch (realm)
+            {
+                case Realm.Life:
+                    return "Vivimancer";
+
+                case Realm.Sorcery:
+                    return "Sorcerer";
+
+                case Realm.Nature:
+                    return "Naturist";
+
+                case Realm.Chaos:
+                    return "Warlock";
+
+                case Realm.Death:
+                    return "Necromancer";
+
+                case Realm.Tarot:
+                    return "Summoner";
+
+                case Realm.Folk:
+                    return "Hedge Wizard";
+
+                case Realm.Corporeal:
+                    return "Zen Master";
+
+                default:
+                    return "High Mage";
+            }
+        }
+        public override int PrimeStat => Ability.Intelligence;
     }
 }

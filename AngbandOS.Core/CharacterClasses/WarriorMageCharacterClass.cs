@@ -27,5 +27,6 @@ namespace AngbandOS.Core.CharacterClasses
         public override int RangedAttackBonusPerLevel => 20;
         public override int HitDieBonus => 4;
         public override int ExperienceFactor => 50;
+        public override int PrimeStat => Ability.Intelligence;
     }
 }

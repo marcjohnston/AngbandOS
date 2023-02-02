@@ -55,5 +55,7 @@
 
         public abstract string Title { get; }
 
+        public virtual string ClassSubName(Realm realm) => Title;
+        public abstract int PrimeStat { get; }
     }
 }

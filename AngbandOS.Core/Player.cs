@@ -147,7 +147,6 @@ namespace AngbandOS
             }
         }
         public int OldSpareSpellSlots;
-        public Profession Profession = null; // TODO: This is a duplicate for BaseCharacterClass.
 
         /// <summary>
         /// Represents the character class of the player.  Will be null prior to the character class birth selection.
@@ -326,7 +325,7 @@ namespace AngbandOS
         public void ChangeRace(Race newRace)
         {
             Race = newRace;
-            ExperienceMultiplier = Race.ExperienceFactor + Profession.ExperienceFactor;
+            ExperienceMultiplier = Race.ExperienceFactor + BaseCharacterClass.ExperienceFactor;
             if (GenderIndex == Constants.SexMale)
             {
                 Height = Program.Rng.RandomNormal(Race.MaleBaseHeight, Race.MaleHeightRange);

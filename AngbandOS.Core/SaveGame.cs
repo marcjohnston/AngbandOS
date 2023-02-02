@@ -2237,7 +2237,7 @@ namespace AngbandOS
                     buf += " the Magnificent";
                 }
                 Screen.Print(buf, 39, 1);
-                buf = $"Level {corpse.Level} {Profession.ClassSubName(corpse.BaseCharacterClass.ID, corpse.Realm1)}";
+                buf = $"Level {corpse.Level} {corpse.BaseCharacterClass.ClassSubName(corpse.Realm1)}";
                 Screen.Print(buf, 40, 1);
                 string tmp = $"Killed on Level {CurrentDepth}".PadLeft(45);
                 Screen.Print(tmp, 39, 34);
@@ -13516,26 +13516,6 @@ namespace AngbandOS
         }
 
         ////////////////// PLAYER FACTORY
-        private readonly MenuItem<int>[] _classMenu =
-        {
-            new MenuItem<int>("Channeler", CharacterClass.Channeler), 
-            new MenuItem<int>("Chosen One", CharacterClass.ChosenOne),
-            new MenuItem<int>("Cultist", CharacterClass.Cultist), 
-            new MenuItem<int>("Druid", CharacterClass.Druid),
-            new MenuItem<int>("Fanatic", CharacterClass.Fanatic), 
-            new MenuItem<int>("High Mage", CharacterClass.HighMage),
-            new MenuItem<int>("Mage", CharacterClass.Mage), 
-            new MenuItem<int>("Monk", CharacterClass.Monk),
-            new MenuItem<int>("Mindcrafter", CharacterClass.Mindcrafter), 
-            new MenuItem<int>("Mystic", CharacterClass.Mystic),
-            new MenuItem<int>("Paladin", CharacterClass.Paladin), 
-            new MenuItem<int>("Priest", CharacterClass.Priest),
-            new MenuItem<int>("Ranger", CharacterClass.Ranger), 
-            new MenuItem<int>("Rogue", CharacterClass.Rogue),
-            new MenuItem<int>("Warrior", CharacterClass.Warrior), 
-            new MenuItem<int>("Warrior Mage", CharacterClass.WarriorMage)
-        };
-
         private readonly string[] _menuItem = new string[32];
 
         private readonly int[] _realmChoices =
@@ -13665,7 +13645,7 @@ namespace AngbandOS
             Screen.Print(Colour.Black, buf, y, x);
         }
 
-        private void DisplayClassInfo(int pclass)
+        private void DisplayClassInfo(BaseCharacterClass characterClass)
         {
             Screen.Print(Colour.Purple, "STR:", 36, 21);
             Screen.Print(Colour.Purple, "INT:", 37, 21);
@@ -13675,7 +13655,7 @@ namespace AngbandOS
             Screen.Print(Colour.Purple, "CHA:", 41, 21);
             for (int i = 0; i < 6; i++)
             {
-                int bonus = Profession.ClassInfo[pclass].AbilityBonus[i];
+                int bonus = characterClass.AbilityBonus[i];
                 DisplayStatBonus(26, 36 + i, bonus);
             }
             Screen.Print(Colour.Purple, "Disarming   :", 36, 53);
@@ -13689,22 +13669,22 @@ namespace AngbandOS
             Screen.Print(Colour.Purple, "Infravision :", 38, 31);
             Screen.Print(Colour.Purple, "Searching   :", 39, 31);
             Screen.Print(Colour.Purple, "Perception  :", 40, 31);
-            DisplayAPlusB(67, 36, Profession.ClassInfo[pclass].BaseDisarmBonus, Profession.ClassInfo[pclass].DisarmBonusPerLevel);
-            DisplayAPlusB(67, 37, Profession.ClassInfo[pclass].BaseDeviceBonus, Profession.ClassInfo[pclass].DeviceBonusPerLevel);
-            DisplayAPlusB(67, 38, Profession.ClassInfo[pclass].BaseSaveBonus, Profession.ClassInfo[pclass].SaveBonusPerLevel);
-            DisplayAPlusB(67, 39, Profession.ClassInfo[pclass].BaseStealthBonus * 4, Profession.ClassInfo[pclass].StealthBonusPerLevel * 4);
-            DisplayAPlusB(67, 40, Profession.ClassInfo[pclass].BaseMeleeAttackBonus, Profession.ClassInfo[pclass].MeleeAttackBonusPerLevel);
-            DisplayAPlusB(67, 41, Profession.ClassInfo[pclass].BaseRangedAttackBonus, Profession.ClassInfo[pclass].RangedAttackBonusPerLevel);
-            string buf = "+" + Profession.ClassInfo[pclass].ExperienceFactor + "%";
+            DisplayAPlusB(67, 36, characterClass.BaseDisarmBonus, characterClass.DisarmBonusPerLevel);
+            DisplayAPlusB(67, 37, characterClass.BaseDeviceBonus, characterClass.DeviceBonusPerLevel);
+            DisplayAPlusB(67, 38, characterClass.BaseSaveBonus, characterClass.SaveBonusPerLevel);
+            DisplayAPlusB(67, 39, characterClass.BaseStealthBonus * 4, characterClass.StealthBonusPerLevel * 4);
+            DisplayAPlusB(67, 40, characterClass.BaseMeleeAttackBonus, characterClass.MeleeAttackBonusPerLevel);
+            DisplayAPlusB(67, 41, characterClass.BaseRangedAttackBonus, characterClass.RangedAttackBonusPerLevel);
+            string buf = "+" + characterClass.ExperienceFactor + "%";
             Screen.Print(Colour.Black, buf, 36, 45);
-            buf = "1d" + Profession.ClassInfo[pclass].HitDieBonus;
+            buf = "1d" + characterClass.HitDieBonus;
             Screen.Print(Colour.Black, buf, 37, 45);
             Screen.Print(Colour.Black, "-", 38, 45);
-            buf = $"{Profession.ClassInfo[pclass].BaseSearchBonus:00}%";
+            buf = $"{characterClass.BaseSearchBonus:00}%";
             Screen.Print(Colour.Black, buf, 39, 45);
-            buf = $"{Profession.ClassInfo[pclass].BaseSearchFrequency:00}%";
+            buf = $"{characterClass.BaseSearchFrequency:00}%";
             Screen.Print(Colour.Black, buf, 40, 45);
-            switch (pclass)
+            switch (characterClass.ID)
             {
                 case CharacterClass.Cultist:
                     Screen.Print(Colour.Purple, "INT based spell casters, who use Chaos and another realm", 30, 20);
@@ -13868,8 +13848,8 @@ namespace AngbandOS
             Screen.Print(Colour.Blue, "Class       :", 5, 1);
             if (stage == 0)
             {
-                Player.Profession = Profession.ClassInfo[_prevCharacterClass.ID];
-                str = Player.Profession.Title;
+                Player.BaseCharacterClass = SingletonRepository.CharacterClasses.Single(_characterClass => _characterClass.ID == _prevCharacterClass.ID);
+                str = Player.BaseCharacterClass.Title;
             }
             else if (stage < 2)
             {
@@ -13877,8 +13857,8 @@ namespace AngbandOS
             }
             else
             {
-                Player.Profession = Profession.ClassInfo[Player.BaseCharacterClass.ID];
-                str = Player.Profession.Title;
+                Player.BaseCharacterClass = SingletonRepository.CharacterClasses.Single(_characterClass => _characterClass.ID == Player.BaseCharacterClass.ID);
+                str = Player.BaseCharacterClass.Title;
             }
             Screen.Print(Colour.Brown, str, 5, 15);
             string buf = string.Empty;
@@ -13980,7 +13960,7 @@ namespace AngbandOS
             {
                 for (i = 0; i < 6; i++)
                 {
-                    buf = Player.Profession.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
+                    buf = Player.BaseCharacterClass.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
                     Screen.Print(Colour.Brown, buf, 22 + i, 20);
                 }
             }
@@ -14011,7 +13991,7 @@ namespace AngbandOS
             Screen.Print(Colour.Purple, "CHA:", 41, 21);
             for (int i = 0; i < 6; i++)
             {
-                int bonus = race.AbilityBonus[i] + Profession.ClassInfo[Player.BaseCharacterClass.ID].AbilityBonus[i];
+                int bonus = race.AbilityBonus[i] + Player.BaseCharacterClass.AbilityBonus[i];
                 DisplayStatBonus(26, 36 + i, bonus);
             }
             Screen.Print(Colour.Purple, "Disarming   :", 36, 53);
@@ -14025,14 +14005,14 @@ namespace AngbandOS
             Screen.Print(Colour.Purple, "Infravision :", 38, 31);
             Screen.Print(Colour.Purple, "Searching   :", 39, 31);
             Screen.Print(Colour.Purple, "Perception  :", 40, 31);
-            DisplayAPlusB(67, 36, Profession.ClassInfo[Player.BaseCharacterClass.ID].BaseDisarmBonus + race.BaseDisarmBonus, Profession.ClassInfo[Player.BaseCharacterClass.ID].DisarmBonusPerLevel);
-            DisplayAPlusB(67, 37, Profession.ClassInfo[Player.BaseCharacterClass.ID].BaseDeviceBonus + race.BaseDeviceBonus, Profession.ClassInfo[Player.BaseCharacterClass.ID].DeviceBonusPerLevel);
-            DisplayAPlusB(67, 38, Profession.ClassInfo[Player.BaseCharacterClass.ID].BaseSaveBonus + race.BaseSaveBonus, Profession.ClassInfo[Player.BaseCharacterClass.ID].SaveBonusPerLevel);
-            DisplayAPlusB(67, 39, (Profession.ClassInfo[Player.BaseCharacterClass.ID].BaseStealthBonus * 4) + (race.BaseStealthBonus * 4), Profession.ClassInfo[Player.BaseCharacterClass.ID].StealthBonusPerLevel * 4);
-            DisplayAPlusB(67, 40, Profession.ClassInfo[Player.BaseCharacterClass.ID].BaseMeleeAttackBonus + race.BaseMeleeAttackBonus, Profession.ClassInfo[Player.BaseCharacterClass.ID].MeleeAttackBonusPerLevel);
-            DisplayAPlusB(67, 41, Profession.ClassInfo[Player.BaseCharacterClass.ID].BaseRangedAttackBonus + race.BaseRangedAttackBonus, Profession.ClassInfo[Player.BaseCharacterClass.ID].RangedAttackBonusPerLevel);
-            Screen.Print(Colour.Black, race.ExperienceFactor + Profession.ClassInfo[Player.BaseCharacterClass.ID].ExperienceFactor + "%", 36, 45);
-            Screen.Print(Colour.Black, "1d" + (race.HitDieBonus + Profession.ClassInfo[Player.BaseCharacterClass.ID].HitDieBonus), 37, 45);
+            DisplayAPlusB(67, 36, Player.BaseCharacterClass.BaseDisarmBonus + race.BaseDisarmBonus, Player.BaseCharacterClass.DisarmBonusPerLevel);
+            DisplayAPlusB(67, 37, Player.BaseCharacterClass.BaseDeviceBonus + race.BaseDeviceBonus, Player.BaseCharacterClass.DeviceBonusPerLevel);
+            DisplayAPlusB(67, 38, Player.BaseCharacterClass.BaseSaveBonus + race.BaseSaveBonus, Player.BaseCharacterClass.SaveBonusPerLevel);
+            DisplayAPlusB(67, 39, (Player.BaseCharacterClass.BaseStealthBonus * 4) + (race.BaseStealthBonus * 4), Player.BaseCharacterClass.StealthBonusPerLevel * 4);
+            DisplayAPlusB(67, 40, Player.BaseCharacterClass.BaseMeleeAttackBonus + race.BaseMeleeAttackBonus, Player.BaseCharacterClass.MeleeAttackBonusPerLevel);
+            DisplayAPlusB(67, 41, Player.BaseCharacterClass.BaseRangedAttackBonus + race.BaseRangedAttackBonus, Player.BaseCharacterClass.RangedAttackBonusPerLevel);
+            Screen.Print(Colour.Black, race.ExperienceFactor + Player.BaseCharacterClass.ExperienceFactor + "%", 36, 45);
+            Screen.Print(Colour.Black, "1d" + (race.HitDieBonus + Player.BaseCharacterClass.HitDieBonus), 37, 45);
             if (race.Infravision == 0)
             {
                 Screen.Print(Colour.Black, "nil", 38, 45);
@@ -14041,8 +14021,8 @@ namespace AngbandOS
             {
                 Screen.Print(Colour.Green, race.Infravision + "0 feet", 38, 45);
             }
-            Screen.Print(Colour.Black, $"{race.BaseSearchBonus + Profession.ClassInfo[Player.BaseCharacterClass.ID].BaseSearchBonus:00}%", 39, 45);
-            Screen.Print(Colour.Black, $"{race.BaseSearchFrequency + Profession.ClassInfo[Player.BaseCharacterClass.ID].BaseSearchFrequency:00}%", 40, 45);
+            Screen.Print(Colour.Black, $"{race.BaseSearchBonus + Player.BaseCharacterClass.BaseSearchBonus:00}%", 39, 45);
+            Screen.Print(Colour.Black, $"{race.BaseSearchFrequency + Player.BaseCharacterClass.BaseSearchFrequency:00}%", 40, 45);
 
             // Retrieve the description for the race and split the description into lines.
             string[] description = race.Description.Split("\n");
@@ -14168,8 +14148,8 @@ namespace AngbandOS
             int i;
             Player.MaxLevelGained = 1;
             Player.Level = 1;
-            Player.ExperienceMultiplier = Player.Race.ExperienceFactor + Player.Profession.ExperienceFactor;
-            Player.HitDie = Player.Race.HitDieBonus + Player.Profession.HitDieBonus;
+            Player.ExperienceMultiplier = Player.Race.ExperienceFactor + Player.BaseCharacterClass.ExperienceFactor;
+            Player.HitDie = Player.Race.HitDieBonus + Player.BaseCharacterClass.HitDieBonus;
             Player.MaxHealth = Player.HitDie;
             Player.PlayerHp[0] = Player.HitDie;
             int lastroll = Player.HitDie;
@@ -14317,11 +14297,11 @@ namespace AngbandOS
                     j = dice[index];
                     dice.RemoveAt(index);
                     Player.AbilityScores[i].InnateMax = j;
-                    int bonus = Player.Race.AbilityBonus[i] + Player.Profession.AbilityBonus[i];
+                    int bonus = Player.Race.AbilityBonus[i] + Player.BaseCharacterClass.AbilityBonus[i];
                     Player.AbilityScores[i].Innate = Player.AbilityScores[i].InnateMax;
                     Player.AbilityScores[i].Adjusted = Player.AbilityScores[i].ModifyStatValue(Player.AbilityScores[i].InnateMax, bonus);
                 }
-                if (Player.AbilityScores[Profession.PrimeStat(Player.BaseCharacterClass.ID)].InnateMax > 13)
+                if (Player.AbilityScores[Player.BaseCharacterClass.PrimeStat].InnateMax > 13)
                 {
                     break;
                 }
@@ -14387,6 +14367,11 @@ namespace AngbandOS
 
         private bool PlayerBirthAux()
         {
+            MenuItem<BaseCharacterClass>[] _classMenu = SingletonRepository.CharacterClasses
+                .OrderBy(_characterClass => _characterClass.Title)
+                .Select(_characterClass => new MenuItem<BaseCharacterClass>(_characterClass.Title, _characterClass))
+                .ToArray();
+
             int i;
             int stage = 0;
             int[] menu = new int[9];
@@ -14479,7 +14464,6 @@ namespace AngbandOS
                         {
                             autoChose[stage] = true;
                             Player.BaseCharacterClass = _prevCharacterClass;
-                            Player.Profession = Profession.ClassInfo[Player.BaseCharacterClass.ID];
                             stage++;
                             break;
                         }
@@ -14487,7 +14471,6 @@ namespace AngbandOS
                         {
                             autoChose[stage] = true;
                             Player.BaseCharacterClass = SingletonRepository.CharacterClasses.WeightedRandom().Choose();
-                            Player.Profession = Profession.ClassInfo[Player.BaseCharacterClass.ID];
                             stage++;
                             break;
                         }
@@ -14545,8 +14528,7 @@ namespace AngbandOS
                         }
                         if (stage > BirthStage.ClassSelection)
                         {
-                            Player.BaseCharacterClass = SingletonRepository.CharacterClasses.Single(_characterClass => _characterClass.ID == _classMenu[menu[BirthStage.ClassSelection]].Item);
-                            Player.Profession = Profession.ClassInfo[Player.BaseCharacterClass.ID];
+                            Player.BaseCharacterClass = _classMenu[menu[BirthStage.ClassSelection]].Item;
                         }
                         break;
 

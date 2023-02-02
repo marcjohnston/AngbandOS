@@ -25,5 +25,6 @@
         public override int RangedAttackBonusPerLevel => 45;
         public override int HitDieBonus => 9;
         public override int ExperienceFactor => 0;
+        public override int PrimeStat => Ability.Strength;
     }
 }

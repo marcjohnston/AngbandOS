@@ -98,15 +98,15 @@ namespace AngbandOS.Core.FlaggedActions
             SaveGame.Player.HasFireImmunity = false;
             SaveGame.Player.HasColdImmunity = false;
             SaveGame.Player.InfravisionRange = SaveGame.Player.Race.Infravision;
-            SaveGame.Player.SkillDisarmTraps = SaveGame.Player.Race.BaseDisarmBonus + SaveGame.Player.Profession.BaseDisarmBonus;
-            SaveGame.Player.SkillUseDevice = SaveGame.Player.Race.BaseDeviceBonus + SaveGame.Player.Profession.BaseDeviceBonus;
-            SaveGame.Player.SkillSavingThrow = SaveGame.Player.Race.BaseSaveBonus + SaveGame.Player.Profession.BaseSaveBonus;
-            SaveGame.Player.SkillStealth = SaveGame.Player.Race.BaseStealthBonus + SaveGame.Player.Profession.BaseStealthBonus;
-            SaveGame.Player.SkillSearching = SaveGame.Player.Race.BaseSearchBonus + SaveGame.Player.Profession.BaseSearchBonus;
-            SaveGame.Player.SkillSearchFrequency = SaveGame.Player.Race.BaseSearchFrequency + SaveGame.Player.Profession.BaseSearchFrequency;
-            SaveGame.Player.SkillMelee = SaveGame.Player.Race.BaseMeleeAttackBonus + SaveGame.Player.Profession.BaseMeleeAttackBonus;
-            SaveGame.Player.SkillRanged = SaveGame.Player.Race.BaseRangedAttackBonus + SaveGame.Player.Profession.BaseRangedAttackBonus;
-            SaveGame.Player.SkillThrowing = SaveGame.Player.Race.BaseRangedAttackBonus + SaveGame.Player.Profession.BaseRangedAttackBonus;
+            SaveGame.Player.SkillDisarmTraps = SaveGame.Player.Race.BaseDisarmBonus + SaveGame.Player.BaseCharacterClass.BaseDisarmBonus;
+            SaveGame.Player.SkillUseDevice = SaveGame.Player.Race.BaseDeviceBonus + SaveGame.Player.BaseCharacterClass.BaseDeviceBonus;
+            SaveGame.Player.SkillSavingThrow = SaveGame.Player.Race.BaseSaveBonus + SaveGame.Player.BaseCharacterClass.BaseSaveBonus;
+            SaveGame.Player.SkillStealth = SaveGame.Player.Race.BaseStealthBonus + SaveGame.Player.BaseCharacterClass.BaseStealthBonus;
+            SaveGame.Player.SkillSearching = SaveGame.Player.Race.BaseSearchBonus + SaveGame.Player.BaseCharacterClass.BaseSearchBonus;
+            SaveGame.Player.SkillSearchFrequency = SaveGame.Player.Race.BaseSearchFrequency + SaveGame.Player.BaseCharacterClass.BaseSearchFrequency;
+            SaveGame.Player.SkillMelee = SaveGame.Player.Race.BaseMeleeAttackBonus + SaveGame.Player.BaseCharacterClass.BaseMeleeAttackBonus;
+            SaveGame.Player.SkillRanged = SaveGame.Player.Race.BaseRangedAttackBonus + SaveGame.Player.BaseCharacterClass.BaseRangedAttackBonus;
+            SaveGame.Player.SkillThrowing = SaveGame.Player.Race.BaseRangedAttackBonus + SaveGame.Player.BaseCharacterClass.BaseRangedAttackBonus;
             SaveGame.Player.SkillDigging = 0;
             if ((SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Warrior && SaveGame.Player.Level > 29) ||
                 (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Paladin && SaveGame.Player.Level > 39) ||
@@ -275,7 +275,7 @@ namespace AngbandOS.Core.FlaggedActions
             SaveGame.Player.AmmunitionItemCategory = 0;
             for (int i = 0; i < 6; i++)
             {
-                SaveGame.Player.AbilityScores[i].Bonus += SaveGame.Player.Race.AbilityBonus[i] + SaveGame.Player.Profession.AbilityBonus[i];
+                SaveGame.Player.AbilityScores[i].Bonus += SaveGame.Player.Race.AbilityBonus[i] + SaveGame.Player.BaseCharacterClass.AbilityBonus[i];
             }
             SaveGame.Player.AbilityScores[Ability.Strength].Bonus += SaveGame.Player.Dna.StrengthBonus;
             SaveGame.Player.AbilityScores[Ability.Intelligence].Bonus += SaveGame.Player.Dna.IntelligenceBonus;
@@ -1069,15 +1069,15 @@ namespace AngbandOS.Core.FlaggedActions
             SaveGame.Player.SkillUseDevice += SaveGame.Player.AbilityScores[Ability.Intelligence].IntUseDeviceBonus;
             SaveGame.Player.SkillSavingThrow += SaveGame.Player.AbilityScores[Ability.Wisdom].WisSavingThrowBonus;
             SaveGame.Player.SkillDigging += SaveGame.Player.AbilityScores[Ability.Strength].StrDiggingBonus;
-            SaveGame.Player.SkillDisarmTraps += (SaveGame.Player.Profession.DisarmBonusPerLevel * SaveGame.Player.Level) / 10;
-            SaveGame.Player.SkillUseDevice += (SaveGame.Player.Profession.DeviceBonusPerLevel * SaveGame.Player.Level) / 10;
-            SaveGame.Player.SkillSavingThrow += (SaveGame.Player.Profession.SaveBonusPerLevel * SaveGame.Player.Level) / 10;
-            SaveGame.Player.SkillStealth += (SaveGame.Player.Profession.StealthBonusPerLevel * SaveGame.Player.Level) / 10;
-            SaveGame.Player.SkillSearching += (SaveGame.Player.Profession.SearchBonusPerLevel * SaveGame.Player.Level) / 10;
-            SaveGame.Player.SkillSearchFrequency += (SaveGame.Player.Profession.SearchFrequencyPerLevel * SaveGame.Player.Level) / 10;
-            SaveGame.Player.SkillMelee += (SaveGame.Player.Profession.MeleeAttackBonusPerLevel * SaveGame.Player.Level) / 10;
-            SaveGame.Player.SkillRanged += (SaveGame.Player.Profession.RangedAttackBonusPerLevel * SaveGame.Player.Level) / 10;
-            SaveGame.Player.SkillThrowing += (SaveGame.Player.Profession.RangedAttackBonusPerLevel * SaveGame.Player.Level) / 10;
+            SaveGame.Player.SkillDisarmTraps += (SaveGame.Player.BaseCharacterClass.DisarmBonusPerLevel * SaveGame.Player.Level) / 10;
+            SaveGame.Player.SkillUseDevice += (SaveGame.Player.BaseCharacterClass.DeviceBonusPerLevel * SaveGame.Player.Level) / 10;
+            SaveGame.Player.SkillSavingThrow += (SaveGame.Player.BaseCharacterClass.SaveBonusPerLevel * SaveGame.Player.Level) / 10;
+            SaveGame.Player.SkillStealth += (SaveGame.Player.BaseCharacterClass.StealthBonusPerLevel * SaveGame.Player.Level) / 10;
+            SaveGame.Player.SkillSearching += (SaveGame.Player.BaseCharacterClass.SearchBonusPerLevel * SaveGame.Player.Level) / 10;
+            SaveGame.Player.SkillSearchFrequency += (SaveGame.Player.BaseCharacterClass.SearchFrequencyPerLevel * SaveGame.Player.Level) / 10;
+            SaveGame.Player.SkillMelee += (SaveGame.Player.BaseCharacterClass.MeleeAttackBonusPerLevel * SaveGame.Player.Level) / 10;
+            SaveGame.Player.SkillRanged += (SaveGame.Player.BaseCharacterClass.RangedAttackBonusPerLevel * SaveGame.Player.Level) / 10;
+            SaveGame.Player.SkillThrowing += (SaveGame.Player.BaseCharacterClass.RangedAttackBonusPerLevel * SaveGame.Player.Level) / 10;
             if (SaveGame.Player.SkillStealth > 30)
             {
                 SaveGame.Player.SkillStealth = 30;
