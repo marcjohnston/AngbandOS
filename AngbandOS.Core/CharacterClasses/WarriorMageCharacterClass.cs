@@ -41,5 +41,6 @@ namespace AngbandOS.Core.CharacterClasses
         public override IArtifactBias? ArtifactBias => new MageArtifactBias();
         public override int FromScrollWarriorArtifactBiasPercentageChance => 40;
         public override bool SenseInventoryTest(int level) => (0 != Program.Rng.RandomLessThan(75000 / ((level * level) + 40)));
+        public override int RealmChoices => RealmChoice.Life | RealmChoice.Nature | RealmChoice.Chaos | RealmChoice.Death | RealmChoice.Tarot | RealmChoice.Folk | RealmChoice.Sorcery | RealmChoice.Corporeal;
     }
 }

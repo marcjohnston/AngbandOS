@@ -77,5 +77,6 @@
         public virtual int FromScrollWarriorArtifactBiasPercentageChance => 0;
         public virtual bool SenseInventoryTest(int level) => false;
         public virtual bool DetailedSenseInventory => false;
+        public virtual int RealmChoices => RealmChoice.None;
     }
 }

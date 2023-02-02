@@ -13523,46 +13523,6 @@ namespace AngbandOS
         ////////////////// PLAYER FACTORY
         private readonly string[] _menuItem = new string[32];
 
-        private readonly int[] _realmChoices =
-        {
-            // Warrior
-            RealmChoice.None,
-            // Mage
-            RealmChoice.Life | RealmChoice.Sorcery | RealmChoice.Nature | RealmChoice.Chaos | RealmChoice.Death |
-            RealmChoice.Tarot | RealmChoice.Folk | RealmChoice.Corporeal,
-            // Priest
-            RealmChoice.Nature | RealmChoice.Chaos | RealmChoice.Tarot | RealmChoice.Folk | RealmChoice.Corporeal,
-            // Rogue
-            RealmChoice.Sorcery | RealmChoice.Death | RealmChoice.Tarot | RealmChoice.Folk,
-            // Ranger
-            RealmChoice.Chaos | RealmChoice.Death | RealmChoice.Tarot | RealmChoice.Folk | RealmChoice.Corporeal,
-            // Paladin
-            RealmChoice.Life | RealmChoice.Death,
-            // Warrior Mage
-            RealmChoice.Life | RealmChoice.Nature | RealmChoice.Chaos | RealmChoice.Death | RealmChoice.Tarot |
-            RealmChoice.Folk | RealmChoice.Sorcery | RealmChoice.Corporeal,
-            // Fanatic
-            RealmChoice.Chaos,
-            // Monk
-            RealmChoice.Corporeal | RealmChoice.Tarot | RealmChoice.Chaos,
-            // Mindcrafter
-            RealmChoice.None,
-            // High Mage
-            RealmChoice.Life | RealmChoice.Sorcery | RealmChoice.Nature | RealmChoice.Chaos | RealmChoice.Death |
-            RealmChoice.Tarot | RealmChoice.Folk | RealmChoice.Corporeal,
-            // Druid
-            RealmChoice.Nature,
-            // Cultist
-            RealmChoice.Life | RealmChoice.Sorcery | RealmChoice.Nature | RealmChoice.Death | RealmChoice.Tarot |
-            RealmChoice.Folk | RealmChoice.Corporeal,
-            // Channeler
-            RealmChoice.None,
-            // Chosen One
-            RealmChoice.None,
-            // Mystic
-            RealmChoice.None
-        };
-
         private readonly Gender[] _sexInfo = { new Gender("Female", "Queen"), new Gender("Male", "King"), new Gender("Other", "Monarch") };
         private int _menuLength;
 
@@ -14101,7 +14061,7 @@ namespace AngbandOS
             int pclas = Player.BaseCharacterClass.ID;
             Player.Realm1 = Realm.None;
             Player.Realm2 = Realm.None;
-            if (_realmChoices[pclas] == RealmChoice.None)
+            if (Player.BaseCharacterClass.RealmChoices == RealmChoice.None)
             {
                 return;
             }
@@ -14132,7 +14092,7 @@ namespace AngbandOS
                     break;
 
                 default:
-                    Player.Realm1 = ChooseRealmRandomly(_realmChoices[pclas]);
+                    Player.Realm1 = ChooseRealmRandomly(Player.BaseCharacterClass.RealmChoices);
                     break;
             }
             if (pclas == CharacterClass.Paladin || pclas == CharacterClass.Rogue || pclas == CharacterClass.Fanatic ||
@@ -14141,7 +14101,7 @@ namespace AngbandOS
             {
                 return;
             }
-            Player.Realm2 = ChooseRealmRandomly(_realmChoices[pclas]);
+            Player.Realm2 = ChooseRealmRandomly(Player.BaseCharacterClass.RealmChoices);
             if (Player.BaseCharacterClass.ID == CharacterClass.Priest)
             {
                 switch (Player.Realm2)
@@ -14726,7 +14686,7 @@ namespace AngbandOS
                             case CharacterClass.Priest:
                             case CharacterClass.Mage:
                                 _menuLength = 0;
-                                int realmFilter = _realmChoices[Player.BaseCharacterClass.ID];
+                                int realmFilter = Player.BaseCharacterClass.RealmChoices;
                                 if ((realmFilter & RealmChoice.Life) != 0 && Player.Realm1 != Realm.Life)
                                 {
                                     realmChoice[_menuLength] = Realm.Life;

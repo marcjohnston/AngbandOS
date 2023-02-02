@@ -76,5 +76,6 @@ namespace AngbandOS.Core.CharacterClasses
         public override int AttackSpeedMultiplier => 2;
         public override IArtifactBias? ArtifactBias => new MageArtifactBias();
         public override bool SenseInventoryTest(int level) => (0 != Program.Rng.RandomLessThan(240000 / (level + 5)));
+        public override int RealmChoices => RealmChoice.Life | RealmChoice.Sorcery | RealmChoice.Nature | RealmChoice.Chaos | RealmChoice.Death | RealmChoice.Tarot | RealmChoice.Folk | RealmChoice.Corporeal;
     }
 }
