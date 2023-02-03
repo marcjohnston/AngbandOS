@@ -14527,76 +14527,29 @@ namespace AngbandOS
                             break;
                         }
                         Player.Realm2 = null;
-                        switch (Player.BaseCharacterClass.ID)
+                        if (Player.BaseCharacterClass.AvailableSecondaryRealms.Length == 0)
                         {
-                            case CharacterClass.ChosenOne:
-                            case CharacterClass.Channeler:
-                            case CharacterClass.Mindcrafter:
-                            case CharacterClass.Warrior:
-                            case CharacterClass.Fanatic:
-                            case CharacterClass.HighMage:
-                            case CharacterClass.Paladin:
-                            case CharacterClass.Rogue:
-                            case CharacterClass.Monk:
-                            case CharacterClass.Mystic:
-                            case CharacterClass.Druid:
-                                autoChose[stage] = true;
-                                Player.Realm2 = null;
-                                stage++;
-                                break;
-
-                            case CharacterClass.Cultist:
-                            case CharacterClass.WarriorMage:
-                            case CharacterClass.Ranger:
-                            case CharacterClass.Priest:
-                            case CharacterClass.Mage:
-                                _menuLength = 0;
-                                int realmFilter = Player.BaseCharacterClass.RealmChoices;
-                                if ((realmFilter & RealmChoice.Life) != 0 && Player.Realm1 != Realm.Life)
-                                {
-                                    realmChoice[_menuLength] = Realm.Life;
-                                    _menuLength++;
-                                }
-                                if ((realmFilter & RealmChoice.Death) != 0 && Player.Realm1 != Realm.Death)
-                                {
-                                    realmChoice[_menuLength] = Realm.Death;
-                                    _menuLength++;
-                                }
-                                if ((realmFilter & RealmChoice.Nature) != 0 && Player.Realm1 != Realm.Nature)
-                                {
-                                    realmChoice[_menuLength] = Realm.Nature;
-                                    _menuLength++;
-                                }
-                                if ((realmFilter & RealmChoice.Sorcery) != 0 && Player.Realm1 != Realm.Sorcery)
-                                {
-                                    realmChoice[_menuLength] = Realm.Sorcery;
-                                    _menuLength++;
-                                }
-                                if ((realmFilter & RealmChoice.Corporeal) != 0 && Player.Realm1 != Realm.Corporeal)
-                                {
-                                    realmChoice[_menuLength] = Realm.Corporeal;
-                                    _menuLength++;
-                                }
-                                if ((realmFilter & RealmChoice.Tarot) != 0 && Player.Realm1 != Realm.Tarot)
-                                {
-                                    realmChoice[_menuLength] = Realm.Tarot;
-                                    _menuLength++;
-                                }
-                                if ((realmFilter & RealmChoice.Chaos) != 0 && Player.Realm1 != Realm.Chaos)
-                                {
-                                    realmChoice[_menuLength] = Realm.Chaos;
-                                    _menuLength++;
-                                }
-                                if ((realmFilter & RealmChoice.Folk) != 0 && Player.Realm1 != Realm.Folk)
-                                {
-                                    realmChoice[_menuLength] = Realm.Folk;
-                                    _menuLength++;
-                                }
-                                break;
-                        }
-                        if (stage > BirthStage.RealmSelection2)
-                        {
+                            autoChose[stage] = true;
+                            Player.Realm1 = null;
+                            stage++;
                             break;
+                        }
+                        else if (Player.BaseCharacterClass.AvailableSecondaryRealms.Length == 1)
+                        {
+                            autoChose[stage] = true;
+                            Player.Realm1 = Player.BaseCharacterClass.AvailableSecondaryRealms[0].ID;
+                            stage++;
+                            break;
+                        }
+                        else
+                        {
+                            _menuLength = 0;
+                            BaseRealm[] remainingRealms = Player.BaseCharacterClass.AvailableSecondaryRealms.Where(_realm => _realm.ID != Player.Realm1).ToArray();
+                            foreach (BaseRealm realm in remainingRealms)
+                            {
+                                realmChoice[_menuLength] = realm.ID;
+                                _menuLength++;
+                            }
                         }
                         autoChose[stage] = false;
                         for (i = 0; i < _menuLength; i++)
