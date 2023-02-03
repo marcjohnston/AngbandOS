@@ -9,7 +9,6 @@ namespace AngbandOS.Enumerations
 {
     internal enum Realm
     {
-        None = 0,
         Life = 1,
         Sorcery = 2,
         Nature = 3,

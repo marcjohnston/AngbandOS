@@ -273,7 +273,7 @@ namespace AngbandOS
         /// </summary>
         /// <param name="realm"> The realm of magic </param>
         /// <returns> The spell book item category </returns>
-        public static ItemTypeEnum ToSpellBookItemCategory(this Realm realm)
+        public static ItemTypeEnum ToSpellBookItemCategory(this Realm? realm)
         {
             switch (realm)
             {

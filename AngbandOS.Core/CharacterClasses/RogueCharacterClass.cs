@@ -27,7 +27,7 @@ namespace AngbandOS.Core.CharacterClasses
         public override int RangedAttackBonusPerLevel => 10;
         public override int HitDieBonus => 6;
         public override int ExperienceFactor => 25;
-        public override string ClassSubName(Realm realm)
+        public override string ClassSubName(Realm? realm)
         {
             switch (realm)
             {

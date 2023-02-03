@@ -8793,7 +8793,7 @@ namespace AngbandOS
             int spell;
             int num = 0;
             int[] spells = new int[64];
-            Realm useRealm = realm2 ? player.Realm2 : player.Realm1;
+            Realm? useRealm = realm2 ? player.Realm2 : player.Realm1;
             string p = player.BaseCharacterClass.SpellCastingType == CastingType.Divine ? "prayer" : "spell";
             for (spell = 0; spell < 32; spell++)
             {
@@ -13540,8 +13540,8 @@ namespace AngbandOS
         /// </summary>
         private Race? _prevRace = null;
 
-        private Realm _prevRealm1;
-        private Realm _prevRealm2;
+        private Realm? _prevRealm1;
+        private Realm? _prevRealm2;
         private int _prevSex;
 
         public bool CharacterGeneration(ExPlayer ex)
@@ -13716,9 +13716,9 @@ namespace AngbandOS
             string buf = string.Empty;
             if (stage == 0)
             {
-                if (_prevRealm1 != Realm.None)
+                if (_prevRealm1 != null)
                 {
-                    if (_prevRealm2 != Realm.None)
+                    if (_prevRealm2 != null)
                     {
                         buf = RealmName(_prevRealm1) + "/" + RealmName(_prevRealm2);
                     }
@@ -13727,11 +13727,11 @@ namespace AngbandOS
                         buf = RealmName(_prevRealm1);
                     }
                 }
-                if (_prevRealm1 != Realm.None || _prevRealm2 != Realm.None)
+                if (_prevRealm1 != null || _prevRealm2 != null)
                 {
                     Screen.Print(Colour.Blue, "Magic       :", 6, 1);
                 }
-                if (_prevRealm1 != Realm.None)
+                if (_prevRealm1 != null)
                 {
                     Screen.Print(Colour.Brown, buf, 6, 15);
                 }
@@ -13745,9 +13745,9 @@ namespace AngbandOS
             else
             {
                 buf = string.Empty;
-                if (Player.Realm1 != Realm.None)
+                if (Player.Realm1 != null)
                 {
-                    if (Player.Realm2 != Realm.None)
+                    if (Player.Realm2 != null)
                     {
                         buf = RealmName(Player.Realm1) + "/" + RealmName(Player.Realm2);
                     }
@@ -13756,11 +13756,11 @@ namespace AngbandOS
                         buf = RealmName(Player.Realm1);
                     }
                 }
-                if (Player.Realm1 != Realm.None || Player.Realm2 != Realm.None)
+                if (Player.Realm1 != null || Player.Realm2 != null)
                 {
                     Screen.Print(Colour.Blue, "Magic       :", 6, 1);
                 }
-                if (Player.Realm1 != Realm.None)
+                if (Player.Realm1 != null)
                 {
                     Screen.Print(Colour.Brown, buf, 6, 15);
                 }
@@ -14059,8 +14059,8 @@ namespace AngbandOS
         private void GetRealmsRandomly()
         {
             int pclas = Player.BaseCharacterClass.ID;
-            Player.Realm1 = Realm.None;
-            Player.Realm2 = Realm.None;
+            Player.Realm1 = null;
+            Player.Realm2 = null;
             if (Player.BaseCharacterClass.AvailablePrimaryRealms.Length == 0)
             {
                 return;
@@ -14186,8 +14186,8 @@ namespace AngbandOS
                 _prevSex = Constants.SexFemale;
                 _prevRace = SingletonRepository.Races.Get<HumanRace>();
                 _prevCharacterClass = SingletonRepository.CharacterClasses.Get<WarriorCharacterClass>();
-                _prevRealm1 = Realm.None;
-                _prevRealm2 = Realm.None;
+                _prevRealm1 = null;
+                _prevRealm2 = null;
                 _prevName = "Xena";
                 _prevGeneration = 0;
             }
@@ -14548,7 +14548,7 @@ namespace AngbandOS
                             case CharacterClass.Mystic:
                             case CharacterClass.Warrior:
                                 autoChose[stage] = true;
-                                Player.Realm1 = Realm.None;
+                                Player.Realm1 = null;
                                 stage++;
                                 break;
                         }
@@ -14661,7 +14661,7 @@ namespace AngbandOS
                             stage++;
                             break;
                         }
-                        Player.Realm2 = Realm.None;
+                        Player.Realm2 = null;
                         switch (Player.BaseCharacterClass.ID)
                         {
                             case CharacterClass.ChosenOne:
@@ -14676,7 +14676,7 @@ namespace AngbandOS
                             case CharacterClass.Mystic:
                             case CharacterClass.Druid:
                                 autoChose[stage] = true;
-                                Player.Realm2 = Realm.None;
+                                Player.Realm2 = null;
                                 stage++;
                                 break;
 
@@ -19120,11 +19120,11 @@ namespace AngbandOS
             return martialArtistArmWgt > 100 + (Player.Level * 4);
         }
 
-        public string RealmName(Realm realm)
+        public string RealmName(Realm? realm)
         {
             switch (realm)
             {
-                case Realm.None:
+                case null:
                     return "None";
 
                 case Realm.Life:

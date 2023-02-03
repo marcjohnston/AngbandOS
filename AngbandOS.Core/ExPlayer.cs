@@ -58,12 +58,12 @@ namespace AngbandOS
         /// <summary>
         /// The character's first realm of magic (if any)
         /// </summary>
-        public readonly Realm Realm1;
+        public readonly Realm? Realm1;
 
         /// <summary>
         /// The character's second realm of magic (if any)
         /// </summary>
-        public readonly Realm Realm2;
+        public readonly Realm? Realm2;
 
         /// <summary>
         /// Make an ex-player from a player, remembering the essential information about the character

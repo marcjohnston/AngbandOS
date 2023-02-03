@@ -830,16 +830,10 @@ namespace AngbandOS.Core.ItemClasses
         /// </summary>
         public virtual bool HatesCold => false;
 
-        //    public virtual bool IgnoredByMonsters => false;
-
-        //    public virtual bool IsCharged => false;
-
-        //    public virtual bool CanBeConsumed => false;
-
         /// <summary>
         /// Returns the realm a spellbook belongs to.  Returns Realm.None by default for non-book objects.
         /// </summary>
-        public virtual Realm SpellBookToToRealm => Realm.None;
+        public virtual Realm? SpellBookToToRealm => null;
 
         /// <summary>
         /// Applies magic to the item.  Does nothing, by default.

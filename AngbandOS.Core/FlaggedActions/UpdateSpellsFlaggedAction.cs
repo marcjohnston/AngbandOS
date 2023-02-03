@@ -17,7 +17,7 @@
             {
                 return;
             }
-            if (SaveGame.Player.Realm1 == Realm.None)
+            if (SaveGame.Player.Realm1 == null)
             {
                 return;
             }
@@ -134,7 +134,7 @@
                 SaveGame.Player.SpareSpellSlots--;
             }
             int k = 0;
-            int limit = SaveGame.Player.Realm2 == Realm.None ? 32 : 64;
+            int limit = SaveGame.Player.Realm2 == null ? 32 : 64;
             for (j = 0; j < limit; j++)
             {
                 sPtr = SaveGame.Spells[j / 32][j % 32];

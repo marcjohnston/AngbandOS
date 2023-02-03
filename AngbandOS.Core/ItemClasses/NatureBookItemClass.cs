@@ -16,6 +16,6 @@ namespace AngbandOS.Core.ItemClasses
 
         public override bool HatesFire => true;
         public override Colour Colour => Colour.BrightGreen;
-        public override Realm SpellBookToToRealm => Realm.Nature;
+        public override Realm? SpellBookToToRealm => Realm.Nature;
     }
 }

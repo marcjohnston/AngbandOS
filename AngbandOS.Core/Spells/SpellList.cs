@@ -22,7 +22,7 @@ namespace AngbandOS.Spells
     [Serializable]
     internal class SpellList : List<Spell>
     {
-        public SpellList(Realm realm, int characterClass)
+        public SpellList(Realm? realm, int characterClass)
         {
             switch (realm)
             {
