@@ -14399,76 +14399,28 @@ namespace AngbandOS
                             stage++;
                             break;
                         }
-                        switch (Player.BaseCharacterClass.ID)
+                        if (Player.BaseCharacterClass.AvailablePrimaryRealms.Length == 0) 
                         {
-                            case CharacterClass.Cultist:
-                            case CharacterClass.Fanatic:
-                                autoChose[stage] = true;
-                                Player.Realm1 = Realm.Chaos;
-                                stage++;
-                                break;
-
-                            case CharacterClass.WarriorMage:
-                                autoChose[stage] = true;
-                                Player.Realm1 = Realm.Folk;
-                                stage++;
-                                break;
-
-                            case CharacterClass.Druid:
-                            case CharacterClass.Ranger:
-                                autoChose[stage] = true;
-                                Player.Realm1 = Realm.Nature;
-                                stage++;
-                                break;
-
-                            case CharacterClass.Paladin:
-                            case CharacterClass.Priest:
-                                realmChoice[0] = Realm.Life;
-                                realmChoice[1] = Realm.Death;
-                                _menuLength = 2;
-                                break;
-
-                            case CharacterClass.Rogue:
-                                realmChoice[0] = Realm.Death;
-                                realmChoice[1] = Realm.Sorcery;
-                                realmChoice[2] = Realm.Tarot;
-                                realmChoice[3] = Realm.Folk;
-                                _menuLength = 4;
-                                break;
-
-                            case CharacterClass.HighMage:
-                            case CharacterClass.Mage:
-                                realmChoice[0] = Realm.Life;
-                                realmChoice[1] = Realm.Death;
-                                realmChoice[2] = Realm.Nature;
-                                realmChoice[3] = Realm.Sorcery;
-                                realmChoice[4] = Realm.Corporeal;
-                                realmChoice[5] = Realm.Tarot;
-                                realmChoice[6] = Realm.Chaos;
-                                realmChoice[7] = Realm.Folk;
-                                _menuLength = 8;
-                                break;
-
-                            case CharacterClass.Monk:
-                                realmChoice[0] = Realm.Corporeal;
-                                realmChoice[1] = Realm.Tarot;
-                                realmChoice[2] = Realm.Chaos;
-                                _menuLength = 3;
-                                break;
-
-                            case CharacterClass.ChosenOne:
-                            case CharacterClass.Channeler:
-                            case CharacterClass.Mindcrafter:
-                            case CharacterClass.Mystic:
-                            case CharacterClass.Warrior:
-                                autoChose[stage] = true;
-                                Player.Realm1 = null;
-                                stage++;
-                                break;
-                        }
-                        if (stage > BirthStage.RealmSelection1)
-                        {
+                            autoChose[stage] = true;
+                            Player.Realm1 = null;
+                            stage++;
                             break;
+                        }
+                        else if (Player.BaseCharacterClass.AvailablePrimaryRealms.Length == 1)
+                        {
+                            autoChose[stage] = true;
+                            Player.Realm1 = Player.BaseCharacterClass.AvailablePrimaryRealms[0].ID;
+                            stage++;
+                            break;
+                        }
+                        else
+                        {
+                            _menuLength = 0;
+                            foreach (BaseRealm realm in Player.BaseCharacterClass.AvailablePrimaryRealms)
+                            {
+                                realmChoice[_menuLength] = realm.ID;
+                                _menuLength++;
+                            }
                         }
                         autoChose[stage] = false;
                         for (i = 0; i < _menuLength; i++)
@@ -14482,8 +14434,7 @@ namespace AngbandOS
                         }
                         MenuDisplay(menu[stage]);
                         DisplayRealmInfo(realmChoice[menu[stage]]);
-                        Screen.Print(Colour.Orange,
-                            "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+                        Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true && !Shutdown)
                         {
                             c = Inkey();
