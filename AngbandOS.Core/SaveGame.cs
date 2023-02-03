@@ -13556,54 +13556,6 @@ namespace AngbandOS
             return false;
         }
 
-        private Realm ChooseRealmRandomly(int choices)
-        {
-            Realm[] picks = new Realm[Constants.MaxRealm];
-            int n = 0;
-            if ((choices & RealmChoice.Chaos) != 0 && Player.Realm1 != Realm.Chaos)
-            {
-                picks[n] = Realm.Chaos;
-                n++;
-            }
-            if ((choices & RealmChoice.Corporeal) != 0 && Player.Realm1 != Realm.Corporeal)
-            {
-                picks[n] = Realm.Corporeal;
-                n++;
-            }
-            if ((choices & RealmChoice.Death) != 0 && Player.Realm1 != Realm.Death)
-            {
-                picks[n] = Realm.Death;
-                n++;
-            }
-            if ((choices & RealmChoice.Folk) != 0 && Player.Realm1 != Realm.Folk)
-            {
-                picks[n] = Realm.Folk;
-                n++;
-            }
-            if ((choices & RealmChoice.Life) != 0 && Player.Realm1 != Realm.Life)
-            {
-                picks[n] = Realm.Life;
-                n++;
-            }
-            if ((choices & RealmChoice.Nature) != 0 && Player.Realm1 != Realm.Nature)
-            {
-                picks[n] = Realm.Nature;
-                n++;
-            }
-            if ((choices & RealmChoice.Tarot) != 0 && Player.Realm1 != Realm.Tarot)
-            {
-                picks[n] = Realm.Tarot;
-                n++;
-            }
-            if ((choices & RealmChoice.Sorcery) != 0 && Player.Realm1 != Realm.Sorcery)
-            {
-                picks[n] = Realm.Sorcery;
-                n++;
-            }
-            int k = Program.Rng.RandomLessThan(n);
-            return picks[k];
-        }
-
         private void DisplayAPlusB(int x, int y, int initial, int bonus)
         {
             string buf = $"{initial:00}% + {bonus / 10}.{bonus % 10}%/lv";
@@ -14058,50 +14010,12 @@ namespace AngbandOS
 
         private void GetRealmsRandomly()
         {
-            int pclas = Player.BaseCharacterClass.ID;
-            Player.Realm1 = null;
-            Player.Realm2 = null;
-            if (Player.BaseCharacterClass.AvailablePrimaryRealms.Length == 0)
+            Player.Realm1 = new WeightedRandom<BaseRealm>(Player.BaseCharacterClass.AvailablePrimaryRealms).Choose()?.ID;
+            Player.Realm2 = new WeightedRandom<BaseRealm>(Player.BaseCharacterClass.AvailableSecondaryRealms).Choose()?.ID; ;
+            if (!Player.BaseCharacterClass.WorshipsADeity)
             {
                 return;
             }
-            switch (pclas)
-            {
-                case CharacterClass.WarriorMage:
-                    Player.Realm1 = Realm.Folk;
-                    break;
-
-                case CharacterClass.Fanatic:
-                    Player.Realm1 = Realm.Chaos;
-                    break;
-
-                case CharacterClass.Priest:
-                    Player.Realm1 = ChooseRealmRandomly(RealmChoice.Life | RealmChoice.Death);
-                    break;
-
-                case CharacterClass.Ranger:
-                    Player.Realm1 = Realm.Nature;
-                    break;
-
-                case CharacterClass.Druid:
-                    Player.Realm1 = Realm.Nature;
-                    break;
-
-                case CharacterClass.Cultist:
-                    Player.Realm1 = Realm.Chaos;
-                    break;
-
-                default:
-                    Player.Realm1 = ChooseRealmRandomly(Player.BaseCharacterClass.RealmChoices);
-                    break;
-            }
-            if (pclas == CharacterClass.Paladin || pclas == CharacterClass.Rogue || pclas == CharacterClass.Fanatic ||
-                pclas == CharacterClass.Monk || pclas == CharacterClass.HighMage ||
-                pclas == CharacterClass.Druid)
-            {
-                return;
-            }
-            Player.Realm2 = ChooseRealmRandomly(Player.BaseCharacterClass.RealmChoices);
             if (Player.BaseCharacterClass.ID == CharacterClass.Priest)
             {
                 switch (Player.Realm2)
