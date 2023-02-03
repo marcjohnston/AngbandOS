@@ -62,5 +62,6 @@ namespace AngbandOS.Core.CharacterClasses
             SaveGame.SingletonRepository.Realms.Get<FolkRealm>(),
             SaveGame.SingletonRepository.Realms.Get<CorporealRealm>()
         };
+        public override bool WorshipsADeity => true;
     }
 }

@@ -90,5 +90,7 @@
         /// </summary>
         /// <value>The available realms.</value>
         public virtual BaseRealm[] AvailableSecondaryRealms => new BaseRealm[] { };
+
+        public virtual bool WorshipsADeity => false; // TODO: Only priests have a godname ... this seems off.
     }
 }
