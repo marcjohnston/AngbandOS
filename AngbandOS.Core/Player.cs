@@ -163,7 +163,9 @@ namespace AngbandOS
         /// </summary>
         public Race RaceAtBirth;
         public Realm Realm1;
+        public BaseRealm? PrimaryRealm = null;
         public Realm Realm2;
+        public BaseRealm? SecondaryRealm = null;
         public Religion Religion = new Religion();
         public int SkillDigging;
         public int SkillDisarmTraps;

@@ -1,4 +1,5 @@
 ﻿using AngbandOS;
+using AngbandOS.Core.Realms;
 
 namespace AngbandOS.Core.CharacterClasses
 {
@@ -44,5 +45,17 @@ namespace AngbandOS.Core.CharacterClasses
         public override IArtifactBias? ArtifactBias => new MageArtifactBias();
         public override bool SenseInventoryTest(int level) => (0 != Program.Rng.RandomLessThan(240000 / (level + 5)));
         public override int RealmChoices => RealmChoice.Life | RealmChoice.Sorcery | RealmChoice.Nature | RealmChoice.Death | RealmChoice.Tarot | RealmChoice.Folk | RealmChoice.Corporeal;
+        public override BaseRealm[] AvailablePrimaryRealms => new BaseRealm[] {
+            SaveGame.SingletonRepository.Realms.Get<ChaosRealm>()
+        };
+        public override BaseRealm[] AvailableSecondaryRealms => new BaseRealm[] {
+            SaveGame.SingletonRepository.Realms.Get<LifeRealm>(),
+            SaveGame.SingletonRepository.Realms.Get<SorceryRealm>(),
+            SaveGame.SingletonRepository.Realms.Get<NatureRealm>(),
+            SaveGame.SingletonRepository.Realms.Get<DeathRealm>(),
+            SaveGame.SingletonRepository.Realms.Get<TarotRealm>(),
+            SaveGame.SingletonRepository.Realms.Get<FolkRealm>(),
+            SaveGame.SingletonRepository.Realms.Get<CorporealRealm>()
+        };
     }
 }

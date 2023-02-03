@@ -14061,7 +14061,7 @@ namespace AngbandOS
             int pclas = Player.BaseCharacterClass.ID;
             Player.Realm1 = Realm.None;
             Player.Realm2 = Realm.None;
-            if (Player.BaseCharacterClass.RealmChoices == RealmChoice.None)
+            if (Player.BaseCharacterClass.AvailablePrimaryRealms.Length == 0)
             {
                 return;
             }

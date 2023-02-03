@@ -3,10 +3,10 @@
     [Serializable]
     internal abstract class BaseCharacterClass
     {
-        protected SaveGame SavedGame { get; }
-        protected BaseCharacterClass(SaveGame savedGame)
+        protected SaveGame SaveGame { get; }
+        protected BaseCharacterClass(SaveGame saveGame)
         {
-            SavedGame = savedGame;
+            SaveGame = saveGame;
         }
 
         /// <summary>
@@ -78,5 +78,17 @@
         public virtual bool SenseInventoryTest(int level) => false;
         public virtual bool DetailedSenseInventory => false;
         public virtual int RealmChoices => RealmChoice.None;
+
+        /// <summary>
+        /// Represents realms that are available to the character class.  Returns an empty array, if the character class cannot cast spells.
+        /// </summary>
+        /// <value>The available realms.</value>
+        public virtual BaseRealm[] AvailablePrimaryRealms => new BaseRealm[] { };
+
+        /// <summary>
+        /// Represents realms that are available to the character class.  Returns an empty array, if the character class cannot cast spells.
+        /// </summary>
+        /// <value>The available realms.</value>
+        public virtual BaseRealm[] AvailableSecondaryRealms => new BaseRealm[] { };
     }
 }

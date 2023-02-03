@@ -44,5 +44,8 @@ namespace AngbandOS.Core.CharacterClasses
         public override bool SenseInventoryTest(int level) => (0 != Program.Rng.RandomLessThan(80000 / ((level * level) + 40)));
         public override bool DetailedSenseInventory => true;
         public override int RealmChoices => RealmChoice.Chaos;
+        public override BaseRealm[] AvailablePrimaryRealms => new BaseRealm[] {
+            SaveGame.SingletonRepository.Realms.Get<ChaosRealm>()
+        };
     }
 }

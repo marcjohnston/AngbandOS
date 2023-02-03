@@ -43,5 +43,18 @@ namespace AngbandOS.Core.CharacterClasses
         public override bool SenseInventoryTest(int level) => (0 != Program.Rng.RandomLessThan(95000 / ((level * level) + 40)));
         public override bool DetailedSenseInventory => true;
         public override int RealmChoices => RealmChoice.Chaos | RealmChoice.Death | RealmChoice.Tarot | RealmChoice.Folk | RealmChoice.Corporeal;
+        public override BaseRealm[] AvailablePrimaryRealms => new BaseRealm[] {
+            SaveGame.SingletonRepository.Realms.Get<NatureRealm>()
+        };
+        public override BaseRealm[] AvailableSecondaryRealms => new BaseRealm[] {
+            SaveGame.SingletonRepository.Realms.Get<LifeRealm>(),
+            SaveGame.SingletonRepository.Realms.Get<SorceryRealm>(),
+            SaveGame.SingletonRepository.Realms.Get<NatureRealm>(),
+            SaveGame.SingletonRepository.Realms.Get<ChaosRealm>(),
+            SaveGame.SingletonRepository.Realms.Get<DeathRealm>(),
+            SaveGame.SingletonRepository.Realms.Get<TarotRealm>(),
+            SaveGame.SingletonRepository.Realms.Get<FolkRealm>(),
+            SaveGame.SingletonRepository.Realms.Get<CorporealRealm>()
+        };
     }
 }
