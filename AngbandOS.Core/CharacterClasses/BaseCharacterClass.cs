@@ -77,7 +77,6 @@
         public virtual int FromScrollWarriorArtifactBiasPercentageChance => 0;
         public virtual bool SenseInventoryTest(int level) => false;
         public virtual bool DetailedSenseInventory => false;
-        public virtual int RealmChoices => RealmChoice.None;
 
         /// <summary>
         /// Represents realms that are available to the character class.  Returns an empty array, if the character class cannot cast spells.
