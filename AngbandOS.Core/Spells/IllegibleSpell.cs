@@ -8,8 +8,13 @@
 
 namespace AngbandOS.Spells
 {
+    /// <summary>
+    /// Represents an IllegibleSpell.  Currently not used.
+    /// Implements the <see cref="AngbandOS.Spells.Spell" />
+    /// </summary>
+    /// <seealso cref="AngbandOS.Spells.Spell" />
     [Serializable]
-    internal class IllegibleSpell : Spell
+    internal class IllegibleSpell : Spell // TODO: Not used.  Looks cool.
     {
         public override void Cast(SaveGame saveGame)
         {

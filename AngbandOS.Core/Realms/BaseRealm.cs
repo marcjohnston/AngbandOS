@@ -26,5 +26,16 @@
         /// <returns> The spell book item category </returns>
         public abstract ItemTypeEnum SpellBookItemCategory { get; }
 
+        protected abstract Spell[] GetGenerateSpellList();
+
+        public Spell[] SpellList(BaseCharacterClass characterClass)
+        {
+            Spell[] spells = GetGenerateSpellList();
+            foreach (Spell spell in spells)
+            {
+                spell.Initialise(characterClass.ID);
+            }
+            return spells;
+        }
     }
 }

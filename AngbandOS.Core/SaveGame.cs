@@ -124,7 +124,7 @@ namespace AngbandOS
 
         public int SpellFirst;
         public readonly int[] SpellOrder = new int[64];
-        public readonly SpellList[] Spells = new SpellList[2];
+        public readonly Spell[][] Spells = new Spell[2][];
         public TalentList Talents;
 
         [NonSerialized]
@@ -14665,11 +14665,11 @@ namespace AngbandOS
                         GetHistory(Player);
                         GetMoney();
 
-                        Spells[0] = new SpellList(Player.Realm1, Player.BaseCharacterClass.ID);
-                        Spells[1] = new SpellList(Player.Realm2, Player.BaseCharacterClass.ID);
+                        Spells[0] = Player.PrimaryRealm.SpellList(Player.BaseCharacterClass);
+                        Spells[1] = Player.SecondaryRealm.SpellList(Player.BaseCharacterClass);
                         Talents = new TalentList(Player.BaseCharacterClass.ID);
                         SpellFirst = 100;
-                        foreach (SpellList bookset in Spells)
+                        foreach (Spell[] bookset in Spells)
                         {
                             foreach (Spell spell in bookset)
                             {
