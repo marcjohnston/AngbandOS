@@ -20,7 +20,7 @@ namespace AngbandOS.Core.FlaggedActions
         {
             PrtField(SaveGame.Player.Name, RowName, ColName);
             PrtField(SaveGame.Player.Race.Title, RowRace, ColRace);
-            PrtField(SaveGame.Player.BaseCharacterClass.ClassSubName(SaveGame.Player.Realm1), RowClass, ColClass);
+            PrtField(SaveGame.Player.BaseCharacterClass.ClassSubName(SaveGame.Player.PrimaryRealm), RowClass, ColClass);
         }
     }
 }

@@ -28,17 +28,17 @@ namespace AngbandOS.Core.CharacterClasses
         public override int HitDieBonus => 6;
         public override int ExperienceFactor => 40;
 
-        public override string ClassSubName(Realm? realm)
+        public override string ClassSubName(BaseRealm? realm)
         {
             switch (realm)
             {
-                case Realm.Corporeal:
+                case CorporealRealm:
                     return "Ascetic";
 
-                case Realm.Tarot:
+                case TarotRealm:
                     return "Ninja";
 
-                case Realm.Chaos:
+                case ChaosRealm:
                     return "Street Fighter";
 
                 default:

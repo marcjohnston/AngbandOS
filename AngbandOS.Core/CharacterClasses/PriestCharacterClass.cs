@@ -27,9 +27,15 @@ namespace AngbandOS.Core.CharacterClasses
         public override int RangedAttackBonusPerLevel => 20;
         public override int HitDieBonus => 2;
         public override int ExperienceFactor => 20;
-        public override string ClassSubName(Realm? realm)
+        public override string ClassSubName(BaseRealm? realm)
         {
-            return realm == Realm.Death ? "Exorcist" : "Priest";
+            switch (realm)
+            {
+                case DeathRealm:
+                    return "Exorcist";
+                default:
+                    return "Priest";
+            }
         }
         public override int PrimeStat => Ability.Wisdom;
         public override string[] Info => new string[] {

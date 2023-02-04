@@ -2242,7 +2242,7 @@ namespace AngbandOS
                     buf += " the Magnificent";
                 }
                 Screen.Print(buf, 39, 1);
-                buf = $"Level {corpse.Level} {corpse.BaseCharacterClass.ClassSubName(corpse.Realm1)}";
+                buf = $"Level {corpse.Level} {corpse.BaseCharacterClass.ClassSubName(corpse.PrimaryRealm)}";
                 Screen.Print(buf, 40, 1);
                 string tmp = $"Killed on Level {CurrentDepth}".PadLeft(45);
                 Screen.Print(tmp, 39, 34);
