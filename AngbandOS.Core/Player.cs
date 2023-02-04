@@ -162,9 +162,9 @@ namespace AngbandOS
         /// Returns the race the character was first assigned at birth.
         /// </summary>
         public Race RaceAtBirth;
-        public Realm? Realm1;
+        public Realm? Realm1 => PrimaryRealm?.ID;
         public BaseRealm? PrimaryRealm = null;
-        public Realm? Realm2;
+        public Realm? Realm2 => SecondaryRealm?.ID;
         public BaseRealm? SecondaryRealm = null;
         public Religion Religion = new Religion();
         public int SkillDigging;

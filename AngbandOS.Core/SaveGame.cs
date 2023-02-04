@@ -13541,7 +13541,9 @@ namespace AngbandOS
         private Race? _prevRace = null;
 
         private Realm? _prevRealm1;
+        private BaseRealm? _prevPrimaryRealm;
         private Realm? _prevRealm2;
+        private BaseRealm? _prevSecondaryRealm;
         private int _prevSex;
 
         public bool CharacterGeneration(ExPlayer ex)
@@ -14010,8 +14012,8 @@ namespace AngbandOS
 
         private void GetRealmsRandomly()
         {
-            Player.Realm1 = new WeightedRandom<BaseRealm>(Player.BaseCharacterClass.AvailablePrimaryRealms).Choose()?.ID;
-            Player.Realm2 = new WeightedRandom<BaseRealm>(Player.BaseCharacterClass.AvailableSecondaryRealms).Choose()?.ID; ;
+            Player.PrimaryRealm = new WeightedRandom<BaseRealm>(Player.BaseCharacterClass.AvailablePrimaryRealms).Choose();
+            Player.SecondaryRealm = new WeightedRandom<BaseRealm>(Player.BaseCharacterClass.AvailableSecondaryRealms).Choose();
             if (!Player.BaseCharacterClass.WorshipsADeity)
             {
                 return;
@@ -14388,7 +14390,7 @@ namespace AngbandOS
                         if (menu[0] == Constants.GenerateReplay)
                         {
                             autoChose[stage] = true;
-                            Player.Realm1 = _prevRealm1;
+                            Player.PrimaryRealm = _prevPrimaryRealm;
                             stage++;
                             break;
                         }
@@ -14402,14 +14404,14 @@ namespace AngbandOS
                         if (Player.BaseCharacterClass.AvailablePrimaryRealms.Length == 0) 
                         {
                             autoChose[stage] = true;
-                            Player.Realm1 = null;
+                            Player.PrimaryRealm = null;
                             stage++;
                             break;
                         }
                         else if (Player.BaseCharacterClass.AvailablePrimaryRealms.Length == 1)
                         {
                             autoChose[stage] = true;
-                            Player.Realm1 = Player.BaseCharacterClass.AvailablePrimaryRealms[0].ID;
+                            Player.PrimaryRealm = Player.BaseCharacterClass.AvailablePrimaryRealms[0];
                             stage++;
                             break;
                         }
@@ -14475,7 +14477,7 @@ namespace AngbandOS
                         }
                         if (stage > BirthStage.RealmSelection1)
                         {
-                            Player.Realm1 = realmChoice[menu[BirthStage.RealmSelection1]];
+                            Player.PrimaryRealm = SingletonRepository.Realms.Single(_realm => _realm.ID == realmChoice[menu[BirthStage.RealmSelection1]]);
                         }
                         break;
 
@@ -14483,7 +14485,7 @@ namespace AngbandOS
                         if (menu[0] == Constants.GenerateReplay)
                         {
                             autoChose[stage] = true;
-                            Player.Realm2 = _prevRealm2;
+                            Player.SecondaryRealm = _prevSecondaryRealm;
                             if (Player.BaseCharacterClass.ID == CharacterClass.Priest)
                             {
                                 switch (Player.Realm2)
@@ -14526,18 +14528,18 @@ namespace AngbandOS
                             stage++;
                             break;
                         }
-                        Player.Realm2 = null;
+                        Player.SecondaryRealm = null;
                         if (Player.BaseCharacterClass.AvailableSecondaryRealms.Length == 0)
                         {
                             autoChose[stage] = true;
-                            Player.Realm1 = null;
+                            Player.SecondaryRealm = null;
                             stage++;
                             break;
                         }
                         else if (Player.BaseCharacterClass.AvailableSecondaryRealms.Length == 1)
                         {
                             autoChose[stage] = true;
-                            Player.Realm1 = Player.BaseCharacterClass.AvailableSecondaryRealms[0].ID;
+                            Player.SecondaryRealm = Player.BaseCharacterClass.AvailableSecondaryRealms[0];
                             stage++;
                             break;
                         }
@@ -14605,7 +14607,7 @@ namespace AngbandOS
                         }
                         if (stage > BirthStage.RealmSelection2)
                         {
-                            Player.Realm2 = realmChoice[menu[BirthStage.RealmSelection2]];
+                            Player.SecondaryRealm = SingletonRepository.Realms.Single(_realm => _realm.ID == realmChoice[menu[BirthStage.RealmSelection2]]);
                             if (Player.BaseCharacterClass.ID == CharacterClass.Priest)
                             {
                                 switch (Player.Realm2)
