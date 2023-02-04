@@ -58,12 +58,12 @@ namespace AngbandOS
         /// <summary>
         /// The character's first realm of magic (if any)
         /// </summary>
-        public readonly Realm? Realm1;
+        public readonly BaseRealm? PrimaryRealm;
 
         /// <summary>
         /// The character's second realm of magic (if any)
         /// </summary>
-        public readonly Realm? Realm2;
+        public readonly BaseRealm? SecondaryRealm;
 
         /// <summary>
         /// Make an ex-player from a player, remembering the essential information about the character
@@ -75,8 +75,8 @@ namespace AngbandOS
             Race = player.Race;
             RaceAtBirth = player.RaceAtBirth;
             CharacterClassName = player.BaseCharacterClass.GetType().Name;
-            Realm1 = player.Realm1;
-            Realm2 = player.Realm2;
+            PrimaryRealm = player.PrimaryRealm;
+            SecondaryRealm = player.SecondaryRealm;
             Name = player.Name;
             Level = player.Level;
             Generation = player.Generation;

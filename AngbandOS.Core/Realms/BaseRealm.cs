@@ -16,5 +16,7 @@
         public abstract Realm ID { get; }
 
         public abstract string[] Info { get; }
+
+        public abstract string Name { get; }
     }
 }

@@ -13540,9 +13540,9 @@ namespace AngbandOS
         /// </summary>
         private Race? _prevRace = null;
 
-        private Realm? _prevRealm1;
+        private Realm? _prevRealm1 => _prevPrimaryRealm?.ID;
         private BaseRealm? _prevPrimaryRealm;
-        private Realm? _prevRealm2;
+        private Realm? _prevRealm2 => _prevSecondaryRealm?.ID;
         private BaseRealm? _prevSecondaryRealm;
         private int _prevSex;
 
@@ -13667,27 +13667,15 @@ namespace AngbandOS
                 str = Player.BaseCharacterClass.Title;
             }
             Screen.Print(Colour.Brown, str, 5, 15);
-            string buf = string.Empty;
             if (stage == 0)
             {
-                if (_prevRealm1 != null)
-                {
-                    if (_prevRealm2 != null)
-                    {
-                        buf = RealmName(_prevRealm1) + "/" + RealmName(_prevRealm2);
-                    }
-                    else
-                    {
-                        buf = RealmName(_prevRealm1);
-                    }
-                }
-                if (_prevRealm1 != null || _prevRealm2 != null)
+                if (_prevPrimaryRealm != null || _prevSecondaryRealm != null)
                 {
                     Screen.Print(Colour.Blue, "Magic       :", 6, 1);
                 }
-                if (_prevRealm1 != null)
+                if (_prevPrimaryRealm != null)
                 {
-                    Screen.Print(Colour.Brown, buf, 6, 15);
+                    Screen.Print(Colour.Brown, RealmNames(_prevPrimaryRealm, _prevSecondaryRealm), 6, 15);
                 }
             }
             else if (stage < 4)
@@ -13698,25 +13686,13 @@ namespace AngbandOS
             }
             else
             {
-                buf = string.Empty;
-                if (Player.Realm1 != null)
-                {
-                    if (Player.Realm2 != null)
-                    {
-                        buf = RealmName(Player.Realm1) + "/" + RealmName(Player.Realm2);
-                    }
-                    else
-                    {
-                        buf = RealmName(Player.Realm1);
-                    }
-                }
                 if (Player.Realm1 != null || Player.Realm2 != null)
                 {
                     Screen.Print(Colour.Blue, "Magic       :", 6, 1);
                 }
                 if (Player.Realm1 != null)
                 {
-                    Screen.Print(Colour.Brown, buf, 6, 15);
+                    Screen.Print(Colour.Brown, RealmNames(Player.PrimaryRealm, Player.SecondaryRealm), 6, 15);
                 }
             }
             Screen.Print(Colour.Blue, "Birthday", 2, 32);
@@ -13766,7 +13742,7 @@ namespace AngbandOS
             {
                 for (i = 0; i < 6; i++)
                 {
-                    buf = Player.BaseCharacterClass.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
+                    string buf = Player.BaseCharacterClass.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
                     Screen.Print(Colour.Brown, buf, 22 + i, 20);
                 }
             }
@@ -13781,7 +13757,7 @@ namespace AngbandOS
             {
                 for (i = 0; i < 6; i++)
                 {
-                    buf = (Player.Race.AbilityBonus[i]).ToString("+0;-0;+0").PadLeft(3);
+                    string buf = (Player.Race.AbilityBonus[i]).ToString("+0;-0;+0").PadLeft(3);
                     Screen.Print(Colour.Brown, buf, 22 + i, 14);
                 }
             }
@@ -14054,8 +14030,8 @@ namespace AngbandOS
                 _prevSex = Constants.SexFemale;
                 _prevRace = SingletonRepository.Races.Get<HumanRace>();
                 _prevCharacterClass = SingletonRepository.CharacterClasses.Get<WarriorCharacterClass>();
-                _prevRealm1 = null;
-                _prevRealm2 = null;
+                _prevPrimaryRealm = null;
+                _prevSecondaryRealm = null;
                 _prevName = "Xena";
                 _prevGeneration = 0;
             }
@@ -14064,8 +14040,8 @@ namespace AngbandOS
                 _prevSex = ex.GenderIndex;
                 _prevRace = ex.RaceAtBirth;
                 _prevCharacterClass = SingletonRepository.CharacterClasses.Get(ex.CharacterClassName);
-                _prevRealm1 = ex.Realm1;
-                _prevRealm2 = ex.Realm2;
+                _prevPrimaryRealm = ex.PrimaryRealm;
+                _prevSecondaryRealm = ex.SecondaryRealm;
                 _prevName = ex.Name;
                 _prevGeneration = ex.Generation;
             }
@@ -14379,7 +14355,7 @@ namespace AngbandOS
                         autoChose[stage] = false;
                         for (i = 0; i < _menuLength; i++)
                         {
-                            _menuItem[i] = RealmName(realmChoice[i]);
+                            _menuItem[i] = SingletonRepository.Realms.Single(_realm => _realm.ID == realmChoice[i]).Name;
                         }
                         DisplayPartialCharacter(stage);
                         if (menu[stage] >= _menuLength)
@@ -14508,7 +14484,7 @@ namespace AngbandOS
                         autoChose[stage] = false;
                         for (i = 0; i < _menuLength; i++)
                         {
-                            _menuItem[i] = RealmName(realmChoice[i]);
+                            _menuItem[i] = SingletonRepository.Realms.Single(_realm => _realm.ID == realmChoice[i]).Name;
                         }
                         DisplayPartialCharacter(stage);
                         if (menu[stage] >= _menuLength)
@@ -14517,8 +14493,7 @@ namespace AngbandOS
                         }
                         MenuDisplay(menu[stage]);
                         DisplayRealmInfo(SingletonRepository.Realms.Single(_realm => _realm.ID == realmChoice[menu[stage]]));
-                        Screen.Print(Colour.Orange,
-                            "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+                        Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true && !Shutdown)
                         {
                             c = Inkey();
@@ -18892,39 +18867,19 @@ namespace AngbandOS
             return martialArtistArmWgt > 100 + (Player.Level * 4);
         }
 
-        public string RealmName(Realm? realm)
+        public string RealmNames(BaseRealm? primaryRealm, BaseRealm? secondaryRealm)
         {
-            switch (realm)
+            if (primaryRealm != null && secondaryRealm != null)
             {
-                case null:
-                    return "None";
-
-                case Realm.Life:
-                    return "Life";
-
-                case Realm.Sorcery:
-                    return "Sorcery";
-
-                case Realm.Nature:
-                    return "Nature";
-
-                case Realm.Chaos:
-                    return "Chaos";
-
-                case Realm.Death:
-                    return "Death";
-
-                case Realm.Tarot:
-                    return "Tarot";
-
-                case Realm.Folk:
-                    return "Folk";
-
-                case Realm.Corporeal:
-                    return "Corporeal";
-
-                default:
-                    return "Unknown Realm";
+                return primaryRealm.Name + "/" + secondaryRealm.Name;
+            }
+            else if (primaryRealm != null)
+            {
+                return primaryRealm.Name;
+            }
+            else
+            {
+                return "None";
             }
         }
     }

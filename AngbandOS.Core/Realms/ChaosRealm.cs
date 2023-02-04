@@ -18,5 +18,7 @@
             "wants to be able to damage their foes directly, but is ",
             "somewhat lacking in non-combat spells."
         };
+
+        public override string Name => "Chaos";
     }
 }

@@ -16,5 +16,6 @@
             "all, almost exclusively containing summoning and transport", 
             "spells."
        };
+        public override string Name => "Tarot";
     }
 }

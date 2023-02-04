@@ -16,5 +16,6 @@
             "miscellaneous spells, but little in the way of offensive", 
             "and defensive capabilities."
       };
+        public override string Name => "Nature";
     }
 }

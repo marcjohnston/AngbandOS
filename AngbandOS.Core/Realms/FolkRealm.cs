@@ -17,5 +17,6 @@
             "in other realms - but usually less effectively than the", 
             "specialist realms."
         };
+        public override string Name => "Folk";
     }
 }

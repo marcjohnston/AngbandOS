@@ -16,6 +16,7 @@
             "itself, for example spells dealing with magical items.",
             "It is the premier source of miscellaneous non-combat", 
             "utility spells."
-     };
+        };
+        public override string Name => "Sorcery";
     }
 }

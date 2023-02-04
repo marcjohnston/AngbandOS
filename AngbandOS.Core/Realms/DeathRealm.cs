@@ -16,5 +16,6 @@
             "curses, and undead summoning. Like chaos, it is a very",
             "offensive realm."
         };
+        public override string Name => "Death";
     }
 }

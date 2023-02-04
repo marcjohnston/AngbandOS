@@ -17,5 +17,6 @@
             "affect other creatures or objects. The corporeal realm is",
             "particularly good at sensing spells."
        };
+        public override string Name => "Corporeal";
     }
 }

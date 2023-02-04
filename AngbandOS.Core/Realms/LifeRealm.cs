@@ -16,5 +16,6 @@
             "offensive capability against undead and demons. It is the", 
             "most defensive of the realms."
       };
+        public override string Name => "Life";
     }
 }

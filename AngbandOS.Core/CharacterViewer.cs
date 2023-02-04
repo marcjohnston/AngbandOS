@@ -506,7 +506,6 @@ namespace AngbandOS
         /// </summary>
         private void DisplayPlayerTop()
         {
-            string realmBuff = "";
             SaveGame.Screen.Print(Colour.Blue, "Name        :", 2, 1);
             SaveGame.Screen.Print(Colour.Blue, "Gender      :", 3, 1);
             SaveGame.Screen.Print(Colour.Blue, "Race        :", 4, 1);
@@ -520,19 +519,9 @@ namespace AngbandOS
             SaveGame.Screen.Print(Colour.Brown, SaveGame.Player.Race.Title, 4, 15);
             SaveGame.Screen.Print(Colour.Brown, SaveGame.Player.BaseCharacterClass.ClassSubName(SaveGame.Player.PrimaryRealm), 5, 15);
             // Only print realms if we have them
-            if (SaveGame.Player.Realm1 != 0)
+            if (SaveGame.Player.PrimaryRealm != null)
             {
-                if (SaveGame.Player.Realm2 != 0)
-                {
-                    realmBuff = SaveGame.RealmName(SaveGame.Player.Realm1) + "/" + SaveGame.RealmName(SaveGame.Player.Realm2);
-                }
-                else
-                {
-                    realmBuff = SaveGame.RealmName(SaveGame.Player.Realm1);
-                }
-            }
-            if (SaveGame.Player.Realm1 != 0)
-            {
+                string realmBuff = SaveGame.RealmNames(SaveGame.Player.PrimaryRealm, SaveGame.Player.SecondaryRealm);
                 SaveGame.Screen.Print(Colour.Brown, realmBuff, 6, 15);
             }
             // Fanatics and Cultists get a patron
