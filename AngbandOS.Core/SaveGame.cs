@@ -13841,61 +13841,13 @@ namespace AngbandOS
             }
         }
 
-        private void DisplayRealmInfo(Realm prealm)
+        private void DisplayRealmInfo(BaseRealm prealm)
         {
-            switch (prealm)
+            int y = 30;
+            foreach (string info in prealm.Info)
             {
-                case Realm.Chaos:
-                    Screen.Print(Colour.Purple, "The Chaos realm is the most destructive realm. It focuses", 30, 20);
-                    Screen.Print(Colour.Purple, "on combat spells. It is a very good choice for anyone who", 31, 20);
-                    Screen.Print(Colour.Purple, "wants to be able to damage their foes directly, but is ", 32, 20);
-                    Screen.Print(Colour.Purple, "somewhat lacking in non-combat spells.", 33, 20);
-                    break;
-
-                case Realm.Corporeal:
-                    Screen.Print(Colour.Purple, "The Corporeal realm contains spells that exclusively affect", 30, 20);
-                    Screen.Print(Colour.Purple, "the caster's body, although some spells also indirectly", 31, 20);
-                    Screen.Print(Colour.Purple, "affect other creatures or objects. The corporeal realm is", 32, 20);
-                    Screen.Print(Colour.Purple, "particularly good at sensing spells.", 33, 20);
-                    break;
-
-                case Realm.Death:
-                    Screen.Print(Colour.Purple, "The Death realm has a combination of life-draining spells,", 30, 20);
-                    Screen.Print(Colour.Purple, "curses, and undead summoning. Like chaos, it is a very", 31, 20);
-                    Screen.Print(Colour.Purple, "offensive realm.", 32, 20);
-                    break;
-
-                case Realm.Folk:
-                    Screen.Print(Colour.Purple, "The Folk realm is the least specialised of all the realms.", 30, 20);
-                    Screen.Print(Colour.Purple, "Folk magic is capable of doing any effect that is possible", 31, 20);
-                    Screen.Print(Colour.Purple, "in other realms - but usually less effectively than the", 32, 20);
-                    Screen.Print(Colour.Purple, "specialist realms.", 33, 20);
-                    break;
-
-                case Realm.Life:
-                    Screen.Print(Colour.Purple, "The Life realm is devoted to healing and buffing, with some", 30, 20);
-                    Screen.Print(Colour.Purple, "offensive capability against undead and demons. It is the", 31, 20);
-                    Screen.Print(Colour.Purple, "most defensive of the realms.", 32, 20);
-                    break;
-
-                case Realm.Nature:
-                    Screen.Print(Colour.Purple, "The Nature realm has a large number of summoning spells and", 30, 20);
-                    Screen.Print(Colour.Purple, "miscellaneous spells, but little in the way of offensive", 31, 20);
-                    Screen.Print(Colour.Purple, "and defensive capabilities.", 32, 20);
-                    break;
-
-                case Realm.Sorcery:
-                    Screen.Print(Colour.Purple, "The Sorcery realm contains spells dealing with raw magic", 30, 20);
-                    Screen.Print(Colour.Purple, "itself, for example spells dealing with magical items.", 31, 20);
-                    Screen.Print(Colour.Purple, "It is the premier source of miscellaneous non-combat", 32, 20);
-                    Screen.Print(Colour.Purple, "utility spells.", 33, 20);
-                    break;
-
-                case Realm.Tarot:
-                    Screen.Print(Colour.Purple, "The Tarot realm is one of the most specialised realms of", 30, 20);
-                    Screen.Print(Colour.Purple, "all, almost exclusively containing summoning and transport", 31, 20);
-                    Screen.Print(Colour.Purple, "spells.", 32, 20);
-                    break;
+                Screen.Print(Colour.Purple, info, y, 20);
+                y++;
             }
         }
 
@@ -14435,7 +14387,7 @@ namespace AngbandOS
                             menu[stage] = 0;
                         }
                         MenuDisplay(menu[stage]);
-                        DisplayRealmInfo(realmChoice[menu[stage]]);
+                        DisplayRealmInfo(SingletonRepository.Realms.Single(_realm => _realm.ID == realmChoice[menu[stage]]));
                         Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true && !Shutdown)
                         {
@@ -14564,7 +14516,7 @@ namespace AngbandOS
                             menu[stage] = 0;
                         }
                         MenuDisplay(menu[stage]);
-                        DisplayRealmInfo(realmChoice[menu[stage]]);
+                        DisplayRealmInfo(SingletonRepository.Realms.Single(_realm => _realm.ID == realmChoice[menu[stage]]));
                         Screen.Print(Colour.Orange,
                             "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true && !Shutdown)

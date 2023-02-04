@@ -14,5 +14,7 @@
         /// </summary>
         /// <value>The identifier.</value>
         public abstract Realm ID { get; }
+
+        public abstract string[] Info { get; }
     }
 }

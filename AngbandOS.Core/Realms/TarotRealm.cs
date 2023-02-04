@@ -11,5 +11,10 @@
         /// </summary>
         /// <value>The identifier.</value>
         public override Realm ID => Realm.Tarot;
+        public override string[] Info => new string[] {
+            "The Tarot realm is one of the most specialised realms of", 
+            "all, almost exclusively containing summoning and transport", 
+            "spells."
+       };
     }
 }

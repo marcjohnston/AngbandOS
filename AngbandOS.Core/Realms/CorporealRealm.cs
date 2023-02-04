@@ -11,5 +11,11 @@
         /// </summary>
         /// <value>The identifier.</value>
         public override Realm ID => Realm.Corporeal;
+        public override string[] Info => new string[] {
+            "The Corporeal realm contains spells that exclusively affect",
+            "the caster's body, although some spells also indirectly",
+            "affect other creatures or objects. The corporeal realm is",
+            "particularly good at sensing spells."
+       };
     }
 }

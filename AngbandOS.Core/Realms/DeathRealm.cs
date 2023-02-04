@@ -11,5 +11,10 @@
         /// </summary>
         /// <value>The identifier.</value>
         public override Realm ID => Realm.Death;
+        public override string[] Info => new string[] {
+            "The Death realm has a combination of life-draining spells,",
+            "curses, and undead summoning. Like chaos, it is a very",
+            "offensive realm."
+        };
     }
 }

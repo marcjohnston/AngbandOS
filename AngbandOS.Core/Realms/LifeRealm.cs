@@ -11,5 +11,10 @@
         /// </summary>
         /// <value>The identifier.</value>
         public override Realm ID => Realm.Life;
+        public override string[] Info => new string[] {
+            "The Life realm is devoted to healing and buffing, with some", 
+            "offensive capability against undead and demons. It is the", 
+            "most defensive of the realms."
+      };
     }
 }
