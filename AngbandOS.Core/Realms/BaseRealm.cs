@@ -18,5 +18,13 @@
         public abstract string[] Info { get; }
 
         public abstract string Name { get; }
+
+        /// <summary>
+        /// Returns the spell book item category that represents the realm.
+        /// </summary>
+        /// <param name="realm"> The realm of magic </param>
+        /// <returns> The spell book item category </returns>
+        public abstract ItemTypeEnum SpellBookItemCategory { get; }
+
     }
 }

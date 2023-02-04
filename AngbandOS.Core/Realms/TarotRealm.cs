@@ -17,5 +17,6 @@
             "spells."
        };
         public override string Name => "Tarot";
-    }
+        public override ItemTypeEnum SpellBookItemCategory => ItemTypeEnum.TarotBook;
+  }
 }

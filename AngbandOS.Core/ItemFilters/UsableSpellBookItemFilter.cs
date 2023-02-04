@@ -5,8 +5,16 @@
     /// </summary>
     internal class UsableSpellBookItemFilter : ItemCategoryItemFilter
     {
-        public UsableSpellBookItemFilter(SaveGame saveGame) : base(saveGame.Player.Realm1.ToSpellBookItemCategory(), saveGame.Player.Realm2.ToSpellBookItemCategory())
+        public UsableSpellBookItemFilter(SaveGame saveGame) : base()
         {
+            if (saveGame.Player.PrimaryRealm != null)
+            {
+                ItemCategories.Add(saveGame.Player.PrimaryRealm.SpellBookItemCategory);
+                if (saveGame.Player.SecondaryRealm != null)
+                {
+                    ItemCategories.Add(saveGame.Player.SecondaryRealm.SpellBookItemCategory);
+                }
+            }
         }
     }
 }

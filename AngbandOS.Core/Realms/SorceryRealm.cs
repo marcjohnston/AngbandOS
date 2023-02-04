@@ -18,5 +18,6 @@
             "utility spells."
         };
         public override string Name => "Sorcery";
+        public override ItemTypeEnum SpellBookItemCategory => ItemTypeEnum.SorceryBook;
     }
 }

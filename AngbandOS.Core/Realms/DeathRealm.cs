@@ -17,5 +17,6 @@
             "offensive realm."
         };
         public override string Name => "Death";
-    }
+        public override ItemTypeEnum SpellBookItemCategory => ItemTypeEnum.DeathBook;
+  }
 }

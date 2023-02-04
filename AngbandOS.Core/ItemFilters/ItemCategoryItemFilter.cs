@@ -15,11 +15,11 @@
             return false;
         }
 
-        private ItemTypeEnum[] ItemCategories { get; }
+        protected List<ItemTypeEnum> ItemCategories = new List<ItemTypeEnum>();
 
         public ItemCategoryItemFilter(params ItemTypeEnum[] itemCategories)
         {
-            ItemCategories = itemCategories;
+            ItemCategories.AddRange(itemCategories);
         }
     }
 }

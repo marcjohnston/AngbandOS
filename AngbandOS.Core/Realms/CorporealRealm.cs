@@ -18,5 +18,6 @@
             "particularly good at sensing spells."
        };
         public override string Name => "Corporeal";
-    }
+        public override ItemTypeEnum SpellBookItemCategory => ItemTypeEnum.CorporealBook;
+   }
 }

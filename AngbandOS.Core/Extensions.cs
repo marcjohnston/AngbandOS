@@ -268,44 +268,6 @@ namespace AngbandOS
             return roman.ToString();
         }
 
-        /// <summary>
-        /// Converts a realm to a spell book item category
-        /// </summary>
-        /// <param name="realm"> The realm of magic </param>
-        /// <returns> The spell book item category </returns>
-        public static ItemTypeEnum ToSpellBookItemCategory(this Realm? realm)
-        {
-            switch (realm)
-            {
-                case Realm.Life:
-                    return ItemTypeEnum.LifeBook;
-
-                case Realm.Sorcery:
-                    return ItemTypeEnum.SorceryBook;
-
-                case Realm.Nature:
-                    return ItemTypeEnum.NatureBook;
-
-                case Realm.Chaos:
-                    return ItemTypeEnum.ChaosBook;
-
-                case Realm.Death:
-                    return ItemTypeEnum.DeathBook;
-
-                case Realm.Tarot:
-                    return ItemTypeEnum.TarotBook;
-
-                case Realm.Folk:
-                    return ItemTypeEnum.FolkBook;
-
-                case Realm.Corporeal:
-                    return ItemTypeEnum.CorporealBook;
-
-                default:
-                    return ItemTypeEnum.None;
-            }
-        }
-
         public static string Pluralize(string singular, int count)
         {
             if (count == 1)

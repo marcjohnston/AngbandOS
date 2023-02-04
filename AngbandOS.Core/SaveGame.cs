@@ -11519,7 +11519,7 @@ namespace AngbandOS
             }
             Item oPtr = item >= 0 ? Player.Inventory[item] : Level.Items[0 - item];
             int sval = oPtr.ItemSubCategory;
-            bool useSetTwo = oPtr.Category == Player.Realm2.ToSpellBookItemCategory();
+            bool useSetTwo = oPtr.Category == Player.SecondaryRealm?.SpellBookItemCategory;
             HandleStuff();
             if (!GetSpell(out int spell, Player.BaseCharacterClass.SpellCastingType == CastingType.Divine ? "recite" : "cast", sval, true, useSetTwo, Player))
             {

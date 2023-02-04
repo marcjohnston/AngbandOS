@@ -18,5 +18,6 @@
             "specialist realms."
         };
         public override string Name => "Folk";
-    }
+        public override ItemTypeEnum SpellBookItemCategory => ItemTypeEnum.FolkBook;
+   }
 }

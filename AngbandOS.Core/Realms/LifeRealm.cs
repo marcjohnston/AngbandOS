@@ -17,5 +17,7 @@
             "most defensive of the realms."
       };
         public override string Name => "Life";
+
+        public override ItemTypeEnum SpellBookItemCategory => ItemTypeEnum.LifeBook;
     }
 }

@@ -1448,7 +1448,7 @@ namespace AngbandOS
             // Check each book
             Item item = itemIndex >= 0 ? SaveGame.Player.Inventory[itemIndex] : SaveGame.Level.Items[0 - itemIndex];
             int itemSubCategory = item.ItemSubCategory;
-            bool useSetTwo = item.Category == SaveGame.Player.Realm2.ToSpellBookItemCategory();
+            bool useSetTwo = item.Category == SaveGame.Player.SecondaryRealm.SpellBookItemCategory;
             SaveGame.HandleStuff();
             int spellIndex;
             // Arcane casters can choose their spell

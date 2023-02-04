@@ -20,5 +20,6 @@
         };
 
         public override string Name => "Chaos";
-    }
+        public override ItemTypeEnum SpellBookItemCategory => ItemTypeEnum.ChaosBook;
+  }
 }
