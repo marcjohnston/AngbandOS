@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.ActivationPowers
+﻿namespace AngbandOS.Core.ActivationPowers
 {
     /// <summary>
     /// Heal 700 health and remove all bleeding.

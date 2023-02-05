@@ -1,6 +1,6 @@
-﻿global using AngbandOS.ActivationPowers;
-global using AngbandOS.ArtifactBiases;
+﻿global using AngbandOS.ArtifactBiases;
 global using AngbandOS.Core;
+global using AngbandOS.Core.ActivationPowers;
 global using AngbandOS.Core.AlterActions;
 global using AngbandOS.Core.AttackTypes;
 global using AngbandOS.Core.CharacterClasses;

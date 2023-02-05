@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.ActivationPowers
+﻿namespace AngbandOS.Core.ActivationPowers
 {
     /// <summary>
     /// Restore all ability drain and lost experience.

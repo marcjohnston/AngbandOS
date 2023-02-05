@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.ActivationPowers
+﻿namespace AngbandOS.Core.ActivationPowers
 {
     /// <summary>
     /// Shoot a shard ball for 120 + level damage.

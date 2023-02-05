@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace AngbandOS.ActivationPowers
+namespace AngbandOS.Core.ActivationPowers
 {
     internal static class ActivationPowerManager // TODO: This is a singleton
     {

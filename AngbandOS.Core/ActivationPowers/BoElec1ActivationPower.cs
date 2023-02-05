@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.ActivationPowers
+﻿namespace AngbandOS.Core.ActivationPowers
 {
     /// <summary>
     /// Shoot a lightning bolt that does 4d8 damage

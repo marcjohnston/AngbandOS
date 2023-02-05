@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.ActivationPowers
+﻿namespace AngbandOS.Core.ActivationPowers
 {
     [Serializable]
     internal class BaFire1ActivationPower : DirectionalActivationPower
