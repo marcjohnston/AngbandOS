@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Commands
+﻿namespace AngbandOS.Core.Commands
 {
     /// <summary>
     /// Toggle whether we're automatically searching while moving

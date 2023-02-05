@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Commands
+﻿namespace AngbandOS.Core.Commands
 {
     /// <summary>
     /// Print the version number and build info of the game

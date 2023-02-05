@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Commands
+﻿namespace AngbandOS.Core.Commands
 {
     /// <summary>
     /// Read a scroll from the inventory or floor

@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Commands
+﻿namespace AngbandOS.Core.Commands
 {
     /// <summary>
     /// Quaff a potion from the inventory or the ground

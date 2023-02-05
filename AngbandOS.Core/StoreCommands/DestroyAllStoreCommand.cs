@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.Core.StoreCommands
 {
     /// <summary>
     /// Destroy all worthless items in your pack

@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Commands
+﻿namespace AngbandOS.Core.Commands
 {
     /// <summary>
     /// Wield/wear an item

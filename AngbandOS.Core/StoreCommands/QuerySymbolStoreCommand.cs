@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.Core.StoreCommands
 {
     /// <summary>
     /// Show the player what a particular symbol represents

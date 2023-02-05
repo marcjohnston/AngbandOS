@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.Core.StoreCommands
 {
     /// <summary>
     /// Look in the player's journal for any one of a number of different reasons

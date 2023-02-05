@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Commands
+﻿namespace AngbandOS.Core.StoreCommands
 {
     [Serializable]
     internal abstract class BaseStoreCommand

@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.StoreCommands
+﻿namespace AngbandOS.Core.StoreCommands
 {
     /// <summary>
     /// Browse a book

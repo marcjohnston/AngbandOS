@@ -8993,6 +8993,7 @@ namespace AngbandOS
             }
             // Destroying something takes a turn
             EnergyUse = 100;
+
             // Can't destroy an artifact artifact
             if (item.IsFixedArtifact() || !string.IsNullOrEmpty(item.RandartName))
             {
@@ -9010,6 +9011,7 @@ namespace AngbandOS
                 return;
             }
             MsgPrint($"You destroy {itemName}.");
+
             // Warriors and paladins get experience for destroying magic books
             if (ItemFilterHighLevelBook(item))
             {
@@ -9054,6 +9056,7 @@ namespace AngbandOS
                     Player.GainExperience(testerExp * amount);
                 }
             }
+
             // Tidy up the player's inventory
             if (itemIndex >= 0)
             {

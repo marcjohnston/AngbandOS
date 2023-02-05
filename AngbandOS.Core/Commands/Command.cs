@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Commands
+﻿namespace AngbandOS.Core.Commands
 {
     [Serializable]
     internal abstract class Command // TODO: Convert this to a class
