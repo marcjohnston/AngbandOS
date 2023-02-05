@@ -6,7 +6,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Spells.Corporeal
+namespace AngbandOS.Core.Spells.Corporeal
 {
     [Serializable]
     internal class CorporealSpellWordOfRecall : Spell

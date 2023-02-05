@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 using AngbandOS.Talents;
 
-namespace AngbandOS.Spells
+namespace AngbandOS.Core.Spells
 {
     [Serializable]
     internal class TalentList : List<Talent>

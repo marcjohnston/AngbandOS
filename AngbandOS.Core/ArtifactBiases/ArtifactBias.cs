@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.ArtifactBiases
+﻿namespace AngbandOS.Core.ArtifactBiases
 {
     /// <summary>
     /// Represents the bias used when applying special abilities to an artifact.

@@ -5,11 +5,11 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.Mutations.ActiveMutations;
-using AngbandOS.Mutations.PassiveMutations;
-using AngbandOS.Mutations.RandomMutations;
+using AngbandOS.Core.Mutations.ActiveMutations;
+using AngbandOS.Core.Mutations.PassiveMutations;
+using AngbandOS.Core.Mutations.RandomMutations;
 
-namespace AngbandOS.Mutations
+namespace AngbandOS.Core.Mutations
 {
     [Serializable]
     internal class Genome

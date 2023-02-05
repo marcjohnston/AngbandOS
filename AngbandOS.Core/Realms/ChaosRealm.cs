@@ -1,4 +1,4 @@
-﻿using AngbandOS.Spells.Chaos;
+﻿using AngbandOS.Core.Spells.Chaos;
 
 namespace AngbandOS.Core.Realms
 {

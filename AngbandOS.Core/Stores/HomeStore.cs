@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Stores
+﻿namespace AngbandOS.Core.Stores
 {
     [Serializable]
     internal class HomeStore : Store

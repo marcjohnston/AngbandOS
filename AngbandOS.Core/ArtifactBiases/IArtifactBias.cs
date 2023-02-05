@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.ArtifactBiases
+﻿namespace AngbandOS.Core.ArtifactBiases
 {
     /// <summary>
     /// Represents the interface for the bias used when giving random powers to an artifact.

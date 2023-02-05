@@ -9858,7 +9858,7 @@ namespace AngbandOS
                     pets++;
                 }
             }
-            List<Mutations.Mutation> activeMutations = Player.Dna.ActivatableMutations(Player);
+            List<Mutation> activeMutations = Player.Dna.ActivatableMutations(Player);
             if (!hasRacial && activeMutations.Count == 0 && pets == 0)
             {
                 MsgPrint("You have no powers to activate.");
@@ -12636,7 +12636,7 @@ namespace AngbandOS
                                 {
                                     MsgPrint("The poison does not affect you!");
                                 }
-                                else if (Program.Rng.DieRoll(10) <= Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+                                else if (Program.Rng.DieRoll(10) <= Player.Religion.GetNamedDeity(GodName.Hagarg_Ryonis).AdjustedFavour)
                                 {
                                     MsgPrint("Hagarg Ryonis's favour protects you!");
                                 }
@@ -12790,7 +12790,7 @@ namespace AngbandOS
                         if (!Player.HasPoisonResistance && Player.TimedPoisonResistance.TurnsRemaining == 0)
                         {
                             // Hagarg Ryonis may save you from the poison
-                            if (Program.Rng.DieRoll(10) <= Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+                            if (Program.Rng.DieRoll(10) <= Player.Religion.GetNamedDeity(GodName.Hagarg_Ryonis).AdjustedFavour)
                             {
                                 MsgPrint("Hagarg Ryonis's favour protects you!");
                             }

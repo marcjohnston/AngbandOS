@@ -6,13 +6,13 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Spells
+namespace AngbandOS.Core.Spells
 {
     /// <summary>
     /// Represents an IllegibleSpell.  Currently not used.
-    /// Implements the <see cref="AngbandOS.Spells.Spell" />
+    /// Implements the <see cref="AngbandOS.Core.Spells.Spell" />
     /// </summary>
-    /// <seealso cref="AngbandOS.Spells.Spell" />
+    /// <seealso cref="AngbandOS.Core.Spells.Spell" />
     [Serializable]
     internal class IllegibleSpell : Spell // TODO: Not used.  Looks cool.
     {

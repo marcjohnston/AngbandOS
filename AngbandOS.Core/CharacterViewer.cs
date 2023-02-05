@@ -531,7 +531,7 @@ namespace AngbandOS
                 SaveGame.Screen.Print(Colour.Brown, SaveGame.Player.GooPatron.LongName, 7, 15);
             }
             // Priests get a deity
-            if (SaveGame.Player.Religion.Deity != Pantheon.GodName.None)
+            if (SaveGame.Player.Religion.Deity != GodName.None)
             {
                 SaveGame.Screen.Print(Colour.Blue, "Deity       :", 7, 1);
                 SaveGame.Screen.Print(Colour.Brown, SaveGame.Player.Religion.GetPatronDeity().LongName, 7, 15);

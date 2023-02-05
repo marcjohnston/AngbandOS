@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.ArtifactBiases
+﻿namespace AngbandOS.Core.ArtifactBiases
 {
     internal class CharismaArtifactBias : ArtifactBias
     {

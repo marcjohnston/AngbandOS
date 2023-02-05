@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Projection
+﻿namespace AngbandOS.Core.Projection
 {
     internal class ProjectDeathRay : Projectile
     {
