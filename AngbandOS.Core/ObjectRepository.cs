@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace AngbandOS.Core.Commands
+namespace AngbandOS.Core
 {
     internal static class ObjectRepository
     {

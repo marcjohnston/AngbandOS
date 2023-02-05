@@ -1,4 +1,4 @@
-﻿namespace AngbandOS
+﻿namespace AngbandOS.Core
 {
     /// <summary>
     /// Represents an encapsulating  wrapper for a saved gamed that publically exposes various functionality.

@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 using System.Text;
 
-namespace AngbandOS
+namespace AngbandOS.Core
 {
     /// <summary>
     /// Extension methods for primitive types

@@ -8,7 +8,7 @@
 
 using System.Runtime.Serialization;
 
-namespace AngbandOS
+namespace AngbandOS.Core
 {
     [Serializable]
     internal class RareItemTypeArray : Dictionary<RareItemTypeEnum, RareItemType>

@@ -1,4 +1,6 @@
-﻿global using AngbandOS.Core;
+﻿global using static AngbandOS.Core.Extensions;
+
+global using AngbandOS.Core;
 global using AngbandOS.Core.ActivationPowers;
 global using AngbandOS.Core.AlterActions;
 global using AngbandOS.Core.AmuletFlavours;
@@ -55,6 +57,7 @@ global using AngbandOS.Core.StaffFlavours;
 global using AngbandOS.Core.StoreCommands;
 global using AngbandOS.Core.Stores;
 global using AngbandOS.Core.Syllables;
+global using AngbandOS.Core.Talents;
 global using AngbandOS.Core.TimedActions;
 global using AngbandOS.Core.VaultTypes;
 global using AngbandOS.Core.WandFlavours;

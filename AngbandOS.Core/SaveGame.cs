@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace AngbandOS
+namespace AngbandOS.Core
 {
     [Serializable]
     internal class SaveGame

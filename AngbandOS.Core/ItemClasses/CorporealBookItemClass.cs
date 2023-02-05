@@ -1,5 +1,4 @@
-﻿using static AngbandOS.Extensions;
-
+﻿
 namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]

@@ -1,6 +1,4 @@
-﻿using static AngbandOS.Extensions;
-
-namespace AngbandOS.Core.ItemClasses
+﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
     internal abstract class FoodItemClass : ItemClass

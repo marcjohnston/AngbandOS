@@ -6,7 +6,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS
+namespace AngbandOS.Core
 {
     /// <summary>
     /// A viewer to display a character sheet for the character

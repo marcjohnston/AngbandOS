@@ -1,4 +1,4 @@
-namespace AngbandOS
+namespace AngbandOS.Core
 {
     [Serializable]
     internal class Player
