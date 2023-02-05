@@ -1,5 +1,3 @@
-using AngbandOS.Core.MonsterSpells;
-
 namespace AngbandOS.Core.MonsterRaces
 {
     [Serializable]

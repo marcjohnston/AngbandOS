@@ -1,5 +1,3 @@
-using AngbandOS.Core.AttackEffects;
-
 namespace AngbandOS.Core.MonsterRaces
 {
     [Serializable]

@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core.MonsterSpells;
-
-namespace AngbandOS.Core.MonsterRaces
+﻿namespace AngbandOS.Core.MonsterRaces
 {
     [Serializable]
     internal abstract class MonsterRace : IMonsterCharacteristics
