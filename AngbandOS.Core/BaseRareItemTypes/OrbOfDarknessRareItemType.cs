@@ -17,7 +17,7 @@ internal class OrbOfDarknessRareItemType : Base2RareItemType
     public override int MaxToA => 0;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override Enumerations.RareItemType RareItemType => Enumerations.RareItemType.OrbOfDarkness;
+    public override Enumerations.RareItemTypeEnum RareItemType => Enumerations.RareItemTypeEnum.OrbOfDarkness;
     public override int Rarity => 0;
     public override int Rating => 0;
     public override bool ResDark => true;

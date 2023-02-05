@@ -19,7 +19,7 @@ internal class CloakOfTheSwashbucklerFixedArtifact : BaseFixedArtifact, IActivat
     public string DescribeActivationEffect() => "recharge item I every 70 turns";
     public override void ApplyResistances(SaveGame saveGame, Item item)
     {
-        item.BonusPowerType = Enumerations.RareItemType.SpecialAbility;
+        item.BonusPowerType = Enumerations.RareItemTypeEnum.SpecialAbility;
         item.BonusPowerSubType = ActivationPowerManager.GetRandom();
     }
     public override ItemClass BaseItemCategory => _baseItemCategory;

@@ -108,7 +108,7 @@ namespace AngbandOS.Core
 
         public virtual bool PermaCurse { get; set; } = false;
 
-        public virtual Enumerations.RareItemType RareItemType { get; }
+        public virtual Enumerations.RareItemTypeEnum RareItemType { get; }
 
         public abstract int Rarity { get; }
 

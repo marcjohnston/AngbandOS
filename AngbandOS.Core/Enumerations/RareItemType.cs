@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Enumerations
 {
-    internal enum RareItemType
+    internal enum RareItemTypeEnum
     {
         None = 0,
         SpecialSustain,

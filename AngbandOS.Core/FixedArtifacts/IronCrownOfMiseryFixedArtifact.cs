@@ -13,7 +13,7 @@ internal class IronCrownOfMiseryFixedArtifact : BaseFixedArtifact
 
     public override void ApplyResistances(SaveGame saveGame, Item item)
     {
-        item.BonusPowerType = Enumerations.RareItemType.SpecialAbility;
+        item.BonusPowerType = Enumerations.RareItemTypeEnum.SpecialAbility;
         item.BonusPowerSubType = ActivationPowerManager.GetRandom();
     }
     public override char Character => ']';

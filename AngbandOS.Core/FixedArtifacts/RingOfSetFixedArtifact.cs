@@ -23,7 +23,7 @@ internal class RingOfSetFixedArtifact : BaseFixedArtifact, IActivatible
     public string DescribeActivationEffect() => "bizarre things every 450+d450 turns";
     public override void ApplyResistances(SaveGame saveGame, Item item)
     {
-        item.BonusPowerType = Enumerations.RareItemType.SpecialAbility;
+        item.BonusPowerType = Enumerations.RareItemTypeEnum.SpecialAbility;
         item.BonusPowerSubType = ActivationPowerManager.GetRandom();
 
         IArtifactBias artifactBias = null;

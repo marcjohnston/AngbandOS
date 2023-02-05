@@ -92,30 +92,30 @@ namespace AngbandOS.Core.ItemClasses
                 case 2:
                 case 3:
                 case 4:
-                    item.RareItemTypeIndex = Enumerations.RareItemType.ArmourOfResistAcid;
+                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.ArmourOfResistAcid;
                     break;
                 case 5:
                 case 6:
                 case 7:
                 case 8:
-                    item.RareItemTypeIndex = Enumerations.RareItemType.ArmourOfResistLightning;
+                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.ArmourOfResistLightning;
                     break;
                 case 9:
                 case 10:
                 case 11:
                 case 12:
-                    item.RareItemTypeIndex = Enumerations.RareItemType.ArmourOfResistFire;
+                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.ArmourOfResistFire;
                     break;
                 case 13:
                 case 14:
                 case 15:
                 case 16:
-                    item.RareItemTypeIndex = Enumerations.RareItemType.ArmourOfResistCold;
+                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.ArmourOfResistCold;
                     break;
                 case 17:
                 case 18:
                     IArtifactBias artifactBias = null;
-                    item.RareItemTypeIndex = Enumerations.RareItemType.ArmourOfResistance;
+                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.ArmourOfResistance;
                     if (Program.Rng.DieRoll(4) == 1)
                     {
                         item.RandartItemCharacteristics.ResPois = true;
@@ -127,7 +127,7 @@ namespace AngbandOS.Core.ItemClasses
                     break;
                 case 20:
                 case 21:
-                    item.RareItemTypeIndex = Enumerations.RareItemType.ArmourOfYith;
+                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.ArmourOfYith;
                     break;
             }
         }

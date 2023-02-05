@@ -21,7 +21,7 @@
             {
                 case 1:
                 case 11:
-                    item.RareItemTypeIndex = Enumerations.RareItemType.ShieldOfResistAcid;
+                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.ShieldOfResistAcid;
                     break;
                 case 2:
                 case 3:
@@ -29,13 +29,13 @@
                 case 12:
                 case 13:
                 case 14:
-                    item.RareItemTypeIndex = Enumerations.RareItemType.ShieldOfResistLightning;
+                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.ShieldOfResistLightning;
                     break;
                 case 5:
                 case 6:
                 case 15:
                 case 16:
-                    item.RareItemTypeIndex = Enumerations.RareItemType.ShieldOfResistFire;
+                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.ShieldOfResistFire;
                     break;
                 case 7:
                 case 8:
@@ -43,7 +43,7 @@
                 case 17:
                 case 18:
                 case 19:
-                    item.RareItemTypeIndex = Enumerations.RareItemType.ShieldOfResistCold;
+                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.ShieldOfResistCold;
                     break;
                 case 10:
                 case 20:
@@ -53,11 +53,11 @@
                     {
                         item.RandartItemCharacteristics.ResPois = true;
                     }
-                    item.RareItemTypeIndex = Enumerations.RareItemType.ShieldOfResistance;
+                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.ShieldOfResistance;
                     break;
                 case 21:
                 case 22:
-                    item.RareItemTypeIndex = Enumerations.RareItemType.ShieldOfReflection;
+                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.ShieldOfReflection;
                     break;
                 case 23:
                     item.CreateRandart(false);

@@ -13,7 +13,7 @@ internal class HatOfRegenerationRareItemType : Base2RareItemType
     public override int MaxToA => 0;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override Enumerations.RareItemType RareItemType => Enumerations.RareItemType.HatOfRegeneration;
+    public override Enumerations.RareItemTypeEnum RareItemType => Enumerations.RareItemTypeEnum.HatOfRegeneration;
     public override int Rarity => 0;
     public override int Rating => 10;
     public override bool Regen => true;

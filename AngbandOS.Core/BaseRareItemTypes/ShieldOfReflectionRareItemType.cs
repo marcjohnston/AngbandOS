@@ -17,7 +17,7 @@ internal class ShieldOfReflectionRareItemType : Base2RareItemType
     public override int MaxToA => 5;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override Enumerations.RareItemType RareItemType => Enumerations.RareItemType.ShieldOfReflection;
+    public override Enumerations.RareItemTypeEnum RareItemType => Enumerations.RareItemTypeEnum.ShieldOfReflection;
     public override int Rarity => 0;
     public override int Rating => 20;
     public override bool Reflect => true;

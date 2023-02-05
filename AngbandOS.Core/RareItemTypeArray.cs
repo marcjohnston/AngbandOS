@@ -11,7 +11,7 @@ using System.Runtime.Serialization;
 namespace AngbandOS
 {
     [Serializable]
-    internal class RareItemTypeArray : Dictionary<Enumerations.RareItemType, RareItemType>
+    internal class RareItemTypeArray : Dictionary<Enumerations.RareItemTypeEnum, RareItemType>
     {
         public RareItemTypeArray(SaveGame saveGame)
         {

@@ -36,7 +36,7 @@ namespace AngbandOS.Core.ItemCategories
                     // Robes have a chance of having the armour of permanence instead of a random characteristic.
                     if (Program.Rng.RandomLessThan(100) < 10)
                     {
-                        item.RareItemTypeIndex = Enumerations.RareItemType.ArmourOfPermanence;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.ArmourOfPermanence;
                     }
                     else
                     {

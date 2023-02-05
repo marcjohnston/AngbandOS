@@ -18,7 +18,7 @@ internal class ArmourOfPermanenceRareItemType : Base2RareItemType
     public override int MaxToA => 10;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override Enumerations.RareItemType RareItemType => Enumerations.RareItemType.ArmourOfPermanence;
+    public override Enumerations.RareItemTypeEnum RareItemType => Enumerations.RareItemTypeEnum.ArmourOfPermanence;
     public override int Rarity => 0;
     public override int Rating => 30;
     public override bool ResAcid => true;

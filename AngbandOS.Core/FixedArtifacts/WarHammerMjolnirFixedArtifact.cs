@@ -13,7 +13,7 @@ internal class WarHammerMjolnirFixedArtifact : BaseFixedArtifact
 
     public override void ApplyResistances(SaveGame saveGame, Item item)
     {
-        item.BonusPowerType = Enumerations.RareItemType.SpecialAbility;
+        item.BonusPowerType = Enumerations.RareItemTypeEnum.SpecialAbility;
         item.BonusPowerSubType = ActivationPowerManager.GetRandom();
 
         IArtifactBias artifactBias = null;

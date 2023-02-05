@@ -13,7 +13,7 @@ internal class HatOfTelepathyRareItemType : Base2RareItemType
     public override int MaxToA => 0;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override Enumerations.RareItemType RareItemType => Enumerations.RareItemType.HatOfTelepathy;
+    public override Enumerations.RareItemTypeEnum RareItemType => Enumerations.RareItemTypeEnum.HatOfTelepathy;
     public override int Rarity => 0;
     public override int Rating => 20;
     public override int Slot => 33;

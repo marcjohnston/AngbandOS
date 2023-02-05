@@ -18,7 +18,7 @@ internal class HatOfTheMagiRareItemType : Base2RareItemType
     public override int MaxToA => 0;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override Enumerations.RareItemType RareItemType => Enumerations.RareItemType.HatOfTheMagi;
+    public override Enumerations.RareItemTypeEnum RareItemType => Enumerations.RareItemTypeEnum.HatOfTheMagi;
     public override int Rarity => 0;
     public override int Rating => 15;
     public override bool ResAcid => true;

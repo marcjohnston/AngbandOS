@@ -14,7 +14,7 @@ internal class CloakOfIrritationRareItemType : Base2RareItemType
     public override int MaxToA => 0;
     public override int MaxToD => 15;
     public override int MaxToH => 15;
-    public override Enumerations.RareItemType RareItemType => Enumerations.RareItemType.CloakOfIrritation;
+    public override Enumerations.RareItemTypeEnum RareItemType => Enumerations.RareItemTypeEnum.CloakOfIrritation;
     public override int Rarity => 0;
     public override int Rating => 0;
     public override bool ShowMods => true;

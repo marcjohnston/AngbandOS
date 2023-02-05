@@ -17,7 +17,7 @@ internal class OrbOfShardsRareItemType : Base2RareItemType
     public override int MaxToA => 0;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override Enumerations.RareItemType RareItemType => Enumerations.RareItemType.OrbOfShards;
+    public override Enumerations.RareItemTypeEnum RareItemType => Enumerations.RareItemTypeEnum.OrbOfShards;
     public override int Rarity => 0;
     public override int Rating => 0;
     public override bool ResShards => true;

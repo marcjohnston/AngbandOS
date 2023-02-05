@@ -26,20 +26,20 @@
                 case 2:
                 case 3:
                 case 4:
-                    item.RareItemTypeIndex = Enumerations.RareItemType.GlovesOfFreeAction;
+                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.GlovesOfFreeAction;
                     break;
                 case 5:
                 case 6:
                 case 7:
-                    item.RareItemTypeIndex = Enumerations.RareItemType.GlovesOfSlaying;
+                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.GlovesOfSlaying;
                     break;
                 case 8:
                 case 9:
-                    item.RareItemTypeIndex = Enumerations.RareItemType.GlovesOfAgility;
+                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.GlovesOfAgility;
                     break;
                 case 10:
                     IArtifactBias artifactBias = null;
-                    item.RareItemTypeIndex = Enumerations.RareItemType.GlovesOfPower;
+                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.GlovesOfPower;
                     item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
                     break;
             }
@@ -55,12 +55,12 @@
             {
                 case 1:
                     {
-                        item.RareItemTypeIndex = Enumerations.RareItemType.GlovesOfClumsiness;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.GlovesOfClumsiness;
                         break;
                     }
                 default:
                     {
-                        item.RareItemTypeIndex = Enumerations.RareItemType.GlovesOfWeakness;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.GlovesOfWeakness;
                         break;
                     }
             }

@@ -16,7 +16,7 @@ internal class WeaponOfKadathRareItemType : Base2RareItemType
     public override int MaxToA => 0;
     public override int MaxToD => 5;
     public override int MaxToH => 5;
-    public override Enumerations.RareItemType RareItemType => Enumerations.RareItemType.WeaponOfKadath;
+    public override Enumerations.RareItemTypeEnum RareItemType => Enumerations.RareItemTypeEnum.WeaponOfKadath;
     public override int Rarity => 0;
     public override int Rating => 20;
     public override bool SeeInvis => true;

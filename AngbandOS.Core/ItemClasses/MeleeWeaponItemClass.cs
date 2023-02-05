@@ -22,7 +22,7 @@
                 switch (Program.Rng.DieRoll(CanBeWeaponOfLaw || CanBeWeaponOfSharpness ? 42 : 40))
                 {
                     case 1:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.WeaponElderSign;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponElderSign;
                         if (Program.Rng.DieRoll(4) == 1)
                         {
                             item.RandartItemCharacteristics.Blows = true;
@@ -33,7 +33,7 @@
                         }
                         break;
                     case 2:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.WeaponDefender;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponDefender;
                         if (Program.Rng.DieRoll(3) == 1)
                         {
                             item.RandartItemCharacteristics.ResPois = true;
@@ -41,28 +41,28 @@
                         item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
                         break;
                     case 3:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfVitriol;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfVitriol;
                         break;
                     case 4:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfShocking;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfShocking;
                         break;
                     case 5:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfBurning;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfBurning;
                         break;
                     case 6:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfFreezing;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfFreezing;
                         break;
                     case 7:
                     case 8:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfSlayAnimal;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfSlayAnimal;
                         if (Program.Rng.RandomLessThan(100) < 20)
                         {
-                            item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfAnimalBane;
+                            item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfAnimalBane;
                         }
                         break;
                     case 9:
                     case 10:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfSlayDragon;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfSlayDragon;
                         item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(12) + 4);
                         if (Program.Rng.RandomLessThan(100) < 20)
                         {
@@ -71,72 +71,72 @@
                                 item.RandartItemCharacteristics.ResPois = true;
                             }
                             item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(14) + 4);
-                            item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfDragonBane;
+                            item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfDragonBane;
                         }
                         break;
                     case 11:
                     case 12:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfSlayEvil;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfSlayEvil;
                         if (Program.Rng.RandomLessThan(100) < 20)
                         {
                             item.RandartItemCharacteristics.ResFear = true;
                             item.RandartItemCharacteristics.Blessed = true;
-                            item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfEvilBane;
+                            item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfEvilBane;
                         }
                         break;
                     case 13:
                     case 14:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfSlayUndead;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfSlayUndead;
                         item.RandartItemCharacteristics.HoldLife = true;
                         if (Program.Rng.RandomLessThan(100) < 20)
                         {
                             item.RandartItemCharacteristics.ResNether = true;
-                            item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfUndeadBane;
+                            item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfUndeadBane;
                         }
                         break;
                     case 15:
                     case 16:
                     case 17:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfSlayOrc;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfSlayOrc;
                         break;
                     case 18:
                     case 19:
                     case 20:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfSlayTroll;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfSlayTroll;
                         break;
                     case 21:
                     case 22:
                     case 23:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfSlayGiant;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfSlayGiant;
                         break;
                     case 24:
                     case 25:
                     case 26:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfSlayDemon;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfSlayDemon;
                         break;
                     case 27:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfKadath;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfKadath;
                         if (Program.Rng.DieRoll(3) == 1)
                         {
                             item.RandartItemCharacteristics.ResFear = true;
                         }
                         break;
                     case 28:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.WeaponBlessed;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponBlessed;
                         break;
                     case 29:
                     case 30:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfExtraAttacks;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfExtraAttacks;
                         break;
                     case 31:
                     case 32:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.WeaponVampiric;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponVampiric;
                         break;
                     case 33:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfPoisoning;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfPoisoning;
                         break;
                     case 34:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.WeaponChaotic;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponChaotic;
                         item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(34) + 4);
                         break;
                     case 35:
@@ -144,7 +144,7 @@
                         break;
                     case 36:
                     case 37:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfSlaying;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfSlaying;
                         if (Program.Rng.DieRoll(3) == 1)
                         {
                             item.DamageDice *= 2;
@@ -171,7 +171,7 @@
                         break;
                     case 38:
                     case 39:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.WeaponPlanarWeapon;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponPlanarWeapon;
                         item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
                         if (Program.Rng.DieRoll(5) == 1)
                         {
@@ -179,7 +179,7 @@
                         }
                         break;
                     case 40:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfLaw;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfLaw;
                         if (Program.Rng.DieRoll(3) == 1)
                         {
                             item.RandartItemCharacteristics.HoldLife = true;
@@ -198,12 +198,12 @@
                     case 42:
                         if (CanBeWeaponOfSharpness)
                         {
-                            item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfSharpness;
+                            item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfSharpness;
                             item.TypeSpecificValue = GetBonusValue(5, level) + 1;
                         }
                         else
                         {
-                            item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfEarthquakes;
+                            item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfEarthquakes;
                             if (Program.Rng.DieRoll(3) == 1)
                             {
                                 item.RandartItemCharacteristics.Blows = true;
@@ -225,7 +225,7 @@
             {
                 if (Program.Rng.RandomLessThan(Constants.MaxDepth) < level)
                 {
-                    item.RareItemTypeIndex = Enumerations.RareItemType.WeaponOfLeng;
+                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfLeng;
                     if (Program.Rng.DieRoll(6) == 1)
                     {
                         item.RandartItemCharacteristics.DreadCurse = true;

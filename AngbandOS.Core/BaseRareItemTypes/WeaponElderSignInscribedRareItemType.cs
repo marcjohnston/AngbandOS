@@ -14,7 +14,7 @@ internal class WeaponElderSignInscribedRareItemType : Base2RareItemType
     public override int MaxToA => 4;
     public override int MaxToD => 6;
     public override int MaxToH => 6;
-    public override Enumerations.RareItemType RareItemType => Enumerations.RareItemType.WeaponElderSign;
+    public override Enumerations.RareItemTypeEnum RareItemType => Enumerations.RareItemTypeEnum.WeaponElderSign;
     public override int Rarity => 0;
     public override int Rating => 30;
     public override bool ResFear => true;

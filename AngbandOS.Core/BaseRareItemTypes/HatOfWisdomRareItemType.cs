@@ -13,7 +13,7 @@ internal class HatOfWisdomRareItemType : Base2RareItemType
     public override int MaxToA => 0;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override Enumerations.RareItemType RareItemType => Enumerations.RareItemType.HatOfWisdom;
+    public override Enumerations.RareItemTypeEnum RareItemType => Enumerations.RareItemTypeEnum.HatOfWisdom;
     public override int Rarity => 0;
     public override int Rating => 13;
     public override int Slot => 33;

@@ -20,7 +20,7 @@ internal class QuarterstaffOfAtalFixedArtifact : BaseFixedArtifact, IActivatible
     }
     public override void ApplyResistances(SaveGame saveGame, Item item)
     {
-        item.BonusPowerType = Enumerations.RareItemType.SpecialAbility;
+        item.BonusPowerType = Enumerations.RareItemTypeEnum.SpecialAbility;
         item.BonusPowerSubType = ActivationPowerManager.GetRandom();
     }
     public string DescribeActivationEffect() => "probing, detection and full id  every 1000 turns";

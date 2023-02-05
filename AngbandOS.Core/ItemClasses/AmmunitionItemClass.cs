@@ -34,30 +34,30 @@
                     case 1:
                     case 2:
                     case 3:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.AmmoOfWounding;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.AmmoOfWounding;
                         break;
                     case 4:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.AmmoOfFlame;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.AmmoOfFlame;
                         break;
                     case 5:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.AmmoOfFrost;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.AmmoOfFrost;
                         break;
                     case 6:
                     case 7:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.AmmoOfHurtAnimal;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.AmmoOfHurtAnimal;
                         break;
                     case 8:
                     case 9:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.AmmoOfHurtEvil;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.AmmoOfHurtEvil;
                         break;
                     case 10:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.AmmoOfHurtDragon;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.AmmoOfHurtDragon;
                         break;
                     case 11:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.AmmoOfShocking;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.AmmoOfShocking;
                         break;
                     case 12:
-                        item.RareItemTypeIndex = Enumerations.RareItemType.AmmoOfSlaying;
+                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.AmmoOfSlaying;
                         item.DamageDice++;
                         break;
                 }
@@ -74,7 +74,7 @@
             {
                 if (Program.Rng.RandomLessThan(Constants.MaxDepth) < level)
                 {
-                    item.RareItemTypeIndex = Enumerations.RareItemType.AmmoOfBackbiting;
+                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.AmmoOfBackbiting;
                 }
             }
         }

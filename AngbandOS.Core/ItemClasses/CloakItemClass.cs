@@ -14,12 +14,12 @@
 
         protected override void ApplyRandomGoodRareCharacteristics(Item item)
         {
-            WeightedRandom<Enumerations.RareItemType> weightedRandom = new WeightedRandom<Enumerations.RareItemType>();
-            weightedRandom.Add(8, Enumerations.RareItemType.CloakOfProtection);
-            weightedRandom.Add(8, Enumerations.RareItemType.CloakOfStealth);
-            weightedRandom.Add(1, Enumerations.RareItemType.CloakOfAman);
-            weightedRandom.Add(1, Enumerations.RareItemType.CloakOfElectricity);
-            weightedRandom.Add(1, Enumerations.RareItemType.CloakOfImmolation);
+            WeightedRandom<Enumerations.RareItemTypeEnum> weightedRandom = new WeightedRandom<Enumerations.RareItemTypeEnum>();
+            weightedRandom.Add(8, Enumerations.RareItemTypeEnum.CloakOfProtection);
+            weightedRandom.Add(8, Enumerations.RareItemTypeEnum.CloakOfStealth);
+            weightedRandom.Add(1, Enumerations.RareItemTypeEnum.CloakOfAman);
+            weightedRandom.Add(1, Enumerations.RareItemTypeEnum.CloakOfElectricity);
+            weightedRandom.Add(1, Enumerations.RareItemTypeEnum.CloakOfImmolation);
             item.RareItemTypeIndex = weightedRandom.Choose();
         }
 
@@ -28,13 +28,13 @@
             switch (Program.Rng.DieRoll(3))
             {
                 case 1:
-                    item.RareItemTypeIndex = Enumerations.RareItemType.CloakOfIrritation;
+                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.CloakOfIrritation;
                     break;
                 case 2:
-                    item.RareItemTypeIndex = Enumerations.RareItemType.CloakOfVulnerability;
+                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.CloakOfVulnerability;
                     break;
                 case 3:
-                    item.RareItemTypeIndex = Enumerations.RareItemType.CloakOfEnveloping;
+                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.CloakOfEnveloping;
                     break;
             }
         }
