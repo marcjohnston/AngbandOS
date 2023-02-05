@@ -61,14 +61,14 @@ namespace AngbandOS.Core.ItemClasses
                 {
                     case 1:
                         {
-                            item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.OrbOfIrritation;
+                            item.RareItemTypeIndex = RareItemTypeEnum.OrbOfIrritation;
                             item.IdentBroken = true;
                             item.IdentCursed = true;
                             break;
                         }
                     case 2:
                         {
-                            item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.OrbOfInstability;
+                            item.RareItemTypeIndex = RareItemTypeEnum.OrbOfInstability;
                             item.IdentBroken = true;
                             item.IdentCursed = true;
                             break;
@@ -77,41 +77,41 @@ namespace AngbandOS.Core.ItemClasses
             }
             else if (power == 1) // Good
             {
-                WeightedRandom<Enumerations.RareItemTypeEnum> weightedRandom = new WeightedRandom<Enumerations.RareItemTypeEnum>();
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfFlame);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfFrost);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfAcid);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfLightning);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfLight);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfDarkness);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfLife);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfSight);
-                weightedRandom.Add(2, Enumerations.RareItemTypeEnum.OrbOfCourage);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfVenom);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfClarity);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfSound);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfChaos);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfShards);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfUnlife);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfStability);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfMagic);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfFreedom);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfStrength);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfIntelligence);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfWisdom);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfDexterity);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfConstitution);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfCharisma);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfLightness);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfInsight);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfTheMind);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfSustenance);
-                weightedRandom.Add(1, Enumerations.RareItemTypeEnum.OrbOfHealth);
+                WeightedRandom<RareItemTypeEnum> weightedRandom = new WeightedRandom<RareItemTypeEnum>();
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfFlame);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfFrost);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfAcid);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfLightning);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfLight);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfDarkness);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfLife);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfSight);
+                weightedRandom.Add(2, RareItemTypeEnum.OrbOfCourage);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfVenom);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfClarity);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfSound);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfChaos);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfShards);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfUnlife);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfStability);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfMagic);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfFreedom);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfStrength);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfIntelligence);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfWisdom);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfDexterity);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfConstitution);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfCharisma);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfLightness);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfInsight);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfTheMind);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfSustenance);
+                weightedRandom.Add(1, RareItemTypeEnum.OrbOfHealth);
                 item.RareItemTypeIndex = weightedRandom.Choose();
             }
             else if (power == 2) // Great
             {
-                item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.OrbOfPower;
+                item.RareItemTypeIndex = RareItemTypeEnum.OrbOfPower;
                 for (int i = 0; i < 3; i++)
                 {
                     WeightedRandomAction weightedRandomAction = new WeightedRandomAction();

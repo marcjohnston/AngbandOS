@@ -13,7 +13,7 @@ internal class BowOfVelocityRareItemType : Base2RareItemType
     public override int MaxToA => 0;
     public override int MaxToD => 15;
     public override int MaxToH => 5;
-    public override Enumerations.RareItemTypeEnum RareItemType => Enumerations.RareItemTypeEnum.BowOfVelocity;
+    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.BowOfVelocity;
     public override int Rarity => 0;
     public override int Rating => 10;
     public override int Slot => 25;

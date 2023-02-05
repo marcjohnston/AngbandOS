@@ -15,7 +15,7 @@ internal class WeaponWeaponOfLawRareItemType : Base2RareItemType
     public override int MaxToA => 0;
     public override int MaxToD => 6;
     public override int MaxToH => 6;
-    public override Enumerations.RareItemTypeEnum RareItemType => Enumerations.RareItemTypeEnum.WeaponOfLaw;
+    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.WeaponOfLaw;
     public override int Rarity => 0;
     public override int Rating => 26;
     public override bool SeeInvis => true;

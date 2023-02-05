@@ -14,7 +14,7 @@ internal class HatOfStupidityRareItemType : Base2RareItemType
     public override int MaxToA => 0;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override Enumerations.RareItemTypeEnum RareItemType => Enumerations.RareItemTypeEnum.HatOfStupidity;
+    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.HatOfStupidity;
     public override int Rarity => 0;
     public override int Rating => 0;
     public override int Slot => 33;

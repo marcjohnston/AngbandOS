@@ -15,7 +15,7 @@ internal class WeaponOfFreezingRareItemType : Base2RareItemType
     public override int MaxToA => 0;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override Enumerations.RareItemTypeEnum RareItemType => Enumerations.RareItemTypeEnum.WeaponOfFreezing;
+    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.WeaponOfFreezing;
     public override int Rarity => 0;
     public override int Rating => 15;
     public override bool ResCold => true;

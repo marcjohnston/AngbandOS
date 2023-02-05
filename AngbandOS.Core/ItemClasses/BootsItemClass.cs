@@ -17,13 +17,13 @@
             switch (Program.Rng.DieRoll(24))
             {
                 case 1:
-                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.BootsOfSpeed;
+                    item.RareItemTypeIndex = RareItemTypeEnum.BootsOfSpeed;
                     break;
                 case 2:
                 case 3:
                 case 4:
                 case 5:
-                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.BootsOfFreeAction;
+                    item.RareItemTypeIndex = RareItemTypeEnum.BootsOfFreeAction;
                     break;
                 case 6:
                 case 7:
@@ -33,7 +33,7 @@
                 case 11:
                 case 12:
                 case 13:
-                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.BootsOfStealth;
+                    item.RareItemTypeIndex = RareItemTypeEnum.BootsOfStealth;
                     break;
                 case 14:
                 case 15:
@@ -46,7 +46,7 @@
                 case 22:
                 case 23:
                 case 24:
-                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.BootsWinged;
+                    item.RareItemTypeIndex = RareItemTypeEnum.BootsWinged;
                     if (Program.Rng.DieRoll(2) == 1)
                     {
                         IArtifactBias artifactBias = null;
@@ -65,13 +65,13 @@
             switch (Program.Rng.DieRoll(3))
             {
                 case 1:
-                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.BootsOfNoise;
+                    item.RareItemTypeIndex = RareItemTypeEnum.BootsOfNoise;
                     break;
                 case 2:
-                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.BootsOfSlowness;
+                    item.RareItemTypeIndex = RareItemTypeEnum.BootsOfSlowness;
                     break;
                 case 3:
-                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.BootsOfAnnoyance;
+                    item.RareItemTypeIndex = RareItemTypeEnum.BootsOfAnnoyance;
                     break;
             }
         }

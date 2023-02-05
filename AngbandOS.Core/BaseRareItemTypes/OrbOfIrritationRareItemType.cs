@@ -18,7 +18,7 @@ internal class OrbOfIrritationRareItemType : Base2RareItemType
     public override int MaxToA => 0;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override Enumerations.RareItemTypeEnum RareItemType => Enumerations.RareItemTypeEnum.OrbOfIrritation;
+    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.OrbOfIrritation;
     public override int Rarity => 0;
     public override int Rating => 0;
     public override int Slot => 0;

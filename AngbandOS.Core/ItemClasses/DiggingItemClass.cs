@@ -15,7 +15,7 @@
             base.ApplyMagic(item, level, power);
             if (power > 1)
             {
-                item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfDigging;
+                item.RareItemTypeIndex = RareItemTypeEnum.WeaponOfDigging;
             }
             else if (power < -1)
             {

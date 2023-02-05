@@ -13,7 +13,7 @@ internal class WeaponOfSlayUndeadRareItemType : Base2RareItemType
     public override int MaxToA => 0;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override Enumerations.RareItemTypeEnum RareItemType => Enumerations.RareItemTypeEnum.WeaponOfSlayUndead;
+    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.WeaponOfSlayUndead;
     public override int Rarity => 0;
     public override int Rating => 18;
     public override bool SlayUndead => true;

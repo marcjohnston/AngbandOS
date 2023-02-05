@@ -89,13 +89,13 @@ namespace AngbandOS.Core.ItemClasses
                 {
                     case 1:
                     case 11:
-                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.BowOfExtraMight;
+                        item.RareItemTypeIndex = RareItemTypeEnum.BowOfExtraMight;
                         IArtifactBias artifactBias = null;
                         item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(34) + 4);
                         break;
                     case 2:
                     case 12:
-                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.BowOfExtraShots;
+                        item.RareItemTypeIndex = RareItemTypeEnum.BowOfExtraShots;
                         break;
                     case 3:
                     case 4:
@@ -105,7 +105,7 @@ namespace AngbandOS.Core.ItemClasses
                     case 14:
                     case 15:
                     case 16:
-                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.BowOfVelocity;
+                        item.RareItemTypeIndex = RareItemTypeEnum.BowOfVelocity;
                         break;
                     case 7:
                     case 8:
@@ -115,7 +115,7 @@ namespace AngbandOS.Core.ItemClasses
                     case 18:
                     case 19:
                     case 20:
-                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.BowOfAccuracy;
+                        item.RareItemTypeIndex = RareItemTypeEnum.BowOfAccuracy;
                         break;
                     case 21:
                         item.CreateRandart(false);

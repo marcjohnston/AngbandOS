@@ -13,7 +13,7 @@ internal class IronHelmTerrorMaskFixedArtifact : BaseFixedArtifact, IActivatible
     {
         if (saveGame.Player.BaseCharacterClass.ID == CharacterClass.Warrior)
         {
-            item.BonusPowerType = Enumerations.RareItemTypeEnum.SpecialAbility;
+            item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
             item.BonusPowerSubType = ActivationPowerManager.GetRandom();
 
             IArtifactBias artifactBias = null;

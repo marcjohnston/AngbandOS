@@ -14,7 +14,7 @@ internal class WeaponVampiricRareItemType : Base2RareItemType
     public override int MaxToA => 0;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override Enumerations.RareItemTypeEnum RareItemType => Enumerations.RareItemTypeEnum.WeaponVampiric;
+    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.WeaponVampiric;
     public override int Rarity => 0;
     public override int Rating => 25;
     public override int Slot => 24;

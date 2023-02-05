@@ -214,7 +214,7 @@ namespace AngbandOS.Core.Patrons
                     qPtr.BonusToHit = 3 + (Program.Rng.DieRoll(saveGame.Difficulty) % 10);
                     qPtr.BonusDamage = 3 + (Program.Rng.DieRoll(saveGame.Difficulty) % 10);
                     qPtr.ApplyRandomResistance(Program.Rng.DieRoll(34) + 4);
-                    qPtr.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponChaotic;
+                    qPtr.RareItemTypeIndex = RareItemTypeEnum.WeaponChaotic;
                     saveGame.Level.DropNear(qPtr, -1, saveGame.Player.MapY, saveGame.Player.MapX);
                     break;
 

@@ -72,7 +72,7 @@ namespace AngbandOS
         public int BonusArmourClass;
         public int BonusDamage;
         public ActivationPower BonusPowerSubType;
-        public Enumerations.RareItemTypeEnum BonusPowerType;
+        public RareItemTypeEnum BonusPowerType;
         public int BonusToHit;
         public int Count;
         public int DamageDice;
@@ -104,7 +104,7 @@ namespace AngbandOS
         public int NextInStack;
 
         public string RandartName = "";
-        public Enumerations.RareItemTypeEnum RareItemTypeIndex;
+        public RareItemTypeEnum RareItemTypeIndex;
         public int RechargeTimeLeft;
 
         /// <summary>
@@ -593,7 +593,7 @@ namespace AngbandOS
                     basenm += ' ';
                     basenm += aPtr.Name;
                 }
-                else if (RareItemTypeIndex != Enumerations.RareItemTypeEnum.None)
+                else if (RareItemTypeIndex != RareItemTypeEnum.None)
                 {
                     RareItemType ePtr = SaveGame.RareItemTypes[RareItemTypeIndex];
                     basenm += ' ';
@@ -1071,7 +1071,7 @@ namespace AngbandOS
             }
 
             // Now merge the characteristics from the rare item type, if there is one.
-            if (RareItemTypeIndex != Enumerations.RareItemTypeEnum.None)
+            if (RareItemTypeIndex != RareItemTypeEnum.None)
             {
                 RareItemType ePtr = SaveGame.RareItemTypes[RareItemTypeIndex];
                 Characteristics.Merge(ePtr.RareItemCharacteristics);
@@ -1083,13 +1083,13 @@ namespace AngbandOS
             {
                 switch (BonusPowerType)
                 {
-                    case Enumerations.RareItemTypeEnum.SpecialSustain:
+                    case RareItemTypeEnum.SpecialSustain:
                         BonusPowerSubType.ActivateSpecialSustain(Characteristics);
                         break;
-                    case Enumerations.RareItemTypeEnum.SpecialPower:
+                    case RareItemTypeEnum.SpecialPower:
                         BonusPowerSubType.ActivateSpecialPower(Characteristics);
                         break;
-                    case Enumerations.RareItemTypeEnum.SpecialAbility:
+                    case RareItemTypeEnum.SpecialAbility:
                         BonusPowerSubType.ActivateSpecialAbility(Characteristics);
                         break;
                 }
@@ -1709,7 +1709,7 @@ namespace AngbandOS
                 }
                 value = aPtr.Cost;
             }
-            else if (RareItemTypeIndex != Enumerations.RareItemTypeEnum.None)
+            else if (RareItemTypeIndex != RareItemTypeEnum.None)
             {
                 RareItemType ePtr = SaveGame.RareItemTypes[RareItemTypeIndex];
                 if (ePtr.Cost == 0)
@@ -1839,7 +1839,7 @@ namespace AngbandOS
                 IActivatible activatibleFixedArtifact = (IActivatible)FixedArtifact.BaseFixedArtifact;
                 return activatibleFixedArtifact.DescribeActivationEffect();
             }
-            if (RareItemTypeIndex == Enumerations.RareItemTypeEnum.WeaponPlanarWeapon)
+            if (RareItemTypeIndex == RareItemTypeEnum.WeaponPlanarWeapon)
             {
                 return "teleport every 50+d50 turns";
             }
@@ -1943,52 +1943,52 @@ namespace AngbandOS
                     SaveGame.Level.TreasureRating += 40;
                 }
             }
-            else if (RareItemTypeIndex != Enumerations.RareItemTypeEnum.None)
+            else if (RareItemTypeIndex != RareItemTypeEnum.None)
             {
                 RareItemType ePtr = SaveGame.RareItemTypes[RareItemTypeIndex];
                 switch (RareItemTypeIndex)
                 {
-                    case Enumerations.RareItemTypeEnum.WeaponElderSign:
+                    case RareItemTypeEnum.WeaponElderSign:
                         {
-                            BonusPowerType = Enumerations.RareItemTypeEnum.SpecialSustain;
+                            BonusPowerType = RareItemTypeEnum.SpecialSustain;
                             break;
                         }
-                    case Enumerations.RareItemTypeEnum.WeaponDefender:
+                    case RareItemTypeEnum.WeaponDefender:
                         {
-                            BonusPowerType = Enumerations.RareItemTypeEnum.SpecialSustain;
+                            BonusPowerType = RareItemTypeEnum.SpecialSustain;
                             break;
                         }
-                    case Enumerations.RareItemTypeEnum.WeaponBlessed:
+                    case RareItemTypeEnum.WeaponBlessed:
                         {
-                            BonusPowerType = Enumerations.RareItemTypeEnum.SpecialAbility;
+                            BonusPowerType = RareItemTypeEnum.SpecialAbility;
                             break;
                         }
-                    case Enumerations.RareItemTypeEnum.WeaponPlanarWeapon:
+                    case RareItemTypeEnum.WeaponPlanarWeapon:
                         {
                             if (Program.Rng.DieRoll(7) == 1)
                             {
-                                BonusPowerType = Enumerations.RareItemTypeEnum.SpecialAbility;
+                                BonusPowerType = RareItemTypeEnum.SpecialAbility;
                             }
                             break;
                         }
-                    case Enumerations.RareItemTypeEnum.ArmourOfPermanence:
+                    case RareItemTypeEnum.ArmourOfPermanence:
                         {
-                            BonusPowerType = Enumerations.RareItemTypeEnum.SpecialPower;
+                            BonusPowerType = RareItemTypeEnum.SpecialPower;
                             break;
                         }
-                    case Enumerations.RareItemTypeEnum.ArmourOfYith:
+                    case RareItemTypeEnum.ArmourOfYith:
                         {
-                            BonusPowerType = Enumerations.RareItemTypeEnum.SpecialPower;
+                            BonusPowerType = RareItemTypeEnum.SpecialPower;
                             break;
                         }
-                    case Enumerations.RareItemTypeEnum.HatOfTheMagi:
+                    case RareItemTypeEnum.HatOfTheMagi:
                         {
-                            BonusPowerType = Enumerations.RareItemTypeEnum.SpecialAbility;
+                            BonusPowerType = RareItemTypeEnum.SpecialAbility;
                             break;
                         }
-                    case Enumerations.RareItemTypeEnum.CloakOfAman:
+                    case RareItemTypeEnum.CloakOfAman:
                         {
-                            BonusPowerType = Enumerations.RareItemTypeEnum.SpecialPower;
+                            BonusPowerType = RareItemTypeEnum.SpecialPower;
                             break;
                         }
                 }

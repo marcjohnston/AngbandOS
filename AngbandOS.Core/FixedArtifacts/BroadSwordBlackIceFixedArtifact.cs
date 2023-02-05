@@ -20,7 +20,7 @@ internal class BroadSwordBlackIceFixedArtifact : BaseFixedArtifact
         }
         else
         {
-            item.BonusPowerType = Enumerations.RareItemTypeEnum.SpecialAbility;
+            item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
             item.BonusPowerSubType = ActivationPowerManager.GetRandom();
         }
     }

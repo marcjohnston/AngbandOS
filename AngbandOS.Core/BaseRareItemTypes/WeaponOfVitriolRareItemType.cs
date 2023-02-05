@@ -15,7 +15,7 @@ internal class WeaponOfVitriolRareItemType : Base2RareItemType
     public override int MaxToA => 0;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override Enumerations.RareItemTypeEnum RareItemType => Enumerations.RareItemTypeEnum.WeaponOfVitriol;
+    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.WeaponOfVitriol;
     public override int Rarity => 0;
     public override int Rating => 15;
     public override bool ResAcid => true;

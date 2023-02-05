@@ -17,19 +17,19 @@
             {
                 case 1:
                 case 2:
-                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.HatOfIntelligence;
+                    item.RareItemTypeIndex = RareItemTypeEnum.HatOfIntelligence;
                     break;
                 case 3:
                 case 4:
-                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.HatOfWisdom;
+                    item.RareItemTypeIndex = RareItemTypeEnum.HatOfWisdom;
                     break;
                 case 5:
                 case 6:
-                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.HatOfBeauty;
+                    item.RareItemTypeIndex = RareItemTypeEnum.HatOfBeauty;
                     break;
                 case 7:
                 case 8:
-                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.HatOfSeeing;
+                    item.RareItemTypeIndex = RareItemTypeEnum.HatOfSeeing;
                     if (Program.Rng.DieRoll(7) == 1)
                     {
                         item.RandartItemCharacteristics.Telepathy = true;
@@ -37,13 +37,13 @@
                     break;
                 case 9:
                 case 10:
-                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.HatOfLight;
+                    item.RareItemTypeIndex = RareItemTypeEnum.HatOfLight;
                     break;
                 case 11:
                 case 12:
                 case 13:
                 case 14:
-                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.HatOfInfravision;
+                    item.RareItemTypeIndex = RareItemTypeEnum.HatOfInfravision;
                     break;
             }
         }
@@ -54,20 +54,20 @@
             {
                 case 1:
                 case 2:
-                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.HatOfStupidity;
+                    item.RareItemTypeIndex = RareItemTypeEnum.HatOfStupidity;
                     break;
                 case 3:
                 case 4:
-                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.HatOfNaivety;
+                    item.RareItemTypeIndex = RareItemTypeEnum.HatOfNaivety;
                     break;
                 case 5:
-                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.HatOfUgliness;
+                    item.RareItemTypeIndex = RareItemTypeEnum.HatOfUgliness;
                     break;
                 case 6:
-                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.HatOfSickliness;
+                    item.RareItemTypeIndex = RareItemTypeEnum.HatOfSickliness;
                     break;
                 case 7:
-                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.HatOfTeleportation;
+                    item.RareItemTypeIndex = RareItemTypeEnum.HatOfTeleportation;
                     break;
             }
         }

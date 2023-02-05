@@ -40,4 +40,3 @@ global using AngbandOS.Core.StoreCommands;
 global using AngbandOS.Core.Stores;
 global using AngbandOS.Core.TimedActions;
 global using AngbandOS.Core.WeightedRandoms;
-global using AngbandOS.Enumerations;

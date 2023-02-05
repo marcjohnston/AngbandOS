@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Enumerations
+﻿namespace AngbandOS.Core
 {
     internal class StompableType
     {

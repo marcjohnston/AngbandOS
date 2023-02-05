@@ -15,7 +15,7 @@ internal class CloakOfImmolationRareItemType : Base2RareItemType
     public override int MaxToA => 4;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override Enumerations.RareItemTypeEnum RareItemType => Enumerations.RareItemTypeEnum.CloakOfImmolation;
+    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.CloakOfImmolation;
     public override int Rarity => 0;
     public override int Rating => 16;
     public override bool ResFire => true;

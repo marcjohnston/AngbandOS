@@ -6666,7 +6666,7 @@ namespace AngbandOS
                 }
                 // Make the bolts into bolts of flame
                 MsgPrint("Your bolts are covered in a fiery aura!");
-                item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.AmmoOfFlame;
+                item.RareItemTypeIndex = RareItemTypeEnum.AmmoOfFlame;
                 Enchant(item, Program.Rng.RandomLessThan(3) + 4,
                     Constants.EnchTohit | Constants.EnchTodam);
                 // Quit after the first bolts have been upgraded
@@ -6694,26 +6694,26 @@ namespace AngbandOS
                     case 4:
                         // Make it a planar weapon
                         act = "seems very unstable now.";
-                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponPlanarWeapon;
+                        item.RareItemTypeIndex = RareItemTypeEnum.WeaponPlanarWeapon;
                         item.TypeSpecificValue = Program.Rng.DieRoll(2);
                         break;
 
                     case 3:
                         // Make it a vampiric weapon
                         act = "thirsts for blood!";
-                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponVampiric;
+                        item.RareItemTypeIndex = RareItemTypeEnum.WeaponVampiric;
                         break;
 
                     case 2:
                         // Make it a poison brand
                         act = "is coated with poison.";
-                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfPoisoning;
+                        item.RareItemTypeIndex = RareItemTypeEnum.WeaponOfPoisoning;
                         break;
 
                     case 1:
                         // Make it a chaotic weapon
                         act = "is engulfed in raw chaos!";
-                        item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponChaotic;
+                        item.RareItemTypeIndex = RareItemTypeEnum.WeaponChaotic;
                         break;
 
                     default:
@@ -6721,12 +6721,12 @@ namespace AngbandOS
                         if (Program.Rng.RandomLessThan(100) < 25)
                         {
                             act = "is covered in a fiery shield!";
-                            item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfBurning;
+                            item.RareItemTypeIndex = RareItemTypeEnum.WeaponOfBurning;
                         }
                         else
                         {
                             act = "glows deep, icy blue!";
-                            item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfFreezing;
+                            item.RareItemTypeIndex = RareItemTypeEnum.WeaponOfFreezing;
                         }
                         break;
                 }
@@ -7111,7 +7111,7 @@ namespace AngbandOS
                 // Completely remake the armour into a set of blasted armour
                 MsgPrint($"A terrible black aura blasts your {itemName}!");
                 item.FixedArtifact = null;
-                item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.ArmourBlasted;
+                item.RareItemTypeIndex = RareItemTypeEnum.ArmourBlasted;
                 item.BonusArmourClass = 0 - Program.Rng.DieRoll(5) - Program.Rng.DieRoll(5);
                 item.BonusToHit = 0;
                 item.BonusDamage = 0;
@@ -7152,7 +7152,7 @@ namespace AngbandOS
                 // Completely remake the item into a shattered weapon
                 MsgPrint($"A terrible black aura blasts your {itemName}!");
                 item.FixedArtifact = null;
-                item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponShattered;
+                item.RareItemTypeIndex = RareItemTypeEnum.WeaponShattered;
                 item.BonusToHit = 0 - Program.Rng.DieRoll(5) - Program.Rng.DieRoll(5);
                 item.BonusDamage = 0 - Program.Rng.DieRoll(5) - Program.Rng.DieRoll(5);
                 item.BonusArmourClass = 0;
@@ -8604,7 +8604,7 @@ namespace AngbandOS
             }
             // If it wasn't an artifact, then check the other types of activatable item Planar
             // weapon teleports you
-            if (item.RareItemTypeIndex == Enumerations.RareItemTypeEnum.WeaponPlanarWeapon)
+            if (item.RareItemTypeIndex == RareItemTypeEnum.WeaponPlanarWeapon)
             {
                 TeleportPlayer(100);
                 item.RechargeTimeLeft = 50 + Program.Rng.DieRoll(50);
@@ -14668,8 +14668,8 @@ namespace AngbandOS
                         GetHistory(Player);
                         GetMoney();
 
-                        Spells[0] = Player.PrimaryRealm.SpellList(Player.BaseCharacterClass);
-                        Spells[1] = Player.SecondaryRealm.SpellList(Player.BaseCharacterClass);
+                        Spells[0] = Player.PrimaryRealm == null ? new Spell[] { }: Player.PrimaryRealm.SpellList(Player.BaseCharacterClass);
+                        Spells[1] = Player.SecondaryRealm == null ? new Spell[] { }: Player.SecondaryRealm.SpellList(Player.BaseCharacterClass);
                         Talents = new TalentList(Player.BaseCharacterClass.ID);
                         SpellFirst = 100;
                         foreach (Spell[] bookset in Spells)
@@ -14900,7 +14900,7 @@ namespace AngbandOS
                 item.AssignItemType(itemClass);
                 if (itemClass.CategoryEnum == ItemTypeEnum.Sword && Player.BaseCharacterClass.ID == CharacterClass.Rogue && Player.Realm1 == Realm.Death)
                 {
-                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.WeaponOfPoisoning;
+                    item.RareItemTypeIndex = RareItemTypeEnum.WeaponOfPoisoning;
                 }
                 if (itemClass.CategoryEnum == ItemTypeEnum.Wand)
                 {

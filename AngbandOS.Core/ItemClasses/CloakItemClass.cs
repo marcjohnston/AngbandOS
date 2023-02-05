@@ -14,12 +14,12 @@
 
         protected override void ApplyRandomGoodRareCharacteristics(Item item)
         {
-            WeightedRandom<Enumerations.RareItemTypeEnum> weightedRandom = new WeightedRandom<Enumerations.RareItemTypeEnum>();
-            weightedRandom.Add(8, Enumerations.RareItemTypeEnum.CloakOfProtection);
-            weightedRandom.Add(8, Enumerations.RareItemTypeEnum.CloakOfStealth);
-            weightedRandom.Add(1, Enumerations.RareItemTypeEnum.CloakOfAman);
-            weightedRandom.Add(1, Enumerations.RareItemTypeEnum.CloakOfElectricity);
-            weightedRandom.Add(1, Enumerations.RareItemTypeEnum.CloakOfImmolation);
+            WeightedRandom<RareItemTypeEnum> weightedRandom = new WeightedRandom<RareItemTypeEnum>();
+            weightedRandom.Add(8, RareItemTypeEnum.CloakOfProtection);
+            weightedRandom.Add(8, RareItemTypeEnum.CloakOfStealth);
+            weightedRandom.Add(1, RareItemTypeEnum.CloakOfAman);
+            weightedRandom.Add(1, RareItemTypeEnum.CloakOfElectricity);
+            weightedRandom.Add(1, RareItemTypeEnum.CloakOfImmolation);
             item.RareItemTypeIndex = weightedRandom.Choose();
         }
 
@@ -28,13 +28,13 @@
             switch (Program.Rng.DieRoll(3))
             {
                 case 1:
-                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.CloakOfIrritation;
+                    item.RareItemTypeIndex = RareItemTypeEnum.CloakOfIrritation;
                     break;
                 case 2:
-                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.CloakOfVulnerability;
+                    item.RareItemTypeIndex = RareItemTypeEnum.CloakOfVulnerability;
                     break;
                 case 3:
-                    item.RareItemTypeIndex = Enumerations.RareItemTypeEnum.CloakOfEnveloping;
+                    item.RareItemTypeIndex = RareItemTypeEnum.CloakOfEnveloping;
                     break;
             }
         }

@@ -17,7 +17,7 @@ internal class ShieldOfResistanceRareItemType : Base2RareItemType
     public override int MaxToA => 10;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override Enumerations.RareItemTypeEnum RareItemType => Enumerations.RareItemTypeEnum.ShieldOfResistance;
+    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.ShieldOfResistance;
     public override int Rarity => 0;
     public override int Rating => 20;
     public override bool ResAcid => true;

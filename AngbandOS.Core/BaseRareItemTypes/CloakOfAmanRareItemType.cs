@@ -17,7 +17,7 @@ internal class CloakOfAmanRareItemType : Base2RareItemType
     public override int MaxToA => 20;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override Enumerations.RareItemTypeEnum RareItemType => Enumerations.RareItemTypeEnum.CloakOfAman;
+    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.CloakOfAman;
     public override int Rarity => 0;
     public override int Rating => 20;
     public override int Slot => 31;
