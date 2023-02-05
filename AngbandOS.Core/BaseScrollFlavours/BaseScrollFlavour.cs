@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Core;
+﻿namespace AngbandOS.Core.ScrollFlavours;
 
 [Serializable]
 internal abstract class BaseScrollFlavour

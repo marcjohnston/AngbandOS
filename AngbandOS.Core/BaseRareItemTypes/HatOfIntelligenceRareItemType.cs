@@ -1,4 +1,4 @@
-namespace AngbandOS.Core;
+namespace AngbandOS.Core.RareItemTypes;
 
 [Serializable]
 internal class HatOfIntelligenceRareItemType : Base2RareItemType

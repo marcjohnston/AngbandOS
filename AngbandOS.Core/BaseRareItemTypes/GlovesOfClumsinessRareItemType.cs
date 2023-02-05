@@ -1,4 +1,4 @@
-namespace AngbandOS.Core;
+namespace AngbandOS.Core.RareItemTypes;
 
 [Serializable]
 internal class GlovesOfClumsinessRareItemType : Base2RareItemType

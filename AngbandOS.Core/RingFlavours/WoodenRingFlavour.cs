@@ -1,4 +1,4 @@
-namespace AngbandOS.Core;
+namespace AngbandOS.Core.RingFlavours;
 
 [Serializable]
 internal class WoodenRingFlavour : RingFlavour

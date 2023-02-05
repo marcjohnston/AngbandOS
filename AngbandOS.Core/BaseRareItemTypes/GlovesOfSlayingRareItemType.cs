@@ -1,4 +1,4 @@
-namespace AngbandOS.Core;
+namespace AngbandOS.Core.RareItemTypes;
 
 [Serializable]
 internal class GlovesOfSlayingRareItemType : Base2RareItemType

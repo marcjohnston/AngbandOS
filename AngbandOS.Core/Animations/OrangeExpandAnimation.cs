@@ -1,4 +1,4 @@
-namespace AngbandOS.Core;
+namespace AngbandOS.Core.Animations;
 
 [Serializable]
 internal class OrangeExpandAnimation : Animation

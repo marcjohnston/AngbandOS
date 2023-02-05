@@ -1,4 +1,4 @@
-namespace AngbandOS.Core;
+namespace AngbandOS.Core.FloorTileTypes;
 
 [Serializable]
 internal class TowerFloorFloorTileType : FloorTileType

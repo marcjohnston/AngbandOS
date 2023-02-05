@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Core;
+﻿namespace AngbandOS.Core.StaffFlavours;
 
 [Serializable]
 internal abstract class StaffFlavour

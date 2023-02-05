@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core.Spells.Chaos;
-
-namespace AngbandOS.Core.Realms
+﻿namespace AngbandOS.Core.Realms
 {
     [Serializable]
     internal class ChaosRealm : BaseRealm

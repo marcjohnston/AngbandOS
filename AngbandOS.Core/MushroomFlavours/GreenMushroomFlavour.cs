@@ -1,4 +1,4 @@
-namespace AngbandOS.Core;
+namespace AngbandOS.Core.MushroomFlavours;
 
 [Serializable]
 internal class GreenMushroomFlavour : MushroomFlavour

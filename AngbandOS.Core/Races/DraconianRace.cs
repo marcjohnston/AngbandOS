@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core.Syllables;
-
-namespace AngbandOS.Core.Races
+﻿namespace AngbandOS.Core.Races
 {
     [Serializable]
     internal class DraconianRace : Race

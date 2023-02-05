@@ -1,6 +1,4 @@
-﻿using AngbandOS;
-
-namespace AngbandOS.Core.CharacterClasses
+﻿namespace AngbandOS.Core.CharacterClasses
 {
     [Serializable]
     internal class RangerCharacterClass : BaseCharacterClass

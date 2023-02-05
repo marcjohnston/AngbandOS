@@ -1,4 +1,4 @@
-namespace AngbandOS.Core;
+namespace AngbandOS.Core.PotionFlavours;
 
 [Serializable]
 internal class CopperSpeckledPotionFlavour : PotionFlavour

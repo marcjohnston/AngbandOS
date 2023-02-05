@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Core;
+﻿namespace AngbandOS.Core.WandFlavours;
 
 [Serializable]
 internal abstract class WandFlavour

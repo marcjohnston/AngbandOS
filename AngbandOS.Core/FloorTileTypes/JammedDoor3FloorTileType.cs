@@ -1,4 +1,4 @@
-namespace AngbandOS.Core;
+namespace AngbandOS.Core.FloorTileTypes;
 
 [Serializable]
 internal class JammedDoor3FloorTileType : FloorTileType

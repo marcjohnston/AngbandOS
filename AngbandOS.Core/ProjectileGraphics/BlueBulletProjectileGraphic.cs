@@ -1,4 +1,4 @@
-namespace AngbandOS.Core;
+namespace AngbandOS.Core.ProjectileGraphics;
 
 [Serializable]
 internal class BlueBulletProjectileGraphic : ProjectileGraphic

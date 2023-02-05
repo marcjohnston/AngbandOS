@@ -1,7 +1,4 @@
-﻿using AngbandOS;
-using AngbandOS.Core.Realms;
-
-namespace AngbandOS.Core.CharacterClasses
+﻿namespace AngbandOS.Core.CharacterClasses
 {
     [Serializable]
     internal class CultistCharacterClass : BaseCharacterClass
