@@ -1209,81 +1209,94 @@ namespace AngbandOS.Core.Stores
             }
             item += _storeTop;
             Item oPtr = _inventory[item];
-            if (oPtr.Category == ItemTypeEnum.LifeBook || oPtr.Category == ItemTypeEnum.SorceryBook ||
-                oPtr.Category == ItemTypeEnum.NatureBook || oPtr.Category == ItemTypeEnum.ChaosBook ||
-                oPtr.Category == ItemTypeEnum.DeathBook ||
-                oPtr.Category == ItemTypeEnum.CorporealBook ||
-                oPtr.Category == ItemTypeEnum.TarotBook || oPtr.Category == ItemTypeEnum.FolkBook)
+            if (BookItemClass.IsItemOf(oPtr))
             {
-                switch (oPtr.Category)
+                //BookItemClass book = (BookItemClass)oPtr.BaseItemCategory;
+                if (SaveGame.Player.PrimaryRealm?.SpellBookItemCategory == oPtr.Category)
                 {
-                    case ItemTypeEnum.LifeBook:
-                        if (SaveGame.Player.Realm1 == Realm.Life || SaveGame.Player.Realm2 == Realm.Life)
-                        {
-                            DoStoreBrowse(oPtr);
-                            return;
-                        }
-                        break;
-
-                    case ItemTypeEnum.SorceryBook:
-                        if (SaveGame.Player.Realm1 == Realm.Sorcery || SaveGame.Player.Realm2 == Realm.Sorcery)
-                        {
-                            DoStoreBrowse(oPtr);
-                            return;
-                        }
-                        break;
-
-                    case ItemTypeEnum.NatureBook:
-                        if (SaveGame.Player.Realm1 == Realm.Nature || SaveGame.Player.Realm2 == Realm.Nature)
-                        {
-                            DoStoreBrowse(oPtr);
-                            return;
-                        }
-                        break;
-
-                    case ItemTypeEnum.ChaosBook:
-                        if (SaveGame.Player.Realm1 == Realm.Chaos || SaveGame.Player.Realm2 == Realm.Chaos)
-                        {
-                            DoStoreBrowse(oPtr);
-                            return;
-                        }
-                        break;
-
-                    case ItemTypeEnum.DeathBook:
-                        if (SaveGame.Player.Realm1 == Realm.Death || SaveGame.Player.Realm2 == Realm.Death)
-                        {
-                            DoStoreBrowse(oPtr);
-                            return;
-                        }
-                        break;
-
-                    case ItemTypeEnum.CorporealBook:
-                        if (SaveGame.Player.Realm1 == Realm.Corporeal || SaveGame.Player.Realm2 == Realm.Corporeal)
-                        {
-                            DoStoreBrowse(oPtr);
-                            return;
-                        }
-                        break;
-
-                    case ItemTypeEnum.TarotBook:
-                        if (SaveGame.Player.Realm1 == Realm.Tarot || SaveGame.Player.Realm2 == Realm.Tarot)
-                        {
-                            DoStoreBrowse(oPtr);
-                            return;
-                        }
-                        break;
-
-                    case ItemTypeEnum.FolkBook:
-                        if (SaveGame.Player.Realm1 == Realm.Folk || SaveGame.Player.Realm2 == Realm.Folk)
-                        {
-                            DoStoreBrowse(oPtr);
-                            return;
-                        }
-                        break;
+                    DoStoreBrowse(oPtr);
                 }
-                SaveGame.MsgPrint("The spells in the book are unintelligible to you.");
-                return;
+                else
+                {
+                    SaveGame.MsgPrint("The spells in the book are unintelligible to you.");
+                    return;
+                }
             }
+            //if (oPtr.Category == ItemTypeEnum.LifeBook || oPtr.Category == ItemTypeEnum.SorceryBook ||
+            //    oPtr.Category == ItemTypeEnum.NatureBook || oPtr.Category == ItemTypeEnum.ChaosBook ||
+            //    oPtr.Category == ItemTypeEnum.DeathBook ||
+            //    oPtr.Category == ItemTypeEnum.CorporealBook ||
+            //    oPtr.Category == ItemTypeEnum.TarotBook || oPtr.Category == ItemTypeEnum.FolkBook)
+            //{
+            //    switch (oPtr.Category)
+            //    {
+            //        case ItemTypeEnum.LifeBook:
+            //            if (SaveGame.Player.Realm1 == Realm.Life || SaveGame.Player.Realm2 == Realm.Life)
+            //            {
+            //                DoStoreBrowse(oPtr);
+            //                return;
+            //            }
+            //            break;
+
+            //        case ItemTypeEnum.SorceryBook:
+            //            if (SaveGame.Player.Realm1 == Realm.Sorcery || SaveGame.Player.Realm2 == Realm.Sorcery)
+            //            {
+            //                DoStoreBrowse(oPtr);
+            //                return;
+            //            }
+            //            break;
+
+            //        case ItemTypeEnum.NatureBook:
+            //            if (SaveGame.Player.Realm1 == Realm.Nature || SaveGame.Player.Realm2 == Realm.Nature)
+            //            {
+            //                DoStoreBrowse(oPtr);
+            //                return;
+            //            }
+            //            break;
+
+            //        case ItemTypeEnum.ChaosBook:
+            //            if (SaveGame.Player.Realm1 == Realm.Chaos || SaveGame.Player.Realm2 == Realm.Chaos)
+            //            {
+            //                DoStoreBrowse(oPtr);
+            //                return;
+            //            }
+            //            break;
+
+            //        case ItemTypeEnum.DeathBook:
+            //            if (SaveGame.Player.Realm1 == Realm.Death || SaveGame.Player.Realm2 == Realm.Death)
+            //            {
+            //                DoStoreBrowse(oPtr);
+            //                return;
+            //            }
+            //            break;
+
+            //        case ItemTypeEnum.CorporealBook:
+            //            if (SaveGame.Player.Realm1 == Realm.Corporeal || SaveGame.Player.Realm2 == Realm.Corporeal)
+            //            {
+            //                DoStoreBrowse(oPtr);
+            //                return;
+            //            }
+            //            break;
+
+            //        case ItemTypeEnum.TarotBook:
+            //            if (SaveGame.Player.Realm1 == Realm.Tarot || SaveGame.Player.Realm2 == Realm.Tarot)
+            //            {
+            //                DoStoreBrowse(oPtr);
+            //                return;
+            //            }
+            //            break;
+
+            //        case ItemTypeEnum.FolkBook:
+            //            if (SaveGame.Player.Realm1 == Realm.Folk || SaveGame.Player.Realm2 == Realm.Folk)
+            //            {
+            //                DoStoreBrowse(oPtr);
+            //                return;
+            //            }
+            //            break;
+            //    }
+            //    SaveGame.MsgPrint("The spells in the book are unintelligible to you.");
+            //    return;
+            //}
             if (!oPtr.IdentMental)
             {
                 SaveGame.MsgPrint("You have no special knowledge about that item.");

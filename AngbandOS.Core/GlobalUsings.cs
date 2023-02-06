@@ -18,6 +18,7 @@ global using AngbandOS.Core.EventsArgs;
 global using AngbandOS.Core.FixedArtifacts;
 global using AngbandOS.Core.FlaggedActions;
 global using AngbandOS.Core.FloorTileTypes;
+global using AngbandOS.Core.Hooks;
 global using AngbandOS.Core.Interface;
 global using AngbandOS.Core.InventorySlots;
 global using AngbandOS.Core.ItemCategories;

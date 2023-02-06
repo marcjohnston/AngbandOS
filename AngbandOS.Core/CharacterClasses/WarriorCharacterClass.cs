@@ -38,5 +38,19 @@
         public override IArtifactBias? ArtifactBias => new WarriorArtifactBias();
         public override bool SenseInventoryTest(int level) => (0 != Program.Rng.RandomLessThan(9000 / ((level * level) + 40)));
         public override bool DetailedSenseInventory => true;
+
+        /// <summary>
+        /// Warriors always gain experience when they destroy spell books.
+        /// destroyed.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        public override void ItemDestroyed(Item item, int amount)
+        {
+            // Warriors and paladins get experience for destroying magic books
+            if (SaveGame.ItemFilterHighLevelBook(item))
+            {
+                GainExperienceFromSpellBookDestroy(item, amount);
+            }
+        }
     }
 }

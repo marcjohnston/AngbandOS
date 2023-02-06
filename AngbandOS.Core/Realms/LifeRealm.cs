@@ -64,5 +64,7 @@
 
             return spellList.ToArray();
         }
+
+        public override bool SusceptibleToHolyAndHellProjectiles => true;
     }
 }

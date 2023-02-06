@@ -6,6 +6,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Hooks;
+
 namespace AngbandOS.Core.Projection
 {
     internal class ProjectHellFire : Projectile
@@ -118,11 +120,12 @@ namespace AngbandOS.Core.Projection
             {
                 SaveGame.MsgPrint("You are hit by something!");
             }
-            if (SaveGame.Player.Realm1 == Realm.Death || SaveGame.Player.Realm2 == Realm.Death)
+            
+            if (SaveGame.Player.PrimaryRealm.ResistantToHolyAndHellProjectiles || SaveGame.Player.SecondaryRealm.ResistantToHolyAndHellProjectiles)
             {
                 dam /= 2;
             }
-            else if (SaveGame.Player.Realm1 == Realm.Life || SaveGame.Player.Realm2 == Realm.Life)
+            else if (SaveGame.Player.PrimaryRealm.SusceptibleToHolyAndHellProjectiles || SaveGame.Player.SecondaryRealm.SusceptibleToHolyAndHellProjectiles)
             {
                 dam *= 2;
             }

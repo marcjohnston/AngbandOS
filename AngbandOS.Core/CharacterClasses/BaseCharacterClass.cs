@@ -91,5 +91,42 @@
         public virtual BaseRealm[] AvailableSecondaryRealms => new BaseRealm[] { };
 
         public virtual bool WorshipsADeity => false; // TODO: Only priests have a godname ... this seems off.
+
+        /// <summary>
+        /// Gains the experience when the character class destroys a spell book.  Derived classes must determine if the character class gains experience when they destroy a
+        /// spell book and can call this common method to perform the gain experience.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <param name="amount">The amount.</param>
+        protected void GainExperienceFromSpellBookDestroy(Item item, int amount)
+        {
+            if (SaveGame.Player.ExperiencePoints < Constants.PyMaxExp)
+            {
+                int testerExp = SaveGame.Player.MaxExperienceGained / 20;
+                if (testerExp > 10000)
+                {
+                    testerExp = 10000;
+                }
+                if (item.ItemSubCategory < 3)
+                {
+                    testerExp /= 4;
+                }
+                if (testerExp < 1)
+                {
+                    testerExp = 1;
+                }
+                SaveGame.MsgPrint("You feel more experienced.");
+                SaveGame.Player.GainExperience(testerExp * amount);
+            }
+        }
+
+        /// <summary>
+        /// Allows the character class to perform any additional handling when an item is destroyed.  Warriors and Paladins gain experience when specific spell books are
+        /// destroyed.  Does nothing, by default.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        public virtual void ItemDestroyed(Item item, int amount)
+        {
+        }
     }
 }

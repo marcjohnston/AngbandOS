@@ -62,5 +62,6 @@
 
             return spellList.ToArray();
         }
+        public override bool ResistantToHolyAndHellProjectiles => true;
     }
 }

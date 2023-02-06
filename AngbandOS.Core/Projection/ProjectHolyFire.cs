@@ -139,11 +139,11 @@ namespace AngbandOS.Core.Projection
             {
                 SaveGame.MsgPrint("You are hit by something!");
             }
-            if (SaveGame.Player.Realm1 == Realm.Life || SaveGame.Player.Realm2 == Realm.Life)
+            if (SaveGame.Player.PrimaryRealm.ResistantToHolyAndHellProjectiles || SaveGame.Player.SecondaryRealm.ResistantToHolyAndHellProjectiles)
             {
                 dam /= 2;
             }
-            else if (SaveGame.Player.Realm1 == Realm.Death || SaveGame.Player.Realm2 == Realm.Death)
+            else if (SaveGame.Player.PrimaryRealm.SusceptibleToHolyAndHellProjectiles || SaveGame.Player.SecondaryRealm.SusceptibleToHolyAndHellProjectiles)
             {
                 dam *= 2;
             }

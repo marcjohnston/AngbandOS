@@ -57,5 +57,27 @@
             SaveGame.SingletonRepository.Realms.Get<LifeRealm>(),
             SaveGame.SingletonRepository.Realms.Get<DeathRealm>()
         };
+
+        public override void ItemDestroyed(Item item, int amount)
+        {
+            // Warriors and paladins get experience for destroying magic books
+            if (SaveGame.ItemFilterHighLevelBook(item))
+            {
+                if (SaveGame.Player.Realm1 == Realm.Life)
+                {
+                    if (item.Category == ItemTypeEnum.DeathBook)
+                    {
+                        GainExperienceFromSpellBookDestroy(item, amount);
+                    }
+                }
+                else
+                {
+                    if (item.Category == ItemTypeEnum.LifeBook)
+                    {
+                        GainExperienceFromSpellBookDestroy(item, amount);
+                    }
+                }
+            }
+        }
     }
 }

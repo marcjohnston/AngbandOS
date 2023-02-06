@@ -9012,50 +9012,7 @@ namespace AngbandOS.Core
             }
             MsgPrint($"You destroy {itemName}.");
 
-            // Warriors and paladins get experience for destroying magic books
-            if (ItemFilterHighLevelBook(item))
-            {
-                bool gainExpr = false;
-                if (Player.BaseCharacterClass.ID == CharacterClass.Warrior)
-                {
-                    gainExpr = true;
-                }
-                else if (Player.BaseCharacterClass.ID == CharacterClass.Paladin)
-                {
-                    if (Player.Realm1 == Realm.Life)
-                    {
-                        if (item.Category == ItemTypeEnum.DeathBook)
-                        {
-                            gainExpr = true;
-                        }
-                    }
-                    else
-                    {
-                        if (item.Category == ItemTypeEnum.LifeBook)
-                        {
-                            gainExpr = true;
-                        }
-                    }
-                }
-                if (gainExpr && Player.ExperiencePoints < Constants.PyMaxExp)
-                {
-                    int testerExp = Player.MaxExperienceGained / 20;
-                    if (testerExp > 10000)
-                    {
-                        testerExp = 10000;
-                    }
-                    if (item.ItemSubCategory < 3)
-                    {
-                        testerExp /= 4;
-                    }
-                    if (testerExp < 1)
-                    {
-                        testerExp = 1;
-                    }
-                    MsgPrint("You feel more experienced.");
-                    Player.GainExperience(testerExp * amount);
-                }
-            }
+            Player.BaseCharacterClass.ItemDestroyed(item, amount);
 
             // Tidy up the player's inventory
             if (itemIndex >= 0)

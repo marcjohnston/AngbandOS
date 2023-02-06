@@ -22,5 +22,10 @@
             }
             return 0;
         }
+
+        public static bool IsItemOf(Item item)
+        {
+            return typeof(BookItemClass).IsAssignableFrom(item.BaseItemCategory.GetType());
+        }
     }
 }
