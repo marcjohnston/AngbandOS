@@ -12,6 +12,11 @@
         /// <value>The identifier.</value>
         public override Realm ID => Realm.Chaos;
 
+        public static bool IsOf(BaseRealm? realm)
+        {
+            return realm != null && typeof(ChaosRealm).IsAssignableFrom(realm.GetType());
+        }
+
         public override string[] Info => new string[] {
             "The Chaos realm is the most destructive realm. It focuses",
             "on combat spells. It is a very good choice for anyone who",

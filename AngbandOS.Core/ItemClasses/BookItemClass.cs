@@ -27,5 +27,7 @@
         {
             return typeof(BookItemClass).IsAssignableFrom(item.BaseItemCategory.GetType());
         }
+
+        public abstract BaseRealm? ToRealm { get; }
     }
 }

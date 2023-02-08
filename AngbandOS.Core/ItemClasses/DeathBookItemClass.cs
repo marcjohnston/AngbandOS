@@ -14,5 +14,7 @@
         public override bool HatesFire => true;
         public override Colour Colour => Colour.Black;
         public override Realm? SpellBookToToRealm => Realm.Death;
+
+        public override BaseRealm? ToRealm => SaveGame.SingletonRepository.Realms.Get<DeathRealm>();
     }
 }

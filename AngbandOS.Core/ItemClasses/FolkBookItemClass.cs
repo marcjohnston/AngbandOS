@@ -14,5 +14,6 @@
         public override bool HatesFire => true;
         public override Colour Colour => Colour.BrightPurple;
         public override Realm? SpellBookToToRealm => Realm.Folk;
+        public override BaseRealm? ToRealm => SaveGame.SingletonRepository.Realms.Get<FolkRealm>();
     }
 }

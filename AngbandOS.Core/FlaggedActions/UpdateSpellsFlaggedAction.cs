@@ -32,11 +32,14 @@
             }
             int numAllowed = SaveGame.Player.AbilityScores[SaveGame.Player.BaseCharacterClass.SpellStat].HalfSpellsPerLevel * levels / 2;
             int numKnown = 0;
-            for (j = 0; j < 64; j++)
+            foreach (Spell[] bookset in SaveGame.Spells)
             {
-                if (SaveGame.Spells[j / 32][j % 32].Learned)
+                foreach (Spell spell in bookset)
                 {
-                    numKnown++;
+                    if (spell.Learned)
+                    {
+                        numKnown++;
+                    }
                 }
             }
             SaveGame.Player.SpareSpellSlots = numAllowed - numKnown;

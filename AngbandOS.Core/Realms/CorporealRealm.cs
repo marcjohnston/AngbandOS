@@ -11,6 +11,11 @@
         /// </summary>
         /// <value>The identifier.</value>
         public override Realm ID => Realm.Corporeal;
+        public static bool IsOf(BaseRealm? realm)
+        {
+            return realm != null && typeof(CorporealRealm).IsAssignableFrom(realm.GetType());
+        }
+
         public override string[] Info => new string[] {
             "The Corporeal realm contains spells that exclusively affect",
             "the caster's body, although some spells also indirectly",
