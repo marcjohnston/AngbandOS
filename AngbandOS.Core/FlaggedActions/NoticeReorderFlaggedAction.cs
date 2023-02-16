@@ -27,7 +27,6 @@
                     {
                         break;
                     }
-                    if (oPtr.BaseItemCategory.SpellBookToToRealm)
                     if (oPtr.BaseItemCategory.SpellBookToToRealm == SaveGame.Player.Realm1 && jPtr.BaseItemCategory.SpellBookToToRealm != SaveGame.Player.Realm1)
                     {
                         break;
