@@ -123,8 +123,18 @@ namespace AngbandOS.Core
         public bool MsgFlag;
 
         public int SpellFirst;
-        public readonly int[] SpellOrder = new int[64];
+
+        /// <summary>
+        /// Represents the order in which spells that have been learned.  When a spell is learned, it is added to this list.  It is not removed, if the spell is forgotten,
+        /// so that when the player regains the necessary experience, the same spell is relearned.
+        /// </summary>
+        public readonly List<Spell> SpellOrder = new List<Spell>();
+
+        /// <summary>
+        /// Represents the spells that belong to both books that the player has access to.
+        /// </summary>
         public readonly Spell[][] Spells = new Spell[2][];
+                                                              
         public TalentList Talents;
 
         [NonSerialized]
@@ -14639,10 +14649,7 @@ namespace AngbandOS.Core
                                 }
                             }
                         }
-                        for (int ii = 0; ii < 64; ii++)
-                        {
-                            SpellOrder[ii] = 99;
-                        }
+                        SpellOrder.Clear();
 
                         Player.GooPatron = PatronList[Program.Rng.DieRoll(PatronList.Length) - 1];
                         UpdateHealthFlaggedAction.Set();

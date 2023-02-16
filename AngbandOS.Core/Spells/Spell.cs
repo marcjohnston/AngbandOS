@@ -11,9 +11,22 @@ namespace AngbandOS.Core.Spells
     [Serializable]
     internal abstract class Spell
     {
+        /// <summary>
+        /// Returns true, if the spell has been forgotten because the players level dropped to low.  When true, Learned is set to false.
+        /// </summary>
         public bool Forgotten;
+
+        /// <summary>
+        /// Returns true, if the spell has been learned.  Once a spell is learned, forgetting the spell returns this value to false and sets the Forgotten property
+        /// to true.
+        /// </summary>
         public bool Learned;
+
+        /// <summary>
+        /// Returns the name of the spell, as rendered to the player.
+        /// </summary>
         public string Name;
+
         public bool Worked;
 
         public int FirstCastExperience

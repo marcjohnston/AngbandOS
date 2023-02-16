@@ -1432,15 +1432,10 @@ namespace AngbandOS.Core.Stores
             Spell spell = useSetTwo ? SaveGame.Spells[1][spellIndex] : SaveGame.Spells[0][spellIndex];
             spell.Learned = true;
             int i;
+
             // Mark the spell as the last spell learned, in case we need to start forgetting them
-            for (i = 0; i < 64; i++)
-            {
-                if (SaveGame.SpellOrder[i] == 99)
-                {
-                    break;
-                }
-            }
-            SaveGame.SpellOrder[i] = spellIndex;
+            SaveGame.SpellOrder.Add(spell);
+
             // Let the player know they've learned a spell
             SaveGame.MsgPrint($"You have learned the {spellType} of {spell.Name}.");
             SaveGame.PlaySound(SoundEffect.Study);
