@@ -13910,7 +13910,11 @@ namespace AngbandOS.Core
 
         private void GetRealmsRandomly()
         {
+            // Use weighted randoms to choose a the realms.
             Player.PrimaryRealm = new WeightedRandom<BaseRealm>(Player.BaseCharacterClass.AvailablePrimaryRealms).Choose();
+
+            // We need to get the available secondary realms.  Note that we need to exclude the primary realm.
+            BaseRealm[] availableSecondaryRealms = Player.BaseCharacterClass.AvailableSecondaryRealms.Where(_realm => _realm != Player.PrimaryRealm).ToArray();
             Player.SecondaryRealm = new WeightedRandom<BaseRealm>(Player.BaseCharacterClass.AvailableSecondaryRealms).Choose();
             if (!Player.BaseCharacterClass.WorshipsADeity)
             {
