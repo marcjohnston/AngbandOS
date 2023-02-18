@@ -93,6 +93,11 @@
         public virtual bool WorshipsADeity => false; // TODO: Only priests have a godname ... this seems off.
 
         /// <summary>
+        /// Returns the default deity that the character class worships.  This is used when randomly choosing a CharacterClass.  Defaults to None.
+        /// </summary>
+        public virtual GodName DefaultDeity(BaseRealm? realm) => GodName.None;
+
+        /// <summary>
         /// Gains the experience when the character class destroys a spell book.  Derived classes must determine if the character class gains experience when they destroy a
         /// spell book and can call this common method to perform the gain experience.
         /// </summary>

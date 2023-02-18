@@ -62,5 +62,29 @@
             SaveGame.SingletonRepository.Realms.Get<CorporealRealm>()
         };
         public override bool WorshipsADeity => true;
+
+        public override GodName DefaultDeity(BaseRealm? realm)
+        {
+            switch (realm)
+            {
+                case NatureRealm:
+                    return GodName.Hagarg_Ryonis;
+
+                case FolkRealm:
+                    return GodName.Zo_Kalar;
+
+                case ChaosRealm:
+                    return GodName.Nath_Horthah;
+
+                case CorporealRealm:
+                    return GodName.Lobon;
+
+                case TarotRealm:
+                    return GodName.Tamash;
+
+                default:
+                    return GodName.None;
+            }
+        }
     }
 }

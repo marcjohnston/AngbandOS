@@ -8803,7 +8803,6 @@ namespace AngbandOS.Core
             int spell;
             int num = 0;
             int[] spells = new int[64];
-            Realm? useRealm = realm2 ? player.Realm2 : player.Realm1;
             string p = player.BaseCharacterClass.SpellCastingType == CastingType.Divine ? "prayer" : "spell";
             for (spell = 0; spell < 32; spell++)
             {
@@ -8836,6 +8835,7 @@ namespace AngbandOS.Core
                     if (savedScreen == null)
                     {
                         savedScreen = Screen.Clone();
+                        BaseRealm? useRealm = realm2 ? player.SecondaryRealm : player.PrimaryRealm;
                         player.PrintSpells(spells, num, 1, 20, useRealm);
                     }
                     else
@@ -11387,7 +11387,8 @@ namespace AngbandOS.Core
             }
             // Save the screen and overprint the spells in the book
             ScreenBuffer savedScreen = Screen.Clone();
-            Player.PrintSpells(spells, spellIndex, 1, 20, item.BaseItemCategory.SpellBookToToRealm);
+            BookItemClass book = (BookItemClass)item.BaseItemCategory;
+            Player.PrintSpells(spells, spellIndex, 1, 20, book.ToRealm);
             Screen.PrintLine("", 0, 0);
             // Wait for a keypress and re-load the screen
             Screen.Print("[Press any key to continue]", 0, 23);
@@ -13510,10 +13511,9 @@ namespace AngbandOS.Core
         /// </summary>
         private Race? _prevRace = null;
 
-        private Realm? _prevRealm1 => _prevPrimaryRealm?.ID;
         private BaseRealm? _prevPrimaryRealm;
-        private Realm? _prevRealm2 => _prevSecondaryRealm?.ID;
         private BaseRealm? _prevSecondaryRealm;
+
         private int _prevSex;
 
         public bool CharacterGeneration(ExPlayer ex)
@@ -13920,39 +13920,7 @@ namespace AngbandOS.Core
             {
                 return;
             }
-            if (Player.BaseCharacterClass.ID == CharacterClass.Priest)
-            {
-                switch (Player.Realm2)
-                {
-                    case Realm.Nature:
-                        Player.Religion.Deity = GodName.Hagarg_Ryonis;
-                        break;
-
-                    case Realm.Folk:
-                        Player.Religion.Deity = GodName.Zo_Kalar;
-                        break;
-
-                    case Realm.Chaos:
-                        Player.Religion.Deity = GodName.Nath_Horthah;
-                        break;
-
-                    case Realm.Corporeal:
-                        Player.Religion.Deity = GodName.Lobon;
-                        break;
-
-                    case Realm.Tarot:
-                        Player.Religion.Deity = GodName.Tamash;
-                        break;
-
-                    default:
-                        Player.Religion.Deity = GodName.None;
-                        break;
-                }
-            }
-            else
-            {
-                Player.Religion.Deity = GodName.None;
-            }
+            Player.Religion.Deity = Player.BaseCharacterClass.DefaultDeity(Player.SecondaryRealm);
         }
 
         private void GetStats()
@@ -14388,39 +14356,7 @@ namespace AngbandOS.Core
                         {
                             autoChose[stage] = true;
                             Player.SecondaryRealm = _prevSecondaryRealm;
-                            if (Player.BaseCharacterClass.ID == CharacterClass.Priest)
-                            {
-                                switch (Player.Realm2)
-                                {
-                                    case Realm.Nature:
-                                        Player.Religion.Deity = GodName.Hagarg_Ryonis;
-                                        break;
-
-                                    case Realm.Folk:
-                                        Player.Religion.Deity = GodName.Zo_Kalar;
-                                        break;
-
-                                    case Realm.Chaos:
-                                        Player.Religion.Deity = GodName.Nath_Horthah;
-                                        break;
-
-                                    case Realm.Corporeal:
-                                        Player.Religion.Deity = GodName.Lobon;
-                                        break;
-
-                                    case Realm.Tarot:
-                                        Player.Religion.Deity = GodName.Tamash;
-                                        break;
-
-                                    default:
-                                        Player.Religion.Deity = GodName.None;
-                                        break;
-                                }
-                            }
-                            else
-                            {
-                                Player.Religion.Deity = GodName.None;
-                            }
+                            Player.Religion.Deity = Player.BaseCharacterClass.DefaultDeity(Player.SecondaryRealm);
                             stage++;
                             break;
                         }
@@ -14509,39 +14445,7 @@ namespace AngbandOS.Core
                         if (stage > BirthStage.RealmSelection2)
                         {
                             Player.SecondaryRealm = SingletonRepository.Realms.Single(_realm => _realm.ID == realmChoice[menu[BirthStage.RealmSelection2]]);
-                            if (Player.BaseCharacterClass.ID == CharacterClass.Priest)
-                            {
-                                switch (Player.Realm2)
-                                {
-                                    case Realm.Nature:
-                                        Player.Religion.Deity = GodName.Hagarg_Ryonis;
-                                        break;
-
-                                    case Realm.Folk:
-                                        Player.Religion.Deity = GodName.Zo_Kalar;
-                                        break;
-
-                                    case Realm.Chaos:
-                                        Player.Religion.Deity = GodName.Nath_Horthah;
-                                        break;
-
-                                    case Realm.Corporeal:
-                                        Player.Religion.Deity = GodName.Lobon;
-                                        break;
-
-                                    case Realm.Tarot:
-                                        Player.Religion.Deity = GodName.Tamash;
-                                        break;
-
-                                    default:
-                                        Player.Religion.Deity = GodName.None;
-                                        break;
-                                }
-                            }
-                            else
-                            {
-                                Player.Religion.Deity = GodName.None;
-                            }
+                            Player.Religion.Deity = Player.BaseCharacterClass.DefaultDeity(Player.SecondaryRealm);
                         }
                         break;
 

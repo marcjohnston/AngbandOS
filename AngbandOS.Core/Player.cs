@@ -1020,10 +1020,10 @@ namespace AngbandOS.Core
             }
         }
 
-        public void PrintSpells(int[] spells, int num, int y, int x, Realm? realm)
+        public void PrintSpells(int[] spells, int num, int y, int x, BaseRealm? realm)
         {
             int i;
-            int set = realm == Realm1 ? 0 : 1;
+            int set = realm == PrimaryRealm ? 0 : 1;
             SaveGame.Screen.PrintLine("", y, x);
             SaveGame.Screen.Print("Name", y, x + 5);
             SaveGame.Screen.Print("Lv Mana Fail Info", y, x + 35);
