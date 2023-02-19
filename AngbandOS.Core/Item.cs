@@ -1,7 +1,7 @@
 namespace AngbandOS.Core
 {
     [Serializable]
-    internal class Item
+    internal class Item : IComparable<Item>
     {
         /// <summary>
         /// Hook into the ProcessWorld, when the item is being worn/wielded.  By default, the item forwards the event to the base ItemClass for processing.
@@ -134,6 +134,112 @@ namespace AngbandOS.Core
         public Item(SaveGame saveGame)
         {
             SaveGame = saveGame;
+        }
+
+        /// <summary>
+        /// Compares two items for sorting.  Returns -1, if this item sorts before the oPtr item; 1, if this item sorts after or 0 if they are equivalent.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public int CompareTo(Item oPtr)
+        {
+            // First two levels of sort belong to spell books.
+            if (BookItemClass.IsItemOf(this) && BookItemClass.IsItemOf(oPtr))
+            {
+                // First level sort (primary realm spells books).
+                // A book that matches the first realm, will always come before a book that doesn't match the first realm.
+                BookItemClass thisBook = (BookItemClass)this.BaseItemCategory;
+                BookItemClass oPtrBook = (BookItemClass)oPtr.BaseItemCategory;
+                if (thisBook.ToRealm == SaveGame.Player.PrimaryRealm && oPtrBook.ToRealm != SaveGame.Player.PrimaryRealm)
+                {
+                    return -1;
+                }
+                if (thisBook.ToRealm != SaveGame.Player.PrimaryRealm && oPtrBook.ToRealm == SaveGame.Player.PrimaryRealm)
+                {
+                    return 1;
+                }
+
+                // Second level sort (secondary realm spell books).
+                // A book that matches the second realm, will always come before a book that doesn't match the second realm.
+                if (thisBook.ToRealm == SaveGame.Player.SecondaryRealm && oPtrBook.ToRealm != SaveGame.Player.SecondaryRealm)
+                {
+                    return 1;
+                }
+                if (thisBook.ToRealm != SaveGame.Player.SecondaryRealm && oPtrBook.ToRealm == SaveGame.Player.SecondaryRealm)
+                {
+                    return -1;
+                }
+            }
+
+            // Third level sort (category, in reverse order).
+            // Sort items by their pack sort order.
+            if (BaseItemCategory.PackSort < oPtr.BaseItemCategory.PackSort)
+            {
+                return -1;
+            }
+            if (BaseItemCategory.PackSort > oPtr.BaseItemCategory.PackSort)
+            {
+                return 1;
+            }
+
+            // Fourth level sort (FlavorAware before those unidentified)
+            // Flavour aware items sort before those not identified.
+            if (IsFlavourAware() && !oPtr.IsFlavourAware())
+            {
+                return -1;
+            }
+            if (!IsFlavourAware() && oPtr.IsFlavourAware())
+            {
+                return 1;
+            }
+
+            // Fifth level sort (subcategory).
+            // Sort items by their subcategory, in ascending order.
+            if (ItemSubCategory < oPtr.ItemSubCategory)
+            {
+                return -1;
+            }
+            if (ItemSubCategory > oPtr.ItemSubCategory)
+            {
+                return 1;
+            }
+
+            // Sixth level sort (known before unknown).
+            if (IsKnown() && !oPtr.IsKnown())
+            {
+                return -1;
+            }
+            if (!IsKnown() && oPtr.IsKnown())
+            {
+                return 1;
+            }
+
+            // Seventh level sort (rods with shortest recharge time).
+            if (Category == ItemTypeEnum.Rod && oPtr.Category == ItemTypeEnum.Rod)
+            {
+                if (TypeSpecificValue < oPtr.TypeSpecificValue)
+                {
+                    return -1;
+                }
+                if (TypeSpecificValue > oPtr.TypeSpecificValue)
+                {
+                    return 1;
+                }
+            }
+
+            // Eigth level sort (greater value over less value).
+            if (Value() > oPtr.Value())
+            {
+                return 1;
+            }
+            if (Value() < oPtr.Value())
+            {
+                return -1;
+            }
+
+            // They are equal.
+            return 0;
         }
 
         public Item Clone(int? newCount = null)

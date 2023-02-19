@@ -36,5 +36,6 @@
         public override bool CanProvideSheathOfFire => true;
 
         public override bool CanReflectBoltsAndArrows => true;
+        public override int PackSort => 20;
     }
 }

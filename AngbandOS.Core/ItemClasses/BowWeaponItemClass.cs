@@ -121,5 +121,6 @@
                 }
             }
         }
+        public override int PackSort => 32;
     }
 }

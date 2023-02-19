@@ -26,5 +26,6 @@
             }
             return 0;
         }
+        public override int PackSort => 37;
     }
 }

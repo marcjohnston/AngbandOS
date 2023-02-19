@@ -16,5 +16,6 @@
         public override Realm? SpellBookToToRealm => Realm.Death;
 
         public override BaseRealm? ToRealm => SaveGame.SingletonRepository.Realms.Get<DeathRealm>();
+        public override int PackSort => 4;
     }
 }

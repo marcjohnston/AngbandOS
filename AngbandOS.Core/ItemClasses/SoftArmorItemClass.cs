@@ -35,5 +35,6 @@
         public override bool CanProvideSheathOfElectricity => true;
 
         public override bool CanProvideSheathOfFire => true;
+        public override int PackSort => 21;
     }
 }

@@ -42,5 +42,6 @@
         }
 
         public abstract bool Eat(SaveGame saveGame);
+        public override int PackSort => 9;
     }
 }

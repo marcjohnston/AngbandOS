@@ -189,6 +189,27 @@
                         saveGame.Player.GainExperience(saveGame.Player.ExperiencePoints + 1);
                     }
                     break;
+                case 'X':
+                    List<int> index = new List<int>();
+                    List<Item> items = new List<Item>();
+
+                    for (int i = 0; i < InventorySlot.PackCount; i++)
+                    {
+                        int pos;
+                        do
+                        {
+                            pos = Program.Rng.RandomLessThan(InventorySlot.PackCount);
+                        }
+                        while (index.Contains(pos));
+                        index.Add(pos);
+                        items.Add(SaveGame.Player.Inventory[pos]);
+                    }
+                    for (int i = 0; i < InventorySlot.PackCount; i++)
+                    {
+                        SaveGame.Player.Inventory[i] = items[i];
+                    }
+                    SaveGame.NoticeReorderFlaggedAction.Set();
+                    break;
 
                 case 'Z':
                     DoCmdWizZap(saveGame);

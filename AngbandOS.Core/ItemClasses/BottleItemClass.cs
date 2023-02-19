@@ -10,5 +10,6 @@
         public override bool HatesAcid => true;
 
         public override int PercentageBreakageChance => 100;
+        public override int PackSort => 39;
     }
 }

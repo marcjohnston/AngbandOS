@@ -15,5 +15,6 @@
         public override Colour Colour => Colour.BrightWhite;
         public override Realm? SpellBookToToRealm => Realm.Life;
         public override BaseRealm? ToRealm => SaveGame.SingletonRepository.Realms.Get<LifeRealm>();
+        public override int PackSort => 8;
     }
 }

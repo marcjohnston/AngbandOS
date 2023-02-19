@@ -18,6 +18,11 @@
         }
 
         /// <summary>
+        /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.
+        /// </summary>
+        public abstract int PackSort { get; }
+
+        /// <summary>
         /// Hook into the ProcessWorld event, when an item of this class is being worn/wielded.  Does nothing, by default.
         /// </summary>
         /// <param name="saveGame"></param>
