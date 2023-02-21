@@ -1657,80 +1657,13 @@ namespace AngbandOS.Core
             int i = j;
             if (!final && i < InventorySlot.PackCount)
             {
-                int oValue = oPtr.Value();
                 for (j = 0; j < InventorySlot.PackCount; j++)
                 {
                     jPtr = Inventory[j];
-                    if (jPtr.BaseItemCategory == null)
+                    int compare = oPtr.CompareTo(jPtr);
+                    if (compare == -1)
                     {
                         break;
-                    }
-                    if (oPtr.BaseItemCategory.SpellBookToToRealm == SaveGame.Player.Realm1 && jPtr.BaseItemCategory.SpellBookToToRealm != SaveGame.Player.Realm1)
-                    {
-                        break;
-                    }
-                    if (jPtr.BaseItemCategory.SpellBookToToRealm == SaveGame.Player.Realm1 && oPtr.BaseItemCategory.SpellBookToToRealm != SaveGame.Player.Realm1)
-                    {
-                        continue;
-                    }
-                    if (oPtr.BaseItemCategory.SpellBookToToRealm == SaveGame.Player.Realm2 && jPtr.BaseItemCategory.SpellBookToToRealm != SaveGame.Player.Realm2)
-                    {
-                        break;
-                    }
-                    if (jPtr.BaseItemCategory.SpellBookToToRealm == SaveGame.Player.Realm2 && oPtr.BaseItemCategory.SpellBookToToRealm != SaveGame.Player.Realm2)
-                    {
-                        continue;
-                    }
-                    if (oPtr.Category > jPtr.Category)
-                    {
-                        break;
-                    }
-                    if (oPtr.Category < jPtr.Category)
-                    {
-                        continue;
-                    }
-                    if (!oPtr.IsFlavourAware())
-                    {
-                        continue;
-                    }
-                    if (!jPtr.IsFlavourAware())
-                    {
-                        break;
-                    }
-                    if (oPtr.ItemSubCategory < jPtr.ItemSubCategory)
-                    {
-                        break;
-                    }
-                    if (oPtr.ItemSubCategory > jPtr.ItemSubCategory)
-                    {
-                        continue;
-                    }
-                    if (!oPtr.IsKnown())
-                    {
-                        continue;
-                    }
-                    if (!jPtr.IsKnown())
-                    {
-                        break;
-                    }
-                    if (oPtr.Category == ItemTypeEnum.Rod)
-                    {
-                        if (oPtr.TypeSpecificValue < jPtr.TypeSpecificValue)
-                        {
-                            break;
-                        }
-                        if (oPtr.TypeSpecificValue > jPtr.TypeSpecificValue)
-                        {
-                            continue;
-                        }
-                    }
-                    int jValue = jPtr.Value();
-                    if (oValue > jValue)
-                    {
-                        break;
-                    }
-                    if (oValue < jValue)
-                    {
                     }
                 }
                 i = j;

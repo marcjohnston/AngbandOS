@@ -13,7 +13,6 @@
         }
         public override bool HatesFire => true;
         public override Colour Colour => Colour.BrightBlue;
-        public override Realm? SpellBookToToRealm => Realm.Sorcery;
         public override BaseRealm? ToRealm => SaveGame.SingletonRepository.Realms.Get<SorceryRealm>();
         public override int PackSort => 7;
     }

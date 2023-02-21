@@ -11396,6 +11396,46 @@ namespace AngbandOS.Core
             Screen.Restore(savedScreen);
         }
 
+        public bool SortPack()
+        {
+            PackInventorySlot packInventorySlot = SingletonRepository.InventorySlots.Get<PackInventorySlot>();
+
+            // Create a list for all of the pack items.
+            List<Item> packItems = new List<Item>();
+            foreach (int index in packInventorySlot.InventorySlots)
+            {
+                Item item = Player.Inventory[index];
+                if (item.BaseItemCategory != null)
+                {
+                    packItems.Add(item);
+                }
+            }
+
+            // Sort the pack.
+            packItems.Sort();
+
+            // Reinsert the items back into the inventory.
+            bool itemsWereReordered = false;
+            int packItemIndex = 0;
+            foreach (int index in packInventorySlot.InventorySlots)
+            {
+                if (packItemIndex < packItems.Count)
+                {
+                    if (Player.Inventory[index] != packItems[packItemIndex])
+                    {
+                        itemsWereReordered = true;
+                    }
+                    Player.Inventory[index] = packItems[packItemIndex];
+                    packItemIndex++;
+                }
+                else
+                {
+                    Player.Inventory[index] = new Item(this);
+                }
+            }
+            return itemsWereReordered;
+        }
+
         public bool DoAlter()
         {
             // Assume we won't disturb the player

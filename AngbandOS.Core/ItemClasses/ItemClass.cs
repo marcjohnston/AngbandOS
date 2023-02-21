@@ -834,11 +834,6 @@
         public virtual bool HatesCold => false;
 
         /// <summary>
-        /// Returns the realm a spellbook belongs to.  Returns Realm.None by default for non-book objects.
-        /// </summary>
-        public virtual Realm? SpellBookToToRealm => null; // TODO: Replaced by ToRealm.
-
-        /// <summary>
         /// Applies magic to the item.  Does nothing, by default.
         /// </summary>
         /// <param name="item"></param>
