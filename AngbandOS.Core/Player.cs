@@ -1660,6 +1660,10 @@ namespace AngbandOS.Core
                 for (j = 0; j < InventorySlot.PackCount; j++)
                 {
                     jPtr = Inventory[j];
+                    if (jPtr.BaseItemCategory == null)
+                    {
+                        break;
+                    }
                     int compare = oPtr.CompareTo(jPtr);
                     if (compare == -1)
                     {
