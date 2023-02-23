@@ -65,11 +65,19 @@
             SaveGame.SingletonRepository.Realms.Get<FolkRealm>()
         };
 
-        public override ItemClass[] Outfit => new ItemClass[]
+        protected override ItemClass[] Outfit => new ItemClass[]
         {
             SaveGame.SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
             SaveGame.SingletonRepository.ItemCategories.Get<SwordDagger>(),
             SaveGame.SingletonRepository.ItemCategories.Get<SoftArmorSoftLeatherArmour>()
         };
+
+        protected override void OutfitItem(Item item)
+        {
+            if (item.BaseItemCategory.CategoryEnum == ItemTypeEnum.Sword && SaveGame.Player.Realm1 == Realm.Death)
+            {
+                item.RareItemTypeIndex = RareItemTypeEnum.WeaponOfPoisoning;
+            }
+        }
     }
 }

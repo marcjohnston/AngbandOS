@@ -134,6 +134,52 @@
         {
         }
 
-        public abstract ItemClass[] Outfit { get; }
+        /// <summary>
+        /// Outfits a new player with a starting inventory.
+        /// </summary>
+        public virtual void OutfitPlayer()
+        {
+            // An an item for each item that the character classes designates the player to be outfitted with.
+            foreach (ItemClass itemClass in Outfit)
+            {
+                // Allow the race to modify the item as the race sees fit.
+                ItemClass outfitItem = SaveGame.Player.Race.OutfitItemClass(itemClass);
+                Item item = new Item(SaveGame);
+                item.AssignItemType(outfitItem);
+                if (outfitItem.CategoryEnum == ItemTypeEnum.Wand)
+                {
+                    item.TypeSpecificValue = 1;
+                }
+                item.IdentStoreb = true;
+                item.BecomeFlavourAware();
+                item.BecomeKnown();
+                int slot = item.BaseItemCategory.WieldSlot;
+                if (slot == -1)
+                {
+                    SaveGame.Player.InvenCarry(item, false);
+                }
+                else
+                {
+                    SaveGame.Player.Inventory[slot] = item;
+                    SaveGame.Player.WeightCarried += item.Weight;
+                }
+
+                // Allow the character class a chance to modify the item.
+                OutfitItem(item);
+            }
+        }
+
+        /// <summary>
+        /// Represents the class of items a new player should be outfitted with.
+        /// </summary>
+        protected abstract ItemClass[] Outfit { get; }
+
+        /// <summary>
+        /// During the outfit process, derived character classes can modify outfitted items.  Does nothing by default.
+        /// </summary>
+        /// <param name="item"></param>
+        protected virtual void OutfitItem(Item item)
+        {
+        }
     }
 }

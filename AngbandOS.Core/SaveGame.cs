@@ -14703,35 +14703,7 @@ namespace AngbandOS.Core
                 Player.Inventory[lightsourceInventorySlot.WeightedRandom.Choose()] = carried;
                 Player.WeightCarried += carried.Weight;
             }
-
-            foreach (ItemClass itemClass in Player.BaseCharacterClass.Outfit)
-            {
-                // Allow the race to modify the item as the race sees fit.
-                ItemClass raceItemClass = Player.Race.OutfitItem(this, itemClass);
-                item = new Item(this);
-                item.AssignItemType(raceItemClass);
-                if (raceItemClass.CategoryEnum == ItemTypeEnum.Sword && Player.BaseCharacterClass.ID == CharacterClass.Rogue && Player.Realm1 == Realm.Death)
-                {
-                    item.RareItemTypeIndex = RareItemTypeEnum.WeaponOfPoisoning;
-                }
-                if (raceItemClass.CategoryEnum == ItemTypeEnum.Wand)
-                {
-                    item.TypeSpecificValue = 1;
-                }
-                item.IdentStoreb = true;
-                item.BecomeFlavourAware();
-                item.BecomeKnown();
-                int slot = item.BaseItemCategory.WieldSlot;
-                if (slot == -1)
-                {
-                    Player.InvenCarry(item, false);
-                }
-                else
-                {
-                    Player.Inventory[slot] = item;
-                    Player.WeightCarried += item.Weight;
-                }
-            }
+            Player.BaseCharacterClass.OutfitPlayer();
         }
 
         /// <summary>

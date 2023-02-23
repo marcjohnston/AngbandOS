@@ -55,7 +55,7 @@
         };
         public override bool WorshipsADeity => true;
 
-        public override ItemClass[] Outfit => new ItemClass[]
+        protected override ItemClass[] Outfit => new ItemClass[]
         {
             SaveGame.SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
             SaveGame.SingletonRepository.ItemCategories.Get<RingSustainIntelligence>(),

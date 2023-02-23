@@ -204,7 +204,7 @@
         /// race upgrades a ring of resist fear to a ring of sustain strength.
         /// </summary>
         /// <param name="item"></param>
-        public virtual ItemClass OutfitItem(SaveGame saveGame, ItemClass item)
+        public virtual ItemClass OutfitItemClass(ItemClass item)
         {
             return item;
         }

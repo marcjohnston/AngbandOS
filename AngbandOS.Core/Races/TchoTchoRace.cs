@@ -66,11 +66,11 @@
             }
         }
 
-        public override ItemClass OutfitItem(SaveGame saveGame, ItemClass itemClass)
+        public override ItemClass OutfitItemClass(ItemClass itemClass)
         {
             if (itemClass is RingFearResistance)
             {
-                return saveGame.SingletonRepository.ItemCategories.Get<RingSustainStrength>();
+                return SaveGame.SingletonRepository.ItemCategories.Get<RingSustainStrength>();
             }
             return itemClass;
         }
