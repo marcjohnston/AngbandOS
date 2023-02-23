@@ -177,6 +177,14 @@ namespace AngbandOS.Core
         public Realm? Realm2 => SecondaryRealm?.ID;
 
         public BaseRealm? SecondaryRealm = null;
+
+        /// <summary>
+        /// Returns true, if the player has chosen the realm <T> for either the primary or secondary realms to study.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public bool Studies<T>() where T : BaseRealm => (PrimaryRealm != null && typeof(T).IsAssignableFrom(PrimaryRealm.GetType())) || (SecondaryRealm != null && typeof(T).IsAssignableFrom(SecondaryRealm.GetType()));
+
         public Religion Religion = new Religion();
         public int SkillDigging;
         public int SkillDisarmTraps;

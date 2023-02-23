@@ -3,7 +3,6 @@
     [Serializable]
     internal class NatureRealm : BaseRealm
     {
-        protected SaveGame SavedGame { get; }
         private NatureRealm(SaveGame savedGame) : base(savedGame) { }
 
         /// <summary>

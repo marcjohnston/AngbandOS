@@ -74,7 +74,7 @@
 
         protected override void OutfitItem(Item item)
         {
-            if (item.BaseItemCategory.CategoryEnum == ItemTypeEnum.Sword && SaveGame.Player.Realm1 == Realm.Death)
+            if (item.BaseItemCategory.CategoryEnum == ItemTypeEnum.Sword && SaveGame.Player.Studies<DeathRealm>())
             {
                 item.RareItemTypeIndex = RareItemTypeEnum.WeaponOfPoisoning;
             }

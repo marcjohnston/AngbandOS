@@ -3,7 +3,6 @@
     [Serializable]
     internal class ChaosRealm : BaseRealm
     {
-        protected SaveGame SavedGame { get; }
         private ChaosRealm(SaveGame savedGame) : base(savedGame) { }
 
         /// <summary>

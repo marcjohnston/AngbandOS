@@ -3,7 +3,6 @@
     [Serializable]
     internal class TarotRealm : BaseRealm
     {
-        protected SaveGame SavedGame { get; }
         private TarotRealm(SaveGame savedGame) : base(savedGame) { }
 
         /// <summary>

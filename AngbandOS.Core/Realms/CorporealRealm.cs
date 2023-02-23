@@ -3,7 +3,6 @@
     [Serializable]
     internal class CorporealRealm : BaseRealm
     {
-        protected SaveGame SavedGame { get; }
         private CorporealRealm(SaveGame savedGame) : base(savedGame) { }
 
         /// <summary>

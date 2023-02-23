@@ -3,7 +3,6 @@
     [Serializable]
     internal class SorceryRealm : BaseRealm
     {
-        protected SaveGame SavedGame { get; }
         private SorceryRealm(SaveGame savedGame) : base(savedGame) { }
 
         /// <summary>

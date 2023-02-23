@@ -3,10 +3,10 @@
     [Serializable]
     internal abstract class BaseRealm
     {
-        protected SaveGame SavedGame { get; }
-        protected BaseRealm(SaveGame savedGame)
+        protected SaveGame SaveGame { get; }
+        protected BaseRealm(SaveGame saveGame)
         {
-            SavedGame = savedGame;
+            SaveGame = saveGame;
         }
 
         /// <summary>

@@ -3,7 +3,6 @@
     [Serializable]
     internal class DeathRealm : BaseRealm
     {
-        protected SaveGame SavedGame { get; }
         private DeathRealm(SaveGame savedGame) : base(savedGame) { }
 
         /// <summary>

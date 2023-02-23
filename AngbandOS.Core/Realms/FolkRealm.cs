@@ -3,7 +3,6 @@
     [Serializable]
     internal class FolkRealm : BaseRealm
     {
-        protected SaveGame SavedGame { get; }
         private FolkRealm(SaveGame savedGame) : base(savedGame) { }
 
         /// <summary>
