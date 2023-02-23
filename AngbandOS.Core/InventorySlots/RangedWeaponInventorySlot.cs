@@ -23,8 +23,7 @@ namespace AngbandOS.Core.InventorySlots
             string p = "Shooting";
             if (Count > 0 && index.HasValue)
             {
-                int i = InventorySlots[index.Value];
-                Item oPtr = SaveGame.Player.Inventory[i];
+                Item oPtr = SaveGame.Player.Inventory[index.Value];
                 if (SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
                 {
                     p = "Just holding";
