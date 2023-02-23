@@ -1,4 +1,4 @@
-﻿using AngbandOS.PersistentStorage.Sql.Entities;
+﻿using AngbandOS.PersistentStorage.MySql.Entities;
 using AngbandOS.Web.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,14 +19,6 @@ namespace AngbandOS.PersistentStorage
         public WebSqlPersistentStorage(IConfiguration configuration)
         {
             ConnectionString = configuration["ConnectionString"];
-        }
-
-        public async Task EnsureCreated()
-        {
-            using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
-            {
-                await context.Database.EnsureCreatedAsync();
-            }
         }
 
         public async Task<UserSettingsDetails?> GetPreferences(string userId)
@@ -186,9 +178,9 @@ namespace AngbandOS.PersistentStorage
         /// <inheritdoc/>
         public async Task<MessageDetails[]> GetMessagesAsync(string? userId, int? mostRecentMessageId, MessageTypeEnum[]? types)
         {
-            await EnsureCreated();
             using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
             {
+                context.Database.EnsureCreated();
                 IQueryable<Message> messagesQuery = context.Messages;
                 if (userId == null)
                     messagesQuery = messagesQuery.Where(_message => _message.ToUserId == null);

@@ -23,7 +23,7 @@ builder.Services.AddScoped(typeof(IWebPersistentStorage), typeof(WebSqlPersisten
 builder.Services.AddTransient<IEmailSender, EmailSender>(); // Email sender
 
 // Add services to the container.
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseMySQL(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 var secret = builder.Configuration["Jwt:Secret"];

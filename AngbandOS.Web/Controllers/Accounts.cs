@@ -94,22 +94,29 @@ namespace AngbandOS.Web.Controllers
             };
 
             // Create the user.
-            IdentityResult result = await UserManager.CreateAsync(newUser, postUser.Password);
-
-            // If it failed, throw.
-            if (!result.Succeeded)
+            try
             {
-                // We may have a special case that we can to clean up. Since the email addresses are used as usernames, we want to hide the concept of usernames
-                // from the UI.  If there are errors relating to the "username" ... then remove the error.  There "should" be a corresponding error relating to 
-                // the email address.
-                string[] errors = result.Errors.Select(_error => _error.Description).ToArray();
+                IdentityResult result = await UserManager.CreateAsync(newUser, postUser.Password);
 
-                // Filter any error message with the term "username" from the errors.
-                //errors = errors.Where(_error => !_error.Contains("user name", System.StringComparison.OrdinalIgnoreCase)).ToArray();
-                return Conflict(errors);
+                // If it failed, throw.
+                if (!result.Succeeded)
+                {
+                    // We may have a special case that we can to clean up. Since the email addresses are used as usernames, we want to hide the concept of usernames
+                    // from the UI.  If there are errors relating to the "username" ... then remove the error.  There "should" be a corresponding error relating to 
+                    // the email address.
+                    string[] errors = result.Errors.Select(_error => _error.Description).ToArray();
+
+                    // Filter any error message with the term "username" from the errors.
+                    //errors = errors.Where(_error => !_error.Contains("user name", System.StringComparison.OrdinalIgnoreCase)).ToArray();
+                    return Conflict(errors);
+                }
+
+                return Ok(new string[] { });
             }
-
-            return Ok(new string[] { });
+            catch (Exception ex)
+            {
+                return new StatusCodeResult(500);
+            }
         }
 
         private string GenerateJSONWebToken(ApplicationUser userInfo)

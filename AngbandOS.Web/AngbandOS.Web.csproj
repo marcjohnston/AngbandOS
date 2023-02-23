@@ -18,8 +18,6 @@
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="6.0.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.8" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.8" ExcludeAssets="All" />
   </ItemGroup>
@@ -76,7 +74,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AngbandOS.Core\AngbandOS.Core.csproj" />
     <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Core.Interface.csproj" />
-    <ProjectReference Include="..\AngbandOS.SqlPersistentStorage\AngbandOS.PersistentStorage.Sql.csproj" />
+    <ProjectReference Include="..\AngbandOS.PersistentStorage.MySql\AngbandOS.PersistentStorage.MySql.csproj" />
     <ProjectReference Include="..\AngbandOS.Web.Interface\AngbandOS.Web.Interface.csproj" />
   </ItemGroup>
 
@@ -105,7 +103,6 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\assets\images\" />
-    <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

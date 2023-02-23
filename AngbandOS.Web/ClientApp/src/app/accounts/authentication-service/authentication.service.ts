@@ -107,11 +107,13 @@ export class AuthenticationService {
         } else {
           reject();
         }
-      }, () => {
+      }, (reason: any) => {
         this.currentUser.next(null);
+        localStorage.setItem('keep-logged-in', "");
         reject()
       }).catch(() => {
         this.currentUser.next(null);
+        localStorage.setItem('keep-logged-in', "");
         reject();
       });
     })
