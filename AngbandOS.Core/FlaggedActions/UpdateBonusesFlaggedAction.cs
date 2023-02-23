@@ -1044,7 +1044,7 @@ namespace AngbandOS.Core.FlaggedActions
                 {
                     SaveGame.MsgPrint("You have trouble wielding such a heavy weapon.");
                 }
-                else if (SaveGame.Player.Inventory[InventorySlot.MeleeWeapon].BaseItemCategory != null)
+                else if (SaveGame.SingletonRepository.InventorySlots.Get<MeleeWeaponInventorySlot>().Count > 0)
                 {
                     SaveGame.MsgPrint("You have no trouble wielding your weapon.");
                 }

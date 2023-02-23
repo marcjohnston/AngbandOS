@@ -19,7 +19,7 @@ namespace AngbandOS.Core.InventorySlots
         {
             SaveGame = saveGame;
         }
-        private List<Item> Items = new List<Item>();
+      //  private List<Item> Items = new List<Item>();
         public abstract int[] InventorySlots { get; }
         public virtual string TakeOffMessage => "You were wearing";
         public abstract string Label(int index);
@@ -143,7 +143,21 @@ namespace AngbandOS.Core.InventorySlots
         /// <summary>
         /// Returns the quantity of items in the inventory slot.
         /// </summary>
-        public virtual int Count => Items.Count;
+        public virtual int Count
+        {
+            get
+            {
+                int count = 0;
+                foreach (int index in InventorySlots)
+                {
+                    if (SaveGame.Player.Inventory[index].BaseItemCategory != null)
+                    {
+                        count++;
+                    }
+                }
+                return count;
+            }
+        }
 
         /// <summary>
         /// Returns the item in a specific inventory slot position.
