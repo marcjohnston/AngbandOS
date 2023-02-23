@@ -5,16 +5,6 @@
     {
         private SorceryRealm(SaveGame savedGame) : base(savedGame) { }
 
-        /// <summary>
-        /// Returns the deprecated Realm enumeration for backwards compatibility.
-        /// </summary>
-        /// <value>The identifier.</value>
-        public override Realm ID => Realm.Sorcery;
-        public static bool IsOf(BaseRealm? realm)
-        {
-            return realm != null && typeof(SorceryRealm).IsAssignableFrom(realm.GetType());
-        }
-
         public override string[] Info => new string[] {
             "The Sorcery realm contains spells dealing with raw magic",
             "itself, for example spells dealing with magical items.",

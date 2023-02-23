@@ -5,16 +5,6 @@
     {
         private DeathRealm(SaveGame savedGame) : base(savedGame) { }
 
-        /// <summary>
-        /// Returns the deprecated Realm enumeration for backwards compatibility.
-        /// </summary>
-        /// <value>The identifier.</value>
-        public override Realm ID => Realm.Death;
-        public static bool IsOf(BaseRealm? realm)
-        {
-            return realm != null && typeof(DeathRealm).IsAssignableFrom(realm.GetType());
-        }
-
         public override string[] Info => new string[] {
             "The Death realm has a combination of life-draining spells,",
             "curses, and undead summoning. Like chaos, it is a very",

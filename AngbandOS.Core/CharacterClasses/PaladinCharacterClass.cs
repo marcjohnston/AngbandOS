@@ -63,7 +63,7 @@
             // Warriors and paladins get experience for destroying magic books
             if (SaveGame.ItemFilterHighLevelBook(item))
             {
-                if (LifeRealm.IsOf(SaveGame.Player.PrimaryRealm))
+                if (SaveGame.Player.Studies<LifeRealm>())
                 {
                     if (item.Category == ItemTypeEnum.DeathBook)
                     {

@@ -9,12 +9,6 @@
             SaveGame = saveGame;
         }
 
-        /// <summary>
-        /// Returns the deprecated Realm enumeration for backwards compatibility.
-        /// </summary>
-        /// <value>The identifier.</value>
-        public abstract Realm ID { get; }
-
         public abstract string[] Info { get; }
 
         public abstract string Name { get; }
