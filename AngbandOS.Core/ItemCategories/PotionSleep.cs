@@ -31,7 +31,7 @@ namespace AngbandOS.Core.ItemCategories
 
         public override bool Smash(SaveGame saveGame, int who, int y, int x)
         {
-            saveGame.Project(who, 2, y, x, 0, new ProjectOldSleep(saveGame), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+            saveGame.Project(who, 2, y, x, 0, new OldSleepProjectile(saveGame), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
             return true;
         }
     }

@@ -310,7 +310,7 @@ namespace AngbandOS.Core.Patrons
                 case Reward.HurtLot:
                     saveGame.MsgPrint($"The voice of {ShortName} booms out:");
                     saveGame.MsgPrint("'Suffer, pathetic fool!'");
-                    saveGame.FireBall(new ProjectDisintegrate(saveGame), 0, saveGame.Player.Level * 4, 4);
+                    saveGame.FireBall(new DisintegrateProjectile(saveGame), 0, saveGame.Player.Level * 4, 4);
                     saveGame.Player.TakeHit(saveGame.Player.Level * 4, wrathReason);
                     break;
 

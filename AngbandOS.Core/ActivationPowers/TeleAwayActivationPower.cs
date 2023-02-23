@@ -16,7 +16,7 @@
 
         protected override bool Activate(SaveGame saveGame, int direction)
         {
-            saveGame.FireBeam(new ProjectAwayAll(saveGame), direction, saveGame.Player.Level);
+            saveGame.FireBeam(new TeleportAwayAllProjectile(saveGame), direction, saveGame.Player.Level);
             return true;
         }
 

@@ -25,7 +25,7 @@ namespace AngbandOS.Core.Talents
             if (saveGame.Player.Level < 25)
             {
                 saveGame.Project(0, 2 + (saveGame.Player.Level / 10), saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2,
-                    new ProjectPsi(saveGame), ProjectionFlag.ProjectKill);
+                    new PsiProjectile(saveGame), ProjectionFlag.ProjectKill);
             }
             else
             {

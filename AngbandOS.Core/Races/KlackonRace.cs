@@ -71,11 +71,11 @@
                     saveGame.MsgPrint("You spit acid.");
                     if (saveGame.Player.Level < 25)
                     {
-                        saveGame.FireBolt(new ProjectAcid(saveGame), direction, saveGame.Player.Level);
+                        saveGame.FireBolt(new AcidProjectile(saveGame), direction, saveGame.Player.Level);
                     }
                     else
                     {
-                        saveGame.FireBall(new ProjectAcid(saveGame), direction, saveGame.Player.Level, 2);
+                        saveGame.FireBall(new AcidProjectile(saveGame), direction, saveGame.Player.Level, 2);
                     }
                 }
             }

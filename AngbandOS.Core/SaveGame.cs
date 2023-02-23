@@ -3351,12 +3351,12 @@ namespace AngbandOS.Core
 
         public bool BanishEvil(int dist)
         {
-            return ProjectAtAllInLos(new ProjectAwayEvil(this), dist);
+            return ProjectAtAllInLos(new TeleportAwayEvilProjectile(this), dist);
         }
 
         public void BanishMonsters(int dist)
         {
-            ProjectAtAllInLos(new ProjectAwayAll(this), dist);
+            ProjectAtAllInLos(new TeleportAwayAllProjectile(this), dist);
         }
 
         public void BlessWeapon()
@@ -3451,14 +3451,14 @@ namespace AngbandOS.Core
             bool lineChaos = false;
             Projectile[] hurtTypes =
             {
-                new ProjectElec(this), new ProjectPois(this), new ProjectAcid(this), new ProjectCold(this),
-                new ProjectFire(this), new ProjectMissile(this), new ProjectArrow(this), new ProjectPlasma(this),
-                new ProjectHolyFire(this), new ProjectWater(this), new ProjectLight(this), new ProjectDark(this),
-                new ProjectForce(this), new ProjectInertia(this), new ProjectMana(this), new ProjectMeteor(this),
-                new ProjectIce(this), new ProjectChaos(this), new ProjectNether(this), new ProjectDisenchant(this),
-                new ProjectExplode(this), new ProjectSound(this), new ProjectNexus(this), new ProjectConfusion(this),
-                new ProjectTime(this), new ProjectGravity(this), new ProjectShard(this), new ProjectNuke(this),
-                new ProjectHellFire(this), new ProjectDisintegrate(this)
+                new ElecProjectile(this), new PoisProjectile(this), new AcidProjectile(this), new ColdProjectile(this),
+                new FireProjectile(this), new MissileProjectile(this), new ArrowProjectile(this), new PlasmaProjectile(this),
+                new HolyFireProjectile(this), new WaterProjectile(this), new LightProjectile(this), new DarkProjectile(this),
+                new ForceProjectile(this), new InertiaProjectile(this), new ManaProjectile(this), new MeteorProjectile(this),
+                new IceProjectile(this), new ChaosProjectile(this), new NetherProjectile(this), new DisenchantProjectile(this),
+                new ExplodeProjectile(this), new SoundProjectile(this), new NexusProjectile(this), new ConfusionProjectile(this),
+                new TimeProjectile(this), new GravityProjectile(this), new ShardProjectile(this), new NukeProjectile(this),
+                new HellFireProjectile(this), new DisintegrateProjectile(this)
             };
             Projectile chaosType = hurtTypes[Program.Rng.DieRoll(30) - 1];
             if (Program.Rng.DieRoll(4) == 1)
@@ -3543,29 +3543,29 @@ namespace AngbandOS.Core
         public void CharmAnimal(int dir, int plev)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            TargetedProject(new ProjectControlAnimal(this), dir, plev, flg);
+            TargetedProject(new ControlAnimalProjectile(this), dir, plev, flg);
         }
 
         public void CharmAnimals(int dam)
         {
-            ProjectAtAllInLos(new ProjectControlAnimal(this), dam);
+            ProjectAtAllInLos(new ControlAnimalProjectile(this), dam);
         }
 
         public bool CharmMonster(int dir, int plev)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectCharm(this), dir, plev, flg);
+            return TargetedProject(new CharmProjectile(this), dir, plev, flg);
         }
 
         public void CharmMonsters(int dam)
         {
-            ProjectAtAllInLos(new ProjectCharm(this), dam);
+            ProjectAtAllInLos(new CharmProjectile(this), dam);
         }
 
         public bool CloneMonster(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectOldClone(this), dir, 0, flg);
+            return TargetedProject(new OldCloneProjectile(this), dir, 0, flg);
         }
 
         public void ColdDam(int dam, string kbStr)
@@ -3601,24 +3601,24 @@ namespace AngbandOS.Core
         public bool ConfuseMonster(int dir, int plev)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectOldConf(this), dir, plev, flg);
+            return TargetedProject(new OldConfProjectile(this), dir, plev, flg);
         }
 
         public void ConfuseMonsters(int dam)
         {
-            ProjectAtAllInLos(new ProjectOldConf(this), dam);
+            ProjectAtAllInLos(new OldConfProjectile(this), dam);
         }
 
         public void ControlOneUndead(int dir, int plev)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            TargetedProject(new ProjectControlUndead(this), dir, plev, flg);
+            TargetedProject(new ControlUndeadProjectile(this), dir, plev, flg);
         }
 
         public void DeathRay(int dir, int plev)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            TargetedProject(new ProjectDeathRay(this), dir, plev, flg);
+            TargetedProject(new DeathRayProjectile(this), dir, plev, flg);
         }
 
         public void DestroyArea(int y1, int x1, int r)
@@ -3694,13 +3694,13 @@ namespace AngbandOS.Core
         public bool DestroyDoor(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
-            return TargetedProject(new ProjectKillDoor(this), dir, 0, flg);
+            return TargetedProject(new KillDoorProjectile(this), dir, 0, flg);
         }
 
         public bool DestroyDoorsTouch()
         {
             ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-            return Project(0, 1, Player.MapY, Player.MapX, 0, new ProjectKillDoor(this), flg);
+            return Project(0, 1, Player.MapY, Player.MapX, 0, new KillDoorProjectile(this), flg);
         }
 
         public bool DetectAll()
@@ -4077,43 +4077,43 @@ namespace AngbandOS.Core
         public bool DisarmTrap(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
-            return TargetedProject(new ProjectKillTrap(this), dir, 0, flg);
+            return TargetedProject(new KillTrapProjectile(this), dir, 0, flg);
         }
 
         public void DispelDemons(int dam)
         {
-            ProjectAtAllInLos(new ProjectDispDemon(this), dam);
+            ProjectAtAllInLos(new DispDemonProjectile(this), dam);
         }
 
         public bool DispelEvil(int dam)
         {
-            return ProjectAtAllInLos(new ProjectDispEvil(this), dam);
+            return ProjectAtAllInLos(new DispEvilProjectile(this), dam);
         }
 
         public void DispelGood(int dam)
         {
-            ProjectAtAllInLos(new ProjectDispGood(this), dam);
+            ProjectAtAllInLos(new DispGoodProjectile(this), dam);
         }
 
         public void DispelLiving(int dam)
         {
-            ProjectAtAllInLos(new ProjectDispLiving(this), dam);
+            ProjectAtAllInLos(new DispLivingProjectile(this), dam);
         }
 
         public bool DispelMonsters(int dam)
         {
-            return ProjectAtAllInLos(new ProjectDispAll(this), dam);
+            return ProjectAtAllInLos(new DispAllProjectile(this), dam);
         }
 
         public bool DispelUndead(int dam)
         {
-            return ProjectAtAllInLos(new ProjectDispUndead(this), dam);
+            return ProjectAtAllInLos(new DispUndeadProjectile(this), dam);
         }
 
         public void DoorCreation()
         {
             ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-            Project(0, 1, Player.MapY, Player.MapX, 0, new ProjectMakeDoor(this), flg);
+            Project(0, 1, Player.MapY, Player.MapX, 0, new MakeDoorProjectile(this), flg);
         }
 
         /// <summary>
@@ -4125,7 +4125,7 @@ namespace AngbandOS.Core
         public bool DrainLife(int dir, int dam)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectOldDrain(this), dir, dam, flg);
+            return TargetedProject(new OldDrainProjectile(this), dir, dam, flg);
         }
 
         public void Earthquake(int cy, int cx, int r)
@@ -4404,7 +4404,7 @@ namespace AngbandOS.Core
         public void ElderSignCreation()
         {
             ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
-            Project(0, 1, Player.MapY, Player.MapX, 0, new ProjectMakeElderSign(this), flg);
+            Project(0, 1, Player.MapY, Player.MapX, 0, new MakeElderSignProjectile(this), flg);
         }
 
         public void ElecDam(int dam, string kbStr)
@@ -4610,7 +4610,7 @@ namespace AngbandOS.Core
         public bool FearMonster(int dir, int plev)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectTurnAll(this), dir, plev, flg);
+            return TargetedProject(new TurnAllProjectile(this), dir, plev, flg);
         }
 
         public bool FireBall(Projectile projectile, int dir, int dam, int rad)
@@ -4683,13 +4683,13 @@ namespace AngbandOS.Core
 
         public bool HasteMonsters()
         {
-            return ProjectAtAllInLos(new ProjectOldSpeed(this), Player.Level);
+            return ProjectAtAllInLos(new OldSpeedProjectile(this), Player.Level);
         }
 
         public bool HealMonster(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectOldHeal(this), dir, Program.Rng.DiceRoll(4, 6), flg);
+            return TargetedProject(new OldHealProjectile(this), dir, Program.Rng.DiceRoll(4, 6), flg);
         }
 
         public bool IdentifyFully()
@@ -4816,7 +4816,7 @@ namespace AngbandOS.Core
             {
                 MsgPrint("You are surrounded by a white light.");
             }
-            Project(0, rad, Player.MapY, Player.MapX, dam, new ProjectLightWeak(this), flg);
+            Project(0, rad, Player.MapY, Player.MapX, dam, new LightWeakProjectile(this), flg);
             LightRoom(Player.MapY, Player.MapX);
             return true;
         }
@@ -4824,7 +4824,7 @@ namespace AngbandOS.Core
         public void LightLine(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill;
-            TargetedProject(new ProjectLightWeak(this), dir, Program.Rng.DiceRoll(6, 8), flg);
+            TargetedProject(new LightWeakProjectile(this), dir, Program.Rng.DiceRoll(6, 8), flg);
         }
 
         public bool LoseAllInfo()
@@ -4897,13 +4897,13 @@ namespace AngbandOS.Core
 
         public void MindblastMonsters(int dam)
         {
-            ProjectAtAllInLos(new ProjectPsi(this), dam);
+            ProjectAtAllInLos(new PsiProjectile(this), dam);
         }
 
         public bool PolyMonster(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectOldPoly(this), dir, Player.Level, flg);
+            return TargetedProject(new OldPolyProjectile(this), dir, Player.Level, flg);
         }
 
         public int PolymorphMonster(MonsterRace rPtr)
@@ -5711,35 +5711,35 @@ namespace AngbandOS.Core
         public bool SleepMonster(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectOldSleep(this), dir, Player.Level, flg);
+            return TargetedProject(new OldSleepProjectile(this), dir, Player.Level, flg);
         }
 
         public bool SleepMonsters()
         {
-            return ProjectAtAllInLos(new ProjectOldSleep(this), Player.Level);
+            return ProjectAtAllInLos(new OldSleepProjectile(this), Player.Level);
         }
 
         public void SleepMonstersTouch()
         {
             ProjectionFlag flg = ProjectionFlag.ProjectKill | ProjectionFlag.ProjectHide;
-            Project(0, 1, Player.MapY, Player.MapX, Player.Level, new ProjectOldSleep(this), flg);
+            Project(0, 1, Player.MapY, Player.MapX, Player.Level, new OldSleepProjectile(this), flg);
         }
 
         public bool SlowMonster(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectOldSlow(this), dir, Player.Level, flg);
+            return TargetedProject(new OldSlowProjectile(this), dir, Player.Level, flg);
         }
 
         public bool SlowMonsters()
         {
-            return ProjectAtAllInLos(new ProjectOldSlow(this), Player.Level);
+            return ProjectAtAllInLos(new OldSlowProjectile(this), Player.Level);
         }
 
         public bool SpeedMonster(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectOldSpeed(this), dir, Player.Level, flg);
+            return TargetedProject(new OldSpeedProjectile(this), dir, Player.Level, flg);
         }
 
         public void StairCreation()
@@ -5773,23 +5773,23 @@ namespace AngbandOS.Core
         public void StasisMonster(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            TargetedProject(new ProjectStasis(this), dir, Player.Level, flg);
+            TargetedProject(new StasisProjectile(this), dir, Player.Level, flg);
         }
 
         public void StasisMonsters(int dam)
         {
-            ProjectAtAllInLos(new ProjectStasis(this), dam);
+            ProjectAtAllInLos(new StasisProjectile(this), dam);
         }
 
         public void StunMonster(int dir, int plev)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            TargetedProject(new ProjectStun(this), dir, plev, flg);
+            TargetedProject(new StunProjectile(this), dir, plev, flg);
         }
 
         public void StunMonsters(int dam)
         {
-            ProjectAtAllInLos(new ProjectStun(this), dam);
+            ProjectAtAllInLos(new StunProjectile(this), dam);
         }
 
         public void SummonReaver()
@@ -5804,7 +5804,7 @@ namespace AngbandOS.Core
         public bool TeleportMonster(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectAwayAll(this), dir, Constants.MaxSight * 5, flg);
+            return TargetedProject(new TeleportAwayAllProjectile(this), dir, Constants.MaxSight * 5, flg);
         }
 
         public void TeleportPlayer(int dis)
@@ -6041,17 +6041,17 @@ namespace AngbandOS.Core
         public bool TrapCreation()
         {
             ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-            return Project(0, 1, Player.MapY, Player.MapX, 0, new ProjectMakeTrap(this), flg);
+            return Project(0, 1, Player.MapY, Player.MapX, 0, new MakeTrapProjectile(this), flg);
         }
 
         public void TurnEvil(int dam)
         {
-            ProjectAtAllInLos(new ProjectTurnEvil(this), dam);
+            ProjectAtAllInLos(new TurnEvilProjectile(this), dam);
         }
 
         public void TurnMonsters(int dam)
         {
-            ProjectAtAllInLos(new ProjectTurnAll(this), dam);
+            ProjectAtAllInLos(new TurnAllProjectile(this), dam);
         }
 
         public bool UnlightArea(int dam, int rad)
@@ -6061,7 +6061,7 @@ namespace AngbandOS.Core
             {
                 MsgPrint("Darkness surrounds you.");
             }
-            Project(0, rad, Player.MapY, Player.MapX, dam, new ProjectDarkWeak(this), flg);
+            Project(0, rad, Player.MapY, Player.MapX, dam, new DarkWeakProjectile(this), flg);
             UnlightRoom(Player.MapY, Player.MapX);
             return true;
         }
@@ -6119,7 +6119,7 @@ namespace AngbandOS.Core
         public void WallStone()
         {
             ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
-            _ = Project(0, 1, Player.MapY, Player.MapX, 0, new ProjectStoneWall(this), flg);
+            _ = Project(0, 1, Player.MapY, Player.MapX, 0, new StoneWallProjectile(this), flg);
             UpdateScentFlaggedAction.Set();
             UpdateLightFlaggedAction.Set();
             UpdateViewFlaggedAction.Set();
@@ -6131,14 +6131,14 @@ namespace AngbandOS.Core
         {
             ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem |
                       ProjectionFlag.ProjectKill;
-            return TargetedProject(new ProjectKillWall(this), dir, 20 + Program.Rng.DieRoll(30), flg);
+            return TargetedProject(new KillWallProjectile(this), dir, 20 + Program.Rng.DieRoll(30), flg);
         }
 
         public void WizardLock(int dir)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem |
                       ProjectionFlag.ProjectKill;
-            TargetedProject(new ProjectJamDoor(this), dir, 20 + Program.Rng.DieRoll(30), flg);
+            TargetedProject(new JamDoorProjectile(this), dir, 20 + Program.Rng.DieRoll(30), flg);
         }
 
         public void YellowSign()
@@ -6768,21 +6768,21 @@ namespace AngbandOS.Core
                 {
                     if (i - 5 != 0)
                     {
-                        FireBall(new ProjectShard(this), i, 175, 2);
+                        FireBall(new ShardProjectile(this), i, 175, 2);
                     }
                 }
                 for (i = 1; i < 10; i++)
                 {
                     if (i - 5 != 0)
                     {
-                        FireBall(new ProjectMana(this), i, 175, 3);
+                        FireBall(new ManaProjectile(this), i, 175, 3);
                     }
                 }
                 for (i = 1; i < 10; i++)
                 {
                     if (i - 5 != 0)
                     {
-                        FireBall(new ProjectNuke(this), i, 175, 4);
+                        FireBall(new NukeProjectile(this), i, 175, 4);
                     }
                 }
             }
@@ -8452,7 +8452,7 @@ namespace AngbandOS.Core
                 case 6:
                     {
                         // Do a 300 damage mana ball
-                        FireBall(new ProjectMana(this), direction, 300, 3);
+                        FireBall(new ManaProjectile(this), direction, 300, 3);
                         break;
                     }
                 case 7:
@@ -8461,7 +8461,7 @@ namespace AngbandOS.Core
                 case 10:
                     {
                         // Do a 250 damage mana bolt
-                        FireBolt(new ProjectMana(this), direction, 250);
+                        FireBolt(new ManaProjectile(this), direction, 250);
                         break;
                     }
             }
@@ -8632,35 +8632,35 @@ namespace AngbandOS.Core
                     case DragonArmour.SvDragonBlue:
                         {
                             MsgPrint("You breathe lightning.");
-                            FireBall(new ProjectElec(this), dir, 100, -2);
+                            FireBall(new ElecProjectile(this), dir, 100, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonWhite:
                         {
                             MsgPrint("You breathe frost.");
-                            FireBall(new ProjectCold(this), dir, 110, -2);
+                            FireBall(new ColdProjectile(this), dir, 110, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonBlack:
                         {
                             MsgPrint("You breathe acid.");
-                            FireBall(new ProjectAcid(this), dir, 130, -2);
+                            FireBall(new AcidProjectile(this), dir, 130, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonGreen:
                         {
                             MsgPrint("You breathe poison gas.");
-                            FireBall(new ProjectPois(this), dir, 150, -2);
+                            FireBall(new PoisProjectile(this), dir, 150, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonRed:
                         {
                             MsgPrint("You breathe fire.");
-                            FireBall(new ProjectFire(this), dir, 200, -2);
+                            FireBall(new FireProjectile(this), dir, 200, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
@@ -8672,27 +8672,27 @@ namespace AngbandOS.Core
                             switch (chance)
                             {
                                 case 0:
-                                    FireBall(new ProjectFire(this),
+                                    FireBall(new FireProjectile(this),
                                         dir, 250, -2);
                                     break;
 
                                 case 1:
-                                    FireBall(new ProjectElec(this),
+                                    FireBall(new ElecProjectile(this),
                                         dir, 250, -2);
                                     break;
 
                                 case 2:
-                                    FireBall(new ProjectCold(this),
+                                    FireBall(new ColdProjectile(this),
                                         dir, 250, -2);
                                     break;
 
                                 case 3:
-                                    FireBall(new ProjectAcid(this),
+                                    FireBall(new AcidProjectile(this),
                                         dir, 250, -2);
                                     break;
 
                                 case 4:
-                                    FireBall(new ProjectPois(this),
+                                    FireBall(new PoisProjectile(this),
                                         dir, 250, -2);
                                     break;
                             }
@@ -8702,14 +8702,14 @@ namespace AngbandOS.Core
                     case DragonArmour.SvDragonBronze:
                         {
                             MsgPrint("You breathe confusion.");
-                            FireBall(new ProjectConfusion(this), dir, 120, -2);
+                            FireBall(new ConfusionProjectile(this), dir, 120, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
                     case DragonArmour.SvDragonGold:
                         {
                             MsgPrint("You breathe sound.");
-                            FireBall(new ProjectSound(this), dir, 130, -2);
+                            FireBall(new SoundProjectile(this), dir, 130, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
                             break;
                         }
@@ -8718,7 +8718,7 @@ namespace AngbandOS.Core
                             chance = Program.Rng.RandomLessThan(2);
                             string element = chance == 1 ? "chaos" : "disenchantment";
                             MsgPrint($"You breathe {element}.");
-                            FireBall(projectile: chance == 1 ? (Projectile)new ProjectChaos(this) : new ProjectDisenchant(this), dir: dir, dam: 220, rad: -2);
+                            FireBall(projectile: chance == 1 ? (Projectile)new ChaosProjectile(this) : new DisenchantProjectile(this), dir: dir, dam: 220, rad: -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
                             break;
                         }
@@ -8727,7 +8727,7 @@ namespace AngbandOS.Core
                             chance = Program.Rng.RandomLessThan(2);
                             string element = chance == 1 ? "sound" : "shards";
                             MsgPrint($"You breathe {element}.");
-                            FireBall(chance == 1 ? (Projectile)new ProjectSound(this) : new ProjectExplode(this), dir, 230, -2);
+                            FireBall(chance == 1 ? (Projectile)new SoundProjectile(this) : new ExplodeProjectile(this), dir, 230, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
                             break;
                         }
@@ -8738,7 +8738,7 @@ namespace AngbandOS.Core
                                 ? "chaos"
                                 : (chance == 2 ? "disenchantment" : (chance == 3 ? "sound" : "shards"));
                             MsgPrint($"You breathe {element}.");
-                            FireBall(chance == 1 ? new ProjectChaos(this) : (chance == 2 ? new ProjectDisenchant(this) : (chance == 3 ? (Projectile)new ProjectSound(this) : new ProjectExplode(this))), dir, 250, -2);
+                            FireBall(chance == 1 ? new ChaosProjectile(this) : (chance == 2 ? new DisenchantProjectile(this) : (chance == 3 ? (Projectile)new SoundProjectile(this) : new ExplodeProjectile(this))), dir, 250, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
                             break;
                         }
@@ -8747,14 +8747,14 @@ namespace AngbandOS.Core
                             chance = Program.Rng.RandomLessThan(2);
                             string element = chance == 0 ? "light" : "darkness";
                             MsgPrint($"You breathe {element}.");
-                            FireBall(chance == 0 ? (Projectile)new ProjectLight(this) : new ProjectDark(this), dir, 200, -2);
+                            FireBall(chance == 0 ? (Projectile)new LightProjectile(this) : new DarkProjectile(this), dir, 200, -2);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
                             break;
                         }
                     case DragonArmour.SvDragonPower:
                         {
                             MsgPrint("You breathe the elements.");
-                            FireBall(new ProjectMissile(this), dir, 300, -3);
+                            FireBall(new MissileProjectile(this), dir, 300, -3);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
                             break;
                         }
@@ -8772,21 +8772,21 @@ namespace AngbandOS.Core
                 {
                     case RingType.Acid:
                         {
-                            FireBall(new ProjectAcid(this), dir, 50, 2);
+                            FireBall(new AcidProjectile(this), dir, 50, 2);
                             Player.TimedAcidResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
                             break;
                         }
                     case RingType.Ice:
                         {
-                            FireBall(new ProjectCold(this), dir, 50, 2);
+                            FireBall(new ColdProjectile(this), dir, 50, 2);
                             Player.TimedColdResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
                             break;
                         }
                     case RingType.Flames:
                         {
-                            FireBall(new ProjectFire(this), dir, 50, 2);
+                            FireBall(new FireProjectile(this), dir, 50, 2);
                             Player.TimedFireResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
                             break;
@@ -11658,7 +11658,7 @@ namespace AngbandOS.Core
                     else
                     {
                         MsgPrint("Your mind unleashes its power in an uncontrollable storm!");
-                        Project(1, 2 + (plev / 10), Player.MapY, Player.MapX, plev * 2, new ProjectMana(this), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectKill | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem);
+                        Project(1, 2 + (plev / 10), Player.MapY, Player.MapX, plev * 2, new ManaProjectile(this), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectKill | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem);
                         Player.Mana = Math.Max(0, Player.Mana - (plev * Math.Max(1, plev / 10)));
                     }
                 }
@@ -11851,7 +11851,7 @@ namespace AngbandOS.Core
                     break;
 
                 case 32:
-                    FireBall(new ProjectChaos(this), 0, spell + 5, 1 + (spell / 10));
+                    FireBall(new ChaosProjectile(this), 0, spell + 5, 1 + (spell / 10));
                     break;
 
                 case 33:
@@ -12489,12 +12489,12 @@ namespace AngbandOS.Core
 
                     case MutationAttackType.Poison:
                         Project(0, 0, monster.MapY, monster.MapX, damage,
-                            new ProjectPois(this), ProjectionFlag.ProjectKill);
+                            new PoisProjectile(this), ProjectionFlag.ProjectKill);
                         break;
 
                     case MutationAttackType.Hellfire:
                         Project(0, 0, monster.MapY, monster.MapX, damage,
-                            new ProjectHellFire(this), ProjectionFlag.ProjectKill);
+                            new HellFireProjectile(this), ProjectionFlag.ProjectKill);
                         break;
                 }
                 // The monster might hurt when we touch it

@@ -18,7 +18,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
                 return;
             }
             saveGame.MsgPrint("Radiation flows from your body!");
-            saveGame.FireBall(new ProjectNuke(saveGame), 0, player.Level * 2, 3 + (player.Level / 20));
+            saveGame.FireBall(new NukeProjectile(saveGame), 0, player.Level * 2, 3 + (player.Level / 20));
         }
 
         public override string ActivationSummary(int lvl)

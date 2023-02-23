@@ -22,7 +22,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             {
                 return;
             }
-            saveGame.FireBolt(new ProjectPsi(saveGame), dir, Program.Rng.DiceRoll(3 + ((player.Level - 1) / 5), 3));
+            saveGame.FireBolt(new PsiProjectile(saveGame), dir, Program.Rng.DiceRoll(3 + ((player.Level - 1) / 5), 3));
         }
 
         public override string ActivationSummary(int lvl)

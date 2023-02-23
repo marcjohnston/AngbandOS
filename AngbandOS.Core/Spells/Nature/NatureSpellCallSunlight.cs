@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Spells.Nature
     {
         public override void Cast(SaveGame saveGame)
         {
-            saveGame.FireBall(new ProjectLight(saveGame), 0, 150, 8);
+            saveGame.FireBall(new LightProjectile(saveGame), 0, 150, 8);
             saveGame.Level.WizLight();
             if (!saveGame.Player.Race.IsBurnedBySunlight || saveGame.Player.HasLightResistance)
             {

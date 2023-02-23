@@ -1,0 +1,125 @@
+﻿// Cthangband: © 1997 - 2022 Dean Anderson; Based on Angband: © 1997 Ben Harrison, James E. Wilson,
+// Robert A. Koeneke; Based on Moria: © 1985 Robert Alan Koeneke and Umoria: © 1989 James E.Wilson
+//
+// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
+// Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
+// and not for profit purposes provided that this copyright and statement are included in all such
+// copies. Other copyrights may also apply.”
+
+namespace AngbandOS.Core.Projection
+{
+    internal class DisintegrateProjectile : Projectile
+    {
+        public DisintegrateProjectile(SaveGame saveGame) : base(saveGame)
+        {
+        }
+
+        protected override string BoltGraphic => "GreenBolt";
+
+        protected override string EffectAnimation => "GreenContract";
+
+        protected override bool AffectItem(int who, int y, int x)
+        {
+            GridTile cPtr = SaveGame.Level.Grid[y][x];
+            int nextOIdx;
+            bool obvious = false;
+            string oName = "";
+            for (int thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
+            {
+                bool isArt = false;
+                bool plural = false;
+                Item oPtr = SaveGame.Level.Items[thisOIdx];
+                nextOIdx = oPtr.NextInStack;
+                if (oPtr.Count > 1)
+                {
+                    plural = true;
+                }
+                if (oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false)
+                {
+                    isArt = true;
+                }
+                string noteKill = plural ? " evaporate!" : " evaporates!";
+                if (oPtr.Marked)
+                {
+                    obvious = true;
+                    oName = oPtr.Description(false, 0);
+                }
+                if (isArt)
+                {
+                    if (oPtr.Marked)
+                    {
+                        string s = plural ? "are" : "is";
+                        SaveGame.MsgPrint($"The {oName} {s} unaffected!");
+                    }
+                }
+                else
+                {
+                    if (oPtr.Marked && string.IsNullOrEmpty(noteKill))
+                    {
+                        SaveGame.MsgPrint($"The {oName}{noteKill}");
+                    }
+                    bool isPotion = oPtr.BaseItemCategory.CategoryEnum == ItemTypeEnum.Potion;
+                    SaveGame.Level.DeleteObjectIdx(thisOIdx);
+                    if (isPotion)
+                    {
+                        PotionItemClass potion = (PotionItemClass)oPtr.BaseItemCategory;
+                        potion.Smash(SaveGame, who, y, x);
+                    }
+                    SaveGame.Level.RedrawSingleLocation(y, x);
+                }
+            }
+            return obvious;
+        }
+
+        protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
+        {
+            MonsterRace rPtr = mPtr.Race;
+            bool seen = mPtr.IsVisible;
+            bool obvious = false;
+            string? note = null;
+            string? noteDies = null;
+            if (seen)
+            {
+                obvious = true;
+            }
+            if (rPtr.HurtByRock)
+            {
+                if (seen)
+                {
+                    rPtr.Knowledge.Characteristics.HurtByRock = true;
+                }
+                note = " loses some skin!";
+                noteDies = " evaporates!";
+                dam *= 2;
+            }
+            if (rPtr.Unique)
+            {
+                if (Program.Rng.RandomLessThan(rPtr.Level + 10) > Program.Rng.RandomLessThan(SaveGame.Player.Level))
+                {
+                    note = " resists.";
+                    dam >>= 3;
+                }
+            }
+            ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies);
+            return obvious;
+        }
+
+        protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
+        {
+            bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
+            if (dam > 1600)
+            {
+                dam = 1600;
+            }
+            dam = (dam + r) / (r + 1);
+            Monster mPtr = SaveGame.Level.Monsters[who];
+            string killer = mPtr.IndefiniteVisibleName;
+            if (blind)
+            {
+                SaveGame.MsgPrint("You are hit by pure energy!");
+            }
+            SaveGame.Player.TakeHit(dam, killer);
+            return true;
+        }
+    }
+}

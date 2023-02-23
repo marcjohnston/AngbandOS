@@ -17,7 +17,7 @@ namespace AngbandOS.Core.Spells.Chaos
             {
                 return;
             }
-            saveGame.FireBall(new ProjectChaos(saveGame), dir, saveGame.Player.Health, -2);
+            saveGame.FireBall(new ChaosProjectile(saveGame), dir, saveGame.Player.Health, -2);
         }
 
         public override void Initialise(int characterClass)

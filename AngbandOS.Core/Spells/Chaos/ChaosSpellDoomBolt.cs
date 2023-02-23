@@ -17,7 +17,7 @@ namespace AngbandOS.Core.Spells.Chaos
             {
                 return;
             }
-            saveGame.FireBeam(new ProjectMana(saveGame), dir, Program.Rng.DiceRoll(11 + ((saveGame.Player.Level - 5) / 4), 8));
+            saveGame.FireBeam(new ManaProjectile(saveGame), dir, Program.Rng.DiceRoll(11 + ((saveGame.Player.Level - 5) / 4), 8));
         }
 
         public override void Initialise(int characterClass)

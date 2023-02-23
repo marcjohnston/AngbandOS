@@ -16,7 +16,7 @@
 
         protected override bool Activate(SaveGame saveGame, int direction)
         {
-            saveGame.FireBall(new ProjectCold(saveGame), direction, 200, 3);
+            saveGame.FireBall(new ColdProjectile(saveGame), direction, 200, 3);
             return true;
         }
 

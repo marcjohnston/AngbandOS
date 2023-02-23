@@ -11,7 +11,7 @@
             int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
             return 10 + Program.Rng.DiceRoll(8, 7) + monsterLevel;
         }
-        protected override Projectile Projectile(SaveGame saveGame) => new ProjectPlasma(saveGame);
+        protected override Projectile Projectile(SaveGame saveGame) => new PlasmaProjectile(saveGame);
         public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { new ReflectSpellResistantDetection() };
     }
 }

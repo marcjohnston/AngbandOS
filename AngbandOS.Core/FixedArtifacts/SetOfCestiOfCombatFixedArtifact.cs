@@ -17,7 +17,7 @@ internal class SetOfCestiOfCombatFixedArtifact : BaseFixedArtifact, IActivatible
         {
             return;
         }
-        saveGame.FireBolt(new ProjectArrow(saveGame), dir, 150);
+        saveGame.FireBolt(new ArrowProjectile(saveGame), dir, 150);
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(90) + 90;
     }
     public override void ApplyResistances(SaveGame saveGame, Item item)

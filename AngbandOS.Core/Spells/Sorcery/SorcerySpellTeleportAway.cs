@@ -17,7 +17,7 @@ namespace AngbandOS.Core.Spells.Sorcery
             {
                 return;
             }
-            saveGame.FireBeam(new ProjectAwayAll(saveGame), dir, saveGame.Player.Level);
+            saveGame.FireBeam(new TeleportAwayAllProjectile(saveGame), dir, saveGame.Player.Level);
         }
 
         public override void Initialise(int characterClass)

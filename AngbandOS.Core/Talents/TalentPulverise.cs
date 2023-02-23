@@ -25,7 +25,7 @@ namespace AngbandOS.Core.Talents
             {
                 return;
             }
-            saveGame.FireBall(new ProjectSound(saveGame), dir,
+            saveGame.FireBall(new SoundProjectile(saveGame), dir,
                 Program.Rng.DiceRoll(8 + ((saveGame.Player.Level - 5) / 4), 8), saveGame.Player.Level > 20 ? ((saveGame.Player.Level - 20) / 8) + 1 : 0);
         }
 

@@ -19,7 +19,7 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 10;
         public override bool ExecuteActivation(SaveGame saveGame, int dir)
         {
-            saveGame.FireBoltOrBeam(20, new ProjectMissile(saveGame), dir, Program.Rng.DiceRoll(2, 6));
+            saveGame.FireBoltOrBeam(20, new MissileProjectile(saveGame), dir, Program.Rng.DiceRoll(2, 6));
             return true;
         }
         public override void ApplyMagic(Item item, int level, int power)

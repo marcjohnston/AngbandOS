@@ -6,7 +6,7 @@
         public override bool UsesPoison => true;
         public override bool IsAttack => true;
         protected override string ActionName => "casts a stinking cloud";
-        protected override Projectile Projectile(SaveGame saveGame) => new ProjectPois(saveGame);
+        protected override Projectile Projectile(SaveGame saveGame) => new PoisProjectile(saveGame);
         protected override int Damage(Monster monster)
         {
             int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;

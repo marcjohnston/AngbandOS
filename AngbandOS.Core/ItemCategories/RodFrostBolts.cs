@@ -20,7 +20,7 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 15;
         public override void Execute(ZapRodEvent zapRodEvent)
         {
-            SaveGame.FireBoltOrBeam(10, new ProjectCold(SaveGame), zapRodEvent.Dir.Value, Program.Rng.DiceRoll(5, 8));
+            SaveGame.FireBoltOrBeam(10, new ColdProjectile(SaveGame), zapRodEvent.Dir.Value, Program.Rng.DiceRoll(5, 8));
             zapRodEvent.Identified = true;
             zapRodEvent.Item.TypeSpecificValue = 13;
         }

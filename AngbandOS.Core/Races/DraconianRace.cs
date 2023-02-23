@@ -101,12 +101,12 @@
             // Default to being randomly fire (66% chance) or cold (33% chance)
             if (Program.Rng.DieRoll(3) == 1)
             {
-                projectile = new ProjectCold(saveGame);
+                projectile = new ColdProjectile(saveGame);
                 projectileDescription = "cold";
             }
             else
             {
-                projectile = new ProjectFire(saveGame);
+                projectile = new FireProjectile(saveGame);
                 projectileDescription = "fire";
             }
 
@@ -121,12 +121,12 @@
                     case CharacterClass.ChosenOne:
                         if (Program.Rng.DieRoll(3) == 1)
                         {
-                            projectile = new ProjectMissile(saveGame);
+                            projectile = new MissileProjectile(saveGame);
                             projectileDescription = "the elements";
                         }
                         else
                         {
-                            projectile = new ProjectExplode(saveGame);
+                            projectile = new ExplodeProjectile(saveGame);
                             projectileDescription = "shards";
                         }
                         break;
@@ -137,12 +137,12 @@
                     case CharacterClass.Channeler:
                         if (Program.Rng.DieRoll(3) == 1)
                         {
-                            projectile = new ProjectMana(saveGame);
+                            projectile = new ManaProjectile(saveGame);
                             projectileDescription = "mana";
                         }
                         else
                         {
-                            projectile = new ProjectDisenchant(saveGame);
+                            projectile = new DisenchantProjectile(saveGame);
                             projectileDescription = "disenchantment";
                         }
                         break;
@@ -151,12 +151,12 @@
                     case CharacterClass.Cultist:
                         if (Program.Rng.DieRoll(3) != 1)
                         {
-                            projectile = new ProjectConfusion(saveGame);
+                            projectile = new ConfusionProjectile(saveGame);
                             projectileDescription = "confusion";
                         }
                         else
                         {
-                            projectile = new ProjectChaos(saveGame);
+                            projectile = new ChaosProjectile(saveGame);
                             projectileDescription = "chaos";
                         }
                         break;
@@ -164,12 +164,12 @@
                     case CharacterClass.Monk:
                         if (Program.Rng.DieRoll(3) != 1)
                         {
-                            projectile = new ProjectConfusion(saveGame);
+                            projectile = new ConfusionProjectile(saveGame);
                             projectileDescription = "confusion";
                         }
                         else
                         {
-                            projectile = new ProjectSound(saveGame);
+                            projectile = new SoundProjectile(saveGame);
                             projectileDescription = "sound";
                         }
                         break;
@@ -178,12 +178,12 @@
                     case CharacterClass.Mystic:
                         if (Program.Rng.DieRoll(3) != 1)
                         {
-                            projectile = new ProjectConfusion(saveGame);
+                            projectile = new ConfusionProjectile(saveGame);
                             projectileDescription = "confusion";
                         }
                         else
                         {
-                            projectile = new ProjectPsi(saveGame);
+                            projectile = new PsiProjectile(saveGame);
                             projectileDescription = "mental energy";
                         }
                         break;
@@ -192,12 +192,12 @@
                     case CharacterClass.Paladin:
                         if (Program.Rng.DieRoll(3) == 1)
                         {
-                            projectile = new ProjectHellFire(saveGame);
+                            projectile = new HellFireProjectile(saveGame);
                             projectileDescription = "hellfire";
                         }
                         else
                         {
-                            projectile = new ProjectHolyFire(saveGame);
+                            projectile = new HolyFireProjectile(saveGame);
                             projectileDescription = "holy fire";
                         }
                         break;
@@ -205,12 +205,12 @@
                     case CharacterClass.Rogue:
                         if (Program.Rng.DieRoll(3) == 1)
                         {
-                            projectile = new ProjectDark(saveGame);
+                            projectile = new DarkProjectile(saveGame);
                             projectileDescription = "darkness";
                         }
                         else
                         {
-                            projectile = new ProjectPois(saveGame);
+                            projectile = new PoisProjectile(saveGame);
                             projectileDescription = "poison";
                         }
                         break;

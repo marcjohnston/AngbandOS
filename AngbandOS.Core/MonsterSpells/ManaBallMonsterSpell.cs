@@ -18,7 +18,7 @@
         public override string? VsMonsterUnseenMessage => "You hear someone mumble powerfully.";
 
         protected override string ActionName => "invokes a mana storm";
-        protected override Projectile Projectile(SaveGame saveGame) => new ProjectMana(saveGame);
+        protected override Projectile Projectile(SaveGame saveGame) => new ManaProjectile(saveGame);
         protected override int Damage(Monster monster)
         {
             int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;

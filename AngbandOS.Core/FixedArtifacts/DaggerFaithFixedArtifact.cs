@@ -17,7 +17,7 @@ internal class DaggerFaithFixedArtifact : BaseFixedArtifact, IActivatible
         {
             return;
         }
-        saveGame.FireBolt(new ProjectFire(saveGame), dir, Program.Rng.DiceRoll(9, 8));
+        saveGame.FireBolt(new FireProjectile(saveGame), dir, Program.Rng.DiceRoll(9, 8));
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(8) + 8;
     }
 

@@ -17,7 +17,7 @@ internal class DaggerCharityFixedArtifact : BaseFixedArtifact, IActivatible
         {
             return;
         }
-        saveGame.FireBolt(new ProjectElec(saveGame), dir, Program.Rng.DiceRoll(4, 8));
+        saveGame.FireBolt(new ElecProjectile(saveGame), dir, Program.Rng.DiceRoll(4, 8));
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(6) + 6;
     }
     public override void ApplyResistances(SaveGame saveGame, Item item)

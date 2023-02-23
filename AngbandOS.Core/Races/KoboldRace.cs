@@ -64,7 +64,7 @@
                 if (saveGame.GetDirectionWithAim(out int direction))
                 {
                     saveGame.MsgPrint("You throw a dart of poison.");
-                    saveGame.FireBolt(new ProjectPois(saveGame), direction, saveGame.Player.Level);
+                    saveGame.FireBolt(new PoisProjectile(saveGame), direction, saveGame.Player.Level);
                 }
             }
         }

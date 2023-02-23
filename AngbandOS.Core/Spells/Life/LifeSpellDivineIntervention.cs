@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Spells.Life
     {
         public override void Cast(SaveGame saveGame)
         {
-            saveGame.Project(0, 1, saveGame.Player.MapY, saveGame.Player.MapX, 777, new ProjectHolyFire(saveGame),
+            saveGame.Project(0, 1, saveGame.Player.MapY, saveGame.Player.MapX, 777, new HolyFireProjectile(saveGame),
                 ProjectionFlag.ProjectKill);
             saveGame.DispelMonsters(saveGame.Player.Level * 4);
             saveGame.SlowMonsters();

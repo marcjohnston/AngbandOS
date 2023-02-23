@@ -37,7 +37,7 @@ namespace AngbandOS.Core.AttackEffects
         }
         public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
         {
-            pt = new ProjectTurnAll(saveGame);
+            pt = new TurnAllProjectile(saveGame);
         }
     }
 }

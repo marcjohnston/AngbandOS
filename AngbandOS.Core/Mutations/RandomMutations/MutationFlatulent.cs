@@ -26,7 +26,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations
                 saveGame.Disturb(false);
                 saveGame.MsgPrint("BRRAAAP! Oops.");
                 saveGame.MsgPrint(null);
-                saveGame.FireBall(new ProjectPois(saveGame), 0, saveGame.Player.Level, 3);
+                saveGame.FireBall(new PoisProjectile(saveGame), 0, saveGame.Player.Level, 3);
             }
         }
     }

@@ -17,7 +17,7 @@ namespace AngbandOS.Core.Spells.Life
             {
                 return;
             }
-            saveGame.FireBall(new ProjectHolyFire(saveGame), dir,
+            saveGame.FireBall(new HolyFireProjectile(saveGame), dir,
                 Program.Rng.DiceRoll(3, 6) + saveGame.Player.Level + (saveGame.Player.Level /
                 (saveGame.Player.BaseCharacterClass.ID == CharacterClass.Priest || saveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)),
                 saveGame.Player.Level < 30 ? 2 : 3);

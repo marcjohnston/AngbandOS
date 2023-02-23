@@ -892,7 +892,7 @@ namespace AngbandOS.Core
                             if (newY == saveGame.Player.MapY && newX == saveGame.Player.MapX)
                             {
                                 saveGame.MsgPrint("The rune explodes!");
-                                saveGame.FireBall(new ProjectMana(saveGame), 0, 2 * ((saveGame.Player.Level / 2) + Program.Rng.DiceRoll(7, 7)), 2);
+                                saveGame.FireBall(new ManaProjectile(saveGame), 0, 2 * ((saveGame.Player.Level / 2) + Program.Rng.DiceRoll(7, 7)), 2);
                             }
                             else
                             {
@@ -1231,7 +1231,7 @@ namespace AngbandOS.Core
                         obvious = true;
                         damage = Program.Rng.DiceRoll(dDice, dSide);
                         // Default to a missile attack
-                        Projectile pt = new ProjectMissile(saveGame);
+                        Projectile pt = new MissileProjectile(saveGame);
                         // Choose the correct type of attack to display, as well as any other special
                         // effects for the attack
                         if (effect == null)
@@ -1262,7 +1262,7 @@ namespace AngbandOS.Core
                                             targetRace.Knowledge.Characteristics.FireAura = true;
                                         }
                                     }
-                                    saveGame.Project(targetIndex, 0, MapY, MapX, Program.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), new ProjectFire(saveGame), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                                    saveGame.Project(targetIndex, 0, MapY, MapX, Program.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), new FireProjectile(saveGame), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
                                 }
                                 if (targetRace.LightningAura && !Race.ImmuneLightning)
                                 {
@@ -1278,7 +1278,7 @@ namespace AngbandOS.Core
                                         }
                                     }
                                     saveGame.Project(targetIndex, 0, MapY, MapX, Program.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)),
-                                        new ProjectElec(saveGame), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                                        new ElecProjectile(saveGame), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
                                 }
                             }
                         }

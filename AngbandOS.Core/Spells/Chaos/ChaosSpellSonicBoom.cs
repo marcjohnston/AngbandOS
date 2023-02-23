@@ -14,7 +14,7 @@ namespace AngbandOS.Core.Spells.Chaos
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Project(0, 2 + (saveGame.Player.Level / 10), saveGame.Player.MapY, saveGame.Player.MapX, 45 + saveGame.Player.Level,
-                new ProjectSound(saveGame), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
+                new SoundProjectile(saveGame), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
         }
 
         public override void Initialise(int characterClass)

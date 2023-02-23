@@ -17,7 +17,7 @@ namespace AngbandOS.Core.Spells.Death
             {
                 return;
             }
-            saveGame.FireBall(new ProjectDark(saveGame), dir, 120, 4);
+            saveGame.FireBall(new DarkProjectile(saveGame), dir, 120, 4);
         }
 
         public override void Initialise(int characterClass)

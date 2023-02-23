@@ -17,7 +17,7 @@ internal class DaggerIcicleFixedArtifact : BaseFixedArtifact, IActivatible
         {
             return;
         }
-        saveGame.FireBall(new ProjectCold(saveGame), dir, 48, 2);
+        saveGame.FireBall(new ColdProjectile(saveGame), dir, 48, 2);
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(5) + 5;
     }
     public string DescribeActivationEffect() => "frost ball (48) every 5+d5 turns";

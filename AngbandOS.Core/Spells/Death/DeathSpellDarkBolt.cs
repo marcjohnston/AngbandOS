@@ -32,7 +32,7 @@ namespace AngbandOS.Core.Spells.Death
             {
                 return;
             }
-            saveGame.FireBoltOrBeam(beam, new ProjectDark(saveGame), dir, Program.Rng.DiceRoll(4 + ((saveGame.Player.Level - 5) / 4), 8));
+            saveGame.FireBoltOrBeam(beam, new DarkProjectile(saveGame), dir, Program.Rng.DiceRoll(4 + ((saveGame.Player.Level - 5) / 4), 8));
         }
 
         public override void Initialise(int characterClass)

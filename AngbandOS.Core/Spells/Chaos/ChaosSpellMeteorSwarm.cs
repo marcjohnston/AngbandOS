@@ -38,7 +38,7 @@ namespace AngbandOS.Core.Spells.Chaos
                     break;
                 }
                 count = 0;
-                saveGame.Project(0, 2, y, x, saveGame.Player.Level * 3 / 2, new ProjectMeteor(saveGame),
+                saveGame.Project(0, 2, y, x, saveGame.Player.Level * 3 / 2, new MeteorProjectile(saveGame),
                     ProjectionFlag.ProjectKill | ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem);
             }
         }

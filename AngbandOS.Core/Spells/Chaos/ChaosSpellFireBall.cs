@@ -17,7 +17,7 @@ namespace AngbandOS.Core.Spells.Chaos
             {
                 return;
             }
-            saveGame.FireBall(new ProjectFire(saveGame), dir, 55 + saveGame.Player.Level, 2);
+            saveGame.FireBall(new FireProjectile(saveGame), dir, 55 + saveGame.Player.Level, 2);
         }
 
         public override void Initialise(int characterClass)

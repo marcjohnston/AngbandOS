@@ -21,7 +21,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             {
                 return;
             }
-            saveGame.FireBeam(new ProjectLight(saveGame), dir, 2 * player.Level);
+            saveGame.FireBeam(new LightProjectile(saveGame), dir, 2 * player.Level);
         }
 
         public override string ActivationSummary(int lvl)

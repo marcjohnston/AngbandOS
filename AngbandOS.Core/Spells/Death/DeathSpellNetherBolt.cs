@@ -32,7 +32,7 @@ namespace AngbandOS.Core.Spells.Death
             {
                 return;
             }
-            saveGame.FireBoltOrBeam(beam, new ProjectNether(saveGame), dir,
+            saveGame.FireBoltOrBeam(beam, new NetherProjectile(saveGame), dir,
                 Program.Rng.DiceRoll(6 + ((saveGame.Player.Level - 5) / 4), 8));
         }
 

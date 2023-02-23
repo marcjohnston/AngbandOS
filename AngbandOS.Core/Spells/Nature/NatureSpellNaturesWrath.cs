@@ -16,7 +16,7 @@ namespace AngbandOS.Core.Spells.Nature
             saveGame.DispelMonsters(saveGame.Player.Level * 4);
             saveGame.Earthquake(saveGame.Player.MapY, saveGame.Player.MapX, 20 + (saveGame.Player.Level / 2));
             saveGame.Project(0, 1 + (saveGame.Player.Level / 12), saveGame.Player.MapY, saveGame.Player.MapX, 100 + saveGame.Player.Level,
-                new ProjectDisintegrate(saveGame), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
+                new DisintegrateProjectile(saveGame), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
         }
 
         public override void Initialise(int characterClass)

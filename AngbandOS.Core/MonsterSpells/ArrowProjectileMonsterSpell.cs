@@ -13,7 +13,7 @@
         /// <returns></returns>
         public override string? VsPlayerBlindMessage => $"You hear a strange noise.";
         protected override string ActionName => "fires an arrow";
-        protected override Projectile Projectile(SaveGame saveGame) => new ProjectArrow(saveGame);
+        protected override Projectile Projectile(SaveGame saveGame) => new ArrowProjectile(saveGame);
         public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { new ReflectSpellResistantDetection() };
     }
 }

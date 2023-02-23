@@ -28,7 +28,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations
             saveGame.Disturb(false);
             saveGame.MsgPrint("You feel the world warping around you!");
             saveGame.MsgPrint(null);
-            saveGame.FireBall(new ProjectChaos(saveGame), 0, saveGame.Player.Level, 8);
+            saveGame.FireBall(new ChaosProjectile(saveGame), 0, saveGame.Player.Level, 8);
         }
     }
 }

@@ -88,13 +88,13 @@
                     if (saveGame.Player.Level >= 30)
                     {
                         saveGame.MsgPrint("You cast a ball of fire.");
-                        saveGame.FireBall(new ProjectFire(saveGame), direction, saveGame.Player.Level,
+                        saveGame.FireBall(new FireProjectile(saveGame), direction, saveGame.Player.Level,
                             2);
                     }
                     else
                     {
                         saveGame.MsgPrint("You cast a bolt of fire.");
-                        saveGame.FireBolt(new ProjectFire(saveGame), direction, saveGame.Player.Level);
+                        saveGame.FireBolt(new FireProjectile(saveGame), direction, saveGame.Player.Level);
                     }
                 }
             }

@@ -32,7 +32,7 @@ namespace AngbandOS.Core.Spells.Nature
             {
                 return;
             }
-            saveGame.FireBoltOrBeam(beam - 10, new ProjectCold(saveGame), dir,
+            saveGame.FireBoltOrBeam(beam - 10, new ColdProjectile(saveGame), dir,
                 Program.Rng.DiceRoll(5 + ((saveGame.Player.Level - 5) / 4), 8));
         }
 

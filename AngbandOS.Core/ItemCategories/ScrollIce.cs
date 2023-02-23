@@ -19,7 +19,7 @@ namespace AngbandOS.Core.ItemCategories
 
         public override void Read(ReadScrollEvent eventArgs)
         {
-            eventArgs.SaveGame.FireBall(new ProjectIce(eventArgs.SaveGame), 0, 175, 4);
+            eventArgs.SaveGame.FireBall(new IceProjectile(eventArgs.SaveGame), 0, 175, 4);
             if (!(eventArgs.SaveGame.Player.TimedColdResistance.TurnsRemaining != 0 || eventArgs.SaveGame.Player.HasColdResistance || eventArgs.SaveGame.Player.HasColdImmunity))
             {
                 eventArgs.SaveGame.Player.TakeHit(100 + Program.Rng.DieRoll(100), "a Scroll of Ice");

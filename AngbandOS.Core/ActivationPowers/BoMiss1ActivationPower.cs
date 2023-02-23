@@ -16,7 +16,7 @@
 
         protected override bool Activate(SaveGame saveGame, int direction)
         {
-            saveGame.FireBolt(new ProjectMissile(saveGame), direction, Program.Rng.DiceRoll(2, 6));
+            saveGame.FireBolt(new MissileProjectile(saveGame), direction, Program.Rng.DiceRoll(2, 6));
             return true;
         }
 

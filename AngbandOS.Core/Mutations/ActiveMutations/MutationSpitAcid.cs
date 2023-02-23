@@ -20,7 +20,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             saveGame.MsgPrint("You spit acid...");
             if (saveGame.GetDirectionWithAim(out int dir))
             {
-                saveGame.FireBall(new ProjectAcid(saveGame), dir, player.Level, 1 + (player.Level / 30));
+                saveGame.FireBall(new AcidProjectile(saveGame), dir, player.Level, 1 + (player.Level / 30));
             }
         }
 

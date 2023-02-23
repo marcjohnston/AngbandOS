@@ -17,7 +17,7 @@ internal class DaggerHopeFixedArtifact : BaseFixedArtifact, IActivatible
         {
             return;
         }
-        saveGame.FireBolt(new ProjectCold(saveGame), dir, Program.Rng.DiceRoll(6, 8));
+        saveGame.FireBolt(new ColdProjectile(saveGame), dir, Program.Rng.DiceRoll(6, 8));
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(7) + 7;
     }
     public string DescribeActivationEffect() => "frost bolt (6d8) every 7+d7 turns";

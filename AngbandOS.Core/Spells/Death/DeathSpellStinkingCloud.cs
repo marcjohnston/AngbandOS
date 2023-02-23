@@ -17,7 +17,7 @@ namespace AngbandOS.Core.Spells.Death
             {
                 return;
             }
-            saveGame.FireBall(new ProjectPois(saveGame), dir, 10 + (saveGame.Player.Level / 2), 2);
+            saveGame.FireBall(new PoisProjectile(saveGame), dir, 10 + (saveGame.Player.Level / 2), 2);
         }
 
         public override void Initialise(int characterClass)

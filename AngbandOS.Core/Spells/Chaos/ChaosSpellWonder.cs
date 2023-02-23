@@ -55,7 +55,7 @@ namespace AngbandOS.Core.Spells.Chaos
             }
             else if (die < 36)
             {
-                saveGame.FireBoltOrBeam(beam - 10, new ProjectMissile(saveGame), dir,
+                saveGame.FireBoltOrBeam(beam - 10, new MissileProjectile(saveGame), dir,
                     Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 5), 4));
             }
             else if (die < 41)
@@ -64,7 +64,7 @@ namespace AngbandOS.Core.Spells.Chaos
             }
             else if (die < 46)
             {
-                saveGame.FireBall(new ProjectPois(saveGame), dir, 20 + (saveGame.Player.Level / 2), 3);
+                saveGame.FireBall(new PoisProjectile(saveGame), dir, 20 + (saveGame.Player.Level / 2), 3);
             }
             else if (die < 51)
             {
@@ -72,22 +72,22 @@ namespace AngbandOS.Core.Spells.Chaos
             }
             else if (die < 56)
             {
-                saveGame.FireBoltOrBeam(beam - 10, new ProjectElec(saveGame), dir,
+                saveGame.FireBoltOrBeam(beam - 10, new ElecProjectile(saveGame), dir,
                     Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 5) / 4), 8));
             }
             else if (die < 61)
             {
-                saveGame.FireBoltOrBeam(beam - 10, new ProjectCold(saveGame), dir,
+                saveGame.FireBoltOrBeam(beam - 10, new ColdProjectile(saveGame), dir,
                     Program.Rng.DiceRoll(5 + ((saveGame.Player.Level - 5) / 4), 8));
             }
             else if (die < 66)
             {
-                saveGame.FireBoltOrBeam(beam, new ProjectAcid(saveGame), dir,
+                saveGame.FireBoltOrBeam(beam, new AcidProjectile(saveGame), dir,
                     Program.Rng.DiceRoll(6 + ((saveGame.Player.Level - 5) / 4), 8));
             }
             else if (die < 71)
             {
-                saveGame.FireBoltOrBeam(beam, new ProjectFire(saveGame), dir,
+                saveGame.FireBoltOrBeam(beam, new FireProjectile(saveGame), dir,
                     Program.Rng.DiceRoll(8 + ((saveGame.Player.Level - 5) / 4), 8));
             }
             else if (die < 76)
@@ -96,19 +96,19 @@ namespace AngbandOS.Core.Spells.Chaos
             }
             else if (die < 81)
             {
-                saveGame.FireBall(new ProjectElec(saveGame), dir, 30 + (saveGame.Player.Level / 2), 2);
+                saveGame.FireBall(new ElecProjectile(saveGame), dir, 30 + (saveGame.Player.Level / 2), 2);
             }
             else if (die < 86)
             {
-                saveGame.FireBall(new ProjectAcid(saveGame), dir, 40 + saveGame.Player.Level, 2);
+                saveGame.FireBall(new AcidProjectile(saveGame), dir, 40 + saveGame.Player.Level, 2);
             }
             else if (die < 91)
             {
-                saveGame.FireBall(new ProjectIce(saveGame), dir, 70 + saveGame.Player.Level, 3);
+                saveGame.FireBall(new IceProjectile(saveGame), dir, 70 + saveGame.Player.Level, 3);
             }
             else if (die < 96)
             {
-                saveGame.FireBall(new ProjectFire(saveGame), dir, 80 + saveGame.Player.Level, 3);
+                saveGame.FireBall(new FireProjectile(saveGame), dir, 80 + saveGame.Player.Level, 3);
             }
             else if (die < 101)
             {

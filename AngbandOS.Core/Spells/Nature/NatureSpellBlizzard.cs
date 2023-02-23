@@ -17,7 +17,7 @@ namespace AngbandOS.Core.Spells.Nature
             {
                 return;
             }
-            saveGame.FireBall(new ProjectCold(saveGame), dir, 70 + saveGame.Player.Level, (saveGame.Player.Level / 12) + 1);
+            saveGame.FireBall(new ColdProjectile(saveGame), dir, 70 + saveGame.Player.Level, (saveGame.Player.Level / 12) + 1);
         }
 
         public override void Initialise(int characterClass)

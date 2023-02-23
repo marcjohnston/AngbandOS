@@ -17,7 +17,7 @@ namespace AngbandOS.Core.Spells.Death
             {
                 return;
             }
-            saveGame.FireBall(new ProjectOldDrain(saveGame), dir,
+            saveGame.FireBall(new OldDrainProjectile(saveGame), dir,
                 Program.Rng.DiceRoll(3, 6) + saveGame.Player.Level + (saveGame.Player.Level /
                 (saveGame.Player.BaseCharacterClass.ID == CharacterClass.Mage || saveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)),
                 saveGame.Player.Level < 30 ? 2 : 3);

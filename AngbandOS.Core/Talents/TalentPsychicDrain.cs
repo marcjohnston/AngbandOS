@@ -26,7 +26,7 @@ namespace AngbandOS.Core.Talents
                 return;
             }
             int i = Program.Rng.DiceRoll(saveGame.Player.Level / 2, 6);
-            if (saveGame.FireBall(new ProjectPsiDrain(saveGame), dir, i, 0 + ((saveGame.Player.Level - 25) / 10)))
+            if (saveGame.FireBall(new PsiDrainProjectile(saveGame), dir, i, 0 + ((saveGame.Player.Level - 25) / 10)))
             {
                 saveGame.Player.Energy -= Program.Rng.DieRoll(150);
             }

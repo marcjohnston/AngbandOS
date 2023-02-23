@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Spells.Chaos
     {
         public override void Cast(SaveGame saveGame)
         {
-            saveGame.FireBall(new ProjectFire(saveGame), 0, 150 + (2 * saveGame.Player.Level), 8);
+            saveGame.FireBall(new FireProjectile(saveGame), 0, 150 + (2 * saveGame.Player.Level), 8);
         }
 
         public override void Initialise(int characterClass)

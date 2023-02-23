@@ -20,7 +20,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             saveGame.MsgPrint("You breathe fire...");
             if (saveGame.GetDirectionWithAim(out int dir))
             {
-                saveGame.FireBall(new ProjectFire(saveGame), dir, player.Level * 2, -(1 + (player.Level / 20)));
+                saveGame.FireBall(new FireProjectile(saveGame), dir, player.Level * 2, -(1 + (player.Level / 20)));
             }
         }
 

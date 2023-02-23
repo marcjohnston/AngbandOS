@@ -17,7 +17,7 @@ namespace AngbandOS.Core.Spells.Death
             {
                 return;
             }
-            saveGame.FireBall(new ProjectHellFire(saveGame), dir,
+            saveGame.FireBall(new HellFireProjectile(saveGame), dir,
                 Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 5), 3), 0);
             if (Program.Rng.DieRoll(5) != 1)
             {
@@ -26,17 +26,17 @@ namespace AngbandOS.Core.Spells.Death
             int dummy = Program.Rng.DieRoll(1000);
             if (dummy == 666)
             {
-                saveGame.FireBolt(new ProjectDeathRay(saveGame), dir, saveGame.Player.Level);
+                saveGame.FireBolt(new DeathRayProjectile(saveGame), dir, saveGame.Player.Level);
             }
             if (dummy < 500)
             {
-                saveGame.FireBolt(new ProjectTurnAll(saveGame), dir, saveGame.Player.Level);
+                saveGame.FireBolt(new TurnAllProjectile(saveGame), dir, saveGame.Player.Level);
             }
             if (dummy < 800)
             {
-                saveGame.FireBolt(new ProjectOldConf(saveGame), dir, saveGame.Player.Level);
+                saveGame.FireBolt(new OldConfProjectile(saveGame), dir, saveGame.Player.Level);
             }
-            saveGame.FireBolt(new ProjectStun(saveGame), dir, saveGame.Player.Level);
+            saveGame.FireBolt(new StunProjectile(saveGame), dir, saveGame.Player.Level);
         }
 
         public override void Initialise(int characterClass)

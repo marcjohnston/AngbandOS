@@ -17,7 +17,7 @@ namespace AngbandOS.Core.Spells.Chaos
             {
                 return;
             }
-            saveGame.FireBall(new ProjectDisintegrate(saveGame), dir, 80 + saveGame.Player.Level,
+            saveGame.FireBall(new DisintegrateProjectile(saveGame), dir, 80 + saveGame.Player.Level,
                 3 + (saveGame.Player.Level / 40));
         }
 

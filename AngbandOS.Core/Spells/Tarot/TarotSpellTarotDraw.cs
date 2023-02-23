@@ -330,7 +330,7 @@ namespace AngbandOS.Core.Spells.Tarot
                     break;
 
                 case 32:
-                    saveGame.FireBall(new ProjectChaos(saveGame), 0, spell + 5, 1 + (spell / 10));
+                    saveGame.FireBall(new ChaosProjectile(saveGame), 0, spell + 5, 1 + (spell / 10));
                     break;
 
                 case 33:

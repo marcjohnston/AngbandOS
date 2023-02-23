@@ -53,7 +53,7 @@ namespace AngbandOS.Core.ItemCategories
 
         public override bool Smash(SaveGame saveGame, int who, int y, int x)
         {
-            saveGame.Project(who, 2, y, x, Program.Rng.DiceRoll(10, 10), new ProjectOldHeal(saveGame), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+            saveGame.Project(who, 2, y, x, Program.Rng.DiceRoll(10, 10), new OldHealProjectile(saveGame), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
             return false;
         }
     }

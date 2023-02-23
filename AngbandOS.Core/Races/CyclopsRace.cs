@@ -66,7 +66,7 @@
                 if (saveGame.GetDirectionWithAim(out int direction))
                 {
                     saveGame.MsgPrint("You throw a huge boulder.");
-                    saveGame.FireBolt(new ProjectMissile(saveGame), direction, 3 * saveGame.Player.Level / 2);
+                    saveGame.FireBolt(new MissileProjectile(saveGame), direction, 3 * saveGame.Player.Level / 2);
                 }
             }
         }

@@ -338,7 +338,7 @@
                 tx = saveGame.TargetCol;
                 ty = saveGame.TargetRow;
             }
-            saveGame.Project(0, 0, ty, tx, 1000000, new ProjectWizardBolt(saveGame), flg);
+            saveGame.Project(0, 0, ty, tx, 1000000, new WizardBoltProjectile(saveGame), flg);
         }
 
         private void DoCmdWizBamf(SaveGame saveGame)

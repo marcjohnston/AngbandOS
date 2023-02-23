@@ -29,7 +29,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations
             saveGame.MsgPrint("Magical energy flows through you! You must release it!");
             saveGame.MsgPrint(null);
             saveGame.GetDirectionNoAutoAim(out int dire);
-            saveGame.FireBall(new ProjectMana(saveGame), dire, saveGame.Player.Level * 2, 3);
+            saveGame.FireBall(new ManaProjectile(saveGame), dire, saveGame.Player.Level * 2, 3);
         }
     }
 }
