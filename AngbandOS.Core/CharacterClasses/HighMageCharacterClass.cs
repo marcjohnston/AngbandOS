@@ -84,5 +84,12 @@
             SaveGame.SingletonRepository.Realms.Get<FolkRealm>(),
             SaveGame.SingletonRepository.Realms.Get<CorporealRealm>()
         };
+
+        public override ItemClass[] Outfit => new ItemClass[]
+        {
+            SaveGame.SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
+            SaveGame.SingletonRepository.ItemCategories.Get<SwordDagger>(),
+            SaveGame.SingletonRepository.ItemCategories.Get<RingSustainIntelligence>()
+        };
     }
 }

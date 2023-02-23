@@ -133,5 +133,7 @@
         public virtual void ItemDestroyed(Item item, int amount)
         {
         }
+
+        public abstract ItemClass[] Outfit { get; }
     }
 }

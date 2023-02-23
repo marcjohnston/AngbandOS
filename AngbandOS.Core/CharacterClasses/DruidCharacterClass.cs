@@ -40,5 +40,12 @@
         public override BaseRealm[] AvailablePrimaryRealms => new BaseRealm[] {
             SaveGame.SingletonRepository.Realms.Get<NatureRealm>()
         };
+
+        public override ItemClass[] Outfit => new ItemClass[]
+        {
+            SaveGame.SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
+            SaveGame.SingletonRepository.ItemCategories.Get<HaftedQuarterstaff>(),
+            SaveGame.SingletonRepository.ItemCategories.Get<RingSustainWisdom>()
+        };
     }
 }

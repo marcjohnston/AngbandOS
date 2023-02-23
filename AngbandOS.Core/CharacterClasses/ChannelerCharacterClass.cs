@@ -41,5 +41,12 @@
         public override IArtifactBias? ArtifactBias => new MageArtifactBias();
         public override bool SenseInventoryTest(int level) => (0 != Program.Rng.RandomLessThan(9000 / ((level * level) + 40)));
         public override bool DetailedSenseInventory => true;
+
+        public override ItemClass[] Outfit => new ItemClass[]
+        {
+            SaveGame.SingletonRepository.ItemCategories.Get<WandMagicMissile>(),
+            SaveGame.SingletonRepository.ItemCategories.Get<SwordDagger>(),
+            SaveGame.SingletonRepository.ItemCategories.Get<RingSustainCharisma>()
+       };
     }
 }

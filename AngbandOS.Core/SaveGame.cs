@@ -14704,117 +14704,17 @@ namespace AngbandOS.Core
                 Player.WeightCarried += carried.Weight;
             }
 
-            ItemClass[][] _playerInit = new ItemClass[16][];
-            _playerInit[CharacterClass.Warrior] = new ItemClass[]
+            foreach (ItemClass itemClass in Player.BaseCharacterClass.Outfit)
             {
-                SingletonRepository.ItemCategories.Get<RingFearResistance>(),
-                SingletonRepository.ItemCategories.Get<SwordBroadSword>(),
-                SingletonRepository.ItemCategories.Get<HardArmorChainMail>()
-            };
-            _playerInit[CharacterClass.Mage] = new ItemClass[]
-            {
-                SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
-                SingletonRepository.ItemCategories.Get<SwordDagger>(),
-                SingletonRepository.ItemCategories.Get<DeathBookBlackPrayers>()
-            };
-            _playerInit[CharacterClass.Priest] = new ItemClass[]
-            {
-                SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
-                SingletonRepository.ItemCategories.Get<HaftedMace>(),
-                SingletonRepository.ItemCategories.Get<DeathBookBlackPrayers>()
-            };
-            _playerInit[CharacterClass.Rogue] = new ItemClass[]
-            {
-                SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
-                SingletonRepository.ItemCategories.Get<SwordDagger>(),
-                SingletonRepository.ItemCategories.Get<SoftArmorSoftLeatherArmour>()
-            };
-            _playerInit[CharacterClass.Ranger] = new ItemClass[]
-            {
-                SingletonRepository.ItemCategories.Get<NatureBookCallOfTheWild>(),
-                SingletonRepository.ItemCategories.Get<SwordBroadSword>(),
-                SingletonRepository.ItemCategories.Get<DeathBookBlackPrayers>()
-            };
-            _playerInit[CharacterClass.Paladin] = new ItemClass[]
-            {
-                SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
-                SingletonRepository.ItemCategories.Get<SwordBroadSword>(),
-                SingletonRepository.ItemCategories.Get<ScrollProtectionFromEvil>()
-            };
-            _playerInit[CharacterClass.WarriorMage] = new ItemClass[]
-            {
-                SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
-                SingletonRepository.ItemCategories.Get<SwordShortSword>(),
-                SingletonRepository.ItemCategories.Get<DeathBookBlackPrayers>()
-            };
-            _playerInit[CharacterClass.Fanatic] = new ItemClass[]
-            {
-                SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
-                SingletonRepository.ItemCategories.Get<SwordBroadSword>(),
-                SingletonRepository.ItemCategories.Get<HardArmorMetalScaleMail>()
-            };
-            _playerInit[CharacterClass.Monk] = new ItemClass[]
-            {
-                SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
-                SingletonRepository.ItemCategories.Get<PotionHealing>(),
-                SingletonRepository.ItemCategories.Get<SoftArmorSoftLeatherArmour>()
-            };
-            _playerInit[CharacterClass.Mindcrafter] = new ItemClass[]
-            {
-                SingletonRepository.ItemCategories.Get<SwordSmallSword>(),
-                SingletonRepository.ItemCategories.Get<PotionRestoreMana>(),
-                SingletonRepository.ItemCategories.Get<SoftArmorSoftLeatherArmour>()
-            };
-            _playerInit[CharacterClass.HighMage] = new ItemClass[]
-            {
-                SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
-                SingletonRepository.ItemCategories.Get<SwordDagger>(),
-                SingletonRepository.ItemCategories.Get<RingSustainIntelligence>()
-            };
-            _playerInit[CharacterClass.Druid] = new ItemClass[]
-            {
-                SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
-                SingletonRepository.ItemCategories.Get<HaftedQuarterstaff>(),
-                SingletonRepository.ItemCategories.Get<RingSustainWisdom>()
-            };
-            _playerInit[CharacterClass.Cultist] = new ItemClass[]
-            {
-                SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
-                SingletonRepository.ItemCategories.Get<RingSustainIntelligence>(),
-                SingletonRepository.ItemCategories.Get<DeathBookBlackPrayers>()
-            };
-            _playerInit[CharacterClass.Channeler] = new ItemClass[]
-            {
-                SingletonRepository.ItemCategories.Get<WandMagicMissile>(),
-                SingletonRepository.ItemCategories.Get<SwordDagger>(),
-                SingletonRepository.ItemCategories.Get<RingSustainCharisma>()
-            };
-            _playerInit[CharacterClass.ChosenOne] = new ItemClass[]
-            {
-                SingletonRepository.ItemCategories.Get<SwordSmallSword>(),
-                SingletonRepository.ItemCategories.Get<PotionHealing>(),
-                SingletonRepository.ItemCategories.Get<SoftArmorSoftLeatherArmour>()
-            };
-            _playerInit[CharacterClass.Mystic] = new ItemClass[]
-            {
-                SingletonRepository.ItemCategories.Get<RingSustainWisdom>(),
-                SingletonRepository.ItemCategories.Get<PotionHealing>(),
-                SingletonRepository.ItemCategories.Get<SoftArmorSoftLeatherArmour>()
-            };
-
-            ItemClass[] startingItems = _playerInit[Player.BaseCharacterClass.ID];
-            for (int i = 0; i < startingItems.Length; i++)
-            {
-                ItemClass itemClass = startingItems[i];
-
-                itemClass = Player.Race.OutfitItem(this, itemClass);
+                // Allow the race to modify the item as the race sees fit.
+                ItemClass raceItemClass = Player.Race.OutfitItem(this, itemClass);
                 item = new Item(this);
-                item.AssignItemType(itemClass);
-                if (itemClass.CategoryEnum == ItemTypeEnum.Sword && Player.BaseCharacterClass.ID == CharacterClass.Rogue && Player.Realm1 == Realm.Death)
+                item.AssignItemType(raceItemClass);
+                if (raceItemClass.CategoryEnum == ItemTypeEnum.Sword && Player.BaseCharacterClass.ID == CharacterClass.Rogue && Player.Realm1 == Realm.Death)
                 {
                     item.RareItemTypeIndex = RareItemTypeEnum.WeaponOfPoisoning;
                 }
-                if (itemClass.CategoryEnum == ItemTypeEnum.Wand)
+                if (raceItemClass.CategoryEnum == ItemTypeEnum.Wand)
                 {
                     item.TypeSpecificValue = 1;
                 }

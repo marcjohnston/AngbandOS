@@ -79,5 +79,12 @@
                 }
             }
         }
+
+        public override ItemClass[] Outfit => new ItemClass[]
+        {
+            SaveGame.SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
+            SaveGame.SingletonRepository.ItemCategories.Get<SwordBroadSword>(),
+            SaveGame.SingletonRepository.ItemCategories.Get<ScrollProtectionFromEvil>()
+        };
     }
 }

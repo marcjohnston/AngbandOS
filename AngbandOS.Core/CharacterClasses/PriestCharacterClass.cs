@@ -86,5 +86,12 @@
                     return GodName.None;
             }
         }
+
+        public override ItemClass[] Outfit => new ItemClass[]
+        {
+            SaveGame.SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
+            SaveGame.SingletonRepository.ItemCategories.Get<HaftedMace>(),
+            SaveGame.SingletonRepository.ItemCategories.Get<DeathBookBlackPrayers>()
+        };
     }
 }

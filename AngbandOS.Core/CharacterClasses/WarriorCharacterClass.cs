@@ -52,5 +52,12 @@
                 GainExperienceFromSpellBookDestroy(item, amount);
             }
         }
+
+        public override ItemClass[] Outfit => new ItemClass[]
+        {
+            SaveGame.SingletonRepository.ItemCategories.Get<RingFearResistance>(),
+            SaveGame.SingletonRepository.ItemCategories.Get<SwordBroadSword>(),
+            SaveGame.SingletonRepository.ItemCategories.Get<HardArmorChainMail>()
+        };
     }
 }

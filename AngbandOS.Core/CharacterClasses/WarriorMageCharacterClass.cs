@@ -53,5 +53,12 @@
             SaveGame.SingletonRepository.Realms.Get<CorporealRealm>()
         };
         public override bool WorshipsADeity => true;
+
+        public override ItemClass[] Outfit => new ItemClass[]
+        {
+            SaveGame.SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
+            SaveGame.SingletonRepository.ItemCategories.Get<SwordShortSword>(),
+            SaveGame.SingletonRepository.ItemCategories.Get<DeathBookBlackPrayers>()
+        };
     }
 }

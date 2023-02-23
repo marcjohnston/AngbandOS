@@ -64,5 +64,12 @@
             SaveGame.SingletonRepository.Realms.Get<TarotRealm>(),
             SaveGame.SingletonRepository.Realms.Get<CorporealRealm>()
         };
+
+        public override ItemClass[] Outfit => new ItemClass[]
+        {
+            SaveGame.SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
+            SaveGame.SingletonRepository.ItemCategories.Get<PotionHealing>(),
+            SaveGame.SingletonRepository.ItemCategories.Get<SoftArmorSoftLeatherArmour>()
+        };
     }
 }
