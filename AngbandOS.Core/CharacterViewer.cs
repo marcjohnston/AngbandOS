@@ -447,7 +447,9 @@ namespace AngbandOS.Core
             item = SaveGame.Player.Inventory[rangedWeaponInventorySlot.WeightedRandom.Choose()];
             tmp = SaveGame.Player.AttackBonus + item.BonusToHit;
             int shooting = SaveGame.Player.SkillRanged + (tmp * Constants.BthPlusAdj);
-            item = SaveGame.Player.Inventory[InventorySlot.MeleeWeapon];
+            BaseInventorySlot meleeWeaponInventorySlot = SaveGame.SingletonRepository.InventorySlots.Get<MeleeWeaponInventorySlot>();
+            int index = meleeWeaponInventorySlot.WeightedRandom.Choose();
+            item = SaveGame.Player.Inventory[index];
             int dambonus = SaveGame.Player.DisplayedDamageBonus;
             // Only include weapon damage if the player knows what it is
             if (item.IsKnown())

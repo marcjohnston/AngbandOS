@@ -1239,7 +1239,7 @@ namespace AngbandOS.Core
                     }
                     string oName = item.Description(false, 0);
                     string isare = item.Count == 1 ? "is" : "are";
-                    SaveGame.MsgPrint($"You feel the {oName} ({i.IndexToLabel()}) {inventorySlot.SenseLocation} {isare} {feel}...");
+                    SaveGame.MsgPrint($"You feel the {oName} ({i.IndexToLabel()}) {inventorySlot.SenseLocation(i)} {isare} {feel}...");
                     item.IdentSense = true;
                     if (string.IsNullOrEmpty(item.Inscription))
                     {

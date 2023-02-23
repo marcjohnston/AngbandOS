@@ -61,5 +61,23 @@
             SaveGame.SingletonRepository.ItemCategories.Get<RingSustainIntelligence>(),
             SaveGame.SingletonRepository.ItemCategories.Get<DeathBookBlackPrayers>()
         };
+
+        public override void UpdateBonusesForMeleeWeapon(Item oPtr)
+        {
+            // Cultists that are NOT wielding the blade of chaos lose bonuses for being an unpriestly weapon.
+            // todo: this should by characterclass
+            if (oPtr.BaseItemCategory != null && !oPtr.IsAnItemOf<SwordBladeofChaos>())
+            {
+                oPtr.RefreshFlagBasedProperties();
+                if (!oPtr.Characteristics.Chaotic)
+                {
+                    SaveGame.Player.AttackBonus -= 10;
+                    SaveGame.Player.DamageBonus -= 10;
+                    SaveGame.Player.DisplayedAttackBonus -= 10;
+                    SaveGame.Player.DisplayedDamageBonus -= 10;
+                    SaveGame.Player.HasUnpriestlyWeapon = true;
+                }
+            }
+        }
     }
 }

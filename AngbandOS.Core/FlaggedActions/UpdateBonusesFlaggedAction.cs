@@ -870,9 +870,9 @@ namespace AngbandOS.Core.FlaggedActions
                 }
             }
 
-            foreach (BaseInventorySlot rangedWeaponInventorySlot in SaveGame.SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsMeleeWeapon))
+            foreach (BaseInventorySlot meleeWeaponInventorySlot in SaveGame.SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsMeleeWeapon))
             {
-                foreach (int index in rangedWeaponInventorySlot.InventorySlots)
+                foreach (int index in meleeWeaponInventorySlot.InventorySlots)
                 {
                     oPtr = SaveGame.Player.Inventory[index];
                     SaveGame.Player.HasHeavyWeapon = false;
@@ -979,22 +979,7 @@ namespace AngbandOS.Core.FlaggedActions
                         SaveGame.Player.HasUnpriestlyWeapon = true;
                     }
 
-                    // Cultists that are NOT wielding the blade of chaos lose bonuses for being an unpriestly weapon.
-                    // todo: this should by characterclass
-                    if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Cultist &&
-                        SaveGame.Player.Inventory[InventorySlot.MeleeWeapon].BaseItemCategory != null &&
-                        !typeof(SwordBladeofChaos).IsAssignableFrom(oPtr.BaseItemCategory.GetType()))
-                    {
-                        oPtr.RefreshFlagBasedProperties();
-                        if (!oPtr.Characteristics.Chaotic)
-                        {
-                            SaveGame.Player.AttackBonus -= 10;
-                            SaveGame.Player.DamageBonus -= 10;
-                            SaveGame.Player.DisplayedAttackBonus -= 10;
-                            SaveGame.Player.DisplayedDamageBonus -= 10;
-                            SaveGame.Player.HasUnpriestlyWeapon = true;
-                        }
-                    }
+                    SaveGame.Player.BaseCharacterClass.UpdateBonusesForMeleeWeapon(oPtr);
                     if (SaveGame.MartialArtistHeavyArmour())
                     {
                         MartialArtistArmourAux = true;

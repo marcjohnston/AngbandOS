@@ -181,5 +181,13 @@
         protected virtual void OutfitItem(Item item)
         {
         }
+
+        /// <summary>
+        /// Update the player bonuses for a melee weapon.
+        /// </summary>
+        /// <param name="oPtr"></param>
+        public virtual void UpdateBonusesForMeleeWeapon(Item oPtr)
+        {
+        }
     }
 }

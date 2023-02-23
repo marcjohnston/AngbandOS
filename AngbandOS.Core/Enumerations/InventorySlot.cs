@@ -9,18 +9,18 @@ namespace AngbandOS.Core
 {
     internal static class InventorySlot
     {
-        public const int Arm = 36;
-        public const int Body = 34;
-        public const int Cloak = 35;
-        public const int Digger = 29;
-        public const int Feet = 39;
-        public const int Hands = 38;
-        public const int Head = 37;
-        public const int LeftHand = 30;
-        public const int Lightsource = 33;
-        public const int Neck = 32;
-        public const int RightHand = 31;
-        public const int Pack = -1; 
+        public const int Arm = 36; // DONE
+        public const int Body = 34; // DONE
+        public const int Cloak = 35; // DONE
+        public const int Digger = 29; // DONE
+        public const int Feet = 39; // DONE
+        public const int Hands = 38; // DONE
+        public const int Head = 37; // DONE
+        public const int LeftHand = 30; // DONE
+        public const int Lightsource = 33; // DONE
+        public const int Neck = 32; // DONE
+        public const int RightHand = 31; // DONE
+        public const int Pack = -1;  // DONE
 
 
         //WIP

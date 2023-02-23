@@ -4,6 +4,13 @@ namespace AngbandOS.Core
     internal class Item : IComparable<Item>
     {
         /// <summary>
+        /// Returns true, if the item belongs to a specific ItemClass.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public bool IsAnItemOf<T>() => typeof(T).IsAssignableFrom(BaseItemCategory.GetType());
+
+        /// <summary>
         /// Hook into the ProcessWorld, when the item is being worn/wielded.  By default, the item forwards the event to the base ItemClass for processing.
         /// </summary>
         /// <param name="saveGame"></param>

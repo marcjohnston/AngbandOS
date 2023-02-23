@@ -15,7 +15,7 @@ namespace AngbandOS.Core.InventorySlots
         public override int[] InventorySlots => new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 };
         public override string Label(int index) => alphabet[index].ToString();
         public override string MentionUse(int? index) => "In pack";
-        public override string SenseLocation => "in your pack";
+        public override string SenseLocation(int index) => "in your pack";
         public override int SortOrder => 0;
         public override string DescribeWieldLocation(int index) => "carrying in your pack";
 
