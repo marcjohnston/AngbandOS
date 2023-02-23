@@ -14,7 +14,7 @@ namespace AngbandOS.Core.Spells.Tarot
         public override void Cast(SaveGame saveGame)
         {
             saveGame.MsgPrint("You have turned into a Extradimensional Being.");
-            saveGame.Player.Dna.GainMutation(saveGame);
+            saveGame.Player.Dna.GainMutation();
         }
 
         public override void Initialise(int characterClass)

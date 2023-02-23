@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Spells.Corporeal
     {
         public override void Cast(SaveGame saveGame)
         {
-            saveGame.Player.Dna.GainMutation(saveGame);
+            saveGame.Player.Dna.GainMutation();
         }
 
         public override void Initialise(int characterClass)

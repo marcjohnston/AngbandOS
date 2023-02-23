@@ -158,13 +158,13 @@
             return list;
         }
 
-        public void GainMutation(SaveGame saveGame)
+        public void GainMutation()
         {
             if (_notPossessed.Count == 0)
             {
                 return;
             }
-            saveGame.MsgPrint("You change...");
+            SaveGame.MsgPrint("You change...");
             int total = 0;
             foreach (Mutation mutation in _notPossessed)
             {
@@ -190,7 +190,7 @@
                             Mutation other = _possessed[j];
                             _possessed.RemoveAt(j);
                             other.OnLose(this);
-                            saveGame.MsgPrint(other.LoseMessage);
+                            SaveGame.MsgPrint(other.LoseMessage);
                             _notPossessed.Add(other);
                         }
                         else
@@ -201,12 +201,12 @@
                 }
                 _possessed.Add(mutation);
                 mutation.OnGain(this);
-                saveGame.MsgPrint(mutation.GainMessage);
-                saveGame.UpdateBonusesFlaggedAction.Set();
-                saveGame.HandleStuff();
+                SaveGame.MsgPrint(mutation.GainMessage);
+                SaveGame.UpdateBonusesFlaggedAction.Set();
+                SaveGame.HandleStuff();
                 return;
             }
-            saveGame.MsgPrint("Oops! Fell out of mutation list!");
+            SaveGame.MsgPrint("Oops! Fell out of mutation list!");
         }
 
         public string[] GetMutationList()

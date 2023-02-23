@@ -21,14 +21,14 @@ namespace AngbandOS.Core.ItemCategories
         public override bool Eat(SaveGame saveGame)
         {
             saveGame.MsgPrint("That tastes... funky.");
-            saveGame.Player.Dna.GainMutation(saveGame);
+            saveGame.Player.Dna.GainMutation();
             if (Program.Rng.DieRoll(3) == 1)
             {
-                saveGame.Player.Dna.GainMutation(saveGame);
+                saveGame.Player.Dna.GainMutation();
             }
             if (Program.Rng.DieRoll(3) == 1)
             {
-                saveGame.Player.Dna.GainMutation(saveGame);
+                saveGame.Player.Dna.GainMutation();
             }
             return true;
         }

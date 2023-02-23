@@ -173,7 +173,7 @@ namespace AngbandOS.Core.Projection
                 if (Program.Rng.DieRoll(3) == 1)
                 {
                     SaveGame.MsgPrint("Your body is twisted by chaos!");
-                    SaveGame.Player.Dna.GainMutation(SaveGame);
+                    SaveGame.Player.Dna.GainMutation();
                 }
             }
             if (!SaveGame.Player.HasNetherResistance && !SaveGame.Player.HasChaosResistance)

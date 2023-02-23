@@ -8,7 +8,8 @@ namespace AngbandOS.Core
     /// </summary>
     internal class SingletonRepository
     {
-        public SingletonFactory<Command> GameCommands;
+        public SingletonFactory<InGameCommand> InGameCommands;
+        public SingletonFactory<WizardCommand> WizardCommands;
         public SingletonFactory<ItemClass> ItemCategories;
         public SingletonFactory<BaseFixedArtifact> BaseFixedArtifacts;
         public SingletonDictionaryFactory<FixedArtifactId, FixedArtifact> FixedArtifacts;
@@ -22,7 +23,8 @@ namespace AngbandOS.Core
 
         public void Initialize(SaveGame saveGame)
         {
-            GameCommands = new SingletonFactory<Command>(saveGame);
+            InGameCommands = new SingletonFactory<InGameCommand>(saveGame);
+            WizardCommands = new SingletonFactory<WizardCommand>(saveGame);
             ItemCategories = new SingletonFactory<ItemClass>(saveGame);
             BaseFixedArtifacts = new SingletonFactory<BaseFixedArtifact>(saveGame);
             InventorySlots = new SingletonFactory<BaseInventorySlot>(saveGame);

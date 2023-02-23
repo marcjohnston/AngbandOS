@@ -1424,11 +1424,7 @@ namespace AngbandOS.Core
             rPtr.Guardian = !rPtr.Guardian;
             if (Quests.ActiveQuests == 0)
             {
-                Player.IsWinner = true;
-                RedrawTitleFlaggedAction.Set();
-                MsgPrint("*** CONGRATULATIONS ***");
-                MsgPrint("You have won the game!");
-                MsgPrint("You may retire ('Q') when you are ready.");
+                Winner();
             }
             else
             {
@@ -1450,6 +1446,15 @@ namespace AngbandOS.Core
                     UpdateViewFlaggedAction.Set();
                 }
             }
+        }
+
+        public void Winner()
+        {
+            Player.IsWinner = true;
+            RedrawTitleFlaggedAction.Set();
+            MsgPrint("*** CONGRATULATIONS ***");
+            MsgPrint("You have won the game!");
+            MsgPrint("You may retire ('Q') when you are ready.");
         }
 
         public void NoticeStuff()
@@ -2269,7 +2274,7 @@ namespace AngbandOS.Core
             if (Player.GetFirstLevelMutation)
             {
                 MsgPrint("You feel different!");
-                Player.Dna.GainMutation(this);
+                Player.Dna.GainMutation();
                 Player.GetFirstLevelMutation = false;
             }
             Player.Energy += Constants.ExtractEnergy[Player.Speed];
@@ -6547,7 +6552,7 @@ namespace AngbandOS.Core
             char c = CurrentCommand;
 
             // Process commands
-            foreach (Command command in SingletonRepository.GameCommands)
+            foreach (InGameCommand command in SingletonRepository.InGameCommands)
             {
                 // TODO: The IF statement below can be converted into a dictionary with the applicable object 
                 // attached for improved performance.
@@ -11838,7 +11843,7 @@ namespace AngbandOS.Core
 
                 case 27:
                 case 28:
-                    Player.Dna.GainMutation(this);
+                    Player.Dna.GainMutation();
                     break;
 
                 case 29:
@@ -18656,6 +18661,1007 @@ namespace AngbandOS.Core
             {
                 return "None";
             }
+        }
+
+        public void DoCmdWizHelp()
+        {
+            FullScreenOverlay = true;
+            ScreenBuffer savedScreen = Screen.Clone();
+            try
+            {
+                UpdateScreen();
+                Screen.Clear();
+                SetBackground(BackgroundImage.Normal);
+                Screen.Print(Colour.Red, "Wizard Commands", 1, 31);
+                Screen.Print(Colour.Red, "===============", 2, 31);
+                Screen.Print(Colour.Red, "Character Editing", 4, 1);
+                Screen.Print(Colour.Red, "=================", 5, 1);
+                Screen.Print("a = Cure All", 7, 1);
+                Screen.Print("e = Edit Stats", 8, 1);
+                Screen.Print("h = Reroll Hitpoints", 9, 1);
+                Screen.Print("k = Self Knowledge", 10, 1);
+                Screen.Print("M = Gain Mutation", 11, 1);
+                Screen.Print("r = Gain Level Reward", 12, 1);
+                Screen.Print("x = Gain Experience", 13, 1);
+                Screen.Print(Colour.Red, "Movement", 15, 1);
+                Screen.Print(Colour.Red, "========", 16, 1);
+                Screen.Print("b = Teleport to Target", 18, 1);
+                Screen.Print("j = Jump Levels", 19, 1);
+                Screen.Print("p = Phase Door", 20, 1);
+                Screen.Print("t = Teleport", 21, 1);
+                Screen.Print(Colour.Red, "Monsters", 4, 26);
+                Screen.Print(Colour.Red, "========", 5, 26);
+                Screen.Print("s = Summon Monster", 7, 26);
+                Screen.Print("n = Summon Named Monster", 8, 26);
+                Screen.Print("N = Summon Named Pet", 9, 26);
+                Screen.Print("H = Summon Horde", 10, 26);
+                Screen.Print("Z = Carnage True", 11, 26);
+                Screen.Print("z = Zap (Wizard Bolt)", 12, 26);
+                Screen.Print(Colour.Red, "General Commands", 14, 26);
+                Screen.Print(Colour.Red, "================", 15, 26);
+                Screen.Print("\" = Generate spoilers", 17, 26);
+                Screen.Print("d = Detect All", 18, 26);
+                Screen.Print("m = Map Area", 19, 26);
+                Screen.Print("w = Wizard Light", 20, 26);
+                Screen.Print(Colour.Red, "Object Commands", 4, 51);
+                Screen.Print(Colour.Red, "===============", 5, 51);
+                Screen.Print("c = Create Item", 7, 51);
+                Screen.Print("C = Create Named artifact", 8, 51);
+                Screen.Print("f = Identify Fully", 9, 51);
+                Screen.Print("g = Generate Good Object", 10, 51);
+                Screen.Print("i = Identify Pack", 11, 51);
+                Screen.Print("l = Learn About Objects", 12, 51);
+                Screen.Print("o = Object Editor", 13, 51);
+                Screen.Print("v = Generate Very Good Object", 14, 51);
+                Screen.Print("Hit any key to continue", 43, 23);
+                Inkey();
+            }
+            finally
+            {
+                Screen.Restore(savedScreen);
+                SetBackground(BackgroundImage.Overhead);
+                FullScreenOverlay = false;
+            }
+        }
+        public void DoCmdWizActivatePower()
+        {
+            FullScreenOverlay = true;
+            ScreenBuffer savedScreen = Screen.Clone();
+            try
+            {
+                SetBackground(BackgroundImage.Normal);
+
+                Screen.Clear();
+                int index = 0;
+                foreach (ActivationPower activationPower in ActivationPowerManager.ActivationPowers)
+                {
+                    int row = 2 + (index % 40);
+                    int col = 30 * (index / 40);
+                    Screen.PrintLine($"{index + 1}. {activationPower.Name}", row, col);
+                    index++;
+                }
+                if (!GetString("Activation power?", out string selection, "", 3))
+                {
+                    return;
+                }
+
+                if (!Int32.TryParse(selection, out int selectedIndex))
+                {
+                    return;
+                }
+                selectedIndex--;
+                if (selectedIndex < 0 || selectedIndex > ActivationPowerManager.ActivationPowers.Length)
+                {
+                    return;
+                }
+
+                ActivationPowerManager.ActivationPowers[selectedIndex].Activate(this);
+            }
+            finally
+            {
+                Screen.Restore(savedScreen);
+                FullScreenOverlay = false;
+                SetBackground(BackgroundImage.Overhead);
+            }
+        }
+
+        public void DoCmdRedraw()
+        {
+            Screen.Clear();
+            NoticeCombineAndReorderFlaggedAction.Set();
+            UpdateTorchRadiusFlaggedAction.Set();
+            UpdateHealthFlaggedAction.Set();
+            UpdateManaFlaggedAction.Set();
+            UpdateSpellsFlaggedAction.Set();
+            UpdateBonusesFlaggedAction.Set();
+            RemoveLightFlaggedAction.Set();
+            RemoveViewFlaggedAction.Set();
+            UpdateLightFlaggedAction.Set();
+            UpdateViewFlaggedAction.Set();
+            UpdateMonstersFlaggedAction.Set();
+            RedrawMapFlaggedAction.Set();
+            RedrawEquippyFlaggedAction.Set();
+            PrExtraRedrawAction.Set();
+            PrBasicRedrawAction.Set();
+            RedrawAllFlaggedAction.Set(); // TODO: Special case ... should be some form of invalidateclient
+            HandleStuff();
+            UpdateScreen();
+        }
+
+        public void DoCmdSummonHorde()
+        {
+            int wy = Player.MapY, wx = Player.MapX;
+            int attempts = 1000;
+            while (--attempts != 0)
+            {
+                Level.Scatter(out wy, out wx, Player.MapY, Player.MapX, 3);
+                if (Level.GridOpenNoItemOrCreature(wy, wx))
+                {
+                    break;
+                }
+            }
+            Level.Monsters.AllocHorde(wy, wx);
+        }
+
+        public void DoCmdWizardBolt()
+        {
+            ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
+            if (!GetDirectionWithAim(out int dir))
+            {
+                return;
+            }
+            int tx = Player.MapX + (99 * Level.KeypadDirectionXOffset[dir]);
+            int ty = Player.MapY + (99 * Level.KeypadDirectionYOffset[dir]);
+            if (dir == 5 && TargetOkay())
+            {
+                flg &= ~ProjectionFlag.ProjectStop;
+                tx = TargetCol;
+                ty = TargetRow;
+            }
+            Project(0, 0, ty, tx, 1000000, new WizardBoltProjectile(this), flg);
+        }
+
+        public void DoCmdWizBamf()
+        {
+            if (TargetWho == 0)
+            {
+                return;
+            }
+            TeleportPlayerTo(TargetRow, TargetCol);
+        }
+
+        public void DoCmdWizChange()
+        {
+            DoCmdWizChangeAux();
+            DoCmdRedraw();
+        }
+
+        private void DoCmdWizChangeAux()
+        {
+            string tmpVal;
+            int tmpInt;
+            for (int i = 0; i < 6; i++)
+            {
+                string ppp = $"{Constants.StatNames[i]} (3-118): ";
+                if (!GetString(ppp, out tmpVal, $"{Player.AbilityScores[i].InnateMax}", 3))
+                {
+                    return;
+                }
+                if (!int.TryParse(tmpVal, out tmpInt))
+                {
+                    tmpInt = 0;
+                }
+                if (tmpInt > 18 + 100)
+                {
+                    tmpInt = 18 + 100;
+                }
+                else if (tmpInt < 3)
+                {
+                    tmpInt = 3;
+                }
+                Player.AbilityScores[i].Innate = tmpInt;
+                Player.AbilityScores[i].InnateMax = tmpInt;
+            }
+            string def = $"{Player.Gold}";
+            if (!GetString("Gold: ", out tmpVal, def, 9))
+            {
+                return;
+            }
+            if (!int.TryParse(tmpVal, out tmpInt))
+            {
+                tmpInt = 0;
+            }
+            if (tmpInt < 0)
+            {
+                tmpInt = 0;
+            }
+            Player.Gold = tmpInt;
+            def = $"{Player.MaxExperienceGained}";
+            if (!GetString("Experience: ", out tmpVal, def, 9))
+            {
+                return;
+            }
+            if (!int.TryParse(tmpVal, out tmpInt))
+            {
+                tmpInt = 0;
+            }
+            if (tmpInt < 0)
+            {
+                tmpInt = 0;
+            }
+            Player.MaxExperienceGained = tmpInt;
+            Player.CheckExperience();
+        }
+
+        public void DoCmdWizCureAll()
+        {
+            RemoveAllCurse();
+            Player.RestoreAbilityScore(Ability.Strength);
+            Player.RestoreAbilityScore(Ability.Intelligence);
+            Player.RestoreAbilityScore(Ability.Wisdom);
+            Player.RestoreAbilityScore(Ability.Constitution);
+            Player.RestoreAbilityScore(Ability.Dexterity);
+            Player.RestoreAbilityScore(Ability.Charisma);
+            Player.RestoreLevel();
+            Player.Health = Player.MaxHealth;
+            Player.FractionalHealth = 0;
+            Player.Mana = Player.MaxMana;
+            Player.FractionalMana = 0;
+            Player.TimedBlindness.ResetTimer();
+            Player.TimedConfusion.ResetTimer();
+            Player.TimedPoison.ResetTimer();
+            Player.TimedFear.ResetTimer();
+            Player.TimedParalysis.ResetTimer();
+            Player.TimedHallucinations.ResetTimer();
+            Player.TimedStun.ResetTimer();
+            Player.TimedBleeding.ResetTimer();
+            Player.TimedSlow.ResetTimer();
+            Player.SetFood(Constants.PyFoodMax - 1);
+            DoCmdRedraw();
+        }
+
+        public void DoCmdWizJump()
+        {
+            if (CommandArgument <= 0)
+            {
+                string ppp = $"Jump to level (0-{CurDungeon.MaxLevel}): ";
+                string def = $"{CurrentDepth}";
+                if (!GetString(ppp, out string tmpVal, def, 10))
+                {
+                    return;
+                }
+                CommandArgument = int.TryParse(tmpVal, out int i) ? i : 0;
+            }
+            if (CommandArgument < 1)
+            {
+                CommandArgument = 1;
+            }
+            if (CommandArgument > CurDungeon.MaxLevel)
+            {
+                CommandArgument = CurDungeon.MaxLevel;
+            }
+            MsgPrint($"You jump to dungeon level {CommandArgument}.");
+            DoCmdSaveGame(true);
+            CurrentDepth = CommandArgument;
+            NewLevelFlag = true;
+        }
+
+        public void DoCmdWizLearn()
+        {
+            foreach (ItemClass kPtr in SingletonRepository.ItemCategories)
+            {
+                if (kPtr.Level <= CommandArgument)
+                {
+                    kPtr.FlavourAware = true;
+                }
+            }
+        }
+
+        public void DoCmdWizNamed(int rIdx, bool slp)
+        {
+            if (rIdx >= SingletonRepository.MonsterRaces.Count - 1)
+            {
+                return;
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                const int d = 1;
+                Level.Scatter(out int y, out int x, Player.MapY, Player.MapX, d);
+                if (!Level.GridPassableNoCreature(y, x))
+                {
+                    continue;
+                }
+                if (Level.Monsters.PlaceMonsterByIndex(y, x, rIdx, slp, true, false))
+                {
+                    break;
+                }
+            }
+        }
+
+        public void DoCmdWizNamedFriendly(int rIdx, bool slp)
+        {
+            if (rIdx >= SingletonRepository.MonsterRaces.Count - 1)
+            {
+                return;
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                const int d = 1;
+                Level.Scatter(out int y, out int x, Player.MapY, Player.MapX, d);
+                if (!Level.GridPassableNoCreature(y, x))
+                {
+                    continue;
+                }
+                if (Level.Monsters.PlaceMonsterByIndex(y, x, rIdx, slp, true, true))
+                {
+                    break;
+                }
+            }
+        }
+
+        public void DoCmdWizPlay()
+        {
+            if (!GetItem(out int item, "Play with which object? ", true, true, true, null))
+            {
+                if (item == -2)
+                {
+                    MsgPrint("You have nothing to play with.");
+                }
+                return;
+            }
+            Item oPtr = item >= 0 ? Player.Inventory[item] : Level.Items[0 - item];
+            bool changed = false;
+            FullScreenOverlay = true;
+            ScreenBuffer savedScreen = Screen.Clone();
+            try
+            {
+                Item qPtr = oPtr.Clone();
+                while (true)
+                {
+                    WizDisplayItem(qPtr);
+                    if (!GetCom("[a]ccept [s]tatistics [r]eroll [t]weak [q]uantity? ", out char ch))
+                    {
+                        break;
+                    }
+                    if (ch == 'A' || ch == 'a')
+                    {
+                        if (item >= 0)
+                        {
+                            Player.Inventory[item] = qPtr;
+                        }
+                        else
+                        {
+                            Level.Items[0 - item] = qPtr;
+                        }
+                        UpdateBonusesFlaggedAction.Set();
+                        NoticeCombineAndReorderFlaggedAction.Set();
+                        changed = true;
+                        break;
+                    }
+                    if (ch == 's' || ch == 'S')
+                    {
+                        WizStatistics( qPtr);
+                    }
+                    if (ch == 'r' || ch == 'r')
+                    {
+                        qPtr = WizRerollItem( qPtr);
+                    }
+                    if (ch == 't' || ch == 'T')
+                    {
+                        WizTweakItem( qPtr);
+                    }
+                    if (ch == 'q' || ch == 'Q')
+                    {
+                        WizQuantityItem( qPtr);
+                    }
+                }
+            }
+            finally
+            {
+                Screen.Restore(savedScreen);
+                FullScreenOverlay = false;
+                if (changed)
+                {
+                    MsgPrint("Changes accepted.");
+                }
+                else
+                {
+                    MsgPrint("Changes ignored.");
+                }
+            }
+        }
+
+        public void DoCmdWizSummon(int num)
+        {
+            for (int i = 0; i < num; i++)
+            {
+                Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, null);
+            }
+        }
+
+        public void DoCmdWizZap()
+        {
+            for (int i = 1; i < Level.MMax; i++)
+            {
+                Monster mPtr = Level.Monsters[i];
+                if (mPtr.Race == null)
+                {
+                    continue;
+                }
+                if (mPtr.DistanceFromPlayer <= Constants.MaxSight)
+                {
+                    Level.Monsters.DeleteMonsterByIndex(i, true);
+                }
+            }
+        }
+
+        private void PrtBinary(bool isSet, int row, int col)
+        {
+            if (isSet)
+            {
+                Screen.Print(Colour.Blue, '*', row, col);
+            }
+            else
+            {
+                Screen.Print(Colour.White, '-', row, col);
+            }
+        }
+
+        public void WizCreateItem()
+        {
+            FullScreenOverlay = true;
+            ScreenBuffer savedScreen = Screen.Clone();
+            SetBackground(BackgroundImage.Normal);
+            int kIdx = WizCreateItemtype();
+            Screen.Restore(savedScreen);
+            FullScreenOverlay = false;
+            SetBackground(BackgroundImage.Overhead);
+            if (kIdx == 0)
+            {
+                return;
+            }
+            Item qPtr = new Item(this);
+            qPtr.AssignItemType(SingletonRepository.ItemCategories[kIdx]);
+            qPtr.ApplyMagic(Difficulty, false, false, false);
+            Level.DropNear(qPtr, -1, Player.MapY, Player.MapX);
+            MsgPrint("Allocated.");
+
+        }
+
+        private int WizCreateItemtype()
+        {
+            char[] _head = { 'a', 'A', '0' };
+            int i, num;
+            int col, row;
+            char ch;
+            int[] choice = new int[60];
+            Screen.Clear();
+            for (num = 0; num < 60 && TvalDescriptionPair.Tvals[num].Tval != 0; num++)
+            {
+                row = 2 + (num % 20);
+                col = 30 * (num / 20);
+                ch = (char)(_head[num / 20] + (char)(num % 20));
+                Screen.PrintLine($"[{ch}] {TvalDescriptionPair.Tvals[num].Desc}", row, col);
+            }
+            int maxNum = num;
+            if (!GetCom("Get what type of object? ", out ch))
+            {
+                return 0;
+            }
+            num = -1;
+            if (ch >= _head[0] && ch < _head[0] + 20)
+            {
+                num = ch - _head[0];
+            }
+            if (ch >= _head[1] && ch < _head[1] + 20)
+            {
+                num = ch - _head[1] + 20;
+            }
+            if (ch >= _head[2] && ch < _head[2] + 10)
+            {
+                num = ch - _head[2] + 40;
+            }
+            if (num < 0 || num >= maxNum)
+            {
+                return 0;
+            }
+            ItemTypeEnum tval = TvalDescriptionPair.Tvals[num].Tval;
+            string tvalDesc = TvalDescriptionPair.Tvals[num].Desc;
+            Screen.Clear();
+            const int maxLetters = 26;
+            const int maxNumbers = 10;
+            const int maxCount = maxLetters * 2 + maxNumbers; // 26 lower case, 26 uppercase, 10 numbers
+            for (num = 0, i = 1; num < maxCount && i < SingletonRepository.ItemCategories.Count; i++)
+            {
+                ItemClass kPtr = SingletonRepository.ItemCategories[i];
+                if (kPtr.CategoryEnum == tval)
+                {
+                    row = 2 + (num % maxLetters);
+                    col = 30 * (num / maxLetters);
+                    ch = (char)(_head[num / maxLetters] + (char)(num % maxLetters));
+                    string itemName = kPtr.Name.Trim().Replace("$", "").Replace("~", "");
+
+                    Screen.PrintLine($"[{ch}] {itemName}", row, col);
+                    choice[num++] = i;
+                }
+            }
+            maxNum = num;
+            if (!GetCom($"What Kind of {tvalDesc}? ", out ch))
+            {
+                return 0;
+            }
+            num = -1;
+            if (ch >= _head[0] && ch < _head[0] + maxLetters)
+            {
+                num = ch - _head[0];
+            }
+            if (ch >= _head[1] && ch < _head[1] + maxLetters)
+            {
+                num = ch - _head[1] + maxLetters;
+            }
+            if (ch >= _head[2] && ch < _head[2] + maxNumbers)
+            {
+                num = ch - _head[2] + maxLetters;
+            }
+            if (num < 0 || num >= maxNum)
+            {
+                return 0;
+            }
+            return choice[num];
+        }
+
+        public void WizCreateNamedArt(FixedArtifactId aIdx)
+        {
+            if (aIdx == FixedArtifactId.None || (int)aIdx >= SingletonRepository.FixedArtifacts.Count)
+            {
+                return;
+            }
+            FixedArtifact? aPtr = SingletonRepository.FixedArtifacts.SingleOrDefault(_fixedArtifact => _fixedArtifact.Value.BaseFixedArtifact.FixedArtifactID == aIdx).Value;
+            if (aPtr == null)
+            {
+                return;
+            }
+            Item qPtr = new Item(this);
+            if (string.IsNullOrEmpty(aPtr.Name))
+            {
+                return;
+            }
+            ItemClass i = aPtr.BaseItemCategory;
+            qPtr.AssignItemType(i);
+            qPtr.FixedArtifact = SingletonRepository.FixedArtifacts[aIdx];
+            qPtr.TypeSpecificValue = aPtr.Pval;
+            qPtr.BaseArmourClass = aPtr.Ac;
+            qPtr.DamageDice = aPtr.Dd;
+            qPtr.DamageDiceSides = aPtr.Ds;
+            qPtr.BonusArmourClass = aPtr.ToA;
+            qPtr.BonusToHit = aPtr.ToH;
+            qPtr.BonusDamage = aPtr.ToD;
+            qPtr.Weight = aPtr.Weight;
+            if (aPtr.FixedArtifactItemCharacteristics.Cursed)
+            {
+                qPtr.IdentCursed = true;
+            }
+            qPtr.GetFixedArtifactResistances();
+            Level.DropNear(qPtr, -1, Player.MapY, Player.MapX);
+            MsgPrint("Allocated.");
+        }
+
+        private void WizDisplayItem(Item oPtr)
+        {
+            const int j = 13;
+            oPtr.RefreshFlagBasedProperties();
+            for (int i = 1; i <= 23; i++)
+            {
+                Screen.PrintLine("", i, j - 2);
+            }
+            string buf = oPtr.StoreDescription(true, 3);
+            Screen.PrintLine(buf, 2, j);
+            Screen.PrintLine($"kind = {oPtr.BaseItemCategory,5}  level = {oPtr.BaseItemCategory.Level,4}  ItemType = {oPtr.Category,5}  ItemSubType = {oPtr.ItemSubCategory,5}", 4, j);
+            Screen.PrintLine($"number = {oPtr.Count,3}  wgt = {oPtr.Weight,6}  BaseArmourClass = {oPtr.BaseArmourClass,5}    damage = {oPtr.DamageDice}d{oPtr.DamageDiceSides}", 5, j);
+            Screen.PrintLine($"TypeSpecificValue = {oPtr.TypeSpecificValue,5}  toac = {oPtr.BonusArmourClass,5}  tohit = {oPtr.BonusToHit,4}  todam = {oPtr.BonusDamage,4}", 6, j);
+            Screen.PrintLine($"FixedArtifactIndex = {oPtr.FixedArtifactIndex,4}  name2 = {oPtr.RareItemTypeIndex,4}  cost = {oPtr.Value()}", 7, j);
+            Screen.PrintLine($"IdentSense = {oPtr.IdentSense} IdentFixed = {oPtr.IdentFixed} IdentEmpty = {oPtr.IdentEmpty}", 8, j);
+            Screen.PrintLine($"IdentKnown = {oPtr.IdentKnown} IdentStoreb = {oPtr.IdentStoreb} IdentMental = {oPtr.IdentMental}", 8, j);
+            Screen.PrintLine($"IdentCursed = {oPtr.IdentCursed} IdentBroken = {oPtr.IdentBroken} timeout = {oPtr.RechargeTimeLeft}", 8, j);
+            Screen.PrintLine("+------------FLAGS1------------+", 10, j);
+            Screen.PrintLine("AFFECT........SLAY........BRAND.", 11, j);
+            Screen.PrintLine("              cvae      xsqpaefc", 12, j);
+            Screen.PrintLine("siwdcc  ssidsahanvudotgddhuoclio", 13, j);
+            Screen.PrintLine("tnieoh  trnipttmiinmrrnrrraiierl", 14, j);
+            Screen.PrintLine("rtsxna..lcfgdkcpmldncltggpksdced", 15, j);
+
+            PrtBinary(oPtr.Characteristics.Str, 16, j + 0);
+            PrtBinary(oPtr.Characteristics.Int, 16, j + 1);
+            PrtBinary(oPtr.Characteristics.Wis, 16, j + 2);
+            PrtBinary(oPtr.Characteristics.Dex, 16, j + 3);
+            PrtBinary(oPtr.Characteristics.Con, 16, j + 4);
+            PrtBinary(oPtr.Characteristics.Cha, 16, j + 5);
+            PrtBinary(false, 16, j + 6);
+            PrtBinary(false, 16, j + 7);
+
+            PrtBinary(oPtr.Characteristics.Stealth, 16, j + 8);
+            PrtBinary(oPtr.Characteristics.Search, 16, j + 9);
+            PrtBinary(oPtr.Characteristics.Infra, 16, j + 10);
+            PrtBinary(oPtr.Characteristics.Tunnel, 16, j + 11);
+
+            PrtBinary(oPtr.Characteristics.Speed, 16, j + 12);
+            PrtBinary(oPtr.Characteristics.Blows, 16, j + 13);
+            PrtBinary(oPtr.Characteristics.Chaotic, 16, j + 14);
+            PrtBinary(oPtr.Characteristics.Vampiric, 16, j + 15);
+
+            PrtBinary(oPtr.Characteristics.SlayAnimal, 16, j + 16);
+            PrtBinary(oPtr.Characteristics.SlayEvil, 16, j + 17);
+            PrtBinary(oPtr.Characteristics.SlayUndead, 16, j + 18);
+            PrtBinary(oPtr.Characteristics.SlayDemon, 16, j + 19);
+
+            PrtBinary(oPtr.Characteristics.SlayOrc, 16, j + 20);
+            PrtBinary(oPtr.Characteristics.SlayTroll, 16, j + 21);
+            PrtBinary(oPtr.Characteristics.SlayGiant, 16, j + 22);
+            PrtBinary(oPtr.Characteristics.SlayDragon, 16, j + 23);
+
+            PrtBinary(oPtr.Characteristics.KillDragon, 16, j + 24);
+            PrtBinary(oPtr.Characteristics.Vorpal, 16, j + 25);
+            PrtBinary(oPtr.Characteristics.Impact, 16, j + 26);
+            PrtBinary(oPtr.Characteristics.BrandPois, 16, j + 27);
+
+            PrtBinary(oPtr.Characteristics.BrandAcid, 16, j + 28);
+            PrtBinary(oPtr.Characteristics.BrandElec, 16, j + 29);
+            PrtBinary(oPtr.Characteristics.BrandFire, 16, j + 30);
+            PrtBinary(oPtr.Characteristics.BrandCold, 16, j + 31);
+
+            Screen.PrintLine("+------------FLAGS2------------+", 17, j);
+            Screen.PrintLine("SUST....IMMUN.RESIST............", 18, j);
+            Screen.PrintLine("        aefcprpsaefcpfldbc sn   ", 19, j);
+            Screen.PrintLine("siwdcc  cliooeatcliooeialoshtncd", 20, j);
+            Screen.PrintLine("tnieoh  ierlifraierliatrnnnrhehi", 21, j);
+            Screen.PrintLine("rtsxna..dcedslatdcedsrekdfddrxss", 22, j);
+
+            PrtBinary(oPtr.Characteristics.SustStr, 23, j + 0);
+            PrtBinary(oPtr.Characteristics.SustInt, 23, j + 1);
+            PrtBinary(oPtr.Characteristics.SustWis, 23, j + 2);
+            PrtBinary(oPtr.Characteristics.SustDex, 23, j + 3);
+            PrtBinary(oPtr.Characteristics.SustCon, 23, j + 4);
+            PrtBinary(oPtr.Characteristics.SustCha, 23, j + 5);
+            PrtBinary(false, 23, j + 6);
+            PrtBinary(false, 23, j + 7);
+
+            PrtBinary(oPtr.Characteristics.ImAcid, 23, j + 8);
+            PrtBinary(oPtr.Characteristics.ImElec, 23, j + 9);
+            PrtBinary(oPtr.Characteristics.ImFire, 23, j + 10);
+            PrtBinary(oPtr.Characteristics.ImCold, 23, j + 11);
+
+            PrtBinary(false, 23, j + 12);
+            PrtBinary(oPtr.Characteristics.Reflect, 23, j + 13);
+            PrtBinary(oPtr.Characteristics.FreeAct, 23, j + 14);
+            PrtBinary(oPtr.Characteristics.HoldLife, 23, j + 15);
+
+            PrtBinary(oPtr.Characteristics.ResAcid, 23, j + 16);
+            PrtBinary(oPtr.Characteristics.ResElec, 23, j + 17);
+            PrtBinary(oPtr.Characteristics.ResFire, 23, j + 18);
+            PrtBinary(oPtr.Characteristics.ResCold, 23, j + 19);
+
+            PrtBinary(oPtr.Characteristics.ResPois, 23, j + 20);
+            PrtBinary(oPtr.Characteristics.ResFear, 23, j + 21);
+            PrtBinary(oPtr.Characteristics.ResLight, 23, j + 22);
+            PrtBinary(oPtr.Characteristics.ResDark, 23, j + 23);
+
+            PrtBinary(oPtr.Characteristics.ResBlind, 23, j + 24);
+            PrtBinary(oPtr.Characteristics.ResConf, 23, j + 25);
+            PrtBinary(oPtr.Characteristics.ResSound, 23, j + 26);
+            PrtBinary(oPtr.Characteristics.ResShards, 23, j + 27);
+
+            PrtBinary(oPtr.Characteristics.ResNether, 23, j + 28);
+            PrtBinary(oPtr.Characteristics.ResNexus, 23, j + 29);
+            PrtBinary(oPtr.Characteristics.ResChaos, 23, j + 30);
+            PrtBinary(oPtr.Characteristics.ResDisen, 23, j + 31);
+
+            Screen.PrintLine("+------------FLAGS3------------+", 10, j + 32);
+            Screen.PrintLine("fe      ehsi  st    iiiiadta  hp", 11, j + 32);
+            Screen.PrintLine("il   n taihnf ee    ggggcregb vr", 12, j + 32);
+            Screen.PrintLine("re  nowysdose eld   nnnntalrl ym", 13, j + 32);
+            Screen.PrintLine("ec  omrcyewta ieirmsrrrriieaeccc", 14, j + 32);
+            Screen.PrintLine("aa  taauktmatlnpgeihaefcvnpvsuuu", 15, j + 32);
+            Screen.PrintLine("uu  egirnyoahivaeggoclioaeoasrrr", 16, j + 32);
+            Screen.PrintLine("rr  litsopdretitsehtierltxrtesss", 17, j + 32);
+            Screen.PrintLine("aa  echewestreshtntsdcedeptedeee", 18, j + 32);
+
+            PrtBinary(oPtr.Characteristics.ShFire, 19, j + 32 + 0);
+            PrtBinary(oPtr.Characteristics.ShElec, 19, j + 32 + 1);
+            PrtBinary(false, 19, j + 32 + 2);
+            PrtBinary(oPtr.Characteristics.AntiTheft, 19, j + 32 + 3);
+
+            PrtBinary(oPtr.Characteristics.NoTele, 19, j + 32 + 4);
+            PrtBinary(oPtr.Characteristics.NoMagic, 19, j + 32 + 5);
+            PrtBinary(oPtr.Characteristics.Wraith, 19, j + 32 + 6);
+            PrtBinary(oPtr.Characteristics.DreadCurse, 19, j + 32 + 7);
+
+            PrtBinary(oPtr.Characteristics.EasyKnow, 19, j + 32 + 8);
+            PrtBinary(oPtr.Characteristics.HideType, 19, j + 32 + 9);
+            PrtBinary(oPtr.Characteristics.ShowMods, 19, j + 32 + 10);
+            PrtBinary(oPtr.Characteristics.InstaArt, 19, j + 32 + 11);
+
+            PrtBinary(oPtr.Characteristics.Feather, 19, j + 12);
+            PrtBinary(oPtr.Characteristics.Lightsource, 19, j + 32 + 13);
+            PrtBinary(oPtr.Characteristics.SeeInvis, 19, j + 32 + 14);
+            PrtBinary(oPtr.Characteristics.Telepathy, 19, j + 32 + 15);
+
+            PrtBinary(oPtr.Characteristics.SlowDigest, 19, j + 32 + 16);
+            PrtBinary(oPtr.Characteristics.Regen, 19, j + 32 + 17);
+            PrtBinary(oPtr.Characteristics.XtraMight, 19, j + 32 + 18);
+            PrtBinary(oPtr.Characteristics.XtraShots, 19, j + 32 + 19);
+
+            PrtBinary(oPtr.Characteristics.IgnoreAcid, 19, j + 32 + 20);
+            PrtBinary(oPtr.Characteristics.IgnoreElec, 19, j + 32 + 21);
+            PrtBinary(oPtr.Characteristics.IgnoreFire, 19, j + 32 + 22);
+            PrtBinary(oPtr.Characteristics.IgnoreCold, 19, j + 32 + 23);
+
+            PrtBinary(oPtr.Characteristics.Activate, 19, j + 32 + 24);
+            PrtBinary(oPtr.Characteristics.DrainExp, 19, j + 32 + 25);
+            PrtBinary(oPtr.Characteristics.Teleport, 19, j + 32 + 26);
+            PrtBinary(oPtr.Characteristics.Aggravate, 19, j + 32 + 27);
+
+            PrtBinary(oPtr.Characteristics.Blessed, 19, j + 32 + 28);
+            PrtBinary(oPtr.Characteristics.Cursed, 19, j + 32 + 29);
+            PrtBinary(oPtr.Characteristics.HeavyCurse, 19, j + 32 + 30);
+            PrtBinary(oPtr.Characteristics.PermaCurse, 19, j + 32 + 31);
+        }
+
+        private void WizQuantityItem(Item oPtr)
+        {
+            if (oPtr.IsFixedArtifact() || !string.IsNullOrEmpty(oPtr.RandartName))
+            {
+                return;
+            }
+            string def = $"{oPtr.Count}";
+            if (GetString("Quantity: ", out string tmpVal, def, 2))
+            {
+                if (!int.TryParse(tmpVal, out int tmpInt))
+                {
+                    tmpInt = 1;
+                }
+                if (tmpInt < 1)
+                {
+                    tmpInt = 1;
+                }
+                if (tmpInt > 99)
+                {
+                    tmpInt = 99;
+                }
+                oPtr.Count = tmpInt;
+            }
+        }
+
+        private Item WizRerollItem(Item oPtr)
+        {
+            bool changed;
+            if (oPtr.IsFixedArtifact() || !string.IsNullOrEmpty(oPtr.RandartName))
+            {
+                return oPtr;
+            }
+            Item qPtr = oPtr.Clone();
+            while (true)
+            {
+                WizDisplayItem(qPtr);
+                if (!GetCom("[a]ccept, [n]ormal, [g]ood, [e]xcellent? ", out char ch))
+                {
+                    changed = false;
+                    break;
+                }
+                if (ch == 'A' || ch == 'a')
+                {
+                    changed = true;
+                    break;
+                }
+                if (ch == 'n' || ch == 'N')
+                {
+                    qPtr.AssignItemType(oPtr.BaseItemCategory);
+                    qPtr.ApplyMagic(Difficulty, false, false, false);
+                }
+                else if (ch == 'g' || ch == 'g')
+                {
+                    qPtr.AssignItemType(oPtr.BaseItemCategory);
+                    qPtr.ApplyMagic(Difficulty, false, true, false);
+                }
+                else if (ch == 'e' || ch == 'e')
+                {
+                    qPtr.AssignItemType(oPtr.BaseItemCategory);
+                    qPtr.ApplyMagic(Difficulty, false, true, true);
+                }
+            }
+            if (changed)
+            {
+                UpdateBonusesFlaggedAction.Set();
+                NoticeCombineAndReorderFlaggedAction.Set();
+                return qPtr;
+            }
+            return oPtr;
+        }
+
+        private void WizStatistics(Item oPtr)
+        {
+            const int _testRoll = 100000;
+            const string q = "Rolls: {0}, Matches: {1}, Better: {2}, Worse: {3}, Other: {4}";
+
+            if (oPtr.IsFixedArtifact())
+            {
+                SingletonRepository.FixedArtifacts[oPtr.FixedArtifactIndex].CurNum = 0;
+            }
+            while (true)
+            {
+                const string pmt = "Roll for [n]ormal, [g]ood, or [e]xcellent treasure? ";
+                WizDisplayItem(oPtr);
+                if (!GetCom(pmt, out char ch))
+                {
+                    break;
+                }
+                string quality;
+                bool good;
+                bool great;
+                if (ch == 'n' || ch == 'N')
+                {
+                    good = false;
+                    great = false;
+                    quality = "normal";
+                }
+                else if (ch == 'g' || ch == 'G')
+                {
+                    good = true;
+                    great = false;
+                    quality = "good";
+                }
+                else if (ch == 'e' || ch == 'E')
+                {
+                    good = true;
+                    great = true;
+                    quality = "excellent";
+                }
+                else
+                {
+                    break;
+                }
+                MsgPrint($"Creating a lot of {quality} items. Base level = {Difficulty}.");
+                MsgPrint(null);
+                long better;
+                long worse;
+                long other;
+                long matches = better = worse = other = 0;
+                long i;
+                for (i = 0; i <= _testRoll; i++)
+                {
+                    if (i < 100 || i % 100 == 0)
+                    {
+                        DoNotWaitOnInkey = true;
+                        if (Inkey() == 0)
+                        {
+                            break;
+                        }
+                        Screen.PrintLine(string.Format(q, i, matches, better, worse, other), 0, 0);
+                        UpdateScreen();
+                    }
+                    Item qPtr = new Item(this);
+                    qPtr.MakeObject(good, great, false);
+                    if (qPtr.IsFixedArtifact())
+                    {
+                        SingletonRepository.FixedArtifacts[qPtr.FixedArtifactIndex].CurNum = 0;
+                    }
+                    if (oPtr.Category != qPtr.Category)
+                    {
+                        continue;
+                    }
+                    if (oPtr.ItemSubCategory != qPtr.ItemSubCategory)
+                    {
+                        continue;
+                    }
+                    if (qPtr.TypeSpecificValue == oPtr.TypeSpecificValue &&
+                        qPtr.BonusArmourClass == oPtr.BonusArmourClass && qPtr.BonusToHit == oPtr.BonusToHit &&
+                        qPtr.BonusDamage == oPtr.BonusDamage)
+                    {
+                        matches++;
+                    }
+                    else if (qPtr.TypeSpecificValue >= oPtr.TypeSpecificValue &&
+                             qPtr.BonusArmourClass >= oPtr.BonusArmourClass && qPtr.BonusToHit >= oPtr.BonusToHit &&
+                             qPtr.BonusDamage >= oPtr.BonusDamage)
+                    {
+                        better++;
+                    }
+                    else if (qPtr.TypeSpecificValue <= oPtr.TypeSpecificValue &&
+                             qPtr.BonusArmourClass <= oPtr.BonusArmourClass && qPtr.BonusToHit <= oPtr.BonusToHit &&
+                             qPtr.BonusDamage <= oPtr.BonusDamage)
+                    {
+                        worse++;
+                    }
+                    else
+                    {
+                        other++;
+                    }
+                }
+                MsgPrint(string.Format(q, i, matches, better, worse, other));
+                MsgPrint(null);
+            }
+            if (oPtr.IsFixedArtifact())
+            {
+                SingletonRepository.FixedArtifacts[oPtr.FixedArtifactIndex].CurNum = 1;
+            }
+        }
+
+        private void WizTweakItem(Item oPtr)
+        {
+            if (oPtr.IsFixedArtifact() || !string.IsNullOrEmpty(oPtr.RandartName))
+            {
+                return;
+            }
+            string p = "Enter new 'TypeSpecificValue' setting: ";
+            string def = $"{oPtr.TypeSpecificValue}";
+            if (!GetString(p, out string tmpVal, def, 5))
+            {
+                return;
+            }
+            oPtr.TypeSpecificValue = tmpVal.ToIntSafely();
+            WizDisplayItem(oPtr);
+            p = "Enter new 'BonusArmourClass' setting: ";
+            def = $"{oPtr.BonusArmourClass}";
+            if (!GetString(p, out tmpVal, def, 5))
+            {
+                return;
+            }
+            oPtr.BonusArmourClass = tmpVal.ToIntSafely();
+            WizDisplayItem(oPtr);
+            p = "Enter new 'BonusToHit' setting: ";
+            def = $"{oPtr.BonusToHit}";
+            if (!GetString(p, out tmpVal, def, 5))
+            {
+                return;
+            }
+            oPtr.BonusToHit = tmpVal.ToIntSafely();
+            WizDisplayItem(oPtr);
+            p = "Enter new 'BonusDamage' setting: ";
+            def = $"{oPtr.BonusDamage}";
+            if (!GetString(p, out tmpVal, def, 5))
+            {
+                return;
+            }
+            oPtr.BonusDamage = tmpVal.ToIntSafely();
+            WizDisplayItem(oPtr);
+        }
+
+        public void EnterWizardMode()
+        {
+            Screen.PrintLine("Enter Wizard Code: ", 0, 0);
+            if (!AskforAux(out string tmp, "", 31))
+            {
+                Screen.Erase(0, 0);
+                return;
+            }
+            Screen.Erase(0, 0);
+            if (tmp == "Dumbledore")
+            {
+                Player.IsWizard = true;
+                MsgPrint("Wizard mode activated.");
+                RedrawTitleFlaggedAction.Set();
+            }
+        }
+
+        public void RandomizeInventory()
+        {
+            List<int> index = new List<int>();
+            List<Item> items = new List<Item>();
+
+            for (int i = 0; i < InventorySlot.PackCount; i++)
+            {
+                int pos;
+                do
+                {
+                    pos = Program.Rng.RandomLessThan(InventorySlot.PackCount);
+                }
+                while (index.Contains(pos));
+                index.Add(pos);
+                items.Add(Player.Inventory[pos]);
+            }
+            for (int i = 0; i < InventorySlot.PackCount; i++)
+            {
+                Player.Inventory[i] = items[i];
+            }
+            NoticeReorderFlaggedAction.Set();
         }
     }
 }

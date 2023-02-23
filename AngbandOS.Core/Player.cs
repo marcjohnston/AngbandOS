@@ -457,7 +457,7 @@ namespace AngbandOS.Core
                 if (levelMutation)
                 {
                     SaveGame.MsgPrint("You feel different...");
-                    Dna.GainMutation(SaveGame);
+                    Dna.GainMutation();
                     levelMutation = false;
                 }
             }
@@ -965,7 +965,7 @@ namespace AngbandOS.Core
                     case 4:
                     case 5:
                     case 6:
-                        Dna.GainMutation(saveGame);
+                        Dna.GainMutation();
                         break;
 
                     case 7:

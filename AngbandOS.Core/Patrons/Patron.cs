@@ -78,7 +78,7 @@ namespace AngbandOS.Core.Patrons
             if (Program.Rng.DieRoll(6) == 1)
             {
                 saveGame.MsgPrint($"{ShortName} rewards you with a mutation!");
-                saveGame.Player.Dna.GainMutation(saveGame);
+                saveGame.Player.Dna.GainMutation();
                 return;
             }
             switch (effect)

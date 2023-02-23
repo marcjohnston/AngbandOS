@@ -317,7 +317,7 @@ namespace AngbandOS.Core.Spells.Tarot
 
                 case 27:
                 case 28:
-                    saveGame.Player.Dna.GainMutation(saveGame);
+                    saveGame.Player.Dna.GainMutation();
                     break;
 
                 case 29:
