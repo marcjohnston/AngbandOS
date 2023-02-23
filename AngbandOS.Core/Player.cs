@@ -164,19 +164,21 @@ namespace AngbandOS.Core
         public Race RaceAtBirth;
 
         /// <summary>
-        /// Deprecated.  Use PrimaryRealm.
+        /// Returns the primary realm that the player studies.
         /// </summary>
         /// <value>The realm1.</value>
-        public Realm? Realm1 => PrimaryRealm?.ID;
         public BaseRealm? PrimaryRealm = null;
 
         /// <summary>
-        /// Deprecated.  Use SecondaryRealm.
+        /// Returns the secondary realm that the player studies.
         /// </summary>
         /// <value>The realm2.</value>
-        public Realm? Realm2 => SecondaryRealm?.ID;
-
         public BaseRealm? SecondaryRealm = null;
+
+        /// <summary>
+        /// Returns true, if the player can cast spells and/or read books.  True, for character classes that can choose either a primary and/or secondary realm.
+        /// </summary>
+        public bool CanCastSpells => PrimaryRealm != null || SecondaryRealm != null;
 
         /// <summary>
         /// Returns true, if the player has chosen the realm <T> for either the primary or secondary realms to study.

@@ -25,7 +25,7 @@
             {
                 return;
             }
-            if (SaveGame.Player.Realm1 == null)
+            if (!SaveGame.Player.CanCastSpells)
             {
                 return;
             }
@@ -118,8 +118,9 @@
                 spellOrderIndex--;
             }
 
+            // TODO: The number of spells remaining needs to be refactored to support the List<> and not 32/64
             int k = 0;
-            int limit = SaveGame.Player.Realm2 == null ? 32 : 64;
+            int limit = SaveGame.Player.SecondaryRealm == null ? 32 : 64;
             for (j = 0; j < limit; j++)
             {
                 sPtr = SaveGame.Spells[j / 32][j % 32];
@@ -133,7 +134,7 @@
                 }
                 k++;
             }
-            if (SaveGame.Player.Realm2 == 0)
+            if (SaveGame.Player.SecondaryRealm == null)
             {
                 if (k > 32)
                 {

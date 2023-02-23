@@ -1350,7 +1350,7 @@ namespace AngbandOS.Core.Stores
         {
             string spellType = SaveGame.Player.BaseCharacterClass.SpellCastingType == CastingType.Arcane ? "spell" : "prayer";
             // If we don't have a realm then we can't do anything
-            if (SaveGame.Player.Realm1 == 0)
+            if (!SaveGame.Player.CanCastSpells)
             {
                 SaveGame.MsgPrint("You cannot read books!");
                 return;

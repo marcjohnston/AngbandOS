@@ -510,7 +510,7 @@ namespace AngbandOS.Core
             SaveGame.Screen.Print(Colour.Blue, "Gender      :", 3, 1);
             SaveGame.Screen.Print(Colour.Blue, "Race        :", 4, 1);
             SaveGame.Screen.Print(Colour.Blue, "Class       :", 5, 1);
-            if (SaveGame.Player.Realm1 != 0 || SaveGame.Player.Realm2 != 0)
+            if (SaveGame.Player.CanCastSpells)
             {
                 SaveGame.Screen.Print(Colour.Blue, "Magic       :", 6, 1);
             }
