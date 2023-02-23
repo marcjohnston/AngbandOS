@@ -1036,12 +1036,15 @@ namespace AngbandOS.Core
             }
             if (canChooseFromEquipment)
             {
-                for (int ii = InventorySlot.MeleeWeapon; ii < InventorySlot.Total; ii++)
+                foreach (BaseInventorySlot inventorySlot in SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsEquipment))
                 {
-                    Item oPtr = Player.Inventory[ii];
-                    if (oPtr.BaseItemCategory != null && (itemFilter == null || itemFilter.ItemMatches(oPtr)))
+                    foreach (int ii in inventorySlot.InventorySlots) 
                     {
-                        equipment.Add(ii);
+                        Item oPtr = Player.Inventory[ii];
+                        if (oPtr.BaseItemCategory != null && (itemFilter == null || itemFilter.ItemMatches(oPtr)))
+                        {
+                            equipment.Add(ii);
+                        }
                     }
                 }
             }
@@ -2828,9 +2831,7 @@ namespace AngbandOS.Core
                     Disturb(false);
                     if (CurrentDepth != 0)
                     {
-                        MsgPrint(CurDungeon.Tower
-                            ? "You feel yourself yanked downwards!"
-                            : "You feel yourself yanked upwards!");
+                        MsgPrint(CurDungeon.Tower ? "You feel yourself yanked downwards!" : "You feel yourself yanked upwards!");
                         DoCmdSaveGame(true);
                         RecallDungeon = CurDungeon.Index;
                         CurrentDepth = 0;
@@ -2852,9 +2853,7 @@ namespace AngbandOS.Core
                     }
                     else
                     {
-                        MsgPrint(Dungeons[RecallDungeon].Tower
-                            ? "You feel yourself yanked upwards!"
-                            : "You feel yourself yanked downwards!");
+                        MsgPrint(Dungeons[RecallDungeon].Tower ? "You feel yourself yanked upwards!" : "You feel yourself yanked downwards!");
                         DoCmdSaveGame(true);
                         CurDungeon = Dungeons[RecallDungeon];
                         Player.WildernessX = CurDungeon.X;
