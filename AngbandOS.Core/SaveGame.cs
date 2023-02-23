@@ -14050,11 +14050,10 @@ namespace AngbandOS.Core
                 .Select(_characterClass => new MenuItem<BaseCharacterClass>(_characterClass.Title, _characterClass))
                 .ToArray();
 
-            int i;
             int stage = 0;
             int[] menu = new int[9];
             bool[] autoChose = new bool[8];
-            for (i = 0; i < 8; i++)
+            for (int i = 0; i < 8; i++)
             {
                 menu[i] = 0;
             }
@@ -14069,7 +14068,7 @@ namespace AngbandOS.Core
                 {
                     case BirthStage.Introduction:
                         Player.Religion.Deity = GodName.None;
-                        for (i = 0; i < 8; i++)
+                        for (int i = 0; i < 8; i++)
                         {
                             autoChose[i] = false;
                         }
@@ -14153,7 +14152,7 @@ namespace AngbandOS.Core
                         }
                         autoChose[stage] = false;
                         _menuLength = Constants.MaxClass;
-                        for (i = 0; i < Constants.MaxClass; i++)
+                        for (int i = 0; i < Constants.MaxClass; i++)
                         {
                             _menuItem[i] = _classMenu[i].Text;
                         }
@@ -14237,7 +14236,7 @@ namespace AngbandOS.Core
                         // Create the menu for the races.
                         MenuItem<Race>[] _raceMenu = SingletonRepository.Races.OrderBy((Race race) => race.Title).Select((Race race) => new MenuItem<Race>(race.Title, race)).ToArray();
 
-                        for (i = 0; i < SingletonRepository.Races.Count; i++)
+                        for (int i = 0; i < SingletonRepository.Races.Count; i++)
                         {
                             _menuItem[i] = _raceMenu[i].Text;
                         }
@@ -14296,203 +14295,188 @@ namespace AngbandOS.Core
                         break;
 
                     case BirthStage.RealmSelection1:
+                        if (menu[0] == Constants.GenerateReplay)
                         {
-                            if (menu[0] == Constants.GenerateReplay)
-                            {
-                                autoChose[stage] = true;
-                                Player.PrimaryRealm = _prevPrimaryRealm;
-                                stage++;
-                                break;
-                            }
-                            if (menu[0] == Constants.GenerateRandom)
-                            {
-                                autoChose[stage] = true;
-                                GetRealmsRandomly();
-                                stage++;
-                                break;
-                            }
-
-                            // Check to see how many realms the player can study.
-                            if (Player.BaseCharacterClass.AvailablePrimaryRealms.Length == 0)
-                            {
-                                // The player cannot study any realms.
-                                autoChose[stage] = true;
-                                Player.PrimaryRealm = null;
-                                stage++;
-                                break;
-                            }
-                            else if (Player.BaseCharacterClass.AvailablePrimaryRealms.Length == 1)
-                            {
-                                // There is only one realm, auto select it.
-                                autoChose[stage] = true;
-                                Player.PrimaryRealm = Player.BaseCharacterClass.AvailablePrimaryRealms[0];
-                                stage++;
-                                break;
-                            }
-
-                            // There is more than one realm available to the player, allow the player to choose the realm.
-                            Realm[] realmChoice = new Realm[8];
-                            _menuLength = 0;
-                            foreach (BaseRealm realm in Player.BaseCharacterClass.AvailablePrimaryRealms)
-                            {
-                                realmChoice[_menuLength] = realm.ID;
-                                _menuLength++;
-                            }
-                            autoChose[stage] = false;
-                            for (i = 0; i < _menuLength; i++)
-                            {
-                                _menuItem[i] = SingletonRepository.Realms.Single(_realm => _realm.ID == realmChoice[i]).Name;
-                            }
-                            DisplayPartialCharacter(stage);
-                            if (menu[stage] >= _menuLength)
-                            {
-                                menu[stage] = 0;
-                            }
-                            MenuDisplay(menu[stage]);
-                            DisplayRealmInfo(SingletonRepository.Realms.Single(_realm => _realm.ID == realmChoice[menu[stage]]));
-                            Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
-                            while (true && !Shutdown)
-                            {
-                                c = Inkey();
-                                if (c == '8')
-                                {
-                                    if (menu[stage] > 0)
-                                    {
-                                        menu[stage]--;
-                                        break;
-                                    }
-                                }
-                                if (c == '2')
-                                {
-                                    if (menu[stage] < _menuLength - 1)
-                                    {
-                                        menu[stage]++;
-                                        break;
-                                    }
-                                }
-                                if (c == '6')
-                                {
-                                    stage++;
-                                    break;
-                                }
-                                if (c == '4')
-                                {
-                                    do
-                                    {
-                                        stage--;
-                                    }
-                                    while (autoChose[stage]);
-                                    break;
-                                }
-                                if (c == 'h')
-                                {
-                                    ShowManual();
-                                }
-                            }
-                            if (stage > BirthStage.RealmSelection1)
-                            {
-                                Player.PrimaryRealm = SingletonRepository.Realms.Single(_realm => _realm.ID == realmChoice[menu[BirthStage.RealmSelection1]]);
-                            }
+                            autoChose[stage] = true;
+                            Player.PrimaryRealm = _prevPrimaryRealm;
+                            stage++;
                             break;
                         }
+                        if (menu[0] == Constants.GenerateRandom)
+                        {
+                            autoChose[stage] = true;
+                            GetRealmsRandomly();
+                            stage++;
+                            break;
+                        }
+
+                        // Check to see how many realms the player can study.
+                        if (Player.BaseCharacterClass.AvailablePrimaryRealms.Length == 0)
+                        {
+                            // The player cannot study any realms.
+                            autoChose[stage] = true;
+                            Player.PrimaryRealm = null;
+                            stage++;
+                            break;
+                        }
+                        else if (Player.BaseCharacterClass.AvailablePrimaryRealms.Length == 1)
+                        {
+                            // There is only one realm, auto select it.
+                            autoChose[stage] = true;
+                            Player.PrimaryRealm = Player.BaseCharacterClass.AvailablePrimaryRealms[0];
+                            stage++;
+                            break;
+                        }
+
+                        // There is more than one realm available to the player, allow the player to choose the realm.
+                        BaseRealm[] availableRealms = Player.BaseCharacterClass.AvailablePrimaryRealms;
+                        autoChose[stage] = false;
+                        for (int i = 0; i < availableRealms.Length; i++)
+                        {
+                            _menuItem[i] = availableRealms[i].Name;
+                        }
+                        DisplayPartialCharacter(stage);
+                        if (menu[stage] >= availableRealms.Length)
+                        {
+                            menu[stage] = 0;
+                        }
+                        _menuLength = availableRealms.Length;
+                        MenuDisplay(menu[stage]);
+                        DisplayRealmInfo(availableRealms[menu[stage]]);
+                        Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+                        while (true && !Shutdown)
+                        {
+                            c = Inkey();
+                            if (c == '8')
+                            {
+                                if (menu[stage] > 0)
+                                {
+                                    menu[stage]--;
+                                    break;
+                                }
+                            }
+                            if (c == '2')
+                            {
+                                if (menu[stage] < availableRealms.Length - 1)
+                                {
+                                    menu[stage]++;
+                                    break;
+                                }
+                            }
+                            if (c == '6')
+                            {
+                                stage++;
+                                break;
+                            }
+                            if (c == '4')
+                            {
+                                do
+                                {
+                                    stage--;
+                                }
+                                while (autoChose[stage]);
+                                break;
+                            }
+                            if (c == 'h')
+                            {
+                                ShowManual();
+                            }
+                        }
+                        if (stage > BirthStage.RealmSelection1)
+                        {
+                            Player.PrimaryRealm = availableRealms[menu[BirthStage.RealmSelection1]];
+                        }
+                        break;
                     case BirthStage.RealmSelection2:
+                        if (menu[0] == Constants.GenerateReplay)
                         {
-                            if (menu[0] == Constants.GenerateReplay)
-                            {
-                                autoChose[stage] = true;
-                                Player.SecondaryRealm = _prevSecondaryRealm;
-                                Player.Religion.Deity = Player.BaseCharacterClass.DefaultDeity(Player.SecondaryRealm);
-                                stage++;
-                                break;
-                            }
-                            if (menu[0] == Constants.GenerateRandom)
-                            {
-                                autoChose[stage] = true;
-                                stage++;
-                                break;
-                            }
-                            Player.SecondaryRealm = null;
-                            if (Player.BaseCharacterClass.AvailableSecondaryRealms.Length == 0)
-                            {
-                                autoChose[stage] = true;
-                                Player.SecondaryRealm = null;
-                                stage++;
-                                break;
-                            }
-                            else if (Player.BaseCharacterClass.AvailableSecondaryRealms.Length == 1)
-                            {
-                                autoChose[stage] = true;
-                                Player.SecondaryRealm = Player.BaseCharacterClass.AvailableSecondaryRealms[0];
-                                stage++;
-                                break;
-                            }
-
-                            Realm[] realmChoice = new Realm[8];
-                            _menuLength = 0;
-                            BaseRealm[] remainingRealms = Player.BaseCharacterClass.AvailableSecondaryRealms.Where(_realm => _realm != Player.PrimaryRealm).ToArray();
-                            foreach (BaseRealm realm in remainingRealms)
-                            {
-                                realmChoice[_menuLength] = realm.ID;
-                                _menuLength++;
-                            }
-                            autoChose[stage] = false;
-                            for (i = 0; i < _menuLength; i++)
-                            {
-                                _menuItem[i] = SingletonRepository.Realms.Single(_realm => _realm.ID == realmChoice[i]).Name;
-                            }
-                            DisplayPartialCharacter(stage);
-                            if (menu[stage] >= _menuLength)
-                            {
-                                menu[stage] = 0;
-                            }
-                            MenuDisplay(menu[stage]);
-                            DisplayRealmInfo(SingletonRepository.Realms.Single(_realm => _realm.ID == realmChoice[menu[stage]]));
-                            Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
-                            while (true && !Shutdown)
-                            {
-                                c = Inkey();
-                                if (c == '8')
-                                {
-                                    if (menu[stage] > 0)
-                                    {
-                                        menu[stage]--;
-                                        break;
-                                    }
-                                }
-                                if (c == '2')
-                                {
-                                    if (menu[stage] < _menuLength - 1)
-                                    {
-                                        menu[stage]++;
-                                        break;
-                                    }
-                                }
-                                if (c == '6')
-                                {
-                                    stage++;
-                                    break;
-                                }
-                                if (c == '4')
-                                {
-                                    do
-                                    {
-                                        stage--;
-                                    }
-                                    while (autoChose[stage]);
-                                    break;
-                                }
-                                if (c == 'h')
-                                {
-                                    ShowManual();
-                                }
-                            }
-                            if (stage > BirthStage.RealmSelection2)
-                            {
-                                Player.SecondaryRealm = SingletonRepository.Realms.Single(_realm => _realm.ID == realmChoice[menu[BirthStage.RealmSelection2]]);
-                                Player.Religion.Deity = Player.BaseCharacterClass.DefaultDeity(Player.SecondaryRealm);
-                            }
+                            autoChose[stage] = true;
+                            Player.SecondaryRealm = _prevSecondaryRealm;
+                            Player.Religion.Deity = Player.BaseCharacterClass.DefaultDeity(Player.SecondaryRealm);
+                            stage++;
                             break;
                         }
+                        if (menu[0] == Constants.GenerateRandom)
+                        {
+                            autoChose[stage] = true;
+                            stage++;
+                            break;
+                        }
+                        Player.SecondaryRealm = null;
+                        if (Player.BaseCharacterClass.AvailableSecondaryRealms.Length == 0)
+                        {
+                            autoChose[stage] = true;
+                            Player.SecondaryRealm = null;
+                            stage++;
+                            break;
+                        }
+                        else if (Player.BaseCharacterClass.AvailableSecondaryRealms.Length == 1)
+                        {
+                            autoChose[stage] = true;
+                            Player.SecondaryRealm = Player.BaseCharacterClass.AvailableSecondaryRealms[0];
+                            stage++;
+                            break;
+                        }
+
+                        BaseRealm[] remainingRealms = Player.BaseCharacterClass.AvailableSecondaryRealms.Where(_realm => _realm != Player.PrimaryRealm).ToArray();
+                        autoChose[stage] = false;
+                        for (int i = 0; i < remainingRealms.Length; i++)
+                        {
+                            _menuItem[i] = remainingRealms[i].Name;
+                        }
+                        DisplayPartialCharacter(stage);
+                        if (menu[stage] >= remainingRealms.Length)
+                        {
+                            menu[stage] = 0;
+                        }
+                        _menuLength = remainingRealms.Length;
+                        MenuDisplay(menu[stage]);
+                        DisplayRealmInfo(remainingRealms[menu[stage]]);
+                        Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+                        while (true && !Shutdown)
+                        {
+                            c = Inkey();
+                            if (c == '8')
+                            {
+                                if (menu[stage] > 0)
+                                {
+                                    menu[stage]--;
+                                    break;
+                                }
+                            }
+                            if (c == '2')
+                            {
+                                if (menu[stage] < remainingRealms.Length - 1)
+                                {
+                                    menu[stage]++;
+                                    break;
+                                }
+                            }
+                            if (c == '6')
+                            {
+                                stage++;
+                                break;
+                            }
+                            if (c == '4')
+                            {
+                                do
+                                {
+                                    stage--;
+                                }
+                                while (autoChose[stage]);
+                                break;
+                            }
+                            if (c == 'h')
+                            {
+                                ShowManual();
+                            }
+                        }
+                        if (stage > BirthStage.RealmSelection2)
+                        {
+                            Player.SecondaryRealm = remainingRealms[menu[BirthStage.RealmSelection2]];
+                            Player.Religion.Deity = Player.BaseCharacterClass.DefaultDeity(Player.SecondaryRealm);
+                        }
+                        break;
                     case BirthStage.GenderSelection:
                         if (menu[0] == Constants.GenerateReplay)
                         {
@@ -14511,7 +14495,7 @@ namespace AngbandOS.Core
                             break;
                         }
                         _menuLength = Constants.MaxGenders;
-                        for (i = 0; i < Constants.MaxGenders; i++)
+                        for (int i = 0; i < Constants.MaxGenders; i++)
                         {
                             _menuItem[i] = _sexInfo[i].Title;
                         }
