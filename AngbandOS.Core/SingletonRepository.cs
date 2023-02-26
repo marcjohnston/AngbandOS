@@ -13,7 +13,7 @@ namespace AngbandOS.Core
         public SingletonDictionaryFactory<FixedArtifactId, FixedArtifact> FixedArtifacts;
         public SingletonDictionaryFactory<string, ProjectileGraphic> ProjectileGraphics;
         public SingletonDictionaryFactory<string, Animation> Animations;
-        public SingletonDictionaryFactory<string, Vault> Vaults;
+        public SingletonFactory<Vault> Vaults;
         public SingletonDictionaryFactory<string, FloorTileType> FloorTileTypes;
         public SingletonDictionaryFactory<string, Base2RareItemType> RareItemTypes;
 
@@ -80,7 +80,7 @@ namespace AngbandOS.Core
             ChestTrapConfigurations = new SingletonFactory<ChestTrapConfiguration>(saveGame, LoadTypesFromAssembly<ChestTrapConfiguration>(saveGame));
             ProjectileGraphics = new SingletonDictionaryFactory<string, ProjectileGraphic>(saveGame, LoadTypesFromAssembly<ProjectileGraphic>(saveGame), (_projectileGraphic => _projectileGraphic.Name));
             Animations = new SingletonDictionaryFactory<string, Animation>(saveGame, LoadTypesFromAssembly<Animation>(saveGame), (_animation => _animation.Name));
-            Vaults = new SingletonDictionaryFactory<string, Vault>(saveGame, LoadTypesFromAssembly<Vault>(saveGame), (_vaultType => _vaultType.Name));
+            Vaults = new SingletonFactory<Vault>(saveGame, LoadTypesFromAssembly<Vault>(saveGame));
             FloorTileTypes = new SingletonDictionaryFactory<string, FloorTileType>(saveGame, LoadTypesFromAssembly<FloorTileType>(saveGame), (_floorTileType => _floorTileType.Name));
             RareItemTypes = new SingletonDictionaryFactory<string, Base2RareItemType>(saveGame, LoadTypesFromAssembly<Base2RareItemType>(saveGame), (_rareItemType => _rareItemType.Name));
             FixedArtifacts = new SingletonDictionaryFactory<FixedArtifactId, FixedArtifact>(saveGame, LoadTypesFromAssembly<FixedArtifact>(saveGame), (_fixedArtifact => _fixedArtifact.FixedArtifactID));

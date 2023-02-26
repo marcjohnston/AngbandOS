@@ -5,12 +5,12 @@
         public override int Type => 7;
         public override void Build(SaveGame saveGame, int yval, int xval)
         {
-            VaultType vPtr = saveGame.VaultTypes[0];
+            Vault vPtr = saveGame.SingletonRepository.Vaults[0];
             int dummy = 0;
             while (dummy < SaveGame.SafeMaxAttempts)
             {
                 dummy++;
-                vPtr = saveGame.VaultTypes[Program.Rng.RandomLessThan(saveGame.VaultTypes.Count)];
+                vPtr = saveGame.SingletonRepository.Vaults.WeightedRandom().Choose();
                 if (vPtr.Category == 7)
                 {
                     var minX = xval - (vPtr.Width / 2);

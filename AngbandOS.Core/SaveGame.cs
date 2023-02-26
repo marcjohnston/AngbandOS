@@ -116,7 +116,6 @@ namespace AngbandOS.Core
 
         public ExPlayer ExPlayer;
         public RareItemTypeArray RareItemTypes;
-        public VaultTypeArray VaultTypes;
         private readonly List<string> _messageBuf = new List<string>();
         private readonly List<int> _messageCounts = new List<int>();
         private int _msgPrintP;
@@ -359,7 +358,6 @@ namespace AngbandOS.Core
         private void PopulateNewProfile()
         {
             RareItemTypes = new RareItemTypeArray(this);
-            VaultTypes = new VaultTypeArray(this);
         }
 
         public int GetMonsterIndexFromName(string name)
