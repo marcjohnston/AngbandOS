@@ -1966,6 +1966,7 @@ namespace AngbandOS.Core
 
         public void ApplyMagic(int lev, bool okay, bool good, bool great)
         {
+            
             if (lev > Constants.MaxDepth - 1)
             {
                 lev = Constants.MaxDepth - 1;
