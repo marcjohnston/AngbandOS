@@ -4,13 +4,6 @@ namespace AngbandOS.Core
 {
     internal static class ObjectRepository
     {
-        public static List<PotionFlavour> PotionFlavours = new List<PotionFlavour>();
-        public static List<RingFlavour> RingFlavours = new List<RingFlavour>();
-        public static List<RodFlavour> RodFlavours = new List<RodFlavour>();
-        public static List<BaseScrollFlavour> ScrollFlavours = new List<BaseScrollFlavour>();
-        public static List<StaffFlavour> StaffFlavours = new List<StaffFlavour>();
-        public static List<WandFlavour> WandFlavours = new List<WandFlavour>();
-        public static List<ChestTrapConfiguration> ChestTrapConfigurations = new List<ChestTrapConfiguration>();
         public static Dictionary<string, ProjectileGraphic> ProjectileGraphics = new Dictionary<string, ProjectileGraphic>();
         public static Dictionary<string, Animation> Animations = new Dictionary<string, Animation>();
         public static Dictionary<string, Vault> Vaults = new Dictionary<string, Vault>();
@@ -22,55 +15,6 @@ namespace AngbandOS.Core
             Assembly assembly = Assembly.GetExecutingAssembly();
             foreach (Type type in assembly.GetTypes())
             {
-                // Load PotionFlavours.
-                if (!type.IsAbstract && typeof(PotionFlavour).IsAssignableFrom(type))
-                {
-                    PotionFlavour basePotionFlavour = (PotionFlavour)Activator.CreateInstance(type);
-                    PotionFlavours.Add(basePotionFlavour);
-                }
-
-                // Load RingFlavours.
-                if (!type.IsAbstract && typeof(RingFlavour).IsAssignableFrom(type))
-                {
-                    RingFlavour baseRingFlavour = (RingFlavour)Activator.CreateInstance(type);
-                    RingFlavours.Add(baseRingFlavour);
-                }
-
-                // Load RodFlavours.
-                if (!type.IsAbstract && typeof(RodFlavour).IsAssignableFrom(type))
-                {
-                    RodFlavour baseRodFlavour = (RodFlavour)Activator.CreateInstance(type);
-                    RodFlavours.Add(baseRodFlavour);
-                }
-
-                // Load ScrollFlavours.
-                if (!type.IsAbstract && typeof(BaseScrollFlavour).IsAssignableFrom(type))
-                {
-                    BaseScrollFlavour baseScrollFlavour = (BaseScrollFlavour)Activator.CreateInstance(type);
-                    ScrollFlavours.Add(baseScrollFlavour);
-                }
-
-                // Load StaffFlavours.
-                if (!type.IsAbstract && typeof(StaffFlavour).IsAssignableFrom(type))
-                {
-                    StaffFlavour baseStaffFlavour = (StaffFlavour)Activator.CreateInstance(type);
-                    StaffFlavours.Add(baseStaffFlavour);
-                }
-
-                // Load WandFlavours.
-                if (!type.IsAbstract && typeof(WandFlavour).IsAssignableFrom(type))
-                {
-                    WandFlavour wandFlavour = (WandFlavour)Activator.CreateInstance(type);
-                    WandFlavours.Add(wandFlavour);
-                }
-
-                // Load ChestTrapConfigurations.
-                if (!type.IsAbstract && typeof(ChestTrapConfiguration).IsAssignableFrom(type))
-                {
-                    ChestTrapConfiguration chestTrapConfiguration = (ChestTrapConfiguration)Activator.CreateInstance(type);
-                    ChestTrapConfigurations.Add(chestTrapConfiguration);
-                }
-
                 // Load ProjectileGraphics.
                 if (!type.IsAbstract && typeof(ProjectileGraphic).IsAssignableFrom(type))
                 {

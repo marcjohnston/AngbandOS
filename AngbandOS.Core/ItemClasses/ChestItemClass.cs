@@ -36,7 +36,7 @@
             }
             else
             {
-                if (ObjectRepository.ChestTrapConfigurations[item.TypeSpecificValue].Traps.Length == 0)
+                if (SaveGame.SingletonRepository.ChestTrapConfigurations[item.TypeSpecificValue].Traps.Length == 0)
                 {
                       return item.BaseItemCategory.Stompable[StompableType.Good];
                 }
@@ -59,7 +59,7 @@
             }
             else if (item.TypeSpecificValue < 0)
             {
-                if (ObjectRepository.ChestTrapConfigurations[-item.TypeSpecificValue].IsTrapped)
+                if (SaveGame.SingletonRepository.ChestTrapConfigurations[-item.TypeSpecificValue].IsTrapped)
                 {
                     s += " (disarmed)";
                 }
@@ -70,7 +70,7 @@
             }
             else
             {
-                s += $" {ObjectRepository.ChestTrapConfigurations[item.TypeSpecificValue].Description}";
+                s += $" {SaveGame.SingletonRepository.ChestTrapConfigurations[item.TypeSpecificValue].Description}";
             }
 
             // Chests do not have Mods, Damage or Bonus.  We are omitting the description for those features.
@@ -95,7 +95,7 @@
                 item.TypeSpecificValue = Program.Rng.DieRoll(item.BaseItemCategory.Level);
                 if (item.TypeSpecificValue > 55)
                 {
-                    int chestTrapConfigurationCount = ObjectRepository.ChestTrapConfigurations.Count;
+                    int chestTrapConfigurationCount = SaveGame.SingletonRepository.ChestTrapConfigurations.Count;
                     int randomRemaining = chestTrapConfigurationCount - 55;
                     item.TypeSpecificValue = (55 + Program.Rng.RandomLessThan(randomRemaining));
                 }

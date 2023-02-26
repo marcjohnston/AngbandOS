@@ -3,6 +3,12 @@
 [Serializable]
 internal abstract class RodFlavour
 {
+    protected SaveGame SaveGame;
+    protected RodFlavour(SaveGame saveGame)
+    {
+        SaveGame = saveGame;
+    }
+
     /// <summary>
     /// The column from which to take the graphical tile.
     /// </summary>

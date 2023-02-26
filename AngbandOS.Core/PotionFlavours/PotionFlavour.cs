@@ -3,6 +3,12 @@
 [Serializable]
 internal abstract class PotionFlavour
 {
+    protected SaveGame SaveGame;
+    protected PotionFlavour(SaveGame saveGame)
+    {
+        SaveGame = saveGame;
+    }
+
     /// <summary>
     /// The column from which to take the graphical tile.
     /// </summary>

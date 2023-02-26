@@ -902,7 +902,7 @@ namespace AngbandOS.Core
             {
                 return;
             }
-            ChestTrapConfiguration trap = ObjectRepository.ChestTrapConfigurations[oPtr.TypeSpecificValue];
+            ChestTrapConfiguration trap = SingletonRepository.ChestTrapConfigurations[oPtr.TypeSpecificValue];
             trap.Activate(this, oPtr);
         }
 
@@ -2034,10 +2034,10 @@ namespace AngbandOS.Core
             Program.Rng.FixedSeed = _seedFlavor;
             PotionFlavours = new List<PotionFlavour>();
             List<PotionFlavour> tempPotions = new List<PotionFlavour>();
-            PotionFlavours.Add(new ClearPotionFlavour());
-            PotionFlavours.Add(new LightBrownPotionFlavour());
-            PotionFlavours.Add(new IckyGreenPotionFlavour());
-            foreach (PotionFlavour potionFlavour in ObjectRepository.PotionFlavours)
+            PotionFlavours.Add(SingletonRepository.PotionFlavours.Get<ClearPotionFlavour>());
+            PotionFlavours.Add(SingletonRepository.PotionFlavours.Get<LightBrownPotionFlavour>());
+            PotionFlavours.Add(SingletonRepository.PotionFlavours.Get<IckyGreenPotionFlavour>());
+            foreach (PotionFlavour potionFlavour in SingletonRepository.PotionFlavours)
             {
                 if (potionFlavour is ClearPotionFlavour)
                 {
@@ -2085,7 +2085,7 @@ namespace AngbandOS.Core
             } while (tempAmulets.Count > 0);
             WandFlavours = new List<WandFlavour>();
             List<WandFlavour> tempWands = new List<WandFlavour>();
-            foreach (WandFlavour wandFlavour in ObjectRepository.WandFlavours)
+            foreach (WandFlavour wandFlavour in SingletonRepository.WandFlavours)
             {
                 tempWands.Add(wandFlavour);
             }
@@ -2097,7 +2097,7 @@ namespace AngbandOS.Core
             } while (tempWands.Count > 0);
             RingFlavours = new List<RingFlavour>();
             List<RingFlavour> tempRings = new List<RingFlavour>();
-            foreach (RingFlavour ringFlavour in ObjectRepository.RingFlavours)
+            foreach (RingFlavour ringFlavour in SingletonRepository.RingFlavours)
             {
                 tempRings.Add(ringFlavour);
             }
@@ -2109,7 +2109,7 @@ namespace AngbandOS.Core
             } while (tempRings.Count > 0);
             RodFlavours = new List<RodFlavour>();
             List<RodFlavour> tempRods = new List<RodFlavour>();
-            foreach (RodFlavour rodFlavour in ObjectRepository.RodFlavours)
+            foreach (RodFlavour rodFlavour in SingletonRepository.RodFlavours)
             {
                 tempRods.Add(rodFlavour);
             }
@@ -2121,7 +2121,7 @@ namespace AngbandOS.Core
             } while (tempRods.Count > 0);
             StaffFlavours = new List<StaffFlavour>();
             List<StaffFlavour> tempStaffs = new List<StaffFlavour>();
-            foreach (StaffFlavour staffFlavour in ObjectRepository.StaffFlavours)
+            foreach (StaffFlavour staffFlavour in SingletonRepository.StaffFlavours)
             {
                 tempStaffs.Add(staffFlavour);
             }
@@ -2133,7 +2133,7 @@ namespace AngbandOS.Core
             } while (tempStaffs.Count > 0);
             ScrollFlavours = new List<ScrollFlavour>();
             List<BaseScrollFlavour> tempScrolls = new List<BaseScrollFlavour>();
-            foreach (BaseScrollFlavour scrollFlavour in ObjectRepository.ScrollFlavours)
+            foreach (BaseScrollFlavour scrollFlavour in SingletonRepository.ScrollFlavours)
             {
                 tempScrolls.Add(scrollFlavour);
             }
@@ -7004,7 +7004,7 @@ namespace AngbandOS.Core
                     continue;
                 }
                 // If we're only interested in trapped chests, skip those that aren't
-                if (trappedOnly && (!item.IsKnown() || ObjectRepository.ChestTrapConfigurations[item.TypeSpecificValue].NotTrapped))
+                if (trappedOnly && (!item.IsKnown() || SingletonRepository.ChestTrapConfigurations[item.TypeSpecificValue].NotTrapped))
                 {
                     continue;
                 }
@@ -7290,7 +7290,7 @@ namespace AngbandOS.Core
                 MsgPrint("The chest is not trapped.");
             }
             // If it has a null trap then there's nothing to disarm
-            else if (ObjectRepository.ChestTrapConfigurations[item.TypeSpecificValue].NotTrapped)
+            else if (SingletonRepository.ChestTrapConfigurations[item.TypeSpecificValue].NotTrapped)
             {
                 MsgPrint("The chest is not trapped.");
             }
@@ -12120,7 +12120,7 @@ namespace AngbandOS.Core
                             {
                                 continue;
                             }
-                            if (ObjectRepository.ChestTrapConfigurations[item.TypeSpecificValue].NotTrapped)
+                            if (SingletonRepository.ChestTrapConfigurations[item.TypeSpecificValue].NotTrapped)
                             {
                                 continue;
                             }

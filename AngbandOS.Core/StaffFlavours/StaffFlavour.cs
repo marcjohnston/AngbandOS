@@ -3,6 +3,12 @@
 [Serializable]
 internal abstract class StaffFlavour
 {
+    protected SaveGame SaveGame;
+    protected StaffFlavour(SaveGame saveGame)
+    {
+        SaveGame = saveGame;
+    }
+
     /// <summary>
     /// The column from which to take the graphical tile.
     /// </summary>

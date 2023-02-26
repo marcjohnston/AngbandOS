@@ -3,6 +3,12 @@
 [Serializable]
 internal abstract class RingFlavour
 {
+    protected SaveGame SaveGame;
+    protected RingFlavour(SaveGame saveGame)
+    {
+        SaveGame = saveGame;
+    }
+
     /// <summary>
     /// The column from which to take the graphical tile.
     /// </summary>

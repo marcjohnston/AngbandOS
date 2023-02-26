@@ -3,6 +3,12 @@
 [Serializable]
 internal abstract class BaseScrollFlavour
 {
+    protected SaveGame SaveGame;
+    protected BaseScrollFlavour(SaveGame saveGame)
+    {
+        SaveGame = saveGame;
+    }
+
     public static readonly string[] Syllables =
     {
         "a", "ab", "ag", "aks", "ala", "an", "ankh", "app", "arg", "arze", "ash", "aus", "ban", "bar", "bat", "bek",

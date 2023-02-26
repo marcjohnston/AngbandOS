@@ -25,6 +25,14 @@ namespace AngbandOS.Core
         public SingletonFactory<AmuletFlavour> AmuletFlavours;
         public SingletonFactory<MushroomFlavour> MushroomFlavours;
 
+        public SingletonFactory<PotionFlavour> PotionFlavours;
+        public SingletonFactory<RingFlavour> RingFlavours;
+        public SingletonFactory<RodFlavour> RodFlavours;
+        public SingletonFactory<BaseScrollFlavour> ScrollFlavours;
+        public SingletonFactory<StaffFlavour> StaffFlavours;
+        public SingletonFactory<WandFlavour> WandFlavours;
+        public SingletonFactory<ChestTrapConfiguration> ChestTrapConfigurations;
+
         private T[] LoadTypesFromAssembly<T>(SaveGame saveGame)
         {
             List<T> typeList = new List<T>();
@@ -59,6 +67,13 @@ namespace AngbandOS.Core
             Towns = new SingletonFactory<Town>(saveGame, LoadTypesFromAssembly<Town>(saveGame));
             AmuletFlavours = new SingletonFactory<AmuletFlavour>(saveGame, LoadTypesFromAssembly<AmuletFlavour>(saveGame));
             MushroomFlavours = new SingletonFactory<MushroomFlavour>(saveGame, LoadTypesFromAssembly<MushroomFlavour>(saveGame));
+            PotionFlavours = new SingletonFactory<PotionFlavour>(saveGame, LoadTypesFromAssembly<PotionFlavour>(saveGame));
+            RingFlavours = new SingletonFactory<RingFlavour>(saveGame, LoadTypesFromAssembly<RingFlavour>(saveGame));
+            RodFlavours = new SingletonFactory<RodFlavour>(saveGame, LoadTypesFromAssembly<RodFlavour>(saveGame));
+            ScrollFlavours = new SingletonFactory<BaseScrollFlavour>(saveGame, LoadTypesFromAssembly<BaseScrollFlavour>(saveGame));
+            StaffFlavours = new SingletonFactory<StaffFlavour>(saveGame, LoadTypesFromAssembly<StaffFlavour>(saveGame));
+            WandFlavours = new SingletonFactory<WandFlavour>(saveGame, LoadTypesFromAssembly<WandFlavour>(saveGame));
+            ChestTrapConfigurations = new SingletonFactory<ChestTrapConfiguration>(saveGame, LoadTypesFromAssembly<ChestTrapConfiguration>(saveGame));
 
             Dictionary<FixedArtifactId, FixedArtifact> dictionary = new Dictionary<FixedArtifactId, FixedArtifact>();
             foreach (BaseFixedArtifact baseFixedArtifact in BaseFixedArtifacts)

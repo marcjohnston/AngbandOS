@@ -3,6 +3,12 @@
 [Serializable]
 internal abstract class WandFlavour
 {
+    protected SaveGame SaveGame;
+    protected WandFlavour(SaveGame saveGame)
+    {
+        SaveGame = saveGame;
+    }
+
     /// <summary>
     /// The column from which to take the graphical tile.
     /// </summary>
