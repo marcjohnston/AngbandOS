@@ -80,7 +80,7 @@ namespace AngbandOS.Core
             //        }
             //    }
             //}
-            MonsterRace[] monsterRaces = LoadTypesFromAssembly<MonsterRace>(saveGame).OrderBy(_monsterRace => _monsterRace.Level).ToArray();
+            MonsterRace[] monsterRaces = LoadTypesFromAssembly<MonsterRace>(saveGame).OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
             MonsterRaces = new SingletonFactory<MonsterRace>(saveGame, monsterRaces);
             Races = new SingletonFactory<Race>(saveGame);
         }
