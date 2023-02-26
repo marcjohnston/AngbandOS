@@ -3,6 +3,12 @@
 [Serializable]
 internal abstract class MushroomFlavour
 {
+    protected SaveGame SaveGame;
+    protected MushroomFlavour(SaveGame saveGame)
+    {
+        SaveGame = saveGame;
+    }
+
     /// <summary>
     /// The column from which to take the graphical tile.
     /// </summary>

@@ -23,8 +23,9 @@ namespace AngbandOS.Core
         public SingletonFactory<BaseRealm> Realms;
         public SingletonFactory<Town> Towns;
         public SingletonFactory<AmuletFlavour> AmuletFlavours;
+        public SingletonFactory<MushroomFlavour> MushroomFlavours;
 
-        public T[] LoadTypesFromAssembly<T>(SaveGame saveGame)
+        private T[] LoadTypesFromAssembly<T>(SaveGame saveGame)
         {
             List<T> typeList = new List<T>();
             Assembly assembly = Assembly.GetExecutingAssembly();
@@ -57,6 +58,7 @@ namespace AngbandOS.Core
             Realms = new SingletonFactory<BaseRealm>(saveGame, LoadTypesFromAssembly<BaseRealm>(saveGame));
             Towns = new SingletonFactory<Town>(saveGame, LoadTypesFromAssembly<Town>(saveGame));
             AmuletFlavours = new SingletonFactory<AmuletFlavour>(saveGame, LoadTypesFromAssembly<AmuletFlavour>(saveGame));
+            MushroomFlavours = new SingletonFactory<MushroomFlavour>(saveGame, LoadTypesFromAssembly<MushroomFlavour>(saveGame));
 
             Dictionary<FixedArtifactId, FixedArtifact> dictionary = new Dictionary<FixedArtifactId, FixedArtifact>();
             foreach (BaseFixedArtifact baseFixedArtifact in BaseFixedArtifacts)

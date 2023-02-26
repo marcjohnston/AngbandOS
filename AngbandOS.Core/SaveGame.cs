@@ -2061,7 +2061,7 @@ namespace AngbandOS.Core
             } while (tempPotions.Count > 0);
             MushroomFlavours = new List<MushroomFlavour>();
             List<MushroomFlavour> tempMushrooms = new List<MushroomFlavour>();
-            foreach (MushroomFlavour mushroomFlavour in ObjectRepository.MushroomFlavours)
+            foreach (MushroomFlavour mushroomFlavour in SingletonRepository.MushroomFlavours)
             {
                 tempMushrooms.Add(mushroomFlavour);
             }
