@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class MetalScaleMailOfTheOrcsFixedArtifact : BaseFixedArtifact, IActivatible
+internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
     private MetalScaleMailOfTheOrcsFixedArtifact(SaveGame saveGame)

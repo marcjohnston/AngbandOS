@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class MaceOfDisruptionDeathwreakerFixedArtifact : BaseFixedArtifact
+internal class MaceOfDisruptionDeathwreakerFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private MaceOfDisruptionDeathwreakerFixedArtifact(SaveGame saveGame)

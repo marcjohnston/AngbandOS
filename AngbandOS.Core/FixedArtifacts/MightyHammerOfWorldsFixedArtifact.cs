@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class MightyHammerOfWorldsFixedArtifact : BaseFixedArtifact
+internal class MightyHammerOfWorldsFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private MightyHammerOfWorldsFixedArtifact(SaveGame saveGame)

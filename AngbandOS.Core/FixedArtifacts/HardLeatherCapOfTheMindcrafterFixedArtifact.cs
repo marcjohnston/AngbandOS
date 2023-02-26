@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class HardLeatherCapOfTheMindcrafterFixedArtifact : BaseFixedArtifact
+internal class HardLeatherCapOfTheMindcrafterFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private HardLeatherCapOfTheMindcrafterFixedArtifact(SaveGame saveGame)

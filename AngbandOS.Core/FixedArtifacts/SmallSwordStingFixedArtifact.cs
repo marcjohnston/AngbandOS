@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class SmallSwordStingFixedArtifact : BaseFixedArtifact
+internal class SmallSwordStingFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private SmallSwordStingFixedArtifact(SaveGame saveGame)

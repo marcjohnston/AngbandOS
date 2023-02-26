@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class LongBowSureshotFixedArtifact : BaseFixedArtifact
+internal class LongBowSureshotFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private LongBowSureshotFixedArtifact(SaveGame saveGame)

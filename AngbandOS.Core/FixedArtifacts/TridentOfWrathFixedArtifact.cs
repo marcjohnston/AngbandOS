@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class TridentOfWrathFixedArtifact : BaseFixedArtifact
+internal class TridentOfWrathFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private TridentOfWrathFixedArtifact(SaveGame saveGame)

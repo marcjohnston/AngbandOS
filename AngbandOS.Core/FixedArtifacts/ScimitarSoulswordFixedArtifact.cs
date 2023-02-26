@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class ScimitarSoulswordFixedArtifact : BaseFixedArtifact
+internal class ScimitarSoulswordFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private ScimitarSoulswordFixedArtifact(SaveGame saveGame)

@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class LongSwordVorpalBladeFixedArtifact : BaseFixedArtifact
+internal class LongSwordVorpalBladeFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private LongSwordVorpalBladeFixedArtifact(SaveGame saveGame)

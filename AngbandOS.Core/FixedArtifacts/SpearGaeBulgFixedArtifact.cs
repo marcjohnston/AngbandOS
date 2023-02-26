@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class SpearGaeBulgFixedArtifact : BaseFixedArtifact
+internal class SpearGaeBulgFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private SpearGaeBulgFixedArtifact(SaveGame saveGame)

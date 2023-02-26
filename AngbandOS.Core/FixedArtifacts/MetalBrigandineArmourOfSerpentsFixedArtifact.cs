@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class MetalBrigandineArmourOfSerpentsFixedArtifact : BaseFixedArtifact
+internal class MetalBrigandineArmourOfSerpentsFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private MetalBrigandineArmourOfSerpentsFixedArtifact(SaveGame saveGame)

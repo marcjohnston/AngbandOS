@@ -8677,9 +8677,9 @@ namespace AngbandOS.Core
                 return;
             }
             // If it's a fixed artifact then use its ability
-            if (item.FixedArtifact != null && typeof(IActivatible).IsAssignableFrom(item.FixedArtifact.BaseFixedArtifact.GetType()))
+            if (item.FixedArtifact != null && typeof(IActivatible).IsAssignableFrom(item.FixedArtifact.GetType()))
             {
-                IActivatible activatibleFixedArtifact = (IActivatible)item.FixedArtifact.BaseFixedArtifact;
+                IActivatible activatibleFixedArtifact = (IActivatible)item.FixedArtifact;
                 activatibleFixedArtifact.ActivateItem(this, item);
                 return;
             }
@@ -19280,7 +19280,7 @@ namespace AngbandOS.Core
             {
                 return;
             }
-            FixedArtifact? aPtr = SingletonRepository.FixedArtifacts.SingleOrDefault(_fixedArtifact => _fixedArtifact.Value.BaseFixedArtifact.FixedArtifactID == aIdx).Value;
+            FixedArtifact? aPtr = SingletonRepository.FixedArtifacts.SingleOrDefault(_fixedArtifact => _fixedArtifact.Value.FixedArtifactID == aIdx).Value;
             if (aPtr == null)
             {
                 return;
@@ -19301,7 +19301,7 @@ namespace AngbandOS.Core
             qPtr.BonusToHit = aPtr.ToH;
             qPtr.BonusDamage = aPtr.ToD;
             qPtr.Weight = aPtr.Weight;
-            if (aPtr.FixedArtifactItemCharacteristics.Cursed)
+            if (aPtr.Cursed)
             {
                 qPtr.IdentCursed = true;
             }

@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class SoftLeatherArmourOfTheKoboldChiefFixedArtifact : BaseFixedArtifact
+internal class SoftLeatherArmourOfTheKoboldChiefFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private SoftLeatherArmourOfTheKoboldChiefFixedArtifact(SaveGame saveGame)

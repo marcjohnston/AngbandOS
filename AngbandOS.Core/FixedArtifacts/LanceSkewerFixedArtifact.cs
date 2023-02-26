@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class LanceSkewerFixedArtifact : BaseFixedArtifact
+internal class LanceSkewerFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private LanceSkewerFixedArtifact(SaveGame saveGame)

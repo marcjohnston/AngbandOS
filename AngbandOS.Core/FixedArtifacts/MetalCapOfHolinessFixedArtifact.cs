@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class MetalCapOfHolinessFixedArtifact : BaseFixedArtifact
+internal class MetalCapOfHolinessFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private MetalCapOfHolinessFixedArtifact(SaveGame saveGame)

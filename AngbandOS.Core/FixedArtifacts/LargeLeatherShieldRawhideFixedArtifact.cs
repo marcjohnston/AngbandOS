@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class LargeLeatherShieldRawhideFixedArtifact : BaseFixedArtifact
+internal class LargeLeatherShieldRawhideFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private LargeLeatherShieldRawhideFixedArtifact(SaveGame saveGame)

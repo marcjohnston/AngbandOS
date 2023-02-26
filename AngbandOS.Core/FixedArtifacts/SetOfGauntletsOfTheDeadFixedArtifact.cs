@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class SetOfGauntletsOfTheDeadFixedArtifact : BaseFixedArtifact, IActivatible
+internal class SetOfGauntletsOfTheDeadFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
     private SetOfGauntletsOfTheDeadFixedArtifact(SaveGame saveGame)

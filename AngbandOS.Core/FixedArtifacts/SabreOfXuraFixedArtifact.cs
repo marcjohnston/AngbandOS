@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class SabreOfXuraFixedArtifact : BaseFixedArtifact
+internal class SabreOfXuraFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private SabreOfXuraFixedArtifact(SaveGame saveGame)

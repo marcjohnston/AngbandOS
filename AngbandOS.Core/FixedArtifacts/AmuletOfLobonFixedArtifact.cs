@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class AmuletOfLobonFixedArtifact : BaseFixedArtifact, IActivatible
+internal class AmuletOfLobonFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
     private AmuletOfLobonFixedArtifact(SaveGame saveGame)

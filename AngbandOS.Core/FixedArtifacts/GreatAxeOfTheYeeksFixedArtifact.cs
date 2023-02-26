@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class GreatAxeOfTheYeeksFixedArtifact : BaseFixedArtifact
+internal class GreatAxeOfTheYeeksFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private GreatAxeOfTheYeeksFixedArtifact(SaveGame saveGame)

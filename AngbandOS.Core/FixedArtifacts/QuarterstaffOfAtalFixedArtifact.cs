@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class QuarterstaffOfAtalFixedArtifact : BaseFixedArtifact, IActivatible
+internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
     private QuarterstaffOfAtalFixedArtifact(SaveGame saveGame)

@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class MainGaucheOfDefenceFixedArtifact : BaseFixedArtifact
+internal class MainGaucheOfDefenceFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private MainGaucheOfDefenceFixedArtifact(SaveGame saveGame)

@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class SetOfLeatherGlovesCalfskinFixedArtifact : BaseFixedArtifact
+internal class SetOfLeatherGlovesCalfskinFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private SetOfLeatherGlovesCalfskinFixedArtifact(SaveGame saveGame)

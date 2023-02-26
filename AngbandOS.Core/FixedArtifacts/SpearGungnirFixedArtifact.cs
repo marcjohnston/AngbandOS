@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class SpearGungnirFixedArtifact : BaseFixedArtifact, IActivatible
+internal class SpearGungnirFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
     private SpearGungnirFixedArtifact(SaveGame saveGame)

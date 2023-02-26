@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class HalberdArmourbaneFixedArtifact : BaseFixedArtifact
+internal class HalberdArmourbaneFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private HalberdArmourbaneFixedArtifact(SaveGame saveGame)

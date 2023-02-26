@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class CloakShadeFixedArtifact : BaseFixedArtifact
+internal class CloakShadeFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private CloakShadeFixedArtifact(SaveGame saveGame)

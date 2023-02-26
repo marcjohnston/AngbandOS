@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class NecklaceOfTheDwarvesFixedArtifact : BaseFixedArtifact
+internal class NecklaceOfTheDwarvesFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private NecklaceOfTheDwarvesFixedArtifact(SaveGame saveGame)

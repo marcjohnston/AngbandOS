@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class CutlassOfBlackbeardFixedArtifact : BaseFixedArtifact
+internal class CutlassOfBlackbeardFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private CutlassOfBlackbeardFixedArtifact(SaveGame saveGame)

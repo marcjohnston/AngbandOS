@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class PairOfMetalShodBootsOfTheBlackReaverFixedArtifact : BaseFixedArtifact
+internal class PairOfMetalShodBootsOfTheBlackReaverFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private PairOfMetalShodBootsOfTheBlackReaverFixedArtifact(SaveGame saveGame)

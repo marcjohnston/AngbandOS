@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class KatanaOfGrooFixedArtifact : BaseFixedArtifact
+internal class KatanaOfGrooFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private KatanaOfGrooFixedArtifact(SaveGame saveGame)

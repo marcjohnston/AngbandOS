@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class FullPlateArmourOfTheGodsFixedArtifact : BaseFixedArtifact
+internal class FullPlateArmourOfTheGodsFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private FullPlateArmourOfTheGodsFixedArtifact(SaveGame saveGame)

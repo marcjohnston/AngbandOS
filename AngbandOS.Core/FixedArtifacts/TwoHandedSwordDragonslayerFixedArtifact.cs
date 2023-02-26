@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class TwoHandedSwordDragonslayerFixedArtifact : BaseFixedArtifact
+internal class TwoHandedSwordDragonslayerFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private TwoHandedSwordDragonslayerFixedArtifact(SaveGame saveGame)

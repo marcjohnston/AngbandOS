@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class BladeOfChaosDoomcallerFixedArtifact : BaseFixedArtifact
+internal class BladeOfChaosDoomcallerFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private BladeOfChaosDoomcallerFixedArtifact(SaveGame saveGame)

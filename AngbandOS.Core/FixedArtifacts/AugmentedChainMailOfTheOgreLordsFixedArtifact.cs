@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : BaseFixedArtifact, IActivatible
+internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
     private AugmentedChainMailOfTheOgreLordsFixedArtifact(SaveGame saveGame)

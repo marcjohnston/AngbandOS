@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class StarEssenceOfXothFixedArtifact : BaseFixedArtifact, IActivatible
+internal class StarEssenceOfXothFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
     private StarEssenceOfXothFixedArtifact(SaveGame saveGame)
