@@ -708,7 +708,7 @@ namespace AngbandOS.Core
                 }
                 else if (RareItemTypeIndex != RareItemTypeEnum.None)
                 {
-                    RareItemType ePtr = SaveGame.RareItemTypes[RareItemTypeIndex];
+                    RareItem ePtr = SaveGame.SingletonRepository.RareItemTypes[RareItemTypeIndex];
                     basenm += ' ';
                     basenm += ePtr.Name;
                 }
@@ -1186,8 +1186,8 @@ namespace AngbandOS.Core
             // Now merge the characteristics from the rare item type, if there is one.
             if (RareItemTypeIndex != RareItemTypeEnum.None)
             {
-                RareItemType ePtr = SaveGame.RareItemTypes[RareItemTypeIndex];
-                Characteristics.Merge(ePtr.RareItemCharacteristics);
+                RareItem ePtr = SaveGame.SingletonRepository.RareItemTypes[RareItemTypeIndex];
+                Characteristics.Merge(ePtr);
             }
 
             Characteristics.Merge(RandartItemCharacteristics);
@@ -1824,7 +1824,7 @@ namespace AngbandOS.Core
             }
             else if (RareItemTypeIndex != RareItemTypeEnum.None)
             {
-                RareItemType ePtr = SaveGame.RareItemTypes[RareItemTypeIndex];
+                RareItem ePtr = SaveGame.SingletonRepository.RareItemTypes[RareItemTypeIndex];
                 if (ePtr.Cost == 0)
                 {
                     return 0;
@@ -2059,7 +2059,7 @@ namespace AngbandOS.Core
             }
             else if (RareItemTypeIndex != RareItemTypeEnum.None)
             {
-                RareItemType ePtr = SaveGame.RareItemTypes[RareItemTypeIndex];
+                RareItem ePtr = SaveGame.SingletonRepository.RareItemTypes[RareItemTypeIndex];
                 switch (RareItemTypeIndex)
                 {
                     case RareItemTypeEnum.WeaponElderSign:
@@ -2114,7 +2114,7 @@ namespace AngbandOS.Core
                 {
                     IdentBroken = true;
                 }
-                if (ePtr.RareItemCharacteristics.Cursed)
+                if (ePtr.Cursed)
                 {
                     IdentCursed = true;
                 }

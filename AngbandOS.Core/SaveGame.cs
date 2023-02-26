@@ -115,7 +115,6 @@ namespace AngbandOS.Core
         public const int HurtChance = 16;
 
         public ExPlayer ExPlayer;
-        public RareItemTypeArray RareItemTypes;
         private readonly List<string> _messageBuf = new List<string>();
         private readonly List<int> _messageCounts = new List<int>();
         private int _msgPrintP;
@@ -324,7 +323,6 @@ namespace AngbandOS.Core
 
             _autoNavigator = new AutoNavigator(this);
             Quests = new QuestArray(this);
-            PopulateNewProfile();
             Dungeons = Dungeon.NewDungeonList();
             PatronList = Patron.NewPatronList(this);
             InitializeAllocationTables();
@@ -353,11 +351,6 @@ namespace AngbandOS.Core
                     }
                 }
             }
-        }
-
-        private void PopulateNewProfile()
-        {
-            RareItemTypes = new RareItemTypeArray(this);
         }
 
         public int GetMonsterIndexFromName(string name)

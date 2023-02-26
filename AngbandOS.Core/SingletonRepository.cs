@@ -15,7 +15,7 @@ namespace AngbandOS.Core
         public SingletonDictionaryFactory<string, Animation> Animations;
         public SingletonFactory<Vault> Vaults;
         public SingletonDictionaryFactory<string, FloorTileType> FloorTileTypes;
-        public SingletonDictionaryFactory<string, Base2RareItemType> RareItemTypes;
+        public SingletonDictionaryFactory<RareItemTypeEnum, RareItem> RareItemTypes;
 
         public SingletonFactory<InGameCommand> InGameCommands;
         public SingletonFactory<WizardCommand> WizardCommands;
@@ -82,7 +82,7 @@ namespace AngbandOS.Core
             Animations = new SingletonDictionaryFactory<string, Animation>(saveGame, LoadTypesFromAssembly<Animation>(saveGame), (_animation => _animation.Name));
             Vaults = new SingletonFactory<Vault>(saveGame, LoadTypesFromAssembly<Vault>(saveGame));
             FloorTileTypes = new SingletonDictionaryFactory<string, FloorTileType>(saveGame, LoadTypesFromAssembly<FloorTileType>(saveGame), (_floorTileType => _floorTileType.Name));
-            RareItemTypes = new SingletonDictionaryFactory<string, Base2RareItemType>(saveGame, LoadTypesFromAssembly<Base2RareItemType>(saveGame), (_rareItemType => _rareItemType.Name));
+            RareItemTypes = new SingletonDictionaryFactory<RareItemTypeEnum, RareItem>(saveGame, LoadTypesFromAssembly<RareItem>(saveGame), _rareItemType => _rareItemType.RareItemType);
             FixedArtifacts = new SingletonDictionaryFactory<FixedArtifactId, FixedArtifact>(saveGame, LoadTypesFromAssembly<FixedArtifact>(saveGame), (_fixedArtifact => _fixedArtifact.FixedArtifactID));
 
             MonsterRace[] monsterRaces = LoadTypesFromAssembly<MonsterRace>(saveGame).OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();

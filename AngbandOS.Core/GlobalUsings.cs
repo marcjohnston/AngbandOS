@@ -38,7 +38,7 @@ global using AngbandOS.Core.PotionFlavours;
 global using AngbandOS.Core.ProjectileGraphics;
 global using AngbandOS.Core.Projection;
 global using AngbandOS.Core.Races;
-global using AngbandOS.Core.RareItemTypes;
+global using AngbandOS.Core.RareItems;
 global using AngbandOS.Core.Realms;
 global using AngbandOS.Core.RingFlavours;
 global using AngbandOS.Core.RodFlavours;
