@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 
 namespace AngbandOS.Core
 {
@@ -21,6 +22,23 @@ namespace AngbandOS.Core
         public SingletonFactory<BaseCharacterClass> CharacterClasses;
         public SingletonFactory<BaseRealm> Realms;
 
+        public T[] LoadTypesFromAssembly<T>(SaveGame saveGame)
+        {
+            List<T> typeList = new List<T>();
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            foreach (Type type in assembly.GetTypes())
+            {
+                // Load Commands.
+                if (!type.IsAbstract && typeof(T).IsAssignableFrom(type))
+                {
+                    ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
+                    T command = (T)constructors[0].Invoke(new object[] { saveGame });
+                    typeList.Add(command);
+                }
+            }
+            return typeList.ToArray();
+        }
+
         public void Initialize(SaveGame saveGame)
         {
             InGameCommands = new SingletonFactory<InGameCommand>(saveGame);
@@ -39,30 +57,31 @@ namespace AngbandOS.Core
             }
             FixedArtifacts = new SingletonDictionaryFactory<FixedArtifactId, FixedArtifact>(saveGame, dictionary);
 
-            int index = 0;
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            List<MonsterRace> monsterRaces = new List<MonsterRace>();
-            for (int level = -1; level < 128; level++)
-            {
-                foreach (Type type in assembly.GetTypes())
-                {
-                    // Check to see if the type implements the MonsterRace interface and is not an abstract class.
-                    if (!type.IsAbstract && typeof(MonsterRace).IsAssignableFrom(type))
-                    {
-                        // Load the monster.
-                        ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
-                        MonsterRace monsterRace = (MonsterRace)constructors[0].Invoke(new object[] { saveGame });
+            //int index = 0;
+            //Assembly assembly = Assembly.GetExecutingAssembly();
+            //List<MonsterRace> monsterRaces = new List<MonsterRace>();
+            //for (int level = -1; level < 128; level++)
+            //{
+            //    foreach (Type type in assembly.GetTypes())
+            //    {
+            //        // Check to see if the type implements the MonsterRace interface and is not an abstract class.
+            //        if (!type.IsAbstract && typeof(MonsterRace).IsAssignableFrom(type))
+            //        {
+            //            // Load the monster.
+            //            ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
+            //            MonsterRace monsterRace = (MonsterRace)constructors[0].Invoke(new object[] { saveGame });
 
-                        if (monsterRace.LevelFound == level)
-                        {
-                            monsterRace.Index = index;
-                            monsterRaces.Add(monsterRace);
-                            index++;
-                        }
-                    }
-                }
-            }
-            MonsterRaces = new SingletonFactory<MonsterRace>(saveGame, monsterRaces.ToArray());
+            //            if (monsterRace.LevelFound == level)
+            //            {
+            //                monsterRace.Index = index;
+            //                monsterRaces.Add(monsterRace);
+            //                index++;
+            //            }
+            //        }
+            //    }
+            //}
+            MonsterRace[] monsterRaces = LoadTypesFromAssembly<MonsterRace>(saveGame).OrderBy(_monsterRace => _monsterRace.Level).ToArray();
+            MonsterRaces = new SingletonFactory<MonsterRace>(saveGame, monsterRaces);
             Races = new SingletonFactory<Race>(saveGame);
         }
     }

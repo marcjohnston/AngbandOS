@@ -1,5 +1,8 @@
 ﻿namespace AngbandOS.Core.Interface;
 
+/// <summary>
+/// Represents a line of text to be rendered onto the console.
+/// </summary>
 public class PrintLine
 {
     public int row { get; set; }

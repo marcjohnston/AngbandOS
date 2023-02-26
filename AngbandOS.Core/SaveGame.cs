@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace AngbandOS.Core
@@ -263,7 +264,8 @@ namespace AngbandOS.Core
         /// <summary>
         /// Creates a new game.
         /// </summary>
-        public SaveGame()
+        /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
+        public SaveGame(Configuration? configuration)
         {
             RedrawMapFlaggedAction = new RedrawMapFlaggedAction(this);
             RedrawEquippyFlaggedAction = new RedrawEquippyFlaggedAction(this);
@@ -316,7 +318,12 @@ namespace AngbandOS.Core
                 RedrawPlayerFlaggedAction, RedrawTitleFlaggedAction, RedrawStatsFlaggedAction, RedrawLevelFlaggedAction, RedrawExpFlaggedAction, RedrawGoldFlaggedAction,
                 RedrawArmorFlaggedAction, RedrawHpFlaggedAction, RedrawManaFlaggedAction, RedrawDepthFlaggedAction, RedrawHealthFlaggedAction, RedrawSpeedFlaggedAction);
 
+            // Load all of the predefined objects.
             SingletonRepository.Initialize(this);
+
+            // Configure the game.
+            Configure(configuration);
+
             _autoNavigator = new AutoNavigator(this);
             Quests = new QuestArray(this);
             PopulateNewProfile();
@@ -324,6 +331,31 @@ namespace AngbandOS.Core
             Dungeons = Dungeon.NewDungeonList();
             PatronList = Patron.NewPatronList(this);
             InitializeAllocationTables();
+        }
+
+        private void Configure(Configuration? configuration)
+        {
+            if (configuration != null)
+            {
+                // Stores repo.
+                if (configuration.StoresRepo != null)
+                {
+                    foreach (StoreConfiguration storeConfiguration in configuration.StoresRepo)
+                    {
+
+                    }
+                }
+
+                // Stores.
+                if (configuration.StoresRepo != null)
+                {
+                    //SingletonRepository.sto
+                    foreach (string storeName in configuration.StoreNames)
+                    {
+
+                    }
+                }
+            }
         }
 
         private void PopulateNewProfile()
@@ -477,17 +509,31 @@ namespace AngbandOS.Core
             PersistentStorage?.WriteGame(gameDetails, memoryStream.ToArray());
         }
 
-        public static SaveGame Initialize(ICorePersistentStorage persistentStorage)
+        /// <summary>
+        /// Retrieves a save game from persistent storage.  If no persistent storage is specified, a new game is created. This static method is used as a factory
+        /// to generate the SaveGame object that can be played using the Play method.
+        /// </summary>
+        /// <param name="persistentStorage"></param>
+        /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
+        /// <returns></returns>
+        public static SaveGame Initialize(ICorePersistentStorage? persistentStorage, Configuration? configuration)
         {
-            byte[] data = null;
+            byte[]? data = null;
 
             // Retrieve the game from the persistent storage.
             if (persistentStorage != null)
+            {
+                // Retrieve the saved game from the persistent storage.  If the persistent storage doesn't find it, the return data is expected to be null; which
+                // will indicate that a new game needs to be created.
                 data = persistentStorage.ReadGame();
+            }
 
-            // The game doesn't exist.  Start a new one.
+            // Check to see if the game needs to be created?
             if (data == null)
-                return new SaveGame();
+            {
+                // The game doesn't exist.  Start a new one.
+                return new SaveGame(configuration);
+            }
             else
             {
                 // Deserialize the game.
@@ -518,6 +564,12 @@ namespace AngbandOS.Core
             }
         }
 
+        /// <summary>
+        /// Plays the current game.
+        /// </summary>
+        /// <param name="console"></param>
+        /// <param name="persistentStorage"></param>
+        /// <param name="updateNotification"></param>
         public void Play(IConsole console, ICorePersistentStorage persistentStorage, IUpdateNotifier updateNotification)
         {
             _console = console;

@@ -395,7 +395,7 @@
 
         protected MonsterRace(SaveGame saveGame)
         {
-            SaveGame = SaveGame;
+            SaveGame = saveGame;
             Knowledge = new MonsterKnowledge(saveGame, this);
             int freqInate = (FreqInate == 0 ? 0 : 100 / FreqInate);
             int freqSpell = (FreqSpell == 0 ? 0 : 100 / FreqSpell);

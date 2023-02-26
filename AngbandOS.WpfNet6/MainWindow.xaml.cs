@@ -198,11 +198,11 @@ namespace Cthangband
 
         private void Thread_DoWork(object? sender, DoWorkEventArgs e)
         {
-            GameServer game = new GameServer();
+            GameServer gameServer = new GameServer();
             string savePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string saveFilename = Path.Combine(savePath, "My Games\\angbandos.savefile");
             ICorePersistentStorage persistentStorage = new AngbandOS.PersistentStorage.FileSystemPersistentStorage(saveFilename);
-            game.Play(this, persistentStorage, null);
+            gameServer.Play(this, persistentStorage, null);
         }
 
         public BackgroundImage BackgroundImage

@@ -1,12 +1,15 @@
 ﻿namespace AngbandOS.Core
 {
     /// <summary>
-    /// Represents an encapsulating  wrapper for a saved gamed that publically exposes various functionality.
+    /// Represents an encapsulating wrapper for an in-progrss game.  This wrapper exposes public functionality.
     /// SaveGame objects are internal.
     /// </summary>
     public class GameServer
     {
-        private SaveGame saveGame;
+        /// <summary>
+        /// Represents the in-progress game.
+        /// </summary>
+        private SaveGame SaveGame;
 
         /// <summary>
         /// Returns the current level of the player.  If the player is dead, null is returned.
@@ -16,10 +19,10 @@
         {
             get
             {
-                if (saveGame?.Player == null)
+                if (SaveGame?.Player == null)
                     return null;
                 else
-                    return saveGame.Player.Level;
+                    return SaveGame.Player.Level;
             }
         }
 
@@ -31,10 +34,10 @@
         {
             get
             {
-                if (saveGame?.Player == null)
+                if (SaveGame?.Player == null)
                     return null;
                 else
-                    return saveGame.Player.Gold;
+                    return SaveGame.Player.Gold;
             }
         }
 
@@ -46,10 +49,10 @@
         {
             get
             {
-                if (saveGame?.Player == null)
+                if (SaveGame?.Player == null)
                     return null;
                 else
-                    return saveGame.Player.Name;
+                    return SaveGame.Player.Name;
             }
         }
 
@@ -60,9 +63,9 @@
         {
             get
             {
-                if (saveGame?.Player?.GameTime == null)
+                if (SaveGame?.Player?.GameTime == null)
                     return null;
-                return saveGame.Player.GameTime.ElapsedGameTime;
+                return SaveGame.Player.GameTime.ElapsedGameTime;
             }
         }
 
@@ -73,21 +76,28 @@
         {
             get
             {
-                if (saveGame?.LastInputReceived == null)
+                if (SaveGame?.LastInputReceived == null)
                     return null;
-                return saveGame.LastInputReceived;
+                return SaveGame.LastInputReceived;
             }
         }
 
+        /// <summary>
+        /// Refresh a spectator console.  
+        /// </summary>
+        /// <param name="spectatorConsole"></param>
         public void RefreshSpectatorConsole(IConsole spectatorConsole)
         {
-            saveGame.Screen.RefreshSpectatorConsole(spectatorConsole);
+            SaveGame.Screen.RefreshSpectatorConsole(spectatorConsole);
         }
 
+        /// <summary>
+        /// Request the in-progress game to be shutdown.
+        /// </summary>
         public void InitiateShutDown()
         {
-            if (saveGame != null)
-                saveGame.Shutdown = true;
+            if (SaveGame != null)
+                SaveGame.Shutdown = true;
         }
 
         /// <summary>
@@ -96,13 +106,15 @@
         /// <param name="console"></param>
         /// <param name="persistentStorage"></param>
         /// <param name="updateNotifier"></param>
+        /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
         /// <returns></returns>
-        public bool Play(IConsole console, ICorePersistentStorage persistentStorage, IUpdateNotifier updateNotifier)
+        public bool Play(IConsole console, ICorePersistentStorage persistentStorage, IUpdateNotifier updateNotifier, Configuration? configuration = null)
         {
             try
             {
-                saveGame = SaveGame.Initialize(persistentStorage);
-                saveGame.Play(console, persistentStorage, updateNotifier);
+                // Retrieve the game from persistent storage
+                SaveGame = SaveGame.Initialize(persistentStorage, configuration);
+                SaveGame.Play(console, persistentStorage, updateNotifier);
             }
             catch (Exception ex)
             {

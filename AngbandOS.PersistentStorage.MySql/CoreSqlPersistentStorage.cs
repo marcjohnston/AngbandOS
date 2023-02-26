@@ -32,6 +32,10 @@ namespace AngbandOS.PersistentStorage
             GameGuid = guid;
         }
 
+        /// <summary>
+        /// Retrieves and returns a saved game from the MySql database.  If the game does not exist, null is returned.
+        /// </summary>
+        /// <returns></returns>
         public byte[]? ReadGame()
         {
             using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))

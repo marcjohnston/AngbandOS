@@ -92,6 +92,7 @@ import { TableOfContentsComponent } from './manual/table-of-contents/table-of-co
 import { ChatComponent } from './chat/chat.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PreferencesDialogComponent } from './preferences-dialog/preferences-dialog.component';
+import { GameDesignerComponent } from './game-designer/game-designer.component';
 
 @NgModule({
   declarations: [
@@ -165,7 +166,8 @@ import { PreferencesDialogComponent } from './preferences-dialog/preferences-dia
     UiComponent,
     ChatComponent,
     DashboardComponent,
-    PreferencesDialogComponent
+    PreferencesDialogComponent,
+    GameDesignerComponent
   ],
   imports: [
     MatTableModule,
@@ -193,6 +195,7 @@ import { PreferencesDialogComponent } from './preferences-dialog/preferences-dia
       { path: 'watch/:guid', component: WatchComponent },
 
       { path: 'ui', component: UiComponent },
+      { path: 'game-designer', component: GameDesignerComponent },
       { path: 'dashboard', component: DashboardComponent },
 
       { path: 'accounts/login', component: LoginComponent },
