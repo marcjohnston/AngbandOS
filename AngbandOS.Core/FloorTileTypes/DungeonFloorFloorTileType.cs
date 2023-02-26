@@ -3,6 +3,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 [Serializable]
 internal class DungeonFloorFloorTileType : FloorTileType
 {
+    private DungeonFloorFloorTileType(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '·';
     public override string Name => "DungeonFloor";
     public override string AppearAs => "DungeonFloor";

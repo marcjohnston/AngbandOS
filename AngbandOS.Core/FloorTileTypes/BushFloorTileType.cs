@@ -3,6 +3,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 [Serializable]
 internal class BushFloorTileType : FloorTileType
 {
+    private BushFloorTileType(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '*';
     public override Colour Colour => Colour.BrightGreen;
     public override string Name => "Bush";

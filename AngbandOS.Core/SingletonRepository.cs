@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using AngbandOS.Core.ProjectileGraphics;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace AngbandOS.Core
@@ -9,11 +10,17 @@ namespace AngbandOS.Core
     /// </summary>
     internal class SingletonRepository
     {
+        public SingletonDictionaryFactory<FixedArtifactId, FixedArtifact> FixedArtifacts;
+        public SingletonDictionaryFactory<string, ProjectileGraphic> ProjectileGraphics;
+        public SingletonDictionaryFactory<string, Animation> Animations;
+        public SingletonDictionaryFactory<string, Vault> Vaults;
+        public SingletonDictionaryFactory<string, FloorTileType> FloorTileTypes;
+        public SingletonDictionaryFactory<string, Base2RareItemType> RareItemTypes;
+
         public SingletonFactory<InGameCommand> InGameCommands;
         public SingletonFactory<WizardCommand> WizardCommands;
         public SingletonFactory<ItemClass> ItemCategories;
         public SingletonFactory<BaseFixedArtifact> BaseFixedArtifacts;
-        public SingletonDictionaryFactory<FixedArtifactId, FixedArtifact> FixedArtifacts;
         public SingletonFactory<MonsterRace> MonsterRaces;
         public SingletonFactory<BaseInventorySlot> InventorySlots;
         public SingletonFactory<Race> Races;
@@ -24,7 +31,6 @@ namespace AngbandOS.Core
         public SingletonFactory<Town> Towns;
         public SingletonFactory<AmuletFlavour> AmuletFlavours;
         public SingletonFactory<MushroomFlavour> MushroomFlavours;
-
         public SingletonFactory<PotionFlavour> PotionFlavours;
         public SingletonFactory<RingFlavour> RingFlavours;
         public SingletonFactory<RodFlavour> RodFlavours;
@@ -74,6 +80,11 @@ namespace AngbandOS.Core
             StaffFlavours = new SingletonFactory<StaffFlavour>(saveGame, LoadTypesFromAssembly<StaffFlavour>(saveGame));
             WandFlavours = new SingletonFactory<WandFlavour>(saveGame, LoadTypesFromAssembly<WandFlavour>(saveGame));
             ChestTrapConfigurations = new SingletonFactory<ChestTrapConfiguration>(saveGame, LoadTypesFromAssembly<ChestTrapConfiguration>(saveGame));
+            ProjectileGraphics = new SingletonDictionaryFactory<string, ProjectileGraphic>(saveGame, LoadTypesFromAssembly<ProjectileGraphic>(saveGame), (_projectileGraphic => _projectileGraphic.Name));
+            Animations = new SingletonDictionaryFactory<string, Animation>(saveGame, LoadTypesFromAssembly<Animation>(saveGame), (_animation => _animation.Name));
+            Vaults = new SingletonDictionaryFactory<string, Vault>(saveGame, LoadTypesFromAssembly<Vault>(saveGame), (_vaultType => _vaultType.Name));
+            FloorTileTypes = new SingletonDictionaryFactory<string, FloorTileType>(saveGame, LoadTypesFromAssembly<FloorTileType>(saveGame), (_floorTileType => _floorTileType.Name));
+            RareItemTypes = new SingletonDictionaryFactory<string, Base2RareItemType>(saveGame, LoadTypesFromAssembly<Base2RareItemType>(saveGame), (_rareItemType => _rareItemType.Name));
 
             Dictionary<FixedArtifactId, FixedArtifact> dictionary = new Dictionary<FixedArtifactId, FixedArtifact>();
             foreach (BaseFixedArtifact baseFixedArtifact in BaseFixedArtifacts)

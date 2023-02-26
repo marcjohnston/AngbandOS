@@ -3,6 +3,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 [Serializable]
 internal class QuartzVisTreasFloorTileType : FloorTileType
 {
+    private QuartzVisTreasFloorTileType(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '*';
     public override Colour Colour => Colour.BrightRed;
     public override string Name => "QuartzVisTreas";

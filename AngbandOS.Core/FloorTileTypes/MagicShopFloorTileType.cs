@@ -3,6 +3,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 [Serializable]
 internal class MagicShopFloorTileType : FloorTileType
 {
+    private MagicShopFloorTileType(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '6';
     public override Colour Colour => Colour.Red;
     public override string Name => "MagicShop";

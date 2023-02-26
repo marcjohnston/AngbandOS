@@ -3,6 +3,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 [Serializable]
 internal class WeaponsmithsFloorTileType : FloorTileType
 {
+    private WeaponsmithsFloorTileType(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '3';
     public override string Name => "Weaponsmiths";
     public override string AppearAs => "Weaponsmiths";

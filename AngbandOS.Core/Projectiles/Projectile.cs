@@ -52,9 +52,9 @@ namespace AngbandOS.Core.Projection
             int[] gy = new int[256];
             int[] gm = new int[32];
             int gmRad = rad;
-            ProjectileGraphic projectileEntity = string.IsNullOrEmpty(BoltGraphic) ? null : ObjectRepository.ProjectileGraphics[BoltGraphic];
-            ProjectileGraphic impactEntity = string.IsNullOrEmpty(ImpactGraphic) ? null : ObjectRepository.ProjectileGraphics[ImpactGraphic];
-            Animation animationEntity = string.IsNullOrEmpty(EffectAnimation) ? null : ObjectRepository.Animations[EffectAnimation];
+            ProjectileGraphic projectileEntity = string.IsNullOrEmpty(BoltGraphic) ? null : SaveGame.SingletonRepository.ProjectileGraphics[BoltGraphic];
+            ProjectileGraphic impactEntity = string.IsNullOrEmpty(ImpactGraphic) ? null : SaveGame.SingletonRepository.ProjectileGraphics[ImpactGraphic];
+            Animation animationEntity = string.IsNullOrEmpty(EffectAnimation) ? null : SaveGame.SingletonRepository.Animations[EffectAnimation];
             if ((flg & ProjectionFlag.ProjectJump) != 0)
             {
                 x1 = x;

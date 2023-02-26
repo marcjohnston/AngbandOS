@@ -3,6 +3,7 @@ namespace AngbandOS.Core.RareItemTypes;
 [Serializable]
 internal class GlovesOfFreeActionRareItemType : Base2RareItemType
 {
+    private GlovesOfFreeActionRareItemType(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => ']';
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Gloves of Free Action";

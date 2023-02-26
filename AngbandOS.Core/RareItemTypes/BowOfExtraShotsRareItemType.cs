@@ -3,6 +3,7 @@ namespace AngbandOS.Core.RareItemTypes;
 [Serializable]
 internal class BowOfExtraShotsRareItemType : Base2RareItemType
 {
+    private BowOfExtraShotsRareItemType(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '}';
     public override Colour Colour => Colour.Brown;
     public override string Name => "Bow of Extra Shots";

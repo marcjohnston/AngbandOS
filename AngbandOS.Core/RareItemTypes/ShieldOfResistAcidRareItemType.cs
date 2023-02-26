@@ -3,6 +3,7 @@ namespace AngbandOS.Core.RareItemTypes;
 [Serializable]
 internal class ShieldOfResistAcidRareItemType : Base2RareItemType
 {
+    private ShieldOfResistAcidRareItemType(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => ')';
     public override Colour Colour => Colour.Brown;
     public override string Name => "Shield of Resist Acid";

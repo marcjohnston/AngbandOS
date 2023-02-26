@@ -489,7 +489,7 @@ namespace AngbandOS.Core.Stores
         {
             get
             {
-                string storeName = ObjectRepository.FloorTileTypes[FeatureType].Description;
+                string storeName = SaveGame.SingletonRepository.FloorTileTypes[FeatureType].Description;
                 return $"{storeName} ({_owner.MaxCost})";
             }
         }

@@ -3,6 +3,7 @@ namespace AngbandOS.Core.RareItemTypes;
 [Serializable]
 internal class WeaponOfSlayingRareItemType : Base2RareItemType
 {
+    private WeaponOfSlayingRareItemType(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "Weapon of Slaying";

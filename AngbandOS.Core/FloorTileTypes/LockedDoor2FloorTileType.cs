@@ -3,6 +3,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 [Serializable]
 internal class LockedDoor2FloorTileType : FloorTileType
 {
+    private LockedDoor2FloorTileType(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '+';
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "LockedDoor2";

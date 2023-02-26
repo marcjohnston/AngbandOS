@@ -11,6 +11,12 @@ namespace AngbandOS.Core.FloorTileTypes
     [Serializable]
     internal abstract class FloorTileType
     {
+        protected SaveGame SaveGame;
+        protected FloorTileType(SaveGame saveGame)
+        {
+            SaveGame = saveGame;
+        }
+
         public abstract char Character { get; }
         public virtual Colour Colour => Colour.White;
         public abstract string Name { get; }

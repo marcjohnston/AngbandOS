@@ -11,6 +11,12 @@ namespace AngbandOS.Core.Animations
     [Serializable]
     internal abstract class Animation
     {
+        protected SaveGame SaveGame;
+        protected Animation(SaveGame saveGame)
+        {
+            SaveGame = saveGame;
+        }
+
         public abstract char Character { get; }
         public abstract Colour Colour { get; }
         public abstract string Name { get; }

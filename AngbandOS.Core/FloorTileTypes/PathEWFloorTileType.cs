@@ -3,6 +3,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 [Serializable]
 internal class PathEWFloorTileType : FloorTileType
 {
+    private PathEWFloorTileType(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '-';
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "PathEW";

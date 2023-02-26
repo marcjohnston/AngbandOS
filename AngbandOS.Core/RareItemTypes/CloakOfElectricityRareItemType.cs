@@ -3,6 +3,7 @@ namespace AngbandOS.Core.RareItemTypes;
 [Serializable]
 internal class CloakOfElectricityRareItemType : Base2RareItemType
 {
+    private CloakOfElectricityRareItemType(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '(';
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Cloak of Electricity";

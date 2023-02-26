@@ -15396,7 +15396,7 @@ namespace AngbandOS.Core
                     Level.Grid[i] = new GridTile[Level.MaxWid];
                     for (int j = 0; j < Level.MaxWid; j++)
                     {
-                        Level.Grid[i][j] = new GridTile();
+                        Level.Grid[i][j] = new GridTile(this);
                         if (CurrentDepth == 0)
                         {
                             Level.Grid[i][j].SetBackgroundFeature("Grass");
@@ -18598,9 +18598,7 @@ namespace AngbandOS.Core
                 {
                     break;
                 }
-                string feat = string.IsNullOrEmpty(cPtr.FeatureType.AppearAs)
-                    ? ObjectRepository.FloorTileTypes[cPtr.BackgroundFeature.AppearAs].Name
-                    : ObjectRepository.FloorTileTypes[cPtr.FeatureType.AppearAs].Name;
+                string feat = string.IsNullOrEmpty(cPtr.FeatureType.AppearAs) ? SingletonRepository.FloorTileTypes[cPtr.BackgroundFeature.AppearAs].Name : SingletonRepository.FloorTileTypes[cPtr.FeatureType.AppearAs].Name;
                 if (cPtr.TileFlags.IsClear(GridTile.PlayerMemorised) && !Level.PlayerCanSeeBold(y, x))
                 {
                     feat = string.Empty;
@@ -18610,7 +18608,7 @@ namespace AngbandOS.Core
                     string name = "unknown grid";
                     if (feat != string.Empty)
                     {
-                        name = ObjectRepository.FloorTileTypes[feat].Description;
+                        name = SingletonRepository.FloorTileTypes[feat].Description;
                         if (s2 != "" && cPtr.FeatureType.BlocksLos)
                         {
                             s2 = "in ";

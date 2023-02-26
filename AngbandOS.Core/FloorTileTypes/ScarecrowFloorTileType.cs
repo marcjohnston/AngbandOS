@@ -3,6 +3,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 [Serializable]
 internal class ScarecrowFloorTileType : FloorTileType
 {
+    private ScarecrowFloorTileType(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => 't';
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Scarecrow";

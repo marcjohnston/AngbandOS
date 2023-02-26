@@ -3,6 +3,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 [Serializable]
 internal class BlackMarketFloorTileType : FloorTileType
 {
+    private BlackMarketFloorTileType(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '7';
     public override Colour Colour => Colour.Black;
     public override string Name => "BlackMarket";

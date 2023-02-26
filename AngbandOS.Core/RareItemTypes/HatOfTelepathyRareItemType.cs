@@ -3,6 +3,7 @@ namespace AngbandOS.Core.RareItemTypes;
 [Serializable]
 internal class HatOfTelepathyRareItemType : Base2RareItemType
 {
+    private HatOfTelepathyRareItemType(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => ']';
     public override Colour Colour => Colour.Brown;
     public override string Name => "Hat of Telepathy";

@@ -25,6 +25,15 @@ namespace AngbandOS.Core
             return instances.GetEnumerator();
         }
 
+        public SingletonDictionaryFactory(SaveGame saveGame, TValue[] items, Func<TValue, TKey> keyRetrieval)
+        {
+            foreach (TValue item in items)
+            {
+                TKey key = keyRetrieval(item);
+                instances.Add(key, item);
+            }
+        }
+
         public SingletonDictionaryFactory(SaveGame saveGame, Dictionary<TKey, TValue> dictionary)
         {
             instances = dictionary;

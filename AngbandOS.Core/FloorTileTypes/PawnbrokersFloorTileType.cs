@@ -3,6 +3,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 [Serializable]
 internal class PawnbrokersFloorTileType : FloorTileType
 {
+    private PawnbrokersFloorTileType(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '0';
     public override Colour Colour => Colour.Turquoise;
     public override string Name => "Pawnbrokers";

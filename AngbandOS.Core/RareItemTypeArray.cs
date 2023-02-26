@@ -15,7 +15,7 @@ namespace AngbandOS.Core
     {
         public RareItemTypeArray(SaveGame saveGame)
         {
-            foreach (KeyValuePair<string, Base2RareItemType> pair in ObjectRepository.RareItemTypes)
+            foreach (KeyValuePair<string, Base2RareItemType> pair in saveGame.SingletonRepository.RareItemTypes)
             {
                 Add(pair.Value.RareItemType, new RareItemType(pair.Value));
             }

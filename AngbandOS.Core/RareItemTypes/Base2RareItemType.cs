@@ -11,6 +11,12 @@ namespace AngbandOS.Core.RareItemTypes
     [Serializable]
     internal abstract class Base2RareItemType : IItemCharacteristics
     {
+        protected SaveGame SaveGame;
+        protected Base2RareItemType(SaveGame saveGame)
+        {
+            SaveGame = saveGame;
+        }
+
         public abstract char Character { get; }
         public virtual Colour Colour => Colour.White;
         public abstract string Name { get; }

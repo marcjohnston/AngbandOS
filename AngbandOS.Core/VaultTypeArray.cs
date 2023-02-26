@@ -13,7 +13,7 @@ namespace AngbandOS.Core
     {
         public VaultTypeArray(SaveGame saveGame)
         {
-            foreach (KeyValuePair<string, Vault> baseType in ObjectRepository.Vaults)
+            foreach (KeyValuePair<string, Vault> baseType in saveGame.SingletonRepository.Vaults)
             {
                 Add(new VaultType(baseType.Value));
             }

@@ -3,6 +3,7 @@ namespace AngbandOS.Core.RareItemTypes;
 [Serializable]
 internal class ShieldOfReflectionRareItemType : Base2RareItemType
 {
+    private ShieldOfReflectionRareItemType(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => ')';
     public override Colour Colour => Colour.Brown;
     public override string Name => "Shield of Reflection";

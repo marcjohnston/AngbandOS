@@ -3,6 +3,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 [Serializable]
 internal class ArmouryFloorTileType : FloorTileType
 {
+    private ArmouryFloorTileType(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '2';
     public override Colour Colour => Colour.Grey;
     public override string Name => "Armoury";

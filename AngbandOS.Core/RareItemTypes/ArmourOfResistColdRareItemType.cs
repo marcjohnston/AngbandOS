@@ -3,6 +3,7 @@ namespace AngbandOS.Core.RareItemTypes;
 [Serializable]
 internal class ArmourOfResistColdRareItemType : Base2RareItemType
 {
+    private ArmourOfResistColdRareItemType(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '[';
     public override Colour Colour => Colour.Grey;
     public override string Name => "Armour of Resist Cold";

@@ -3,6 +3,7 @@ namespace AngbandOS.Core.RareItemTypes;
 [Serializable]
 internal class AmmoOfHurtEvilRareItemType : Base2RareItemType
 {
+    private AmmoOfHurtEvilRareItemType(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '{';
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Ammo of Hurt Evil";

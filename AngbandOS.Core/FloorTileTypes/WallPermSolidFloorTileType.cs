@@ -3,6 +3,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 [Serializable]
 internal class WallPermSolidFloorTileType : FloorTileType
 {
+    private WallPermSolidFloorTileType(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '#';
     public override string Name => "WallPermSolid";
     public override AlterAction? AlterAction => new TunnelAlterAction();

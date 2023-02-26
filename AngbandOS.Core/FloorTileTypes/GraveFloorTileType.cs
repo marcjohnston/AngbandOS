@@ -3,6 +3,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 [Serializable]
 internal class GraveFloorTileType : FloorTileType
 {
+    private GraveFloorTileType(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '+';
     public override string Name => "Grave";
     public override AlterAction? AlterAction => new TunnelAlterAction();

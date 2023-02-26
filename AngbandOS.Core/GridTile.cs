@@ -14,10 +14,12 @@ namespace AngbandOS.Core
     [Serializable]
     internal class GridTile
     {
-        public GridTile()
+        protected SaveGame SaveGame; // TODO: Remove this because it is heavyweight for GridTile objects
+        public GridTile(SaveGame saveGame)
         {
-            BackgroundFeature = ObjectRepository.FloorTileTypes["Nothing"];
-            FeatureType = ObjectRepository.FloorTileTypes["Nothing"];
+            SaveGame = saveGame;
+            BackgroundFeature = SaveGame.SingletonRepository.FloorTileTypes["Nothing"];
+            FeatureType = SaveGame.SingletonRepository.FloorTileTypes["Nothing"];
         }
 
         /// <summary>
@@ -107,7 +109,7 @@ namespace AngbandOS.Core
 
         public void SetBackgroundFeature(string name)
         {
-            BackgroundFeature = ObjectRepository.FloorTileTypes[name];
+            BackgroundFeature = SaveGame.SingletonRepository.FloorTileTypes[name];
         }
 
         /// <summary>
@@ -116,7 +118,7 @@ namespace AngbandOS.Core
         /// <param name="name"> </param>
         public void SetFeature(string name)
         {
-            FeatureType = ObjectRepository.FloorTileTypes[name];
+            FeatureType = SaveGame.SingletonRepository.FloorTileTypes[name];
         }
 
         public override string ToString()

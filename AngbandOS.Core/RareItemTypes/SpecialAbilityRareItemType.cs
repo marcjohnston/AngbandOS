@@ -3,6 +3,7 @@ namespace AngbandOS.Core.RareItemTypes;
 [Serializable]
 internal class SpecialAbilityRareItemType : Base2RareItemType
 {
+    private SpecialAbilityRareItemType(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => 'x';
     public override string Name => "Special Ability";
     public override int Cost => 0;

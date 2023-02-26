@@ -69,7 +69,7 @@ namespace AngbandOS.Core
                 Grid[i] = new GridTile[MaxWid];
                 for (int j = 0; j < MaxWid; j++)
                 {
-                    Grid[i][j] = new GridTile();
+                    Grid[i][j] = new GridTile(saveGame);
                 }
             }
             for (int j = 0; j < Constants.MaxOIdx; j++)
@@ -115,13 +115,13 @@ namespace AngbandOS.Core
         public void CaveSetBackground(int y, int x, string feat)
         {
             GridTile cPtr = Grid[y][x];
-            cPtr.BackgroundFeature = ObjectRepository.FloorTileTypes[feat];
+            cPtr.BackgroundFeature = SaveGame.SingletonRepository.FloorTileTypes[feat];
         }
 
         public void CaveSetFeat(int y, int x, string feat)
         {
             GridTile cPtr = Grid[y][x];
-            cPtr.FeatureType = ObjectRepository.FloorTileTypes[feat];
+            cPtr.FeatureType = SaveGame.SingletonRepository.FloorTileTypes[feat];
             NoteSpot(y, x);
             RedrawSingleLocation(y, x);
         }
@@ -1684,8 +1684,8 @@ namespace AngbandOS.Core
                 }
                 else
                 {
-                    a = ObjectRepository.FloorTileTypes["Nothing"].Colour;
-                    c = ObjectRepository.FloorTileTypes["Nothing"].Character;
+                    a = SaveGame.SingletonRepository.FloorTileTypes["Nothing"].Colour;
+                    c = SaveGame.SingletonRepository.FloorTileTypes["Nothing"].Character;
                 }
             }
             else
@@ -1693,8 +1693,8 @@ namespace AngbandOS.Core
                 if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorised))
                 {
                     feat = string.IsNullOrEmpty(feat.AppearAs)
-                        ? ObjectRepository.FloorTileTypes[cPtr.BackgroundFeature.AppearAs]
-                        : ObjectRepository.FloorTileTypes[feat.AppearAs];
+                        ? SaveGame.SingletonRepository.FloorTileTypes[cPtr.BackgroundFeature.AppearAs]
+                        : SaveGame.SingletonRepository.FloorTileTypes[feat.AppearAs];
                     c = feat.Character;
                     a = feat.Colour;
                     if (feat.DimsOutsideLOS)
@@ -1734,8 +1734,8 @@ namespace AngbandOS.Core
                 }
                 else
                 {
-                    a = ObjectRepository.FloorTileTypes["Nothing"].Colour;
-                    c = ObjectRepository.FloorTileTypes["Nothing"].Character;
+                    a = SaveGame.SingletonRepository.FloorTileTypes["Nothing"].Colour;
+                    c = SaveGame.SingletonRepository.FloorTileTypes["Nothing"].Character;
                 }
             }
             if (SaveGame.Player.TimedHallucinations.TurnsRemaining != 0 && Program.Rng.RandomLessThan(256) == 0 && (!cPtr.FeatureType.IsWall))

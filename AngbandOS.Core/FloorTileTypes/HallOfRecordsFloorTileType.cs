@@ -3,6 +3,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 [Serializable]
 internal class HallOfRecordsFloorTileType : FloorTileType
 {
+    private HallOfRecordsFloorTileType(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '8';
     public override Colour Colour => Colour.Yellow;
     public override string Name => "HallOfRecords";
