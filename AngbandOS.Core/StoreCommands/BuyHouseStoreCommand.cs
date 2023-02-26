@@ -13,7 +13,7 @@
 
         public override void Execute(StoreCommandEvent storeCommandEvent)
         {
-            HomeStore homeStore = HomeStore.FindHomeStore(SaveGame, SaveGame.CurTown.Index);
+            HomeStore homeStore = SaveGame.FindHomeStore(SaveGame.CurTown.Index);
             homeStore.BuyHouse(SaveGame.Player);
         }
     }

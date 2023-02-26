@@ -60,6 +60,7 @@ global using AngbandOS.Core.Stores;
 global using AngbandOS.Core.Syllables;
 global using AngbandOS.Core.Talents;
 global using AngbandOS.Core.TimedActions;
+global using AngbandOS.Core.Towns;
 global using AngbandOS.Core.VaultTypes;
 global using AngbandOS.Core.WandFlavours;
 global using AngbandOS.Core.WeightedRandoms;

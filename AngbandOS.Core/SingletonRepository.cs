@@ -21,6 +21,7 @@ namespace AngbandOS.Core
         public SingletonFactory<TimedAction> TimedActions;
         public SingletonFactory<BaseCharacterClass> CharacterClasses;
         public SingletonFactory<BaseRealm> Realms;
+        public SingletonFactory<Town> Towns;
 
         public T[] LoadTypesFromAssembly<T>(SaveGame saveGame)
         {
@@ -49,6 +50,7 @@ namespace AngbandOS.Core
             StoreCommands = new SingletonFactory<BaseStoreCommand>(saveGame);
             CharacterClasses = new SingletonFactory<BaseCharacterClass>(saveGame);
             Realms = new SingletonFactory<BaseRealm>(saveGame);
+            Towns = new SingletonFactory<Town>(saveGame);
 
             Dictionary<FixedArtifactId, FixedArtifact> dictionary = new Dictionary<FixedArtifactId, FixedArtifact>();
             foreach (BaseFixedArtifact baseFixedArtifact in BaseFixedArtifacts)

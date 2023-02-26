@@ -58,8 +58,6 @@
 
         protected override bool PerformsMaintenanceWhenResting => false;
 
-        public static HomeStore FindHomeStore(SaveGame saveGame, int town) => (HomeStore)Array.Find(saveGame.Towns[town].Stores, store => store.StoreType == StoreType.StoreHome);
-
         public void BuyHouse(Player player)
         {
             int price;
@@ -91,27 +89,12 @@
                         {
                             SaveGame.MsgPrint(
                                 "I've sold your old house to pay for the removal service.");
-                            MoveHouse(SaveGame, oldHouse, player.TownWithHouse);
+                            SaveGame.MoveHouse(oldHouse, player.TownWithHouse);
                         }
                     }
                     SaveGame.HandleStuff();
                 }
             }
-        }
-
-        private static void MoveHouse(SaveGame saveGame, int oldTown, int newTown)
-        {
-            Store newStore = FindHomeStore(saveGame, newTown);
-            Store oldStore = FindHomeStore(saveGame, oldTown);
-            if (oldStore == null)
-            {
-                return;
-            }
-            if (newStore == null)
-            {
-                return;
-            }
-            oldStore.MoveInventoryToAnotherStore(newStore);
         }
 
         /// <summary>

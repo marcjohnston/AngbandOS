@@ -935,7 +935,7 @@ namespace AngbandOS.Core.Stores
             SaveGame.UpdateHealthFlaggedAction.Set();
             SaveGame.UpdateManaFlaggedAction.Set();
             SaveGame.Player.SetFood(Constants.PyFoodMax - 1);
-            foreach (Town town in SaveGame.Towns)
+            foreach (Town town in SaveGame.SingletonRepository.Towns)
             {
                 foreach (Store store in town.Stores)
                 {
@@ -1671,7 +1671,7 @@ namespace AngbandOS.Core.Stores
         {
             int price;
             var escortable = new Dictionary<char, Town>();
-            foreach (var town in SaveGame.Towns)
+            foreach (Town town in SaveGame.SingletonRepository.Towns)
             {
                 if (town.Visited && town.Name != SaveGame.CurTown.Name && town.Char != 'K')
                 {

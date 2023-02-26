@@ -70,7 +70,6 @@ namespace AngbandOS.Core
         public readonly Dungeon[] Dungeons;
         public readonly Patron[] PatronList;
         public readonly QuestArray Quests;
-        public readonly Town[] Towns;
         public readonly Island Wilderness = new Island();
         public int AllocKindSize;
         public AllocationEntry[] AllocKindTable;
@@ -327,7 +326,6 @@ namespace AngbandOS.Core
             _autoNavigator = new AutoNavigator(this);
             Quests = new QuestArray(this);
             PopulateNewProfile();
-            Towns = Town.NewTownList(this);
             Dungeons = Dungeon.NewDungeonList();
             PatronList = Patron.NewPatronList(this);
             InitializeAllocationTables();
@@ -592,7 +590,7 @@ namespace AngbandOS.Core
                 {
                     return;
                 }
-                foreach (Town town in Towns)
+                foreach (Town town in SingletonRepository.Towns)
                 {
                     foreach (Store store in town.Stores)
                     {
@@ -609,10 +607,10 @@ namespace AngbandOS.Core
                 }
                 ResetStompability();
                 CurrentDepth = 0;
-                CurTown = Towns[Program.Rng.RandomLessThan(Towns.Length)];
+                CurTown = SingletonRepository.Towns[Program.Rng.RandomLessThan(SingletonRepository.Towns.Count)];
                 while (CurTown.Char == 'K' || CurTown.Char == 'N')
                 {
-                    CurTown = Towns[Program.Rng.RandomLessThan(Towns.Length)];
+                    CurTown = SingletonRepository.Towns[Program.Rng.RandomLessThan(SingletonRepository.Towns.Count)];
                 }
                 CurDungeon = Dungeons[CurTown.Index];
                 RecallDungeon = CurDungeon.Index;
@@ -677,6 +675,23 @@ namespace AngbandOS.Core
             }
             UpdateNotifier?.GameStopped();
             CloseGame();
+        }
+
+        public HomeStore FindHomeStore(int town) => (HomeStore)Array.Find(SingletonRepository.Towns[town].Stores, store => store.StoreType == StoreType.StoreHome);
+
+        public void MoveHouse(int oldTown, int newTown)
+        {
+            Store newStore = FindHomeStore(newTown);
+            Store oldStore = FindHomeStore(oldTown);
+            if (oldStore == null)
+            {
+                return;
+            }
+            if (newStore == null)
+            {
+                return;
+            }
+            oldStore.MoveInventoryToAnotherStore(newStore);
         }
 
         // PROFILE MESSAGING START
@@ -944,8 +959,8 @@ namespace AngbandOS.Core
                 string buffer;
                 if (Dungeons[y].Visited)
                 {
-                    buffer = y < Towns.Length
-                        ? $"{Dungeons[y].MapSymbol} = {Towns[y].Name} (L:{depth}, D:{difficulty}, Q:{dungeonGuardians[y]})"
+                    buffer = y < SingletonRepository.Towns.Count
+                        ? $"{Dungeons[y].MapSymbol} = {SingletonRepository.Towns[y].Name} (L:{depth}, D:{difficulty}, Q:{dungeonGuardians[y]})"
                         : $"{Dungeons[y].MapSymbol} = {Dungeons[y].Name} (L:{depth}, D:{difficulty}, Q:{dungeonGuardians[y]})";
                 }
                 else
@@ -953,7 +968,7 @@ namespace AngbandOS.Core
                     buffer = $"? = {Dungeons[y].Name} (L:{depth}, D:{difficulty}, Q:{dungeonGuardians[y]})";
                 }
                 Colour keyAttr = Colour.Brown;
-                if (y < Towns.Length)
+                if (y < SingletonRepository.Towns.Count)
                 {
                     keyAttr = Colour.Grey;
                 }
@@ -1686,12 +1701,12 @@ namespace AngbandOS.Core
                     Wilderness[i][j].RoadMap = 0;
                 }
             }
-            for (i = 0; i < Towns.Length; i++)
+            for (i = 0; i < SingletonRepository.Towns.Count; i++)
             {
-                Towns[i].Seed = Program.Rng.RandomLessThan(int.MaxValue);
-                Towns[i].Visited = false;
-                Towns[i].X = 0;
-                Towns[i].Y = 0;
+                SingletonRepository.Towns[i].Seed = Program.Rng.RandomLessThan(int.MaxValue);
+                SingletonRepository.Towns[i].Visited = false;
+                SingletonRepository.Towns[i].X = 0;
+                SingletonRepository.Towns[i].Y = 0;
             }
             for (i = 0; i < Constants.MaxCaves; i++)
             {
@@ -1703,7 +1718,7 @@ namespace AngbandOS.Core
                 Dungeons[i].Visited = false;
                 Dungeons[i].KnownDepth = false;
                 Dungeons[i].KnownOffset = false;
-                if (i < Towns.Length)
+                if (i < SingletonRepository.Towns.Count)
                 {
                     Dungeons[i].Visited = true;
                     j = 0;
@@ -1737,21 +1752,21 @@ namespace AngbandOS.Core
                     }
                 }
                 Wilderness[y][x].Dungeon = Dungeons[i];
-                if (i < Towns.Length)
+                if (i < SingletonRepository.Towns.Count)
                 {
-                    Wilderness[y][x].Town = Towns[i];
-                    Towns[i].X = x;
-                    Towns[i].Y = y;
+                    Wilderness[y][x].Town = SingletonRepository.Towns[i];
+                    SingletonRepository.Towns[i].X = x;
+                    SingletonRepository.Towns[i].Y = y;
                 }
                 Dungeons[i].X = x;
                 Dungeons[i].Y = y;
             }
-            for (i = 0; i < Towns.Length - 1; i++)
+            for (i = 0; i < SingletonRepository.Towns.Count - 1; i++)
             {
-                int curX = Towns[i].X;
-                int curY = Towns[i].Y;
-                int destX = Towns[i + 1].X;
-                int destY = Towns[i + 1].Y;
+                int curX = SingletonRepository.Towns[i].X;
+                int curY = SingletonRepository.Towns[i].Y;
+                int destX = SingletonRepository.Towns[i + 1].X;
+                int destY = SingletonRepository.Towns[i + 1].Y;
                 bool fin = false;
                 while (!fin)
                 {
@@ -2553,7 +2568,7 @@ namespace AngbandOS.Core
                 Player.Religion.DecayFavour();
                 UpdateHealthFlaggedAction.Set();
                 UpdateManaFlaggedAction.Set();
-                foreach (Town town in Towns)
+                foreach (Town town in SingletonRepository.Towns)
                 {
                     foreach (Store store in town.Stores)
                     {
@@ -2562,9 +2577,9 @@ namespace AngbandOS.Core
                 }
                 if (Program.Rng.RandomLessThan(Constants.StoreShuffle) == 0)
                 {
-                    int town = Program.Rng.RandomLessThan(Towns.Length);
+                    int town = Program.Rng.RandomLessThan(SingletonRepository.Towns.Count);
                     int store = Program.Rng.RandomLessThan(12);
-                    Towns[town].Stores[store].StoreShuffle();
+                    SingletonRepository.Towns[town].Stores[store].StoreShuffle();
                 }
             }
             if (!Player.GameTime.IsTurnTen)
@@ -2889,7 +2904,7 @@ namespace AngbandOS.Core
                         CurrentDepth = 0;
                         if (Player.TownWithHouse > -1)
                         {
-                            CurTown = Towns[Player.TownWithHouse];
+                            CurTown = SingletonRepository.Towns[Player.TownWithHouse];
                             Player.WildernessX = CurTown.X;
                             Player.WildernessY = CurTown.Y;
                             NewLevelFlag = true;
