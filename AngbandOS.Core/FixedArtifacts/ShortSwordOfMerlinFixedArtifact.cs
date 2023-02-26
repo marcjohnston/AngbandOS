@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class ShortSwordOfMerlinFixedArtifact : BaseFixedArtifact
+internal class ShortSwordOfMerlinFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private ShortSwordOfMerlinFixedArtifact(SaveGame saveGame)

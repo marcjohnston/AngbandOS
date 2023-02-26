@@ -89,7 +89,7 @@ namespace AngbandOS.Core
         {
             get
             {
-                return FixedArtifact == null ? FixedArtifactId.None : FixedArtifact.BaseFixedArtifact.FixedArtifactID;
+                return FixedArtifact == null ? FixedArtifactId.None : FixedArtifact.FixedArtifactID;
             }
         }
         public FixedArtifact? FixedArtifact; // If this item is a fixed artifact, this will be not null.
@@ -1180,7 +1180,7 @@ namespace AngbandOS.Core
             if (FixedArtifactIndex != 0)
             {
                 FixedArtifact aPtr = SaveGame.SingletonRepository.FixedArtifacts[FixedArtifactIndex];
-                Characteristics.Merge(aPtr.FixedArtifactItemCharacteristics);
+                Characteristics.Merge(aPtr);
             }
 
             // Now merge the characteristics from the rare item type, if there is one.
@@ -1947,9 +1947,9 @@ namespace AngbandOS.Core
                 return BonusPowerSubType.Description;
             }
 
-            if (FixedArtifact != null && typeof(IActivatible).IsAssignableFrom(FixedArtifact.BaseFixedArtifact.GetType()))
+            if (FixedArtifact != null && typeof(IActivatible).IsAssignableFrom(FixedArtifact.GetType()))
             {
-                IActivatible activatibleFixedArtifact = (IActivatible)FixedArtifact.BaseFixedArtifact;
+                IActivatible activatibleFixedArtifact = (IActivatible)FixedArtifact;
                 return activatibleFixedArtifact.DescribeActivationEffect();
             }
             if (RareItemTypeIndex == RareItemTypeEnum.WeaponPlanarWeapon)
@@ -2033,7 +2033,7 @@ namespace AngbandOS.Core
                 {
                     IdentBroken = true;
                 }
-                if (aPtr.FixedArtifactItemCharacteristics.Cursed)
+                if (aPtr.Cursed)
                 {
                     IdentCursed = true;
                 }
@@ -2541,7 +2541,7 @@ namespace AngbandOS.Core
         {
             if (FixedArtifact != null)
             {
-                FixedArtifact.BaseFixedArtifact.ApplyResistances(SaveGame, this);
+                FixedArtifact.ApplyResistances(SaveGame, this);
             }
         }
 

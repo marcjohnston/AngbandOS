@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class ScytheOfGharneFixedArtifact : BaseFixedArtifact, IActivatible
+internal class ScytheOfGharneFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
     private ScytheOfGharneFixedArtifact(SaveGame saveGame)

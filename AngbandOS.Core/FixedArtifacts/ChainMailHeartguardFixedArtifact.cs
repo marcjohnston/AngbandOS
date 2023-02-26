@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class ChainMailHeartguardFixedArtifact : BaseFixedArtifact
+internal class ChainMailHeartguardFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private ChainMailHeartguardFixedArtifact(SaveGame saveGame)

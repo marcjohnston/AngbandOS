@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : BaseFixedArtifact, IActivatible
+internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
     private MultiHuedDragonScaleMailRazorbackFixedArtifact(SaveGame saveGame)

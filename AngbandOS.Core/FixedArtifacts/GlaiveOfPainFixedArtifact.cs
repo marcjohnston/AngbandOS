@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class GlaiveOfPainFixedArtifact : BaseFixedArtifact
+internal class GlaiveOfPainFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private GlaiveOfPainFixedArtifact(SaveGame saveGame)

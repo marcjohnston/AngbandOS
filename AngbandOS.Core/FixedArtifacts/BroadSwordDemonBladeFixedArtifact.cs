@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class BroadSwordDemonBladeFixedArtifact : BaseFixedArtifact
+internal class BroadSwordDemonBladeFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private BroadSwordDemonBladeFixedArtifact(SaveGame saveGame)

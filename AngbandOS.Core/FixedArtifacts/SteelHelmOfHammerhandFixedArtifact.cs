@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class SteelHelmOfHammerhandFixedArtifact : BaseFixedArtifact
+internal class SteelHelmOfHammerhandFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private SteelHelmOfHammerhandFixedArtifact(SaveGame saveGame)

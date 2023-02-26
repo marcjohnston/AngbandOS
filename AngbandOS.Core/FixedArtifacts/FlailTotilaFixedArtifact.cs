@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class FlailTotilaFixedArtifact : BaseFixedArtifact, IActivatible
+internal class FlailTotilaFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
     private FlailTotilaFixedArtifact(SaveGame saveGame)

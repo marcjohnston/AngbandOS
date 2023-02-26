@@ -9,8 +9,13 @@
 namespace AngbandOS.Core.FixedArtifacts
 {
     [Serializable]
-    internal abstract class BaseFixedArtifact : IItemCharacteristics // TODO: Merge this with ItemClass
+    internal abstract class FixedArtifact : IItemCharacteristics 
     {
+        /// <summary>
+        /// Represents the quantity of this artifact currently in existence.
+        /// </summary>
+        public int CurNum = 0;
+
         /// <summary>
         /// Allows the fixed artifact to apply resistances and power as needed.  Does nothing, by default.
         /// </summary>

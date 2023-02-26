@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class ExecutionersSwordOfNyarlathotepFixedArtifact : BaseFixedArtifact
+internal class ExecutionersSwordOfNyarlathotepFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private ExecutionersSwordOfNyarlathotepFixedArtifact(SaveGame saveGame)

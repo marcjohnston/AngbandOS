@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class SetOfCestiOfCombatFixedArtifact : BaseFixedArtifact, IActivatible
+internal class SetOfCestiOfCombatFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
     private SetOfCestiOfCombatFixedArtifact(SaveGame saveGame)

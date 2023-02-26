@@ -20,7 +20,6 @@ namespace AngbandOS.Core
         public SingletonFactory<InGameCommand> InGameCommands;
         public SingletonFactory<WizardCommand> WizardCommands;
         public SingletonFactory<ItemClass> ItemCategories;
-        public SingletonFactory<BaseFixedArtifact> BaseFixedArtifacts;
         public SingletonFactory<MonsterRace> MonsterRaces;
         public SingletonFactory<BaseInventorySlot> InventorySlots;
         public SingletonFactory<Race> Races;
@@ -65,7 +64,6 @@ namespace AngbandOS.Core
             InGameCommands = new SingletonFactory<InGameCommand>(saveGame, LoadTypesFromAssembly<InGameCommand>(saveGame));
             WizardCommands = new SingletonFactory<WizardCommand>(saveGame, LoadTypesFromAssembly<WizardCommand>(saveGame));
             ItemCategories = new SingletonFactory<ItemClass>(saveGame, LoadTypesFromAssembly<ItemClass>(saveGame));
-            BaseFixedArtifacts = new SingletonFactory<BaseFixedArtifact>(saveGame, LoadTypesFromAssembly<BaseFixedArtifact>(saveGame));
             InventorySlots = new SingletonFactory<BaseInventorySlot>(saveGame, LoadTypesFromAssembly<BaseInventorySlot>(saveGame));
             StoreCommands = new SingletonFactory<BaseStoreCommand>(saveGame, LoadTypesFromAssembly<BaseStoreCommand>(saveGame));
             CharacterClasses = new SingletonFactory<BaseCharacterClass>(saveGame, LoadTypesFromAssembly<BaseCharacterClass>(saveGame));
@@ -85,13 +83,7 @@ namespace AngbandOS.Core
             Vaults = new SingletonDictionaryFactory<string, Vault>(saveGame, LoadTypesFromAssembly<Vault>(saveGame), (_vaultType => _vaultType.Name));
             FloorTileTypes = new SingletonDictionaryFactory<string, FloorTileType>(saveGame, LoadTypesFromAssembly<FloorTileType>(saveGame), (_floorTileType => _floorTileType.Name));
             RareItemTypes = new SingletonDictionaryFactory<string, Base2RareItemType>(saveGame, LoadTypesFromAssembly<Base2RareItemType>(saveGame), (_rareItemType => _rareItemType.Name));
-
-            Dictionary<FixedArtifactId, FixedArtifact> dictionary = new Dictionary<FixedArtifactId, FixedArtifact>();
-            foreach (BaseFixedArtifact baseFixedArtifact in BaseFixedArtifacts)
-            {
-                dictionary.Add(baseFixedArtifact.FixedArtifactID, new FixedArtifact(baseFixedArtifact));
-            }
-            FixedArtifacts = new SingletonDictionaryFactory<FixedArtifactId, FixedArtifact>(saveGame, dictionary);
+            FixedArtifacts = new SingletonDictionaryFactory<FixedArtifactId, FixedArtifact>(saveGame, LoadTypesFromAssembly<FixedArtifact>(saveGame), (_fixedArtifact => _fixedArtifact.FixedArtifactID));
 
             MonsterRace[] monsterRaces = LoadTypesFromAssembly<MonsterRace>(saveGame).OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
             MonsterRaces = new SingletonFactory<MonsterRace>(saveGame, monsterRaces);

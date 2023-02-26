@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class GemstoneShiningTrapezodedronFixedArtifact : BaseFixedArtifact, IActivatible
+internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
     private GemstoneShiningTrapezodedronFixedArtifact(SaveGame saveGame)

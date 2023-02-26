@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class PairOfSoftLeatherBootsOfDancingFixedArtifact : BaseFixedArtifact, IActivatible
+internal class PairOfSoftLeatherBootsOfDancingFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
     private PairOfSoftLeatherBootsOfDancingFixedArtifact(SaveGame saveGame)

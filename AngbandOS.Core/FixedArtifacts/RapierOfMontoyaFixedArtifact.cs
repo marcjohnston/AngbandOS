@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class RapierOfMontoyaFixedArtifact : BaseFixedArtifact
+internal class RapierOfMontoyaFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private RapierOfMontoyaFixedArtifact(SaveGame saveGame)

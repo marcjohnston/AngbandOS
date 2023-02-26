@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class LargeMetalShieldOfStabilityFixedArtifact : BaseFixedArtifact
+internal class LargeMetalShieldOfStabilityFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private LargeMetalShieldOfStabilityFixedArtifact(SaveGame saveGame)

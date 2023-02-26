@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class BeakedAxeOfTheodenFixedArtifact : BaseFixedArtifact, IActivatible
+internal class BeakedAxeOfTheodenFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
     private BeakedAxeOfTheodenFixedArtifact(SaveGame saveGame)

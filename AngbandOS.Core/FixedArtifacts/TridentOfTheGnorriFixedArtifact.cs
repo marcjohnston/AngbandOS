@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class TridentOfTheGnorriFixedArtifact : BaseFixedArtifact, IActivatible
+internal class TridentOfTheGnorriFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
     private TridentOfTheGnorriFixedArtifact(SaveGame saveGame)

@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class PikeOfTepesFixedArtifact : BaseFixedArtifact
+internal class PikeOfTepesFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private PikeOfTepesFixedArtifact(SaveGame saveGame)

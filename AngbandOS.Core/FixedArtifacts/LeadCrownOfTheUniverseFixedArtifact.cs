@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class LeadCrownOfTheUniverseFixedArtifact : BaseFixedArtifact
+internal class LeadCrownOfTheUniverseFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private LeadCrownOfTheUniverseFixedArtifact(SaveGame saveGame)

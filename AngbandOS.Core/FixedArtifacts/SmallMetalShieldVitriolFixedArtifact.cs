@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class SmallMetalShieldVitriolFixedArtifact : BaseFixedArtifact
+internal class SmallMetalShieldVitriolFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private SmallMetalShieldVitriolFixedArtifact(SaveGame saveGame)

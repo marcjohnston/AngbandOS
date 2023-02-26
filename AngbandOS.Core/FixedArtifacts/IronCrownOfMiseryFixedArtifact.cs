@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class IronCrownOfMiseryFixedArtifact : BaseFixedArtifact
+internal class IronCrownOfMiseryFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private IronCrownOfMiseryFixedArtifact(SaveGame saveGame)

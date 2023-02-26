@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class BroadAxeOfNodensFixedArtifact : BaseFixedArtifact
+internal class BroadAxeOfNodensFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private BroadAxeOfNodensFixedArtifact(SaveGame saveGame)

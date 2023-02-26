@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class BattleAxeOfNKaiFixedArtifact : BaseFixedArtifact
+internal class BattleAxeOfNKaiFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private BattleAxeOfNKaiFixedArtifact(SaveGame saveGame)

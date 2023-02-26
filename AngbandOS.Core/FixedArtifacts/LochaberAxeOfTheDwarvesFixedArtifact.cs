@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class LochaberAxeOfTheDwarvesFixedArtifact : BaseFixedArtifact
+internal class LochaberAxeOfTheDwarvesFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private LochaberAxeOfTheDwarvesFixedArtifact(SaveGame saveGame)

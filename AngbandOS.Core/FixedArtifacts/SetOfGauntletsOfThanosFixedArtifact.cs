@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class SetOfGauntletsOfThanosFixedArtifact : BaseFixedArtifact
+internal class SetOfGauntletsOfThanosFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private SetOfGauntletsOfThanosFixedArtifact(SaveGame saveGame)

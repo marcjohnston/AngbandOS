@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class ShadowCloakOfTheShoggothFixedArtifact : BaseFixedArtifact
+internal class ShadowCloakOfTheShoggothFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private ShadowCloakOfTheShoggothFixedArtifact(SaveGame saveGame)

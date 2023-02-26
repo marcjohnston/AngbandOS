@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class LeatherScaleMailWyvernscaleFixedArtifact : BaseFixedArtifact
+internal class LeatherScaleMailWyvernscaleFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private LeatherScaleMailWyvernscaleFixedArtifact(SaveGame saveGame)

@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class BattleAxeSpleenSlicerFixedArtifact : BaseFixedArtifact, IActivatible
+internal class BattleAxeSpleenSlicerFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
     private BattleAxeSpleenSlicerFixedArtifact(SaveGame saveGame)

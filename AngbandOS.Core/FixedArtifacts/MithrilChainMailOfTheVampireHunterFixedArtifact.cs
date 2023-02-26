@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class MithrilChainMailOfTheVampireHunterFixedArtifact : BaseFixedArtifact, IActivatible
+internal class MithrilChainMailOfTheVampireHunterFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
     private MithrilChainMailOfTheVampireHunterFixedArtifact(SaveGame saveGame)

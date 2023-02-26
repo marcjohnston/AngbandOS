@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class BastardSwordSelfSlayerFixedArtifact : BaseFixedArtifact
+internal class BastardSwordSelfSlayerFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private BastardSwordSelfSlayerFixedArtifact(SaveGame saveGame)

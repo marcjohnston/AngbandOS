@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class WarHammerMjolnirFixedArtifact : BaseFixedArtifact
+internal class WarHammerMjolnirFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private WarHammerMjolnirFixedArtifact(SaveGame saveGame)

@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class MorningStarBloodspikeFixedArtifact : BaseFixedArtifact
+internal class MorningStarBloodspikeFixedArtifact : FixedArtifact
 {
     private readonly ItemClass _baseItemCategory;
     private MorningStarBloodspikeFixedArtifact(SaveGame saveGame)

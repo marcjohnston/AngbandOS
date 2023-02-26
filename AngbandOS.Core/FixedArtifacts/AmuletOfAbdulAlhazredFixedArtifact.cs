@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class AmuletOfAbdulAlhazredFixedArtifact : BaseFixedArtifact, IActivatible
+internal class AmuletOfAbdulAlhazredFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
     private AmuletOfAbdulAlhazredFixedArtifact(SaveGame saveGame)

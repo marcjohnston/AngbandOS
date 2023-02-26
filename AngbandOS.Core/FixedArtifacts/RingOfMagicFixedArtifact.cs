@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class RingOfMagicFixedArtifact : BaseFixedArtifact, IActivatible
+internal class RingOfMagicFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemClass _baseItemCategory;
     private RingOfMagicFixedArtifact(SaveGame saveGame)
