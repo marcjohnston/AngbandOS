@@ -22,6 +22,7 @@ namespace AngbandOS.Core
         public SingletonFactory<BaseCharacterClass> CharacterClasses;
         public SingletonFactory<BaseRealm> Realms;
         public SingletonFactory<Town> Towns;
+        public SingletonFactory<AmuletFlavour> AmuletFlavours;
 
         public T[] LoadTypesFromAssembly<T>(SaveGame saveGame)
         {
@@ -33,6 +34,10 @@ namespace AngbandOS.Core
                 if (!type.IsAbstract && typeof(T).IsAssignableFrom(type))
                 {
                     ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
+                    if (constructors.Length == 0)
+                    {
+                        throw new Exception($"{type.Name} does not have a private constructor.  Loading singletons requires the object to have a private constructor to ensure it isn't publically created.");
+                    }
                     T command = (T)constructors[0].Invoke(new object[] { saveGame });
                     typeList.Add(command);
                 }
@@ -42,15 +47,16 @@ namespace AngbandOS.Core
 
         public void Initialize(SaveGame saveGame)
         {
-            InGameCommands = new SingletonFactory<InGameCommand>(saveGame);
-            WizardCommands = new SingletonFactory<WizardCommand>(saveGame);
-            ItemCategories = new SingletonFactory<ItemClass>(saveGame);
-            BaseFixedArtifacts = new SingletonFactory<BaseFixedArtifact>(saveGame);
-            InventorySlots = new SingletonFactory<BaseInventorySlot>(saveGame);
-            StoreCommands = new SingletonFactory<BaseStoreCommand>(saveGame);
-            CharacterClasses = new SingletonFactory<BaseCharacterClass>(saveGame);
-            Realms = new SingletonFactory<BaseRealm>(saveGame);
-            Towns = new SingletonFactory<Town>(saveGame);
+            InGameCommands = new SingletonFactory<InGameCommand>(saveGame, LoadTypesFromAssembly<InGameCommand>(saveGame));
+            WizardCommands = new SingletonFactory<WizardCommand>(saveGame, LoadTypesFromAssembly<WizardCommand>(saveGame));
+            ItemCategories = new SingletonFactory<ItemClass>(saveGame, LoadTypesFromAssembly<ItemClass>(saveGame));
+            BaseFixedArtifacts = new SingletonFactory<BaseFixedArtifact>(saveGame, LoadTypesFromAssembly<BaseFixedArtifact>(saveGame));
+            InventorySlots = new SingletonFactory<BaseInventorySlot>(saveGame, LoadTypesFromAssembly<BaseInventorySlot>(saveGame));
+            StoreCommands = new SingletonFactory<BaseStoreCommand>(saveGame, LoadTypesFromAssembly<BaseStoreCommand>(saveGame));
+            CharacterClasses = new SingletonFactory<BaseCharacterClass>(saveGame, LoadTypesFromAssembly<BaseCharacterClass>(saveGame));
+            Realms = new SingletonFactory<BaseRealm>(saveGame, LoadTypesFromAssembly<BaseRealm>(saveGame));
+            Towns = new SingletonFactory<Town>(saveGame, LoadTypesFromAssembly<Town>(saveGame));
+            AmuletFlavours = new SingletonFactory<AmuletFlavour>(saveGame, LoadTypesFromAssembly<AmuletFlavour>(saveGame));
 
             Dictionary<FixedArtifactId, FixedArtifact> dictionary = new Dictionary<FixedArtifactId, FixedArtifact>();
             foreach (BaseFixedArtifact baseFixedArtifact in BaseFixedArtifacts)
@@ -59,32 +65,9 @@ namespace AngbandOS.Core
             }
             FixedArtifacts = new SingletonDictionaryFactory<FixedArtifactId, FixedArtifact>(saveGame, dictionary);
 
-            //int index = 0;
-            //Assembly assembly = Assembly.GetExecutingAssembly();
-            //List<MonsterRace> monsterRaces = new List<MonsterRace>();
-            //for (int level = -1; level < 128; level++)
-            //{
-            //    foreach (Type type in assembly.GetTypes())
-            //    {
-            //        // Check to see if the type implements the MonsterRace interface and is not an abstract class.
-            //        if (!type.IsAbstract && typeof(MonsterRace).IsAssignableFrom(type))
-            //        {
-            //            // Load the monster.
-            //            ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
-            //            MonsterRace monsterRace = (MonsterRace)constructors[0].Invoke(new object[] { saveGame });
-
-            //            if (monsterRace.LevelFound == level)
-            //            {
-            //                monsterRace.Index = index;
-            //                monsterRaces.Add(monsterRace);
-            //                index++;
-            //            }
-            //        }
-            //    }
-            //}
             MonsterRace[] monsterRaces = LoadTypesFromAssembly<MonsterRace>(saveGame).OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
             MonsterRaces = new SingletonFactory<MonsterRace>(saveGame, monsterRaces);
-            Races = new SingletonFactory<Race>(saveGame);
+            Races = new SingletonFactory<Race>(saveGame, LoadTypesFromAssembly<Race>(saveGame));
         }
     }
 }

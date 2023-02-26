@@ -2073,7 +2073,7 @@ namespace AngbandOS.Core
             } while (tempMushrooms.Count > 0);
             AmuletFlavours = new List<AmuletFlavour>();
             List<AmuletFlavour> tempAmulets = new List<AmuletFlavour>();
-            foreach (AmuletFlavour amuletFlavour in ObjectRepository.AmuletFlavours)
+            foreach (AmuletFlavour amuletFlavour in SingletonRepository.AmuletFlavours)
             {
                 tempAmulets.Add(amuletFlavour);
             }

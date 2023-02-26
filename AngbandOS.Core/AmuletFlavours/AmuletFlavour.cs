@@ -4,6 +4,12 @@
 [Serializable]
 internal abstract class AmuletFlavour
 {
+    protected SaveGame SaveGame;
+    protected AmuletFlavour(SaveGame saveGame)
+    {
+        SaveGame = saveGame;
+    }
+
     /// <summary>
     /// The column from which to take the graphical tile.
     /// </summary>

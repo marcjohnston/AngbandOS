@@ -40,22 +40,6 @@ namespace AngbandOS.Core
             return list.GetEnumerator();
         }
 
-        public SingletonFactory(SaveGame saveGame)
-        {
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            foreach (Type type in assembly.GetTypes())
-            {
-                // Load Commands.
-                if (!type.IsAbstract && typeof(T).IsAssignableFrom(type))
-                {
-                    ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
-                    T command = (T)constructors[0].Invoke(new object[] { saveGame });
-                    list.Add(command);
-                    dictionary.Add(type.Name, command);
-                }
-            }
-        }
-
         public SingletonFactory(SaveGame saveGame, T[] items)
         {
             foreach (T item in items)

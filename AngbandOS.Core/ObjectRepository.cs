@@ -4,7 +4,6 @@ namespace AngbandOS.Core
 {
     internal static class ObjectRepository
     {
-        public static List<AmuletFlavour> AmuletFlavours = new List<AmuletFlavour>();
         public static List<MushroomFlavour> MushroomFlavours = new List<MushroomFlavour>();
         public static List<PotionFlavour> PotionFlavours = new List<PotionFlavour>();
         public static List<RingFlavour> RingFlavours = new List<RingFlavour>();
@@ -24,13 +23,6 @@ namespace AngbandOS.Core
             Assembly assembly = Assembly.GetExecutingAssembly();
             foreach (Type type in assembly.GetTypes())
             {
-                // Load AmuletFlavours.
-                if (!type.IsAbstract && typeof(AmuletFlavour).IsAssignableFrom(type))
-                {
-                    AmuletFlavour baseAmuletFlavour = (AmuletFlavour)Activator.CreateInstance(type);
-                    AmuletFlavours.Add(baseAmuletFlavour);
-                }
-
                 // Load MushroomFlavours.
                 if (!type.IsAbstract && typeof(MushroomFlavour).IsAssignableFrom(type))
                 {
