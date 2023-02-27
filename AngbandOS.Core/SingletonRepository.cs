@@ -10,33 +10,33 @@ namespace AngbandOS.Core
     /// </summary>
     internal class SingletonRepository
     {
-        public SingletonDictionaryFactory<FixedArtifactId, FixedArtifact> FixedArtifacts;
-        public SingletonDictionaryFactory<string, ProjectileGraphic> ProjectileGraphics;
-        public SingletonDictionaryFactory<string, Animation> Animations;
-        public SingletonFactory<Vault> Vaults;
-        public SingletonDictionaryFactory<string, FloorTileType> FloorTileTypes;
-        public SingletonDictionaryFactory<RareItemTypeEnum, RareItem> RareItemTypes;
+        public SingletonDictionary<FixedArtifactId, FixedArtifact> FixedArtifacts;
+        public SingletonDictionary<string, ProjectileGraphic> ProjectileGraphics;
+        public SingletonDictionary<string, Animation> Animations;
+        public SingletonList<Vault> Vaults;
+        public SingletonDictionary<string, FloorTileType> FloorTileTypes;
+        public SingletonDictionary<RareItemTypeEnum, RareItem> RareItemTypes;
 
-        public SingletonFactory<InGameCommand> InGameCommands;
-        public SingletonFactory<WizardCommand> WizardCommands;
-        public SingletonFactory<ItemClass> ItemCategories;
-        public SingletonFactory<MonsterRace> MonsterRaces;
-        public SingletonFactory<BaseInventorySlot> InventorySlots;
-        public SingletonFactory<Race> Races;
-        public SingletonFactory<BaseStoreCommand> StoreCommands;
-        public SingletonFactory<TimedAction> TimedActions;
-        public SingletonFactory<BaseCharacterClass> CharacterClasses;
-        public SingletonFactory<BaseRealm> Realms;
-        public SingletonFactory<Town> Towns;
-        public SingletonFactory<AmuletFlavour> AmuletFlavours;
-        public SingletonFactory<MushroomFlavour> MushroomFlavours;
-        public SingletonFactory<PotionFlavour> PotionFlavours;
-        public SingletonFactory<RingFlavour> RingFlavours;
-        public SingletonFactory<RodFlavour> RodFlavours;
-        public SingletonFactory<BaseScrollFlavour> ScrollFlavours;
-        public SingletonFactory<StaffFlavour> StaffFlavours;
-        public SingletonFactory<WandFlavour> WandFlavours;
-        public SingletonFactory<ChestTrapConfiguration> ChestTrapConfigurations;
+        public SingletonList<InGameCommand> InGameCommands;
+        public SingletonList<WizardCommand> WizardCommands;
+        public SingletonList<ItemClass> ItemCategories;
+        public SingletonList<MonsterRace> MonsterRaces;
+        public SingletonList<BaseInventorySlot> InventorySlots;
+        public SingletonList<Race> Races;
+        public SingletonList<BaseStoreCommand> StoreCommands;
+        public SingletonList<TimedAction> TimedActions;
+        public SingletonList<BaseCharacterClass> CharacterClasses;
+        public SingletonList<BaseRealm> Realms;
+        public SingletonList<Town> Towns;
+        public SingletonList<AmuletFlavour> AmuletFlavours;
+        public SingletonList<MushroomFlavour> MushroomFlavours;
+        public SingletonList<PotionFlavour> PotionFlavours;
+        public SingletonList<RingFlavour> RingFlavours;
+        public SingletonList<RodFlavour> RodFlavours;
+        public SingletonList<BaseScrollFlavour> ScrollFlavours;
+        public SingletonList<StaffFlavour> StaffFlavours;
+        public SingletonList<WandFlavour> WandFlavours;
+        public SingletonList<ChestTrapConfiguration> ChestTrapConfigurations;
 
         private T[] LoadTypesFromAssembly<T>(SaveGame saveGame)
         {
@@ -61,33 +61,33 @@ namespace AngbandOS.Core
 
         public void Initialize(SaveGame saveGame)
         {
-            InGameCommands = new SingletonFactory<InGameCommand>(saveGame, LoadTypesFromAssembly<InGameCommand>(saveGame));
-            WizardCommands = new SingletonFactory<WizardCommand>(saveGame, LoadTypesFromAssembly<WizardCommand>(saveGame));
-            ItemCategories = new SingletonFactory<ItemClass>(saveGame, LoadTypesFromAssembly<ItemClass>(saveGame));
-            InventorySlots = new SingletonFactory<BaseInventorySlot>(saveGame, LoadTypesFromAssembly<BaseInventorySlot>(saveGame));
-            StoreCommands = new SingletonFactory<BaseStoreCommand>(saveGame, LoadTypesFromAssembly<BaseStoreCommand>(saveGame));
-            CharacterClasses = new SingletonFactory<BaseCharacterClass>(saveGame, LoadTypesFromAssembly<BaseCharacterClass>(saveGame));
-            Realms = new SingletonFactory<BaseRealm>(saveGame, LoadTypesFromAssembly<BaseRealm>(saveGame));
-            Towns = new SingletonFactory<Town>(saveGame, LoadTypesFromAssembly<Town>(saveGame));
-            AmuletFlavours = new SingletonFactory<AmuletFlavour>(saveGame, LoadTypesFromAssembly<AmuletFlavour>(saveGame));
-            MushroomFlavours = new SingletonFactory<MushroomFlavour>(saveGame, LoadTypesFromAssembly<MushroomFlavour>(saveGame));
-            PotionFlavours = new SingletonFactory<PotionFlavour>(saveGame, LoadTypesFromAssembly<PotionFlavour>(saveGame));
-            RingFlavours = new SingletonFactory<RingFlavour>(saveGame, LoadTypesFromAssembly<RingFlavour>(saveGame));
-            RodFlavours = new SingletonFactory<RodFlavour>(saveGame, LoadTypesFromAssembly<RodFlavour>(saveGame));
-            ScrollFlavours = new SingletonFactory<BaseScrollFlavour>(saveGame, LoadTypesFromAssembly<BaseScrollFlavour>(saveGame));
-            StaffFlavours = new SingletonFactory<StaffFlavour>(saveGame, LoadTypesFromAssembly<StaffFlavour>(saveGame));
-            WandFlavours = new SingletonFactory<WandFlavour>(saveGame, LoadTypesFromAssembly<WandFlavour>(saveGame));
-            ChestTrapConfigurations = new SingletonFactory<ChestTrapConfiguration>(saveGame, LoadTypesFromAssembly<ChestTrapConfiguration>(saveGame));
-            ProjectileGraphics = new SingletonDictionaryFactory<string, ProjectileGraphic>(saveGame, LoadTypesFromAssembly<ProjectileGraphic>(saveGame), (_projectileGraphic => _projectileGraphic.Name));
-            Animations = new SingletonDictionaryFactory<string, Animation>(saveGame, LoadTypesFromAssembly<Animation>(saveGame), (_animation => _animation.Name));
-            Vaults = new SingletonFactory<Vault>(saveGame, LoadTypesFromAssembly<Vault>(saveGame));
-            FloorTileTypes = new SingletonDictionaryFactory<string, FloorTileType>(saveGame, LoadTypesFromAssembly<FloorTileType>(saveGame), (_floorTileType => _floorTileType.Name));
-            RareItemTypes = new SingletonDictionaryFactory<RareItemTypeEnum, RareItem>(saveGame, LoadTypesFromAssembly<RareItem>(saveGame), _rareItemType => _rareItemType.RareItemType);
-            FixedArtifacts = new SingletonDictionaryFactory<FixedArtifactId, FixedArtifact>(saveGame, LoadTypesFromAssembly<FixedArtifact>(saveGame), (_fixedArtifact => _fixedArtifact.FixedArtifactID));
+            InGameCommands = new SingletonList<InGameCommand>(saveGame, LoadTypesFromAssembly<InGameCommand>(saveGame));
+            WizardCommands = new SingletonList<WizardCommand>(saveGame, LoadTypesFromAssembly<WizardCommand>(saveGame));
+            ItemCategories = new SingletonList<ItemClass>(saveGame, LoadTypesFromAssembly<ItemClass>(saveGame));
+            InventorySlots = new SingletonList<BaseInventorySlot>(saveGame, LoadTypesFromAssembly<BaseInventorySlot>(saveGame));
+            StoreCommands = new SingletonList<BaseStoreCommand>(saveGame, LoadTypesFromAssembly<BaseStoreCommand>(saveGame));
+            CharacterClasses = new SingletonList<BaseCharacterClass>(saveGame, LoadTypesFromAssembly<BaseCharacterClass>(saveGame));
+            Realms = new SingletonList<BaseRealm>(saveGame, LoadTypesFromAssembly<BaseRealm>(saveGame));
+            Towns = new SingletonList<Town>(saveGame, LoadTypesFromAssembly<Town>(saveGame));
+            AmuletFlavours = new SingletonList<AmuletFlavour>(saveGame, LoadTypesFromAssembly<AmuletFlavour>(saveGame));
+            MushroomFlavours = new SingletonList<MushroomFlavour>(saveGame, LoadTypesFromAssembly<MushroomFlavour>(saveGame));
+            PotionFlavours = new SingletonList<PotionFlavour>(saveGame, LoadTypesFromAssembly<PotionFlavour>(saveGame));
+            RingFlavours = new SingletonList<RingFlavour>(saveGame, LoadTypesFromAssembly<RingFlavour>(saveGame));
+            RodFlavours = new SingletonList<RodFlavour>(saveGame, LoadTypesFromAssembly<RodFlavour>(saveGame));
+            ScrollFlavours = new SingletonList<BaseScrollFlavour>(saveGame, LoadTypesFromAssembly<BaseScrollFlavour>(saveGame));
+            StaffFlavours = new SingletonList<StaffFlavour>(saveGame, LoadTypesFromAssembly<StaffFlavour>(saveGame));
+            WandFlavours = new SingletonList<WandFlavour>(saveGame, LoadTypesFromAssembly<WandFlavour>(saveGame));
+            ChestTrapConfigurations = new SingletonList<ChestTrapConfiguration>(saveGame, LoadTypesFromAssembly<ChestTrapConfiguration>(saveGame));
+            ProjectileGraphics = new SingletonDictionary<string, ProjectileGraphic>(saveGame, LoadTypesFromAssembly<ProjectileGraphic>(saveGame), (_projectileGraphic => _projectileGraphic.Name));
+            Animations = new SingletonDictionary<string, Animation>(saveGame, LoadTypesFromAssembly<Animation>(saveGame), (_animation => _animation.Name));
+            Vaults = new SingletonList<Vault>(saveGame, LoadTypesFromAssembly<Vault>(saveGame));
+            FloorTileTypes = new SingletonDictionary<string, FloorTileType>(saveGame, LoadTypesFromAssembly<FloorTileType>(saveGame), (_floorTileType => _floorTileType.Name));
+            RareItemTypes = new SingletonDictionary<RareItemTypeEnum, RareItem>(saveGame, LoadTypesFromAssembly<RareItem>(saveGame), _rareItemType => _rareItemType.RareItemType);
+            FixedArtifacts = new SingletonDictionary<FixedArtifactId, FixedArtifact>(saveGame, LoadTypesFromAssembly<FixedArtifact>(saveGame), (_fixedArtifact => _fixedArtifact.FixedArtifactID));
 
             MonsterRace[] monsterRaces = LoadTypesFromAssembly<MonsterRace>(saveGame).OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
-            MonsterRaces = new SingletonFactory<MonsterRace>(saveGame, monsterRaces);
-            Races = new SingletonFactory<Race>(saveGame, LoadTypesFromAssembly<Race>(saveGame));
+            MonsterRaces = new SingletonList<MonsterRace>(saveGame, monsterRaces);
+            Races = new SingletonList<Race>(saveGame, LoadTypesFromAssembly<Race>(saveGame));
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Reflection;
 namespace AngbandOS.Core
 {
     [Serializable]
-    internal class SingletonFactory<T> : IEnumerable<T>
+    internal class SingletonList<T> : IEnumerable<T>
     {
         List<T> list = new List<T>();
         Dictionary<string, T> dictionary = new Dictionary<string, T>();
@@ -40,7 +40,7 @@ namespace AngbandOS.Core
             return list.GetEnumerator();
         }
 
-        public SingletonFactory(SaveGame saveGame, T[] items)
+        public SingletonList(SaveGame saveGame, T[] items)
         {
             foreach (T item in items)
             {
