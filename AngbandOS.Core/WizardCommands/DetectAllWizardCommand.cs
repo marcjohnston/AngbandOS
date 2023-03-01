@@ -7,6 +7,10 @@
 
         public override char Key => 'd';
 
+        public override string HelpDescription => "Detect All";
+
+        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<GeneralCommandsHelpGroup>();
+
         public override void Execute()
         {
             SaveGame.DetectAll();

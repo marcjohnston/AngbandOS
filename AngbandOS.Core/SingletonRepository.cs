@@ -6,24 +6,23 @@ namespace AngbandOS.Core
 {
     [Serializable]
     /// <summary>
-    /// Represents a repository for game singletons.
+    /// Represents a repository for all game singletons.
     /// </summary>
     internal class SingletonRepository
     {
-        public SingletonDictionary<FixedArtifactId, FixedArtifact> FixedArtifacts;
-        public SingletonDictionary<string, ProjectileGraphic> ProjectileGraphics;
         public SingletonDictionary<string, Animation> Animations;
-        public SingletonList<Vault> Vaults;
+        public SingletonDictionary<FixedArtifactId, FixedArtifact> FixedArtifacts;
         public SingletonDictionary<string, FloorTileType> FloorTileTypes;
-        public SingletonDictionary<RareItemTypeEnum, RareItem> RareItemTypes;
-
         public SingletonList<InGameCommand> InGameCommands;
-        public SingletonList<WizardCommand> WizardCommands;
+        public SingletonList<BaseInventorySlot> InventorySlots;
         public SingletonList<ItemClass> ItemCategories;
         public SingletonList<MonsterRace> MonsterRaces;
-        public SingletonList<BaseInventorySlot> InventorySlots;
+        public SingletonDictionary<string, ProjectileGraphic> ProjectileGraphics;
         public SingletonList<Race> Races;
+        public SingletonDictionary<RareItemTypeEnum, RareItem> RareItemTypes;
         public SingletonList<BaseStoreCommand> StoreCommands;
+        public SingletonList<Vault> Vaults;
+        public SingletonList<WizardCommand> WizardCommands;
         public SingletonList<TimedAction> TimedActions;
         public SingletonList<BaseCharacterClass> CharacterClasses;
         public SingletonList<BaseRealm> Realms;
@@ -37,6 +36,7 @@ namespace AngbandOS.Core
         public SingletonList<StaffFlavour> StaffFlavours;
         public SingletonList<WandFlavour> WandFlavours;
         public SingletonList<ChestTrapConfiguration> ChestTrapConfigurations;
+        public SingletonList<HelpGroup> HelpGroups;
 
         private T[] LoadTypesFromAssembly<T>(SaveGame saveGame)
         {
@@ -84,10 +84,9 @@ namespace AngbandOS.Core
             FloorTileTypes = new SingletonDictionary<string, FloorTileType>(saveGame, LoadTypesFromAssembly<FloorTileType>(saveGame), (_floorTileType => _floorTileType.Name));
             RareItemTypes = new SingletonDictionary<RareItemTypeEnum, RareItem>(saveGame, LoadTypesFromAssembly<RareItem>(saveGame), _rareItemType => _rareItemType.RareItemType);
             FixedArtifacts = new SingletonDictionary<FixedArtifactId, FixedArtifact>(saveGame, LoadTypesFromAssembly<FixedArtifact>(saveGame), (_fixedArtifact => _fixedArtifact.FixedArtifactID));
-
-            MonsterRace[] monsterRaces = LoadTypesFromAssembly<MonsterRace>(saveGame).OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
-            MonsterRaces = new SingletonList<MonsterRace>(saveGame, monsterRaces);
+            MonsterRaces = new SingletonList<MonsterRace>(saveGame, LoadTypesFromAssembly<MonsterRace>(saveGame).OrderBy(_monsterRace => _monsterRace.LevelFound));
             Races = new SingletonList<Race>(saveGame, LoadTypesFromAssembly<Race>(saveGame));
+            HelpGroups = new SingletonList<HelpGroup>(saveGame, LoadTypesFromAssembly<HelpGroup>(saveGame));
         }
     }
 }

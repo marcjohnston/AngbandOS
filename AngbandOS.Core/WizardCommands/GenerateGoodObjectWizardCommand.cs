@@ -1,11 +1,15 @@
 ﻿namespace AngbandOS.Core.WizardCommands
 {
     [Serializable]
-    internal class GoodAcquirementWizardCommand : WizardCommand
+    internal class GenerateGoodObjectWizardCommand : WizardCommand
     {
-        private GoodAcquirementWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private GenerateGoodObjectWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Key => 'g';
+
+        public override string HelpDescription => "Generate Good Object";
+
+        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<ObjectCommandsHelpGroup>();
 
         public override void Execute()
         {

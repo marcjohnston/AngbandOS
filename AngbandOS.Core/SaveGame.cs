@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Net.Http.Headers;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -10527,7 +10528,6 @@ namespace AngbandOS.Core
         {
             int itemIndex = -999;
 
-            int i;
             // Make sure we're in a situation where we can read
             if (Player.TimedBlindness.TurnsRemaining != 0)
             {
@@ -18729,45 +18729,47 @@ namespace AngbandOS.Core
                 SetBackground(BackgroundImage.Normal);
                 Screen.Print(Colour.Red, "Wizard Commands", 1, 31);
                 Screen.Print(Colour.Red, "===============", 2, 31);
-                Screen.Print(Colour.Red, "Character Editing", 4, 1);
-                Screen.Print(Colour.Red, "=================", 5, 1);
-                Screen.Print("a = Cure All", 7, 1);
-                Screen.Print("e = Edit Stats", 8, 1);
-                Screen.Print("h = Reroll Hitpoints", 9, 1);
-                Screen.Print("k = Self Knowledge", 10, 1);
-                Screen.Print("M = Gain Mutation", 11, 1);
-                Screen.Print("r = Gain Level Reward", 12, 1);
-                Screen.Print("x = Gain Experience", 13, 1);
-                Screen.Print(Colour.Red, "Movement", 15, 1);
-                Screen.Print(Colour.Red, "========", 16, 1);
-                Screen.Print("b = Teleport to Target", 18, 1);
-                Screen.Print("j = Jump Levels", 19, 1);
-                Screen.Print("p = Phase Door", 20, 1);
-                Screen.Print("t = Teleport", 21, 1);
-                Screen.Print(Colour.Red, "Monsters", 4, 26);
-                Screen.Print(Colour.Red, "========", 5, 26);
-                Screen.Print("s = Summon Monster", 7, 26);
-                Screen.Print("n = Summon Named Monster", 8, 26);
-                Screen.Print("N = Summon Named Pet", 9, 26);
-                Screen.Print("H = Summon Horde", 10, 26);
-                Screen.Print("Z = Carnage True", 11, 26);
-                Screen.Print("z = Zap (Wizard Bolt)", 12, 26);
-                Screen.Print(Colour.Red, "General Commands", 14, 26);
-                Screen.Print(Colour.Red, "================", 15, 26);
-                Screen.Print("\" = Generate spoilers", 17, 26);
-                Screen.Print("d = Detect All", 18, 26);
-                Screen.Print("m = Map Area", 19, 26);
-                Screen.Print("w = Wizard Light", 20, 26);
-                Screen.Print(Colour.Red, "Object Commands", 4, 51);
-                Screen.Print(Colour.Red, "===============", 5, 51);
-                Screen.Print("c = Create Item", 7, 51);
-                Screen.Print("C = Create Named artifact", 8, 51);
-                Screen.Print("f = Identify Fully", 9, 51);
-                Screen.Print("g = Generate Good Object", 10, 51);
-                Screen.Print("i = Identify Pack", 11, 51);
-                Screen.Print("l = Learn About Objects", 12, 51);
-                Screen.Print("o = Object Editor", 13, 51);
-                Screen.Print("v = Generate Very Good Object", 14, 51);
+
+                List<IHelpCommand> allCommands = new List<IHelpCommand>();
+                foreach (IHelpCommand command in SingletonRepository.WizardCommands)
+                {
+                    if (command.IsEnabled && command.HelpGroup != null && !String.IsNullOrEmpty(command.HelpDescription))
+                    {
+                        allCommands.Add(command);
+                    }
+                }
+
+                // We will create a card for each help group and render all of the cards in a wrappable grid.
+                ConsoleGrid consoleGrid = new ConsoleGrid();
+
+                // Get all of the help groups.
+                HelpGroup[] helpGroups = allCommands
+                    .Where(_command => _command.HelpGroup != null)
+                    .Select(_command => _command.HelpGroup)
+                    .Distinct()
+                    .OrderBy(_helpGroup => _helpGroup.SortIndex)
+                    .ToArray();
+
+                // Enumerate the groups in alphabetical order and build a console card for each group.
+                foreach (HelpGroup helpGroup in helpGroups)
+                {
+                    List<IHelpCommand> groupCommands = allCommands
+                        .Where(_command => _command.HelpGroup == helpGroup)
+                        .OrderBy(_command => _command.Key)
+                        .ToList();
+
+                    ConsoleCard card = new ConsoleCard();
+                    card.Print(0, 0, Colour.Red, helpGroup.Title);
+                    card.Print(0, 1, Colour.Red, new string('=', helpGroup.Title.Length));
+                    int row = 3;
+                    foreach (IHelpCommand command in groupCommands)
+                    {
+                        card.Print(0, row, Colour.White, $"{command.Key} = {command.HelpDescription}");
+                        row++;
+                    }
+                    consoleGrid.AddCard(card);
+                }
+                consoleGrid.Render(this, new ConsoleWindow(1, 4, 79, 21), new ConsoleTopLeftAlignment());
                 Screen.Print("Hit any key to continue", 43, 23);
                 Inkey();
             }

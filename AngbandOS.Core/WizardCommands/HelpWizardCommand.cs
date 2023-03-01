@@ -7,6 +7,10 @@
 
         public override char Key => '?';
 
+        public override string HelpDescription => "Render Wizard Help";
+
+        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<GeneralCommandsHelpGroup>();
+
         public override void Execute()
         {
             SaveGame.DoCmdWizHelp();

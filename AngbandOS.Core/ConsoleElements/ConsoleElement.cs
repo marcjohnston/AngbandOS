@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.ConsoleElements
 {
     /// <summary>
-    /// Represents an element that can be rendered on the screen.
+    /// Represents an abstract element that can be rendered on the screen.
     /// </summary>
     internal abstract class ConsoleElement
     {
@@ -14,11 +14,6 @@
         /// </summary>
         public ConsoleAlignment? Alignment { get; set; } = null;
 
-        public abstract void Print(SaveGame saveGame, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment);
-
-        public void Print(SaveGame saveGame, ConsoleWindow containerWindow)
-        {
-            Print(saveGame, containerWindow, new ConsoleTopLeftAlignment());
-        }
+        public abstract void Render(SaveGame saveGame, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment);
     }
 }

@@ -7,6 +7,10 @@
 
         public override char Key => 'X';
 
+        public override string HelpDescription => "Randomize Inventory";
+
+        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<GeneralCommandsHelpGroup>();
+
         public override void Execute()
         {
             SaveGame.RandomizeInventory();

@@ -26,6 +26,14 @@
             TopLeft = topLeft;
             BottomRight = bottomRight;
         }
+
+        /// <summary>
+        /// Creates a new ConsoleWindow object from top, left, right and bottom locations.
+        /// </summary>
+        /// <param name="left">The 0-based left location of the window.</param>
+        /// <param name="top">The 0-based top location of the window.</param>
+        /// <param name="right">The 0-based right side location of the window.</param>
+        /// <param name="bottom">The 0-based bottom side location of the window.</param>
         public ConsoleWindow(int left, int top, int right, int bottom) : this(new ConsoleLocation(left, top), new ConsoleLocation(right, bottom)) { }
 
         public override string ToString()

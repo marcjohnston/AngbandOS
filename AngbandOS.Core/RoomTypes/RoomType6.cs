@@ -113,7 +113,6 @@
             }
             else if (tmp < 80)
             {
-                uint _vaultAuxDragonMask4;
                 switch (Program.Rng.RandomLessThan(6))
                 {
                     case 0:

@@ -40,7 +40,7 @@ namespace AngbandOS.Core.ConsoleElements
             return characters.GetEnumerator();
         }
 
-        public override void Print(SaveGame saveGame, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment)
+        public override void Render(SaveGame saveGame, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment)
         {
             ConsoleAlignment alignment = Alignment ?? parentAlignment;
             ConsoleLocation location = alignment.ComputeTopLeftLocation(this, containerWindow);
@@ -48,7 +48,7 @@ namespace AngbandOS.Core.ConsoleElements
 
             foreach (ConsoleChar consoleChar in characters)
             {
-                consoleChar.Print(saveGame, location.ToWindow(consoleChar.Width, consoleChar.Height), alignment);
+                consoleChar.Render(saveGame, location.ToWindow(consoleChar.Width, consoleChar.Height), alignment);
                 location = location.Offset(1, 0);
             }
         }

@@ -7,6 +7,10 @@
 
         public override char Key => 'a';
 
+        public override string HelpDescription => "Cure All";
+
+        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<CharacterEditingHelpGroup>();
+
         public override void Execute()
         {
             SaveGame.DoCmdWizCureAll();

@@ -242,8 +242,6 @@ namespace AngbandOS.Core
         /// </summary>
         private void DisplayPlayerAbilityScoresWithModifiers()
         {
-            Colour a;
-            char c;
             const int statCol = 1;
             const int row = 22;
             SaveGame.Screen.Print(Colour.Purple, "Initial", row - 1, statCol + 5);

@@ -7,6 +7,10 @@
 
         public override char Key => 'H';
 
+        public override string HelpDescription => "Summon Horde";
+
+        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<MonstersHelpGroup>();
+
         public override void Execute()
         {
             SaveGame.DoCmdSummonHorde();

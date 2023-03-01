@@ -7,6 +7,10 @@
 
         public override char Key => 'i';
 
+        public override string HelpDescription => "Identify Pack";
+
+        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<ObjectCommandsHelpGroup>();
+
         public override void Execute()
         {
             SaveGame.IdentifyPack();

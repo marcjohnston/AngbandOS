@@ -40,7 +40,7 @@ namespace AngbandOS.Core
             return list.GetEnumerator();
         }
 
-        public SingletonList(SaveGame saveGame, T[] items)
+        public SingletonList(SaveGame saveGame, IEnumerable<T> items)
         {
             foreach (T item in items)
             {

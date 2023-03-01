@@ -7,6 +7,10 @@
 
         public override char Key => 'c';
 
+        public override string HelpDescription => "Create Item";
+
+        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<ObjectCommandsHelpGroup>();
+
         public override void Execute()
         {
             SaveGame.WizCreateItem();

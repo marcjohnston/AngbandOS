@@ -189,7 +189,8 @@ namespace AngbandOS.Core
 
         public static readonly int VersionMajor = Assembly.GetExecutingAssembly().GetName().Version.Major;
         public static readonly int VersionMinor = Assembly.GetExecutingAssembly().GetName().Version.Minor;
+        public static readonly int VersionBuild = Assembly.GetExecutingAssembly().GetName().Version.Build;
         public static readonly string VersionName = Assembly.GetExecutingAssembly().GetName().Name;
-        public static readonly string VersionStamp = $"Version {VersionMajor}.{VersionMinor}";
+        public static readonly string VersionStamp = $"Version {VersionMajor}.{VersionMinor}.{VersionBuild}";
     }
 }

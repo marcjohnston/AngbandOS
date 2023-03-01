@@ -5,8 +5,14 @@
     /// </summary>
     internal class ConsoleLocation
     {
+        /// <summary>
+        /// The 0-based x-coordinate for the location on the console.
+        /// </summary>
         public int X { get; }
 
+        /// <summary>
+        /// The 0-based y-coordinate for the location on the console.
+        /// </summary>
         public int Y { get; }
 
         public ConsoleLocation Clone() => new ConsoleLocation(X, Y);

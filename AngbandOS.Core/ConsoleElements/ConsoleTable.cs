@@ -76,7 +76,7 @@
             return row;
         }
 
-        public override void Print(SaveGame saveGame, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment)
+        public override void Render(SaveGame saveGame, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment)
         {
             ConsoleAlignment alignment = Alignment ?? parentAlignment;
             ConsoleLocation rowLocation = alignment.ComputeTopLeftLocation(this, containerWindow);
@@ -98,7 +98,7 @@
                         ConsoleElement? element = row[column.Name];
                         if (element != null)
                         {
-                            element.Print(saveGame, columnLocation.ToWindow(columnWidth, 1), column.Alignment);
+                            element.Render(saveGame, columnLocation.ToWindow(columnWidth, 1), column.Alignment);
                         }
                         columnLocation = columnLocation.Offset(columnWidth + 1, 0);
                     }

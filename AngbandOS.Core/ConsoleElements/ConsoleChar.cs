@@ -12,7 +12,7 @@
 
         public override int Height => 1;
 
-        public override void Print(SaveGame saveGame, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment)
+        public override void Render(SaveGame saveGame, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment)
         {
             ConsoleAlignment alignment = Alignment ?? parentAlignment;
             ConsoleLocation location = alignment.ComputeTopLeftLocation(this, containerWindow);

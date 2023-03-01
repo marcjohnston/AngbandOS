@@ -1254,7 +1254,6 @@ namespace AngbandOS.Core.Stores
 
         private void StoreItemOptimize(int item)
         {
-            int j;
             Item oPtr = _inventory[item];
             if (oPtr.BaseItemCategory == null)
             {
@@ -1432,7 +1431,6 @@ namespace AngbandOS.Core.Stores
             // Mark the spell as learned
             Spell spell = useSetTwo ? SaveGame.Spells[1][spellIndex] : SaveGame.Spells[0][spellIndex];
             spell.Learned = true;
-            int i;
 
             // Mark the spell as the last spell learned, in case we need to start forgetting them
             SaveGame.SpellOrder.Add(spell);

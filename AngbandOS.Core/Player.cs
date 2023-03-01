@@ -2013,11 +2013,11 @@ namespace AngbandOS.Core
             {
                 ConsoleWindow container = new ConsoleWindow(50, 1, 79, consoleTable.Height);
                 container.Clear(SaveGame, Colour.Background);
-                consoleTable.Print(SaveGame, container, new ConsoleTopLeftAlignment());
+                consoleTable.Render(SaveGame, container, new ConsoleTopLeftAlignment());
             }
             else
             {
-                consoleTable.Print(SaveGame, new ConsoleWindow(0, 1, 79, 26), new ConsoleTopRightAlignment());
+                consoleTable.Render(SaveGame, new ConsoleWindow(0, 1, 79, 26), new ConsoleTopRightAlignment());
             }
         }
     }

@@ -1,11 +1,15 @@
 ﻿namespace AngbandOS.Core.WizardCommands
 {
     [Serializable]
-    internal class SummonWizardCommand : WizardCommand
+    internal class SummonMonsterWizardCommand : WizardCommand
     {
-        private SummonWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private SummonMonsterWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Key => 's';
+
+        public override string HelpDescription => "Summon Monster";
+
+        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<MonstersHelpGroup>();
 
         public override void Execute()
         {

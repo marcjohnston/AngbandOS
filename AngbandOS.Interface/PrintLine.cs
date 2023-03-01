@@ -5,10 +5,29 @@
 /// </summary>
 public class PrintLine
 {
+    /// <summary>
+    /// The 0-based row in which the line should be rendered.  
+    /// </summary>
     public int row { get; set; }
+
+    /// <summary>
+    /// The 0-based column in which the line should start at.
+    /// </summary>
     public int col { get; set; }
+
+    /// <summary>
+    /// The text to render.
+    /// </summary>
     public string text { get; set; }
+
+    /// <summary>
+    /// The foreground color to render the text.
+    /// </summary>
     public Colour foreColour { get; set; }
+
+    /// <summary>
+    /// The background color to render the text.
+    /// </summary>
     public Colour backColour { get; set; }
 
     public PrintLine(int row, int col, string text, Colour foreColour, Colour backColour)

@@ -7,6 +7,10 @@
 
         public override char Key => 'x';
 
+        public override string HelpDescription => "Gain Experience";
+
+        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<CharacterEditingHelpGroup>();
+
         public override void Execute()
         {
             if (SaveGame.CommandArgument != 0)
