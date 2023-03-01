@@ -3,34 +3,32 @@
     [Serializable]
     internal class TempleStore : Store
     {
-        public TempleStore(SaveGame saveGame) : base(saveGame, StoreType.StoreTemple)
-        {
-        }
+        private TempleStore(SaveGame saveGame) : base(saveGame, StoreType.StoreTemple) { } // This object is a singleton
 
         public override string FeatureType => "Temple";
 
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
-            new StoreOwner("Ludwig the Humble", 10000, 109, SaveGame.SingletonRepository.Races.Get<DwarfRace>()),
-            new StoreOwner("Gunnar the Paladin", 15000, 110, SaveGame.SingletonRepository.Races.Get<HalfTrollRace>()),
-            new StoreOwner("Sir Parsival the Pure", 25000, 107, SaveGame.SingletonRepository.Races.Get<HighElfRace>()),
-            new StoreOwner("Asenath the Holy", 30000, 109, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("McKinnon", 10000, 109, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Mistress Chastity", 15000, 110, SaveGame.SingletonRepository.Races.Get<HighElfRace>()),
-            new StoreOwner("Hashnik the Druid", 25000, 107, SaveGame.SingletonRepository.Races.Get<HobbitRace>()),
-            new StoreOwner("Finak", 30000, 109, SaveGame.SingletonRepository.Races.Get<YeekRace>()),
-            new StoreOwner("Krikkik", 10000, 109, SaveGame.SingletonRepository.Races.Get<KlackonRace>()),
-            new StoreOwner("Morival the Wild", 15000, 110, SaveGame.SingletonRepository.Races.Get<ElfRace>()),
-            new StoreOwner("Hoshak the Dark", 25000, 107, SaveGame.SingletonRepository.Races.Get<ImpRace>()),
-            new StoreOwner("Atal the Wise", 30000, 109, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Ibenidd the Chaste", 10000, 109, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Eridish", 15000, 110, SaveGame.SingletonRepository.Races.Get<HalfTrollRace>()),
-            new StoreOwner("Vrudush the Shaman", 25000, 107, SaveGame.SingletonRepository.Races.Get<HalfOgreRace>()),
-            new StoreOwner("Haob the Berserker", 30000, 109, SaveGame.SingletonRepository.Races.Get<TchoTchoRace>()),
-            new StoreOwner("Proogdish the Youthfull", 10000, 109, SaveGame.SingletonRepository.Races.Get<HalfOgreRace>()),
-            new StoreOwner("Lumwise the Mad", 15000, 110, SaveGame.SingletonRepository.Races.Get<YeekRace>()),
-            new StoreOwner("Muirt the Virtuous", 25000, 107, SaveGame.SingletonRepository.Races.Get<KoboldRace>()),
-            new StoreOwner("Dardobard the Weak", 30000, 109, SaveGame.SingletonRepository.Races.Get<SpectreRace>())
+            SaveGame.SingletonRepository.StoreOwners.Get<LudwigTheHumbleStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<GunnarThePaladinStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<SirParsivalThePureStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<AsenathTheHolyStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<McKinnonStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<MistressChastityStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<HashnikTheDruidStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<FinakStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<KrikkikStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<MorivalTheWildStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<HoshakTheDarkStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<AtalTheWiseStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<IbeniddTheChasteStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<EridishStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<VrudushTheShamanStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<HaobTheBerserkerStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<ProogdishTheYouthfullStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<LumwiseTheMadStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<MuirtTheVirtuousStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<DardobardTheWeakStoreOwner>()
         };
 
         protected override StockStoreInventoryItem[] GetStoreTable()

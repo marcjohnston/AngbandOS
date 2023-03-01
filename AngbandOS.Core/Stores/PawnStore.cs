@@ -3,32 +3,30 @@
     [Serializable]
     internal class PawnStore : Store
     {
-        public PawnStore(SaveGame saveGame) : base(saveGame, StoreType.StorePawn)
-        {
-        }
+        private PawnStore(SaveGame saveGame) : base(saveGame, StoreType.StorePawn) { } // This object is a singleton
 
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
-            new StoreOwner("Magd the Ruthless", 2000, 100, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Drako Fairdeal", 4000, 100, SaveGame.SingletonRepository.Races.Get<DraconianRace>()),
-            new StoreOwner("Featherwing", 5000, 100, SaveGame.SingletonRepository.Races.Get<SpriteRace>()),
-            new StoreOwner("Xochinaggua", 10000, 100, SaveGame.SingletonRepository.Races.Get<MindFlayerRace>()),
-            new StoreOwner("Od the Penniless", 2000, 100, SaveGame.SingletonRepository.Races.Get<ElfRace>()),
-            new StoreOwner("Xax", 4000, 100, SaveGame.SingletonRepository.Races.Get<GolemRace>()),
-            new StoreOwner("Jake Small", 5000, 100, SaveGame.SingletonRepository.Races.Get<HalfGiantRace>()),
-            new StoreOwner("Helga the Lost", 10000, 100, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Gloom the Phlegmatic", 2000, 100, SaveGame.SingletonRepository.Races.Get<ZombieRace>()),
-            new StoreOwner("Quick-Arm Vollaire", 4000, 100, SaveGame.SingletonRepository.Races.Get<VampireRace>()),
-            new StoreOwner("Asenath", 5000, 100, SaveGame.SingletonRepository.Races.Get<ZombieRace>()),
-            new StoreOwner("Lord Filbert", 10000, 100, SaveGame.SingletonRepository.Races.Get<VampireRace>()),
-            new StoreOwner("Herranyth the Ruthless", 2000, 100, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Gagrin Moneylender", 4000, 100, SaveGame.SingletonRepository.Races.Get<YeekRace>()),
-            new StoreOwner("Thrambor the Grubby", 5000, 100, SaveGame.SingletonRepository.Races.Get<HalfElfRace>()),
-            new StoreOwner("Derigrin the Honest", 10000, 100, SaveGame.SingletonRepository.Races.Get<HobbitRace>()),
-            new StoreOwner("Munk the Barterer", 2000, 100, SaveGame.SingletonRepository.Races.Get<HalfOgreRace>()),
-            new StoreOwner("Gadrialdur the Fair", 4000, 100, SaveGame.SingletonRepository.Races.Get<HalfElfRace>()),
-            new StoreOwner("Ninar the Stooped", 5000, 100, SaveGame.SingletonRepository.Races.Get<DwarfRace>()),
-            new StoreOwner("Adirath the Unmagical", 10000, 100, SaveGame.SingletonRepository.Races.Get<TchoTchoRace>())
+            SaveGame.SingletonRepository.StoreOwners.Get<MagdTheRuthlessStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<DrakoFairdealStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<FeatherwingStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<XochinagguaStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<OdThePennilessStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<XaxStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<JakeSmallStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<HelgaTheLostStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<GloomThePhlegmaticStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<QuickArmVollaireStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<AsenathStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<LordFilbertStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<HerranythTheRuthlessStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<GagrinMoneylenderStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<ThramborTheGrubbyStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<DerigrinTheHonestStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<MunkTheBartererStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<GadrialdurTheFairStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<NinarTheStoopedStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<AdirathTheUnmagicalStoreOwner>()
         };
 
         public override string FeatureType => "Pawnbrokers";
@@ -54,9 +52,9 @@
         /// <returns></returns>
         /// <remarks>
         /// Per Dean Anderson, 7/22/2022
-        /// The pawn shop both buys and sells cheaply. The whole idea is that if you need cash you can pawn items
-        /// (for less money than you could sell them for), in the knowledge that the shop will hold onto them and then buy
-        /// them back later for the amount you pawned them for. If retrieving your items from the pawn shop had a
+        ///Thepawn shop both buys and sells cheaply.Thewhole idea is that if you need cash you can pawn items
+        /// (for less money than you could sell them for), inTheknowledge thatTheshop will hold onto them and then buy
+        /// them back later forTheamount you pawned them for. If retrieving your items fromThepawn shop had a
         /// markup then you'd be better off just selling them  normally and buying new ones to replace them.
         /// </remarks>
         protected override int AdjustPrice(int price, bool trueToMarkDownFalseToMarkUp)

@@ -3,36 +3,34 @@
     [Serializable]
     internal class ArmouryStore : Store
     {
-        public ArmouryStore(SaveGame saveGame) : base(saveGame, StoreType.StoreArmoury)
-        {
-        }
+        private ArmouryStore(SaveGame saveGame) : base(saveGame, StoreType.StoreArmoury) { } // This object is a singleton
 
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
-            new StoreOwner("Kon-Dar the Ugly", 10000, 115, SaveGame.SingletonRepository.Races.Get<HalfOrcRace>()),
-            new StoreOwner("Darg-Low the Grim", 15000, 111, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Decado the Handsome", 25000, 112, SaveGame.SingletonRepository.Races.Get<GreatOneRace>()),
-            new StoreOwner("Elo Dragonscale", 30000, 112, SaveGame.SingletonRepository.Races.Get<ElfRace>()),
-            new StoreOwner("Delicatus", 10000, 115, SaveGame.SingletonRepository.Races.Get<SpriteRace>()),
-            new StoreOwner("Gruce the Huge", 15000, 111, SaveGame.SingletonRepository.Races.Get<HalfGiantRace>()),
-            new StoreOwner("Animus", 25000, 112, SaveGame.SingletonRepository.Races.Get<GolemRace>()),
-            new StoreOwner("Malvus", 30000, 112, SaveGame.SingletonRepository.Races.Get<HalfTitanRace>()),
-            new StoreOwner("Selaxis", 10000, 115, SaveGame.SingletonRepository.Races.Get<ZombieRace>()),
-            new StoreOwner("Deathchill", 15000, 111, SaveGame.SingletonRepository.Races.Get<SpectreRace>()),
-            new StoreOwner("Drios the Faint", 25000, 112, SaveGame.SingletonRepository.Races.Get<SpectreRace>()),
-            new StoreOwner("Bathric the Cold", 30000, 112, SaveGame.SingletonRepository.Races.Get<VampireRace>()),
-            new StoreOwner("Vengella the Cruel", 10000, 115, SaveGame.SingletonRepository.Races.Get<HalfTrollRace>()),
-            new StoreOwner("Wyrana the Mighty", 15000, 111, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Yojo II", 25000, 112, SaveGame.SingletonRepository.Races.Get<DwarfRace>()),
-            new StoreOwner("Ranalar the Sweet", 30000, 112, SaveGame.SingletonRepository.Races.Get<GreatOneRace>()),
-            new StoreOwner("Horbag the Unclean", 10000, 115, SaveGame.SingletonRepository.Races.Get<HalfOrcRace>()),
-            new StoreOwner("Elelen the Telepath", 15000, 111, SaveGame.SingletonRepository.Races.Get<DarkElfRace>()),
-            new StoreOwner("Isedrelias", 25000, 112, SaveGame.SingletonRepository.Races.Get<SpriteRace>()),
-            new StoreOwner("Vegnar One-eye", 30000, 112, SaveGame.SingletonRepository.Races.Get<CyclopsRace>()),
-            new StoreOwner("Rodish the Chaotic", 10000, 115, SaveGame.SingletonRepository.Races.Get<MiriNigriRace>()),
-            new StoreOwner("Hesin Swordmaster", 15000, 111, SaveGame.SingletonRepository.Races.Get<NibelungRace>()),
-            new StoreOwner("Elvererith the Cheat", 25000, 112, SaveGame.SingletonRepository.Races.Get<DarkElfRace>()),
-            new StoreOwner("Zzathath the Imp", 30000, 112, SaveGame.SingletonRepository.Races.Get<ImpRace>())
+            SaveGame.SingletonRepository.StoreOwners.Get<KonDarTheUglyStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<DargLowTheGrimStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<DecadoTheHandsomeStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<EloDragonscaleStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<DelicatusStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<GruceTheHugeStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<AnimusStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<MalvusStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<SelaxisStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<DeathchillStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<DriosTheFaintStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<BathricTheColdStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<VengellaTheCruelStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<WyranaTheMightyStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<YojoIIStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<RanalarTheSweetStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<HorbagTheUncleanStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<ElelenTheTelepathStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<IsedreliasStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<VegnarOneEyeStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<RodishTheChaoticStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<HesinSwordmasterStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<ElvererithTheCheatStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<ZzathathTheImpStoreOwner>()
         };
 
         public override string FeatureType => "Armoury";

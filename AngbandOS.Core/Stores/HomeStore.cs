@@ -3,14 +3,12 @@
     [Serializable]
     internal class HomeStore : Store
     {
-        public HomeStore(SaveGame saveGame) : base(saveGame, StoreType.StoreHome)
-        {
-        }
+        private HomeStore(SaveGame saveGame) : base(saveGame, StoreType.StoreHome) { } // This object is a singleton
 
         public override int MaxInventory => 100;
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
-            new StoreOwner("Your home", 0, 100, null)
+            SaveGame.SingletonRepository.StoreOwners.Get<YourHomeStoreOwner>()
         };
 
         public override string FeatureType => "Home";

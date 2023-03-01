@@ -37,6 +37,8 @@ namespace AngbandOS.Core
         public SingletonList<WandFlavour> WandFlavours;
         public SingletonList<ChestTrapConfiguration> ChestTrapConfigurations;
         public SingletonList<HelpGroup> HelpGroups;
+        public SingletonList<StoreOwner> StoreOwners;
+        public SingletonList<Store> Stores;
 
         private T[] LoadTypesFromAssembly<T>(SaveGame saveGame)
         {
@@ -87,6 +89,8 @@ namespace AngbandOS.Core
             MonsterRaces = new SingletonList<MonsterRace>(saveGame, LoadTypesFromAssembly<MonsterRace>(saveGame).OrderBy(_monsterRace => _monsterRace.LevelFound));
             Races = new SingletonList<Race>(saveGame, LoadTypesFromAssembly<Race>(saveGame));
             HelpGroups = new SingletonList<HelpGroup>(saveGame, LoadTypesFromAssembly<HelpGroup>(saveGame));
+            StoreOwners = new SingletonList<StoreOwner>(saveGame, LoadTypesFromAssembly<StoreOwner>(saveGame));
+            Stores = new SingletonList<Store>(saveGame, LoadTypesFromAssembly<Store>(saveGame));
         }
     }
 }

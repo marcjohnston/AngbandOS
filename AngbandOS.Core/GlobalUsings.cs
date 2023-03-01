@@ -57,6 +57,7 @@ global using AngbandOS.Core.Spells.Sorcery;
 global using AngbandOS.Core.Spells.Tarot;
 global using AngbandOS.Core.StaffFlavours;
 global using AngbandOS.Core.StoreCommands;
+global using AngbandOS.Core.StoreOwners;
 global using AngbandOS.Core.Stores;
 global using AngbandOS.Core.Syllables;
 global using AngbandOS.Core.Talents;

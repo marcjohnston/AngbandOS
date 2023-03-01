@@ -3,13 +3,11 @@
     [Serializable]
     internal class HallStore : Store
     {
-        public HallStore(SaveGame saveGame) : base(saveGame, StoreType.StoreHall)
-        {
-        }
+        private HallStore(SaveGame saveGame) : base(saveGame, StoreType.StoreHall) { } // This object is a singleton
 
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
-            new StoreOwner("Hall of Records", 0, 100, null)
+            SaveGame.SingletonRepository.StoreOwners.Get<HallOfRecordsStoreOwner>()
         };
 
         public override string FeatureType => "HallOfRecords";

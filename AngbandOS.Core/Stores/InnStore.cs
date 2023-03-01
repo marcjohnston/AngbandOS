@@ -3,40 +3,38 @@
     [Serializable]
     internal class InnStore : Store
     {
-        public InnStore(SaveGame saveGame) : base(saveGame, StoreType.StoreInn)
-        {
-        }
+        private InnStore(SaveGame saveGame) : base(saveGame, StoreType.StoreInn) { } // This object is a singleton
 
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
-            new StoreOwner("Mordsan", 15000, 108, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Furfoot Pobber", 20000, 105, SaveGame.SingletonRepository.Races.Get<HobbitRace>()),
-            new StoreOwner("Oddo Yeekson", 25000, 110, SaveGame.SingletonRepository.Races.Get<YeekRace>()),
-            new StoreOwner("Dry-Bones", 30000, 105, SaveGame.SingletonRepository.Races.Get<SkeletonRace>()),
-            new StoreOwner("Kleibons", 15000, 108, SaveGame.SingletonRepository.Races.Get<KlackonRace>()),
-            new StoreOwner("Prendegast", 20000, 105, SaveGame.SingletonRepository.Races.Get<HobbitRace>()),
-            new StoreOwner("Straasha", 25000, 110, SaveGame.SingletonRepository.Races.Get<DraconianRace>()),
-            new StoreOwner("Allia the Servile", 30000, 105, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Lumin the Blue", 15000, 108, SaveGame.SingletonRepository.Races.Get<SpectreRace>()),
-            new StoreOwner("Short Al", 20000, 105, SaveGame.SingletonRepository.Races.Get<ZombieRace>()),
-            new StoreOwner("Silent Faldus", 25000, 110, SaveGame.SingletonRepository.Races.Get<ZombieRace>()),
-            new StoreOwner("Quirmby the Strange", 30000, 105, SaveGame.SingletonRepository.Races.Get<VampireRace>()),
-            new StoreOwner("Aldous the Sleepy", 15000, 108, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Grundy the Tall", 20000, 105, SaveGame.SingletonRepository.Races.Get<HobbitRace>()),
-            new StoreOwner("Gobbleguts Thunderbreath", 25000, 110, SaveGame.SingletonRepository.Races.Get<HalfTrollRace>()),
-            new StoreOwner("Silverscale", 30000, 105, SaveGame.SingletonRepository.Races.Get<DraconianRace>()),
-            new StoreOwner("Etheraa the Furious", 15000, 108, SaveGame.SingletonRepository.Races.Get<TchoTchoRace>()),
-            new StoreOwner("Paetlan the Alcoholic", 20000, 105, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Drang", 25000, 110, SaveGame.SingletonRepository.Races.Get<HalfOgreRace>()),
-            new StoreOwner("Barbag the Sly", 30000, 105, SaveGame.SingletonRepository.Races.Get<KoboldRace>()),
-            new StoreOwner("Kirakak", 15000, 108, SaveGame.SingletonRepository.Races.Get<KlackonRace>()),
-            new StoreOwner("Nafur the Wooden", 20000, 105, SaveGame.SingletonRepository.Races.Get<GolemRace>()),
-            new StoreOwner("Grarak the Hospitable", 25000, 110, SaveGame.SingletonRepository.Races.Get<HalfGiantRace>()),
-            new StoreOwner("Lona the Charismatic", 30000, 105, SaveGame.SingletonRepository.Races.Get<GnomeRace>()),
-            new StoreOwner("Crediric the Brewer", 15000, 108, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Nydudus the Slow", 20000, 105, SaveGame.SingletonRepository.Races.Get<ZombieRace>()),
-            new StoreOwner("Baurk the Busy", 25000, 110, SaveGame.SingletonRepository.Races.Get<YeekRace>()),
-            new StoreOwner("Seviras the Mindcrafter", 30000, 105, SaveGame.SingletonRepository.Races.Get<HumanRace>())
+            SaveGame.SingletonRepository.StoreOwners.Get<MordsanStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<FurfootPobberStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<OddoYeeksonStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<DryBonesStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<KleibonsStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<PrendegastStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<StraashaStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<AlliaTheServileStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<LuminTheBlueStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<ShortAlStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<SilentFaldusStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<QuirmbyTheStrangeStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<AldousTheSleepyStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<GrundyTheTallStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<GobblegutsThunderbreathStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<SilverscaleStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<EtheraaTheFuriousStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<PaetlanTheAlcoholicStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<DrangStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<BarbagTheSlyStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<KirakakStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<NafurTheWoodenStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<GrarakTheHospitableStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<LonaTheCharismaticStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<CrediricTheBrewerStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<NydudusTheSlowStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<BaurkTheBusyStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<SevirasTheMindcrafterStoreOwner>()
         };
 
         public override string FeatureType => "Inn";

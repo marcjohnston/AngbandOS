@@ -14,18 +14,18 @@ namespace AngbandOS.Core.Towns
         private NirTown(SaveGame saveGame) : base(saveGame) { } // This object is an singleton
         public override Store[] Stores => new Store[]
         {
-            new GeneralStore(SaveGame),
-            new EmptyLotStore(SaveGame),
-            new EmptyLotStore(SaveGame),
-            new EmptyLotStore(SaveGame),
-            new EmptyLotStore(SaveGame),
-            new EmptyLotStore(SaveGame),
-            new EmptyLotStore(SaveGame),
-            new EmptyLotStore(SaveGame),
-            new EmptyLotStore(SaveGame),
-            new EmptyLotStore(SaveGame),
-            new InnStore(SaveGame),
-            new PawnStore(SaveGame)
+            SaveGame.SingletonRepository.Stores.Get<GeneralStore>(),
+            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
+            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
+            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
+            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
+            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
+            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
+            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
+            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
+            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
+            SaveGame.SingletonRepository.Stores.Get<InnStore>(),
+            SaveGame.SingletonRepository.Stores.Get<PawnStore>()
         };
 
         public override int HousePrice => 0;

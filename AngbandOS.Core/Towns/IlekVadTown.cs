@@ -14,18 +14,18 @@ namespace AngbandOS.Core.Towns
         private IlekVadTown(SaveGame saveGame) : base(saveGame) { } // This object is an singleton
         public override Store[] Stores => new Store[]
         {
-            new GeneralStore(SaveGame), 
-            new ArmouryStore(SaveGame),
-            new WeaponStore(SaveGame), 
-            new TempleStore(SaveGame),
-            new AlchemistStore(SaveGame), 
-            new MagicStore(SaveGame),
-            new BlackStore(SaveGame), 
-            new HomeStore(SaveGame),
-            new LibraryStore(SaveGame), 
-            new EmptyLotStore(SaveGame),
-            new InnStore(SaveGame), 
-            new HallStore(SaveGame)
+            SaveGame.SingletonRepository.Stores.Get<GeneralStore>(), 
+            SaveGame.SingletonRepository.Stores.Get<ArmouryStore>(),
+            SaveGame.SingletonRepository.Stores.Get<WeaponStore>(), 
+            SaveGame.SingletonRepository.Stores.Get<TempleStore>(),
+            SaveGame.SingletonRepository.Stores.Get<AlchemistStore>(), 
+            SaveGame.SingletonRepository.Stores.Get<MagicStore>(),
+            SaveGame.SingletonRepository.Stores.Get<BlackStore>(), 
+            SaveGame.SingletonRepository.Stores.Get<HomeStore>(),
+            SaveGame.SingletonRepository.Stores.Get<LibraryStore>(), 
+            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
+            SaveGame.SingletonRepository.Stores.Get<InnStore>(), 
+            SaveGame.SingletonRepository.Stores.Get<HallStore>()
         };
 
         public override int HousePrice => 60000;

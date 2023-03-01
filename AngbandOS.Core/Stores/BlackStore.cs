@@ -3,9 +3,7 @@
     [Serializable]
     internal class BlackStore : Store
     {
-        public BlackStore(SaveGame saveGame) : base(saveGame, StoreType.StoreBlack)
-        {
-        }
+        private BlackStore(SaveGame saveGame) : base(saveGame, StoreType.StoreBlack) { } // This object is a singleton
 
         public override int MaxInventory => 75;
         public override int StoreMinKeep => 35;
@@ -15,26 +13,26 @@
 
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
-            new StoreOwner("Vhassa the Dead", 20000, 150, SaveGame.SingletonRepository.Races.Get<ZombieRace>()),
-            new StoreOwner("Kyn the Treacherous", 20000, 150, SaveGame.SingletonRepository.Races.Get<VampireRace>()),
-            new StoreOwner("Batrachian Belle", 30000, 150, SaveGame.SingletonRepository.Races.Get<MiriNigriRace>()),
-            new StoreOwner("Corpselight", 30000, 150, SaveGame.SingletonRepository.Races.Get<SpectreRace>()),
-            new StoreOwner("Parrish the Bloodthirsty", 20000, 150, SaveGame.SingletonRepository.Races.Get<VampireRace>()),
-            new StoreOwner("Vile", 20000, 150, SaveGame.SingletonRepository.Races.Get<SkeletonRace>()),
-            new StoreOwner("Prentice the Trusted", 30000, 150, SaveGame.SingletonRepository.Races.Get<SkeletonRace>()),
-            new StoreOwner("Griella Humanslayer", 30000, 150, SaveGame.SingletonRepository.Races.Get<ImpRace>()),
-            new StoreOwner("Charity the Necromancer", 20000, 150, SaveGame.SingletonRepository.Races.Get<DarkElfRace>()),
-            new StoreOwner("Pugnacious the Pugilist", 20000, 150, SaveGame.SingletonRepository.Races.Get<HalfOrcRace>()),
-            new StoreOwner("Footsore the Lucky", 30000, 150, SaveGame.SingletonRepository.Races.Get<MiriNigriRace>()),
-            new StoreOwner("Sidria Lighfingered", 30000, 150, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Riatho the Juggler", 20000, 150, SaveGame.SingletonRepository.Races.Get<HobbitRace>()),
-            new StoreOwner("Janaaka the Shifty", 20000, 150, SaveGame.SingletonRepository.Races.Get<GnomeRace>()),
-            new StoreOwner("Cina the Rogue", 30000, 150, SaveGame.SingletonRepository.Races.Get<GnomeRace>()),
-            new StoreOwner("Arunikki Greatclaw", 30000, 150, SaveGame.SingletonRepository.Races.Get<DraconianRace>()),
-            new StoreOwner("Chaeand the Poor", 20000, 150, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Afardorf the Brigand", 20000, 150, SaveGame.SingletonRepository.Races.Get<TchoTchoRace>()),
-            new StoreOwner("Lathaxl the Greedy", 30000, 150, SaveGame.SingletonRepository.Races.Get<MindFlayerRace>()),
-            new StoreOwner("Falarewyn", 30000, 150, SaveGame.SingletonRepository.Races.Get<SpriteRace>())
+            SaveGame.SingletonRepository.StoreOwners.Get<VhassaTheDeadStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<KynTheTreacherousStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<BatrachianBelleStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<CorpselightStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<ParrishTheBloodthirstyStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<VileStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<PrenticeTheTrustedStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<GriellaHumanslayerStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<CharityTheNecromancerStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<PugnaciousThePugilistStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<FootsoreTheLuckyStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<SidriaLighfingeredStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<RiathoTheJugglerStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<JanaakaTheShiftyStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<CinaTheRogueStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<ArunikkiGreatclawStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<ChaeandThePoorStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<AfardorfTheBrigandStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<LathaxlTheGreedyStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<FalarewynStoreOwner>()
         };
 
         protected override StockStoreInventoryItem[] GetStoreTable()

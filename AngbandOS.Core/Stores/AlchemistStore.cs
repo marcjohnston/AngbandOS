@@ -5,31 +5,29 @@
     {
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
-            new StoreOwner("Mauser the Chemist", 10000, 111, SaveGame.SingletonRepository.Races.Get<HalfElfRace>()),
-            new StoreOwner("Wizzle the Chaotic", 10000, 110, SaveGame.SingletonRepository.Races.Get<HobbitRace>()),
-            new StoreOwner("Kakalrakakal", 15000, 116, SaveGame.SingletonRepository.Races.Get<KlackonRace>()),
-            new StoreOwner("Jal-Eth the Alchemist", 15000, 111, SaveGame.SingletonRepository.Races.Get<ElfRace>()),
-            new StoreOwner("Fanelath the Cautious", 10000, 111, SaveGame.SingletonRepository.Races.Get<DwarfRace>()),
-            new StoreOwner("Runcie the Insane", 10000, 110, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Grumbleworth", 15000, 116, SaveGame.SingletonRepository.Races.Get<GnomeRace>()),
-            new StoreOwner("Flitter", 15000, 111, SaveGame.SingletonRepository.Races.Get<SpriteRace>()),
-            new StoreOwner("Xarillus", 10000, 111, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Egbert the Old", 10000, 110, SaveGame.SingletonRepository.Races.Get<DwarfRace>()),
-            new StoreOwner("Valindra the Proud", 15000, 116, SaveGame.SingletonRepository.Races.Get<HighElfRace>()),
-            new StoreOwner("Taen the Alchemist", 15000, 111, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Cayd the Sweet", 10000, 111, SaveGame.SingletonRepository.Races.Get<VampireRace>()),
-            new StoreOwner("Fulir the Dark", 10000, 110, SaveGame.SingletonRepository.Races.Get<NibelungRace>()),
-            new StoreOwner("Domli the Humble", 15000, 116, SaveGame.SingletonRepository.Races.Get<DwarfRace>()),
-            new StoreOwner("Yaarjukka Demonspawn", 15000, 111, SaveGame.SingletonRepository.Races.Get<ImpRace>()),
-            new StoreOwner("Gelaraldor the Herbmaster", 10000, 111, SaveGame.SingletonRepository.Races.Get<HighElfRace>()),
-            new StoreOwner("Olelaldan the Wise", 10000, 110, SaveGame.SingletonRepository.Races.Get<TchoTchoRace>()),
-            new StoreOwner("Fthoglo the Demonicist", 15000, 116, SaveGame.SingletonRepository.Races.Get<ImpRace>()),
-            new StoreOwner("Dridash the Alchemist", 15000, 111, SaveGame.SingletonRepository.Races.Get<HalfOrcRace>())
+            SaveGame.SingletonRepository.StoreOwners.Get<MauserTheChemistStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<WizzleTheChaoticStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<KakalrakakalStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<JalEthTheAlchemistStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<FanelathTheCautiousStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<RuncieTheInsaneStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<GrumbleworthStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<FlitterStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<XarillusStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<EgbertTheOldStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<ValindraTheProudStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<TaenTheAlchemistStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<CaydTheSweetStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<FulirTheDarkStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<DomliTheHumbleStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<YaarjukkaDemonspawnStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<GelaraldorTheHerbmasterStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<OlelaldanTheWiseStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<FthogloTheDemonicistStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<DridashTheAlchemistStoreOwner>()
         };
 
-        public AlchemistStore(SaveGame saveGame) : base(saveGame, StoreType.StoreAlchemist)
-        {
-        }
+        private AlchemistStore(SaveGame saveGame) : base(saveGame, StoreType.StoreAlchemist) { } // This object is a singleton
 
         public override string FeatureType => "Alchemist";
 

@@ -3,40 +3,38 @@
     [Serializable]
     internal class GeneralStore : Store
     {
-        public GeneralStore(SaveGame saveGame) : base(saveGame, StoreType.StoreGeneral)
-        {
-        }
+        private GeneralStore(SaveGame saveGame) : base(saveGame, StoreType.StoreGeneral) { } // This object is a singleton
 
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
-            new StoreOwner("Falilmawen the Friendly", 250, 108, SaveGame.SingletonRepository.Races.Get<HobbitRace>()),
-            new StoreOwner("Voirin the Cowardly", 500, 108, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Erashnak the Midget", 750, 107, SaveGame.SingletonRepository.Races.Get<MiriNigriRace>()),
-            new StoreOwner("Grug the Comely", 1000, 107, SaveGame.SingletonRepository.Races.Get<HalfTitanRace>()),
-            new StoreOwner("Forovir the Cheap", 250, 108, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Ellis the Fool", 500, 108, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Filbert the Hungry", 750, 107, SaveGame.SingletonRepository.Races.Get<VampireRace>()),
-            new StoreOwner("Fthnargl Psathiggua", 1000, 107, SaveGame.SingletonRepository.Races.Get<MindFlayerRace>()),
-            new StoreOwner("Eloise Long-Dead", 250, 108, SaveGame.SingletonRepository.Races.Get<SpectreRace>()),
-            new StoreOwner("Fundi the Slow", 500, 108, SaveGame.SingletonRepository.Races.Get<ZombieRace>()),
-            new StoreOwner("Granthus", 750, 107, SaveGame.SingletonRepository.Races.Get<SkeletonRace>()),
-            new StoreOwner("Lorax the Suave", 1000, 107, SaveGame.SingletonRepository.Races.Get<VampireRace>()),
-            new StoreOwner("Butch", 250, 108, SaveGame.SingletonRepository.Races.Get<HalfOrcRace>()),
-            new StoreOwner("Elbereth the Beautiful", 500, 108, SaveGame.SingletonRepository.Races.Get<HighElfRace>()),
-            new StoreOwner("Sarleth the Sneaky", 750, 107, SaveGame.SingletonRepository.Races.Get<GnomeRace>()),
-            new StoreOwner("Narlock", 1000, 107, SaveGame.SingletonRepository.Races.Get<DwarfRace>()),
-            new StoreOwner("Haneka the Small", 250, 108, SaveGame.SingletonRepository.Races.Get<GnomeRace>()),
-            new StoreOwner("Loirin the Mad", 500, 108, SaveGame.SingletonRepository.Races.Get<HalfGiantRace>()),
-            new StoreOwner("Wuto Poisonbreath", 750, 107, SaveGame.SingletonRepository.Races.Get<DraconianRace>()),
-            new StoreOwner("Araaka the Rotund", 1000, 107, SaveGame.SingletonRepository.Races.Get<DraconianRace>()),
-            new StoreOwner("Poogor the Dumb", 250, 108, SaveGame.SingletonRepository.Races.Get<MiriNigriRace>()),
-            new StoreOwner("Felorfiliand", 500, 108, SaveGame.SingletonRepository.Races.Get<ElfRace>()),
-            new StoreOwner("Maroka the Aged", 750, 107, SaveGame.SingletonRepository.Races.Get<GnomeRace>()),
-            new StoreOwner("Sasin the Bold", 1000, 107, SaveGame.SingletonRepository.Races.Get<HalfGiantRace>()),
-            new StoreOwner("Abiemar the Peasant", 250, 108, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Hurk the Poor", 500, 108, SaveGame.SingletonRepository.Races.Get<HalfOrcRace>()),
-            new StoreOwner("Soalin the Wretched", 750, 107, SaveGame.SingletonRepository.Races.Get<ZombieRace>()),
-            new StoreOwner("Merulla the Humble", 1000, 107, SaveGame.SingletonRepository.Races.Get<ElfRace>())
+            SaveGame.SingletonRepository.StoreOwners.Get<FalilmawenTheFriendlyStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<VoirinTheCowardlyStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<ErashnakTheMidgetStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<GrugTheComelyStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<ForovirTheCheapStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<EllisTheFoolStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<FilbertTheHungryStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<FthnarglPsathigguaStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<EloiseLongDeadStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<FundiTheSlowStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<GranthusStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<LoraxTheSuaveStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<ButchStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<ElberethTheBeautifulStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<SarlethTheSneakyStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<NarlockStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<HanekaTheSmallStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<LoirinTheMadStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<WutoPoisonbreathStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<AraakaTheRotundStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<PoogorTheDumbStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<FelorfiliandStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<MarokaTheAgedStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<SasinTheBoldStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<AbiemarThePeasantStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<HurkThePoorStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<SoalinTheWretchedStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<MerullaTheHumbleStoreOwner>()
         };
 
         public override string FeatureType => "GeneralStore";

@@ -3,36 +3,34 @@
     [Serializable]
     internal class MagicStore : Store
     {
-        public MagicStore(SaveGame saveGame) : base(saveGame, StoreType.StoreMagic)
-        {
-        }
+        private MagicStore(SaveGame saveGame) : base(saveGame, StoreType.StoreMagic) { } // This object is a singleton
 
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
-            new StoreOwner("Skidney the Sorcerer", 15000, 110, SaveGame.SingletonRepository.Races.Get<HalfElfRace>()),
-            new StoreOwner("Buggerby the Great", 20000, 113, SaveGame.SingletonRepository.Races.Get<GnomeRace>()),
-            new StoreOwner("Kyria the Illusionist", 30000, 110, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Nikki the Necromancer", 30000, 110, SaveGame.SingletonRepository.Races.Get<DarkElfRace>()),
-            new StoreOwner("Solostoran", 15000, 110, SaveGame.SingletonRepository.Races.Get<SpriteRace>()),
-            new StoreOwner("Achshe the Tentacled", 20000, 113, SaveGame.SingletonRepository.Races.Get<MindFlayerRace>()),
-            new StoreOwner("Kaza the Noble", 30000, 110, SaveGame.SingletonRepository.Races.Get<HighElfRace>()),
-            new StoreOwner("Fazzil the Dark", 30000, 110, SaveGame.SingletonRepository.Races.Get<DarkElfRace>()),
-            new StoreOwner("Angel", 20000, 150, SaveGame.SingletonRepository.Races.Get<VampireRace>()),
-            new StoreOwner("Flotsam the Bloated", 20000, 150, SaveGame.SingletonRepository.Races.Get<ZombieRace>()),
-            new StoreOwner("Nieval", 30000, 150, SaveGame.SingletonRepository.Races.Get<VampireRace>()),
-            new StoreOwner("Anastasia the Luminous", 30000, 150, SaveGame.SingletonRepository.Races.Get<SpectreRace>()),
-            new StoreOwner("Keldorn the Grand", 15000, 110, SaveGame.SingletonRepository.Races.Get<DwarfRace>()),
-            new StoreOwner("Philanthropus", 20000, 113, SaveGame.SingletonRepository.Races.Get<HobbitRace>()),
-            new StoreOwner("Agnar the Enchantress", 30000, 110, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Buliance the Necromancer", 30000, 110, SaveGame.SingletonRepository.Races.Get<MiriNigriRace>()),
-            new StoreOwner("Vuirak the High-Mage", 15000, 110, SaveGame.SingletonRepository.Races.Get<MiriNigriRace>()),
-            new StoreOwner("Madish the Smart", 20000, 113, SaveGame.SingletonRepository.Races.Get<MiriNigriRace>()),
-            new StoreOwner("Falebrimbor", 30000, 110, SaveGame.SingletonRepository.Races.Get<HighElfRace>()),
-            new StoreOwner("Felil-Gand the Subtle", 30000, 110, SaveGame.SingletonRepository.Races.Get<DarkElfRace>()),
-            new StoreOwner("Thalegord the Shaman", 15000, 110, SaveGame.SingletonRepository.Races.Get<TchoTchoRace>()),
-            new StoreOwner("Cthoaloth the Mystic", 20000, 113, SaveGame.SingletonRepository.Races.Get<MindFlayerRace>()),
-            new StoreOwner("Ibeli the Illusionist", 30000, 110, SaveGame.SingletonRepository.Races.Get<SkeletonRace>()),
-            new StoreOwner("Heto the Necromancer", 30000, 110, SaveGame.SingletonRepository.Races.Get<YeekRace>())
+            SaveGame.SingletonRepository.StoreOwners.Get<SkidneyTheSorcererStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<BuggerbyTheGreatStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<KyriaTheIllusionistStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<NikkiTheNecromancerStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<SolostoranStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<AchsheTheTentacledStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<KazaTheNobleStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<FazzilTheDarkStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<AngelStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<FlotsamTheBloatedStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<NievalStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<AnastasiaTheLuminousStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<KeldornTheGrandStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<PhilanthropusStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<AgnarTheEnchantressStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<BulianceTheNecromancerStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<VuirakTheHighMageStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<MadishTheSmartStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<FalebrimborStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<FelilGandTheSubtleStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<ThalegordTheShamanStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<CthoalothTheMysticStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<IbeliTheIllusionistStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<HetoTheNecromancerStoreOwner>()
         };
 
         public override string FeatureType => "MagicShop";

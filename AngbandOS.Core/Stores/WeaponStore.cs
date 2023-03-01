@@ -3,36 +3,34 @@
     [Serializable]
     internal class WeaponStore : Store
     {
-        public WeaponStore(SaveGame saveGame) : base(saveGame, StoreType.StoreWeapon)
-        {
-        }
+        private WeaponStore(SaveGame saveGame) : base(saveGame, StoreType.StoreWeapon) { } // This object is a singleton
 
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
-            new StoreOwner("Arnold the Beastly", 10000, 115, SaveGame.SingletonRepository.Races.Get<TchoTchoRace>()),
-            new StoreOwner("Arndal Beast-Slayer", 15000, 110, SaveGame.SingletonRepository.Races.Get<HalfElfRace>()),
-            new StoreOwner("Edor the Short", 25000, 115, SaveGame.SingletonRepository.Races.Get<HobbitRace>()),
-            new StoreOwner("Oglign Dragon-Slayer", 30000, 112, SaveGame.SingletonRepository.Races.Get<DwarfRace>()),
-            new StoreOwner("Drew the Skilled", 10000, 115, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Orrax Dragonson", 15000, 110, SaveGame.SingletonRepository.Races.Get<DraconianRace>()),
-            new StoreOwner("Bob", 25000, 115, SaveGame.SingletonRepository.Races.Get<MiriNigriRace>()),
-            new StoreOwner("Arkhoth the Stout", 30000, 112, SaveGame.SingletonRepository.Races.Get<DwarfRace>()),
-            new StoreOwner("Sarlyas the Rotten", 10000, 115, SaveGame.SingletonRepository.Races.Get<ZombieRace>()),
-            new StoreOwner("Tuethic Bare-Bones", 15000, 110, SaveGame.SingletonRepository.Races.Get<SkeletonRace>()),
-            new StoreOwner("Bilious the Toad", 25000, 115, SaveGame.SingletonRepository.Races.Get<MiriNigriRace>()),
-            new StoreOwner("Fasgul", 30000, 112, SaveGame.SingletonRepository.Races.Get<ZombieRace>()),
-            new StoreOwner("Ellefris the Paladin", 10000, 115, SaveGame.SingletonRepository.Races.Get<TchoTchoRace>()),
-            new StoreOwner("K'trrik'k", 15000, 110, SaveGame.SingletonRepository.Races.Get<KlackonRace>()),
-            new StoreOwner("Drocus Spiderfriend", 25000, 115, SaveGame.SingletonRepository.Races.Get<DarkElfRace>()),
-            new StoreOwner("Fungus Giant-Slayer", 30000, 112, SaveGame.SingletonRepository.Races.Get<DwarfRace>()),
-            new StoreOwner("Nadoc the Strong", 10000, 115, SaveGame.SingletonRepository.Races.Get<HobbitRace>()),
-            new StoreOwner("Eramog the Weak", 15000, 110, SaveGame.SingletonRepository.Races.Get<KoboldRace>()),
-            new StoreOwner("Eowilith the Fair", 25000, 115, SaveGame.SingletonRepository.Races.Get<VampireRace>()),
-            new StoreOwner("Huimog Balrog-Slayer", 30000, 112, SaveGame.SingletonRepository.Races.Get<HalfOrcRace>()),
-            new StoreOwner("Peadus the Cruel", 10000, 115, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Vamog Slayer", 15000, 110, SaveGame.SingletonRepository.Races.Get<HalfOgreRace>()),
-            new StoreOwner("Hooshnak the Vicious", 25000, 115, SaveGame.SingletonRepository.Races.Get<MiriNigriRace>()),
-            new StoreOwner("Balenn War-Dancer", 30000, 112, SaveGame.SingletonRepository.Races.Get<TchoTchoRace>())
+            SaveGame.SingletonRepository.StoreOwners.Get<ArnoldTheBeastlyStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<ArndalBeastSlayerStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<EdorTheShortStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<OglignDragonSlayerStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<DrewTheSkilledStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<OrraxDragonsonStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<BobStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<ArkhothTheStoutStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<SarlyasTheRottenStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<TuethicBareBonesStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<BiliousTheToadStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<FasgulStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<EllefrisThePaladinStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<KtrrikkStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<DrocusSpiderfriendStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<FungusGiantSlayerStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<NadocTheStrongStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<EramogTheWeakStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<EowilithTheFairStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<HuimogBalrogSlayerStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<PeadusTheCruelStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<VamogSlayerStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<HooshnakTheViciousStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<BalennWarDancerStoreOwner>()
         };
 
         public override string FeatureType => "Weaponsmiths";

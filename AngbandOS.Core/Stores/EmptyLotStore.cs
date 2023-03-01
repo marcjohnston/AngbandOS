@@ -3,13 +3,11 @@
     [Serializable]
     internal class EmptyLotStore : Store
     {
-        public EmptyLotStore(SaveGame saveGame) : base(saveGame, StoreType.StoreEmptyLot)
-        {
-        }
+        private EmptyLotStore(SaveGame saveGame) : base(saveGame, StoreType.StoreEmptyLot) { } // This object is a singleton
 
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
-            new StoreOwner("Empty lot", 0, 100, null)
+            SaveGame.SingletonRepository.StoreOwners.Get<EmptyLotStoreOwner>()
         };
 
         public override string FeatureType => "";

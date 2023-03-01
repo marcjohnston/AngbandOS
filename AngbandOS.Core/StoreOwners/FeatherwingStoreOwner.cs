@@ -1,0 +1,9 @@
+[Serializable]
+internal class FeatherwingStoreOwner : StoreOwner
+{
+    private FeatherwingStoreOwner(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    public override string OwnerName => "Featherwing";
+    public override int MaxCost =>  5000;
+    public override int MinInflate =>  100;
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<SpriteRace>();
+}

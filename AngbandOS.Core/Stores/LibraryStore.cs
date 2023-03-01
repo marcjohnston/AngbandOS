@@ -3,36 +3,34 @@
     [Serializable]
     internal class LibraryStore : Store
     {
-        public LibraryStore(SaveGame saveGame) : base(saveGame, StoreType.StoreLibrary)
-        {
-        }
+        private LibraryStore(SaveGame saveGame) : base(saveGame, StoreType.StoreLibrary) { } // This object is a singleton
 
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
-            new StoreOwner("Randolph Carter", 15000, 108, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Odnar the Sage", 20000, 105, SaveGame.SingletonRepository.Races.Get<HighElfRace>()),
-            new StoreOwner("Gandar the Neutral", 25000, 110, SaveGame.SingletonRepository.Races.Get<VampireRace>()),
-            new StoreOwner("Ro-sha the Patient", 30000, 105, SaveGame.SingletonRepository.Races.Get<GolemRace>()),
-            new StoreOwner("Sarai the Swift", 15000, 108, SaveGame.SingletonRepository.Races.Get<HumanRace>()),
-            new StoreOwner("Bodril the Seer", 20000, 105, SaveGame.SingletonRepository.Races.Get<HighElfRace>()),
-            new StoreOwner("Veloin the Quiet", 25000, 110, SaveGame.SingletonRepository.Races.Get<ZombieRace>()),
-            new StoreOwner("Vanthylas the Learned", 30000, 105, SaveGame.SingletonRepository.Races.Get<MindFlayerRace>()),
-            new StoreOwner("Ossein the Literate", 15000, 108, SaveGame.SingletonRepository.Races.Get<SkeletonRace>()),
-            new StoreOwner("Olvar Bookworm", 20000, 105, SaveGame.SingletonRepository.Races.Get<VampireRace>()),
-            new StoreOwner("Shallowgrave", 25000, 110, SaveGame.SingletonRepository.Races.Get<ZombieRace>()),
-            new StoreOwner("Death Mask", 30000, 105, SaveGame.SingletonRepository.Races.Get<ZombieRace>()),
-            new StoreOwner("Porcina the Obese", 15000, 108, SaveGame.SingletonRepository.Races.Get<HalfOrcRace>()),
-            new StoreOwner("Glaruna Brandybreath", 20000, 105, SaveGame.SingletonRepository.Races.Get<DwarfRace>()),
-            new StoreOwner("Furface Yeek", 25000, 110, SaveGame.SingletonRepository.Races.Get<YeekRace>()),
-            new StoreOwner("Bald Oggin", 30000, 105, SaveGame.SingletonRepository.Races.Get<GnomeRace>()),
-            new StoreOwner("Asuunu the Learned", 15000, 108, SaveGame.SingletonRepository.Races.Get<MindFlayerRace>()),
-            new StoreOwner("Prirand the Dead", 20000, 105, SaveGame.SingletonRepository.Races.Get<ZombieRace>()),
-            new StoreOwner("Ronar the Iron", 25000, 110, SaveGame.SingletonRepository.Races.Get<GolemRace>()),
-            new StoreOwner("Galil-Gamir", 30000, 105, SaveGame.SingletonRepository.Races.Get<ElfRace>()),
-            new StoreOwner("Rorbag Book-Eater", 15000, 108, SaveGame.SingletonRepository.Races.Get<KoboldRace>()),
-            new StoreOwner("Kiriarikirk", 20000, 105, SaveGame.SingletonRepository.Races.Get<KlackonRace>()),
-            new StoreOwner("Rilin the Quiet", 25000, 110, SaveGame.SingletonRepository.Races.Get<DwarfRace>()),
-            new StoreOwner("Isung the Lord", 30000, 105, SaveGame.SingletonRepository.Races.Get<HighElfRace>())
+            SaveGame.SingletonRepository.StoreOwners.Get<RandolphCarterStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<OdnarTheSageStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<GandarTheNeutralStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<RoshaThePatientStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<SaraiTheSwiftStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<BodrilTheSeerStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<VeloinTheQuietStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<VanthylasTheLearnedStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<OsseinTheLiterateStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<OlvarBookwormStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<ShallowgraveStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<DeathMaskStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<PorcinaTheObeseStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<GlarunaBrandybreathStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<FurfaceYeekStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<BaldOgginStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<AsuunuTheLearnedStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<PrirandTheDeadStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<RonarTheIronStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<GalilGamirStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<RorbagBookEaterStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<KiriarikirkStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<RilinTheQuietStoreOwner>(),
+            SaveGame.SingletonRepository.StoreOwners.Get<IsungTheLordStoreOwner>()
         };
 
         public override string FeatureType => "Bookstore";

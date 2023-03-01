@@ -1322,7 +1322,11 @@ namespace AngbandOS.Core
             return item;
         }
 
-        public Store GetWhichStore()
+        /// <summary>
+        /// Returns the specific store that the player is currently in.  Returns null, if the player is not detected as being in a store.
+        /// </summary>
+        /// <returns></returns>
+        public Store? GetWhichStore()
         {
             foreach (Store store in CurTown.Stores)
             {
