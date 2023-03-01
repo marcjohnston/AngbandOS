@@ -9,7 +9,7 @@
 
         public override string HelpDescription => "Teleport to Target";
 
-        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<MovementHelpGroup>();
+        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardMovementHelpGroup>();
 
         public override void Execute()
         {

@@ -9,7 +9,7 @@
 
         public override string HelpDescription => "Activate Power";
 
-        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<GeneralCommandsHelpGroup>();
+        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardGeneralCommandsHelpGroup>();
 
         public override void Execute()
         {

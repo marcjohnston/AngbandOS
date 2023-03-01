@@ -9,7 +9,7 @@
 
         public override string HelpDescription => "Render Wizard Help";
 
-        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<GeneralCommandsHelpGroup>();
+        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardGeneralCommandsHelpGroup>();
 
         public override void Execute()
         {

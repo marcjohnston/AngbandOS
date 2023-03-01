@@ -9,7 +9,7 @@
 
         public override string HelpDescription => "Object Editor";
 
-        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<ObjectCommandsHelpGroup>();
+        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardObjectCommandsHelpGroup>();
 
         public override void Execute()
         {

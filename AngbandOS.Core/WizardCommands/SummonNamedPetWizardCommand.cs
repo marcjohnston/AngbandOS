@@ -9,7 +9,7 @@
 
         public override string HelpDescription => "Summon Named Pet";
 
-        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<MonstersHelpGroup>();
+        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardMonstersHelpGroup>();
 
         public override void Execute()
         {

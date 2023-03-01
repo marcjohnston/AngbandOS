@@ -9,7 +9,7 @@
 
         public override string HelpDescription => "Generate Spoilers";
 
-        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<GeneralCommandsHelpGroup>();
+        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardGeneralCommandsHelpGroup>();
 
         public override bool IsEnabled => false;
 

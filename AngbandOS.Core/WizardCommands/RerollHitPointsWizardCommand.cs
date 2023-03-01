@@ -11,7 +11,7 @@ namespace AngbandOS.Core.WizardCommands
 
         public override string HelpDescription => "Reroll Hitpoints";
 
-        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<CharacterEditingHelpGroup>();
+        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardCharacterEditingHelpGroup>();
 
         public override void Execute()
         {
