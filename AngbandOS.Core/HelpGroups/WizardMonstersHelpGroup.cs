@@ -1,5 +1,6 @@
 ﻿namespace AngbandOS.Core.HelpGroups
 {
+    [Serializable]
     internal class WizardMonstersHelpGroup : HelpGroup
     {
         private WizardMonstersHelpGroup(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.

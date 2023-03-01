@@ -1,5 +1,6 @@
 ﻿namespace AngbandOS.Core.HelpGroups
 {
+    [Serializable]
     internal abstract class HelpGroup
     {
         protected SaveGame SaveGame { get; }
