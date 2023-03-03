@@ -3,6 +3,7 @@
     [Serializable]
     internal class AlchemistStore : Store
     {
+        public override StoreType StoreType => StoreType.StoreAlchemist;
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
             SaveGame.SingletonRepository.StoreOwners.Get<MauserTheChemistStoreOwner>(),
@@ -27,9 +28,12 @@
             SaveGame.SingletonRepository.StoreOwners.Get<DridashTheAlchemistStoreOwner>()
         };
 
-        private AlchemistStore(SaveGame saveGame) : base(saveGame, StoreType.StoreAlchemist) { } // This object is a singleton
+        private AlchemistStore(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
 
         public override string FeatureType => "Alchemist";
+        public override Colour Colour => Colour.Blue;
+        public override char Character => '5';
+        public override string Description => "Alchemy Shop";
 
         protected override StockStoreInventoryItem[] GetStoreTable()
         {

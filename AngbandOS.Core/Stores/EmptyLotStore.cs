@@ -3,7 +3,8 @@
     [Serializable]
     internal class EmptyLotStore : Store
     {
-        private EmptyLotStore(SaveGame saveGame) : base(saveGame, StoreType.StoreEmptyLot) { } // This object is a singleton
+        public override StoreType StoreType => StoreType.StoreEmptyLot;
+        private EmptyLotStore(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
 
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
@@ -11,6 +12,8 @@
         };
 
         public override string FeatureType => "";
+        public override Colour Colour => Colour.White;
+        public override char Character => ' ';
 
         public override bool ItemMatches(Item item)
         {

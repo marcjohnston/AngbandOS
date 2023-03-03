@@ -3,7 +3,8 @@
     [Serializable]
     internal class HallStore : Store
     {
-        private HallStore(SaveGame saveGame) : base(saveGame, StoreType.StoreHall) { } // This object is a singleton
+        public override StoreType StoreType => StoreType.StoreHall;
+        private HallStore(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
 
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
@@ -11,6 +12,9 @@
         };
 
         public override string FeatureType => "HallOfRecords";
+        public override Colour Colour => Colour.Yellow;
+        public override char Character => '8';
+        public override string Description => "Hall of Records";
 
         public override bool ItemMatches(Item item)
         {

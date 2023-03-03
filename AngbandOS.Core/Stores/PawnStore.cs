@@ -3,8 +3,9 @@
     [Serializable]
     internal class PawnStore : Store
     {
-        private PawnStore(SaveGame saveGame) : base(saveGame, StoreType.StorePawn) { } // This object is a singleton
+        private PawnStore(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
 
+        public override StoreType StoreType => StoreType.StorePawn;
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
             SaveGame.SingletonRepository.StoreOwners.Get<MagdTheRuthlessStoreOwner>(),
@@ -30,6 +31,8 @@
         };
 
         public override string FeatureType => "Pawnbrokers";
+        public override Colour Colour => Colour.Turquoise;
+        public override char Character => '0';
 
         public override bool ItemMatches(Item item)
         {

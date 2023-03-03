@@ -3,9 +3,12 @@
     [Serializable]
     internal class TempleStore : Store
     {
-        private TempleStore(SaveGame saveGame) : base(saveGame, StoreType.StoreTemple) { } // This object is a singleton
+        private TempleStore(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
 
+        public override StoreType StoreType => StoreType.StoreTemple;
         public override string FeatureType => "Temple";
+        public override Colour Colour => Colour.Green;
+        public override char Character => '4';
 
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {

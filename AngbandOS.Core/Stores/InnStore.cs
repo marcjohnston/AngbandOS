@@ -3,8 +3,9 @@
     [Serializable]
     internal class InnStore : Store
     {
-        private InnStore(SaveGame saveGame) : base(saveGame, StoreType.StoreInn) { } // This object is a singleton
+        private InnStore(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
 
+        public override StoreType StoreType => StoreType.StoreInn;
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
             SaveGame.SingletonRepository.StoreOwners.Get<MordsanStoreOwner>(),
@@ -38,6 +39,8 @@
         };
 
         public override string FeatureType => "Inn";
+        public override Colour Colour => Colour.Purple;
+        public override char Character => '&';
 
         public override bool ItemMatches(Item item)
         {

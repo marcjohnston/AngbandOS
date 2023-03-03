@@ -3,8 +3,9 @@
     [Serializable]
     internal class ArmouryStore : Store
     {
-        private ArmouryStore(SaveGame saveGame) : base(saveGame, StoreType.StoreArmoury) { } // This object is a singleton
+        private ArmouryStore(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
 
+        public override StoreType StoreType => StoreType.StoreArmoury;
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
             SaveGame.SingletonRepository.StoreOwners.Get<KonDarTheUglyStoreOwner>(),
@@ -34,6 +35,8 @@
         };
 
         public override string FeatureType => "Armoury";
+        public override Colour Colour => Colour.Grey;
+        public override char Character => '2';
 
         protected override StockStoreInventoryItem[] GetStoreTable()
         {

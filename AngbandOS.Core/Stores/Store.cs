@@ -16,7 +16,7 @@ namespace AngbandOS.Core.Stores
 
         protected readonly SaveGame SaveGame;
 
-        public readonly StoreType StoreType;
+        public abstract StoreType StoreType { get; }
 
         public virtual int PageSize => 26;
 
@@ -52,7 +52,7 @@ namespace AngbandOS.Core.Stores
         /// Returns the index of each ItemType in the ItemTypeArray that the store carries.  Multiple instances of the same item type allows the item to have a higher
         /// chance that it will be selected.  Each item in the table has a 1-in-count chance of being selected.
         /// </summary>
-        private readonly int[] _table;
+        private readonly int[]? _table = null;
         private bool _leaveStore;
         private StoreOwner _owner;
 
@@ -163,10 +163,20 @@ namespace AngbandOS.Core.Stores
         /// </summary>
         protected virtual bool RenderWeightUnitOfMeasurement => false;
 
-        public Store(SaveGame saveGame, StoreType storeType)
+        public abstract char Character { get; }
+        public abstract Colour Colour { get; }
+        public virtual string Description => FeatureType;
+
+        public void InitializeFloorTileType()
+        {
+            StoreFloorTileType storeFloorTileType = new StoreFloorTileType(SaveGame, Character, Colour, FeatureType, FeatureType, Description);
+            SaveGame.SingletonRepository.FloorTileTypes.Add(storeFloorTileType);
+        }
+
+        protected Store(SaveGame saveGame)
         {
             SaveGame = saveGame;
-            StoreType = storeType;
+
             _inventory.Clear();
             StockStoreInventoryItem[] master = GetStoreTable();
             if (master == null)
@@ -357,7 +367,7 @@ namespace AngbandOS.Core.Stores
             {
                 j = MaxInventory - 1;
             }
-            while (_inventory.Count < j)
+            while (_inventory.Count < j && _table != null && _table.Length > 0)
             {
                 StoreCreate();
             }

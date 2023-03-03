@@ -3,8 +3,9 @@
     [Serializable]
     internal class LibraryStore : Store
     {
-        private LibraryStore(SaveGame saveGame) : base(saveGame, StoreType.StoreLibrary) { } // This object is a singleton
+        private LibraryStore(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
 
+        public override StoreType StoreType => StoreType.StoreLibrary;
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
             SaveGame.SingletonRepository.StoreOwners.Get<RandolphCarterStoreOwner>(),
@@ -34,6 +35,8 @@
         };
 
         public override string FeatureType => "Bookstore";
+        public override Colour Colour => Colour.Orange;
+        public override char Character => '9';
 
         protected override StockStoreInventoryItem[] GetStoreTable()
         {

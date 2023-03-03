@@ -3,8 +3,9 @@
     [Serializable]
     internal class MagicStore : Store
     {
-        private MagicStore(SaveGame saveGame) : base(saveGame, StoreType.StoreMagic) { } // This object is a singleton
+        private MagicStore(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
 
+        public override StoreType StoreType => StoreType.StoreMagic;
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
             SaveGame.SingletonRepository.StoreOwners.Get<SkidneyTheSorcererStoreOwner>(),
@@ -34,6 +35,9 @@
         };
 
         public override string FeatureType => "MagicShop";
+        public override Colour Colour => Colour.Red;
+        public override char Character => '6';
+        public override string Description => "Magic Shop";
 
         protected override StockStoreInventoryItem[] GetStoreTable()
         {

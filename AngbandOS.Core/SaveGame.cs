@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text.Json;
 
 namespace AngbandOS.Core
 {
@@ -322,6 +323,11 @@ namespace AngbandOS.Core
             // Configure the game.
             Configure(configuration);
 
+            foreach (Store store in SingletonRepository.Stores)
+            {
+                store.InitializeFloorTileType();
+            }
+
             _autoNavigator = new AutoNavigator(this);
             Quests = new QuestArray(this);
             Dungeons = Dungeon.NewDungeonList();
@@ -599,7 +605,7 @@ namespace AngbandOS.Core
                 }
                 ResetStompability();
                 CurrentDepth = 0;
-                CurTown = SingletonRepository.Towns[Program.Rng.RandomLessThan(SingletonRepository.Towns.Count)];
+                CurTown = SingletonRepository.Towns.WeightedRandom().Choose();
                 while (CurTown.Char == 'K' || CurTown.Char == 'N')
                 {
                     CurTown = SingletonRepository.Towns[Program.Rng.RandomLessThan(SingletonRepository.Towns.Count)];
@@ -16818,65 +16824,84 @@ namespace AngbandOS.Core
             }
         }
 
-        private void MakeTownContents()
+        private void BuildStores()
         {
-            int x, n;
-            int dummy = 0;
-            GridTile cPtr;
-            int[] rooms = new int[12];
-            Program.Rng.UseFixed = true;
-            Program.Rng.FixedSeed = CurTown.Seed;
-            for (n = 0; n < 12; n++)
+            List<string> occupied = new List<string>();
+            for (int i = 0; i < CurTown.Stores.Length; i++)
             {
-                rooms[n] = n;
-            }
-            int y = Level.CurHgt / 2;
-            for (x = 1; x < Level.CurWid - 1; x++)
-            {
-                Level.Grid[y][x].SetFeature("PathBase");
-            }
-            x = Level.CurWid / 2;
-            for (y = 1; y < Level.CurHgt - 1; y++)
-            {
-                Level.Grid[y][x].SetFeature("PathBase");
-            }
-            for (y = 0; y < 4; y++)
-            {
-                for (x = 0; x < 4; x++)
+                int x;
+                int y;
+                do
                 {
-                    if (x == 1 || x == 2 || y == 1 || y == 2)
+                    x = Program.Rng.RandomBetween(0, 3);
+                    y = Program.Rng.RandomBetween(0, 3);
+                    if ((x == 1 || x == 2 || y == 1 || y == 2) && !occupied.Contains($"{x},{y}"))
                     {
-                        int k = Program.Rng.RandomLessThan(n);
-                        BuildStore(CurTown.Stores[rooms[k]], y, x);
-                        rooms[k] = rooms[--n];
+                        break;
                     }
-                    else
-                    {
-                        switch (Program.Rng.DieRoll(10))
-                        {
-                            case 3:
-                            case 7:
-                            case 9:
-                                break;
+                } while (true);
+                occupied.Add($"{x},{y}");
+                BuildStore(CurTown.Stores[i], y, x);
+            }
 
-                            default:
-                                if (CurTown.Char == 'K')
-                                {
-                                    BuildGraveyard(y, x);
-                                }
-                                else
-                                {
-                                    BuildField(y, x);
-                                }
+            int maxSpacesRemaining = 4 * 4 - CurTown.Stores.Length;
+            for (int i = 0; i < maxSpacesRemaining; i++)
+            {
+                switch (Program.Rng.DieRoll(10))
+                {
+                    case 3:
+                    case 7:
+                    case 9:
+                        break;
+
+                    default:
+                        int x;
+                        int y;
+                        do
+                        {
+                            x = Program.Rng.RandomBetween(0, 3);
+                            y = Program.Rng.RandomBetween(0, 3);
+                            if (!occupied.Contains($"{x},{y}"))
+                            {
                                 break;
+                            }
+                        } while (true);
+                        occupied.Add($"{x},{y}");
+
+                        if (CurTown.Char == 'K')
+                        {
+                            BuildGraveyard(y, x);
                         }
-                    }
+                        else
+                        {
+                            BuildField(y, x);
+                        }
+                        break;
                 }
             }
-            for (n = 0; n < Program.Rng.RandomBetween(1, 10) - 6; n++)
+        }
+
+        private void BuildPath()
+        {
+            int yy = Level.CurHgt / 2;
+            for (int x = 1; x < Level.CurWid - 1; x++)
             {
-                x = Program.Rng.RandomBetween(1, Level.CurWid - 2);
-                y = Program.Rng.RandomBetween(1, Level.CurHgt - 2);
+                Level.Grid[yy][x].SetFeature("PathBase");
+            }
+            int xx = Level.CurWid / 2;
+            for (int y = 1; y < Level.CurHgt - 1; y++)
+            {
+                Level.Grid[y][xx].SetFeature("PathBase");
+            }
+        }
+
+        private void BuildRocks()
+        {
+            GridTile cPtr;
+            for (int n = 0; n < Program.Rng.RandomBetween(1, 10) - 6; n++)
+            {
+                int x = Program.Rng.RandomBetween(1, Level.CurWid - 2);
+                int y = Program.Rng.RandomBetween(1, Level.CurHgt - 2);
                 cPtr = Level.Grid[y][x];
                 if (cPtr.FeatureType.Name == cPtr.BackgroundFeature.Name)
                 {
@@ -16884,10 +16909,15 @@ namespace AngbandOS.Core
                     cPtr.TileFlags.Set(GridTile.PlayerMemorised);
                 }
             }
-            for (n = 0; n < Program.Rng.RandomBetween(5, 10); n++)
+        }
+
+        private void BuildTrees()
+        {
+            GridTile cPtr;
+            for (int n = 0; n < Program.Rng.RandomBetween(5, 10); n++)
             {
-                x = Program.Rng.RandomBetween(1, Level.CurWid - 2);
-                y = Program.Rng.RandomBetween(1, Level.CurHgt - 2);
+                int x = Program.Rng.RandomBetween(1, Level.CurWid - 2);
+                int y = Program.Rng.RandomBetween(1, Level.CurHgt - 2);
                 cPtr = Level.Grid[y][x];
                 if (cPtr.FeatureType.Name == cPtr.BackgroundFeature.Name)
                 {
@@ -16895,10 +16925,15 @@ namespace AngbandOS.Core
                     cPtr.TileFlags.Set(GridTile.PlayerMemorised);
                 }
             }
-            for (n = 0; n < Program.Rng.RandomBetween(5, 10); n++)
+        }
+
+        private void BuildBushes()
+        {
+            GridTile cPtr;
+            for (int n = 0; n < Program.Rng.RandomBetween(5, 10); n++)
             {
-                x = Program.Rng.RandomBetween(1, Level.CurWid - 2);
-                y = Program.Rng.RandomBetween(1, Level.CurHgt - 2);
+                int x = Program.Rng.RandomBetween(1, Level.CurWid - 2);
+                int y = Program.Rng.RandomBetween(1, Level.CurHgt - 2);
                 cPtr = Level.Grid[y][x];
                 if (cPtr.FeatureType.Name == cPtr.BackgroundFeature.Name)
                 {
@@ -16906,13 +16941,18 @@ namespace AngbandOS.Core
                     cPtr.TileFlags.Set(GridTile.PlayerMemorised);
                 }
             }
-            MakeTownCentre();
-            x = Level.CurWid / 2;
+        }
+
+
+        private void AddPaths()
+        {
+            GridTile cPtr;
+            int x = Level.CurWid / 2;
             cPtr = Level.Grid[0][x];
             cPtr.SetFeature("PathBorderNS");
             cPtr.TileFlags.Set(GridTile.PlayerMemorised);
             x = Level.CurWid - 2;
-            y = Level.CurHgt / 2;
+            int y = Level.CurHgt / 2;
             cPtr = Level.Grid[y][x + 1];
             cPtr.SetFeature("PathBorderEW");
             cPtr.TileFlags.Set(GridTile.PlayerMemorised);
@@ -16926,7 +16966,15 @@ namespace AngbandOS.Core
             cPtr = Level.Grid[y][0];
             cPtr.SetFeature("PathBorderEW");
             cPtr.TileFlags.Set(GridTile.PlayerMemorised);
-            while (dummy < SafeMaxAttempts)
+        }
+
+        private GridCoordinate AddStairsDown()
+        {
+            GridTile cPtr;
+            int dummy = 0;
+            int x;
+            int y;
+            do
             {
                 dummy++;
                 y = Program.Rng.RandomBetween(12, 29);
@@ -16935,10 +16983,15 @@ namespace AngbandOS.Core
                 {
                     break;
                 }
-            }
+            } while (true);
             cPtr = Level.Grid[y][x];
             cPtr.SetFeature("DownStair");
             cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+            return new GridCoordinate(x, y);
+        }
+
+        private void SetStartingLocation(GridCoordinate downStairsLocation)
+        {
             Program.Rng.UseFixed = false;
             switch (CameFrom)
             {
@@ -16947,8 +17000,8 @@ namespace AngbandOS.Core
                     break;
 
                 case LevelStart.StartStairs:
-                    Player.MapY = y;
-                    Player.MapX = x;
+                    Player.MapY = downStairsLocation.Y;
+                    Player.MapX = downStairsLocation.X;
                     break;
 
                 case LevelStart.StartWalk:
@@ -16969,6 +17022,22 @@ namespace AngbandOS.Core
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        private void MakeTownContents()
+        {
+            Program.Rng.UseFixed = true;
+            Program.Rng.FixedSeed = CurTown.Seed;
+
+            BuildPath();
+            BuildStores();
+            BuildRocks();
+            BuildTrees();
+            BuildBushes();
+            MakeTownCentre();
+            AddPaths();
+            GridCoordinate downStairsLocation = AddStairsDown();
+            SetStartingLocation(downStairsLocation);
         }
 
         private void MakeTownWalls()

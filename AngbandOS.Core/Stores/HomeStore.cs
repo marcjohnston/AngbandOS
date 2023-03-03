@@ -3,8 +3,9 @@
     [Serializable]
     internal class HomeStore : Store
     {
-        private HomeStore(SaveGame saveGame) : base(saveGame, StoreType.StoreHome) { } // This object is a singleton
+        private HomeStore(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
 
+        public override StoreType StoreType => StoreType.StoreHome;
         public override int MaxInventory => 100;
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
@@ -12,6 +13,8 @@
         };
 
         public override string FeatureType => "Home";
+        public override Colour Colour => Colour.Pink;
+        public override char Character => '@';
 
         public override bool ItemMatches(Item item)
         {

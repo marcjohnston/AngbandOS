@@ -3,8 +3,9 @@
     [Serializable]
     internal class WeaponStore : Store
     {
-        private WeaponStore(SaveGame saveGame) : base(saveGame, StoreType.StoreWeapon) { } // This object is a singleton
+        private WeaponStore(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
 
+        public override StoreType StoreType => StoreType.StoreWeapon;
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
             SaveGame.SingletonRepository.StoreOwners.Get<ArnoldTheBeastlyStoreOwner>(),
@@ -34,6 +35,8 @@
         };
 
         public override string FeatureType => "Weaponsmiths";
+        public override Colour Colour => Colour.White;
+        public override char Character => '3';
 
         protected override StockStoreInventoryItem[] GetStoreTable()
         {

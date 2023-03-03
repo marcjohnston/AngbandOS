@@ -3,7 +3,8 @@
     [Serializable]
     internal class GeneralStore : Store
     {
-        private GeneralStore(SaveGame saveGame) : base(saveGame, StoreType.StoreGeneral) { } // This object is a singleton
+        public override StoreType StoreType => StoreType.StoreGeneral;
+        private GeneralStore(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
 
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
@@ -38,6 +39,9 @@
         };
 
         public override string FeatureType => "GeneralStore";
+        public override Colour Colour => Colour.BrightBrown;
+        public override char Character => '1';
+        public override string Description => "General Store";
 
         protected override StockStoreInventoryItem[] GetStoreTable()
         {
