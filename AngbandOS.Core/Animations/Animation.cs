@@ -8,11 +8,6 @@
 
 namespace AngbandOS.Core.Animations
 {
-    internal interface ISingletonDictionary<TKey>
-    {
-        TKey GetKey { get; }
-    }
-
     [Serializable]
     internal abstract class Animation : ISingletonDictionary<string>
     {
