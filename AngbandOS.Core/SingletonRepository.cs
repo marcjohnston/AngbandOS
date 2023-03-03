@@ -50,12 +50,11 @@ namespace AngbandOS.Core
                 if (!type.IsAbstract && typeof(T).IsAssignableFrom(type))
                 {
                     ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
-                    if (constructors.Length == 0)
+                    if (constructors.Length == 1)
                     {
-                        throw new Exception($"{type.Name} does not have a private constructor.  Loading singletons requires the object to have a private constructor to ensure it isn't publically created.");
+                        T command = (T)constructors[0].Invoke(new object[] { saveGame });
+                        typeList.Add(command);
                     }
-                    T command = (T)constructors[0].Invoke(new object[] { saveGame });
-                    typeList.Add(command);
                 }
             }
             return typeList.ToArray();
