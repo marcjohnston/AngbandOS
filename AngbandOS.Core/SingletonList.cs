@@ -40,12 +40,21 @@ namespace AngbandOS.Core
             return list.GetEnumerator();
         }
 
+        /// <summary>
+        /// Adds an item to the repository.  This is often used to add configured objects.
+        /// </summary>
+        /// <param name="item"></param>
+        public void Add(T item)
+        {
+            list.Add(item);
+            dictionary.Add(item.GetType().Name, item);
+        }
+
         public SingletonList(SaveGame saveGame, IEnumerable<T> items)
         {
             foreach (T item in items)
             {
-                list.Add(item);
-                dictionary.Add(item.GetType().Name, item);
+                Add(item);
             }
         }
     }
