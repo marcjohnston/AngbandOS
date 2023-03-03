@@ -8,8 +8,13 @@
 
 namespace AngbandOS.Core.Animations
 {
+    internal interface ISingletonDictionary<TKey>
+    {
+        TKey GetKey { get; }
+    }
+
     [Serializable]
-    internal abstract class Animation
+    internal abstract class Animation : ISingletonDictionary<string>
     {
         protected SaveGame SaveGame;
         protected Animation(SaveGame saveGame)
@@ -17,6 +22,7 @@ namespace AngbandOS.Core.Animations
             SaveGame = saveGame;
         }
 
+        public string GetKey => Name;
         public abstract char Character { get; }
         public abstract Colour Colour { get; }
         public abstract string Name { get; }

@@ -3,9 +3,9 @@
     [Serializable]
     internal class EmptyLotStore : Store
     {
-        public override StoreType StoreType => StoreType.StoreEmptyLot;
-        private EmptyLotStore(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
+        public EmptyLotStore(SaveGame saveGame) : base(saveGame) { }
 
+        public override StoreType StoreType => StoreType.StoreEmptyLot;
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {
             SaveGame.SingletonRepository.StoreOwners.Get<EmptyLotStoreOwner>()

@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.RareItems
 {
     [Serializable]
-    internal abstract class RareItem : IItemCharacteristics
+    internal abstract class RareItem : IItemCharacteristics, ISingletonDictionary<RareItemTypeEnum>
     {
         protected SaveGame SaveGame;
         protected RareItem(SaveGame saveGame)
@@ -17,6 +17,7 @@ namespace AngbandOS.Core.RareItems
             SaveGame = saveGame;
         }
 
+        public RareItemTypeEnum GetKey => RareItemType;
         public abstract char Character { get; }
         public virtual Colour Colour => Colour.White;
         public abstract string Name { get; }

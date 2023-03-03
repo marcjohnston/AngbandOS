@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.ProjectileGraphics
 {
     [Serializable]
-    internal abstract class ProjectileGraphic
+    internal abstract class ProjectileGraphic : ISingletonDictionary<string>
     {
         protected SaveGame SaveGame;
         protected ProjectileGraphic(SaveGame saveGame)
@@ -17,6 +17,7 @@ namespace AngbandOS.Core.ProjectileGraphics
             SaveGame = saveGame;
         }
 
+        public string GetKey => Name;
         /// <summary>
         /// The column from which to take the graphical tile.
         /// </summary>

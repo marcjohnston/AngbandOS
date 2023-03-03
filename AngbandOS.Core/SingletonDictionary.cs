@@ -3,10 +3,9 @@
 namespace AngbandOS.Core
 {
     [Serializable]
-    internal class SingletonDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>>
+    internal class SingletonDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>> where TValue : ISingletonDictionary<TKey>
     {
         private SaveGame SaveGame;
-        private Func<TValue, TKey> _keyRetrieval;
         Dictionary<TKey, TValue> instances = new Dictionary<TKey, TValue>();
         public int Count => instances.Count;
         public TValue this[TKey index]
@@ -16,6 +15,8 @@ namespace AngbandOS.Core
                 return instances[index];
             }
         }
+
+        public bool Contains(TValue item) => instances.ContainsKey(item.GetKey);
 
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {
@@ -29,14 +30,13 @@ namespace AngbandOS.Core
 
         public void Add(TValue item)
         {
-            TKey key = _keyRetrieval(item);
+            TKey key = item.GetKey;
             instances.Add(key, item);
         }
 
-        public SingletonDictionary(SaveGame saveGame, TValue[] items, Func<TValue, TKey> keyRetrieval)
+        public SingletonDictionary(SaveGame saveGame, TValue[] items)
         {
             SaveGame = saveGame;
-            _keyRetrieval = keyRetrieval;
             foreach (TValue item in items)
             {
                 Add(item);

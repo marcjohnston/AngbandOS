@@ -11,22 +11,26 @@ namespace AngbandOS.Core.Towns
     [Serializable]
     internal class NirTown : Town
     {
-        private NirTown(SaveGame saveGame) : base(saveGame) { } // This object is an singleton
-        public override Store[] Stores => new Store[]
+        private Store[] _stores;
+        private NirTown(SaveGame saveGame) : base(saveGame)
         {
-            SaveGame.SingletonRepository.Stores.Get<GeneralStore>(),
-            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
-            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
-            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
-            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
-            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
-            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
-            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
-            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
-            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
-            SaveGame.SingletonRepository.Stores.Get<InnStore>(),
-            SaveGame.SingletonRepository.Stores.Get<PawnStore>()
-        };
+            _stores = new Store[]
+            {
+                new GeneralStore(SaveGame),
+                new EmptyLotStore(SaveGame),
+                new EmptyLotStore(SaveGame),
+                new EmptyLotStore(SaveGame),
+                new EmptyLotStore(SaveGame),
+                new EmptyLotStore(SaveGame),
+                new EmptyLotStore(SaveGame),
+                new EmptyLotStore(SaveGame),
+                new EmptyLotStore(SaveGame),
+                new EmptyLotStore(SaveGame),
+                new InnStore(SaveGame),
+                new PawnStore(SaveGame)
+            };
+        }
+        public override Store[] Stores => _stores;
 
         public override int HousePrice => 0;
         public override string Name => "the hamlet of Nir";

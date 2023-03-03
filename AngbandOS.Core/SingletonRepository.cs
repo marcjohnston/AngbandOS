@@ -38,7 +38,6 @@ namespace AngbandOS.Core
         public SingletonList<ChestTrapConfiguration> ChestTrapConfigurations;
         public SingletonList<HelpGroup> HelpGroups;
         public SingletonList<StoreOwner> StoreOwners;
-        public SingletonList<Store> Stores;
 
         private T[] LoadTypesFromAssembly<T>(SaveGame saveGame)
         {
@@ -79,17 +78,16 @@ namespace AngbandOS.Core
             StaffFlavours = new SingletonList<StaffFlavour>(saveGame, LoadTypesFromAssembly<StaffFlavour>(saveGame));
             WandFlavours = new SingletonList<WandFlavour>(saveGame, LoadTypesFromAssembly<WandFlavour>(saveGame));
             ChestTrapConfigurations = new SingletonList<ChestTrapConfiguration>(saveGame, LoadTypesFromAssembly<ChestTrapConfiguration>(saveGame));
-            ProjectileGraphics = new SingletonDictionary<string, ProjectileGraphic>(saveGame, LoadTypesFromAssembly<ProjectileGraphic>(saveGame), (_projectileGraphic => _projectileGraphic.Name));
-            Animations = new SingletonDictionary<string, Animation>(saveGame, LoadTypesFromAssembly<Animation>(saveGame), (_animation => _animation.Name));
+            ProjectileGraphics = new SingletonDictionary<string, ProjectileGraphic>(saveGame, LoadTypesFromAssembly<ProjectileGraphic>(saveGame));
+            Animations = new SingletonDictionary<string, Animation>(saveGame, LoadTypesFromAssembly<Animation>(saveGame));
             Vaults = new SingletonList<Vault>(saveGame, LoadTypesFromAssembly<Vault>(saveGame));
-            FloorTileTypes = new SingletonDictionary<string, FloorTileType>(saveGame, LoadTypesFromAssembly<FloorTileType>(saveGame), (_floorTileType => _floorTileType.Name));
-            RareItemTypes = new SingletonDictionary<RareItemTypeEnum, RareItem>(saveGame, LoadTypesFromAssembly<RareItem>(saveGame), _rareItemType => _rareItemType.RareItemType);
-            FixedArtifacts = new SingletonDictionary<FixedArtifactId, FixedArtifact>(saveGame, LoadTypesFromAssembly<FixedArtifact>(saveGame), (_fixedArtifact => _fixedArtifact.FixedArtifactID));
+            FloorTileTypes = new SingletonDictionary<string, FloorTileType>(saveGame, LoadTypesFromAssembly<FloorTileType>(saveGame));
+            RareItemTypes = new SingletonDictionary<RareItemTypeEnum, RareItem>(saveGame, LoadTypesFromAssembly<RareItem>(saveGame));
+            FixedArtifacts = new SingletonDictionary<FixedArtifactId, FixedArtifact>(saveGame, LoadTypesFromAssembly<FixedArtifact>(saveGame));
             MonsterRaces = new SingletonList<MonsterRace>(saveGame, LoadTypesFromAssembly<MonsterRace>(saveGame).OrderBy(_monsterRace => _monsterRace.LevelFound));
             Races = new SingletonList<Race>(saveGame, LoadTypesFromAssembly<Race>(saveGame));
             HelpGroups = new SingletonList<HelpGroup>(saveGame, LoadTypesFromAssembly<HelpGroup>(saveGame));
             StoreOwners = new SingletonList<StoreOwner>(saveGame, LoadTypesFromAssembly<StoreOwner>(saveGame));
-            Stores = new SingletonList<Store>(saveGame, LoadTypesFromAssembly<Store>(saveGame));
         }
     }
 }

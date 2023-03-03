@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.FloorTileTypes
 {
     [Serializable]
-    internal abstract class FloorTileType
+    internal abstract class FloorTileType : ISingletonDictionary<string>
     {
         protected SaveGame SaveGame;
         protected FloorTileType(SaveGame saveGame)
@@ -17,6 +17,7 @@ namespace AngbandOS.Core.FloorTileTypes
             SaveGame = saveGame;
         }
 
+        public string GetKey => Name;
         public abstract char Character { get; }
         public virtual Colour Colour => Colour.White;
         public abstract string Name { get; }

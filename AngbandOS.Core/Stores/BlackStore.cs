@@ -3,7 +3,7 @@
     [Serializable]
     internal class BlackStore : Store
     {
-        private BlackStore(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
+        public BlackStore(SaveGame saveGame) : base(saveGame) { }
 
         public override StoreType StoreType => StoreType.StoreBlack;
         public override int MaxInventory => 75;

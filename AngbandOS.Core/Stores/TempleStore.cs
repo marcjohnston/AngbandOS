@@ -3,7 +3,7 @@
     [Serializable]
     internal class TempleStore : Store
     {
-        private TempleStore(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
+        public TempleStore(SaveGame saveGame) : base(saveGame) { }
 
         public override StoreType StoreType => StoreType.StoreTemple;
         public override string FeatureType => "Temple";

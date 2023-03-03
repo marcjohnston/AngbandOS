@@ -167,11 +167,7 @@ namespace AngbandOS.Core.Stores
         public abstract Colour Colour { get; }
         public virtual string Description => FeatureType;
 
-        public void InitializeFloorTileType()
-        {
-            StoreFloorTileType storeFloorTileType = new StoreFloorTileType(SaveGame, Character, Colour, FeatureType, FeatureType, Description);
-            SaveGame.SingletonRepository.FloorTileTypes.Add(storeFloorTileType);
-        }
+        public StoreFloorTileType CreateFloorTileType() => new StoreFloorTileType(SaveGame, Character, Colour, FeatureType, FeatureType, Description);
 
         protected Store(SaveGame saveGame)
         {

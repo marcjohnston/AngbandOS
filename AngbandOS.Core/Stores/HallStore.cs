@@ -3,8 +3,8 @@
     [Serializable]
     internal class HallStore : Store
     {
+        public HallStore(SaveGame saveGame) : base(saveGame) { }
         public override StoreType StoreType => StoreType.StoreHall;
-        private HallStore(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
 
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
         {

@@ -323,11 +323,6 @@ namespace AngbandOS.Core
             // Configure the game.
             Configure(configuration);
 
-            foreach (Store store in SingletonRepository.Stores)
-            {
-                store.InitializeFloorTileType();
-            }
-
             _autoNavigator = new AutoNavigator(this);
             Quests = new QuestArray(this);
             Dungeons = Dungeon.NewDungeonList();
@@ -15773,6 +15768,13 @@ namespace AngbandOS.Core
         {
             int y, x;
             GridTile cPtr;
+
+            StoreFloorTileType storeFloorTileType = store.CreateFloorTileType();
+            if (!SingletonRepository.FloorTileTypes.Contains(storeFloorTileType))
+            {
+                SingletonRepository.FloorTileTypes.Add(storeFloorTileType);
+            }
+
             if (CurTown.Char != 'K')
             {
                 if (store.StoreType == StoreType.StoreEmptyLot)

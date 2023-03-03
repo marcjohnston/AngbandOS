@@ -4,7 +4,7 @@ using System.Reflection;
 namespace AngbandOS.Core
 {
     [Serializable]
-    internal class SingletonList<T> : IEnumerable<T>
+    internal class SingletonList<T> : IEnumerable<T> // TODO: This is a SingletonDictionary ... using GetType().Name as the KeyRetrieval
     {
         List<T> list = new List<T>();
         Dictionary<string, T> dictionary = new Dictionary<string, T>();
@@ -15,6 +15,8 @@ namespace AngbandOS.Core
                 return list[index];
             }
         }
+
+        public bool Contains(T item)=> dictionary.ContainsKey(item.GetType().Name);
 
         public int Count => list.Count;
 

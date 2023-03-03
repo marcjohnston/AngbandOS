@@ -3,7 +3,7 @@
     [Serializable]
     internal class ArmouryStore : Store
     {
-        private ArmouryStore(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
+        public ArmouryStore(SaveGame saveGame) : base(saveGame) { }
 
         public override StoreType StoreType => StoreType.StoreArmoury;
         protected override StoreOwner[] StoreOwners => new StoreOwner[]
