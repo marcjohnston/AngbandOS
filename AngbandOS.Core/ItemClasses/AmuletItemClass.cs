@@ -13,7 +13,7 @@
             {
                 return base.GetDescription(item, includeCountPrefix);
             }
-            string flavour = item.IdentStoreb ? "" : $"{item.SaveGame.AmuletFlavours[item.ItemSubCategory].Name} ";
+            string flavour = item.IdentStoreb ? "" : $"{item.SaveGame.SingletonRepository.AmuletFlavours[item.ItemSubCategory].Name} ";
             string ofName = item.IsFlavourAware() ? $" of {item.BaseItemCategory.FriendlyName}" : "";
             string name = $"{flavour}{Pluralize("Amulet", item.Count)}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;

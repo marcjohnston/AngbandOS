@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core.ProjectileGraphics;
-using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace AngbandOS.Core
 {
@@ -59,6 +57,30 @@ namespace AngbandOS.Core
             return typeList.ToArray();
         }
 
+        private T[] Shuffle<T>(IEnumerable<T> items) => items.OrderBy(_item => Program.Rng.RandomLessThan(int.MaxValue)).ToArray();
+        private T[] WeightedShuffle<T>(T[] items) where T : IWeightedShuffle
+        {
+            Dictionary<int, List<T>> itemsByWeight = new Dictionary<int, List<T>>();
+            foreach (T item in items)
+            {
+                List<T>? list = null;
+                if (!itemsByWeight.TryGetValue(item.ShuffleWeight, out list))
+                {
+                    list = new List<T>();
+                    itemsByWeight.Add(item.ShuffleWeight, list);
+                }
+                list.Add(item);
+            }
+
+            // Sort the dictionary.
+            List<T> shuffledList = new List<T>();
+            foreach (KeyValuePair<int, List<T>> weightAndItem in itemsByWeight.OrderByDescending(_weightAndItem => _weightAndItem.Key))
+            {
+                shuffledList.AddRange(Shuffle(weightAndItem.Value));
+            }           
+            return shuffledList.ToArray();
+        }
+
         public void Initialize(SaveGame saveGame)
         {
             InGameCommands = new SingletonList<InGameCommand>(saveGame, LoadTypesFromAssembly<InGameCommand>(saveGame));
@@ -69,14 +91,14 @@ namespace AngbandOS.Core
             CharacterClasses = new SingletonList<BaseCharacterClass>(saveGame, LoadTypesFromAssembly<BaseCharacterClass>(saveGame));
             Realms = new SingletonList<BaseRealm>(saveGame, LoadTypesFromAssembly<BaseRealm>(saveGame));
             Towns = new SingletonList<Town>(saveGame, LoadTypesFromAssembly<Town>(saveGame));
-            AmuletFlavours = new SingletonList<AmuletFlavour>(saveGame, LoadTypesFromAssembly<AmuletFlavour>(saveGame));
-            MushroomFlavours = new SingletonList<MushroomFlavour>(saveGame, LoadTypesFromAssembly<MushroomFlavour>(saveGame));
-            PotionFlavours = new SingletonList<PotionFlavour>(saveGame, LoadTypesFromAssembly<PotionFlavour>(saveGame));
-            RingFlavours = new SingletonList<RingFlavour>(saveGame, LoadTypesFromAssembly<RingFlavour>(saveGame));
-            RodFlavours = new SingletonList<RodFlavour>(saveGame, LoadTypesFromAssembly<RodFlavour>(saveGame));
+            AmuletFlavours = new SingletonList<AmuletFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<AmuletFlavour>(saveGame)));
+            MushroomFlavours = new SingletonList<MushroomFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<MushroomFlavour>(saveGame)));
+            PotionFlavours = new SingletonList<PotionFlavour>(saveGame, WeightedShuffle(LoadTypesFromAssembly<PotionFlavour>(saveGame)));
+            RingFlavours = new SingletonList<RingFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<RingFlavour>(saveGame)));
+            RodFlavours = new SingletonList<RodFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<RodFlavour>(saveGame)));
             ScrollFlavours = new SingletonList<BaseScrollFlavour>(saveGame, LoadTypesFromAssembly<BaseScrollFlavour>(saveGame));
-            StaffFlavours = new SingletonList<StaffFlavour>(saveGame, LoadTypesFromAssembly<StaffFlavour>(saveGame));
-            WandFlavours = new SingletonList<WandFlavour>(saveGame, LoadTypesFromAssembly<WandFlavour>(saveGame));
+            StaffFlavours = new SingletonList<StaffFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<StaffFlavour>(saveGame)));
+            WandFlavours = new SingletonList<WandFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<WandFlavour>(saveGame)));
             ChestTrapConfigurations = new SingletonList<ChestTrapConfiguration>(saveGame, LoadTypesFromAssembly<ChestTrapConfiguration>(saveGame));
             ProjectileGraphics = new SingletonDictionary<string, ProjectileGraphic>(saveGame, LoadTypesFromAssembly<ProjectileGraphic>(saveGame));
             Animations = new SingletonDictionary<string, Animation>(saveGame, LoadTypesFromAssembly<Animation>(saveGame));

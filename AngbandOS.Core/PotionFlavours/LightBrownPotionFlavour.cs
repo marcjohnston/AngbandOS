@@ -7,4 +7,8 @@ internal class LightBrownPotionFlavour : PotionFlavour
     public override char Character => '!';
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Light Brown";
+    /// <summary>
+    /// Returns a shuffle weight of 2, so that it appears after the clear potion, but before the light brown potion flavour.
+    /// </summary>
+    public override int ShuffleWeight => 2;
 }

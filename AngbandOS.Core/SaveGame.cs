@@ -95,14 +95,7 @@ namespace AngbandOS.Core
         public int RecallDungeon;
         public int Resting;
         public int Running;
-        public List<AmuletFlavour> AmuletFlavours; // This is the randomized list for the game.
-        public List<MushroomFlavour> MushroomFlavours; // TODO: Move these to the singletons repository
-        public List<PotionFlavour> PotionFlavours; // TODO: Move these to the singletons repository
-        public List<RingFlavour> RingFlavours; // TODO: Move these to the singletons repository
-        public List<RodFlavour> RodFlavours; // TODO: Move these to the singletons repository
         public List<ScrollFlavour> ScrollFlavours; // These are generated from the available base scrolls.
-        public List<StaffFlavour> StaffFlavours; // TODO: Move these to the singletons repository
-        public List<WandFlavour> WandFlavours; // This is a list of all of the wand flavors.  They are randomized for each game.
         public int TargetCol;
         public int TargetRow;
         public int TargetWho;
@@ -1604,13 +1597,13 @@ namespace AngbandOS.Core
                     switch (kPtr.CategoryEnum)
                     {
                         case ItemTypeEnum.Food:
-                            kPtr.FlavorCharacter = MushroomFlavours[indexx].Character;
-                            kPtr.FlavorColour = MushroomFlavours[indexx].Colour;
+                            kPtr.FlavorCharacter = SingletonRepository.MushroomFlavours[indexx].Character;
+                            kPtr.FlavorColour = SingletonRepository.MushroomFlavours[indexx].Colour;
                             break;
 
                         case ItemTypeEnum.Potion:
-                            kPtr.FlavorCharacter = PotionFlavours[indexx].Character;
-                            kPtr.FlavorColour = PotionFlavours[indexx].Colour;
+                            kPtr.FlavorCharacter = SingletonRepository.PotionFlavours[indexx].Character;
+                            kPtr.FlavorColour = SingletonRepository.PotionFlavours[indexx].Colour;
                             break;
 
                         case ItemTypeEnum.Scroll:
@@ -1619,28 +1612,28 @@ namespace AngbandOS.Core
                             break;
 
                         case ItemTypeEnum.Amulet:
-                            kPtr.FlavorCharacter = AmuletFlavours[indexx].Character;
-                            kPtr.FlavorColour = AmuletFlavours[indexx].Colour;
+                            kPtr.FlavorCharacter = SingletonRepository.AmuletFlavours[indexx].Character;
+                            kPtr.FlavorColour = SingletonRepository.AmuletFlavours[indexx].Colour;
                             break;
 
                         case ItemTypeEnum.Ring:
-                            kPtr.FlavorCharacter = RingFlavours[indexx].Character;
-                            kPtr.FlavorColour = RingFlavours[indexx].Colour;
+                            kPtr.FlavorCharacter = SingletonRepository.RingFlavours[indexx].Character;
+                            kPtr.FlavorColour = SingletonRepository.RingFlavours[indexx].Colour;
                             break;
 
                         case ItemTypeEnum.Staff:
-                            kPtr.FlavorCharacter = StaffFlavours[indexx].Character;
-                            kPtr.FlavorColour = StaffFlavours[indexx].Colour;
+                            kPtr.FlavorCharacter = SingletonRepository.StaffFlavours[indexx].Character;
+                            kPtr.FlavorColour = SingletonRepository.StaffFlavours[indexx].Colour;
                             break;
 
                         case ItemTypeEnum.Wand:
-                            kPtr.FlavorCharacter = WandFlavours[indexx].Character;
-                            kPtr.FlavorColour = WandFlavours[indexx].Colour;
+                            kPtr.FlavorCharacter = SingletonRepository.WandFlavours[indexx].Character;
+                            kPtr.FlavorColour = SingletonRepository.WandFlavours[indexx].Colour;
                             break;
 
                         case ItemTypeEnum.Rod:
-                            kPtr.FlavorCharacter = RodFlavours[indexx].Character;
-                            kPtr.FlavorColour = RodFlavours[indexx].Colour;
+                            kPtr.FlavorCharacter = SingletonRepository.RodFlavours[indexx].Character;
+                            kPtr.FlavorColour = SingletonRepository.RodFlavours[indexx].Colour;
                             break;
                     }
                 }
@@ -2029,105 +2022,6 @@ namespace AngbandOS.Core
             int i, j;
             Program.Rng.UseFixed = true;
             Program.Rng.FixedSeed = _seedFlavor;
-            PotionFlavours = new List<PotionFlavour>();
-            List<PotionFlavour> tempPotions = new List<PotionFlavour>();
-            PotionFlavours.Add(SingletonRepository.PotionFlavours.Get<ClearPotionFlavour>());
-            PotionFlavours.Add(SingletonRepository.PotionFlavours.Get<LightBrownPotionFlavour>());
-            PotionFlavours.Add(SingletonRepository.PotionFlavours.Get<IckyGreenPotionFlavour>());
-            foreach (PotionFlavour potionFlavour in SingletonRepository.PotionFlavours)
-            {
-                if (potionFlavour is ClearPotionFlavour)
-                {
-                    continue;
-                }
-                if (potionFlavour is LightBrownPotionFlavour)
-                {
-                    continue;
-                }
-                if (potionFlavour is IckyGreenPotionFlavour)
-                {
-                    continue;
-                }
-                tempPotions.Add(potionFlavour);
-            }
-            do
-            {
-                int index = Program.Rng.RandomLessThan(tempPotions.Count);
-                PotionFlavours.Add(tempPotions[index]);
-                tempPotions.RemoveAt(index);
-            } while (tempPotions.Count > 0);
-            MushroomFlavours = new List<MushroomFlavour>();
-            List<MushroomFlavour> tempMushrooms = new List<MushroomFlavour>();
-            foreach (MushroomFlavour mushroomFlavour in SingletonRepository.MushroomFlavours)
-            {
-                tempMushrooms.Add(mushroomFlavour);
-            }
-            do
-            {
-                int index = Program.Rng.RandomLessThan(tempMushrooms.Count);
-                MushroomFlavours.Add(tempMushrooms[index]);
-                tempMushrooms.RemoveAt(index);
-            } while (tempMushrooms.Count > 0);
-            AmuletFlavours = new List<AmuletFlavour>();
-            List<AmuletFlavour> tempAmulets = new List<AmuletFlavour>();
-            foreach (AmuletFlavour amuletFlavour in SingletonRepository.AmuletFlavours)
-            {
-                tempAmulets.Add(amuletFlavour);
-            }
-            do
-            {
-                int index = Program.Rng.RandomLessThan(tempAmulets.Count);
-                AmuletFlavours.Add(tempAmulets[index]);
-                tempAmulets.RemoveAt(index);
-            } while (tempAmulets.Count > 0);
-            WandFlavours = new List<WandFlavour>();
-            List<WandFlavour> tempWands = new List<WandFlavour>();
-            foreach (WandFlavour wandFlavour in SingletonRepository.WandFlavours)
-            {
-                tempWands.Add(wandFlavour);
-            }
-            do
-            {
-                int index = Program.Rng.RandomLessThan(tempWands.Count);
-                WandFlavours.Add(tempWands[index]);
-                tempWands.RemoveAt(index);
-            } while (tempWands.Count > 0);
-            RingFlavours = new List<RingFlavour>();
-            List<RingFlavour> tempRings = new List<RingFlavour>();
-            foreach (RingFlavour ringFlavour in SingletonRepository.RingFlavours)
-            {
-                tempRings.Add(ringFlavour);
-            }
-            do
-            {
-                int index = Program.Rng.RandomLessThan(tempRings.Count);
-                RingFlavours.Add(tempRings[index]);
-                tempRings.RemoveAt(index);
-            } while (tempRings.Count > 0);
-            RodFlavours = new List<RodFlavour>();
-            List<RodFlavour> tempRods = new List<RodFlavour>();
-            foreach (RodFlavour rodFlavour in SingletonRepository.RodFlavours)
-            {
-                tempRods.Add(rodFlavour);
-            }
-            do
-            {
-                int index = Program.Rng.RandomLessThan(tempRods.Count);
-                RodFlavours.Add(tempRods[index]);
-                tempRods.RemoveAt(index);
-            } while (tempRods.Count > 0);
-            StaffFlavours = new List<StaffFlavour>();
-            List<StaffFlavour> tempStaffs = new List<StaffFlavour>();
-            foreach (StaffFlavour staffFlavour in SingletonRepository.StaffFlavours)
-            {
-                tempStaffs.Add(staffFlavour);
-            }
-            do
-            {
-                int index = Program.Rng.RandomLessThan(tempStaffs.Count);
-                StaffFlavours.Add(tempStaffs[index]);
-                tempStaffs.RemoveAt(index);
-            } while (tempStaffs.Count > 0);
             ScrollFlavours = new List<ScrollFlavour>();
             List<BaseScrollFlavour> tempScrolls = new List<BaseScrollFlavour>();
             foreach (BaseScrollFlavour scrollFlavour in SingletonRepository.ScrollFlavours)

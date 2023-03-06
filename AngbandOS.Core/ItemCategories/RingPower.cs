@@ -21,7 +21,7 @@ namespace AngbandOS.Core.ItemCategories
             {
                 return base.GetDescription(item, includeCountPrefix);
             }
-            string flavour = item.IdentStoreb ? "" : $"{item.SaveGame.RingFlavours[item.ItemSubCategory].Name} ";
+            string flavour = item.IdentStoreb ? "" : $"{item.SaveGame.SingletonRepository.RingFlavours[item.ItemSubCategory].Name} ";
             if (!item.IsFlavourAware())
             {
                 flavour = "Plain Gold ";

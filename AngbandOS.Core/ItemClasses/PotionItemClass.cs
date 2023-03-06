@@ -32,7 +32,7 @@
         }
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
-            string flavour = item.IdentStoreb ? "" : $"{item.SaveGame.PotionFlavours[item.ItemSubCategory].Name} ";
+            string flavour = item.IdentStoreb ? "" : $"{item.SaveGame.SingletonRepository.PotionFlavours[item.ItemSubCategory].Name} ";
             string ofName = item.IsFlavourAware() ? $" of {item.BaseItemCategory.FriendlyName}" : "";
             string name = $"{flavour}{Pluralize("Potion", item.Count)}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
