@@ -1,4 +1,4 @@
-namespace AngbandOS.Core
+namespace AngbandOS.Core.Items
 {
     [Serializable]
     internal class Item : IComparable<Item>

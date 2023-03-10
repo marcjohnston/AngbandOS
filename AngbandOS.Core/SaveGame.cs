@@ -337,85 +337,47 @@ namespace AngbandOS.Core
             {
                 goldType = 17;
             }
-            ItemClass? kPtr = null;
             switch (goldType.Value)
             {
                 case 0:
-                    kPtr = SingletonRepository.ItemCategories.Get<GoldCopper>(); // TODO: Use a property on item for GoldValue
-                    break;
-
+                    return new CopperGoldItem(this);
                 case 1:
-                    kPtr = SingletonRepository.ItemCategories.Get<GoldCopper1>();
-                    break;
-
+                    return new Copper1GoldItem(this);
                 case 2:
-                    kPtr = SingletonRepository.ItemCategories.Get<GoldCopper2>();
-                    break;
-
+                    return new Copper2GoldItem(this);
                 case 3:
-                    kPtr = SingletonRepository.ItemCategories.Get<GoldSilver>();
-                    break;
-
+                    return new SilverGoldItem(this);
                 case 4:
-                    kPtr = SingletonRepository.ItemCategories.Get<GoldSilver1>();
-                    break;
-
+                    return new Silver1GoldItem(this);
                 case 5:
-                    kPtr = SingletonRepository.ItemCategories.Get<GoldSilver2>();
-                    break;
-
+                    return new Silver2GoldItem(this);
                 case 6:
-                    kPtr = SingletonRepository.ItemCategories.Get<GoldGarnets>();
-                    break;
-
+                    return new GarnetsGoldItem(this);
                 case 7:
-                    kPtr = SingletonRepository.ItemCategories.Get<GoldGarnets1>();
-                    break;
-
+                    return new Garnets1GoldItem(this);
                 case 8:
-                    kPtr = SingletonRepository.ItemCategories.Get<GoldGold>();
-                    break;
-
+                    return new GoldGoldItem(this);
                 case 9:
-                    kPtr = SingletonRepository.ItemCategories.Get<GoldGold1>();
-                    break;
-
+                    return new Gold1GoldItem(this);
                 case 10:
-                    kPtr = SingletonRepository.ItemCategories.Get<GoldGold2>();
-                    break;
-
+                    return new Gold2GoldItem(this);
                 case 11:
-                    kPtr = SingletonRepository.ItemCategories.Get<GoldOpals>();
-                    break;
-
+                    return new OpalsGoldItem(this);
                 case 12:
-                    kPtr = SingletonRepository.ItemCategories.Get<GoldSapphires>();
-                    break;
-
+                    return new SapphiresGoldItem(this);
                 case 13:
-                    kPtr = SingletonRepository.ItemCategories.Get<GoldRubies>();
-                    break;
-
+                    return new RubiesGoldItem(this);
                 case 14:
-                    kPtr = SingletonRepository.ItemCategories.Get<GoldDiamonds>();
-                    break;
-
+                    return new DiamondsGoldItem(this);
                 case 15:
-                    kPtr = SingletonRepository.ItemCategories.Get<GoldEmeralds>();
-                    break;
-
+                    return new EmeraldsGoldItem(this);
                 case 16:
-                    kPtr = SingletonRepository.ItemCategories.Get<GoldMithril>();
-                    break;
-
+                    return new MithrilGoldItem(this);
                 case 17:
-                    kPtr = SingletonRepository.ItemCategories.Get<GoldAdamantite>();
-                    break;
+                    return new AdamantiteGoldItem(this);
+                default:
+                    throw new Exception("MakeGold invalid random.");
             }
-            Item goldItem = new Item(this, kPtr);
-            int bbase = kPtr.Cost;
-            goldItem.TypeSpecificValue = bbase + (8 * Program.Rng.DieRoll(bbase)) + Program.Rng.DieRoll(8);
-            return goldItem;
         }
 
         private void Configure(Configuration? configuration)

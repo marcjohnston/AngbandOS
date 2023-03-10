@@ -125,7 +125,6 @@ namespace AngbandOS.Core.Patrons
                 case Reward.ChaosWp:
                     saveGame.MsgPrint($"The voice of {ShortName} booms out:");
                     saveGame.MsgPrint("'Thy deed hath earned thee a worthy blade.'");
-                    Item qPtr = new Item(saveGame);
                     ItemClass reward;
                     switch (Program.Rng.DieRoll(saveGame.Player.Level))
                     {
@@ -210,7 +209,7 @@ namespace AngbandOS.Core.Patrons
                             reward = saveGame.SingletonRepository.ItemCategories.Get<SwordBladeofChaos>();
                             break;
                     }
-                    qPtr.AssignItemType(reward);
+                    Item qPtr = new Item(saveGame, reward);
                     qPtr.BonusToHit = 3 + (Program.Rng.DieRoll(saveGame.Difficulty) % 10);
                     qPtr.BonusDamage = 3 + (Program.Rng.DieRoll(saveGame.Difficulty) % 10);
                     qPtr.ApplyRandomResistance(Program.Rng.DieRoll(34) + 4);
