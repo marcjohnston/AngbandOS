@@ -152,7 +152,7 @@ namespace AngbandOS.Core
         public int CompareTo(Item oPtr)
         {
             // First two levels of sort belong to spell books.
-            if (BookItemClass.IsItemOf(this) && BookItemClass.IsItemOf(oPtr))
+            if (BookItemClass.IsBook(this.BaseItemCategory) && BookItemClass.IsBook(oPtr.BaseItemCategory))
             {
                 // First level sort (primary realm spells books).
                 // A book that matches the first realm, will always come before a book that doesn't match the first realm.

@@ -23,9 +23,9 @@
             return 0;
         }
 
-        public static bool IsItemOf(Item item)
+        public static bool IsBook(ItemClass itemClass)
         {
-            return typeof(BookItemClass).IsAssignableFrom(item.BaseItemCategory.GetType());
+            return typeof(BookItemClass).IsAssignableFrom(itemClass.GetType());
         }
 
         public abstract BaseRealm? ToRealm { get; }

@@ -1216,7 +1216,7 @@ namespace AngbandOS.Core.Stores
             }
             item += _storeTop;
             Item oPtr = _inventory[item];
-            if (BookItemClass.IsItemOf(oPtr))
+            if (BookItemClass.IsBook(oPtr.BaseItemCategory))
             {
                 //BookItemClass book = (BookItemClass)oPtr.BaseItemCategory;
                 if (SaveGame.Player.PrimaryRealm?.SpellBookItemCategory == oPtr.Category)
