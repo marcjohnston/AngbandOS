@@ -1695,6 +1695,11 @@ namespace AngbandOS.Core
             return RareItemTypeIndex != 0;
         }
 
+        /// <summary>
+        /// DEPRECATED.  Use SaveGame.MakeGold.
+        /// </summary>
+        /// <param name="goldType"></param>
+        /// <returns></returns>
         public bool MakeGold(int? goldType = null)
         {
             if (goldType == null)

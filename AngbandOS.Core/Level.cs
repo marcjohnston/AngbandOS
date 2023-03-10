@@ -1128,11 +1128,7 @@ namespace AngbandOS.Core
             {
                 return;
             }
-            Item qPtr = new Item(SaveGame);
-            if (!qPtr.MakeGold())
-            {
-                return;
-            }
+            Item qPtr = SaveGame.MakeGold();
             int oIdx = OPop();
             if (oIdx != 0)
             {
