@@ -1118,6 +1118,7 @@ namespace AngbandOS.Core
                 ViewingItemList = false;
                 itemIndex = -2;
                 done = true;
+                done = true;
             }
             else
             {
@@ -2023,18 +2024,13 @@ namespace AngbandOS.Core
             Program.Rng.UseFixed = true;
             Program.Rng.FixedSeed = _seedFlavor;
             ScrollFlavours = new List<ScrollFlavour>();
-            List<BaseScrollFlavour> tempScrolls = new List<BaseScrollFlavour>();
-            foreach (BaseScrollFlavour scrollFlavour in SingletonRepository.ScrollFlavours)
-            {
-                tempScrolls.Add(scrollFlavour);
-            }
             for (i = 0; i < Constants.MaxNumberOfScrollFlavoursGenerated; i++)
             {
                 ScrollFlavour flavour = new ScrollFlavour();
                 ScrollFlavours.Add(flavour);
-                int index = Program.Rng.RandomLessThan(tempScrolls.Count);
-                flavour.Character = tempScrolls[index].Character;
-                flavour.Colour = tempScrolls[index].Colour;
+                int index = Program.Rng.RandomLessThan(SingletonRepository.ScrollFlavours.Count);
+                flavour.Character = SingletonRepository.ScrollFlavours[index].Character;
+                flavour.Colour = SingletonRepository.ScrollFlavours[index].Colour;
                 while (true)
                 {
                     string buf = "";
