@@ -135,12 +135,18 @@ namespace AngbandOS.Core
         public ItemCharacteristics Characteristics = new ItemCharacteristics();
 
         /// <summary>
-        /// Creates a new (nothing) item.
+        /// Creates a new (nothing) item.  DEPRECATED.  This constructor creates a "nothing" item; for which, we are trying to convert to Null.
         /// </summary>
         /// <param name="saveGame"></param>
-        public Item(SaveGame saveGame)
+        public Item(SaveGame saveGame) // TODO: Deprecated
         {
             SaveGame = saveGame;
+        }
+
+        public Item(SaveGame saveGame, ItemClass baseItemCategory)
+        {
+            SaveGame = saveGame;
+            AssignItemType(baseItemCategory);
         }
 
         /// <summary>

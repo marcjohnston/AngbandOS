@@ -1132,8 +1132,7 @@ namespace AngbandOS.Core.Stores
             int i = _table[Program.Rng.RandomLessThan(_table.Length)];
             level = Program.Rng.RandomBetween(1, Constants.StoreObjLevel);
             itemType = SaveGame.SingletonRepository.ItemCategories[i];
-            Item qPtr = new Item(SaveGame);
-            qPtr.AssignItemType(itemType);
+            Item qPtr = new Item(SaveGame, itemType);
             qPtr.ApplyMagic(level, false, false, false);
             return qPtr;
         }

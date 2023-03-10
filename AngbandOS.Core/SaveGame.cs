@@ -14605,30 +14605,26 @@ namespace AngbandOS.Core
 
         private void PlayerOutfit()
         {
-            Item item = new Item(this);
-
             if (Player.Race.OutfitsWithScrollsOfSatisfyHunger)
             {
-                item.AssignItemType(SingletonRepository.ItemCategories.Get<ScrollSatisfyHunger>());
+                Item item = new Item(this, SingletonRepository.ItemCategories.Get<ScrollSatisfyHunger>());
                 item.Count = (char)Program.Rng.RandomBetween(2, 5);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
                 item.IdentStoreb = true;
                 Player.InvenCarry(item, false);
-                item = new Item(this);
             }
             else
             {
-                item.AssignItemType(SingletonRepository.ItemCategories.Get<FoodRation>());
+                Item item = new Item(this, SingletonRepository.ItemCategories.Get<FoodRation>());
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
                 Player.InvenCarry(item, false);
-                item = new Item(this);
             }
-            if (Player.Race.OutfitsWithScrollsOfLight || Player.BaseCharacterClass.ID == CharacterClass.ChosenOne)
+            if (Player.Race.OutfitsWithScrollsOfLight || Player.BaseCharacterClass.OutfitsWithScrollsOfLight)
             {
-                item.AssignItemType(SingletonRepository.ItemCategories.Get<ScrollLight>());
+                Item item = new Item(this, SingletonRepository.ItemCategories.Get<ScrollLight>());
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
@@ -14637,7 +14633,7 @@ namespace AngbandOS.Core
             }
             else
             {
-                item.AssignItemType(SingletonRepository.ItemCategories.Get<LightWoodenTorch>());
+                Item item = new Item(this, SingletonRepository.ItemCategories.Get<LightWoodenTorch>());
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.TypeSpecificValue = Program.Rng.RandomBetween(3, 7) * 500;
                 item.BecomeFlavourAware();
@@ -19142,8 +19138,7 @@ namespace AngbandOS.Core
             {
                 return;
             }
-            Item qPtr = new Item(this);
-            qPtr.AssignItemType(SingletonRepository.ItemCategories[kIdx]);
+            Item qPtr = new Item(this, SingletonRepository.ItemCategories[kIdx]);
             qPtr.ApplyMagic(Difficulty, false, false, false);
             Level.DropNear(qPtr, -1, Player.MapY, Player.MapX);
             MsgPrint("Allocated.");
@@ -19243,13 +19238,11 @@ namespace AngbandOS.Core
             {
                 return;
             }
-            Item qPtr = new Item(this);
             if (string.IsNullOrEmpty(aPtr.Name))
             {
                 return;
             }
-            ItemClass i = aPtr.BaseItemCategory;
-            qPtr.AssignItemType(i);
+            Item qPtr = new Item(this, aPtr.BaseItemCategory);
             qPtr.FixedArtifact = SingletonRepository.FixedArtifacts[aIdx];
             qPtr.TypeSpecificValue = aPtr.Pval;
             qPtr.BaseArmourClass = aPtr.Ac;

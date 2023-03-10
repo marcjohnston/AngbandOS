@@ -15,6 +15,11 @@
         /// <value>The identifier.</value>
         public abstract int ID { get; }
 
+        /// <summary>
+        /// Returns true, if players of the character class are outfitted with scrolls of light at the start of the game.  Returns false, by default.
+        /// </summary>
+        public virtual bool OutfitsWithScrollsOfLight => false;
+
         public abstract int[] AbilityBonus { get; }
 
         public abstract int BaseDeviceBonus { get; }
@@ -144,8 +149,7 @@
             {
                 // Allow the race to modify the item as the race sees fit.
                 ItemClass outfitItem = SaveGame.Player.Race.OutfitItemClass(itemClass);
-                Item item = new Item(SaveGame);
-                item.AssignItemType(outfitItem);
+                Item item = new Item(SaveGame, outfitItem);
                 if (outfitItem.CategoryEnum == ItemTypeEnum.Wand)
                 {
                     item.TypeSpecificValue = 1;
