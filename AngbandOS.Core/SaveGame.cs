@@ -323,6 +323,101 @@ namespace AngbandOS.Core
             InitializeAllocationTables();
         }
 
+        public Item MakeGold(int? goldType = null)
+        {
+            if (goldType == null)
+            {
+                goldType = ((Program.Rng.DieRoll(Level.ObjectLevel + 2) + 2) / 2) - 1;
+                if (Program.Rng.RandomLessThan(Constants.GreatObj) == 0)
+                {
+                    goldType += Program.Rng.DieRoll(Level.ObjectLevel + 1);
+                }
+            }
+            if (goldType > 17)
+            {
+                goldType = 17;
+            }
+            ItemClass? kPtr = null;
+            switch (goldType.Value)
+            {
+                case 0:
+                    kPtr = SingletonRepository.ItemCategories.Get<GoldCopper>(); // TODO: Use a property on item for GoldValue
+                    break;
+
+                case 1:
+                    kPtr = SingletonRepository.ItemCategories.Get<GoldCopper1>();
+                    break;
+
+                case 2:
+                    kPtr = SingletonRepository.ItemCategories.Get<GoldCopper2>();
+                    break;
+
+                case 3:
+                    kPtr = SingletonRepository.ItemCategories.Get<GoldSilver>();
+                    break;
+
+                case 4:
+                    kPtr = SingletonRepository.ItemCategories.Get<GoldSilver1>();
+                    break;
+
+                case 5:
+                    kPtr = SingletonRepository.ItemCategories.Get<GoldSilver2>();
+                    break;
+
+                case 6:
+                    kPtr = SingletonRepository.ItemCategories.Get<GoldGarnets>();
+                    break;
+
+                case 7:
+                    kPtr = SingletonRepository.ItemCategories.Get<GoldGarnets1>();
+                    break;
+
+                case 8:
+                    kPtr = SingletonRepository.ItemCategories.Get<GoldGold>();
+                    break;
+
+                case 9:
+                    kPtr = SingletonRepository.ItemCategories.Get<GoldGold1>();
+                    break;
+
+                case 10:
+                    kPtr = SingletonRepository.ItemCategories.Get<GoldGold2>();
+                    break;
+
+                case 11:
+                    kPtr = SingletonRepository.ItemCategories.Get<GoldOpals>();
+                    break;
+
+                case 12:
+                    kPtr = SingletonRepository.ItemCategories.Get<GoldSapphires>();
+                    break;
+
+                case 13:
+                    kPtr = SingletonRepository.ItemCategories.Get<GoldRubies>();
+                    break;
+
+                case 14:
+                    kPtr = SingletonRepository.ItemCategories.Get<GoldDiamonds>();
+                    break;
+
+                case 15:
+                    kPtr = SingletonRepository.ItemCategories.Get<GoldEmeralds>();
+                    break;
+
+                case 16:
+                    kPtr = SingletonRepository.ItemCategories.Get<GoldMithril>();
+                    break;
+
+                case 17:
+                    kPtr = SingletonRepository.ItemCategories.Get<GoldAdamantite>();
+                    break;
+            }
+            Item goldItem = new Item(this, kPtr);
+            int bbase = kPtr.Cost;
+            goldItem.TypeSpecificValue = bbase + (8 * Program.Rng.DieRoll(bbase)) + Program.Rng.DieRoll(8);
+            return goldItem;
+        }
+
         private void Configure(Configuration? configuration)
         {
             if (configuration != null)
@@ -1389,8 +1484,7 @@ namespace AngbandOS.Core
             }
             if (mPtr.StolenGold > 0)
             {
-                Item oPtr = new Item(this);
-                oPtr.MakeGold(10);
+                Item oPtr = MakeGold(10);
                 oPtr.TypeSpecificValue = mPtr.StolenGold;
                 Level.DropNear(oPtr, -1, y, x);
             }
@@ -1440,34 +1534,33 @@ namespace AngbandOS.Core
             Level.ObjectLevel = (Difficulty + rPtr.Level) / 2;
             for (int j = 0; j < number; j++)
             {
-                qPtr = new Item(this);
                 if (doGold && (!doItem || Program.Rng.RandomLessThan(100) < 50))
                 {
-                    if (!qPtr.MakeGold(forceCoin))
-                    {
-                        continue;
-                    }
+                    qPtr = MakeGold(forceCoin);
+                    Level.DropNear(qPtr, -1, y, x);
                     dumpGold++;
                 }
                 else
                 {
                     if (!quest || j > 1)
                     {
-                        if (!qPtr.MakeObject(good, great, false))
+                        qPtr = new Item(this);
+                        if (qPtr.MakeObject(good, great, false))
                         {
-                            continue;
+                            Level.DropNear(qPtr, -1, y, x);
+                            dumpItem++;
                         }
                     }
                     else
                     {
-                        if (!qPtr.MakeObject(true, true, false))
+                        qPtr = new Item(this);
+                        if (qPtr.MakeObject(true, true, false))
                         {
-                            continue;
+                            Level.DropNear(qPtr, -1, y, x);
+                            dumpItem++;
                         }
                     }
-                    dumpItem++;
                 }
-                Level.DropNear(qPtr, -1, y, x);
             }
             Level.ObjectLevel = Difficulty;
             if (visible && (dumpItem != 0 || dumpGold != 0))
@@ -1539,22 +1632,19 @@ namespace AngbandOS.Core
             Level.ObjectLevel = Math.Abs(oPtr.TypeSpecificValue) + 10;
             for (; number > 0; --number)
             {
-                Item qPtr = new Item(this);
                 if (small && Program.Rng.RandomLessThan(100) < 75)
                 {
-                    if (!qPtr.MakeGold())
-                    {
-                        continue;
-                    }
+                    Item qPtr = MakeGold();
+                    Level.DropNear(qPtr, -1, y, x);
                 }
                 else
                 {
-                    if (!qPtr.MakeObject(false, false, true))
+                    Item qPtr = new Item(this);
+                    if (qPtr.MakeObject(false, false, true))
                     {
-                        continue;
+                        Level.DropNear(qPtr, -1, y, x);
                     }
                 }
-                Level.DropNear(qPtr, -1, y, x);
             }
             Level.ObjectLevel = Difficulty;
             oPtr.TypeSpecificValue = 0;
