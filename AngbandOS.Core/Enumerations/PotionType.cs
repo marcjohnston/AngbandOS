@@ -9,7 +9,7 @@ namespace AngbandOS.Core
 {
     internal enum PotionType // TODO: Cannot be removed until initial items given to player are resolved.
     {
-        AppleJuice = 1,
+        AppleJuice = 1, // This is always light brown flavour color
         Augmentation = 55,
         BeserkStrength = 33,
         Blindness = 7,
@@ -60,12 +60,12 @@ namespace AngbandOS.Core
         SaltWater = 5,
         SelfKnowledge = 58,
         Sleep = 11,
-        SlimeMold = 2,
+        SlimeMold = 2, // This is always light green flavour
         Slowness = 4,
         SlowPoison = 26,
         Speed = 29,
         StarEnlightenment = 57,
         StarHealing = 38,
-        Water = 0
+        Water = 0 // This is always clear flavour
     }
 }
