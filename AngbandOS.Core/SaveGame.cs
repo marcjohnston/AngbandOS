@@ -323,7 +323,83 @@ namespace AngbandOS.Core
             InitializeAllocationTables();
         }
 
-        public Item MakeGold(int? goldType = null)
+        private Item? MakeFixedArtifact()
+        {
+            foreach (KeyValuePair<FixedArtifactId, FixedArtifact> pair in SingletonRepository.FixedArtifacts)
+            {
+                FixedArtifact aPtr = pair.Value;
+                if (!aPtr.HasOwnType)
+                {
+                    continue;
+                }
+                if (aPtr.CurNum != 0)
+                {
+                    continue;
+                }
+                if (aPtr.Level > Difficulty)
+                {
+                    int d = (aPtr.Level - Difficulty) * 2;
+                    if (Program.Rng.RandomLessThan(d) != 0)
+                    {
+                        continue;
+                    }
+                }
+                if (Program.Rng.RandomLessThan(aPtr.Rarity) != 0)
+                {
+                    return null;
+                }
+                ItemClass kIdx = aPtr.BaseItemCategory;
+                if (kIdx.Level > Level.ObjectLevel)
+                {
+                    int d = (kIdx.Level - Level.ObjectLevel) * 5;
+                    if (Program.Rng.RandomLessThan(d) != 0)
+                    {
+                        continue;
+                    }
+                }
+                Item item = new Item(this, kIdx);
+                item.FixedArtifact = pair.Value;
+                return item;
+            }
+            return null;
+        }
+
+        public Item? MakeObject(bool good, bool great, bool doNotAllowChestToBeCreated)
+        {
+            int prob = good ? 10 : 1000;
+            int baselevel = good ? Level.ObjectLevel + 10 : Level.ObjectLevel;
+
+            Item? item = null;
+
+            // Attempt to create a fixed artifact.
+            if (Program.Rng.RandomLessThan(prob) == 0)
+            {
+                item = MakeFixedArtifact();
+            }
+            
+            // Attempt to create a non-artifact.
+            if (item == null)
+            {
+                ItemClass kIdx = RandomItemType(baselevel, doNotAllowChestToBeCreated, good);
+                if (kIdx == null)
+                {
+                    return null;
+                }
+                item = new Item(this, kIdx);
+            }
+            item.ApplyMagic(Level.ObjectLevel, true, good, great);
+            item.Count = item.BaseItemCategory.MakeObjectCount;
+            if (!item.IsCursed() && !item.IsBroken() && item.BaseItemCategory.Level > Difficulty)
+            {
+                if (Level != null)
+                {
+                    Level.TreasureRating += item.BaseItemCategory.Level - Difficulty;
+                }
+            }
+            return item;
+        }
+
+        public GoldItem MakeGold(int? goldType = null)
         {
             if (goldType == null)
             {
@@ -441,7 +517,7 @@ namespace AngbandOS.Core
             }
         }
 
-        public ItemClass RandomItemType(int level, bool doNotAllowChestToBeCreated, bool good)
+        public ItemClass? RandomItemType(int level, bool doNotAllowChestToBeCreated, bool good)
         {
             int i;
             int j;
@@ -1506,8 +1582,8 @@ namespace AngbandOS.Core
                 {
                     if (!quest || j > 1)
                     {
-                        qPtr = new Item(this);
-                        if (qPtr.MakeObject(good, great, false))
+                        qPtr = this.MakeObject(good, great, false);
+                        if (qPtr != null)
                         {
                             Level.DropNear(qPtr, -1, y, x);
                             dumpItem++;
@@ -1515,8 +1591,8 @@ namespace AngbandOS.Core
                     }
                     else
                     {
-                        qPtr = new Item(this);
-                        if (qPtr.MakeObject(true, true, false))
+                        qPtr = this.MakeObject(true, true, false);
+                        if (qPtr != null)
                         {
                             Level.DropNear(qPtr, -1, y, x);
                             dumpItem++;
@@ -1601,8 +1677,8 @@ namespace AngbandOS.Core
                 }
                 else
                 {
-                    Item qPtr = new Item(this);
-                    if (qPtr.MakeObject(false, false, true))
+                    Item qPtr = this.MakeObject(false, false, true);
+                    if (qPtr != null)
                     {
                         Level.DropNear(qPtr, -1, y, x);
                     }
@@ -19605,8 +19681,7 @@ namespace AngbandOS.Core
                         Screen.PrintLine(string.Format(q, i, matches, better, worse, other), 0, 0);
                         UpdateScreen();
                     }
-                    Item qPtr = new Item(this);
-                    qPtr.MakeObject(good, great, false);
+                    Item qPtr = this.MakeObject(good, great, false);
                     if (qPtr.IsFixedArtifact())
                     {
                         SingletonRepository.FixedArtifacts[qPtr.FixedArtifactIndex].CurNum = 0;

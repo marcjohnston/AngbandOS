@@ -103,8 +103,8 @@ namespace AngbandOS.Core
         {
             while (num-- != 0)
             {
-                Item qPtr = new Item(SaveGame);
-                if (!qPtr.MakeObject(true, great, false))
+                Item? qPtr = SaveGame.MakeObject(true, great, false);
+                if (qPtr == null)
                 {
                     continue;
                 }
@@ -1154,8 +1154,8 @@ namespace AngbandOS.Core
             {
                 return;
             }
-            Item qPtr = new Item(SaveGame);
-            if (!qPtr.MakeObject(good, great, false))
+            Item? qPtr = SaveGame.MakeObject(good, great, false);
+            if (qPtr == null)
             {
                 return;
             }

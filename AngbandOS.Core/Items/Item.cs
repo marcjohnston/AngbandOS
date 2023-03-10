@@ -2453,31 +2453,6 @@ namespace AngbandOS.Core.Items
             }
         }
 
-        public bool MakeObject(bool good, bool great, bool doNotAllowChestToBeCreated)
-        {
-            int prob = good ? 10 : 1000;
-            int baselevel = good ? SaveGame.Level.ObjectLevel + 10 : SaveGame.Level.ObjectLevel;
-            if (Program.Rng.RandomLessThan(prob) != 0 || !MakeFixedArtifact())
-            {
-                ItemClass kIdx = SaveGame.RandomItemType(baselevel, doNotAllowChestToBeCreated, good);
-                if (kIdx == null)
-                {
-                    return false;
-                }
-                AssignItemType(kIdx);
-            }
-            ApplyMagic(SaveGame.Level.ObjectLevel, true, good, great);
-            Count = BaseItemCategory.MakeObjectCount;
-            if (!IsCursed() && !IsBroken() && BaseItemCategory.Level > SaveGame.Difficulty)
-            {
-                if (SaveGame.Level != null)
-                {
-                    SaveGame.Level.TreasureRating += BaseItemCategory.Level - SaveGame.Difficulty;
-                }
-            }
-            return true;
-        }
-
         private bool ApplyFixedArtifact()
         {
             if (Count != 1)
@@ -2920,45 +2895,45 @@ namespace AngbandOS.Core.Items
             RechargeTimeLeft = 0;
         }
 
-        private bool MakeFixedArtifact()
-        {
-            foreach (KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.SingletonRepository.FixedArtifacts)
-            {
-                FixedArtifact aPtr = pair.Value;
-                if (!aPtr.HasOwnType)
-                {
-                    continue;
-                }
-                if (aPtr.CurNum != 0)
-                {
-                    continue;
-                }
-                if (aPtr.Level > SaveGame.Difficulty)
-                {
-                    int d = (aPtr.Level - SaveGame.Difficulty) * 2;
-                    if (Program.Rng.RandomLessThan(d) != 0)
-                    {
-                        continue;
-                    }
-                }
-                if (Program.Rng.RandomLessThan(aPtr.Rarity) != 0)
-                {
-                    return false;
-                }
-                ItemClass kIdx = aPtr.BaseItemCategory;
-                if (kIdx.Level > SaveGame.Level.ObjectLevel)
-                {
-                    int d = (kIdx.Level - SaveGame.Level.ObjectLevel) * 5;
-                    if (Program.Rng.RandomLessThan(d) != 0)
-                    {
-                        continue;
-                    }
-                }
-                AssignItemType(kIdx);
-                FixedArtifact = pair.Value;
-                return true;
-            }
-            return false;
-        }
+        //private bool MakeFixedArtifact()
+        //{
+        //    foreach (KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.SingletonRepository.FixedArtifacts)
+        //    {
+        //        FixedArtifact aPtr = pair.Value;
+        //        if (!aPtr.HasOwnType)
+        //        {
+        //            continue;
+        //        }
+        //        if (aPtr.CurNum != 0)
+        //        {
+        //            continue;
+        //        }
+        //        if (aPtr.Level > SaveGame.Difficulty)
+        //        {
+        //            int d = (aPtr.Level - SaveGame.Difficulty) * 2;
+        //            if (Program.Rng.RandomLessThan(d) != 0)
+        //            {
+        //                continue;
+        //            }
+        //        }
+        //        if (Program.Rng.RandomLessThan(aPtr.Rarity) != 0)
+        //        {
+        //            return false;
+        //        }
+        //        ItemClass kIdx = aPtr.BaseItemCategory;
+        //        if (kIdx.Level > SaveGame.Level.ObjectLevel)
+        //        {
+        //            int d = (kIdx.Level - SaveGame.Level.ObjectLevel) * 5;
+        //            if (Program.Rng.RandomLessThan(d) != 0)
+        //            {
+        //                continue;
+        //            }
+        //        }
+        //        AssignItemType(kIdx);
+        //        FixedArtifact = pair.Value;
+        //        return true;
+        //    }
+        //    return false;
+        //}
     }
 }
