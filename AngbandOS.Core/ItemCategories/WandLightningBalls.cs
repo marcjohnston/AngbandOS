@@ -27,5 +27,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             item.TypeSpecificValue = Program.Rng.DieRoll(8) + 4;
         }
+        public override Item CreateItem(SaveGame saveGame) => new LightningBallsWandItem(saveGame);
     }
 }

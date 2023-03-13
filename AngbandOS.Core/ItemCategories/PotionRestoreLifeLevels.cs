@@ -22,5 +22,6 @@ namespace AngbandOS.Core.ItemCategories
             // Restore life levels restores any lost experience
             return saveGame.Player.RestoreLevel();
         }
+        public override Item CreateItem(SaveGame saveGame) => new RestoreLifeLevelsPotionItem(saveGame);
     }
 }

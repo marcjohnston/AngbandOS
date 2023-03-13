@@ -15,5 +15,6 @@ namespace AngbandOS.Core.ItemCategories
         public override string FriendlyName => "& Empty Bottle~";
         public override int? SubCategory => 1;
         public override int Weight => 2;
+        public override Item CreateItem(SaveGame saveGame) => new EmptyBottle(saveGame);
     }
 }

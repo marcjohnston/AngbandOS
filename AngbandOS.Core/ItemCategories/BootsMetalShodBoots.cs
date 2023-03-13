@@ -19,5 +19,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int[] Locale => new int[] { 20, 0, 0, 0 };
         public override int? SubCategory => 6;
         public override int Weight => 80;
+        public override Item CreateItem(SaveGame saveGame) => new MetalShodBootsItem(saveGame);
     }
 }

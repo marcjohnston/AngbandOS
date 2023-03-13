@@ -22,5 +22,6 @@ namespace AngbandOS.Core.ItemCategories
             // Constitution increases your constitution
             return saveGame.Player.TryIncreasingAbilityScore(Ability.Constitution);
         }
+        public override Item CreateItem(SaveGame saveGame) => new ConstitutionPotionItem(saveGame);
     }
 }

@@ -24,5 +24,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             item.TypeSpecificValue = Program.Rng.DieRoll(20) + 8;
         }
+        public override Item CreateItem(SaveGame saveGame) => new HasteMonsterWandItem(saveGame);
     }
 }

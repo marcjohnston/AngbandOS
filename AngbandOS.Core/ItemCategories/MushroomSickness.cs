@@ -24,5 +24,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.Player.TryDecreasingAbilityScore(Ability.Constitution);
             return true;
         }
+        public override Item CreateItem(SaveGame saveGame) => new SicknessMushroomItem(saveGame);
     }
 }

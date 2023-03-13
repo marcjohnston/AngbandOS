@@ -16,5 +16,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int[] Locale => new int[] { 15, 0, 0, 0 };
         public override bool SlowDigest => true;
         public override int Weight => 3;
+        public override Item CreateItem(SaveGame saveGame) => new SlowDigestionAmuletItem(saveGame);
     }
 }

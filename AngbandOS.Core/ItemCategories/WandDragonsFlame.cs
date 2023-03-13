@@ -30,5 +30,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             item.TypeSpecificValue = Program.Rng.DieRoll(3) + 1;
         }
+        public override Item CreateItem(SaveGame saveGame) => new DragonsFlameWandItem(saveGame);
     }
 }

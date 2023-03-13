@@ -14,5 +14,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int Level => 100;
         public override int? SubCategory => 36;
         public override int Weight => 2;
+        public override Item CreateItem(SaveGame saveGame) => new VilyaRingItem(saveGame);
     }
 }

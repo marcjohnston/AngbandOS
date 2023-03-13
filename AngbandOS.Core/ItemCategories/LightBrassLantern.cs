@@ -95,5 +95,6 @@ namespace AngbandOS.Core.ItemCategories
             }
             saveGame.UpdateTorchRadiusFlaggedAction.Set();
         }
+        public override Item CreateItem(SaveGame saveGame) => new BrassLanternLightItem(saveGame);
     }
 }

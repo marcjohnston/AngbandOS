@@ -206,10 +206,10 @@ namespace AngbandOS.Core.Patrons
                             break;
 
                         default:
-                            reward = saveGame.SingletonRepository.ItemCategories.Get<SwordBladeofChaos>();
+                            reward = saveGame.SingletonRepository.ItemCategories.Get<SwordBladeOfChaos>();
                             break;
                     }
-                    Item qPtr = new Item(saveGame, reward);
+                    Item qPtr = reward.CreateItem(saveGame);
                     qPtr.BonusToHit = 3 + (Program.Rng.DieRoll(saveGame.Difficulty) % 10);
                     qPtr.BonusDamage = 3 + (Program.Rng.DieRoll(saveGame.Difficulty) % 10);
                     qPtr.ApplyRandomResistance(Program.Rng.DieRoll(34) + 4);

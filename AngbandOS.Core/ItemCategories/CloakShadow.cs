@@ -20,5 +20,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int? SubCategory => 6;
         public override int ToA => 4;
         public override int Weight => 5;
+        public override Item CreateItem(SaveGame saveGame) => new ShadowCloakArmorItem(saveGame);
     }
 }

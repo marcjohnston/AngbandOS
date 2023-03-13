@@ -147,5 +147,6 @@ namespace AngbandOS.Core.ItemCategories
                     throw new Exception("Invalid random potion chosen.");
             }
         }
+        public override Item CreateItem(SaveGame saveGame) => new SlimeMoldJuicePotionItem(saveGame);
     }
 }

@@ -25,5 +25,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             item.TypeSpecificValue = Program.Rng.DieRoll(15) + 8;
         }
+        public override Item CreateItem(SaveGame saveGame) => new SleepMonsterWandItem(saveGame);
     }
 }

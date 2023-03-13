@@ -1,3 +1,5 @@
+using AngbandOS.Core.Items;
+
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
@@ -22,5 +24,6 @@ namespace AngbandOS.Core.ItemCategories
             // Detect invisible gives you times see invisibility
             return saveGame.Player.TimedSeeInvisibility.AddTimer(12 + Program.Rng.DieRoll(12));
         }
+        public override Item CreateItem(SaveGame saveGame) => new DetectInvisiblePotionItem(saveGame);
     }
 }

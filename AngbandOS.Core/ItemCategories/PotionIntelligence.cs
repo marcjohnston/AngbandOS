@@ -22,5 +22,6 @@ namespace AngbandOS.Core.ItemCategories
             // Intelligence increases your intelligence
             return saveGame.Player.TryIncreasingAbilityScore(Ability.Intelligence);
         }
+        public override Item CreateItem(SaveGame saveGame) => new IntelligencePotionItem(saveGame);
     }
 }

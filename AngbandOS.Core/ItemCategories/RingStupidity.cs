@@ -18,5 +18,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int Pval => -5;
         public override int? SubCategory => 3;
         public override int Weight => 2;
+        public override Item CreateItem(SaveGame saveGame) => new StupidityRingItem(saveGame);
     }
 }

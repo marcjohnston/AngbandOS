@@ -24,5 +24,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.Player.TryDecreasingAbilityScore(Ability.Strength);
             return true;
         }
+        public override Item CreateItem(SaveGame saveGame) => new WeaknessMushroomItem(saveGame);
     }
 }

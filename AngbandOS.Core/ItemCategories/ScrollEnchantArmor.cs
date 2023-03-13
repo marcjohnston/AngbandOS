@@ -24,5 +24,6 @@ namespace AngbandOS.Core.ItemCategories
                 eventArgs.UsedUp = false;
             }
         }
+        public override Item CreateItem(SaveGame saveGame) => new EnchantArmorScrollItem(saveGame);
     }
 }

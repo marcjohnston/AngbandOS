@@ -17,5 +17,6 @@ namespace AngbandOS.Core.ItemCategories
         public override bool SeeInvis => true;
         public override int? SubCategory => 22;
         public override int Weight => 2;
+        public override Item CreateItem(SaveGame saveGame) => new SeeInvisibleRingItem(saveGame);
     }
 }

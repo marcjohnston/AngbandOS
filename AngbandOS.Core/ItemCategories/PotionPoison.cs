@@ -40,5 +40,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.Project(who, 2, y, x, 3, new PoisProjectile(saveGame), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
             return true;
         }
+        public override Item CreateItem(SaveGame saveGame) => new PoisonPotionItem(saveGame);
     }
 }

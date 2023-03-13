@@ -26,5 +26,6 @@
                 item.TypeSpecificValue = 0 - item.TypeSpecificValue;
             }
         }
+        public override Item CreateItem(SaveGame saveGame) => new WisdomAmuletItem(saveGame);
     }
 }

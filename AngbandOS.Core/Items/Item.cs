@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.Items
 {
     [Serializable]
-    internal class Item : IComparable<Item>
+    internal class Item : IComparable<Item> // TODO: Should be abstract
     {
         /// <summary>
         /// Returns true, if the item belongs to a specific ItemClass.
@@ -257,7 +257,7 @@ namespace AngbandOS.Core.Items
 
         public Item Clone(int? newCount = null)
         {
-            Item clonedItem = new Item(SaveGame);
+            Item clonedItem = BaseItemCategory.CreateItem(SaveGame);
             clonedItem.BaseArmourClass = BaseArmourClass;
             clonedItem.RandartItemCharacteristics.Copy(RandartItemCharacteristics);
             clonedItem.RandartName = RandartName;

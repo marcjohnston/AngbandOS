@@ -43,5 +43,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.Project(who, 1, y, x, Program.Rng.DiceRoll(50, 50), new OldHealProjectile(saveGame), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
             return false;
         }
+        public override Item CreateItem(SaveGame saveGame) => new LifePotionItem(saveGame);
     }
 }

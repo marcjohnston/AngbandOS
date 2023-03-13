@@ -26,5 +26,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             item.TypeSpecificValue = Program.Rng.DieRoll(10) + 6;
         }
+        public override Item CreateItem(SaveGame saveGame) => new MagicMissileWandItem(saveGame);
     }
 }

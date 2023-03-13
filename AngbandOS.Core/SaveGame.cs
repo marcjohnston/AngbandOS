@@ -357,7 +357,7 @@ namespace AngbandOS.Core
                         continue;
                     }
                 }
-                Item item = new Item(this, kIdx);
+                Item item = kIdx.CreateItem(this);
                 item.FixedArtifact = pair.Value;
                 return item;
             }
@@ -385,7 +385,7 @@ namespace AngbandOS.Core
                 {
                     return null;
                 }
-                item = new Item(this, kIdx);
+                item = kIdx.CreateItem(this);
             }
             item.ApplyMagic(Level.ObjectLevel, true, good, great);
             item.Count = item.BaseItemCategory.MakeObjectCount;
@@ -399,61 +399,32 @@ namespace AngbandOS.Core
             return item;
         }
 
+        /// <summary>
+        /// Returns the one-in-probability that found gold is great.
+        /// </summary>
+        public int OneInProbabilityGoldItemIsGreat => 20;
         public GoldItem MakeGold(int? goldType = null)
         {
             if (goldType == null)
             {
+                // The type of gold to be created depends on the level it is found.
                 goldType = ((Program.Rng.DieRoll(Level.ObjectLevel + 2) + 2) / 2) - 1;
-                if (Program.Rng.RandomLessThan(Constants.GreatObj) == 0)
+
+                // A great find has some probability.
+                if (Program.Rng.RandomLessThan(OneInProbabilityGoldItemIsGreat) == 0)
                 {
                     goldType += Program.Rng.DieRoll(Level.ObjectLevel + 1);
                 }
             }
-            if (goldType > 17)
+
+            // Get a list of all of the item classes that are considered gold.  Sort them by the cost.
+            ItemClass[] goldItemClasses = SingletonRepository.ItemCategories.Where(_itemClass => GoldItemClass.IsGold(_itemClass)).OrderBy(_goldItemClass => _goldItemClass.Cost).ToArray();
+
+            if (goldType > goldItemClasses.Length)
             {
-                goldType = 17;
+                goldType = goldItemClasses.Length - 1;
             }
-            switch (goldType.Value)
-            {
-                case 0:
-                    return new CopperGoldItem(this);
-                case 1:
-                    return new Copper1GoldItem(this);
-                case 2:
-                    return new Copper2GoldItem(this);
-                case 3:
-                    return new SilverGoldItem(this);
-                case 4:
-                    return new Silver1GoldItem(this);
-                case 5:
-                    return new Silver2GoldItem(this);
-                case 6:
-                    return new GarnetsGoldItem(this);
-                case 7:
-                    return new Garnets1GoldItem(this);
-                case 8:
-                    return new GoldGoldItem(this);
-                case 9:
-                    return new Gold1GoldItem(this);
-                case 10:
-                    return new Gold2GoldItem(this);
-                case 11:
-                    return new OpalsGoldItem(this);
-                case 12:
-                    return new SapphiresGoldItem(this);
-                case 13:
-                    return new RubiesGoldItem(this);
-                case 14:
-                    return new DiamondsGoldItem(this);
-                case 15:
-                    return new EmeraldsGoldItem(this);
-                case 16:
-                    return new MithrilGoldItem(this);
-                case 17:
-                    return new AdamantiteGoldItem(this);
-                default:
-                    throw new Exception("MakeGold invalid random.");
-            }
+            return (GoldItem)goldItemClasses[goldType.Value].CreateItem(this);
         }
 
         private void Configure(Configuration? configuration)
@@ -14735,7 +14706,8 @@ namespace AngbandOS.Core
         {
             if (Player.Race.OutfitsWithScrollsOfSatisfyHunger)
             {
-                Item item = new Item(this, SingletonRepository.ItemCategories.Get<ScrollSatisfyHunger>());
+                ItemClass scrollSatisfyHungerItemClass = SingletonRepository.ItemCategories.Get<ScrollSatisfyHunger>();
+                Item item = scrollSatisfyHungerItemClass.CreateItem(this);
                 item.Count = (char)Program.Rng.RandomBetween(2, 5);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
@@ -14744,7 +14716,8 @@ namespace AngbandOS.Core
             }
             else
             {
-                Item item = new Item(this, SingletonRepository.ItemCategories.Get<FoodRation>());
+                ItemClass rationFoodItemClass = SingletonRepository.ItemCategories.Get<FoodRation>();
+                Item item = rationFoodItemClass.CreateItem(this);
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
@@ -14752,7 +14725,8 @@ namespace AngbandOS.Core
             }
             if (Player.Race.OutfitsWithScrollsOfLight || Player.BaseCharacterClass.OutfitsWithScrollsOfLight)
             {
-                Item item = new Item(this, SingletonRepository.ItemCategories.Get<ScrollLight>());
+                ItemClass scrollLightItemClass = SingletonRepository.ItemCategories.Get<ScrollLight>();
+                Item item = scrollLightItemClass .CreateItem(this);
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
@@ -14761,7 +14735,8 @@ namespace AngbandOS.Core
             }
             else
             {
-                Item item = new Item(this, SingletonRepository.ItemCategories.Get<LightWoodenTorch>());
+                ItemClass woodenTorchItemClass = SingletonRepository.ItemCategories.Get<LightWoodenTorch>();
+                Item item = woodenTorchItemClass.CreateItem(this);
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.TypeSpecificValue = Program.Rng.RandomBetween(3, 7) * 500;
                 item.BecomeFlavourAware();
@@ -19266,7 +19241,8 @@ namespace AngbandOS.Core
             {
                 return;
             }
-            Item qPtr = new Item(this, SingletonRepository.ItemCategories[kIdx]);
+            ItemClass itemClass = SingletonRepository.ItemCategories[kIdx];
+            Item qPtr = itemClass.CreateItem(this);
             qPtr.ApplyMagic(Difficulty, false, false, false);
             Level.DropNear(qPtr, -1, Player.MapY, Player.MapX);
             MsgPrint("Allocated.");
@@ -19370,7 +19346,7 @@ namespace AngbandOS.Core
             {
                 return;
             }
-            Item qPtr = new Item(this, aPtr.BaseItemCategory);
+            Item qPtr = aPtr.BaseItemCategory.CreateItem(this);
             qPtr.FixedArtifact = SingletonRepository.FixedArtifacts[aIdx];
             qPtr.TypeSpecificValue = aPtr.Pval;
             qPtr.BaseArmourClass = aPtr.Ac;

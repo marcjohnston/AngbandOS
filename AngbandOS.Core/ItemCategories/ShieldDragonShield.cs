@@ -42,5 +42,6 @@ namespace AngbandOS.Core.ItemCategories
             }
             ApplyDragonscaleResistance(item);
         }
+        public override Item CreateItem(SaveGame saveGame) => new DragonShieldArmorItem(saveGame);
     }
 }

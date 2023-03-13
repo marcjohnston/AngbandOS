@@ -21,6 +21,6 @@ namespace AngbandOS.Core.ItemCategories
             // Ugliness tries to reduce your charisma
             return saveGame.Player.TryDecreasingAbilityScore(Ability.Charisma);
         }
-
+        public override Item CreateItem(SaveGame saveGame) => new UglinessPotionItem(saveGame);
     }
 }

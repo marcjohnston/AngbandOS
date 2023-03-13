@@ -17,5 +17,6 @@ namespace AngbandOS.Core.ItemCategories
         public override bool ResShards => true;
         public override int? SubCategory => 44;
         public override int Weight => 2;
+        public override Item CreateItem(SaveGame saveGame) => new ShardResistanceRingItem(saveGame);
     }
 }

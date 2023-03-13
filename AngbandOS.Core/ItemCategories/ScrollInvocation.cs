@@ -23,5 +23,6 @@ namespace AngbandOS.Core.ItemCategories
             patron.GetReward(eventArgs.SaveGame);
             eventArgs.Identified = true;
         }
+        public override Item CreateItem(SaveGame saveGame) => new InvocationScrollItem(saveGame);
     }
 }

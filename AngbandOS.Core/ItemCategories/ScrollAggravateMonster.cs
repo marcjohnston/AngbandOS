@@ -21,5 +21,6 @@ namespace AngbandOS.Core.ItemCategories
             eventArgs.SaveGame.AggravateMonsters();
             eventArgs.Identified = true;
         }
+        public override Item CreateItem(SaveGame saveGame) => new AggravateMonsterScrollItem(saveGame);
     }
 }

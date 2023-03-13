@@ -37,5 +37,6 @@ namespace AngbandOS.Core.ItemCategories
         }
 
         public override bool KindIsGood => true;
+        public override Item CreateItem(SaveGame saveGame) => new ResistanceAmuletItem(saveGame);
     }
 }

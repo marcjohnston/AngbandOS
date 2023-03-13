@@ -20,5 +20,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 30;
         public override bool KindIsGood => false;
 
+        public override Item CreateItem(SaveGame saveGame) => new CardMasteryTarotBookItem(saveGame);
     }
 }

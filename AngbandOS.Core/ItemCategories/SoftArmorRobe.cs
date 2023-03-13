@@ -45,6 +45,6 @@ namespace AngbandOS.Core.ItemCategories
                 }
             }
         }
-
+        public override Item CreateItem(SaveGame saveGame) => new RobeSoftArmorItem(saveGame);
     }
 }

@@ -18,5 +18,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int? SubCategory => 4;
         public override bool Teleport => true;
         public override int Weight => 2;
+        public override Item CreateItem(SaveGame saveGame) => new TeleportationRingItem(saveGame);
     }
 }

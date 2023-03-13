@@ -27,5 +27,6 @@ namespace AngbandOS.Core.ItemCategories
                 item.TypeSpecificValue = 0 - item.TypeSpecificValue;
             }
         }
+        public override Item CreateItem(SaveGame saveGame) => new SearchingAmuletItem(saveGame);
     }
 }

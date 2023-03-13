@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class SwordBladeofChaos : SwordItemClass
+    internal class SwordBladeOfChaos : SwordItemClass
     {
-        private SwordBladeofChaos(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private SwordBladeOfChaos(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '|';
         public override Colour Colour => Colour.Purple;
@@ -20,5 +20,6 @@ namespace AngbandOS.Core.ItemCategories
         public override bool ShowMods => true;
         public override int? SubCategory => 30;
         public override int Weight => 180;
+        public override Item CreateItem(SaveGame saveGame) => new BladeOfChaosSwordWeaponItem(saveGame);
     }
 }

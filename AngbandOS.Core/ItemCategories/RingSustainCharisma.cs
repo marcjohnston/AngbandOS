@@ -17,5 +17,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int? SubCategory => 15;
         public override bool SustCha => true;
         public override int Weight => 2;
+        public override Item CreateItem(SaveGame saveGame) => new SustainCharismaRingItem(saveGame);
     }
 }

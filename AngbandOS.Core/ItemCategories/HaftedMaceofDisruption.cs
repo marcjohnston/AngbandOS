@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class HaftedMaceofDisruption : HaftedItemClass
+    internal class HaftedMaceOfDisruption : HaftedItemClass
     {
-        private HaftedMaceofDisruption(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private HaftedMaceOfDisruption(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '\\';
         public override Colour Colour => Colour.Purple;
@@ -20,5 +20,6 @@ namespace AngbandOS.Core.ItemCategories
         public override bool SlayUndead => true;
         public override int? SubCategory => 20;
         public override int Weight => 400;
+        public override Item CreateItem(SaveGame saveGame) => new MaceOfDisruptionHaftedWeaponItem(saveGame);
     }
 }

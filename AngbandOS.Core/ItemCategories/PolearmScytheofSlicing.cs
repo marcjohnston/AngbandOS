@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class PolearmScytheofSlicing : PolearmItemClass
+    internal class PolearmScytheOfSlicing : PolearmItemClass
     {
-        private PolearmScytheofSlicing(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private PolearmScytheOfSlicing(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '/';
         public override Colour Colour => Colour.Red;
@@ -19,5 +19,6 @@ namespace AngbandOS.Core.ItemCategories
         public override bool ShowMods => true;
         public override int? SubCategory => 30;
         public override int Weight => 250;
+        public override Item CreateItem(SaveGame saveGame) => new ScytheOfSlicingPolearmWeaponItem(saveGame);
     }
 }
