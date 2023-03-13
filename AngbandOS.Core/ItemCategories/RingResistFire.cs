@@ -18,5 +18,6 @@ namespace AngbandOS.Core.ItemCategories
         public override bool ResFire => true;
         public override int? SubCategory => 8;
         public override int Weight => 2;
+        public override Item CreateItem(SaveGame saveGame) => new ResistFireRingItem(saveGame);
     }
 }

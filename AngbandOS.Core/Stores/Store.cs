@@ -1127,13 +1127,21 @@ namespace AngbandOS.Core.Stores
 
         protected virtual Item CreateItem()
         {
-            int level;
-            ItemClass itemType;
+            // Pick an item to create from the inventory.
             int i = _table[Program.Rng.RandomLessThan(_table.Length)];
-            level = Program.Rng.RandomBetween(1, Constants.StoreObjLevel);
-            itemType = SaveGame.SingletonRepository.ItemCategories[i];
-            Item qPtr = new Item(SaveGame, itemType);
+
+            // Generate a level for the item.
+            int level = Program.Rng.RandomBetween(1, Constants.StoreObjLevel);
+
+            // Retrieve the item class.
+            ItemClass itemType = SaveGame.SingletonRepository.ItemCategories[i];
+
+            // Create the item.
+            Item qPtr = itemType.CreateItem(SaveGame);
+
+            // Apply magic to the item.
             qPtr.ApplyMagic(level, false, false, false);
+
             return qPtr;
         }
 

@@ -26,5 +26,6 @@ namespace AngbandOS.Core.ItemCategories
             }
             zapRodEvent.Item.TypeSpecificValue = 15 + Program.Rng.DieRoll(15);
         }
+        public override Item CreateItem(SaveGame saveGame) => new DisarmingRodItem(saveGame);
     }
 }

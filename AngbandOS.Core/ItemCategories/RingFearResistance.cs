@@ -17,5 +17,6 @@ namespace AngbandOS.Core.ItemCategories
         public override bool ResFear => true;
         public override int? SubCategory => 38;
         public override int Weight => 2;
+        public override Item CreateItem(SaveGame saveGame) => new FearResistanceRingItem(saveGame);
     }
 }

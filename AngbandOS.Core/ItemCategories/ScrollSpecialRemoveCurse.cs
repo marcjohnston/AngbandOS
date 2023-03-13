@@ -21,5 +21,6 @@ namespace AngbandOS.Core.ItemCategories
             eventArgs.SaveGame.RemoveAllCurse();
             eventArgs.Identified = true;
         }
+        public override Item CreateItem(SaveGame saveGame) => new SpecialRemoveCurseScrollItem(saveGame);
     }
 }

@@ -21,5 +21,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.Player.TryDecreasingAbilityScore(Ability.Intelligence);
             return true;
         }
+        public override Item CreateItem(SaveGame saveGame) => new StupidityMushroomItem(saveGame);
     }
 }

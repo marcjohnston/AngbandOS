@@ -22,5 +22,6 @@ namespace AngbandOS.Core.ItemCategories
             eventArgs.SaveGame.Earthquake(eventArgs.SaveGame.Player.MapY, eventArgs.SaveGame.Player.MapX, 10);
             eventArgs.Identified = true;
         }
+        public override Item CreateItem(SaveGame saveGame) => new EarthquakesStaffItem(saveGame);
     }
 }

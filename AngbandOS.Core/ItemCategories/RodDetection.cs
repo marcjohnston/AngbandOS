@@ -24,5 +24,6 @@ namespace AngbandOS.Core.ItemCategories
             zapRodEvent.Identified = true;
             zapRodEvent.Item.TypeSpecificValue = 99;
         }
+        public override Item CreateItem(SaveGame saveGame) => new DetectionRodItem(saveGame);
     }
 }

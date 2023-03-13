@@ -12,5 +12,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int Cost => 40;
         public override string FriendlyName => "mithril";
         public override int Level => 1;
+        public override Item CreateItem(SaveGame saveGame) => new MithrilGoldItem(saveGame);
     }
 }

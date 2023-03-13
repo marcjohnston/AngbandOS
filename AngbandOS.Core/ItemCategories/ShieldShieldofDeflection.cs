@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class ShieldShieldofDeflection : ShieldItemClass
+    internal class ShieldShieldOfDeflection : ShieldItemClass
     {
-        private ShieldShieldofDeflection(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private ShieldShieldOfDeflection(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '[';
         public override Colour Colour => Colour.BrightBlue;
@@ -21,5 +21,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int? SubCategory => 10;
         public override int ToA => 10;
         public override int Weight => 100;
+        public override Item CreateItem(SaveGame saveGame) => new OfDeflectionShieldArmorItem(saveGame);
     }
 }

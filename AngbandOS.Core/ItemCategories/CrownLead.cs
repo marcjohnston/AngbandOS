@@ -17,5 +17,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int Level => 44;
         public override int? SubCategory => 50;
         public override int Weight => 20;
+        public override Item CreateItem(SaveGame saveGame) => new LeadCrownArmorItem(saveGame);
     }
 }

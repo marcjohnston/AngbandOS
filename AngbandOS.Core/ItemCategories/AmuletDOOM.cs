@@ -30,5 +30,6 @@ namespace AngbandOS.Core.ItemCategories
             item.TypeSpecificValue = 0 - (Program.Rng.DieRoll(5) + GetBonusValue(5, level));
             item.BonusArmourClass = 0 - (Program.Rng.DieRoll(5) + GetBonusValue(5, level));
         }
+        public override Item CreateItem(SaveGame saveGame) => new DOOMAmuletItem(saveGame);
     }
 }

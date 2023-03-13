@@ -26,5 +26,6 @@ namespace AngbandOS.Core.ItemCategories
             }
             zapRodEvent.Item.TypeSpecificValue = 25;
         }
+        public override Item CreateItem(SaveGame saveGame) => new TeleportOtherRodItem(saveGame);
     }
 }

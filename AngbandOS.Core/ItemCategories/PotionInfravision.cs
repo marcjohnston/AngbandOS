@@ -22,5 +22,6 @@ namespace AngbandOS.Core.ItemCategories
             // Infravision gives you timed infravision
             return saveGame.Player.TimedInfravision.AddTimer(100 + Program.Rng.DieRoll(100));
         }
+        public override Item CreateItem(SaveGame saveGame) => new InfravisionPotionItem(saveGame);
     }
 }

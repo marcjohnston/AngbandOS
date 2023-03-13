@@ -7,15 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ConfigurationMetadata\**" />
+    <EmbeddedResource Remove="ConfigurationMetadata\**" />
+    <None Remove="ConfigurationMetadata\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="5.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Core.Interface.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ConfigurationMetadata\" />
   </ItemGroup>
 
 </Project>

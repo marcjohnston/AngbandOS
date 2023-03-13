@@ -18,5 +18,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int? SubCategory => 5;
         public override int Weight => 5;
         public override bool ProvidesSunlight => true;
+        public override Item CreateItem(SaveGame saveGame) => new EssenceElendilLightItem(saveGame);
     }
 }

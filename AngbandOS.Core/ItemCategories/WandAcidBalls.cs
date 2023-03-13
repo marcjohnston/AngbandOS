@@ -27,5 +27,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             item.TypeSpecificValue = Program.Rng.DieRoll(5) + 2;
         }
+        public override Item CreateItem(SaveGame saveGame) => new AcidBallsWandItem(saveGame);
     }
 }

@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class WandStonetoMud : WandItemClass
+    internal class WandStoneToMud : WandItemClass
     {
-        private WandStonetoMud(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private WandStoneToMud(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '-';
         public override string Name => "Stone to Mud";
@@ -25,5 +25,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             item.TypeSpecificValue = Program.Rng.DieRoll(8) + 3;
         }
+        public override Item CreateItem(SaveGame saveGame) => new StoneToMudWandItem(saveGame);
     }
 }

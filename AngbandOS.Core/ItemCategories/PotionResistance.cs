@@ -32,5 +32,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.Player.TimedPoisonResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
             return true;
         }
+        public override Item CreateItem(SaveGame saveGame) => new ResistancePotionItem(saveGame);
     }
 }

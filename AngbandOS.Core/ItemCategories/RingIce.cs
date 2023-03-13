@@ -19,5 +19,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int? SubCategory => 19;
         public override int ToA => 15;
         public override int Weight => 2;
+        public override Item CreateItem(SaveGame saveGame) => new IceRingItem(saveGame);
     }
 }

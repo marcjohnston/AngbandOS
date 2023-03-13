@@ -20,5 +20,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 2;
         public override int? SubCategory => 0;
         public override bool Wis => true;
+        public override Item CreateItem(SaveGame saveGame) => new WoeRingItem(saveGame);
     }
 }

@@ -15,5 +15,6 @@ namespace AngbandOS.Core.ItemCategories
         public override string FriendlyName => "& Broken Skull~";
         public override int? SubCategory => 1;
         public override int Weight => 1;
+        public override Item CreateItem(SaveGame saveGame) => new BrokenSkullSkeletonItem(saveGame);
     }
 }

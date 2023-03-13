@@ -22,5 +22,6 @@ namespace AngbandOS.Core.ItemCategories
             // Restore intelligence restores your intelligence
             return saveGame.Player.TryRestoringAbilityScore(Ability.Intelligence);
         }
+        public override Item CreateItem(SaveGame saveGame) => new RestoreIntelligencePotionItem(saveGame);
     }
 }

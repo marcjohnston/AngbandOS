@@ -34,5 +34,6 @@ namespace AngbandOS.Core.ItemCategories
             }
             return false;
         }
+        public override Item CreateItem(SaveGame saveGame) => new PoisonMushroomItem(saveGame);
     }
 }

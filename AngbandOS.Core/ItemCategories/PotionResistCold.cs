@@ -22,5 +22,6 @@ namespace AngbandOS.Core.ItemCategories
             // Resist cold gives you timed frost resistance
             return saveGame.Player.TimedColdResistance.AddTimer(Program.Rng.DieRoll(10) + 10);
         }
+        public override Item CreateItem(SaveGame saveGame) => new ResistColdPotionItem(saveGame);
     }
 }

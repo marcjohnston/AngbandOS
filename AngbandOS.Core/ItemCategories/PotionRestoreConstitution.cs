@@ -22,5 +22,6 @@ namespace AngbandOS.Core.ItemCategories
             // Restore constitution restores your constitution
             return saveGame.Player.TryRestoringAbilityScore(Ability.Constitution);
         }
+        public override Item CreateItem(SaveGame saveGame) => new RestoreConstitutionPotionItem(saveGame);
     }
 }

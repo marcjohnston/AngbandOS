@@ -25,5 +25,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             item.TypeSpecificValue = Program.Rng.DieRoll(8) + 6;
         }
+        public override Item CreateItem(SaveGame saveGame) => new TrapDoorDestructionWandItem(saveGame);
     }
 }

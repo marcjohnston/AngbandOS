@@ -28,5 +28,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.Project(who, 2, y, x, 0, new DarkProjectile(saveGame), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
             return true;
         }
+        public override Item CreateItem(SaveGame saveGame) => new BlindnessPotionItem(saveGame);
     }
 }

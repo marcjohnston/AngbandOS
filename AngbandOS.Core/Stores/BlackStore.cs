@@ -70,7 +70,7 @@
             {
                 return null; ;
             }
-            Item qPtr = new Item(SaveGame, itemType);
+            Item qPtr = itemType.CreateItem(SaveGame);
             qPtr.ApplyMagic(level, false, false, false);
             return qPtr;
         }

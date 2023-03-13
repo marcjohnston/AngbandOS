@@ -1,3 +1,5 @@
+using AngbandOS.Core.Items;
+
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
@@ -27,5 +29,6 @@ namespace AngbandOS.Core.ItemCategories
                 item.IdentCursed = true;
             }
         }
+        public override Item CreateItem(SaveGame saveGame) => new AntiTeleportationAmuletItem(saveGame);
     }
 }

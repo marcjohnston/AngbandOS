@@ -20,5 +20,6 @@ namespace AngbandOS.Core.ItemCategories
         public override bool ShowMods => true;
         public override bool Tunnel => true;
         public override int Weight => 60;
+        public override Item CreateItem(SaveGame saveGame) => new GnomishShovelDiggingWeaponItem(saveGame);
     }
 }

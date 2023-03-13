@@ -27,5 +27,6 @@ namespace AngbandOS.Core.ItemCategories
                 item.IdentCursed = true;
             }
         }
+        public override Item CreateItem(SaveGame saveGame) => new AntiMagicAmuletItem(saveGame);
     }
 }

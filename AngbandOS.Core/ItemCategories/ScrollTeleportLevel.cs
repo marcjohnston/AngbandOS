@@ -20,5 +20,6 @@ namespace AngbandOS.Core.ItemCategories
             eventArgs.SaveGame.TeleportPlayerLevel();
             eventArgs.Identified = true;
         }
+        public override Item CreateItem(SaveGame saveGame) => new TeleportLevelScrollItem(saveGame);
     }
 }

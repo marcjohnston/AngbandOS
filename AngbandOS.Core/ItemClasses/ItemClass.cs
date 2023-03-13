@@ -18,6 +18,14 @@
         }
 
         /// <summary>
+        /// Returns the item type to use when creating an item of this category.
+        /// </summary>
+        public virtual Item CreateItem(SaveGame saveGame) // TODO: This should be an abstract because we want the Item class to be abstract.
+        {
+            return new Item(saveGame, this);
+        }
+
+        /// <summary>
         /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.
         /// </summary>
         public abstract int PackSort { get; }

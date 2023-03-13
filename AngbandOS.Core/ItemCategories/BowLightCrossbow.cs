@@ -18,5 +18,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 110;
         public override int MissileDamageMultiplier => 3;
         public override ItemTypeEnum AmmunitionItemCategory => ItemTypeEnum.Bolt;
+        public override Item CreateItem(SaveGame saveGame) => new LightCrossbowBowWeapon(saveGame);
     }
 }
