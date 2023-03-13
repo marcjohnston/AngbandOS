@@ -51,7 +51,7 @@ namespace AngbandOS.Core
             InitGradients();
         }
 
-        public double Noise(double x, double y, double z) // TODO: This method participated in a hang during startup
+        public double Noise(double x, double y, double z) 
         {
             int ix = (int)Math.Floor(x);
             double fx0 = x - ix;
@@ -82,7 +82,7 @@ namespace AngbandOS.Core
             return Lerp(wz, vz0, vz1);
         }
 
-        private int Index(int ix, int iy, int iz) // TODO: This method participated in a hang during startup
+        private int Index(int ix, int iy, int iz) 
         {
             return Permutate(ix + Permutate(iy + Permutate(iz)));
         }
