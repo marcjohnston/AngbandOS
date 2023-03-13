@@ -100,7 +100,6 @@ namespace AngbandOS.Core.Items
         /// <summary>
         /// Returns the item type that this item is based on.  Returns null, if the item is (nothing), as in the inventory.
         /// </summary>
-        //public ItemType? ItemType = null;
         public ItemClass? BaseItemCategory = null;
 
         public bool Marked;
