@@ -985,15 +985,14 @@ namespace AngbandOS.Core
             } while (Program.Rng.DieRoll(3) == 1);
         }
 
-        public void ChestTrap(int y, int x, int oIdx)
+        public void ChestTrap(int y, int x, Item chestItem)
         {
-            Item oPtr = Level.Items[oIdx];
-            if (oPtr.TypeSpecificValue <= 0)
+            if (chestItem.TypeSpecificValue <= 0)
             {
                 return;
             }
-            ChestTrapConfiguration trap = SingletonRepository.ChestTrapConfigurations[oPtr.TypeSpecificValue];
-            trap.Activate(this, oPtr);
+            ChestTrapConfiguration trap = SingletonRepository.ChestTrapConfigurations[chestItem.TypeSpecificValue];
+            trap.Activate(this, chestItem);
         }
 
         public void DisplayWildMap()
@@ -1626,19 +1625,18 @@ namespace AngbandOS.Core
             NoticeReorderFlaggedAction.Check();
         }
 
-        public void OpenChest(int y, int x, int oIdx)
+        public void OpenChest(int y, int x, Item chestItem)
         {
-            Item oPtr = Level.Items[oIdx];
-            ChestItemClass chest = (ChestItemClass)oPtr.BaseItemCategory;
+            ChestItemClass chest = (ChestItemClass)chestItem.BaseItemCategory;
             bool small = chest.IsSmall;
             int number = chest.NumberOfItemsContained;
 
             // Check to see if there is anything in the chest.  A chest trap will set this to zero, if it explodes.
-            if (oPtr.TypeSpecificValue == 0)
+            if (chestItem.TypeSpecificValue == 0)
             {
                 number = 0;
             }
-            Level.ObjectLevel = Math.Abs(oPtr.TypeSpecificValue) + 10;
+            Level.ObjectLevel = Math.Abs(chestItem.TypeSpecificValue) + 10;
             for (; number > 0; --number)
             {
                 if (small && Program.Rng.RandomLessThan(100) < 75)
@@ -1656,8 +1654,8 @@ namespace AngbandOS.Core
                 }
             }
             Level.ObjectLevel = Difficulty;
-            oPtr.TypeSpecificValue = 0;
-            oPtr.BecomeKnown();
+            chestItem.TypeSpecificValue = 0;
+            chestItem.BecomeKnown();
         }
 
         private void InitializeDisplay(int w, int h, int k)
@@ -6977,20 +6975,19 @@ namespace AngbandOS.Core
                 int yy = Player.MapY + Level.OrderedDirectionYOffset[orderedDirection];
                 int xx = Player.MapX + Level.OrderedDirectionXOffset[orderedDirection];
                 // Get the index of first item in the tile that is a chest
-                int itemIndex;
-                if ((itemIndex = Level.ChestCheck(yy, xx)) == 0)
+                Item? chestItem = Level.ChestCheck(yy, xx);
+                if (chestItem == null)
                 {
                     // There wasn't a chest on the grid so skip
                     continue;
                 }
                 // Get the actual item from the index
-                Item item = Level.Items[itemIndex];
-                if (item.TypeSpecificValue == 0)
+                if (chestItem.TypeSpecificValue == 0)
                 {
                     continue;
                 }
                 // If we're only interested in trapped chests, skip those that aren't
-                if (trappedOnly && (!item.IsKnown() || SingletonRepository.ChestTrapConfigurations[item.TypeSpecificValue].NotTrapped))
+                if (trappedOnly && (!chestItem.IsKnown() || SingletonRepository.ChestTrapConfigurations[chestItem.TypeSpecificValue].NotTrapped))
                 {
                     continue;
                 }
@@ -7242,10 +7239,9 @@ namespace AngbandOS.Core
         /// <param name="x"> The x coordinate of the location </param>
         /// <param name="itemIndex"> The index of the chest item </param>
         /// <returns> True, if the player is allowed to another attempt to disarm the trap.</returns>
-        public bool DisarmChest(int y, int x, int itemIndex)
+        public bool DisarmChest(int y, int x, Item chestItem)
         {
             bool allowAdditionalDisarmAttempts = false;
-            Item item = Level.Items[itemIndex];
             // Disarming a chest takes a turn
             EnergyUse = 100;
             int i = Player.SkillDisarmTraps;
@@ -7260,23 +7256,23 @@ namespace AngbandOS.Core
                 i /= 10;
             }
             // Penalty for difficulty of trap
-            int j = i - item.TypeSpecificValue;
+            int j = i - chestItem.TypeSpecificValue;
             if (j < 2)
             {
                 j = 2;
             }
             // If we don't know about the traps, we don't know what to disarm
-            if (!item.IsKnown())
+            if (!chestItem.IsKnown())
             {
                 MsgPrint("I don't see any traps.");
             }
             // If it has no traps there's nothing to disarm
-            else if (item.TypeSpecificValue <= 0)
+            else if (chestItem.TypeSpecificValue <= 0)
             {
                 MsgPrint("The chest is not trapped.");
             }
             // If it has a null trap then there's nothing to disarm
-            else if (SingletonRepository.ChestTrapConfigurations[item.TypeSpecificValue].NotTrapped)
+            else if (SingletonRepository.ChestTrapConfigurations[chestItem.TypeSpecificValue].NotTrapped)
             {
                 MsgPrint("The chest is not trapped.");
             }
@@ -7284,8 +7280,8 @@ namespace AngbandOS.Core
             else if (Program.Rng.RandomLessThan(100) < j)
             {
                 MsgPrint("You have disarmed the chest.");
-                Player.GainExperience(item.TypeSpecificValue);
-                item.TypeSpecificValue = 0 - item.TypeSpecificValue;
+                Player.GainExperience(chestItem.TypeSpecificValue);
+                chestItem.TypeSpecificValue = 0 - chestItem.TypeSpecificValue;
             }
             // If we failed to disarm it there's a chance it goes off
             else if (i > 5 && Program.Rng.DieRoll(i) > 5)
@@ -7296,7 +7292,7 @@ namespace AngbandOS.Core
             else
             {
                 MsgPrint("You set off a trap!");
-                ChestTrap(y, x, itemIndex);
+                ChestTrap(y, x, chestItem);
             }
             return allowAdditionalDisarmAttempts;
         }
@@ -9398,9 +9394,8 @@ namespace AngbandOS.Core
                 int x = Player.MapX + Level.KeypadDirectionXOffset[dir];
                 GridTile tile = Level.Grid[y][x];
                 // Check for a chest
-                int itemIndex = Level.ChestCheck(y, x);
-                if (!tile.FeatureType.IsTrap &&
-                    itemIndex == 0)
+                Item? chestItem = Level.ChestCheck(y, x);
+                if (!tile.FeatureType.IsTrap && chestItem == null)
                 {
                     MsgPrint("You see nothing there to disarm.");
                 }
@@ -9411,9 +9406,9 @@ namespace AngbandOS.Core
                     PlayerAttackMonster(y, x);
                 }
                 // Disarm the chest or trap
-                else if (itemIndex != 0)
+                else if (chestItem != null)
                 {
-                    more = DisarmChest(y, x, itemIndex);
+                    more = DisarmChest(y, x, chestItem);
                 }
                 else
                 {
@@ -9445,10 +9440,9 @@ namespace AngbandOS.Core
                 int y = Player.MapY + Level.KeypadDirectionYOffset[dir];
                 int x = Player.MapX + Level.KeypadDirectionXOffset[dir];
                 GridTile tile = Level.Grid[y][x];
-                int itemIndex = Level.ChestCheck(y, x);
+                Item? chestItem = Level.ChestCheck(y, x);
                 // Make sure there is something to open in the direction we chose
-                if (!tile.FeatureType.IsClosedDoor &&
-                    itemIndex == 0)
+                if (!tile.FeatureType.IsClosedDoor && chestItem == null)
                 {
                     MsgPrint("You see nothing there to open.");
                 }
@@ -9460,9 +9454,9 @@ namespace AngbandOS.Core
                     PlayerAttackMonster(y, x);
                 }
                 // Open the chest or door
-                else if (itemIndex != 0)
+                else if (chestItem != null)
                 {
-                    more = OpenChestAtGivenLocation(y, x, itemIndex);
+                    more = OpenChestAtGivenLocation(y, x, chestItem);
                 }
                 else
                 {
@@ -10641,15 +10635,14 @@ namespace AngbandOS.Core
         /// <param name="x"> The x coordinate of the location </param>
         /// <param name="itemIndex"> The index of the chest item </param>
         /// <returns> Whether or not the player should be disturbed by the action </returns>
-        private bool OpenChestAtGivenLocation(int y, int x, int itemIndex)
+        private bool OpenChestAtGivenLocation(int y, int x, Item chestItem)
         {
             bool openedSuccessfully = true;
             bool more = false;
-            Item item = Level.Items[itemIndex];
             // Opening a chest takes an action
             EnergyUse = 100;
             // If the chest is locked, we may need to pick it
-            if (item.TypeSpecificValue > 0)
+            if (chestItem.TypeSpecificValue > 0)
             {
                 openedSuccessfully = false;
                 // Our disable traps skill also doubles up as a lockpicking skill
@@ -10665,7 +10658,7 @@ namespace AngbandOS.Core
                     i /= 10;
                 }
                 // Some locks are harder to pick than others
-                int j = i - item.TypeSpecificValue;
+                int j = i - chestItem.TypeSpecificValue;
                 if (j < 2)
                 {
                     j = 2;
@@ -10686,8 +10679,8 @@ namespace AngbandOS.Core
             // If we successfully opened it, set of any traps and then actually open the chest
             if (openedSuccessfully)
             {
-                ChestTrap(y, x, itemIndex);
-                OpenChest(y, x, itemIndex);
+                ChestTrap(y, x, chestItem);
+                OpenChest(y, x, chestItem);
             }
             return more;
         }

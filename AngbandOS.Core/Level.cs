@@ -147,12 +147,12 @@ namespace AngbandOS.Core
         }
 
         /// <summary>
-        /// Checks the stack of items at a grid coordinate for a chest and returns the index number of the chest item. 
+        /// Checks the stack of items at a grid coordinate for a chest and returns the first chest item found.   Returns null, if no chest is found.
         /// </summary>
         /// <param name="y"></param>
         /// <param name="x"></param>
         /// <returns></returns>
-        public int ChestCheck(int y, int x)
+        public Item? ChestCheck(int y, int x)
         {
             GridTile cPtr = Grid[y][x];
             int nextOIdx;
@@ -162,10 +162,10 @@ namespace AngbandOS.Core
                 nextOIdx = oPtr.NextInStack;
                 if (oPtr.Category == ItemTypeEnum.Chest)
                 {
-                    return objectItemIndex;
+                    return oPtr;
                 }
             }
-            return 0;
+            return null;
         }
 
         public void CompactObjects(int size)

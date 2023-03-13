@@ -30,7 +30,7 @@
                 }
             }
         }
-        public void Activate(SaveGame saveGame, Item oPtr)
+        public void Activate(SaveGame saveGame, Item chestItem)
         {
             foreach (BaseChestTrap trap in Traps)
             {
@@ -40,7 +40,7 @@
                 if (eventArgs.DestroysContents)
                 {
                     eventArgs.SaveGame.MsgPrint("Everything inside the chest is destroyed!");
-                    oPtr.TypeSpecificValue = 0;
+                    chestItem.TypeSpecificValue = 0;
                 }
             }
         }
