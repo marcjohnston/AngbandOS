@@ -76,6 +76,8 @@
             return row;
         }
 
+        public int TopRow = 0;
+
         public override void Render(SaveGame saveGame, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment)
         {
             ConsoleAlignment alignment = Alignment ?? parentAlignment;
@@ -83,8 +85,9 @@
             rowLocation.ToWindow(Width, Height).Clear(saveGame, Colour.Background);
             Dictionary<ConsoleTableColumn, int> columnWidths = new Dictionary<ConsoleTableColumn, int>();
 
-            foreach (ConsoleTableRow row in rows)
+            for (int rowIndex = 0; rowIndex <= containerWindow.Height; rowIndex++)
             {
+                ConsoleTableRow row = rows[TopRow + rowIndex];
                 ConsoleLocation columnLocation = rowLocation.Clone();
                 foreach (ConsoleTableColumn column in columns.Values)
                 {

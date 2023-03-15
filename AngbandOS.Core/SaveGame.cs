@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using System;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -252,6 +253,21 @@ namespace AngbandOS.Core
         private int RowRooms;
         private int TunnN;
         private int WallN;
+
+        /// <summary>
+        /// Returns an item from the players inventory.  If there is no item at the desired slot, null is returned.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public Item? GetInventoryItem(int index)
+        {
+            Item? item = Player.Inventory[index];
+            if (item.BaseItemCategory == null)
+            {
+                return null;
+            }
+            return item;
+        }
 
         /// <summary>
         /// Creates a new game.
@@ -19218,6 +19234,93 @@ namespace AngbandOS.Core
             else
             {
                 Screen.Print(Colour.White, '-', row, col);
+            }
+        }
+
+        public void WizSpawnMonster()
+        {
+            FullScreenOverlay = true;
+            ScreenBuffer savedScreen = Screen.Clone();
+            SetBackground(BackgroundImage.Normal);
+            Screen.Clear();
+
+            try
+            {
+                ConsoleTable table = new ConsoleTable("Name", "Character", "Level");
+                MonsterRace[] monsterRaces = SingletonRepository.MonsterRaces.OrderBy(_monsterRace => _monsterRace.Name).ToArray();
+                foreach (MonsterRace monsterRace in monsterRaces)
+                {
+                    ConsoleTableRow tableRow = table.AddRow();
+                    tableRow["Name"] = new ConsoleString(Colour.White, monsterRace.Name);
+                    tableRow["Character"] = new ConsoleString(Colour.White, monsterRace.Character.ToString());
+                    tableRow["Level"] = new ConsoleString(Colour.White, monsterRace.LevelFound.ToString());
+                }
+
+                ConsoleWindow consoleWindow = new ConsoleWindow(0, 1, 79, 42);
+                int selectedIndex = 0;
+                while (true)
+                {
+                    if (selectedIndex < 0)
+                    {
+                        selectedIndex = 0;
+                    }
+                    else if (selectedIndex >= table.Rows.Length)
+                    {
+                        selectedIndex = table.Rows.Length - 1;
+                    }
+
+                    if (selectedIndex < table.TopRow)
+                    {
+                        table.TopRow = selectedIndex;
+                    }
+                    else if (selectedIndex > table.TopRow + consoleWindow.Height)
+                    {
+                        table.TopRow = selectedIndex - consoleWindow.Height;
+                    }
+                    ConsoleString s = (ConsoleString)table.Rows[selectedIndex]["Name"];
+                    foreach (ConsoleChar c in s)
+                    {
+                        c.Colour = Colour.Red;
+                    }
+
+                    table.Render(this, consoleWindow, new ConsoleTopLeftAlignment());
+
+                    if (!GetCom("Spawn Which Monster? ", out char ch))
+                    {
+                        return;
+                    }
+
+                    foreach (ConsoleChar c in s)
+                    {
+                        c.Colour = Colour.White;
+                    }
+                    switch (ch)
+                    {
+                        case '9':
+                            selectedIndex -= consoleWindow.Height;
+                            break;
+                        case '3':
+                            selectedIndex += consoleWindow.Height;
+                            break;
+                        case '8':
+                            selectedIndex -= 1;
+                            break;
+                        case '2':
+                            selectedIndex += 1;
+                            break;
+                        case '\r':
+                            MonsterRace monsterRace = monsterRaces[selectedIndex];
+                            Level.Scatter(out int y, out int x, Player.MapY, Player.MapX, 1);
+                            Level.Monsters.PlaceMonsterAux(y, x, monsterRace, false, false, false);
+                            return;
+                    }
+                }
+            }
+            finally
+            {
+                Screen.Restore(savedScreen);
+                FullScreenOverlay = false;
+                SetBackground(BackgroundImage.Overhead);
             }
         }
 

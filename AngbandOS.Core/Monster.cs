@@ -2656,8 +2656,10 @@ namespace AngbandOS.Core
                     }
                     // Get the basic attack power from the attack type
                     if (effect != null)
+                    {
                         power = effect.Power;
-
+                    }
+                    
                     // Check if the monster actually hits us
                     if (effect == null || MonsterCheckHitOnPlayer(SaveGame, power, monsterLevel))
                     {
@@ -2690,7 +2692,9 @@ namespace AngbandOS.Core
                             damage = 0;
                         }
                         else
+                        {
                             effect.ApplyToPlayer(saveGame, monsterLevel, GetMonsterIndex(saveGame), armourClass, monsterDescription, this, ref obvious, ref damage, ref blinked);
+                        }
 
                         // Be nice and don't let us be both stunned and cut by the same blow
                         bool doCut = method.AttackCutsTarget;

@@ -10,6 +10,11 @@
         public ConsoleLocation BottomRight { get; }
         public ConsoleLocation TopRight => new ConsoleLocation(Right, Top);
         public ConsoleLocation BottomLeft => new ConsoleLocation(Left, Bottom);
+
+        public int Height => Bottom - Top + 1;
+
+        public int Width => Right - Left + 1;
+
         public void Clear(SaveGame saveGame, Colour colour)
         {
             for (int y = Top; y <= Bottom; y++)
