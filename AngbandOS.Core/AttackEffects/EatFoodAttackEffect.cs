@@ -21,8 +21,8 @@ namespace AngbandOS.Core.AttackEffects
             {
                 BaseInventorySlot packInventorySlot = saveGame.SingletonRepository.InventorySlots.Get<PackInventorySlot>();
                 int i = packInventorySlot.WeightedRandom.Choose();
-                Item item = saveGame.Player.Inventory[i];
-                if (item.BaseItemCategory != null)
+                Item? item = saveGame.GetInventoryItem(i);
+                if (item == null)
                 {
                     continue;
                 }
