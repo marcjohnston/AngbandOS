@@ -17,6 +17,8 @@ namespace AngbandOS.Core.ConsoleElements
             }
         }
 
+        public ConsoleString(string text) : this(Colour.White, text) { }
+
         public void Append(Colour colour, string text)
         {
             foreach (char c in text)
