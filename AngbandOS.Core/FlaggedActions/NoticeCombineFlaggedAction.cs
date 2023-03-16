@@ -25,7 +25,7 @@
                                 int k;
                                 for (k = i; k < InventorySlot.PackCount; k++)
                                 {
-                                    SaveGame.SetInventoryItem(k, SaveGame.GetInventoryItem(k + 1);
+                                    SaveGame.SetInventoryItem(k, SaveGame.GetInventoryItem(k + 1));
                                 }
                                 SaveGame.SetInventoryItem(k, null);
                                 break;

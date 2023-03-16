@@ -8,7 +8,7 @@
         {
             get
             {
-                if (SaveGame.Player.Inventory[InventorySlot.RightHand].BaseItemCategory == null)
+                if (SaveGame.GetInventoryItem(InventorySlot.RightHand) == null)
                 {
                     return InventorySlot.RightHand;
                 }

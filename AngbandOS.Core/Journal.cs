@@ -109,19 +109,24 @@ namespace AngbandOS.Core
         private void DisplayStat(string title, int row, int col, Func<IItemCharacteristics, bool> getStat)
         {
             // Determine if the stat is granted via any equipment.  This allows us to choose the color before rendering any of the inventory slots.
-            bool hasStat = false;
+            bool anyHasStat = false;
             foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsEquipment))
             {
                 foreach (int i in inventorySlot.InventorySlots)
                 {
-                    Item oPtr = SaveGame.Player.Inventory[i];
-                    IItemCharacteristics itemCharacteristics = oPtr.ObjectFlagsKnown();
-                    if (getStat(itemCharacteristics))
-                        hasStat = true;
+                    Item? oPtr = SaveGame.GetInventoryItem(i);
+                    if (oPtr != null)
+                    {
+                        IItemCharacteristics itemCharacteristics = oPtr.ObjectFlagsKnown();
+                        if (getStat(itemCharacteristics))
+                        {
+                            anyHasStat = true;
+                        }
+                    }
                 }
             }
 
-            Colour baseColour = hasStat ? Colour.Green : Colour.Blue; // Blue default color for missing stat, green when stat is possessed.
+            Colour baseColour = anyHasStat ? Colour.Green : Colour.Blue; // Blue default color for missing stat, green when stat is possessed.
             SaveGame.Screen.Print(baseColour, title, row, col);
             SaveGame.Screen.Print(baseColour, ':', row, col + 10); // Right aligned
 
@@ -131,9 +136,17 @@ namespace AngbandOS.Core
             {
                 foreach (int i in inventorySlot.InventorySlots)
                 {
-                    Item oPtr = SaveGame.Player.Inventory[i];
-                    IItemCharacteristics itemCharacteristics = oPtr.ObjectFlagsKnown();
-                    if (getStat(itemCharacteristics))
+                    bool thisHasStat = false;
+                    Item? oPtr = SaveGame.GetInventoryItem(i);
+                    if (oPtr != null)
+                    {
+                        IItemCharacteristics itemCharacteristics = oPtr.ObjectFlagsKnown();
+                        if (getStat(itemCharacteristics))
+                        {
+                            thisHasStat = true;
+                        }
+                    }
+                    if (thisHasStat)
                     {
                         SaveGame.Screen.Print(baseColour, "+", row, col + 10 + index + 1);
                     }

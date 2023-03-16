@@ -54,7 +54,12 @@ namespace AngbandOS.Core.ItemCategories
                 return;
             }
 
-            Item fuelSource = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
+            Item? fuelSource = itemIndex >= 0 ? saveGame.GetInventoryItem(itemIndex) : saveGame.Level.Items[0 - itemIndex];
+            if (fuelSource == null)
+            {
+                return;
+            }
+
             // Check that our fuel is suitable
             if (!saveGame.Player.ItemMatchesFilter(fuelSource, new TorchFuelItemFilter()))
             {

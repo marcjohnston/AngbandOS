@@ -58,7 +58,12 @@ namespace AngbandOS.Core.ItemCategories
             }
 
             // Get the item from the inventory or from the floor.
-            Item fuelSource = itemIndex >= 0 ? saveGame.Player.Inventory[itemIndex] : saveGame.Level.Items[0 - itemIndex];
+            Item? fuelSource = itemIndex >= 0 ? saveGame.GetInventoryItem(itemIndex) : saveGame.Level.Items[0 - itemIndex];
+
+            if (fuelSource == null)
+            {
+                return;
+            }
 
             // Make sure our item is suitable fuel
             if (!saveGame.Player.ItemMatchesFilter(fuelSource, new LanternFuelItemFilter()))
