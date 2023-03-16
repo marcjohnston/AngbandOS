@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations
     [Serializable]
     internal class MutationWasting : Mutation
     {
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 1;
             GainMessage = "You suddenly contract a horrible wasting disease.";

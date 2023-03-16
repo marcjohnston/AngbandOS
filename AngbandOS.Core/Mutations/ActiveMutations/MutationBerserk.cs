@@ -11,15 +11,15 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationBerserk : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (!saveGame.CheckIfRacialPowerWorks(8, 8, Ability.Strength, 14))
             {
                 return;
             }
-            player.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(25) + 25);
-            player.RestoreHealth(30);
-            player.TimedFear.ResetTimer();
+            saveGame.Player.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(25) + 25);
+            saveGame.Player.RestoreHealth(30);
+            saveGame.Player.TimedFear.ResetTimer();
         }
 
         public override string ActivationSummary(int lvl)
@@ -27,7 +27,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             return lvl < 8 ? "berserk          (unusable until level 8)" : "berserk          (cost 8, STR based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 3;
             GainMessage = "You feel a controlled rage.";

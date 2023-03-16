@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations
     [Serializable]
     internal class MutationWraith : Mutation
     {
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 1;
             GainMessage = "You start to fade in and out of the physical world.";

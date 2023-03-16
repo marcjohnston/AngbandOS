@@ -11,15 +11,15 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationDazzle : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (!saveGame.CheckIfRacialPowerWorks(7, 15, Ability.Charisma, 8))
             {
                 return;
             }
-            saveGame.StunMonsters(player.Level * 4);
-            saveGame.ConfuseMonsters(player.Level * 4);
-            saveGame.TurnMonsters(player.Level * 4);
+            saveGame.StunMonsters(saveGame.Player.Level * 4);
+            saveGame.ConfuseMonsters(saveGame.Player.Level * 4);
+            saveGame.TurnMonsters(saveGame.Player.Level * 4);
         }
 
         public override string ActivationSummary(int lvl)
@@ -27,7 +27,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             return lvl < 7 ? "dazzle           (unusable until level 7)" : "dazzle           (cost 15, CHA based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 3;
             GainMessage = "You gain the ability to emit dazzling lights.";

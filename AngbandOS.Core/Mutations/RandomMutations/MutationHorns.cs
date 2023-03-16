@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations
     [Serializable]
     internal class MutationHorns : Mutation
     {
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 2;
             GainMessage = "Horns pop forth into your forehead!";

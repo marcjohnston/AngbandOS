@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations
     [Serializable]
     internal class MutationWarning : Mutation
     {
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 2;
             GainMessage = "You suddenly feel paranoid.";

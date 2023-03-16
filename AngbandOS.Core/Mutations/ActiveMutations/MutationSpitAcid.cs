@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationSpitAcid : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (!saveGame.CheckIfRacialPowerWorks(9, 9, Ability.Dexterity, 15))
             {
@@ -20,7 +20,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             saveGame.MsgPrint("You spit acid...");
             if (saveGame.GetDirectionWithAim(out int dir))
             {
-                saveGame.FireBall(new AcidProjectile(saveGame), dir, player.Level, 1 + (player.Level / 30));
+                saveGame.FireBall(new AcidProjectile(saveGame), dir, saveGame.Player.Level, 1 + (saveGame.Player.Level / 30));
             }
         }
 
@@ -31,7 +31,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
                 : $"spit acid        (cost 9, dam {lvl}, DEX based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 4;
             GainMessage = "You gain the ability to spit acid.";

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationColdTouch : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (!saveGame.CheckIfRacialPowerWorks(2, 2, Ability.Constitution, 11))
             {
@@ -21,15 +21,15 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             {
                 return;
             }
-            int y = player.MapY + level.KeypadDirectionYOffset[dir];
-            int x = player.MapX + level.KeypadDirectionXOffset[dir];
-            GridTile cPtr = level.Grid[y][x];
+            int y = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
+            int x = saveGame.Player.MapX + saveGame.Level.KeypadDirectionXOffset[dir];
+            GridTile cPtr = saveGame.Level.Grid[y][x];
             if (cPtr.MonsterIndex == 0)
             {
                 saveGame.MsgPrint("You wave your hands in the air.");
                 return;
             }
-            saveGame.FireBolt(new ColdProjectile(saveGame), dir, 2 * player.Level);
+            saveGame.FireBolt(new ColdProjectile(saveGame), dir, 2 * saveGame.Player.Level);
         }
 
         public override string ActivationSummary(int lvl)
@@ -37,7 +37,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             return lvl < 2 ? "cold touch       (unusable until level 2)" : "cold touch       (cost 2, CON based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 2;
             GainMessage = "Your hands get very cold.";

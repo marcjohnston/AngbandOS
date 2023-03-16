@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations
     [Serializable]
     internal class MutationWartSkin : Mutation
     {
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 1;
             GainMessage = "Disgusting warts appear everywhere on you!";

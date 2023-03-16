@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations
     [Serializable]
     internal class MutationHpToSp : Mutation
     {
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 1;
             GainMessage = "You are subject to fits of painful clarity.";

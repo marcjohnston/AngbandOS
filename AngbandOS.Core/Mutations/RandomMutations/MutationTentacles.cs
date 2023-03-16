@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations
     [Serializable]
     internal class MutationTentacles : Mutation
     {
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 2;
             GainMessage = "Evil-looking tentacles sprout from your sides.";

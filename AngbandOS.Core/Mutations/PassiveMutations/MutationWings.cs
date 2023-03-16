@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations
     [Serializable]
     internal class MutationWings : Mutation
     {
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 2;
             GainMessage = "You grow a pair of wings.";

@@ -11,16 +11,16 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationBrFire : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
-            if (!saveGame.CheckIfRacialPowerWorks(20, player.Level, Ability.Constitution, 18))
+            if (!saveGame.CheckIfRacialPowerWorks(20, saveGame.Player.Level, Ability.Constitution, 18))
             {
                 return;
             }
             saveGame.MsgPrint("You breathe fire...");
             if (saveGame.GetDirectionWithAim(out int dir))
             {
-                saveGame.FireBall(new FireProjectile(saveGame), dir, player.Level * 2, -(1 + (player.Level / 20)));
+                saveGame.FireBall(new FireProjectile(saveGame), dir, saveGame.Player.Level * 2, -(1 + (saveGame.Player.Level / 20)));
             }
         }
 
@@ -31,7 +31,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
                 : $"fire breath      (cost {lvl}, dam {lvl * 2}, CON based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 3;
             GainMessage = "You gain the ability to breathe fire.";

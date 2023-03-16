@@ -11,35 +11,35 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationResist : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (saveGame.CheckIfRacialPowerWorks(10, 12, Ability.Constitution, 12))
             {
-                int num = player.Level / 10;
+                int num = saveGame.Player.Level / 10;
                 int dur = Program.Rng.DieRoll(20) + 20;
                 if (Program.Rng.RandomLessThan(5) < num)
                 {
-                    player.TimedAcidResistance.AddTimer(dur);
+                    saveGame.Player.TimedAcidResistance.AddTimer(dur);
                     num--;
                 }
                 if (Program.Rng.RandomLessThan(4) < num)
                 {
-                    player.TimedLightningResistance.AddTimer(dur);
+                    saveGame.Player.TimedLightningResistance.AddTimer(dur);
                     num--;
                 }
                 if (Program.Rng.RandomLessThan(3) < num)
                 {
-                    player.TimedFireResistance.AddTimer(dur);
+                    saveGame.Player.TimedFireResistance.AddTimer(dur);
                     num--;
                 }
                 if (Program.Rng.RandomLessThan(2) < num)
                 {
-                    player.TimedColdResistance.AddTimer(dur);
+                    saveGame.Player.TimedColdResistance.AddTimer(dur);
                     num--;
                 }
                 if (num != 0)
                 {
-                    player.TimedPoisonResistance.AddTimer(dur);
+                    saveGame.Player.TimedPoisonResistance.AddTimer(dur);
                 }
             }
         }
@@ -49,7 +49,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             return lvl < 10 ? "resist elements  (unusable until level 10)" : "resist elements  (cost 12, CON based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 3;
             GainMessage = "You feel like you can protect yourself.";

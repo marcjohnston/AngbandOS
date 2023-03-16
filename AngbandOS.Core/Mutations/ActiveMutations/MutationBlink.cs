@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationBlink : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (saveGame.CheckIfRacialPowerWorks(3, 3, Ability.Wisdom, 12))
             {
@@ -24,7 +24,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             return lvl < 3 ? "blink            (unusable until level 3)" : "blink            (cost 3, WIS based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 3;
             GainMessage = "You gain the power of minor teleportation.";

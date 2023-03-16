@@ -138,7 +138,7 @@
             _notPossessed.Add(new MutationWraith());
             foreach (Mutation mutation in _notPossessed)
             {
-                mutation.Initialise();
+                mutation.Initialize();
             }
         }
 

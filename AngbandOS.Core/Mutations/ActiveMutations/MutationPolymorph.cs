@@ -11,11 +11,11 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationPolymorph : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (saveGame.CheckIfRacialPowerWorks(18, 20, Ability.Constitution, 18))
             {
-                player.PolymorphSelf(saveGame);
+                saveGame.Player.PolymorphSelf(saveGame);
             }
         }
 
@@ -24,7 +24,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             return lvl < 18 ? "polymorph        (unusable until level 18)" : "polymorph        (cost 20, CON based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 1;
             GainMessage = "Your body seems mutable.";

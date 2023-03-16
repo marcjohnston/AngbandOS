@@ -11,15 +11,15 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationSterility : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (!saveGame.CheckIfRacialPowerWorks(20, 40, Ability.Charisma, 18))
             {
                 return;
             }
             saveGame.MsgPrint("You suddenly have a headache!");
-            player.TakeHit(Program.Rng.DieRoll(30) + 30, "the strain of forcing abstinence");
-            level.Monsters.NumRepro += Constants.MaxRepro;
+            saveGame.Player.TakeHit(Program.Rng.DieRoll(30) + 30, "the strain of forcing abstinence");
+            saveGame.Level.Monsters.NumRepro += Constants.MaxRepro;
         }
 
         public override string ActivationSummary(int lvl)
@@ -27,7 +27,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             return lvl < 20 ? "sterilize        (unusable until level 20)" : "sterilize        (cost 40, CHA based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 1;
             GainMessage = "You can give everything around you a headache.";

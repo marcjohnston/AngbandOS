@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationWeighMag : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (saveGame.CheckIfRacialPowerWorks(6, 6, Ability.Intelligence, 10))
             {
@@ -24,7 +24,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             return lvl < 6 ? "weigh magic      (unusable until level 6)" : "weigh magic      (cost 6, INT based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 2;
             GainMessage = "You feel you can better understand the magic around you.";

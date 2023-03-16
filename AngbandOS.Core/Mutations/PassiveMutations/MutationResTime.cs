@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations
     [Serializable]
     internal class MutationResTime : Mutation
     {
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 1;
             GainMessage = "You feel immortal.";

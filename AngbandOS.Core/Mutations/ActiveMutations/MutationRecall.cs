@@ -11,13 +11,13 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationRecall : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (!saveGame.CheckIfRacialPowerWorks(17, 50, Ability.Intelligence, 16))
             {
                 return;
             }
-            player.ToggleRecall();
+            saveGame.Player.ToggleRecall();
         }
 
         public override string ActivationSummary(int lvl)
@@ -25,7 +25,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             return lvl < 17 ? "recall           (unusable until level 17)" : "recall           (cost 50, INT based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 2;
             GainMessage = "You feel briefly homesick, but it passes.";

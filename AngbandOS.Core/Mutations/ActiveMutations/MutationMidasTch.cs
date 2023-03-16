@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationMidasTch : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (saveGame.CheckIfRacialPowerWorks(10, 5, Ability.Intelligence, 12))
             {
@@ -24,7 +24,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             return lvl < 10 ? "midas touch      (unusable until level 10)" : "midas touch      (cost 5, INT based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 2;
             GainMessage = "You gain the Midas touch.";

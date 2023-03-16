@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationEarthquake : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (!saveGame.CheckIfRacialPowerWorks(12, 12, Ability.Strength, 16))
             {
@@ -19,7 +19,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             }
             if (!saveGame.Quests.IsQuest(saveGame.CurrentDepth) && saveGame.CurrentDepth != 0)
             {
-                saveGame.Earthquake(player.MapY, player.MapX, 10);
+                saveGame.Earthquake(saveGame.Player.MapY, saveGame.Player.MapX, 10);
             }
         }
 
@@ -28,7 +28,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             return lvl < 12 ? "earthquake       (unusable until level 12)" : "earthquake       (cost 12, STR based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 3;
             GainMessage = "You gain the ability to wreck the dungeon.";

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations
     [Serializable]
     internal class MutationArthritis : Mutation
     {
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 3;
             GainMessage = "Your joints suddenly hurt.";

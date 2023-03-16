@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationMindBlst : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (!saveGame.CheckIfRacialPowerWorks(5, 3, Ability.Wisdom, 15))
             {
@@ -22,7 +22,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             {
                 return;
             }
-            saveGame.FireBolt(new PsiProjectile(saveGame), dir, Program.Rng.DiceRoll(3 + ((player.Level - 1) / 5), 3));
+            saveGame.FireBolt(new PsiProjectile(saveGame), dir, Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 5), 3));
         }
 
         public override string ActivationSummary(int lvl)
@@ -30,7 +30,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             return lvl < 5 ? "mind blast       (unusable until level 5)" : "mind blast       (cost 3, WIS based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 2;
             GainMessage = "You gain the power of Mind Blast.";

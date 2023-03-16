@@ -22,7 +22,7 @@ namespace AngbandOS.Core.Mutations
         public string LoseMessage;
         public MutationAttackType MutationAttackType = MutationAttackType.Physical;
 
-        public virtual void Activate(SaveGame saveGame, Player player, Level level) // TODO: Remove the player and level variables
+        public virtual void Activate(SaveGame saveGame)
         {
         }
 
@@ -31,7 +31,7 @@ namespace AngbandOS.Core.Mutations
             return string.Empty;
         }
 
-        public abstract void Initialise();
+        public abstract void Initialize();
 
         public virtual void OnGain(Genome genome)
         {

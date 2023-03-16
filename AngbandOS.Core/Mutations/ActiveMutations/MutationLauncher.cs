@@ -11,13 +11,13 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationLauncher : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
-            if (!saveGame.CheckIfRacialPowerWorks(1, player.Level, Ability.Strength, 6))
+            if (!saveGame.CheckIfRacialPowerWorks(1, saveGame.Player.Level, Ability.Strength, 6))
             {
                 return;
             }
-            saveGame.DoCmdThrow(2 + (player.Level / 16));
+            saveGame.DoCmdThrow(2 + (saveGame.Player.Level / 16));
         }
 
         public override string ActivationSummary(int lvl)
@@ -25,7 +25,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             return "throw object     (cost lev, STR based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 2;
             GainMessage = "Your throwing arm feels much stronger.";

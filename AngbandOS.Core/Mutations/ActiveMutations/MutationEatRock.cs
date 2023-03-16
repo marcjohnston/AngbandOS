@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationEatRock : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (!saveGame.CheckIfRacialPowerWorks(8, 12, Ability.Constitution, 18))
             {
@@ -21,10 +21,10 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             {
                 return;
             }
-            int y = player.MapY + level.KeypadDirectionYOffset[dir];
-            int x = player.MapX + level.KeypadDirectionXOffset[dir];
-            GridTile cPtr = level.Grid[y][x];
-            if (level.GridPassable(y, x))
+            int y = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
+            int x = saveGame.Player.MapX + saveGame.Level.KeypadDirectionXOffset[dir];
+            GridTile cPtr = saveGame.Level.Grid[y][x];
+            if (saveGame.Level.GridPassable(y, x))
             {
                 saveGame.MsgPrint("You bite into thin air!");
                 return;
@@ -46,25 +46,25 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             }
             if (cPtr.FeatureType.IsClosedDoor || cPtr.FeatureType.Category == FloorTileTypeCategory.SecretDoor || cPtr.FeatureType.Category == FloorTileTypeCategory.Rubble)
             {
-                player.SetFood(player.Food + 3000);
+                saveGame.Player.SetFood(saveGame.Player.Food + 3000);
             }
             else if (cPtr.FeatureType.Category == FloorTileTypeCategory.Vein)
             {
-                player.SetFood(player.Food + 5000);
+                saveGame.Player.SetFood(saveGame.Player.Food + 5000);
             }
             else
             {
                 saveGame.MsgPrint("This granite is very filling!");
-                player.SetFood(player.Food + 10000);
+                saveGame.Player.SetFood(saveGame.Player.Food + 10000);
             }
             saveGame.WallToMud(dir);
-            int oy = player.MapY;
-            int ox = player.MapX;
-            player.MapY = y;
-            player.MapX = x;
-            level.RedrawSingleLocation(player.MapY, player.MapX);
-            level.RedrawSingleLocation(oy, ox);
-            player.RecenterScreenAroundPlayer();
+            int oy = saveGame.Player.MapY;
+            int ox = saveGame.Player.MapX;
+            saveGame.Player.MapY = y;
+            saveGame.Player.MapX = x;
+            saveGame.Level.RedrawSingleLocation(saveGame.Player.MapY, saveGame.Player.MapX);
+            saveGame.Level.RedrawSingleLocation(oy, ox);
+            saveGame.Player.RecenterScreenAroundPlayer();
             saveGame.UpdateScentFlaggedAction.Set();
             saveGame.UpdateLightFlaggedAction.Set();
             saveGame.UpdateViewFlaggedAction.Set();
@@ -76,7 +76,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             return lvl < 8 ? "eat rock         (unusable until level 8)" : "eat rock         (cost 12, CON based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 2;
             GainMessage = "The walls look delicious.";

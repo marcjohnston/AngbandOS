@@ -11,14 +11,14 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationVteleport : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (!saveGame.CheckIfRacialPowerWorks(7, 7, Ability.Wisdom, 15))
             {
                 return;
             }
             saveGame.MsgPrint("You concentrate...");
-            saveGame.TeleportPlayer(10 + (4 * player.Level));
+            saveGame.TeleportPlayer(10 + (4 * saveGame.Player.Level));
         }
 
         public override string ActivationSummary(int lvl)
@@ -26,7 +26,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             return lvl < 7 ? "teleport         (unusable until level 7)" : "teleport         (cost 7, WIS based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 3;
             GainMessage = "You gain the power of teleportation at will.";

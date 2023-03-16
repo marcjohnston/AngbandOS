@@ -11,14 +11,14 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationRadiation : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (!saveGame.CheckIfRacialPowerWorks(15, 15, Ability.Constitution, 14))
             {
                 return;
             }
             saveGame.MsgPrint("Radiation flows from your body!");
-            saveGame.FireBall(new NukeProjectile(saveGame), 0, player.Level * 2, 3 + (player.Level / 20));
+            saveGame.FireBall(new NukeProjectile(saveGame), 0, saveGame.Player.Level * 2, 3 + (saveGame.Player.Level / 20));
         }
 
         public override string ActivationSummary(int lvl)
@@ -28,7 +28,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
                 : "produce radiation   (cost 15, CON based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 2;
             GainMessage = "You start emitting hard radiation.";

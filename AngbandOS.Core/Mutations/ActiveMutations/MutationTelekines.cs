@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationTelekines : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (!saveGame.CheckIfRacialPowerWorks(9, 9, Ability.Wisdom, 14))
             {
@@ -20,7 +20,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             saveGame.MsgPrint("You concentrate...");
             if (saveGame.GetDirectionWithAim(out int dir))
             {
-                saveGame.SummonItem(dir, player.Level * 10, true);
+                saveGame.SummonItem(dir, saveGame.Player.Level * 10, true);
             }
         }
 
@@ -29,7 +29,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             return lvl < 9 ? "telekinesis      (unusable until level 9)" : "telekinesis      (cost 9, WIS based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 2;
             GainMessage = "You gain the ability to move objects telekinetically.";

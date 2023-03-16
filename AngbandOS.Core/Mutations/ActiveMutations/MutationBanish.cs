@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationBanish : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (!saveGame.CheckIfRacialPowerWorks(25, 25, Ability.Wisdom, 18))
             {
@@ -21,19 +21,19 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             {
                 return;
             }
-            int y = player.MapY + level.KeypadDirectionYOffset[dir];
-            int x = player.MapX + level.KeypadDirectionXOffset[dir];
-            GridTile cPtr = level.Grid[y][x];
+            int y = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
+            int x = saveGame.Player.MapX + saveGame.Level.KeypadDirectionXOffset[dir];
+            GridTile cPtr = saveGame.Level.Grid[y][x];
             if (cPtr.MonsterIndex == 0)
             {
                 saveGame.MsgPrint("You sense no evil there!");
                 return;
             }
-            Monster mPtr = level.Monsters[cPtr.MonsterIndex];
+            Monster mPtr = saveGame.Level.Monsters[cPtr.MonsterIndex];
             MonsterRace rPtr = mPtr.Race;
             if (rPtr.Evil)
             {
-                level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
+                saveGame.Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                 saveGame.MsgPrint("The evil creature vanishes in a puff of sulfurous smoke!");
             }
             else
@@ -47,7 +47,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             return lvl < 25 ? "banish evil      (unusable until level 25)" : "banish evil      (cost 25, WIS based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 1;
             GainMessage = "You feel a holy wrath fill you.";

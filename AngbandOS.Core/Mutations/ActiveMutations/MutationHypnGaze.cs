@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationHypnGaze : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (!saveGame.CheckIfRacialPowerWorks(12, 12, Ability.Charisma, 18))
             {
@@ -20,7 +20,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             saveGame.MsgPrint("Your eyes look mesmerizing...");
             if (saveGame.GetDirectionWithAim(out int dir))
             {
-                saveGame.CharmMonster(dir, player.Level);
+                saveGame.CharmMonster(dir, saveGame.Player.Level);
             }
         }
 
@@ -29,7 +29,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             return lvl < 20 ? "hypnotic gaze    (unusable until level 12)" : "hypnotic gaze    (cost 12, CHA based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 2;
             GainMessage = "Your eyes look mesmerizing...";

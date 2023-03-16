@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationSmellMet : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (saveGame.CheckIfRacialPowerWorks(3, 2, Ability.Intelligence, 12))
             {
@@ -24,7 +24,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             return lvl < 3 ? "smell metal      (unusable until level 3)" : "smell metal      (cost 2, INT based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 3;
             GainMessage = "You smell a metallic odor.";

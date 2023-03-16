@@ -10029,7 +10029,7 @@ namespace AngbandOS.Core
             else
             {
                 EnergyUse = 100;
-                activeMutations[powers[i] - 100].Activate(this, Player, Level);
+                activeMutations[powers[i] - 100].Activate(this);
             }
         }
 

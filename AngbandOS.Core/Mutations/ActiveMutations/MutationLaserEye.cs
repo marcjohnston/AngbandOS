@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationLaserEye : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (!saveGame.CheckIfRacialPowerWorks(7, 10, Ability.Wisdom, 9))
             {
@@ -21,7 +21,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             {
                 return;
             }
-            saveGame.FireBeam(new LightProjectile(saveGame), dir, 2 * player.Level);
+            saveGame.FireBeam(new LightProjectile(saveGame), dir, 2 * saveGame.Player.Level);
         }
 
         public override string ActivationSummary(int lvl)
@@ -29,7 +29,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             return lvl < 7 ? "laser eyes        (unusable until level 7)" : "laser eyes        (cost 10, WIS based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 3;
             GainMessage = "Your eyes burn for a moment.";

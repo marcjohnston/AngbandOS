@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationGrowMold : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (!saveGame.CheckIfRacialPowerWorks(1, 6, Ability.Constitution, 14))
             {
@@ -19,7 +19,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             }
             for (int i = 0; i < 8; i++)
             {
-                level.Monsters.SummonSpecificFriendly(player.MapY, player.MapX, player.Level, new Bizarre1MonsterSelector(), false);
+                saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new Bizarre1MonsterSelector(), false);
             }
         }
 
@@ -28,7 +28,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             return lvl < 1 ? "grow mold        (unusable until level 1)" : "grow mold        (cost 6, CON based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 1;
             GainMessage = "You feel a sudden affinity for mold.";

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationDetCurse : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (!saveGame.CheckIfRacialPowerWorks(7, 14, Ability.Wisdom, 14))
             {
@@ -19,7 +19,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             }
             for (int i = 0; i < InventorySlot.Total; i++)
             {
-                Item oPtr = player.Inventory[i];
+                Item oPtr = saveGame.Player.Inventory[i];
                 if (oPtr.BaseItemCategory != null)
                 {
                     continue;
@@ -37,7 +37,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             return lvl < 7 ? "detect curses    (unusable until level 7)" : "detect curses    (cost 14, WIS based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 2;
             GainMessage = "You can feel evil magics.";

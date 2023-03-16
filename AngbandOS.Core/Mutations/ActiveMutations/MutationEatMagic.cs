@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationEatMagic : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (!saveGame.CheckIfRacialPowerWorks(17, 1, Ability.Wisdom, 15))
             {
@@ -21,7 +21,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             {
                 return;
             }
-            Item oPtr = item >= 0 ? player.Inventory[item] : level.Items[0 - item];
+            Item oPtr = item >= 0 ? saveGame.Player.Inventory[item] : saveGame.Level.Items[0 - item];
             int lev = oPtr.BaseItemCategory.Level;
             if (oPtr.Category == ItemTypeEnum.Rod)
             {
@@ -31,7 +31,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
                 }
                 else
                 {
-                    player.Mana += 2 * lev;
+                    saveGame.Player.Mana += 2 * lev;
                     oPtr.TypeSpecificValue = 500;
                 }
             }
@@ -39,7 +39,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             {
                 if (oPtr.TypeSpecificValue > 0)
                 {
-                    player.Mana += oPtr.TypeSpecificValue * lev;
+                    saveGame.Player.Mana += oPtr.TypeSpecificValue * lev;
                     oPtr.TypeSpecificValue = 0;
                 }
                 else
@@ -48,9 +48,9 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
                 }
                 oPtr.IdentEmpty = true;
             }
-            if (player.Mana > player.MaxMana)
+            if (saveGame.Player.Mana > saveGame.Player.MaxMana)
             {
-                player.Mana = player.MaxMana;
+                saveGame.Player.Mana = saveGame.Player.MaxMana;
             }
             saveGame.NoticeCombineAndReorderFlaggedAction.Set();
         }
@@ -60,7 +60,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             return lvl < 17 ? "eat magic        (unusable until level 17)" : "eat magic        (cost 1, WIS based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 1;
             GainMessage = "Your magic items look delicious.";

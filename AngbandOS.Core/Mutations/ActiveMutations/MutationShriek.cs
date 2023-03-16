@@ -11,13 +11,13 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationShriek : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (!saveGame.CheckIfRacialPowerWorks(4, 4, Ability.Constitution, 6))
             {
                 return;
             }
-            saveGame.FireBall(new SoundProjectile(saveGame), 0, 4 * player.Level, 8);
+            saveGame.FireBall(new SoundProjectile(saveGame), 0, 4 * saveGame.Player.Level, 8);
             saveGame.AggravateMonsters();
         }
 
@@ -26,7 +26,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             return lvl < 4 ? "shriek           (unusable until level 4)" : "shriek           (cost 4, CON based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 3;
             GainMessage = "Your vocal cords get much tougher.";

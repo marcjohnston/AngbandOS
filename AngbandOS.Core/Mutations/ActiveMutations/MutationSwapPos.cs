@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     [Serializable]
     internal class MutationSwapPos : Mutation
     {
-        public override void Activate(SaveGame saveGame, Player player, Level level)
+        public override void Activate(SaveGame saveGame)
         {
             if (!saveGame.CheckIfRacialPowerWorks(15, 12, Ability.Dexterity, 16))
             {
@@ -29,7 +29,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             return lvl < 15 ? "swap position    (unusable until level 15)" : "swap position    (cost 12, DEX based)";
         }
 
-        public override void Initialise()
+        public override void Initialize()
         {
             Frequency = 2;
             GainMessage = "You feel like walking a mile in someone else's shoes.";
