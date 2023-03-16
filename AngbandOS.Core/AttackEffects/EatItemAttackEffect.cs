@@ -29,35 +29,30 @@ namespace AngbandOS.Core.AttackEffects
             {
                 BaseInventorySlot packInventorySlot = saveGame.SingletonRepository.InventorySlots.Get<PackInventorySlot>();
                 int i = packInventorySlot.WeightedRandom.Choose();
-                Item item = saveGame.Player.Inventory[i];
-                if (item.BaseItemCategory == null)
+                Item? item = saveGame.GetInventoryItem(i);
+                if (item != null && !item.IsFixedArtifact() && string.IsNullOrEmpty(item.RandartName))
                 {
-                    continue;
+                    string itemName = item.Description(false, 3);
+                    string y = item.Count > 1 ? "One of y" : "Y";
+                    saveGame.MsgPrint($"{y}our {itemName} ({i.IndexToLabel()}) was stolen!");
+                    int nextObjectIndex = saveGame.Level.OPop();
+                    if (nextObjectIndex != 0)
+                    {
+                        // Give the item to the thief so it can later drop it
+                        Item stolenItem = item.Clone();
+                        saveGame.Level.Items[nextObjectIndex] = stolenItem;
+                        stolenItem.Count = 1;
+                        stolenItem.Marked = false;
+                        stolenItem.HoldingMonsterIndex = monsterIndex;
+                        stolenItem.NextInStack = monster.FirstHeldItemIndex;
+                        monster.FirstHeldItemIndex = nextObjectIndex;
+                    }
+                    saveGame.Player.InvenItemIncrease(i, -1);
+                    saveGame.Player.InvenItemOptimize(i);
+                    obvious = true;
+                    blinked = true;
+                    return;
                 }
-                if (item.IsFixedArtifact() || !string.IsNullOrEmpty(item.RandartName))
-                {
-                    continue;
-                }
-                string itemName = item.Description(false, 3);
-                string y = item.Count > 1 ? "One of y" : "Y";
-                saveGame.MsgPrint($"{y}our {itemName} ({i.IndexToLabel()}) was stolen!");
-                int nextObjectIndex = saveGame.Level.OPop();
-                if (nextObjectIndex != 0)
-                {
-                    // Give the item to the thief so it can later drop it
-                    Item stolenItem = item.Clone();
-                    saveGame.Level.Items[nextObjectIndex] = stolenItem;
-                    stolenItem.Count = 1;
-                    stolenItem.Marked = false;
-                    stolenItem.HoldingMonsterIndex = monsterIndex;
-                    stolenItem.NextInStack = monster.FirstHeldItemIndex;
-                    monster.FirstHeldItemIndex = nextObjectIndex;
-                }
-                saveGame.Player.InvenItemIncrease(i, -1);
-                saveGame.Player.InvenItemOptimize(i);
-                obvious = true;
-                blinked = true;
-                return;
             }
         }
         public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)

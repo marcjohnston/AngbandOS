@@ -22,23 +22,17 @@ namespace AngbandOS.Core.AttackEffects
                 BaseInventorySlot packInventorySlot = saveGame.SingletonRepository.InventorySlots.Get<PackInventorySlot>();
                 int i = packInventorySlot.WeightedRandom.Choose();
                 Item? item = saveGame.GetInventoryItem(i);
-                if (item == null)
+                if (item != null && item.Category != ItemTypeEnum.Food)
                 {
-                    continue;
+                    // Note that the monster doesn't actually get the food item - it's gone
+                    string itemName = item.Description(false, 0);
+                    string y = item.Count > 1 ? "One of y" : "Y";
+                    saveGame.MsgPrint($"{y}our {itemName} ({i.IndexToLabel()}) was eaten!");
+                    saveGame.Player.InvenItemIncrease(i, -1);
+                    saveGame.Player.InvenItemOptimize(i);
+                    obvious = true;
+                    return;
                 }
-                if (item.Category != ItemTypeEnum.Food)
-                {
-                    continue;
-                }
-                // Note that the monster doesn't actually get the food item -
-                // it's gone
-                string itemName = item.Description(false, 0);
-                string y = item.Count > 1 ? "One of y" : "Y";
-                saveGame.MsgPrint($"{y}our {itemName} ({i.IndexToLabel()}) was eaten!");
-                saveGame.Player.InvenItemIncrease(i, -1);
-                saveGame.Player.InvenItemOptimize(i);
-                obvious = true;
-                return;
             }
         }
         public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
