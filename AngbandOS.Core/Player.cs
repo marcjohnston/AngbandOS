@@ -3,7 +3,11 @@ namespace AngbandOS.Core
     [Serializable]
     internal class Player
     {
+        /// <summary>
+        /// The players inventory.  GET IS DEPRECATED; use SaveGame.GetInventoryItem.
+        /// </summary>
         public readonly Item[] Inventory;
+
         public int _invenCnt;
 
         public readonly AbilityScore[] AbilityScores = new AbilityScore[6];

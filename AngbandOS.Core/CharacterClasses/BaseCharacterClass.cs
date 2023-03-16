@@ -164,7 +164,7 @@
                 }
                 else
                 {
-                    SaveGame.Player.Inventory[slot] = item;
+                    SaveGame.SetInventoryItem(slot, item);
                     SaveGame.Player.WeightCarried += item.Weight;
                 }
 

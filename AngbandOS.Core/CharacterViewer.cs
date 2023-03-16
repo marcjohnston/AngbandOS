@@ -33,11 +33,11 @@ namespace AngbandOS.Core
             {
                 foreach (int index in inventorySlot.InventorySlots)
                 {
-                    Item item = saveGame.Player.Inventory[index];
+                    Item? item = saveGame.GetInventoryItem(index);
                     Colour colour = Colour.Background;
                     char character = ' ';
                     // Only print items that exist
-                    if (item.BaseItemCategory != null)
+                    if (item != null)
                     {
                         colour = item.BaseItemCategory.FlavorColour;
                         character = item.BaseItemCategory.FlavorCharacter;
@@ -299,7 +299,7 @@ namespace AngbandOS.Core
             {
                 foreach (int i in inventorySlot.InventorySlots)
                 {
-                    Item item = SaveGame.Player.Inventory[i];
+                    Item item = SaveGame.GetInventoryItem(i);
                     // Only extract known bonuses, not full bonuses
                     ItemCharacteristics itemCharacteristics = item.ObjectFlagsKnown();
                     ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Str, item.TypeSpecificValue, row + 0, col);

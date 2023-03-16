@@ -268,6 +268,10 @@ namespace AngbandOS.Core
             }
             return item;
         }
+        public void SetInventoryItem(int index, Item item)
+        {
+            Player.Inventory[index] = item;
+        }
 
         /// <summary>
         /// Creates a new game.

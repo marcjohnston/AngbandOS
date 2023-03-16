@@ -43,8 +43,8 @@ namespace AngbandOS.Core.AttackEffects
                 return;
             }
 
-            Item item = saveGame.Player.Inventory[i.Value];
-            if (item.BaseItemCategory == null)
+            Item? item = saveGame.GetInventoryItem(i.Value);
+            if (item == null)
             {
                 return;
             }

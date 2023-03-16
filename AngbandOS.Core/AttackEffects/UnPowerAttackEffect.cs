@@ -21,12 +21,8 @@ namespace AngbandOS.Core.AttackEffects
             {
                 BaseInventorySlot packInventorySlot = saveGame.SingletonRepository.InventorySlots.Get<PackInventorySlot>();
                 int i = packInventorySlot.WeightedRandom.Choose();
-                Item item = saveGame.Player.Inventory[i];
-                if (item.BaseItemCategory != null)
-                {
-                    continue;
-                }
-                if ((item.Category == ItemTypeEnum.Staff || item.Category == ItemTypeEnum.Wand) && item.TypeSpecificValue != 0)
+                Item? item = saveGame.GetInventoryItem(i);
+                if (item != null && (item.Category == ItemTypeEnum.Staff || item.Category == ItemTypeEnum.Wand) && item.TypeSpecificValue != 0)
                 {
                     saveGame.MsgPrint("Energy drains from your pack!");
                     obvious = true;
