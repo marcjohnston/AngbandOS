@@ -15,8 +15,8 @@
             {
                 foreach (int i in inventorySlot.InventorySlots)
                 {
-                    Item oPtr = SaveGame.Player.Inventory[i];
-                    if (oPtr.BaseItemCategory != null)
+                    Item? oPtr = SaveGame.GetInventoryItem(i);
+                    if (oPtr != null)
                     {
                         SaveGame.Player.LightLevel += oPtr.BaseItemCategory.CalcTorch(oPtr);
                     }

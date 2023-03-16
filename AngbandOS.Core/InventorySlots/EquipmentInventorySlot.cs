@@ -28,16 +28,19 @@ namespace AngbandOS.Core.InventorySlots
             // Allow the base functionality to process items.
             foreach (int index in InventorySlots)
             {
-                Item oPtr = SaveGame.Player.Inventory[index];
-                oPtr.EquipmentProcessWorldHook(SaveGame);
+                Item? oPtr = SaveGame.GetInventoryItem(index);
+                if (oPtr != null)
+                {
+                    oPtr.EquipmentProcessWorldHook(SaveGame);
+                }
             }
 
             if (processWorldEventArgs.SaveGame.Player.Race.IsBurnedBySunlight) // TODO: This needs to use a hook.
             {
                 foreach (int index in InventorySlots)
                 {
-                    Item oPtr = processWorldEventArgs.SaveGame.Player.Inventory[index];
-                    if (oPtr.BaseItemCategory != null && oPtr.BaseItemCategory.ProvidesSunlight && !processWorldEventArgs.SaveGame.Player.HasLightResistance)
+                    Item? oPtr = processWorldEventArgs.SaveGame.GetInventoryItem(index);
+                    if (oPtr != null && oPtr.BaseItemCategory.ProvidesSunlight && !processWorldEventArgs.SaveGame.Player.HasLightResistance)
                     {
                         string oName = oPtr.Description(false, 0);
                         processWorldEventArgs.SaveGame.MsgPrint($"The {oName} scorches your undead flesh!");

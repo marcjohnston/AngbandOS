@@ -9,30 +9,28 @@
             bool flag = false;
             for (int i = InventorySlot.PackCount; i > 0; i--)
             {
-                Item oPtr = SaveGame.Player.Inventory[i];
-                if (oPtr.BaseItemCategory == null)
+                Item? oPtr = SaveGame.GetInventoryItem(i);
+                if (oPtr != null)
                 {
-                    continue;
-                }
-                for (int j = 0; j < i; j++)
-                {
-                    Item jPtr = SaveGame.Player.Inventory[j];
-                    if (jPtr.BaseItemCategory == null)
+                    for (int j = 0; j < i; j++)
                     {
-                        continue;
-                    }
-                    if (jPtr.CanAbsorb(oPtr))
-                    {
-                        flag = true;
-                        jPtr.Absorb(oPtr);
-                        SaveGame.Player._invenCnt--;
-                        int k;
-                        for (k = i; k < InventorySlot.PackCount; k++)
+                        Item jPtr = SaveGame.GetInventoryItem(j);
+                        if (jPtr != null)
                         {
-                            SaveGame.Player.Inventory[k] = SaveGame.Player.Inventory[k + 1];
+                            if (jPtr.CanAbsorb(oPtr))
+                            {
+                                flag = true;
+                                jPtr.Absorb(oPtr);
+                                SaveGame.Player._invenCnt--;
+                                int k;
+                                for (k = i; k < InventorySlot.PackCount; k++)
+                                {
+                                    SaveGame.SetInventoryItem(k, SaveGame.GetInventoryItem(k + 1);
+                                }
+                                SaveGame.SetInventoryItem(k, null);
+                                break;
+                            }
                         }
-                        SaveGame.Player.Inventory[k] = new Item(SaveGame); // No ItemType here
-                        break;
                     }
                 }
             }

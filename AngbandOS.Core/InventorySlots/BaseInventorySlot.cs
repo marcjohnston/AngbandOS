@@ -150,7 +150,7 @@ namespace AngbandOS.Core.InventorySlots
                 int count = 0;
                 foreach (int index in InventorySlots)
                 {
-                    if (SaveGame.Player.Inventory[index].BaseItemCategory != null)
+                    if (SaveGame.GetInventory(index) != null)
                     {
                         count++;
                     }

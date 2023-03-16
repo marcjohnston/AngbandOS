@@ -63,8 +63,8 @@ namespace AngbandOS.Core.FlaggedActions
                     {
                         foreach (int index in inventorySlot)
                         {
-                            Item item = SaveGame.Player.Inventory[index];
-                            if (item.BaseItemCategory != null)
+                            Item? item = SaveGame.GetInventoryItem(index);
+                            if (item != null)
                             {
                                 curWgt += item.Weight;
                             }

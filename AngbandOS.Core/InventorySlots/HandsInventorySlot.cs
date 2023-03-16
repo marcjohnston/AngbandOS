@@ -11,7 +11,7 @@ namespace AngbandOS.Core.InventorySlots
     [Serializable]
     internal class HandsInventorySlot : EquipmentInventorySlot
     {
-        private bool OldRestrictingGloves;
+        private bool RestrictingGloves;
         private HandsInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override string Label(int index) => "l";
         public override int[] InventorySlots => new int[] { InventorySlot.Hands };
@@ -26,27 +26,28 @@ namespace AngbandOS.Core.InventorySlots
         {
             if (SaveGame.Player.BaseCharacterClass.SpellCastingType == CastingType.Arcane)
             {
+                bool previousRestrictingGloves = RestrictingGloves;
+                RestrictingGloves = false;
                 foreach (int index in InventorySlots)
                 {
-                    Item oPtr = SaveGame.Player.Inventory[index];
-                    oPtr.RefreshFlagBasedProperties();
-                    if (oPtr.BaseItemCategory != null && !oPtr.Characteristics.FreeAct && !oPtr.Characteristics.Dex && oPtr.TypeSpecificValue > 0)
+                    Item? oPtr = SaveGame.GetInventoryItem(index);
+                    if (oPtr != null)
                     {
-                        msp = 3 * msp / 4;
-                        if (!OldRestrictingGloves)
+                        oPtr.RefreshFlagBasedProperties();
+                        if (!oPtr.Characteristics.FreeAct && !oPtr.Characteristics.Dex && oPtr.TypeSpecificValue > 0)
                         {
-                            SaveGame.MsgPrint("Your covered hands feel unsuitable for spellcasting.");
-                            OldRestrictingGloves = true;
+                            msp = 3 * msp / 4;
+                            RestrictingGloves = true;
                         }
                     }
-                    else
-                    {
-                        if (OldRestrictingGloves)
-                        {
-                            SaveGame.MsgPrint("Your hands feel more suitable for spellcasting.");
-                            OldRestrictingGloves = false;
-                        }
-                    }
+                }
+                if (RestrictingGloves && !previousRestrictingGloves)
+                {
+                    SaveGame.MsgPrint("Your covered hands feel unsuitable for spellcasting.");
+                }
+                else if (!RestrictingGloves && previousRestrictingGloves)
+                {
+                    SaveGame.MsgPrint("Your hands feel more suitable for spellcasting.");
                 }
             }
             return msp;

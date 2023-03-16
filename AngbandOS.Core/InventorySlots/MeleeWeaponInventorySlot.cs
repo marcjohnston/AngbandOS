@@ -23,8 +23,8 @@ namespace AngbandOS.Core.InventorySlots
             string p = "Wielding";
             if (Count > 0 && index.HasValue)
             {
-                Item oPtr = SaveGame.Player.Inventory[index.Value];
-                if (SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
+                Item? oPtr = SaveGame.GetInventoryItem(index.Value);
+                if (oPtr != null && SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
                 {
                     p = "Just lifting";
                 }
@@ -38,8 +38,8 @@ namespace AngbandOS.Core.InventorySlots
             if (Count > 0)
             {
                 int i = InventorySlots[index];
-                Item oPtr = SaveGame.Player.Inventory[i];
-                if (SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
+                Item? oPtr = SaveGame.GetInventoryItem(i);
+                if (oPtr != null && SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
                 {
                     p = "just lifting";
                 }

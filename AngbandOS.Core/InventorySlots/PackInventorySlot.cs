@@ -35,8 +35,11 @@ namespace AngbandOS.Core.InventorySlots
 
             foreach (int index in InventorySlots)
             {
-                Item oPtr = SaveGame.Player.Inventory[index];
-                oPtr.PackProcessWorldHook(SaveGame);
+                Item? oPtr = SaveGame.GetInventoryItem(index);
+                if (oPtr != null)
+                {
+                    oPtr.PackProcessWorldHook(SaveGame);
+                }
             }
         }
     }

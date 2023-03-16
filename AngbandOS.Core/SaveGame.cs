@@ -268,8 +268,13 @@ namespace AngbandOS.Core
             }
             return item;
         }
-        public void SetInventoryItem(int index, Item item)
+        public void SetInventoryItem(int index, Item? item)
         {
+            // TODO: Assigning a new Item should go away once Inventory accepts nulls
+            if (item == null)
+            {
+                item = new Item(this);
+            }
             Player.Inventory[index] = item;
         }
 

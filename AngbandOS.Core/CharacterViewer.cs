@@ -6,6 +6,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Items;
+
 namespace AngbandOS.Core
 {
     /// <summary>
@@ -299,9 +301,18 @@ namespace AngbandOS.Core
             {
                 foreach (int i in inventorySlot.InventorySlots)
                 {
-                    Item item = SaveGame.GetInventoryItem(i);
-                    // Only extract known bonuses, not full bonuses
-                    ItemCharacteristics itemCharacteristics = item.ObjectFlagsKnown();
+                    ItemCharacteristics itemCharacteristics;
+
+                    Item? item = SaveGame.GetInventoryItem(i);
+                    if (item == null)
+                    {
+                        itemCharacteristics = new ItemCharacteristics();
+                    }
+                    else
+                    {
+                        // Only extract known bonuses, not full bonuses
+                        itemCharacteristics = item.ObjectFlagsKnown();
+                    }
                     ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Str, item.TypeSpecificValue, row + 0, col);
                     ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Int, item.TypeSpecificValue, row + 1, col);
                     ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Wis, item.TypeSpecificValue, row + 2, col);
@@ -361,14 +372,11 @@ namespace AngbandOS.Core
             int showTohit = SaveGame.Player.DisplayedAttackBonus;
             int showTodam = SaveGame.Player.DisplayedDamageBonus;
             MeleeWeaponInventorySlot meeleeWeaponInventorySlot = SaveGame.SingletonRepository.InventorySlots.Get<MeleeWeaponInventorySlot>();
-            Item item = SaveGame.Player.Inventory[meeleeWeaponInventorySlot.WeightedRandom.Choose()];
+            Item? item = SaveGame.GetInventoryItem(meeleeWeaponInventorySlot.WeightedRandom.Choose());
             // Only show bonuses if we know them
-            if (item.IsKnown())
+            if (item != null && item.IsKnown())
             {
                 showTohit += item.BonusToHit;
-            }
-            if (item.IsKnown())
-            {
                 showTodam += item.BonusDamage;
             }
             // Print some basics
@@ -438,24 +446,34 @@ namespace AngbandOS.Core
         private void DisplayPlayerSkills()
         {
             MeleeWeaponInventorySlot meeleeWeaponInventorySlot = SaveGame.SingletonRepository.InventorySlots.Get<MeleeWeaponInventorySlot>();
-            Item item = SaveGame.Player.Inventory[meeleeWeaponInventorySlot.WeightedRandom.Choose()];
-            int tmp = SaveGame.Player.AttackBonus + item.BonusToHit;
-            int fighting = SaveGame.Player.SkillMelee + (tmp * Constants.BthPlusAdj);
-            RangedWeaponInventorySlot rangedWeaponInventorySlot = SaveGame.SingletonRepository.InventorySlots.Get<RangedWeaponInventorySlot>();
-            item = SaveGame.Player.Inventory[rangedWeaponInventorySlot.WeightedRandom.Choose()];
-            tmp = SaveGame.Player.AttackBonus + item.BonusToHit;
-            int shooting = SaveGame.Player.SkillRanged + (tmp * Constants.BthPlusAdj);
-            BaseInventorySlot meleeWeaponInventorySlot = SaveGame.SingletonRepository.InventorySlots.Get<MeleeWeaponInventorySlot>();
-            int index = meleeWeaponInventorySlot.WeightedRandom.Choose();
-            item = SaveGame.Player.Inventory[index];
+            int index = meeleeWeaponInventorySlot.WeightedRandom.Choose();
+            Item? meeleeItem = SaveGame.GetInventoryItem(index);
+
             int dambonus = SaveGame.Player.DisplayedDamageBonus;
             // Only include weapon damage if the player knows what it is
-            if (item.IsKnown())
+            int damdice = 0;
+            int damsides = 0;
+            int fighting = SaveGame.Player.SkillMelee + (SaveGame.Player.AttackBonus * Constants.BthPlusAdj);
+            if (meeleeItem != null)
             {
-                dambonus += item.BonusDamage;
+                fighting += meeleeItem.BonusToHit * Constants.BthPlusAdj;
+                damdice += meeleeItem.DamageDice;
+                damsides += meeleeItem.DamageDiceSides;
+
+                if (meeleeItem.IsKnown())
+                {
+                    dambonus += meeleeItem.BonusDamage;
+                }
             }
-            int damdice = item.DamageDice;
-            int damsides = item.DamageDiceSides;
+
+            RangedWeaponInventorySlot rangedWeaponInventorySlot = SaveGame.SingletonRepository.InventorySlots.Get<RangedWeaponInventorySlot>();
+            Item? rangedItem = SaveGame.GetInventoryItem(rangedWeaponInventorySlot.WeightedRandom.Choose());
+            int shooting = SaveGame.Player.SkillRanged + (SaveGame.Player.AttackBonus * Constants.BthPlusAdj);
+            if (rangedItem != null)
+            {
+                shooting += rangedItem.BonusToHit * Constants.BthPlusAdj;
+            }
+
             int attacksPerRound = SaveGame.Player.MeleeAttacksPerRound;
             int disarmTraps = SaveGame.Player.SkillDisarmTraps;
             int useDevice = SaveGame.Player.SkillUseDevice;
