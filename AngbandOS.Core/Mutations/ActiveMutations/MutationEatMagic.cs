@@ -21,7 +21,13 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             {
                 return;
             }
-            Item oPtr = item >= 0 ? saveGame.Player.Inventory[item] : saveGame.Level.Items[0 - item];
+            Item? oPtr = item >= 0 ? saveGame.GetInventoryItem(item) : saveGame.Level.Items[0 - item];
+
+            if (oPtr == null)
+            {
+                return;
+            }
+
             int lev = oPtr.BaseItemCategory.Level;
             if (oPtr.Category == ItemTypeEnum.Rod)
             {

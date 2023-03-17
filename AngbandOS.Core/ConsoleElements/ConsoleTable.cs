@@ -85,9 +85,20 @@
             rowLocation.ToWindow(Width, Height).Clear(saveGame, Colour.Background);
             Dictionary<ConsoleTableColumn, int> columnWidths = new Dictionary<ConsoleTableColumn, int>();
 
-            for (int rowIndex = 0; rowIndex <= containerWindow.Height; rowIndex++)
+            int rowIndex = TopRow;
+            if (rowIndex < 0)
             {
-                ConsoleTableRow row = rows[TopRow + rowIndex];
+                rowIndex = 0;
+            }
+
+            for (int windowRowIndex = 0; windowRowIndex <= containerWindow.Height; windowRowIndex++)
+            {
+                if (rowIndex >= rows.Count)
+                {
+                    break;
+                }
+
+                ConsoleTableRow row = rows[rowIndex];
                 ConsoleLocation columnLocation = rowLocation.Clone();
                 foreach (ConsoleTableColumn column in columns.Values)
                 {
@@ -109,6 +120,7 @@
 
                 // Move the location to the next row.
                 rowLocation = rowLocation.Offset(0, 1);
+                rowIndex++;
             }
         }
 

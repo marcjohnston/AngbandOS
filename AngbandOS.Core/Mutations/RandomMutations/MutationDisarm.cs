@@ -29,8 +29,8 @@ namespace AngbandOS.Core.Mutations.RandomMutations
             saveGame.MsgPrint("You trip over your own feet!");
             saveGame.Player.TakeHit(Program.Rng.DieRoll(saveGame.Player.Weight / 6), "tripping");
             saveGame.MsgPrint(null);
-            Item oPtr = saveGame.Player.Inventory[InventorySlot.MeleeWeapon];
-            if (oPtr.BaseItemCategory == null)
+            Item? oPtr = saveGame.GetInventoryItem(InventorySlot.MeleeWeapon);
+            if (oPtr == null)
             {
                 return;
             }

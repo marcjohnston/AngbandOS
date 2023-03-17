@@ -280,7 +280,7 @@ namespace AngbandOS.Core
             Inventory = new Item[InventorySlot.Total];
             for (int i = 0; i < InventorySlot.Total; i++)
             {
-                Inventory[i] = new Item(SaveGame); // No ItemType here
+                Inventory[i] = new Item(SaveGame); // No ItemType here // TODO: Convert to NULL
             }
             _invenCnt = 0;
 
@@ -470,12 +470,12 @@ namespace AngbandOS.Core
         public void CurseEquipment(int chance, int heavyChance)
         {
             bool changed = false;
-            Item oPtr = Inventory[InventorySlot.MeleeWeapon - 1 + Program.Rng.DieRoll(12)];
             if (Program.Rng.DieRoll(100) > chance)
             {
                 return;
             }
-            if (oPtr.BaseItemCategory == null)
+            Item? oPtr = SaveGame.GetInventoryItem(InventorySlot.MeleeWeapon - 1 + Program.Rng.DieRoll(12));
+            if (oPtr == null)
             {
                 return;
             }
@@ -1214,8 +1214,8 @@ namespace AngbandOS.Core
                 // Enumerate each of the items in the inventory slot.
                 foreach (int i in inventorySlot)
                 {
-                    Item item = Inventory[i];
-                    if (item.BaseItemCategory == null)
+                    Item? item = SaveGame.GetInventoryItem(i);
+                    if (item == null)
                     {
                         continue;
                     }
@@ -1629,20 +1629,24 @@ namespace AngbandOS.Core
             {
                 return false;
             }
-            return ItemMatchesFilter(Inventory[i], itemFilter);
+            Item? item = SaveGame.GetInventoryItem(i);
+            if (item == null)
+            {
+                return false;
+            }
+            return ItemMatchesFilter(item, itemFilter);
         }
 
         public int InvenCarry(Item oPtr, bool final)
         {
             int j;
             int n = -1;
-            Item jPtr;
             if (!final)
             {
                 for (j = 0; j < InventorySlot.PackCount; j++)
                 {
-                    jPtr = Inventory[j];
-                    if (jPtr.BaseItemCategory == null)
+                    Item? jPtr = SaveGame.GetInventoryItem(j);
+                    if (jPtr == null)
                     {
                         continue;
                     }
@@ -1662,8 +1666,8 @@ namespace AngbandOS.Core
             }
             for (j = 0; j <= InventorySlot.PackCount; j++)
             {
-                jPtr = Inventory[j];
-                if (jPtr.BaseItemCategory == null)
+                Item? jPtr = SaveGame.GetInventoryItem(j);
+                if (jPtr == null)
                 {
                     break;
                 }
@@ -1673,8 +1677,8 @@ namespace AngbandOS.Core
             {
                 for (j = 0; j < InventorySlot.PackCount; j++)
                 {
-                    jPtr = Inventory[j];
-                    if (jPtr.BaseItemCategory == null)
+                    Item? jPtr = SaveGame.GetInventoryItem(j);
+                    if (jPtr == null)
                     {
                         break;
                     }
@@ -1687,12 +1691,13 @@ namespace AngbandOS.Core
                 i = j;
                 for (int k = n; k >= i; k--)
                 {
-                    Inventory[k + 1] = Inventory[k].Clone();
+                    SaveGame.SetInventoryItem(k + 1, SaveGame.GetInventoryItem(k));
                 }
-                Inventory[i] = new Item(SaveGame); // No ItemType here
+                SaveGame.SetInventoryItem(i, null);
             }
-            Inventory[i] = oPtr.Clone();
-            oPtr = Inventory[i];
+
+            SaveGame.SetInventoryItem(i, oPtr.Clone());
+            oPtr = SaveGame.GetInventoryItem(i);
             oPtr.Y = 0;
             oPtr.X = 0;
             oPtr.NextInStack = 0;
@@ -1712,8 +1717,8 @@ namespace AngbandOS.Core
             }
             for (int j = 0; j < InventorySlot.PackCount; j++)
             {
-                Item jPtr = Inventory[j];
-                if (jPtr.BaseItemCategory == null)
+                Item? jPtr = SaveGame.GetInventoryItem(j);
+                if (jPtr == null)
                 {
                     continue;
                 }
@@ -1730,16 +1735,8 @@ namespace AngbandOS.Core
             int k = 0;
             for (int i = 0; i < InventorySlot.PackCount; i++)
             {
-                Item oPtr = Inventory[i];
-                if (oPtr.BaseItemCategory == null)
-                {
-                    continue;
-                }
-                if (oPtr.IsFixedArtifact() || !string.IsNullOrEmpty(oPtr.RandartName))
-                {
-                    continue;
-                }
-                if (testerFunc(oPtr))
+                Item oPtr = SaveGame.GetInventoryItem(i);
+                if (oPtr != null && !oPtr.IsFixedArtifact() && string.IsNullOrEmpty(oPtr.RandartName) && testerFunc(oPtr))
                 {
                     int j;
                     int amt;
@@ -1753,9 +1750,7 @@ namespace AngbandOS.Core
                     if (amt != 0)
                     {
                         string oName = oPtr.Description(false, 3);
-                        string y = oPtr.Count > 1
-                            ? (amt == oPtr.Count ? "All of y" : (amt > 1 ? "Some of y" : "One of y"))
-                            : "Y";
+                        string y = oPtr.Count > 1 ? (amt == oPtr.Count ? "All of y" : (amt > 1 ? "Some of y" : "One of y")) : "Y";
                         string w = amt > 1 ? "were" : "was";
                         SaveGame.MsgPrint($"{y}our {oName} ({i.IndexToLabel()}) {w} destroyed!");
                         if (oPtr.BaseItemCategory.CategoryEnum == ItemTypeEnum.Potion)
@@ -1774,8 +1769,12 @@ namespace AngbandOS.Core
 
         public void InvenDrop(int item, int amt)
         {
-            Item oPtr = Inventory[item];
             if (amt <= 0)
+            {
+                return;
+            }
+            Item? oPtr = SaveGame.GetInventoryItem(item);
+            if (oPtr == null)
             {
                 return;
             }
@@ -1785,8 +1784,20 @@ namespace AngbandOS.Core
             }
             if (item >= InventorySlot.MeleeWeapon)
             {
-                item = InvenTakeoff(item, amt);
-                oPtr = Inventory[item];
+                // Take the item off first.
+                int? newItem = InvenTakeoff(item, amt);
+                if (newItem == null)
+                {
+                    return;
+                }
+
+                oPtr = SaveGame.GetInventoryItem(newItem.Value);
+
+                // We took off the item, check to ensure that the item is not missing.
+                if (oPtr == null)
+                {
+                    return;
+                }
             }
             Item qPtr = oPtr.Clone(amt);
             string oName = qPtr.Description(true, 3);
@@ -1799,14 +1810,22 @@ namespace AngbandOS.Core
 
         public void InvenItemDescribe(int item)
         {
-            Item oPtr = Inventory[item];
+            Item? oPtr = SaveGame.GetInventoryItem(item);
+            if (oPtr == null)
+            {
+                return;
+            }
             string oName = oPtr.Description(true, 3);
             SaveGame.MsgPrint($"You have {oName}.");
         }
 
         public void InvenItemIncrease(int item, int num)
         {
-            Item oPtr = Inventory[item];
+            Item? oPtr = SaveGame.GetInventoryItem(item);
+            if (oPtr == null)
+            {
+                return;
+            }
             num += oPtr.Count;
             if (num > 255)
             {
@@ -1829,8 +1848,8 @@ namespace AngbandOS.Core
 
         public void InvenItemOptimize(int item)
         {
-            Item oPtr = Inventory[item];
-            if (oPtr.BaseItemCategory == null)
+            Item? oPtr = SaveGame.GetInventoryItem(item);
+            if (oPtr == null)
             {
                 return;
             }
@@ -1844,26 +1863,30 @@ namespace AngbandOS.Core
                 _invenCnt--;
                 for (i = item; i < InventorySlot.PackCount; i++)
                 {
-                    Inventory[i] = Inventory[i + 1];
+                    SaveGame.SetInventoryItem(i, SaveGame.GetInventoryItem(i + 1));
                 }
-                Inventory[i] = new Item(SaveGame); // No ItemType here
+                SaveGame.SetInventoryItem(i, null);
             }
             else
             {
-                Inventory[item] = new Item(SaveGame); // No ItemType here
+                SaveGame.SetInventoryItem(item, null);
                 SaveGame.UpdateBonusesFlaggedAction.Set();
                 SaveGame.UpdateTorchRadiusFlaggedAction.Set();
                 SaveGame.UpdateManaFlaggedAction.Set();
             }
         }
 
-        public int InvenTakeoff(int item, int amt)
+        public int? InvenTakeoff(int item, int amt)
         {
             string act;
-            Item oPtr = Inventory[item];
+            Item? oPtr = SaveGame.GetInventoryItem(item);
+            if (oPtr == null)
+            {
+                return null;
+            }
             if (amt <= 0)
             {
-                return -1;
+                return null;
             }
             if (amt > oPtr.Count)
             {
@@ -1905,43 +1928,36 @@ namespace AngbandOS.Core
             int i = (char.IsLower(c) ? c.LetterToNumber() : -1) + InventorySlot.MeleeWeapon;
             if (i < InventorySlot.MeleeWeapon || i >= InventorySlot.Total)
             {
-                return -1;
+                return -1; // TODO: Return null
             }
-            if (Inventory[i].BaseItemCategory == null)
+            if (SaveGame.GetInventoryItem(i) == null)
             {
-                return -1;
+                return -1; // TODO: Return null
             }
             return i;
         }
 
-        public int LabelToInven(char c)
+        public int LabelToInven(char c) 
         {
             int i = char.IsLower(c) ? c.LetterToNumber() : -1;
             if (i < 0 || i > InventorySlot.PackCount)
             {
-                return -1;
+                return -1; // TODO: Return null
             }
-            if (Inventory[i].BaseItemCategory == null)
+            if (SaveGame.GetInventoryItem(i) == null)
             {
-                return -1;
+                return -1; // TODO: Return null
             }
             return i;
         }
 
         public void ReportChargeUsageFromInventory(int item)
         {
-            Item oPtr = Inventory[item];
-            if (oPtr.Category != ItemTypeEnum.Staff && oPtr.Category != ItemTypeEnum.Wand)
+            Item? oPtr = SaveGame.GetInventoryItem(item);
+            if (oPtr != null && (oPtr.Category == ItemTypeEnum.Staff || oPtr.Category == ItemTypeEnum.Wand) && oPtr.IsKnown())
             {
-                return;
+                SaveGame.MsgPrint(oPtr.TypeSpecificValue != 1 ? $"You have {oPtr.TypeSpecificValue} charges remaining." : $"You have {oPtr.TypeSpecificValue} charge remaining.");
             }
-            if (!oPtr.IsKnown())
-            {
-                return;
-            }
-            SaveGame.MsgPrint(oPtr.TypeSpecificValue != 1
-                ? $"You have {oPtr.TypeSpecificValue} charges remaining."
-                : $"You have {oPtr.TypeSpecificValue} charge remaining.");
         }
 
         public void ShowEquip(IItemFilter? itemFilter)
@@ -1977,8 +1993,8 @@ namespace AngbandOS.Core
                 bool slotIsEmpty = true;
                 foreach (int index in inventorySlot.InventorySlots)
                 {
-                    Item oPtr = Inventory[index];
-                    if (oPtr.BaseItemCategory != null && (itemFilter == null || itemFilter.ItemMatches(oPtr)))
+                    Item? oPtr = SaveGame.GetInventoryItem(index);
+                    if (oPtr != null && (itemFilter == null || itemFilter.ItemMatches(oPtr)))
                     {
                         ConsoleTableRow consoleRow = consoleTable.AddRow();
                         consoleRow["label"] = new ConsoleString(Colour.White, $"{index.IndexToLabel()})");

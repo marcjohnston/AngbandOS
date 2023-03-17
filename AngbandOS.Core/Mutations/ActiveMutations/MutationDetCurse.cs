@@ -19,16 +19,11 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             }
             for (int i = 0; i < InventorySlot.Total; i++)
             {
-                Item oPtr = saveGame.Player.Inventory[i];
-                if (oPtr.BaseItemCategory != null)
+                Item? oPtr = saveGame.GetInventoryItem(i);
+                if (oPtr != null && oPtr.IsCursed())
                 {
-                    continue;
+                    oPtr.Inscription = "cursed";
                 }
-                if (!oPtr.IsCursed())
-                {
-                    continue;
-                }
-                oPtr.Inscription = "cursed";
             }
         }
 

@@ -1208,8 +1208,8 @@ namespace AngbandOS.Core
             {
                 for (int ii = 0; ii < InventorySlot.PackCount; ii++)
                 {
-                    Item oPtr = Player.Inventory[ii];
-                    if (oPtr.BaseItemCategory != null && (itemFilter == null || itemFilter.ItemMatches(oPtr)))
+                    Item? oPtr = GetInventoryItem(ii);
+                    if (oPtr != null && (itemFilter == null || itemFilter.ItemMatches(oPtr)))
                     {
                         inventory.Add(ii);
                     }
@@ -1221,8 +1221,8 @@ namespace AngbandOS.Core
                 {
                     foreach (int ii in inventorySlot.InventorySlots) 
                     {
-                        Item oPtr = Player.Inventory[ii];
-                        if (oPtr.BaseItemCategory != null && (itemFilter == null || itemFilter.ItemMatches(oPtr)))
+                        Item? oPtr = GetInventoryItem(ii);
+                        if (oPtr != null && (itemFilter == null || itemFilter.ItemMatches(oPtr)))
                         {
                             equipment.Add(ii);
                         }
@@ -2398,10 +2398,10 @@ namespace AngbandOS.Core
                 RedrawStuff();
                 Level.MoveCursorRelative(Player.MapY, Player.MapX);
                 UpdateScreen();
-                if (Player.Inventory[InventorySlot.PackCount].BaseItemCategory != null)
-                {
-                    const int item = InventorySlot.PackCount;
-                    Item oPtr = Player.Inventory[item];
+                const int item = InventorySlot.PackCount;
+                Item? oPtr = GetInventoryItem(item);
+                if (oPtr != null)
+                { 
                     Disturb(false);
                     MsgPrint("Your pack overflows!");
                     string oName = oPtr.Description(true, 3);
@@ -2535,15 +2535,12 @@ namespace AngbandOS.Core
             {
                 if (Player.GameTime.IsDawn)
                 {
-                    GridTile cPtr;
-                    int x;
-                    int y;
                     MsgPrint("The sun has risen.");
-                    for (y = 0; y < Level.CurHgt; y++)
+                    for (int y = 0; y < Level.CurHgt; y++)
                     {
-                        for (x = 0; x < Level.CurWid; x++)
+                        for (int x = 0; x < Level.CurWid; x++)
                         {
-                            cPtr = Level.Grid[y][x];
+                            GridTile cPtr = Level.Grid[y][x];
                             cPtr.TileFlags.Set(GridTile.SelfLit);
                             cPtr.TileFlags.Set(GridTile.PlayerMemorised);
                             Level.NoteSpot(y, x);
@@ -2552,15 +2549,12 @@ namespace AngbandOS.Core
                 }
                 else if (Player.GameTime.IsDusk)
                 {
-                    GridTile cPtr;
-                    int x;
-                    int y;
                     MsgPrint("The sun has fallen.");
-                    for (y = 0; y < Level.CurHgt; y++)
+                    for (int y = 0; y < Level.CurHgt; y++)
                     {
-                        for (x = 0; x < Level.CurWid; x++)
+                        for (int x = 0; x < Level.CurWid; x++)
                         {
-                            cPtr = Level.Grid[y][x];
+                            GridTile cPtr = Level.Grid[y][x];
                             if (cPtr.FeatureType.IsOpenFloor)
                             {
                                 cPtr.TileFlags.Clear(GridTile.SelfLit);
@@ -2607,7 +2601,6 @@ namespace AngbandOS.Core
             {
                 Player.TakeHit(1, "poison");
             }
-            Item oPtr;
             bool caveNoRegen = false;
 
             // Allow all inventory slots access to the process world.
@@ -2648,41 +2641,41 @@ namespace AngbandOS.Core
                     Player.TakeHit(1 + (Player.Level / 5), damDesc);
                 }
             }
-            int i;
             if (Player.TimedBleeding.TurnsRemaining != 0 && Player.TimedInvulnerability.TurnsRemaining == 0)
             {
+                int damage;
                 if (Player.TimedBleeding.TurnsRemaining > 200)
                 {
-                    i = 3;
+                    damage = 3;
                 }
                 else if (Player.TimedBleeding.TurnsRemaining > 100)
                 {
-                    i = 2;
+                    damage = 2;
                 }
                 else
                 {
-                    i = 1;
+                    damage = 1;
                 }
-                Player.TakeHit(i, "a fatal wound");
+                Player.TakeHit(damage, "a fatal wound");
             }
             if (Player.Food < Constants.PyFoodMax)
             {
                 if (Player.GameTime.IsTurnHundred)
                 {
-                    i = Constants.ExtractEnergy[Player.Speed] * 2;
+                    int additionalEnergy = Constants.ExtractEnergy[Player.Speed] * 2;
                     if (Player.HasRegeneration)
                     {
-                        i += 30;
+                        additionalEnergy += 30;
                     }
                     if (Player.HasSlowDigestion)
                     {
-                        i -= 10;
+                        additionalEnergy -= 10;
                     }
-                    if (i < 1)
+                    if (additionalEnergy < 1)
                     {
-                        i = 1;
+                        additionalEnergy = 1;
                     }
-                    Player.SetFood(Player.Food - i);
+                    Player.SetFood(Player.Food - additionalEnergy);
                 }
             }
             else
@@ -2691,7 +2684,7 @@ namespace AngbandOS.Core
             }
             if (Player.Food < Constants.PyFoodStarve)
             {
-                i = (Constants.PyFoodStarve - Player.Food) / 10;
+                int i = (Constants.PyFoodStarve - Player.Food) / 10;
                 if (Player.TimedInvulnerability.TurnsRemaining == 0)
                 {
                     Player.TakeHit(i, "starvation");
@@ -2827,33 +2820,36 @@ namespace AngbandOS.Core
                     Player.CheckExperience();
                 }
             }
-            int j;
-            for (j = 0, i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
+            bool combineFlags = false;
+            for (int i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
             {
-                oPtr = Player.Inventory[i];
-                oPtr.RefreshFlagBasedProperties();
-                if (oPtr.Characteristics.DreadCurse && Program.Rng.DieRoll(100) == 1)
+                Item? oPtr = GetInventoryItem(i);
+                if (oPtr != null)
                 {
-                    ActivateDreadCurse();
-                }
-                if (oPtr.Characteristics.Teleport && Program.Rng.RandomLessThan(100) < 1)
-                {
-                    if (oPtr.IdentCursed && !Player.HasAntiTeleport)
+                    oPtr.RefreshFlagBasedProperties();
+                    if (oPtr.Characteristics.DreadCurse && Program.Rng.DieRoll(100) == 1)
                     {
-                        Disturb(true);
-                        TeleportPlayer(40);
+                        ActivateDreadCurse();
                     }
-                    else
+                    if (oPtr.Characteristics.Teleport && Program.Rng.RandomLessThan(100) < 1)
                     {
-                        if (GetCheck("Teleport? "))
+                        if (oPtr.IdentCursed && !Player.HasAntiTeleport)
                         {
-                            Disturb(false);
-                            TeleportPlayer(50);
+                            Disturb(true);
+                            TeleportPlayer(40);
+                        }
+                        else
+                        {
+                            if (GetCheck("Teleport? "))
+                            {
+                                Disturb(false);
+                                TeleportPlayer(50);
+                            }
                         }
                     }
                 }
                 Player.Dna.OnProcessWorld(this, Player, Level);
-                if (oPtr.BaseItemCategory == null)
+                if (oPtr == null)
                 {
                     continue;
                 }
@@ -2862,34 +2858,30 @@ namespace AngbandOS.Core
                     oPtr.RechargeTimeLeft--;
                     if (oPtr.RechargeTimeLeft == 0)
                     {
-                        j++;
+                        combineFlags = true;
                     }
                 }
             }
-            for (j = 0, i = 0; i < InventorySlot.PackCount; i++)
+            for (int i = 0; i < InventorySlot.PackCount; i++)
             {
-                oPtr = Player.Inventory[i];
-                if (oPtr.BaseItemCategory == null)
-                {
-                    continue;
-                }
-                if (oPtr.Category == ItemTypeEnum.Rod && oPtr.TypeSpecificValue != 0)
+                Item? oPtr = GetInventoryItem(i);
+                if (oPtr != null && oPtr.Category == ItemTypeEnum.Rod && oPtr.TypeSpecificValue != 0)
                 {
                     oPtr.TypeSpecificValue--;
                     if (oPtr.TypeSpecificValue == 0)
                     {
-                        j++;
+                        combineFlags = true;
                     }
                 }
             }
-            if (j != 0)
+            if (combineFlags)
             {
                 NoticeCombineFlaggedAction.Set();
             }
             Player.SenseInventory();
-            for (i = 1; i < Level.OMax; i++)
+            for (int i = 1; i < Level.OMax; i++)
             {
-                oPtr = Level.Items[i];
+                Item oPtr = Level.Items[i];
                 if (oPtr.BaseItemCategory == null)
                 {
                     continue;
@@ -3019,7 +3011,11 @@ namespace AngbandOS.Core
 
         private bool Verify(string prompt, int item)
         {
-            Item oPtr = item >= 0 ? Player.Inventory[item] : Level.Items[0 - item];
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : Level.Items[0 - item];
+            if (oPtr == null)
+            {
+                return false;
+            }
             string oName = oPtr.Description(true, 3);
             string outVal = $"{prompt} {oName}? ";
             return GetCheck(outVal);
@@ -3201,7 +3197,11 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item oPtr = item >= 0 ? Player.Inventory[item] : Level.Items[0 - item];
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : Level.Items[0 - item];
+            if (oPtr == null)
+            {
+                return;
+            }
             if (oPtr.Count > 1)
             {
                 amt = GetQuantity(null, oPtr.Count, true);
@@ -3292,10 +3292,10 @@ namespace AngbandOS.Core
 
             // Select an item in the inventory slot to be disenchanted.
             int i = inventorySlot.WeightedRandom.Choose();
-            Item oPtr = Player.Inventory[i];
+            Item? oPtr = GetInventoryItem(i);
 
             // The chosen slot does not have an item to disenchant.
-            if (oPtr.BaseItemCategory == null)
+            if (oPtr == null)
             {
                 return false;
             }
@@ -3393,7 +3393,11 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item oPtr = item >= 0 ? Player.Inventory[item] : Level.Items[0 - item];
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : Level.Items[0 - item];
+            if (oPtr == null)
+            {
+                return;
+            }
             string oName = oPtr.Description(false, 0);
             string your = item >= 0 ? "Your" : "The";
             string s = oPtr.Count > 1 ? "" : "s";
@@ -3445,11 +3449,15 @@ namespace AngbandOS.Core
             {
                 if (item == -2)
                 {
-                    MsgPrint("You have weapon to bless.");
+                    MsgPrint("You have no weapon to bless.");
                 }
                 return;
             }
-            Item oPtr = item >= 0 ? Player.Inventory[item] : Level.Items[0 - item];
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : Level.Items[0 - item];
+            if (oPtr == null)
+            {
+                return;
+            }
             string oName = oPtr.Description(false, 0);
             oPtr.RefreshFlagBasedProperties();
             if (oPtr.IdentCursed)
@@ -4663,7 +4671,11 @@ namespace AngbandOS.Core
                 }
                 return false;
             }
-            Item oPtr = item >= 0 ? Player.Inventory[item] : Level.Items[0 - item];
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : Level.Items[0 - item];
+            if (oPtr == null)
+            {
+                return false;
+            }
             string oName = oPtr.Description(false, 0);
             string your = item >= 0 ? "Your" : "The";
             string s = oPtr.Count > 1 ? "" : "s";
@@ -4782,7 +4794,11 @@ namespace AngbandOS.Core
                 }
                 return false;
             }
-            Item oPtr = item >= 0 ? Player.Inventory[item] : Level.Items[0 - item];
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : Level.Items[0 - item];
+            if (oPtr == null)
+            {
+                return false;
+            }
             oPtr.BecomeFlavourAware();
             oPtr.BecomeKnown();
             oPtr.IdentMental = true;
@@ -4831,7 +4847,11 @@ namespace AngbandOS.Core
                 }
                 return false;
             }
-            Item oPtr = item >= 0 ? Player.Inventory[item] : Level.Items[0 - item];
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : Level.Items[0 - item];
+            if (oPtr == null)
+            {
+                return false;
+            }
             oPtr.BecomeFlavourAware();
             oPtr.BecomeKnown();
             UpdateBonusesFlaggedAction.Set();
@@ -4870,8 +4890,8 @@ namespace AngbandOS.Core
         {
             for (int i = 0; i < InventorySlot.Total; i++)
             {
-                Item oPtr = Player.Inventory[i];
-                if (oPtr.BaseItemCategory == null)
+                Item? oPtr = GetInventoryItem(i);
+                if (oPtr == null)
                 {
                     continue;
                 }
@@ -4911,8 +4931,8 @@ namespace AngbandOS.Core
         {
             for (int i = 0; i < InventorySlot.Total; i++)
             {
-                Item oPtr = Player.Inventory[i];
-                if (oPtr.BaseItemCategory == null)
+                Item? oPtr = GetInventoryItem(i);
+                if (oPtr == null)
                 {
                     continue;
                 }
@@ -5076,7 +5096,11 @@ namespace AngbandOS.Core
                 }
                 return false;
             }
-            Item oPtr = item >= 0 ? Player.Inventory[item] : Level.Items[0 - item];
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : Level.Items[0 - item];
+            if (oPtr == null)
+            {
+                return false;
+            }
             int lev = oPtr.BaseItemCategory.Level;
             if (oPtr.Category == ItemTypeEnum.Rod)
             {
@@ -5287,28 +5311,24 @@ namespace AngbandOS.Core
 
         public void SelfKnowledge()
         {
-            int i = 0, j, k;
-            Item oPtr;
+            int infoCount = 0;
             string[] info = new string[128];
-            //int plev = Player.Level;
-            //string dummy = "";
             ItemCharacteristics inventoryCharacteristics = new ItemCharacteristics();
-            for (k = InventorySlot.MeleeWeapon; k < InventorySlot.Total; k++)
+            for (int k = InventorySlot.MeleeWeapon; k < InventorySlot.Total; k++)
             {
-                oPtr = Player.Inventory[k];
-                if (oPtr.BaseItemCategory != null)
+                Item? oPtr = GetInventoryItem(k);
+                if (oPtr != null)
                 {
-                    continue;
+                    oPtr.RefreshFlagBasedProperties();
+                    inventoryCharacteristics.Merge(oPtr.Characteristics);
                 }
-                oPtr.RefreshFlagBasedProperties();
-                inventoryCharacteristics.Merge(oPtr.Characteristics);
             }
             string[]? selfKnowledgeInfo = Player.Race.SelfKnowledge(Player.Level);
             if (selfKnowledgeInfo != null)
             {
                 foreach (string infoLine in selfKnowledgeInfo)
                 {
-                    info[i++] = infoLine;
+                    info[infoCount++] = infoLine;
                 }
             }
             string[] mutations = Player.Dna.GetMutationList();
@@ -5316,418 +5336,419 @@ namespace AngbandOS.Core
             {
                 foreach (string m in mutations)
                 {
-                    info[i++] = m;
+                    info[infoCount++] = m;
                 }
             }
             if (Player.TimedBlindness.TurnsRemaining != 0)
             {
-                info[i++] = "You cannot see.";
+                info[infoCount++] = "You cannot see.";
             }
             if (Player.TimedConfusion.TurnsRemaining != 0)
             {
-                info[i++] = "You are confused.";
+                info[infoCount++] = "You are confused.";
             }
             if (Player.TimedFear.TurnsRemaining != 0)
             {
-                info[i++] = "You are terrified.";
+                info[infoCount++] = "You are terrified.";
             }
             if (Player.TimedBleeding.TurnsRemaining != 0)
             {
-                info[i++] = "You are bleeding.";
+                info[infoCount++] = "You are bleeding.";
             }
             if (Player.TimedStun.TurnsRemaining != 0)
             {
-                info[i++] = "You are stunned.";
+                info[infoCount++] = "You are stunned.";
             }
             if (Player.TimedPoison.TurnsRemaining != 0)
             {
-                info[i++] = "You are poisoned.";
+                info[infoCount++] = "You are poisoned.";
             }
             if (Player.TimedHallucinations.TurnsRemaining != 0)
             {
-                info[i++] = "You are hallucinating.";
+                info[infoCount++] = "You are hallucinating.";
             }
             if (Player.HasAggravation)
             {
-                info[i++] = "You aggravate monsters.";
+                info[infoCount++] = "You aggravate monsters.";
             }
             if (Player.HasRandomTeleport)
             {
-                info[i++] = "Your position is very uncertain.";
+                info[infoCount++] = "Your position is very uncertain.";
             }
             if (Player.TimedBlessing.TurnsRemaining != 0)
             {
-                info[i++] = "You feel rightous.";
+                info[infoCount++] = "You feel rightous.";
             }
             if (Player.TimedHeroism.TurnsRemaining != 0)
             {
-                info[i++] = "You feel heroic.";
+                info[infoCount++] = "You feel heroic.";
             }
             if (Player.TimedSuperheroism.TurnsRemaining != 0)
             {
-                info[i++] = "You are in a battle rage.";
+                info[infoCount++] = "You are in a battle rage.";
             }
             if (Player.TimedProtectionFromEvil.TurnsRemaining != 0)
             {
-                info[i++] = "You are protected from evil.";
+                info[infoCount++] = "You are protected from evil.";
             }
             if (Player.TimedStoneskin.TurnsRemaining != 0)
             {
-                info[i++] = "You are protected by a mystic shield.";
+                info[infoCount++] = "You are protected by a mystic shield.";
             }
             if (Player.TimedInvulnerability.TurnsRemaining != 0)
             {
-                info[i++] = "You are temporarily invulnerable.";
+                info[infoCount++] = "You are temporarily invulnerable.";
             }
             if (Player.TimedEtherealness.TurnsRemaining != 0)
             {
-                info[i++] = "You are temporarily incorporeal.";
+                info[infoCount++] = "You are temporarily incorporeal.";
             }
             if (Player.HasConfusingTouch)
             {
-                info[i++] = "Your hands are glowing dull red.";
+                info[infoCount++] = "Your hands are glowing dull red.";
             }
             if (Player.IsSearching)
             {
-                info[i++] = "You are looking around very carefully.";
+                info[infoCount++] = "You are looking around very carefully.";
             }
             if (Player.SpareSpellSlots != 0)
             {
-                info[i++] = "You can learn some spells/prayers.";
+                info[infoCount++] = "You can learn some spells/prayers.";
             }
             if (Player.WordOfRecallDelay != 0)
             {
-                info[i++] = "You will soon be recalled.";
+                info[infoCount++] = "You will soon be recalled.";
             }
             if (Player.InfravisionRange != 0)
             {
-                info[i++] = "Your eyes are sensitive to infrared light.";
+                info[infoCount++] = "Your eyes are sensitive to infrared light.";
             }
             if (Player.HasSeeInvisibility)
             {
-                info[i++] = "You can see invisible creatures.";
+                info[infoCount++] = "You can see invisible creatures.";
             }
             if (Player.HasFeatherFall)
             {
-                info[i++] = "You can fly.";
+                info[infoCount++] = "You can fly.";
             }
             if (Player.HasFreeAction)
             {
-                info[i++] = "You have free action.";
+                info[infoCount++] = "You have free action.";
             }
             if (Player.HasRegeneration)
             {
-                info[i++] = "You regenerate quickly.";
+                info[infoCount++] = "You regenerate quickly.";
             }
             if (Player.HasSlowDigestion)
             {
-                info[i++] = "Your appetite is small.";
+                info[infoCount++] = "Your appetite is small.";
             }
             if (Player.HasTelepathy)
             {
-                info[i++] = "You have ESP.";
+                info[infoCount++] = "You have ESP.";
             }
             if (Player.HasHoldLife)
             {
-                info[i++] = "You have a firm hold on your life force.";
+                info[infoCount++] = "You have a firm hold on your life force.";
             }
             if (Player.HasReflection)
             {
-                info[i++] = "You reflect arrows and bolts.";
+                info[infoCount++] = "You reflect arrows and bolts.";
             }
             if (Player.HasFireShield)
             {
-                info[i++] = "You are surrounded with a fiery aura.";
+                info[infoCount++] = "You are surrounded with a fiery aura.";
             }
             if (Player.HasLightningShield)
             {
-                info[i++] = "You are surrounded with electricity.";
+                info[infoCount++] = "You are surrounded with electricity.";
             }
             if (Player.HasAntiMagic)
             {
-                info[i++] = "You are surrounded by an anti-magic shell.";
+                info[infoCount++] = "You are surrounded by an anti-magic shell.";
             }
             if (Player.HasAntiTeleport)
             {
-                info[i++] = "You cannot teleport.";
+                info[infoCount++] = "You cannot teleport.";
             }
             if (Player.HasGlow)
             {
-                info[i++] = "You are carrying a permanent light.";
+                info[infoCount++] = "You are carrying a permanent light.";
             }
             if (Player.HasAcidImmunity)
             {
-                info[i++] = "You are completely immune to acid.";
+                info[infoCount++] = "You are completely immune to acid.";
             }
             else if (Player.HasAcidResistance && Player.TimedAcidResistance.TurnsRemaining != 0)
             {
-                info[i++] = "You resist acid exceptionally well.";
+                info[infoCount++] = "You resist acid exceptionally well.";
             }
             else if (Player.HasAcidResistance || Player.TimedAcidResistance.TurnsRemaining != 0)
             {
-                info[i++] = "You are resistant to acid.";
+                info[infoCount++] = "You are resistant to acid.";
             }
             if (Player.HasLightningImmunity)
             {
-                info[i++] = "You are completely immune to lightning.";
+                info[infoCount++] = "You are completely immune to lightning.";
             }
             else if (Player.HasLightningResistance && Player.TimedLightningResistance.TurnsRemaining != 0)
             {
-                info[i++] = "You resist lightning exceptionally well.";
+                info[infoCount++] = "You resist lightning exceptionally well.";
             }
             else if (Player.HasLightningResistance || Player.TimedLightningResistance.TurnsRemaining != 0)
             {
-                info[i++] = "You are resistant to lightning.";
+                info[infoCount++] = "You are resistant to lightning.";
             }
             if (Player.HasFireImmunity)
             {
-                info[i++] = "You are completely immune to fire.";
+                info[infoCount++] = "You are completely immune to fire.";
             }
             else if (Player.HasFireResistance && Player.TimedFireResistance.TurnsRemaining != 0)
             {
-                info[i++] = "You resist fire exceptionally well.";
+                info[infoCount++] = "You resist fire exceptionally well.";
             }
             else if (Player.HasFireResistance || Player.TimedFireResistance.TurnsRemaining != 0)
             {
-                info[i++] = "You are resistant to fire.";
+                info[infoCount++] = "You are resistant to fire.";
             }
             if (Player.HasColdImmunity)
             {
-                info[i++] = "You are completely immune to cold.";
+                info[infoCount++] = "You are completely immune to cold.";
             }
             else if (Player.HasColdResistance && Player.TimedColdResistance.TurnsRemaining != 0)
             {
-                info[i++] = "You resist cold exceptionally well.";
+                info[infoCount++] = "You resist cold exceptionally well.";
             }
             else if (Player.HasColdResistance || Player.TimedColdResistance.TurnsRemaining != 0)
             {
-                info[i++] = "You are resistant to cold.";
+                info[infoCount++] = "You are resistant to cold.";
             }
             if (Player.HasPoisonResistance && Player.TimedPoisonResistance.TurnsRemaining != 0)
             {
-                info[i++] = "You resist poison exceptionally well.";
+                info[infoCount++] = "You resist poison exceptionally well.";
             }
             else if (Player.HasPoisonResistance || Player.TimedPoisonResistance.TurnsRemaining != 0)
             {
-                info[i++] = "You are resistant to poison.";
+                info[infoCount++] = "You are resistant to poison.";
             }
             if (Player.HasLightResistance)
             {
-                info[i++] = "You are resistant to bright light.";
+                info[infoCount++] = "You are resistant to bright light.";
             }
             if (Player.HasDarkResistance)
             {
-                info[i++] = "You are resistant to darkness.";
+                info[infoCount++] = "You are resistant to darkness.";
             }
             if (Player.HasConfusionResistance)
             {
-                info[i++] = "You are resistant to confusion.";
+                info[infoCount++] = "You are resistant to confusion.";
             }
             if (Player.HasSoundResistance)
             {
-                info[i++] = "You are resistant to sonic attacks.";
+                info[infoCount++] = "You are resistant to sonic attacks.";
             }
             if (Player.HasDisenchantResistance)
             {
-                info[i++] = "You are resistant to disenchantment.";
+                info[infoCount++] = "You are resistant to disenchantment.";
             }
             if (Player.HasChaosResistance)
             {
-                info[i++] = "You are resistant to chaos.";
+                info[infoCount++] = "You are resistant to chaos.";
             }
             if (Player.HasShardResistance)
             {
-                info[i++] = "You are resistant to blasts of shards.";
+                info[infoCount++] = "You are resistant to blasts of shards.";
             }
             if (Player.HasNexusResistance)
             {
-                info[i++] = "You are resistant to nexus attacks.";
+                info[infoCount++] = "You are resistant to nexus attacks.";
             }
             if (Player.HasNetherResistance)
             {
-                info[i++] = "You are resistant to nether forces.";
+                info[infoCount++] = "You are resistant to nether forces.";
             }
             if (Player.HasFearResistance)
             {
-                info[i++] = "You are completely fearless.";
+                info[infoCount++] = "You are completely fearless.";
             }
             if (Player.HasBlindnessResistance)
             {
-                info[i++] = "Your eyes are resistant to blindness.";
+                info[infoCount++] = "Your eyes are resistant to blindness.";
             }
             if (Player.HasSustainStrength)
             {
-                info[i++] = "Your strength is sustained.";
+                info[infoCount++] = "Your strength is sustained.";
             }
             if (Player.HasSustainIntelligence)
             {
-                info[i++] = "Your intelligence is sustained.";
+                info[infoCount++] = "Your intelligence is sustained.";
             }
             if (Player.HasSustainWisdom)
             {
-                info[i++] = "Your wisdom is sustained.";
+                info[infoCount++] = "Your wisdom is sustained.";
             }
             if (Player.HasSustainConstitution)
             {
-                info[i++] = "Your constitution is sustained.";
+                info[infoCount++] = "Your constitution is sustained.";
             }
             if (Player.HasSustainDexterity)
             {
-                info[i++] = "Your dexterity is sustained.";
+                info[infoCount++] = "Your dexterity is sustained.";
             }
             if (Player.HasSustainCharisma)
             {
-                info[i++] = "Your charisma is sustained.";
+                info[infoCount++] = "Your charisma is sustained.";
             }
             if (inventoryCharacteristics.Str)
             {
-                info[i++] = "Your strength is affected by your equipment.";
+                info[infoCount++] = "Your strength is affected by your equipment.";
             }
             if (inventoryCharacteristics.Int)
             {
-                info[i++] = "Your intelligence is affected by your equipment.";
+                info[infoCount++] = "Your intelligence is affected by your equipment.";
             }
             if (inventoryCharacteristics.Wis)
             {
-                info[i++] = "Your wisdom is affected by your equipment.";
+                info[infoCount++] = "Your wisdom is affected by your equipment.";
             }
             if (inventoryCharacteristics.Dex)
             {
-                info[i++] = "Your dexterity is affected by your equipment.";
+                info[infoCount++] = "Your dexterity is affected by your equipment.";
             }
             if (inventoryCharacteristics.Con)
             {
-                info[i++] = "Your constitution is affected by your equipment.";
+                info[infoCount++] = "Your constitution is affected by your equipment.";
             }
             if (inventoryCharacteristics.Cha)
             {
-                info[i++] = "Your charisma is affected by your equipment.";
+                info[infoCount++] = "Your charisma is affected by your equipment.";
             }
             if (inventoryCharacteristics.Stealth)
             {
-                info[i++] = "Your stealth is affected by your equipment.";
+                info[infoCount++] = "Your stealth is affected by your equipment.";
             }
             if (inventoryCharacteristics.Search)
             {
-                info[i++] = "Your searching ability is affected by your equipment.";
+                info[infoCount++] = "Your searching ability is affected by your equipment.";
             }
             if (inventoryCharacteristics.Infra)
             {
-                info[i++] = "Your infravision is affected by your equipment.";
+                info[infoCount++] = "Your infravision is affected by your equipment.";
             }
             if (inventoryCharacteristics.Tunnel)
             {
-                info[i++] = "Your digging ability is affected by your equipment.";
+                info[infoCount++] = "Your digging ability is affected by your equipment.";
             }
             if (inventoryCharacteristics.Speed)
             {
-                info[i++] = "Your speed is affected by your equipment.";
+                info[infoCount++] = "Your speed is affected by your equipment.";
             }
             if (inventoryCharacteristics.Blows)
             {
-                info[i++] = "Your attack speed is affected by your equipment.";
+                info[infoCount++] = "Your attack speed is affected by your equipment.";
             }
-            oPtr = Player.Inventory[InventorySlot.MeleeWeapon];
-            oPtr.RefreshFlagBasedProperties();
-            if (oPtr.BaseItemCategory != null)
+            Item? meleeItem = GetInventoryItem(InventorySlot.MeleeWeapon);
+            if (meleeItem != null)
             {
-                if (oPtr.Characteristics.Blessed)
+                meleeItem.RefreshFlagBasedProperties();
+                if (meleeItem.Characteristics.Blessed)
                 {
-                    info[i++] = "Your weapon has been blessed by the gods.";
+                    info[infoCount++] = "Your weapon has been blessed by the gods.";
                 }
-                if (oPtr.Characteristics.Chaotic)
+                if (meleeItem.Characteristics.Chaotic)
                 {
-                    info[i++] = "Your weapon is branded with the Yellow Sign.";
+                    info[infoCount++] = "Your weapon is branded with the Yellow Sign.";
                 }
-                if (oPtr.Characteristics.Impact)
+                if (meleeItem.Characteristics.Impact)
                 {
-                    info[i++] = "The impact of your weapon can cause earthquakes.";
+                    info[infoCount++] = "The impact of your weapon can cause earthquakes.";
                 }
-                if (oPtr.Characteristics.Vorpal)
+                if (meleeItem.Characteristics.Vorpal)
                 {
-                    info[i++] = "Your weapon is very sharp.";
+                    info[infoCount++] = "Your weapon is very sharp.";
                 }
-                if (oPtr.Characteristics.Vampiric)
+                if (meleeItem.Characteristics.Vampiric)
                 {
-                    info[i++] = "Your weapon drains life from your foes.";
+                    info[infoCount++] = "Your weapon drains life from your foes.";
                 }
-                if (oPtr.Characteristics.BrandAcid)
+                if (meleeItem.Characteristics.BrandAcid)
                 {
-                    info[i++] = "Your weapon melts your foes.";
+                    info[infoCount++] = "Your weapon melts your foes.";
                 }
-                if (oPtr.Characteristics.BrandElec)
+                if (meleeItem.Characteristics.BrandElec)
                 {
-                    info[i++] = "Your weapon shocks your foes.";
+                    info[infoCount++] = "Your weapon shocks your foes.";
                 }
-                if (oPtr.Characteristics.BrandFire)
+                if (meleeItem.Characteristics.BrandFire)
                 {
-                    info[i++] = "Your weapon burns your foes.";
+                    info[infoCount++] = "Your weapon burns your foes.";
                 }
-                if (oPtr.Characteristics.BrandCold)
+                if (meleeItem.Characteristics.BrandCold)
                 {
-                    info[i++] = "Your weapon freezes your foes.";
+                    info[infoCount++] = "Your weapon freezes your foes.";
                 }
-                if (oPtr.Characteristics.BrandPois)
+                if (meleeItem.Characteristics.BrandPois)
                 {
-                    info[i++] = "Your weapon poisons your foes.";
+                    info[infoCount++] = "Your weapon poisons your foes.";
                 }
-                if (oPtr.Characteristics.SlayAnimal)
+                if (meleeItem.Characteristics.SlayAnimal)
                 {
-                    info[i++] = "Your weapon strikes at animals with extra force.";
+                    info[infoCount++] = "Your weapon strikes at animals with extra force.";
                 }
-                if (oPtr.Characteristics.SlayEvil)
+                if (meleeItem.Characteristics.SlayEvil)
                 {
-                    info[i++] = "Your weapon strikes at evil with extra force.";
+                    info[infoCount++] = "Your weapon strikes at evil with extra force.";
                 }
-                if (oPtr.Characteristics.SlayUndead)
+                if (meleeItem.Characteristics.SlayUndead)
                 {
-                    info[i++] = "Your weapon strikes at undead with holy wrath.";
+                    info[infoCount++] = "Your weapon strikes at undead with holy wrath.";
                 }
-                if (oPtr.Characteristics.SlayDemon)
+                if (meleeItem.Characteristics.SlayDemon)
                 {
-                    info[i++] = "Your weapon strikes at demons with holy wrath.";
+                    info[infoCount++] = "Your weapon strikes at demons with holy wrath.";
                 }
-                if (oPtr.Characteristics.SlayOrc)
+                if (meleeItem.Characteristics.SlayOrc)
                 {
-                    info[i++] = "Your weapon is especially deadly against orcs.";
+                    info[infoCount++] = "Your weapon is especially deadly against orcs.";
                 }
-                if (oPtr.Characteristics.SlayTroll)
+                if (meleeItem.Characteristics.SlayTroll)
                 {
-                    info[i++] = "Your weapon is especially deadly against trolls.";
+                    info[infoCount++] = "Your weapon is especially deadly against trolls.";
                 }
-                if (oPtr.Characteristics.SlayGiant)
+                if (meleeItem.Characteristics.SlayGiant)
                 {
-                    info[i++] = "Your weapon is especially deadly against giants.";
+                    info[infoCount++] = "Your weapon is especially deadly against giants.";
                 }
-                if (oPtr.Characteristics.SlayDragon)
+                if (meleeItem.Characteristics.SlayDragon)
                 {
-                    info[i++] = "Your weapon is especially deadly against dragons.";
+                    info[infoCount++] = "Your weapon is especially deadly against dragons.";
                 }
-                if (oPtr.Characteristics.KillDragon)
+                if (meleeItem.Characteristics.KillDragon)
                 {
-                    info[i++] = "Your weapon is a great bane of dragons.";
+                    info[infoCount++] = "Your weapon is a great bane of dragons.";
                 }
             }
             ScreenBuffer savedScreen = Screen.Clone();
-            for (k = 1; k < 24; k++)
+            for (int k = 1; k < 24; k++)
             {
                 Screen.PrintLine("", k, 13);
             }
             Screen.PrintLine("     Your Attributes:", 1, 15);
-            for (k = 2, j = 0; j < i; j++)
+            int row, infoIndex;
+            for (row = 2, infoIndex = 0; infoIndex < infoCount; infoIndex++)
             {
-                Screen.PrintLine(info[j], k++, 15);
-                if (k == 22 && j + 1 < i)
+                Screen.PrintLine(info[infoIndex], row++, 15);
+                if (row == 22 && infoIndex + 1 < infoCount)
                 {
-                    Screen.PrintLine("-- more --", k, 15);
+                    Screen.PrintLine("-- more --", row, 15);
                     Inkey();
-                    for (; k > 2; k--)
+                    for (; row > 2; row--)
                     {
-                        Screen.PrintLine("", k, 15);
+                        Screen.PrintLine("", row, 15);
                     }
                 }
             }
-            Screen.PrintLine("[Press any key to continue]", k, 13);
+            Screen.PrintLine("[Press any key to continue]", row, 13);
             Inkey();
             Screen.Restore(savedScreen);
         }
@@ -6378,12 +6399,8 @@ namespace AngbandOS.Core
                 // No inventory slots are affected by acid or the slot is empty.
                 return false;
             }
-            Item oPtr = Player.Inventory[inventorySlot.WeightedRandom.Choose()];
+            Item? oPtr = GetInventoryItem(inventorySlot.WeightedRandom.Choose());
             if (oPtr == null)
-            {
-                return false;
-            }
-            if (oPtr.BaseItemCategory == null)
             {
                 return false;
             }
@@ -6434,8 +6451,8 @@ namespace AngbandOS.Core
             int cnt = 0;
             for (int i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
             {
-                Item oPtr = Player.Inventory[i];
-                if (oPtr.BaseItemCategory == null)
+                Item? oPtr = GetInventoryItem(i);
+                if (oPtr == null)
                 {
                     continue;
                 }
@@ -6735,8 +6752,8 @@ namespace AngbandOS.Core
             for (int i = 0; i < InventorySlot.PackCount; i++)
             {
                 // Find a set of non-artifact bolts in our inventory
-                Item item = Player.Inventory[i];
-                if (item.Category != ItemTypeEnum.Bolt)
+                Item? item = GetInventoryItem(i);
+                if (item == null || item.Category != ItemTypeEnum.Bolt)
                 {
                     continue;
                 }
@@ -6772,10 +6789,9 @@ namespace AngbandOS.Core
         /// <param name="brandType"> The type of brand to give the weapon </param>
         public void BrandWeapon(int brandType)
         {
-            Item item = Player.Inventory[InventorySlot.MeleeWeapon];
+            Item? item = GetInventoryItem(InventorySlot.MeleeWeapon);
             // We must have a non-rare, non-artifact weapon that isn't cursed
-            if (item.BaseItemCategory != null && !item.IsFixedArtifact() && !item.IsRare() &&
-                string.IsNullOrEmpty(item.RandartName) && !item.IsCursed())
+            if (item != null && !item.IsFixedArtifact() && !item.IsRare() && string.IsNullOrEmpty(item.RandartName) && !item.IsCursed())
             {
                 string act;
                 string itemName = item.Description(false, 0);
@@ -7132,13 +7148,13 @@ namespace AngbandOS.Core
         {
             int maxPhlogiston;
             LightsourceInventorySlot lightsourceInventorySlot = SingletonRepository.InventorySlots.Get<LightsourceInventorySlot>();
-            Item item = Player.Inventory[lightsourceInventorySlot.WeightedRandom.Choose()];
+            Item? item = GetInventoryItem(lightsourceInventorySlot.WeightedRandom.Choose());
             // Maximum phlogiston is the capacity of the light source
-            if (item.Category == ItemTypeEnum.Light && item.ItemSubCategory == LightType.Lantern)
+            if (item != null && item.Category == ItemTypeEnum.Light && item.ItemSubCategory == LightType.Lantern)
             {
                 maxPhlogiston = Constants.FuelLamp;
             }
-            else if (item.Category == ItemTypeEnum.Light && item.ItemSubCategory == LightType.Torch)
+            else if (item != null && item.Category == ItemTypeEnum.Light && item.ItemSubCategory == LightType.Torch)
             {
                 maxPhlogiston = Constants.FuelTorch;
             }
@@ -10642,8 +10658,8 @@ namespace AngbandOS.Core
                 return;
             }
 
-            Item lightSource = Player.Inventory[i.Value];
-            if (lightSource.BaseItemCategory == null)
+            Item? lightSource = GetInventoryItem(i.Value);
+            if (lightSource == null)
             {
                 MsgPrint("You are not wielding a light.");
                 return;
@@ -11478,8 +11494,8 @@ namespace AngbandOS.Core
             List<Item> packItems = new List<Item>();
             foreach (int index in packInventorySlot.InventorySlots)
             {
-                Item item = Player.Inventory[index];
-                if (item.BaseItemCategory != null)
+                Item? item = GetInventoryItem(index);
+                if (item != null)
                 {
                     packItems.Add(item);
                 }

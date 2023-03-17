@@ -37,8 +37,8 @@ namespace AngbandOS.Core.Mutations.RandomMutations
                 return;
             }
             int index = inventorySlot.WeightedRandom.Choose();
-            Item oPtr = saveGame.Player.Inventory[index];
-            if (oPtr.Category == ItemTypeEnum.Light)
+            Item? oPtr = saveGame.GetInventoryItem(index);
+            if (oPtr != null && oPtr.Category == ItemTypeEnum.Light)
             {
                 if ((oPtr.ItemSubCategory == LightType.Torch || oPtr.ItemSubCategory == LightType.Lantern) && oPtr.TypeSpecificValue > 0)
                 {
