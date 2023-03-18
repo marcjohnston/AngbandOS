@@ -17,7 +17,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             {
                 return;
             }
-            if (!saveGame.Quests.IsQuest(saveGame.CurrentDepth) && saveGame.CurrentDepth != 0)
+            if (!saveGame.IsQuest(saveGame.CurrentDepth) && saveGame.CurrentDepth != 0)
             {
                 saveGame.Earthquake(saveGame.Player.MapY, saveGame.Player.MapX, 10);
             }

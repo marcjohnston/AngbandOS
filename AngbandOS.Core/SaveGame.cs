@@ -69,7 +69,7 @@ namespace AngbandOS.Core
         public int CommandRepeat;
         public readonly Dungeon[] Dungeons;
         public readonly Patron[] PatronList;
-        public readonly QuestArray Quests;
+        public readonly List<Quest> Quests;
         public readonly Island Wilderness = new Island();
         public int AllocKindSize;
         public AllocationEntry[] AllocKindTable;
@@ -329,7 +329,7 @@ namespace AngbandOS.Core
             Configure(configuration);
 
             _autoNavigator = new AutoNavigator(this);
-            Quests = new QuestArray(this);
+            Quests = new List<Quest>();
             Dungeons = Dungeon.NewDungeonList();
             PatronList = Patron.NewPatronList(this);
             InitializeAllocationTables();
@@ -1537,9 +1537,9 @@ namespace AngbandOS.Core
             {
                 number = 0;
             }
-            if (Quests.IsQuest(CurrentDepth) && rPtr.Guardian)
+            if (IsQuest(CurrentDepth) && rPtr.Guardian)
             {
-                qIdx = Quests.GetQuestNumber();
+                qIdx = GetQuestNumber();
                 Quests[qIdx].Killed++;
                 if (Quests[qIdx].Killed == Quests[qIdx].ToKill)
                 {
@@ -1596,7 +1596,7 @@ namespace AngbandOS.Core
                 return;
             }
             rPtr.Guardian = !rPtr.Guardian;
-            if (Quests.ActiveQuests == 0)
+            if (ActiveQuests == 0)
             {
                 Winner();
             }
@@ -1970,7 +1970,7 @@ namespace AngbandOS.Core
             {
                 Player.MaxDlv[CurDungeon.Index] = CurrentDepth;
             }
-            if (Quests.IsQuest(CurrentDepth))
+            if (IsQuest(CurrentDepth))
             {
                 if (CurDungeon.Tower)
                 {
@@ -2033,9 +2033,9 @@ namespace AngbandOS.Core
             {
                 return;
             }
-            if (Quests.IsQuest(CurrentDepth))
+            if (IsQuest(CurrentDepth))
             {
-                Quests.QuestDiscovery();
+                QuestDiscovery();
             }
             Level.MonsterLevel = Difficulty;
             Level.ObjectLevel = Difficulty;
@@ -2058,7 +2058,7 @@ namespace AngbandOS.Core
             }
             else
             {
-                if (Quests.IsQuest(CurrentDepth))
+                if (IsQuest(CurrentDepth))
                 {
                     PlayMusic(MusicTrack.QuestLevel);
                 }
@@ -5842,7 +5842,7 @@ namespace AngbandOS.Core
             {
                 Level.CaveSetFeat(Player.MapY, Player.MapX, "DownStair");
             }
-            else if (Quests.IsQuest(CurrentDepth) ||
+            else if (IsQuest(CurrentDepth) ||
                      CurrentDepth >= CurDungeon.MaxLevel)
             {
                 Level.CaveSetFeat(Player.MapY, Player.MapX,
@@ -6003,7 +6003,7 @@ namespace AngbandOS.Core
                 CurrentDepth++;
                 NewLevelFlag = true;
             }
-            else if (Quests.IsQuest(CurrentDepth) ||
+            else if (IsQuest(CurrentDepth) ||
                      CurrentDepth >= CurDungeon.MaxLevel)
             {
                 MsgPrint(upDesc);
@@ -7498,7 +7498,7 @@ namespace AngbandOS.Core
             {
                 // The rumour describes a quest
                 Quests[index].Discovered = true;
-                rumor = Quests.DescribeQuest(index);
+                rumor = DescribeQuest(index);
             }
             else if (type == 'd')
             {
@@ -10223,7 +10223,7 @@ namespace AngbandOS.Core
                 for (int i = 0; i < stairLength; i++)
                 {
                     CurrentDepth++;
-                    if (Quests.IsQuest(CurrentDepth))
+                    if (IsQuest(CurrentDepth))
                     {
                         // Stop on the quest level
                         break;
@@ -10285,7 +10285,7 @@ namespace AngbandOS.Core
                 for (int i = 0; i < stairLength; i++)
                 {
                     CurrentDepth++;
-                    if (Quests.IsQuest(CurrentDepth))
+                    if (IsQuest(CurrentDepth))
                     {
                         break;
                     }
@@ -11167,9 +11167,9 @@ namespace AngbandOS.Core
             if (!feelingOnly)
             {
                 MsgPrint($"You are in {CurDungeon.Name}.");
-                if (Quests.IsQuest(CurrentDepth))
+                if (IsQuest(CurrentDepth))
                 {
-                    Quests.PrintQuestMessage();
+                    PrintQuestMessage();
                 }
             }
             // Special feeling overrides the normal two-part feeling
@@ -14202,7 +14202,7 @@ namespace AngbandOS.Core
                 return false;
             }
             Player.RaceAtBirth = Player.Race;
-            Quests.PlayerBirthQuests();
+            PlayerBirthQuests();
             MessageAdd(" ");
             MessageAdd("  ");
             MessageAdd("====================");
@@ -15807,7 +15807,7 @@ namespace AngbandOS.Core
                         {
                             cPtr.SetFeature("DownStair");
                         }
-                        else if (Quests.IsQuest(CurrentDepth) ||
+                        else if (IsQuest(CurrentDepth) ||
                                  CurrentDepth == CurDungeon.MaxLevel)
                         {
                             cPtr.SetFeature(CurDungeon.Tower ? "DownStair" : "UpStair");
@@ -16496,7 +16496,7 @@ namespace AngbandOS.Core
             {
                 destroyed = true;
             }
-            if (Quests.IsQuest(CurrentDepth))
+            if (IsQuest(CurrentDepth))
             {
                 destroyed = false;
             }
@@ -18010,9 +18010,9 @@ namespace AngbandOS.Core
             int i;
             int k;
             ResetGuardians();
-            if (Quests.IsQuest(CurrentDepth))
+            if (IsQuest(CurrentDepth))
             {
-                SingletonRepository.MonsterRaces[Quests.GetQuestMonster()].Guardian = true;
+                SingletonRepository.MonsterRaces[GetQuestMonster()].Guardian = true;
             }
             if (Program.Rng.PercentileRoll(4) && !CurDungeon.Tower)
             {
@@ -18037,10 +18037,10 @@ namespace AngbandOS.Core
             {
                 k = 2;
             }
-            if (Quests.IsQuest(CurrentDepth))
+            if (IsQuest(CurrentDepth))
             {
-                int rIdx = Quests.GetQuestMonster();
-                int qIdx = Quests.GetQuestNumber();
+                int rIdx = GetQuestMonster();
+                int qIdx = GetQuestNumber();
                 while (SingletonRepository.MonsterRaces[rIdx].CurNum < (Quests[qIdx].ToKill - Quests[qIdx].Killed))
                 {
                     Level.PutQuestMonster(Quests[qIdx].RIdx);
@@ -19993,6 +19993,303 @@ namespace AngbandOS.Core
                 SetInventoryItem(i, null);
             }
             NoticeReorderFlaggedAction.Set();
+        }
+
+        private const int _maxQuests = 50;
+
+        private readonly string[] _findQuest =
+        {
+                "You find the following inscription in the floor",
+                "You see a message inscribed in the wall",
+                "There is a sign saying",
+                "Something is writen on the staircase",
+                "You find a scroll with the following message"
+            };
+
+        public int ActiveQuests => Quests.Where(q => q.IsActive).Count();
+
+        public string DescribeQuest(int qIdx)
+        {
+            string buf;
+            MonsterRace rPtr = SingletonRepository.MonsterRaces[Quests[qIdx].RIdx];
+            string name = rPtr.Name;
+            int qNum = Quests[qIdx].ToKill;
+            string dunName = Dungeons[Quests[qIdx].Dungeon].Name;
+            int lev = Quests[qIdx].Level;
+            if (Quests[qIdx].Level == 0)
+            {
+                if (qNum == 1)
+                {
+                    buf = $"You have defeated {name} in {dunName}";
+                }
+                else
+                {
+                    string plural = name.PluraliseMonsterName();
+                    buf = $"You have defeated {qNum} {plural} in {dunName}";
+                }
+            }
+            else
+            {
+                if (Quests[qIdx].Discovered)
+                {
+                    if (qNum == 1)
+                    {
+                        buf = $"You must defeat {name} at lvl {lev} of {dunName}";
+                    }
+                    else
+                    {
+                        if (Quests[qIdx].ToKill - Quests[qIdx].Killed > 1)
+                        {
+                            string plural = name.PluraliseMonsterName();
+                            buf = $"You must defeat {qNum} {plural} at lvl {lev} of {dunName}";
+                        }
+                        else
+                        {
+                            buf = $"You must defeat 1 {name} at lvl {lev} of {dunName}";
+                        }
+                    }
+                }
+                else
+                {
+                    buf = $"You must defeat something at lvl {lev} of {dunName}";
+                }
+            }
+            return buf;
+        }
+
+        public int GetQuestMonster()
+        {
+            for (int i = 0; i < Quests.Count; i++)
+            {
+                if (Quests[i].Level == CurrentDepth &&
+                    Quests[i].Dungeon == CurDungeon.Index)
+                {
+                    return Quests[i].RIdx;
+                }
+            }
+            return 0;
+        }
+
+        public int GetQuestNumber()
+        {
+            for (int i = 0; i < Quests.Count; i++)
+            {
+                if (Quests[i].Level == CurrentDepth &&
+                    Quests[i].Dungeon == CurDungeon.Index)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        public bool IsQuest(int level)
+        {
+            // Town levels cannot be quest levels.
+            if (level == 0)
+            {
+                return false;
+            }
+            for (int i = 0; i < Quests.Count; i++)
+            {
+                if (Quests[i].Level == level && Quests[i].Dungeon == CurDungeon.Index)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void PlayerBirthQuests()
+        {
+            ResetUniqueOnlyGuardianStatus();
+            int index = 0;
+            Quests.Clear();
+            for (int i = 0; i < _maxQuests; i++)
+            {
+                Quests.Add(new Quest());
+            }
+            for (int i = 0; i < Constants.MaxCaves; i++)
+            {
+                if (Dungeons[i].FirstGuardian != "")
+                {
+                    Quests[index].Level = Dungeons[i].FirstLevel;
+                    Quests[index].RIdx = GetMonsterIndexFromName(Dungeons[i].FirstGuardian);
+                    SingletonRepository.MonsterRaces[Quests[index].RIdx].OnlyGuardian = true;
+                    Quests[index].Dungeon = i;
+                    Quests[index].ToKill = 1;
+                    Quests[index].Killed = 0;
+                    index++;
+                }
+                if (Dungeons[i].SecondGuardian != "")
+                {
+                    Quests[index].Level = Dungeons[i].SecondLevel;
+                    Quests[index].RIdx = GetMonsterIndexFromName(Dungeons[i].SecondGuardian);
+                    SingletonRepository.MonsterRaces[Quests[index].RIdx].OnlyGuardian = true;
+                    Quests[index].Dungeon = i;
+                    Quests[index].ToKill = 1;
+                    Quests[index].Killed = 0;
+                    index++;
+                }
+            }
+            for (int i = 0; i < 26; i++)
+            {
+                int j;
+                bool sameLevel;
+                do
+                {
+                    sameLevel = false;
+                    do
+                    {
+                        Quests[index].RIdx = GetRndQMonster(index);
+                    } while (Quests[index].RIdx == 0);
+                    Quests[index].Level = SingletonRepository.MonsterRaces[Quests[index].RIdx].Level;
+                    Quests[index].Level -= Program.Rng.RandomBetween(2, 3 + (Quests[index].Level / 6));
+                    for (j = 0; j < index; j++)
+                    {
+                        if (Quests[index].Level == Quests[j].Level)
+                        {
+                            sameLevel = true;
+                            break;
+                        }
+                    }
+                } while (sameLevel);
+                if (SingletonRepository.MonsterRaces[Quests[index].RIdx].Unique)
+                {
+                    SingletonRepository.MonsterRaces[Quests[index].RIdx].OnlyGuardian = true;
+                }
+                j = Program.Rng.RandomBetween(1, Constants.MaxCaves) - 1;
+                while (Quests[index].Level <= Dungeons[j].Offset ||
+                       Quests[index].Level >
+                       Dungeons[j].MaxLevel + Dungeons[j].Offset ||
+                       Quests[index].Level == Dungeons[j].FirstLevel +
+                       Dungeons[j].Offset || Quests[index].Level ==
+                       Dungeons[j].SecondLevel + Dungeons[j].Offset)
+                {
+                    j = Program.Rng.RandomBetween(1, Constants.MaxCaves) - 1;
+                }
+                Quests[index].Dungeon = j;
+                Quests[index].Level -= Dungeons[j].Offset;
+                Quests[index].ToKill = GetNumberMonster(index);
+                Quests[index].Killed = 0;
+                index++;
+            }
+        }
+
+        public void PrintQuestMessage()
+        {
+            int qIdx = GetQuestNumber();
+            MonsterRace rPtr = SingletonRepository.MonsterRaces[Quests[qIdx].RIdx];
+            string name = rPtr.Name;
+            int qNum = Quests[qIdx].ToKill - Quests[qIdx].Killed;
+            if (Quests[qIdx].ToKill == 1)
+            {
+                MsgPrint($"You still have to kill {name}.");
+            }
+            else if (qNum > 1)
+            {
+                string plural = name.PluraliseMonsterName();
+                MsgPrint($"You still have to kill {qNum} {plural}.");
+            }
+            else
+            {
+                MsgPrint($"You still have to kill 1 {name}.");
+            }
+        }
+
+        public void QuestDiscovery()
+        {
+            int qIdx = GetQuestNumber();
+            MonsterRace rPtr = SingletonRepository.MonsterRaces[Quests[qIdx].RIdx];
+            string name = rPtr.Name;
+            int qNum = Quests[qIdx].ToKill;
+            MsgPrint(_findQuest[Program.Rng.RandomBetween(0, 4)]);
+            MsgPrint(null);
+            if (qNum == 1)
+            {
+                MsgPrint($"Beware, this level is protected by {name}!");
+            }
+            else
+            {
+                string plural = name.PluraliseMonsterName();
+                MsgPrint($"Be warned, this level is guarded by {qNum} {plural}!");
+            }
+            Quests[qIdx].Discovered = true;
+        }
+
+        private int GetNumberMonster(int i)
+        {
+            if (SingletonRepository.MonsterRaces[Quests[i].RIdx].Unique || SingletonRepository.MonsterRaces[Quests[i].RIdx].Multiply)
+            {
+                return 1;
+            }
+            int num = SingletonRepository.MonsterRaces[Quests[i].RIdx].Friends ? 10 : 5;
+            num += Program.Rng.RandomBetween(1, (Quests[i].Level / 3) + 5);
+            return num;
+        }
+
+        private int GetRndQMonster(int qIdx)
+        {
+            int rIdx;
+            int tmp = Program.Rng.RandomBetween(1, 10);
+            switch (tmp)
+            {
+                case 1:
+                    rIdx = Program.Rng.RandomBetween(181, 220);
+                    break;
+
+                case 2:
+                    rIdx = Program.Rng.RandomBetween(221, 260);
+                    break;
+
+                case 3:
+                    rIdx = Program.Rng.RandomBetween(261, 300);
+                    break;
+
+                case 4:
+                    rIdx = Program.Rng.RandomBetween(301, 340);
+                    break;
+
+                case 5:
+                    rIdx = Program.Rng.RandomBetween(341, 380);
+                    break;
+
+                case 6:
+                    rIdx = Program.Rng.RandomBetween(381, 420);
+                    break;
+
+                case 7:
+                    rIdx = Program.Rng.RandomBetween(421, 460);
+                    break;
+
+                case 8:
+                    rIdx = Program.Rng.RandomBetween(461, 500);
+                    break;
+
+                case 9:
+                    rIdx = Program.Rng.RandomBetween(501, 530);
+                    break;
+
+                case 10:
+                    rIdx = Program.Rng.RandomBetween(531, 560);
+                    break;
+
+                default:
+                    rIdx = Program.Rng.RandomBetween(87, 573);
+                    break;
+            }
+            if (SingletonRepository.MonsterRaces[rIdx].Multiply)
+            {
+                return 0;
+            }
+            for (int j = 2; j < qIdx; j++)
+            {
+                if (Quests[j].RIdx == rIdx)
+                {
+                    return 0;
+                }
+            }
+            return rIdx;
         }
     }
 }

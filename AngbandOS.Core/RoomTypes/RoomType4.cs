@@ -296,7 +296,7 @@
             if (saveGame.CurrentDepth <= 0)
             {
             }
-            if (saveGame.Quests.IsQuest(saveGame.CurrentDepth) || saveGame.CurrentDepth == saveGame.CurDungeon.MaxLevel)
+            if (saveGame.IsQuest(saveGame.CurrentDepth) || saveGame.CurrentDepth == saveGame.CurDungeon.MaxLevel)
             {
                 if (saveGame.CurDungeon.Tower)
                 {

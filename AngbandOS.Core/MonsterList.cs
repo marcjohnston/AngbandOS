@@ -1262,7 +1262,7 @@ namespace AngbandOS.Core
             }
             if (rPtr.OnlyGuardian || rPtr.Guardian)
             {
-                int qIdx = SaveGame.Quests.GetQuestNumber();
+                int qIdx = SaveGame.GetQuestNumber();
                 if (qIdx < 0)
                 {
                     return false;

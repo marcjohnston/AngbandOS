@@ -855,7 +855,7 @@ namespace AngbandOS.Core
             {
                 if (first[i] != -1)
                 {
-                    string line = SaveGame.Quests.DescribeQuest(first[i]);
+                    string line = SaveGame.DescribeQuest(first[i]);
                     SaveGame.Screen.Print(Colour.Blue, line, row, 0);
                     row++;
                 }

@@ -1041,7 +1041,7 @@ namespace AngbandOS.Core
                 return;
             }
             int trapType = Program.Rng.DieRoll(16);
-            if (SaveGame.Quests.IsQuest(SaveGame.CurrentDepth))
+            if (SaveGame.IsQuest(SaveGame.CurrentDepth))
             {
                 trapType = Program.Rng.DieRoll(15);
             }
