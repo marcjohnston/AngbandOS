@@ -261,10 +261,10 @@ namespace AngbandOS.Core.Stores
                 SaveGame.FullScreenOverlay = true;
                 SaveGame.NoticeStuff();
                 SaveGame.HandleStuff();
-                if (SaveGame.Player.Inventory[InventorySlot.PackCount].BaseItemCategory != null)
+                const int itemIndex = InventorySlot.PackCount;
+                Item? oPtr = SaveGame.GetInventoryItem(itemIndex);
+                if (oPtr != null)
                 {
-                    const int item = InventorySlot.PackCount;
-                    Item oPtr = SaveGame.Player.Inventory[item];
                     if (StoreType != StoreType.StoreHome)
                     {
                         SaveGame.MsgPrint("Your pack is so full that you flee the Stores...");
@@ -280,10 +280,10 @@ namespace AngbandOS.Core.Stores
                         SaveGame.MsgPrint("Your pack overflows!");
                         Item qPtr = oPtr.Clone();
                         string oName = qPtr.Description(true, 3);
-                        SaveGame.MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
-                        SaveGame.Player.InvenItemIncrease(item, -255);
-                        SaveGame.Player.InvenItemDescribe(item);
-                        SaveGame.Player.InvenItemOptimize(item);
+                        SaveGame.MsgPrint($"You drop {oName} ({itemIndex.IndexToLabel()}).");
+                        SaveGame.Player.InvenItemIncrease(itemIndex, -255);
+                        SaveGame.Player.InvenItemDescribe(itemIndex);
+                        SaveGame.Player.InvenItemOptimize(itemIndex);
                         SaveGame.HandleStuff();
                         int itemPos = HomeCarry(qPtr);
                         if (itemPos >= 0)
@@ -1001,7 +1001,11 @@ namespace AngbandOS.Core.Stores
                     return;
                 }
             }
-            Item oPtr = item >= 0 ? SaveGame.Player.Inventory[item] : SaveGame.Level.Items[0 - item];
+            Item? oPtr = item >= 0 ? SaveGame.GetInventoryItem(item) : SaveGame.Level.Items[0 - item];
+            if (oPtr == null)
+            {
+                return;
+            }
             if (item >= InventorySlot.MeleeWeapon && oPtr.IsCursed())
             {
                 SaveGame.MsgPrint("Hmmm, it seems to be cursed.");
@@ -1397,7 +1401,11 @@ namespace AngbandOS.Core.Stores
                 return;
             }
             // Check each book
-            Item item = itemIndex >= 0 ? SaveGame.Player.Inventory[itemIndex] : SaveGame.Level.Items[0 - itemIndex];
+            Item? item = itemIndex >= 0 ? SaveGame.GetInventoryItem(itemIndex) : SaveGame.Level.Items[0 - itemIndex];
+            if (item == null)
+            {
+                return;
+            }
             int itemSubCategory = item.ItemSubCategory;
             bool useSetTwo = item.Category == SaveGame.Player.SecondaryRealm.SpellBookItemCategory;
             SaveGame.HandleStuff();
@@ -1829,7 +1837,12 @@ namespace AngbandOS.Core.Stores
                         SaveGame.MsgPrint(BoughtMessage(oName, price));
                         jPtr.Inscription = "";
                         itemNew = SaveGame.Player.InvenCarry(jPtr, false);
-                        oName = SaveGame.Player.Inventory[itemNew].Description(true, 3);
+                        Item? newItemInInventory = SaveGame.GetInventoryItem(itemNew);
+                        if (newItemInInventory == null)
+                        {
+                            return; // TODO: This should never be.
+                        }
+                        oName = newItemInInventory.Description(true, 3);
                         SaveGame.MsgPrint($"You have {oName} ({itemNew.IndexToLabel()}).");
                         SaveGame.HandleStuff();
                         i = _inventory.Count;
@@ -1878,7 +1891,12 @@ namespace AngbandOS.Core.Stores
             else
             {
                 itemNew = SaveGame.Player.InvenCarry(jPtr, false);
-                oName = SaveGame.Player.Inventory[itemNew].Description(true, 3);
+                Item? newItemInInventory = SaveGame.GetInventoryItem(itemNew);
+                if (newItemInInventory == null)
+                {
+                    return; // TODO: This should never be.
+                }
+                oName = newItemInInventory.Description(true, 3);
                 SaveGame.MsgPrint($"You have {oName} ({itemNew.IndexToLabel()}).");
                 SaveGame.HandleStuff();
                 i = _inventory.Count;
@@ -1937,7 +1955,11 @@ namespace AngbandOS.Core.Stores
                 }
                 return;
             }
-            Item oPtr = item >= 0 ? SaveGame.Player.Inventory[item] : SaveGame.Level.Items[0 - item];
+            Item? oPtr = item >= 0 ? SaveGame.GetInventoryItem(item) : SaveGame.Level.Items[0 - item];
+            if (oPtr == null)
+            {
+                return;
+            }
             if (item >= InventorySlot.MeleeWeapon && oPtr.IsCursed())
             {
                 SaveGame.MsgPrint("Hmmm, it seems to be cursed.");

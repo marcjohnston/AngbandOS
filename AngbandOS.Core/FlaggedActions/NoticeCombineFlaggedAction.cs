@@ -21,7 +21,7 @@
                             {
                                 flag = true;
                                 jPtr.Absorb(oPtr);
-                                SaveGame.Player._invenCnt--;
+                                SaveGame._invenCnt--;
                                 int k;
                                 for (k = i; k < InventorySlot.PackCount; k++)
                                 {

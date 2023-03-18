@@ -111,6 +111,7 @@ namespace AngbandOS.Core
 
         public bool IsQuest(int level)
         {
+            // Town levels cannot be quest levels.
             if (level == 0)
             {
                 return false;

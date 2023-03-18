@@ -3,13 +3,6 @@ namespace AngbandOS.Core
     [Serializable]
     internal class Player
     {
-        /// <summary>
-        /// The players inventory.  GET IS DEPRECATED; use SaveGame.GetInventoryItem.
-        /// </summary>
-        public readonly Item[] Inventory;
-
-        public int _invenCnt;
-
         public readonly AbilityScore[] AbilityScores = new AbilityScore[6];
         public readonly Genome Dna;
         public readonly string[] History = new string[4];
@@ -276,13 +269,6 @@ namespace AngbandOS.Core
                 AbilityScores[i] = new AbilityScore();
             }
             WeightCarried = 0;
-
-            Inventory = new Item[InventorySlot.Total];
-            for (int i = 0; i < InventorySlot.Total; i++)
-            {
-                Inventory[i] = new Item(SaveGame); // No ItemType here // TODO: Convert to NULL
-            }
-            _invenCnt = 0;
 
             foreach (KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.SingletonRepository.FixedArtifacts)
             {
@@ -1660,7 +1646,7 @@ namespace AngbandOS.Core
                     }
                 }
             }
-            if (_invenCnt > InventorySlot.PackCount)
+            if (SaveGame._invenCnt > InventorySlot.PackCount)
             {
                 return -1;
             }
@@ -1703,7 +1689,7 @@ namespace AngbandOS.Core
             oPtr.NextInStack = 0;
             oPtr.HoldingMonsterIndex = 0;
             SaveGame.Player.WeightCarried += oPtr.Count * oPtr.Weight;
-            _invenCnt++;
+            SaveGame._invenCnt++;
             SaveGame.UpdateBonusesFlaggedAction.Set();
             SaveGame.NoticeCombineAndReorderFlaggedAction.Set();
             return i;
@@ -1711,7 +1697,7 @@ namespace AngbandOS.Core
 
         public bool InvenCarryOkay(Item oPtr)
         {
-            if (_invenCnt < InventorySlot.PackCount)
+            if (SaveGame._invenCnt < InventorySlot.PackCount)
             {
                 return true;
             }
@@ -1860,7 +1846,7 @@ namespace AngbandOS.Core
             if (item < InventorySlot.MeleeWeapon)
             {
                 int i;
-                _invenCnt--;
+                SaveGame._invenCnt--;
                 for (i = item; i < InventorySlot.PackCount; i++)
                 {
                     SaveGame.SetInventoryItem(i, SaveGame.GetInventoryItem(i + 1));

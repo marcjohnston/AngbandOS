@@ -1,15 +1,12 @@
-﻿using System;
-using System.Net.Http.Headers;
-using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text.Json;
 
 namespace AngbandOS.Core
 {
     [Serializable]
     internal class SaveGame
     {
+        public const int OneInChanceUpStairsReturnsToTownLevel = 5;
         public FlaggedAction RedrawMapFlaggedAction { get; }
         public FlaggedAction RedrawEquippyFlaggedAction { get; }
         public FlaggedAction RedrawTitleFlaggedAction { get; }
@@ -261,21 +258,11 @@ namespace AngbandOS.Core
         /// <returns></returns>
         public Item? GetInventoryItem(int index)
         {
-            Item? item = Player.Inventory[index];
-            if (item.BaseItemCategory == null)
-            {
-                return null;
-            }
-            return item;
+            return Inventory[index];
         }
         public void SetInventoryItem(int index, Item? item)
         {
-            // TODO: Assigning a new Item should go away once Inventory accepts nulls
-            if (item == null)
-            {
-                item = new Item(this);
-            }
-            Player.Inventory[index] = item;
+            Inventory[index] = item;
         }
 
         /// <summary>
@@ -7198,10 +7185,10 @@ namespace AngbandOS.Core
             }
 
             // Choose an item from the slot.
-            Item item = Player.Inventory[inventorySlot.WeightedRandom.Choose()];
+            Item? item = GetInventoryItem(inventorySlot.WeightedRandom.Choose());
 
             // If we're not wearing armour then nothing can happen
-            if (item.BaseItemCategory == null)
+            if (item == null)
             {
                 return false;
             }
@@ -7238,9 +7225,9 @@ namespace AngbandOS.Core
         /// <returns> True if the player was carrying a weapon, false if not </returns>
         public bool CurseWeapon()
         {
-            Item item = Player.Inventory[InventorySlot.MeleeWeapon];
+            Item? item = GetInventoryItem(InventorySlot.MeleeWeapon);
             // If we don't have a weapon then nothing happens
-            if (item.BaseItemCategory == null)
+            if (item == null)
             {
                 return false;
             }
@@ -7542,8 +7529,8 @@ namespace AngbandOS.Core
             // Loop through the inventory
             for (int i = 0; i < InventorySlot.PackCount; i++)
             {
-                Item item = Player.Inventory[i];
-                if (item.BaseItemCategory == null)
+                Item? item = GetInventoryItem(i);
+                if (item == null)
                 {
                     continue;
                 }
@@ -8023,8 +8010,12 @@ namespace AngbandOS.Core
                     {
                         // Actually pick up the item
                         int slot = Player.InvenCarry(item, false);
-                        item = Player.Inventory[slot];
-                        itemName = item.Description(true, 3);
+                        Item? inventoryItem = GetInventoryItem(slot);
+                        if (inventoryItem == null)
+                        {
+                            throw new Exception("Picked up item should have been found."); // TODO: Clean this up
+                        }
+                        itemName = inventoryItem.Description(true, 3);
                         MsgPrint($"You have {itemName} ({slot.IndexToLabel()}).");
                         Level.DeleteObjectIdx(thisItemIndex);
                     }
@@ -8106,8 +8097,13 @@ namespace AngbandOS.Core
                 MsgPrint(monster.IsVisible ? $"You are too afraid to attack {monsterName}!" : "There is something scary in your way!");
                 return;
             }
-            Item item = Player.Inventory[InventorySlot.MeleeWeapon];
-            int bonus = Player.AttackBonus + item.BonusToHit;
+            int bonus = Player.AttackBonus;
+            bool chaosEffect = false;
+            Item? meleeItem = GetInventoryItem(InventorySlot.MeleeWeapon);
+            if (meleeItem != null)
+            {
+                bonus += meleeItem.BonusToHit;
+            }
             int chance = Player.SkillMelee + (bonus * Constants.BthPlusAdj);
             // Attacking uses a full turn
             EnergyUse = 100;
@@ -8139,24 +8135,26 @@ namespace AngbandOS.Core
                     }
                     // Default to 1 damage for an unarmed hit
                     int totalDamage = 1;
-                    // Get our weapon's flags to see if we need to do anything special
-                    item.RefreshFlagBasedProperties();
-                    bool chaosEffect = item.Characteristics.Chaotic && Program.Rng.DieRoll(2) == 1;
-                    if (item.Characteristics.Vampiric || (chaosEffect && Program.Rng.DieRoll(5) < 3))
+
+                    if (meleeItem != null)
                     {
-                        // Vampiric overrides chaotic
-                        chaosEffect = false;
-                        if (!(race.Undead || race.Nonliving))
+                        // Get our weapon's flags to see if we need to do anything special
+                        meleeItem.RefreshFlagBasedProperties();
+                        chaosEffect = meleeItem.Characteristics.Chaotic && Program.Rng.DieRoll(2) == 1;
+                        if (meleeItem.Characteristics.Vampiric || (chaosEffect && Program.Rng.DieRoll(5) < 3))
                         {
-                            drainResult = monster.Health;
-                        }
-                        else
-                        {
-                            drainResult = 0;
+                            // Vampiric overrides chaotic
+                            chaosEffect = false;
+                            if (!(race.Undead || race.Nonliving))
+                            {
+                                drainResult = monster.Health;
+                            }
+                            else
+                            {
+                                drainResult = 0;
+                            }
                         }
                     }
-                    // Vorpal weapons have a chance of a deep cut
-                    bool vorpalCut = item.Characteristics.Vorpal && Program.Rng.DieRoll(item.FixedArtifactIndex == FixedArtifactId.SwordVorpalBlade ? 3 : 6) == 1;
                     // If we're a martial artist then we have special attacks
                     if ((Player.BaseCharacterClass.ID == CharacterClass.Monk || Player.BaseCharacterClass.ID == CharacterClass.Mystic) && MartialArtistEmptyHands())
                     {
@@ -8272,11 +8270,11 @@ namespace AngbandOS.Core
                         }
                     }
                     // We have a weapon
-                    else if (item.BaseItemCategory != null)
+                    else if (meleeItem != null)
                     {
                         // Roll damage for the weapon
-                        totalDamage = Program.Rng.DiceRoll(item.DamageDice, item.DamageDiceSides);
-                        totalDamage = item.AdjustDamageForMonsterType(totalDamage, monster);
+                        totalDamage = Program.Rng.DiceRoll(meleeItem.DamageDice, meleeItem.DamageDiceSides);
+                        totalDamage = meleeItem.AdjustDamageForMonsterType(totalDamage, monster);
                         // Extra damage for backstabbing
                         if (backstab)
                         {
@@ -8287,26 +8285,27 @@ namespace AngbandOS.Core
                             totalDamage = 3 * totalDamage / 2;
                         }
                         // We might need to do an earthquake
-                        if ((Player.HasQuakeWeapon && (totalDamage > 50 || Program.Rng.DieRoll(7) == 1)) ||
-                            (chaosEffect && Program.Rng.DieRoll(250) == 1))
+                        if ((Player.HasQuakeWeapon && (totalDamage > 50 || Program.Rng.DieRoll(7) == 1)) || (chaosEffect && Program.Rng.DieRoll(250) == 1))
                         {
                             doQuake = true;
                             chaosEffect = false;
                         }
                         // Check if we did a critical
-                        totalDamage = PlayerCriticalMelee(item.Weight, item.BonusToHit, totalDamage);
+                        totalDamage = PlayerCriticalMelee(meleeItem.Weight, meleeItem.BonusToHit, totalDamage);
+                        // Vorpal weapons have a chance of a deep cut
+                        bool vorpalCut = meleeItem.Characteristics.Vorpal && Program.Rng.DieRoll(meleeItem.FixedArtifactIndex == FixedArtifactId.SwordVorpalBlade ? 3 : 6) == 1;
                         // If we did a vorpal cut, do extra damage
                         if (vorpalCut)
                         {
                             int stepK = totalDamage;
-                            MsgPrint(item.FixedArtifactIndex == FixedArtifactId.SwordVorpalBlade ? "Your Vorpal Blade goes snicker-snack!" : $"Your weapon cuts deep into {monsterName}!");
+                            MsgPrint(meleeItem.FixedArtifactIndex == FixedArtifactId.SwordVorpalBlade ? "Your Vorpal Blade goes snicker-snack!" : $"Your weapon cuts deep into {monsterName}!");
                             do
                             {
                                 totalDamage += stepK;
-                            } while (Program.Rng.DieRoll(item.FixedArtifactIndex == FixedArtifactId.SwordVorpalBlade ? 2 : 4) == 1);
+                            } while (Program.Rng.DieRoll(meleeItem.FixedArtifactIndex == FixedArtifactId.SwordVorpalBlade ? 2 : 4) == 1);
                         }
                         // Add bonus damage for the weapon
-                        totalDamage += item.BonusDamage;
+                        totalDamage += meleeItem.BonusDamage;
                     }
                     // Add bonus damage for strength etc.
                     totalDamage += Player.DamageBonus;
@@ -8615,7 +8614,11 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex];
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex];
+            if (item == null)
+            {
+                return;
+            }
             string itenName = item.Description(false, 0);
             // Set the ignore acid flag
             item.RandartItemCharacteristics.IgnoreAcid = true;
@@ -8650,7 +8653,11 @@ namespace AngbandOS.Core
                 }
             }
             // Get the item from the index
-            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex];
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex];
+            if (item == null)
+            {
+                return;
+            }    
             // Check if the item is activatable
             if (!Player.ItemMatchesFilter(item, new ActivatableItemFilter()))
             {
@@ -9016,8 +9023,8 @@ namespace AngbandOS.Core
             // Look for worthless items
             for (int i = InventorySlot.PackCount - 1; i >= 0; i--)
             {
-                Item item = Player.Inventory[i];
-                if (item.BaseItemCategory == null)
+                Item? item = GetInventoryItem(i);
+                if (item == null)
                 {
                     continue;
                 }
@@ -9058,7 +9065,11 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex]; // TODO: Remove access to Level
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex]; // TODO: Remove access to Level
+            if (item == null)
+            {
+                return;
+            }
             // If we have more than one we might not want to destroy all of them
             if (item.Count > 1)
             {
@@ -9276,7 +9287,11 @@ namespace AngbandOS.Core
                     return;
                 }
             }
-            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex];
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex];
+            if (item == null)
+            {
+                return;
+            }
             // Make sure the item is actually a rod
             if (!Player.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Rod)))
             {
@@ -9523,7 +9538,11 @@ namespace AngbandOS.Core
                     return;
                 }
             }
-            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex];
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex];
+            if (item == null)
+            {
+                return;
+            }
             // Make sure the item is a potion
             if (!Player.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Potion)))
             {
@@ -9614,7 +9633,11 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex];
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex];
+            if (item == null)
+            {
+                return;
+            }
             if (!GetDirectionWithAim(out int dir))
             {
                 return;
@@ -10276,7 +10299,7 @@ namespace AngbandOS.Core
             else
             {
                 // We're not in a tower, so going up decreases our level number
-                int j = Program.Rng.DieRoll(5);
+                int j = Program.Rng.DieRoll(OneInChanceUpStairsReturnsToTownLevel);
                 if (j > CurrentDepth)
                 {
                     j = 1;
@@ -10309,7 +10332,11 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex];
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex];
+            if (item == null)
+            {
+                return;
+            }
             // Can't drop a cursed item
             if (itemIndex >= InventorySlot.MeleeWeapon && item.IsCursed())
             {
@@ -10366,7 +10393,11 @@ namespace AngbandOS.Core
                     return;
                 }
             }
-            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex];
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex];
+            if (item == null)
+            {
+                return;
+            }
             // Make sure the item is actually a staff
             if (!Player.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Staff)))
             {
@@ -10585,7 +10616,11 @@ namespace AngbandOS.Core
                     return;
                 }
             }
-            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex];
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex];
+            if (item == null)
+            {
+                return;
+            }
             // Make sure the item is actually a scroll
             if (!Player.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Scroll)))
             {
@@ -10729,8 +10764,8 @@ namespace AngbandOS.Core
         public void DoCmdFire()
         {
             // Check that we're actually wielding a ranged weapon
-            Item missileWeapon = Player.Inventory[InventorySlot.RangedWeapon];
-            if (missileWeapon.Category == 0)
+            Item? missileWeapon = GetInventoryItem(InventorySlot.RangedWeapon);
+            if (missileWeapon == null || missileWeapon.Category == 0)
             {
                 MsgPrint("You have nothing to fire with.");
                 return;
@@ -10744,7 +10779,11 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item ammunitionStack = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex];
+            Item? ammunitionStack = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex];
+            if (ammunitionStack == null)
+            {
+                return;
+            }
             // Find out where we're aiming at
             if (!GetDirectionWithAim(out int dir))
             {
@@ -10917,7 +10956,11 @@ namespace AngbandOS.Core
                     return;
                 }
             }
-            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex];
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex];
+            if (item == null)
+            {
+                return;
+            }
             // Make sure the item is edible
             if (!Player.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Food)))
             {
@@ -11194,16 +11237,20 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex];
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex];
+            if (item == null)
+            {
+                return;
+            }
 
             // Find the inventory slot where the item is to be wielded.
             int slot = item.BaseItemCategory.WieldSlot;
 
-
             // Can't replace a cursed item
-            if (Player.Inventory[slot].IsCursed())
+            Item? wieldingItem = GetInventoryItem(slot);
+            if (wieldingItem != null && wieldingItem.IsCursed())
             {
-                string cursedItemName = Player.Inventory[slot].Description(false, 0);
+                string cursedItemName = wieldingItem.Description(false, 0);
                 MsgPrint($"The {cursedItemName} you are {Player.DescribeWieldLocation(slot)} appears to be cursed.");
                 return;
             }
@@ -11237,13 +11284,13 @@ namespace AngbandOS.Core
                 Level.FloorItemOptimize(0 - itemIndex);
             }
             // Take off the old item
-            item = Player.Inventory[slot];
-            if (item.BaseItemCategory != null)
+            Item? wasWieldingItem = GetInventoryItem(slot);
+            if (wasWieldingItem != null)
             {
                 Player.InvenTakeoff(slot, 255);
             }
             // Put the item into the wield slot
-            Player.Inventory[slot] = wornItem;
+            SetInventoryItem(slot, wornItem);
             // Add the weight of the item
             Player.WeightCarried += wornItem.Weight;
 
@@ -11312,7 +11359,11 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex]; // TODO: Remove access to Level
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex]; // TODO: Remove access to Level because GetItem for TakeOff doesn't support take off from floor
+            if (item == null)
+            {
+                return;
+            }
             // Can't take of cursed items
             if (item.IsCursed())
             {
@@ -11421,7 +11472,11 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex]; // TODO: Remove access to Level
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex]; 
+            if (item == null)
+            {
+                return;
+            }
             // Do we know anything about it?
             if (!item.IdentMental)
             {
@@ -11458,7 +11513,11 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex]; // TODO: Remove access to Level
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex]; // TODO: Remove access to Level
+            if (item == null)
+            {
+                return;
+            }
             // Check that the book is useable by the player
             if (!Player.ItemMatchesFilter(item, new UsableSpellBookItemFilter(this)))
             {
@@ -11511,16 +11570,16 @@ namespace AngbandOS.Core
             {
                 if (packItemIndex < packItems.Count)
                 {
-                    if (Player.Inventory[index] != packItems[packItemIndex])
+                    if (GetInventoryItem(index) != packItems[packItemIndex])
                     {
                         itemsWereReordered = true;
                     }
-                    Player.Inventory[index] = packItems[packItemIndex];
+                    SetInventoryItem(index, packItems[packItemIndex]);
                     packItemIndex++;
                 }
                 else
                 {
-                    Player.Inventory[index] = new Item(this);
+                    SetInventoryItem(index, null);
                 }
             }
             return itemsWereReordered;
@@ -11618,7 +11677,11 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item oPtr = item >= 0 ? Player.Inventory[item] : Level.Items[0 - item];
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : Level.Items[0 - item];
+            if (item == null)
+            {
+                return;
+            }
             int sval = oPtr.ItemSubCategory;
             bool useSetTwo = oPtr.Category == Player.SecondaryRealm?.SpellBookItemCategory;
             HandleStuff();
@@ -11988,7 +12051,11 @@ namespace AngbandOS.Core
                 }
             }
             // Get the item and check if it is really a wand
-            Item item = itemIndex >= 0 ? Player.Inventory[itemIndex] : Level.Items[0 - itemIndex];
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex];
+            if (item == null)
+            {
+                return;
+            }
             if (!Player.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Wand)))
             {
                 MsgPrint("That is not a wand!");
@@ -13646,10 +13713,23 @@ namespace AngbandOS.Core
 
         private int _prevSex;
 
+        /// <summary>
+        /// The players inventory.
+        /// </summary>
+        public Item?[] Inventory;
+        public int _invenCnt;
+
         public bool CharacterGeneration(ExPlayer ex)
         {
             SetBackground(BackgroundImage.Paper);
             PlayMusic(MusicTrack.Chargen);
+            Inventory = new Item[InventorySlot.Total];
+            for (int i = 0; i < InventorySlot.Total; i++)
+            {
+                Inventory[i] = null;
+            }
+            _invenCnt = 0;
+
             Player = new Player(this);
             if (PlayerBirth(ex))
             {
@@ -14778,7 +14858,7 @@ namespace AngbandOS.Core
                 Player.InvenCarry(item, false);
                 Item carried = item.Clone(1);
                 LightsourceInventorySlot lightsourceInventorySlot = SingletonRepository.InventorySlots.Get<LightsourceInventorySlot>();
-                Player.Inventory[lightsourceInventorySlot.WeightedRandom.Choose()] = carried;
+                SetInventoryItem(lightsourceInventorySlot.WeightedRandom.Choose(), carried);
                 Player.WeightCarried += carried.Weight;
             }
             Player.BaseCharacterClass.OutfitPlayer();
@@ -18769,7 +18849,7 @@ namespace AngbandOS.Core
             {
                 return false;
             }
-            return Player.Inventory[InventorySlot.MeleeWeapon].BaseItemCategory == null;
+            return GetInventoryItem(InventorySlot.MeleeWeapon) == null;
         }
 
         public bool MartialArtistHeavyArmour()
@@ -18785,8 +18865,8 @@ namespace AngbandOS.Core
                 {
                     foreach (int index in inventorySlot)
                     {
-                        Item item = Player.Inventory[index];
-                        if (item.BaseItemCategory != null)
+                        Item? item = GetInventoryItem(index);
+                        if (item != null)
                         {
                             martialArtistArmWgt += item.Weight;
                         }
@@ -19164,7 +19244,11 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item oPtr = item >= 0 ? Player.Inventory[item] : Level.Items[0 - item];
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : Level.Items[0 - item];
+            if (item == null)
+            {
+                return;
+            }
             bool changed = false;
             FullScreenOverlay = true;
             ScreenBuffer savedScreen = Screen.Clone();
@@ -19182,7 +19266,7 @@ namespace AngbandOS.Core
                     {
                         if (item >= 0)
                         {
-                            Player.Inventory[item] = qPtr;
+                            SetInventoryItem(item, qPtr);
                         }
                         else
                         {
@@ -19894,11 +19978,19 @@ namespace AngbandOS.Core
                 }
                 while (index.Contains(pos));
                 index.Add(pos);
-                items.Add(Player.Inventory[pos]);
+                Item? item = GetInventoryItem(pos);
+                if (item != null)
+                {
+                    items.Add(item);
+                }
             }
-            for (int i = 0; i < InventorySlot.PackCount; i++)
+            for (int i = 0; i < items.Count; i++)
             {
-                Player.Inventory[i] = items[i];
+                SetInventoryItem(i, items[i]);
+            }
+            for (int i = items.Count; i < InventorySlot.Pack; i++)
+            {
+                SetInventoryItem(i, null);
             }
             NoticeReorderFlaggedAction.Set();
         }
