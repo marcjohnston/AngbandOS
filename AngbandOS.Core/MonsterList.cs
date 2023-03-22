@@ -351,7 +351,7 @@ namespace AngbandOS.Core
             SaveGame.Level.Grid[y][x].MonsterIndex = 0;
             for (int thisOIdx = mPtr.FirstHeldItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
             {
-                Item? oPtr = SaveGame.GetItem(thisOIdx);
+                Item? oPtr = SaveGame.GetLevelItem(thisOIdx);
                 nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
                 if (oPtr != null)
                 {
@@ -1130,7 +1130,7 @@ namespace AngbandOS.Core
             cPtr.MonsterIndex = i2;
             for (int thisOIdx = mPtr.FirstHeldItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
             {
-                Item? oPtr = SaveGame.GetItem(thisOIdx);
+                Item? oPtr = SaveGame.GetLevelItem(thisOIdx);
                 nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
                 if (oPtr != null)
                 {

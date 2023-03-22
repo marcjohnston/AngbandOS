@@ -176,7 +176,7 @@ namespace AngbandOS.Core
                 // If there's an item there we weren't previously aware of then we must stop moving
                 for (int itemIndex = tile.ItemIndex; itemIndex != 0; itemIndex = nextItemIndex)
                 {
-                    Item? item = SaveGame.GetItem(itemIndex);
+                    Item? item = SaveGame.GetLevelItem(itemIndex);
                     if (item != null && item.Marked)
                     {
                         return true;

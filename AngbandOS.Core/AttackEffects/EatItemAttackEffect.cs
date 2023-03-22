@@ -40,7 +40,7 @@ namespace AngbandOS.Core.AttackEffects
                     {
                         // Give the item to the thief so it can later drop it
                         Item stolenItem = item.Clone();
-                        saveGame.SetItem(nextObjectIndex, stolenItem);
+                        saveGame.SetLevelItem(nextObjectIndex, stolenItem);
                         stolenItem.Count = 1;
                         stolenItem.Marked = false;
                         stolenItem.HoldingMonsterIndex = monsterIndex;

@@ -32,7 +32,7 @@ namespace AngbandOS.Core.Projection
                 bool plural = false;
                 bool doKill = false;
                 string noteKill = null;
-                Item? oPtr = SaveGame.GetItem(thisOIdx);
+                Item? oPtr = SaveGame.GetLevelItem(thisOIdx);
                 nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
                 if (oPtr != null)
                 {

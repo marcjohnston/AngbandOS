@@ -21,7 +21,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             {
                 return;
             }
-            Item? oPtr = item >= 0 ? saveGame.GetInventoryItem(item) : saveGame.GetItem(0 - item);
+            Item? oPtr = item >= 0 ? saveGame.GetInventoryItem(item) : saveGame.GetLevelItem(0 - item);
 
             if (oPtr == null)
             {

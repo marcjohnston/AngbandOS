@@ -251,16 +251,16 @@ namespace AngbandOS.Core
         private int TunnN;
         private int WallN;
 
-        public readonly Item?[] Items = new Item[Constants.MaxOIdx];
+        public readonly Item?[] LevelItems = new Item[Constants.MaxOIdx];
 
-        public Item? GetItem(int index)
+        public Item? GetLevelItem(int index)
         {
-            return Items[index];
+            return LevelItems[index];
         }
 
-        public void SetItem(int index, Item? item)
+        public void SetLevelItem(int index, Item? item)
         {
-            Items[index] = item;
+            LevelItems[index] = item;
         }
 
         /// <summary>
@@ -1232,7 +1232,7 @@ namespace AngbandOS.Core
             {
                 for (currentItemIndex = tile.ItemIndex; currentItemIndex != 0; currentItemIndex = nextItemIndex)
                 {
-                    Item? oPtr = GetItem(currentItemIndex);
+                    Item? oPtr = GetLevelItem(currentItemIndex);
                     nextItemIndex = (oPtr == null ? 0 : oPtr.NextInStack);
                     if (oPtr != null && Player.ItemMatchesFilter(oPtr, itemFilter))
                     {
@@ -1374,7 +1374,7 @@ namespace AngbandOS.Core
                             {
                                 for (currentItemIndex = tile.ItemIndex; currentItemIndex != 0; currentItemIndex = nextItemIndex)
                                 {
-                                    Item? oPtr = GetItem(currentItemIndex);
+                                    Item? oPtr = GetLevelItem(currentItemIndex);
                                     nextItemIndex = (oPtr == null ? 0 : oPtr.NextInStack);
                                     if (oPtr != null && Player.ItemMatchesFilter(oPtr, itemFilter))
                                     {
@@ -1505,7 +1505,7 @@ namespace AngbandOS.Core
             }
             for (int thisOIdx = mPtr.FirstHeldItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
             {
-                Item? oPtr = GetItem(thisOIdx);
+                Item? oPtr = GetLevelItem(thisOIdx);
                 nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
                 if (oPtr == null)
                 {
@@ -2882,7 +2882,7 @@ namespace AngbandOS.Core
             Player.SenseInventory();
             for (int i = 1; i < Level.OMax; i++)
             {
-                Item? oPtr = GetItem(i);
+                Item? oPtr = GetLevelItem(i);
                 if (oPtr == null)
                 {
                     continue;
@@ -3012,7 +3012,7 @@ namespace AngbandOS.Core
 
         private bool Verify(string prompt, int item)
         {
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetItem(0 - item);
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetLevelItem(0 - item);
             if (oPtr == null)
             {
                 return false;
@@ -3198,7 +3198,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetItem(0 - item);
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetLevelItem(0 - item);
             if (oPtr == null)
             {
                 return;
@@ -3394,7 +3394,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetItem(0 - item);
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetLevelItem(0 - item);
             if (oPtr == null)
             {
                 return;
@@ -3454,7 +3454,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetItem(0 - item);
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetLevelItem(0 - item);
             if (oPtr == null)
             {
                 return;
@@ -3972,7 +3972,7 @@ namespace AngbandOS.Core
             bool detect = false;
             for (int i = 1; i < Level.OMax; i++)
             {
-                Item? oPtr = GetItem(i);
+                Item? oPtr = GetLevelItem(i);
                 if (oPtr == null)
                 {
                     continue;
@@ -4010,7 +4010,7 @@ namespace AngbandOS.Core
             bool detect = false;
             for (int i = 1; i < Level.OMax; i++)
             {
-                Item? oPtr = GetItem(i);
+                Item? oPtr = GetLevelItem(i);
                 if (oPtr == null)
                 {
                     continue;
@@ -4050,7 +4050,7 @@ namespace AngbandOS.Core
             bool detect = false;
             for (int i = 1; i < Level.OMax; i++)
             {
-                Item? oPtr = GetItem(i);
+                Item? oPtr = GetLevelItem(i);
                 if (oPtr == null)
                 {
                     continue;
@@ -4672,7 +4672,7 @@ namespace AngbandOS.Core
                 }
                 return false;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetItem(0 - item);
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetLevelItem(0 - item);
             if (oPtr == null)
             {
                 return false;
@@ -4795,7 +4795,7 @@ namespace AngbandOS.Core
                 }
                 return false;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetItem(0 - item);
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetLevelItem(0 - item);
             if (oPtr == null)
             {
                 return false;
@@ -4848,7 +4848,7 @@ namespace AngbandOS.Core
                 }
                 return false;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetItem(0 - item);
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetLevelItem(0 - item);
             if (oPtr == null)
             {
                 return false;
@@ -5097,7 +5097,7 @@ namespace AngbandOS.Core
                 }
                 return false;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetItem(0 - item);
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetLevelItem(0 - item);
             if (oPtr == null)
             {
                 return false;
@@ -7990,7 +7990,7 @@ namespace AngbandOS.Core
             int nextItemIndex;
             for (int thisItemIndex = tile.ItemIndex; thisItemIndex != 0; thisItemIndex = nextItemIndex)
             {
-                Item? item = GetItem(thisItemIndex);
+                Item? item = GetLevelItem(thisItemIndex);
                 nextItemIndex = (item == null ? 0 : item.NextInStack);
                 if (item != null)
                 {
@@ -8631,7 +8631,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -8670,7 +8670,7 @@ namespace AngbandOS.Core
                 }
             }
             // Get the item from the index
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -9082,7 +9082,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex); // TODO: Remove access to Level
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex); // TODO: Remove access to Level
             if (item == null)
             {
                 return;
@@ -9304,7 +9304,7 @@ namespace AngbandOS.Core
                     return;
                 }
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -9555,7 +9555,7 @@ namespace AngbandOS.Core
                     return;
                 }
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -9650,7 +9650,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -10349,7 +10349,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -10410,7 +10410,7 @@ namespace AngbandOS.Core
                     return;
                 }
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -10633,7 +10633,7 @@ namespace AngbandOS.Core
                     return;
                 }
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -10796,7 +10796,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? ammunitionStack = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
+            Item? ammunitionStack = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (ammunitionStack == null)
             {
                 return;
@@ -10973,7 +10973,7 @@ namespace AngbandOS.Core
                     return;
                 }
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -11254,7 +11254,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -11376,7 +11376,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex); // TODO: Remove access to Level because GetItem for TakeOff doesn't support take off from floor
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex); // TODO: Remove access to Level because GetItem for TakeOff doesn't support take off from floor
             if (item == null)
             {
                 return;
@@ -11489,7 +11489,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -11530,7 +11530,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex); // TODO: Remove access to Level
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex); // TODO: Remove access to Level
             if (item == null)
             {
                 return;
@@ -11694,7 +11694,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetItem(0 - item);
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetLevelItem(0 - item);
             if (item == null)
             {
                 return;
@@ -12068,7 +12068,7 @@ namespace AngbandOS.Core
                 }
             }
             // Get the item and check if it is really a wand
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -12212,7 +12212,7 @@ namespace AngbandOS.Core
                         // Check the items on the tile
                         for (int itemIndex = tile.ItemIndex; itemIndex != 0; itemIndex = nextItemIndex)
                         {
-                            Item? item = GetItem(itemIndex);
+                            Item? item = GetLevelItem(itemIndex);
                             nextItemIndex = (item == null ? 0 : item.NextInStack);
                             // If one of them is a chest, determine if it is trapped
                             if (item == null || item.Category != ItemTypeEnum.Chest)
@@ -12294,7 +12294,7 @@ namespace AngbandOS.Core
                     }
                 } while (tile.ItemIndex == 0);
             }
-            Item? item = GetItem(tile.ItemIndex);
+            Item? item = GetLevelItem(tile.ItemIndex);
             // Check the weight of the item
             if (item != null && item.Weight > maxWeight)
             {
@@ -15502,7 +15502,7 @@ namespace AngbandOS.Core
         {
             for (int j = 0; j < Constants.MaxOIdx; j++)
             {
-                SetItem(j, null);
+                SetLevelItem(j, null);
             }
 
             // Loop until we are able to build the level.  Keep track of the number of attempts.
@@ -18626,7 +18626,7 @@ namespace AngbandOS.Core
             }
             for (int thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
             {
-                Item? oPtr = GetItem(thisOIdx);
+                Item? oPtr = GetLevelItem(thisOIdx);
                 nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
                 if (oPtr != null && oPtr.Marked)
                 {
@@ -18733,7 +18733,7 @@ namespace AngbandOS.Core
                         s2 = "carrying ";
                         for (thisOIdx = mPtr.FirstHeldItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
                         {
-                            Item? oPtr = GetItem(thisOIdx);
+                            Item? oPtr = GetLevelItem(thisOIdx);
                             nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
                             if (oPtr != null)
                             {
@@ -18762,7 +18762,7 @@ namespace AngbandOS.Core
                 }
                 for (thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
                 {
-                    Item? oPtr = GetItem(thisOIdx);
+                    Item? oPtr = GetLevelItem(thisOIdx);
                     nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
                     if (oPtr != null && oPtr.Marked)
                     {
@@ -19269,7 +19269,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetItem(0 - item);
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetLevelItem(0 - item);
             if (item == null)
             {
                 return;
@@ -19295,7 +19295,7 @@ namespace AngbandOS.Core
                         }
                         else
                         {
-                            SetItem(0 - item, qPtr);
+                            SetLevelItem(0 - item, qPtr);
                         }
                         UpdateBonusesFlaggedAction.Set();
                         NoticeCombineAndReorderFlaggedAction.Set();

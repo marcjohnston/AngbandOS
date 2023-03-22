@@ -48,7 +48,7 @@ namespace AngbandOS.Core.Projection
             bool obvious = false;
             for (int thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
             {
-                Item? oPtr = SaveGame.GetItem(thisOIdx);
+                Item? oPtr = SaveGame.GetLevelItem(thisOIdx);
                 nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
                 if (oPtr != null)
                 {

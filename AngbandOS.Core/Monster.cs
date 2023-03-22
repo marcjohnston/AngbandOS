@@ -993,7 +993,7 @@ namespace AngbandOS.Core
                     // Check through the items in the tile we just entered
                     for (int thisItemIndex = tile.ItemIndex; thisItemIndex != 0; thisItemIndex = nextItemIndex)
                     {
-                        Item? item = saveGame.GetItem(thisItemIndex);
+                        Item? item = saveGame.GetLevelItem(thisItemIndex);
                         nextItemIndex = (item == null ? 0 : item.NextInStack);
                         // We ignore gold
                         if (item == null || item.Category == ItemTypeEnum.Gold)

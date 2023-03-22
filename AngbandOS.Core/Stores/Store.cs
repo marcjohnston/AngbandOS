@@ -1001,7 +1001,7 @@ namespace AngbandOS.Core.Stores
                     return;
                 }
             }
-            Item? oPtr = item >= 0 ? SaveGame.GetInventoryItem(item) : SaveGame.GetItem(0 - item);
+            Item? oPtr = item >= 0 ? SaveGame.GetInventoryItem(item) : SaveGame.GetLevelItem(0 - item);
             if (oPtr == null)
             {
                 return;
@@ -1401,7 +1401,7 @@ namespace AngbandOS.Core.Stores
                 return;
             }
             // Check each book
-            Item? item = itemIndex >= 0 ? SaveGame.GetInventoryItem(itemIndex) : SaveGame.GetItem(0 - itemIndex);
+            Item? item = itemIndex >= 0 ? SaveGame.GetInventoryItem(itemIndex) : SaveGame.GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -1955,7 +1955,7 @@ namespace AngbandOS.Core.Stores
                 }
                 return;
             }
-            Item? oPtr = item >= 0 ? SaveGame.GetInventoryItem(item) : SaveGame.GetItem(0 - item);
+            Item? oPtr = item >= 0 ? SaveGame.GetInventoryItem(item) : SaveGame.GetLevelItem(0 - item);
             if (oPtr == null)
             {
                 return;
