@@ -85,7 +85,7 @@ namespace AngbandOS.Core
         /// <summary>
         /// The index of the first item that is in this grid tile
         /// </summary>
-        public int ItemIndex;
+        public int ItemIndex; // TODO: Use a list of items
 
         /// <summary>
         /// The index of the monster that is in this grid tile

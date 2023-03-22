@@ -77,7 +77,9 @@
             get
             {
                 if (SaveGame?.LastInputReceived == null)
+                {
                     return null;
+                }
                 return SaveGame.LastInputReceived;
             }
         }

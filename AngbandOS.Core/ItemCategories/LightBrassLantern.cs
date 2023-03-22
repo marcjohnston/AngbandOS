@@ -58,7 +58,7 @@ namespace AngbandOS.Core.ItemCategories
             }
 
             // Get the item from the inventory or from the floor.
-            Item? fuelSource = itemIndex >= 0 ? saveGame.GetInventoryItem(itemIndex) : saveGame.Level.Items[0 - itemIndex];
+            Item? fuelSource = itemIndex >= 0 ? saveGame.GetInventoryItem(itemIndex) : saveGame.GetItem(0 - itemIndex);
 
             if (fuelSource == null)
             {

@@ -54,7 +54,7 @@ namespace AngbandOS.Core.ItemCategories
                 return;
             }
 
-            Item? fuelSource = itemIndex >= 0 ? saveGame.GetInventoryItem(itemIndex) : saveGame.Level.Items[0 - itemIndex];
+            Item? fuelSource = itemIndex >= 0 ? saveGame.GetInventoryItem(itemIndex) : saveGame.GetItem(0 - itemIndex);
             if (fuelSource == null)
             {
                 return;

@@ -176,12 +176,12 @@ namespace AngbandOS.Core
                 // If there's an item there we weren't previously aware of then we must stop moving
                 for (int itemIndex = tile.ItemIndex; itemIndex != 0; itemIndex = nextItemIndex)
                 {
-                    Item item = level.Items[itemIndex];
-                    nextItemIndex = item.NextInStack;
-                    if (item.Marked)
+                    Item? item = SaveGame.GetItem(itemIndex);
+                    if (item != null && item.Marked)
                     {
                         return true;
                     }
+                    nextItemIndex = item.NextInStack;
                 }
                 bool tileUnseen = true;
                 // If the tile is something we should not run past then we must stop moving

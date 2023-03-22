@@ -14,7 +14,6 @@ namespace AngbandOS.Core
         public const int MaxHgt = 126;
         public const int MaxWid = 198;
         public readonly GridTile[][] Grid = new GridTile[MaxHgt][];
-        public readonly Item[] Items = new Item[Constants.MaxOIdx];
         public readonly int[] KeypadDirectionXOffset = { 0, -1, 0, 1, -1, 0, 1, -1, 0, 1 };
         public readonly int[] KeypadDirectionYOffset = { 0, 1, 1, 1, 0, 0, 0, -1, -1, -1 };
         public readonly MonsterList Monsters;
@@ -72,11 +71,7 @@ namespace AngbandOS.Core
                     Grid[i][j] = new GridTile(saveGame);
                 }
             }
-            for (int j = 0; j < Constants.MaxOIdx; j++)
-            {
-                Items[j] = new Item(SaveGame); // No ItemType here
-            }
-            Monsters = new MonsterList(saveGame, this);
+            Monsters = new MonsterList(saveGame);
         }
 
         public void PanelBounds()
@@ -136,7 +131,11 @@ namespace AngbandOS.Core
             }
             for (int thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
             {
-                Item oPtr = Items[thisOIdx];
+                Item? oPtr = SaveGame.GetItem(thisOIdx);
+                if (oPtr == null)
+                {
+                    return true;
+                }
                 nextOIdx = oPtr.NextInStack;
                 if (!string.IsNullOrEmpty(oPtr.RandartName) || oPtr.IsFixedArtifact())
                 {
@@ -158,12 +157,12 @@ namespace AngbandOS.Core
             int nextOIdx;
             for (int objectItemIndex = cPtr.ItemIndex; objectItemIndex != 0; objectItemIndex = nextOIdx)
             {
-                Item oPtr = Items[objectItemIndex];
-                nextOIdx = oPtr.NextInStack;
-                if (oPtr.Category == ItemTypeEnum.Chest)
+                Item? oPtr = SaveGame.GetItem(objectItemIndex);
+                if (oPtr != null && oPtr.Category == ItemTypeEnum.Chest)
                 {
                     return oPtr;
                 }
+                nextOIdx = oPtr.NextInStack;
             }
             return null;
         }
@@ -183,12 +182,12 @@ namespace AngbandOS.Core
                 int curDis = 5 * (20 - cnt);
                 for (i = 1; i < OMax; i++)
                 {
-                    Item oPtr = Items[i];
-                    ItemClass? kPtr = oPtr.BaseItemCategory;
-                    if (oPtr.BaseItemCategory == null)
+                    Item? oPtr = SaveGame.GetItem(i);
+                    if (oPtr == null)
                     {
                         continue;
                     }
+                    ItemClass? kPtr = oPtr.BaseItemCategory;
                     if (kPtr.Level > curLev)
                     {
                         continue;
@@ -229,13 +228,12 @@ namespace AngbandOS.Core
             }
             for (i = OMax - 1; i >= 1; i--)
             {
-                Item oPtr = Items[i];
-                if (oPtr.BaseItemCategory != null)
+                Item? oPtr = SaveGame.GetItem(i);
+                if (oPtr == null)
                 {
-                    continue;
+                    CompactObjectsAux(OMax - 1, i);
+                    OMax--;
                 }
-                CompactObjectsAux(OMax - 1, i);
-                OMax--;
             }
         }
 
@@ -274,9 +272,13 @@ namespace AngbandOS.Core
             GridTile cPtr = Grid[y][x];
             for (int thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
             {
-                Item oPtr = Items[thisOIdx];
+                Item? oPtr = SaveGame.GetItem(thisOIdx);
+                if (oPtr == null)
+                {
+                    break;
+                }
                 nextOIdx = oPtr.NextInStack;
-                Items[thisOIdx] = new Item(SaveGame);
+                SaveGame.SetItem(thisOIdx, null);
                 OCnt--;
             }
             cPtr.ItemIndex = 0;
@@ -286,14 +288,14 @@ namespace AngbandOS.Core
         public void DeleteObjectIdx(int oIdx)
         {
             ExciseObjectIdx(oIdx);
-            Item jPtr = Items[oIdx];
-            if (jPtr.HoldingMonsterIndex == 0)
+            Item? jPtr = SaveGame.GetItem(oIdx);
+            if (jPtr != null && jPtr.HoldingMonsterIndex == 0)
             {
                 int y = jPtr.Y;
                 int x = jPtr.X;
                 RedrawSingleLocation(y, x);
             }
-            Items[oIdx] = new Item(SaveGame);
+            SaveGame.SetItem(oIdx, null);
             OCnt--;
         }
 
@@ -459,12 +461,12 @@ namespace AngbandOS.Core
                     int k = 0;
                     for (thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
                     {
-                        Item oPtr = Items[thisOIdx];
-                        nextOIdx = oPtr.NextInStack;
-                        if (oPtr.CanAbsorb(jPtr))
+                        Item? oPtr = SaveGame.GetItem(thisOIdx);
+                        if (oPtr != null && oPtr.CanAbsorb(jPtr))
                         {
                             comb = true;
                         }
+                        nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
                         k++;
                     }
                     if (!comb)
@@ -528,9 +530,9 @@ namespace AngbandOS.Core
             cPtr = Grid[by][bx];
             for (thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
             {
-                Item oPtr = Items[thisOIdx];
-                nextOIdx = oPtr.NextInStack;
-                if (oPtr.CanAbsorb(jPtr))
+                Item? oPtr = SaveGame.GetItem(thisOIdx);
+                nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
+                if (oPtr != null && oPtr.CanAbsorb(jPtr))
                 {
                     oPtr.Absorb(jPtr);
                     done = true;
@@ -550,12 +552,16 @@ namespace AngbandOS.Core
             }
             if (!done)
             {
-                Items[oIdx] = jPtr.Clone();
-                jPtr = Items[oIdx];
-                jPtr.Y = by;
-                jPtr.X = bx;
-                jPtr.HoldingMonsterIndex = 0;
-                jPtr.NextInStack = cPtr.ItemIndex;
+                SaveGame.SetItem(oIdx, jPtr.Clone());
+                Item? oPtr = SaveGame.GetItem(oIdx);
+                if (oPtr == null)
+                {
+                    throw new Exception("oPtr is null ... Shouldn't happen");
+                }
+                oPtr.Y = by;
+                oPtr.X = bx;
+                oPtr.HoldingMonsterIndex = 0;
+                oPtr.NextInStack = cPtr.ItemIndex;
                 cPtr.ItemIndex = oIdx;
             }
             NoteSpot(by, bx);
@@ -571,86 +577,124 @@ namespace AngbandOS.Core
         {
             int thisOIdx, nextOIdx;
             int prevOIdx = 0;
-            Item jPtr = Items[oIdx];
-            if (jPtr.HoldingMonsterIndex != 0)
+
+            // Retrieve the object to excise.
+            Item? jPtr = SaveGame.GetItem(oIdx);
+            if (jPtr != null)
             {
-                Monster mPtr = Monsters[jPtr.HoldingMonsterIndex];
-                for (thisOIdx = mPtr.FirstHeldItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
+                // Check to see if the object is being held by a monster.
+                if (jPtr.HoldingMonsterIndex != 0)
                 {
-                    Item oPtr = Items[thisOIdx];
-                    nextOIdx = oPtr.NextInStack;
-                    if (thisOIdx == oIdx)
+                    // It is.  Get the monster.
+                    Monster mPtr = Monsters[jPtr.HoldingMonsterIndex];
+
+                    // Scan the items that the monster is holding.
+                    for (thisOIdx = mPtr.FirstHeldItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
                     {
-                        if (prevOIdx == 0)
+                        // Get the object the monster is holding.
+                        Item? oPtr = SaveGame.GetItem(thisOIdx);
+
+                        // Get the next item that the monster is holding.
+                        nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
+
+                        // Check to see if the monster item is the item we want to excise.
+                        if (oPtr != null && thisOIdx == oIdx)
                         {
-                            mPtr.FirstHeldItemIndex = nextOIdx;
+                            // Check to see if there was a previous item.
+                            if (prevOIdx == 0)
+                            {
+                                // There wasn't ... set the monster first held to be the next item.
+                                mPtr.FirstHeldItemIndex = nextOIdx;
+                            }
+                            else
+                            {
+                                // There is a previous object ... set that object's next item to be next.
+                                Item? kPtr = SaveGame.GetItem(prevOIdx);
+                                if (kPtr == null)
+                                {
+                                    throw new Exception("Excise invalid previous item");
+                                }
+                                kPtr.NextInStack = nextOIdx;
+                            }
+                            oPtr.NextInStack = 0;
+                            break;
                         }
-                        else
-                        {
-                            Item kPtr = Items[prevOIdx];
-                            kPtr.NextInStack = nextOIdx;
-                        }
-                        oPtr.NextInStack = 0;
-                        break;
+
+                        // Track this pointer for the next round.
+                        prevOIdx = thisOIdx;
                     }
-                    prevOIdx = thisOIdx;
                 }
-            }
-            else
-            {
-                int y = jPtr.Y;
-                int x = jPtr.X;
-                GridTile cPtr = Grid[y][x];
-                for (thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
+                else
                 {
-                    Item oPtr = Items[thisOIdx];
-                    nextOIdx = oPtr.NextInStack;
-                    if (thisOIdx == oIdx)
+                    // The object is not being held by a monster.
+                    int y = jPtr.Y;
+                    int x = jPtr.X;
+                    GridTile cPtr = Grid[y][x];
+                    for (thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
                     {
-                        if (prevOIdx == 0)
+                        Item? oPtr = SaveGame.GetItem(thisOIdx);
+                        nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
+                        if (oPtr != null && thisOIdx == oIdx)
                         {
-                            cPtr.ItemIndex = nextOIdx;
+                            if (prevOIdx == 0)
+                            {
+                                cPtr.ItemIndex = nextOIdx;
+                            }
+                            else
+                            {
+                                Item? kPtr = SaveGame.GetItem(prevOIdx);
+                                if (kPtr == null)
+                                {
+                                    throw new Exception("Excise invalid previous item");
+                                }
+                                kPtr.NextInStack = nextOIdx;
+                            }
+                            oPtr.NextInStack = 0;
+                            break;
                         }
-                        else
-                        {
-                            Item kPtr = Items[prevOIdx];
-                            kPtr.NextInStack = nextOIdx;
-                        }
-                        oPtr.NextInStack = 0;
-                        break;
+                        prevOIdx = thisOIdx;
                     }
-                    prevOIdx = thisOIdx;
                 }
             }
         }
 
         public void FloorItemDescribe(int item)
         {
-            Item oPtr = Items[item];
-            string oName = oPtr.Description(true, 3);
-            SaveGame.MsgPrint($"You see {oName}.");
+            Item? oPtr = SaveGame.GetItem(item);
+            if (oPtr == null)
+            {
+                SaveGame.MsgPrint($"You see (nothing).");
+            }
+            else
+            { 
+                string oName = oPtr.Description(true, 3);
+                SaveGame.MsgPrint($"You see {oName}.");
+            }
         }
 
         public void FloorItemIncrease(int item, int num)
         {
-            Item oPtr = Items[item];
-            num += oPtr.Count;
-            if (num > 255)
+            Item? oPtr = SaveGame.GetItem(item);
+            if (oPtr != null)
             {
-                num = 255;
+                num += oPtr.Count;
+                if (num > 255)
+                {
+                    num = 255;
+                }
+                else if (num < 0)
+                {
+                    num = 0;
+                }
+                num -= oPtr.Count;
+                oPtr.Count += num;
             }
-            else if (num < 0)
-            {
-                num = 0;
-            }
-            num -= oPtr.Count;
-            oPtr.Count += num;
         }
 
         public void FloorItemOptimize(int item)
         {
-            Item oPtr = Items[item];
-            if (oPtr.BaseItemCategory == null)
+            Item? oPtr = SaveGame.GetItem(item);
+            if (oPtr == null)
             {
                 return;
             }
@@ -974,9 +1018,12 @@ namespace AngbandOS.Core
             }
             for (int thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
             {
-                Item oPtr = Items[thisOIdx];
-                nextOIdx = oPtr.NextInStack;
-                oPtr.Marked = true;
+                Item? oPtr = SaveGame.GetItem(thisOIdx);
+                nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
+                if (oPtr != null)
+                {
+                    oPtr.Marked = true;
+                }
             }
             if (cPtr.TileFlags.IsClear(GridTile.PlayerMemorised))
             {
@@ -1016,8 +1063,8 @@ namespace AngbandOS.Core
             }
             for (i = 1; i < OMax; i++)
             {
-                Item oPtr = Items[i];
-                if (oPtr.BaseItemCategory != null)
+                Item? oPtr = SaveGame.GetItem(i);
+                if (oPtr != null)
                 {
                     continue;
                 }
@@ -1132,8 +1179,12 @@ namespace AngbandOS.Core
             int oIdx = OPop();
             if (oIdx != 0)
             {
-                Items[oIdx] = qPtr.Clone();
-                Item oPtr = Items[oIdx];
+                SaveGame.SetItem(oIdx, qPtr.Clone());
+                Item? oPtr = SaveGame.GetItem(oIdx);
+                if (oPtr == null)
+                {
+                    return;
+                }
                 oPtr.Y = y;
                 oPtr.X = x;
                 GridTile cPtr = Grid[y][x];
@@ -1162,8 +1213,12 @@ namespace AngbandOS.Core
             int oIdx = OPop();
             if (oIdx != 0)
             {
-                Items[oIdx] = qPtr.Clone();
-                Item oPtr = Items[oIdx];
+                SaveGame.SetItem(oIdx, qPtr.Clone());
+                Item? oPtr = SaveGame.GetItem(oIdx);
+                if (oPtr == null)
+                {
+                    return;
+                }
                 oPtr.Y = y;
                 oPtr.X = x;
                 GridTile cPtr = Grid[y][x];
@@ -1338,8 +1393,8 @@ namespace AngbandOS.Core
 
         public void ReportChargeUsageFromFloor(int item)
         {
-            Item oPtr = Items[item];
-            if (oPtr.Category != ItemTypeEnum.Staff && oPtr.Category != ItemTypeEnum.Wand)
+            Item? oPtr = SaveGame.GetItem(item);
+            if (oPtr == null || (oPtr.Category != ItemTypeEnum.Staff && oPtr.Category != ItemTypeEnum.Wand))
             {
                 return;
             }
@@ -1395,8 +1450,8 @@ namespace AngbandOS.Core
         {
             for (int i = 1; i < OMax; i++)
             {
-                Item oPtr = Items[i];
-                if (oPtr.BaseItemCategory == null)
+                Item? oPtr = SaveGame.GetItem(i);
+                if (oPtr == null)
                 {
                     continue;
                 }
@@ -1412,7 +1467,7 @@ namespace AngbandOS.Core
                     GridTile cPtr = Grid[y][x];
                     cPtr.ItemIndex = 0;
                 }
-                Items[i] = new Item(SaveGame);
+                SaveGame.SetItem(i, null);
             }
             OMax = 1;
             OCnt = 0;
@@ -1430,8 +1485,8 @@ namespace AngbandOS.Core
             }
             for (int i = 1; i < OMax; i++)
             {
-                Item oPtr = Items[i];
-                if (oPtr.BaseItemCategory == null)
+                Item? oPtr = SaveGame.GetItem(i);
+                if (oPtr == null)
                 {
                     continue;
                 }
@@ -1454,8 +1509,8 @@ namespace AngbandOS.Core
             int i;
             for (i = 1; i < OMax; i++)
             {
-                Item oPtr = Items[i];
-                if (oPtr.BaseItemCategory != null)
+                Item? oPtr = SaveGame.GetItem(i);
+                if (oPtr == null)
                 {
                     continue;
                 }
@@ -1493,15 +1548,15 @@ namespace AngbandOS.Core
 
         private void CompactObjectsAux(int i1, int i2)
         {
-            Item oPtr;
             if (i1 == i2)
             {
                 return;
             }
+            Item? oPtr;
             for (int i = 1; i < OMax; i++)
             {
-                oPtr = Items[i];
-                if (oPtr.BaseItemCategory == null)
+                oPtr = SaveGame.GetItem(i);
+                if (oPtr == null)
                 {
                     continue;
                 }
@@ -1510,7 +1565,11 @@ namespace AngbandOS.Core
                     oPtr.NextInStack = i2;
                 }
             }
-            oPtr = Items[i1];
+            oPtr = SaveGame.GetItem(i1);
+            if (oPtr == null)
+            {
+                return;
+            }
             if (oPtr.HoldingMonsterIndex != 0)
             {
                 Monster mPtr = Monsters[oPtr.HoldingMonsterIndex];
@@ -1529,8 +1588,8 @@ namespace AngbandOS.Core
                     cPtr.ItemIndex = i2;
                 }
             }
-            Items[i2] = Items[i1];
-            Items[i1] = new Item(SaveGame);
+            SaveGame.SetItem(i2, SaveGame.GetItem(i1));
+            SaveGame.SetItem(i1, null);
         }
 
         private Colour DimColour(Colour a)
@@ -1745,9 +1804,9 @@ namespace AngbandOS.Core
             }
             for (int thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
             {
-                Item oPtr = Items[thisOIdx];
-                nextOIdx = oPtr.NextInStack;
-                if (oPtr.Marked)
+                Item? oPtr = SaveGame.GetItem(thisOIdx);
+                nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
+                if (oPtr != null && oPtr.Marked)
                 {
                     cp = oPtr.BaseItemCategory.FlavorCharacter;
                     ap = oPtr.BaseItemCategory.FlavorColour;

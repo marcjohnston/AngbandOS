@@ -31,58 +31,61 @@ namespace AngbandOS.Core.Projection
                 bool plural = false;
                 bool doKill = false;
                 string noteKill = null;
-                Item oPtr = SaveGame.Level.Items[thisOIdx];
-                nextOIdx = oPtr.NextInStack;
-                oPtr.RefreshFlagBasedProperties();
-                if (oPtr.Count > 1)
+                Item? oPtr = SaveGame.GetItem(thisOIdx);
+                nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
+                if (oPtr != null)
                 {
-                    plural = true;
-                }
-                if (oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false)
-                {
-                    isArt = true;
-                }
-                if (oPtr.HatesElec())
-                {
-                    doKill = true;
-                    noteKill = plural ? " are destroyed!" : " is destroyed!";
-                    if (oPtr.Characteristics.IgnoreElec)
+                    oPtr.RefreshFlagBasedProperties();
+                    if (oPtr.Count > 1)
                     {
-                        ignore = true;
+                        plural = true;
                     }
-                }
-                if (!doKill)
-                {
-                    continue;
-                }
-                if (oPtr.Marked)
-                {
-                    obvious = true;
-                    oName = oPtr.Description(false, 0);
-                }
-                if (isArt || ignore)
-                {
-                    if (!oPtr.Marked)
+                    if (oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false)
+                    {
+                        isArt = true;
+                    }
+                    if (oPtr.HatesElec())
+                    {
+                        doKill = true;
+                        noteKill = plural ? " are destroyed!" : " is destroyed!";
+                        if (oPtr.Characteristics.IgnoreElec)
+                        {
+                            ignore = true;
+                        }
+                    }
+                    if (!doKill)
                     {
                         continue;
                     }
-                    string s = plural ? "are" : "is";
-                    SaveGame.MsgPrint($"The {oName} {s} unaffected!");
-                }
-                else
-                {
-                    if (oPtr.Marked && string.IsNullOrEmpty(noteKill))
+                    if (oPtr.Marked)
                     {
-                        SaveGame.MsgPrint($"The {oName}{noteKill}");
+                        obvious = true;
+                        oName = oPtr.Description(false, 0);
                     }
-                    bool isPotion = oPtr.BaseItemCategory.CategoryEnum == ItemTypeEnum.Potion;
-                    SaveGame.Level.DeleteObjectIdx(thisOIdx);
-                    if (isPotion)
+                    if (isArt || ignore)
                     {
-                        PotionItemClass potion = (PotionItemClass)oPtr.BaseItemCategory;
-                        potion.Smash(SaveGame, who, y, x);
+                        if (!oPtr.Marked)
+                        {
+                            continue;
+                        }
+                        string s = plural ? "are" : "is";
+                        SaveGame.MsgPrint($"The {oName} {s} unaffected!");
                     }
-                    SaveGame.Level.RedrawSingleLocation(y, x);
+                    else
+                    {
+                        if (oPtr.Marked && string.IsNullOrEmpty(noteKill))
+                        {
+                            SaveGame.MsgPrint($"The {oName}{noteKill}");
+                        }
+                        bool isPotion = oPtr.BaseItemCategory.CategoryEnum == ItemTypeEnum.Potion;
+                        SaveGame.Level.DeleteObjectIdx(thisOIdx);
+                        if (isPotion)
+                        {
+                            PotionItemClass potion = (PotionItemClass)oPtr.BaseItemCategory;
+                            potion.Smash(SaveGame, who, y, x);
+                        }
+                        SaveGame.Level.RedrawSingleLocation(y, x);
+                    }
                 }
             }
             return obvious;

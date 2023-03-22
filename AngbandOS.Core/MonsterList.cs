@@ -17,15 +17,13 @@ namespace AngbandOS.Core
         public bool RepairMonsters;
         public bool ShimmerMonsters;
 
-        private readonly Level _level;
         private readonly Monster[] _monsters;
         private int _hackMIdxIi;
         private readonly SaveGame SaveGame;
 
-        public MonsterList(SaveGame saveGame, Level level)
+        public MonsterList(SaveGame saveGame)
         {
             SaveGame = saveGame;
-            _level = level;
             _monsters = new Monster[Constants.MaxMIdx];
             for (int j = 0; j < Constants.MaxMIdx; j++)
             {
@@ -56,7 +54,7 @@ namespace AngbandOS.Core
             int attempts = 1000;
             while (--attempts != 0)
             {
-                int rIdx = GetMonNum(_level.MonsterLevel, null);
+                int rIdx = GetMonNum(SaveGame.Level.MonsterLevel, null);
                 if (rIdx == 0)
                 {
                     return false;
@@ -98,13 +96,13 @@ namespace AngbandOS.Core
             int attemptsLeft = 10000;
             while (attemptsLeft != 0)
             {
-                y = Program.Rng.RandomLessThan(_level.CurHgt);
-                x = Program.Rng.RandomLessThan(_level.CurWid);
-                if (!_level.GridOpenNoItemOrCreature(y, x))
+                y = Program.Rng.RandomLessThan(SaveGame.Level.CurHgt);
+                x = Program.Rng.RandomLessThan(SaveGame.Level.CurWid);
+                if (!SaveGame.Level.GridOpenNoItemOrCreature(y, x))
                 {
                     continue;
                 }
-                if (_level.Distance(y, x, SaveGame.Player.MapY, SaveGame.Player.MapX) > dis)
+                if (SaveGame.Level.Distance(y, x, SaveGame.Player.MapY, SaveGame.Player.MapX) > dis)
                 {
                     break;
                 }
@@ -148,7 +146,7 @@ namespace AngbandOS.Core
             {
                 int curLev = 5 * cnt;
                 int curDis = 5 * (20 - cnt);
-                for (i = 1; i < _level.MMax; i++)
+                for (i = 1; i < SaveGame.Level.MMax; i++)
                 {
                     Monster mPtr = _monsters[i];
                     MonsterRace rPtr = mPtr.Race;
@@ -181,15 +179,15 @@ namespace AngbandOS.Core
                     num++;
                 }
             }
-            for (i = _level.MMax - 1; i >= 1; i--)
+            for (i = SaveGame.Level.MMax - 1; i >= 1; i--)
             {
                 Monster mPtr = _monsters[i];
                 if (mPtr.Race != null)
                 {
                     continue;
                 }
-                CompactMonstersAux(_level.MMax - 1, i);
-                _level.MMax--;
+                CompactMonstersAux(SaveGame.Level.MMax - 1, i);
+                SaveGame.Level.MMax--;
             }
         }
 
@@ -350,19 +348,22 @@ namespace AngbandOS.Core
             {
                 SaveGame.HealthTrack(0);
             }
-            _level.Grid[y][x].MonsterIndex = 0;
+            SaveGame.Level.Grid[y][x].MonsterIndex = 0;
             for (int thisOIdx = mPtr.FirstHeldItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
             {
-                Item oPtr = _level.Items[thisOIdx];
-                nextOIdx = oPtr.NextInStack;
-                oPtr.HoldingMonsterIndex = 0;
-                _level.DeleteObjectIdx(thisOIdx);
+                Item? oPtr = SaveGame.GetItem(thisOIdx);
+                nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
+                if (oPtr != null)
+                {
+                    oPtr.HoldingMonsterIndex = 0;
+                    SaveGame.Level.DeleteObjectIdx(thisOIdx);
+                }
             }
             _monsters[i] = new Monster(SaveGame);
-            _level.MCnt--;
+            SaveGame.Level.MCnt--;
             if (visibly)
             {
-                _level.RedrawSingleLocation(y, x);
+                SaveGame.Level.RedrawSingleLocation(y, x);
             }
         }
 
@@ -692,8 +693,8 @@ namespace AngbandOS.Core
             for (int i = 0; i < 18; i++)
             {
                 int d = 1;
-                _level.Scatter(out int y, out int x, mPtr.MapY, mPtr.MapX, d);
-                if (!_level.GridPassableNoCreature(y, x))
+                SaveGame.Level.Scatter(out int y, out int x, mPtr.MapY, mPtr.MapX, d);
+                if (!SaveGame.Level.GridPassableNoCreature(y, x))
                 {
                     continue;
                 }
@@ -711,7 +712,7 @@ namespace AngbandOS.Core
 
         public bool PlaceMonster(int y, int x, bool slp, bool grp)
         {
-            int rIdx = GetMonNum(_level.MonsterLevel, null);
+            int rIdx = GetMonNum(SaveGame.Level.MonsterLevel, null);
             if (rIdx == 0)
             {
                 return false;
@@ -734,8 +735,8 @@ namespace AngbandOS.Core
                 for (int i = 0; i < 50; i++)
                 {
                     int d = 3;
-                    _level.Scatter(out int ny, out int nx, y, x, d);
-                    if (!_level.GridPassableNoCreature(ny, nx))
+                    SaveGame.Level.Scatter(out int ny, out int nx, y, x, d);
+                    if (!SaveGame.Level.GridPassableNoCreature(ny, nx))
                     {
                         continue;
                     }
@@ -777,12 +778,12 @@ namespace AngbandOS.Core
             for (i = 0; i < 20; ++i)
             {
                 int d = (i / 15) + 1;
-                _level.Scatter(out y, out x, y1, x1, d);
-                if (!_level.GridPassableNoCreature(y, x))
+                SaveGame.Level.Scatter(out y, out x, y1, x1, d);
+                if (!SaveGame.Level.GridPassableNoCreature(y, x))
                 {
                     continue;
                 }
-                if (_level.Grid[y][x].FeatureType.Category == FloorTileTypeCategory.Sigil)
+                if (SaveGame.Level.Grid[y][x].FeatureType.Category == FloorTileTypeCategory.Sigil)
                 {
                     continue;
                 }
@@ -793,7 +794,7 @@ namespace AngbandOS.Core
                 SaveGame.MsgPrint($"You lose sight of {monster.Name}.");
                 return;
             }
-            GridTile cPtr = _level.Grid[y][x];
+            GridTile cPtr = SaveGame.Level.Grid[y][x];
             cPtr.MonsterIndex = MPop();
             if (cPtr.MonsterIndex == 0)
             {
@@ -822,12 +823,12 @@ namespace AngbandOS.Core
             for (i = 0; i < 20; ++i)
             {
                 int d = (i / 15) + 1;
-                _level.Scatter(out y, out x, y1, x1, d);
-                if (!_level.GridPassableNoCreature(y, x))
+                SaveGame.Level.Scatter(out y, out x, y1, x1, d);
+                if (!SaveGame.Level.GridPassableNoCreature(y, x))
                 {
                     continue;
                 }
-                if (_level.Grid[y][x].FeatureType.Category == FloorTileTypeCategory.Sigil)
+                if (SaveGame.Level.Grid[y][x].FeatureType.Category == FloorTileTypeCategory.Sigil)
                 {
                     continue;
                 }
@@ -858,16 +859,16 @@ namespace AngbandOS.Core
             for (i = 0; i < 20; ++i)
             {
                 int d = (i / 15) + 1;
-                _level.Scatter(out y, out x, y1, x1, d);
-                if (!_level.GridPassableNoCreature(y, x))
+                SaveGame.Level.Scatter(out y, out x, y1, x1, d);
+                if (!SaveGame.Level.GridPassableNoCreature(y, x))
                 {
                     continue;
                 }
-                if (_level.Grid[y][x].FeatureType.Name == "ElderSign")
+                if (SaveGame.Level.Grid[y][x].FeatureType.Name == "ElderSign")
                 {
                     continue;
                 }
-                if (_level.Grid[y][x].FeatureType.Name == "YellowSign")
+                if (SaveGame.Level.Grid[y][x].FeatureType.Name == "YellowSign")
                 {
                     continue;
                 }
@@ -930,9 +931,9 @@ namespace AngbandOS.Core
                     flag = true;
                 }
             }
-            else if (_level.PanelContains(fy, fx))
+            else if (SaveGame.Level.PanelContains(fy, fx))
             {
-                GridTile cPtr = _level.Grid[fy][fx];
+                GridTile cPtr = SaveGame.Level.Grid[fy][fx];
                 if (cPtr.TileFlags.IsSet(GridTile.IsVisible) && SaveGame.Player.TimedBlindness.TurnsRemaining == 0)
                 {
                     if (mPtr.DistanceFromPlayer <= SaveGame.Player.InfravisionRange)
@@ -995,7 +996,7 @@ namespace AngbandOS.Core
                 if (!mPtr.IsVisible)
                 {
                     mPtr.IsVisible = true;
-                    _level.RedrawSingleLocation(fy, fx);
+                    SaveGame.Level.RedrawSingleLocation(fy, fx);
                     if (SaveGame.TrackedMonsterIndex == mIdx)
                     {
                         SaveGame.RedrawHealthFlaggedAction.Set();
@@ -1038,7 +1039,7 @@ namespace AngbandOS.Core
                 if (mPtr.IsVisible)
                 {
                     mPtr.IsVisible = false;
-                    _level.RedrawSingleLocation(fy, fx);
+                    SaveGame.Level.RedrawSingleLocation(fy, fx);
                     if (SaveGame.TrackedMonsterIndex == mIdx)
                     {
                         SaveGame.RedrawHealthFlaggedAction.Set();
@@ -1096,7 +1097,7 @@ namespace AngbandOS.Core
 
         public void WipeMList()
         {
-            for (int i = _level.MMax - 1; i >= 1; i--)
+            for (int i = SaveGame.Level.MMax - 1; i >= 1; i--)
             {
                 Monster mPtr = _monsters[i];
                 MonsterRace rPtr = mPtr.Race;
@@ -1105,11 +1106,11 @@ namespace AngbandOS.Core
                     continue;
                 }
                 rPtr.CurNum--;
-                _level.Grid[mPtr.MapY][mPtr.MapX].MonsterIndex = 0;
+                SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX].MonsterIndex = 0;
                 _monsters[i] = new Monster(SaveGame);
             }
-            _level.MMax = 1;
-            _level.MCnt = 0;
+            SaveGame.Level.MMax = 1;
+            SaveGame.Level.MCnt = 0;
             NumRepro = 0;
             SaveGame.TargetWho = 0;
             SaveGame.HealthTrack(0);
@@ -1125,13 +1126,16 @@ namespace AngbandOS.Core
             Monster mPtr = _monsters[i1];
             int y = mPtr.MapY;
             int x = mPtr.MapX;
-            GridTile cPtr = _level.Grid[y][x];
+            GridTile cPtr = SaveGame.Level.Grid[y][x];
             cPtr.MonsterIndex = i2;
             for (int thisOIdx = mPtr.FirstHeldItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
             {
-                Item oPtr = _level.Items[thisOIdx];
-                nextOIdx = oPtr.NextInStack;
-                oPtr.HoldingMonsterIndex = i2;
+                Item? oPtr = SaveGame.GetItem(thisOIdx);
+                nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
+                if (oPtr != null)
+                {
+                    oPtr.HoldingMonsterIndex = i2;
+                }
             }
             if (SaveGame.TargetWho == i1)
             {
@@ -1148,24 +1152,24 @@ namespace AngbandOS.Core
         private int MPop()
         {
             int i;
-            if (_level.MMax < Constants.MaxMIdx)
+            if (SaveGame.Level.MMax < Constants.MaxMIdx)
             {
-                i = _level.MMax;
-                _level.MMax++;
-                _level.MCnt++;
+                i = SaveGame.Level.MMax;
+                SaveGame.Level.MMax++;
+                SaveGame.Level.MCnt++;
                 return i;
             }
-            for (i = 1; i < _level.MMax; i++)
+            for (i = 1; i < SaveGame.Level.MMax; i++)
             {
                 Monster mPtr = _monsters[i];
                 if (mPtr.Race != null)
                 {
                     continue;
                 }
-                _level.MCnt++;
+                SaveGame.Level.MCnt++;
                 return i;
             }
-            if (_level != null)
+            if (SaveGame.Level != null)
             {
                 SaveGame.MsgPrint("Too many monsters!");
             }
@@ -1202,7 +1206,7 @@ namespace AngbandOS.Core
             {
                 total = Constants.GroupMax;
             }
-            int old = _level.DangerRating;
+            int old = SaveGame.Level.DangerRating;
             int hackN = 1;
             hackX[0] = x;
             hackY[0] = y;
@@ -1212,9 +1216,9 @@ namespace AngbandOS.Core
                 int hy = hackY[n];
                 for (int i = 0; i < 8 && hackN < total; i++)
                 {
-                    int mx = hx + _level.OrderedDirectionXOffset[i];
-                    int my = hy + _level.OrderedDirectionYOffset[i];
-                    if (!_level.GridPassableNoCreature(my, mx))
+                    int mx = hx + SaveGame.Level.OrderedDirectionXOffset[i];
+                    int my = hy + SaveGame.Level.OrderedDirectionYOffset[i];
+                    if (!SaveGame.Level.GridPassableNoCreature(my, mx))
                     {
                         continue;
                     }
@@ -1226,7 +1230,7 @@ namespace AngbandOS.Core
                     }
                 }
             }
-            _level.DangerRating = old;
+            SaveGame.Level.DangerRating = old;
         }
 
         private bool PlaceMonsterOne(int y, int x, MonsterRace rPtr, bool slp, bool charm)
@@ -1240,15 +1244,15 @@ namespace AngbandOS.Core
                 return false;
             }
             string name = rPtr.Name;
-            if (!_level.InBounds(y, x))
+            if (!SaveGame.Level.InBounds(y, x))
             {
                 return false;
             }
-            if (!_level.GridPassableNoCreature(y, x))
+            if (!SaveGame.Level.GridPassableNoCreature(y, x))
             {
                 return false;
             }
-            if (_level.Grid[y][x].FeatureType.Category == FloorTileTypeCategory.Sigil)
+            if (SaveGame.Level.Grid[y][x].FeatureType.Category == FloorTileTypeCategory.Sigil)
             {
                 return false;
             }
@@ -1280,14 +1284,14 @@ namespace AngbandOS.Core
             {
                 if (rPtr.Unique)
                 {
-                    _level.DangerRating += (rPtr.Level - SaveGame.Difficulty) * 2;
+                    SaveGame.Level.DangerRating += (rPtr.Level - SaveGame.Difficulty) * 2;
                 }
                 else
                 {
-                    _level.DangerRating += rPtr.Level - SaveGame.Difficulty;
+                    SaveGame.Level.DangerRating += rPtr.Level - SaveGame.Difficulty;
                 }
             }
-            GridTile cPtr = _level.Grid[y][x];
+            GridTile cPtr = SaveGame.Level.Grid[y][x];
             cPtr.MonsterIndex = MPop();
             _hackMIdxIi = cPtr.MonsterIndex;
             if (cPtr.MonsterIndex == 0)

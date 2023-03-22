@@ -31,55 +31,58 @@ namespace AngbandOS.Core.Projection
                 bool plural = false;
                 bool doKill = false;
                 string noteKill = null;
-                Item oPtr = SaveGame.Level.Items[thisOIdx];
-                nextOIdx = oPtr.NextInStack;
-                oPtr.RefreshFlagBasedProperties();
-                if (oPtr.Count > 1)
+                Item? oPtr = SaveGame.GetItem(thisOIdx);
+                nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
+                if (oPtr != null)
                 {
-                    plural = true;
-                }
-                if (oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false)
-                {
-                    isArt = true;
-                }
-                if (oPtr.HatesCold())
-                {
-                    noteKill = plural ? " shatter!" : " shatters!";
-                    doKill = true;
-                    if (oPtr.Characteristics.IgnoreCold)
+                    oPtr.RefreshFlagBasedProperties();
+                    if (oPtr.Count > 1)
                     {
-                        ignore = true;
+                        plural = true;
                     }
-                }
-                if (doKill)
-                {
-                    if (oPtr.Marked)
+                    if (oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false)
                     {
-                        obvious = true;
-                        oName = oPtr.Description(false, 0);
+                        isArt = true;
                     }
-                    if (isArt || ignore)
+                    if (oPtr.HatesCold())
+                    {
+                        noteKill = plural ? " shatter!" : " shatters!";
+                        doKill = true;
+                        if (oPtr.Characteristics.IgnoreCold)
+                        {
+                            ignore = true;
+                        }
+                    }
+                    if (doKill)
                     {
                         if (oPtr.Marked)
                         {
-                            string s = plural ? "are" : "is";
-                            SaveGame.MsgPrint($"The {oName} {s} unaffected!");
+                            obvious = true;
+                            oName = oPtr.Description(false, 0);
                         }
-                    }
-                    else
-                    {
-                        if (oPtr.Marked && string.IsNullOrEmpty(noteKill))
+                        if (isArt || ignore)
                         {
-                            SaveGame.MsgPrint($"The {oName}{noteKill}");
+                            if (oPtr.Marked)
+                            {
+                                string s = plural ? "are" : "is";
+                                SaveGame.MsgPrint($"The {oName} {s} unaffected!");
+                            }
                         }
-                        bool isPotion = oPtr.BaseItemCategory.CategoryEnum == ItemTypeEnum.Potion;
-                        SaveGame.Level.DeleteObjectIdx(thisOIdx);
-                        if (isPotion)
+                        else
                         {
-                            PotionItemClass potion = (PotionItemClass)oPtr.BaseItemCategory;
-                            potion.Smash(SaveGame, who, y, x);
+                            if (oPtr.Marked && string.IsNullOrEmpty(noteKill))
+                            {
+                                SaveGame.MsgPrint($"The {oName}{noteKill}");
+                            }
+                            bool isPotion = oPtr.BaseItemCategory.CategoryEnum == ItemTypeEnum.Potion;
+                            SaveGame.Level.DeleteObjectIdx(thisOIdx);
+                            if (isPotion)
+                            {
+                                PotionItemClass potion = (PotionItemClass)oPtr.BaseItemCategory;
+                                potion.Smash(SaveGame, who, y, x);
+                            }
+                            SaveGame.Level.RedrawSingleLocation(y, x);
                         }
-                        SaveGame.Level.RedrawSingleLocation(y, x);
                     }
                 }
             }

@@ -52,24 +52,27 @@ namespace AngbandOS.Core.Projection
             bool obvious = false;
             for (int thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
             {
-                Item oPtr = SaveGame.Level.Items[thisOIdx];
-                nextOIdx = oPtr.NextInStack;
-                if (oPtr.Count > 1)
+                Item? oPtr = SaveGame.GetItem(thisOIdx);
+                nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
+                if (oPtr != null)
                 {
-                }
-                if (oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false)
-                {
-                }
-                if (oPtr.Category == ItemTypeEnum.Chest)
-                {
-                    if (oPtr.TypeSpecificValue > 0)
+                    if (oPtr.Count > 1)
                     {
-                        oPtr.TypeSpecificValue = 0 - oPtr.TypeSpecificValue;
-                        oPtr.BecomeKnown();
-                        if (oPtr.Marked)
+                    }
+                    if (oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false)
+                    {
+                    }
+                    if (oPtr.Category == ItemTypeEnum.Chest)
+                    {
+                        if (oPtr.TypeSpecificValue > 0)
                         {
-                            SaveGame.MsgPrint("Click!");
-                            obvious = true;
+                            oPtr.TypeSpecificValue = 0 - oPtr.TypeSpecificValue;
+                            oPtr.BecomeKnown();
+                            if (oPtr.Marked)
+                            {
+                                SaveGame.MsgPrint("Click!");
+                                obvious = true;
+                            }
                         }
                     }
                 }

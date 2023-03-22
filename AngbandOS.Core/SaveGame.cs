@@ -251,6 +251,18 @@ namespace AngbandOS.Core
         private int TunnN;
         private int WallN;
 
+        public readonly Item?[] Items = new Item[Constants.MaxOIdx];
+
+        public Item? GetItem(int index)
+        {
+            return Items[index];
+        }
+
+        public void SetItem(int index, Item? item)
+        {
+            Items[index] = item;
+        }
+
         /// <summary>
         /// Returns an item from the players inventory.  If there is no item at the desired slot, null is returned.
         /// </summary>
@@ -432,7 +444,7 @@ namespace AngbandOS.Core
             // Get a list of all of the item classes that are considered gold.  Sort them by the cost.
             ItemClass[] goldItemClasses = SingletonRepository.ItemCategories.Where(_itemClass => GoldItemClass.IsGold(_itemClass)).OrderBy(_goldItemClass => _goldItemClass.Cost).ToArray();
 
-            if (goldType > goldItemClasses.Length)
+            if (goldType >= goldItemClasses.Length)
             {
                 goldType = goldItemClasses.Length - 1;
             }
@@ -1220,9 +1232,9 @@ namespace AngbandOS.Core
             {
                 for (currentItemIndex = tile.ItemIndex; currentItemIndex != 0; currentItemIndex = nextItemIndex)
                 {
-                    Item oPtr = Level.Items[currentItemIndex];
-                    nextItemIndex = oPtr.NextInStack;
-                    if (Player.ItemMatchesFilter(oPtr, itemFilter))
+                    Item? oPtr = GetItem(currentItemIndex);
+                    nextItemIndex = (oPtr == null ? 0 : oPtr.NextInStack);
+                    if (oPtr != null && Player.ItemMatchesFilter(oPtr, itemFilter))
                     {
                         allowFloor = true;
                     }
@@ -1362,16 +1374,15 @@ namespace AngbandOS.Core
                             {
                                 for (currentItemIndex = tile.ItemIndex; currentItemIndex != 0; currentItemIndex = nextItemIndex)
                                 {
-                                    Item oPtr = Level.Items[currentItemIndex];
-                                    nextItemIndex = oPtr.NextInStack;
-                                    if (!Player.ItemMatchesFilter(oPtr, itemFilter))
+                                    Item? oPtr = GetItem(currentItemIndex);
+                                    nextItemIndex = (oPtr == null ? 0 : oPtr.NextInStack);
+                                    if (oPtr != null && Player.ItemMatchesFilter(oPtr, itemFilter))
                                     {
-                                        continue;
+                                        itemIndex = 0 - currentItemIndex;
+                                        item = true;
+                                        done = true;
+                                        break;
                                     }
-                                    itemIndex = 0 - currentItemIndex;
-                                    item = true;
-                                    done = true;
-                                    break;
                                 }
                                 if (done)
                                 {
@@ -1486,7 +1497,6 @@ namespace AngbandOS.Core
             bool doItem = !rPtr.OnlyDropGold;
             bool cloned = false;
             int forceCoin = rPtr.GetCoinType();
-            Item qPtr;
             int y = mPtr.MapY;
             int x = mPtr.MapX;
             if (mPtr.SmCloned)
@@ -1495,10 +1505,14 @@ namespace AngbandOS.Core
             }
             for (int thisOIdx = mPtr.FirstHeldItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
             {
-                Item oPtr = Level.Items[thisOIdx];
-                nextOIdx = oPtr.NextInStack;
+                Item? oPtr = GetItem(thisOIdx);
+                nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
+                if (oPtr == null)
+                {
+                    return;
+                }
                 oPtr.HoldingMonsterIndex = 0;
-                qPtr = Level.Items[thisOIdx].Clone();
+                Item qPtr = oPtr.Clone();
                 Level.DeleteObjectIdx(thisOIdx);
                 Level.DropNear(qPtr, -1, y, x);
             }
@@ -1556,7 +1570,7 @@ namespace AngbandOS.Core
             {
                 if (doGold && (!doItem || Program.Rng.RandomLessThan(100) < 50))
                 {
-                    qPtr = MakeGold(forceCoin);
+                    GoldItem qPtr = MakeGold(forceCoin);
                     Level.DropNear(qPtr, -1, y, x);
                     dumpGold++;
                 }
@@ -1564,7 +1578,7 @@ namespace AngbandOS.Core
                 {
                     if (!quest || j > 1)
                     {
-                        qPtr = this.MakeObject(good, great, false);
+                        Item? qPtr = this.MakeObject(good, great, false);
                         if (qPtr != null)
                         {
                             Level.DropNear(qPtr, -1, y, x);
@@ -1573,7 +1587,7 @@ namespace AngbandOS.Core
                     }
                     else
                     {
-                        qPtr = this.MakeObject(true, true, false);
+                        Item? qPtr = this.MakeObject(true, true, false);
                         if (qPtr != null)
                         {
                             Level.DropNear(qPtr, -1, y, x);
@@ -2868,8 +2882,8 @@ namespace AngbandOS.Core
             Player.SenseInventory();
             for (int i = 1; i < Level.OMax; i++)
             {
-                Item oPtr = Level.Items[i];
-                if (oPtr.BaseItemCategory == null)
+                Item? oPtr = GetItem(i);
+                if (oPtr == null)
                 {
                     continue;
                 }
@@ -2998,7 +3012,7 @@ namespace AngbandOS.Core
 
         private bool Verify(string prompt, int item)
         {
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : Level.Items[0 - item];
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetItem(0 - item);
             if (oPtr == null)
             {
                 return false;
@@ -3184,7 +3198,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : Level.Items[0 - item];
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetItem(0 - item);
             if (oPtr == null)
             {
                 return;
@@ -3380,7 +3394,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : Level.Items[0 - item];
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetItem(0 - item);
             if (oPtr == null)
             {
                 return;
@@ -3440,7 +3454,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : Level.Items[0 - item];
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetItem(0 - item);
             if (oPtr == null)
             {
                 return;
@@ -3958,8 +3972,8 @@ namespace AngbandOS.Core
             bool detect = false;
             for (int i = 1; i < Level.OMax; i++)
             {
-                Item oPtr = Level.Items[i];
-                if (oPtr.BaseItemCategory == null)
+                Item? oPtr = GetItem(i);
+                if (oPtr == null)
                 {
                     continue;
                 }
@@ -3996,8 +4010,8 @@ namespace AngbandOS.Core
             bool detect = false;
             for (int i = 1; i < Level.OMax; i++)
             {
-                Item oPtr = Level.Items[i];
-                if (oPtr.BaseItemCategory == null)
+                Item? oPtr = GetItem(i);
+                if (oPtr == null)
                 {
                     continue;
                 }
@@ -4036,8 +4050,8 @@ namespace AngbandOS.Core
             bool detect = false;
             for (int i = 1; i < Level.OMax; i++)
             {
-                Item oPtr = Level.Items[i];
-                if (oPtr.BaseItemCategory == null)
+                Item? oPtr = GetItem(i);
+                if (oPtr == null)
                 {
                     continue;
                 }
@@ -4658,7 +4672,7 @@ namespace AngbandOS.Core
                 }
                 return false;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : Level.Items[0 - item];
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetItem(0 - item);
             if (oPtr == null)
             {
                 return false;
@@ -4781,7 +4795,7 @@ namespace AngbandOS.Core
                 }
                 return false;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : Level.Items[0 - item];
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetItem(0 - item);
             if (oPtr == null)
             {
                 return false;
@@ -4834,7 +4848,7 @@ namespace AngbandOS.Core
                 }
                 return false;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : Level.Items[0 - item];
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetItem(0 - item);
             if (oPtr == null)
             {
                 return false;
@@ -5083,7 +5097,7 @@ namespace AngbandOS.Core
                 }
                 return false;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : Level.Items[0 - item];
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetItem(0 - item);
             if (oPtr == null)
             {
                 return false;
@@ -7976,48 +7990,51 @@ namespace AngbandOS.Core
             int nextItemIndex;
             for (int thisItemIndex = tile.ItemIndex; thisItemIndex != 0; thisItemIndex = nextItemIndex)
             {
-                Item item = Level.Items[thisItemIndex];
-                string itemName = item.Description(true, 3);
-                nextItemIndex = item.NextInStack;
-                Disturb(false);
-                // We always pick up gold
-                if (item.Category == ItemTypeEnum.Gold)
+                Item? item = GetItem(thisItemIndex);
+                nextItemIndex = (item == null ? 0 : item.NextInStack);
+                if (item != null)
                 {
-                    MsgPrint($"You collect {item.TypeSpecificValue} gold pieces worth of {itemName}.");
-                    Player.Gold += item.TypeSpecificValue;
-                    RedrawGoldFlaggedAction.Set();
-                    Level.DeleteObjectIdx(thisItemIndex);
-                }
-                else
-                {
-                    // If we're not interested, simply say that we see it
-                    if (!pickup)
+                    string itemName = item.Description(true, 3);
+                    Disturb(false);
+                    // We always pick up gold
+                    if (item.Category == ItemTypeEnum.Gold)
                     {
-                        MsgPrint($"You see {itemName}.");
-                    }
-                    // If it's worthless, stomp on it
-                    else if (item.Stompable())
-                    {
+                        MsgPrint($"You collect {item.TypeSpecificValue} gold pieces worth of {itemName}.");
+                        Player.Gold += item.TypeSpecificValue;
+                        RedrawGoldFlaggedAction.Set();
                         Level.DeleteObjectIdx(thisItemIndex);
-                        MsgPrint($"You stomp on {itemName}.");
-                    }
-                    // If we can't carry the item, let us know
-                    else if (!Player.InvenCarryOkay(item))
-                    {
-                        MsgPrint($"You have no room for {itemName}.");
                     }
                     else
                     {
-                        // Actually pick up the item
-                        int slot = Player.InvenCarry(item, false);
-                        Item? inventoryItem = GetInventoryItem(slot);
-                        if (inventoryItem == null)
+                        // If we're not interested, simply say that we see it
+                        if (!pickup)
                         {
-                            throw new Exception("Picked up item should have been found."); // TODO: Clean this up
+                            MsgPrint($"You see {itemName}.");
                         }
-                        itemName = inventoryItem.Description(true, 3);
-                        MsgPrint($"You have {itemName} ({slot.IndexToLabel()}).");
-                        Level.DeleteObjectIdx(thisItemIndex);
+                        // If it's worthless, stomp on it
+                        else if (item.Stompable())
+                        {
+                            Level.DeleteObjectIdx(thisItemIndex);
+                            MsgPrint($"You stomp on {itemName}.");
+                        }
+                        // If we can't carry the item, let us know
+                        else if (!Player.InvenCarryOkay(item))
+                        {
+                            MsgPrint($"You have no room for {itemName}.");
+                        }
+                        else
+                        {
+                            // Actually pick up the item
+                            int slot = Player.InvenCarry(item, false);
+                            Item? inventoryItem = GetInventoryItem(slot);
+                            if (inventoryItem == null)
+                            {
+                                throw new Exception("Picked up item should have been found."); // TODO: Clean this up
+                            }
+                            itemName = inventoryItem.Description(true, 3);
+                            MsgPrint($"You have {itemName} ({slot.IndexToLabel()}).");
+                            Level.DeleteObjectIdx(thisItemIndex);
+                        }
                     }
                 }
             }
@@ -8614,7 +8631,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex];
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -8653,7 +8670,7 @@ namespace AngbandOS.Core
                 }
             }
             // Get the item from the index
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex];
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -9065,7 +9082,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex]; // TODO: Remove access to Level
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex); // TODO: Remove access to Level
             if (item == null)
             {
                 return;
@@ -9287,7 +9304,7 @@ namespace AngbandOS.Core
                     return;
                 }
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex];
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -9538,7 +9555,7 @@ namespace AngbandOS.Core
                     return;
                 }
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex];
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -9633,7 +9650,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex];
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -10332,7 +10349,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex];
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -10393,7 +10410,7 @@ namespace AngbandOS.Core
                     return;
                 }
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex];
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -10616,7 +10633,7 @@ namespace AngbandOS.Core
                     return;
                 }
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex];
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -10779,7 +10796,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? ammunitionStack = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex];
+            Item? ammunitionStack = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
             if (ammunitionStack == null)
             {
                 return;
@@ -10956,7 +10973,7 @@ namespace AngbandOS.Core
                     return;
                 }
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex];
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -11237,7 +11254,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex];
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -11359,7 +11376,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex]; // TODO: Remove access to Level because GetItem for TakeOff doesn't support take off from floor
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex); // TODO: Remove access to Level because GetItem for TakeOff doesn't support take off from floor
             if (item == null)
             {
                 return;
@@ -11472,7 +11489,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex]; 
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -11513,7 +11530,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex]; // TODO: Remove access to Level
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex); // TODO: Remove access to Level
             if (item == null)
             {
                 return;
@@ -11677,7 +11694,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : Level.Items[0 - item];
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetItem(0 - item);
             if (item == null)
             {
                 return;
@@ -12051,7 +12068,7 @@ namespace AngbandOS.Core
                 }
             }
             // Get the item and check if it is really a wand
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : Level.Items[0 - itemIndex];
+            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -12195,10 +12212,10 @@ namespace AngbandOS.Core
                         // Check the items on the tile
                         for (int itemIndex = tile.ItemIndex; itemIndex != 0; itemIndex = nextItemIndex)
                         {
-                            Item item = Level.Items[itemIndex];
-                            nextItemIndex = item.NextInStack;
+                            Item? item = GetItem(itemIndex);
+                            nextItemIndex = (item == null ? 0 : item.NextInStack);
                             // If one of them is a chest, determine if it is trapped
-                            if (item.Category != ItemTypeEnum.Chest)
+                            if (item == null || item.Category != ItemTypeEnum.Chest)
                             {
                                 continue;
                             }
@@ -12277,9 +12294,9 @@ namespace AngbandOS.Core
                     }
                 } while (tile.ItemIndex == 0);
             }
-            Item item = Level.Items[tile.ItemIndex];
+            Item? item = GetItem(tile.ItemIndex);
             // Check the weight of the item
-            if (item.Weight > maxWeight)
+            if (item != null && item.Weight > maxWeight)
             {
                 MsgPrint("The object is too heavy.");
                 return;
@@ -15483,6 +15500,11 @@ namespace AngbandOS.Core
 
         public void GenerateNewLevel()
         {
+            for (int j = 0; j < Constants.MaxOIdx; j++)
+            {
+                SetItem(j, null);
+            }
+
             // Loop until we are able to build the level.  Keep track of the number of attempts.
             for (int generateAttemptNumber = 0; ; generateAttemptNumber++)
             {
@@ -18604,9 +18626,9 @@ namespace AngbandOS.Core
             }
             for (int thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
             {
-                Item oPtr = Level.Items[thisOIdx];
-                nextOIdx = oPtr.NextInStack;
-                if (oPtr.Marked)
+                Item? oPtr = GetItem(thisOIdx);
+                nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
+                if (oPtr != null && oPtr.Marked)
                 {
                     return true;
                 }
@@ -18711,22 +18733,25 @@ namespace AngbandOS.Core
                         s2 = "carrying ";
                         for (thisOIdx = mPtr.FirstHeldItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
                         {
-                            Item oPtr = Level.Items[thisOIdx];
-                            nextOIdx = oPtr.NextInStack;
-                            string oName = oPtr.Description(true, 3);
-                            outVal = $"{s1}{s2}{s3}{oName} [{info}]";
-                            Screen.PrintLine(outVal, 0, 0);
-                            Level.MoveCursorRelative(y, x);
-                            query = Inkey();
-                            if (query != '\r' && query != '\n' && query != ' ')
+                            Item? oPtr = GetItem(thisOIdx);
+                            nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
+                            if (oPtr != null)
                             {
-                                break;
+                                string oName = oPtr.Description(true, 3);
+                                outVal = $"{s1}{s2}{s3}{oName} [{info}]";
+                                Screen.PrintLine(outVal, 0, 0);
+                                Level.MoveCursorRelative(y, x);
+                                query = Inkey();
+                                if (query != '\r' && query != '\n' && query != ' ')
+                                {
+                                    break;
+                                }
+                                if (query == ' ' && (mode & Constants.TargetLook) == 0)
+                                {
+                                    break;
+                                }
+                                s2 = "also carrying ";
                             }
-                            if (query == ' ' && (mode & Constants.TargetLook) == 0)
-                            {
-                                break;
-                            }
-                            s2 = "also carrying ";
                         }
                         if (thisOIdx != 0)
                         {
@@ -18737,9 +18762,9 @@ namespace AngbandOS.Core
                 }
                 for (thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
                 {
-                    Item oPtr = Level.Items[thisOIdx];
-                    nextOIdx = oPtr.NextInStack;
-                    if (oPtr.Marked)
+                    Item? oPtr = GetItem(thisOIdx);
+                    nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
+                    if (oPtr != null && oPtr.Marked)
                     {
                         boring = false;
                         string oName = oPtr.Description(true, 3);
@@ -19244,7 +19269,7 @@ namespace AngbandOS.Core
                 }
                 return;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : Level.Items[0 - item];
+            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetItem(0 - item);
             if (item == null)
             {
                 return;
@@ -19270,7 +19295,7 @@ namespace AngbandOS.Core
                         }
                         else
                         {
-                            Level.Items[0 - item] = qPtr;
+                            SetItem(0 - item, qPtr);
                         }
                         UpdateBonusesFlaggedAction.Set();
                         NoticeCombineAndReorderFlaggedAction.Set();

@@ -46,7 +46,7 @@ namespace AngbandOS.Core.Talents
                 }
                 return;
             }
-            Item? oPtr = item >= 0 ? saveGame.GetInventoryItem(item) : saveGame.Level.Items[0 - item];
+            Item? oPtr = item >= 0 ? saveGame.GetInventoryItem(item) : saveGame.GetItem(0 - item);
             if (oPtr == null)
             {
                 return;

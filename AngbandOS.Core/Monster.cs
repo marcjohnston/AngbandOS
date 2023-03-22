@@ -22,7 +22,7 @@ namespace AngbandOS.Core
 
         public int FearLevel;
 
-        public int FirstHeldItemIndex;
+        public int FirstHeldItemIndex; // TODO ... use a list of items.
         public int Generation;
         public int Health;
         public int IndividualMonsterFlags;
@@ -993,10 +993,10 @@ namespace AngbandOS.Core
                     // Check through the items in the tile we just entered
                     for (int thisItemIndex = tile.ItemIndex; thisItemIndex != 0; thisItemIndex = nextItemIndex)
                     {
-                        Item item = saveGame.Level.Items[thisItemIndex];
-                        nextItemIndex = item.NextInStack;
+                        Item? item = saveGame.GetItem(thisItemIndex);
+                        nextItemIndex = (item == null ? 0 : item.NextInStack);
                         // We ignore gold
-                        if (item.Category == ItemTypeEnum.Gold)
+                        if (item == null || item.Category == ItemTypeEnum.Gold)
                         {
                             continue;
                         }
