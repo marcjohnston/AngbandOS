@@ -26,7 +26,7 @@
             {
                 saveGame.MsgPrint(seenByPlayer ? $"{monsterName} looks healthier." : $"{monsterName} sounds healthier.");
             }
-            if (saveGame.TrackedMonsterIndex == monster.GetMonsterIndex(saveGame))
+            if (saveGame.TrackedMonsterIndex == monster.GetMonsterIndex())
             {
                 saveGame.RedrawHealthFlaggedAction.Set();
             }
@@ -54,7 +54,7 @@
             {
                 saveGame.MsgPrint(seen ? $"{monsterName} looks healthier." : $"{monsterName} sounds healthier.");
             }
-            if (saveGame.TrackedMonsterIndex == monster.GetMonsterIndex(saveGame))
+            if (saveGame.TrackedMonsterIndex == monster.GetMonsterIndex())
             {
                 saveGame.RedrawHealthFlaggedAction.Set();
             }

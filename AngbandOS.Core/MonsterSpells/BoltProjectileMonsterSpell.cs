@@ -64,7 +64,7 @@
         /// <returns></returns>
         protected virtual bool Project(SaveGame saveGame, Monster monster, int rad, int y, int x, int dam, Projectile projectile, ProjectionFlag flg)
         {
-            return saveGame.Project(monster.GetMonsterIndex(saveGame), rad, saveGame.Player.MapY, saveGame.Player.MapX, dam, projectile, flg);
+            return saveGame.Project(monster.GetMonsterIndex(), rad, saveGame.Player.MapY, saveGame.Player.MapX, dam, projectile, flg);
         }
 
         public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)

@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Cryptography;
 
 namespace AngbandOS.Core
 {
@@ -286,6 +287,89 @@ namespace AngbandOS.Core
         public void SetLevelItem(int index, Item? item)
         {
             LevelItems[index] = item;
+        }
+
+        private int OPop()
+        {
+            int i;
+            if (Level.OMax < Constants.MaxOIdx)
+            {
+                i = Level.OMax;
+                Level.OMax++;
+                Level.OCnt++;
+                return i;
+            }
+            for (i = 1; i < Level.OMax; i++)
+            {
+                Item? oPtr = GetLevelItem(i);
+                if (oPtr != null)
+                {
+                    continue;
+                }
+                Level.OCnt++;
+                return i;
+            }
+            return 0;
+        }
+
+        /// <summary>
+        /// Removes all items from a grid tile.
+        /// </summary>
+        /// <param name="y"></param>
+        /// <param name="x"></param>
+        public void DeleteObject(int y, int x)
+        {
+            int nextOIdx;
+            if (!Level.InBounds(y, x))
+            {
+                return;
+            }
+            GridTile cPtr = Level.Grid[y][x];
+            for (int thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
+            {
+                Item? oPtr = GetLevelItem(thisOIdx);
+                if (oPtr == null)
+                {
+                    break;
+                }
+                nextOIdx = oPtr.NextInStack;
+                SetLevelItem(thisOIdx, null);
+                Level.OCnt--;
+            }
+            cPtr.ItemIndex = 0;
+            Level.RedrawSingleLocation(y, x);
+        }
+
+        public bool AddItemToMonster(Item item, Monster monster)
+        {
+            // Get the next index.
+            int nextObjectIndex = OPop();
+            if (nextObjectIndex != 0)
+            {
+                SetLevelItem(nextObjectIndex, item);
+                item.HoldingMonsterIndex = monster.GetMonsterIndex();
+                item.NextInStack = monster.FirstHeldItemIndex;
+                monster.FirstHeldItemIndex = nextObjectIndex;
+                return true;
+            }
+            return false;
+        }
+
+        public bool AddItemToGrid(Item item, int x, int y)
+        {
+            GridTile tile = Level.Grid[y][x];
+            int oIdx = OPop();
+            if (oIdx != 0)
+            {
+                SetLevelItem(oIdx, item);
+                item.Y = y;
+                item.X = x;
+                item.HoldingMonsterIndex = 0;
+                item.NextInStack = tile.ItemIndex;
+                tile.ItemIndex = oIdx;
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
@@ -1990,7 +2074,7 @@ namespace AngbandOS.Core
                         y = ny;
                         x = nx;
                     }
-                    Level.DeleteObject(y, x);
+                    DeleteObject(y, x);
                     MsgPrint("A magical stairway appears...");
                     Level.CaveSetFeat(y, x, CurDungeon.Tower ? "UpStair" : "DownStair");
                     UpdateScentFlaggedAction.Set();
@@ -2369,9 +2453,8 @@ namespace AngbandOS.Core
             {
                 if (Level.CaveValidBold(Player.MapY, Player.MapX))
                 {
-                    Level.DeleteObject(Player.MapY, Player.MapX);
-                    Level.CaveSetFeat(Player.MapY, Player.MapX,
-                        CreateDownStair ? "DownStair" : "UpStair");
+                    DeleteObject(Player.MapY, Player.MapX);
+                    Level.CaveSetFeat(Player.MapY, Player.MapX, CreateDownStair ? "DownStair" : "UpStair");
                 }
                 CreateDownStair = false;
                 CreateUpStair = false;
@@ -4107,7 +4190,7 @@ namespace AngbandOS.Core
                     Level.DeleteMonster(y, x);
                     if (Level.CaveValidBold(y, x))
                     {
-                        Level.DeleteObject(y, x);
+                        DeleteObject(y, x);
                         int t = Program.Rng.RandomLessThan(200);
                         if (t < 20)
                         {
@@ -4814,7 +4897,7 @@ namespace AngbandOS.Core
                     if (Level.CaveValidBold(yy, xx))
                     {
                         bool floor = Level.GridPassable(yy, xx);
-                        Level.DeleteObject(yy, xx);
+                        DeleteObject(yy, xx);
                         int t = floor ? Program.Rng.RandomLessThan(100) : 200;
                         if (t < 20)
                         {
@@ -6216,7 +6299,7 @@ namespace AngbandOS.Core
                 MsgPrint("The object resists the spell.");
                 return;
             }
-            Level.DeleteObject(Player.MapY, Player.MapX);
+            DeleteObject(Player.MapY, Player.MapX);
             if (CurrentDepth <= 0)
             {
                 Level.CaveSetFeat(Player.MapY, Player.MapX, "DownStair");
@@ -16607,7 +16690,7 @@ namespace AngbandOS.Core
                         Level.DeleteMonster(y, x);
                         if (Level.CaveValidBold(y, x))
                         {
-                            Level.DeleteObject(y, x);
+                            DeleteObject(y, x);
                             GridTile cPtr = Level.Grid[y][x];
                             int t = Program.Rng.RandomLessThan(200);
                             if (t < 20)

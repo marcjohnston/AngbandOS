@@ -35,18 +35,14 @@ namespace AngbandOS.Core.AttackEffects
                     string itemName = item.Description(false, 3);
                     string y = item.Count > 1 ? "One of y" : "Y";
                     saveGame.MsgPrint($"{y}our {itemName} ({i.IndexToLabel()}) was stolen!");
-                    int nextObjectIndex = saveGame.Level.OPop();
-                    if (nextObjectIndex != 0)
-                    {
-                        // Give the item to the thief so it can later drop it
-                        Item stolenItem = item.Clone();
-                        saveGame.SetLevelItem(nextObjectIndex, stolenItem);
-                        stolenItem.Count = 1;
-                        stolenItem.Marked = false;
-                        stolenItem.HoldingMonsterIndex = monsterIndex;
-                        stolenItem.NextInStack = monster.FirstHeldItemIndex;
-                        monster.FirstHeldItemIndex = nextObjectIndex;
-                    }
+
+                    // Give the item to the thief so it can later drop it
+                    Item stolenItem = item.Clone();
+                    stolenItem.Count = 1;
+                    stolenItem.Marked = false;
+
+                    saveGame.AddItemToMonster(item.Clone(), monster);
+
                     saveGame.Player.InvenItemIncrease(i, -1);
                     saveGame.Player.InvenItemOptimize(i);
                     obvious = true;

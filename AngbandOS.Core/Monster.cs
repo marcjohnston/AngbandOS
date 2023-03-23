@@ -976,10 +976,10 @@ namespace AngbandOS.Core
                         saveGame.Level.Monsters[tile.MonsterIndex].SleepLevel = 0;
                     }
                     // Update our position
-                    tile.MonsterIndex = GetMonsterIndex(saveGame);
+                    tile.MonsterIndex = GetMonsterIndex();
                     MapY = newY;
                     MapX = newX;
-                    saveGame.Level.Monsters.UpdateMonsterVisibility(GetMonsterIndex(saveGame), true);
+                    saveGame.Level.Monsters.UpdateMonsterVisibility(GetMonsterIndex(), true);
                     saveGame.Level.RedrawSingleLocation(oldY, oldX);
                     saveGame.Level.RedrawSingleLocation(newY, newX);
                     // If we are hostile and the player saw us move, then saveGame.Disturb them
@@ -1064,11 +1064,11 @@ namespace AngbandOS.Core
                                     saveGame.MsgPrint($"{monsterName} picks up {itemName}.");
                                 }
                                 // And pick up the actual item
-                                saveGame.Level.ExciseObjectIdx(thisItemIndex);
+                                saveGame.Level.ExciseObject(item);
                                 item.Marked = false;
                                 item.Y = 0;
                                 item.X = 0;
-                                item.HoldingMonsterIndex = GetMonsterIndex(saveGame);
+                                item.HoldingMonsterIndex = GetMonsterIndex();
                                 item.NextInStack = FirstHeldItemIndex;
                                 FirstHeldItemIndex = thisItemIndex;
                             }
@@ -1245,7 +1245,7 @@ namespace AngbandOS.Core
                         // Implement the attack as a projectile
                         if (pt != null)
                         {
-                            saveGame.Project(GetMonsterIndex(saveGame), 0, target.MapY, target.MapX, damage, pt, ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                            saveGame.Project(GetMonsterIndex(), 0, target.MapY, target.MapX, damage, pt, ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
                             // If we touched the target we might get burned or zapped
                             if (method.AttackTouchesTarget)
                             {
@@ -1672,7 +1672,7 @@ namespace AngbandOS.Core
             }
             // Make the radius negative to indicate we need a cone instead of a ball
             radius = 0 - radius;
-            saveGame.Project(GetMonsterIndex(saveGame), radius, targetY, targetX, damage, projectile, projectionFlags);
+            saveGame.Project(GetMonsterIndex(), radius, targetY, targetX, damage, projectile, projectionFlags);
         }
 
         /// <summary>
@@ -1689,7 +1689,7 @@ namespace AngbandOS.Core
             {
                 radius = Race.Powerful ? 3 : 2;
             }
-            saveGame.Project(GetMonsterIndex(saveGame), radius, saveGame.Player.MapY, saveGame.Player.MapX, damage, projectile, projectionFlag);
+            saveGame.Project(GetMonsterIndex(), radius, saveGame.Player.MapY, saveGame.Player.MapX, damage, projectile, projectionFlag);
         }
 
         /// <summary>
@@ -1711,7 +1711,7 @@ namespace AngbandOS.Core
             }
             // Make the radius negative to indicate we need a cone instead of a ball
             radius = 0 - radius;
-            saveGame.Project(GetMonsterIndex(saveGame), radius, saveGame.Player.MapY, saveGame.Player.MapX, damage, projectile, projectionFlags);
+            saveGame.Project(GetMonsterIndex(), radius, saveGame.Player.MapY, saveGame.Player.MapX, damage, projectile, projectionFlags);
         }
 
         /// <summary>
@@ -1725,7 +1725,7 @@ namespace AngbandOS.Core
         public void FireBoltAtMonster(SaveGame saveGame, int targetY, int targetX, Projectile projectile, int damage)
         {
             const ProjectionFlag projectionFlags = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            saveGame.Project(GetMonsterIndex(saveGame), 0, targetY, targetX, damage, projectile, projectionFlags);
+            saveGame.Project(GetMonsterIndex(), 0, targetY, targetX, damage, projectile, projectionFlags);
         }
 
         /// <summary>
@@ -1739,7 +1739,7 @@ namespace AngbandOS.Core
         {
             fear = false;
             // Track the monster that has just taken damage
-            if (saveGame.TrackedMonsterIndex == GetMonsterIndex(saveGame))
+            if (saveGame.TrackedMonsterIndex == GetMonsterIndex())
             {
                 saveGame.RedrawHealthFlaggedAction.Set();
             }
@@ -1780,9 +1780,9 @@ namespace AngbandOS.Core
                         saveGame.MsgPrint($"{monsterName} is killed.");
                     }
                     // Let the save game know we've died
-                    saveGame.MonsterDeath(GetMonsterIndex(saveGame));
+                    saveGame.MonsterDeath(GetMonsterIndex());
                     // Delete us from the monster list
-                    saveGame.Level.Monsters.DeleteMonsterByIndex(GetMonsterIndex(saveGame), true);
+                    saveGame.Level.Monsters.DeleteMonsterByIndex(GetMonsterIndex(), true);
                     fear = false;
                     return;
                 }
@@ -1823,7 +1823,7 @@ namespace AngbandOS.Core
         public void FireBoltAtPlayer(SaveGame saveGame, Projectile projectile, int damage)
         {
             const ProjectionFlag projectionFlags = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-            saveGame.Project(GetMonsterIndex(saveGame), 0, saveGame.Player.MapY, saveGame.Player.MapX, damage, projectile, projectionFlags);
+            saveGame.Project(GetMonsterIndex(), 0, saveGame.Player.MapY, saveGame.Player.MapX, damage, projectile, projectionFlags);
         }
 
         /// <summary>
@@ -2121,7 +2121,7 @@ namespace AngbandOS.Core
                 {
                     for (int i = 0; i < 8; i++)
                     {
-                        int monsterIndex = GetMonsterIndex(saveGame);
+                        int monsterIndex = GetMonsterIndex();
                         targetLocation = new GridCoordinate(saveGame.Player.MapX + saveGame.Level.OrderedDirectionXOffset[(monsterIndex + i) & 7], saveGame.Player.MapY + saveGame.Level.OrderedDirectionYOffset[(monsterIndex + i) & 7]);
                         // We might have got a '5' meaning stay where we are, so replace that with
                         // moving towards the player
@@ -2576,7 +2576,7 @@ namespace AngbandOS.Core
                 return false;
             }
             int playerLevel = saveGame.Player.Level;
-            int monsterLevel = Race.Level + (GetMonsterIndex(saveGame) & 0x08) + 25;
+            int monsterLevel = Race.Level + (GetMonsterIndex() & 0x08) + 25;
             // If we're tougher than the player, don't move away
             if (monsterLevel > playerLevel + 4)
             {
@@ -2600,9 +2600,9 @@ namespace AngbandOS.Core
         /// <summary>
         /// Returns the index of this monster in the monster list.  This method is provided for backwards compatability and should NOT be used.  Will be deleted when no longer needed.
         /// </summary>
-        public int GetMonsterIndex(SaveGame saveGame) // TODO: Needs to be removed.
+        public int GetMonsterIndex() // TODO: Needs to be removed.
         {
-            return saveGame.Level.Monsters.GetMonsterIndex(this);
+            return SaveGame.Level.Monsters.GetMonsterIndex(this);
         }
 
         /// <summary>
@@ -2693,7 +2693,7 @@ namespace AngbandOS.Core
                         }
                         else
                         {
-                            effect.ApplyToPlayer(saveGame, monsterLevel, GetMonsterIndex(saveGame), armourClass, monsterDescription, this, ref obvious, ref damage, ref blinked);
+                            effect.ApplyToPlayer(saveGame, monsterLevel, GetMonsterIndex(), armourClass, monsterDescription, this, ref obvious, ref damage, ref blinked);
                         }
 
                         // Be nice and don't let us be both stunned and cut by the same blow
@@ -2807,7 +2807,7 @@ namespace AngbandOS.Core
                                 if (!Race.ImmuneFire)
                                 {
                                     saveGame.MsgPrint($"{monsterName} is suddenly very hot!");
-                                    if (saveGame.Level.Monsters.DamageMonster(GetMonsterIndex(saveGame), Program.Rng.DiceRoll(2, 6), out fear,
+                                    if (saveGame.Level.Monsters.DamageMonster(GetMonsterIndex(), Program.Rng.DiceRoll(2, 6), out fear,
                                         " turns into a pile of ash."))
                                     {
                                         blinked = false;
@@ -2828,7 +2828,7 @@ namespace AngbandOS.Core
                                 if (!Race.ImmuneLightning)
                                 {
                                     saveGame.MsgPrint($"{monsterName} gets zapped!");
-                                    if (saveGame.Level.Monsters.DamageMonster(GetMonsterIndex(saveGame), Program.Rng.DiceRoll(2, 6), out fear,
+                                    if (saveGame.Level.Monsters.DamageMonster(GetMonsterIndex(), Program.Rng.DiceRoll(2, 6), out fear,
                                         " turns into a pile of cinder."))
                                     {
                                         blinked = false;
@@ -2941,11 +2941,11 @@ namespace AngbandOS.Core
                 min /= 2;
             }
             saveGame.PlaySound(SoundEffect.Teleport);
-            saveGame.Level.Grid[ny][nx].MonsterIndex = GetMonsterIndex(saveGame);
+            saveGame.Level.Grid[ny][nx].MonsterIndex = GetMonsterIndex();
             saveGame.Level.Grid[oy][ox].MonsterIndex = 0;
             MapY = ny;
             MapX = nx;
-            saveGame.Level.Monsters.UpdateMonsterVisibility(GetMonsterIndex(saveGame), true);
+            saveGame.Level.Monsters.UpdateMonsterVisibility(GetMonsterIndex(), true);
             saveGame.Level.RedrawSingleLocation(oy, ox);
             saveGame.Level.RedrawSingleLocation(ny, nx);
         }

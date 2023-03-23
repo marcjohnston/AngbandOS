@@ -52,7 +52,7 @@
                     {
                         monster.Health = monster.MaxHealth;
                     }
-                    if (saveGame.TrackedMonsterIndex == monster.GetMonsterIndex(saveGame))
+                    if (saveGame.TrackedMonsterIndex == monster.GetMonsterIndex())
                     {
                         saveGame.RedrawHealthFlaggedAction.Set();
                     }
@@ -94,7 +94,7 @@
                     {
                         monster.Health = monster.MaxHealth;
                     }
-                    if (saveGame.TrackedMonsterIndex == monster.GetMonsterIndex(saveGame))
+                    if (saveGame.TrackedMonsterIndex == monster.GetMonsterIndex())
                     {
                         saveGame.RedrawHealthFlaggedAction.Set();
                     }
