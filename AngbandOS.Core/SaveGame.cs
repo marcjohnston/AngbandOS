@@ -8585,10 +8585,11 @@ namespace AngbandOS.Core
         /// </param>
         public void RunOneStep(int direction)
         {
+            // Is this a new run?
             if (direction != 0)
             {
                 // Check if we can actually run in that direction
-                if (AutoNavigator.SeeWall(Level, direction, Player.MapY, Player.MapX))
+                if (_autoNavigator.SeeWall(direction, Player.MapY, Player.MapX))
                 {
                     MsgPrint("You cannot run in that direction.");
                     Disturb(false);
@@ -8596,7 +8597,7 @@ namespace AngbandOS.Core
                 }
                 UpdateTorchRadiusFlaggedAction.Set();
                 // Initialise our navigation state
-                _autoNavigator = new AutoNavigator(this, direction); // TODO: This is aweful
+                _autoNavigator.StartRun(direction);
             }
             else
             {

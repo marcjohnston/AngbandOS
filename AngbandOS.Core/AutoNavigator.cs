@@ -48,20 +48,14 @@ namespace AngbandOS.Core
         public AutoNavigator(SaveGame saveGame) // TODO: This constructor needs to be deleted.
         {
             SaveGame = saveGame;
-            CurrentRunDirection = 5;
-            _previousRunDirection = 5;
-            _findOpenarea = true;
-            _findBreakright = false;
-            _findBreakleft = false;
         }
 
         /// <summary>
         /// Initialise the navigator with a direction
         /// </summary>
         /// <param name="direction"> The direction in which we wish to run </param>
-        public AutoNavigator(SaveGame saveGame, int direction)
+        public void StartRun(int direction)
         {
-            SaveGame = saveGame;
             CurrentRunDirection = direction;
             _previousRunDirection = direction;
             _findOpenarea = true;
@@ -78,25 +72,25 @@ namespace AngbandOS.Core
             // Get the index of our run direction in the cycle
             int cycleIndex = _cycleEntryPoint[direction];
             // If there's a wall ahead-left of us, remember that
-            if (SeeWall(SaveGame.Level, _directionCycle[cycleIndex + 1], player.MapY, player.MapX))
+            if (SeeWall(_directionCycle[cycleIndex + 1], player.MapY, player.MapX))
             {
                 _findBreakleft = true;
                 wallAheadLeft = true;
             }
             // Else check if there's a wall ahead-left of our first step, and remember that
-            else if (SeeWall(SaveGame.Level, _directionCycle[cycleIndex + 1], row, col))
+            else if (SeeWall(_directionCycle[cycleIndex + 1], row, col))
             {
                 _findBreakleft = true;
                 wallDoubleAheadLeft = true;
             }
             // If there's a wall ahead-right of us, remember that
-            if (SeeWall(SaveGame.Level, _directionCycle[cycleIndex - 1], player.MapY, player.MapX))
+            if (SeeWall(_directionCycle[cycleIndex - 1], player.MapY, player.MapX))
             {
                 _findBreakright = true;
                 wallAheadRight = true;
             }
             // Else check if there's a wall ahead-right of our first step, and remember that
-            else if (SeeWall(SaveGame.Level, _directionCycle[cycleIndex - 1], row, col))
+            else if (SeeWall(_directionCycle[cycleIndex - 1], row, col))
             {
                 _findBreakright = true;
                 wallDoubleAheadRight = true;
@@ -120,7 +114,7 @@ namespace AngbandOS.Core
                 }
                 // If there's a wall directly ahead but not diagonally ahead, nudge our assumed
                 // previous direction away from it
-                else if (SeeWall(SaveGame.Level, _directionCycle[cycleIndex], row, col))
+                else if (SeeWall(_directionCycle[cycleIndex], row, col))
                 {
                     if (wallAheadLeft && !wallAheadRight)
                     {
@@ -314,9 +308,9 @@ namespace AngbandOS.Core
                 {
                     row = player.MapY + level.KeypadDirectionYOffset[option];
                     col = player.MapX + level.KeypadDirectionXOffset[option];
-                    if (!SeeWall(SaveGame.Level, option, row, col) || !SeeWall(SaveGame.Level, checkDir, row, col))
+                    if (!SeeWall(option, row, col) || !SeeWall(checkDir, row, col))
                     {
-                        if (SeeNothing(SaveGame.Level, option, row, col) && SeeNothing(SaveGame.Level, option2, row, col))
+                        if (SeeNothing(option, row, col) && SeeNothing(option2, row, col))
                         {
                             CurrentRunDirection = option;
                             _previousRunDirection = option2;
@@ -334,7 +328,7 @@ namespace AngbandOS.Core
                 }
             }
             // No options, so just return whether or not we can move forward
-            return SeeWall(SaveGame.Level, CurrentRunDirection, player.MapY, player.MapX);
+            return SeeWall(CurrentRunDirection, player.MapY, player.MapX);
         }
 
         /// <summary>
@@ -344,22 +338,22 @@ namespace AngbandOS.Core
         /// <param name="y"> The y coordinate of our location </param>
         /// <param name="x"> The x coordinate of our location </param>
         /// <returns> True if we can see a wall, false if not </returns>
-        public static bool SeeWall(Level level, int direction, int y, int x)
+        public bool SeeWall(int direction, int y, int x)
         {
-            y += level.KeypadDirectionYOffset[direction];
-            x += level.KeypadDirectionXOffset[direction];
+            y += SaveGame.Level.KeypadDirectionYOffset[direction];
+            x += SaveGame.Level.KeypadDirectionXOffset[direction];
             // Out of bounds is not a wall
-            if (!level.InBounds2(y, x))
+            if (!SaveGame.Level.InBounds2(y, x))
             {
                 return false;
             }
             // Any passable grid is okay
-            if (level.GridPassable(y, x))
+            if (SaveGame.Level.GridPassable(y, x))
             {
                 return false;
             }
             // If we don't know what's there it's okay
-            if (level.Grid[y][x].TileFlags.IsClear(GridTile.PlayerMemorised))
+            if (SaveGame.Level.Grid[y][x].TileFlags.IsClear(GridTile.PlayerMemorised))
             {
                 return false;
             }
@@ -374,27 +368,27 @@ namespace AngbandOS.Core
         /// <param name="y"> The y coordinate of our location </param>
         /// <param name="x"> The x coordinate of our location </param>
         /// <returns> </returns>
-        private static bool SeeNothing(Level level, int direction, int y, int x)
+        private bool SeeNothing(int direction, int y, int x)
         {
-            y += level.KeypadDirectionYOffset[direction];
-            x += level.KeypadDirectionXOffset[direction];
+            y += SaveGame.Level.KeypadDirectionYOffset[direction];
+            x += SaveGame.Level.KeypadDirectionXOffset[direction];
             // Out of bounds is empty
-            if (!level.InBounds2(y, x))
+            if (!SaveGame.Level.InBounds2(y, x))
             {
                 return true;
             }
             // Unknown tiles are not empty
-            if (level.Grid[y][x].TileFlags.IsSet(GridTile.PlayerMemorised))
+            if (SaveGame.Level.Grid[y][x].TileFlags.IsSet(GridTile.PlayerMemorised))
             {
                 return false;
             }
             // Anything we can walk through is empty
-            if (!level.GridPassable(y, x))
+            if (!SaveGame.Level.GridPassable(y, x))
             {
                 return true;
             }
             // It's empty if we can't see it
-            return !level.PlayerCanSeeBold(y, x);
+            return !SaveGame.Level.PlayerCanSeeBold(y, x);
         }
     }
 }
