@@ -17,6 +17,22 @@ namespace AngbandOS.Core.InventorySlots
         /// </summary>
         public override bool IsEquipment => true;
 
+        /// Checks the quantity of an item and removes it, when the quanity is zero.
+        /// </summary>
+        /// <param name="oPtr"></param>
+        public override void ItemOptimize(Item oPtr)
+        {
+            if (oPtr.Count > 0)
+            {
+                return;
+            }
+            int foundSlot = FindInventorySlot(oPtr);
+            SaveGame.SetInventoryItem(foundSlot, null);
+            SaveGame.UpdateBonusesFlaggedAction.Set();
+            SaveGame.UpdateTorchRadiusFlaggedAction.Set();
+            SaveGame.UpdateManaFlaggedAction.Set();
+        }
+
         /// <summary>
         /// Allows wielded equipment items to process world.  By default, initiates the hook for all items in the inventory slot to perform processing during the ProcessWorld event through
         /// the EquipmentProcessWorld method.

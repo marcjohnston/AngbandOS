@@ -9,7 +9,7 @@
 namespace AngbandOS.Core
 {
     [Serializable]
-    internal class Monster
+    internal class Monster : IItemContainer
     {
         public int ConfusionLevel;
 
@@ -80,6 +80,55 @@ namespace AngbandOS.Core
         {
             SaveGame = saveGame;
         }
+
+
+        /// <summary>
+        /// Modifies the quantity of an item.  No player stats are modified.
+        /// </summary>
+        /// <param name="oPtr"></param>
+        /// <param name="num"></param>
+        public void ItemIncrease(Item oPtr, int num)
+        {
+            num += oPtr.Count;
+            if (num > 255)
+            {
+                num = 255;
+            }
+            else if (num < 0)
+            {
+                num = 0;
+            }
+            num -= oPtr.Count;
+            oPtr.Count += num;
+        }
+
+        /// <summary>
+        /// Renders a description of the item.  For a non-inventory slot, the description is rendered as the player viewing the item.
+        /// </summary>
+        /// <param name="item"></param>
+        public void ItemDescribe(Item oPtr)
+        {
+            string oName = oPtr.Description(true, 3);
+            SaveGame.MsgPrint($"You see {oName}.");
+        }
+
+        /// <summary>
+        /// Checks the quantity of an item and removes it, when the quanity is zero. 
+        /// </summary>
+        /// <param name="oPtr"></param>
+        public void ItemOptimize(Item oPtr)
+        {
+            if (oPtr.Count != 0)
+            {
+                return;
+            }
+            Items.Remove(oPtr);
+        }
+
+        /// <summary>
+        /// Returns false, because the item container doesn't belong to the players inventory.
+        /// </summary>
+        public bool IsInInventory => false;
 
         /// <summary>
         /// Returns the name of the monster.

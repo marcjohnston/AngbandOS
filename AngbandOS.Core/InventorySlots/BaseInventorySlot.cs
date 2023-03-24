@@ -11,7 +11,7 @@ using System.Collections;
 namespace AngbandOS.Core.InventorySlots
 {
     [Serializable]
-    internal abstract class BaseInventorySlot : IEnumerable<int>
+    internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer // TODO: Rename to InventorySlot when the enumeration is refactored out of existence
     {
         protected const string alphabet = "abcdefghijklmnopqrstuvwxyz";
         public SaveGame SaveGame { get; }
@@ -23,6 +23,67 @@ namespace AngbandOS.Core.InventorySlots
         public abstract int[] InventorySlots { get; }
         public virtual string TakeOffMessage => "You were wearing";
         public abstract string Label(int index);
+
+        /// <summary>
+        /// Modifies the quantity of an item.  For an inventory slot, the player's weight, bonuses and mana are updated accordingly.
+        /// </summary>
+        /// <param name="oPtr"></param>
+        /// <param name="num"></param>
+        public virtual void ItemIncrease(Item oPtr, int num)
+        {
+            num += oPtr.Count;
+            if (num > 255)
+            {
+                num = 255;
+            }
+            else if (num < 0)
+            {
+                num = 0;
+            }
+            num -= oPtr.Count;
+            if (num != 0)
+            {
+                oPtr.Count += num;
+                SaveGame.Player.WeightCarried += num * oPtr.Weight;
+                SaveGame.UpdateBonusesFlaggedAction.Set();
+                SaveGame.UpdateManaFlaggedAction.Set();
+                SaveGame.NoticeCombineAndReorderFlaggedAction.Set();
+            }
+        }
+
+        /// <summary>
+        /// Renders a description of the item.  For an inventory slot, the description is rendered as possessive.
+        /// </summary>
+        /// <param name="item"></param>
+        public virtual void ItemDescribe(Item oPtr)
+        {
+            string oName = oPtr.Description(true, 3);
+            SaveGame.MsgPrint($"You have {oName}.");
+        }
+
+        protected int FindInventorySlot(Item oPtr)
+        {
+            for (int slot = 0; slot < InventorySlot.Total; slot++)
+            {
+                if (SaveGame.GetInventoryItem(slot) == oPtr)
+                {
+                    return slot;
+                }
+            }
+            throw new Exception("Find slot failed.");
+        }
+
+        /// <summary>
+        /// Checks the quantity of an item and removes it, when the quanity is zero.  This process differs depending on which inventory slot is containing the item.  The pack inventory slot will move
+        /// subsequent items in the pack to the end of the pack; equipment slots won't.
+        /// </summary>
+        /// <param name="oPtr"></param>
+        public abstract void ItemOptimize(Item oPtr);
+
+        /// <summary>
+        /// Returns true, because the item container belongs to the players inventory.
+        /// </summary>
+        public bool IsInInventory => false;
 
         /// <summary>
         /// Hooks into the ProcessWorld event.  All inventory slots receive this event and can perform additional processing based on the items being carried, either in a pack or by being

@@ -1639,6 +1639,17 @@ namespace AngbandOS.Core
             return ranges;
         }
 
+        /// <summary>
+        /// Returns an item selected by the player.  If the player doesn't have any items capable of being selected, false is returned; otherwise the item selected by the user is returned on the output
+        /// parameter.  If the user cancels the selection, a true value is returned and the output item parameter is set to null.
+        /// </summary>
+        /// <param name="returnItem"></param>
+        /// <param name="prompt"></param>
+        /// <param name="canChooseFromEquipment"></param>
+        /// <param name="canChooseFromInventory"></param>
+        /// <param name="canChooseFromFloor"></param>
+        /// <param name="itemFilter"></param>
+        /// <returns></returns>
         public bool SelectItem(out Item? itemIndex, string prompt, bool canChooseFromEquipment, bool canChooseFromInventory, bool canChooseFromFloor, IItemFilter? itemFilter)
         {
             GridTile tile = Level.Grid[Player.MapY][Player.MapX];
@@ -1890,7 +1901,8 @@ namespace AngbandOS.Core
             return item;
         }
 
-        public bool GetItem(out int itemIndex, string prompt, bool canChooseFromEquipment, bool canChooseFromInventory, bool canChooseFromFloor, IItemFilter? itemFilter)
+        [Obsolete("Use SelectItem")]
+        public bool GetItem(out int itemIndex, string prompt, bool canChooseFromEquipment, bool canChooseFromInventory, bool canChooseFromFloor, IItemFilter? itemFilter) // TODO: Obsolete
         {
             GridTile tile = Level.Grid[Player.MapY][Player.MapX];
             int currentItemIndex;
@@ -10333,15 +10345,11 @@ namespace AngbandOS.Core
         public void DoCmdThrow(int damageMultiplier)
         {
             // Get an item to throw
-            if (!GetItem(out int itemIndex, "Throw which item? ", false, true, true, null))
+            if (!SelectItem(out Item? item, "Throw which item? ", false, true, true, null))
             {
-                if (itemIndex == -2)
-                {
-                    MsgPrint("You have nothing to throw.");
-                }
+                MsgPrint("You have nothing to throw.");
                 return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -10352,17 +10360,12 @@ namespace AngbandOS.Core
             }
             // Copy a single item from the item stack as the thrown item
             Item missile = item.Clone(1);
-            if (itemIndex >= 0)
+            item.ItemIncrease(-1);
+            if (item.IsInInventory)
             {
-                Player.InvenItemIncrease(itemIndex, -1);
-                Player.InvenItemDescribe(itemIndex);
-                Player.InvenItemOptimize(itemIndex);
+                item.ItemDescribe();
             }
-            else
-            {
-                Level.FloorItemIncrease(0 - itemIndex, -1);
-                Level.FloorItemOptimize(0 - itemIndex);
-            }
+            item.ItemOptimize();
             string missileName = missile.Description(false, 3);
             Colour missileColour = missile.BaseItemCategory.FlavorColour;
             char missileCharacter = missile.BaseItemCategory.FlavorCharacter;

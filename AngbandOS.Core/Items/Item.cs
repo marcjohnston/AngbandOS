@@ -1,3 +1,5 @@
+using System.ComponentModel;
+
 namespace AngbandOS.Core.Items
 {
     [Serializable]
@@ -54,6 +56,96 @@ namespace AngbandOS.Core.Items
         public int DamageDice;
         public int DamageDiceSides;
         public int Discount;
+        public FixedArtifact? FixedArtifact; // If this item is a fixed artifact, this will be not null.
+        public int HoldingMonsterIndex;
+        public string Inscription = "";
+        public int ItemSubCategory; // TODO: Deprecated.  Needs to be deleted.
+
+        /// <summary>
+        /// Returns the container that is holding the container.  The container is not available publicly.  Items need to encapsulate any container functionality that is needed publicly.
+        /// </summary>
+        private IItemContainer? GetContainer()
+        {
+            for (int i = 0; i <= InventorySlot.Total; i++)
+            {
+                if (SaveGame.GetInventoryItem(i) == this)
+                {
+                    return SaveGame.SingletonRepository.InventorySlots.Single(_inventorySlot => _inventorySlot.InventorySlots.Contains(i));
+                }
+            }
+
+            if (HoldingMonsterIndex != 0)
+            {
+                return SaveGame.Level.Monsters[HoldingMonsterIndex];
+            } 
+            else if (X != 0 && Y != 0)
+            {
+                return SaveGame.Level.Grid[Y][X];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
+        /// <summary>
+        /// Modifies the quantity of an item.  The modification process differs depending on the type of container containing the item (e.g. inventory slots will update the player stats, monster and grid tile containers do not).
+        /// </summary>
+        /// <param name="oPtr"></param>
+        /// <param name="num"></param>
+        public void ItemIncrease(int num)
+        {
+            IItemContainer container = GetContainer();
+            if (container == null)
+            {
+                throw new Exception("Missing item container.");
+            }
+            container.ItemIncrease(this, num);
+        }
+
+        /// <summary>
+        /// Renders a description of the item.  For an inventory slot, the description is rendered as possessive; non-inventory slots, render as the player is viewing the item.
+        /// </summary>
+        /// <param name="item"></param>
+        public void ItemDescribe()
+        {
+            IItemContainer container = GetContainer();
+            if (container == null)
+            {
+                throw new Exception("Missing item container.");
+            }
+            container.ItemDescribe(this);
+        }
+
+        /// <summary>
+        /// Checks the quantity of an item and removes it, when the quanity is zero.  This process differs depending on which container is containing the item.
+        /// </summary>
+        /// <param name="oPtr"></param>
+        public void ItemOptimize()
+        {
+            IItemContainer container = GetContainer();
+            if (container == null)
+            {
+                throw new Exception("Missing item container.");
+            }
+            container.ItemOptimize(this);
+        }
+
+        public bool IsInInventory
+        {
+            get
+            {
+                IItemContainer container = GetContainer();
+                if (container == null)
+                {
+                    throw new Exception("Missing item container.");
+                }
+                return container.IsInInventory;
+            }
+        }
+
+
         public FixedArtifactId FixedArtifactIndex
         {
             get
@@ -61,11 +153,6 @@ namespace AngbandOS.Core.Items
                 return FixedArtifact == null ? FixedArtifactId.None : FixedArtifact.FixedArtifactID;
             }
         }
-        public FixedArtifact? FixedArtifact; // If this item is a fixed artifact, this will be not null.
-        public int HoldingMonsterIndex;
-        public string Inscription = "";
-        public int ItemSubCategory; // TODO: Deprecated.  Needs to be deleted.
-
         /// <summary>
         /// Returns the item type that this item is based on.  Returns null, if the item is (nothing), as in the inventory.
         /// </summary>
@@ -101,15 +188,6 @@ namespace AngbandOS.Core.Items
         public int Y;
         public readonly SaveGame SaveGame;
         public ItemCharacteristics Characteristics = new ItemCharacteristics();
-
-        /// <summary>
-        /// Creates a new (nothing) item.  DEPRECATED.  This constructor creates a "nothing" item; for which, we are trying to convert to Null.
-        /// </summary>
-        /// <param name="saveGame"></param>
-        public Item(SaveGame saveGame) // TODO: Deprecated ... item cannot be nothing
-        {
-            SaveGame = saveGame;
-        }
 
         public Item(SaveGame saveGame, ItemClass baseItemCategory) // TODO: Deprecated ... Item to be abstract
         {

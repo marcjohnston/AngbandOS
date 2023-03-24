@@ -19,6 +19,28 @@ namespace AngbandOS.Core.InventorySlots
         public override int SortOrder => 0;
         public override string DescribeWieldLocation(int index) => "carrying in your pack";
 
+        /// Checks the quantity of an item and removes it, when the quanity is zero.  The pack inventory slot will move subsequent items in the pack to the end of the pack.
+        /// </summary>
+        /// <param name="oPtr"></param>
+        public override void ItemOptimize(Item oPtr)
+        {
+            // Check to see if there are any items remaining.
+            if (oPtr.Count > 0)
+            {
+                // There are, nothing to do.
+                return;
+            }
+
+            // Remove the item from the inventory slot.
+            int foundSlot = FindInventorySlot(oPtr);
+            SaveGame._invenCnt--;
+            for (int i = foundSlot; i < InventorySlot.PackCount; i++)
+            {
+                SaveGame.SetInventoryItem(i, SaveGame.GetInventoryItem(i + 1));
+            }
+            SaveGame.SetInventoryItem(InventorySlot.PackCount, null);
+        }
+
         public override bool IsEquipment => false;
         /// <summary>
         /// Returns true, to sense the identity of items in the pack only 20% of the time.
