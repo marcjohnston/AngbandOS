@@ -1639,6 +1639,257 @@ namespace AngbandOS.Core
             return ranges;
         }
 
+        public bool SelectItem(out Item? itemIndex, string prompt, bool canChooseFromEquipment, bool canChooseFromInventory, bool canChooseFromFloor, IItemFilter? itemFilter)
+        {
+            GridTile tile = Level.Grid[Player.MapY][Player.MapX];
+            int currentItemIndex;
+            int nextItemIndex;
+            bool allowFloor = false;
+            MsgPrint(null);
+            bool done = false;
+            bool item = false;
+            itemIndex = null;
+            List<int> inventory = new List<int>();
+            List<int> equipment = new List<int>();
+            if (canChooseFromInventory)
+            {
+                for (int ii = 0; ii < InventorySlot.PackCount; ii++)
+                {
+                    Item? oPtr = GetInventoryItem(ii);
+                    if (oPtr != null && (itemFilter == null || itemFilter.ItemMatches(oPtr)))
+                    {
+                        inventory.Add(ii);
+                    }
+                }
+            }
+            if (canChooseFromEquipment)
+            {
+                foreach (BaseInventorySlot inventorySlot in SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsEquipment))
+                {
+                    foreach (int ii in inventorySlot.InventorySlots)
+                    {
+                        Item? oPtr = GetInventoryItem(ii);
+                        if (oPtr != null && (itemFilter == null || itemFilter.ItemMatches(oPtr)))
+                        {
+                            equipment.Add(ii);
+                        }
+                    }
+                }
+            }
+            if (canChooseFromFloor)
+            {
+                for (currentItemIndex = tile.ItemIndex; currentItemIndex != 0; currentItemIndex = nextItemIndex)
+                {
+                    Item? oPtr = GetLevelItem(currentItemIndex);
+                    nextItemIndex = (oPtr == null ? 0 : oPtr.NextInStack);
+                    if (oPtr != null && Player.ItemMatchesFilter(oPtr, itemFilter))
+                    {
+                        allowFloor = true;
+                    }
+                }
+            }
+            if (!allowFloor && inventory.Count == 0 && equipment.Count == 0)
+            {
+                ViewingItemList = false;
+                itemIndex = null;
+                done = true;
+            }
+            else
+            {
+                if (ViewingItemList && ViewingEquipment && canChooseFromEquipment)
+                {
+                    ViewingEquipment = true;
+                }
+                else if (canChooseFromInventory)
+                {
+                    ViewingEquipment = false;
+                }
+                else if (canChooseFromEquipment)
+                {
+                    ViewingEquipment = true;
+                }
+                else
+                {
+                    ViewingEquipment = false;
+                }
+            }
+            ScreenBuffer? savedScreen = null;
+            if (ViewingItemList)
+            {
+                savedScreen = Screen.Clone();
+            }
+            while (!done && !Shutdown)
+            {
+                if (!ViewingEquipment)
+                {
+                    if (ViewingItemList)
+                    {
+                        Player.ShowInven(_inventorySlot => !_inventorySlot.IsEquipment, itemFilter);
+                    }
+                }
+                else
+                {
+                    if (ViewingItemList)
+                    {
+                        Player.ShowEquip(itemFilter);
+                    }
+                }
+                string tmpVal;
+                string outVal;
+                if (!ViewingEquipment)
+                {
+                    outVal = "Inven:";
+                    if (inventory.Count > 0)
+                    {
+                        tmpVal = $" {GetLabelRanges(inventory)},";
+                        outVal += tmpVal;
+                    }
+                    if (!ViewingItemList)
+                    {
+                        outVal += " * to see,";
+                    }
+                    if (canChooseFromEquipment)
+                    {
+                        outVal += " / for Equip,";
+                    }
+                }
+                else
+                {
+                    outVal = "Equip:";
+                    if (equipment.Count > 0)
+                    {
+                        tmpVal = $" {GetLabelRanges(equipment)}";
+                        outVal += tmpVal;
+                    }
+                    if (!ViewingItemList)
+                    {
+                        outVal += " * to see,";
+                    }
+                    if (canChooseFromInventory)
+                    {
+                        outVal += " / for Inven,";
+                    }
+                }
+                if (allowFloor)
+                {
+                    outVal += " - for floor,";
+                }
+                outVal += " ESC";
+                tmpVal = $"({outVal}) {prompt}";
+                Screen.PrintLine(tmpVal, 0, 0);
+                char which = Inkey();
+                int k;
+                switch (which)
+                {
+                    case '\x1b':
+                        {
+                            done = true;
+                            break;
+                        }
+                    case '*':
+                    case '?':
+                    case ' ':
+                        {
+                            if (!ViewingItemList)
+                            {
+                                savedScreen = Screen.Clone();
+                                ViewingItemList = true;
+                            }
+                            else
+                            {
+                                Screen.Restore(savedScreen);
+                                ViewingItemList = false;
+                            }
+                            break;
+                        }
+                    case '/':
+                        {
+                            if (!canChooseFromInventory || !canChooseFromEquipment)
+                            {
+                                break;
+                            }
+                            if (ViewingItemList)
+                            {
+                                Screen.Restore(savedScreen);
+                            }
+                            ViewingEquipment = !ViewingEquipment;
+                            break;
+                        }
+                    case '-':
+                        {
+                            if (allowFloor)
+                            {
+                                for (currentItemIndex = tile.ItemIndex; currentItemIndex != 0; currentItemIndex = nextItemIndex)
+                                {
+                                    Item? oPtr = GetLevelItem(currentItemIndex);
+                                    nextItemIndex = (oPtr == null ? 0 : oPtr.NextInStack);
+                                    if (oPtr != null && Player.ItemMatchesFilter(oPtr, itemFilter))
+                                    {
+                                        itemIndex = GetLevelItem(currentItemIndex);
+                                        item = true;
+                                        done = true;
+                                        break;
+                                    }
+                                }
+                                if (done)
+                                {
+                                }
+                            }
+                            break;
+                        }
+                    case '\n':
+                    case '\r':
+                        {
+                            if (!ViewingEquipment)
+                            {
+                                k = inventory.Count == 1 ? inventory[0] : -1;
+                            }
+                            else
+                            {
+                                k = equipment.Count == 1 ? equipment[0] : -1;
+                            }
+                            if (!Player.GetItemOkay(k, itemFilter))
+                            {
+                                break;
+                            }
+                            itemIndex = GetInventoryItem(k);
+                            item = true;
+                            done = true;
+                            break;
+                        }
+                    default:
+                        {
+                            bool ver = char.IsUpper(which);
+                            if (ver)
+                            {
+                                which = char.ToLower(which);
+                            }
+                            k = !ViewingEquipment ? Player.LabelToInven(which) : Player.LabelToEquip(which);
+                            if (!Player.GetItemOkay(k, itemFilter))
+                            {
+                                break;
+                            }
+                            if (ver && !Verify("Try", k))
+                            {
+                                done = true;
+                                break;
+                            }
+                            itemIndex = GetInventoryItem(k);
+                            item = true;
+                            done = true;
+                            break;
+                        }
+                }
+            }
+            if (savedScreen != null)
+            {
+                Screen.Restore(savedScreen);
+            }
+            ViewingItemList = false;
+            Screen.PrintLine("", 0, 0);
+            return item;
+        }
+
         public bool GetItem(out int itemIndex, string prompt, bool canChooseFromEquipment, bool canChooseFromInventory, bool canChooseFromFloor, IItemFilter? itemFilter)
         {
             GridTile tile = Level.Grid[Player.MapY][Player.MapX];
