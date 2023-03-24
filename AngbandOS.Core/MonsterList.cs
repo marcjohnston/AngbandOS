@@ -349,16 +349,7 @@ namespace AngbandOS.Core
                 SaveGame.HealthTrack(0);
             }
             SaveGame.Level.Grid[y][x].MonsterIndex = 0;
-            for (int thisOIdx = mPtr.FirstHeldItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
-            {
-                Item? oPtr = SaveGame.GetLevelItem(thisOIdx);
-                nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
-                if (oPtr != null)
-                {
-                    oPtr.HoldingMonsterIndex = 0;
-                    SaveGame.Level.DeleteObjectIdx(thisOIdx);
-                }
-            }
+            mPtr.Items.Clear();
             _monsters[i] = new Monster(SaveGame);
             SaveGame.Level.MCnt--;
             if (visibly)
@@ -1118,7 +1109,6 @@ namespace AngbandOS.Core
 
         private void CompactMonstersAux(int i1, int i2)
         {
-            int nextOIdx;
             if (i1 == i2)
             {
                 return;
@@ -1128,15 +1118,8 @@ namespace AngbandOS.Core
             int x = mPtr.MapX;
             GridTile cPtr = SaveGame.Level.Grid[y][x];
             cPtr.MonsterIndex = i2;
-            for (int thisOIdx = mPtr.FirstHeldItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
-            {
-                Item? oPtr = SaveGame.GetLevelItem(thisOIdx);
-                nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
-                if (oPtr != null)
-                {
-                    oPtr.HoldingMonsterIndex = i2;
-                }
-            }
+            Monster mPtr2 = _monsters[i2];
+            mPtr2.Items.AddRange(mPtr.Items);
             if (SaveGame.TargetWho == i1)
             {
                 SaveGame.TargetWho = i2;

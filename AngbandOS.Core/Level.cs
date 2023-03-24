@@ -553,41 +553,7 @@ namespace AngbandOS.Core
                 // It is.  Get the monster.
                 Monster mPtr = Monsters[jPtr.HoldingMonsterIndex];
 
-                // Scan the items that the monster is holding.
-                for (thisOIdx = mPtr.FirstHeldItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
-                {
-                    // Get the object the monster is holding.
-                    Item? oPtr = SaveGame.GetLevelItem(thisOIdx);
-
-                    // Get the next item that the monster is holding.
-                    nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
-
-                    // Check to see if the monster item is the item we want to excise.
-                    if (oPtr != null && oPtr == jPtr)
-                    {
-                        // Check to see if there was a previous item.
-                        if (prevOIdx == 0)
-                        {
-                            // There wasn't ... set the monster first held to be the next item.
-                            mPtr.FirstHeldItemIndex = nextOIdx;
-                        }
-                        else
-                        {
-                            // There is a previous object ... set that object's next item to be next.
-                            Item? kPtr = SaveGame.GetLevelItem(prevOIdx);
-                            if (kPtr == null)
-                            {
-                                throw new Exception("Excise invalid previous item");
-                            }
-                            kPtr.NextInStack = nextOIdx;
-                        }
-                        oPtr.NextInStack = 0;
-                        break;
-                    }
-
-                    // Track this pointer for the next round.
-                    prevOIdx = thisOIdx;
-                }
+                mPtr.Items.Remove(jPtr);
             }
             else
             {
@@ -1376,7 +1342,7 @@ namespace AngbandOS.Core
                 if (oPtr.HoldingMonsterIndex != 0)
                 {
                     Monster mPtr = Monsters[oPtr.HoldingMonsterIndex];
-                    mPtr.FirstHeldItemIndex = 0;
+                    mPtr.Items.Clear();
                 }
                 else
                 {
@@ -1490,11 +1456,6 @@ namespace AngbandOS.Core
             }
             if (oPtr.HoldingMonsterIndex != 0)
             {
-                Monster mPtr = Monsters[oPtr.HoldingMonsterIndex];
-                if (mPtr.FirstHeldItemIndex == i1)
-                {
-                    mPtr.FirstHeldItemIndex = i2;
-                }
             }
             else
             {
@@ -1505,9 +1466,9 @@ namespace AngbandOS.Core
                 {
                     cPtr.ItemIndex = i2;
                 }
+                SaveGame.SetLevelItem(i2, SaveGame.GetLevelItem(i1));
+                SaveGame.SetLevelItem(i1, null);
             }
-            SaveGame.SetLevelItem(i2, SaveGame.GetLevelItem(i1));
-            SaveGame.SetLevelItem(i1, null);
         }
 
         private Colour DimColour(Colour a)

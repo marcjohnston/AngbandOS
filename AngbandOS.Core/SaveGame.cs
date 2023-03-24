@@ -348,8 +348,7 @@ namespace AngbandOS.Core
             {
                 SetLevelItem(nextObjectIndex, item);
                 item.HoldingMonsterIndex = monster.GetMonsterIndex();
-                item.NextInStack = monster.FirstHeldItemIndex;
-                monster.FirstHeldItemIndex = nextObjectIndex;
+                monster.Items.Add(item);
                 return true;
             }
             return false;
@@ -1952,18 +1951,10 @@ namespace AngbandOS.Core
             {
                 cloned = true;
             }
-            for (int thisOIdx = mPtr.FirstHeldItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
+            foreach (Item oPtr in mPtr.Items)
             {
-                Item? oPtr = GetLevelItem(thisOIdx);
-                nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
-                if (oPtr == null)
-                {
-                    return;
-                }
                 oPtr.HoldingMonsterIndex = 0;
-                Item qPtr = oPtr.Clone();
-                Level.DeleteObjectIdx(thisOIdx);
-                Level.DropNear(qPtr, -1, y, x);
+                Level.DropNear(oPtr, -1, y, x);
             }
             if (mPtr.StolenGold > 0)
             {
@@ -1971,7 +1962,7 @@ namespace AngbandOS.Core
                 oPtr.TypeSpecificValue = mPtr.StolenGold;
                 Level.DropNear(oPtr, -1, y, x);
             }
-            mPtr.FirstHeldItemIndex = 0;
+            mPtr.Items.Clear();
             if (rPtr.Drop60 && Program.Rng.RandomLessThan(100) < 60)
             {
                 number++;
@@ -19180,29 +19171,28 @@ namespace AngbandOS.Core
                             s1 = "He is ";
                         }
                         s2 = "carrying ";
-                        for (thisOIdx = mPtr.FirstHeldItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
+                        bool exitDo = false;
+                        foreach (Item oPtr in mPtr.Items) 
                         {
-                            Item? oPtr = GetLevelItem(thisOIdx);
-                            nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
-                            if (oPtr != null)
+                            string oName = oPtr.Description(true, 3);
+                            outVal = $"{s1}{s2}{s3}{oName} [{info}]";
+                            Screen.PrintLine(outVal, 0, 0);
+                            Screen.UpdateScreen(_console);
+                            Level.MoveCursorRelative(y, x);
+                            query = Inkey();
+                            if (query != '\r' && query != '\n' && query != ' ')
                             {
-                                string oName = oPtr.Description(true, 3);
-                                outVal = $"{s1}{s2}{s3}{oName} [{info}]";
-                                Screen.PrintLine(outVal, 0, 0);
-                                Level.MoveCursorRelative(y, x);
-                                query = Inkey();
-                                if (query != '\r' && query != '\n' && query != ' ')
-                                {
-                                    break;
-                                }
-                                if (query == ' ' && (mode & Constants.TargetLook) == 0)
-                                {
-                                    break;
-                                }
-                                s2 = "also carrying ";
+                                exitDo = true;
+                                break;
                             }
+                            if (query == ' ' && (mode & Constants.TargetLook) == 0)
+                            {
+                                exitDo = true;
+                                break;
+                            }
+                            s2 = "also carrying ";
                         }
-                        if (thisOIdx != 0)
+                        if (exitDo)
                         {
                             break;
                         }

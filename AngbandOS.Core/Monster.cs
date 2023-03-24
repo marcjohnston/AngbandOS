@@ -22,7 +22,7 @@ namespace AngbandOS.Core
 
         public int FearLevel;
 
-        public int FirstHeldItemIndex; // TODO ... use a list of items.
+        public List<Item> Items = new List<Item>();
         public int Generation;
         public int Health;
         public int IndividualMonsterFlags;
@@ -1069,8 +1069,7 @@ namespace AngbandOS.Core
                                 item.Y = 0;
                                 item.X = 0;
                                 item.HoldingMonsterIndex = GetMonsterIndex();
-                                item.NextInStack = FirstHeldItemIndex;
-                                FirstHeldItemIndex = thisItemIndex;
+                                Items.Add(item);
                             }
                             else
                             {
