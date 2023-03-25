@@ -45,16 +45,11 @@ namespace AngbandOS.Core.ItemCategories
         public override void Refill(SaveGame saveGame, Item item)
         {
             // Get an item if we don't already have one
-            if (!saveGame.GetItem(out int itemIndex, "Refuel with which torch? ", false, true, true, new TorchFuelItemFilter()))
+            if (!saveGame.SelectItem(out Item? fuelSource, "Refuel with which torch? ", false, true, true, new TorchFuelItemFilter()))
             {
-                if (itemIndex == -2)
-                {
-                    saveGame.MsgPrint("You have no extra torches.");
-                }
+                saveGame.MsgPrint("You have no extra torches.");
                 return;
             }
-
-            Item? fuelSource = itemIndex >= 0 ? saveGame.GetInventoryItem(itemIndex) : saveGame.GetLevelItem(0 - itemIndex);
             if (fuelSource == null)
             {
                 return;
@@ -85,18 +80,9 @@ namespace AngbandOS.Core.ItemCategories
             }
 
             // Update the player's inventory
-            if (itemIndex >= 0)
-            {
-                saveGame.Player.InvenItemIncrease(itemIndex, -1);
-                saveGame.Player.InvenItemDescribe(itemIndex);
-                saveGame.Player.InvenItemOptimize(itemIndex);
-            }
-            else
-            {
-                saveGame.Level.FloorItemIncrease(0 - itemIndex, -1);
-                saveGame.Level.FloorItemDescribe(0 - itemIndex);
-                saveGame.Level.FloorItemOptimize(0 - itemIndex);
-            }
+            fuelSource.ItemIncrease(-1);
+            fuelSource.ItemDescribe();
+            fuelSource.ItemOptimize();
             saveGame.UpdateTorchRadiusFlaggedAction.Set();
         }
         public override Item CreateItem(SaveGame saveGame) => new WoodenTorchLightItem(saveGame);

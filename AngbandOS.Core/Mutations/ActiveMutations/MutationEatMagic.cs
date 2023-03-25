@@ -13,16 +13,15 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
     {
         public override void Activate(SaveGame saveGame)
         {
+            if (!saveGame.SelectItem(out Item? oPtr, "Drain which item? ", false, true, true, new RechargableItemFilter()))
+            {
+                saveGame.MsgPrint("You have nothing appropriate to eat.");
+                return;
+            }
             if (!saveGame.CheckIfRacialPowerWorks(17, 1, Ability.Wisdom, 15))
             {
                 return;
             }
-            if (!saveGame.GetItem(out int item, "Drain which item? ", false, true, true, new RechargableItemFilter()))
-            {
-                return;
-            }
-            Item? oPtr = item >= 0 ? saveGame.GetInventoryItem(item) : saveGame.GetLevelItem(0 - item);
-
             if (oPtr == null)
             {
                 return;

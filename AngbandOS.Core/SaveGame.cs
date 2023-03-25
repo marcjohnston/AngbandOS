@@ -3892,15 +3892,11 @@ namespace AngbandOS.Core
         {
             int amt = 1;
             bool force = CommandArgument > 0;
-            if (!GetItem(out int item, "Turn which item to gold? ", false, true, true, null))
+            if (!SelectItem(out Item? oPtr, "Turn which item to gold? ", false, true, true, null))
             {
-                if (item == -2)
-                {
-                    MsgPrint("You have nothing to turn to gold.");
-                }
+                MsgPrint("You have nothing to turn to gold.");
                 return;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetLevelItem(0 - item);
             if (oPtr == null)
             {
                 return;
@@ -3961,18 +3957,9 @@ namespace AngbandOS.Core
                 Player.Gold += price;
                 RedrawGoldFlaggedAction.Set();
             }
-            if (item >= 0)
-            {
-                Player.InvenItemIncrease(item, -amt);
-                Player.InvenItemDescribe(item);
-                Player.InvenItemOptimize(item);
-            }
-            else
-            {
-                Level.FloorItemIncrease(0 - item, -amt);
-                Level.FloorItemDescribe(0 - item);
-                Level.FloorItemOptimize(0 - item);
-            }
+            oPtr.ItemIncrease(-amt);
+            oPtr.ItemDescribe();
+            oPtr.ItemOptimize();
         }
 
         public void AlterReality()
@@ -4088,21 +4075,17 @@ namespace AngbandOS.Core
         public void ArtifactScroll()
         {
             bool okay;
-            if (!GetItem(out int item, "Enchant which item? ", true, true, true, new WeaponItemFilter()))
+            if (!SelectItem(out Item? oPtr, "Enchant which item? ", true, true, true, new WeaponItemFilter()))
             {
-                if (item == -2)
-                {
-                    MsgPrint("You have nothing to enchant.");
-                }
+                MsgPrint("You have nothing to enchant.");
                 return;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetLevelItem(0 - item);
             if (oPtr == null)
             {
                 return;
             }
             string oName = oPtr.Description(false, 0);
-            string your = item >= 0 ? "Your" : "The";
+            string your = oPtr.IsInInventory ? "Your" : "The";
             string s = oPtr.Count > 1 ? "" : "s";
             MsgPrint($"{your} {oName} radiate{s} a blinding light!");
             if (oPtr.FixedArtifactIndex != 0 || string.IsNullOrEmpty(oPtr.RandartName) == false)
@@ -20069,6 +20052,7 @@ namespace AngbandOS.Core
             }
         }
 
+        
         public void WizSpawnMonster()
         {
             FullScreenOverlay = true;
@@ -20077,7 +20061,7 @@ namespace AngbandOS.Core
             Screen.Clear();
 
             try
-            {
+            {                
                 ConsoleTable table = new ConsoleTable("Name", "Character", "Level");
                 MonsterRace[] monsterRaces = SingletonRepository.MonsterRaces.OrderBy(_monsterRace => _monsterRace.Name).ToArray();
                 foreach (MonsterRace monsterRace in monsterRaces)
