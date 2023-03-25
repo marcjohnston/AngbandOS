@@ -9870,7 +9870,12 @@ namespace AngbandOS.Core
             ViewingEquipment = false;
             ScreenBuffer savedScreen = Screen.Clone();
             // We want to see everything
-            Player.ShowInven(_inventorySlot => !_inventorySlot.IsEquipment, null);
+            bool inventoryShown = Player.ShowInven(_inventorySlot => !_inventorySlot.IsEquipment, null);
+            if (!inventoryShown)
+            {
+                MsgPrint("You have nothing.");
+                return;
+            }
             // Get a new command
             string outVal = $"Inventory: carrying {Player.WeightCarried / 10}.{Player.WeightCarried % 10} pounds ({Player.WeightCarried * 100 / (Player.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
             Screen.PrintLine(outVal, 0, 0);

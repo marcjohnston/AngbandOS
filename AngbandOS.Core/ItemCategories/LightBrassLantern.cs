@@ -48,18 +48,13 @@ namespace AngbandOS.Core.ItemCategories
         public override void Refill(SaveGame saveGame, Item item)
         {
             // Get an item if we don't already have one
-            if (!saveGame.GetItem(out int itemIndex, "Refill with which flask? ", false, true, true, new LanternFuelItemFilter()))
+            if (!saveGame.SelectItem(out Item? fuelSource, "Refill with which flask? ", false, true, true, new LanternFuelItemFilter()))
             {
-                if (itemIndex == -2)
-                {
-                    saveGame.MsgPrint("You have no flasks of oil.");
-                }
+                saveGame.MsgPrint("You have no flasks of oil.");
                 return;
             }
 
             // Get the item from the inventory or from the floor.
-            Item? fuelSource = itemIndex >= 0 ? saveGame.GetInventoryItem(itemIndex) : saveGame.GetLevelItem(0 - itemIndex);
-
             if (fuelSource == null)
             {
                 return;
@@ -86,18 +81,9 @@ namespace AngbandOS.Core.ItemCategories
             }
 
             // Update the inventory
-            if (itemIndex >= 0)
-            {
-                saveGame.Player.InvenItemIncrease(itemIndex, -1);
-                saveGame.Player.InvenItemDescribe(itemIndex);
-                saveGame.Player.InvenItemOptimize(itemIndex);
-            }
-            else
-            {
-                saveGame.Level.FloorItemIncrease(0 - itemIndex, -1);
-                saveGame.Level.FloorItemDescribe(0 - itemIndex);
-                saveGame.Level.FloorItemOptimize(0 - itemIndex);
-            }
+            fuelSource.ItemIncrease(-1);
+            fuelSource.ItemDescribe();
+            fuelSource.ItemOptimize();
             saveGame.UpdateTorchRadiusFlaggedAction.Set();
         }
         public override Item CreateItem(SaveGame saveGame) => new BrassLanternLightItem(saveGame);

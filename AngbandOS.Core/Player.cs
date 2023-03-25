@@ -1957,7 +1957,14 @@ namespace AngbandOS.Core
             ShowInven(_inventorySlot => _inventorySlot.IsEquipment, itemFilter, options);
         }
 
-        public void ShowInven(Func<BaseInventorySlot, bool> inventorySlotPredicate, IItemFilter? itemFilter, ShowInventoryOptions? options = null)
+        /// <summary>
+        /// Shows the players inventory on the screen.  Returns false, if the player has nothing in their inventory.
+        /// </summary>
+        /// <param name="inventorySlotPredicate"></param>
+        /// <param name="itemFilter"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public bool ShowInven(Func<BaseInventorySlot, bool> inventorySlotPredicate, IItemFilter? itemFilter, ShowInventoryOptions? options = null)
         {
             if (options == null)
             {
@@ -2015,16 +2022,21 @@ namespace AngbandOS.Core
                 }
             }
 
-            if (consoleTable.Width < 29)
+            if (consoleTable.Rows.Count() > 0)
             {
-                ConsoleWindow container = new ConsoleWindow(50, 1, 79, consoleTable.Height);
-                container.Clear(SaveGame, Colour.Background);
-                consoleTable.Render(SaveGame, container, new ConsoleTopLeftAlignment());
+                if (consoleTable.Width < 29)
+                {
+                    ConsoleWindow container = new ConsoleWindow(50, 1, 79, consoleTable.Height);
+                    container.Clear(SaveGame, Colour.Background);
+                    consoleTable.Render(SaveGame, container, new ConsoleTopLeftAlignment());
+                }
+                else
+                {
+                    consoleTable.Render(SaveGame, new ConsoleWindow(0, 1, 79, 26), new ConsoleTopRightAlignment());
+                }
+                return true;
             }
-            else
-            {
-                consoleTable.Render(SaveGame, new ConsoleWindow(0, 1, 79, 26), new ConsoleTopRightAlignment());
-            }
+            return false;
         }
     }
 }
