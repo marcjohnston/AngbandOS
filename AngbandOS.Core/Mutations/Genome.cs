@@ -276,7 +276,7 @@
 
         public void OnProcessWorld(SaveGame saveGame, Player player, Level level)
         {
-            foreach (Mutation mutation in _possessed)
+            foreach (Mutation mutation in _possessed.ToArray()) // The list may be modified.  Use the ToArray to prevent an issue.
             {
                 mutation.OnProcessWorld(saveGame);
             }
