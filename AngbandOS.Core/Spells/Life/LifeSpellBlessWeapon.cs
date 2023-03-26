@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Spells.Life
     {
         public override void Cast(SaveGame saveGame)
         {
-            saveGame.BlessWeapon();
+            Worked = saveGame.BlessWeapon();
         }
 
         public override void Initialise(int characterClass)

@@ -1795,6 +1795,7 @@ namespace AngbandOS.Core
                     case '\x1b':
                         {
                             done = true;
+                            item = true;
                             break;
                         }
                     case '*':
@@ -4129,33 +4130,27 @@ namespace AngbandOS.Core
             ProjectAtAllInLos(new TeleportAwayAllProjectile(this), dist);
         }
 
-        public void BlessWeapon()
+        public bool BlessWeapon()
         {
-            if (!GetItem(out int item, "Bless which weapon? ", true, true, true, new WeaponItemFilter()))
+            if (!SelectItem(out Item? oPtr, "Bless which weapon? ", true, true, true, new WeaponItemFilter()))
             {
-                if (item == -2)
-                {
-                    MsgPrint("You have no weapon to bless.");
-                }
-                return;
+                MsgPrint("You have no weapon to bless.");
+                return false;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetLevelItem(0 - item);
             if (oPtr == null)
             {
-                return;
+                return false;
             }
+            string your = oPtr.IsInInventory ? "your" : "the";;
             string oName = oPtr.Description(false, 0);
             oPtr.RefreshFlagBasedProperties();
             if (oPtr.IdentCursed)
             {
-                string your;
                 if ((oPtr.Characteristics.HeavyCurse && Program.Rng.DieRoll(100) < 33) || oPtr.Characteristics.PermaCurse)
                 {
-                    your = item >= 0 ? "your" : "the";
                     MsgPrint($"The black aura on {your} {oName} disrupts the blessing!");
-                    return;
+                    return true;
                 }
-                your = item >= 0 ? "your" : "the";
                 MsgPrint($"A malignant aura leaves {your} {oName}.");
                 oPtr.IdentCursed = false;
                 oPtr.IdentSense = true;
@@ -4164,15 +4159,12 @@ namespace AngbandOS.Core
             }
             if (oPtr.Characteristics.Blessed)
             {
-                string your = item >= 0 ? "your" : "the";
                 string s = oPtr.Count > 1 ? "were" : "was";
                 MsgPrint($"{your} {oName} {s} blessed already.");
-                return;
+                return true;
             }
-            if (!(string.IsNullOrEmpty(oPtr.RandartName) == false || oPtr.FixedArtifactIndex != 0) ||
-                Program.Rng.DieRoll(3) == 1)
+            if (!(string.IsNullOrEmpty(oPtr.RandartName) == false || oPtr.FixedArtifactIndex != 0) || Program.Rng.DieRoll(3) == 1)
             {
-                string your = item >= 0 ? "your" : "the";
                 string s = oPtr.Count > 1 ? "" : "s";
                 MsgPrint($"{your} {oName} shine{s}!");
                 oPtr.RandartItemCharacteristics.Blessed = true;
@@ -4211,12 +4203,12 @@ namespace AngbandOS.Core
                 if (disHappened)
                 {
                     MsgPrint("There is a  feeling in the air...");
-                    string your = item >= 0 ? "your" : "the";
                     string s = oPtr.Count > 1 ? "were" : "was";
                     MsgPrint($"{your} {oName} {s} disenchanted!");
                 }
             }
             UpdateBonusesFlaggedAction.Set();
+            return true;
         }
 
         public void CallChaos()
@@ -9132,7 +9124,7 @@ namespace AngbandOS.Core
             // Only make extra attacks if the monster is still there
             foreach (Mutation naturalAttack in Player.Dna.NaturalAttacks)
             {
-                if (!noExtra)
+                if (!noExtra && tile.MonsterIndex != 0)
                 {
                     PlayerNaturalAttackOnMonster(tile.MonsterIndex, naturalAttack, out fear, out noExtra);
                 }
@@ -13954,6 +13946,7 @@ namespace AngbandOS.Core
             while (!done && !Shutdown)
             {
                 Screen.Goto(cursorPosition.Y, cursorPosition.X + k);
+                Screen.UpdateScreen(_console);
                 i = Inkey();
                 switch (i)
                 {
@@ -19817,6 +19810,22 @@ namespace AngbandOS.Core
                 tmpInt = 0;
             }
             Player.Gold = tmpInt;
+
+            string mana = $"{Player.Mana}";
+            if (!GetString("Mana: ", out tmpVal, def, 9))
+            {
+                return;
+            }
+            if (!int.TryParse(tmpVal, out tmpInt))
+            {
+                tmpInt = 0;
+            }
+            if (tmpInt < 0)
+            {
+                tmpInt = 0;
+            }
+            Player.Mana = tmpInt;
+
             def = $"{Player.MaxExperienceGained}";
             if (!GetString("Experience: ", out tmpVal, def, 9))
             {
