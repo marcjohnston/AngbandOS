@@ -13,9 +13,11 @@ namespace AngbandOS.Core.InventorySlots
     {
         private CloakInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override string Label(int index) => "i";
+        public override string Label(Item optr) => "i";
         public override int[] InventorySlots => new int[] { InventorySlot.Cloak };
         public override string MentionUse(int? index) => "About body";
         public override string DescribeWieldLocation(int index) => "wearing on your back";
+        public override string DescribeItemLocation(Item oPtr) => "wearing on your back";
         public override int BareArmourClassBonus => SaveGame.Player.Level > 15 ? (SaveGame.Player.Level - 13) / 3 : 0;
         public override bool IsWeightRestricting => true;
         public override bool IsArmour => true;

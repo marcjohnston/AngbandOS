@@ -1752,15 +1752,9 @@ namespace AngbandOS.Core
             }
             return k;
         }
-
-        public void InvenDrop(int item, int amt)
+        public void InvenDrop(Item oPtr, int amt)
         {
             if (amt <= 0)
-            {
-                return;
-            }
-            Item? oPtr = SaveGame.GetInventoryItem(item);
-            if (oPtr == null)
             {
                 return;
             }
@@ -1768,10 +1762,10 @@ namespace AngbandOS.Core
             {
                 amt = oPtr.Count;
             }
-            if (item >= InventorySlot.MeleeWeapon)
+            if (oPtr.IsInEquipment)
             {
                 // Take the item off first.
-                int? newItem = InvenTakeoff(item, amt);
+                int? newItem = InvenTakeoff(oPtr, amt);
                 if (newItem == null)
                 {
                     return;
@@ -1787,11 +1781,22 @@ namespace AngbandOS.Core
             }
             Item qPtr = oPtr.Clone(amt);
             string oName = qPtr.Description(true, 3);
-            SaveGame.MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
+            SaveGame.MsgPrint($"You drop {oName} ({oPtr.Label}).");
             SaveGame.Level.DropNear(qPtr, 0, SaveGame.Player.MapY, SaveGame.Player.MapX);
-            InvenItemIncrease(item, -amt);
-            InvenItemDescribe(item);
-            InvenItemOptimize(item);
+            oPtr.ItemIncrease(-amt);
+            oPtr.ItemDescribe();
+            oPtr.ItemOptimize();
+        }
+
+        [Obsolete("Use InvenDrop(Item, int)")]
+        public void InvenDrop(int item, int amt)
+        {
+            Item? oPtr = SaveGame.GetInventoryItem(item);
+            if (oPtr == null)
+            {
+                return;
+            }
+            InvenDrop(oPtr, amt);
         }
 
         public void InvenItemDescribe(int item)
@@ -1862,14 +1867,9 @@ namespace AngbandOS.Core
             }
         }
 
-        public int? InvenTakeoff(int item, int amt)
+        public int? InvenTakeoff(Item oPtr, int amt)
         {
             string act;
-            Item? oPtr = SaveGame.GetInventoryItem(item);
-            if (oPtr == null)
-            {
-                return null;
-            }
             if (amt <= 0)
             {
                 return null;
@@ -1880,13 +1880,23 @@ namespace AngbandOS.Core
             }
             Item qPtr = oPtr.Clone(amt);
             string oName = qPtr.Description(true, 3);
-            BaseInventorySlot inventorySlot = SaveGame.SingletonRepository.InventorySlots.Single(_inventorySlot => _inventorySlot.InventorySlots.Contains(item));
-            act = inventorySlot.TakeOffMessage;
-            InvenItemIncrease(item, -amt);
-            InvenItemOptimize(item);
+            act = oPtr.TakeOffMessage;
+            oPtr.ItemIncrease(-amt);
+            oPtr.ItemOptimize();
             int slot = InvenCarry(qPtr, false);
             SaveGame.MsgPrint($"{act} {oName} ({slot.IndexToLabel()}).");
             return slot;
+        }
+
+        [Obsolete("Use InvenTakeOff(Item, int)")]
+        public int? InvenTakeoff(int item, int amt)
+        {
+            Item? oPtr = SaveGame.GetInventoryItem(item);
+            if (oPtr == null)
+            {
+                return null;
+            }
+            return InvenTakeoff(oPtr, amt);
         }
 
         public bool ItemMatchesFilter(Item item, IItemFilter? itemFilter)

@@ -14,8 +14,10 @@ namespace AngbandOS.Core.InventorySlots
         private NeckInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override int[] InventorySlots => new int[] { InventorySlot.Neck };
         public override string Label(int index) => "f";
+        public override string Label(Item oPtr) => "f";
         public override string MentionUse(int? index) => "Around neck";
         public override string DescribeWieldLocation(int index) => "wearing around your neck";
+        public override string DescribeItemLocation(Item oPtr) => "wearing around your neck";
         public override int SortOrder => 6;
     }
 }

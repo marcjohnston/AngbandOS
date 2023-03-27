@@ -6,6 +6,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System;
+
 namespace AngbandOS.Core.InventorySlots
 {
     [Serializable]
@@ -15,9 +17,10 @@ namespace AngbandOS.Core.InventorySlots
         public override int[] InventorySlots => new int[] { InventorySlot.MeleeWeapon };
         public override int SortOrder => 1;
         public override string Label(int index) => "a";
+        public override string Label(Item oPtr) => "a";
         public override bool IsMeleeWeapon => true;
         public override string WieldPhrase => "You are wielding";
-        public override string TakeOffMessage => "You were wielding";
+        public override string TakeOffMessage(Item oPtr) => "You were wielding";
         public override string MentionUse(int? index)
         {
             string p = "Wielding";
@@ -32,7 +35,7 @@ namespace AngbandOS.Core.InventorySlots
             return p;
         }
 
-        public override string DescribeWieldLocation(int index)
+        public override string DescribeWieldLocation(int index) 
         {
             string p = "attacking monsters with";
             if (Count > 0)
@@ -43,6 +46,18 @@ namespace AngbandOS.Core.InventorySlots
                 {
                     p = "just lifting";
                 }
+            }
+            return p;
+        }
+
+        public override string DescribeItemLocation(Item oPtr)
+        {
+            string p = "attacking monsters with";
+
+            // Check to see if we have a weapon.
+            if (oPtr != null && SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
+            {
+                p = "just lifting";
             }
             return p;
         }

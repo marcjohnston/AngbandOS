@@ -6,6 +6,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System;
+
 namespace AngbandOS.Core.InventorySlots
 {
     [Serializable]
@@ -13,11 +15,12 @@ namespace AngbandOS.Core.InventorySlots
     {
         private RangedWeaponInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override string Label(int index) => "b";
+        public override string Label(Item oPtr) => "b";
         public override int[] InventorySlots => new int[] { InventorySlot.RangedWeapon };
         public override bool IsRangedWeapon => true;
         public override string WieldPhrase => "You are shooting with";
         public override int SortOrder => 2;
-        public override string TakeOffMessage => "You were holding";
+        public override string TakeOffMessage(Item oPtr) => "You were holding";
         public override string MentionUse(int? index)
         {
             string p = "Shooting";
@@ -43,6 +46,15 @@ namespace AngbandOS.Core.InventorySlots
                 {
                     p = "just holding";
                 }
+            }
+            return p;
+        }
+        public override string DescribeItemLocation(Item oPtr)
+        {
+            string p = "shooting missiles with";
+            if (oPtr != null && SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
+            {
+                p = "just holding";
             }
             return p;
         }

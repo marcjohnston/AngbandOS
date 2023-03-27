@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 
 namespace AngbandOS.Core.Items
@@ -88,6 +89,28 @@ namespace AngbandOS.Core.Items
             }
         }
 
+        public string Label
+        {
+            get
+            {
+                IItemContainer? container = GetContainer();
+                if (container == null)
+                {
+                    throw new Exception("Missing item container.");
+                }
+                return container.Label(this);
+            }
+        }
+
+        public string DescribeLocation()
+        {
+            IItemContainer? container = GetContainer();
+            if (container == null)
+            {
+                throw new Exception("Missing item container.");
+            }
+            return container.DescribeItemLocation(this);
+        }
 
         /// <summary>
         /// Modifies the quantity of an item.  The modification process differs depending on the type of container containing the item (e.g. inventory slots will update the player stats, monster and grid tile containers do not).
@@ -96,7 +119,7 @@ namespace AngbandOS.Core.Items
         /// <param name="num"></param>
         public void ItemIncrease(int num)
         {
-            IItemContainer container = GetContainer();
+            IItemContainer? container = GetContainer();
             if (container == null)
             {
                 throw new Exception("Missing item container.");
@@ -110,7 +133,7 @@ namespace AngbandOS.Core.Items
         /// <param name="item"></param>
         public void ItemDescribe()
         {
-            IItemContainer container = GetContainer();
+            IItemContainer? container = GetContainer();
             if (container == null)
             {
                 throw new Exception("Missing item container.");
@@ -124,7 +147,7 @@ namespace AngbandOS.Core.Items
         /// <param name="oPtr"></param>
         public void ItemOptimize()
         {
-            IItemContainer container = GetContainer();
+            IItemContainer? container = GetContainer();
             if (container == null)
             {
                 throw new Exception("Missing item container.");
@@ -132,11 +155,14 @@ namespace AngbandOS.Core.Items
             container.ItemOptimize(this);
         }
 
+        /// <summary>
+        /// Returns true, if the container is part of the players inventory.  All inventory slots (pack & equipment), return true; monsters and grid tiles return false.
+        /// </summary>
         public bool IsInInventory
         {
             get
             {
-                IItemContainer container = GetContainer();
+                IItemContainer? container = GetContainer();
                 if (container == null)
                 {
                     throw new Exception("Missing item container.");
@@ -145,6 +171,34 @@ namespace AngbandOS.Core.Items
             }
         }
 
+        /// <summary>
+        /// Returns true, if the container is part of the players inventory.  All inventory slots (pack & equipment), return true; monsters and grid tiles return false.
+        /// </summary>
+        public bool IsInEquipment
+        {
+            get
+            {
+                IItemContainer? container = GetContainer();
+                if (container == null)
+                {
+                    throw new Exception("Missing item container.");
+                }
+                return container.IsInEquipment;
+            }
+        }
+
+        public string TakeOffMessage
+        {
+            get
+            {
+                IItemContainer? container = GetContainer();
+                if (container == null)
+                {
+                    throw new Exception("Missing item container.");
+                }
+                return container.TakeOffMessage(this);
+            }
+        }
 
         public FixedArtifactId FixedArtifactIndex
         {

@@ -12,10 +12,13 @@ namespace AngbandOS.Core.InventorySlots
     internal abstract class EquipmentInventorySlot : BaseInventorySlot
     {
         protected EquipmentInventorySlot(SaveGame saveGame) : base(saveGame) { }
+
         /// <summary>
         /// Returns true.
         /// </summary>
         public override bool IsEquipment => true;
+
+        public override bool IsInEquipment => true;
 
         /// Checks the quantity of an item and removes it, when the quanity is zero.
         /// </summary>

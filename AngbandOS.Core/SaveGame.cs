@@ -5466,15 +5466,11 @@ namespace AngbandOS.Core
 
         public bool IdentifyFully()
         {
-            if (!GetItem(out int item, "Identify which item? ", true, true, true, null))
+            if (!SelectItem(out Item? oPtr, "Identify which item? ", true, true, true, null))
             {
-                if (item == -2)
-                {
-                    MsgPrint("You have nothing to identify.");
-                }
+                MsgPrint("You have nothing to identify.");
                 return false;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetLevelItem(0 - item);
             if (oPtr == null)
             {
                 return false;
@@ -5486,48 +5482,30 @@ namespace AngbandOS.Core
             NoticeCombineAndReorderFlaggedAction.Set();
             HandleStuff();
             string oName = oPtr.Description(true, 3);
-            if (item >= InventorySlot.MeleeWeapon)
+
+            MsgPrint($"{oPtr.DescribeLocation}: {oName} ({oPtr.Label}).");
+
+            // Check to see if the player is carrying the item and it is stompable.
+            if (oPtr.IsInInventory && oPtr.Stompable())
             {
-                MsgPrint($"{Player.DescribeWieldLocation(item)}: {oName} ({item.IndexToLabel()}).");
-                if (oPtr.Stompable())
-                {
-                    string itemName = oPtr.Description(true, 3);
-                    MsgPrint($"You destroy {oName}.");
-                    int amount = oPtr.Count;
-                    Player.InvenItemIncrease(item, -amount);
-                    Player.InvenItemOptimize(item);
-                }
+                string itemName = oPtr.Description(true, 3);
+                MsgPrint($"You destroy {oName}.");
+                int amount = oPtr.Count;
+                oPtr.ItemIncrease(-amount);
+                oPtr.ItemOptimize();
             }
-            else if (item >= 0)
-            {
-                MsgPrint($"In your pack: {oName} ({item.IndexToLabel()}).");
-                if (oPtr.Stompable())
-                {
-                    MsgPrint($"You destroy {oName}.");
-                    int amount = oPtr.Count;
-                    Player.InvenItemIncrease(item, -amount);
-                    Player.InvenItemOptimize(item);
-                }
-            }
-            else
-            {
-                MsgPrint($"On the ground: {oName}.");
-            }
+
             oPtr.IdentifyFully();
             return true;
         }
 
         public bool IdentifyItem()
         {
-            if (!GetItem(out int item, "Identify which item? ", true, true, true, null))
+            if (!SelectItem(out Item oPtr, "Identify which item? ", true, true, true, null))
             {
-                if (item == -2)
-                {
-                    MsgPrint("You have nothing to identify.");
-                }
+                MsgPrint("You have nothing to identify.");
                 return false;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetLevelItem(0 - item);
             if (oPtr == null)
             {
                 return false;
@@ -5537,32 +5515,19 @@ namespace AngbandOS.Core
             UpdateBonusesFlaggedAction.Set();
             NoticeCombineAndReorderFlaggedAction.Set();
             string oName = oPtr.Description(true, 3);
-            if (item >= InventorySlot.MeleeWeapon)
+
+            MsgPrint($"{oPtr.DescribeLocation}: {oName} ({oPtr.Label}).");
+
+            // Check to see if the player is carrying the item and it is stompable.
+            if (oPtr.IsInInventory && oPtr.Stompable())
             {
-                MsgPrint($"{Player.DescribeWieldLocation(item)}: {oName} ({item.IndexToLabel()}).");
-                if (oPtr.Stompable())
-                {
-                    MsgPrint($"You destroy {oName}.");
-                    int amount = oPtr.Count;
-                    Player.InvenItemIncrease(item, -amount);
-                    Player.InvenItemOptimize(item);
-                }
+                string itemName = oPtr.Description(true, 3);
+                MsgPrint($"You destroy {oName}.");
+                int amount = oPtr.Count;
+                oPtr.ItemIncrease(-amount);
+                oPtr.ItemOptimize();
             }
-            else if (item >= 0)
-            {
-                MsgPrint($"In your pack: {oName} ({item.IndexToLabel()}).");
-                if (oPtr.Stompable())
-                {
-                    MsgPrint($"You destroy {oName}.");
-                    int amount = oPtr.Count;
-                    Player.InvenItemIncrease(item, -amount);
-                    Player.InvenItemOptimize(item);
-                }
-            }
-            else
-            {
-                MsgPrint($"On the ground: {oName}.");
-            }
+
             return true;
         }
 
@@ -5768,15 +5733,11 @@ namespace AngbandOS.Core
         public bool Recharge(int num)
         {
             int i, t;
-            if (!GetItem(out int item, "Recharge which item? ", false, true, true, new RechargableItemFilter()))
+            if (!SelectItem(out Item? oPtr, "Recharge which item? ", false, true, true, new RechargableItemFilter()))
             {
-                if (item == -2)
-                {
-                    MsgPrint("You have nothing to recharge.");
-                }
+                MsgPrint("You have nothing to recharge.");
                 return false;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetLevelItem(0 - item);
             if (oPtr == null)
             {
                 return false;
@@ -5820,18 +5781,9 @@ namespace AngbandOS.Core
                 if (Program.Rng.RandomLessThan(i) == 0)
                 {
                     MsgPrint("There is a bright flash of light.");
-                    if (item >= 0)
-                    {
-                        Player.InvenItemIncrease(item, -999);
-                        Player.InvenItemDescribe(item);
-                        Player.InvenItemOptimize(item);
-                    }
-                    else
-                    {
-                        Level.FloorItemIncrease(0 - item, -999);
-                        Level.FloorItemDescribe(0 - item);
-                        Level.FloorItemOptimize(0 - item);
-                    }
+                    oPtr.ItemIncrease(-999);
+                    oPtr.ItemDescribe();
+                    oPtr.ItemOptimize();
                 }
                 else
                 {
@@ -9303,15 +9255,11 @@ namespace AngbandOS.Core
         public void Rustproof()
         {
             // Get a piece of armour
-            if (!GetItem(out int itemIndex, "Rustproof which piece of armour? ", true, true, true, new ArmourItemFilter()))
+            if (!SelectItem(out Item? item, "Rustproof which piece of armour? ", true, true, true, new ArmourItemFilter()))
             {
-                if (itemIndex == -2)
-                {
-                    MsgPrint("You have nothing to rustproof.");
-                }
+                MsgPrint("You have nothing to rustproof.");
                 return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -9320,37 +9268,27 @@ namespace AngbandOS.Core
             // Set the ignore acid flag
             item.RandartItemCharacteristics.IgnoreAcid = true;
             // Make sure the grammar of the message is correct
-            string your;
+            string your = item.IsInInventory ? "Your" : "The";
             string s;
             if (item.BonusArmourClass < 0 && !item.IdentCursed)
             {
-                your = itemIndex > 0 ? "Your" : "The";
                 s = item.Count > 1 ? "" : "s";
                 MsgPrint($"{your} {itenName} look{s} as good as new!");
                 item.BonusArmourClass = 0;
             }
-            your = itemIndex > 0 ? "Your" : "The";
             s = item.Count > 1 ? "are" : "is";
             MsgPrint($"{your} {itenName} {s} now protected against corrosion.");
         }
 
         public void DoActivate()
         {
-            int itemIndex = -999;
-            if (itemIndex == -999)
+            // No item passed in, so get one; filtering to activatable items only
+            if (!SelectItem(out Item? item, "Activate which item? ", true, false, false, new ActivatableItemFilter()))
             {
-                // No item passed in, so get one; filtering to activatable items only
-                if (!GetItem(out itemIndex, "Activate which item? ", true, false, false, new ActivatableItemFilter()))
-                {
-                    if (itemIndex == -2)
-                    {
-                        MsgPrint("You have nothing to activate.");
-                    }
-                    return;
-                }
+                MsgPrint("You have nothing to activate.");
+                return;
             }
             // Get the item from the index
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -9754,15 +9692,11 @@ namespace AngbandOS.Core
             int amount = 1;
             bool force = CommandArgument > 0;
             // Get an item to destroy
-            if (!GetItem(out int itemIndex, "Destroy which item? ", false, true, true, null))
+            if (!SelectItem(out Item? item, "Destroy which item? ", false, true, true, null))
             {
-                if (itemIndex == -2)
-                {
-                    MsgPrint("You have nothing to destroy.");
-                }
+                MsgPrint("You have nothing to destroy.");
                 return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex); // TODO: Remove access to Level
             if (item == null)
             {
                 return;
@@ -9827,18 +9761,9 @@ namespace AngbandOS.Core
             Player.BaseCharacterClass.ItemDestroyed(item, amount);
 
             // Tidy up the player's inventory
-            if (itemIndex >= 0)
-            {
-                Player.InvenItemIncrease(itemIndex, -amount);
-                Player.InvenItemDescribe(itemIndex);
-                Player.InvenItemOptimize(itemIndex);
-            }
-            else
-            {
-                Level.FloorItemIncrease(0 - itemIndex, -amount);
-                Level.FloorItemDescribe(0 - itemIndex);
-                Level.FloorItemOptimize(0 - itemIndex);
-            }
+            item.ItemIncrease(-amount);
+            item.ItemDescribe();
+            item.ItemOptimize();
         }
 
         public void DoCmdInventory()
@@ -9975,21 +9900,11 @@ namespace AngbandOS.Core
 
         public void DoCmdZapRod()
         {
-            int itemIndex = -999;
-
-            // Get the item if we weren't passed it
-            if (itemIndex == -999)
+            if (!SelectItem(out Item? item, "Zap which rod? ", false, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Rod)))
             {
-                if (!GetItem(out itemIndex, "Zap which rod? ", false, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Rod)))
-                {
-                    if (itemIndex == -2)
-                    {
-                        MsgPrint("You have no rod to zap.");
-                    }
-                    return;
-                }
+                MsgPrint("You have no rod to zap.");
+                return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -10001,7 +9916,7 @@ namespace AngbandOS.Core
                 return;
             }
             // Rods can't be used from the floor
-            if (itemIndex < 0 && item.Count > 1)
+            if (!item.IsInInventory && item.Count > 1)
             {
                 MsgPrint("You must first pick up the rods.");
                 return;
@@ -10081,7 +9996,7 @@ namespace AngbandOS.Core
             if (!channeled)
             {
                 // If the rod was part of a stack, remove it
-                if (itemIndex >= 0 && item.Count > 1)
+                if (item.IsInInventory && item.Count > 1)
                 {
                     Item singleRod = item.Clone(1);
                     item.TypeSpecificValue = 0;
@@ -10226,21 +10141,11 @@ namespace AngbandOS.Core
 
         public void DoCmdQuaff()
         {
-            int itemIndex = -999;
-
-            // Get an item if we didn't already have one
-            if (itemIndex == -999)
+            if (!SelectItem(out Item? item, "Quaff which potion? ", true, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Potion)))
             {
-                if (!GetItem(out itemIndex, "Quaff which potion? ", true, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Potion)))
-                {
-                    if (itemIndex == -2)
-                    {
-                        MsgPrint("You have no potions to quaff.");
-                    }
-                    return;
-                }
+                MsgPrint("You have no potions to quaff.");
+                return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -10280,18 +10185,9 @@ namespace AngbandOS.Core
             if (!channeled)
             {
                 // We didn't channel it, so use up one potion from the stack
-                if (itemIndex >= 0)
-                {
-                    Player.InvenItemIncrease(itemIndex, -1);
-                    Player.InvenItemDescribe(itemIndex);
-                    Player.InvenItemOptimize(itemIndex);
-                }
-                else
-                {
-                    Level.FloorItemIncrease(0 - itemIndex, -1);
-                    Level.FloorItemDescribe(0 - itemIndex);
-                    Level.FloorItemOptimize(0 - itemIndex);
-                }
+                item.ItemIncrease(-1);
+                item.ItemDescribe();
+                item.ItemOptimize();
             }
         }
 
@@ -11017,21 +10913,17 @@ namespace AngbandOS.Core
         {
             int amount = 1;
             // Get an item from the inventory/equipment
-            if (!GetItem(out int itemIndex, "Drop which item? ", true, true, false, null))
+            if (!SelectItem(out Item? item, "Drop which item? ", true, true, false, null))
             {
-                if (itemIndex == -2)
-                {
-                    MsgPrint("You have nothing to drop.");
-                }
+                MsgPrint("You have nothing to drop.");
                 return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
             }
             // Can't drop a cursed item
-            if (itemIndex >= InventorySlot.MeleeWeapon && item.IsCursed())
+            if (item.IsInEquipment && item.IsCursed())
             {
                 MsgPrint("Hmmm, it seems to be cursed.");
                 return;
@@ -11048,7 +10940,7 @@ namespace AngbandOS.Core
             // Dropping things takes half a turn
             EnergyUse = 50;
             // Drop it
-            Player.InvenDrop(itemIndex, amount);
+            Player.InvenDrop(item, amount);
             RedrawEquippyFlaggedAction.Set();
         }
 

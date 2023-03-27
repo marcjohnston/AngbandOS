@@ -102,6 +102,12 @@ namespace AngbandOS.Core
         /// </summary>
         public int ScentStrength;
 
+        public string DescribeItemLocation(Item oPtr) => $"On the ground:";
+
+        public string Label(Item oPtr) => ""; // TODO: Items on the floor cannot be selected yet.
+
+        public string TakeOffMessage(Item oPtr) => ""; // TODO: Grid tiles do not support removal messages yet.
+
         /// <summary>
         /// Modifies the quantity of an item.  No player stats are modified.
         /// </summary>
@@ -154,6 +160,7 @@ namespace AngbandOS.Core
         /// Returns false, because the item container doesn't belong to the players inventory.
         /// </summary>
         public bool IsInInventory => false;
+        public bool IsInEquipment => false;
 
         public void RevertToBackground()
         {

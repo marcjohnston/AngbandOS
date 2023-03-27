@@ -13,13 +13,15 @@ namespace AngbandOS.Core.InventorySlots
     {
         private LightsourceInventorySlot(SaveGame saveGame) : base(saveGame) { }
         public override string Label(int index) => "g";
+        public override string Label(Item oPtr) => "g";
         public override int[] InventorySlots => new int[] { InventorySlot.Lightsource };
         public override string MentionUse(int? index) => "Light source";
         public override string DescribeWieldLocation(int index) => "using to light the way";
+        public override string DescribeItemLocation(Item oPtr) => "using to light the way";
         public override string WieldPhrase => "Your light source is";
         public override bool ProvidesLight => true;
         public override int SortOrder => 7;
-        public override string TakeOffMessage => "You were holding";
+        public override string TakeOffMessage(Item oPtr) => "You were holding";
 
         /// <summary>
         /// Consumes a turn of light during the ProcessWorldHook event.  Base inventory slot ProcessWorldHook processing occurs first, allowing light source items to process the event first.

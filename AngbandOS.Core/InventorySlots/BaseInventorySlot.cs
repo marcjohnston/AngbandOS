@@ -21,8 +21,15 @@ namespace AngbandOS.Core.InventorySlots
         }
       //  private List<Item> Items = new List<Item>();
         public abstract int[] InventorySlots { get; }
-        public virtual string TakeOffMessage => "You were wearing";
+        public virtual string TakeOffMessage(Item oPtr) => "You were wearing";
+
+        [Obsolete("Use Label(Item)")]
         public abstract string Label(int index);
+
+        /// <summary>
+        /// Returns a description of an item in the container.
+        /// </summary>
+        public abstract string DescribeItemLocation(Item oPtr);
 
         /// <summary>
         /// Modifies the quantity of an item.  For an inventory slot, the player's weight, bonuses and mana are updated accordingly.
@@ -52,6 +59,12 @@ namespace AngbandOS.Core.InventorySlots
         }
 
         /// <summary>
+        /// Returns the alphabetical label for the position of the item in the container.  The player will use this label to select the item from the container.
+        /// </summary>
+        /// <param name="oPtr"></param>
+        public abstract string Label(Item oPtr);
+
+        /// <summary>
         /// Renders a description of the item.  For an inventory slot, the description is rendered as possessive.
         /// </summary>
         /// <param name="item"></param>
@@ -61,6 +74,7 @@ namespace AngbandOS.Core.InventorySlots
             SaveGame.MsgPrint($"You have {oName}.");
         }
 
+        [Obsolete("Use InventorySlot.Items WIP")]
         protected int FindInventorySlot(Item oPtr)
         {
             for (int slot = 0; slot < InventorySlot.Total; slot++)
@@ -81,9 +95,11 @@ namespace AngbandOS.Core.InventorySlots
         public abstract void ItemOptimize(Item oPtr);
 
         /// <summary>
-        /// Returns true, because the item container belongs to the players inventory.
+        /// Returns true, because the item container belongs to the players inventory (pack & equipment).
         /// </summary>
-        public bool IsInInventory => false;
+        public bool IsInInventory => true;
+
+        public abstract bool IsInEquipment { get; }
 
         /// <summary>
         /// Hooks into the ProcessWorld event.  All inventory slots receive this event and can perform additional processing based on the items being carried, either in a pack or by being
@@ -188,6 +204,7 @@ namespace AngbandOS.Core.InventorySlots
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
+        [Obsolete("Use DescribeItemLocation")]
         public abstract string DescribeWieldLocation(int index);
 
         public IEnumerator<int> GetEnumerator()

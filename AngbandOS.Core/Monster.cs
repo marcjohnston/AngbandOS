@@ -81,6 +81,9 @@ namespace AngbandOS.Core
             SaveGame = saveGame;
         }
 
+        public string DescribeItemLocation(Item oPtr) => $"being held by {Race.Name}";
+
+        public string Label(Item oPtr) => ""; // TODO: Items held by a monster cannot be selected.
 
         /// <summary>
         /// Modifies the quantity of an item.  No player stats are modified.
@@ -129,6 +132,9 @@ namespace AngbandOS.Core
         /// Returns false, because the item container doesn't belong to the players inventory.
         /// </summary>
         public bool IsInInventory => false;
+        public bool IsInEquipment => false;
+
+        public string TakeOffMessage(Item oPtr) => ""; // TODO: Monsters do not support removal messages yet.
 
         /// <summary>
         /// Returns the name of the monster.
