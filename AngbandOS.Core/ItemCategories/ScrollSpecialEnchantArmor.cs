@@ -18,7 +18,7 @@ namespace AngbandOS.Core.ItemCategories
 
         public override void Read(ReadScrollEvent eventArgs)
         {
-            if (!eventArgs.SaveGame.EnchantSpell(0, 0, Program.Rng.DieRoll(3) + 2))
+            if (!eventArgs.SaveGame.EnchantItem(0, 0, Program.Rng.DieRoll(3) + 2))
             {
                 eventArgs.UsedUp = false;
             }

@@ -126,7 +126,15 @@ namespace AngbandOS.Core
         public int TotalFriendLevels;
         public int TotalFriends;
         public int TrackedMonsterIndex;
+
+        /// <summary>
+        /// Returns true, when the GetItem/SelectItem is rendering the equipment list, instead of the inventory list (when the ViewingItemList is true).
+        /// </summary>
         public bool ViewingEquipment; // TODO: Convert to parameter
+
+        /// <summary>
+        /// Returns true, when the player is selecting an item and the inventory/equipment list is being rendered.
+        /// </summary>
         public bool ViewingItemList;
 
         private List<Monster> _petList = new List<Monster>();
@@ -1707,6 +1715,7 @@ namespace AngbandOS.Core
             }
             else
             {
+                // If the user was rendering the equipment list and the item selection can choose from the equipment, then render the equipment.  // TODO: this doesn't make sense
                 if (ViewingItemList && ViewingEquipment && canChooseFromEquipment)
                 {
                     ViewingEquipment = true;
@@ -1731,18 +1740,15 @@ namespace AngbandOS.Core
             }
             while (!done && !Shutdown)
             {
-                if (!ViewingEquipment)
+                if (ViewingItemList)
                 {
-                    if (ViewingItemList)
-                    {
-                        Player.ShowInven(_inventorySlot => !_inventorySlot.IsEquipment, itemFilter);
-                    }
-                }
-                else
-                {
-                    if (ViewingItemList)
+                    if (ViewingEquipment)
                     {
                         Player.ShowEquip(itemFilter);
+                    }
+                    else
+                    {
+                        Player.ShowInven(_inventorySlot => !_inventorySlot.IsEquipment, itemFilter);
                     }
                 }
                 string tmpVal;
@@ -5338,26 +5344,22 @@ namespace AngbandOS.Core
             return true;
         }
 
-        public bool EnchantSpell(int numHit, int numDam, int numAc)
+        public bool EnchantItem(int numHit, int numDam, int numAc)
         {
             bool okay = false;
-            if (!GetItem(out int item, "Enchant which item? ", true, true, true, numAc != 0 ? new ArmourItemFilter() : new WeaponItemFilter()))
+            if (!SelectItem(out Item? oPtr, "Enchant which item? ", true, true, true, numAc != 0 ? new ArmourItemFilter() : new WeaponItemFilter()))
             {
-                if (item == -2)
-                {
-                    MsgPrint("You have nothing to enchant.");
-                }
+                MsgPrint("You have nothing to enchant.");
                 return false;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetLevelItem(0 - item);
             if (oPtr == null)
             {
                 return false;
             }
             string oName = oPtr.Description(false, 0);
-            string your = item >= 0 ? "Your" : "The";
-            string s = oPtr.Count > 1 ? "" : "s";
-            MsgPrint($"{your} {oName} glow{s} brightly!");
+            string your = oPtr.IsInInventory ? "Your" : "The";
+            string s = oPtr.Count > 1 ? "" : "s"; // TODO: this plural looks wrong
+            MsgPrint($"{your} {oName} glow{s} brightly!"); // TODO: this plural looks wrong
             if (Enchant(oPtr, numHit, Constants.EnchTohit))
             {
                 okay = true;

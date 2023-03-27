@@ -1659,7 +1659,7 @@ namespace AngbandOS.Core.Stores
                     SayComment_1();
                     SaveGame.PlaySound(SoundEffect.StoreTransaction);
                     StorePrtGold();
-                    SaveGame.EnchantSpell(4, 4, 0);
+                    SaveGame.EnchantItem(4, 4, 0);
                 }
                 SaveGame.HandleStuff();
             }
@@ -1680,7 +1680,7 @@ namespace AngbandOS.Core.Stores
                     SayComment_1();
                     SaveGame.PlaySound(SoundEffect.StoreTransaction);
                     StorePrtGold();
-                    SaveGame.EnchantSpell(0, 0, 4);
+                    SaveGame.EnchantItem(0, 0, 4);
                 }
                 SaveGame.HandleStuff();
             }

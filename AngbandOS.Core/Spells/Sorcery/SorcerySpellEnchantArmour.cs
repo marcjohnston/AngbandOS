@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Spells.Sorcery
     {
         public override void Cast(SaveGame saveGame)
         {
-            saveGame.EnchantSpell(0, 0, Program.Rng.RandomLessThan(3) + 2);
+            saveGame.EnchantItem(0, 0, Program.Rng.RandomLessThan(3) + 2);
         }
 
         public override void Initialise(int characterClass)
