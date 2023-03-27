@@ -11154,8 +11154,6 @@ namespace AngbandOS.Core
 
         public void DoCmdReadScroll()
         {
-            int itemIndex = -999;
-
             // Make sure we're in a situation where we can read
             if (Player.TimedBlindness.TurnsRemaining != 0)
             {
@@ -11172,19 +11170,11 @@ namespace AngbandOS.Core
                 MsgPrint("You are too confused!");
                 return;
             }
-            // If we weren't passed in an item, prompt for one
-            if (itemIndex == -999)
+            if (!SelectItem(out Item? item, "Read which scroll? ", true, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Scroll)))
             {
-                if (!GetItem(out itemIndex, "Read which scroll? ", true, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Scroll)))
-                {
-                    if (itemIndex == -2)
-                    {
-                        MsgPrint("You have no scrolls to read.");
-                    }
-                    return;
-                }
+                MsgPrint("You have no scrolls to read.");
+                return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -11226,18 +11216,9 @@ namespace AngbandOS.Core
                     return;
                 }
                 // If it wasn't used up then decrease the amount in the stack
-                if (itemIndex >= 0)
-                {
-                    Player.InvenItemIncrease(itemIndex, -1);
-                    Player.InvenItemDescribe(itemIndex);
-                    Player.InvenItemOptimize(itemIndex);
-                }
-                else
-                {
-                    Level.FloorItemIncrease(0 - itemIndex, -1);
-                    Level.FloorItemDescribe(0 - itemIndex);
-                    Level.FloorItemOptimize(0 - itemIndex);
-                }
+                item.ItemIncrease(-1);
+                item.ItemDescribe();
+                item.ItemOptimize();
             }
         }
 
@@ -11339,15 +11320,11 @@ namespace AngbandOS.Core
                 return;
             }
             // Get the ammunition to fire
-            if (!GetItem(out int itemIndex, "Fire which item? ", false, true, true, new ItemCategoryItemFilter(Player.AmmunitionItemCategory)))
+            if (!SelectItem(out Item? ammunitionStack, "Fire which item? ", false, true, true, new ItemCategoryItemFilter(Player.AmmunitionItemCategory)))
             {
-                if (itemIndex == -2)
-                {
-                    MsgPrint("You have nothing to fire.");
-                }
+                MsgPrint("You have nothing to fire.");
                 return;
             }
-            Item? ammunitionStack = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (ammunitionStack == null)
             {
                 return;
@@ -11360,17 +11337,12 @@ namespace AngbandOS.Core
             // Copy an ammunition piece from the stack...
             Item individualAmmunition = ammunitionStack.Clone(1);
             // ...and reduced the amount in the stack
-            if (itemIndex >= 0)
+            ammunitionStack.ItemIncrease(-1);
+            if (ammunitionStack.IsInInventory)
             {
-                Player.InvenItemIncrease(itemIndex, -1);
-                Player.InvenItemDescribe(itemIndex);
-                Player.InvenItemOptimize(itemIndex);
+                ammunitionStack.ItemDescribe();
             }
-            else
-            {
-                Level.FloorItemIncrease(0 - itemIndex, -1);
-                Level.FloorItemOptimize(0 - itemIndex);
-            }
+            ammunitionStack.ItemOptimize();
             PlaySound(SoundEffect.Shoot);
             // Get the details of the shot
             string missileName = individualAmmunition.Description(false, 3);
@@ -11511,20 +11483,11 @@ namespace AngbandOS.Core
 
         public void DoEatCmd()
         {
-            int itemIndex = -999;
-            // Get a food item from the inventory if one wasn't already specified
-            if (itemIndex == -999)
+            if (!SelectItem(out Item? item, "Eat which item? ", false, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Food)))
             {
-                if (!GetItem(out itemIndex, "Eat which item? ", false, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Food)))
-                {
-                    if (itemIndex == -2)
-                    {
-                        MsgPrint("You have nothing to eat.");
-                    }
-                    return;
-                }
+                MsgPrint("You have nothing to eat.");
+                return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -11569,18 +11532,9 @@ namespace AngbandOS.Core
             }
 
             // Use up the item (if it fell to the floor this will have already been dealt with)
-            if (itemIndex >= 0)
-            {
-                Player.InvenItemIncrease(itemIndex, -1);
-                Player.InvenItemDescribe(itemIndex);
-                Player.InvenItemOptimize(itemIndex);
-            }
-            else
-            {
-                Level.FloorItemIncrease(0 - itemIndex, -1);
-                Level.FloorItemDescribe(0 - itemIndex);
-                Level.FloorItemOptimize(0 - itemIndex);
-            }
+            item.ItemIncrease(-1);
+            item.ItemOptimize();
+            item.ItemDescribe();
         }
 
         public bool DoCmdTunnel()
@@ -11797,15 +11751,11 @@ namespace AngbandOS.Core
         public void DoCmdWield()
         {
             // Only interested in wearable items
-            if (!GetItem(out int itemIndex, "Wear/Wield which item? ", false, true, true, new WearableItemFilter()))
+            if (!SelectItem(out Item? item, "Wear/Wield which item? ", false, true, true, new WearableItemFilter()))
             {
-                if (itemIndex == -2)
-                {
-                    MsgPrint("You have nothing you can wear or wield.");
-                }
+                MsgPrint("You have nothing you can wear or wield.");
                 return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -11841,16 +11791,9 @@ namespace AngbandOS.Core
             Item wornItem = item.Clone(1);
 
             // Reduce the count of the item stack accordingly
-            if (itemIndex >= 0)
-            {
-                Player.InvenItemIncrease(itemIndex, -1);
-                Player.InvenItemOptimize(itemIndex);
-            }
-            else
-            {
-                Level.FloorItemIncrease(0 - itemIndex, -1);
-                Level.FloorItemOptimize(0 - itemIndex);
-            }
+            item.ItemIncrease(-1);
+            item.ItemOptimize();
+
             // Take off the old item
             Item? wasWieldingItem = GetInventoryItem(slot);
             if (wasWieldingItem != null)
@@ -11919,15 +11862,11 @@ namespace AngbandOS.Core
         public void DoCmdTakeOff()
         {
             // Get the item to take off
-            if (!GetItem(out int itemIndex, "Take off which item? ", true, false, false, null))
+            if (!SelectItem(out Item? item, "Take off which item? ", true, false, false, null))
             {
-                if (itemIndex == -2)
-                {
-                    MsgPrint("You are not wearing anything to take off.");
-                }
+                MsgPrint("You are not wearing anything to take off.");
                 return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex); // TODO: Remove access to Level because GetItem for TakeOff doesn't support take off from floor
             if (item == null)
             {
                 return;
@@ -11940,7 +11879,7 @@ namespace AngbandOS.Core
             }
             // Take off the item
             EnergyUse = 50;
-            Player.InvenTakeoff(itemIndex, 255);
+            Player.InvenTakeoff(item, 255);
             RedrawEquippyFlaggedAction.Set();
         }
 
@@ -12032,15 +11971,11 @@ namespace AngbandOS.Core
         public void DoCmdExamine()
         {
             // Get the item to examine
-            if (!GetItem(out int itemIndex, "Examine which item? ", true, true, true, null))
+            if (!SelectItem(out Item? item, "Examine which item? ", true, true, true, null))
             {
-                if (itemIndex == -2)
-                {
-                    MsgPrint("You have nothing to examine.");
-                }
+                MsgPrint("You have nothing to examine.");
                 return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -12073,15 +12008,11 @@ namespace AngbandOS.Core
                 return;
             }
             // Get a book to read if we don't already have one
-            if (!GetItem(out int itemIndex, "Browse which book? ", false, true, true, new UsableSpellBookItemFilter(this)))
+            if (!SelectItem(out Item? item, "Browse which book? ", false, true, true, new UsableSpellBookItemFilter(this)))
             {
-                if (itemIndex == -2)
-                {
-                    MsgPrint("You have no books that you can read.");
-                }
+                MsgPrint("You have no books that you can read.");
                 return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex); // TODO: Remove access to Level
             if (item == null)
             {
                 return;
@@ -12237,16 +12168,12 @@ namespace AngbandOS.Core
                 MsgPrint("You are too confused!");
                 return;
             }
-            if (!GetItem(out int item, "Use which book? ", false, true, true, new UsableSpellBookItemFilter(this)))
+            if (!SelectItem(out Item? oPtr, "Use which book? ", false, true, true, new UsableSpellBookItemFilter(this)))
             {
-                if (item == -2)
-                {
-                    MsgPrint($"You have no {prayer} books!");
-                }
+                MsgPrint($"You have no {prayer} books!");
                 return;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetLevelItem(0 - item);
-            if (item == null)
+            if (oPtr == null)
             {
                 return;
             }
@@ -19813,16 +19740,12 @@ namespace AngbandOS.Core
 
         public void DoCmdWizPlay()
         {
-            if (!GetItem(out int item, "Play with which object? ", true, true, true, null))
+            if (!SelectItem(out Item? oPtr, "Play with which object? ", true, true, true, null))
             {
-                if (item == -2)
-                {
-                    MsgPrint("You have nothing to play with.");
-                }
+                MsgPrint("You have nothing to play with.");
                 return;
             }
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetLevelItem(0 - item);
-            if (item == null)
+            if (oPtr == null)
             {
                 return;
             }
@@ -19841,13 +19764,27 @@ namespace AngbandOS.Core
                     }
                     if (ch == 'A' || ch == 'a')
                     {
-                        if (item >= 0)
+                        if (oPtr.IsInInventory)
                         {
-                            SetInventoryItem(item, qPtr);
+                            // TODO: this is a hack
+                            for (int i = 0; i < InventorySlot.Total; i++)
+                            {
+                                if (GetInventoryItem(i) == oPtr)
+                                {
+                                    SetInventoryItem(i, qPtr);
+                                }
+                            }
                         }
                         else
                         {
-                            SetLevelItem(0 - item, qPtr);
+                            // TODO: this is a hack
+                            for (int i = 0; i < Level.OMax; i++)
+                            {
+                                if (GetLevelItem(i) == oPtr)
+                                {
+                                    SetLevelItem(i, qPtr);
+                                }
+                            }
                         }
                         UpdateBonusesFlaggedAction.Set();
                         NoticeCombineAndReorderFlaggedAction.Set();

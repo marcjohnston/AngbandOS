@@ -993,20 +993,16 @@ namespace AngbandOS.Core.Stores
             }
             var deity = SaveGame.Player.Religion.GetNamedDeity(godName);
             string pmt = "Sacrifice which item? ";
-            if (!SaveGame.GetItem(out int item, pmt, true, true, false, null))
+            if (!SaveGame.SelectItem(out Item? oPtr, pmt, true, true, false, null))
             {
-                if (item == -2)
-                {
-                    SaveGame.MsgPrint("You have nothing to sacrifice.");
-                    return;
-                }
+                SaveGame.MsgPrint("You have nothing to sacrifice.");
+                return;
             }
-            Item? oPtr = item >= 0 ? SaveGame.GetInventoryItem(item) : SaveGame.GetLevelItem(0 - item);
             if (oPtr == null)
             {
                 return;
             }
-            if (item >= InventorySlot.MeleeWeapon && oPtr.IsCursed())
+            if (oPtr.IsInEquipment && oPtr.IsCursed())
             {
                 SaveGame.MsgPrint("Hmmm, it seems to be cursed.");
                 return;
@@ -1024,9 +1020,9 @@ namespace AngbandOS.Core.Stores
             string oName = qPtr.Description(true, 3);
             qPtr.Inscription = "";
             int finalAsk = PriceItem(qPtr, _owner.MinInflate, true) * qPtr.Count;
-            SaveGame.Player.InvenItemIncrease(item, -amt);
-            SaveGame.Player.InvenItemDescribe(item);
-            SaveGame.Player.InvenItemOptimize(item);
+            oPtr.ItemIncrease(-amt);
+            oPtr.ItemDescribe();
+            oPtr.ItemOptimize();
             SaveGame.HandleStuff();
             var deityName = deity.ShortName;
             if (finalAsk <= 0)
@@ -1392,16 +1388,12 @@ namespace AngbandOS.Core.Stores
             SaveGame.MsgPrint($"You can learn {SaveGame.Player.SpareSpellSlots} new {spellType}{plural}.");
             SaveGame.MsgPrint(null);
             // Get the spell books we have
-            if (!SaveGame.GetItem(out int itemIndex, "Study which book? ", false, true, true, new UsableSpellBookItemFilter(SaveGame)))
+            if (!SaveGame.SelectItem(out Item? item, "Study which book? ", false, true, true, new UsableSpellBookItemFilter(SaveGame)))
             {
-                if (itemIndex == -2)
-                {
-                    SaveGame.MsgPrint("You have no books that you can read.");
-                }
+                SaveGame.MsgPrint("You have no books that you can read.");
                 return;
             }
             // Check each book
-            Item? item = itemIndex >= 0 ? SaveGame.GetInventoryItem(itemIndex) : SaveGame.GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -1947,20 +1939,16 @@ namespace AngbandOS.Core.Stores
         public void StoreSell()
         {
             int itemPos;
-            if (!SaveGame.GetItem(out int item, SellPrompt, true, true, false, this)) // We use the store itself as the ItemFilter because the Store implements IItemFilter.
+            if (!SaveGame.SelectItem(out Item? oPtr, SellPrompt, true, true, false, this)) // We use the store itself as the ItemFilter because the Store implements IItemFilter.
             {
-                if (item == -2)
-                {
-                    SaveGame.MsgPrint("You have nothing that I want.");
-                }
+                SaveGame.MsgPrint("You have nothing that I want.");
                 return;
             }
-            Item? oPtr = item >= 0 ? SaveGame.GetInventoryItem(item) : SaveGame.GetLevelItem(0 - item);
             if (oPtr == null)
             {
                 return;
             }
-            if (item >= InventorySlot.MeleeWeapon && oPtr.IsCursed())
+            if (oPtr.IsInEquipment && oPtr.IsCursed())
             {
                 SaveGame.MsgPrint("Hmmm, it seems to be cursed.");
                 return;
@@ -1988,7 +1976,7 @@ namespace AngbandOS.Core.Stores
             }
             if (StoreBuysItems)
             {
-                SaveGame.MsgPrint($"Selling {oName} ({item.IndexToLabel()}).");
+                SaveGame.MsgPrint($"Selling {oName} ({oPtr.Label}).");
                 SaveGame.MsgPrint(null);
                 bool choice = SellHaggle(qPtr, out int price);
                 if (!choice)
@@ -2022,12 +2010,12 @@ namespace AngbandOS.Core.Stores
             }
             else
             {
-                SaveGame.MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
+                SaveGame.MsgPrint($"You drop {oName} ({oPtr.Label}).");
             }
 
-            SaveGame.Player.InvenItemIncrease(item, -amt);
-            SaveGame.Player.InvenItemDescribe(item);
-            SaveGame.Player.InvenItemOptimize(item);
+            oPtr.ItemIncrease(-amt);
+            oPtr.ItemDescribe();
+            oPtr.ItemOptimize();
             SaveGame.HandleStuff();
             itemPos = CarryItem(qPtr);
             if (itemPos >= 0)

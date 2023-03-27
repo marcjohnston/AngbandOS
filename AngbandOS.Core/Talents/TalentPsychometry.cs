@@ -38,15 +38,11 @@ namespace AngbandOS.Core.Talents
 
         private void Psychometry(SaveGame saveGame)
         {
-            if (!saveGame.GetItem(out int item, "Meditate on which item? ", true, true, true, null))
+            if (!saveGame.SelectItem(out Item? oPtr, "Meditate on which item? ", true, true, true, null))
             {
-                if (item == -2)
-                {
-                    saveGame.MsgPrint("You have nothing appropriate.");
-                }
+                saveGame.MsgPrint("You have nothing appropriate.");
                 return;
             }
-            Item? oPtr = item >= 0 ? saveGame.GetInventoryItem(item) : saveGame.GetLevelItem(0 - item);
             if (oPtr == null)
             {
                 return;
