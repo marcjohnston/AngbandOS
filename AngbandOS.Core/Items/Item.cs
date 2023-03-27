@@ -62,12 +62,27 @@ namespace AngbandOS.Core.Items
         public string Inscription = "";
         public int ItemSubCategory; // TODO: Deprecated.  Needs to be deleted.
 
+        public void ReportChargeUsage()
+        {
+            if ((Category == ItemTypeEnum.Staff || Category == ItemTypeEnum.Wand) && IsKnown())
+            {
+                if (IsInInventory)
+                {
+                    SaveGame.MsgPrint(TypeSpecificValue != 1 ? $"You have {TypeSpecificValue} charges remaining." : $"You have {TypeSpecificValue} charge remaining.");
+                }
+                else
+                {
+                    SaveGame.MsgPrint(TypeSpecificValue != 1 ? $"There are {TypeSpecificValue} charges remaining." : $"There is {TypeSpecificValue} charge remaining.");
+                }
+            }
+        }
+
         /// <summary>
         /// Returns the container that is holding the container.  The container is not available publicly.  Items need to encapsulate any container functionality that is needed publicly.
         /// </summary>
         private IItemContainer? GetContainer()
         {
-            for (int i = 0; i <= InventorySlot.Total; i++)
+            for (int i = 0; i < InventorySlot.Total; i++)
             {
                 if (SaveGame.GetInventoryItem(i) == this)
                 {

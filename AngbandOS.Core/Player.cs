@@ -1947,15 +1947,6 @@ namespace AngbandOS.Core
             return i;
         }
 
-        public void ReportChargeUsageFromInventory(int item)
-        {
-            Item? oPtr = SaveGame.GetInventoryItem(item);
-            if (oPtr != null && (oPtr.Category == ItemTypeEnum.Staff || oPtr.Category == ItemTypeEnum.Wand) && oPtr.IsKnown())
-            {
-                SaveGame.MsgPrint(oPtr.TypeSpecificValue != 1 ? $"You have {oPtr.TypeSpecificValue} charges remaining." : $"You have {oPtr.TypeSpecificValue} charge remaining.");
-            }
-        }
-
         public void ShowEquip(IItemFilter? itemFilter)
         {
             ShowInventoryOptions options = new ShowInventoryOptions()

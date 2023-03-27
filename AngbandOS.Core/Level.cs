@@ -1275,22 +1275,6 @@ namespace AngbandOS.Core
             }
         }
 
-        public void ReportChargeUsageFromFloor(int item)
-        {
-            Item? oPtr = SaveGame.GetLevelItem(item);
-            if (oPtr == null || (oPtr.Category != ItemTypeEnum.Staff && oPtr.Category != ItemTypeEnum.Wand))
-            {
-                return;
-            }
-            if (!oPtr.IsKnown())
-            {
-                return;
-            }
-            SaveGame.MsgPrint(oPtr.TypeSpecificValue != 1
-                ? $"There are {oPtr.TypeSpecificValue} charges remaining."
-                : $"There is {oPtr.TypeSpecificValue} charge remaining.");
-        }
-
         public void RevertTileToBackground(int y, int x)
         {
             GridTile cPtr = Grid[y][x];

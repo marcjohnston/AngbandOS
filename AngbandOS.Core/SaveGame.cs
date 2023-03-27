@@ -10964,21 +10964,11 @@ namespace AngbandOS.Core
 
         public void DoUseStaff()
         {
-            int itemIndex = -999;
-
-            // Get an item if we weren't passed one
-            if (itemIndex == -999)
+            if (!SelectItem(out Item? item, "Use which staff? ", false, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Staff)))
             {
-                if (!GetItem(out itemIndex, "Use which staff? ", false, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Staff)))
-                {
-                    if (itemIndex == -2)
-                    {
-                        MsgPrint("You have no staff to use.");
-                    }
-                    return;
-                }
+                MsgPrint("You have no staff to use.");
+                return;
             }
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -10993,7 +10983,7 @@ namespace AngbandOS.Core
             StaffItemClass staffItem = (StaffItemClass)item.BaseItemCategory;
 
             // We can't use a staff from the floor
-            if (itemIndex < 0 && item.Count > 1)
+            if (!item.IsInInventory && item.Count > 1)
             {
                 MsgPrint("You must first pick up the staff.");
                 return;
@@ -11057,24 +11047,17 @@ namespace AngbandOS.Core
                 // Use the actual charge
                 item.TypeSpecificValue--;
                 // If the staff was part of a stack, separate it from the rest
-                if (itemIndex >= 0 && item.Count > 1)
+                if (item.IsInInventory && item.Count > 1)
                 {
                     Item singleStaff = item.Clone(1);
                     item.TypeSpecificValue++;
                     item.Count--;
                     Player.WeightCarried -= singleStaff.Weight;
-                    itemIndex = Player.InvenCarry(singleStaff, false);
+                    Player.InvenCarry(singleStaff, false);
                     MsgPrint("You unstack your staff.");
                 }
                 // Let the player know what happened
-                if (itemIndex >= 0)
-                {
-                    Player.ReportChargeUsageFromInventory(itemIndex);
-                }
-                else
-                {
-                    Level.ReportChargeUsageFromFloor(0 - itemIndex);
-                }
+                item.ReportChargeUsage();
             }
         }
 
@@ -12622,21 +12605,13 @@ namespace AngbandOS.Core
 
         public void DoAimWand()
         {
-            int itemIndex = -999;
-            if (itemIndex == -999)
+            // Prompt for an item, showing only wands
+            if (!SelectItem(out Item? item, "Aim which wand? ", true, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Wand)))
             {
-                // Prompt for an item, showing only wands
-                if (!GetItem(out itemIndex, "Aim which wand? ", true, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Wand)))
-                {
-                    if (itemIndex == -2)
-                    {
-                        MsgPrint("You have no wand to aim.");
-                    }
-                    return;
-                }
+                MsgPrint("You have no wand to aim.");
+                return;
             }
             // Get the item and check if it is really a wand
-            Item? item = itemIndex >= 0 ? GetInventoryItem(itemIndex) : GetLevelItem(0 - itemIndex);
             if (item == null)
             {
                 return;
@@ -12647,7 +12622,7 @@ namespace AngbandOS.Core
                 return;
             }
             // We can't use wands directly from the floor, since we need to aim them
-            if (itemIndex < 0 && item.Count > 1)
+            if (!item.IsInInventory && item.Count > 1)
             {
                 MsgPrint("You must first pick up the wand.");
                 return;
@@ -12713,24 +12688,17 @@ namespace AngbandOS.Core
             {
                 item.TypeSpecificValue--;
                 // If the wand is part of a stack, split it off from the others
-                if (itemIndex >= 0 && item.Count > 1)
+                if (item.IsInInventory && item.Count > 1)
                 {
                     Item splitItem = item.Clone(1);
                     item.TypeSpecificValue++;
                     item.Count--;
                     Player.WeightCarried -= splitItem.Weight;
-                    itemIndex = Player.InvenCarry(splitItem, false);
+                    Player.InvenCarry(splitItem, false);
                     MsgPrint("You unstack your wand.");
                 }
                 // Let us know we have used a charge
-                if (itemIndex >= 0)
-                {
-                    Player.ReportChargeUsageFromInventory(itemIndex);
-                }
-                else
-                {
-                    Level.ReportChargeUsageFromFloor(0 - itemIndex);
-                }
+                item.ReportChargeUsage();
             }
         }
 
