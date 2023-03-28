@@ -85,6 +85,16 @@ namespace AngbandOS.Core
 
         public string Label(Item oPtr) => ""; // TODO: Items held by a monster cannot be selected.
 
+        public void AddItem(Item oPtr)
+        {
+            Items.Add(oPtr);
+        }
+
+        public void RemoveItem(Item oPtr)
+        {
+            Items.Remove(oPtr);
+        }
+
         /// <summary>
         /// Modifies the quantity of an item.  No player stats are modified.
         /// </summary>
@@ -1046,12 +1056,10 @@ namespace AngbandOS.Core
                         }
                     }
                     // Check through the items in the tile we just entered
-                    for (int thisItemIndex = tile.ItemIndex; thisItemIndex != 0; thisItemIndex = nextItemIndex)
+                    foreach (Item item in tile.Items)
                     {
-                        Item? item = saveGame.GetLevelItem(thisItemIndex);
-                        nextItemIndex = (item == null ? 0 : item.NextInStack);
                         // We ignore gold
-                        if (item == null || item.Category == ItemTypeEnum.Gold)
+                        if (item.Category == ItemTypeEnum.Gold)
                         {
                             continue;
                         }
@@ -1135,7 +1143,7 @@ namespace AngbandOS.Core
                                 {
                                     saveGame.MsgPrint($"{monsterName} crushes {itemName}.");
                                 }
-                                saveGame.Level.DeleteObjectIdx(thisItemIndex);
+                                saveGame.Level.DeleteObject(item);
                             }
                         }
                     }

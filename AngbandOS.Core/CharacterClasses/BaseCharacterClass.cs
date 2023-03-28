@@ -160,7 +160,7 @@
                 int slot = item.BaseItemCategory.WieldSlot;
                 if (slot == -1)
                 {
-                    SaveGame.Player.InvenCarry(item, false);
+                    SaveGame.Player.InvenCarry(item);
                 }
                 else
                 {

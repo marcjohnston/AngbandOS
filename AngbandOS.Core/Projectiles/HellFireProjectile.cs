@@ -26,61 +26,56 @@ namespace AngbandOS.Core.Projection
             int nextOIdx;
             bool obvious = false;
             string oName = "";
-            for (int thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
+            foreach (Item oPtr in cPtr.Items)
             {
                 bool isArt = false;
                 bool plural = false;
                 bool doKill = false;
                 string noteKill = null;
-                Item? oPtr = SaveGame.GetLevelItem(thisOIdx);
-                nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
-                if (oPtr != null)
+                if (oPtr.Count > 1)
                 {
-                    if (oPtr.Count > 1)
-                    {
-                        plural = true;
-                    }
-                    if (oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false)
-                    {
-                        isArt = true;
-                    }
-                    if (oPtr.IsCursed())
-                    {
-                        doKill = true;
-                        noteKill = plural ? " are destroyed!" : " is destroyed!";
-                    }
-                    if (!doKill)
-                    {
-                        continue;
-                    }
+                    plural = true;
+                }
+                if (oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false)
+                {
+                    isArt = true;
+                }
+                if (oPtr.IsCursed())
+                {
+                    doKill = true;
+                    noteKill = plural ? " are destroyed!" : " is destroyed!";
+                }
+                if (!doKill)
+                {
+                    continue;
+                }
+                if (oPtr.Marked)
+                {
+                    obvious = true;
+                    oName = oPtr.Description(false, 0);
+                }
+                if (isArt)
+                {
                     if (oPtr.Marked)
                     {
-                        obvious = true;
-                        oName = oPtr.Description(false, 0);
+                        string s = plural ? "are" : "is";
+                        SaveGame.MsgPrint($"The {oName} {s} unaffected!");
                     }
-                    if (isArt)
+                }
+                else
+                {
+                    if (oPtr.Marked && string.IsNullOrEmpty(noteKill))
                     {
-                        if (oPtr.Marked)
-                        {
-                            string s = plural ? "are" : "is";
-                            SaveGame.MsgPrint($"The {oName} {s} unaffected!");
-                        }
+                        SaveGame.MsgPrint($"The {oName}{noteKill}");
                     }
-                    else
+                    bool isPotion = oPtr.BaseItemCategory.CategoryEnum == ItemTypeEnum.Potion;
+                    SaveGame.Level.DeleteObject(oPtr);
+                    if (isPotion)
                     {
-                        if (oPtr.Marked && string.IsNullOrEmpty(noteKill))
-                        {
-                            SaveGame.MsgPrint($"The {oName}{noteKill}");
-                        }
-                        bool isPotion = oPtr.BaseItemCategory.CategoryEnum == ItemTypeEnum.Potion;
-                        SaveGame.Level.DeleteObjectIdx(thisOIdx);
-                        if (isPotion)
-                        {
-                            PotionItemClass potion = (PotionItemClass)oPtr.BaseItemCategory;
-                            potion.Smash(SaveGame, who, y, x);
-                        }
-                        SaveGame.Level.RedrawSingleLocation(y, x);
+                        PotionItemClass potion = (PotionItemClass)oPtr.BaseItemCategory;
+                        potion.Smash(SaveGame, who, y, x);
                     }
+                    SaveGame.Level.RedrawSingleLocation(y, x);
                 }
             }
             return obvious;

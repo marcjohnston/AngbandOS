@@ -1623,27 +1623,24 @@ namespace AngbandOS.Core
             return ItemMatchesFilter(item, itemFilter);
         }
 
-        public int InvenCarry(Item oPtr, bool final)
+        public int InvenCarry(Item oPtr)
         {
             int j;
             int n = -1;
-            if (!final)
+            for (j = 0; j < InventorySlot.PackCount; j++)
             {
-                for (j = 0; j < InventorySlot.PackCount; j++)
+                Item? jPtr = SaveGame.GetInventoryItem(j);
+                if (jPtr == null)
                 {
-                    Item? jPtr = SaveGame.GetInventoryItem(j);
-                    if (jPtr == null)
-                    {
-                        continue;
-                    }
-                    n = j;
-                    if (oPtr.CanAbsorb(jPtr))
-                    {
-                        jPtr.Absorb(oPtr);
-                        SaveGame.Player.WeightCarried += oPtr.Count * oPtr.Weight;
-                        SaveGame.UpdateBonusesFlaggedAction.Set();
-                        return j;
-                    }
+                    continue;
+                }
+                n = j;
+                if (oPtr.CanAbsorb(jPtr))
+                {
+                    jPtr.Absorb(oPtr);
+                    SaveGame.Player.WeightCarried += oPtr.Count * oPtr.Weight;
+                    SaveGame.UpdateBonusesFlaggedAction.Set();
+                    return j;
                 }
             }
             if (SaveGame._invenCnt > InventorySlot.PackCount)
@@ -1659,7 +1656,7 @@ namespace AngbandOS.Core
                 }
             }
             int i = j;
-            if (!final && i < InventorySlot.PackCount)
+            if (i < InventorySlot.PackCount)
             {
                 for (j = 0; j < InventorySlot.PackCount; j++)
                 {
@@ -1686,7 +1683,6 @@ namespace AngbandOS.Core
             oPtr = SaveGame.GetInventoryItem(i);
             oPtr.Y = 0;
             oPtr.X = 0;
-            oPtr.NextInStack = 0;
             oPtr.HoldingMonsterIndex = 0;
             SaveGame.Player.WeightCarried += oPtr.Count * oPtr.Weight;
             SaveGame._invenCnt++;
@@ -1883,7 +1879,7 @@ namespace AngbandOS.Core
             act = oPtr.TakeOffMessage;
             oPtr.ItemIncrease(-amt);
             oPtr.ItemOptimize();
-            int slot = InvenCarry(qPtr, false);
+            int slot = InvenCarry(qPtr);
             SaveGame.MsgPrint($"{act} {oName} ({slot.IndexToLabel()}).");
             return slot;
         }
