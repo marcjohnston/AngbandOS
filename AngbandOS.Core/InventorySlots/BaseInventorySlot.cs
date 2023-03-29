@@ -58,18 +58,6 @@ namespace AngbandOS.Core.InventorySlots
             }
         }
 
-        public virtual void AddItem(Item oPtr) // TODO: this doesn't support the multi-item slots
-        {
-            int slot = oPtr.BaseItemCategory.WieldSlot;
-            SaveGame.SetInventoryItem(slot, oPtr);
-        }
-
-        public virtual void RemoveItem(Item oPtr) // TODO: this doesn't support the multi-item slots
-        {
-            int slot = FindInventorySlot(oPtr);
-            SaveGame.SetInventoryItem(slot, null);
-        }
-
         /// <summary>
         /// Returns the alphabetical label for the position of the item in the container.  The player will use this label to select the item from the container.
         /// </summary>

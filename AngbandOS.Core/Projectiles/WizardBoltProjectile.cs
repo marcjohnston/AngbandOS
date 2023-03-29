@@ -24,46 +24,51 @@ namespace AngbandOS.Core.Projection
             int nextOIdx;
             bool obvious = false;
             string oName = "";
-            foreach (Item oPtr in cPtr.Items)
+            for (int thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
             {
                 bool isArt = false;
                 bool plural = false;
-                if (oPtr.Count > 1)
+                Item? oPtr = SaveGame.GetLevelItem(thisOIdx);
+                nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
+                if (oPtr != null)
                 {
-                    plural = true;
-                }
-                if (oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false)
-                {
-                    isArt = true;
-                }
-                string noteKill = plural ? " are destroyed!" : " is destroyed!";
-                if (oPtr.Marked)
-                {
-                    obvious = true;
-                    oName = oPtr.Description(false, 0);
-                }
-                if (isArt)
-                {
+                    if (oPtr.Count > 1)
+                    {
+                        plural = true;
+                    }
+                    if (oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false)
+                    {
+                        isArt = true;
+                    }
+                    string noteKill = plural ? " are destroyed!" : " is destroyed!";
                     if (oPtr.Marked)
                     {
-                        string s = plural ? "are" : "is";
-                        SaveGame.MsgPrint($"The {oName} {s} unaffected!");
+                        obvious = true;
+                        oName = oPtr.Description(false, 0);
                     }
-                }
-                else
-                {
-                    if (oPtr.Marked && string.IsNullOrEmpty(noteKill))
+                    if (isArt)
                     {
-                        SaveGame.MsgPrint($"The {oName}{noteKill}");
+                        if (oPtr.Marked)
+                        {
+                            string s = plural ? "are" : "is";
+                            SaveGame.MsgPrint($"The {oName} {s} unaffected!");
+                        }
                     }
-                    bool isPotion = oPtr.BaseItemCategory.CategoryEnum == ItemTypeEnum.Potion;
-                    SaveGame.Level.DeleteObject(oPtr);
-                    if (isPotion)
+                    else
                     {
-                        PotionItemClass potion = (PotionItemClass)oPtr.BaseItemCategory;
-                        potion.Smash(SaveGame, who, y, x);
+                        if (oPtr.Marked && string.IsNullOrEmpty(noteKill))
+                        {
+                            SaveGame.MsgPrint($"The {oName}{noteKill}");
+                        }
+                        bool isPotion = oPtr.BaseItemCategory.CategoryEnum == ItemTypeEnum.Potion;
+                        SaveGame.Level.DeleteObjectIdx(thisOIdx);
+                        if (isPotion)
+                        {
+                            PotionItemClass potion = (PotionItemClass)oPtr.BaseItemCategory;
+                            potion.Smash(SaveGame, who, y, x);
+                        }
+                        SaveGame.Level.RedrawSingleLocation(y, x);
                     }
-                    SaveGame.Level.RedrawSingleLocation(y, x);
                 }
             }
             return obvious;

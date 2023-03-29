@@ -1828,7 +1828,7 @@ namespace AngbandOS.Core.Stores
                         oName = jPtr.Description(true, 3);
                         SaveGame.MsgPrint(BoughtMessage(oName, price));
                         jPtr.Inscription = "";
-                        itemNew = SaveGame.Player.InvenCarry(jPtr);
+                        itemNew = SaveGame.Player.InvenCarry(jPtr, false);
                         Item? newItemInInventory = SaveGame.GetInventoryItem(itemNew);
                         if (newItemInInventory == null)
                         {
@@ -1882,7 +1882,7 @@ namespace AngbandOS.Core.Stores
             }
             else
             {
-                itemNew = SaveGame.Player.InvenCarry(jPtr);
+                itemNew = SaveGame.Player.InvenCarry(jPtr, false);
                 Item? newItemInInventory = SaveGame.GetInventoryItem(itemNew);
                 if (newItemInInventory == null)
                 {

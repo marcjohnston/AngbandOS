@@ -27,12 +27,6 @@ namespace AngbandOS.Core.InventorySlots
         public override string DescribeWieldLocation(int index) => "carrying in your pack";
 
         public override string DescribeItemLocation(Item oPtr) => "In your pack:";
-
-        public override void AddItem(Item oPtr) // TODO: this doesn't support the multi-item slots
-        {
-            SaveGame.Player.InvenCarry(oPtr);
-        }
-
         /// Checks the quantity of an item and removes it, when the quanity is zero.  The pack inventory slot will move subsequent items in the pack to the end of the pack.
         /// </summary>
         /// <param name="oPtr"></param>

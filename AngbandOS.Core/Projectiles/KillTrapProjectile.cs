@@ -50,24 +50,29 @@ namespace AngbandOS.Core.Projection
             GridTile cPtr = SaveGame.Level.Grid[y][x];
             int nextOIdx;
             bool obvious = false;
-            foreach (Item oPtr in cPtr.Items)
+            for (int thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
             {
-                if (oPtr.Count > 1)
+                Item? oPtr = SaveGame.GetLevelItem(thisOIdx);
+                nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
+                if (oPtr != null)
                 {
-                }
-                if (oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false)
-                {
-                }
-                if (oPtr.Category == ItemTypeEnum.Chest)
-                {
-                    if (oPtr.TypeSpecificValue > 0)
+                    if (oPtr.Count > 1)
                     {
-                        oPtr.TypeSpecificValue = 0 - oPtr.TypeSpecificValue;
-                        oPtr.BecomeKnown();
-                        if (oPtr.Marked)
+                    }
+                    if (oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false)
+                    {
+                    }
+                    if (oPtr.Category == ItemTypeEnum.Chest)
+                    {
+                        if (oPtr.TypeSpecificValue > 0)
                         {
-                            SaveGame.MsgPrint("Click!");
-                            obvious = true;
+                            oPtr.TypeSpecificValue = 0 - oPtr.TypeSpecificValue;
+                            oPtr.BecomeKnown();
+                            if (oPtr.Marked)
+                            {
+                                SaveGame.MsgPrint("Click!");
+                                obvious = true;
+                            }
                         }
                     }
                 }

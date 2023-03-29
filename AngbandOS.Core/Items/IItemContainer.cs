@@ -50,8 +50,5 @@
         /// <param name="oPtr"></param>
         /// <returns></returns>
         string TakeOffMessage(Item oPtr);
-
-        void AddItem(Item oPtr);
-        void RemoveItem(Item oPtr);
     }
 }
