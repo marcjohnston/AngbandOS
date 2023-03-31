@@ -89,11 +89,14 @@ namespace AngbandOS.Core.InventorySlots
         [Obsolete("Use InventorySlot.Items WIP")]
         protected int FindInventorySlot(Item oPtr)
         {
-            for (int slot = 0; slot < InventorySlot.Total; slot++)
+            foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots)
             {
-                if (SaveGame.GetInventoryItem(slot) == oPtr)
+                foreach (int slot in inventorySlot.InventorySlots)
                 {
-                    return slot;
+                    if (SaveGame.GetInventoryItem(slot) == oPtr)
+                    {
+                        return slot;
+                    }
                 }
             }
             throw new Exception("Find slot failed.");

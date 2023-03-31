@@ -5145,7 +5145,7 @@ namespace AngbandOS.Core
             HandleStuff();
             string oName = oPtr.Description(true, 3);
 
-            MsgPrint($"{oPtr.DescribeLocation}: {oName} ({oPtr.Label}).");
+            MsgPrint($"{oPtr.DescribeLocation()}: {oName} ({oPtr.Label}).");
 
             // Check to see if the player is carrying the item and it is stompable.
             if (oPtr.IsInInventory && oPtr.Stompable())
@@ -5178,7 +5178,7 @@ namespace AngbandOS.Core
             NoticeCombineAndReorderFlaggedAction.Set();
             string oName = oPtr.Description(true, 3);
 
-            MsgPrint($"{oPtr.DescribeLocation}: {oName} ({oPtr.Label}).");
+            MsgPrint($"{oPtr.DescribeLocation()}: {oName} ({oPtr.Label}).");
 
             // Check to see if the player is carrying the item and it is stompable.
             if (oPtr.IsInInventory && oPtr.Stompable())
@@ -18476,10 +18476,6 @@ namespace AngbandOS.Core
 
         public bool TargetOkay()
         {
-            if (TargetWho < 0)
-            {
-                return true;
-            }
             if (TargetWho <= 0)
             {
                 return false;

@@ -79,11 +79,14 @@ namespace AngbandOS.Core.Items
         /// </summary>
         public IItemContainer? GetContainer()
         {
-            for (int i = 0; i < InventorySlot.Total; i++)
+            foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots)
             {
-                if (SaveGame.GetInventoryItem(i) == this)
+                foreach (int slot in inventorySlot.InventorySlots)
                 {
-                    return SaveGame.SingletonRepository.InventorySlots.Single(_inventorySlot => _inventorySlot.InventorySlots.Contains(i));
+                    if (SaveGame.GetInventoryItem(slot) == this)
+                    {
+                        return inventorySlot;
+                    }
                 }
             }
 

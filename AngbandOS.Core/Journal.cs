@@ -161,11 +161,11 @@ namespace AngbandOS.Core
             ItemCharacteristics playerCharacteristics = SaveGame.Player.GetAbilitiesAsItemFlags();
             if (getStat(playerCharacteristics))
             {
-                SaveGame.Screen.Print(baseColour, "+", row, col + 10 + InventorySlot.Total - InventorySlot.MeleeWeapon + 1);
+                SaveGame.Screen.Print(baseColour, "+", row, col + 10 + 26); // col + 10 + InventorySlot.Total - InventorySlot.MeleeWeapon + 1);
             }
             else
             {
-                SaveGame.Screen.Print(Colour.Grey, ".", row, col + 10 + InventorySlot.Total - InventorySlot.MeleeWeapon + 1);
+                SaveGame.Screen.Print(Colour.Grey, ".", row, col + 10 + 26); // col + 10 + InventorySlot.Total - InventorySlot.MeleeWeapon + 1);
             }
 
         }

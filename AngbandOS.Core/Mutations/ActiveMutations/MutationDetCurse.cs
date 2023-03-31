@@ -17,12 +17,16 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             {
                 return;
             }
-            for (int i = 0; i < InventorySlot.Total; i++)
+
+            foreach (BaseInventorySlot inventorySlot in saveGame.SingletonRepository.InventorySlots)
             {
-                Item? oPtr = saveGame.GetInventoryItem(i);
-                if (oPtr != null && oPtr.IsCursed())
+                foreach (int slot in inventorySlot.InventorySlots)
                 {
-                    oPtr.Inscription = "cursed";
+                    Item? oPtr = saveGame.GetInventoryItem(slot);
+                    if (oPtr != null && oPtr.IsCursed())
+                    {
+                        oPtr.Inscription = "cursed";
+                    }
                 }
             }
         }
