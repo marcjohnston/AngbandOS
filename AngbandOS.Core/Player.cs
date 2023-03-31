@@ -1609,13 +1609,9 @@ namespace AngbandOS.Core
             }
             return false;
         }
-        public bool GetItemOkay(int i, IItemFilter? itemFilter)
+
+        public bool GetItemOkay(Item? item, IItemFilter? itemFilter)
         {
-            if (i < 0 || i >= InventorySlot.Total)
-            {
-                return false;
-            }
-            Item? item = SaveGame.GetInventoryItem(i);
             if (item == null)
             {
                 return false;

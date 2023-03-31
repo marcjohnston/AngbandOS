@@ -167,6 +167,14 @@ namespace AngbandOS.Core.Items
             container.ItemOptimize(this);
         }
 
+        public void ProcessWorld()
+        {
+            if (Category == ItemTypeEnum.Rod && TypeSpecificValue != 0)
+            {
+                TypeSpecificValue--;
+            }
+        }
+
         /// <summary>
         /// Returns true, if the container is part of the players inventory.  All inventory slots (pack & equipment), return true; monsters and grid tiles return false.
         /// </summary>

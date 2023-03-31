@@ -148,13 +148,7 @@ namespace AngbandOS.Core
             {
                 return;
             }
-            for (int i = 0; i < SaveGame.Level.OMax; i++)
-            {
-                if (SaveGame.GetLevelItem(i) == oPtr)
-                {
-                    SaveGame.Level.DeleteObjectIdx(i);
-                }
-            }
+            Items.Remove(oPtr);
         }
 
         public void AddItem(Item oPtr)
@@ -165,6 +159,14 @@ namespace AngbandOS.Core
         public void RemoveItem(Item oPtr)
         {
             Items.Remove(oPtr);
+        }
+
+        public void ProcessWorld()
+        {
+            foreach (Item oPtr in Items)
+            {
+                oPtr.ProcessWorld();
+            }
         }
 
         /// <summary>

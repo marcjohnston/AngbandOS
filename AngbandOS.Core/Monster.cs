@@ -138,6 +138,14 @@ namespace AngbandOS.Core
             Items.Remove(oPtr);
         }
 
+        public void ProcessWorld()
+        {
+            foreach (Item item in Items)
+            {
+                item.ProcessWorld();
+            }
+        }
+
         /// <summary>
         /// Returns false, because the item container doesn't belong to the players inventory.
         /// </summary>

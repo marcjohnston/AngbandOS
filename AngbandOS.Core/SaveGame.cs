@@ -284,13 +284,6 @@ namespace AngbandOS.Core
         private int TunnN;
         private int WallN;
 
-        public readonly Item?[] LevelItems = new Item[Constants.MaxOIdx];
-
-        public Item? GetLevelItem(int index)
-        {
-            return LevelItems[index];
-        }
-
         /// <summary>
         /// Removes all items from a grid tile.
         /// </summary>
@@ -303,7 +296,6 @@ namespace AngbandOS.Core
                 return;
             }
             GridTile cPtr = Level.Grid[y][x];
-            Level.OCnt -= cPtr.Items.Count;
             cPtr.Items.Clear();
             Level.RedrawSingleLocation(y, x);
         }
@@ -1805,11 +1797,12 @@ namespace AngbandOS.Core
                             {
                                 k = equipment.Count == 1 ? equipment[0] : -1;
                             }
-                            if (!Player.GetItemOkay(k, itemFilter))
+                            Item? oPtr = GetInventoryItem(k);
+                            if (!Player.GetItemOkay(oPtr, itemFilter))
                             {
                                 break;
                             }
-                            itemIndex = GetInventoryItem(k);
+                            itemIndex = oPtr;
                             item = true;
                             done = true;
                             break;
@@ -1822,16 +1815,25 @@ namespace AngbandOS.Core
                                 which = char.ToLower(which);
                             }
                             k = !ViewingEquipment ? Player.LabelToInven(which) : Player.LabelToEquip(which);
-                            if (!Player.GetItemOkay(k, itemFilter))
+                            if (k < 0 || k >= InventorySlot.Total)
                             {
                                 break;
                             }
-                            if (ver && !Verify("Try", k))
+                            Item? oPtr = GetInventoryItem(k);
+                            if (oPtr == null)
+                            {
+                                break;
+                            }
+                            if (!Player.GetItemOkay(oPtr, itemFilter))
+                            {
+                                break;
+                            }
+                            if (ver && !Verify("Try", oPtr))
                             {
                                 done = true;
                                 break;
                             }
-                            itemIndex = GetInventoryItem(k);
+                            itemIndex = oPtr;
                             item = true;
                             done = true;
                             break;
@@ -3267,18 +3269,16 @@ namespace AngbandOS.Core
                 NoticeCombineFlaggedAction.Set();
             }
             Player.SenseInventory();
-            for (int i = 1; i < Level.OMax; i++)
+            for (int y = 1; y < Level.CurHgt - 1; y++)
             {
-                Item? oPtr = GetLevelItem(i);
-                if (oPtr == null)
+                for (int x = 1; x < Level.CurWid - 1; x++)
                 {
-                    continue;
-                }
-                if (oPtr.Category == ItemTypeEnum.Rod && oPtr.TypeSpecificValue != 0)
-                {
-                    oPtr.TypeSpecificValue--;
+                    GridTile cPtr = Level.Grid[y][x];
+                    cPtr.ProcessWorld();
                 }
             }
+            Level.Monsters.ProcessWorld();
+
             if (Player.WordOfRecallDelay != 0)
             {
                 Player.WordOfRecallDelay--;
@@ -3397,14 +3397,9 @@ namespace AngbandOS.Core
             }
         }
 
-        private bool Verify(string prompt, int item)
+        private bool Verify(string prompt, Item item)
         {
-            Item? oPtr = item >= 0 ? GetInventoryItem(item) : GetLevelItem(0 - item);
-            if (oPtr == null)
-            {
-                return false;
-            }
-            string oName = oPtr.Description(true, 3);
+            string oName = item.Description(true, 3);
             string outVal = $"{prompt} {oName}? ";
             return GetCheck(outVal);
         }
@@ -4331,30 +4326,27 @@ namespace AngbandOS.Core
         public bool DetectObjectsGold()
         {
             bool detect = false;
-            for (int i = 1; i < Level.OMax; i++)
+            for (int y = 1; y < Level.CurHgt - 1; y++)
             {
-                Item? oPtr = GetLevelItem(i);
-                if (oPtr == null)
+                for (int x = 1; x < Level.CurWid - 1; x++)
                 {
-                    continue;
-                }
-                if (oPtr.HoldingMonsterIndex != 0)
-                {
-                    continue;
-                }
-                int y = oPtr.Y;
-                int x = oPtr.X;
-                if (!Level.PanelContains(y, x))
-                {
-                    continue;
-                }
-                if (oPtr.Category == ItemTypeEnum.Gold)
-                {
-                    oPtr.Marked = true;
-                    Level.RedrawSingleLocation(y, x);
-                    detect = true;
+                    GridTile cPtr = Level.Grid[y][x];
+                    foreach (Item oPtr in cPtr.Items)
+                    {
+                        if (!Level.PanelContains(y, x))
+                        {
+                            continue;
+                        }
+                        if (oPtr.Category == ItemTypeEnum.Gold)
+                        {
+                            oPtr.Marked = true;
+                            Level.RedrawSingleLocation(y, x);
+                            detect = true;
+                        }
+                    }
                 }
             }
+
             if (detect)
             {
                 MsgPrint("You sense the presence of treasure!");
@@ -4369,35 +4361,31 @@ namespace AngbandOS.Core
         public void DetectObjectsMagic()
         {
             bool detect = false;
-            for (int i = 1; i < Level.OMax; i++)
+            for (int y = 1; y < Level.CurHgt - 1; y++)
             {
-                Item? oPtr = GetLevelItem(i);
-                if (oPtr == null)
+                for (int x = 1; x < Level.CurWid - 1; x++)
                 {
-                    continue;
-                }
-                if (oPtr.HoldingMonsterIndex != 0)
-                {
-                    continue;
-                }
-                int y = oPtr.Y;
-                int x = oPtr.X;
-                if (!Level.PanelContains(y, x))
-                {
-                    continue;
-                }
-                ItemTypeEnum tv = oPtr.Category;
-                if (oPtr.IsFixedArtifact() || oPtr.IsRare() || string.IsNullOrEmpty(oPtr.RandartName) == false ||
-                    tv == ItemTypeEnum.Amulet || tv == ItemTypeEnum.Ring || tv == ItemTypeEnum.Staff ||
-                    tv == ItemTypeEnum.Wand || tv == ItemTypeEnum.Rod || tv == ItemTypeEnum.Scroll ||
-                    tv == ItemTypeEnum.Potion || tv == ItemTypeEnum.LifeBook || tv == ItemTypeEnum.SorceryBook ||
-                    tv == ItemTypeEnum.NatureBook || tv == ItemTypeEnum.ChaosBook || tv == ItemTypeEnum.DeathBook ||
-                    tv == ItemTypeEnum.CorporealBook || tv == ItemTypeEnum.TarotBook || tv == ItemTypeEnum.FolkBook ||
-                    oPtr.BonusArmourClass > 0 || oPtr.BonusToHit + oPtr.BonusDamage > 0)
-                {
-                    oPtr.Marked = true;
-                    Level.RedrawSingleLocation(y, x);
-                    detect = true;
+                    GridTile cPtr = Level.Grid[y][x];
+                    foreach (Item oPtr in cPtr.Items)
+                    {
+                        if (!Level.PanelContains(y, x))
+                        {
+                            continue;
+                        }
+                        ItemTypeEnum tv = oPtr.Category;
+                        if (oPtr.IsFixedArtifact() || oPtr.IsRare() || string.IsNullOrEmpty(oPtr.RandartName) == false ||
+                            tv == ItemTypeEnum.Amulet || tv == ItemTypeEnum.Ring || tv == ItemTypeEnum.Staff ||
+                            tv == ItemTypeEnum.Wand || tv == ItemTypeEnum.Rod || tv == ItemTypeEnum.Scroll ||
+                            tv == ItemTypeEnum.Potion || tv == ItemTypeEnum.LifeBook || tv == ItemTypeEnum.SorceryBook ||
+                            tv == ItemTypeEnum.NatureBook || tv == ItemTypeEnum.ChaosBook || tv == ItemTypeEnum.DeathBook ||
+                            tv == ItemTypeEnum.CorporealBook || tv == ItemTypeEnum.TarotBook || tv == ItemTypeEnum.FolkBook ||
+                            oPtr.BonusArmourClass > 0 || oPtr.BonusToHit + oPtr.BonusDamage > 0)
+                        {
+                            oPtr.Marked = true;
+                            Level.RedrawSingleLocation(y, x);
+                            detect = true;
+                        }
+                    }
                 }
             }
             if (detect)
@@ -4409,28 +4397,24 @@ namespace AngbandOS.Core
         public bool DetectObjectsNormal()
         {
             bool detect = false;
-            for (int i = 1; i < Level.OMax; i++)
+            for (int y = 1; y < Level.CurHgt - 1; y++)
             {
-                Item? oPtr = GetLevelItem(i);
-                if (oPtr == null)
+                for (int x = 1; x < Level.CurWid - 1; x++)
                 {
-                    continue;
-                }
-                if (oPtr.HoldingMonsterIndex != 0)
-                {
-                    continue;
-                }
-                int y = oPtr.Y;
-                int x = oPtr.X;
-                if (!Level.PanelContains(y, x))
-                {
-                    continue;
-                }
-                if (oPtr.Category != ItemTypeEnum.Gold)
-                {
-                    oPtr.Marked = true;
-                    Level.RedrawSingleLocation(y, x);
-                    detect = true;
+                    GridTile cPtr = Level.Grid[y][x];
+                    foreach (Item oPtr in cPtr.Items)
+                    {
+                        if (!Level.PanelContains(y, x))
+                        {
+                            continue;
+                        }
+                        if (oPtr.Category != ItemTypeEnum.Gold)
+                        {
+                            oPtr.Marked = true;
+                            Level.RedrawSingleLocation(y, x);
+                            detect = true;
+                        }
+                    }
                 }
             }
             if (detect)
@@ -15637,7 +15621,6 @@ namespace AngbandOS.Core
             for (int generateAttemptNumber = 0; ; generateAttemptNumber++)
             {
                 bool okay = true;
-                Level.OMax = 1;
 
                 // Allocate and reset the grid tiles.
                 for (int i = 0; i < Level.MaxHgt; i++)
@@ -15844,10 +15827,6 @@ namespace AngbandOS.Core
                 {
                     Level.TreasureFeeling = 0;
                     Level.DangerFeeling = 0;
-                }
-                if (Level.OMax >= Constants.MaxOIdx)
-                {
-                    okay = false;
                 }
                 if (Level.MMax >= Constants.MaxMIdx)
                 {

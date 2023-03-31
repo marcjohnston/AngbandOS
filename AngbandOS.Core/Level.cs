@@ -32,8 +32,6 @@ namespace AngbandOS.Core
         public int MMax = 1;
         public int MonsterLevel;
         public int ObjectLevel;
-        public int OCnt;
-        public int OMax = 1;
 
         public int PanelCol;
         public int PanelColMax;
@@ -190,17 +188,6 @@ namespace AngbandOS.Core
                 int y = jPtr.Y;
                 int x = jPtr.X;
                 RedrawSingleLocation(y, x);
-            }
-            OCnt--;
-        }
-
-        [Obsolete("Use DeleteObject(Item)")]
-        public void DeleteObjectIdx(int oIdx)
-        {
-            Item? jPtr = SaveGame.GetLevelItem(oIdx);
-            if (jPtr != null)
-            {
-                DeleteObject(jPtr);
             }
         }
 
@@ -484,53 +471,6 @@ namespace AngbandOS.Core
                 GridTile cPtr = Grid[y][x];
                 cPtr.Items.Remove(jPtr);
             }
-        }
-
-        public void FloorItemDescribe(int item)
-        {
-            Item? oPtr = SaveGame.GetLevelItem(item);
-            if (oPtr == null)
-            {
-                SaveGame.MsgPrint($"You see (nothing).");
-            }
-            else
-            { 
-                string oName = oPtr.Description(true, 3);
-                SaveGame.MsgPrint($"You see {oName}.");
-            }
-        }
-
-        public void FloorItemIncrease(int item, int num)
-        {
-            Item? oPtr = SaveGame.GetLevelItem(item);
-            if (oPtr != null)
-            {
-                num += oPtr.Count;
-                if (num > 255)
-                {
-                    num = 255;
-                }
-                else if (num < 0)
-                {
-                    num = 0;
-                }
-                num -= oPtr.Count;
-                oPtr.Count += num;
-            }
-        }
-
-        public void FloorItemOptimize(int item)
-        {
-            Item? oPtr = SaveGame.GetLevelItem(item);
-            if (oPtr == null)
-            {
-                return;
-            }
-            if (oPtr.Count != 0)
-            {
-                return;
-            }
-            DeleteObjectIdx(item);
         }
 
         public bool GridOpenNoItem(int y, int x)
@@ -1214,20 +1154,11 @@ namespace AngbandOS.Core
                 {
                     GridTile cPtr = Grid[y][x];
                     cPtr.TileFlags.Clear(GridTile.PlayerMemorised);
+                    foreach (Item oPtr in cPtr.Items)
+                    {
+                        oPtr.Marked = false;
+                    }
                 }
-            }
-            for (int i = 1; i < OMax; i++)
-            {
-                Item? oPtr = SaveGame.GetLevelItem(i);
-                if (oPtr == null)
-                {
-                    continue;
-                }
-                if (oPtr.HoldingMonsterIndex != 0)
-                {
-                    continue;
-                }
-                oPtr.Marked = false;
             }
             SaveGame.RemoveLightFlaggedAction.Set();
             SaveGame.RemoveViewFlaggedAction.Set();
@@ -1239,20 +1170,6 @@ namespace AngbandOS.Core
 
         public void WizLight()
         {
-            int i;
-            for (i = 1; i < OMax; i++)
-            {
-                Item? oPtr = SaveGame.GetLevelItem(i);
-                if (oPtr == null)
-                {
-                    continue;
-                }
-                if (oPtr.HoldingMonsterIndex != 0)
-                {
-                    continue;
-                }
-                oPtr.Marked = true;
-            }
             for (int y = 1; y < CurHgt - 1; y++)
             {
                 for (int x = 1; x < CurWid - 1; x++)
@@ -1260,7 +1177,7 @@ namespace AngbandOS.Core
                     GridTile cPtr = Grid[y][x];
                     if (!cPtr.FeatureType.IsWall)
                     {
-                        for (i = 0; i < 9; i++)
+                        for (int i = 0; i < 9; i++)
                         {
                             int yy = y + OrderedDirectionYOffset[i];
                             int xx = x + OrderedDirectionXOffset[i];
@@ -1272,6 +1189,10 @@ namespace AngbandOS.Core
                             }
                             cPtr.TileFlags.Set(GridTile.PlayerMemorised);
                         }
+                    }
+                    foreach (Item oPtr in cPtr.Items)
+                    {
+                        oPtr.Marked = true;    
                     }
                 }
             }

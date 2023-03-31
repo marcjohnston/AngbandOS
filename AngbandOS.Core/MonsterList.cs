@@ -31,6 +31,14 @@ namespace AngbandOS.Core
             }
         }
 
+        public void ProcessWorld()
+        {
+            foreach (Monster monster in _monsters)
+            {
+                monster.ProcessWorld();
+            }
+        }
+
         public Monster this[int index] => _monsters[index];
 
         /// <summary>
