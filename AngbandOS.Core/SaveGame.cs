@@ -10970,7 +10970,9 @@ namespace AngbandOS.Core
         public void DoCmdFire()
         {
             // Check that we're actually wielding a ranged weapon
-            Item? missileWeapon = GetInventoryItem(InventorySlot.RangedWeapon);
+            RangedWeaponInventorySlot rangedWeaponInventorySlot = SingletonRepository.InventorySlots.Get<RangedWeaponInventorySlot>();
+            WeightedRandom<int> weightedRandom = rangedWeaponInventorySlot.WeightedRandom;
+            Item? missileWeapon = GetInventoryItem(weightedRandom.Choose());
             if (missileWeapon == null || missileWeapon.Category == 0)
             {
                 MsgPrint("You have nothing to fire with.");

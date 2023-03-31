@@ -1029,7 +1029,7 @@ namespace AngbandOS.Core.FlaggedActions
                 {
                     SaveGame.MsgPrint("You have trouble wielding such a heavy bow.");
                 }
-                else if (SaveGame.GetInventoryItem(InventorySlot.RangedWeapon) != null)
+                else if (SaveGame.SingletonRepository.InventorySlots.Get<RangedWeaponInventorySlot>().Count > 0)
                 {
                     SaveGame.MsgPrint("You have no trouble wielding your bow.");
                 }

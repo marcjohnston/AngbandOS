@@ -41,7 +41,6 @@ namespace AngbandOS.Core
         public const int MaxMetals = 39;
         public const int MaxMIdx = 512;
         public const int MaxMindcraftPowers = 12;
-        public const int MaxOIdx = 256;
         public const int MaxPatron = 16;
         public const int MaxRange = 18;
         public const int MaxRealm = 8;
