@@ -24,77 +24,72 @@ namespace AngbandOS.Core.Projection
             int nextOIdx;
             bool obvious = false;
             string oName = "";
-            for (int thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
+            foreach (Item oPtr in cPtr.Items)
             {
                 bool isArt = false;
                 bool ignore = false;
                 bool plural = false;
                 bool doKill = false;
                 string noteKill = null;
-                Item? oPtr = SaveGame.GetLevelItem(thisOIdx);
-                nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
-                if (oPtr != null)
+                oPtr.RefreshFlagBasedProperties();
+                if (oPtr.Count > 1)
                 {
-                    oPtr.RefreshFlagBasedProperties();
-                    if (oPtr.Count > 1)
+                    plural = true;
+                }
+                if (oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false)
+                {
+                    isArt = true;
+                }
+                if (oPtr.HatesFire())
+                {
+                    doKill = true;
+                    noteKill = plural ? " burn up!" : " burns up!";
+                    if (oPtr.Characteristics.IgnoreFire)
                     {
-                        plural = true;
+                        ignore = true;
                     }
-                    if (oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false)
+                }
+                if (oPtr.HatesElec())
+                {
+                    ignore = false;
+                    doKill = true;
+                    noteKill = plural ? " are destroyed!" : " is destroyed!";
+                    if (oPtr.Characteristics.IgnoreElec)
                     {
-                        isArt = true;
+                        ignore = true;
                     }
-                    if (oPtr.HatesFire())
-                    {
-                        doKill = true;
-                        noteKill = plural ? " burn up!" : " burns up!";
-                        if (oPtr.Characteristics.IgnoreFire)
-                        {
-                            ignore = true;
-                        }
-                    }
-                    if (oPtr.HatesElec())
-                    {
-                        ignore = false;
-                        doKill = true;
-                        noteKill = plural ? " are destroyed!" : " is destroyed!";
-                        if (oPtr.Characteristics.IgnoreElec)
-                        {
-                            ignore = true;
-                        }
-                    }
-                    if (!doKill)
-                    {
-                        continue;
-                    }
+                }
+                if (!doKill)
+                {
+                    continue;
+                }
+                if (oPtr.Marked)
+                {
+                    obvious = true;
+                    oName = oPtr.Description(false, 0);
+                }
+                if (isArt || ignore)
+                {
                     if (oPtr.Marked)
                     {
-                        obvious = true;
-                        oName = oPtr.Description(false, 0);
+                        string s = plural ? "are" : "is";
+                        SaveGame.MsgPrint($"The {oName} {s} unaffected!");
                     }
-                    if (isArt || ignore)
+                }
+                else
+                {
+                    if (oPtr.Marked && string.IsNullOrEmpty(noteKill))
                     {
-                        if (oPtr.Marked)
-                        {
-                            string s = plural ? "are" : "is";
-                            SaveGame.MsgPrint($"The {oName} {s} unaffected!");
-                        }
+                        SaveGame.MsgPrint($"The {oName}{noteKill}");
                     }
-                    else
+                    bool isPotion = oPtr.BaseItemCategory.CategoryEnum == ItemTypeEnum.Potion;
+                    SaveGame.Level.DeleteObject(oPtr);
+                    if (isPotion)
                     {
-                        if (oPtr.Marked && string.IsNullOrEmpty(noteKill))
-                        {
-                            SaveGame.MsgPrint($"The {oName}{noteKill}");
-                        }
-                        bool isPotion = oPtr.BaseItemCategory.CategoryEnum == ItemTypeEnum.Potion;
-                        SaveGame.Level.DeleteObjectIdx(thisOIdx);
-                        if (isPotion)
-                        {
-                            PotionItemClass potion = (PotionItemClass)oPtr.BaseItemCategory;
-                            potion.Smash(SaveGame, who, y, x);
-                        }
-                        SaveGame.Level.RedrawSingleLocation(y, x);
+                        PotionItemClass potion = (PotionItemClass)oPtr.BaseItemCategory;
+                        potion.Smash(SaveGame, who, y, x);
                     }
+                    SaveGame.Level.RedrawSingleLocation(y, x);
                 }
             }
             return obvious;

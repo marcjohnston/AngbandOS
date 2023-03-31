@@ -291,34 +291,6 @@ namespace AngbandOS.Core
             return LevelItems[index];
         }
 
-        public void SetLevelItem(int index, Item? item)
-        {
-            LevelItems[index] = item;
-        }
-
-        private int OPop()
-        {
-            int i;
-            if (Level.OMax < Constants.MaxOIdx)
-            {
-                i = Level.OMax;
-                Level.OMax++;
-                Level.OCnt++;
-                return i;
-            }
-            for (i = 1; i < Level.OMax; i++)
-            {
-                Item? oPtr = GetLevelItem(i);
-                if (oPtr != null)
-                {
-                    continue;
-                }
-                Level.OCnt++;
-                return i;
-            }
-            return 0;
-        }
-
         /// <summary>
         /// Removes all items from a grid tile.
         /// </summary>
@@ -326,56 +298,31 @@ namespace AngbandOS.Core
         /// <param name="x"></param>
         public void DeleteObject(int y, int x)
         {
-            int nextOIdx;
             if (!Level.InBounds(y, x))
             {
                 return;
             }
             GridTile cPtr = Level.Grid[y][x];
-            for (int thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
-            {
-                Item? oPtr = GetLevelItem(thisOIdx);
-                if (oPtr == null)
-                {
-                    break;
-                }
-                nextOIdx = oPtr.NextInStack;
-                SetLevelItem(thisOIdx, null);
-                Level.OCnt--;
-            }
-            cPtr.ItemIndex = 0;
+            Level.OCnt -= cPtr.Items.Count;
+            cPtr.Items.Clear();
             Level.RedrawSingleLocation(y, x);
         }
 
         public bool AddItemToMonster(Item item, Monster monster)
         {
-            // Get the next index.
-            int nextObjectIndex = OPop();
-            if (nextObjectIndex != 0)
-            {
-                SetLevelItem(nextObjectIndex, item);
-                item.HoldingMonsterIndex = monster.GetMonsterIndex();
-                monster.Items.Add(item);
-                return true;
-            }
-            return false;
+            item.HoldingMonsterIndex = monster.GetMonsterIndex();
+            monster.Items.Add(item);
+            return true;
         }
 
         public bool AddItemToGrid(Item item, int x, int y)
         {
             GridTile tile = Level.Grid[y][x];
-            int oIdx = OPop();
-            if (oIdx != 0)
-            {
-                SetLevelItem(oIdx, item);
-                item.Y = y;
-                item.X = x;
-                item.HoldingMonsterIndex = 0;
-                item.NextInStack = tile.ItemIndex;
-                tile.ItemIndex = oIdx;
-                return true;
-            }
-            return false;
+            item.Y = y;
+            item.X = x;
+            item.HoldingMonsterIndex = 0;
+            tile.Items.Add(item);
+            return true;
         }
 
         /// <summary>
@@ -579,14 +526,12 @@ namespace AngbandOS.Core
                     }
                 }
                 // If there's an item there we weren't previously aware of then we must stop moving
-                for (int itemIndex = tile.ItemIndex; itemIndex != 0; itemIndex = nextItemIndex)
+                foreach (Item item in tile.Items)
                 {
-                    Item? item = GetLevelItem(itemIndex);
-                    if (item != null && item.Marked)
+                    if (item.Marked)
                     {
                         return true;
                     }
-                    nextItemIndex = item.NextInStack;
                 }
                 bool tileUnseen = true;
                 // If the tile is something we should not run past then we must stop moving
@@ -1226,7 +1171,6 @@ namespace AngbandOS.Core
                 {
                     break;
                 }
-                Level.WipeOList();
                 _petList = Level.Monsters.GetPets();
                 Level.Monsters.WipeMList();
                 MsgPrint(null);
@@ -1696,11 +1640,9 @@ namespace AngbandOS.Core
             }
             if (canChooseFromFloor)
             {
-                for (currentItemIndex = tile.ItemIndex; currentItemIndex != 0; currentItemIndex = nextItemIndex)
+                foreach (Item oPtr in tile.Items)
                 {
-                    Item? oPtr = GetLevelItem(currentItemIndex);
-                    nextItemIndex = (oPtr == null ? 0 : oPtr.NextInStack);
-                    if (oPtr != null && Player.ItemMatchesFilter(oPtr, itemFilter))
+                    if (Player.ItemMatchesFilter(oPtr, itemFilter))
                     {
                         allowFloor = true;
                     }
@@ -1836,13 +1778,11 @@ namespace AngbandOS.Core
                         {
                             if (allowFloor)
                             {
-                                for (currentItemIndex = tile.ItemIndex; currentItemIndex != 0; currentItemIndex = nextItemIndex)
+                                foreach (Item oPtr in tile.Items)
                                 {
-                                    Item? oPtr = GetLevelItem(currentItemIndex);
-                                    nextItemIndex = (oPtr == null ? 0 : oPtr.NextInStack);
-                                    if (oPtr != null && Player.ItemMatchesFilter(oPtr, itemFilter))
+                                    if (Player.ItemMatchesFilter(oPtr, itemFilter))
                                     {
-                                        itemIndex = GetLevelItem(currentItemIndex);
+                                        itemIndex = oPtr;
                                         item = true;
                                         done = true;
                                         break;
@@ -2545,14 +2485,6 @@ namespace AngbandOS.Core
                 if (Level.MCnt + 32 < Level.MMax)
                 {
                     Level.Monsters.CompactMonsters(0);
-                }
-                if (Level.OCnt + 32 > Constants.MaxOIdx)
-                {
-                    Level.CompactObjects(64);
-                }
-                if (Level.OCnt + 32 < Level.OMax)
-                {
-                    Level.CompactObjects(0);
                 }
                 ProcessPlayer();
 
@@ -8365,53 +8297,48 @@ namespace AngbandOS.Core
         {
             GridTile tile = Level.Grid[Player.MapY][Player.MapX];
             int nextItemIndex;
-            for (int thisItemIndex = tile.ItemIndex; thisItemIndex != 0; thisItemIndex = nextItemIndex)
+            foreach (Item item in tile.Items.ToArray()) // We need a ToArray to prevent the collection from being modified error
             {
-                Item? item = GetLevelItem(thisItemIndex);
-                nextItemIndex = (item == null ? 0 : item.NextInStack);
-                if (item != null)
+                string itemName = item.Description(true, 3);
+                Disturb(false);
+                // We always pick up gold
+                if (item.Category == ItemTypeEnum.Gold)
                 {
-                    string itemName = item.Description(true, 3);
-                    Disturb(false);
-                    // We always pick up gold
-                    if (item.Category == ItemTypeEnum.Gold)
+                    MsgPrint($"You collect {item.TypeSpecificValue} gold pieces worth of {itemName}.");
+                    Player.Gold += item.TypeSpecificValue;
+                    RedrawGoldFlaggedAction.Set();
+                    Level.DeleteObject(item);
+                }
+                else
+                {
+                    // If we're not interested, simply say that we see it
+                    if (!pickup)
                     {
-                        MsgPrint($"You collect {item.TypeSpecificValue} gold pieces worth of {itemName}.");
-                        Player.Gold += item.TypeSpecificValue;
-                        RedrawGoldFlaggedAction.Set();
-                        Level.DeleteObjectIdx(thisItemIndex);
+                        MsgPrint($"You see {itemName}.");
+                    }
+                    // If it's worthless, stomp on it
+                    else if (item.Stompable())
+                    {
+                        Level.DeleteObject(item);
+                        MsgPrint($"You stomp on {itemName}.");
+                    }
+                    // If we can't carry the item, let us know
+                    else if (!Player.InvenCarryOkay(item))
+                    {
+                        MsgPrint($"You have no room for {itemName}.");
                     }
                     else
                     {
-                        // If we're not interested, simply say that we see it
-                        if (!pickup)
+                        // Actually pick up the item
+                        int slot = Player.InvenCarry(item);
+                        Item? inventoryItem = GetInventoryItem(slot);
+                        if (inventoryItem == null)
                         {
-                            MsgPrint($"You see {itemName}.");
+                            throw new Exception("Picked up item should have been found."); // TODO: Clean this up
                         }
-                        // If it's worthless, stomp on it
-                        else if (item.Stompable())
-                        {
-                            Level.DeleteObjectIdx(thisItemIndex);
-                            MsgPrint($"You stomp on {itemName}.");
-                        }
-                        // If we can't carry the item, let us know
-                        else if (!Player.InvenCarryOkay(item))
-                        {
-                            MsgPrint($"You have no room for {itemName}.");
-                        }
-                        else
-                        {
-                            // Actually pick up the item
-                            int slot = Player.InvenCarry(item, false);
-                            Item? inventoryItem = GetInventoryItem(slot);
-                            if (inventoryItem == null)
-                            {
-                                throw new Exception("Picked up item should have been found."); // TODO: Clean this up
-                            }
-                            itemName = inventoryItem.Description(true, 3);
-                            MsgPrint($"You have {itemName} ({slot.IndexToLabel()}).");
-                            Level.DeleteObjectIdx(thisItemIndex);
-                        }
+                        itemName = inventoryItem.Description(true, 3);
+                        MsgPrint($"You have {itemName} ({slot.IndexToLabel()}).");
+                        Level.DeleteObject(item);
                     }
                 }
             }
@@ -9748,7 +9675,7 @@ namespace AngbandOS.Core
                     item.TypeSpecificValue = 0;
                     item.Count--;
                     Player.WeightCarried -= singleRod.Weight;
-                    Player.InvenCarry(singleRod, false);
+                    Player.InvenCarry(singleRod);
                     MsgPrint("You unstack your rod.");
                 }
             }
@@ -10799,7 +10726,7 @@ namespace AngbandOS.Core
                     item.TypeSpecificValue++;
                     item.Count--;
                     Player.WeightCarried -= singleStaff.Weight;
-                    Player.InvenCarry(singleStaff, false);
+                    Player.InvenCarry(singleStaff);
                     MsgPrint("You unstack your staff.");
                 }
                 // Let the player know what happened
@@ -12367,7 +12294,7 @@ namespace AngbandOS.Core
                     item.TypeSpecificValue++;
                     item.Count--;
                     Player.WeightCarried -= splitItem.Weight;
-                    Player.InvenCarry(splitItem, false);
+                    Player.InvenCarry(splitItem);
                     MsgPrint("You unstack your wand.");
                 }
                 // Let us know we have used a charge
@@ -12419,12 +12346,10 @@ namespace AngbandOS.Core
                         }
                         int nextItemIndex;
                         // Check the items on the tile
-                        for (int itemIndex = tile.ItemIndex; itemIndex != 0; itemIndex = nextItemIndex)
+                        foreach (Item item in tile.Items)
                         {
-                            Item? item = GetLevelItem(itemIndex);
-                            nextItemIndex = (item == null ? 0 : item.NextInStack);
                             // If one of them is a chest, determine if it is trapped
-                            if (item == null || item.Category != ItemTypeEnum.Chest)
+                            if (item.Category != ItemTypeEnum.Chest)
                             {
                                 continue;
                             }
@@ -12461,7 +12386,7 @@ namespace AngbandOS.Core
             int targetX;
             GridTile tile;
             // Can't summon something if we're already standing on something
-            if (Level.Grid[Player.MapY][Player.MapX].ItemIndex != 0)
+            if (Level.Grid[Player.MapY][Player.MapX].Items.Count > 0)
             {
                 MsgPrint("You can't fetch when you're already standing on something.");
                 return;
@@ -12496,24 +12421,22 @@ namespace AngbandOS.Core
                     targetX += Level.KeypadDirectionXOffset[dir];
                     tile = Level.Grid[targetY][targetX];
                     // Stop if we hit max range or we're blocked by something
-                    if (Level.Distance(Player.MapY, Player.MapX, targetY, targetX) > Constants.MaxRange ||
-                        !Level.GridPassable(targetY, targetX))
+                    if (Level.Distance(Player.MapY, Player.MapX, targetY, targetX) > Constants.MaxRange || !Level.GridPassable(targetY, targetX))
                     {
                         return;
                     }
-                } while (tile.ItemIndex == 0);
+                } while (tile.Items.Count == 0);
             }
-            Item? item = GetLevelItem(tile.ItemIndex);
+            Item item = tile.Items[0]; // TODO: We can only pull the top item?
             // Check the weight of the item
-            if (item != null && item.Weight > maxWeight)
+            if (item != null && item.Weight > maxWeight) // TODO: We are only measuring the weight of the first item?
             {
                 MsgPrint("The object is too heavy.");
                 return;
             }
             // Remove the entire item stack from the tile and move it to the player's tile
-            int itemIndex = tile.ItemIndex;
-            tile.ItemIndex = 0;
-            Level.Grid[Player.MapY][Player.MapX].ItemIndex = itemIndex;
+            Level.Grid[Player.MapY][Player.MapX].Items.Add(item);
+            tile.Items.Remove(item);
             item.Y = Player.MapY;
             item.X = Player.MapX;
             Level.NoteSpot(Player.MapY, Player.MapX);
@@ -15053,7 +14976,7 @@ namespace AngbandOS.Core
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
                 item.IdentStoreb = true;
-                Player.InvenCarry(item, false);
+                Player.InvenCarry(item);
             }
             else
             {
@@ -15062,7 +14985,7 @@ namespace AngbandOS.Core
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
-                Player.InvenCarry(item, false);
+                Player.InvenCarry(item);
             }
             if (Player.Race.OutfitsWithScrollsOfLight || Player.BaseCharacterClass.OutfitsWithScrollsOfLight)
             {
@@ -15072,7 +14995,7 @@ namespace AngbandOS.Core
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
                 item.IdentStoreb = true;
-                Player.InvenCarry(item, false);
+                Player.InvenCarry(item);
             }
             else
             {
@@ -15082,7 +15005,7 @@ namespace AngbandOS.Core
                 item.TypeSpecificValue = Program.Rng.RandomBetween(3, 7) * 500;
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
-                Player.InvenCarry(item, false);
+                Player.InvenCarry(item);
                 Item carried = item.Clone(1);
                 LightsourceInventorySlot lightsourceInventorySlot = SingletonRepository.InventorySlots.Get<LightsourceInventorySlot>();
                 SetInventoryItem(lightsourceInventorySlot.WeightedRandom.Choose(), carried);
@@ -15710,11 +15633,6 @@ namespace AngbandOS.Core
 
         public void GenerateNewLevel()
         {
-            for (int j = 0; j < Constants.MaxOIdx; j++)
-            {
-                SetLevelItem(j, null);
-            }
-
             // Loop until we are able to build the level.  Keep track of the number of attempts.
             for (int generateAttemptNumber = 0; ; generateAttemptNumber++)
             {
@@ -15953,7 +15871,6 @@ namespace AngbandOS.Core
                 }
 
                 // Reset the level so that we can attempt again.
-                Level.WipeOList();
                 Level.Monsters.WipeMList();
             }
             Player.GameTime.MarkLevelEntry();
@@ -18834,11 +18751,9 @@ namespace AngbandOS.Core
                     return true;
                 }
             }
-            for (int thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
+            foreach (Item oPtr in cPtr.Items)
             {
-                Item? oPtr = GetLevelItem(thisOIdx);
-                nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
-                if (oPtr != null && oPtr.Marked)
+                if (oPtr.Marked)
                 {
                     return true;
                 }
@@ -18941,7 +18856,7 @@ namespace AngbandOS.Core
                             s1 = "He is ";
                         }
                         s2 = "carrying ";
-                        bool exitDo = false;
+                        bool exitWhile = false;
                         foreach (Item oPtr in mPtr.Items) 
                         {
                             string oName = oPtr.Description(true, 3);
@@ -18952,28 +18867,27 @@ namespace AngbandOS.Core
                             query = Inkey();
                             if (query != '\r' && query != '\n' && query != ' ')
                             {
-                                exitDo = true;
+                                exitWhile = true;
                                 break;
                             }
                             if (query == ' ' && (mode & Constants.TargetLook) == 0)
                             {
-                                exitDo = true;
+                                exitWhile = true;
                                 break;
                             }
                             s2 = "also carrying ";
                         }
-                        if (exitDo)
+                        if (exitWhile)
                         {
                             break;
                         }
                         s2 = "on ";
                     }
                 }
-                for (thisOIdx = cPtr.ItemIndex; thisOIdx != 0; thisOIdx = nextOIdx)
+                bool exitDo = false;
+                foreach (Item oPtr in cPtr.Items)
                 {
-                    Item? oPtr = GetLevelItem(thisOIdx);
-                    nextOIdx = (oPtr == null ? 0 : oPtr.NextInStack);
-                    if (oPtr != null && oPtr.Marked)
+                    if (oPtr.Marked)
                     {
                         boring = false;
                         string oName = oPtr.Description(true, 3);
@@ -18983,10 +18897,12 @@ namespace AngbandOS.Core
                         query = Inkey();
                         if (query != '\r' && query != '\n' && query != ' ')
                         {
+                            exitDo = true;
                             break;
                         }
                         if (query == ' ' && (mode & Constants.TargetLook) == 0)
                         {
+                            exitDo = true;
                             break;
                         }
                         s1 = "It is ";
@@ -18997,7 +18913,7 @@ namespace AngbandOS.Core
                         s2 = "on ";
                     }
                 }
-                if (thisOIdx != 0)
+                if (exitDo)
                 {
                     break;
                 }
@@ -19510,28 +19426,9 @@ namespace AngbandOS.Core
                     }
                     if (ch == 'A' || ch == 'a')
                     {
-                        if (oPtr.IsInInventory)
-                        {
-                            // TODO: this is a hack
-                            for (int i = 0; i < InventorySlot.Total; i++)
-                            {
-                                if (GetInventoryItem(i) == oPtr)
-                                {
-                                    SetInventoryItem(i, qPtr);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            // TODO: this is a hack
-                            for (int i = 0; i < Level.OMax; i++)
-                            {
-                                if (GetLevelItem(i) == oPtr)
-                                {
-                                    SetLevelItem(i, qPtr);
-                                }
-                            }
-                        }
+                        IItemContainer container = oPtr.GetContainer();
+                        container.RemoveItem(oPtr);
+                        container.AddItem(qPtr);
                         UpdateBonusesFlaggedAction.Set();
                         NoticeCombineAndReorderFlaggedAction.Set();
                         changed = true;

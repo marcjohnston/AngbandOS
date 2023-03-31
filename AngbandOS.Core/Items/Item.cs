@@ -1,6 +1,3 @@
-using System;
-using System.ComponentModel;
-
 namespace AngbandOS.Core.Items
 {
     [Serializable]
@@ -78,9 +75,9 @@ namespace AngbandOS.Core.Items
         }
 
         /// <summary>
-        /// Returns the container that is holding the container.  The container is not available publicly.  Items need to encapsulate any container functionality that is needed publicly.
+        /// Returns the container that is holding the container.
         /// </summary>
-        private IItemContainer? GetContainer()
+        public IItemContainer? GetContainer()
         {
             for (int i = 0; i < InventorySlot.Total; i++)
             {
@@ -228,11 +225,6 @@ namespace AngbandOS.Core.Items
         public ItemClass? BaseItemCategory = null;
 
         public bool Marked;
-
-        /// <summary>
-        /// Returns the index of the next item, if this item is part of a stack of items.
-        /// </summary>
-        public int NextInStack;
 
         public string RandartName = "";
         public RareItemTypeEnum RareItemTypeIndex;
@@ -427,7 +419,6 @@ namespace AngbandOS.Core.Items
             clonedItem.Marked = Marked;
             clonedItem.FixedArtifact = FixedArtifact;
             clonedItem.RareItemTypeIndex = RareItemTypeIndex;
-            clonedItem.NextInStack = NextInStack;
             clonedItem.Inscription = Inscription;
             clonedItem.Count = newCount ?? Count;
             clonedItem.TypeSpecificValue = TypeSpecificValue;

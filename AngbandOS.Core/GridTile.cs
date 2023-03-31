@@ -85,7 +85,7 @@ namespace AngbandOS.Core
         /// <summary>
         /// The index of the first item that is in this grid tile
         /// </summary>
-        public int ItemIndex; // TODO: Use a list of items
+        public List<Item> Items = new List<Item>();
 
         /// <summary>
         /// The index of the monster that is in this grid tile
@@ -156,6 +156,17 @@ namespace AngbandOS.Core
                 }
             }
         }
+
+        public void AddItem(Item oPtr)
+        {
+            Items.Add(oPtr);
+        }
+
+        public void RemoveItem(Item oPtr)
+        {
+            Items.Remove(oPtr);
+        }
+
         /// <summary>
         /// Returns false, because the item container doesn't belong to the players inventory.
         /// </summary>
