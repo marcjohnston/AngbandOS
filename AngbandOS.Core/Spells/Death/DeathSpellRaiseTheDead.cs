@@ -15,7 +15,7 @@ namespace AngbandOS.Core.Spells.Death
         {
             if (Program.Rng.DieRoll(3) == 1)
             {
-                if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2, saveGame.Player.Level > 47 ? new HiUndeadMonsterSelector() : new UndeadMonsterSelector()))
+                if (saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2, saveGame.Player.Level > 47 ? new HiUndeadMonsterSelector() : new UndeadMonsterSelector()))
                 {
                     saveGame.MsgPrint(
                         "Cold winds begin to swirl around you, carrying with them the stench of decay...");
@@ -28,7 +28,7 @@ namespace AngbandOS.Core.Spells.Death
             }
             else
             {
-                if (saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2,
+                if (saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2,
                     saveGame.Player.Level > 47 ? new HiUndeadNoUniquesMonsterSelector() : new UndeadMonsterSelector(), saveGame.Player.Level > 24 && Program.Rng.DieRoll(3) == 1))
                 {
                     saveGame.MsgPrint(

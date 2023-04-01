@@ -25,7 +25,7 @@
             {
                 saveGame.Player.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(4) + 4);
             }
-            saveGame.Level.Monsters.UpdateSmartLearn(monster, new ConfSpellResistantDetection());
+            saveGame.Level.UpdateSmartLearn(monster, new ConfSpellResistantDetection());
         }
 
         public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)

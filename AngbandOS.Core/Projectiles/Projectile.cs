@@ -554,7 +554,7 @@ namespace AngbandOS.Core.Projection
             bool notice = AffectMonster(who, mPtr, dam, r);
 
             GridTile newGridTile = SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX];
-            SaveGame.Level.Monsters.UpdateMonsterVisibility(newGridTile.MonsterIndex, false);
+            SaveGame.Level.UpdateMonsterVisibility(newGridTile.MonsterIndex, false);
             SaveGame.Level.RedrawSingleLocation(y, x);
             ProjectMn++;
             ProjectMx = mPtr.MapX;
@@ -681,7 +681,7 @@ namespace AngbandOS.Core.Projection
                 {
                     bool sad = mPtr.SmFriendly && !mPtr.IsVisible;
                     SaveGame.MonsterDeath(cPtr.MonsterIndex);
-                    SaveGame.Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
+                    SaveGame.Level.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                     if (string.IsNullOrEmpty(note) == false)
                     {
                         SaveGame.MsgPrint($"{mName}{note}");
@@ -699,13 +699,13 @@ namespace AngbandOS.Core.Projection
                     }
                     else if (dam > 0)
                     {
-                        SaveGame.Level.Monsters.MessagePain(cPtr.MonsterIndex, dam);
+                        SaveGame.Level.MessagePain(cPtr.MonsterIndex, dam);
                     }
                 }
             }
             else
             {
-                if (SaveGame.Level.Monsters.DamageMonster(cPtr.MonsterIndex, dam, out bool fear, noteDies))
+                if (SaveGame.Level.DamageMonster(cPtr.MonsterIndex, dam, out bool fear, noteDies))
                 {
                 }
                 else
@@ -716,7 +716,7 @@ namespace AngbandOS.Core.Projection
                     }
                     else if (dam > 0)
                     {
-                        SaveGame.Level.Monsters.MessagePain(cPtr.MonsterIndex, dam);
+                        SaveGame.Level.MessagePain(cPtr.MonsterIndex, dam);
                     }
                     if ((fear || addFear > 0) && mPtr.IsVisible)
                     {

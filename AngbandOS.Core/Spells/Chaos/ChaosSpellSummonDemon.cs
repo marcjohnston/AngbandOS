@@ -15,7 +15,7 @@ namespace AngbandOS.Core.Spells.Chaos
         {
             if (Program.Rng.DieRoll(3) == 1)
             {
-                if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2, new DemonMonsterSelector()))
+                if (saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2, new DemonMonsterSelector()))
                 {
                     saveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
                     saveGame.MsgPrint("'NON SERVIAM! Wretch! I shall feast on thy mortal soul!'");
@@ -27,7 +27,7 @@ namespace AngbandOS.Core.Spells.Chaos
             }
             else
             {
-                if (saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2, new DemonMonsterSelector(), saveGame.Player.Level == 50))
+                if (saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2, new DemonMonsterSelector(), saveGame.Player.Level == 50))
                 {
                     saveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
                     saveGame.MsgPrint("'What is thy bidding... Master?'");

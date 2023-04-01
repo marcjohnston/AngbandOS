@@ -18,7 +18,7 @@ namespace AngbandOS.Core.AttackEffects
             obvious = true;
             saveGame.MsgPrint("You are enveloped in flames!");
             saveGame.FireDam(damage, monsterDescription);
-            saveGame.Level.Monsters.UpdateSmartLearn(monster, new FireSpellResistantDetection());
+            saveGame.Level.UpdateSmartLearn(monster, new FireSpellResistantDetection());
         }
         public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
         {

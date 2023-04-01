@@ -19,7 +19,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             }
             saveGame.MsgPrint("You suddenly have a headache!");
             saveGame.Player.TakeHit(Program.Rng.DieRoll(30) + 30, "the strain of forcing abstinence");
-            saveGame.Level.Monsters.NumRepro += Constants.MaxRepro;
+            saveGame.Level.NumRepro += Constants.MaxRepro;
         }
 
         public override string ActivationSummary(int lvl)

@@ -14,7 +14,7 @@
         {
             if (Program.Rng.DieRoll(3) == 1)
             {
-                if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, (int)(saveGame.Player.Level * 1.5), saveGame.Player.Level > 47 ? new HiUndeadMonsterSelector() : new UndeadMonsterSelector()))
+                if (saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, (int)(saveGame.Player.Level * 1.5), saveGame.Player.Level > 47 ? new HiUndeadMonsterSelector() : new UndeadMonsterSelector()))
                 {
                     saveGame.MsgPrint("Cold winds begin to Attack around you, carrying with them the stench of decay...");
                     saveGame.MsgPrint("'The dead arise... to punish you for disturbing them!'");
@@ -22,7 +22,7 @@
             }
             else
             {
-                if (saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, (int)(saveGame.Player.Level * 1.5), saveGame.Player.Level > 47 ? new HiUndeadNoUniquesMonsterSelector() : new UndeadMonsterSelector(), saveGame.Player.Level > 24 && Program.Rng.DieRoll(3) == 1))
+                if (saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, (int)(saveGame.Player.Level * 1.5), saveGame.Player.Level > 47 ? new HiUndeadNoUniquesMonsterSelector() : new UndeadMonsterSelector(), saveGame.Player.Level > 24 && Program.Rng.DieRoll(3) == 1))
                 {
                     saveGame.MsgPrint("Cold winds begin to Attack around you, carrying with them the stench of decay...");
                     saveGame.MsgPrint("Ancient, long-dead forms arise from the ground to serve you!");

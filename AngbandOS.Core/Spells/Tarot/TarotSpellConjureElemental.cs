@@ -15,12 +15,12 @@ namespace AngbandOS.Core.Spells.Tarot
         {
             if (Program.Rng.DieRoll(6) > 3)
             {
-                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new ElementalMonsterSelector(), false))
+                if (!saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new ElementalMonsterSelector(), false))
                 {
                     saveGame.MsgPrint("No-one ever turns up.");
                 }
             }
-            else if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new ElementalMonsterSelector()))
+            else if (saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new ElementalMonsterSelector()))
             {
                 saveGame.MsgPrint("You fail to control the elemental creature!");
             }

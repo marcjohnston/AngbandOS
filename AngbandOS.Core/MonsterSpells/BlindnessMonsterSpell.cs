@@ -31,7 +31,7 @@
             {
                 saveGame.Player.TimedBlindness.SetTimer(12 + Program.Rng.RandomLessThan(4));
             }
-            saveGame.Level.Monsters.UpdateSmartLearn(monster, new BlindSpellResistantDetection());
+            saveGame.Level.UpdateSmartLearn(monster, new BlindSpellResistantDetection());
         }
 
         public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)

@@ -671,7 +671,7 @@ namespace AngbandOS.Core
             int oldY = MapY;
             int oldX = MapX;
             // If it's suitable for us to reproduce
-            if (Race.Multiply && saveGame.Level.Monsters.NumRepro < Constants.MaxRepro && Generation < 10)
+            if (Race.Multiply && saveGame.Level.NumRepro < Constants.MaxRepro && Generation < 10)
             {
                 // Find how many spaces we've got near us
                 int k;
@@ -691,7 +691,7 @@ namespace AngbandOS.Core
                 // If there's lots of space, then pop out a baby
                 if (k < 4 && (k == 0 || Program.Rng.RandomLessThan(k * Constants.MonMultAdj) == 0))
                 {
-                    if (saveGame.Level.Monsters.MultiplyMonster(this, isFriend, false))
+                    if (saveGame.Level.MultiplyMonster(this, isFriend, false))
                     {
                         // If the player saw this, they now know we can multiply
                         if (IsVisible)
@@ -1044,7 +1044,7 @@ namespace AngbandOS.Core
                     {
                         monsterInTargetTile.MapY = oldY;
                         monsterInTargetTile.MapX = oldX;
-                        saveGame.Level.Monsters.UpdateMonsterVisibility(tile.MonsterIndex, true);
+                        saveGame.Level.UpdateMonsterVisibility(tile.MonsterIndex, true);
                         // Pushing past something wakes it up
                         saveGame.Level.Monsters[tile.MonsterIndex].SleepLevel = 0;
                     }
@@ -1052,7 +1052,7 @@ namespace AngbandOS.Core
                     tile.MonsterIndex = GetMonsterIndex();
                     MapY = newY;
                     MapX = newX;
-                    saveGame.Level.Monsters.UpdateMonsterVisibility(GetMonsterIndex(), true);
+                    saveGame.Level.UpdateMonsterVisibility(GetMonsterIndex(), true);
                     saveGame.Level.RedrawSingleLocation(oldY, oldX);
                     saveGame.Level.RedrawSingleLocation(newY, newX);
                     // If we are hostile and the player saw us move, then saveGame.Disturb them
@@ -1539,7 +1539,7 @@ namespace AngbandOS.Core
             // Learn from the spell.
             foreach (SpellResistantDetection smartLearn in thrownSpell.SmartLearn)
             {
-                saveGame.Level.Monsters.UpdateSmartLearn(this, smartLearn);
+                saveGame.Level.UpdateSmartLearn(this, smartLearn);
             }
 
             // If the player saw us cast the spell, let them learn we can do that
@@ -1852,7 +1852,7 @@ namespace AngbandOS.Core
                     // Let the save game know we've died
                     saveGame.MonsterDeath(GetMonsterIndex());
                     // Delete us from the monster list
-                    saveGame.Level.Monsters.DeleteMonsterByIndex(GetMonsterIndex(), true);
+                    saveGame.Level.DeleteMonsterByIndex(GetMonsterIndex(), true);
                     fear = false;
                     return;
                 }
@@ -2672,7 +2672,7 @@ namespace AngbandOS.Core
         /// </summary>
         public int GetMonsterIndex() // TODO: Needs to be removed.
         {
-            return SaveGame.Level.Monsters.GetMonsterIndex(this);
+            return SaveGame.Level.GetMonsterIndex(this);
         }
 
         /// <summary>
@@ -2877,7 +2877,7 @@ namespace AngbandOS.Core
                                 if (!Race.ImmuneFire)
                                 {
                                     saveGame.MsgPrint($"{monsterName} is suddenly very hot!");
-                                    if (saveGame.Level.Monsters.DamageMonster(GetMonsterIndex(), Program.Rng.DiceRoll(2, 6), out fear,
+                                    if (saveGame.Level.DamageMonster(GetMonsterIndex(), Program.Rng.DiceRoll(2, 6), out fear,
                                         " turns into a pile of ash."))
                                     {
                                         blinked = false;
@@ -2898,7 +2898,7 @@ namespace AngbandOS.Core
                                 if (!Race.ImmuneLightning)
                                 {
                                     saveGame.MsgPrint($"{monsterName} gets zapped!");
-                                    if (saveGame.Level.Monsters.DamageMonster(GetMonsterIndex(), Program.Rng.DiceRoll(2, 6), out fear,
+                                    if (saveGame.Level.DamageMonster(GetMonsterIndex(), Program.Rng.DiceRoll(2, 6), out fear,
                                         " turns into a pile of cinder."))
                                     {
                                         blinked = false;
@@ -3015,7 +3015,7 @@ namespace AngbandOS.Core
             saveGame.Level.Grid[oy][ox].MonsterIndex = 0;
             MapY = ny;
             MapX = nx;
-            saveGame.Level.Monsters.UpdateMonsterVisibility(GetMonsterIndex(), true);
+            saveGame.Level.UpdateMonsterVisibility(GetMonsterIndex(), true);
             saveGame.Level.RedrawSingleLocation(oy, ox);
             saveGame.Level.RedrawSingleLocation(ny, nx);
         }

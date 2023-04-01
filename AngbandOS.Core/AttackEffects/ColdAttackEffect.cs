@@ -18,7 +18,7 @@ namespace AngbandOS.Core.AttackEffects
             obvious = true;
             saveGame.MsgPrint("You are covered with frost!");
             saveGame.ColdDam(damage, monsterDescription);
-            saveGame.Level.Monsters.UpdateSmartLearn(monster, new ColdSpellResistantDetection());
+            saveGame.Level.UpdateSmartLearn(monster, new ColdSpellResistantDetection());
         }
         public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
         {

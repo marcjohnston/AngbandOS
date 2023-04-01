@@ -31,7 +31,7 @@ namespace AngbandOS.Core.Spells.Tarot
             else if (die < 14)
             {
                 saveGame.MsgPrint("Oh no! It's the Devil!");
-                saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new DemonMonsterSelector());
+                saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new DemonMonsterSelector());
             }
             else if (die < 18)
             {
@@ -53,7 +53,7 @@ namespace AngbandOS.Core.Spells.Tarot
             {
                 saveGame.MsgPrint("It's a picture of a strange monster.");
 
-                if (!saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2, MonsterSelector.RandomBizarre()))
+                if (!saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2, MonsterSelector.RandomBizarre()))
                 {
                     noneCame = true;
                 }
@@ -106,7 +106,7 @@ namespace AngbandOS.Core.Spells.Tarot
             else if (die < 82)
             {
                 saveGame.MsgPrint("It's a picture of a friendly monster.");
-                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2, new Bizarre1MonsterSelector(), false))
+                if (!saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2, new Bizarre1MonsterSelector(), false))
                 {
                     noneCame = true;
                 }
@@ -114,7 +114,7 @@ namespace AngbandOS.Core.Spells.Tarot
             else if (die < 84)
             {
                 saveGame.MsgPrint("It's a picture of a friendly monster.");
-                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2, new Bizarre2MonsterSelector(), false))
+                if (!saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2, new Bizarre2MonsterSelector(), false))
                 {
                     noneCame = true;
                 }
@@ -122,7 +122,7 @@ namespace AngbandOS.Core.Spells.Tarot
             else if (die < 86)
             {
                 saveGame.MsgPrint("It's a picture of a friendly monster.");
-                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2, new Bizarre4MonsterSelector(), false))
+                if (!saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2, new Bizarre4MonsterSelector(), false))
                 {
                     noneCame = true;
                 }
@@ -130,7 +130,7 @@ namespace AngbandOS.Core.Spells.Tarot
             else if (die < 88)
             {
                 saveGame.MsgPrint("It's a picture of a friendly monster.");
-                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2, new Bizarre5MonsterSelector(), false))
+                if (!saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2, new Bizarre5MonsterSelector(), false))
                 {
                     noneCame = true;
                 }
@@ -342,7 +342,7 @@ namespace AngbandOS.Core.Spells.Tarot
                     int counter = 0;
                     while (counter++ < 8)
                     {
-                        saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2, MonsterSelector.RandomBizarre());
+                        saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty * 3 / 2, MonsterSelector.RandomBizarre());
                     }
                     break;
 

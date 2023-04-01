@@ -12,7 +12,7 @@
 
         public override bool Activate(SaveGame saveGame)
         {
-            saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new PhantomMonsterSelector(), true);
+            saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new PhantomMonsterSelector(), true);
             return true;
         }
 

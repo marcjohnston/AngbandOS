@@ -14,7 +14,7 @@
                 }
                 else
                 {
-                    eventArgs.SaveGame.Level.Monsters.SummonSpecific(eventArgs.Y, eventArgs.X, eventArgs.SaveGame.Difficulty, null);
+                    eventArgs.SaveGame.Level.SummonSpecific(eventArgs.Y, eventArgs.X, eventArgs.SaveGame.Difficulty, null);
                 }
             }
         }

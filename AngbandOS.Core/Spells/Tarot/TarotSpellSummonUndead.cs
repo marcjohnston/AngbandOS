@@ -16,12 +16,12 @@ namespace AngbandOS.Core.Spells.Tarot
             saveGame.MsgPrint("You concentrate on the image of an undead creature...");
             if (Program.Rng.DieRoll(10) > 3)
             {
-                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new UndeadMonsterSelector(), true))
+                if (!saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new UndeadMonsterSelector(), true))
                 {
                     saveGame.MsgPrint("No-one ever turns up.");
                 }
             }
-            else if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new UndeadMonsterSelector()))
+            else if (saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new UndeadMonsterSelector()))
             {
                 saveGame.MsgPrint("The summoned undead creature gets angry!");
             }

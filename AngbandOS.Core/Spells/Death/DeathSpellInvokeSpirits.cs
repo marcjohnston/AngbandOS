@@ -41,7 +41,7 @@ namespace AngbandOS.Core.Spells.Death
             if (die < 8)
             {
                 saveGame.MsgPrint("Oh no! Mouldering forms rise from the earth around you!");
-                saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new UndeadMonsterSelector());
+                saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new UndeadMonsterSelector());
             }
             if (die < 14)
             {

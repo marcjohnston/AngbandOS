@@ -1163,8 +1163,8 @@ namespace AngbandOS.Core
                 {
                     break;
                 }
-                _petList = Level.Monsters.GetPets();
-                Level.Monsters.WipeMList();
+                _petList = Level.GetPets();
+                Level.WipeMList();
                 MsgPrint(null);
                 if (Player.IsDead)
                 {
@@ -1342,7 +1342,7 @@ namespace AngbandOS.Core
                     case 8:
                     case 9:
                     case 18:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, null);
+                        Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, null);
                         break;
 
                     case 10:
@@ -1997,7 +1997,7 @@ namespace AngbandOS.Core
             Level.ObjectLevel = Difficulty;
             if (visible && (dumpItem != 0 || dumpGold != 0))
             {
-                Level.Monsters.LoreTreasure(mIdx, dumpItem, dumpGold);
+                Level.LoreTreasure(mIdx, dumpItem, dumpGold);
             }
             if (!rPtr.Guardian)
             {
@@ -2371,8 +2371,8 @@ namespace AngbandOS.Core
             CommandDirection = 0;
             TargetWho = 0;
             HealthTrack(0);
-            Level.Monsters.ShimmerMonsters = true;
-            Level.Monsters.RepairMonsters = true;
+            Level.ShimmerMonsters = true;
+            Level.RepairMonsters = true;
             Disturb(true);
             if (Player.MaxLevelGained < Player.Level)
             {
@@ -2482,11 +2482,11 @@ namespace AngbandOS.Core
             {
                 if (Level.MCnt + 32 > Constants.MaxMIdx)
                 {
-                    Level.Monsters.CompactMonsters(64);
+                    Level.CompactMonsters(64);
                 }
                 if (Level.MCnt + 32 < Level.MMax)
                 {
-                    Level.Monsters.CompactMonsters(0);
+                    Level.CompactMonsters(0);
                 }
                 ProcessPlayer();
 
@@ -2845,9 +2845,9 @@ namespace AngbandOS.Core
                 {
                     Player.Energy -= EnergyUse;
                     int i;
-                    if (Level.Monsters.ShimmerMonsters)
+                    if (Level.ShimmerMonsters)
                     {
-                        Level.Monsters.ShimmerMonsters = false;
+                        Level.ShimmerMonsters = false;
                         for (i = 1; i < Level.MMax; i++)
                         {
                             Monster mPtr = Level.Monsters[i];
@@ -2860,13 +2860,13 @@ namespace AngbandOS.Core
                             {
                                 continue;
                             }
-                            Level.Monsters.ShimmerMonsters = true;
+                            Level.ShimmerMonsters = true;
                             Level.RedrawSingleLocation(mPtr.MapY, mPtr.MapX);
                         }
                     }
-                    if (Level.Monsters.RepairMonsters)
+                    if (Level.RepairMonsters)
                     {
-                        Level.Monsters.RepairMonsters = false;
+                        Level.RepairMonsters = false;
                         for (i = 1; i < Level.MMax; i++)
                         {
                             Monster mPtr = Level.Monsters[i];
@@ -2883,13 +2883,13 @@ namespace AngbandOS.Core
                                 if ((mPtr.IndividualMonsterFlags & Constants.MflagShow) != 0)
                                 {
                                     mPtr.IndividualMonsterFlags &= ~Constants.MflagShow;
-                                    Level.Monsters.RepairMonsters = true;
+                                    Level.RepairMonsters = true;
                                 }
                                 else
                                 {
                                     mPtr.IndividualMonsterFlags &= ~Constants.MflagMark;
                                     mPtr.IsVisible = false;
-                                    Level.Monsters.UpdateMonsterVisibility(i, false);
+                                    Level.UpdateMonsterVisibility(i, false);
                                     Level.RedrawSingleLocation(mPtr.MapY, mPtr.MapX);
                                 }
                             }
@@ -2919,7 +2919,7 @@ namespace AngbandOS.Core
             if (Player.GameTime.IsHalloween)
             {
                 MsgPrint("All Hallows Eve and the ghouls come out to play...");
-                Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new UndeadMonsterSelector());
+                Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new UndeadMonsterSelector());
             }
             if (CurrentDepth <= 0)
             {
@@ -2981,7 +2981,7 @@ namespace AngbandOS.Core
             }
             if (Program.Rng.RandomLessThan(Constants.MaxMAllocChance) == 0)
             {
-                Level.Monsters.AllocMonster(Constants.MaxSight + 5, false);
+                Level.AllocMonster(Constants.MaxSight + 5, false);
             }
             if (Player.GameTime.IsTurnHundred)
             {
@@ -3277,7 +3277,7 @@ namespace AngbandOS.Core
                     cPtr.ProcessWorld();
                 }
             }
-            Level.Monsters.ProcessWorld();
+            Level.ProcessWorld();
 
             if (Player.WordOfRecallDelay != 0)
             {
@@ -3449,70 +3449,70 @@ namespace AngbandOS.Core
                 {
                     case 1:
                     case 2:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new AntMonsterSelector());
+                        Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new AntMonsterSelector());
                         break;
 
                     case 3:
                     case 4:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new SpiderMonsterSelector());
+                        Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new SpiderMonsterSelector());
                         break;
 
                     case 5:
                     case 6:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new HoundMonsterSelector());
+                        Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new HoundMonsterSelector());
                         break;
 
                     case 7:
                     case 8:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new HydraMonsterSelector());
+                        Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new HydraMonsterSelector());
                         break;
 
                     case 9:
                     case 10:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new CthuloidMonsterSelector());
+                        Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new CthuloidMonsterSelector());
                         break;
 
                     case 11:
                     case 12:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new UndeadMonsterSelector());
+                        Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new UndeadMonsterSelector());
                         break;
 
                     case 13:
                     case 14:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new DragonMonsterSelector());
+                        Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new DragonMonsterSelector());
                         break;
 
                     case 15:
                     case 16:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new DemonMonsterSelector());
+                        Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new DemonMonsterSelector());
                         break;
 
                     case 17:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new GooMonsterSelector());
+                        Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new GooMonsterSelector());
                         break;
 
                     case 18:
                     case 19:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new UniqueMonsterSelector());
+                        Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new UniqueMonsterSelector());
                         break;
 
                     case 20:
                     case 21:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new HiUndeadMonsterSelector());
+                        Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new HiUndeadMonsterSelector());
                         break;
 
                     case 22:
                     case 23:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new HiDragonMonsterSelector());
+                        Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new HiDragonMonsterSelector());
                         break;
 
                     case 24:
                     case 25:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, 100, new ReaverMonsterSelector());
+                        Level.SummonSpecific(Player.MapY, Player.MapX, 100, new ReaverMonsterSelector());
                         break;
 
                     default:
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, (Difficulty * 3 / 2) + 5, null);
+                        Level.SummonSpecific(Player.MapY, Player.MapX, (Difficulty * 3 / 2) + 5, null);
                         break;
                 }
             }
@@ -3972,7 +3972,7 @@ namespace AngbandOS.Core
                 {
                     continue;
                 }
-                Level.Monsters.DeleteMonsterByIndex(i, true);
+                Level.DeleteMonsterByIndex(i, true);
                 if (playerCast)
                 {
                     Player.TakeHit(Program.Rng.DieRoll(4), "the strain of casting Carnage");
@@ -4209,7 +4209,7 @@ namespace AngbandOS.Core
                 if (rPtr.Evil)
                 {
                     rPtr.Knowledge.Characteristics.Evil = true;
-                    Level.Monsters.RepairMonsters = true;
+                    Level.RepairMonsters = true;
                     mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
                     mPtr.IsVisible = true;
                     Level.RedrawSingleLocation(y, x);
@@ -4243,7 +4243,7 @@ namespace AngbandOS.Core
                 if (rPtr.Invisible)
                 {
                     rPtr.Knowledge.Characteristics.Invisible = true;
-                    Level.Monsters.RepairMonsters = true;
+                    Level.RepairMonsters = true;
                     mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
                     mPtr.IsVisible = true;
                     Level.RedrawSingleLocation(y, x);
@@ -4277,7 +4277,7 @@ namespace AngbandOS.Core
                 if (rPtr.Nonliving || rPtr.Undead ||
                     rPtr.Cthuloid || rPtr.Demon)
                 {
-                    Level.Monsters.RepairMonsters = true;
+                    Level.RepairMonsters = true;
                     mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
                     mPtr.IsVisible = true;
                     Level.RedrawSingleLocation(y, x);
@@ -4309,7 +4309,7 @@ namespace AngbandOS.Core
                 }
                 if (!rPtr.Invisible || Player.HasSeeInvisibility || Player.TimedSeeInvisibility.TurnsRemaining != 0)
                 {
-                    Level.Monsters.RepairMonsters = true;
+                    Level.RepairMonsters = true;
                     mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
                     mPtr.IsVisible = true;
                     Level.RedrawSingleLocation(y, x);
@@ -4768,7 +4768,7 @@ namespace AngbandOS.Core
                                 Level.Grid[yy][xx].MonsterIndex = 0;
                                 mPtr.MapY = sy;
                                 mPtr.MapX = sx;
-                                Level.Monsters.UpdateMonsterVisibility(mIdx, true);
+                                Level.UpdateMonsterVisibility(mIdx, true);
                                 Level.RedrawSingleLocation(yy, xx);
                                 Level.RedrawSingleLocation(sy, sx);
                             }
@@ -5289,7 +5289,7 @@ namespace AngbandOS.Core
                 {
                     continue;
                 }
-                Level.Monsters.DeleteMonsterByIndex(i, true);
+                Level.DeleteMonsterByIndex(i, true);
                 if (playerCast)
                 {
                     Player.TakeHit(Program.Rng.DieRoll(3), "the strain of casting Mass Carnage");
@@ -5324,7 +5324,7 @@ namespace AngbandOS.Core
             int lev2 = rPtr.Level + (Program.Rng.DieRoll(20) / Program.Rng.DieRoll(9)) + 1;
             for (int i = 0; i < 1000; i++)
             {
-                int r = Level.Monsters.GetMonNum(((Difficulty + rPtr.Level) / 2) + 5, null);
+                int r = Level.GetMonNum(((Difficulty + rPtr.Level) / 2) + 5, null);
                 if (r == 0)
                 {
                     break;
@@ -5366,7 +5366,7 @@ namespace AngbandOS.Core
                     }
                     string mName = mPtr.IndefiniteWhenHiddenName;
                     MsgPrint($"{mName} has {mPtr.Health} hit points.");
-                    Level.Monsters.LoreDoProbe(i);
+                    Level.LoreDoProbe(i);
                     probe = true;
                 }
             }
@@ -6192,7 +6192,7 @@ namespace AngbandOS.Core
             int maxReaver = (Difficulty / 50) + Program.Rng.DieRoll(6);
             for (int i = 0; i < maxReaver; i++)
             {
-                Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, 100, new ReaverMonsterSelector());
+                Level.SummonSpecific(Player.MapY, Player.MapX, 100, new ReaverMonsterSelector());
             }
         }
 
@@ -6420,7 +6420,7 @@ namespace AngbandOS.Core
                     Player.MapY = ty;
                     tx = mPtr.MapX;
                     ty = mPtr.MapY;
-                    Level.Monsters.UpdateMonsterVisibility(Level.Grid[ty][tx].MonsterIndex, true);
+                    Level.UpdateMonsterVisibility(Level.Grid[ty][tx].MonsterIndex, true);
                     Level.RedrawSingleLocation(ty, tx);
                     Level.RedrawSingleLocation(Player.MapY, Player.MapX);
                     Player.RecenterScreenAroundPlayer();
@@ -6581,7 +6581,7 @@ namespace AngbandOS.Core
                     int chance = 25;
                     Monster mPtr = Level.Monsters[cPtr.MonsterIndex];
                     MonsterRace rPtr = mPtr.Race;
-                    Level.Monsters.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
+                    Level.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
                     if (rPtr.Stupid)
                     {
                         chance = 10;
@@ -6622,7 +6622,7 @@ namespace AngbandOS.Core
                 }
                 if (cPtr.MonsterIndex != 0)
                 {
-                    Level.Monsters.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
+                    Level.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
                 }
                 Level.RedrawSingleLocation(y, x);
             }
@@ -6648,7 +6648,7 @@ namespace AngbandOS.Core
                 }
                 if (match.Contains(rPtr.Character.ToString()))
                 {
-                    Level.Monsters.RepairMonsters = true;
+                    Level.RepairMonsters = true;
                     mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
                     mPtr.IsVisible = true;
                     Level.RedrawSingleLocation(y, x);
@@ -6898,7 +6898,7 @@ namespace AngbandOS.Core
             Level.Grid[oy][ox].MonsterIndex = 0;
             mPtr.MapY = ny;
             mPtr.MapX = nx;
-            Level.Monsters.UpdateMonsterVisibility(mIdx, true);
+            Level.UpdateMonsterVisibility(mIdx, true);
             Level.RedrawSingleLocation(oy, ox);
             Level.RedrawSingleLocation(ny, nx);
         }
@@ -7935,7 +7935,7 @@ namespace AngbandOS.Core
                         monster.MapX = Player.MapX;
                         Level.Grid[Player.MapY][Player.MapX].MonsterIndex = tile.MonsterIndex;
                         tile.MonsterIndex = 0;
-                        Level.Monsters.UpdateMonsterVisibility(Level.Grid[Player.MapY][Player.MapX].MonsterIndex, true);
+                        Level.UpdateMonsterVisibility(Level.Grid[Player.MapY][Player.MapX].MonsterIndex, true);
                     }
                     // If we couldn't push past it, tell us it was in the way
                     else
@@ -8620,7 +8620,7 @@ namespace AngbandOS.Core
                         totalDamage = 0;
                     }
                     // Apply damage to the monster
-                    if (Level.Monsters.DamageMonster(tile.MonsterIndex, totalDamage, out fear, null))
+                    if (Level.DamageMonster(tile.MonsterIndex, totalDamage, out fear, null))
                     {
                         // Can't have any more attacks because the monster's dead
                         noExtra = true;
@@ -8710,9 +8710,9 @@ namespace AngbandOS.Core
                             if (newRaceIndex != monster.Race.Index)
                             {
                                 MsgPrint($"{monsterName} changes!");
-                                Level.Monsters.DeleteMonsterByIndex(tile.MonsterIndex, true);
+                                Level.DeleteMonsterByIndex(tile.MonsterIndex, true);
                                 MonsterRace newRace = SingletonRepository.MonsterRaces[newRaceIndex];
-                                Level.Monsters.PlaceMonsterAux(y, x, newRace, false, false, false);
+                                Level.PlaceMonsterAux(y, x, newRace, false, false, false);
                                 monster = Level.Monsters[tile.MonsterIndex];
                                 monsterName = monster.Name;
                                 fear = false;
@@ -10004,14 +10004,14 @@ namespace AngbandOS.Core
                         {
                             damage = 0;
                         }
-                        if (Level.Monsters.DamageMonster(tile.MonsterIndex, damage, out bool fear, noteDies))
+                        if (Level.DamageMonster(tile.MonsterIndex, damage, out bool fear, noteDies))
                         {
                             // The monster is dead, so don't add further statuses or messages
                         }
                         else
                         {
                             // Let the player know what happens to the monster
-                            Level.Monsters.MessagePain(tile.MonsterIndex, damage);
+                            Level.MessagePain(tile.MonsterIndex, damage);
                             if (monster.SmFriendly && missile.BaseItemCategory.CategoryEnum != ItemTypeEnum.Potion)
                             {
                                 string mName = monster.Name;
@@ -10303,7 +10303,7 @@ namespace AngbandOS.Core
                         }
                         if (deleteThis)
                         {
-                            Level.Monsters.DeleteMonsterByIndex(petCtr, true);
+                            Level.DeleteMonsterByIndex(petCtr, true);
                             dismissed++;
                         }
                     }
@@ -11115,13 +11115,13 @@ namespace AngbandOS.Core
                         {
                             shotDamage = 0;
                         }
-                        if (Level.Monsters.DamageMonster(tile.MonsterIndex, shotDamage, out bool fear, noteDies))
+                        if (Level.DamageMonster(tile.MonsterIndex, shotDamage, out bool fear, noteDies))
                         {
                             // The monster is dead, so don't add further statuses or messages
                         }
                         else
                         {
-                            Level.Monsters.MessagePain(tile.MonsterIndex, shotDamage);
+                            Level.MessagePain(tile.MonsterIndex, shotDamage);
                             if (fear && monster.IsVisible)
                             {
                                 PlaySound(SoundEffect.MonsterFlees);
@@ -12170,7 +12170,7 @@ namespace AngbandOS.Core
                     int counter = 0;
                     while (counter++ < 8)
                     {
-                        Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty * 3 / 2, MonsterSelector.RandomBizarre());
+                        Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty * 3 / 2, MonsterSelector.RandomBizarre());
                     }
                     break;
 
@@ -12776,7 +12776,7 @@ namespace AngbandOS.Core
                 switch (mutation.MutationAttackType)
                 {
                     case MutationAttackType.Physical:
-                        monsterDies = Level.Monsters.DamageMonster(monsterIndex, damage, out fear, null);
+                        monsterDies = Level.DamageMonster(monsterIndex, damage, out fear, null);
                         break;
 
                     case MutationAttackType.Poison:
@@ -12960,7 +12960,7 @@ namespace AngbandOS.Core
                         int num = 2 + Program.Rng.DieRoll(3);
                         for (int i = 0; i < num; i++)
                         {
-                            Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, null);
+                            Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, null);
                         }
                         // Have a chance of also cursing the player
                         if (Difficulty > Program.Rng.DieRoll(100))
@@ -13255,7 +13255,7 @@ namespace AngbandOS.Core
                 {
                     continue;
                 }
-                Level.Monsters.CurrentlyActingMonster = i;
+                Level.CurrentlyActingMonster = i;
                 // Process the individual monster
                 monster.ProcessMonster(this, noise);
                 // If the monster killed the player or sent us to a new level, then stop processing
@@ -13264,7 +13264,7 @@ namespace AngbandOS.Core
                     break;
                 }
             }
-            Level.Monsters.CurrentlyActingMonster = 0;
+            Level.CurrentlyActingMonster = 0;
         }
 
         /// <summary>
@@ -15656,11 +15656,11 @@ namespace AngbandOS.Core
                     {
                         CurTown = Wilderness[Player.WildernessY][Player.WildernessX].Town;
                         DungeonDifficulty = 0;
-                        Level.Monsters.DunBias = null;
+                        Level.DunBias = null;
                         if (Wilderness[Player.WildernessY][Player.WildernessX].Town.Char == 'K')
                         {
                             DungeonDifficulty = 35;
-                            Level.Monsters.DunBias = new CthuloidMonsterSelector();
+                            Level.DunBias = new CthuloidMonsterSelector();
                         }
                     }
                     else if (Wilderness[Player.WildernessY][Player.WildernessX].Dungeon != null)
@@ -15670,18 +15670,18 @@ namespace AngbandOS.Core
                         {
                             DungeonDifficulty = 4;
                         }
-                        Level.Monsters.DunBias = Wilderness[Player.WildernessY][Player.WildernessX].Dungeon.Bias;
+                        Level.DunBias = Wilderness[Player.WildernessY][Player.WildernessX].Dungeon.Bias;
                     }
                     else
                     {
                         DungeonDifficulty = 2;
-                        Level.Monsters.DunBias = new AnimalMonsterSelector();
+                        Level.DunBias = new AnimalMonsterSelector();
                     }
                 }
                 else
                 {
                     DungeonDifficulty = CurDungeon.Offset;
-                    Level.Monsters.DunBias = CurDungeon.Bias;
+                    Level.DunBias = CurDungeon.Bias;
                 }
                 Level.MonsterLevel = Difficulty;
                 Level.ObjectLevel = Difficulty;
@@ -15852,7 +15852,7 @@ namespace AngbandOS.Core
                 }
 
                 // Reset the level so that we can attempt again.
-                Level.Monsters.WipeMList();
+                Level.WipeMList();
             }
             Player.GameTime.MarkLevelEntry();
         }
@@ -18103,14 +18103,14 @@ namespace AngbandOS.Core
                 }
                 for (i = 0; i < Constants.MinMAllocTd; i++)
                 {
-                    Level.Monsters.AllocMonster(3, true);
+                    Level.AllocMonster(3, true);
                 }
             }
             else
             {
                 for (i = 0; i < Constants.MinMAllocTn; i++)
                 {
-                    Level.Monsters.AllocMonster(3, true);
+                    Level.AllocMonster(3, true);
                 }
             }
         }
@@ -18191,7 +18191,7 @@ namespace AngbandOS.Core
             i += Program.Rng.DieRoll(8);
             for (i += k; i > 0; i--)
             {
-                Level.Monsters.AllocMonster(0, true);
+                Level.AllocMonster(0, true);
             }
             AllocObject(_allocSetBoth, _allocTypTrap, Program.Rng.DieRoll(k));
             AllocObject(_allocSetCorr, _allocTypRubble, Program.Rng.DieRoll(k));
@@ -18310,7 +18310,7 @@ namespace AngbandOS.Core
             }
             for (x = 0; x < Constants.MinMAllocLevel; x++)
             {
-                Level.Monsters.AllocMonster(3, true);
+                Level.AllocMonster(3, true);
             }
             ///LEVEL FACTORY
         }
@@ -19162,7 +19162,7 @@ namespace AngbandOS.Core
                     break;
                 }
             }
-            Level.Monsters.AllocHorde(wy, wx);
+            Level.AllocHorde(wy, wx);
         }
 
         public void DoCmdWizardBolt()
@@ -19349,7 +19349,7 @@ namespace AngbandOS.Core
                 {
                     continue;
                 }
-                if (Level.Monsters.PlaceMonsterByIndex(y, x, rIdx, slp, true, false))
+                if (Level.PlaceMonsterByIndex(y, x, rIdx, slp, true, false))
                 {
                     break;
                 }
@@ -19370,7 +19370,7 @@ namespace AngbandOS.Core
                 {
                     continue;
                 }
-                if (Level.Monsters.PlaceMonsterByIndex(y, x, rIdx, slp, true, true))
+                if (Level.PlaceMonsterByIndex(y, x, rIdx, slp, true, true))
                 {
                     break;
                 }
@@ -19448,7 +19448,7 @@ namespace AngbandOS.Core
         {
             for (int i = 0; i < num; i++)
             {
-                Level.Monsters.SummonSpecific(Player.MapY, Player.MapX, Difficulty, null);
+                Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, null);
             }
         }
 
@@ -19463,7 +19463,7 @@ namespace AngbandOS.Core
                 }
                 if (mPtr.DistanceFromPlayer <= Constants.MaxSight)
                 {
-                    Level.Monsters.DeleteMonsterByIndex(i, true);
+                    Level.DeleteMonsterByIndex(i, true);
                 }
             }
         }
@@ -19555,7 +19555,7 @@ namespace AngbandOS.Core
                         case '\r':
                             MonsterRace monsterRace = monsterRaces[selectedIndex];
                             Level.Scatter(out int y, out int x, Player.MapY, Player.MapX, 1);
-                            Level.Monsters.PlaceMonsterAux(y, x, monsterRace, false, false, false);
+                            Level.PlaceMonsterAux(y, x, monsterRace, false, false, false);
                             return;
                     }
                 }

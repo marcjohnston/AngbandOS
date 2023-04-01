@@ -28,7 +28,7 @@
             {
                 saveGame.Player.TimedFear.AddTimer(Program.Rng.RandomLessThan(4) + 4);
             }
-            saveGame.Level.Monsters.UpdateSmartLearn(monster, new FearSpellResistantDetection());
+            saveGame.Level.UpdateSmartLearn(monster, new FearSpellResistantDetection());
         }
 
         public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)

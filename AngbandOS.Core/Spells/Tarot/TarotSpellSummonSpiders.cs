@@ -16,12 +16,12 @@ namespace AngbandOS.Core.Spells.Tarot
             saveGame.MsgPrint("You concentrate on the image of a spider...");
             if (Program.Rng.DieRoll(5) > 2)
             {
-                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new SpiderMonsterSelector(), true))
+                if (!saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new SpiderMonsterSelector(), true))
                 {
                     saveGame.MsgPrint("No-one ever turns up.");
                 }
             }
-            else if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new SpiderMonsterSelector()))
+            else if (saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new SpiderMonsterSelector()))
             {
                 saveGame.MsgPrint("The summoned spiders get angry!");
             }

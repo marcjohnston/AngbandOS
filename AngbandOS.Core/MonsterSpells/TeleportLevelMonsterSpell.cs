@@ -25,7 +25,7 @@
             {
                 saveGame.TeleportPlayerLevel();
             }
-            saveGame.Level.Monsters.UpdateSmartLearn(monster, new NexusSpellResistantDetection());
+            saveGame.Level.UpdateSmartLearn(monster, new NexusSpellResistantDetection());
         }
 
         public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)

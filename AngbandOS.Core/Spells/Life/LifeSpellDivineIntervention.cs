@@ -21,7 +21,7 @@ namespace AngbandOS.Core.Spells.Life
             saveGame.ConfuseMonsters(saveGame.Player.Level * 4);
             saveGame.TurnMonsters(saveGame.Player.Level * 4);
             saveGame.StasisMonsters(saveGame.Player.Level * 4);
-            saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new CthuloidMonsterSelector(), true);
+            saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new CthuloidMonsterSelector(), true);
             saveGame.Player.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(25) + 25);
             saveGame.Player.RestoreHealth(300);
             if (saveGame.Player.TimedHaste.TurnsRemaining == 0)

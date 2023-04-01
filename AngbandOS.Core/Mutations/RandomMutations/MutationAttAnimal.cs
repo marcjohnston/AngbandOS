@@ -28,11 +28,11 @@ namespace AngbandOS.Core.Mutations.RandomMutations
             bool aSummon;
             if (Program.Rng.DieRoll(3) == 1)
             {
-                aSummon = saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new AnimalMonsterSelector(), true);
+                aSummon = saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new AnimalMonsterSelector(), true);
             }
             else
             {
-                aSummon = saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new AnimalMonsterSelector());
+                aSummon = saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new AnimalMonsterSelector());
             }
             if (!aSummon)
             {

@@ -14,7 +14,7 @@ namespace AngbandOS.Core.Spells.Tarot
         public override void Cast(SaveGame saveGame)
         {
             saveGame.MsgPrint(
-                saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2, new PhantomMonsterSelector(), false)
+                saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2, new PhantomMonsterSelector(), false)
                     ? "'Your wish, master?'"
                     : "No-one ever turns up.");
         }

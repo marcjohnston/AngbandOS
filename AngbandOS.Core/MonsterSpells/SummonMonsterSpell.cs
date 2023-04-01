@@ -49,7 +49,7 @@
             int playerX = saveGame.Player.MapX;
             int playerY = saveGame.Player.MapY;
 
-            return saveGame.Level.Monsters.SummonSpecific(playerY, playerX, SummonLevel(monster), MonsterSelector(monster));
+            return saveGame.Level.SummonSpecific(playerY, playerX, SummonLevel(monster), MonsterSelector(monster));
         }
 
         public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
@@ -86,7 +86,7 @@
             {
                 if (friendly)
                 {
-                    if (saveGame.Level.Monsters.SummonSpecificFriendly(target.MapY, target.MapX, SummonLevel(monster), FriendlyMonsterSelector(monster), true))
+                    if (saveGame.Level.SummonSpecificFriendly(target.MapY, target.MapX, SummonLevel(monster), FriendlyMonsterSelector(monster), true))
                     {
                         count++;
                     }

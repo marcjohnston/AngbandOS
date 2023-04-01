@@ -240,7 +240,7 @@ namespace AngbandOS.Core.Patrons
                     saveGame.MsgPrint("'My pets, destroy the arrogant mortal!'");
                     for (dummy = 0; dummy < Program.Rng.DieRoll(5) + 1; dummy++)
                     {
-                        saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, null);
+                        saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, null);
                     }
                     break;
 
@@ -424,7 +424,7 @@ namespace AngbandOS.Core.Patrons
 
                 case Reward.SerDemo:
                     saveGame.MsgPrint($"{ShortName} rewards you with a demonic servant!");
-                    if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new DemonMonsterSelector(), false))
+                    if (!saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new DemonMonsterSelector(), false))
                     {
                         saveGame.MsgPrint("Nobody ever turns up...");
                     }
@@ -432,7 +432,7 @@ namespace AngbandOS.Core.Patrons
 
                 case Reward.SerMons:
                     saveGame.MsgPrint($"{ShortName} rewards you with a servant!");
-                    if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new NoUniquesMonsterSelector(), false))
+                    if (!saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new NoUniquesMonsterSelector(), false))
                     {
                         saveGame.MsgPrint("Nobody ever turns up...");
                     }
@@ -440,7 +440,7 @@ namespace AngbandOS.Core.Patrons
 
                 case Reward.SerUnde:
                     saveGame.MsgPrint($"{ShortName} rewards you with an undead servant!");
-                    if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new UndeadMonsterSelector(), false))
+                    if (!saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new UndeadMonsterSelector(), false))
                     {
                         saveGame.MsgPrint("Nobody ever turns up...");
                     }

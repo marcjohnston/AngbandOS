@@ -31,7 +31,7 @@ namespace AngbandOS.Core.Projection
             }
             if (cPtr.MonsterIndex != 0)
             {
-                SaveGame.Level.Monsters.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
+                SaveGame.Level.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
             }
             return obvious;
         }

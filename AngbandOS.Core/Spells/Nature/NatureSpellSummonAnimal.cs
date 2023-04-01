@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Spells.Nature
     {
         public override void Cast(SaveGame saveGame)
         {
-            if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new AnimalRangerMonsterSelector(), true))
+            if (!saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new AnimalRangerMonsterSelector(), true))
             {
                 saveGame.MsgPrint("No-one ever turns up.");
             }

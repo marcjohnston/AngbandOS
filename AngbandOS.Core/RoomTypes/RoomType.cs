@@ -78,21 +78,21 @@
                         case '&':
                             {
                                 saveGame.Level.MonsterLevel = saveGame.Difficulty + 5;
-                                saveGame.Level.Monsters.PlaceMonster(y, x, true, true);
+                                saveGame.Level.PlaceMonster(y, x, true, true);
                                 saveGame.Level.MonsterLevel = saveGame.Difficulty;
                                 break;
                             }
                         case '@':
                             {
                                 saveGame.Level.MonsterLevel = saveGame.Difficulty + 11;
-                                saveGame.Level.Monsters.PlaceMonster(y, x, true, true);
+                                saveGame.Level.PlaceMonster(y, x, true, true);
                                 saveGame.Level.MonsterLevel = saveGame.Difficulty;
                                 break;
                             }
                         case '9':
                             {
                                 saveGame.Level.MonsterLevel = saveGame.Difficulty + 9;
-                                saveGame.Level.Monsters.PlaceMonster(y, x, true, true);
+                                saveGame.Level.PlaceMonster(y, x, true, true);
                                 saveGame.Level.MonsterLevel = saveGame.Difficulty;
                                 saveGame.Level.ObjectLevel = saveGame.Difficulty + 7;
                                 saveGame.Level.PlaceObject(y, x, true, false);
@@ -102,7 +102,7 @@
                         case '8':
                             {
                                 saveGame.Level.MonsterLevel = saveGame.Difficulty + 40;
-                                saveGame.Level.Monsters.PlaceMonster(y, x, true, true);
+                                saveGame.Level.PlaceMonster(y, x, true, true);
                                 saveGame.Level.MonsterLevel = saveGame.Difficulty;
                                 saveGame.Level.ObjectLevel = saveGame.Difficulty + 20;
                                 saveGame.Level.PlaceObject(y, x, true, true);
@@ -114,7 +114,7 @@
                                 if (Program.Rng.RandomLessThan(100) < 50)
                                 {
                                     saveGame.Level.MonsterLevel = saveGame.Difficulty + 3;
-                                    saveGame.Level.Monsters.PlaceMonster(y, x, true, true);
+                                    saveGame.Level.PlaceMonster(y, x, true, true);
                                     saveGame.Level.MonsterLevel = saveGame.Difficulty;
                                 }
                                 if (Program.Rng.RandomLessThan(100) < 50)
@@ -184,7 +184,7 @@
                         continue;
                     }
                     saveGame.Level.MonsterLevel = saveGame.Difficulty + 2;
-                    saveGame.Level.Monsters.PlaceMonster(y, x, true, true);
+                    saveGame.Level.PlaceMonster(y, x, true, true);
                     saveGame.Level.MonsterLevel = saveGame.Difficulty;
                 }
             }

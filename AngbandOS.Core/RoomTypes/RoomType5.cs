@@ -125,7 +125,7 @@
             }
             for (int i = 0; i < 64; i++)
             {
-                what[i] = saveGame.Level.Monsters.GetMonNum(saveGame.Difficulty + 10, getMonNumHook);
+                what[i] = saveGame.Level.GetMonNum(saveGame.Difficulty + 10, getMonNumHook);
                 if (what[i] == 0)
                 {
                     empty = true;
@@ -146,7 +146,7 @@
                 {
                     int rIdx = what[Program.Rng.RandomLessThan(64)];
                     MonsterRace race = saveGame.SingletonRepository.MonsterRaces[rIdx];
-                    saveGame.Level.Monsters.PlaceMonsterAux(y, x, race, false, false, false);
+                    saveGame.Level.PlaceMonsterAux(y, x, race, false, false, false);
                 }
             }
         }

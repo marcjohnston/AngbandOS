@@ -19,12 +19,12 @@ namespace AngbandOS.Core.Spells.Tarot
             {
                 if (Program.Rng.DieRoll(10) > 3)
                 {
-                    if (saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new NoUniquesMonsterSelector(), false))
+                    if (saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new NoUniquesMonsterSelector(), false))
                     {
                         noneCame = false;
                     }
                 }
-                else if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, null))
+                else if (saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, null))
                 {
                     saveGame.MsgPrint("A summoned creature gets angry!");
                     noneCame = false;

@@ -35,13 +35,13 @@ namespace AngbandOS.Core.Spells.Tarot
             }
             if (Program.Rng.DieRoll(2) == 1)
             {
-                saveGame.MsgPrint(saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, summonType)
+                saveGame.MsgPrint(saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, summonType)
                     ? "The summoned creature gets angry!"
                     : "No-one ever turns up.");
             }
             else
             {
-                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, summonType, false))
+                if (!saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, summonType, false))
                 {
                     saveGame.MsgPrint("No-one ever turns up.");
                 }

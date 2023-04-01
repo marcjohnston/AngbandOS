@@ -13,7 +13,7 @@
                 {
                     continue;
                 }
-                SaveGame.Level.Monsters.UpdateMonsterVisibility(i, false);
+                SaveGame.Level.UpdateMonsterVisibility(i, false);
             }
         }
     }

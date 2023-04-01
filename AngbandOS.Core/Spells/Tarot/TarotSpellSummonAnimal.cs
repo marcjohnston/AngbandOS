@@ -16,12 +16,12 @@ namespace AngbandOS.Core.Spells.Tarot
             saveGame.MsgPrint("You concentrate on the image of an animal...");
             if (Program.Rng.DieRoll(5) > 2)
             {
-                if (!saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new AnimalRangerMonsterSelector(), false))
+                if (!saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new AnimalRangerMonsterSelector(), false))
                 {
                     saveGame.MsgPrint("No-one ever turns up.");
                 }
             }
-            else if (saveGame.Level.Monsters.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new AnimalMonsterSelector()))
+            else if (saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new AnimalMonsterSelector()))
             {
                 saveGame.MsgPrint("The summoned animal gets angry!");
             }

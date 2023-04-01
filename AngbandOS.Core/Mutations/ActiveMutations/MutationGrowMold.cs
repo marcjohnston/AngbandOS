@@ -19,7 +19,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             }
             for (int i = 0; i < 8; i++)
             {
-                saveGame.Level.Monsters.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new Bizarre1MonsterSelector(), false);
+                saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new Bizarre1MonsterSelector(), false);
             }
         }
 

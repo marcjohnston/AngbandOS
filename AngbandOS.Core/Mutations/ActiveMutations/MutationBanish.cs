@@ -33,7 +33,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             MonsterRace rPtr = mPtr.Race;
             if (rPtr.Evil)
             {
-                saveGame.Level.Monsters.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
+                saveGame.Level.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                 saveGame.MsgPrint("The evil creature vanishes in a puff of sulfurous smoke!");
             }
             else

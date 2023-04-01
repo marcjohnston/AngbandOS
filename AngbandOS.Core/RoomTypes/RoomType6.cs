@@ -153,7 +153,7 @@
             }
             for (i = 0; i < 16; i++)
             {
-                what[i] = saveGame.Level.Monsters.GetMonNum(saveGame.Difficulty + 10, getMonNumHook);
+                what[i] = saveGame.Level.GetMonNum(saveGame.Difficulty + 10, getMonNumHook);
                 if (what[i] == 0)
                 {
                     empty = true;
@@ -191,36 +191,36 @@
             }
             for (x = xval - 9; x <= xval + 9; x++)
             {
-                saveGame.Level.Monsters.PlaceMonsterByIndex(yval - 2, x, what[0], false, false, false);
-                saveGame.Level.Monsters.PlaceMonsterByIndex(yval + 2, x, what[0], false, false, false);
+                saveGame.Level.PlaceMonsterByIndex(yval - 2, x, what[0], false, false, false);
+                saveGame.Level.PlaceMonsterByIndex(yval + 2, x, what[0], false, false, false);
             }
             for (y = yval - 1; y <= yval + 1; y++)
             {
-                saveGame.Level.Monsters.PlaceMonsterByIndex(y, xval - 9, what[0], false, false, false);
-                saveGame.Level.Monsters.PlaceMonsterByIndex(y, xval + 9, what[0], false, false, false);
-                saveGame.Level.Monsters.PlaceMonsterByIndex(y, xval - 8, what[1], false, false, false);
-                saveGame.Level.Monsters.PlaceMonsterByIndex(y, xval + 8, what[1], false, false, false);
-                saveGame.Level.Monsters.PlaceMonsterByIndex(y, xval - 7, what[1], false, false, false);
-                saveGame.Level.Monsters.PlaceMonsterByIndex(y, xval + 7, what[1], false, false, false);
-                saveGame.Level.Monsters.PlaceMonsterByIndex(y, xval - 6, what[2], false, false, false);
-                saveGame.Level.Monsters.PlaceMonsterByIndex(y, xval + 6, what[2], false, false, false);
-                saveGame.Level.Monsters.PlaceMonsterByIndex(y, xval - 5, what[2], false, false, false);
-                saveGame.Level.Monsters.PlaceMonsterByIndex(y, xval + 5, what[2], false, false, false);
-                saveGame.Level.Monsters.PlaceMonsterByIndex(y, xval - 4, what[3], false, false, false);
-                saveGame.Level.Monsters.PlaceMonsterByIndex(y, xval + 4, what[3], false, false, false);
-                saveGame.Level.Monsters.PlaceMonsterByIndex(y, xval - 3, what[3], false, false, false);
-                saveGame.Level.Monsters.PlaceMonsterByIndex(y, xval + 3, what[3], false, false, false);
-                saveGame.Level.Monsters.PlaceMonsterByIndex(y, xval - 2, what[4], false, false, false);
-                saveGame.Level.Monsters.PlaceMonsterByIndex(y, xval + 2, what[4], false, false, false);
+                saveGame.Level.PlaceMonsterByIndex(y, xval - 9, what[0], false, false, false);
+                saveGame.Level.PlaceMonsterByIndex(y, xval + 9, what[0], false, false, false);
+                saveGame.Level.PlaceMonsterByIndex(y, xval - 8, what[1], false, false, false);
+                saveGame.Level.PlaceMonsterByIndex(y, xval + 8, what[1], false, false, false);
+                saveGame.Level.PlaceMonsterByIndex(y, xval - 7, what[1], false, false, false);
+                saveGame.Level.PlaceMonsterByIndex(y, xval + 7, what[1], false, false, false);
+                saveGame.Level.PlaceMonsterByIndex(y, xval - 6, what[2], false, false, false);
+                saveGame.Level.PlaceMonsterByIndex(y, xval + 6, what[2], false, false, false);
+                saveGame.Level.PlaceMonsterByIndex(y, xval - 5, what[2], false, false, false);
+                saveGame.Level.PlaceMonsterByIndex(y, xval + 5, what[2], false, false, false);
+                saveGame.Level.PlaceMonsterByIndex(y, xval - 4, what[3], false, false, false);
+                saveGame.Level.PlaceMonsterByIndex(y, xval + 4, what[3], false, false, false);
+                saveGame.Level.PlaceMonsterByIndex(y, xval - 3, what[3], false, false, false);
+                saveGame.Level.PlaceMonsterByIndex(y, xval + 3, what[3], false, false, false);
+                saveGame.Level.PlaceMonsterByIndex(y, xval - 2, what[4], false, false, false);
+                saveGame.Level.PlaceMonsterByIndex(y, xval + 2, what[4], false, false, false);
             }
             for (x = xval - 1; x <= xval + 1; x++)
             {
-                saveGame.Level.Monsters.PlaceMonsterByIndex(yval + 1, x, what[5], false, false, false);
-                saveGame.Level.Monsters.PlaceMonsterByIndex(yval - 1, x, what[5], false, false, false);
+                saveGame.Level.PlaceMonsterByIndex(yval + 1, x, what[5], false, false, false);
+                saveGame.Level.PlaceMonsterByIndex(yval - 1, x, what[5], false, false, false);
             }
-            saveGame.Level.Monsters.PlaceMonsterByIndex(yval, xval + 1, what[6], false, false, false);
-            saveGame.Level.Monsters.PlaceMonsterByIndex(yval, xval - 1, what[6], false, false, false);
-            saveGame.Level.Monsters.PlaceMonsterByIndex(yval, xval, what[7], false, false, false);
+            saveGame.Level.PlaceMonsterByIndex(yval, xval + 1, what[6], false, false, false);
+            saveGame.Level.PlaceMonsterByIndex(yval, xval - 1, what[6], false, false, false);
+            saveGame.Level.PlaceMonsterByIndex(yval, xval, what[7], false, false, false);
         }
     }
 }

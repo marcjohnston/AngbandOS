@@ -62,7 +62,7 @@
                     }
                 }
             }
-            saveGame.Level.Monsters.UpdateSmartLearn(monster, new ManaSpellResistantDetection());
+            saveGame.Level.UpdateSmartLearn(monster, new ManaSpellResistantDetection());
         }
 
         public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)

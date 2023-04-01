@@ -23,7 +23,7 @@ namespace AngbandOS.Core.AttackEffects
                     obvious = true;
                 }
             }
-            saveGame.Level.Monsters.UpdateSmartLearn(monster, new BlindSpellResistantDetection());
+            saveGame.Level.UpdateSmartLearn(monster, new BlindSpellResistantDetection());
         }
     }
 }

@@ -19,7 +19,7 @@ namespace AngbandOS.Core.ItemCategories
         {
             for (int i = 0; i < Program.Rng.DieRoll(3); i++)
             {
-                if (eventArgs.SaveGame.Level.Monsters.SummonSpecific(eventArgs.SaveGame.Player.MapY, eventArgs.SaveGame.Player.MapX, eventArgs.SaveGame.Difficulty, null))
+                if (eventArgs.SaveGame.Level.SummonSpecific(eventArgs.SaveGame.Player.MapY, eventArgs.SaveGame.Player.MapX, eventArgs.SaveGame.Difficulty, null))
                 {
                     eventArgs.Identified = true;
                 }

@@ -30,7 +30,7 @@ namespace AngbandOS.Core.Spells.Death
                 {
                     continue;
                 }
-                saveGame.Level.Monsters.DeleteMonsterByIndex(i, true);
+                saveGame.Level.DeleteMonsterByIndex(i, true);
                 saveGame.Player.TakeHit(Program.Rng.DieRoll(4), "the strain of casting Annihilation");
                 saveGame.Player.Mana++;
                 saveGame.Level.MoveCursorRelative(saveGame.Player.MapY, saveGame.Player.MapX);

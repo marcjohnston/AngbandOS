@@ -23,7 +23,7 @@ namespace AngbandOS.Core.AttackEffects
                     obvious = true;
                 }
             }
-            saveGame.Level.Monsters.UpdateSmartLearn(monster, new ConfSpellResistantDetection());
+            saveGame.Level.UpdateSmartLearn(monster, new ConfSpellResistantDetection());
         }
         public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
         {

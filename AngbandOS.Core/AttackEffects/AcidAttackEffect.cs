@@ -18,7 +18,7 @@ namespace AngbandOS.Core.AttackEffects
             obvious = true;
             saveGame.MsgPrint("You are covered in acid!");
             saveGame.AcidDam(damage, monsterDescription);
-            saveGame.Level.Monsters.UpdateSmartLearn(monster, new AcidSpellResistantDetection());
+            saveGame.Level.UpdateSmartLearn(monster, new AcidSpellResistantDetection());
         }
         public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
         {
