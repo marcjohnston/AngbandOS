@@ -2,51 +2,39 @@
 
 namespace AngbandOS.Core
 {
-    [Obsolete("Use SingletonList")]
     [Serializable]
-    internal class SingletonDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>> where TValue : ISingletonDictionary<TKey>
+    internal class SingletonDictionary<T> : SingletonList<T>, IEnumerable<T> // TODO: This is a SingletonDictionary ... using GetType().Name as the KeyRetrieval
     {
-        private SaveGame SaveGame;
-        Dictionary<TKey, TValue> instances = new Dictionary<TKey, TValue>();
-        public int Count => instances.Count;
-        public TValue this[TKey index]
+        Dictionary<string, T> dictionary = new Dictionary<string, T>();
+
+        public bool Contains(T item) => dictionary.ContainsKey(item.GetType().Name);
+
+        public U Get<U>() where U : T
         {
-            get
-            {
-                return instances[index];
-            }
+            return (U)dictionary[typeof(U).Name];
         }
 
-        public bool Contains(TValue item) => instances.ContainsKey(item.GetKey);
-
-        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
+        public T Get(string typename)
         {
-            return instances.GetEnumerator();
+            return dictionary[typename];
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        /// <summary>
+        /// Adds an item to the repository.  This is often used to add configured objects.
+        /// </summary>
+        /// <param name="item"></param>
+        public override void Add(T item) 
         {
-            return instances.GetEnumerator();
+            base.Add(item);
+            dictionary.Add(item.GetType().Name, item);
         }
 
-        public void Add(TValue item)
+        public SingletonDictionary(SaveGame saveGame, params T[] items) : base(saveGame, items)
         {
-            TKey key = item.GetKey;
-            instances.Add(key, item);
         }
 
-        public SingletonDictionary(SaveGame saveGame, TValue[] items)
+        public SingletonDictionary(SaveGame saveGame, IEnumerable<T> items) : base(saveGame, items)
         {
-            SaveGame = saveGame;
-            foreach (TValue item in items)
-            {
-                Add(item);
-            }
-        }
-
-        public SingletonDictionary(SaveGame saveGame, Dictionary<TKey, TValue> dictionary)
-        {
-            instances = dictionary;
         }
     }
 }

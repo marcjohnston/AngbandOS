@@ -3,38 +3,55 @@
 namespace AngbandOS.Core
 {
     [Serializable]
-    internal class SingletonList<T> : SingletonBaseList<T>, IEnumerable<T> // TODO: This is a SingletonDictionary ... using GetType().Name as the KeyRetrieval
+    internal class SingletonList<T> : IEnumerable<T>
     {
-        Dictionary<string, T> dictionary = new Dictionary<string, T>();
+        List<T> list = new List<T>();
 
-        public bool Contains(T item) => dictionary.ContainsKey(item.GetType().Name);
-
-        public U Get<U>() where U : T
+        public T this[int index]
         {
-            return (U)dictionary[typeof(U).Name];
+            get
+            {
+                return list[index];
+            }
         }
 
-        public T Get(string typename)
+        public int Count => list.Count;
+
+        public WeightedRandom<T> ToWeightedRandom(Func<T, bool>? predicate = null) => new WeightedRandom<T>(this, predicate);
+
+        public IEnumerator<T> GetEnumerator()
         {
-            return dictionary[typename];
+            return list.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return list.GetEnumerator();
         }
 
         /// <summary>
         /// Adds an item to the repository.  This is often used to add configured objects.
         /// </summary>
         /// <param name="item"></param>
-        public override void Add(T item) 
+        public virtual void Add(T item)
         {
-            base.Add(item);
-            dictionary.Add(item.GetType().Name, item);
+            list.Add(item);
         }
 
-        public SingletonList(SaveGame saveGame, params T[] items) : base(saveGame, items)
+        public SingletonList(SaveGame saveGame, params T[] items)
         {
+            foreach (T item in items)
+            {
+                Add(item);
+            }
         }
 
-        public SingletonList(SaveGame saveGame, IEnumerable<T> items) : base(saveGame, items)
+        public SingletonList(SaveGame saveGame, IEnumerable<T> items)
         {
+            foreach (T item in items)
+            {
+                Add(item);
+            }
         }
     }
 }

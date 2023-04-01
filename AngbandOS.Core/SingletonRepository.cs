@@ -8,49 +8,49 @@ namespace AngbandOS.Core
     /// </summary>
     internal class SingletonRepository
     {
-        public SingletonDictionary<string, Animation> Animations;
-        public SingletonDictionary<FixedArtifactId, FixedArtifact> FixedArtifacts;
-        public SingletonDictionary<string, FloorTileType> FloorTileTypes;
-        public SingletonList<InGameCommand> InGameCommands;
-        public SingletonList<BaseInventorySlot> InventorySlots;
-        public SingletonList<ItemClass> ItemCategories;
-        public SingletonList<MonsterRace> MonsterRaces;
-        public SingletonDictionary<string, ProjectileGraphic> ProjectileGraphics;
-        public SingletonList<Race> Races;
-        public SingletonDictionary<RareItemTypeEnum, RareItem> RareItemTypes;
-        public SingletonList<BaseStoreCommand> StoreCommands;
-        public SingletonList<Vault> Vaults;
-        public SingletonList<WizardCommand> WizardCommands;
-        public SingletonList<TimedAction> TimedActions;
-        public SingletonList<BaseCharacterClass> CharacterClasses;
-        public SingletonList<BaseRealm> Realms;
-        public SingletonList<Town> Towns;
-        public SingletonList<AmuletFlavour> AmuletFlavours;
-        public SingletonList<MushroomFlavour> MushroomFlavours;
-        public SingletonList<PotionFlavour> PotionFlavours;
-        public SingletonList<RingFlavour> RingFlavours;
-        public SingletonList<RodFlavour> RodFlavours;
-        public SingletonList<BaseScrollFlavour> ScrollFlavours;
-        public SingletonList<StaffFlavour> StaffFlavours;
-        public SingletonList<WandFlavour> WandFlavours;
-        public SingletonList<ChestTrapConfiguration> ChestTrapConfigurations;
-        public SingletonList<HelpGroup> HelpGroups;
-        public SingletonList<StoreOwner> StoreOwners;
+        public SingletonKeyedDictionary<string, Animation> Animations;
+        public SingletonKeyedDictionary<FixedArtifactId, FixedArtifact> FixedArtifacts;
+        public SingletonKeyedDictionary<string, FloorTileType> FloorTileTypes;
+        public SingletonDictionary<InGameCommand> InGameCommands;
+        public SingletonDictionary<BaseInventorySlot> InventorySlots;
+        public SingletonDictionary<ItemClass> ItemCategories;
+        public SingletonDictionary<MonsterRace> MonsterRaces;
+        public SingletonKeyedDictionary<string, ProjectileGraphic> ProjectileGraphics;
+        public SingletonDictionary<Race> Races;
+        public SingletonKeyedDictionary<RareItemTypeEnum, RareItem> RareItemTypes;
+        public SingletonDictionary<BaseStoreCommand> StoreCommands;
+        public SingletonDictionary<Vault> Vaults;
+        public SingletonDictionary<WizardCommand> WizardCommands;
+        public SingletonDictionary<TimedAction> TimedActions;
+        public SingletonDictionary<BaseCharacterClass> CharacterClasses;
+        public SingletonDictionary<BaseRealm> Realms;
+        public SingletonDictionary<Town> Towns;
+        public SingletonDictionary<AmuletFlavour> AmuletFlavours;
+        public SingletonDictionary<MushroomFlavour> MushroomFlavours;
+        public SingletonDictionary<PotionFlavour> PotionFlavours;
+        public SingletonDictionary<RingFlavour> RingFlavours;
+        public SingletonDictionary<RodFlavour> RodFlavours;
+        public SingletonDictionary<BaseScrollFlavour> ScrollFlavours;
+        public SingletonDictionary<StaffFlavour> StaffFlavours;
+        public SingletonDictionary<WandFlavour> WandFlavours;
+        public SingletonDictionary<ChestTrapConfiguration> ChestTrapConfigurations;
+        public SingletonDictionary<HelpGroup> HelpGroups;
+        public SingletonDictionary<StoreOwner> StoreOwners;
 
-        public SingletonBaseList<string> ShopKeeperGoodComments;
-        public SingletonBaseList<string> ShopKeeperBargainComments;
-        public SingletonBaseList<string> ElvishText;
-        public SingletonBaseList<string> FunnyComments;
-        public SingletonBaseList<string> FunnyDescriptions;
-        public SingletonBaseList<string> HorrificDescriptions;
-        public SingletonBaseList<string> InsultPlayerAttacks;
-        public SingletonBaseList<string> MoanPlayerAttacks;
+        public SingletonList<string> ShopKeeperGoodComments;
+        public SingletonList<string> ShopKeeperBargainComments;
+        public SingletonList<string> ElvishText;
+        public SingletonList<string> FunnyComments;
+        public SingletonList<string> FunnyDescriptions;
+        public SingletonList<string> HorrificDescriptions;
+        public SingletonList<string> InsultPlayerAttacks;
+        public SingletonList<string> MoanPlayerAttacks;
                         
-        public SingletonBaseList<string> ShopKeeperLessThanGuessComments;
-        public SingletonBaseList<string> ShopKeeperWorthlessComments;
-        public SingletonBaseList<string> SingingPlayerAttacks;
-        public SingletonBaseList<string> StoreOwnerAcceptedComments;
-        public SingletonBaseList<string> WorshipPlayerAttacks;
+        public SingletonList<string> ShopKeeperLessThanGuessComments;
+        public SingletonList<string> ShopKeeperWorthlessComments;
+        public SingletonList<string> SingingPlayerAttacks;
+        public SingletonList<string> StoreOwnerAcceptedComments;
+        public SingletonList<string> WorshipPlayerAttacks;
 
         private T[] LoadTypesFromAssembly<T>(SaveGame saveGame)
         {
@@ -98,36 +98,36 @@ namespace AngbandOS.Core
 
         public void Initialize(SaveGame saveGame)
         {
-            InGameCommands = new SingletonList<InGameCommand>(saveGame, LoadTypesFromAssembly<InGameCommand>(saveGame));
-            WizardCommands = new SingletonList<WizardCommand>(saveGame, LoadTypesFromAssembly<WizardCommand>(saveGame));
-            ItemCategories = new SingletonList<ItemClass>(saveGame, LoadTypesFromAssembly<ItemClass>(saveGame));
-            InventorySlots = new SingletonList<BaseInventorySlot>(saveGame, LoadTypesFromAssembly<BaseInventorySlot>(saveGame));
-            StoreCommands = new SingletonList<BaseStoreCommand>(saveGame, LoadTypesFromAssembly<BaseStoreCommand>(saveGame));
-            CharacterClasses = new SingletonList<BaseCharacterClass>(saveGame, LoadTypesFromAssembly<BaseCharacterClass>(saveGame));
-            Realms = new SingletonList<BaseRealm>(saveGame, LoadTypesFromAssembly<BaseRealm>(saveGame));
-            Towns = new SingletonList<Town>(saveGame, LoadTypesFromAssembly<Town>(saveGame));
-            AmuletFlavours = new SingletonList<AmuletFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<AmuletFlavour>(saveGame)));
-            MushroomFlavours = new SingletonList<MushroomFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<MushroomFlavour>(saveGame)));
-            PotionFlavours = new SingletonList<PotionFlavour>(saveGame, WeightedShuffle(LoadTypesFromAssembly<PotionFlavour>(saveGame)));
-            RingFlavours = new SingletonList<RingFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<RingFlavour>(saveGame)));
-            RodFlavours = new SingletonList<RodFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<RodFlavour>(saveGame)));
-            ScrollFlavours = new SingletonList<BaseScrollFlavour>(saveGame, LoadTypesFromAssembly<BaseScrollFlavour>(saveGame));
-            StaffFlavours = new SingletonList<StaffFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<StaffFlavour>(saveGame)));
-            WandFlavours = new SingletonList<WandFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<WandFlavour>(saveGame)));
-            ChestTrapConfigurations = new SingletonList<ChestTrapConfiguration>(saveGame, LoadTypesFromAssembly<ChestTrapConfiguration>(saveGame));
-            ProjectileGraphics = new SingletonDictionary<string, ProjectileGraphic>(saveGame, LoadTypesFromAssembly<ProjectileGraphic>(saveGame));
-            Animations = new SingletonDictionary<string, Animation>(saveGame, LoadTypesFromAssembly<Animation>(saveGame));
-            Vaults = new SingletonList<Vault>(saveGame, LoadTypesFromAssembly<Vault>(saveGame));
-            FloorTileTypes = new SingletonDictionary<string, FloorTileType>(saveGame, LoadTypesFromAssembly<FloorTileType>(saveGame));
-            RareItemTypes = new SingletonDictionary<RareItemTypeEnum, RareItem>(saveGame, LoadTypesFromAssembly<RareItem>(saveGame));
-            FixedArtifacts = new SingletonDictionary<FixedArtifactId, FixedArtifact>(saveGame, LoadTypesFromAssembly<FixedArtifact>(saveGame));
-            MonsterRaces = new SingletonList<MonsterRace>(saveGame, LoadTypesFromAssembly<MonsterRace>(saveGame).OrderBy(_monsterRace => _monsterRace.LevelFound));
-            Races = new SingletonList<Race>(saveGame, LoadTypesFromAssembly<Race>(saveGame));
-            HelpGroups = new SingletonList<HelpGroup>(saveGame, LoadTypesFromAssembly<HelpGroup>(saveGame));
-            StoreOwners = new SingletonList<StoreOwner>(saveGame, LoadTypesFromAssembly<StoreOwner>(saveGame));
-            ShopKeeperGoodComments = new SingletonBaseList<string>(saveGame, "Cool!", "You've made my day!", "The shopkeeper giggles.", "The shopkeeper laughs loudly.");
-            ShopKeeperBargainComments = new SingletonBaseList<string>(saveGame, "Yipee!", "I think I'll retire!", "The shopkeeper jumps for joy.", "The shopkeeper smiles gleefully.");
-            ElvishText = new SingletonBaseList<string>(saveGame,
+            InGameCommands = new SingletonDictionary<InGameCommand>(saveGame, LoadTypesFromAssembly<InGameCommand>(saveGame));
+            WizardCommands = new SingletonDictionary<WizardCommand>(saveGame, LoadTypesFromAssembly<WizardCommand>(saveGame));
+            ItemCategories = new SingletonDictionary<ItemClass>(saveGame, LoadTypesFromAssembly<ItemClass>(saveGame));
+            InventorySlots = new SingletonDictionary<BaseInventorySlot>(saveGame, LoadTypesFromAssembly<BaseInventorySlot>(saveGame));
+            StoreCommands = new SingletonDictionary<BaseStoreCommand>(saveGame, LoadTypesFromAssembly<BaseStoreCommand>(saveGame));
+            CharacterClasses = new SingletonDictionary<BaseCharacterClass>(saveGame, LoadTypesFromAssembly<BaseCharacterClass>(saveGame));
+            Realms = new SingletonDictionary<BaseRealm>(saveGame, LoadTypesFromAssembly<BaseRealm>(saveGame));
+            Towns = new SingletonDictionary<Town>(saveGame, LoadTypesFromAssembly<Town>(saveGame));
+            AmuletFlavours = new SingletonDictionary<AmuletFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<AmuletFlavour>(saveGame)));
+            MushroomFlavours = new SingletonDictionary<MushroomFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<MushroomFlavour>(saveGame)));
+            PotionFlavours = new SingletonDictionary<PotionFlavour>(saveGame, WeightedShuffle(LoadTypesFromAssembly<PotionFlavour>(saveGame)));
+            RingFlavours = new SingletonDictionary<RingFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<RingFlavour>(saveGame)));
+            RodFlavours = new SingletonDictionary<RodFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<RodFlavour>(saveGame)));
+            ScrollFlavours = new SingletonDictionary<BaseScrollFlavour>(saveGame, LoadTypesFromAssembly<BaseScrollFlavour>(saveGame));
+            StaffFlavours = new SingletonDictionary<StaffFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<StaffFlavour>(saveGame)));
+            WandFlavours = new SingletonDictionary<WandFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<WandFlavour>(saveGame)));
+            ChestTrapConfigurations = new SingletonDictionary<ChestTrapConfiguration>(saveGame, LoadTypesFromAssembly<ChestTrapConfiguration>(saveGame));
+            ProjectileGraphics = new SingletonKeyedDictionary<string, ProjectileGraphic>(saveGame, LoadTypesFromAssembly<ProjectileGraphic>(saveGame));
+            Animations = new SingletonKeyedDictionary<string, Animation>(saveGame, LoadTypesFromAssembly<Animation>(saveGame));
+            Vaults = new SingletonDictionary<Vault>(saveGame, LoadTypesFromAssembly<Vault>(saveGame));
+            FloorTileTypes = new SingletonKeyedDictionary<string, FloorTileType>(saveGame, LoadTypesFromAssembly<FloorTileType>(saveGame));
+            RareItemTypes = new SingletonKeyedDictionary<RareItemTypeEnum, RareItem>(saveGame, LoadTypesFromAssembly<RareItem>(saveGame));
+            FixedArtifacts = new SingletonKeyedDictionary<FixedArtifactId, FixedArtifact>(saveGame, LoadTypesFromAssembly<FixedArtifact>(saveGame));
+            MonsterRaces = new SingletonDictionary<MonsterRace>(saveGame, LoadTypesFromAssembly<MonsterRace>(saveGame).OrderBy(_monsterRace => _monsterRace.LevelFound));
+            Races = new SingletonDictionary<Race>(saveGame, LoadTypesFromAssembly<Race>(saveGame));
+            HelpGroups = new SingletonDictionary<HelpGroup>(saveGame, LoadTypesFromAssembly<HelpGroup>(saveGame));
+            StoreOwners = new SingletonDictionary<StoreOwner>(saveGame, LoadTypesFromAssembly<StoreOwner>(saveGame));
+            ShopKeeperGoodComments = new SingletonList<string>(saveGame, "Cool!", "You've made my day!", "The shopkeeper giggles.", "The shopkeeper laughs loudly.");
+            ShopKeeperBargainComments = new SingletonList<string>(saveGame, "Yipee!", "I think I'll retire!", "The shopkeeper jumps for joy.", "The shopkeeper smiles gleefully.");
+            ElvishText = new SingletonList<string>(saveGame,
                 "adan", "ael", "in", "agl", "ar", "aina", "alda", "al", "qua", "am", "arth", "amon", "anca", "an", "dune",
                 "anga", "anna", "ann", "on", "ar", "ien", "atar", "band", "bar", "ad", "bel", "eg", "brag", "ol", "breth",
                 "il", "brith", "cal", "en", "gal", "en", "cam", "car", "ak", "cel", "eb", "cor", "on", "cu", "cui", "vie",
@@ -143,24 +143,24 @@ namespace AngbandOS.Core
                 "roch", "rom", "rond", "ros", "ruin", "ruth", "sarn", "ser", "eg", "sil", "sir", "sul", "tal", "dal", "tal",
                 "ath", "tar", "tath", "ar", "taur", "tel", "thal", "thang", "thar", "thaur", "thin", "thol", "thon", "thor",
                 "on", "til", "tin", "tir", "tol", "tum", "tur", "uial", "ur", "val", "wen", "wing", "yave");
-            FunnyComments = new SingletonBaseList<string>(saveGame, "Wow, cosmic, man!", "Rad!", "Groovy!", "Cool!", "Far out!");
-            FunnyDescriptions = new SingletonBaseList<string>(saveGame, 
+            FunnyComments = new SingletonList<string>(saveGame, "Wow, cosmic, man!", "Rad!", "Groovy!", "Cool!", "Far out!");
+            FunnyDescriptions = new SingletonList<string>(saveGame, 
                 "silly", "hilarious", "absurd", "insipid", "ridiculous", "laughable", "ludicrous", "far-out", "groovy",
                 "postmodern", "fantastic", "dadaistic", "cubistic", "cosmic", "awesome", "incomprehensible", "fabulous",
                 "amazing", "incredible", "chaotic", "wild", "preposterous");
-            HorrificDescriptions = new SingletonBaseList<string>(saveGame, 
+            HorrificDescriptions = new SingletonList<string>(saveGame, 
                 "abominable", "abysmal", "appalling", "baleful", "blasphemous", "disgusting", "dreadful", "filthy",
                 "grisly", "hideous", "hellish", "horrible", "infernal", "loathsome", "nightmarish", "repulsive",
                 "sacrilegious", "terrible", "unclean", "unspeakable");
-            InsultPlayerAttacks = new SingletonBaseList<string>(saveGame, 
+            InsultPlayerAttacks = new SingletonList<string>(saveGame, 
                 "insults you!", "insults your mother!", "gives you the finger!", "humiliates you!", "defiles you!",
                 "dances around you!", "makes obscene gestures!", "moons you!");
-            MoanPlayerAttacks = new SingletonBaseList<string>(saveGame, "seems sad about something.", "asks if you have seen his dogs.", "tells you to get off his land.", "mumbles something about mushrooms.");
-            ShopKeeperLessThanGuessComments = new SingletonBaseList<string>(saveGame, "Damn!", "You bastard!", "The shopkeeper curses at you.", "The shopkeeper glares at you.");
-            ShopKeeperWorthlessComments = new SingletonBaseList<string>(saveGame, "Arrgghh!", "You bastard!", "You hear someone sobbing...", "The shopkeeper howls in agony!");
-            SingingPlayerAttacks = new SingletonBaseList<string>(saveGame, "sings 'We are a happy family.'", "sings 'I love you, you love me.'");
-            StoreOwnerAcceptedComments = new SingletonBaseList<string>(saveGame, "Okay.", "Fine.", "Accepted!", "Agreed!", "Done!", "Taken!");
-            WorshipPlayerAttacks = new SingletonBaseList<string>(saveGame, 
+            MoanPlayerAttacks = new SingletonList<string>(saveGame, "seems sad about something.", "asks if you have seen his dogs.", "tells you to get off his land.", "mumbles something about mushrooms.");
+            ShopKeeperLessThanGuessComments = new SingletonList<string>(saveGame, "Damn!", "You bastard!", "The shopkeeper curses at you.", "The shopkeeper glares at you.");
+            ShopKeeperWorthlessComments = new SingletonList<string>(saveGame, "Arrgghh!", "You bastard!", "You hear someone sobbing...", "The shopkeeper howls in agony!");
+            SingingPlayerAttacks = new SingletonList<string>(saveGame, "sings 'We are a happy family.'", "sings 'I love you, you love me.'");
+            StoreOwnerAcceptedComments = new SingletonList<string>(saveGame, "Okay.", "Fine.", "Accepted!", "Agreed!", "Done!", "Taken!");
+            WorshipPlayerAttacks = new SingletonList<string>(saveGame, 
                 "looks up at you!", "asks how many dragons you've killed!", "asks for your autograph!", "tries to shake your hand!", "pretends to be you!",
                 "dances around you!", "tugs at your clothing!", "asks if you will adopt him!");
         }
