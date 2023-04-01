@@ -11,7 +11,7 @@ using System.Collections;
 namespace AngbandOS.Core.InventorySlots
 {
     [Serializable]
-    internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer // TODO: Rename to InventorySlot when the enumeration is refactored out of existence
+    internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, ISingletonDictionary<string> // TODO: Rename to InventorySlot when the enumeration is refactored out of existence
     {
         protected const string alphabet = "abcdefghijklmnopqrstuvwxyz";
         public SaveGame SaveGame { get; }
@@ -263,5 +263,7 @@ namespace AngbandOS.Core.InventorySlots
         /// Returns a bonus for armour class, for Monk and Mystic character classes when the player doesn't have use the slot.
         /// </summary>
         public virtual int BareArmourClassBonus => 0;
+
+        public string GetKey => GetType().Name;
     }
 }

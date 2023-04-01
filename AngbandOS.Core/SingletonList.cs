@@ -1,28 +1,15 @@
 ﻿using System.Collections;
-using System.Reflection;
 
 namespace AngbandOS.Core
 {
     [Serializable]
-    internal class SingletonList<T> : IEnumerable<T> // TODO: This is a SingletonDictionary ... using GetType().Name as the KeyRetrieval
+    internal class SingletonList<T> : SingletonBaseList<T>, IEnumerable<T> // TODO: This is a SingletonDictionary ... using GetType().Name as the KeyRetrieval
     {
-        List<T> list = new List<T>();
         Dictionary<string, T> dictionary = new Dictionary<string, T>();
 
-        public T this[int index]
-        {
-            get {
-                return list[index];
-            }
-        }
+        public bool Contains(T item) => dictionary.ContainsKey(item.GetType().Name);
 
-        public bool Contains(T item)=> dictionary.ContainsKey(item.GetType().Name);
-
-        public int Count => list.Count;
-
-        public WeightedRandom<T> WeightedRandom(Func<T, bool>? predicate = null) => new WeightedRandom<T>(this, predicate);
-
-        public U Get<U>() where U:T
+        public U Get<U>() where U : T
         {
             return (U)dictionary[typeof(U).Name];
         }
@@ -32,32 +19,22 @@ namespace AngbandOS.Core
             return dictionary[typename];
         }
 
-        public IEnumerator<T> GetEnumerator()
-        {
-            return list.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return list.GetEnumerator();
-        }
-
         /// <summary>
         /// Adds an item to the repository.  This is often used to add configured objects.
         /// </summary>
         /// <param name="item"></param>
-        public void Add(T item)
+        public override void Add(T item) 
         {
-            list.Add(item);
+            base.Add(item);
             dictionary.Add(item.GetType().Name, item);
         }
 
-        public SingletonList(SaveGame saveGame, IEnumerable<T> items)
+        public SingletonList(SaveGame saveGame, params T[] items) : base(saveGame, items)
         {
-            foreach (T item in items)
-            {
-                Add(item);
-            }
+        }
+
+        public SingletonList(SaveGame saveGame, IEnumerable<T> items) : base(saveGame, items)
+        {
         }
     }
 }

@@ -1113,7 +1113,7 @@ namespace AngbandOS.Core
                 }
                 ResetStompability();
                 CurrentDepth = 0;
-                CurTown = SingletonRepository.Towns.WeightedRandom().Choose();
+                CurTown = SingletonRepository.Towns.ToWeightedRandom().Choose();
                 while (CurTown.Char == 'K' || CurTown.Char == 'N')
                 {
                     CurTown = SingletonRepository.Towns[Program.Rng.RandomLessThan(SingletonRepository.Towns.Count)];
@@ -3653,7 +3653,7 @@ namespace AngbandOS.Core
         public bool ApplyDisenchant()
         {
             // Select an inventory slot where items can be disenchanted.
-            BaseInventorySlot? inventorySlot = SingletonRepository.InventorySlots.WeightedRandom(_inventorySlot => _inventorySlot.CanBeDisenchanted).Choose();
+            BaseInventorySlot? inventorySlot = SingletonRepository.InventorySlots.ToWeightedRandom(_inventorySlot => _inventorySlot.CanBeDisenchanted).Choose();
             if (inventorySlot == null)
             {
                 // There are no inventory slots capable of being disenchanted.
@@ -7483,7 +7483,7 @@ namespace AngbandOS.Core
         /// <returns> true if there was armour to curse, false otherwise </returns>
         public bool CurseArmour()
         {
-            BaseInventorySlot? inventorySlot = SingletonRepository.InventorySlots.WeightedRandom(_inventorySlot => _inventorySlot.CanBeCursed).Choose();
+            BaseInventorySlot? inventorySlot = SingletonRepository.InventorySlots.ToWeightedRandom(_inventorySlot => _inventorySlot.CanBeCursed).Choose();
 
             // Check to see if there are any slots capable of cursing.
             if (inventorySlot == null)
@@ -10882,7 +10882,7 @@ namespace AngbandOS.Core
         public void DoCmdRefill()
         {
             // Make sure we actually have a light source to refuel.           
-            BaseInventorySlot? chosenLightSourceInventorySlot = SingletonRepository.InventorySlots.WeightedRandom(inventorySlot => inventorySlot.ProvidesLight).Choose();
+            BaseInventorySlot? chosenLightSourceInventorySlot = SingletonRepository.InventorySlots.ToWeightedRandom(inventorySlot => inventorySlot.ProvidesLight).Choose();
 
             // Check to ensure there is an inventory slot for light sources.
             if (chosenLightSourceInventorySlot == null)
@@ -14452,7 +14452,7 @@ namespace AngbandOS.Core
                         if (menu[0] == Constants.GenerateRandom)
                         {
                             autoChose[stage] = true;
-                            Player.BaseCharacterClass = SingletonRepository.CharacterClasses.WeightedRandom().Choose();
+                            Player.BaseCharacterClass = SingletonRepository.CharacterClasses.ToWeightedRandom().Choose();
                             stage++;
                             break;
                         }

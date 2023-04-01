@@ -18,7 +18,7 @@ namespace AngbandOS.Core.AttackEffects
             saveGame.Player.TakeHit(damage, monsterDescription);
 
             // Choose an inventory slot for lights.
-            BaseInventorySlot? chosenLightSourceInventorySlot = saveGame.SingletonRepository.InventorySlots.WeightedRandom(inventorySlot => inventorySlot.ProvidesLight).Choose();
+            BaseInventorySlot? chosenLightSourceInventorySlot = saveGame.SingletonRepository.InventorySlots.ToWeightedRandom(inventorySlot => inventorySlot.ProvidesLight).Choose();
 
             // Check to see if there are no slots.
             if (chosenLightSourceInventorySlot == null)

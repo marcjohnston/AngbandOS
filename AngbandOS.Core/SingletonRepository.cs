@@ -37,6 +37,21 @@ namespace AngbandOS.Core
         public SingletonList<HelpGroup> HelpGroups;
         public SingletonList<StoreOwner> StoreOwners;
 
+        public SingletonBaseList<string> ShopKeeperGoodComments;
+        public SingletonBaseList<string> ShopKeeperBargainComments;
+        public SingletonBaseList<string> ElvishText;
+        public SingletonBaseList<string> FunnyComments;
+        public SingletonBaseList<string> FunnyDescriptions;
+        public SingletonBaseList<string> HorrificDescriptions;
+        public SingletonBaseList<string> InsultPlayerAttacks;
+        public SingletonBaseList<string> MoanPlayerAttacks;
+                        
+        public SingletonBaseList<string> ShopKeeperLessThanGuessComments;
+        public SingletonBaseList<string> ShopKeeperWorthlessComments;
+        public SingletonBaseList<string> SingingPlayerAttacks;
+        public SingletonBaseList<string> StoreOwnerAcceptedComments;
+        public SingletonBaseList<string> WorshipPlayerAttacks;
+
         private T[] LoadTypesFromAssembly<T>(SaveGame saveGame)
         {
             List<T> typeList = new List<T>();
@@ -110,6 +125,44 @@ namespace AngbandOS.Core
             Races = new SingletonList<Race>(saveGame, LoadTypesFromAssembly<Race>(saveGame));
             HelpGroups = new SingletonList<HelpGroup>(saveGame, LoadTypesFromAssembly<HelpGroup>(saveGame));
             StoreOwners = new SingletonList<StoreOwner>(saveGame, LoadTypesFromAssembly<StoreOwner>(saveGame));
+            ShopKeeperGoodComments = new SingletonBaseList<string>(saveGame, "Cool!", "You've made my day!", "The shopkeeper giggles.", "The shopkeeper laughs loudly.");
+            ShopKeeperBargainComments = new SingletonBaseList<string>(saveGame, "Yipee!", "I think I'll retire!", "The shopkeeper jumps for joy.", "The shopkeeper smiles gleefully.");
+            ElvishText = new SingletonBaseList<string>(saveGame,
+                "adan", "ael", "in", "agl", "ar", "aina", "alda", "al", "qua", "am", "arth", "amon", "anca", "an", "dune",
+                "anga", "anna", "ann", "on", "ar", "ien", "atar", "band", "bar", "ad", "bel", "eg", "brag", "ol", "breth",
+                "il", "brith", "cal", "en", "gal", "en", "cam", "car", "ak", "cel", "eb", "cor", "on", "cu", "cui", "vie",
+                "cul", "curu", "dae", "dag", "or", "del", "din", "dol", "dor", "draug", "du", "duin", "dur", "ear", "ech",
+                "or", "edh", "el", "eith", "elen", "er", "ereg", "es", "gal", "fal", "as", "far", "oth", "faug", "fea",
+                "fin", "for", "men", "fuin", "gaer", "gaur", "gil", "gir", "ith", "glin", "gol", "odh", "gond", "gor",
+                "groth", "grod", "gul", "gurth", "gwaith", "gwath", "wath", "had", "hod", "haudh", "heru", "him", "hini",
+                "hith", "hoth", "hyar", "men", "ia", "iant", "iath", "iaur", "ilm", "iluve", "kal", "gal", "kano", "kel",
+                "kemen", "khel", "ek", "khil", "kir", "lad", "laure", "lhach", "lin", "lith", "lok", "lom", "lome", "londe",
+                "los", "loth", "luin", "maeg", "mal", "man", "mel", "men", "menel", "mer", "eth", "min", "as", "mir",
+                "mith", "mor", "moth", "nan", "nar", "naug", "dil", "dur", "nel", "dor", "nen", "nim", "orn", "orod", "os",
+                "pal", "an", "pel", "quen", "quet", "ram", "ran", "rant", "ras", "rauko", "ril", "rim", "ring", "ris",
+                "roch", "rom", "rond", "ros", "ruin", "ruth", "sarn", "ser", "eg", "sil", "sir", "sul", "tal", "dal", "tal",
+                "ath", "tar", "tath", "ar", "taur", "tel", "thal", "thang", "thar", "thaur", "thin", "thol", "thon", "thor",
+                "on", "til", "tin", "tir", "tol", "tum", "tur", "uial", "ur", "val", "wen", "wing", "yave");
+            FunnyComments = new SingletonBaseList<string>(saveGame, "Wow, cosmic, man!", "Rad!", "Groovy!", "Cool!", "Far out!");
+            FunnyDescriptions = new SingletonBaseList<string>(saveGame, 
+                "silly", "hilarious", "absurd", "insipid", "ridiculous", "laughable", "ludicrous", "far-out", "groovy",
+                "postmodern", "fantastic", "dadaistic", "cubistic", "cosmic", "awesome", "incomprehensible", "fabulous",
+                "amazing", "incredible", "chaotic", "wild", "preposterous");
+            HorrificDescriptions = new SingletonBaseList<string>(saveGame, 
+                "abominable", "abysmal", "appalling", "baleful", "blasphemous", "disgusting", "dreadful", "filthy",
+                "grisly", "hideous", "hellish", "horrible", "infernal", "loathsome", "nightmarish", "repulsive",
+                "sacrilegious", "terrible", "unclean", "unspeakable");
+            InsultPlayerAttacks = new SingletonBaseList<string>(saveGame, 
+                "insults you!", "insults your mother!", "gives you the finger!", "humiliates you!", "defiles you!",
+                "dances around you!", "makes obscene gestures!", "moons you!");
+            MoanPlayerAttacks = new SingletonBaseList<string>(saveGame, "seems sad about something.", "asks if you have seen his dogs.", "tells you to get off his land.", "mumbles something about mushrooms.");
+            ShopKeeperLessThanGuessComments = new SingletonBaseList<string>(saveGame, "Damn!", "You bastard!", "The shopkeeper curses at you.", "The shopkeeper glares at you.");
+            ShopKeeperWorthlessComments = new SingletonBaseList<string>(saveGame, "Arrgghh!", "You bastard!", "You hear someone sobbing...", "The shopkeeper howls in agony!");
+            SingingPlayerAttacks = new SingletonBaseList<string>(saveGame, "sings 'We are a happy family.'", "sings 'I love you, you love me.'");
+            StoreOwnerAcceptedComments = new SingletonBaseList<string>(saveGame, "Okay.", "Fine.", "Accepted!", "Agreed!", "Done!", "Taken!");
+            WorshipPlayerAttacks = new SingletonBaseList<string>(saveGame, 
+                "looks up at you!", "asks how many dragons you've killed!", "asks for your autograph!", "tries to shake your hand!", "pretends to be you!",
+                "dances around you!", "tugs at your clothing!", "asks if you will adopt him!");
         }
-    }
+}
 }

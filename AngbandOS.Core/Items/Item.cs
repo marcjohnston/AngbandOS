@@ -3013,7 +3013,7 @@ namespace AngbandOS.Core.Items
                 testcounter = Program.Rng.DieRoll(2) + 1;
                 while (testcounter-- != 0)
                 {
-                    outString += new ElvishTextWeightedRandom().Choose();
+                    outString += SaveGame.SingletonRepository.ElvishText.ToWeightedRandom().Choose();
                 }
             }
             return "'" + outString.Substring(0, 1).ToUpper() + outString.Substring(1) + "'";

@@ -10,7 +10,7 @@
             while (dummy < SaveGame.SafeMaxAttempts)
             {
                 dummy++;
-                vPtr = saveGame.SingletonRepository.Vaults.WeightedRandom().Choose();
+                vPtr = saveGame.SingletonRepository.Vaults.ToWeightedRandom().Choose();
                 if (vPtr.Category == 8)
                 {
                     var minX = xval - (vPtr.Width / 2);

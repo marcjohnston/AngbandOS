@@ -31,7 +31,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations
             {
                 saveGame.Player.RestoreHealth(10);
             }
-            BaseInventorySlot? inventorySlot = saveGame.SingletonRepository.InventorySlots.WeightedRandom(_inventorySlot => _inventorySlot.ProvidesLight).Choose();
+            BaseInventorySlot? inventorySlot = saveGame.SingletonRepository.InventorySlots.ToWeightedRandom(_inventorySlot => _inventorySlot.ProvidesLight).Choose();
             if (inventorySlot == null)
             {
                 return;

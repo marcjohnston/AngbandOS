@@ -2,6 +2,7 @@
 
 namespace AngbandOS.Core
 {
+    [Obsolete("Use SingletonList")]
     [Serializable]
     internal class SingletonDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>> where TValue : ISingletonDictionary<TKey>
     {

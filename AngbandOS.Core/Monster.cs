@@ -425,15 +425,15 @@ namespace AngbandOS.Core
                 }
                 if (player.TimedHallucinations.TurnsRemaining != 0)
                 {
-                    SaveGame.MsgPrint($"You behold the {new FunnyDescriptions().Choose()} visage of {mName}!");
+                    SaveGame.MsgPrint($"You behold the {SaveGame.SingletonRepository.FunnyDescriptions.ToWeightedRandom().Choose()} visage of {mName}!");
                     if (Program.Rng.DieRoll(3) == 1)
                     {
-                        SaveGame.MsgPrint(new FunnyComments().Choose());
+                        SaveGame.MsgPrint(SaveGame.SingletonRepository.FunnyComments.ToWeightedRandom().Choose());
                         player.TimedHallucinations.AddTimer(Program.Rng.DieRoll(Race.Level));
                     }
                     return;
                 }
-                SaveGame.MsgPrint($"You behold the {new HorrificDescriptions().Choose()} visage of {mName}!");
+                SaveGame.MsgPrint($"You behold the {SaveGame.SingletonRepository.HorrificDescriptions.ToWeightedRandom().Choose()} visage of {mName}!");
                 Race.Knowledge.Characteristics.EldritchHorror = true;
 
                 // Allow the race to resist.

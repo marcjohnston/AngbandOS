@@ -887,22 +887,22 @@ namespace AngbandOS.Core.Stores
         {
             if (value <= 0 && price > value)
             {
-                SaveGame.MsgPrint(new ShopKeeperWorthlessComments().Choose());
+                SaveGame.MsgPrint(SaveGame.SingletonRepository.ShopKeeperWorthlessComments.ToWeightedRandom().Choose());
                 SaveGame.PlaySound(SoundEffect.StoreSoldWorthless);
             }
             else if (value < guess && price > value)
             {
-                SaveGame.MsgPrint(new ShopKeeperLessThanGuessComments().Choose());
+                SaveGame.MsgPrint(SaveGame.SingletonRepository.ShopKeeperLessThanGuessComments.ToWeightedRandom().Choose());
                 SaveGame.PlaySound(SoundEffect.StoreSoldBargain);
             }
             else if (value > guess && value < 4 * guess && price < value)
             {
-                SaveGame.MsgPrint(new ShopKeeperGoodComments().Choose());
+                SaveGame.MsgPrint(SaveGame.SingletonRepository.ShopKeeperGoodComments.ToWeightedRandom().Choose());
                 SaveGame.PlaySound(SoundEffect.StoreSoldCheaply);
             }
             else if (value > guess && price < value)
             {
-                SaveGame.MsgPrint(new ShopKeeperBargainComments().Choose());
+                SaveGame.MsgPrint(SaveGame.SingletonRepository.ShopKeeperBargainComments.ToWeightedRandom().Choose());
                 SaveGame.PlaySound(SoundEffect.StoreSoldExtraCheaply);
             }
         }
@@ -1064,7 +1064,7 @@ namespace AngbandOS.Core.Stores
 
         protected void SayComment_1()
         {
-            SaveGame.MsgPrint(new StoreOwnerAcceptedComments().Choose());
+            SaveGame.MsgPrint(SaveGame.SingletonRepository.StoreOwnerAcceptedComments.ToWeightedRandom().Choose());
         }
 
         private bool SellHaggle(Item oPtr, out int price)
