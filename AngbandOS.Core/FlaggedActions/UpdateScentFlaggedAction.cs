@@ -15,7 +15,7 @@
             {
                 return;
             }
-            if (cPtr.FeatureType.BlocksLos && cPtr.FeatureType.Name != "SecretDoor")
+            if (cPtr.FeatureType.BlocksScent)
             {
                 return;
             }

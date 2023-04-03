@@ -9,6 +9,12 @@ internal class SecretDoorFloorTileType : FloorTileType
     public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "WallBasic";
     public override bool BlocksLos => true;
+
+    /// <summary>
+    /// Returns false, because secret doors allow the scent trail to pass through.
+    /// </summary>
+    public override bool BlocksScent => false;
+
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.SecretDoor;
     public override string Description => "granite wall";
     public override bool DimsOutsideLOS => true;

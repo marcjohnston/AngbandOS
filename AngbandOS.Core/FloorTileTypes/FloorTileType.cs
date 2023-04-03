@@ -23,6 +23,12 @@ namespace AngbandOS.Core.FloorTileTypes
         public abstract string Name { get; }
 
         /// <summary>
+        /// Returns true, if the tile type blocks the scent trail.  Defaults to return true, if the tile type blocks line of sight; false, otherwise.  Secret doors typically block line of sight but will allow
+        /// the scent to pass through.
+        /// </summary>
+        public virtual bool BlocksScent => BlocksLos;
+
+        /// <summary>
         /// Returns a single action to perform on the tile.
         /// </summary>
         public virtual AlterAction? AlterAction => null;
