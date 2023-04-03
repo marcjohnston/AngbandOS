@@ -10,6 +10,7 @@ internal class QuartzVisTreasFloorTileType : FloorTileType
     public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "QuartzVisTreas";
     public override bool BlocksLos => true;
+    public override bool IsVisibleTreasure => true;
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Vein;
     public override string Description => "quartz vein with treasure";
     public override bool DimsOutsideLOS => true;

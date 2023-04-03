@@ -10,6 +10,7 @@ internal class MagmaHidTreasFloorTileType : FloorTileType
     public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "Magma";
     public override bool BlocksLos => true;
+    public override string? HiddenTreasureFor => "MagmaVisTreas";
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Vein;
     public override string Description => "magma vein";
     public override bool DimsOutsideLOS => true;

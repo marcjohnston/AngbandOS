@@ -4489,11 +4489,11 @@ namespace AngbandOS.Core
                 for (int x = Level.PanelColMin; x <= Level.PanelColMax; x++)
                 {
                     GridTile cPtr = Level.Grid[y][x];
-                    if (cPtr.FeatureType.Name.Contains("HidTreas"))
+                    if (cPtr.FeatureType.HiddenTreasureFor != null)
                     {
-                        cPtr.SetFeature(cPtr.FeatureType.Name.Replace("Hid", "Vis"));
+                        cPtr.SetFeature(cPtr.FeatureType.HiddenTreasureFor);
                     }
-                    if (cPtr.FeatureType.Name.Contains("VisTreas"))
+                    if (cPtr.FeatureType.IsVisibleTreasure)
                     {
                         cPtr.TileFlags.Set(GridTile.PlayerMemorised);
                         Level.RedrawSingleLocation(y, x);

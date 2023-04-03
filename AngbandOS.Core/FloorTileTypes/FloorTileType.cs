@@ -29,6 +29,16 @@ namespace AngbandOS.Core.FloorTileTypes
         public virtual bool BlocksScent => BlocksLos;
 
         /// <summary>
+        /// Returns null, if the tile type is not a hidden treasure; otherwise, when the tile is a hidden treasure, the visible tile type is returned.
+        /// </summary>
+        public virtual string? HiddenTreasureFor => null;
+
+        /// <summary>
+        /// Returns true, if the tile type is a visible treasure.  Defaults to false.  Magma and quartz are treasure tile types.
+        /// </summary>
+        public virtual bool IsVisibleTreasure => false;
+
+        /// <summary>
         /// Returns a single action to perform on the tile.
         /// </summary>
         public virtual AlterAction? AlterAction => null;
