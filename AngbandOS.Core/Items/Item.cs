@@ -855,11 +855,10 @@ namespace AngbandOS.Core.Items
                     basenm += ' ';
                     basenm += RandartName;
                 }
-                else if (FixedArtifactIndex != 0)
+                else if (FixedArtifact != null)
                 {
-                    FixedArtifact aPtr = SaveGame.SingletonRepository.FixedArtifacts[FixedArtifactIndex];
                     basenm += ' ';
-                    basenm += aPtr.Name;
+                    basenm += FixedArtifact.FriendlyName;
                 }
                 else if (RareItemTypeIndex != RareItemTypeEnum.None)
                 {
@@ -1332,10 +1331,9 @@ namespace AngbandOS.Core.Items
             Characteristics.Merge(BaseItemCategory);
 
             // Now merge the characteristics from the fixed artifact, if there is one.
-            if (FixedArtifactIndex != 0)
+            if (FixedArtifact != null)
             {
-                FixedArtifact aPtr = SaveGame.SingletonRepository.FixedArtifacts[FixedArtifactIndex];
-                Characteristics.Merge(aPtr);
+                Characteristics.Merge(FixedArtifact);
             }
 
             // Now merge the characteristics from the rare item type, if there is one.
@@ -1808,6 +1806,7 @@ namespace AngbandOS.Core.Items
             return IdentCursed;
         }
 
+        [Obsolete("Use FixedArtifact == null to help with null reference warnings")]
         public bool IsFixedArtifact()
         {
             return FixedArtifactIndex != 0;
@@ -1869,14 +1868,13 @@ namespace AngbandOS.Core.Items
             {
                 value += FlagBasedCost(TypeSpecificValue);
             }
-            else if (FixedArtifactIndex != 0)
+            else if (FixedArtifact != null)
             {
-                FixedArtifact aPtr = SaveGame.SingletonRepository.FixedArtifacts[FixedArtifactIndex];
-                if (aPtr.Cost == 0)
+                if (FixedArtifact.Cost == 0)
                 {
                     return 0;
                 }
-                value = aPtr.Cost;
+                value = FixedArtifact.Cost;
             }
             else if (RareItemTypeIndex != RareItemTypeEnum.None)
             {
@@ -2063,7 +2061,7 @@ namespace AngbandOS.Core.Items
             {
                 rolls = 4;
             }
-            if (!okay || FixedArtifactIndex != 0)
+            if (!okay || FixedArtifact != null)
             {
                 rolls = 0;
             }
@@ -2074,30 +2072,29 @@ namespace AngbandOS.Core.Items
                     break;
                 }
             }
-            if (FixedArtifactIndex != 0)
+            if (FixedArtifact != null)
             {
-                FixedArtifact aPtr = SaveGame.SingletonRepository.FixedArtifacts[FixedArtifactIndex];
-                aPtr.CurNum = 1;
-                TypeSpecificValue = aPtr.Pval;
-                BaseArmourClass = aPtr.Ac;
-                DamageDice = aPtr.Dd;
-                DamageDiceSides = aPtr.Ds;
-                BonusArmourClass = aPtr.ToA;
-                BonusToHit = aPtr.ToH;
-                BonusDamage = aPtr.ToD;
-                Weight = aPtr.Weight;
-                if (aPtr.Cost == 0)
+                FixedArtifact.CurNum = 1;
+                TypeSpecificValue = FixedArtifact.Pval;
+                BaseArmourClass = FixedArtifact.Ac;
+                DamageDice = FixedArtifact.Dd;
+                DamageDiceSides = FixedArtifact.Ds;
+                BonusArmourClass = FixedArtifact.ToA;
+                BonusToHit = FixedArtifact.ToH;
+                BonusDamage = FixedArtifact.ToD;
+                Weight = FixedArtifact.Weight;
+                if (FixedArtifact.Cost == 0)
                 {
                     IdentBroken = true;
                 }
-                if (aPtr.Cursed)
+                if (FixedArtifact.Cursed)
                 {
                     IdentCursed = true;
                 }
                 if (SaveGame.Level != null)
                 {
                     SaveGame.Level.TreasureRating += 10;
-                    if (aPtr.Cost > 50000)
+                    if (FixedArtifact.Cost > 50000)
                     {
                         SaveGame.Level.TreasureRating += 10;
                     }
@@ -2608,9 +2605,8 @@ namespace AngbandOS.Core.Items
             {
                 return false;
             }
-            foreach (KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.SingletonRepository.FixedArtifacts)
+            foreach (FixedArtifact aPtr in SaveGame.SingletonRepository.FixedArtifacts)
             {
-                FixedArtifact aPtr = pair.Value;
                 if (aPtr.HasOwnType)
                 {
                     continue;
@@ -2638,7 +2634,7 @@ namespace AngbandOS.Core.Items
                 {
                     continue;
                 }
-                FixedArtifact = pair.Value;
+                FixedArtifact = aPtr;
                 GetFixedArtifactResistances();
                 return true;
             }

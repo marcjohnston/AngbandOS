@@ -270,9 +270,8 @@ namespace AngbandOS.Core
             }
             WeightCarried = 0;
 
-            foreach (KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.SingletonRepository.FixedArtifacts)
+            foreach (FixedArtifact aPtr in SaveGame.SingletonRepository.FixedArtifacts)
             {
-                FixedArtifact aPtr = pair.Value;
                 aPtr.CurNum = 0;
             }
             foreach (ItemClass kPtr in SaveGame.SingletonRepository.ItemCategories)
