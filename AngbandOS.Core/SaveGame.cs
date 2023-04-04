@@ -741,9 +741,8 @@ namespace AngbandOS.Core
 
         private Item? MakeFixedArtifact()
         {
-            foreach (KeyValuePair<FixedArtifactId, FixedArtifact> pair in SingletonRepository.FixedArtifacts)
+            foreach (FixedArtifact aPtr in SingletonRepository.FixedArtifacts)
             {
-                FixedArtifact aPtr = pair.Value;
                 if (!aPtr.HasOwnType)
                 {
                     continue;
@@ -774,7 +773,7 @@ namespace AngbandOS.Core
                     }
                 }
                 Item item = kIdx.CreateItem(this);
-                item.FixedArtifact = pair.Value;
+                item.FixedArtifact = aPtr;
                 return item;
             }
             return null;
@@ -19671,21 +19670,18 @@ namespace AngbandOS.Core
             return choice[num];
         }
 
-        public void WizCreateNamedArt(FixedArtifactId aIdx)
+        public void WizCreateNamedArt(int aIdx)
         {
-            if (aIdx == FixedArtifactId.None || (int)aIdx >= SingletonRepository.FixedArtifacts.Count)
+            if (aIdx < 0 || aIdx >= SingletonRepository.FixedArtifacts.Count)
             {
                 return;
             }
-            FixedArtifact? aPtr = SingletonRepository.FixedArtifacts.SingleOrDefault(_fixedArtifact => _fixedArtifact.Value.FixedArtifactID == aIdx).Value;
-            if (aPtr == null)
+            FixedArtifact aPtr = SingletonRepository.FixedArtifacts[aIdx];
+            if (aPtr.CurNum > 0)
             {
                 return;
             }
-            if (string.IsNullOrEmpty(aPtr.Name))
-            {
-                return;
-            }
+            aPtr.CurNum = 1;
             Item qPtr = aPtr.BaseItemCategory.CreateItem(this);
             qPtr.FixedArtifact = SingletonRepository.FixedArtifacts[aIdx];
             qPtr.TypeSpecificValue = aPtr.Pval;
@@ -19941,9 +19937,9 @@ namespace AngbandOS.Core
             const int _testRoll = 100000;
             const string q = "Rolls: {0}, Matches: {1}, Better: {2}, Worse: {3}, Other: {4}";
 
-            if (oPtr.IsFixedArtifact())
+            if (oPtr.FixedArtifact != null)
             {
-                SingletonRepository.FixedArtifacts[oPtr.FixedArtifactIndex].CurNum = 0;
+                oPtr.FixedArtifact.CurNum = 0;
             }
             while (true)
             {
@@ -19998,9 +19994,9 @@ namespace AngbandOS.Core
                         UpdateScreen();
                     }
                     Item qPtr = this.MakeObject(good, great, false);
-                    if (qPtr.IsFixedArtifact())
+                    if (qPtr.FixedArtifact != null)
                     {
-                        SingletonRepository.FixedArtifacts[qPtr.FixedArtifactIndex].CurNum = 0;
+                        qPtr.FixedArtifact.CurNum = 0;
                     }
                     if (oPtr.Category != qPtr.Category)
                     {
@@ -20036,9 +20032,9 @@ namespace AngbandOS.Core
                 MsgPrint(string.Format(q, i, matches, better, worse, other));
                 MsgPrint(null);
             }
-            if (oPtr.IsFixedArtifact())
+            if (oPtr.FixedArtifact != null)
             {
-                SingletonRepository.FixedArtifacts[oPtr.FixedArtifactIndex].CurNum = 1;
+                oPtr.FixedArtifact.CurNum = 1;
             }
         }
 

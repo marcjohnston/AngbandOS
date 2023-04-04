@@ -9,8 +9,7 @@ namespace AngbandOS.Core
     internal class SingletonRepository
     {
         public SingletonDictionary<Animation> Animations;
-        [Obsolete("Needs to be non-keyed")]
-        public SingletonKeyedDictionary<FixedArtifactId, FixedArtifact> FixedArtifacts;
+        public SingletonDictionary<FixedArtifact> FixedArtifacts;
         [Obsolete("Needs to be non-keyed")]
         public SingletonKeyedDictionary<string, FloorTileType> FloorTileTypes;
         public SingletonDictionary<InGameCommand> InGameCommands;
@@ -123,7 +122,7 @@ namespace AngbandOS.Core
             Vaults = new SingletonDictionary<Vault>(saveGame, LoadTypesFromAssembly<Vault>(saveGame));
             FloorTileTypes = new SingletonKeyedDictionary<string, FloorTileType>(saveGame, LoadTypesFromAssembly<FloorTileType>(saveGame));
             RareItemTypes = new SingletonKeyedDictionary<RareItemTypeEnum, RareItem>(saveGame, LoadTypesFromAssembly<RareItem>(saveGame));
-            FixedArtifacts = new SingletonKeyedDictionary<FixedArtifactId, FixedArtifact>(saveGame, LoadTypesFromAssembly<FixedArtifact>(saveGame));
+            FixedArtifacts = new SingletonDictionary<FixedArtifact>(saveGame, LoadTypesFromAssembly<FixedArtifact>(saveGame));
             MonsterRaces = new SingletonDictionary<MonsterRace>(saveGame, LoadTypesFromAssembly<MonsterRace>(saveGame).OrderBy(_monsterRace => _monsterRace.LevelFound));
             Races = new SingletonDictionary<Race>(saveGame, LoadTypesFromAssembly<Race>(saveGame));
             HelpGroups = new SingletonDictionary<HelpGroup>(saveGame, LoadTypesFromAssembly<HelpGroup>(saveGame));

@@ -13,7 +13,7 @@
 
         public override void Execute()
         {
-            SaveGame.WizCreateNamedArt((FixedArtifactId)SaveGame.CommandArgument);
+            SaveGame.WizCreateNamedArt(SaveGame.CommandArgument);
         }
     }
 }

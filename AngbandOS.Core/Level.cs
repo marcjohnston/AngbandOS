@@ -437,9 +437,9 @@ namespace AngbandOS.Core
                 {
                     string p = plural ? "" : "s";
                     SaveGame.MsgPrint($"The {oName} disappear{p}.");
-                    if (jPtr.FixedArtifactIndex != 0)
+                    if (jPtr.FixedArtifact != null)
                     {
-                        SaveGame.SingletonRepository.FixedArtifacts[jPtr.FixedArtifactIndex].CurNum = 0;
+                        jPtr.FixedArtifact.CurNum = 0;
                     }
                     return;
                 }
@@ -948,9 +948,9 @@ namespace AngbandOS.Core
             }
             else
             {
-                if (qPtr.FixedArtifactIndex != 0)
+                if (qPtr.FixedArtifact != null)
                 {
-                    SaveGame.SingletonRepository.FixedArtifacts[qPtr.FixedArtifactIndex].CurNum = 0;
+                    qPtr.FixedArtifact.CurNum = 0;
                 }
             }
         }
