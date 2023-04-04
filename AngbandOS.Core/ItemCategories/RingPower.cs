@@ -17,7 +17,7 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 2;
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
-            if (item.IsFixedArtifact() && item.IsFlavourAware())
+            if (item.FixedArtifact != null && item.IsFlavourAware())
             {
                 return base.GetDescription(item, includeCountPrefix);
             }

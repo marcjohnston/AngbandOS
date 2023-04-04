@@ -32,7 +32,7 @@ namespace AngbandOS.Core.Projection
                 {
                     plural = true;
                 }
-                if (oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false)
+                if (oPtr.FixedArtifact != null || string.IsNullOrEmpty(oPtr.RandartName) == false)
                 {
                     isArt = true;
                 }

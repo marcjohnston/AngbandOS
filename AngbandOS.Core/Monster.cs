@@ -1115,7 +1115,7 @@ namespace AngbandOS.Core
                                 willHurt = true;
                             }
                             // Monsters won't pick up artifacts or items that hurt them
-                            if (item.IsFixedArtifact() || willHurt || !string.IsNullOrEmpty(item.RandartName))
+                            if (item.FixedArtifact != null || willHurt || !string.IsNullOrEmpty(item.RandartName))
                             {
                                 if (Race.TakeItem)
                                 {

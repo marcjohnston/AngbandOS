@@ -49,7 +49,7 @@ namespace AngbandOS.Core.Projection
                 if (oPtr.Count > 1)
                 {
                 }
-                if (oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false)
+                if (oPtr.FixedArtifact != null || string.IsNullOrEmpty(oPtr.RandartName) == false)
                 {
                 }
                 if (oPtr.Category == ItemTypeEnum.Chest)

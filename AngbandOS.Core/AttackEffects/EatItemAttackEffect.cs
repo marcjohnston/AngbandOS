@@ -30,7 +30,7 @@ namespace AngbandOS.Core.AttackEffects
                 BaseInventorySlot packInventorySlot = saveGame.SingletonRepository.InventorySlots.Get<PackInventorySlot>();
                 int i = packInventorySlot.WeightedRandom.Choose();
                 Item? item = saveGame.GetInventoryItem(i);
-                if (item != null && !item.IsFixedArtifact() && string.IsNullOrEmpty(item.RandartName))
+                if (item != null && item.FixedArtifact == null && string.IsNullOrEmpty(item.RandartName))
                 {
                     string itemName = item.Description(false, 3);
                     string y = item.Count > 1 ? "One of y" : "Y";

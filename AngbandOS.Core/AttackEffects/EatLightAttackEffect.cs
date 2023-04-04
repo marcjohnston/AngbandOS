@@ -50,7 +50,7 @@ namespace AngbandOS.Core.AttackEffects
             }
 
             // Only dim lights that consume fuel
-            if (item.TypeSpecificValue > 0 && !item.IsFixedArtifact())
+            if (item.TypeSpecificValue > 0 && item.FixedArtifact == null)
             {
                 item.TypeSpecificValue -= 250 + Program.Rng.DieRoll(250);
                 if (item.TypeSpecificValue < 1)

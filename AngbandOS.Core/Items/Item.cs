@@ -445,7 +445,7 @@ namespace AngbandOS.Core.Items
             return clonedItem;
         }
 
-        public bool IsKnownArtifact => IsKnown() && (IsFixedArtifact() || !string.IsNullOrEmpty(RandartName));
+        public bool IsKnownArtifact => IsKnown() && (FixedArtifact != null || !string.IsNullOrEmpty(RandartName));
 
         public ItemTypeEnum Category => BaseItemCategory == null ? ItemTypeEnum.None : BaseItemCategory.CategoryEnum; // Provided for backwards compatability.  Will be deleted.
 
@@ -763,7 +763,7 @@ namespace AngbandOS.Core.Items
             {
                 return false;
             }
-            if (FixedArtifactIndex != other.FixedArtifactIndex)
+            if (FixedArtifact != other.FixedArtifact)
             {
                 return false;
             }
@@ -1278,7 +1278,7 @@ namespace AngbandOS.Core.Items
 
         public string GetDetailedFeeling()
         {
-            if (IsFixedArtifact() || !string.IsNullOrEmpty(RandartName))
+            if (FixedArtifact != null || !string.IsNullOrEmpty(RandartName))
             {
                 if (IsCursed() || IsBroken())
                 {
@@ -1373,7 +1373,7 @@ namespace AngbandOS.Core.Items
             {
                 return "broken";
             }
-            if (IsFixedArtifact() || !string.IsNullOrEmpty(RandartName))
+            if (FixedArtifact != null || !string.IsNullOrEmpty(RandartName))
             {
                 return "special";
             }

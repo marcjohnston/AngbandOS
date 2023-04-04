@@ -3603,7 +3603,7 @@ namespace AngbandOS.Core
                     }
                 }
             }
-            if (oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false)
+            if (oPtr.FixedArtifact != null || string.IsNullOrEmpty(oPtr.RandartName) == false)
             {
                 string feel = "special";
                 MsgPrint($"You fail to turn {oName} to gold!");
@@ -3674,7 +3674,7 @@ namespace AngbandOS.Core
             }
             string oName = oPtr.Description(false, 0);
             string s;
-            if ((oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false) && Program.Rng.RandomLessThan(100) < 71)
+            if ((oPtr.FixedArtifact != null || string.IsNullOrEmpty(oPtr.RandartName) == false) && Program.Rng.RandomLessThan(100) < 71)
             {
                 s = oPtr.Count != 1 ? "" : "s";
                 MsgPrint($"Your {oName} ({i.IndexToLabel()}) resist{s} disenchantment!");
@@ -4372,7 +4372,7 @@ namespace AngbandOS.Core
                             continue;
                         }
                         ItemTypeEnum tv = oPtr.Category;
-                        if (oPtr.IsFixedArtifact() || oPtr.IsRare() || string.IsNullOrEmpty(oPtr.RandartName) == false ||
+                        if (oPtr.FixedArtifact != null || oPtr.IsRare() || string.IsNullOrEmpty(oPtr.RandartName) == false ||
                             tv == ItemTypeEnum.Amulet || tv == ItemTypeEnum.Ring || tv == ItemTypeEnum.Staff ||
                             tv == ItemTypeEnum.Wand || tv == ItemTypeEnum.Rod || tv == ItemTypeEnum.Scroll ||
                             tv == ItemTypeEnum.Potion || tv == ItemTypeEnum.LifeBook || tv == ItemTypeEnum.SorceryBook ||
@@ -4875,7 +4875,7 @@ namespace AngbandOS.Core
             int[] EnchantTable = {0, 10, 50, 100, 200, 300, 400, 500, 650, 800, 950, 987, 993, 995, 998, 1000};
 
             bool res = false;
-            bool a = oPtr.IsFixedArtifact() || string.IsNullOrEmpty(oPtr.RandartName) == false;
+            bool a = oPtr.FixedArtifact != null || string.IsNullOrEmpty(oPtr.RandartName) == false;
             oPtr.RefreshFlagBasedProperties();
             int prob = oPtr.Count * 100;
             if (oPtr.Category == ItemTypeEnum.Bolt || oPtr.Category == ItemTypeEnum.Arrow || oPtr.Category == ItemTypeEnum.Shot)
@@ -7050,7 +7050,7 @@ namespace AngbandOS.Core
                 {
                     continue;
                 }
-                if (!string.IsNullOrEmpty(item.RandartName) || item.IsFixedArtifact() || item.IsRare())
+                if (!string.IsNullOrEmpty(item.RandartName) || item.FixedArtifact != null || item.IsRare())
                 {
                     continue;
                 }
@@ -7084,7 +7084,7 @@ namespace AngbandOS.Core
         {
             Item? item = GetInventoryItem(InventorySlot.MeleeWeapon);
             // We must have a non-rare, non-artifact weapon that isn't cursed
-            if (item != null && !item.IsFixedArtifact() && !item.IsRare() && string.IsNullOrEmpty(item.RandartName) && !item.IsCursed())
+            if (item != null && item.FixedArtifact == null && !item.IsRare() && string.IsNullOrEmpty(item.RandartName) && !item.IsCursed())
             {
                 string act;
                 string itemName = item.Description(false, 0);
@@ -7500,7 +7500,7 @@ namespace AngbandOS.Core
             }
             // Artifacts can't be cursed, and normal armour has a chance to save
             string itemName = item.Description(false, 3);
-            if ((!string.IsNullOrEmpty(item.RandartName) || item.IsFixedArtifact()) && Program.Rng.RandomLessThan(100) < 50)
+            if ((!string.IsNullOrEmpty(item.RandartName) || item.FixedArtifact != null) && Program.Rng.RandomLessThan(100) < 50)
             {
                 MsgPrint($"A terrible black aura tries to surround your armour, but your {itemName} resists the effects!");
             }
@@ -7539,7 +7539,7 @@ namespace AngbandOS.Core
             }
             string itemName = item.Description(false, 3);
             // Artifacts can't be cursed, and other items have a chance to resist
-            if ((item.IsFixedArtifact() || !string.IsNullOrEmpty(item.RandartName)) &&
+            if ((item.FixedArtifact != null || !string.IsNullOrEmpty(item.RandartName)) &&
                 Program.Rng.RandomLessThan(100) < 50)
             {
                 MsgPrint(
@@ -8959,7 +8959,7 @@ namespace AngbandOS.Core
             EnergyUse = 100;
             // Get the level of the item
             int itemLevel = item.BaseItemCategory.Level;
-            if (item.FixedArtifact != null && item.IsFixedArtifact())
+            if (item.FixedArtifact != null)
             {
                 itemLevel = item.FixedArtifact.Level;
             }
@@ -9397,7 +9397,7 @@ namespace AngbandOS.Core
             EnergyUse = 100;
 
             // Can't destroy an artifact artifact
-            if (item.IsFixedArtifact() || !string.IsNullOrEmpty(item.RandartName))
+            if (item.FixedArtifact != null || !string.IsNullOrEmpty(item.RandartName))
             {
                 string feel = "special";
                 EnergyUse = 0;
@@ -19863,7 +19863,7 @@ namespace AngbandOS.Core
 
         private void WizQuantityItem(Item oPtr)
         {
-            if (oPtr.IsFixedArtifact() || !string.IsNullOrEmpty(oPtr.RandartName))
+            if (oPtr.FixedArtifact != null || !string.IsNullOrEmpty(oPtr.RandartName))
             {
                 return;
             }
@@ -19889,7 +19889,7 @@ namespace AngbandOS.Core
         private Item WizRerollItem(Item oPtr)
         {
             bool changed;
-            if (oPtr.IsFixedArtifact() || !string.IsNullOrEmpty(oPtr.RandartName))
+            if (oPtr.FixedArtifact != null || !string.IsNullOrEmpty(oPtr.RandartName))
             {
                 return oPtr;
             }
@@ -20040,7 +20040,7 @@ namespace AngbandOS.Core
 
         private void WizTweakItem(Item oPtr)
         {
-            if (oPtr.IsFixedArtifact() || !string.IsNullOrEmpty(oPtr.RandartName))
+            if (oPtr.FixedArtifact != null || !string.IsNullOrEmpty(oPtr.RandartName))
             {
                 return;
             }

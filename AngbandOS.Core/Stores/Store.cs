@@ -1311,7 +1311,7 @@ namespace AngbandOS.Core.Stores
             {
                 return false;
             }
-            if (oPtr.FixedArtifactIndex != jPtr.FixedArtifactIndex)
+            if (oPtr.FixedArtifact != jPtr.FixedArtifact)
             {
                 return false;
             }

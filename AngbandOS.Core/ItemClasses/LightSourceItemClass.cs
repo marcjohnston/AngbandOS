@@ -19,7 +19,7 @@
         /// <returns></returns>
         public override int CalcTorch(Item oPtr)
         {
-            if (oPtr.IsFixedArtifact())
+            if (oPtr.FixedArtifact != null)
             {
                 return 3;
             }
@@ -174,7 +174,7 @@
 
         public override string Identify(Item item)
         {
-            if (item.IsFixedArtifact())
+            if (item.FixedArtifact != null)
             {
                 return "It provides light (radius 3) forever.";
             }

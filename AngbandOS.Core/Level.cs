@@ -131,7 +131,7 @@ namespace AngbandOS.Core
             }
             foreach (Item oPtr in cPtr.Items)
             {
-                if (!string.IsNullOrEmpty(oPtr.RandartName) || oPtr.IsFixedArtifact())
+                if (!string.IsNullOrEmpty(oPtr.RandartName) || oPtr.FixedArtifact != null)
                 {
                     return false;
                 }
@@ -317,7 +317,7 @@ namespace AngbandOS.Core
             bool done = false;
             bool plural = jPtr.Count != 1;
             string oName = jPtr.Description(false, 0);
-            if (!(!string.IsNullOrEmpty(jPtr.RandartName) || jPtr.IsFixedArtifact()) && Program.Rng.RandomLessThan(100) < chance)
+            if (!(!string.IsNullOrEmpty(jPtr.RandartName) || jPtr.FixedArtifact != null) && Program.Rng.RandomLessThan(100) < chance)
             {
                 string p = plural ? "" : "s";
                 SaveGame.MsgPrint($"The {oName} disappear{p}.");
@@ -388,7 +388,7 @@ namespace AngbandOS.Core
                     flag = true;
                 }
             }
-            if (!flag && !(jPtr.IsFixedArtifact() || !string.IsNullOrEmpty(jPtr.RandartName)))
+            if (!flag && !(jPtr.FixedArtifact != null || !string.IsNullOrEmpty(jPtr.RandartName)))
             {
                 string p = plural ? "" : "s";
                 SaveGame.MsgPrint($"The {oName} disappear{p}.");

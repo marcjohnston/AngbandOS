@@ -9,7 +9,7 @@
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Amulet;
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
-            if (item.IsFixedArtifact() && item.IsFlavourAware())
+            if (item.FixedArtifact != null && item.IsFlavourAware())
             {
                 return base.GetDescription(item, includeCountPrefix);
             }

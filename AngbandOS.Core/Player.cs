@@ -1713,7 +1713,7 @@ namespace AngbandOS.Core
             for (int i = 0; i < InventorySlot.PackCount; i++)
             {
                 Item oPtr = SaveGame.GetInventoryItem(i);
-                if (oPtr != null && !oPtr.IsFixedArtifact() && string.IsNullOrEmpty(oPtr.RandartName) && testerFunc(oPtr))
+                if (oPtr != null && oPtr.FixedArtifact == null && string.IsNullOrEmpty(oPtr.RandartName) && testerFunc(oPtr))
                 {
                     int j;
                     int amt;
