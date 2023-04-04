@@ -22,7 +22,7 @@ namespace AngbandOS.Core.Projection
 
         protected abstract string BoltGraphic { get; }
 
-        protected virtual string EffectAnimation { get; } = "";
+        protected virtual Animation? EffectAnimation => null;
 
         protected virtual string ImpactGraphic { get; } = "";
 
@@ -54,7 +54,6 @@ namespace AngbandOS.Core.Projection
             int gmRad = rad;
             ProjectileGraphic projectileEntity = string.IsNullOrEmpty(BoltGraphic) ? null : SaveGame.SingletonRepository.ProjectileGraphics[BoltGraphic];
             ProjectileGraphic impactEntity = string.IsNullOrEmpty(ImpactGraphic) ? null : SaveGame.SingletonRepository.ProjectileGraphics[ImpactGraphic];
-            Animation animationEntity = string.IsNullOrEmpty(EffectAnimation) ? null : SaveGame.SingletonRepository.Animations[EffectAnimation];
             if ((flg & ProjectionFlag.ProjectJump) != 0)
             {
                 x1 = x;
@@ -318,9 +317,9 @@ namespace AngbandOS.Core.Projection
                 }
             }
 
-            if (animationEntity != null)
+            if (EffectAnimation != null)
             {
-                animationEntity.Animate(SaveGame, SaveGame.Level, gy, gx);
+                EffectAnimation.Animate(SaveGame, SaveGame.Level, gy, gx);
             }
 
             if ((flg & ProjectionFlag.ProjectGrid) != 0)

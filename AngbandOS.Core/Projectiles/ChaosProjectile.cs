@@ -18,7 +18,7 @@ namespace AngbandOS.Core.Projection
 
         protected override string ImpactGraphic => "PurpleSplat";
 
-        protected override string EffectAnimation => "PinkPurpleFlash";
+        protected override Animation? EffectAnimation => SaveGame.SingletonRepository.Animations.Get<PinkPurpleFlashAnimation>();
 
         protected override bool AffectFloor(int y, int x) => true;
 

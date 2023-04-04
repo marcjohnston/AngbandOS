@@ -16,7 +16,7 @@ namespace AngbandOS.Core.Projection
 
         protected override string BoltGraphic => "BrightWhiteSplat";
 
-        protected override string EffectAnimation => "BrightWhiteExpand";
+        protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<BrightWhiteExpandAnimation>();
 
         protected override bool ProjectileAngersMonster(Monster mPtr)
         {

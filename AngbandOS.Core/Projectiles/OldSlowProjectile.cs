@@ -16,7 +16,7 @@ namespace AngbandOS.Core.Projection
 
         protected override string BoltGraphic => "BlueBullet";
 
-        protected override string EffectAnimation => "BlueSwirl";
+        protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<BlueSwirlAnimation>();
 
         protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
         {

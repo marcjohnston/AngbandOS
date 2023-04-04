@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.Animations
 {
     [Serializable]
-    internal abstract class Animation : ISingletonDictionary<string>
+    internal abstract class Animation
     {
         protected SaveGame SaveGame;
         protected Animation(SaveGame saveGame)
@@ -17,7 +17,6 @@ namespace AngbandOS.Core.Animations
             SaveGame = saveGame;
         }
 
-        public string GetKey => Name;
         public abstract char Character { get; }
         public abstract Colour Colour { get; }
         public abstract string Name { get; }

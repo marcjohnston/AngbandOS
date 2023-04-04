@@ -16,7 +16,7 @@ namespace AngbandOS.Core.Projection
 
         protected override string BoltGraphic => "CopperBolt";
 
-        protected override string EffectAnimation => "CopperExpand";
+        protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<CopperExpandAnimation>();
 
         protected override bool ProjectileAngersMonster(Monster mPtr)
         {

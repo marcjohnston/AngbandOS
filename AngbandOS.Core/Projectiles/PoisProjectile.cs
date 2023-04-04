@@ -18,7 +18,7 @@ namespace AngbandOS.Core.Projection
 
         protected override string ImpactGraphic => "GreenSplat";
 
-        protected override string EffectAnimation => "GreenCloud";
+        protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<GreenCloudAnimation>();
 
         protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
         {

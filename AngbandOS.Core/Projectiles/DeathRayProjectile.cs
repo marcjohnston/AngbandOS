@@ -8,7 +8,7 @@
 
         protected override string BoltGraphic => "CopperBolt";
 
-        protected override string EffectAnimation => "CopperContract";
+        protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<CopperContractAnimation>();
 
         protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
         {

@@ -16,7 +16,7 @@ namespace AngbandOS.Core.Projection
 
         protected override string BoltGraphic => "BrightWhiteBolt";
 
-        protected override string EffectAnimation => "BrightWhiteCloud";
+        protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<BrightWhiteCloudAnimation>();
 
         protected override bool AffectFloor(int y, int x)
         {

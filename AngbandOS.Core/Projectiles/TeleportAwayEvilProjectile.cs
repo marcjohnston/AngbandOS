@@ -18,7 +18,7 @@ namespace AngbandOS.Core.Projection
 
         protected override string ImpactGraphic => "PinkBullet";
 
-        protected override string EffectAnimation => "PinkSwirl";
+        protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<PinkSwirlAnimation>();
 
         protected override bool ProjectileAngersMonster(Monster mPtr)
         {

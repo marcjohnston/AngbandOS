@@ -8,7 +8,7 @@ namespace AngbandOS.Core
     /// </summary>
     internal class SingletonRepository
     {
-        public SingletonKeyedDictionary<string, Animation> Animations;
+        public SingletonDictionary<Animation> Animations;
         public SingletonKeyedDictionary<FixedArtifactId, FixedArtifact> FixedArtifacts;
         public SingletonKeyedDictionary<string, FloorTileType> FloorTileTypes;
         public SingletonDictionary<InGameCommand> InGameCommands;
@@ -116,7 +116,7 @@ namespace AngbandOS.Core
             WandFlavours = new SingletonDictionary<WandFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<WandFlavour>(saveGame)));
             ChestTrapConfigurations = new SingletonDictionary<ChestTrapConfiguration>(saveGame, LoadTypesFromAssembly<ChestTrapConfiguration>(saveGame));
             ProjectileGraphics = new SingletonKeyedDictionary<string, ProjectileGraphic>(saveGame, LoadTypesFromAssembly<ProjectileGraphic>(saveGame));
-            Animations = new SingletonKeyedDictionary<string, Animation>(saveGame, LoadTypesFromAssembly<Animation>(saveGame));
+            Animations = new SingletonDictionary<Animation>(saveGame, LoadTypesFromAssembly<Animation>(saveGame));
             Vaults = new SingletonDictionary<Vault>(saveGame, LoadTypesFromAssembly<Vault>(saveGame));
             FloorTileTypes = new SingletonKeyedDictionary<string, FloorTileType>(saveGame, LoadTypesFromAssembly<FloorTileType>(saveGame));
             RareItemTypes = new SingletonKeyedDictionary<RareItemTypeEnum, RareItem>(saveGame, LoadTypesFromAssembly<RareItem>(saveGame));

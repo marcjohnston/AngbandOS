@@ -16,7 +16,7 @@ namespace AngbandOS.Core.Projection
 
         protected override string BoltGraphic => "BrightRedSplat";
 
-        protected override string EffectAnimation => "RedWhiteFlash";
+        protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<RedWhiteFlashAnimation>();
 
         protected override bool AffectItem(int who, int y, int x)
         {
