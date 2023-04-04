@@ -1806,12 +1806,6 @@ namespace AngbandOS.Core.Items
             return IdentCursed;
         }
 
-        [Obsolete("Use FixedArtifact == null to help with null reference warnings")]
-        public bool IsFixedArtifact()
-        {
-            return FixedArtifactIndex != 0;
-        }
-
         public bool IsFlavourAware()
         {
             if (BaseItemCategory == null)
