@@ -14,7 +14,7 @@ namespace AngbandOS.Core.Projection
         {
         }
 
-        protected override string BoltGraphic => "WhiteBullet";
+        protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<WhiteBulletProjectileGraphic>();
 
         protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<WhiteSparkleAnimation>();
 

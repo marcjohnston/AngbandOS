@@ -6,7 +6,7 @@
         {
         }
 
-        protected override string BoltGraphic => "CopperBolt";
+        protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<CopperBoltProjectileGraphic>();
 
         protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<CopperContractAnimation>();
 

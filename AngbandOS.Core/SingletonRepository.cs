@@ -15,7 +15,7 @@ namespace AngbandOS.Core
         public SingletonDictionary<BaseInventorySlot> InventorySlots;
         public SingletonDictionary<ItemClass> ItemCategories;
         public SingletonDictionary<MonsterRace> MonsterRaces;
-        public SingletonKeyedDictionary<string, ProjectileGraphic> ProjectileGraphics;
+        public SingletonDictionary<ProjectileGraphic> ProjectileGraphics;
         public SingletonDictionary<Race> Races;
         public SingletonKeyedDictionary<RareItemTypeEnum, RareItem> RareItemTypes;
         public SingletonDictionary<BaseStoreCommand> StoreCommands;
@@ -115,7 +115,7 @@ namespace AngbandOS.Core
             StaffFlavours = new SingletonDictionary<StaffFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<StaffFlavour>(saveGame)));
             WandFlavours = new SingletonDictionary<WandFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<WandFlavour>(saveGame)));
             ChestTrapConfigurations = new SingletonDictionary<ChestTrapConfiguration>(saveGame, LoadTypesFromAssembly<ChestTrapConfiguration>(saveGame));
-            ProjectileGraphics = new SingletonKeyedDictionary<string, ProjectileGraphic>(saveGame, LoadTypesFromAssembly<ProjectileGraphic>(saveGame));
+            ProjectileGraphics = new SingletonDictionary<ProjectileGraphic>(saveGame, LoadTypesFromAssembly<ProjectileGraphic>(saveGame));
             Animations = new SingletonDictionary<Animation>(saveGame, LoadTypesFromAssembly<Animation>(saveGame));
             Vaults = new SingletonDictionary<Vault>(saveGame, LoadTypesFromAssembly<Vault>(saveGame));
             FloorTileTypes = new SingletonKeyedDictionary<string, FloorTileType>(saveGame, LoadTypesFromAssembly<FloorTileType>(saveGame));

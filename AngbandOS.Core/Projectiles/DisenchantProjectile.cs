@@ -14,9 +14,9 @@ namespace AngbandOS.Core.Projection
         {
         }
 
-        protected override string BoltGraphic => "ChartreuseSplat";
+        protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<ChartreuseSplatProjectileGraphic>();
 
-        protected override string ImpactGraphic => "ChartreuseSplat";
+        protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<ChartreuseSplatProjectileGraphic>();
 
         protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
         {

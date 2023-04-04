@@ -20,11 +20,11 @@ namespace AngbandOS.Core.Projection
             SaveGame = saveGame;
         }
 
-        protected abstract string BoltGraphic { get; }
+        protected virtual ProjectileGraphic? BoltProjectileGraphic { get; }
 
         protected virtual Animation? EffectAnimation => null;
 
-        protected virtual string ImpactGraphic { get; } = "";
+        protected virtual ProjectileGraphic? ImpactProjectileGraphic => null;
 
         /// <summary>
         /// Returns true, if the projectile actally hits and affects a monster.
@@ -52,8 +52,6 @@ namespace AngbandOS.Core.Projection
             int[] gy = new int[256];
             int[] gm = new int[32];
             int gmRad = rad;
-            ProjectileGraphic projectileEntity = string.IsNullOrEmpty(BoltGraphic) ? null : SaveGame.SingletonRepository.ProjectileGraphics[BoltGraphic];
-            ProjectileGraphic impactEntity = string.IsNullOrEmpty(ImpactGraphic) ? null : SaveGame.SingletonRepository.ProjectileGraphics[ImpactGraphic];
             if ((flg & ProjectionFlag.ProjectJump) != 0)
             {
                 x1 = x;
@@ -106,9 +104,9 @@ namespace AngbandOS.Core.Projection
                     (flg & ProjectionFlag.ProjectBeam) != 0 && SaveGame.Level.PanelContains(y, x) &&
                     SaveGame.Level.PlayerHasLosBold(y, x))
                 {
-                    if (impactEntity != null)
+                    if (ImpactProjectileGraphic != null)
                     {
-                        SaveGame.Level.PrintCharacterAtMapLocation(impactEntity.Character, impactEntity.Colour, y, x);
+                        SaveGame.Level.PrintCharacterAtMapLocation(ImpactProjectileGraphic.Character, ImpactProjectileGraphic.Colour, y, x);
                     }
                 }
                 cPtr = SaveGame.Level.Grid[y][x];
@@ -138,14 +136,14 @@ namespace AngbandOS.Core.Projection
                 {
                     if (SaveGame.Level.PlayerHasLosBold(y9, x9) && SaveGame.Level.PanelContains(y9, x9))
                     {
-                        if (projectileEntity != null)
+                        if (BoltProjectileGraphic != null)
                         {
-                            char directionalCharacter = projectileEntity.Character;
+                            char directionalCharacter = BoltProjectileGraphic.Character;
                             if (directionalCharacter == '|')
                             {
                                 directionalCharacter = BoltChar(y, x, y9, x9);
                             }
-                            SaveGame.Level.PrintCharacterAtMapLocation(directionalCharacter, projectileEntity.Colour, y9, x9);
+                            SaveGame.Level.PrintCharacterAtMapLocation(directionalCharacter, BoltProjectileGraphic.Colour, y9, x9);
                             SaveGame.Level.MoveCursorRelative(y9, x9);
                             SaveGame.UpdateScreen();
                             visual = true;
@@ -284,14 +282,14 @@ namespace AngbandOS.Core.Projection
                         x = gx[i];
                         if (SaveGame.Level.PlayerHasLosBold(y, x) && SaveGame.Level.PanelContains(y, x))
                         {
-                            if (impactEntity != null)
+                            if (ImpactProjectileGraphic != null)
                             {
                                 drawn = true;
-                                SaveGame.Level.PrintCharacterAtMapLocation(impactEntity.Character, impactEntity.Colour, y, x);
+                                SaveGame.Level.PrintCharacterAtMapLocation(ImpactProjectileGraphic.Character, ImpactProjectileGraphic.Colour, y, x);
                             }
                         }
                     }
-                    if (impactEntity != null)
+                    if (ImpactProjectileGraphic != null)
                     {
                         SaveGame.Level.MoveCursorRelative(y2, x2);
                         SaveGame.UpdateScreen();
