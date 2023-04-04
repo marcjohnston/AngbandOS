@@ -223,6 +223,7 @@ namespace AngbandOS.Core.Items
             }
         }
 
+        [Obsolete("Use FixedArtifact")]
         public FixedArtifactId FixedArtifactIndex
         {
             get

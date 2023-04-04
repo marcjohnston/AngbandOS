@@ -9,7 +9,9 @@ namespace AngbandOS.Core
     internal class SingletonRepository
     {
         public SingletonDictionary<Animation> Animations;
+        [Obsolete("Needs to be non-keyed")]
         public SingletonKeyedDictionary<FixedArtifactId, FixedArtifact> FixedArtifacts;
+        [Obsolete("Needs to be non-keyed")]
         public SingletonKeyedDictionary<string, FloorTileType> FloorTileTypes;
         public SingletonDictionary<InGameCommand> InGameCommands;
         public SingletonDictionary<BaseInventorySlot> InventorySlots;
@@ -17,6 +19,7 @@ namespace AngbandOS.Core
         public SingletonDictionary<MonsterRace> MonsterRaces;
         public SingletonDictionary<ProjectileGraphic> ProjectileGraphics;
         public SingletonDictionary<Race> Races;
+        [Obsolete("Needs to be non-keyed")]
         public SingletonKeyedDictionary<RareItemTypeEnum, RareItem> RareItemTypes;
         public SingletonDictionary<BaseStoreCommand> StoreCommands;
         public SingletonDictionary<Vault> Vaults;
