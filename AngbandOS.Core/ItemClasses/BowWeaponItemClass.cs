@@ -4,7 +4,6 @@
     internal abstract class BowWeaponItemClass : WeaponItemClass // TODO: Should be renamed to RangedWeaponItemClass
     {
         public BowWeaponItemClass(SaveGame saveGame) : base(saveGame) { }
-        public override int WieldSlot => InventorySlot.RangedWeapon;
         public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<RangedWeaponInventorySlot>();
         /// <summary>
         /// Returns a damage multiplier when the missile weapon is used.

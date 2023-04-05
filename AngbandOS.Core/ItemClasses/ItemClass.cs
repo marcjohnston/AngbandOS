@@ -42,11 +42,6 @@
         public virtual void PackProcessWorld(SaveGame saveGame, Item item) { }
 
         /// <summary>
-        /// Returns the inventory slot where the item is wielded.  Returns the pack, by default.
-        /// </summary>
-        public virtual int WieldSlot => InventorySlot.Pack;
-
-        /// <summary>
         /// Returns the intensity of light that the object emits.  By default, a value of 1 is returned, if the item has a 
         /// lightsource characteristic.
         /// </summary>

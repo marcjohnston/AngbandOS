@@ -4,7 +4,6 @@
     internal abstract class CrownItemClass : ArmourItemClass
     {
         public CrownItemClass(SaveGame saveGame) : base(saveGame) { }
-        public override int WieldSlot => InventorySlot.Head;
         public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<HeadInventorySlot>();
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Crown;
         public override bool HatesAcid => true;

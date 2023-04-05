@@ -4,17 +4,6 @@
     internal abstract class RingItemClass : JewelleryItemClass
     {
         public RingItemClass(SaveGame saveGame) : base(saveGame) { }
-        public override int WieldSlot
-        {
-            get
-            {
-                if (SaveGame.GetInventoryItem(InventorySlot.RightHand) == null)
-                {
-                    return InventorySlot.RightHand;
-                }
-                return InventorySlot.LeftHand;
-            }
-        }
         public override BaseInventorySlot BaseWieldSlot
         {
             get

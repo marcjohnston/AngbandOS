@@ -4,7 +4,6 @@
     internal abstract class CloakItemClass : ArmourItemClass
     {
         public CloakItemClass(SaveGame saveGame) : base(saveGame) { }
-        public override int WieldSlot => InventorySlot.Cloak;
         public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<CloakInventorySlot>();
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Cloak;
         public override bool HatesFire => true;

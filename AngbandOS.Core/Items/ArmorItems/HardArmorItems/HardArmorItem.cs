@@ -3,6 +3,7 @@ namespace AngbandOS.Core.Items
 [Serializable]
     internal abstract class HardArmorItem : ArmourItem
     {
+        public override int WieldSlot => InventorySlot.Body;
         public HardArmorItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
     }
 }

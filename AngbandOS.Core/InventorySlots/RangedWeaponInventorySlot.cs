@@ -40,8 +40,7 @@ namespace AngbandOS.Core.InventorySlots
             string p = "shooting missiles with";
             if (Count > 0)
             {
-                int i = InventorySlots[index];
-                Item? oPtr = SaveGame.GetInventoryItem(i);
+                Item? oPtr = SaveGame.GetInventoryItem(index);
                 if (oPtr != null && SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
                 {
                     p = "just holding";

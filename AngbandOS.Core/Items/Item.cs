@@ -1,8 +1,13 @@
 namespace AngbandOS.Core.Items
 {
     [Serializable]
-    internal class Item : IComparable<Item> // TODO: Should be abstract
+    internal abstract class Item : IComparable<Item> // TODO: Should be abstract
     {
+        /// <summary>
+        /// Returns the inventory slot where the item is wielded.  Returns the pack, by default.
+        /// </summary>
+        public virtual int WieldSlot => InventorySlot.Pack;
+
         /// <summary>
         /// Returns true, if the item has already been identify sensed.  This property used to be a flag in the IdentifyFlags.
         /// </summary>

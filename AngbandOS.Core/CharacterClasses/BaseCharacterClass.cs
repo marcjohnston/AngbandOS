@@ -157,7 +157,7 @@
                 item.IdentStoreb = true;
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
-                int slot = item.BaseItemCategory.WieldSlot;
+                int slot = item.WieldSlot;
                 if (slot == -1)
                 {
                     SaveGame.Player.InvenCarry(item);

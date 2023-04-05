@@ -4,7 +4,6 @@
     internal abstract class DiggingItemClass : WeaponItemClass
     {
         public DiggingItemClass(SaveGame saveGame) : base(saveGame) { }
-        public override int WieldSlot => InventorySlot.Digger;
         public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<DiggerInventorySlot>();
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Digging;
         public override bool IdentityCanBeSensed => true;

@@ -4,7 +4,6 @@
     internal abstract class GlovesItemClass : ArmourItemClass
     {
         public GlovesItemClass(SaveGame saveGame) : base(saveGame) { }
-        public override int WieldSlot => InventorySlot.Hands;
         public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<HandsInventorySlot>();
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Gloves;
         public override bool HatesFire => true;

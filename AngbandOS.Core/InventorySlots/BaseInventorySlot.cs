@@ -60,7 +60,7 @@ namespace AngbandOS.Core.InventorySlots
 
         public virtual void AddItem(Item oPtr) // TODO: this doesn't support the multi-item slots
         {
-            int slot = oPtr.BaseItemCategory.WieldSlot;
+            int slot = oPtr.WieldSlot;
             SaveGame.SetInventoryItem(slot, oPtr);
         }
 

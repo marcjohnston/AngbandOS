@@ -11426,7 +11426,7 @@ namespace AngbandOS.Core
             }
 
             // Find the inventory slot where the item is to be wielded.
-            int slot = item.BaseItemCategory.WieldSlot;
+            int slot = item.WieldSlot;
 
             // Can't replace a cursed item
             Item? wieldingItem = GetInventoryItem(slot);
