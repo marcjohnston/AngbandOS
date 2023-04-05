@@ -27,7 +27,6 @@ internal class CloakDarknessFixedArtifact : FixedArtifact, IActivatible
     public override int Cost => 13000;
     public override int Dd => 0;
     public override int Ds => 0;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.CloakDarkness;
     public override string FriendlyName => "'Darkness'";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

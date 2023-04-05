@@ -37,7 +37,6 @@ internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact, IActiv
     public override int Cost => 150000;
     public override int Dd => 1;
     public override int Ds => 1;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.ShiningTrapezohedron;
     public override string FriendlyName => "'Shining Trapezodedron'";
     public override bool HasOwnType => true;
     public override bool HoldLife => true;

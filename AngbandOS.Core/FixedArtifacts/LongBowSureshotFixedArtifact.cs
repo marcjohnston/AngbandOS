@@ -19,7 +19,6 @@ internal class LongBowSureshotFixedArtifact : FixedArtifact
     public override int Dd => 0;
     public override bool Dex => true;
     public override int Ds => 0;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.BowSureshot;
     public override string FriendlyName => "'Sureshot'";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

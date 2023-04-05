@@ -23,7 +23,6 @@ internal class LargeMetalShieldOfStabilityFixedArtifact : FixedArtifact
     public override int Cost => 160000;
     public override int Dd => 1;
     public override int Ds => 3;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.ShieldOfStability;
     public override string FriendlyName => "of Stability";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

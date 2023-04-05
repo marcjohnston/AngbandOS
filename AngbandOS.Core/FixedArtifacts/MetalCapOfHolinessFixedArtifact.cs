@@ -19,7 +19,6 @@ internal class MetalCapOfHolinessFixedArtifact : FixedArtifact
     public override int Cost => 22000;
     public override int Dd => 1;
     public override int Ds => 1;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.CapOfHoliness;
     public override string FriendlyName => "of Holiness";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

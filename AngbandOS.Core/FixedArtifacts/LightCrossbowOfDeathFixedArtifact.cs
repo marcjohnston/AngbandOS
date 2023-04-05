@@ -40,7 +40,6 @@ internal class LightCrossbowOfDeathFixedArtifact : FixedArtifact, IActivatible
     public override int Cost => 50000;
     public override int Dd => 0;
     public override int Ds => 0;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.CrossbowOfDeath;
     public override string FriendlyName => "of Death";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

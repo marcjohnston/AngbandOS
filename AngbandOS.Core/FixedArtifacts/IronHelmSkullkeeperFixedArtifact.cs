@@ -28,7 +28,6 @@ internal class IronHelmSkullkeeperFixedArtifact : FixedArtifact, IActivatible
     public override int Cost => 100000;
     public override int Dd => 1;
     public override int Ds => 3;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.HelmSkullkeeper;
     public override string FriendlyName => "'Skullkeeper'";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

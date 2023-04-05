@@ -39,7 +39,6 @@ internal class RingOfElementalPowerStormFixedArtifact : FixedArtifact, IActivati
     public override bool Dex => true;
     public override int Ds => 1;
     public override bool Feather => true;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.RingOfElementalPowerStorm;
     public override bool FreeAct => true;
     public override string FriendlyName => "of Elemental Power (Storm)";
     public override bool HasOwnType => true;

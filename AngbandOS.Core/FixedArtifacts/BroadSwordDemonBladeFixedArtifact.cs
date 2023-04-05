@@ -22,7 +22,6 @@ internal class BroadSwordDemonBladeFixedArtifact : FixedArtifact
     public override int Dd => 11;
     public override bool Dex => true;
     public override int Ds => 5;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.SwordDemonblade;
     public override string FriendlyName => "'Demon Blade'";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

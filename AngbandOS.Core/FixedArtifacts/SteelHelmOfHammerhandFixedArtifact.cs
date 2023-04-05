@@ -20,7 +20,6 @@ internal class SteelHelmOfHammerhandFixedArtifact : FixedArtifact
     public override int Dd => 1;
     public override bool Dex => true;
     public override int Ds => 3;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.HelmOfHammerhand;
     public override string FriendlyName => "of Hammerhand";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

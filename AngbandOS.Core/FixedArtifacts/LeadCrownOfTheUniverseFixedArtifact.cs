@@ -22,7 +22,6 @@ internal class LeadCrownOfTheUniverseFixedArtifact : FixedArtifact
     public override int Dd => 1;
     public override bool Dex => true;
     public override int Ds => 1;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.CrownOfTheUniverse;
     public override string FriendlyName => "of the Universe";
     public override bool HeavyCurse => true;
     public override bool HideType => true;

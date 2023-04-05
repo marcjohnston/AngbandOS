@@ -32,7 +32,6 @@ internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact, I
     public override int Cost => 400000;
     public override int Dd => 2;
     public override int Ds => 4;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.DragonScaleRazorback;
     public override bool FreeAct => true;
     public override string FriendlyName => "'Razorback'";
     public override bool IgnoreAcid => true;

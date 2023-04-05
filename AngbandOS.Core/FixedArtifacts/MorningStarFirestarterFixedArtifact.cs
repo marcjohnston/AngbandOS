@@ -32,7 +32,6 @@ internal class MorningStarFirestarterFixedArtifact : FixedArtifact, IActivatible
     public override int Cost => 35000;
     public override int Dd => 2;
     public override int Ds => 6;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.MorningStarFirestarter;
     public override string FriendlyName => "'Firestarter'";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

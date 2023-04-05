@@ -19,7 +19,12 @@ internal class BroadSwordLightningFixedArtifact : FixedArtifact
     public override int Cost => 95000;
     public override int Dd => 2;
     public override int Ds => 5;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.SwordLightning;
+
+    /// <summary>
+    /// Returns 3, because this sword of lighting has a 3x multipler when killing dragons.
+    /// </summary>
+    public override int KilLDragonMultiplier => 3;
+
     public override string FriendlyName => "'Lightning'";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

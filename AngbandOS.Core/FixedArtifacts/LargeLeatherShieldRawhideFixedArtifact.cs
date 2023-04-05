@@ -23,7 +23,6 @@ internal class LargeLeatherShieldRawhideFixedArtifact : FixedArtifact
     public override int Cost => 12000;
     public override int Dd => 1;
     public override int Ds => 2;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.ShieldRawhide;
     public override string FriendlyName => "'Rawhide'";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

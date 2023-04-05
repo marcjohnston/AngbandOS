@@ -35,7 +35,6 @@ internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact, IActivatibl
     public override int Cost => 150000;
     public override int Dd => 2;
     public override int Ds => 4;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.ArmourOfTheOrcs;
     public override string FriendlyName => "of the Orcs";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

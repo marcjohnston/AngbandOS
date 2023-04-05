@@ -23,7 +23,6 @@ internal class SoftLeatherArmourOfTheKoboldChiefFixedArtifact : FixedArtifact
     public override int Cost => 45000;
     public override int Dd => 0;
     public override int Ds => 0;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.ArmourOfTheKoboldChief;
     public override string FriendlyName => "of the Kobold Chief";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

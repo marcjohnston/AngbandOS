@@ -28,7 +28,6 @@ internal class DragonHelmOfPowerFixedArtifact : FixedArtifact, IActivatible
     public override int Dd => 1;
     public override bool Dex => true;
     public override int Ds => 3;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.DragonHelmOfPower;
     public override string FriendlyName => "of Power";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

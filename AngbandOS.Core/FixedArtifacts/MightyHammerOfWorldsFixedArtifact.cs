@@ -19,7 +19,6 @@ internal class MightyHammerOfWorldsFixedArtifact : FixedArtifact
     public override int Cost => 500000;
     public override int Dd => 9;
     public override int Ds => 9;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.HammerOfWorlds;
     public override string FriendlyName => "of Worlds";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

@@ -24,7 +24,6 @@ internal class MetalBrigandineArmourOfSerpentsFixedArtifact : FixedArtifact
     public override int Dd => 1;
     public override bool Dex => true;
     public override int Ds => 4;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.ArmourOfSerpents;
     public override string FriendlyName => "of Serpents";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

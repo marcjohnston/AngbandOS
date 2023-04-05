@@ -33,7 +33,6 @@ internal class ScimitarSoulswordFixedArtifact : FixedArtifact
     public override int Cost => 111111;
     public override int Dd => 2;
     public override int Ds => 5;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.ScimitarSoulsword;
     public override string FriendlyName => "'Soulsword'";
     public override bool HoldLife => true;
     public override bool IgnoreAcid => true;

@@ -38,7 +38,6 @@ internal class TridentOfTheGnorriFixedArtifact : FixedArtifact, IActivatible
     public override int Dd => 4;
     public override bool Dex => true;
     public override int Ds => 8;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.TridentOfTheGnorri;
     public override bool FreeAct => true;
     public override string FriendlyName => "of the Gnorri";
     public override bool HideType => true;

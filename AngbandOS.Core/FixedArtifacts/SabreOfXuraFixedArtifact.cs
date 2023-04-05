@@ -22,7 +22,6 @@ internal class SabreOfXuraFixedArtifact : FixedArtifact
     public override int Dd => 2;
     public override bool Dex => true;
     public override int Ds => 7;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.SwordOfXura;
     public override bool FreeAct => true;
     public override string FriendlyName => "of Xura";
     public override bool HideType => true;

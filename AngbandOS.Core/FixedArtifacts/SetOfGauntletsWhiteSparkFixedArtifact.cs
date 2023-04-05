@@ -31,7 +31,6 @@ internal class SetOfGauntletsWhiteSparkFixedArtifact : FixedArtifact, IActivatib
     public override int Cost => 11000;
     public override int Dd => 1;
     public override int Ds => 1;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.GauntletsWhiteSpark;
     public override string FriendlyName => "'White Spark'";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

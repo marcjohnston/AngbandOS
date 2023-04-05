@@ -34,7 +34,6 @@ internal class PairOfHardLeatherBootsOfIthaquaFixedArtifact : FixedArtifact, IAc
     public override int Cost => 300000;
     public override int Dd => 1;
     public override int Ds => 1;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.BootsOfIthaqua;
     public override string FriendlyName => "of Ithaqua";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

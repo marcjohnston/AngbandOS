@@ -32,7 +32,6 @@ internal class BeakedAxeOfTheodenFixedArtifact : FixedArtifact, IActivatible
     public override int Cost => 40000;
     public override int Dd => 2;
     public override int Ds => 6;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.AxeOfTheoden;
     public override string FriendlyName => "of Theoden";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

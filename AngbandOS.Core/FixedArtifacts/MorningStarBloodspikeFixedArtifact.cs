@@ -18,7 +18,6 @@ internal class MorningStarBloodspikeFixedArtifact : FixedArtifact
     public override int Cost => 30000;
     public override int Dd => 2;
     public override int Ds => 6;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.MorningStarBloodspike;
     public override string FriendlyName => "'Bloodspike'";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

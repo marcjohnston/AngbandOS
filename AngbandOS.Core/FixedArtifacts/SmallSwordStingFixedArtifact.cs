@@ -26,7 +26,6 @@ internal class SmallSwordStingFixedArtifact : FixedArtifact
     public override int Dd => 1;
     public override bool Dex => true;
     public override int Ds => 6;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.SmallSwordSting;
     public override bool FreeAct => true;
     public override string FriendlyName => "'Sting'";
     public override bool IgnoreAcid => true;

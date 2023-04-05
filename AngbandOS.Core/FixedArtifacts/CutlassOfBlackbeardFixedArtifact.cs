@@ -20,7 +20,6 @@ internal class CutlassOfBlackbeardFixedArtifact : FixedArtifact
     public override bool Dex => true;
     public override int Ds => 7;
     public override bool Feather => true;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.CutlassOfBlackbeard;
     public override string FriendlyName => "of Blackbeard";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

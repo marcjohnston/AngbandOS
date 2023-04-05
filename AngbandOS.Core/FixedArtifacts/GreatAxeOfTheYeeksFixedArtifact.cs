@@ -19,7 +19,6 @@ internal class GreatAxeOfTheYeeksFixedArtifact : FixedArtifact
     public override int Cost => 150000;
     public override int Dd => 4;
     public override int Ds => 4;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.AxeOfTheYeeks;
     public override bool FreeAct => true;
     public override string FriendlyName => "of the Yeeks";
     public override bool HideType => true;

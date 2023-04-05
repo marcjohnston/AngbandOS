@@ -26,7 +26,6 @@ internal class IronCrownOfMiseryFixedArtifact : FixedArtifact
     public override int Dd => 1;
     public override bool Dex => true;
     public override int Ds => 1;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.CrownOfMisery;
     public override bool FreeAct => true;
     public override string FriendlyName => "of Misery";
     public override bool HideType => true;

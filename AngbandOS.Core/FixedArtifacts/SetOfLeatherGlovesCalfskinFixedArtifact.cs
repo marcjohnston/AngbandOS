@@ -19,7 +19,6 @@ internal class SetOfLeatherGlovesCalfskinFixedArtifact : FixedArtifact
     public override int Cost => 36000;
     public override int Dd => 0;
     public override int Ds => 0;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.GlovesCalfskin;
     public override bool FreeAct => true;
     public override string FriendlyName => "'Calfskin'";
     public override bool HideType => true;

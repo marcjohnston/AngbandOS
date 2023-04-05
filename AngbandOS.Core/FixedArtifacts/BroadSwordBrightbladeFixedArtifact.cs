@@ -32,7 +32,6 @@ internal class BroadSwordBrightbladeFixedArtifact : FixedArtifact
     public override int Cost => 40000;
     public override int Dd => 2;
     public override int Ds => 5;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.SwordBrightblade;
     public override string FriendlyName => "'Brightblade'";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

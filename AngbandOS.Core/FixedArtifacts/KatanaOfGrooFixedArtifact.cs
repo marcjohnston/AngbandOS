@@ -20,7 +20,6 @@ internal class KatanaOfGrooFixedArtifact : FixedArtifact
     public override int Dd => 8;
     public override bool Dex => true;
     public override int Ds => 4;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.KatanaOfGroo;
     public override string FriendlyName => "of Groo";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

@@ -46,7 +46,6 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IActivatible
     public override bool DrainExp => true;
     public override bool DreadCurse => true;
     public override int Ds => 1;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.RingOfSet;
     public override string FriendlyName => "of Set";
     public override bool HasOwnType => true;
     public override bool HeavyCurse => true;

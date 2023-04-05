@@ -31,7 +31,6 @@ internal class TwoHandedSwordDragonslayerFixedArtifact : FixedArtifact
     public override int Cost => 100000;
     public override int Dd => 3;
     public override int Ds => 6;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.SwordDragonSlayer;
     public override bool FreeAct => true;
     public override string FriendlyName => "'Dragonslayer'";
     public override bool HideType => true;

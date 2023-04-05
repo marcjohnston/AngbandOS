@@ -32,7 +32,6 @@ internal class LongBowOfSerpentsFixedArtifact : FixedArtifact
     public override int Dd => 0;
     public override bool Dex => true;
     public override int Ds => 0;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.BowOfSerpents;
     public override bool FreeAct => true;
     public override string FriendlyName => "of Serpents";
     public override bool HideType => true;

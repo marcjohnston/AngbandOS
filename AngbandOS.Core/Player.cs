@@ -472,7 +472,7 @@ namespace AngbandOS.Core
                 SaveGame.MsgPrint($"Your {oName} resist{s} cursing!");
                 return;
             }
-            if (Program.Rng.DieRoll(100) <= heavyChance && (oPtr.FixedArtifactIndex != 0 || oPtr.RareItemTypeIndex != 0 || !string.IsNullOrEmpty(oPtr.RandartName)))
+            if (Program.Rng.DieRoll(100) <= heavyChance && (oPtr.FixedArtifact != null || oPtr.RareItemTypeIndex != 0 || !string.IsNullOrEmpty(oPtr.RandartName)))
             {
                 if (!oPtr.Characteristics.HeavyCurse)
                 {

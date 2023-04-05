@@ -19,7 +19,6 @@ internal class LanceSkewerFixedArtifact : FixedArtifact
     public override int Dd => 3;
     public override bool Dex => true;
     public override int Ds => 8;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.LanceSkewer;
     public override string FriendlyName => "'Skewer'";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

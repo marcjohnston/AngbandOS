@@ -30,7 +30,6 @@ internal class QuarterstaffEririlFixedArtifact : FixedArtifact, IActivatible
     public override int Cost => 20000;
     public override int Dd => 1;
     public override int Ds => 9;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.QuarterstaffEriril;
     public override string FriendlyName => "'Eriril'";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

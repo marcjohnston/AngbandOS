@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics.Metrics;
+using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace AngbandOS.Core
@@ -3767,7 +3768,7 @@ namespace AngbandOS.Core
             string your = oPtr.IsInInventory ? "Your" : "The";
             string s = oPtr.Count > 1 ? "" : "s";
             MsgPrint($"{your} {oName} radiate{s} a blinding light!");
-            if (oPtr.FixedArtifactIndex != 0 || string.IsNullOrEmpty(oPtr.RandartName) == false)
+            if (oPtr.FixedArtifact != null || string.IsNullOrEmpty(oPtr.RandartName) == false)
             {
                 string are = oPtr.Count > 1 ? "are" : "is";
                 s = oPtr.Count > 1 ? "artifacts" : "an artifact";
@@ -3841,7 +3842,7 @@ namespace AngbandOS.Core
                 MsgPrint($"{your} {oName} {s} blessed already.");
                 return true;
             }
-            if (!(string.IsNullOrEmpty(oPtr.RandartName) == false || oPtr.FixedArtifactIndex != 0) || Program.Rng.DieRoll(3) == 1)
+            if (!(string.IsNullOrEmpty(oPtr.RandartName) == false || oPtr.FixedArtifact != null) || Program.Rng.DieRoll(3) == 1)
             {
                 string s = oPtr.Count > 1 ? "" : "s";
                 MsgPrint($"{your} {oName} shine{s}!");
@@ -8596,17 +8597,22 @@ namespace AngbandOS.Core
                         }
                         // Check if we did a critical
                         totalDamage = PlayerCriticalMelee(meleeItem.Weight, meleeItem.BonusToHit, totalDamage);
-                        // Vorpal weapons have a chance of a deep cut
-                        bool vorpalCut = meleeItem.Characteristics.Vorpal && Program.Rng.DieRoll(meleeItem.FixedArtifactIndex == FixedArtifactId.SwordVorpalBlade ? 3 : 6) == 1;
+
+                        int extraDamage1InChance = meleeItem.FixedArtifact == null ? 2 : meleeItem.FixedArtifact.VorpalExtraDamage1InChance;
+
+                        // Vorpal weapons have a chance of a deep cut.
+                        bool vorpalCut = meleeItem.Characteristics.Vorpal && Program.Rng.DieRoll(extraDamage1InChance) == 1;
+
                         // If we did a vorpal cut, do extra damage
                         if (vorpalCut)
                         {
                             int stepK = totalDamage;
-                            MsgPrint(meleeItem.FixedArtifactIndex == FixedArtifactId.SwordVorpalBlade ? "Your Vorpal Blade goes snicker-snack!" : $"Your weapon cuts deep into {monsterName}!");
+                            string message = meleeItem.FixedArtifact == null || !meleeItem.FixedArtifact.IsVorpalBlade ? $"Your weapon cuts deep into {monsterName}!" : "Your Vorpal Blade goes snicker-snack!";
+                            MsgPrint(message);
                             do
                             {
                                 totalDamage += stepK;
-                            } while (Program.Rng.DieRoll(meleeItem.FixedArtifactIndex == FixedArtifactId.SwordVorpalBlade ? 2 : 4) == 1);
+                            } while (Program.Rng.DieRoll(meleeItem.FixedArtifact == null ? 4 : meleeItem.FixedArtifact.VorpalExtraAttacks1InChance) == 1);
                         }
                         // Add bonus damage for the weapon
                         totalDamage += meleeItem.BonusDamage;
@@ -19714,7 +19720,7 @@ namespace AngbandOS.Core
             Screen.PrintLine($"kind = {oPtr.BaseItemCategory,5}  level = {oPtr.BaseItemCategory.Level,4}  ItemType = {oPtr.Category,5}  ItemSubType = {oPtr.ItemSubCategory,5}", 4, j);
             Screen.PrintLine($"number = {oPtr.Count,3}  wgt = {oPtr.Weight,6}  BaseArmourClass = {oPtr.BaseArmourClass,5}    damage = {oPtr.DamageDice}d{oPtr.DamageDiceSides}", 5, j);
             Screen.PrintLine($"TypeSpecificValue = {oPtr.TypeSpecificValue,5}  toac = {oPtr.BonusArmourClass,5}  tohit = {oPtr.BonusToHit,4}  todam = {oPtr.BonusDamage,4}", 6, j);
-            Screen.PrintLine($"FixedArtifactIndex = {oPtr.FixedArtifactIndex,4}  name2 = {oPtr.RareItemTypeIndex,4}  cost = {oPtr.Value()}", 7, j);
+            Screen.PrintLine($"FixedArtifact = {(oPtr.FixedArtifact == null ? "no" : oPtr.FixedArtifact.Name),4}  name2 = {oPtr.RareItemTypeIndex,4}  cost = {oPtr.Value()}", 7, j);
             Screen.PrintLine($"IdentSense = {oPtr.IdentSense} IdentFixed = {oPtr.IdentFixed} IdentEmpty = {oPtr.IdentEmpty}", 8, j);
             Screen.PrintLine($"IdentKnown = {oPtr.IdentKnown} IdentStoreb = {oPtr.IdentStoreb} IdentMental = {oPtr.IdentMental}", 8, j);
             Screen.PrintLine($"IdentCursed = {oPtr.IdentCursed} IdentBroken = {oPtr.IdentBroken} timeout = {oPtr.RechargeTimeLeft}", 8, j);

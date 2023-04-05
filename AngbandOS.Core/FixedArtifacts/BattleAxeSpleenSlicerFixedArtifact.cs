@@ -29,7 +29,6 @@ internal class BattleAxeSpleenSlicerFixedArtifact : FixedArtifact, IActivatible
     public override int Dd => 2;
     public override bool Dex => true;
     public override int Ds => 8;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.AxeSpleenSlicer;
     public override string FriendlyName => "'Spleen Slicer'";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

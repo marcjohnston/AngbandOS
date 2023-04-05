@@ -46,7 +46,6 @@ internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact, IActivatible
     public override int Cost => 0;
     public override int Dd => 1;
     public override int Ds => 3;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.HelmTerrorMask;
     public override bool FreeAct => true;
     public override string FriendlyName => "'Terror Mask'";
     public override bool HideType => true;

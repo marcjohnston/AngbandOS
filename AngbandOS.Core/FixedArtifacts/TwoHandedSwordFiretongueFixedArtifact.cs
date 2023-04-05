@@ -34,7 +34,6 @@ internal class TwoHandedSwordFiretongueFixedArtifact : FixedArtifact
     public override int Cost => 205000;
     public override int Dd => 4;
     public override int Ds => 6;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.SwordFiretongue;
     public override bool FreeAct => true;
     public override string FriendlyName => "'Firetongue'";
     public override bool HideType => true;

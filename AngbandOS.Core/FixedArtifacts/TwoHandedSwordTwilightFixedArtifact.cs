@@ -22,7 +22,6 @@ internal class TwoHandedSwordTwilightFixedArtifact : FixedArtifact
     public override int Dd => 4;
     public override bool DreadCurse => true;
     public override int Ds => 6;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.SwordTwilight;
     public override string FriendlyName => "'Twilight'";
     public override bool HeavyCurse => true;
     public override bool IgnoreAcid => true;

@@ -31,7 +31,6 @@ internal class ScytheOfGharneFixedArtifact : FixedArtifact, IActivatible
     public override int Dd => 5;
     public override bool Dex => true;
     public override int Ds => 3;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.ScytheOfGharne;
     public override bool FreeAct => true;
     public override string FriendlyName => "of G'harne";
     public override bool HideType => true;

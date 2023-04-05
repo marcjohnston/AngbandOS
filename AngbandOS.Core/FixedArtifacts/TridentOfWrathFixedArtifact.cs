@@ -21,7 +21,6 @@ internal class TridentOfWrathFixedArtifact : FixedArtifact
     public override int Dd => 3;
     public override bool Dex => true;
     public override int Ds => 8;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.TridentOfWrath;
     public override string FriendlyName => "of Wrath";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

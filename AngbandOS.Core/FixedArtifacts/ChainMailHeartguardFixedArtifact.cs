@@ -24,7 +24,6 @@ internal class ChainMailHeartguardFixedArtifact : FixedArtifact
     public override int Cost => 32000;
     public override int Dd => 1;
     public override int Ds => 4;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.ChainMailHeartguard;
     public override string FriendlyName => "'Heartguard'";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

@@ -42,7 +42,6 @@ internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact, IAc
     public override int Dd => 2;
     public override int Ds => 4;
     public override bool Feather => true;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.DragonScaleBladeturner;
     public override string FriendlyName => "'Bladeturner'";
     public override bool HoldLife => true;
     public override bool IgnoreAcid => true;

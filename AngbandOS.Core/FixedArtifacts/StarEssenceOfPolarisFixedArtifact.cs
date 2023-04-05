@@ -28,7 +28,6 @@ internal class StarEssenceOfPolarisFixedArtifact : FixedArtifact, IActivatible
     public override int Cost => 10000;
     public override int Dd => 1;
     public override int Ds => 1;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.StarEssenceOfPolaris;
     public override string FriendlyName => "of Polaris";
     public override bool HasOwnType => true;
     public override bool IgnoreAcid => true;

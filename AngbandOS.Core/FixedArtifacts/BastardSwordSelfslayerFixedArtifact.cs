@@ -21,7 +21,6 @@ internal class BastardSwordSelfSlayerFixedArtifact : FixedArtifact
     public override bool Cursed => true;
     public override int Dd => 5;
     public override int Ds => 4;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.SwordSelfSlayer;
     public override string FriendlyName => "'Selfslayer'";
     public override bool HeavyCurse => true;
     public override bool HideType => true;

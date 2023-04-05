@@ -18,7 +18,6 @@ internal class CloakShadeFixedArtifact : FixedArtifact
     public override int Cost => 8000;
     public override int Dd => 0;
     public override int Ds => 0;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.CloakShade;
     public override bool FreeAct => true;
     public override string FriendlyName => "'Shade'";
     public override bool IgnoreAcid => true;

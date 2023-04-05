@@ -11,6 +11,18 @@ internal class LongSwordVorpalBladeFixedArtifact : FixedArtifact
 
     public override ItemClass BaseItemCategory => _baseItemCategory;
 
+    /// <summary>
+    /// Returns a 1-in-3 chance for the long sword of vorpal cutting.
+    /// </summary>
+    public override int VorpalExtraDamage1InChance => 3;
+
+    /// <summary>
+    /// Returns a 1-in-2 chance for the long sword of vorpal to have extra attacks.
+    /// </summary>
+    public override int VorpalExtraAttacks1InChance => 2;
+
+    public override bool IsVorpalBlade => true;
+
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "The Long Sword 'Vorpal Blade'";
@@ -19,7 +31,6 @@ internal class LongSwordVorpalBladeFixedArtifact : FixedArtifact
     public override int Dd => 5;
     public override bool Dex => true;
     public override int Ds => 5;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.SwordVorpalBlade;
     public override bool FreeAct => true;
     public override string FriendlyName => "'Vorpal Blade'";
     public override bool IgnoreAcid => true;

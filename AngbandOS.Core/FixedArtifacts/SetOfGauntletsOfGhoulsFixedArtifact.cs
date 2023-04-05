@@ -32,7 +32,6 @@ internal class SetOfGauntletsOfGhoulsFixedArtifact : FixedArtifact, IActivatible
     public override int Cost => 33000;
     public override int Dd => 1;
     public override int Ds => 1;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.GauntletsOfGhouls;
     public override string FriendlyName => "of Ghouls";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

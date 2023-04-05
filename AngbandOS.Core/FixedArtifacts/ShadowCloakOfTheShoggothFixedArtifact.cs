@@ -18,7 +18,6 @@ internal class ShadowCloakOfTheShoggothFixedArtifact : FixedArtifact
     public override int Cost => 35000;
     public override int Dd => 0;
     public override int Ds => 0;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.ShadowCloakOfTheShoggoth;
     public override bool FreeAct => true;
     public override string FriendlyName => "of the Shoggoth";
     public override bool IgnoreAcid => true;

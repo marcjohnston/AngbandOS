@@ -18,7 +18,6 @@ internal class GlaiveOfPainFixedArtifact : FixedArtifact
     public override int Cost => 50000;
     public override int Dd => 9;
     public override int Ds => 6;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.GlaiveOfPain;
     public override string FriendlyName => "of Pain";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

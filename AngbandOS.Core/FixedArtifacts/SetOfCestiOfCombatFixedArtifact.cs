@@ -37,7 +37,6 @@ internal class SetOfCestiOfCombatFixedArtifact : FixedArtifact, IActivatible
     public override int Dd => 1;
     public override bool Dex => true;
     public override int Ds => 1;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.CestiOfCombat;
     public override bool FreeAct => true;
     public override string FriendlyName => "of Combat";
     public override bool HideType => true;

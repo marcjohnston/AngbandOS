@@ -32,7 +32,6 @@ internal class FlailTotilaFixedArtifact : FixedArtifact, IActivatible
     public override int Cost => 55000;
     public override int Dd => 3;
     public override int Ds => 6;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.FlailTotila;
     public override string FriendlyName => "'Totila'";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

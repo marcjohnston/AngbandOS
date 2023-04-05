@@ -18,7 +18,6 @@ internal class LochaberAxeOfTheDwarvesFixedArtifact : FixedArtifact
     public override int Cost => 80000;
     public override int Dd => 3;
     public override int Ds => 8;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.AxeOfTheDwarves;
     public override string FriendlyName => "of the Dwarves";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

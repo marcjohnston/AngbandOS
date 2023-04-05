@@ -30,7 +30,6 @@ internal class AdamantitePlateMailSoulkeeperFixedArtifact : FixedArtifact, IActi
     public override int Cost => 300000;
     public override int Dd => 2;
     public override int Ds => 4;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.PlateMailSoulkeeper;
     public override string FriendlyName => "'Soulkeeper'";
     public override bool HoldLife => true;
     public override bool IgnoreAcid => true;

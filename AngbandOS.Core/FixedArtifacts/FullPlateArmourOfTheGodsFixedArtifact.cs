@@ -19,7 +19,6 @@ internal class FullPlateArmourOfTheGodsFixedArtifact : FixedArtifact
     public override int Cost => 50000;
     public override int Dd => 2;
     public override int Ds => 4;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.ArmourOfTheGods;
     public override string FriendlyName => "of the Gods";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

@@ -20,7 +20,6 @@ internal class DaggerOfAssassinFixedArtifact : FixedArtifact
     public override int Dd => 2;
     public override bool Dex => true;
     public override int Ds => 4;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.DaggerOfTheAssassin;
     public override bool FreeAct => true;
     public override string FriendlyName => "of Assassin";
     public override bool HideType => true;

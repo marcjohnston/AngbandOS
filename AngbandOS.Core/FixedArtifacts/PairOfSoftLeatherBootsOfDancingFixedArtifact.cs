@@ -30,7 +30,6 @@ internal class PairOfSoftLeatherBootsOfDancingFixedArtifact : FixedArtifact, IAc
     public override int Dd => 1;
     public override bool Dex => true;
     public override int Ds => 1;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.BootsOfDancing;
     public override bool FreeAct => true;
     public override string FriendlyName => "of Dancing";
     public override bool HideType => true;

@@ -39,7 +39,6 @@ internal class DaggerFaithFixedArtifact : FixedArtifact, IActivatible
     public override int Cost => 12000;
     public override int Dd => 1;
     public override int Ds => 4;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.DaggerOfFaith;
     public override string FriendlyName => "'Faith'";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

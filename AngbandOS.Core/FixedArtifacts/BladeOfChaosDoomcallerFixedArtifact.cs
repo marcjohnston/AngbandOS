@@ -23,7 +23,6 @@ internal class BladeOfChaosDoomcallerFixedArtifact : FixedArtifact
     public override int Cost => 250000;
     public override int Dd => 6;
     public override int Ds => 5;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.BladeDoomcaller;
     public override bool FreeAct => true;
     public override string FriendlyName => "'Doomcaller'";
     public override bool IgnoreAcid => true;

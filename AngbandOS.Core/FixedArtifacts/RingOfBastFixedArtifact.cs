@@ -35,7 +35,6 @@ internal class RingOfBastFixedArtifact : FixedArtifact, IActivatible
     public override int Dd => 0;
     public override bool Dex => true;
     public override int Ds => 0;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.RingOfBast;
     public override string FriendlyName => "of Bast";
     public override bool HasOwnType => true;
     public override bool HideType => true;

@@ -37,7 +37,6 @@ internal class DaggerCharityFixedArtifact : FixedArtifact, IActivatible
     public override int Cost => 13000;
     public override int Dd => 1;
     public override int Ds => 4;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.DaggerOfCharity;
     public override string FriendlyName => "'Charity'";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

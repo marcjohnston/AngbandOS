@@ -20,7 +20,6 @@ internal class TwoHandedFlailThunderfistFixedArtifact : FixedArtifact
     public override int Cost => 160000;
     public override int Dd => 3;
     public override int Ds => 6;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.FlailThunderfist;
     public override string FriendlyName => "'Thunderfist'";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

@@ -21,7 +21,6 @@ internal class MaceOfDisruptionDeathwreakerFixedArtifact : FixedArtifact
     public override int Cost => 444444;
     public override int Dd => 7;
     public override int Ds => 8;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.MaceDeathwreaker;
     public override string FriendlyName => "'Deathwreaker'";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

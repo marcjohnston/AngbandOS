@@ -223,14 +223,6 @@ namespace AngbandOS.Core.Items
             }
         }
 
-        [Obsolete("Use FixedArtifact")]
-        public FixedArtifactId FixedArtifactIndex
-        {
-            get
-            {
-                return FixedArtifact == null ? FixedArtifactId.None : FixedArtifact.FixedArtifactID;
-            }
-        }
         /// <summary>
         /// Returns the item type that this item is based on.  Returns null, if the item is (nothing), as in the inventory.
         /// </summary>
@@ -588,9 +580,9 @@ namespace AngbandOS.Core.Items
                     {
                         mult = 5;
                     }
-                    if (FixedArtifactIndex == FixedArtifactId.SwordLightning)
+                    if (FixedArtifact != null)
                     {
-                        mult *= 3;
+                        mult *= FixedArtifact.KilLDragonMultiplier;
                     }
                 }
                 if (Characteristics.BrandAcid)
@@ -1990,7 +1982,7 @@ namespace AngbandOS.Core.Items
             {
                 return null;
             }
-            if (FixedArtifactIndex == 0 && RareItemTypeIndex == 0 && BonusPowerType == 0 && BonusPowerSubType != null)
+            if (FixedArtifact == null && RareItemTypeIndex == 0 && BonusPowerType == 0 && BonusPowerSubType != null)
             {
                 return BonusPowerSubType.Description;
             }

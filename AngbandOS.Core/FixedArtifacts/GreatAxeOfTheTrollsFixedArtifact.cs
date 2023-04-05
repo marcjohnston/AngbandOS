@@ -32,7 +32,6 @@ internal class GreatAxeOfTheTrollsFixedArtifact : FixedArtifact, IActivatible
     public override int Dd => 4;
     public override bool Dex => true;
     public override int Ds => 4;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.AxeOfTheTrolls;
     public override bool FreeAct => true;
     public override string FriendlyName => "of the Trolls";
     public override bool HideType => true;

@@ -19,7 +19,6 @@ internal class RapierOfMontoyaFixedArtifact : FixedArtifact
     public override int Cost => 15000;
     public override int Dd => 1;
     public override int Ds => 6;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.RapierOfMontoya;
     public override string FriendlyName => "of Montoya";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

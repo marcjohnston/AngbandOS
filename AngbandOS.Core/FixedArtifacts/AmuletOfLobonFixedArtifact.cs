@@ -28,7 +28,6 @@ internal class AmuletOfLobonFixedArtifact : FixedArtifact, IActivatible
     public override int Cost => 60000;
     public override int Dd => 0;
     public override int Ds => 0;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.AmuletOfLobon;
     public override string FriendlyName => "of Lobon";
     public override bool HasOwnType => true;
     public override bool HideType => true;

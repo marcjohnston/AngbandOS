@@ -22,7 +22,6 @@ internal class SetOfGauntletsOfThanosFixedArtifact : FixedArtifact
     public override bool Dex => true;
     public override bool DreadCurse => true;
     public override int Ds => 1;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.GauntletOfThanos;
     public override string FriendlyName => "of Thanos";
     public override bool HeavyCurse => true;
     public override bool HideType => true;

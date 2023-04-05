@@ -27,7 +27,6 @@ internal class AmuletOfAbdulAlhazredFixedArtifact : FixedArtifact, IActivatible
     public override int Cost => 90000;
     public override int Dd => 0;
     public override int Ds => 0;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.AmuletOfAbdulAlhazred;
     public override bool FreeAct => true;
     public override string FriendlyName => "of Abdul Alhazred";
     public override bool HasOwnType => true;

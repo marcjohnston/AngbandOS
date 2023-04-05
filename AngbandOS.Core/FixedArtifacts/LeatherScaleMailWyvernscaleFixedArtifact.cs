@@ -24,7 +24,6 @@ internal class LeatherScaleMailWyvernscaleFixedArtifact : FixedArtifact
     public override int Dd => 1;
     public override bool Dex => true;
     public override int Ds => 1;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.ScaleMailWyvernscale;
     public override string FriendlyName => "'Wyvernscale'";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

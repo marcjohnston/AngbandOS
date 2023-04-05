@@ -31,7 +31,6 @@ internal class CloakOfBarzaiFixedArtifact : FixedArtifact, IActivatible
     public override int Cost => 10000;
     public override int Dd => 0;
     public override int Ds => 0;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.CloakOfBarzai;
     public override string FriendlyName => "of Barzai";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

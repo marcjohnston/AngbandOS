@@ -33,7 +33,6 @@ internal class RingOfElementalPowerFireFixedArtifact : FixedArtifact, IActivatib
     public override int Dd => 1;
     public override bool Dex => true;
     public override int Ds => 1;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.RingOfElementalPowerFire;
     public override bool FreeAct => true;
     public override string FriendlyName => "of Elemental Power (Fire)";
     public override bool HasOwnType => true;

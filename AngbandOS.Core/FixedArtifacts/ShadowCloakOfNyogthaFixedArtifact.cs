@@ -33,7 +33,6 @@ internal class ShadowCloakOfNyogthaFixedArtifact : FixedArtifact, IActivatible
     public override int Cost => 55000;
     public override int Dd => 0;
     public override int Ds => 0;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.ShadowCloakOfNyogtha;
     public override string FriendlyName => "of Nyogtha";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

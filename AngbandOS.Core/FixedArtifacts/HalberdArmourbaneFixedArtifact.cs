@@ -21,7 +21,6 @@ internal class HalberdArmourbaneFixedArtifact : FixedArtifact
     public override int Dd => 3;
     public override int Ds => 5;
     public override bool Feather => true;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.HalberdArmourbane;
     public override string FriendlyName => "'Armourbane'";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

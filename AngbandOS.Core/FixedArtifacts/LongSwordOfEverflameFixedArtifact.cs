@@ -45,7 +45,6 @@ internal class LongSwordOfEverflameFixedArtifact : FixedArtifact, IActivatible
     public override int Cost => 80000;
     public override int Dd => 2;
     public override int Ds => 5;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.SwordOfEverflame;
     public override bool FreeAct => true;
     public override string FriendlyName => "of Everflame";
     public override bool HideType => true;

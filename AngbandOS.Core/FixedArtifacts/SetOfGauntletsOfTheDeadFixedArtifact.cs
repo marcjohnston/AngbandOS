@@ -31,7 +31,6 @@ internal class SetOfGauntletsOfTheDeadFixedArtifact : FixedArtifact, IActivatibl
     public override int Cost => 12000;
     public override int Dd => 1;
     public override int Ds => 1;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.GauntletsOfTheDead;
     public override string FriendlyName => "of the Dead";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

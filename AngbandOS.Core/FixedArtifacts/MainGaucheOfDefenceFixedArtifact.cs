@@ -32,7 +32,6 @@ internal class MainGaucheOfDefenceFixedArtifact : FixedArtifact
     public override int Dd => 2;
     public override bool Dex => true;
     public override int Ds => 5;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.MainGaucheOfDefence;
     public override bool FreeAct => true;
     public override string FriendlyName => "of Defence";
     public override bool HideType => true;

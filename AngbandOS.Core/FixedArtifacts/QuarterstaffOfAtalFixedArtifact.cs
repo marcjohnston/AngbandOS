@@ -36,7 +36,6 @@ internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact, IActivatible
     public override int Cost => 140000;
     public override int Dd => 2;
     public override int Ds => 9;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.QuarterstaffOfAtal;
     public override string FriendlyName => "of Atal";
     public override bool HideType => true;
     public override bool HoldLife => true;

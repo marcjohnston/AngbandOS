@@ -31,7 +31,6 @@ internal class SetOfLeatherGlovesOfLightFixedArtifact : FixedArtifact, IActivati
     public override int Cost => 30000;
     public override int Dd => 0;
     public override int Ds => 0;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.GlovesOfLight;
     public override bool FreeAct => true;
     public override string FriendlyName => "of Light";
     public override bool IgnoreAcid => true;

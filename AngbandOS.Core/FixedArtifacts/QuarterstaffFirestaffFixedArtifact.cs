@@ -19,7 +19,6 @@ internal class QuarterstaffFirestaffFixedArtifact : FixedArtifact
     public override int Cost => 70000;
     public override int Dd => 1;
     public override int Ds => 9;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.QuarterstaffFirestaff;
     public override string FriendlyName => "'Firestaff'";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

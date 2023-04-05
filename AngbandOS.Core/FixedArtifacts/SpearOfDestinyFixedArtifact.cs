@@ -34,7 +34,6 @@ internal class SpearOfDestinyFixedArtifact : FixedArtifact, IActivatible
     public override int Dd => 1;
     public override int Ds => 6;
     public override bool Feather => true;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.SpearOfDestiny;
     public override string FriendlyName => "of Destiny";
     public override bool HideType => true;
     public override bool HoldLife => true;

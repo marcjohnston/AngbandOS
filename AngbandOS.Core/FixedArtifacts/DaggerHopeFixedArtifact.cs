@@ -37,7 +37,6 @@ internal class DaggerHopeFixedArtifact : FixedArtifact, IActivatible
     public override int Cost => 11000;
     public override int Dd => 1;
     public override int Ds => 4;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.DaggerOfHope;
     public override string FriendlyName => "'Hope'";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

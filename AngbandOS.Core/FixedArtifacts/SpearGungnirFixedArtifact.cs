@@ -34,7 +34,6 @@ internal class SpearGungnirFixedArtifact : FixedArtifact, IActivatible
     public override int Cost => 180000;
     public override int Dd => 4;
     public override int Ds => 6;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.SpearGungnir;
     public override bool FreeAct => true;
     public override string FriendlyName => "'Gungnir'";
     public override bool HideType => true;

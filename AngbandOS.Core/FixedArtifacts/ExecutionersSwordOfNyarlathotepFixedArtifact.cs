@@ -19,7 +19,6 @@ internal class ExecutionersSwordOfNyarlathotepFixedArtifact : FixedArtifact
     public override int Cost => 111000;
     public override int Dd => 4;
     public override int Ds => 5;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.SwordOfNyarlathotep;
     public override string FriendlyName => "of Nyarlathotep";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

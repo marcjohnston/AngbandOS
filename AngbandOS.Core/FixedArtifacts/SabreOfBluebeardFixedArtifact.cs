@@ -19,7 +19,6 @@ internal class SabreOfBluebeardFixedArtifact : FixedArtifact
     public override int Cost => 25000;
     public override int Dd => 1;
     public override int Ds => 7;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.SabreOfBluebeard;
     public override string FriendlyName => "of Bluebeard";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

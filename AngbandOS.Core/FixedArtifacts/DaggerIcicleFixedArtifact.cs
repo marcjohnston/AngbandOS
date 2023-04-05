@@ -35,7 +35,6 @@ internal class DaggerIcicleFixedArtifact : FixedArtifact, IActivatible
     public override int Dd => 2;
     public override bool Dex => true;
     public override int Ds => 4;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.DaggerIcicle;
     public override string FriendlyName => "'Icicle'";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

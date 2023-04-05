@@ -38,7 +38,6 @@ internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact, IActivatible
     public override int Cost => 125000;
     public override int Dd => 1;
     public override int Ds => 1;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.CrownOfTheSun;
     public override string FriendlyName => "of the Sun";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

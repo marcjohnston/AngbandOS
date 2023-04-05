@@ -19,7 +19,6 @@ internal class BroadAxeOfNodensFixedArtifact : FixedArtifact
     public override int Cost => 50000;
     public override int Dd => 2;
     public override int Ds => 6;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.AxeOfNodens;
     public override string FriendlyName => "of Nodens";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;

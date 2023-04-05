@@ -28,7 +28,6 @@ internal class StarEssenceOfXothFixedArtifact : FixedArtifact, IActivatible
     public override int Cost => 32500;
     public override int Dd => 1;
     public override int Ds => 1;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.StarEssenceOfXoth;
     public override string FriendlyName => "of Xoth";
     public override bool HasOwnType => true;
     public override bool HoldLife => true;

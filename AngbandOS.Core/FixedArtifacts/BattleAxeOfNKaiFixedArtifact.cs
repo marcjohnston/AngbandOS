@@ -20,7 +20,6 @@ internal class BattleAxeOfNKaiFixedArtifact : FixedArtifact
     public override int Dd => 3;
     public override int Ds => 8;
     public override bool Feather => true;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.AxeOfNKai;
     public override bool FreeAct => true;
     public override string FriendlyName => "of N'Kai";
     public override bool HideType => true;

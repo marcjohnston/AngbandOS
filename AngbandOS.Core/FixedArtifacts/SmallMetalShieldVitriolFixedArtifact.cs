@@ -24,7 +24,6 @@ internal class SmallMetalShieldVitriolFixedArtifact : FixedArtifact
     public override int Cost => 60000;
     public override int Dd => 1;
     public override int Ds => 2;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.ShieldVitriol;
     public override bool FreeAct => true;
     public override string FriendlyName => "'Vitriol'";
     public override bool HideType => true;

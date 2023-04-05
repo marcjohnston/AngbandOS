@@ -32,7 +32,6 @@ internal class LongSwordExcaliburFixedArtifact : FixedArtifact, IActivatible
     public override int Cost => 300000;
     public override int Dd => 4;
     public override int Ds => 5;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.SwordExcalibur;
     public override bool FreeAct => true;
     public override string FriendlyName => "'Excalibur'";
     public override bool IgnoreAcid => true;

@@ -35,7 +35,6 @@ internal class RingOfMagicFixedArtifact : FixedArtifact, IActivatible
     public override int Dd => 0;
     public override bool Dex => true;
     public override int Ds => 0;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.RingOfMagic;
     public override string FriendlyName => "of Magic";
     public override bool HasOwnType => true;
     public override bool HideType => true;

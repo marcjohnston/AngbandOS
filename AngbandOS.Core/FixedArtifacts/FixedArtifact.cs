@@ -17,6 +17,11 @@ namespace AngbandOS.Core.FixedArtifacts
         public int CurNum = 0;
 
         /// <summary>
+        /// Returns the multipler to use when being used to kill a dragon.  The SwordOfLightning returns a 3.  All other weapons return 1.
+        /// </summary>
+        public virtual int KilLDragonMultiplier => 1;
+
+        /// <summary>
         /// Allows the fixed artifact to apply resistances and power as needed.  Does nothing, by default.
         /// </summary>
         /// <returns></returns>
@@ -25,6 +30,18 @@ namespace AngbandOS.Core.FixedArtifacts
         }
 
         public abstract ItemClass BaseItemCategory { get; } // Inherit this 
+
+        /// <summary>
+        /// Returns a 1-in-chance value of the weapon doing extra vorpal damage.  Does not affect non-vorpal cutting weapons.  Default to a 1-in-6 chance.
+        /// </summary>
+        public virtual int VorpalExtraDamage1InChance => 6;
+
+        public virtual bool IsVorpalBlade => false;
+
+        /// <summary>
+        /// Returns a 1-in-chance value of the weapon doing extra vorpal attacks. Does not affect non-vorpal cutting weapons.  Default to a 1-in-4 chance.
+        /// </summary>
+        public virtual int VorpalExtraAttacks1InChance => 4;
 
         public abstract char Character { get; }
         public virtual Colour Colour => Colour.White;
@@ -75,8 +92,6 @@ namespace AngbandOS.Core.FixedArtifacts
         public virtual bool EasyKnow { get; set; } = false;
 
         public virtual bool Feather { get; set; } = false;
-
-        public abstract FixedArtifactId FixedArtifactID { get; }
 
         public virtual bool FreeAct { get; set; } = false;
 

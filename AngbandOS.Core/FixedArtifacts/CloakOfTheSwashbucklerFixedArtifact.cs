@@ -34,7 +34,6 @@ internal class CloakOfTheSwashbucklerFixedArtifact : FixedArtifact, IActivatible
     public override int Dd => 0;
     public override bool Dex => true;
     public override int Ds => 0;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.CloakOfTheSwashbuckler;
     public override bool FreeAct => true;
     public override string FriendlyName => "of the Swashbuckler";
     public override bool HideType => true;

@@ -27,7 +27,6 @@ internal class WarHammerMjolnirFixedArtifact : FixedArtifact
     public override int Cost => 250000;
     public override int Dd => 9;
     public override int Ds => 3;
-    public override FixedArtifactId FixedArtifactID => FixedArtifactId.HammerMjolnir;
     public override bool FreeAct => true;
     public override string FriendlyName => "'Mjolnir'";
     public override bool HideType => true;
