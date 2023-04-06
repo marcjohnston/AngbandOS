@@ -3229,46 +3229,5 @@ namespace AngbandOS.Core.Items
             RandartItemCharacteristics.Activate = true;
             RechargeTimeLeft = 0;
         }
-
-        //private bool MakeFixedArtifact()
-        //{
-        //    foreach (KeyValuePair<FixedArtifactId, FixedArtifact> pair in SaveGame.SingletonRepository.FixedArtifacts)
-        //    {
-        //        FixedArtifact aPtr = pair.Value;
-        //        if (!aPtr.HasOwnType)
-        //        {
-        //            continue;
-        //        }
-        //        if (aPtr.CurNum != 0)
-        //        {
-        //            continue;
-        //        }
-        //        if (aPtr.Level > SaveGame.Difficulty)
-        //        {
-        //            int d = (aPtr.Level - SaveGame.Difficulty) * 2;
-        //            if (Program.Rng.RandomLessThan(d) != 0)
-        //            {
-        //                continue;
-        //            }
-        //        }
-        //        if (Program.Rng.RandomLessThan(aPtr.Rarity) != 0)
-        //        {
-        //            return false;
-        //        }
-        //        ItemClass kIdx = aPtr.BaseItemCategory;
-        //        if (kIdx.Level > SaveGame.Level.ObjectLevel)
-        //        {
-        //            int d = (kIdx.Level - SaveGame.Level.ObjectLevel) * 5;
-        //            if (Program.Rng.RandomLessThan(d) != 0)
-        //            {
-        //                continue;
-        //            }
-        //        }
-        //        AssignItemType(kIdx);
-        //        FixedArtifact = pair.Value;
-        //        return true;
-        //    }
-        //    return false;
-        //}
     }
 }
