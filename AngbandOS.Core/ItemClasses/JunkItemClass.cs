@@ -8,6 +8,5 @@
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Junk;
         public override bool HatesAcid => true;
 
-        public override int PercentageBreakageChance => 100;
     }
 }

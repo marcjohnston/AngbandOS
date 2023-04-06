@@ -25,7 +25,6 @@
             }
         }
 
-        public override bool GetsDamageMultiplier => true;
         public override int? SubCategory => null; // Not used anymore
     }
 }

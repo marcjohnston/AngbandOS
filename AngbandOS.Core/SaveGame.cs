@@ -804,7 +804,7 @@ namespace AngbandOS.Core
                 item = kIdx.CreateItem(this);
             }
             item.ApplyMagic(Level.ObjectLevel, true, good, great);
-            item.Count = item.BaseItemCategory.MakeObjectCount;
+            item.Count = item.MakeObjectCount;
             if (!item.IsCursed() && !item.IsBroken() && item.BaseItemCategory.Level > Difficulty)
             {
                 if (Level != null)

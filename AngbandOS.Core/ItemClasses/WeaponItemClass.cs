@@ -15,7 +15,6 @@
             item.BonusDamage += Program.Rng.DieRoll(item.BonusDamage > 19 ? 1 : 20 - item.BonusDamage);
         }
 
-        public override bool CanApplyBonusArmourClassMiscPower => true;
 
         /// <summary>
         /// Returns true, for all weapons where both the hit (ToH) and damage (ToD) are equal to or greater than zero.  False, for all weapons with either stat less than 0.
@@ -96,7 +95,6 @@
         }
 
         public override bool CanApplyTunnelBonus => true;
-        public override bool CanApplyBlowsBonus => true;
 
         public override int? GetBonusRealValue(Item item, int value)
         {

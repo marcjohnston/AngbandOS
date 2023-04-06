@@ -44,7 +44,6 @@
         public override int BaseValue => 20;
         public override bool HatesCold => true;
         public override Colour Colour => Colour.Blue;
-        public override int PercentageBreakageChance => 100;
 
         public override int GetAdditionalMassProduceCount(Item item)
         {

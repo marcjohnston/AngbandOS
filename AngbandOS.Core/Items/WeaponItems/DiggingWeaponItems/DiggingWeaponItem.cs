@@ -7,5 +7,6 @@ namespace AngbandOS.Core.Items
         public DiggingWeaponItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
         public override int PackSort => 31;
         public override bool IdentityCanBeSensed => true;
+        public override bool GetsDamageMultiplier => true;
     }
 }

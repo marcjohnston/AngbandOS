@@ -48,7 +48,6 @@
             return basenm;
         }
 
-        public override bool CanApplyBlowsBonus => false;
 
         public override Colour Colour => Colour.Brown;
 

@@ -4,6 +4,31 @@ namespace AngbandOS.Core.Items
     internal abstract class Item : IComparable<Item> // TODO: Should be abstract
     {
         /// <summary>
+        /// Returns a count for the number of items to create during the MakeObject.  Returns 1, by default.  Spikes, shots, arrows and bolts return values greater than 1.
+        /// </summary>
+        public virtual int MakeObjectCount => 1;
+
+        /// <summary>
+        /// Returns true, if the item multiplies damages against a specific monster race.  Returns false, by default. Shots, arrows, bolts, hafted, polearms, swords and digging all return true.
+        /// </summary>
+        public virtual bool GetsDamageMultiplier => false;
+
+        /// <summary>
+        /// Returns the percentage chance that an thrown or fired item breaks.  Returns 10, or 10%, by default.  A value of 101, guarantees the item will break.
+        /// </summary>
+        public virtual int PercentageBreakageChance => 10;
+
+        /// <summary>
+        /// Returns true, if the item can apply a bonus armour class for miscellaneous power.  Only weapons return true.  Returns false, by default.
+        /// </summary>
+        public virtual bool CanApplyBonusArmourClassMiscPower => false;
+
+        /// <summary>
+        /// Returns true, if the item can apply a blows bonus.  All weapons, except for the bow, return true.  Returns false, by default.
+        /// </summary>
+        public virtual bool CanApplyBlowsBonus => false;
+
+        /// <summary>
         /// Returns true, if the identity of the item can be sensed; false, otherwise.  Returns false, by default.
         /// </summary>
         public virtual bool IdentityCanBeSensed => false;
@@ -502,7 +527,7 @@ namespace AngbandOS.Core.Items
             int mult = 1;
             MonsterRace rPtr = mPtr.Race;
             RefreshFlagBasedProperties();
-            if (BaseItemCategory.GetsDamageMultiplier)
+            if (GetsDamageMultiplier)
             {
                 if (Characteristics.SlayAnimal && rPtr.Animal)
                 {
@@ -748,7 +773,7 @@ namespace AngbandOS.Core.Items
 
         public int BreakageChance()
         {
-            return BaseItemCategory.PercentageBreakageChance;
+            return PercentageBreakageChance;
         }
 
         public bool StatsAreSame(Item other)
@@ -2779,7 +2804,7 @@ namespace AngbandOS.Core.Items
 
                 case 22:
                 case 23:
-                    if (!BaseItemCategory.CanApplyBlowsBonus)
+                    if (!CanApplyBlowsBonus)
                     {
                         ApplyRandomBonuses(ref artifactBias);
                     }
@@ -2910,7 +2935,7 @@ namespace AngbandOS.Core.Items
                 case 24:
                 case 25:
                 case 26:
-                    if (!BaseItemCategory.CanApplyBonusArmourClassMiscPower)
+                    if (!CanApplyBonusArmourClassMiscPower)
                     {
                         ApplyRandomMiscPower(ref artifactBias);
                     }

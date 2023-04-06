@@ -12,6 +12,5 @@
 
         protected override bool CanBeWeaponOfLaw => true;
 
-        public override bool GetsDamageMultiplier => true;
     }
 }

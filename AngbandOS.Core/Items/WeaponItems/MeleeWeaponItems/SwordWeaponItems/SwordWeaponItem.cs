@@ -5,5 +5,6 @@ namespace AngbandOS.Core.Items
     {
         public SwordWeaponItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
         public override int PackSort => 28;
+        public override bool GetsDamageMultiplier => true;
     }
 }

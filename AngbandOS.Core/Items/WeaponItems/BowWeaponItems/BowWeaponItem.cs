@@ -7,5 +7,6 @@ namespace AngbandOS.Core.Items
         public override int PackSort => 32;
         public BowWeaponItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
         public override bool IdentityCanBeSensed => true;
+        public override bool CanApplyBlowsBonus => false;
     }
 }

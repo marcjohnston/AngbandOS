@@ -15,6 +15,5 @@
         protected override bool CanBeWeaponOfSharpness => true;
         protected override bool CapableOfVorpalSlaying => true;
 
-        public override bool GetsDamageMultiplier => true;
     }
 }

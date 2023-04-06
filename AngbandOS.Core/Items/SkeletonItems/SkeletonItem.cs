@@ -5,5 +5,6 @@ namespace AngbandOS.Core.Items
     {
         public SkeletonItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
         public override int PackSort => 40;
+        public override int PercentageBreakageChance => 50;
     }
 }

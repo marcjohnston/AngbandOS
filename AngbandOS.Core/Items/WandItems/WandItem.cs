@@ -5,5 +5,6 @@ namespace AngbandOS.Core.Items
     {
         public WandItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
         public override int PackSort => 14;
+        public override int PercentageBreakageChance => 25;
     }
 }

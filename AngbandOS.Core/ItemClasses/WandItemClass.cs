@@ -31,7 +31,6 @@
 
         //public override bool IsCharged => true;
         public override Colour Colour => Colour.Chartreuse;
-        public override int PercentageBreakageChance => 25;
         public override int? GetBonusRealValue(Item item, int value)
         {
             return value / 20 * item.TypeSpecificValue;

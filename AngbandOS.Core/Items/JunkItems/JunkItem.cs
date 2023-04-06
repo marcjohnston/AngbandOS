@@ -5,5 +5,6 @@ namespace AngbandOS.Core.Items
     {
         public JunkItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
         public override int PackSort => 38;
+        public override int PercentageBreakageChance => 100;
     }
 }
