@@ -45,6 +45,5 @@
 
         public override bool GetsDamageMultiplier => true;
         public override int PercentageBreakageChance => 25;
-        public override int PackSort => 34;
     }
 }

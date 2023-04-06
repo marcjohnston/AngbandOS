@@ -4,5 +4,6 @@ namespace AngbandOS.Core.Items
     internal abstract class StaffItem : Item
     {
         public StaffItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
+        public override int PackSort => 15;
     }
 }

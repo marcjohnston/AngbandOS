@@ -205,6 +205,5 @@
                     return null;
             }
         }
-        public override int PackSort => 16;
     }
 }

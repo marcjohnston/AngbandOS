@@ -23,18 +23,6 @@
         public abstract Item CreateItem(SaveGame saveGame);
 
         /// <summary>
-        /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.
-        /// </summary>
-        public abstract int PackSort { get; }
-
-        /// <summary>
-        /// Hook into the ProcessWorld event, when an item of this class is being worn/wielded.  Does nothing, by default.
-        /// </summary>
-        /// <param name="saveGame"></param>
-        /// <param name="item"></param>
-        public virtual void EquipmentProcessWorld(SaveGame saveGame, Item item) { }
-
-        /// <summary>
         /// Hook into the ProcessWorld event, when an item of this class is being carried in a pack inventory slot.  Does nothing, by default.
         /// </summary>
         /// <param name="saveGame"></param>

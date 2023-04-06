@@ -64,6 +64,5 @@
                     return "some unknown effect"; // This is a change from the original code ... at least we will render something.
             }
         }
-        public override int PackSort => 19;
     }
 }

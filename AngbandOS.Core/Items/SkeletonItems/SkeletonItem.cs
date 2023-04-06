@@ -4,5 +4,6 @@ namespace AngbandOS.Core.Items
     internal abstract class SkeletonItem : Item
     {
         public SkeletonItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
+        public override int PackSort => 40;
     }
 }

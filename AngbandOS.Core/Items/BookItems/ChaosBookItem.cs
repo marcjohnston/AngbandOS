@@ -4,5 +4,6 @@ namespace AngbandOS.Core.Items
     internal abstract class ChaosBookItem : BookItem
     {
         public ChaosBookItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
+        public override int PackSort => 5;
     }
 }

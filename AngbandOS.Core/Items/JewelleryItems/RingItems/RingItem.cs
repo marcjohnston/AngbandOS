@@ -15,5 +15,6 @@ namespace AngbandOS.Core.Items
             }
         }
         public RingItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
+        public override int PackSort => 16;
     }
 }

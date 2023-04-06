@@ -15,6 +15,5 @@ namespace AngbandOS.Core.ItemClasses
         public override bool HatesFire => true;
         public override Colour Colour => Colour.BrightYellow;
         public override BaseRealm? ToRealm => SaveGame.SingletonRepository.Realms.Get<CorporealRealm>();
-        public override int PackSort => 1;
     }
 }

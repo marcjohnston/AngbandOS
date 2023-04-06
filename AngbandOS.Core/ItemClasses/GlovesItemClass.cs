@@ -96,6 +96,5 @@
 
             }
         }
-        public override int PackSort => 26;
     }
 }

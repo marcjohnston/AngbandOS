@@ -47,6 +47,5 @@
             s += base.GetVerboseDescription(item);
             return s;
         }
-        public override int PackSort => 14;
     }
 }

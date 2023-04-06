@@ -21,6 +21,5 @@
         public override Colour Colour => Colour.Orange;
         public override int? SubCategory => null; // All amulet subcategories have been refactored.
         public override bool HasFlavor => true;
-        public override int PackSort => 17;
     }
 }

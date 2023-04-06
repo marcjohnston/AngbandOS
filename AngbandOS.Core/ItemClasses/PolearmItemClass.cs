@@ -11,6 +11,5 @@
         public override Colour Colour => Colour.BrightWhite;
 
         public override bool GetsDamageMultiplier => true;
-        public override int PackSort => 29;
     }
 }

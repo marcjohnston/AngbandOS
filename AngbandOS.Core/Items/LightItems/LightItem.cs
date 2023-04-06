@@ -5,5 +5,6 @@ namespace AngbandOS.Core.Items
     {
         public override int WieldSlot => InventorySlot.Lightsource;
         public LightItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
+        public override int PackSort => 18;
     }
 }

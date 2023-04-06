@@ -4,5 +4,6 @@ namespace AngbandOS.Core.Items
     internal abstract class SwordWeaponItem : MeleeWeaponItem
     {
         public SwordWeaponItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
+        public override int PackSort => 28;
     }
 }

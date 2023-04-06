@@ -103,6 +103,5 @@
         }
 
         public override bool CanReflectBoltsAndArrows => true;
-        public override int PackSort => 25;
     }
 }

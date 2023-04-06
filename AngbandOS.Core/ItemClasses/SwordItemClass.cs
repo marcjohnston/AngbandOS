@@ -16,6 +16,5 @@
         protected override bool CapableOfVorpalSlaying => true;
 
         public override bool GetsDamageMultiplier => true;
-        public override int PackSort => 28;
     }
 }

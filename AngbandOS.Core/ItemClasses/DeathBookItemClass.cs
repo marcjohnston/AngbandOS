@@ -15,6 +15,5 @@
         public override Colour Colour => Colour.Black;
 
         public override BaseRealm? ToRealm => SaveGame.SingletonRepository.Realms.Get<DeathRealm>();
-        public override int PackSort => 4;
     }
 }

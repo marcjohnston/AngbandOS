@@ -39,6 +39,5 @@
         }
 
         public abstract void Read(ReadScrollEvent eventArgs);
-        public override int PackSort => 12;
     }
 }

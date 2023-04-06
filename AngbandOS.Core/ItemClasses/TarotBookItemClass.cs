@@ -14,6 +14,5 @@
         public override bool HatesFire => true;
         public override Colour Colour => Colour.Pink;
         public override BaseRealm? ToRealm => SaveGame.SingletonRepository.Realms.Get<TarotRealm>();
-        public override int PackSort => 3;
     }
 }

@@ -13,6 +13,5 @@
         protected override bool CanBeWeaponOfLaw => true;
 
         public override bool GetsDamageMultiplier => true;
-        public override int PackSort => 30;
     }
 }

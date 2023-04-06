@@ -190,6 +190,5 @@
                 return "It provides light (radius 2) forever.";
             }
         }
-        public override int PackSort => 18;
     }
 }

@@ -37,6 +37,5 @@
         }
 
         public abstract void Execute(ZapRodEvent zapRodEvent);
-        public override int PackSort => 13;
     }
 }

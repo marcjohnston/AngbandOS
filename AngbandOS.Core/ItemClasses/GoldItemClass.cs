@@ -7,7 +7,6 @@
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Gold;
         //public override bool IgnoredByMonsters => true;
         public override int? SubCategory => null; // No longer used by gold.
-        public override int PackSort => 0;
         public static bool IsGold(ItemClass itemClass)
         {
             return typeof(GoldItemClass).IsAssignableFrom(itemClass.GetType());

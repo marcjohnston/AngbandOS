@@ -273,16 +273,15 @@ namespace AngbandOS.Core.Items
         public bool IsAnItemOf<T>() => typeof(T).IsAssignableFrom(BaseItemCategory.GetType());
 
         /// <summary>
-        /// Hook into the ProcessWorld, when the item is being worn/wielded.  By default, the item forwards the event to the base ItemClass for processing.
+        /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.
+        /// </summary>
+        public abstract int PackSort { get; }
+
+        /// <summary>
+        /// Hook into the ProcessWorld, when the item is being worn/wielded.  Does nothing, by default.
         /// </summary>
         /// <param name="saveGame"></param>
-        public virtual void EquipmentProcessWorldHook(SaveGame saveGame)
-        {
-            if (BaseItemCategory != null)
-            {
-                BaseItemCategory.EquipmentProcessWorld(saveGame, this);
-            }
-        }
+        public virtual void EquipmentProcessWorldHook(SaveGame saveGame) { }
 
         /// <summary>
         /// Hook into the ProcessWorld, when the item is being carried in a pack inventory slot.  By default, the item forwards the event to the base ItemClass for processing.
@@ -334,11 +333,11 @@ namespace AngbandOS.Core.Items
 
             // Third level sort (category, in reverse order).
             // Sort items by their pack sort order.
-            if (BaseItemCategory.PackSort < oPtr.BaseItemCategory.PackSort)
+            if (PackSort < oPtr.PackSort)
             {
                 return -1;
             }
-            if (BaseItemCategory.PackSort > oPtr.BaseItemCategory.PackSort)
+            if (PackSort > oPtr.PackSort)
             {
                 return 1;
             }

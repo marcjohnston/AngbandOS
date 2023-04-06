@@ -4,5 +4,6 @@ namespace AngbandOS.Core.Items
     internal abstract class FolkBookItem : BookItem
     {
         public FolkBookItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
+        public override int PackSort => 2;
     }
 }

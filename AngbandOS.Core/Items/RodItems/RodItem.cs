@@ -4,5 +4,6 @@ namespace AngbandOS.Core.Items
     internal abstract class RodItem : Item
     {
         public RodItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
+        public override int PackSort => 13;
     }
 }
