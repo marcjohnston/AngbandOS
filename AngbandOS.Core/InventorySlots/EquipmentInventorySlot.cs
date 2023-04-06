@@ -50,7 +50,7 @@ namespace AngbandOS.Core.InventorySlots
                 Item? oPtr = SaveGame.GetInventoryItem(index);
                 if (oPtr != null)
                 {
-                    oPtr.EquipmentProcessWorldHook(SaveGame);
+                    oPtr.EquipmentProcessWorldHook();
                 }
             }
 

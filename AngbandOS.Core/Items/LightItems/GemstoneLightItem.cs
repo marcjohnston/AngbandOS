@@ -3,14 +3,14 @@ namespace AngbandOS.Core.Items
 [Serializable]
     internal class GemstoneLightItem : LightItem
     {
-        public override void EquipmentProcessWorldHook(SaveGame saveGame)
+        public override void EquipmentProcessWorldHook()
         {
-            if (Program.Rng.DieRoll(999) == 1 && !saveGame.Player.HasAntiMagic)
+            if (Program.Rng.DieRoll(999) == 1 && !SaveGame.Player.HasAntiMagic)
             {
-                if (saveGame.Player.TimedInvulnerability.TurnsRemaining == 0)
+                if (SaveGame.Player.TimedInvulnerability.TurnsRemaining == 0)
                 {
-                    saveGame.MsgPrint("The Jewel of Judgement drains life from you!");
-                    saveGame.Player.TakeHit(Math.Min(saveGame.Player.Level, 50), "the Jewel of Judgement");
+                    SaveGame.MsgPrint("The Jewel of Judgement drains life from you!");
+                    SaveGame.Player.TakeHit(Math.Min(SaveGame.Player.Level, 50), "the Jewel of Judgement");
                 }
             }
         }
