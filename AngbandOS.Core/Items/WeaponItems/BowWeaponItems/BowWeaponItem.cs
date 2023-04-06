@@ -3,6 +3,30 @@ namespace AngbandOS.Core.Items
 [Serializable]
     internal abstract class BowWeaponItem : WeaponItem
     {
+        public override void ApplyRandomSlaying(ref IArtifactBias artifactBias, Item item)
+        {
+            switch (Program.Rng.DieRoll(6))
+            {
+                case 1:
+                case 2:
+                case 3:
+                    item.RandartItemCharacteristics.XtraMight = true;
+                    if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
+                    {
+                        artifactBias = new RangerArtifactBias();
+                    }
+                    break;
+
+                default:
+                    item.RandartItemCharacteristics.XtraShots = true;
+                    if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
+                    {
+                        artifactBias = new RangerArtifactBias();
+                    }
+                    break;
+            }
+        }
+
         public override int WieldSlot => InventorySlot.RangedWeapon;
         public override int PackSort => 32;
         public BowWeaponItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }

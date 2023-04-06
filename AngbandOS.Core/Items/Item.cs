@@ -4,6 +4,167 @@ namespace AngbandOS.Core.Items
     internal abstract class Item : IComparable<Item> // TODO: Should be abstract
     {
         /// <summary>
+        /// Returns true, if the item is capable of vorpal slaying.  Only swords return true.  Returns false, by default.
+        /// </summary>
+        public virtual bool CanVorpalSlay => false;
+
+        public virtual void ApplyRandomSlaying(ref IArtifactBias artifactBias, Item item)
+        {
+            switch (Program.Rng.DieRoll(34))
+            {
+                case 1:
+                case 2:
+                    item.RandartItemCharacteristics.SlayAnimal = true;
+                    break;
+
+                case 3:
+                case 4:
+                    item.RandartItemCharacteristics.SlayEvil = true;
+                    if (artifactBias == null && Program.Rng.DieRoll(2) == 1)
+                    {
+                        artifactBias = new LawArtifactBias();
+                    }
+                    else if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
+                    {
+                        artifactBias = new PriestlyArtifactBias();
+                    }
+                    break;
+
+                case 5:
+                case 6:
+                    item.RandartItemCharacteristics.SlayUndead = true;
+                    if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
+                    {
+                        artifactBias = new PriestlyArtifactBias();
+                    }
+                    break;
+
+                case 7:
+                case 8:
+                    item.RandartItemCharacteristics.SlayDemon = true;
+                    if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
+                    {
+                        artifactBias = new PriestlyArtifactBias();
+                    }
+                    break;
+
+                case 9:
+                case 10:
+                    item.RandartItemCharacteristics.SlayOrc = true;
+                    break;
+
+                case 11:
+                case 12:
+                    item.RandartItemCharacteristics.SlayTroll = true;
+                    break;
+
+                case 13:
+                case 14:
+                    item.RandartItemCharacteristics.SlayGiant = true;
+                    break;
+
+                case 15:
+                case 16:
+                    item.RandartItemCharacteristics.SlayDragon = true;
+                    break;
+
+                case 17:
+                    item.RandartItemCharacteristics.KillDragon = true;
+                    break;
+
+                case 18:
+                case 19:
+                    if (CanVorpalSlay)
+                    {
+                        item.RandartItemCharacteristics.Vorpal = true;
+                        if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
+                        {
+                            artifactBias = new WarriorArtifactBias();
+                        }
+                    }
+                    else
+                    {
+                        item.ApplyRandomSlaying(ref artifactBias);
+                    }
+                    break;
+
+                case 20:
+                    item.RandartItemCharacteristics.Impact = true;
+                    break;
+
+                case 21:
+                case 22:
+                    item.RandartItemCharacteristics.BrandFire = true;
+                    if (artifactBias == null)
+                    {
+                        artifactBias = new FireArtifactBias();
+                    }
+                    break;
+
+                case 23:
+                case 24:
+                    item.RandartItemCharacteristics.BrandCold = true;
+                    if (artifactBias == null)
+                    {
+                        artifactBias = new ColdArtifactBias();
+                    }
+                    break;
+
+                case 25:
+                case 26:
+                    item.RandartItemCharacteristics.BrandElec = true;
+                    if (artifactBias == null)
+                    {
+                        artifactBias = new ElectricityArtifactBias();
+                    }
+                    break;
+
+                case 27:
+                case 28:
+                    item.RandartItemCharacteristics.BrandAcid = true;
+                    if (artifactBias == null)
+                    {
+                        artifactBias = new AcidArtifactBias();
+                    }
+                    break;
+
+                case 29:
+                case 30:
+                    item.RandartItemCharacteristics.BrandPois = true;
+                    if (artifactBias == null && Program.Rng.DieRoll(3) != 1)
+                    {
+                        artifactBias = new PoisonArtifactBias();
+                    }
+                    else if (artifactBias == null && Program.Rng.DieRoll(6) == 1)
+                    {
+                        artifactBias = new NecromanticArtifactBias();
+                    }
+                    else if (artifactBias == null)
+                    {
+                        artifactBias = new RogueArtifactBias();
+                    }
+                    break;
+
+                case 31:
+                case 32:
+                    item.RandartItemCharacteristics.Vampiric = true;
+                    if (artifactBias == null)
+                    {
+                        artifactBias = new NecromanticArtifactBias();
+                    }
+                    break;
+
+                default:
+                    item.RandartItemCharacteristics.Chaotic = true;
+                    if (artifactBias == null)
+                    {
+                        artifactBias = new ChaosArtifactBias();
+                    }
+                    break;
+            }
+        }
+
+        /// <summary>
         /// Returns a count for the number of items to create during the MakeObject.  Returns 1, by default.  Spikes, shots, arrows and bolts return values greater than 1.
         /// </summary>
         public virtual int MakeObjectCount => 1;
@@ -2973,7 +3134,7 @@ namespace AngbandOS.Core.Items
                     return;
                 }
             }
-            BaseItemCategory.ApplyRandomSlaying(ref artifactBias, this);
+            ApplyRandomSlaying(ref artifactBias, this);
         }
 
         private void CurseRandart()
