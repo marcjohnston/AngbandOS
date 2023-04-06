@@ -77,7 +77,7 @@ namespace AngbandOS.Core.InventorySlots
                 Item? oPtr = SaveGame.GetInventoryItem(index);
                 if (oPtr != null)
                 {
-                    oPtr.PackProcessWorldHook(SaveGame);
+                    oPtr.PackProcessWorldHook();
                 }
             }
         }
