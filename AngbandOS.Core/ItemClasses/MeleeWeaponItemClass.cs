@@ -9,7 +9,6 @@
         public MeleeWeaponItemClass(SaveGame saveGame) : base(saveGame) { }
         public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<MeleeWeaponInventorySlot>();
         protected virtual bool CanBeWeaponOfLaw => false;
-        public override bool IdentityCanBeSensed => true;
         protected virtual bool CapableOfVorpalSlaying => false;
         protected virtual bool CanBeWeaponOfSharpness => false;
         public override void ApplyMagic(Item item, int level, int power)

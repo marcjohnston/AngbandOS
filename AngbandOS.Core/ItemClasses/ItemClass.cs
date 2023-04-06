@@ -23,40 +23,9 @@
         public abstract Item CreateItem(SaveGame saveGame);
 
         /// <summary>
-        /// Hook into the ProcessWorld event, when an item of this class is being carried in a pack inventory slot.  Does nothing, by default.
-        /// </summary>
-        /// <param name="saveGame"></param>
-        /// <param name="item"></param>
-        public virtual void PackProcessWorld(SaveGame saveGame, Item item) { }
-
-        /// <summary>
-        /// Returns the intensity of light that the object emits.  By default, a value of 1 is returned, if the item has a 
-        /// lightsource characteristic.
-        /// </summary>
-        /// <param name="oPtr"></param>
-        /// <returns></returns>
-        public virtual int CalcTorch(Item oPtr)
-        {
-            oPtr.RefreshFlagBasedProperties();
-            if (oPtr.Characteristics.Lightsource)
-            {
-                return 1;
-            }
-            else
-            {
-                return 0;
-            }
-        }
-
-        /// <summary>
         /// Returns the inventory slot where the item is wielded.  Returns the pack, by default.
         /// </summary>
         public virtual BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<PackInventorySlot>();
-
-        /// <summary>
-        /// Returns true, if the identity of the item can be sensed; false, otherwise.  Returns false, by default.
-        /// </summary>
-        public virtual bool IdentityCanBeSensed => false;
 
         /// <summary>
         /// Returns true, if items of this type are stompable (based on the known "feeling" of (Broken, Average, Good & Excellent)).

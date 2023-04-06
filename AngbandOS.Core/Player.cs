@@ -1204,7 +1204,7 @@ namespace AngbandOS.Core
                     {
                         continue;
                     }
-                    bool okay = item.BaseItemCategory.IdentityCanBeSensed;
+                    bool okay = item.IdentityCanBeSensed;
                     if (!okay)
                     {
                         continue;

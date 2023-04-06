@@ -6,5 +6,6 @@ namespace AngbandOS.Core.Items
         public override int WieldSlot => InventorySlot.Digger;
         public DiggingWeaponItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
         public override int PackSort => 31;
+        public override bool IdentityCanBeSensed => true;
     }
 }

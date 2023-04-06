@@ -11,22 +11,6 @@
         public override bool HatesFire => true;
         public override Colour Colour => Colour.BrightYellow;
 
-        /// <summary>
-        /// Returns an intensity of 3, if the item is an artifact; otherwise, 0 is returned.
-        /// </summary>
-        /// <param name="oPtr"></param>
-        /// <returns></returns>
-        public override int CalcTorch(Item oPtr)
-        {
-            if (oPtr.FixedArtifact != null)
-            {
-                return 3;
-            }
-            else
-            {
-                return 0;
-            }
-        }
         public virtual void Refill(SaveGame saveGame, Item item)
         {
             saveGame.MsgPrint("Your light cannot be refilled.");

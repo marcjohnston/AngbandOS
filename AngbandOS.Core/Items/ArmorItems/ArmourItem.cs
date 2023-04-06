@@ -4,5 +4,6 @@ namespace AngbandOS.Core.Items
     internal abstract class ArmourItem : Item
     {
         public ArmourItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
+        public override bool IdentityCanBeSensed => true;
     }
 }

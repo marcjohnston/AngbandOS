@@ -4,6 +4,30 @@ namespace AngbandOS.Core.Items
     internal abstract class Item : IComparable<Item> // TODO: Should be abstract
     {
         /// <summary>
+        /// Returns true, if the identity of the item can be sensed; false, otherwise.  Returns false, by default.
+        /// </summary>
+        public virtual bool IdentityCanBeSensed => false;
+
+        /// <summary>
+        /// Returns the intensity of light that the object emits.  By default, a value of 1 is returned, if the item has a 
+        /// lightsource characteristic.
+        /// </summary>
+        /// <param name="oPtr"></param>
+        /// <returns></returns>
+        public virtual int CalcTorch()
+        {
+            RefreshFlagBasedProperties();
+            if (Characteristics.Lightsource)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
         /// Returns the inventory slot where the item is wielded.  Returns the pack, by default.
         /// </summary>
         public virtual int WieldSlot => InventorySlot.Pack;
@@ -284,16 +308,10 @@ namespace AngbandOS.Core.Items
         public virtual void EquipmentProcessWorldHook(SaveGame saveGame) { }
 
         /// <summary>
-        /// Hook into the ProcessWorld, when the item is being carried in a pack inventory slot.  By default, the item forwards the event to the base ItemClass for processing.
+        /// Hook into the ProcessWorld, when the item is being carried in a pack inventory slot.  Does nothing, by default..
         /// </summary>
         /// <param name="saveGame"></param>
-        public virtual void PackProcessWorldHook(SaveGame saveGame)
-        {
-            if (BaseItemCategory != null)
-            {
-                BaseItemCategory.PackProcessWorld(saveGame, this);
-            }
-        }
+        public virtual void PackProcessWorldHook(SaveGame saveGame) { }
 
         /// <summary>
         /// Compares two items for sorting.  Returns -1, if this item sorts before the oPtr item; 1, if this item sorts after or 0 if they are equivalent.

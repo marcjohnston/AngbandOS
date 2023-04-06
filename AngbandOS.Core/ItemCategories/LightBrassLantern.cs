@@ -21,16 +21,6 @@ namespace AngbandOS.Core.ItemCategories
             }
         }
 
-        /// <summary>
-        /// Returns an intensity of light provided by the lantern.  2, if the lantern has turns remaining, plus an additional 3
-        /// if the lantern is an artifact.
-        /// </summary>
-        /// <param name="oPtr"></param>
-        /// <returns></returns>
-        public override int CalcTorch(Item oPtr)
-        {
-            return base.CalcTorch(oPtr) + oPtr.TypeSpecificValue > 0 ? 2 : 0;
-        }
         public override int Ds => 1;
         public override bool EasyKnow => true;
         public override string FriendlyName => "& Brass Lantern~";

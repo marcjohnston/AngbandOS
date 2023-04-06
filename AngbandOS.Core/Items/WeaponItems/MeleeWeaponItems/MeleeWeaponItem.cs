@@ -6,5 +6,6 @@
         public override int WieldSlot => InventorySlot.MeleeWeapon;
         public MeleeWeaponItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
 
+        public override bool IdentityCanBeSensed => true;
     }
 }

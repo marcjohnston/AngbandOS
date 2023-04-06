@@ -4,5 +4,16 @@ namespace AngbandOS.Core.Items
     internal class OrbLightItem : LightItem
     {
         public OrbLightItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<LightOrb>()) { }
+        /// <summary>
+        /// Returns an intensity of light provided by the orb.  A value of 2 is returned, plus an additional 3
+        /// if the orb is an artifact.
+        /// </summary>
+        /// <param name="oPtr"></param>
+        /// <returns></returns>
+        public override int CalcTorch()
+        {
+            return base.CalcTorch() + 2;
+        }
+        public override bool IdentityCanBeSensed => true;
     }
 }

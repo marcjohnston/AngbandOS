@@ -6,5 +6,22 @@ namespace AngbandOS.Core.Items
         public override int WieldSlot => InventorySlot.Lightsource;
         public LightItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
         public override int PackSort => 18;
+
+        /// <summary>
+        /// Returns an intensity of 3, if the item is an artifact; otherwise, 0 is returned.
+        /// </summary>
+        /// <param name="oPtr"></param>
+        /// <returns></returns>
+        public override int CalcTorch()
+        {
+            if (FixedArtifact != null)
+            {
+                return 3;
+            }
+            else
+            {
+                return 0;
+            }
+        }
     }
 }
