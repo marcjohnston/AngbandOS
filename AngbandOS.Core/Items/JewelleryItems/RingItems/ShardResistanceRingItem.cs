@@ -4,5 +4,7 @@ namespace AngbandOS.Core.Items
     internal class ShardResistanceRingItem : RingItem
     {
         public ShardResistanceRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<RingShardResistance>()) { }
+        public override bool EasyKnow => true;
+        public override bool ResShards => true;
     }
 }

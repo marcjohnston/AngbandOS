@@ -6,5 +6,6 @@ namespace AngbandOS.Core.Items
         public FoodItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
         public override int PackSort => 9;
         public override int PercentageBreakageChance => 100;
+        public override bool EasyKnow => true;
     }
 }

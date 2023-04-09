@@ -4,5 +4,6 @@ namespace AngbandOS.Core.Items
     internal class BarahirRingItem : RingItem
     {
         public BarahirRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<RingBarahir>()) { }
+        public override bool InstaArt => true;
     }
 }

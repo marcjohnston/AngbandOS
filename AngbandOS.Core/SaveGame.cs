@@ -805,11 +805,11 @@ namespace AngbandOS.Core
             }
             item.ApplyMagic(Level.ObjectLevel, true, good, great);
             item.Count = item.MakeObjectCount;
-            if (!item.IsCursed() && !item.IsBroken() && item.BaseItemCategory.Level > Difficulty)
+            if (!item.IsCursed() && !item.IsBroken() && item.ItemFactory.Level > Difficulty)
             {
                 if (Level != null)
                 {
-                    Level.TreasureRating += item.BaseItemCategory.Level - Difficulty;
+                    Level.TreasureRating += item.ItemFactory.Level - Difficulty;
                 }
             }
             return item;
@@ -2051,7 +2051,7 @@ namespace AngbandOS.Core
 
         public void OpenChest(int y, int x, Item chestItem)
         {
-            ChestItemClass chest = (ChestItemClass)chestItem.BaseItemCategory;
+            ChestItemClass chest = (ChestItemClass)chestItem.ItemFactory;
             bool small = chest.IsSmall;
             int number = chest.NumberOfItemsContained;
 
@@ -5404,7 +5404,7 @@ namespace AngbandOS.Core
             {
                 return false;
             }
-            int lev = oPtr.BaseItemCategory.Level;
+            int lev = oPtr.ItemFactory.Level;
             if (oPtr.Category == ItemTypeEnum.Rod)
             {
                 i = (100 - lev + num) / 5;
@@ -7694,7 +7694,7 @@ namespace AngbandOS.Core
         public bool DoCmdChannel(Item item)
         {
             int cost;
-            int price = item.BaseItemCategory.Cost;
+            int price = item.ItemFactory.Cost;
             // Never channel worthless items
             if (price <= 0)
             {
@@ -8964,7 +8964,7 @@ namespace AngbandOS.Core
             // Activating an item uses 100 energy
             EnergyUse = 100;
             // Get the level of the item
-            int itemLevel = item.BaseItemCategory.Level;
+            int itemLevel = item.ItemFactory.Level;
             if (item.FixedArtifact != null)
             {
                 itemLevel = item.FixedArtifact.Level;
@@ -9387,13 +9387,13 @@ namespace AngbandOS.Core
                         return;
                     }
                     // If it was something we might want to destroy again, ask
-                    if (!item.BaseItemCategory.HasQuality && item.BaseItemCategory.CategoryEnum != ItemTypeEnum.Chest)
+                    if (!item.ItemFactory.HasQuality && item.ItemFactory.CategoryEnum != ItemTypeEnum.Chest)
                     {
                         if (item.IsKnown())
                         {
                             if (GetCheck($"Always destroy {itemName}?"))
                             {
-                                item.BaseItemCategory.Stompable[0] = true;
+                                item.ItemFactory.Stompable[0] = true;
                             }
                         }
                     }
@@ -9586,7 +9586,7 @@ namespace AngbandOS.Core
             // We may need to aim the rod.  If we know that the rod requires aiming, we get a direction from the player.  Otherwise, if we do not know what
             // the rod is going to do, we will get a direction from the player.  This helps prevent the player from learning what the rod does because the game
             // would ask for a direction.
-            RodItemClass rodItemCategory = (RodItemClass)item.BaseItemCategory;
+            RodItemClass rodItemCategory = (RodItemClass)item.ItemFactory;
             int? dir = 5;
             if (rodItemCategory.RequiresAiming || !item.IsFlavourAware()) 
             {
@@ -9600,7 +9600,7 @@ namespace AngbandOS.Core
             // Using a rod takes a whole turn
             EnergyUse = 100;
             bool identified = false;
-            int itemLevel = item.BaseItemCategory.Level;
+            int itemLevel = item.ItemFactory.Level;
             // Chance to successfully use it is skill (halved if confused) - rod level (capped at 50)
             int chance = Player.SkillUseDevice;
             if (Player.TimedConfusion.TurnsRemaining != 0)
@@ -9628,7 +9628,7 @@ namespace AngbandOS.Core
             PlaySound(SoundEffect.ZapRod);
             // Do the rod-specific effect
             bool useCharge = true;
-            RodItemClass rodItem = (RodItemClass)item.BaseItemCategory;
+            RodItemClass rodItem = (RodItemClass)item.ItemFactory;
             ZapRodEvent zapRodEvent = new ZapRodEvent(item, dir);
             rodItem.Execute(zapRodEvent);
             NoticeCombineAndReorderFlaggedAction.Set();
@@ -9821,9 +9821,9 @@ namespace AngbandOS.Core
             PlaySound(SoundEffect.Quaff);
             // Drinking a potion costs a whole turn
             EnergyUse = 100;
-            int itemLevel = item.BaseItemCategory.Level;
+            int itemLevel = item.ItemFactory.Level;
             // Do the actual potion effect
-            PotionItemClass potion = (PotionItemClass)item.BaseItemCategory; // The item will be a potion.
+            PotionItemClass potion = (PotionItemClass)item.ItemFactory; // The item will be a potion.
             bool identified = potion.Quaff(this);
 
             // Skeletons are messy drinkers
@@ -9907,8 +9907,8 @@ namespace AngbandOS.Core
             }
             item.ItemOptimize();
             string missileName = missile.Description(false, 3);
-            Colour missileColour = missile.BaseItemCategory.FlavorColour;
-            char missileCharacter = missile.BaseItemCategory.FlavorCharacter;
+            Colour missileColour = missile.ItemFactory.FlavorColour;
+            char missileCharacter = missile.ItemFactory.FlavorCharacter;
             // Thrown distance is based on the weight of the missile
             int multiplier = 10 + (2 * (damageMultiplier - 1));
             int divider = missile.Weight > 10 ? missile.Weight : 10;
@@ -10017,7 +10017,7 @@ namespace AngbandOS.Core
                         {
                             // Let the player know what happens to the monster
                             Level.MessagePain(tile.MonsterIndex, damage);
-                            if (monster.SmFriendly && missile.BaseItemCategory.CategoryEnum != ItemTypeEnum.Potion)
+                            if (monster.SmFriendly && missile.ItemFactory.CategoryEnum != ItemTypeEnum.Potion)
                             {
                                 string mName = monster.Name;
                                 MsgPrint($"{mName} gets angry!");
@@ -10037,11 +10037,11 @@ namespace AngbandOS.Core
             // There's a chance of breakage if we hit a creature
             int chanceToBreak = hitBody ? missile.BreakageChance() : 0;
             // If we hit with a potion, the potion might affect the creature
-            if (missile.BaseItemCategory.CategoryEnum == ItemTypeEnum.Potion)
+            if (missile.ItemFactory.CategoryEnum == ItemTypeEnum.Potion)
             {
                 if (hitBody || !Level.GridPassable(newY, newX) || Program.Rng.DieRoll(100) < chanceToBreak)
                 {
-                    PotionItemClass potion = (PotionItemClass)missile.BaseItemCategory;
+                    PotionItemClass potion = (PotionItemClass)missile.ItemFactory;
                     MsgPrint($"The {missileName} shatters!");
                     if (potion.Smash(this, 1, y, x))
                     {
@@ -10642,7 +10642,7 @@ namespace AngbandOS.Core
                 return;
             }
 
-            StaffItemClass staffItem = (StaffItemClass)item.BaseItemCategory;
+            StaffItemClass staffItem = (StaffItemClass)item.ItemFactory;
 
             // We can't use a staff from the floor
             if (!item.IsInInventory && item.Count > 1)
@@ -10652,7 +10652,7 @@ namespace AngbandOS.Core
             }
             // Using a staff costs a full turn
             EnergyUse = 100;
-            int itemLevel = item.BaseItemCategory.Level;
+            int itemLevel = item.ItemFactory.Level;
             // We have a chance of the device working equal to skill (halved if confused) - item
             // level (capped at 50)
             int chance = Player.SkillUseDevice;
@@ -10852,7 +10852,7 @@ namespace AngbandOS.Core
             //bool identified = false;
             //bool usedUp = true;
 
-            ScrollItemClass scrollItem = (ScrollItemClass)item.BaseItemCategory;
+            ScrollItemClass scrollItem = (ScrollItemClass)item.ItemFactory;
             ReadScrollEvent readScrollEventArgs = new ReadScrollEvent(this);
             scrollItem.Read(readScrollEventArgs);
 
@@ -10862,7 +10862,7 @@ namespace AngbandOS.Core
             if (readScrollEventArgs.Identified && !item.IsFlavourAware())
             {
                 item.BecomeFlavourAware();
-                int itemLevel = item.BaseItemCategory.Level;
+                int itemLevel = item.ItemFactory.Level;
                 Player.GainExperience((itemLevel + (Player.Level >> 1)) / Player.Level);
             }
             bool channeled = false;
@@ -10911,7 +10911,7 @@ namespace AngbandOS.Core
                 return;
             }
 
-            LightSourceItemClass lightSourceItem = (LightSourceItemClass)lightSource.BaseItemCategory;
+            LightSourceItemClass lightSourceItem = (LightSourceItemClass)lightSource.ItemFactory;
             lightSourceItem.Refill(this, lightSource);
         }
 
@@ -11010,14 +11010,14 @@ namespace AngbandOS.Core
             PlaySound(SoundEffect.Shoot);
             // Get the details of the shot
             string missileName = individualAmmunition.Description(false, 3);
-            Colour missileColour = individualAmmunition.BaseItemCategory.FlavorColour;
-            char missileCharacter = individualAmmunition.BaseItemCategory.FlavorCharacter;
+            Colour missileColour = individualAmmunition.ItemFactory.FlavorColour;
+            char missileCharacter = individualAmmunition.ItemFactory.FlavorCharacter;
             int shotSpeed = Player.MissileAttacksPerRound;
             int shotDamage = Program.Rng.DiceRoll(individualAmmunition.DamageDice, individualAmmunition.DamageDiceSides) + individualAmmunition.BonusDamage + missileWeapon.BonusDamage;
             int attackBonus = Player.AttackBonus + individualAmmunition.BonusToHit + missileWeapon.BonusToHit;
             int chanceToHit = Player.SkillRanged + (attackBonus * Constants.BthPlusAdj);
             // Damage multiplier depends on weapon
-            BowWeaponItemClass missileWeaponItemCategory = (BowWeaponItemClass)missileWeapon.BaseItemCategory;
+            BowWeaponItemClass missileWeaponItemCategory = (BowWeaponItemClass)missileWeapon.ItemFactory;
             int damageMultiplier = missileWeaponItemCategory.MissileDamageMultiplier;
             // Extra might gives us an increased multiplier
             if (Player.HasExtraMight)
@@ -11170,8 +11170,8 @@ namespace AngbandOS.Core
             // Eating costs 100 energy
             EnergyUse = 100;
             bool ident = false;
-            int itemLevel = item.BaseItemCategory.Level;
-            FoodItemClass foodItem = (FoodItemClass)item.BaseItemCategory;
+            int itemLevel = item.ItemFactory.Level;
+            FoodItemClass foodItem = (FoodItemClass)item.ItemFactory;
 
             // Allow the food item to process the consumption.
             ident = foodItem.Eat(this);
@@ -11699,7 +11699,7 @@ namespace AngbandOS.Core
             }
             // Save the screen and overprint the spells in the book
             ScreenBuffer savedScreen = Screen.Clone();
-            BookItemClass book = (BookItemClass)item.BaseItemCategory;
+            BookItemClass book = (BookItemClass)item.ItemFactory;
             Player.PrintSpells(spells, spellIndex, 1, 20, book.ToRealm);
             Screen.PrintLine("", 0, 0);
             // Wait for a keypress and re-load the screen
@@ -12226,7 +12226,7 @@ namespace AngbandOS.Core
             // Using a wand takes 100 energy
             EnergyUse = 100;
             bool ident = false;
-            int itemLevel = item.BaseItemCategory.Level;
+            int itemLevel = item.ItemFactory.Level;
             // Chance of success is your skill - item level, with item level capped at 50 and your
             // skill halved if you're confused
             int chance = Player.SkillUseDevice;
@@ -12253,7 +12253,7 @@ namespace AngbandOS.Core
                 return;
             }
             PlaySound(SoundEffect.ZapRod);
-            WandItemClass activateableItem = (WandItemClass)item.BaseItemCategory;
+            WandItemClass activateableItem = (WandItemClass)item.ItemFactory;
             if (activateableItem.ExecuteActivation(this, dir))
             {
                 ident = true;
@@ -19717,7 +19717,7 @@ namespace AngbandOS.Core
             }
             string buf = oPtr.StoreDescription(true, 3);
             Screen.PrintLine(buf, 2, j);
-            Screen.PrintLine($"kind = {oPtr.BaseItemCategory,5}  level = {oPtr.BaseItemCategory.Level,4}  ItemType = {oPtr.Category,5}  ItemSubType = {oPtr.ItemSubCategory,5}", 4, j);
+            Screen.PrintLine($"kind = {oPtr.ItemFactory,5}  level = {oPtr.ItemFactory.Level,4}  ItemType = {oPtr.Category,5}  ItemSubType = {oPtr.ItemSubCategory,5}", 4, j);
             Screen.PrintLine($"number = {oPtr.Count,3}  wgt = {oPtr.Weight,6}  BaseArmourClass = {oPtr.BaseArmourClass,5}    damage = {oPtr.DamageDice}d{oPtr.DamageDiceSides}", 5, j);
             Screen.PrintLine($"TypeSpecificValue = {oPtr.TypeSpecificValue,5}  toac = {oPtr.BonusArmourClass,5}  tohit = {oPtr.BonusToHit,4}  todam = {oPtr.BonusDamage,4}", 6, j);
             Screen.PrintLine($"FixedArtifact = {(oPtr.FixedArtifact == null ? "no" : oPtr.FixedArtifact.Name),4}  name2 = {oPtr.RareItemTypeIndex,4}  cost = {oPtr.Value()}", 7, j);
@@ -19915,17 +19915,17 @@ namespace AngbandOS.Core
                 }
                 if (ch == 'n' || ch == 'N')
                 {
-                    qPtr.AssignItemType(oPtr.BaseItemCategory);
+                    qPtr.AssignItemType(oPtr.ItemFactory);
                     qPtr.ApplyMagic(Difficulty, false, false, false);
                 }
                 else if (ch == 'g' || ch == 'g')
                 {
-                    qPtr.AssignItemType(oPtr.BaseItemCategory);
+                    qPtr.AssignItemType(oPtr.ItemFactory);
                     qPtr.ApplyMagic(Difficulty, false, true, false);
                 }
                 else if (ch == 'e' || ch == 'e')
                 {
-                    qPtr.AssignItemType(oPtr.BaseItemCategory);
+                    qPtr.AssignItemType(oPtr.ItemFactory);
                     qPtr.ApplyMagic(Difficulty, false, true, true);
                 }
             }

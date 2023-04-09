@@ -4,5 +4,6 @@ namespace AngbandOS.Core.Items
     internal class MaceOfDisruptionHaftedWeaponItem : HaftedWeaponItem
     {
         public MaceOfDisruptionHaftedWeaponItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<HaftedMaceOfDisruption>()) { }
+        public override bool SlayUndead => true;
     }
 }

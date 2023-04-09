@@ -59,7 +59,7 @@ namespace AngbandOS.Core.InventorySlots
                 foreach (int index in InventorySlots)
                 {
                     Item? oPtr = processWorldEventArgs.SaveGame.GetInventoryItem(index);
-                    if (oPtr != null && oPtr.BaseItemCategory.ProvidesSunlight && !processWorldEventArgs.SaveGame.Player.HasLightResistance)
+                    if (oPtr != null && oPtr.ItemFactory.ProvidesSunlight && !processWorldEventArgs.SaveGame.Player.HasLightResistance)
                     {
                         string oName = oPtr.Description(false, 0);
                         processWorldEventArgs.SaveGame.MsgPrint($"The {oName} scorches your undead flesh!");

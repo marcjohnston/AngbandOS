@@ -195,7 +195,7 @@
             if (item.IsKnown())
             {
                 item.RefreshFlagBasedProperties();
-                if (ShowMods || item.BonusToHit != 0 && item.BonusDamage != 0)
+                if (item.ShowMods || item.BonusToHit != 0 && item.BonusDamage != 0)
                 {
                     s += $" ({GetSignedValue(item.BonusToHit)},{GetSignedValue(item.BonusDamage)})";
                 }

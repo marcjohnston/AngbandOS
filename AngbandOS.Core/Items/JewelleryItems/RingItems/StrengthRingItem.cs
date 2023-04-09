@@ -4,5 +4,7 @@ namespace AngbandOS.Core.Items
     internal class StrengthRingItem : RingItem
     {
         public StrengthRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<RingStrength>()) { }
+        public override bool HideType => true;
+        public override bool Str => true;
     }
 }

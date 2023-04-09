@@ -415,15 +415,15 @@ namespace AngbandOS.Core.Stores
             int i = pos % PageSize;
             string outVal = $"{i.IndexToLetter()}) ";
             SaveGame.Screen.PrintLine(outVal, i + 6, 0);
-            Colour a = oPtr.BaseItemCategory.FlavorColour;
-            char c = oPtr.BaseItemCategory.FlavorCharacter;
+            Colour a = oPtr.ItemFactory.FlavorColour;
+            char c = oPtr.ItemFactory.FlavorCharacter;
             SaveGame.Screen.Print(a, c.ToString(), i + 6, 3);
             oName = GetItemDescription(oPtr);
             if (maxwid < oName.Length)
             {
                 oName = oName.Substring(0, maxwid);
             }
-            SaveGame.Screen.Print(oPtr.BaseItemCategory.Colour, oName, i + 6, 5);
+            SaveGame.Screen.Print(oPtr.ItemFactory.Colour, oName, i + 6, 5);
             int wgt = oPtr.Weight;
             outVal = $"{wgt / 10,3}.{wgt % 10}{(RenderWeightUnitOfMeasurement ? " lb" : "")}";
             SaveGame.Screen.Print(outVal, i + 6, 61);
@@ -550,7 +550,7 @@ namespace AngbandOS.Core.Stores
                 }
             }
             ScreenBuffer savedScreen = SaveGame.Screen.Clone();
-            BookItemClass book = (BookItemClass)oPtr.BaseItemCategory;
+            BookItemClass book = (BookItemClass)oPtr.ItemFactory;
             SaveGame.Player.PrintSpells(spells, num, 1, 20, book.ToRealm);
             SaveGame.Screen.PrintLine("", 0, 0);
             SaveGame.Screen.Print("[Press any key to continue]", 0, 23);
@@ -814,7 +814,7 @@ namespace AngbandOS.Core.Stores
             int size = 1;
             int discount = 0;
             int cost = oPtr.Value();
-            size += oPtr.BaseItemCategory.GetAdditionalMassProduceCount(oPtr);
+            size += oPtr.ItemFactory.GetAdditionalMassProduceCount(oPtr);
             if (cost < 5)
             {
                 discount = 0;
@@ -1223,7 +1223,7 @@ namespace AngbandOS.Core.Stores
             }
             item += _storeTop;
             Item oPtr = _inventory[item];
-            if (BookItemClass.IsBook(oPtr.BaseItemCategory))
+            if (BookItemClass.IsBook(oPtr.ItemFactory))
             {
                 //BookItemClass book = (BookItemClass)oPtr.BaseItemCategory;
                 if (SaveGame.Player.PrimaryRealm?.SpellBookItemCategory == oPtr.Category)
@@ -1268,7 +1268,7 @@ namespace AngbandOS.Core.Stores
         private void StoreItemOptimize(int item)
         {
             Item oPtr = _inventory[item];
-            if (oPtr.BaseItemCategory == null)
+            if (oPtr.ItemFactory == null)
             {
                 return;
             }
@@ -1291,7 +1291,7 @@ namespace AngbandOS.Core.Stores
             {
                 return false;
             }
-            if (oPtr.BaseItemCategory != jPtr.BaseItemCategory)
+            if (oPtr.ItemFactory != jPtr.ItemFactory)
             {
                 return false;
             }

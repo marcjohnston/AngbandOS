@@ -4,5 +4,11 @@ namespace AngbandOS.Core.Items
     internal class GoldDragonScaleMailDragArmorItem : DragArmorItem
     {
         public GoldDragonScaleMailDragArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<DragArmorGoldDragonScaleMail>()) { }
+        public override bool Activate => true;
+        public override bool IgnoreAcid => true;
+        public override bool IgnoreCold => true;
+        public override bool IgnoreElec => true;
+        public override bool IgnoreFire => true;
+        public override bool ResSound => true;
     }
 }

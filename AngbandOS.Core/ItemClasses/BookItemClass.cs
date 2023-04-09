@@ -4,11 +4,6 @@
     internal abstract class BookItemClass : ItemClass
     {
         public BookItemClass(SaveGame saveGame) : base(saveGame) { }
-        /// <summary>
-        /// Returns true for all books.
-        /// </summary>
-        public override bool EasyKnow => true;
-
         public override int GetAdditionalMassProduceCount(Item item)
         {
             int cost = item.Value();

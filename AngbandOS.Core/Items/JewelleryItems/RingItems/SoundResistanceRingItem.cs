@@ -4,5 +4,7 @@ namespace AngbandOS.Core.Items
     internal class SoundResistanceRingItem : RingItem
     {
         public SoundResistanceRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<RingSoundResistance>()) { }
+        public override bool EasyKnow => true;
+        public override bool ResSound => true;
     }
 }

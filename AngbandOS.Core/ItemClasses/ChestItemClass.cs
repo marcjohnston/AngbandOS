@@ -28,21 +28,21 @@
             }
             else if (item.TypeSpecificValue == 0)
             {
-                return item.BaseItemCategory.Stompable[StompableType.Broken];
+                return item.ItemFactory.Stompable[StompableType.Broken];
             }
             else if (item.TypeSpecificValue < 0)
             {
-                return item.BaseItemCategory.Stompable[StompableType.Average];
+                return item.ItemFactory.Stompable[StompableType.Average];
             }
             else
             {
                 if (SaveGame.SingletonRepository.ChestTrapConfigurations[item.TypeSpecificValue].Traps.Length == 0)
                 {
-                      return item.BaseItemCategory.Stompable[StompableType.Good];
+                      return item.ItemFactory.Stompable[StompableType.Good];
                 }
                 else
                 {
-                    return item.BaseItemCategory.Stompable[StompableType.Excellent];
+                    return item.ItemFactory.Stompable[StompableType.Excellent];
                 }
             }
         }
@@ -90,9 +90,9 @@
         /// </remarks>
         public override void ApplyMagic(Item item, int level, int power)
         {
-            if (item.BaseItemCategory.Level > 0)
+            if (item.ItemFactory.Level > 0)
             {
-                item.TypeSpecificValue = Program.Rng.DieRoll(item.BaseItemCategory.Level);
+                item.TypeSpecificValue = Program.Rng.DieRoll(item.ItemFactory.Level);
                 if (item.TypeSpecificValue > 55)
                 {
                     int chestTrapConfigurationCount = SaveGame.SingletonRepository.ChestTrapConfigurations.Count;

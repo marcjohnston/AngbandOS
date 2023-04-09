@@ -103,9 +103,9 @@
 
             int bonusValue = 0;
             bonusValue += (item.BonusToHit + item.BonusDamage + item.BonusArmourClass) * 100;
-            if (item.DamageDice > item.BaseItemCategory.Dd && item.DamageDiceSides == item.BaseItemCategory.Ds)
+            if (item.DamageDice > item.ItemFactory.Dd && item.DamageDiceSides == item.ItemFactory.Ds)
             {
-                bonusValue += (item.DamageDice - item.BaseItemCategory.Dd) * item.DamageDiceSides * 100;
+                bonusValue += (item.DamageDice - item.ItemFactory.Dd) * item.DamageDiceSides * 100;
             }
             return bonusValue;
         }

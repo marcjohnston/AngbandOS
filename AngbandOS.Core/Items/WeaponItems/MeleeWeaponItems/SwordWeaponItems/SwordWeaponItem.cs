@@ -8,5 +8,6 @@ namespace AngbandOS.Core.Items
         public override bool GetsDamageMultiplier => true;
         public override bool CanVorpalSlay => true;
 
+        public override bool ShowMods => true;
     }
 }

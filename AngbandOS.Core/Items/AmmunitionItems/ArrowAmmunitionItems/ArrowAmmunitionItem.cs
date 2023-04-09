@@ -9,5 +9,6 @@ namespace AngbandOS.Core.Items
         public override int MakeObjectCount => Program.Rng.DiceRoll(6, 7);
 
         public override int PercentageBreakageChance => 25;
+        public override bool ShowMods => true;
     }
 }

@@ -40,5 +40,6 @@ namespace AngbandOS.Core.Items
         public BowWeaponItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
         public override bool IdentityCanBeSensed => true;
         public override bool CanApplyBlowsBonus => false;
+        public override bool ShowMods => true;
     }
 }

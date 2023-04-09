@@ -83,7 +83,7 @@
 
         public override bool ItemMatches(Item item)
         {
-            switch (item.BaseItemCategory)
+            switch (item.ItemFactory)
             {
                 case SorceryBookItemClass _:
                 case NatureBookItemClass _:

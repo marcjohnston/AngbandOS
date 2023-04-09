@@ -4,7 +4,6 @@
     internal abstract class FoodItemClass : ItemClass
     {
         public FoodItemClass(SaveGame saveGame) : base(saveGame) { }
-        public override bool EasyKnow => true;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Food;
         public override bool CanAbsorb(Item item, Item other)
         {
@@ -18,7 +17,7 @@
                 return base.GetDescription(item, includeCountPrefix);
             }
             string flavour = item.IdentStoreb ? "" : $"{item.SaveGame.SingletonRepository.MushroomFlavours[item.ItemSubCategory].Name} ";
-            string ofName = item.IsFlavourAware() ? $" of {item.BaseItemCategory.FriendlyName}" : "";
+            string ofName = item.IsFlavourAware() ? $" of {item.ItemFactory.FriendlyName}" : "";
             string name = $"{flavour}{Pluralize("Mushroom", item.Count)}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
         }

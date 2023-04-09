@@ -5,5 +5,6 @@ namespace AngbandOS.Core.Items
     {
         public RodItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
         public override int PackSort => 13;
+        public override bool EasyKnow => true;
     }
 }

@@ -4,5 +4,6 @@ namespace AngbandOS.Core.Items
     internal class OfDeflectionShieldArmorItem : ShieldArmorItem
     {
         public OfDeflectionShieldArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<ShieldShieldOfDeflection>()) { }
+        public override bool IgnoreAcid => true;
     }
 }
