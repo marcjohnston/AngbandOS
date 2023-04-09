@@ -15,7 +15,5 @@ namespace AngbandOS.Core.Items
         {
             return base.CalcTorch() + TypeSpecificValue > 0 ? 2 : 0;
         }
-        public override bool EasyKnow => true;
-        public override bool IgnoreFire => true;
     }
 }

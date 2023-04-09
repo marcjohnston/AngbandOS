@@ -9,10 +9,11 @@
             if (item.BonusToHit + item.BonusDamage < 0)
                 return null;
 
-            int bonusValue = (item.BonusToHit + item.BonusDamage) * 5;
-            if (item.DamageDice > item.ItemFactory.Dd && item.DamageDiceSides == item.ItemFactory.Ds)
+            int bonusValue = 0;
+            bonusValue = (item.BonusToHit + item.BonusDamage) * 5;
+            if (item.DamageDice > item.BaseItemCategory.Dd && item.DamageDiceSides == item.BaseItemCategory.Ds)
             {
-                bonusValue += (item.DamageDice - item.ItemFactory.Dd) * item.DamageDiceSides * 5;
+                bonusValue += (item.DamageDice - item.BaseItemCategory.Dd) * item.DamageDiceSides * 5;
             }
             return bonusValue;
         }

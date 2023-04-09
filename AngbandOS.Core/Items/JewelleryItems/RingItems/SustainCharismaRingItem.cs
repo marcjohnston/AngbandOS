@@ -4,7 +4,5 @@ namespace AngbandOS.Core.Items
     internal class SustainCharismaRingItem : RingItem
     {
         public SustainCharismaRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<RingSustainCharisma>()) { }
-        public override bool EasyKnow => true;
-        public override bool SustCha => true;
     }
 }

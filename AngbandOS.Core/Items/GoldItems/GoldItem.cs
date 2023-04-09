@@ -5,7 +5,7 @@ namespace AngbandOS.Core.Items
     {
         public GoldItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass)
         {
-            int cost = ItemFactory.Cost;
+            int cost = BaseItemCategory.Cost;
             TypeSpecificValue = cost + (8 * Program.Rng.DieRoll(cost)) + Program.Rng.DieRoll(8);
         }
         public override int PackSort => 0;

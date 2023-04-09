@@ -4,6 +4,5 @@ namespace AngbandOS.Core.Items
     internal class VilyaRingItem : RingItem
     {
         public VilyaRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<RingVilya>()) { }
-        public override bool InstaArt => true;
     }
 }

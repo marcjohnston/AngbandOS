@@ -6,9 +6,8 @@
     /// </summary>
     [Serializable]
 
-    internal abstract class ItemClass
+    internal abstract class ItemClass : IItemCharacteristics
     {
-        public virtual bool InstaArt => false;
         public SaveGame SaveGame { get; }
 
         public ItemClass(SaveGame saveGame)
@@ -52,6 +51,18 @@
         public Colour FlavorColour;
 
         /// <summary>
+        /// Returns true, if the item category has any of the following properties: Str, Int, Wis, Dex, Con, Cha, Stealth, Search, Infra, Tunnel, Speed or Blows.
+        /// </summary>
+        /// <returns></returns>
+        public bool HasAnyPvalMask
+        {
+            get
+            {
+                return Str || Int || Wis || Dex || Con || Cha || Stealth || Search || Infra || Tunnel || Speed || Blows;
+            }
+        }
+
+        /// <summary>
         /// Returns true, if the object has quality.  Returns false, by default.  Armour, weapons and orbs of light return true.  All others types return false.
         /// </summary>
         public virtual bool HasQuality => false;
@@ -84,31 +95,204 @@
         public abstract string Name { get; }
 
         public virtual int Ac => 0;
+        public virtual bool Activate { get; set; } = false;
+        public virtual bool Aggravate { get; set; } = false;
+        public virtual bool AntiTheft { get; set; } = false;
+        public virtual bool Blessed { get; set; } = false;
+
+        /// <summary>
+        /// Returns whether or not the item affects the blows delivered by the player when being worn.
+        /// </summary>
+        public virtual bool Blows { get; set; } = false;
+
+        /// <summary>
+        /// Returns whether or not the item does extra damage from acid when being wielded.
+        /// </summary>
+        public virtual bool BrandAcid { get; set; } = false;
+
+        /// <summary>
+        /// Returns whether or not the item does extra damage from frost when being wielded.
+        /// </summary>
+        public virtual bool BrandCold { get; set; } = false;
+
+        /// <summary>
+        /// Returns whether or not the item does extra damage from electricity when being wielded.
+        /// </summary>
+        public virtual bool BrandElec { get; set; } = false;
+
+        /// <summary>
+        /// Returns whether or not the item does extra damage from fire when being wielded.
+        /// </summary>
+        public virtual bool BrandFire { get; set; } = false;
+
+        /// <summary>
+        /// Returns whether or not the item poisons foes when being wielded.
+        /// </summary>
+        public virtual bool BrandPois { get; set; } = false;
+
+        /// <summary>
+        /// Returns whether or not the item affects the charisma of the player when being worn.
+        /// </summary>
+        public virtual bool Cha { get; set; } = false;
+
         public virtual int[] Chance => new int[] { 0, 0, 0, 0 };
 
+        /// <summary>
+        /// Returns whether or not the item produced chaotic effects when being wielded.
+        /// </summary>
+        public virtual bool Chaotic { get; set; } = false;
+
+        /// <summary>
+        /// Returns whether or not the item affects the constitution of the player when being worn.
+        /// </summary>
+        public virtual bool Con { get; set; } = false;
         public virtual int Cost => 0;
+        public virtual bool Cursed { get; set; } = false;
         public virtual int Dd => 0;
 
+        /// <summary>
+        /// Returns whether or not the item affects the dexterity of the player when being worn.
+        /// </summary>
+        public virtual bool Dex { get; set; } = false;
+        public virtual bool DrainExp { get; set; } = false;
+        public virtual bool DreadCurse { get; set; } = false;
         public virtual int Ds => 0;
+        public virtual bool EasyKnow { get; set; } = false;
+        public virtual bool Feather { get; set; } = false;
+        public virtual bool FreeAct { get; set; } = false;
         public abstract string FriendlyName { get; }
+        public virtual bool HeavyCurse { get; set; } = false;
+        public virtual bool HideType { get; set; } = false;
+        public virtual bool HoldLife { get; set; } = false;
+        public virtual bool IgnoreAcid { get; set; } = false;
+        public virtual bool IgnoreCold { get; set; } = false;
+        public virtual bool IgnoreElec { get; set; } = false;
+        public virtual bool IgnoreFire { get; set; } = false;
+        public virtual bool ImAcid { get; set; } = false;
+        public virtual bool ImCold { get; set; } = false;
+        public virtual bool ImElec { get; set; } = false;
+        public virtual bool ImFire { get; set; } = false;
+
+        /// <summary>
+        /// Returns whether or not the item causes earthquakes of the player when being worn.
+        /// </summary>
+        public virtual bool Impact { get; set; } = false;
+
+        /// <summary>
+        /// Returns whether or not the item affects the infravision of the player when being worn.
+        /// </summary>
+        public virtual bool Infra { get; set; } = false;
+        public virtual bool InstaArt { get; set; } = false;
+
+        /// <summary>
+        /// Returns whether or not the item affects the intelligence of the player when being worn.
+        /// </summary>
+        public virtual bool Int { get; set; } = false;
+
+        /// <summary>
+        /// Returns whether or not the item is a great bane of dragons.
+        /// </summary>
+        public virtual bool KillDragon { get; set; } = false;
 
         public virtual bool KindIsGood => false;
         public virtual int Level => 0;
+        public virtual bool Lightsource { get; set; } = false;
         public virtual int[] Locale => new int[] { 0, 0, 0, 0 };
+        public virtual bool NoMagic { get; set; } = false;
+        public virtual bool NoTele { get; set; } = false;
+        public virtual bool PermaCurse { get; set; } = false;
         public virtual int Pval => 0;
+        public virtual bool Reflect { get; set; } = false;
+        public virtual bool Regen { get; set; } = false;
+        public virtual bool ResAcid { get; set; } = false;
+        public virtual bool ResBlind { get; set; } = false;
+        public virtual bool ResChaos { get; set; } = false;
+        public virtual bool ResCold { get; set; } = false;
+        public virtual bool ResConf { get; set; } = false;
+        public virtual bool ResDark { get; set; } = false;
+        public virtual bool ResDisen { get; set; } = false;
+        public virtual bool ResElec { get; set; } = false;
+        public virtual bool ResFear { get; set; } = false;
+        public virtual bool ResFire { get; set; } = false;
+        public virtual bool ResLight { get; set; } = false;
+        public virtual bool ResNether { get; set; } = false;
+        public virtual bool ResNexus { get; set; } = false;
+        public virtual bool ResPois { get; set; } = false;
+        public virtual bool ResShards { get; set; } = false;
+        public virtual bool ResSound { get; set; } = false;
 
+        /// <summary>
+        /// Returns whether or not the item affects the search capabilities of the player when being worn.
+        /// </summary>
+        public virtual bool Search { get; set; } = false;
+
+        public virtual bool SeeInvis { get; set; } = false;
+        public virtual bool ShElec { get; set; } = false;
+        public virtual bool ShFire { get; set; } = false;
+        public virtual bool ShowMods { get; set; } = false;
+        public virtual bool SlayAnimal { get; set; } = false;
+        public virtual bool SlayDemon { get; set; } = false;
+        public virtual bool SlayDragon { get; set; } = false;
+        public virtual bool SlayEvil { get; set; } = false;
+        public virtual bool SlayGiant { get; set; } = false;
+        public virtual bool SlayOrc { get; set; } = false;
+        public virtual bool SlayTroll { get; set; } = false;
+        public virtual bool SlayUndead { get; set; } = false;
+        public virtual bool SlowDigest { get; set; } = false;
+
+        /// <summary>
+        /// Returns whether or not the item affects the attack speed of the player when being worn.
+        /// </summary>
+        public virtual bool Speed { get; set; } = false;
+
+        /// <summary>
+        /// Returns whether or not the item affects the stealth of the player when being worn.
+        /// </summary>
+        public virtual bool Stealth { get; set; } = false;
+
+        /// <summary>
+        /// Returns whether or not the item affects the strength of the player when being worn.
+        /// </summary>
+        public virtual bool Str { get; set; } = false;
 
         /// <summary>
         /// Returns the subcategory enumeration that the item belongs to.  This property is to be deleted.  Returns null, when not in use.
         /// </summary>
         public abstract int? SubCategory { get; }
 
+        public virtual bool SustCha { get; set; } = false;
+        public virtual bool SustCon { get; set; } = false;
+        public virtual bool SustDex { get; set; } = false;
+        public virtual bool SustInt { get; set; } = false;
+        public virtual bool SustStr { get; set; } = false;
+        public virtual bool SustWis { get; set; } = false;
+        public virtual bool Telepathy { get; set; } = false;
+        public virtual bool Teleport { get; set; } = false;
         public virtual int ToA => 0;
         public virtual int ToD => 0;
         public virtual int ToH => 0;
 
+        /// <summary>
+        /// Returns whether or not the item affects the tunnelling capabilities of the player when being worn.
+        /// </summary>
+        public virtual bool Tunnel { get; set; } = false;
+
+        public virtual bool Vampiric { get; set; } = false;
+
+        /// <summary>
+        /// Returns whether or not the item is very sharp and cuts foes of the player when being used.
+        /// </summary>
+        public virtual bool Vorpal { get; set; } = false;
+
         public virtual int Weight => 0;
 
+        /// <summary>
+        /// Returns whether or not the item affects the wisdom of the player when being worn.
+        /// </summary>
+        public virtual bool Wis { get; set; } = false;
+        public virtual bool Wraith { get; set; } = false;
+        public virtual bool XtraMight { get; set; } = false;
+        public virtual bool XtraShots { get; set; } = false;
 
         /// <summary>
         /// Returns the ItemCategoryEnum value for backwards compatibility.  This property will be deleted.
@@ -129,7 +313,7 @@
         /// <returns></returns>
         public virtual bool IsStompable(Item item)
         {
-            if (item.ItemFactory.HasQuality)
+            if (item.BaseItemCategory.HasQuality)
             {
                 switch (item.GetDetailedFeeling())
                 {
@@ -137,16 +321,16 @@
                     case "worthless":
                     case "cursed":
                     case "broken":
-                        return item.ItemFactory.Stompable[StompableType.Broken];
+                        return item.BaseItemCategory.Stompable[StompableType.Broken];
 
                     case "average":
-                        return item.ItemFactory.Stompable[StompableType.Average];
+                        return item.BaseItemCategory.Stompable[StompableType.Average];
 
                     case "good":
-                        return item.ItemFactory.Stompable[StompableType.Good];
+                        return item.BaseItemCategory.Stompable[StompableType.Good];
 
                     case "excellent":
-                        return item.ItemFactory.Stompable[StompableType.Excellent];
+                        return item.BaseItemCategory.Stompable[StompableType.Excellent];
 
                     case "special":
                         return false;
@@ -155,7 +339,7 @@
                         throw new InvalidDataException($"Unrecognised item quality ({item.GetDetailedFeeling()})");
                 }
             }
-            return item.ItemFactory.Stompable[StompableType.Broken];
+            return item.BaseItemCategory.Stompable[StompableType.Broken];
         }
 
         //    public virtual bool CanSlay => false;
@@ -186,7 +370,7 @@
         /// <returns></returns>
         public virtual string GetDescription(Item item, bool includeCountPrefix)
         {
-            string pluralizedName = ApplyPlurizationMacro(item.ItemFactory.FriendlyName, item.Count);
+            string pluralizedName = ApplyPlurizationMacro(item.BaseItemCategory.FriendlyName, item.Count);
             return ApplyGetPrefixCountMacro(includeCountPrefix, pluralizedName, item.Count, item.IsKnownArtifact);
         }
 
@@ -201,7 +385,7 @@
             if (item.IsKnown())
             {
                 item.RefreshFlagBasedProperties();
-                if (item.ShowMods || item.BonusToHit != 0 && item.BonusDamage != 0)
+                if (ShowMods || item.BonusToHit != 0 && item.BonusDamage != 0)
                 {
                     s += $" ({GetSignedValue(item.BonusToHit)},{GetSignedValue(item.BonusDamage)})";
                 }
@@ -238,17 +422,17 @@
         {
             string s = "";
             item.RefreshFlagBasedProperties();
-            if (item.IsKnown() && item.HasAnyPvalMask)
+            if (item.IsKnown() && HasAnyPvalMask)
             {
                 s += $" ({GetSignedValue(item.TypeSpecificValue)}";
-                if (item.HideType)
+                if (HideType)
                 {
                 }
-                else if (item.Speed)
+                else if (Speed)
                 {
                     s += " speed";
                 }
-                else if (item.Blows)
+                else if (Blows)
                 {
                     if (item.TypeSpecificValue > 1)
                     {
@@ -259,19 +443,19 @@
                         s += " attack";
                     }
                 }
-                else if (item.Stealth)
+                else if (Stealth)
                 {
                     s += " stealth";
                 }
-                else if (item.Search)
+                else if (Search)
                 {
                     s += " searching";
                 }
-                else if (item.Infra)
+                else if (Infra)
                 {
                     s += " infravision";
                 }
-                else if (item.Tunnel)
+                else if (Tunnel)
                 {
                 }
                 s += ")";
@@ -304,7 +488,7 @@
             {
                 tmpVal2 = "empty";
             }
-            else if (!item.IsFlavourAware() && item.ItemFactory.Tried)
+            else if (!item.IsFlavourAware() && item.BaseItemCategory.Tried)
             {
                 tmpVal2 = "tried";
             }

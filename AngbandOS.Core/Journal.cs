@@ -485,9 +485,15 @@ namespace AngbandOS.Core
                     {
                         continue;
                     }
-                    (names[j - 1], names[j]) = (names[j], names[j - 1]); // Tuple representation to swap the  values.
-                    (counts[j - 1], counts[j]) = (counts[j], counts[j - 1]); // Tuple representation to swap the  values.
-                    (unique[j - 1], unique[j]) = (unique[j], unique[j - 1]); // Tuple representation to swap the  values.
+                    string tempName = names[j];
+                    names[j] = names[j - 1];
+                    names[j - 1] = tempName;
+                    int tempCount = counts[j];
+                    counts[j] = counts[j - 1];
+                    counts[j - 1] = tempCount;
+                    bool tempUnique = unique[j];
+                    unique[j] = unique[j - 1];
+                    unique[j - 1] = tempUnique;
                 }
             }
             int first = 0;

@@ -1,206 +1,8 @@
 namespace AngbandOS.Core.Items
 {
     [Serializable]
-    internal abstract class Item : IComparable<Item>, IItemCharacteristics
+    internal abstract class Item : IComparable<Item> // TODO: Should be abstract
     {
-        #region IItemCharacteristics
-        public virtual bool Activate { get; set; } = false;
-        public virtual bool Aggravate { get; set; } = false;
-
-        public virtual bool AntiTheft { get; set; } = false;
-
-        public virtual bool Blessed { get; set; } = false;
-
-        /// <summary>
-        /// Returns whether or not the item affects the blows delivered by the player when being worn.
-        /// </summary>
-        public virtual bool Blows { get; set; } = false;
-
-        /// <summary>
-        /// Returns whether or not the item does extra damage from acid when being wielded.
-        /// </summary>
-        public virtual bool BrandAcid { get; set; } = false;
-
-        /// <summary>
-        /// Returns whether or not the item does extra damage from frost when being wielded.
-        /// </summary>
-        public virtual bool BrandCold { get; set; } = false;
-
-        /// <summary>
-        /// Returns whether or not the item does extra damage from electricity when being wielded.
-        /// </summary>
-        public virtual bool BrandElec { get; set; } = false;
-
-        /// <summary>
-        /// Returns whether or not the item does extra damage from fire when being wielded.
-        /// </summary>
-        public virtual bool BrandFire { get; set; } = false;
-
-        /// <summary>
-        /// Returns whether or not the item poisons foes when being wielded.
-        /// </summary>
-        public virtual bool BrandPois { get; set; } = false;
-
-        /// <summary>
-        /// Returns whether or not the item affects the charisma of the player when being worn.
-        /// </summary>
-        public virtual bool Cha { get; set; } = false;
-
-        /// <summary>
-        /// Returns whether or not the item produced chaotic effects when being wielded.
-        /// </summary>
-        public virtual bool Chaotic { get; set; } = false;
-
-        /// <summary>
-        /// Returns whether or not the item affects the constitution of the player when being worn.
-        /// </summary>
-        public virtual bool Con { get; set; } = false;
-
-        public virtual bool Cursed { get; set; } = false;
-
-        /// <summary>
-        /// Returns whether or not the item affects the dexterity of the player when being worn.
-        /// </summary>
-        public virtual bool Dex { get; set; } = false;
-
-        public virtual bool DrainExp { get; set; } = false;
-        public virtual bool DreadCurse { get; set; } = false;
-
-        public virtual bool EasyKnow { get; set; } = false;
-        public virtual bool Feather { get; set; } = false;
-
-        public virtual bool FreeAct { get; set; } = false;
-
-        public virtual bool HeavyCurse { get; set; } = false;
-        public virtual bool HideType { get; set; } = false;
-        public virtual bool HoldLife { get; set; } = false;
-
-        public virtual bool IgnoreAcid { get; set; } = false;
-        public virtual bool IgnoreCold { get; set; } = false;
-        public virtual bool IgnoreElec { get; set; } = false;
-        public virtual bool IgnoreFire { get; set; } = false;
-
-        public virtual bool ImAcid { get; set; } = false;
-        public virtual bool ImCold { get; set; } = false;
-        public virtual bool ImElec { get; set; } = false;
-        public virtual bool ImFire { get; set; } = false;
-
-        /// <summary>
-        /// Returns whether or not the item causes earthquakes of the player when being worn.
-        /// </summary>
-        public virtual bool Impact { get; set; } = false;
-
-        /// <summary>
-        /// Returns whether or not the item affects the infravision of the player when being worn.
-        /// </summary>
-        public virtual bool Infra { get; set; } = false;
-
-        public virtual bool InstaArt { get; set; } = false;
-
-        /// <summary>
-        /// Returns whether or not the item affects the intelligence of the player when being worn.
-        /// </summary>
-        public virtual bool Int { get; set; } = false;
-
-        /// <summary>
-        /// Returns whether or not the item is a great bane of dragons.
-        /// </summary>
-        public virtual bool KillDragon { get; set; } = false;
-
-        public virtual bool Lightsource { get; set; } = false;
-
-        public virtual bool NoMagic { get; set; } = false;
-        public virtual bool NoTele { get; set; } = false;
-        public virtual bool PermaCurse { get; set; } = false;
-
-        public virtual bool Regen { get; set; } = false;
-        public virtual bool Reflect { get; set; } = false;
-
-        public virtual bool ResAcid { get; set; } = false;
-        public virtual bool ResBlind { get; set; } = false;
-        public virtual bool ResChaos { get; set; } = false;
-        public virtual bool ResCold { get; set; } = false;
-        public virtual bool ResConf { get; set; } = false;
-        public virtual bool ResDark { get; set; } = false;
-        public virtual bool ResDisen { get; set; } = false;
-        public virtual bool ResElec { get; set; } = false;
-        public virtual bool ResFear { get; set; } = false;
-        public virtual bool ResFire { get; set; } = false;
-        public virtual bool ResLight { get; set; } = false;
-        public virtual bool ResNether { get; set; } = false;
-        public virtual bool ResNexus { get; set; } = false;
-        public virtual bool ResPois { get; set; } = false;
-        public virtual bool ResShards { get; set; } = false;
-        public virtual bool ResSound { get; set; } = false;
-
-        /// <summary>
-        /// Returns whether or not the item affects the search capabilities of the player when being worn.
-        /// </summary>
-        public virtual bool Search { get; set; } = false;
-
-        public virtual bool SeeInvis { get; set; } = false;
-        public virtual bool ShElec { get; set; } = false;
-        public virtual bool ShFire { get; set; } = false;
-        public virtual bool ShowMods { get; set; } = false;
-
-        public virtual bool SlayAnimal { get; set; } = false;
-        public virtual bool SlayDemon { get; set; } = false;
-        public virtual bool SlayDragon { get; set; } = false;
-        public virtual bool SlayEvil { get; set; } = false;
-        public virtual bool SlayGiant { get; set; } = false;
-        public virtual bool SlayOrc { get; set; } = false;
-        public virtual bool SlayTroll { get; set; } = false;
-        public virtual bool SlayUndead { get; set; } = false;
-
-        public virtual bool SlowDigest { get; set; } = false;
-        /// <summary>
-        /// Returns whether or not the item affects the attack speed of the player when being worn.
-        /// </summary>
-        public virtual bool Speed { get; set; } = false;
-
-        /// <summary>
-        /// Returns whether or not the item affects the stealth of the player when being worn.
-        /// </summary>
-        public virtual bool Stealth { get; set; } = false;
-
-        /// <summary>
-        /// Returns whether or not the item affects the strength of the player when being worn.
-        /// </summary>
-        public virtual bool Str { get; set; } = false;
-
-        public virtual bool SustCha { get; set; } = false;
-        public virtual bool SustCon { get; set; } = false;
-        public virtual bool SustDex { get; set; } = false;
-        public virtual bool SustInt { get; set; } = false;
-        public virtual bool SustStr { get; set; } = false;
-        public virtual bool SustWis { get; set; } = false;
-
-        public virtual bool Telepathy { get; set; } = false;
-        public virtual bool Teleport { get; set; } = false;
-
-        /// <summary>
-        /// Returns whether or not the item affects the tunnelling capabilities of the player when being worn.
-        /// </summary>
-        public virtual bool Tunnel { get; set; } = false;
-
-        public virtual bool Vampiric { get; set; } = false;
-
-        /// <summary>
-        /// Returns whether or not the item is very sharp and cuts foes of the player when being used.
-        /// </summary>
-        public virtual bool Vorpal { get; set; } = false;
-
-        /// <summary>
-        /// Returns whether or not the item affects the wisdom of the player when being worn.
-        /// </summary>
-        public virtual bool Wis { get; set; } = false;
-
-        public virtual bool Wraith { get; set; } = false;
-        public virtual bool XtraMight { get; set; } = false;
-        public virtual bool XtraShots { get; set; } = false;
-
-        #endregion
-
         /// <summary>
         /// Returns true, if the item is capable of vorpal slaying.  Only swords return true.  Returns false, by default.
         /// </summary>
@@ -483,7 +285,7 @@ namespace AngbandOS.Core.Items
         /// <summary>
         /// Returns the item type that this item is based on.  Returns null, if the item is (nothing), as in the inventory.
         /// </summary>
-        public ItemClass? ItemFactory = null;
+        public ItemClass? BaseItemCategory = null;
 
         public bool Marked;
 
@@ -522,7 +324,7 @@ namespace AngbandOS.Core.Items
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public bool IsAnItemOf<T>() => typeof(T).IsAssignableFrom(ItemFactory.GetType());
+        public bool IsAnItemOf<T>() => typeof(T).IsAssignableFrom(BaseItemCategory.GetType());
 
         /// <summary>
         /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.
@@ -550,12 +352,12 @@ namespace AngbandOS.Core.Items
         public int CompareTo(Item oPtr)
         {
             // First two levels of sort belong to spell books.
-            if (BookItemClass.IsBook(this.ItemFactory) && BookItemClass.IsBook(oPtr.ItemFactory))
+            if (BookItemClass.IsBook(this.BaseItemCategory) && BookItemClass.IsBook(oPtr.BaseItemCategory))
             {
                 // First level sort (primary realm spells books).
                 // A book that matches the first realm, will always come before a book that doesn't match the first realm.
-                BookItemClass thisBook = (BookItemClass)this.ItemFactory;
-                BookItemClass oPtrBook = (BookItemClass)oPtr.ItemFactory;
+                BookItemClass thisBook = (BookItemClass)this.BaseItemCategory;
+                BookItemClass oPtrBook = (BookItemClass)oPtr.BaseItemCategory;
                 if (thisBook.ToRealm == SaveGame.Player.PrimaryRealm && oPtrBook.ToRealm != SaveGame.Player.PrimaryRealm)
                 {
                     return -1;
@@ -649,7 +451,7 @@ namespace AngbandOS.Core.Items
 
         public Item Clone(int? newCount = null)
         {
-            Item clonedItem = ItemFactory.CreateItem(SaveGame);
+            Item clonedItem = BaseItemCategory.CreateItem(SaveGame);
             clonedItem.BaseArmourClass = BaseArmourClass;
             clonedItem.RandartItemCharacteristics.Copy(RandartItemCharacteristics);
             clonedItem.RandartName = RandartName;
@@ -669,7 +471,7 @@ namespace AngbandOS.Core.Items
 
             clonedItem.X = X;
             clonedItem.Y = Y;
-            clonedItem.ItemFactory = ItemFactory;
+            clonedItem.BaseItemCategory = BaseItemCategory;
             clonedItem.Marked = Marked;
             clonedItem.FixedArtifact = FixedArtifact;
             clonedItem.RareItemTypeIndex = RareItemTypeIndex;
@@ -689,7 +491,7 @@ namespace AngbandOS.Core.Items
 
         public bool IsKnownArtifact => IsKnown() && (FixedArtifact != null || !string.IsNullOrEmpty(RandartName));
 
-        public ItemTypeEnum Category => ItemFactory == null ? ItemTypeEnum.None : ItemFactory.CategoryEnum; // Provided for backwards compatability.  Will be deleted.
+        public ItemTypeEnum Category => BaseItemCategory == null ? ItemTypeEnum.None : BaseItemCategory.CategoryEnum; // Provided for backwards compatability.  Will be deleted.
 
         public void Absorb(Item other)
         {
@@ -932,22 +734,22 @@ namespace AngbandOS.Core.Items
 
         public void AssignItemType(ItemClass baseItemCategory)
         {
-            ItemFactory = baseItemCategory;
-            ItemSubCategory = ItemFactory.SubCategory ?? 0;
-            TypeSpecificValue = ItemFactory.Pval;
+            BaseItemCategory = baseItemCategory;
+            ItemSubCategory = BaseItemCategory.SubCategory ?? 0;
+            TypeSpecificValue = BaseItemCategory.Pval;
             Count = 1;
-            Weight = ItemFactory.Weight;
-            BonusToHit = ItemFactory.ToH;
-            BonusDamage = ItemFactory.ToD;
-            BonusArmourClass = ItemFactory.ToA;
-            BaseArmourClass = ItemFactory.Ac;
-            DamageDice = ItemFactory.Dd;
-            DamageDiceSides = ItemFactory.Ds;
-            if (ItemFactory.Cost <= 0)
+            Weight = BaseItemCategory.Weight;
+            BonusToHit = BaseItemCategory.ToH;
+            BonusDamage = BaseItemCategory.ToD;
+            BonusArmourClass = BaseItemCategory.ToA;
+            BaseArmourClass = BaseItemCategory.Ac;
+            DamageDice = BaseItemCategory.Dd;
+            DamageDiceSides = BaseItemCategory.Ds;
+            if (BaseItemCategory.Cost <= 0)
             {
                 IdentBroken = true;
             }
-            if (Cursed)
+            if (BaseItemCategory.Cursed)
             {
                 IdentCursed = true;
             }
@@ -955,7 +757,7 @@ namespace AngbandOS.Core.Items
 
         public void BecomeFlavourAware()
         {
-            ItemFactory.FlavourAware = true;
+            BaseItemCategory.FlavourAware = true;
         }
 
         public void BecomeKnown()
@@ -1043,11 +845,11 @@ namespace AngbandOS.Core.Items
         public bool CanAbsorb(Item other)
         {
             int total = Count + other.Count;
-            if (ItemFactory != other.ItemFactory)
+            if (BaseItemCategory != other.BaseItemCategory)
             {
                 return false;
             }
-            if (!ItemFactory.CanAbsorb(this, other))
+            if (!BaseItemCategory.CanAbsorb(this, other))
             {
                 return false;
             }
@@ -1085,11 +887,11 @@ namespace AngbandOS.Core.Items
         /// <returns></returns>
         public string Description(bool includeCountPrefix, int mode)
         {
-            if (ItemFactory == null)
+            if (BaseItemCategory == null)
             {
                 return "(nothing)";
             }
-            string basenm = ItemFactory.GetDescription(this, includeCountPrefix);
+            string basenm = BaseItemCategory.GetDescription(this, includeCountPrefix);
             if (IsKnown())
             {
                 if (!string.IsNullOrEmpty(RandartName))
@@ -1115,13 +917,13 @@ namespace AngbandOS.Core.Items
             }
 
             // This is the detailed description.
-            basenm += ItemFactory.GetDetailedDescription(this);
+            basenm += BaseItemCategory.GetDetailedDescription(this);
             if (mode < 2)
             {
                 return basenm;
             }
 
-            basenm += ItemFactory.GetVerboseDescription(this);
+            basenm += BaseItemCategory.GetVerboseDescription(this);
 
             // This is the verbose description.
             if (mode < 3)
@@ -1130,7 +932,7 @@ namespace AngbandOS.Core.Items
             }
 
             // This is the full description.
-            basenm += ItemFactory.GetFullDescription(this);
+            basenm += BaseItemCategory.GetFullDescription(this);
 
             // We can only render 75 characters max ... we are forced to truncate.
             if (basenm.Length > 75)
@@ -1564,13 +1366,13 @@ namespace AngbandOS.Core.Items
         {
             // All characteristics are set to false.
             Characteristics = new ItemCharacteristics();
-            if (ItemFactory == null)
+            if (BaseItemCategory == null)
             {
                 return;
             }
 
-            // Merge the original characteristics from this item .
-            Characteristics.Merge(this);
+            // Merge the characteristics from the base item category.
+            Characteristics.Merge(BaseItemCategory);
 
             // Now merge the characteristics from the fixed artifact, if there is one.
             if (FixedArtifact != null)
@@ -1636,22 +1438,22 @@ namespace AngbandOS.Core.Items
 
         public bool HatesAcid()
         {
-            return ItemFactory.HatesAcid;
+            return BaseItemCategory.HatesAcid;
         }
 
         public bool HatesCold()
         {
-            return ItemFactory.HatesCold;
+            return BaseItemCategory.HatesCold;
         }
 
         public bool HatesElec()
         {
-            return ItemFactory.HatesElectricity;
+            return BaseItemCategory.HatesElectricity;
         }
 
         public bool HatesFire()
         {
-            return ItemFactory.HatesFire;
+            return BaseItemCategory.HatesFire;
         }
 
         public bool IdentifyFully()
@@ -1665,7 +1467,7 @@ namespace AngbandOS.Core.Items
                 info[i++] = DescribeActivationEffect();
                 info[i++] = "...if it is being worn.";
             }
-            string categoryIdentity = ItemFactory.Identify(this);
+            string categoryIdentity = BaseItemCategory.Identify(this);
             if (categoryIdentity != null)
             {
                 info[i++] = categoryIdentity;
@@ -2050,16 +1852,16 @@ namespace AngbandOS.Core.Items
 
         public bool IsFlavourAware()
         {
-            if (ItemFactory == null)
+            if (BaseItemCategory == null)
             {
                 return false;
             }
-            return ItemFactory.FlavourAware;
+            return BaseItemCategory.FlavourAware;
         }
 
         public bool IsKnown()
         {
-            if (ItemFactory == null)
+            if (BaseItemCategory == null)
             {
                 return false;
             }
@@ -2067,7 +1869,7 @@ namespace AngbandOS.Core.Items
             {
                 return true;
             }
-            if (EasyKnow && ItemFactory.FlavourAware)
+            if (BaseItemCategory.EasyKnow && BaseItemCategory.FlavourAware)
             {
                 return true;
             }
@@ -2090,16 +1892,16 @@ namespace AngbandOS.Core.Items
 
         public void ObjectTried()
         {
-            ItemFactory.Tried = true;
+            BaseItemCategory.Tried = true;
         }
 
         public int RealValue()
         {
-            if (ItemFactory.Cost == 0)
+            if (BaseItemCategory.Cost == 0)
             {
                 return 0;
             }
-            int value = ItemFactory.Cost;
+            int value = BaseItemCategory.Cost;
             if (RandartItemCharacteristics.IsSet)
             {
                 value += FlagBasedCost(TypeSpecificValue);
@@ -2121,16 +1923,16 @@ namespace AngbandOS.Core.Items
                 }
                 value += ePtr.Cost;
             }
-            if (ItemFactory.IsWorthless(this))
+            if (BaseItemCategory.IsWorthless(this))
             {
                 return 0;
             }
-            int? typeSpecificValue = ItemFactory.GetTypeSpecificRealValue(this, value);
+            int? typeSpecificValue = BaseItemCategory.GetTypeSpecificRealValue(this, value);
             if (typeSpecificValue == null)
                 return 0;
             value += typeSpecificValue.Value;
 
-            int? bonusValue = ItemFactory.GetBonusRealValue(this, value);
+            int? bonusValue = BaseItemCategory.GetBonusRealValue(this, value);
             if (bonusValue == null)
                 return 0;
 
@@ -2142,11 +1944,11 @@ namespace AngbandOS.Core.Items
         {
             if (!IsKnown())
             {
-                if (ItemFactory.HasFlavor)
+                if (BaseItemCategory.HasFlavor)
                 {
                     if (IsFlavourAware())
                     {
-                        return ItemFactory.Stompable[StompableType.Broken];
+                        return BaseItemCategory.Stompable[StompableType.Broken];
                     }
                 }
                 if (!IdentSense)
@@ -2154,17 +1956,17 @@ namespace AngbandOS.Core.Items
                     return false;
                 }
             }
-            return ItemFactory.IsStompable(this);
+            return BaseItemCategory.IsStompable(this);
         }
 
         public string StoreDescription(bool pref, int mode)
         {
-            bool hackAware = ItemFactory.FlavourAware;
+            bool hackAware = BaseItemCategory.FlavourAware;
             bool hackKnown = IdentKnown;
             IdentKnown = true;
-            ItemFactory.FlavourAware = true;
+            BaseItemCategory.FlavourAware = true;
             string buf = Description(pref, mode);
-            ItemFactory.FlavourAware = hackAware;
+            BaseItemCategory.FlavourAware = hackAware;
             if (!hackKnown)
             {
                 IdentKnown = false;
@@ -2220,9 +2022,9 @@ namespace AngbandOS.Core.Items
         {
             if (IsFlavourAware())
             {
-                return ItemFactory.Cost;
+                return BaseItemCategory.Cost;
             }
-            return ItemFactory.BaseValue;
+            return BaseItemCategory.BaseValue;
         }
 
         private string DescribeActivationEffect()
@@ -2246,12 +2048,12 @@ namespace AngbandOS.Core.Items
             {
                 return "teleport every 50+d50 turns";
             }
-            return ItemFactory.DescribeActivationEffect(this);
+            return BaseItemCategory.DescribeActivationEffect(this);
         }
 
         private bool IsTried()
         {
-            return ItemFactory.Tried;
+            return BaseItemCategory.Tried;
         }
 
         public void ApplyMagic(int lev, bool okay, bool good, bool great)
@@ -2338,7 +2140,7 @@ namespace AngbandOS.Core.Items
                 }
                 return;
             }
-            ItemFactory.ApplyMagic(this, lev, power);
+            BaseItemCategory.ApplyMagic(this, lev, power);
             if (!string.IsNullOrEmpty(RandartName))
             {
                 if (SaveGame.Level != null)
@@ -2451,13 +2253,13 @@ namespace AngbandOS.Core.Items
                 }
                 return;
             }
-            if (ItemFactory != null)
+            if (BaseItemCategory != null)
             {
-                if (ItemFactory.Cost == 0)
+                if (BaseItemCategory.Cost == 0)
                 {
                     IdentBroken = true;
                 }
-                if (Cursed)
+                if (BaseItemCategory.Cursed)
                 {
                     IdentCursed = true;
                 }
@@ -2663,7 +2465,7 @@ namespace AngbandOS.Core.Items
                     break;
 
                 case 39:
-                    if (ItemFactory.CanProvideSheathOfElectricity)
+                    if (BaseItemCategory.CanProvideSheathOfElectricity)
                     {
                         RandartItemCharacteristics.ShElec = true;
                     }
@@ -2678,7 +2480,7 @@ namespace AngbandOS.Core.Items
                     break;
 
                 case 40:
-                    if (ItemFactory.CanProvideSheathOfFire)
+                    if (BaseItemCategory.CanProvideSheathOfFire)
                     {
                         RandartItemCharacteristics.ShFire = true;
                     }
@@ -2693,7 +2495,7 @@ namespace AngbandOS.Core.Items
                     break;
 
                 case 41:
-                    if (ItemFactory.CanReflectBoltsAndArrows)
+                    if (BaseItemCategory.CanReflectBoltsAndArrows)
                     {
                         RandartItemCharacteristics.Reflect = true;
                     }
@@ -2741,7 +2543,7 @@ namespace AngbandOS.Core.Items
             }
             while (powers-- != 0)
             {
-                int maxType = (ItemFactory.CanApplySlayingBonus ? 7 : 5);
+                int maxType = (BaseItemCategory.CanApplySlayingBonus ? 7 : 5);
                 switch (Program.Rng.DieRoll(maxType))
                 {
                     case 1:
@@ -2788,7 +2590,7 @@ namespace AngbandOS.Core.Items
                     TypeSpecificValue = 4;
                 }
             }
-            ItemFactory.ApplyRandartBonus(this);
+            BaseItemCategory.ApplyRandartBonus(this);
             RandartItemCharacteristics.IgnoreAcid = true;
             RandartItemCharacteristics.IgnoreElec = true;
             RandartItemCharacteristics.IgnoreFire = true;
@@ -2798,7 +2600,7 @@ namespace AngbandOS.Core.Items
             {
                 CurseRandart();
             }
-            if (!aCursed && Program.Rng.DieRoll(ItemFactory.RandartActivationChance) == 1)
+            if (!aCursed && Program.Rng.DieRoll(BaseItemCategory.RandartActivationChance) == 1)
             {
                 BonusPowerSubType = null;
                 GiveActivationPower(ref artifactBias);
@@ -2854,7 +2656,7 @@ namespace AngbandOS.Core.Items
                     continue;
                 }
 
-                if (aPtr.BaseItemCategory != ItemFactory)
+                if (aPtr.BaseItemCategory != BaseItemCategory)
                 {
                     continue;
                 }
@@ -2995,7 +2797,7 @@ namespace AngbandOS.Core.Items
 
                 case 20:
                 case 21:
-                    if (!ItemFactory.CanApplyTunnelBonus)
+                    if (!BaseItemCategory.CanApplyTunnelBonus)
                     {
                         ApplyRandomBonuses(ref artifactBias);
                     }
@@ -3427,18 +3229,5 @@ namespace AngbandOS.Core.Items
             RandartItemCharacteristics.Activate = true;
             RechargeTimeLeft = 0;
         }
-
-        /// <summary>
-        /// Returns true, if the item category has any of the following properties: Str, Int, Wis, Dex, Con, Cha, Stealth, Search, Infra, Tunnel, Speed or Blows.
-        /// </summary>
-        /// <returns></returns>
-        public bool HasAnyPvalMask
-        {
-            get
-            {
-                return Str || Int || Wis || Dex || Con || Cha || Stealth || Search || Infra || Tunnel || Speed || Blows;
-            }
-        }
-
     }
 }

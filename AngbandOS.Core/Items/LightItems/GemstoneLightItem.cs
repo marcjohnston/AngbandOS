@@ -15,6 +15,5 @@ namespace AngbandOS.Core.Items
             }
         }
         public GemstoneLightItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<LightGemstone>()) { }
-        public override bool InstaArt => true;
     }
 }

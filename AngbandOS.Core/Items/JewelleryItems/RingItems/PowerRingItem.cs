@@ -4,6 +4,5 @@ namespace AngbandOS.Core.Items
     internal class PowerRingItem : RingItem
     {
         public PowerRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<RingPower>()) { }
-        public override bool InstaArt => true;
     }
 }

@@ -8,7 +8,5 @@ namespace AngbandOS.Core.Items
         public override int PackSort => 31;
         public override bool IdentityCanBeSensed => true;
         public override bool GetsDamageMultiplier => true;
-        public override bool ShowMods => true;
-        public override bool Tunnel => true;
     }
 }

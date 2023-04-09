@@ -4,6 +4,7 @@
     internal abstract class ScrollItemClass : ItemClass
     {
         public ScrollItemClass(SaveGame saveGame) : base(saveGame) { }
+        public override bool EasyKnow => true;
         public override bool HasFlavor => true;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Scroll;
         public override bool CanAbsorb(Item item, Item other)
@@ -13,7 +14,7 @@
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             string flavour = item.IdentStoreb ? "" : $" titled \"{item.SaveGame.ScrollFlavours[item.ItemSubCategory].Name}\"";
-            string ofName = item.IsFlavourAware() ? $" of {item.ItemFactory.FriendlyName}" : "";
+            string ofName = item.IsFlavourAware() ? $" of {item.BaseItemCategory.FriendlyName}" : "";
             string name = $"{Pluralize("Scroll", item.Count)}{flavour}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
         }

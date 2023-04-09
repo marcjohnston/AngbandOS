@@ -1730,9 +1730,9 @@ namespace AngbandOS.Core
                         string y = oPtr.Count > 1 ? (amt == oPtr.Count ? "All of y" : (amt > 1 ? "Some of y" : "One of y")) : "Y";
                         string w = amt > 1 ? "were" : "was";
                         SaveGame.MsgPrint($"{y}our {oName} ({i.IndexToLabel()}) {w} destroyed!");
-                        if (oPtr.ItemFactory.CategoryEnum == ItemTypeEnum.Potion)
+                        if (oPtr.BaseItemCategory.CategoryEnum == ItemTypeEnum.Potion)
                         {
-                            PotionItemClass potion = (PotionItemClass)oPtr.ItemFactory;
+                            PotionItemClass potion = (PotionItemClass)oPtr.BaseItemCategory;
                             potion.Smash(SaveGame, 0, SaveGame.Player.MapY, SaveGame.Player.MapX);
                         }
                         InvenItemIncrease(i, -amt);
@@ -1892,7 +1892,7 @@ namespace AngbandOS.Core
 
         public bool ItemMatchesFilter(Item item, IItemFilter? itemFilter)
         {
-            if (item.ItemFactory == null)
+            if (item.BaseItemCategory == null)
             {
                 return false;
             }
@@ -1984,10 +1984,10 @@ namespace AngbandOS.Core
                         ConsoleTableRow consoleRow = consoleTable.AddRow();
                         consoleRow["label"] = new ConsoleString(Colour.White, $"{index.IndexToLabel()})");
 
-                        if (oPtr.ItemFactory != null)
+                        if (oPtr.BaseItemCategory != null)
                         {
                             // Apply flavour visuals
-                            consoleRow["flavour"] = new ConsoleChar(oPtr.ItemFactory.FlavorColour, oPtr.ItemFactory.FlavorCharacter);
+                            consoleRow["flavour"] = new ConsoleChar(oPtr.BaseItemCategory.FlavorColour, oPtr.BaseItemCategory.FlavorCharacter);
                         }
                         else
                         {
@@ -1996,7 +1996,7 @@ namespace AngbandOS.Core
                         }
                         consoleRow["usage"] = new ConsoleString(Colour.White, $"{inventorySlot.MentionUse(index)}:");
 
-                        Colour colour = oPtr.ItemFactory == null ? Colour.White : oPtr.ItemFactory.Colour;
+                        Colour colour = oPtr.BaseItemCategory == null ? Colour.White : oPtr.BaseItemCategory.Colour;
                         consoleRow["description"] = new ConsoleString(colour, oPtr.Description(true, 3));
 
                         int wgt = oPtr.Weight * oPtr.Count;

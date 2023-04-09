@@ -66,7 +66,7 @@
         {
             // Cultists that are NOT wielding the blade of chaos lose bonuses for being an unpriestly weapon.
             // todo: this should by characterclass
-            if (oPtr.ItemFactory != null && !oPtr.IsAnItemOf<SwordBladeOfChaos>())
+            if (oPtr.BaseItemCategory != null && !oPtr.IsAnItemOf<SwordBladeOfChaos>())
             {
                 oPtr.RefreshFlagBasedProperties();
                 if (!oPtr.Characteristics.Chaotic)

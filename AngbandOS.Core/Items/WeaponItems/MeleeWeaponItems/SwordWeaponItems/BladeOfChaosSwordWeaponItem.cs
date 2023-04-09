@@ -4,6 +4,5 @@ namespace AngbandOS.Core.Items
     internal class BladeOfChaosSwordWeaponItem : SwordWeaponItem
     {
         public BladeOfChaosSwordWeaponItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<SwordBladeOfChaos>()) { }
-        public override bool ResChaos => true;
     }
 }

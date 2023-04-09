@@ -4,6 +4,5 @@ namespace AngbandOS.Core.Items
     internal class IceScrollItem : ScrollItem
     {
         public IceScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<ScrollIce>()) { }
-        public override bool IgnoreCold => true;
     }
 }

@@ -4,6 +4,5 @@ namespace AngbandOS.Core.Items
     internal class FireScrollItem : ScrollItem
     {
         public FireScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<ScrollFire>()) { }
-        public override bool IgnoreFire => true;
     }
 }

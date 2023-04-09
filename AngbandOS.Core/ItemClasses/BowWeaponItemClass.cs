@@ -21,7 +21,7 @@
             string basenm = "";
             item.RefreshFlagBasedProperties();
             int power = item.ItemSubCategory % 10;
-            if (item.XtraMight)
+            if (XtraMight)
             {
                 power++;
             }

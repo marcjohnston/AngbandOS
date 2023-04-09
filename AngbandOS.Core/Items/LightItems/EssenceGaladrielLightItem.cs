@@ -4,6 +4,5 @@ namespace AngbandOS.Core.Items
     internal class EssenceGaladrielLightItem : LightItem
     {
         public EssenceGaladrielLightItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<LightStarEssenceGaladriel>()) { }
-        public override bool InstaArt => true;
     }
 }

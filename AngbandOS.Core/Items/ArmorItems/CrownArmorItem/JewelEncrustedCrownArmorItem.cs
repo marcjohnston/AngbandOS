@@ -4,6 +4,5 @@ namespace AngbandOS.Core.Items
     internal class JewelEncrustedCrownArmorItem : CrownArmorItem
     {
         public JewelEncrustedCrownArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<CrownJewelEncrusted>()) { }
-        public override bool IgnoreAcid => true;
     }
 }

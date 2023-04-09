@@ -73,11 +73,11 @@ namespace AngbandOS.Core.Projection
                     {
                         SaveGame.MsgPrint($"The {oName}{noteKill}");
                     }
-                    bool isPotion = oPtr.ItemFactory.CategoryEnum == ItemTypeEnum.Potion;
+                    bool isPotion = oPtr.BaseItemCategory.CategoryEnum == ItemTypeEnum.Potion;
                     SaveGame.Level.DeleteObject(oPtr);
                     if (isPotion)
                     {
-                        PotionItemClass potion = (PotionItemClass)oPtr.ItemFactory;
+                        PotionItemClass potion = (PotionItemClass)oPtr.BaseItemCategory;
                         potion.Smash(SaveGame, who, y, x);
                     }
                     SaveGame.Level.RedrawSingleLocation(y, x);

@@ -4,6 +4,5 @@ namespace AngbandOS.Core.Items
     internal class NenyaRingItem : RingItem
     {
         public NenyaRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<RingNenya>()) { }
-        public override bool InstaArt => true;
     }
 }

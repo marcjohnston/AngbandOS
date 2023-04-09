@@ -4,6 +4,5 @@ namespace AngbandOS.Core.Items
     internal class CarlammasAmuletItem : AmuletItem
     {
         public CarlammasAmuletItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<AmuletCarlammas>()) { }
-        public override bool InstaArt => true;
     }
 }

@@ -4,6 +4,5 @@ namespace AngbandOS.Core.Items
     internal class TulkasRingItem : RingItem
     {
         public TulkasRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<RingTulkas>()) { }
-        public override bool InstaArt => true;
     }
 }

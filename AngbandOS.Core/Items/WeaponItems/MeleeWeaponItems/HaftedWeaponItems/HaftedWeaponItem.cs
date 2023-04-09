@@ -6,6 +6,5 @@ namespace AngbandOS.Core.Items
         public HaftedWeaponItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
         public override int PackSort => 30;
         public override bool GetsDamageMultiplier => true;
-        public override bool ShowMods => true;
     }
 }

@@ -68,7 +68,7 @@
 
         public override bool ItemMatches(Item item)
         {
-            switch (item.ItemFactory)
+            switch (item.BaseItemCategory)
             {
                 case FoodItemClass _:
                 case LightSourceItemClass _:

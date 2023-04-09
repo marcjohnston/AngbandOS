@@ -4,7 +4,5 @@ namespace AngbandOS.Core.Items
     internal class SustainWisdomRingItem : RingItem
     {
         public SustainWisdomRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<RingSustainWisdom>()) { }
-        public override bool EasyKnow => true;
-        public override bool SustWis => true;
     }
 }

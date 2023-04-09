@@ -4,7 +4,5 @@ namespace AngbandOS.Core.Items
     internal class WisdomAmuletItem : AmuletItem
     {
         public WisdomAmuletItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<AmuletWisdom>()) { }
-        public override bool Wis => true;
-        public override bool HideType => true;
     }
 }

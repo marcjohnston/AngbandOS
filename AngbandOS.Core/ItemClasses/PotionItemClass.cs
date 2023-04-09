@@ -4,6 +4,7 @@
     internal abstract class PotionItemClass : ItemClass
     {
         public PotionItemClass(SaveGame saveGame) : base(saveGame) { }
+        public override bool EasyKnow => true;
         /// <summary>
         /// Have a potion affect the player.  Activates the potion effect.
         /// </summary>
@@ -36,7 +37,7 @@
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             string flavour = item.IdentStoreb ? "" : $"{item.SaveGame.SingletonRepository.PotionFlavours[item.ItemSubCategory].Name} ";
-            string ofName = item.IsFlavourAware() ? $" of {item.ItemFactory.FriendlyName}" : "";
+            string ofName = item.IsFlavourAware() ? $" of {item.BaseItemCategory.FriendlyName}" : "";
             string name = $"{flavour}{Pluralize("Potion", item.Count)}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
         }

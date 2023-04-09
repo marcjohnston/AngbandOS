@@ -27,7 +27,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
                 return;
             }
 
-            int lev = oPtr.ItemFactory.Level;
+            int lev = oPtr.BaseItemCategory.Level;
             if (oPtr.Category == ItemTypeEnum.Rod)
             {
                 if (oPtr.TypeSpecificValue > 0)

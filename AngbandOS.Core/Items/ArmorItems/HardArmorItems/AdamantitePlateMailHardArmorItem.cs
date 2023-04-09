@@ -4,6 +4,5 @@ namespace AngbandOS.Core.Items
     internal class AdamantitePlateMailHardArmorItem : HardArmorItem
     {
         public AdamantitePlateMailHardArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<HardArmorAdamantitePlateMail>()) { }
-        public override bool IgnoreAcid => true;
     }
 }

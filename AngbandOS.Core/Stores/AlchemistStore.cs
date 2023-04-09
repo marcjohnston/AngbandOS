@@ -67,7 +67,7 @@
 
         public override bool ItemMatches(Item item)
         {
-            switch (item.ItemFactory)
+            switch (item.BaseItemCategory)
             {
                 case ScrollItemClass _:
                 case PotionItemClass _:

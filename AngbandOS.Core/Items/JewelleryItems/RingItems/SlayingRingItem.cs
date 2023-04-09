@@ -4,6 +4,5 @@ namespace AngbandOS.Core.Items
     internal class SlayingRingItem : RingItem
     {
         public SlayingRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<RingSlaying>()) { }
-        public override bool ShowMods => true;
     }
 }

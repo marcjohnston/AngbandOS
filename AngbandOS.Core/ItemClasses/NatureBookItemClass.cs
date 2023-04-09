@@ -8,7 +8,7 @@
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             string name = item.SaveGame.Player.BaseCharacterClass.SpellCastingType == CastingType.Divine ? $"{Pluralize("Book", item.Count)} of Nature Magic" : $"Nature {Pluralize("Spellbook", item.Count)}";
-            name = $"{name} {item.ItemFactory.FriendlyName}";
+            name = $"{name} {item.BaseItemCategory.FriendlyName}";
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
         }
 

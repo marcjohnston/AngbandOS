@@ -6,6 +6,5 @@ namespace AngbandOS.Core.Items
         public PotionItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
         public override int PackSort => 11;
         public override int PercentageBreakageChance => 100;
-        public override bool EasyKnow => true;
     }
 }

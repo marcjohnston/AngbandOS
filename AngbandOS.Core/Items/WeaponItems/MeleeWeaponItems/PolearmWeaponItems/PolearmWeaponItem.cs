@@ -6,6 +6,5 @@ namespace AngbandOS.Core.Items
         public PolearmWeaponItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
         public override int PackSort => 29;
         public override bool GetsDamageMultiplier => true;
-        public override bool ShowMods => true;
     }
 }

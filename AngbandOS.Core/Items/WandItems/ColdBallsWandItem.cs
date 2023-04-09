@@ -4,6 +4,5 @@ namespace AngbandOS.Core.Items
     internal class ColdBallsWandItem : WandItem
     {
         public ColdBallsWandItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<WandColdBalls>()) { }
-        public override bool IgnoreCold => true;
     }
 }
