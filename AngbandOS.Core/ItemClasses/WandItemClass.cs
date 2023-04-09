@@ -31,11 +31,6 @@
 
         //public override bool IsCharged => true;
         public override Colour Colour => Colour.Chartreuse;
-        public override int? GetBonusRealValue(Item item, int value)
-        {
-            return value / 20 * item.TypeSpecificValue;
-        }
-
         public override string GetVerboseDescription(Item item)
         {
             string s = "";

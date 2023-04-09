@@ -5,5 +5,9 @@ namespace AngbandOS.Core.Items
     {
         public StaffItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
         public override int PackSort => 15;
+        public override int? GetBonusRealValue(Item item, int value)
+        {
+            return value / 20 * item.TypeSpecificValue;
+        }
     }
 }

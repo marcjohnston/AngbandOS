@@ -96,19 +96,6 @@
 
         public override bool CanApplyTunnelBonus => true;
 
-        public override int? GetBonusRealValue(Item item, int value)
-        {
-            if (item.BonusToHit + item.BonusDamage < 0)
-                return null;
-
-            int bonusValue = 0;
-            bonusValue += (item.BonusToHit + item.BonusDamage + item.BonusArmourClass) * 100;
-            if (item.DamageDice > item.BaseItemCategory.Dd && item.DamageDiceSides == item.BaseItemCategory.Ds)
-            {
-                bonusValue += (item.DamageDice - item.BaseItemCategory.Dd) * item.DamageDiceSides * 100;
-            }
-            return bonusValue;
-        }
         public override int? GetTypeSpecificRealValue(Item item, int value)
         {
             return ComputeTypeSpecificRealValue(item, value);

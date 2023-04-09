@@ -38,14 +38,6 @@
         /// </summary>
         public override bool KindIsGood => ToA >= 0;
 
-        public override int? GetBonusRealValue(Item item, int value)
-        {
-            if (item.BonusArmourClass < 0)
-                return null;
-
-            return (item.BonusToHit + item.BonusDamage + item.BonusArmourClass) * 100;
-        }
-
         public override int? GetTypeSpecificRealValue(Item item, int value)
         {
             return ComputeTypeSpecificRealValue(item, value);

@@ -6,5 +6,10 @@ namespace AngbandOS.Core.Items
         public WandItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
         public override int PackSort => 14;
         public override int PercentageBreakageChance => 25;
+        public override int? GetBonusRealValue(Item item, int value)
+        {
+            return value / 20 * item.TypeSpecificValue;
+        }
+
     }
 }

@@ -1932,7 +1932,7 @@ namespace AngbandOS.Core.Items
                 return 0;
             value += typeSpecificValue.Value;
 
-            int? bonusValue = BaseItemCategory.GetBonusRealValue(this, value);
+            int? bonusValue = GetBonusRealValue(this, value);
             if (bonusValue == null)
                 return 0;
 
@@ -3229,5 +3229,12 @@ namespace AngbandOS.Core.Items
             RandartItemCharacteristics.Activate = true;
             RechargeTimeLeft = 0;
         }
+
+        /// <summary>
+        /// Gets an additional bonus gold real value associated with the item.  Returns 0, by default.  Returns null, if the item is worthless.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public virtual int? GetBonusRealValue(Item item, int value) => 0;
     }
 }

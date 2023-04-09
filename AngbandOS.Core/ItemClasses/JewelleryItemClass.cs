@@ -28,14 +28,6 @@
             return true;
         }
 
-        public override int? GetBonusRealValue(Item item, int value)
-        {
-            if (item.BonusArmourClass < 0 || item.BonusToHit < 0 || item.BonusDamage < 0)
-                return 0;
-
-            return (item.BonusToHit + item.BonusDamage + item.BonusArmourClass) * 100;
-        }
-
         public override int? GetTypeSpecificRealValue(Item item, int value)
         {
             return ComputeTypeSpecificRealValue(item, value);

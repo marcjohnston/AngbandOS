@@ -504,12 +504,6 @@
             return tmpVal2;
         }
 
-        /// <summary>
-        /// Gets an additional bonus gold real value associated with the item.  Returns 0, by default.  Returns null, if the item is worthless.
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        public virtual int? GetBonusRealValue(Item item, int value) => 0;
         public virtual int? GetTypeSpecificRealValue(Item item, int value) => 0;
 
         /// <summary>
