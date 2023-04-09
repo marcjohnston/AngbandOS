@@ -1,10 +1,10 @@
 namespace AngbandOS.Core.Items
 {
 [Serializable]
-    internal abstract class LightItem : ArmourItem
+    internal abstract class LightSourceItem : ArmourItem
     {
         public override int WieldSlot => InventorySlot.Lightsource;
-        public LightItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
+        public LightSourceItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
         public override int PackSort => 18;
 
         public override int PercentageBreakageChance => 50;

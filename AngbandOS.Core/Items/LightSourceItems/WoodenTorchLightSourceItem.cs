@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.Items
 {
 [Serializable]
-    internal class WoodenTorchLightItem : LightItem
+    internal class WoodenTorchLightSourceItem : LightSourceItem
     {
-        public WoodenTorchLightItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<LightWoodenTorch>()) { }
+        public WoodenTorchLightSourceItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<LightWoodenTorch>()) { }
 
         /// <summary>
         /// Returns an intensity of light provided by the torch.  1, if the torch has turns remaining, plus an optional 3

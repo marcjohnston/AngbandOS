@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.Items
 {
 [Serializable]
-    internal class BrassLanternLightItem : LightItem
+    internal class BrassLanternLightSourceItem : LightSourceItem
     {
-        public BrassLanternLightItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<LightBrassLantern>()) { }
+        public BrassLanternLightSourceItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<LightBrassLantern>()) { }
 
         /// <summary>
         /// Returns an intensity of light provided by the lantern.  2, if the lantern has turns remaining, plus an additional 3

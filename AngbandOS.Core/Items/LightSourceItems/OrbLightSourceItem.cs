@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.Items
 {
 [Serializable]
-    internal class OrbLightItem : LightItem
+    internal class OrbLightSourceItem : LightSourceItem
     {
-        public OrbLightItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<LightOrb>()) { }
+        public OrbLightSourceItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<LightOrb>()) { }
         /// <summary>
         /// Returns an intensity of light provided by the orb.  A value of 2 is returned, plus an additional 3
         /// if the orb is an artifact.

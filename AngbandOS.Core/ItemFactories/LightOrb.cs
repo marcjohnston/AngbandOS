@@ -21,6 +21,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 50;
 
         public override bool HasQuality => true;
-        public override Item CreateItem(SaveGame saveGame) => new OrbLightItem(saveGame);
+        public override Item CreateItem(SaveGame saveGame) => new OrbLightSourceItem(saveGame);
     }
 }
