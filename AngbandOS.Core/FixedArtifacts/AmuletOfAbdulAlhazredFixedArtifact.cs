@@ -3,7 +3,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class AmuletOfAbdulAlhazredFixedArtifact : FixedArtifact, IActivatible
 {
-    private readonly ItemClass _baseItemCategory;
+    private readonly ItemFactory _baseItemCategory;
     private AmuletOfAbdulAlhazredFixedArtifact(SaveGame saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<AmuletIngwe>();
@@ -17,7 +17,7 @@ internal class AmuletOfAbdulAlhazredFixedArtifact : FixedArtifact, IActivatible
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
     }
     public string DescribeActivationEffect() => "dispel evil (x5) every 300+d300 turns";
-    public override ItemClass BaseItemCategory => _baseItemCategory;
+    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override char Character => '"';
     public override string Name => "The Amulet of Abdul Alhazred";

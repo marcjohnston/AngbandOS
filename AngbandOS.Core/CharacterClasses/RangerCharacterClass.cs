@@ -55,7 +55,7 @@
         };
         public override bool WorshipsADeity => true;
 
-        protected override ItemClass[] Outfit => new ItemClass[]
+        protected override ItemFactory[] Outfit => new ItemFactory[]
         {
             SaveGame.SingletonRepository.ItemCategories.Get<NatureBookCallOfTheWild>(),
             SaveGame.SingletonRepository.ItemCategories.Get<SwordBroadSword>(),

@@ -3,7 +3,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class RingOfSetFixedArtifact : FixedArtifact, IActivatible
 {
-    private readonly ItemClass _baseItemCategory;
+    private readonly ItemFactory _baseItemCategory;
     private RingOfSetFixedArtifact(SaveGame saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<RingPower>();
@@ -29,7 +29,7 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IActivatible
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
     }
-    public override ItemClass BaseItemCategory => _baseItemCategory;
+    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override char Character => '=';
     public override Colour Colour => Colour.Yellow;

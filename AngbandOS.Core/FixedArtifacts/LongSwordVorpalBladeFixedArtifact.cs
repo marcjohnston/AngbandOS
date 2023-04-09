@@ -3,13 +3,13 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class LongSwordVorpalBladeFixedArtifact : FixedArtifact
 {
-    private readonly ItemClass _baseItemCategory;
+    private readonly ItemFactory _baseItemCategory;
     private LongSwordVorpalBladeFixedArtifact(SaveGame saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordLongSword>();
     }
 
-    public override ItemClass BaseItemCategory => _baseItemCategory;
+    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     /// <summary>
     /// Returns a 1-in-3 chance for the long sword of vorpal cutting.

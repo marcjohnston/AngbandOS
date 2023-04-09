@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class BookItemClass : ItemClass
+    internal abstract class BookItemClass : ItemFactory
     {
         public BookItemClass(SaveGame saveGame) : base(saveGame) { }
         /// <summary>
@@ -23,7 +23,7 @@
             return 0;
         }
 
-        public static bool IsBook(ItemClass itemClass)
+        public static bool IsBook(ItemFactory itemClass)
         {
             return typeof(BookItemClass).IsAssignableFrom(itemClass.GetType());
         }

@@ -14,7 +14,7 @@ namespace AngbandOS.Core.Items
                 return InventorySlot.LeftHand;
             }
         }
-        public RingItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
+        public RingItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
         public override int PackSort => 16;
     }
 }

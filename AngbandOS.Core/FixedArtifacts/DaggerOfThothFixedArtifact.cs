@@ -3,7 +3,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class DaggerOfThothFixedArtifact : FixedArtifact, IActivatible
 {
-    private readonly ItemClass _baseItemCategory;
+    private readonly ItemFactory _baseItemCategory;
     private DaggerOfThothFixedArtifact(SaveGame saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordDagger>();
@@ -21,7 +21,7 @@ internal class DaggerOfThothFixedArtifact : FixedArtifact, IActivatible
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(4) + 4;
     }
     public string DescribeActivationEffect() => "stinking cloud (12) every 4+d4 turns";
-    public override ItemClass BaseItemCategory => _baseItemCategory;
+    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;

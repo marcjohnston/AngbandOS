@@ -3,7 +3,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact, IActivatible
 {
-    private readonly ItemClass _baseItemCategory;
+    private readonly ItemFactory _baseItemCategory;
     private PowerDragonScaleMailBladeturnerFixedArtifact(SaveGame saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<DragArmorPowerDragonScaleMail>();
@@ -31,7 +31,7 @@ internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact, IAc
         item.RechargeTimeLeft = 400;
     }
     public string DescribeActivationEffect() => "breathe elements (300), berserk rage, bless, and resistance";
-    public override ItemClass BaseItemCategory => _baseItemCategory;
+    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override char Character => '[';
     public override Colour Colour => Colour.Purple;

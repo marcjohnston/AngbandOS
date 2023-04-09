@@ -3,13 +3,13 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class PairOfMetalShodBootsOfTheBlackReaverFixedArtifact : FixedArtifact
 {
-    private readonly ItemClass _baseItemCategory;
+    private readonly ItemFactory _baseItemCategory;
     private PairOfMetalShodBootsOfTheBlackReaverFixedArtifact(SaveGame saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<BootsMetalShodBoots>();
     }
 
-    public override ItemClass BaseItemCategory => _baseItemCategory;
+    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override void ApplyResistances(SaveGame saveGame, Item item)
     {

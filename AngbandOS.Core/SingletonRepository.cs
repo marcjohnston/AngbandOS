@@ -14,7 +14,7 @@ namespace AngbandOS.Core
         public SingletonKeyedDictionary<string, FloorTileType> FloorTileTypes;
         public SingletonDictionary<InGameCommand> InGameCommands;
         public SingletonDictionary<BaseInventorySlot> InventorySlots;
-        public SingletonDictionary<ItemClass> ItemCategories;
+        public SingletonDictionary<ItemFactory> ItemCategories;
         public SingletonDictionary<MonsterRace> MonsterRaces;
         public SingletonDictionary<ProjectileGraphic> ProjectileGraphics;
         public SingletonDictionary<Race> Races;
@@ -102,7 +102,7 @@ namespace AngbandOS.Core
         {
             InGameCommands = new SingletonDictionary<InGameCommand>(saveGame, LoadTypesFromAssembly<InGameCommand>(saveGame));
             WizardCommands = new SingletonDictionary<WizardCommand>(saveGame, LoadTypesFromAssembly<WizardCommand>(saveGame));
-            ItemCategories = new SingletonDictionary<ItemClass>(saveGame, LoadTypesFromAssembly<ItemClass>(saveGame));
+            ItemCategories = new SingletonDictionary<ItemFactory>(saveGame, LoadTypesFromAssembly<ItemFactory>(saveGame));
             InventorySlots = new SingletonDictionary<BaseInventorySlot>(saveGame, LoadTypesFromAssembly<BaseInventorySlot>(saveGame));
             StoreCommands = new SingletonDictionary<BaseStoreCommand>(saveGame, LoadTypesFromAssembly<BaseStoreCommand>(saveGame));
             CharacterClasses = new SingletonDictionary<BaseCharacterClass>(saveGame, LoadTypesFromAssembly<BaseCharacterClass>(saveGame));

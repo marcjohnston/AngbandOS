@@ -3,7 +3,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact, IActivatible
 {
-    private readonly ItemClass _baseItemCategory;
+    private readonly ItemFactory _baseItemCategory;
     private QuarterstaffOfAtalFixedArtifact(SaveGame saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedQuarterstaff>();
@@ -24,7 +24,7 @@ internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact, IActivatible
         item.BonusPowerSubType = ActivationPowerManager.GetRandom();
     }
     public string DescribeActivationEffect() => "probing, detection and full id  every 1000 turns";
-    public override ItemClass BaseItemCategory => _baseItemCategory;
+    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override char Character => '\\';
     public override Colour Colour => Colour.BrightBrown;

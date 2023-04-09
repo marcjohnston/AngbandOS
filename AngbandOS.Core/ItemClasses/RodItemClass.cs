@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class RodItemClass : ItemClass
+    internal abstract class RodItemClass : ItemFactory
     {
         public RodItemClass(SaveGame saveGame) : base(saveGame) { }
         public abstract bool RequiresAiming { get; }
@@ -19,7 +19,7 @@
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             string flavour = item.IdentStoreb ? "" : $"{item.SaveGame.SingletonRepository.RodFlavours[item.ItemSubCategory].Name} ";
-            string ofName = item.IsFlavourAware() ? $" of {item.BaseItemCategory.FriendlyName}" : "";
+            string ofName = item.IsFlavourAware() ? $" of {item.Factory.FriendlyName}" : "";
             string name = $"{flavour}{Pluralize("Rod", item.Count)}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
         }

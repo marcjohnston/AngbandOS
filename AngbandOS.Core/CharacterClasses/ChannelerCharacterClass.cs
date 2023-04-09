@@ -42,7 +42,7 @@
         public override bool SenseInventoryTest(int level) => (0 != Program.Rng.RandomLessThan(9000 / ((level * level) + 40)));
         public override bool DetailedSenseInventory => true;
 
-        protected override ItemClass[] Outfit => new ItemClass[]
+        protected override ItemFactory[] Outfit => new ItemFactory[]
         {
             SaveGame.SingletonRepository.ItemCategories.Get<WandMagicMissile>(),
             SaveGame.SingletonRepository.ItemCategories.Get<SwordDagger>(),

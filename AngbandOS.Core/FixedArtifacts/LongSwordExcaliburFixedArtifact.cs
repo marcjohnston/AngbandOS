@@ -3,7 +3,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class LongSwordExcaliburFixedArtifact : FixedArtifact, IActivatible
 {
-    private readonly ItemClass _baseItemCategory;
+    private readonly ItemFactory _baseItemCategory;
     private LongSwordExcaliburFixedArtifact(SaveGame saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordLongSword>();
@@ -21,7 +21,7 @@ internal class LongSwordExcaliburFixedArtifact : FixedArtifact, IActivatible
         item.RechargeTimeLeft = 300;
     }
     public string DescribeActivationEffect() => "frost ball (100) every 300 turns";
-    public override ItemClass BaseItemCategory => _baseItemCategory;
+    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override char Character => '|';
     public override Colour Colour => Colour.BrightWhite;

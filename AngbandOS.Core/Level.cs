@@ -1417,8 +1417,8 @@ namespace AngbandOS.Core
             {
                 if (oPtr.Marked)
                 {
-                    cp = oPtr.BaseItemCategory.FlavorCharacter;
-                    ap = oPtr.BaseItemCategory.FlavorColour;
+                    cp = oPtr.Factory.FlavorCharacter;
+                    ap = oPtr.Factory.FlavorColour;
                     if (SaveGame.Player.TimedHallucinations.TurnsRemaining != 0)
                     {
                         ImageObject(out ap, out cp);

@@ -3,7 +3,7 @@ namespace AngbandOS.Core.Items
 [Serializable]
     internal abstract class WandItem : Item
     {
-        public WandItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
+        public WandItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
         public override int PackSort => 14;
         public override int PercentageBreakageChance => 25;
         public override int? GetBonusRealValue(Item item, int value)

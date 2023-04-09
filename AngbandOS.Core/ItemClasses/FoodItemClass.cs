@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class FoodItemClass : ItemClass
+    internal abstract class FoodItemClass : ItemFactory
     {
         public FoodItemClass(SaveGame saveGame) : base(saveGame) { }
         public override bool EasyKnow => true;
@@ -18,7 +18,7 @@
                 return base.GetDescription(item, includeCountPrefix);
             }
             string flavour = item.IdentStoreb ? "" : $"{item.SaveGame.SingletonRepository.MushroomFlavours[item.ItemSubCategory].Name} ";
-            string ofName = item.IsFlavourAware() ? $" of {item.BaseItemCategory.FriendlyName}" : "";
+            string ofName = item.IsFlavourAware() ? $" of {item.Factory.FriendlyName}" : "";
             string name = $"{flavour}{Pluralize("Mushroom", item.Count)}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
         }

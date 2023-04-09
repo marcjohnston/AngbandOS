@@ -4,7 +4,7 @@
     /// <summary>
     /// Represents jewellery items.  Amulets and rings are both armour classes.
     /// </summary>
-    internal abstract class JewelleryItemClass : ItemClass
+    internal abstract class JewelleryItemClass : ItemFactory
     {
         public JewelleryItemClass(SaveGame saveGame) : base(saveGame) { }
         public override bool IsStompable(Item item)

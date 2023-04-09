@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class PotionItemClass : ItemClass
+    internal abstract class PotionItemClass : ItemFactory
     {
         public PotionItemClass(SaveGame saveGame) : base(saveGame) { }
         public override bool EasyKnow => true;
@@ -11,7 +11,7 @@
         /// <returns> True, if drinking the potion identified it; false, to keep the potion as unidentified.</returns>
         public abstract bool Quaff(SaveGame saveGame);
 
-        public static bool IsPotion(ItemClass itemClass)
+        public static bool IsPotion(ItemFactory itemClass)
         {
             return typeof(PotionItemClass).IsAssignableFrom(itemClass.GetType());
         }
@@ -37,7 +37,7 @@
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             string flavour = item.IdentStoreb ? "" : $"{item.SaveGame.SingletonRepository.PotionFlavours[item.ItemSubCategory].Name} ";
-            string ofName = item.IsFlavourAware() ? $" of {item.BaseItemCategory.FriendlyName}" : "";
+            string ofName = item.IsFlavourAware() ? $" of {item.Factory.FriendlyName}" : "";
             string name = $"{flavour}{Pluralize("Potion", item.Count)}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
         }

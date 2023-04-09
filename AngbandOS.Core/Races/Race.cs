@@ -204,7 +204,7 @@
         /// race upgrades a ring of resist fear to a ring of sustain strength.
         /// </summary>
         /// <param name="item"></param>
-        public virtual ItemClass OutfitItemClass(ItemClass item)
+        public virtual ItemFactory OutfitItemClass(ItemFactory item)
         {
             return item;
         }

@@ -3,7 +3,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact, IActivatible
 {
-    private readonly ItemClass _baseItemCategory;
+    private readonly ItemFactory _baseItemCategory;
     private MultiHuedDragonScaleMailRazorbackFixedArtifact(SaveGame saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<DragArmorMultiHuedDragonScaleMail>();
@@ -21,7 +21,7 @@ internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact, I
     }
 
     public string DescribeActivationEffect() => "star ball (150) every 1000 turns";
-    public override ItemClass BaseItemCategory => _baseItemCategory;
+    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override char Character => '[';
     public override Colour Colour => Colour.Purple;

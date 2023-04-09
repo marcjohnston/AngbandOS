@@ -26,7 +26,7 @@ namespace AngbandOS.Core.ItemCategories
             {
                 flavour = "Plain Gold ";
             }
-            string ofName = item.IsFlavourAware() ? $" of {item.BaseItemCategory.FriendlyName}" : "";
+            string ofName = item.IsFlavourAware() ? $" of {item.Factory.FriendlyName}" : "";
             string name = $"{flavour}{Pluralize("Ring", item.Count)}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
         }

@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class ChestItemClass : ItemClass
+    internal abstract class ChestItemClass : ItemFactory
     {
         public ChestItemClass(SaveGame saveGame) : base(saveGame) { }
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Chest;
@@ -28,21 +28,21 @@
             }
             else if (item.TypeSpecificValue == 0)
             {
-                return item.BaseItemCategory.Stompable[StompableType.Broken];
+                return item.Factory.Stompable[StompableType.Broken];
             }
             else if (item.TypeSpecificValue < 0)
             {
-                return item.BaseItemCategory.Stompable[StompableType.Average];
+                return item.Factory.Stompable[StompableType.Average];
             }
             else
             {
                 if (SaveGame.SingletonRepository.ChestTrapConfigurations[item.TypeSpecificValue].Traps.Length == 0)
                 {
-                      return item.BaseItemCategory.Stompable[StompableType.Good];
+                      return item.Factory.Stompable[StompableType.Good];
                 }
                 else
                 {
-                    return item.BaseItemCategory.Stompable[StompableType.Excellent];
+                    return item.Factory.Stompable[StompableType.Excellent];
                 }
             }
         }
@@ -90,9 +90,9 @@
         /// </remarks>
         public override void ApplyMagic(Item item, int level, int power)
         {
-            if (item.BaseItemCategory.Level > 0)
+            if (item.Factory.Level > 0)
             {
-                item.TypeSpecificValue = Program.Rng.DieRoll(item.BaseItemCategory.Level);
+                item.TypeSpecificValue = Program.Rng.DieRoll(item.Factory.Level);
                 if (item.TypeSpecificValue > 55)
                 {
                     int chestTrapConfigurationCount = SaveGame.SingletonRepository.ChestTrapConfigurations.Count;

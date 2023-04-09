@@ -29,7 +29,7 @@ namespace AngbandOS.Core.FixedArtifacts
         {
         }
 
-        public abstract ItemClass BaseItemCategory { get; } // Inherit this 
+        public abstract ItemFactory BaseItemCategory { get; } // Inherit this 
 
         /// <summary>
         /// Returns a 1-in-chance value of the weapon doing extra vorpal damage.  Does not affect non-vorpal cutting weapons.  Default to a 1-in-6 chance.

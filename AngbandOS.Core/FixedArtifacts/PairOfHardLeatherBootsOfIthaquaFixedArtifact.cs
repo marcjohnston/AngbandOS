@@ -3,7 +3,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class PairOfHardLeatherBootsOfIthaquaFixedArtifact : FixedArtifact, IActivatible
 {
-    private readonly ItemClass _baseItemCategory;
+    private readonly ItemFactory _baseItemCategory;
     private PairOfHardLeatherBootsOfIthaquaFixedArtifact(SaveGame saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<BootsHardLeatherBoots>();
@@ -24,7 +24,7 @@ internal class PairOfHardLeatherBootsOfIthaquaFixedArtifact : FixedArtifact, IAc
         item.RechargeTimeLeft = 200;
     }
     public string DescribeActivationEffect() => "haste self (20+d20 turns) every 200 turns";
-    public override ItemClass BaseItemCategory => _baseItemCategory;
+    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override char Character => ']';
     public override Colour Colour => Colour.BrightBrown;

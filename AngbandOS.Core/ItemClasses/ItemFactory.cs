@@ -6,11 +6,11 @@
     /// </summary>
     [Serializable]
 
-    internal abstract class ItemClass : IItemCharacteristics
+    internal abstract class ItemFactory : IItemCharacteristics
     {
         public SaveGame SaveGame { get; }
 
-        public ItemClass(SaveGame saveGame)
+        public ItemFactory(SaveGame saveGame)
         {
             SaveGame = saveGame;
             FlavorCharacter = Character;
@@ -313,7 +313,7 @@
         /// <returns></returns>
         public virtual bool IsStompable(Item item)
         {
-            if (item.BaseItemCategory.HasQuality)
+            if (item.Factory.HasQuality)
             {
                 switch (item.GetDetailedFeeling())
                 {
@@ -321,16 +321,16 @@
                     case "worthless":
                     case "cursed":
                     case "broken":
-                        return item.BaseItemCategory.Stompable[StompableType.Broken];
+                        return item.Factory.Stompable[StompableType.Broken];
 
                     case "average":
-                        return item.BaseItemCategory.Stompable[StompableType.Average];
+                        return item.Factory.Stompable[StompableType.Average];
 
                     case "good":
-                        return item.BaseItemCategory.Stompable[StompableType.Good];
+                        return item.Factory.Stompable[StompableType.Good];
 
                     case "excellent":
-                        return item.BaseItemCategory.Stompable[StompableType.Excellent];
+                        return item.Factory.Stompable[StompableType.Excellent];
 
                     case "special":
                         return false;
@@ -339,7 +339,7 @@
                         throw new InvalidDataException($"Unrecognised item quality ({item.GetDetailedFeeling()})");
                 }
             }
-            return item.BaseItemCategory.Stompable[StompableType.Broken];
+            return item.Factory.Stompable[StompableType.Broken];
         }
 
         //    public virtual bool CanSlay => false;
@@ -370,7 +370,7 @@
         /// <returns></returns>
         public virtual string GetDescription(Item item, bool includeCountPrefix)
         {
-            string pluralizedName = ApplyPlurizationMacro(item.BaseItemCategory.FriendlyName, item.Count);
+            string pluralizedName = ApplyPlurizationMacro(item.Factory.FriendlyName, item.Count);
             return ApplyGetPrefixCountMacro(includeCountPrefix, pluralizedName, item.Count, item.IsKnownArtifact);
         }
 
@@ -488,7 +488,7 @@
             {
                 tmpVal2 = "empty";
             }
-            else if (!item.IsFlavourAware() && item.BaseItemCategory.Tried)
+            else if (!item.IsFlavourAware() && item.Factory.Tried)
             {
                 tmpVal2 = "tried";
             }

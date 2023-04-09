@@ -3,7 +3,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class RingOfElementalPowerStormFixedArtifact : FixedArtifact, IActivatible
 {
-    private readonly ItemClass _baseItemCategory;
+    private readonly ItemFactory _baseItemCategory;
     private RingOfElementalPowerStormFixedArtifact(SaveGame saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<RingVilya>();
@@ -26,7 +26,7 @@ internal class RingOfElementalPowerStormFixedArtifact : FixedArtifact, IActivati
         item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
         item.BonusPowerSubType = ActivationPowerManager.GetRandom();
     }
-    public override ItemClass BaseItemCategory => _baseItemCategory;
+    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override char Character => '=';
     public override string Name => "The Ring of Elemental Power (Storm)";

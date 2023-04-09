@@ -764,7 +764,7 @@ namespace AngbandOS.Core
                 {
                     return null;
                 }
-                ItemClass kIdx = aPtr.BaseItemCategory;
+                ItemFactory kIdx = aPtr.BaseItemCategory;
                 if (kIdx.Level > Level.ObjectLevel)
                 {
                     int d = (kIdx.Level - Level.ObjectLevel) * 5;
@@ -796,7 +796,7 @@ namespace AngbandOS.Core
             // Attempt to create a non-artifact.
             if (item == null)
             {
-                ItemClass kIdx = RandomItemType(baselevel, doNotAllowChestToBeCreated, good);
+                ItemFactory kIdx = RandomItemType(baselevel, doNotAllowChestToBeCreated, good);
                 if (kIdx == null)
                 {
                     return null;
@@ -805,11 +805,11 @@ namespace AngbandOS.Core
             }
             item.ApplyMagic(Level.ObjectLevel, true, good, great);
             item.Count = item.MakeObjectCount;
-            if (!item.IsCursed() && !item.IsBroken() && item.BaseItemCategory.Level > Difficulty)
+            if (!item.IsCursed() && !item.IsBroken() && item.Factory.Level > Difficulty)
             {
                 if (Level != null)
                 {
-                    Level.TreasureRating += item.BaseItemCategory.Level - Difficulty;
+                    Level.TreasureRating += item.Factory.Level - Difficulty;
                 }
             }
             return item;
@@ -834,7 +834,7 @@ namespace AngbandOS.Core
             }
 
             // Get a list of all of the item classes that are considered gold.  Sort them by the cost.
-            ItemClass[] goldItemClasses = SingletonRepository.ItemCategories.Where(_itemClass => GoldItemClass.IsGold(_itemClass)).OrderBy(_goldItemClass => _goldItemClass.Cost).ToArray();
+            ItemFactory[] goldItemClasses = SingletonRepository.ItemCategories.Where(_itemClass => GoldItemClass.IsGold(_itemClass)).OrderBy(_goldItemClass => _goldItemClass.Cost).ToArray();
 
             if (goldType >= goldItemClasses.Length)
             {
@@ -904,7 +904,7 @@ namespace AngbandOS.Core
             }
         }
 
-        public ItemClass? RandomItemType(int level, bool doNotAllowChestToBeCreated, bool good)
+        public ItemFactory? RandomItemType(int level, bool doNotAllowChestToBeCreated, bool good)
         {
             int i;
             int j;
@@ -925,7 +925,7 @@ namespace AngbandOS.Core
                 }
                 table[i].FinalProbability = 0;
                 int kIdx = table[i].Index;
-                ItemClass kPtr = SingletonRepository.ItemCategories[kIdx];
+                ItemFactory kPtr = SingletonRepository.ItemCategories[kIdx];
                 if (doNotAllowChestToBeCreated && kPtr.CategoryEnum == ItemTypeEnum.Chest)
                 {
                     continue;
@@ -1049,7 +1049,7 @@ namespace AngbandOS.Core
 
         private void ResetStompability()
         {
-            foreach (ItemClass item in SingletonRepository.ItemCategories)
+            foreach (ItemFactory item in SingletonRepository.ItemCategories)
             {
                 if (item.HasQuality)
                 {
@@ -2051,7 +2051,7 @@ namespace AngbandOS.Core
 
         public void OpenChest(int y, int x, Item chestItem)
         {
-            ChestItemClass chest = (ChestItemClass)chestItem.BaseItemCategory;
+            ChestItemClass chest = (ChestItemClass)chestItem.Factory;
             bool small = chest.IsSmall;
             int number = chest.NumberOfItemsContained;
 
@@ -2111,7 +2111,7 @@ namespace AngbandOS.Core
 
         private void ApplyFlavourVisuals()
         {
-            foreach (ItemClass kPtr in SingletonRepository.ItemCategories)
+            foreach (ItemFactory kPtr in SingletonRepository.ItemCategories)
             {
                 if (kPtr.HasFlavor)
                 {
@@ -2581,7 +2581,7 @@ namespace AngbandOS.Core
                 }
             }
             Program.Rng.UseFixed = false;
-            foreach (ItemClass kPtr in SingletonRepository.ItemCategories)
+            foreach (ItemFactory kPtr in SingletonRepository.ItemCategories)
             {
                 if (string.IsNullOrEmpty(kPtr.FriendlyName))
                 {
@@ -2597,7 +2597,7 @@ namespace AngbandOS.Core
         private void InitializeAllocationTables()
         {
             int i, j;
-            ItemClass kPtr;
+            ItemFactory kPtr;
             MonsterRace rPtr;
             int[] num = new int[Constants.MaxDepth];
             int[] aux = new int[Constants.MaxDepth];
@@ -5404,7 +5404,7 @@ namespace AngbandOS.Core
             {
                 return false;
             }
-            int lev = oPtr.BaseItemCategory.Level;
+            int lev = oPtr.Factory.Level;
             if (oPtr.Category == ItemTypeEnum.Rod)
             {
                 i = (100 - lev + num) / 5;
@@ -7694,7 +7694,7 @@ namespace AngbandOS.Core
         public bool DoCmdChannel(Item item)
         {
             int cost;
-            int price = item.BaseItemCategory.Cost;
+            int price = item.Factory.Cost;
             // Never channel worthless items
             if (price <= 0)
             {
@@ -8964,7 +8964,7 @@ namespace AngbandOS.Core
             // Activating an item uses 100 energy
             EnergyUse = 100;
             // Get the level of the item
-            int itemLevel = item.BaseItemCategory.Level;
+            int itemLevel = item.Factory.Level;
             if (item.FixedArtifact != null)
             {
                 itemLevel = item.FixedArtifact.Level;
@@ -9387,13 +9387,13 @@ namespace AngbandOS.Core
                         return;
                     }
                     // If it was something we might want to destroy again, ask
-                    if (!item.BaseItemCategory.HasQuality && item.BaseItemCategory.CategoryEnum != ItemTypeEnum.Chest)
+                    if (!item.Factory.HasQuality && item.Factory.CategoryEnum != ItemTypeEnum.Chest)
                     {
                         if (item.IsKnown())
                         {
                             if (GetCheck($"Always destroy {itemName}?"))
                             {
-                                item.BaseItemCategory.Stompable[0] = true;
+                                item.Factory.Stompable[0] = true;
                             }
                         }
                     }
@@ -9586,7 +9586,7 @@ namespace AngbandOS.Core
             // We may need to aim the rod.  If we know that the rod requires aiming, we get a direction from the player.  Otherwise, if we do not know what
             // the rod is going to do, we will get a direction from the player.  This helps prevent the player from learning what the rod does because the game
             // would ask for a direction.
-            RodItemClass rodItemCategory = (RodItemClass)item.BaseItemCategory;
+            RodItemClass rodItemCategory = (RodItemClass)item.Factory;
             int? dir = 5;
             if (rodItemCategory.RequiresAiming || !item.IsFlavourAware()) 
             {
@@ -9600,7 +9600,7 @@ namespace AngbandOS.Core
             // Using a rod takes a whole turn
             EnergyUse = 100;
             bool identified = false;
-            int itemLevel = item.BaseItemCategory.Level;
+            int itemLevel = item.Factory.Level;
             // Chance to successfully use it is skill (halved if confused) - rod level (capped at 50)
             int chance = Player.SkillUseDevice;
             if (Player.TimedConfusion.TurnsRemaining != 0)
@@ -9628,7 +9628,7 @@ namespace AngbandOS.Core
             PlaySound(SoundEffect.ZapRod);
             // Do the rod-specific effect
             bool useCharge = true;
-            RodItemClass rodItem = (RodItemClass)item.BaseItemCategory;
+            RodItemClass rodItem = (RodItemClass)item.Factory;
             ZapRodEvent zapRodEvent = new ZapRodEvent(item, dir);
             rodItem.Execute(zapRodEvent);
             NoticeCombineAndReorderFlaggedAction.Set();
@@ -9821,9 +9821,9 @@ namespace AngbandOS.Core
             PlaySound(SoundEffect.Quaff);
             // Drinking a potion costs a whole turn
             EnergyUse = 100;
-            int itemLevel = item.BaseItemCategory.Level;
+            int itemLevel = item.Factory.Level;
             // Do the actual potion effect
-            PotionItemClass potion = (PotionItemClass)item.BaseItemCategory; // The item will be a potion.
+            PotionItemClass potion = (PotionItemClass)item.Factory; // The item will be a potion.
             bool identified = potion.Quaff(this);
 
             // Skeletons are messy drinkers
@@ -9907,8 +9907,8 @@ namespace AngbandOS.Core
             }
             item.ItemOptimize();
             string missileName = missile.Description(false, 3);
-            Colour missileColour = missile.BaseItemCategory.FlavorColour;
-            char missileCharacter = missile.BaseItemCategory.FlavorCharacter;
+            Colour missileColour = missile.Factory.FlavorColour;
+            char missileCharacter = missile.Factory.FlavorCharacter;
             // Thrown distance is based on the weight of the missile
             int multiplier = 10 + (2 * (damageMultiplier - 1));
             int divider = missile.Weight > 10 ? missile.Weight : 10;
@@ -10017,7 +10017,7 @@ namespace AngbandOS.Core
                         {
                             // Let the player know what happens to the monster
                             Level.MessagePain(tile.MonsterIndex, damage);
-                            if (monster.SmFriendly && missile.BaseItemCategory.CategoryEnum != ItemTypeEnum.Potion)
+                            if (monster.SmFriendly && missile.Factory.CategoryEnum != ItemTypeEnum.Potion)
                             {
                                 string mName = monster.Name;
                                 MsgPrint($"{mName} gets angry!");
@@ -10037,11 +10037,11 @@ namespace AngbandOS.Core
             // There's a chance of breakage if we hit a creature
             int chanceToBreak = hitBody ? missile.BreakageChance() : 0;
             // If we hit with a potion, the potion might affect the creature
-            if (missile.BaseItemCategory.CategoryEnum == ItemTypeEnum.Potion)
+            if (missile.Factory.CategoryEnum == ItemTypeEnum.Potion)
             {
                 if (hitBody || !Level.GridPassable(newY, newX) || Program.Rng.DieRoll(100) < chanceToBreak)
                 {
-                    PotionItemClass potion = (PotionItemClass)missile.BaseItemCategory;
+                    PotionItemClass potion = (PotionItemClass)missile.Factory;
                     MsgPrint($"The {missileName} shatters!");
                     if (potion.Smash(this, 1, y, x))
                     {
@@ -10642,7 +10642,7 @@ namespace AngbandOS.Core
                 return;
             }
 
-            StaffItemClass staffItem = (StaffItemClass)item.BaseItemCategory;
+            StaffItemClass staffItem = (StaffItemClass)item.Factory;
 
             // We can't use a staff from the floor
             if (!item.IsInInventory && item.Count > 1)
@@ -10652,7 +10652,7 @@ namespace AngbandOS.Core
             }
             // Using a staff costs a full turn
             EnergyUse = 100;
-            int itemLevel = item.BaseItemCategory.Level;
+            int itemLevel = item.Factory.Level;
             // We have a chance of the device working equal to skill (halved if confused) - item
             // level (capped at 50)
             int chance = Player.SkillUseDevice;
@@ -10852,7 +10852,7 @@ namespace AngbandOS.Core
             //bool identified = false;
             //bool usedUp = true;
 
-            ScrollItemClass scrollItem = (ScrollItemClass)item.BaseItemCategory;
+            ScrollItemClass scrollItem = (ScrollItemClass)item.Factory;
             ReadScrollEvent readScrollEventArgs = new ReadScrollEvent(this);
             scrollItem.Read(readScrollEventArgs);
 
@@ -10862,7 +10862,7 @@ namespace AngbandOS.Core
             if (readScrollEventArgs.Identified && !item.IsFlavourAware())
             {
                 item.BecomeFlavourAware();
-                int itemLevel = item.BaseItemCategory.Level;
+                int itemLevel = item.Factory.Level;
                 Player.GainExperience((itemLevel + (Player.Level >> 1)) / Player.Level);
             }
             bool channeled = false;
@@ -10911,7 +10911,7 @@ namespace AngbandOS.Core
                 return;
             }
 
-            LightSourceItemClass lightSourceItem = (LightSourceItemClass)lightSource.BaseItemCategory;
+            LightSourceItemClass lightSourceItem = (LightSourceItemClass)lightSource.Factory;
             lightSourceItem.Refill(this, lightSource);
         }
 
@@ -11010,14 +11010,14 @@ namespace AngbandOS.Core
             PlaySound(SoundEffect.Shoot);
             // Get the details of the shot
             string missileName = individualAmmunition.Description(false, 3);
-            Colour missileColour = individualAmmunition.BaseItemCategory.FlavorColour;
-            char missileCharacter = individualAmmunition.BaseItemCategory.FlavorCharacter;
+            Colour missileColour = individualAmmunition.Factory.FlavorColour;
+            char missileCharacter = individualAmmunition.Factory.FlavorCharacter;
             int shotSpeed = Player.MissileAttacksPerRound;
             int shotDamage = Program.Rng.DiceRoll(individualAmmunition.DamageDice, individualAmmunition.DamageDiceSides) + individualAmmunition.BonusDamage + missileWeapon.BonusDamage;
             int attackBonus = Player.AttackBonus + individualAmmunition.BonusToHit + missileWeapon.BonusToHit;
             int chanceToHit = Player.SkillRanged + (attackBonus * Constants.BthPlusAdj);
             // Damage multiplier depends on weapon
-            BowWeaponItemClass missileWeaponItemCategory = (BowWeaponItemClass)missileWeapon.BaseItemCategory;
+            BowWeaponItemClass missileWeaponItemCategory = (BowWeaponItemClass)missileWeapon.Factory;
             int damageMultiplier = missileWeaponItemCategory.MissileDamageMultiplier;
             // Extra might gives us an increased multiplier
             if (Player.HasExtraMight)
@@ -11170,8 +11170,8 @@ namespace AngbandOS.Core
             // Eating costs 100 energy
             EnergyUse = 100;
             bool ident = false;
-            int itemLevel = item.BaseItemCategory.Level;
-            FoodItemClass foodItem = (FoodItemClass)item.BaseItemCategory;
+            int itemLevel = item.Factory.Level;
+            FoodItemClass foodItem = (FoodItemClass)item.Factory;
 
             // Allow the food item to process the consumption.
             ident = foodItem.Eat(this);
@@ -11699,7 +11699,7 @@ namespace AngbandOS.Core
             }
             // Save the screen and overprint the spells in the book
             ScreenBuffer savedScreen = Screen.Clone();
-            BookItemClass book = (BookItemClass)item.BaseItemCategory;
+            BookItemClass book = (BookItemClass)item.Factory;
             Player.PrintSpells(spells, spellIndex, 1, 20, book.ToRealm);
             Screen.PrintLine("", 0, 0);
             // Wait for a keypress and re-load the screen
@@ -12226,7 +12226,7 @@ namespace AngbandOS.Core
             // Using a wand takes 100 energy
             EnergyUse = 100;
             bool ident = false;
-            int itemLevel = item.BaseItemCategory.Level;
+            int itemLevel = item.Factory.Level;
             // Chance of success is your skill - item level, with item level capped at 50 and your
             // skill halved if you're confused
             int chance = Player.SkillUseDevice;
@@ -12253,7 +12253,7 @@ namespace AngbandOS.Core
                 return;
             }
             PlaySound(SoundEffect.ZapRod);
-            WandItemClass activateableItem = (WandItemClass)item.BaseItemCategory;
+            WandItemClass activateableItem = (WandItemClass)item.Factory;
             if (activateableItem.ExecuteActivation(this, dir))
             {
                 ident = true;
@@ -14961,7 +14961,7 @@ namespace AngbandOS.Core
         {
             if (Player.Race.OutfitsWithScrollsOfSatisfyHunger)
             {
-                ItemClass scrollSatisfyHungerItemClass = SingletonRepository.ItemCategories.Get<ScrollSatisfyHunger>();
+                ItemFactory scrollSatisfyHungerItemClass = SingletonRepository.ItemCategories.Get<ScrollSatisfyHunger>();
                 Item item = scrollSatisfyHungerItemClass.CreateItem(this);
                 item.Count = (char)Program.Rng.RandomBetween(2, 5);
                 item.BecomeFlavourAware();
@@ -14971,7 +14971,7 @@ namespace AngbandOS.Core
             }
             else
             {
-                ItemClass rationFoodItemClass = SingletonRepository.ItemCategories.Get<FoodRation>();
+                ItemFactory rationFoodItemClass = SingletonRepository.ItemCategories.Get<FoodRation>();
                 Item item = rationFoodItemClass.CreateItem(this);
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.BecomeFlavourAware();
@@ -14980,7 +14980,7 @@ namespace AngbandOS.Core
             }
             if (Player.Race.OutfitsWithScrollsOfLight || Player.BaseCharacterClass.OutfitsWithScrollsOfLight)
             {
-                ItemClass scrollLightItemClass = SingletonRepository.ItemCategories.Get<ScrollLight>();
+                ItemFactory scrollLightItemClass = SingletonRepository.ItemCategories.Get<ScrollLight>();
                 Item item = scrollLightItemClass .CreateItem(this);
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.BecomeFlavourAware();
@@ -14990,7 +14990,7 @@ namespace AngbandOS.Core
             }
             else
             {
-                ItemClass woodenTorchItemClass = SingletonRepository.ItemCategories.Get<LightWoodenTorch>();
+                ItemFactory woodenTorchItemClass = SingletonRepository.ItemCategories.Get<LightWoodenTorch>();
                 Item item = woodenTorchItemClass.CreateItem(this);
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.TypeSpecificValue = Program.Rng.RandomBetween(3, 7) * 500;
@@ -19331,7 +19331,7 @@ namespace AngbandOS.Core
 
         public void DoCmdWizLearn()
         {
-            foreach (ItemClass kPtr in SingletonRepository.ItemCategories)
+            foreach (ItemFactory kPtr in SingletonRepository.ItemCategories)
             {
                 if (kPtr.Level <= CommandArgument)
                 {
@@ -19586,7 +19586,7 @@ namespace AngbandOS.Core
             {
                 return;
             }
-            ItemClass itemClass = SingletonRepository.ItemCategories[kIdx];
+            ItemFactory itemClass = SingletonRepository.ItemCategories[kIdx];
             Item qPtr = itemClass.CreateItem(this);
             qPtr.ApplyMagic(Difficulty, false, false, false);
             Level.DropNear(qPtr, -1, Player.MapY, Player.MapX);
@@ -19639,7 +19639,7 @@ namespace AngbandOS.Core
             const int maxCount = maxLetters * 2 + maxNumbers; // 26 lower case, 26 uppercase, 10 numbers
             for (num = 0, i = 1; num < maxCount && i < SingletonRepository.ItemCategories.Count; i++)
             {
-                ItemClass kPtr = SingletonRepository.ItemCategories[i];
+                ItemFactory kPtr = SingletonRepository.ItemCategories[i];
                 if (kPtr.CategoryEnum == tval)
                 {
                     row = 2 + (num % maxLetters);
@@ -19717,7 +19717,7 @@ namespace AngbandOS.Core
             }
             string buf = oPtr.StoreDescription(true, 3);
             Screen.PrintLine(buf, 2, j);
-            Screen.PrintLine($"kind = {oPtr.BaseItemCategory,5}  level = {oPtr.BaseItemCategory.Level,4}  ItemType = {oPtr.Category,5}  ItemSubType = {oPtr.ItemSubCategory,5}", 4, j);
+            Screen.PrintLine($"kind = {oPtr.Factory,5}  level = {oPtr.Factory.Level,4}  ItemType = {oPtr.Category,5}  ItemSubType = {oPtr.ItemSubCategory,5}", 4, j);
             Screen.PrintLine($"number = {oPtr.Count,3}  wgt = {oPtr.Weight,6}  BaseArmourClass = {oPtr.BaseArmourClass,5}    damage = {oPtr.DamageDice}d{oPtr.DamageDiceSides}", 5, j);
             Screen.PrintLine($"TypeSpecificValue = {oPtr.TypeSpecificValue,5}  toac = {oPtr.BonusArmourClass,5}  tohit = {oPtr.BonusToHit,4}  todam = {oPtr.BonusDamage,4}", 6, j);
             Screen.PrintLine($"FixedArtifact = {(oPtr.FixedArtifact == null ? "no" : oPtr.FixedArtifact.Name),4}  name2 = {oPtr.RareItemTypeIndex,4}  cost = {oPtr.Value()}", 7, j);
@@ -19915,17 +19915,17 @@ namespace AngbandOS.Core
                 }
                 if (ch == 'n' || ch == 'N')
                 {
-                    qPtr.AssignItemType(oPtr.BaseItemCategory);
+                    qPtr.AssignItemType(oPtr.Factory);
                     qPtr.ApplyMagic(Difficulty, false, false, false);
                 }
                 else if (ch == 'g' || ch == 'g')
                 {
-                    qPtr.AssignItemType(oPtr.BaseItemCategory);
+                    qPtr.AssignItemType(oPtr.Factory);
                     qPtr.ApplyMagic(Difficulty, false, true, false);
                 }
                 else if (ch == 'e' || ch == 'e')
                 {
-                    qPtr.AssignItemType(oPtr.BaseItemCategory);
+                    qPtr.AssignItemType(oPtr.Factory);
                     qPtr.ApplyMagic(Difficulty, false, true, true);
                 }
             }

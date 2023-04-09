@@ -39,7 +39,7 @@
         public override IArtifactBias? ArtifactBias => (Program.Rng.DieRoll(5) > 2 ? new PriestlyArtifactBias() : null);
         public override bool SenseInventoryTest(int level) => (0 != Program.Rng.RandomLessThan(55000 / ((level * level) + 40)));
 
-        protected override ItemClass[] Outfit => new ItemClass[]
+        protected override ItemFactory[] Outfit => new ItemFactory[]
         {
             SaveGame.SingletonRepository.ItemCategories.Get<SwordSmallSword>(),
             SaveGame.SingletonRepository.ItemCategories.Get<PotionRestoreMana>(),

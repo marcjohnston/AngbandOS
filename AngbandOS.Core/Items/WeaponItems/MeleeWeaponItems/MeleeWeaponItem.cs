@@ -4,7 +4,7 @@
     internal abstract class MeleeWeaponItem : WeaponItem
     {
         public override int WieldSlot => InventorySlot.MeleeWeapon;
-        public MeleeWeaponItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
+        public MeleeWeaponItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
 
         public override bool IdentityCanBeSensed => true;
     }

@@ -65,7 +65,7 @@
             SaveGame.SingletonRepository.Realms.Get<CorporealRealm>()
         };
 
-        protected override ItemClass[] Outfit => new ItemClass[]
+        protected override ItemFactory[] Outfit => new ItemFactory[]
         {
             SaveGame.SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
             SaveGame.SingletonRepository.ItemCategories.Get<PotionHealing>(),

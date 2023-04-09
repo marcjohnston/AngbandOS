@@ -285,7 +285,7 @@ namespace AngbandOS.Core.Items
         /// <summary>
         /// Returns the item type that this item is based on.  Returns null, if the item is (nothing), as in the inventory.
         /// </summary>
-        public ItemClass? BaseItemCategory = null;
+        public ItemFactory? Factory = null;
 
         public bool Marked;
 
@@ -313,7 +313,7 @@ namespace AngbandOS.Core.Items
         public readonly SaveGame SaveGame;
         public ItemCharacteristics Characteristics = new ItemCharacteristics();
 
-        public Item(SaveGame saveGame, ItemClass baseItemCategory) // TODO: Deprecated ... Item to be abstract
+        public Item(SaveGame saveGame, ItemFactory baseItemCategory) // TODO: Deprecated ... Item to be abstract
         {
             SaveGame = saveGame;
             AssignItemType(baseItemCategory);
@@ -324,7 +324,7 @@ namespace AngbandOS.Core.Items
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public bool IsAnItemOf<T>() => typeof(T).IsAssignableFrom(BaseItemCategory.GetType());
+        public bool IsAnItemOf<T>() => typeof(T).IsAssignableFrom(Factory.GetType());
 
         /// <summary>
         /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.
@@ -352,12 +352,12 @@ namespace AngbandOS.Core.Items
         public int CompareTo(Item oPtr)
         {
             // First two levels of sort belong to spell books.
-            if (BookItemClass.IsBook(this.BaseItemCategory) && BookItemClass.IsBook(oPtr.BaseItemCategory))
+            if (BookItemClass.IsBook(this.Factory) && BookItemClass.IsBook(oPtr.Factory))
             {
                 // First level sort (primary realm spells books).
                 // A book that matches the first realm, will always come before a book that doesn't match the first realm.
-                BookItemClass thisBook = (BookItemClass)this.BaseItemCategory;
-                BookItemClass oPtrBook = (BookItemClass)oPtr.BaseItemCategory;
+                BookItemClass thisBook = (BookItemClass)this.Factory;
+                BookItemClass oPtrBook = (BookItemClass)oPtr.Factory;
                 if (thisBook.ToRealm == SaveGame.Player.PrimaryRealm && oPtrBook.ToRealm != SaveGame.Player.PrimaryRealm)
                 {
                     return -1;
@@ -451,7 +451,7 @@ namespace AngbandOS.Core.Items
 
         public Item Clone(int? newCount = null)
         {
-            Item clonedItem = BaseItemCategory.CreateItem(SaveGame);
+            Item clonedItem = Factory.CreateItem(SaveGame);
             clonedItem.BaseArmourClass = BaseArmourClass;
             clonedItem.RandartItemCharacteristics.Copy(RandartItemCharacteristics);
             clonedItem.RandartName = RandartName;
@@ -471,7 +471,7 @@ namespace AngbandOS.Core.Items
 
             clonedItem.X = X;
             clonedItem.Y = Y;
-            clonedItem.BaseItemCategory = BaseItemCategory;
+            clonedItem.Factory = Factory;
             clonedItem.Marked = Marked;
             clonedItem.FixedArtifact = FixedArtifact;
             clonedItem.RareItemTypeIndex = RareItemTypeIndex;
@@ -491,7 +491,7 @@ namespace AngbandOS.Core.Items
 
         public bool IsKnownArtifact => IsKnown() && (FixedArtifact != null || !string.IsNullOrEmpty(RandartName));
 
-        public ItemTypeEnum Category => BaseItemCategory == null ? ItemTypeEnum.None : BaseItemCategory.CategoryEnum; // Provided for backwards compatability.  Will be deleted.
+        public ItemTypeEnum Category => Factory == null ? ItemTypeEnum.None : Factory.CategoryEnum; // Provided for backwards compatability.  Will be deleted.
 
         public void Absorb(Item other)
         {
@@ -732,24 +732,24 @@ namespace AngbandOS.Core.Items
             ApplyRandomResistance(ref artifactBias, specific); // TODO: We has to inject 0 for the ArtifactBias because the constructor would have initialized the _artifactBias to 0.
         }
 
-        public void AssignItemType(ItemClass baseItemCategory)
+        public void AssignItemType(ItemFactory baseItemCategory)
         {
-            BaseItemCategory = baseItemCategory;
-            ItemSubCategory = BaseItemCategory.SubCategory ?? 0;
-            TypeSpecificValue = BaseItemCategory.Pval;
+            Factory = baseItemCategory;
+            ItemSubCategory = Factory.SubCategory ?? 0;
+            TypeSpecificValue = Factory.Pval;
             Count = 1;
-            Weight = BaseItemCategory.Weight;
-            BonusToHit = BaseItemCategory.ToH;
-            BonusDamage = BaseItemCategory.ToD;
-            BonusArmourClass = BaseItemCategory.ToA;
-            BaseArmourClass = BaseItemCategory.Ac;
-            DamageDice = BaseItemCategory.Dd;
-            DamageDiceSides = BaseItemCategory.Ds;
-            if (BaseItemCategory.Cost <= 0)
+            Weight = Factory.Weight;
+            BonusToHit = Factory.ToH;
+            BonusDamage = Factory.ToD;
+            BonusArmourClass = Factory.ToA;
+            BaseArmourClass = Factory.Ac;
+            DamageDice = Factory.Dd;
+            DamageDiceSides = Factory.Ds;
+            if (Factory.Cost <= 0)
             {
                 IdentBroken = true;
             }
-            if (BaseItemCategory.Cursed)
+            if (Factory.Cursed)
             {
                 IdentCursed = true;
             }
@@ -757,7 +757,7 @@ namespace AngbandOS.Core.Items
 
         public void BecomeFlavourAware()
         {
-            BaseItemCategory.FlavourAware = true;
+            Factory.FlavourAware = true;
         }
 
         public void BecomeKnown()
@@ -845,11 +845,11 @@ namespace AngbandOS.Core.Items
         public bool CanAbsorb(Item other)
         {
             int total = Count + other.Count;
-            if (BaseItemCategory != other.BaseItemCategory)
+            if (Factory != other.Factory)
             {
                 return false;
             }
-            if (!BaseItemCategory.CanAbsorb(this, other))
+            if (!Factory.CanAbsorb(this, other))
             {
                 return false;
             }
@@ -887,11 +887,11 @@ namespace AngbandOS.Core.Items
         /// <returns></returns>
         public string Description(bool includeCountPrefix, int mode)
         {
-            if (BaseItemCategory == null)
+            if (Factory == null)
             {
                 return "(nothing)";
             }
-            string basenm = BaseItemCategory.GetDescription(this, includeCountPrefix);
+            string basenm = Factory.GetDescription(this, includeCountPrefix);
             if (IsKnown())
             {
                 if (!string.IsNullOrEmpty(RandartName))
@@ -917,13 +917,13 @@ namespace AngbandOS.Core.Items
             }
 
             // This is the detailed description.
-            basenm += BaseItemCategory.GetDetailedDescription(this);
+            basenm += Factory.GetDetailedDescription(this);
             if (mode < 2)
             {
                 return basenm;
             }
 
-            basenm += BaseItemCategory.GetVerboseDescription(this);
+            basenm += Factory.GetVerboseDescription(this);
 
             // This is the verbose description.
             if (mode < 3)
@@ -932,7 +932,7 @@ namespace AngbandOS.Core.Items
             }
 
             // This is the full description.
-            basenm += BaseItemCategory.GetFullDescription(this);
+            basenm += Factory.GetFullDescription(this);
 
             // We can only render 75 characters max ... we are forced to truncate.
             if (basenm.Length > 75)
@@ -1366,13 +1366,13 @@ namespace AngbandOS.Core.Items
         {
             // All characteristics are set to false.
             Characteristics = new ItemCharacteristics();
-            if (BaseItemCategory == null)
+            if (Factory == null)
             {
                 return;
             }
 
             // Merge the characteristics from the base item category.
-            Characteristics.Merge(BaseItemCategory);
+            Characteristics.Merge(Factory);
 
             // Now merge the characteristics from the fixed artifact, if there is one.
             if (FixedArtifact != null)
@@ -1438,22 +1438,22 @@ namespace AngbandOS.Core.Items
 
         public bool HatesAcid()
         {
-            return BaseItemCategory.HatesAcid;
+            return Factory.HatesAcid;
         }
 
         public bool HatesCold()
         {
-            return BaseItemCategory.HatesCold;
+            return Factory.HatesCold;
         }
 
         public bool HatesElec()
         {
-            return BaseItemCategory.HatesElectricity;
+            return Factory.HatesElectricity;
         }
 
         public bool HatesFire()
         {
-            return BaseItemCategory.HatesFire;
+            return Factory.HatesFire;
         }
 
         public bool IdentifyFully()
@@ -1467,7 +1467,7 @@ namespace AngbandOS.Core.Items
                 info[i++] = DescribeActivationEffect();
                 info[i++] = "...if it is being worn.";
             }
-            string categoryIdentity = BaseItemCategory.Identify(this);
+            string categoryIdentity = Factory.Identify(this);
             if (categoryIdentity != null)
             {
                 info[i++] = categoryIdentity;
@@ -1852,16 +1852,16 @@ namespace AngbandOS.Core.Items
 
         public bool IsFlavourAware()
         {
-            if (BaseItemCategory == null)
+            if (Factory == null)
             {
                 return false;
             }
-            return BaseItemCategory.FlavourAware;
+            return Factory.FlavourAware;
         }
 
         public bool IsKnown()
         {
-            if (BaseItemCategory == null)
+            if (Factory == null)
             {
                 return false;
             }
@@ -1869,7 +1869,7 @@ namespace AngbandOS.Core.Items
             {
                 return true;
             }
-            if (BaseItemCategory.EasyKnow && BaseItemCategory.FlavourAware)
+            if (Factory.EasyKnow && Factory.FlavourAware)
             {
                 return true;
             }
@@ -1892,16 +1892,16 @@ namespace AngbandOS.Core.Items
 
         public void ObjectTried()
         {
-            BaseItemCategory.Tried = true;
+            Factory.Tried = true;
         }
 
         public int RealValue()
         {
-            if (BaseItemCategory.Cost == 0)
+            if (Factory.Cost == 0)
             {
                 return 0;
             }
-            int value = BaseItemCategory.Cost;
+            int value = Factory.Cost;
             if (RandartItemCharacteristics.IsSet)
             {
                 value += FlagBasedCost(TypeSpecificValue);
@@ -1923,11 +1923,11 @@ namespace AngbandOS.Core.Items
                 }
                 value += ePtr.Cost;
             }
-            if (BaseItemCategory.IsWorthless(this))
+            if (Factory.IsWorthless(this))
             {
                 return 0;
             }
-            int? typeSpecificValue = BaseItemCategory.GetTypeSpecificRealValue(this, value);
+            int? typeSpecificValue = Factory.GetTypeSpecificRealValue(this, value);
             if (typeSpecificValue == null)
                 return 0;
             value += typeSpecificValue.Value;
@@ -1944,11 +1944,11 @@ namespace AngbandOS.Core.Items
         {
             if (!IsKnown())
             {
-                if (BaseItemCategory.HasFlavor)
+                if (Factory.HasFlavor)
                 {
                     if (IsFlavourAware())
                     {
-                        return BaseItemCategory.Stompable[StompableType.Broken];
+                        return Factory.Stompable[StompableType.Broken];
                     }
                 }
                 if (!IdentSense)
@@ -1956,17 +1956,17 @@ namespace AngbandOS.Core.Items
                     return false;
                 }
             }
-            return BaseItemCategory.IsStompable(this);
+            return Factory.IsStompable(this);
         }
 
         public string StoreDescription(bool pref, int mode)
         {
-            bool hackAware = BaseItemCategory.FlavourAware;
+            bool hackAware = Factory.FlavourAware;
             bool hackKnown = IdentKnown;
             IdentKnown = true;
-            BaseItemCategory.FlavourAware = true;
+            Factory.FlavourAware = true;
             string buf = Description(pref, mode);
-            BaseItemCategory.FlavourAware = hackAware;
+            Factory.FlavourAware = hackAware;
             if (!hackKnown)
             {
                 IdentKnown = false;
@@ -2022,9 +2022,9 @@ namespace AngbandOS.Core.Items
         {
             if (IsFlavourAware())
             {
-                return BaseItemCategory.Cost;
+                return Factory.Cost;
             }
-            return BaseItemCategory.BaseValue;
+            return Factory.BaseValue;
         }
 
         private string DescribeActivationEffect()
@@ -2048,12 +2048,12 @@ namespace AngbandOS.Core.Items
             {
                 return "teleport every 50+d50 turns";
             }
-            return BaseItemCategory.DescribeActivationEffect(this);
+            return Factory.DescribeActivationEffect(this);
         }
 
         private bool IsTried()
         {
-            return BaseItemCategory.Tried;
+            return Factory.Tried;
         }
 
         public void ApplyMagic(int lev, bool okay, bool good, bool great)
@@ -2140,7 +2140,7 @@ namespace AngbandOS.Core.Items
                 }
                 return;
             }
-            BaseItemCategory.ApplyMagic(this, lev, power);
+            Factory.ApplyMagic(this, lev, power);
             if (!string.IsNullOrEmpty(RandartName))
             {
                 if (SaveGame.Level != null)
@@ -2253,13 +2253,13 @@ namespace AngbandOS.Core.Items
                 }
                 return;
             }
-            if (BaseItemCategory != null)
+            if (Factory != null)
             {
-                if (BaseItemCategory.Cost == 0)
+                if (Factory.Cost == 0)
                 {
                     IdentBroken = true;
                 }
-                if (BaseItemCategory.Cursed)
+                if (Factory.Cursed)
                 {
                     IdentCursed = true;
                 }
@@ -2465,7 +2465,7 @@ namespace AngbandOS.Core.Items
                     break;
 
                 case 39:
-                    if (BaseItemCategory.CanProvideSheathOfElectricity)
+                    if (Factory.CanProvideSheathOfElectricity)
                     {
                         RandartItemCharacteristics.ShElec = true;
                     }
@@ -2480,7 +2480,7 @@ namespace AngbandOS.Core.Items
                     break;
 
                 case 40:
-                    if (BaseItemCategory.CanProvideSheathOfFire)
+                    if (Factory.CanProvideSheathOfFire)
                     {
                         RandartItemCharacteristics.ShFire = true;
                     }
@@ -2495,7 +2495,7 @@ namespace AngbandOS.Core.Items
                     break;
 
                 case 41:
-                    if (BaseItemCategory.CanReflectBoltsAndArrows)
+                    if (Factory.CanReflectBoltsAndArrows)
                     {
                         RandartItemCharacteristics.Reflect = true;
                     }
@@ -2543,7 +2543,7 @@ namespace AngbandOS.Core.Items
             }
             while (powers-- != 0)
             {
-                int maxType = (BaseItemCategory.CanApplySlayingBonus ? 7 : 5);
+                int maxType = (Factory.CanApplySlayingBonus ? 7 : 5);
                 switch (Program.Rng.DieRoll(maxType))
                 {
                     case 1:
@@ -2590,7 +2590,7 @@ namespace AngbandOS.Core.Items
                     TypeSpecificValue = 4;
                 }
             }
-            BaseItemCategory.ApplyRandartBonus(this);
+            Factory.ApplyRandartBonus(this);
             RandartItemCharacteristics.IgnoreAcid = true;
             RandartItemCharacteristics.IgnoreElec = true;
             RandartItemCharacteristics.IgnoreFire = true;
@@ -2600,7 +2600,7 @@ namespace AngbandOS.Core.Items
             {
                 CurseRandart();
             }
-            if (!aCursed && Program.Rng.DieRoll(BaseItemCategory.RandartActivationChance) == 1)
+            if (!aCursed && Program.Rng.DieRoll(Factory.RandartActivationChance) == 1)
             {
                 BonusPowerSubType = null;
                 GiveActivationPower(ref artifactBias);
@@ -2656,7 +2656,7 @@ namespace AngbandOS.Core.Items
                     continue;
                 }
 
-                if (aPtr.BaseItemCategory != BaseItemCategory)
+                if (aPtr.BaseItemCategory != Factory)
                 {
                     continue;
                 }
@@ -2797,7 +2797,7 @@ namespace AngbandOS.Core.Items
 
                 case 20:
                 case 21:
-                    if (!BaseItemCategory.CanApplyTunnelBonus)
+                    if (!Factory.CanApplyTunnelBonus)
                     {
                         ApplyRandomBonuses(ref artifactBias);
                     }

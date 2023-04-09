@@ -41,8 +41,8 @@ namespace AngbandOS.Core
                     // Only print items that exist
                     if (item != null)
                     {
-                        colour = item.BaseItemCategory.FlavorColour;
-                        character = item.BaseItemCategory.FlavorCharacter;
+                        colour = item.Factory.FlavorColour;
+                        character = item.Factory.FlavorCharacter;
                     }
                     saveGame.Screen.Print(colour, character, screenRow, screenCol + column);
                     column++;

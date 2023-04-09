@@ -5,6 +5,6 @@ namespace AngbandOS.Core.Items
     {
         public override int WieldSlot => InventorySlot.Neck;
         public override int PackSort => 17;
-        public AmuletItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
+        public AmuletItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
     }
 }

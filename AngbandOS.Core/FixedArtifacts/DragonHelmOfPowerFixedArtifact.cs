@@ -3,7 +3,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class DragonHelmOfPowerFixedArtifact : FixedArtifact, IActivatible
 {
-    private readonly ItemClass _baseItemCategory;
+    private readonly ItemFactory _baseItemCategory;
     private DragonHelmOfPowerFixedArtifact(SaveGame saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HelmDragonHelm>();
@@ -16,7 +16,7 @@ internal class DragonHelmOfPowerFixedArtifact : FixedArtifact, IActivatible
         item.RechargeTimeLeft = 3 * (saveGame.Player.Level + 10);
     }
     public string DescribeActivationEffect() => "rays of fear in every direction";
-    public override ItemClass BaseItemCategory => _baseItemCategory;
+    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override char Character => ']';
     public override Colour Colour => Colour.BrightGreen;

@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class LightSourceItemClass : ItemClass
+    internal abstract class LightSourceItemClass : ItemFactory
     {
         public LightSourceItemClass(SaveGame saveGame) : base(saveGame) { }
         public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<LightsourceInventorySlot>();

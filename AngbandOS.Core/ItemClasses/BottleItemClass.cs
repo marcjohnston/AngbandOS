@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class BottleItemClass : ItemClass
+    internal abstract class BottleItemClass : ItemFactory
     {
         public BottleItemClass(SaveGame saveGame) : base(saveGame) { }
         public override bool EasyKnow => true;

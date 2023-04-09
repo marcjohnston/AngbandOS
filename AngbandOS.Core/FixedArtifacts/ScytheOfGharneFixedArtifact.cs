@@ -3,7 +3,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class ScytheOfGharneFixedArtifact : FixedArtifact, IActivatible
 {
-    private readonly ItemClass _baseItemCategory;
+    private readonly ItemFactory _baseItemCategory;
     private ScytheOfGharneFixedArtifact(SaveGame saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmScythe>();
@@ -17,7 +17,7 @@ internal class ScytheOfGharneFixedArtifact : FixedArtifact, IActivatible
         item.RechargeTimeLeft = 200;
     }
     public string DescribeActivationEffect() => "word of recall every 200 turns";
-    public override ItemClass BaseItemCategory => _baseItemCategory;
+    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override char Character => '/';
     public override Colour Colour => Colour.Grey;

@@ -4,7 +4,7 @@ namespace AngbandOS.Core.Items
     internal abstract class CrownArmorItem : ArmourItem
     {
         public override int WieldSlot => InventorySlot.Head;
-        public CrownArmorItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
+        public CrownArmorItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
         public override int PackSort => 24;
     }
 }

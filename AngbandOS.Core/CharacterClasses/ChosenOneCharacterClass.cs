@@ -36,7 +36,7 @@
         public override bool DetailedSenseInventory => true;
         public override bool OutfitsWithScrollsOfLight => true;
 
-        protected override ItemClass[] Outfit => new ItemClass[]
+        protected override ItemFactory[] Outfit => new ItemFactory[]
         {
             SaveGame.SingletonRepository.ItemCategories.Get<SwordSmallSword>(),
             SaveGame.SingletonRepository.ItemCategories.Get<PotionHealing>(),

@@ -3,7 +3,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class BeakedAxeOfTheodenFixedArtifact : FixedArtifact, IActivatible
 {
-    private readonly ItemClass _baseItemCategory;
+    private readonly ItemFactory _baseItemCategory;
     private BeakedAxeOfTheodenFixedArtifact(SaveGame saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmBeakedAxe>();
@@ -21,7 +21,7 @@ internal class BeakedAxeOfTheodenFixedArtifact : FixedArtifact, IActivatible
         item.RechargeTimeLeft = 400;
     }
     public string DescribeActivationEffect() => "drain life (120) every 400 turns";
-    public override ItemClass BaseItemCategory => _baseItemCategory;
+    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override char Character => '/';
     public override Colour Colour => Colour.Grey;

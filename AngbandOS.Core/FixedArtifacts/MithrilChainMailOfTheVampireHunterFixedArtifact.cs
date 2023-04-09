@@ -3,7 +3,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class MithrilChainMailOfTheVampireHunterFixedArtifact : FixedArtifact, IActivatible
 {
-    private readonly ItemClass _baseItemCategory;
+    private readonly ItemFactory _baseItemCategory;
     private MithrilChainMailOfTheVampireHunterFixedArtifact(SaveGame saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HardArmorMithrilChainMail>();
@@ -23,7 +23,7 @@ internal class MithrilChainMailOfTheVampireHunterFixedArtifact : FixedArtifact, 
         item.RechargeTimeLeft = 300;
     }
     public string DescribeActivationEffect() => "heal (777), curing and heroism every 300 turns";
-    public override ItemClass BaseItemCategory => _baseItemCategory;
+    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override char Character => '[';
     public override Colour Colour => Colour.BrightBlue;

@@ -4,7 +4,7 @@
     /// <summary>
     /// Represents weapon items.  Arrow, bolt, bow, digging, hafted, polearm, shot and swords are all weapon classes.
     /// </summary>
-    internal abstract class WeaponItemClass : ItemClass
+    internal abstract class WeaponItemClass : ItemFactory
     {
         public WeaponItemClass(SaveGame saveGame) : base(saveGame) { }
         public override bool HasQuality => true;

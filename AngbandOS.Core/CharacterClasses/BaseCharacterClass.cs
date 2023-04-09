@@ -145,10 +145,10 @@
         public virtual void OutfitPlayer()
         {
             // An an item for each item that the character classes designates the player to be outfitted with.
-            foreach (ItemClass itemClass in Outfit)
+            foreach (ItemFactory itemClass in Outfit)
             {
                 // Allow the race to modify the item as the race sees fit.
-                ItemClass outfitItem = SaveGame.Player.Race.OutfitItemClass(itemClass);
+                ItemFactory outfitItem = SaveGame.Player.Race.OutfitItemClass(itemClass);
                 Item item = outfitItem.CreateItem(SaveGame);
                 if (outfitItem.CategoryEnum == ItemTypeEnum.Wand)
                 {
@@ -176,7 +176,7 @@
         /// <summary>
         /// Represents the class of items a new player should be outfitted with.
         /// </summary>
-        protected abstract ItemClass[] Outfit { get; }
+        protected abstract ItemFactory[] Outfit { get; }
 
         /// <summary>
         /// During the outfit process, derived character classes can modify outfitted items.  Does nothing by default.

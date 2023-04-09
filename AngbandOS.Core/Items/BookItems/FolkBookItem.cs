@@ -3,7 +3,7 @@ namespace AngbandOS.Core.Items
 [Serializable]
     internal abstract class FolkBookItem : BookItem
     {
-        public FolkBookItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
+        public FolkBookItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
         public override int PackSort => 2;
     }
 }

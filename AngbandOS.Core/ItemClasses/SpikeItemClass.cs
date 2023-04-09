@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class SpikeItemClass : ItemClass
+    internal abstract class SpikeItemClass : ItemFactory
     {
         public SpikeItemClass(SaveGame saveGame) : base(saveGame) { }
         public override bool EasyKnow => true;

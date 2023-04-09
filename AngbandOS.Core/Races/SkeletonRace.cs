@@ -75,7 +75,7 @@
             if (!(item.ItemSubCategory == FoodType.Waybread || item.ItemSubCategory == FoodType.Warpstone || item.ItemSubCategory < FoodType.Biscuit))
             {
                 // Spawn a new food item on the floor to make up for the one that will be destroyed
-                Item floorItem = item.BaseItemCategory.CreateItem(saveGame);
+                Item floorItem = item.Factory.CreateItem(saveGame);
                 saveGame.MsgPrint("The food falls through your jaws!");
                 saveGame.Level.DropNear(floorItem, -1, saveGame.Player.MapY, saveGame.Player.MapX);
             }

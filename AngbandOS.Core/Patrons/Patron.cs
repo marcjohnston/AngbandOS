@@ -125,7 +125,7 @@ namespace AngbandOS.Core.Patrons
                 case Reward.ChaosWp:
                     saveGame.MsgPrint($"The voice of {ShortName} booms out:");
                     saveGame.MsgPrint("'Thy deed hath earned thee a worthy blade.'");
-                    ItemClass reward;
+                    ItemFactory reward;
                     switch (Program.Rng.DieRoll(saveGame.Player.Level))
                     {
                         case 1:

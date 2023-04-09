@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class JunkItemClass : ItemClass
+    internal abstract class JunkItemClass : ItemFactory
     {
         public JunkItemClass(SaveGame saveGame) : base(saveGame) { }
         public override bool EasyKnow => true;

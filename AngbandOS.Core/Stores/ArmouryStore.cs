@@ -68,7 +68,7 @@
 
         public override bool ItemMatches(Item item)
         {
-            switch (item.BaseItemCategory)
+            switch (item.Factory)
             {
                 case BootsItemClass _:
                 case GlovesItemClass _:

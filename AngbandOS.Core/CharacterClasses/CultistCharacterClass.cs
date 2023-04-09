@@ -55,7 +55,7 @@
         };
         public override bool WorshipsADeity => true;
 
-        protected override ItemClass[] Outfit => new ItemClass[]
+        protected override ItemFactory[] Outfit => new ItemFactory[]
         {
             SaveGame.SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
             SaveGame.SingletonRepository.ItemCategories.Get<RingSustainIntelligence>(),
@@ -66,7 +66,7 @@
         {
             // Cultists that are NOT wielding the blade of chaos lose bonuses for being an unpriestly weapon.
             // todo: this should by characterclass
-            if (oPtr.BaseItemCategory != null && !oPtr.IsAnItemOf<SwordBladeOfChaos>())
+            if (oPtr.Factory != null && !oPtr.IsAnItemOf<SwordBladeOfChaos>())
             {
                 oPtr.RefreshFlagBasedProperties();
                 if (!oPtr.Characteristics.Chaotic)

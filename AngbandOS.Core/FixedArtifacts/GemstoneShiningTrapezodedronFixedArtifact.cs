@@ -3,7 +3,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact, IActivatible
 {
-    private readonly ItemClass _baseItemCategory;
+    private readonly ItemFactory _baseItemCategory;
     private GemstoneShiningTrapezodedronFixedArtifact(SaveGame saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<LightGemstone>();
@@ -27,7 +27,7 @@ internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact, IActiv
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(20) + 20;
     }
     public string DescribeActivationEffect() => "clairvoyance and recall, draining you";
-    public override ItemClass BaseItemCategory => _baseItemCategory;
+    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override char Character => '*';
     public override Colour Colour => Colour.Red;

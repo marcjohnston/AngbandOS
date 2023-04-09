@@ -66,7 +66,7 @@
             }
         }
 
-        public override ItemClass OutfitItemClass(ItemClass itemClass)
+        public override ItemFactory OutfitItemClass(ItemFactory itemClass)
         {
             if (itemClass is RingFearResistance)
             {

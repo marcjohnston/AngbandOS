@@ -4,7 +4,7 @@ namespace AngbandOS.Core.Items
     internal abstract class DiggingWeaponItem : WeaponItem
     {
         public override int WieldSlot => InventorySlot.Digger;
-        public DiggingWeaponItem(SaveGame saveGame, ItemClass itemClass) : base(saveGame, itemClass) { }
+        public DiggingWeaponItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
         public override int PackSort => 31;
         public override bool IdentityCanBeSensed => true;
         public override bool GetsDamageMultiplier => true;
