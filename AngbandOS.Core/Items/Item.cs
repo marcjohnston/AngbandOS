@@ -313,10 +313,28 @@ namespace AngbandOS.Core.Items
         public readonly SaveGame SaveGame;
         public ItemCharacteristics Characteristics = new ItemCharacteristics();
 
-        public Item(SaveGame saveGame, ItemFactory baseItemCategory) // TODO: Deprecated ... Item to be abstract
+        public Item(SaveGame saveGame, ItemFactory factory)
         {
             SaveGame = saveGame;
-            AssignItemType(baseItemCategory);
+            Factory = factory;
+            ItemSubCategory = Factory.SubCategory ?? 0;
+            TypeSpecificValue = Factory.Pval;
+            Count = 1;
+            Weight = Factory.Weight;
+            BonusToHit = Factory.ToH;
+            BonusDamage = Factory.ToD;
+            BonusArmourClass = Factory.ToA;
+            BaseArmourClass = Factory.Ac;
+            DamageDice = Factory.Dd;
+            DamageDiceSides = Factory.Ds;
+            if (Factory.Cost <= 0)
+            {
+                IdentBroken = true;
+            }
+            if (Factory.Cursed)
+            {
+                IdentCursed = true;
+            }
         }
 
         /// <summary>
@@ -730,29 +748,6 @@ namespace AngbandOS.Core.Items
         {
             IArtifactBias artifactBias = null;
             ApplyRandomResistance(ref artifactBias, specific); // TODO: We has to inject 0 for the ArtifactBias because the constructor would have initialized the _artifactBias to 0.
-        }
-
-        public void AssignItemType(ItemFactory baseItemCategory)
-        {
-            Factory = baseItemCategory;
-            ItemSubCategory = Factory.SubCategory ?? 0;
-            TypeSpecificValue = Factory.Pval;
-            Count = 1;
-            Weight = Factory.Weight;
-            BonusToHit = Factory.ToH;
-            BonusDamage = Factory.ToD;
-            BonusArmourClass = Factory.ToA;
-            BaseArmourClass = Factory.Ac;
-            DamageDice = Factory.Dd;
-            DamageDiceSides = Factory.Ds;
-            if (Factory.Cost <= 0)
-            {
-                IdentBroken = true;
-            }
-            if (Factory.Cursed)
-            {
-                IdentCursed = true;
-            }
         }
 
         public void BecomeFlavourAware()

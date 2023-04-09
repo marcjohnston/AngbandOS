@@ -19915,17 +19915,17 @@ namespace AngbandOS.Core
                 }
                 if (ch == 'n' || ch == 'N')
                 {
-                    qPtr.AssignItemType(oPtr.Factory);
+                    qPtr = oPtr.Factory.CreateItem(this);
                     qPtr.ApplyMagic(Difficulty, false, false, false);
                 }
                 else if (ch == 'g' || ch == 'g')
                 {
-                    qPtr.AssignItemType(oPtr.Factory);
+                    qPtr = oPtr.Factory.CreateItem(this);
                     qPtr.ApplyMagic(Difficulty, false, true, false);
                 }
                 else if (ch == 'e' || ch == 'e')
                 {
-                    qPtr.AssignItemType(oPtr.Factory);
+                    qPtr = oPtr.Factory.CreateItem(this);
                     qPtr.ApplyMagic(Difficulty, false, true, true);
                 }
             }
