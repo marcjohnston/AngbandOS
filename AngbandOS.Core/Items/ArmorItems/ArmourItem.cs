@@ -5,12 +5,12 @@ namespace AngbandOS.Core.Items
     {
         public ArmourItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
         public override bool IdentityCanBeSensed => true;
-        public override int? GetBonusRealValue(Item item, int value)
+        public override int? GetBonusRealValue(int value)
         {
-            if (item.BonusArmourClass < 0)
+            if (BonusArmourClass < 0)
                 return null;
 
-            return (item.BonusToHit + item.BonusDamage + item.BonusArmourClass) * 100;
+            return (BonusToHit + BonusDamage + BonusArmourClass) * 100;
         }
 
     }

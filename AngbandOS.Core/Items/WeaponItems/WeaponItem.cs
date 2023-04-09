@@ -6,16 +6,16 @@ namespace AngbandOS.Core.Items
         public WeaponItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
         public override bool CanApplyBlowsBonus => true;
         public override bool CanApplyBonusArmourClassMiscPower => true;
-        public override int? GetBonusRealValue(Item item, int value)
+        public override int? GetBonusRealValue(int value)
         {
-            if (item.BonusToHit + item.BonusDamage < 0)
+            if (BonusToHit + BonusDamage < 0)
                 return null;
 
             int bonusValue = 0;
-            bonusValue += (item.BonusToHit + item.BonusDamage + item.BonusArmourClass) * 100;
-            if (item.DamageDice > item.Factory.Dd && item.DamageDiceSides == item.Factory.Ds)
+            bonusValue += (BonusToHit + BonusDamage + BonusArmourClass) * 100;
+            if (DamageDice > Factory.Dd && DamageDiceSides == Factory.Ds)
             {
-                bonusValue += (item.DamageDice - item.Factory.Dd) * item.DamageDiceSides * 100;
+                bonusValue += (DamageDice - Factory.Dd) * DamageDiceSides * 100;
             }
             return bonusValue;
         }

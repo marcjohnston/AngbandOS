@@ -1927,7 +1927,7 @@ namespace AngbandOS.Core.Items
                 return 0;
             value += typeSpecificValue.Value;
 
-            int? bonusValue = GetBonusRealValue(this, value);
+            int? bonusValue = GetBonusRealValue(value);
             if (bonusValue == null)
                 return 0;
 
@@ -3230,6 +3230,6 @@ namespace AngbandOS.Core.Items
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public virtual int? GetBonusRealValue(Item item, int value) => 0;
+        public virtual int? GetBonusRealValue(int value) => 0;
     }
 }

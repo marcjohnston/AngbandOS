@@ -5,15 +5,15 @@ namespace AngbandOS.Core.Items
     {
         public AmmunitionItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
         public override bool IdentityCanBeSensed => true;
-        public override int? GetBonusRealValue(Item item, int value)
+        public override int? GetBonusRealValue(int value)
         {
-            if (item.BonusToHit + item.BonusDamage < 0)
+            if (BonusToHit + BonusDamage < 0)
                 return null;
 
-            int bonusValue = (item.BonusToHit + item.BonusDamage) * 5;
-            if (item.DamageDice > item.Factory.Dd && item.DamageDiceSides == item.Factory.Ds)
+            int bonusValue = (BonusToHit + BonusDamage) * 5;
+            if (DamageDice > Factory.Dd && DamageDiceSides == Factory.Ds)
             {
-                bonusValue += (item.DamageDice - item.Factory.Dd) * item.DamageDiceSides * 5;
+                bonusValue += (DamageDice - Factory.Dd) * DamageDiceSides * 5;
             }
             return bonusValue;
         }
