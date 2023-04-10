@@ -657,15 +657,6 @@
         public virtual int RandartActivationChance => 3;
 
         /// <summary>
-        /// Applies an additional bonus to random artifacts.  Does nothing by default.
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        public virtual void ApplyRandartBonus(Item item)
-        {
-        }
-
-        /// <summary>
         /// Returns true, if the item can apply a tunnel bonus.  Only weapons, return true.  Returns false, by default.
         /// </summary>
         public virtual bool CanApplyTunnelBonus => false;

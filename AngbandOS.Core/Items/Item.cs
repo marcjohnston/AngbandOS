@@ -2585,7 +2585,7 @@ namespace AngbandOS.Core.Items
                     TypeSpecificValue = 4;
                 }
             }
-            Factory.ApplyRandartBonus(this);
+            ApplyRandartBonus();
             RandartItemCharacteristics.IgnoreAcid = true;
             RandartItemCharacteristics.IgnoreElec = true;
             RandartItemCharacteristics.IgnoreFire = true;
