@@ -1931,7 +1931,7 @@ namespace AngbandOS.Core.Items
                 }
                 value += ePtr.Cost;
             }
-            if (Factory.IsWorthless(this))
+            if (IsWorthless())
             {
                 return 0;
             }
@@ -3574,5 +3574,10 @@ namespace AngbandOS.Core.Items
             }
             return Factory.Stompable[StompableType.Broken];
         }
+
+        /// <summary>
+        /// Returns true, if the item is deemed as worthless.  Worthless items will ignore their RealValue and will always have 0 real value.  Returns false by default.
+        /// </summary>
+        public virtual bool IsWorthless() => false;
     }
 }

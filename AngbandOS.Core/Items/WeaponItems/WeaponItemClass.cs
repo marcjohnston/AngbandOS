@@ -33,18 +33,5 @@
         public override bool CanApplySlayingBonus => true;
 
         public override bool CanApplyTunnelBonus => true;
-
-        public override bool IsWorthless(Item item)
-        {
-            if (item.TypeSpecificValue < 0)
-            {
-                return true;
-            }
-            if (item.BonusToHit + item.BonusDamage < 0)
-            {
-                return true;
-            }
-            return false;
-        }
     }
 }

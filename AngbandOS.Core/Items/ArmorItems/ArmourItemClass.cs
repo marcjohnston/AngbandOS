@@ -15,19 +15,5 @@
         /// Returns true, for all armour where the armour class (ToA) is greater than or equal to zero.
         /// </summary>
         public override bool KindIsGood => ToA >= 0;
-
-        public override bool IsWorthless(Item item)
-        {
-            if (item.TypeSpecificValue < 0)
-            {
-                return true;
-            }
-            if (item.BonusArmourClass < 0)
-            {
-                return true;
-            }
-            return false;
-        }
-
     }
 }

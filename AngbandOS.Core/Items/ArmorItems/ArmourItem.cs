@@ -192,5 +192,18 @@ namespace AngbandOS.Core.Items
             }
             return s;
         }
+
+        public override bool IsWorthless()
+        {
+            if (TypeSpecificValue < 0)
+            {
+                return true;
+            }
+            if (BonusArmourClass < 0)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

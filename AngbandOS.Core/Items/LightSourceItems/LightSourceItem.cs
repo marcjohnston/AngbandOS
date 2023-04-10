@@ -181,5 +181,6 @@ namespace AngbandOS.Core.Items
             s += base.GetVerboseDescription();
             return s;
         }
+        public override bool IsWorthless() => TypeSpecificValue < 0;
     }
 }

@@ -313,11 +313,6 @@
         public virtual bool CanApplySlayingBonus => false;
 
         /// <summary>
-        /// Returns true, if the item is deemed as worthless.  Worthless items will ignore their RealValue and will always have 0 real value.  Returns false by default.
-        /// </summary>
-        public virtual bool IsWorthless(Item item) => false;
-
-        /// <summary>
         /// Returns the base value for a non flavor-aware item.  Returns 0, by default.
         /// </summary>
         public virtual int BaseValue => 0;
