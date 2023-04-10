@@ -6,6 +6,7 @@
         public HardArmorItemClass(SaveGame saveGame) : base(saveGame) { }
         public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<BodyInventorySlot>();
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.HardArmor;
+        public override int PackSort => 20;
         public override bool HatesAcid => true;
 
         public override Colour Colour => Colour.Grey;

@@ -6,6 +6,7 @@
         public ScrollItemClass(SaveGame saveGame) : base(saveGame) { }
         public override bool EasyKnow => true;
         public override bool HasFlavor => true;
+        public override int PackSort => 12;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Scroll;
         public override bool CanAbsorb(Item item, Item other)
         {

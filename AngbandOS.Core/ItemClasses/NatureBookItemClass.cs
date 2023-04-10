@@ -12,6 +12,7 @@
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
         }
 
+        public override int PackSort => 6;
         public override bool HatesFire => true;
         public override Colour Colour => Colour.BrightGreen;
         public override BaseRealm? ToRealm => SaveGame.SingletonRepository.Realms.Get<NatureRealm>();

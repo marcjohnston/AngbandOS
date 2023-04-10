@@ -11,6 +11,7 @@
             name = $"{name} {item.Factory.FriendlyName}";
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
         }
+        public override int PackSort => 3;
         public override bool HatesFire => true;
         public override Colour Colour => Colour.Pink;
         public override BaseRealm? ToRealm => SaveGame.SingletonRepository.Realms.Get<TarotRealm>();

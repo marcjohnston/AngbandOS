@@ -5,7 +5,6 @@ namespace AngbandOS.Core.Items
     {
         public override int WieldSlot => InventorySlot.Cloak;
         public CloakArmorItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-        public override int PackSort => 22;
 
         protected override void ApplyRandomGoodRareCharacteristics()
         {

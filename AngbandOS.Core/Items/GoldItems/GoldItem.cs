@@ -8,6 +8,5 @@ namespace AngbandOS.Core.Items
             int cost = Factory.Cost;
             TypeSpecificValue = cost + (8 * Program.Rng.DieRoll(cost)) + Program.Rng.DieRoll(8);
         }
-        public override int PackSort => 0;
     }
 }

@@ -4,7 +4,6 @@ namespace AngbandOS.Core.Items
     internal abstract class ChestItem : Item
     {
         public ChestItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-        public override int PackSort => 36;
 
         /// <summary>
         /// Assigns the TypeSpecificValue for this chest.

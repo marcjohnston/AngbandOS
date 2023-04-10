@@ -7,6 +7,7 @@
         public abstract bool RequiresAiming { get; }
         public override bool EasyKnow => true;
         public override bool HasFlavor => true;
+        public override int PackSort => 13;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Rod;
         public override bool CanAbsorb(Item item, Item other)
         {

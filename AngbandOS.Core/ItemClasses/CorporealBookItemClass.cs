@@ -12,6 +12,7 @@ namespace AngbandOS.Core.ItemClasses
             name = $"{name} {item.Factory.FriendlyName}";
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
         }
+        public override int PackSort => 1;
         public override bool HatesFire => true;
         public override Colour Colour => Colour.BrightYellow;
         public override BaseRealm? ToRealm => SaveGame.SingletonRepository.Realms.Get<CorporealRealm>();

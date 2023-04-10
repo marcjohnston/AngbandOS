@@ -5,6 +5,7 @@
     {
         public ArrowItemClass(SaveGame saveGame) : base(saveGame) { }
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Arrow;
+        public override int PackSort => 34;
         public override bool HatesFire => true;
         public override bool HatesAcid => true;
         /// <summary>

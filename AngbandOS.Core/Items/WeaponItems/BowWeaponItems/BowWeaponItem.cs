@@ -36,7 +36,6 @@ namespace AngbandOS.Core.Items
         }
 
         public override int WieldSlot => InventorySlot.RangedWeapon;
-        public override int PackSort => 32;
         public BowWeaponItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
         public override bool IdentityCanBeSensed => true;
         public override bool CanApplyBlowsBonus => false;

@@ -5,6 +5,7 @@
     {
         public BoltItemClass(SaveGame saveGame) : base(saveGame) { }
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Bolt;
+        public override int PackSort => 33;
         public override Colour Colour => Colour.BrightBrown;
 
         /// <summary>

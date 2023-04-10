@@ -5,7 +5,6 @@ namespace AngbandOS.Core.Items
     {
         public GlovesArmourItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
         public override int WieldSlot => InventorySlot.Hands;
-        public override int PackSort => 26;
 
         /// <summary>
         /// Applies a good random rare characteristics to gloves.

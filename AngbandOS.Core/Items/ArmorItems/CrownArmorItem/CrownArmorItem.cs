@@ -5,7 +5,6 @@ namespace AngbandOS.Core.Items
     {
         public override int WieldSlot => InventorySlot.Head;
         public CrownArmorItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-        public override int PackSort => 24;
 
 
         protected override void ApplyRandomGoodRareCharacteristics()

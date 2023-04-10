@@ -4,7 +4,6 @@ namespace AngbandOS.Core.Items
     internal abstract class JunkItem : Item
     {
         public JunkItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-        public override int PackSort => 38;
         public override int PercentageBreakageChance => 100;
     }
 }

@@ -5,6 +5,7 @@
     {
         public WandItemClass(SaveGame saveGame) : base(saveGame) { }
         public override bool HasFlavor => true;
+        public override int PackSort => 14;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Wand;
         public abstract bool ExecuteActivation(SaveGame saveGame, int dir);
         public override string GetDescription(Item item, bool includeCountPrefix)

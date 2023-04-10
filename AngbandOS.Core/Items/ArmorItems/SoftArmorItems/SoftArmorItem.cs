@@ -5,7 +5,6 @@ namespace AngbandOS.Core.Items
     {
         public override int WieldSlot => InventorySlot.Body;
         public SoftArmorItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-        public override int PackSort => 21;
 
         /// <summary>
         /// Applies standard magic to soft armour.

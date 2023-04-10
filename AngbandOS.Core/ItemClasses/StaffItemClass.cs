@@ -11,6 +11,7 @@
         /// <returns></returns>
         public abstract void UseStaff(UseStaffEvent eventArgs);
 
+        public override int PackSort => 15;
         public override bool HasFlavor => true;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Staff;
         public override string GetDescription(Item item, bool includeCountPrefix)

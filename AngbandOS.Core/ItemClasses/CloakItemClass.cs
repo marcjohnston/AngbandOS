@@ -10,6 +10,7 @@
         public override bool HatesAcid => true;
 
         public override Colour Colour => Colour.BrightBrown;
+        public override int PackSort => 22;
 
         public override bool CanProvideSheathOfElectricity => true;
 

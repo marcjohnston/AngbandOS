@@ -5,7 +5,6 @@ namespace AngbandOS.Core.Items
     {
         public DragArmorItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
         public override int WieldSlot => InventorySlot.Body;
-        public override int PackSort => 19;
 
         /// <summary>
         /// Applies special magic to dragon armour.

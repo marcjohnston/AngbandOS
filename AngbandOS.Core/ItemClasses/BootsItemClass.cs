@@ -8,6 +8,7 @@
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Boots;
         public override bool HatesFire => true;
         public override bool HatesAcid => true;
+        public override int PackSort => 27;
 
         public override Colour Colour => Colour.BrightBrown;
     }

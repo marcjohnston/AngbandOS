@@ -17,6 +17,7 @@
             string name = $"{flavour}{Pluralize("Amulet", item.Count)}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
         }
+        public override int PackSort => 17;
         public override int BaseValue => 45;
         public override Colour Colour => Colour.Orange;
         public override int? SubCategory => null; // All amulet subcategories have been refactored.

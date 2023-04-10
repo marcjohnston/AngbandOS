@@ -3,7 +3,6 @@ namespace AngbandOS.Core.Items
 [Serializable]
     internal abstract class ArrowAmmunitionItem : AmmunitionItem
     {
-        public override int PackSort => 34;
         public ArrowAmmunitionItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
         public override bool GetsDamageMultiplier => true;
         public override int MakeObjectCount => Program.Rng.DiceRoll(6, 7);

@@ -5,6 +5,7 @@
     {
         public SkeletonItemClass(SaveGame saveGame) : base(saveGame) { }
         public override bool EasyKnow => true;
+        public override int PackSort => 40;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Skeleton;
         public override bool HatesAcid => true;
 

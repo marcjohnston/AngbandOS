@@ -16,6 +16,7 @@
                 return SaveGame.SingletonRepository.InventorySlots.Get<LeftHandInventorySlot>();
             }
         }
+        public override int PackSort => 16;
         public override bool HasFlavor => true;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Ring;
         public override string GetDescription(Item item, bool includeCountPrefix)

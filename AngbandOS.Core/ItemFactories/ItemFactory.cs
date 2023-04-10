@@ -17,6 +17,12 @@
             FlavorColour = Colour;
         }
 
+
+        /// <summary>
+        /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.
+        /// </summary>
+        public abstract int PackSort { get; }
+
         /// <summary>
         /// Returns the item type to use when creating an item of this category.
         /// </summary>

@@ -11,6 +11,7 @@
         public virtual int MissileDamageMultiplier => 1;
         public override int? SubCategory => null; // The subcategory for all bows have been resolved.
 
+        public override int PackSort => 32;
         public abstract ItemTypeEnum AmmunitionItemCategory { get; }
 
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Bow;

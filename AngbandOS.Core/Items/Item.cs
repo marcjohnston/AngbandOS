@@ -3,6 +3,12 @@ namespace AngbandOS.Core.Items
     [Serializable]
     internal abstract class Item : IComparable<Item> // TODO: Should be abstract
     {
+
+        /// <summary>
+        /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.
+        /// </summary>
+        public int PackSort => Factory.PackSort;
+
         /// <summary>
         /// Returns true, if the item is capable of vorpal slaying.  Only swords return true.  Returns false, by default.
         /// </summary>
@@ -283,9 +289,9 @@ namespace AngbandOS.Core.Items
         }
 
         /// <summary>
-        /// Returns the item type that this item is based on.  Returns null, if the item is (nothing), as in the inventory.
+        /// Returns the item type that this item is based on.
         /// </summary>
-        public ItemFactory? Factory = null;
+        public readonly ItemFactory Factory;
 
         public bool Marked;
 
@@ -343,11 +349,6 @@ namespace AngbandOS.Core.Items
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         public bool IsAnItemOf<T>() => typeof(T).IsAssignableFrom(Factory.GetType());
-
-        /// <summary>
-        /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.
-        /// </summary>
-        public abstract int PackSort { get; }
 
         /// <summary>
         /// Hook into the ProcessWorld, when the item is being worn/wielded.  Does nothing, by default.
@@ -489,7 +490,6 @@ namespace AngbandOS.Core.Items
 
             clonedItem.X = X;
             clonedItem.Y = Y;
-            clonedItem.Factory = Factory;
             clonedItem.Marked = Marked;
             clonedItem.FixedArtifact = FixedArtifact;
             clonedItem.RareItemTypeIndex = RareItemTypeIndex;

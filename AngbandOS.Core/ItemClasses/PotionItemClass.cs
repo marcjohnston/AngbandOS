@@ -5,6 +5,7 @@
     {
         public PotionItemClass(SaveGame saveGame) : base(saveGame) { }
         public override bool EasyKnow => true;
+        public override int PackSort => 11;
         /// <summary>
         /// Have a potion affect the player.  Activates the potion effect.
         /// </summary>

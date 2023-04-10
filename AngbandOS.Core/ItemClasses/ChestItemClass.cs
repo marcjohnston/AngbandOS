@@ -12,6 +12,7 @@
         /// Returns whether or not the chest is small.  Small chests have a 75% chance that the items in the chest are gold.  Large chest always return items.
         /// </summary>
         public abstract bool IsSmall { get; }
+        public override int PackSort => 36;
         public abstract int NumberOfItemsContained { get; }
         public override bool CanAbsorb(Item item, Item other)
         {
