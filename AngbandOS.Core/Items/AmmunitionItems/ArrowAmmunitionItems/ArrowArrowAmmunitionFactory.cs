@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class Arrow : ArrowItemClass
+    internal class ArrowArrowAmmunitionFactory : ArrowItemFactory
     {
-        private Arrow(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private ArrowArrowAmmunitionFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '{';
         public override Colour Colour => Colour.BrightBrown;

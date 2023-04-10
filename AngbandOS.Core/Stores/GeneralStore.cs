@@ -47,7 +47,7 @@
         {
             return new[]
             {
-                new StockStoreInventoryItem(typeof(Arrow), 2),
+                new StockStoreInventoryItem(typeof(ArrowArrowAmmunitionFactory), 2),
                 new StockStoreInventoryItem(typeof(Bolt), 2),
                 new StockStoreInventoryItem(typeof(Cloak), 3),
                 new StockStoreInventoryItem(typeof(DiggingPick)),
@@ -75,7 +75,7 @@
                 case FlaskItemClass _:
                 case SpikeItemClass _:
                 case ShotItemClass _:
-                case ArrowItemClass _:
+                case ArrowItemFactory _:
                 case BoltItemClass _:
                 case DiggingItemClass _:
                 case CloakItemClass _:

@@ -42,7 +42,7 @@
         {
             return new[]
             {
-                new StockStoreInventoryItem(typeof(Arrow), 4),
+                new StockStoreInventoryItem(typeof(ArrowArrowAmmunitionFactory), 4),
                 new StockStoreInventoryItem(typeof(Bolt), 4),
                 new StockStoreInventoryItem(typeof(BowLightCrossbow), 2),
                 new StockStoreInventoryItem(typeof(BowLong), 2),
@@ -80,7 +80,7 @@
             {
                 case ShotItemClass _:
                 case BoltItemClass _:
-                case ArrowItemClass _:
+                case ArrowItemFactory _:
                 case BowWeaponItemClass _:
                 case DiggingItemClass _:
                 case HaftedItemClass _:
