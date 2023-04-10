@@ -624,16 +624,6 @@
         public virtual bool HatesCold => false;
 
         /// <summary>
-        /// Applies magic to the item.  Does nothing, by default.
-        /// </summary>
-        /// <param name="item"></param>
-        /// <param name="level"></param>
-        /// <param name="power"></param>
-        public virtual void ApplyMagic(Item item, int level, int power)
-        {
-        }
-
-        /// <summary>
         /// Returns true, if an item can absorb another item of the same type.  Returns false, by default, if either item is known.
         /// </summary>
         public virtual bool CanAbsorb(Item item, Item other)
@@ -683,35 +673,5 @@
         /// Returns true, if the item provides sunlight, which burns certain races.  Returns false, by default.
         /// </summary>
         public virtual bool ProvidesSunlight => false;
-
-        protected int GetBonusValue(int max, int level)
-        {
-            if (level > Constants.MaxDepth - 1)
-            {
-                level = Constants.MaxDepth - 1;
-            }
-            int bonus = max * level / Constants.MaxDepth;
-            int extra = max * level % Constants.MaxDepth;
-            if (Program.Rng.RandomLessThan(Constants.MaxDepth) < extra)
-            {
-                bonus++;
-            }
-            int stand = max / 4;
-            extra = max % 4;
-            if (Program.Rng.RandomLessThan(4) < extra)
-            {
-                stand++;
-            }
-            int value = Program.Rng.RandomNormal(bonus, stand);
-            if (value < 0)
-            {
-                return 0;
-            }
-            if (value > max)
-            {
-                return max;
-            }
-            return value;
-        }
     }
 }

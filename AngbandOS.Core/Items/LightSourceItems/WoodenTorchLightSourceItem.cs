@@ -15,5 +15,13 @@ namespace AngbandOS.Core.Items
         {
             return base.CalcTorch() + TypeSpecificValue > 0 ? 1 : 0;
         }
+
+        public override void ApplyMagic(int level, int power)
+        {
+            if (TypeSpecificValue != 0)
+            {
+                TypeSpecificValue = Program.Rng.DieRoll(TypeSpecificValue);
+            }
+        }
     }
 }

@@ -22,10 +22,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.FireBoltOrBeam(20, new MissileProjectile(saveGame), dir, Program.Rng.DiceRoll(2, 6));
             return true;
         }
-        public override void ApplyMagic(Item item, int level, int power)
-        {
-            item.TypeSpecificValue = Program.Rng.DieRoll(10) + 6;
-        }
         public override Item CreateItem(SaveGame saveGame) => new MagicMissileWandItem(saveGame);
     }
 }

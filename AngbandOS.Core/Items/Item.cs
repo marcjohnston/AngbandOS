@@ -2135,7 +2135,7 @@ namespace AngbandOS.Core.Items
                 }
                 return;
             }
-            Factory.ApplyMagic(this, lev, power);
+            ApplyMagic(lev, power);
             if (!string.IsNullOrEmpty(RandartName))
             {
                 if (SaveGame.Level != null)
@@ -3231,5 +3231,46 @@ namespace AngbandOS.Core.Items
         /// <param name="item"></param>
         /// <returns></returns>
         public virtual int? GetBonusRealValue(int value) => 0;
+
+
+        protected int GetBonusValue(int max, int level)
+        {
+            if (level > Constants.MaxDepth - 1)
+            {
+                level = Constants.MaxDepth - 1;
+            }
+            int bonus = max * level / Constants.MaxDepth;
+            int extra = max * level % Constants.MaxDepth;
+            if (Program.Rng.RandomLessThan(Constants.MaxDepth) < extra)
+            {
+                bonus++;
+            }
+            int stand = max / 4;
+            extra = max % 4;
+            if (Program.Rng.RandomLessThan(4) < extra)
+            {
+                stand++;
+            }
+            int value = Program.Rng.RandomNormal(bonus, stand);
+            if (value < 0)
+            {
+                return 0;
+            }
+            if (value > max)
+            {
+                return max;
+            }
+            return value;
+        }
+
+        /// <summary>
+        /// Applies magic to the item.  Does nothing, by default.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="level"></param>
+        /// <param name="power"></param>
+        public virtual void ApplyMagic(int level, int power)
+        {
+        }
     }
 }

@@ -24,24 +24,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int? SubCategory => 7;
         public override int ToA => 10;
         public override int Weight => 50;
-
-        /// <summary>
-        /// Applies special magic to this dragon helm.
-        /// </summary>
-        /// <param name="item"></param>
-        /// <param name="level"></param>
-        /// <param name="power"></param>
-        public override void ApplyMagic(Item item, int level, int power)
-        {
-            // Apply the standard armour characteristics, regardless of the power.
-            base.ApplyMagic(item, level, power);
-
-            if (item.SaveGame.Level != null)
-            {
-                item.SaveGame.Level.TreasureRating += 5;
-            }
-            ApplyDragonscaleResistance(item);
-        }
         public override Item CreateItem(SaveGame saveGame) => new DragonHelmArmorItem(saveGame);
     }
 }

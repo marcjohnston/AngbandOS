@@ -17,34 +17,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int[] Locale => new int[] { 1, 50, 0, 0 };
         public override int? SubCategory => 2;
         public override int Weight => 20;
-
-        /// <summary>
-        /// Applies special magic to this robe.
-        /// </summary>
-        /// <param name="item"></param>
-        /// <param name="level"></param>
-        /// <param name="power"></param>
-        public override void ApplyMagic(Item item, int level, int power)
-        {
-            if (power != 0)
-            {
-                // Apply the standard armour characteristics.
-                base.ApplyMagic(item, level, power);
-
-                if (power > 1)
-                {
-                    // Robes have a chance of having the armour of permanence instead of a random characteristic.
-                    if (Program.Rng.RandomLessThan(100) < 10)
-                    {
-                        item.RareItemTypeIndex = RareItemTypeEnum.ArmourOfPermanence;
-                    }
-                    else
-                    {
-                        ApplyRandomGoodRareCharacteristics(item);
-                    }
-                }
-            }
-        }
         public override Item CreateItem(SaveGame saveGame) => new RobeSoftArmorItem(saveGame);
     }
 }

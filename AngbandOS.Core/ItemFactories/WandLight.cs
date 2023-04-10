@@ -23,10 +23,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.LightLine(dir);
             return true;
         }
-        public override void ApplyMagic(Item item, int level, int power)
-        {
-            item.TypeSpecificValue = Program.Rng.DieRoll(10) + 6;
-        }
         public override Item CreateItem(SaveGame saveGame) => new LightWandItem(saveGame);
     }
 }

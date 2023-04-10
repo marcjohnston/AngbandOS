@@ -22,20 +22,6 @@ namespace AngbandOS.Core.ItemCategories
         public override bool ResElec => true;
         public override bool ResFire => true;
         public override int Weight => 3;
-
-        public override void ApplyMagic(Item item, int level, int power)
-        {
-            if (Program.Rng.DieRoll(3) == 1)
-            {
-                IArtifactBias? artifactBias = null;
-                item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(34) + 4);
-            }
-            if (Program.Rng.DieRoll(5) == 1)
-            {
-                item.RandartItemCharacteristics.ResPois = true;
-            }
-        }
-
         public override bool KindIsGood => true;
         public override Item CreateItem(SaveGame saveGame) => new ResistanceAmuletItem(saveGame);
     }

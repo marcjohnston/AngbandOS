@@ -17,6 +17,60 @@ namespace AngbandOS.Core.Items
             }
             return bonusValue;
         }
+        public override void ApplyMagic(int level, int power)
+        {
+            base.ApplyMagic(level, power);
+            if (power > 1)
+            {
+                switch (Program.Rng.DieRoll(12))
+                {
+                    case 1:
+                    case 2:
+                    case 3:
+                        RareItemTypeIndex = RareItemTypeEnum.AmmoOfWounding;
+                        break;
+                    case 4:
+                        RareItemTypeIndex = RareItemTypeEnum.AmmoOfFlame;
+                        break;
+                    case 5:
+                        RareItemTypeIndex = RareItemTypeEnum.AmmoOfFrost;
+                        break;
+                    case 6:
+                    case 7:
+                        RareItemTypeIndex = RareItemTypeEnum.AmmoOfHurtAnimal;
+                        break;
+                    case 8:
+                    case 9:
+                        RareItemTypeIndex = RareItemTypeEnum.AmmoOfHurtEvil;
+                        break;
+                    case 10:
+                        RareItemTypeIndex = RareItemTypeEnum.AmmoOfHurtDragon;
+                        break;
+                    case 11:
+                        RareItemTypeIndex = RareItemTypeEnum.AmmoOfShocking;
+                        break;
+                    case 12:
+                        RareItemTypeIndex = RareItemTypeEnum.AmmoOfSlaying;
+                        DamageDice++;
+                        break;
+                }
+                while (Program.Rng.RandomLessThan(10 * DamageDice * DamageDiceSides) == 0)
+                {
+                    DamageDice++;
+                }
+                if (DamageDice > 9)
+                {
+                    DamageDice = 9;
+                }
+            }
+            else if (power < -1)
+            {
+                if (Program.Rng.RandomLessThan(Constants.MaxDepth) < level)
+                {
+                    RareItemTypeIndex = RareItemTypeEnum.AmmoOfBackbiting;
+                }
+            }
+        }
 
     }
 }

@@ -21,10 +21,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             return saveGame.ConfuseMonster(dir, 10);
         }
-        public override void ApplyMagic(Item item, int level, int power)
-        {
-            item.TypeSpecificValue = Program.Rng.DieRoll(12) + 6;
-        }
         public override Item CreateItem(SaveGame saveGame) => new ConfuseMonsterWandItem(saveGame);
     }
 }

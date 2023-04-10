@@ -21,10 +21,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             return saveGame.DisarmTrap(dir);
         }
-        public override void ApplyMagic(Item item, int level, int power)
-        {
-            item.TypeSpecificValue = Program.Rng.DieRoll(5) + 4;
-        }
         public override Item CreateItem(SaveGame saveGame) => new DisarmingWandItem(saveGame);
     }
 }

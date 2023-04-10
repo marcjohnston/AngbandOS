@@ -23,10 +23,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.FireBall(new ElecProjectile(saveGame), dir, 32, 2);
             return true;
         }
-        public override void ApplyMagic(Item item, int level, int power)
-        {
-            item.TypeSpecificValue = Program.Rng.DieRoll(8) + 4;
-        }
         public override Item CreateItem(SaveGame saveGame) => new LightningBallsWandItem(saveGame);
     }
 }

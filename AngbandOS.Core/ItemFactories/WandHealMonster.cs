@@ -20,10 +20,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             return saveGame.HealMonster(dir);
         }
-        public override void ApplyMagic(Item item, int level, int power)
-        {
-            item.TypeSpecificValue = Program.Rng.DieRoll(20) + 8;
-        }
         public override Item CreateItem(SaveGame saveGame) => new HealMonsterWandItem(saveGame);
     }
 }

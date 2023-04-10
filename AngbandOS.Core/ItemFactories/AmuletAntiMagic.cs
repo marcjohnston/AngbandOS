@@ -20,13 +20,6 @@ namespace AngbandOS.Core.ItemCategories
         public override bool NoMagic => true;
         public override int Weight => 3;
 
-        public override void ApplyMagic(Item item, int level, int power)
-        {
-            if (power < 0 || (power == 0 && Program.Rng.RandomLessThan(100) < 50))
-            {
-                item.IdentCursed = true;
-            }
-        }
         public override Item CreateItem(SaveGame saveGame) => new AntiMagicAmuletItem(saveGame);
     }
 }

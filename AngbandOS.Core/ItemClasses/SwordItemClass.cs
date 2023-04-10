@@ -9,9 +9,6 @@
 
         public override Colour Colour => Colour.BrightWhite;
 
-        protected override bool CanBeWeaponOfLaw => true;
-        protected override bool CanBeWeaponOfSharpness => true;
-        protected override bool CapableOfVorpalSlaying => true;
 
     }
 }

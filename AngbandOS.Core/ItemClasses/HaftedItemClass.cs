@@ -10,7 +10,6 @@
 
         public override Colour Colour => Colour.BrightWhite;
 
-        protected override bool CanBeWeaponOfLaw => true;
 
     }
 }

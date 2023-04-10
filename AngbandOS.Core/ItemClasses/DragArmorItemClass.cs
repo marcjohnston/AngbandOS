@@ -10,26 +10,6 @@
 
         public override Colour Colour => Colour.Grey;
 
-        /// <summary>
-        /// Applies special magic to dragon armour.
-        /// </summary>
-        /// <param name="item"></param>
-        /// <param name="level"></param>
-        /// <param name="power"></param>
-        public override void ApplyMagic(Item item, int level, int power)
-        {
-            if (power != 0)
-            {
-                // Apply the standard armour characteristics.
-                base.ApplyMagic(item, level, power);
-
-                if (item.SaveGame.Level != null)
-                {
-                    item.SaveGame.Level.TreasureRating += 30;
-                }
-            }
-        }
-
         public override string DescribeActivationEffect(Item item)
         {
             switch (item.ItemSubCategory)

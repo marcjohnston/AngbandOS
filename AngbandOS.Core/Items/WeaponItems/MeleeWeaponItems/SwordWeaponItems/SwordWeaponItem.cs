@@ -8,5 +8,8 @@ namespace AngbandOS.Core.Items
         public override bool GetsDamageMultiplier => true;
         public override bool CanVorpalSlay => true;
 
+        protected override bool CanBeWeaponOfLaw => true;
+        protected override bool CanBeWeaponOfSharpness => true;
+        protected override bool CapableOfVorpalSlaying => true;
     }
 }

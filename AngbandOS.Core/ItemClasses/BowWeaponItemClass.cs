@@ -50,49 +50,5 @@
 
 
         public override Colour Colour => Colour.Brown;
-
-        public override void ApplyMagic(Item item, int level, int power)
-        {
-            base.ApplyMagic(item, level, power);
-            if (power > 1)
-            {
-                switch (Program.Rng.DieRoll(21))
-                {
-                    case 1:
-                    case 11:
-                        item.RareItemTypeIndex = RareItemTypeEnum.BowOfExtraMight;
-                        IArtifactBias artifactBias = null;
-                        item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(34) + 4);
-                        break;
-                    case 2:
-                    case 12:
-                        item.RareItemTypeIndex = RareItemTypeEnum.BowOfExtraShots;
-                        break;
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 13:
-                    case 14:
-                    case 15:
-                    case 16:
-                        item.RareItemTypeIndex = RareItemTypeEnum.BowOfVelocity;
-                        break;
-                    case 7:
-                    case 8:
-                    case 9:
-                    case 10:
-                    case 17:
-                    case 18:
-                    case 19:
-                    case 20:
-                        item.RareItemTypeIndex = RareItemTypeEnum.BowOfAccuracy;
-                        break;
-                    case 21:
-                        item.CreateRandart(false);
-                        break;
-                }
-            }
-        }
     }
 }

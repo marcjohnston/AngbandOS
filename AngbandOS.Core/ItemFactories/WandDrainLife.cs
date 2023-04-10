@@ -21,10 +21,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             return saveGame.DrainLife(dir, 75);
         }
-        public override void ApplyMagic(Item item, int level, int power)
-        {
-            item.TypeSpecificValue = Program.Rng.DieRoll(3) + 3;
-        }
         public override Item CreateItem(SaveGame saveGame) => new DrainLifeWandItem(saveGame);
     }
 }

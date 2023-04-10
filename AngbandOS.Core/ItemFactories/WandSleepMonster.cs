@@ -21,10 +21,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             return saveGame.SleepMonster(dir);
         }
-        public override void ApplyMagic(Item item, int level, int power)
-        {
-            item.TypeSpecificValue = Program.Rng.DieRoll(15) + 8;
-        }
         public override Item CreateItem(SaveGame saveGame) => new SleepMonsterWandItem(saveGame);
     }
 }

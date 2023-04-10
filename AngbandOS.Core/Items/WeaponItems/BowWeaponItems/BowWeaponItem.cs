@@ -40,5 +40,49 @@ namespace AngbandOS.Core.Items
         public BowWeaponItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
         public override bool IdentityCanBeSensed => true;
         public override bool CanApplyBlowsBonus => false;
+
+        public override void ApplyMagic(int level, int power)
+        {
+            base.ApplyMagic(level, power);
+            if (power > 1)
+            {
+                switch (Program.Rng.DieRoll(21))
+                {
+                    case 1:
+                    case 11:
+                        RareItemTypeIndex = RareItemTypeEnum.BowOfExtraMight;
+                        IArtifactBias artifactBias = null;
+                        ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(34) + 4);
+                        break;
+                    case 2:
+                    case 12:
+                        RareItemTypeIndex = RareItemTypeEnum.BowOfExtraShots;
+                        break;
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 13:
+                    case 14:
+                    case 15:
+                    case 16:
+                        RareItemTypeIndex = RareItemTypeEnum.BowOfVelocity;
+                        break;
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                    case 17:
+                    case 18:
+                    case 19:
+                    case 20:
+                        RareItemTypeIndex = RareItemTypeEnum.BowOfAccuracy;
+                        break;
+                    case 21:
+                        CreateRandart(false);
+                        break;
+                }
+            }
+        }
     }
 }

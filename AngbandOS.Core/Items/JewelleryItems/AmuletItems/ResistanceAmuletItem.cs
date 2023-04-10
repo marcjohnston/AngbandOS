@@ -4,5 +4,19 @@ namespace AngbandOS.Core.Items
     internal class ResistanceAmuletItem : AmuletItem
     {
         public ResistanceAmuletItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<AmuletResistance>()) { }
+
+        public override void ApplyMagic(int level, int power)
+        {
+            if (Program.Rng.DieRoll(3) == 1)
+            {
+                IArtifactBias? artifactBias = null;
+                ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(34) + 4);
+            }
+            if (Program.Rng.DieRoll(5) == 1)
+            {
+                RandartItemCharacteristics.ResPois = true;
+            }
+        }
+
     }
 }

@@ -23,20 +23,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int ToA => 3;
         public override int Weight => 3;
 
-        public override void ApplyMagic(Item item, int level, int power)
-        {
-            item.TypeSpecificValue = Program.Rng.DieRoll(5) + GetBonusValue(5, level);
-            item.BonusArmourClass = Program.Rng.DieRoll(5) + GetBonusValue(5, level);
-            if (Program.Rng.DieRoll(3) == 1)
-            {
-                item.RandartItemCharacteristics.SlowDigest = true;
-            }
-            if (item.SaveGame.Level != null)
-            {
-                item.SaveGame.Level.TreasureRating += 25;
-            }
-        }
-
         public override bool KindIsGood => true;
         public override Item CreateItem(SaveGame saveGame) => new OfTheMagiAmuletItem(saveGame);
     }

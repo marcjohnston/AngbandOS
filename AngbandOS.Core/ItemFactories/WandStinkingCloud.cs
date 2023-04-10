@@ -22,10 +22,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.FireBall(new PoisProjectile(saveGame), dir, 12, 2);
             return true;
         }
-        public override void ApplyMagic(Item item, int level, int power)
-        {
-            item.TypeSpecificValue = Program.Rng.DieRoll(8) + 6;
-        }
         public override Item CreateItem(SaveGame saveGame) => new StinkingCloudWandItem(saveGame);
     }
 }

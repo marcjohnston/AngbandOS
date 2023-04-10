@@ -1,6 +1,6 @@
 namespace AngbandOS.Core.Items
 {
-[Serializable]
+    [Serializable]
     internal class BrassLanternLightSourceItem : LightSourceItem
     {
         public BrassLanternLightSourceItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<LightBrassLantern>()) { }
@@ -14,6 +14,14 @@ namespace AngbandOS.Core.Items
         public override int CalcTorch()
         {
             return base.CalcTorch() + TypeSpecificValue > 0 ? 2 : 0;
+        }
+
+        public override void ApplyMagic(int level, int power)
+        {
+            if (TypeSpecificValue != 0)
+            {
+                TypeSpecificValue = Program.Rng.DieRoll(TypeSpecificValue);
+            }
         }
     }
 }

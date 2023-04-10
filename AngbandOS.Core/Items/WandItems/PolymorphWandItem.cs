@@ -4,5 +4,9 @@ namespace AngbandOS.Core.Items
     internal class PolymorphWandItem : WandItem
     {
         public PolymorphWandItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<WandPolymorph>()) { }
+        public override void ApplyMagic(int level, int power)
+        {
+            TypeSpecificValue = Program.Rng.DieRoll(8) + 6;
+        }
     }
 }

@@ -45,10 +45,6 @@ namespace AngbandOS.Core.ItemCategories
             }
             return true;
         }
-        public override void ApplyMagic(Item item, int level, int power)
-        {
-            item.TypeSpecificValue = Program.Rng.DieRoll(3) + 1;
-        }
         public override Item CreateItem(SaveGame saveGame) => new DragonsBreathWandItem(saveGame);
     }
 }

@@ -4,5 +4,9 @@ namespace AngbandOS.Core.Items
     internal class FrostBoltsWandItem : WandItem
     {
         public FrostBoltsWandItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<WandFrostBolts>()) { }
+        public override void ApplyMagic(int level, int power)
+        {
+            TypeSpecificValue = Program.Rng.DieRoll(5) + 6;
+        }
     }
 }

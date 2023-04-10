@@ -20,14 +20,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int Pval => 4000;
         public override int? SubCategory => 0;
         public override int Weight => 30;
-
-        public override void ApplyMagic(Item item, int level, int power)
-        {
-            if (item.TypeSpecificValue != 0)
-            {
-                item.TypeSpecificValue = Program.Rng.DieRoll(item.TypeSpecificValue);
-            }
-        }
         /// <summary>
         /// Refill a torch from another torch
         /// </summary>

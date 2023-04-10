@@ -17,16 +17,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int[] Locale => new int[] { 20, 0, 0, 0 };
         public override int Weight => 3;
 
-        public override void ApplyMagic(Item item, int level, int power)
-        {
-            item.TypeSpecificValue = 1 + GetBonusValue(5, level);
-            if (power < 0 || (power == 0 && Program.Rng.RandomLessThan(100) < 50))
-            {
-                item.IdentBroken = true;
-                item.IdentCursed = true;
-                item.TypeSpecificValue = 0 - item.TypeSpecificValue;
-            }
-        }
         public override Item CreateItem(SaveGame saveGame) => new CharismaAmuletItem(saveGame);
     }
 }

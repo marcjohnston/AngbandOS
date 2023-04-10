@@ -21,10 +21,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             return saveGame.FearMonster(dir, 10);
         }
-        public override void ApplyMagic(Item item, int level, int power)
-        {
-            item.TypeSpecificValue = Program.Rng.DieRoll(5) + 3;
-        }
         public override Item CreateItem(SaveGame saveGame) => new ScareMonsterWandItem(saveGame);
     }
 }

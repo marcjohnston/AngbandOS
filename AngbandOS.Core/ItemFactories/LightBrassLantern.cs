@@ -12,15 +12,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int[] Chance => new int[] { 1, 0, 0, 0 };
         public override int Cost => 35;
         public override int Dd => 1;
-
-        public override void ApplyMagic(Item item, int level, int power)
-        {
-            if (item.TypeSpecificValue != 0)
-            {
-                item.TypeSpecificValue = Program.Rng.DieRoll(item.TypeSpecificValue);
-            }
-        }
-
         public override int Ds => 1;
         public override bool EasyKnow => true;
         public override string FriendlyName => "& Brass Lantern~";

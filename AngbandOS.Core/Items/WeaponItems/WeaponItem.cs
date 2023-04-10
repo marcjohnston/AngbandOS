@@ -19,5 +19,42 @@ namespace AngbandOS.Core.Items
             }
             return bonusValue;
         }
+
+        public override void ApplyMagic(int level, int power)
+        {
+            if (power == 0)
+            {
+                return;
+            }
+
+            int tohit1 = Program.Rng.DieRoll(5) + GetBonusValue(5, level);
+            int todam1 = Program.Rng.DieRoll(5) + GetBonusValue(5, level);
+            int tohit2 = GetBonusValue(10, level);
+            int todam2 = GetBonusValue(10, level);
+            if (power > 0)
+            {
+                BonusToHit += tohit1;
+                BonusDamage += todam1;
+                if (power > 1)
+                {
+                    BonusToHit += tohit2;
+                    BonusDamage += todam2;
+                }
+            }
+            else if (power < 0)
+            {
+                BonusToHit -= tohit1;
+                BonusDamage -= todam1;
+                if (power < -1)
+                {
+                    BonusToHit -= tohit2;
+                    BonusDamage -= todam2;
+                }
+                if (BonusToHit + BonusDamage < 0)
+                {
+                    IdentCursed = true;
+                }
+            }
+        }
     }
 }

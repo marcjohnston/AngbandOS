@@ -112,10 +112,6 @@ namespace AngbandOS.Core.ItemCategories
                     throw new Exception("Internal error.");
             }
         }
-        public override void ApplyMagic(Item item, int level, int power)
-        {
-            item.TypeSpecificValue = Program.Rng.DieRoll(15) + 8;
-        }
         public override Item CreateItem(SaveGame saveGame) => new WonderWandItem(saveGame);
     }
 }

@@ -22,14 +22,6 @@ namespace AngbandOS.Core.ItemCategories
         public override bool Str => true;
         public override int Weight => 3;
         public override bool Wis => true;
-
-        public override void ApplyMagic(Item item, int level, int power)
-        {
-            item.IdentBroken = true;
-            item.IdentCursed = true;
-            item.TypeSpecificValue = 0 - (Program.Rng.DieRoll(5) + GetBonusValue(5, level));
-            item.BonusArmourClass = 0 - (Program.Rng.DieRoll(5) + GetBonusValue(5, level));
-        }
         public override Item CreateItem(SaveGame saveGame) => new DOOMAmuletItem(saveGame);
     }
 }

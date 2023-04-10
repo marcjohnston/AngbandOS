@@ -20,10 +20,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             return saveGame.CloneMonster(dir);
         }
-        public override void ApplyMagic(Item item, int level, int power)
-        {
-            item.TypeSpecificValue = Program.Rng.DieRoll(5) + 3;
-        }
         public override Item CreateItem(SaveGame saveGame) => new CloneMonsterWandItem(saveGame);
     }
 }

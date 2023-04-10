@@ -21,10 +21,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             return saveGame.PolyMonster(dir);
         }
-        public override void ApplyMagic(Item item, int level, int power)
-        {
-            item.TypeSpecificValue = Program.Rng.DieRoll(8) + 6;
-        }
         public override Item CreateItem(SaveGame saveGame) => new PolymorphWandItem(saveGame);
     }
 }
