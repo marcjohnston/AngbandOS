@@ -356,16 +356,6 @@
         public virtual bool IsWorthless(Item item) => false;
 
         /// <summary>
-        /// Returns a description of the items' activation.  Returns null by default.
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        public virtual string DescribeActivationEffect(Item item)
-        {
-            return null;
-        }
-
-        /// <summary>
         /// Returns the base value for a non flavor-aware item.  Returns 0, by default.
         /// </summary>
         public virtual int BaseValue => 0;

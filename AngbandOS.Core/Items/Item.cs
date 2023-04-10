@@ -2035,7 +2035,7 @@ namespace AngbandOS.Core.Items
             return Factory.BaseValue;
         }
 
-        private string DescribeActivationEffect()
+        private string? DescribeActivationEffect()
         {
             RefreshFlagBasedProperties();
             if (!Characteristics.Activate)
@@ -2056,7 +2056,7 @@ namespace AngbandOS.Core.Items
             {
                 return "teleport every 50+d50 turns";
             }
-            return Factory.DescribeActivationEffect(this);
+            return FactoryDescribeActivationEffect();
         }
 
         private bool IsTried()
@@ -3527,6 +3527,16 @@ namespace AngbandOS.Core.Items
                 tmpVal2 = $" {{{tmpVal2}}}";
             }
             return tmpVal2;
+        }
+
+        /// <summary>
+        /// Returns a description of the items' activation or null, .  Returns null by default.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public virtual string? FactoryDescribeActivationEffect()
+        {
+            return null;
         }
     }
 }

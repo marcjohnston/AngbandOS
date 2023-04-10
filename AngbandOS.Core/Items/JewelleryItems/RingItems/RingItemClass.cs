@@ -22,23 +22,5 @@
         public override int BaseValue => 45;
         public override bool HatesElectricity => true;
         public override Colour Colour => Colour.Gold;
-
-        public override string DescribeActivationEffect(Item item)
-        {
-            switch (item.ItemSubCategory)
-            {
-                case RingType.Flames:
-                    return "ball of fire and resist fire";
-
-                case RingType.Ice:
-                    return "ball of cold and resist cold";
-
-                case RingType.Acid:
-                    return "ball of acid and resist acid";
-
-                default:
-                    return null;
-            }
-        }
     }
 }
