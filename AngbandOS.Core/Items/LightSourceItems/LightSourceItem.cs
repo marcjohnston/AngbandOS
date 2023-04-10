@@ -120,5 +120,25 @@ namespace AngbandOS.Core.Items
                 }
             }
         }
+
+        public override string Identify()
+        {
+            if (FixedArtifact != null)
+            {
+                return "It provides light (radius 3) forever.";
+            }
+            else if (ItemSubCategory == LightType.Lantern)
+            {
+                return "It provides light (radius 2) when fueled.";
+            }
+            else if (ItemSubCategory == LightType.Torch)
+            {
+                return "It provides light (radius 1) when fueled.";
+            }
+            else
+            {
+                return "It provides light (radius 2) forever.";
+            }
+        }
     }
 }

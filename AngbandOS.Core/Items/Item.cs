@@ -1462,7 +1462,7 @@ namespace AngbandOS.Core.Items
                 info[i++] = DescribeActivationEffect();
                 info[i++] = "...if it is being worn.";
             }
-            string categoryIdentity = Factory.Identify(this);
+            string categoryIdentity = Identify();
             if (categoryIdentity != null)
             {
                 info[i++] = categoryIdentity;
@@ -3272,5 +3272,10 @@ namespace AngbandOS.Core.Items
         public virtual void ApplyMagic(int level, int power)
         {
         }
+
+        /// <summary>
+        /// Returns an additional description when identified fully.  Returns null by default.  Only light sources provide an additional description.
+        /// </summary>
+        public virtual string Identify() => null;
     }
 }

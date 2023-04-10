@@ -58,25 +58,5 @@
             s += base.GetVerboseDescription(item);
             return s;
         }
-
-        public override string Identify(Item item)
-        {
-            if (item.FixedArtifact != null)
-            {
-                return "It provides light (radius 3) forever.";
-            }
-            else if (item.ItemSubCategory == LightType.Lantern)
-            {
-                return "It provides light (radius 2) when fueled.";
-            }
-            else if (item.ItemSubCategory == LightType.Torch)
-            {
-                return "It provides light (radius 1) when fueled.";
-            }
-            else
-            {
-                return "It provides light (radius 2) forever.";
-            }
-        }
     }
 }

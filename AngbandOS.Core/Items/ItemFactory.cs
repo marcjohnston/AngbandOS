@@ -600,11 +600,6 @@
         }
 
         /// <summary>
-        /// Returns an additional description when identified fully.  Returns null by default.  Only light sources provide an additional description.
-        /// </summary>
-        public virtual string Identify(Item item) => null;
-
-        /// <summary>
         /// Returns the base value for a non flavor-aware item.  Returns 0, by default.
         /// </summary>
         public virtual int BaseValue => 0;
