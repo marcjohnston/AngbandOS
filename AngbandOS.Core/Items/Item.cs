@@ -1935,7 +1935,7 @@ namespace AngbandOS.Core.Items
             {
                 return 0;
             }
-            int? typeSpecificValue = Factory.GetTypeSpecificRealValue(this, value);
+            int? typeSpecificValue = GetTypeSpecificRealValue(value);
             if (typeSpecificValue == null)
                 return 0;
             value += typeSpecificValue.Value;
@@ -3297,5 +3297,79 @@ namespace AngbandOS.Core.Items
         /// <param name="item"></param>
         /// <returns></returns>
         public virtual void ApplyRandartBonus() { }
+
+        public virtual int? GetTypeSpecificRealValue(int value) => 0;
+
+        /// <summary>
+        /// Provides base functionality for the type specific real value.  Returns a real value for the type specific characteristics of the item.  Returns
+        /// null, if the item is worthless.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        protected int? ComputeTypeSpecificRealValue(int value)
+        {
+            if (TypeSpecificValue < 0)
+            {
+                return null; // Worthless
+            }
+
+            if (TypeSpecificValue == 0)
+            {
+                return 0;
+            }
+
+            int bonusValue = 0;
+            RefreshFlagBasedProperties();
+            if (Characteristics.Str)
+            {
+                bonusValue += TypeSpecificValue * 200;
+            }
+            if (Characteristics.Int)
+            {
+                bonusValue += TypeSpecificValue * 200;
+            }
+            if (Characteristics.Wis)
+            {
+                bonusValue += TypeSpecificValue * 200;
+            }
+            if (Characteristics.Dex)
+            {
+                bonusValue += TypeSpecificValue * 200;
+            }
+            if (Characteristics.Con)
+            {
+                bonusValue += TypeSpecificValue * 200;
+            }
+            if (Characteristics.Cha)
+            {
+                bonusValue += TypeSpecificValue * 200;
+            }
+            if (Characteristics.Stealth)
+            {
+                bonusValue += TypeSpecificValue * 100;
+            }
+            if (Characteristics.Search)
+            {
+                bonusValue += TypeSpecificValue * 100;
+            }
+            if (Characteristics.Infra)
+            {
+                bonusValue += TypeSpecificValue * 50;
+            }
+            if (Characteristics.Tunnel)
+            {
+                bonusValue += TypeSpecificValue * 50;
+            }
+            if (Characteristics.Blows)
+            {
+                bonusValue += TypeSpecificValue * 5000;
+            }
+            if (Characteristics.Speed)
+            {
+                bonusValue += TypeSpecificValue * 3000;
+            }
+            return bonusValue;
+        }
     }
 }

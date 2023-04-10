@@ -33,11 +33,6 @@
         /// </summary>
         public override bool KindIsGood => ToA >= 0;
 
-        public override int? GetTypeSpecificRealValue(Item item, int value)
-        {
-            return ComputeTypeSpecificRealValue(item, value);
-        }
-
         public override bool IsWorthless(Item item)
         {
             if (item.TypeSpecificValue < 0)

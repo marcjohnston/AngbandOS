@@ -17,11 +17,6 @@
             saveGame.MsgPrint("Your light cannot be refilled.");
         }
 
-        public override int? GetTypeSpecificRealValue(Item item, int value)
-        {
-            return ComputeTypeSpecificRealValue(item, value);
-        }
-
         public override int GetAdditionalMassProduceCount(Item item)
         {
             int cost = item.Value();

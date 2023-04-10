@@ -71,6 +71,9 @@ namespace AngbandOS.Core.Items
                 }
             }
         }
-
+        public override int? GetTypeSpecificRealValue(int value)
+        {
+            return ComputeTypeSpecificRealValue(value);
+        }
     }
 }
