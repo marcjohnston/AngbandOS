@@ -4,5 +4,11 @@ namespace AngbandOS.Core.Items
     internal class StupidityRingItem : RingItem
     {
         public StupidityRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<RingStupidity>()) { }
+        public override void ApplyMagic(int level, int power)
+        {
+            IdentBroken = true;
+            IdentCursed = true;
+            TypeSpecificValue = 0 - (1 + GetBonusValue(5, level));
+        }
     }
 }

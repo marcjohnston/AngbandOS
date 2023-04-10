@@ -4,5 +4,19 @@ namespace AngbandOS.Core.Items
     internal class DamageRingItem : RingItem
     {
         public DamageRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<RingDamage>()) { }
+        public override void ApplyMagic(int level, int power)
+        {
+            if (power == 0 && Program.Rng.RandomLessThan(100) < 50)
+            {
+                power = -1;
+            }
+            BonusDamage = 5 + Program.Rng.DieRoll(8) + GetBonusValue(10, level);
+            if (power < 0)
+            {
+                IdentBroken = true;
+                IdentCursed = true;
+                BonusDamage = 0 - BonusDamage;
+            }
+        }
     }
 }

@@ -4,5 +4,12 @@ namespace AngbandOS.Core.Items
     internal class WoeRingItem : RingItem
     {
         public WoeRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<RingWoe>()) { }
+        public override void ApplyMagic(int level, int power)
+        {
+            IdentBroken = true;
+            IdentCursed = true;
+            BonusArmourClass = 0 - (5 + GetBonusValue(10, level));
+            TypeSpecificValue = 0 - (1 + GetBonusValue(5, level));
+        }
     }
 }
