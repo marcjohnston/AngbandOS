@@ -321,7 +321,7 @@
         {
             if (item.Factory.HasQuality)
             {
-                switch (item.GetDetailedFeeling())
+                switch (item.GetDetailedFeeling()) // TODO: This is poor
                 {
                     case "terrible":
                     case "worthless":

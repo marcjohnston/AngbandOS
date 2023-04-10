@@ -9,11 +9,6 @@
         public ArmourItemClass(SaveGame saveGame) : base(saveGame) { }
         public override bool HasQuality => true;
 
-        public override void ApplyRandartBonus(Item item)
-        {
-            item.BonusArmourClass += Program.Rng.DieRoll(item.BonusArmourClass > 19 ? 1 : 20 - item.BonusArmourClass);
-        }
-
         public override int RandartActivationChance => base.RandartActivationChance * 2;
         public override int GetAdditionalMassProduceCount(Item item)
         {

@@ -56,5 +56,11 @@ namespace AngbandOS.Core.Items
                 }
             }
         }
+
+        public override void ApplyRandartBonus()
+        {
+            BonusToHit += Program.Rng.DieRoll(BonusToHit > 19 ? 1 : 20 - BonusToHit);
+            BonusDamage += Program.Rng.DieRoll(BonusDamage > 19 ? 1 : 20 - BonusDamage);
+        }
     }
 }

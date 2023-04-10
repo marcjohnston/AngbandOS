@@ -124,5 +124,9 @@ namespace AngbandOS.Core.Items
             }
         }
 
+        public override void ApplyRandartBonus()
+        {
+            BonusArmourClass += Program.Rng.DieRoll(BonusArmourClass > 19 ? 1 : 20 - BonusArmourClass);
+        }
     }
 }

@@ -3277,5 +3277,12 @@ namespace AngbandOS.Core.Items
         /// Returns an additional description when identified fully.  Returns null by default.  Only light sources provide an additional description.
         /// </summary>
         public virtual string Identify() => null;
+
+        /// <summary>
+        /// Applies an additional bonus to random artifacts.  Does nothing by default.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public virtual void ApplyRandartBonus() { }
     }
 }
