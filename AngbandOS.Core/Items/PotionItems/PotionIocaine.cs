@@ -29,6 +29,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.Project(who, 1, y, x, 0, new DeathRayProjectile(saveGame), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
             return true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new IocainePotionItem(saveGame);
+        public override Item CreateItem() => new IocainePotionItem(SaveGame);
     }
 }

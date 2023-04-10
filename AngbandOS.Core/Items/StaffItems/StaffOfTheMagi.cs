@@ -33,6 +33,6 @@ namespace AngbandOS.Core.ItemCategories
                 eventArgs.SaveGame.RedrawManaFlaggedAction.Set();
             }
         }
-        public override Item CreateItem(SaveGame saveGame) => new OfTheMagiStaffItem(saveGame);
+        public override Item CreateItem() => new OfTheMagiStaffItem(SaveGame);
     }
 }

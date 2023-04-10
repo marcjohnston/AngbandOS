@@ -26,6 +26,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.FireBall(new FireProjectile(saveGame), dir, 100, 3);
             return true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new DragonsFlameWandItem(saveGame);
+        public override Item CreateItem() => new DragonsFlameWandItem(SaveGame);
     }
 }

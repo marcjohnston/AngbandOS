@@ -22,6 +22,6 @@ namespace AngbandOS.Core.ItemCategories
             eventArgs.SaveGame.DestroyArea(eventArgs.SaveGame.Player.MapY, eventArgs.SaveGame.Player.MapX, 15);
             eventArgs.Identified = true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new DestructionStaffItem(saveGame);
+        public override Item CreateItem() => new DestructionStaffItem(SaveGame);
     }
 }

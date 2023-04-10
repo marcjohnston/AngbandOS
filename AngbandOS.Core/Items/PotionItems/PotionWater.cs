@@ -27,6 +27,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             return true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new WaterPotionItem(saveGame);
+        public override Item CreateItem() => new WaterPotionItem(SaveGame);
     }
 }

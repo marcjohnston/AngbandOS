@@ -21,6 +21,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int ToA => -8;
         public override int ToH => -5;
         public override int Weight => 200;
-        public override Item CreateItem(SaveGame saveGame) => new RustyChainMailHardArmorItem(saveGame);
+        public override Item CreateItem() => new RustyChainMailHardArmorItem(SaveGame);
     }
 }

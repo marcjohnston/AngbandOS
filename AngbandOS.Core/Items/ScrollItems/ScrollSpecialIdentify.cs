@@ -24,6 +24,6 @@ namespace AngbandOS.Core.ItemCategories
                 eventArgs.UsedUp = false;
             }
         }
-        public override Item CreateItem(SaveGame saveGame) => new SpecialIdentifyScrollItem(saveGame);
+        public override Item CreateItem() => new SpecialIdentifyScrollItem(SaveGame);
     }
 }

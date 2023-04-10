@@ -29,6 +29,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.Project(who, 2, y, x, 5, new OldSlowProjectile(saveGame), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
             return true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new SlownessPotionItem(saveGame);
+        public override Item CreateItem() => new SlownessPotionItem(SaveGame);
     }
 }

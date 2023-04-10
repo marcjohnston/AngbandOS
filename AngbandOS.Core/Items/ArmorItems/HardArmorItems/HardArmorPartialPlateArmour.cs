@@ -20,6 +20,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int? SubCategory => 12;
         public override int ToH => -3;
         public override int Weight => 260;
-        public override Item CreateItem(SaveGame saveGame) => new PartialPlateArmourHardArmorItem(saveGame);
+        public override Item CreateItem() => new PartialPlateArmourHardArmorItem(SaveGame);
     }
 }

@@ -20,6 +20,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             return saveGame.CloneMonster(dir);
         }
-        public override Item CreateItem(SaveGame saveGame) => new CloneMonsterWandItem(saveGame);
+        public override Item CreateItem() => new CloneMonsterWandItem(SaveGame);
     }
 }

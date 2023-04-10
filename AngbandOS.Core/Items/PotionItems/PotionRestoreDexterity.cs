@@ -22,6 +22,6 @@ namespace AngbandOS.Core.ItemCategories
             // Restore wisdom restores your wisdom
             return saveGame.Player.TryRestoringAbilityScore(Ability.Wisdom);
         }
-        public override Item CreateItem(SaveGame saveGame) => new RestoreDexterityPotionItem(saveGame);
+        public override Item CreateItem() => new RestoreDexterityPotionItem(SaveGame);
     }
 }

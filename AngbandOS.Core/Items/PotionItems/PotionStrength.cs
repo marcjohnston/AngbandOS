@@ -22,6 +22,6 @@ namespace AngbandOS.Core.ItemCategories
             // Strength increases your strength
             return saveGame.Player.TryIncreasingAbilityScore(Ability.Strength);
         }
-        public override Item CreateItem(SaveGame saveGame) => new StrengthPotionItem(saveGame);
+        public override Item CreateItem() => new StrengthPotionItem(SaveGame);
     }
 }

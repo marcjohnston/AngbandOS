@@ -773,7 +773,7 @@ namespace AngbandOS.Core
                         continue;
                     }
                 }
-                Item item = kIdx.CreateItem(this);
+                Item item = kIdx.CreateItem();
                 item.FixedArtifact = aPtr;
                 return item;
             }
@@ -801,7 +801,7 @@ namespace AngbandOS.Core
                 {
                     return null;
                 }
-                item = kIdx.CreateItem(this);
+                item = kIdx.CreateItem();
             }
             item.ApplyMagic(Level.ObjectLevel, true, good, great);
             item.Count = item.MakeObjectCount;
@@ -840,7 +840,7 @@ namespace AngbandOS.Core
             {
                 goldType = goldItemClasses.Length - 1;
             }
-            return (GoldItem)goldItemClasses[goldType.Value].CreateItem(this);
+            return (GoldItem)goldItemClasses[goldType.Value].CreateItem();
         }
 
         private void Configure(Configuration? configuration)
@@ -14962,7 +14962,7 @@ namespace AngbandOS.Core
             if (Player.Race.OutfitsWithScrollsOfSatisfyHunger)
             {
                 ItemFactory scrollSatisfyHungerItemClass = SingletonRepository.ItemCategories.Get<ScrollSatisfyHunger>();
-                Item item = scrollSatisfyHungerItemClass.CreateItem(this);
+                Item item = scrollSatisfyHungerItemClass.CreateItem();
                 item.Count = (char)Program.Rng.RandomBetween(2, 5);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
@@ -14972,7 +14972,7 @@ namespace AngbandOS.Core
             else
             {
                 ItemFactory rationFoodItemClass = SingletonRepository.ItemCategories.Get<FoodRation>();
-                Item item = rationFoodItemClass.CreateItem(this);
+                Item item = rationFoodItemClass.CreateItem();
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
@@ -14981,7 +14981,7 @@ namespace AngbandOS.Core
             if (Player.Race.OutfitsWithScrollsOfLight || Player.BaseCharacterClass.OutfitsWithScrollsOfLight)
             {
                 ItemFactory scrollLightItemClass = SingletonRepository.ItemCategories.Get<ScrollLight>();
-                Item item = scrollLightItemClass .CreateItem(this);
+                Item item = scrollLightItemClass .CreateItem();
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.BecomeFlavourAware();
                 item.BecomeKnown();
@@ -14991,7 +14991,7 @@ namespace AngbandOS.Core
             else
             {
                 ItemFactory woodenTorchItemClass = SingletonRepository.ItemCategories.Get<LightWoodenTorch>();
-                Item item = woodenTorchItemClass.CreateItem(this);
+                Item item = woodenTorchItemClass.CreateItem();
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.TypeSpecificValue = Program.Rng.RandomBetween(3, 7) * 500;
                 item.BecomeFlavourAware();
@@ -19587,7 +19587,7 @@ namespace AngbandOS.Core
                 return;
             }
             ItemFactory itemClass = SingletonRepository.ItemCategories[kIdx];
-            Item qPtr = itemClass.CreateItem(this);
+            Item qPtr = itemClass.CreateItem();
             qPtr.ApplyMagic(Difficulty, false, false, false);
             Level.DropNear(qPtr, -1, Player.MapY, Player.MapX);
             MsgPrint("Allocated.");
@@ -19688,7 +19688,7 @@ namespace AngbandOS.Core
                 return;
             }
             aPtr.CurNum = 1;
-            Item qPtr = aPtr.BaseItemCategory.CreateItem(this);
+            Item qPtr = aPtr.BaseItemCategory.CreateItem();
             qPtr.FixedArtifact = SingletonRepository.FixedArtifacts[aIdx];
             qPtr.TypeSpecificValue = aPtr.Pval;
             qPtr.BaseArmourClass = aPtr.Ac;
@@ -19915,17 +19915,17 @@ namespace AngbandOS.Core
                 }
                 if (ch == 'n' || ch == 'N')
                 {
-                    qPtr = oPtr.Factory.CreateItem(this);
+                    qPtr = oPtr.Factory.CreateItem();
                     qPtr.ApplyMagic(Difficulty, false, false, false);
                 }
                 else if (ch == 'g' || ch == 'g')
                 {
-                    qPtr = oPtr.Factory.CreateItem(this);
+                    qPtr = oPtr.Factory.CreateItem();
                     qPtr.ApplyMagic(Difficulty, false, true, false);
                 }
                 else if (ch == 'e' || ch == 'e')
                 {
-                    qPtr = oPtr.Factory.CreateItem(this);
+                    qPtr = oPtr.Factory.CreateItem();
                     qPtr.ApplyMagic(Difficulty, false, true, true);
                 }
             }

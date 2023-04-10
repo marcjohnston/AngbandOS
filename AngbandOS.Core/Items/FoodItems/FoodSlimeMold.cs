@@ -23,6 +23,6 @@ namespace AngbandOS.Core.ItemCategories
             slimeMold.Quaff(saveGame);
             return true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new SlimeMoldFoodItem(saveGame);
+        public override Item CreateItem() => new SlimeMoldFoodItem(SaveGame);
     }
 }

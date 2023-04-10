@@ -67,6 +67,6 @@ namespace AngbandOS.Core.ItemCategories
             fuelSource.ItemOptimize();
             saveGame.UpdateTorchRadiusFlaggedAction.Set();
         }
-        public override Item CreateItem(SaveGame saveGame) => new BrassLanternLightSourceItem(saveGame);
+        public override Item CreateItem() => new BrassLanternLightSourceItem(SaveGame);
     }
 }

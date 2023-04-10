@@ -24,6 +24,6 @@ namespace AngbandOS.Core.ItemCategories
             // Resist heat gives you timed fire resistance
             return saveGame.Player.TimedFireResistance.AddTimer(Program.Rng.DieRoll(10) + 10);
         }
-        public override Item CreateItem(SaveGame saveGame) => new ResistHeatPotionItem(saveGame);
+        public override Item CreateItem() => new ResistHeatPotionItem(SaveGame);
     }
 }

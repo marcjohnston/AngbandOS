@@ -26,6 +26,6 @@ namespace AngbandOS.Core.ItemCategories
             }
             eventArgs.Identified = true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new PerceptionStaffItem(saveGame);
+        public override Item CreateItem() => new PerceptionStaffItem(SaveGame);
     }
 }

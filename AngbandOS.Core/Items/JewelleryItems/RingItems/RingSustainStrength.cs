@@ -17,6 +17,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int? SubCategory => 10;
         public override bool SustStr => true;
         public override int Weight => 2;
-        public override Item CreateItem(SaveGame saveGame) => new SustainStrengthRingItem(saveGame);
+        public override Item CreateItem() => new SustainStrengthRingItem(SaveGame);
     }
 }

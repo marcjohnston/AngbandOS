@@ -21,6 +21,6 @@ namespace AngbandOS.Core.ItemCategories
             eventArgs.SaveGame.TeleportPlayer(10);
             eventArgs.Identified = true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new PhaseDoorScrollItem(saveGame);
+        public override Item CreateItem() => new PhaseDoorScrollItem(SaveGame);
     }
 }

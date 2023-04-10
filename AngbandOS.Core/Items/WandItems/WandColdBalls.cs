@@ -23,6 +23,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.FireBall(new ColdProjectile(saveGame), dir, 48, 2);
             return true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new ColdBallsWandItem(saveGame);
+        public override Item CreateItem() => new ColdBallsWandItem(SaveGame);
     }
 }

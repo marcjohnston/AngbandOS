@@ -19,6 +19,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int? SubCategory => 2;
         public override int Weight => 30;
         public override bool KindIsGood => true;
-        public override Item CreateItem(SaveGame saveGame) => new MajorMagicksFolkBookItem(saveGame);
+        public override Item CreateItem() => new MajorMagicksFolkBookItem(SaveGame);
     }
 }

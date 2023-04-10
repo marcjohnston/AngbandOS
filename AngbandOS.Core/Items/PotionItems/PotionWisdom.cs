@@ -22,6 +22,6 @@ namespace AngbandOS.Core.ItemCategories
             // Wisdom increases your wisdom
             return saveGame.Player.TryIncreasingAbilityScore(Ability.Wisdom);
         }
-        public override Item CreateItem(SaveGame saveGame) => new WisdomPotionItem(saveGame);
+        public override Item CreateItem() => new WisdomPotionItem(SaveGame);
     }
 }

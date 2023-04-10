@@ -34,6 +34,6 @@ namespace AngbandOS.Core.ItemCategories
             }
             zapRodEvent.Item.TypeSpecificValue = 999;
         }
-        public override Item CreateItem(SaveGame saveGame) => new HealingRodItem(saveGame);
+        public override Item CreateItem() => new HealingRodItem(SaveGame);
     }
 }

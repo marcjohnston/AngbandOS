@@ -25,6 +25,6 @@ namespace AngbandOS.Core.ItemCategories
                 eventArgs.Identified = true;
             }
         }
-        public override Item CreateItem(SaveGame saveGame) => new SleepMonstersStaffItem(saveGame);
+        public override Item CreateItem() => new SleepMonstersStaffItem(SaveGame);
     }
 }

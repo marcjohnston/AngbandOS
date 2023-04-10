@@ -23,6 +23,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.LightLine(dir);
             return true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new LightWandItem(saveGame);
+        public override Item CreateItem() => new LightWandItem(SaveGame);
     }
 }

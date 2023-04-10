@@ -20,6 +20,6 @@ namespace AngbandOS.Core.ItemCategories
         public override bool NoMagic => true;
         public override int Weight => 3;
 
-        public override Item CreateItem(SaveGame saveGame) => new AntiMagicAmuletItem(saveGame);
+        public override Item CreateItem() => new AntiMagicAmuletItem(SaveGame);
     }
 }

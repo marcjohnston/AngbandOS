@@ -20,6 +20,6 @@ namespace AngbandOS.Core.ItemCategories
 
         public override bool ProvidesSunlight => true;
 
-        public override Item CreateItem(SaveGame saveGame) => new GemstoneLightSourceItem(saveGame);
+        public override Item CreateItem() => new GemstoneLightSourceItem(SaveGame);
     }
 }

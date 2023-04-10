@@ -17,6 +17,6 @@ namespace AngbandOS.Core.ItemCategories
         public override bool ResSound => true;
         public override int? SubCategory => 42;
         public override int Weight => 2;
-        public override Item CreateItem(SaveGame saveGame) => new SoundResistanceRingItem(saveGame);
+        public override Item CreateItem() => new SoundResistanceRingItem(SaveGame);
     }
 }

@@ -20,6 +20,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             return saveGame.SpeedMonster(dir);
         }
-        public override Item CreateItem(SaveGame saveGame) => new HasteMonsterWandItem(saveGame);
+        public override Item CreateItem() => new HasteMonsterWandItem(SaveGame);
     }
 }

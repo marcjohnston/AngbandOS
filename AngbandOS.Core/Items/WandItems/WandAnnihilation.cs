@@ -25,6 +25,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             return saveGame.DrainLife(dir, 125);
         }
-        public override Item CreateItem(SaveGame saveGame) => new AnnihilationWandItem(saveGame);
+        public override Item CreateItem() => new AnnihilationWandItem(SaveGame);
     }
 }

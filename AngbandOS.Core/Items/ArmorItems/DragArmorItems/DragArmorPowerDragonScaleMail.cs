@@ -40,6 +40,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int ToA => 15;
         public override int ToH => -3;
         public override int Weight => 250;
-        public override Item CreateItem(SaveGame saveGame) => new PowerDragonScaleMailDragArmorItem(saveGame);
+        public override Item CreateItem() => new PowerDragonScaleMailDragArmorItem(SaveGame);
     }
 }

@@ -19,6 +19,6 @@ namespace AngbandOS.Core.ItemCategories
         public override bool ShowMods => true;
         public override int? SubCategory => 17;
         public override int Weight => 250;
-        public override Item CreateItem(SaveGame saveGame) => new ScythePolearmWeaponItem(saveGame);
+        public override Item CreateItem() => new ScythePolearmWeaponItem(SaveGame);
     }
 }

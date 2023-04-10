@@ -24,6 +24,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8));
             return true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new PieceOfElvishWaybreadFoodItem(saveGame);
+        public override Item CreateItem() => new PieceOfElvishWaybreadFoodItem(SaveGame);
     }
 }

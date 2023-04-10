@@ -49,6 +49,6 @@ namespace AngbandOS.Core.ItemCategories
 
             return identified;
         }
-        public override Item CreateItem(SaveGame saveGame) => new AugmentationPotionItem(saveGame);
+        public override Item CreateItem() => new AugmentationPotionItem(SaveGame);
     }
 }

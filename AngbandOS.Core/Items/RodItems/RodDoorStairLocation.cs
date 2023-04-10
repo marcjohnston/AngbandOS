@@ -31,6 +31,6 @@ namespace AngbandOS.Core.ItemCategories
             }
             zapRodEvent.Item.TypeSpecificValue = 70;
         }
-        public override Item CreateItem(SaveGame saveGame) => new DoorStairLocationRodItem(saveGame);
+        public override Item CreateItem() => new DoorStairLocationRodItem(SaveGame);
     }
 }

@@ -22,6 +22,6 @@ namespace AngbandOS.Core.ItemCategories
         public override bool NoTele => true;
         public override int Weight => 3;
 
-        public override Item CreateItem(SaveGame saveGame) => new AntiTeleportationAmuletItem(saveGame);
+        public override Item CreateItem() => new AntiTeleportationAmuletItem(SaveGame);
     }
 }

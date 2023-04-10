@@ -21,6 +21,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             return saveGame.CharmMonster(dir, 45);
         }
-        public override Item CreateItem(SaveGame saveGame) => new TameMonsterWandItem(saveGame);
+        public override Item CreateItem() => new TameMonsterWandItem(SaveGame);
     }
 }

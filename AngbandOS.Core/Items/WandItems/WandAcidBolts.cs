@@ -22,6 +22,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.FireBoltOrBeam(20, new AcidProjectile(saveGame), dir, Program.Rng.DiceRoll(3, 8));
             return true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new AcidBoltsWandItem(saveGame);
+        public override Item CreateItem() => new AcidBoltsWandItem(SaveGame);
     }
 }

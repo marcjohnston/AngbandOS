@@ -112,6 +112,6 @@ namespace AngbandOS.Core.ItemCategories
                     throw new Exception("Internal error.");
             }
         }
-        public override Item CreateItem(SaveGame saveGame) => new WonderWandItem(saveGame);
+        public override Item CreateItem() => new WonderWandItem(SaveGame);
     }
 }

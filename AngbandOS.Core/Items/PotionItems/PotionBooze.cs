@@ -61,6 +61,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.Project(who, 2, y, x, 0, new OldConfProjectile(saveGame), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
             return true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new BoozePotionItem(saveGame);
+        public override Item CreateItem() => new BoozePotionItem(SaveGame);
     }
 }

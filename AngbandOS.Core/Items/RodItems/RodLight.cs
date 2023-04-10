@@ -25,6 +25,6 @@ namespace AngbandOS.Core.ItemCategories
             zapRodEvent.Identified = true;
             zapRodEvent.Item.TypeSpecificValue = 9;
         }
-        public override Item CreateItem(SaveGame saveGame) => new LightRodItem(saveGame);
+        public override Item CreateItem() => new LightRodItem(SaveGame);
     }
 }

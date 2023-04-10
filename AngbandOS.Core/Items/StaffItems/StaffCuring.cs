@@ -45,6 +45,6 @@ namespace AngbandOS.Core.ItemCategories
                 eventArgs.Identified = true;
             }
         }
-        public override Item CreateItem(SaveGame saveGame) => new CuringStaffItem(saveGame);
+        public override Item CreateItem() => new CuringStaffItem(SaveGame);
     }
 }

@@ -26,6 +26,6 @@ namespace AngbandOS.Core.ItemCategories
             }
             zapRodEvent.Item.TypeSpecificValue = 20;
         }
-        public override Item CreateItem(SaveGame saveGame) => new SlowMonsterRodItem(saveGame);
+        public override Item CreateItem() => new SlowMonsterRodItem(SaveGame);
     }
 }

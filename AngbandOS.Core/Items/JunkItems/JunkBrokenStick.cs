@@ -15,6 +15,6 @@ namespace AngbandOS.Core.ItemCategories
         public override string FriendlyName => "& Broken Stick~";
         public override int? SubCategory => 6;
         public override int Weight => 3;
-        public override Item CreateItem(SaveGame saveGame) => new BrokenStickJunkItem(saveGame);
+        public override Item CreateItem() => new BrokenStickJunkItem(SaveGame);
     }
 }

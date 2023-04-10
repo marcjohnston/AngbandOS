@@ -36,6 +36,6 @@ namespace AngbandOS.Core.ItemCategories
             }
             return identified;
         }
-        public override Item CreateItem(SaveGame saveGame) => new BerserkStrengthPotionItem(saveGame);
+        public override Item CreateItem() => new BerserkStrengthPotionItem(SaveGame);
     }
 }

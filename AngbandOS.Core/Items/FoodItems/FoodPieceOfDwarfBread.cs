@@ -24,6 +24,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.MsgPrint("You look at the dwarf bread, and don't feel quite so hungry anymore.");
             return true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new PieceOfDwarfBreadFoodItem(saveGame);
+        public override Item CreateItem() => new PieceOfDwarfBreadFoodItem(SaveGame);
     }
 }

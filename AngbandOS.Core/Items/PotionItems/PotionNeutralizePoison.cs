@@ -22,6 +22,6 @@ namespace AngbandOS.Core.ItemCategories
             // Cure poison removes any poison you have
             return saveGame.Player.TimedPoison.ResetTimer();
         }
-        public override Item CreateItem(SaveGame saveGame) => new NeutralizePoisonPotionItem(saveGame);
+        public override Item CreateItem() => new NeutralizePoisonPotionItem(SaveGame);
     }
 }

@@ -33,6 +33,6 @@ namespace AngbandOS.Core.ItemCategories
             }
             zapRodEvent.Item.TypeSpecificValue = 99;
         }
-        public override Item CreateItem(SaveGame saveGame) => new SpeedRodItem(saveGame);
+        public override Item CreateItem() => new SpeedRodItem(SaveGame);
     }
 }

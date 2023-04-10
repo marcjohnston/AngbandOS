@@ -25,6 +25,6 @@ namespace AngbandOS.Core.ItemCategories
                 }
             }
         }
-        public override Item CreateItem(SaveGame saveGame) => new SummonUndeadScrollItem(saveGame);
+        public override Item CreateItem() => new SummonUndeadScrollItem(SaveGame);
     }
 }

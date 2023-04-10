@@ -21,6 +21,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             return saveGame.FearMonster(dir, 10);
         }
-        public override Item CreateItem(SaveGame saveGame) => new ScareMonsterWandItem(saveGame);
+        public override Item CreateItem() => new ScareMonsterWandItem(SaveGame);
     }
 }

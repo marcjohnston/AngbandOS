@@ -17,6 +17,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int[] Locale => new int[] { 20, 0, 0, 0 };
         public override int Weight => 3;
 
-        public override Item CreateItem(SaveGame saveGame) => new CharismaAmuletItem(saveGame);
+        public override Item CreateItem() => new CharismaAmuletItem(SaveGame);
     }
 }

@@ -20,6 +20,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             return saveGame.HealMonster(dir);
         }
-        public override Item CreateItem(SaveGame saveGame) => new HealMonsterWandItem(saveGame);
+        public override Item CreateItem() => new HealMonsterWandItem(SaveGame);
     }
 }

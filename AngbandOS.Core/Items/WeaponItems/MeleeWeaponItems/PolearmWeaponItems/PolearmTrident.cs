@@ -19,6 +19,6 @@ namespace AngbandOS.Core.ItemCategories
         public override bool ShowMods => true;
         public override int? SubCategory => 5;
         public override int Weight => 70;
-        public override Item CreateItem(SaveGame saveGame) => new TridentPolearmWeaponItem(saveGame);
+        public override Item CreateItem() => new TridentPolearmWeaponItem(SaveGame);
     }
 }

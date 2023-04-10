@@ -470,7 +470,7 @@ namespace AngbandOS.Core.Items
 
         public Item Clone(int? newCount = null)
         {
-            Item clonedItem = Factory.CreateItem(SaveGame);
+            Item clonedItem = Factory.CreateItem();
             clonedItem.BaseArmourClass = BaseArmourClass;
             clonedItem.RandartItemCharacteristics.Copy(RandartItemCharacteristics);
             clonedItem.RandartName = RandartName;

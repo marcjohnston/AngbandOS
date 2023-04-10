@@ -21,6 +21,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             return saveGame.DisarmTrap(dir);
         }
-        public override Item CreateItem(SaveGame saveGame) => new DisarmingWandItem(saveGame);
+        public override Item CreateItem() => new DisarmingWandItem(SaveGame);
     }
 }

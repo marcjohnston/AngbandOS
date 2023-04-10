@@ -21,6 +21,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             return saveGame.PolyMonster(dir);
         }
-        public override Item CreateItem(SaveGame saveGame) => new PolymorphWandItem(saveGame);
+        public override Item CreateItem() => new PolymorphWandItem(SaveGame);
     }
 }

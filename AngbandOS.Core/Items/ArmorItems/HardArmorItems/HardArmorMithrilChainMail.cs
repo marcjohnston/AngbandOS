@@ -21,6 +21,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int? SubCategory => 20;
         public override int ToH => -1;
         public override int Weight => 150;
-        public override Item CreateItem(SaveGame saveGame) => new MithrilChainMailHardArmorItem(saveGame);
+        public override Item CreateItem() => new MithrilChainMailHardArmorItem(SaveGame);
     }
 }

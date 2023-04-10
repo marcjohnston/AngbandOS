@@ -20,6 +20,6 @@ namespace AngbandOS.Core.ItemCategories
         public override bool SlayUndead => true;
         public override int? SubCategory => 20;
         public override int Weight => 400;
-        public override Item CreateItem(SaveGame saveGame) => new MaceOfDisruptionHaftedWeaponItem(saveGame);
+        public override Item CreateItem() => new MaceOfDisruptionHaftedWeaponItem(SaveGame);
     }
 }

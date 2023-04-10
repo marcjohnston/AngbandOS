@@ -25,6 +25,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.SelfKnowledge();
             return true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new SelfKnowledgePotionItem(saveGame);
+        public override Item CreateItem() => new SelfKnowledgePotionItem(SaveGame);
     }
 }

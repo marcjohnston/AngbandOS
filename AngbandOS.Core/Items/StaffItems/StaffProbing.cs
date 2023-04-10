@@ -22,6 +22,6 @@ namespace AngbandOS.Core.ItemCategories
             eventArgs.SaveGame.Probing();
             eventArgs.Identified = true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new ProbingStaffItem(saveGame);
+        public override Item CreateItem() => new ProbingStaffItem(SaveGame);
     }
 }

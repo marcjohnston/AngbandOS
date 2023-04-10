@@ -27,6 +27,6 @@ namespace AngbandOS.Core.ItemCategories
                 eventArgs.Identified = true;
             }
         }
-        public override Item CreateItem(SaveGame saveGame) => new DoorStairLocationScrollItem(saveGame);
+        public override Item CreateItem() => new DoorStairLocationScrollItem(SaveGame);
     }
 }

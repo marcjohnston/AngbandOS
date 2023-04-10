@@ -19,6 +19,6 @@ namespace AngbandOS.Core.ItemCategories
         public override bool ResPois => true;
         public override int? SubCategory => 48;
         public override int Weight => 2;
-        public override Item CreateItem(SaveGame saveGame) => new LordlyProtectionRingItem(saveGame);
+        public override Item CreateItem() => new LordlyProtectionRingItem(SaveGame);
     }
 }

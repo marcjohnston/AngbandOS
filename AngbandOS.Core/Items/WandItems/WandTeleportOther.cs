@@ -21,6 +21,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             return saveGame.TeleportMonster(dir);
         }
-        public override Item CreateItem(SaveGame saveGame) => new TeleportOtherWandItem(saveGame);
+        public override Item CreateItem() => new TeleportOtherWandItem(SaveGame);
     }
 }

@@ -21,6 +21,6 @@ namespace AngbandOS.Core.ItemCategories
             eventArgs.SaveGame.Level.MapArea();
             eventArgs.Identified = true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new MagicMappingScrollItem(saveGame);
+        public override Item CreateItem() => new MagicMappingScrollItem(SaveGame);
     }
 }

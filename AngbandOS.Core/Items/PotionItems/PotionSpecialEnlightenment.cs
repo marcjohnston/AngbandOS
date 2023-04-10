@@ -36,6 +36,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.SelfKnowledge();
             return true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new SpecialEnlightenmentPotionItem(saveGame);
+        public override Item CreateItem() => new SpecialEnlightenmentPotionItem(SaveGame);
     }
 }

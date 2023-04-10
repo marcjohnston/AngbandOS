@@ -27,6 +27,6 @@ namespace AngbandOS.Core.ItemCategories
             }
             zapRodEvent.Item.TypeSpecificValue = 10;
         }
-        public override Item CreateItem(SaveGame saveGame) => new PerceptionRodItem(saveGame);
+        public override Item CreateItem() => new PerceptionRodItem(SaveGame);
     }
 }

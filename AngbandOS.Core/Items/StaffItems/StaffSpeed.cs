@@ -32,6 +32,6 @@ namespace AngbandOS.Core.ItemCategories
                 eventArgs.SaveGame.Player.TimedHaste.AddTimer(5);
             }
         }
-        public override Item CreateItem(SaveGame saveGame) => new SpeedStaffItem(saveGame);
+        public override Item CreateItem() => new SpeedStaffItem(SaveGame);
     }
 }

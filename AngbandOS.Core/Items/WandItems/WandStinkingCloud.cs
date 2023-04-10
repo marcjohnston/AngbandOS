@@ -22,6 +22,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.FireBall(new PoisProjectile(saveGame), dir, 12, 2);
             return true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new StinkingCloudWandItem(saveGame);
+        public override Item CreateItem() => new StinkingCloudWandItem(SaveGame);
     }
 }

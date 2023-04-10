@@ -22,6 +22,6 @@ namespace AngbandOS.Core.ItemCategories
             // Restore strength restores your strength
             return saveGame.Player.TryRestoringAbilityScore(Ability.Strength);
         }
-        public override Item CreateItem(SaveGame saveGame) => new RestoreStrengthPotionItem(saveGame);
+        public override Item CreateItem() => new RestoreStrengthPotionItem(SaveGame);
     }
 }

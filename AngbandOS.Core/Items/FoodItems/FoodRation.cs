@@ -22,6 +22,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.MsgPrint("That tastes good.");
             return true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new RationFoodItem(saveGame);
+        public override Item CreateItem() => new RationFoodItem(SaveGame);
     }
 }

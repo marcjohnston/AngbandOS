@@ -20,6 +20,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 500;
         public override bool IsSmall => true;
         public override int NumberOfItemsContained => 6;
-        public override Item CreateItem(SaveGame saveGame) => new SmallSteelChestItem(saveGame);
+        public override Item CreateItem() => new SmallSteelChestItem(SaveGame);
     }
 }

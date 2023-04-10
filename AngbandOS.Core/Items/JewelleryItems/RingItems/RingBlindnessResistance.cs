@@ -17,6 +17,6 @@ namespace AngbandOS.Core.ItemCategories
         public override bool ResBlind => true;
         public override int? SubCategory => 47;
         public override int Weight => 2;
-        public override Item CreateItem(SaveGame saveGame) => new BlindnessResistanceRingItem(saveGame);
+        public override Item CreateItem() => new BlindnessResistanceRingItem(SaveGame);
     }
 }

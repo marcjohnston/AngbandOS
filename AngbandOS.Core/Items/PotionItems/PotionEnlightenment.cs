@@ -24,6 +24,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.Level.WizLight();
             return true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new EnlightenmentPotionItem(saveGame);
+        public override Item CreateItem() => new EnlightenmentPotionItem(SaveGame);
     }
 }

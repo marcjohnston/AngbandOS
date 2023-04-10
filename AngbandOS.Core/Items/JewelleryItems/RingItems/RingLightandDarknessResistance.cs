@@ -18,6 +18,6 @@ namespace AngbandOS.Core.ItemCategories
         public override bool ResLight => true;
         public override int? SubCategory => 39;
         public override int Weight => 2;
-        public override Item CreateItem(SaveGame saveGame) => new LightAndDarknessResistancRingItem(saveGame);
+        public override Item CreateItem() => new LightAndDarknessResistancRingItem(SaveGame);
     }
 }

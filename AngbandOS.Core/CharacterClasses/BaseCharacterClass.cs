@@ -149,7 +149,7 @@
             {
                 // Allow the race to modify the item as the race sees fit.
                 ItemFactory outfitItem = SaveGame.Player.Race.OutfitItemClass(itemClass);
-                Item item = outfitItem.CreateItem(SaveGame);
+                Item item = outfitItem.CreateItem();
                 if (outfitItem.CategoryEnum == ItemTypeEnum.Wand)
                 {
                     item.TypeSpecificValue = 1;

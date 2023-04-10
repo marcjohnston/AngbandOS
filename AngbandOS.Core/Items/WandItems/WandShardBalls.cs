@@ -27,6 +27,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.FireBall(new ShardProjectile(saveGame), dir, 75 + Program.Rng.DieRoll(50), 2);
             return true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new ShardBallsWandItem(saveGame);
+        public override Item CreateItem() => new ShardBallsWandItem(SaveGame);
     }
 }

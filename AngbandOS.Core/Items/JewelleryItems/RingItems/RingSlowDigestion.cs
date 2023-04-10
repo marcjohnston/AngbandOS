@@ -17,6 +17,6 @@ namespace AngbandOS.Core.ItemCategories
         public override bool SlowDigest => true;
         public override int? SubCategory => 6;
         public override int Weight => 2;
-        public override Item CreateItem(SaveGame saveGame) => new SlowDigestionRingItem(saveGame);
+        public override Item CreateItem() => new SlowDigestionRingItem(SaveGame);
     }
 }

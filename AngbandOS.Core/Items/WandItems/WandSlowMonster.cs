@@ -21,6 +21,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             return saveGame.SlowMonster(dir);
         }
-        public override Item CreateItem(SaveGame saveGame) => new SlowMonsterWandItem(saveGame);
+        public override Item CreateItem() => new SlowMonsterWandItem(SaveGame);
     }
 }

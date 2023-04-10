@@ -13,6 +13,6 @@ namespace AngbandOS.Core.ItemCategories
         public override bool InstaArt => true;
         public override int Level => 70;
         public override int Weight => 3;
-        public override Item CreateItem(SaveGame saveGame) => new NecklaceAmuletItem(saveGame);
+        public override Item CreateItem() => new NecklaceAmuletItem(SaveGame);
     }
 }

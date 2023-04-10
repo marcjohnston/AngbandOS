@@ -19,6 +19,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int ToD => -4;
         public override int ToH => -2;
         public override int Weight => 30;
-        public override Item CreateItem(SaveGame saveGame) => new BrokenSwordWeaponItem(saveGame);
+        public override Item CreateItem() => new BrokenSwordWeaponItem(SaveGame);
     }
 }

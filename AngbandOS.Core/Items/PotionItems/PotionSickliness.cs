@@ -25,6 +25,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             return true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new SicklinessPotionItem(saveGame);
+        public override Item CreateItem() => new SicklinessPotionItem(SaveGame);
     }
 }

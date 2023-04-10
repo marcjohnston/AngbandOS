@@ -1137,7 +1137,7 @@ namespace AngbandOS.Core.Stores
             ItemFactory itemType = SaveGame.SingletonRepository.ItemCategories[i];
 
             // Create the item.
-            Item qPtr = itemType.CreateItem(SaveGame);
+            Item qPtr = itemType.CreateItem();
 
             // Apply magic to the item.
             qPtr.ApplyMagic(level, false, false, false);

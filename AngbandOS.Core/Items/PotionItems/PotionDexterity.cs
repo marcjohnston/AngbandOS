@@ -22,6 +22,6 @@ namespace AngbandOS.Core.ItemCategories
             // Dexterity increases your dexterity
             return saveGame.Player.TryIncreasingAbilityScore(Ability.Dexterity);
         }
-        public override Item CreateItem(SaveGame saveGame) => new DexterityPotionItem(saveGame);
+        public override Item CreateItem() => new DexterityPotionItem(SaveGame);
     }
 }

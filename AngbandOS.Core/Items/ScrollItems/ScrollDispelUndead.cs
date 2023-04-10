@@ -23,6 +23,6 @@ namespace AngbandOS.Core.ItemCategories
                 eventArgs.Identified = true;
             }
         }
-        public override Item CreateItem(SaveGame saveGame) => new DispelUndeadScrollItem(saveGame);
+        public override Item CreateItem() => new DispelUndeadScrollItem(SaveGame);
     }
 }

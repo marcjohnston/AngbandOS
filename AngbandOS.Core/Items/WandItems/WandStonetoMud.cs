@@ -21,6 +21,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             return saveGame.WallToMud(dir);
         }
-        public override Item CreateItem(SaveGame saveGame) => new StoneToMudWandItem(saveGame);
+        public override Item CreateItem() => new StoneToMudWandItem(SaveGame);
     }
 }

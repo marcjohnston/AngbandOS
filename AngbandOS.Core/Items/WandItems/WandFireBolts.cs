@@ -22,6 +22,6 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.FireBoltOrBeam(20, new FireProjectile(saveGame), dir, Program.Rng.DiceRoll(6, 8));
             return true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new FireBoltsWandItem(saveGame);
+        public override Item CreateItem() => new FireBoltsWandItem(SaveGame);
     }
 }

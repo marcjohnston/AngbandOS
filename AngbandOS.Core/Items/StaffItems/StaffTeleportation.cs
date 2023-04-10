@@ -22,6 +22,6 @@ namespace AngbandOS.Core.ItemCategories
             eventArgs.SaveGame.TeleportPlayer(100);
             eventArgs.Identified = true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new TeleportationStaffItem(saveGame);
+        public override Item CreateItem() => new TeleportationStaffItem(SaveGame);
     }
 }

@@ -26,6 +26,6 @@ namespace AngbandOS.Core.ItemCategories
                 }
             }
         }
-        public override Item CreateItem(SaveGame saveGame) => new SummoningStaffItem(saveGame);
+        public override Item CreateItem() => new SummoningStaffItem(SaveGame);
     }
 }

@@ -21,6 +21,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             return saveGame.DestroyDoor(dir);
         }
-        public override Item CreateItem(SaveGame saveGame) => new TrapDoorDestructionWandItem(saveGame);
+        public override Item CreateItem() => new TrapDoorDestructionWandItem(SaveGame);
     }
 }

@@ -21,6 +21,6 @@ namespace AngbandOS.Core.ItemCategories
         {
             return saveGame.ConfuseMonster(dir, 10);
         }
-        public override Item CreateItem(SaveGame saveGame) => new ConfuseMonsterWandItem(saveGame);
+        public override Item CreateItem() => new ConfuseMonsterWandItem(SaveGame);
     }
 }

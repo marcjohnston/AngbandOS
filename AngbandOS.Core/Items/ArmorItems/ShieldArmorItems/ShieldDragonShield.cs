@@ -24,6 +24,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int? SubCategory => 6;
         public override int ToA => 10;
         public override int Weight => 100;
-        public override Item CreateItem(SaveGame saveGame) => new DragonShieldArmorItem(saveGame);
+        public override Item CreateItem() => new DragonShieldArmorItem(SaveGame);
     }
 }

@@ -21,6 +21,6 @@ namespace AngbandOS.Core.ItemCategories
             eventArgs.SaveGame.ElderSign();
             eventArgs.Identified = true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new RuneOfProtectionScrollItem(saveGame);
+        public override Item CreateItem() => new RuneOfProtectionScrollItem(SaveGame);
     }
 }

@@ -21,6 +21,6 @@ namespace AngbandOS.Core.ItemCategories
             eventArgs.SaveGame.Level.Acquirement(eventArgs.SaveGame.Player.MapY, eventArgs.SaveGame.Player.MapX, 1, true);
             eventArgs.Identified = true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new AcquirementScrollItem(saveGame);
+        public override Item CreateItem() => new AcquirementScrollItem(SaveGame);
     }
 }

@@ -23,6 +23,6 @@ namespace AngbandOS.Core.ItemCategories
         public override bool ResFire => true;
         public override int Weight => 3;
         public override bool KindIsGood => true;
-        public override Item CreateItem(SaveGame saveGame) => new ResistanceAmuletItem(saveGame);
+        public override Item CreateItem() => new ResistanceAmuletItem(SaveGame);
     }
 }

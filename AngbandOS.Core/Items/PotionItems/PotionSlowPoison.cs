@@ -22,6 +22,6 @@ namespace AngbandOS.Core.ItemCategories
             // Slow poison halves the remaining duration of any poison you have
             return saveGame.Player.TimedPoison.SetTimer(saveGame.Player.TimedPoison.TurnsRemaining / 2);
         }
-        public override Item CreateItem(SaveGame saveGame) => new SlowPoisonPotionItem(saveGame);
+        public override Item CreateItem() => new SlowPoisonPotionItem(SaveGame);
     }
 }

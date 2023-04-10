@@ -38,6 +38,6 @@ namespace AngbandOS.Core.ItemCategories
             }
             return true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new NewLifePotionItem(saveGame);
+        public override Item CreateItem() => new NewLifePotionItem(SaveGame);
     }
 }

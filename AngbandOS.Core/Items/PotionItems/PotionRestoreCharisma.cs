@@ -23,6 +23,6 @@ namespace AngbandOS.Core.ItemCategories
             // Restore charisma restores your charisma
             return saveGame.Player.TryRestoringAbilityScore(Ability.Charisma);
         }
-        public override Item CreateItem(SaveGame saveGame) => new RestoreCharismaPotionItem(saveGame);
+        public override Item CreateItem() => new RestoreCharismaPotionItem(SaveGame);
     }
 }

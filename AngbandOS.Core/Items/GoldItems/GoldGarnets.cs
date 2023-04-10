@@ -12,6 +12,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int Cost => 9;
         public override string FriendlyName => "garnets";
         public override int Level => 1;
-        public override Item CreateItem(SaveGame saveGame) => new GarnetsGoldItem(saveGame);
+        public override Item CreateItem() => new GarnetsGoldItem(SaveGame);
     }
 }

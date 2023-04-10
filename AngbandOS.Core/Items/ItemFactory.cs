@@ -26,7 +26,7 @@
         /// <summary>
         /// Returns the item type to use when creating an item of this category.
         /// </summary>
-        public abstract Item CreateItem(SaveGame saveGame);
+        public abstract Item CreateItem();
 
         /// <summary>
         /// Returns the inventory slot where the item is wielded.  Returns the pack, by default.

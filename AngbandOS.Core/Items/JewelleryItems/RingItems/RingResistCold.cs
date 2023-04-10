@@ -18,6 +18,6 @@ namespace AngbandOS.Core.ItemCategories
         public override bool ResCold => true;
         public override int? SubCategory => 9;
         public override int Weight => 2;
-        public override Item CreateItem(SaveGame saveGame) => new ResistColdRingItem(saveGame);
+        public override Item CreateItem() => new ResistColdRingItem(SaveGame);
     }
 }

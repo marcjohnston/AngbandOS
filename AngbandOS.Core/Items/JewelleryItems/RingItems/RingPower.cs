@@ -30,6 +30,6 @@ namespace AngbandOS.Core.ItemCategories
             string name = $"{flavour}{Pluralize("Ring", item.Count)}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
         }
-        public override Item CreateItem(SaveGame saveGame) => new PowerRingItem(saveGame);
+        public override Item CreateItem() => new PowerRingItem(SaveGame);
     }
 }

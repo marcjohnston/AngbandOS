@@ -26,6 +26,6 @@ namespace AngbandOS.Core.ItemCategories
             }
             zapRodEvent.Item.TypeSpecificValue = 25;
         }
-        public override Item CreateItem(SaveGame saveGame) => new PolymorphRodItem(saveGame);
+        public override Item CreateItem() => new PolymorphRodItem(SaveGame);
     }
 }

@@ -23,6 +23,6 @@ namespace AngbandOS.Core.ItemCategories
             eventArgs.SaveGame.GetRumour();
             eventArgs.Identified = true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new RumourScrollItem(saveGame);
+        public override Item CreateItem() => new RumourScrollItem(SaveGame);
     }
 }

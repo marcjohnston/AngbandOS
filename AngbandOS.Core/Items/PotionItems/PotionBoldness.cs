@@ -22,6 +22,6 @@ namespace AngbandOS.Core.ItemCategories
             // Boldness stops you being afraid
             return saveGame.Player.TimedFear.ResetTimer();
         }
-        public override Item CreateItem(SaveGame saveGame) => new BoldnessPotionItem(saveGame);
+        public override Item CreateItem() => new BoldnessPotionItem(SaveGame);
     }
 }

@@ -45,6 +45,6 @@ namespace AngbandOS.Core.ItemCategories
             }
             return ident;
         }
-        public override Item CreateItem(SaveGame saveGame) => new RestoringMushroomItem(saveGame);
+        public override Item CreateItem() => new RestoringMushroomItem(SaveGame);
     }
 }

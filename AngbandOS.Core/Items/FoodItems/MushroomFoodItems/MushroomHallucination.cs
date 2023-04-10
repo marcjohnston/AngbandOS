@@ -27,6 +27,6 @@ namespace AngbandOS.Core.ItemCategories
             }
             return false;
         }
-        public override Item CreateItem(SaveGame saveGame) => new HallucinationMushroomItem(saveGame);
+        public override Item CreateItem() => new HallucinationMushroomItem(SaveGame);
     }
 }

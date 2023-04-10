@@ -17,6 +17,6 @@ namespace AngbandOS.Core.ItemCategories
         public override bool ResDisen => true;
         public override int? SubCategory => 45;
         public override int Weight => 2;
-        public override Item CreateItem(SaveGame saveGame) => new DisenchantmentResistanceRingItem(saveGame);
+        public override Item CreateItem() => new DisenchantmentResistanceRingItem(SaveGame);
     }
 }

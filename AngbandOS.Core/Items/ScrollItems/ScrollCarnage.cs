@@ -21,6 +21,6 @@ namespace AngbandOS.Core.ItemCategories
             eventArgs.SaveGame.Carnage(true);
             eventArgs.Identified = true;
         }
-        public override Item CreateItem(SaveGame saveGame) => new CarnageScrollItem(saveGame);
+        public override Item CreateItem() => new CarnageScrollItem(SaveGame);
     }
 }

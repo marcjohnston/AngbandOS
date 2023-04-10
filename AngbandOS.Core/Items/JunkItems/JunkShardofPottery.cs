@@ -15,6 +15,6 @@ namespace AngbandOS.Core.ItemCategories
         public override string FriendlyName => "& Shard~ of Pottery";
         public override int? SubCategory => 3;
         public override int Weight => 5;
-        public override Item CreateItem(SaveGame saveGame) => new ShardOfPotteryJunkItem(saveGame);
+        public override Item CreateItem() => new ShardOfPotteryJunkItem(SaveGame);
     }
 }

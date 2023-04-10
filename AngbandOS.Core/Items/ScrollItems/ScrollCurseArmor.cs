@@ -22,6 +22,6 @@ namespace AngbandOS.Core.ItemCategories
                 eventArgs.Identified = true;
             }
         }
-        public override Item CreateItem(SaveGame saveGame) => new CurseArmorScrollItem(saveGame);
+        public override Item CreateItem() => new CurseArmorScrollItem(SaveGame);
     }
 }

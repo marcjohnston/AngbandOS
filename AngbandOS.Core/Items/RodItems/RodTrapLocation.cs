@@ -26,6 +26,6 @@ namespace AngbandOS.Core.ItemCategories
             }
             zapRodEvent.Item.TypeSpecificValue = 10 + Program.Rng.DieRoll(10);
         }
-        public override Item CreateItem(SaveGame saveGame) => new TrapLocationRodItem(saveGame);
+        public override Item CreateItem() => new TrapLocationRodItem(SaveGame);
     }
 }

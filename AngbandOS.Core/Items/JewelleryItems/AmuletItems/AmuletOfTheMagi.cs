@@ -24,6 +24,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 3;
 
         public override bool KindIsGood => true;
-        public override Item CreateItem(SaveGame saveGame) => new OfTheMagiAmuletItem(saveGame);
+        public override Item CreateItem() => new OfTheMagiAmuletItem(SaveGame);
     }
 }
