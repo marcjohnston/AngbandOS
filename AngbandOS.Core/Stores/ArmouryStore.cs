@@ -78,7 +78,7 @@
                 case CloakItemClass _:
                 case SoftArmorItemClass _:
                 case HardArmorItemClass _:
-                case DragArmorItemClass _:
+                case DragonScaleMailArmorItemFactory _:
                     return item.Value() > 0;
                 default:
                     return false;

@@ -6,7 +6,7 @@ internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact, IAc
     private readonly ItemFactory _baseItemCategory;
     private PowerDragonScaleMailBladeturnerFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<DragArmorPowerDragonScaleMail>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PowerDragonScaleMailArmorItemFactory>();
     }
 
     // Bladeturner heals you and gives you timed resistances

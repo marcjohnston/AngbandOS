@@ -1,9 +1,9 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class DragArmorItemClass : ArmourItemClass
+    internal abstract class DragonScaleMailArmorItemFactory : ArmourItemClass
     {
-        public DragArmorItemClass(SaveGame saveGame) : base(saveGame) { }
+        public DragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
         public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<BodyInventorySlot>();
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.DragArmor;
         public override int PackSort => 19;

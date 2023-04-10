@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class DragArmorRedDragonScaleMail : DragArmorItemClass
+    internal class RedDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory
     {
-        private DragArmorRedDragonScaleMail(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private RedDragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '[';
         public override Colour Colour => Colour.Red;
@@ -27,6 +27,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int ToA => 10;
         public override int ToH => -2;
         public override int Weight => 200;
-        public override Item CreateItem() => new RedDragonScaleMailDragArmorItem(SaveGame);
+        public override Item CreateItem() => new RedDragonScaleMailArmorItem(SaveGame);
     }
 }
