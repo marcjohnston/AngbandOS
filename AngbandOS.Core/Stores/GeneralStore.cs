@@ -79,7 +79,7 @@
                 case BoltItemClass _:
                 case DiggingItemClass _:
                 case CloakItemClass _:
-                case BottleItemClass _:
+                case BottleItemFactory _:
                     return item.Value() > 0;
                 default:
                     return false;
