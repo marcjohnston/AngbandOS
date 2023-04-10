@@ -7,15 +7,6 @@
     internal abstract class JewelleryItemClass : ItemFactory
     {
         public JewelleryItemClass(SaveGame saveGame) : base(saveGame) { }
-        public override bool IsStompable(Item item)
-        {
-            if (item.BonusDamage < 0 || item.BonusArmourClass < 0 || item.BonusToHit < 0 || item.TypeSpecificValue < 0)
-            {
-                return true;
-            }
-            return base.IsStompable(item);
-        }
-
         public override bool IsWorthless(Item item)
         {
             if (item.TypeSpecificValue < 0 || item.BonusArmourClass < 0 || item.BonusToHit < 0 || item.BonusDamage < 0)

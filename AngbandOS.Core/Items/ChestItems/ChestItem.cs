@@ -62,5 +62,32 @@ namespace AngbandOS.Core.Items
             // Chests do not have Mods, Damage or Bonus.  We are omitting the description for those features.
             return s;
         }
+
+        public override bool IsStompable()
+        {
+            if (!IsKnown())
+            {
+                return false;
+            }
+            else if (TypeSpecificValue == 0)
+            {
+                return Factory.Stompable[StompableType.Broken];
+            }
+            else if (TypeSpecificValue < 0)
+            {
+                return Factory.Stompable[StompableType.Average];
+            }
+            else
+            {
+                if (SaveGame.SingletonRepository.ChestTrapConfigurations[TypeSpecificValue].Traps.Length == 0)
+                {
+                    return Factory.Stompable[StompableType.Good];
+                }
+                else
+                {
+                    return Factory.Stompable[StompableType.Excellent];
+                }
+            }
+        }
     }
 }

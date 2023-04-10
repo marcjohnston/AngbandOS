@@ -1964,7 +1964,7 @@ namespace AngbandOS.Core.Items
                     return false;
                 }
             }
-            return Factory.IsStompable(this);
+            return IsStompable();
         }
 
         public string StoreDescription(bool pref, int mode)
@@ -3537,6 +3537,42 @@ namespace AngbandOS.Core.Items
         public virtual string? FactoryDescribeActivationEffect()
         {
             return null;
+        }
+
+        /// <summary>
+        /// Returns true, if the item can be stomped.  Returns the stompable status based on the item "Feeling", by default.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public virtual bool IsStompable()
+        {
+            if (Factory.HasQuality)
+            {
+                switch (GetDetailedFeeling()) // TODO: This is poor
+                {
+                    case "terrible":
+                    case "worthless":
+                    case "cursed":
+                    case "broken":
+                        return Factory.Stompable[StompableType.Broken];
+
+                    case "average":
+                        return Factory.Stompable[StompableType.Average];
+
+                    case "good":
+                        return Factory.Stompable[StompableType.Good];
+
+                    case "excellent":
+                        return Factory.Stompable[StompableType.Excellent];
+
+                    case "special":
+                        return false;
+
+                    default:
+                        throw new InvalidDataException($"Unrecognised item quality ({GetDetailedFeeling()})");
+                }
+            }
+            return Factory.Stompable[StompableType.Broken];
         }
     }
 }

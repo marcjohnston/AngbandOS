@@ -16,32 +16,5 @@
         public abstract int NumberOfItemsContained { get; }
 
         public override Colour Colour => Colour.Grey;
-
-        public override bool IsStompable(Item item)
-        {
-            if (!item.IsKnown())
-            {
-                return false;
-            }
-            else if (item.TypeSpecificValue == 0)
-            {
-                return item.Factory.Stompable[StompableType.Broken];
-            }
-            else if (item.TypeSpecificValue < 0)
-            {
-                return item.Factory.Stompable[StompableType.Average];
-            }
-            else
-            {
-                if (SaveGame.SingletonRepository.ChestTrapConfigurations[item.TypeSpecificValue].Traps.Length == 0)
-                {
-                      return item.Factory.Stompable[StompableType.Good];
-                }
-                else
-                {
-                    return item.Factory.Stompable[StompableType.Excellent];
-                }
-            }
-        }
     }
 }

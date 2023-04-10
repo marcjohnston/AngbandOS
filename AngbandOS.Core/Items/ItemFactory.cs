@@ -313,44 +313,6 @@
         public virtual bool CanApplySlayingBonus => false;
 
         /// <summary>
-        /// Returns true, if the item can be stomped.  Returns the stompable status based on the item "Feeling", by default.
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        public virtual bool IsStompable(Item item)
-        {
-            if (item.Factory.HasQuality)
-            {
-                switch (item.GetDetailedFeeling()) // TODO: This is poor
-                {
-                    case "terrible":
-                    case "worthless":
-                    case "cursed":
-                    case "broken":
-                        return item.Factory.Stompable[StompableType.Broken];
-
-                    case "average":
-                        return item.Factory.Stompable[StompableType.Average];
-
-                    case "good":
-                        return item.Factory.Stompable[StompableType.Good];
-
-                    case "excellent":
-                        return item.Factory.Stompable[StompableType.Excellent];
-
-                    case "special":
-                        return false;
-
-                    default:
-                        throw new InvalidDataException($"Unrecognised item quality ({item.GetDetailedFeeling()})");
-                }
-            }
-            return item.Factory.Stompable[StompableType.Broken];
-        }
-
-        //    public virtual bool CanSlay => false;
-
-        /// <summary>
         /// Returns true, if the item is deemed as worthless.  Worthless items will ignore their RealValue and will always have 0 real value.  Returns false by default.
         /// </summary>
         public virtual bool IsWorthless(Item item) => false;

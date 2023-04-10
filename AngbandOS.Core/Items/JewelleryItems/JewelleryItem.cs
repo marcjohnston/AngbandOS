@@ -28,5 +28,14 @@
         {
             return ComputeTypeSpecificRealValue(value);
         }
+        public override bool IsStompable()
+        {
+            if (BonusDamage < 0 || BonusArmourClass < 0 || BonusToHit < 0 || TypeSpecificValue < 0)
+            {
+                return true;
+            }
+            return base.IsStompable();
+        }
+
     }
 }
