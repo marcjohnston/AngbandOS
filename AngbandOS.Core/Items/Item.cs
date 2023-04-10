@@ -844,7 +844,7 @@ namespace AngbandOS.Core.Items
             {
                 return false;
             }
-            if (!Factory.CanAbsorb(this, other))
+            if (!FactoryCanAbsorbItem(other))
             {
                 return false;
             }
@@ -871,6 +871,19 @@ namespace AngbandOS.Core.Items
                 return false;
             }
             return total < Constants.MaxStackSize;
+        }
+
+
+        /// <summary>
+        /// Returns true, if an item can absorb another item of the same type.  Returns false, by default, if either item is known.
+        /// </summary>
+        protected virtual bool FactoryCanAbsorbItem(Item other)
+        {
+            if (!IsKnown() || !other.IsKnown())
+            {
+                return false;
+            }
+            return true;
         }
 
         /// <summary>

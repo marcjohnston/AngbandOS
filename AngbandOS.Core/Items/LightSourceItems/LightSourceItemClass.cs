@@ -22,18 +22,6 @@
             return ComputeTypeSpecificRealValue(item, value);
         }
 
-        public override bool CanAbsorb(Item item, Item other)
-        {
-            if (!item.IsKnown() || !other.IsKnown())
-            {
-                return false;
-            }
-            if (!item.StatsAreSame(other))
-            {
-                return false;
-            }
-            return true;
-        }
         public override int GetAdditionalMassProduceCount(Item item)
         {
             int cost = item.Value();

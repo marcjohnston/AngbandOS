@@ -28,5 +28,9 @@ namespace AngbandOS.Core.Items
                 }
             }
         }
+        protected override bool FactoryCanAbsorbItem(Item other)
+        {
+            return false;
+        }
     }
 }

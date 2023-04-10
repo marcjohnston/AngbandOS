@@ -24,16 +24,5 @@
             }
             return 0;
         }
-
-        public override bool CanAbsorb(Item item, Item other)
-        {
-            if (!item.StatsAreSame(other))
-            {
-                return false;
-            }
-            return true;
-        }
-
-
     }
 }

@@ -128,5 +128,18 @@ namespace AngbandOS.Core.Items
         {
             BonusArmourClass += Program.Rng.DieRoll(BonusArmourClass > 19 ? 1 : 20 - BonusArmourClass);
         }
+
+        protected override bool FactoryCanAbsorbItem(Item other)
+        {
+            if (!IsKnown() || !other.IsKnown())
+            {
+                return false;
+            }
+            if (!StatsAreSame(other))
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

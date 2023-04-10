@@ -11,6 +11,17 @@
 
             return (BonusToHit + BonusDamage + BonusArmourClass) * 100;
         }
-
+        protected override bool FactoryCanAbsorbItem(Item other)
+        {
+            if (!IsKnown() || !other.IsKnown())
+            {
+                return false;
+            }
+            if (!StatsAreSame(other))
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

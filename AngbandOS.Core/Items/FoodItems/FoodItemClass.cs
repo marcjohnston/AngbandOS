@@ -7,11 +7,6 @@
         public override bool EasyKnow => true;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Food;
         public override int PackSort => 9;
-        public override bool CanAbsorb(Item item, Item other)
-        {
-            return true;
-        }
-
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             if (item.ItemSubCategory >= FoodType.MinFood)

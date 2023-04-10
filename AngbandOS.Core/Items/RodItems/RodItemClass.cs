@@ -9,14 +9,6 @@
         public override bool HasFlavor => true;
         public override int PackSort => 13;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Rod;
-        public override bool CanAbsorb(Item item, Item other)
-        {
-            if (item.TypeSpecificValue != other.TypeSpecificValue)
-            {
-                return false;
-            }
-            return true;
-        }
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             string flavour = item.IdentStoreb ? "" : $"{item.SaveGame.SingletonRepository.RodFlavours[item.ItemSubCategory].Name} ";

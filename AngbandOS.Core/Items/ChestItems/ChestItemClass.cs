@@ -14,10 +14,6 @@
         public abstract bool IsSmall { get; }
         public override int PackSort => 36;
         public abstract int NumberOfItemsContained { get; }
-        public override bool CanAbsorb(Item item, Item other)
-        {
-            return false;
-        }
 
         public override Colour Colour => Colour.Grey;
 

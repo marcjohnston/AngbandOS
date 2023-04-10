@@ -32,15 +32,5 @@
         }
 
         public override Colour Colour => Colour.BrightBrown;
-
-        public override bool CanAbsorb(Item item, Item other)
-        {
-            if (!item.StatsAreSame(other))
-            {
-                return false;
-            }
-            return true;
-        }
-
     }
 }

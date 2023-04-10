@@ -9,6 +9,17 @@ namespace AngbandOS.Core.Items
         {
             return value / 20 * TypeSpecificValue;
         }
-
+        protected override bool FactoryCanAbsorbItem(Item other)
+        {
+            if (!IsKnown() || !other.IsKnown())
+            {
+                return false;
+            }
+            if (TypeSpecificValue != other.TypeSpecificValue)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

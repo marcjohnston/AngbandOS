@@ -62,5 +62,18 @@ namespace AngbandOS.Core.Items
             BonusToHit += Program.Rng.DieRoll(BonusToHit > 19 ? 1 : 20 - BonusToHit);
             BonusDamage += Program.Rng.DieRoll(BonusDamage > 19 ? 1 : 20 - BonusDamage);
         }
+
+        protected override bool FactoryCanAbsorbItem(Item other)
+        {
+            if (!IsKnown() || !other.IsKnown())
+            {
+                return false;
+            }
+            if (!StatsAreSame(other))
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

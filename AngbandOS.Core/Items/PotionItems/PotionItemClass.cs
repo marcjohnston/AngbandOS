@@ -31,10 +31,6 @@
         }
 
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Potion;
-        public override bool CanAbsorb(Item item, Item other)
-        {
-            return true;
-        }
         public override string GetDescription(Item item, bool includeCountPrefix)
         {
             string flavour = item.IdentStoreb ? "" : $"{item.SaveGame.SingletonRepository.PotionFlavours[item.ItemSubCategory].Name} ";

@@ -625,18 +625,6 @@
         public virtual bool HatesCold => false;
 
         /// <summary>
-        /// Returns true, if an item can absorb another item of the same type.  Returns false, by default, if either item is known.
-        /// </summary>
-        public virtual bool CanAbsorb(Item item, Item other)
-        {
-            if (!item.IsKnown() || !other.IsKnown())
-            {
-                return false;
-            }
-            return true;
-        }
-
-        /// <summary>
         /// Returns true, if the item can provide a sheath of electricity.  Returns false, by default.  Cloaks, soft and hard armor return true.
         /// </summary>
         public virtual bool CanProvideSheathOfElectricity => false;

@@ -8,5 +8,14 @@ namespace AngbandOS.Core.Items
 
         public override bool GetsDamageMultiplier => true;
         public override int PercentageBreakageChance => 25;
+
+        protected override bool FactoryCanAbsorbItem(Item other)
+        {
+            if (!StatsAreSame(other))
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

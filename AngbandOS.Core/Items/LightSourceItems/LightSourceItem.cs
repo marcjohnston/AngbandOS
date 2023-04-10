@@ -140,5 +140,17 @@ namespace AngbandOS.Core.Items
                 return "It provides light (radius 2) forever.";
             }
         }
+        protected override bool FactoryCanAbsorbItem(Item other)
+        {
+            if (!IsKnown() || !other.IsKnown())
+            {
+                return false;
+            }
+            if (!StatsAreSame(other))
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }
