@@ -48,7 +48,7 @@
                 new StockStoreInventoryItem(typeof(AmuletSearching)),
                 new StockStoreInventoryItem(typeof(AmuletSlowDigestion)),
                 new StockStoreInventoryItem(typeof(FolkBookCantripsforBeginners), 2),
-                new StockStoreInventoryItem(typeof(FolkBookMagicksofMastery), 2),
+                new StockStoreInventoryItem(typeof(FolkBookMagicksOfMastery), 2),
                 new StockStoreInventoryItem(typeof(FolkBookMajorMagicks), 2),
                 new StockStoreInventoryItem(typeof(FolkBookMinorMagicks), 2),
                 new StockStoreInventoryItem(typeof(LightOrb)),

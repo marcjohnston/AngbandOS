@@ -3,6 +3,11 @@ namespace AngbandOS.Core.Items
 [Serializable]
     internal abstract class BookItem : Item
     {
+        /// <summary>
+        /// Returns a divisor to be used to compute the amount of experience gained when an applicable character class destroys the book.  Defaults to 4.
+        /// </summary>
+        public virtual int ExperienceGainDivisorForDestroying => 4;
+
         protected abstract string RealmName { get; }
 
         /// <summary>

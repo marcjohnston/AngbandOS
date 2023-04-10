@@ -1,8 +1,13 @@
 namespace AngbandOS.Core.Items
 {
 [Serializable]
-    internal class MagicksofMasteryFolkBookItem : FolkBookItem
+    internal class MagicksOfMasteryFolkBookItem : FolkBookItem
     {
-        public MagicksofMasteryFolkBookItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<FolkBookMagicksofMastery>()) { }
+        public MagicksOfMasteryFolkBookItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<FolkBookMagicksOfMastery>()) { }
+
+        /// <summary>
+        /// Returns a divisor of 1 because this is the most powerful book for this realm of magic.  Destroying this book provides the most experience.
+        /// </summary>
+        public override int ExperienceGainDivisorForDestroying => 1;
     }
 }

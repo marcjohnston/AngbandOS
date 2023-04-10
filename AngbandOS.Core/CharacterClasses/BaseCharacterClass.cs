@@ -108,7 +108,7 @@
         /// </summary>
         /// <param name="item">The item.</param>
         /// <param name="amount">The amount.</param>
-        protected void GainExperienceFromSpellBookDestroy(Item item, int amount)
+        protected void GainExperienceFromSpellBookDestroy(BookItem item, int amount)
         {
             if (SaveGame.Player.ExperiencePoints < Constants.PyMaxExp)
             {
@@ -117,10 +117,7 @@
                 {
                     testerExp = 10000;
                 }
-                if (item.ItemSubCategory < 3)
-                {
-                    testerExp /= 4;
-                }
+                testerExp /= item.ExperienceGainDivisorForDestroying;
                 if (testerExp < 1)
                 {
                     testerExp = 1;

@@ -49,7 +49,7 @@
                 new StockStoreInventoryItem(typeof(DeathBookBlackMass), 4),
                 new StockStoreInventoryItem(typeof(DeathBookBlackPrayers), 4),
                 new StockStoreInventoryItem(typeof(FolkBookCantripsforBeginners), 2),
-                new StockStoreInventoryItem(typeof(FolkBookMagicksofMastery), 2),
+                new StockStoreInventoryItem(typeof(FolkBookMagicksOfMastery), 2),
                 new StockStoreInventoryItem(typeof(FolkBookMajorMagicks), 2),
                 new StockStoreInventoryItem(typeof(FolkBookMinorMagicks), 2),
                 new StockStoreInventoryItem(typeof(LifeBookBookofCommonPrayer), 4),

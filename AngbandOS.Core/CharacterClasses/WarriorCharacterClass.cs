@@ -49,7 +49,8 @@
             // Warriors and paladins get experience for destroying magic books
             if (SaveGame.ItemFilterHighLevelBook(item))
             {
-                GainExperienceFromSpellBookDestroy(item, amount);
+                BookItem bookItem = (BookItem)item;
+                GainExperienceFromSpellBookDestroy(bookItem, amount);
             }
         }
 
