@@ -8,5 +8,9 @@ namespace AngbandOS.Core.Items
         {
             BonusArmourClass = 5 + Program.Rng.DieRoll(5) + GetBonusValue(10, level);
         }
+        public override string? FactoryDescribeActivationEffect()
+        {
+            return "ball of fire and resist fire";
+        }
     }
 }
