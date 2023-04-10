@@ -47,8 +47,8 @@
         {
             return new[]
             {
-                new StockStoreInventoryItem(typeof(ArrowArrowAmmunitionFactory), 2),
-                new StockStoreInventoryItem(typeof(Bolt), 2),
+                new StockStoreInventoryItem(typeof(ArrowArrowAmmunitionItemFactory), 2),
+                new StockStoreInventoryItem(typeof(BoltBoltAmmunitionItemFactory), 2),
                 new StockStoreInventoryItem(typeof(Cloak), 3),
                 new StockStoreInventoryItem(typeof(DiggingPick)),
                 new StockStoreInventoryItem(typeof(DiggingShovel), 2),
@@ -61,7 +61,7 @@
                 new StockStoreInventoryItem(typeof(LightBrassLantern), 4),
                 new StockStoreInventoryItem(typeof(LightOrb)),
                 new StockStoreInventoryItem(typeof(LightWoodenTorch), 5),
-                new StockStoreInventoryItem(typeof(ShotIronShot), 2),
+                new StockStoreInventoryItem(typeof(IronShotAmmunitionItemFactory), 2),
                 new StockStoreInventoryItem(typeof(SpikeIronSpike), 2),
             };
         }
@@ -74,9 +74,9 @@
                 case LightSourceItemClass _:
                 case FlaskItemClass _:
                 case SpikeItemClass _:
-                case ShotItemClass _:
-                case ArrowItemFactory _:
-                case BoltItemClass _:
+                case ShotAmmunitionItemFactory _:
+                case ArrowAmmunitionItemFactory _:
+                case BoltAmmunitionItemFactory _:
                 case DiggingItemClass _:
                 case CloakItemClass _:
                 case BottleItemFactory _:

@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class Bolt : BoltItemClass
+    internal class Bolt : BoltAmmunitionItemFactory
     {
         private Bolt(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 

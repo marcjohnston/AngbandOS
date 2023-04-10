@@ -42,8 +42,8 @@
         {
             return new[]
             {
-                new StockStoreInventoryItem(typeof(ArrowArrowAmmunitionFactory), 4),
-                new StockStoreInventoryItem(typeof(Bolt), 4),
+                new StockStoreInventoryItem(typeof(ArrowArrowAmmunitionItemFactory), 4),
+                new StockStoreInventoryItem(typeof(BoltBoltAmmunitionItemFactory), 4),
                 new StockStoreInventoryItem(typeof(LightCrossbowBowWeaponItemFactory), 2),
                 new StockStoreInventoryItem(typeof(LongBowWeaponItemFactory), 2),
                 new StockStoreInventoryItem(typeof(ShortBowWeaponItemFactory), 2),
@@ -57,7 +57,7 @@
                 new StockStoreInventoryItem(typeof(PolearmPike)),
                 new StockStoreInventoryItem(typeof(PolearmSpear)),
                 new StockStoreInventoryItem(typeof(PolearmTrident)),
-                new StockStoreInventoryItem(typeof(ShotIronShot), 2),
+                new StockStoreInventoryItem(typeof(IronShotAmmunitionItemFactory), 2),
                 new StockStoreInventoryItem(typeof(SwordBastardSword)),
                 new StockStoreInventoryItem(typeof(SwordBroadSword), 2),
                 new StockStoreInventoryItem(typeof(SwordCutlass)),
@@ -78,9 +78,9 @@
         {
             switch (item.Factory)
             {
-                case ShotItemClass _:
-                case BoltItemClass _:
-                case ArrowItemFactory _:
+                case ShotAmmunitionItemFactory _:
+                case BoltAmmunitionItemFactory _:
+                case ArrowAmmunitionItemFactory _:
                 case BowWeaponItemFactory _:
                 case DiggingItemClass _:
                 case HaftedItemClass _:
