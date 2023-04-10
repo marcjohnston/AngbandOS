@@ -9,20 +9,6 @@
         /// </summary>
         public override bool EasyKnow => true;
 
-        public override int GetAdditionalMassProduceCount(Item item)
-        {
-            int cost = item.Value();
-            if (cost <= 50)
-            {
-                return MassRoll(2, 3) + 1;
-            }
-            if (cost <= 500)
-            {
-                return MassRoll(1, 3) + 1;
-            }
-            return 0;
-        }
-
         public static bool IsBook(ItemFactory itemClass)
         {
             return typeof(BookItemClass).IsAssignableFrom(itemClass.GetType());

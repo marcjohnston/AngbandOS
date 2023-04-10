@@ -13,23 +13,6 @@
         /// </summary>
         public override bool KindIsGood => true;
 
-        public override int GetAdditionalMassProduceCount(Item item)
-        {
-            int cost = item.Value();
-            if (cost <= 5)
-            {
-                return MassRoll(5, 5);
-            }
-            if (cost <= 50)
-            {
-                return MassRoll(5, 5);
-            }
-            if (cost <= 500)
-            {
-                return MassRoll(5, 5);
-            }
-            return 0;
-        }
 
         public override bool HatesAcid => true;
     }

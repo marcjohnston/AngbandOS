@@ -9,5 +9,18 @@ namespace AngbandOS.Core.Items
         {
             return true;
         }
+        public override int GetAdditionalMassProduceCount()
+        {
+            int cost = Value();
+            if (cost <= 60)
+            {
+                return MassRoll(3, 5);
+            }
+            if (cost <= 240)
+            {
+                return MassRoll(1, 5);
+            }
+            return 0;
+        }
     }
 }

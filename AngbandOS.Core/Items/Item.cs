@@ -3371,5 +3371,22 @@ namespace AngbandOS.Core.Items
             }
             return bonusValue;
         }
+
+        protected int MassRoll(int num, int max)
+        {
+            int t = 0;
+            for (int i = 0; i < num; i++)
+            {
+                t += Program.Rng.RandomLessThan(max);
+            }
+            return t;
+        }
+
+        /// <summary>
+        /// Returns the number of additional items to be produced, when the item is mass produced for a store.  Returns 0, by default.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public virtual int GetAdditionalMassProduceCount() => 0;
     }
 }

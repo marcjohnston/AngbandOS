@@ -22,19 +22,6 @@
         //public override bool CanBeConsumed => true;
         public override Colour Colour => Colour.Green;
 
-        public override int GetAdditionalMassProduceCount(Item item)
-        {
-            int cost = item.Value();
-            if (cost <= 5)
-            {
-                return MassRoll(3, 5);
-            }
-            if (cost <= 20)
-            {
-                return MassRoll(3, 5);
-            }
-            return 0;
-        }
 
         public abstract bool Eat(SaveGame saveGame);
     }

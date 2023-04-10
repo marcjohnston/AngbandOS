@@ -146,5 +146,22 @@ namespace AngbandOS.Core.Items
         {
             return ComputeTypeSpecificRealValue(value);
         }
+        public override int GetAdditionalMassProduceCount()
+        {
+            int cost = Value();
+            if (RareItemTypeIndex != 0)
+            {
+                return 0;
+            }
+            if (cost <= 10)
+            {
+                return MassRoll(3, 5);
+            }
+            if (cost <= 100)
+            {
+                return MassRoll(3, 5);
+            }
+            return 0;
+        }
     }
 }

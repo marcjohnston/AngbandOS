@@ -814,7 +814,7 @@ namespace AngbandOS.Core.Stores
             int size = 1;
             int discount = 0;
             int cost = oPtr.Value();
-            size += oPtr.Factory.GetAdditionalMassProduceCount(oPtr);
+            size += oPtr.GetAdditionalMassProduceCount();
             if (cost < 5)
             {
                 discount = 0;

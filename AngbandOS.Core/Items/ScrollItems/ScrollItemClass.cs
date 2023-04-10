@@ -20,19 +20,6 @@
         public override bool HatesAcid => true;
 
         public override Colour Colour => Colour.BrightBeige;
-        public override int GetAdditionalMassProduceCount(Item item)
-        {
-            int cost = item.Value();
-            if (cost <= 60)
-            {
-                return MassRoll(3, 5);
-            }
-            if (cost <= 240)
-            {
-                return MassRoll(1, 5);
-            }
-            return 0;
-        }
 
         public abstract void Read(ReadScrollEvent eventArgs);
     }
