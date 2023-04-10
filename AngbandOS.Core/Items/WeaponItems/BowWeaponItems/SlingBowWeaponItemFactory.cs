@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class BowSling : BowWeaponItemClass
+    internal class SlingBowWeaponItemFactory : BowWeaponItemFactory
     {
-        private BowSling(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private SlingBowWeaponItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '}';
         public override Colour Colour => Colour.Brown;
@@ -18,6 +18,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 5;
         public override int MissileDamageMultiplier => 2;
         public override ItemTypeEnum AmmunitionItemCategory => ItemTypeEnum.Shot;
-        public override Item CreateItem(SaveGame saveGame) => new SlingBowWeapon(saveGame);
+        public override Item CreateItem(SaveGame saveGame) => new SlingBowWeaponItem(saveGame);
     }
 }

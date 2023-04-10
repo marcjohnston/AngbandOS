@@ -6,7 +6,7 @@ internal class LightCrossbowOfDeathFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private LightCrossbowOfDeathFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<BowLightCrossbow>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<LightCrossbowBowWeaponItemFactory>();
     }
 
     // Death brands your bolts

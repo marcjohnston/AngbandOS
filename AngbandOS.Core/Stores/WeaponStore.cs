@@ -44,10 +44,10 @@
             {
                 new StockStoreInventoryItem(typeof(ArrowArrowAmmunitionFactory), 4),
                 new StockStoreInventoryItem(typeof(Bolt), 4),
-                new StockStoreInventoryItem(typeof(BowLightCrossbow), 2),
-                new StockStoreInventoryItem(typeof(BowLong), 2),
-                new StockStoreInventoryItem(typeof(BowShort), 2),
-                new StockStoreInventoryItem(typeof(BowSling)),
+                new StockStoreInventoryItem(typeof(LightCrossbowBowWeaponItemFactory), 2),
+                new StockStoreInventoryItem(typeof(LongBowWeaponItemFactory), 2),
+                new StockStoreInventoryItem(typeof(ShortBowWeaponItemFactory), 2),
+                new StockStoreInventoryItem(typeof(SlingBowWeaponItemFactory)),
                 new StockStoreInventoryItem(typeof(HaftedWhip), 2),
                 new StockStoreInventoryItem(typeof(PolearmAwlPike)),
                 new StockStoreInventoryItem(typeof(PolearmBattleAxe)),
@@ -81,7 +81,7 @@
                 case ShotItemClass _:
                 case BoltItemClass _:
                 case ArrowItemFactory _:
-                case BowWeaponItemClass _:
+                case BowWeaponItemFactory _:
                 case DiggingItemClass _:
                 case HaftedItemClass _:
                 case PolearmItemClass _:

@@ -1,9 +1,9 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class BowWeaponItemClass : WeaponItemClass // TODO: Should be renamed to RangedWeaponItemClass
+    internal abstract class BowWeaponItemFactory : WeaponItemClass // TODO: Should be renamed to RangedWeaponItemClass
     {
-        public BowWeaponItemClass(SaveGame saveGame) : base(saveGame) { }
+        public BowWeaponItemFactory(SaveGame saveGame) : base(saveGame) { }
         public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<RangedWeaponInventorySlot>();
         /// <summary>
         /// Returns a damage multiplier when the missile weapon is used.

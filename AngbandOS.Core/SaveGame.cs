@@ -11017,7 +11017,7 @@ namespace AngbandOS.Core
             int attackBonus = Player.AttackBonus + individualAmmunition.BonusToHit + missileWeapon.BonusToHit;
             int chanceToHit = Player.SkillRanged + (attackBonus * Constants.BthPlusAdj);
             // Damage multiplier depends on weapon
-            BowWeaponItemClass missileWeaponItemCategory = (BowWeaponItemClass)missileWeapon.Factory;
+            BowWeaponItemFactory missileWeaponItemCategory = (BowWeaponItemFactory)missileWeapon.Factory;
             int damageMultiplier = missileWeaponItemCategory.MissileDamageMultiplier;
             // Extra might gives us an increased multiplier
             if (Player.HasExtraMight)
