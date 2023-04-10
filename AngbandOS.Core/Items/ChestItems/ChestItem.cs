@@ -32,5 +32,35 @@ namespace AngbandOS.Core.Items
         {
             return false;
         }
+
+        public override string GetDetailedDescription()
+        {
+            string s = string.Empty;
+            if (!IsKnown())
+            {
+            }
+            else if (TypeSpecificValue == 0)
+            {
+                s += " (empty)";
+            }
+            else if (TypeSpecificValue < 0)
+            {
+                if (SaveGame.SingletonRepository.ChestTrapConfigurations[-TypeSpecificValue].IsTrapped)
+                {
+                    s += " (disarmed)";
+                }
+                else
+                {
+                    s += " (unlocked)";
+                }
+            }
+            else
+            {
+                s += $" {SaveGame.SingletonRepository.ChestTrapConfigurations[TypeSpecificValue].Description}";
+            }
+
+            // Chests do not have Mods, Damage or Bonus.  We are omitting the description for those features.
+            return s;
+        }
     }
 }

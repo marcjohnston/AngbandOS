@@ -83,5 +83,36 @@ namespace AngbandOS.Core.Items
                 }
             }
         }
+        public override string GetDetailedDescription()
+        {
+            string basenm = "";
+            RefreshFlagBasedProperties();
+            int power = ItemSubCategory % 10;
+            if (Factory.XtraMight)
+            {
+                power++;
+            }
+            basenm += $" (x{power})";
+            if (IsKnown())
+            {
+                basenm += $" ({GetSignedValue(BonusToHit)},{GetSignedValue(BonusDamage)})";
+
+                if (BaseArmourClass != 0)
+                {
+                    // Add base armour class for all types of armour and when the base armour class is greater than zero.
+                    basenm += $" [{BaseArmourClass},{GetSignedValue(BonusArmourClass)}]";
+                }
+                else if (BonusArmourClass != 0)
+                {
+                    // This is not armour, only show bonus armour class, if it is not zero and we know about it.
+                    basenm += $" [{GetSignedValue(BonusArmourClass)}]";
+                }
+            }
+            else if (BaseArmourClass != 0)
+            {
+                basenm += $" [{BaseArmourClass}]";
+            }
+            return basenm;
+        }
     }
 }

@@ -32,32 +32,6 @@
 
         public override bool CanApplySlayingBonus => true;
 
-        public override string GetDetailedDescription(Item item)
-        {
-            string s = "";
-            s += $" ({item.DamageDice}d{item.DamageDiceSides})";
-            if (item.IsKnown())
-            {
-                s += $" ({GetSignedValue(item.BonusToHit)},{GetSignedValue(item.BonusDamage)})";
-
-                if (item.BaseArmourClass != 0)
-                {
-                    // Add base armour class for all types of armour and when the base armour class is greater than zero.
-                    s += $" [{item.BaseArmourClass},{GetSignedValue(item.BonusArmourClass)}]";
-                }
-                else if (item.BonusArmourClass != 0)
-                {
-                    // This is not armour, only show bonus armour class, if it is not zero and we know about it.
-                    s += $" [{GetSignedValue(item.BonusArmourClass)}]";
-                }
-            }
-            else if (item.BaseArmourClass != 0)
-            {
-                s += $" [{item.BaseArmourClass}]";
-            }
-            return s;
-        }
-
         public override bool CanApplyTunnelBonus => true;
 
         public override bool IsWorthless(Item item)

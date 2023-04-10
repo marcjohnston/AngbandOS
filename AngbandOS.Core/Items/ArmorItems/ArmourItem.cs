@@ -163,5 +163,34 @@ namespace AngbandOS.Core.Items
             }
             return 0;
         }
+
+        public override string GetDetailedDescription()
+        {
+            string s = "";
+            if (IsKnown())
+            {
+                RefreshFlagBasedProperties();
+                if (Factory.ShowMods || BonusToHit != 0 && BonusDamage != 0)
+                {
+                    s += $" ({GetSignedValue(BonusToHit)},{GetSignedValue(BonusDamage)})";
+                }
+                else if (BonusToHit != 0)
+                {
+                    s += $" ({GetSignedValue(BonusToHit)})";
+                }
+                else if (BonusDamage != 0)
+                {
+                    s += $" ({GetSignedValue(BonusDamage)})";
+                }
+
+                // Add base armour class for all types of armour and when the base armour class is greater than zero.
+                s += $" [{BaseArmourClass},{GetSignedValue(BonusArmourClass)}]";
+            }
+            else if (BaseArmourClass != 0)
+            {
+                s += $" [{BaseArmourClass}]";
+            }
+            return s;
+        }
     }
 }

@@ -15,21 +15,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int Level => 110;
         public override int? SubCategory => 37;
         public override int Weight => 2;
-        public override string GetDescription(Item item, bool includeCountPrefix)
-        {
-            if (item.FixedArtifact != null && item.IsFlavourAware())
-            {
-                return base.GetDescription(item, includeCountPrefix);
-            }
-            string flavour = item.IdentStoreb ? "" : $"{item.SaveGame.SingletonRepository.RingFlavours[item.ItemSubCategory].Name} ";
-            if (!item.IsFlavourAware())
-            {
-                flavour = "Plain Gold ";
-            }
-            string ofName = item.IsFlavourAware() ? $" of {item.Factory.FriendlyName}" : "";
-            string name = $"{flavour}{Pluralize("Ring", item.Count)}{ofName}";
-            return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
-        }
         public override Item CreateItem() => new PowerRingItem(SaveGame);
     }
 }

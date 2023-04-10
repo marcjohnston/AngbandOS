@@ -19,17 +19,6 @@
         public override int PackSort => 16;
         public override bool HasFlavor => true;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Ring;
-        public override string GetDescription(Item item, bool includeCountPrefix)
-        {
-            if (item.FixedArtifact != null && item.IsFlavourAware())
-            {
-                return base.GetDescription(item, includeCountPrefix);
-            }
-            string flavour = item.IdentStoreb ? "" : $"{item.SaveGame.SingletonRepository.RingFlavours[item.ItemSubCategory].Name} ";
-            string ofName = item.IsFlavourAware() ? $" of {item.Factory.FriendlyName}" : "";
-            string name = $"{flavour}{Pluralize("Ring", item.Count)}{ofName}";
-            return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
-        }
         public override int BaseValue => 45;
         public override bool HatesElectricity => true;
         public override Colour Colour => Colour.Gold;

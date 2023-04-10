@@ -22,5 +22,12 @@ namespace AngbandOS.Core.Items
             }
             return 0;
         }
+        public override string GetDescription(bool includeCountPrefix)
+        {
+            string flavour = IdentStoreb ? "" : $"{SaveGame.SingletonRepository.PotionFlavours[ItemSubCategory].Name} ";
+            string ofName = IsFlavourAware() ? $" of {Factory.FriendlyName}" : "";
+            string name = $"{flavour}{Pluralize("Potion", Count)}{ofName}";
+            return includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
+        }
     }
 }

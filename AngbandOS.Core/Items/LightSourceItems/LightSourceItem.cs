@@ -170,5 +170,16 @@ namespace AngbandOS.Core.Items
             }
             return 0;
         }
+
+        public override string GetVerboseDescription()
+        {
+            string s = "";
+            if (ItemSubCategory == LightType.Torch || ItemSubCategory == LightType.Lantern)
+            {
+                s += $" (with {TypeSpecificValue} {Pluralize("turn", TypeSpecificValue)} of light)";
+            }
+            s += base.GetVerboseDescription();
+            return s;
+        }
     }
 }

@@ -899,7 +899,7 @@ namespace AngbandOS.Core.Items
             {
                 return "(nothing)";
             }
-            string basenm = Factory.GetDescription(this, includeCountPrefix);
+            string basenm = GetDescription(includeCountPrefix);
             if (IsKnown())
             {
                 if (!string.IsNullOrEmpty(RandartName))
@@ -925,13 +925,13 @@ namespace AngbandOS.Core.Items
             }
 
             // This is the detailed description.
-            basenm += Factory.GetDetailedDescription(this);
+            basenm += GetDetailedDescription();
             if (mode < 2)
             {
                 return basenm;
             }
 
-            basenm += Factory.GetVerboseDescription(this);
+            basenm += GetVerboseDescription();
 
             // This is the verbose description.
             if (mode < 3)
@@ -940,7 +940,7 @@ namespace AngbandOS.Core.Items
             }
 
             // This is the full description.
-            basenm += Factory.GetFullDescription(this);
+            basenm += GetFullDescription();
 
             // We can only render 75 characters max ... we are forced to truncate.
             if (basenm.Length > 75)
@@ -3388,5 +3388,145 @@ namespace AngbandOS.Core.Items
         /// <param name="item"></param>
         /// <returns></returns>
         public virtual int GetAdditionalMassProduceCount() => 0;
+
+        /// <summary>
+        /// Returns a description for the item.  Returns a macro processed description, by default.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="includeCountPrefix">Specify true, to include the number of items as the prefix; false, to excluse the count.  Pluralization will still
+        /// occur when the count is not included.</param>
+        /// <returns></returns>
+        public virtual string GetDescription(bool includeCountPrefix)
+        {
+            string pluralizedName = ApplyPlurizationMacro(Factory.FriendlyName, Count);
+            return ApplyGetPrefixCountMacro(includeCountPrefix, pluralizedName, Count, IsKnownArtifact);
+        }
+
+        /// <summary>
+        /// Returns an additional description of the item that is appended to the base description, when needed.  Returns string.empty by default.
+        /// </summary>
+        /// <returns></returns>
+        public virtual string GetDetailedDescription()
+        {
+            string s = "";
+            if (IsKnown())
+            {
+                RefreshFlagBasedProperties();
+                if (Factory.ShowMods || BonusToHit != 0 && BonusDamage != 0)
+                {
+                    s += $" ({GetSignedValue(BonusToHit)},{GetSignedValue(BonusDamage)})";
+                }
+                else if (BonusToHit != 0)
+                {
+                    s += $" ({GetSignedValue(BonusToHit)})";
+                }
+                else if (BonusDamage != 0)
+                {
+                    s += $" ({GetSignedValue(BonusDamage)})";
+                }
+
+                if (BaseArmourClass != 0)
+                {
+                    // Add base armour class for all types of armour and when the base armour class is greater than zero.
+                    s += $" [{BaseArmourClass},{GetSignedValue(BonusArmourClass)}]";
+                }
+                else if (BonusArmourClass != 0)
+                {
+                    // This is not armour, only show bonus armour class, if it is not zero and we know about it.
+                    s += $" [{GetSignedValue(BonusArmourClass)}]";
+                }
+            }
+            return s;
+        }
+
+        /// <summary>
+        /// Returns an additional description of the item that is appended to the detailed description, when needed.  
+        /// By default, empty is returned, if the item is known; otherwise, the HideType, Speed, Blows, Stealth, Search, Infra, Tunnel and recharging time characteristics are returned.
+        /// </summary>
+        /// <returns></returns>
+        public virtual string GetVerboseDescription()
+        {
+            string s = "";
+            RefreshFlagBasedProperties();
+            if (IsKnown() && Factory.HasAnyPvalMask)
+            {
+                s += $" ({GetSignedValue(TypeSpecificValue)}";
+                if (Factory.HideType)
+                {
+                }
+                else if (Factory.Speed)
+                {
+                    s += " speed";
+                }
+                else if (Factory.Blows)
+                {
+                    if (TypeSpecificValue > 1)
+                    {
+                        s += " attacks";
+                    }
+                    else
+                    {
+                        s += " attack";
+                    }
+                }
+                else if (Factory.Stealth)
+                {
+                    s += " stealth";
+                }
+                else if (Factory.Search)
+                {
+                    s += " searching";
+                }
+                else if (Factory.Infra)
+                {
+                    s += " infravision";
+                }
+                else if (Factory.Tunnel)
+                {
+                }
+                s += ")";
+            }
+            if (IsKnown() && RechargeTimeLeft != 0)
+            {
+                s += " (charging)";
+            }
+            return s;
+        }
+
+        /// <summary>
+        /// Returns an additional description to fully identify the item that is appended to the verbode description, when needed.  
+        /// By default, returns the description for inscriptions, cursed, empty, tried and on discount.
+        /// </summary>
+        /// <returns></returns>
+        public virtual string GetFullDescription()
+        {
+            string tmpVal2 = "";
+            if (!string.IsNullOrEmpty(Inscription))
+            {
+                tmpVal2 = Inscription;
+            }
+            else if (IsCursed() && (IsKnown() || IdentSense))
+            {
+                tmpVal2 = "cursed";
+            }
+            else if (!IsKnown() && IdentEmpty)
+            {
+                tmpVal2 = "empty";
+            }
+            else if (!IsFlavourAware() && Factory.Tried)
+            {
+                tmpVal2 = "tried";
+            }
+            else if (Discount != 0)
+            {
+                tmpVal2 = Discount.ToString();
+                tmpVal2 += "% off";
+            }
+            if (!string.IsNullOrEmpty(tmpVal2))
+            {
+                tmpVal2 = $" {{{tmpVal2}}}";
+            }
+            return tmpVal2;
+        }
     }
 }

@@ -5,12 +5,6 @@
     {
         public ChaosBookItemClass(SaveGame saveGame) : base(saveGame) { }
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.ChaosBook;
-        public override string GetDescription(Item item, bool includeCountPrefix)
-        {
-            string name = item.SaveGame.Player.BaseCharacterClass.SpellCastingType == CastingType.Divine ? $"{Pluralize("Book", item.Count)} of Chaos Magic" : $"Chaos {Pluralize("Spellbook", item.Count)}";
-            name = $"{name} {item.Factory.FriendlyName}";
-            return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
-        }
         public override int PackSort => 5;
         public override bool HatesFire => true;
         public override Colour Colour => Colour.BrightRed;

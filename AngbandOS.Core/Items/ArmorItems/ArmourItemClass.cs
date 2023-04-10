@@ -29,34 +29,5 @@
             return false;
         }
 
-
-        public override string GetDetailedDescription(Item item)
-        {
-            string s = "";
-            if (item.IsKnown())
-            {
-                item.RefreshFlagBasedProperties();
-                if (ShowMods || item.BonusToHit != 0 && item.BonusDamage != 0)
-                {
-                    s += $" ({GetSignedValue(item.BonusToHit)},{GetSignedValue(item.BonusDamage)})";
-                }
-                else if (item.BonusToHit != 0)
-                {
-                    s += $" ({GetSignedValue(item.BonusToHit)})";
-                }
-                else if (item.BonusDamage != 0)
-                {
-                    s += $" ({GetSignedValue(item.BonusDamage)})";
-                }
-
-                // Add base armour class for all types of armour and when the base armour class is greater than zero.
-                s += $" [{item.BaseArmourClass},{GetSignedValue(item.BonusArmourClass)}]";
-            }
-            else if (item.BaseArmourClass != 0)
-            {
-                s += $" [{item.BaseArmourClass}]";
-            }
-            return s;
-        }
     }
 }

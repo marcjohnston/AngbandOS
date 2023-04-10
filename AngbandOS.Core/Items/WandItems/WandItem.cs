@@ -21,5 +21,22 @@ namespace AngbandOS.Core.Items
             }
             return true;
         }
+        public override string GetDescription(bool includeCountPrefix)
+        {
+            string flavour = IdentStoreb ? "" : $"{SaveGame.SingletonRepository.WandFlavours[ItemSubCategory].Name} ";
+            string ofName = IsFlavourAware() ? $" of {Factory.FriendlyName}" : "";
+            string name = $"{flavour}{Pluralize("Wand", Count)}{ofName}";
+            return includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
+        }
+        public override string GetVerboseDescription()
+        {
+            string s = "";
+            if (IsKnown())
+            {
+                s += $" ({TypeSpecificValue} {Pluralize("charge", TypeSpecificValue)})";
+            }
+            s += base.GetVerboseDescription();
+            return s;
+        }
     }
 }

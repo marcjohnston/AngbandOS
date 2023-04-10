@@ -4,5 +4,11 @@ namespace AngbandOS.Core.Items
     internal abstract class SorceryBookItem : BookItem
     {
         public SorceryBookItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
+        public override string GetDescription(bool includeCountPrefix)
+        {
+            string name = SaveGame.Player.BaseCharacterClass.SpellCastingType == CastingType.Divine ? $"{Pluralize("Book", Count)} of Sorcery" : $"Sorcery {Pluralize("Spellbook", Count)}";
+            name = $"{name} {Factory.FriendlyName}";
+            return includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
+        }
     }
 }

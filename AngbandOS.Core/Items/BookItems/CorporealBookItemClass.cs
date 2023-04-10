@@ -6,12 +6,6 @@ namespace AngbandOS.Core.ItemClasses
     {
         public CorporealBookItemClass(SaveGame saveGame) : base(saveGame) { }
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.CorporealBook;
-        public override string GetDescription(Item item, bool includeCountPrefix)
-        {
-            string name = item.SaveGame.Player.BaseCharacterClass.SpellCastingType == CastingType.Divine ? $"{Pluralize("Book", item.Count)} of Corporeal Magic" : $"Corporeal {Pluralize("Spellbook", item.Count)}";
-            name = $"{name} {item.Factory.FriendlyName}";
-            return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
-        }
         public override int PackSort => 1;
         public override bool HatesFire => true;
         public override Colour Colour => Colour.BrightYellow;
