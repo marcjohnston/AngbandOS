@@ -3,7 +3,7 @@ namespace AngbandOS.Core.Items
 [Serializable]
     internal class WoodenTorchLightSourceItem : LightSourceItem
     {
-        public WoodenTorchLightSourceItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<LightWoodenTorch>()) { }
+        public WoodenTorchLightSourceItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<WoodenTorchLightSourceItemFactory>()) { }
 
         /// <summary>
         /// Returns 1 because wooden torches consume a single turn of light for every world turn.

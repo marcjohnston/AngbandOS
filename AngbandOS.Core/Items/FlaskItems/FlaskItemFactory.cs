@@ -1,9 +1,9 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class FlaskItemClass : ItemFactory
+    internal abstract class FlaskItemFactory : ItemFactory
     {
-        public FlaskItemClass(SaveGame saveGame) : base(saveGame) { }
+        public FlaskItemFactory(SaveGame saveGame) : base(saveGame) { }
         public override bool EasyKnow => true;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Flask;
         public override bool HatesCold => true;

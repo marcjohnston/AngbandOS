@@ -6,7 +6,7 @@ internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact, IActiv
     private readonly ItemFactory _baseItemCategory;
     private GemstoneShiningTrapezodedronFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<LightGemstone>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<GemstoneLightSourceItemFactory>();
     }
 
     // Shining Trapezohedron lights the entire level and recalls us, but drains

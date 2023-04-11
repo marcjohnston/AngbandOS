@@ -14,6 +14,6 @@ namespace AngbandOS.Core.Items
                 }
             }
         }
-        public GemstoneLightSourceItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<LightGemstone>()) { }
+        public GemstoneLightSourceItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<GemstoneLightSourceItemFactory>()) { }
     }
 }

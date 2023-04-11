@@ -51,7 +51,7 @@
                 new StockStoreInventoryItem(typeof(FolkBookMagicksOfMastery), 2),
                 new StockStoreInventoryItem(typeof(FolkBookMajorMagicks), 2),
                 new StockStoreInventoryItem(typeof(FolkBookMinorMagicks), 2),
-                new StockStoreInventoryItem(typeof(LightOrb)),
+                new StockStoreInventoryItem(typeof(OrbLightSourceItemFactory)),
                 new StockStoreInventoryItem(typeof(RingLevitation)),
                 new StockStoreInventoryItem(typeof(RingProtection), 2),
                 new StockStoreInventoryItem(typeof(RingResistCold)),

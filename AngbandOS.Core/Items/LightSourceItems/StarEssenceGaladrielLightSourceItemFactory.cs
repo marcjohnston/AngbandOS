@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class LightStarEssenceGaladriel : LightSourceItemClass
+    internal class StarEssenceGaladrielLightSourceItemFactory : LightSourceItemFactory
     {
-        private LightStarEssenceGaladriel(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private StarEssenceGaladrielLightSourceItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '*';
         public override Colour Colour => Colour.Yellow;
@@ -18,6 +18,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int? SubCategory => 4;
         public override int Weight => 10;
         public override bool ProvidesSunlight => true;
-        public override Item CreateItem() => new EssenceGaladrielLightSourceItem(SaveGame);
+        public override Item CreateItem() => new StarEssenceGaladrielLightSourceItem(SaveGame);
     }
 }

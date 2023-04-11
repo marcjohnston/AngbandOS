@@ -6,7 +6,7 @@ internal class StarEssenceOfXothFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private StarEssenceOfXothFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<LightStarEssenceElendil>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<StarEssenceElendilLightSourceItemFactory>();
     }
 
     // Star essence of Xoth lights and maps the area

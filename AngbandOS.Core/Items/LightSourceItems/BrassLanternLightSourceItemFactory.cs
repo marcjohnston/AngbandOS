@@ -1,9 +1,14 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class LightBrassLantern : LightSourceItemClass
+    internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
     {
-        private LightBrassLantern(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private BrassLanternLightSourceItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+
+        /// <summary>
+        /// Returns true because a lantern contains oil which is valid as fuel for other lanterns.
+        /// </summary>
+        public override bool IsFuelForLantern => true;
 
         public override char Character => '~';
         public override Colour Colour => Colour.BrightBrown;

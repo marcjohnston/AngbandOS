@@ -10911,7 +10911,7 @@ namespace AngbandOS.Core
                 return;
             }
 
-            LightSourceItemClass lightSourceItem = (LightSourceItemClass)lightSource.Factory;
+            LightSourceItemFactory lightSourceItem = (LightSourceItemFactory)lightSource.Factory;
             lightSourceItem.Refill(this, lightSource);
         }
 
@@ -14990,7 +14990,7 @@ namespace AngbandOS.Core
             }
             else
             {
-                ItemFactory woodenTorchItemClass = SingletonRepository.ItemCategories.Get<LightWoodenTorch>();
+                ItemFactory woodenTorchItemClass = SingletonRepository.ItemCategories.Get<WoodenTorchLightSourceItemFactory>();
                 Item item = woodenTorchItemClass.CreateItem();
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.TypeSpecificValue = Program.Rng.RandomBetween(3, 7) * 500;

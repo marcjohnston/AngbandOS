@@ -17,6 +17,10 @@
             FlavorColour = Colour;
         }
 
+        /// <summary>
+        /// Returns true, if the item is fuel for a lantern.  Returns false, by default.
+        /// </summary>
+        public virtual bool IsFuelForLantern => false;
 
         /// <summary>
         /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.

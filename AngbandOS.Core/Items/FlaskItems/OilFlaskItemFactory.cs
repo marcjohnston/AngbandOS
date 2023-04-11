@@ -1,10 +1,14 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class FlaskOfOil : FlaskItemClass
+    internal class OilFlaskItemFactory : FlaskItemFactory
     {
-        private FlaskOfOil(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private OilFlaskItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
+        /// <summary>
+        /// Returns true because a flask of oil is valid as fuel for lanterns.
+        /// </summary>
+        public override bool IsFuelForLantern => true;
         public override char Character => '!';
         public override Colour Colour => Colour.Yellow;
         public override string Name => "Flask of oil";
@@ -19,6 +23,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int Pval => 7500;
         public override int? SubCategory => 0;
         public override int Weight => 10;
-        public override Item CreateItem() => new OfOilFlaskItem(SaveGame);
+        public override Item CreateItem() => new OilFlaskItem(SaveGame);
     }
 }
