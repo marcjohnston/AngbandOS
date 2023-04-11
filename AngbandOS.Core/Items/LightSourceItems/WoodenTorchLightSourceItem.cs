@@ -6,6 +6,11 @@ namespace AngbandOS.Core.Items
         public WoodenTorchLightSourceItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<LightWoodenTorch>()) { }
 
         /// <summary>
+        /// Returns 1 because wooden torches consume a single turn of light for every world turn.
+        /// </summary>
+        public override int BurnRate => 1;
+
+        /// <summary>
         /// Returns an intensity of light provided by the torch.  1, if the torch has turns remaining, plus an optional 3
         /// if the torch is an artifact.
         /// </summary>

@@ -37,13 +37,13 @@ namespace AngbandOS.Core.InventorySlots
             int maxLight = 0; // The amount of light remaining on the lightsource with the most light.
             foreach (int index in InventorySlots)
             {
-                Item? oPtr = SaveGame.GetInventoryItem(index);
+                LightSourceItem? oPtr = (LightSourceItem?)SaveGame.GetInventoryItem(index);
                 if (oPtr != null && oPtr.Category == ItemTypeEnum.Light)
                 {
-                    if ((oPtr.ItemSubCategory == LightType.Torch || oPtr.ItemSubCategory == LightType.Lantern) && oPtr.TypeSpecificValue > 0)
+                    if (oPtr.BurnRate > 0 && oPtr.TypeSpecificValue > 0)
                     {
                         hadLight = true;
-                        oPtr.TypeSpecificValue--;
+                        oPtr.TypeSpecificValue -= oPtr.BurnRate;
 
                         // If the player is blind, do not allow the light to go out completely.
                         if (SaveGame.Player.TimedBlindness.TurnsRemaining != 0)
