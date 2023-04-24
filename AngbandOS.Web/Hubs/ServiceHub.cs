@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.SignalR;
 namespace AngbandOS.Web.Hubs
 {
     /// <summary>
-    /// Represents the signal-r hub singleton service for the home screen that monitors active games.
+    /// Represents an anonymous signal-r hub singleton service for the home screen that monitors active games and provides public read-only chats.
     /// </summary>
     public class ServiceHub : Hub<IServiceHub>
     {
@@ -57,16 +57,29 @@ namespace AngbandOS.Web.Hubs
             await serviceHub.ChatRefreshed(chatMessages);
         }
 
+        /// <summary>
+        /// Triggered by signal-r when a user connects to the service hub on the home screen.  This message is fowarded to the GameService.
+        /// </summary>
+        /// <returns></returns>
         public override Task OnConnectedAsync()
         {
-            // We are not doing anything at this time with the connections.  We should render a list of who is playing though.
-            HttpTransportType? transportType = Context.Features.Get<IHttpTransportFeature>()?.TransportType;
+            //HttpTransportType? transportType = Context.Features.Get<IHttpTransportFeature>()?.TransportType; // This was to determine what type of transport was being used so that the dashboard can render it.  It isn't ready yet though.
             IServiceHub serviceHub = Clients.Client(Context.ConnectionId);
+
+            // Add this connection to the service hub connections.
             GameService.ServiceHubConnected(Context.ConnectionId);
+
+            // Connect the client to the chat.
             GameService.ChatConnected(Context.ConnectionId, new AnonymousChatRecipient(serviceHub));
+
             return base.OnConnectedAsync();
         }
 
+        /// <summary>
+        /// Triggered by signal-r when a user disconnects from the service hub on the home screen.  This message is forwarded to the GameService.
+        /// </summary>
+        /// <param name="exception"></param>
+        /// <returns></returns>
         public override Task OnDisconnectedAsync(Exception? exception)
         {
             GameService.ServiceHubDisconnected(Context.ConnectionId);

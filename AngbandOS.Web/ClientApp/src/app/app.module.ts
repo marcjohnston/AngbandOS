@@ -93,6 +93,7 @@ import { ChatComponent } from './chat/chat.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PreferencesDialogComponent } from './preferences-dialog/preferences-dialog.component';
 import { GameDesignerComponent } from './game-designer/game-designer.component';
+import { CanDeactivatePlay } from './can-deactivate-play/can-deactivate-play';
 
 @NgModule({
   declarations: [
@@ -185,12 +186,13 @@ import { GameDesignerComponent } from './game-designer/game-designer.component';
     ColorPickerModule,
 
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'play', component: PlayComponent },
+      { path: 'play', component: PlayComponent, canDeactivate: [CanDeactivatePlay] },
       { path: 'play/:guid', component: PlayComponent },
       { path: 'watch/:guid', component: WatchComponent },
 
@@ -259,12 +261,12 @@ import { GameDesignerComponent } from './game-designer/game-designer.component';
       { path: 'manual/whats-new', component: WhatsNewComponent },
       { path: 'manual/wisdom', component: WisdomComponent },
 
-    ]),
-    BrowserAnimationsModule
+    ])
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: UnauthorizedInterceptorService, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
+    CanDeactivatePlay
   ],
   bootstrap: [AppComponent]
 })

@@ -10,8 +10,7 @@ using System.Security.Claims;
 namespace AngbandOS.Web.Hubs
 {
     /// <summary>
-    /// Represents a singleton service that maintains all concurrent active games and all other active state.  This singleton provides
-    /// access to the database.
+    /// Represents a singleton service that maintains the active state for the AngbandOS.
     /// </summary>
     public class GameService
     {
@@ -99,7 +98,7 @@ namespace AngbandOS.Web.Hubs
                 // Remove the connection from the consoles.
                 Consoles.Remove(connectionId, out _);
 
-                // Force a shutdown the console thread.
+                // Force a shutdown of the console thread.
                 console.Shutdown();
             }
 
@@ -140,6 +139,10 @@ namespace AngbandOS.Web.Hubs
             SendHubConnectionsUpdate();
         }
 
+        /// <summary>
+        /// Adds a connection to the service hub monitor and sends updates to the dashboard.
+        /// </summary>
+        /// <param name="connectionId"></param>
         public void ServiceHubConnected(string connectionId)
         {
             serviceHubConnections.Connected(connectionId, null);
@@ -416,12 +419,22 @@ namespace AngbandOS.Web.Hubs
 
             console.ThreadName = $"Game: {userId}/{guid}";
 
-            // We need to track this game.
+            // We need to track this game by the connection ID so that messages on the signal-r connection can be quickly correlated to the associated game.
             if (!Consoles.TryAdd(connectionId, console))
             {
+                // We were unable to track this game.  Kill it and abort the play request.
+                console.Kill();
                 return;
             }
-            ConnectionIds.TryAdd(console, connectionId);
+
+            // We also need to track the connection associated to the game so that game messages can be quickly associated to the signal-r connection.
+            if (!ConnectionIds.TryAdd(console, connectionId))
+            {
+                // We were unable to track this game.  Remove the entry we added for the console, kill the game and abort the play request.
+                Consoles.Remove(connectionId, out _);
+                console.Kill();
+                return;
+            }
 
             // Add an event for when the game is over, that we can disconnect the client.
             console.RunWorkerCompleted += Console_RunWorkerCompleted;

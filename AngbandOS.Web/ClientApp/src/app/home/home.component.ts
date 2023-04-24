@@ -230,14 +230,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public deleteSavedGame(savedGame: SavedGameDetails) {
-    this._httpClient.delete<SavedGameDetails[]>(`/apiv1/saved-games/${savedGame.guid}`).toPromise().then((_savedGames) => {
-      this._ngZone.run(() => {
-        this.savedGames = _savedGames;
+    if (window.confirm('Are you sure you want to delete this game?')) {
+      this._httpClient.delete<SavedGameDetails[]>(`/apiv1/saved-games/${savedGame.guid}`).toPromise().then((_savedGames) => {
+        this._ngZone.run(() => {
+          this.savedGames = _savedGames;
+        });
+      }, (_errorResponse: HttpErrorResponse) => {
+        this._snackBar.open(ErrorMessages.getMessage(_errorResponse).join('\n'), "", {
+          duration: 5000
+        });
       });
-    }, (_errorResponse: HttpErrorResponse) => {
-      this._snackBar.open(ErrorMessages.getMessage(_errorResponse).join('\n'), "", {
-        duration: 5000
-      });
-    });
+    }
   }
 }
