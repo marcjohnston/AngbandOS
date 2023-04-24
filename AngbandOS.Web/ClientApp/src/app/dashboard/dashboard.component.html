@@ -49,7 +49,7 @@
       <tr mat-row *matRowDef="let adminHubConnection; columns: displayColumns"></tr>
     </table>
   </ng-container>
-  <h6 id="active-games-span">Games Hub Connections {{gameHubConnections === undefined ? 0 : gameHubConnections.length}}</h6>
+  <h6 id="active-games-span">Game Hub Connections {{gameHubConnections === undefined ? 0 : gameHubConnections.length}}</h6>
   <ng-container *ngIf="gameHubConnections !== undefined">
     <table mat-table [dataSource]="gameHubConnections">
       <ng-container matColumnDef="username">
