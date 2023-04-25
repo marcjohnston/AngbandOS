@@ -6,7 +6,7 @@ internal class DaggerIcicleFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private DaggerIcicleFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordDagger>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordDagger>();
     }
 
     // Icicle shoots a cold ball

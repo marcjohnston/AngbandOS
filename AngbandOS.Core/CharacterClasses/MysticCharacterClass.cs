@@ -44,9 +44,9 @@
 
         protected override ItemFactory[] Outfit => new ItemFactory[]
         {
-            SaveGame.SingletonRepository.ItemCategories.Get<RingSustainWisdom>(),
-            SaveGame.SingletonRepository.ItemCategories.Get<PotionHealing>(),
-            SaveGame.SingletonRepository.ItemCategories.Get<SoftArmorSoftLeatherArmour>()
+            SaveGame.SingletonRepository.ItemFactories.Get<RingSustainWisdom>(),
+            SaveGame.SingletonRepository.ItemFactories.Get<PotionHealing>(),
+            SaveGame.SingletonRepository.ItemFactories.Get<SoftArmorSoftLeatherArmour>()
         };
     }
 }

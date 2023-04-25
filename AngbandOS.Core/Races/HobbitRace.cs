@@ -63,7 +63,7 @@
             // Hobbits can cook food
             if (saveGame.CheckIfRacialPowerWorks(15, 10, Ability.Intelligence, 10))
             {
-                ItemFactory foodItemClass = saveGame.SingletonRepository.ItemCategories.Get<FoodRation>();
+                ItemFactory foodItemClass = saveGame.SingletonRepository.ItemFactories.Get<RationFoodItemFactory>();
                 Item item = foodItemClass.CreateItem();
                 saveGame.Level.DropNear(item, -1, saveGame.Player.MapY, saveGame.Player.MapX);
                 saveGame.MsgPrint("You cook some food.");

@@ -1154,9 +1154,9 @@ namespace AngbandOS.Core
         private void WorthlessItemTypeSelection(ItemTypeEnum tval)
         {
             _menuLength = 0;
-            for (int i = 0; i < SaveGame.SingletonRepository.ItemCategories.Count; i++)
+            for (int i = 0; i < SaveGame.SingletonRepository.ItemFactories.Count; i++)
             {
-                ItemFactory kPtr = SaveGame.SingletonRepository.ItemCategories[i];
+                ItemFactory kPtr = SaveGame.SingletonRepository.ItemFactories[i];
                 if (kPtr.CategoryEnum == tval)
                 {
                     if (kPtr.InstaArt)
@@ -1196,14 +1196,14 @@ namespace AngbandOS.Core
                     }
                     if (c == '6')
                     {
-                        ItemFactory kPtr = SaveGame.SingletonRepository.ItemCategories[_menuIndices[menu]];
+                        ItemFactory kPtr = SaveGame.SingletonRepository.ItemFactories[_menuIndices[menu]];
                         if (kPtr.HasQuality)
                         {
                             WorthlessItemQualitySelection(kPtr);
                             _menuLength = 0;
-                            for (int i = 0; i < SaveGame.SingletonRepository.ItemCategories.Count; i++)
+                            for (int i = 0; i < SaveGame.SingletonRepository.ItemFactories.Count; i++)
                             {
-                                kPtr = SaveGame.SingletonRepository.ItemCategories[i];
+                                kPtr = SaveGame.SingletonRepository.ItemFactories[i];
                                 if (kPtr.CategoryEnum == tval)
                                 {
                                     if (kPtr.InstaArt)
@@ -1228,9 +1228,9 @@ namespace AngbandOS.Core
                         {
                             WorthlessItemChestSelection(kPtr);
                             _menuLength = 0;
-                            for (int i = 0; i < SaveGame.SingletonRepository.ItemCategories.Count; i++)
+                            for (int i = 0; i < SaveGame.SingletonRepository.ItemFactories.Count; i++)
                             {
-                                kPtr = SaveGame.SingletonRepository.ItemCategories[i];
+                                kPtr = SaveGame.SingletonRepository.ItemFactories[i];
                                 if (kPtr.CategoryEnum == tval)
                                 {
                                     if (kPtr.InstaArt)

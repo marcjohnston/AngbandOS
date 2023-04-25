@@ -6,7 +6,7 @@ internal class HalberdArmourbaneFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private HalberdArmourbaneFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmHalberd>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<PolearmHalberd>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

@@ -6,7 +6,7 @@ internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private IronHelmTerrorMaskFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HelmIronHelm>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HelmIronHelm>();
     }
 
     public override void ApplyResistances(SaveGame saveGame, Item item)

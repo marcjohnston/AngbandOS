@@ -6,7 +6,7 @@ internal class RapierOfMontoyaFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private RapierOfMontoyaFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordRapier>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordRapier>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

@@ -6,7 +6,7 @@ internal class SmallSwordStingFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private SmallSwordStingFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordShortSword>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordShortSword>();
     }
 
     public override void ApplyResistances(SaveGame saveGame, Item item)

@@ -3,7 +3,7 @@ namespace AngbandOS.Core.Items
 [Serializable]
     internal class DragonHelmArmorItem : HelmArmorItem
     {
-        public DragonHelmArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<HelmDragonHelm>()) { }
+        public DragonHelmArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<HelmDragonHelm>()) { }
 
         /// <summary>
         /// Applies special magic to this dragon helm.

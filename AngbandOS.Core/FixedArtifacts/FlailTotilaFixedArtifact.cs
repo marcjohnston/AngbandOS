@@ -6,7 +6,7 @@ internal class FlailTotilaFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private FlailTotilaFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedFlail>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HaftedFlail>();
     }
 
     // Totila does confusion

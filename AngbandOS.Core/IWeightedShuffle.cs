@@ -1,8 +1,8 @@
 ﻿namespace AngbandOS.Core
 {
     /// <summary>
-    /// Represents the interface a type needs to implement to support a weighted shuffle.  Weighted shuffles sort the items by weight, with the highest weight first and
-    /// all items of the same weight are shuffled amongst themselves.
+    /// Represents the interface that a repository item can implement to support the SingletonRepository.WeightedShuffle.  Weighted shuffles sort the items by weight, 
+    /// with the highest weight first and all items of the same weight are shuffled amongst themselves.  The 
     /// </summary>
     internal interface IWeightedShuffle
     {

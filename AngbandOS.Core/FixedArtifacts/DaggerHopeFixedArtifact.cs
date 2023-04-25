@@ -6,7 +6,7 @@ internal class DaggerHopeFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private DaggerHopeFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordDagger>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordDagger>();
     }
 
     // Hope shoots a frost bolt

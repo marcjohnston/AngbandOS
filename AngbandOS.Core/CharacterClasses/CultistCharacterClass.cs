@@ -57,9 +57,9 @@
 
         protected override ItemFactory[] Outfit => new ItemFactory[]
         {
-            SaveGame.SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
-            SaveGame.SingletonRepository.ItemCategories.Get<RingSustainIntelligence>(),
-            SaveGame.SingletonRepository.ItemCategories.Get<DeathBookBlackPrayers>()
+            SaveGame.SingletonRepository.ItemFactories.Get<SorceryBookBeginnersHandbook>(),
+            SaveGame.SingletonRepository.ItemFactories.Get<RingSustainIntelligence>(),
+            SaveGame.SingletonRepository.ItemFactories.Get<DeathBookBlackPrayers>()
         };
 
         public override void UpdateBonusesForMeleeWeapon(Item oPtr)

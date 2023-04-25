@@ -56,9 +56,9 @@
 
         protected override ItemFactory[] Outfit => new ItemFactory[]
         {
-            SaveGame.SingletonRepository.ItemCategories.Get<RingFearResistance>(),
-            SaveGame.SingletonRepository.ItemCategories.Get<SwordBroadSword>(),
-            SaveGame.SingletonRepository.ItemCategories.Get<HardArmorChainMail>()
+            SaveGame.SingletonRepository.ItemFactories.Get<RingFearResistance>(),
+            SaveGame.SingletonRepository.ItemFactories.Get<SwordBroadSword>(),
+            SaveGame.SingletonRepository.ItemFactories.Get<HardArmorChainMail>()
         };
     }
 }

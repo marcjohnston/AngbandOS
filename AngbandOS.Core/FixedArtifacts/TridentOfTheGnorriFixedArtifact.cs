@@ -6,7 +6,7 @@ internal class TridentOfTheGnorriFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private TridentOfTheGnorriFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmTrident>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<PolearmTrident>();
     }
 
     // Gnorri teleports monsters away

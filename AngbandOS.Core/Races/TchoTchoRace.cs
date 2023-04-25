@@ -70,7 +70,7 @@
         {
             if (itemClass is RingFearResistance)
             {
-                return SaveGame.SingletonRepository.ItemCategories.Get<RingSustainStrength>();
+                return SaveGame.SingletonRepository.ItemFactories.Get<RingSustainStrength>();
             }
             return itemClass;
         }

@@ -6,7 +6,7 @@ internal class TwoHandedSwordFiretongueFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private TwoHandedSwordFiretongueFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordTwoHandedSword>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordTwoHandedSword>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

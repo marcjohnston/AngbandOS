@@ -6,7 +6,7 @@ internal class MightyHammerOfWorldsFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private MightyHammerOfWorldsFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedMightyHammer>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HaftedMightyHammer>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

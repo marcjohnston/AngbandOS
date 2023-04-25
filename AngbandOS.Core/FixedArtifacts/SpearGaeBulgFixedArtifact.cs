@@ -6,7 +6,7 @@ internal class SpearGaeBulgFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private SpearGaeBulgFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmSpear>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<PolearmSpear>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

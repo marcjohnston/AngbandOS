@@ -6,7 +6,7 @@ internal class MetalBrigandineArmourOfSerpentsFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private MetalBrigandineArmourOfSerpentsFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HardArmorMetalBrigandineArmour>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HardArmorMetalBrigandineArmour>();
     }
 
     public override void ApplyResistances(SaveGame saveGame, Item item)

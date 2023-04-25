@@ -3,7 +3,7 @@ namespace AngbandOS.Core.Items
 [Serializable]
     internal class SearchingAmuletItem : AmuletItem
     {
-        public SearchingAmuletItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<AmuletSearching>()) { }
+        public SearchingAmuletItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<AmuletSearching>()) { }
 
         public override void ApplyMagic(int level, int power)
         {

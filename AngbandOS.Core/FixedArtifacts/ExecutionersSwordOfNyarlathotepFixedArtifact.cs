@@ -6,7 +6,7 @@ internal class ExecutionersSwordOfNyarlathotepFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private ExecutionersSwordOfNyarlathotepFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordExecutionersSword>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordExecutionersSword>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

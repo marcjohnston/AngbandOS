@@ -83,6 +83,11 @@
         public virtual bool HasFlavor => false;
 
         /// <summary>
+        /// Applies random flavour visuals to the items.  This method is called if the HasFlavor property returns true when creating a new game.
+        /// </summary>
+        public virtual void ApplyFlavourVisuals() { }
+
+        /// <summary>
         /// Returns true, if the player has attempted/tried the item.
         /// </summary>
         public bool Tried;
@@ -268,6 +273,7 @@
         /// <summary>
         /// Returns the subcategory enumeration that the item belongs to.  This property is to be deleted.  Returns null, when not in use.
         /// </summary>
+        [Obsolete("To be deleted")]
         public abstract int? SubCategory { get; }
 
         public virtual bool SustCha { get; set; } = false;

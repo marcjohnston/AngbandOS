@@ -6,7 +6,7 @@ internal class BattleAxeSpleenSlicerFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private BattleAxeSpleenSlicerFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmBattleAxe>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<PolearmBattleAxe>();
     }
 
     // Spleens Slicer heals you

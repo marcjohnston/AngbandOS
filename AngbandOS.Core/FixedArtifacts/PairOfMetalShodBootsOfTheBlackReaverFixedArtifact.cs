@@ -6,7 +6,7 @@ internal class PairOfMetalShodBootsOfTheBlackReaverFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private PairOfMetalShodBootsOfTheBlackReaverFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<BootsMetalShodBoots>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<BootsMetalShodBoots>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

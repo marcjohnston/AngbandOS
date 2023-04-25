@@ -6,7 +6,7 @@ internal class SoftLeatherArmourOfTheKoboldChiefFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private SoftLeatherArmourOfTheKoboldChiefFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SoftArmorSoftLeatherArmour>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SoftArmorSoftLeatherArmour>();
     }
 
     public override void ApplyResistances(SaveGame saveGame, Item item)

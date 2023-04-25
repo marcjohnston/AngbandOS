@@ -6,7 +6,7 @@ internal class RingOfElementalPowerStormFixedArtifact : FixedArtifact, IActivati
     private readonly ItemFactory _baseItemCategory;
     private RingOfElementalPowerStormFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<RingVilya>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<RingVilya>();
     }
 
     // Ring of Elemental Lightning casts a lightning ball

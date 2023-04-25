@@ -6,7 +6,7 @@ internal class AmuletOfLobonFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private AmuletOfLobonFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<AmuletCarlammas>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<AmuletCarlammas>();
     }
 
     // Amulet of Lobon protects us from evil

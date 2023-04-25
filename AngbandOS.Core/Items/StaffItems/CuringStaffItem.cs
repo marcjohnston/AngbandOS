@@ -3,7 +3,7 @@ namespace AngbandOS.Core.Items
 [Serializable]
     internal class CuringStaffItem : StaffItem
     {
-        public CuringStaffItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<StaffCuring>()) { }
+        public CuringStaffItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<StaffCuring>()) { }
         public override void ApplyMagic(int level, int power)
         {
             TypeSpecificValue = Program.Rng.DieRoll(3) + 4;

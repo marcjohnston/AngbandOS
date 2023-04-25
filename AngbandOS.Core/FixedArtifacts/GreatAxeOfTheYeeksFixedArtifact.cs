@@ -6,7 +6,7 @@ internal class GreatAxeOfTheYeeksFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private GreatAxeOfTheYeeksFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmGreatAxe>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<PolearmGreatAxe>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

@@ -6,7 +6,7 @@ internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private QuarterstaffOfAtalFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedQuarterstaff>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HaftedQuarterstaff>();
     }
 
     // Atal does full identify

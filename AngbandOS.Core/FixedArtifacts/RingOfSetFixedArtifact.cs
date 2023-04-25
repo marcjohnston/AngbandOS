@@ -6,7 +6,7 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private RingOfSetFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<RingPower>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<RingPower>();
     }
 
     // Ring of Set has a random effect

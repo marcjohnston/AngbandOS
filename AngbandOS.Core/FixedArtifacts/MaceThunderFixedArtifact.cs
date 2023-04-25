@@ -6,7 +6,7 @@ internal class MaceThunderFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private MaceThunderFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedMace>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HaftedMace>();
     }
 
     // Thunder does haste

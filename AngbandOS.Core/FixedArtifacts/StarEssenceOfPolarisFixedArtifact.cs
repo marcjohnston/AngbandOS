@@ -6,7 +6,7 @@ internal class StarEssenceOfPolarisFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private StarEssenceOfPolarisFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<StarEssenceGaladrielLightSourceItemFactory>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<StarEssenceGaladrielLightSourceItemFactory>();
     }
 
     // Star Essence of Polaris lights the area

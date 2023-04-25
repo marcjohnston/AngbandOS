@@ -53,11 +53,11 @@
                 new StockStoreInventoryItem(typeof(DiggingPick)),
                 new StockStoreInventoryItem(typeof(DiggingShovel), 2),
                 new StockStoreInventoryItem(typeof(OilFlaskItemFactory), 10),
-                new StockStoreInventoryItem(typeof(FoodHardBiscuit)),
-                new StockStoreInventoryItem(typeof(FoodPintOfFineAle)),
-                new StockStoreInventoryItem(typeof(FoodPintOfFineWine)),
-                new StockStoreInventoryItem(typeof(FoodRation), 9),
-                new StockStoreInventoryItem(typeof(FoodStripOfVenison), 2),
+                new StockStoreInventoryItem(typeof(HardBiscuitFoodItemFactory)),
+                new StockStoreInventoryItem(typeof(PintOfFineAleFoodItemFactory)),
+                new StockStoreInventoryItem(typeof(PintOfFineWineFoodItemFactory)),
+                new StockStoreInventoryItem(typeof(RationFoodItemFactory), 9),
+                new StockStoreInventoryItem(typeof(StripOfVenisonFoodItemFactory), 2),
                 new StockStoreInventoryItem(typeof(BrassLanternLightSourceItemFactory), 4),
                 new StockStoreInventoryItem(typeof(OrbLightSourceItemFactory)),
                 new StockStoreInventoryItem(typeof(WoodenTorchLightSourceItemFactory), 5),
@@ -70,7 +70,7 @@
         {
             switch (item.Factory)
             {
-                case FoodItemClass _:
+                case FoodItemFactory _:
                 case LightSourceItemFactory _:
                 case FlaskItemFactory _:
                 case SpikeItemClass _:

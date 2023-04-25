@@ -6,7 +6,7 @@ internal class SmallMetalShieldVitriolFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private SmallMetalShieldVitriolFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<ShieldSmallMetalShield>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<ShieldSmallMetalShield>();
     }
 
     public override void ApplyResistances(SaveGame saveGame, Item item)

@@ -6,7 +6,7 @@ internal class LongSwordExcaliburFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private LongSwordExcaliburFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordLongSword>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordLongSword>();
     }
 
     // Excalibur shoots a frost ball

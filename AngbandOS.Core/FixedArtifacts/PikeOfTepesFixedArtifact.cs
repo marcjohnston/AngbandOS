@@ -6,7 +6,7 @@ internal class PikeOfTepesFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private PikeOfTepesFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmPike>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<PolearmPike>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

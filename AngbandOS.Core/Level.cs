@@ -1270,8 +1270,8 @@ namespace AngbandOS.Core
 
         private void ImageObject(out Colour ap, out char cp)
         {
-            cp = SaveGame.SingletonRepository.ItemCategories[Program.Rng.DieRoll(SaveGame.SingletonRepository.ItemCategories.Count - 1)].FlavorCharacter;
-            ap = SaveGame.SingletonRepository.ItemCategories[Program.Rng.DieRoll(SaveGame.SingletonRepository.ItemCategories.Count - 1)].FlavorColour;
+            cp = SaveGame.SingletonRepository.ItemFactories[Program.Rng.DieRoll(SaveGame.SingletonRepository.ItemFactories.Count - 1)].FlavorCharacter;
+            ap = SaveGame.SingletonRepository.ItemFactories[Program.Rng.DieRoll(SaveGame.SingletonRepository.ItemFactories.Count - 1)].FlavorColour;
         }
 
         private void ImageRandom(out Colour ap, out char cp)

@@ -43,9 +43,9 @@
 
         protected override ItemFactory[] Outfit => new ItemFactory[]
         {
-            SaveGame.SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
-            SaveGame.SingletonRepository.ItemCategories.Get<HaftedQuarterstaff>(),
-            SaveGame.SingletonRepository.ItemCategories.Get<RingSustainWisdom>()
+            SaveGame.SingletonRepository.ItemFactories.Get<SorceryBookBeginnersHandbook>(),
+            SaveGame.SingletonRepository.ItemFactories.Get<HaftedQuarterstaff>(),
+            SaveGame.SingletonRepository.ItemFactories.Get<RingSustainWisdom>()
         };
     }
 }

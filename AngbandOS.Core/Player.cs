@@ -274,7 +274,7 @@ namespace AngbandOS.Core
             {
                 aPtr.CurNum = 0;
             }
-            foreach (ItemFactory kPtr in SaveGame.SingletonRepository.ItemCategories)
+            foreach (ItemFactory kPtr in SaveGame.SingletonRepository.ItemFactories)
             {
                 kPtr.Tried = false;
                 kPtr.FlavourAware = false;

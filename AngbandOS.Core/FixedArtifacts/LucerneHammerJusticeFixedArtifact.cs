@@ -6,7 +6,7 @@ internal class TheLucerneHammerJusticeFixedArtifact : FixedArtifact, IActivatibl
     private readonly ItemFactory _baseItemCategory;
     private TheLucerneHammerJusticeFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedLucerneHammer>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HaftedLucerneHammer>();
     }
 
     // Justice drains life

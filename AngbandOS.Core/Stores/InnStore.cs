@@ -51,11 +51,11 @@
         {
             return new[]
             {
-                new StockStoreInventoryItem(typeof(FoodHardBiscuit), 2),
-                new StockStoreInventoryItem(typeof(FoodPintOfFineAle), 10),
-                new StockStoreInventoryItem(typeof(FoodPintOfFineWine), 10),
-                new StockStoreInventoryItem(typeof(FoodRation), 18),
-                new StockStoreInventoryItem(typeof(FoodStripOfVenison), 4),
+                new StockStoreInventoryItem(typeof(HardBiscuitFoodItemFactory), 2),
+                new StockStoreInventoryItem(typeof(PintOfFineAleFoodItemFactory), 10),
+                new StockStoreInventoryItem(typeof(PintOfFineWineFoodItemFactory), 10),
+                new StockStoreInventoryItem(typeof(RationFoodItemFactory), 18),
+                new StockStoreInventoryItem(typeof(StripOfVenisonFoodItemFactory), 4),
                 new StockStoreInventoryItem(typeof(ScrollSatisfyHunger), 4),
             };
         }

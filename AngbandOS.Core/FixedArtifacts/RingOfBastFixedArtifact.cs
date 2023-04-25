@@ -6,7 +6,7 @@ internal class RingOfBastFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private RingOfBastFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<RingTulkas>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<RingTulkas>();
     }
 
     // Ring of Bast hastes you

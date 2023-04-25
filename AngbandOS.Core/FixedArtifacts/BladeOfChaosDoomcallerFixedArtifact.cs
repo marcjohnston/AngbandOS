@@ -6,7 +6,7 @@ internal class BladeOfChaosDoomcallerFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private BladeOfChaosDoomcallerFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordBladeOfChaos>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordBladeOfChaos>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

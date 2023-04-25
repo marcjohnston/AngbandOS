@@ -3,7 +3,7 @@ namespace AngbandOS.Core.Items
 [Serializable]
     internal class DOOMAmuletItem : AmuletItem
     {
-        public DOOMAmuletItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<AmuletDOOM>()) { }
+        public DOOMAmuletItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<AmuletDOOM>()) { }
 
         public override void ApplyMagic(int level, int power)
         {

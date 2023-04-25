@@ -3,6 +3,6 @@ namespace AngbandOS.Core.Items
 [Serializable]
     internal class ArrowArrowAmmunitionItem : ArrowAmmunitionItem
     {
-        public ArrowArrowAmmunitionItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<ArrowArrowAmmunitionItemFactory>()) { }
+        public ArrowArrowAmmunitionItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ArrowArrowAmmunitionItemFactory>()) { }
     }
 }

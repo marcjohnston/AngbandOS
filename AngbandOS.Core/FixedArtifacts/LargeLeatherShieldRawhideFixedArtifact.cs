@@ -6,7 +6,7 @@ internal class LargeLeatherShieldRawhideFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private LargeLeatherShieldRawhideFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<ShieldLargeLeatherShield>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<ShieldLargeLeatherShield>();
     }
 
     public override void ApplyResistances(SaveGame saveGame, Item item)

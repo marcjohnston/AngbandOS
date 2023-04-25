@@ -834,7 +834,7 @@ namespace AngbandOS.Core
             }
 
             // Get a list of all of the item classes that are considered gold.  Sort them by the cost.
-            ItemFactory[] goldItemClasses = SingletonRepository.ItemCategories.Where(_itemClass => GoldItemClass.IsGold(_itemClass)).OrderBy(_goldItemClass => _goldItemClass.Cost).ToArray();
+            ItemFactory[] goldItemClasses = SingletonRepository.ItemFactories.Where(_itemClass => GoldItemClass.IsGold(_itemClass)).OrderBy(_goldItemClass => _goldItemClass.Cost).ToArray();
 
             if (goldType >= goldItemClasses.Length)
             {
@@ -925,7 +925,7 @@ namespace AngbandOS.Core
                 }
                 table[i].FinalProbability = 0;
                 int kIdx = table[i].Index;
-                ItemFactory kPtr = SingletonRepository.ItemCategories[kIdx];
+                ItemFactory kPtr = SingletonRepository.ItemFactories[kIdx];
                 if (doNotAllowChestToBeCreated && kPtr.CategoryEnum == ItemTypeEnum.Chest)
                 {
                     continue;
@@ -984,7 +984,7 @@ namespace AngbandOS.Core
                     i = j;
                 }
             }
-            return SingletonRepository.ItemCategories[table[i].Index];
+            return SingletonRepository.ItemFactories[table[i].Index];
         }
 
         public void MessageBoxShow(string message)
@@ -1049,7 +1049,7 @@ namespace AngbandOS.Core
 
         private void ResetStompability()
         {
-            foreach (ItemFactory item in SingletonRepository.ItemCategories)
+            foreach (ItemFactory item in SingletonRepository.ItemFactories)
             {
                 if (item.HasQuality)
                 {
@@ -2111,10 +2111,11 @@ namespace AngbandOS.Core
 
         private void ApplyFlavourVisuals()
         {
-            foreach (ItemFactory kPtr in SingletonRepository.ItemCategories)
+            foreach (ItemFactory kPtr in SingletonRepository.ItemFactories)
             {
                 if (kPtr.HasFlavor)
                 {
+                    //kPtr.ApplyFlavourVisuals();
                     int indexx = kPtr.SubCategory ?? 0;
                     switch (kPtr.CategoryEnum)
                     {
@@ -2538,11 +2539,6 @@ namespace AngbandOS.Core
             ScrollFlavours = new List<ScrollFlavour>();
             for (i = 0; i < Constants.MaxNumberOfScrollFlavoursGenerated; i++)
             {
-                ScrollFlavour flavour = new ScrollFlavour();
-                ScrollFlavours.Add(flavour);
-                int index = Program.Rng.RandomLessThan(SingletonRepository.ScrollFlavours.Count);
-                flavour.Character = SingletonRepository.ScrollFlavours[index].Character;
-                flavour.Colour = SingletonRepository.ScrollFlavours[index].Colour;
                 while (true)
                 {
                     string buf = "";
@@ -2561,27 +2557,29 @@ namespace AngbandOS.Core
                         buf += " ";
                         buf += tmp;
                     }
-                    flavour.Name = buf.Substring(1);
                     bool okay = true;
+                    string name = buf.Substring(1);
                     for (j = 0; j < i; j++)
                     {
                         string hack1 = ScrollFlavours[j].Name;
-                        string hack2 = ScrollFlavours[i].Name;
-                        if (hack1.Substring(0, 4) != hack2.Substring(0, 4))
+                        if (hack1.Substring(0, 4) == name.Substring(0, 4))
                         {
-                            continue;
+                            okay = false;
+                            break;
                         }
-                        okay = false;
-                        break;
                     }
                     if (okay)
                     {
+                        int index = Program.Rng.RandomLessThan(SingletonRepository.ScrollFlavours.Count);
+                        BaseScrollFlavour baseFlavour = SingletonRepository.ScrollFlavours[index];
+                        ScrollFlavour flavour = new ScrollFlavour(this, baseFlavour.Character, baseFlavour.Colour, name);
+                        ScrollFlavours.Add(flavour);
                         break;
                     }
                 }
             }
             Program.Rng.UseFixed = false;
-            foreach (ItemFactory kPtr in SingletonRepository.ItemCategories)
+            foreach (ItemFactory kPtr in SingletonRepository.ItemFactories)
             {
                 if (string.IsNullOrEmpty(kPtr.FriendlyName))
                 {
@@ -2602,9 +2600,9 @@ namespace AngbandOS.Core
             int[] num = new int[Constants.MaxDepth];
             int[] aux = new int[Constants.MaxDepth];
             AllocKindSize = 0;
-            for (i = 1; i < SingletonRepository.ItemCategories.Count; i++)
+            for (i = 1; i < SingletonRepository.ItemFactories.Count; i++)
             {
-                kPtr = SingletonRepository.ItemCategories[i];
+                kPtr = SingletonRepository.ItemFactories[i];
                 for (j = 0; j < 4; j++)
                 {
                     if (kPtr.Chance[j] != 0)
@@ -2628,9 +2626,9 @@ namespace AngbandOS.Core
                 AllocKindTable[k] = new AllocationEntry();
             }
             AllocationEntry[] table = AllocKindTable;
-            for (i = 1; i < SingletonRepository.ItemCategories.Count; i++)
+            for (i = 1; i < SingletonRepository.ItemFactories.Count; i++)
             {
-                kPtr = SingletonRepository.ItemCategories[i];
+                kPtr = SingletonRepository.ItemFactories[i];
                 for (j = 0; j < 4; j++)
                 {
                     if (kPtr.Chance[j] != 0)
@@ -11171,7 +11169,7 @@ namespace AngbandOS.Core
             EnergyUse = 100;
             bool ident = false;
             int itemLevel = item.Factory.Level;
-            FoodItemClass foodItem = (FoodItemClass)item.Factory;
+            FoodItemFactory foodItem = (FoodItemFactory)item.Factory;
 
             // Allow the food item to process the consumption.
             ident = foodItem.Eat(this);
@@ -14961,7 +14959,7 @@ namespace AngbandOS.Core
         {
             if (Player.Race.OutfitsWithScrollsOfSatisfyHunger)
             {
-                ItemFactory scrollSatisfyHungerItemClass = SingletonRepository.ItemCategories.Get<ScrollSatisfyHunger>();
+                ItemFactory scrollSatisfyHungerItemClass = SingletonRepository.ItemFactories.Get<ScrollSatisfyHunger>();
                 Item item = scrollSatisfyHungerItemClass.CreateItem();
                 item.Count = (char)Program.Rng.RandomBetween(2, 5);
                 item.BecomeFlavourAware();
@@ -14971,7 +14969,7 @@ namespace AngbandOS.Core
             }
             else
             {
-                ItemFactory rationFoodItemClass = SingletonRepository.ItemCategories.Get<FoodRation>();
+                ItemFactory rationFoodItemClass = SingletonRepository.ItemFactories.Get<RationFoodItemFactory>();
                 Item item = rationFoodItemClass.CreateItem();
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.BecomeFlavourAware();
@@ -14980,7 +14978,7 @@ namespace AngbandOS.Core
             }
             if (Player.Race.OutfitsWithScrollsOfLight || Player.BaseCharacterClass.OutfitsWithScrollsOfLight)
             {
-                ItemFactory scrollLightItemClass = SingletonRepository.ItemCategories.Get<ScrollLight>();
+                ItemFactory scrollLightItemClass = SingletonRepository.ItemFactories.Get<ScrollLight>();
                 Item item = scrollLightItemClass .CreateItem();
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.BecomeFlavourAware();
@@ -14990,7 +14988,7 @@ namespace AngbandOS.Core
             }
             else
             {
-                ItemFactory woodenTorchItemClass = SingletonRepository.ItemCategories.Get<WoodenTorchLightSourceItemFactory>();
+                ItemFactory woodenTorchItemClass = SingletonRepository.ItemFactories.Get<WoodenTorchLightSourceItemFactory>();
                 Item item = woodenTorchItemClass.CreateItem();
                 item.Count = Program.Rng.RandomBetween(3, 7);
                 item.TypeSpecificValue = Program.Rng.RandomBetween(3, 7) * 500;
@@ -19331,7 +19329,7 @@ namespace AngbandOS.Core
 
         public void DoCmdWizLearn()
         {
-            foreach (ItemFactory kPtr in SingletonRepository.ItemCategories)
+            foreach (ItemFactory kPtr in SingletonRepository.ItemFactories)
             {
                 if (kPtr.Level <= CommandArgument)
                 {
@@ -19586,7 +19584,7 @@ namespace AngbandOS.Core
             {
                 return;
             }
-            ItemFactory itemClass = SingletonRepository.ItemCategories[kIdx];
+            ItemFactory itemClass = SingletonRepository.ItemFactories[kIdx];
             Item qPtr = itemClass.CreateItem();
             qPtr.ApplyMagic(Difficulty, false, false, false);
             Level.DropNear(qPtr, -1, Player.MapY, Player.MapX);
@@ -19637,9 +19635,9 @@ namespace AngbandOS.Core
             const int maxLetters = 26;
             const int maxNumbers = 10;
             const int maxCount = maxLetters * 2 + maxNumbers; // 26 lower case, 26 uppercase, 10 numbers
-            for (num = 0, i = 1; num < maxCount && i < SingletonRepository.ItemCategories.Count; i++)
+            for (num = 0, i = 1; num < maxCount && i < SingletonRepository.ItemFactories.Count; i++)
             {
-                ItemFactory kPtr = SingletonRepository.ItemCategories[i];
+                ItemFactory kPtr = SingletonRepository.ItemFactories[i];
                 if (kPtr.CategoryEnum == tval)
                 {
                     row = 2 + (num % maxLetters);

@@ -6,7 +6,7 @@ internal class ShortSwordOfMerlinFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private ShortSwordOfMerlinFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordShortSword>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordShortSword>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

@@ -6,7 +6,7 @@ internal class MorningStarFirestarterFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private MorningStarFirestarterFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedMorningStar>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HaftedMorningStar>();
     }
 
     // Firestarter does fire ball

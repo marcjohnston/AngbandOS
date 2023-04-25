@@ -6,7 +6,7 @@ internal class BeakedAxeOfTheodenFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private BeakedAxeOfTheodenFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmBeakedAxe>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<PolearmBeakedAxe>();
     }
 
     // Theoden drains life

@@ -6,7 +6,7 @@ internal class DaggerOfThothFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private DaggerOfThothFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordDagger>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordDagger>();
     }
 
     // Thoth shoots a poison ball

@@ -6,7 +6,7 @@ internal class SetOfGauntletsOfTheDeadFixedArtifact : FixedArtifact, IActivatibl
     private readonly ItemFactory _baseItemCategory;
     private SetOfGauntletsOfTheDeadFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<GlovesSetOfGauntlets>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<GlovesSetOfGauntlets>();
     }
 
     // The Dead shoot acid bolts

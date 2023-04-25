@@ -6,7 +6,7 @@ internal class ScytheOfGharneFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private ScytheOfGharneFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmScythe>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<PolearmScythe>();
     }
 
     // G'Harne does Word of Recall

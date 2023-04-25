@@ -6,7 +6,7 @@ internal class SabreOfXuraFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private SabreOfXuraFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordSabre>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordSabre>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

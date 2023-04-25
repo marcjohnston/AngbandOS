@@ -6,7 +6,7 @@ internal class BroadSwordBlackIceFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private BroadSwordBlackIceFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordBroadSword>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordBroadSword>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

@@ -6,7 +6,7 @@ internal class PairOfHardLeatherBootsOfIthaquaFixedArtifact : FixedArtifact, IAc
     private readonly ItemFactory _baseItemCategory;
     private PairOfHardLeatherBootsOfIthaquaFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<BootsHardLeatherBoots>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<BootsHardLeatherBoots>();
     }
 
     // Boots haste you

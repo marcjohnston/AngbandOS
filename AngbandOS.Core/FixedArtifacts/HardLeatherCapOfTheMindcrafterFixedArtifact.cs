@@ -6,7 +6,7 @@ internal class HardLeatherCapOfTheMindcrafterFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private HardLeatherCapOfTheMindcrafterFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HelmHardLeatherCap>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HelmHardLeatherCap>();
     }
 
     public override void ApplyResistances(SaveGame saveGame, Item item)

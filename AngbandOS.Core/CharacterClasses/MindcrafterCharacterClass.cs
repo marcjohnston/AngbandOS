@@ -41,9 +41,9 @@
 
         protected override ItemFactory[] Outfit => new ItemFactory[]
         {
-            SaveGame.SingletonRepository.ItemCategories.Get<SwordSmallSword>(),
-            SaveGame.SingletonRepository.ItemCategories.Get<PotionRestoreMana>(),
-            SaveGame.SingletonRepository.ItemCategories.Get<SoftArmorSoftLeatherArmour>()
+            SaveGame.SingletonRepository.ItemFactories.Get<SwordSmallSword>(),
+            SaveGame.SingletonRepository.ItemFactories.Get<PotionRestoreMana>(),
+            SaveGame.SingletonRepository.ItemFactories.Get<SoftArmorSoftLeatherArmour>()
         };
     }
 }

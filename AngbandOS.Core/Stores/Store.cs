@@ -183,9 +183,9 @@ namespace AngbandOS.Core.Stores
             for (int k = 0; k < master.Length; k++)
             {
                 int kIdx = -1;
-                for (int i = 0; i < SaveGame.SingletonRepository.ItemCategories.Count; i++)
+                for (int i = 0; i < SaveGame.SingletonRepository.ItemFactories.Count; i++)
                 {
-                    ItemFactory itemType = SaveGame.SingletonRepository.ItemCategories[i];
+                    ItemFactory itemType = SaveGame.SingletonRepository.ItemFactories[i];
                     if (itemType.GetType().IsAssignableFrom(master[k].ItemType))
                     {
                         kIdx = i;
@@ -1134,7 +1134,7 @@ namespace AngbandOS.Core.Stores
             int level = Program.Rng.RandomBetween(1, Constants.StoreObjLevel);
 
             // Retrieve the item class.
-            ItemFactory itemType = SaveGame.SingletonRepository.ItemCategories[i];
+            ItemFactory itemType = SaveGame.SingletonRepository.ItemFactories[i];
 
             // Create the item.
             Item qPtr = itemType.CreateItem();

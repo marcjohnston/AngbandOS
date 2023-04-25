@@ -6,7 +6,7 @@ internal class MorningStarBloodspikeFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private MorningStarBloodspikeFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedMorningStar>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HaftedMorningStar>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

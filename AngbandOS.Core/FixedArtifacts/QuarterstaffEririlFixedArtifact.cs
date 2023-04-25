@@ -6,7 +6,7 @@ internal class QuarterstaffEririlFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private QuarterstaffEririlFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedQuarterstaff>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HaftedQuarterstaff>();
     }
 
     // Ereril does identify

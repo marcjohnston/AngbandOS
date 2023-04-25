@@ -3,7 +3,7 @@ namespace AngbandOS.Core.Items
 [Serializable]
     internal class CharismaAmuletItem : AmuletItem
     {
-        public CharismaAmuletItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<AmuletCharisma>()) { }
+        public CharismaAmuletItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<AmuletCharisma>()) { }
         public override void ApplyMagic(int level, int power)
         {
             TypeSpecificValue = 1 + GetBonusValue(5, level);

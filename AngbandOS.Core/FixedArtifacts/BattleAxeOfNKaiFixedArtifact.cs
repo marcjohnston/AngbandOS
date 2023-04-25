@@ -6,7 +6,7 @@ internal class BattleAxeOfNKaiFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private BattleAxeOfNKaiFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmBattleAxe>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<PolearmBattleAxe>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

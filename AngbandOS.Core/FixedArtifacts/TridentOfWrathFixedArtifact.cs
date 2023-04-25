@@ -6,7 +6,7 @@ internal class TridentOfWrathFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private TridentOfWrathFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmTrident>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<PolearmTrident>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

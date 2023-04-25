@@ -6,7 +6,7 @@ internal class MainGaucheOfDefenceFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private MainGaucheOfDefenceFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordMainGauche>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordMainGauche>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

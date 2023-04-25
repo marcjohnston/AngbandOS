@@ -6,7 +6,7 @@ internal class SetOfLeatherGlovesOfLightFixedArtifact : FixedArtifact, IActivati
     private readonly ItemFactory _baseItemCategory;
     private SetOfLeatherGlovesOfLightFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<GlovesSetOfLeatherGloves>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<GlovesSetOfLeatherGloves>();
     }
 
     // Light shoots magic missiles

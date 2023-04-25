@@ -6,7 +6,7 @@ internal class GlaiveOfPainFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private GlaiveOfPainFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmGlaive>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<PolearmGlaive>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

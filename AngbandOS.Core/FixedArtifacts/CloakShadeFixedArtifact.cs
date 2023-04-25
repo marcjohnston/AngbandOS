@@ -6,7 +6,7 @@ internal class CloakShadeFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private CloakShadeFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<Cloak>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<Cloak>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

@@ -6,7 +6,7 @@ internal class LochaberAxeOfTheDwarvesFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private LochaberAxeOfTheDwarvesFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmLochaberAxe>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<PolearmLochaberAxe>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

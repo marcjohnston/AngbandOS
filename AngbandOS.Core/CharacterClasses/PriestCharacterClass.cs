@@ -89,9 +89,9 @@
 
         protected override ItemFactory[] Outfit => new ItemFactory[]
         {
-            SaveGame.SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
-            SaveGame.SingletonRepository.ItemCategories.Get<HaftedMace>(),
-            SaveGame.SingletonRepository.ItemCategories.Get<DeathBookBlackPrayers>()
+            SaveGame.SingletonRepository.ItemFactories.Get<SorceryBookBeginnersHandbook>(),
+            SaveGame.SingletonRepository.ItemFactories.Get<HaftedMace>(),
+            SaveGame.SingletonRepository.ItemFactories.Get<DeathBookBlackPrayers>()
         };
     }
 }

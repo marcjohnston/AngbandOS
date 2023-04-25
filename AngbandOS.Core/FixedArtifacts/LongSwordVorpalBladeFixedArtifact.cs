@@ -6,7 +6,7 @@ internal class LongSwordVorpalBladeFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private LongSwordVorpalBladeFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordLongSword>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordLongSword>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

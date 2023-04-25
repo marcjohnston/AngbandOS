@@ -6,7 +6,7 @@ internal class LargeMetalShieldOfStabilityFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private LargeMetalShieldOfStabilityFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<ShieldLargeMetalShield>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<ShieldLargeMetalShield>();
     }
 
     public override void ApplyResistances(SaveGame saveGame, Item item)

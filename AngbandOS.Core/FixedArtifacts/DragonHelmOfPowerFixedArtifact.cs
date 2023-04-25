@@ -6,7 +6,7 @@ internal class DragonHelmOfPowerFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private DragonHelmOfPowerFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HelmDragonHelm>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HelmDragonHelm>();
     }
 
     // Dragon Helm and Terror Mask cause fear

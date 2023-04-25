@@ -6,7 +6,7 @@ internal class BastardSwordSelfSlayerFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private BastardSwordSelfSlayerFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordBastardSword>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordBastardSword>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

@@ -6,7 +6,7 @@ internal class FullPlateArmourOfTheGodsFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private FullPlateArmourOfTheGodsFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HardArmorFullPlateArmour>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HardArmorFullPlateArmour>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

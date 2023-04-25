@@ -6,7 +6,7 @@ internal class SetOfLeatherGlovesCalfskinFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private SetOfLeatherGlovesCalfskinFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<GlovesSetOfLeatherGloves>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<GlovesSetOfLeatherGloves>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

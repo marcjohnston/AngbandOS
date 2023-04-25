@@ -6,7 +6,7 @@ internal class DaggerCharityFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private DaggerCharityFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordDagger>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordDagger>();
     }
 
     // Charity shoots a lightning bolt

@@ -6,7 +6,7 @@ internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact, I
     private readonly ItemFactory _baseItemCategory;
     private MultiHuedDragonScaleMailRazorbackFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<MultiHuedDragonScaleMailArmorItemFactory>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<MultiHuedDragonScaleMailArmorItemFactory>();
     }
 
     // Razorback gives you a point-blank lightning ball

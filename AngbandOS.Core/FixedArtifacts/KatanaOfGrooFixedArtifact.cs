@@ -6,7 +6,7 @@ internal class KatanaOfGrooFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private KatanaOfGrooFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordKatana>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordKatana>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

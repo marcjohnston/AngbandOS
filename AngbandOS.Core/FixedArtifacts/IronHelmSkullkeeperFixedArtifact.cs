@@ -6,7 +6,7 @@ internal class IronHelmSkullkeeperFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private IronHelmSkullkeeperFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HelmIronHelm>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HelmIronHelm>();
     }
 
     // Skull Keeper detects everything

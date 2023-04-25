@@ -6,7 +6,7 @@ internal class DaggerOfAssassinFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private DaggerOfAssassinFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordDagger>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordDagger>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

@@ -47,9 +47,9 @@
 
         protected override ItemFactory[] Outfit => new ItemFactory[]
         {
-            SaveGame.SingletonRepository.ItemCategories.Get<SorceryBookBeginnersHandbook>(),
-            SaveGame.SingletonRepository.ItemCategories.Get<SwordBroadSword>(),
-            SaveGame.SingletonRepository.ItemCategories.Get<HardArmorMetalScaleMail>()
+            SaveGame.SingletonRepository.ItemFactories.Get<SorceryBookBeginnersHandbook>(),
+            SaveGame.SingletonRepository.ItemFactories.Get<SwordBroadSword>(),
+            SaveGame.SingletonRepository.ItemFactories.Get<HardArmorMetalScaleMail>()
         };
     }
 }

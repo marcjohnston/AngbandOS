@@ -6,7 +6,7 @@ internal class SteelHelmOfHammerhandFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private SteelHelmOfHammerhandFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HelmSteelHelm>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HelmSteelHelm>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

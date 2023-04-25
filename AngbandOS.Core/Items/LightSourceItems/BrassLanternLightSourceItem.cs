@@ -3,7 +3,7 @@ namespace AngbandOS.Core.Items
     [Serializable]
     internal class BrassLanternLightSourceItem : LightSourceItem
     {
-        public BrassLanternLightSourceItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<BrassLanternLightSourceItemFactory>()) { }
+        public BrassLanternLightSourceItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<BrassLanternLightSourceItemFactory>()) { }
 
         /// <summary>
         /// Returns 1 because a latern consumes a turn of light for every world turn.

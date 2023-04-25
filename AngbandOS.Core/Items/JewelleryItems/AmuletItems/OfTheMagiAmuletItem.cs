@@ -3,7 +3,7 @@ namespace AngbandOS.Core.Items
 [Serializable]
     internal class OfTheMagiAmuletItem : AmuletItem
     {
-        public OfTheMagiAmuletItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<AmuletOfTheMagi>()) { }
+        public OfTheMagiAmuletItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<AmuletOfTheMagi>()) { }
 
         public override void ApplyMagic(int level, int power)
         {

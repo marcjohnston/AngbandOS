@@ -6,7 +6,7 @@ internal class LongBowSureshotFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private LongBowSureshotFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<LongBowWeaponItemFactory>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<LongBowWeaponItemFactory>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

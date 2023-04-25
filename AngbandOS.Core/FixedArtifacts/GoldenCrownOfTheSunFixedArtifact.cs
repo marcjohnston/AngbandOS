@@ -6,7 +6,7 @@ internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private GoldenCrownOfTheSunFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<CrownGolden>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<CrownGolden>();
     }
 
     // Sun Crown heals

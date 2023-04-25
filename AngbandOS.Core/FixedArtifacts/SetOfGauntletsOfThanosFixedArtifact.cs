@@ -6,7 +6,7 @@ internal class SetOfGauntletsOfThanosFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private SetOfGauntletsOfThanosFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<GlovesSetOfGauntlets>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<GlovesSetOfGauntlets>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

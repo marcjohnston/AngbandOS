@@ -6,7 +6,7 @@ internal class QuarterstaffFirestaffFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private QuarterstaffFirestaffFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedQuarterstaff>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HaftedQuarterstaff>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

@@ -6,7 +6,7 @@ internal class SpearOfDestinyFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private SpearOfDestinyFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<PolearmSpear>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<PolearmSpear>();
     }
 
     // Destiny does rock to mud

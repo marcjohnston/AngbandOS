@@ -6,7 +6,7 @@ internal class TwoHandedFlailThunderfistFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private TwoHandedFlailThunderfistFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedTwoHandedFlail>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HaftedTwoHandedFlail>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

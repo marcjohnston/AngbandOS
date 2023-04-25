@@ -6,7 +6,7 @@ internal class ScimitarSoulswordFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private ScimitarSoulswordFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordScimitar>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordScimitar>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

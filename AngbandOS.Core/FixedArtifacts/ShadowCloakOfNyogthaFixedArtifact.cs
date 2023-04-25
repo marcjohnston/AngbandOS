@@ -6,7 +6,7 @@ internal class ShadowCloakOfNyogthaFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private ShadowCloakOfNyogthaFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<CloakShadow>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<CloakShadow>();
     }
 
     // Nyogtha restores experience

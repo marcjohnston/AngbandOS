@@ -3,6 +3,6 @@ namespace AngbandOS.Core.Items
 [Serializable]
     internal class GnomeSkeletonItem : SkeletonItem
     {
-        public GnomeSkeletonItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemCategories.Get<SkeletonGnomeSkeleton>()) { }
+        public GnomeSkeletonItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<SkeletonGnomeSkeleton>()) { }
     }
 }

@@ -6,7 +6,7 @@ internal class CutlassOfBlackbeardFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private CutlassOfBlackbeardFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<SwordCutlass>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordCutlass>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

@@ -57,9 +57,9 @@
 
         protected override ItemFactory[] Outfit => new ItemFactory[]
         {
-            SaveGame.SingletonRepository.ItemCategories.Get<NatureBookCallOfTheWild>(),
-            SaveGame.SingletonRepository.ItemCategories.Get<SwordBroadSword>(),
-            SaveGame.SingletonRepository.ItemCategories.Get<DeathBookBlackPrayers>()
+            SaveGame.SingletonRepository.ItemFactories.Get<NatureBookCallOfTheWild>(),
+            SaveGame.SingletonRepository.ItemFactories.Get<SwordBroadSword>(),
+            SaveGame.SingletonRepository.ItemFactories.Get<DeathBookBlackPrayers>()
         };
     }
 }

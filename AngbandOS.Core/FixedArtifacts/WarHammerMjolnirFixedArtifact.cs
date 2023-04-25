@@ -6,7 +6,7 @@ internal class WarHammerMjolnirFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private WarHammerMjolnirFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedWarHammer>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HaftedWarHammer>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

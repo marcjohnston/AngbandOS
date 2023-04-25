@@ -6,7 +6,7 @@ internal class RingOfElementalPowerFireFixedArtifact : FixedArtifact, IActivatib
     private readonly ItemFactory _baseItemCategory;
     private RingOfElementalPowerFireFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<RingNarya>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<RingNarya>();
     }
 
     // Ring of Elemental Fire casts a fireball

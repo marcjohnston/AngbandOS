@@ -6,7 +6,7 @@ internal class PairOfSoftLeatherBootsOfDancingFixedArtifact : FixedArtifact, IAc
     private readonly ItemFactory _baseItemCategory;
     private PairOfSoftLeatherBootsOfDancingFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<BootsSoftLeatherBoots>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<BootsSoftLeatherBoots>();
     }
 
     // Dancing heal poison and fear

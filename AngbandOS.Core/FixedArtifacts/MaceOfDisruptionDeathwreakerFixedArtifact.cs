@@ -6,7 +6,7 @@ internal class MaceOfDisruptionDeathwreakerFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private MaceOfDisruptionDeathwreakerFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemCategories.Get<HaftedMace>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HaftedMace>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;
