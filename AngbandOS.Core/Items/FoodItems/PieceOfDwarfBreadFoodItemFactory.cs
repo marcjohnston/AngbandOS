@@ -19,9 +19,9 @@ namespace AngbandOS.Core.ItemCategories
         public override int Pval => 7500;
         public override int? SubCategory => 41;
         public override int Weight => 3;
-        public override bool Eat(SaveGame saveGame)
+        public override bool Eat()
         {
-            saveGame.MsgPrint("You look at the dwarf bread, and don't feel quite so hungry anymore.");
+            SaveGame.MsgPrint("You look at the dwarf bread, and don't feel quite so hungry anymore.");
             return true;
         }
         public override Item CreateItem() => new PieceOfDwarfBreadFoodItem(SaveGame);

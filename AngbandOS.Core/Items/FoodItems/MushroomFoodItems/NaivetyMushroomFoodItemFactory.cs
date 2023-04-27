@@ -15,10 +15,10 @@ namespace AngbandOS.Core.ItemCategories
         public override int Pval => 500;
         public override int? SubCategory => 9;
         public override int Weight => 1;
-        public override bool Eat(SaveGame saveGame)
+        public override bool Eat()
         {
-            saveGame.Player.TakeHit(Program.Rng.DiceRoll(8, 8), "poisonous food.");
-            saveGame.Player.TryDecreasingAbilityScore(Ability.Wisdom);
+            SaveGame.Player.TakeHit(Program.Rng.DiceRoll(8, 8), "poisonous food.");
+            SaveGame.Player.TryDecreasingAbilityScore(Ability.Wisdom);
             return true;
         }
         public override Item CreateItem() => new NaivetyMushroomFoodItem(SaveGame);

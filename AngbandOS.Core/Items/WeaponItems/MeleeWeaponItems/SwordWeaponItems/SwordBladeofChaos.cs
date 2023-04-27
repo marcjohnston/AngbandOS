@@ -9,6 +9,7 @@ namespace AngbandOS.Core.ItemCategories
         public override Colour Colour => Colour.Purple;
         public override string Name => "Blade of Chaos";
 
+        public override bool Chaotic => true;
         public override int[] Chance => new int[] { 8, 0, 0, 0 };
         public override int Cost => 4000;
         public override int Dd => 6;

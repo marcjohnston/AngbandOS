@@ -9,6 +9,9 @@ namespace AngbandOS.Core.Items
         {
             return true;
         }
+
+        public override FoodItemFactory Factory => (FoodItemFactory)base.Factory;
+
         public override int GetAdditionalMassProduceCount()
         {
             int cost = Value();
@@ -22,6 +25,7 @@ namespace AngbandOS.Core.Items
             }
             return 0;
         }
+
         public override string GetDescription(bool includeCountPrefix)
         {
             return base.GetDescription(includeCountPrefix);

@@ -834,7 +834,7 @@ namespace AngbandOS.Core
             }
 
             // Get a list of all of the item classes that are considered gold.  Sort them by the cost.
-            ItemFactory[] goldItemClasses = SingletonRepository.ItemFactories.Where(_itemClass => GoldItemClass.IsGold(_itemClass)).OrderBy(_goldItemClass => _goldItemClass.Cost).ToArray();
+            ItemFactory[] goldItemClasses = SingletonRepository.ItemFactories.Where(_itemClass => _itemClass.TryCast<GoldItemClass>() != null).OrderBy(_goldItemClass => _goldItemClass.Cost).ToArray();
 
             if (goldType >= goldItemClasses.Length)
             {
@@ -11138,25 +11138,28 @@ namespace AngbandOS.Core
             {
                 return;
             }
+
             // Make sure the item is edible
-            if (!Player.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Food)))
+            FoodItem? foodItem = item.TryCast<FoodItem>();
+            if (foodItem == null)
             {
                 MsgPrint("You can't eat that!");
                 return;
             }
+
             // We don't actually eat dwarf bread
             if (item.ItemSubCategory != FoodType.Dwarfbread)
             {
                 PlaySound(SoundEffect.Eat);
             }
+
             // Eating costs 100 energy
             EnergyUse = 100;
             bool ident = false;
             int itemLevel = item.Factory.Level;
-            FoodItemFactory foodItem = (FoodItemFactory)item.Factory;
 
             // Allow the food item to process the consumption.
-            ident = foodItem.Eat(this);
+            ident = foodItem.Factory.Eat();
 
             NoticeCombineAndReorderFlaggedAction.Set();
             // We've tried this type of object
@@ -11169,7 +11172,7 @@ namespace AngbandOS.Core
             }
 
             // Now races process the sustenance.
-            Player.Race.Eat(this, item);
+            Player.Race.Eat(foodItem);
 
             // Dwarf bread isn't actually eaten so return early
             if (item.ItemSubCategory == FoodType.Dwarfbread)

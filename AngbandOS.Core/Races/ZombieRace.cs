@@ -72,11 +72,11 @@
             }
         }
         public override bool RestsTillDuskInsteadOfDawn => true;
-        public override void Eat(SaveGame saveGame, Item item)
+        public override void Eat(FoodItem item)
         {
             // This race only gets 1/20th of the food value
-            saveGame.MsgPrint("The food of mortals is poor sustenance for you.");
-            saveGame.Player.SetFood(saveGame.Player.Food + (item.TypeSpecificValue / 20));
+            SaveGame.MsgPrint("The food of mortals is poor sustenance for you.");
+            SaveGame.Player.SetFood(SaveGame.Player.Food + (item.TypeSpecificValue / 20));
         }
         public override bool CanBleed(int level) => (level > 11);
 

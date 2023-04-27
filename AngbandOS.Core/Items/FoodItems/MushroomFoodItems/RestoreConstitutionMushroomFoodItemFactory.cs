@@ -16,9 +16,9 @@ namespace AngbandOS.Core.ItemCategories
         public override int Pval => 500;
         public override int? SubCategory => 18;
         public override int Weight => 1;
-        public override bool Eat(SaveGame saveGame)
+        public override bool Eat()
         {
-            if (saveGame.Player.TryRestoringAbilityScore(Ability.Constitution))
+            if (SaveGame.Player.TryRestoringAbilityScore(Ability.Constitution))
             {
                 return true;
             }

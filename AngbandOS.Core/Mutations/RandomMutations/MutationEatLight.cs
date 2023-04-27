@@ -38,9 +38,10 @@ namespace AngbandOS.Core.Mutations.RandomMutations
             }
             int index = inventorySlot.WeightedRandom.Choose();
             Item? oPtr = saveGame.GetInventoryItem(index);
-            if (oPtr != null && oPtr.Category == ItemTypeEnum.Light)
+            if (oPtr != null)
             {
-                if ((oPtr.ItemSubCategory == LightType.Torch || oPtr.ItemSubCategory == LightType.Lantern) && oPtr.TypeSpecificValue > 0)
+                LightSourceItem? lightSourceItem = oPtr.TryCast<LightSourceItem>();
+                if (lightSourceItem != null && lightSourceItem.Factory.BurnRate > 0 && oPtr.TypeSpecificValue > 0)
                 {
                     saveGame.Player.RestoreHealth(oPtr.TypeSpecificValue / 20);
                     oPtr.TypeSpecificValue /= 2;

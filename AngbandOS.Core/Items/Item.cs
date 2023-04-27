@@ -130,6 +130,23 @@ namespace AngbandOS.Core.Items
         [Obsolete("To be deleted")]
         public int ItemSubCategory;
 
+        /// <summary>
+        /// Tests an item to determine if it belongs to an Item type and returns a the item casted into that type; or null, if the item doesn't belong to the type.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public T? TryCast<T>() where T : Item
+        {
+            if (typeof(T).IsAssignableFrom(GetType()))
+            {
+                return (T)this;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public void ReportChargeUsage()
         {
             if ((Category == ItemTypeEnum.Staff || Category == ItemTypeEnum.Wand) && IsKnown())
@@ -355,13 +372,6 @@ namespace AngbandOS.Core.Items
         }
 
         /// <summary>
-        /// Returns true, if the item belongs to a specific ItemClass.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public bool IsAnItemOf<T>() => typeof(T).IsAssignableFrom(Factory.GetType());
-
-        /// <summary>
         /// Hook into the ProcessWorld, when the item is being worn/wielded.  Does nothing, by default.
         /// </summary>
         /// <param name="saveGame"></param>
@@ -381,29 +391,28 @@ namespace AngbandOS.Core.Items
         /// <exception cref="NotImplementedException"></exception>
         public int CompareTo(Item oPtr)
         {
-            // First two levels of sort belong to spell books.
-            if (BookItemClass.IsBook(this.Factory) && BookItemClass.IsBook(oPtr.Factory))
+            // First level sort (primary realm spells books).
+            // A book that matches the first realm, will always come before a book that doesn't match the first realm.
+            BookItemClass? thisBookFactory = Factory.TryCast<BookItemClass>();
+            BookItemClass? oPtrBookFactory = oPtr.Factory.TryCast<BookItemClass>();
+            if (thisBookFactory != null && oPtrBookFactory != null)
             {
-                // First level sort (primary realm spells books).
-                // A book that matches the first realm, will always come before a book that doesn't match the first realm.
-                BookItemClass thisBook = (BookItemClass)this.Factory;
-                BookItemClass oPtrBook = (BookItemClass)oPtr.Factory;
-                if (thisBook.ToRealm == SaveGame.Player.PrimaryRealm && oPtrBook.ToRealm != SaveGame.Player.PrimaryRealm)
+                if (thisBookFactory.ToRealm == SaveGame.Player.PrimaryRealm && oPtrBookFactory.ToRealm != SaveGame.Player.PrimaryRealm)
                 {
                     return -1;
                 }
-                if (thisBook.ToRealm != SaveGame.Player.PrimaryRealm && oPtrBook.ToRealm == SaveGame.Player.PrimaryRealm)
+                if (thisBookFactory.ToRealm != SaveGame.Player.PrimaryRealm && oPtrBookFactory.ToRealm == SaveGame.Player.PrimaryRealm)
                 {
                     return 1;
                 }
 
                 // Second level sort (secondary realm spell books).
                 // A book that matches the second realm, will always come before a book that doesn't match the second realm.
-                if (thisBook.ToRealm == SaveGame.Player.SecondaryRealm && oPtrBook.ToRealm != SaveGame.Player.SecondaryRealm)
+                if (thisBookFactory.ToRealm == SaveGame.Player.SecondaryRealm && oPtrBookFactory.ToRealm != SaveGame.Player.SecondaryRealm)
                 {
                     return 1;
                 }
-                if (thisBook.ToRealm != SaveGame.Player.SecondaryRealm && oPtrBook.ToRealm == SaveGame.Player.SecondaryRealm)
+                if (thisBookFactory.ToRealm != SaveGame.Player.SecondaryRealm && oPtrBookFactory.ToRealm == SaveGame.Player.SecondaryRealm)
                 {
                     return -1;
                 }

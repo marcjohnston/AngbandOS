@@ -71,14 +71,14 @@
 
         public override bool IsDamagedByDarkness => false;
 
-        public override void Eat(SaveGame saveGame, Item item)
+        public override void Eat(FoodItem item)
         {
             // Vampires only get 1/10th of the food value
-            _ = saveGame.Player.SetFood(saveGame.Player.Food + (item.TypeSpecificValue / 10));
-            saveGame.MsgPrint("Mere victuals hold scant sustenance for a being such as yourself.");
-            if (saveGame.Player.Food < Constants.PyFoodAlert)
+            SaveGame.Player.SetFood(SaveGame.Player.Food + (item.TypeSpecificValue / 10));
+            SaveGame.MsgPrint("Mere victuals hold scant sustenance for a being such as yourself.");
+            if (SaveGame.Player.Food < Constants.PyFoodAlert)
             {
-                saveGame.MsgPrint("Your hunger can only be satisfied with fresh blood!");
+                SaveGame.MsgPrint("Your hunger can only be satisfied with fresh blood!");
             }
         }
 

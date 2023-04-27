@@ -62,11 +62,10 @@
             SaveGame.SingletonRepository.ItemFactories.Get<DeathBookBlackPrayers>()
         };
 
-        public override void UpdateBonusesForMeleeWeapon(Item oPtr)
+        public override void UpdateBonusesForMeleeWeapon(Item? oPtr)
         {
-            // Cultists that are NOT wielding the blade of chaos lose bonuses for being an unpriestly weapon.
-            // todo: this should by characterclass
-            if (oPtr.Factory != null && !oPtr.IsAnItemOf<SwordBladeOfChaos>())
+            // Cultists that are NOT wielding the a blade of chaos lose bonuses for being an unpriestly weapon.
+            if (oPtr != null)
             {
                 oPtr.RefreshFlagBasedProperties();
                 if (!oPtr.Characteristics.Chaotic)

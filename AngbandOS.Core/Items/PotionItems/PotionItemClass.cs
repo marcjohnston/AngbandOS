@@ -21,10 +21,6 @@
         /// <returns> True, if drinking the potion identified it; false, to keep the potion as unidentified.</returns>
         public abstract bool Quaff(SaveGame saveGame);
 
-        public static bool IsPotion(ItemFactory itemClass)
-        {
-            return typeof(PotionItemClass).IsAssignableFrom(itemClass.GetType());
-        }
         /// <summary>
         /// Perform a smash effect for the potion.
         /// </summary>

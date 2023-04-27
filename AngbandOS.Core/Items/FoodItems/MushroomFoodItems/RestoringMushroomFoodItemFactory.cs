@@ -16,30 +16,30 @@ namespace AngbandOS.Core.ItemCategories
         public override int Pval => 500;
         public override int? SubCategory => 19;
         public override int Weight => 1;
-        public override bool Eat(SaveGame saveGame)
+        public override bool Eat()
         {
             bool ident = false;
-            if (saveGame.Player.TryRestoringAbilityScore(Ability.Strength))
+            if (SaveGame.Player.TryRestoringAbilityScore(Ability.Strength))
             {
                 ident = true;
             }
-            if (saveGame.Player.TryRestoringAbilityScore(Ability.Intelligence))
+            if (SaveGame.Player.TryRestoringAbilityScore(Ability.Intelligence))
             {
                 ident = true;
             }
-            if (saveGame.Player.TryRestoringAbilityScore(Ability.Wisdom))
+            if (SaveGame.Player.TryRestoringAbilityScore(Ability.Wisdom))
             {
                 ident = true;
             }
-            if (saveGame.Player.TryRestoringAbilityScore(Ability.Dexterity))
+            if (SaveGame.Player.TryRestoringAbilityScore(Ability.Dexterity))
             {
                 ident = true;
             }
-            if (saveGame.Player.TryRestoringAbilityScore(Ability.Constitution))
+            if (SaveGame.Player.TryRestoringAbilityScore(Ability.Constitution))
             {
                 ident = true;
             }
-            if (saveGame.Player.TryRestoringAbilityScore(Ability.Charisma))
+            if (SaveGame.Player.TryRestoringAbilityScore(Ability.Charisma))
             {
                 ident = true;
             }

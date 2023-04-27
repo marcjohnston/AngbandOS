@@ -9,11 +9,6 @@ namespace AngbandOS.Core.Items
         public override int PercentageBreakageChance => 50;
 
         /// <summary>
-        /// Returns the number of turns of light that is consumed for each world turn.  Default to zero.
-        /// </summary>
-        public virtual int BurnRate => 0;
-
-        /// <summary>
         /// Returns an intensity of 3, if the item is an artifact; otherwise, 0 is returned.
         /// </summary>
         /// <param name="oPtr"></param>

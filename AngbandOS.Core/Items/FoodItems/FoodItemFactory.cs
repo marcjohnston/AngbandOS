@@ -10,7 +10,8 @@
         public override int BaseValue => 5;
         //public override bool CanBeConsumed => true;
         public override Colour Colour => Colour.Green;
+        public virtual bool VanishesWhenEatenBySkeletons => false;
 
-        public abstract bool Eat(SaveGame saveGame);
+        public abstract bool Eat();
     }
 }

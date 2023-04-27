@@ -18,20 +18,25 @@ namespace AngbandOS.Core.ItemCategories
         public override int[] Locale => new int[] { 50, 0, 0, 0 };
         public override int? SubCategory => 40;
         public override int Weight => 1;
-        public override bool Eat(SaveGame saveGame)
+        public override bool Eat()
         {
-            saveGame.MsgPrint("That tastes... funky.");
-            saveGame.Player.Dna.GainMutation();
+            SaveGame.MsgPrint("That tastes... funky.");
+            SaveGame.Player.Dna.GainMutation();
             if (Program.Rng.DieRoll(3) == 1)
             {
-                saveGame.Player.Dna.GainMutation();
+                SaveGame.Player.Dna.GainMutation();
             }
             if (Program.Rng.DieRoll(3) == 1)
             {
-                saveGame.Player.Dna.GainMutation();
+                SaveGame.Player.Dna.GainMutation();
             }
             return true;
         }
+
+        /// <summary>
+        /// Returns true because warpstones vanish when a skeleton tries to eat it.
+        /// </summary>
+        public override bool VanishesWhenEatenBySkeletons => true;
         public override Item CreateItem() => new PieceOfWarpstoneFoodItem(SaveGame);
     }
 }

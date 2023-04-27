@@ -14,9 +14,9 @@ namespace AngbandOS.Core.ItemCategories
         public override int Pval => 500;
         public override int? SubCategory => 32;
         public override int Weight => 2;
-        public override bool Eat(SaveGame saveGame)
+        public override bool Eat()
         {
-            saveGame.MsgPrint("That tastes good.");
+            SaveGame.MsgPrint("That tastes good.");
             return true;
         }
 
@@ -24,6 +24,11 @@ namespace AngbandOS.Core.ItemCategories
         {
             base.ApplyFlavourVisuals();
         }
+
+        /// <summary>
+        /// Returns true because biscuits vanish when a skeleton tries to eat it.
+        /// </summary>
+        public override bool VanishesWhenEatenBySkeletons => true;
 
         public override Item CreateItem() => new HardBiscuitFoodItem(SaveGame);
     }

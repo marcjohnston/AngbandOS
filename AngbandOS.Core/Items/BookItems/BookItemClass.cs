@@ -9,11 +9,6 @@
         /// </summary>
         public override bool EasyKnow => true;
 
-        public static bool IsBook(ItemFactory itemClass)
-        {
-            return typeof(BookItemClass).IsAssignableFrom(itemClass.GetType());
-        }
-
         public abstract BaseRealm? ToRealm { get; }
     }
 }

@@ -18,10 +18,10 @@ namespace AngbandOS.Core.ItemCategories
         public override int? SubCategory => 6;
         public override int Weight => 1;
 
-        public override bool Eat(SaveGame saveGame)
+        public override bool Eat()
         {
-            saveGame.Player.TakeHit(Program.Rng.DiceRoll(6, 6), "poisonous food.");
-            saveGame.Player.TryDecreasingAbilityScore(Ability.Strength);
+            SaveGame.Player.TakeHit(Program.Rng.DiceRoll(6, 6), "poisonous food.");
+            SaveGame.Player.TryDecreasingAbilityScore(Ability.Strength);
             return true;
         }
         public override Item CreateItem() => new WeaknessMushroomFoodItem(SaveGame);

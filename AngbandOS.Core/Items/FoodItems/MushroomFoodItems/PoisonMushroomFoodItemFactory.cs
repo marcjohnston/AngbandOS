@@ -18,16 +18,16 @@ namespace AngbandOS.Core.ItemCategories
         public override int? SubCategory => 0;
         public override int Weight => 1;
 
-        public override bool Eat(SaveGame saveGame)
+        public override bool Eat()
         {
-            if (!(saveGame.Player.HasPoisonResistance || saveGame.Player.TimedPoisonResistance.TurnsRemaining != 0))
+            if (!(SaveGame.Player.HasPoisonResistance || SaveGame.Player.TimedPoisonResistance.TurnsRemaining != 0))
             {
                 // Hagarg Ryonis may protect us from poison
-                if (Program.Rng.DieRoll(10) <= saveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+                if (Program.Rng.DieRoll(10) <= SaveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
                 {
-                    saveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
+                    SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
                 }
-                else if (saveGame.Player.TimedPoison.AddTimer(Program.Rng.RandomLessThan(10) + 10))
+                else if (SaveGame.Player.TimedPoison.AddTimer(Program.Rng.RandomLessThan(10) + 10))
                 {
                     return true;
                 }

@@ -127,10 +127,10 @@
         /// </summary>
         /// <param name="saveGame"></param>
         /// <param name="item"></param>
-        public virtual void Eat(SaveGame saveGame, Item item)
+        public virtual void Eat(FoodItem item)
         {
             // Everyone else gets the full value
-            saveGame.Player.SetFood(saveGame.Player.Food + item.TypeSpecificValue);
+            SaveGame.Player.SetFood(SaveGame.Player.Food + item.TypeSpecificValue);
         }
 
         /// <summary>

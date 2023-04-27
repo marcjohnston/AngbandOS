@@ -17,10 +17,10 @@ namespace AngbandOS.Core.ItemCategories
         public override int Pval => 3000;
         public override int? SubCategory => 36;
         public override int Weight => 5;
-        public override bool Eat(SaveGame saveGame)
+        public override bool Eat()
         {
-            PotionItemClass slimeMold = (PotionItemClass)saveGame.SingletonRepository.ItemFactories.Get<PotionSlimeMoldJuice>();
-            slimeMold.Quaff(saveGame);
+            PotionItemClass slimeMold = (PotionItemClass)SaveGame.SingletonRepository.ItemFactories.Get<PotionSlimeMoldJuice>();
+            slimeMold.Quaff(SaveGame);
             return true;
         }
         public override Item CreateItem() => new SlimeMoldFoodItem(SaveGame);

@@ -16,11 +16,11 @@ namespace AngbandOS.Core.ItemCategories
         public override int? SubCategory => 2;
         public override int Weight => 1;
 
-        public override bool Eat(SaveGame saveGame)
+        public override bool Eat()
         {
-            if (!saveGame.Player.HasFearResistance)
+            if (!SaveGame.Player.HasFearResistance)
             {
-                if (saveGame.Player.TimedFear.AddTimer(Program.Rng.RandomLessThan(10) + 10))
+                if (SaveGame.Player.TimedFear.AddTimer(Program.Rng.RandomLessThan(10) + 10))
                 {
                     return true;
                 }

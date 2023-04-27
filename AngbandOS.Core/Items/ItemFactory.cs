@@ -278,6 +278,23 @@
         [Obsolete("To be deleted")]
         public abstract int? SubCategory { get; }
 
+        /// <summary>
+        /// Tests an item to determine if it belongs to an Item type and returns a the item casted into that type; or null, if the item doesn't belong to the type.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public T? TryCast<T>() where T : ItemFactory
+        {
+            if (typeof(T).IsAssignableFrom(GetType()))
+            {
+                return (T)this;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public virtual bool SustCha { get; set; } = false;
         public virtual bool SustCon { get; set; } = false;
         public virtual bool SustDex { get; set; } = false;

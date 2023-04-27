@@ -22,6 +22,8 @@ namespace AngbandOS.Core.Items
             return includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
         }
 
+        public override BookItemClass Factory => (BookItemClass)base.Factory;
+
         public BookItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
         public override int GetAdditionalMassProduceCount()
         {

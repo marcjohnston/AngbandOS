@@ -69,20 +69,21 @@
         }
         public override bool RestsTillDuskInsteadOfDawn => true;
 
-        public override void Eat(SaveGame saveGame, Item item)
+        // Skeletons get no food sustenance
+        public override void Eat(FoodItem item)
         {
-            // Skeletons get no food sustenance
-            if (!(item.ItemSubCategory == FoodType.Waybread || item.ItemSubCategory == FoodType.Warpstone || item.ItemSubCategory < FoodType.Biscuit))
+            // Check to see if the food item is a waybread, warpstones or a biscuit.
+            if (item.Factory.VanishesWhenEatenBySkeletons)
             {
-                // Spawn a new food item on the floor to make up for the one that will be destroyed
-                Item floorItem = item.Factory.CreateItem();
-                saveGame.MsgPrint("The food falls through your jaws!");
-                saveGame.Level.DropNear(floorItem, -1, saveGame.Player.MapY, saveGame.Player.MapX);
+                // These magical food types vanish.
+                SaveGame.MsgPrint("The food falls through your jaws and vanishes!");
             }
             else
             {
-                // But some magical types work anyway and then vanish
-                saveGame.MsgPrint("The food falls through your jaws and vanishes!");
+                // Spawn a new food item on the floor to make up for the one that will be destroyed
+                Item floorItem = item.Factory.CreateItem();
+                SaveGame.MsgPrint("The food falls through your jaws!");
+                SaveGame.Level.DropNear(floorItem, -1, SaveGame.Player.MapY, SaveGame.Player.MapX);
             }
         }
 

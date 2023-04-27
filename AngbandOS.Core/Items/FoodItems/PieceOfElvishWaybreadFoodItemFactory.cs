@@ -17,13 +17,19 @@ namespace AngbandOS.Core.ItemCategories
         public override int Pval => 7500;
         public override int? SubCategory => 37;
         public override int Weight => 3;
-        public override bool Eat(SaveGame saveGame)
+        public override bool Eat()
         {
-            saveGame.MsgPrint("That tastes good.");
-            saveGame.Player.TimedPoison.ResetTimer();
-            saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8));
+            SaveGame.MsgPrint("That tastes good.");
+            SaveGame.Player.TimedPoison.ResetTimer();
+            SaveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8));
             return true;
         }
+
+        /// <summary>
+        /// Returns true because waybread vanishes when a skeleton tries to eat it.
+        /// </summary>
+        public override bool VanishesWhenEatenBySkeletons => true;
+        
         public override Item CreateItem() => new PieceOfElvishWaybreadFoodItem(SaveGame);
     }
 }
