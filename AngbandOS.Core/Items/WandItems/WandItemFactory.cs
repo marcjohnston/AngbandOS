@@ -1,9 +1,9 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class WandItemClass : ItemFactory, IFlavour
+    internal abstract class WandItemFactory : ItemFactory, IFlavour
     {
-        public WandItemClass(SaveGame saveGame) : base(saveGame) { }
+        public WandItemFactory(SaveGame saveGame) : base(saveGame) { }
 
         /// <summary>
         /// Returns the want flavours repository because wands have flavours that need to be identified.

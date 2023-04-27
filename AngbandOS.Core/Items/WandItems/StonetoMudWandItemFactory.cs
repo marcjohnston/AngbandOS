@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class WandStoneToMud : WandItemClass
+    internal class StonetoMudWandItemFactory : WandItemFactory
     {
-        private WandStoneToMud(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private StonetoMudWandItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '-';
         public override string Name => "Stone to Mud";

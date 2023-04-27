@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class WandTeleportOther : WandItemClass
+    internal class TeleportOtherWandItemFactory : WandItemFactory
     {
-        private WandTeleportOther(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private TeleportOtherWandItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '-';
         public override string Name => "Teleport Other";
