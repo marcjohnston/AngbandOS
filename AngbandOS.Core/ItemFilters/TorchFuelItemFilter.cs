@@ -7,7 +7,7 @@
     {
         public override bool ItemMatches(Item item)
         {
-            return item.Category == ItemTypeEnum.Light && item.ItemSubCategory == LightType.Torch;
+            return item.IsFuelForTorch;
         }
     }
 }

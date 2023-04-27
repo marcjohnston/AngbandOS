@@ -3,6 +3,10 @@ namespace AngbandOS.Core.Items
     [Serializable]
     internal abstract class Item : IComparable<Item> // TODO: Should be abstract
     {
+        /// <summary>
+        /// Returns true, if the item can be used as fuel for a torch.
+        /// </summary>
+        public virtual bool IsFuelForTorch => false;
 
         /// <summary>
         /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.
@@ -122,7 +126,9 @@ namespace AngbandOS.Core.Items
         public FixedArtifact? FixedArtifact; // If this item is a fixed artifact, this will be not null.
         public int HoldingMonsterIndex;
         public string Inscription = "";
-        public int ItemSubCategory; // TODO: Deprecated.  Needs to be deleted.
+
+        [Obsolete("To be deleted")]
+        public int ItemSubCategory;
 
         public void ReportChargeUsage()
         {
@@ -289,7 +295,7 @@ namespace AngbandOS.Core.Items
         }
 
         /// <summary>
-        /// Returns the item type that this item is based on.
+        /// Returns the factory that created this item.
         /// </summary>
         public readonly ItemFactory Factory;
 

@@ -10,6 +10,9 @@
         /// </summary>
         public IEnumerable<Flavour> Flavours => SaveGame.SingletonRepository.ScrollFlavours;
 
+        /// <inheritdoc/>
+        public Flavour Flavour { get; set; }
+
         public override bool EasyKnow => true;
         public override int PackSort => 12;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Scroll;

@@ -52,12 +52,14 @@
         /// Returns the character to be displayed for items of this type.  This character is initially set from the BaseItemCategory, but item categories
         /// that have flavor may override this character and replace it with a different character from the flavor.
         /// </summary>
+        [Obsolete("This property is available via the IFlavour.Flavour property.")]
         public char FlavorCharacter;
 
         /// <summary>
         /// Returns the color to be used for items of this type.  This color is initially set from the BaseItemCategory, but item categories
         /// that have flavor may override this color and replace it with a different color from the flavor.
         /// </summary>
+        [Obsolete("This property is available via the IFlavour.Flavour property.")]
         public Colour FlavorColour;
 
         /// <summary>

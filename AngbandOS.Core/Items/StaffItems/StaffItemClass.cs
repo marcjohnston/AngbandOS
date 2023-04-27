@@ -10,6 +10,9 @@
         /// </summary>
         public IEnumerable<Flavour> Flavours => SaveGame.SingletonRepository.StaffFlavours;
 
+        /// <inheritdoc/>
+        public Flavour Flavour { get; set; }
+
         /// <summary>
         /// Executes the staff action.  Returns true, if the usage identifies the staff.
         /// </summary>

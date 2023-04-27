@@ -9,5 +9,10 @@
         /// Returns the repository to use for the issuance of the flavours.
         /// </summary>
         IEnumerable<Flavour> Flavours { get; }
+
+        /// <summary>
+        /// Returns the flavour that was issued to the item factory.
+        /// </summary>
+        Flavour Flavour { get; set; }
     }
 }

@@ -2140,6 +2140,7 @@ namespace AngbandOS.Core
                     Flavour flavour = flavourEnumerator.Current;
 
                     // Assign the flavour details.
+                    flavourFactory.Flavour = flavour;
                     kPtr.FlavorCharacter = flavour.Character;
                     kPtr.FlavorColour = flavour.Colour;
                 }

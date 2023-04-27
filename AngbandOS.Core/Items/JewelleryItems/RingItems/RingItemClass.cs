@@ -10,6 +10,9 @@
         /// </summary>
         public IEnumerable<Flavour> Flavours => SaveGame.SingletonRepository.RingFlavours;
 
+        /// <inheritdoc/>
+        public Flavour Flavour { get; set; }
+
         public override BaseInventorySlot BaseWieldSlot
         {
             get

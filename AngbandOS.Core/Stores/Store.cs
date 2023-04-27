@@ -541,10 +541,9 @@ namespace AngbandOS.Core.Stores
         {
             int num = 0;
             int[] spells = new int[64];
-            int sval = oPtr.ItemSubCategory;
             for (int spell = 0; spell < 32; spell++)
             {
-                if ((Constants.BookSpellFlags[sval] & (1u << spell)) != 0)
+                if ((Constants.BookSpellFlags[oPtr.ItemSubCategory] & (1u << spell)) != 0)
                 {
                     spells[num++] = spell;
                 }

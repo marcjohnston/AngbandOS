@@ -6,6 +6,11 @@ namespace AngbandOS.Core.Items
         public WoodenTorchLightSourceItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<WoodenTorchLightSourceItemFactory>()) { }
 
         /// <summary>
+        /// Returns true because a torch can be used as fuel for another torch.
+        /// </summary>
+        public override bool IsFuelForTorch => true;
+
+        /// <summary>
         /// Returns 1 because wooden torches consume a single turn of light for every world turn.
         /// </summary>
         public override int BurnRate => 1;

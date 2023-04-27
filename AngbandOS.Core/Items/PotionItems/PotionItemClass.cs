@@ -10,6 +10,9 @@
         /// </summary>
         public IEnumerable<Flavour> Flavours => SaveGame.SingletonRepository.PotionFlavours;
 
+        /// <inheritdoc/>
+        public Flavour Flavour { get; set; }
+
         public override bool EasyKnow => true;
         public override int PackSort => 11;
         /// <summary>

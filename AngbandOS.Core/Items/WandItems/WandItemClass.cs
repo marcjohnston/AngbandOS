@@ -10,6 +10,9 @@
         /// </summary>
         public IEnumerable<Flavour> Flavours => SaveGame.SingletonRepository.WandFlavours;
 
+        /// <inheritdoc/>
+        public Flavour Flavour { get; set; }
+
         public override int PackSort => 14;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Wand;
         public abstract bool ExecuteActivation(SaveGame saveGame, int dir);
