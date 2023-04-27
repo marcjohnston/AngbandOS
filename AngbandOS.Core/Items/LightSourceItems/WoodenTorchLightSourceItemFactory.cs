@@ -5,6 +5,11 @@ namespace AngbandOS.Core.ItemCategories
     {
         private WoodenTorchLightSourceItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
+        /// <summary>
+        /// Returns 1 because wooden torches consume a single turn of light for every world turn.
+        /// </summary>
+        public override int BurnRate => 1;
+
         public override char Character => '~';
         public override Colour Colour => Colour.Brown;
         public override string Name => "Wooden Torch";
@@ -68,5 +73,10 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.UpdateTorchRadiusFlaggedAction.Set();
         }
         public override Item CreateItem() => new WoodenTorchLightSourceItem(SaveGame);
+
+        /// <summary>
+        /// Returns a radius of 1 because a torch provides light shorter than the default 2 radius for a typical light source.
+        /// </summary>
+        public override int Radius => 1;
     }
 }

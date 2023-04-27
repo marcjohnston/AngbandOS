@@ -3,6 +3,11 @@ namespace AngbandOS.Core.Items
 [Serializable]
     internal abstract class BowWeaponItem : WeaponItem
     {
+        /// <summary>
+        /// Returns the factory that created this bow weapon item.
+        /// </summary>
+        public override BowWeaponItemFactory Factory => (BowWeaponItemFactory)base.Factory;
+
         public override void ApplyRandomSlaying(ref IArtifactBias artifactBias)
         {
             if (artifactBias != null)
@@ -87,7 +92,7 @@ namespace AngbandOS.Core.Items
         {
             string basenm = "";
             RefreshFlagBasedProperties();
-            int power = ItemSubCategory % 10;
+            int power = Factory.MissileDamageMultiplier;
             if (Factory.XtraMight)
             {
                 power++;

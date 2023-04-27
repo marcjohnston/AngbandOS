@@ -126,23 +126,21 @@ namespace AngbandOS.Core.Items
             }
         }
 
+        /// <summary>
+        /// Returns the factory that created this light source item.
+        /// </summary>
+        public override LightSourceItemFactory Factory => (LightSourceItemFactory)base.Factory;
+
         public override string Identify()
         {
             if (FixedArtifact != null)
             {
                 return "It provides light (radius 3) forever.";
             }
-            else if (ItemSubCategory == LightType.Lantern)
-            {
-                return "It provides light (radius 2) when fueled.";
-            }
-            else if (ItemSubCategory == LightType.Torch)
-            {
-                return "It provides light (radius 1) when fueled.";
-            }
             else
             {
-                return "It provides light (radius 2) forever.";
+                string burnRate = Factory.BurnRate == 0 ? "forever" : "when fueled";
+                return $"It provides light (radius {Factory.Radius}) {burnRate}.";
             }
         }
         protected override bool FactoryCanAbsorbItem(Item other)
@@ -179,7 +177,7 @@ namespace AngbandOS.Core.Items
         public override string GetVerboseDescription()
         {
             string s = "";
-            if (ItemSubCategory == LightType.Torch || ItemSubCategory == LightType.Lantern)
+            if (Factory.BurnRate > 0)
             {
                 s += $" (with {TypeSpecificValue} {Pluralize("turn", TypeSpecificValue)} of light)";
             }

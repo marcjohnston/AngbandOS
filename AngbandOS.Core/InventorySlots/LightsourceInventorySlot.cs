@@ -40,10 +40,10 @@ namespace AngbandOS.Core.InventorySlots
                 LightSourceItem? oPtr = (LightSourceItem?)SaveGame.GetInventoryItem(index);
                 if (oPtr != null && oPtr.Category == ItemTypeEnum.Light)
                 {
-                    if (oPtr.BurnRate > 0 && oPtr.TypeSpecificValue > 0)
+                    if (oPtr.Factory.BurnRate > 0 && oPtr.TypeSpecificValue > 0)
                     {
                         hadLight = true;
-                        oPtr.TypeSpecificValue -= oPtr.BurnRate;
+                        oPtr.TypeSpecificValue -= oPtr.Factory.BurnRate;
 
                         // If the player is blind, do not allow the light to go out completely.
                         if (SaveGame.Player.TimedBlindness.TurnsRemaining != 0)

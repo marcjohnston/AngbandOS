@@ -297,7 +297,12 @@ namespace AngbandOS.Core.Items
         /// <summary>
         /// Returns the factory that created this item.
         /// </summary>
-        public readonly ItemFactory Factory;
+        private readonly ItemFactory _factory;
+
+        /// <summary>
+        /// Returns the factory that created this item.
+        /// </summary>
+        public virtual ItemFactory Factory => _factory;
 
         public bool Marked;
 
@@ -328,7 +333,7 @@ namespace AngbandOS.Core.Items
         public Item(SaveGame saveGame, ItemFactory factory)
         {
             SaveGame = saveGame;
-            Factory = factory;
+            _factory = factory;
             ItemSubCategory = Factory.SubCategory ?? 0;
             TypeSpecificValue = Factory.Pval;
             Count = 1;

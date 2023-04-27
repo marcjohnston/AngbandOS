@@ -6,6 +6,12 @@ namespace AngbandOS.Core.ItemCategories
         private BrassLanternLightSourceItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         /// <summary>
+        /// Returns 1 because a latern consumes a turn of light for every world turn.
+        /// </summary>
+        public override int BurnRate => 1;
+
+
+        /// <summary>
         /// Returns true because a lantern contains oil which is valid as fuel for other lanterns.
         /// </summary>
         public override bool IsFuelForLantern => true;

@@ -16,5 +16,15 @@
             saveGame.MsgPrint("Your light cannot be refilled.");
         }
 
+        /// <summary>
+        /// Returns the number of turns of light that consumeds for each world turn.  Defaults to zero; which means there is no consumption and that the light source lasts forever.
+        /// Torches and laterns have burn rates greater than zero.
+        /// </summary>
+        public virtual int BurnRate => 0;
+
+        /// <summary>
+        /// Returns the radius that the light source illuminates.  Default radius is 2.
+        /// </summary>
+        public virtual int Radius => 2;
     }
 }
