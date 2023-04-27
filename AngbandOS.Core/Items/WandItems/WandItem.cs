@@ -21,9 +21,15 @@ namespace AngbandOS.Core.Items
             }
             return true;
         }
+
+        /// <summary>
+        /// Returns the factory that this item was created by; casted as an IFlavour.
+        /// </summary>
+        public IFlavour FlavourFactory => (IFlavour)Factory;
+
         public override string GetDescription(bool includeCountPrefix)
         {
-            string flavour = IdentStoreb ? "" : $"{SaveGame.SingletonRepository.WandFlavours[ItemSubCategory].Name} ";
+            string flavour = IdentStoreb ? "" : $"{FlavourFactory.Flavour.Name} ";
             string ofName = IsFlavourAware() ? $" of {Factory.FriendlyName}" : "";
             string name = $"{flavour}{Pluralize("Wand", Count)}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;

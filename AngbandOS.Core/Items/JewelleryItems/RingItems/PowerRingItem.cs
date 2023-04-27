@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Items
             {
                 return base.GetDescription(includeCountPrefix);
             }
-            string flavour = IdentStoreb ? "" : $"{SaveGame.SingletonRepository.RingFlavours[ItemSubCategory].Name} ";
+            string flavour = IdentStoreb ? "" : $"{FlavourFactory.Flavour.Name} ";
             if (!IsFlavourAware())
             {
                 flavour = "Plain Gold ";

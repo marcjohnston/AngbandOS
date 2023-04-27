@@ -22,9 +22,15 @@ namespace AngbandOS.Core.Items
             }
             return 0;
         }
+
+        /// <summary>
+        /// Returns the factory that this item was created by; casted as an IFlavour.
+        /// </summary>
+        public IFlavour FlavourFactory => (IFlavour)Factory;
+
         public override string GetDescription(bool includeCountPrefix)
         {
-            string flavour = IdentStoreb ? "" : $" titled \"{SaveGame.ScrollFlavours[ItemSubCategory].Name}\"";
+            string flavour = IdentStoreb ? "" : $" titled \"{FlavourFactory.Flavour.Name}\"";
             string ofName = IsFlavourAware() ? $" of {Factory.FriendlyName}" : "";
             string name = $"{Pluralize("Scroll", Count)}{flavour}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;

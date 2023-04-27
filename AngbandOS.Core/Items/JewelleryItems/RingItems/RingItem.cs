@@ -3,6 +3,11 @@ namespace AngbandOS.Core.Items
 [Serializable]
     internal abstract class RingItem : JewelleryItem
     {
+        /// <summary>
+        /// Returns the factory that this item was created by; casted as an IFlavour.
+        /// </summary>
+        public IFlavour FlavourFactory => (IFlavour)Factory;
+
         public override int WieldSlot
         {
             get
@@ -21,7 +26,7 @@ namespace AngbandOS.Core.Items
             {
                 return base.GetDescription(includeCountPrefix);
             }
-            string flavour = IdentStoreb ? "" : $"{SaveGame.SingletonRepository.RingFlavours[ItemSubCategory].Name} ";
+            string flavour = IdentStoreb ? "" : $"{FlavourFactory.Flavour.Name} ";
             string ofName = IsFlavourAware() ? $" of {Factory.FriendlyName}" : "";
             string name = $"{flavour}{Pluralize("Ring", Count)}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
