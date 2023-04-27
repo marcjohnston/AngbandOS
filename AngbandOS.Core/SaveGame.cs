@@ -12238,7 +12238,7 @@ namespace AngbandOS.Core
                 return;
             }
             PlaySound(SoundEffect.ZapRod);
-            WandItemClass activateableItem = (WandItemClass)item.Factory;
+            WandItemFactory activateableItem = (WandItemFactory)item.Factory;
             if (activateableItem.ExecuteActivation(this, dir))
             {
                 ident = true;

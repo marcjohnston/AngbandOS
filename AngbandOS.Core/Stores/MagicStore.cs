@@ -71,13 +71,13 @@
                 new StockStoreInventoryItem(typeof(StaffTeleportation), 3),
                 new StockStoreInventoryItem(typeof(StaffTrapLocation)),
                 new StockStoreInventoryItem(typeof(StaffTreasureLocation)),
-                new StockStoreInventoryItem(typeof(WandConfuseMonster)),
-                new StockStoreInventoryItem(typeof(WandDisarming)),
-                new StockStoreInventoryItem(typeof(WandMagicMissile)),
-                new StockStoreInventoryItem(typeof(WandSleepMonster)),
-                new StockStoreInventoryItem(typeof(WandSlowMonster)),
-                new StockStoreInventoryItem(typeof(WandStinkingCloud)),
-                new StockStoreInventoryItem(typeof(WandWonder)),
+                new StockStoreInventoryItem(typeof(ConfuseMonsterWandItemFactory)),
+                new StockStoreInventoryItem(typeof(DisarmingWandItemFactory)),
+                new StockStoreInventoryItem(typeof(MagicMissileWandItemFactory)),
+                new StockStoreInventoryItem(typeof(SleepMonsterWandItemFactory)),
+                new StockStoreInventoryItem(typeof(SlowMonsterWandItemFactory)),
+                new StockStoreInventoryItem(typeof(StinkingCloudWandItemFactory)),
+                new StockStoreInventoryItem(typeof(WonderWandItemFactory)),
             };
         }
 
@@ -95,7 +95,7 @@
                 case AmuletJeweleryItemFactory _:
                 case RingItemClass _:
                 case StaffItemClass _:
-                case WandItemClass _:
+                case WandItemFactory _:
                 case RodItemClass _:
                 case ScrollItemClass _:
                 case PotionItemClass _:

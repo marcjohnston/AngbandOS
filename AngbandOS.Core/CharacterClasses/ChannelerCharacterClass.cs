@@ -44,7 +44,7 @@
 
         protected override ItemFactory[] Outfit => new ItemFactory[]
         {
-            SaveGame.SingletonRepository.ItemFactories.Get<WandMagicMissile>(),
+            SaveGame.SingletonRepository.ItemFactories.Get<MagicMissileWandItemFactory>(),
             SaveGame.SingletonRepository.ItemFactories.Get<SwordDagger>(),
             SaveGame.SingletonRepository.ItemFactories.Get<RingSustainCharisma>()
        };

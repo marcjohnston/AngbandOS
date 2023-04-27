@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class WandFireBalls : WandItemClass
+    internal class WandFireBalls : WandItemFactory
     {
         private WandFireBalls(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
