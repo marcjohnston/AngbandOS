@@ -43,10 +43,10 @@
         {
             return new[]
             {
-                new StockStoreInventoryItem(typeof(AmuletCharisma)),
-                new StockStoreInventoryItem(typeof(AmuletResistAcid)),
-                new StockStoreInventoryItem(typeof(AmuletSearching)),
-                new StockStoreInventoryItem(typeof(AmuletSlowDigestion)),
+                new StockStoreInventoryItem(typeof(CharismaAmuletJeweleryItemFactory)),
+                new StockStoreInventoryItem(typeof(ResistAcidAmuletJeweleryItemFactory)),
+                new StockStoreInventoryItem(typeof(SearchingAmuletJeweleryItemFactory)),
+                new StockStoreInventoryItem(typeof(SlowDigestionAmuletJeweleryItemFactory)),
                 new StockStoreInventoryItem(typeof(FolkBookCantripsforBeginners), 2),
                 new StockStoreInventoryItem(typeof(FolkBookMagicksOfMastery), 2),
                 new StockStoreInventoryItem(typeof(FolkBookMajorMagicks), 2),
@@ -92,7 +92,7 @@
                 case TarotBookItemClass _:
                 case FolkBookItemClass _:
                 case CorporealBookItemClass _:
-                case AmuletItemClass _:
+                case AmuletJeweleryItemFactory _:
                 case RingItemClass _:
                 case StaffItemClass _:
                 case WandItemClass _:

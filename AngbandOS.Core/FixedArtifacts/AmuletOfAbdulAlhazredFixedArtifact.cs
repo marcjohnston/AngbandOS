@@ -6,7 +6,7 @@ internal class AmuletOfAbdulAlhazredFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private AmuletOfAbdulAlhazredFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<AmuletIngwe>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<IngweAmuletJeweleryItemFactory>();
     }
 
     // Amulet of Abdul Alhazred dispels evil

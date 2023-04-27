@@ -6,7 +6,7 @@ internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : FixedArtifact, IA
     private readonly ItemFactory _baseItemCategory;
     private AugmentedChainMailOfTheOgreLordsFixedArtifact(SaveGame saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<AmuletBrilliance>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<BrillianceAmuletJeweleryItemFactory>();
     }
 
     // Ogre Lords destroys doors

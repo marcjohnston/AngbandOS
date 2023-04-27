@@ -1,9 +1,15 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class PotionItemClass : ItemFactory
+    internal abstract class PotionItemClass : ItemFactory, IFlavour
     {
         public PotionItemClass(SaveGame saveGame) : base(saveGame) { }
+
+        /// <summary>
+        /// Returns the potions flavours repository because potions have flavours that need to be identified.
+        /// </summary>
+        public IEnumerable<Flavour> Flavours => SaveGame.SingletonRepository.PotionFlavours;
+
         public override bool EasyKnow => true;
         public override int PackSort => 11;
         /// <summary>
@@ -16,7 +22,6 @@
         {
             return typeof(PotionItemClass).IsAssignableFrom(itemClass.GetType());
         }
-        public override bool HasFlavor => true;
         /// <summary>
         /// Perform a smash effect for the potion.
         /// </summary>

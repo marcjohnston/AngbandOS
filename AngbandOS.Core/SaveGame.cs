@@ -2111,54 +2111,37 @@ namespace AngbandOS.Core
 
         private void ApplyFlavourVisuals()
         {
+            Dictionary<Type, IEnumerator<Flavour>> currentFlavourIndex = new Dictionary<Type, IEnumerator<Flavour>>();
             foreach (ItemFactory kPtr in SingletonRepository.ItemFactories)
             {
                 if (kPtr.HasFlavor)
                 {
-                    //kPtr.ApplyFlavourVisuals();
-                    int indexx = kPtr.SubCategory ?? 0;
-                    switch (kPtr.CategoryEnum)
+                    // Convert the factory into the IFlavour type.
+                    IFlavour flavourFactory = (IFlavour)kPtr;
+
+                    // Get the repository of flavours.
+                    IEnumerable<Flavour> flavourRepository = flavourFactory.Flavours;
+
+                    // Determine the next next index of the flavour to assign to this factory.
+                    Type factoryType = kPtr.GetType();
+                    if (!currentFlavourIndex.TryGetValue(factoryType, out IEnumerator<Flavour>? flavourEnumerator))
                     {
-                        case ItemTypeEnum.Food:
-                            kPtr.FlavorCharacter = SingletonRepository.MushroomFlavours[indexx].Character;
-                            kPtr.FlavorColour = SingletonRepository.MushroomFlavours[indexx].Colour;
-                            break;
-
-                        case ItemTypeEnum.Potion:
-                            kPtr.FlavorCharacter = SingletonRepository.PotionFlavours[indexx].Character;
-                            kPtr.FlavorColour = SingletonRepository.PotionFlavours[indexx].Colour;
-                            break;
-
-                        case ItemTypeEnum.Scroll:
-                            kPtr.FlavorCharacter = ScrollFlavours[indexx].Character;
-                            kPtr.FlavorColour = ScrollFlavours[indexx].Colour;
-                            break;
-
-                        case ItemTypeEnum.Amulet:
-                            kPtr.FlavorCharacter = SingletonRepository.AmuletFlavours[indexx].Character;
-                            kPtr.FlavorColour = SingletonRepository.AmuletFlavours[indexx].Colour;
-                            break;
-
-                        case ItemTypeEnum.Ring:
-                            kPtr.FlavorCharacter = SingletonRepository.RingFlavours[indexx].Character;
-                            kPtr.FlavorColour = SingletonRepository.RingFlavours[indexx].Colour;
-                            break;
-
-                        case ItemTypeEnum.Staff:
-                            kPtr.FlavorCharacter = SingletonRepository.StaffFlavours[indexx].Character;
-                            kPtr.FlavorColour = SingletonRepository.StaffFlavours[indexx].Colour;
-                            break;
-
-                        case ItemTypeEnum.Wand:
-                            kPtr.FlavorCharacter = SingletonRepository.WandFlavours[indexx].Character;
-                            kPtr.FlavorColour = SingletonRepository.WandFlavours[indexx].Colour;
-                            break;
-
-                        case ItemTypeEnum.Rod:
-                            kPtr.FlavorCharacter = SingletonRepository.RodFlavours[indexx].Character;
-                            kPtr.FlavorColour = SingletonRepository.RodFlavours[indexx].Colour;
-                            break;
+                        flavourEnumerator = flavourRepository.GetEnumerator();
+                        currentFlavourIndex.Add(factoryType, flavourEnumerator);
                     }
+
+                    // Ensure there are enough flavours.
+                    if (!flavourEnumerator.MoveNext())
+                    {
+                        throw new Exception($"{factoryType.Name} does not have enough flavours to assign to the associated factories.");
+                    }
+
+                    // Retrieve the flavour to assign to the factory.
+                    Flavour flavour = flavourEnumerator.Current;
+
+                    // Assign the flavour details.
+                    kPtr.FlavorCharacter = flavour.Character;
+                    kPtr.FlavorColour = flavour.Colour;
                 }
             }
         }
@@ -19589,7 +19572,6 @@ namespace AngbandOS.Core
             qPtr.ApplyMagic(Difficulty, false, false, false);
             Level.DropNear(qPtr, -1, Player.MapY, Player.MapX);
             MsgPrint("Allocated.");
-
         }
 
         private int WizCreateItemtype()
@@ -19665,7 +19647,7 @@ namespace AngbandOS.Core
             }
             if (ch >= _head[2] && ch < _head[2] + maxNumbers)
             {
-                num = ch - _head[2] + maxLetters;
+                num = ch - _head[2] + maxLetters * 2;
             }
             if (num < 0 || num >= maxNum)
             {

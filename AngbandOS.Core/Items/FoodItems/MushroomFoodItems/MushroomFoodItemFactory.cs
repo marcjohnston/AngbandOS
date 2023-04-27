@@ -1,9 +1,13 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class MushroomFoodItemFactory : FoodItemFactory
+    internal abstract class MushroomFoodItemFactory : FoodItemFactory, IFlavour
     {
         public MushroomFoodItemFactory(SaveGame saveGame) : base(saveGame) { }
-        public override bool HasFlavor => true;
+
+        /// <summary>
+        /// Returns the mushroom flavours repository because mushrooms have flavours that need to be identified.
+        /// </summary>
+        public IEnumerable<Flavour> Flavours => SaveGame.SingletonRepository.MushroomFlavours;
     }
 }

@@ -3,6 +3,7 @@
 /// <summary>
 /// Represents a single flavour for a group of items that participate in the IFlavour interface.
 /// </summary>
+[Serializable]
 internal abstract class Flavour
 {
     protected SaveGame SaveGame;

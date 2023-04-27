@@ -1,12 +1,17 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class RodItemClass : ItemFactory
+    internal abstract class RodItemClass : ItemFactory, IFlavour
     {
         public RodItemClass(SaveGame saveGame) : base(saveGame) { }
+
+        /// <summary>
+        /// Returns the rod flavours repository because rods have flavours that need to be identified.
+        /// </summary>
+        public IEnumerable<Flavour> Flavours => SaveGame.SingletonRepository.RodFlavours;
+
         public abstract bool RequiresAiming { get; }
         public override bool EasyKnow => true;
-        public override bool HasFlavor => true;
         public override int PackSort => 13;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Rod;
         public override int BaseValue => 90;

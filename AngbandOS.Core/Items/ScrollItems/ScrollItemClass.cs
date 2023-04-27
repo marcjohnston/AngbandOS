@@ -1,11 +1,16 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class ScrollItemClass : ItemFactory
+    internal abstract class ScrollItemClass : ItemFactory, IFlavour
     {
         public ScrollItemClass(SaveGame saveGame) : base(saveGame) { }
+
+        /// <summary>
+        /// Returns the scroll flavours repository because scrolls have flavours that need to be identified.
+        /// </summary>
+        public IEnumerable<Flavour> Flavours => SaveGame.SingletonRepository.ScrollFlavours;
+
         public override bool EasyKnow => true;
-        public override bool HasFlavor => true;
         public override int PackSort => 12;
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Scroll;
         public override int BaseValue => 20;

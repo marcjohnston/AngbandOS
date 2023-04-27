@@ -1,12 +1,10 @@
 ﻿namespace AngbandOS.Core.Flavours;
 
 [Serializable]
-internal abstract class BaseScrollFlavour
+internal abstract class BaseScrollFlavour : Flavour
 {
-    protected SaveGame SaveGame;
-    protected BaseScrollFlavour(SaveGame saveGame)
+    protected BaseScrollFlavour(SaveGame saveGame) : base(saveGame)
     {
-        SaveGame = saveGame;
     }
 
     public static readonly string[] Syllables =
@@ -23,14 +21,4 @@ internal abstract class BaseScrollFlavour
         "um", "un", "uni", "ur", "val", "viv", "vly", "vom", "wah", "wed", "werg", "wex", "whon", "wun", "x",
         "yerg", "yp", "zun", "tri", "blaa", "jah", "bul", "on", "foo", "ju", "xuxu"
     };
-
-    /// <summary>
-    /// The column from which to take the graphical tile.
-    /// </summary>
-    public abstract char Character { get; }
-
-    /// <summary>
-    /// The row from which to take the graphical tile
-    /// </summary>
-    public virtual Colour Colour => Colour.White;
 }
