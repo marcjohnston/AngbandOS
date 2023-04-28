@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class FolkBookItemFactory : BookItemClass
+    internal abstract class FolkBookItemFactory : BookItemFactory
     {
         public FolkBookItemFactory(SaveGame saveGame) : base(saveGame) { }
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.FolkBook;

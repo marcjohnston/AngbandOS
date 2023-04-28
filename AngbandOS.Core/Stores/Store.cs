@@ -549,7 +549,7 @@ namespace AngbandOS.Core.Stores
                 }
             }
             ScreenBuffer savedScreen = SaveGame.Screen.Clone();
-            BookItemClass book = (BookItemClass)oPtr.Factory;
+            BookItemFactory book = (BookItemFactory)oPtr.Factory;
             SaveGame.Player.PrintSpells(spells, num, 1, 20, book.ToRealm);
             SaveGame.Screen.PrintLine("", 0, 0);
             SaveGame.Screen.Print("[Press any key to continue]", 0, 23);

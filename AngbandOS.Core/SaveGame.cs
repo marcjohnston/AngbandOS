@@ -11691,7 +11691,7 @@ namespace AngbandOS.Core
             }
             // Save the screen and overprint the spells in the book
             ScreenBuffer savedScreen = Screen.Clone();
-            BookItemClass book = (BookItemClass)item.Factory;
+            BookItemFactory book = (BookItemFactory)item.Factory;
             Player.PrintSpells(spells, spellIndex, 1, 20, book.ToRealm);
             Screen.PrintLine("", 0, 0);
             // Wait for a keypress and re-load the screen

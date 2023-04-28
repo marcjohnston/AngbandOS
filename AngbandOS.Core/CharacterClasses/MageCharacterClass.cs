@@ -65,7 +65,7 @@
         {
             SaveGame.SingletonRepository.ItemFactories.Get<SorceryBookBeginnersHandbook>(),
             SaveGame.SingletonRepository.ItemFactories.Get<SwordDagger>(),
-            SaveGame.SingletonRepository.ItemFactories.Get<DeathBookBlackPrayers>()
+            SaveGame.SingletonRepository.ItemFactories.Get<BlackPrayersDeathBookItemFactory>()
         };
     }
 }

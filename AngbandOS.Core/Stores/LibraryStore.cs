@@ -46,8 +46,8 @@
                 new StockStoreInventoryItem(typeof(ChaosBookSignofChaos), 2),
                 new StockStoreInventoryItem(typeof(CorporealBookBasicChiFlow), 2),
                 new StockStoreInventoryItem(typeof(CorporealBookYogicMastery), 2),
-                new StockStoreInventoryItem(typeof(DeathBookBlackMass), 4),
-                new StockStoreInventoryItem(typeof(DeathBookBlackPrayers), 4),
+                new StockStoreInventoryItem(typeof(BlackMassDeathBookItemFactory), 4),
+                new StockStoreInventoryItem(typeof(BlackPrayersDeathBookItemFactory), 4),
                 new StockStoreInventoryItem(typeof(CantripsforBeginnersFolkBookItemFactory), 2),
                 new StockStoreInventoryItem(typeof(MagicksOfMasteryFolkBookItemFactory), 2),
                 new StockStoreInventoryItem(typeof(MajorMagicksFolkBookItemFactory), 2),
@@ -70,7 +70,7 @@
                 case SorceryBookItemClass _:
                 case NatureBookItemClass _:
                 case ChaosBookItemClass _:
-                case DeathBookItemClass _:
+                case DeathBookItemFactory _:
                 case LifeBookItemClass _:
                 case TarotBookItemClass _:
                 case FolkBookItemFactory _:

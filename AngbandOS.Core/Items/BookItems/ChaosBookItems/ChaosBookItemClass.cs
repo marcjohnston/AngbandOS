@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class ChaosBookItemClass : BookItemClass
+    internal abstract class ChaosBookItemClass : BookItemFactory
     {
         public ChaosBookItemClass(SaveGame saveGame) : base(saveGame) { }
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.ChaosBook;

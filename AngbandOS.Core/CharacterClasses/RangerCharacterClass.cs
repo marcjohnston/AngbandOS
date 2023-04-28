@@ -59,7 +59,7 @@
         {
             SaveGame.SingletonRepository.ItemFactories.Get<NatureBookCallOfTheWild>(),
             SaveGame.SingletonRepository.ItemFactories.Get<SwordBroadSword>(),
-            SaveGame.SingletonRepository.ItemFactories.Get<DeathBookBlackPrayers>()
+            SaveGame.SingletonRepository.ItemFactories.Get<BlackPrayersDeathBookItemFactory>()
         };
     }
 }

@@ -393,8 +393,8 @@ namespace AngbandOS.Core.Items
         {
             // First level sort (primary realm spells books).
             // A book that matches the first realm, will always come before a book that doesn't match the first realm.
-            BookItemClass? thisBookFactory = Factory.TryCast<BookItemClass>();
-            BookItemClass? oPtrBookFactory = oPtr.Factory.TryCast<BookItemClass>();
+            BookItemFactory? thisBookFactory = Factory.TryCast<BookItemFactory>();
+            BookItemFactory? oPtrBookFactory = oPtr.Factory.TryCast<BookItemFactory>();
             if (thisBookFactory != null && oPtrBookFactory != null)
             {
                 if (thisBookFactory.ToRealm == SaveGame.Player.PrimaryRealm && oPtrBookFactory.ToRealm != SaveGame.Player.PrimaryRealm)

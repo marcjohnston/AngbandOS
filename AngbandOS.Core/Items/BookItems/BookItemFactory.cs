@@ -1,9 +1,9 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class BookItemClass : ItemFactory
+    internal abstract class BookItemFactory : ItemFactory
     {
-        public BookItemClass(SaveGame saveGame) : base(saveGame) { }
+        public BookItemFactory(SaveGame saveGame) : base(saveGame) { }
         /// <summary>
         /// Returns true for all books.
         /// </summary>

@@ -88,7 +88,7 @@
                 case SorceryBookItemClass _:
                 case NatureBookItemClass _:
                 case ChaosBookItemClass _:
-                case DeathBookItemClass _:
+                case DeathBookItemFactory _:
                 case TarotBookItemClass _:
                 case FolkBookItemFactory _:
                 case CorporealBookItemClass _:

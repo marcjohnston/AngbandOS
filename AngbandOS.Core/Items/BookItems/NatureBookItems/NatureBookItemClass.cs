@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class NatureBookItemClass : BookItemClass
+    internal abstract class NatureBookItemClass : BookItemFactory
     {
         public NatureBookItemClass(SaveGame saveGame) : base(saveGame) { }
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.NatureBook;
