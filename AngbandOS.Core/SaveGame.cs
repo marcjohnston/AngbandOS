@@ -7422,39 +7422,46 @@ namespace AngbandOS.Core
         /// </summary>
         public void CreatePhlogiston()
         {
-            int maxPhlogiston;
             LightsourceInventorySlot lightsourceInventorySlot = SingletonRepository.InventorySlots.Get<LightsourceInventorySlot>();
             Item? item = GetInventoryItem(lightsourceInventorySlot.WeightedRandom.Choose());
+            if (item == null)
+            {
+                MsgPrint("You are not wielding a light source.");
+                return;
+            }
+            LightSourceItem? lightSourceItem = item.TryCast<LightSourceItem>();
+            if (lightSourceItem == null)
+            {
+                return;
+            }
             // Maximum phlogiston is the capacity of the light source
-            if (item != null && item.Category == ItemTypeEnum.Light && item.ItemSubCategory == LightType.Lantern)
-            {
-                maxPhlogiston = Constants.FuelLamp;
-            }
-            else if (item != null && item.Category == ItemTypeEnum.Light && item.ItemSubCategory == LightType.Torch)
-            {
-                maxPhlogiston = Constants.FuelTorch;
-            }
+            int? maxPhlogiston = lightSourceItem.Factory.MaxPhlogiston;
+
             // Probably using an orb or a star essence (or maybe not holding a light source at all)
-            else
+            if  (maxPhlogiston == null)
             {
                 MsgPrint("You are not wielding anything which uses phlogiston.");
                 return;
             }
+
             // Item is already full
             if (item.TypeSpecificValue >= maxPhlogiston)
             {
                 MsgPrint("No more phlogiston can be put in this item.");
                 return;
             }
+
             // Add half the max fuel of the item to its current fuel
-            item.TypeSpecificValue += maxPhlogiston / 2;
+            item.TypeSpecificValue += maxPhlogiston.Value / 2;
             MsgPrint("You add phlogiston to your light item.");
+
             // Make sure it doesn't overflow
             if (item.TypeSpecificValue >= maxPhlogiston)
             {
-                item.TypeSpecificValue = maxPhlogiston;
+                item.TypeSpecificValue = maxPhlogiston.Value;
                 MsgPrint("Your light item is full.");
             }
+
             // We need to update our light after this
             UpdateTorchRadiusFlaggedAction.Set();
         }

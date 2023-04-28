@@ -17,6 +17,11 @@
         }
 
         /// <summary>
+        /// Returns the maximum fuel that can be used for phlogiston.  Returns null, by default, meaning that the light source cannot be used to create a phlogiston.
+        /// </summary>
+        public virtual int? MaxPhlogiston => null;
+
+        /// <summary>
         /// Returns the number of turns of light that consumeds for each world turn.  Defaults to zero; which means there is no consumption and that the light source lasts forever.
         /// Torches and laterns have burn rates greater than zero.
         /// </summary>

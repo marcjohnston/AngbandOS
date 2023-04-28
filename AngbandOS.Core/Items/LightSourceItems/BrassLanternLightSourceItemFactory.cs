@@ -10,6 +10,10 @@ namespace AngbandOS.Core.ItemCategories
         /// </summary>
         public override int BurnRate => 1;
 
+        /// <summary>
+        /// Returns 15000 because it is the maximum amount of fuel that can be used for a phlogiston.
+        /// </summary>
+        public override int? MaxPhlogiston => 15000;
 
         /// <summary>
         /// Returns true because a lantern contains oil which is valid as fuel for other lanterns.

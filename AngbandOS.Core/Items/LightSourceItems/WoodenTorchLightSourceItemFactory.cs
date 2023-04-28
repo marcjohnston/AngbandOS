@@ -14,6 +14,11 @@ namespace AngbandOS.Core.ItemCategories
         public override Colour Colour => Colour.Brown;
         public override string Name => "Wooden Torch";
 
+        /// <summary>
+        /// Returns 5000 because it is the maximum amount of fuel that can be used for a phlogiston.
+        /// </summary>
+        public override int? MaxPhlogiston => 5000;
+
         public override int[] Chance => new int[] { 1, 0, 0, 0 };
         public override int Cost => 2;
         public override int Dd => 1;
