@@ -48,10 +48,10 @@
                 new StockStoreInventoryItem(typeof(CorporealBookYogicMastery), 2),
                 new StockStoreInventoryItem(typeof(DeathBookBlackMass), 4),
                 new StockStoreInventoryItem(typeof(DeathBookBlackPrayers), 4),
-                new StockStoreInventoryItem(typeof(FolkBookCantripsforBeginners), 2),
-                new StockStoreInventoryItem(typeof(FolkBookMagicksOfMastery), 2),
-                new StockStoreInventoryItem(typeof(FolkBookMajorMagicks), 2),
-                new StockStoreInventoryItem(typeof(FolkBookMinorMagicks), 2),
+                new StockStoreInventoryItem(typeof(CantripsforBeginnersFolkBookItemFactory), 2),
+                new StockStoreInventoryItem(typeof(MagicksOfMasteryFolkBookItemFactory), 2),
+                new StockStoreInventoryItem(typeof(MajorMagicksFolkBookItemFactory), 2),
+                new StockStoreInventoryItem(typeof(MinorMagicksFolkBookItemFactory), 2),
                 new StockStoreInventoryItem(typeof(LifeBookBookofCommonPrayer), 4),
                 new StockStoreInventoryItem(typeof(LifeBookHighMass), 4),
                 new StockStoreInventoryItem(typeof(NatureBookCallOfTheWild), 4),
@@ -73,7 +73,7 @@
                 case DeathBookItemClass _:
                 case LifeBookItemClass _:
                 case TarotBookItemClass _:
-                case FolkBookItemClass _:
+                case FolkBookItemFactory _:
                 case CorporealBookItemClass _:
                     return item.Value() > 0;
                 default:

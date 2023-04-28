@@ -47,10 +47,10 @@
                 new StockStoreInventoryItem(typeof(ResistAcidAmuletJeweleryItemFactory)),
                 new StockStoreInventoryItem(typeof(SearchingAmuletJeweleryItemFactory)),
                 new StockStoreInventoryItem(typeof(SlowDigestionAmuletJeweleryItemFactory)),
-                new StockStoreInventoryItem(typeof(FolkBookCantripsforBeginners), 2),
-                new StockStoreInventoryItem(typeof(FolkBookMagicksOfMastery), 2),
-                new StockStoreInventoryItem(typeof(FolkBookMajorMagicks), 2),
-                new StockStoreInventoryItem(typeof(FolkBookMinorMagicks), 2),
+                new StockStoreInventoryItem(typeof(CantripsforBeginnersFolkBookItemFactory), 2),
+                new StockStoreInventoryItem(typeof(MagicksOfMasteryFolkBookItemFactory), 2),
+                new StockStoreInventoryItem(typeof(MajorMagicksFolkBookItemFactory), 2),
+                new StockStoreInventoryItem(typeof(MinorMagicksFolkBookItemFactory), 2),
                 new StockStoreInventoryItem(typeof(OrbLightSourceItemFactory)),
                 new StockStoreInventoryItem(typeof(RingLevitation)),
                 new StockStoreInventoryItem(typeof(RingProtection), 2),
@@ -90,7 +90,7 @@
                 case ChaosBookItemClass _:
                 case DeathBookItemClass _:
                 case TarotBookItemClass _:
-                case FolkBookItemClass _:
+                case FolkBookItemFactory _:
                 case CorporealBookItemClass _:
                 case AmuletJeweleryItemFactory _:
                 case RingItemClass _:
