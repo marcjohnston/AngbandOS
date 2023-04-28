@@ -4,7 +4,7 @@ namespace AngbandOS.Core.Items
     internal class StoneToMudWandItem : WandItem
     {
         public StoneToMudWandItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<StonetoMudWandItemFactory>()) { }
-        public override void ApplyMagic(int level, int power)
+        protected override void ApplyMagic(int level, int power)
         {
             TypeSpecificValue = Program.Rng.DieRoll(8) + 3;
         }

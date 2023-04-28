@@ -5,7 +5,7 @@ namespace AngbandOS.Core.Items
     {
         public ResistanceAmuletJeweleryItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ResistanceAmuletJeweleryItemFactory>()) { }
 
-        public override void ApplyMagic(int level, int power)
+        protected override void ApplyMagic(int level, int power)
         {
             if (Program.Rng.DieRoll(3) == 1)
             {

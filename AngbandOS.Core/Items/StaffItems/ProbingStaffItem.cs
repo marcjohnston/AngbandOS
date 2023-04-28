@@ -4,7 +4,7 @@ namespace AngbandOS.Core.Items
     internal class ProbingStaffItem : StaffItem
     {
         public ProbingStaffItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<StaffProbing>()) { }
-        public override void ApplyMagic(int level, int power)
+        protected override void ApplyMagic(int level, int power)
         {
             TypeSpecificValue = Program.Rng.DieRoll(6) + 2;
         }

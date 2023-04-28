@@ -65,7 +65,7 @@ namespace AngbandOS.Core.Items
         /// </summary>
         /// <param name="level"></param>
         /// <param name="power"></param>
-        public override void ApplyMagic(int level, int power)
+        protected override void ApplyMagic(int level, int power)
         {
             if (power != 0)
             {

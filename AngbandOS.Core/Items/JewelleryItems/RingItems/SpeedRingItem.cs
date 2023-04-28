@@ -4,7 +4,7 @@ namespace AngbandOS.Core.Items
     internal class SpeedRingItem : RingItem
     {
         public SpeedRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<RingSpeed>()) { }
-        public override void ApplyMagic(int level, int power)
+        protected override void ApplyMagic(int level, int power)
         {
             if (power == 0 && Program.Rng.RandomLessThan(100) < 50)
             {

@@ -4,7 +4,7 @@ namespace AngbandOS.Core.Items
     internal class WoeRingItem : RingItem
     {
         public WoeRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<RingWoe>()) { }
-        public override void ApplyMagic(int level, int power)
+        protected override void ApplyMagic(int level, int power)
         {
             IdentBroken = true;
             IdentCursed = true;

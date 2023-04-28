@@ -72,6 +72,11 @@ namespace AngbandOS.Core.ItemCategories
             fuelSource.ItemOptimize();
             saveGame.UpdateTorchRadiusFlaggedAction.Set();
         }
+
+        /// <summary>
+        /// Returns a new WoodenTorchLightSourceItem.
+        /// </summary>
+        /// <returns></returns>
         public override Item CreateItem() => new WoodenTorchLightSourceItem(SaveGame);
 
         /// <summary>

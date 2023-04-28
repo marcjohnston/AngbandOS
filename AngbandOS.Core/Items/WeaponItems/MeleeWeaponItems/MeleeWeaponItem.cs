@@ -10,7 +10,7 @@
         protected virtual bool CanBeWeaponOfLaw => false;
         protected virtual bool CanBeWeaponOfSharpness => false;
         protected virtual bool CapableOfVorpalSlaying => false;
-        public override void ApplyMagic(int level, int power)
+        protected override void ApplyMagic(int level, int power)
         {
             base.ApplyMagic( level, power);
             if (power > 1)

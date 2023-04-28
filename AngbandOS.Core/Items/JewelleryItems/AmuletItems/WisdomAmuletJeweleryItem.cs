@@ -5,7 +5,7 @@ namespace AngbandOS.Core.Items
     {
         public WisdomAmuletJeweleryItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<WisdomAmuletJeweleryItemFactory>()) { }
 
-        public override void ApplyMagic(int level, int power)
+        protected override void ApplyMagic(int level, int power)
         {
             TypeSpecificValue = 1 + GetBonusValue(5, level);
             if (power < 0 || (power == 0 && Program.Rng.RandomLessThan(100) < 50))

@@ -5,7 +5,7 @@ namespace AngbandOS.Core.Items
     {
         public ElvenCloakArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<CloakElven>()) { }
 
-        public override void ApplyMagic(int level, int power)
+        protected override void ApplyMagic(int level, int power)
         {
             if (power != 0)
             {

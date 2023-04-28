@@ -45,7 +45,7 @@ namespace AngbandOS.Core.Items
         public override bool IdentityCanBeSensed => true;
         public override bool CanApplyBlowsBonus => false;
 
-        public override void ApplyMagic(int level, int power)
+        protected override void ApplyMagic(int level, int power)
         {
             base.ApplyMagic(level, power);
             if (power > 1)

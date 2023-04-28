@@ -1155,10 +1155,6 @@ namespace AngbandOS.Core.Stores
             for (int tries = 0; tries < 4; tries++)
             {
                 Item qPtr = CreateItem();
-                if (qPtr == null)
-                {
-                    continue;
-                }
 
                 if (qPtr.Category == ItemTypeEnum.Light)
                 {

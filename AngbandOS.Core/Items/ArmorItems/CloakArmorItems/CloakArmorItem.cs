@@ -34,7 +34,7 @@ namespace AngbandOS.Core.Items
             }
         }
 
-        public override void ApplyMagic(int level, int power)
+        protected override void ApplyMagic(int level, int power)
         {
             if (power != 0)
             {

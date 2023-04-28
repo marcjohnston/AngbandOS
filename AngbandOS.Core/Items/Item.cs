@@ -2294,6 +2294,16 @@ namespace AngbandOS.Core.Items
             }
         }
 
+        /// <summary>
+        /// Applies magic to the item.  Does nothing, by default.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="level"></param>
+        /// <param name="power"></param>
+        protected virtual void ApplyMagic(int level, int power)
+        {
+        }
+
         public void ApplyRandomResistance(ref IArtifactBias artifactBias, int specific)
         {
             if (specific == 0 && artifactBias != null)
@@ -3294,16 +3304,6 @@ namespace AngbandOS.Core.Items
                 return max;
             }
             return value;
-        }
-
-        /// <summary>
-        /// Applies magic to the item.  Does nothing, by default.
-        /// </summary>
-        /// <param name="item"></param>
-        /// <param name="level"></param>
-        /// <param name="power"></param>
-        public virtual void ApplyMagic(int level, int power)
-        {
         }
 
         /// <summary>

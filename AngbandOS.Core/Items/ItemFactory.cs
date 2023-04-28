@@ -28,7 +28,7 @@
         public abstract int PackSort { get; }
 
         /// <summary>
-        /// Returns the item type to use when creating an item of this category.
+        /// Returns a new item.
         /// </summary>
         public abstract Item CreateItem();
 
