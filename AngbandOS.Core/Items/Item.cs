@@ -2076,7 +2076,7 @@ namespace AngbandOS.Core.Items
             {
                 return "teleport every 50+d50 turns";
             }
-            return FactoryDescribeActivationEffect();
+            return Factory.DescribeActivationEffect;
         }
 
         public void ApplyMagic(int lev, bool okay, bool good, bool great)
@@ -3542,16 +3542,6 @@ namespace AngbandOS.Core.Items
                 tmpVal2 = $" {{{tmpVal2}}}";
             }
             return tmpVal2;
-        }
-
-        /// <summary>
-        /// Returns a description of the items' activation or null, .  Returns null by default.
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        public virtual string? FactoryDescribeActivationEffect()
-        {
-            return null;
         }
 
         /// <summary>

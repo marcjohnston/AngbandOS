@@ -7,7 +7,7 @@ namespace AngbandOS.Core.Items
         public override int WieldSlot => InventorySlot.Body;
 
         /// <summary>
-        /// Applies special magic to dragon armour.
+        /// Applies special magic to dragon scale mail armour.
         /// </summary>
         /// <param name="item"></param>
         /// <param name="level"></param>

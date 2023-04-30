@@ -1,9 +1,9 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class RingItemClass : JewelleryItemFactory, IFlavour
+    internal abstract class RingItemFactory : JewelleryItemFactory, IFlavour
     {
-        public RingItemClass(SaveGame saveGame) : base(saveGame) { }
+        public RingItemFactory(SaveGame saveGame) : base(saveGame) { }
 
         /// <summary>
         /// Returns the ring flavours repository because rings have flavours that need to be identified.

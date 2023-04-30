@@ -93,7 +93,7 @@
                 case FolkBookItemFactory _:
                 case CorporealBookItemClass _:
                 case AmuletJeweleryItemFactory _:
-                case RingItemClass _:
+                case RingItemFactory _:
                 case StaffItemClass _:
                 case WandItemFactory _:
                 case RodItemClass _:

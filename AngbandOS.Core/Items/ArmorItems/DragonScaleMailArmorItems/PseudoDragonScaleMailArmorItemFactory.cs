@@ -5,6 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     {
         private PseudoDragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
+        public override string? DescribeActivationEffect => "breathe light/darkness (200) every 300+d300 turns";
         public override char Character => '[';
         public override Colour Colour => Colour.Pink;
         public override string Name => "Pseudo Dragon Scale Mail";

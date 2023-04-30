@@ -1,10 +1,11 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class RingIce : RingItemClass
+    internal class RingIce : RingItemFactory
     {
         private RingIce(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
+        public override string? DescribeActivationEffect => "ball of cold and resist cold";
         public override char Character => '=';
         public override string Name => "Ice";
 

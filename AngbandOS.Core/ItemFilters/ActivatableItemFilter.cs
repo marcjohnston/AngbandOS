@@ -12,7 +12,7 @@
                 return false;
             }
             item.RefreshFlagBasedProperties();
-            return item.Characteristics.Activate;
+            return item.Characteristics.Activate || item.Factory.ActivationPower != null;
         }
     }
 }

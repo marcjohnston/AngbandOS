@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class GlovesItemClass : ArmourItemClass
+    internal abstract class GlovesItemClass : ArmourItemFactory
     {
         public GlovesItemClass(SaveGame saveGame) : base(saveGame) { }
         public override int PackSort => 26;

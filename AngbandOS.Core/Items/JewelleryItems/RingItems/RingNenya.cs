@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class RingNenya : RingItemClass
+    internal class RingNenya : RingItemFactory
     {
         private RingNenya(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 

@@ -1,10 +1,11 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class RingAcid : RingItemClass
+    internal class RingAcid : RingItemFactory
     {
         private RingAcid(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
+        public override string? DescribeActivationEffect => "ball of acid and resist acid";
         public override char Character => '=';
         public override string Name => "Acid";
 

@@ -5,6 +5,7 @@ namespace AngbandOS.Core.ItemCategories
     {
         private WhiteDragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
+        public override string? DescribeActivationEffect => "breathe frost (110) every 450+d450 turns";
         public override char Character => '[';
         public override string Name => "White Dragon Scale Mail";
 

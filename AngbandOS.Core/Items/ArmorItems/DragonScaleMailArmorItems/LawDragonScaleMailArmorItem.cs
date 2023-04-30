@@ -4,9 +4,5 @@ namespace AngbandOS.Core.Items
     internal class LawDragonScaleMailArmorItem : DragonScaleMailArmorItem
     {
         public LawDragonScaleMailArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<LawDragonScaleMailArmorItemFactory>()) { }
-        public override string? FactoryDescribeActivationEffect()
-        {
-            return "breathe sound/shards (230) every 300+d300 turns";
-        }
     }
 }

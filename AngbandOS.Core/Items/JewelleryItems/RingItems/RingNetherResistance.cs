@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class RingNetherResistance : RingItemClass
+    internal class RingNetherResistance : RingItemFactory
     {
         private RingNetherResistance(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
