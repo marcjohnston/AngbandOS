@@ -3,7 +3,7 @@ namespace AngbandOS.Core.Items
 [Serializable]
     internal class AccuracyRingItem : RingItem
     {
-        public AccuracyRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<RingAccuracy>()) { }
+        public AccuracyRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<AccuracyRingItemFactory>()) { }
         protected override void ApplyMagic(int level, int power)
         {
             if (power == 0 && Program.Rng.RandomLessThan(100) < 50)

@@ -3,7 +3,7 @@ namespace AngbandOS.Core.Items
 [Serializable]
     internal class PowerRingItem : RingItem
     {
-        public PowerRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<RingPower>()) { }
+        public PowerRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<PowerRingItemFactory>()) { }
         public override string GetDescription(bool includeCountPrefix)
         {
             if (FixedArtifact != null && IsFlavourAware())

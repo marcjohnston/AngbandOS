@@ -89,7 +89,7 @@
         {
             SaveGame.SingletonRepository.ItemFactories.Get<SorceryBookBeginnersHandbook>(),
             SaveGame.SingletonRepository.ItemFactories.Get<SwordDagger>(),
-            SaveGame.SingletonRepository.ItemFactories.Get<RingSustainIntelligence>()
+            SaveGame.SingletonRepository.ItemFactories.Get<SustainIntelligenceRingItemFactory>()
         };
     }
 }

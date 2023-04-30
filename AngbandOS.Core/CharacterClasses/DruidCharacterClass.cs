@@ -45,7 +45,7 @@
         {
             SaveGame.SingletonRepository.ItemFactories.Get<SorceryBookBeginnersHandbook>(),
             SaveGame.SingletonRepository.ItemFactories.Get<HaftedQuarterstaff>(),
-            SaveGame.SingletonRepository.ItemFactories.Get<RingSustainWisdom>()
+            SaveGame.SingletonRepository.ItemFactories.Get<SustainWisdomRingItemFactory>()
         };
     }
 }

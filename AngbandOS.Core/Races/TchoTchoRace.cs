@@ -68,9 +68,9 @@
 
         public override ItemFactory OutfitItemClass(ItemFactory itemClass)
         {
-            if (itemClass is RingFearResistance)
+            if (itemClass is FearResistanceRingItemFactory)
             {
-                return SaveGame.SingletonRepository.ItemFactories.Get<RingSustainStrength>();
+                return SaveGame.SingletonRepository.ItemFactories.Get<SustainStrengthRingItemFactory>();
             }
             return itemClass;
         }

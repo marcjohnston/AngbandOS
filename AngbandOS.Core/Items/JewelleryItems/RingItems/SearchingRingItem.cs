@@ -3,7 +3,7 @@ namespace AngbandOS.Core.Items
 [Serializable]
     internal class SearchingRingItem : RingItem
     {
-        public SearchingRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<RingSearching>()) { }
+        public SearchingRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<SearchingRingItemFactory>()) { }
         protected override void ApplyMagic(int level, int power)
         {
             if (power == 0 && Program.Rng.RandomLessThan(100) < 50)

@@ -6,7 +6,7 @@ internal class RingOfElementalPowerIceFixedArtifact : FixedArtifact, IActivatibl
     private readonly ItemFactory _baseItemCategory;
     private RingOfElementalPowerIceFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<RingNenya>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<NenyaRingItemFactory>();
     }
 
     // Ring of Elemental Ice casts a coldball

@@ -46,7 +46,7 @@
         {
             SaveGame.SingletonRepository.ItemFactories.Get<MagicMissileWandItemFactory>(),
             SaveGame.SingletonRepository.ItemFactories.Get<SwordDagger>(),
-            SaveGame.SingletonRepository.ItemFactories.Get<RingSustainCharisma>()
+            SaveGame.SingletonRepository.ItemFactories.Get<SustainCharismaRingItemFactory>()
        };
     }
 }

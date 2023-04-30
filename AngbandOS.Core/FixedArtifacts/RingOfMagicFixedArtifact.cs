@@ -6,7 +6,7 @@ internal class RingOfMagicFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private RingOfMagicFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<RingBarahir>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<BarahirRingItemFactory>();
     }
 
     // Ring of Magic has a djinn in it that drains life from an opponent

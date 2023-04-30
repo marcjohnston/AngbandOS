@@ -3,7 +3,7 @@ namespace AngbandOS.Core.Items
 [Serializable]
     internal class SpeedRingItem : RingItem
     {
-        public SpeedRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<RingSpeed>()) { }
+        public SpeedRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<SpeedRingItemFactory>()) { }
         protected override void ApplyMagic(int level, int power)
         {
             if (power == 0 && Program.Rng.RandomLessThan(100) < 50)
