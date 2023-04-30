@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class TridentOfWrathFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private TridentOfWrathFixedArtifact(SaveGame saveGame)
+    private TridentOfWrathFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<PolearmTrident>();
     }

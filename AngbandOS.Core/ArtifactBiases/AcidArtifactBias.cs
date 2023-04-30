@@ -1,7 +1,10 @@
 ﻿namespace AngbandOS.Core.ArtifactBiases
 {
+    [Serializable]
     internal class AcidArtifactBias : ArtifactBias
     {
+        private AcidArtifactBias(SaveGame saveGame) : base(saveGame) { }
+
         public override bool ApplyRandomResistances(Item item)
         {
             if (!item.RandartItemCharacteristics.ResAcid)

@@ -1,7 +1,9 @@
 ﻿namespace AngbandOS.Core.ArtifactBiases
 {
+    [Serializable]
     internal class PriestlyArtifactBias : ArtifactBias
     {
+        private PriestlyArtifactBias(SaveGame saveGame) : base(saveGame) { }
         public override bool ApplyBonuses(Item item)
         {
             if (!item.RandartItemCharacteristics.Wis)
@@ -24,43 +26,43 @@
             return false;
         }
 
-        public override ActivationPower GetActivationPowerType(Item item)
+        public override Activation GetActivationPowerType(Item item)
         {
             if (Program.Rng.DieRoll(13) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(CharmUndeadActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<CharmUndeadActivation>();
             }
             else if (Program.Rng.DieRoll(12) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(BanishEvilActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<BanishEvilActivation>();
             }
             else if (Program.Rng.DieRoll(11) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(DispEvilActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<DispEvilActivation>();
             }
             else if (Program.Rng.DieRoll(10) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(ProtEvilActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<ProtEvilActivation>();
             }
             else if (Program.Rng.DieRoll(9) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(Cure1000ActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<Cure1000Activation>();
             }
             else if (Program.Rng.DieRoll(8) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(Cure700ActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<Cure700Activation>();
             }
             else if (Program.Rng.DieRoll(7) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(RestAllActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<RestAllActivation>();
             }
             else if (Program.Rng.DieRoll(6) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(RestLifeActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<RestLifeActivation>();
             }
             else
             {
-                return ActivationPowerManager.FindByType(typeof(CureMwActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<CureMwActivation>();
             }
         }
     }

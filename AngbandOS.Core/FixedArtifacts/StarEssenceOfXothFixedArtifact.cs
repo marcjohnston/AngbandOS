@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class StarEssenceOfXothFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private StarEssenceOfXothFixedArtifact(SaveGame saveGame)
+    private StarEssenceOfXothFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<StarEssenceElendilLightSourceItemFactory>();
     }

@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class PairOfMetalShodBootsOfTheBlackReaverFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private PairOfMetalShodBootsOfTheBlackReaverFixedArtifact(SaveGame saveGame)
+    private PairOfMetalShodBootsOfTheBlackReaverFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<BootsMetalShodBoots>();
     }

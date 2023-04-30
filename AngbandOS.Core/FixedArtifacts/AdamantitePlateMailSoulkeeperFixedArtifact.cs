@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class AdamantitePlateMailSoulkeeperFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private AdamantitePlateMailSoulkeeperFixedArtifact(SaveGame saveGame)
+    private AdamantitePlateMailSoulkeeperFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HardArmorAdamantitePlateMail>();
     }

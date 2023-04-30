@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class DragonHelmOfPowerFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private DragonHelmOfPowerFixedArtifact(SaveGame saveGame)
+    private DragonHelmOfPowerFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HelmDragonHelm>();
     }

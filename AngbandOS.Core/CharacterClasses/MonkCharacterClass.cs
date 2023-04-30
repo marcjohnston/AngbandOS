@@ -57,7 +57,7 @@
         public override int MaximumMeleeAttacksPerRound(int level) => level < 40 ? 3 : 4;
         public override int MaximumWeight => 40;
         public override int AttackSpeedMultiplier => 4;
-        public override IArtifactBias? ArtifactBias => new PriestlyArtifactBias();
+        public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get<PriestlyArtifactBias>();
         public override bool SenseInventoryTest(int level) => (0 != Program.Rng.RandomLessThan(20000 / ((level * level) + 40)));
         public override BaseRealm[] AvailablePrimaryRealms => new BaseRealm[] {
             SaveGame.SingletonRepository.Realms.Get<ChaosRealm>(),

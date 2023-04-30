@@ -1,7 +1,9 @@
 ﻿namespace AngbandOS.Core.ArtifactBiases
 {
+    [Serializable]
     internal class MageArtifactBias : ArtifactBias
     {
+        private MageArtifactBias(SaveGame saveGame) : base(saveGame) { }
         public override bool ApplyBonuses(Item item)
         {
             if (!item.RandartItemCharacteristics.Int)
@@ -17,23 +19,23 @@
 
         public override int ActivationPowerChance => 66;
 
-        public override ActivationPower GetActivationPowerType(Item item)
+        public override Activation GetActivationPowerType(Item item)
         {
             if (Program.Rng.DieRoll(20) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(SummonElementalActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<SummonElementalActivation>();
             }
             else if (Program.Rng.DieRoll(10) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(SummonPhantomActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<SummonPhantomActivation>();
             }
             else if (Program.Rng.DieRoll(5) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(RuneExploActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<RuneExploActivation>();
             }
             else
             {
-                return ActivationPowerManager.FindByType(typeof(EspActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<EspActivation>();
             }
         }
     }

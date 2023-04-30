@@ -1,7 +1,9 @@
 ﻿namespace AngbandOS.Core.ArtifactBiases
 {
+    [Serializable]
     internal class LawArtifactBias : ArtifactBias
     {
+        private LawArtifactBias(SaveGame saveGame) : base(saveGame) { }
         public override bool ApplySlaying(Item item)
         {
             if (item.Category != ItemTypeEnum.Bow)
@@ -34,19 +36,19 @@
             return false;
         }
 
-        public override ActivationPower GetActivationPowerType(Item item)
+        public override Activation GetActivationPowerType(Item item)
         {
             if (Program.Rng.DieRoll(8) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(BanishEvilActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<BanishEvilActivation>();
             }
             else if (Program.Rng.DieRoll(4) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(DispEvilActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<DispEvilActivation>();
             }
             else
             {
-                return ActivationPowerManager.FindByType(typeof(ProtEvilActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<ProtEvilActivation>();
             }
         }
     }

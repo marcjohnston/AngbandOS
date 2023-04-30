@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SetOfCestiOfCombatFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private SetOfCestiOfCombatFixedArtifact(SaveGame saveGame)
+    private SetOfCestiOfCombatFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<GlovesSetOfCesti>();
     }
@@ -23,7 +23,7 @@ internal class SetOfCestiOfCombatFixedArtifact : FixedArtifact, IActivatible
     public override void ApplyResistances(SaveGame saveGame, Item item)
     {
         item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
-        item.BonusPowerSubType = ActivationPowerManager.GetRandom();
+        item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
     }
     public string DescribeActivationEffect() => "a magical arrow (150) every 90+d90 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

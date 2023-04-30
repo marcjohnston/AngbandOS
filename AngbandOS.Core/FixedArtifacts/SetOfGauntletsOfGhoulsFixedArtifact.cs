@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SetOfGauntletsOfGhoulsFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private SetOfGauntletsOfGhoulsFixedArtifact(SaveGame saveGame)
+    private SetOfGauntletsOfGhoulsFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<GlovesSetOfGauntlets>();
     }

@@ -1,7 +1,9 @@
 ﻿namespace AngbandOS.Core.ArtifactBiases
 {
+    [Serializable]
     internal class DexterityArtifactBias : ArtifactBias
     {
+        private DexterityArtifactBias(SaveGame saveGame) : base(saveGame) { }
         public override bool ApplyBonuses(Item item)
         {
             if (!item.RandartItemCharacteristics.Dex)

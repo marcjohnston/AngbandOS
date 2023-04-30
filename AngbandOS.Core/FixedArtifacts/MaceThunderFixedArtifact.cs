@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MaceThunderFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private MaceThunderFixedArtifact(SaveGame saveGame)
+    private MaceThunderFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HaftedMace>();
     }

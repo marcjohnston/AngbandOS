@@ -1,7 +1,9 @@
 ﻿namespace AngbandOS.Core.ArtifactBiases
 {
-    internal class WarriorArtifactBias : ArtifactBias // TODO: These can/should be singletons
+    [Serializable]
+    internal class WarriorArtifactBias : ArtifactBias 
     {
+        private WarriorArtifactBias(SaveGame saveGame) : base(saveGame) { }
         public override bool ApplyBonuses(Item item)
         {
             if (!item.RandartItemCharacteristics.Str)
@@ -53,16 +55,16 @@
         }
 
         public override int ActivationPowerChance => 80;
-        public override ActivationPower GetActivationPowerType(Item item)
+        public override Activation GetActivationPowerType(Item item)
         {
             if (Program.Rng.DieRoll(100) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(InvulnActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<InvulnActivation>();
 
             }
             else
             {
-                return ActivationPowerManager.FindByType(typeof(BerserkActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<BerserkActivation>();
             }
         }
     }

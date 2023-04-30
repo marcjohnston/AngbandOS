@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class KatanaOfGrooFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private KatanaOfGrooFixedArtifact(SaveGame saveGame)
+    private KatanaOfGrooFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordKatana>();
     }

@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MightyHammerOfWorldsFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private MightyHammerOfWorldsFixedArtifact(SaveGame saveGame)
+    private MightyHammerOfWorldsFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HaftedMightyHammer>();
     }

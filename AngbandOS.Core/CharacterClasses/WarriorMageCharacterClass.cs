@@ -36,7 +36,7 @@
         public override int SpellWeight => 350;
         public override CastingType SpellCastingType => CastingType.Arcane;
         public override int SpellStat => Ability.Intelligence;
-        public override IArtifactBias? ArtifactBias => new MageArtifactBias();
+        public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get<MageArtifactBias>();
         public override int FromScrollWarriorArtifactBiasPercentageChance => 40;
         public override bool SenseInventoryTest(int level) => (0 != Program.Rng.RandomLessThan(75000 / ((level * level) + 40)));
         public override BaseRealm[] AvailablePrimaryRealms => new BaseRealm[] {

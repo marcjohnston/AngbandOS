@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private IronHelmTerrorMaskFixedArtifact(SaveGame saveGame)
+    private IronHelmTerrorMaskFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HelmIronHelm>();
     }
@@ -14,7 +14,7 @@ internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact, IActivatible
         if (saveGame.Player.BaseCharacterClass.ID == CharacterClass.Warrior)
         {
             item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
-            item.BonusPowerSubType = ActivationPowerManager.GetRandom();
+            item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
 
             IArtifactBias artifactBias = null;
             item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);

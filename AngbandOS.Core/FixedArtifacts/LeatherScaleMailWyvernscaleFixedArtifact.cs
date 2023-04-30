@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LeatherScaleMailWyvernscaleFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private LeatherScaleMailWyvernscaleFixedArtifact(SaveGame saveGame)
+    private LeatherScaleMailWyvernscaleFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SoftArmorLeatherScaleMail>();
     }

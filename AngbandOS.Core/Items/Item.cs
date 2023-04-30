@@ -116,7 +116,7 @@ namespace AngbandOS.Core.Items
         public int BaseArmourClass;
         public int BonusArmourClass;
         public int BonusDamage;
-        public ActivationPower BonusPowerSubType;
+        public Activation BonusPowerSubType;
         public RareItemTypeEnum BonusPowerType;
         public int BonusToHit;
         public int Count;
@@ -2079,11 +2079,6 @@ namespace AngbandOS.Core.Items
             return FactoryDescribeActivationEffect();
         }
 
-        private bool IsTried()
-        {
-            return Factory.Tried;
-        }
-
         public void ApplyMagic(int lev, bool okay, bool good, bool great)
         {
             
@@ -2227,7 +2222,7 @@ namespace AngbandOS.Core.Items
                 }
                 if (BonusPowerType != 0 && string.IsNullOrEmpty(RandartName))
                 {
-                    BonusPowerSubType = ActivationPowerManager.GetRandom();
+                    BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
                 }
                 if (ePtr.Cost == 0)
                 {
@@ -2326,7 +2321,7 @@ namespace AngbandOS.Core.Items
                         RandartItemCharacteristics.ImAcid = true;
                         if (artifactBias == null)
                         {
-                            artifactBias = new AcidArtifactBias();
+                            artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<AcidArtifactBias>();
                         }
                     }
                     break;
@@ -2341,7 +2336,7 @@ namespace AngbandOS.Core.Items
                         RandartItemCharacteristics.ImElec = true;
                         if (artifactBias == null)
                         {
-                            artifactBias = new ElectricityArtifactBias();
+                            artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ElectricityArtifactBias>();
                         }
                     }
                     break;
@@ -2356,7 +2351,7 @@ namespace AngbandOS.Core.Items
                         RandartItemCharacteristics.ImCold = true;
                         if (artifactBias == null)
                         {
-                            artifactBias = new ColdArtifactBias();
+                            artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ColdArtifactBias>();
                         }
                     }
                     break;
@@ -2371,7 +2366,7 @@ namespace AngbandOS.Core.Items
                         RandartItemCharacteristics.ImFire = true;
                         if (artifactBias == null)
                         {
-                            artifactBias = new FireArtifactBias();
+                            artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<FireArtifactBias>();
                         }
                     }
                     break;
@@ -2382,7 +2377,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.ResAcid = true;
                     if (artifactBias == null)
                     {
-                        artifactBias = new AcidArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<AcidArtifactBias>();
                     }
                     break;
 
@@ -2392,7 +2387,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.ResElec = true;
                     if (artifactBias == null)
                     {
-                        artifactBias = new ElectricityArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ElectricityArtifactBias>();
                     }
                     break;
 
@@ -2402,7 +2397,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.ResFire = true;
                     if (artifactBias == null)
                     {
-                        artifactBias = new FireArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<FireArtifactBias>();
                     }
                     break;
 
@@ -2412,7 +2407,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.ResCold = true;
                     if (artifactBias == null)
                     {
-                        artifactBias = new ColdArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ColdArtifactBias>();
                     }
                     break;
 
@@ -2421,15 +2416,15 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.ResPois = true;
                     if (artifactBias == null && Program.Rng.DieRoll(4) != 1)
                     {
-                        artifactBias = new PoisonArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<PoisonArtifactBias>();
                     }
                     else if (artifactBias == null && Program.Rng.DieRoll(2) == 1)
                     {
-                        artifactBias = new NecromanticArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<NecromanticArtifactBias>();
                     }
                     else if (artifactBias == null && Program.Rng.DieRoll(2) == 1)
                     {
-                        artifactBias = new RogueArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RogueArtifactBias>();
                     }
                     break;
 
@@ -2438,7 +2433,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.ResFear = true;
                     if (artifactBias == null && Program.Rng.DieRoll(3) == 1)
                     {
-                        artifactBias = new WarriorArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<WarriorArtifactBias>();
                     }
                     break;
 
@@ -2460,7 +2455,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.ResConf = true;
                     if (artifactBias == null && Program.Rng.DieRoll(6) == 1)
                     {
-                        artifactBias = new ChaosArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ChaosArtifactBias>();
                     }
                     break;
 
@@ -2479,7 +2474,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.ResNether = true;
                     if (artifactBias == null && Program.Rng.DieRoll(3) == 1)
                     {
-                        artifactBias = new NecromanticArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<NecromanticArtifactBias>();
                     }
                     break;
 
@@ -2493,7 +2488,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.ResChaos = true;
                     if (artifactBias == null && Program.Rng.DieRoll(2) == 1)
                     {
-                        artifactBias = new ChaosArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ChaosArtifactBias>();
                     }
                     break;
 
@@ -2513,7 +2508,7 @@ namespace AngbandOS.Core.Items
                     }
                     if (artifactBias == null)
                     {
-                        artifactBias = new ElectricityArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ElectricityArtifactBias>();
                     }
                     break;
 
@@ -2528,7 +2523,7 @@ namespace AngbandOS.Core.Items
                     }
                     if (artifactBias == null)
                     {
-                        artifactBias = new FireArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<FireArtifactBias>();
                     }
                     break;
 
@@ -2560,7 +2555,7 @@ namespace AngbandOS.Core.Items
             }
             if (Program.Rng.DieRoll(100) <= warriorArtifactBias && fromScroll)
             {
-                artifactBias = new WarriorArtifactBias();
+                artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<WarriorArtifactBias>();
             }
             string newName;
             if (!fromScroll && Program.Rng.DieRoll(ArtifactCurseChance) == 1)
@@ -2733,11 +2728,11 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.Str = true;
                     if (artifactBias == null && Program.Rng.DieRoll(13) != 1)
                     {
-                        artifactBias = new StrengthArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<StrengthArtifactBias>();
                     }
                     else if (artifactBias == null && Program.Rng.DieRoll(7) == 1)
                     {
-                        artifactBias = new WarriorArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<WarriorArtifactBias>();
                     }
                     break;
 
@@ -2746,11 +2741,11 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.Int = true;
                     if (artifactBias == null && Program.Rng.DieRoll(13) != 1)
                     {
-                        artifactBias = new IntelligenceArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<IntelligenceArtifactBias>();
                     }
                     else if (artifactBias == null && Program.Rng.DieRoll(7) == 1)
                     {
-                        artifactBias = new MageArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<MageArtifactBias>();
                     }
                     break;
 
@@ -2759,11 +2754,11 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.Wis = true;
                     if (artifactBias == null && Program.Rng.DieRoll(13) != 1)
                     {
-                        artifactBias = new WisdomArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<WisdomArtifactBias>();
                     }
                     else if (artifactBias == null && Program.Rng.DieRoll(7) == 1)
                     {
-                        artifactBias = new PriestlyArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<PriestlyArtifactBias>();
                     }
                     break;
 
@@ -2772,11 +2767,11 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.Dex = true;
                     if (artifactBias == null && Program.Rng.DieRoll(13) != 1)
                     {
-                        artifactBias = new DexterityArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<DexterityArtifactBias>();
                     }
                     else if (artifactBias == null && Program.Rng.DieRoll(7) == 1)
                     {
-                        artifactBias = new RogueArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RogueArtifactBias>();
                     }
                     break;
 
@@ -2785,11 +2780,11 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.Con = true;
                     if (artifactBias == null && Program.Rng.DieRoll(13) != 1)
                     {
-                        artifactBias = new ConstitutionArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ConstitutionArtifactBias>();
                     }
                     else if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
                     {
-                        artifactBias = new RangerArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RangerArtifactBias>();
                     }
                     break;
 
@@ -2798,7 +2793,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.Cha = true;
                     if (artifactBias == null && Program.Rng.DieRoll(13) != 1)
                     {
-                        artifactBias = new CharismaArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<CharismaArtifactBias>();
                     }
                     break;
 
@@ -2807,7 +2802,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.Stealth = true;
                     if (artifactBias == null && Program.Rng.DieRoll(3) == 1)
                     {
-                        artifactBias = new RogueArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RogueArtifactBias>();
                     }
                     break;
 
@@ -2816,7 +2811,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.Search = true;
                     if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
                     {
-                        artifactBias = new RangerArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RangerArtifactBias>();
                     }
                     break;
 
@@ -2829,7 +2824,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.Speed = true;
                     if (artifactBias == null && Program.Rng.DieRoll(11) == 1)
                     {
-                        artifactBias = new RogueArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RogueArtifactBias>();
                     }
                     break;
 
@@ -2856,7 +2851,7 @@ namespace AngbandOS.Core.Items
                         RandartItemCharacteristics.Blows = true;
                         if (artifactBias == null && Program.Rng.DieRoll(11) == 1)
                         {
-                            artifactBias = new WarriorArtifactBias();
+                            artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<WarriorArtifactBias>();
                         }
                     }
                     break;
@@ -2875,7 +2870,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.SustStr = true;
                     if (artifactBias == null)
                     {
-                        artifactBias = new StrengthArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<StrengthArtifactBias>();
                     }
                     break;
 
@@ -2883,7 +2878,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.SustInt = true;
                     if (artifactBias == null)
                     {
-                        artifactBias = new IntelligenceArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<IntelligenceArtifactBias>();
                     }
                     break;
 
@@ -2891,7 +2886,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.SustWis = true;
                     if (artifactBias == null)
                     {
-                        artifactBias = new WisdomArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<WisdomArtifactBias>();
                     }
                     break;
 
@@ -2899,7 +2894,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.SustDex = true;
                     if (artifactBias == null)
                     {
-                        artifactBias = new DexterityArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<DexterityArtifactBias>();
                     }
                     break;
 
@@ -2907,7 +2902,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.SustCon = true;
                     if (artifactBias == null)
                     {
-                        artifactBias = new ConstitutionArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ConstitutionArtifactBias>();
                     }
                     break;
 
@@ -2915,7 +2910,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.SustCha = true;
                     if (artifactBias == null)
                     {
-                        artifactBias = new CharismaArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<CharismaArtifactBias>();
                     }
                     break;
 
@@ -2929,11 +2924,11 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.HoldLife = true;
                     if (artifactBias == null && Program.Rng.DieRoll(5) == 1)
                     {
-                        artifactBias = new PriestlyArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<PriestlyArtifactBias>();
                     }
                     else if (artifactBias == null && Program.Rng.DieRoll(6) == 1)
                     {
-                        artifactBias = new NecromanticArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<NecromanticArtifactBias>();
                     }
                     break;
 
@@ -2957,7 +2952,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.Telepathy = true;
                     if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
                     {
-                        artifactBias = new MageArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<MageArtifactBias>();
                     }
                     break;
 
@@ -3029,11 +3024,11 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.SlayEvil = true;
                     if (artifactBias == null && Program.Rng.DieRoll(2) == 1)
                     {
-                        artifactBias = new LawArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<LawArtifactBias>();
                     }
                     else if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
                     {
-                        artifactBias = new PriestlyArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<PriestlyArtifactBias>();
                     }
                     break;
 
@@ -3042,7 +3037,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.SlayUndead = true;
                     if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
                     {
-                        artifactBias = new PriestlyArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<PriestlyArtifactBias>();
                     }
                     break;
 
@@ -3051,7 +3046,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.SlayDemon = true;
                     if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
                     {
-                        artifactBias = new PriestlyArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<PriestlyArtifactBias>();
                     }
                     break;
 
@@ -3086,7 +3081,7 @@ namespace AngbandOS.Core.Items
                         RandartItemCharacteristics.Vorpal = true;
                         if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
                         {
-                            artifactBias = new WarriorArtifactBias();
+                            artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<WarriorArtifactBias>();
                         }
                     }
                     else
@@ -3104,7 +3099,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.BrandFire = true;
                     if (artifactBias == null)
                     {
-                        artifactBias = new FireArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<FireArtifactBias>();
                     }
                     break;
 
@@ -3113,7 +3108,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.BrandCold = true;
                     if (artifactBias == null)
                     {
-                        artifactBias = new ColdArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ColdArtifactBias>();
                     }
                     break;
 
@@ -3122,7 +3117,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.BrandElec = true;
                     if (artifactBias == null)
                     {
-                        artifactBias = new ElectricityArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ElectricityArtifactBias>();
                     }
                     break;
 
@@ -3131,7 +3126,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.BrandAcid = true;
                     if (artifactBias == null)
                     {
-                        artifactBias = new AcidArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<AcidArtifactBias>();
                     }
                     break;
 
@@ -3140,15 +3135,15 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.BrandPois = true;
                     if (artifactBias == null && Program.Rng.DieRoll(3) != 1)
                     {
-                        artifactBias = new PoisonArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<PoisonArtifactBias>();
                     }
                     else if (artifactBias == null && Program.Rng.DieRoll(6) == 1)
                     {
-                        artifactBias = new NecromanticArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<NecromanticArtifactBias>();
                     }
                     else if (artifactBias == null)
                     {
-                        artifactBias = new RogueArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RogueArtifactBias>();
                     }
                     break;
 
@@ -3157,7 +3152,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.Vampiric = true;
                     if (artifactBias == null)
                     {
-                        artifactBias = new NecromanticArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<NecromanticArtifactBias>();
                     }
                     break;
 
@@ -3165,7 +3160,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.Chaotic = true;
                     if (artifactBias == null)
                     {
-                        artifactBias = new ChaosArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ChaosArtifactBias>();
                     }
                     break;
             }
@@ -3246,7 +3241,7 @@ namespace AngbandOS.Core.Items
 
         private void GiveActivationPower(ref IArtifactBias artifactBias)
         {
-            ActivationPower type = null;
+            Activation type = null;
             if (artifactBias != null)
             {
                 if (Program.Rng.DieRoll(100) < artifactBias.ActivationPowerChance)
@@ -3259,7 +3254,7 @@ namespace AngbandOS.Core.Items
                 int chance = 0;
                 while (type == null || Program.Rng.DieRoll(100) >= chance)
                 {
-                    type = ActivationPowerManager.GetRandom();
+                    type = SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
                     chance = type.RandomChance;
                 }
             }

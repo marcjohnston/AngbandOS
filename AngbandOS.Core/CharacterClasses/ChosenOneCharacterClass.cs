@@ -31,7 +31,7 @@
             "gain a large number of passive magical abilities (too long",
             "to list here) as they increase in level."
         };
-        public override IArtifactBias? ArtifactBias => new WarriorArtifactBias();
+        public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get<WarriorArtifactBias>();
         public override bool SenseInventoryTest(int level) => (0 != Program.Rng.RandomLessThan(9000 / ((level * level) + 40)));
         public override bool DetailedSenseInventory => true;
         public override bool OutfitsWithScrollsOfLight => true;

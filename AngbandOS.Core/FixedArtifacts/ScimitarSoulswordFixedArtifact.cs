@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class ScimitarSoulswordFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private ScimitarSoulswordFixedArtifact(SaveGame saveGame)
+    private ScimitarSoulswordFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordScimitar>();
     }
@@ -21,7 +21,7 @@ internal class ScimitarSoulswordFixedArtifact : FixedArtifact
         else
         {
             item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
-            item.BonusPowerSubType = ActivationPowerManager.GetRandom();
+            item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
         }
     }
     public override char Character => '|';

@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class PairOfHardLeatherBootsOfIthaquaFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private PairOfHardLeatherBootsOfIthaquaFixedArtifact(SaveGame saveGame)
+    private PairOfHardLeatherBootsOfIthaquaFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<BootsHardLeatherBoots>();
     }

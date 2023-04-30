@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private GoldenCrownOfTheSunFixedArtifact(SaveGame saveGame)
+    private GoldenCrownOfTheSunFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<CrownGolden>();
     }
@@ -22,7 +22,7 @@ internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact, IActivatible
     public override void ApplyResistances(SaveGame saveGame, Item item)
     {
         item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
-        item.BonusPowerSubType = ActivationPowerManager.GetRandom();
+        item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
 
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);

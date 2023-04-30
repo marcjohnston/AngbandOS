@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SpearOfDestinyFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private SpearOfDestinyFixedArtifact(SaveGame saveGame)
+    private SpearOfDestinyFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<PolearmSpear>();
     }

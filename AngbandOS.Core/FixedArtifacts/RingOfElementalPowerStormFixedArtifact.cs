@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class RingOfElementalPowerStormFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private RingOfElementalPowerStormFixedArtifact(SaveGame saveGame)
+    private RingOfElementalPowerStormFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<RingVilya>();
     }
@@ -24,7 +24,7 @@ internal class RingOfElementalPowerStormFixedArtifact : FixedArtifact, IActivati
     public override void ApplyResistances(SaveGame saveGame, Item item)
     {
         item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
-        item.BonusPowerSubType = ActivationPowerManager.GetRandom();
+        item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
     }
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 

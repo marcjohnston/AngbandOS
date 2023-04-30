@@ -36,7 +36,7 @@
         public override CastingType SpellCastingType => CastingType.Divine;
         public override int SpellStat => Ability.Intelligence;
         public override int AttackSpeedMultiplier => 4;
-        public override IArtifactBias? ArtifactBias => new RangerArtifactBias();
+        public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get<RangerArtifactBias>();
         public override int FromScrollWarriorArtifactBiasPercentageChance => 30;
         public override bool SenseInventoryTest(int level) => (0 != Program.Rng.RandomLessThan(95000 / ((level * level) + 40)));
         public override bool DetailedSenseInventory => true;

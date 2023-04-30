@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SmallMetalShieldVitriolFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private SmallMetalShieldVitriolFixedArtifact(SaveGame saveGame)
+    private SmallMetalShieldVitriolFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<ShieldSmallMetalShield>();
     }

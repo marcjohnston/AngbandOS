@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MorningStarFirestarterFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private MorningStarFirestarterFixedArtifact(SaveGame saveGame)
+    private MorningStarFirestarterFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HaftedMorningStar>();
     }

@@ -1,7 +1,9 @@
 ﻿namespace AngbandOS.Core.ArtifactBiases
 {
+    [Serializable]
     internal class IntelligenceArtifactBias : ArtifactBias
     {
+        private IntelligenceArtifactBias(SaveGame saveGame) : base(saveGame) { }
         public override bool ApplyBonuses(Item item)
         {
             if (!item.RandartItemCharacteristics.Int)

@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private QuarterstaffOfAtalFixedArtifact(SaveGame saveGame)
+    private QuarterstaffOfAtalFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HaftedQuarterstaff>();
     }
@@ -21,7 +21,7 @@ internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact, IActivatible
     public override void ApplyResistances(SaveGame saveGame, Item item)
     {
         item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
-        item.BonusPowerSubType = ActivationPowerManager.GetRandom();
+        item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
     }
     public string DescribeActivationEffect() => "probing, detection and full id  every 1000 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

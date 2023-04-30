@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class IronCrownOfMiseryFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private IronCrownOfMiseryFixedArtifact(SaveGame saveGame)
+    private IronCrownOfMiseryFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<CrownIron>();
     }
@@ -14,7 +14,7 @@ internal class IronCrownOfMiseryFixedArtifact : FixedArtifact
     public override void ApplyResistances(SaveGame saveGame, Item item)
     {
         item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
-        item.BonusPowerSubType = ActivationPowerManager.GetRandom();
+        item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
     }
     public override char Character => ']';
     public override Colour Colour => Colour.Grey;

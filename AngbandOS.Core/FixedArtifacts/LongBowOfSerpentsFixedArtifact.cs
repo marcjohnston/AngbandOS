@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LongBowOfSerpentsFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private LongBowOfSerpentsFixedArtifact(SaveGame saveGame)
+    private LongBowOfSerpentsFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<LongBowWeaponItemFactory>();
     }
@@ -21,7 +21,7 @@ internal class LongBowOfSerpentsFixedArtifact : FixedArtifact
         else
         {
             item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
-            item.BonusPowerSubType = ActivationPowerManager.GetRandom();
+            item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
         }
     }
     public override char Character => '}';

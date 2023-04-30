@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LargeMetalShieldOfStabilityFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private LargeMetalShieldOfStabilityFixedArtifact(SaveGame saveGame)
+    private LargeMetalShieldOfStabilityFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<ShieldLargeMetalShield>();
     }

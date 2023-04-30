@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class BroadSwordLightningFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private BroadSwordLightningFixedArtifact(SaveGame saveGame)
+    private BroadSwordLightningFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordBroadSword>();
     }

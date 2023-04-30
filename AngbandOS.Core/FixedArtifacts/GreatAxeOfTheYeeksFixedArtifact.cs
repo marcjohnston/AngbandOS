@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class GreatAxeOfTheYeeksFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private GreatAxeOfTheYeeksFixedArtifact(SaveGame saveGame)
+    private GreatAxeOfTheYeeksFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<PolearmGreatAxe>();
     }

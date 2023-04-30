@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class BeakedAxeOfTheodenFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private BeakedAxeOfTheodenFixedArtifact(SaveGame saveGame)
+    private BeakedAxeOfTheodenFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<PolearmBeakedAxe>();
     }

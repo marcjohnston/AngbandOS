@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class StarEssenceOfPolarisFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private StarEssenceOfPolarisFixedArtifact(SaveGame saveGame)
+    private StarEssenceOfPolarisFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<StarEssenceGaladrielLightSourceItemFactory>();
     }

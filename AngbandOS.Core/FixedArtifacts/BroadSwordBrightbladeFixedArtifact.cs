@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class BroadSwordBrightbladeFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private BroadSwordBrightbladeFixedArtifact(SaveGame saveGame)
+    private BroadSwordBrightbladeFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordBroadSword>();
     }
@@ -21,7 +21,7 @@ internal class BroadSwordBrightbladeFixedArtifact : FixedArtifact
         else
         {
             item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
-            item.BonusPowerSubType = ActivationPowerManager.GetRandom();
+            item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
         }
     }
     public override char Character => '|';

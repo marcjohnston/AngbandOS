@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private MetalScaleMailOfTheOrcsFixedArtifact(SaveGame saveGame)
+    private MetalScaleMailOfTheOrcsFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HardArmorMetalScaleMail>();
     }

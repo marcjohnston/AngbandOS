@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MithrilChainMailOfTheVampireHunterFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private MithrilChainMailOfTheVampireHunterFixedArtifact(SaveGame saveGame)
+    private MithrilChainMailOfTheVampireHunterFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HardArmorMithrilChainMail>();
     }

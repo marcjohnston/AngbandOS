@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LargeLeatherShieldRawhideFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private LargeLeatherShieldRawhideFixedArtifact(SaveGame saveGame)
+    private LargeLeatherShieldRawhideFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<ShieldLargeLeatherShield>();
     }

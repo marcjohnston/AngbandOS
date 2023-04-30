@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class RingOfBastFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private RingOfBastFixedArtifact(SaveGame saveGame)
+    private RingOfBastFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<RingTulkas>();
     }

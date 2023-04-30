@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.Metrics;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace AngbandOS.Core
@@ -6920,7 +6919,7 @@ namespace AngbandOS.Core
             char c = CurrentCommand;
 
             // Process commands
-            foreach (InGameCommand command in SingletonRepository.InGameCommands)
+            foreach (GameCommand command in SingletonRepository.InGameCommands)
             {
                 // TODO: The IF statement below can be converted into a dictionary with the applicable object 
                 // attached for improved performance.
@@ -6959,20 +6958,20 @@ namespace AngbandOS.Core
         /// Activate a randomly generated artifact that will therefore have been given a random power
         /// </summary>
         /// <param name="item"> The artifact being activated.</param>
-        public void ActivateRandomArtifact(Item item)
+        private void ActivateRandomArtifact(Item item)
         {
             // If we don't have a random artifact, abort
             if (string.IsNullOrEmpty(item.RandartName))
             {
                 return;
             }
-            ActivationPower artifactPower = item.BonusPowerSubType;
+            Activation artifactPower = item.BonusPowerSubType;
 
             if (!String.IsNullOrEmpty(artifactPower.PreActivationMessage))
             {
                 MsgPrint(artifactPower.PreActivationMessage);
             }
-            if (artifactPower.Activate(this))
+            if (artifactPower.Activate())
             {
                 item.RechargeTimeLeft = artifactPower.RechargeTime(Player);
             }
@@ -8934,7 +8933,7 @@ namespace AngbandOS.Core
         public void DoActivate()
         {
             // No item passed in, so get one; filtering to activatable items only
-            if (!SelectItem(out Item? item, "Activate which item? ", true, false, false, new ActivatableItemFilter()))
+            if (!SelectItem(out Item? item, "Activate which item? ", true, true, false, new ActivatableItemFilter()))
             {
                 MsgPrint("You have nothing to activate.");
                 return;
@@ -8943,21 +8942,18 @@ namespace AngbandOS.Core
             if (item == null)
             {
                 return;
-            }    
-            // Check if the item is activatable
-            if (!Player.ItemMatchesFilter(item, new ActivatableItemFilter()))
-            {
-                MsgPrint("You can't activate that!");
-                return;
             }
+
             // Activating an item uses 100 energy
             EnergyUse = 100;
+
             // Get the level of the item
             int itemLevel = item.Factory.Level;
             if (item.FixedArtifact != null)
             {
                 itemLevel = item.FixedArtifact.Level;
             }
+
             // Work out the chance of using the item successfully based on its level and the
             // player's skill
             int chance = Player.SkillUseDevice;
@@ -8965,33 +8961,40 @@ namespace AngbandOS.Core
             {
                 chance /= 2;
             }
+
             chance -= itemLevel > 50 ? 50 : itemLevel;
+
             // Always give a slight chance of success
             if (chance < Constants.UseDevice && Program.Rng.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
             {
                 chance = Constants.UseDevice;
             }
+
             // If we fail our use item roll just tell us and quit
             if (chance < Constants.UseDevice || Program.Rng.DieRoll(chance) < Constants.UseDevice)
             {
                 MsgPrint("You failed to activate it properly.");
                 return;
             }
+
             // If the item is still recharging, then just tell us and quit
             if (item.RechargeTimeLeft != 0)
             {
                 MsgPrint("It whines, glows and fades...");
                 return;
             }
+
             // We passed the checks, so the item is activated
             MsgPrint("You activate it...");
             PlaySound(SoundEffect.ActivateArtifact);
+
             // If it is a random artifact then use its ability and quit
             if (string.IsNullOrEmpty(item.RandartName) == false)
             {
                 ActivateRandomArtifact(item);
                 return;
             }
+
             // If it's a fixed artifact then use its ability
             if (item.FixedArtifact != null && typeof(IActivatible).IsAssignableFrom(item.FixedArtifact.GetType()))
             {
@@ -8999,6 +9002,7 @@ namespace AngbandOS.Core
                 activatibleFixedArtifact.ActivateItem(this, item);
                 return;
             }
+
             // If it wasn't an artifact, then check the other types of activatable item Planar
             // weapon teleports you
             if (item.RareItemTypeIndex == RareItemTypeEnum.WeaponPlanarWeapon)
@@ -9007,147 +9011,150 @@ namespace AngbandOS.Core
                 item.RechargeTimeLeft = 50 + Program.Rng.DieRoll(50);
                 return;
             }
+
             // Dragon armour gives you a ball of the relevant damage type
-            if (item.Category == ItemTypeEnum.DragArmor)
-            {
-                if (!GetDirectionWithAim(out int dir))
+            //if (item.Factory.ActivationPower != null)
+            //{
+            //    item.Factory.ActivationPower.Activate();
+            //    return;
+            //}
+            //else
+            //{
+                if (item.Category == ItemTypeEnum.DragArmor)
                 {
-                    return;
-                }
-                switch (item.ItemSubCategory) // TODO: Move to ItemCategories
-                {
-                    case DragonArmour.SvDragonBlue:
-                        {
-                            MsgPrint("You breathe lightning.");
-                            FireBall(new ElecProjectile(this), dir, 100, -2);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
-                            break;
-                        }
-                    case DragonArmour.SvDragonWhite:
-                        {
-                            MsgPrint("You breathe frost.");
-                            FireBall(new ColdProjectile(this), dir, 110, -2);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
-                            break;
-                        }
-                    case DragonArmour.SvDragonBlack:
-                        {
-                            MsgPrint("You breathe acid.");
-                            FireBall(new AcidProjectile(this), dir, 130, -2);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
-                            break;
-                        }
-                    case DragonArmour.SvDragonGreen:
-                        {
-                            MsgPrint("You breathe poison gas.");
-                            FireBall(new PoisProjectile(this), dir, 150, -2);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
-                            break;
-                        }
-                    case DragonArmour.SvDragonRed:
-                        {
-                            MsgPrint("You breathe fire.");
-                            FireBall(new FireProjectile(this), dir, 200, -2);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
-                            break;
-                        }
-                    case DragonArmour.SvDragonMultihued:
-                        {
-                            chance = Program.Rng.RandomLessThan(5);
-                            string element = chance == 1 ? "lightning" : (chance == 2 ? "frost" : (chance == 3 ? "acid" : (chance == 4 ? "poison gas" : "fire")));
-                            MsgPrint($"You breathe {element}.");
-                            switch (chance)
+                    if (!GetDirectionWithAim(out int dir))
+                    {
+                        return;
+                    }
+                    switch (item.ItemSubCategory) // TODO: Move to ItemCategories
+                    {
+                        case DragonArmour.SvDragonBlue:
                             {
-                                case 0:
-                                    FireBall(new FireProjectile(this),
-                                        dir, 250, -2);
-                                    break;
-
-                                case 1:
-                                    FireBall(new ElecProjectile(this),
-                                        dir, 250, -2);
-                                    break;
-
-                                case 2:
-                                    FireBall(new ColdProjectile(this),
-                                        dir, 250, -2);
-                                    break;
-
-                                case 3:
-                                    FireBall(new AcidProjectile(this),
-                                        dir, 250, -2);
-                                    break;
-
-                                case 4:
-                                    FireBall(new PoisProjectile(this),
-                                        dir, 250, -2);
-                                    break;
+                                MsgPrint("You breathe lightning.");
+                                FireBall(new ElecProjectile(this), dir, 100, -2);
+                                item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+                                return;
                             }
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(225) + 225;
-                            break;
-                        }
-                    case DragonArmour.SvDragonBronze:
-                        {
-                            MsgPrint("You breathe confusion.");
-                            FireBall(new ConfusionProjectile(this), dir, 120, -2);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
-                            break;
-                        }
-                    case DragonArmour.SvDragonGold:
-                        {
-                            MsgPrint("You breathe sound.");
-                            FireBall(new SoundProjectile(this), dir, 130, -2);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
-                            break;
-                        }
-                    case DragonArmour.SvDragonChaos:
-                        {
-                            chance = Program.Rng.RandomLessThan(2);
-                            string element = chance == 1 ? "chaos" : "disenchantment";
-                            MsgPrint($"You breathe {element}.");
-                            FireBall(projectile: chance == 1 ? (Projectile)new ChaosProjectile(this) : new DisenchantProjectile(this), dir: dir, dam: 220, rad: -2);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
-                            break;
-                        }
-                    case DragonArmour.SvDragonLaw:
-                        {
-                            chance = Program.Rng.RandomLessThan(2);
-                            string element = chance == 1 ? "sound" : "shards";
-                            MsgPrint($"You breathe {element}.");
-                            FireBall(chance == 1 ? (Projectile)new SoundProjectile(this) : new ExplodeProjectile(this), dir, 230, -2);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
-                            break;
-                        }
-                    case DragonArmour.SvDragonBalance:
-                        {
-                            chance = Program.Rng.RandomLessThan(4);
-                            string element = chance == 1
-                                ? "chaos"
-                                : (chance == 2 ? "disenchantment" : (chance == 3 ? "sound" : "shards"));
-                            MsgPrint($"You breathe {element}.");
-                            FireBall(chance == 1 ? new ChaosProjectile(this) : (chance == 2 ? new DisenchantProjectile(this) : (chance == 3 ? (Projectile)new SoundProjectile(this) : new ExplodeProjectile(this))), dir, 250, -2);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
-                            break;
-                        }
-                    case DragonArmour.SvDragonShining:
-                        {
-                            chance = Program.Rng.RandomLessThan(2);
-                            string element = chance == 0 ? "light" : "darkness";
-                            MsgPrint($"You breathe {element}.");
-                            FireBall(chance == 0 ? (Projectile)new LightProjectile(this) : new DarkProjectile(this), dir, 200, -2);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
-                            break;
-                        }
-                    case DragonArmour.SvDragonPower:
-                        {
-                            MsgPrint("You breathe the elements.");
-                            FireBall(new MissileProjectile(this), dir, 300, -3);
-                            item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
-                            break;
-                        }
+                        case DragonArmour.SvDragonWhite:
+                            {
+                                MsgPrint("You breathe frost.");
+                                FireBall(new ColdProjectile(this), dir, 110, -2);
+                                item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+                                return;
+                            }
+                        case DragonArmour.SvDragonBlack:
+                            {
+                                MsgPrint("You breathe acid.");
+                                FireBall(new AcidProjectile(this), dir, 130, -2);
+                                item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+                                return;
+                            }
+                        case DragonArmour.SvDragonGreen:
+                            {
+                                MsgPrint("You breathe poison gas.");
+                                FireBall(new PoisProjectile(this), dir, 150, -2);
+                                item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+                                return;
+                            }
+                        case DragonArmour.SvDragonRed:
+                            {
+                                MsgPrint("You breathe fire.");
+                                FireBall(new FireProjectile(this), dir, 200, -2);
+                                item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+                                return;
+                            }
+                        case DragonArmour.SvDragonMultihued:
+                            {
+                                chance = Program.Rng.RandomLessThan(5);
+                                string element = chance == 1 ? "lightning" : (chance == 2 ? "frost" : (chance == 3 ? "acid" : (chance == 4 ? "poison gas" : "fire")));
+                                MsgPrint($"You breathe {element}.");
+                                switch (chance)
+                                {
+                                    case 0:
+                                        FireBall(new FireProjectile(this), dir, 250, -2);
+                                        return;
+                                    case 1:
+                                        FireBall(new ElecProjectile(this), dir, 250, -2);
+                                        return;
+
+                                    case 2:
+                                        FireBall(new ColdProjectile(this), dir, 250, -2);
+                                        return;
+
+                                    case 3:
+                                        FireBall(new AcidProjectile(this), dir, 250, -2);
+                                        return;
+
+                                    case 4:
+                                        FireBall(new PoisProjectile(this), dir, 250, -2);
+                                        return;
+                                }
+                                item.RechargeTimeLeft = Program.Rng.RandomLessThan(225) + 225;
+                                return;
+                            }
+                        case DragonArmour.SvDragonBronze:
+                            {
+                                MsgPrint("You breathe confusion.");
+                                FireBall(new ConfusionProjectile(this), dir, 120, -2);
+                                item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+                                return;
+                            }
+                        case DragonArmour.SvDragonGold:
+                            {
+                                MsgPrint("You breathe sound.");
+                                FireBall(new SoundProjectile(this), dir, 130, -2);
+                                item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+                                return;
+                            }
+                        case DragonArmour.SvDragonChaos:
+                            {
+                                chance = Program.Rng.RandomLessThan(2);
+                                string element = chance == 1 ? "chaos" : "disenchantment";
+                                MsgPrint($"You breathe {element}.");
+                                FireBall(projectile: chance == 1 ? (Projectile)new ChaosProjectile(this) : new DisenchantProjectile(this), dir: dir, dam: 220, rad: -2);
+                                item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
+                                return;
+                            }
+                        case DragonArmour.SvDragonLaw:
+                            {
+                                chance = Program.Rng.RandomLessThan(2);
+                                string element = chance == 1 ? "sound" : "shards";
+                                MsgPrint($"You breathe {element}.");
+                                FireBall(chance == 1 ? (Projectile)new SoundProjectile(this) : new ExplodeProjectile(this), dir, 230, -2);
+                                item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
+                                return;
+                            }
+                        case DragonArmour.SvDragonBalance:
+                            {
+                                chance = Program.Rng.RandomLessThan(4);
+                                string element = chance == 1
+                                    ? "chaos"
+                                    : (chance == 2 ? "disenchantment" : (chance == 3 ? "sound" : "shards"));
+                                MsgPrint($"You breathe {element}.");
+                                FireBall(chance == 1 ? new ChaosProjectile(this) : (chance == 2 ? new DisenchantProjectile(this) : (chance == 3 ? (Projectile)new SoundProjectile(this) : new ExplodeProjectile(this))), dir, 250, -2);
+                                item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
+                                return;
+                            }
+                        case DragonArmour.SvDragonShining:
+                            {
+                                chance = Program.Rng.RandomLessThan(2);
+                                string element = chance == 0 ? "light" : "darkness";
+                                MsgPrint($"You breathe {element}.");
+                                FireBall(chance == 0 ? (Projectile)new LightProjectile(this) : new DarkProjectile(this), dir, 200, -2);
+                                item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
+                                return;
+                            }
+                        case DragonArmour.SvDragonPower:
+                            {
+                                MsgPrint("You breathe the elements.");
+                                FireBall(new MissileProjectile(this), dir, 300, -3);
+                                item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
+                                return;
+                            }
+                    }
                 }
-                return;
-            }
+            //}
+
             // Elemental rings give you a ball of the appropriate element
             if (item.Category == ItemTypeEnum.Ring)
             {
@@ -9162,21 +9169,21 @@ namespace AngbandOS.Core
                             FireBall(new AcidProjectile(this), dir, 50, 2);
                             Player.TimedAcidResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
-                            break;
+                            return;
                         }
                     case RingType.Ice:
                         {
                             FireBall(new ColdProjectile(this), dir, 50, 2);
                             Player.TimedColdResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
-                            break;
+                            return;
                         }
                     case RingType.Flames:
                         {
                             FireBall(new FireProjectile(this), dir, 50, 2);
                             Player.TimedFireResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
                             item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
-                            break;
+                            return;
                         }
                 }
             }
@@ -19092,7 +19099,7 @@ namespace AngbandOS.Core
 
                 Screen.Clear();
                 int index = 0;
-                foreach (ActivationPower activationPower in ActivationPowerManager.ActivationPowers)
+                foreach (Activation activationPower in SingletonRepository.Activations)
                 {
                     int row = 2 + (index % 40);
                     int col = 30 * (index / 40);
@@ -19109,12 +19116,13 @@ namespace AngbandOS.Core
                     return;
                 }
                 selectedIndex--;
-                if (selectedIndex < 0 || selectedIndex > ActivationPowerManager.ActivationPowers.Length)
+                if (selectedIndex < 0 || selectedIndex > SingletonRepository.Activations.Count)
                 {
                     return;
                 }
 
-                ActivationPowerManager.ActivationPowers[selectedIndex].Activate(this);
+                Activation activation = SingletonRepository.Activations[selectedIndex];
+                activation.Activate();
             }
             finally
             {

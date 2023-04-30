@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SpearGaeBulgFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private SpearGaeBulgFixedArtifact(SaveGame saveGame)
+    private SpearGaeBulgFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<PolearmSpear>();
     }

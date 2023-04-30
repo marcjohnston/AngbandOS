@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class QuarterstaffEririlFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private QuarterstaffEririlFixedArtifact(SaveGame saveGame)
+    private QuarterstaffEririlFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HaftedQuarterstaff>();
     }

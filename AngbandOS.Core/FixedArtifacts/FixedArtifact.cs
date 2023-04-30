@@ -11,6 +11,13 @@ namespace AngbandOS.Core.FixedArtifacts
     [Serializable]
     internal abstract class FixedArtifact : IItemCharacteristics
     {
+        protected readonly SaveGame SaveGame;
+
+        protected FixedArtifact(SaveGame saveGame)
+        {
+            SaveGame = saveGame;
+        }
+
         /// <summary>
         /// Represents the quantity of this artifact currently in existence.
         /// </summary>

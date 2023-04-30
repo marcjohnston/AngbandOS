@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class ShadowCloakOfNyogthaFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private ShadowCloakOfNyogthaFixedArtifact(SaveGame saveGame)
+    private ShadowCloakOfNyogthaFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<CloakShadow>();
     }

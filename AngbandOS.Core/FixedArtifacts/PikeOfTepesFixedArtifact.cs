@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class PikeOfTepesFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private PikeOfTepesFixedArtifact(SaveGame saveGame)
+    private PikeOfTepesFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<PolearmPike>();
     }

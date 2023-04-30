@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private MultiHuedDragonScaleMailRazorbackFixedArtifact(SaveGame saveGame)
+    private MultiHuedDragonScaleMailRazorbackFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<MultiHuedDragonScaleMailArmorItemFactory>();
     }

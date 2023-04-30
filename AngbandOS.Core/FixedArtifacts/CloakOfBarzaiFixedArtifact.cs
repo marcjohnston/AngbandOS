@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class CloakOfBarzaiFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private CloakOfBarzaiFixedArtifact(SaveGame saveGame)
+    private CloakOfBarzaiFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<Cloak>();
     }

@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class RingOfSetFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private RingOfSetFixedArtifact(SaveGame saveGame)
+    private RingOfSetFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<RingPower>();
     }
@@ -24,7 +24,7 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IActivatible
     public override void ApplyResistances(SaveGame saveGame, Item item)
     {
         item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
-        item.BonusPowerSubType = ActivationPowerManager.GetRandom();
+        item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
 
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);

@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class CloakDarknessFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private CloakDarknessFixedArtifact(SaveGame saveGame)
+    private CloakDarknessFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<Cloak>();
     }

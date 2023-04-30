@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class RapierOfMontoyaFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private RapierOfMontoyaFixedArtifact(SaveGame saveGame)
+    private RapierOfMontoyaFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordRapier>();
     }

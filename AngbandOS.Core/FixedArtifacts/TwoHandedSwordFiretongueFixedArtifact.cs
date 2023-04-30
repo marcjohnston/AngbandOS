@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class TwoHandedSwordFiretongueFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private TwoHandedSwordFiretongueFixedArtifact(SaveGame saveGame)
+    private TwoHandedSwordFiretongueFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordTwoHandedSword>();
     }
@@ -21,7 +21,7 @@ internal class TwoHandedSwordFiretongueFixedArtifact : FixedArtifact
         else
         {
             item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
-            item.BonusPowerSubType = ActivationPowerManager.GetRandom();
+            item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
         }
     }
     public override char Character => '|';

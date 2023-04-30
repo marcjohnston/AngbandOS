@@ -1,7 +1,9 @@
 ﻿namespace AngbandOS.Core.ArtifactBiases
 {
+    [Serializable]
     internal class RangerArtifactBias : ArtifactBias
     {
+        private RangerArtifactBias(SaveGame saveGame) : base(saveGame) { }
         public override bool ApplyBonuses(Item item)
         {
             if (!item.RandartItemCharacteristics.Con)
@@ -59,31 +61,31 @@
             return false;
         }
 
-        public override ActivationPower GetActivationPowerType(Item item)
+        public override Activation GetActivationPowerType(Item item)
         {
             if (Program.Rng.DieRoll(20) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(CharmAnimalsActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<CharmAnimalsActivation>();
             }
             else if (Program.Rng.DieRoll(7) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(SummonAnimalActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<SummonAnimalActivation>();
             }
             else if (Program.Rng.DieRoll(6) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(CharmAnimalActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<CharmAnimalActivation>();
             }
             else if (Program.Rng.DieRoll(4) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(ResistAllActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<ResistAllActivation>();
             }
             else if (Program.Rng.DieRoll(3) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(SatiateActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<SatiateActivation>();
             }
             else
             {
-                return ActivationPowerManager.FindByType(typeof(CurePoisonActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<CurePoisonActivation>();
             }
         }
     }

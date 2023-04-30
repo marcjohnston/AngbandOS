@@ -1,7 +1,9 @@
 ﻿namespace AngbandOS.Core.ArtifactBiases
 {
+    [Serializable]
     internal class NecromanticArtifactBias : ArtifactBias
     {
+        private NecromanticArtifactBias(SaveGame saveGame) : base(saveGame) { }
         public override bool ApplyRandomResistances(Item item)
         {
             if (!item.RandartItemCharacteristics.ResNether)
@@ -55,39 +57,39 @@
             return false;
         }
 
-        public override ActivationPower GetActivationPowerType(Item item)
+        public override Activation GetActivationPowerType(Item item)
         {
             if (Program.Rng.DieRoll(66) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(WraithActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<WraithActivation>();
             }
             else if (Program.Rng.DieRoll(13) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(DispGoodActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<DispGoodActivation>();
             }
             else if (Program.Rng.DieRoll(9) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(MassGenoActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<MassGenoActivation>();
             }
             else if (Program.Rng.DieRoll(8) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(CarnageActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<CarnageActivation>();
             }
             else if (Program.Rng.DieRoll(13) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(SummonUndeadActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<SummonUndeadActivation>();
             }
             else if (Program.Rng.DieRoll(9) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(Vampire2ActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<Vampire2Activation>();
             }
             else if (Program.Rng.DieRoll(6) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(CharmUndeadActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<CharmUndeadActivation>();
             }
             else
             {
-                return ActivationPowerManager.FindByType(typeof(Vampire1ActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<Vampire1Activation>();
             }
         }
     }

@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private AugmentedChainMailOfTheOgreLordsFixedArtifact(SaveGame saveGame)
+    private AugmentedChainMailOfTheOgreLordsFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<BrillianceAmuletJeweleryItemFactory>();
     }

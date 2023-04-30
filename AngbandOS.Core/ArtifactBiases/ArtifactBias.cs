@@ -3,8 +3,16 @@
     /// <summary>
     /// Represents the bias used when applying special abilities to an artifact.
     /// </summary>
+    [Serializable]
     internal abstract class ArtifactBias : IArtifactBias
     {
+        protected readonly SaveGame SaveGame;
+
+        protected ArtifactBias(SaveGame saveGame)
+        {
+            SaveGame = saveGame;
+        }
+
         /// <inheritdoc/>
         public virtual int ImmunityLuckOneInChance => 20;
 
@@ -33,7 +41,7 @@
         }
 
         /// <inheritdoc/>
-        public virtual ActivationPower GetActivationPowerType(Item item)
+        public virtual Activation GetActivationPowerType(Item item)
         {
             return null;
         }

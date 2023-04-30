@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private GemstoneShiningTrapezodedronFixedArtifact(SaveGame saveGame)
+    private GemstoneShiningTrapezodedronFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<GemstoneLightSourceItemFactory>();
     }

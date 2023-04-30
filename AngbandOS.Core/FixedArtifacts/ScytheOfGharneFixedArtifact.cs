@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class ScytheOfGharneFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private ScytheOfGharneFixedArtifact(SaveGame saveGame)
+    private ScytheOfGharneFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<PolearmScythe>();
     }

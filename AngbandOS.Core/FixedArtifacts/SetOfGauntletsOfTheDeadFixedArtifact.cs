@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SetOfGauntletsOfTheDeadFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private SetOfGauntletsOfTheDeadFixedArtifact(SaveGame saveGame)
+    private SetOfGauntletsOfTheDeadFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<GlovesSetOfGauntlets>();
     }

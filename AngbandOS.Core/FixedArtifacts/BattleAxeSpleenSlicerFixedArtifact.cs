@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class BattleAxeSpleenSlicerFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private BattleAxeSpleenSlicerFixedArtifact(SaveGame saveGame)
+    private BattleAxeSpleenSlicerFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<PolearmBattleAxe>();
     }

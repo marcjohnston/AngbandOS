@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class ExecutionersSwordOfNyarlathotepFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private ExecutionersSwordOfNyarlathotepFixedArtifact(SaveGame saveGame)
+    private ExecutionersSwordOfNyarlathotepFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordExecutionersSword>();
     }

@@ -1,7 +1,9 @@
 ﻿namespace AngbandOS.Core.ArtifactBiases
 {
+    [Serializable]
     internal class ColdArtifactBias : ArtifactBias
     {
+        private ColdArtifactBias(SaveGame saveGame) : base(saveGame) { }
         public override bool ApplyRandomResistances(Item item)
         {
             if (!item.RandartItemCharacteristics.ResCold)
@@ -39,23 +41,23 @@
             return false;
         }
 
-        public override ActivationPower GetActivationPowerType(Item item)
+        public override Activation GetActivationPowerType(Item item)
         {
             if (Program.Rng.DieRoll(3) != 1)
             {
-                return ActivationPowerManager.FindByType(typeof(BoCold1ActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<BoCold1Activation>();
             }
             else if (Program.Rng.DieRoll(3) != 1)
             {
-                return ActivationPowerManager.FindByType(typeof(BaCold1ActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<BaCold1Activation>();
             }
             else if (Program.Rng.DieRoll(3) != 1)
             {
-                return ActivationPowerManager.FindByType(typeof(BaCold2ActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<BaCold2Activation>();
             }
             else
             {
-                return ActivationPowerManager.FindByType(typeof(BaCold3ActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<BaCold3Activation>();
             }
         }
     }

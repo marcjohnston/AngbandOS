@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LongBowSureshotFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private LongBowSureshotFixedArtifact(SaveGame saveGame)
+    private LongBowSureshotFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<LongBowWeaponItemFactory>();
     }

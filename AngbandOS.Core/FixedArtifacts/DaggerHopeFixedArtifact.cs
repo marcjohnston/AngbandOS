@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class DaggerHopeFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private DaggerHopeFixedArtifact(SaveGame saveGame)
+    private DaggerHopeFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordDagger>();
     }

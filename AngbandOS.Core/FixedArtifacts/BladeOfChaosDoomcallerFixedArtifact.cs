@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class BladeOfChaosDoomcallerFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private BladeOfChaosDoomcallerFixedArtifact(SaveGame saveGame)
+    private BladeOfChaosDoomcallerFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordBladeOfChaos>();
     }

@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class FullPlateArmourOfTheGodsFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private FullPlateArmourOfTheGodsFixedArtifact(SaveGame saveGame)
+    private FullPlateArmourOfTheGodsFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HardArmorFullPlateArmour>();
     }

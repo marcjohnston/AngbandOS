@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class AmuletOfAbdulAlhazredFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private AmuletOfAbdulAlhazredFixedArtifact(SaveGame saveGame)
+    private AmuletOfAbdulAlhazredFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<IngweAmuletJeweleryItemFactory>();
     }

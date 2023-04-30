@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class TridentOfTheGnorriFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private TridentOfTheGnorriFixedArtifact(SaveGame saveGame)
+    private TridentOfTheGnorriFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<PolearmTrident>();
     }
@@ -23,7 +23,7 @@ internal class TridentOfTheGnorriFixedArtifact : FixedArtifact, IActivatible
     public override void ApplyResistances(SaveGame saveGame, Item item)
     {
         item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
-        item.BonusPowerSubType = ActivationPowerManager.GetRandom();
+        item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
     }
     public string DescribeActivationEffect() => "teleport away every 150 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

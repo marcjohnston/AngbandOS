@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MainGaucheOfDefenceFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private MainGaucheOfDefenceFixedArtifact(SaveGame saveGame)
+    private MainGaucheOfDefenceFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordMainGauche>();
     }
@@ -21,7 +21,7 @@ internal class MainGaucheOfDefenceFixedArtifact : FixedArtifact
         else
         {
             item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
-            item.BonusPowerSubType = ActivationPowerManager.GetRandom();
+            item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
         }
     }
     public override char Character => '|';

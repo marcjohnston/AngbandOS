@@ -1,7 +1,9 @@
 ﻿namespace AngbandOS.Core.ArtifactBiases
 {
+    [Serializable]
     internal class PoisonArtifactBias : ArtifactBias
     {
+        private PoisonArtifactBias(SaveGame saveGame) : base(saveGame) { }
         public override bool ApplyRandomResistances(Item item)
         {
             if (!item.RandartItemCharacteristics.ResPois)
@@ -31,9 +33,9 @@
             return false;
         }
 
-        public override ActivationPower GetActivationPowerType(Item item)
+        public override Activation GetActivationPowerType(Item item)
         {
-            return ActivationPowerManager.FindByType(typeof(BaPois1ActivationPower));
+            return SaveGame.SingletonRepository.Activations.Get<BaPois1Activation>();
         }
     }
 }

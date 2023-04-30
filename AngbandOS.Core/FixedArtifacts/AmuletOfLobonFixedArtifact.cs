@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class AmuletOfLobonFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private AmuletOfLobonFixedArtifact(SaveGame saveGame)
+    private AmuletOfLobonFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<CarlammasAmuletJeweleryItemFactory>();
     }

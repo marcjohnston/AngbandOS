@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SabreOfBluebeardFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private SabreOfBluebeardFixedArtifact(SaveGame saveGame)
+    private SabreOfBluebeardFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordSabre>();
     }

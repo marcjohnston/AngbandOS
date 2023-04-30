@@ -12,11 +12,13 @@ namespace AngbandOS.Core
         public SingletonDictionary<FixedArtifact> FixedArtifacts;
         [Obsolete("Needs to be non-keyed")]
         public SingletonKeyedDictionary<string, FloorTileType> FloorTileTypes;
-        public SingletonDictionary<InGameCommand> InGameCommands;
+        public SingletonDictionary<GameCommand> InGameCommands;
+        public SingletonDictionary<ArtifactBias> ArtifactBiases;
         public SingletonDictionary<BaseInventorySlot> InventorySlots;
         public SingletonDictionary<ItemFactory> ItemFactories;
         public SingletonDictionary<MonsterRace> MonsterRaces;
         public SingletonDictionary<ProjectileGraphic> ProjectileGraphics;
+        public SingletonDictionary<Activation> Activations;
         public SingletonDictionary<Race> Races;
         [Obsolete("Needs to be non-keyed")]
         public SingletonKeyedDictionary<RareItemTypeEnum, RareItem> RareItemTypes;
@@ -100,11 +102,13 @@ namespace AngbandOS.Core
 
         public void Initialize(SaveGame saveGame)
         {
-            InGameCommands = new SingletonDictionary<InGameCommand>(saveGame, LoadTypesFromAssembly<InGameCommand>(saveGame));
+            InGameCommands = new SingletonDictionary<GameCommand>(saveGame, LoadTypesFromAssembly<GameCommand>(saveGame));
             WizardCommands = new SingletonDictionary<WizardCommand>(saveGame, LoadTypesFromAssembly<WizardCommand>(saveGame));
             ItemFactories = new SingletonDictionary<ItemFactory>(saveGame, LoadTypesFromAssembly<ItemFactory>(saveGame));
             InventorySlots = new SingletonDictionary<BaseInventorySlot>(saveGame, LoadTypesFromAssembly<BaseInventorySlot>(saveGame));
             StoreCommands = new SingletonDictionary<BaseStoreCommand>(saveGame, LoadTypesFromAssembly<BaseStoreCommand>(saveGame));
+            ArtifactBiases = new SingletonDictionary<ArtifactBias>(saveGame, LoadTypesFromAssembly<ArtifactBias>(saveGame));
+            Activations = new SingletonDictionary<Activation>(saveGame, LoadTypesFromAssembly<Activation>(saveGame));
             CharacterClasses = new SingletonDictionary<BaseCharacterClass>(saveGame, LoadTypesFromAssembly<BaseCharacterClass>(saveGame));
             Realms = new SingletonDictionary<BaseRealm>(saveGame, LoadTypesFromAssembly<BaseRealm>(saveGame));
             Towns = new SingletonDictionary<Town>(saveGame, LoadTypesFromAssembly<Town>(saveGame));

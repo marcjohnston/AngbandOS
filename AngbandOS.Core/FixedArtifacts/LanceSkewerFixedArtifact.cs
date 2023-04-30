@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LanceSkewerFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private LanceSkewerFixedArtifact(SaveGame saveGame)
+    private LanceSkewerFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<PolearmLance>();
     }

@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SetOfLeatherGlovesOfLightFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private SetOfLeatherGlovesOfLightFixedArtifact(SaveGame saveGame)
+    private SetOfLeatherGlovesOfLightFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<GlovesSetOfLeatherGloves>();
     }

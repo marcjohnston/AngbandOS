@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class SabreOfXuraFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private SabreOfXuraFixedArtifact(SaveGame saveGame)
+    private SabreOfXuraFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordSabre>();
     }

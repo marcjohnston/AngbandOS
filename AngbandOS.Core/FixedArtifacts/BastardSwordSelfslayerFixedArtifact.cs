@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class BastardSwordSelfSlayerFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private BastardSwordSelfSlayerFixedArtifact(SaveGame saveGame)
+    private BastardSwordSelfSlayerFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordBastardSword>();
     }

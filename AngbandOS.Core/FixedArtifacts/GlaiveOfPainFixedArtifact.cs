@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class GlaiveOfPainFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private GlaiveOfPainFixedArtifact(SaveGame saveGame)
+    private GlaiveOfPainFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<PolearmGlaive>();
     }

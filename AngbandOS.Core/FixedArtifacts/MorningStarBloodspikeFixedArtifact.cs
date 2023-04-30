@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class MorningStarBloodspikeFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private MorningStarBloodspikeFixedArtifact(SaveGame saveGame)
+    private MorningStarBloodspikeFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HaftedMorningStar>();
     }

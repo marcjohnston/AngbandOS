@@ -1,7 +1,10 @@
 ﻿namespace AngbandOS.Core.ArtifactBiases
 {
+    [Serializable]
     internal class ChaosArtifactBias : ArtifactBias
     {
+        private ChaosArtifactBias(SaveGame saveGame) : base(saveGame) { }
+
         public override bool ApplyRandomResistances(Item item)
         {
             if (!item.RandartItemCharacteristics.ResChaos)
@@ -61,15 +64,15 @@
 
         public override int ActivationPowerChance => 50;
 
-        public override ActivationPower GetActivationPowerType(Item item)
+        public override Activation GetActivationPowerType(Item item)
         {
             if (Program.Rng.DieRoll(6) == 1)
             {
-                return ActivationPowerManager.FindByType(typeof(SummonDemonActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<SummonDemonActivation>();
             }
             else
             {
-                return ActivationPowerManager.FindByType(typeof(CallChaosActivationPower));
+                return SaveGame.SingletonRepository.Activations.Get<CallChaosActivation>();
             }
         }
     }

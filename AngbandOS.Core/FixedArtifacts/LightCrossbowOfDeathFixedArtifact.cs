@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LightCrossbowOfDeathFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private LightCrossbowOfDeathFixedArtifact(SaveGame saveGame)
+    private LightCrossbowOfDeathFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<LightCrossbowBowWeaponItemFactory>();
     }
@@ -26,7 +26,7 @@ internal class LightCrossbowOfDeathFixedArtifact : FixedArtifact, IActivatible
         else
         {
             item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
-            item.BonusPowerSubType = ActivationPowerManager.GetRandom();
+            item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
         }
     }
     public string DescribeActivationEffect() => "fire branding of bolts every 999 turns";

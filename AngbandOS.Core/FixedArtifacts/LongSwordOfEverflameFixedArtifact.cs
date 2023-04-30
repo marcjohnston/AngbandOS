@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class LongSwordOfEverflameFixedArtifact : FixedArtifact, IActivatible
 {
     private readonly ItemFactory _baseItemCategory;
-    private LongSwordOfEverflameFixedArtifact(SaveGame saveGame)
+    private LongSwordOfEverflameFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SwordLongSword>();
     }
@@ -31,7 +31,7 @@ internal class LongSwordOfEverflameFixedArtifact : FixedArtifact, IActivatible
         else
         {
             item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
-            item.BonusPowerSubType = ActivationPowerManager.GetRandom();
+            item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
         }
     }
     public override ItemFactory BaseItemCategory => _baseItemCategory;

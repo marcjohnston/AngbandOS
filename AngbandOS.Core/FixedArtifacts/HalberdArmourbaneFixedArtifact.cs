@@ -4,7 +4,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 internal class HalberdArmourbaneFixedArtifact : FixedArtifact
 {
     private readonly ItemFactory _baseItemCategory;
-    private HalberdArmourbaneFixedArtifact(SaveGame saveGame)
+    private HalberdArmourbaneFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
         _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<PolearmHalberd>();
     }

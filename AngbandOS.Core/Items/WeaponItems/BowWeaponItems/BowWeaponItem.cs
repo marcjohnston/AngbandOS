@@ -26,7 +26,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.XtraMight = true;
                     if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
                     {
-                        artifactBias = new RangerArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RangerArtifactBias>();
                     }
                     break;
 
@@ -34,7 +34,7 @@ namespace AngbandOS.Core.Items
                     RandartItemCharacteristics.XtraShots = true;
                     if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
                     {
-                        artifactBias = new RangerArtifactBias();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RangerArtifactBias>();
                     }
                     break;
             }
