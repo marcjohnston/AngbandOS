@@ -8,7 +8,7 @@
         /// <summary>
         /// Returns the staff flavours repository because staves have flavours that need to be identified.
         /// </summary>
-        public IEnumerable<Flavour> Flavours => SaveGame.SingletonRepository.StaffFlavours;
+        public IEnumerable<Flavour>? GetFlavourRepository() => SaveGame.SingletonRepository.StaffFlavours;
 
         /// <inheritdoc/>
         public Flavour Flavour { get; set; }

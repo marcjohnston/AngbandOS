@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class RodFrostBolts : RodItemClass
+    internal class RodFrostBolts : RodItemFactory
     {
         private RodFrostBolts(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 

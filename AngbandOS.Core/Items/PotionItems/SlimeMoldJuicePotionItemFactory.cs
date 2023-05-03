@@ -3,7 +3,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class SlimeMoldJuicePotionItemFactory : PotionItemFactory
     {
-        private SlimeMoldJuicePotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private SlimeMoldJuicePotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
 
         public override char Character => '!';
         public override string Name => "Slime Mold Juice";
@@ -24,6 +24,16 @@ namespace AngbandOS.Core.ItemCategories
             potion.Quaff(saveGame);
             return true;
         }
+
+        /// <summary>
+        /// Returns null because the slime-mold potion is always an icky-green flavour.
+        /// </summary>
+        public override IEnumerable<Flavour>? GetFlavourRepository()
+        {
+            Flavour = SaveGame.SingletonRepository.PotionFlavours.Get<IckyGreenPotionFlavour>();
+            return null;
+        }
+
         public override bool Smash(SaveGame saveGame, int who, int y, int x)
         {
             return true;

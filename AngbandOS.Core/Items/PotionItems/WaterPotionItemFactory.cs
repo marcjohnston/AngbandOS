@@ -3,8 +3,7 @@ namespace AngbandOS.Core.ItemCategories
     [Serializable]
     internal class WaterPotionItemFactory : PotionItemFactory
     {
-        private WaterPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-
+        private WaterPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
         public override char Character => '!';
         public override string Name => "Water";
 
@@ -23,6 +22,16 @@ namespace AngbandOS.Core.ItemCategories
             saveGame.MsgPrint("You feel less thirsty.");
             return true;
         }
+
+        /// <summary>
+        /// Returns null because water potions are always clear flavour.
+        /// </summary>
+        public override IEnumerable<Flavour>? GetFlavourRepository()
+        {
+            Flavour = SaveGame.SingletonRepository.PotionFlavours.Get<ClearPotionFlavour>();
+            return null;
+        }
+
         public override bool Smash(SaveGame saveGame, int who, int y, int x)
         {
             return true;

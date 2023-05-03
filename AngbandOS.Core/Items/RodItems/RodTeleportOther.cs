@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class RodTeleportOther : RodItemClass
+    internal class RodTeleportOther : RodItemFactory
     {
         private RodTeleportOther(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 

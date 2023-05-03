@@ -8,7 +8,7 @@
         /// <summary>
         /// Returns the scroll flavours repository because scrolls have flavours that need to be identified.
         /// </summary>
-        public IEnumerable<Flavour> Flavours => SaveGame.SingletonRepository.ScrollFlavours;
+        public IEnumerable<Flavour>? GetFlavourRepository() => SaveGame.ScrollFlavours;
 
         /// <inheritdoc/>
         public Flavour Flavour { get; set; }

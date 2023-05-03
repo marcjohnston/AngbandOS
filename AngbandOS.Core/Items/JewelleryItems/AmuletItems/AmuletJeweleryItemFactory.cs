@@ -14,7 +14,7 @@
         /// <summary>
         /// Returns the amulet flavours repository because amulets have flavours that need to be identified.
         /// </summary>
-        public IEnumerable<Flavour> Flavours => SaveGame.SingletonRepository.AmuletFlavours;
+        public IEnumerable<Flavour>? GetFlavourRepository() => SaveGame.SingletonRepository.AmuletFlavours;
 
         /// <inheritdoc/>
         public Flavour Flavour { get; set; }

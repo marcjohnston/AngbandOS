@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class RodPolymorph : RodItemClass
+    internal class RodPolymorph : RodItemFactory
     {
         private RodPolymorph(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 

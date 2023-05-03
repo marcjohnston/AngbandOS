@@ -10,4 +10,9 @@ internal class ClearPotionFlavour : PotionFlavour
     /// Returns a shuffle weight of 3, so that it appears first.
     /// </summary>
     public override int ShuffleWeight => 3;
+
+    /// <summary>
+    /// Returns false because the clear potion flavour is manually assigned to the water potion.
+    /// </summary>
+    public override bool CanBeAssigned => false;
 }

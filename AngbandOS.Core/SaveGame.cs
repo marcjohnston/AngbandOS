@@ -2118,30 +2118,41 @@ namespace AngbandOS.Core
                     // Convert the factory into the IFlavour type.
                     IFlavour flavourFactory = (IFlavour)kPtr;
 
-                    // Get the repository of flavours.
-                    IEnumerable<Flavour> flavourRepository = flavourFactory.Flavours;
+                    // Get the repository for the flavours.
+                    IEnumerable<Flavour>? flavourRepository = flavourFactory.GetFlavourRepository();
 
-                    // Determine the next next index of the flavour to assign to this factory.
-                    Type factoryType = kPtr.GetType();
-                    if (!currentFlavourIndex.TryGetValue(factoryType, out IEnumerator<Flavour>? flavourEnumerator))
+                    // Check to see if the repository indicates that the flavours need to be assigned.
+                    if (flavourRepository != null)
                     {
-                        flavourEnumerator = flavourRepository.GetEnumerator();
-                        currentFlavourIndex.Add(factoryType, flavourEnumerator);
+                        // The dictionary for the enumerator is using the type as the key.
+                        Type factoryType = flavourRepository.GetType();
+
+                        if (!currentFlavourIndex.TryGetValue(factoryType, out IEnumerator<Flavour>? flavourEnumerator))
+                        {
+                            // Get the enumerator for the repository.
+                            flavourEnumerator = flavourRepository.GetEnumerator();
+                            currentFlavourIndex.Add(factoryType, flavourEnumerator);
+                        }
+
+                        // Ensure there are enough flavours.
+                        do
+                        {
+                            if (!flavourEnumerator.MoveNext())
+                            {
+                                throw new Exception($"{factoryType.Name} does not have enough flavours to assign to the associated factories.");
+                            }
+                        }
+                        while (!flavourEnumerator.Current.CanBeAssigned);
+
+                        // Retrieve the flavour to assign to the factory.
+                        Flavour flavour = flavourEnumerator.Current;
+
+                        // Assign the flavour details.
+                        flavourFactory.Flavour = flavour;
                     }
 
-                    // Ensure there are enough flavours.
-                    if (!flavourEnumerator.MoveNext())
-                    {
-                        throw new Exception($"{factoryType.Name} does not have enough flavours to assign to the associated factories.");
-                    }
-
-                    // Retrieve the flavour to assign to the factory.
-                    Flavour flavour = flavourEnumerator.Current;
-
-                    // Assign the flavour details.
-                    flavourFactory.Flavour = flavour;
-                    kPtr.FlavorCharacter = flavour.Character;
-                    kPtr.FlavorColour = flavour.Colour;
+                    kPtr.FlavorCharacter = flavourFactory.Flavour.Character;
+                    kPtr.FlavorColour = flavourFactory.Flavour.Colour;
                 }
             }
         }
@@ -9582,7 +9593,7 @@ namespace AngbandOS.Core
             // We may need to aim the rod.  If we know that the rod requires aiming, we get a direction from the player.  Otherwise, if we do not know what
             // the rod is going to do, we will get a direction from the player.  This helps prevent the player from learning what the rod does because the game
             // would ask for a direction.
-            RodItemClass rodItemCategory = (RodItemClass)item.Factory;
+            RodItemFactory rodItemCategory = (RodItemFactory)item.Factory;
             int? dir = 5;
             if (rodItemCategory.RequiresAiming || !item.IsFlavourAware()) 
             {
@@ -9624,7 +9635,7 @@ namespace AngbandOS.Core
             PlaySound(SoundEffect.ZapRod);
             // Do the rod-specific effect
             bool useCharge = true;
-            RodItemClass rodItem = (RodItemClass)item.Factory;
+            RodItemFactory rodItem = (RodItemFactory)item.Factory;
             ZapRodEvent zapRodEvent = new ZapRodEvent(item, dir);
             rodItem.Execute(zapRodEvent);
             NoticeCombineAndReorderFlaggedAction.Set();

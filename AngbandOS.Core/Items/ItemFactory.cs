@@ -176,7 +176,12 @@
         /// Returns whether or not the item affects the constitution of the player when being worn.
         /// </summary>
         public virtual bool Con { get; set; } = false;
+
+        /// <summary>
+        /// Returns the real cost of a standard item.  Returns 0 by default.
+        /// </summary>
         public virtual int Cost => 0;
+
         public virtual bool Cursed { get; set; } = false;
         public virtual int Dd => 0;
 

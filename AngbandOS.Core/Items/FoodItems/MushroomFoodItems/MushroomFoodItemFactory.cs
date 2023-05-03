@@ -8,7 +8,7 @@
         /// <summary>
         /// Returns the mushroom flavours repository because mushrooms have flavours that need to be identified.
         /// </summary>
-        public IEnumerable<Flavour> Flavours => SaveGame.SingletonRepository.MushroomFlavours;
+        public IEnumerable<Flavour>? GetFlavourRepository() => SaveGame.SingletonRepository.MushroomFlavours;
 
         /// <inheritdoc/>
         public Flavour Flavour { get; set; }

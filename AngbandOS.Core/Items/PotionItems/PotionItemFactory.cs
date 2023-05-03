@@ -6,9 +6,10 @@
         public PotionItemFactory(SaveGame saveGame) : base(saveGame) { }
 
         /// <summary>
-        /// Returns the potions flavours repository because potions have flavours that need to be identified.
+        /// Returns the potions flavours repository because potions have flavours that need to be identified.  The Apple Juice, Water and Slime-Mold
+        /// potions override this
         /// </summary>
-        public IEnumerable<Flavour> Flavours => SaveGame.SingletonRepository.PotionFlavours;
+        public virtual IEnumerable<Flavour>? GetFlavourRepository() => SaveGame.SingletonRepository.PotionFlavours;
 
         /// <inheritdoc/>
         public Flavour Flavour { get; set; }

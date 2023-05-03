@@ -8,7 +8,7 @@
         /// <summary>
         /// Returns the want flavours repository because wands have flavours that need to be identified.
         /// </summary>
-        public IEnumerable<Flavour> Flavours => SaveGame.SingletonRepository.WandFlavours;
+        public IEnumerable<Flavour>? GetFlavourRepository() => SaveGame.SingletonRepository.WandFlavours;
 
         /// <inheritdoc/>
         public Flavour Flavour { get; set; }

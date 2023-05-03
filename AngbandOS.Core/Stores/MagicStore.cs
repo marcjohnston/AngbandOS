@@ -96,7 +96,7 @@
                 case RingItemFactory _:
                 case StaffItemClass _:
                 case WandItemFactory _:
-                case RodItemClass _:
+                case RodItemFactory _:
                 case ScrollItemClass _:
                 case PotionItemFactory _:
                     return item.Value() > 0;

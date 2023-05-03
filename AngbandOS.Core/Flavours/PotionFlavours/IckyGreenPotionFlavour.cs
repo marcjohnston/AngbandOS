@@ -11,4 +11,9 @@ internal class IckyGreenPotionFlavour : PotionFlavour
     /// Returns a shuffle weight of 1, so that it appears after the light brown potion, but before all other unweighted potions.
     /// </summary>
     public override int ShuffleWeight => 1;
+
+    /// <summary>
+    /// Returns false because the icky green potion flavour is manually assigned to the slime mold juice potion.
+    /// </summary>
+    public override bool CanBeAssigned => false;
 }
