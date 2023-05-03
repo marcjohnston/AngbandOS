@@ -72,7 +72,7 @@ namespace AngbandOS.Core.Projection
                     SaveGame.Level.DeleteObject(oPtr);
                     if (isPotion)
                     {
-                        PotionItemClass potion = (PotionItemClass)oPtr.Factory;
+                        PotionItemFactory potion = (PotionItemFactory)oPtr.Factory;
                         potion.Smash(SaveGame, who, y, x);
                     }
                     SaveGame.Level.RedrawSingleLocation(y, x);

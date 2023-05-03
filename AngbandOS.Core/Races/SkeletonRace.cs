@@ -87,7 +87,7 @@
             }
         }
 
-        public override void Quaff(SaveGame saveGame, PotionItemClass potion)
+        public override void Quaff(SaveGame saveGame, PotionItemFactory potion)
         {
             if (Program.Rng.DieRoll(12) == 1)
             {

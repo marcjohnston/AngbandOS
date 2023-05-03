@@ -9819,7 +9819,7 @@ namespace AngbandOS.Core
             EnergyUse = 100;
             int itemLevel = item.Factory.Level;
             // Do the actual potion effect
-            PotionItemClass potion = (PotionItemClass)item.Factory; // The item will be a potion.
+            PotionItemFactory potion = (PotionItemFactory)item.Factory; // The item will be a potion.
             bool identified = potion.Quaff(this);
 
             // Skeletons are messy drinkers
@@ -10037,7 +10037,7 @@ namespace AngbandOS.Core
             {
                 if (hitBody || !Level.GridPassable(newY, newX) || Program.Rng.DieRoll(100) < chanceToBreak)
                 {
-                    PotionItemClass potion = (PotionItemClass)missile.Factory;
+                    PotionItemFactory potion = (PotionItemFactory)missile.Factory;
                     MsgPrint($"The {missileName} shatters!");
                     if (potion.Smash(this, 1, y, x))
                     {

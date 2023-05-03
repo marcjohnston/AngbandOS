@@ -98,7 +98,7 @@
                 case WandItemFactory _:
                 case RodItemClass _:
                 case ScrollItemClass _:
-                case PotionItemClass _:
+                case PotionItemFactory _:
                     return item.Value() > 0;
                 default:
                     return false;

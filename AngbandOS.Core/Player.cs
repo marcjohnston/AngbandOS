@@ -1732,7 +1732,7 @@ namespace AngbandOS.Core
                         SaveGame.MsgPrint($"{y}our {oName} ({i.IndexToLabel()}) {w} destroyed!");
                         if (oPtr.Factory.CategoryEnum == ItemTypeEnum.Potion)
                         {
-                            PotionItemClass potion = (PotionItemClass)oPtr.Factory;
+                            PotionItemFactory potion = (PotionItemFactory)oPtr.Factory;
                             potion.Smash(SaveGame, 0, SaveGame.Player.MapY, SaveGame.Player.MapX);
                         }
                         InvenItemIncrease(i, -amt);

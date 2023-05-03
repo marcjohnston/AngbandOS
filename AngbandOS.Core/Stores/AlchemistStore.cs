@@ -39,12 +39,12 @@
         {
             return new[]
             {
-                new StockStoreInventoryItem(typeof(PotionRestoreCharisma), 2),
-                new StockStoreInventoryItem(typeof(PotionRestoreConstitution), 2),
-                new StockStoreInventoryItem(typeof(PotionRestoreDexterity), 2),
-                new StockStoreInventoryItem(typeof(PotionRestoreIntelligence), 2),
-                new StockStoreInventoryItem(typeof(PotionRestoreStrength), 2),
-                new StockStoreInventoryItem(typeof(PotionRestoreWisdom), 2),
+                new StockStoreInventoryItem(typeof(RestoreCharismaPotionItemFactory), 2),
+                new StockStoreInventoryItem(typeof(RestoreConstitutionPotionItemFactory), 2),
+                new StockStoreInventoryItem(typeof(RestoreDexterityPotionItemFactory), 2),
+                new StockStoreInventoryItem(typeof(RestoreIntelligencePotionItemFactory), 2),
+                new StockStoreInventoryItem(typeof(RestoreStrengthPotionItemFactory), 2),
+                new StockStoreInventoryItem(typeof(RestoreWisdomPotionItemFactory), 2),
                 new StockStoreInventoryItem(typeof(ScrollDetectInvisible)),
                 new StockStoreInventoryItem(typeof(ScrollEnchantArmor), 3),
                 new StockStoreInventoryItem(typeof(ScrollEnchantWeaponToDam)),
@@ -70,7 +70,7 @@
             switch (item.Factory)
             {
                 case ScrollItemClass _:
-                case PotionItemClass _:
+                case PotionItemFactory _:
                     return item.Value() > 0;
                 default:
                     return false;

@@ -1,0 +1,29 @@
+using AngbandOS.Core.Items;
+
+namespace AngbandOS.Core.ItemCategories
+{
+    [Serializable]
+    internal class ResistHeatPotionItemFactory : PotionItemFactory
+    {
+        private ResistHeatPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+
+        public override char Character => '!';
+        public override string Name => "Resist Heat";
+
+        public override int[] Chance => new int[] { 1, 0, 0, 0 };
+        public override int Cost => 30;
+        public override int Dd => 1;
+        public override int Ds => 1;
+        public override string FriendlyName => "Resist Heat";
+        public override int Level => 1;
+        public override int[] Locale => new int[] { 1, 0, 0, 0 };
+        public override int? SubCategory => (int)PotionType.ResistHeat;
+        public override int Weight => 4;
+        public override bool Quaff(SaveGame saveGame)
+        {
+            // Resist heat gives you timed fire resistance
+            return saveGame.Player.TimedFireResistance.AddTimer(Program.Rng.DieRoll(10) + 10);
+        }
+        public override Item CreateItem() => new ResistHeatPotionItem(SaveGame);
+    }
+}

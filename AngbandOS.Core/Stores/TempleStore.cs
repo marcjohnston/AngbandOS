@@ -49,11 +49,11 @@
                 new StockStoreInventoryItem(typeof(HaftedWhip), 2),
                 new StockStoreInventoryItem(typeof(LifeBookBookofCommonPrayer), 4),
                 new StockStoreInventoryItem(typeof(LifeBookHighMass), 4),
-                new StockStoreInventoryItem(typeof(PotionCureCriticalWounds), 4),
-                new StockStoreInventoryItem(typeof(PotionCureLightWounds)),
-                new StockStoreInventoryItem(typeof(PotionCureSeriousWounds), 2),
-                new StockStoreInventoryItem(typeof(PotionHeroism)),
-                new StockStoreInventoryItem(typeof(PotionRestoreLifeLevels), 6),
+                new StockStoreInventoryItem(typeof(CureCriticalWoundsPotionItemFactory), 4),
+                new StockStoreInventoryItem(typeof(CureLightWoundsPotionItemFactory)),
+                new StockStoreInventoryItem(typeof(CureSeriousWoundsPotionItemFactory), 2),
+                new StockStoreInventoryItem(typeof(HeroismPotionItemFactory)),
+                new StockStoreInventoryItem(typeof(RestoreLifeLevelsPotionItemFactory), 6),
                 new StockStoreInventoryItem(typeof(ScrollBlessing)),
                 new StockStoreInventoryItem(typeof(ScrollHolyChant)),
                 new StockStoreInventoryItem(typeof(ScrollRemoveCurse), 3),
@@ -68,7 +68,7 @@
             {
                 case LifeBookItemClass _:
                 case ScrollItemClass _:
-                case PotionItemClass _:
+                case PotionItemFactory _:
                 case HaftedItemClass _:
                     return item.Value() > 0;
                 case PolearmItemClass _:

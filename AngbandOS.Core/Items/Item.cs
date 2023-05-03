@@ -1957,7 +1957,9 @@ namespace AngbandOS.Core.Items
             }
             int? typeSpecificValue = GetTypeSpecificRealValue(value);
             if (typeSpecificValue == null)
+            {
                 return 0;
+            }
             value += typeSpecificValue.Value;
 
             int? bonusValue = GetBonusRealValue(value);

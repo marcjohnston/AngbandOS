@@ -138,7 +138,7 @@
         /// </summary>
         /// <param name="saveGame"></param>
         /// <param name="item"></param>
-        public virtual void Quaff(SaveGame saveGame, PotionItemClass potion)
+        public virtual void Quaff(SaveGame saveGame, PotionItemFactory potion)
         {
         }
 

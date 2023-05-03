@@ -3,6 +3,6 @@ namespace AngbandOS.Core.Items
 [Serializable]
     internal class BoozePotionItem : PotionItem
     {
-        public BoozePotionItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<PotionBooze>()) { }
+        public BoozePotionItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<BoozePotionItemFactory>()) { }
     }
 }

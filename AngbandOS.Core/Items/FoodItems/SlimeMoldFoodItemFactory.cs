@@ -19,7 +19,7 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 5;
         public override bool Eat()
         {
-            PotionItemClass slimeMold = (PotionItemClass)SaveGame.SingletonRepository.ItemFactories.Get<PotionSlimeMoldJuice>();
+            PotionItemFactory slimeMold = (PotionItemFactory)SaveGame.SingletonRepository.ItemFactories.Get<SlimeMoldJuicePotionItemFactory>();
             slimeMold.Quaff(SaveGame);
             return true;
         }
