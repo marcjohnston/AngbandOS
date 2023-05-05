@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class ChaosBookTheBookofAzathoth : ChaosBookItemClass
+    internal class ChaosBookTheBookofAzathoth : ChaosBookItemFactory
     {
         private ChaosBookTheBookofAzathoth(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
@@ -23,6 +23,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int? SubCategory => 3;
         public override int Weight => 30;
         public override bool KindIsGood => true;
-        public override Item CreateItem() => new TheBookofAzathothChaosBookItem(SaveGame);
+        public override Item CreateItem() => new AzathothChaosBookItem(SaveGame);
     }
 }

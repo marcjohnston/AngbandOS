@@ -56,8 +56,8 @@
                 new StockStoreInventoryItem(typeof(ProtectionRingItemFactory), 2),
                 new StockStoreInventoryItem(typeof(ResistColdRingItemFactory)),
                 new StockStoreInventoryItem(typeof(ResistFireRingItemFactory)),
-                new StockStoreInventoryItem(typeof(SorceryBookBeginnersHandbook), 2),
-                new StockStoreInventoryItem(typeof(SorceryBookMasterSorcerersHandbook), 2),
+                new StockStoreInventoryItem(typeof(BeginnersHandbookSorceryBookItemFactory), 2),
+                new StockStoreInventoryItem(typeof(MasterSorcerersHandbookSorceryBookItemFactory), 2),
                 new StockStoreInventoryItem(typeof(StaffCureLightWounds)),
                 new StockStoreInventoryItem(typeof(StaffDetectEvil)),
                 new StockStoreInventoryItem(typeof(StaffDetectInvisible)),
@@ -85,13 +85,13 @@
         {
             switch (item.Factory)
             {
-                case SorceryBookItemClass _:
-                case NatureBookItemClass _:
-                case ChaosBookItemClass _:
+                case SorceryBookItemFactory _:
+                case NatureBookItemFactory _:
+                case ChaosBookItemFactory _:
                 case DeathBookItemFactory _:
-                case TarotBookItemClass _:
+                case TarotBookItemFactory _:
                 case FolkBookItemFactory _:
-                case CorporealBookItemClass _:
+                case CorporealBookItemFactory _:
                 case AmuletJeweleryItemFactory _:
                 case RingItemFactory _:
                 case StaffItemClass _:

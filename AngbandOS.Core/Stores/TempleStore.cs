@@ -47,8 +47,8 @@
                 new StockStoreInventoryItem(typeof(HaftedQuarterstaff)),
                 new StockStoreInventoryItem(typeof(HaftedWarHammer), 2),
                 new StockStoreInventoryItem(typeof(HaftedWhip), 2),
-                new StockStoreInventoryItem(typeof(LifeBookBookofCommonPrayer), 4),
-                new StockStoreInventoryItem(typeof(LifeBookHighMass), 4),
+                new StockStoreInventoryItem(typeof(CommonPrayerLifeBookItemFactory), 4),
+                new StockStoreInventoryItem(typeof(HighMassLifeBookItemFactory), 4),
                 new StockStoreInventoryItem(typeof(CureCriticalWoundsPotionItemFactory), 4),
                 new StockStoreInventoryItem(typeof(CureLightWoundsPotionItemFactory)),
                 new StockStoreInventoryItem(typeof(CureSeriousWoundsPotionItemFactory), 2),
@@ -66,7 +66,7 @@
         {
             switch (item.Factory)
             {
-                case LifeBookItemClass _:
+                case LifeBookItemFactory _:
                 case ScrollItemClass _:
                 case PotionItemFactory _:
                 case HaftedItemClass _:

@@ -42,24 +42,24 @@
         {
             return new[]
             {
-                new StockStoreInventoryItem(typeof(ChaosBookChaosMastery), 2),
-                new StockStoreInventoryItem(typeof(ChaosBookSignofChaos), 2),
-                new StockStoreInventoryItem(typeof(CorporealBookBasicChiFlow), 2),
-                new StockStoreInventoryItem(typeof(CorporealBookYogicMastery), 2),
+                new StockStoreInventoryItem(typeof(MasteryChaosBookItemFactory), 2),
+                new StockStoreInventoryItem(typeof(SignofChaosChaosBookItemFactory), 2),
+                new StockStoreInventoryItem(typeof(BasicChiFlowCorporealBookItemFactory), 2),
+                new StockStoreInventoryItem(typeof(YogicMasteryCorporealBookItemFactory), 2),
                 new StockStoreInventoryItem(typeof(BlackMassDeathBookItemFactory), 4),
                 new StockStoreInventoryItem(typeof(BlackPrayersDeathBookItemFactory), 4),
                 new StockStoreInventoryItem(typeof(CantripsforBeginnersFolkBookItemFactory), 2),
                 new StockStoreInventoryItem(typeof(MagicksOfMasteryFolkBookItemFactory), 2),
                 new StockStoreInventoryItem(typeof(MajorMagicksFolkBookItemFactory), 2),
                 new StockStoreInventoryItem(typeof(MinorMagicksFolkBookItemFactory), 2),
-                new StockStoreInventoryItem(typeof(LifeBookBookofCommonPrayer), 4),
-                new StockStoreInventoryItem(typeof(LifeBookHighMass), 4),
-                new StockStoreInventoryItem(typeof(NatureBookCallOfTheWild), 4),
-                new StockStoreInventoryItem(typeof(NatureBookNatureMastery), 4),
-                new StockStoreInventoryItem(typeof(SorceryBookBeginnersHandbook), 2),
-                new StockStoreInventoryItem(typeof(SorceryBookMasterSorcerersHandbook), 2),
-                new StockStoreInventoryItem(typeof(TarotBookCardMastery), 2),
-                new StockStoreInventoryItem(typeof(TarotBookConjuringsTricks), 2),
+                new StockStoreInventoryItem(typeof(CommonPrayerLifeBookItemFactory), 4),
+                new StockStoreInventoryItem(typeof(HighMassLifeBookItemFactory), 4),
+                new StockStoreInventoryItem(typeof(CallOfTheWildNatureBookItemFactory), 4),
+                new StockStoreInventoryItem(typeof(NatureMasteryNatureBookItemFactory), 4),
+                new StockStoreInventoryItem(typeof(BeginnersHandbookSorceryBookItemFactory), 2),
+                new StockStoreInventoryItem(typeof(MasterSorcerersHandbookSorceryBookItemFactory), 2),
+                new StockStoreInventoryItem(typeof(CardMasteryTarotBookItemFactory), 2),
+                new StockStoreInventoryItem(typeof(ConjuringsTricksTarotBookItemFactory), 2),
             };
         }
 
@@ -67,14 +67,14 @@
         {
             switch (item.Factory)
             {
-                case SorceryBookItemClass _:
-                case NatureBookItemClass _:
-                case ChaosBookItemClass _:
+                case SorceryBookItemFactory _:
+                case NatureBookItemFactory _:
+                case ChaosBookItemFactory _:
                 case DeathBookItemFactory _:
-                case LifeBookItemClass _:
-                case TarotBookItemClass _:
+                case LifeBookItemFactory _:
+                case TarotBookItemFactory _:
                 case FolkBookItemFactory _:
-                case CorporealBookItemClass _:
+                case CorporealBookItemFactory _:
                     return item.Value() > 0;
                 default:
                     return false;

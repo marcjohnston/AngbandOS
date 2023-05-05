@@ -43,7 +43,7 @@
 
         protected override ItemFactory[] Outfit => new ItemFactory[]
         {
-            SaveGame.SingletonRepository.ItemFactories.Get<SorceryBookBeginnersHandbook>(),
+            SaveGame.SingletonRepository.ItemFactories.Get<BeginnersHandbookSorceryBookItemFactory>(),
             SaveGame.SingletonRepository.ItemFactories.Get<HaftedQuarterstaff>(),
             SaveGame.SingletonRepository.ItemFactories.Get<SustainWisdomRingItemFactory>()
         };

@@ -9202,7 +9202,7 @@ namespace AngbandOS.Core
             MsgPrint("Oops. That object cannot be activated.");
         }
 
-        public bool GetSpell(out int sn, string prompt, int sval, bool known, bool realm2, Player player)
+        public bool GetSpell(out int sn, string prompt, int spellBookSubcategory, bool known, bool realm2, Player player)
         {
             int i;
             int spell;
@@ -9211,7 +9211,7 @@ namespace AngbandOS.Core
             string p = player.BaseCharacterClass.SpellCastingType == CastingType.Divine ? "prayer" : "spell";
             for (spell = 0; spell < 32; spell++)
             {
-                if ((Constants.BookSpellFlags[sval] & (1u << spell)) != 0)
+                if ((Constants.BookSpellFlags[spellBookSubcategory] & (1u << spell)) != 0)
                 {
                     spells[num++] = spell;
                 }
