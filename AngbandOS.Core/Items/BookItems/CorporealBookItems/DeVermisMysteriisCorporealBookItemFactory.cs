@@ -24,5 +24,17 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 30;
         public override bool KindIsGood => true;
         public override Item CreateItem() => new DeVermisMysteriisCorporealBookItem(SaveGame);
+
+        public override Spell[] Spells => new Spell[]
+        {
+            new CorporealSpellHorrificVisage(),
+            new CorporealSpellSeeMagic(),
+            new CorporealSpellStoneSkin(),
+            new CorporealSpellMoveBody(),
+            new CorporealSpellMutateBody(),
+            new CorporealSpellKnowSelf(),
+            new CorporealSpellTeleportLevel(),
+            new CorporealSpellWordOfRecall()
+    };
     }
 }

@@ -10,5 +10,7 @@
         public override bool EasyKnow => true;
 
         public abstract BaseRealm? ToRealm { get; }
+
+        public abstract Spell[] Spells { get; }
     }
 }

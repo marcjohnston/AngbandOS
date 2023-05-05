@@ -23,6 +23,19 @@ namespace AngbandOS.Core.ItemCategories
         public override int? SubCategory => 3;
         public override int Weight => 30;
         public override bool KindIsGood => true;
+
+        public override Spell[] Spells => new Spell[]
+        {
+            new DeathSpellDeathRay(),
+            new DeathSpellRaiseTheDead(),
+            new DeathSpellEsoteria(),
+            new DeathSpellWordOfDeath(),
+            new DeathSpellEvocation(),
+            new DeathSpellHellfire(),
+            new DeathSpellAnnihilation(),
+            new DeathSpellWraithform()
+        };
+
         public override Item CreateItem() => new NecronomiconDeathBookItem(SaveGame);
     }
 }

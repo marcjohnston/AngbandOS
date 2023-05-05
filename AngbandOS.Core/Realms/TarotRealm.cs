@@ -13,48 +13,15 @@
         public override string Name => "Tarot";
         public override ItemTypeEnum SpellBookItemCategory => ItemTypeEnum.TarotBook;
 
-        protected override Spell[] GetGenerateSpellList()
+        /// <summary>
+        /// Returns the Conjurings Tricks, Card Mastery, Eltdown Shards and Celeano Fragments books because they belong to the Tarot realm.
+        /// </summary>
+        public override BookItemFactory[] SpellBooks => new BookItemFactory[]
         {
-            List<Spell> spellList = new List<Spell>();
-
-            // Conjurings and Tricks
-            spellList.Add(new TarotSpellPhaseDoor());
-            spellList.Add(new TarotSpellMindBlast());
-            spellList.Add(new TarotSpellTarotDraw());
-            spellList.Add(new TarotSpellResetRecall());
-            spellList.Add(new TarotSpellTeleport());
-            spellList.Add(new TarotSpellDimensionDoor());
-            spellList.Add(new TarotSpellAstralSpying());
-            spellList.Add(new TarotSpellTeleportAway());
-            // Card Mastery
-            spellList.Add(new TarotSpellSummonObject());
-            spellList.Add(new TarotSpellSummonAnimal());
-            spellList.Add(new TarotSpellPhantasmalServant());
-            spellList.Add(new TarotSpellSummonMonster());
-            spellList.Add(new TarotSpellConjureElemental());
-            spellList.Add(new TarotSpellTeleportLevel());
-            spellList.Add(new TarotSpellWordOfRecall());
-            spellList.Add(new TarotSpellBanish());
-            // Eltdown Shards
-            spellList.Add(new TarotSpellTheFool());
-            spellList.Add(new TarotSpellSummonSpiders());
-            spellList.Add(new TarotSpellSummonReptiles());
-            spellList.Add(new TarotSpellSummonHounds());
-            spellList.Add(new TarotSpellAstralBranding());
-            spellList.Add(new TarotSpellExtradimensionalBeing());
-            spellList.Add(new TarotSpellDeathDealing());
-            spellList.Add(new TarotSpellSummonReaver());
-            // Celeano Fragments
-            spellList.Add(new TarotSpellEtherealDivination());
-            spellList.Add(new TarotSpellAstralLore());
-            spellList.Add(new TarotSpellSummonUndead());
-            spellList.Add(new TarotSpellSummonDragon());
-            spellList.Add(new TarotSpellMassSummons());
-            spellList.Add(new TarotSpellSummonDemon());
-            spellList.Add(new TarotSpellSummonAncientDragon());
-            spellList.Add(new TarotSpellSummonGreaterUndead());
-
-            return spellList.ToArray();
-        }
+            SaveGame.SingletonRepository.ItemFactories.Get<ConjuringsTricksTarotBookItemFactory>(),
+            SaveGame.SingletonRepository.ItemFactories.Get<CardMasteryTarotBookItemFactory>(),
+            SaveGame.SingletonRepository.ItemFactories.Get<EltdownShardsTarotBookItemFactory>(),
+            SaveGame.SingletonRepository.ItemFactories.Get<CeleanoFragmentsTarotBookItemFactory>()
+        };
     }
 }

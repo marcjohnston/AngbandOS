@@ -21,5 +21,17 @@ namespace AngbandOS.Core.ItemCategories
         public override bool KindIsGood => false;
 
         public override Item CreateItem() => new CardMasteryTarotBookItem(SaveGame);
+
+        public override Spell[] Spells => new Spell[]
+        {
+            new TarotSpellSummonObject(),
+            new TarotSpellSummonAnimal(),
+            new TarotSpellPhantasmalServant(),
+            new TarotSpellSummonMonster(),
+            new TarotSpellConjureElemental(),
+            new TarotSpellTeleportLevel(),
+            new TarotSpellWordOfRecall(),
+            new TarotSpellBanish()
+        };
     }
 }

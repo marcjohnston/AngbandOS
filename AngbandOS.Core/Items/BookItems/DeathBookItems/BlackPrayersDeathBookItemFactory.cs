@@ -20,5 +20,17 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 30;
         public override bool KindIsGood => false;
         public override Item CreateItem() => new BlackPrayersDeathBookItem(SaveGame);
+
+        public override Spell[] Spells => new Spell[]
+        {
+            new DeathSpellDetectUnlife(),
+            new DeathSpellMalediction(),
+            new DeathSpellDetectEvil(),
+            new DeathSpellStinkingCloud(),
+            new DeathSpellBlackSleep(),
+            new DeathSpellResistPoison(),
+            new DeathSpellHorrify(),
+            new DeathSpellEnslaveUndead()
+        };
     }
 }

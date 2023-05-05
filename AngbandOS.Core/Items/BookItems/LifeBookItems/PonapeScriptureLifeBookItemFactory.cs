@@ -24,5 +24,16 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 30;
         public override bool KindIsGood => true;
         public override Item CreateItem() => new PonapeScriptureLifeBookItem(SaveGame);
+
+        public override Spell[] Spells => new Spell[] {
+            new LifeSpellHeroism(),
+            new LifeSpellPrayer(),
+            new LifeSpellBlessWeapon(),
+            new LifeSpellRestoration(),
+            new LifeSpellHealingTrue(),
+            new LifeSpellHolyVision(),
+            new LifeSpellDivineIntervention(),
+            new LifeSpellHolyInvulnerability()
+        };
     }
 }

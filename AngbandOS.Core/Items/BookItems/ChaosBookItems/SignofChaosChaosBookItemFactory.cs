@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class SignofChaosChaosBookItemFactory : ChaosBookItemFactory
+    internal class SignOfChaosChaosBookItemFactory : ChaosBookItemFactory
     {
-        private SignofChaosChaosBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private SignOfChaosChaosBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override Colour Colour => Colour.BrightRed;
@@ -19,6 +19,19 @@ namespace AngbandOS.Core.ItemCategories
         public override int? SubCategory => 0;
         public override int Weight => 30;
         public override bool KindIsGood => false;
+
+        public override Spell[] Spells => new Spell[]
+        {
+            new ChaosSpellMagicMissile(),
+            new ChaosSpellTrapAndDoorDestruction(),
+            new ChaosSpellFlashOfLight(),
+            new ChaosSpellTouchOfConfusion(),
+            new ChaosSpellManaBurst(),
+            new ChaosSpellFireBolt(),
+            new ChaosSpellFistOfForce(),
+            new ChaosSpellTeleportSelf()
+        };
+
         public override Item CreateItem() => new SignOfChaosChaosBookItem(SaveGame);
     }
 }

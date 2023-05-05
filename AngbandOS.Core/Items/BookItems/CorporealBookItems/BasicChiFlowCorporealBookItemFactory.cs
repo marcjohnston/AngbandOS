@@ -20,5 +20,17 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 30;
         public override bool KindIsGood => false;
         public override Item CreateItem() => new BasicChiFlowCorporealBookItem(SaveGame);
+
+        public override Spell[] Spells => new Spell[]
+        {
+            new CorporealSpellBlink(),
+            new CorporealSpellBravery(),
+            new CorporealSpellBatsSense(),
+            new CorporealSpellEaglesVision(),
+            new CorporealSpellMindVision(),
+            new CorporealSpellCureMediumWounds(),
+            new CorporealSpellCureLightWounds(),
+            new CorporealSpellSatisfyHunger()
+        };
     }
 }

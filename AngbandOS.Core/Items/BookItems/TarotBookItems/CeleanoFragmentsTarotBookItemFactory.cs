@@ -23,6 +23,18 @@ namespace AngbandOS.Core.ItemCategories
         public override int? SubCategory => 3;
         public override int Weight => 30;
         public override bool KindIsGood => true;
-        public override Item CreateItem() => new CeleanoFragmentTarotBookItem(SaveGame);
+        public override Item CreateItem() => new CeleanoFragmentsTarotBookItem(SaveGame);
+
+        public override Spell[] Spells => new Spell[]
+        {
+            new TarotSpellEtherealDivination(),
+            new TarotSpellAstralLore(),
+            new TarotSpellSummonUndead(),
+            new TarotSpellSummonDragon(),
+            new TarotSpellMassSummons(),
+            new TarotSpellSummonDemon(),
+            new TarotSpellSummonAncientDragon(),
+            new TarotSpellSummonGreaterUndead()
+        };
     }
 }

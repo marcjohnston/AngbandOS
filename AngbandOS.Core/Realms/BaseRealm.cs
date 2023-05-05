@@ -9,6 +9,11 @@
             SaveGame = saveGame;
         }
 
+        /// <summary>
+        /// Returns the spells books that belong to the realm.
+        /// </summary>
+        public abstract BookItemFactory[] SpellBooks { get; }
+
         public abstract string[] Info { get; }
 
         public abstract string Name { get; }
@@ -20,7 +25,16 @@
         /// <returns> The spell book item category </returns>
         public abstract ItemTypeEnum SpellBookItemCategory { get; }
 
-        protected abstract Spell[] GetGenerateSpellList();
+        protected Spell[] GetGenerateSpellList()
+        {
+            List<Spell> spellList = new List<Spell>();
+            foreach (BookItemFactory bookItemFactory in  SpellBooks)
+            {
+                spellList.AddRange(bookItemFactory.Spells);
+            }
+
+            return spellList.ToArray();
+        }
 
         public Spell[] SpellList(BaseCharacterClass characterClass)
         {

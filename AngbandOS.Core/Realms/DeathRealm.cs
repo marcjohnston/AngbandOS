@@ -13,49 +13,16 @@
         public override string Name => "Death";
         public override ItemTypeEnum SpellBookItemCategory => ItemTypeEnum.DeathBook;
 
-        protected override Spell[] GetGenerateSpellList()
+        /// <summary>
+        /// Returns the Black Prayers, Black Mass, Cultesdes Goules and Necronomicon books because they belong to the Death realm.
+        /// </summary>
+        public override BookItemFactory[] SpellBooks => new BookItemFactory[]
         {
-            List<Spell> spellList = new List<Spell>();
-
-            // Black Prayers
-            spellList.Add(new DeathSpellDetectUnlife());
-            spellList.Add(new DeathSpellMalediction());
-            spellList.Add(new DeathSpellDetectEvil());
-            spellList.Add(new DeathSpellStinkingCloud());
-            spellList.Add(new DeathSpellBlackSleep());
-            spellList.Add(new DeathSpellResistPoison());
-            spellList.Add(new DeathSpellHorrify());
-            spellList.Add(new DeathSpellEnslaveUndead());
-            // Black Mass
-            spellList.Add(new DeathSpellOrbOfEntropy());
-            spellList.Add(new DeathSpellNetherBolt());
-            spellList.Add(new DeathSpellTerror());
-            spellList.Add(new DeathSpellVampiricDrain());
-            spellList.Add(new DeathSpellPoisonBranding());
-            spellList.Add(new DeathSpellDispelGood());
-            spellList.Add(new DeathSpellCarnage());
-            spellList.Add(new DeathSpellRestoreLife());
-            // Cultes des Goules
-            spellList.Add(new DeathSpellBerserk());
-            spellList.Add(new DeathSpellInvokeSpirits());
-            spellList.Add(new DeathSpellDarkBolt());
-            spellList.Add(new DeathSpellBattleFrenzy());
-            spellList.Add(new DeathSpellVampirismTrue());
-            spellList.Add(new DeathSpellVampiricBranding());
-            spellList.Add(new DeathSpellDarknessStorm());
-            spellList.Add(new DeathSpellMassCarnage());
-            // Necronomicon
-            spellList.Add(new DeathSpellDeathRay());
-            spellList.Add(new DeathSpellRaiseTheDead());
-            spellList.Add(new DeathSpellEsoteria());
-            spellList.Add(new DeathSpellWordOfDeath());
-            spellList.Add(new DeathSpellEvocation());
-            spellList.Add(new DeathSpellHellfire());
-            spellList.Add(new DeathSpellAnnihilation());
-            spellList.Add(new DeathSpellWraithform());
-
-            return spellList.ToArray();
-        }
+            SaveGame.SingletonRepository.ItemFactories.Get<BlackPrayersDeathBookItemFactory>(),
+            SaveGame.SingletonRepository.ItemFactories.Get<BlackMassDeathBookItemFactory>(),
+            SaveGame.SingletonRepository.ItemFactories.Get<CultesdesGoulesDeathBookItemFactory>(),
+            SaveGame.SingletonRepository.ItemFactories.Get<NecronomiconDeathBookItemFactory>()
+        };
         public override bool ResistantToHolyAndHellProjectiles => true;
     }
 }

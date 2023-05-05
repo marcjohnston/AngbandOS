@@ -24,5 +24,17 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 30;
         public override bool KindIsGood => true;
         public override Item CreateItem() => new EltdownShardsTarotBookItem(SaveGame);
+
+        public override Spell[] Spells => new Spell[]
+        {
+            new TarotSpellTheFool(),
+            new TarotSpellSummonSpiders(),
+            new TarotSpellSummonReptiles(),
+            new TarotSpellSummonHounds(),
+            new TarotSpellAstralBranding(),
+            new TarotSpellExtradimensionalBeing(),
+            new TarotSpellDeathDealing(),
+            new TarotSpellSummonReaver()
+        };
     }
 }

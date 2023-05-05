@@ -20,5 +20,15 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 30;
         public override bool KindIsGood => true;
         public override Item CreateItem() => new MagicksOfMasteryFolkBookItem(SaveGame);
+        public override Spell[] Spells => new Spell[] {
+            new FolkSpellRecharging(),
+            new FolkSpellTeleportLevel(),
+            new FolkSpellIdentify(),
+            new FolkSpellTeleportAway(),
+            new FolkSpellElementalBall(),
+            new FolkSpellDetection(),
+            new FolkSpellWordOfRecall(),
+            new FolkSpellClairvoyance()
+        };
     }
 }

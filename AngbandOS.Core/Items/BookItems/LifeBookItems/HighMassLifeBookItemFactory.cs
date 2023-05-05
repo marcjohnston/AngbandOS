@@ -19,5 +19,16 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 30;
         public override bool KindIsGood => false;
         public override Item CreateItem() => new HighMassLifeBookItem(SaveGame);
+
+        public override Spell[] Spells => new Spell[] {
+            new LifeSpellRemoveCurse(),
+            new LifeSpellCurePoison(),
+            new LifeSpellCureCriticalWounds(),
+            new LifeSpellSenseUnseen(),
+            new LifeSpellHolyOrb(),
+            new LifeSpellProtectionFromEvil(),
+            new LifeSpellHealing(),
+            new LifeSpellElderSign()
+        };
     }
 }

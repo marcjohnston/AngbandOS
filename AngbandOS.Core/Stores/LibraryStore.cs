@@ -43,7 +43,7 @@
             return new[]
             {
                 new StockStoreInventoryItem(typeof(MasteryChaosBookItemFactory), 2),
-                new StockStoreInventoryItem(typeof(SignofChaosChaosBookItemFactory), 2),
+                new StockStoreInventoryItem(typeof(SignOfChaosChaosBookItemFactory), 2),
                 new StockStoreInventoryItem(typeof(BasicChiFlowCorporealBookItemFactory), 2),
                 new StockStoreInventoryItem(typeof(YogicMasteryCorporealBookItemFactory), 2),
                 new StockStoreInventoryItem(typeof(BlackMassDeathBookItemFactory), 4),

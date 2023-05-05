@@ -20,5 +20,17 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 30;
         public override bool KindIsGood => false;
         public override Item CreateItem() => new YogicMasteryCorporealBookItem(SaveGame);
+
+        public override Spell[] Spells => new Spell[]
+        {
+            new CorporealSpellBurnResistance(),
+            new CorporealSpellDetoxify(),
+            new CorporealSpellCureCriticalWounds(),
+            new CorporealSpellSeeInvisible(),
+            new CorporealSpellTeleport(),
+            new CorporealSpellHaste(),
+            new CorporealSpellHealing(),
+            new CorporealSpellResistTrue()
+        };
     }
 }

@@ -24,5 +24,16 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 30;
         public override bool KindIsGood => true;
         public override Item CreateItem() => new DholChantsLifeBookItem(SaveGame);
+
+        public override Spell[] Spells => new Spell[] {
+            new LifeSpellExorcism(),
+            new LifeSpellDispelCurse(),
+            new LifeSpellDispelUndeadAndDemons(),
+            new LifeSpellDayOfTheDove(),
+            new LifeSpellDispelEvil(),
+            new LifeSpellBanish(),
+            new LifeSpellHolyWord(),
+            new LifeSpellWardingTrue()
+        };
     }
 }

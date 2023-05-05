@@ -20,5 +20,17 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 30;
         public override bool KindIsGood => false;
         public override Item CreateItem() => new BeginnersHandbookSorceryBookItem(SaveGame);
+
+        public override Spell[] Spells => new Spell[]
+        {
+            new SorcerySpellDetectMonsters(),
+            new SorcerySpellPhaseDoor(),
+            new SorcerySpellDetectDoorsAndTraps(),
+            new SorcerySpellLightArea(),
+            new SorcerySpellConfuseMonster(),
+            new SorcerySpellTeleport(),
+            new SorcerySpellSleepMonster(),
+            new SorcerySpellRecharging()
+        };
     }
 }

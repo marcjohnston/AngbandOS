@@ -24,5 +24,17 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 30;
         public override bool KindIsGood => true;
         public override Item CreateItem() => new UnaussprechlichenKultenSorceryBookItem(SaveGame);
+
+        public override Spell[] Spells => new Spell[]
+        {
+            new SorcerySpellDetectObjectsAndTreasure(),
+            new SorcerySpellDetectEnchantment(),
+            new SorcerySpellCharmMonster(),
+            new SorcerySpellDimensionDoor(),
+            new SorcerySpellSenseMinds(),
+            new SorcerySpellSelfKnowledge(),
+            new SorcerySpellTeleportLevel(),
+            new SorcerySpellWordOfRecall()
+        };
     }
 }

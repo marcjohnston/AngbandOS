@@ -24,5 +24,17 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 30;
         public override bool KindIsGood => true;
         public override Item CreateItem() => new AzathothChaosBookItem(SaveGame);
+
+        public override Spell[] Spells => new Spell[]
+        {
+            new ChaosSpellGravityBeam(),
+            new ChaosSpellMeteorSwarm(),
+            new ChaosSpellFlameStrike(),
+            new ChaosSpellCallChaos(),
+            new ChaosSpellShardBall(),
+            new ChaosSpellManaStorm(),
+            new ChaosSpellBreatheChaos(),
+            new ChaosSpellCallTheVoid()
+        };
     }
 }

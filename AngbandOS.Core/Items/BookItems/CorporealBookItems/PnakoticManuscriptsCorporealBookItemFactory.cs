@@ -24,5 +24,17 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 30;
         public override bool KindIsGood => true;
         public override Item CreateItem() => new PnakoticManuscriptsCorporealBookItem(SaveGame);
+
+        public override Spell[] Spells => new Spell[]
+        {
+            new CorporealSpellHeroism(),
+            new CorporealSpellWraithform(),
+            new CorporealSpellAttunement(),
+            new CorporealSpellRestoreBody(),
+            new CorporealSpellHealingTrue(),
+            new CorporealSpellHypnoticEyes(),
+            new CorporealSpellRestoreSoul(),
+            new CorporealSpellInvulnerability()
+       };
     }
 }

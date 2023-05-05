@@ -24,5 +24,17 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 30;
         public override bool KindIsGood => true;
         public override Item CreateItem() => new LiberIvonisSorceryBookItem(SaveGame);
+
+        public override Spell[] Spells => new Spell[]
+        {
+            new SorcerySpellStasis(),
+            new SorcerySpellTelekinesis(),
+            new SorcerySpellYellowSign(),
+            new SorcerySpellClairvoyance(),
+            new SorcerySpellEnchantWeapon(),
+            new SorcerySpellEnchantArmour(),
+            new SorcerySpellAlchemy(),
+            new SorcerySpellGlobeOfInvulnerability()
+        };
     }
 }

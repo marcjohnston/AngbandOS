@@ -24,5 +24,16 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 30;
         public override bool KindIsGood => true;
         public override Item CreateItem() => new RevelationsOfGlaakiNatureBookItem(SaveGame);
+
+        public override Spell[] Spells => new Spell[] {
+            new NatureSpellDoorCreation(),
+            new NatureSpellStairBuilding(),
+            new NatureSpellStoneSkin(),
+            new NatureSpellResistanceTrue(),
+            new NatureSpellAnimalFriendship(),
+            new NatureSpellStoneTell(),
+            new NatureSpellWallOfStone(),
+            new NatureSpellProtectFromCorrosion()
+        };
     }
 }

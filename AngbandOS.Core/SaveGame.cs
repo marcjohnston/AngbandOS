@@ -9240,7 +9240,7 @@ namespace AngbandOS.Core
                     {
                         savedScreen = Screen.Clone();
                         BaseRealm? useRealm = realm2 ? player.SecondaryRealm : player.PrimaryRealm;
-                        player.PrintSpells(spells.ToArray(), spells.Count, 1, 20, useRealm);
+                        player.PrintSpells(spells.ToArray(), 1, 20, useRealm);
                     }
                     else
                     {
@@ -11672,8 +11672,7 @@ namespace AngbandOS.Core
         public void DoCmdBrowse()
         {
             int spell;
-            int spellIndex = 0;
-            int[] spells = new int[64];
+            List<int> spells = new List<int>();
             // Make sure we can read
             if (!Player.CanCastSpells)
             {
@@ -11703,13 +11702,13 @@ namespace AngbandOS.Core
             {
                 if ((Constants.BookSpellFlags[bookSubCategory] & (1u << spell)) != 0)
                 {
-                    spells[spellIndex++] = spell;
+                    spells.Add(spell);
                 }
             }
             // Save the screen and overprint the spells in the book
             ScreenBuffer savedScreen = Screen.Clone();
             BookItemFactory book = (BookItemFactory)item.Factory;
-            Player.PrintSpells(spells, spellIndex, 1, 20, book.ToRealm);
+            Player.PrintSpells(spells.ToArray(), 1, 20, book.ToRealm);
             Screen.PrintLine("", 0, 0);
             // Wait for a keypress and re-load the screen
             Screen.Print("[Press any key to continue]", 0, 23);

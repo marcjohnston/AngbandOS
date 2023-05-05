@@ -20,5 +20,17 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 30;
         public override bool KindIsGood => false;
         public override Item CreateItem() => new MasteryChaosBookItem(SaveGame);
+
+        public override Spell[] Spells => new Spell[]
+        {
+            new ChaosSpellWonder(),
+            new ChaosSpellChaosBolt(),
+            new ChaosSpellSonicBoom(),
+            new ChaosSpellDoomBolt(),
+            new ChaosSpellFireBall(),
+            new ChaosSpellTeleportOther(),
+            new ChaosSpellWordOfDestruction(),
+            new ChaosSpellInvokeChaos()
+        };
     }
 }

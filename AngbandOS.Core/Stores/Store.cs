@@ -539,18 +539,17 @@ namespace AngbandOS.Core.Stores
 
         private void DoStoreBrowse(Item oPtr)
         {
-            int num = 0;
-            int[] spells = new int[64];
+            List<int> spells = new List<int>();
             for (int spell = 0; spell < 32; spell++)
             {
                 if ((Constants.BookSpellFlags[oPtr.ItemSubCategory] & (1u << spell)) != 0)
                 {
-                    spells[num++] = spell;
+                    spells.Add(spell);
                 }
             }
             ScreenBuffer savedScreen = SaveGame.Screen.Clone();
             BookItemFactory book = (BookItemFactory)oPtr.Factory;
-            SaveGame.Player.PrintSpells(spells, num, 1, 20, book.ToRealm);
+            SaveGame.Player.PrintSpells(spells.ToArray(), 1, 20, book.ToRealm);
             SaveGame.Screen.PrintLine("", 0, 0);
             SaveGame.Screen.Print("[Press any key to continue]", 0, 23);
             SaveGame.Inkey();
