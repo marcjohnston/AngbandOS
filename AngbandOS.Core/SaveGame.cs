@@ -9240,7 +9240,7 @@ namespace AngbandOS.Core
                     {
                         savedScreen = Screen.Clone();
                         BaseRealm? useRealm = realm2 ? player.SecondaryRealm : player.PrimaryRealm;
-                        player.PrintSpells(spells, spells.Count, 1, 20, useRealm);
+                        player.PrintSpells(spells.ToArray(), spells.Count, 1, 20, useRealm);
                     }
                     else
                     {
