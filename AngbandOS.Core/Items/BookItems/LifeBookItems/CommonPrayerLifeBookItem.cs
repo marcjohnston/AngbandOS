@@ -1,8 +1,8 @@
 namespace AngbandOS.Core.Items
 {
 [Serializable]
-    internal class BookOfCommonPrayerLifeBookItem : LifeBookItem
+    internal class CommonPrayerLifeBookItem : LifeBookItem
     {
-        public BookOfCommonPrayerLifeBookItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<CommonPrayerLifeBookItemFactory>()) { }
+        public CommonPrayerLifeBookItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<CommonPrayerLifeBookItemFactory>()) { }
     }
 }

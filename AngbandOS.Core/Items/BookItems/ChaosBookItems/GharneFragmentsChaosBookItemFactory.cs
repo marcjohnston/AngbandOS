@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class ChaosBookGharneFragments : ChaosBookItemClass
+    internal class GharneFragmentsChaosBookItemFactory : ChaosBookItemFactory
     {
-        private ChaosBookGharneFragments(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private GharneFragmentsChaosBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override Colour Colour => Colour.Red;

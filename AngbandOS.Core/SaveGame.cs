@@ -9206,19 +9206,18 @@ namespace AngbandOS.Core
         {
             int i;
             int spell;
-            int num = 0;
-            int[] spells = new int[64];
+            List<int> spells = new List<int>();
             string p = player.BaseCharacterClass.SpellCastingType == CastingType.Divine ? "prayer" : "spell";
             for (spell = 0; spell < 32; spell++)
             {
                 if ((Constants.BookSpellFlags[spellBookSubcategory] & (1u << spell)) != 0)
                 {
-                    spells[num++] = spell;
+                    spells.Add(spell);
                 }
             }
             bool okay = false;
             sn = -2;
-            for (i = 0; i < num; i++)
+            for (i = 0; i < spells.Count; i++)
             {
                 if (player.SpellOkay(spells[i], known, realm2))
                 {
@@ -9232,7 +9231,7 @@ namespace AngbandOS.Core
             sn = -1;
             bool flag = false;
             ScreenBuffer? savedScreen = null;
-            string outVal = $"({p}s {0.IndexToLetter()}-{(num - 1).IndexToLetter()}, *=List, ESC=exit) {prompt} which {p}? ";
+            string outVal = $"({p}s {0.IndexToLetter()}-{(spells.Count - 1).IndexToLetter()}, *=List, ESC=exit) {prompt} which {p}? ";
             while (!flag && GetCom(outVal, out char choice) && !Shutdown)
             {
                 if (choice == ' ' || choice == '*' || choice == '?')
@@ -9241,7 +9240,7 @@ namespace AngbandOS.Core
                     {
                         savedScreen = Screen.Clone();
                         BaseRealm? useRealm = realm2 ? player.SecondaryRealm : player.PrimaryRealm;
-                        player.PrintSpells(spells, num, 1, 20, useRealm);
+                        player.PrintSpells(spells, spells.Count, 1, 20, useRealm);
                     }
                     else
                     {
@@ -9256,7 +9255,7 @@ namespace AngbandOS.Core
                     choice = char.ToLower(choice);
                 }
                 i = char.IsLower(choice) ? choice.LetterToNumber() : -1;
-                if (i < 0 || i >= num)
+                if (i < 0 || i >= spells.Count)
                 {
                     continue;
                 }

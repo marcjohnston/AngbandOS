@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class NatureBookNatureMastery : NatureBookItemFactory
+    internal class NatureMasteryNatureBookItemFactory : NatureBookItemFactory
     {
-        private NatureBookNatureMastery(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private NatureMasteryNatureBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override Colour Colour => Colour.BrightGreen;

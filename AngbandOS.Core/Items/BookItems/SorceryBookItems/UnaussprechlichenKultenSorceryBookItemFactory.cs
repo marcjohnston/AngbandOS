@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class SorceryBookUnaussprechlichenKulten : SorceryBookItemFactory
+    internal class UnaussprechlichenKultenSorceryBookItemFactory : SorceryBookItemFactory
     {
-        private SorceryBookUnaussprechlichenKulten(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private UnaussprechlichenKultenSorceryBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override Colour Colour => Colour.Blue;

@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class LifeBookHighMass : LifeBookItemClass
+    internal class HighMassLifeBookItemFactory : LifeBookItemFactory
     {
-        private LifeBookHighMass(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private HighMassLifeBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override string Name => "[High Mass]";

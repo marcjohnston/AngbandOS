@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class LifeBookBookofCommonPrayer : LifeBookItemClass
+    internal class CommonPrayerLifeBookItemFactory : LifeBookItemFactory
     {
-        private LifeBookBookofCommonPrayer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private CommonPrayerLifeBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override string Name => "[Book of Common Prayer]";
@@ -18,6 +18,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int? SubCategory => 0;
         public override int Weight => 30;
         public override bool KindIsGood => false;
-        public override Item CreateItem() => new BookOfCommonPrayerLifeBookItem(SaveGame);
+        public override Item CreateItem() => new CommonPrayerLifeBookItem(SaveGame);
     }
 }

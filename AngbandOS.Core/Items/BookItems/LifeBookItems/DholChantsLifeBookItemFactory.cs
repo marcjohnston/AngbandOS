@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class LifeBookDholChants : LifeBookItemClass
+    internal class DholChantsLifeBookItemFactory : LifeBookItemFactory
     {
-        private LifeBookDholChants(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private DholChantsLifeBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override Colour Colour => Colour.BrightWhite;

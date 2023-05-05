@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class CorporealBookBasicChiFlow : CorporealBookItemClass
+    internal class BasicChiFlowCorporealBookItemFactory : CorporealBookItemFactory
     {
-        private CorporealBookBasicChiFlow(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private BasicChiFlowCorporealBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => '?';
         public override Colour Colour => Colour.Yellow;
