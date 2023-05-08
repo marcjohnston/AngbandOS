@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Life
             saveGame.Player.TimedProtectionFromEvil.AddTimer(Program.Rng.DieRoll(25) + (3 * saveGame.Player.Level));
         }
 
+        public override string Name => "Protection from Evil";
         public override void Initialise(int characterClass)
         {
-            Name = "Protection from Evil";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

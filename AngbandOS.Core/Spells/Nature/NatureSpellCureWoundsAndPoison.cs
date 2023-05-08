@@ -17,9 +17,9 @@ namespace AngbandOS.Core.Spells.Nature
             saveGame.Player.TimedPoison.ResetTimer();
         }
 
+        public override string Name => "Cure Wounds and Poison";
         public override void Initialise(int characterClass)
         {
-            Name = "Cure Wounds and Poison";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

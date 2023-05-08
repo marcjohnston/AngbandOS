@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Sorcery
             saveGame.YellowSign();
         }
 
+        public override string Name => "Yellow Sign";
         public override void Initialise(int characterClass)
         {
-            Name = "Yellow Sign";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

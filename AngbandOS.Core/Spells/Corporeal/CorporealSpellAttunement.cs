@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Corporeal
             saveGame.IdentifyFully();
         }
 
+        public override string Name => "Attunement";
         public override void Initialise(int characterClass)
         {
-            Name = "Attunement";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

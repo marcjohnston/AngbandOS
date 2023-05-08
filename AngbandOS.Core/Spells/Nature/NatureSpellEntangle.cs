@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Nature
             saveGame.SlowMonsters();
         }
 
+        public override string Name => "Entangle";
         public override void Initialise(int characterClass)
         {
-            Name = "Entangle";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

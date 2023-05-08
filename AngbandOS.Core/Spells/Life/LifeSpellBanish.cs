@@ -19,9 +19,9 @@ namespace AngbandOS.Core.Spells.Life
             }
         }
 
+        public override string Name => "Banish";
         public override void Initialise(int characterClass)
         {
-            Name = "Banish";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

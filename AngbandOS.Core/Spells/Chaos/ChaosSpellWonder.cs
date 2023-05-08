@@ -139,9 +139,9 @@ namespace AngbandOS.Core.Spells.Chaos
             }
         }
 
+        public override string Name => "Wonder";
         public override void Initialise(int characterClass)
         {
-            Name = "Wonder";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

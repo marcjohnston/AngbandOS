@@ -23,9 +23,9 @@ namespace AngbandOS.Core.Spells.Sorcery
             }
         }
 
+        public override string Name => "Haste Self";
         public override void Initialise(int characterClass)
         {
-            Name = "Haste Self";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

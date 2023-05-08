@@ -21,9 +21,9 @@ namespace AngbandOS.Core.Spells.Chaos
                 3 + (saveGame.Player.Level / 40));
         }
 
+        public override string Name => "Disintegrate";
         public override void Initialise(int characterClass)
         {
-            Name = "Disintegrate";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

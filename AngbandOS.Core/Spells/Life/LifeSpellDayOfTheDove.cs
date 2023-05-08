@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Life
             saveGame.CharmMonsters(saveGame.Player.Level * 2);
         }
 
+        public override string Name => "Day of the Dove";
         public override void Initialise(int characterClass)
         {
-            Name = "Day of the Dove";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

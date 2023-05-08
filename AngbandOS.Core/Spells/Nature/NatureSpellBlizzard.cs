@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Spells.Nature
             saveGame.FireBall(new ColdProjectile(saveGame), dir, 70 + saveGame.Player.Level, (saveGame.Player.Level / 12) + 1);
         }
 
+        public override string Name => "Blizzard";
         public override void Initialise(int characterClass)
         {
-            Name = "Blizzard";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

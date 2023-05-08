@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Life
             saveGame.Player.TimedBlessing.AddTimer(Program.Rng.DieRoll(48) + 48);
         }
 
+        public override string Name => "Prayer";
         public override void Initialise(int characterClass)
         {
-            Name = "Prayer";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

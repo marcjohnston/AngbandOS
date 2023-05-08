@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Spells.Sorcery
             }
         }
 
+        public override string Name => "Clairvoyance";
         public override void Initialise(int characterClass)
         {
-            Name = "Clairvoyance";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

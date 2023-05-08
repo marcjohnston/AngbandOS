@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Life
             saveGame.IdentifyFully();
         }
 
+        public override string Name => "Holy Vision";
         public override void Initialise(int characterClass)
         {
-            Name = "Holy Vision";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

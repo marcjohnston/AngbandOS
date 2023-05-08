@@ -21,9 +21,9 @@ namespace AngbandOS.Core.Spells.Death
             saveGame.StunMonster(dir, saveGame.Player.Level);
         }
 
+        public override string Name => "Horrify";
         public override void Initialise(int characterClass)
         {
-            Name = "Horrify";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

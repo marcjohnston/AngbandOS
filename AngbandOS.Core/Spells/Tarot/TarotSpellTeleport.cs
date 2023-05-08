@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Tarot
             saveGame.TeleportPlayer(saveGame.Player.Level * 4);
         }
 
+        public override string Name => "Teleport";
         public override void Initialise(int characterClass)
         {
-            Name = "Teleport";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

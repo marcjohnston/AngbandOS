@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Life
             Worked = saveGame.BlessWeapon();
         }
 
+        public override string Name => "Bless Weapon";
         public override void Initialise(int characterClass)
         {
-            Name = "Bless Weapon";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

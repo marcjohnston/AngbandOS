@@ -33,9 +33,9 @@ namespace AngbandOS.Core.Spells.Sorcery
             }
         }
 
+        public override string Name => "Dimension Door";
         public override void Initialise(int characterClass)
         {
-            Name = "Dimension Door";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

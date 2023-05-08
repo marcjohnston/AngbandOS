@@ -11,9 +11,9 @@ namespace AngbandOS.Core.Talents
     [Serializable]
     internal class TalentPrecognition : Talent
     {
+        public override string Name => "Precognition";
         public override void Initialise(int characterClass)
         {
-            Name = "Precognition";
             Level = 1;
             ManaCost = 1;
             BaseFailure = 15;

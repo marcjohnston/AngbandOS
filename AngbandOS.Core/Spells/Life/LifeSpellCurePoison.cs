@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Life
             saveGame.Player.TimedPoison.ResetTimer();
         }
 
+        public override string Name => "Cure Poison";
         public override void Initialise(int characterClass)
         {
-            Name = "Cure Poison";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

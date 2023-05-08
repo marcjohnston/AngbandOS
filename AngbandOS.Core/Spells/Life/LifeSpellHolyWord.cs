@@ -21,9 +21,9 @@ namespace AngbandOS.Core.Spells.Life
             saveGame.Player.TimedBleeding.ResetTimer();
         }
 
+        public override string Name => "Holy Word";
         public override void Initialise(int characterClass)
         {
-            Name = "Holy Word";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

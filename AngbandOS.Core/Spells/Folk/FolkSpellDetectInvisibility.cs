@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Folk
             saveGame.DetectMonstersInvis();
         }
 
+        public override string Name => "Detect Invisibility";
         public override void Initialise(int characterClass)
         {
-            Name = "Detect Invisibility";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

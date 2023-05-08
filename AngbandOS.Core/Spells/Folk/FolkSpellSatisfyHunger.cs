@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Folk
             saveGame.Player.SetFood(Constants.PyFoodMax - 1);
         }
 
+        public override string Name => "Satisfy Hunger";
         public override void Initialise(int characterClass)
         {
-            Name = "Satisfy Hunger";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

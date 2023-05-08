@@ -35,9 +35,9 @@ namespace AngbandOS.Core.Spells.Folk
             saveGame.FireBoltOrBeam(beam - 10, new ElecProjectile(saveGame), dir, Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 5), 3));
         }
 
+        public override string Name => "Zap";
         public override void Initialise(int characterClass)
         {
-            Name = "Zap";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Nature
             saveGame.Earthquake(saveGame.Player.MapY, saveGame.Player.MapX, 10);
         }
 
+        public override string Name => "Earthquake";
         public override void Initialise(int characterClass)
         {
-            Name = "Earthquake";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

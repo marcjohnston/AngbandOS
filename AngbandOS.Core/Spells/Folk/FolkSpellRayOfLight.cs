@@ -21,9 +21,9 @@ namespace AngbandOS.Core.Spells.Folk
             saveGame.LightLine(dir);
         }
 
+        public override string Name => "Ray of Light";
         public override void Initialise(int characterClass)
         {
-            Name = "Ray of Light";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

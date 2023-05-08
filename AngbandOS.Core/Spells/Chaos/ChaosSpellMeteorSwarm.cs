@@ -43,9 +43,9 @@ namespace AngbandOS.Core.Spells.Chaos
             }
         }
 
+        public override string Name => "Meteor Swarm";
         public override void Initialise(int characterClass)
         {
-            Name = "Meteor Swarm";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

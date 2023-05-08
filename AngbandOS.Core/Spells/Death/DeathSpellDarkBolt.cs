@@ -35,9 +35,9 @@ namespace AngbandOS.Core.Spells.Death
             saveGame.FireBoltOrBeam(beam, new DarkProjectile(saveGame), dir, Program.Rng.DiceRoll(4 + ((saveGame.Player.Level - 5) / 4), 8));
         }
 
+        public override string Name => "Dark Bolt";
         public override void Initialise(int characterClass)
         {
-            Name = "Dark Bolt";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

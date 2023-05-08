@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Chaos
             saveGame.Recharge(40);
         }
 
+        public override string Name => "Arcane Binding";
         public override void Initialise(int characterClass)
         {
-            Name = "Arcane Binding";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

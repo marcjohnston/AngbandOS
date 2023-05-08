@@ -11,9 +11,9 @@ namespace AngbandOS.Core.Talents
     [Serializable]
     internal class TalentDomination : Talent
     {
+        public override string Name => "Domination";
         public override void Initialise(int characterClass)
         {
-            Name = "Domination";
             Level = 9;
             ManaCost = 7;
             BaseFailure = 50;

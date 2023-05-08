@@ -11,9 +11,9 @@ namespace AngbandOS.Core.Talents
     [Serializable]
     internal class TalentTelekineticWave : Talent
     {
+        public override string Name => "Telekinetic Wave";
         public override void Initialise(int characterClass)
         {
-            Name = "Telekinetic Wave";
             Level = 28;
             ManaCost = 20;
             BaseFailure = 45;

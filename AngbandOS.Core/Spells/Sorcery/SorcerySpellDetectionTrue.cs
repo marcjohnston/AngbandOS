@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Sorcery
             saveGame.DetectAll();
         }
 
+        public override string Name => "Detection True";
         public override void Initialise(int characterClass)
         {
-            Name = "Detection True";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

@@ -19,9 +19,9 @@ namespace AngbandOS.Core.Spells.Chaos
             saveGame.CameFrom = LevelStart.StartRandom;
         }
 
+        public override string Name => "Alter Reality";
         public override void Initialise(int characterClass)
         {
-            Name = "Alter Reality";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

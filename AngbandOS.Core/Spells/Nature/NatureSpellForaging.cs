@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Nature
             saveGame.Player.SetFood(Constants.PyFoodMax - 1);
         }
 
+        public override string Name => "Foraging";
         public override void Initialise(int characterClass)
         {
-            Name = "Foraging";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

@@ -18,9 +18,9 @@ namespace AngbandOS.Core.Spells.Corporeal
             saveGame.DetectStairs();
         }
 
+        public override string Name => "Eagle's Vision";
         public override void Initialise(int characterClass)
         {
-            Name = "Eagle's Vision";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

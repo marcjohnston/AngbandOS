@@ -25,7 +25,7 @@ namespace AngbandOS.Core.Spells
         /// <summary>
         /// Returns the name of the spell, as rendered to the player.
         /// </summary>
-        public string Name;
+        public abstract string Name { get; }
 
         public bool Worked;
 

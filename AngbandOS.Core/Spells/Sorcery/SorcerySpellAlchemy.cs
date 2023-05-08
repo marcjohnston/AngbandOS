@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Sorcery
             saveGame.Alchemy();
         }
 
+        public override string Name => "Alchemy";
         public override void Initialise(int characterClass)
         {
-            Name = "Alchemy";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

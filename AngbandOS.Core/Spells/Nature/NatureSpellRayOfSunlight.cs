@@ -21,9 +21,9 @@ namespace AngbandOS.Core.Spells.Nature
             saveGame.LightLine(dir);
         }
 
+        public override string Name => "Ray of Sunlight";
         public override void Initialise(int characterClass)
         {
-            Name = "Ray of Sunlight";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

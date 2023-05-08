@@ -39,9 +39,9 @@ namespace AngbandOS.Core.Spells.Folk
             saveGame.FireBall(dummy, dir, 75 + saveGame.Player.Level, 2);
         }
 
+        public override string Name => "Teleport Away";
         public override void Initialise(int characterClass)
         {
-            Name = "Teleport Away";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

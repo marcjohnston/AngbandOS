@@ -21,9 +21,9 @@ namespace AngbandOS.Core.Spells.Corporeal
             saveGame.StunMonster(dir, saveGame.Player.Level);
         }
 
+        public override string Name => "Horrific Visage";
         public override void Initialise(int characterClass)
         {
-            Name = "Horrific Visage";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

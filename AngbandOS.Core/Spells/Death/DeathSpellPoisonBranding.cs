@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Death
             saveGame.BrandWeapon(2);
         }
 
+        public override string Name => "Poison Branding";
         public override void Initialise(int characterClass)
         {
-            Name = "Poison Branding";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

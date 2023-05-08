@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Spells.Chaos
             saveGame.PolyMonster(dir);
         }
 
+        public override string Name => "Polymorph Other";
         public override void Initialise(int characterClass)
         {
-            Name = "Polymorph Other";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

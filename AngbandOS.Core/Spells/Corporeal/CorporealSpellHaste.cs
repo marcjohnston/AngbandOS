@@ -23,9 +23,9 @@ namespace AngbandOS.Core.Spells.Corporeal
             }
         }
 
+        public override string Name => "Haste";
         public override void Initialise(int characterClass)
         {
-            Name = "Haste";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

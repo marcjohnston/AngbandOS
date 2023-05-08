@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Life
             saveGame.DispelEvil(saveGame.Player.Level * 4);
         }
 
+        public override string Name => "Dispel Evil";
         public override void Initialise(int characterClass)
         {
-            Name = "Dispel Evil";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

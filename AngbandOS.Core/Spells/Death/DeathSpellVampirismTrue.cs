@@ -26,9 +26,9 @@ namespace AngbandOS.Core.Spells.Death
             }
         }
 
+        public override string Name => "Vampirism True";
         public override void Initialise(int characterClass)
         {
-            Name = "Vampirism True";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

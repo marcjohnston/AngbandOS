@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Sorcery
             saveGame.SleepMonsters();
         }
 
+        public override string Name => "Mass Sleep";
         public override void Initialise(int characterClass)
         {
-            Name = "Mass Sleep";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

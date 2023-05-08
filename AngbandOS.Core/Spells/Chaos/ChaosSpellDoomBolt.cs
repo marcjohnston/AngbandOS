@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Spells.Chaos
             saveGame.FireBeam(new ManaProjectile(saveGame), dir, Program.Rng.DiceRoll(11 + ((saveGame.Player.Level - 5) / 4), 8));
         }
 
+        public override string Name => "Doom Bolt";
         public override void Initialise(int characterClass)
         {
-            Name = "Doom Bolt";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Spells.Nature
             saveGame.FireBall(new WaterProjectile(saveGame), dir, 100 + saveGame.Player.Level, (saveGame.Player.Level / 12) + 1);
         }
 
+        public override string Name => "Whirlpool";
         public override void Initialise(int characterClass)
         {
-            Name = "Whirlpool";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

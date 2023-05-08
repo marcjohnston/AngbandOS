@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Folk
             saveGame.Player.TimedFireResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
         }
 
+        public override string Name => "Resist Fire";
         public override void Initialise(int characterClass)
         {
-            Name = "Resist Fire";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

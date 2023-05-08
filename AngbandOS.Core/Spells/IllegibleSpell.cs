@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Spells
         {
         }
 
+        public override string Name => "(illegible)";
         public override void Initialise(int characterClass)
         {
-            Name = "(illegible)";
             Level = 99;
             ManaCost = 0;
             BaseFailure = 0;

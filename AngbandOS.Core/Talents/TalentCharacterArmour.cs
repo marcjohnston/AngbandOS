@@ -11,9 +11,9 @@ namespace AngbandOS.Core.Talents
     [Serializable]
     internal class TalentCharacterArmour : Talent
     {
+        public override string Name => "Character Armour";
         public override void Initialise(int characterClass)
         {
-            Name = "Character Armour";
             Level = 13;
             ManaCost = 12;
             BaseFailure = 50;

@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Spells.Folk
             saveGame.WallToMud(dir);
         }
 
+        public override string Name => "Stone to Mud";
         public override void Initialise(int characterClass)
         {
-            Name = "Stone to Mud";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

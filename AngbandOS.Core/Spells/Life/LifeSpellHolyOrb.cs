@@ -23,9 +23,9 @@ namespace AngbandOS.Core.Spells.Life
                 saveGame.Player.Level < 30 ? 2 : 3);
         }
 
+        public override string Name => "Holy Orb";
         public override void Initialise(int characterClass)
         {
-            Name = "Holy Orb";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

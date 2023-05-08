@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Tarot
             saveGame.Player.TimedTelepathy.AddTimer(Program.Rng.DieRoll(30) + 25);
         }
 
+        public override string Name => "Astral Spying";
         public override void Initialise(int characterClass)
         {
-            Name = "Astral Spying";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

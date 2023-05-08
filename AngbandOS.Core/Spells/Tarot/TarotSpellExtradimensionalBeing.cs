@@ -17,9 +17,9 @@ namespace AngbandOS.Core.Spells.Tarot
             saveGame.Player.Dna.GainMutation();
         }
 
+        public override string Name => "Extradimensional Being";
         public override void Initialise(int characterClass)
         {
-            Name = "Extradimensional Being";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Spells.Folk
             saveGame.WizardLock(dir);
         }
 
+        public override string Name => "Wizard Lock";
         public override void Initialise(int characterClass)
         {
-            Name = "Wizard Lock";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

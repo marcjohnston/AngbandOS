@@ -11,9 +11,9 @@ namespace AngbandOS.Core.Talents
     [Serializable]
     internal class TalentMindWave : Talent
     {
+        public override string Name => "Mind Wave";
         public override void Initialise(int characterClass)
         {
-            Name = "Mind Wave";
             Level = 18;
             ManaCost = 10;
             BaseFailure = 45;

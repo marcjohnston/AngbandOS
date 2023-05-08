@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Corporeal
             saveGame.Player.Dna.GainMutation();
         }
 
+        public override string Name => "Mutate Body";
         public override void Initialise(int characterClass)
         {
-            Name = "Mutate Body";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

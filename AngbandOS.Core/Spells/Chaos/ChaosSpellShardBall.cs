@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Spells.Chaos
             saveGame.FireBall(new ShardProjectile(saveGame), dir, 120 + saveGame.Player.Level, 2);
         }
 
+        public override string Name => "Shard Ball";
         public override void Initialise(int characterClass)
         {
-            Name = "Shard Ball";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

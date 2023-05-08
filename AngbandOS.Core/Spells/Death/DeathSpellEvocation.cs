@@ -18,9 +18,9 @@ namespace AngbandOS.Core.Spells.Death
             saveGame.BanishMonsters(saveGame.Player.Level * 4);
         }
 
+        public override string Name => "Evocation";
         public override void Initialise(int characterClass)
         {
-            Name = "Evocation";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

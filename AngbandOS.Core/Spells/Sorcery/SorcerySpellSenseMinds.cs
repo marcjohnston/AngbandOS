@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Sorcery
             saveGame.Player.TimedTelepathy.AddTimer(Program.Rng.DieRoll(30) + 25);
         }
 
+        public override string Name => "Sense Minds";
         public override void Initialise(int characterClass)
         {
-            Name = "Sense Minds";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

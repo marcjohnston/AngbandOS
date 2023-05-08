@@ -11,9 +11,9 @@ namespace AngbandOS.Core.Talents
     [Serializable]
     internal class TalentPsychicDrain : Talent
     {
+        public override string Name => "Psychic Drain";
         public override void Initialise(int characterClass)
         {
-            Name = "Psychic Drain";
             Level = 25;
             ManaCost = 10;
             BaseFailure = 40;

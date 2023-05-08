@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Nature
             saveGame.Player.TimedStoneskin.AddTimer(Program.Rng.DieRoll(20) + 30);
         }
 
+        public override string Name => "Stone Skin";
         public override void Initialise(int characterClass)
         {
-            Name = "Stone Skin";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

@@ -26,9 +26,9 @@ namespace AngbandOS.Core.Spells.Nature
             }
         }
 
+        public override string Name => "Whirlwind Attack";
         public override void Initialise(int characterClass)
         {
-            Name = "Whirlwind Attack";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

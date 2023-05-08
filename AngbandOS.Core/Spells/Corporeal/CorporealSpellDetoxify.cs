@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Corporeal
             saveGame.Player.TimedPoison.ResetTimer();
         }
 
+        public override string Name => "Detoxify";
         public override void Initialise(int characterClass)
         {
-            Name = "Detoxify";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

@@ -18,9 +18,9 @@ namespace AngbandOS.Core.Spells.Corporeal
             saveGame.Player.TimedFear.ResetTimer();
         }
 
+        public override string Name => "Heroism";
         public override void Initialise(int characterClass)
         {
-            Name = "Heroism";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

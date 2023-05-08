@@ -18,9 +18,9 @@ namespace AngbandOS.Core.Spells.Life
             saveGame.DetectStairs();
         }
 
+        public override string Name => "Detect Traps and Secret Doors";
         public override void Initialise(int characterClass)
         {
-            Name = "Detect Traps and Secret Doors";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

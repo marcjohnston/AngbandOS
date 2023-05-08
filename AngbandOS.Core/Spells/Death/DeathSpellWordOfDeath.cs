@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Death
             saveGame.DispelLiving(saveGame.Player.Level * 3);
         }
 
+        public override string Name => "Word of Death";
         public override void Initialise(int characterClass)
         {
-            Name = "Word of Death";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Chaos
             saveGame.TeleportPlayer(saveGame.Player.Level * 5);
         }
 
+        public override string Name => "Teleport Self";
         public override void Initialise(int characterClass)
         {
-            Name = "Teleport Self";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

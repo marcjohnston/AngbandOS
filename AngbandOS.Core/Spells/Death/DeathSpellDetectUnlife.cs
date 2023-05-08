@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Death
             saveGame.DetectMonstersNonliving();
         }
 
+        public override string Name => "Detect Unlife";
         public override void Initialise(int characterClass)
         {
-            Name = "Detect Unlife";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

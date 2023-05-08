@@ -36,9 +36,9 @@ namespace AngbandOS.Core.Spells.Nature
                 Program.Rng.DiceRoll(5 + ((saveGame.Player.Level - 5) / 4), 8));
         }
 
+        public override string Name => "Frost Bolt";
         public override void Initialise(int characterClass)
         {
-            Name = "Frost Bolt";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

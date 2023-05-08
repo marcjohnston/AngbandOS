@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Sorcery
             saveGame.Recharge(saveGame.Player.Level * 2);
         }
 
+        public override string Name => "Recharging";
         public override void Initialise(int characterClass)
         {
-            Name = "Recharging";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

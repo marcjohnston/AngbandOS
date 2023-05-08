@@ -30,9 +30,9 @@ namespace AngbandOS.Core.Spells.Tarot
             saveGame.TeleportPlayerTo(ij, ii);
         }
 
+        public override string Name => "Dimension Door";
         public override void Initialise(int characterClass)
         {
-            Name = "Dimension Door";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

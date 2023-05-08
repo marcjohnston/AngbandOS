@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Life
             saveGame.Player.TimedSeeInvisibility.AddTimer(Program.Rng.DieRoll(24) + 24);
         }
 
+        public override string Name => "Sense Unseen";
         public override void Initialise(int characterClass)
         {
-            Name = "Sense Unseen";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

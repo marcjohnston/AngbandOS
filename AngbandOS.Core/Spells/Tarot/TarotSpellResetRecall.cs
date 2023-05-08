@@ -34,9 +34,9 @@ namespace AngbandOS.Core.Spells.Tarot
             saveGame.MsgPrint($"Recall depth set to level {dummy}.");
         }
 
+        public override string Name => "Reset Recall";
         public override void Initialise(int characterClass)
         {
-            Name = "Reset Recall";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

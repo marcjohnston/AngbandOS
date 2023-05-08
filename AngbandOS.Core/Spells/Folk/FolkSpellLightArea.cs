@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Folk
             saveGame.LightArea(Program.Rng.DiceRoll(2, saveGame.Player.Level / 2), (saveGame.Player.Level / 10) + 1);
         }
 
+        public override string Name => "Light Area";
         public override void Initialise(int characterClass)
         {
-            Name = "Light Area";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

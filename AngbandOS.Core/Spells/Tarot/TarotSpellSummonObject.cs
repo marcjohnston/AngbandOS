@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Spells.Tarot
             saveGame.SummonItem(dir, saveGame.Player.Level * 15, true);
         }
 
+        public override string Name => "Summon Object";
         public override void Initialise(int characterClass)
         {
-            Name = "Summon Object";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Nature
             saveGame.WallStone();
         }
 
+        public override string Name => "Wall of Stone";
         public override void Initialise(int characterClass)
         {
-            Name = "Wall of Stone";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

@@ -19,9 +19,9 @@ namespace AngbandOS.Core.Spells.Nature
             saveGame.Player.TimedPoison.ResetTimer();
         }
 
+        public override string Name => "Herbal Healing";
         public override void Initialise(int characterClass)
         {
-            Name = "Herbal Healing";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

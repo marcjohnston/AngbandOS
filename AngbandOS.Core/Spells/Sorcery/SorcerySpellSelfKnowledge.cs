@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Sorcery
             saveGame.SelfKnowledge();
         }
 
+        public override string Name => "Self Knowledge";
         public override void Initialise(int characterClass)
         {
-            Name = "Self Knowledge";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

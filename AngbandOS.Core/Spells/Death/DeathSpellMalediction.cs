@@ -39,9 +39,9 @@ namespace AngbandOS.Core.Spells.Death
             saveGame.FireBolt(new StunProjectile(saveGame), dir, saveGame.Player.Level);
         }
 
+        public override string Name => "Malediction";
         public override void Initialise(int characterClass)
         {
-            Name = "Malediction";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

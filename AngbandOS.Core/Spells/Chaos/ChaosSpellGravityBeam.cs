@@ -21,9 +21,9 @@ namespace AngbandOS.Core.Spells.Chaos
                 Program.Rng.DiceRoll(9 + ((saveGame.Player.Level - 5) / 4), 8));
         }
 
+        public override string Name => "Gravity Beam";
         public override void Initialise(int characterClass)
         {
-            Name = "Gravity Beam";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

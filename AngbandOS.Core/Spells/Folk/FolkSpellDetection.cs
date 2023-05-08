@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Folk
             saveGame.DetectAll();
         }
 
+        public override string Name => "Detection";
         public override void Initialise(int characterClass)
         {
-            Name = "Detection";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

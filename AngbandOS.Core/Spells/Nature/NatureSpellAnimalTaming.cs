@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Spells.Nature
             saveGame.CharmAnimal(dir, saveGame.Player.Level);
         }
 
+        public override string Name => "Animal Taming";
         public override void Initialise(int characterClass)
         {
-            Name = "Animal Taming";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

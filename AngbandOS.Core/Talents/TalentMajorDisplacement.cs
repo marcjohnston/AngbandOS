@@ -11,9 +11,9 @@ namespace AngbandOS.Core.Talents
     [Serializable]
     internal class TalentMajorDisplacement : Talent
     {
+        public override string Name => "Major Displacement";
         public override void Initialise(int characterClass)
         {
-            Name = "Major Displacement";
             Level = 7;
             ManaCost = 6;
             BaseFailure = 35;

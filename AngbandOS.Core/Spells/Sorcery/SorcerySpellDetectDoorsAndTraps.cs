@@ -18,9 +18,9 @@ namespace AngbandOS.Core.Spells.Sorcery
             saveGame.DetectStairs();
         }
 
+        public override string Name => "Detect Doors and Traps";
         public override void Initialise(int characterClass)
         {
-            Name = "Detect Doors and Traps";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

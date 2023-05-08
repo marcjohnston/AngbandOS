@@ -18,9 +18,9 @@ namespace AngbandOS.Core.Spells.Corporeal
             saveGame.Player.TimedAcidResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
         }
 
+        public override string Name => "Burn Resistance";
         public override void Initialise(int characterClass)
         {
-            Name = "Burn Resistance";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

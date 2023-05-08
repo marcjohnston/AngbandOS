@@ -23,9 +23,9 @@ namespace AngbandOS.Core.Spells.Nature
             saveGame.Player.TakeHit(50, "sunlight");
         }
 
+        public override string Name => "Whirlpool";
         public override void Initialise(int characterClass)
         {
-            Name = "Whirlpool";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

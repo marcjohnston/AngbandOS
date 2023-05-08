@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Folk
             saveGame.CreatePhlogiston();
         }
 
+        public override string Name => "Phlogiston";
         public override void Initialise(int characterClass)
         {
-            Name = "Phlogiston";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

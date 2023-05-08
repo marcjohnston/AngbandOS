@@ -36,9 +36,9 @@ namespace AngbandOS.Core.Spells.Tarot
             }
         }
 
+        public override string Name => "Mass Summons";
         public override void Initialise(int characterClass)
         {
-            Name = "Mass Summons";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

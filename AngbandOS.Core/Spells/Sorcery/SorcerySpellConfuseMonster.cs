@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Spells.Sorcery
             saveGame.ConfuseMonster(dir, saveGame.Player.Level * 3 / 2);
         }
 
+        public override string Name => "Confuse Monster";
         public override void Initialise(int characterClass)
         {
-            Name = "Confuse Monster";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

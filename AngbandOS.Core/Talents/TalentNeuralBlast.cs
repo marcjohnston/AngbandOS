@@ -11,9 +11,9 @@ namespace AngbandOS.Core.Talents
     [Serializable]
     internal class TalentNeuralBlast : Talent
     {
+        public override string Name => "Neural Blast";
         public override void Initialise(int characterClass)
         {
-            Name = "Neural Blast";
             Level = 2;
             ManaCost = 1;
             BaseFailure = 20;

@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Folk
             saveGame.TeleportPlayer(saveGame.Player.Level * 5);
         }
 
+        public override string Name => "Teleport";
         public override void Initialise(int characterClass)
         {
-            Name = "Teleport";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

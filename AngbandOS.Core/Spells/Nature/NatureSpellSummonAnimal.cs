@@ -19,9 +19,9 @@ namespace AngbandOS.Core.Spells.Nature
             }
         }
 
+        public override string Name => "Summon Animal";
         public override void Initialise(int characterClass)
         {
-            Name = "Summon Animal";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

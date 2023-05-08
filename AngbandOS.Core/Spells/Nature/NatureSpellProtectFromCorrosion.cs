@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Nature
             saveGame.Rustproof();
         }
 
+        public override string Name => "Protection from Corrosion";
         public override void Initialise(int characterClass)
         {
-            Name = "Protection from Corrosion";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

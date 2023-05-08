@@ -18,9 +18,9 @@ namespace AngbandOS.Core.Spells.Corporeal
             saveGame.Player.TimedBleeding.ResetTimer();
         }
 
+        public override string Name => "Healing True";
         public override void Initialise(int characterClass)
         {
-            Name = "Healing True";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

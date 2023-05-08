@@ -18,9 +18,9 @@ namespace AngbandOS.Core.Spells.Nature
             saveGame.Player.TimedLightningResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
         }
 
+        public override string Name => "Resist Environment";
         public override void Initialise(int characterClass)
         {
-            Name = "Resist Environment";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

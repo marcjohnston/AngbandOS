@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Spells.Death
             saveGame.FireBall(new DarkProjectile(saveGame), dir, 120, 4);
         }
 
+        public override string Name => "Darkness Storm";
         public override void Initialise(int characterClass)
         {
-            Name = "Darkness Storm";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

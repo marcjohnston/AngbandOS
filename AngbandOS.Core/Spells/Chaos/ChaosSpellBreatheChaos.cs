@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Spells.Chaos
             saveGame.FireBall(new ChaosProjectile(saveGame), dir, saveGame.Player.Health, -2);
         }
 
+        public override string Name => "Breathe Chaos";
         public override void Initialise(int characterClass)
         {
-            Name = "Breathe Chaos";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Death
             saveGame.Player.TimedEtherealness.AddTimer(Program.Rng.DieRoll(saveGame.Player.Level / 2) + (saveGame.Player.Level / 2));
         }
 
+        public override string Name => "Wraithform";
         public override void Initialise(int characterClass)
         {
-            Name = "Wraithform";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

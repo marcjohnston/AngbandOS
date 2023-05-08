@@ -21,9 +21,9 @@ namespace AngbandOS.Core.Spells.Chaos
                 Program.Rng.DiceRoll(8 + ((saveGame.Player.Level - 5) / 4), 8), 0);
         }
 
+        public override string Name => "Fist of Force";
         public override void Initialise(int characterClass)
         {
-            Name = "Fist of Force";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

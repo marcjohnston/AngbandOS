@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Spells.Sorcery
             saveGame.SummonItem(dir, saveGame.Player.Level * 15, false);
         }
 
+        public override string Name => "Telekinesis";
         public override void Initialise(int characterClass)
         {
-            Name = "Telekinesis";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

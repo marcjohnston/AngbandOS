@@ -19,9 +19,9 @@ namespace AngbandOS.Core.Spells.Tarot
                     : "No-one ever turns up.");
         }
 
+        public override string Name => "Phantasmal Servant";
         public override void Initialise(int characterClass)
         {
-            Name = "Phantasmal Servant";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

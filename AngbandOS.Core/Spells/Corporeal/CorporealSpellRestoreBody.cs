@@ -21,9 +21,9 @@ namespace AngbandOS.Core.Spells.Corporeal
             saveGame.Player.TryRestoringAbilityScore(Ability.Charisma);
         }
 
+        public override string Name => "Restore Body";
         public override void Initialise(int characterClass)
         {
-            Name = "Restore Body";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

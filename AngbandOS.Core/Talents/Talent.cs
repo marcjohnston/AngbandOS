@@ -3,7 +3,7 @@
     [Serializable]
     internal abstract class Talent
     {
-        public string Name;
+        public abstract string Name { get; }
 
         public int Level
         {

@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Spells.Death
             saveGame.DeathRay(dir, saveGame.Player.Level);
         }
 
+        public override string Name => "Death Ray";
         public override void Initialise(int characterClass)
         {
-            Name = "Death Ray";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

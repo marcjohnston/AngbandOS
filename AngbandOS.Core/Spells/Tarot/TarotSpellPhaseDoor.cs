@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Tarot
             saveGame.TeleportPlayer(10);
         }
 
+        public override string Name => "Phase Door";
         public override void Initialise(int characterClass)
         {
-            Name = "Phase Door";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

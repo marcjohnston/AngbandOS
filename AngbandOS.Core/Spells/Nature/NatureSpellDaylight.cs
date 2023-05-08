@@ -22,9 +22,9 @@ namespace AngbandOS.Core.Spells.Nature
             saveGame.Player.TakeHit(Program.Rng.DiceRoll(2, 2), "daylight");
         }
 
+        public override string Name => "Daylight";
         public override void Initialise(int characterClass)
         {
-            Name = "Daylight";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

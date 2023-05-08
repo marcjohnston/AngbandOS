@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Nature
             saveGame.BrandWeapon(0);
         }
 
+        public override string Name => "Elemental Branding";
         public override void Initialise(int characterClass)
         {
-            Name = "Elemental Branding";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

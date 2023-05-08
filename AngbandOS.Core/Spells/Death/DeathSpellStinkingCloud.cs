@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Spells.Death
             saveGame.FireBall(new PoisProjectile(saveGame), dir, 10 + (saveGame.Player.Level / 2), 2);
         }
 
+        public override string Name => "Stinking Cloud";
         public override void Initialise(int characterClass)
         {
-            Name = "Stinking Cloud";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

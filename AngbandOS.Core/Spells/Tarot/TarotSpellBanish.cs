@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Tarot
             saveGame.BanishMonsters(saveGame.Player.Level * 4);
         }
 
+        public override string Name => "Banish";
         public override void Initialise(int characterClass)
         {
-            Name = "Banish";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

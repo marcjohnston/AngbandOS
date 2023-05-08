@@ -17,9 +17,9 @@ namespace AngbandOS.Core.Spells.Chaos
                 new SoundProjectile(saveGame), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
         }
 
+        public override string Name => "Sonic Boom";
         public override void Initialise(int characterClass)
         {
-            Name = "Sonic Boom";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

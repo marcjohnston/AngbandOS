@@ -11,9 +11,9 @@ namespace AngbandOS.Core.Talents
     [Serializable]
     internal class TalentAdrenalineChanneling : Talent
     {
+        public override string Name => "Adrenaline Channeling";
         public override void Initialise(int characterClass)
         {
-            Name = "Adrenaline Channeling";
             Level = 23;
             ManaCost = 15;
             BaseFailure = 50;

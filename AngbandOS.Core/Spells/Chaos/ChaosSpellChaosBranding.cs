@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Chaos
             saveGame.BrandWeapon(1);
         }
 
+        public override string Name => "Chaos Branding";
         public override void Initialise(int characterClass)
         {
-            Name = "Chaos Branding";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

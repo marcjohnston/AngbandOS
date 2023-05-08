@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Sorcery
             saveGame.TeleportPlayerLevel();
         }
 
+        public override string Name => "Teleport Level";
         public override void Initialise(int characterClass)
         {
-            Name = "Teleport Level";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

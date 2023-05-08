@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Tarot
             saveGame.DispelLiving(saveGame.Player.Level * 3);
         }
 
+        public override string Name => "Death Dealing";
         public override void Initialise(int characterClass)
         {
-            Name = "Death Dealing";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

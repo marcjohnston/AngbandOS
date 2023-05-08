@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Life
             saveGame.Player.TimedFear.ResetTimer();
         }
 
+        public override string Name => "Remove Fear";
         public override void Initialise(int characterClass)
         {
-            Name = "Remove Fear";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

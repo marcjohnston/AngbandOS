@@ -31,9 +31,9 @@ namespace AngbandOS.Core.Spells.Tarot
             }
         }
 
+        public override string Name => "Summon Monster";
         public override void Initialise(int characterClass)
         {
-            Name = "Summon Monster";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Death
             saveGame.Player.TimedPoisonResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
         }
 
+        public override string Name => "Resist Poison";
         public override void Initialise(int characterClass)
         {
-            Name = "Resist Poison";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

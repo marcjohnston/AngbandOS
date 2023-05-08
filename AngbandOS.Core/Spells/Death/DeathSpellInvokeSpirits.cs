@@ -144,9 +144,9 @@ namespace AngbandOS.Core.Spells.Death
             }
         }
 
+        public override string Name => "Invoke Spirits";
         public override void Initialise(int characterClass)
         {
-            Name = "Invoke Spirits";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

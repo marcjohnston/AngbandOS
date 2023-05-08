@@ -36,9 +36,9 @@ namespace AngbandOS.Core.Spells.Tarot
                 Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 5), 3));
         }
 
+        public override string Name => "Mind Blast";
         public override void Initialise(int characterClass)
         {
-            Name = "Mind Blast";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

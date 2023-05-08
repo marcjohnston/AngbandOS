@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Chaos
             saveGame.CallTheVoid();
         }
 
+        public override string Name => "Call the Void";
         public override void Initialise(int characterClass)
         {
-            Name = "Call the Void";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

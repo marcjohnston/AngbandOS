@@ -18,9 +18,9 @@ namespace AngbandOS.Core.Spells.Life
             saveGame.Player.TimedBleeding.ResetTimer();
         }
 
+        public override string Name => "Cure Critical Wounds";
         public override void Initialise(int characterClass)
         {
-            Name = "Cure Critical Wounds";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

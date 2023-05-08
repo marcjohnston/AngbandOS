@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Chaos
             saveGame.DestroyArea(saveGame.Player.MapY, saveGame.Player.MapX, 15);
         }
 
+        public override string Name => "Word of Destruction";
         public override void Initialise(int characterClass)
         {
-            Name = "Word of Destruction";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

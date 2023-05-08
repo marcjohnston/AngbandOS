@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Chaos
             saveGame.CallChaos();
         }
 
+        public override string Name => "Call Chaos";
         public override void Initialise(int characterClass)
         {
-            Name = "Call Chaos";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

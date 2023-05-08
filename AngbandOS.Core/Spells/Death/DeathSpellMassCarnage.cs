@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Death
             saveGame.MassCarnage(true);
         }
 
+        public override string Name => "Mass Carnage";
         public override void Initialise(int characterClass)
         {
-            Name = "Mass Carnage";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

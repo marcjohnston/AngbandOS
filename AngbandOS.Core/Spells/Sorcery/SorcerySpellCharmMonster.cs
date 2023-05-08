@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Spells.Sorcery
             saveGame.CharmMonster(dir, saveGame.Player.Level);
         }
 
+        public override string Name => "Charm Monster";
         public override void Initialise(int characterClass)
         {
-            Name = "Charm Monster";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

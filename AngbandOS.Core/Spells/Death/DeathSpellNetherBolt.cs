@@ -36,9 +36,9 @@ namespace AngbandOS.Core.Spells.Death
                 Program.Rng.DiceRoll(6 + ((saveGame.Player.Level - 5) / 4), 8));
         }
 
+        public override string Name => "Nether Bolt";
         public override void Initialise(int characterClass)
         {
-            Name = "Nether Bolt";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

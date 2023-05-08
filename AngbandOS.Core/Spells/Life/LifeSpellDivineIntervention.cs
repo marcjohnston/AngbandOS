@@ -35,9 +35,9 @@ namespace AngbandOS.Core.Spells.Life
             saveGame.Player.TimedFear.ResetTimer();
         }
 
+        public override string Name => "Divine Intervention";
         public override void Initialise(int characterClass)
         {
-            Name = "Divine Intervention";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

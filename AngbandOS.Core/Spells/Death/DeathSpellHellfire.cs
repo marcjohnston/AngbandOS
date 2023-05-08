@@ -21,9 +21,9 @@ namespace AngbandOS.Core.Spells.Death
             saveGame.Player.TakeHit(50 + Program.Rng.DieRoll(50), "the strain of casting Hellfire");
         }
 
+        public override string Name => "Hellfire";
         public override void Initialise(int characterClass)
         {
-            Name = "Hellfire";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

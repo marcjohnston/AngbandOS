@@ -22,9 +22,9 @@ namespace AngbandOS.Core.Spells.Life
             saveGame.Player.RestoreLevel();
         }
 
+        public override string Name => "Restoration";
         public override void Initialise(int characterClass)
         {
-            Name = "Restoration";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

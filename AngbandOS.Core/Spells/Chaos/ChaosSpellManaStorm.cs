@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Spells.Chaos
             saveGame.FireBall(new ManaProjectile(saveGame), dir, 300 + (saveGame.Player.Level * 2), 4);
         }
 
+        public override string Name => "Mana Storm";
         public override void Initialise(int characterClass)
         {
-            Name = "Mana Storm";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

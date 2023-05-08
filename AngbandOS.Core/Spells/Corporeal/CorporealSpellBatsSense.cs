@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Corporeal
             saveGame.Level.MapArea();
         }
 
+        public override string Name => "Bat's Sense";
         public override void Initialise(int characterClass)
         {
-            Name = "Bat's Sense";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

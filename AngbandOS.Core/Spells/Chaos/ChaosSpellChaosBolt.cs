@@ -36,9 +36,9 @@ namespace AngbandOS.Core.Spells.Chaos
                 Program.Rng.DiceRoll(10 + ((saveGame.Player.Level - 5) / 4), 8));
         }
 
+        public override string Name => "Chaos Bolt";
         public override void Initialise(int characterClass)
         {
-            Name = "Chaos Bolt";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Sorcery
             saveGame.IdentifyFully();
         }
 
+        public override string Name => "Identify True";
         public override void Initialise(int characterClass)
         {
-            Name = "Identify True";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

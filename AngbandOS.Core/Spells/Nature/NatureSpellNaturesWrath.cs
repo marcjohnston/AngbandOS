@@ -19,9 +19,9 @@ namespace AngbandOS.Core.Spells.Nature
                 new DisintegrateProjectile(saveGame), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
         }
 
+        public override string Name => "Nature's Wrath";
         public override void Initialise(int characterClass)
         {
-            Name = "Nature's Wrath";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

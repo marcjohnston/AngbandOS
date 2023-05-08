@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Tarot
             saveGame.DetectAll();
         }
 
+        public override string Name => "Ethereal Divination";
         public override void Initialise(int characterClass)
         {
-            Name = "Ethereal Divination";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

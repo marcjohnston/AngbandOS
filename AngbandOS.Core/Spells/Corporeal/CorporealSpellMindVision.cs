@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Corporeal
             saveGame.Player.TimedTelepathy.AddTimer(Program.Rng.DieRoll(30) + 25);
         }
 
+        public override string Name => "Mind Vision";
         public override void Initialise(int characterClass)
         {
-            Name = "Mind Vision";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

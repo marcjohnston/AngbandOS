@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Sorcery
             saveGame.Player.ToggleRecall();
         }
 
+        public override string Name => "Word of Recall";
         public override void Initialise(int characterClass)
         {
-            Name = "Word of Recall";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

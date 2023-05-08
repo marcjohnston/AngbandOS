@@ -23,9 +23,9 @@ namespace AngbandOS.Core.Spells.Death
                 saveGame.Player.Level < 30 ? 2 : 3);
         }
 
+        public override string Name => "Orb of Entropy";
         public override void Initialise(int characterClass)
         {
-            Name = "Orb of Entropy";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

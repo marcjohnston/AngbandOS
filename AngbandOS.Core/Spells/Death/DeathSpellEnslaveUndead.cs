@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Spells.Death
             saveGame.ControlOneUndead(dir, saveGame.Player.Level);
         }
 
+        public override string Name => "Enslave Undead";
         public override void Initialise(int characterClass)
         {
-            Name = "Enslave Undead";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Folk
             saveGame.IdentifyItem();
         }
 
+        public override string Name => "Identify";
         public override void Initialise(int characterClass)
         {
-            Name = "Identify";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

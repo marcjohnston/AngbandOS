@@ -17,9 +17,9 @@ namespace AngbandOS.Core.Spells.Folk
             saveGame.DetectObjectsGold();
         }
 
+        public override string Name => "Detect Treasure";
         public override void Initialise(int characterClass)
         {
-            Name = "Detect Treasure";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

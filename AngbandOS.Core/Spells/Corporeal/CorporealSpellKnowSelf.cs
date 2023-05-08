@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Corporeal
             saveGame.SelfKnowledge();
         }
 
+        public override string Name => "Know Self";
         public override void Initialise(int characterClass)
         {
-            Name = "Know Self";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

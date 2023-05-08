@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Spells.Folk
             saveGame.DestroyDoor(dir);
         }
 
+        public override string Name => "Trap & Door Destruction";
         public override void Initialise(int characterClass)
         {
-            Name = "Trap & Door Destruction";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

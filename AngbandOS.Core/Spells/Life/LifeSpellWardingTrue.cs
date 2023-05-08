@@ -17,9 +17,9 @@ namespace AngbandOS.Core.Spells.Life
             saveGame.ElderSignCreation();
         }
 
+        public override string Name => "Warding True";
         public override void Initialise(int characterClass)
         {
-            Name = "Warding True";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

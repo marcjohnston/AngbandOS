@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Nature
             saveGame.IdentifyFully();
         }
 
+        public override string Name => "Stone Tell";
         public override void Initialise(int characterClass)
         {
-            Name = "Stone Tell";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

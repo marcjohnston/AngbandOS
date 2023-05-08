@@ -43,9 +43,9 @@ namespace AngbandOS.Core.Spells.Death
             saveGame.Player.Mana += 100;
         }
 
+        public override string Name => "Annihilation";
         public override void Initialise(int characterClass)
         {
-            Name = "Annihilation";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

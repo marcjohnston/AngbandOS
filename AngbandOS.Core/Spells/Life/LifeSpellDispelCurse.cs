@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Life
             saveGame.RemoveAllCurse();
         }
 
+        public override string Name => "Dispel Curse";
         public override void Initialise(int characterClass)
         {
-            Name = "Dispel Curse";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

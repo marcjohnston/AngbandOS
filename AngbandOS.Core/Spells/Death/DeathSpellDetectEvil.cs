@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Death
             saveGame.DetectMonstersEvil();
         }
 
+        public override string Name => "Detect Evil";
         public override void Initialise(int characterClass)
         {
-            Name = "Detect Evil";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

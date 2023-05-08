@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Death
             saveGame.TurnMonsters(30 + saveGame.Player.Level);
         }
 
+        public override string Name => "Terror";
         public override void Initialise(int characterClass)
         {
-            Name = "Terror";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

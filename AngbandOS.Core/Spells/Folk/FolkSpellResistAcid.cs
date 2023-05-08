@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Folk
             saveGame.Player.TimedAcidResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
         }
 
+        public override string Name => "Resist Acid";
         public override void Initialise(int characterClass)
         {
-            Name = "Resist Acid";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Tarot
             saveGame.IdentifyFully();
         }
 
+        public override string Name => "Astral Lore";
         public override void Initialise(int characterClass)
         {
-            Name = "Astral Lore";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

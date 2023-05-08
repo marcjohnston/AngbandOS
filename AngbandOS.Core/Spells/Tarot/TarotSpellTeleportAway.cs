@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Spells.Tarot
             saveGame.FireBeam(new TeleportAwayAllProjectile(saveGame), dir, saveGame.Player.Level);
         }
 
+        public override string Name => "Teleport Away";
         public override void Initialise(int characterClass)
         {
-            Name = "Teleport Away";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

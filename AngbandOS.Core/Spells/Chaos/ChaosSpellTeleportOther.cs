@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Spells.Chaos
             saveGame.FireBeam(new TeleportAwayAllProjectile(saveGame), dir, saveGame.Player.Level);
         }
 
+        public override string Name => "Teleport Other";
         public override void Initialise(int characterClass)
         {
-            Name = "Teleport Other";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

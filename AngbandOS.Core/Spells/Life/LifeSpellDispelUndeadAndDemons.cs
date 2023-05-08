@@ -17,9 +17,9 @@ namespace AngbandOS.Core.Spells.Life
             saveGame.DispelDemons(saveGame.Player.Level * 3);
         }
 
+        public override string Name => "Dispel Undead & Demons";
         public override void Initialise(int characterClass)
         {
-            Name = "Dispel Undead & Demons";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Nature
             saveGame.DoorCreation();
         }
 
+        public override string Name => "Door Creation";
         public override void Initialise(int characterClass)
         {
-            Name = "Door Creation";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

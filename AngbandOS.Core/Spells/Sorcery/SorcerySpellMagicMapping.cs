@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Sorcery
             saveGame.Level.MapArea();
         }
 
+        public override string Name => "Magic Mapping";
         public override void Initialise(int characterClass)
         {
-            Name = "Magic Mapping";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

@@ -33,9 +33,9 @@ namespace AngbandOS.Core.Spells.Corporeal
             }
         }
 
+        public override string Name => "Move Body";
         public override void Initialise(int characterClass)
         {
-            Name = "Move Body";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

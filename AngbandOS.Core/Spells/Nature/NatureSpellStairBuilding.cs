@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Nature
             saveGame.StairCreation();
         }
 
+        public override string Name => "Stair Building";
         public override void Initialise(int characterClass)
         {
-            Name = "Stair Building";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

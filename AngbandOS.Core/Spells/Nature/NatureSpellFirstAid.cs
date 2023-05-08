@@ -17,9 +17,9 @@ namespace AngbandOS.Core.Spells.Nature
             saveGame.Player.TimedBleeding.AddTimer(-15);
         }
 
+        public override string Name => "First Aid";
         public override void Initialise(int characterClass)
         {
-            Name = "First Aid";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

@@ -17,9 +17,9 @@ namespace AngbandOS.Core.Spells.Folk
             saveGame.Player.TimedBleeding.SetTimer((saveGame.Player.TimedBleeding.TurnsRemaining / 2) - 50);
         }
 
+        public override string Name => "Cure Medium Wounds";
         public override void Initialise(int characterClass)
         {
-            Name = "Cure Medium Wounds";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

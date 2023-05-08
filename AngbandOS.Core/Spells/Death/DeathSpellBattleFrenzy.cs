@@ -26,9 +26,9 @@ namespace AngbandOS.Core.Spells.Death
             }
         }
 
+        public override string Name => "Battle Frenzy";
         public override void Initialise(int characterClass)
         {
-            Name = "Battle Frenzy";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

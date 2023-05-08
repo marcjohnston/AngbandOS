@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Sorcery
             saveGame.EnchantItem(0, 0, Program.Rng.RandomLessThan(3) + 2);
         }
 
+        public override string Name => "Enchant Armour";
         public override void Initialise(int characterClass)
         {
-            Name = "Enchant Armour";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

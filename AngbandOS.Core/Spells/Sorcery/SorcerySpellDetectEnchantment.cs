@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Sorcery
             saveGame.DetectObjectsMagic();
         }
 
+        public override string Name => "Detect Enchantment";
         public override void Initialise(int characterClass)
         {
-            Name = "Detect Enchantment";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

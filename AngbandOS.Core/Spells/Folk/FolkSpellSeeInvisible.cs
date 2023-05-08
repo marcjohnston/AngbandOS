@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Folk
             saveGame.Player.TimedSeeInvisibility.AddTimer(Program.Rng.DieRoll(24) + 24);
         }
 
+        public override string Name => "See Invisible";
         public override void Initialise(int characterClass)
         {
-            Name = "See Invisible";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

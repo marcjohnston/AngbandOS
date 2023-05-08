@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Spells.Chaos
             }
         }
 
+        public override string Name => "Chain Lightning";
         public override void Initialise(int characterClass)
         {
-            Name = "Chain Lightning";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

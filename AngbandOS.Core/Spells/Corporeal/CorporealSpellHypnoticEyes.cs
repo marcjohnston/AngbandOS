@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Spells.Corporeal
             saveGame.CharmMonster(dir, saveGame.Player.Level);
         }
 
+        public override string Name => "Hypnotic Eyes";
         public override void Initialise(int characterClass)
         {
-            Name = "Hypnotic Eyes";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

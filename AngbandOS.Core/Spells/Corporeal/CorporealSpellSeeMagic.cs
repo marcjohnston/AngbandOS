@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Corporeal
             saveGame.DetectObjectsMagic();
         }
 
+        public override string Name => "See Magic";
         public override void Initialise(int characterClass)
         {
-            Name = "See Magic";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

@@ -18,9 +18,9 @@ namespace AngbandOS.Core.Spells.Life
             saveGame.TurnEvil(saveGame.Player.Level);
         }
 
+        public override string Name => "Exorcism";
         public override void Initialise(int characterClass)
         {
-            Name = "Exorcism";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

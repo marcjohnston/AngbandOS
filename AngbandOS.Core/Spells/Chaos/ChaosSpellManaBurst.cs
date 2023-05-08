@@ -22,9 +22,9 @@ namespace AngbandOS.Core.Spells.Chaos
                 saveGame.Player.Level < 30 ? 2 : 3);
         }
 
+        public override string Name => "Mana Burst";
         public override void Initialise(int characterClass)
         {
-            Name = "Mana Burst";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Chaos
             saveGame.DestroyDoorsTouch();
         }
 
+        public override string Name => "Trap and Door Destruction";
         public override void Initialise(int characterClass)
         {
-            Name = "Trap and Door Destruction";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

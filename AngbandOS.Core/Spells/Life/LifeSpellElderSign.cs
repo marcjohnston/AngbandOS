@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Life
             saveGame.ElderSign();
         }
 
+        public override string Name => "Elder Sign";
         public override void Initialise(int characterClass)
         {
-            Name = "Elder Sign";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

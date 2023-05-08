@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Tarot
             saveGame.BrandWeapon(4);
         }
 
+        public override string Name => "Astral Branding";
         public override void Initialise(int characterClass)
         {
-            Name = "Astral Branding";
             switch (characterClass)
             {
                 case CharacterClass.Mage:

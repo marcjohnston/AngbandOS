@@ -16,9 +16,9 @@ namespace AngbandOS.Core.Spells.Nature
             saveGame.DetectMonstersNormal();
         }
 
+        public override string Name => "Detect Creatures";
         public override void Initialise(int characterClass)
         {
-            Name = "Detect Creatures";
             switch (characterClass)
             {
                 case CharacterClass.Mage:
