@@ -4,7 +4,7 @@ namespace AngbandOS.Core.Items
     internal class DetectInvisibleStaffItem : StaffItem
     {
         public DetectInvisibleStaffItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<StaffDetectInvisible>()) { }
-        protected override void ApplyMagic(int level, int power)
+        protected override void ApplyMagic(int level, int power, Store? store)
         {
             TypeSpecificValue = Program.Rng.DieRoll(15) + 8;
         }

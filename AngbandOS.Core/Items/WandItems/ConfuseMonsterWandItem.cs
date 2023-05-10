@@ -4,7 +4,7 @@ namespace AngbandOS.Core.Items
     internal class ConfuseMonsterWandItem : WandItem
     {
         public ConfuseMonsterWandItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ConfuseMonsterWandItemFactory>()) { }
-        protected override void ApplyMagic(int level, int power)
+        protected override void ApplyMagic(int level, int power, Store? store)
         {
             TypeSpecificValue = Program.Rng.DieRoll(12) + 6;
         }

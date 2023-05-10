@@ -10,9 +10,9 @@
         protected virtual bool CanBeWeaponOfLaw => false;
         protected virtual bool CanBeWeaponOfSharpness => false;
         protected virtual bool CapableOfVorpalSlaying => false;
-        protected override void ApplyMagic(int level, int power)
+        protected override void ApplyMagic(int level, int power, Store? store)
         {
-            base.ApplyMagic( level, power);
+            base.ApplyMagic(level, power, null);
             if (power > 1)
             {
                 IArtifactBias artifactBias = null;

@@ -20,7 +20,7 @@ namespace AngbandOS.Core.Items
             return bonusValue;
         }
 
-        protected override void ApplyMagic(int level, int power)
+        protected override void ApplyMagic(int level, int power, Store? store)
         {
             if (power == 0)
             {

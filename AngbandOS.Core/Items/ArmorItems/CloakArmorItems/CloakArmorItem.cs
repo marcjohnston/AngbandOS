@@ -34,12 +34,12 @@ namespace AngbandOS.Core.Items
             }
         }
 
-        protected override void ApplyMagic(int level, int power)
+        protected override void ApplyMagic(int level, int power, Store? store)
         {
             if (power != 0)
             {
                 // Apply the standard armour characteristics.
-                base.ApplyMagic(level, power);
+                base.ApplyMagic(level, power, null);
 
                 if (power > 1)
                 {

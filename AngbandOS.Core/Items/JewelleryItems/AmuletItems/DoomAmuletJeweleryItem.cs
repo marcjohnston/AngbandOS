@@ -5,7 +5,7 @@ namespace AngbandOS.Core.Items
     {
         public DoomAmuletJeweleryItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<DoomAmuletJeweleryItemFactory>()) { }
 
-        protected override void ApplyMagic(int level, int power)
+        protected override void ApplyMagic(int level, int power, Store? store)
         {
             IdentBroken = true;
             IdentCursed = true;

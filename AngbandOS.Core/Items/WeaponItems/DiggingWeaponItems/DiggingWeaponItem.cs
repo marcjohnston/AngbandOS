@@ -8,9 +8,9 @@ namespace AngbandOS.Core.Items
         public override bool IdentityCanBeSensed => true;
         public override bool GetsDamageMultiplier => true;
 
-        protected override void ApplyMagic(int level, int power)
+        protected override void ApplyMagic(int level, int power, Store? store)
         {
-            base.ApplyMagic( level, power);
+            base.ApplyMagic(level, power, null);
             if (power > 1)
             {
                 RareItemTypeIndex = RareItemTypeEnum.WeaponOfDigging;

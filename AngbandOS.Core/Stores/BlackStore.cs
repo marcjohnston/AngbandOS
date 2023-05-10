@@ -71,7 +71,7 @@
                 return null; ;
             }
             Item qPtr = itemType.CreateItem();
-            qPtr.ApplyMagic(level, false, false, false);
+            qPtr.ApplyMagic(level, false, false, false, this);
             return qPtr;
         }
         protected override int MinimumItemValue => 10;

@@ -18,9 +18,9 @@ namespace AngbandOS.Core.Items
             return bonusValue;
         }
 
-        protected override void ApplyMagic(int level, int power)
+        protected override void ApplyMagic(int level, int power, Store? store)
         {
-            base.ApplyMagic(level, power);
+            base.ApplyMagic(level, power, null);
             if (power > 1)
             {
                 switch (Program.Rng.DieRoll(12))

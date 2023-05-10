@@ -802,7 +802,7 @@ namespace AngbandOS.Core
                 }
                 item = kIdx.CreateItem();
             }
-            item.ApplyMagic(Level.ObjectLevel, true, good, great);
+            item.ApplyMagic(Level.ObjectLevel, true, good, great, null);
             item.Count = item.MakeObjectCount;
             if (!item.IsCursed() && !item.IsBroken() && item.Factory.Level > Difficulty)
             {
@@ -19597,7 +19597,7 @@ namespace AngbandOS.Core
             }
             ItemFactory itemClass = SingletonRepository.ItemFactories[kIdx];
             Item qPtr = itemClass.CreateItem();
-            qPtr.ApplyMagic(Difficulty, false, false, false);
+            qPtr.ApplyMagic(Difficulty, false, false, false, null);
             Level.DropNear(qPtr, -1, Player.MapY, Player.MapX);
             MsgPrint("Allocated.");
         }
@@ -19924,17 +19924,17 @@ namespace AngbandOS.Core
                 if (ch == 'n' || ch == 'N')
                 {
                     qPtr = oPtr.Factory.CreateItem();
-                    qPtr.ApplyMagic(Difficulty, false, false, false);
+                    qPtr.ApplyMagic(Difficulty, false, false, false, null);
                 }
                 else if (ch == 'g' || ch == 'g')
                 {
                     qPtr = oPtr.Factory.CreateItem();
-                    qPtr.ApplyMagic(Difficulty, false, true, false);
+                    qPtr.ApplyMagic(Difficulty, false, true, false, null);
                 }
                 else if (ch == 'e' || ch == 'e')
                 {
                     qPtr = oPtr.Factory.CreateItem();
-                    qPtr.ApplyMagic(Difficulty, false, true, true);
+                    qPtr.ApplyMagic(Difficulty, false, true, true, null);
                 }
             }
             if (changed)

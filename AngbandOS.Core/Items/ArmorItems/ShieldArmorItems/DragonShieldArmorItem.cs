@@ -11,10 +11,10 @@ namespace AngbandOS.Core.Items
         /// <param name="item"></param>
         /// <param name="level"></param>
         /// <param name="power"></param>
-        protected override void ApplyMagic(int level, int power)
+        protected override void ApplyMagic(int level, int power, Store? store)
         {
             // Apply the standard armour characteristics, regardless of the power level.
-            base.ApplyMagic(level, power);
+            base.ApplyMagic(level, power, null);
 
             if (SaveGame.Level != null)
             {

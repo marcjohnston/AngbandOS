@@ -5,12 +5,12 @@ namespace AngbandOS.Core.Items
     {
         public ElvenCloakArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<CloakElven>()) { }
 
-        protected override void ApplyMagic(int level, int power)
+        protected override void ApplyMagic(int level, int power, Store? store)
         {
             if (power != 0)
             {
                 // Apply the standard armour characteristics.
-                base.ApplyMagic(level, power);
+                base.ApplyMagic(level, power, null);
 
                 TypeSpecificValue = Program.Rng.DieRoll(4);
                 if (power > 1)

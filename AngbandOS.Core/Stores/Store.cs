@@ -1138,7 +1138,7 @@ namespace AngbandOS.Core.Stores
             Item qPtr = itemType.CreateItem();
 
             // Apply magic to the item.
-            qPtr.ApplyMagic(level, false, false, false);
+            qPtr.ApplyMagic(level, false, false, false, this);
 
             return qPtr;
         }
@@ -1154,18 +1154,6 @@ namespace AngbandOS.Core.Stores
             for (int tries = 0; tries < 4; tries++)
             {
                 Item qPtr = CreateItem();
-
-                if (qPtr.Category == ItemTypeEnum.Light)
-                {
-                    if (qPtr.ItemSubCategory == LightType.Torch)
-                    {
-                        qPtr.TypeSpecificValue = Constants.FuelTorch / 2;
-                    }
-                    if (qPtr.ItemSubCategory == LightType.Lantern)
-                    {
-                        qPtr.TypeSpecificValue = Constants.FuelLamp / 2;
-                    }
-                }
                 qPtr.BecomeKnown();
                 qPtr.IdentStoreb = true;
                 if (qPtr.Category == ItemTypeEnum.Chest)

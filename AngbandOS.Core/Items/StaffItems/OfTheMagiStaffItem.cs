@@ -4,7 +4,7 @@ namespace AngbandOS.Core.Items
     internal class OfTheMagiStaffItem : StaffItem
     {
         public OfTheMagiStaffItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<StaffOfTheMagi>()) { }
-        protected override void ApplyMagic(int level, int power)
+        protected override void ApplyMagic(int level, int power, Store? store)
         {
             TypeSpecificValue = Program.Rng.DieRoll(2) + 2;
         }

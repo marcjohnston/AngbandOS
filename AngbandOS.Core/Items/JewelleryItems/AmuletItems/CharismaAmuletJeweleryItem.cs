@@ -4,7 +4,7 @@ namespace AngbandOS.Core.Items
     internal class CharismaAmuletJeweleryItem : AmuletJeweleryItem
     {
         public CharismaAmuletJeweleryItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<CharismaAmuletJeweleryItemFactory>()) { }
-        protected override void ApplyMagic(int level, int power)
+        protected override void ApplyMagic(int level, int power, Store? store)
         {
             TypeSpecificValue = 1 + GetBonusValue(5, level);
             if (power < 0 || (power == 0 && Program.Rng.RandomLessThan(100) < 50))

@@ -2081,9 +2081,8 @@ namespace AngbandOS.Core.Items
             return Factory.DescribeActivationEffect;
         }
 
-        public void ApplyMagic(int lev, bool okay, bool good, bool great)
-        {
-            
+        public void ApplyMagic(int lev, bool okay, bool good, bool great, Store? store)
+        {            
             if (lev > Constants.MaxDepth - 1)
             {
                 lev = Constants.MaxDepth - 1;
@@ -2165,7 +2164,7 @@ namespace AngbandOS.Core.Items
                 }
                 return;
             }
-            ApplyMagic(lev, power);
+            ApplyMagic(lev, power, store);
             if (!string.IsNullOrEmpty(RandartName))
             {
                 if (SaveGame.Level != null)
@@ -2297,9 +2296,7 @@ namespace AngbandOS.Core.Items
         /// <param name="item"></param>
         /// <param name="level"></param>
         /// <param name="power"></param>
-        protected virtual void ApplyMagic(int level, int power)
-        {
-        }
+        protected virtual void ApplyMagic(int level, int power, Store? store) { }
 
         public void ApplyRandomResistance(ref IArtifactBias artifactBias, int specific)
         {
