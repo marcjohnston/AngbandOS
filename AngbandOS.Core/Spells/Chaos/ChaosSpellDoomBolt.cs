@@ -12,20 +12,20 @@ namespace AngbandOS.Core.Spells.Chaos
     internal class ChaosSpellDoomBolt : Spell
     {
         private ChaosSpellDoomBolt(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBeam(new ManaProjectile(saveGame), dir, Program.Rng.DiceRoll(11 + ((saveGame.Player.Level - 5) / 4), 8));
+            SaveGame.FireBeam(new ManaProjectile(SaveGame), dir, Program.Rng.DiceRoll(11 + ((SaveGame.Player.Level - 5) / 4), 8));
         }
 
         public override string Name => "Doom Bolt";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam {11 + ((player.Level - 5) / 4)}d8";
+            return $"dam {11 + ((SaveGame.Player.Level - 5) / 4)}d8";
         }
     }
 }

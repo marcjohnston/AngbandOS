@@ -12,20 +12,20 @@ namespace AngbandOS.Core.Spells.Nature
     internal class NatureSpellBlizzard : Spell
     {
         private NatureSpellBlizzard(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBall(new ColdProjectile(saveGame), dir, 70 + saveGame.Player.Level, (saveGame.Player.Level / 12) + 1);
+            SaveGame.FireBall(new ColdProjectile(SaveGame), dir, 70 + SaveGame.Player.Level, (SaveGame.Player.Level / 12) + 1);
         }
 
         public override string Name => "Blizzard";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam {70 + player.Level}";
+            return $"dam {70 + SaveGame.Player.Level}";
         }
     }
 }

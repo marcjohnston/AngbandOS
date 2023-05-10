@@ -12,23 +12,23 @@ namespace AngbandOS.Core.Spells.Death
     internal class DeathSpellOrbOfEntropy : Spell
     {
         private DeathSpellOrbOfEntropy(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBall(new OldDrainProjectile(saveGame), dir,
-                Program.Rng.DiceRoll(3, 6) + saveGame.Player.Level + (saveGame.Player.Level /
-                (saveGame.Player.BaseCharacterClass.ID == CharacterClass.Mage || saveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)),
-                saveGame.Player.Level < 30 ? 2 : 3);
+            SaveGame.FireBall(new OldDrainProjectile(SaveGame), dir,
+                Program.Rng.DiceRoll(3, 6) + SaveGame.Player.Level + (SaveGame.Player.Level /
+                (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mage || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)),
+                SaveGame.Player.Level < 30 ? 2 : 3);
         }
 
         public override string Name => "Orb of Entropy";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            int s = player.Level + (player.Level / (player.BaseCharacterClass.ID == CharacterClass.Mage || player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4));
+            int s = SaveGame.Player.Level + (SaveGame.Player.Level / (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mage || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4));
             return $"dam 3d6+{s}";
         }
     }

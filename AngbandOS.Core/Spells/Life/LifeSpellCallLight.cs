@@ -12,16 +12,16 @@ namespace AngbandOS.Core.Spells.Life
     internal class LifeSpellCallLight : Spell
     {
         private LifeSpellCallLight(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.LightArea(Program.Rng.DiceRoll(2, saveGame.Player.Level / 2), (saveGame.Player.Level / 10) + 1);
+            SaveGame.LightArea(Program.Rng.DiceRoll(2, SaveGame.Player.Level / 2), (SaveGame.Player.Level / 10) + 1);
         }
 
         public override string Name => "Call Light";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam {10 + (player.Level / 2)}";
+            return $"dam {10 + (SaveGame.Player.Level / 2)}";
         }
     }
 }

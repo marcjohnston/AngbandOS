@@ -12,16 +12,16 @@ namespace AngbandOS.Core.Spells.Life
     internal class LifeSpellHealingTrue : Spell
     {
         private LifeSpellHealingTrue(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.RestoreHealth(2000);
-            saveGame.Player.TimedStun.ResetTimer();
-            saveGame.Player.TimedBleeding.ResetTimer();
+            SaveGame.Player.RestoreHealth(2000);
+            SaveGame.Player.TimedStun.ResetTimer();
+            SaveGame.Player.TimedBleeding.ResetTimer();
         }
 
         public override string Name => "Healing True";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "heal 2000";
         }

@@ -12,11 +12,11 @@ namespace AngbandOS.Core.Spells.Life
     internal class LifeSpellBanish : Spell
     {
         private LifeSpellBanish(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (saveGame.BanishEvil(100))
+            if (SaveGame.BanishEvil(100))
             {
-                saveGame.MsgPrint("The power of your god banishes evil!");
+                SaveGame.MsgPrint("The power of your god banishes evil!");
             }
         }
 

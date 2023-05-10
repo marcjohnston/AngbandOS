@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Folk
     internal class FolkSpellElementalBall : Spell
     {
         private FolkSpellElementalBall(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
@@ -22,29 +22,29 @@ namespace AngbandOS.Core.Spells.Folk
             switch (Program.Rng.DieRoll(4))
             {
                 case 1:
-                    dummy = new FireProjectile(saveGame);
+                    dummy = new FireProjectile(SaveGame);
                     break;
 
                 case 2:
-                    dummy = new ElecProjectile(saveGame);
+                    dummy = new ElecProjectile(SaveGame);
                     break;
 
                 case 3:
-                    dummy = new ColdProjectile(saveGame);
+                    dummy = new ColdProjectile(SaveGame);
                     break;
 
                 default:
-                    dummy = new AcidProjectile(saveGame);
+                    dummy = new AcidProjectile(SaveGame);
                     break;
             }
-            saveGame.FireBall(dummy, dir, 75 + saveGame.Player.Level, 2);
+            SaveGame.FireBall(dummy, dir, 75 + SaveGame.Player.Level, 2);
         }
 
         public override string Name => "Teleport Away";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam {75 + player.Level}";
+            return $"dam {75 + SaveGame.Player.Level}";
         }
     }
 }

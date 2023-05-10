@@ -12,142 +12,142 @@ namespace AngbandOS.Core.Spells.Death
     internal class DeathSpellInvokeSpirits : Spell
     {
         private DeathSpellInvokeSpirits(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
             int beam;
-            switch (saveGame.Player.BaseCharacterClass.ID)
+            switch (SaveGame.Player.BaseCharacterClass.ID)
             {
                 case CharacterClass.Mage:
-                    beam = saveGame.Player.Level;
+                    beam = SaveGame.Player.Level;
                     break;
 
                 case CharacterClass.HighMage:
-                    beam = saveGame.Player.Level + 10;
+                    beam = SaveGame.Player.Level + 10;
                     break;
 
                 default:
-                    beam = saveGame.Player.Level / 2;
+                    beam = SaveGame.Player.Level / 2;
                     break;
             }
-            int die = Program.Rng.DieRoll(100) + (saveGame.Player.Level / 5);
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            int die = Program.Rng.DieRoll(100) + (SaveGame.Player.Level / 5);
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.MsgPrint("You call on the power of the dead...");
+            SaveGame.MsgPrint("You call on the power of the dead...");
             if (die > 100)
             {
-                saveGame.MsgPrint("You feel a surge of eldritch force!");
+                SaveGame.MsgPrint("You feel a surge of eldritch force!");
             }
             if (die < 8)
             {
-                saveGame.MsgPrint("Oh no! Mouldering forms rise from the earth around you!");
-                saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new UndeadMonsterSelector());
+                SaveGame.MsgPrint("Oh no! Mouldering forms rise from the earth around you!");
+                SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Difficulty, new UndeadMonsterSelector());
             }
             if (die < 14)
             {
-                saveGame.MsgPrint("An unnamable evil brushes against your mind...");
-                saveGame.Player.TimedFear.AddTimer(Program.Rng.DieRoll(4) + 4);
+                SaveGame.MsgPrint("An unnamable evil brushes against your mind...");
+                SaveGame.Player.TimedFear.AddTimer(Program.Rng.DieRoll(4) + 4);
             }
             if (die < 26)
             {
-                saveGame.MsgPrint("Your head is invaded by a horde of gibbering spectral voices...");
-                saveGame.Player.TimedConfusion.AddTimer(Program.Rng.DieRoll(4) + 4);
+                SaveGame.MsgPrint("Your head is invaded by a horde of gibbering spectral voices...");
+                SaveGame.Player.TimedConfusion.AddTimer(Program.Rng.DieRoll(4) + 4);
             }
             if (die < 31)
             {
-                saveGame.PolyMonster(dir);
+                SaveGame.PolyMonster(dir);
             }
             if (die < 36)
             {
-                saveGame.FireBoltOrBeam(beam - 10, new MissileProjectile(saveGame), dir,
-                    Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 5), 4));
+                SaveGame.FireBoltOrBeam(beam - 10, new MissileProjectile(SaveGame), dir,
+                    Program.Rng.DiceRoll(3 + ((SaveGame.Player.Level - 1) / 5), 4));
             }
             if (die < 41)
             {
-                saveGame.ConfuseMonster(dir, saveGame.Player.Level);
+                SaveGame.ConfuseMonster(dir, SaveGame.Player.Level);
             }
             if (die < 46)
             {
-                saveGame.FireBall(new PoisProjectile(saveGame), dir, 20 + (saveGame.Player.Level / 2), 3);
+                SaveGame.FireBall(new PoisProjectile(SaveGame), dir, 20 + (SaveGame.Player.Level / 2), 3);
             }
             if (die < 51)
             {
-                saveGame.LightLine(dir);
+                SaveGame.LightLine(dir);
             }
             if (die < 56)
             {
-                saveGame.FireBoltOrBeam(beam - 10, new ElecProjectile(saveGame), dir,
-                    Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 5) / 4), 8));
+                SaveGame.FireBoltOrBeam(beam - 10, new ElecProjectile(SaveGame), dir,
+                    Program.Rng.DiceRoll(3 + ((SaveGame.Player.Level - 5) / 4), 8));
             }
             if (die < 61)
             {
-                saveGame.FireBoltOrBeam(beam - 10, new ColdProjectile(saveGame), dir,
-                    Program.Rng.DiceRoll(5 + ((saveGame.Player.Level - 5) / 4), 8));
+                SaveGame.FireBoltOrBeam(beam - 10, new ColdProjectile(SaveGame), dir,
+                    Program.Rng.DiceRoll(5 + ((SaveGame.Player.Level - 5) / 4), 8));
             }
             if (die < 66)
             {
-                saveGame.FireBoltOrBeam(beam, new AcidProjectile(saveGame), dir,
-                    Program.Rng.DiceRoll(6 + ((saveGame.Player.Level - 5) / 4), 8));
+                SaveGame.FireBoltOrBeam(beam, new AcidProjectile(SaveGame), dir,
+                    Program.Rng.DiceRoll(6 + ((SaveGame.Player.Level - 5) / 4), 8));
             }
             if (die < 71)
             {
-                saveGame.FireBoltOrBeam(beam, new FireProjectile(saveGame), dir,
-                    Program.Rng.DiceRoll(8 + ((saveGame.Player.Level - 5) / 4), 8));
+                SaveGame.FireBoltOrBeam(beam, new FireProjectile(SaveGame), dir,
+                    Program.Rng.DiceRoll(8 + ((SaveGame.Player.Level - 5) / 4), 8));
             }
             if (die < 76)
             {
-                saveGame.DrainLife(dir, 75);
+                SaveGame.DrainLife(dir, 75);
             }
             if (die < 81)
             {
-                saveGame.FireBall(new ElecProjectile(saveGame), dir, 30 + (saveGame.Player.Level / 2), 2);
+                SaveGame.FireBall(new ElecProjectile(SaveGame), dir, 30 + (SaveGame.Player.Level / 2), 2);
             }
             if (die < 86)
             {
-                saveGame.FireBall(new AcidProjectile(saveGame), dir, 40 + saveGame.Player.Level, 2);
+                SaveGame.FireBall(new AcidProjectile(SaveGame), dir, 40 + SaveGame.Player.Level, 2);
             }
             if (die < 91)
             {
-                saveGame.FireBall(new IceProjectile(saveGame), dir, 70 + saveGame.Player.Level, 3);
+                SaveGame.FireBall(new IceProjectile(SaveGame), dir, 70 + SaveGame.Player.Level, 3);
             }
             if (die < 96)
             {
-                saveGame.FireBall(new FireProjectile(saveGame), dir, 80 + saveGame.Player.Level, 3);
+                SaveGame.FireBall(new FireProjectile(SaveGame), dir, 80 + SaveGame.Player.Level, 3);
             }
             if (die < 101)
             {
-                saveGame.DrainLife(dir, 100 + saveGame.Player.Level);
+                SaveGame.DrainLife(dir, 100 + SaveGame.Player.Level);
             }
             if (die < 104)
             {
-                saveGame.Earthquake(saveGame.Player.MapY, saveGame.Player.MapX, 12);
+                SaveGame.Earthquake(SaveGame.Player.MapY, SaveGame.Player.MapX, 12);
             }
             if (die < 106)
             {
-                saveGame.DestroyArea(saveGame.Player.MapY, saveGame.Player.MapX, 15);
+                SaveGame.DestroyArea(SaveGame.Player.MapY, SaveGame.Player.MapX, 15);
             }
             if (die < 108)
             {
-                saveGame.Carnage(true);
+                SaveGame.Carnage(true);
             }
             if (die < 110)
             {
-                saveGame.DispelMonsters(120);
+                SaveGame.DispelMonsters(120);
             }
-            saveGame.DispelMonsters(150);
-            saveGame.SlowMonsters();
-            saveGame.SleepMonsters();
-            saveGame.Player.RestoreHealth(300);
+            SaveGame.DispelMonsters(150);
+            SaveGame.SlowMonsters();
+            SaveGame.SleepMonsters();
+            SaveGame.Player.RestoreHealth(300);
             if (die < 31)
             {
-                saveGame.MsgPrint("Sepulchral voices chuckle. 'Soon you will join us, mortal.'");
+                SaveGame.MsgPrint("Sepulchral voices chuckle. 'Soon you will join us, mortal.'");
             }
         }
 
         public override string Name => "Invoke Spirits";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "random";
         }

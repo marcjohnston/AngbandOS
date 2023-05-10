@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Life
     internal class LifeSpellCurePoison : Spell
     {
         private LifeSpellCurePoison(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.TimedPoison.ResetTimer();
+            SaveGame.Player.TimedPoison.ResetTimer();
         }
 
         public override string Name => "Cure Poison";

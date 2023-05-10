@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Life
     internal class LifeSpellRemoveCurse : Spell
     {
         private LifeSpellRemoveCurse(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.RemoveCurse();
+            SaveGame.RemoveCurse();
         }
 
         public override string Name => "Remove Curse";

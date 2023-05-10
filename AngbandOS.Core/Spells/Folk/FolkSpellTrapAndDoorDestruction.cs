@@ -12,13 +12,13 @@ namespace AngbandOS.Core.Spells.Folk
     internal class FolkSpellTrapAndDoorDestruction : Spell
     {
         private FolkSpellTrapAndDoorDestruction(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.DestroyDoor(dir);
+            SaveGame.DestroyDoor(dir);
         }
 
         public override string Name => "Trap & Door Destruction";

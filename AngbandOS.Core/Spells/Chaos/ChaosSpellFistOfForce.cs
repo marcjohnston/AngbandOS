@@ -12,21 +12,21 @@ namespace AngbandOS.Core.Spells.Chaos
     internal class ChaosSpellFistOfForce : Spell
     {
         private ChaosSpellFistOfForce(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBall(new DisintegrateProjectile(saveGame), dir,
-                Program.Rng.DiceRoll(8 + ((saveGame.Player.Level - 5) / 4), 8), 0);
+            SaveGame.FireBall(new DisintegrateProjectile(SaveGame), dir,
+                Program.Rng.DiceRoll(8 + ((SaveGame.Player.Level - 5) / 4), 8), 0);
         }
 
         public override string Name => "Fist of Force";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam {8 + ((player.Level - 5) / 4)}d8";
+            return $"dam {8 + ((SaveGame.Player.Level - 5) / 4)}d8";
         }
     }
 }

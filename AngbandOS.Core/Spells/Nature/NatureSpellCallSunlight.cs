@@ -12,21 +12,21 @@ namespace AngbandOS.Core.Spells.Nature
     internal class NatureSpellCallSunlight : Spell
     {
         private NatureSpellCallSunlight(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.FireBall(new LightProjectile(saveGame), 0, 150, 8);
-            saveGame.Level.WizLight();
-            if (!saveGame.Player.Race.IsBurnedBySunlight || saveGame.Player.HasLightResistance)
+            SaveGame.FireBall(new LightProjectile(SaveGame), 0, 150, 8);
+            SaveGame.Level.WizLight();
+            if (!SaveGame.Player.Race.IsBurnedBySunlight || SaveGame.Player.HasLightResistance)
             {
                 return;
             }
-            saveGame.MsgPrint("The sunlight scorches your flesh!");
-            saveGame.Player.TakeHit(50, "sunlight");
+            SaveGame.MsgPrint("The sunlight scorches your flesh!");
+            SaveGame.Player.TakeHit(50, "sunlight");
         }
 
         public override string Name => "Whirlpool";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "dam 150";
         }

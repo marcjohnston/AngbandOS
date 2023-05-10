@@ -12,17 +12,17 @@ namespace AngbandOS.Core.Spells.Nature
     internal class NatureSpellHerbalHealing : Spell
     {
         private NatureSpellHerbalHealing(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.RestoreHealth(1000);
-            saveGame.Player.TimedStun.ResetTimer();
-            saveGame.Player.TimedBleeding.ResetTimer();
-            saveGame.Player.TimedPoison.ResetTimer();
+            SaveGame.Player.RestoreHealth(1000);
+            SaveGame.Player.TimedStun.ResetTimer();
+            SaveGame.Player.TimedBleeding.ResetTimer();
+            SaveGame.Player.TimedPoison.ResetTimer();
         }
 
         public override string Name => "Herbal Healing";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "heal 1000";
         }

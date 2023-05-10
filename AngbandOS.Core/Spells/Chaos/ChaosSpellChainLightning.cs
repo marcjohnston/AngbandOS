@@ -12,20 +12,19 @@ namespace AngbandOS.Core.Spells.Chaos
     internal class ChaosSpellChainLightning : Spell
     {
         private ChaosSpellChainLightning(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
             for (int dir = 0; dir <= 9; dir++)
             {
-                saveGame.FireBeam(new ElecProjectile(saveGame), dir,
-                    Program.Rng.DiceRoll(5 + (saveGame.Player.Level / 10), 8));
+                SaveGame.FireBeam(new ElecProjectile(SaveGame), dir, Program.Rng.DiceRoll(5 + (SaveGame.Player.Level / 10), 8));
             }
         }
 
         public override string Name => "Chain Lightning";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam {5 + (player.Level / 10)}d8";
+            return $"dam {5 + (SaveGame.Player.Level / 10)}d8";
         }
     }
 }

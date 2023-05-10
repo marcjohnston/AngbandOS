@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Death
     internal class DeathSpellDetectEvil : Spell
     {
         private DeathSpellDetectEvil(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.DetectMonstersEvil();
+            SaveGame.DetectMonstersEvil();
         }
 
         public override string Name => "Detect Evil";

@@ -12,16 +12,16 @@ namespace AngbandOS.Core.Spells.Death
     internal class DeathSpellWordOfDeath : Spell
     {
         private DeathSpellWordOfDeath(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.DispelLiving(saveGame.Player.Level * 3);
+            SaveGame.DispelLiving(SaveGame.Player.Level * 3);
         }
 
         public override string Name => "Word of Death";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam {player.Level * 3}";
+            return $"dam {SaveGame.Player.Level * 3}";
         }
     }
 }

@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Folk
     internal class FolkSpellPhlogiston : Spell
     {
         private FolkSpellPhlogiston(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.CreatePhlogiston();
+            SaveGame.CreatePhlogiston();
         }
 
         public override string Name => "Phlogiston";

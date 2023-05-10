@@ -12,18 +12,18 @@ namespace AngbandOS.Core.Spells.Death
     internal class DeathSpellEvocation : Spell
     {
         private DeathSpellEvocation(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.DispelMonsters(saveGame.Player.Level * 4);
-            saveGame.TurnMonsters(saveGame.Player.Level * 4);
-            saveGame.BanishMonsters(saveGame.Player.Level * 4);
+            SaveGame.DispelMonsters(SaveGame.Player.Level * 4);
+            SaveGame.TurnMonsters(SaveGame.Player.Level * 4);
+            SaveGame.BanishMonsters(SaveGame.Player.Level * 4);
         }
 
         public override string Name => "Evocation";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam {player.Level * 4}";
+            return $"dam {SaveGame.Player.Level * 4}";
         }
     }
 }

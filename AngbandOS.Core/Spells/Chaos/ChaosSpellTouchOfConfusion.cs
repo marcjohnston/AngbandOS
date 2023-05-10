@@ -12,12 +12,12 @@ namespace AngbandOS.Core.Spells.Chaos
     internal class ChaosSpellTouchOfConfusion : Spell
     {
         private ChaosSpellTouchOfConfusion(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.Player.HasConfusingTouch)
+            if (!SaveGame.Player.HasConfusingTouch)
             {
-                saveGame.MsgPrint("Your hands start glowing.");
-                saveGame.Player.HasConfusingTouch = true;
+                SaveGame.MsgPrint("Your hands start glowing.");
+                SaveGame.Player.HasConfusingTouch = true;
             }
         }
 

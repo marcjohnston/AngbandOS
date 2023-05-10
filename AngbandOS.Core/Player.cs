@@ -1030,7 +1030,7 @@ namespace AngbandOS.Core
             {
                 int spell = spells[i];
                 Spell sPtr = SaveGame.Spells[set][spell];
-                SaveGame.Screen.PrintLine($"{i.IndexToLetter()}) {sPtr.SummaryLine(this)}", y + i + 1, x);
+                SaveGame.Screen.PrintLine($"{i.IndexToLetter()}) {sPtr.SummaryLine()}", y + i + 1, x);
             }
             SaveGame.Screen.PrintLine("", y + i + 1, x);
         }

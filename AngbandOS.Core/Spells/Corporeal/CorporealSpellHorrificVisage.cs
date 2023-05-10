@@ -12,14 +12,14 @@ namespace AngbandOS.Core.Spells.Corporeal
     internal class CorporealSpellHorrificVisage : Spell
     {
         private CorporealSpellHorrificVisage(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FearMonster(dir, saveGame.Player.Level);
-            saveGame.StunMonster(dir, saveGame.Player.Level);
+            SaveGame.FearMonster(dir, SaveGame.Player.Level);
+            SaveGame.StunMonster(dir, SaveGame.Player.Level);
         }
 
         public override string Name => "Horrific Visage";

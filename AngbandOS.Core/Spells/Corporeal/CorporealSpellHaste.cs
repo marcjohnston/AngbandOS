@@ -12,23 +12,23 @@ namespace AngbandOS.Core.Spells.Corporeal
     internal class CorporealSpellHaste : Spell
     {
         private CorporealSpellHaste(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (saveGame.Player.TimedHaste.TurnsRemaining == 0)
+            if (SaveGame.Player.TimedHaste.TurnsRemaining == 0)
             {
-                saveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(20 + saveGame.Player.Level) + saveGame.Player.Level);
+                SaveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(20 + SaveGame.Player.Level) + SaveGame.Player.Level);
             }
             else
             {
-                saveGame.Player.TimedHaste.AddTimer(Program.Rng.DieRoll(5));
+                SaveGame.Player.TimedHaste.AddTimer(Program.Rng.DieRoll(5));
             }
         }
 
         public override string Name => "Haste";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dur {player.Level}+d{20 + player.Level}";
+            return $"dur {SaveGame.Player.Level}+d{20 + SaveGame.Player.Level}";
         }
     }
 }

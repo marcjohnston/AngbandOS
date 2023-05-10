@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Tarot
     internal class TarotSpellAstralLore : Spell
     {
         private TarotSpellAstralLore(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.IdentifyFully();
+            SaveGame.IdentifyFully();
         }
 
         public override string Name => "Astral Lore";

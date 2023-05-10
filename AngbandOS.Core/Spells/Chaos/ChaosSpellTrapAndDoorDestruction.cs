@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Chaos
     internal class ChaosSpellTrapAndDoorDestruction : Spell
     {
         private ChaosSpellTrapAndDoorDestruction(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.DestroyDoorsTouch();
+            SaveGame.DestroyDoorsTouch();
         }
 
         public override string Name => "Trap and Door Destruction";

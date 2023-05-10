@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Folk
     internal class FolkSpellIdentify : Spell
     {
         private FolkSpellIdentify(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.IdentifyItem();
+            SaveGame.IdentifyItem();
         }
 
         public override string Name => "Identify";

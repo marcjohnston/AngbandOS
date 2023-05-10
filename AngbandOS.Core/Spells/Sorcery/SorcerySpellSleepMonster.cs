@@ -12,13 +12,13 @@ namespace AngbandOS.Core.Spells.Sorcery
     internal class SorcerySpellSleepMonster : Spell
     {
         private SorcerySpellSleepMonster(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.SleepMonster(dir);
+            SaveGame.SleepMonster(dir);
         }
 
         public override string Name => "Sleep Monster";

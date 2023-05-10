@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Nature
     internal class NatureSpellWallOfStone : Spell
     {
         private NatureSpellWallOfStone(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.WallStone();
+            SaveGame.WallStone();
         }
 
         public override string Name => "Wall of Stone";

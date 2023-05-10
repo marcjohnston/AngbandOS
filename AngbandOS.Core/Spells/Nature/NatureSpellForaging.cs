@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Nature
     internal class NatureSpellForaging : Spell
     {
         private NatureSpellForaging(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.SetFood(Constants.PyFoodMax - 1);
+            SaveGame.Player.SetFood(Constants.PyFoodMax - 1);
         }
 
         public override string Name => "Foraging";

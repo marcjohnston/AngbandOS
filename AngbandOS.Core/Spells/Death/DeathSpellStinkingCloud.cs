@@ -12,20 +12,20 @@ namespace AngbandOS.Core.Spells.Death
     internal class DeathSpellStinkingCloud : Spell
     {
         private DeathSpellStinkingCloud(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBall(new PoisProjectile(saveGame), dir, 10 + (saveGame.Player.Level / 2), 2);
+            SaveGame.FireBall(new PoisProjectile(SaveGame), dir, 10 + (SaveGame.Player.Level / 2), 2);
         }
 
         public override string Name => "Stinking Cloud";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam {10 + (player.Level / 2)}";
+            return $"dam {10 + (SaveGame.Player.Level / 2)}";
         }
     }
 }

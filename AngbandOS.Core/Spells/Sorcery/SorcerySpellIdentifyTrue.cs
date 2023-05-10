@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Sorcery
     internal class SorcerySpellIdentifyTrue : Spell
     {
         private SorcerySpellIdentifyTrue(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.IdentifyFully();
+            SaveGame.IdentifyFully();
         }
 
         public override string Name => "Identify True";

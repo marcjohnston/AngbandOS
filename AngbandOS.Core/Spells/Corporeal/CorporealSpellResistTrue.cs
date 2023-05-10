@@ -12,18 +12,18 @@ namespace AngbandOS.Core.Spells.Corporeal
     internal class CorporealSpellResistTrue : Spell
     {
         private CorporealSpellResistTrue(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.TimedAcidResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
-            saveGame.Player.TimedLightningResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
-            saveGame.Player.TimedFireResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
-            saveGame.Player.TimedColdResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
-            saveGame.Player.TimedPoisonResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
+            SaveGame.Player.TimedAcidResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
+            SaveGame.Player.TimedLightningResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
+            SaveGame.Player.TimedFireResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
+            SaveGame.Player.TimedColdResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
+            SaveGame.Player.TimedPoisonResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
         }
 
         public override string Name => "Resist True";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "dur 20+d20";
         }

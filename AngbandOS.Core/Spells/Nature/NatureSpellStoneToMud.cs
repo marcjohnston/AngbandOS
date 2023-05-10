@@ -12,13 +12,13 @@ namespace AngbandOS.Core.Spells.Nature
     internal class NatureSpellStoneToMud : Spell
     {
         private NatureSpellStoneToMud(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.WallToMud(dir);
+            SaveGame.WallToMud(dir);
         }
 
         public override string Name => "Stone to Mud";

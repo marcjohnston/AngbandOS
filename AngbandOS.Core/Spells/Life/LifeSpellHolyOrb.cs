@@ -12,26 +12,26 @@ namespace AngbandOS.Core.Spells.Life
     internal class LifeSpellHolyOrb : Spell
     {
         private LifeSpellHolyOrb(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBall(new HolyFireProjectile(saveGame), dir,
-                Program.Rng.DiceRoll(3, 6) + saveGame.Player.Level + (saveGame.Player.Level /
-                (saveGame.Player.BaseCharacterClass.ID == CharacterClass.Priest || saveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)),
-                saveGame.Player.Level < 30 ? 2 : 3);
+            SaveGame.FireBall(new HolyFireProjectile(SaveGame), dir,
+                Program.Rng.DiceRoll(3, 6) + SaveGame.Player.Level + (SaveGame.Player.Level /
+                (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Priest || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)),
+                SaveGame.Player.Level < 30 ? 2 : 3);
         }
 
         public override string Name => "Holy Orb";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            int orb = player.Level / (player.BaseCharacterClass.ID == CharacterClass.Priest || player.BaseCharacterClass.ID == CharacterClass.HighMage
+            int orb = SaveGame.Player.Level / (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Priest || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage
                           ? 2
                           : 4);
-            return $" dam 3d6+{player.Level + orb}";
+            return $" dam 3d6+{SaveGame.Player.Level + orb}";
         }
     }
 }

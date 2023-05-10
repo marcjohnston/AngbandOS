@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Corporeal
     internal class CorporealSpellTeleportLevel : Spell
     {
         private CorporealSpellTeleportLevel(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.TeleportPlayerLevel();
+            SaveGame.TeleportPlayerLevel();
         }
 
         public override string Name => "Teleport Level";

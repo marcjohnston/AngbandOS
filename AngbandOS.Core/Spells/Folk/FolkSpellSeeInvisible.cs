@@ -12,14 +12,14 @@ namespace AngbandOS.Core.Spells.Folk
     internal class FolkSpellSeeInvisible : Spell
     {
         private FolkSpellSeeInvisible(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.TimedSeeInvisibility.AddTimer(Program.Rng.DieRoll(24) + 24);
+            SaveGame.Player.TimedSeeInvisibility.AddTimer(Program.Rng.DieRoll(24) + 24);
         }
 
         public override string Name => "See Invisible";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "dur 24+d24";
         }

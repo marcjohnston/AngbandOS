@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Chaos
     internal class ChaosSpellArcaneBinding : Spell
     {
         private ChaosSpellArcaneBinding(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Recharge(40);
+            SaveGame.Recharge(40);
         }
 
         public override string Name => "Arcane Binding";

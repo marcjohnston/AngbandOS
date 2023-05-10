@@ -12,15 +12,15 @@ namespace AngbandOS.Core.Spells.Corporeal
     internal class CorporealSpellCureMediumWounds : Spell
     {
         private CorporealSpellCureMediumWounds(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 10));
-            saveGame.Player.TimedBleeding.SetTimer((saveGame.Player.TimedBleeding.TurnsRemaining / 2) - 20);
+            SaveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 10));
+            SaveGame.Player.TimedBleeding.SetTimer((SaveGame.Player.TimedBleeding.TurnsRemaining / 2) - 20);
         }
 
         public override string Name => "Cure Medium Wounds";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "heal 4d10";
         }

@@ -12,15 +12,15 @@ namespace AngbandOS.Core.Spells.Life
     internal class LifeSpellCureLightWounds : Spell
     {
         private LifeSpellCureLightWounds(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(2, 10));
-            saveGame.Player.TimedBleeding.AddTimer(-10);
+            SaveGame.Player.RestoreHealth(Program.Rng.DiceRoll(2, 10));
+            SaveGame.Player.TimedBleeding.AddTimer(-10);
         }
 
         public override string Name => "Cure Light Wounds";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "heal 2d10";
         }

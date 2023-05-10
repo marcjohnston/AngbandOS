@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Death
     internal class DeathSpellPoisonBranding : Spell
     {
         private DeathSpellPoisonBranding(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.BrandWeapon(2);
+            SaveGame.BrandWeapon(2);
         }
 
         public override string Name => "Poison Branding";

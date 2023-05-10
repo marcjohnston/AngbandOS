@@ -12,16 +12,16 @@ namespace AngbandOS.Core.Spells.Life
     internal class LifeSpellDispelEvil : Spell
     {
         private LifeSpellDispelEvil(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.DispelEvil(saveGame.Player.Level * 4);
+            SaveGame.DispelEvil(SaveGame.Player.Level * 4);
         }
 
         public override string Name => "Dispel Evil";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam {4 * player.Level}";
+            return $"dam {4 * SaveGame.Player.Level}";
         }
     }
 }

@@ -12,17 +12,17 @@ namespace AngbandOS.Core.Spells.Life
     internal class LifeSpellDispelUndeadAndDemons : Spell
     {
         private LifeSpellDispelUndeadAndDemons(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.DispelUndead(saveGame.Player.Level * 3);
-            saveGame.DispelDemons(saveGame.Player.Level * 3);
+            SaveGame.DispelUndead(SaveGame.Player.Level * 3);
+            SaveGame.DispelDemons(SaveGame.Player.Level * 3);
         }
 
         public override string Name => "Dispel Undead & Demons";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam {3 * player.Level}+{3 * player.Level}";
+            return $"dam {3 * SaveGame.Player.Level}+{3 * SaveGame.Player.Level}";
         }
     }
 }

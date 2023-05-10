@@ -12,14 +12,14 @@ namespace AngbandOS.Core.Spells.Corporeal
     internal class CorporealSpellBlink : Spell
     {
         private CorporealSpellBlink(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.TeleportPlayer(10);
+            SaveGame.TeleportPlayer(10);
         }
 
         public override string Name => "Blink";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "range 10";
         }

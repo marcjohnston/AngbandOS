@@ -12,16 +12,16 @@ namespace AngbandOS.Core.Spells.Corporeal
     internal class CorporealSpellWraithform : Spell
     {
         private CorporealSpellWraithform(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.TimedEtherealness.AddTimer(Program.Rng.DieRoll(saveGame.Player.Level / 2) + (saveGame.Player.Level / 2));
+            SaveGame.Player.TimedEtherealness.AddTimer(Program.Rng.DieRoll(SaveGame.Player.Level / 2) + (SaveGame.Player.Level / 2));
         }
 
         public override string Name => "Wraithform";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dur {player.Level / 2}+d{player.Level / 2}";
+            return $"dur {SaveGame.Player.Level / 2}+d{SaveGame.Player.Level / 2}";
         }
     }
 }

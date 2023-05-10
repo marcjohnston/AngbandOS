@@ -12,18 +12,18 @@ namespace AngbandOS.Core.Spells.Death
     internal class DeathSpellDarknessStorm : Spell
     {
         private DeathSpellDarknessStorm(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBall(new DarkProjectile(saveGame), dir, 120, 4);
+            SaveGame.FireBall(new DarkProjectile(SaveGame), dir, 120, 4);
         }
 
         public override string Name => "Darkness Storm";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "dam 120";
         }

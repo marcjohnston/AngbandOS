@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Corporeal
     internal class CorporealSpellRestoreSoul : Spell
     {
         private CorporealSpellRestoreSoul(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.RestoreLevel();
+            SaveGame.Player.RestoreLevel();
         }
 
         public override string Name => "Restore Soul";

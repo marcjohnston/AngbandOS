@@ -12,14 +12,14 @@ namespace AngbandOS.Core.Spells.Sorcery
     internal class SorcerySpellWordOfRecall : Spell
     {
         private SorcerySpellWordOfRecall(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.ToggleRecall();
+            SaveGame.Player.ToggleRecall();
         }
 
         public override string Name => "Word of Recall";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "delay 15+d21";
         }

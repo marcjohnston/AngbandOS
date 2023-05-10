@@ -12,21 +12,21 @@ namespace AngbandOS.Core.Spells.Chaos
     internal class ChaosSpellDisintegrate : Spell
     {
         private ChaosSpellDisintegrate(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBall(new DisintegrateProjectile(saveGame), dir, 80 + saveGame.Player.Level,
-                3 + (saveGame.Player.Level / 40));
+            SaveGame.FireBall(new DisintegrateProjectile(SaveGame), dir, 80 + SaveGame.Player.Level,
+                3 + (SaveGame.Player.Level / 40));
         }
 
         public override string Name => "Disintegrate";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam {80 + player.Level}";
+            return $"dam {80 + SaveGame.Player.Level}";
         }
     }
 }

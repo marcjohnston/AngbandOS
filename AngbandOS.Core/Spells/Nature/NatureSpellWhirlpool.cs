@@ -12,20 +12,20 @@ namespace AngbandOS.Core.Spells.Nature
     internal class NatureSpellWhirlpool : Spell
     {
         private NatureSpellWhirlpool(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBall(new WaterProjectile(saveGame), dir, 100 + saveGame.Player.Level, (saveGame.Player.Level / 12) + 1);
+            SaveGame.FireBall(new WaterProjectile(SaveGame), dir, 100 + SaveGame.Player.Level, (SaveGame.Player.Level / 12) + 1);
         }
 
         public override string Name => "Whirlpool";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam {100 + player.Level}";
+            return $"dam {100 + SaveGame.Player.Level}";
         }
     }
 }

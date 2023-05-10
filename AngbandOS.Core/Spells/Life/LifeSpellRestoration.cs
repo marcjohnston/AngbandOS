@@ -12,15 +12,15 @@ namespace AngbandOS.Core.Spells.Life
     internal class LifeSpellRestoration : Spell
     {
         private LifeSpellRestoration(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.TryRestoringAbilityScore(Ability.Strength);
-            saveGame.Player.TryRestoringAbilityScore(Ability.Intelligence);
-            saveGame.Player.TryRestoringAbilityScore(Ability.Wisdom);
-            saveGame.Player.TryRestoringAbilityScore(Ability.Dexterity);
-            saveGame.Player.TryRestoringAbilityScore(Ability.Constitution);
-            saveGame.Player.TryRestoringAbilityScore(Ability.Charisma);
-            saveGame.Player.RestoreLevel();
+            SaveGame.Player.TryRestoringAbilityScore(Ability.Strength);
+            SaveGame.Player.TryRestoringAbilityScore(Ability.Intelligence);
+            SaveGame.Player.TryRestoringAbilityScore(Ability.Wisdom);
+            SaveGame.Player.TryRestoringAbilityScore(Ability.Dexterity);
+            SaveGame.Player.TryRestoringAbilityScore(Ability.Constitution);
+            SaveGame.Player.TryRestoringAbilityScore(Ability.Charisma);
+            SaveGame.Player.RestoreLevel();
         }
 
         public override string Name => "Restoration";

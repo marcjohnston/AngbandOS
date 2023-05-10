@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Sorcery
     internal class SorcerySpellTeleportLevel : Spell
     {
         private SorcerySpellTeleportLevel(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.TeleportPlayerLevel();
+            SaveGame.TeleportPlayerLevel();
         }
 
         public override string Name => "Teleport Level";

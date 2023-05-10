@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Tarot
     internal class TarotSpellAstralBranding : Spell
     {
         private TarotSpellAstralBranding(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.BrandWeapon(4);
+            SaveGame.BrandWeapon(4);
         }
 
         public override string Name => "Astral Branding";

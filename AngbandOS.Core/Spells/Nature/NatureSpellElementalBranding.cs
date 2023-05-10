@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Nature
     internal class NatureSpellElementalBranding : Spell
     {
         private NatureSpellElementalBranding(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.BrandWeapon(0);
+            SaveGame.BrandWeapon(0);
         }
 
         public override string Name => "Elemental Branding";

@@ -12,14 +12,14 @@ namespace AngbandOS.Core.Spells.Corporeal
     internal class CorporealSpellRestoreBody : Spell
     {
         private CorporealSpellRestoreBody(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.TryRestoringAbilityScore(Ability.Strength);
-            saveGame.Player.TryRestoringAbilityScore(Ability.Intelligence);
-            saveGame.Player.TryRestoringAbilityScore(Ability.Wisdom);
-            saveGame.Player.TryRestoringAbilityScore(Ability.Dexterity);
-            saveGame.Player.TryRestoringAbilityScore(Ability.Constitution);
-            saveGame.Player.TryRestoringAbilityScore(Ability.Charisma);
+            SaveGame.Player.TryRestoringAbilityScore(Ability.Strength);
+            SaveGame.Player.TryRestoringAbilityScore(Ability.Intelligence);
+            SaveGame.Player.TryRestoringAbilityScore(Ability.Wisdom);
+            SaveGame.Player.TryRestoringAbilityScore(Ability.Dexterity);
+            SaveGame.Player.TryRestoringAbilityScore(Ability.Constitution);
+            SaveGame.Player.TryRestoringAbilityScore(Ability.Charisma);
         }
 
         public override string Name => "Restore Body";

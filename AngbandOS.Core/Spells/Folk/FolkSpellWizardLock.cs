@@ -12,13 +12,13 @@ namespace AngbandOS.Core.Spells.Folk
     internal class FolkSpellWizardLock : Spell
     {
         private FolkSpellWizardLock(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.WizardLock(dir);
+            SaveGame.WizardLock(dir);
         }
 
         public override string Name => "Wizard Lock";

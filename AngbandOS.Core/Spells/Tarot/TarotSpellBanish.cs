@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Tarot
     internal class TarotSpellBanish : Spell
     {
         private TarotSpellBanish(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.BanishMonsters(saveGame.Player.Level * 4);
+            SaveGame.BanishMonsters(SaveGame.Player.Level * 4);
         }
 
         public override string Name => "Banish";

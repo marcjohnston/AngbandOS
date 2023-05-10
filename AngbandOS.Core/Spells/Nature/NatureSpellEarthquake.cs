@@ -12,14 +12,14 @@ namespace AngbandOS.Core.Spells.Nature
     internal class NatureSpellEarthquake : Spell
     {
         private NatureSpellEarthquake(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Earthquake(saveGame.Player.MapY, saveGame.Player.MapX, 10);
+            SaveGame.Earthquake(SaveGame.Player.MapY, SaveGame.Player.MapX, 10);
         }
 
         public override string Name => "Earthquake";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "rad 10";
         }

@@ -41,7 +41,7 @@
             Spell[] spells = GetGenerateSpellList();
             foreach (Spell spell in spells)
             {
-                spell.Initialize(SaveGame, characterClass);
+                spell.Initialize(characterClass);
             }
             return spells;
         }

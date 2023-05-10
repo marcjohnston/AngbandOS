@@ -12,20 +12,20 @@ namespace AngbandOS.Core.Spells.Chaos
     internal class ChaosSpellManaStorm : Spell
     {
         private ChaosSpellManaStorm(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBall(new ManaProjectile(saveGame), dir, 300 + (saveGame.Player.Level * 2), 4);
+            SaveGame.FireBall(new ManaProjectile(SaveGame), dir, 300 + (SaveGame.Player.Level * 2), 4);
         }
 
         public override string Name => "Mana Storm";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam {300 + (player.Level * 2)}";
+            return $"dam {300 + (SaveGame.Player.Level * 2)}";
         }
     }
 }

@@ -12,17 +12,17 @@ namespace AngbandOS.Core.Spells.Nature
     internal class NatureSpellWhirlwindAttack : Spell
     {
         private NatureSpellWhirlwindAttack(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
             for (int dir = 0; dir <= 9; dir++)
             {
-                int y = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
-                int x = saveGame.Player.MapX + saveGame.Level.KeypadDirectionXOffset[dir];
-                GridTile cPtr = saveGame.Level.Grid[y][x];
-                Monster mPtr = saveGame.Level.Monsters[cPtr.MonsterIndex];
-                if (cPtr.MonsterIndex != 0 && (mPtr.IsVisible || saveGame.Level.GridPassable(y, x)))
+                int y = SaveGame.Player.MapY + SaveGame.Level.KeypadDirectionYOffset[dir];
+                int x = SaveGame.Player.MapX + SaveGame.Level.KeypadDirectionXOffset[dir];
+                GridTile cPtr = SaveGame.Level.Grid[y][x];
+                Monster mPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex];
+                if (cPtr.MonsterIndex != 0 && (mPtr.IsVisible || SaveGame.Level.GridPassable(y, x)))
                 {
-                    saveGame.PlayerAttackMonster(y, x);
+                    SaveGame.PlayerAttackMonster(y, x);
                 }
             }
         }

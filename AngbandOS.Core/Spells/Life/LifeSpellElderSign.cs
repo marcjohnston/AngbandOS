@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Life
     internal class LifeSpellElderSign : Spell
     {
         private LifeSpellElderSign(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.ElderSign();
+            SaveGame.ElderSign();
         }
 
         public override string Name => "Elder Sign";

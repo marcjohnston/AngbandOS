@@ -12,13 +12,13 @@ namespace AngbandOS.Core.Spells.Tarot
     internal class TarotSpellTeleportAway : Spell
     {
         private TarotSpellTeleportAway(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBeam(new TeleportAwayAllProjectile(saveGame), dir, saveGame.Player.Level);
+            SaveGame.FireBeam(new TeleportAwayAllProjectile(SaveGame), dir, SaveGame.Player.Level);
         }
 
         public override string Name => "Teleport Away";

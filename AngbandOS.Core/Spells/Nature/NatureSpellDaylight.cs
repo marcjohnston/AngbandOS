@@ -12,22 +12,22 @@ namespace AngbandOS.Core.Spells.Nature
     internal class NatureSpellDaylight : Spell
     {
         private NatureSpellDaylight(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.LightArea(Program.Rng.DiceRoll(2, saveGame.Player.Level / 2), (saveGame.Player.Level / 10) + 1);
-            if (!saveGame.Player.Race.IsBurnedBySunlight || saveGame.Player.HasLightResistance)
+            SaveGame.LightArea(Program.Rng.DiceRoll(2, SaveGame.Player.Level / 2), (SaveGame.Player.Level / 10) + 1);
+            if (!SaveGame.Player.Race.IsBurnedBySunlight || SaveGame.Player.HasLightResistance)
             {
                 return;
             }
-            saveGame.MsgPrint("The daylight scorches your flesh!");
-            saveGame.Player.TakeHit(Program.Rng.DiceRoll(2, 2), "daylight");
+            SaveGame.MsgPrint("The daylight scorches your flesh!");
+            SaveGame.Player.TakeHit(Program.Rng.DiceRoll(2, 2), "daylight");
         }
 
         public override string Name => "Daylight";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam 2d{player.Level / 2}";
+            return $"dam 2d{SaveGame.Player.Level / 2}";
         }
     }
 }

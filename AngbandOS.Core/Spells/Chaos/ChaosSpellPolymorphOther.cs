@@ -12,13 +12,13 @@ namespace AngbandOS.Core.Spells.Chaos
     internal class ChaosSpellPolymorphOther : Spell
     {
         private ChaosSpellPolymorphOther(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.PolyMonster(dir);
+            SaveGame.PolyMonster(dir);
         }
 
         public override string Name => "Polymorph Other";

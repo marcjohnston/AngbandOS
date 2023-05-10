@@ -12,21 +12,21 @@ namespace AngbandOS.Core.Spells.Chaos
     internal class ChaosSpellGravityBeam : Spell
     {
         private ChaosSpellGravityBeam(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBeam(new GravityProjectile(saveGame), dir,
-                Program.Rng.DiceRoll(9 + ((saveGame.Player.Level - 5) / 4), 8));
+            SaveGame.FireBeam(new GravityProjectile(SaveGame), dir,
+                Program.Rng.DiceRoll(9 + ((SaveGame.Player.Level - 5) / 4), 8));
         }
 
         public override string Name => "Gravity Beam";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam {9 + ((player.Level - 5) / 4)}d8";
+            return $"dam {9 + ((SaveGame.Player.Level - 5) / 4)}d8";
         }
     }
 }

@@ -12,13 +12,13 @@ namespace AngbandOS.Core.Spells.Sorcery
     internal class SorcerySpellStasis : Spell
     {
         private SorcerySpellStasis(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.StasisMonster(dir);
+            SaveGame.StasisMonster(dir);
         }
 
         public override string Name => "Stasis";

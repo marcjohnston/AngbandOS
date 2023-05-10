@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Corporeal
     internal class CorporealSpellMutateBody : Spell
     {
         private CorporealSpellMutateBody(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.Dna.GainMutation();
+            SaveGame.Player.Dna.GainMutation();
         }
 
         public override string Name => "Mutate Body";

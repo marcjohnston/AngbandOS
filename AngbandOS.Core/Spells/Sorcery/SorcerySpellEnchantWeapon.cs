@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Sorcery
     internal class SorcerySpellEnchantWeapon : Spell
     {
         private SorcerySpellEnchantWeapon(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.EnchantItem(Program.Rng.RandomLessThan(4) + 1, Program.Rng.RandomLessThan(4) + 1, 0);
+            SaveGame.EnchantItem(Program.Rng.RandomLessThan(4) + 1, Program.Rng.RandomLessThan(4) + 1, 0);
         }
 
         public override string Name => "Enchant Weapon";

@@ -12,35 +12,35 @@ namespace AngbandOS.Core.Spells.Folk
     internal class FolkSpellZap : Spell
     {
         private FolkSpellZap(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
             int beam;
-            switch (saveGame.Player.BaseCharacterClass.ID)
+            switch (SaveGame.Player.BaseCharacterClass.ID)
             {
                 case CharacterClass.Mage:
-                    beam = saveGame.Player.Level;
+                    beam = SaveGame.Player.Level;
                     break;
 
                 case CharacterClass.HighMage:
-                    beam = saveGame.Player.Level + 10;
+                    beam = SaveGame.Player.Level + 10;
                     break;
 
                 default:
-                    beam = saveGame.Player.Level / 2;
+                    beam = SaveGame.Player.Level / 2;
                     break;
             }
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBoltOrBeam(beam - 10, new ElecProjectile(saveGame), dir, Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 5), 3));
+            SaveGame.FireBoltOrBeam(beam - 10, new ElecProjectile(SaveGame), dir, Program.Rng.DiceRoll(3 + ((SaveGame.Player.Level - 1) / 5), 3));
         }
 
         public override string Name => "Zap";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam {3 + ((player.Level - 1) / 5)}d3";
+            return $"dam {3 + ((SaveGame.Player.Level - 1) / 5)}d3";
         }
     }
 }

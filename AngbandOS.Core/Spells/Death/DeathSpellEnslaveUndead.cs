@@ -12,13 +12,13 @@ namespace AngbandOS.Core.Spells.Death
     internal class DeathSpellEnslaveUndead : Spell
     {
         private DeathSpellEnslaveUndead(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.ControlOneUndead(dir, saveGame.Player.Level);
+            SaveGame.ControlOneUndead(dir, SaveGame.Player.Level);
         }
 
         public override string Name => "Enslave Undead";

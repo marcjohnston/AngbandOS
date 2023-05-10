@@ -12,37 +12,37 @@ namespace AngbandOS.Core.Spells.Chaos
     internal class ChaosSpellSummonDemon : Spell
     {
         private ChaosSpellSummonDemon(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
             if (Program.Rng.DieRoll(3) == 1)
             {
-                if (saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2, new DemonMonsterSelector()))
+                if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level * 3 / 2, new DemonMonsterSelector()))
                 {
-                    saveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
-                    saveGame.MsgPrint("'NON SERVIAM! Wretch! I shall feast on thy mortal soul!'");
+                    SaveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
+                    SaveGame.MsgPrint("'NON SERVIAM! Wretch! I shall feast on thy mortal soul!'");
                 }
                 else
                 {
-                    saveGame.MsgPrint("No-one ever turns up.");
+                    SaveGame.MsgPrint("No-one ever turns up.");
                 }
             }
             else
             {
-                if (saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2, new DemonMonsterSelector(), saveGame.Player.Level == 50))
+                if (SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level * 3 / 2, new DemonMonsterSelector(), SaveGame.Player.Level == 50))
                 {
-                    saveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
-                    saveGame.MsgPrint("'What is thy bidding... Master?'");
+                    SaveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
+                    SaveGame.MsgPrint("'What is thy bidding... Master?'");
                 }
                 else
                 {
-                    saveGame.MsgPrint("No-one ever turns up.");
+                    SaveGame.MsgPrint("No-one ever turns up.");
                 }
             }
         }
 
         public override string Name => "Summon Demon";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "control 67%";
         }

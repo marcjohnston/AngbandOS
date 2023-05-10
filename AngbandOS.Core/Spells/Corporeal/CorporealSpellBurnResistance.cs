@@ -12,16 +12,16 @@ namespace AngbandOS.Core.Spells.Corporeal
     internal class CorporealSpellBurnResistance : Spell
     {
         private CorporealSpellBurnResistance(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.TimedFireResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
-            saveGame.Player.TimedLightningResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
-            saveGame.Player.TimedAcidResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
+            SaveGame.Player.TimedFireResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
+            SaveGame.Player.TimedLightningResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
+            SaveGame.Player.TimedAcidResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
         }
 
         public override string Name => "Burn Resistance";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "dur 20+d20";
         }

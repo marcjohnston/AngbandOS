@@ -12,34 +12,34 @@ namespace AngbandOS.Core.Spells.Tarot
     internal class TarotSpellMassSummons : Spell
     {
         private TarotSpellMassSummons(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
             bool noneCame = true;
-            saveGame.MsgPrint("You concentrate on several images at once...");
-            for (int dummy = 0; dummy < 3 + (saveGame.Player.Level / 10); dummy++)
+            SaveGame.MsgPrint("You concentrate on several images at once...");
+            for (int dummy = 0; dummy < 3 + (SaveGame.Player.Level / 10); dummy++)
             {
                 if (Program.Rng.DieRoll(10) > 3)
                 {
-                    if (saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new NoUniquesMonsterSelector(), false))
+                    if (SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new NoUniquesMonsterSelector(), false))
                     {
                         noneCame = false;
                     }
                 }
-                else if (saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, null))
+                else if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, null))
                 {
-                    saveGame.MsgPrint("A summoned creature gets angry!");
+                    SaveGame.MsgPrint("A summoned creature gets angry!");
                     noneCame = false;
                 }
             }
             if (noneCame)
             {
-                saveGame.MsgPrint("No-one ever turns up.");
+                SaveGame.MsgPrint("No-one ever turns up.");
             }
         }
 
         public override string Name => "Mass Summons";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "control 70%";
         }

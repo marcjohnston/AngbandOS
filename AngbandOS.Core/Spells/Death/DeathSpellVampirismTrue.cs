@@ -12,24 +12,24 @@ namespace AngbandOS.Core.Spells.Death
     internal class DeathSpellVampirismTrue : Spell
     {
         private DeathSpellVampirismTrue(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
             for (int dummy = 0; dummy < 3; dummy++)
             {
-                if (saveGame.DrainLife(dir, 100))
+                if (SaveGame.DrainLife(dir, 100))
                 {
-                    saveGame.Player.RestoreHealth(100);
+                    SaveGame.Player.RestoreHealth(100);
                 }
             }
         }
 
         public override string Name => "Vampirism True";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "dam 3*100";
         }

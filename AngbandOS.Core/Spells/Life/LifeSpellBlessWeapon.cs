@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Life
     internal class LifeSpellBlessWeapon : Spell
     {
         private LifeSpellBlessWeapon(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            Worked = saveGame.BlessWeapon();
+            Worked = SaveGame.BlessWeapon();
         }
 
         public override string Name => "Bless Weapon";

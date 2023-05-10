@@ -12,11 +12,11 @@ namespace AngbandOS.Core.Spells.Corporeal
     internal class CorporealSpellEaglesVision : Spell
     {
         private CorporealSpellEaglesVision(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.DetectTraps();
-            saveGame.DetectDoors();
-            saveGame.DetectStairs();
+            SaveGame.DetectTraps();
+            SaveGame.DetectDoors();
+            SaveGame.DetectStairs();
         }
 
         public override string Name => "Eagle's Vision";

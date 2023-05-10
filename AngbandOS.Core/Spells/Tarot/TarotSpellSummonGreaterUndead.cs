@@ -12,29 +12,29 @@ namespace AngbandOS.Core.Spells.Tarot
     internal class TarotSpellSummonGreaterUndead : Spell
     {
         private TarotSpellSummonGreaterUndead(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.MsgPrint("You concentrate on the image of a greater undead being...");
+            SaveGame.MsgPrint("You concentrate on the image of a greater undead being...");
             if (Program.Rng.DieRoll(10) > 3)
             {
-                if (!saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new HiUndeadNoUniquesMonsterSelector(), true))
+                if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new HiUndeadNoUniquesMonsterSelector(), true))
                 {
-                    saveGame.MsgPrint("No-one ever turns up.");
+                    SaveGame.MsgPrint("No-one ever turns up.");
                 }
             }
-            else if (saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new HiUndeadNoUniquesMonsterSelector()))
+            else if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new HiUndeadNoUniquesMonsterSelector()))
             {
-                saveGame.MsgPrint("The summoned undead creature gets angry!");
+                SaveGame.MsgPrint("The summoned undead creature gets angry!");
             }
             else
             {
-                saveGame.MsgPrint("No-one ever turns up.");
+                SaveGame.MsgPrint("No-one ever turns up.");
             }
         }
 
         public override string Name => "Summon Greater Undead";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "control 70%";
         }

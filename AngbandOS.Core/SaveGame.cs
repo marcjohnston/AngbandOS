@@ -9268,7 +9268,7 @@ namespace AngbandOS.Core
                 if (ask)
                 {
                     Spell sPtr = Spells[realm2 ? 1 : 0][spell % 32];
-                    string tmpVal = $"{prompt} {sPtr.Name} ({sPtr.ManaCost} mana, {sPtr.FailureChance(player)}% fail)? ";
+                    string tmpVal = $"{prompt} {sPtr.Name} ({sPtr.ManaCost} mana, {sPtr.FailureChance()}% fail)? ";
                     if (!GetCheck(tmpVal))
                     {
                         continue;
@@ -11870,7 +11870,7 @@ namespace AngbandOS.Core
                     return;
                 }
             }
-            int chance = sPtr.FailureChance(Player);
+            int chance = sPtr.FailureChance();
             if (Program.Rng.RandomLessThan(100) < chance)
             {
                 MsgPrint($"You failed to get the {prayer} off!");
@@ -11898,7 +11898,7 @@ namespace AngbandOS.Core
             }
             else
             {
-                sPtr.Cast(this);
+                sPtr.Cast();
                 if (!sPtr.Worked)
                 {
                     int e = sPtr.FirstCastExperience;

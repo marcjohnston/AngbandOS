@@ -12,14 +12,14 @@ namespace AngbandOS.Core.Spells.Life
     internal class LifeSpellPrayer : Spell
     {
         private LifeSpellPrayer(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.TimedBlessing.AddTimer(Program.Rng.DieRoll(48) + 48);
+            SaveGame.Player.TimedBlessing.AddTimer(Program.Rng.DieRoll(48) + 48);
         }
 
         public override string Name => "Prayer";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "dur 48+d48";
         }

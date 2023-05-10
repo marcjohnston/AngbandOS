@@ -12,11 +12,11 @@ namespace AngbandOS.Core.Spells.Sorcery
     internal class SorcerySpellDetectObjectsAndTreasure : Spell
     {
         private SorcerySpellDetectObjectsAndTreasure(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.DetectObjectsNormal();
-            saveGame.DetectTreasure();
-            saveGame.DetectObjectsGold();
+            SaveGame.DetectObjectsNormal();
+            SaveGame.DetectTreasure();
+            SaveGame.DetectObjectsGold();
         }
 
         public override string Name => "Detect Objects and Treasure";

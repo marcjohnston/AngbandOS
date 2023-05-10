@@ -12,16 +12,16 @@ namespace AngbandOS.Core.Spells.Death
     internal class DeathSpellDispelGood : Spell
     {
         private DeathSpellDispelGood(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.DispelGood(saveGame.Player.Level * 4);
+            SaveGame.DispelGood(SaveGame.Player.Level * 4);
         }
 
         public override string Name => "Dispel Good";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam {4 * player.Level}";
+            return $"dam {4 * SaveGame.Player.Level}";
         }
     }
 }

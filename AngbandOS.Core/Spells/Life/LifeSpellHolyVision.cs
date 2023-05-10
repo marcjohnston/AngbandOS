@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Life
     internal class LifeSpellHolyVision : Spell
     {
         private LifeSpellHolyVision(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.IdentifyFully();
+            SaveGame.IdentifyFully();
         }
 
         public override string Name => "Holy Vision";

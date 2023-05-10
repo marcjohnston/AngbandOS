@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Corporeal
     internal class CorporealSpellAttunement : Spell
     {
         private CorporealSpellAttunement(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.IdentifyFully();
+            SaveGame.IdentifyFully();
         }
 
         public override string Name => "Attunement";

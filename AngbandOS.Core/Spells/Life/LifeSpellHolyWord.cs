@@ -12,21 +12,21 @@ namespace AngbandOS.Core.Spells.Life
     internal class LifeSpellHolyWord : Spell
     {
         private LifeSpellHolyWord(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.DispelEvil(saveGame.Player.Level * 4);
-            saveGame.Player.RestoreHealth(1000);
-            saveGame.Player.TimedFear.ResetTimer();
-            saveGame.Player.TimedPoison.ResetTimer();
-            saveGame.Player.TimedStun.ResetTimer();
-            saveGame.Player.TimedBleeding.ResetTimer();
+            SaveGame.DispelEvil(SaveGame.Player.Level * 4);
+            SaveGame.Player.RestoreHealth(1000);
+            SaveGame.Player.TimedFear.ResetTimer();
+            SaveGame.Player.TimedPoison.ResetTimer();
+            SaveGame.Player.TimedStun.ResetTimer();
+            SaveGame.Player.TimedBleeding.ResetTimer();
         }
 
         public override string Name => "Holy Word";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"d {4 * player.Level}/h 1000";
+            return $"d {4 * SaveGame.Player.Level}/h 1000";
         }
     }
 }

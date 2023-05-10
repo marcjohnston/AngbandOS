@@ -12,19 +12,19 @@ namespace AngbandOS.Core.Spells.Folk
     internal class FolkSpellRayOfLight : Spell
     {
         private FolkSpellRayOfLight(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.MsgPrint("A line of light appears.");
-            saveGame.LightLine(dir);
+            SaveGame.MsgPrint("A line of light appears.");
+            SaveGame.LightLine(dir);
         }
 
         public override string Name => "Ray of Light";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "dam 6d8";
         }

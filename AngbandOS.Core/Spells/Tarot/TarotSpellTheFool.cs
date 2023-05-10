@@ -12,10 +12,10 @@ namespace AngbandOS.Core.Spells.Tarot
     internal class TarotSpellTheFool : Spell
     {
         private TarotSpellTheFool(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
             MonsterSelector? summonType = null;
-            saveGame.MsgPrint("You concentrate on the Fool card...");
+            SaveGame.MsgPrint("You concentrate on the Fool card...");
             switch (Program.Rng.DieRoll(4))
             {
                 case 1:
@@ -36,22 +36,22 @@ namespace AngbandOS.Core.Spells.Tarot
             }
             if (Program.Rng.DieRoll(2) == 1)
             {
-                saveGame.MsgPrint(saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, summonType)
+                SaveGame.MsgPrint(SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, summonType)
                     ? "The summoned creature gets angry!"
                     : "No-one ever turns up.");
             }
             else
             {
-                if (!saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, summonType, false))
+                if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, summonType, false))
                 {
-                    saveGame.MsgPrint("No-one ever turns up.");
+                    SaveGame.MsgPrint("No-one ever turns up.");
                 }
             }
         }
 
         public override string Name => "The Fool";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "control 50%";
         }

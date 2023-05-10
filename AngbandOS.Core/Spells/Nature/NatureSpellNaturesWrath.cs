@@ -12,19 +12,19 @@ namespace AngbandOS.Core.Spells.Nature
     internal class NatureSpellNaturesWrath : Spell
     {
         private NatureSpellNaturesWrath(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.DispelMonsters(saveGame.Player.Level * 4);
-            saveGame.Earthquake(saveGame.Player.MapY, saveGame.Player.MapX, 20 + (saveGame.Player.Level / 2));
-            saveGame.Project(0, 1 + (saveGame.Player.Level / 12), saveGame.Player.MapY, saveGame.Player.MapX, 100 + saveGame.Player.Level,
-                new DisintegrateProjectile(saveGame), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
+            SaveGame.DispelMonsters(SaveGame.Player.Level * 4);
+            SaveGame.Earthquake(SaveGame.Player.MapY, SaveGame.Player.MapX, 20 + (SaveGame.Player.Level / 2));
+            SaveGame.Project(0, 1 + (SaveGame.Player.Level / 12), SaveGame.Player.MapY, SaveGame.Player.MapX, 100 + SaveGame.Player.Level,
+                new DisintegrateProjectile(SaveGame), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
         }
 
         public override string Name => "Nature's Wrath";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam {4 * player.Level}+{100 + player.Level}";
+            return $"dam {4 * SaveGame.Player.Level}+{100 + SaveGame.Player.Level}";
         }
     }
 }

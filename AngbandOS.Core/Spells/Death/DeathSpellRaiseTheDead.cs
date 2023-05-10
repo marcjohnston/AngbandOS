@@ -12,40 +12,40 @@ namespace AngbandOS.Core.Spells.Death
     internal class DeathSpellRaiseTheDead : Spell
     {
         private DeathSpellRaiseTheDead(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
             if (Program.Rng.DieRoll(3) == 1)
             {
-                if (saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2, saveGame.Player.Level > 47 ? new HiUndeadMonsterSelector() : new UndeadMonsterSelector()))
+                if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level * 3 / 2, SaveGame.Player.Level > 47 ? new HiUndeadMonsterSelector() : new UndeadMonsterSelector()))
                 {
-                    saveGame.MsgPrint(
+                    SaveGame.MsgPrint(
                         "Cold winds begin to swirl around you, carrying with them the stench of decay...");
-                    saveGame.MsgPrint("'The dead arise... to punish you for disturbing them!'");
+                    SaveGame.MsgPrint("'The dead arise... to punish you for disturbing them!'");
                 }
                 else
                 {
-                    saveGame.MsgPrint("No-one ever turns up.");
+                    SaveGame.MsgPrint("No-one ever turns up.");
                 }
             }
             else
             {
-                if (saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2,
-                    saveGame.Player.Level > 47 ? new HiUndeadNoUniquesMonsterSelector() : new UndeadMonsterSelector(), saveGame.Player.Level > 24 && Program.Rng.DieRoll(3) == 1))
+                if (SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level * 3 / 2,
+                    SaveGame.Player.Level > 47 ? new HiUndeadNoUniquesMonsterSelector() : new UndeadMonsterSelector(), SaveGame.Player.Level > 24 && Program.Rng.DieRoll(3) == 1))
                 {
-                    saveGame.MsgPrint(
+                    SaveGame.MsgPrint(
                         "Cold winds begin to swirl around you, carrying with them the stench of decay...");
-                    saveGame.MsgPrint("Ancient, long-dead forms arise from the ground to serve you!");
+                    SaveGame.MsgPrint("Ancient, long-dead forms arise from the ground to serve you!");
                 }
                 else
                 {
-                    saveGame.MsgPrint("No-one ever turns up.");
+                    SaveGame.MsgPrint("No-one ever turns up.");
                 }
             }
         }
 
         public override string Name => "Raise the Dead";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "control 67%";
         }

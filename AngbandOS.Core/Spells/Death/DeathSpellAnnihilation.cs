@@ -12,12 +12,12 @@ namespace AngbandOS.Core.Spells.Death
     internal class DeathSpellAnnihilation : Spell
     {
         private DeathSpellAnnihilation(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.Mana -= 100;
-            for (int i = 1; i < saveGame.Level.MMax; i++)
+            SaveGame.Player.Mana -= 100;
+            for (int i = 1; i < SaveGame.Level.MMax; i++)
             {
-                Monster mPtr = saveGame.Level.Monsters[i];
+                Monster mPtr = SaveGame.Level.Monsters[i];
                 MonsterRace rPtr = mPtr.Race;
                 if (mPtr.Race == null)
                 {
@@ -31,17 +31,17 @@ namespace AngbandOS.Core.Spells.Death
                 {
                     continue;
                 }
-                saveGame.Level.DeleteMonsterByIndex(i, true);
-                saveGame.Player.TakeHit(Program.Rng.DieRoll(4), "the strain of casting Annihilation");
-                saveGame.Player.Mana++;
-                saveGame.Level.MoveCursorRelative(saveGame.Player.MapY, saveGame.Player.MapX);
-                saveGame.RedrawHpFlaggedAction.Set();
-                saveGame.RedrawManaFlaggedAction.Set();
-                saveGame.HandleStuff();
-                saveGame.UpdateScreen();
-                saveGame.Pause(Constants.DelayFactorInMilliseconds);
+                SaveGame.Level.DeleteMonsterByIndex(i, true);
+                SaveGame.Player.TakeHit(Program.Rng.DieRoll(4), "the strain of casting Annihilation");
+                SaveGame.Player.Mana++;
+                SaveGame.Level.MoveCursorRelative(SaveGame.Player.MapY, SaveGame.Player.MapX);
+                SaveGame.RedrawHpFlaggedAction.Set();
+                SaveGame.RedrawManaFlaggedAction.Set();
+                SaveGame.HandleStuff();
+                SaveGame.UpdateScreen();
+                SaveGame.Pause(Constants.DelayFactorInMilliseconds);
             }
-            saveGame.Player.Mana += 100;
+            SaveGame.Player.Mana += 100;
         }
 
         public override string Name => "Annihilation";

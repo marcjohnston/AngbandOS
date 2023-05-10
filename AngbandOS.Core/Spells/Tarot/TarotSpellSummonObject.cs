@@ -12,20 +12,20 @@ namespace AngbandOS.Core.Spells.Tarot
     internal class TarotSpellSummonObject : Spell
     {
         private TarotSpellSummonObject(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.SummonItem(dir, saveGame.Player.Level * 15, true);
+            SaveGame.SummonItem(dir, SaveGame.Player.Level * 15, true);
         }
 
         public override string Name => "Summon Object";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"max wgt {player.Level * 15 / 10}";
+            return $"max wgt {SaveGame.Player.Level * 15 / 10}";
         }
     }
 }

@@ -12,20 +12,20 @@ namespace AngbandOS.Core.Spells.Chaos
     internal class ChaosSpellShardBall : Spell
     {
         private ChaosSpellShardBall(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBall(new ShardProjectile(saveGame), dir, 120 + saveGame.Player.Level, 2);
+            SaveGame.FireBall(new ShardProjectile(SaveGame), dir, 120 + SaveGame.Player.Level, 2);
         }
 
         public override string Name => "Shard Ball";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam {120 + player.Level}";
+            return $"dam {120 + SaveGame.Player.Level}";
         }
     }
 }

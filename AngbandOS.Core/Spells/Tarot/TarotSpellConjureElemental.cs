@@ -12,28 +12,28 @@ namespace AngbandOS.Core.Spells.Tarot
     internal class TarotSpellConjureElemental : Spell
     {
         private TarotSpellConjureElemental(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
             if (Program.Rng.DieRoll(6) > 3)
             {
-                if (!saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new ElementalMonsterSelector(), false))
+                if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new ElementalMonsterSelector(), false))
                 {
-                    saveGame.MsgPrint("No-one ever turns up.");
+                    SaveGame.MsgPrint("No-one ever turns up.");
                 }
             }
-            else if (saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new ElementalMonsterSelector()))
+            else if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new ElementalMonsterSelector()))
             {
-                saveGame.MsgPrint("You fail to control the elemental creature!");
+                SaveGame.MsgPrint("You fail to control the elemental creature!");
             }
             else
             {
-                saveGame.MsgPrint("No-one ever turns up.");
+                SaveGame.MsgPrint("No-one ever turns up.");
             }
         }
 
         public override string Name => "Conjure Elemental";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "control 50%";
         }

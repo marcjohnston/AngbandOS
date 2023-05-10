@@ -12,22 +12,22 @@ namespace AngbandOS.Core.Spells.Chaos
     internal class ChaosSpellManaBurst : Spell
     {
         private ChaosSpellManaBurst(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBall(new MissileProjectile(saveGame), dir, Program.Rng.DiceRoll(3, 5) + saveGame.Player.Level + (saveGame.Player.Level /
-                (saveGame.Player.BaseCharacterClass.ID == CharacterClass.Mage || saveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)),
-                saveGame.Player.Level < 30 ? 2 : 3);
+            SaveGame.FireBall(new MissileProjectile(SaveGame), dir, Program.Rng.DiceRoll(3, 5) + SaveGame.Player.Level + (SaveGame.Player.Level /
+                (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mage || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)),
+                SaveGame.Player.Level < 30 ? 2 : 3);
         }
 
         public override string Name => "Mana Burst";
         
-        protected override string Comment(Player player) // TODO: Player to SaveGame
+        protected override string? Info() // TODO: Player to SaveGame
         {
-            int i = player.Level + (player.Level / (player.BaseCharacterClass.ID == CharacterClass.Mage || player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4));
+            int i = SaveGame.Player.Level + (SaveGame.Player.Level / (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mage || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4));
             return $"dam 3d5+{i}";
         }
     }

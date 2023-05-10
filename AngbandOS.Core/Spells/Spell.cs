@@ -6,6 +6,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.CharacterClasses;
+
 namespace AngbandOS.Core.Spells
 {
     [Serializable]
@@ -30,7 +32,7 @@ namespace AngbandOS.Core.Spells
         public bool Learned;
 
         /// <summary>
-        /// Returns the name of the spell, as rendered to the player.
+        /// Returns the name of the spell, as rendered to the SaveGame.Player.
         /// </summary>
         public abstract string Name { get; }
 
@@ -56,36 +58,37 @@ namespace AngbandOS.Core.Spells
             get; set;
         }
 
-        public abstract void Cast(SaveGame saveGame);
+        public abstract void Cast();
 
-        public int FailureChance(Player player) // TODO: Player to SaveGame
+        public int FailureChance() 
         {
-            if (player.BaseCharacterClass.SpellCastingType == CastingType.None)
+            BaseCharacterClass baseCharacterClass = SaveGame.Player.BaseCharacterClass;
+            if (baseCharacterClass.SpellCastingType == CastingType.None)
             {
                 return 100;
             }
             int chance = BaseFailure;
-            chance -= 3 * (player.Level - Level);
-            chance -= 3 * (player.AbilityScores[player.BaseCharacterClass.SpellStat].SpellFailureReduction - 1);
-            if (ManaCost > player.Mana)
+            chance -= 3 * (SaveGame.Player.Level - Level);
+            chance -= 3 * (SaveGame.Player.AbilityScores[baseCharacterClass.SpellStat].SpellFailureReduction - 1);
+            if (ManaCost > SaveGame.Player.Mana)
             {
-                chance += 5 * (ManaCost - player.Mana);
+                chance += 5 * (ManaCost - SaveGame.Player.Mana);
             }
-            int minfail = player.AbilityScores[player.BaseCharacterClass.SpellStat].SpellMinFailChance;
-            if (player.BaseCharacterClass.ID != CharacterClass.Priest && player.BaseCharacterClass.ID != CharacterClass.Druid &&
-                player.BaseCharacterClass.ID != CharacterClass.Mage && player.BaseCharacterClass.ID != CharacterClass.HighMage &&
-                player.BaseCharacterClass.ID != CharacterClass.Cultist)
+            int minfail = SaveGame.Player.AbilityScores[baseCharacterClass.SpellStat].SpellMinFailChance;
+            if (baseCharacterClass.ID != CharacterClass.Priest && baseCharacterClass.ID != CharacterClass.Druid &&
+                baseCharacterClass.ID != CharacterClass.Mage && baseCharacterClass.ID != CharacterClass.HighMage &&
+                baseCharacterClass.ID != CharacterClass.Cultist)
             {
                 if (minfail < 5)
                 {
                     minfail = 5;
                 }
             }
-            if ((player.BaseCharacterClass.ID == CharacterClass.Priest || player.BaseCharacterClass.ID == CharacterClass.Druid) && player.HasUnpriestlyWeapon)
+            if ((baseCharacterClass.ID == CharacterClass.Priest || baseCharacterClass.ID == CharacterClass.Druid) && SaveGame.Player.HasUnpriestlyWeapon)
             {
                 chance += 25;
             }
-            if (player.BaseCharacterClass.ID == CharacterClass.Cultist && player.HasUnpriestlyWeapon)
+            if (baseCharacterClass.ID == CharacterClass.Cultist && SaveGame.Player.HasUnpriestlyWeapon)
             {
                 chance += 25;
             }
@@ -93,11 +96,11 @@ namespace AngbandOS.Core.Spells
             {
                 chance = minfail;
             }
-            if (player.TimedStun.TurnsRemaining > 50)
+            if (SaveGame.Player.TimedStun.TurnsRemaining > 50)
             {
                 chance += 25;
             }
-            else if (player.TimedStun.TurnsRemaining != 0)
+            else if (SaveGame.Player.TimedStun.TurnsRemaining != 0)
             {
                 chance += 15;
             }
@@ -108,7 +111,11 @@ namespace AngbandOS.Core.Spells
             return chance;
         }
 
-        public string GetComment(Player player) // TODO: Player to SaveGame
+        /// <summary>
+        /// Returns detailed information about the spell.
+        /// </summary>
+        /// <returns></returns>
+        public string GetInfo()
         {
             if (Forgotten)
             {
@@ -118,12 +125,13 @@ namespace AngbandOS.Core.Spells
             {
                 return "unknown";
             }
-            return !Worked ? "untried" : Comment(player);
+            string spellComment = Info() ?? "";
+            return !Worked ? "untried" : spellComment;
         }
 
-        public void Initialize(SaveGame saveGame, BaseCharacterClass characterClass)
+        public void Initialize(BaseCharacterClass characterClass)
         {
-            foreach (ClassSpell classSpell in saveGame.SingletonRepository.ClassSpells)
+            foreach (ClassSpell classSpell in SaveGame.SingletonRepository.ClassSpells)
             {
                 // TODO: This needs to use a dual dictionary for fast lookup
                 if (classSpell.Spell.Name == this.GetType().Name && classSpell.CharacterClass.Name == characterClass.GetType().Name)
@@ -145,11 +153,9 @@ namespace AngbandOS.Core.Spells
             //FirstCastExperience = 0;
         }
 
-        public string SummaryLine(Player player) // TODO: Player to SaveGame
+        public string SummaryLine()
         {
-            return Level >= 99
-                ? "(illegible)"
-                : $"{Name,-30} {Level,3} {ManaCost,4} {FailureChance(player),3}% {GetComment(player)}";
+            return Level >= 99 ? "(illegible)" : $"{Name,-30} {Level,3} {ManaCost,4} {FailureChance(),3}% {GetInfo()}";
         }
 
         public override string ToString()
@@ -157,6 +163,10 @@ namespace AngbandOS.Core.Spells
             return $"{Name} ({Level}, {ManaCost}, {BaseFailure}, {FirstCastExperience})";
         }
 
-        protected virtual string Comment(Player player) => string.Empty;
+        /// <summary>
+        /// Returns information about the spell.  If there is no detailed information, null is returned.  Returns null, by default.
+        /// </summary>
+        /// <returns></returns>
+        protected virtual string? Info() => null;
     }
 }

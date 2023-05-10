@@ -12,14 +12,14 @@ namespace AngbandOS.Core.Spells.Death
     internal class DeathSpellResistPoison : Spell
     {
         private DeathSpellResistPoison(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.TimedPoisonResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
+            SaveGame.Player.TimedPoisonResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
         }
 
         public override string Name => "Resist Poison";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "dur 20+d20";
         }

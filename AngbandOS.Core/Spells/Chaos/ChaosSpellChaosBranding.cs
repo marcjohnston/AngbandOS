@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Chaos
     internal class ChaosSpellChaosBranding : Spell
     {
         private ChaosSpellChaosBranding(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.BrandWeapon(1);
+            SaveGame.BrandWeapon(1);
         }
 
         public override string Name => "Chaos Branding";

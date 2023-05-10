@@ -12,16 +12,16 @@ namespace AngbandOS.Core.Spells.Corporeal
     internal class CorporealSpellHeroism : Spell
     {
         private CorporealSpellHeroism(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.TimedHeroism.AddTimer(Program.Rng.DieRoll(25) + 25);
-            saveGame.Player.RestoreHealth(10);
-            saveGame.Player.TimedFear.ResetTimer();
+            SaveGame.Player.TimedHeroism.AddTimer(Program.Rng.DieRoll(25) + 25);
+            SaveGame.Player.RestoreHealth(10);
+            SaveGame.Player.TimedFear.ResetTimer();
         }
 
         public override string Name => "Heroism";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "dur 25+d25";
         }

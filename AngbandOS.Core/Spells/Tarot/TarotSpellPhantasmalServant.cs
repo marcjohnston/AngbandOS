@@ -12,17 +12,17 @@ namespace AngbandOS.Core.Spells.Tarot
     internal class TarotSpellPhantasmalServant : Spell
     {
         private TarotSpellPhantasmalServant(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.MsgPrint(
-                saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2, new PhantomMonsterSelector(), false)
+            SaveGame.MsgPrint(
+                SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level * 3 / 2, new PhantomMonsterSelector(), false)
                     ? "'Your wish, master?'"
                     : "No-one ever turns up.");
         }
 
         public override string Name => "Phantasmal Servant";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "control 100%";
         }

@@ -12,15 +12,15 @@ namespace AngbandOS.Core.Spells.Folk
     internal class FolkSpellCureMediumWounds : Spell
     {
         private FolkSpellCureMediumWounds(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8));
-            saveGame.Player.TimedBleeding.SetTimer((saveGame.Player.TimedBleeding.TurnsRemaining / 2) - 50);
+            SaveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8));
+            SaveGame.Player.TimedBleeding.SetTimer((SaveGame.Player.TimedBleeding.TurnsRemaining / 2) - 50);
         }
 
         public override string Name => "Cure Medium Wounds";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "heal 4d8";
         }

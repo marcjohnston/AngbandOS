@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Death
     internal class DeathSpellMassCarnage : Spell
     {
         private DeathSpellMassCarnage(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.MassCarnage(true);
+            SaveGame.MassCarnage(true);
         }
 
         public override string Name => "Mass Carnage";

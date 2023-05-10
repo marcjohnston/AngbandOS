@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Corporeal
     internal class CorporealSpellBravery : Spell
     {
         private CorporealSpellBravery(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.TimedFear.ResetTimer();
+            SaveGame.Player.TimedFear.ResetTimer();
         }
 
         public override string Name => "Bravery";

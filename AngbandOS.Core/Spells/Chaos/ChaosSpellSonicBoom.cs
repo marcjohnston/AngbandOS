@@ -12,17 +12,17 @@ namespace AngbandOS.Core.Spells.Chaos
     internal class ChaosSpellSonicBoom : Spell
     {
         private ChaosSpellSonicBoom(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Project(0, 2 + (saveGame.Player.Level / 10), saveGame.Player.MapY, saveGame.Player.MapX, 45 + saveGame.Player.Level,
-                new SoundProjectile(saveGame), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
+            SaveGame.Project(0, 2 + (SaveGame.Player.Level / 10), SaveGame.Player.MapY, SaveGame.Player.MapX, 45 + SaveGame.Player.Level,
+                new SoundProjectile(SaveGame), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
         }
 
         public override string Name => "Sonic Boom";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam {45 + player.Level}";
+            return $"dam {45 + SaveGame.Player.Level}";
         }
     }
 }

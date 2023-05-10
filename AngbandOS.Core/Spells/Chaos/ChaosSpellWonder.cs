@@ -12,137 +12,137 @@ namespace AngbandOS.Core.Spells.Chaos
     internal class ChaosSpellWonder : Spell
     {
         private ChaosSpellWonder(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
             int beam;
-            switch (saveGame.Player.BaseCharacterClass.ID)
+            switch (SaveGame.Player.BaseCharacterClass.ID)
             {
                 case CharacterClass.Mage:
-                    beam = saveGame.Player.Level;
+                    beam = SaveGame.Player.Level;
                     break;
 
                 case CharacterClass.HighMage:
-                    beam = saveGame.Player.Level + 10;
+                    beam = SaveGame.Player.Level + 10;
                     break;
 
                 default:
-                    beam = saveGame.Player.Level / 2;
+                    beam = SaveGame.Player.Level / 2;
                     break;
             }
-            int die = Program.Rng.DieRoll(100) + (saveGame.Player.Level / 5);
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            int die = Program.Rng.DieRoll(100) + (SaveGame.Player.Level / 5);
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
             if (die > 100)
             {
-                saveGame.MsgPrint("You feel a surge of power!");
+                SaveGame.MsgPrint("You feel a surge of power!");
             }
             if (die < 8)
             {
-                saveGame.CloneMonster(dir);
+                SaveGame.CloneMonster(dir);
             }
             else if (die < 14)
             {
-                saveGame.SpeedMonster(dir);
+                SaveGame.SpeedMonster(dir);
             }
             else if (die < 26)
             {
-                saveGame.HealMonster(dir);
+                SaveGame.HealMonster(dir);
             }
             else if (die < 31)
             {
-                saveGame.PolyMonster(dir);
+                SaveGame.PolyMonster(dir);
             }
             else if (die < 36)
             {
-                saveGame.FireBoltOrBeam(beam - 10, new MissileProjectile(saveGame), dir,
-                    Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 5), 4));
+                SaveGame.FireBoltOrBeam(beam - 10, new MissileProjectile(SaveGame), dir,
+                    Program.Rng.DiceRoll(3 + ((SaveGame.Player.Level - 1) / 5), 4));
             }
             else if (die < 41)
             {
-                saveGame.ConfuseMonster(dir, saveGame.Player.Level);
+                SaveGame.ConfuseMonster(dir, SaveGame.Player.Level);
             }
             else if (die < 46)
             {
-                saveGame.FireBall(new PoisProjectile(saveGame), dir, 20 + (saveGame.Player.Level / 2), 3);
+                SaveGame.FireBall(new PoisProjectile(SaveGame), dir, 20 + (SaveGame.Player.Level / 2), 3);
             }
             else if (die < 51)
             {
-                saveGame.LightLine(dir);
+                SaveGame.LightLine(dir);
             }
             else if (die < 56)
             {
-                saveGame.FireBoltOrBeam(beam - 10, new ElecProjectile(saveGame), dir,
-                    Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 5) / 4), 8));
+                SaveGame.FireBoltOrBeam(beam - 10, new ElecProjectile(SaveGame), dir,
+                    Program.Rng.DiceRoll(3 + ((SaveGame.Player.Level - 5) / 4), 8));
             }
             else if (die < 61)
             {
-                saveGame.FireBoltOrBeam(beam - 10, new ColdProjectile(saveGame), dir,
-                    Program.Rng.DiceRoll(5 + ((saveGame.Player.Level - 5) / 4), 8));
+                SaveGame.FireBoltOrBeam(beam - 10, new ColdProjectile(SaveGame), dir,
+                    Program.Rng.DiceRoll(5 + ((SaveGame.Player.Level - 5) / 4), 8));
             }
             else if (die < 66)
             {
-                saveGame.FireBoltOrBeam(beam, new AcidProjectile(saveGame), dir,
-                    Program.Rng.DiceRoll(6 + ((saveGame.Player.Level - 5) / 4), 8));
+                SaveGame.FireBoltOrBeam(beam, new AcidProjectile(SaveGame), dir,
+                    Program.Rng.DiceRoll(6 + ((SaveGame.Player.Level - 5) / 4), 8));
             }
             else if (die < 71)
             {
-                saveGame.FireBoltOrBeam(beam, new FireProjectile(saveGame), dir,
-                    Program.Rng.DiceRoll(8 + ((saveGame.Player.Level - 5) / 4), 8));
+                SaveGame.FireBoltOrBeam(beam, new FireProjectile(SaveGame), dir,
+                    Program.Rng.DiceRoll(8 + ((SaveGame.Player.Level - 5) / 4), 8));
             }
             else if (die < 76)
             {
-                saveGame.DrainLife(dir, 75);
+                SaveGame.DrainLife(dir, 75);
             }
             else if (die < 81)
             {
-                saveGame.FireBall(new ElecProjectile(saveGame), dir, 30 + (saveGame.Player.Level / 2), 2);
+                SaveGame.FireBall(new ElecProjectile(SaveGame), dir, 30 + (SaveGame.Player.Level / 2), 2);
             }
             else if (die < 86)
             {
-                saveGame.FireBall(new AcidProjectile(saveGame), dir, 40 + saveGame.Player.Level, 2);
+                SaveGame.FireBall(new AcidProjectile(SaveGame), dir, 40 + SaveGame.Player.Level, 2);
             }
             else if (die < 91)
             {
-                saveGame.FireBall(new IceProjectile(saveGame), dir, 70 + saveGame.Player.Level, 3);
+                SaveGame.FireBall(new IceProjectile(SaveGame), dir, 70 + SaveGame.Player.Level, 3);
             }
             else if (die < 96)
             {
-                saveGame.FireBall(new FireProjectile(saveGame), dir, 80 + saveGame.Player.Level, 3);
+                SaveGame.FireBall(new FireProjectile(SaveGame), dir, 80 + SaveGame.Player.Level, 3);
             }
             else if (die < 101)
             {
-                saveGame.DrainLife(dir, 100 + saveGame.Player.Level);
+                SaveGame.DrainLife(dir, 100 + SaveGame.Player.Level);
             }
             else if (die < 104)
             {
-                saveGame.Earthquake(saveGame.Player.MapY, saveGame.Player.MapX, 12);
+                SaveGame.Earthquake(SaveGame.Player.MapY, SaveGame.Player.MapX, 12);
             }
             else if (die < 106)
             {
-                saveGame.DestroyArea(saveGame.Player.MapY, saveGame.Player.MapX, 15);
+                SaveGame.DestroyArea(SaveGame.Player.MapY, SaveGame.Player.MapX, 15);
             }
             else if (die < 108)
             {
-                saveGame.Carnage(true);
+                SaveGame.Carnage(true);
             }
             else if (die < 110)
             {
-                saveGame.DispelMonsters(120);
+                SaveGame.DispelMonsters(120);
             }
             else
             {
-                saveGame.DispelMonsters(150);
-                saveGame.SlowMonsters();
-                saveGame.SleepMonsters();
-                saveGame.Player.RestoreHealth(300);
+                SaveGame.DispelMonsters(150);
+                SaveGame.SlowMonsters();
+                SaveGame.SleepMonsters();
+                SaveGame.Player.RestoreHealth(300);
             }
         }
 
         public override string Name => "Wonder";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "random";
         }

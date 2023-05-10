@@ -12,36 +12,35 @@ namespace AngbandOS.Core.Spells.Chaos
     internal class ChaosSpellFireBolt : Spell
     {
         private ChaosSpellFireBolt(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
             int beam;
-            switch (saveGame.Player.BaseCharacterClass.ID)
+            switch (SaveGame.Player.BaseCharacterClass.ID)
             {
                 case CharacterClass.Mage:
-                    beam = saveGame.Player.Level;
+                    beam = SaveGame.Player.Level;
                     break;
 
                 case CharacterClass.HighMage:
-                    beam = saveGame.Player.Level + 10;
+                    beam = SaveGame.Player.Level + 10;
                     break;
 
                 default:
-                    beam = saveGame.Player.Level / 2;
+                    beam = SaveGame.Player.Level / 2;
                     break;
             }
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBoltOrBeam(beam, new FireProjectile(saveGame), dir,
-                Program.Rng.DiceRoll(8 + ((saveGame.Player.Level - 5) / 4), 8));
+            SaveGame.FireBoltOrBeam(beam, new FireProjectile(SaveGame), dir, Program.Rng.DiceRoll(8 + ((SaveGame.Player.Level - 5) / 4), 8));
         }
 
         public override string Name => "Fire Bolt";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam {6 + ((player.Level - 5) / 4)}d8";
+            return $"dam {6 + ((SaveGame.Player.Level - 5) / 4)}d8";
         }
     }
 }

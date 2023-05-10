@@ -12,11 +12,11 @@ namespace AngbandOS.Core.Spells.Tarot
     internal class TarotSpellResetRecall : Spell
     {
         private TarotSpellResetRecall(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            string ppp = $"Reset to which level (1-{saveGame.Player.MaxDlv[saveGame.CurDungeon.Index]}): ";
-            string def = $"{Math.Max(saveGame.CurrentDepth, 1)}";
-            if (!saveGame.GetString(ppp, out string tmpVal, def, 10))
+            string ppp = $"Reset to which level (1-{SaveGame.Player.MaxDlv[SaveGame.CurDungeon.Index]}): ";
+            string def = $"{Math.Max(SaveGame.CurrentDepth, 1)}";
+            if (!SaveGame.GetString(ppp, out string tmpVal, def, 10))
             {
                 return;
             }
@@ -28,11 +28,11 @@ namespace AngbandOS.Core.Spells.Tarot
             {
                 dummy = 1;
             }
-            if (dummy > saveGame.Player.MaxDlv[saveGame.CurDungeon.Index])
+            if (dummy > SaveGame.Player.MaxDlv[SaveGame.CurDungeon.Index])
             {
-                dummy = saveGame.Player.MaxDlv[saveGame.CurDungeon.Index];
+                dummy = SaveGame.Player.MaxDlv[SaveGame.CurDungeon.Index];
             }
-            saveGame.MsgPrint($"Recall depth set to level {dummy}.");
+            SaveGame.MsgPrint($"Recall depth set to level {dummy}.");
         }
 
         public override string Name => "Reset Recall";

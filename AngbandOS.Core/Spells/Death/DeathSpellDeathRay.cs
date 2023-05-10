@@ -12,13 +12,13 @@ namespace AngbandOS.Core.Spells.Death
     internal class DeathSpellDeathRay : Spell
     {
         private DeathSpellDeathRay(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.DeathRay(dir, saveGame.Player.Level);
+            SaveGame.DeathRay(dir, SaveGame.Player.Level);
         }
 
         public override string Name => "Death Ray";

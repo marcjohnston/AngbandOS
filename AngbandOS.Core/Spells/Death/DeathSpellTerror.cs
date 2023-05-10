@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Death
     internal class DeathSpellTerror : Spell
     {
         private DeathSpellTerror(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.TurnMonsters(30 + saveGame.Player.Level);
+            SaveGame.TurnMonsters(30 + SaveGame.Player.Level);
         }
 
         public override string Name => "Terror";

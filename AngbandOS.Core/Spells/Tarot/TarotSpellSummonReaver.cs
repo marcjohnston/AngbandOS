@@ -12,29 +12,29 @@ namespace AngbandOS.Core.Spells.Tarot
     internal class TarotSpellSummonReaver : Spell
     {
         private TarotSpellSummonReaver(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.MsgPrint("You concentrate on the image of a Black Reaver...");
+            SaveGame.MsgPrint("You concentrate on the image of a Black Reaver...");
             if (Program.Rng.DieRoll(10) > 3)
             {
-                if (!saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new ReaverMonsterSelector(), true))
+                if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new ReaverMonsterSelector(), true))
                 {
-                    saveGame.MsgPrint("No-one ever turns up.");
+                    SaveGame.MsgPrint("No-one ever turns up.");
                 }
             }
-            else if (saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new ReaverMonsterSelector()))
+            else if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new ReaverMonsterSelector()))
             {
-                saveGame.MsgPrint("The summoned Black Reaver gets angry!");
+                SaveGame.MsgPrint("The summoned Black Reaver gets angry!");
             }
             else
             {
-                saveGame.MsgPrint("No-one ever turns up.");
+                SaveGame.MsgPrint("No-one ever turns up.");
             }
         }
 
         public override string Name => "Summon Reaver";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "control 70%";
         }

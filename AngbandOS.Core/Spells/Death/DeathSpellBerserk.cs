@@ -12,16 +12,16 @@ namespace AngbandOS.Core.Spells.Death
     internal class DeathSpellBerserk : Spell
     {
         private DeathSpellBerserk(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(25) + 25);
-            saveGame.Player.RestoreHealth(30);
-            saveGame.Player.TimedFear.ResetTimer();
+            SaveGame.Player.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(25) + 25);
+            SaveGame.Player.RestoreHealth(30);
+            SaveGame.Player.TimedFear.ResetTimer();
         }
 
         public override string Name => "Berserk";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "dur 25+d25";
         }

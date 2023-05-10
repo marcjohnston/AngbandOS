@@ -12,30 +12,30 @@ namespace AngbandOS.Core.Spells.Death
     internal class DeathSpellVampiricDrain : Spell
     {
         private DeathSpellVampiricDrain(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            int dummy = saveGame.Player.Level + (Program.Rng.DieRoll(saveGame.Player.Level) * Math.Max(1, saveGame.Player.Level / 10));
-            if (!saveGame.DrainLife(dir, dummy))
+            int dummy = SaveGame.Player.Level + (Program.Rng.DieRoll(SaveGame.Player.Level) * Math.Max(1, SaveGame.Player.Level / 10));
+            if (!SaveGame.DrainLife(dir, dummy))
             {
                 return;
             }
-            saveGame.Player.RestoreHealth(dummy);
-            dummy = saveGame.Player.Food + Math.Min(5000, 100 * dummy);
-            if (saveGame.Player.Food < Constants.PyFoodMax)
+            SaveGame.Player.RestoreHealth(dummy);
+            dummy = SaveGame.Player.Food + Math.Min(5000, 100 * dummy);
+            if (SaveGame.Player.Food < Constants.PyFoodMax)
             {
-                saveGame.Player.SetFood(dummy >= Constants.PyFoodMax ? Constants.PyFoodMax - 1 : dummy);
+                SaveGame.Player.SetFood(dummy >= Constants.PyFoodMax ? Constants.PyFoodMax - 1 : dummy);
             }
         }
 
         public override string Name => "Vampiric Drain";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam {Math.Max(1, player.Level / 10)}d{player.Level}+{player.Level}";
+            return $"dam {Math.Max(1, SaveGame.Player.Level / 10)}d{SaveGame.Player.Level}+{SaveGame.Player.Level}";
         }
     }
 }

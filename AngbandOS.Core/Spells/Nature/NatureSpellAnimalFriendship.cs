@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Nature
     internal class NatureSpellAnimalFriendship : Spell
     {
         private NatureSpellAnimalFriendship(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.CharmAnimals(saveGame.Player.Level * 2);
+            SaveGame.CharmAnimals(SaveGame.Player.Level * 2);
         }
 
         public override string Name => "Animal Friendship";

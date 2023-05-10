@@ -12,13 +12,13 @@ namespace AngbandOS.Core.Spells.Corporeal
     internal class CorporealSpellHypnoticEyes : Spell
     {
         private CorporealSpellHypnoticEyes(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.CharmMonster(dir, saveGame.Player.Level);
+            SaveGame.CharmMonster(dir, SaveGame.Player.Level);
         }
 
         public override string Name => "Hypnotic Eyes";

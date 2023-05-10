@@ -12,17 +12,17 @@ namespace AngbandOS.Core.Spells.Nature
     internal class NatureSpellSummonAnimal : Spell
     {
         private NatureSpellSummonAnimal(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new AnimalRangerMonsterSelector(), true))
+            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new AnimalRangerMonsterSelector(), true))
             {
-                saveGame.MsgPrint("No-one ever turns up.");
+                SaveGame.MsgPrint("No-one ever turns up.");
             }
         }
 
         public override string Name => "Summon Animal";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "control 100%";
         }

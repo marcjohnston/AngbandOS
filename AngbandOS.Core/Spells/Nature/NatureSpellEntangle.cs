@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Nature
     internal class NatureSpellEntangle : Spell
     {
         private NatureSpellEntangle(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.SlowMonsters();
+            SaveGame.SlowMonsters();
         }
 
         public override string Name => "Entangle";

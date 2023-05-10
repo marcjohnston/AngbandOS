@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Death
     internal class DeathSpellRestoreLife : Spell
     {
         private DeathSpellRestoreLife(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.RestoreLevel();
+            SaveGame.Player.RestoreLevel();
         }
 
         public override string Name => "Restore Life";

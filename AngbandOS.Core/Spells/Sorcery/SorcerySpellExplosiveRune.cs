@@ -12,16 +12,16 @@ namespace AngbandOS.Core.Spells.Sorcery
     internal class SorcerySpellYellowSign : Spell
     {
         private SorcerySpellYellowSign(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.YellowSign();
+            SaveGame.YellowSign();
         }
 
         public override string Name => "Yellow Sign";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam 7d7+{player.Level / 2}";
+            return $"dam 7d7+{SaveGame.Player.Level / 2}";
         }
     }
 }

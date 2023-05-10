@@ -12,13 +12,13 @@ namespace AngbandOS.Core.Spells.Nature
     internal class NatureSpellNatureAwareness : Spell
     {
         private NatureSpellNatureAwareness(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Level.MapArea();
-            saveGame.DetectTraps();
-            saveGame.DetectDoors();
-            saveGame.DetectStairs();
-            saveGame.DetectMonstersNormal();
+            SaveGame.Level.MapArea();
+            SaveGame.DetectTraps();
+            SaveGame.DetectDoors();
+            SaveGame.DetectStairs();
+            SaveGame.DetectMonstersNormal();
         }
 
         public override string Name => "Nature Awareness";

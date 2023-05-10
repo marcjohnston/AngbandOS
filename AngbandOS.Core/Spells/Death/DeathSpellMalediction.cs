@@ -12,14 +12,14 @@ namespace AngbandOS.Core.Spells.Death
     internal class DeathSpellMalediction : Spell
     {
         private DeathSpellMalediction(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBall(new HellFireProjectile(saveGame), dir,
-                Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 5), 3), 0);
+            SaveGame.FireBall(new HellFireProjectile(SaveGame), dir,
+                Program.Rng.DiceRoll(3 + ((SaveGame.Player.Level - 1) / 5), 3), 0);
             if (Program.Rng.DieRoll(5) != 1)
             {
                 return;
@@ -27,24 +27,24 @@ namespace AngbandOS.Core.Spells.Death
             int dummy = Program.Rng.DieRoll(1000);
             if (dummy == 666)
             {
-                saveGame.FireBolt(new DeathRayProjectile(saveGame), dir, saveGame.Player.Level);
+                SaveGame.FireBolt(new DeathRayProjectile(SaveGame), dir, SaveGame.Player.Level);
             }
             if (dummy < 500)
             {
-                saveGame.FireBolt(new TurnAllProjectile(saveGame), dir, saveGame.Player.Level);
+                SaveGame.FireBolt(new TurnAllProjectile(SaveGame), dir, SaveGame.Player.Level);
             }
             if (dummy < 800)
             {
-                saveGame.FireBolt(new OldConfProjectile(saveGame), dir, saveGame.Player.Level);
+                SaveGame.FireBolt(new OldConfProjectile(SaveGame), dir, SaveGame.Player.Level);
             }
-            saveGame.FireBolt(new StunProjectile(saveGame), dir, saveGame.Player.Level);
+            SaveGame.FireBolt(new StunProjectile(SaveGame), dir, SaveGame.Player.Level);
         }
 
         public override string Name => "Malediction";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam {3 + ((player.Level - 1) / 5)}d3";
+            return $"dam {3 + ((SaveGame.Player.Level - 1) / 5)}d3";
         }
     }
 }

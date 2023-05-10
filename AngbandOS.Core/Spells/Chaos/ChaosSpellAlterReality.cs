@@ -12,12 +12,12 @@ namespace AngbandOS.Core.Spells.Chaos
     internal class ChaosSpellAlterReality : Spell
     {
         private ChaosSpellAlterReality(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.MsgPrint("The world changes!");
-            saveGame.DoCmdSaveGame(true);
-            saveGame.NewLevelFlag = true;
-            saveGame.CameFrom = LevelStart.StartRandom;
+            SaveGame.MsgPrint("The world changes!");
+            SaveGame.DoCmdSaveGame(true);
+            SaveGame.NewLevelFlag = true;
+            SaveGame.CameFrom = LevelStart.StartRandom;
         }
 
         public override string Name => "Alter Reality";

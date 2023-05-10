@@ -12,29 +12,29 @@ namespace AngbandOS.Core.Spells.Tarot
     internal class TarotSpellSummonSpiders : Spell
     {
         private TarotSpellSummonSpiders(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.MsgPrint("You concentrate on the image of a spider...");
+            SaveGame.MsgPrint("You concentrate on the image of a spider...");
             if (Program.Rng.DieRoll(5) > 2)
             {
-                if (!saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new SpiderMonsterSelector(), true))
+                if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new SpiderMonsterSelector(), true))
                 {
-                    saveGame.MsgPrint("No-one ever turns up.");
+                    SaveGame.MsgPrint("No-one ever turns up.");
                 }
             }
-            else if (saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new SpiderMonsterSelector()))
+            else if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new SpiderMonsterSelector()))
             {
-                saveGame.MsgPrint("The summoned spiders get angry!");
+                SaveGame.MsgPrint("The summoned spiders get angry!");
             }
             else
             {
-                saveGame.MsgPrint("No-one ever turns up.");
+                SaveGame.MsgPrint("No-one ever turns up.");
             }
         }
 
         public override string Name => "Summon Spiders";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "control 60%";
         }

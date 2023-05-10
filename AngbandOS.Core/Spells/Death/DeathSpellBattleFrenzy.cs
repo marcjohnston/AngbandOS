@@ -12,24 +12,24 @@ namespace AngbandOS.Core.Spells.Death
     internal class DeathSpellBattleFrenzy : Spell
     {
         private DeathSpellBattleFrenzy(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(25) + 25);
-            saveGame.Player.RestoreHealth(30);
-            saveGame.Player.TimedFear.ResetTimer();
-            if (saveGame.Player.TimedHaste.TurnsRemaining == 0)
+            SaveGame.Player.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(25) + 25);
+            SaveGame.Player.RestoreHealth(30);
+            SaveGame.Player.TimedFear.ResetTimer();
+            if (SaveGame.Player.TimedHaste.TurnsRemaining == 0)
             {
-                saveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(20 + (saveGame.Player.Level / 2)) + (saveGame.Player.Level / 2));
+                SaveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(20 + (SaveGame.Player.Level / 2)) + (SaveGame.Player.Level / 2));
             }
             else
             {
-                saveGame.Player.TimedHaste.AddTimer(Program.Rng.DieRoll(5));
+                SaveGame.Player.TimedHaste.AddTimer(Program.Rng.DieRoll(5));
             }
         }
 
         public override string Name => "Battle Frenzy";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "max dur 50";
         }

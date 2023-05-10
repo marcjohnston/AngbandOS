@@ -12,14 +12,14 @@ namespace AngbandOS.Core.Spells.Folk
     internal class FolkSpellResistLightning : Spell
     {
         private FolkSpellResistLightning(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.TimedLightningResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
+            SaveGame.Player.TimedLightningResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
         }
 
         public override string Name => "Resist Lightning";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "dur 20+d20";
         }

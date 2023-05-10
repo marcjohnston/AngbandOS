@@ -12,20 +12,20 @@ namespace AngbandOS.Core.Spells.Chaos
     internal class ChaosSpellBreatheChaos : Spell
     {
         private ChaosSpellBreatheChaos(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBall(new ChaosProjectile(saveGame), dir, saveGame.Player.Health, -2);
+            SaveGame.FireBall(new ChaosProjectile(SaveGame), dir, SaveGame.Player.Health, -2);
         }
 
         public override string Name => "Breathe Chaos";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam {player.Health}";
+            return $"dam {SaveGame.Player.Health}";
         }
     }
 }

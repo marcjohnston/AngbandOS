@@ -12,16 +12,16 @@ namespace AngbandOS.Core.Spells.Chaos
     internal class ChaosSpellTeleportSelf : Spell
     {
         private ChaosSpellTeleportSelf(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.TeleportPlayer(saveGame.Player.Level * 5);
+            SaveGame.TeleportPlayer(SaveGame.Player.Level * 5);
         }
 
         public override string Name => "Teleport Self";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"range {player.Level * 5}";
+            return $"range {SaveGame.Player.Level * 5}";
         }
     }
 }

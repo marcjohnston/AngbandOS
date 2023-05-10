@@ -12,33 +12,33 @@ namespace AngbandOS.Core.Spells.Sorcery
     internal class SorcerySpellDimensionDoor : Spell
     {
         private SorcerySpellDimensionDoor(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.MsgPrint("You open a dimensional gate. Choose a destination.");
-            if (!saveGame.TgtPt(out int ii, out int ij))
+            SaveGame.MsgPrint("You open a dimensional gate. Choose a destination.");
+            if (!SaveGame.TgtPt(out int ii, out int ij))
             {
                 return;
             }
-            saveGame.Player.Energy -= 60 - saveGame.Player.Level;
-            if (!saveGame.Level.GridPassableNoCreature(ij, ii) || saveGame.Level.Grid[ij][ii].TileFlags.IsSet(GridTile.InVault) ||
-                saveGame.Level.Distance(ij, ii, saveGame.Player.MapY, saveGame.Player.MapX) > saveGame.Player.Level + 2 ||
-                Program.Rng.RandomLessThan(saveGame.Player.Level * saveGame.Player.Level / 2) == 0)
+            SaveGame.Player.Energy -= 60 - SaveGame.Player.Level;
+            if (!SaveGame.Level.GridPassableNoCreature(ij, ii) || SaveGame.Level.Grid[ij][ii].TileFlags.IsSet(GridTile.InVault) ||
+                SaveGame.Level.Distance(ij, ii, SaveGame.Player.MapY, SaveGame.Player.MapX) > SaveGame.Player.Level + 2 ||
+                Program.Rng.RandomLessThan(SaveGame.Player.Level * SaveGame.Player.Level / 2) == 0)
             {
-                saveGame.MsgPrint("You fail to exit the astral plane correctly!");
-                saveGame.Player.Energy -= 100;
-                saveGame.TeleportPlayer(10);
+                SaveGame.MsgPrint("You fail to exit the astral plane correctly!");
+                SaveGame.Player.Energy -= 100;
+                SaveGame.TeleportPlayer(10);
             }
             else
             {
-                saveGame.TeleportPlayerTo(ij, ii);
+                SaveGame.TeleportPlayerTo(ij, ii);
             }
         }
 
         public override string Name => "Dimension Door";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"range {player.Level + 2}";
+            return $"range {SaveGame.Player.Level + 2}";
         }
     }
 }

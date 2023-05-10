@@ -12,10 +12,10 @@ namespace AngbandOS.Core.Spells.Life
     internal class LifeSpellWardingTrue : Spell
     {
         private LifeSpellWardingTrue(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.ElderSign();
-            saveGame.ElderSignCreation();
+            SaveGame.ElderSign();
+            SaveGame.ElderSignCreation();
         }
 
         public override string Name => "Warding True";

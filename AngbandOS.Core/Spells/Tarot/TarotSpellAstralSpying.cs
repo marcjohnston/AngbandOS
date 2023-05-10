@@ -12,14 +12,14 @@ namespace AngbandOS.Core.Spells.Tarot
     internal class TarotSpellAstralSpying : Spell
     {
         private TarotSpellAstralSpying(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.TimedTelepathy.AddTimer(Program.Rng.DieRoll(30) + 25);
+            SaveGame.Player.TimedTelepathy.AddTimer(Program.Rng.DieRoll(30) + 25);
         }
 
         public override string Name => "Astral Spying";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "dur 25+d30";
         }

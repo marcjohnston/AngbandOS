@@ -12,10 +12,10 @@ namespace AngbandOS.Core.Spells.Tarot
     internal class TarotSpellExtradimensionalBeing : Spell
     {
         private TarotSpellExtradimensionalBeing(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.MsgPrint("You have turned into a Extradimensional Being.");
-            saveGame.Player.Dna.GainMutation();
+            SaveGame.MsgPrint("You have turned into a Extradimensional Being.");
+            SaveGame.Player.Dna.GainMutation();
         }
 
         public override string Name => "Extradimensional Being";

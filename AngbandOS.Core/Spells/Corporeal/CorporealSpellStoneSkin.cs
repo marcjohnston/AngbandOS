@@ -12,14 +12,14 @@ namespace AngbandOS.Core.Spells.Corporeal
     internal class CorporealSpellStoneSkin : Spell
     {
         private CorporealSpellStoneSkin(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Player.TimedStoneskin.AddTimer(Program.Rng.DieRoll(20) + 30);
+            SaveGame.Player.TimedStoneskin.AddTimer(Program.Rng.DieRoll(20) + 30);
         }
 
         public override string Name => "Stone Skin";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "dur 30+d20";
         }

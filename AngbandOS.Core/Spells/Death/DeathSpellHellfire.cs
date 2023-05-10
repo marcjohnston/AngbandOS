@@ -12,19 +12,19 @@ namespace AngbandOS.Core.Spells.Death
     internal class DeathSpellHellfire : Spell
     {
         private DeathSpellHellfire(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBall(new HellFireProjectile(saveGame), dir, 666, 3);
-            saveGame.Player.TakeHit(50 + Program.Rng.DieRoll(50), "the strain of casting Hellfire");
+            SaveGame.FireBall(new HellFireProjectile(SaveGame), dir, 666, 3);
+            SaveGame.Player.TakeHit(50 + Program.Rng.DieRoll(50), "the strain of casting Hellfire");
         }
 
         public override string Name => "Hellfire";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "dam 666";
         }

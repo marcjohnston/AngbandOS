@@ -12,14 +12,14 @@ namespace AngbandOS.Core.Spells.Chaos
     internal class ChaosSpellCallTheVoid : Spell
     {
         private ChaosSpellCallTheVoid(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.CallTheVoid();
+            SaveGame.CallTheVoid();
         }
 
         public override string Name => "Call the Void";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
             return "dam 3 * 175";
         }

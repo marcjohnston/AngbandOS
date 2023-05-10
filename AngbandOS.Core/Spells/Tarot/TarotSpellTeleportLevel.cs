@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Tarot
     internal class TarotSpellTeleportLevel : Spell
     {
         private TarotSpellTeleportLevel(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.TeleportPlayerLevel();
+            SaveGame.TeleportPlayerLevel();
         }
 
         public override string Name => "Teleport Level";

@@ -12,10 +12,10 @@ namespace AngbandOS.Core.Spells.Chaos
     internal class ChaosSpellMeteorSwarm : Spell
     {
         private ChaosSpellMeteorSwarm(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            int x = saveGame.Player.MapX;
-            int y = saveGame.Player.MapY;
+            int x = SaveGame.Player.MapX;
+            int y = SaveGame.Player.MapY;
             int count = 0;
             int b = 10 + Program.Rng.DieRoll(10);
             for (int i = 0; i < b; i++)
@@ -28,27 +28,27 @@ namespace AngbandOS.Core.Spells.Chaos
                     {
                         break;
                     }
-                    x = saveGame.Player.MapX - 5 + Program.Rng.DieRoll(10);
-                    y = saveGame.Player.MapY - 5 + Program.Rng.DieRoll(10);
-                    int dx = saveGame.Player.MapX > x ? saveGame.Player.MapX - x : x - saveGame.Player.MapX;
-                    int dy = saveGame.Player.MapY > y ? saveGame.Player.MapY - y : y - saveGame.Player.MapY;
+                    x = SaveGame.Player.MapX - 5 + Program.Rng.DieRoll(10);
+                    y = SaveGame.Player.MapY - 5 + Program.Rng.DieRoll(10);
+                    int dx = SaveGame.Player.MapX > x ? SaveGame.Player.MapX - x : x - SaveGame.Player.MapX;
+                    int dy = SaveGame.Player.MapY > y ? SaveGame.Player.MapY - y : y - SaveGame.Player.MapY;
                     d = dy > dx ? dy + (dx >> 1) : dx + (dy >> 1);
-                } while (d > 5 || !saveGame.Level.PlayerHasLosBold(y, x));
+                } while (d > 5 || !SaveGame.Level.PlayerHasLosBold(y, x));
                 if (count > 1000)
                 {
                     break;
                 }
                 count = 0;
-                saveGame.Project(0, 2, y, x, saveGame.Player.Level * 3 / 2, new MeteorProjectile(saveGame),
+                SaveGame.Project(0, 2, y, x, SaveGame.Player.Level * 3 / 2, new MeteorProjectile(SaveGame),
                     ProjectionFlag.ProjectKill | ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem);
             }
         }
 
         public override string Name => "Meteor Swarm";
         
-        protected override string Comment(Player player)
+        protected override string? Info()
         {
-            return $"dam {3 * player.Level / 2} each";
+            return $"dam {3 * SaveGame.Player.Level / 2} each";
         }
     }
 }

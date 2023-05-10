@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Spells.Folk
     internal class FolkSpellRecharging : Spell
     {
         private FolkSpellRecharging(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast(SaveGame saveGame)
+        public override void Cast()
         {
-            saveGame.Recharge(saveGame.Player.Level * 2);
+            SaveGame.Recharge(SaveGame.Player.Level * 2);
         }
 
         public override string Name => "Recharging";
