@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Life
     [Serializable]
     internal class LifeSpellCurePoison : Spell
     {
+        private LifeSpellCurePoison(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Player.TimedPoison.ResetTimer();

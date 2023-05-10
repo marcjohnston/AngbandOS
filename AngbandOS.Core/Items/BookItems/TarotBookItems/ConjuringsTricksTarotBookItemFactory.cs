@@ -23,14 +23,14 @@ namespace AngbandOS.Core.ItemCategories
 
         public override Spell[] Spells => new Spell[]
         {
-            new TarotSpellPhaseDoor(),
-            new TarotSpellMindBlast(),
-            new TarotSpellTarotDraw(),
-            new TarotSpellResetRecall(),
-            new TarotSpellTeleport(),
-            new TarotSpellDimensionDoor(),
-            new TarotSpellAstralSpying(),
-            new TarotSpellTeleportAway()
+            SaveGame.SingletonRepository.Spells.Get<TarotSpellPhaseDoor>(),
+            SaveGame.SingletonRepository.Spells.Get<TarotSpellMindBlast>(),
+            SaveGame.SingletonRepository.Spells.Get<TarotSpellTarotDraw>(),
+            SaveGame.SingletonRepository.Spells.Get<TarotSpellResetRecall>(),
+            SaveGame.SingletonRepository.Spells.Get<TarotSpellTeleport>(),
+            SaveGame.SingletonRepository.Spells.Get<TarotSpellDimensionDoor>(),
+            SaveGame.SingletonRepository.Spells.Get<TarotSpellAstralSpying>(),
+            SaveGame.SingletonRepository.Spells.Get<TarotSpellTeleportAway>()
         };
     }
 }

@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Nature
     [Serializable]
     internal class NatureSpellLightningBolt : Spell
     {
+        private NatureSpellLightningBolt(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             int beam;

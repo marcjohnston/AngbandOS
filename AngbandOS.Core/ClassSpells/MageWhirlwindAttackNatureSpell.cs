@@ -1,3 +1,4 @@
+[Serializable]
 internal class MageWhirlwindAttackNatureSpell : ClassSpell
 {
     private MageWhirlwindAttackNatureSpell(SaveGame saveGame) : base(saveGame) { }

@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Life
     [Serializable]
     internal class LifeSpellSatisfyHunger : Spell
     {
+        private LifeSpellSatisfyHunger(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Player.SetFood(Constants.PyFoodMax - 1);

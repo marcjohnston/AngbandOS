@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Chaos
     [Serializable]
     internal class ChaosSpellTrapAndDoorDestruction : Spell
     {
+        private ChaosSpellTrapAndDoorDestruction(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.DestroyDoorsTouch();

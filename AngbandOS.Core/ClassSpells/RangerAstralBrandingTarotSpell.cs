@@ -1,3 +1,4 @@
+[Serializable]
 internal class RangerAstralBrandingTarotSpell : ClassSpell
 {
     private RangerAstralBrandingTarotSpell(SaveGame saveGame) : base(saveGame) { }

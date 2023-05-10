@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Tarot
     [Serializable]
     internal class TarotSpellResetRecall : Spell
     {
+        private TarotSpellResetRecall(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             string ppp = $"Reset to which level (1-{saveGame.Player.MaxDlv[saveGame.CurDungeon.Index]}): ";

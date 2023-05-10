@@ -1,3 +1,4 @@
+[Serializable]
 internal class MonkTeleportLevelCorporealSpell : ClassSpell
 {
     private MonkTeleportLevelCorporealSpell(SaveGame saveGame) : base(saveGame) { }

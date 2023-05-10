@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Life
     [Serializable]
     internal class LifeSpellBanish : Spell
     {
+        private LifeSpellBanish(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             if (saveGame.BanishEvil(100))

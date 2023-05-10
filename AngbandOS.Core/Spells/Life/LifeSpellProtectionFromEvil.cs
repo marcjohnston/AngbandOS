@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Life
     [Serializable]
     internal class LifeSpellProtectionFromEvil : Spell
     {
+        private LifeSpellProtectionFromEvil(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Player.TimedProtectionFromEvil.AddTimer(Program.Rng.DieRoll(25) + (3 * saveGame.Player.Level));

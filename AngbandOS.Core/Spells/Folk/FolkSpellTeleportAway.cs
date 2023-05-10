@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Folk
     [Serializable]
     internal class FolkSpellTeleportAway : Spell
     {
+        private FolkSpellTeleportAway(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             if (!saveGame.GetDirectionWithAim(out int dir))

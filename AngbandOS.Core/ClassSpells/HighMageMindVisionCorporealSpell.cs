@@ -1,3 +1,4 @@
+[Serializable]
 internal class HighMageMindVisionCorporealSpell : ClassSpell
 {
     private HighMageMindVisionCorporealSpell(SaveGame saveGame) : base(saveGame) { }

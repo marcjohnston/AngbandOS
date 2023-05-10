@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Life
     [Serializable]
     internal class LifeSpellHolyOrb : Spell
     {
+        private LifeSpellHolyOrb(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             if (!saveGame.GetDirectionWithAim(out int dir))

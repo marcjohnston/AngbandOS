@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Chaos
     [Serializable]
     internal class ChaosSpellFistOfForce : Spell
     {
+        private ChaosSpellFistOfForce(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             if (!saveGame.GetDirectionWithAim(out int dir))

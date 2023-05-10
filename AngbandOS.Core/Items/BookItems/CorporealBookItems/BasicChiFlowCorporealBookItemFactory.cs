@@ -23,14 +23,14 @@ namespace AngbandOS.Core.ItemCategories
 
         public override Spell[] Spells => new Spell[]
         {
-            new CorporealSpellBlink(),
-            new CorporealSpellBravery(),
-            new CorporealSpellBatsSense(),
-            new CorporealSpellEaglesVision(),
-            new CorporealSpellMindVision(),
-            new CorporealSpellCureMediumWounds(),
-            new CorporealSpellCureLightWounds(),
-            new CorporealSpellSatisfyHunger()
+            SaveGame.SingletonRepository.Spells.Get<CorporealSpellBlink>(),
+            SaveGame.SingletonRepository.Spells.Get<CorporealSpellBravery>(),
+            SaveGame.SingletonRepository.Spells.Get<CorporealSpellBatsSense>(),
+            SaveGame.SingletonRepository.Spells.Get<CorporealSpellEaglesVision>(),
+            SaveGame.SingletonRepository.Spells.Get<CorporealSpellMindVision>(),
+            SaveGame.SingletonRepository.Spells.Get<CorporealSpellCureMediumWounds>(),
+            SaveGame.SingletonRepository.Spells.Get<CorporealSpellCureLightWounds>(),
+            SaveGame.SingletonRepository.Spells.Get<CorporealSpellSatisfyHunger>()
         };
     }
 }

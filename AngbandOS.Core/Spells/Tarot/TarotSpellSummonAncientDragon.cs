@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Tarot
     [Serializable]
     internal class TarotSpellSummonAncientDragon : Spell
     {
+        private TarotSpellSummonAncientDragon(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.MsgPrint("You concentrate on the image of an ancient dragon...");

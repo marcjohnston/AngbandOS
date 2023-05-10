@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Folk
     [Serializable]
     internal class FolkSpellSatisfyHunger : Spell
     {
+        private FolkSpellSatisfyHunger(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Player.SetFood(Constants.PyFoodMax - 1);

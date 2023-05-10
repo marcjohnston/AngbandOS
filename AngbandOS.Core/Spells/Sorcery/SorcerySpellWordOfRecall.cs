@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery
     [Serializable]
     internal class SorcerySpellWordOfRecall : Spell
     {
+        private SorcerySpellWordOfRecall(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Player.ToggleRecall();

@@ -1,3 +1,4 @@
+[Serializable]
 internal class RogueTeleportLevelFolkSpell : ClassSpell
 {
     private RogueTeleportLevelFolkSpell(SaveGame saveGame) : base(saveGame) { }

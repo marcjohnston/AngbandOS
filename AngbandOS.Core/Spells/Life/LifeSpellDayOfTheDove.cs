@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Life
     [Serializable]
     internal class LifeSpellDayOfTheDove : Spell
     {
+        private LifeSpellDayOfTheDove(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.CharmMonsters(saveGame.Player.Level * 2);

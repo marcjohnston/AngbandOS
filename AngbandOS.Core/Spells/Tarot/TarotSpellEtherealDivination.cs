@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Tarot
     [Serializable]
     internal class TarotSpellEtherealDivination : Spell
     {
+        private TarotSpellEtherealDivination(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.DetectAll();

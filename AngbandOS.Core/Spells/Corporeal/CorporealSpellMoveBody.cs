@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Corporeal
     [Serializable]
     internal class CorporealSpellMoveBody : Spell
     {
+        private CorporealSpellMoveBody(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.MsgPrint("You focus your Chi. Choose a destination.");

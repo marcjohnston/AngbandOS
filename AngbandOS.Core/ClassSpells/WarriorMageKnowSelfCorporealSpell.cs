@@ -1,3 +1,4 @@
+[Serializable]
 internal class WarriorMageKnowSelfCorporealSpell : ClassSpell
 {
     private WarriorMageKnowSelfCorporealSpell(SaveGame saveGame) : base(saveGame) { }

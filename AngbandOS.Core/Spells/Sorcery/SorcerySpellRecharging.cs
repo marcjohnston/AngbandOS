@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery
     [Serializable]
     internal class SorcerySpellRecharging : Spell
     {
+        private SorcerySpellRecharging(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Recharge(saveGame.Player.Level * 2);

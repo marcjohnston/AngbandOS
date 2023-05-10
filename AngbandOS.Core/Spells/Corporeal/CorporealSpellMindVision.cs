@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Corporeal
     [Serializable]
     internal class CorporealSpellMindVision : Spell
     {
+        private CorporealSpellMindVision(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Player.TimedTelepathy.AddTimer(Program.Rng.DieRoll(30) + 25);

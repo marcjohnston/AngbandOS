@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Nature
     [Serializable]
     internal class NatureSpellHerbalHealing : Spell
     {
+        private NatureSpellHerbalHealing(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Player.RestoreHealth(1000);

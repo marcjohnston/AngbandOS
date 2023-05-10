@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Chaos
     [Serializable]
     internal class ChaosSpellWordOfDestruction : Spell
     {
+        private ChaosSpellWordOfDestruction(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.DestroyArea(saveGame.Player.MapY, saveGame.Player.MapX, 15);

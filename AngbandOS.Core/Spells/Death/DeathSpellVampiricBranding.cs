@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Death
     [Serializable]
     internal class DeathSpellVampiricBranding : Spell
     {
+        private DeathSpellVampiricBranding(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.BrandWeapon(3);

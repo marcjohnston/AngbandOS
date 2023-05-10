@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Folk
     [Serializable]
     internal class FolkSpellLightArea : Spell
     {
+        private FolkSpellLightArea(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.LightArea(Program.Rng.DiceRoll(2, saveGame.Player.Level / 2), (saveGame.Player.Level / 10) + 1);

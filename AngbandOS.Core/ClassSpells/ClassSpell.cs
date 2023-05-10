@@ -1,3 +1,4 @@
+[Serializable]
 internal abstract class ClassSpell
 {
     protected readonly SaveGame SaveGame;

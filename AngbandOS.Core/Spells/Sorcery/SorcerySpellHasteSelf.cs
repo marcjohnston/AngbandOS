@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery
     [Serializable]
     internal class SorcerySpellHasteSelf : Spell
     {
+        private SorcerySpellHasteSelf(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             if (saveGame.Player.TimedHaste.TurnsRemaining == 0)

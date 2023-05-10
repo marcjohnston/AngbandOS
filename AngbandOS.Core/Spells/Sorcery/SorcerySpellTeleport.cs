@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery
     [Serializable]
     internal class SorcerySpellTeleport : Spell
     {
+        private SorcerySpellTeleport(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.TeleportPlayer(saveGame.Player.Level * 5);

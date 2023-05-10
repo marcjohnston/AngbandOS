@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Folk
     [Serializable]
     internal class FolkSpellCureMediumWounds : Spell
     {
+        private FolkSpellCureMediumWounds(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8));

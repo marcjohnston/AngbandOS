@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery
     [Serializable]
     internal class SorcerySpellEnchantArmour : Spell
     {
+        private SorcerySpellEnchantArmour(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.EnchantItem(0, 0, Program.Rng.RandomLessThan(3) + 2);

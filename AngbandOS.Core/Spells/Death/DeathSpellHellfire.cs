@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Death
     [Serializable]
     internal class DeathSpellHellfire : Spell
     {
+        private DeathSpellHellfire(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             if (!saveGame.GetDirectionWithAim(out int dir))

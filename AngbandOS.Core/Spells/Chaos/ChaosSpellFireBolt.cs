@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Chaos
     [Serializable]
     internal class ChaosSpellFireBolt : Spell
     {
+        private ChaosSpellFireBolt(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             int beam;

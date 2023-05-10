@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Tarot
     [Serializable]
     internal class TarotSpellDimensionDoor : Spell
     {
+        private TarotSpellDimensionDoor(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.MsgPrint("You open a dimensional gate. Choose a destination.");

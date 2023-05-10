@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Corporeal
     [Serializable]
     internal class CorporealSpellRestoreBody : Spell
     {
+        private CorporealSpellRestoreBody(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Player.TryRestoringAbilityScore(Ability.Strength);

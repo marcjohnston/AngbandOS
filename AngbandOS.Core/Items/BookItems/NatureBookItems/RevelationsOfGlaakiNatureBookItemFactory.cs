@@ -25,15 +25,16 @@ namespace AngbandOS.Core.ItemCategories
         public override bool KindIsGood => true;
         public override Item CreateItem() => new RevelationsOfGlaakiNatureBookItem(SaveGame);
 
-        public override Spell[] Spells => new Spell[] {
-            new NatureSpellDoorCreation(),
-            new NatureSpellStairBuilding(),
-            new NatureSpellStoneSkin(),
-            new NatureSpellResistanceTrue(),
-            new NatureSpellAnimalFriendship(),
-            new NatureSpellStoneTell(),
-            new NatureSpellWallOfStone(),
-            new NatureSpellProtectFromCorrosion()
+        public override Spell[] Spells => new Spell[]
+        {
+            SaveGame.SingletonRepository.Spells.Get<NatureSpellDoorCreation>(),
+            SaveGame.SingletonRepository.Spells.Get<NatureSpellStairBuilding>(),
+            SaveGame.SingletonRepository.Spells.Get<NatureSpellStoneSkin>(),
+            SaveGame.SingletonRepository.Spells.Get<NatureSpellResistanceTrue>(),
+            SaveGame.SingletonRepository.Spells.Get<NatureSpellAnimalFriendship>(),
+            SaveGame.SingletonRepository.Spells.Get<NatureSpellStoneTell>(),
+            SaveGame.SingletonRepository.Spells.Get<NatureSpellWallOfStone>(),
+            SaveGame.SingletonRepository.Spells.Get<NatureSpellProtectFromCorrosion>()
         };
     }
 }

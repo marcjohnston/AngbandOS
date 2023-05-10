@@ -1,3 +1,4 @@
+[Serializable]
 internal class MageDetectObjectsFolkSpell : ClassSpell
 {
     private MageDetectObjectsFolkSpell(SaveGame saveGame) : base(saveGame) { }

@@ -21,15 +21,16 @@ namespace AngbandOS.Core.ItemCategories
         public override bool KindIsGood => false;
         public override Item CreateItem() => new CallOfTheWildNatureBookItem(SaveGame);
 
-        public override Spell[] Spells => new Spell[] {
-            new NatureSpellDetectCreatures(),
-            new NatureSpellFirstAid(),
-            new NatureSpellDetectDoorsAndTraps(),
-            new NatureSpellForaging(),
-            new NatureSpellDaylight(),
-            new NatureSpellAnimalTaming(),
-            new NatureSpellResistEnvironment(),
-            new NatureSpellCureWoundsAndPoison()
+        public override Spell[] Spells => new Spell[]
+        {
+            SaveGame.SingletonRepository.Spells.Get<NatureSpellDetectCreatures>(),
+            SaveGame.SingletonRepository.Spells.Get<NatureSpellFirstAid>(),
+            SaveGame.SingletonRepository.Spells.Get<NatureSpellDetectDoorsAndTraps>(),
+            SaveGame.SingletonRepository.Spells.Get<NatureSpellForaging>(),
+            SaveGame.SingletonRepository.Spells.Get<NatureSpellDaylight>(),
+            SaveGame.SingletonRepository.Spells.Get<NatureSpellAnimalTaming>(),
+            SaveGame.SingletonRepository.Spells.Get<NatureSpellResistEnvironment>(),
+            SaveGame.SingletonRepository.Spells.Get<NatureSpellCureWoundsAndPoison>()
         };
     }
 }

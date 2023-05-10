@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Corporeal
     [Serializable]
     internal class CorporealSpellHeroism : Spell
     {
+        private CorporealSpellHeroism(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Player.TimedHeroism.AddTimer(Program.Rng.DieRoll(25) + 25);

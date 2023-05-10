@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Life
     [Serializable]
     internal class LifeSpellDetectTrapsAndSecretDoors : Spell
     {
+        private LifeSpellDetectTrapsAndSecretDoors(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.DetectTraps();

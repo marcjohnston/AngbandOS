@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Tarot
     [Serializable]
     internal class TarotSpellDeathDealing : Spell
     {
+        private TarotSpellDeathDealing(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.DispelLiving(saveGame.Player.Level * 3);

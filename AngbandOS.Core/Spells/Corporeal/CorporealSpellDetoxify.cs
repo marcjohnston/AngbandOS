@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Corporeal
     [Serializable]
     internal class CorporealSpellDetoxify : Spell
     {
+        private CorporealSpellDetoxify(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Player.TimedPoison.ResetTimer();

@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Death
     [Serializable]
     internal class DeathSpellDetectEvil : Spell
     {
+        private DeathSpellDetectEvil(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.DetectMonstersEvil();

@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Corporeal
     [Serializable]
     internal class CorporealSpellHaste : Spell
     {
+        private CorporealSpellHaste(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             if (saveGame.Player.TimedHaste.TurnsRemaining == 0)

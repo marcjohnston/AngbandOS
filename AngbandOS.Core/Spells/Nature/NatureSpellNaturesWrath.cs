@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Nature
     [Serializable]
     internal class NatureSpellNaturesWrath : Spell
     {
+        private NatureSpellNaturesWrath(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.DispelMonsters(saveGame.Player.Level * 4);

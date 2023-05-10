@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Chaos
     [Serializable]
     internal class ChaosSpellAlterReality : Spell
     {
+        private ChaosSpellAlterReality(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.MsgPrint("The world changes!");

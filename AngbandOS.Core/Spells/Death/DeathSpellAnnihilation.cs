@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Death
     [Serializable]
     internal class DeathSpellAnnihilation : Spell
     {
+        private DeathSpellAnnihilation(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Player.Mana -= 100;

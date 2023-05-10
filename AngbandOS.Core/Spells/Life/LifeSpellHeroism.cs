@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Life
     [Serializable]
     internal class LifeSpellHeroism : Spell
     {
+        private LifeSpellHeroism(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Player.TimedHeroism.AddTimer(Program.Rng.DieRoll(25) + 25);

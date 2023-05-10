@@ -25,15 +25,16 @@ namespace AngbandOS.Core.ItemCategories
         public override bool KindIsGood => true;
         public override Item CreateItem() => new CthaatAquadingenNatureBookItem(SaveGame);
 
-        public override Spell[] Spells => new Spell[] {
-            new NatureSpellEarthquake(),
-            new NatureSpellWhirlwindAttack(),
-            new NatureSpellBlizzard(),
-            new NatureSpellLightningStorm(),
-            new NatureSpellWhirlpool(),
-            new NatureSpellCallSunlight(),
-            new NatureSpellElementalBranding(),
-            new NatureSpellNaturesWrath()
+        public override Spell[] Spells => new Spell[]
+        {
+            SaveGame.SingletonRepository.Spells.Get<NatureSpellEarthquake>(),
+            SaveGame.SingletonRepository.Spells.Get<NatureSpellWhirlwindAttack>(),
+            SaveGame.SingletonRepository.Spells.Get<NatureSpellBlizzard>(),
+            SaveGame.SingletonRepository.Spells.Get<NatureSpellLightningStorm>(),
+            SaveGame.SingletonRepository.Spells.Get<NatureSpellWhirlpool>(),
+            SaveGame.SingletonRepository.Spells.Get<NatureSpellCallSunlight>(),
+            SaveGame.SingletonRepository.Spells.Get<NatureSpellElementalBranding>(),
+            SaveGame.SingletonRepository.Spells.Get<NatureSpellNaturesWrath>()
         };
     }
 }

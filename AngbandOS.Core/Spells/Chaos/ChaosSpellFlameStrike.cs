@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Chaos
     [Serializable]
     internal class ChaosSpellFlameStrike : Spell
     {
+        private ChaosSpellFlameStrike(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.FireBall(new FireProjectile(saveGame), 0, 150 + (2 * saveGame.Player.Level), 8);

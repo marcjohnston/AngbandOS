@@ -23,14 +23,14 @@ namespace AngbandOS.Core.ItemCategories
 
         public override Spell[] Spells => new Spell[]
         {
-            new SorcerySpellDetectMonsters(),
-            new SorcerySpellPhaseDoor(),
-            new SorcerySpellDetectDoorsAndTraps(),
-            new SorcerySpellLightArea(),
-            new SorcerySpellConfuseMonster(),
-            new SorcerySpellTeleport(),
-            new SorcerySpellSleepMonster(),
-            new SorcerySpellRecharging()
+            SaveGame.SingletonRepository.Spells.Get<SorcerySpellDetectMonsters>(),
+            SaveGame.SingletonRepository.Spells.Get<SorcerySpellPhaseDoor>(),
+            SaveGame.SingletonRepository.Spells.Get<SorcerySpellDetectDoorsAndTraps>(),
+            SaveGame.SingletonRepository.Spells.Get<SorcerySpellLightArea>(),
+            SaveGame.SingletonRepository.Spells.Get<SorcerySpellConfuseMonster>(),
+            SaveGame.SingletonRepository.Spells.Get<SorcerySpellTeleport>(),
+            SaveGame.SingletonRepository.Spells.Get<SorcerySpellSleepMonster>(),
+            SaveGame.SingletonRepository.Spells.Get<SorcerySpellRecharging>()
         };
     }
 }

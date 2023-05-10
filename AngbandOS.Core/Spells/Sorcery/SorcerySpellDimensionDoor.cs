@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery
     [Serializable]
     internal class SorcerySpellDimensionDoor : Spell
     {
+        private SorcerySpellDimensionDoor(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.MsgPrint("You open a dimensional gate. Choose a destination.");

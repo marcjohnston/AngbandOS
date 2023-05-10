@@ -11,6 +11,13 @@ namespace AngbandOS.Core.Spells
     [Serializable]
     internal abstract class Spell
     {
+        protected readonly SaveGame SaveGame;
+
+        protected Spell(SaveGame saveGame)
+        {
+            SaveGame = saveGame;
+        }
+
         /// <summary>
         /// Returns true, if the spell has been forgotten because the players level dropped to low.  When true, Learned is set to false.
         /// </summary>

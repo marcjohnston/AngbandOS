@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Folk
     [Serializable]
     internal class FolkSpellTeleport : Spell
     {
+        private FolkSpellTeleport(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.TeleportPlayer(saveGame.Player.Level * 5);

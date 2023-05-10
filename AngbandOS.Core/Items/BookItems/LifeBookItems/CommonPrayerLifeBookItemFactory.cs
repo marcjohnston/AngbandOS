@@ -20,15 +20,16 @@ namespace AngbandOS.Core.ItemCategories
         public override bool KindIsGood => false;
         public override Item CreateItem() => new CommonPrayerLifeBookItem(SaveGame);
 
-        public override Spell[] Spells => new Spell[] {
-            new LifeSpellDetectEvil(),
-            new LifeSpellCureLightWounds(),
-            new LifeSpellBless(),
-            new LifeSpellRemoveFear(),
-            new LifeSpellCallLight(),
-            new LifeSpellDetectTrapsAndSecretDoors(),
-            new LifeSpellCureMediumWounds(),
-            new LifeSpellSatisfyHunger()
+        public override Spell[] Spells => new Spell[]
+        {
+            SaveGame.SingletonRepository.Spells.Get<LifeSpellDetectEvil>(),
+            SaveGame.SingletonRepository.Spells.Get<LifeSpellCureLightWounds>(),
+            SaveGame.SingletonRepository.Spells.Get<LifeSpellBless>(),
+            SaveGame.SingletonRepository.Spells.Get<LifeSpellRemoveFear>(),
+            SaveGame.SingletonRepository.Spells.Get<LifeSpellCallLight>(),
+            SaveGame.SingletonRepository.Spells.Get<LifeSpellDetectTrapsAndSecretDoors>(),
+            SaveGame.SingletonRepository.Spells.Get<LifeSpellCureMediumWounds>(),
+            SaveGame.SingletonRepository.Spells.Get<LifeSpellSatisfyHunger>()
        };
 
     }

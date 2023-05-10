@@ -1,3 +1,4 @@
+[Serializable]
 internal class RangerResistTrueCorporealSpell : ClassSpell
 {
     private RangerResistTrueCorporealSpell(SaveGame saveGame) : base(saveGame) { }

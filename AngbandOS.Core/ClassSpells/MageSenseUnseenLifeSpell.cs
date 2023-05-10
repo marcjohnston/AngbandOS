@@ -1,3 +1,4 @@
+[Serializable]
 internal class MageSenseUnseenLifeSpell : ClassSpell
 {
     private MageSenseUnseenLifeSpell(SaveGame saveGame) : base(saveGame) { }

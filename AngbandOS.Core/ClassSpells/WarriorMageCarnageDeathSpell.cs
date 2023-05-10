@@ -1,3 +1,4 @@
+[Serializable]
 internal class WarriorMageCarnageDeathSpell : ClassSpell
 {
     private WarriorMageCarnageDeathSpell(SaveGame saveGame) : base(saveGame) { }

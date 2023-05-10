@@ -1,3 +1,4 @@
+[Serializable]
 internal class MageBlinkFolkSpell : ClassSpell
 {
     private MageBlinkFolkSpell(SaveGame saveGame) : base(saveGame) { }

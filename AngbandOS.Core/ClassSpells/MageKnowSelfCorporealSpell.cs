@@ -1,3 +1,4 @@
+[Serializable]
 internal class MageKnowSelfCorporealSpell : ClassSpell
 {
     private MageKnowSelfCorporealSpell(SaveGame saveGame) : base(saveGame) { }

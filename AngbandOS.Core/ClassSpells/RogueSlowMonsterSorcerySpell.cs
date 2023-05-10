@@ -1,3 +1,4 @@
+[Serializable]
 internal class RogueSlowMonsterSorcerySpell : ClassSpell
 {
     private RogueSlowMonsterSorcerySpell(SaveGame saveGame) : base(saveGame) { }

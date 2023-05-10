@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Life
     [Serializable]
     internal class LifeSpellHolyWord : Spell
     {
+        private LifeSpellHolyWord(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.DispelEvil(saveGame.Player.Level * 4);

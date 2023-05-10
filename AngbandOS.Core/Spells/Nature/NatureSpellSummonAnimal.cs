@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Nature
     [Serializable]
     internal class NatureSpellSummonAnimal : Spell
     {
+        private NatureSpellSummonAnimal(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             if (!saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new AnimalRangerMonsterSelector(), true))

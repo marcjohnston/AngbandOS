@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Death
     [Serializable]
     internal class DeathSpellDispelGood : Spell
     {
+        private DeathSpellDispelGood(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.DispelGood(saveGame.Player.Level * 4);

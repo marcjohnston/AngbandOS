@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Death
     [Serializable]
     internal class DeathSpellEsoteria : Spell
     {
+        private DeathSpellEsoteria(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             if (Program.Rng.DieRoll(50) > saveGame.Player.Level)

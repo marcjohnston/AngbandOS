@@ -1,3 +1,4 @@
+[Serializable]
 internal class DruidRayOfSunlightNatureSpell : ClassSpell
 {
     private DruidRayOfSunlightNatureSpell(SaveGame saveGame) : base(saveGame) { }

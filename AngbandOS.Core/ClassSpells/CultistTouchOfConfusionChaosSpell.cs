@@ -1,3 +1,4 @@
+[Serializable]
 internal class CultistTouchOfConfusionChaosSpell : ClassSpell
 {
     private CultistTouchOfConfusionChaosSpell(SaveGame saveGame) : base(saveGame) { }

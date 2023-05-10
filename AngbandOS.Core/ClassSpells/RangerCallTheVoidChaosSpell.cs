@@ -1,3 +1,4 @@
+[Serializable]
 internal class RangerCallTheVoidChaosSpell : ClassSpell
 {
     private RangerCallTheVoidChaosSpell(SaveGame saveGame) : base(saveGame) { }

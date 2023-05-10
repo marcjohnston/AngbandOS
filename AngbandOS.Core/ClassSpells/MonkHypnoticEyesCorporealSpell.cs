@@ -1,3 +1,4 @@
+[Serializable]
 internal class MonkHypnoticEyesCorporealSpell : ClassSpell
 {
     private MonkHypnoticEyesCorporealSpell(SaveGame saveGame) : base(saveGame) { }

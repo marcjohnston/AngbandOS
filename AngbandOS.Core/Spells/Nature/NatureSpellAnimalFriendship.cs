@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Nature
     [Serializable]
     internal class NatureSpellAnimalFriendship : Spell
     {
+        private NatureSpellAnimalFriendship(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.CharmAnimals(saveGame.Player.Level * 2);

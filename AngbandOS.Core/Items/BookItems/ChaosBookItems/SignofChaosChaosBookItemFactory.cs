@@ -22,14 +22,14 @@ namespace AngbandOS.Core.ItemCategories
 
         public override Spell[] Spells => new Spell[]
         {
-            new ChaosSpellMagicMissile(),
-            new ChaosSpellTrapAndDoorDestruction(),
-            new ChaosSpellFlashOfLight(),
-            new ChaosSpellTouchOfConfusion(),
-            new ChaosSpellManaBurst(),
-            new ChaosSpellFireBolt(),
-            new ChaosSpellFistOfForce(),
-            new ChaosSpellTeleportSelf()
+            SaveGame.SingletonRepository.Spells.Get<ChaosSpellMagicMissile>(),
+            SaveGame.SingletonRepository.Spells.Get<ChaosSpellTrapAndDoorDestruction>(),
+            SaveGame.SingletonRepository.Spells.Get<ChaosSpellFlashOfLight>(),
+            SaveGame.SingletonRepository.Spells.Get<ChaosSpellTouchOfConfusion>(),
+            SaveGame.SingletonRepository.Spells.Get<ChaosSpellManaBurst>(),
+            SaveGame.SingletonRepository.Spells.Get<ChaosSpellFireBolt>(),
+            SaveGame.SingletonRepository.Spells.Get<ChaosSpellFistOfForce>(),
+            SaveGame.SingletonRepository.Spells.Get<ChaosSpellTeleportSelf>()
         };
 
         public override Item CreateItem() => new SignOfChaosChaosBookItem(SaveGame);

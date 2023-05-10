@@ -25,15 +25,16 @@ namespace AngbandOS.Core.ItemCategories
         public override bool KindIsGood => true;
         public override Item CreateItem() => new PonapeScriptureLifeBookItem(SaveGame);
 
-        public override Spell[] Spells => new Spell[] {
-            new LifeSpellHeroism(),
-            new LifeSpellPrayer(),
-            new LifeSpellBlessWeapon(),
-            new LifeSpellRestoration(),
-            new LifeSpellHealingTrue(),
-            new LifeSpellHolyVision(),
-            new LifeSpellDivineIntervention(),
-            new LifeSpellHolyInvulnerability()
+        public override Spell[] Spells => new Spell[]
+        {
+            SaveGame.SingletonRepository.Spells.Get<LifeSpellHeroism>(),
+            SaveGame.SingletonRepository.Spells.Get<LifeSpellPrayer>(),
+            SaveGame.SingletonRepository.Spells.Get<LifeSpellBlessWeapon>(),
+            SaveGame.SingletonRepository.Spells.Get<LifeSpellRestoration>(),
+            SaveGame.SingletonRepository.Spells.Get<LifeSpellHealingTrue>(),
+            SaveGame.SingletonRepository.Spells.Get<LifeSpellHolyVision>(),
+            SaveGame.SingletonRepository.Spells.Get<LifeSpellDivineIntervention>(),
+            SaveGame.SingletonRepository.Spells.Get<LifeSpellHolyInvulnerability>()
         };
     }
 }

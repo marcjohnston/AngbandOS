@@ -27,14 +27,14 @@ namespace AngbandOS.Core.ItemCategories
 
         public override Spell[] Spells => new Spell[]
         {
-            new ChaosSpellGravityBeam(),
-            new ChaosSpellMeteorSwarm(),
-            new ChaosSpellFlameStrike(),
-            new ChaosSpellCallChaos(),
-            new ChaosSpellShardBall(),
-            new ChaosSpellManaStorm(),
-            new ChaosSpellBreatheChaos(),
-            new ChaosSpellCallTheVoid()
+            SaveGame.SingletonRepository.Spells.Get<ChaosSpellGravityBeam>(),
+            SaveGame.SingletonRepository.Spells.Get<ChaosSpellMeteorSwarm>(),
+            SaveGame.SingletonRepository.Spells.Get<ChaosSpellFlameStrike>(),
+            SaveGame.SingletonRepository.Spells.Get<ChaosSpellCallChaos>(),
+            SaveGame.SingletonRepository.Spells.Get<ChaosSpellShardBall>(),
+            SaveGame.SingletonRepository.Spells.Get<ChaosSpellManaStorm>(),
+            SaveGame.SingletonRepository.Spells.Get<ChaosSpellBreatheChaos>(),
+            SaveGame.SingletonRepository.Spells.Get<ChaosSpellCallTheVoid>()
         };
     }
 }

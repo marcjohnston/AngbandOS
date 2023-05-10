@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Nature
     [Serializable]
     internal class NatureSpellResistanceTrue : Spell
     {
+        private NatureSpellResistanceTrue(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Player.TimedAcidResistance.AddTimer(Program.Rng.DieRoll(20) + 20);

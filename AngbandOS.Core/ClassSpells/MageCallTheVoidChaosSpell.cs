@@ -1,3 +1,4 @@
+[Serializable]
 internal class MageCallTheVoidChaosSpell : ClassSpell
 {
     private MageCallTheVoidChaosSpell(SaveGame saveGame) : base(saveGame) { }

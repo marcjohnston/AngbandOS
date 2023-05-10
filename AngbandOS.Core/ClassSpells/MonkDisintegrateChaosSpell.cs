@@ -1,3 +1,4 @@
+[Serializable]
 internal class MonkDisintegrateChaosSpell : ClassSpell
 {
     private MonkDisintegrateChaosSpell(SaveGame saveGame) : base(saveGame) { }

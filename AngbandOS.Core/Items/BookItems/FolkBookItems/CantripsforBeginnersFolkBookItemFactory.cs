@@ -20,15 +20,16 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 30;
         public override bool KindIsGood => false;
         public override Item CreateItem() => new CantripsforBeginnersFolkBookItem(SaveGame);
-        public override Spell[] Spells => new Spell[] {
-            new FolkSpellZap(),
-            new FolkSpellWizardLock(),
-            new FolkSpellDetectInvisibility(),
-            new FolkSpellDetectMonsters(),
-            new FolkSpellBlink(),
-            new FolkSpellLightArea(),
-            new FolkSpellTrapAndDoorDestruction(),
-            new FolkSpellCureLightWounds(),
+        public override Spell[] Spells => new Spell[]
+        {
+            SaveGame.SingletonRepository.Spells.Get<FolkSpellZap>(),
+            SaveGame.SingletonRepository.Spells.Get<FolkSpellWizardLock>(),
+            SaveGame.SingletonRepository.Spells.Get<FolkSpellDetectInvisibility>(),
+            SaveGame.SingletonRepository.Spells.Get<FolkSpellDetectMonsters>(),
+            SaveGame.SingletonRepository.Spells.Get<FolkSpellBlink>(),
+            SaveGame.SingletonRepository.Spells.Get<FolkSpellLightArea>(),
+            SaveGame.SingletonRepository.Spells.Get<FolkSpellTrapAndDoorDestruction>(),
+            SaveGame.SingletonRepository.Spells.Get<FolkSpellCureLightWounds>(),
         };
     }
 }

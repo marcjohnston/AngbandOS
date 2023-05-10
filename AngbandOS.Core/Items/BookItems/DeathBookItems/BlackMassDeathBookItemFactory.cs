@@ -23,14 +23,14 @@ namespace AngbandOS.Core.ItemCategories
 
         public override Spell[] Spells => new Spell[]
         {
-            new DeathSpellOrbOfEntropy(),
-            new DeathSpellNetherBolt(),
-            new DeathSpellTerror(),
-            new DeathSpellVampiricDrain(),
-            new DeathSpellPoisonBranding(),
-            new DeathSpellDispelGood(),
-            new DeathSpellCarnage(),
-            new DeathSpellRestoreLife()
+            SaveGame.SingletonRepository.Spells.Get<DeathSpellOrbOfEntropy>(),
+            SaveGame.SingletonRepository.Spells.Get<DeathSpellNetherBolt>(),
+            SaveGame.SingletonRepository.Spells.Get<DeathSpellTerror>(),
+            SaveGame.SingletonRepository.Spells.Get<DeathSpellVampiricDrain>(),
+            SaveGame.SingletonRepository.Spells.Get<DeathSpellPoisonBranding>(),
+            SaveGame.SingletonRepository.Spells.Get<DeathSpellDispelGood>(),
+            SaveGame.SingletonRepository.Spells.Get<DeathSpellCarnage>(),
+            SaveGame.SingletonRepository.Spells.Get<DeathSpellRestoreLife>()
         };
     }
 }

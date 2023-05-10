@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Death
     [Serializable]
     internal class DeathSpellEvocation : Spell
     {
+        private DeathSpellEvocation(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.DispelMonsters(saveGame.Player.Level * 4);

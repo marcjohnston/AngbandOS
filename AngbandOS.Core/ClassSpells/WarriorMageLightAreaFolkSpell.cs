@@ -1,3 +1,4 @@
+[Serializable]
 internal class WarriorMageLightAreaFolkSpell : ClassSpell
 {
     private WarriorMageLightAreaFolkSpell(SaveGame saveGame) : base(saveGame) { }

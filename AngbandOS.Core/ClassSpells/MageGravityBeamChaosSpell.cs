@@ -1,3 +1,4 @@
+[Serializable]
 internal class MageGravityBeamChaosSpell : ClassSpell
 {
     private MageGravityBeamChaosSpell(SaveGame saveGame) : base(saveGame) { }

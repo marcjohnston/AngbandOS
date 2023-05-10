@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Chaos
     [Serializable]
     internal class ChaosSpellSummonDemon : Spell
     {
+        private ChaosSpellSummonDemon(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             if (Program.Rng.DieRoll(3) == 1)

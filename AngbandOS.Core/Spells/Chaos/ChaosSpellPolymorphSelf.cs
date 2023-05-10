@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Chaos
     [Serializable]
     internal class ChaosSpellPolymorphSelf : Spell
     {
+        private ChaosSpellPolymorphSelf(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Player.PolymorphSelf(saveGame);

@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Folk
     [Serializable]
     internal class FolkSpellResistCold : Spell
     {
+        private FolkSpellResistCold(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Player.TimedColdResistance.AddTimer(Program.Rng.DieRoll(20) + 20);

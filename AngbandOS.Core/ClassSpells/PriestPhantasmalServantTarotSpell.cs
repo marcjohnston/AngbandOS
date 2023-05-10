@@ -1,3 +1,4 @@
+[Serializable]
 internal class PriestPhantasmalServantTarotSpell : ClassSpell
 {
     private PriestPhantasmalServantTarotSpell(SaveGame saveGame) : base(saveGame) { }

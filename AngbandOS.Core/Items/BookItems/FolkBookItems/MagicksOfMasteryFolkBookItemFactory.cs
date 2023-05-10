@@ -20,15 +20,16 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 30;
         public override bool KindIsGood => true;
         public override Item CreateItem() => new MagicksOfMasteryFolkBookItem(SaveGame);
-        public override Spell[] Spells => new Spell[] {
-            new FolkSpellRecharging(),
-            new FolkSpellTeleportLevel(),
-            new FolkSpellIdentify(),
-            new FolkSpellTeleportAway(),
-            new FolkSpellElementalBall(),
-            new FolkSpellDetection(),
-            new FolkSpellWordOfRecall(),
-            new FolkSpellClairvoyance()
+        public override Spell[] Spells => new Spell[]
+        {
+            SaveGame.SingletonRepository.Spells.Get<FolkSpellRecharging>(),
+            SaveGame.SingletonRepository.Spells.Get<FolkSpellTeleportLevel>(),
+            SaveGame.SingletonRepository.Spells.Get<FolkSpellIdentify>(),
+            SaveGame.SingletonRepository.Spells.Get<FolkSpellTeleportAway>(),
+            SaveGame.SingletonRepository.Spells.Get<FolkSpellElementalBall>(),
+            SaveGame.SingletonRepository.Spells.Get<FolkSpellDetection>(),
+            SaveGame.SingletonRepository.Spells.Get<FolkSpellWordOfRecall>(),
+            SaveGame.SingletonRepository.Spells.Get<FolkSpellClairvoyance>()
         };
     }
 }

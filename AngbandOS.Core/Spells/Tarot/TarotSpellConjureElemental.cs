@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Tarot
     [Serializable]
     internal class TarotSpellConjureElemental : Spell
     {
+        private TarotSpellConjureElemental(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             if (Program.Rng.DieRoll(6) > 3)

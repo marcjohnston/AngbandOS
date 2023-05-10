@@ -1,3 +1,4 @@
+[Serializable]
 internal class MageWhirlpoolNatureSpell : ClassSpell
 {
     private MageWhirlpoolNatureSpell(SaveGame saveGame) : base(saveGame) { }

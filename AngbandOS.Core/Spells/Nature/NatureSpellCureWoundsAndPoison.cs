@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Nature
     [Serializable]
     internal class NatureSpellCureWoundsAndPoison : Spell
     {
+        private NatureSpellCureWoundsAndPoison(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Player.TimedBleeding.ResetTimer();

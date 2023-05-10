@@ -1,3 +1,4 @@
+[Serializable]
 internal class MageElderSignLifeSpell : ClassSpell
 {
     private MageElderSignLifeSpell(SaveGame saveGame) : base(saveGame) { }

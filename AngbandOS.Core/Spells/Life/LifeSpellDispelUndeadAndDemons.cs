@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Life
     [Serializable]
     internal class LifeSpellDispelUndeadAndDemons : Spell
     {
+        private LifeSpellDispelUndeadAndDemons(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.DispelUndead(saveGame.Player.Level * 3);

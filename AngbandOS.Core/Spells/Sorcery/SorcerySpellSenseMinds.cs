@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery
     [Serializable]
     internal class SorcerySpellSenseMinds : Spell
     {
+        private SorcerySpellSenseMinds(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Player.TimedTelepathy.AddTimer(Program.Rng.DieRoll(30) + 25);

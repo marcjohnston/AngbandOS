@@ -25,15 +25,16 @@ namespace AngbandOS.Core.ItemCategories
         public override bool KindIsGood => true;
         public override Item CreateItem() => new DholChantsLifeBookItem(SaveGame);
 
-        public override Spell[] Spells => new Spell[] {
-            new LifeSpellExorcism(),
-            new LifeSpellDispelCurse(),
-            new LifeSpellDispelUndeadAndDemons(),
-            new LifeSpellDayOfTheDove(),
-            new LifeSpellDispelEvil(),
-            new LifeSpellBanish(),
-            new LifeSpellHolyWord(),
-            new LifeSpellWardingTrue()
+        public override Spell[] Spells => new Spell[]
+        {
+            SaveGame.SingletonRepository.Spells.Get<LifeSpellExorcism>(),
+            SaveGame.SingletonRepository.Spells.Get<LifeSpellDispelCurse>(),
+            SaveGame.SingletonRepository.Spells.Get<LifeSpellDispelUndeadAndDemons>(),
+            SaveGame.SingletonRepository.Spells.Get<LifeSpellDayOfTheDove>(),
+            SaveGame.SingletonRepository.Spells.Get<LifeSpellDispelEvil>(),
+            SaveGame.SingletonRepository.Spells.Get<LifeSpellBanish>(),
+            SaveGame.SingletonRepository.Spells.Get<LifeSpellHolyWord>(),
+            SaveGame.SingletonRepository.Spells.Get<LifeSpellWardingTrue>()
         };
     }
 }

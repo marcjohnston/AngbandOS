@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Nature
     [Serializable]
     internal class NatureSpellCallSunlight : Spell
     {
+        private NatureSpellCallSunlight(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.FireBall(new LightProjectile(saveGame), 0, 150, 8);

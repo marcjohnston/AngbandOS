@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Nature
     [Serializable]
     internal class NatureSpellEarthquake : Spell
     {
+        private NatureSpellEarthquake(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Earthquake(saveGame.Player.MapY, saveGame.Player.MapX, 10);

@@ -1,3 +1,4 @@
+[Serializable]
 internal class RangerDaylightNatureSpell : ClassSpell
 {
     private RangerDaylightNatureSpell(SaveGame saveGame) : base(saveGame) { }

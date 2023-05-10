@@ -1,3 +1,4 @@
+[Serializable]
 internal class MageProtectFromCorrosionNatureSpell : ClassSpell
 {
     private MageProtectFromCorrosionNatureSpell(SaveGame saveGame) : base(saveGame) { }

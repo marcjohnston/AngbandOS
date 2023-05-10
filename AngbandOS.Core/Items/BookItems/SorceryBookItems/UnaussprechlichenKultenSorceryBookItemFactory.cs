@@ -27,14 +27,14 @@ namespace AngbandOS.Core.ItemCategories
 
         public override Spell[] Spells => new Spell[]
         {
-            new SorcerySpellDetectObjectsAndTreasure(),
-            new SorcerySpellDetectEnchantment(),
-            new SorcerySpellCharmMonster(),
-            new SorcerySpellDimensionDoor(),
-            new SorcerySpellSenseMinds(),
-            new SorcerySpellSelfKnowledge(),
-            new SorcerySpellTeleportLevel(),
-            new SorcerySpellWordOfRecall()
+            SaveGame.SingletonRepository.Spells.Get<SorcerySpellDetectObjectsAndTreasure>(),
+            SaveGame.SingletonRepository.Spells.Get<SorcerySpellDetectEnchantment>(),
+            SaveGame.SingletonRepository.Spells.Get<SorcerySpellCharmMonster>(),
+            SaveGame.SingletonRepository.Spells.Get<SorcerySpellDimensionDoor>(),
+            SaveGame.SingletonRepository.Spells.Get<SorcerySpellSenseMinds>(),
+            SaveGame.SingletonRepository.Spells.Get<SorcerySpellSelfKnowledge>(),
+            SaveGame.SingletonRepository.Spells.Get<SorcerySpellTeleportLevel>(),
+            SaveGame.SingletonRepository.Spells.Get<SorcerySpellWordOfRecall>()
         };
     }
 }

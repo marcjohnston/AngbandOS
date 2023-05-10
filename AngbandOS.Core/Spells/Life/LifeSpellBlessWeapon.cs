@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Life
     [Serializable]
     internal class LifeSpellBlessWeapon : Spell
     {
+        private LifeSpellBlessWeapon(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             Worked = saveGame.BlessWeapon();

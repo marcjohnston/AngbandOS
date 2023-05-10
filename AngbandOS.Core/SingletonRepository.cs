@@ -41,6 +41,7 @@ namespace AngbandOS.Core
         public SingletonDictionary<HelpGroup> HelpGroups;
         public SingletonDictionary<StoreOwner> StoreOwners;
         public SingletonList<ClassSpell> ClassSpells; // TODO: This needs to use a DualDictionary
+        public SingletonDictionary<Spell> Spells;
 
         public SingletonList<string> ShopKeeperGoodComments;
         public SingletonList<string> ShopKeeperBargainComments;
@@ -104,6 +105,7 @@ namespace AngbandOS.Core
         public void Initialize(SaveGame saveGame)
         {
             ClassSpells = new SingletonList<ClassSpell>(saveGame, LoadTypesFromAssembly<ClassSpell>(saveGame));
+            Spells = new SingletonDictionary<Spell>(saveGame, LoadTypesFromAssembly<Spell>(saveGame));
 
             InGameCommands = new SingletonDictionary<GameCommand>(saveGame, LoadTypesFromAssembly<GameCommand>(saveGame));
             WizardCommands = new SingletonDictionary<WizardCommand>(saveGame, LoadTypesFromAssembly<WizardCommand>(saveGame));

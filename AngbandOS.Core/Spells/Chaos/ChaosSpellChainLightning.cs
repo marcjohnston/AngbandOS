@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Chaos
     [Serializable]
     internal class ChaosSpellChainLightning : Spell
     {
+        private ChaosSpellChainLightning(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             for (int dir = 0; dir <= 9; dir++)

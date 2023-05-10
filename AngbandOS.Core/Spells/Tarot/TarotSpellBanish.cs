@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Tarot
     [Serializable]
     internal class TarotSpellBanish : Spell
     {
+        private TarotSpellBanish(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.BanishMonsters(saveGame.Player.Level * 4);

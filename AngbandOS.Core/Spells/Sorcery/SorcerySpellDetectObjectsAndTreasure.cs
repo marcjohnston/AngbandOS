@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery
     [Serializable]
     internal class SorcerySpellDetectObjectsAndTreasure : Spell
     {
+        private SorcerySpellDetectObjectsAndTreasure(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.DetectObjectsNormal();

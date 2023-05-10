@@ -1,3 +1,4 @@
+[Serializable]
 internal class FanaticManaBurstChaosSpell : ClassSpell
 {
     private FanaticManaBurstChaosSpell(SaveGame saveGame) : base(saveGame) { }

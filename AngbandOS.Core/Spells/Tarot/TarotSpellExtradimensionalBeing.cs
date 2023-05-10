@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Tarot
     [Serializable]
     internal class TarotSpellExtradimensionalBeing : Spell
     {
+        private TarotSpellExtradimensionalBeing(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.MsgPrint("You have turned into a Extradimensional Being.");

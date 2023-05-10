@@ -1,3 +1,4 @@
+[Serializable]
 internal class PaladinCallLightLifeSpell : ClassSpell
 {
     private PaladinCallLightLifeSpell(SaveGame saveGame) : base(saveGame) { }

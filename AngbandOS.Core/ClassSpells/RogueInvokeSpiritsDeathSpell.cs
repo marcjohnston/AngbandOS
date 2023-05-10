@@ -1,3 +1,4 @@
+[Serializable]
 internal class RogueInvokeSpiritsDeathSpell : ClassSpell
 {
     private RogueInvokeSpiritsDeathSpell(SaveGame saveGame) : base(saveGame) { }

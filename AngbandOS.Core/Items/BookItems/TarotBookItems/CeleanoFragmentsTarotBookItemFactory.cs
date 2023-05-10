@@ -27,14 +27,14 @@ namespace AngbandOS.Core.ItemCategories
 
         public override Spell[] Spells => new Spell[]
         {
-            new TarotSpellEtherealDivination(),
-            new TarotSpellAstralLore(),
-            new TarotSpellSummonUndead(),
-            new TarotSpellSummonDragon(),
-            new TarotSpellMassSummons(),
-            new TarotSpellSummonDemon(),
-            new TarotSpellSummonAncientDragon(),
-            new TarotSpellSummonGreaterUndead()
+            SaveGame.SingletonRepository.Spells.Get<TarotSpellEtherealDivination>(),
+            SaveGame.SingletonRepository.Spells.Get<TarotSpellAstralLore>(),
+            SaveGame.SingletonRepository.Spells.Get<TarotSpellSummonUndead>(),
+            SaveGame.SingletonRepository.Spells.Get<TarotSpellSummonDragon>(),
+            SaveGame.SingletonRepository.Spells.Get<TarotSpellMassSummons>(),
+            SaveGame.SingletonRepository.Spells.Get<TarotSpellSummonDemon>(),
+            SaveGame.SingletonRepository.Spells.Get<TarotSpellSummonAncientDragon>(),
+            SaveGame.SingletonRepository.Spells.Get<TarotSpellSummonGreaterUndead>()
         };
     }
 }

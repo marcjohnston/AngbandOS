@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Corporeal
     [Serializable]
     internal class CorporealSpellStoneSkin : Spell
     {
+        private CorporealSpellStoneSkin(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Player.TimedStoneskin.AddTimer(Program.Rng.DieRoll(20) + 30);

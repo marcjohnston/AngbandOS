@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Nature
     [Serializable]
     internal class NatureSpellWhirlwindAttack : Spell
     {
+        private NatureSpellWhirlwindAttack(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             for (int dir = 0; dir <= 9; dir++)

@@ -1,3 +1,4 @@
+[Serializable]
 internal class CultistProtectFromCorrosionNatureSpell : ClassSpell
 {
     private CultistProtectFromCorrosionNatureSpell(SaveGame saveGame) : base(saveGame) { }

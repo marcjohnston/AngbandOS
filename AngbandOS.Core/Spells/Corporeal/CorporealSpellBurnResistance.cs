@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Corporeal
     [Serializable]
     internal class CorporealSpellBurnResistance : Spell
     {
+        private CorporealSpellBurnResistance(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Player.TimedFireResistance.AddTimer(Program.Rng.DieRoll(20) + 20);

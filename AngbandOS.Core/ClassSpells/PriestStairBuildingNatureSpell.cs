@@ -1,3 +1,4 @@
+[Serializable]
 internal class PriestStairBuildingNatureSpell : ClassSpell
 {
     private PriestStairBuildingNatureSpell(SaveGame saveGame) : base(saveGame) { }

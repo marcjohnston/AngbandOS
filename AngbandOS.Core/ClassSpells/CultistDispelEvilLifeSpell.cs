@@ -1,3 +1,4 @@
+[Serializable]
 internal class CultistDispelEvilLifeSpell : ClassSpell
 {
     private CultistDispelEvilLifeSpell(SaveGame saveGame) : base(saveGame) { }

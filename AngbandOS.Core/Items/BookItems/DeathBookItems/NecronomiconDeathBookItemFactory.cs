@@ -26,14 +26,14 @@ namespace AngbandOS.Core.ItemCategories
 
         public override Spell[] Spells => new Spell[]
         {
-            new DeathSpellDeathRay(),
-            new DeathSpellRaiseTheDead(),
-            new DeathSpellEsoteria(),
-            new DeathSpellWordOfDeath(),
-            new DeathSpellEvocation(),
-            new DeathSpellHellfire(),
-            new DeathSpellAnnihilation(),
-            new DeathSpellWraithform()
+            SaveGame.SingletonRepository.Spells.Get<DeathSpellDeathRay>(),
+            SaveGame.SingletonRepository.Spells.Get<DeathSpellRaiseTheDead>(),
+            SaveGame.SingletonRepository.Spells.Get<DeathSpellEsoteria>(),
+            SaveGame.SingletonRepository.Spells.Get<DeathSpellWordOfDeath>(),
+            SaveGame.SingletonRepository.Spells.Get<DeathSpellEvocation>(),
+            SaveGame.SingletonRepository.Spells.Get<DeathSpellHellfire>(),
+            SaveGame.SingletonRepository.Spells.Get<DeathSpellAnnihilation>(),
+            SaveGame.SingletonRepository.Spells.Get<DeathSpellWraithform>()
         };
 
         public override Item CreateItem() => new NecronomiconDeathBookItem(SaveGame);

@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Life
     [Serializable]
     internal class LifeSpellBless : Spell
     {
+        private LifeSpellBless(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Player.TimedBlessing.AddTimer(Program.Rng.DieRoll(12) + 12);

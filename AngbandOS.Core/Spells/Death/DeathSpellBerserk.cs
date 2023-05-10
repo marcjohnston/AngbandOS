@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Spells.Death
     [Serializable]
     internal class DeathSpellBerserk : Spell
     {
+        private DeathSpellBerserk(SaveGame saveGame) : base(saveGame) { }
         public override void Cast(SaveGame saveGame)
         {
             saveGame.Player.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(25) + 25);
