@@ -36,62 +36,7 @@ namespace AngbandOS.Core.Spells.Folk
         }
 
         public override string Name => "Zap";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 1;
-                    ManaCost = 1;
-                    BaseFailure = 20;
-                    FirstCastExperience = 4;
-                    break;
-
-                case CharacterClass.Priest:
-                    Level = 1;
-                    ManaCost = 1;
-                    BaseFailure = 20;
-                    FirstCastExperience = 4;
-                    break;
-
-                case CharacterClass.Rogue:
-                    Level = 5;
-                    ManaCost = 2;
-                    BaseFailure = 20;
-                    FirstCastExperience = 4;
-                    break;
-
-                case CharacterClass.Ranger:
-                    Level = 3;
-                    ManaCost = 2;
-                    BaseFailure = 20;
-                    FirstCastExperience = 4;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Cultist:
-                    Level = 1;
-                    ManaCost = 1;
-                    BaseFailure = 20;
-                    FirstCastExperience = 4;
-                    break;
-
-                case CharacterClass.HighMage:
-                    Level = 1;
-                    ManaCost = 1;
-                    BaseFailure = 15;
-                    FirstCastExperience = 4;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             return $"dam {3 + ((player.Level - 1) / 5)}d3";

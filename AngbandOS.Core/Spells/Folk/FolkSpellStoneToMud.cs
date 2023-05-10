@@ -21,62 +21,7 @@ namespace AngbandOS.Core.Spells.Folk
         }
 
         public override string Name => "Stone to Mud";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 20;
-                    ManaCost = 16;
-                    BaseFailure = 60;
-                    FirstCastExperience = 9;
-                    break;
-
-                case CharacterClass.Priest:
-                    Level = 22;
-                    ManaCost = 20;
-                    BaseFailure = 60;
-                    FirstCastExperience = 9;
-                    break;
-
-                case CharacterClass.Rogue:
-                    Level = 25;
-                    ManaCost = 23;
-                    BaseFailure = 60;
-                    FirstCastExperience = 9;
-                    break;
-
-                case CharacterClass.Ranger:
-                    Level = 25;
-                    ManaCost = 23;
-                    BaseFailure = 60;
-                    FirstCastExperience = 9;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Cultist:
-                    Level = 23;
-                    ManaCost = 22;
-                    BaseFailure = 60;
-                    FirstCastExperience = 9;
-                    break;
-
-                case CharacterClass.HighMage:
-                    Level = 17;
-                    ManaCost = 15;
-                    BaseFailure = 50;
-                    FirstCastExperience = 9;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             return string.Empty;

@@ -21,48 +21,7 @@ namespace AngbandOS.Core.Spells.Sorcery
         }
 
         public override string Name => "Confuse Monster";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 4;
-                    ManaCost = 4;
-                    BaseFailure = 30;
-                    FirstCastExperience = 1;
-                    break;
-
-                case CharacterClass.Rogue:
-                    Level = 13;
-                    ManaCost = 6;
-                    BaseFailure = 75;
-                    FirstCastExperience = 1;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Cultist:
-                    Level = 5;
-                    ManaCost = 5;
-                    BaseFailure = 30;
-                    FirstCastExperience = 1;
-                    break;
-
-                case CharacterClass.HighMage:
-                    Level = 3;
-                    ManaCost = 3;
-                    BaseFailure = 20;
-                    FirstCastExperience = 1;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             return string.Empty;

@@ -1,0 +1,10 @@
+internal class PaladinBlackSleepDeathSpell : ClassSpell
+{
+    private PaladinBlackSleepDeathSpell(SaveGame saveGame) : base(saveGame) { }
+    public override Type Spell => typeof(DeathSpellBlackSleep);
+    public override Type CharacterClass => typeof(PaladinCharacterClass);
+    public override int Level => 8;
+    public override int ManaCost => 8;
+    public override int BaseFailure => 30;
+    public override int FirstCastExperience => 4;
+}

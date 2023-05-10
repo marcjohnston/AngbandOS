@@ -114,7 +114,29 @@ namespace AngbandOS.Core.Spells
             return !Worked ? "untried" : Comment(player);
         }
 
-        public abstract void Initialise(int characterClass);
+        public void Initialize(SaveGame saveGame, BaseCharacterClass characterClass)
+        {
+            foreach (ClassSpell classSpell in saveGame.SingletonRepository.ClassSpells)
+            {
+                // TODO: This needs to use a dual dictionary for fast lookup
+                if (classSpell.Spell.Name == this.GetType().Name && classSpell.CharacterClass.Name == characterClass.GetType().Name)
+                {
+                    Level = classSpell.Level;
+                    ManaCost = classSpell.ManaCost;
+                    BaseFailure = classSpell.BaseFailure;
+                    FirstCastExperience = classSpell.FirstCastExperience;
+                    return;
+                }
+            }
+
+            // Character class does not have access to this spell.
+            // TODO: This should never happen.
+            throw new Exception("Spell does not have a configuration for this character class.");
+            //Level = 99;
+            //ManaCost = 0;
+            //BaseFailure = 0;
+            //FirstCastExperience = 0;
+        }
 
         public string SummaryLine(Player player) // TODO: Player to SaveGame
         {

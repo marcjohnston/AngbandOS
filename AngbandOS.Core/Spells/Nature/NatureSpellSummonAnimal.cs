@@ -20,56 +20,7 @@ namespace AngbandOS.Core.Spells.Nature
         }
 
         public override string Name => "Summon Animal";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 25;
-                    ManaCost = 25;
-                    BaseFailure = 90;
-                    FirstCastExperience = 50;
-                    break;
-
-                case CharacterClass.Priest:
-                    Level = 30;
-                    ManaCost = 30;
-                    BaseFailure = 55;
-                    FirstCastExperience = 8;
-                    break;
-
-                case CharacterClass.Ranger:
-                    Level = 23;
-                    ManaCost = 23;
-                    BaseFailure = 65;
-                    FirstCastExperience = 10;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Cultist:
-                    Level = 31;
-                    ManaCost = 31;
-                    BaseFailure = 65;
-                    FirstCastExperience = 10;
-                    break;
-
-                case CharacterClass.HighMage:
-                case CharacterClass.Druid:
-                    Level = 20;
-                    ManaCost = 20;
-                    BaseFailure = 80;
-                    FirstCastExperience = 50;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             return "control 100%";

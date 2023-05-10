@@ -49,63 +49,7 @@ namespace AngbandOS.Core.Spells.Tarot
         }
 
         public override string Name => "The Fool";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 15;
-                    ManaCost = 15;
-                    BaseFailure = 80;
-                    FirstCastExperience = 8;
-                    break;
-
-                case CharacterClass.Priest:
-                case CharacterClass.Monk:
-                    Level = 17;
-                    ManaCost = 17;
-                    BaseFailure = 80;
-                    FirstCastExperience = 8;
-                    break;
-
-                case CharacterClass.Rogue:
-                    Level = 20;
-                    ManaCost = 15;
-                    BaseFailure = 80;
-                    FirstCastExperience = 20;
-                    break;
-
-                case CharacterClass.Ranger:
-                    Level = 20;
-                    ManaCost = 20;
-                    BaseFailure = 80;
-                    FirstCastExperience = 20;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Cultist:
-                    Level = 19;
-                    ManaCost = 18;
-                    BaseFailure = 80;
-                    FirstCastExperience = 20;
-                    break;
-
-                case CharacterClass.HighMage:
-                    Level = 11;
-                    ManaCost = 11;
-                    BaseFailure = 70;
-                    FirstCastExperience = 20;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             return "control 50%";

@@ -21,63 +21,7 @@ namespace AngbandOS.Core.Spells.Chaos
         }
 
         public override string Name => "Mana Storm";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 45;
-                    ManaCost = 48;
-                    BaseFailure = 85;
-                    FirstCastExperience = 200;
-                    break;
-
-                case CharacterClass.Priest:
-                    Level = 47;
-                    ManaCost = 50;
-                    BaseFailure = 95;
-                    FirstCastExperience = 200;
-                    break;
-
-                case CharacterClass.Ranger:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Monk:
-                    Level = 49;
-                    ManaCost = 50;
-                    BaseFailure = 85;
-                    FirstCastExperience = 200;
-                    break;
-
-                case CharacterClass.Fanatic:
-                    Level = 45;
-                    ManaCost = 48;
-                    BaseFailure = 85;
-                    FirstCastExperience = 200;
-                    break;
-
-                case CharacterClass.HighMage:
-                case CharacterClass.Cultist:
-                    Level = 40;
-                    ManaCost = 45;
-                    BaseFailure = 75;
-                    FirstCastExperience = 200;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             return $"dam {300 + (player.Level * 2)}";

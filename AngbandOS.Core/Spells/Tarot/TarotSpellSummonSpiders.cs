@@ -32,63 +32,7 @@ namespace AngbandOS.Core.Spells.Tarot
         }
 
         public override string Name => "Summon Spiders";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 24;
-                    ManaCost = 24;
-                    BaseFailure = 70;
-                    FirstCastExperience = 25;
-                    break;
-
-                case CharacterClass.Priest:
-                case CharacterClass.Monk:
-                    Level = 27;
-                    ManaCost = 25;
-                    BaseFailure = 70;
-                    FirstCastExperience = 25;
-                    break;
-
-                case CharacterClass.Rogue:
-                    Level = 30;
-                    ManaCost = 30;
-                    BaseFailure = 70;
-                    FirstCastExperience = 25;
-                    break;
-
-                case CharacterClass.Ranger:
-                    Level = 28;
-                    ManaCost = 26;
-                    BaseFailure = 70;
-                    FirstCastExperience = 25;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Cultist:
-                    Level = 29;
-                    ManaCost = 27;
-                    BaseFailure = 70;
-                    FirstCastExperience = 25;
-                    break;
-
-                case CharacterClass.HighMage:
-                    Level = 21;
-                    ManaCost = 21;
-                    BaseFailure = 60;
-                    FirstCastExperience = 25;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             return "control 60%";

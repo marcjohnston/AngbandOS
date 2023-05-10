@@ -17,69 +17,7 @@ namespace AngbandOS.Core.Spells.Death
         }
 
         public override string Name => "Word of Death";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 33;
-                    ManaCost = 35;
-                    BaseFailure = 70;
-                    FirstCastExperience = 40;
-                    break;
-
-                case CharacterClass.Priest:
-                    Level = 40;
-                    ManaCost = 40;
-                    BaseFailure = 70;
-                    FirstCastExperience = 40;
-                    break;
-
-                case CharacterClass.Rogue:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-
-                case CharacterClass.Ranger:
-                    Level = 48;
-                    ManaCost = 50;
-                    BaseFailure = 30;
-                    FirstCastExperience = 75;
-                    break;
-
-                case CharacterClass.Paladin:
-                    Level = 45;
-                    ManaCost = 45;
-                    BaseFailure = 70;
-                    FirstCastExperience = 40;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Cultist:
-                    Level = 42;
-                    ManaCost = 50;
-                    BaseFailure = 70;
-                    FirstCastExperience = 40;
-                    break;
-
-                case CharacterClass.HighMage:
-                    Level = 29;
-                    ManaCost = 30;
-                    BaseFailure = 60;
-                    FirstCastExperience = 40;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             return $"dam {player.Level * 3}";

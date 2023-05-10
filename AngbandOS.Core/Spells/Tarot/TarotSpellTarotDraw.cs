@@ -187,63 +187,7 @@ namespace AngbandOS.Core.Spells.Tarot
         }
 
         public override string Name => "Tarot Draw";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 5;
-                    ManaCost = 5;
-                    BaseFailure = 75;
-                    FirstCastExperience = 8;
-                    break;
-
-                case CharacterClass.Priest:
-                case CharacterClass.Monk:
-                    Level = 6;
-                    ManaCost = 5;
-                    BaseFailure = 75;
-                    FirstCastExperience = 8;
-                    break;
-
-                case CharacterClass.Rogue:
-                    Level = 9;
-                    ManaCost = 7;
-                    BaseFailure = 75;
-                    FirstCastExperience = 8;
-                    break;
-
-                case CharacterClass.Ranger:
-                    Level = 9;
-                    ManaCost = 7;
-                    BaseFailure = 75;
-                    FirstCastExperience = 8;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Cultist:
-                    Level = 7;
-                    ManaCost = 7;
-                    BaseFailure = 75;
-                    FirstCastExperience = 8;
-                    break;
-
-                case CharacterClass.HighMage:
-                    Level = 4;
-                    ManaCost = 4;
-                    BaseFailure = 65;
-                    FirstCastExperience = 8;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             return "random";

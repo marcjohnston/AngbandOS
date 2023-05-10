@@ -18,62 +18,7 @@ namespace AngbandOS.Core.Spells.Folk
         }
 
         public override string Name => "Cure Medium Wounds";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 16;
-                    ManaCost = 14;
-                    BaseFailure = 33;
-                    FirstCastExperience = 6;
-                    break;
-
-                case CharacterClass.Priest:
-                    Level = 18;
-                    ManaCost = 17;
-                    BaseFailure = 33;
-                    FirstCastExperience = 6;
-                    break;
-
-                case CharacterClass.Rogue:
-                    Level = 20;
-                    ManaCost = 19;
-                    BaseFailure = 33;
-                    FirstCastExperience = 6;
-                    break;
-
-                case CharacterClass.Ranger:
-                    Level = 20;
-                    ManaCost = 19;
-                    BaseFailure = 33;
-                    FirstCastExperience = 6;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Cultist:
-                    Level = 19;
-                    ManaCost = 18;
-                    BaseFailure = 33;
-                    FirstCastExperience = 6;
-                    break;
-
-                case CharacterClass.HighMage:
-                    Level = 14;
-                    ManaCost = 11;
-                    BaseFailure = 22;
-                    FirstCastExperience = 6;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             return "heal 4d8";

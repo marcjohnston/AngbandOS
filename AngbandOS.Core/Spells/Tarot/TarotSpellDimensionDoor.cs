@@ -31,63 +31,7 @@ namespace AngbandOS.Core.Spells.Tarot
         }
 
         public override string Name => "Dimension Door";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 9;
-                    ManaCost = 9;
-                    BaseFailure = 60;
-                    FirstCastExperience = 6;
-                    break;
-
-                case CharacterClass.Priest:
-                case CharacterClass.Monk:
-                    Level = 11;
-                    ManaCost = 11;
-                    BaseFailure = 60;
-                    FirstCastExperience = 6;
-                    break;
-
-                case CharacterClass.Rogue:
-                    Level = 15;
-                    ManaCost = 13;
-                    BaseFailure = 60;
-                    FirstCastExperience = 6;
-                    break;
-
-                case CharacterClass.Ranger:
-                    Level = 17;
-                    ManaCost = 15;
-                    BaseFailure = 60;
-                    FirstCastExperience = 6;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Cultist:
-                    Level = 12;
-                    ManaCost = 12;
-                    BaseFailure = 60;
-                    FirstCastExperience = 6;
-                    break;
-
-                case CharacterClass.HighMage:
-                    Level = 7;
-                    ManaCost = 7;
-                    BaseFailure = 50;
-                    FirstCastExperience = 6;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             return $"range {player.Level + 2}";

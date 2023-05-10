@@ -17,63 +17,7 @@ namespace AngbandOS.Core.Spells.Chaos
         }
 
         public override string Name => "Word of Destruction";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 30;
-                    ManaCost = 20;
-                    BaseFailure = 80;
-                    FirstCastExperience = 15;
-                    break;
-
-                case CharacterClass.Priest:
-                    Level = 33;
-                    ManaCost = 23;
-                    BaseFailure = 80;
-                    FirstCastExperience = 15;
-                    break;
-
-                case CharacterClass.Ranger:
-                    Level = 43;
-                    ManaCost = 30;
-                    BaseFailure = 95;
-                    FirstCastExperience = 15;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Monk:
-                    Level = 41;
-                    ManaCost = 40;
-                    BaseFailure = 80;
-                    FirstCastExperience = 15;
-                    break;
-
-                case CharacterClass.Fanatic:
-                    Level = 36;
-                    ManaCost = 26;
-                    BaseFailure = 80;
-                    FirstCastExperience = 15;
-                    break;
-
-                case CharacterClass.HighMage:
-                case CharacterClass.Cultist:
-                    Level = 27;
-                    ManaCost = 17;
-                    BaseFailure = 70;
-                    FirstCastExperience = 15;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             return string.Empty;

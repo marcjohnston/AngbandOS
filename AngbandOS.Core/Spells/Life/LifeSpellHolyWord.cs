@@ -22,55 +22,7 @@ namespace AngbandOS.Core.Spells.Life
         }
 
         public override string Name => "Holy Word";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 39;
-                    ManaCost = 40;
-                    BaseFailure = 80;
-                    FirstCastExperience = 125;
-                    break;
-
-                case CharacterClass.Priest:
-                    Level = 39;
-                    ManaCost = 32;
-                    BaseFailure = 90;
-                    FirstCastExperience = 200;
-                    break;
-
-                case CharacterClass.Paladin:
-                    Level = 39;
-                    ManaCost = 38;
-                    BaseFailure = 80;
-                    FirstCastExperience = 125;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Cultist:
-                    Level = 45;
-                    ManaCost = 45;
-                    BaseFailure = 80;
-                    FirstCastExperience = 125;
-                    break;
-
-                case CharacterClass.HighMage:
-                    Level = 35;
-                    ManaCost = 35;
-                    BaseFailure = 60;
-                    FirstCastExperience = 125;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             return $"d {4 * player.Level}/h 1000";

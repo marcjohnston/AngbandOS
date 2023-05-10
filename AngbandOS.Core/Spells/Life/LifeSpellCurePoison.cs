@@ -17,55 +17,7 @@ namespace AngbandOS.Core.Spells.Life
         }
 
         public override string Name => "Cure Poison";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 17;
-                    ManaCost = 17;
-                    BaseFailure = 50;
-                    FirstCastExperience = 4;
-                    break;
-
-                case CharacterClass.Priest:
-                    Level = 9;
-                    ManaCost = 6;
-                    BaseFailure = 38;
-                    FirstCastExperience = 4;
-                    break;
-
-                case CharacterClass.Paladin:
-                    Level = 15;
-                    ManaCost = 15;
-                    BaseFailure = 50;
-                    FirstCastExperience = 4;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Cultist:
-                    Level = 20;
-                    ManaCost = 20;
-                    BaseFailure = 50;
-                    FirstCastExperience = 4;
-                    break;
-
-                case CharacterClass.HighMage:
-                    Level = 15;
-                    ManaCost = 14;
-                    BaseFailure = 40;
-                    FirstCastExperience = 4;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             return string.Empty;

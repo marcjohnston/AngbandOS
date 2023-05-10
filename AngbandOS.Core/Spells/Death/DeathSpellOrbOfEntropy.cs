@@ -24,69 +24,7 @@ namespace AngbandOS.Core.Spells.Death
         }
 
         public override string Name => "Orb of Entropy";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 12;
-                    ManaCost = 12;
-                    BaseFailure = 40;
-                    FirstCastExperience = 5;
-                    break;
-
-                case CharacterClass.Priest:
-                    Level = 14;
-                    ManaCost = 14;
-                    BaseFailure = 40;
-                    FirstCastExperience = 5;
-                    break;
-
-                case CharacterClass.Rogue:
-                    Level = 21;
-                    ManaCost = 21;
-                    BaseFailure = 60;
-                    FirstCastExperience = 3;
-                    break;
-
-                case CharacterClass.Ranger:
-                    Level = 24;
-                    ManaCost = 24;
-                    BaseFailure = 55;
-                    FirstCastExperience = 3;
-                    break;
-
-                case CharacterClass.Paladin:
-                    Level = 17;
-                    ManaCost = 17;
-                    BaseFailure = 40;
-                    FirstCastExperience = 5;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Cultist:
-                    Level = 14;
-                    ManaCost = 14;
-                    BaseFailure = 40;
-                    FirstCastExperience = 5;
-                    break;
-
-                case CharacterClass.HighMage:
-                    Level = 10;
-                    ManaCost = 10;
-                    BaseFailure = 30;
-                    FirstCastExperience = 5;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             int s = player.Level + (player.Level / (player.BaseCharacterClass.ID == CharacterClass.Mage || player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4));

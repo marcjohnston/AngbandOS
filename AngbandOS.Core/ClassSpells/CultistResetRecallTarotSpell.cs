@@ -1,0 +1,10 @@
+internal class CultistResetRecallTarotSpell : ClassSpell
+{
+    private CultistResetRecallTarotSpell(SaveGame saveGame) : base(saveGame) { }
+    public override Type Spell => typeof(TarotSpellResetRecall);
+    public override Type CharacterClass => typeof(CultistCharacterClass);
+    public override int Level => 8;
+    public override int ManaCost => 7;
+    public override int BaseFailure => 80;
+    public override int FirstCastExperience => 8;
+}

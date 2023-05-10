@@ -37,63 +37,7 @@ namespace AngbandOS.Core.Spells.Chaos
         }
 
         public override string Name => "Chaos Bolt";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 19;
-                    ManaCost = 12;
-                    BaseFailure = 45;
-                    FirstCastExperience = 9;
-                    break;
-
-                case CharacterClass.Priest:
-                    Level = 21;
-                    ManaCost = 16;
-                    BaseFailure = 50;
-                    FirstCastExperience = 9;
-                    break;
-
-                case CharacterClass.Ranger:
-                    Level = 30;
-                    ManaCost = 25;
-                    BaseFailure = 60;
-                    FirstCastExperience = 8;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Monk:
-                    Level = 23;
-                    ManaCost = 22;
-                    BaseFailure = 45;
-                    FirstCastExperience = 9;
-                    break;
-
-                case CharacterClass.Fanatic:
-                    Level = 22;
-                    ManaCost = 14;
-                    BaseFailure = 45;
-                    FirstCastExperience = 9;
-                    break;
-
-                case CharacterClass.HighMage:
-                case CharacterClass.Cultist:
-                    Level = 17;
-                    ManaCost = 10;
-                    BaseFailure = 35;
-                    FirstCastExperience = 9;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             return $"dam {10 + ((player.Level - 5) / 4)}d8";

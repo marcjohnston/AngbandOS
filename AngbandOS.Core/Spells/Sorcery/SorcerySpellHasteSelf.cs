@@ -24,48 +24,7 @@ namespace AngbandOS.Core.Spells.Sorcery
         }
 
         public override string Name => "Haste Self";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 18;
-                    ManaCost = 12;
-                    BaseFailure = 60;
-                    FirstCastExperience = 8;
-                    break;
-
-                case CharacterClass.Rogue:
-                    Level = 31;
-                    ManaCost = 23;
-                    BaseFailure = 80;
-                    FirstCastExperience = 5;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Cultist:
-                    Level = 20;
-                    ManaCost = 15;
-                    BaseFailure = 60;
-                    FirstCastExperience = 8;
-                    break;
-
-                case CharacterClass.HighMage:
-                    Level = 13;
-                    ManaCost = 8;
-                    BaseFailure = 50;
-                    FirstCastExperience = 8;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             return $"dur {player.Level}+d{player.Level + 20}";

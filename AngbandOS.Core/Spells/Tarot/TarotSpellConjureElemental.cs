@@ -31,63 +31,7 @@ namespace AngbandOS.Core.Spells.Tarot
         }
 
         public override string Name => "Conjure Elemental";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 33;
-                    ManaCost = 28;
-                    BaseFailure = 80;
-                    FirstCastExperience = 12;
-                    break;
-
-                case CharacterClass.Priest:
-                case CharacterClass.Monk:
-                    Level = 35;
-                    ManaCost = 30;
-                    BaseFailure = 80;
-                    FirstCastExperience = 12;
-                    break;
-
-                case CharacterClass.Rogue:
-                    Level = 40;
-                    ManaCost = 35;
-                    BaseFailure = 80;
-                    FirstCastExperience = 12;
-                    break;
-
-                case CharacterClass.Ranger:
-                    Level = 38;
-                    ManaCost = 33;
-                    BaseFailure = 80;
-                    FirstCastExperience = 12;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Cultist:
-                    Level = 38;
-                    ManaCost = 32;
-                    BaseFailure = 80;
-                    FirstCastExperience = 12;
-                    break;
-
-                case CharacterClass.HighMage:
-                    Level = 28;
-                    ManaCost = 26;
-                    BaseFailure = 70;
-                    FirstCastExperience = 12;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             return "control 50%";

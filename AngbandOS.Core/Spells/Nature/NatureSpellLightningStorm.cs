@@ -21,56 +21,7 @@ namespace AngbandOS.Core.Spells.Nature
         }
 
         public override string Name => "Lightning Storm";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 30;
-                    ManaCost = 27;
-                    BaseFailure = 75;
-                    FirstCastExperience = 35;
-                    break;
-
-                case CharacterClass.Priest:
-                    Level = 32;
-                    ManaCost = 30;
-                    BaseFailure = 75;
-                    FirstCastExperience = 29;
-                    break;
-
-                case CharacterClass.Ranger:
-                    Level = 32;
-                    ManaCost = 29;
-                    BaseFailure = 75;
-                    FirstCastExperience = 35;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Cultist:
-                    Level = 33;
-                    ManaCost = 33;
-                    BaseFailure = 75;
-                    FirstCastExperience = 35;
-                    break;
-
-                case CharacterClass.HighMage:
-                case CharacterClass.Druid:
-                    Level = 28;
-                    ManaCost = 25;
-                    BaseFailure = 65;
-                    FirstCastExperience = 35;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             return $"dam {90 + player.Level}";

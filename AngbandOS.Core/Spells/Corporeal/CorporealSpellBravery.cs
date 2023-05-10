@@ -17,56 +17,7 @@ namespace AngbandOS.Core.Spells.Corporeal
         }
 
         public override string Name => "Bravery";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 3;
-                    ManaCost = 3;
-                    BaseFailure = 25;
-                    FirstCastExperience = 1;
-                    break;
-
-                case CharacterClass.Priest:
-                    Level = 4;
-                    ManaCost = 3;
-                    BaseFailure = 25;
-                    FirstCastExperience = 1;
-                    break;
-
-                case CharacterClass.Ranger:
-                    Level = 5;
-                    ManaCost = 4;
-                    BaseFailure = 40;
-                    FirstCastExperience = 2;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Monk:
-                case CharacterClass.Cultist:
-                    Level = 3;
-                    ManaCost = 3;
-                    BaseFailure = 25;
-                    FirstCastExperience = 1;
-                    break;
-
-                case CharacterClass.HighMage:
-                    Level = 2;
-                    ManaCost = 2;
-                    BaseFailure = 15;
-                    FirstCastExperience = 1;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             return string.Empty;

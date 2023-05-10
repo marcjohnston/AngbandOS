@@ -32,63 +32,7 @@ namespace AngbandOS.Core.Spells.Tarot
         }
 
         public override string Name => "Summon Ancient Dragon";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 48;
-                    ManaCost = 100;
-                    BaseFailure = 80;
-                    FirstCastExperience = 200;
-                    break;
-
-                case CharacterClass.Priest:
-                case CharacterClass.Monk:
-                    Level = 49;
-                    ManaCost = 120;
-                    BaseFailure = 80;
-                    FirstCastExperience = 200;
-                    break;
-
-                case CharacterClass.Rogue:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-
-                case CharacterClass.Ranger:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Cultist:
-                    Level = 49;
-                    ManaCost = 130;
-                    BaseFailure = 80;
-                    FirstCastExperience = 200;
-                    break;
-
-                case CharacterClass.HighMage:
-                    Level = 44;
-                    ManaCost = 90;
-                    BaseFailure = 70;
-                    FirstCastExperience = 200;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             return "control 70%";

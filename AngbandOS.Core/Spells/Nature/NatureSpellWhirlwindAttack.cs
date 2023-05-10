@@ -27,56 +27,7 @@ namespace AngbandOS.Core.Spells.Nature
         }
 
         public override string Name => "Whirlwind Attack";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 23;
-                    ManaCost = 23;
-                    BaseFailure = 80;
-                    FirstCastExperience = 50;
-                    break;
-
-                case CharacterClass.Priest:
-                    Level = 25;
-                    ManaCost = 25;
-                    BaseFailure = 60;
-                    FirstCastExperience = 25;
-                    break;
-
-                case CharacterClass.Ranger:
-                    Level = 26;
-                    ManaCost = 26;
-                    BaseFailure = 60;
-                    FirstCastExperience = 100;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Cultist:
-                    Level = 27;
-                    ManaCost = 27;
-                    BaseFailure = 60;
-                    FirstCastExperience = 25;
-                    break;
-
-                case CharacterClass.HighMage:
-                case CharacterClass.Druid:
-                    Level = 20;
-                    ManaCost = 20;
-                    BaseFailure = 70;
-                    FirstCastExperience = 50;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             return string.Empty;

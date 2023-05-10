@@ -40,62 +40,7 @@ namespace AngbandOS.Core.Spells.Folk
         }
 
         public override string Name => "Teleport Away";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 41;
-                    ManaCost = 30;
-                    BaseFailure = 66;
-                    FirstCastExperience = 30;
-                    break;
-
-                case CharacterClass.Priest:
-                    Level = 44;
-                    ManaCost = 39;
-                    BaseFailure = 66;
-                    FirstCastExperience = 30;
-                    break;
-
-                case CharacterClass.Rogue:
-                    Level = 47;
-                    ManaCost = 42;
-                    BaseFailure = 66;
-                    FirstCastExperience = 30;
-                    break;
-
-                case CharacterClass.Ranger:
-                    Level = 47;
-                    ManaCost = 42;
-                    BaseFailure = 66;
-                    FirstCastExperience = 30;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Cultist:
-                    Level = 45;
-                    ManaCost = 44;
-                    BaseFailure = 66;
-                    FirstCastExperience = 30;
-                    break;
-
-                case CharacterClass.HighMage:
-                    Level = 40;
-                    ManaCost = 28;
-                    BaseFailure = 55;
-                    FirstCastExperience = 30;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             return $"dam {75 + player.Level}";

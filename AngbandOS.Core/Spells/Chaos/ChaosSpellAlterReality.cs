@@ -20,62 +20,6 @@ namespace AngbandOS.Core.Spells.Chaos
         }
 
         public override string Name => "Alter Reality";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 30;
-                    ManaCost = 25;
-                    BaseFailure = 85;
-                    FirstCastExperience = 150;
-                    break;
-
-                case CharacterClass.Priest:
-                    Level = 35;
-                    ManaCost = 30;
-                    BaseFailure = 85;
-                    FirstCastExperience = 150;
-                    break;
-
-                case CharacterClass.Ranger:
-                    Level = 38;
-                    ManaCost = 35;
-                    BaseFailure = 85;
-                    FirstCastExperience = 150;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Monk:
-                    Level = 35;
-                    ManaCost = 30;
-                    BaseFailure = 85;
-                    FirstCastExperience = 150;
-                    break;
-
-                case CharacterClass.Fanatic:
-                    Level = 30;
-                    ManaCost = 30;
-                    BaseFailure = 85;
-                    FirstCastExperience = 150;
-                    break;
-
-                case CharacterClass.HighMage:
-                case CharacterClass.Cultist:
-                    Level = 26;
-                    ManaCost = 22;
-                    BaseFailure = 75;
-                    FirstCastExperience = 150;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
 
         protected override string Comment(Player player)
         {

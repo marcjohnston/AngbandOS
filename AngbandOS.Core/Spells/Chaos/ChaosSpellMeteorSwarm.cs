@@ -44,63 +44,7 @@ namespace AngbandOS.Core.Spells.Chaos
         }
 
         public override string Name => "Meteor Swarm";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 35;
-                    ManaCost = 32;
-                    BaseFailure = 85;
-                    FirstCastExperience = 35;
-                    break;
-
-                case CharacterClass.Priest:
-                    Level = 37;
-                    ManaCost = 37;
-                    BaseFailure = 85;
-                    FirstCastExperience = 35;
-                    break;
-
-                case CharacterClass.Ranger:
-                    Level = 40;
-                    ManaCost = 45;
-                    BaseFailure = 85;
-                    FirstCastExperience = 35;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Monk:
-                    Level = 40;
-                    ManaCost = 35;
-                    BaseFailure = 85;
-                    FirstCastExperience = 35;
-                    break;
-
-                case CharacterClass.Fanatic:
-                    Level = 35;
-                    ManaCost = 35;
-                    BaseFailure = 85;
-                    FirstCastExperience = 35;
-                    break;
-
-                case CharacterClass.HighMage:
-                case CharacterClass.Cultist:
-                    Level = 32;
-                    ManaCost = 30;
-                    BaseFailure = 75;
-                    FirstCastExperience = 35;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             return $"dam {3 * player.Level / 2} each";

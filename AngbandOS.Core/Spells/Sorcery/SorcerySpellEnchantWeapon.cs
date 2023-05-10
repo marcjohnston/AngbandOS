@@ -17,48 +17,7 @@ namespace AngbandOS.Core.Spells.Sorcery
         }
 
         public override string Name => "Enchant Weapon";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 40;
-                    ManaCost = 80;
-                    BaseFailure = 95;
-                    FirstCastExperience = 200;
-                    break;
-
-                case CharacterClass.Rogue:
-                    Level = 43;
-                    ManaCost = 80;
-                    BaseFailure = 80;
-                    FirstCastExperience = 100;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Cultist:
-                    Level = 42;
-                    ManaCost = 85;
-                    BaseFailure = 95;
-                    FirstCastExperience = 200;
-                    break;
-
-                case CharacterClass.HighMage:
-                    Level = 30;
-                    ManaCost = 65;
-                    BaseFailure = 85;
-                    FirstCastExperience = 200;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             return string.Empty;

@@ -145,69 +145,7 @@ namespace AngbandOS.Core.Spells.Death
         }
 
         public override string Name => "Invoke Spirits";
-        public override void Initialise(int characterClass)
-        {
-            switch (characterClass)
-            {
-                case CharacterClass.Mage:
-                    Level = 10;
-                    ManaCost = 15;
-                    BaseFailure = 80;
-                    FirstCastExperience = 30;
-                    break;
-
-                case CharacterClass.Priest:
-                    Level = 13;
-                    ManaCost = 15;
-                    BaseFailure = 80;
-                    FirstCastExperience = 30;
-                    break;
-
-                case CharacterClass.Rogue:
-                    Level = 23;
-                    ManaCost = 20;
-                    BaseFailure = 40;
-                    FirstCastExperience = 20;
-                    break;
-
-                case CharacterClass.Ranger:
-                    Level = 25;
-                    ManaCost = 25;
-                    BaseFailure = 80;
-                    FirstCastExperience = 100;
-                    break;
-
-                case CharacterClass.Paladin:
-                    Level = 15;
-                    ManaCost = 20;
-                    BaseFailure = 80;
-                    FirstCastExperience = 30;
-                    break;
-
-                case CharacterClass.WarriorMage:
-                case CharacterClass.Cultist:
-                    Level = 12;
-                    ManaCost = 18;
-                    BaseFailure = 80;
-                    FirstCastExperience = 30;
-                    break;
-
-                case CharacterClass.HighMage:
-                    Level = 8;
-                    ManaCost = 10;
-                    BaseFailure = 70;
-                    FirstCastExperience = 30;
-                    break;
-
-                default:
-                    Level = 99;
-                    ManaCost = 0;
-                    BaseFailure = 0;
-                    FirstCastExperience = 0;
-                    break;
-            }
-        }
-
+        
         protected override string Comment(Player player)
         {
             return "random";
