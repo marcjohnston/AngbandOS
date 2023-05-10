@@ -24,9 +24,5 @@ namespace AngbandOS.Core.Spells.Corporeal
 
         public override string Name => "Restore Body";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

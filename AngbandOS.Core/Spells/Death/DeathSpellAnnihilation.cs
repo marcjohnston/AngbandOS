@@ -46,9 +46,5 @@ namespace AngbandOS.Core.Spells.Death
 
         public override string Name => "Annihilation";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

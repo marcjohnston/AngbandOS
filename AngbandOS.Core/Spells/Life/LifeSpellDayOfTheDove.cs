@@ -19,9 +19,5 @@ namespace AngbandOS.Core.Spells.Life
 
         public override string Name => "Day of the Dove";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

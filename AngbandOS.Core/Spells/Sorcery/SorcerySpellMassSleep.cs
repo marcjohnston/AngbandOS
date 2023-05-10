@@ -19,9 +19,5 @@ namespace AngbandOS.Core.Spells.Sorcery
 
         public override string Name => "Mass Sleep";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

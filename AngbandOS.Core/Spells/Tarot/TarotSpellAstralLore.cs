@@ -19,9 +19,5 @@ namespace AngbandOS.Core.Spells.Tarot
 
         public override string Name => "Astral Lore";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

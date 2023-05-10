@@ -25,9 +25,5 @@ namespace AngbandOS.Core.Spells.Life
 
         public override string Name => "Restoration";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

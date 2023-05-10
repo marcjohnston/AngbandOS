@@ -23,9 +23,5 @@ namespace AngbandOS.Core.Spells.Folk
 
         public override string Name => "Trap & Door Destruction";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

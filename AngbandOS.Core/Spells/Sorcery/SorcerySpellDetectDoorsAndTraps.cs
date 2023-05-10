@@ -21,9 +21,5 @@ namespace AngbandOS.Core.Spells.Sorcery
 
         public override string Name => "Detect Doors and Traps";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

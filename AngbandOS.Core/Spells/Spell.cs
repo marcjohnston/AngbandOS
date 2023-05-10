@@ -157,6 +157,6 @@ namespace AngbandOS.Core.Spells
             return $"{Name} ({Level}, {ManaCost}, {BaseFailure}, {FirstCastExperience})";
         }
 
-        protected abstract string Comment(Player player); // TODO: Player to SaveGame
+        protected virtual string Comment(Player player) => string.Empty;
     }
 }

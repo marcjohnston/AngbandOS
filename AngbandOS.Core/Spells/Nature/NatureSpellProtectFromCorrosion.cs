@@ -19,9 +19,5 @@ namespace AngbandOS.Core.Spells.Nature
 
         public override string Name => "Protection from Corrosion";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

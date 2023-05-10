@@ -20,9 +20,5 @@ namespace AngbandOS.Core.Spells.Tarot
 
         public override string Name => "Extradimensional Being";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

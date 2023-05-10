@@ -19,9 +19,5 @@ namespace AngbandOS.Core.Spells.Chaos
 
         public override string Name => "Polymorph Self";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

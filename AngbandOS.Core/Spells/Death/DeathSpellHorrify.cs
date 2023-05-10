@@ -24,9 +24,5 @@ namespace AngbandOS.Core.Spells.Death
 
         public override string Name => "Horrify";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

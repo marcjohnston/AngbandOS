@@ -23,9 +23,5 @@ namespace AngbandOS.Core.Spells.Nature
 
         public override string Name => "Stone to Mud";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

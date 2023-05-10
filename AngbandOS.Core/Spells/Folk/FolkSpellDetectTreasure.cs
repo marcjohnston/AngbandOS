@@ -20,9 +20,5 @@ namespace AngbandOS.Core.Spells.Folk
 
         public override string Name => "Detect Treasure";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

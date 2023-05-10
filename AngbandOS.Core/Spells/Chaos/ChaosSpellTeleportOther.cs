@@ -23,9 +23,5 @@ namespace AngbandOS.Core.Spells.Chaos
 
         public override string Name => "Teleport Other";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

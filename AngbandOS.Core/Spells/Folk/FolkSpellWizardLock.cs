@@ -23,9 +23,5 @@ namespace AngbandOS.Core.Spells.Folk
 
         public override string Name => "Wizard Lock";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

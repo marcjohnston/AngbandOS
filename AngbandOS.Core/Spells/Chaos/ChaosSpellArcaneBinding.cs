@@ -19,9 +19,5 @@ namespace AngbandOS.Core.Spells.Chaos
 
         public override string Name => "Arcane Binding";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

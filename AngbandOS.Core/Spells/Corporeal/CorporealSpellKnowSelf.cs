@@ -19,9 +19,5 @@ namespace AngbandOS.Core.Spells.Corporeal
 
         public override string Name => "Know Self";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

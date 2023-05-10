@@ -29,9 +29,5 @@ namespace AngbandOS.Core.Spells.Nature
 
         public override string Name => "Whirlwind Attack";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

@@ -19,9 +19,5 @@ namespace AngbandOS.Core.Spells.Folk
 
         public override string Name => "Recharging";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

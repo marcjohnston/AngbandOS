@@ -19,9 +19,5 @@ namespace AngbandOS.Core.Spells.Life
 
         public override string Name => "Dispel Curse";
 
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

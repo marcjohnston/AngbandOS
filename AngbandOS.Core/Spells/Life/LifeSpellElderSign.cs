@@ -19,9 +19,5 @@ namespace AngbandOS.Core.Spells.Life
 
         public override string Name => "Elder Sign";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

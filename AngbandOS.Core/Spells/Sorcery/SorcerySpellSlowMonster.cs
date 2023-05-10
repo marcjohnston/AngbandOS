@@ -23,9 +23,5 @@ namespace AngbandOS.Core.Spells.Sorcery
 
         public override string Name => "Slow Monster";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

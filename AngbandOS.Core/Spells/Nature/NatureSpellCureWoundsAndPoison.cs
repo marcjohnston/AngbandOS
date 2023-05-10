@@ -20,9 +20,5 @@ namespace AngbandOS.Core.Spells.Nature
 
         public override string Name => "Cure Wounds and Poison";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

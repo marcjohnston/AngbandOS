@@ -19,9 +19,5 @@ namespace AngbandOS.Core.Spells.Sorcery
 
         public override string Name => "Detection True";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

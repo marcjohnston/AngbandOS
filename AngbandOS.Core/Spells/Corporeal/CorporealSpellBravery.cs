@@ -19,9 +19,5 @@ namespace AngbandOS.Core.Spells.Corporeal
 
         public override string Name => "Bravery";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

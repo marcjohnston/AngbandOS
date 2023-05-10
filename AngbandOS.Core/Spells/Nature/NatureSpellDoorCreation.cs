@@ -19,9 +19,5 @@ namespace AngbandOS.Core.Spells.Nature
 
         public override string Name => "Door Creation";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }

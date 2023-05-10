@@ -22,9 +22,5 @@ namespace AngbandOS.Core.Spells.Life
 
         public override string Name => "Banish";
         
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
     }
 }
