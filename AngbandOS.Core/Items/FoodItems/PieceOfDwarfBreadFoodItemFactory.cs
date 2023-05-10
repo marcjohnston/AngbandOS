@@ -19,6 +19,12 @@ namespace AngbandOS.Core.ItemCategories
         public override int Pval => 7500;
         public override int? SubCategory => 41;
         public override int Weight => 3;
+
+        /// <summary>
+        /// Returns false, because dwarf bread isn't actually consumed.
+        /// </summary>
+        public override bool IsConsumedWhenEaten => false;
+
         public override bool Eat()
         {
             SaveGame.MsgPrint("You look at the dwarf bread, and don't feel quite so hungry anymore.");

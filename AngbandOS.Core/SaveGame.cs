@@ -11186,8 +11186,10 @@ namespace AngbandOS.Core
             ident = foodItem.Factory.Eat();
 
             NoticeCombineAndReorderFlaggedAction.Set();
+
             // We've tried this type of object
             item.ObjectTried();
+
             // Learn its flavour if necessary
             if (ident && !item.IsFlavourAware())
             {
@@ -11199,7 +11201,7 @@ namespace AngbandOS.Core
             Player.Race.Eat(foodItem);
 
             // Dwarf bread isn't actually eaten so return early
-            if (item.ItemSubCategory == FoodType.Dwarfbread)
+            if (!foodItem.Factory.IsConsumedWhenEaten)
             {
                 return;
             }
