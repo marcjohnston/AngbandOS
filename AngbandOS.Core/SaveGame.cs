@@ -93,7 +93,7 @@ namespace AngbandOS.Core
 
         public int CommandRepeat;
         public readonly Dungeon[] Dungeons;
-        public readonly Patron[] PatronList;
+     //   public readonly Patron[] PatronList;
         public readonly List<Quest> Quests;
         public readonly Island Wilderness = new Island();
         public int AllocKindSize;
@@ -396,7 +396,6 @@ namespace AngbandOS.Core
 
             Quests = new List<Quest>();
             Dungeons = Dungeon.NewDungeonList();
-            PatronList = Patron.NewPatronList(this);
             InitializeAllocationTables();
         }
 
@@ -14893,7 +14892,7 @@ namespace AngbandOS.Core
                         }
                         SpellOrder.Clear();
 
-                        Player.GooPatron = PatronList[Program.Rng.DieRoll(PatronList.Length) - 1];
+                        Player.GooPatron = SingletonRepository.Patrons.ToWeightedRandom().Choose();
                         UpdateHealthFlaggedAction.Set();
                         UpdateBonusesFlaggedAction.Set();
                         UpdateStuff();

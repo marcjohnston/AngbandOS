@@ -71,7 +71,7 @@
         /// <value>The spell weight.</value>
         public virtual int SpellWeight => 0;
 
-        public virtual CastingType? SpellCastingType => null;
+        public virtual CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get<CastingType>();
 
         public virtual int SpellStat => Ability.Strength;
 

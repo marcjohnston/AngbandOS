@@ -18,7 +18,7 @@ namespace AngbandOS.Core.ItemCategories
 
         public override void Read(ReadScrollEvent eventArgs)
         {
-            var patron = eventArgs.SaveGame.PatronList[Program.Rng.DieRoll(eventArgs.SaveGame.PatronList.Length) - 1];
+            var patron = eventArgs.SaveGame.SingletonRepository.Patrons.ToWeightedRandom().Choose();
             eventArgs.SaveGame.MsgPrint($"You invoke the secret name of {patron.LongName}.");
             patron.GetReward(eventArgs.SaveGame);
             eventArgs.Identified = true;

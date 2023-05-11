@@ -41,6 +41,7 @@ global using AngbandOS.Core.Projection;
 global using AngbandOS.Core.Races;
 global using AngbandOS.Core.RareItems;
 global using AngbandOS.Core.Realms;
+global using AngbandOS.Core.Rewards;
 global using AngbandOS.Core.RoomTypes;
 global using AngbandOS.Core.SpellResistantDetections;
 global using AngbandOS.Core.Spells;

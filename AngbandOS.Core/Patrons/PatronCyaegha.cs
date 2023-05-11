@@ -11,18 +11,32 @@ namespace AngbandOS.Core.Patrons
     [Serializable]
     internal class PatronCyaegha : Patron
     {
-        protected override void Initialise()
+        private PatronCyaegha(SaveGame saveGame) : base(saveGame) { }
+        public override string ShortName => "Cyaegha";
+        public override string LongName => "Cyaegha, the Destroying Eye";
+        public override int PreferredAbility => Ability.Strength;
+        protected override Reward[] Rewards => new Reward[]
         {
-            ShortName = "Cyaegha";
-            LongName = "Cyaegha, the Destroying Eye";
-            PreferredAbility = Ability.Strength;
-            Rewards = new[]
-            {
-                Reward.Wrath, Reward.HurtLot, Reward.PissOff, Reward.LoseAbl, Reward.LoseExp, Reward.Ignore,
-                Reward.Ignore, Reward.DispelC, Reward.DoHavoc, Reward.DoHavoc, Reward.PolySlf, Reward.PolySlf,
-                Reward.GainExp, Reward.GainAbl, Reward.GainAbl, Reward.SerMons, Reward.GoodObj, Reward.ChaosWp,
-                Reward.GreaObj, Reward.GoodObs
-            };
-        }
+            SaveGame.SingletonRepository.Rewards.Get<WrathReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<HurtLotReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<PissOffReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<LoseAblReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<LoseExpReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<IgnoreReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<IgnoreReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<DispelCReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<DoHavocReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<DoHavocReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<PolySlfReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<PolySlfReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<GainExpReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<GainAblReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<GainAblReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<SerMonsReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<GoodObjReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<ChaosWpReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<GreaObjReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<GoodObsReward>()
+        };
     }
 }

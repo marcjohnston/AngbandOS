@@ -1,7 +1,10 @@
 ﻿namespace AngbandOS.Core.CastingTypes
 {
+    /// <summary>
+    /// Represents basic spell casting properties.
+    /// </summary>
     [Serializable]
-    internal abstract class CastingType
+    internal class CastingType
     {
         protected readonly SaveGame SaveGame;
         protected CastingType(SaveGame saveGame)

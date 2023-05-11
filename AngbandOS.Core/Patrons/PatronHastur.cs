@@ -11,18 +11,32 @@ namespace AngbandOS.Core.Patrons
     [Serializable]
     internal class PatronHastur : Patron
     {
-        protected override void Initialise()
+        private PatronHastur(SaveGame saveGame) : base(saveGame) { }
+        public override string ShortName => "Hastur";
+        public override string LongName => "Hastur, the Unspeakable";
+        public override int PreferredAbility => -1;
+        protected override Reward[] Rewards => new Reward[]
         {
-            ShortName = "Hastur";
-            LongName = "Hastur, the Unspeakable";
-            PreferredAbility = -1;
-            Rewards = new[]
-            {
-                Reward.Wrath, Reward.SerDemo, Reward.CurseWp, Reward.CurseAr, Reward.LoseExp, Reward.GainAbl,
-                Reward.LoseAbl, Reward.PolyWnd, Reward.PolySlf, Reward.Ignore, Reward.Destruct, Reward.MassGen,
-                Reward.ChaosWp, Reward.GreaObj, Reward.HurtLot, Reward.AugmAbl, Reward.RuinAbl, Reward.HSummon,
-                Reward.GreaObs, Reward.AugmAbl
-            };
-        }
+            SaveGame.SingletonRepository.Rewards.Get<WrathReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<SerDemoReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<CurseWpReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<CurseArReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<LoseExpReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<GainAblReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<LoseAblReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<PolyWndReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<PolySlfReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<IgnoreReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<DestructReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<MassGenReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<ChaosWpReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<GreaObjReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<HurtLotReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<AugmAblReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<RuinAblReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<HSummonReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<GreaObsReward>(),
+            SaveGame.SingletonRepository.Rewards.Get<AugmAblReward>()
+        };
     }
 }

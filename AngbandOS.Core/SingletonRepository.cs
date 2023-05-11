@@ -8,6 +8,7 @@ namespace AngbandOS.Core
     /// </summary>
     internal class SingletonRepository
     {
+        public SingletonDictionary<Patron> Patrons;
         public SingletonDictionary<Animation> Animations;
         public SingletonDictionary<FixedArtifact> FixedArtifacts;
         [Obsolete("Needs to be non-keyed")]
@@ -43,6 +44,7 @@ namespace AngbandOS.Core
         public SingletonList<ClassSpell> ClassSpells; // TODO: This needs to use a DualDictionary
         public SingletonDictionary<Spell> Spells;
         public SingletonDictionary<CastingType> CastingTypes;
+        public SingletonDictionary<Reward> Rewards;
 
         public SingletonList<string> ShopKeeperGoodComments;
         public SingletonList<string> ShopKeeperBargainComments;
@@ -106,6 +108,8 @@ namespace AngbandOS.Core
         public void Initialize(SaveGame saveGame)
         {
             ClassSpells = new SingletonList<ClassSpell>(saveGame, LoadTypesFromAssembly<ClassSpell>(saveGame));
+            Rewards = new SingletonDictionary<Reward>(saveGame, LoadTypesFromAssembly<Reward>(saveGame));
+            Patrons = new SingletonDictionary<Patron>(saveGame, LoadTypesFromAssembly<Patron>(saveGame));
             Spells = new SingletonDictionary<Spell>(saveGame, LoadTypesFromAssembly<Spell>(saveGame));
             CastingTypes = new SingletonDictionary<CastingType>(saveGame, LoadTypesFromAssembly<CastingType>(saveGame));
             InGameCommands = new SingletonDictionary<GameCommand>(saveGame, LoadTypesFromAssembly<GameCommand>(saveGame));
