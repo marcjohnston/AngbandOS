@@ -33,7 +33,7 @@
             "(at lvl 30) and fear (at lvl 40)."
         };
         public override int SpellWeight => 400;
-        public override CastingType SpellCastingType => CastingType.Divine;
+        public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get<DivineCastingType>();
         public override int SpellStat => Ability.Intelligence;
         public override int MaximumWeight => 30;
         public override int AttackSpeedMultiplier => 4;

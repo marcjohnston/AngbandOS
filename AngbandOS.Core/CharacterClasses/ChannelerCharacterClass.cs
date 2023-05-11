@@ -33,7 +33,7 @@
             "without depleting them."
         };
         public override int SpellWeight => 400;
-        public override CastingType SpellCastingType => CastingType.Channeling;
+        public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get<ChannelingCastingType>();
         public override int SpellStat => Ability.Charisma;
         public override int MaximumMeleeAttacksPerRound(int level) => 4;
         public override int MaximumWeight => 40;

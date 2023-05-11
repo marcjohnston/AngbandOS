@@ -71,7 +71,7 @@
         /// <value>The spell weight.</value>
         public virtual int SpellWeight => 0;
 
-        public virtual CastingType SpellCastingType => CastingType.None;
+        public virtual CastingType? SpellCastingType => null;
 
         public virtual int SpellStat => Ability.Strength;
 

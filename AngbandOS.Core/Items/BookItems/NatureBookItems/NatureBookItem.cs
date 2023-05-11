@@ -4,6 +4,6 @@ namespace AngbandOS.Core.Items
     internal abstract class NatureBookItem : BookItem
     {
         public NatureBookItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-        protected override string RealmName => "Nature";
+        public override string RealmName => "Nature";
     }
 }

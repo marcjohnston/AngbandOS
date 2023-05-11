@@ -14,25 +14,12 @@ namespace AngbandOS.Core.FlaggedActions
         public UpdateManaFlaggedAction(SaveGame saveGame) : base(saveGame) { }
         protected override void Execute()
         {
-            int levels;
-            switch (SaveGame.Player.BaseCharacterClass.SpellCastingType)
+            
+            if (SaveGame.Player.BaseCharacterClass.SpellCastingType == null)
             {
-                case CastingType.None:
-                    return;
-
-                case CastingType.Arcane:
-                case CastingType.Divine:
-                    levels = SaveGame.Player.Level - SaveGame.SpellFirst + 1;
-                    break;
-
-                case CastingType.Mentalism:
-                case CastingType.Channeling:
-                    levels = SaveGame.Player.Level;
-                    break;
-
-                default:
-                    throw new ArgumentOutOfRangeException();
+                return;
             }
+            int levels = SaveGame.Player.BaseCharacterClass.SpellCastingType.Levels;
             if (levels < 0)
             {
                 levels = 0;
@@ -54,7 +41,7 @@ namespace AngbandOS.Core.FlaggedActions
                 msp = inventorySlot.CalcMana(SaveGame, msp);
             }
 
-            if (SaveGame.Player.BaseCharacterClass.SpellCastingType == CastingType.Arcane)
+            if (SaveGame.Player.BaseCharacterClass.SpellCastingType.WeightEncumbersMovement)
             {
                 int curWgt = 0;
                 foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots)

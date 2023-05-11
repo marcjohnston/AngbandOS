@@ -20,8 +20,8 @@
             {
                 return;
             }
-            string p = SaveGame.Player.BaseCharacterClass.SpellCastingType == CastingType.Arcane ? "spell" : "prayer";
-            if (SaveGame.Player.BaseCharacterClass.SpellCastingType == CastingType.None)
+            string p = SaveGame.Player.BaseCharacterClass.SpellCastingType.SpellNoun;
+            if (SaveGame.Player.BaseCharacterClass.SpellCastingType == null)
             {
                 return;
             }

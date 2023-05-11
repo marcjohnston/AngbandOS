@@ -1274,7 +1274,7 @@ namespace AngbandOS.Core.Stores
 
         private void DoCmdStudy()
         {
-            string spellType = SaveGame.Player.BaseCharacterClass.SpellCastingType == CastingType.Arcane ? "spell" : "prayer";
+            string spellType = SaveGame.Player.BaseCharacterClass.SpellCastingType.SpellNoun;
             // If we don't have a realm then we can't do anything
             if (!SaveGame.Player.CanCastSpells)
             {
@@ -1316,8 +1316,9 @@ namespace AngbandOS.Core.Stores
             bool useSetTwo = item.Category == SaveGame.Player.SecondaryRealm.SpellBookItemCategory;
             SaveGame.HandleStuff();
             int spellIndex;
+
             // Arcane casters can choose their spell
-            if (SaveGame.Player.BaseCharacterClass.SpellCastingType != CastingType.Divine)
+            if (SaveGame.Player.BaseCharacterClass.SpellCastingType.CanChooseSpellToStudy)
             {
                 if (!SaveGame.GetSpell(out spellIndex, "study", itemSubCategory, false, useSetTwo, SaveGame.Player) && spellIndex == -1)
                 {

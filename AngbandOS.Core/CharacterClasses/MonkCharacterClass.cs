@@ -52,7 +52,7 @@
             "WIS based casters using Chaos, Tarot or Corporeal magic."
         };
         public override int SpellWeight => 300;
-        public override CastingType SpellCastingType => CastingType.Divine;
+        public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get<DivineCastingType>();
         public override int SpellStat => Ability.Wisdom;
         public override int MaximumMeleeAttacksPerRound(int level) => level < 40 ? 3 : 4;
         public override int MaximumWeight => 40;

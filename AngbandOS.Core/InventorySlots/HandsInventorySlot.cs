@@ -26,7 +26,7 @@ namespace AngbandOS.Core.InventorySlots
 
         public override int CalcMana(SaveGame saveGame, int msp)
         {
-            if (SaveGame.Player.BaseCharacterClass.SpellCastingType == CastingType.Arcane)
+            if (SaveGame.Player.BaseCharacterClass.SpellCastingType.CoveredHandsRestrictCasting)
             {
                 bool previousRestrictingGloves = RestrictingGloves;
                 RestrictingGloves = false;

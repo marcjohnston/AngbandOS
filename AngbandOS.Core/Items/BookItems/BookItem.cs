@@ -8,16 +8,16 @@ namespace AngbandOS.Core.Items
         /// </summary>
         public virtual int ExperienceGainDivisorForDestroying => 4;
 
-        protected abstract string RealmName { get; }
+        public abstract string RealmName { get; }
 
         /// <summary>
         /// Returns the divine title for the book to be returned as the description.  The divine title defaults to the realm name with a "Magic" suffix.
         /// </summary>
-        protected virtual string DivineTitle => $"{RealmName} Magic";
+        public virtual string DivineTitle => $"{RealmName} Magic";
 
         public override string GetDescription(bool includeCountPrefix)
         {
-            string name = SaveGame.Player.BaseCharacterClass.SpellCastingType == CastingType.Divine ? $"{Pluralize("Book", Count)} of {DivineTitle}" : $"{RealmName} {Pluralize("Spellbook", Count)}";
+            string name = SaveGame.Player.BaseCharacterClass.SpellCastingType.GetBookTitle(this);
             name = $"{name} {Factory.FriendlyName}";
             return includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
         }

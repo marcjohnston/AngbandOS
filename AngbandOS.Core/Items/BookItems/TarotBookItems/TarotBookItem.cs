@@ -4,6 +4,6 @@ namespace AngbandOS.Core.Items
     internal abstract class TarotBookItem : BookItem
     {
         public TarotBookItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-        protected override string RealmName => "Tarot";
+        public override string RealmName => "Tarot";
     }
 }

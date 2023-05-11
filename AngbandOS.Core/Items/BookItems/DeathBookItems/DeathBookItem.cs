@@ -4,6 +4,6 @@ namespace AngbandOS.Core.Items
     internal abstract class DeathBookItem : BookItem
     {
         public DeathBookItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-        protected override string RealmName => "Death";
+        public override string RealmName => "Death";
     }
 }

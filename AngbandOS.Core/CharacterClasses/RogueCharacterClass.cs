@@ -51,7 +51,7 @@
             "from the Tarot, Sorcery, Death, or Folk realms."
        };
         public override int SpellWeight => 350;
-        public override CastingType SpellCastingType => CastingType.Arcane;
+        public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get<ArcaneCastingType>();
         public override int SpellStat => Ability.Intelligence;
         public override int MaximumWeight => 30;
         public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get<RogueArtifactBias>();

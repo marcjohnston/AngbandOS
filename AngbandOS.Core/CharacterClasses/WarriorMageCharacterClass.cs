@@ -34,7 +34,7 @@
             "flexibility by increasing in level only slowly."
         };
         public override int SpellWeight => 350;
-        public override CastingType SpellCastingType => CastingType.Arcane;
+        public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get<ArcaneCastingType>();
         public override int SpellStat => Ability.Intelligence;
         public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get<MageArtifactBias>();
         public override int FromScrollWarriorArtifactBiasPercentageChance => 40;

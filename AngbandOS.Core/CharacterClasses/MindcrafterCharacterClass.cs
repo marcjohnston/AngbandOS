@@ -35,7 +35,7 @@
             "(at lvl 30), and gain telepathy (at lvl 40)."
         };
         public override int SpellWeight => 300;
-        public override CastingType SpellCastingType => CastingType.Mentalism;
+        public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get<MentalismCastingType>();
         public override int SpellStat => Ability.Wisdom;
         public override IArtifactBias? ArtifactBias => (Program.Rng.DieRoll(5) > 2 ? SaveGame.SingletonRepository.ArtifactBiases.Get<PriestlyArtifactBias>() : null);
         public override bool SenseInventoryTest(int level) => (0 != Program.Rng.RandomLessThan(55000 / ((level * level) + 40)));

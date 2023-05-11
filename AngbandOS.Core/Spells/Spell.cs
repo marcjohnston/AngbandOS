@@ -63,7 +63,7 @@ namespace AngbandOS.Core.Spells
         public int FailureChance() 
         {
             BaseCharacterClass baseCharacterClass = SaveGame.Player.BaseCharacterClass;
-            if (baseCharacterClass.SpellCastingType == CastingType.None)
+            if (baseCharacterClass.SpellCastingType == null)
             {
                 return 100;
             }

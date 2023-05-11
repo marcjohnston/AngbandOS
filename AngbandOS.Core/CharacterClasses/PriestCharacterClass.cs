@@ -43,7 +43,7 @@
             "weapons unless they are blessed, but can use any armour."
         };
         public override int SpellWeight => 350;
-        public override CastingType SpellCastingType => CastingType.Divine;
+        public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get<DivineCastingType>();
         public override int SpellStat => Ability.Wisdom;
         public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get<PriestlyArtifactBias>();
         public override bool SenseInventoryTest(int level) => (0 != Program.Rng.RandomLessThan(10000 / ((level * level) + 40)));
