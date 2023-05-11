@@ -12,5 +12,10 @@
         public abstract BaseRealm? ToRealm { get; }
 
         public abstract Spell[] Spells { get; }
+
+        /// <summary>
+        /// Returns true, if a book is a high level book; false, otherwise.  False is returned, by default.
+        /// </summary>
+        public virtual bool IsHighLevelBook => false;
     }
 }

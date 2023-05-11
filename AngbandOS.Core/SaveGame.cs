@@ -7874,13 +7874,8 @@ namespace AngbandOS.Core
         /// <returns> True if the item is a high level book </returns>
         public bool ItemFilterHighLevelBook(Item item)
         {
-            if (item.Category == ItemTypeEnum.LifeBook || item.Category == ItemTypeEnum.SorceryBook ||
-                item.Category == ItemTypeEnum.NatureBook || item.Category == ItemTypeEnum.ChaosBook ||
-                item.Category == ItemTypeEnum.DeathBook || item.Category == ItemTypeEnum.TarotBook)
-            {
-                return item.ItemSubCategory > 1;
-            }
-            return false;
+            BookItem? bookItem = item.TryCast<BookItem>();
+            return bookItem.Factory.IsHighLevelBook;
         }
 
         /// <summary>

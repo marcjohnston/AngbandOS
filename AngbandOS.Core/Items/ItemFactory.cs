@@ -326,7 +326,7 @@
         public virtual int ToH => 0;
 
         /// <summary>
-        /// Returns whether or not the item affects the tunnelling capabilities of the player when being worn.
+        /// Returns whether or not the item affects the tunneling capabilities of the player when being worn.
         /// </summary>
         public virtual bool Tunnel { get; set; } = false;
 

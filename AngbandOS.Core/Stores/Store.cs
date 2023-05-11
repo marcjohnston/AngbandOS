@@ -30,7 +30,7 @@ namespace AngbandOS.Core.Stores
         /// </summary>
         public int Y => _y;
 
-        private readonly List<Item> _inventory = new List<Item>();
+        private readonly List<Item> _storeInventoryList = new List<Item>();
 
         protected virtual int CarryItem(Item qPtr) => StoreCarry(qPtr);
 
@@ -173,7 +173,7 @@ namespace AngbandOS.Core.Stores
         {
             SaveGame = saveGame;
 
-            _inventory.Clear();
+            _storeInventoryList.Clear();
             StockStoreInventoryItem[] master = GetStoreTable();
             if (master == null)
             {
@@ -202,9 +202,9 @@ namespace AngbandOS.Core.Stores
 
         public void MoveInventoryToAnotherStore(Store newStore)
         {
-            newStore._inventory.Clear();
-            newStore._inventory.AddRange(_inventory);
-            _inventory.Clear();
+            newStore._storeInventoryList.Clear();
+            newStore._storeInventoryList.AddRange(_storeInventoryList);
+            _storeInventoryList.Clear();
         }
 
         public void PageUp()
@@ -218,7 +218,7 @@ namespace AngbandOS.Core.Stores
 
         public void PageDown()
         {
-            if (_storeTop + PageSize < _inventory.Count)
+            if (_storeTop + PageSize < _storeInventoryList.Count)
             {
                 _storeTop += PageSize;
                 DisplayInventory();
@@ -317,7 +317,7 @@ namespace AngbandOS.Core.Stores
         public virtual void StoreInit()
         {
             _owner = GetRandomOwner();
-            _inventory.Clear();
+            _storeInventoryList.Clear();
         }
 
         public virtual void StoreMaint()
@@ -331,7 +331,7 @@ namespace AngbandOS.Core.Stores
             {
                 return;
             }
-            int j = _inventory.Count;
+            int j = _storeInventoryList.Count;
             j -= Program.Rng.DieRoll(StoreTurnover);
             if (j > StoreMaxKeep)
             {
@@ -345,11 +345,11 @@ namespace AngbandOS.Core.Stores
             {
                 j = 0;
             }
-            while (_inventory.Count > j)
+            while (_storeInventoryList.Count > j)
             {
                 StoreDelete();
             }
-            j = _inventory.Count;
+            j = _storeInventoryList.Count;
             j += Program.Rng.DieRoll(StoreTurnover);
             if (j > StoreMaxKeep)
             {
@@ -363,7 +363,7 @@ namespace AngbandOS.Core.Stores
             {
                 j = MaxInventory - 1;
             }
-            while (_inventory.Count < j && _table != null && _table.Length > 0)
+            while (_storeInventoryList.Count < j && _table != null && _table.Length > 0)
             {
                 StoreCreate();
             }
@@ -385,9 +385,9 @@ namespace AngbandOS.Core.Stores
                 return;
             }
             _owner = GetRandomOwner();
-            for (int i = 0; i < _inventory.Count; i++)
+            for (int i = 0; i < _storeInventoryList.Count; i++)
             {
-                Item oPtr = _inventory[i];
+                Item oPtr = _storeInventoryList[i];
                 if (string.IsNullOrEmpty(oPtr.RandartName))
                 {
                     oPtr.Discount = 50;
@@ -411,7 +411,7 @@ namespace AngbandOS.Core.Stores
         {
             string oName;
             int maxwid = WidthOfDescriptionColumn;
-            Item oPtr = _inventory[pos];
+            Item oPtr = _storeInventoryList[pos];
             int i = pos % PageSize;
             string outVal = $"{i.IndexToLetter()}) ";
             SaveGame.Screen.PrintLine(outVal, i + 6, 0);
@@ -452,7 +452,7 @@ namespace AngbandOS.Core.Stores
             int k;
             for (k = 0; k < PageSize; k++)
             {
-                if (_storeTop + k >= _inventory.Count)
+                if (_storeTop + k >= _storeInventoryList.Count)
                 {
                     break;
                 }
@@ -462,14 +462,14 @@ namespace AngbandOS.Core.Stores
             {
                 SaveGame.Screen.PrintLine("", i + 6, 0);
             }
-            SaveGame.Screen.Print(new String(' ', _inventory.Count.ToString().Length * 2 + 11), 5, 20);
-            if (_storeTop + PageSize < _inventory.Count)
+            SaveGame.Screen.Print(new String(' ', _storeInventoryList.Count.ToString().Length * 2 + 11), 5, 20);
+            if (_storeTop + PageSize < _storeInventoryList.Count)
             {
                 SaveGame.Screen.PrintLine("-more-", k + 6, 3);
             }
-            if (_inventory.Count > PageSize)
+            if (_storeInventoryList.Count > PageSize)
             {
-                SaveGame.Screen.Print($"(Page {(_storeTop / PageSize) + 1} of {(_inventory.Count / PageSize) + 1})", 5, 20);
+                SaveGame.Screen.Print($"(Page {(_storeTop / PageSize) + 1} of {(_storeInventoryList.Count / PageSize) + 1})", 5, 20);
             }
         }
 
@@ -669,59 +669,33 @@ namespace AngbandOS.Core.Stores
                 oPtr.IdentMental = true;
                 oPtr.Inscription = "";
             }
-            for (slot = 0; slot < _inventory.Count; slot++)
+            for (slot = 0; slot < _storeInventoryList.Count; slot++)
             {
-                jPtr = _inventory[slot];
+                jPtr = _storeInventoryList[slot];
                 if (StoreObjectSimilar(jPtr, oPtr))
                 {
                     StoreObjectAbsorb(jPtr, oPtr);
                     return slot;
                 }
             }
-            if (_inventory.Count >= MaxInventory)
+            if (_storeInventoryList.Count >= MaxInventory)
             {
                 return -1;
             }
-            for (slot = 0; slot < _inventory.Count; slot++)
+            for (slot = 0; slot < _storeInventoryList.Count; slot++)
             {
-                jPtr = _inventory[slot];
-                if (oPtr.Category > jPtr.Category)
+                jPtr = _storeInventoryList[slot];
+                int compareResult = oPtr.CompareTo(jPtr);
+                if (compareResult < 0)
                 {
                     break;
                 }
-                if (oPtr.Category < jPtr.Category)
+                else if (compareResult > 0)
                 {
                     continue;
-                }
-                if (oPtr.ItemSubCategory < jPtr.ItemSubCategory)
-                {
-                    break;
-                }
-                if (oPtr.ItemSubCategory > jPtr.ItemSubCategory)
-                {
-                    continue;
-                }
-                if (oPtr.Category == ItemTypeEnum.Rod)
-                {
-                    if (oPtr.TypeSpecificValue < jPtr.TypeSpecificValue)
-                    {
-                        break;
-                    }
-                    if (oPtr.TypeSpecificValue > jPtr.TypeSpecificValue)
-                    {
-                        continue;
-                    }
-                }
-                int jValue = jPtr.Value();
-                if (value > jValue)
-                {
-                    break;
-                }
-                if (value < jValue)
-                {
                 }
             }
-            _inventory.Insert(slot, oPtr);
+            _storeInventoryList.Insert(slot, oPtr);
             return slot;
         }
 
@@ -734,76 +708,34 @@ namespace AngbandOS.Core.Stores
         {
             int slot;
             Item jPtr;
-            for (slot = 0; slot < _inventory.Count; slot++)
+            for (slot = 0; slot < _storeInventoryList.Count; slot++)
             {
-                jPtr = _inventory[slot];
+                jPtr = _storeInventoryList[slot];
                 if (jPtr.CanAbsorb(oPtr))
                 {
                     jPtr.Absorb(oPtr);
                     return slot;
                 }
             }
-            if (_inventory.Count >= MaxInventory)
+            if (_storeInventoryList.Count >= MaxInventory)
             {
                 return -1;
             }
             int value = oPtr.Value();
-            for (slot = 0; slot < _inventory.Count; slot++)
+            for (slot = 0; slot < _storeInventoryList.Count; slot++)
             {
-                jPtr = _inventory[slot];
-                if (oPtr.Category > jPtr.Category)
+                jPtr = _storeInventoryList[slot];
+                int compareResult = oPtr.CompareTo(jPtr);
+                if (compareResult < 0)
                 {
                     break;
                 }
-                if (oPtr.Category < jPtr.Category)
+                else if (compareResult > 0)
                 {
                     continue;
-                }
-                if (!oPtr.IsFlavourAware())
-                {
-                    continue;
-                }
-                if (!jPtr.IsFlavourAware())
-                {
-                    break;
-                }
-                if (oPtr.ItemSubCategory < jPtr.ItemSubCategory)
-                {
-                    break;
-                }
-                if (oPtr.ItemSubCategory > jPtr.ItemSubCategory)
-                {
-                    continue;
-                }
-                if (!oPtr.IsKnown())
-                {
-                    continue;
-                }
-                if (!jPtr.IsKnown())
-                {
-                    break;
-                }
-                if (oPtr.Category == ItemTypeEnum.Rod)
-                {
-                    if (oPtr.TypeSpecificValue < jPtr.TypeSpecificValue)
-                    {
-                        break;
-                    }
-                    if (oPtr.TypeSpecificValue > jPtr.TypeSpecificValue)
-                    {
-                        continue;
-                    }
-                }
-                int jValue = jPtr.Value();
-                if (value > jValue)
-                {
-                    break;
-                }
-                if (value < jValue)
-                {
                 }
             }
-            _inventory.Insert(slot, oPtr.Clone());
+            _storeInventoryList.Insert(slot, oPtr.Clone());
             return slot;
         }
 
@@ -1108,13 +1040,13 @@ namespace AngbandOS.Core.Stores
         {
             int i;
             Item jPtr;
-            if (_inventory.Count < MaxInventory)
+            if (_storeInventoryList.Count < MaxInventory)
             {
                 return true;
             }
-            for (i = 0; i < _inventory.Count; i++)
+            for (i = 0; i < _storeInventoryList.Count; i++)
             {
-                jPtr = _inventory[i];
+                jPtr = _storeInventoryList[i];
                 if (StoreCanMergeItem(oPtr, jPtr))
                 {
                     return true;
@@ -1147,7 +1079,7 @@ namespace AngbandOS.Core.Stores
 
         private void StoreCreate()
         {
-            if (_inventory.Count >= MaxInventory)
+            if (_storeInventoryList.Count >= MaxInventory)
             {
                 return;
             }
@@ -1172,8 +1104,8 @@ namespace AngbandOS.Core.Stores
 
         private void StoreDelete()
         {
-            int what = Program.Rng.RandomLessThan(_inventory.Count);
-            int num = _inventory[what].Count;
+            int what = Program.Rng.RandomLessThan(_storeInventoryList.Count);
+            int num = _storeInventoryList[what].Count;
             if (Program.Rng.RandomLessThan(100) < 50)
             {
                 num = (num + 1) / 2;
@@ -1188,12 +1120,12 @@ namespace AngbandOS.Core.Stores
 
         public void StoreExamine()
         {
-            if (_inventory.Count <= 0)
+            if (_storeInventoryList.Count <= 0)
             {
                 SaveGame.MsgPrint(NoStockMessage);
                 return;
             }
-            int i = _inventory.Count - _storeTop;
+            int i = _storeInventoryList.Count - _storeTop;
             if (i > PageSize)
             {
                 i = PageSize;
@@ -1204,7 +1136,7 @@ namespace AngbandOS.Core.Stores
                 return;
             }
             item += _storeTop;
-            Item oPtr = _inventory[item];
+            Item oPtr = _storeInventoryList[item];
             BookItem? bookItem = oPtr.TryCast<BookItem>();
             if (bookItem != null)
             {
@@ -1233,7 +1165,7 @@ namespace AngbandOS.Core.Stores
 
         private void StoreItemIncrease(int item, int num)
         {
-            Item oPtr = _inventory[item];
+            Item oPtr = _storeInventoryList[item];
             int cnt = oPtr.Count + num;
             if (cnt > 255)
             {
@@ -1249,7 +1181,7 @@ namespace AngbandOS.Core.Stores
 
         private void StoreItemOptimize(int item)
         {
-            Item oPtr = _inventory[item];
+            Item oPtr = _storeInventoryList[item];
             if (oPtr.Factory == null)
             {
                 return;
@@ -1258,7 +1190,7 @@ namespace AngbandOS.Core.Stores
             {
                 return;
             }
-            _inventory.RemoveAt(item);
+            _storeInventoryList.RemoveAt(item);
         }
 
         private void StoreObjectAbsorb(Item oPtr, Item jPtr)
@@ -1727,12 +1659,12 @@ namespace AngbandOS.Core.Stores
         {
             int itemNew;
             string oName;
-            if (_inventory.Count <= 0)
+            if (_storeInventoryList.Count <= 0)
             {
                 SaveGame.MsgPrint(NoStockMessage);
                 return;
             }
-            int i = _inventory.Count - _storeTop;
+            int i = _storeInventoryList.Count - _storeTop;
             if (i > PageSize)
             {
                 i = PageSize;
@@ -1743,7 +1675,7 @@ namespace AngbandOS.Core.Stores
                 return;
             }
             item += _storeTop;
-            Item oPtr = _inventory[item];
+            Item oPtr = _storeInventoryList[item];
             int amt = 1;
             Item jPtr = oPtr.Clone(amt);
             if (!SaveGame.Player.InvenCarryOkay(jPtr))
@@ -1819,10 +1751,10 @@ namespace AngbandOS.Core.Stores
                         oName = newItemInInventory.Description(true, 3);
                         SaveGame.MsgPrint($"You have {oName} ({itemNew.IndexToLabel()}).");
                         SaveGame.HandleStuff();
-                        i = _inventory.Count;
+                        i = _storeInventoryList.Count;
                         StoreItemIncrease(item, -amt);
                         StoreItemOptimize(item);
-                        if (_inventory.Count == 0)
+                        if (_storeInventoryList.Count == 0)
                         {
                             if (MaintainsStockLevels)
                             {
@@ -1843,9 +1775,9 @@ namespace AngbandOS.Core.Stores
                             _storeTop = 0;
                             DisplayInventory();
                         }
-                        else if (_inventory.Count != i)
+                        else if (_storeInventoryList.Count != i)
                         {
-                            if (_storeTop >= _inventory.Count)
+                            if (_storeTop >= _storeInventoryList.Count)
                             {
                                 _storeTop -= PageSize;
                             }
@@ -1873,20 +1805,20 @@ namespace AngbandOS.Core.Stores
                 oName = newItemInInventory.Description(true, 3);
                 SaveGame.MsgPrint($"You have {oName} ({itemNew.IndexToLabel()}).");
                 SaveGame.HandleStuff();
-                i = _inventory.Count;
+                i = _storeInventoryList.Count;
                 StoreItemIncrease(item, -amt);
                 StoreItemOptimize(item);
-                if (i == _inventory.Count)
+                if (i == _storeInventoryList.Count)
                 {
                     DisplayEntry(item);
                 }
                 else
                 {
-                    if (_inventory.Count == 0)
+                    if (_storeInventoryList.Count == 0)
                     {
                         _storeTop = 0;
                     }
-                    else if (_storeTop >= _inventory.Count)
+                    else if (_storeTop >= _storeInventoryList.Count)
                     {
                         _storeTop -= PageSize;
                     }

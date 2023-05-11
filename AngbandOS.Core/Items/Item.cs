@@ -529,6 +529,7 @@ namespace AngbandOS.Core.Items
 
         public bool IsKnownArtifact => IsKnown() && (FixedArtifact != null || !string.IsNullOrEmpty(RandartName));
 
+        [Obsolete]
         public ItemTypeEnum Category => Factory == null ? ItemTypeEnum.None : Factory.CategoryEnum; // Provided for backwards compatability.  Will be deleted.
 
         public void Absorb(Item other)

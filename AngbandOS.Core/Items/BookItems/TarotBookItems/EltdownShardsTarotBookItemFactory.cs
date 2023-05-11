@@ -21,6 +21,11 @@ namespace AngbandOS.Core.ItemCategories
         public override int Level => 40;
         public override int[] Locale => new int[] { 40, 0, 0, 0 };
         public override int? SubCategory => 2;
+
+        /// <summary>
+        /// Returns true, because this book is a high level book.
+        /// </summary>
+        public override bool IsHighLevelBook => true;
         public override int Weight => 30;
         public override bool KindIsGood => true;
         public override Item CreateItem() => new EltdownShardsTarotBookItem(SaveGame);
