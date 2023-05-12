@@ -106,7 +106,7 @@ namespace AngbandOS.Core
             return shuffledList.ToArray();
         }
 
-        public void Initialize(SaveGame saveGame)
+        public SingletonRepository(SaveGame saveGame)
         {
             ClassSpells = new SingletonList<ClassSpell>(saveGame, LoadTypesFromAssembly<ClassSpell>(saveGame));
             Rewards = new SingletonDictionary<Reward>(saveGame, LoadTypesFromAssembly<Reward>(saveGame));
