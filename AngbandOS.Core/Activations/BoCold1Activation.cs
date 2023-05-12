@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Core.ActivationPowers
+﻿namespace AngbandOS.Core.Activations
 {
     /// <summary>
     /// Shoot a frost bolt that does 6d8 damage.

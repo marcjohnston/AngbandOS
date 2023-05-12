@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Core.ActivationPowers
+﻿namespace AngbandOS.Core.Activations
 {
     /// <summary>
     /// Shoot a fire bolt that does 9d8 damage.

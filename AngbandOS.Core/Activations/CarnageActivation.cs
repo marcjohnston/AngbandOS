@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Core.ActivationPowers
+﻿namespace AngbandOS.Core.Activations
 {
     /// <summary>
     /// Carnage a chosen creature type.

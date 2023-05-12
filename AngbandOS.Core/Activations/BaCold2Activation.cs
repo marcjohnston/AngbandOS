@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Core.ActivationPowers
+﻿namespace AngbandOS.Core.Activations
 {
     /// <summary>
     /// Shoot a frost ball that does 100 damage.

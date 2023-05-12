@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Core.ActivationPowers
+﻿namespace AngbandOS.Core.Activations
 {
     /// <summary>
     /// Shoot a fire ball that does 120 damage with a larger radius.

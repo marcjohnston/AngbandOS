@@ -1,7 +1,7 @@
 ﻿global using static AngbandOS.Core.Extensions;
 
 global using AngbandOS.Core;
-global using AngbandOS.Core.ActivationPowers;
+global using AngbandOS.Core.Activations;
 global using AngbandOS.Core.AlterActions;
 global using AngbandOS.Core.Animations;
 global using AngbandOS.Core.ArtifactBiases;
