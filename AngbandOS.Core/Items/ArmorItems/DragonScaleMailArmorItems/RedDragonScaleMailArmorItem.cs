@@ -4,5 +4,15 @@ namespace AngbandOS.Core.Items
     internal class RedDragonScaleMailArmorItem : DragonScaleMailArmorItem
     {
         public RedDragonScaleMailArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<RedDragonScaleMailArmorItemFactory>()) { }
+        public override void DoActivate()
+        {
+            if (!SaveGame.GetDirectionWithAim(out int dir))
+            {
+                return;
+            }
+            SaveGame.MsgPrint("You breathe fire.");
+            SaveGame.FireBall(new FireProjectile(SaveGame), dir, 200, -2);
+            RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+        }
     }
 }

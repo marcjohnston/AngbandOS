@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class DragonScaleMailArmorItemFactory : ArmourItemFactory
+    internal abstract class DragonScaleMailArmorItemFactory : ArmourItemFactory 
     {
         public DragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
         public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<BodyInventorySlot>();

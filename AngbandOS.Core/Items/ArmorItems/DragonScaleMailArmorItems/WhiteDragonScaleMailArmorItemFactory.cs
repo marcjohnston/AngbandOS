@@ -1,3 +1,5 @@
+using AngbandOS.Core.Items;
+
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]

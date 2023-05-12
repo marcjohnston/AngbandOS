@@ -17,11 +17,11 @@
         /// <returns></returns>
         public virtual string? DescribeActivationEffect => null;
 
-        /// <summary>
-        /// Returns an activation power object that handles the activation properties for the item, if the item can be activated; null, if the item cannot be activated.  Returns 
-        /// null, by default.
-        /// </summary>
-        public virtual Activation? ActivationPower => null;
+        ///// <summary>
+        ///// Returns an activation power object that handles the activation properties for the item, if the item can be activated; null, if the item cannot be activated.  Returns 
+        ///// null, by default.
+        ///// </summary>
+        //public virtual Activation? ActivationPower => null;
 
         public ItemFactory(SaveGame saveGame)
         {
