@@ -23,7 +23,7 @@
 
 //        protected override bool Activate(int direction)
 //        {
-//            SaveGame.FireBall(new ElecProjectile(SaveGame), direction, 100, -2);
+//            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), direction, 100, -2);
 //            return true;
 //        }
 //    }

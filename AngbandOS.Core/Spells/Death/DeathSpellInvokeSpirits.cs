@@ -60,7 +60,7 @@ namespace AngbandOS.Core.Spells.Death
             }
             if (die < 36)
             {
-                SaveGame.FireBoltOrBeam(beam - 10, new MissileProjectile(SaveGame), dir,
+                SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), dir,
                     Program.Rng.DiceRoll(3 + ((SaveGame.Player.Level - 1) / 5), 4));
             }
             if (die < 41)
@@ -69,7 +69,7 @@ namespace AngbandOS.Core.Spells.Death
             }
             if (die < 46)
             {
-                SaveGame.FireBall(new PoisProjectile(SaveGame), dir, 20 + (SaveGame.Player.Level / 2), 3);
+                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), dir, 20 + (SaveGame.Player.Level / 2), 3);
             }
             if (die < 51)
             {
@@ -77,22 +77,22 @@ namespace AngbandOS.Core.Spells.Death
             }
             if (die < 56)
             {
-                SaveGame.FireBoltOrBeam(beam - 10, new ElecProjectile(SaveGame), dir,
+                SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir,
                     Program.Rng.DiceRoll(3 + ((SaveGame.Player.Level - 5) / 4), 8));
             }
             if (die < 61)
             {
-                SaveGame.FireBoltOrBeam(beam - 10, new ColdProjectile(SaveGame), dir,
+                SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir,
                     Program.Rng.DiceRoll(5 + ((SaveGame.Player.Level - 5) / 4), 8));
             }
             if (die < 66)
             {
-                SaveGame.FireBoltOrBeam(beam, new AcidProjectile(SaveGame), dir,
+                SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir,
                     Program.Rng.DiceRoll(6 + ((SaveGame.Player.Level - 5) / 4), 8));
             }
             if (die < 71)
             {
-                SaveGame.FireBoltOrBeam(beam, new FireProjectile(SaveGame), dir,
+                SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir,
                     Program.Rng.DiceRoll(8 + ((SaveGame.Player.Level - 5) / 4), 8));
             }
             if (die < 76)
@@ -101,19 +101,19 @@ namespace AngbandOS.Core.Spells.Death
             }
             if (die < 81)
             {
-                SaveGame.FireBall(new ElecProjectile(SaveGame), dir, 30 + (SaveGame.Player.Level / 2), 2);
+                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, 30 + (SaveGame.Player.Level / 2), 2);
             }
             if (die < 86)
             {
-                SaveGame.FireBall(new AcidProjectile(SaveGame), dir, 40 + SaveGame.Player.Level, 2);
+                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir, 40 + SaveGame.Player.Level, 2);
             }
             if (die < 91)
             {
-                SaveGame.FireBall(new IceProjectile(SaveGame), dir, 70 + SaveGame.Player.Level, 3);
+                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<IceProjectile>(), dir, 70 + SaveGame.Player.Level, 3);
             }
             if (die < 96)
             {
-                SaveGame.FireBall(new FireProjectile(SaveGame), dir, 80 + SaveGame.Player.Level, 3);
+                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, 80 + SaveGame.Player.Level, 3);
             }
             if (die < 101)
             {

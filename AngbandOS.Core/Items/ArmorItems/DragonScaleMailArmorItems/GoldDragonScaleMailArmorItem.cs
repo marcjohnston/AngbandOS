@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Items
                 return;
             }
             SaveGame.MsgPrint("You breathe sound.");
-            SaveGame.FireBall(new SoundProjectile(SaveGame), dir, 130, -2);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<SoundProjectile>(), dir, 130, -2);
             RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
         }
     }

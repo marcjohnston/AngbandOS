@@ -27,7 +27,7 @@ namespace AngbandOS.Core.Talents
                 {
                     return;
                 }
-                saveGame.FireBall(new DominationProjectile(saveGame), dir, saveGame.Player.Level, 0);
+                saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<DominationProjectile>(), dir, saveGame.Player.Level, 0);
             }
             else
             {

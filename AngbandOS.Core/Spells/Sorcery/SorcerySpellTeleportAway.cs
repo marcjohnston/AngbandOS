@@ -18,7 +18,7 @@ namespace AngbandOS.Core.Spells.Sorcery
             {
                 return;
             }
-            SaveGame.FireBeam(new TeleportAwayAllProjectile(SaveGame), dir, SaveGame.Player.Level);
+            SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<TeleportAwayAllProjectile>(), dir, SaveGame.Player.Level);
         }
 
         public override string Name => "Teleport Away";

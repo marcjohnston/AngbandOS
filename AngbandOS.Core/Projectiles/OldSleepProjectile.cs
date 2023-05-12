@@ -10,9 +10,7 @@ namespace AngbandOS.Core.Projection
 {
     internal class OldSleepProjectile : Projectile
     {
-        public OldSleepProjectile(SaveGame saveGame) : base(saveGame)
-        {
-        }
+        private OldSleepProjectile(SaveGame saveGame) : base(saveGame) { }
 
         protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<YellowSparkleAnimation>();
 

@@ -18,7 +18,7 @@ namespace AngbandOS.Core.Spells.Chaos
             {
                 return;
             }
-            SaveGame.FireBall(new ChaosProjectile(SaveGame), dir, SaveGame.Player.Health, -2);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>(), dir, SaveGame.Player.Health, -2);
         }
 
         public override string Name => "Breathe Chaos";

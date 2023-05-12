@@ -18,7 +18,7 @@ namespace AngbandOS.Core.Spells.Death
             {
                 return;
             }
-            SaveGame.FireBall(new HellFireProjectile(SaveGame), dir,
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<HellFireProjectile>(), dir,
                 Program.Rng.DiceRoll(3 + ((SaveGame.Player.Level - 1) / 5), 3), 0);
             if (Program.Rng.DieRoll(5) != 1)
             {
@@ -27,17 +27,17 @@ namespace AngbandOS.Core.Spells.Death
             int dummy = Program.Rng.DieRoll(1000);
             if (dummy == 666)
             {
-                SaveGame.FireBolt(new DeathRayProjectile(SaveGame), dir, SaveGame.Player.Level);
+                SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<DeathRayProjectile>(), dir, SaveGame.Player.Level);
             }
             if (dummy < 500)
             {
-                SaveGame.FireBolt(new TurnAllProjectile(SaveGame), dir, SaveGame.Player.Level);
+                SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<TurnAllProjectile>(), dir, SaveGame.Player.Level);
             }
             if (dummy < 800)
             {
-                SaveGame.FireBolt(new OldConfProjectile(SaveGame), dir, SaveGame.Player.Level);
+                SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<OldConfProjectile>(), dir, SaveGame.Player.Level);
             }
-            SaveGame.FireBolt(new StunProjectile(SaveGame), dir, SaveGame.Player.Level);
+            SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<StunProjectile>(), dir, SaveGame.Player.Level);
         }
 
         public override string Name => "Malediction";

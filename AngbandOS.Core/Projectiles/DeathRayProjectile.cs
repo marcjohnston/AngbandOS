@@ -2,9 +2,7 @@
 {
     internal class DeathRayProjectile : Projectile
     {
-        public DeathRayProjectile(SaveGame saveGame) : base(saveGame)
-        {
-        }
+        private DeathRayProjectile(SaveGame saveGame) : base(saveGame) { }
 
         protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<CopperBoltProjectileGraphic>();
 

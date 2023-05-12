@@ -10,9 +10,7 @@ namespace AngbandOS.Core.Projection
 {
     internal class StoneWallProjectile : Projectile
     {
-        public StoneWallProjectile(SaveGame saveGame) : base(saveGame)
-        {
-        }
+        private StoneWallProjectile(SaveGame saveGame) : base(saveGame) { }
 
         protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<BrightGreySparkleAnimation>();
 

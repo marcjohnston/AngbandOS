@@ -33,7 +33,7 @@ namespace AngbandOS.Core.Spells.Tarot
             {
                 return;
             }
-            SaveGame.FireBoltOrBeam(beam - 10, new PsiProjectile(SaveGame), dir,
+            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir,
                 Program.Rng.DiceRoll(3 + ((SaveGame.Player.Level - 1) / 5), 3));
         }
 

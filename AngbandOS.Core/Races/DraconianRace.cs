@@ -101,12 +101,12 @@
             // Default to being randomly fire (66% chance) or cold (33% chance)
             if (Program.Rng.DieRoll(3) == 1)
             {
-                projectile = new ColdProjectile(saveGame);
+                projectile = saveGame.SingletonRepository.Projectiles.Get<ColdProjectile>();
                 projectileDescription = "cold";
             }
             else
             {
-                projectile = new FireProjectile(saveGame);
+                projectile = saveGame.SingletonRepository.Projectiles.Get<FireProjectile>();
                 projectileDescription = "fire";
             }
 
@@ -121,12 +121,12 @@
                     case CharacterClass.ChosenOne:
                         if (Program.Rng.DieRoll(3) == 1)
                         {
-                            projectile = new MissileProjectile(saveGame);
+                            projectile = saveGame.SingletonRepository.Projectiles.Get<MissileProjectile>();
                             projectileDescription = "the elements";
                         }
                         else
                         {
-                            projectile = new ExplodeProjectile(saveGame);
+                            projectile = saveGame.SingletonRepository.Projectiles.Get<ExplodeProjectile>();
                             projectileDescription = "shards";
                         }
                         break;
@@ -137,12 +137,12 @@
                     case CharacterClass.Channeler:
                         if (Program.Rng.DieRoll(3) == 1)
                         {
-                            projectile = new ManaProjectile(saveGame);
+                            projectile = saveGame.SingletonRepository.Projectiles.Get<ManaProjectile>();
                             projectileDescription = "mana";
                         }
                         else
                         {
-                            projectile = new DisenchantProjectile(saveGame);
+                            projectile = saveGame.SingletonRepository.Projectiles.Get<DisenchantProjectile>();
                             projectileDescription = "disenchantment";
                         }
                         break;
@@ -151,12 +151,12 @@
                     case CharacterClass.Cultist:
                         if (Program.Rng.DieRoll(3) != 1)
                         {
-                            projectile = new ConfusionProjectile(saveGame);
+                            projectile = saveGame.SingletonRepository.Projectiles.Get<ConfusionProjectile>();
                             projectileDescription = "confusion";
                         }
                         else
                         {
-                            projectile = new ChaosProjectile(saveGame);
+                            projectile = saveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>();
                             projectileDescription = "chaos";
                         }
                         break;
@@ -164,12 +164,12 @@
                     case CharacterClass.Monk:
                         if (Program.Rng.DieRoll(3) != 1)
                         {
-                            projectile = new ConfusionProjectile(saveGame);
+                            projectile = saveGame.SingletonRepository.Projectiles.Get<ConfusionProjectile>();
                             projectileDescription = "confusion";
                         }
                         else
                         {
-                            projectile = new SoundProjectile(saveGame);
+                            projectile = saveGame.SingletonRepository.Projectiles.Get<SoundProjectile>();
                             projectileDescription = "sound";
                         }
                         break;
@@ -178,12 +178,12 @@
                     case CharacterClass.Mystic:
                         if (Program.Rng.DieRoll(3) != 1)
                         {
-                            projectile = new ConfusionProjectile(saveGame);
+                            projectile = saveGame.SingletonRepository.Projectiles.Get<ConfusionProjectile>();
                             projectileDescription = "confusion";
                         }
                         else
                         {
-                            projectile = new PsiProjectile(saveGame);
+                            projectile = saveGame.SingletonRepository.Projectiles.Get<PsiProjectile>();
                             projectileDescription = "mental energy";
                         }
                         break;
@@ -192,12 +192,12 @@
                     case CharacterClass.Paladin:
                         if (Program.Rng.DieRoll(3) == 1)
                         {
-                            projectile = new HellFireProjectile(saveGame);
+                            projectile = saveGame.SingletonRepository.Projectiles.Get<HellFireProjectile>();
                             projectileDescription = "hellfire";
                         }
                         else
                         {
-                            projectile = new HolyFireProjectile(saveGame);
+                            projectile = saveGame.SingletonRepository.Projectiles.Get<HolyFireProjectile>();
                             projectileDescription = "holy fire";
                         }
                         break;
@@ -205,12 +205,12 @@
                     case CharacterClass.Rogue:
                         if (Program.Rng.DieRoll(3) == 1)
                         {
-                            projectile = new DarkProjectile(saveGame);
+                            projectile = saveGame.SingletonRepository.Projectiles.Get<DarkProjectile>();
                             projectileDescription = "darkness";
                         }
                         else
                         {
-                            projectile = new PoisProjectile(saveGame);
+                            projectile = saveGame.SingletonRepository.Projectiles.Get<PoisProjectile>();
                             projectileDescription = "poison";
                         }
                         break;

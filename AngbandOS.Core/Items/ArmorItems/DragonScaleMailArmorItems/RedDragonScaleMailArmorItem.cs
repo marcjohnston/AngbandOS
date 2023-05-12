@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Items
                 return;
             }
             SaveGame.MsgPrint("You breathe fire.");
-            SaveGame.FireBall(new FireProjectile(SaveGame), dir, 200, -2);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, 200, -2);
             RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
         }
     }

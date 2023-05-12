@@ -10,9 +10,7 @@ namespace AngbandOS.Core.Projection
 {
     internal class KillTrapProjectile : Projectile
     {
-        public KillTrapProjectile(SaveGame saveGame) : base(saveGame)
-        {
-        }
+        private KillTrapProjectile(SaveGame saveGame) : base(saveGame) { }
 
         protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<RedSwirlAnimation>();
 

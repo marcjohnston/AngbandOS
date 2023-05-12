@@ -15,7 +15,7 @@
 
         protected override bool Activate(int direction)
         {
-            SaveGame.FireBall(new ElecProjectile(SaveGame), direction, 250, 3);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), direction, 250, 3);
             return true;
         }
 

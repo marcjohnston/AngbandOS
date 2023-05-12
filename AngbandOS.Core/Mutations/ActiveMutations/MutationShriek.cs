@@ -17,7 +17,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
             {
                 return;
             }
-            saveGame.FireBall(new SoundProjectile(saveGame), 0, 4 * saveGame.Player.Level, 8);
+            saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<SoundProjectile>(), 0, 4 * saveGame.Player.Level, 8);
             saveGame.AggravateMonsters();
         }
 

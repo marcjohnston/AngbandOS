@@ -16,22 +16,22 @@ namespace AngbandOS.Core.Items
             switch (chance)
             {
                 case 0:
-                    SaveGame.FireBall(new FireProjectile(SaveGame), dir, 250, -2);
+                    SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, 250, -2);
                     return;
                 case 1:
-                    SaveGame.FireBall(new ElecProjectile(SaveGame), dir, 250, -2);
+                    SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, 250, -2);
                     return;
 
                 case 2:
-                    SaveGame.FireBall(new ColdProjectile(SaveGame), dir, 250, -2);
+                    SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 250, -2);
                     return;
 
                 case 3:
-                    SaveGame.FireBall(new AcidProjectile(SaveGame), dir, 250, -2);
+                    SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir, 250, -2);
                     return;
 
                 case 4:
-                    SaveGame.FireBall(new PoisProjectile(SaveGame), dir, 250, -2);
+                    SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), dir, 250, -2);
                     return;
             }
             RechargeTimeLeft = Program.Rng.RandomLessThan(225) + 225;

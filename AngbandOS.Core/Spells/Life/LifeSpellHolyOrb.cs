@@ -18,7 +18,7 @@ namespace AngbandOS.Core.Spells.Life
             {
                 return;
             }
-            SaveGame.FireBall(new HolyFireProjectile(SaveGame), dir,
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<HolyFireProjectile>(), dir,
                 Program.Rng.DiceRoll(3, 6) + SaveGame.Player.Level + (SaveGame.Player.Level /
                 (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Priest || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)),
                 SaveGame.Player.Level < 30 ? 2 : 3);

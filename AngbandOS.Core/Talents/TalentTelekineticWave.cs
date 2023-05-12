@@ -23,7 +23,7 @@ namespace AngbandOS.Core.Talents
         {
             saveGame.MsgPrint("A wave of pure physical force radiates out from your body!");
             saveGame.Project(0, 3 + (saveGame.Player.Level / 10), saveGame.Player.MapY, saveGame.Player.MapX,
-                saveGame.Player.Level * (saveGame.Player.Level > 39 ? 4 : 3), new TelekinesisProjectile(saveGame),
+                saveGame.Player.Level * (saveGame.Player.Level > 39 ? 4 : 3), saveGame.SingletonRepository.Projectiles.Get<TelekinesisProjectile>(),
                 ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectGrid);
         }
 

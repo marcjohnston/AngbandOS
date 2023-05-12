@@ -17,7 +17,7 @@ internal class SetOfGauntletsWhiteSparkFixedArtifact : FixedArtifact, IActivatib
         {
             return;
         }
-        saveGame.FireBolt(new ElecProjectile(saveGame), dir, Program.Rng.DiceRoll(4, 8));
+        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, Program.Rng.DiceRoll(4, 8));
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(6) + 6;
     }
     public string DescribeActivationEffect() => "lightning bolt (4d8) every 6+d6 turns";

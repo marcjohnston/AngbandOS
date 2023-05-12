@@ -14,7 +14,7 @@ namespace AngbandOS.Core.Spells.Chaos
         private ChaosSpellFlameStrike(SaveGame saveGame) : base(saveGame) { }
         public override void Cast()
         {
-            SaveGame.FireBall(new FireProjectile(SaveGame), 0, 150 + (2 * SaveGame.Player.Level), 8);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), 0, 150 + (2 * SaveGame.Player.Level), 8);
         }
 
         public override string Name => "Flame Strike";

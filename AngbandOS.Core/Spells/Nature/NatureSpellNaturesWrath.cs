@@ -17,7 +17,7 @@ namespace AngbandOS.Core.Spells.Nature
             SaveGame.DispelMonsters(SaveGame.Player.Level * 4);
             SaveGame.Earthquake(SaveGame.Player.MapY, SaveGame.Player.MapX, 20 + (SaveGame.Player.Level / 2));
             SaveGame.Project(0, 1 + (SaveGame.Player.Level / 12), SaveGame.Player.MapY, SaveGame.Player.MapX, 100 + SaveGame.Player.Level,
-                new DisintegrateProjectile(SaveGame), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
+                SaveGame.SingletonRepository.Projectiles.Get<DisintegrateProjectile>(), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
         }
 
         public override string Name => "Nature's Wrath";

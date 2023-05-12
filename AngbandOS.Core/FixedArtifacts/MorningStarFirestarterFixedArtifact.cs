@@ -17,7 +17,7 @@ internal class MorningStarFirestarterFixedArtifact : FixedArtifact, IActivatible
         {
             return;
         }
-        saveGame.FireBall(new FireProjectile(saveGame), dir, 72, 3);
+        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, 72, 3);
         item.RechargeTimeLeft = 100;
     }
     public string DescribeActivationEffect() => "large fire ball (72) every 100 turns";

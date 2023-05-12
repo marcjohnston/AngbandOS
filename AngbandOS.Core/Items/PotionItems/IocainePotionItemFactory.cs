@@ -26,7 +26,7 @@ namespace AngbandOS.Core.ItemCategories
 
         public override bool Smash(SaveGame saveGame, int who, int y, int x)
         {
-            saveGame.Project(who, 1, y, x, 0, new DeathRayProjectile(saveGame), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+            saveGame.Project(who, 1, y, x, 0, saveGame.SingletonRepository.Projectiles.Get<DeathRayProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
             return true;
         }
         public override Item CreateItem() => new IocainePotionItem(SaveGame);

@@ -10,9 +10,7 @@ namespace AngbandOS.Core.Projection
 {
     internal class DominationProjectile : Projectile
     {
-        public DominationProjectile(SaveGame saveGame) : base(saveGame)
-        {
-        }
+        private DominationProjectile(SaveGame saveGame) : base(saveGame) { }
 
         protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<WhiteControlAnimation>();
 

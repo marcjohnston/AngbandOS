@@ -10,9 +10,7 @@ namespace AngbandOS.Core.Projection
 {
     internal class MakeTrapProjectile : Projectile
     {
-        public MakeTrapProjectile(SaveGame saveGame) : base(saveGame)
-        {
-        }
+        private MakeTrapProjectile(SaveGame saveGame) : base(saveGame) { }
 
         protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<BrightRedSparkleAnimation>();
 

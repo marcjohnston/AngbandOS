@@ -10,9 +10,7 @@ namespace AngbandOS.Core.Projection
 {
     internal class TurnEvilProjectile : Projectile
     {
-        public TurnEvilProjectile(SaveGame saveGame) : base(saveGame)
-        {
-        }
+        private TurnEvilProjectile(SaveGame saveGame) : base(saveGame) { }
 
         protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<WhiteControlAnimation>();
 

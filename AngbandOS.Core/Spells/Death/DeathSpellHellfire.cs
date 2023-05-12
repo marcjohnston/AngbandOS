@@ -18,7 +18,7 @@ namespace AngbandOS.Core.Spells.Death
             {
                 return;
             }
-            SaveGame.FireBall(new HellFireProjectile(SaveGame), dir, 666, 3);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<HellFireProjectile>(), dir, 666, 3);
             SaveGame.Player.TakeHit(50 + Program.Rng.DieRoll(50), "the strain of casting Hellfire");
         }
 

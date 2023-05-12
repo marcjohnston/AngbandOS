@@ -27,12 +27,12 @@ namespace AngbandOS.Core.Talents
             }
             if (Program.Rng.DieRoll(100) < saveGame.Player.Level * 2)
             {
-                saveGame.FireBeam(new PsiProjectile(saveGame), dir,
+                saveGame.FireBeam(saveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir,
                     Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 4), 3 + (saveGame.Player.Level / 15)));
             }
             else
             {
-                saveGame.FireBall(new PsiProjectile(saveGame), dir,
+                saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir,
                     Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 4), 3 + (saveGame.Player.Level / 15)), 0);
             }
         }

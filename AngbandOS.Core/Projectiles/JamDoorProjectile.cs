@@ -10,9 +10,7 @@ namespace AngbandOS.Core.Projection
 {
     internal class JamDoorProjectile : Projectile
     {
-        public JamDoorProjectile(SaveGame saveGame) : base(saveGame)
-        {
-        }
+        private JamDoorProjectile(SaveGame saveGame) : base(saveGame) { }
 
         protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<YellowSwirlAnimation>();
 

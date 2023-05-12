@@ -10,9 +10,7 @@ namespace AngbandOS.Core.Projection
 {
     internal class AcidProjectile : Projectile
     {
-        public AcidProjectile(SaveGame saveGame) : base(saveGame)
-        {
-        }
+        private AcidProjectile(SaveGame saveGame) : base(saveGame) { }
 
         protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<BrightChartreuseBoltProjectileGraphic>();
 

@@ -14,7 +14,7 @@ namespace AngbandOS.Core.Spells.Nature
         private NatureSpellCallSunlight(SaveGame saveGame) : base(saveGame) { }
         public override void Cast()
         {
-            SaveGame.FireBall(new LightProjectile(SaveGame), 0, 150, 8);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<LightProjectile>(), 0, 150, 8);
             SaveGame.Level.WizLight();
             if (!SaveGame.Player.Race.IsBurnedBySunlight || SaveGame.Player.HasLightResistance)
             {

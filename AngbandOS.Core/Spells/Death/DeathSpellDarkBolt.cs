@@ -33,7 +33,7 @@ namespace AngbandOS.Core.Spells.Death
             {
                 return;
             }
-            SaveGame.FireBoltOrBeam(beam, new DarkProjectile(SaveGame), dir, Program.Rng.DiceRoll(4 + ((SaveGame.Player.Level - 5) / 4), 8));
+            SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get<DarkProjectile>(), dir, Program.Rng.DiceRoll(4 + ((SaveGame.Player.Level - 5) / 4), 8));
         }
 
         public override string Name => "Dark Bolt";

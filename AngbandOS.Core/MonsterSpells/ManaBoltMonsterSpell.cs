@@ -11,7 +11,7 @@
             int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
             return Program.Rng.DieRoll(monsterLevel * 7 / 2) + 50;
         }
-        protected override Projectile Projectile(SaveGame saveGame) => new ManaProjectile(saveGame);
+        protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get<ManaProjectile>();
         public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { new ReflectSpellResistantDetection() };
     }
 }

@@ -275,7 +275,7 @@ namespace AngbandOS.Core.Spells.Tarot
                     break;
 
                 case 32:
-                    SaveGame.FireBall(new ChaosProjectile(SaveGame), 0, spell + 5, 1 + (spell / 10));
+                    SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>(), 0, spell + 5, 1 + (spell / 10));
                     break;
 
                 case 33:

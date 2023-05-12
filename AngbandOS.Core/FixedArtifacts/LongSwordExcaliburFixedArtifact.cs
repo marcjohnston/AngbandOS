@@ -17,7 +17,7 @@ internal class LongSwordExcaliburFixedArtifact : FixedArtifact, IActivatible
         {
             return;
         }
-        saveGame.FireBall(new ColdProjectile(saveGame), dir, 100, 2);
+        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 100, 2);
         item.RechargeTimeLeft = 300;
     }
     public string DescribeActivationEffect() => "frost ball (100) every 300 turns";

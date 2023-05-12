@@ -36,7 +36,7 @@ namespace AngbandOS.Core.ItemCategories
 
         public override bool Smash(SaveGame saveGame, int who, int y, int x)
         {
-            saveGame.Project(who, 2, y, x, 0, new OldSpeedProjectile(saveGame), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+            saveGame.Project(who, 2, y, x, 0, saveGame.SingletonRepository.Projectiles.Get<OldSpeedProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
             return false;
         }
         public override Item CreateItem() => new SpeedPotionItem(SaveGame);

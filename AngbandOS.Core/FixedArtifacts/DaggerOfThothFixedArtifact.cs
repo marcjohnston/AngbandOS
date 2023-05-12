@@ -17,7 +17,7 @@ internal class DaggerOfThothFixedArtifact : FixedArtifact, IActivatible
         {
             return;
         }
-        saveGame.FireBall(new PoisProjectile(saveGame), dir, 12, 3);
+        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), dir, 12, 3);
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(4) + 4;
     }
     public string DescribeActivationEffect() => "stinking cloud (12) every 4+d4 turns";

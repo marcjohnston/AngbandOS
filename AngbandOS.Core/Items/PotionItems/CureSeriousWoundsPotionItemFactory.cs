@@ -45,7 +45,7 @@ namespace AngbandOS.Core.ItemCategories
 
         public override bool Smash(SaveGame saveGame, int who, int y, int x)
         {
-            saveGame.Project(who, 2, y, x, Program.Rng.DiceRoll(4, 3), new OldHealProjectile(saveGame), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+            saveGame.Project(who, 2, y, x, Program.Rng.DiceRoll(4, 3), saveGame.SingletonRepository.Projectiles.Get<OldHealProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
             return false;
         }
         public override Item CreateItem() => new CureSeriousWoundsPotionItem(SaveGame);

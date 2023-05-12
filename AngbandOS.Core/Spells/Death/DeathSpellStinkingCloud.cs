@@ -18,7 +18,7 @@ namespace AngbandOS.Core.Spells.Death
             {
                 return;
             }
-            SaveGame.FireBall(new PoisProjectile(SaveGame), dir, 10 + (SaveGame.Player.Level / 2), 2);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), dir, 10 + (SaveGame.Player.Level / 2), 2);
         }
 
         public override string Name => "Stinking Cloud";

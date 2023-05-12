@@ -26,19 +26,19 @@ namespace AngbandOS.Core.ItemCategories
             switch (Program.Rng.RandomLessThan(5))
             {
                 case 0:
-                    saveGame.FireBall(new AcidProjectile(saveGame), dir, 100, -3);
+                    saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir, 100, -3);
                     break;
                 case 1:
-                    saveGame.FireBall(new ElecProjectile(saveGame), dir, 80, -3);
+                    saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, 80, -3);
                     break;
                 case 2:
-                    saveGame.FireBall(new FireProjectile(saveGame), dir, 100, -3);
+                    saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, 100, -3);
                     break;
                 case 3:
-                    saveGame.FireBall(new ColdProjectile(saveGame), dir, 80, -3);
+                    saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 80, -3);
                     break;
                 case 4:
-                    saveGame.FireBall(new PoisProjectile(saveGame), dir, 60, -3);
+                    saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), dir, 60, -3);
                     break;
                 default:
                     throw new Exception("Internal error.");

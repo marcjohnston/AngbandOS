@@ -18,7 +18,7 @@ namespace AngbandOS.Core.Spells.Death
             {
                 return;
             }
-            SaveGame.FireBall(new DarkProjectile(SaveGame), dir, 120, 4);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<DarkProjectile>(), dir, 120, 4);
         }
 
         public override string Name => "Darkness Storm";

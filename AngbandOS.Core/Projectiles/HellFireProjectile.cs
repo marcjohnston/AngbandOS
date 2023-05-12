@@ -12,9 +12,7 @@ namespace AngbandOS.Core.Projection
 {
     internal class HellFireProjectile : Projectile
     {
-        public HellFireProjectile(SaveGame saveGame) : base(saveGame)
-        {
-        }
+        private HellFireProjectile(SaveGame saveGame) : base(saveGame) { }
 
         protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<RedSplatProjectileGraphic>();
 

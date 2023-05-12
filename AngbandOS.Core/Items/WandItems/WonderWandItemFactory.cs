@@ -27,11 +27,11 @@ namespace AngbandOS.Core.ItemCategories
             {
                 case 0:
                     // Acid ball
-                    saveGame.FireBall(new AcidProjectile(saveGame), dir, 60, 2);
+                    saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir, 60, 2);
                     return true;
                 case 1:
                     // Acid bolt
-                    saveGame.FireBoltOrBeam(20, new AcidProjectile(saveGame), dir, Program.Rng.DiceRoll(3, 8));
+                    saveGame.FireBoltOrBeam(20, saveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir, Program.Rng.DiceRoll(3, 8));
                     return true;
                 case 2:
                     // CharmMonster
@@ -41,11 +41,11 @@ namespace AngbandOS.Core.ItemCategories
                     return saveGame.CloneMonster(dir);
                 case 4:
                     // ColdBall
-                    saveGame.FireBall(new ColdProjectile(saveGame), dir, 48, 2);
+                    saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 48, 2);
                     return true;
                 case 5:
                     // ColdBolt
-                    saveGame.FireBoltOrBeam(20, new ColdProjectile(saveGame), dir, Program.Rng.DiceRoll(3, 8));
+                    saveGame.FireBoltOrBeam(20, saveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, Program.Rng.DiceRoll(3, 8));
                     return true;
                 case 6:
                     // ConfuseMonster
@@ -58,18 +58,18 @@ namespace AngbandOS.Core.ItemCategories
                     return saveGame.DrainLife(dir, 75);
                 case 9:
                     // ElecBall
-                    saveGame.FireBall(new ElecProjectile(saveGame), dir, 32, 2);
+                    saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, 32, 2);
                     return true;
                 case 10:
                     // FearMonster
                     return saveGame.FearMonster(dir, 10);
                 case 11:
                     // FireBall
-                    saveGame.FireBall(new FireProjectile(saveGame), dir, 72, 2);
+                    saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, 72, 2);
                     return true;
                 case 12:
                     // FireBolt
-                    saveGame.FireBoltOrBeam(20, new FireProjectile(saveGame), dir, Program.Rng.DiceRoll(6, 8));
+                    saveGame.FireBoltOrBeam(20, saveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, Program.Rng.DiceRoll(6, 8));
                     return true;
                 case 13:
                     // HasteMonster
@@ -84,7 +84,7 @@ namespace AngbandOS.Core.ItemCategories
                     return true;
                 case 16:
                     // MagicMissile
-                    saveGame.FireBoltOrBeam(20, new MissileProjectile(saveGame), dir, Program.Rng.DiceRoll(2, 6));
+                    saveGame.FireBoltOrBeam(20, saveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), dir, Program.Rng.DiceRoll(2, 6));
                     return true;
                 case 17:
                     // Polymorph
@@ -97,7 +97,7 @@ namespace AngbandOS.Core.ItemCategories
                     return saveGame.SlowMonster(dir);
                 case 20:
                     // StinkingCloud
-                    saveGame.FireBall(new PoisProjectile(saveGame), dir, 12, 2);
+                    saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), dir, 12, 2);
                     return true;
                 case 21:
                     // StoneToMud

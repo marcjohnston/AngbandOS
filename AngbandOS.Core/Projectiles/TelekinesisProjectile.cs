@@ -10,9 +10,7 @@ namespace AngbandOS.Core.Projection
 {
     internal class TelekinesisProjectile : Projectile
     {
-        public TelekinesisProjectile(SaveGame saveGame) : base(saveGame)
-        {
-        }
+        private TelekinesisProjectile(SaveGame saveGame) : base(saveGame) { }
 
         protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<TurquoiseBoltProjectileGraphic>();
 

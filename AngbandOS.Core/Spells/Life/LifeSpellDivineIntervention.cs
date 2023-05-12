@@ -14,7 +14,7 @@ namespace AngbandOS.Core.Spells.Life
         private LifeSpellDivineIntervention(SaveGame saveGame) : base(saveGame) { }
         public override void Cast()
         {
-            SaveGame.Project(0, 1, SaveGame.Player.MapY, SaveGame.Player.MapX, 777, new HolyFireProjectile(SaveGame),
+            SaveGame.Project(0, 1, SaveGame.Player.MapY, SaveGame.Player.MapX, 777, SaveGame.SingletonRepository.Projectiles.Get<HolyFireProjectile>(),
                 ProjectionFlag.ProjectKill);
             SaveGame.DispelMonsters(SaveGame.Player.Level * 4);
             SaveGame.SlowMonsters();

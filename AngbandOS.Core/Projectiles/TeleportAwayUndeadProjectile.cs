@@ -10,9 +10,7 @@ namespace AngbandOS.Core.Projection
 {
     internal class TeleportAwayUndeadProjectile : Projectile
     {
-        public TeleportAwayUndeadProjectile(SaveGame saveGame) : base(saveGame)
-        {
-        }
+        private TeleportAwayUndeadProjectile(SaveGame saveGame) : base(saveGame) { }
 
         protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<PinkBulletProjectileGraphic>();
 

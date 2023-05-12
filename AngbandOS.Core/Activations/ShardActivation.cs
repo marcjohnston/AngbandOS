@@ -13,7 +13,7 @@
 
         protected override bool Activate(int direction)
         {
-            SaveGame.FireBall(new ShardProjectile(SaveGame), direction, 120 + SaveGame.Player.Level, 2);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ShardProjectile>(), direction, 120 + SaveGame.Player.Level, 2);
             return true;
         }
 

@@ -12,13 +12,13 @@
         public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-            saveGame.Project(0, 1, saveGame.Player.MapY, saveGame.Player.MapX, 0, new MakeTrapProjectile(saveGame), flg);
+            saveGame.Project(0, 1, saveGame.Player.MapY, saveGame.Player.MapX, 0, saveGame.SingletonRepository.Projectiles.Get<MakeTrapProjectile>(), flg);
         }
 
         public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
         {
             ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-            saveGame.Project(0, 1, target.MapY, target.MapX, 0, new MakeTrapProjectile(saveGame), flg);
+            saveGame.Project(0, 1, target.MapY, target.MapX, 0, saveGame.SingletonRepository.Projectiles.Get<MakeTrapProjectile>(), flg);
         }
     }
 }

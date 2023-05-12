@@ -33,7 +33,7 @@ namespace AngbandOS.Core.Spells.Chaos
             {
                 return;
             }
-            SaveGame.FireBoltOrBeam(beam, new FireProjectile(SaveGame), dir, Program.Rng.DiceRoll(8 + ((SaveGame.Player.Level - 5) / 4), 8));
+            SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, Program.Rng.DiceRoll(8 + ((SaveGame.Player.Level - 5) / 4), 8));
         }
 
         public override string Name => "Fire Bolt";

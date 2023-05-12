@@ -15,7 +15,7 @@
 
         protected override bool Activate(int direction)
         {
-            SaveGame.FireBolt(new ElecProjectile(SaveGame), direction, Program.Rng.DiceRoll(4, 8));
+            SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), direction, Program.Rng.DiceRoll(4, 8));
             return true;
         }
 

@@ -16,7 +16,7 @@ namespace AngbandOS.Core.Spells.Chaos
         {
             for (int dir = 0; dir <= 9; dir++)
             {
-                SaveGame.FireBeam(new ElecProjectile(SaveGame), dir, Program.Rng.DiceRoll(5 + (SaveGame.Player.Level / 10), 8));
+                SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, Program.Rng.DiceRoll(5 + (SaveGame.Player.Level / 10), 8));
             }
         }
 

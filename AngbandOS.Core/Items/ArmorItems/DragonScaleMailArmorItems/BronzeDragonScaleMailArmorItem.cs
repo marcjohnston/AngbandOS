@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Items
                 return;
             }
             SaveGame.MsgPrint("You breathe confusion.");
-            SaveGame.FireBall(new ConfusionProjectile(SaveGame), dir, 120, -2);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ConfusionProjectile>(), dir, 120, -2);
             RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
         }
     }

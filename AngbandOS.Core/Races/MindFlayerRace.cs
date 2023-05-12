@@ -82,7 +82,7 @@
                 if (saveGame.GetDirectionWithAim(out int direction))
                 {
                     saveGame.MsgPrint("You concentrate and your eyes glow red...");
-                    saveGame.FireBolt(new PsiProjectile(saveGame), direction, saveGame.Player.Level);
+                    saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), direction, saveGame.Player.Level);
                 }
             }
         }

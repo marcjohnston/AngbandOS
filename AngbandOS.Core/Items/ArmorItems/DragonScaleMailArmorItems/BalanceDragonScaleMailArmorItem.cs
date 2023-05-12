@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Items
             int chance = Program.Rng.RandomLessThan(4);
             string element = chance == 1 ? "chaos" : (chance == 2 ? "disenchantment" : (chance == 3 ? "sound" : "shards"));
             SaveGame.MsgPrint($"You breathe {element}.");
-            SaveGame.FireBall(chance == 1 ? new ChaosProjectile(SaveGame) : (chance == 2 ? new DisenchantProjectile(SaveGame) : (chance == 3 ? (Projectile)new SoundProjectile(SaveGame) : new ExplodeProjectile(SaveGame))), dir, 250, -2);
+            SaveGame.FireBall(chance == 1 ? SaveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>() : (chance == 2 ? SaveGame.SingletonRepository.Projectiles.Get<DisenchantProjectile>() : (chance == 3 ? (Projectile)SaveGame.SingletonRepository.Projectiles.Get<SoundProjectile>() : SaveGame.SingletonRepository.Projectiles.Get<ExplodeProjectile>())), dir, 250, -2);
             RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
         }
     }

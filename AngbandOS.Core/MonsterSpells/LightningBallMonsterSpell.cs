@@ -6,7 +6,7 @@
         public override bool UsesLightning => true;
         public override bool IsAttack => true;
         protected override string ActionName => "casts a lightning ball";
-        protected override Projectile Projectile(SaveGame saveGame) => new ElecProjectile(saveGame);
+        protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get<ElecProjectile>();
         protected override int Damage(Monster monster)
         {
             int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;

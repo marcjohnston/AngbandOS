@@ -10,9 +10,7 @@ namespace AngbandOS.Core.Projection
 {
     internal class PsiProjectile : Projectile
     {
-        public PsiProjectile(SaveGame saveGame) : base(saveGame)
-        {
-        }
+        private PsiProjectile(SaveGame saveGame) : base(saveGame) { }
 
         protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<DiamondSparkleAnimation>();
 

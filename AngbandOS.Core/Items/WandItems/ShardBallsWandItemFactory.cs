@@ -24,7 +24,7 @@ namespace AngbandOS.Core.ItemCategories
 
         public override bool ExecuteActivation(SaveGame saveGame, int dir)
         {
-            saveGame.FireBall(new ShardProjectile(saveGame), dir, 75 + Program.Rng.DieRoll(50), 2);
+            saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ShardProjectile>(), dir, 75 + Program.Rng.DieRoll(50), 2);
             return true;
         }
         public override Item CreateItem() => new ShardBallsWandItem(SaveGame);

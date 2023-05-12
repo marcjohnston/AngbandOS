@@ -12,7 +12,7 @@
 
         protected override bool Activate(int direction)
         {
-            SaveGame.FireBall(new FireProjectile(SaveGame), direction, 72, 2);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), direction, 72, 2);
             return true;
         }
 

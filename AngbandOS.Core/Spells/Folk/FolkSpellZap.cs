@@ -33,7 +33,7 @@ namespace AngbandOS.Core.Spells.Folk
             {
                 return;
             }
-            SaveGame.FireBoltOrBeam(beam - 10, new ElecProjectile(SaveGame), dir, Program.Rng.DiceRoll(3 + ((SaveGame.Player.Level - 1) / 5), 3));
+            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, Program.Rng.DiceRoll(3 + ((SaveGame.Player.Level - 1) / 5), 3));
         }
 
         public override string Name => "Zap";

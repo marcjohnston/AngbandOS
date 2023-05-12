@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Items
                 return;
             }
             SaveGame.MsgPrint("You breathe acid.");
-            SaveGame.FireBall(new AcidProjectile(SaveGame), dir, 130, -2);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir, 130, -2);
             RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
             return;
         }

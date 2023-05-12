@@ -10,9 +10,7 @@ namespace AngbandOS.Core.Projection
 {
     internal class SoundProjectile : Projectile
     {
-        public SoundProjectile(SaveGame saveGame) : base(saveGame)
-        {
-        }
+        private SoundProjectile(SaveGame saveGame) : base(saveGame) { }
 
         protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<GoldSplatProjectileGraphic>();
 

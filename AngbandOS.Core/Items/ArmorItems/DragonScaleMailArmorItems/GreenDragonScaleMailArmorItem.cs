@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Items
                 return;
             }
             SaveGame.MsgPrint("You breathe poison gas.");
-            SaveGame.FireBall(new PoisProjectile(SaveGame), dir, 150, -2);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), dir, 150, -2);
             RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
         }
     }

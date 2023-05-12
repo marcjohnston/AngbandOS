@@ -18,7 +18,7 @@ namespace AngbandOS.Core.Spells.Chaos
             {
                 return;
             }
-            SaveGame.FireBall(new MissileProjectile(SaveGame), dir, Program.Rng.DiceRoll(3, 5) + SaveGame.Player.Level + (SaveGame.Player.Level /
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), dir, Program.Rng.DiceRoll(3, 5) + SaveGame.Player.Level + (SaveGame.Player.Level /
                 (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mage || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)),
                 SaveGame.Player.Level < 30 ? 2 : 3);
         }

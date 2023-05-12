@@ -29,7 +29,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations
                 saveGame.MsgPrint("You wave your hands in the air.");
                 return;
             }
-            saveGame.FireBolt(new ColdProjectile(saveGame), dir, 2 * saveGame.Player.Level);
+            saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 2 * saveGame.Player.Level);
         }
 
         public override string ActivationSummary(int lvl)

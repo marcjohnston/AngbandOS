@@ -17,7 +17,7 @@
 
         protected override bool Activate(int direction)
         {
-            SaveGame.FireBall(new MissileProjectile(SaveGame), direction, 300, -4);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), direction, 300, -4);
             return true;
         }
 

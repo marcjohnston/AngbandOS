@@ -8,6 +8,7 @@ namespace AngbandOS.Core
     /// </summary>
     internal class SingletonRepository
     {
+        public SingletonDictionary<Projectile> Projectiles;
         public SingletonDictionary<Patron> Patrons;
         public SingletonDictionary<Animation> Animations;
         public SingletonDictionary<FixedArtifact> FixedArtifacts;
@@ -109,6 +110,7 @@ namespace AngbandOS.Core
         {
             ClassSpells = new SingletonList<ClassSpell>(saveGame, LoadTypesFromAssembly<ClassSpell>(saveGame));
             Rewards = new SingletonDictionary<Reward>(saveGame, LoadTypesFromAssembly<Reward>(saveGame));
+            Projectiles = new SingletonDictionary<Projectile>(saveGame, LoadTypesFromAssembly<Projectile>(saveGame));
             Patrons = new SingletonDictionary<Patron>(saveGame, LoadTypesFromAssembly<Patron>(saveGame));
             Spells = new SingletonDictionary<Spell>(saveGame, LoadTypesFromAssembly<Spell>(saveGame));
             CastingTypes = new SingletonDictionary<CastingType>(saveGame, LoadTypesFromAssembly<CastingType>(saveGame));

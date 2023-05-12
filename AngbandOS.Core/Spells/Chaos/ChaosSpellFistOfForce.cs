@@ -18,7 +18,7 @@ namespace AngbandOS.Core.Spells.Chaos
             {
                 return;
             }
-            SaveGame.FireBall(new DisintegrateProjectile(SaveGame), dir,
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<DisintegrateProjectile>(), dir,
                 Program.Rng.DiceRoll(8 + ((SaveGame.Player.Level - 5) / 4), 8), 0);
         }
 

@@ -22,19 +22,19 @@ namespace AngbandOS.Core.Spells.Folk
             switch (Program.Rng.DieRoll(4))
             {
                 case 1:
-                    dummy = new FireProjectile(SaveGame);
+                    dummy = SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>();
                     break;
 
                 case 2:
-                    dummy = new ElecProjectile(SaveGame);
+                    dummy = SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>();
                     break;
 
                 case 3:
-                    dummy = new ColdProjectile(SaveGame);
+                    dummy = SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>();
                     break;
 
                 default:
-                    dummy = new AcidProjectile(SaveGame);
+                    dummy = SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>();
                     break;
             }
             SaveGame.FireBall(dummy, dir, 75 + SaveGame.Player.Level, 2);

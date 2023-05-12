@@ -6,7 +6,7 @@
         public override bool UsesNether => true;
         public override bool IsAttack => true;
         protected override string ActionName => "casts an nether ball";
-        protected override Projectile Projectile(SaveGame saveGame) => new NetherProjectile(saveGame);
+        protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get<NetherProjectile>();
         protected override int Damage(Monster monster)
         {
             int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;

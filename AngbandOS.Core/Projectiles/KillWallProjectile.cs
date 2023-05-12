@@ -10,9 +10,7 @@ namespace AngbandOS.Core.Projection
 {
     internal class KillWallProjectile : Projectile
     {
-        public KillWallProjectile(SaveGame saveGame) : base(saveGame)
-        {
-        }
+        private KillWallProjectile(SaveGame saveGame) : base(saveGame) { }
 
         protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<BrownSwirlAnimation>();
 

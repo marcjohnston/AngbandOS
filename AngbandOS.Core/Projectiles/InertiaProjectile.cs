@@ -10,9 +10,7 @@ namespace AngbandOS.Core.Projection
 {
     internal class InertiaProjectile : Projectile
     {
-        public InertiaProjectile(SaveGame saveGame) : base(saveGame)
-        {
-        }
+        private InertiaProjectile(SaveGame saveGame) : base(saveGame) { }
 
         protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<OrangeBoltProjectileGraphic>();
 

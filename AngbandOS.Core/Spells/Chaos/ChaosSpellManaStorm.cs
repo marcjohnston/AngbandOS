@@ -18,7 +18,7 @@ namespace AngbandOS.Core.Spells.Chaos
             {
                 return;
             }
-            SaveGame.FireBall(new ManaProjectile(SaveGame), dir, 300 + (SaveGame.Player.Level * 2), 4);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), dir, 300 + (SaveGame.Player.Level * 2), 4);
         }
 
         public override string Name => "Mana Storm";

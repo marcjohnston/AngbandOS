@@ -18,7 +18,7 @@ namespace AngbandOS.Core.Spells.Chaos
             {
                 return;
             }
-            SaveGame.FireBall(new ShardProjectile(SaveGame), dir, 120 + SaveGame.Player.Level, 2);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ShardProjectile>(), dir, 120 + SaveGame.Player.Level, 2);
         }
 
         public override string Name => "Shard Ball";

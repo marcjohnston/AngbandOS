@@ -18,7 +18,7 @@ namespace AngbandOS.Core.Spells.Nature
             {
                 return;
             }
-            SaveGame.FireBall(new ColdProjectile(SaveGame), dir, 70 + SaveGame.Player.Level, (SaveGame.Player.Level / 12) + 1);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 70 + SaveGame.Player.Level, (SaveGame.Player.Level / 12) + 1);
         }
 
         public override string Name => "Blizzard";

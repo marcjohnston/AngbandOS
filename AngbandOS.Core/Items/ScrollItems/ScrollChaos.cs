@@ -22,7 +22,7 @@ namespace AngbandOS.Core.ItemCategories
 
         public override void Read(ReadScrollEvent eventArgs)
         {
-            eventArgs.SaveGame.FireBall(new ChaosProjectile(eventArgs.SaveGame), 0, 222, 4);
+            eventArgs.SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>(), 0, 222, 4);
             if (!eventArgs.SaveGame.Player.HasChaosResistance)
             {
                 eventArgs.SaveGame.Player.TakeHit(111 + Program.Rng.DieRoll(111), "a Scroll of Chaos");

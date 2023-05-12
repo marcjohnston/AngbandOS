@@ -23,7 +23,7 @@ namespace AngbandOS.Core.ItemCategories
         public override int Weight => 10;
         public override bool ExecuteActivation(SaveGame saveGame, int dir)
         {
-            saveGame.FireBall(new FireProjectile(saveGame), dir, 100, 3);
+            saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, 100, 3);
             return true;
         }
         public override Item CreateItem() => new DragonsFlameWandItem(SaveGame);

@@ -33,7 +33,7 @@ namespace AngbandOS.Core.Spells.Chaos
             {
                 return;
             }
-            SaveGame.FireBoltOrBeam(beam - 10, new MissileProjectile(SaveGame), dir,
+            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), dir,
                 Program.Rng.DiceRoll(3 + ((SaveGame.Player.Level - 1) / 5), 4));
         }
 

@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Rewards
             string wrathReason = $"the Wrath of {patron.ShortName}";
             SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
             SaveGame.MsgPrint("'Suffer, pathetic fool!'");
-            SaveGame.FireBall(new DisintegrateProjectile(SaveGame), 0, SaveGame.Player.Level * 4, 4);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<DisintegrateProjectile>(), 0, SaveGame.Player.Level * 4, 4);
             SaveGame.Player.TakeHit(SaveGame.Player.Level * 4, wrathReason);
         }
     }

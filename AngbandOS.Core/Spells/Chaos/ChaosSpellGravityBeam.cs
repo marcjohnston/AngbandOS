@@ -18,7 +18,7 @@ namespace AngbandOS.Core.Spells.Chaos
             {
                 return;
             }
-            SaveGame.FireBeam(new GravityProjectile(SaveGame), dir,
+            SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<GravityProjectile>(), dir,
                 Program.Rng.DiceRoll(9 + ((SaveGame.Player.Level - 5) / 4), 8));
         }
 

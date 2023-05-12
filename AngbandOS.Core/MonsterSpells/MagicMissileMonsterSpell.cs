@@ -14,7 +14,7 @@
             return Program.Rng.DiceRoll(2, 6) + (monsterLevel / 3);
         }
 
-        protected override Projectile Projectile(SaveGame saveGame) => new MissileProjectile(saveGame);
+        protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get<MissileProjectile>();
 
         public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { new ReflectSpellResistantDetection() };
     }

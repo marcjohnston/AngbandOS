@@ -33,7 +33,7 @@ namespace AngbandOS.Core.Spells.Nature
             {
                 return;
             }
-            SaveGame.FireBoltOrBeam(beam - 10, new ElecProjectile(SaveGame), dir,
+            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir,
                 Program.Rng.DiceRoll(3 + ((SaveGame.Player.Level - 5) / 4), 8));
         }
 

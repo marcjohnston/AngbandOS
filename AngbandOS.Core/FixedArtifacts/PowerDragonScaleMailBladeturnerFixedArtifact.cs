@@ -17,7 +17,7 @@ internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact, IAc
             return;
         }
         saveGame.MsgPrint("You breathe the elements.");
-        saveGame.FireBall(new MissileProjectile(saveGame), dir, 300, 4);
+        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), dir, 300, 4);
         saveGame.MsgPrint("Your armor glows many colors...");
         saveGame.Player.TimedFear.ResetTimer();
         saveGame.Player.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(50) + 50);

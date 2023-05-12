@@ -15,7 +15,7 @@ namespace AngbandOS.Core.Spells.Chaos
         public override void Cast()
         {
             SaveGame.Project(0, 2 + (SaveGame.Player.Level / 10), SaveGame.Player.MapY, SaveGame.Player.MapX, 45 + SaveGame.Player.Level,
-                new SoundProjectile(SaveGame), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
+                SaveGame.SingletonRepository.Projectiles.Get<SoundProjectile>(), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
         }
 
         public override string Name => "Sonic Boom";

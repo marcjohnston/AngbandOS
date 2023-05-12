@@ -18,7 +18,7 @@ namespace AngbandOS.Core.Spells.Chaos
             {
                 return;
             }
-            SaveGame.FireBall(new FireProjectile(SaveGame), dir, 55 + SaveGame.Player.Level, 2);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, 55 + SaveGame.Player.Level, 2);
         }
 
         public override string Name => "Fire Ball";

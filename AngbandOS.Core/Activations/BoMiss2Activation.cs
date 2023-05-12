@@ -15,7 +15,7 @@
 
         protected override bool Activate(int direction)
         {
-            SaveGame.FireBolt(new ArrowProjectile(SaveGame), direction, 150);
+            SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<ArrowProjectile>(), direction, 150);
             return true;
         }
 

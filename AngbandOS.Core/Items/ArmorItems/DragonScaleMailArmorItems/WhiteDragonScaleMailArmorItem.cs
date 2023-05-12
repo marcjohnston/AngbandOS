@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Items
                 return;
             }
             SaveGame.MsgPrint("You breathe frost.");
-            SaveGame.FireBall(new ColdProjectile(SaveGame), dir, 110, -2);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 110, -2);
             RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
         }
     }

@@ -18,7 +18,7 @@ namespace AngbandOS.Core.Spells.Chaos
             {
                 return;
             }
-            SaveGame.FireBall(new ChaosProjectile(SaveGame), dir, 66 + SaveGame.Player.Level, SaveGame.Player.Level / 5);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>(), dir, 66 + SaveGame.Player.Level, SaveGame.Player.Level / 5);
         }
 
         public override string Name => "Invoke Chaos";

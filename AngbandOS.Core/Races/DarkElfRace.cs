@@ -68,7 +68,7 @@
                 if (saveGame.GetDirectionWithAim(out int direction))
                 {
                     saveGame.MsgPrint("You cast a magic missile.");
-                    saveGame.FireBoltOrBeam(10, new MissileProjectile(saveGame), direction, Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 5), 4));
+                    saveGame.FireBoltOrBeam(10, saveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), direction, Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 5), 4));
                 }
             }
         }

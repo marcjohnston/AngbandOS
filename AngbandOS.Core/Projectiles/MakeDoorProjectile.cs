@@ -10,9 +10,7 @@ namespace AngbandOS.Core.Projection
 {
     internal class MakeDoorProjectile : Projectile
     {
-        public MakeDoorProjectile(SaveGame saveGame) : base(saveGame)
-        {
-        }
+        private MakeDoorProjectile(SaveGame saveGame) : base(saveGame) { }
 
         protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<BrightBrownSparkleAnimation>();
 
