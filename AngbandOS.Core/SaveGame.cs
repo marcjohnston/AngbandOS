@@ -9022,6 +9022,7 @@ namespace AngbandOS.Core
             if (dragonScaleMailArmor != null)
             {
                 dragonScaleMailArmor.DoActivate();
+                return;
             }
 
             // Elemental rings give you a ball of the appropriate element
