@@ -935,7 +935,7 @@ namespace AngbandOS.Core.Items
                 }
                 else if (RareItemTypeIndex != RareItemTypeEnum.None)
                 {
-                    RareItem ePtr = SaveGame.SingletonRepository.RareItemTypes[RareItemTypeIndex];
+                    RareItem ePtr = SaveGame.SingletonRepository.RareItems[RareItemTypeIndex];
                     basenm += ' ';
                     basenm += ePtr.Name;
                 }
@@ -1412,7 +1412,7 @@ namespace AngbandOS.Core.Items
             // Now merge the characteristics from the rare item type, if there is one.
             if (RareItemTypeIndex != RareItemTypeEnum.None)
             {
-                RareItem ePtr = SaveGame.SingletonRepository.RareItemTypes[RareItemTypeIndex];
+                RareItem ePtr = SaveGame.SingletonRepository.RareItems[RareItemTypeIndex];
                 Characteristics.Merge(ePtr);
             }
 
@@ -1945,7 +1945,7 @@ namespace AngbandOS.Core.Items
             }
             else if (RareItemTypeIndex != RareItemTypeEnum.None)
             {
-                RareItem ePtr = SaveGame.SingletonRepository.RareItemTypes[RareItemTypeIndex];
+                RareItem ePtr = SaveGame.SingletonRepository.RareItems[RareItemTypeIndex];
                 if (ePtr.Cost == 0)
                 {
                     return 0;
@@ -2175,7 +2175,7 @@ namespace AngbandOS.Core.Items
             }
             else if (RareItemTypeIndex != RareItemTypeEnum.None)
             {
-                RareItem ePtr = SaveGame.SingletonRepository.RareItemTypes[RareItemTypeIndex];
+                RareItem ePtr = SaveGame.SingletonRepository.RareItems[RareItemTypeIndex];
                 switch (RareItemTypeIndex)
                 {
                     case RareItemTypeEnum.WeaponElderSign:

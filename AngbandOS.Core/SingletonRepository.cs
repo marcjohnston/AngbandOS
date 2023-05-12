@@ -23,7 +23,7 @@ namespace AngbandOS.Core
         public SingletonDictionary<Activation> Activations;
         public SingletonDictionary<Race> Races;
         [Obsolete("Needs to be non-keyed")]
-        public SingletonKeyedDictionary<RareItemTypeEnum, RareItem> RareItemTypes;
+        public SingletonKeyedDictionary<RareItemTypeEnum, RareItem> RareItems;
         public SingletonDictionary<BaseStoreCommand> StoreCommands;
         public SingletonDictionary<Vault> Vaults;
         public SingletonDictionary<WizardCommand> WizardCommands;
@@ -137,7 +137,7 @@ namespace AngbandOS.Core
             Animations = new SingletonDictionary<Animation>(saveGame, LoadTypesFromAssembly<Animation>(saveGame));
             Vaults = new SingletonDictionary<Vault>(saveGame, LoadTypesFromAssembly<Vault>(saveGame));
             FloorTileTypes = new SingletonKeyedDictionary<string, FloorTileType>(saveGame, LoadTypesFromAssembly<FloorTileType>(saveGame));
-            RareItemTypes = new SingletonKeyedDictionary<RareItemTypeEnum, RareItem>(saveGame, LoadTypesFromAssembly<RareItem>(saveGame));
+            RareItems = new SingletonKeyedDictionary<RareItemTypeEnum, RareItem>(saveGame, LoadTypesFromAssembly<RareItem>(saveGame));
             FixedArtifacts = new SingletonDictionary<FixedArtifact>(saveGame, LoadTypesFromAssembly<FixedArtifact>(saveGame));
             MonsterRaces = new SingletonDictionary<MonsterRace>(saveGame, LoadTypesFromAssembly<MonsterRace>(saveGame).OrderBy(_monsterRace => _monsterRace.LevelFound));
             Races = new SingletonDictionary<Race>(saveGame, LoadTypesFromAssembly<Race>(saveGame));
