@@ -14,7 +14,7 @@ namespace AngbandOS.Core
         public SingletonDictionary<FixedArtifact> FixedArtifacts;
         [Obsolete("Needs to be non-keyed")]
         public SingletonKeyedDictionary<string, FloorTileType> FloorTileTypes;
-        public SingletonDictionary<GameCommand> InGameCommands;
+        public SingletonDictionary<GameCommand> GameCommands;
         public SingletonDictionary<ArtifactBias> ArtifactBiases;
         public SingletonDictionary<BaseInventorySlot> InventorySlots;
         public SingletonDictionary<ItemFactory> ItemFactories;
@@ -114,7 +114,7 @@ namespace AngbandOS.Core
             Patrons = new SingletonDictionary<Patron>(saveGame, LoadTypesFromAssembly<Patron>(saveGame));
             Spells = new SingletonDictionary<Spell>(saveGame, LoadTypesFromAssembly<Spell>(saveGame));
             CastingTypes = new SingletonDictionary<CastingType>(saveGame, LoadTypesFromAssembly<CastingType>(saveGame));
-            InGameCommands = new SingletonDictionary<GameCommand>(saveGame, LoadTypesFromAssembly<GameCommand>(saveGame));
+            GameCommands = new SingletonDictionary<GameCommand>(saveGame, LoadTypesFromAssembly<GameCommand>(saveGame));
             WizardCommands = new SingletonDictionary<WizardCommand>(saveGame, LoadTypesFromAssembly<WizardCommand>(saveGame));
             ItemFactories = new SingletonDictionary<ItemFactory>(saveGame, LoadTypesFromAssembly<ItemFactory>(saveGame));
             InventorySlots = new SingletonDictionary<BaseInventorySlot>(saveGame, LoadTypesFromAssembly<BaseInventorySlot>(saveGame));

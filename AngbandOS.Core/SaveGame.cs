@@ -6951,7 +6951,7 @@ namespace AngbandOS.Core
             char c = CurrentCommand;
 
             // Process commands
-            foreach (GameCommand command in SingletonRepository.InGameCommands)
+            foreach (GameCommand command in SingletonRepository.GameCommands)
             {
                 // TODO: The IF statement below can be converted into a dictionary with the applicable object 
                 // attached for improved performance.
