@@ -53,7 +53,7 @@ namespace AngbandOS.Core
         public FlaggedAction NoticeReorderFlaggedAction { get; }
         public FlaggedAction NoticeCombineAndReorderFlaggedAction { get; }
 
-        public SingletonRepository SingletonRepository;// = new SingletonRepository();
+        public SingletonRepository SingletonRepository = new SingletonRepository();
 
         /// <summary>
         /// Maximum amount of health that can be drained from an opponent in one turn
@@ -389,7 +389,6 @@ namespace AngbandOS.Core
                 RedrawArmorFlaggedAction, RedrawHpFlaggedAction, RedrawManaFlaggedAction, RedrawDepthFlaggedAction, RedrawHealthFlaggedAction, RedrawSpeedFlaggedAction);
 
             // Load all of the predefined objects.
-            SingletonRepository = new SingletonRepository();
             SingletonRepository.Initialize(this);
 
             // Configure the game.
