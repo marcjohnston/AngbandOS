@@ -14,7 +14,11 @@ namespace AngbandOS.Core
     [Serializable]
     internal class Dungeon
     {
+        /// <summary>
+        /// Returns the deepest level the player has achieved for Word of Recall.
+        /// </summary>
         public int RecallLevel;
+
         /// <summary>
         /// The base offset (difficulty) for the dungeon
         /// </summary>

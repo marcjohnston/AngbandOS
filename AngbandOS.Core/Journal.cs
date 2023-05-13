@@ -874,8 +874,8 @@ namespace AngbandOS.Core
             SaveGame.Screen.Print(Colour.Blue, "Word of Recall", 0, 1);
             SaveGame.Screen.Print(Colour.Blue, "==============", 1, 1);
             string recallTown = SaveGame.Player.TownWithHouse > -1 ? SaveGame.SingletonRepository.Towns[SaveGame.Player.TownWithHouse].Name : SaveGame.CurTown.Name;
-            string recallDungeon = SaveGame.Dungeons[SaveGame.RecallDungeon].Name;
-            int recallLev = SaveGame.Dungeons[SaveGame.RecallDungeon].RecallLevel;
+            string recallDungeon = SaveGame.RecallDungeon.Name;
+            int recallLev = SaveGame.RecallDungeon.RecallLevel;
             SaveGame.Screen.Print(Colour.Blue, $"Your Word of Recall position is level {recallLev} of {recallDungeon}.", 3, 0);
             SaveGame.Screen.Print(Colour.Blue, $"Your home town is {recallTown}.", 4, 0);
             if (SaveGame.Player.TownWithHouse > -1)

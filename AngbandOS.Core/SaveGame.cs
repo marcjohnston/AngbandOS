@@ -115,7 +115,7 @@ namespace AngbandOS.Core
         public bool NewLevelFlag;
         public Player Player;
         public bool Playing;
-        public int RecallDungeon;
+        public Dungeon RecallDungeon;
         public int Resting;
         public int Running;
         public List<ScrollFlavour> ScrollFlavours; // These are generated from the available base scrolls.
@@ -1117,8 +1117,8 @@ namespace AngbandOS.Core
                     CurTown = SingletonRepository.Towns[Program.Rng.RandomLessThan(SingletonRepository.Towns.Count)];
                 }
                 CurDungeon = Dungeons[CurTown.Index];
-                RecallDungeon = CurDungeon.Index;
-                Dungeons[RecallDungeon].RecallLevel = 1;
+                RecallDungeon = CurDungeon;
+                RecallDungeon.RecallLevel = 1;
                 DungeonDifficulty = 0;
                 Player.WildernessX = CurTown.X;
                 Player.WildernessY = CurTown.Y;
@@ -3280,7 +3280,7 @@ namespace AngbandOS.Core
                     {
                         MsgPrint(CurDungeon.Tower ? "You feel yourself yanked downwards!" : "You feel yourself yanked upwards!");
                         DoCmdSaveGame(true);
-                        RecallDungeon = CurDungeon.Index;
+                        RecallDungeon = CurDungeon;
                         CurrentDepth = 0;
                         if (Player.TownWithHouse > -1)
                         {
@@ -3300,9 +3300,9 @@ namespace AngbandOS.Core
                     }
                     else
                     {
-                        MsgPrint(Dungeons[RecallDungeon].Tower ? "You feel yourself yanked upwards!" : "You feel yourself yanked downwards!");
+                        MsgPrint(RecallDungeon.Tower ? "You feel yourself yanked upwards!" : "You feel yourself yanked downwards!");
                         DoCmdSaveGame(true);
-                        CurDungeon = Dungeons[RecallDungeon];
+                        CurDungeon = RecallDungeon;
                         Player.WildernessX = CurDungeon.X;
                         Player.WildernessY = CurDungeon.Y;
                         CurrentDepth = Dungeons[CurDungeon.Index].RecallLevel;
