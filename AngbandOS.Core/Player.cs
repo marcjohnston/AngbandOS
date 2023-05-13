@@ -865,11 +865,11 @@ namespace AngbandOS.Core
         public int GetScore(SaveGame saveGame)
         {
             int score = (MaxLevelGained - 1) * 100;
-            for (int i = 0; i < Constants.MaxCaves; i++)
+            foreach (Dungeon dungeon in SaveGame.Dungeons)
             {
-                if (MaxDlv[i] > 0)
+                if (dungeon.RecallLevel > 0)
                 {
-                    score += ((MaxDlv[i] + SaveGame.Dungeons[i].Offset) * 10);
+                    score += ((dungeon.RecallLevel + dungeon.Offset) * 10);
                 }
             }
             for (int i = 0; i < SaveGame.Quests.Count; i++)

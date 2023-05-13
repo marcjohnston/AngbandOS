@@ -1,5 +1,6 @@
 ﻿namespace AngbandOS.Core.Projection
 {
+    [Serializable]
     internal class DeathRayProjectile : Projectile
     {
         private DeathRayProjectile(SaveGame saveGame) : base(saveGame) { }

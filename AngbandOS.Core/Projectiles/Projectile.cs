@@ -8,6 +8,7 @@
 
 namespace AngbandOS.Core.Projection
 {
+    [Serializable]
     internal abstract class Projectile
     {
         protected readonly SaveGame SaveGame;

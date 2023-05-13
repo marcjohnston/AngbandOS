@@ -8,6 +8,7 @@
 
 namespace AngbandOS.Core.Projection
 {
+    [Serializable]
     internal class GravityProjectile : Projectile
     {
         private GravityProjectile(SaveGame saveGame) : base(saveGame) { }

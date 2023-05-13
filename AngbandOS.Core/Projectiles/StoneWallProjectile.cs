@@ -8,6 +8,7 @@
 
 namespace AngbandOS.Core.Projection
 {
+    [Serializable]
     internal class StoneWallProjectile : Projectile
     {
         private StoneWallProjectile(SaveGame saveGame) : base(saveGame) { }

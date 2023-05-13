@@ -8,6 +8,7 @@
 
 namespace AngbandOS.Core.Projection
 {
+    [Serializable]
     internal class TelekinesisProjectile : Projectile
     {
         private TelekinesisProjectile(SaveGame saveGame) : base(saveGame) { }

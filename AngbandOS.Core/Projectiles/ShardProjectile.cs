@@ -8,6 +8,7 @@
 
 namespace AngbandOS.Core.Projection
 {
+    [Serializable]
     internal class ShardProjectile : Projectile
     {
         private ShardProjectile(SaveGame saveGame) : base(saveGame) { }

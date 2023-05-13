@@ -8,6 +8,7 @@
 
 namespace AngbandOS.Core.Projection
 {
+    [Serializable]
     internal class ConfusionProjectile : Projectile
     {
         private ConfusionProjectile(SaveGame saveGame) : base(saveGame) { }

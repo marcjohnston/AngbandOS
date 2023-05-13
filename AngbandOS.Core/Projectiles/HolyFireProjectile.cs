@@ -8,6 +8,7 @@
 
 namespace AngbandOS.Core.Projection
 {
+    [Serializable]
     internal class HolyFireProjectile : Projectile
     {
         private HolyFireProjectile(SaveGame saveGame) : base(saveGame) { }

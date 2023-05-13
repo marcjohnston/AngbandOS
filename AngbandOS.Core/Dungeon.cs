@@ -14,6 +14,7 @@ namespace AngbandOS.Core
     [Serializable]
     internal class Dungeon
     {
+        public int RecallLevel;
         /// <summary>
         /// The base offset (difficulty) for the dungeon
         /// </summary>

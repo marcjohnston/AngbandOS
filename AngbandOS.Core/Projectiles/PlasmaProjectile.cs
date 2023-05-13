@@ -8,6 +8,7 @@
 
 namespace AngbandOS.Core.Projection
 {
+    [Serializable]
     internal class PlasmaProjectile : Projectile
     {
         private PlasmaProjectile(SaveGame saveGame) : base(saveGame) { }

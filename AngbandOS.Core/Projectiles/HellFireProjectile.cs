@@ -10,6 +10,7 @@ using AngbandOS.Core.Hooks;
 
 namespace AngbandOS.Core.Projection
 {
+    [Serializable]
     internal class HellFireProjectile : Projectile
     {
         private HellFireProjectile(SaveGame saveGame) : base(saveGame) { }

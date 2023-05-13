@@ -8,6 +8,7 @@
 
 namespace AngbandOS.Core.Projection
 {
+    [Serializable]
     internal class OldConfProjectile : Projectile
     {
         private OldConfProjectile(SaveGame saveGame) : base(saveGame) { }

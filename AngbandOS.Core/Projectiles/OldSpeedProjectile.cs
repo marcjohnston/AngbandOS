@@ -8,6 +8,7 @@
 
 namespace AngbandOS.Core.Projection
 {
+    [Serializable]
     internal class OldSpeedProjectile : Projectile
     {
         private OldSpeedProjectile(SaveGame saveGame) : base(saveGame) { }

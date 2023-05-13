@@ -8,6 +8,7 @@
 
 namespace AngbandOS.Core.Projection
 {
+    [Serializable]
     internal class MeteorProjectile : Projectile
     {
         private MeteorProjectile(SaveGame saveGame) : base(saveGame) { }

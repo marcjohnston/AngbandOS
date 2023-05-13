@@ -8,6 +8,7 @@
 
 namespace AngbandOS.Core.Projection
 {
+    [Serializable]
     internal class MakeTrapProjectile : Projectile
     {
         private MakeTrapProjectile(SaveGame saveGame) : base(saveGame) { }

@@ -8,6 +8,7 @@
 
 namespace AngbandOS.Core.Projection
 {
+    [Serializable]
     internal class CharmProjectile : Projectile
     {
         private CharmProjectile(SaveGame saveGame) : base(saveGame) { }

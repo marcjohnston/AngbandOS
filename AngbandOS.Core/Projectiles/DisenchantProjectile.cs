@@ -8,6 +8,7 @@
 
 namespace AngbandOS.Core.Projection
 {
+    [Serializable]
     internal class DisenchantProjectile : Projectile
     {
         private DisenchantProjectile(SaveGame saveGame) : base(saveGame) { }

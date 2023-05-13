@@ -8,6 +8,7 @@
 
 namespace AngbandOS.Core.Projection
 {
+    [Serializable]
     internal class TurnUndeadProjectile : Projectile
     {
         private TurnUndeadProjectile(SaveGame saveGame) : base(saveGame) { }

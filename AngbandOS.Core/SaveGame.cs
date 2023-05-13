@@ -1118,7 +1118,7 @@ namespace AngbandOS.Core
                 }
                 CurDungeon = Dungeons[CurTown.Index];
                 RecallDungeon = CurDungeon.Index;
-                Player.MaxDlv[RecallDungeon] = 1;
+                Dungeons[RecallDungeon].RecallLevel = 1;
                 DungeonDifficulty = 0;
                 Player.WildernessX = CurTown.X;
                 Player.WildernessY = CurTown.Y;
@@ -2372,9 +2372,9 @@ namespace AngbandOS.Core
             {
                 Player.MaxLevelGained = Player.Level;
             }
-            if (Player.MaxDlv[CurDungeon.Index] < CurrentDepth)
+            if (Dungeons[CurDungeon.Index].RecallLevel < CurrentDepth)
             {
-                Player.MaxDlv[CurDungeon.Index] = CurrentDepth;
+                Dungeons[CurDungeon.Index].RecallLevel = CurrentDepth;
             }
             if (IsQuest(CurrentDepth))
             {
@@ -3305,7 +3305,7 @@ namespace AngbandOS.Core
                         CurDungeon = Dungeons[RecallDungeon];
                         Player.WildernessX = CurDungeon.X;
                         Player.WildernessY = CurDungeon.Y;
-                        CurrentDepth = Player.MaxDlv[CurDungeon.Index];
+                        CurrentDepth = Dungeons[CurDungeon.Index].RecallLevel;
                         if (CurrentDepth < 1)
                         {
                             CurrentDepth = 1;

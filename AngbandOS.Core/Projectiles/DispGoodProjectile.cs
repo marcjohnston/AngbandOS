@@ -8,6 +8,7 @@
 
 namespace AngbandOS.Core.Projection
 {
+    [Serializable]
     internal class DispGoodProjectile : Projectile
     {
         private DispGoodProjectile(SaveGame saveGame) : base(saveGame) { }

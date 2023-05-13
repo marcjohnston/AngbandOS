@@ -8,6 +8,7 @@
 
 namespace AngbandOS.Core.Projection
 {
+    [Serializable]
     internal class MakeElderSignProjectile : Projectile
     {
         private MakeElderSignProjectile(SaveGame saveGame) : base(saveGame) { }

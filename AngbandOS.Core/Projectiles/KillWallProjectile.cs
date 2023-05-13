@@ -8,6 +8,7 @@
 
 namespace AngbandOS.Core.Projection
 {
+    [Serializable]
     internal class KillWallProjectile : Projectile
     {
         private KillWallProjectile(SaveGame saveGame) : base(saveGame) { }

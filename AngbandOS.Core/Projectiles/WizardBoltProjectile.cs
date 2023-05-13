@@ -8,6 +8,7 @@
 
 namespace AngbandOS.Core.Projection
 {
+    [Serializable]
     internal class WizardBoltProjectile : Projectile
     {
         private WizardBoltProjectile(SaveGame saveGame) : base(saveGame) { }

@@ -8,6 +8,7 @@
 
 namespace AngbandOS.Core.Projection
 {
+    [Serializable]
     internal class SoundProjectile : Projectile
     {
         private SoundProjectile(SaveGame saveGame) : base(saveGame) { }
