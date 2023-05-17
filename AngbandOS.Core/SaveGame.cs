@@ -13713,10 +13713,7 @@ namespace AngbandOS.Core
         }
 
         ////////////////// PLAYER FACTORY
-        private readonly string[] _menuItem = new string[32];
-
         private readonly Gender[] _sexInfo = { new Gender("Female", "Queen"), new Gender("Male", "King"), new Gender("Other", "Monarch") };
-        private int _menuLength;
 
         /// <summary>
         /// Represents the previous character class.
@@ -14180,11 +14177,11 @@ namespace AngbandOS.Core
             }
         }
 
-        private void MenuDisplay(int current)
+        private void MenuDisplay(int current, List<string> _menuItem)
         {
             Screen.Clear(30);
             Screen.Print(Colour.Orange, "=>", 35, 0);
-            for (int i = 0; i < _menuLength; i++)
+            for (int i = 0; i < _menuItem.Count; i++)
             {
                 int row = 35 + i - current;
                 if (row >= 30 && row <= 40)
@@ -14239,6 +14236,8 @@ namespace AngbandOS.Core
 
         private bool PlayerBirthAux()
         {
+            List<string> _menuItem = new List<string>();
+
             MenuItem<BaseCharacterClass>[] _classMenu = SingletonRepository.CharacterClasses
                 .OrderBy(_characterClass => _characterClass.Title)
                 .Select(_characterClass => new MenuItem<BaseCharacterClass>(_characterClass.Title, _characterClass))
@@ -14266,16 +14265,15 @@ namespace AngbandOS.Core
                         {
                             autoChose[i] = false;
                         }
-                        _menuItem[0] = "Choose";
-                        _menuItem[1] = "Random";
-                        _menuItem[2] = "Re-use";
-                        _menuLength = 3;
+                        _menuItem.Add("Choose");
+                        _menuItem.Add("Random");
+                        _menuItem.Add("Re-use");
                         DisplayPartialCharacter(stage);
-                        if (menu[stage] >= _menuLength)
+                        if (menu[stage] > _menuItem.Count)
                         {
                             menu[stage] = 0;
                         }
-                        MenuDisplay(menu[stage]);
+                        MenuDisplay(menu[stage], _menuItem);
                         switch (menu[stage])
                         {
                             case 0:
@@ -14306,7 +14304,7 @@ namespace AngbandOS.Core
                             }
                             if (c == '2')
                             {
-                                if (menu[stage] < _menuLength - 1)
+                                if (menu[stage] < _menuItem.Count)
                                 {
                                     menu[stage]++;
                                     break;
@@ -14345,17 +14343,17 @@ namespace AngbandOS.Core
                             break;
                         }
                         autoChose[stage] = false;
-                        _menuLength = Constants.MaxClass;
+                        _menuItem.Clear();
                         for (int i = 0; i < Constants.MaxClass; i++)
                         {
-                            _menuItem[i] = _classMenu[i].Text;
+                            _menuItem.Add(_classMenu[i].Text);
                         }
                         DisplayPartialCharacter(stage);
-                        if (menu[stage] >= _menuLength)
+                        if (menu[stage] >= _menuItem.Count)
                         {
-                            menu[stage] = 0;
+                            menu[stage] = _menuItem.Count - 1;
                         }
-                        MenuDisplay(menu[stage]);
+                        MenuDisplay(menu[stage], _menuItem);
                         DisplayClassInfo(_classMenu[menu[stage]].Item);
                         Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true && !Shutdown)
@@ -14371,7 +14369,7 @@ namespace AngbandOS.Core
                             }
                             if (c == '2')
                             {
-                                if (menu[stage] < _menuLength - 1)
+                                if (menu[stage] < _menuItem.Count)
                                 {
                                     menu[stage]++;
                                     break;
@@ -14425,21 +14423,21 @@ namespace AngbandOS.Core
                             break;
                         }
                         autoChose[stage] = false;
-                        _menuLength = SingletonRepository.Races.Count;
 
                         // Create the menu for the races.
                         MenuItem<Race>[] _raceMenu = SingletonRepository.Races.OrderBy((Race race) => race.Title).Select((Race race) => new MenuItem<Race>(race.Title, race)).ToArray();
 
+                        _menuItem.Clear();
                         for (int i = 0; i < SingletonRepository.Races.Count; i++)
                         {
-                            _menuItem[i] = _raceMenu[i].Text;
+                            _menuItem.Add(_raceMenu[i].Text);
                         }
                         DisplayPartialCharacter(stage);
-                        if (menu[stage] >= _menuLength)
+                        if (menu[stage] >= _menuItem.Count)
                         {
-                            menu[stage] = 0;
+                            menu[stage] = _menuItem.Count - 1;
                         }
-                        MenuDisplay(menu[stage]);
+                        MenuDisplay(menu[stage], _menuItem);
 
                         DisplayRaceInfo(_raceMenu[menu[stage]].Item);
                         Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
@@ -14456,7 +14454,7 @@ namespace AngbandOS.Core
                             }
                             if (c == '2')
                             {
-                                if (menu[stage] < _menuLength - 1)
+                                if (menu[stage] < _menuItem.Count)
                                 {
                                     menu[stage]++;
                                     break;
@@ -14525,17 +14523,17 @@ namespace AngbandOS.Core
                         // There is more than one realm available to the player, allow the player to choose the realm.
                         BaseRealm[] availableRealms = Player.BaseCharacterClass.AvailablePrimaryRealms;
                         autoChose[stage] = false;
+                        _menuItem.Clear();
                         for (int i = 0; i < availableRealms.Length; i++)
                         {
-                            _menuItem[i] = availableRealms[i].Name;
+                            _menuItem.Add(availableRealms[i].Name);
                         }
                         DisplayPartialCharacter(stage);
-                        if (menu[stage] >= availableRealms.Length)
+                        if (menu[stage] >= _menuItem.Count)
                         {
-                            menu[stage] = 0;
+                            menu[stage] = _menuItem.Count - 1;
                         }
-                        _menuLength = availableRealms.Length;
-                        MenuDisplay(menu[stage]);
+                        MenuDisplay(menu[stage], _menuItem);
                         DisplayRealmInfo(availableRealms[menu[stage]]);
                         Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true && !Shutdown)
@@ -14614,17 +14612,17 @@ namespace AngbandOS.Core
 
                         BaseRealm[] remainingRealms = Player.BaseCharacterClass.AvailableSecondaryRealms.Where(_realm => _realm != Player.PrimaryRealm).ToArray();
                         autoChose[stage] = false;
+                        _menuItem.Clear();
                         for (int i = 0; i < remainingRealms.Length; i++)
                         {
-                            _menuItem[i] = remainingRealms[i].Name;
+                            _menuItem.Add(remainingRealms[i].Name);
                         }
                         DisplayPartialCharacter(stage);
-                        if (menu[stage] >= remainingRealms.Length)
+                        if (menu[stage] >= _menuItem.Count)
                         {
-                            menu[stage] = 0;
+                            menu[stage] = _menuItem.Count - 1;
                         }
-                        _menuLength = remainingRealms.Length;
-                        MenuDisplay(menu[stage]);
+                        MenuDisplay(menu[stage], _menuItem);
                         DisplayRealmInfo(remainingRealms[menu[stage]]);
                         Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true && !Shutdown)
@@ -14688,18 +14686,18 @@ namespace AngbandOS.Core
                             stage++;
                             break;
                         }
-                        _menuLength = Constants.MaxGenders;
+                        _menuItem.Clear();
                         for (int i = 0; i < Constants.MaxGenders; i++)
                         {
-                            _menuItem[i] = _sexInfo[i].Title;
+                            _menuItem.Add(_sexInfo[i].Title);
                         }
                         DisplayPartialCharacter(stage);
                         autoChose[stage] = false;
-                        if (menu[stage] >= _menuLength)
+                        if (menu[stage] >= _menuItem.Count)
                         {
-                            menu[stage] = 0;
+                            menu[stage] = _menuItem.Count - 1;
                         }
-                        MenuDisplay(menu[stage]);
+                        MenuDisplay(menu[stage], _menuItem);
                         Screen.Print(Colour.Purple, "Your sex has no effect on gameplay.", 35, 21);
                         Screen.Print(Colour.Orange,
                             "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
@@ -14716,7 +14714,7 @@ namespace AngbandOS.Core
                             }
                             if (c == '2')
                             {
-                                if (menu[stage] < _menuLength - 1)
+                                if (menu[stage] < _menuItem.Count)
                                 {
                                     menu[stage]++;
                                     break;
