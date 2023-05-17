@@ -830,9 +830,9 @@ namespace AngbandOS.Core
             SaveGame.Screen.Clear();
             SaveGame.Screen.Print(Colour.Blue, "Outstanding Quests", 0, 1);
             SaveGame.Screen.Print(Colour.Blue, "==================", 1, 1);
-            int[] lev = new int[Constants.MaxCaves];
-            int[] first = new int[Constants.MaxCaves];
-            for (int i = 0; i < Constants.MaxCaves; i++)
+            int[] lev = new int[SaveGame.DungeonCount];
+            int[] first = new int[SaveGame.DungeonCount];
+            for (int i = 0; i < SaveGame.DungeonCount; i++)
             {
                 first[i] = -1;
                 lev[i] = -1;
@@ -851,11 +851,11 @@ namespace AngbandOS.Core
                 }
             }
             int row = 3;
-            for (int i = 0; i < Constants.MaxCaves; i++)
+            for (int i = 0; i < SaveGame.DungeonCount; i++)
             {
                 if (first[i] != -1)
                 {
-                    string line = SaveGame.DescribeQuest(first[i]);
+                    string line = SaveGame.Quests[first[i]].Describe();
                     SaveGame.Screen.Print(Colour.Blue, line, row, 0);
                     row++;
                 }

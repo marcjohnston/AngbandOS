@@ -6,7 +6,7 @@ namespace AngbandOS.Core
         public readonly AbilityScore[] AbilityScores = new AbilityScore[6];
         public readonly Genome Dna;
         public readonly string[] History = new string[4];
-        public readonly int[] MaxDlv = new int[Constants.MaxCaves];
+        public readonly int[] MaxDlv = new int[SaveGame.DungeonCount];
         public readonly int[] PlayerHp = new int[Constants.PyMaxLevel];
         public int Age;
         public ItemTypeEnum AmmunitionItemCategory; // TODO: This needs to be a property of the missileweaponitemcategory

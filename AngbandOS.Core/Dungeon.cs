@@ -32,10 +32,10 @@ namespace AngbandOS.Core
         /// <summary>
         /// The race of the first fixed quest monster
         /// </summary>
-        public readonly string FirstGuardian;
+        public readonly string FirstGuardian; // TODO: Should be List<Quest>
 
         /// <summary>
-        /// The level of the first fixed quest
+        /// The level of the first guardian quest monster
         /// </summary>
         public readonly int FirstLevel;
 
@@ -57,10 +57,10 @@ namespace AngbandOS.Core
         /// <summary>
         /// The race of the second fixed quest monster
         /// </summary>
-        public readonly string SecondGuardian;
+        public readonly string SecondGuardian; // TODO: Should be a List<Quest>
 
         /// <summary>
-        /// The level of the second fixed quest
+        /// The level of the second guardian quest monster
         /// </summary>
         public readonly int SecondLevel;
 

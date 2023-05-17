@@ -31,7 +31,7 @@ namespace AngbandOS.Core
         public const int MaKnee = 1;
         public const int MaSlow = 2;
         public const int MaxAmulets = 17;
-        public const int MaxCaves = 20;
+
         public const int MaxClass = 16;
         public const int MaxColors = 66;
         public const int MaxDepth = 128;

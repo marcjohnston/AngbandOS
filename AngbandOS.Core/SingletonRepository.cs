@@ -61,6 +61,7 @@ namespace AngbandOS.Core
         public SingletonList<string> SingingPlayerAttacks;
         public SingletonList<string> StoreOwnerAcceptedComments;
         public SingletonList<string> WorshipPlayerAttacks;
+        public SingletonList<string> FindQuests;
 
         private T[] LoadTypesFromAssembly<T>(SaveGame saveGame)
         {
@@ -181,6 +182,12 @@ namespace AngbandOS.Core
             WorshipPlayerAttacks = new SingletonList<string>(saveGame, 
                 "looks up at you!", "asks how many dragons you've killed!", "asks for your autograph!", "tries to shake your hand!", "pretends to be you!",
                 "dances around you!", "tugs at your clothing!", "asks if you will adopt him!");
+            FindQuests = new SingletonList<string>(saveGame,
+                "You find the following inscription in the floor",
+                "You see a message inscribed in the wall",
+                "There is a sign saying",
+                "Something is written on the staircase",
+                "You find a scroll with the following message");
         }
-}
+    }
 }

@@ -6,6 +6,8 @@ namespace AngbandOS.Core
     [Serializable]
     internal class SaveGame
     {
+        public const int DungeonCount = 20;
+
         public const int OneInChanceUpStairsReturnsToTownLevel = 5;
         public FlaggedAction RedrawMapFlaggedAction { get; }
         public FlaggedAction RedrawEquippyFlaggedAction { get; }
@@ -1410,9 +1412,9 @@ namespace AngbandOS.Core
 
         public void DisplayWildMap()
         {
-            int[] dungeonGuardians = new int[Constants.MaxCaves];
+            int[] dungeonGuardians = new int[DungeonCount];
             int y, i;
-            for (i = 0; i < Constants.MaxCaves; i++)
+            for (i = 0; i < DungeonCount; i++)
             {
                 dungeonGuardians[i] = 0;
             }
@@ -1454,7 +1456,7 @@ namespace AngbandOS.Core
                 Screen.Print(Colour.Purple, "|", y + 2, 14);
             }
             Screen.Print(Colour.Purple, "+------------+", 14, 1);
-            for (y = 0; y < Constants.MaxCaves; y++)
+            for (y = 0; y < DungeonCount; y++)
             {
                 string depth = Dungeons[y].KnownDepth ? $"{Dungeons[y].MaxLevel}" : "?";
                 string difficulty = Dungeons[y].KnownOffset ? $"{Dungeons[y].Offset}" : "?";
@@ -1483,7 +1485,7 @@ namespace AngbandOS.Core
             Screen.Print(Colour.Purple, "L:levels", 16, 1);
             Screen.Print(Colour.Purple, "D:difficulty", 17, 1);
             Screen.Print(Colour.Purple, "Q:quests", 18, 1);
-            Screen.Print(Colour.Purple, "(Your position is marked with the cursor)", Constants.MaxCaves + 2, 19);
+            Screen.Print(Colour.Purple, "(Your position is marked with the cursor)", DungeonCount + 2, 19);
         }
 
         /// <summary>
@@ -2214,12 +2216,12 @@ namespace AngbandOS.Core
                 SingletonRepository.Towns[i].X = 0;
                 SingletonRepository.Towns[i].Y = 0;
             }
-            for (i = 0; i < Constants.MaxCaves; i++)
+            for (i = 0; i < DungeonCount; i++)
             {
                 Dungeons[i].X = 0;
                 Dungeons[i].Y = 0;
             }
-            for (i = 0; i < Constants.MaxCaves; i++)
+            for (i = 0; i < DungeonCount; i++)
             {
                 Dungeons[i].Visited = false;
                 Dungeons[i].KnownDepth = false;
@@ -2372,9 +2374,9 @@ namespace AngbandOS.Core
             {
                 Player.MaxLevelGained = Player.Level;
             }
-            if (Dungeons[CurDungeon.Index].RecallLevel < CurrentDepth)
+            if (CurDungeon.RecallLevel < CurrentDepth)
             {
-                Dungeons[CurDungeon.Index].RecallLevel = CurrentDepth;
+                CurDungeon.RecallLevel = CurrentDepth;
             }
             if (IsQuest(CurrentDepth))
             {
@@ -3305,7 +3307,7 @@ namespace AngbandOS.Core
                         CurDungeon = RecallDungeon;
                         Player.WildernessX = CurDungeon.X;
                         Player.WildernessY = CurDungeon.Y;
-                        CurrentDepth = Dungeons[CurDungeon.Index].RecallLevel;
+                        CurrentDepth = CurDungeon.RecallLevel;
                         if (CurrentDepth < 1)
                         {
                             CurrentDepth = 1;
@@ -7774,8 +7776,8 @@ namespace AngbandOS.Core
         {
             string rumor;
             // Build an array of all the possible rumours we can get
-            char[] rumorType = new char[Quests.Count + Constants.MaxCaves + Constants.MaxCaves];
-            int[] rumorIndex = new int[Quests.Count + Constants.MaxCaves + Constants.MaxCaves];
+            char[] rumorType = new char[Quests.Count + DungeonCount + DungeonCount];
+            int[] rumorIndex = new int[Quests.Count + DungeonCount + DungeonCount];
             int maxRumor = 0;
             // Add a rumour for each undiscovered quest
             for (int i = 0; i < Quests.Count; i++)
@@ -7787,7 +7789,7 @@ namespace AngbandOS.Core
                     maxRumor++;
                 }
             }
-            for (int i = 0; i < Constants.MaxCaves; i++)
+            for (int i = 0; i < DungeonCount; i++)
             {
                 // Add a rumour for each dungeon we don't know the depth of
                 if (!Dungeons[i].KnownDepth)
@@ -7825,7 +7827,7 @@ namespace AngbandOS.Core
             {
                 // The rumour describes a quest
                 Quests[index].Discovered = true;
-                rumor = DescribeQuest(index);
+                rumor = Quests[index].Describe();
             }
             else if (type == 'd')
             {
@@ -20015,72 +20017,13 @@ namespace AngbandOS.Core
 
         private const int _maxQuests = 50;
 
-        private readonly string[] _findQuest =
-        {
-                "You find the following inscription in the floor",
-                "You see a message inscribed in the wall",
-                "There is a sign saying",
-                "Something is writen on the staircase",
-                "You find a scroll with the following message"
-            };
-
         public int ActiveQuests => Quests.Where(q => q.IsActive).Count();
-
-        public string DescribeQuest(int qIdx)
-        {
-            string buf;
-            MonsterRace rPtr = SingletonRepository.MonsterRaces[Quests[qIdx].RIdx];
-            string name = rPtr.Name;
-            int qNum = Quests[qIdx].ToKill;
-            string dunName = Dungeons[Quests[qIdx].Dungeon].Name;
-            int lev = Quests[qIdx].Level;
-            if (Quests[qIdx].Level == 0)
-            {
-                if (qNum == 1)
-                {
-                    buf = $"You have defeated {name} in {dunName}";
-                }
-                else
-                {
-                    string plural = name.PluraliseMonsterName();
-                    buf = $"You have defeated {qNum} {plural} in {dunName}";
-                }
-            }
-            else
-            {
-                if (Quests[qIdx].Discovered)
-                {
-                    if (qNum == 1)
-                    {
-                        buf = $"You must defeat {name} at lvl {lev} of {dunName}";
-                    }
-                    else
-                    {
-                        if (Quests[qIdx].ToKill - Quests[qIdx].Killed > 1)
-                        {
-                            string plural = name.PluraliseMonsterName();
-                            buf = $"You must defeat {qNum} {plural} at lvl {lev} of {dunName}";
-                        }
-                        else
-                        {
-                            buf = $"You must defeat 1 {name} at lvl {lev} of {dunName}";
-                        }
-                    }
-                }
-                else
-                {
-                    buf = $"You must defeat something at lvl {lev} of {dunName}";
-                }
-            }
-            return buf;
-        }
 
         public int GetQuestMonster()
         {
             for (int i = 0; i < Quests.Count; i++)
             {
-                if (Quests[i].Level == CurrentDepth &&
-                    Quests[i].Dungeon == CurDungeon.Index)
+                if (Quests[i].Level == CurrentDepth && Quests[i].Dungeon == CurDungeon.Index)
                 {
                     return Quests[i].RIdx;
                 }
@@ -20108,9 +20051,9 @@ namespace AngbandOS.Core
             {
                 return false;
             }
-            for (int i = 0; i < Quests.Count; i++)
+            foreach (Quest quest in Quests)
             {
-                if (Quests[i].Level == level && Quests[i].Dungeon == CurDungeon.Index)
+                if (quest.Level == level && quest.Dungeon == CurDungeon.Index)
                 {
                     return true;
                 }
@@ -20125,9 +20068,9 @@ namespace AngbandOS.Core
             Quests.Clear();
             for (int i = 0; i < _maxQuests; i++)
             {
-                Quests.Add(new Quest());
+                Quests.Add(new Quest(this));
             }
-            for (int i = 0; i < Constants.MaxCaves; i++)
+            for (int i = 0; i < DungeonCount; i++)
             {
                 if (Dungeons[i].FirstGuardian != "")
                 {
@@ -20176,7 +20119,7 @@ namespace AngbandOS.Core
                 {
                     SingletonRepository.MonsterRaces[Quests[index].RIdx].OnlyGuardian = true;
                 }
-                j = Program.Rng.RandomBetween(1, Constants.MaxCaves) - 1;
+                j = Program.Rng.RandomBetween(1, DungeonCount) - 1;
                 while (Quests[index].Level <= Dungeons[j].Offset ||
                        Quests[index].Level >
                        Dungeons[j].MaxLevel + Dungeons[j].Offset ||
@@ -20184,7 +20127,7 @@ namespace AngbandOS.Core
                        Dungeons[j].Offset || Quests[index].Level ==
                        Dungeons[j].SecondLevel + Dungeons[j].Offset)
                 {
-                    j = Program.Rng.RandomBetween(1, Constants.MaxCaves) - 1;
+                    j = Program.Rng.RandomBetween(1, DungeonCount) - 1;
                 }
                 Quests[index].Dungeon = j;
                 Quests[index].Level -= Dungeons[j].Offset;
@@ -20221,7 +20164,7 @@ namespace AngbandOS.Core
             MonsterRace rPtr = SingletonRepository.MonsterRaces[Quests[qIdx].RIdx];
             string name = rPtr.Name;
             int qNum = Quests[qIdx].ToKill;
-            MsgPrint(_findQuest[Program.Rng.RandomBetween(0, 4)]);
+            MsgPrint(SingletonRepository.FindQuests.ToWeightedRandom().Choose());
             MsgPrint(null);
             if (qNum == 1)
             {
