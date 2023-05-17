@@ -9,5 +9,6 @@
         }
 
         public abstract string[] GetMenu();
+        public virtual void SelectionChanged() { }
     }
 }

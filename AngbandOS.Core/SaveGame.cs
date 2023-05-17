@@ -13763,6 +13763,10 @@ namespace AngbandOS.Core
             Screen.Print(Colour.Black, buf, y, x);
         }
 
+        /// <summary>
+        /// Renders the details of a Character Class during the Birth selection process.
+        /// </summary>
+        /// <param name="characterClass"></param>
         private void DisplayClassInfo(BaseCharacterClass characterClass)
         {
             Screen.Print(Colour.Purple, "STR:", 36, 21);
@@ -14234,7 +14238,7 @@ namespace AngbandOS.Core
 
         private bool PlayerBirthAux()
         {
-            List<string> menuItems = new List<string>();
+            string[] menuItems;
 
             MenuItem<BaseCharacterClass>[] _classMenu = SingletonRepository.CharacterClasses
                 .OrderBy(_characterClass => _characterClass.Title)
@@ -14264,12 +14268,9 @@ namespace AngbandOS.Core
                             autoChose[i] = false;
                         }
                         DisplayPartialCharacter(stage);
-                        if (menu[stage] > menuItems.Count)
-                        {
-                            menu[stage] = 0;
-                        }
                         BaseBirthStage introductionBirthStage = SingletonRepository.BirthStages.Get<IntroductionBirthStage>();
-                        MenuDisplay(menu[stage], introductionBirthStage.GetMenu());
+                        menuItems = introductionBirthStage.GetMenu();
+                        MenuDisplay(menu[stage], menuItems);
                         switch (menu[stage])
                         {
                             case 0:
@@ -14300,7 +14301,7 @@ namespace AngbandOS.Core
                             }
                             if (c == '2')
                             {
-                                if (menu[stage] < menuItems.Count)
+                                if (menu[stage] < menuItems.Length - 1)
                                 {
                                     menu[stage]++;
                                     break;
@@ -14339,18 +14340,10 @@ namespace AngbandOS.Core
                             break;
                         }
                         autoChose[stage] = false;
-                        menuItems.Clear();
-                        for (int i = 0; i < Constants.MaxClass; i++)
-                        {
-                            menuItems.Add(_classMenu[i].Text);
-                        }
                         DisplayPartialCharacter(stage);
-                        if (menu[stage] >= menuItems.Count)
-                        {
-                            menu[stage] = menuItems.Count - 1;
-                        }
                         BaseBirthStage classSelectionBirthStage = SingletonRepository.BirthStages.Get<ClassSelectionBirthStage>();
-                        MenuDisplay(menu[stage], classSelectionBirthStage.GetMenu());
+                        menuItems = classSelectionBirthStage.GetMenu();
+                        MenuDisplay(menu[stage], menuItems);
                         DisplayClassInfo(_classMenu[menu[stage]].Item);
                         Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true && !Shutdown)
@@ -14366,7 +14359,7 @@ namespace AngbandOS.Core
                             }
                             if (c == '2')
                             {
-                                if (menu[stage] < menuItems.Count)
+                                if (menu[stage] < menuItems.Length - 1)
                                 {
                                     menu[stage]++;
                                     break;
@@ -14425,12 +14418,9 @@ namespace AngbandOS.Core
                         MenuItem<Race>[] _raceMenu = SingletonRepository.Races.OrderBy((Race race) => race.Title).Select((Race race) => new MenuItem<Race>(race.Title, race)).ToArray();
 
                         DisplayPartialCharacter(stage);
-                        if (menu[stage] >= menuItems.Count)
-                        {
-                            menu[stage] = menuItems.Count - 1;
-                        }
                         BaseBirthStage raceSelectionBirthStage = SingletonRepository.BirthStages.Get<RaceSelectionBirthStage>();
-                        MenuDisplay(menu[stage], raceSelectionBirthStage.GetMenu());
+                        menuItems = raceSelectionBirthStage.GetMenu();
+                        MenuDisplay(menu[stage], menuItems);
 
                         DisplayRaceInfo(_raceMenu[menu[stage]].Item);
                         Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
@@ -14447,7 +14437,7 @@ namespace AngbandOS.Core
                             }
                             if (c == '2')
                             {
-                                if (menu[stage] < menuItems.Count)
+                                if (menu[stage] < menuItems.Length - 1)
                                 {
                                     menu[stage]++;
                                     break;
@@ -14517,12 +14507,9 @@ namespace AngbandOS.Core
                         BaseRealm[] availableRealms = Player.BaseCharacterClass.AvailablePrimaryRealms;
                         autoChose[stage] = false;
                         DisplayPartialCharacter(stage);
-                        if (menu[stage] >= menuItems.Count)
-                        {
-                            menu[stage] = menuItems.Count - 1;
-                        }
                         BaseBirthStage realm1SelectionBirthStage = SingletonRepository.BirthStages.Get<Realm1SelectionBirthStage>();
-                        MenuDisplay(menu[stage], realm1SelectionBirthStage.GetMenu());
+                        menuItems = realm1SelectionBirthStage.GetMenu();
+                        MenuDisplay(menu[stage], menuItems);
                         DisplayRealmInfo(availableRealms[menu[stage]]);
                         Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true && !Shutdown)
@@ -14538,7 +14525,7 @@ namespace AngbandOS.Core
                             }
                             if (c == '2')
                             {
-                                if (menu[stage] < availableRealms.Length - 1)
+                                if (menu[stage] < menuItems.Length - 1)
                                 {
                                     menu[stage]++;
                                     break;
@@ -14602,12 +14589,9 @@ namespace AngbandOS.Core
                         BaseRealm[] remainingRealms = Player.BaseCharacterClass.AvailableSecondaryRealms.Where(_realm => _realm != Player.PrimaryRealm).ToArray();
                         autoChose[stage] = false;
                         DisplayPartialCharacter(stage);
-                        if (menu[stage] >= menuItems.Count)
-                        {
-                            menu[stage] = menuItems.Count - 1;
-                        }
                         BaseBirthStage realm2SelectionBirthStage = SingletonRepository.BirthStages.Get<Realm2SelectionBirthStage>();
-                        MenuDisplay(menu[stage], realm2SelectionBirthStage.GetMenu());
+                        menuItems = realm2SelectionBirthStage.GetMenu();
+                        MenuDisplay(menu[stage], menuItems);
                         DisplayRealmInfo(remainingRealms[menu[stage]]);
                         Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true && !Shutdown)
@@ -14623,7 +14607,7 @@ namespace AngbandOS.Core
                             }
                             if (c == '2')
                             {
-                                if (menu[stage] < remainingRealms.Length - 1)
+                                if (menu[stage] < menuItems.Length - 1)
                                 {
                                     menu[stage]++;
                                     break;
@@ -14673,12 +14657,9 @@ namespace AngbandOS.Core
                         }
                         DisplayPartialCharacter(stage);
                         autoChose[stage] = false;
-                        if (menu[stage] >= menuItems.Count)
-                        {
-                            menu[stage] = menuItems.Count - 1;
-                        }
                         BaseBirthStage genderSelectionBirthStage = SingletonRepository.BirthStages.Get<GenderSelectionBirthStage>();
-                        MenuDisplay(menu[stage], genderSelectionBirthStage.GetMenu());
+                        menuItems = genderSelectionBirthStage.GetMenu();
+                        MenuDisplay(menu[stage], menuItems);
                         Screen.Print(Colour.Purple, "Your sex has no effect on gameplay.", 35, 21);
                         Screen.Print(Colour.Orange,
                             "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
@@ -14695,7 +14676,7 @@ namespace AngbandOS.Core
                             }
                             if (c == '2')
                             {
-                                if (menu[stage] < menuItems.Count)
+                                if (menu[stage] < menuItems.Length - 1)
                                 {
                                     menu[stage]++;
                                     break;
