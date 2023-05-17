@@ -9,6 +9,6 @@
         }
 
         public abstract string[] GetMenu();
-        public virtual void SelectionChanged() { }
+        public virtual void RenderSelection(int index) { }
     }
 }

@@ -28,7 +28,7 @@
         protected Spell[] GetGenerateSpellList()
         {
             List<Spell> spellList = new List<Spell>();
-            foreach (BookItemFactory bookItemFactory in  SpellBooks)
+            foreach (BookItemFactory bookItemFactory in SpellBooks)
             {
                 spellList.AddRange(bookItemFactory.Spells);
             }

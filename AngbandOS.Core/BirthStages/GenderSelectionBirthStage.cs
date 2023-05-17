@@ -9,5 +9,10 @@ namespace AngbandOS.Core.BirthStages
                 .Select(_gender => _gender.Title)
                 .ToArray();
         }
+
+        public override void RenderSelection(int index)
+        {
+            SaveGame.Screen.Print(Colour.Purple, "Your sex has no effect on gameplay.", 35, 21);
+        }
     }
 }

@@ -969,9 +969,7 @@ namespace AngbandOS.Core.FlaggedActions
                         SaveGame.Player.DisplayedAttackBonus += SaveGame.Player.Level / 5;
                         SaveGame.Player.DisplayedDamageBonus += SaveGame.Player.Level / 5;
                     }
-                    if ((SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Priest || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Druid) &&
-                        !SaveGame.Player.HasBlessedBlade && (oPtr.Category == ItemTypeEnum.Sword ||
-                                                oPtr.Category == ItemTypeEnum.Polearm))
+                    if ((SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Priest || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Druid) && !SaveGame.Player.HasBlessedBlade && oPtr != null && (oPtr.Category == ItemTypeEnum.Sword || oPtr.Category == ItemTypeEnum.Polearm))
                     {
                         SaveGame.Player.AttackBonus -= 2;
                         SaveGame.Player.DamageBonus -= 2;

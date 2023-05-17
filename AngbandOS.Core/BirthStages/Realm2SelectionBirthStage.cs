@@ -10,5 +10,12 @@ namespace AngbandOS.Core.BirthStages
                 .Select(_realm => _realm.Name)
                 .ToArray();
         }
+
+        public override void RenderSelection(int index)
+        {
+            BaseRealm[] remainingRealms = SaveGame.Player.BaseCharacterClass.AvailableSecondaryRealms.Where(_realm => _realm != SaveGame.Player.PrimaryRealm).ToArray();
+            BaseRealm realm = remainingRealms[index];
+            SaveGame.DisplayRealmInfo(realm);
+        }
     }
 }

@@ -13757,62 +13757,10 @@ namespace AngbandOS.Core
             return false;
         }
 
-        private void DisplayAPlusB(int x, int y, int initial, int bonus)
+        public void DisplayAPlusB(int x, int y, int initial, int bonus)
         {
             string buf = $"{initial:00}% + {bonus / 10}.{bonus % 10}%/lv";
             Screen.Print(Colour.Black, buf, y, x);
-        }
-
-        /// <summary>
-        /// Renders the details of a Character Class during the Birth selection process.
-        /// </summary>
-        /// <param name="characterClass"></param>
-        private void DisplayClassInfo(BaseCharacterClass characterClass)
-        {
-            Screen.Print(Colour.Purple, "STR:", 36, 21);
-            Screen.Print(Colour.Purple, "INT:", 37, 21);
-            Screen.Print(Colour.Purple, "WIS:", 38, 21);
-            Screen.Print(Colour.Purple, "DEX:", 39, 21);
-            Screen.Print(Colour.Purple, "CON:", 40, 21);
-            Screen.Print(Colour.Purple, "CHA:", 41, 21);
-            for (int i = 0; i < 6; i++)
-            {
-                int bonus = characterClass.AbilityBonus[i];
-                DisplayStatBonus(26, 36 + i, bonus);
-            }
-            Screen.Print(Colour.Purple, "Disarming   :", 36, 53);
-            Screen.Print(Colour.Purple, "Magic Device:", 37, 53);
-            Screen.Print(Colour.Purple, "Saving Throw:", 38, 53);
-            Screen.Print(Colour.Purple, "Stealth     :", 39, 53);
-            Screen.Print(Colour.Purple, "Fighting    :", 40, 53);
-            Screen.Print(Colour.Purple, "Shooting    :", 41, 53);
-            Screen.Print(Colour.Purple, "Experience  :", 36, 31);
-            Screen.Print(Colour.Purple, "Hit Dice    :", 37, 31);
-            Screen.Print(Colour.Purple, "Infravision :", 38, 31);
-            Screen.Print(Colour.Purple, "Searching   :", 39, 31);
-            Screen.Print(Colour.Purple, "Perception  :", 40, 31);
-            DisplayAPlusB(67, 36, characterClass.BaseDisarmBonus, characterClass.DisarmBonusPerLevel);
-            DisplayAPlusB(67, 37, characterClass.BaseDeviceBonus, characterClass.DeviceBonusPerLevel);
-            DisplayAPlusB(67, 38, characterClass.BaseSaveBonus, characterClass.SaveBonusPerLevel);
-            DisplayAPlusB(67, 39, characterClass.BaseStealthBonus * 4, characterClass.StealthBonusPerLevel * 4);
-            DisplayAPlusB(67, 40, characterClass.BaseMeleeAttackBonus, characterClass.MeleeAttackBonusPerLevel);
-            DisplayAPlusB(67, 41, characterClass.BaseRangedAttackBonus, characterClass.RangedAttackBonusPerLevel);
-            string buf = "+" + characterClass.ExperienceFactor + "%";
-            Screen.Print(Colour.Black, buf, 36, 45);
-            buf = "1d" + characterClass.HitDieBonus;
-            Screen.Print(Colour.Black, buf, 37, 45);
-            Screen.Print(Colour.Black, "-", 38, 45);
-            buf = $"{characterClass.BaseSearchBonus:00}%";
-            Screen.Print(Colour.Black, buf, 39, 45);
-            buf = $"{characterClass.BaseSearchFrequency:00}%";
-            Screen.Print(Colour.Black, buf, 40, 45);
-
-            int y = 30;
-            foreach (string classInfo in characterClass.Info)
-            {
-                Screen.Print(Colour.Purple, classInfo, y, 20);
-                y++;
-            }
         }
 
         private void DisplayPartialCharacter(int stage)
@@ -13966,61 +13914,7 @@ namespace AngbandOS.Core
             }
         }
 
-        private void DisplayRaceInfo(Race race)
-        {
-            Screen.Print(Colour.Purple, "STR:", 36, 21);
-            Screen.Print(Colour.Purple, "INT:", 37, 21);
-            Screen.Print(Colour.Purple, "WIS:", 38, 21);
-            Screen.Print(Colour.Purple, "DEX:", 39, 21);
-            Screen.Print(Colour.Purple, "CON:", 40, 21);
-            Screen.Print(Colour.Purple, "CHA:", 41, 21);
-            for (int i = 0; i < 6; i++)
-            {
-                int bonus = race.AbilityBonus[i] + Player.BaseCharacterClass.AbilityBonus[i];
-                DisplayStatBonus(26, 36 + i, bonus);
-            }
-            Screen.Print(Colour.Purple, "Disarming   :", 36, 53);
-            Screen.Print(Colour.Purple, "Magic Device:", 37, 53);
-            Screen.Print(Colour.Purple, "Saving Throw:", 38, 53);
-            Screen.Print(Colour.Purple, "Stealth     :", 39, 53);
-            Screen.Print(Colour.Purple, "Fighting    :", 40, 53);
-            Screen.Print(Colour.Purple, "Shooting    :", 41, 53);
-            Screen.Print(Colour.Purple, "Experience  :", 36, 31);
-            Screen.Print(Colour.Purple, "Hit Dice    :", 37, 31);
-            Screen.Print(Colour.Purple, "Infravision :", 38, 31);
-            Screen.Print(Colour.Purple, "Searching   :", 39, 31);
-            Screen.Print(Colour.Purple, "Perception  :", 40, 31);
-            DisplayAPlusB(67, 36, Player.BaseCharacterClass.BaseDisarmBonus + race.BaseDisarmBonus, Player.BaseCharacterClass.DisarmBonusPerLevel);
-            DisplayAPlusB(67, 37, Player.BaseCharacterClass.BaseDeviceBonus + race.BaseDeviceBonus, Player.BaseCharacterClass.DeviceBonusPerLevel);
-            DisplayAPlusB(67, 38, Player.BaseCharacterClass.BaseSaveBonus + race.BaseSaveBonus, Player.BaseCharacterClass.SaveBonusPerLevel);
-            DisplayAPlusB(67, 39, (Player.BaseCharacterClass.BaseStealthBonus * 4) + (race.BaseStealthBonus * 4), Player.BaseCharacterClass.StealthBonusPerLevel * 4);
-            DisplayAPlusB(67, 40, Player.BaseCharacterClass.BaseMeleeAttackBonus + race.BaseMeleeAttackBonus, Player.BaseCharacterClass.MeleeAttackBonusPerLevel);
-            DisplayAPlusB(67, 41, Player.BaseCharacterClass.BaseRangedAttackBonus + race.BaseRangedAttackBonus, Player.BaseCharacterClass.RangedAttackBonusPerLevel);
-            Screen.Print(Colour.Black, race.ExperienceFactor + Player.BaseCharacterClass.ExperienceFactor + "%", 36, 45);
-            Screen.Print(Colour.Black, "1d" + (race.HitDieBonus + Player.BaseCharacterClass.HitDieBonus), 37, 45);
-            if (race.Infravision == 0)
-            {
-                Screen.Print(Colour.Black, "nil", 38, 45);
-            }
-            else
-            {
-                Screen.Print(Colour.Green, race.Infravision + "0 feet", 38, 45);
-            }
-            Screen.Print(Colour.Black, $"{race.BaseSearchBonus + Player.BaseCharacterClass.BaseSearchBonus:00}%", 39, 45);
-            Screen.Print(Colour.Black, $"{race.BaseSearchFrequency + Player.BaseCharacterClass.BaseSearchFrequency:00}%", 40, 45);
-
-            // Retrieve the description for the race and split the description into lines.
-            string[] description = race.Description.Split("\n");
-
-            // Render the description, center justified into row 32.
-            int descriptionRow = 32 - (int)Math.Floor((double)description.Length / 2);
-            foreach (string descriptionLine in description)
-            {
-                Screen.Print(Colour.Purple, descriptionLine, descriptionRow++, 21);
-            }
-        }
-
-        private void DisplayRealmInfo(BaseRealm prealm)
+        public void DisplayRealmInfo(BaseRealm prealm)
         {
             int y = 30;
             foreach (string info in prealm.Info)
@@ -14030,7 +13924,7 @@ namespace AngbandOS.Core
             }
         }
 
-        private void DisplayStatBonus(int x, int y, int bonus)
+        public void DisplayStatBonus(int x, int y, int bonus)
         {
             string buf;
             if (bonus == 0)
@@ -14271,22 +14165,7 @@ namespace AngbandOS.Core
                         BaseBirthStage introductionBirthStage = SingletonRepository.BirthStages.Get<IntroductionBirthStage>();
                         menuItems = introductionBirthStage.GetMenu();
                         MenuDisplay(menu[stage], menuItems);
-                        switch (menu[stage])
-                        {
-                            case 0:
-                                Screen.Print(Colour.Purple, "Choose your character's race, sex, and class; and select", 35, 20);
-                                Screen.Print(Colour.Purple, "which realms of magic your character will use.", 36, 20);
-                                break;
-
-                            case 1:
-                                Screen.Print(Colour.Purple, "Let the game generate a character for you randomly.", 35, 20);
-                                break;
-
-                            case 2:
-                                Screen.Print(Colour.Purple, "Re-play with a character similar to the one you played", 35, 20);
-                                Screen.Print(Colour.Purple, "last time.", 36, 20);
-                                break;
-                        }
+                        introductionBirthStage.RenderSelection(menu[stage]);
                         Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true & !Shutdown)
                         {
@@ -14344,7 +14223,7 @@ namespace AngbandOS.Core
                         BaseBirthStage classSelectionBirthStage = SingletonRepository.BirthStages.Get<ClassSelectionBirthStage>();
                         menuItems = classSelectionBirthStage.GetMenu();
                         MenuDisplay(menu[stage], menuItems);
-                        DisplayClassInfo(_classMenu[menu[stage]].Item);
+                        classSelectionBirthStage.RenderSelection(menu[stage]);
                         Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true && !Shutdown)
                         {
@@ -14421,8 +14300,7 @@ namespace AngbandOS.Core
                         BaseBirthStage raceSelectionBirthStage = SingletonRepository.BirthStages.Get<RaceSelectionBirthStage>();
                         menuItems = raceSelectionBirthStage.GetMenu();
                         MenuDisplay(menu[stage], menuItems);
-
-                        DisplayRaceInfo(_raceMenu[menu[stage]].Item);
+                        raceSelectionBirthStage.RenderSelection(menu[stage]);
                         Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true && !Shutdown)
                         {
@@ -14510,7 +14388,7 @@ namespace AngbandOS.Core
                         BaseBirthStage realm1SelectionBirthStage = SingletonRepository.BirthStages.Get<Realm1SelectionBirthStage>();
                         menuItems = realm1SelectionBirthStage.GetMenu();
                         MenuDisplay(menu[stage], menuItems);
-                        DisplayRealmInfo(availableRealms[menu[stage]]);
+                        realm1SelectionBirthStage.RenderSelection(menu[stage]);
                         Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true && !Shutdown)
                         {
@@ -14592,7 +14470,7 @@ namespace AngbandOS.Core
                         BaseBirthStage realm2SelectionBirthStage = SingletonRepository.BirthStages.Get<Realm2SelectionBirthStage>();
                         menuItems = realm2SelectionBirthStage.GetMenu();
                         MenuDisplay(menu[stage], menuItems);
-                        DisplayRealmInfo(remainingRealms[menu[stage]]);
+                        realm2SelectionBirthStage.RenderSelection(menu[stage]);
                         Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true && !Shutdown)
                         {
@@ -14660,9 +14538,8 @@ namespace AngbandOS.Core
                         BaseBirthStage genderSelectionBirthStage = SingletonRepository.BirthStages.Get<GenderSelectionBirthStage>();
                         menuItems = genderSelectionBirthStage.GetMenu();
                         MenuDisplay(menu[stage], menuItems);
-                        Screen.Print(Colour.Purple, "Your sex has no effect on gameplay.", 35, 21);
-                        Screen.Print(Colour.Orange,
-                            "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+                        genderSelectionBirthStage.RenderSelection(menu[stage]);
+                        Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
                         while (true && !Shutdown)
                         {
                             c = Inkey();
