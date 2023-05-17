@@ -1064,7 +1064,7 @@ namespace AngbandOS.Core
                         }
                     }
                     // Check through the items in the tile we just entered
-                    foreach (Item item in tile.Items)
+                    foreach (Item item in tile.Items.ToArray()) // We need to use a copy because the collection can change
                     {
                         // We ignore gold
                         if (item.Category == ItemTypeEnum.Gold)
