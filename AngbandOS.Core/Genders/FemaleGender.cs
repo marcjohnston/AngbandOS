@@ -1,0 +1,9 @@
+namespace AngbandOS.Core.Genders
+{
+    internal class FemaleGender : Gender
+    {
+        private FemaleGender(SaveGame saveGame) : base(saveGame) { }
+        public override string Title => "Female";
+        public override string Winner => "Queen";
+    }
+}

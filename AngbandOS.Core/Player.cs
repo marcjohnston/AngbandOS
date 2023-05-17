@@ -26,7 +26,7 @@ namespace AngbandOS.Core
         public int FractionalHealth;
         public int FractionalMana;
         public GameTime GameTime;
-        public Gender Gender = new Gender();
+        public Gender Gender;
         public int GenderIndex;
         public int Generation; // This is how many times the character name has changed.
         public bool GetFirstLevelMutation;
