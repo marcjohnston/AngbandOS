@@ -1,9 +1,10 @@
 namespace AngbandOS.Core.BirthStages
 {
+    [Serializable]
     internal class RaceSelectionBirthStage : BaseBirthStage
     {
         private RaceSelectionBirthStage(SaveGame saveGame) : base(saveGame) { }
-        public override string[] GetMenu()
+        public override string[]? GetMenu()
         {
             return SaveGame.SingletonRepository.Races
                 .OrderBy((Race race) => race.Title)
@@ -67,6 +68,55 @@ namespace AngbandOS.Core.BirthStages
             {
                 SaveGame.Screen.Print(Colour.Purple, descriptionLine, descriptionRow++, 21);
             }
+        }
+        public override int? GoForward(int index)
+        {
+            Race[] races = SaveGame.SingletonRepository.Races
+                .OrderBy((Race race) => race.Title)
+                .ToArray();
+            SaveGame.Player.Race = races[index];
+            SaveGame.Player.GetFirstLevelMutation = SaveGame.Player.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
+
+            // Check to see how many realms the player can study.
+            int availablePrimaryRealmCount = SaveGame.Player.BaseCharacterClass.AvailablePrimaryRealms.Length;
+            BaseRealm[] remainingAvailableSecondaryRealms = SaveGame.Player.BaseCharacterClass.RemainingAvailableSecondaryRealms();
+            int remainingAvailableSecondaryRealmCount = remainingAvailableSecondaryRealms.Length;
+            if (availablePrimaryRealmCount == 0)
+            {
+                // The player cannot study any realms.
+                SaveGame.Player.PrimaryRealm = null;
+                SaveGame.Player.SecondaryRealm = null;
+                return BirthStage.GenderSelection;
+            }
+            else if (availablePrimaryRealmCount == 1)
+            {
+                // There is only one realm, auto select it.
+                SaveGame.Player.PrimaryRealm = SaveGame.Player.BaseCharacterClass.AvailablePrimaryRealms[0];
+
+                // Check the secondary realm selection.
+                if (remainingAvailableSecondaryRealmCount == 0)
+                {
+                    SaveGame.Player.SecondaryRealm = null;
+                    return BirthStage.GenderSelection;
+                }
+                else if (remainingAvailableSecondaryRealmCount == 1)
+                {
+                    // There is only one realm, auto select it.
+                    SaveGame.Player.SecondaryRealm = remainingAvailableSecondaryRealms[0];
+                    return BirthStage.GenderSelection;
+                }
+                else
+                {
+                    return BirthStage.RealmSelection2;
+                }
+            }
+
+            return BirthStage.RealmSelection1;
+        }
+
+        public override int? GoBack()
+        {
+            return BirthStage.ClassSelection;
         }
     }
 }

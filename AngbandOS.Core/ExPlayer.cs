@@ -18,7 +18,7 @@ namespace AngbandOS.Core
         /// <summary>
         /// The index of the character's gender
         /// </summary>
-        public readonly int GenderIndex;
+        public readonly Gender Gender;
 
         /// <summary>
         /// The character's generation, to be appended to their name
@@ -71,7 +71,7 @@ namespace AngbandOS.Core
         /// <param name="player"> The player character from which to create the ex player </param>
         public ExPlayer(Player player)
         {
-            GenderIndex = player.GenderIndex;
+            Gender = player.Gender;
             Race = player.Race;
             RaceAtBirth = player.RaceAtBirth;
             CharacterClassName = player.BaseCharacterClass.GetType().Name;

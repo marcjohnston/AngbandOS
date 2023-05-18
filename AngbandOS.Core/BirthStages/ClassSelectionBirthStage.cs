@@ -1,9 +1,10 @@
 namespace AngbandOS.Core.BirthStages
 {
+    [Serializable]
     internal class ClassSelectionBirthStage : BaseBirthStage
     {
         private ClassSelectionBirthStage(SaveGame saveGame) : base(saveGame) { }
-        public override string[] GetMenu()
+        public override string[]? GetMenu()
         {
             return SaveGame.SingletonRepository.CharacterClasses
                 .OrderBy(_characterClass => _characterClass.Title)
@@ -67,6 +68,20 @@ namespace AngbandOS.Core.BirthStages
                 SaveGame.Screen.Print(Colour.Purple, classInfo, y, 20);
                 y++;
             }
+        }
+        public override int? GoForward(int index)
+        {
+            BaseCharacterClass[] classes = SaveGame.SingletonRepository.CharacterClasses
+                .OrderBy(_characterClass => _characterClass.Title)
+                .ToArray();
+
+            SaveGame.Player.BaseCharacterClass = classes[index];
+            return BirthStage.RaceSelection;
+        }
+
+        public override int? GoBack()
+        {
+            return BirthStage.Introduction;
         }
     }
 }

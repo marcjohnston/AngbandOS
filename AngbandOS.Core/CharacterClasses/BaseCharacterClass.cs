@@ -95,6 +95,11 @@
         /// <value>The available realms.</value>
         public virtual BaseRealm[] AvailableSecondaryRealms => new BaseRealm[] { };
 
+        public BaseRealm[] RemainingAvailableSecondaryRealms()
+        {
+            return AvailableSecondaryRealms.Where(_realm => _realm != SaveGame.Player.PrimaryRealm).ToArray();
+        }
+
         public virtual bool WorshipsADeity => false; // TODO: Only priests have a godname ... this seems off.
 
         /// <summary>

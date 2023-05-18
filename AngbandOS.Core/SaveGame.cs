@@ -1092,7 +1092,7 @@ namespace AngbandOS.Core
             }
             if (Player == null)
             {
-                if (!CharacterGeneration(ExPlayer))
+                if (!CharacterGeneration())
                 {
                     return;
                 }
@@ -13716,21 +13716,21 @@ namespace AngbandOS.Core
         /// <summary>
         /// Represents the previous character class.
         /// </summary>
-        private BaseCharacterClass _prevCharacterClass;
+        public BaseCharacterClass _prevCharacterClass;
 
-        private int _prevGeneration;
-        private string _prevName;
+        public int _prevGeneration;
+        public string _prevName;
 
         /// <summary>
         /// Returns the race of the previous character.  Used as a default during the birthing process.  Set to HumanRace if there is no previous character.  Returns
         /// null, before the birthing process is started.
         /// </summary>
-        private Race? _prevRace = null;
+        public Race? _prevRace = null;
 
-        private BaseRealm? _prevPrimaryRealm;
-        private BaseRealm? _prevSecondaryRealm;
+        public BaseRealm? _prevPrimaryRealm;
+        public BaseRealm? _prevSecondaryRealm;
 
-        private int _prevSex;
+        public Gender _prevSex;
 
         /// <summary>
         /// The players inventory.
@@ -13738,7 +13738,7 @@ namespace AngbandOS.Core
         public Item?[] Inventory;
         public int _invenCnt;
 
-        public bool CharacterGeneration(ExPlayer ex)
+        public bool CharacterGeneration()
         {
             SetBackground(BackgroundImage.Paper);
             PlayMusic(MusicTrack.Chargen);
@@ -13750,7 +13750,7 @@ namespace AngbandOS.Core
             _invenCnt = 0;
 
             Player = new Player(this);
-            if (PlayerBirth(ex))
+            if (PlayerBirth())
             {
                 return true;
             }
@@ -13774,7 +13774,7 @@ namespace AngbandOS.Core
             Screen.Print(Colour.Blue, "Gender      :", 3, 1);
             if (stage == 0)
             {
-                Player.Gender = SingletonRepository.Genders[_prevSex];
+                Player.Gender = _prevSex;
                 str = Player.Gender.Title;
             }
             else if (stage < 6)
@@ -13783,7 +13783,7 @@ namespace AngbandOS.Core
             }
             else
             {
-                Player.Gender = SingletonRepository.Genders[Player.GenderIndex];
+                Player.Gender = SingletonRepository.Genders[Player.Gender.Index];
                 str = Player.Gender.Title;
             }
             Screen.Print(Colour.Brown, str, 3, 15);
@@ -13949,12 +13949,12 @@ namespace AngbandOS.Core
             bool startAtDusk = Player.Race.RestsTillDuskInsteadOfDawn;
             Player.GameTime = new GameTime(this, Program.Rng.DieRoll(365), startAtDusk);
 
-            if (Player.GenderIndex == Constants.SexMale)
+            if (Player.Gender.Index == Constants.SexMale)
             {
                 Player.Height = Program.Rng.RandomNormal(Player.Race.MaleBaseHeight, Player.Race.MaleHeightRange);
                 Player.Weight = Program.Rng.RandomNormal(Player.Race.MaleBaseWeight, Player.Race.MaleWeightRange);
             }
-            else if (Player.GenderIndex == Constants.SexFemale)
+            else if (Player.Gender.Index == Constants.SexFemale)
             {
                 Player.Height = Program.Rng.RandomNormal(Player.Race.FemaleBaseHeight, Player.Race.FemaleHeightRange);
                 Player.Weight = Program.Rng.RandomNormal(Player.Race.FemaleBaseWeight, Player.Race.FemaleWeightRange);
@@ -14035,21 +14035,6 @@ namespace AngbandOS.Core
             Player.Gold = gold;
         }
 
-        private void GetRealmsRandomly()
-        {
-            // Use weighted randoms to choose a the realms.
-            Player.PrimaryRealm = new WeightedRandom<BaseRealm>(Player.BaseCharacterClass.AvailablePrimaryRealms).Choose();
-
-            // We need to get the available secondary realms.  Note that we need to exclude the primary realm.
-            BaseRealm[] availableSecondaryRealms = Player.BaseCharacterClass.AvailableSecondaryRealms.Where(_realm => _realm != Player.PrimaryRealm).ToArray();
-            Player.SecondaryRealm = new WeightedRandom<BaseRealm>(Player.BaseCharacterClass.AvailableSecondaryRealms).Choose();
-            if (!Player.BaseCharacterClass.WorshipsADeity)
-            {
-                return;
-            }
-            Player.Religion.Deity = Player.BaseCharacterClass.DefaultDeity(Player.SecondaryRealm);
-        }
-
         private void GetStats()
         {
             int i, j;
@@ -14092,11 +14077,11 @@ namespace AngbandOS.Core
             }
         }
 
-        private bool PlayerBirth(ExPlayer ex)
+        private bool PlayerBirth()
         {
-            if (ex == null)
+            if (ExPlayer == null)
             {
-                _prevSex = Constants.SexFemale;
+                _prevSex = SingletonRepository.Genders.Get<FemaleGender>();
                 _prevRace = SingletonRepository.Races.Get<HumanRace>();
                 _prevCharacterClass = SingletonRepository.CharacterClasses.Get<WarriorCharacterClass>();
                 _prevPrimaryRealm = null;
@@ -14106,13 +14091,13 @@ namespace AngbandOS.Core
             }
             else
             {
-                _prevSex = ex.GenderIndex;
-                _prevRace = ex.RaceAtBirth;
-                _prevCharacterClass = SingletonRepository.CharacterClasses.Get(ex.CharacterClassName);
-                _prevPrimaryRealm = ex.PrimaryRealm;
-                _prevSecondaryRealm = ex.SecondaryRealm;
-                _prevName = ex.Name;
-                _prevGeneration = ex.Generation;
+                _prevSex = ExPlayer.Gender;
+                _prevRace = ExPlayer.RaceAtBirth;
+                _prevCharacterClass = SingletonRepository.CharacterClasses.Get(ExPlayer.CharacterClassName);
+                _prevPrimaryRealm = ExPlayer.PrimaryRealm;
+                _prevSecondaryRealm = ExPlayer.SecondaryRealm;
+                _prevName = ExPlayer.Name;
+                _prevGeneration = ExPlayer.Generation;
             }
             if (!PlayerBirthAux())
             {
@@ -14141,7 +14126,6 @@ namespace AngbandOS.Core
 
             int stage = 0;
             int[] menu = new int[9];
-            bool[] autoChose = new bool[8];
             for (int i = 0; i < 8; i++)
             {
                 menu[i] = 0;
@@ -14156,11 +14140,6 @@ namespace AngbandOS.Core
                 switch (stage)
                 {
                     case BirthStage.Introduction:
-                        Player.Religion.Deity = GodName.None;
-                        for (int i = 0; i < 8; i++)
-                        {
-                            autoChose[i] = false;
-                        }
                         DisplayPartialCharacter(stage);
                         BaseBirthStage introductionBirthStage = SingletonRepository.BirthStages.Get<IntroductionBirthStage>();
                         menuItems = introductionBirthStage.GetMenu();
@@ -14188,12 +14167,13 @@ namespace AngbandOS.Core
                             }
                             if (c == '6')
                             {
-                                stage++;
+                                stage = introductionBirthStage.GoForward(menu[stage])!.Value;
                                 break;
                             }
                             if (c == '4')
                             {
-                                return false;
+                                stage = introductionBirthStage.GoBack()!.Value;
+                                break;
                             }
                             if (c == 'h')
                             {
@@ -14203,22 +14183,6 @@ namespace AngbandOS.Core
                         break;
 
                     case BirthStage.ClassSelection:
-                        Player.Religion.Deity = GodName.None;
-                        if (menu[0] == Constants.GenerateReplay)
-                        {
-                            autoChose[stage] = true;
-                            Player.BaseCharacterClass = _prevCharacterClass;
-                            stage++;
-                            break;
-                        }
-                        if (menu[0] == Constants.GenerateRandom)
-                        {
-                            autoChose[stage] = true;
-                            Player.BaseCharacterClass = SingletonRepository.CharacterClasses.ToWeightedRandom().Choose();
-                            stage++;
-                            break;
-                        }
-                        autoChose[stage] = false;
                         DisplayPartialCharacter(stage);
                         BaseBirthStage classSelectionBirthStage = SingletonRepository.BirthStages.Get<ClassSelectionBirthStage>();
                         menuItems = classSelectionBirthStage.GetMenu();
@@ -14246,16 +14210,12 @@ namespace AngbandOS.Core
                             }
                             if (c == '6')
                             {
-                                stage++;
+                                stage = classSelectionBirthStage.GoForward(menu[stage])!.Value;
                                 break;
                             }
                             if (c == '4')
                             {
-                                do
-                                {
-                                    stage--;
-                                }
-                                while (autoChose[stage]);
+                                stage = classSelectionBirthStage.GoBack()!.Value;
                                 break;
                             }
                             if (c == 'h')
@@ -14263,39 +14223,10 @@ namespace AngbandOS.Core
                                 ShowManual();
                             }
                         }
-                        if (stage > BirthStage.ClassSelection)
-                        {
-                            Player.BaseCharacterClass = _classMenu[menu[BirthStage.ClassSelection]].Item;
-                        }
                         break;
 
                     case BirthStage.RaceSelection:
-                        if (menu[0] == Constants.GenerateReplay)
-                        {
-                            autoChose[stage] = true;
-                            Player.Race = _prevRace;
-                            Player.GetFirstLevelMutation = Player.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
-                            stage++;
-                            break;
-                        }
-                        if (menu[0] == Constants.GenerateRandom)
-                        {
-                            autoChose[stage] = true;
-                            do
-                            {
-                                int raceIndex = Program.Rng.RandomLessThan(SingletonRepository.Races.Count);
-                                Player.Race = SingletonRepository.Races[raceIndex];
-                                Player.GetFirstLevelMutation = Player.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
-                            }
-                            while ((Player.Race.Choice & (1L << Player.BaseCharacterClass.ID)) == 0);
-                            stage++;
-                            break;
-                        }
-                        autoChose[stage] = false;
-
                         // Create the menu for the races.
-                        MenuItem<Race>[] _raceMenu = SingletonRepository.Races.OrderBy((Race race) => race.Title).Select((Race race) => new MenuItem<Race>(race.Title, race)).ToArray();
-
                         DisplayPartialCharacter(stage);
                         BaseBirthStage raceSelectionBirthStage = SingletonRepository.BirthStages.Get<RaceSelectionBirthStage>();
                         menuItems = raceSelectionBirthStage.GetMenu();
@@ -14323,16 +14254,12 @@ namespace AngbandOS.Core
                             }
                             if (c == '6')
                             {
-                                stage++;
+                                stage = raceSelectionBirthStage.GoForward(menu[stage])!.Value;
                                 break;
                             }
                             if (c == '4')
                             {
-                                do
-                                {
-                                    stage--;
-                                }
-                                while (autoChose[stage]);
+                                stage = raceSelectionBirthStage.GoBack()!.Value;
                                 break;
                             }
                             if (c == 'h')
@@ -14340,50 +14267,10 @@ namespace AngbandOS.Core
                                 ShowManual();
                             }
                         }
-                        if (stage > BirthStage.RaceSelection)
-                        {
-                            Player.Race = _raceMenu[menu[BirthStage.RaceSelection]].Item;
-                            Player.GetFirstLevelMutation = Player.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
-                        }
                         break;
 
                     case BirthStage.RealmSelection1:
-                        if (menu[0] == Constants.GenerateReplay)
-                        {
-                            autoChose[stage] = true;
-                            Player.PrimaryRealm = _prevPrimaryRealm;
-                            stage++;
-                            break;
-                        }
-                        if (menu[0] == Constants.GenerateRandom)
-                        {
-                            autoChose[stage] = true;
-                            GetRealmsRandomly();
-                            stage++;
-                            break;
-                        }
-
-                        // Check to see how many realms the player can study.
-                        if (Player.BaseCharacterClass.AvailablePrimaryRealms.Length == 0)
-                        {
-                            // The player cannot study any realms.
-                            autoChose[stage] = true;
-                            Player.PrimaryRealm = null;
-                            stage++;
-                            break;
-                        }
-                        else if (Player.BaseCharacterClass.AvailablePrimaryRealms.Length == 1)
-                        {
-                            // There is only one realm, auto select it.
-                            autoChose[stage] = true;
-                            Player.PrimaryRealm = Player.BaseCharacterClass.AvailablePrimaryRealms[0];
-                            stage++;
-                            break;
-                        }
-
                         // There is more than one realm available to the player, allow the player to choose the realm.
-                        BaseRealm[] availableRealms = Player.BaseCharacterClass.AvailablePrimaryRealms;
-                        autoChose[stage] = false;
                         DisplayPartialCharacter(stage);
                         BaseBirthStage realm1SelectionBirthStage = SingletonRepository.BirthStages.Get<Realm1SelectionBirthStage>();
                         menuItems = realm1SelectionBirthStage.GetMenu();
@@ -14411,16 +14298,12 @@ namespace AngbandOS.Core
                             }
                             if (c == '6')
                             {
-                                stage++;
+                                stage = realm1SelectionBirthStage.GoForward(menu[stage])!.Value;
                                 break;
                             }
                             if (c == '4')
                             {
-                                do
-                                {
-                                    stage--;
-                                }
-                                while (autoChose[stage]);
+                                stage = realm1SelectionBirthStage.GoBack()!.Value;
                                 break;
                             }
                             if (c == 'h')
@@ -14428,44 +14311,8 @@ namespace AngbandOS.Core
                                 ShowManual();
                             }
                         }
-                        if (stage > BirthStage.RealmSelection1)
-                        {
-                            Player.PrimaryRealm = availableRealms[menu[BirthStage.RealmSelection1]];
-                        }
                         break;
                     case BirthStage.RealmSelection2:
-                        if (menu[0] == Constants.GenerateReplay)
-                        {
-                            autoChose[stage] = true;
-                            Player.SecondaryRealm = _prevSecondaryRealm;
-                            Player.Religion.Deity = Player.BaseCharacterClass.DefaultDeity(Player.SecondaryRealm);
-                            stage++;
-                            break;
-                        }
-                        if (menu[0] == Constants.GenerateRandom)
-                        {
-                            autoChose[stage] = true;
-                            stage++;
-                            break;
-                        }
-                        Player.SecondaryRealm = null;
-                        if (Player.BaseCharacterClass.AvailableSecondaryRealms.Length == 0)
-                        {
-                            autoChose[stage] = true;
-                            Player.SecondaryRealm = null;
-                            stage++;
-                            break;
-                        }
-                        else if (Player.BaseCharacterClass.AvailableSecondaryRealms.Length == 1)
-                        {
-                            autoChose[stage] = true;
-                            Player.SecondaryRealm = Player.BaseCharacterClass.AvailableSecondaryRealms[0];
-                            stage++;
-                            break;
-                        }
-
-                        BaseRealm[] remainingRealms = Player.BaseCharacterClass.AvailableSecondaryRealms.Where(_realm => _realm != Player.PrimaryRealm).ToArray();
-                        autoChose[stage] = false;
                         DisplayPartialCharacter(stage);
                         BaseBirthStage realm2SelectionBirthStage = SingletonRepository.BirthStages.Get<Realm2SelectionBirthStage>();
                         menuItems = realm2SelectionBirthStage.GetMenu();
@@ -14493,16 +14340,12 @@ namespace AngbandOS.Core
                             }
                             if (c == '6')
                             {
-                                stage++;
+                                stage = realm2SelectionBirthStage.GoForward(menu[stage])!.Value;
                                 break;
                             }
                             if (c == '4')
                             {
-                                do
-                                {
-                                    stage--;
-                                }
-                                while (autoChose[stage]);
+                                stage = realm2SelectionBirthStage.GoBack()!.Value;
                                 break;
                             }
                             if (c == 'h')
@@ -14510,31 +14353,9 @@ namespace AngbandOS.Core
                                 ShowManual();
                             }
                         }
-                        if (stage > BirthStage.RealmSelection2)
-                        {
-                            Player.SecondaryRealm = remainingRealms[menu[BirthStage.RealmSelection2]];
-                            Player.Religion.Deity = Player.BaseCharacterClass.DefaultDeity(Player.SecondaryRealm);
-                        }
                         break;
                     case BirthStage.GenderSelection:
-                        if (menu[0] == Constants.GenerateReplay)
-                        {
-                            autoChose[stage] = true;
-                            Player.GenderIndex = _prevSex;
-                            Player.Gender = SingletonRepository.Genders[Player.GenderIndex];
-                            stage++;
-                            break;
-                        }
-                        if (menu[0] == Constants.GenerateRandom)
-                        {
-                            autoChose[stage] = true;
-                            Player.GenderIndex = Program.Rng.RandomBetween(0, 1);
-                            Player.Gender = SingletonRepository.Genders[Player.GenderIndex];
-                            stage++;
-                            break;
-                        }
                         DisplayPartialCharacter(stage);
-                        autoChose[stage] = false;
                         BaseBirthStage genderSelectionBirthStage = SingletonRepository.BirthStages.Get<GenderSelectionBirthStage>();
                         menuItems = genderSelectionBirthStage.GetMenu();
                         MenuDisplay(menu[stage], menuItems);
@@ -14561,16 +14382,12 @@ namespace AngbandOS.Core
                             }
                             if (c == '6')
                             {
-                                stage++;
+                                stage = genderSelectionBirthStage.GoForward(menu[stage])!.Value;
                                 break;
                             }
                             if (c == '4')
                             {
-                                do
-                                {
-                                    stage--;
-                                }
-                                while (autoChose[stage]);
+                                stage = genderSelectionBirthStage.GoBack()!.Value;
                                 break;
                             }
                             if (c == 'h')
@@ -14578,24 +14395,9 @@ namespace AngbandOS.Core
                                 ShowManual();
                             }
                         }
-                        if (stage > BirthStage.GenderSelection)
-                        {
-                            Player.GenderIndex = menu[BirthStage.GenderSelection];
-                            Player.Gender = SingletonRepository.Genders[Player.GenderIndex];
-                        }
                         break;
 
                     case BirthStage.Confirmation:
-                        if (menu[0] != Constants.GenerateReplay)
-                        {
-                            Player.Name = Player.Race.CreateRandomName();
-                            Player.Generation = 1;
-                        }
-                        else
-                        {
-                            Player.Name = string.IsNullOrEmpty(_prevName) ? Player.Race.CreateRandomName() : _prevName;
-                            Player.Generation = _prevGeneration + 1;
-                        }
                         GetStats();
                         GetExtra();
                         GetAhw();
@@ -14629,8 +14431,7 @@ namespace AngbandOS.Core
                         while (true && !Shutdown)
                         {
                             characterViewer.DisplayPlayer();
-                            Screen.Print(Colour.Orange,
-                                "[Use return to confirm, or left to go back.]", 43, 1);
+                            Screen.Print(Colour.Orange, "[Use return to confirm, or left to go back.]", 43, 1);
                             c = Inkey();
                             if (c == 13)
                             {
@@ -14639,11 +14440,7 @@ namespace AngbandOS.Core
                             }
                             if (c == '4')
                             {
-                                do
-                                {
-                                    stage--;
-                                }
-                                while (autoChose[stage]);
+                                stage--;
                                 break;
                             }
                             if (c == '8')

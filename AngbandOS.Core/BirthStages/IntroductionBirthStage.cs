@@ -1,9 +1,10 @@
 namespace AngbandOS.Core.BirthStages
 {
+    [Serializable]
     internal class IntroductionBirthStage : BaseBirthStage
     {
         private IntroductionBirthStage(SaveGame saveGame) : base(saveGame) { }
-        public override string[] GetMenu()
+        public override string[]? GetMenu()
         {
             List<string> menuItems = new List<string>();
             menuItems.Add("Choose");
@@ -29,6 +30,58 @@ namespace AngbandOS.Core.BirthStages
                     SaveGame.Screen.Print(Colour.Purple, "last time.", 36, 20);
                     break;
             }
+        }
+
+        public override int? GoForward(int index)
+        {
+            SaveGame.Player.Religion.Deity = GodName.None;
+            if (index == Constants.GenerateRandom)
+            {
+                SaveGame.Player.BaseCharacterClass = SaveGame.SingletonRepository.CharacterClasses.ToWeightedRandom().Choose();
+                do
+                {
+                    int raceIndex = Program.Rng.RandomLessThan(SaveGame.SingletonRepository.Races.Count);
+                    SaveGame.Player.Race = SaveGame.SingletonRepository.Races[raceIndex];
+                    SaveGame.Player.GetFirstLevelMutation = SaveGame.Player.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
+                }
+                while ((SaveGame.Player.Race.Choice & (1L << SaveGame.Player.BaseCharacterClass.ID)) == 0);
+
+                // Use a weighted random to choose a the realms.
+                SaveGame.Player.PrimaryRealm = new WeightedRandom<BaseRealm>(SaveGame.Player.BaseCharacterClass.AvailablePrimaryRealms).Choose();
+
+                // We need to get the available secondary realms.  Note that we need to exclude the primary realm.
+                SaveGame.Player.SecondaryRealm = new WeightedRandom<BaseRealm>(SaveGame.Player.BaseCharacterClass.RemainingAvailableSecondaryRealms()).Choose();
+                if (SaveGame.Player.BaseCharacterClass.WorshipsADeity)
+                {
+                    SaveGame.Player.Religion.Deity = SaveGame.Player.BaseCharacterClass.DefaultDeity(SaveGame.Player.SecondaryRealm);
+                }
+
+                Gender[] availableRandomGenders = SaveGame.SingletonRepository.Genders.Where(_gender => _gender.CanBeRandomlySelected).ToArray();
+                int genderIndex = Program.Rng.RandomBetween(0, availableRandomGenders.Length - 1);
+                SaveGame.Player.Gender = availableRandomGenders[genderIndex];
+                SaveGame.Player.Name = string.IsNullOrEmpty(SaveGame._prevName) ? SaveGame.Player.Race.CreateRandomName() : SaveGame._prevName;
+                SaveGame.Player.Generation = SaveGame._prevGeneration + 1;
+                return BirthStage.Confirmation;
+            }
+            else if (index == Constants.GenerateReplay)
+            {
+                SaveGame.Player.BaseCharacterClass = SaveGame._prevCharacterClass;
+                SaveGame.Player.Race = SaveGame._prevRace;
+                SaveGame.Player.GetFirstLevelMutation = SaveGame.Player.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
+                SaveGame.Player.PrimaryRealm = SaveGame._prevPrimaryRealm;
+                SaveGame.Player.SecondaryRealm = SaveGame._prevSecondaryRealm;
+                SaveGame.Player.Religion.Deity = SaveGame.Player.BaseCharacterClass.DefaultDeity(SaveGame.Player.SecondaryRealm);
+                SaveGame.Player.Gender = SaveGame._prevSex;
+                SaveGame.Player.Name = SaveGame.Player.Race.CreateRandomName();
+                SaveGame.Player.Generation = 1;
+                return BirthStage.Confirmation;
+            }
+            return BirthStage.ClassSelection;
+        }
+
+        public override int? GoBack()
+        {
+            return null;
         }
     }
 }

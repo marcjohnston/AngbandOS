@@ -9,5 +9,9 @@
         }
         public abstract string Title { get; }
         public abstract string Winner { get; }
+
+        public virtual bool CanBeRandomlySelected => true;
+        [Obsolete]
+        public abstract int Index { get; }
     }
 }

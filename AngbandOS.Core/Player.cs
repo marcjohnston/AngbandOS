@@ -27,7 +27,6 @@ namespace AngbandOS.Core
         public int FractionalMana;
         public GameTime GameTime;
         public Gender Gender;
-        public int GenderIndex;
         public int Generation; // This is how many times the character name has changed.
         public bool GetFirstLevelMutation;
         private int _gold;
@@ -337,12 +336,12 @@ namespace AngbandOS.Core
         {
             Race = newRace;
             ExperienceMultiplier = Race.ExperienceFactor + BaseCharacterClass.ExperienceFactor;
-            if (GenderIndex == Constants.SexMale)
+            if (Gender.Index == Constants.SexMale)
             {
                 Height = Program.Rng.RandomNormal(Race.MaleBaseHeight, Race.MaleHeightRange);
                 Weight = Program.Rng.RandomNormal(Race.MaleBaseWeight, Race.MaleWeightRange);
             }
-            else if (GenderIndex == Constants.SexFemale)
+            else if (Gender.Index == Constants.SexFemale)
             {
                 Height = Program.Rng.RandomNormal(Race.FemaleBaseHeight, Race.FemaleHeightRange);
                 Weight = Program.Rng.RandomNormal(Race.FemaleBaseWeight, Race.FemaleWeightRange);

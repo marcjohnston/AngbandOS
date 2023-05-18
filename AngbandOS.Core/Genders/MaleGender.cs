@@ -5,5 +5,6 @@ namespace AngbandOS.Core.Genders
         private MaleGender(SaveGame saveGame) : base(saveGame) { }
         public override string Title => "Male";
         public override string Winner => "King";
+        public override int Index => Constants.SexMale;
     }
 }
