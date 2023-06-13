@@ -11,9 +11,10 @@ namespace AngbandOS.Core.BirthStages
                 .ToArray();
         }
 
-        public override void RenderSelection(int index)
+        public override bool RenderSelection(int index)
         {
             SaveGame.Screen.Print(Colour.Purple, "Your sex has no effect on gameplay.", 35, 21);
+            return true;
         }
         public override int? GoForward(int index)
         {

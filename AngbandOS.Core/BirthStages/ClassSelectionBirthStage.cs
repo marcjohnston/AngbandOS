@@ -17,7 +17,7 @@ namespace AngbandOS.Core.BirthStages
         /// </summary>
         /// <param name="characterClass"></param>
 
-        public override void RenderSelection(int index)
+        public override bool RenderSelection(int index)
         {
             BaseCharacterClass[] classes = SaveGame.SingletonRepository.CharacterClasses
                 .OrderBy(_characterClass => _characterClass.Title)
@@ -68,6 +68,7 @@ namespace AngbandOS.Core.BirthStages
                 SaveGame.Screen.Print(Colour.Purple, classInfo, y, 20);
                 y++;
             }
+            return true;
         }
         public override int? GoForward(int index)
         {

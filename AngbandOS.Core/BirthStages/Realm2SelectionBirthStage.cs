@@ -12,11 +12,12 @@ namespace AngbandOS.Core.BirthStages
                 .ToArray();
         }
 
-        public override void RenderSelection(int index)
+        public override bool RenderSelection(int index)
         {
             BaseRealm[] remainingRealms = SaveGame.Player.BaseCharacterClass.AvailableSecondaryRealms.Where(_realm => _realm != SaveGame.Player.PrimaryRealm).ToArray();
             BaseRealm realm = remainingRealms[index];
             SaveGame.DisplayRealmInfo(realm);
+            return true;
         }
         public override int? GoForward(int index)
         {

@@ -12,7 +12,7 @@ namespace AngbandOS.Core.BirthStages
             menuItems.Add("Re-use");
             return menuItems.ToArray();
         }
-        public override void RenderSelection(int index)
+        public override bool RenderSelection(int index)
         {
             switch (index)
             {
@@ -30,6 +30,7 @@ namespace AngbandOS.Core.BirthStages
                     SaveGame.Screen.Print(Colour.Purple, "last time.", 36, 20);
                     break;
             }
+            return true;
         }
 
         public override int? GoForward(int index)
@@ -75,6 +76,11 @@ namespace AngbandOS.Core.BirthStages
                 SaveGame.Player.Name = SaveGame.Player.Race.CreateRandomName();
                 SaveGame.Player.Generation = 1;
                 return BirthStage.Confirmation;
+            }
+            else
+            {
+                SaveGame.Player.Name = string.IsNullOrEmpty(SaveGame._prevName) ? SaveGame.Player.Race.CreateRandomName() : SaveGame._prevName;
+                SaveGame.Player.Generation = SaveGame._prevGeneration + 1;
             }
             return BirthStage.ClassSelection;
         }

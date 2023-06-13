@@ -13943,7 +13943,7 @@ namespace AngbandOS.Core
             }
         }
 
-        private void GetAhw()
+        public void GetAhw()
         {
             Player.Age = Player.Race.BaseAge + Program.Rng.DieRoll(Player.Race.AgeRange);
             bool startAtDusk = Player.Race.RestsTillDuskInsteadOfDawn;
@@ -13974,7 +13974,7 @@ namespace AngbandOS.Core
             }
         }
 
-        private void GetExtra()
+        public void GetExtra()
         {
             int i;
             Player.MaxLevelGained = 1;
@@ -14006,7 +14006,7 @@ namespace AngbandOS.Core
             }
         }
 
-        private void GetMoney()
+        public void GetMoney()
         {
             int gold = (Player.SocialClass * 6) + Program.Rng.DieRoll(100) + 300;
             for (int i = 0; i < 6; i++)
@@ -14035,7 +14035,7 @@ namespace AngbandOS.Core
             Player.Gold = gold;
         }
 
-        private void GetStats()
+        public void GetStats()
         {
             int i, j;
             while (true)
@@ -14117,7 +14117,8 @@ namespace AngbandOS.Core
 
         private bool PlayerBirthAux()
         {
-            string[] menuItems;
+            string[]? menuItems;
+            bool acceptInput;
 
             MenuItem<BaseCharacterClass>[] _classMenu = SingletonRepository.CharacterClasses
                 .OrderBy(_characterClass => _characterClass.Title)
@@ -14143,41 +14144,47 @@ namespace AngbandOS.Core
                         DisplayPartialCharacter(stage);
                         BaseBirthStage introductionBirthStage = SingletonRepository.BirthStages.Get<IntroductionBirthStage>();
                         menuItems = introductionBirthStage.GetMenu();
-                        MenuDisplay(menu[stage], menuItems);
-                        introductionBirthStage.RenderSelection(menu[stage]);
-                        Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
-                        while (true & !Shutdown)
+                        if (menuItems != null)
                         {
-                            c = Inkey();
-                            if (c == '8')
+                            MenuDisplay(menu[stage], menuItems);
+                        }
+                        acceptInput = introductionBirthStage.RenderSelection(menu[stage]);
+                        if (acceptInput)
+                        {
+                            Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+                            while (acceptInput & !Shutdown)
                             {
-                                if (menu[stage] > 0)
+                                c = Inkey();
+                                if (c == '8')
                                 {
-                                    menu[stage]--;
+                                    if (menu[stage] > 0)
+                                    {
+                                        menu[stage]--;
+                                        break;
+                                    }
+                                }
+                                if (c == '2')
+                                {
+                                    if (menu[stage] < menuItems.Length - 1)
+                                    {
+                                        menu[stage]++;
+                                        break;
+                                    }
+                                }
+                                if (c == '6')
+                                {
+                                    stage = introductionBirthStage.GoForward(menu[stage])!.Value;
                                     break;
                                 }
-                            }
-                            if (c == '2')
-                            {
-                                if (menu[stage] < menuItems.Length - 1)
+                                if (c == '4')
                                 {
-                                    menu[stage]++;
+                                    stage = introductionBirthStage.GoBack()!.Value;
                                     break;
                                 }
-                            }
-                            if (c == '6')
-                            {
-                                stage = introductionBirthStage.GoForward(menu[stage])!.Value;
-                                break;
-                            }
-                            if (c == '4')
-                            {
-                                stage = introductionBirthStage.GoBack()!.Value;
-                                break;
-                            }
-                            if (c == 'h')
-                            {
-                                ShowManual();
+                                if (c == 'h')
+                                {
+                                    ShowManual();
+                                }
                             }
                         }
                         break;
@@ -14186,41 +14193,47 @@ namespace AngbandOS.Core
                         DisplayPartialCharacter(stage);
                         BaseBirthStage classSelectionBirthStage = SingletonRepository.BirthStages.Get<ClassSelectionBirthStage>();
                         menuItems = classSelectionBirthStage.GetMenu();
-                        MenuDisplay(menu[stage], menuItems);
-                        classSelectionBirthStage.RenderSelection(menu[stage]);
-                        Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
-                        while (true && !Shutdown)
+                        if (menuItems != null)
                         {
-                            c = Inkey();
-                            if (c == '8')
+                            MenuDisplay(menu[stage], menuItems);
+                        }
+                        acceptInput = classSelectionBirthStage.RenderSelection(menu[stage]);
+                        if (acceptInput)
+                        {
+                            Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+                            while (true && !Shutdown)
                             {
-                                if (menu[stage] > 0)
+                                c = Inkey();
+                                if (c == '8')
                                 {
-                                    menu[stage]--;
+                                    if (menu[stage] > 0)
+                                    {
+                                        menu[stage]--;
+                                        break;
+                                    }
+                                }
+                                if (c == '2')
+                                {
+                                    if (menu[stage] < menuItems.Length - 1)
+                                    {
+                                        menu[stage]++;
+                                        break;
+                                    }
+                                }
+                                if (c == '6')
+                                {
+                                    stage = classSelectionBirthStage.GoForward(menu[stage])!.Value;
                                     break;
                                 }
-                            }
-                            if (c == '2')
-                            {
-                                if (menu[stage] < menuItems.Length - 1)
+                                if (c == '4')
                                 {
-                                    menu[stage]++;
+                                    stage = classSelectionBirthStage.GoBack()!.Value;
                                     break;
                                 }
-                            }
-                            if (c == '6')
-                            {
-                                stage = classSelectionBirthStage.GoForward(menu[stage])!.Value;
-                                break;
-                            }
-                            if (c == '4')
-                            {
-                                stage = classSelectionBirthStage.GoBack()!.Value;
-                                break;
-                            }
-                            if (c == 'h')
-                            {
-                                ShowManual();
+                                if (c == 'h')
+                                {
+                                    ShowManual();
+                                }
                             }
                         }
                         break;
@@ -14230,41 +14243,47 @@ namespace AngbandOS.Core
                         DisplayPartialCharacter(stage);
                         BaseBirthStage raceSelectionBirthStage = SingletonRepository.BirthStages.Get<RaceSelectionBirthStage>();
                         menuItems = raceSelectionBirthStage.GetMenu();
-                        MenuDisplay(menu[stage], menuItems);
-                        raceSelectionBirthStage.RenderSelection(menu[stage]);
-                        Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
-                        while (true && !Shutdown)
+                        if (menuItems != null)
                         {
-                            c = Inkey();
-                            if (c == '8')
+                            MenuDisplay(menu[stage], menuItems);
+                        }
+                        acceptInput = raceSelectionBirthStage.RenderSelection(menu[stage]);
+                        if (acceptInput)
+                        {
+                            Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+                            while (true && !Shutdown)
                             {
-                                if (menu[stage] > 0)
+                                c = Inkey();
+                                if (c == '8')
                                 {
-                                    menu[stage]--;
+                                    if (menu[stage] > 0)
+                                    {
+                                        menu[stage]--;
+                                        break;
+                                    }
+                                }
+                                if (c == '2')
+                                {
+                                    if (menu[stage] < menuItems.Length - 1)
+                                    {
+                                        menu[stage]++;
+                                        break;
+                                    }
+                                }
+                                if (c == '6')
+                                {
+                                    stage = raceSelectionBirthStage.GoForward(menu[stage])!.Value;
                                     break;
                                 }
-                            }
-                            if (c == '2')
-                            {
-                                if (menu[stage] < menuItems.Length - 1)
+                                if (c == '4')
                                 {
-                                    menu[stage]++;
+                                    stage = raceSelectionBirthStage.GoBack()!.Value;
                                     break;
                                 }
-                            }
-                            if (c == '6')
-                            {
-                                stage = raceSelectionBirthStage.GoForward(menu[stage])!.Value;
-                                break;
-                            }
-                            if (c == '4')
-                            {
-                                stage = raceSelectionBirthStage.GoBack()!.Value;
-                                break;
-                            }
-                            if (c == 'h')
-                            {
-                                ShowManual();
+                                if (c == 'h')
+                                {
+                                    ShowManual();
+                                }
                             }
                         }
                         break;
@@ -14274,41 +14293,47 @@ namespace AngbandOS.Core
                         DisplayPartialCharacter(stage);
                         BaseBirthStage realm1SelectionBirthStage = SingletonRepository.BirthStages.Get<Realm1SelectionBirthStage>();
                         menuItems = realm1SelectionBirthStage.GetMenu();
-                        MenuDisplay(menu[stage], menuItems);
-                        realm1SelectionBirthStage.RenderSelection(menu[stage]);
-                        Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
-                        while (true && !Shutdown)
+                        if (menuItems != null)
                         {
-                            c = Inkey();
-                            if (c == '8')
+                            MenuDisplay(menu[stage], menuItems);
+                        }
+                        acceptInput = realm1SelectionBirthStage.RenderSelection(menu[stage]);
+                        if (acceptInput)
+                        {
+                            Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+                            while (true && !Shutdown)
                             {
-                                if (menu[stage] > 0)
+                                c = Inkey();
+                                if (c == '8')
                                 {
-                                    menu[stage]--;
+                                    if (menu[stage] > 0)
+                                    {
+                                        menu[stage]--;
+                                        break;
+                                    }
+                                }
+                                if (c == '2')
+                                {
+                                    if (menu[stage] < menuItems.Length - 1)
+                                    {
+                                        menu[stage]++;
+                                        break;
+                                    }
+                                }
+                                if (c == '6')
+                                {
+                                    stage = realm1SelectionBirthStage.GoForward(menu[stage])!.Value;
                                     break;
                                 }
-                            }
-                            if (c == '2')
-                            {
-                                if (menu[stage] < menuItems.Length - 1)
+                                if (c == '4')
                                 {
-                                    menu[stage]++;
+                                    stage = realm1SelectionBirthStage.GoBack()!.Value;
                                     break;
                                 }
-                            }
-                            if (c == '6')
-                            {
-                                stage = realm1SelectionBirthStage.GoForward(menu[stage])!.Value;
-                                break;
-                            }
-                            if (c == '4')
-                            {
-                                stage = realm1SelectionBirthStage.GoBack()!.Value;
-                                break;
-                            }
-                            if (c == 'h')
-                            {
-                                ShowManual();
+                                if (c == 'h')
+                                {
+                                    ShowManual();
+                                }
                             }
                         }
                         break;
@@ -14316,41 +14341,47 @@ namespace AngbandOS.Core
                         DisplayPartialCharacter(stage);
                         BaseBirthStage realm2SelectionBirthStage = SingletonRepository.BirthStages.Get<Realm2SelectionBirthStage>();
                         menuItems = realm2SelectionBirthStage.GetMenu();
-                        MenuDisplay(menu[stage], menuItems);
-                        realm2SelectionBirthStage.RenderSelection(menu[stage]);
-                        Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
-                        while (true && !Shutdown)
+                        if (menuItems != null)
                         {
-                            c = Inkey();
-                            if (c == '8')
+                            MenuDisplay(menu[stage], menuItems);
+                        }
+                        acceptInput = realm2SelectionBirthStage.RenderSelection(menu[stage]);
+                        if (acceptInput)
+                        {
+                            Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+                            while (true && !Shutdown)
                             {
-                                if (menu[stage] > 0)
+                                c = Inkey();
+                                if (c == '8')
                                 {
-                                    menu[stage]--;
+                                    if (menu[stage] > 0)
+                                    {
+                                        menu[stage]--;
+                                        break;
+                                    }
+                                }
+                                if (c == '2')
+                                {
+                                    if (menu[stage] < menuItems.Length - 1)
+                                    {
+                                        menu[stage]++;
+                                        break;
+                                    }
+                                }
+                                if (c == '6')
+                                {
+                                    stage = realm2SelectionBirthStage.GoForward(menu[stage])!.Value;
                                     break;
                                 }
-                            }
-                            if (c == '2')
-                            {
-                                if (menu[stage] < menuItems.Length - 1)
+                                if (c == '4')
                                 {
-                                    menu[stage]++;
+                                    stage = realm2SelectionBirthStage.GoBack()!.Value;
                                     break;
                                 }
-                            }
-                            if (c == '6')
-                            {
-                                stage = realm2SelectionBirthStage.GoForward(menu[stage])!.Value;
-                                break;
-                            }
-                            if (c == '4')
-                            {
-                                stage = realm2SelectionBirthStage.GoBack()!.Value;
-                                break;
-                            }
-                            if (c == 'h')
-                            {
-                                ShowManual();
+                                if (c == 'h')
+                                {
+                                    ShowManual();
+                                }
                             }
                         }
                         break;
@@ -14358,80 +14389,64 @@ namespace AngbandOS.Core
                         DisplayPartialCharacter(stage);
                         BaseBirthStage genderSelectionBirthStage = SingletonRepository.BirthStages.Get<GenderSelectionBirthStage>();
                         menuItems = genderSelectionBirthStage.GetMenu();
-                        MenuDisplay(menu[stage], menuItems);
-                        genderSelectionBirthStage.RenderSelection(menu[stage]);
-                        Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
-                        while (true && !Shutdown)
+                        if (menuItems != null)
                         {
-                            c = Inkey();
-                            if (c == '8')
+                            MenuDisplay(menu[stage], menuItems);
+                        }
+                        acceptInput = genderSelectionBirthStage.RenderSelection(menu[stage]);
+                        if (acceptInput)
+                        {
+                            Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+                            while (true && !Shutdown)
                             {
-                                if (menu[stage] > 0)
+                                c = Inkey();
+                                if (c == '8')
                                 {
-                                    menu[stage]--;
+                                    if (menu[stage] > 0)
+                                    {
+                                        menu[stage]--;
+                                        break;
+                                    }
+                                }
+                                if (c == '2')
+                                {
+                                    if (menu[stage] < menuItems.Length - 1)
+                                    {
+                                        menu[stage]++;
+                                        break;
+                                    }
+                                }
+                                if (c == '6')
+                                {
+                                    stage = genderSelectionBirthStage.GoForward(menu[stage])!.Value;
                                     break;
                                 }
-                            }
-                            if (c == '2')
-                            {
-                                if (menu[stage] < menuItems.Length - 1)
+                                if (c == '4')
                                 {
-                                    menu[stage]++;
+                                    stage = genderSelectionBirthStage.GoBack()!.Value;
                                     break;
                                 }
-                            }
-                            if (c == '6')
-                            {
-                                stage = genderSelectionBirthStage.GoForward(menu[stage])!.Value;
-                                break;
-                            }
-                            if (c == '4')
-                            {
-                                stage = genderSelectionBirthStage.GoBack()!.Value;
-                                break;
-                            }
-                            if (c == 'h')
-                            {
-                                ShowManual();
+                                if (c == 'h')
+                                {
+                                    ShowManual();
+                                }
                             }
                         }
                         break;
 
                     case BirthStage.Confirmation:
-                        GetStats();
-                        GetExtra();
-                        GetAhw();
-                        GetHistory(Player);
-                        GetMoney();
-
-                        Spells[0] = Player.PrimaryRealm == null ? new Spell[] { }: Player.PrimaryRealm.SpellList(Player.BaseCharacterClass);
-                        Spells[1] = Player.SecondaryRealm == null ? new Spell[] { }: Player.SecondaryRealm.SpellList(Player.BaseCharacterClass);
-                        Talents = new TalentList(Player.BaseCharacterClass.ID);
-                        SpellFirst = 100;
-                        foreach (Spell[] bookset in Spells)
+                        BaseBirthStage confirmationBirthStage = SingletonRepository.BirthStages.Get<ConfirmationBirthStage>();
+                        menuItems = confirmationBirthStage.GetMenu();
+                        if (menuItems != null)
                         {
-                            foreach (Spell spell in bookset)
-                            {
-                                if (spell.Level < SpellFirst)
-                                {
-                                    SpellFirst = spell.Level;
-                                }
-                            }
+                            MenuDisplay(menu[stage], menuItems);
                         }
-                        SpellOrder.Clear();
-
-                        Player.GooPatron = SingletonRepository.Patrons.ToWeightedRandom().Choose();
-                        UpdateHealthFlaggedAction.Set();
-                        UpdateBonusesFlaggedAction.Set();
-                        UpdateStuff();
-                        Player.Health = Player.MaxHealth;
-                        Player.Mana = Player.MaxMana;
-                        Player.Energy = 150;
-                        CharacterViewer characterViewer = new CharacterViewer(this);
-                        while (true && !Shutdown)
+                        acceptInput = confirmationBirthStage.RenderSelection(0);
+                        while (acceptInput && !Shutdown)
                         {
-                            characterViewer.DisplayPlayer();
                             Screen.Print(Colour.Orange, "[Use return to confirm, or left to go back.]", 43, 1);
+                            CharacterViewer characterViewer = new CharacterViewer(this);
+                            characterViewer.DisplayPlayer();
                             c = Inkey();
                             if (c == 13)
                             {
@@ -14467,7 +14482,50 @@ namespace AngbandOS.Core
                         break;
 
                     case BirthStage.Naming:
-                        Player.InputPlayerName();
+                        BaseBirthStage namingBirthStage = SingletonRepository.BirthStages.Get<NamingBirthStage>();
+                        menuItems = namingBirthStage.GetMenu();
+                        if (menuItems != null)
+                        {
+                            MenuDisplay(menu[stage], menuItems);
+                        }
+                        acceptInput = namingBirthStage.RenderSelection(0);
+                        while (acceptInput && !Shutdown)
+                        {
+                            CharacterViewer characterViewer = new CharacterViewer(this);
+                            characterViewer.DisplayPlayer();
+                            Screen.Print(Colour.Orange, "[Use return to confirm, or left to go back.]", 43, 1);
+                            c = Inkey();
+                            if (c == 13)
+                            {
+                                stage++;
+                                break;
+                            }
+                            if (c == '4')
+                            {
+                                stage--;
+                                break;
+                            }
+                            if (c == '8')
+                            {
+                                viewMode++;
+                                if (viewMode > 1)
+                                {
+                                    viewMode = 0;
+                                }
+                            }
+                            if (c == '2')
+                            {
+                                viewMode--;
+                                if (viewMode < 0)
+                                {
+                                    viewMode = 1;
+                                }
+                            }
+                            if (c == 'h')
+                            {
+                                ShowManual();
+                            }
+                        }
                         return true;
                 }
             }
@@ -15078,7 +15136,7 @@ namespace AngbandOS.Core
         /// based on their race
         /// </summary>
         /// <param name="player"> The player that needs a background </param>
-        private void GetHistory(Player player)
+        public void GetHistory(Player player)
         {
             int i;
             for (i = 0; i < 4; i++)

@@ -903,7 +903,7 @@ namespace AngbandOS.Core
             SaveGame.Screen.Clear(42);
             SaveGame.Screen.PrintLine(Colour.Orange, "[Enter your player's name above, or hit ESCAPE]", 43, 2);
             const int col = 15;
-            while (true)
+            while (true && !SaveGame.Shutdown)
             {
                 SaveGame.Screen.Goto(2, col);
                 if (SaveGame.AskforAux(out string newName, Name, 12))

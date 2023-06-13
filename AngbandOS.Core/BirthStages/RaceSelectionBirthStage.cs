@@ -12,7 +12,7 @@ namespace AngbandOS.Core.BirthStages
                 .ToArray();
         }
 
-        public override void RenderSelection(int index)
+        public override bool RenderSelection(int index)
         {
             Race[] races = SaveGame.SingletonRepository.Races
                 .OrderBy((Race race) => race.Title)
@@ -68,6 +68,7 @@ namespace AngbandOS.Core.BirthStages
             {
                 SaveGame.Screen.Print(Colour.Purple, descriptionLine, descriptionRow++, 21);
             }
+            return true;
         }
         public override int? GoForward(int index)
         {

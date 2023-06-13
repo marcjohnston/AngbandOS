@@ -116,10 +116,7 @@ namespace Cthangband
         {
             while (KeyQueue.Count == 0)
             {
-                if (KeyQueue.Count == 0)
-                {
-                    System.Threading.Thread.Sleep(5);
-                }
+                System.Threading.Thread.Sleep(5);
             }
             char key = KeyQueue.Dequeue();
             return key;
@@ -326,14 +323,17 @@ namespace Cthangband
             switch (e.Key)
             {
                 case Key.Tab:
+                    e.Handled = true;
                     KeyQueue.Enqueue('\x09');
                     break;
 
                 case Key.Return:
+                    e.Handled = true;
                     KeyQueue.Enqueue('\x0D');
                     break;
 
                 case Key.Prior:
+                    e.Handled = true;
                     if (Keyboard.Modifiers == ModifierKeys.Shift)
                     {
                         KeyQueue.Enqueue('.');
@@ -342,6 +342,7 @@ namespace Cthangband
                     break;
 
                 case Key.Next:
+                    e.Handled = true;
                     if (Keyboard.Modifiers == ModifierKeys.Shift)
                     {
                         KeyQueue.Enqueue('.');
@@ -350,6 +351,7 @@ namespace Cthangband
                     break;
 
                 case Key.End:
+                    e.Handled = true;
                     if (Keyboard.Modifiers == ModifierKeys.Shift)
                     {
                         KeyQueue.Enqueue('.');
@@ -358,6 +360,7 @@ namespace Cthangband
                     break;
 
                 case Key.Home:
+                    e.Handled = true;
                     if (Keyboard.Modifiers == ModifierKeys.Shift)
                     {
                         KeyQueue.Enqueue('.');
@@ -366,6 +369,7 @@ namespace Cthangband
                     break;
 
                 case Key.Left:
+                    e.Handled = true;
                     if (Keyboard.Modifiers == ModifierKeys.Shift)
                     {
                         KeyQueue.Enqueue('.');
@@ -374,6 +378,7 @@ namespace Cthangband
                     break;
 
                 case Key.Up:
+                    e.Handled = true;
                     if (Keyboard.Modifiers == ModifierKeys.Shift)
                     {
                         KeyQueue.Enqueue('.');
@@ -382,6 +387,7 @@ namespace Cthangband
                     break;
 
                 case Key.Right:
+                    e.Handled = true;
                     if (Keyboard.Modifiers == ModifierKeys.Shift)
                     {
                         KeyQueue.Enqueue('.');
@@ -390,6 +396,7 @@ namespace Cthangband
                     break;
 
                 case Key.Down:
+                    e.Handled = true;
                     if (Keyboard.Modifiers == ModifierKeys.Shift)
                     {
                         KeyQueue.Enqueue('.');
@@ -398,6 +405,7 @@ namespace Cthangband
                     break;
 
                 case Key.Clear:
+                    e.Handled = true;
                     KeyQueue.Enqueue('5');
                     break;
 
