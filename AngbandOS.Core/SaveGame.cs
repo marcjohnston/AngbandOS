@@ -13966,11 +13966,6 @@ namespace AngbandOS.Core
 
         private bool PlayerBirthAux()
         {
-            MenuItem<BaseCharacterClass>[] _classMenu = SingletonRepository.CharacterClasses
-                .OrderBy(_characterClass => _characterClass.Title)
-                .Select(_characterClass => new MenuItem<BaseCharacterClass>(_characterClass.Title, _characterClass))
-                .ToArray();
-
             Screen.Clear();
             BaseBirthStage? birthStage = SingletonRepository.BirthStages.Get<IntroductionBirthStage>();
             while (birthStage != null && !Shutdown)
