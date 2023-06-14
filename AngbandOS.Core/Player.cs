@@ -26,7 +26,7 @@ namespace AngbandOS.Core
         public int FractionalHealth;
         public int FractionalMana;
         public GameTime GameTime;
-        public Gender Gender;
+        public Gender? Gender = null; // The gender will be null until the player has selected the gender.
         public int Generation; // This is how many times the character name has changed.
         public bool GetFirstLevelMutation;
         private int _gold;

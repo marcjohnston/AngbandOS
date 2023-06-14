@@ -6,6 +6,7 @@ namespace AngbandOS.Core.BirthStages
         private RaceSelectionBirthStage(SaveGame saveGame) : base(saveGame) { }
         public override string[]? GetMenu()
         {
+            SaveGame.DisplayPartialCharacter(BirthStage.RaceSelection);
             return SaveGame.SingletonRepository.Races
                 .OrderBy((Race race) => race.Title)
                 .Select((Race race) => race.Title)

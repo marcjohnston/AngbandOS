@@ -6,6 +6,7 @@ namespace AngbandOS.Core.BirthStages
         private Realm1SelectionBirthStage(SaveGame saveGame) : base(saveGame) { }
         public override string[]? GetMenu()
         {
+            SaveGame.DisplayPartialCharacter(BirthStage.RealmSelection1);
             return SaveGame.Player.BaseCharacterClass.AvailablePrimaryRealms
                 .Select(_availablePrimaryRealms => _availablePrimaryRealms.Name)
                 .ToArray();

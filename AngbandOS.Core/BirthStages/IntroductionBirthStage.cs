@@ -6,6 +6,7 @@ namespace AngbandOS.Core.BirthStages
         private IntroductionBirthStage(SaveGame saveGame) : base(saveGame) { }
         public override string[]? GetMenu()
         {
+            SaveGame.DisplayPartialCharacter(BirthStage.Introduction);
             List<string> menuItems = new List<string>();
             menuItems.Add("Choose");
             menuItems.Add("Random");

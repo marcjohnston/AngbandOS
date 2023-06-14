@@ -13763,7 +13763,7 @@ namespace AngbandOS.Core
             Screen.Print(Colour.Black, buf, y, x);
         }
 
-        private void DisplayPartialCharacter(int stage)
+        public void DisplayPartialCharacter(int stage)
         {
             int i;
             string str;
@@ -14141,7 +14141,6 @@ namespace AngbandOS.Core
                 switch (stage)
                 {
                     case BirthStage.Introduction:
-                        DisplayPartialCharacter(stage);
                         BaseBirthStage introductionBirthStage = SingletonRepository.BirthStages.Get<IntroductionBirthStage>();
                         menuItems = introductionBirthStage.GetMenu();
                         if (menuItems != null)
@@ -14190,7 +14189,6 @@ namespace AngbandOS.Core
                         break;
 
                     case BirthStage.ClassSelection:
-                        DisplayPartialCharacter(stage);
                         BaseBirthStage classSelectionBirthStage = SingletonRepository.BirthStages.Get<ClassSelectionBirthStage>();
                         menuItems = classSelectionBirthStage.GetMenu();
                         if (menuItems != null)
@@ -14239,8 +14237,6 @@ namespace AngbandOS.Core
                         break;
 
                     case BirthStage.RaceSelection:
-                        // Create the menu for the races.
-                        DisplayPartialCharacter(stage);
                         BaseBirthStage raceSelectionBirthStage = SingletonRepository.BirthStages.Get<RaceSelectionBirthStage>();
                         menuItems = raceSelectionBirthStage.GetMenu();
                         if (menuItems != null)
@@ -14289,8 +14285,6 @@ namespace AngbandOS.Core
                         break;
 
                     case BirthStage.RealmSelection1:
-                        // There is more than one realm available to the player, allow the player to choose the realm.
-                        DisplayPartialCharacter(stage);
                         BaseBirthStage realm1SelectionBirthStage = SingletonRepository.BirthStages.Get<Realm1SelectionBirthStage>();
                         menuItems = realm1SelectionBirthStage.GetMenu();
                         if (menuItems != null)
@@ -14338,7 +14332,6 @@ namespace AngbandOS.Core
                         }
                         break;
                     case BirthStage.RealmSelection2:
-                        DisplayPartialCharacter(stage);
                         BaseBirthStage realm2SelectionBirthStage = SingletonRepository.BirthStages.Get<Realm2SelectionBirthStage>();
                         menuItems = realm2SelectionBirthStage.GetMenu();
                         if (menuItems != null)
@@ -14386,7 +14379,6 @@ namespace AngbandOS.Core
                         }
                         break;
                     case BirthStage.GenderSelection:
-                        DisplayPartialCharacter(stage);
                         BaseBirthStage genderSelectionBirthStage = SingletonRepository.BirthStages.Get<GenderSelectionBirthStage>();
                         menuItems = genderSelectionBirthStage.GetMenu();
                         if (menuItems != null)
