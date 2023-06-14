@@ -1,5 +1,6 @@
 ﻿namespace AngbandOS.Core.BirthStages
 {
+    [Serializable]
     internal class ConfirmationBirthStage : BaseBirthStage
     {
         private ConfirmationBirthStage(SaveGame saveGame) : base(saveGame) { }
@@ -11,8 +12,6 @@
 
         public override bool RenderSelection(int index)
         {
-            SaveGame.Player.Name = string.IsNullOrEmpty(SaveGame._prevName) ? SaveGame.Player.Race.CreateRandomName() : SaveGame._prevName;
-            SaveGame.Player.Generation = SaveGame._prevGeneration + 1;
             SaveGame.GetStats();
             SaveGame.GetExtra();
             SaveGame.GetAhw();

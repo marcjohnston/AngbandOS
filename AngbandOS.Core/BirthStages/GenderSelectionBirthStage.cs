@@ -6,7 +6,7 @@ namespace AngbandOS.Core.BirthStages
         private GenderSelectionBirthStage(SaveGame saveGame) : base(saveGame) { }
         public override string[]? GetMenu()
         {
-            SaveGame.DisplayPartialCharacter(BirthStage.GenderSelection);
+            DisplayPartialCharacter();
             return SaveGame.SingletonRepository.Genders
                 .Select(_gender => _gender.Title)
                 .ToArray();

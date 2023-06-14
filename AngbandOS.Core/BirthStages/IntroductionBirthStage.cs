@@ -6,7 +6,14 @@ namespace AngbandOS.Core.BirthStages
         private IntroductionBirthStage(SaveGame saveGame) : base(saveGame) { }
         public override string[]? GetMenu()
         {
-            SaveGame.DisplayPartialCharacter(BirthStage.Introduction);
+            SaveGame.Player.Name = SaveGame._prevName;
+            SaveGame.Player.Gender = SaveGame._prevSex;
+            SaveGame.Player.Race = SaveGame._prevRace;
+            SaveGame.Player.BaseCharacterClass = SaveGame._prevCharacterClass;
+            SaveGame.Player.PrimaryRealm = SaveGame._prevPrimaryRealm;
+            SaveGame.Player.SecondaryRealm = SaveGame._prevSecondaryRealm;
+
+            DisplayPartialCharacter();
             List<string> menuItems = new List<string>();
             menuItems.Add("Choose");
             menuItems.Add("Random");
@@ -37,7 +44,7 @@ namespace AngbandOS.Core.BirthStages
         public override int? GoForward(int index)
         {
             SaveGame.Player.Religion.Deity = GodName.None;
-            if (index == Constants.GenerateRandom)
+            if (index == 1) // Random
             {
                 SaveGame.Player.BaseCharacterClass = SaveGame.SingletonRepository.CharacterClasses.ToWeightedRandom().Choose();
                 do
@@ -61,11 +68,11 @@ namespace AngbandOS.Core.BirthStages
                 Gender[] availableRandomGenders = SaveGame.SingletonRepository.Genders.Where(_gender => _gender.CanBeRandomlySelected).ToArray();
                 int genderIndex = Program.Rng.RandomBetween(0, availableRandomGenders.Length - 1);
                 SaveGame.Player.Gender = availableRandomGenders[genderIndex];
-                SaveGame.Player.Name = string.IsNullOrEmpty(SaveGame._prevName) ? SaveGame.Player.Race.CreateRandomName() : SaveGame._prevName;
-                SaveGame.Player.Generation = SaveGame._prevGeneration + 1;
+                SaveGame.Player.Name = SaveGame.Player.Race.CreateRandomName();
+                SaveGame.Player.Generation = 1;
                 return BirthStage.Confirmation;
             }
-            else if (index == Constants.GenerateReplay)
+            else if (index == 2) // Previous
             {
                 SaveGame.Player.BaseCharacterClass = SaveGame._prevCharacterClass;
                 SaveGame.Player.Race = SaveGame._prevRace;
@@ -74,14 +81,19 @@ namespace AngbandOS.Core.BirthStages
                 SaveGame.Player.SecondaryRealm = SaveGame._prevSecondaryRealm;
                 SaveGame.Player.Religion.Deity = SaveGame.Player.BaseCharacterClass.DefaultDeity(SaveGame.Player.SecondaryRealm);
                 SaveGame.Player.Gender = SaveGame._prevSex;
-                SaveGame.Player.Name = SaveGame.Player.Race.CreateRandomName();
-                SaveGame.Player.Generation = 1;
+                SaveGame.Player.Name = SaveGame._prevName;
+                SaveGame.Player.Generation = SaveGame._prevGeneration + 1;
                 return BirthStage.Confirmation;
             }
             else
             {
-                SaveGame.Player.Name = string.IsNullOrEmpty(SaveGame._prevName) ? SaveGame.Player.Race.CreateRandomName() : SaveGame._prevName;
-                SaveGame.Player.Generation = SaveGame._prevGeneration + 1;
+                SaveGame.Player.Name = "";
+                SaveGame.Player.Generation = 1;
+                SaveGame.Player.Gender = null; // Wait until the player has selected the gender.
+                SaveGame.Player.BaseCharacterClass = null; // Wait until the player has selected the character class.
+                SaveGame.Player.Race = null; // Wait until the player has selected the race.
+                SaveGame.Player.PrimaryRealm = null; // Wait until the player has selected a primary realm.
+                SaveGame.Player.SecondaryRealm = null; // Wait until the player has selected secondary realm.
             }
             return BirthStage.ClassSelection;
         }

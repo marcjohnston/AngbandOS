@@ -1,5 +1,6 @@
 ﻿namespace AngbandOS.Core.BirthStages
 {
+    [Serializable]
     internal class NamingBirthStage : BaseBirthStage
     {
         private NamingBirthStage(SaveGame saveGame) : base(saveGame) { }

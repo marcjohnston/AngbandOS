@@ -1,5 +1,6 @@
 namespace AngbandOS.Core.Genders
 {
+    [Serializable]
     internal class FemaleGender : Gender
     {
         private FemaleGender(SaveGame saveGame) : base(saveGame) { }

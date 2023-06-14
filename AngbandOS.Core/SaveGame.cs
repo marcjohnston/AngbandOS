@@ -13763,157 +13763,6 @@ namespace AngbandOS.Core
             Screen.Print(Colour.Black, buf, y, x);
         }
 
-        public void DisplayPartialCharacter(int stage)
-        {
-            int i;
-            string str;
-            const string spaces = "                 ";
-            Screen.Clear(0);
-            Screen.Print(Colour.Blue, "Name        :", 2, 1);
-            Screen.Print(Colour.Brown, stage == 0 ? _prevName : spaces, 2, 15);
-            Screen.Print(Colour.Blue, "Gender      :", 3, 1);
-            if (stage == 0)
-            {
-                Player.Gender = _prevSex;
-                str = Player.Gender.Title;
-            }
-            else if (stage < 6)
-            {
-                str = spaces;
-            }
-            else
-            {
-                Player.Gender = SingletonRepository.Genders[Player.Gender.Index];
-                str = Player.Gender.Title;
-            }
-            Screen.Print(Colour.Brown, str, 3, 15);
-            Screen.Print(Colour.Blue, "Race        :", 4, 1);
-            if (stage == 0)
-            {
-                Player.Race = _prevRace;
-                str = Player.Race.Title;
-            }
-            else if (stage < 3)
-            {
-                str = spaces;
-            }
-            else
-            {
-                str = Player.Race.Title;
-            }
-            Screen.Print(Colour.Brown, str, 4, 15);
-            Screen.Print(Colour.Blue, "Class       :", 5, 1);
-            if (stage == 0)
-            {
-                Player.BaseCharacterClass = SingletonRepository.CharacterClasses.Single(_characterClass => _characterClass.ID == _prevCharacterClass.ID);
-                str = Player.BaseCharacterClass.Title;
-            }
-            else if (stage < 2)
-            {
-                str = spaces;
-            }
-            else
-            {
-                Player.BaseCharacterClass = SingletonRepository.CharacterClasses.Single(_characterClass => _characterClass.ID == Player.BaseCharacterClass.ID);
-                str = Player.BaseCharacterClass.Title;
-            }
-            Screen.Print(Colour.Brown, str, 5, 15);
-            if (stage == 0)
-            {
-                if (_prevPrimaryRealm != null || _prevSecondaryRealm != null)
-                {
-                    Screen.Print(Colour.Blue, "Magic       :", 6, 1);
-                }
-                if (_prevPrimaryRealm != null)
-                {
-                    Screen.Print(Colour.Brown, RealmNames(_prevPrimaryRealm, _prevSecondaryRealm), 6, 15);
-                }
-            }
-            else if (stage < 4)
-            {
-                str = spaces;
-                Screen.Print(Colour.Blue, str, 6, 0);
-                Screen.Print(Colour.Brown, str, 6, 15);
-            }
-            else
-            {
-                if (Player.CanCastSpells)
-                {
-                    Screen.Print(Colour.Blue, "Magic       :", 6, 1);
-                }
-                if (Player.PrimaryRealm != null)
-                {
-                    Screen.Print(Colour.Brown, RealmNames(Player.PrimaryRealm, Player.SecondaryRealm), 6, 15);
-                }
-            }
-            Screen.Print(Colour.Blue, "Birthday", 2, 32);
-            Screen.Print(Colour.Blue, "Age          ", 3, 32);
-            Screen.Print(Colour.Blue, "Height       ", 4, 32);
-            Screen.Print(Colour.Blue, "Weight       ", 5, 32);
-            Screen.Print(Colour.Blue, "Social Class ", 6, 32);
-            Screen.Print(Colour.Blue, "STR:", 2 + Ability.Strength, 61);
-            Screen.Print(Colour.Blue, "INT:", 2 + Ability.Intelligence, 61);
-            Screen.Print(Colour.Blue, "WIS:", 2 + Ability.Wisdom, 61);
-            Screen.Print(Colour.Blue, "DEX:", 2 + Ability.Dexterity, 61);
-            Screen.Print(Colour.Blue, "CON:", 2 + Ability.Constitution, 61);
-            Screen.Print(Colour.Blue, "CHA:", 2 + Ability.Charisma, 61);
-            Screen.Print(Colour.Blue, "STR:", 14 + Ability.Strength, 1);
-            Screen.Print(Colour.Blue, "INT:", 14 + Ability.Intelligence, 1);
-            Screen.Print(Colour.Blue, "WIS:", 14 + Ability.Wisdom, 1);
-            Screen.Print(Colour.Blue, "DEX:", 14 + Ability.Dexterity, 1);
-            Screen.Print(Colour.Blue, "CON:", 14 + Ability.Constitution, 1);
-            Screen.Print(Colour.Blue, "CHA:", 14 + Ability.Charisma, 1);
-            Screen.Print(Colour.Blue, "STR:", 22 + Ability.Strength, 1);
-            Screen.Print(Colour.Blue, "INT:", 22 + Ability.Intelligence, 1);
-            Screen.Print(Colour.Blue, "WIS:", 22 + Ability.Wisdom, 1);
-            Screen.Print(Colour.Blue, "DEX:", 22 + Ability.Dexterity, 1);
-            Screen.Print(Colour.Blue, "CON:", 22 + Ability.Constitution, 1);
-            Screen.Print(Colour.Blue, "CHA:", 22 + Ability.Charisma, 1);
-            Screen.Print(Colour.Purple, "Initial", 21, 6);
-            Screen.Print(Colour.Brown, "Race Class Mods", 21, 14);
-            Screen.Print(Colour.Green, "Actual", 21, 30);
-            Screen.Print(Colour.Red, "Reduced", 21, 37);
-            Screen.Print(Colour.Blue, "abcdefghijklm@", 21, 45);
-            Screen.Print(Colour.Grey, "..............", 22, 45);
-            Screen.Print(Colour.Grey, "..............", 23, 45);
-            Screen.Print(Colour.Grey, "..............", 24, 45);
-            Screen.Print(Colour.Grey, "..............", 25, 45);
-            Screen.Print(Colour.Grey, "..............", 26, 45);
-            Screen.Print(Colour.Grey, "..............", 27, 45);
-            Screen.Print(Colour.Blue, "Modifications", 28, 45);
-
-            if (stage < 2)
-            {
-                for (i = 0; i < 6; i++)
-                {
-                    Screen.Print(Colour.Brown, "   ", 22 + i, 20);
-                }
-            }
-            else
-            {
-                for (i = 0; i < 6; i++)
-                {
-                    string buf = Player.BaseCharacterClass.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
-                    Screen.Print(Colour.Brown, buf, 22 + i, 20);
-                }
-            }
-            if (stage < 3)
-            {
-                for (i = 0; i < 6; i++)
-                {
-                    Screen.Print(Colour.Brown, "   ", 22 + i, 14);
-                }
-            }
-            else
-            {
-                for (i = 0; i < 6; i++)
-                {
-                    string buf = (Player.Race.AbilityBonus[i]).ToString("+0;-0;+0").PadLeft(3);
-                    Screen.Print(Colour.Brown, buf, 22 + i, 14);
-                }
-            }
-        }
-
         public void DisplayRealmInfo(BaseRealm prealm)
         {
             int y = 30;
@@ -18579,7 +18428,7 @@ namespace AngbandOS.Core
             return martialArtistArmWgt > 100 + (Player.Level * 4);
         }
 
-        public string RealmNames(BaseRealm? primaryRealm, BaseRealm? secondaryRealm)
+        public string RealmNames(BaseRealm? primaryRealm, BaseRealm? secondaryRealm, string defaultTitle = "None")
         {
             if (primaryRealm != null && secondaryRealm != null)
             {
@@ -18591,7 +18440,7 @@ namespace AngbandOS.Core
             }
             else
             {
-                return "None";
+                return defaultTitle;
             }
         }
 

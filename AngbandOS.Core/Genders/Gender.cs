@@ -1,5 +1,6 @@
 ﻿namespace AngbandOS.Core.Genders
 {
+    [Serializable]
     internal abstract class Gender
     {
         protected readonly SaveGame SaveGame;

@@ -6,7 +6,7 @@ namespace AngbandOS.Core.BirthStages
         private ClassSelectionBirthStage(SaveGame saveGame) : base(saveGame) { }
         public override string[]? GetMenu()
         {
-            SaveGame.DisplayPartialCharacter(BirthStage.ClassSelection);
+            DisplayPartialCharacter();
             return SaveGame.SingletonRepository.CharacterClasses
                 .OrderBy(_characterClass => _characterClass.Title)
                 .Select(_characterClass => _characterClass.Title)
