@@ -3,39 +3,70 @@ namespace AngbandOS.Core.BirthStages
     [Serializable]
     internal class GenderSelectionBirthStage : BaseBirthStage
     {
+        private int currentSelection = 0;
         private GenderSelectionBirthStage(SaveGame saveGame) : base(saveGame) { }
-        public override string[]? GetMenu()
+        public override BaseBirthStage? Render()
         {
             DisplayPartialCharacter();
-            return SaveGame.SingletonRepository.Genders
+            string[]? menuItems = SaveGame.SingletonRepository.Genders
                 .Select(_gender => _gender.Title)
                 .ToArray();
+            SaveGame.Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+            while (!SaveGame.Shutdown)
+            {
+                SaveGame.MenuDisplay(currentSelection, menuItems);
+                RenderSelection(currentSelection);
+                char c = SaveGame.Inkey();
+                switch (c)
+                {
+                    case '8':
+                        if (currentSelection > 0)
+                        {
+                            currentSelection--;
+                        }
+                        break;
+                    case '2':
+                        if (currentSelection < menuItems.Length - 1)
+                        {
+                            currentSelection++;
+                        }
+                        break;
+                    case '6':
+                        return GoForward(currentSelection);
+                    case '4':
+                        return GoBack();
+                    case 'h':
+                        SaveGame.ShowManual();
+                        break;
+                }
+            }
+            return null;
         }
 
-        public override bool RenderSelection(int index)
+        private bool RenderSelection(int index)
         {
             SaveGame.Screen.Print(Colour.Purple, "Your sex has no effect on gameplay.", 35, 21);
             return true;
         }
-        public override int? GoForward(int index)
+        private BaseBirthStage? GoForward(int index)
         {
             SaveGame.Player.Gender = SaveGame.SingletonRepository.Genders[index];
-            return BirthStage.Confirmation;
+            return SaveGame.SingletonRepository.BirthStages.Get<ConfirmationBirthStage>();
         }
 
-        public override int? GoBack()
+        private BaseBirthStage? GoBack()
         {
             int availablePrimaryRealmCount = SaveGame.Player.BaseCharacterClass.AvailablePrimaryRealms.Length;
             int remainingAvailableSecondaryRealmCount = SaveGame.Player.BaseCharacterClass.RemainingAvailableSecondaryRealms().Length;
             if (remainingAvailableSecondaryRealmCount <= 1 && availablePrimaryRealmCount <= 1)
             {
-                return BirthStage.RaceSelection;
+                return SaveGame.SingletonRepository.BirthStages.Get<RaceSelectionBirthStage>();
             }
             else if (remainingAvailableSecondaryRealmCount <= 1)
             {
-                return BirthStage.RealmSelection1;
+                return SaveGame.SingletonRepository.BirthStages.Get<Realm1SelectionBirthStage>();
             }
-            return BirthStage.RealmSelection2;
+            return SaveGame.SingletonRepository.BirthStages.Get<Realm2SelectionBirthStage>();
         }
     }
 }

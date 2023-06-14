@@ -5,12 +5,7 @@
     {
         private ConfirmationBirthStage(SaveGame saveGame) : base(saveGame) { }
 
-        public override string[]? GetMenu()
-        {
-            return null;
-        }
-
-        public override bool RenderSelection(int index)
+        public override BaseBirthStage? Render()
         {
             SaveGame.GetStats();
             SaveGame.GetExtra();
@@ -41,17 +36,24 @@
             SaveGame.Player.Health = SaveGame.Player.MaxHealth;
             SaveGame.Player.Mana = SaveGame.Player.MaxMana;
             SaveGame.Player.Energy = 150;
-            return true;
-        }
-
-        public override int? GoForward(int index)
-        {
-            return BirthStage.Naming;
-        }
-
-        public override int? GoBack()
-        {
-            return BirthStage.GenderSelection;
+            while (!SaveGame.Shutdown)
+            {
+                SaveGame.Screen.Print(Colour.Orange, "[Use return to confirm, or left to go back.]", 43, 1);
+                CharacterViewer characterViewer = new CharacterViewer(SaveGame);
+                characterViewer.DisplayPlayer();
+                char c = SaveGame.Inkey();
+                switch (c)
+                {
+                    case (char)13:
+                        return SaveGame.SingletonRepository.BirthStages.Get<NamingBirthStage>();
+                    case '4':
+                        return SaveGame.SingletonRepository.BirthStages.Get<GenderSelectionBirthStage>();
+                    case 'h':
+                        SaveGame.ShowManual();
+                        break;
+                }
+            }
+            return null;
         }
     }
 }

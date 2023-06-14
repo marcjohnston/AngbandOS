@@ -3,14 +3,45 @@ namespace AngbandOS.Core.BirthStages
     [Serializable]
     internal class ClassSelectionBirthStage : BaseBirthStage
     {
+        private int currentSelection = 14;
         private ClassSelectionBirthStage(SaveGame saveGame) : base(saveGame) { }
-        public override string[]? GetMenu()
+        public override BaseBirthStage? Render()
         {
             DisplayPartialCharacter();
-            return SaveGame.SingletonRepository.CharacterClasses
+            string[]? menuItems = SaveGame.SingletonRepository.CharacterClasses
                 .OrderBy(_characterClass => _characterClass.Title)
                 .Select(_characterClass => _characterClass.Title)
-                .ToArray();
+                .ToArray(); ;
+            SaveGame.Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+            while (!SaveGame.Shutdown)
+            {
+                SaveGame.MenuDisplay(currentSelection, menuItems);
+                RenderSelection(currentSelection);
+                char c = SaveGame.Inkey();
+                switch (c)
+                {
+                    case '8':
+                        if (currentSelection > 0)
+                        {
+                            currentSelection--;
+                        }
+                        break;
+                    case '2':
+                        if (currentSelection < menuItems.Length - 1)
+                        {
+                            currentSelection++;
+                        }
+                        break;
+                    case '6':
+                        return GoForward(currentSelection);
+                    case '4':
+                        return GoBack();
+                    case 'h':
+                        SaveGame.ShowManual();
+                        break;
+                }
+            }
+            return null;
         }
 
         /// <summary>
@@ -18,7 +49,7 @@ namespace AngbandOS.Core.BirthStages
         /// </summary>
         /// <param name="characterClass"></param>
 
-        public override bool RenderSelection(int index)
+        private bool RenderSelection(int index)
         {
             BaseCharacterClass[] classes = SaveGame.SingletonRepository.CharacterClasses
                 .OrderBy(_characterClass => _characterClass.Title)
@@ -71,19 +102,19 @@ namespace AngbandOS.Core.BirthStages
             }
             return true;
         }
-        public override int? GoForward(int index)
+        private BaseBirthStage? GoForward(int index)
         {
             BaseCharacterClass[] classes = SaveGame.SingletonRepository.CharacterClasses
                 .OrderBy(_characterClass => _characterClass.Title)
                 .ToArray();
 
             SaveGame.Player.BaseCharacterClass = classes[index];
-            return BirthStage.RaceSelection;
+            return SaveGame.SingletonRepository.BirthStages.Get<RaceSelectionBirthStage>();
         }
 
-        public override int? GoBack()
+        private BaseBirthStage? GoBack()
         {
-            return BirthStage.Introduction;
+            return SaveGame.SingletonRepository.BirthStages.Get<IntroductionBirthStage>();
         }
     }
 }

@@ -4,24 +4,14 @@
     internal class NamingBirthStage : BaseBirthStage
     {
         private NamingBirthStage(SaveGame saveGame) : base(saveGame) { }
-        public override string[]? GetMenu()
+        public override BaseBirthStage? Render()
         {
-            return null;
-        }
-        public override bool RenderSelection(int index)
-        {
+            if (string.IsNullOrEmpty(SaveGame.Player.Name))
+            {
+                SaveGame.Player.Name = SaveGame.Player.Race.CreateRandomName();
+            }
             SaveGame.Player.InputPlayerName();
-            return false;
-        }
-
-        public override int? GoForward(int index)
-        {
             return null;
-        }
-
-        public override int? GoBack()
-        {
-            return BirthStage.Confirmation;
         }
     }
 }

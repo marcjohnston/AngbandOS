@@ -3,8 +3,54 @@ namespace AngbandOS.Core.BirthStages
     [Serializable]
     internal class IntroductionBirthStage : BaseBirthStage
     {
+        private int currentSelection = 0;
         private IntroductionBirthStage(SaveGame saveGame) : base(saveGame) { }
-        public override string[]? GetMenu()
+
+        public override BaseBirthStage? Render()
+        {
+            string[]? menuItems = GetMenu();
+            if (menuItems != null)
+            {
+                SaveGame.MenuDisplay(currentSelection, menuItems);
+            }
+            RenderSelection(currentSelection);
+            SaveGame.Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+            while (!SaveGame.Shutdown)
+            {
+                char c = SaveGame.Inkey();
+                if (c == '8')
+                {
+                    if (currentSelection > 0)
+                    {
+                        currentSelection--;
+                        break;
+                    }
+                }
+                if (c == '2')
+                {
+                    if (currentSelection < menuItems.Length - 1)
+                    {
+                        currentSelection++;
+                        break;
+                    }
+                }
+                if (c == '6')
+                {
+                    return GoForward(currentSelection);
+                }
+                if (c == '4')
+                {
+                    return GoBack();
+                }
+                if (c == 'h')
+                {
+                    SaveGame.ShowManual();
+                }
+            }
+            return null;
+        }
+
+        private string[]? GetMenu()
         {
             SaveGame.Player.Name = SaveGame._prevName;
             SaveGame.Player.Gender = SaveGame._prevSex;
@@ -20,7 +66,7 @@ namespace AngbandOS.Core.BirthStages
             menuItems.Add("Re-use");
             return menuItems.ToArray();
         }
-        public override bool RenderSelection(int index)
+        private bool RenderSelection(int index)
         {
             switch (index)
             {
@@ -41,7 +87,7 @@ namespace AngbandOS.Core.BirthStages
             return true;
         }
 
-        public override int? GoForward(int index)
+        private BaseBirthStage GoForward(int index)
         {
             SaveGame.Player.Religion.Deity = GodName.None;
             if (index == 1) // Random
@@ -70,7 +116,7 @@ namespace AngbandOS.Core.BirthStages
                 SaveGame.Player.Gender = availableRandomGenders[genderIndex];
                 SaveGame.Player.Name = SaveGame.Player.Race.CreateRandomName();
                 SaveGame.Player.Generation = 1;
-                return BirthStage.Confirmation;
+                return SaveGame.SingletonRepository.BirthStages.Get<ConfirmationBirthStage>();
             }
             else if (index == 2) // Previous
             {
@@ -83,7 +129,7 @@ namespace AngbandOS.Core.BirthStages
                 SaveGame.Player.Gender = SaveGame._prevSex;
                 SaveGame.Player.Name = SaveGame._prevName;
                 SaveGame.Player.Generation = SaveGame._prevGeneration + 1;
-                return BirthStage.Confirmation;
+                return SaveGame.SingletonRepository.BirthStages.Get<ConfirmationBirthStage>();
             }
             else
             {
@@ -95,10 +141,9 @@ namespace AngbandOS.Core.BirthStages
                 SaveGame.Player.PrimaryRealm = null; // Wait until the player has selected a primary realm.
                 SaveGame.Player.SecondaryRealm = null; // Wait until the player has selected secondary realm.
             }
-            return BirthStage.ClassSelection;
+            return SaveGame.SingletonRepository.BirthStages.Get<ClassSelectionBirthStage>();
         }
-
-        public override int? GoBack()
+        private BaseBirthStage? GoBack()
         {
             return null;
         }
