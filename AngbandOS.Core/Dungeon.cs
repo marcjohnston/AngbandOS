@@ -102,12 +102,12 @@ namespace AngbandOS.Core
         /// <summary>
         /// The X coordinate of the dungeon on the island
         /// </summary>
-        public int X;
+        public int X = 0;
 
         /// <summary>
         /// The Y coordinate of the dungeon on the island
         /// </summary>
-        public int Y;
+        public int Y = 0;
 
         /// <summary>
         /// Create the dungeon
@@ -125,8 +125,6 @@ namespace AngbandOS.Core
         /// <param name="mapSymbol"> The symbol for the dungeon on the wilderness map </param>
         private Dungeon(bool tower, int offset, int maxLevel, MonsterSelector? bias, string firstGuardian, string secondGuardian, int firstLevel, int secondLevel, string name, string shortname, string mapSymbol)
         {
-            X = 0;
-            Y = 0;
             Tower = tower;
             Offset = offset;
             BaseOffset = offset;
