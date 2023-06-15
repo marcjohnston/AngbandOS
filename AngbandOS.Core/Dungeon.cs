@@ -114,7 +114,7 @@ namespace AngbandOS.Core
             int activeQuestCount = 0;
             for (int i = 0; i < SaveGame.Quests.Count; i++)
             {
-                if (SaveGame.Quests[i].IsActive && SaveGame.Quests[i].Dungeon  == Index)
+                if (SaveGame.Quests[i].IsActive && SaveGame.Quests[i].Dungeon == this)
                 {
                     activeQuestCount++;
                 }
@@ -129,10 +129,9 @@ namespace AngbandOS.Core
             for (int i = 0; i < SaveGame.Quests.Count; i++)
             {
                 Quest q = SaveGame.Quests[i];
-                if (q.Level > 0)
+                if (q.Level > 0 && q.Dungeon == this)
                 {
-                    int dungeon = q.Dungeon;
-                    if (dungeon == this.Index && (first == -1 || q.Level < lev))
+                    if (first == -1 || q.Level < lev)
                     {
                         first = i;
                         lev = q.Level;

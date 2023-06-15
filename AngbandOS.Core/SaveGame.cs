@@ -19149,7 +19149,7 @@ namespace AngbandOS.Core
         {
             for (int i = 0; i < Quests.Count; i++)
             {
-                if (Quests[i].Level == CurrentDepth && Quests[i].Dungeon == CurDungeon.Index)
+                if (Quests[i].Level == CurrentDepth && Quests[i].Dungeon == CurDungeon)
                 {
                     return Quests[i].RIdx;
                 }
@@ -19162,7 +19162,7 @@ namespace AngbandOS.Core
             for (int i = 0; i < Quests.Count; i++)
             {
                 if (Quests[i].Level == CurrentDepth &&
-                    Quests[i].Dungeon == CurDungeon.Index)
+                    Quests[i].Dungeon == CurDungeon)
                 {
                     return i;
                 }
@@ -19179,7 +19179,7 @@ namespace AngbandOS.Core
             }
             foreach (Quest quest in Quests)
             {
-                if (quest.Level == level && quest.Dungeon == CurDungeon.Index)
+                if (quest.Level == level && quest.Dungeon == CurDungeon)
                 {
                     return true;
                 }
@@ -19203,7 +19203,7 @@ namespace AngbandOS.Core
                     Quests[index].Level = Dungeons[i].FirstLevel;
                     Quests[index].RIdx = GetMonsterIndexFromName(Dungeons[i].FirstGuardian);
                     SingletonRepository.MonsterRaces[Quests[index].RIdx].OnlyGuardian = true;
-                    Quests[index].Dungeon = i;
+                    Quests[index].Dungeon = Dungeons[i];
                     Quests[index].ToKill = 1;
                     Quests[index].Killed = 0;
                     index++;
@@ -19213,7 +19213,7 @@ namespace AngbandOS.Core
                     Quests[index].Level = Dungeons[i].SecondLevel;
                     Quests[index].RIdx = GetMonsterIndexFromName(Dungeons[i].SecondGuardian);
                     SingletonRepository.MonsterRaces[Quests[index].RIdx].OnlyGuardian = true;
-                    Quests[index].Dungeon = i;
+                    Quests[index].Dungeon = Dungeons[i];
                     Quests[index].ToKill = 1;
                     Quests[index].Killed = 0;
                     index++;
@@ -19255,7 +19255,7 @@ namespace AngbandOS.Core
                 {
                     j = Program.Rng.RandomBetween(1, DungeonCount) - 1;
                 }
-                Quests[index].Dungeon = j;
+                Quests[index].Dungeon = Dungeons[j];
                 Quests[index].Level -= Dungeons[j].Offset;
                 Quests[index].ToKill = GetNumberMonster(index);
                 Quests[index].Killed = 0;

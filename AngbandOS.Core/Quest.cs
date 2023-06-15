@@ -12,7 +12,7 @@ namespace AngbandOS.Core
     internal class Quest
     {
         public bool Discovered;
-        public int Dungeon;
+        public Dungeon Dungeon;
         public int Killed;
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace AngbandOS.Core
             MonsterRace rPtr = SaveGame.SingletonRepository.MonsterRaces[RIdx];
             string name = rPtr.Name;
             int qNum = ToKill;
-            string dunName = SaveGame.Dungeons[Dungeon].Name;
+            string dunName = Dungeon.Name;
             int lev = Level;
             if (Level == 0)
             {
