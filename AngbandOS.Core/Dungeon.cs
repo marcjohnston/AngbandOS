@@ -75,11 +75,6 @@ namespace AngbandOS.Core
         public readonly bool Tower;
 
         /// <summary>
-        /// The index of the dungeon in the dungeon list
-        /// </summary>
-        public int Index;
-
-        /// <summary>
         /// Whether or not the player knows the depth of the dungeon
         /// </summary>
         public bool KnownDepth;
@@ -210,11 +205,6 @@ namespace AngbandOS.Core
                 new Dungeon(saveGame, false, 2, 8, new YeekMonsterSelector(), "Orfax, Son of Boldor", "Boldor, King of the Yeeks", 7, 8, "the Yeek King's Lair", "Yeek Lair", "y")
             };
 
-            // Make sure each dungeon knows its index
-            for (int i = 0; i < array.Length; i++)
-            {
-                array[i].Index = i;
-            }
             return array;
         }
 
