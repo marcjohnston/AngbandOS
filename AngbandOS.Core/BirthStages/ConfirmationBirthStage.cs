@@ -39,8 +39,7 @@
             while (!SaveGame.Shutdown)
             {
                 SaveGame.Screen.Print(Colour.Orange, "[Use return to confirm, or left to go back.]", 43, 1);
-                CharacterViewer characterViewer = new CharacterViewer(SaveGame);
-                characterViewer.DisplayPlayer();
+                SaveGame.DisplayPlayer();
                 char c = SaveGame.Inkey();
                 switch (c)
                 {

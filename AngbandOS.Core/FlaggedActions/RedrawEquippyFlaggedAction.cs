@@ -14,7 +14,7 @@
         /// <param name="player"> The player whose equippy characters should be displayed </param>
         protected override void Execute()
         {
-            CharacterViewer.DisplayPlayerEquippy(SaveGame, RowEquippy, ColEquippy);
+            SaveGame.DisplayPlayerEquippy(RowEquippy, ColEquippy);
         }
     }
 }
