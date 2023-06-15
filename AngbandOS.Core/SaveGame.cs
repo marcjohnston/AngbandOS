@@ -397,7 +397,7 @@ namespace AngbandOS.Core
             Configure(configuration);
 
             Quests = new List<Quest>();
-            Dungeons = Dungeon.NewDungeonList();
+            Dungeons = Dungeon.NewDungeonList(this);
             InitializeAllocationTables();
         }
 
@@ -1412,19 +1412,7 @@ namespace AngbandOS.Core
 
         public void DisplayWildMap()
         {
-            int[] dungeonGuardians = new int[DungeonCount];
             int y, i;
-            for (i = 0; i < DungeonCount; i++)
-            {
-                dungeonGuardians[i] = 0;
-            }
-            for (i = 0; i < Quests.Count; i++)
-            {
-                if (Quests[i].IsActive)
-                {
-                    dungeonGuardians[Quests[i].Dungeon]++;
-                }
-            }
             for (y = 0; y < 12; y++)
             {
                 for (int x = 0; x < 12; x++)
@@ -1436,7 +1424,9 @@ namespace AngbandOS.Core
                         Dungeon dungeon = Wilderness[y][x].Dungeon;
                         wildMapSymbol = dungeon.Visited ? dungeon.MapSymbol : "?";
                         wildMapAttr = Wilderness[y][x].Town != null ? Colour.Grey : Colour.Brown;
-                        if (dungeonGuardians[Wilderness[y][x].Dungeon.Index] != 0)
+
+                        // Check to see if there are any active quests in the dungeon and show them in bright red.
+                        if (Wilderness[y][x].Dungeon.ActiveQuestCount() != 0) 
                         {
                             wildMapAttr = Colour.BrightRed;
                         }
@@ -1458,25 +1448,27 @@ namespace AngbandOS.Core
             Screen.Print(Colour.Purple, "+------------+", 14, 1);
             for (y = 0; y < DungeonCount; y++)
             {
-                string depth = Dungeons[y].KnownDepth ? $"{Dungeons[y].MaxLevel}" : "?";
-                string difficulty = Dungeons[y].KnownOffset ? $"{Dungeons[y].Offset}" : "?";
+                Dungeon dungeon = Dungeons[y];
+                int activeQuestCount = dungeon.ActiveQuestCount();
+                string depth = Dungeons[y].KnownDepth ? $"{dungeon.MaxLevel}" : "?";
+                string difficulty = Dungeons[y].KnownOffset ? $"{dungeon.Offset}" : "?";
                 string buffer;
-                if (Dungeons[y].Visited)
+                if (dungeon.Visited)
                 {
                     buffer = y < SingletonRepository.Towns.Count
-                        ? $"{Dungeons[y].MapSymbol} = {SingletonRepository.Towns[y].Name} (L:{depth}, D:{difficulty}, Q:{dungeonGuardians[y]})"
-                        : $"{Dungeons[y].MapSymbol} = {Dungeons[y].Name} (L:{depth}, D:{difficulty}, Q:{dungeonGuardians[y]})";
+                        ? $"{Dungeons[y].MapSymbol} = {SingletonRepository.Towns[y].Name} (L:{depth}, D:{difficulty}, Q:{activeQuestCount})"
+                        : $"{Dungeons[y].MapSymbol} = {Dungeons[y].Name} (L:{depth}, D:{difficulty}, Q:{activeQuestCount})";
                 }
                 else
                 {
-                    buffer = $"? = {Dungeons[y].Name} (L:{depth}, D:{difficulty}, Q:{dungeonGuardians[y]})";
+                    buffer = $"? = {Dungeons[y].Name} (L:{depth}, D:{difficulty}, Q:{activeQuestCount})";
                 }
                 Colour keyAttr = Colour.Brown;
                 if (y < SingletonRepository.Towns.Count)
                 {
                     keyAttr = Colour.Grey;
                 }
-                if (dungeonGuardians[y] != 0)
+                if (activeQuestCount != 0)
                 {
                     keyAttr = Colour.BrightRed;
                 }

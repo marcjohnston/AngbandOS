@@ -109,6 +109,21 @@ namespace AngbandOS.Core
         /// </summary>
         public int Y = 0;
 
+        public int ActiveQuestCount()
+        {
+            int activeQuestCount = 0;
+            for (int i = 0; i < SaveGame.Quests.Count; i++)
+            {
+                if (SaveGame.Quests[i].IsActive && SaveGame.Quests[i].Dungeon  == Index)
+                {
+                    activeQuestCount++;
+                }
+            }
+            return activeQuestCount;
+        }
+
+        protected readonly SaveGame SaveGame;
+
         /// <summary>
         /// Create the dungeon
         /// </summary>
@@ -123,8 +138,9 @@ namespace AngbandOS.Core
         /// <param name="name"> The full name of the dungeon </param>
         /// <param name="shortname"> The shortened display name of the dungeon </param>
         /// <param name="mapSymbol"> The symbol for the dungeon on the wilderness map </param>
-        private Dungeon(bool tower, int offset, int maxLevel, MonsterSelector? bias, string firstGuardian, string secondGuardian, int firstLevel, int secondLevel, string name, string shortname, string mapSymbol)
+        private Dungeon(SaveGame saveGame, bool tower, int offset, int maxLevel, MonsterSelector? bias, string firstGuardian, string secondGuardian, int firstLevel, int secondLevel, string name, string shortname, string mapSymbol)
         {
+            SaveGame = saveGame;
             Tower = tower;
             Offset = offset;
             BaseOffset = offset;
@@ -146,33 +162,33 @@ namespace AngbandOS.Core
         /// Create the list of dungeons from a hard-coded set
         /// </summary>
         /// <returns> </returns>
-        public static Dungeon[] NewDungeonList()
+        public static Dungeon[] NewDungeonList(SaveGame saveGame)
         {
             Dungeon[] array = new[]
             {
                 // Note that the indices of the first eight dungeons match the towns that they are under
-                new Dungeon(false, 0, 3, null, "", "", 0, 0, "the Sewers under Celephais", "Celephais", "C"),
-                new Dungeon(false, 1, 9, null, "", "", 0, 0, "the Sewers under Dylath Leen", "Dylath Leen", "D"),
-                new Dungeon(false, 0, 5, null, "", "", 0, 0, "the Sewers under Hlanith", "Hlanith", "H"),
-                new Dungeon(false, 0, 5, null, "", "", 0, 0, "the Sewers under Inganok", "Inganok", "I"),
-                new Dungeon(false, 50, 75, new CthuloidMonsterSelector(), "Nyarlathotep", "Azathoth, The Daemon Sultan", 49, 50, "the Catacombs under Kadath", "Kadath", "K"),
-                new Dungeon(false, 0, 7, new HumanMonsterSelector(), "Robin Hood, the Outlaw", "", 7, 0, "the Sewers under Nir", "Nir", "N"),
-                new Dungeon(false, 0, 7, new AnimalMonsterSelector(), "Hobbes the Tiger", "", 7, 0, "the Sewers under Ulthar", "Ulthar", "U"),
-                new Dungeon(false, 0, 5, null, "", "", 0, 0, "the Sewers under Ilek-Vad", "Ilek-Vad", "V"),
+                new Dungeon(saveGame, false, 0, 3, null, "", "", 0, 0, "the Sewers under Celephais", "Celephais", "C"),
+                new Dungeon(saveGame, false, 1, 9, null, "", "", 0, 0, "the Sewers under Dylath Leen", "Dylath Leen", "D"),
+                new Dungeon(saveGame, false, 0, 5, null, "", "", 0, 0, "the Sewers under Hlanith", "Hlanith", "H"),
+                new Dungeon(saveGame, false, 0, 5, null, "", "", 0, 0, "the Sewers under Inganok", "Inganok", "I"),
+                new Dungeon(saveGame, false, 50, 75, new CthuloidMonsterSelector(), "Nyarlathotep", "Azathoth, The Daemon Sultan", 49, 50, "the Catacombs under Kadath", "Kadath", "K"),
+                new Dungeon(saveGame, false, 0, 7, new HumanMonsterSelector(), "Robin Hood, the Outlaw", "", 7, 0, "the Sewers under Nir", "Nir", "N"),
+                new Dungeon(saveGame, false, 0, 7, new AnimalMonsterSelector(), "Hobbes the Tiger", "", 7, 0, "the Sewers under Ulthar", "Ulthar", "U"),
+                new Dungeon(saveGame, false, 0, 5, null, "", "", 0, 0, "the Sewers under Ilek-Vad", "Ilek-Vad", "V"),
 
                 // The remaining dungeons are in the wilderness
-                new Dungeon(false, 30, 20, null, "The Collector", "", 20, 0, "the Collector's Cave", "Cave", "c"),
-                new Dungeon(true, 15, 20, new DemonMonsterSelector(), "The Emissary", "Glaryssa, Succubus Queen", 1, 20, "the Demon Spire", "Spire", "d"),
-                new Dungeon(true, 20, 20,new ElementalMonsterSelector(), "Lasha, Mistress of Water", "Grom, Master of Earth", 15, 20, "the Conflux of the Elements", "Conflux", "e"),
-                new Dungeon(true, 1, 5, new KoboldMonsterSelector(), "Vort the Kobold Queen", "", 5, 0, "the Kobold Fort", "Fort", "f"),
-                new Dungeon(true, 40, 20, new CthuloidMonsterSelector(), "Father Dagon", "Tulzscha", 1, 20, "the Tower of Koth", "Koth", "k"),
-                new Dungeon(false, 15, 35, new DragonMonsterSelector(), "Glaurung, Father of the Dragons", "Ancalagon the Black", 34, 35, "the Dragon's Lair", "Dragon Lair", "l"),
-                new Dungeon(true, 30, 40, new HiUndeadMonsterSelector(), "Fire Phantom", "Vecna, the Emperor Lich", 1, 40, "the Necropolis", "Necropolis", "n"),
-                new Dungeon(true, 3, 17, new OrcMonsterSelector(), "Bolg, Son of Azog", "Azog, King of the Uruk-Hai", 16, 17, "the Orc Tower", "Orc Tower", "o"),
-                new Dungeon(true, 13, 17, new SpiderMonsterSelector(), "Shelob, Spider of Darkness", "", 17, 0, "Shelob's Tower", "Tower", "s"),
-                new Dungeon(false, 4, 21, new UndeadMonsterSelector(), "The disembodied hand", "Khufu the mummified King", 1, 21, "Khufu's Tomb", "Tomb", "t"),
-                new Dungeon(false, 10, 30, null, "The Stormbringer", "", 30, 0, "the Vault of the Sword", "Vault", "v"),
-                new Dungeon(false, 2, 8, new YeekMonsterSelector(), "Orfax, Son of Boldor", "Boldor, King of the Yeeks", 7, 8, "the Yeek King's Lair", "Yeek Lair", "y")
+                new Dungeon(saveGame, false, 30, 20, null, "The Collector", "", 20, 0, "the Collector's Cave", "Cave", "c"),
+                new Dungeon(saveGame, true, 15, 20, new DemonMonsterSelector(), "The Emissary", "Glaryssa, Succubus Queen", 1, 20, "the Demon Spire", "Spire", "d"),
+                new Dungeon(saveGame, true, 20, 20,new ElementalMonsterSelector(), "Lasha, Mistress of Water", "Grom, Master of Earth", 15, 20, "the Conflux of the Elements", "Conflux", "e"),
+                new Dungeon(saveGame, true, 1, 5, new KoboldMonsterSelector(), "Vort the Kobold Queen", "", 5, 0, "the Kobold Fort", "Fort", "f"),
+                new Dungeon(saveGame, true, 40, 20, new CthuloidMonsterSelector(), "Father Dagon", "Tulzscha", 1, 20, "the Tower of Koth", "Koth", "k"),
+                new Dungeon(saveGame, false, 15, 35, new DragonMonsterSelector(), "Glaurung, Father of the Dragons", "Ancalagon the Black", 34, 35, "the Dragon's Lair", "Dragon Lair", "l"),
+                new Dungeon(saveGame, true, 30, 40, new HiUndeadMonsterSelector(), "Fire Phantom", "Vecna, the Emperor Lich", 1, 40, "the Necropolis", "Necropolis", "n"),
+                new Dungeon(saveGame, true, 3, 17, new OrcMonsterSelector(), "Bolg, Son of Azog", "Azog, King of the Uruk-Hai", 16, 17, "the Orc Tower", "Orc Tower", "o"),
+                new Dungeon(saveGame, true, 13, 17, new SpiderMonsterSelector(), "Shelob, Spider of Darkness", "", 17, 0, "Shelob's Tower", "Tower", "s"),
+                new Dungeon(saveGame, false, 4, 21, new UndeadMonsterSelector(), "The disembodied hand", "Khufu the mummified King", 1, 21, "Khufu's Tomb", "Tomb", "t"),
+                new Dungeon(saveGame, false, 10, 30, null, "The Stormbringer", "", 30, 0, "the Vault of the Sword", "Vault", "v"),
+                new Dungeon(saveGame, false, 2, 8, new YeekMonsterSelector(), "Orfax, Son of Boldor", "Boldor, King of the Yeeks", 7, 8, "the Yeek King's Lair", "Yeek Lair", "y")
             };
 
             // Make sure each dungeon knows its index
