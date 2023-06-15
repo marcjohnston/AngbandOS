@@ -122,6 +122,26 @@ namespace AngbandOS.Core
             return activeQuestCount;
         }
 
+        public int FirstQuest()
+        {
+            int lev = -1;
+            int first = -1;
+            for (int i = 0; i < SaveGame.Quests.Count; i++)
+            {
+                Quest q = SaveGame.Quests[i];
+                if (q.Level > 0)
+                {
+                    int dungeon = q.Dungeon;
+                    if (dungeon == this.Index && (first == -1 || q.Level < lev))
+                    {
+                        first = i;
+                        lev = q.Level;
+                    }
+                }
+            }
+            return first;
+        }
+
         protected readonly SaveGame SaveGame;
 
         /// <summary>

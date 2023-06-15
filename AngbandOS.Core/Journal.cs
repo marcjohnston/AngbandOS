@@ -830,32 +830,13 @@ namespace AngbandOS.Core
             SaveGame.Screen.Clear();
             SaveGame.Screen.Print(Colour.Blue, "Outstanding Quests", 0, 1);
             SaveGame.Screen.Print(Colour.Blue, "==================", 1, 1);
-            int[] lev = new int[SaveGame.DungeonCount];
-            int[] first = new int[SaveGame.DungeonCount];
-            for (int i = 0; i < SaveGame.DungeonCount; i++)
-            {
-                first[i] = -1;
-                lev[i] = -1;
-            }
-            for (int i = 0; i < SaveGame.Quests.Count; i++)
-            {
-                Quest q = SaveGame.Quests[i];
-                if (q.Level > 0)
-                {
-                    int dungeon = q.Dungeon;
-                    if (first[dungeon] == -1 || q.Level < lev[dungeon])
-                    {
-                        first[dungeon] = i;
-                        lev[dungeon] = q.Level;
-                    }
-                }
-            }
             int row = 3;
             for (int i = 0; i < SaveGame.DungeonCount; i++)
             {
-                if (first[i] != -1)
+                int firstQuest = SaveGame.Dungeons[i].FirstQuest();
+                if (firstQuest != -1)
                 {
-                    string line = SaveGame.Quests[first[i]].Describe();
+                    string line = SaveGame.Quests[firstQuest].Describe();
                     SaveGame.Screen.Print(Colour.Blue, line, row, 0);
                     row++;
                 }
