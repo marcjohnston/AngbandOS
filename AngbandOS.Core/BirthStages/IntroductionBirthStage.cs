@@ -9,42 +9,33 @@ namespace AngbandOS.Core.BirthStages
         public override BaseBirthStage? Render()
         {
             string[]? menuItems = GetMenu();
-            if (menuItems != null)
-            {
-                SaveGame.MenuDisplay(currentSelection, menuItems);
-            }
-            RenderSelection(currentSelection);
             SaveGame.Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
             while (!SaveGame.Shutdown)
             {
+                SaveGame.MenuDisplay(currentSelection, menuItems);
+                RenderSelection(currentSelection);
                 char c = SaveGame.Inkey();
-                if (c == '8')
+                switch (c)
                 {
-                    if (currentSelection > 0)
-                    {
-                        currentSelection--;
+                    case '8':
+                        if (currentSelection > 0)
+                        {
+                            currentSelection--;
+                        }
                         break;
-                    }
-                }
-                if (c == '2')
-                {
-                    if (currentSelection < menuItems.Length - 1)
-                    {
-                        currentSelection++;
+                    case '2':
+                        if (currentSelection < menuItems.Length - 1)
+                        {
+                            currentSelection++;
+                        }
                         break;
-                    }
-                }
-                if (c == '6')
-                {
-                    return GoForward(currentSelection);
-                }
-                if (c == '4')
-                {
-                    return GoBack();
-                }
-                if (c == 'h')
-                {
-                    SaveGame.ShowManual();
+                    case '6':
+                        return GoForward(currentSelection);
+                    case '4':
+                        return null;
+                    case 'h':
+                        SaveGame.ShowManual();
+                        break;
                 }
             }
             return null;
@@ -142,10 +133,6 @@ namespace AngbandOS.Core.BirthStages
                 SaveGame.Player.SecondaryRealm = null; // Wait until the player has selected secondary realm.
             }
             return SaveGame.SingletonRepository.BirthStages.Get<ClassSelectionBirthStage>();
-        }
-        private BaseBirthStage? GoBack()
-        {
-            return null;
         }
     }
 }
