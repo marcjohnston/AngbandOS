@@ -6,26 +6,25 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Nature
-{
-    [Serializable]
-    internal class NatureSpellWhirlpool : Spell
-    {
-        private NatureSpellWhirlpool(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            if (!SaveGame.GetDirectionWithAim(out int dir))
-            {
-                return;
-            }
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<WaterProjectile>(), dir, 100 + SaveGame.Player.Level, (SaveGame.Player.Level / 12) + 1);
-        }
+namespace AngbandOS.Core.Spells.Nature;
 
-        public override string Name => "Whirlpool";
-        
-        protected override string? Info()
+[Serializable]
+internal class NatureSpellWhirlpool : Spell
+{
+    private NatureSpellWhirlpool(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
-            return $"dam {100 + SaveGame.Player.Level}";
+            return;
         }
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<WaterProjectile>(), dir, 100 + SaveGame.Player.Level, (SaveGame.Player.Level / 12) + 1);
+    }
+
+    public override string Name => "Whirlpool";
+    
+    protected override string? Info()
+    {
+        return $"dam {100 + SaveGame.Player.Level}";
     }
 }

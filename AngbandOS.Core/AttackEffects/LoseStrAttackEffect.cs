@@ -6,20 +6,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.AttackEffects
+namespace AngbandOS.Core.AttackEffects;
+
+[Serializable]
+internal class LoseStrAttackEffect : BaseAttackEffect
 {
-    [Serializable]
-    internal class LoseStrAttackEffect : BaseAttackEffect
+    public override int Power => 0;
+    public override string Description => "reduce strength";
+    public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
-        public override int Power => 0;
-        public override string Description => "reduce strength";
-        public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+        saveGame.Player.TakeHit(damage, monsterDescription);
+        if (saveGame.Player.TryDecreasingAbilityScore(Ability.Strength))
         {
-            saveGame.Player.TakeHit(damage, monsterDescription);
-            if (saveGame.Player.TryDecreasingAbilityScore(Ability.Strength))
-            {
-                obvious = true;
-            }
+            obvious = true;
         }
     }
 }

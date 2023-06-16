@@ -6,22 +6,21 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Life
-{
-    [Serializable]
-    internal class LifeSpellDispelEvil : Spell
-    {
-        private LifeSpellDispelEvil(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.DispelEvil(SaveGame.Player.Level * 4);
-        }
+namespace AngbandOS.Core.Spells.Life;
 
-        public override string Name => "Dispel Evil";
-        
-        protected override string? Info()
-        {
-            return $"dam {4 * SaveGame.Player.Level}";
-        }
+[Serializable]
+internal class LifeSpellDispelEvil : Spell
+{
+    private LifeSpellDispelEvil(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.DispelEvil(SaveGame.Player.Level * 4);
+    }
+
+    public override string Name => "Dispel Evil";
+    
+    protected override string? Info()
+    {
+        return $"dam {4 * SaveGame.Player.Level}";
     }
 }

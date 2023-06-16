@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Tarot
-{
-    [Serializable]
-    internal class TarotSpellEtherealDivination : Spell
-    {
-        private TarotSpellEtherealDivination(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.DetectAll();
-        }
+namespace AngbandOS.Core.Spells.Tarot;
 
-        public override string Name => "Ethereal Divination";
-        
+[Serializable]
+internal class TarotSpellEtherealDivination : Spell
+{
+    private TarotSpellEtherealDivination(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.DetectAll();
     }
+
+    public override string Name => "Ethereal Divination";
+    
 }

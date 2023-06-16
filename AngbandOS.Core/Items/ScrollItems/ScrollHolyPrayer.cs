@@ -1,28 +1,27 @@
-namespace AngbandOS.Core.ItemCategories
+namespace AngbandOS.Core.ItemCategories;
+
+[Serializable]
+internal class ScrollHolyPrayer : ScrollItemClass
 {
-    [Serializable]
-    internal class ScrollHolyPrayer : ScrollItemClass
+    private ScrollHolyPrayer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+
+    public override char Character => '?';
+    public override string Name => "Holy Prayer";
+
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
+    public override int Cost => 80;
+    public override string FriendlyName => "Holy Prayer";
+    public override int Level => 25;
+    public override int[] Locale => new int[] { 25, 0, 0, 0 };
+    public override int? SubCategory => 35;
+    public override int Weight => 5;
+
+    public override void Read(ReadScrollEvent eventArgs)
     {
-        private ScrollHolyPrayer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-
-        public override char Character => '?';
-        public override string Name => "Holy Prayer";
-
-        public override int[] Chance => new int[] { 1, 0, 0, 0 };
-        public override int Cost => 80;
-        public override string FriendlyName => "Holy Prayer";
-        public override int Level => 25;
-        public override int[] Locale => new int[] { 25, 0, 0, 0 };
-        public override int? SubCategory => 35;
-        public override int Weight => 5;
-
-        public override void Read(ReadScrollEvent eventArgs)
+        if (eventArgs.SaveGame.Player.TimedBlessing.AddTimer(Program.Rng.DieRoll(48) + 24))
         {
-            if (eventArgs.SaveGame.Player.TimedBlessing.AddTimer(Program.Rng.DieRoll(48) + 24))
-            {
-                eventArgs.Identified = true;
-            }
+            eventArgs.Identified = true;
         }
-        public override Item CreateItem() => new HolyPrayerScrollItem(SaveGame);
     }
+    public override Item CreateItem() => new HolyPrayerScrollItem(SaveGame);
 }

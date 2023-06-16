@@ -6,57 +6,56 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Projection
+namespace AngbandOS.Core.Projection;
+
+[Serializable]
+internal class StunProjectile : Projectile
 {
-    [Serializable]
-    internal class StunProjectile : Projectile
+    private StunProjectile(SaveGame saveGame) : base(saveGame) { }
+
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<GoldBoltProjectileGraphic>();
+
+    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<GoldSplatProjectileGraphic>();
+
+    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
-        private StunProjectile(SaveGame saveGame) : base(saveGame) { }
-
-        protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<GoldBoltProjectileGraphic>();
-
-        protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<GoldSplatProjectileGraphic>();
-
-        protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
+        MonsterRace rPtr = mPtr.Race;
+        bool seen = mPtr.IsVisible;
+        bool obvious = false;
+        string? note = null;
+        if (seen)
         {
-            MonsterRace rPtr = mPtr.Race;
-            bool seen = mPtr.IsVisible;
-            bool obvious = false;
-            string? note = null;
+            obvious = true;
+        }
+        int doStun = Program.Rng.DiceRoll((SaveGame.Player.Level / 10) + 3, dam) + 1;
+        if (rPtr.Unique ||
+            rPtr.Level > Program.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+        {
+            doStun = 0;
+            note = " is unaffected!";
+            obvious = false;
+        }
+        dam = 0;
+        if (doStun != 0 && !rPtr.BreatheSound && !rPtr.BreatheForce)
+        {
             if (seen)
             {
                 obvious = true;
             }
-            int doStun = Program.Rng.DiceRoll((SaveGame.Player.Level / 10) + 3, dam) + 1;
-            if (rPtr.Unique ||
-                rPtr.Level > Program.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+            int tmp;
+            if (mPtr.StunLevel != 0)
             {
-                doStun = 0;
-                note = " is unaffected!";
-                obvious = false;
+                note = " is more dazed.";
+                tmp = mPtr.StunLevel + (doStun / 2);
             }
-            dam = 0;
-            if (doStun != 0 && !rPtr.BreatheSound && !rPtr.BreatheForce)
+            else
             {
-                if (seen)
-                {
-                    obvious = true;
-                }
-                int tmp;
-                if (mPtr.StunLevel != 0)
-                {
-                    note = " is more dazed.";
-                    tmp = mPtr.StunLevel + (doStun / 2);
-                }
-                else
-                {
-                    note = " is dazed.";
-                    tmp = doStun;
-                }
-                mPtr.StunLevel = tmp < 200 ? tmp : 200;
+                note = " is dazed.";
+                tmp = doStun;
             }
-            ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-            return obvious;
+            mPtr.StunLevel = tmp < 200 ? tmp : 200;
         }
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        return obvious;
     }
 }

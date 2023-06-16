@@ -6,33 +6,32 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.ActiveMutations
+namespace AngbandOS.Core.Mutations.ActiveMutations;
+
+[Serializable]
+internal class MutationDazzle : Mutation
 {
-    [Serializable]
-    internal class MutationDazzle : Mutation
+    public override void Activate(SaveGame saveGame)
     {
-        public override void Activate(SaveGame saveGame)
+        if (!saveGame.CheckIfRacialPowerWorks(7, 15, Ability.Charisma, 8))
         {
-            if (!saveGame.CheckIfRacialPowerWorks(7, 15, Ability.Charisma, 8))
-            {
-                return;
-            }
-            saveGame.StunMonsters(saveGame.Player.Level * 4);
-            saveGame.ConfuseMonsters(saveGame.Player.Level * 4);
-            saveGame.TurnMonsters(saveGame.Player.Level * 4);
+            return;
         }
+        saveGame.StunMonsters(saveGame.Player.Level * 4);
+        saveGame.ConfuseMonsters(saveGame.Player.Level * 4);
+        saveGame.TurnMonsters(saveGame.Player.Level * 4);
+    }
 
-        public override string ActivationSummary(int lvl)
-        {
-            return lvl < 7 ? "dazzle           (unusable until level 7)" : "dazzle           (cost 15, CHA based)";
-        }
+    public override string ActivationSummary(int lvl)
+    {
+        return lvl < 7 ? "dazzle           (unusable until level 7)" : "dazzle           (cost 15, CHA based)";
+    }
 
-        public override void Initialize()
-        {
-            Frequency = 3;
-            GainMessage = "You gain the ability to emit dazzling lights.";
-            HaveMessage = "You can emit confusing, blinding radiation.";
-            LoseMessage = "You lose the ability to emit dazzling lights.";
-        }
+    public override void Initialize()
+    {
+        Frequency = 3;
+        GainMessage = "You gain the ability to emit dazzling lights.";
+        HaveMessage = "You can emit confusing, blinding radiation.";
+        LoseMessage = "You lose the ability to emit dazzling lights.";
     }
 }

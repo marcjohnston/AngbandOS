@@ -6,58 +6,57 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Animations
+namespace AngbandOS.Core.Animations;
+
+[Serializable]
+internal abstract class Animation
 {
-    [Serializable]
-    internal abstract class Animation
+    protected SaveGame SaveGame;
+    protected Animation(SaveGame saveGame)
     {
-        protected SaveGame SaveGame;
-        protected Animation(SaveGame saveGame)
-        {
-            SaveGame = saveGame;
-        }
+        SaveGame = saveGame;
+    }
 
-        public abstract char Character { get; }
-        public abstract Colour Colour { get; }
-        public abstract string Name { get; }
-        public abstract Colour AlternateColour { get; }
-        public abstract string Sequence { get; }
+    public abstract char Character { get; }
+    public abstract Colour Colour { get; }
+    public abstract string Name { get; }
+    public abstract Colour AlternateColour { get; }
+    public abstract string Sequence { get; }
 
-        public void Animate(SaveGame saveGame, Level level, int[] y, int[] x)
+    public void Animate(SaveGame saveGame, Level level, int[] y, int[] x)
+    {
+        int msec = Constants.DelayFactorInMilliseconds;
+        int grids = x.Length;
+        bool drawn = false;
+        bool oddFrame = true;
+        foreach (char character in Sequence)
         {
-            int msec = Constants.DelayFactorInMilliseconds;
-            int grids = x.Length;
-            bool drawn = false;
-            bool oddFrame = true;
-            foreach (char character in Sequence)
+            for (int j = 0; j < grids; j++)
             {
-                for (int j = 0; j < grids; j++)
+                if (level.PlayerHasLosBold(y[j], x[j]) && level.PanelContains(y[j], x[j]))
                 {
-                    if (level.PlayerHasLosBold(y[j], x[j]) && level.PanelContains(y[j], x[j]))
-                    {
-                        Colour colour = oddFrame ? Colour : AlternateColour;
-                        level.PrintCharacterAtMapLocation(character, colour, y[j], x[j]);
-                        drawn = true;
-                    }
+                    Colour colour = oddFrame ? Colour : AlternateColour;
+                    level.PrintCharacterAtMapLocation(character, colour, y[j], x[j]);
+                    drawn = true;
                 }
-                if (drawn)
-                {
-                    saveGame.UpdateScreen();
-                    saveGame.Pause(msec);
-                }
-                oddFrame = !oddFrame;
             }
             if (drawn)
             {
-                for (int j = 0; j < grids; j++)
-                {
-                    if (level.PlayerHasLosBold(y[j], x[j]) && level.PanelContains(y[j], x[j]))
-                    {
-                        level.RedrawSingleLocation(y[j], x[j]);
-                    }
-                }
                 saveGame.UpdateScreen();
+                saveGame.Pause(msec);
             }
+            oddFrame = !oddFrame;
+        }
+        if (drawn)
+        {
+            for (int j = 0; j < grids; j++)
+            {
+                if (level.PlayerHasLosBold(y[j], x[j]) && level.PanelContains(y[j], x[j]))
+                {
+                    level.RedrawSingleLocation(y[j], x[j]);
+                }
+            }
+            saveGame.UpdateScreen();
         }
     }
 }

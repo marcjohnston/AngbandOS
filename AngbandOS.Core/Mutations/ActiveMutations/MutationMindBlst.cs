@@ -6,36 +6,35 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.ActiveMutations
+namespace AngbandOS.Core.Mutations.ActiveMutations;
+
+[Serializable]
+internal class MutationMindBlst : Mutation
 {
-    [Serializable]
-    internal class MutationMindBlst : Mutation
+    public override void Activate(SaveGame saveGame)
     {
-        public override void Activate(SaveGame saveGame)
+        if (!saveGame.CheckIfRacialPowerWorks(5, 3, Ability.Wisdom, 15))
         {
-            if (!saveGame.CheckIfRacialPowerWorks(5, 3, Ability.Wisdom, 15))
-            {
-                return;
-            }
-            saveGame.MsgPrint("You concentrate...");
-            if (!saveGame.GetDirectionWithAim(out int dir))
-            {
-                return;
-            }
-            saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir, Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 5), 3));
+            return;
         }
+        saveGame.MsgPrint("You concentrate...");
+        if (!saveGame.GetDirectionWithAim(out int dir))
+        {
+            return;
+        }
+        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir, Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 5), 3));
+    }
 
-        public override string ActivationSummary(int lvl)
-        {
-            return lvl < 5 ? "mind blast       (unusable until level 5)" : "mind blast       (cost 3, WIS based)";
-        }
+    public override string ActivationSummary(int lvl)
+    {
+        return lvl < 5 ? "mind blast       (unusable until level 5)" : "mind blast       (cost 3, WIS based)";
+    }
 
-        public override void Initialize()
-        {
-            Frequency = 2;
-            GainMessage = "You gain the power of Mind Blast.";
-            HaveMessage = "You can Mind Blast your enemies.";
-            LoseMessage = "You lose the power of Mind Blast.";
-        }
+    public override void Initialize()
+    {
+        Frequency = 2;
+        GainMessage = "You gain the power of Mind Blast.";
+        HaveMessage = "You can Mind Blast your enemies.";
+        LoseMessage = "You lose the power of Mind Blast.";
     }
 }

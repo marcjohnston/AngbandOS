@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class SpecialEnchantArmorScrollItem : ScrollItem
-    {
-        public SpecialEnchantArmorScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ScrollSpecialEnchantArmor>()) { }
-    }
+internal class SpecialEnchantArmorScrollItem : ScrollItem
+{
+    public SpecialEnchantArmorScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ScrollSpecialEnchantArmor>()) { }
 }

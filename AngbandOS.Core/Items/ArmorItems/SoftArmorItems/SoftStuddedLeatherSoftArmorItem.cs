@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class SoftStuddedLeatherSoftArmorItem : SoftArmorItem
-    {
-        public SoftStuddedLeatherSoftArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<SoftArmorSoftStuddedLeather>()) { }
-    }
+internal class SoftStuddedLeatherSoftArmorItem : SoftArmorItem
+{
+    public SoftStuddedLeatherSoftArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<SoftArmorSoftStuddedLeather>()) { }
 }

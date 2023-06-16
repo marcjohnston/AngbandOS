@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Folk
-{
-    [Serializable]
-    internal class FolkSpellDetection : Spell
-    {
-        private FolkSpellDetection(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.DetectAll();
-        }
+namespace AngbandOS.Core.Spells.Folk;
 
-        public override string Name => "Detection";
-        
+[Serializable]
+internal class FolkSpellDetection : Spell
+{
+    private FolkSpellDetection(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.DetectAll();
     }
+
+    public override string Name => "Detection";
+    
 }

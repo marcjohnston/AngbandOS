@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Life
-{
-    [Serializable]
-    internal class LifeSpellBlessWeapon : Spell
-    {
-        private LifeSpellBlessWeapon(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            Worked = SaveGame.BlessWeapon();
-        }
+namespace AngbandOS.Core.Spells.Life;
 
-        public override string Name => "Bless Weapon";
-        
+[Serializable]
+internal class LifeSpellBlessWeapon : Spell
+{
+    private LifeSpellBlessWeapon(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        Worked = SaveGame.BlessWeapon();
     }
+
+    public override string Name => "Bless Weapon";
+    
 }

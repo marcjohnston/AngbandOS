@@ -6,37 +6,36 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Tarot
+namespace AngbandOS.Core.Spells.Tarot;
+
+[Serializable]
+internal class TarotSpellSummonDemon : Spell
 {
-    [Serializable]
-    internal class TarotSpellSummonDemon : Spell
+    private TarotSpellSummonDemon(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
     {
-        private TarotSpellSummonDemon(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
+        SaveGame.MsgPrint("You concentrate on the image of a demon...");
+        if (Program.Rng.DieRoll(10) > 3)
         {
-            SaveGame.MsgPrint("You concentrate on the image of a demon...");
-            if (Program.Rng.DieRoll(10) > 3)
-            {
-                if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new DemonMonsterSelector(), true))
-                {
-                    SaveGame.MsgPrint("No-one ever turns up.");
-                }
-            }
-            else if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new DemonMonsterSelector()))
-            {
-                SaveGame.MsgPrint("The summoned demon gets angry!");
-            }
-            else
+            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new DemonMonsterSelector(), true))
             {
                 SaveGame.MsgPrint("No-one ever turns up.");
             }
         }
-
-        public override string Name => "Summon Demon";
-        
-        protected override string? Info()
+        else if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new DemonMonsterSelector()))
         {
-            return "control 70%";
+            SaveGame.MsgPrint("The summoned demon gets angry!");
         }
+        else
+        {
+            SaveGame.MsgPrint("No-one ever turns up.");
+        }
+    }
+
+    public override string Name => "Summon Demon";
+    
+    protected override string? Info()
+    {
+        return "control 70%";
     }
 }

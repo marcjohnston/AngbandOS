@@ -1,48 +1,47 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal abstract class WandItem : Item
+internal abstract class WandItem : Item
+{
+    public WandItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
+    public override int PercentageBreakageChance => 25;
+    public override int? GetBonusRealValue(int value)
     {
-        public WandItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-        public override int PercentageBreakageChance => 25;
-        public override int? GetBonusRealValue(int value)
+        return value / 20 * TypeSpecificValue;
+    }
+    protected override bool FactoryCanAbsorbItem(Item other)
+    {
+        if (!IsKnown() || !other.IsKnown())
         {
-            return value / 20 * TypeSpecificValue;
+            return false;
         }
-        protected override bool FactoryCanAbsorbItem(Item other)
+        if (TypeSpecificValue != other.TypeSpecificValue)
         {
-            if (!IsKnown() || !other.IsKnown())
-            {
-                return false;
-            }
-            if (TypeSpecificValue != other.TypeSpecificValue)
-            {
-                return false;
-            }
-            return true;
+            return false;
         }
+        return true;
+    }
 
-        /// <summary>
-        /// Returns the factory that this item was created by; casted as an IFlavour.
-        /// </summary>
-        public IFlavour FlavourFactory => (IFlavour)Factory;
+    /// <summary>
+    /// Returns the factory that this item was created by; casted as an IFlavour.
+    /// </summary>
+    public IFlavour FlavourFactory => (IFlavour)Factory;
 
-        public override string GetDescription(bool includeCountPrefix)
+    public override string GetDescription(bool includeCountPrefix)
+    {
+        string flavour = IdentStoreb ? "" : $"{FlavourFactory.Flavour.Name} ";
+        string ofName = IsFlavourAware() ? $" of {Factory.FriendlyName}" : "";
+        string name = $"{flavour}{Pluralize("Wand", Count)}{ofName}";
+        return includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
+    }
+    public override string GetVerboseDescription()
+    {
+        string s = "";
+        if (IsKnown())
         {
-            string flavour = IdentStoreb ? "" : $"{FlavourFactory.Flavour.Name} ";
-            string ofName = IsFlavourAware() ? $" of {Factory.FriendlyName}" : "";
-            string name = $"{flavour}{Pluralize("Wand", Count)}{ofName}";
-            return includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
+            s += $" ({TypeSpecificValue} {Pluralize("charge", TypeSpecificValue)})";
         }
-        public override string GetVerboseDescription()
-        {
-            string s = "";
-            if (IsKnown())
-            {
-                s += $" ({TypeSpecificValue} {Pluralize("charge", TypeSpecificValue)})";
-            }
-            s += base.GetVerboseDescription();
-            return s;
-        }
+        s += base.GetVerboseDescription();
+        return s;
     }
 }

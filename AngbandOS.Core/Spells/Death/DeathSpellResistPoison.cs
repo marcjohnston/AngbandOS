@@ -6,22 +6,21 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Death
-{
-    [Serializable]
-    internal class DeathSpellResistPoison : Spell
-    {
-        private DeathSpellResistPoison(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.Player.TimedPoisonResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
-        }
+namespace AngbandOS.Core.Spells.Death;
 
-        public override string Name => "Resist Poison";
-        
-        protected override string? Info()
-        {
-            return "dur 20+d20";
-        }
+[Serializable]
+internal class DeathSpellResistPoison : Spell
+{
+    private DeathSpellResistPoison(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.Player.TimedPoisonResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
+    }
+
+    public override string Name => "Resist Poison";
+    
+    protected override string? Info()
+    {
+        return "dur 20+d20";
     }
 }

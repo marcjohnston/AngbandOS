@@ -8,23 +8,22 @@
 
 using static AngbandOS.Core.CelephaisDungeon;
 
-namespace AngbandOS.Core
-{
+namespace AngbandOS.Core;
+
 [Serializable]
-    internal class TowerDungeon : Dungeon
-    {
-        private TowerDungeon(SaveGame saveGame) : base(saveGame) { }
-        public override int BaseOffset => 13;
-        /// <summary>
-        /// Returns true because this dungeon is a tower.
-        /// </summary>
-        public override bool Tower => true;
-        public override int MaxLevel => 17;
-        public override MonsterSelector? Bias => new SpiderMonsterSelector();
-        public override string FirstGuardian => "Shelob, Spider of Darkness";
-        public override int FirstLevel => 17;
-        public override string Name => "Shelob's Tower";
-        public override string Shortname => "Tower";
-        public override string MapSymbol => "s";
-    }
+internal class TowerDungeon : Dungeon
+{
+    private TowerDungeon(SaveGame saveGame) : base(saveGame) { }
+    public override int BaseOffset => 13;
+    /// <summary>
+    /// Returns true because this dungeon is a tower.
+    /// </summary>
+    public override bool Tower => true;
+    public override int MaxLevel => 17;
+    public override MonsterSelector? Bias => new SpiderMonsterSelector();
+    public override string FirstGuardian => "Shelob, Spider of Darkness";
+    public override int FirstLevel => 17;
+    public override string Name => "Shelob's Tower";
+    public override string Shortname => "Tower";
+    public override string MapSymbol => "s";
 }

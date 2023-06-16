@@ -6,40 +6,39 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Talents
+namespace AngbandOS.Core.Talents;
+
+[Serializable]
+internal class TalentNeuralBlast : Talent
 {
-    [Serializable]
-    internal class TalentNeuralBlast : Talent
+    public override string Name => "Neural Blast";
+    public override void Initialise(int characterClass)
     {
-        public override string Name => "Neural Blast";
-        public override void Initialise(int characterClass)
-        {
-            Level = 2;
-            ManaCost = 1;
-            BaseFailure = 20;
-        }
+        Level = 2;
+        ManaCost = 1;
+        BaseFailure = 20;
+    }
 
-        public override void Use(SaveGame saveGame)
+    public override void Use(SaveGame saveGame)
+    {
+        if (!saveGame.GetDirectionWithAim(out int dir))
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
-            {
-                return;
-            }
-            if (Program.Rng.DieRoll(100) < saveGame.Player.Level * 2)
-            {
-                saveGame.FireBeam(saveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir,
-                    Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 4), 3 + (saveGame.Player.Level / 15)));
-            }
-            else
-            {
-                saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir,
-                    Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 4), 3 + (saveGame.Player.Level / 15)), 0);
-            }
+            return;
         }
+        if (Program.Rng.DieRoll(100) < saveGame.Player.Level * 2)
+        {
+            saveGame.FireBeam(saveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir,
+                Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 4), 3 + (saveGame.Player.Level / 15)));
+        }
+        else
+        {
+            saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir,
+                Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 4), 3 + (saveGame.Player.Level / 15)), 0);
+        }
+    }
 
-        protected override string Comment(Player player)
-        {
-            return $"dam {3 + ((player.Level - 1) / 4)}d{3 + (player.Level / 15)}";
-        }
+    protected override string Comment(Player player)
+    {
+        return $"dam {3 + ((player.Level - 1) / 4)}d{3 + (player.Level / 15)}";
     }
 }

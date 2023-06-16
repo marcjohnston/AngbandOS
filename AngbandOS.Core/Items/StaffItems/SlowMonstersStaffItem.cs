@@ -1,12 +1,11 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class SlowMonstersStaffItem : StaffItem
+internal class SlowMonstersStaffItem : StaffItem
+{
+    public SlowMonstersStaffItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<StaffSlowMonsters>()) { }
+    protected override void ApplyMagic(int level, int power, Store? store)
     {
-        public SlowMonstersStaffItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<StaffSlowMonsters>()) { }
-        protected override void ApplyMagic(int level, int power, Store? store)
-        {
-            TypeSpecificValue = Program.Rng.DieRoll(5) + 6;
-        }
+        TypeSpecificValue = Program.Rng.DieRoll(5) + 6;
     }
 }

@@ -6,34 +6,33 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Towns
-{
-    [Serializable]
-    internal class InganokTown : Town
-    {
-        private Store[] _stores;
-        private InganokTown(SaveGame saveGame) : base(saveGame)
-        {
-            _stores = new Store[]
-            {
-                new GeneralStore(SaveGame),
-                new ArmouryStore(SaveGame),
-                new WeaponStore(SaveGame),
-                new TempleStore(SaveGame),
-                new AlchemistStore(SaveGame),
-                new EmptyLotStore(SaveGame),
-                new MagicStore(SaveGame),
-                new BlackStore(SaveGame),
-                new EmptyLotStore(SaveGame),
-                new LibraryStore(SaveGame),
-                new InnStore(SaveGame),
-                new PawnStore(SaveGame)
-            };
-        }
-        public override Store[] Stores => _stores;
+namespace AngbandOS.Core.Towns;
 
-        public override int HousePrice => 0;
-        public override string Name => "the industrious town of Inganok";
-        public override char Char => 'I';
+[Serializable]
+internal class InganokTown : Town
+{
+    private Store[] _stores;
+    private InganokTown(SaveGame saveGame) : base(saveGame)
+    {
+        _stores = new Store[]
+        {
+            new GeneralStore(SaveGame),
+            new ArmouryStore(SaveGame),
+            new WeaponStore(SaveGame),
+            new TempleStore(SaveGame),
+            new AlchemistStore(SaveGame),
+            new EmptyLotStore(SaveGame),
+            new MagicStore(SaveGame),
+            new BlackStore(SaveGame),
+            new EmptyLotStore(SaveGame),
+            new LibraryStore(SaveGame),
+            new InnStore(SaveGame),
+            new PawnStore(SaveGame)
+        };
     }
+    public override Store[] Stores => _stores;
+
+    public override int HousePrice => 0;
+    public override string Name => "the industrious town of Inganok";
+    public override char Char => 'I';
 }

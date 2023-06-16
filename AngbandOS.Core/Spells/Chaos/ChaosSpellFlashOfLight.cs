@@ -6,22 +6,21 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Chaos
-{
-    [Serializable]
-    internal class ChaosSpellFlashOfLight : Spell
-    {
-        private ChaosSpellFlashOfLight(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.LightArea(Program.Rng.DiceRoll(2, SaveGame.Player.Level / 2), (SaveGame.Player.Level / 10) + 1);
-        }
+namespace AngbandOS.Core.Spells.Chaos;
 
-        public override string Name => "Flash of Light";
-        
-        protected override string? Info()
-        {
-            return $"dam 2d{SaveGame.Player.Level / 2}";
-        }
+[Serializable]
+internal class ChaosSpellFlashOfLight : Spell
+{
+    private ChaosSpellFlashOfLight(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.LightArea(Program.Rng.DiceRoll(2, SaveGame.Player.Level / 2), (SaveGame.Player.Level / 10) + 1);
+    }
+
+    public override string Name => "Flash of Light";
+    
+    protected override string? Info()
+    {
+        return $"dam 2d{SaveGame.Player.Level / 2}";
     }
 }

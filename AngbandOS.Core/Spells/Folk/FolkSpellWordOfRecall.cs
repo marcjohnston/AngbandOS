@@ -6,22 +6,21 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Folk
+namespace AngbandOS.Core.Spells.Folk;
+
+[Serializable]
+internal class FolkSpellWordOfRecall : Spell
 {
-    [Serializable]
-    internal class FolkSpellWordOfRecall : Spell
+    private FolkSpellWordOfRecall(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
     {
-        private FolkSpellWordOfRecall(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.Player.ToggleRecall();
-        }
+        SaveGame.Player.ToggleRecall();
+    }
 
-        public override string Name => "Word of Recall";
+    public override string Name => "Word of Recall";
 
-        protected override string? Info()
-        {
-            return "delay 15+d21";
-        }
+    protected override string? Info()
+    {
+        return "delay 15+d21";
     }
 }

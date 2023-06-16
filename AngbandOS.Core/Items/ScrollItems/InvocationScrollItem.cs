@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class InvocationScrollItem : ScrollItem
-    {
-        public InvocationScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ScrollInvocation>()) { }
-    }
+internal class InvocationScrollItem : ScrollItem
+{
+    public InvocationScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ScrollInvocation>()) { }
 }

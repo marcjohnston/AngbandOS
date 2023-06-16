@@ -6,36 +6,35 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Tarot
+namespace AngbandOS.Core.Spells.Tarot;
+
+[Serializable]
+internal class TarotSpellConjureElemental : Spell
 {
-    [Serializable]
-    internal class TarotSpellConjureElemental : Spell
+    private TarotSpellConjureElemental(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
     {
-        private TarotSpellConjureElemental(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
+        if (Program.Rng.DieRoll(6) > 3)
         {
-            if (Program.Rng.DieRoll(6) > 3)
-            {
-                if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new ElementalMonsterSelector(), false))
-                {
-                    SaveGame.MsgPrint("No-one ever turns up.");
-                }
-            }
-            else if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new ElementalMonsterSelector()))
-            {
-                SaveGame.MsgPrint("You fail to control the elemental creature!");
-            }
-            else
+            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new ElementalMonsterSelector(), false))
             {
                 SaveGame.MsgPrint("No-one ever turns up.");
             }
         }
-
-        public override string Name => "Conjure Elemental";
-        
-        protected override string? Info()
+        else if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new ElementalMonsterSelector()))
         {
-            return "control 50%";
+            SaveGame.MsgPrint("You fail to control the elemental creature!");
         }
+        else
+        {
+            SaveGame.MsgPrint("No-one ever turns up.");
+        }
+    }
+
+    public override string Name => "Conjure Elemental";
+    
+    protected override string? Info()
+    {
+        return "control 50%";
     }
 }

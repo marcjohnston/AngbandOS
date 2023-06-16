@@ -1,40 +1,39 @@
-namespace AngbandOS.Core.ItemCategories
+namespace AngbandOS.Core.ItemCategories;
+
+[Serializable]
+internal class AppleJuicePotionItemFactory : PotionItemFactory
 {
-    [Serializable]
-    internal class AppleJuicePotionItemFactory : PotionItemFactory
+    private AppleJuicePotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
+    public override char Character => '!';
+    public override string Name => "Apple Juice";
+
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
+    public override int Cost => 1;
+    public override int Dd => 1;
+    public override int Ds => 1;
+    public override string FriendlyName => "Apple Juice";
+    public override int Pval => 250;
+    public override int? SubCategory => (int)PotionType.AppleJuice;
+    public override int Weight => 4;
+    public override bool Quaff(SaveGame saveGame)
     {
-        private AppleJuicePotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
-        public override char Character => '!';
-        public override string Name => "Apple Juice";
-
-        public override int[] Chance => new int[] { 1, 0, 0, 0 };
-        public override int Cost => 1;
-        public override int Dd => 1;
-        public override int Ds => 1;
-        public override string FriendlyName => "Apple Juice";
-        public override int Pval => 250;
-        public override int? SubCategory => (int)PotionType.AppleJuice;
-        public override int Weight => 4;
-        public override bool Quaff(SaveGame saveGame)
-        {
-            // Apple juice has no effect
-            saveGame.MsgPrint("You feel less thirsty.");
-            return true;
-        }
-
-        /// <summary>
-        /// Returns null because the Apple Juice potion is always a light brown flavour.
-        /// </summary>
-        public override IEnumerable<Flavour>? GetFlavourRepository()
-        {
-            Flavour = SaveGame.SingletonRepository.PotionFlavours.Get<LightBrownPotionFlavour>();
-            return null;
-        }
-
-        public override bool Smash(SaveGame saveGame, int who, int y, int x)
-        {
-            return true;
-        }
-        public override Item CreateItem() => new AppleJuicePotionItem(SaveGame);
+        // Apple juice has no effect
+        saveGame.MsgPrint("You feel less thirsty.");
+        return true;
     }
+
+    /// <summary>
+    /// Returns null because the Apple Juice potion is always a light brown flavour.
+    /// </summary>
+    public override IEnumerable<Flavour>? GetFlavourRepository()
+    {
+        Flavour = SaveGame.SingletonRepository.PotionFlavours.Get<LightBrownPotionFlavour>();
+        return null;
+    }
+
+    public override bool Smash(SaveGame saveGame, int who, int y, int x)
+    {
+        return true;
+    }
+    public override Item CreateItem() => new AppleJuicePotionItem(SaveGame);
 }

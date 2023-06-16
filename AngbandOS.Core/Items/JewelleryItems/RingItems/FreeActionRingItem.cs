@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class FreeActionRingItem : RingItem
-    {
-        public FreeActionRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<FreeActionRingItemFactory>()) { }
-    }
+internal class FreeActionRingItem : RingItem
+{
+    public FreeActionRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<FreeActionRingItemFactory>()) { }
 }

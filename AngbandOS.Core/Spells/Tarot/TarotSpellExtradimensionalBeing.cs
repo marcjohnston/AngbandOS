@@ -6,19 +6,18 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Tarot
-{
-    [Serializable]
-    internal class TarotSpellExtradimensionalBeing : Spell
-    {
-        private TarotSpellExtradimensionalBeing(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.MsgPrint("You have turned into a Extradimensional Being.");
-            SaveGame.Player.Dna.GainMutation();
-        }
+namespace AngbandOS.Core.Spells.Tarot;
 
-        public override string Name => "Extradimensional Being";
-        
+[Serializable]
+internal class TarotSpellExtradimensionalBeing : Spell
+{
+    private TarotSpellExtradimensionalBeing(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.MsgPrint("You have turned into a Extradimensional Being.");
+        SaveGame.Player.Dna.GainMutation();
     }
+
+    public override string Name => "Extradimensional Being";
+    
 }

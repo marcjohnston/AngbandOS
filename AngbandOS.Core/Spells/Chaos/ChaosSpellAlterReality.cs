@@ -6,21 +6,20 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Chaos
+namespace AngbandOS.Core.Spells.Chaos;
+
+[Serializable]
+internal class ChaosSpellAlterReality : Spell
 {
-    [Serializable]
-    internal class ChaosSpellAlterReality : Spell
+    private ChaosSpellAlterReality(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
     {
-        private ChaosSpellAlterReality(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.MsgPrint("The world changes!");
-            SaveGame.DoCmdSaveGame(true);
-            SaveGame.NewLevelFlag = true;
-            SaveGame.CameFrom = LevelStart.StartRandom;
-        }
-
-        public override string Name => "Alter Reality";
-
+        SaveGame.MsgPrint("The world changes!");
+        SaveGame.DoCmdSaveGame(true);
+        SaveGame.NewLevelFlag = true;
+        SaveGame.CameFrom = LevelStart.StartRandom;
     }
+
+    public override string Name => "Alter Reality";
+
 }

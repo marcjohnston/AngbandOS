@@ -1,13 +1,12 @@
-﻿namespace AngbandOS.Core.SpellResistantDetections
+﻿namespace AngbandOS.Core.SpellResistantDetections;
+
+internal class NethSpellResistantDetection : SpellResistantDetection
 {
-    internal class NethSpellResistantDetection : SpellResistantDetection
+    public override void Learn(SaveGame saveGame, Monster monster)
     {
-        public override void Learn(SaveGame saveGame, Monster monster)
+        if (saveGame.Player.HasNetherResistance)
         {
-            if (saveGame.Player.HasNetherResistance)
-            {
-                monster.SmResNeth = true;
-            }
+            monster.SmResNeth = true;
         }
     }
 }

@@ -6,23 +6,22 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Corporeal
-{
-    [Serializable]
-    internal class CorporealSpellHorrificVisage : Spell
-    {
-        private CorporealSpellHorrificVisage(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            if (!SaveGame.GetDirectionWithAim(out int dir))
-            {
-                return;
-            }
-            SaveGame.FearMonster(dir, SaveGame.Player.Level);
-            SaveGame.StunMonster(dir, SaveGame.Player.Level);
-        }
+namespace AngbandOS.Core.Spells.Corporeal;
 
-        public override string Name => "Horrific Visage";
-        
+[Serializable]
+internal class CorporealSpellHorrificVisage : Spell
+{
+    private CorporealSpellHorrificVisage(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
+        {
+            return;
+        }
+        SaveGame.FearMonster(dir, SaveGame.Player.Level);
+        SaveGame.StunMonster(dir, SaveGame.Player.Level);
     }
+
+    public override string Name => "Horrific Visage";
+    
 }

@@ -1,13 +1,12 @@
-﻿namespace AngbandOS.Core.SpellResistantDetections
+﻿namespace AngbandOS.Core.SpellResistantDetections;
+
+internal class FreeSpellResistantDetection : SpellResistantDetection
 {
-    internal class FreeSpellResistantDetection : SpellResistantDetection
+    public override void Learn(SaveGame saveGame, Monster monster)
     {
-        public override void Learn(SaveGame saveGame, Monster monster)
+        if (saveGame.Player.HasFreeAction)
         {
-            if (saveGame.Player.HasFreeAction)
-            {
-                monster.SmImmFree = true;
-            }
+            monster.SmImmFree = true;
         }
     }
 }

@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class TeleportationAmuletJeweleryItem : AmuletJeweleryItem
-    {
-        public TeleportationAmuletJeweleryItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<TeleportationAmuletJeweleryItemFactory>()) { }
-    }
+internal class TeleportationAmuletJeweleryItem : AmuletJeweleryItem
+{
+    public TeleportationAmuletJeweleryItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<TeleportationAmuletJeweleryItemFactory>()) { }
 }

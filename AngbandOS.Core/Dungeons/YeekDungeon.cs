@@ -8,21 +8,20 @@
 
 using static AngbandOS.Core.CelephaisDungeon;
 
-namespace AngbandOS.Core
-{
+namespace AngbandOS.Core;
+
 [Serializable]
-    internal class YeekDungeon : Dungeon
-    {
-        private YeekDungeon(SaveGame saveGame) : base(saveGame) { }
-        public override int BaseOffset => 2;
-        public override int MaxLevel => 8;
-        public override MonsterSelector? Bias => new YeekMonsterSelector();
-        public override string FirstGuardian => "Orfax, Son of Boldor";
-        public override string SecondGuardian => "Boldor, King of the Yeeks";
-        public override int FirstLevel => 7;
-        public override int SecondLevel => 8;
-        public override string Name => "the Yeek King's Lair";
-        public override string Shortname => "Yeek Lair";
-        public override string MapSymbol => "y";
-    }
+internal class YeekDungeon : Dungeon
+{
+    private YeekDungeon(SaveGame saveGame) : base(saveGame) { }
+    public override int BaseOffset => 2;
+    public override int MaxLevel => 8;
+    public override MonsterSelector? Bias => new YeekMonsterSelector();
+    public override string FirstGuardian => "Orfax, Son of Boldor";
+    public override string SecondGuardian => "Boldor, King of the Yeeks";
+    public override int FirstLevel => 7;
+    public override int SecondLevel => 8;
+    public override string Name => "the Yeek King's Lair";
+    public override string Shortname => "Yeek Lair";
+    public override string MapSymbol => "y";
 }

@@ -6,72 +6,71 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Projection
+namespace AngbandOS.Core.Projection;
+
+[Serializable]
+internal class TeleportAwayAllProjectile : Projectile
 {
-    [Serializable]
-    internal class TeleportAwayAllProjectile : Projectile
+    private TeleportAwayAllProjectile(SaveGame saveGame) : base(saveGame) { }
+
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<PinkBulletProjectileGraphic>();
+
+    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<PinkBulletProjectileGraphic>();
+
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<PinkSwirlAnimation>();
+
+    protected override bool ProjectileAngersMonster(Monster mPtr)
     {
-        private TeleportAwayAllProjectile(SaveGame saveGame) : base(saveGame) { }
+        return false;
+    }
 
-        protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<PinkBulletProjectileGraphic>();
-
-        protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<PinkBulletProjectileGraphic>();
-
-        protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<PinkSwirlAnimation>();
-
-        protected override bool ProjectileAngersMonster(Monster mPtr)
+    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
+    {
+        MonsterRace rPtr = mPtr.Race;
+        bool seen = mPtr.IsVisible;
+        bool obvious = false;
+        int doDist = 0;
+        string? note = null;
+        bool resistsTele = false;
+        if (rPtr.ResistTeleport)
         {
-            return false;
-        }
-
-        protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-        {
-            MonsterRace rPtr = mPtr.Race;
-            bool seen = mPtr.IsVisible;
-            bool obvious = false;
-            int doDist = 0;
-            string? note = null;
-            bool resistsTele = false;
-            if (rPtr.ResistTeleport)
-            {
-                if (rPtr.Unique)
-                {
-                    if (seen)
-                    {
-                        rPtr.Knowledge.Characteristics.ResistTeleport = true;
-                    }
-                    note = " is unaffected!";
-                    resistsTele = true;
-                }
-                else if (rPtr.Level > Program.Rng.DieRoll(100))
-                {
-                    if (seen)
-                    {
-                        rPtr.Knowledge.Characteristics.ResistTeleport = true;
-                    }
-                    note = " resists!";
-                    resistsTele = true;
-                }
-            }
-            if (!resistsTele)
+            if (rPtr.Unique)
             {
                 if (seen)
                 {
-                    obvious = true;
+                    rPtr.Knowledge.Characteristics.ResistTeleport = true;
                 }
-                doDist = dam;
+                note = " is unaffected!";
+                resistsTele = true;
             }
-            if (doDist != 0)
+            else if (rPtr.Level > Program.Rng.DieRoll(100))
             {
                 if (seen)
                 {
-                    obvious = true;
+                    rPtr.Knowledge.Characteristics.ResistTeleport = true;
                 }
-                note = " disappears!";
-                mPtr.TeleportAway(SaveGame, doDist);
+                note = " resists!";
+                resistsTele = true;
             }
-            ApplyProjectileDamageToMonster(who, mPtr, 0, note);
-            return obvious;
         }
+        if (!resistsTele)
+        {
+            if (seen)
+            {
+                obvious = true;
+            }
+            doDist = dam;
+        }
+        if (doDist != 0)
+        {
+            if (seen)
+            {
+                obvious = true;
+            }
+            note = " disappears!";
+            mPtr.TeleportAway(SaveGame, doDist);
+        }
+        ApplyProjectileDamageToMonster(who, mPtr, 0, note);
+        return obvious;
     }
 }

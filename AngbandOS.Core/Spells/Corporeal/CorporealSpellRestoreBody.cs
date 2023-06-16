@@ -6,23 +6,22 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Corporeal
-{
-    [Serializable]
-    internal class CorporealSpellRestoreBody : Spell
-    {
-        private CorporealSpellRestoreBody(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.Player.TryRestoringAbilityScore(Ability.Strength);
-            SaveGame.Player.TryRestoringAbilityScore(Ability.Intelligence);
-            SaveGame.Player.TryRestoringAbilityScore(Ability.Wisdom);
-            SaveGame.Player.TryRestoringAbilityScore(Ability.Dexterity);
-            SaveGame.Player.TryRestoringAbilityScore(Ability.Constitution);
-            SaveGame.Player.TryRestoringAbilityScore(Ability.Charisma);
-        }
+namespace AngbandOS.Core.Spells.Corporeal;
 
-        public override string Name => "Restore Body";
-        
+[Serializable]
+internal class CorporealSpellRestoreBody : Spell
+{
+    private CorporealSpellRestoreBody(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.Player.TryRestoringAbilityScore(Ability.Strength);
+        SaveGame.Player.TryRestoringAbilityScore(Ability.Intelligence);
+        SaveGame.Player.TryRestoringAbilityScore(Ability.Wisdom);
+        SaveGame.Player.TryRestoringAbilityScore(Ability.Dexterity);
+        SaveGame.Player.TryRestoringAbilityScore(Ability.Constitution);
+        SaveGame.Player.TryRestoringAbilityScore(Ability.Charisma);
     }
+
+    public override string Name => "Restore Body";
+    
 }

@@ -1,15 +1,14 @@
-﻿namespace AngbandOS.Core.StoreCommands
+﻿namespace AngbandOS.Core.StoreCommands;
+
+[Serializable]
+internal class CarriageReturnStoreCommand : BaseStoreCommand
 {
-    [Serializable]
-    internal class CarriageReturnStoreCommand : BaseStoreCommand
+    private CarriageReturnStoreCommand(SaveGame saveGame) : base(saveGame) { }
+    public override char Key => '\r';
+
+    public override string Description => "";
+
+    public override void Execute(StoreCommandEvent storeCommandEvent)
     {
-        private CarriageReturnStoreCommand(SaveGame saveGame) : base(saveGame) { }
-        public override char Key => '\r';
-
-        public override string Description => "";
-
-        public override void Execute(StoreCommandEvent storeCommandEvent)
-        {
-        }
     }
 }

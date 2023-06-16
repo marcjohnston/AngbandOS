@@ -1,70 +1,69 @@
-﻿namespace AngbandOS.Core.MonsterSpells
+﻿namespace AngbandOS.Core.MonsterSpells;
+
+[Serializable]
+internal class SlowMonsterSpell : MonsterSpell
 {
-    [Serializable]
-    internal class SlowMonsterSpell : MonsterSpell
+    public override bool IsIntelligent => true;
+    public override bool RestrictsFreeAction => true;
+    public override bool Annoys => true;
+
+    public override string? VsPlayerBlindMessage => $"Someone drains power from your muscles!";
+    public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} drains power from your muscles!";
+    public override string? VsMonsterSeenMessage(Monster monster, Monster target)
     {
-        public override bool IsIntelligent => true;
-        public override bool RestrictsFreeAction => true;
-        public override bool Annoys => true;
+        string monsterName = target.Name;
+        string targetName = target.Name;
+        string it = (targetName == "it" ? "s" : "'s");
+        return $"{monsterName} drains power from {targetName}{it} muscles.";
+    }
 
-        public override string? VsPlayerBlindMessage => $"Someone drains power from your muscles!";
-        public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} drains power from your muscles!";
-        public override string? VsMonsterSeenMessage(Monster monster, Monster target)
+    public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
+    {
+        string monsterName = monster.Name;
+
+        if (saveGame.Player.HasFreeAction)
         {
-            string monsterName = target.Name;
-            string targetName = target.Name;
-            string it = (targetName == "it" ? "s" : "'s");
-            return $"{monsterName} drains power from {targetName}{it} muscles.";
+            saveGame.MsgPrint("You are unaffected!");
         }
-
-        public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
+        else if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
         {
-            string monsterName = monster.Name;
-
-            if (saveGame.Player.HasFreeAction)
-            {
-                saveGame.MsgPrint("You are unaffected!");
-            }
-            else if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
-            {
-                saveGame.MsgPrint("You resist the effects!");
-            }
-            else
-            {
-                saveGame.Player.TimedSlow.AddTimer(Program.Rng.RandomLessThan(4) + 4);
-            }
-            saveGame.Level.UpdateSmartLearn(monster, new FreeSpellResistantDetection());
+            saveGame.MsgPrint("You resist the effects!");
         }
-
-        public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
+        else
         {
-            int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-            bool blind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
-            bool seeTarget = !blind && target.IsVisible;
-            MonsterRace targetRace = target.Race;
-            string targetName = target.Name;
+            saveGame.Player.TimedSlow.AddTimer(Program.Rng.RandomLessThan(4) + 4);
+        }
+        saveGame.Level.UpdateSmartLearn(monster, new FreeSpellResistantDetection());
+    }
 
-            if (targetRace.Unique)
+    public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
+    {
+        int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
+        bool blind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool seeTarget = !blind && target.IsVisible;
+        MonsterRace targetRace = target.Race;
+        string targetName = target.Name;
+
+        if (targetRace.Unique)
+        {
+            if (seeTarget)
             {
-                if (seeTarget)
-                {
-                    saveGame.MsgPrint($"{targetName} is unaffected.");
-                }
+                saveGame.MsgPrint($"{targetName} is unaffected.");
             }
-            else if (targetRace.Level > Program.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
+        }
+        else if (targetRace.Level > Program.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
+        {
+            if (seeTarget)
             {
-                if (seeTarget)
-                {
-                    saveGame.MsgPrint($"{targetName} is unaffected.");
-                }
+                saveGame.MsgPrint($"{targetName} is unaffected.");
             }
-            else
+        }
+        else
+        {
+            target.Speed -= 10;
+            if (seeTarget)
             {
-                target.Speed -= 10;
-                if (seeTarget)
-                {
-                    saveGame.MsgPrint($"{targetName} starts moving slower.");
-                }
+                saveGame.MsgPrint($"{targetName} starts moving slower.");
             }
         }
     }

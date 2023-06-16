@@ -5,12 +5,11 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.Core
+namespace AngbandOS.Core;
+
+internal static class CloakType
 {
-    internal static class CloakType
-    {
-        public const int SvCloak = 1;
-        public const int SvElvenCloak = 2;
-        public const int SvShadowCloak = 6;
-    }
+    public const int SvCloak = 1;
+    public const int SvElvenCloak = 2;
+    public const int SvShadowCloak = 6;
 }

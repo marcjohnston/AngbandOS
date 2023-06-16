@@ -1,36 +1,35 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class WoodenTorchLightSourceItem : LightSourceItem
+internal class WoodenTorchLightSourceItem : LightSourceItem
+{
+    public WoodenTorchLightSourceItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<WoodenTorchLightSourceItemFactory>()) { }
+
+    /// <summary>
+    /// Returns true because a torch can be used as fuel for another torch.
+    /// </summary>
+    public override bool IsFuelForTorch => true;
+
+    /// <summary>
+    /// Returns an intensity of light provided by the torch.  1, if the torch has turns remaining, plus an optional 3
+    /// if the torch is an artifact.
+    /// </summary>
+    /// <param name="oPtr"></param>
+    /// <returns></returns>
+    public override int CalculateTorch()
     {
-        public WoodenTorchLightSourceItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<WoodenTorchLightSourceItemFactory>()) { }
+        return base.CalculateTorch() + TypeSpecificValue > 0 ? 1 : 0;
+    }
 
-        /// <summary>
-        /// Returns true because a torch can be used as fuel for another torch.
-        /// </summary>
-        public override bool IsFuelForTorch => true;
-
-        /// <summary>
-        /// Returns an intensity of light provided by the torch.  1, if the torch has turns remaining, plus an optional 3
-        /// if the torch is an artifact.
-        /// </summary>
-        /// <param name="oPtr"></param>
-        /// <returns></returns>
-        public override int CalculateTorch()
+    protected override void ApplyMagic(int level, int power, Store? store)
+    {
+        if (store != null)
         {
-            return base.CalculateTorch() + TypeSpecificValue > 0 ? 1 : 0;
+            TypeSpecificValue = Constants.FuelTorch / 2;
         }
-
-        protected override void ApplyMagic(int level, int power, Store? store)
+        else if (TypeSpecificValue != 0)
         {
-            if (store != null)
-            {
-                TypeSpecificValue = Constants.FuelTorch / 2;
-            }
-            else if (TypeSpecificValue != 0)
-            {
-                TypeSpecificValue = Program.Rng.DieRoll(TypeSpecificValue);
-            }
+            TypeSpecificValue = Program.Rng.DieRoll(TypeSpecificValue);
         }
     }
 }

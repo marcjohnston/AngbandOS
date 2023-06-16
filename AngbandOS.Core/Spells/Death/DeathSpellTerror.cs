@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Death
-{
-    [Serializable]
-    internal class DeathSpellTerror : Spell
-    {
-        private DeathSpellTerror(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.TurnMonsters(30 + SaveGame.Player.Level);
-        }
+namespace AngbandOS.Core.Spells.Death;
 
-        public override string Name => "Terror";
-        
+[Serializable]
+internal class DeathSpellTerror : Spell
+{
+    private DeathSpellTerror(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.TurnMonsters(30 + SaveGame.Player.Level);
     }
+
+    public override string Name => "Terror";
+    
 }

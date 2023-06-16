@@ -8,25 +8,24 @@
 
 using static AngbandOS.Core.CelephaisDungeon;
 
-namespace AngbandOS.Core
-{
+namespace AngbandOS.Core;
+
 [Serializable]
-    internal class KothDungeon : Dungeon
-    {
-        private KothDungeon(SaveGame saveGame) : base(saveGame) { }
-        public override int BaseOffset => 40;
-        /// <summary>
-        /// Returns true because this dungeon is a tower.
-        /// </summary>
-        public override bool Tower => true;
-        public override int MaxLevel => 20;
-        public override MonsterSelector? Bias => new CthuloidMonsterSelector();
-        public override string FirstGuardian => "Father Dagon";
-        public override string SecondGuardian => "Tulzscha";
-        public override int FirstLevel => 1;
-        public override int SecondLevel => 20;
-        public override string Name => "the Tower of Koth";
-        public override string Shortname => "Koth";
-        public override string MapSymbol => "k";
-    }
+internal class KothDungeon : Dungeon
+{
+    private KothDungeon(SaveGame saveGame) : base(saveGame) { }
+    public override int BaseOffset => 40;
+    /// <summary>
+    /// Returns true because this dungeon is a tower.
+    /// </summary>
+    public override bool Tower => true;
+    public override int MaxLevel => 20;
+    public override MonsterSelector? Bias => new CthuloidMonsterSelector();
+    public override string FirstGuardian => "Father Dagon";
+    public override string SecondGuardian => "Tulzscha";
+    public override int FirstLevel => 1;
+    public override int SecondLevel => 20;
+    public override string Name => "the Tower of Koth";
+    public override string Shortname => "Koth";
+    public override string MapSymbol => "k";
 }

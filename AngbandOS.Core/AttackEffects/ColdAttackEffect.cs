@@ -6,23 +6,22 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.AttackEffects
+namespace AngbandOS.Core.AttackEffects;
+
+[Serializable]
+internal class ColdAttackEffect : BaseAttackEffect
 {
-    [Serializable]
-    internal class ColdAttackEffect : BaseAttackEffect
+    public override int Power => 10;
+    public override string Description => "freeze";
+    public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
-        public override int Power => 10;
-        public override string Description => "freeze";
-        public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
-        {
-            obvious = true;
-            saveGame.MsgPrint("You are covered with frost!");
-            saveGame.ColdDam(damage, monsterDescription);
-            saveGame.Level.UpdateSmartLearn(monster, new ColdSpellResistantDetection());
-        }
-        public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
-        {
-            pt = saveGame.SingletonRepository.Projectiles.Get<ColdProjectile>();
-        }
+        obvious = true;
+        saveGame.MsgPrint("You are covered with frost!");
+        saveGame.ColdDam(damage, monsterDescription);
+        saveGame.Level.UpdateSmartLearn(monster, new ColdSpellResistantDetection());
+    }
+    public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
+    {
+        pt = saveGame.SingletonRepository.Projectiles.Get<ColdProjectile>();
     }
 }

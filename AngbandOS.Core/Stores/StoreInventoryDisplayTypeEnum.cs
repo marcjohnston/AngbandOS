@@ -1,9 +1,8 @@
-﻿namespace AngbandOS.Core.Stores
+﻿namespace AngbandOS.Core.Stores;
+
+internal enum StoreInventoryDisplayTypeEnum
 {
-    internal enum StoreInventoryDisplayTypeEnum
-    {
-        DoNotShowInventory,
-        InventoryWithPrice,
-        InventoryWithoutPrice
-    }
+    DoNotShowInventory,
+    InventoryWithPrice,
+    InventoryWithoutPrice
 }

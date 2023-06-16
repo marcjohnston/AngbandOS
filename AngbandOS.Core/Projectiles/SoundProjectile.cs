@@ -6,144 +6,143 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Projection
+namespace AngbandOS.Core.Projection;
+
+[Serializable]
+internal class SoundProjectile : Projectile
 {
-    [Serializable]
-    internal class SoundProjectile : Projectile
+    private SoundProjectile(SaveGame saveGame) : base(saveGame) { }
+
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<GoldSplatProjectileGraphic>();
+
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<GoldCloudAnimation>();
+
+    protected override bool AffectItem(int who, int y, int x)
     {
-        private SoundProjectile(SaveGame saveGame) : base(saveGame) { }
-
-        protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<GoldSplatProjectileGraphic>();
-
-        protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<GoldCloudAnimation>();
-
-        protected override bool AffectItem(int who, int y, int x)
+        GridTile cPtr = SaveGame.Level.Grid[y][x];
+        int nextOIdx;
+        bool obvious = false;
+        string oName = "";
+        foreach (Item oPtr in cPtr.Items)
         {
-            GridTile cPtr = SaveGame.Level.Grid[y][x];
-            int nextOIdx;
-            bool obvious = false;
-            string oName = "";
-            foreach (Item oPtr in cPtr.Items)
+            bool isArt = false;
+            bool plural = false;
+            bool doKill = false;
+            string noteKill = null;
+            if (oPtr.Count > 1)
             {
-                bool isArt = false;
-                bool plural = false;
-                bool doKill = false;
-                string noteKill = null;
-                if (oPtr.Count > 1)
-                {
-                    plural = true;
-                }
-                if (oPtr.FixedArtifact != null || string.IsNullOrEmpty(oPtr.RandartName) == false)
-                {
-                    isArt = true;
-                }
-                if (oPtr.HatesCold())
-                {
-                    noteKill = plural ? " shatter!" : " shatters!";
-                    doKill = true;
-                }
-                if (!doKill)
-                {
-                    continue;
-                }
-                if (oPtr.Marked)
-                {
-                    obvious = true;
-                    oName = oPtr.Description(false, 0);
-                }
-                if (isArt)
-                {
-                    if (oPtr.Marked)
-                    {
-                        string s = plural ? "are" : "is";
-                        SaveGame.MsgPrint($"The {oName} {s} unaffected!");
-                    }
-                }
-                else
-                {
-                    if (oPtr.Marked && string.IsNullOrEmpty(noteKill))
-                    {
-                        SaveGame.MsgPrint($"The {oName}{noteKill}");
-                    }
-                    bool isPotion = oPtr.Factory.CategoryEnum == ItemTypeEnum.Potion;
-                    SaveGame.Level.DeleteObject(oPtr);
-                    if (isPotion)
-                    {
-                        PotionItemFactory potion = (PotionItemFactory)oPtr.Factory;
-                        potion.Smash(SaveGame, who, y, x);
-                    }
-                    SaveGame.Level.RedrawSingleLocation(y, x);
-                }
+                plural = true;
             }
-            return obvious;
-        }
-
-        protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-        {
-            MonsterRace rPtr = mPtr.Race;
-            bool seen = mPtr.IsVisible;
-            bool obvious = false;
-            string? note = null;
-            if (seen)
+            if (oPtr.FixedArtifact != null || string.IsNullOrEmpty(oPtr.RandartName) == false)
+            {
+                isArt = true;
+            }
+            if (oPtr.HatesCold())
+            {
+                noteKill = plural ? " shatter!" : " shatters!";
+                doKill = true;
+            }
+            if (!doKill)
+            {
+                continue;
+            }
+            if (oPtr.Marked)
             {
                 obvious = true;
+                oName = oPtr.Description(false, 0);
             }
-            int doStun = (10 + Program.Rng.DieRoll(15) + r) / (r + 1);
-            if (rPtr.BreatheSound)
+            if (isArt)
             {
-                note = " resists.";
-                dam *= 2;
-                dam /= Program.Rng.DieRoll(6) + 6;
-            }
-            if (doStun != 0 && !rPtr.BreatheSound && !rPtr.BreatheForce)
-            {
-                int tmp;
-                if (mPtr.StunLevel != 0)
+                if (oPtr.Marked)
                 {
-                    note = " is more dazed.";
-                    tmp = mPtr.StunLevel + (doStun / 2);
+                    string s = plural ? "are" : "is";
+                    SaveGame.MsgPrint($"The {oName} {s} unaffected!");
                 }
-                else
-                {
-                    note = " is dazed.";
-                    tmp = doStun;
-                }
-                mPtr.StunLevel = tmp < 200 ? tmp : 200;
-            }
-            ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-            return obvious;
-        }
-
-        protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
-        {
-            bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
-            if (dam > 1600)
-            {
-                dam = 1600;
-            }
-            dam = (dam + r) / (r + 1);
-            Monster mPtr = SaveGame.Level.Monsters[who];
-            string killer = mPtr.IndefiniteVisibleName;
-            if (blind)
-            {
-                SaveGame.MsgPrint("You are hit by a loud noise!");
-            }
-            if (SaveGame.Player.HasSoundResistance)
-            {
-                dam *= 5;
-                dam /= Program.Rng.DieRoll(6) + 6;
             }
             else
             {
-                int kk = Program.Rng.DieRoll(dam > 90 ? 35 : (dam / 3) + 5);
-                SaveGame.Player.TimedStun.AddTimer(kk);
+                if (oPtr.Marked && string.IsNullOrEmpty(noteKill))
+                {
+                    SaveGame.MsgPrint($"The {oName}{noteKill}");
+                }
+                bool isPotion = oPtr.Factory.CategoryEnum == ItemTypeEnum.Potion;
+                SaveGame.Level.DeleteObject(oPtr);
+                if (isPotion)
+                {
+                    PotionItemFactory potion = (PotionItemFactory)oPtr.Factory;
+                    potion.Smash(SaveGame, who, y, x);
+                }
+                SaveGame.Level.RedrawSingleLocation(y, x);
             }
-            if (!SaveGame.Player.HasSoundResistance || Program.Rng.DieRoll(13) == 1)
-            {
-                SaveGame.Player.InvenDamage(SaveGame.SetColdDestroy, 2);
-            }
-            SaveGame.Player.TakeHit(dam, killer);
-            return true;
         }
+        return obvious;
+    }
+
+    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
+    {
+        MonsterRace rPtr = mPtr.Race;
+        bool seen = mPtr.IsVisible;
+        bool obvious = false;
+        string? note = null;
+        if (seen)
+        {
+            obvious = true;
+        }
+        int doStun = (10 + Program.Rng.DieRoll(15) + r) / (r + 1);
+        if (rPtr.BreatheSound)
+        {
+            note = " resists.";
+            dam *= 2;
+            dam /= Program.Rng.DieRoll(6) + 6;
+        }
+        if (doStun != 0 && !rPtr.BreatheSound && !rPtr.BreatheForce)
+        {
+            int tmp;
+            if (mPtr.StunLevel != 0)
+            {
+                note = " is more dazed.";
+                tmp = mPtr.StunLevel + (doStun / 2);
+            }
+            else
+            {
+                note = " is dazed.";
+                tmp = doStun;
+            }
+            mPtr.StunLevel = tmp < 200 ? tmp : 200;
+        }
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        return obvious;
+    }
+
+    protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
+    {
+        bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        if (dam > 1600)
+        {
+            dam = 1600;
+        }
+        dam = (dam + r) / (r + 1);
+        Monster mPtr = SaveGame.Level.Monsters[who];
+        string killer = mPtr.IndefiniteVisibleName;
+        if (blind)
+        {
+            SaveGame.MsgPrint("You are hit by a loud noise!");
+        }
+        if (SaveGame.Player.HasSoundResistance)
+        {
+            dam *= 5;
+            dam /= Program.Rng.DieRoll(6) + 6;
+        }
+        else
+        {
+            int kk = Program.Rng.DieRoll(dam > 90 ? 35 : (dam / 3) + 5);
+            SaveGame.Player.TimedStun.AddTimer(kk);
+        }
+        if (!SaveGame.Player.HasSoundResistance || Program.Rng.DieRoll(13) == 1)
+        {
+            SaveGame.Player.InvenDamage(SaveGame.SetColdDestroy, 2);
+        }
+        SaveGame.Player.TakeHit(dam, killer);
+        return true;
     }
 }

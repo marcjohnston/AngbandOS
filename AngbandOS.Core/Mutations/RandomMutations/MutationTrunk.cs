@@ -6,32 +6,31 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.RandomMutations
+namespace AngbandOS.Core.Mutations.RandomMutations;
+
+[Serializable]
+internal class MutationTrunk : Mutation
 {
-    [Serializable]
-    internal class MutationTrunk : Mutation
+    public override void Initialize()
     {
-        public override void Initialize()
-        {
-            Frequency = 2;
-            GainMessage = "Your nose grows into an elephant-like trunk.";
-            HaveMessage = "You have an elephantine trunk (dam 1d4).";
-            LoseMessage = "Your nose returns to a normal length.";
-            Group = MutationGroup.Mouth;
-            DamageDiceSize = 1;
-            DamageDiceNumber = 4;
-            EquivalentWeaponWeight = 35;
-            AttackDescription = "trunk";
-        }
+        Frequency = 2;
+        GainMessage = "Your nose grows into an elephant-like trunk.";
+        HaveMessage = "You have an elephantine trunk (dam 1d4).";
+        LoseMessage = "Your nose returns to a normal length.";
+        Group = MutationGroup.Mouth;
+        DamageDiceSize = 1;
+        DamageDiceNumber = 4;
+        EquivalentWeaponWeight = 35;
+        AttackDescription = "trunk";
+    }
 
-        public override void OnGain(Genome genome)
-        {
-            genome.NaturalAttacks.Add(this);
-        }
+    public override void OnGain(Genome genome)
+    {
+        genome.NaturalAttacks.Add(this);
+    }
 
-        public override void OnLose(Genome genome)
-        {
-            genome.NaturalAttacks.Remove(this);
-        }
+    public override void OnLose(Genome genome)
+    {
+        genome.NaturalAttacks.Remove(this);
     }
 }

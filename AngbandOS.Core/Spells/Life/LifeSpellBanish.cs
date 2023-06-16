@@ -6,21 +6,20 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Life
-{
-    [Serializable]
-    internal class LifeSpellBanish : Spell
-    {
-        private LifeSpellBanish(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            if (SaveGame.BanishEvil(100))
-            {
-                SaveGame.MsgPrint("The power of your god banishes evil!");
-            }
-        }
+namespace AngbandOS.Core.Spells.Life;
 
-        public override string Name => "Banish";
-        
+[Serializable]
+internal class LifeSpellBanish : Spell
+{
+    private LifeSpellBanish(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        if (SaveGame.BanishEvil(100))
+        {
+            SaveGame.MsgPrint("The power of your god banishes evil!");
+        }
     }
+
+    public override string Name => "Banish";
+    
 }

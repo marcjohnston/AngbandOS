@@ -6,19 +6,18 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.InventorySlots
+namespace AngbandOS.Core.InventorySlots;
+
+[Serializable]
+internal class DiggerInventorySlot : EquipmentInventorySlot
 {
-    [Serializable]
-    internal class DiggerInventorySlot : EquipmentInventorySlot
-    {
-        private DiggerInventorySlot(SaveGame saveGame) : base(saveGame) { }
-        public override int[] InventorySlots => new int[] { InventorySlot.Digger };
-        public override string Label(int index) => "c";
-        public override string Label(Item oPtr) => "c";
-        public override string MentionUse(int? index) => "Digging with";
-        public override string DescribeWieldLocation(int index) => "carrying in your pack";
-        public override string DescribeItemLocation(Item oPtr) => "carrying in your pack";
-        public override string WieldPhrase => "You are digging with";
-        public override int SortOrder => 3;
-    }
+    private DiggerInventorySlot(SaveGame saveGame) : base(saveGame) { }
+    public override int[] InventorySlots => new int[] { InventorySlot.Digger };
+    public override string Label(int index) => "c";
+    public override string Label(Item oPtr) => "c";
+    public override string MentionUse(int? index) => "Digging with";
+    public override string DescribeWieldLocation(int index) => "carrying in your pack";
+    public override string DescribeItemLocation(Item oPtr) => "carrying in your pack";
+    public override string WieldPhrase => "You are digging with";
+    public override int SortOrder => 3;
 }

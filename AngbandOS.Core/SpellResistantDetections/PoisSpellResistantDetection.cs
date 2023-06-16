@@ -1,17 +1,16 @@
-﻿namespace AngbandOS.Core.SpellResistantDetections
+﻿namespace AngbandOS.Core.SpellResistantDetections;
+
+internal class PoisSpellResistantDetection : SpellResistantDetection
 {
-    internal class PoisSpellResistantDetection : SpellResistantDetection
+    public override void Learn(SaveGame saveGame, Monster monster)
     {
-        public override void Learn(SaveGame saveGame, Monster monster)
+        if (saveGame.Player.HasPoisonResistance)
         {
-            if (saveGame.Player.HasPoisonResistance)
-            {
-                monster.SmResPois = true;
-            }
-            if (saveGame.Player.TimedPoisonResistance.TurnsRemaining != 0)
-            {
-                monster.SmOppPois = true;
-            }
+            monster.SmResPois = true;
+        }
+        if (saveGame.Player.TimedPoisonResistance.TurnsRemaining != 0)
+        {
+            monster.SmOppPois = true;
         }
     }
 }

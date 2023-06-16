@@ -6,34 +6,33 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.ActiveMutations
+namespace AngbandOS.Core.Mutations.ActiveMutations;
+
+[Serializable]
+internal class MutationRadiation : Mutation
 {
-    [Serializable]
-    internal class MutationRadiation : Mutation
+    public override void Activate(SaveGame saveGame)
     {
-        public override void Activate(SaveGame saveGame)
+        if (!saveGame.CheckIfRacialPowerWorks(15, 15, Ability.Constitution, 14))
         {
-            if (!saveGame.CheckIfRacialPowerWorks(15, 15, Ability.Constitution, 14))
-            {
-                return;
-            }
-            saveGame.MsgPrint("Radiation flows from your body!");
-            saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<NukeProjectile>(), 0, saveGame.Player.Level * 2, 3 + (saveGame.Player.Level / 20));
+            return;
         }
+        saveGame.MsgPrint("Radiation flows from your body!");
+        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<NukeProjectile>(), 0, saveGame.Player.Level * 2, 3 + (saveGame.Player.Level / 20));
+    }
 
-        public override string ActivationSummary(int lvl)
-        {
-            return lvl < 15
-                ? "produce radiation   (unusable until level 15)"
-                : "produce radiation   (cost 15, CON based)";
-        }
+    public override string ActivationSummary(int lvl)
+    {
+        return lvl < 15
+            ? "produce radiation   (unusable until level 15)"
+            : "produce radiation   (cost 15, CON based)";
+    }
 
-        public override void Initialize()
-        {
-            Frequency = 2;
-            GainMessage = "You start emitting hard radiation.";
-            HaveMessage = "You can emit hard radiation at will.";
-            LoseMessage = "You stop emitting hard radiation.";
-        }
+    public override void Initialize()
+    {
+        Frequency = 2;
+        GainMessage = "You start emitting hard radiation.";
+        HaveMessage = "You can emit hard radiation at will.";
+        LoseMessage = "You stop emitting hard radiation.";
     }
 }

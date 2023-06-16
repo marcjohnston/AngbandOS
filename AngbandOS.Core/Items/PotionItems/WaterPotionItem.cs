@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class WaterPotionItem : PotionItem
-    {
-        public WaterPotionItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<WaterPotionItemFactory>()) { }
-    }
+internal class WaterPotionItem : PotionItem
+{
+    public WaterPotionItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<WaterPotionItemFactory>()) { }
 }

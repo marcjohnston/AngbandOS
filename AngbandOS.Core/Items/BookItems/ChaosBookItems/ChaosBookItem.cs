@@ -1,9 +1,8 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal abstract class ChaosBookItem : BookItem
-    {
-        public ChaosBookItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-        public override string RealmName => "Chaos";
-    }
+internal abstract class ChaosBookItem : BookItem
+{
+    public ChaosBookItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
+    public override string RealmName => "Chaos";
 }

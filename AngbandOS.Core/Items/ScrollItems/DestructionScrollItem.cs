@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class DestructionScrollItem : ScrollItem
-    {
-        public DestructionScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ScrollDestruction>()) { }
-    }
+internal class DestructionScrollItem : ScrollItem
+{
+    public DestructionScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ScrollDestruction>()) { }
 }

@@ -1,96 +1,95 @@
-﻿namespace AngbandOS.Core.ArtifactBiases
+﻿namespace AngbandOS.Core.ArtifactBiases;
+
+[Serializable]
+internal class NecromanticArtifactBias : ArtifactBias
 {
-    [Serializable]
-    internal class NecromanticArtifactBias : ArtifactBias
+    private NecromanticArtifactBias(SaveGame saveGame) : base(saveGame) { }
+    public override bool ApplyRandomResistances(Item item)
     {
-        private NecromanticArtifactBias(SaveGame saveGame) : base(saveGame) { }
-        public override bool ApplyRandomResistances(Item item)
+        if (!item.RandartItemCharacteristics.ResNether)
         {
-            if (!item.RandartItemCharacteristics.ResNether)
+            item.RandartItemCharacteristics.ResNether = true;
+            if (Program.Rng.DieRoll(2) == 1)
             {
-                item.RandartItemCharacteristics.ResNether = true;
-                if (Program.Rng.DieRoll(2) == 1)
-                {
-                    return true;
-                }
+                return true;
             }
-            if (!item.RandartItemCharacteristics.ResPois)
-            {
-                item.RandartItemCharacteristics.ResPois = true;
-                if (Program.Rng.DieRoll(2) == 1)
-                {
-                    return true;
-                }
-            }
-            if (!item.RandartItemCharacteristics.ResDark)
-            {
-                item.RandartItemCharacteristics.ResDark = true;
-                if (Program.Rng.DieRoll(2) == 1)
-                {
-                    return true;
-                }
-            }
-            return false;
         }
-
-        public override bool ApplySlaying(Item item)
+        if (!item.RandartItemCharacteristics.ResPois)
         {
-            if (item.Category != ItemTypeEnum.Bow)
+            item.RandartItemCharacteristics.ResPois = true;
+            if (Program.Rng.DieRoll(2) == 1)
             {
-                if (!item.RandartItemCharacteristics.Vampiric)
-                {
-                    item.RandartItemCharacteristics.Vampiric = true;
-                    if (Program.Rng.DieRoll(2) == 1)
-                    {
-                        return true;
-                    }
-                }
-                if (!item.RandartItemCharacteristics.BrandPois && Program.Rng.DieRoll(2) == 1)
-                {
-                    item.RandartItemCharacteristics.BrandPois = true;
-                    if (Program.Rng.DieRoll(2) == 1)
-                    {
-                        return true;
-                    }
-                }
+                return true;
             }
-            return false;
         }
-
-        public override Activation GetActivationPowerType(Item item)
+        if (!item.RandartItemCharacteristics.ResDark)
         {
-            if (Program.Rng.DieRoll(66) == 1)
+            item.RandartItemCharacteristics.ResDark = true;
+            if (Program.Rng.DieRoll(2) == 1)
             {
-                return SaveGame.SingletonRepository.Activations.Get<WraithActivation>();
+                return true;
             }
-            else if (Program.Rng.DieRoll(13) == 1)
+        }
+        return false;
+    }
+
+    public override bool ApplySlaying(Item item)
+    {
+        if (item.Category != ItemTypeEnum.Bow)
+        {
+            if (!item.RandartItemCharacteristics.Vampiric)
             {
-                return SaveGame.SingletonRepository.Activations.Get<DispGoodActivation>();
+                item.RandartItemCharacteristics.Vampiric = true;
+                if (Program.Rng.DieRoll(2) == 1)
+                {
+                    return true;
+                }
             }
-            else if (Program.Rng.DieRoll(9) == 1)
+            if (!item.RandartItemCharacteristics.BrandPois && Program.Rng.DieRoll(2) == 1)
             {
-                return SaveGame.SingletonRepository.Activations.Get<MassGenoActivation>();
+                item.RandartItemCharacteristics.BrandPois = true;
+                if (Program.Rng.DieRoll(2) == 1)
+                {
+                    return true;
+                }
             }
-            else if (Program.Rng.DieRoll(8) == 1)
-            {
-                return SaveGame.SingletonRepository.Activations.Get<CarnageActivation>();
-            }
-            else if (Program.Rng.DieRoll(13) == 1)
-            {
-                return SaveGame.SingletonRepository.Activations.Get<SummonUndeadActivation>();
-            }
-            else if (Program.Rng.DieRoll(9) == 1)
-            {
-                return SaveGame.SingletonRepository.Activations.Get<Vampire2Activation>();
-            }
-            else if (Program.Rng.DieRoll(6) == 1)
-            {
-                return SaveGame.SingletonRepository.Activations.Get<CharmUndeadActivation>();
-            }
-            else
-            {
-                return SaveGame.SingletonRepository.Activations.Get<Vampire1Activation>();
-            }
+        }
+        return false;
+    }
+
+    public override Activation GetActivationPowerType(Item item)
+    {
+        if (Program.Rng.DieRoll(66) == 1)
+        {
+            return SaveGame.SingletonRepository.Activations.Get<WraithActivation>();
+        }
+        else if (Program.Rng.DieRoll(13) == 1)
+        {
+            return SaveGame.SingletonRepository.Activations.Get<DispGoodActivation>();
+        }
+        else if (Program.Rng.DieRoll(9) == 1)
+        {
+            return SaveGame.SingletonRepository.Activations.Get<MassGenoActivation>();
+        }
+        else if (Program.Rng.DieRoll(8) == 1)
+        {
+            return SaveGame.SingletonRepository.Activations.Get<CarnageActivation>();
+        }
+        else if (Program.Rng.DieRoll(13) == 1)
+        {
+            return SaveGame.SingletonRepository.Activations.Get<SummonUndeadActivation>();
+        }
+        else if (Program.Rng.DieRoll(9) == 1)
+        {
+            return SaveGame.SingletonRepository.Activations.Get<Vampire2Activation>();
+        }
+        else if (Program.Rng.DieRoll(6) == 1)
+        {
+            return SaveGame.SingletonRepository.Activations.Get<CharmUndeadActivation>();
+        }
+        else
+        {
+            return SaveGame.SingletonRepository.Activations.Get<Vampire1Activation>();
         }
     }
 }

@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Chaos
-{
-    [Serializable]
-    internal class ChaosSpellArcaneBinding : Spell
-    {
-        private ChaosSpellArcaneBinding(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.Recharge(40);
-        }
+namespace AngbandOS.Core.Spells.Chaos;
 
-        public override string Name => "Arcane Binding";
-        
+[Serializable]
+internal class ChaosSpellArcaneBinding : Spell
+{
+    private ChaosSpellArcaneBinding(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.Recharge(40);
     }
+
+    public override string Name => "Arcane Binding";
+    
 }

@@ -6,27 +6,26 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Death
-{
-    [Serializable]
-    internal class DeathSpellHellfire : Spell
-    {
-        private DeathSpellHellfire(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            if (!SaveGame.GetDirectionWithAim(out int dir))
-            {
-                return;
-            }
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<HellFireProjectile>(), dir, 666, 3);
-            SaveGame.Player.TakeHit(50 + Program.Rng.DieRoll(50), "the strain of casting Hellfire");
-        }
+namespace AngbandOS.Core.Spells.Death;
 
-        public override string Name => "Hellfire";
-        
-        protected override string? Info()
+[Serializable]
+internal class DeathSpellHellfire : Spell
+{
+    private DeathSpellHellfire(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
-            return "dam 666";
+            return;
         }
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<HellFireProjectile>(), dir, 666, 3);
+        SaveGame.Player.TakeHit(50 + Program.Rng.DieRoll(50), "the strain of casting Hellfire");
+    }
+
+    public override string Name => "Hellfire";
+    
+    protected override string? Info()
+    {
+        return "dam 666";
     }
 }

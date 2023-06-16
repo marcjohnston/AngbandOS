@@ -6,68 +6,67 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Projection
+namespace AngbandOS.Core.Projection;
+
+[Serializable]
+internal class LightWeakProjectile : Projectile
 {
-    [Serializable]
-    internal class LightWeakProjectile : Projectile
+    private LightWeakProjectile(SaveGame saveGame) : base(saveGame) { }
+
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<BrightWhiteBoltProjectileGraphic>();
+
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<BrightWhiteCloudAnimation>();
+
+    protected override bool AffectFloor(int y, int x)
     {
-        private LightWeakProjectile(SaveGame saveGame) : base(saveGame) { }
-
-        protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<BrightWhiteBoltProjectileGraphic>();
-
-        protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<BrightWhiteCloudAnimation>();
-
-        protected override bool AffectFloor(int y, int x)
+        GridTile cPtr = SaveGame.Level.Grid[y][x];
+        bool obvious = false;
+        cPtr.TileFlags.Set(GridTile.SelfLit);
+        SaveGame.Level.NoteSpot(y, x);
+        SaveGame.Level.RedrawSingleLocation(y, x);
+        if (SaveGame.Level.PlayerCanSeeBold(y, x))
         {
-            GridTile cPtr = SaveGame.Level.Grid[y][x];
-            bool obvious = false;
-            cPtr.TileFlags.Set(GridTile.SelfLit);
-            SaveGame.Level.NoteSpot(y, x);
-            SaveGame.Level.RedrawSingleLocation(y, x);
-            if (SaveGame.Level.PlayerCanSeeBold(y, x))
+            obvious = true;
+        }
+        if (cPtr.MonsterIndex != 0)
+        {
+            SaveGame.Level.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
+        }
+        return obvious;
+    }
+
+    protected override bool ProjectileAngersMonster(Monster mPtr)
+    {
+        // Only friends that are hurt by light are affected.
+        MonsterRace rPtr = mPtr.Race;
+        return rPtr.HurtByLight;
+    }
+
+    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
+    {
+        MonsterRace rPtr = mPtr.Race;
+        bool seen = mPtr.IsVisible;
+        bool obvious = false;
+        string? note = null;
+        string? noteDies = null;
+        if (rPtr.HurtByLight)
+        {
+            if (seen)
             {
                 obvious = true;
             }
-            if (cPtr.MonsterIndex != 0)
+            if (seen)
             {
-                SaveGame.Level.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
+                rPtr.Knowledge.Characteristics.HurtByLight = true;
             }
-            return obvious;
+            note = " cringes from the light!";
+            noteDies = " shrivels away in the light!";
         }
-
-        protected override bool ProjectileAngersMonster(Monster mPtr)
+        else
         {
-            // Only friends that are hurt by light are affected.
-            MonsterRace rPtr = mPtr.Race;
-            return rPtr.HurtByLight;
+            dam = 0;
         }
-
-        protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-        {
-            MonsterRace rPtr = mPtr.Race;
-            bool seen = mPtr.IsVisible;
-            bool obvious = false;
-            string? note = null;
-            string? noteDies = null;
-            if (rPtr.HurtByLight)
-            {
-                if (seen)
-                {
-                    obvious = true;
-                }
-                if (seen)
-                {
-                    rPtr.Knowledge.Characteristics.HurtByLight = true;
-                }
-                note = " cringes from the light!";
-                noteDies = " shrivels away in the light!";
-            }
-            else
-            {
-                dam = 0;
-            }
-            ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies);
-            return obvious;
-        }
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies);
+        return obvious;
     }
 }

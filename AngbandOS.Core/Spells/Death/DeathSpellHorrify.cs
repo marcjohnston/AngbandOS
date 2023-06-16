@@ -6,23 +6,22 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Death
-{
-    [Serializable]
-    internal class DeathSpellHorrify : Spell
-    {
-        private DeathSpellHorrify(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            if (!SaveGame.GetDirectionWithAim(out int dir))
-            {
-                return;
-            }
-            SaveGame.FearMonster(dir, SaveGame.Player.Level);
-            SaveGame.StunMonster(dir, SaveGame.Player.Level);
-        }
+namespace AngbandOS.Core.Spells.Death;
 
-        public override string Name => "Horrify";
-        
+[Serializable]
+internal class DeathSpellHorrify : Spell
+{
+    private DeathSpellHorrify(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
+        {
+            return;
+        }
+        SaveGame.FearMonster(dir, SaveGame.Player.Level);
+        SaveGame.StunMonster(dir, SaveGame.Player.Level);
     }
+
+    public override string Name => "Horrify";
+    
 }

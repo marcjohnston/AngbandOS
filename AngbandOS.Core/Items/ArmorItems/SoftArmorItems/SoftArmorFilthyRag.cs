@@ -1,21 +1,20 @@
-namespace AngbandOS.Core.ItemCategories
+namespace AngbandOS.Core.ItemCategories;
+
+[Serializable]
+internal class SoftArmorFilthyRag : SoftArmorItemClass
 {
-    [Serializable]
-    internal class SoftArmorFilthyRag : SoftArmorItemClass
-    {
-        private SoftArmorFilthyRag(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SoftArmorFilthyRag(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public override char Character => '(';
-        public override Colour Colour => Colour.Black;
-        public override string Name => "Filthy Rag";
+    public override char Character => '(';
+    public override Colour Colour => Colour.Black;
+    public override string Name => "Filthy Rag";
 
-        public override int Ac => 1;
-        public override int[] Chance => new int[] { 1, 0, 0, 0 };
-        public override int Cost => 1;
-        public override string FriendlyName => "& Filthy Rag~";
-        public override int? SubCategory => 1;
-        public override int ToA => -1;
-        public override int Weight => 20;
-        public override Item CreateItem() => new FilthyRagSoftArmorItem(SaveGame);
-    }
+    public override int Ac => 1;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
+    public override int Cost => 1;
+    public override string FriendlyName => "& Filthy Rag~";
+    public override int? SubCategory => 1;
+    public override int ToA => -1;
+    public override int Weight => 20;
+    public override Item CreateItem() => new FilthyRagSoftArmorItem(SaveGame);
 }

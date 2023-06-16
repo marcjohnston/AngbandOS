@@ -1,8 +1,7 @@
-﻿namespace AngbandOS.Core.AlterActions
+﻿namespace AngbandOS.Core.AlterActions;
+
+[Serializable]
+internal abstract class AlterAction
 {
-    [Serializable]
-    internal abstract class AlterAction
-    {
-        public abstract void Execute(AlterEventArgs alterEventArgs);
-    }
+    public abstract void Execute(AlterEventArgs alterEventArgs);
 }

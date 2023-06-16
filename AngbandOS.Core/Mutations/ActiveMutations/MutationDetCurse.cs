@@ -6,42 +6,41 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.ActiveMutations
-{
-    [Serializable]
-    internal class MutationDetCurse : Mutation
-    {
-        public override void Activate(SaveGame saveGame)
-        {
-            if (!saveGame.CheckIfRacialPowerWorks(7, 14, Ability.Wisdom, 14))
-            {
-                return;
-            }
+namespace AngbandOS.Core.Mutations.ActiveMutations;
 
-            foreach (BaseInventorySlot inventorySlot in saveGame.SingletonRepository.InventorySlots)
+[Serializable]
+internal class MutationDetCurse : Mutation
+{
+    public override void Activate(SaveGame saveGame)
+    {
+        if (!saveGame.CheckIfRacialPowerWorks(7, 14, Ability.Wisdom, 14))
+        {
+            return;
+        }
+
+        foreach (BaseInventorySlot inventorySlot in saveGame.SingletonRepository.InventorySlots)
+        {
+            foreach (int slot in inventorySlot.InventorySlots)
             {
-                foreach (int slot in inventorySlot.InventorySlots)
+                Item? oPtr = saveGame.GetInventoryItem(slot);
+                if (oPtr != null && oPtr.IsCursed())
                 {
-                    Item? oPtr = saveGame.GetInventoryItem(slot);
-                    if (oPtr != null && oPtr.IsCursed())
-                    {
-                        oPtr.Inscription = "cursed";
-                    }
+                    oPtr.Inscription = "cursed";
                 }
             }
         }
+    }
 
-        public override string ActivationSummary(int lvl)
-        {
-            return lvl < 7 ? "detect curses    (unusable until level 7)" : "detect curses    (cost 14, WIS based)";
-        }
+    public override string ActivationSummary(int lvl)
+    {
+        return lvl < 7 ? "detect curses    (unusable until level 7)" : "detect curses    (cost 14, WIS based)";
+    }
 
-        public override void Initialize()
-        {
-            Frequency = 2;
-            GainMessage = "You can feel evil magics.";
-            HaveMessage = "You can feel the danger of evil magic.";
-            LoseMessage = "You can no longer feel evil magics.";
-        }
+    public override void Initialize()
+    {
+        Frequency = 2;
+        GainMessage = "You can feel evil magics.";
+        HaveMessage = "You can feel the danger of evil magic.";
+        LoseMessage = "You can no longer feel evil magics.";
     }
 }

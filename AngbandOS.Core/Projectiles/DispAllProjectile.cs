@@ -6,34 +6,33 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Projection
+namespace AngbandOS.Core.Projection;
+
+[Serializable]
+internal class DispAllProjectile : Projectile
 {
-    [Serializable]
-    internal class DispAllProjectile : Projectile
+    private DispAllProjectile(SaveGame saveGame) : base(saveGame) { }
+
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<BrightPinkSplatProjectileGraphic>();
+
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<BrightPinkExpandAnimation>();
+
+    protected override bool ProjectileAngersMonster(Monster mPtr)
     {
-        private DispAllProjectile(SaveGame saveGame) : base(saveGame) { }
+        return false;
+    }
 
-        protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<BrightPinkSplatProjectileGraphic>();
-
-        protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<BrightPinkExpandAnimation>();
-
-        protected override bool ProjectileAngersMonster(Monster mPtr)
+    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
+    {
+        bool seen = mPtr.IsVisible;
+        bool obvious = false;
+        string noteDies = " dissolves!";
+        if (seen)
         {
-            return false;
+            obvious = true;
         }
-
-        protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-        {
-            bool seen = mPtr.IsVisible;
-            bool obvious = false;
-            string noteDies = " dissolves!";
-            if (seen)
-            {
-                obvious = true;
-            }
-            string? note = " shudders.";
-            ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies);
-            return obvious;
-        }
+        string? note = " shudders.";
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies);
+        return obvious;
     }
 }

@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class DiseaseMushroomFoodItem : MushroomFoodItem
-    {
-        public DiseaseMushroomFoodItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<DiseaseMushroomFoodItemFactory>()) { }
-    }
+internal class DiseaseMushroomFoodItem : MushroomFoodItem
+{
+    public DiseaseMushroomFoodItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<DiseaseMushroomFoodItemFactory>()) { }
 }

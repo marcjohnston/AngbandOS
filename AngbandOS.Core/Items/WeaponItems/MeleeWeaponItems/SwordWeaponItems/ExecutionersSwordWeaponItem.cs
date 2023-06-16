@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class ExecutionersSwordWeaponItem : SwordWeaponItem
-    {
-        public ExecutionersSwordWeaponItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<SwordExecutionersSword>()) { }
-    }
+internal class ExecutionersSwordWeaponItem : SwordWeaponItem
+{
+    public ExecutionersSwordWeaponItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<SwordExecutionersSword>()) { }
 }

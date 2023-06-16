@@ -6,46 +6,45 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Projection
+namespace AngbandOS.Core.Projection;
+
+[Serializable]
+internal class DispDemonProjectile : Projectile
 {
-    [Serializable]
-    internal class DispDemonProjectile : Projectile
+    private DispDemonProjectile(SaveGame saveGame) : base(saveGame) { }
+
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<BrightRedSplatProjectileGraphic>();
+
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<BrightRedExpandAnimation>();
+
+    protected override bool ProjectileAngersMonster(Monster mPtr)
     {
-        private DispDemonProjectile(SaveGame saveGame) : base(saveGame) { }
+        // Only demon friends are affected.
+        MonsterRace rPtr = mPtr.Race;
+        return rPtr.Demon;
+    }
 
-        protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<BrightRedSplatProjectileGraphic>();
-
-        protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<BrightRedExpandAnimation>();
-
-        protected override bool ProjectileAngersMonster(Monster mPtr)
+    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
+    {
+        MonsterRace rPtr = mPtr.Race;
+        bool seen = mPtr.IsVisible;
+        bool obvious = false;
+        string noteDies = " dissolves!";
+        string? note = null;
+        if (rPtr.Demon)
         {
-            // Only demon friends are affected.
-            MonsterRace rPtr = mPtr.Race;
-            return rPtr.Demon;
+            if (seen)
+            {
+                rPtr.Knowledge.Characteristics.Demon = true;
+                obvious = true;
+            }
+            note = " shudders.";
         }
-
-        protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
+        else
         {
-            MonsterRace rPtr = mPtr.Race;
-            bool seen = mPtr.IsVisible;
-            bool obvious = false;
-            string noteDies = " dissolves!";
-            string? note = null;
-            if (rPtr.Demon)
-            {
-                if (seen)
-                {
-                    rPtr.Knowledge.Characteristics.Demon = true;
-                    obvious = true;
-                }
-                note = " shudders.";
-            }
-            else
-            {
-                return false;
-            }
-            ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies);
-            return obvious;
+            return false;
         }
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies);
+        return obvious;
     }
 }

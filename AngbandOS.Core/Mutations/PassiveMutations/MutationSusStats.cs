@@ -6,27 +6,26 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.PassiveMutations
+namespace AngbandOS.Core.Mutations.PassiveMutations;
+
+[Serializable]
+internal class MutationSusStats : Mutation
 {
-    [Serializable]
-    internal class MutationSusStats : Mutation
+    public override void Initialize()
     {
-        public override void Initialize()
-        {
-            Frequency = 2;
-            GainMessage = "You feel like you can recover from anything.";
-            HaveMessage = "Your body resists serious damage.";
-            LoseMessage = "You no longer feel like you can recover from anything.";
-        }
+        Frequency = 2;
+        GainMessage = "You feel like you can recover from anything.";
+        HaveMessage = "Your body resists serious damage.";
+        LoseMessage = "You no longer feel like you can recover from anything.";
+    }
 
-        public override void OnGain(Genome genome)
-        {
-            genome.SustainAll = true;
-        }
+    public override void OnGain(Genome genome)
+    {
+        genome.SustainAll = true;
+    }
 
-        public override void OnLose(Genome genome)
-        {
-            genome.SustainAll = false;
-        }
+    public override void OnLose(Genome genome)
+    {
+        genome.SustainAll = false;
     }
 }

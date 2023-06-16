@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class OfDeflectionShieldArmorItem : ShieldArmorItem
-    {
-        public OfDeflectionShieldArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ShieldShieldOfDeflection>()) { }
-    }
+internal class OfDeflectionShieldArmorItem : ShieldArmorItem
+{
+    public OfDeflectionShieldArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ShieldShieldOfDeflection>()) { }
 }

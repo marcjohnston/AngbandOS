@@ -6,23 +6,22 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Corporeal
-{
-    [Serializable]
-    internal class CorporealSpellCureMediumWounds : Spell
-    {
-        private CorporealSpellCureMediumWounds(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 10));
-            SaveGame.Player.TimedBleeding.SetTimer((SaveGame.Player.TimedBleeding.TurnsRemaining / 2) - 20);
-        }
+namespace AngbandOS.Core.Spells.Corporeal;
 
-        public override string Name => "Cure Medium Wounds";
-        
-        protected override string? Info()
-        {
-            return "heal 4d10";
-        }
+[Serializable]
+internal class CorporealSpellCureMediumWounds : Spell
+{
+    private CorporealSpellCureMediumWounds(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 10));
+        SaveGame.Player.TimedBleeding.SetTimer((SaveGame.Player.TimedBleeding.TurnsRemaining / 2) - 20);
+    }
+
+    public override string Name => "Cure Medium Wounds";
+    
+    protected override string? Info()
+    {
+        return "heal 4d10";
     }
 }

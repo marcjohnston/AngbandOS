@@ -1,26 +1,25 @@
-﻿namespace AngbandOS.Core.FlaggedActions
+﻿namespace AngbandOS.Core.FlaggedActions;
+
+[Serializable]
+internal class RedrawTitleFlaggedAction : FlaggedAction
 {
-    [Serializable]
-    internal class RedrawTitleFlaggedAction : FlaggedAction
+    private const int RowTitle = 4;
+    private const int ColTitle = 0;
+    public RedrawTitleFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    private void PrtField(string info, int row, int col) // TODO: Duplicate with PrPlayerRedrawAction
     {
-        private const int RowTitle = 4;
-        private const int ColTitle = 0;
-        public RedrawTitleFlaggedAction(SaveGame saveGame) : base(saveGame) { }
-        private void PrtField(string info, int row, int col) // TODO: Duplicate with PrPlayerRedrawAction
+        SaveGame.Screen.Print(Colour.White, "             ", row, col);
+        SaveGame.Screen.Print(Colour.BrightBlue, info, row, col);
+    }
+    protected override void Execute()
+    {
+        if (SaveGame.Player.IsWizard)
         {
-            SaveGame.Screen.Print(Colour.White, "             ", row, col);
-            SaveGame.Screen.Print(Colour.BrightBlue, info, row, col);
+            PrtField("-=<WIZARD>=-", RowTitle, ColTitle);
         }
-        protected override void Execute()
+        else if (SaveGame.Player.IsWinner || SaveGame.Player.Level > Constants.PyMaxLevel)
         {
-            if (SaveGame.Player.IsWizard)
-            {
-                PrtField("-=<WIZARD>=-", RowTitle, ColTitle);
-            }
-            else if (SaveGame.Player.IsWinner || SaveGame.Player.Level > Constants.PyMaxLevel)
-            {
-                PrtField("***WINNER***", RowTitle, ColTitle);
-            }
+            PrtField("***WINNER***", RowTitle, ColTitle);
         }
     }
 }

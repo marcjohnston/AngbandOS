@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Nature
-{
-    [Serializable]
-    internal class NatureSpellElementalBranding : Spell
-    {
-        private NatureSpellElementalBranding(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.BrandWeapon(0);
-        }
+namespace AngbandOS.Core.Spells.Nature;
 
-        public override string Name => "Elemental Branding";
-        
+[Serializable]
+internal class NatureSpellElementalBranding : Spell
+{
+    private NatureSpellElementalBranding(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.BrandWeapon(0);
     }
+
+    public override string Name => "Elemental Branding";
+    
 }

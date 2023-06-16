@@ -1,13 +1,12 @@
-﻿namespace AngbandOS.Core.SpellResistantDetections
+﻿namespace AngbandOS.Core.SpellResistantDetections;
+
+internal class NexusSpellResistantDetection : SpellResistantDetection
 {
-    internal class NexusSpellResistantDetection : SpellResistantDetection
+    public override void Learn(SaveGame saveGame, Monster monster)
     {
-        public override void Learn(SaveGame saveGame, Monster monster)
+        if (saveGame.Player.HasNexusResistance)
         {
-            if (saveGame.Player.HasNexusResistance)
-            {
-                monster.SmResNexus = true;
-            }
+            monster.SmResNexus = true;
         }
     }
 }

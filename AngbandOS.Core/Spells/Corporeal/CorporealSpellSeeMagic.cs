@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Corporeal
+namespace AngbandOS.Core.Spells.Corporeal;
+
+[Serializable]
+internal class CorporealSpellSeeMagic : Spell
 {
-    [Serializable]
-    internal class CorporealSpellSeeMagic : Spell
+    private CorporealSpellSeeMagic(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
     {
-        private CorporealSpellSeeMagic(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.DetectObjectsMagic();
-        }
-
-        public override string Name => "See Magic";
-
+        SaveGame.DetectObjectsMagic();
     }
+
+    public override string Name => "See Magic";
+
 }

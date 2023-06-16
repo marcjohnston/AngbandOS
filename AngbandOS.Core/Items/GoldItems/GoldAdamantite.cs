@@ -1,18 +1,17 @@
-namespace AngbandOS.Core.ItemCategories
+namespace AngbandOS.Core.ItemCategories;
+
+[Serializable]
+internal class GoldAdamantite : GoldItemClass
 {
-    [Serializable]
-    internal class GoldAdamantite : GoldItemClass
-    {
-        private GoldAdamantite(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private GoldAdamantite(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public override char Character => '$';
-        public override Colour Colour => Colour.Chartreuse;
-        public override string Name => "adamantite";
+    public override char Character => '$';
+    public override Colour Colour => Colour.Chartreuse;
+    public override string Name => "adamantite";
 
-        public override int Cost => 80;
-        public override string FriendlyName => "adamantite";
-        public override int Level => 1;
+    public override int Cost => 80;
+    public override string FriendlyName => "adamantite";
+    public override int Level => 1;
 
-        public override Item CreateItem() => new AdamantiteGoldItem(SaveGame);
-    }
+    public override Item CreateItem() => new AdamantiteGoldItem(SaveGame);
 }

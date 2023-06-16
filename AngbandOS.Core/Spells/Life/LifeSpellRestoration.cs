@@ -6,24 +6,23 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Life
-{
-    [Serializable]
-    internal class LifeSpellRestoration : Spell
-    {
-        private LifeSpellRestoration(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.Player.TryRestoringAbilityScore(Ability.Strength);
-            SaveGame.Player.TryRestoringAbilityScore(Ability.Intelligence);
-            SaveGame.Player.TryRestoringAbilityScore(Ability.Wisdom);
-            SaveGame.Player.TryRestoringAbilityScore(Ability.Dexterity);
-            SaveGame.Player.TryRestoringAbilityScore(Ability.Constitution);
-            SaveGame.Player.TryRestoringAbilityScore(Ability.Charisma);
-            SaveGame.Player.RestoreLevel();
-        }
+namespace AngbandOS.Core.Spells.Life;
 
-        public override string Name => "Restoration";
-        
+[Serializable]
+internal class LifeSpellRestoration : Spell
+{
+    private LifeSpellRestoration(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.Player.TryRestoringAbilityScore(Ability.Strength);
+        SaveGame.Player.TryRestoringAbilityScore(Ability.Intelligence);
+        SaveGame.Player.TryRestoringAbilityScore(Ability.Wisdom);
+        SaveGame.Player.TryRestoringAbilityScore(Ability.Dexterity);
+        SaveGame.Player.TryRestoringAbilityScore(Ability.Constitution);
+        SaveGame.Player.TryRestoringAbilityScore(Ability.Charisma);
+        SaveGame.Player.RestoreLevel();
     }
+
+    public override string Name => "Restoration";
+    
 }

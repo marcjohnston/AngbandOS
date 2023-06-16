@@ -1,20 +1,19 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class BalanceDragonScaleMailArmorItem : DragonScaleMailArmorItem
+internal class BalanceDragonScaleMailArmorItem : DragonScaleMailArmorItem
+{
+    public BalanceDragonScaleMailArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<BalanceDragonScaleMailArmorItemFactory>()) { }
+    public override void DoActivate()
     {
-        public BalanceDragonScaleMailArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<BalanceDragonScaleMailArmorItemFactory>()) { }
-        public override void DoActivate()
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
-            if (!SaveGame.GetDirectionWithAim(out int dir))
-            {
-                return;
-            }
-            int chance = Program.Rng.RandomLessThan(4);
-            string element = chance == 1 ? "chaos" : (chance == 2 ? "disenchantment" : (chance == 3 ? "sound" : "shards"));
-            SaveGame.MsgPrint($"You breathe {element}.");
-            SaveGame.FireBall(chance == 1 ? SaveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>() : (chance == 2 ? SaveGame.SingletonRepository.Projectiles.Get<DisenchantProjectile>() : (chance == 3 ? (Projectile)SaveGame.SingletonRepository.Projectiles.Get<SoundProjectile>() : SaveGame.SingletonRepository.Projectiles.Get<ExplodeProjectile>())), dir, 250, -2);
-            RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
+            return;
         }
+        int chance = Program.Rng.RandomLessThan(4);
+        string element = chance == 1 ? "chaos" : (chance == 2 ? "disenchantment" : (chance == 3 ? "sound" : "shards"));
+        SaveGame.MsgPrint($"You breathe {element}.");
+        SaveGame.FireBall(chance == 1 ? SaveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>() : (chance == 2 ? SaveGame.SingletonRepository.Projectiles.Get<DisenchantProjectile>() : (chance == 3 ? (Projectile)SaveGame.SingletonRepository.Projectiles.Get<SoundProjectile>() : SaveGame.SingletonRepository.Projectiles.Get<ExplodeProjectile>())), dir, 250, -2);
+        RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
     }
 }

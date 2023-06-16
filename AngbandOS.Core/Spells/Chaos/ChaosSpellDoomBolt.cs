@@ -6,26 +6,25 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Chaos
-{
-    [Serializable]
-    internal class ChaosSpellDoomBolt : Spell
-    {
-        private ChaosSpellDoomBolt(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            if (!SaveGame.GetDirectionWithAim(out int dir))
-            {
-                return;
-            }
-            SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), dir, Program.Rng.DiceRoll(11 + ((SaveGame.Player.Level - 5) / 4), 8));
-        }
+namespace AngbandOS.Core.Spells.Chaos;
 
-        public override string Name => "Doom Bolt";
-        
-        protected override string? Info()
+[Serializable]
+internal class ChaosSpellDoomBolt : Spell
+{
+    private ChaosSpellDoomBolt(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
-            return $"dam {11 + ((SaveGame.Player.Level - 5) / 4)}d8";
+            return;
         }
+        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), dir, Program.Rng.DiceRoll(11 + ((SaveGame.Player.Level - 5) / 4), 8));
+    }
+
+    public override string Name => "Doom Bolt";
+    
+    protected override string? Info()
+    {
+        return $"dam {11 + ((SaveGame.Player.Level - 5) / 4)}d8";
     }
 }

@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class SmallMetalShieldArmorItem : ShieldArmorItem
-    {
-        public SmallMetalShieldArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ShieldSmallMetalShield>()) { }
-    }
+internal class SmallMetalShieldArmorItem : ShieldArmorItem
+{
+    public SmallMetalShieldArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ShieldSmallMetalShield>()) { }
 }

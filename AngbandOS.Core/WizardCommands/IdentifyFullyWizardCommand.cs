@@ -1,19 +1,18 @@
-﻿namespace AngbandOS.Core.WizardCommands
+﻿namespace AngbandOS.Core.WizardCommands;
+
+[Serializable]
+internal class IdentifyFullyWizardCommand : WizardCommand
 {
-    [Serializable]
-    internal class IdentifyFullyWizardCommand : WizardCommand
+    private IdentifyFullyWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+
+    public override char Key => 'f';
+
+    public override string HelpDescription => "Identify Fully";
+
+    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardObjectCommandsHelpGroup>();
+
+    public override void Execute()
     {
-        private IdentifyFullyWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-
-        public override char Key => 'f';
-
-        public override string HelpDescription => "Identify Fully";
-
-        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardObjectCommandsHelpGroup>();
-
-        public override void Execute()
-        {
-            SaveGame.IdentifyFully();
-        }
+        SaveGame.IdentifyFully();
     }
 }

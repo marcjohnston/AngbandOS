@@ -1,11 +1,10 @@
-﻿namespace AngbandOS.Core.MonsterSelectors
+﻿namespace AngbandOS.Core.MonsterSelectors;
+
+[Serializable]
+internal class ElementalMonsterSelector : MonsterSelector
 {
-    [Serializable]
-    internal class ElementalMonsterSelector : MonsterSelector
+    public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
     {
-        public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
-        {
-            return rPtr.Name.Contains("lemental") && !rPtr.Unique;
-        }
+        return rPtr.Name.Contains("lemental") && !rPtr.Unique;
     }
 }

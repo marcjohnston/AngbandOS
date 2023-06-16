@@ -1,11 +1,10 @@
-﻿namespace AngbandOS.Core.MonsterSelectors
+﻿namespace AngbandOS.Core.MonsterSelectors;
+
+[Serializable]
+internal class LightningBreathingDragonMonsterSelector : MonsterSelector
 {
-    [Serializable]
-    internal class LightningBreathingDragonMonsterSelector : MonsterSelector
+    public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
     {
-        public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
-        {
-            return !rPtr.Unique && "Dd".Contains(rPtr.Character.ToString()) && rPtr.BreatheLightning;
-        }
+        return !rPtr.Unique && "Dd".Contains(rPtr.Character.ToString()) && rPtr.BreatheLightning;
     }
 }

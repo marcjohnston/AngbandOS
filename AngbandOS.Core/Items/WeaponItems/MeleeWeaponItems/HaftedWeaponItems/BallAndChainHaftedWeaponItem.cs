@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class BallAndChainHaftedWeaponItem : HaftedWeaponItem
-    {
-        public BallAndChainHaftedWeaponItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<HaftedBallAndChain>()) { }
-    }
+internal class BallAndChainHaftedWeaponItem : HaftedWeaponItem
+{
+    public BallAndChainHaftedWeaponItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<HaftedBallAndChain>()) { }
 }

@@ -1,48 +1,47 @@
-namespace AngbandOS.Core.MonsterRaces
-{
-    [Serializable]
-    internal class CryptCreepMonsterRace : MonsterRace
-    {
-        protected CryptCreepMonsterRace(SaveGame saveGame) : base(saveGame) { }
- 
-        public override MonsterSpellList Spells => new MonsterSpellList(
-            new CauseLightWoundsMonsterSpell(),
-            new SummonUndeadMonsterSpell());
-        public override char Character => 's';
-        public override Colour Colour => Colour.Black;
-        public override string Name => "Crypt creep";
+namespace AngbandOS.Core.MonsterRaces;
 
-        public override int ArmourClass => 12;
-        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 2),
-            new MonsterAttack(new CrushAttackType(), new HurtAttackEffect(), 1, 2),
-            new MonsterAttack(new BiteAttackType(), new PoisonAttackEffect(), 1, 3),
-        };
-        public override bool BashDoor => true;
-        public override bool ColdBlood => true;
-        public override string Description => "Frightening skeletal figures in black robes. ";
-        public override bool Evil => true;
-        public override int FreqInate => 10;
-        public override int FreqSpell => 10;
-        public override string FriendlyName => "Crypt creep";
-        public override bool Friends => true;
-        public override int Hdice => 6;
-        public override int Hside => 8;
-        public override bool HurtByLight => true;
-        public override bool ImmuneConfusion => true;
-        public override bool ImmunePoison => true;
-        public override bool ImmuneSleep => true;
-        public override int LevelFound => 7;
-        public override int Mexp => 25;
-        public override int NoticeRange => 20;
-        public override bool OpenDoor => true;
-        public override bool RandomMove25 => true;
-        public override int Rarity => 2;
-        public override int Sleep => 14;
-        public override int Speed => 110;
-        public override string SplitName1 => "            ";
-        public override string SplitName2 => "   Crypt    ";
-        public override string SplitName3 => "   creep    ";
-        public override bool Undead => true;
-    }
+[Serializable]
+internal class CryptCreepMonsterRace : MonsterRace
+{
+    protected CryptCreepMonsterRace(SaveGame saveGame) : base(saveGame) { }
+
+    public override MonsterSpellList Spells => new MonsterSpellList(
+        new CauseLightWoundsMonsterSpell(),
+        new SummonUndeadMonsterSpell());
+    public override char Character => 's';
+    public override Colour Colour => Colour.Black;
+    public override string Name => "Crypt creep";
+
+    public override int ArmourClass => 12;
+    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+        new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 2),
+        new MonsterAttack(new CrushAttackType(), new HurtAttackEffect(), 1, 2),
+        new MonsterAttack(new BiteAttackType(), new PoisonAttackEffect(), 1, 3),
+    };
+    public override bool BashDoor => true;
+    public override bool ColdBlood => true;
+    public override string Description => "Frightening skeletal figures in black robes. ";
+    public override bool Evil => true;
+    public override int FreqInate => 10;
+    public override int FreqSpell => 10;
+    public override string FriendlyName => "Crypt creep";
+    public override bool Friends => true;
+    public override int Hdice => 6;
+    public override int Hside => 8;
+    public override bool HurtByLight => true;
+    public override bool ImmuneConfusion => true;
+    public override bool ImmunePoison => true;
+    public override bool ImmuneSleep => true;
+    public override int LevelFound => 7;
+    public override int Mexp => 25;
+    public override int NoticeRange => 20;
+    public override bool OpenDoor => true;
+    public override bool RandomMove25 => true;
+    public override int Rarity => 2;
+    public override int Sleep => 14;
+    public override int Speed => 110;
+    public override string SplitName1 => "            ";
+    public override string SplitName2 => "   Crypt    ";
+    public override string SplitName3 => "   creep    ";
+    public override bool Undead => true;
 }

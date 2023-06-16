@@ -1,12 +1,11 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class ObjectLocationStaffItem : StaffItem
+internal class ObjectLocationStaffItem : StaffItem
+{
+    public ObjectLocationStaffItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<StaffObjectLocation>()) { }
+    protected override void ApplyMagic(int level, int power, Store? store)
     {
-        public ObjectLocationStaffItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<StaffObjectLocation>()) { }
-        protected override void ApplyMagic(int level, int power, Store? store)
-        {
-            TypeSpecificValue = Program.Rng.DieRoll(15) + 6;
-        }
+        TypeSpecificValue = Program.Rng.DieRoll(15) + 6;
     }
 }

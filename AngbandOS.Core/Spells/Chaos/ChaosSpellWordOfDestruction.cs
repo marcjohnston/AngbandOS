@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Chaos
-{
-    [Serializable]
-    internal class ChaosSpellWordOfDestruction : Spell
-    {
-        private ChaosSpellWordOfDestruction(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.DestroyArea(SaveGame.Player.MapY, SaveGame.Player.MapX, 15);
-        }
+namespace AngbandOS.Core.Spells.Chaos;
 
-        public override string Name => "Word of Destruction";
-        
+[Serializable]
+internal class ChaosSpellWordOfDestruction : Spell
+{
+    private ChaosSpellWordOfDestruction(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.DestroyArea(SaveGame.Player.MapY, SaveGame.Player.MapX, 15);
     }
+
+    public override string Name => "Word of Destruction";
+    
 }

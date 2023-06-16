@@ -6,26 +6,25 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Tarot
-{
-    [Serializable]
-    internal class TarotSpellSummonObject : Spell
-    {
-        private TarotSpellSummonObject(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            if (!SaveGame.GetDirectionWithAim(out int dir))
-            {
-                return;
-            }
-            SaveGame.SummonItem(dir, SaveGame.Player.Level * 15, true);
-        }
+namespace AngbandOS.Core.Spells.Tarot;
 
-        public override string Name => "Summon Object";
-        
-        protected override string? Info()
+[Serializable]
+internal class TarotSpellSummonObject : Spell
+{
+    private TarotSpellSummonObject(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
-            return $"max wgt {SaveGame.Player.Level * 15 / 10}";
+            return;
         }
+        SaveGame.SummonItem(dir, SaveGame.Player.Level * 15, true);
+    }
+
+    public override string Name => "Summon Object";
+    
+    protected override string? Info()
+    {
+        return $"max wgt {SaveGame.Player.Level * 15 / 10}";
     }
 }

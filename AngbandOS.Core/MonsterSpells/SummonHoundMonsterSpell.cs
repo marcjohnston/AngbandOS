@@ -1,10 +1,9 @@
-﻿namespace AngbandOS.Core.MonsterSpells
-{
-    [Serializable]
-    internal class SummonHoundMonsterSpell : SummonMonsterSpell
-    {
-        protected override string SummonName(Monster monster) => "hounds";
+﻿namespace AngbandOS.Core.MonsterSpells;
 
-        protected override MonsterSelector? MonsterSelector(Monster monster) => new HoundMonsterSelector();
-    }
+[Serializable]
+internal class SummonHoundMonsterSpell : SummonMonsterSpell
+{
+    protected override string SummonName(Monster monster) => "hounds";
+
+    protected override MonsterSelector? MonsterSelector(Monster monster) => new HoundMonsterSelector();
 }

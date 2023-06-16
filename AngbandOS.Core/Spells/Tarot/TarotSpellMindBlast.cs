@@ -6,42 +6,41 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Tarot
+namespace AngbandOS.Core.Spells.Tarot;
+
+[Serializable]
+internal class TarotSpellMindBlast : Spell
 {
-    [Serializable]
-    internal class TarotSpellMindBlast : Spell
+    private TarotSpellMindBlast(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
     {
-        private TarotSpellMindBlast(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
+        int beam;
+        switch (SaveGame.Player.BaseCharacterClass.ID)
         {
-            int beam;
-            switch (SaveGame.Player.BaseCharacterClass.ID)
-            {
-                case CharacterClass.Mage:
-                    beam = SaveGame.Player.Level;
-                    break;
+            case CharacterClass.Mage:
+                beam = SaveGame.Player.Level;
+                break;
 
-                case CharacterClass.HighMage:
-                    beam = SaveGame.Player.Level + 10;
-                    break;
+            case CharacterClass.HighMage:
+                beam = SaveGame.Player.Level + 10;
+                break;
 
-                default:
-                    beam = SaveGame.Player.Level / 2;
-                    break;
-            }
-            if (!SaveGame.GetDirectionWithAim(out int dir))
-            {
-                return;
-            }
-            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir,
-                Program.Rng.DiceRoll(3 + ((SaveGame.Player.Level - 1) / 5), 3));
+            default:
+                beam = SaveGame.Player.Level / 2;
+                break;
         }
-
-        public override string Name => "Mind Blast";
-        
-        protected override string? Info()
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
-            return $"dam {3 + ((SaveGame.Player.Level - 1) / 5)}d3";
+            return;
         }
+        SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir,
+            Program.Rng.DiceRoll(3 + ((SaveGame.Player.Level - 1) / 5), 3));
+    }
+
+    public override string Name => "Mind Blast";
+    
+    protected override string? Info()
+    {
+        return $"dam {3 + ((SaveGame.Player.Level - 1) / 5)}d3";
     }
 }

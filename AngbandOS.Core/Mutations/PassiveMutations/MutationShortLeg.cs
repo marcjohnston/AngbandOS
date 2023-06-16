@@ -6,27 +6,26 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.PassiveMutations
+namespace AngbandOS.Core.Mutations.PassiveMutations;
+
+[Serializable]
+internal class MutationShortLeg : Mutation
 {
-    [Serializable]
-    internal class MutationShortLeg : Mutation
+    public override void Initialize()
     {
-        public override void Initialize()
-        {
-            Frequency = 2;
-            GainMessage = "Your legs turn into short stubs!";
-            HaveMessage = "Your legs are short stubs (-3 speed).";
-            LoseMessage = "Your legs lengthen to normal.";
-        }
+        Frequency = 2;
+        GainMessage = "Your legs turn into short stubs!";
+        HaveMessage = "Your legs are short stubs (-3 speed).";
+        LoseMessage = "Your legs lengthen to normal.";
+    }
 
-        public override void OnGain(Genome genome)
-        {
-            genome.SpeedBonus -= 3;
-        }
+    public override void OnGain(Genome genome)
+    {
+        genome.SpeedBonus -= 3;
+    }
 
-        public override void OnLose(Genome genome)
-        {
-            genome.SpeedBonus += 3;
-        }
+    public override void OnLose(Genome genome)
+    {
+        genome.SpeedBonus += 3;
     }
 }

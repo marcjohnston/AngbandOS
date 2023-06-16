@@ -6,37 +6,36 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.RandomMutations
-{
-    [Serializable]
-    internal class MutationHpToSp : Mutation
-    {
-        public override void Initialize()
-        {
-            Frequency = 1;
-            GainMessage = "You are subject to fits of painful clarity.";
-            HaveMessage = "Your blood sometimes rushes to your head.";
-            LoseMessage = "You are no longer subject to fits of painful clarity.";
-        }
+namespace AngbandOS.Core.Mutations.RandomMutations;
 
-        public override void OnProcessWorld(SaveGame saveGame)
+[Serializable]
+internal class MutationHpToSp : Mutation
+{
+    public override void Initialize()
+    {
+        Frequency = 1;
+        GainMessage = "You are subject to fits of painful clarity.";
+        HaveMessage = "Your blood sometimes rushes to your head.";
+        LoseMessage = "You are no longer subject to fits of painful clarity.";
+    }
+
+    public override void OnProcessWorld(SaveGame saveGame)
+    {
+        if (saveGame.Player.HasAntiMagic || Program.Rng.DieRoll(4000) != 1)
         {
-            if (saveGame.Player.HasAntiMagic || Program.Rng.DieRoll(4000) != 1)
-            {
-                return;
-            }
-            int wounds = saveGame.Player.MaxMana - saveGame.Player.Mana;
-            if (wounds <= 0)
-            {
-                return;
-            }
-            int healing = saveGame.Player.Health;
-            if (healing > wounds)
-            {
-                healing = wounds;
-            }
-            saveGame.Player.Mana += healing;
-            saveGame.Player.TakeHit(healing, "blood rushing to the head");
+            return;
         }
+        int wounds = saveGame.Player.MaxMana - saveGame.Player.Mana;
+        if (wounds <= 0)
+        {
+            return;
+        }
+        int healing = saveGame.Player.Health;
+        if (healing > wounds)
+        {
+            healing = wounds;
+        }
+        saveGame.Player.Mana += healing;
+        saveGame.Player.TakeHit(healing, "blood rushing to the head");
     }
 }

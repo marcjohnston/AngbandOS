@@ -6,36 +6,35 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.RandomMutations
-{
-    [Serializable]
-    internal class MutationDisarm : Mutation
-    {
-        public override void Initialize()
-        {
-            Frequency = 1;
-            GainMessage = "Your feet grow to four times their former size.";
-            HaveMessage = "You occasionally stumble and drop things.";
-            LoseMessage = "Your feet shrink to their former size.";
-        }
+namespace AngbandOS.Core.Mutations.RandomMutations;
 
-        public override void OnProcessWorld(SaveGame saveGame)
+[Serializable]
+internal class MutationDisarm : Mutation
+{
+    public override void Initialize()
+    {
+        Frequency = 1;
+        GainMessage = "Your feet grow to four times their former size.";
+        HaveMessage = "You occasionally stumble and drop things.";
+        LoseMessage = "Your feet shrink to their former size.";
+    }
+
+    public override void OnProcessWorld(SaveGame saveGame)
+    {
+        if (Program.Rng.DieRoll(10000) != 1)
         {
-            if (Program.Rng.DieRoll(10000) != 1)
-            {
-                return;
-            }
-            saveGame.Disturb(false);
-            saveGame.MsgPrint("You trip over your own feet!");
-            saveGame.Player.TakeHit(Program.Rng.DieRoll(saveGame.Player.Weight / 6), "tripping");
-            saveGame.MsgPrint(null);
-            Item? oPtr = saveGame.GetInventoryItem(InventorySlot.MeleeWeapon);
-            if (oPtr == null)
-            {
-                return;
-            }
-            saveGame.MsgPrint("You drop your weapon!");
-            saveGame.Player.InvenDrop(InventorySlot.MeleeWeapon, 1);
+            return;
         }
+        saveGame.Disturb(false);
+        saveGame.MsgPrint("You trip over your own feet!");
+        saveGame.Player.TakeHit(Program.Rng.DieRoll(saveGame.Player.Weight / 6), "tripping");
+        saveGame.MsgPrint(null);
+        Item? oPtr = saveGame.GetInventoryItem(InventorySlot.MeleeWeapon);
+        if (oPtr == null)
+        {
+            return;
+        }
+        saveGame.MsgPrint("You drop your weapon!");
+        saveGame.Player.InvenDrop(InventorySlot.MeleeWeapon, 1);
     }
 }

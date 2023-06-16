@@ -6,78 +6,77 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Projection
+namespace AngbandOS.Core.Projection;
+
+[Serializable]
+internal class KillDoorProjectile : Projectile
 {
-    [Serializable]
-    internal class KillDoorProjectile : Projectile
+    private KillDoorProjectile(SaveGame saveGame) : base(saveGame) { }
+
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<BrightYellowSwirlAnimation>();
+
+    protected override bool AffectFloor(int y, int x)
     {
-        private KillDoorProjectile(SaveGame saveGame) : base(saveGame) { }
-
-        protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<BrightYellowSwirlAnimation>();
-
-        protected override bool AffectFloor(int y, int x)
+        GridTile cPtr = SaveGame.Level.Grid[y][x];
+        bool obvious = false;
+        if (cPtr.FeatureType.IsClosedDoor || cPtr.FeatureType.Category == FloorTileTypeCategory.OpenDoorway || cPtr.FeatureType.Category == FloorTileTypeCategory.UnidentifiedTrap || cPtr.FeatureType.IsTrap)
         {
-            GridTile cPtr = SaveGame.Level.Grid[y][x];
-            bool obvious = false;
-            if (cPtr.FeatureType.IsClosedDoor || cPtr.FeatureType.Category == FloorTileTypeCategory.OpenDoorway || cPtr.FeatureType.Category == FloorTileTypeCategory.UnidentifiedTrap || cPtr.FeatureType.IsTrap)
+            if (SaveGame.Level.PlayerHasLosBold(y, x))
             {
-                if (SaveGame.Level.PlayerHasLosBold(y, x))
+                SaveGame.MsgPrint("There is a bright flash of light!");
+                obvious = true;
+                if (cPtr.FeatureType.IsClosedDoor)
                 {
-                    SaveGame.MsgPrint("There is a bright flash of light!");
-                    obvious = true;
-                    if (cPtr.FeatureType.IsClosedDoor)
-                    {
-                        SaveGame.UpdateMonstersFlaggedAction.Set();
-                        SaveGame.UpdateLightFlaggedAction.Set();
-                        SaveGame.UpdateViewFlaggedAction.Set();
-                    }
+                    SaveGame.UpdateMonstersFlaggedAction.Set();
+                    SaveGame.UpdateLightFlaggedAction.Set();
+                    SaveGame.UpdateViewFlaggedAction.Set();
                 }
-                cPtr.TileFlags.Clear(GridTile.PlayerMemorised);
-                SaveGame.Level.RevertTileToBackground(y, x);
             }
-            return obvious;
+            cPtr.TileFlags.Clear(GridTile.PlayerMemorised);
+            SaveGame.Level.RevertTileToBackground(y, x);
         }
+        return obvious;
+    }
 
-        protected override bool AffectItem(int who, int y, int x)
+    protected override bool AffectItem(int who, int y, int x)
+    {
+        GridTile cPtr = SaveGame.Level.Grid[y][x];
+        int nextOIdx;
+        bool obvious = false;
+        foreach (Item oPtr in cPtr.Items)
         {
-            GridTile cPtr = SaveGame.Level.Grid[y][x];
-            int nextOIdx;
-            bool obvious = false;
-            foreach (Item oPtr in cPtr.Items)
+            if (oPtr.Count > 1)
             {
-                if (oPtr.Count > 1)
+            }
+            if (oPtr.FixedArtifact != null || string.IsNullOrEmpty(oPtr.RandartName) == false)
+            {
+            }
+            if (oPtr.Category == ItemTypeEnum.Chest)
+            {
+                if (oPtr.TypeSpecificValue > 0)
                 {
-                }
-                if (oPtr.FixedArtifact != null || string.IsNullOrEmpty(oPtr.RandartName) == false)
-                {
-                }
-                if (oPtr.Category == ItemTypeEnum.Chest)
-                {
-                    if (oPtr.TypeSpecificValue > 0)
+                    oPtr.TypeSpecificValue = 0 - oPtr.TypeSpecificValue;
+                    oPtr.BecomeKnown();
+                    if (oPtr.Marked)
                     {
-                        oPtr.TypeSpecificValue = 0 - oPtr.TypeSpecificValue;
-                        oPtr.BecomeKnown();
-                        if (oPtr.Marked)
-                        {
-                            SaveGame.MsgPrint("Click!");
-                            obvious = true;
-                        }
+                        SaveGame.MsgPrint("Click!");
+                        obvious = true;
                     }
                 }
             }
-            return obvious;
         }
+        return obvious;
+    }
 
-        protected override bool ProjectileAngersMonster(Monster mPtr)
-        {
-            return false;
-        }
+    protected override bool ProjectileAngersMonster(Monster mPtr)
+    {
+        return false;
+    }
 
-        protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-        {
-            string? note = null;
-            ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-            return false;
-        }
+    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
+    {
+        string? note = null;
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        return false;
     }
 }

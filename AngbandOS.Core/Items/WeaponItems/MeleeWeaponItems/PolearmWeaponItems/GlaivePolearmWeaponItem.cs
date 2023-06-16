@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class GlaivePolearmWeaponItem : PolearmWeaponItem
-    {
-        public GlaivePolearmWeaponItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<PolearmGlaive>()) { }
-    }
+internal class GlaivePolearmWeaponItem : PolearmWeaponItem
+{
+    public GlaivePolearmWeaponItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<PolearmGlaive>()) { }
 }

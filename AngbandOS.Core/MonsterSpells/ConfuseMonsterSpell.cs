@@ -1,63 +1,62 @@
-﻿namespace AngbandOS.Core.MonsterSpells
+﻿namespace AngbandOS.Core.MonsterSpells;
+
+[Serializable]
+internal class ConfuseMonsterSpell : MonsterSpell
 {
-    [Serializable]
-    internal class ConfuseMonsterSpell : MonsterSpell
+    public override bool IsIntelligent => true;
+    public override bool UsesConfusion => true;
+    public override bool Annoys => true;
+
+    public override string? VsPlayerBlindMessage => $"Someone mumbles, and you hear puzzling noises.";
+    public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} creates a mesmerising illusion.";
+    public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} creates a mesmerising illusion in front of {target.Name}";
+
+    public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
     {
-        public override bool IsIntelligent => true;
-        public override bool UsesConfusion => true;
-        public override bool Annoys => true;
-
-        public override string? VsPlayerBlindMessage => $"Someone mumbles, and you hear puzzling noises.";
-        public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} creates a mesmerising illusion.";
-        public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} creates a mesmerising illusion in front of {target.Name}";
-
-        public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
+        if (saveGame.Player.HasConfusionResistance)
         {
-            if (saveGame.Player.HasConfusionResistance)
-            {
-                saveGame.MsgPrint("You disbelieve the feeble spell.");
-            }
-            else if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
-            {
-                saveGame.MsgPrint("You disbelieve the feeble spell.");
-            }
-            else
-            {
-                saveGame.Player.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(4) + 4);
-            }
-            saveGame.Level.UpdateSmartLearn(monster, new ConfSpellResistantDetection());
+            saveGame.MsgPrint("You disbelieve the feeble spell.");
         }
-
-        public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
+        else if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
         {
-            int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-            bool blind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
-            bool seeTarget = !blind && target.IsVisible;
-            string targetName = target.Name;
-            MonsterRace targetRace = target.Race;
+            saveGame.MsgPrint("You disbelieve the feeble spell.");
+        }
+        else
+        {
+            saveGame.Player.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(4) + 4);
+        }
+        saveGame.Level.UpdateSmartLearn(monster, new ConfSpellResistantDetection());
+    }
 
-            if (targetRace.ImmuneConfusion)
+    public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
+    {
+        int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
+        bool blind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool seeTarget = !blind && target.IsVisible;
+        string targetName = target.Name;
+        MonsterRace targetRace = target.Race;
+
+        if (targetRace.ImmuneConfusion)
+        {
+            if (seeTarget)
             {
-                if (seeTarget)
-                {
-                    saveGame.MsgPrint($"{targetName} disbelieves the feeble spell.");
-                }
+                saveGame.MsgPrint($"{targetName} disbelieves the feeble spell.");
             }
-            else if (targetRace.Level > Program.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
+        }
+        else if (targetRace.Level > Program.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
+        {
+            if (seeTarget)
             {
-                if (seeTarget)
-                {
-                    saveGame.MsgPrint($"{targetName} disbelieves the feeble spell.");
-                }
+                saveGame.MsgPrint($"{targetName} disbelieves the feeble spell.");
             }
-            else
+        }
+        else
+        {
+            if (seeTarget)
             {
-                if (seeTarget)
-                {
-                    saveGame.MsgPrint($"{targetName} seems confused.");
-                }
-                target.ConfusionLevel += 12 + Program.Rng.RandomLessThan(4);
+                saveGame.MsgPrint($"{targetName} seems confused.");
             }
+            target.ConfusionLevel += 12 + Program.Rng.RandomLessThan(4);
         }
     }
 }

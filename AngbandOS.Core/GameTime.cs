@@ -6,223 +6,222 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core
+namespace AngbandOS.Core;
+
+[Serializable]
+internal class GameTime
 {
-    [Serializable]
-    internal class GameTime
+    public bool IsBirthday;
+    public bool IsDawn;
+    public bool IsDusk;
+    public bool IsFeelTime;
+    public bool IsHalloween;
+    public bool IsMidnight;
+    public bool IsNewYear;
+
+    private const int LevelFeelDelay = 2500;
+    private const int MillisecondsPerTurn = 800;
+    private int _birthday;
+    private DateTime _currentGameDateTime;
+    private int _currentTurn;
+    private DateTime _dawn;
+    private DateTime _dusk;
+    private DateTime _gameStartDateTime;
+    private int _levelEntryTurn;
+    private TimeSpan _tick = new TimeSpan(0, 0, 0, 0, MillisecondsPerTurn);
+    private readonly SaveGame SaveGame;
+
+    public GameTime(SaveGame saveGame, int startDate, bool startAtDusk)
     {
-        public bool IsBirthday;
-        public bool IsDawn;
-        public bool IsDusk;
-        public bool IsFeelTime;
-        public bool IsHalloween;
-        public bool IsMidnight;
-        public bool IsNewYear;
-
-        private const int LevelFeelDelay = 2500;
-        private const int MillisecondsPerTurn = 800;
-        private int _birthday;
-        private DateTime _currentGameDateTime;
-        private int _currentTurn;
-        private DateTime _dawn;
-        private DateTime _dusk;
-        private DateTime _gameStartDateTime;
-        private int _levelEntryTurn;
-        private TimeSpan _tick = new TimeSpan(0, 0, 0, 0, MillisecondsPerTurn);
-        private readonly SaveGame SaveGame;
-
-        public GameTime(SaveGame saveGame, int startDate, bool startAtDusk)
+        SaveGame = saveGame;
+        _currentGameDateTime = new DateTime(1297, 1, 1, 0, 0, 0, 0);
+        _currentGameDateTime = _currentGameDateTime.AddDays(startDate - 1);
+        _birthday = startDate;
+        RecalculateDawnAndDusk();
+        if (startAtDusk)
         {
-            SaveGame = saveGame;
-            _currentGameDateTime = new DateTime(1297, 1, 1, 0, 0, 0, 0);
-            _currentGameDateTime = _currentGameDateTime.AddDays(startDate - 1);
-            _birthday = startDate;
+            _gameStartDateTime = _dusk;
+        }
+        else
+        {
+            _gameStartDateTime = _dawn;
+        }
+        _currentGameDateTime = _gameStartDateTime;
+        Tick();
+    }
+
+    public TimeSpan ElapsedGameTime
+    {
+        get
+        {
+            return _currentGameDateTime - _gameStartDateTime;
+        }
+    }
+
+    public string BirthdayText
+    {
+        get
+        {
+            return _gameStartDateTime.ToString("MMM d");
+        }
+    }
+
+    public string DateText
+    {
+        get
+        {
+            return _currentGameDateTime.ToString("MMM d");
+        }
+    }
+
+    public bool IsLight
+    {
+        get
+        {
+            return (_currentGameDateTime >= _dawn) && (_currentGameDateTime <= _dusk);
+        }
+    }
+
+    public bool IsTurnHundred
+    {
+        get
+        {
+            return _currentTurn % 100 == 0;
+        }
+    }
+
+    public bool IsTurnTen
+    {
+        get
+        {
+            return _currentTurn % 10 == 0;
+        }
+    }
+
+    public bool LevelFeel
+    {
+        get
+        {
+            return (_currentTurn - _levelEntryTurn) >= LevelFeelDelay;
+        }
+    }
+
+    public string TimeText
+    {
+        get
+        {
+            return _currentGameDateTime.ToString("h:mmtt");
+        }
+    }
+
+    public int Turn
+    {
+        get
+        {
+            return _currentTurn;
+        }
+    }
+
+    public void MarkLevelEntry()
+    {
+        _levelEntryTurn = _currentTurn;
+    }
+
+    public void Tick()
+    {
+        var oldDay = _currentGameDateTime.DayOfYear;
+        _currentTurn++;
+        var oldDateTime = _currentGameDateTime;
+        _currentGameDateTime += _tick;
+        var newDay = _currentGameDateTime.DayOfYear;
+        IsBirthday = false;
+        IsDawn = false;
+        IsDusk = false;
+        IsFeelTime = false;
+        IsHalloween = false;
+        IsMidnight = false;
+        IsNewYear = false;
+        if (_currentTurn - _levelEntryTurn == LevelFeelDelay)
+        {
+            IsFeelTime = true;
+        }
+        if (oldDay != newDay)
+        {
+            IsMidnight = true;
             RecalculateDawnAndDusk();
-            if (startAtDusk)
+            if (newDay == 1)
             {
-                _gameStartDateTime = _dusk;
+                IsNewYear = true;
             }
-            else
+            if (newDay == _birthday)
             {
-                _gameStartDateTime = _dawn;
+                IsBirthday = true;
             }
-            _currentGameDateTime = _gameStartDateTime;
-            Tick();
+            if (newDay == 305)
+            {
+                IsHalloween = true;
+            }
         }
-
-        public TimeSpan ElapsedGameTime
+        if (oldDateTime < _dawn && _currentGameDateTime >= _dawn)
         {
-            get
-            {
-                return _currentGameDateTime - _gameStartDateTime;
-            }
+            IsDawn = true;
         }
-
-        public string BirthdayText
+        if (oldDateTime < _dusk && _currentGameDateTime >= _dusk)
         {
-            get
-            {
-                return _gameStartDateTime.ToString("MMM d");
-            }
+            IsDusk = true;
         }
-
-        public string DateText
+        var year = _currentGameDateTime.Year;
+        if (year > 1297)
         {
-            get
-            {
-                return _currentGameDateTime.ToString("MMM d");
-            }
+            _currentGameDateTime = _currentGameDateTime.AddYears(1297 - year);
         }
 
-        public bool IsLight
-        {
-            get
-            {
-                return (_currentGameDateTime >= _dawn) && (_currentGameDateTime <= _dusk);
-            }
-        }
+        // Send an update to the calling application, that the game time has changed.
+        SaveGame.UpdateNotifier?.GameTimeElapsed();
+    }
 
-        public bool IsTurnHundred
-        {
-            get
-            {
-                return _currentTurn % 100 == 0;
-            }
-        }
+    public void ToNextDawn()
+    {
+        var midnight = new DateTime(_currentGameDateTime.Year, _currentGameDateTime.Month, _currentGameDateTime.Day, 0, 0, 0);
+        midnight += new TimeSpan(1, 0, 0, 0);
+        _currentGameDateTime = midnight;
+        RecalculateDawnAndDusk();
+        _currentGameDateTime = _dawn;
+        ReverseEngineerTurn();
+        Tick();
+    }
 
-        public bool IsTurnTen
-        {
-            get
-            {
-                return _currentTurn % 10 == 0;
-            }
-        }
+    public void ToNextDusk()
+    {
+        var midnight = new DateTime(_currentGameDateTime.Year, _currentGameDateTime.Month, _currentGameDateTime.Day, 0, 0, 0);
+        midnight += new TimeSpan(1, 0, 0, 0);
+        _currentGameDateTime = midnight;
+        RecalculateDawnAndDusk();
+        _currentGameDateTime = _dusk;
+        ReverseEngineerTurn();
+        Tick();
+    }
 
-        public bool LevelFeel
-        {
-            get
-            {
-                return (_currentTurn - _levelEntryTurn) >= LevelFeelDelay;
-            }
-        }
+    private void RecalculateDawnAndDusk()
+    {
+        var midnight = new DateTime(_currentGameDateTime.Year, _currentGameDateTime.Month, _currentGameDateTime.Day, 0, 0, 0);
+        var n = midnight.DayOfYear;
+        var delta = 23.45 * Math.Sin((360.0 / 365.0 * (n + 284)) * (Math.PI / 180.0)) * (Math.PI / 180.0);
+        const double phi = 50.838 * (Math.PI / 180.0);
+        var omega = Math.Acos(Math.Tan(delta) * -Math.Tan(phi)) * (180.0 / Math.PI);
+        var sunriseHoursBeforeNoon = omega / 15.0;
+        var sunrise = TimeSpan.FromHours(12.0 - sunriseHoursBeforeNoon);
+        sunrise = new TimeSpan(0, 0, 0, (int)sunrise.TotalSeconds, 0);
+        var sunset = TimeSpan.FromHours(12.0 + sunriseHoursBeforeNoon);
+        sunset = new TimeSpan(0, 0, 0, (int)sunset.TotalSeconds, 0);
+        _dawn = midnight + sunrise;
+        _dusk = midnight + sunset;
+    }
 
-        public string TimeText
-        {
-            get
-            {
-                return _currentGameDateTime.ToString("h:mmtt");
-            }
-        }
-
-        public int Turn
-        {
-            get
-            {
-                return _currentTurn;
-            }
-        }
-
-        public void MarkLevelEntry()
-        {
-            _levelEntryTurn = _currentTurn;
-        }
-
-        public void Tick()
-        {
-            var oldDay = _currentGameDateTime.DayOfYear;
-            _currentTurn++;
-            var oldDateTime = _currentGameDateTime;
-            _currentGameDateTime += _tick;
-            var newDay = _currentGameDateTime.DayOfYear;
-            IsBirthday = false;
-            IsDawn = false;
-            IsDusk = false;
-            IsFeelTime = false;
-            IsHalloween = false;
-            IsMidnight = false;
-            IsNewYear = false;
-            if (_currentTurn - _levelEntryTurn == LevelFeelDelay)
-            {
-                IsFeelTime = true;
-            }
-            if (oldDay != newDay)
-            {
-                IsMidnight = true;
-                RecalculateDawnAndDusk();
-                if (newDay == 1)
-                {
-                    IsNewYear = true;
-                }
-                if (newDay == _birthday)
-                {
-                    IsBirthday = true;
-                }
-                if (newDay == 305)
-                {
-                    IsHalloween = true;
-                }
-            }
-            if (oldDateTime < _dawn && _currentGameDateTime >= _dawn)
-            {
-                IsDawn = true;
-            }
-            if (oldDateTime < _dusk && _currentGameDateTime >= _dusk)
-            {
-                IsDusk = true;
-            }
-            var year = _currentGameDateTime.Year;
-            if (year > 1297)
-            {
-                _currentGameDateTime = _currentGameDateTime.AddYears(1297 - year);
-            }
-
-            // Send an update to the calling application, that the game time has changed.
-            SaveGame.UpdateNotifier?.GameTimeElapsed();
-        }
-
-        public void ToNextDawn()
-        {
-            var midnight = new DateTime(_currentGameDateTime.Year, _currentGameDateTime.Month, _currentGameDateTime.Day, 0, 0, 0);
-            midnight += new TimeSpan(1, 0, 0, 0);
-            _currentGameDateTime = midnight;
-            RecalculateDawnAndDusk();
-            _currentGameDateTime = _dawn;
-            ReverseEngineerTurn();
-            Tick();
-        }
-
-        public void ToNextDusk()
-        {
-            var midnight = new DateTime(_currentGameDateTime.Year, _currentGameDateTime.Month, _currentGameDateTime.Day, 0, 0, 0);
-            midnight += new TimeSpan(1, 0, 0, 0);
-            _currentGameDateTime = midnight;
-            RecalculateDawnAndDusk();
-            _currentGameDateTime = _dusk;
-            ReverseEngineerTurn();
-            Tick();
-        }
-
-        private void RecalculateDawnAndDusk()
-        {
-            var midnight = new DateTime(_currentGameDateTime.Year, _currentGameDateTime.Month, _currentGameDateTime.Day, 0, 0, 0);
-            var n = midnight.DayOfYear;
-            var delta = 23.45 * Math.Sin((360.0 / 365.0 * (n + 284)) * (Math.PI / 180.0)) * (Math.PI / 180.0);
-            const double phi = 50.838 * (Math.PI / 180.0);
-            var omega = Math.Acos(Math.Tan(delta) * -Math.Tan(phi)) * (180.0 / Math.PI);
-            var sunriseHoursBeforeNoon = omega / 15.0;
-            var sunrise = TimeSpan.FromHours(12.0 - sunriseHoursBeforeNoon);
-            sunrise = new TimeSpan(0, 0, 0, (int)sunrise.TotalSeconds, 0);
-            var sunset = TimeSpan.FromHours(12.0 + sunriseHoursBeforeNoon);
-            sunset = new TimeSpan(0, 0, 0, (int)sunset.TotalSeconds, 0);
-            _dawn = midnight + sunrise;
-            _dusk = midnight + sunset;
-        }
-
-        private void ReverseEngineerTurn()
-        {
-            var totalTime = _currentGameDateTime - _gameStartDateTime;
-            var milliseconds = totalTime.TotalMilliseconds;
-            _currentTurn = (int)(milliseconds / MillisecondsPerTurn);
-        }
+    private void ReverseEngineerTurn()
+    {
+        var totalTime = _currentGameDateTime - _gameStartDateTime;
+        var milliseconds = totalTime.TotalMilliseconds;
+        _currentTurn = (int)(milliseconds / MillisecondsPerTurn);
     }
 }

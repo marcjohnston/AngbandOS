@@ -1,60 +1,59 @@
-namespace AngbandOS.Core.MonsterRaces
-{
-    [Serializable]
-    internal class LichMonsterRace : MonsterRace
-    {
-        protected LichMonsterRace(SaveGame saveGame) : base(saveGame) { }
- 
-        public override MonsterSpellList Spells => new MonsterSpellList(
-            new BlindnessMonsterSpell(),
-            new BrainSmashMonsterSpell(),
-            new CauseCriticalWoundsMonsterSpell(),
-            new DrainManaMonsterSpell(),
-            new HoldMonsterSpell(),
-            new ScareMonsterSpell(),
-            new SlowMonsterSpell(),
-            new BlinkMonsterSpell(),
-            new TeleportAwayMonsterSpell(),
-            new TeleportToMonsterSpell());
-        public override char Character => 'L';
-        public override Colour Colour => Colour.BrightBeige;
-        public override string Name => "Lich";
+namespace AngbandOS.Core.MonsterRaces;
 
-        public override int ArmourClass => 60;
-        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(new TouchAttackType(), new Exp40AttackEffect(), 0, 0),
-            new MonsterAttack(new TouchAttackType(), new UnPowerAttackEffect(), 0, 0),
-            new MonsterAttack(new TouchAttackType(), new LoseDexAttackEffect(), 2, 8),
-            new MonsterAttack(new TouchAttackType(), new LoseDexAttackEffect(), 2, 8)
-        };
-        public override bool BashDoor => true;
-        public override bool ColdBlood => true;
-        public override string Description => "It is a skeletal form dressed in robes. It radiates vastly evil power.";
-        public override bool Drop_1D2 => true;
-        public override bool Evil => true;
-        public override bool ForceMaxHp => true;
-        public override bool ForceSleep => true;
-        public override int FreqInate => 4;
-        public override int FreqSpell => 4;
-        public override string FriendlyName => "Lich";
-        public override int Hdice => 30;
-        public override int Hside => 10;
-        public override bool HurtByLight => true;
-        public override bool ImmuneCold => true;
-        public override bool ImmuneConfusion => true;
-        public override bool ImmunePoison => true;
-        public override bool ImmuneSleep => true;
-        public override int LevelFound => 34;
-        public override int Mexp => 800;
-        public override int NoticeRange => 20;
-        public override bool OpenDoor => true;
-        public override int Rarity => 3;
-        public override int Sleep => 60;
-        public override bool Smart => true;
-        public override int Speed => 110;
-        public override string SplitName1 => "            ";
-        public override string SplitName2 => "            ";
-        public override string SplitName3 => "    Lich    ";
-        public override bool Undead => true;
-    }
+[Serializable]
+internal class LichMonsterRace : MonsterRace
+{
+    protected LichMonsterRace(SaveGame saveGame) : base(saveGame) { }
+
+    public override MonsterSpellList Spells => new MonsterSpellList(
+        new BlindnessMonsterSpell(),
+        new BrainSmashMonsterSpell(),
+        new CauseCriticalWoundsMonsterSpell(),
+        new DrainManaMonsterSpell(),
+        new HoldMonsterSpell(),
+        new ScareMonsterSpell(),
+        new SlowMonsterSpell(),
+        new BlinkMonsterSpell(),
+        new TeleportAwayMonsterSpell(),
+        new TeleportToMonsterSpell());
+    public override char Character => 'L';
+    public override Colour Colour => Colour.BrightBeige;
+    public override string Name => "Lich";
+
+    public override int ArmourClass => 60;
+    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+        new MonsterAttack(new TouchAttackType(), new Exp40AttackEffect(), 0, 0),
+        new MonsterAttack(new TouchAttackType(), new UnPowerAttackEffect(), 0, 0),
+        new MonsterAttack(new TouchAttackType(), new LoseDexAttackEffect(), 2, 8),
+        new MonsterAttack(new TouchAttackType(), new LoseDexAttackEffect(), 2, 8)
+    };
+    public override bool BashDoor => true;
+    public override bool ColdBlood => true;
+    public override string Description => "It is a skeletal form dressed in robes. It radiates vastly evil power.";
+    public override bool Drop_1D2 => true;
+    public override bool Evil => true;
+    public override bool ForceMaxHp => true;
+    public override bool ForceSleep => true;
+    public override int FreqInate => 4;
+    public override int FreqSpell => 4;
+    public override string FriendlyName => "Lich";
+    public override int Hdice => 30;
+    public override int Hside => 10;
+    public override bool HurtByLight => true;
+    public override bool ImmuneCold => true;
+    public override bool ImmuneConfusion => true;
+    public override bool ImmunePoison => true;
+    public override bool ImmuneSleep => true;
+    public override int LevelFound => 34;
+    public override int Mexp => 800;
+    public override int NoticeRange => 20;
+    public override bool OpenDoor => true;
+    public override int Rarity => 3;
+    public override int Sleep => 60;
+    public override bool Smart => true;
+    public override int Speed => 110;
+    public override string SplitName1 => "            ";
+    public override string SplitName2 => "            ";
+    public override string SplitName3 => "    Lich    ";
+    public override bool Undead => true;
 }

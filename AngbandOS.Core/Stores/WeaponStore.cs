@@ -1,96 +1,95 @@
-﻿namespace AngbandOS.Core.Stores
+﻿namespace AngbandOS.Core.Stores;
+
+[Serializable]
+internal class WeaponStore : Store
 {
-    [Serializable]
-    internal class WeaponStore : Store
+    public WeaponStore(SaveGame saveGame) : base(saveGame) { }
+
+    public override StoreType StoreType => StoreType.StoreWeapon;
+    protected override StoreOwner[] StoreOwners => new StoreOwner[]
     {
-        public WeaponStore(SaveGame saveGame) : base(saveGame) { }
+        SaveGame.SingletonRepository.StoreOwners.Get<ArnoldTheBeastlyStoreOwner>(),
+        SaveGame.SingletonRepository.StoreOwners.Get<ArndalBeastSlayerStoreOwner>(),
+        SaveGame.SingletonRepository.StoreOwners.Get<EdorTheShortStoreOwner>(),
+        SaveGame.SingletonRepository.StoreOwners.Get<OglignDragonSlayerStoreOwner>(),
+        SaveGame.SingletonRepository.StoreOwners.Get<DrewTheSkilledStoreOwner>(),
+        SaveGame.SingletonRepository.StoreOwners.Get<OrraxDragonsonStoreOwner>(),
+        SaveGame.SingletonRepository.StoreOwners.Get<BobStoreOwner>(),
+        SaveGame.SingletonRepository.StoreOwners.Get<ArkhothTheStoutStoreOwner>(),
+        SaveGame.SingletonRepository.StoreOwners.Get<SarlyasTheRottenStoreOwner>(),
+        SaveGame.SingletonRepository.StoreOwners.Get<TuethicBareBonesStoreOwner>(),
+        SaveGame.SingletonRepository.StoreOwners.Get<BiliousTheToadStoreOwner>(),
+        SaveGame.SingletonRepository.StoreOwners.Get<FasgulStoreOwner>(),
+        SaveGame.SingletonRepository.StoreOwners.Get<EllefrisThePaladinStoreOwner>(),
+        SaveGame.SingletonRepository.StoreOwners.Get<KtrrikkStoreOwner>(),
+        SaveGame.SingletonRepository.StoreOwners.Get<DrocusSpiderfriendStoreOwner>(),
+        SaveGame.SingletonRepository.StoreOwners.Get<FungusGiantSlayerStoreOwner>(),
+        SaveGame.SingletonRepository.StoreOwners.Get<NadocTheStrongStoreOwner>(),
+        SaveGame.SingletonRepository.StoreOwners.Get<EramogTheWeakStoreOwner>(),
+        SaveGame.SingletonRepository.StoreOwners.Get<EowilithTheFairStoreOwner>(),
+        SaveGame.SingletonRepository.StoreOwners.Get<HuimogBalrogSlayerStoreOwner>(),
+        SaveGame.SingletonRepository.StoreOwners.Get<PeadusTheCruelStoreOwner>(),
+        SaveGame.SingletonRepository.StoreOwners.Get<VamogSlayerStoreOwner>(),
+        SaveGame.SingletonRepository.StoreOwners.Get<HooshnakTheViciousStoreOwner>(),
+        SaveGame.SingletonRepository.StoreOwners.Get<BalennWarDancerStoreOwner>()
+    };
 
-        public override StoreType StoreType => StoreType.StoreWeapon;
-        protected override StoreOwner[] StoreOwners => new StoreOwner[]
+    public override string FeatureType => "Weaponsmiths";
+    public override Colour Colour => Colour.White;
+    public override char Character => '3';
+
+    protected override StockStoreInventoryItem[] GetStoreTable()
+    {
+        return new[]
         {
-            SaveGame.SingletonRepository.StoreOwners.Get<ArnoldTheBeastlyStoreOwner>(),
-            SaveGame.SingletonRepository.StoreOwners.Get<ArndalBeastSlayerStoreOwner>(),
-            SaveGame.SingletonRepository.StoreOwners.Get<EdorTheShortStoreOwner>(),
-            SaveGame.SingletonRepository.StoreOwners.Get<OglignDragonSlayerStoreOwner>(),
-            SaveGame.SingletonRepository.StoreOwners.Get<DrewTheSkilledStoreOwner>(),
-            SaveGame.SingletonRepository.StoreOwners.Get<OrraxDragonsonStoreOwner>(),
-            SaveGame.SingletonRepository.StoreOwners.Get<BobStoreOwner>(),
-            SaveGame.SingletonRepository.StoreOwners.Get<ArkhothTheStoutStoreOwner>(),
-            SaveGame.SingletonRepository.StoreOwners.Get<SarlyasTheRottenStoreOwner>(),
-            SaveGame.SingletonRepository.StoreOwners.Get<TuethicBareBonesStoreOwner>(),
-            SaveGame.SingletonRepository.StoreOwners.Get<BiliousTheToadStoreOwner>(),
-            SaveGame.SingletonRepository.StoreOwners.Get<FasgulStoreOwner>(),
-            SaveGame.SingletonRepository.StoreOwners.Get<EllefrisThePaladinStoreOwner>(),
-            SaveGame.SingletonRepository.StoreOwners.Get<KtrrikkStoreOwner>(),
-            SaveGame.SingletonRepository.StoreOwners.Get<DrocusSpiderfriendStoreOwner>(),
-            SaveGame.SingletonRepository.StoreOwners.Get<FungusGiantSlayerStoreOwner>(),
-            SaveGame.SingletonRepository.StoreOwners.Get<NadocTheStrongStoreOwner>(),
-            SaveGame.SingletonRepository.StoreOwners.Get<EramogTheWeakStoreOwner>(),
-            SaveGame.SingletonRepository.StoreOwners.Get<EowilithTheFairStoreOwner>(),
-            SaveGame.SingletonRepository.StoreOwners.Get<HuimogBalrogSlayerStoreOwner>(),
-            SaveGame.SingletonRepository.StoreOwners.Get<PeadusTheCruelStoreOwner>(),
-            SaveGame.SingletonRepository.StoreOwners.Get<VamogSlayerStoreOwner>(),
-            SaveGame.SingletonRepository.StoreOwners.Get<HooshnakTheViciousStoreOwner>(),
-            SaveGame.SingletonRepository.StoreOwners.Get<BalennWarDancerStoreOwner>()
+            new StockStoreInventoryItem(typeof(ArrowArrowAmmunitionItemFactory), 4),
+            new StockStoreInventoryItem(typeof(BoltBoltAmmunitionItemFactory), 4),
+            new StockStoreInventoryItem(typeof(LightCrossbowBowWeaponItemFactory), 2),
+            new StockStoreInventoryItem(typeof(LongBowWeaponItemFactory), 2),
+            new StockStoreInventoryItem(typeof(ShortBowWeaponItemFactory), 2),
+            new StockStoreInventoryItem(typeof(SlingBowWeaponItemFactory)),
+            new StockStoreInventoryItem(typeof(HaftedWhip), 2),
+            new StockStoreInventoryItem(typeof(PolearmAwlPike)),
+            new StockStoreInventoryItem(typeof(PolearmBattleAxe)),
+            new StockStoreInventoryItem(typeof(PolearmBeakedAxe)),
+            new StockStoreInventoryItem(typeof(PolearmBroadAxe)),
+            new StockStoreInventoryItem(typeof(PolearmLance)),
+            new StockStoreInventoryItem(typeof(PolearmPike)),
+            new StockStoreInventoryItem(typeof(PolearmSpear)),
+            new StockStoreInventoryItem(typeof(PolearmTrident)),
+            new StockStoreInventoryItem(typeof(IronShotAmmunitionItemFactory), 2),
+            new StockStoreInventoryItem(typeof(SwordBastardSword)),
+            new StockStoreInventoryItem(typeof(SwordBroadSword), 2),
+            new StockStoreInventoryItem(typeof(SwordCutlass)),
+            new StockStoreInventoryItem(typeof(SwordDagger), 2),
+            new StockStoreInventoryItem(typeof(SwordKatana)),
+            new StockStoreInventoryItem(typeof(SwordLongSword), 2),
+            new StockStoreInventoryItem(typeof(SwordMainGauche), 2),
+            new StockStoreInventoryItem(typeof(SwordRapier), 2),
+            new StockStoreInventoryItem(typeof(SwordSabre)),
+            new StockStoreInventoryItem(typeof(SwordScimitar), 2),
+            new StockStoreInventoryItem(typeof(SwordShortSword), 2),
+            new StockStoreInventoryItem(typeof(SwordSmallSword), 2),
+            new StockStoreInventoryItem(typeof(SwordTulwar)),
         };
-
-        public override string FeatureType => "Weaponsmiths";
-        public override Colour Colour => Colour.White;
-        public override char Character => '3';
-
-        protected override StockStoreInventoryItem[] GetStoreTable()
-        {
-            return new[]
-            {
-                new StockStoreInventoryItem(typeof(ArrowArrowAmmunitionItemFactory), 4),
-                new StockStoreInventoryItem(typeof(BoltBoltAmmunitionItemFactory), 4),
-                new StockStoreInventoryItem(typeof(LightCrossbowBowWeaponItemFactory), 2),
-                new StockStoreInventoryItem(typeof(LongBowWeaponItemFactory), 2),
-                new StockStoreInventoryItem(typeof(ShortBowWeaponItemFactory), 2),
-                new StockStoreInventoryItem(typeof(SlingBowWeaponItemFactory)),
-                new StockStoreInventoryItem(typeof(HaftedWhip), 2),
-                new StockStoreInventoryItem(typeof(PolearmAwlPike)),
-                new StockStoreInventoryItem(typeof(PolearmBattleAxe)),
-                new StockStoreInventoryItem(typeof(PolearmBeakedAxe)),
-                new StockStoreInventoryItem(typeof(PolearmBroadAxe)),
-                new StockStoreInventoryItem(typeof(PolearmLance)),
-                new StockStoreInventoryItem(typeof(PolearmPike)),
-                new StockStoreInventoryItem(typeof(PolearmSpear)),
-                new StockStoreInventoryItem(typeof(PolearmTrident)),
-                new StockStoreInventoryItem(typeof(IronShotAmmunitionItemFactory), 2),
-                new StockStoreInventoryItem(typeof(SwordBastardSword)),
-                new StockStoreInventoryItem(typeof(SwordBroadSword), 2),
-                new StockStoreInventoryItem(typeof(SwordCutlass)),
-                new StockStoreInventoryItem(typeof(SwordDagger), 2),
-                new StockStoreInventoryItem(typeof(SwordKatana)),
-                new StockStoreInventoryItem(typeof(SwordLongSword), 2),
-                new StockStoreInventoryItem(typeof(SwordMainGauche), 2),
-                new StockStoreInventoryItem(typeof(SwordRapier), 2),
-                new StockStoreInventoryItem(typeof(SwordSabre)),
-                new StockStoreInventoryItem(typeof(SwordScimitar), 2),
-                new StockStoreInventoryItem(typeof(SwordShortSword), 2),
-                new StockStoreInventoryItem(typeof(SwordSmallSword), 2),
-                new StockStoreInventoryItem(typeof(SwordTulwar)),
-            };
-        }
-
-        public override bool ItemMatches(Item item)
-        {
-            switch (item.Factory)
-            {
-                case ShotAmmunitionItemFactory _:
-                case BoltAmmunitionItemFactory _:
-                case ArrowAmmunitionItemFactory _:
-                case BowWeaponItemFactory _:
-                case DiggingItemClass _:
-                case HaftedItemClass _:
-                case PolearmItemClass _:
-                case SwordItemClass _:
-                    return item.Value() > 0;
-                default:
-                    return false;
-            }
-        }
-        protected override BaseStoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get<EnchantWeaponStoreCommand>();
     }
+
+    public override bool ItemMatches(Item item)
+    {
+        switch (item.Factory)
+        {
+            case ShotAmmunitionItemFactory _:
+            case BoltAmmunitionItemFactory _:
+            case ArrowAmmunitionItemFactory _:
+            case BowWeaponItemFactory _:
+            case DiggingItemClass _:
+            case HaftedItemClass _:
+            case PolearmItemClass _:
+            case SwordItemClass _:
+                return item.Value() > 0;
+            default:
+                return false;
+        }
+    }
+    protected override BaseStoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get<EnchantWeaponStoreCommand>();
 }

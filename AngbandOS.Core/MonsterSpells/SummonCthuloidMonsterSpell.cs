@@ -1,12 +1,11 @@
-﻿namespace AngbandOS.Core.MonsterSpells
+﻿namespace AngbandOS.Core.MonsterSpells;
+
+[Serializable]
+internal class SummonCthuloidMonsterSpell : SummonMonsterSpell
 {
-    [Serializable]
-    internal class SummonCthuloidMonsterSpell : SummonMonsterSpell
-    {
-        protected override string SummonName(Monster monster) => "a Cthuloid entity";
+    protected override string SummonName(Monster monster) => "a Cthuloid entity";
 
-        protected override int MaximumSummonCount(SaveGame saveGame) => 1;
+    protected override int MaximumSummonCount(SaveGame saveGame) => 1;
 
-        protected override MonsterSelector? MonsterSelector(Monster monster) => new CthuloidMonsterSelector();
-    }
+    protected override MonsterSelector? MonsterSelector(Monster monster) => new CthuloidMonsterSelector();
 }

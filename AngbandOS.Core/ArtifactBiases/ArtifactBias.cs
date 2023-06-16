@@ -1,52 +1,51 @@
-﻿namespace AngbandOS.Core.ArtifactBiases
+﻿namespace AngbandOS.Core.ArtifactBiases;
+
+/// <summary>
+/// Represents the bias used when applying special abilities to an artifact.
+/// </summary>
+[Serializable]
+internal abstract class ArtifactBias : IArtifactBias
 {
-    /// <summary>
-    /// Represents the bias used when applying special abilities to an artifact.
-    /// </summary>
-    [Serializable]
-    internal abstract class ArtifactBias : IArtifactBias
+    protected readonly SaveGame SaveGame;
+
+    protected ArtifactBias(SaveGame saveGame)
     {
-        protected readonly SaveGame SaveGame;
-
-        protected ArtifactBias(SaveGame saveGame)
-        {
-            SaveGame = saveGame;
-        }
-
-        /// <inheritdoc/>
-        public virtual int ImmunityLuckOneInChance => 20;
-
-        /// <inheritdoc/>
-        public virtual bool ApplyBonuses(Item item)
-        {
-            return false;
-        }
-
-        /// <inheritdoc/>
-        public virtual bool ApplyRandomResistances(Item item)
-        {
-            return false;
-        }
-
-        /// <inheritdoc/>
-        public virtual bool ApplyMiscPowers(Item item)
-        {
-            return false;
-        }
-
-        /// <inheritdoc/>
-        public virtual bool ApplySlaying(Item item)
-        {
-            return false;
-        }
-
-        /// <inheritdoc/>
-        public virtual Activation GetActivationPowerType(Item item)
-        {
-            return null;
-        }
-
-        /// <inheritdoc/>
-        public virtual int ActivationPowerChance => 101;
+        SaveGame = saveGame;
     }
+
+    /// <inheritdoc/>
+    public virtual int ImmunityLuckOneInChance => 20;
+
+    /// <inheritdoc/>
+    public virtual bool ApplyBonuses(Item item)
+    {
+        return false;
+    }
+
+    /// <inheritdoc/>
+    public virtual bool ApplyRandomResistances(Item item)
+    {
+        return false;
+    }
+
+    /// <inheritdoc/>
+    public virtual bool ApplyMiscPowers(Item item)
+    {
+        return false;
+    }
+
+    /// <inheritdoc/>
+    public virtual bool ApplySlaying(Item item)
+    {
+        return false;
+    }
+
+    /// <inheritdoc/>
+    public virtual Activation GetActivationPowerType(Item item)
+    {
+        return null;
+    }
+
+    /// <inheritdoc/>
+    public virtual int ActivationPowerChance => 101;
 }

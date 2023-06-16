@@ -6,23 +6,22 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Folk
-{
-    [Serializable]
-    internal class FolkSpellCureLightWounds : Spell
-    {
-        private FolkSpellCureLightWounds(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.Player.RestoreHealth(Program.Rng.DiceRoll(2, 8));
-            SaveGame.Player.TimedBleeding.AddTimer(-10);
-        }
+namespace AngbandOS.Core.Spells.Folk;
 
-        public override string Name => "Cure Light Wounds";
-        
-        protected override string? Info()
-        {
-            return "heal 2d8";
-        }
+[Serializable]
+internal class FolkSpellCureLightWounds : Spell
+{
+    private FolkSpellCureLightWounds(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.Player.RestoreHealth(Program.Rng.DiceRoll(2, 8));
+        SaveGame.Player.TimedBleeding.AddTimer(-10);
+    }
+
+    public override string Name => "Cure Light Wounds";
+    
+    protected override string? Info()
+    {
+        return "heal 2d8";
     }
 }

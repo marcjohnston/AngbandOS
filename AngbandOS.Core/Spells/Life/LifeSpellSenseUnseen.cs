@@ -6,22 +6,21 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Life
-{
-    [Serializable]
-    internal class LifeSpellSenseUnseen : Spell
-    {
-        private LifeSpellSenseUnseen(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.Player.TimedSeeInvisibility.AddTimer(Program.Rng.DieRoll(24) + 24);
-        }
+namespace AngbandOS.Core.Spells.Life;
 
-        public override string Name => "Sense Unseen";
-        
-        protected override string? Info()
-        {
-            return "dur 24+d24";
-        }
+[Serializable]
+internal class LifeSpellSenseUnseen : Spell
+{
+    private LifeSpellSenseUnseen(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.Player.TimedSeeInvisibility.AddTimer(Program.Rng.DieRoll(24) + 24);
+    }
+
+    public override string Name => "Sense Unseen";
+    
+    protected override string? Info()
+    {
+        return "dur 24+d24";
     }
 }

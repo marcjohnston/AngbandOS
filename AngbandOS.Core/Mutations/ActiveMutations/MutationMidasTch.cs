@@ -6,30 +6,29 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.ActiveMutations
+namespace AngbandOS.Core.Mutations.ActiveMutations;
+
+[Serializable]
+internal class MutationMidasTch : Mutation
 {
-    [Serializable]
-    internal class MutationMidasTch : Mutation
+    public override void Activate(SaveGame saveGame)
     {
-        public override void Activate(SaveGame saveGame)
+        if (saveGame.CheckIfRacialPowerWorks(10, 5, Ability.Intelligence, 12))
         {
-            if (saveGame.CheckIfRacialPowerWorks(10, 5, Ability.Intelligence, 12))
-            {
-                saveGame.Alchemy();
-            }
+            saveGame.Alchemy();
         }
+    }
 
-        public override string ActivationSummary(int lvl)
-        {
-            return lvl < 10 ? "midas touch      (unusable until level 10)" : "midas touch      (cost 5, INT based)";
-        }
+    public override string ActivationSummary(int lvl)
+    {
+        return lvl < 10 ? "midas touch      (unusable until level 10)" : "midas touch      (cost 5, INT based)";
+    }
 
-        public override void Initialize()
-        {
-            Frequency = 2;
-            GainMessage = "You gain the Midas touch.";
-            HaveMessage = "You can turn ordinary items to gold.";
-            LoseMessage = "You lose the Midas touch.";
-        }
+    public override void Initialize()
+    {
+        Frequency = 2;
+        GainMessage = "You gain the Midas touch.";
+        HaveMessage = "You can turn ordinary items to gold.";
+        LoseMessage = "You lose the Midas touch.";
     }
 }

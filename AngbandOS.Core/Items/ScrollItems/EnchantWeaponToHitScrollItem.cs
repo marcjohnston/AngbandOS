@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class EnchantWeaponToHitScrollItem : ScrollItem
-    {
-        public EnchantWeaponToHitScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ScrollEnchantWeaponToHit>()) { }
-    }
+internal class EnchantWeaponToHitScrollItem : ScrollItem
+{
+    public EnchantWeaponToHitScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ScrollEnchantWeaponToHit>()) { }
 }

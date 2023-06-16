@@ -8,21 +8,20 @@
 
 using static AngbandOS.Core.CelephaisDungeon;
 
-namespace AngbandOS.Core
-{
+namespace AngbandOS.Core;
+
 [Serializable]
-    internal class TombDungeon : Dungeon
-    {
-        private TombDungeon(SaveGame saveGame) : base(saveGame) { }
-        public override int BaseOffset => 4;
-        public override int MaxLevel => 21;
-        public override MonsterSelector? Bias => new UndeadMonsterSelector();
-        public override string FirstGuardian => "The disembodied hand";
-        public override string SecondGuardian => "Khufu the mummified King";
-        public override int FirstLevel => 1;
-        public override int SecondLevel => 21;
-        public override string Name => "Khufu's Tomb";
-        public override string Shortname => "Tomb";
-        public override string MapSymbol => "t";
-    }
+internal class TombDungeon : Dungeon
+{
+    private TombDungeon(SaveGame saveGame) : base(saveGame) { }
+    public override int BaseOffset => 4;
+    public override int MaxLevel => 21;
+    public override MonsterSelector? Bias => new UndeadMonsterSelector();
+    public override string FirstGuardian => "The disembodied hand";
+    public override string SecondGuardian => "Khufu the mummified King";
+    public override int FirstLevel => 1;
+    public override int SecondLevel => 21;
+    public override string Name => "Khufu's Tomb";
+    public override string Shortname => "Tomb";
+    public override string MapSymbol => "t";
 }

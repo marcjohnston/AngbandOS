@@ -6,20 +6,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Corporeal
-{
-    [Serializable]
-    internal class CorporealSpellEaglesVision : Spell
-    {
-        private CorporealSpellEaglesVision(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.DetectTraps();
-            SaveGame.DetectDoors();
-            SaveGame.DetectStairs();
-        }
+namespace AngbandOS.Core.Spells.Corporeal;
 
-        public override string Name => "Eagle's Vision";
-        
+[Serializable]
+internal class CorporealSpellEaglesVision : Spell
+{
+    private CorporealSpellEaglesVision(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.DetectTraps();
+        SaveGame.DetectDoors();
+        SaveGame.DetectStairs();
     }
+
+    public override string Name => "Eagle's Vision";
+    
 }

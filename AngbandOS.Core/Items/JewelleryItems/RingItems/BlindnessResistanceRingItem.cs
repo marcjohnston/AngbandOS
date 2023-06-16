@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class BlindnessResistanceRingItem : RingItem
-    {
-        public BlindnessResistanceRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<BlindnessResistanceRingItemFactory>()) { }
-    }
+internal class BlindnessResistanceRingItem : RingItem
+{
+    public BlindnessResistanceRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<BlindnessResistanceRingItemFactory>()) { }
 }

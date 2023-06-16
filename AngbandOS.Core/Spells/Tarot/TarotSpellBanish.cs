@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Tarot
-{
-    [Serializable]
-    internal class TarotSpellBanish : Spell
-    {
-        private TarotSpellBanish(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.BanishMonsters(SaveGame.Player.Level * 4);
-        }
+namespace AngbandOS.Core.Spells.Tarot;
 
-        public override string Name => "Banish";
-        
+[Serializable]
+internal class TarotSpellBanish : Spell
+{
+    private TarotSpellBanish(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.BanishMonsters(SaveGame.Player.Level * 4);
     }
+
+    public override string Name => "Banish";
+    
 }

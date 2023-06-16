@@ -1,42 +1,41 @@
-﻿namespace AngbandOS.Core.ArtifactBiases
+﻿namespace AngbandOS.Core.ArtifactBiases;
+
+[Serializable]
+internal class MageArtifactBias : ArtifactBias
 {
-    [Serializable]
-    internal class MageArtifactBias : ArtifactBias
+    private MageArtifactBias(SaveGame saveGame) : base(saveGame) { }
+    public override bool ApplyBonuses(Item item)
     {
-        private MageArtifactBias(SaveGame saveGame) : base(saveGame) { }
-        public override bool ApplyBonuses(Item item)
+        if (!item.RandartItemCharacteristics.Int)
         {
-            if (!item.RandartItemCharacteristics.Int)
+            item.RandartItemCharacteristics.Int = true;
+            if (Program.Rng.DieRoll(2) == 1)
             {
-                item.RandartItemCharacteristics.Int = true;
-                if (Program.Rng.DieRoll(2) == 1)
-                {
-                    return true;
-                }
+                return true;
             }
-            return false;
         }
+        return false;
+    }
 
-        public override int ActivationPowerChance => 66;
+    public override int ActivationPowerChance => 66;
 
-        public override Activation GetActivationPowerType(Item item)
+    public override Activation GetActivationPowerType(Item item)
+    {
+        if (Program.Rng.DieRoll(20) == 1)
         {
-            if (Program.Rng.DieRoll(20) == 1)
-            {
-                return SaveGame.SingletonRepository.Activations.Get<SummonElementalActivation>();
-            }
-            else if (Program.Rng.DieRoll(10) == 1)
-            {
-                return SaveGame.SingletonRepository.Activations.Get<SummonPhantomActivation>();
-            }
-            else if (Program.Rng.DieRoll(5) == 1)
-            {
-                return SaveGame.SingletonRepository.Activations.Get<RuneExploActivation>();
-            }
-            else
-            {
-                return SaveGame.SingletonRepository.Activations.Get<EspActivation>();
-            }
+            return SaveGame.SingletonRepository.Activations.Get<SummonElementalActivation>();
+        }
+        else if (Program.Rng.DieRoll(10) == 1)
+        {
+            return SaveGame.SingletonRepository.Activations.Get<SummonPhantomActivation>();
+        }
+        else if (Program.Rng.DieRoll(5) == 1)
+        {
+            return SaveGame.SingletonRepository.Activations.Get<RuneExploActivation>();
+        }
+        else
+        {
+            return SaveGame.SingletonRepository.Activations.Get<EspActivation>();
         }
     }
 }

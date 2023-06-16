@@ -6,52 +6,51 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Talents
-{
-    [Serializable]
-    internal class TalentMinorDisplacement : Talent
-    {
-        public override string Name => "Minor Displacement";
-        public override void Initialise(int characterClass)
-        {
-            Level = 3;
-            ManaCost = 2;
-            BaseFailure = 25;
-        }
+namespace AngbandOS.Core.Talents;
 
-        public override void Use(SaveGame saveGame)
+[Serializable]
+internal class TalentMinorDisplacement : Talent
+{
+    public override string Name => "Minor Displacement";
+    public override void Initialise(int characterClass)
+    {
+        Level = 3;
+        ManaCost = 2;
+        BaseFailure = 25;
+    }
+
+    public override void Use(SaveGame saveGame)
+    {
+        if (saveGame.Player.Level < 25)
         {
-            if (saveGame.Player.Level < 25)
+            saveGame.TeleportPlayer(10);
+        }
+        else
+        {
+            saveGame.MsgPrint("Choose a destination.");
+            if (!saveGame.TgtPt(out int i, out int j))
             {
-                saveGame.TeleportPlayer(10);
+                return;
+            }
+            saveGame.Player.Energy -= 60 - saveGame.Player.Level;
+            if (!saveGame.Level.GridPassableNoCreature(j, i) || saveGame.Level.Grid[j][i].TileFlags.IsSet(GridTile.InVault) ||
+                saveGame.Level.Grid[j][i].FeatureType.Name != "Water" ||
+                saveGame.Level.Distance(j, i, saveGame.Player.MapY, saveGame.Player.MapX) > saveGame.Player.Level + 2 ||
+                Program.Rng.RandomLessThan(saveGame.Player.Level * saveGame.Player.Level / 2) == 0)
+            {
+                saveGame.MsgPrint("Something disrupts your concentration!");
+                saveGame.Player.Energy -= 100;
+                saveGame.TeleportPlayer(20);
             }
             else
             {
-                saveGame.MsgPrint("Choose a destination.");
-                if (!saveGame.TgtPt(out int i, out int j))
-                {
-                    return;
-                }
-                saveGame.Player.Energy -= 60 - saveGame.Player.Level;
-                if (!saveGame.Level.GridPassableNoCreature(j, i) || saveGame.Level.Grid[j][i].TileFlags.IsSet(GridTile.InVault) ||
-                    saveGame.Level.Grid[j][i].FeatureType.Name != "Water" ||
-                    saveGame.Level.Distance(j, i, saveGame.Player.MapY, saveGame.Player.MapX) > saveGame.Player.Level + 2 ||
-                    Program.Rng.RandomLessThan(saveGame.Player.Level * saveGame.Player.Level / 2) == 0)
-                {
-                    saveGame.MsgPrint("Something disrupts your concentration!");
-                    saveGame.Player.Energy -= 100;
-                    saveGame.TeleportPlayer(20);
-                }
-                else
-                {
-                    saveGame.TeleportPlayerTo(j, i);
-                }
+                saveGame.TeleportPlayerTo(j, i);
             }
         }
+    }
 
-        protected override string Comment(Player player)
-        {
-            return $"range {(player.Level < 25 ? 10 : player.Level + 2)}";
-        }
+    protected override string Comment(Player player)
+    {
+        return $"range {(player.Level < 25 ? 10 : player.Level + 2)}";
     }
 }

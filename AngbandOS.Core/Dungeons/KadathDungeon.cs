@@ -8,21 +8,20 @@
 
 using static AngbandOS.Core.CelephaisDungeon;
 
-namespace AngbandOS.Core
-{
+namespace AngbandOS.Core;
+
 [Serializable]
-    internal class KadathDungeon : Dungeon
-    {
-        private KadathDungeon(SaveGame saveGame) : base(saveGame) { }
-        public override int BaseOffset => 50;
-        public override int MaxLevel => 75;
-        public override MonsterSelector? Bias => new CthuloidMonsterSelector();
-        public override string FirstGuardian => "Nyarlathotep";
-        public override string SecondGuardian => "Azathoth, The Daemon Sultan";
-        public override int FirstLevel => 49;
-        public override int SecondLevel => 50;
-        public override string Name => "the Catacombs under Kadath";
-        public override string Shortname => "Kadath";
-        public override string MapSymbol => "K";
-    }
+internal class KadathDungeon : Dungeon
+{
+    private KadathDungeon(SaveGame saveGame) : base(saveGame) { }
+    public override int BaseOffset => 50;
+    public override int MaxLevel => 75;
+    public override MonsterSelector? Bias => new CthuloidMonsterSelector();
+    public override string FirstGuardian => "Nyarlathotep";
+    public override string SecondGuardian => "Azathoth, The Daemon Sultan";
+    public override int FirstLevel => 49;
+    public override int SecondLevel => 50;
+    public override string Name => "the Catacombs under Kadath";
+    public override string Shortname => "Kadath";
+    public override string MapSymbol => "K";
 }

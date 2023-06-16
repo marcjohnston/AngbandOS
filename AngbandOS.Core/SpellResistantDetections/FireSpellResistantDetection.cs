@@ -1,21 +1,20 @@
-﻿namespace AngbandOS.Core.SpellResistantDetections
+﻿namespace AngbandOS.Core.SpellResistantDetections;
+
+internal class FireSpellResistantDetection : SpellResistantDetection
 {
-    internal class FireSpellResistantDetection : SpellResistantDetection
+    public override void Learn(SaveGame saveGame, Monster monster)
     {
-        public override void Learn(SaveGame saveGame, Monster monster)
+        if (saveGame.Player.HasFireResistance)
         {
-            if (saveGame.Player.HasFireResistance)
-            {
-                monster.SmResFire = true;
-            }
-            if (saveGame.Player.TimedFireResistance.TurnsRemaining != 0)
-            {
-                monster.SmOppFire = true;
-            }
-            if (saveGame.Player.HasFireImmunity)
-            {
-                monster.SmImmFire = true;
-            }
+            monster.SmResFire = true;
+        }
+        if (saveGame.Player.TimedFireResistance.TurnsRemaining != 0)
+        {
+            monster.SmOppFire = true;
+        }
+        if (saveGame.Player.HasFireImmunity)
+        {
+            monster.SmImmFire = true;
         }
     }
 }

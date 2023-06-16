@@ -6,29 +6,28 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.RandomMutations
-{
-    [Serializable]
-    internal class MutationBersRage : Mutation
-    {
-        public override void Initialize()
-        {
-            Frequency = 1;
-            GainMessage = "You become subject to fits of berserk rage!";
-            HaveMessage = "You are subject to berserker fits.";
-            LoseMessage = "You are no longer subject to fits of berserk rage!";
-        }
+namespace AngbandOS.Core.Mutations.RandomMutations;
 
-        public override void OnProcessWorld(SaveGame saveGame)
+[Serializable]
+internal class MutationBersRage : Mutation
+{
+    public override void Initialize()
+    {
+        Frequency = 1;
+        GainMessage = "You become subject to fits of berserk rage!";
+        HaveMessage = "You are subject to berserker fits.";
+        LoseMessage = "You are no longer subject to fits of berserk rage!";
+    }
+
+    public override void OnProcessWorld(SaveGame saveGame)
+    {
+        if (Program.Rng.DieRoll(3000) != 1)
         {
-            if (Program.Rng.DieRoll(3000) != 1)
-            {
-                return;
-            }
-            saveGame.Disturb(false);
-            saveGame.MsgPrint("RAAAAGHH!");
-            saveGame.MsgPrint("You feel a fit of rage coming over you!");
-            saveGame.Player.TimedSuperheroism.AddTimer(10 + Program.Rng.DieRoll(saveGame.Player.Level));
+            return;
         }
+        saveGame.Disturb(false);
+        saveGame.MsgPrint("RAAAAGHH!");
+        saveGame.MsgPrint("You feel a fit of rage coming over you!");
+        saveGame.Player.TimedSuperheroism.AddTimer(10 + Program.Rng.DieRoll(saveGame.Player.Level));
     }
 }

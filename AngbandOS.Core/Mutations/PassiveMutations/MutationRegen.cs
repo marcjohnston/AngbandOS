@@ -6,27 +6,26 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.PassiveMutations
+namespace AngbandOS.Core.Mutations.PassiveMutations;
+
+[Serializable]
+internal class MutationRegen : Mutation
 {
-    [Serializable]
-    internal class MutationRegen : Mutation
+    public override void Initialize()
     {
-        public override void Initialize()
-        {
-            Frequency = 2;
-            GainMessage = "You start regenerating.";
-            HaveMessage = "You are regenerating.";
-            LoseMessage = "You stop regenerating.";
-        }
+        Frequency = 2;
+        GainMessage = "You start regenerating.";
+        HaveMessage = "You are regenerating.";
+        LoseMessage = "You stop regenerating.";
+    }
 
-        public override void OnGain(Genome genome)
-        {
-            genome.Regen = true;
-        }
+    public override void OnGain(Genome genome)
+    {
+        genome.Regen = true;
+    }
 
-        public override void OnLose(Genome genome)
-        {
-            genome.Regen = false;
-        }
+    public override void OnLose(Genome genome)
+    {
+        genome.Regen = false;
     }
 }

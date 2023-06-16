@@ -1,25 +1,24 @@
-namespace AngbandOS.Core.ItemCategories
+namespace AngbandOS.Core.ItemCategories;
+
+[Serializable]
+internal class ChestSmallWooden : ChestItemClass
 {
-    [Serializable]
-    internal class ChestSmallWooden : ChestItemClass
-    {
-        private ChestSmallWooden(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ChestSmallWooden(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public override char Character => '~';
-        public override Colour Colour => Colour.Grey;
-        public override string Name => "Small wooden chest";
+    public override char Character => '~';
+    public override Colour Colour => Colour.Grey;
+    public override string Name => "Small wooden chest";
 
-        public override int[] Chance => new int[] { 1, 0, 0, 0 };
-        public override int Cost => 20;
-        public override int Dd => 2;
-        public override int Ds => 3;
-        public override string FriendlyName => "& Small wooden chest~";
-        public override int Level => 5;
-        public override int[] Locale => new int[] { 5, 0, 0, 0 };
-        public override int? SubCategory => 1;
-        public override int Weight => 250;
-        public override bool IsSmall => true;
-        public override int NumberOfItemsContained => 2;
-        public override Item CreateItem() => new SmallWoodenChestItem(SaveGame);
-    }
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
+    public override int Cost => 20;
+    public override int Dd => 2;
+    public override int Ds => 3;
+    public override string FriendlyName => "& Small wooden chest~";
+    public override int Level => 5;
+    public override int[] Locale => new int[] { 5, 0, 0, 0 };
+    public override int? SubCategory => 1;
+    public override int Weight => 250;
+    public override bool IsSmall => true;
+    public override int NumberOfItemsContained => 2;
+    public override Item CreateItem() => new SmallWoodenChestItem(SaveGame);
 }

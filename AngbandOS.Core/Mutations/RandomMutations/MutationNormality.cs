@@ -6,25 +6,24 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.RandomMutations
-{
-    [Serializable]
-    internal class MutationNormality : Mutation
-    {
-        public override void Initialize()
-        {
-            Frequency = 3;
-            GainMessage = "You feel strangely normal.";
-            HaveMessage = "You may be chaotic, but you're recovering.";
-            LoseMessage = "You feel normally strange.";
-        }
+namespace AngbandOS.Core.Mutations.RandomMutations;
 
-        public override void OnProcessWorld(SaveGame saveGame)
+[Serializable]
+internal class MutationNormality : Mutation
+{
+    public override void Initialize()
+    {
+        Frequency = 3;
+        GainMessage = "You feel strangely normal.";
+        HaveMessage = "You may be chaotic, but you're recovering.";
+        LoseMessage = "You feel normally strange.";
+    }
+
+    public override void OnProcessWorld(SaveGame saveGame)
+    {
+        if (Program.Rng.DieRoll(5000) == 1)
         {
-            if (Program.Rng.DieRoll(5000) == 1)
-            {
-                saveGame.Player.Dna.LoseMutation();
-            }
+            saveGame.Player.Dna.LoseMutation();
         }
     }
 }

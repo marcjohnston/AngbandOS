@@ -1,14 +1,13 @@
 ﻿
-namespace AngbandOS.Core.FlaggedActions
+namespace AngbandOS.Core.FlaggedActions;
+
+[Serializable]
+internal class RedrawAllFlaggedAction : FlaggedAction
 {
-    [Serializable]
-    internal class RedrawAllFlaggedAction : FlaggedAction
+    public RedrawAllFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    protected override void Execute()
     {
-        public RedrawAllFlaggedAction(SaveGame saveGame) : base(saveGame) { }
-        protected override void Execute()
-        {
-            SaveGame.MsgPrint(null);
-            SaveGame.Screen.Clear();
-        }
+        SaveGame.MsgPrint(null);
+        SaveGame.Screen.Clear();
     }
 }

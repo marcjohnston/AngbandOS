@@ -6,22 +6,21 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Corporeal
-{
-    [Serializable]
-    internal class CorporealSpellMindVision : Spell
-    {
-        private CorporealSpellMindVision(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.Player.TimedTelepathy.AddTimer(Program.Rng.DieRoll(30) + 25);
-        }
+namespace AngbandOS.Core.Spells.Corporeal;
 
-        public override string Name => "Mind Vision";
-        
-        protected override string? Info()
-        {
-            return "dur 25+d30";
-        }
+[Serializable]
+internal class CorporealSpellMindVision : Spell
+{
+    private CorporealSpellMindVision(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.Player.TimedTelepathy.AddTimer(Program.Rng.DieRoll(30) + 25);
+    }
+
+    public override string Name => "Mind Vision";
+    
+    protected override string? Info()
+    {
+        return "dur 25+d30";
     }
 }

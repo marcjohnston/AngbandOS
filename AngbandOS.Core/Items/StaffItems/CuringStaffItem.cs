@@ -1,12 +1,11 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class CuringStaffItem : StaffItem
+internal class CuringStaffItem : StaffItem
+{
+    public CuringStaffItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<StaffCuring>()) { }
+    protected override void ApplyMagic(int level, int power, Store? store)
     {
-        public CuringStaffItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<StaffCuring>()) { }
-        protected override void ApplyMagic(int level, int power, Store? store)
-        {
-            TypeSpecificValue = Program.Rng.DieRoll(3) + 4;
-        }
+        TypeSpecificValue = Program.Rng.DieRoll(3) + 4;
     }
 }

@@ -6,22 +6,21 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Corporeal
-{
-    [Serializable]
-    internal class CorporealSpellWraithform : Spell
-    {
-        private CorporealSpellWraithform(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.Player.TimedEtherealness.AddTimer(Program.Rng.DieRoll(SaveGame.Player.Level / 2) + (SaveGame.Player.Level / 2));
-        }
+namespace AngbandOS.Core.Spells.Corporeal;
 
-        public override string Name => "Wraithform";
-        
-        protected override string? Info()
-        {
-            return $"dur {SaveGame.Player.Level / 2}+d{SaveGame.Player.Level / 2}";
-        }
+[Serializable]
+internal class CorporealSpellWraithform : Spell
+{
+    private CorporealSpellWraithform(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.Player.TimedEtherealness.AddTimer(Program.Rng.DieRoll(SaveGame.Player.Level / 2) + (SaveGame.Player.Level / 2));
+    }
+
+    public override string Name => "Wraithform";
+    
+    protected override string? Info()
+    {
+        return $"dur {SaveGame.Player.Level / 2}+d{SaveGame.Player.Level / 2}";
     }
 }

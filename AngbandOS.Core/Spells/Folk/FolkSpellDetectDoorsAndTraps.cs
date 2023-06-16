@@ -6,20 +6,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Folk
-{
-    [Serializable]
-    internal class FolkSpellDetectDoorsAndTraps : Spell
-    {
-        private FolkSpellDetectDoorsAndTraps(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.DetectTraps();
-            SaveGame.DetectDoors();
-            SaveGame.DetectStairs();
-        }
+namespace AngbandOS.Core.Spells.Folk;
 
-        public override string Name => "Detect Doors and Traps";
-        
+[Serializable]
+internal class FolkSpellDetectDoorsAndTraps : Spell
+{
+    private FolkSpellDetectDoorsAndTraps(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.DetectTraps();
+        SaveGame.DetectDoors();
+        SaveGame.DetectStairs();
     }
+
+    public override string Name => "Detect Doors and Traps";
+    
 }

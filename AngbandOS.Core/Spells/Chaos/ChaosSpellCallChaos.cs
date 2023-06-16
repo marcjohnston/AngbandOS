@@ -6,22 +6,21 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Chaos
-{
-    [Serializable]
-    internal class ChaosSpellCallChaos : Spell
-    {
-        private ChaosSpellCallChaos(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.CallChaos();
-        }
+namespace AngbandOS.Core.Spells.Chaos;
 
-        public override string Name => "Call Chaos";
-        
-        protected override string? Info()
-        {
-            return "dam 75 / 150";
-        }
+[Serializable]
+internal class ChaosSpellCallChaos : Spell
+{
+    private ChaosSpellCallChaos(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.CallChaos();
+    }
+
+    public override string Name => "Call Chaos";
+    
+    protected override string? Info()
+    {
+        return "dam 75 / 150";
     }
 }

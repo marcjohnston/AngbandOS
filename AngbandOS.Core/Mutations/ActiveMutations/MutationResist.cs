@@ -6,55 +6,54 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.ActiveMutations
+namespace AngbandOS.Core.Mutations.ActiveMutations;
+
+[Serializable]
+internal class MutationResist : Mutation
 {
-    [Serializable]
-    internal class MutationResist : Mutation
+    public override void Activate(SaveGame saveGame)
     {
-        public override void Activate(SaveGame saveGame)
+        if (saveGame.CheckIfRacialPowerWorks(10, 12, Ability.Constitution, 12))
         {
-            if (saveGame.CheckIfRacialPowerWorks(10, 12, Ability.Constitution, 12))
+            int num = saveGame.Player.Level / 10;
+            int dur = Program.Rng.DieRoll(20) + 20;
+            if (Program.Rng.RandomLessThan(5) < num)
             {
-                int num = saveGame.Player.Level / 10;
-                int dur = Program.Rng.DieRoll(20) + 20;
-                if (Program.Rng.RandomLessThan(5) < num)
-                {
-                    saveGame.Player.TimedAcidResistance.AddTimer(dur);
-                    num--;
-                }
-                if (Program.Rng.RandomLessThan(4) < num)
-                {
-                    saveGame.Player.TimedLightningResistance.AddTimer(dur);
-                    num--;
-                }
-                if (Program.Rng.RandomLessThan(3) < num)
-                {
-                    saveGame.Player.TimedFireResistance.AddTimer(dur);
-                    num--;
-                }
-                if (Program.Rng.RandomLessThan(2) < num)
-                {
-                    saveGame.Player.TimedColdResistance.AddTimer(dur);
-                    num--;
-                }
-                if (num != 0)
-                {
-                    saveGame.Player.TimedPoisonResistance.AddTimer(dur);
-                }
+                saveGame.Player.TimedAcidResistance.AddTimer(dur);
+                num--;
+            }
+            if (Program.Rng.RandomLessThan(4) < num)
+            {
+                saveGame.Player.TimedLightningResistance.AddTimer(dur);
+                num--;
+            }
+            if (Program.Rng.RandomLessThan(3) < num)
+            {
+                saveGame.Player.TimedFireResistance.AddTimer(dur);
+                num--;
+            }
+            if (Program.Rng.RandomLessThan(2) < num)
+            {
+                saveGame.Player.TimedColdResistance.AddTimer(dur);
+                num--;
+            }
+            if (num != 0)
+            {
+                saveGame.Player.TimedPoisonResistance.AddTimer(dur);
             }
         }
+    }
 
-        public override string ActivationSummary(int lvl)
-        {
-            return lvl < 10 ? "resist elements  (unusable until level 10)" : "resist elements  (cost 12, CON based)";
-        }
+    public override string ActivationSummary(int lvl)
+    {
+        return lvl < 10 ? "resist elements  (unusable until level 10)" : "resist elements  (cost 12, CON based)";
+    }
 
-        public override void Initialize()
-        {
-            Frequency = 3;
-            GainMessage = "You feel like you can protect yourself.";
-            HaveMessage = "You can harden yourself to the ravages of the elements.";
-            LoseMessage = "You feel like you might be vulnerable.";
-        }
+    public override void Initialize()
+    {
+        Frequency = 3;
+        GainMessage = "You feel like you can protect yourself.";
+        HaveMessage = "You can harden yourself to the ravages of the elements.";
+        LoseMessage = "You feel like you might be vulnerable.";
     }
 }

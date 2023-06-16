@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class DoorStairLocationScrollItem : ScrollItem
-    {
-        public DoorStairLocationScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ScrollDoorStairLocation>()) { }
-    }
+internal class DoorStairLocationScrollItem : ScrollItem
+{
+    public DoorStairLocationScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ScrollDoorStairLocation>()) { }
 }

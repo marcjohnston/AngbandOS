@@ -6,27 +6,26 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.PassiveMutations
+namespace AngbandOS.Core.Mutations.PassiveMutations;
+
+[Serializable]
+internal class MutationBlankFac : Mutation
 {
-    [Serializable]
-    internal class MutationBlankFac : Mutation
+    public override void Initialize()
     {
-        public override void Initialize()
-        {
-            Frequency = 2;
-            GainMessage = "Your face becomes completely featureless!";
-            HaveMessage = "Your face is featureless (-1 CHR).";
-            LoseMessage = "Your facial features return.";
-        }
+        Frequency = 2;
+        GainMessage = "Your face becomes completely featureless!";
+        HaveMessage = "Your face is featureless (-1 CHR).";
+        LoseMessage = "Your facial features return.";
+    }
 
-        public override void OnGain(Genome genome)
-        {
-            genome.CharismaBonus -= 1;
-        }
+    public override void OnGain(Genome genome)
+    {
+        genome.CharismaBonus -= 1;
+    }
 
-        public override void OnLose(Genome genome)
-        {
-            genome.CharismaBonus += 1;
-        }
+    public override void OnLose(Genome genome)
+    {
+        genome.CharismaBonus += 1;
     }
 }

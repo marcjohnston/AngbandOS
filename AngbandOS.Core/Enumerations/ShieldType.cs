@@ -5,15 +5,14 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.Core
+namespace AngbandOS.Core;
+
+internal static class ShieldType
 {
-    internal static class ShieldType
-    {
-        public const int SvDragonShield = 6;
-        public const int SvLargeLeatherShield = 4;
-        public const int SvLargeMetalShield = 5;
-        public const int SvShieldOfDeflection = 10;
-        public const int SvSmallLeatherShield = 2;
-        public const int SvSmallMetalShield = 3;
-    }
+    public const int SvDragonShield = 6;
+    public const int SvLargeLeatherShield = 4;
+    public const int SvLargeMetalShield = 5;
+    public const int SvShieldOfDeflection = 10;
+    public const int SvSmallLeatherShield = 2;
+    public const int SvSmallMetalShield = 3;
 }

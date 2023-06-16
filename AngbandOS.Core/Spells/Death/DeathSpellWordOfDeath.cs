@@ -6,22 +6,21 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Death
-{
-    [Serializable]
-    internal class DeathSpellWordOfDeath : Spell
-    {
-        private DeathSpellWordOfDeath(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.DispelLiving(SaveGame.Player.Level * 3);
-        }
+namespace AngbandOS.Core.Spells.Death;
 
-        public override string Name => "Word of Death";
-        
-        protected override string? Info()
-        {
-            return $"dam {SaveGame.Player.Level * 3}";
-        }
+[Serializable]
+internal class DeathSpellWordOfDeath : Spell
+{
+    private DeathSpellWordOfDeath(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.DispelLiving(SaveGame.Player.Level * 3);
+    }
+
+    public override string Name => "Word of Death";
+    
+    protected override string? Info()
+    {
+        return $"dam {SaveGame.Player.Level * 3}";
     }
 }

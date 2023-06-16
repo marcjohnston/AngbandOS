@@ -6,76 +6,75 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Patrons
+namespace AngbandOS.Core.Patrons;
+
+[Serializable]
+internal abstract class Patron
 {
-    [Serializable]
-    internal abstract class Patron
+    protected readonly SaveGame SaveGame;
+    protected Patron(SaveGame saveGame)
     {
-        protected readonly SaveGame SaveGame;
-        protected Patron(SaveGame saveGame)
+        SaveGame = saveGame;
+    }
+
+    public abstract string LongName { get; }
+    public bool MultiRew;
+
+    public abstract int PreferredAbility { get; }
+    protected abstract Reward[] Rewards { get; }
+    public abstract string ShortName { get; }
+
+    public void GetReward(SaveGame saveGame)
+    {
+        int type;
+        int dummy;
+        int nastyChance = 6;
+        if (MultiRew)
         {
-            SaveGame = saveGame;
+            return;
         }
-
-        public abstract string LongName { get; }
-        public bool MultiRew;
-
-        public abstract int PreferredAbility { get; }
-        protected abstract Reward[] Rewards { get; }
-        public abstract string ShortName { get; }
-
-        public void GetReward(SaveGame saveGame)
+        MultiRew = true;
+        if (saveGame.Player.Level == 13)
         {
-            int type;
-            int dummy;
-            int nastyChance = 6;
-            if (MultiRew)
-            {
-                return;
-            }
-            MultiRew = true;
-            if (saveGame.Player.Level == 13)
-            {
-                nastyChance = 2;
-            }
-            else if (saveGame.Player.Level % 13 == 0)
-            {
-                nastyChance = 3;
-            }
-            else if (saveGame.Player.Level % 14 == 0)
-            {
-                nastyChance = 12;
-            }
-            if (Program.Rng.DieRoll(nastyChance) == 1)
-            {
-                type = Program.Rng.DieRoll(20);
-            }
-            else
-            {
-                type = Program.Rng.DieRoll(15) + 5;
-            }
-            if (type < 1)
-            {
-                type = 1;
-            }
-            if (type > 20)
-            {
-                type = 20;
-            }
-            type--;
-            Reward effect = Rewards[type];
-            if (Program.Rng.DieRoll(6) == 1)
-            {
-                saveGame.MsgPrint($"{ShortName} rewards you with a mutation!");
-                saveGame.Player.Dna.GainMutation();
-                return;
-            }
-            effect.GetReward(this);
+            nastyChance = 2;
         }
-
-        public override string ToString()
+        else if (saveGame.Player.Level % 13 == 0)
         {
-            return ShortName;
+            nastyChance = 3;
         }
+        else if (saveGame.Player.Level % 14 == 0)
+        {
+            nastyChance = 12;
+        }
+        if (Program.Rng.DieRoll(nastyChance) == 1)
+        {
+            type = Program.Rng.DieRoll(20);
+        }
+        else
+        {
+            type = Program.Rng.DieRoll(15) + 5;
+        }
+        if (type < 1)
+        {
+            type = 1;
+        }
+        if (type > 20)
+        {
+            type = 20;
+        }
+        type--;
+        Reward effect = Rewards[type];
+        if (Program.Rng.DieRoll(6) == 1)
+        {
+            saveGame.MsgPrint($"{ShortName} rewards you with a mutation!");
+            saveGame.Player.Dna.GainMutation();
+            return;
+        }
+        effect.GetReward(this);
+    }
+
+    public override string ToString()
+    {
+        return ShortName;
     }
 }

@@ -6,22 +6,21 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Corporeal
-{
-    [Serializable]
-    internal class CorporealSpellStoneSkin : Spell
-    {
-        private CorporealSpellStoneSkin(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.Player.TimedStoneskin.AddTimer(Program.Rng.DieRoll(20) + 30);
-        }
+namespace AngbandOS.Core.Spells.Corporeal;
 
-        public override string Name => "Stone Skin";
-        
-        protected override string? Info()
-        {
-            return "dur 30+d20";
-        }
+[Serializable]
+internal class CorporealSpellStoneSkin : Spell
+{
+    private CorporealSpellStoneSkin(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.Player.TimedStoneskin.AddTimer(Program.Rng.DieRoll(20) + 30);
+    }
+
+    public override string Name => "Stone Skin";
+    
+    protected override string? Info()
+    {
+        return "dur 30+d20";
     }
 }

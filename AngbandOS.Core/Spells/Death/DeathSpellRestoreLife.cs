@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Death
-{
-    [Serializable]
-    internal class DeathSpellRestoreLife : Spell
-    {
-        private DeathSpellRestoreLife(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.Player.RestoreLevel();
-        }
+namespace AngbandOS.Core.Spells.Death;
 
-        public override string Name => "Restore Life";
-        
+[Serializable]
+internal class DeathSpellRestoreLife : Spell
+{
+    private DeathSpellRestoreLife(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.Player.RestoreLevel();
     }
+
+    public override string Name => "Restore Life";
+    
 }

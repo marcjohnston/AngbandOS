@@ -1,13 +1,12 @@
-﻿namespace AngbandOS.Core.SpellResistantDetections
+﻿namespace AngbandOS.Core.SpellResistantDetections;
+
+internal class BlindSpellResistantDetection : SpellResistantDetection
 {
-    internal class BlindSpellResistantDetection : SpellResistantDetection
+    public override void Learn(SaveGame saveGame, Monster monster)
     {
-        public override void Learn(SaveGame saveGame, Monster monster)
+        if (saveGame.Player.HasBlindnessResistance)
         {
-            if (saveGame.Player.HasBlindnessResistance)
-            {
-                monster.SmResBlind = true;
-            }
+            monster.SmResBlind = true;
         }
     }
 }

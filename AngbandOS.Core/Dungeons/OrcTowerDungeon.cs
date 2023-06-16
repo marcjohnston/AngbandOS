@@ -8,25 +8,24 @@
 
 using static AngbandOS.Core.CelephaisDungeon;
 
-namespace AngbandOS.Core
-{
+namespace AngbandOS.Core;
+
 [Serializable]
-    internal class OrcTowerDungeon : Dungeon
-    {
-        private OrcTowerDungeon(SaveGame saveGame) : base(saveGame) { }
-        public override int BaseOffset => 3;
-        /// <summary>
-        /// Returns true because this dungeon is a tower.
-        /// </summary>
-        public override bool Tower => true;
-        public override int MaxLevel => 17;
-        public override MonsterSelector? Bias => new OrcMonsterSelector();
-        public override string FirstGuardian => "Bolg, Son of Azog";
-        public override string SecondGuardian => "Azog, King of the Uruk-Hai";
-        public override int FirstLevel => 16;
-        public override int SecondLevel => 17;
-        public override string Name => "the Orc Tower";
-        public override string Shortname => "Orc Tower";
-        public override string MapSymbol => "o";
-    }
+internal class OrcTowerDungeon : Dungeon
+{
+    private OrcTowerDungeon(SaveGame saveGame) : base(saveGame) { }
+    public override int BaseOffset => 3;
+    /// <summary>
+    /// Returns true because this dungeon is a tower.
+    /// </summary>
+    public override bool Tower => true;
+    public override int MaxLevel => 17;
+    public override MonsterSelector? Bias => new OrcMonsterSelector();
+    public override string FirstGuardian => "Bolg, Son of Azog";
+    public override string SecondGuardian => "Azog, King of the Uruk-Hai";
+    public override int FirstLevel => 16;
+    public override int SecondLevel => 17;
+    public override string Name => "the Orc Tower";
+    public override string Shortname => "Orc Tower";
+    public override string MapSymbol => "o";
 }

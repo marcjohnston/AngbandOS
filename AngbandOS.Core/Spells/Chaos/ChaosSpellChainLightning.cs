@@ -6,25 +6,24 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Chaos
-{
-    [Serializable]
-    internal class ChaosSpellChainLightning : Spell
-    {
-        private ChaosSpellChainLightning(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            for (int dir = 0; dir <= 9; dir++)
-            {
-                SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, Program.Rng.DiceRoll(5 + (SaveGame.Player.Level / 10), 8));
-            }
-        }
+namespace AngbandOS.Core.Spells.Chaos;
 
-        public override string Name => "Chain Lightning";
-        
-        protected override string? Info()
+[Serializable]
+internal class ChaosSpellChainLightning : Spell
+{
+    private ChaosSpellChainLightning(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        for (int dir = 0; dir <= 9; dir++)
         {
-            return $"dam {5 + (SaveGame.Player.Level / 10)}d8";
+            SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, Program.Rng.DiceRoll(5 + (SaveGame.Player.Level / 10), 8));
         }
+    }
+
+    public override string Name => "Chain Lightning";
+    
+    protected override string? Info()
+    {
+        return $"dam {5 + (SaveGame.Player.Level / 10)}d8";
     }
 }

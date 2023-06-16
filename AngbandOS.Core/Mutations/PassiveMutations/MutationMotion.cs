@@ -6,29 +6,28 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.PassiveMutations
+namespace AngbandOS.Core.Mutations.PassiveMutations;
+
+[Serializable]
+internal class MutationMotion : Mutation
 {
-    [Serializable]
-    internal class MutationMotion : Mutation
+    public override void Initialize()
     {
-        public override void Initialize()
-        {
-            Frequency = 3;
-            GainMessage = "You move with new assurance.";
-            HaveMessage = "Your movements are precise and forceful (+1 STL).";
-            LoseMessage = "You move with less assurance.";
-        }
+        Frequency = 3;
+        GainMessage = "You move with new assurance.";
+        HaveMessage = "Your movements are precise and forceful (+1 STL).";
+        LoseMessage = "You move with less assurance.";
+    }
 
-        public override void OnGain(Genome genome)
-        {
-            genome.StealthBonus += 1;
-            genome.FreeAction = true;
-        }
+    public override void OnGain(Genome genome)
+    {
+        genome.StealthBonus += 1;
+        genome.FreeAction = true;
+    }
 
-        public override void OnLose(Genome genome)
-        {
-            genome.StealthBonus -= 1;
-            genome.FreeAction = false;
-        }
+    public override void OnLose(Genome genome)
+    {
+        genome.StealthBonus -= 1;
+        genome.FreeAction = false;
     }
 }

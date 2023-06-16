@@ -6,32 +6,31 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.RandomMutations
+namespace AngbandOS.Core.Mutations.RandomMutations;
+
+[Serializable]
+internal class MutationTentacles : Mutation
 {
-    [Serializable]
-    internal class MutationTentacles : Mutation
+    public override void Initialize()
     {
-        public override void Initialize()
-        {
-            Frequency = 2;
-            GainMessage = "Evil-looking tentacles sprout from your sides.";
-            HaveMessage = "You have evil looking tentacles (dam 2d5).";
-            LoseMessage = "Your tentacles vanish from your sides.";
-            DamageDiceSize = 2;
-            DamageDiceNumber = 5;
-            EquivalentWeaponWeight = 5;
-            AttackDescription = "tentacles";
-            MutationAttackType = MutationAttackType.Hellfire;
-        }
+        Frequency = 2;
+        GainMessage = "Evil-looking tentacles sprout from your sides.";
+        HaveMessage = "You have evil looking tentacles (dam 2d5).";
+        LoseMessage = "Your tentacles vanish from your sides.";
+        DamageDiceSize = 2;
+        DamageDiceNumber = 5;
+        EquivalentWeaponWeight = 5;
+        AttackDescription = "tentacles";
+        MutationAttackType = MutationAttackType.Hellfire;
+    }
 
-        public override void OnGain(Genome genome)
-        {
-            genome.NaturalAttacks.Add(this);
-        }
+    public override void OnGain(Genome genome)
+    {
+        genome.NaturalAttacks.Add(this);
+    }
 
-        public override void OnLose(Genome genome)
-        {
-            genome.NaturalAttacks.Remove(this);
-        }
+    public override void OnLose(Genome genome)
+    {
+        genome.NaturalAttacks.Remove(this);
     }
 }

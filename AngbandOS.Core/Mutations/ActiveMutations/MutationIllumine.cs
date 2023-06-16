@@ -6,30 +6,29 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.ActiveMutations
+namespace AngbandOS.Core.Mutations.ActiveMutations;
+
+[Serializable]
+internal class MutationIllumine : Mutation
 {
-    [Serializable]
-    internal class MutationIllumine : Mutation
+    public override void Activate(SaveGame saveGame)
     {
-        public override void Activate(SaveGame saveGame)
+        if (saveGame.CheckIfRacialPowerWorks(3, 2, Ability.Intelligence, 10))
         {
-            if (saveGame.CheckIfRacialPowerWorks(3, 2, Ability.Intelligence, 10))
-            {
-                saveGame.LightArea(Program.Rng.DiceRoll(2, saveGame.Player.Level / 2), (saveGame.Player.Level / 10) + 1);
-            }
+            saveGame.LightArea(Program.Rng.DiceRoll(2, saveGame.Player.Level / 2), (saveGame.Player.Level / 10) + 1);
         }
+    }
 
-        public override string ActivationSummary(int lvl)
-        {
-            return lvl < 3 ? "illuminate       (unusable until level 3)" : "illuminate       (cost 2, INT based)";
-        }
+    public override string ActivationSummary(int lvl)
+    {
+        return lvl < 3 ? "illuminate       (unusable until level 3)" : "illuminate       (cost 2, INT based)";
+    }
 
-        public override void Initialize()
-        {
-            Frequency = 3;
-            GainMessage = "You can light up rooms with your presence.";
-            HaveMessage = "You can emit bright light.";
-            LoseMessage = "You can no longer light up rooms with your presence.";
-        }
+    public override void Initialize()
+    {
+        Frequency = 3;
+        GainMessage = "You can light up rooms with your presence.";
+        HaveMessage = "You can emit bright light.";
+        LoseMessage = "You can no longer light up rooms with your presence.";
     }
 }

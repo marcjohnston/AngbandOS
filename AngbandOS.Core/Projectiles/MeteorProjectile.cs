@@ -6,131 +6,130 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Projection
+namespace AngbandOS.Core.Projection;
+
+[Serializable]
+internal class MeteorProjectile : Projectile
 {
-    [Serializable]
-    internal class MeteorProjectile : Projectile
+    private MeteorProjectile(SaveGame saveGame) : base(saveGame) { }
+
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<BrightRedSplatProjectileGraphic>();
+
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<RedOrangeFlashAnimation>();
+
+    protected override bool AffectItem(int who, int y, int x)
     {
-        private MeteorProjectile(SaveGame saveGame) : base(saveGame) { }
-
-        protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<BrightRedSplatProjectileGraphic>();
-
-        protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<RedOrangeFlashAnimation>();
-
-        protected override bool AffectItem(int who, int y, int x)
+        GridTile cPtr = SaveGame.Level.Grid[y][x];
+        int nextOIdx;
+        bool obvious = false;
+        string oName = "";
+        foreach (Item oPtr in cPtr.Items)
         {
-            GridTile cPtr = SaveGame.Level.Grid[y][x];
-            int nextOIdx;
-            bool obvious = false;
-            string oName = "";
-            foreach (Item oPtr in cPtr.Items)
+            bool isArt = false;
+            bool ignore = false;
+            bool plural = false;
+            bool doKill = false;
+            string noteKill = null;
+            oPtr.RefreshFlagBasedProperties();
+            if (oPtr.Count > 1)
             {
-                bool isArt = false;
-                bool ignore = false;
-                bool plural = false;
-                bool doKill = false;
-                string noteKill = null;
-                oPtr.RefreshFlagBasedProperties();
-                if (oPtr.Count > 1)
+                plural = true;
+            }
+            if (oPtr.FixedArtifact != null || string.IsNullOrEmpty(oPtr.RandartName) == false)
+            {
+                isArt = true;
+            }
+            if (oPtr.HatesFire())
+            {
+                doKill = true;
+                noteKill = plural ? " burn up!" : " burns up!";
+                if (oPtr.Characteristics.IgnoreFire)
                 {
-                    plural = true;
+                    ignore = true;
                 }
-                if (oPtr.FixedArtifact != null || string.IsNullOrEmpty(oPtr.RandartName) == false)
+            }
+            if (oPtr.HatesCold())
+            {
+                ignore = false;
+                doKill = true;
+                noteKill = plural ? " shatter!" : " shatters!";
+                if (oPtr.Characteristics.IgnoreCold)
                 {
-                    isArt = true;
+                    ignore = true;
                 }
-                if (oPtr.HatesFire())
+            }
+            if (doKill)
+            {
+                if (oPtr.Marked)
                 {
-                    doKill = true;
-                    noteKill = plural ? " burn up!" : " burns up!";
-                    if (oPtr.Characteristics.IgnoreFire)
-                    {
-                        ignore = true;
-                    }
+                    obvious = true;
+                    oName = oPtr.Description(false, 0);
                 }
-                if (oPtr.HatesCold())
-                {
-                    ignore = false;
-                    doKill = true;
-                    noteKill = plural ? " shatter!" : " shatters!";
-                    if (oPtr.Characteristics.IgnoreCold)
-                    {
-                        ignore = true;
-                    }
-                }
-                if (doKill)
+                if (isArt || ignore)
                 {
                     if (oPtr.Marked)
                     {
-                        obvious = true;
-                        oName = oPtr.Description(false, 0);
-                    }
-                    if (isArt || ignore)
-                    {
-                        if (oPtr.Marked)
-                        {
-                            string s = plural ? "are" : "is";
-                            SaveGame.MsgPrint($"The {oName} {s} unaffected!");
-                        }
-                    }
-                    else
-                    {
-                        if (oPtr.Marked && string.IsNullOrEmpty(noteKill))
-                        {
-                            SaveGame.MsgPrint($"The {oName}{noteKill}");
-                        }
-                        bool isPotion = oPtr.Factory.CategoryEnum == ItemTypeEnum.Potion;
-                        SaveGame.Level.DeleteObject(oPtr);
-                        if (isPotion)
-                        {
-                            PotionItemFactory potion = (PotionItemFactory)oPtr.Factory;
-                            potion.Smash(SaveGame, who, y, x);
-                        }
-                        SaveGame.Level.RedrawSingleLocation(y, x);
+                        string s = plural ? "are" : "is";
+                        SaveGame.MsgPrint($"The {oName} {s} unaffected!");
                     }
                 }
-            }
-            return obvious;
-        }
-
-        protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-        {
-            MonsterRace rPtr = mPtr.Race;
-            bool seen = mPtr.IsVisible;
-            bool obvious = false;
-            string? note = null;
-            if (seen)
-            {
-                obvious = true;
-            }
-            ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-            return obvious;
-        }
-
-        protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
-        {
-            bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
-            if (dam > 1600)
-            {
-                dam = 1600;
-            }
-            dam = (dam + r) / (r + 1);
-            Monster mPtr = SaveGame.Level.Monsters[who];
-            string killer = mPtr.IndefiniteVisibleName;
-            if (blind)
-            {
-                SaveGame.MsgPrint("Something falls from the sky on you!");
-            }
-            SaveGame.Player.TakeHit(dam, killer);
-            if (!SaveGame.Player.HasShardResistance || Program.Rng.DieRoll(13) == 1)
-            {
-                if (!SaveGame.Player.HasFireImmunity)
+                else
                 {
-                    SaveGame.Player.InvenDamage(SaveGame.SetFireDestroy, 2);
+                    if (oPtr.Marked && string.IsNullOrEmpty(noteKill))
+                    {
+                        SaveGame.MsgPrint($"The {oName}{noteKill}");
+                    }
+                    bool isPotion = oPtr.Factory.CategoryEnum == ItemTypeEnum.Potion;
+                    SaveGame.Level.DeleteObject(oPtr);
+                    if (isPotion)
+                    {
+                        PotionItemFactory potion = (PotionItemFactory)oPtr.Factory;
+                        potion.Smash(SaveGame, who, y, x);
+                    }
+                    SaveGame.Level.RedrawSingleLocation(y, x);
                 }
-                SaveGame.Player.InvenDamage(SaveGame.SetColdDestroy, 2);
             }
-            return true;
         }
+        return obvious;
+    }
+
+    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
+    {
+        MonsterRace rPtr = mPtr.Race;
+        bool seen = mPtr.IsVisible;
+        bool obvious = false;
+        string? note = null;
+        if (seen)
+        {
+            obvious = true;
+        }
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        return obvious;
+    }
+
+    protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
+    {
+        bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        if (dam > 1600)
+        {
+            dam = 1600;
+        }
+        dam = (dam + r) / (r + 1);
+        Monster mPtr = SaveGame.Level.Monsters[who];
+        string killer = mPtr.IndefiniteVisibleName;
+        if (blind)
+        {
+            SaveGame.MsgPrint("Something falls from the sky on you!");
+        }
+        SaveGame.Player.TakeHit(dam, killer);
+        if (!SaveGame.Player.HasShardResistance || Program.Rng.DieRoll(13) == 1)
+        {
+            if (!SaveGame.Player.HasFireImmunity)
+            {
+                SaveGame.Player.InvenDamage(SaveGame.SetFireDestroy, 2);
+            }
+            SaveGame.Player.InvenDamage(SaveGame.SetColdDestroy, 2);
+        }
+        return true;
     }
 }

@@ -8,57 +8,56 @@
 
 using System;
 
-namespace AngbandOS.Core.InventorySlots
+namespace AngbandOS.Core.InventorySlots;
+
+[Serializable]
+internal class MeleeWeaponInventorySlot : EquipmentInventorySlot
 {
-    [Serializable]
-    internal class MeleeWeaponInventorySlot : EquipmentInventorySlot
+    private MeleeWeaponInventorySlot(SaveGame saveGame) : base(saveGame) { }
+    public override int[] InventorySlots => new int[] { InventorySlot.MeleeWeapon };
+    public override int SortOrder => 1;
+    public override string Label(int index) => "a";
+    public override string Label(Item oPtr) => "a";
+    public override bool IsMeleeWeapon => true;
+    public override string WieldPhrase => "You are wielding";
+    public override string TakeOffMessage(Item oPtr) => "You were wielding";
+    public override string MentionUse(int? index)
     {
-        private MeleeWeaponInventorySlot(SaveGame saveGame) : base(saveGame) { }
-        public override int[] InventorySlots => new int[] { InventorySlot.MeleeWeapon };
-        public override int SortOrder => 1;
-        public override string Label(int index) => "a";
-        public override string Label(Item oPtr) => "a";
-        public override bool IsMeleeWeapon => true;
-        public override string WieldPhrase => "You are wielding";
-        public override string TakeOffMessage(Item oPtr) => "You were wielding";
-        public override string MentionUse(int? index)
+        string p = "Wielding";
+        if (Count > 0 && index.HasValue)
         {
-            string p = "Wielding";
-            if (Count > 0 && index.HasValue)
+            Item? oPtr = SaveGame.GetInventoryItem(index.Value);
+            if (oPtr != null && SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
             {
-                Item? oPtr = SaveGame.GetInventoryItem(index.Value);
-                if (oPtr != null && SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
-                {
-                    p = "Just lifting";
-                }
+                p = "Just lifting";
             }
-            return p;
         }
+        return p;
+    }
 
-        public override string DescribeWieldLocation(int index) 
+    public override string DescribeWieldLocation(int index) 
+    {
+        string p = "attacking monsters with";
+        if (Count > 0)
         {
-            string p = "attacking monsters with";
-            if (Count > 0)
-            {
-                Item? oPtr = SaveGame.GetInventoryItem(index);
-                if (oPtr != null && SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
-                {
-                    p = "just lifting";
-                }
-            }
-            return p;
-        }
-
-        public override string DescribeItemLocation(Item oPtr)
-        {
-            string p = "attacking monsters with";
-
-            // Check to see if we have a weapon.
+            Item? oPtr = SaveGame.GetInventoryItem(index);
             if (oPtr != null && SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
             {
                 p = "just lifting";
             }
-            return p;
         }
+        return p;
+    }
+
+    public override string DescribeItemLocation(Item oPtr)
+    {
+        string p = "attacking monsters with";
+
+        // Check to see if we have a weapon.
+        if (oPtr != null && SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
+        {
+            p = "just lifting";
+        }
+        return p;
     }
 }

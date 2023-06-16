@@ -6,29 +6,28 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.RandomMutations
-{
-    [Serializable]
-    internal class MutationBanishAll : Mutation
-    {
-        public override void Initialize()
-        {
-            Frequency = 2;
-            GainMessage = "You feel a terrifying power lurking behind you.";
-            HaveMessage = "You sometimes cause nearby creatures to vanish.";
-            LoseMessage = "You no longer feel a terrifying power lurking behind you.";
-        }
+namespace AngbandOS.Core.Mutations.RandomMutations;
 
-        public override void OnProcessWorld(SaveGame saveGame)
+[Serializable]
+internal class MutationBanishAll : Mutation
+{
+    public override void Initialize()
+    {
+        Frequency = 2;
+        GainMessage = "You feel a terrifying power lurking behind you.";
+        HaveMessage = "You sometimes cause nearby creatures to vanish.";
+        LoseMessage = "You no longer feel a terrifying power lurking behind you.";
+    }
+
+    public override void OnProcessWorld(SaveGame saveGame)
+    {
+        if (Program.Rng.DieRoll(9000) != 1)
         {
-            if (Program.Rng.DieRoll(9000) != 1)
-            {
-                return;
-            }
-            saveGame.Disturb(false);
-            saveGame.MsgPrint("You suddenly feel almost lonely.");
-            saveGame.BanishMonsters(100);
-            saveGame.MsgPrint(null);
+            return;
         }
+        saveGame.Disturb(false);
+        saveGame.MsgPrint("You suddenly feel almost lonely.");
+        saveGame.BanishMonsters(100);
+        saveGame.MsgPrint(null);
     }
 }

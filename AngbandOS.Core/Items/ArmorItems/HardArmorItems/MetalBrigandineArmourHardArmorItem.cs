@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class MetalBrigandineArmourHardArmorItem : HardArmorItem
-    {
-        public MetalBrigandineArmourHardArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<HardArmorMetalBrigandineArmour>()) { }
-    }
+internal class MetalBrigandineArmourHardArmorItem : HardArmorItem
+{
+    public MetalBrigandineArmourHardArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<HardArmorMetalBrigandineArmour>()) { }
 }

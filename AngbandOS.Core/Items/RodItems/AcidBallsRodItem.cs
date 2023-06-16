@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
+namespace AngbandOS.Core.Items;
+
+[Serializable]
+internal class AcidBallsRodItem : RodItem
 {
-    [Serializable]
-    internal class AcidBallsRodItem : RodItem
-    {
-        public AcidBallsRodItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<RodAcidBalls>()) { }
-    }
+    public AcidBallsRodItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<RodAcidBalls>()) { }
 }

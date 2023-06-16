@@ -6,22 +6,21 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Chaos
-{
-    [Serializable]
-    internal class ChaosSpellTouchOfConfusion : Spell
-    {
-        private ChaosSpellTouchOfConfusion(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            if (!SaveGame.Player.HasConfusingTouch)
-            {
-                SaveGame.MsgPrint("Your hands start glowing.");
-                SaveGame.Player.HasConfusingTouch = true;
-            }
-        }
+namespace AngbandOS.Core.Spells.Chaos;
 
-        public override string Name => "Touch of Confusion";
-        
+[Serializable]
+internal class ChaosSpellTouchOfConfusion : Spell
+{
+    private ChaosSpellTouchOfConfusion(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        if (!SaveGame.Player.HasConfusingTouch)
+        {
+            SaveGame.MsgPrint("Your hands start glowing.");
+            SaveGame.Player.HasConfusingTouch = true;
+        }
     }
+
+    public override string Name => "Touch of Confusion";
+    
 }

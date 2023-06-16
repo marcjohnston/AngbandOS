@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class NenyaRingItem : RingItem
-    {
-        public NenyaRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<NenyaRingItemFactory>()) { }
-    }
+internal class NenyaRingItem : RingItem
+{
+    public NenyaRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<NenyaRingItemFactory>()) { }
 }

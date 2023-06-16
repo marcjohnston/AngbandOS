@@ -6,24 +6,23 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Life
-{
-    [Serializable]
-    internal class LifeSpellHealing : Spell
-    {
-        private LifeSpellHealing(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.Player.RestoreHealth(300);
-            SaveGame.Player.TimedStun.ResetTimer();
-            SaveGame.Player.TimedBleeding.ResetTimer();
-        }
+namespace AngbandOS.Core.Spells.Life;
 
-        public override string Name => "Healing";
-        
-        protected override string? Info()
-        {
-            return "heal 300";
-        }
+[Serializable]
+internal class LifeSpellHealing : Spell
+{
+    private LifeSpellHealing(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.Player.RestoreHealth(300);
+        SaveGame.Player.TimedStun.ResetTimer();
+        SaveGame.Player.TimedBleeding.ResetTimer();
+    }
+
+    public override string Name => "Healing";
+    
+    protected override string? Info()
+    {
+        return "heal 300";
     }
 }

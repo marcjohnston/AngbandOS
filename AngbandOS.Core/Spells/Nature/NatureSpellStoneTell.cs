@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Nature
-{
-    [Serializable]
-    internal class NatureSpellStoneTell : Spell
-    {
-        private NatureSpellStoneTell(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.IdentifyFully();
-        }
+namespace AngbandOS.Core.Spells.Nature;
 
-        public override string Name => "Stone Tell";
-        
+[Serializable]
+internal class NatureSpellStoneTell : Spell
+{
+    private NatureSpellStoneTell(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.IdentifyFully();
     }
+
+    public override string Name => "Stone Tell";
+    
 }

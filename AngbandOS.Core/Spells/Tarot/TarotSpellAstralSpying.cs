@@ -6,22 +6,21 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Tarot
-{
-    [Serializable]
-    internal class TarotSpellAstralSpying : Spell
-    {
-        private TarotSpellAstralSpying(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.Player.TimedTelepathy.AddTimer(Program.Rng.DieRoll(30) + 25);
-        }
+namespace AngbandOS.Core.Spells.Tarot;
 
-        public override string Name => "Astral Spying";
-        
-        protected override string? Info()
-        {
-            return "dur 25+d30";
-        }
+[Serializable]
+internal class TarotSpellAstralSpying : Spell
+{
+    private TarotSpellAstralSpying(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.Player.TimedTelepathy.AddTimer(Program.Rng.DieRoll(30) + 25);
+    }
+
+    public override string Name => "Astral Spying";
+    
+    protected override string? Info()
+    {
+        return "dur 25+d30";
     }
 }

@@ -1,29 +1,28 @@
 using AngbandOS.Core.Items;
 
-namespace AngbandOS.Core.ItemCategories
+namespace AngbandOS.Core.ItemCategories;
+
+[Serializable]
+internal class DetectInvisiblePotionItemFactory : PotionItemFactory
 {
-    [Serializable]
-    internal class DetectInvisiblePotionItemFactory : PotionItemFactory
+    private DetectInvisiblePotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+
+    public override char Character => '!';
+    public override string Name => "Detect Invisible";
+
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
+    public override int Cost => 50;
+    public override int Dd => 1;
+    public override int Ds => 1;
+    public override string FriendlyName => "Detect Invisible";
+    public override int Level => 3;
+    public override int[] Locale => new int[] { 3, 0, 0, 0 };
+    public override int? SubCategory => (int)PotionType.DetectInvis;
+    public override int Weight => 4;
+    public override bool Quaff(SaveGame saveGame)
     {
-        private DetectInvisiblePotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-
-        public override char Character => '!';
-        public override string Name => "Detect Invisible";
-
-        public override int[] Chance => new int[] { 1, 0, 0, 0 };
-        public override int Cost => 50;
-        public override int Dd => 1;
-        public override int Ds => 1;
-        public override string FriendlyName => "Detect Invisible";
-        public override int Level => 3;
-        public override int[] Locale => new int[] { 3, 0, 0, 0 };
-        public override int? SubCategory => (int)PotionType.DetectInvis;
-        public override int Weight => 4;
-        public override bool Quaff(SaveGame saveGame)
-        {
-            // Detect invisible gives you times see invisibility
-            return saveGame.Player.TimedSeeInvisibility.AddTimer(12 + Program.Rng.DieRoll(12));
-        }
-        public override Item CreateItem() => new DetectInvisiblePotionItem(SaveGame);
+        // Detect invisible gives you times see invisibility
+        return saveGame.Player.TimedSeeInvisibility.AddTimer(12 + Program.Rng.DieRoll(12));
     }
+    public override Item CreateItem() => new DetectInvisiblePotionItem(SaveGame);
 }

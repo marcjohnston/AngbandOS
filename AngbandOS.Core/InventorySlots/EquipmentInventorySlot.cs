@@ -6,70 +6,69 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.InventorySlots
+namespace AngbandOS.Core.InventorySlots;
+
+[Serializable]
+internal abstract class EquipmentInventorySlot : BaseInventorySlot
 {
-    [Serializable]
-    internal abstract class EquipmentInventorySlot : BaseInventorySlot
+    protected EquipmentInventorySlot(SaveGame saveGame) : base(saveGame) { }
+
+    /// <summary>
+    /// Returns true.
+    /// </summary>
+    public override bool IsEquipment => true;
+
+    public override bool IsInEquipment => true;
+
+    /// Checks the quantity of an item and removes it, when the quanity is zero.
+    /// </summary>
+    /// <param name="oPtr"></param>
+    public override void ItemOptimize(Item oPtr)
     {
-        protected EquipmentInventorySlot(SaveGame saveGame) : base(saveGame) { }
-
-        /// <summary>
-        /// Returns true.
-        /// </summary>
-        public override bool IsEquipment => true;
-
-        public override bool IsInEquipment => true;
-
-        /// Checks the quantity of an item and removes it, when the quanity is zero.
-        /// </summary>
-        /// <param name="oPtr"></param>
-        public override void ItemOptimize(Item oPtr)
+        if (oPtr.Count > 0)
         {
-            if (oPtr.Count > 0)
+            return;
+        }
+        int foundSlot = FindInventorySlot(oPtr);
+        SaveGame.SetInventoryItem(foundSlot, null);
+        SaveGame.UpdateBonusesFlaggedAction.Set();
+        SaveGame.UpdateTorchRadiusFlaggedAction.Set();
+        SaveGame.UpdateManaFlaggedAction.Set();
+    }
+
+    /// <summary>
+    /// Allows wielded equipment items to process world.  By default, initiates the hook for all items in the inventory slot to perform processing during the ProcessWorld event through
+    /// the EquipmentProcessWorld method.
+    /// </summary>
+    public override void ProcessWorldHook(ProcessWorldEventArgs processWorldEventArgs)
+    {
+        base.ProcessWorldHook(processWorldEventArgs);
+
+        // Allow the base functionality to process items.
+        foreach (int index in InventorySlots)
+        {
+            Item? oPtr = SaveGame.GetInventoryItem(index);
+            if (oPtr != null)
             {
-                return;
+                oPtr.EquipmentProcessWorldHook();
             }
-            int foundSlot = FindInventorySlot(oPtr);
-            SaveGame.SetInventoryItem(foundSlot, null);
-            SaveGame.UpdateBonusesFlaggedAction.Set();
-            SaveGame.UpdateTorchRadiusFlaggedAction.Set();
-            SaveGame.UpdateManaFlaggedAction.Set();
         }
 
-        /// <summary>
-        /// Allows wielded equipment items to process world.  By default, initiates the hook for all items in the inventory slot to perform processing during the ProcessWorld event through
-        /// the EquipmentProcessWorld method.
-        /// </summary>
-        public override void ProcessWorldHook(ProcessWorldEventArgs processWorldEventArgs)
+        if (processWorldEventArgs.SaveGame.Player.Race.IsBurnedBySunlight) // TODO: This needs to use a hook.
         {
-            base.ProcessWorldHook(processWorldEventArgs);
-
-            // Allow the base functionality to process items.
             foreach (int index in InventorySlots)
             {
-                Item? oPtr = SaveGame.GetInventoryItem(index);
-                if (oPtr != null)
+                Item? oPtr = processWorldEventArgs.SaveGame.GetInventoryItem(index);
+                if (oPtr != null && oPtr.Factory.ProvidesSunlight && !processWorldEventArgs.SaveGame.Player.HasLightResistance)
                 {
-                    oPtr.EquipmentProcessWorldHook();
-                }
-            }
-
-            if (processWorldEventArgs.SaveGame.Player.Race.IsBurnedBySunlight) // TODO: This needs to use a hook.
-            {
-                foreach (int index in InventorySlots)
-                {
-                    Item? oPtr = processWorldEventArgs.SaveGame.GetInventoryItem(index);
-                    if (oPtr != null && oPtr.Factory.ProvidesSunlight && !processWorldEventArgs.SaveGame.Player.HasLightResistance)
+                    string oName = oPtr.Description(false, 0);
+                    processWorldEventArgs.SaveGame.MsgPrint($"The {oName} scorches your undead flesh!");
+                    processWorldEventArgs.DisableRegeneration = true;
+                    oName = oPtr.Description(true, 0);
+                    string ouch = $"wielding {oName}";
+                    if (processWorldEventArgs.SaveGame.Player.TimedInvulnerability.TurnsRemaining == 0)
                     {
-                        string oName = oPtr.Description(false, 0);
-                        processWorldEventArgs.SaveGame.MsgPrint($"The {oName} scorches your undead flesh!");
-                        processWorldEventArgs.DisableRegeneration = true;
-                        oName = oPtr.Description(true, 0);
-                        string ouch = $"wielding {oName}";
-                        if (processWorldEventArgs.SaveGame.Player.TimedInvulnerability.TurnsRemaining == 0)
-                        {
-                            processWorldEventArgs.SaveGame.Player.TakeHit(1, ouch);
-                        }
+                        processWorldEventArgs.SaveGame.Player.TakeHit(1, ouch);
                     }
                 }
             }

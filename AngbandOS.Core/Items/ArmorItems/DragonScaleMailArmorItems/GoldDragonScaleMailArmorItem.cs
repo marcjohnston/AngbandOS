@@ -1,18 +1,17 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class GoldDragonScaleMailArmorItem : DragonScaleMailArmorItem
+internal class GoldDragonScaleMailArmorItem : DragonScaleMailArmorItem
+{
+    public GoldDragonScaleMailArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<GoldDragonScaleMailArmorItemFactory>()) { }
+    public override void DoActivate()
     {
-        public GoldDragonScaleMailArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<GoldDragonScaleMailArmorItemFactory>()) { }
-        public override void DoActivate()
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
-            if (!SaveGame.GetDirectionWithAim(out int dir))
-            {
-                return;
-            }
-            SaveGame.MsgPrint("You breathe sound.");
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<SoundProjectile>(), dir, 130, -2);
-            RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+            return;
         }
+        SaveGame.MsgPrint("You breathe sound.");
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<SoundProjectile>(), dir, 130, -2);
+        RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
     }
 }

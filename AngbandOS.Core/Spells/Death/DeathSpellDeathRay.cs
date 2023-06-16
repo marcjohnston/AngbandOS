@@ -6,22 +6,21 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Death
-{
-    [Serializable]
-    internal class DeathSpellDeathRay : Spell
-    {
-        private DeathSpellDeathRay(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            if (!SaveGame.GetDirectionWithAim(out int dir))
-            {
-                return;
-            }
-            SaveGame.DeathRay(dir, SaveGame.Player.Level);
-        }
+namespace AngbandOS.Core.Spells.Death;
 
-        public override string Name => "Death Ray";
-        
+[Serializable]
+internal class DeathSpellDeathRay : Spell
+{
+    private DeathSpellDeathRay(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
+        {
+            return;
+        }
+        SaveGame.DeathRay(dir, SaveGame.Player.Level);
     }
+
+    public override string Name => "Death Ray";
+    
 }

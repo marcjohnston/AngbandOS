@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class SeeInvisibleRingItem : RingItem
-    {
-        public SeeInvisibleRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<SeeInvisibleRingItemFactory>()) { }
-    }
+internal class SeeInvisibleRingItem : RingItem
+{
+    public SeeInvisibleRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<SeeInvisibleRingItemFactory>()) { }
 }

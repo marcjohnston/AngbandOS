@@ -8,18 +8,17 @@
 
 using static AngbandOS.Core.CelephaisDungeon;
 
-namespace AngbandOS.Core
-{
+namespace AngbandOS.Core;
+
 [Serializable]
-    internal class VaultDungeon : Dungeon
-    {
-        private VaultDungeon(SaveGame saveGame) : base(saveGame) { }
-        public override int BaseOffset => 10;
-        public override int MaxLevel => 30;
-        public override string FirstGuardian => "The Stormbringer";
-        public override int FirstLevel => 30;
-        public override string Name => "the Vault of the Sword";
-        public override string Shortname => "Vault";
-        public override string MapSymbol => "v";
-    }
+internal class VaultDungeon : Dungeon
+{
+    private VaultDungeon(SaveGame saveGame) : base(saveGame) { }
+    public override int BaseOffset => 10;
+    public override int MaxLevel => 30;
+    public override string FirstGuardian => "The Stormbringer";
+    public override int FirstLevel => 30;
+    public override string Name => "the Vault of the Sword";
+    public override string Shortname => "Vault";
+    public override string MapSymbol => "v";
 }

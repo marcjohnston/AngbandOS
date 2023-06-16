@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Chaos
-{
-    [Serializable]
-    internal class ChaosSpellTrapAndDoorDestruction : Spell
-    {
-        private ChaosSpellTrapAndDoorDestruction(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.DestroyDoorsTouch();
-        }
+namespace AngbandOS.Core.Spells.Chaos;
 
-        public override string Name => "Trap and Door Destruction";
-        
+[Serializable]
+internal class ChaosSpellTrapAndDoorDestruction : Spell
+{
+    private ChaosSpellTrapAndDoorDestruction(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.DestroyDoorsTouch();
     }
+
+    public override string Name => "Trap and Door Destruction";
+    
 }

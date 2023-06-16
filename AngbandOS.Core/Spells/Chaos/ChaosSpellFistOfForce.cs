@@ -6,27 +6,26 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Chaos
-{
-    [Serializable]
-    internal class ChaosSpellFistOfForce : Spell
-    {
-        private ChaosSpellFistOfForce(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            if (!SaveGame.GetDirectionWithAim(out int dir))
-            {
-                return;
-            }
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<DisintegrateProjectile>(), dir,
-                Program.Rng.DiceRoll(8 + ((SaveGame.Player.Level - 5) / 4), 8), 0);
-        }
+namespace AngbandOS.Core.Spells.Chaos;
 
-        public override string Name => "Fist of Force";
-        
-        protected override string? Info()
+[Serializable]
+internal class ChaosSpellFistOfForce : Spell
+{
+    private ChaosSpellFistOfForce(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
-            return $"dam {8 + ((SaveGame.Player.Level - 5) / 4)}d8";
+            return;
         }
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<DisintegrateProjectile>(), dir,
+            Program.Rng.DiceRoll(8 + ((SaveGame.Player.Level - 5) / 4), 8), 0);
+    }
+
+    public override string Name => "Fist of Force";
+    
+    protected override string? Info()
+    {
+        return $"dam {8 + ((SaveGame.Player.Level - 5) / 4)}d8";
     }
 }

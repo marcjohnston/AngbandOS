@@ -6,26 +6,25 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core
+namespace AngbandOS.Core;
+
+/// <summary>
+/// A simple immutable coordinate, stored in a reference type so it can be passed from function to function.
+/// </summary>
+[Serializable]
+internal class GridCoordinate
 {
-    /// <summary>
-    /// A simple immutable coordinate, stored in a reference type so it can be passed from function to function.
-    /// </summary>
-    [Serializable]
-    internal class GridCoordinate
+    public readonly int X;
+    public readonly int Y;
+
+    public GridCoordinate Clone()
     {
-        public readonly int X;
-        public readonly int Y;
+        return new GridCoordinate(X, Y);
+    }
 
-        public GridCoordinate Clone()
-        {
-            return new GridCoordinate(X, Y);
-        }
-
-        public GridCoordinate(int x, int y)
-        {
-            X = x;
-            Y = y;
-        }
+    public GridCoordinate(int x, int y)
+    {
+        X = x;
+        Y = y;
     }
 }

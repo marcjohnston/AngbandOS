@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class BlackPrayersDeathBookItem : DeathBookItem
-    {
-        public BlackPrayersDeathBookItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<BlackPrayersDeathBookItemFactory>()) { }
-    }
+internal class BlackPrayersDeathBookItem : DeathBookItem
+{
+    public BlackPrayersDeathBookItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<BlackPrayersDeathBookItemFactory>()) { }
 }

@@ -1,34 +1,33 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal abstract class FoodItem : Item
+internal abstract class FoodItem : Item
+{
+    public FoodItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
+    public override int PercentageBreakageChance => 100;
+    protected override bool FactoryCanAbsorbItem(Item other)
     {
-        public FoodItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-        public override int PercentageBreakageChance => 100;
-        protected override bool FactoryCanAbsorbItem(Item other)
-        {
-            return true;
-        }
+        return true;
+    }
 
-        public override FoodItemFactory Factory => (FoodItemFactory)base.Factory;
+    public override FoodItemFactory Factory => (FoodItemFactory)base.Factory;
 
-        public override int GetAdditionalMassProduceCount()
+    public override int GetAdditionalMassProduceCount()
+    {
+        int cost = Value();
+        if (cost <= 5)
         {
-            int cost = Value();
-            if (cost <= 5)
-            {
-                return MassRoll(3, 5);
-            }
-            if (cost <= 20)
-            {
-                return MassRoll(3, 5);
-            }
-            return 0;
+            return MassRoll(3, 5);
         }
+        if (cost <= 20)
+        {
+            return MassRoll(3, 5);
+        }
+        return 0;
+    }
 
-        public override string GetDescription(bool includeCountPrefix)
-        {
-            return base.GetDescription(includeCountPrefix);
-        }
+    public override string GetDescription(bool includeCountPrefix)
+    {
+        return base.GetDescription(includeCountPrefix);
     }
 }

@@ -6,30 +6,29 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.PassiveMutations
+namespace AngbandOS.Core.Mutations.PassiveMutations;
+
+[Serializable]
+internal class MutationMoronic : Mutation
 {
-    [Serializable]
-    internal class MutationMoronic : Mutation
+    public override void Initialize()
     {
-        public override void Initialize()
-        {
-            Frequency = 3;
-            GainMessage = "Your brain withers away...";
-            HaveMessage = "You are moronic (-4 INT/WIS).";
-            LoseMessage = "Your brain reverts to normal";
-            Group = MutationGroup.Smarts;
-        }
+        Frequency = 3;
+        GainMessage = "Your brain withers away...";
+        HaveMessage = "You are moronic (-4 INT/WIS).";
+        LoseMessage = "Your brain reverts to normal";
+        Group = MutationGroup.Smarts;
+    }
 
-        public override void OnGain(Genome genome)
-        {
-            genome.IntelligenceBonus -= 4;
-            genome.WisdomBonus -= 4;
-        }
+    public override void OnGain(Genome genome)
+    {
+        genome.IntelligenceBonus -= 4;
+        genome.WisdomBonus -= 4;
+    }
 
-        public override void OnLose(Genome genome)
-        {
-            genome.IntelligenceBonus += 4;
-            genome.WisdomBonus += 4;
-        }
+    public override void OnLose(Genome genome)
+    {
+        genome.IntelligenceBonus += 4;
+        genome.WisdomBonus += 4;
     }
 }

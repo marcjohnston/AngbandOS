@@ -6,54 +6,53 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Tarot
+namespace AngbandOS.Core.Spells.Tarot;
+
+[Serializable]
+internal class TarotSpellTheFool : Spell
 {
-    [Serializable]
-    internal class TarotSpellTheFool : Spell
+    private TarotSpellTheFool(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
     {
-        private TarotSpellTheFool(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
+        MonsterSelector? summonType = null;
+        SaveGame.MsgPrint("You concentrate on the Fool card...");
+        switch (Program.Rng.DieRoll(4))
         {
-            MonsterSelector? summonType = null;
-            SaveGame.MsgPrint("You concentrate on the Fool card...");
-            switch (Program.Rng.DieRoll(4))
-            {
-                case 1:
-                    summonType = new Bizarre1MonsterSelector();
-                    break;
+            case 1:
+                summonType = new Bizarre1MonsterSelector();
+                break;
 
-                case 2:
-                    summonType = new Bizarre2MonsterSelector();
-                    break;
+            case 2:
+                summonType = new Bizarre2MonsterSelector();
+                break;
 
-                case 3:
-                    summonType = new Bizarre4MonsterSelector();
-                    break;
+            case 3:
+                summonType = new Bizarre4MonsterSelector();
+                break;
 
-                case 4:
-                    summonType = new Bizarre5MonsterSelector();
-                    break;
-            }
-            if (Program.Rng.DieRoll(2) == 1)
+            case 4:
+                summonType = new Bizarre5MonsterSelector();
+                break;
+        }
+        if (Program.Rng.DieRoll(2) == 1)
+        {
+            SaveGame.MsgPrint(SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, summonType)
+                ? "The summoned creature gets angry!"
+                : "No-one ever turns up.");
+        }
+        else
+        {
+            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, summonType, false))
             {
-                SaveGame.MsgPrint(SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, summonType)
-                    ? "The summoned creature gets angry!"
-                    : "No-one ever turns up.");
-            }
-            else
-            {
-                if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, summonType, false))
-                {
-                    SaveGame.MsgPrint("No-one ever turns up.");
-                }
+                SaveGame.MsgPrint("No-one ever turns up.");
             }
         }
+    }
 
-        public override string Name => "The Fool";
-        
-        protected override string? Info()
-        {
-            return "control 50%";
-        }
+    public override string Name => "The Fool";
+    
+    protected override string? Info()
+    {
+        return "control 50%";
     }
 }

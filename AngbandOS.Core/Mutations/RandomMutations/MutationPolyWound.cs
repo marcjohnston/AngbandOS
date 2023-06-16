@@ -6,25 +6,24 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.RandomMutations
-{
-    [Serializable]
-    internal class MutationPolyWound : Mutation
-    {
-        public override void Initialize()
-        {
-            Frequency = 1;
-            GainMessage = "You feel forces of chaos entering your old scars.";
-            HaveMessage = "Your health is subject to chaotic forces.";
-            LoseMessage = "You feel forces of chaos departing your old scars.";
-        }
+namespace AngbandOS.Core.Mutations.RandomMutations;
 
-        public override void OnProcessWorld(SaveGame saveGame)
+[Serializable]
+internal class MutationPolyWound : Mutation
+{
+    public override void Initialize()
+    {
+        Frequency = 1;
+        GainMessage = "You feel forces of chaos entering your old scars.";
+        HaveMessage = "Your health is subject to chaotic forces.";
+        LoseMessage = "You feel forces of chaos departing your old scars.";
+    }
+
+    public override void OnProcessWorld(SaveGame saveGame)
+    {
+        if (Program.Rng.DieRoll(3000) == 1)
         {
-            if (Program.Rng.DieRoll(3000) == 1)
-            {
-                saveGame.Player.PolymorphWounds();
-            }
+            saveGame.Player.PolymorphWounds();
         }
     }
 }

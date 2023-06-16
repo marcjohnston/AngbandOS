@@ -1,17 +1,16 @@
-﻿namespace AngbandOS.Core.MonsterSpells
+﻿namespace AngbandOS.Core.MonsterSpells;
+
+[Serializable]
+internal class PoisonBallMonsterSpell : BallProjectileMonsterSpell
 {
-    [Serializable]
-    internal class PoisonBallMonsterSpell : BallProjectileMonsterSpell
+    public override bool UsesPoison => true;
+    public override bool IsAttack => true;
+    protected override string ActionName => "casts a stinking cloud";
+    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get<PoisProjectile>();
+    protected override int Damage(Monster monster)
     {
-        public override bool UsesPoison => true;
-        public override bool IsAttack => true;
-        protected override string ActionName => "casts a stinking cloud";
-        protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get<PoisProjectile>();
-        protected override int Damage(Monster monster)
-        {
-            int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-            return Program.Rng.DiceRoll(12, 2);
-        }
-        public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { new PoisSpellResistantDetection() };
+        int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
+        return Program.Rng.DiceRoll(12, 2);
     }
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { new PoisSpellResistantDetection() };
 }

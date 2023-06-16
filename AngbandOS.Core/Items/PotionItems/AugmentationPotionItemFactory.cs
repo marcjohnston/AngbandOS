@@ -1,54 +1,53 @@
-namespace AngbandOS.Core.ItemCategories
+namespace AngbandOS.Core.ItemCategories;
+
+[Serializable]
+internal class AugmentationPotionItemFactory : PotionItemFactory
 {
-    [Serializable]
-    internal class AugmentationPotionItemFactory : PotionItemFactory
+    private AugmentationPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+
+    public override char Character => '!';
+    public override string Name => "Augmentation";
+
+    public override int[] Chance => new int[] { 16, 0, 0, 0 };
+    public override int Cost => 60000;
+    public override int Dd => 1;
+    public override int Ds => 1;
+    public override string FriendlyName => "Augmentation";
+    public override int Level => 40;
+    public override int[] Locale => new int[] { 40, 0, 0, 0 };
+    public override int? SubCategory => (int)PotionType.Augmentation;
+    public override int Weight => 4;
+    public override bool Quaff(SaveGame saveGame)
     {
-        private AugmentationPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        bool identified = false;
 
-        public override char Character => '!';
-        public override string Name => "Augmentation";
-
-        public override int[] Chance => new int[] { 16, 0, 0, 0 };
-        public override int Cost => 60000;
-        public override int Dd => 1;
-        public override int Ds => 1;
-        public override string FriendlyName => "Augmentation";
-        public override int Level => 40;
-        public override int[] Locale => new int[] { 40, 0, 0, 0 };
-        public override int? SubCategory => (int)PotionType.Augmentation;
-        public override int Weight => 4;
-        public override bool Quaff(SaveGame saveGame)
+        // Augmentation increases all ability scores
+        if (saveGame.Player.TryIncreasingAbilityScore(Ability.Strength))
         {
-            bool identified = false;
-
-            // Augmentation increases all ability scores
-            if (saveGame.Player.TryIncreasingAbilityScore(Ability.Strength))
-            {
-                identified = true;
-            }
-            if (saveGame.Player.TryIncreasingAbilityScore(Ability.Intelligence))
-            {
-                identified = true;
-            }
-            if (saveGame.Player.TryIncreasingAbilityScore(Ability.Wisdom))
-            {
-                identified = true;
-            }
-            if (saveGame.Player.TryIncreasingAbilityScore(Ability.Dexterity))
-            {
-                identified = true;
-            }
-            if (saveGame.Player.TryIncreasingAbilityScore(Ability.Constitution))
-            {
-                identified = true;
-            }
-            if (saveGame.Player.TryIncreasingAbilityScore(Ability.Charisma))
-            {
-                identified = true;
-            }
-
-            return identified;
+            identified = true;
         }
-        public override Item CreateItem() => new AugmentationPotionItem(SaveGame);
+        if (saveGame.Player.TryIncreasingAbilityScore(Ability.Intelligence))
+        {
+            identified = true;
+        }
+        if (saveGame.Player.TryIncreasingAbilityScore(Ability.Wisdom))
+        {
+            identified = true;
+        }
+        if (saveGame.Player.TryIncreasingAbilityScore(Ability.Dexterity))
+        {
+            identified = true;
+        }
+        if (saveGame.Player.TryIncreasingAbilityScore(Ability.Constitution))
+        {
+            identified = true;
+        }
+        if (saveGame.Player.TryIncreasingAbilityScore(Ability.Charisma))
+        {
+            identified = true;
+        }
+
+        return identified;
     }
+    public override Item CreateItem() => new AugmentationPotionItem(SaveGame);
 }

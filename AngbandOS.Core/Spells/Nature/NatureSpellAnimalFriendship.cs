@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Nature
-{
-    [Serializable]
-    internal class NatureSpellAnimalFriendship : Spell
-    {
-        private NatureSpellAnimalFriendship(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.CharmAnimals(SaveGame.Player.Level * 2);
-        }
+namespace AngbandOS.Core.Spells.Nature;
 
-        public override string Name => "Animal Friendship";
-        
+[Serializable]
+internal class NatureSpellAnimalFriendship : Spell
+{
+    private NatureSpellAnimalFriendship(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.CharmAnimals(SaveGame.Player.Level * 2);
     }
+
+    public override string Name => "Animal Friendship";
+    
 }

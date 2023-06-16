@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Death
-{
-    [Serializable]
-    internal class DeathSpellVampiricBranding : Spell
-    {
-        private DeathSpellVampiricBranding(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.BrandWeapon(3);
-        }
+namespace AngbandOS.Core.Spells.Death;
 
-        public override string Name => "Vampiric Branding";
-        
+[Serializable]
+internal class DeathSpellVampiricBranding : Spell
+{
+    private DeathSpellVampiricBranding(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.BrandWeapon(3);
     }
+
+    public override string Name => "Vampiric Branding";
+    
 }

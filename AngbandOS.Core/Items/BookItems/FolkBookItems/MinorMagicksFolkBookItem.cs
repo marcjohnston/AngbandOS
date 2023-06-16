@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class MinorMagicksFolkBookItem : FolkBookItem
-    {
-        public MinorMagicksFolkBookItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<MinorMagicksFolkBookItemFactory>()) { }
-    }
+internal class MinorMagicksFolkBookItem : FolkBookItem
+{
+    public MinorMagicksFolkBookItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<MinorMagicksFolkBookItemFactory>()) { }
 }

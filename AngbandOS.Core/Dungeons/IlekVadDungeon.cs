@@ -8,16 +8,15 @@
 
 using static AngbandOS.Core.CelephaisDungeon;
 
-namespace AngbandOS.Core
-{
+namespace AngbandOS.Core;
+
 [Serializable]
-    internal class IlekVadDungeon : Dungeon
-    {
-        private IlekVadDungeon(SaveGame saveGame) : base(saveGame) { }
-        public override int BaseOffset => 0;
-        public override int MaxLevel => 5;
-        public override string Name => "the Sewers under Ilek-Vad";
-        public override string Shortname => "Ilek-Vad";
-        public override string MapSymbol => "V";
-    }
+internal class IlekVadDungeon : Dungeon
+{
+    private IlekVadDungeon(SaveGame saveGame) : base(saveGame) { }
+    public override int BaseOffset => 0;
+    public override int MaxLevel => 5;
+    public override string Name => "the Sewers under Ilek-Vad";
+    public override string Shortname => "Ilek-Vad";
+    public override string MapSymbol => "V";
 }

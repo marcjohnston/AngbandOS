@@ -1,75 +1,74 @@
 ﻿using System.Collections;
 
-namespace AngbandOS.Core.ConsoleElements
+namespace AngbandOS.Core.ConsoleElements;
+
+/// <summary>
+/// Represents a string that can be rendered via the console.  Each character in the string can have a separate colour.
+/// </summary>
+internal class ConsoleString : ConsoleElement, IEnumerable<ConsoleChar>
 {
-    /// <summary>
-    /// Represents a string that can be rendered via the console.  Each character in the string can have a separate colour.
-    /// </summary>
-    internal class ConsoleString : ConsoleElement, IEnumerable<ConsoleChar>
+    private List<ConsoleChar> characters = new List<ConsoleChar>();
+
+    public ConsoleString(Colour colour, string text)
     {
-        private List<ConsoleChar> characters = new List<ConsoleChar>();
-
-        public ConsoleString(Colour colour, string text)
+        foreach (char c in text)
         {
-            foreach (char c in text)
-            {
-                Append(colour, c);
-            }
+            Append(colour, c);
         }
+    }
 
-        public ConsoleString(string text) : this(Colour.White, text) { }
+    public ConsoleString(string text) : this(Colour.White, text) { }
 
-        public void Append(Colour colour, string text)
+    public void Append(Colour colour, string text)
+    {
+        foreach (char c in text)
         {
-            foreach (char c in text)
-            {
-                Append(colour, c);
-            }
+            Append(colour, c);
         }
+    }
 
-        public void Append(Colour colour, char c)
+    public void Append(Colour colour, char c)
+    {
+        characters.Add(new ConsoleChar(colour, c));
+    }
+
+    public IEnumerator<ConsoleChar> GetEnumerator()
+    {
+        return characters.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return characters.GetEnumerator();
+    }
+
+    public override void Render(SaveGame saveGame, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment)
+    {
+        ConsoleAlignment alignment = Alignment ?? parentAlignment;
+        ConsoleLocation location = alignment.ComputeTopLeftLocation(this, containerWindow);
+        location.ToWindow(Width, Height).Clear(saveGame, Colour.Background);
+
+        foreach (ConsoleChar consoleChar in characters)
         {
-            characters.Add(new ConsoleChar(colour, c));
+            consoleChar.Render(saveGame, location.ToWindow(consoleChar.Width, consoleChar.Height), alignment);
+            location = location.Offset(1, 0);
         }
+    }
 
-        public IEnumerator<ConsoleChar> GetEnumerator()
+    public int Length
+    {
+        get
         {
-            return characters.GetEnumerator();
+            return characters.Count;
         }
+    }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return characters.GetEnumerator();
-        }
+    public override int Width => characters.Count;
 
-        public override void Render(SaveGame saveGame, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment)
-        {
-            ConsoleAlignment alignment = Alignment ?? parentAlignment;
-            ConsoleLocation location = alignment.ComputeTopLeftLocation(this, containerWindow);
-            location.ToWindow(Width, Height).Clear(saveGame, Colour.Background);
+    public override int Height => 1;
 
-            foreach (ConsoleChar consoleChar in characters)
-            {
-                consoleChar.Render(saveGame, location.ToWindow(consoleChar.Width, consoleChar.Height), alignment);
-                location = location.Offset(1, 0);
-            }
-        }
-
-        public int Length
-        {
-            get
-            {
-                return characters.Count;
-            }
-        }
-
-        public override int Width => characters.Count;
-
-        public override int Height => 1;
-
-        public override string ToString()
-        {
-            return new string(characters.Select(_character => _character.Char).ToArray());
-        }
+    public override string ToString()
+    {
+        return new string(characters.Select(_character => _character.Char).ToArray());
     }
 }

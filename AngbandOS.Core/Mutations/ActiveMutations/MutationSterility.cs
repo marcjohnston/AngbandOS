@@ -6,33 +6,32 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.ActiveMutations
+namespace AngbandOS.Core.Mutations.ActiveMutations;
+
+[Serializable]
+internal class MutationSterility : Mutation
 {
-    [Serializable]
-    internal class MutationSterility : Mutation
+    public override void Activate(SaveGame saveGame)
     {
-        public override void Activate(SaveGame saveGame)
+        if (!saveGame.CheckIfRacialPowerWorks(20, 40, Ability.Charisma, 18))
         {
-            if (!saveGame.CheckIfRacialPowerWorks(20, 40, Ability.Charisma, 18))
-            {
-                return;
-            }
-            saveGame.MsgPrint("You suddenly have a headache!");
-            saveGame.Player.TakeHit(Program.Rng.DieRoll(30) + 30, "the strain of forcing abstinence");
-            saveGame.Level.NumRepro += Constants.MaxRepro;
+            return;
         }
+        saveGame.MsgPrint("You suddenly have a headache!");
+        saveGame.Player.TakeHit(Program.Rng.DieRoll(30) + 30, "the strain of forcing abstinence");
+        saveGame.Level.NumRepro += Constants.MaxRepro;
+    }
 
-        public override string ActivationSummary(int lvl)
-        {
-            return lvl < 20 ? "sterilize        (unusable until level 20)" : "sterilize        (cost 40, CHA based)";
-        }
+    public override string ActivationSummary(int lvl)
+    {
+        return lvl < 20 ? "sterilize        (unusable until level 20)" : "sterilize        (cost 40, CHA based)";
+    }
 
-        public override void Initialize()
-        {
-            Frequency = 1;
-            GainMessage = "You can give everything around you a headache.";
-            HaveMessage = "You can cause mass impotence.";
-            LoseMessage = "You hear a massed sigh of relief.";
-        }
+    public override void Initialize()
+    {
+        Frequency = 1;
+        GainMessage = "You can give everything around you a headache.";
+        HaveMessage = "You can cause mass impotence.";
+        LoseMessage = "You hear a massed sigh of relief.";
     }
 }

@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Corporeal
-{
-    [Serializable]
-    internal class CorporealSpellBatsSense : Spell
-    {
-        private CorporealSpellBatsSense(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.Level.MapArea();
-        }
+namespace AngbandOS.Core.Spells.Corporeal;
 
-        public override string Name => "Bat's Sense";
-        
+[Serializable]
+internal class CorporealSpellBatsSense : Spell
+{
+    private CorporealSpellBatsSense(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.Level.MapArea();
     }
+
+    public override string Name => "Bat's Sense";
+    
 }

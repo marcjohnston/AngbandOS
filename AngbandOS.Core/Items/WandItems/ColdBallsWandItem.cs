@@ -1,12 +1,11 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class ColdBallsWandItem : WandItem
+internal class ColdBallsWandItem : WandItem
+{
+    public ColdBallsWandItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ColdBallsWandItemFactory>()) { }
+    protected override void ApplyMagic(int level, int power, Store? store)
     {
-        public ColdBallsWandItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ColdBallsWandItemFactory>()) { }
-        protected override void ApplyMagic(int level, int power, Store? store)
-        {
-            TypeSpecificValue = Program.Rng.DieRoll(6) + 2;
-        }
+        TypeSpecificValue = Program.Rng.DieRoll(6) + 2;
     }
 }

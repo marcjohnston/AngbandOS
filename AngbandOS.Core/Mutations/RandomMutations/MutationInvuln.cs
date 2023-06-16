@@ -6,28 +6,27 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.RandomMutations
-{
-    [Serializable]
-    internal class MutationInvuln : Mutation
-    {
-        public override void Initialize()
-        {
-            Frequency = 1;
-            GainMessage = "You are blessed with fits of invulnerability.";
-            HaveMessage = "You occasionally feel invincible.";
-            LoseMessage = "You are no longer blessed with fits of invulnerability.";
-        }
+namespace AngbandOS.Core.Mutations.RandomMutations;
 
-        public override void OnProcessWorld(SaveGame saveGame)
+[Serializable]
+internal class MutationInvuln : Mutation
+{
+    public override void Initialize()
+    {
+        Frequency = 1;
+        GainMessage = "You are blessed with fits of invulnerability.";
+        HaveMessage = "You occasionally feel invincible.";
+        LoseMessage = "You are no longer blessed with fits of invulnerability.";
+    }
+
+    public override void OnProcessWorld(SaveGame saveGame)
+    {
+        if (!saveGame.Player.HasAntiMagic && Program.Rng.DieRoll(5000) == 1)
         {
-            if (!saveGame.Player.HasAntiMagic && Program.Rng.DieRoll(5000) == 1)
-            {
-                saveGame.Disturb(false);
-                saveGame.MsgPrint("You feel invincible!");
-                saveGame.MsgPrint(null);
-                saveGame.Player.TimedInvulnerability.AddTimer(Program.Rng.DieRoll(8) + 8);
-            }
+            saveGame.Disturb(false);
+            saveGame.MsgPrint("You feel invincible!");
+            saveGame.MsgPrint(null);
+            saveGame.Player.TimedInvulnerability.AddTimer(Program.Rng.DieRoll(8) + 8);
         }
     }
 }

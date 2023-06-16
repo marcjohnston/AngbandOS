@@ -6,34 +6,33 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.ActiveMutations
+namespace AngbandOS.Core.Mutations.ActiveMutations;
+
+[Serializable]
+internal class MutationEarthquake : Mutation
 {
-    [Serializable]
-    internal class MutationEarthquake : Mutation
+    public override void Activate(SaveGame saveGame)
     {
-        public override void Activate(SaveGame saveGame)
+        if (!saveGame.CheckIfRacialPowerWorks(12, 12, Ability.Strength, 16))
         {
-            if (!saveGame.CheckIfRacialPowerWorks(12, 12, Ability.Strength, 16))
-            {
-                return;
-            }
-            if (!saveGame.IsQuest(saveGame.CurrentDepth) && saveGame.CurrentDepth != 0)
-            {
-                saveGame.Earthquake(saveGame.Player.MapY, saveGame.Player.MapX, 10);
-            }
+            return;
         }
+        if (!saveGame.IsQuest(saveGame.CurrentDepth) && saveGame.CurrentDepth != 0)
+        {
+            saveGame.Earthquake(saveGame.Player.MapY, saveGame.Player.MapX, 10);
+        }
+    }
 
-        public override string ActivationSummary(int lvl)
-        {
-            return lvl < 12 ? "earthquake       (unusable until level 12)" : "earthquake       (cost 12, STR based)";
-        }
+    public override string ActivationSummary(int lvl)
+    {
+        return lvl < 12 ? "earthquake       (unusable until level 12)" : "earthquake       (cost 12, STR based)";
+    }
 
-        public override void Initialize()
-        {
-            Frequency = 3;
-            GainMessage = "You gain the ability to wreck the dungeon.";
-            HaveMessage = "You can bring down the dungeon around your ears.";
-            LoseMessage = "You lose the ability to wreck the dungeon.";
-        }
+    public override void Initialize()
+    {
+        Frequency = 3;
+        GainMessage = "You gain the ability to wreck the dungeon.";
+        HaveMessage = "You can bring down the dungeon around your ears.";
+        LoseMessage = "You lose the ability to wreck the dungeon.";
     }
 }

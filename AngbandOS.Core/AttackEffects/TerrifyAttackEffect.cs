@@ -6,38 +6,37 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.AttackEffects
+namespace AngbandOS.Core.AttackEffects;
+
+[Serializable]
+internal class TerrifyAttackEffect : BaseAttackEffect
 {
-    [Serializable]
-    internal class TerrifyAttackEffect : BaseAttackEffect
+    public override int Power => 10;
+    public override string Description => "terrify";
+    public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
-        public override int Power => 10;
-        public override string Description => "terrify";
-        public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+        saveGame.Player.TakeHit(damage, monsterDescription);
+        if (saveGame.Player.HasFearResistance)
         {
-            saveGame.Player.TakeHit(damage, monsterDescription);
-            if (saveGame.Player.HasFearResistance)
+            saveGame.MsgPrint("You stand your ground!");
+            obvious = true;
+        }
+        else if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
+        {
+            saveGame.MsgPrint("You stand your ground!");
+            obvious = true;
+        }
+        else
+        {
+            if (saveGame.Player.TimedFear.AddTimer(3 + Program.Rng.DieRoll(monsterLevel)))
             {
-                saveGame.MsgPrint("You stand your ground!");
                 obvious = true;
             }
-            else if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
-            {
-                saveGame.MsgPrint("You stand your ground!");
-                obvious = true;
-            }
-            else
-            {
-                if (saveGame.Player.TimedFear.AddTimer(3 + Program.Rng.DieRoll(monsterLevel)))
-                {
-                    obvious = true;
-                }
-            }
-            saveGame.Level.UpdateSmartLearn(monster, new FearSpellResistantDetection());
         }
-        public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
-        {
-            pt = saveGame.SingletonRepository.Projectiles.Get<TurnAllProjectile>();
-        }
+        saveGame.Level.UpdateSmartLearn(monster, new FearSpellResistantDetection());
+    }
+    public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
+    {
+        pt = saveGame.SingletonRepository.Projectiles.Get<TurnAllProjectile>();
     }
 }

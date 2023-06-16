@@ -6,27 +6,26 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core
+namespace AngbandOS.Core;
+
+[Serializable]
+internal class MonsterAttack
 {
-    [Serializable]
-    internal class MonsterAttack
+    public int DDice;
+    public int DSide;
+    public BaseAttackEffect? Effect;
+    public BaseAttackType Method;
+
+    public MonsterAttack(BaseAttackType method, BaseAttackEffect? effect, int dice, int sides)
     {
-        public int DDice;
-        public int DSide;
-        public BaseAttackEffect? Effect;
-        public BaseAttackType Method;
+        Method = method;
+        Effect = effect;
+        DDice = dice;
+        DSide = sides;
+    }
 
-        public MonsterAttack(BaseAttackType method, BaseAttackEffect? effect, int dice, int sides)
-        {
-            Method = method;
-            Effect = effect;
-            DDice = dice;
-            DSide = sides;
-        }
-
-        public override string ToString()
-        {
-            return $"{Method} to {Effect} ({DDice}d{DSide})";
-        }
+    public override string ToString()
+    {
+        return $"{Method} to {Effect} ({DDice}d{DSide})";
     }
 }

@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Corporeal
-{
-    [Serializable]
-    internal class CorporealSpellKnowSelf : Spell
-    {
-        private CorporealSpellKnowSelf(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.SelfKnowledge();
-        }
+namespace AngbandOS.Core.Spells.Corporeal;
 
-        public override string Name => "Know Self";
-        
+[Serializable]
+internal class CorporealSpellKnowSelf : Spell
+{
+    private CorporealSpellKnowSelf(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.SelfKnowledge();
     }
+
+    public override string Name => "Know Self";
+    
 }

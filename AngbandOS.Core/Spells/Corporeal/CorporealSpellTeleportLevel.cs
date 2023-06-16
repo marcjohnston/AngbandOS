@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Corporeal
-{
-    [Serializable]
-    internal class CorporealSpellTeleportLevel : Spell
-    {
-        private CorporealSpellTeleportLevel(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.TeleportPlayerLevel();
-        }
+namespace AngbandOS.Core.Spells.Corporeal;
 
-        public override string Name => "Teleport Level";
-        
+[Serializable]
+internal class CorporealSpellTeleportLevel : Spell
+{
+    private CorporealSpellTeleportLevel(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.TeleportPlayerLevel();
     }
+
+    public override string Name => "Teleport Level";
+    
 }

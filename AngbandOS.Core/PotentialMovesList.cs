@@ -6,20 +6,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core
-{
-    /// <summary>
-    /// A matrix of possible moves that can be made by a monster
-    /// </summary>
-    [Serializable]
-    internal class PotentialMovesList
-    {
-        private readonly int[] _values = new int[8];
+namespace AngbandOS.Core;
 
-        public int this[int index]
-        {
-            get => _values[index];
-            set => _values[index] = value;
-        }
+/// <summary>
+/// A matrix of possible moves that can be made by a monster
+/// </summary>
+[Serializable]
+internal class PotentialMovesList
+{
+    private readonly int[] _values = new int[8];
+
+    public int this[int index]
+    {
+        get => _values[index];
+        set => _values[index] = value;
     }
 }

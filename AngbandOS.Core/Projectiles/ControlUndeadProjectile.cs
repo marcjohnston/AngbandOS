@@ -6,50 +6,49 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Projection
+namespace AngbandOS.Core.Projection;
+
+[Serializable]
+internal class ControlUndeadProjectile : Projectile
 {
-    [Serializable]
-    internal class ControlUndeadProjectile : Projectile
+    private ControlUndeadProjectile(SaveGame saveGame) : base(saveGame) { }
+
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<BlackBulletProjectileGraphic>();
+
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<BlackControlAnimation>();
+
+    protected override bool ProjectileAngersMonster(Monster mPtr)
     {
-        private ControlUndeadProjectile(SaveGame saveGame) : base(saveGame) { }
+        return false;
+    }
 
-        protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<BlackBulletProjectileGraphic>();
-
-        protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<BlackControlAnimation>();
-
-        protected override bool ProjectileAngersMonster(Monster mPtr)
+    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
+    {
+        MonsterRace rPtr = mPtr.Race;
+        bool seen = mPtr.IsVisible;
+        bool obvious = false;
+        string? note = null;
+        if (seen)
         {
-            return false;
+            obvious = true;
         }
-
-        protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
+        if (rPtr.Unique || !rPtr.Undead ||
+            rPtr.Level > Program.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
         {
-            MonsterRace rPtr = mPtr.Race;
-            bool seen = mPtr.IsVisible;
-            bool obvious = false;
-            string? note = null;
-            if (seen)
-            {
-                obvious = true;
-            }
-            if (rPtr.Unique || !rPtr.Undead ||
-                rPtr.Level > Program.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
-            {
-                note = " is unaffected!";
-                obvious = false;
-            }
-            else if (SaveGame.Player.HasAggravation || rPtr.Guardian)
-            {
-                note = " hates you too much!";
-            }
-            else
-            {
-                note = " is in your thrall!";
-                mPtr.SmFriendly = true;
-            }
-            dam = 0;
-            ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-            return obvious;
+            note = " is unaffected!";
+            obvious = false;
         }
+        else if (SaveGame.Player.HasAggravation || rPtr.Guardian)
+        {
+            note = " hates you too much!";
+        }
+        else
+        {
+            note = " is in your thrall!";
+            mPtr.SmFriendly = true;
+        }
+        dam = 0;
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        return obvious;
     }
 }

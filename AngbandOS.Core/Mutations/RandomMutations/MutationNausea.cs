@@ -6,29 +6,28 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.RandomMutations
-{
-    [Serializable]
-    internal class MutationNausea : Mutation
-    {
-        public override void Initialize()
-        {
-            Frequency = 1;
-            GainMessage = "Your stomach starts to roil nauseously.";
-            HaveMessage = "You have a seriously upset stomach.";
-            LoseMessage = "Your stomach stops roiling.";
-        }
+namespace AngbandOS.Core.Mutations.RandomMutations;
 
-        public override void OnProcessWorld(SaveGame saveGame)
+[Serializable]
+internal class MutationNausea : Mutation
+{
+    public override void Initialize()
+    {
+        Frequency = 1;
+        GainMessage = "Your stomach starts to roil nauseously.";
+        HaveMessage = "You have a seriously upset stomach.";
+        LoseMessage = "Your stomach stops roiling.";
+    }
+
+    public override void OnProcessWorld(SaveGame saveGame)
+    {
+        if (saveGame.Player.HasSlowDigestion || Program.Rng.DieRoll(9000) != 1)
         {
-            if (saveGame.Player.HasSlowDigestion || Program.Rng.DieRoll(9000) != 1)
-            {
-                return;
-            }
-            saveGame.Disturb(false);
-            saveGame.MsgPrint("Your stomach roils, and you lose your lunch!");
-            saveGame.MsgPrint(null);
-            saveGame.Player.SetFood(Constants.PyFoodWeak);
+            return;
         }
+        saveGame.Disturb(false);
+        saveGame.MsgPrint("Your stomach roils, and you lose your lunch!");
+        saveGame.MsgPrint(null);
+        saveGame.Player.SetFood(Constants.PyFoodWeak);
     }
 }

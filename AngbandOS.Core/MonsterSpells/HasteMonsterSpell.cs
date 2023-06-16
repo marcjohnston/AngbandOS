@@ -1,51 +1,50 @@
-﻿namespace AngbandOS.Core.MonsterSpells
+﻿namespace AngbandOS.Core.MonsterSpells;
+
+[Serializable]
+internal class HasteMonsterSpell : MonsterSpell
 {
-    [Serializable]
-    internal class HasteMonsterSpell : MonsterSpell
+    public override bool IsIntelligent => true;
+    public override bool Hastens => true;
+
+    public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} concentrates on {monster.PossessiveName} body.";
+
+    public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
     {
-        public override bool IsIntelligent => true;
-        public override bool Hastens => true;
+        string monsterName = monster.Name;
 
-        public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} concentrates on {monster.PossessiveName} body.";
-
-        public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
+        if (monster.Speed < monster.Race.Speed + 10)
         {
-            string monsterName = monster.Name;
-
-            if (monster.Speed < monster.Race.Speed + 10)
-            {
-                saveGame.MsgPrint($"{monsterName} starts moving faster.");
-                monster.Speed += 10;
-            }
-            else if (monster.Speed < monster.Race.Speed + 20)
-            {
-                saveGame.MsgPrint($"{monsterName} starts moving faster.");
-                monster.Speed += 2;
-            }
+            saveGame.MsgPrint($"{monsterName} starts moving faster.");
+            monster.Speed += 10;
         }
-
-        public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
+        else if (monster.Speed < monster.Race.Speed + 20)
         {
-            bool blind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
-            bool seen = !blind && monster.IsVisible;
-            MonsterRace targetRace = target.Race;
+            saveGame.MsgPrint($"{monsterName} starts moving faster.");
+            monster.Speed += 2;
+        }
+    }
 
-            if (monster.Speed < monster.Race.Speed + 10)
+    public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
+    {
+        bool blind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool seen = !blind && monster.IsVisible;
+        MonsterRace targetRace = target.Race;
+
+        if (monster.Speed < monster.Race.Speed + 10)
+        {
+            if (seen)
             {
-                if (seen)
-                {
-                    saveGame.MsgPrint($"{monster.Name} starts moving faster.");
-                }
-                monster.Speed += 10;
+                saveGame.MsgPrint($"{monster.Name} starts moving faster.");
             }
-            else if (monster.Speed < monster.Race.Speed + 20)
+            monster.Speed += 10;
+        }
+        else if (monster.Speed < monster.Race.Speed + 20)
+        {
+            if (seen)
             {
-                if (seen)
-                {
-                    saveGame.MsgPrint($"{monster.Name} starts moving faster.");
-                }
-                monster.Speed += 2;
+                saveGame.MsgPrint($"{monster.Name} starts moving faster.");
             }
+            monster.Speed += 2;
         }
     }
 }

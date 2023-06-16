@@ -1,18 +1,17 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class BronzeDragonScaleMailArmorItem : DragonScaleMailArmorItem
+internal class BronzeDragonScaleMailArmorItem : DragonScaleMailArmorItem
+{
+    public BronzeDragonScaleMailArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<BronzeDragonScaleMailArmorItemFactory>()) { }
+    public override void DoActivate()
     {
-        public BronzeDragonScaleMailArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<BronzeDragonScaleMailArmorItemFactory>()) { }
-        public override void DoActivate()
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
-            if (!SaveGame.GetDirectionWithAim(out int dir))
-            {
-                return;
-            }
-            SaveGame.MsgPrint("You breathe confusion.");
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ConfusionProjectile>(), dir, 120, -2);
-            RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+            return;
         }
+        SaveGame.MsgPrint("You breathe confusion.");
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ConfusionProjectile>(), dir, 120, -2);
+        RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
     }
 }

@@ -6,34 +6,33 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.ActiveMutations
+namespace AngbandOS.Core.Mutations.ActiveMutations;
+
+[Serializable]
+internal class MutationGrowMold : Mutation
 {
-    [Serializable]
-    internal class MutationGrowMold : Mutation
+    public override void Activate(SaveGame saveGame)
     {
-        public override void Activate(SaveGame saveGame)
+        if (!saveGame.CheckIfRacialPowerWorks(1, 6, Ability.Constitution, 14))
         {
-            if (!saveGame.CheckIfRacialPowerWorks(1, 6, Ability.Constitution, 14))
-            {
-                return;
-            }
-            for (int i = 0; i < 8; i++)
-            {
-                saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new Bizarre1MonsterSelector(), false);
-            }
+            return;
         }
+        for (int i = 0; i < 8; i++)
+        {
+            saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level, new Bizarre1MonsterSelector(), false);
+        }
+    }
 
-        public override string ActivationSummary(int lvl)
-        {
-            return lvl < 1 ? "grow mold        (unusable until level 1)" : "grow mold        (cost 6, CON based)";
-        }
+    public override string ActivationSummary(int lvl)
+    {
+        return lvl < 1 ? "grow mold        (unusable until level 1)" : "grow mold        (cost 6, CON based)";
+    }
 
-        public override void Initialize()
-        {
-            Frequency = 1;
-            GainMessage = "You feel a sudden affinity for mold.";
-            HaveMessage = "You can cause mold to grow near you.";
-            LoseMessage = "You feel a sudden dislike for mold.";
-        }
+    public override void Initialize()
+    {
+        Frequency = 1;
+        GainMessage = "You feel a sudden affinity for mold.";
+        HaveMessage = "You can cause mold to grow near you.";
+        LoseMessage = "You feel a sudden dislike for mold.";
     }
 }

@@ -1,28 +1,27 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal abstract class HardArmorItem : ArmourItem
+internal abstract class HardArmorItem : ArmourItem
+{
+    public override int WieldSlot => InventorySlot.Body;
+    public HardArmorItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
+
+    /// <summary>
+    /// Applies standard magic to hard armour.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="level"></param>
+    /// <param name="power"></param>
+    protected override void ApplyMagic(int level, int power, Store? store)
     {
-        public override int WieldSlot => InventorySlot.Body;
-        public HardArmorItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-
-        /// <summary>
-        /// Applies standard magic to hard armour.
-        /// </summary>
-        /// <param name="item"></param>
-        /// <param name="level"></param>
-        /// <param name="power"></param>
-        protected override void ApplyMagic(int level, int power, Store? store)
+        if (power != 0)
         {
-            if (power != 0)
-            {
-                // Apply the standard armour characteristics.
-                base.ApplyMagic(level, power, null);
+            // Apply the standard armour characteristics.
+            base.ApplyMagic(level, power, null);
 
-                if (power > 1)
-                {
-                    ApplyRandomGoodRareCharacteristics();
-                }
+            if (power > 1)
+            {
+                ApplyRandomGoodRareCharacteristics();
             }
         }
     }

@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class ArtifactCreationScrollItem : ScrollItem
-    {
-        public ArtifactCreationScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ScrollArtifactCreation>()) { }
-    }
+internal class ArtifactCreationScrollItem : ScrollItem
+{
+    public ArtifactCreationScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ScrollArtifactCreation>()) { }
 }

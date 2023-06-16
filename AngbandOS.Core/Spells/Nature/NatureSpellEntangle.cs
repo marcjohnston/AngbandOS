@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Nature
-{
-    [Serializable]
-    internal class NatureSpellEntangle : Spell
-    {
-        private NatureSpellEntangle(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.SlowMonsters();
-        }
+namespace AngbandOS.Core.Spells.Nature;
 
-        public override string Name => "Entangle";
-        
+[Serializable]
+internal class NatureSpellEntangle : Spell
+{
+    private NatureSpellEntangle(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.SlowMonsters();
     }
+
+    public override string Name => "Entangle";
+    
 }

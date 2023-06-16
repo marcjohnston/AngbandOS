@@ -8,21 +8,20 @@
 
 using static AngbandOS.Core.CelephaisDungeon;
 
-namespace AngbandOS.Core
-{
+namespace AngbandOS.Core;
+
 [Serializable]
-    internal class DragonLairDungeon : Dungeon
-    {
-        private DragonLairDungeon(SaveGame saveGame) : base(saveGame) { }
-        public override int BaseOffset => 15;
-        public override int MaxLevel => 35;
-        public override MonsterSelector? Bias => new DragonMonsterSelector();
-        public override string FirstGuardian => "Glaurung, Father of the Dragons";
-        public override string SecondGuardian => "Ancalagon the Black";
-        public override int FirstLevel => 34;
-        public override int SecondLevel => 35;
-        public override string Name => "the Dragon's Lair";
-        public override string Shortname => "Dragon Lair";
-        public override string MapSymbol => "l";
-    }
+internal class DragonLairDungeon : Dungeon
+{
+    private DragonLairDungeon(SaveGame saveGame) : base(saveGame) { }
+    public override int BaseOffset => 15;
+    public override int MaxLevel => 35;
+    public override MonsterSelector? Bias => new DragonMonsterSelector();
+    public override string FirstGuardian => "Glaurung, Father of the Dragons";
+    public override string SecondGuardian => "Ancalagon the Black";
+    public override int FirstLevel => 34;
+    public override int SecondLevel => 35;
+    public override string Name => "the Dragon's Lair";
+    public override string Shortname => "Dragon Lair";
+    public override string MapSymbol => "l";
 }

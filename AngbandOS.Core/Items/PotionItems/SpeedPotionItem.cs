@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class SpeedPotionItem : PotionItem
-    {
-        public SpeedPotionItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<SpeedPotionItemFactory>()) { }
-    }
+internal class SpeedPotionItem : PotionItem
+{
+    public SpeedPotionItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<SpeedPotionItemFactory>()) { }
 }

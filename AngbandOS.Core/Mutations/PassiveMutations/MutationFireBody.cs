@@ -6,27 +6,26 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.PassiveMutations
+namespace AngbandOS.Core.Mutations.PassiveMutations;
+
+[Serializable]
+internal class MutationFireBody : Mutation
 {
-    [Serializable]
-    internal class MutationFireBody : Mutation
+    public override void Initialize()
     {
-        public override void Initialize()
-        {
-            Frequency = 2;
-            GainMessage = "Your body is enveloped in flames!";
-            HaveMessage = "Your body is enveloped in flames.";
-            LoseMessage = "Your body is no longer enveloped in flames.";
-        }
+        Frequency = 2;
+        GainMessage = "Your body is enveloped in flames!";
+        HaveMessage = "Your body is enveloped in flames.";
+        LoseMessage = "Your body is no longer enveloped in flames.";
+    }
 
-        public override void OnGain(Genome genome)
-        {
-            genome.FireHit = true;
-        }
+    public override void OnGain(Genome genome)
+    {
+        genome.FireHit = true;
+    }
 
-        public override void OnLose(Genome genome)
-        {
-            genome.FireHit = false;
-        }
+    public override void OnLose(Genome genome)
+    {
+        genome.FireHit = false;
     }
 }

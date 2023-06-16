@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Sorcery
-{
-    [Serializable]
-    internal class SorcerySpellDetectionTrue : Spell
-    {
-        private SorcerySpellDetectionTrue(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.DetectAll();
-        }
+namespace AngbandOS.Core.Spells.Sorcery;
 
-        public override string Name => "Detection True";
-        
+[Serializable]
+internal class SorcerySpellDetectionTrue : Spell
+{
+    private SorcerySpellDetectionTrue(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.DetectAll();
     }
+
+    public override string Name => "Detection True";
+    
 }

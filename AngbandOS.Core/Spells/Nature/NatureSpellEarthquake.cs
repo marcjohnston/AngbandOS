@@ -6,22 +6,21 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Nature
-{
-    [Serializable]
-    internal class NatureSpellEarthquake : Spell
-    {
-        private NatureSpellEarthquake(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.Earthquake(SaveGame.Player.MapY, SaveGame.Player.MapX, 10);
-        }
+namespace AngbandOS.Core.Spells.Nature;
 
-        public override string Name => "Earthquake";
-        
-        protected override string? Info()
-        {
-            return "rad 10";
-        }
+[Serializable]
+internal class NatureSpellEarthquake : Spell
+{
+    private NatureSpellEarthquake(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.Earthquake(SaveGame.Player.MapY, SaveGame.Player.MapX, 10);
+    }
+
+    public override string Name => "Earthquake";
+    
+    protected override string? Info()
+    {
+        return "rad 10";
     }
 }

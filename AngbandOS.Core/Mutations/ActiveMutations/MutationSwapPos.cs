@@ -6,35 +6,34 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.ActiveMutations
+namespace AngbandOS.Core.Mutations.ActiveMutations;
+
+[Serializable]
+internal class MutationSwapPos : Mutation
 {
-    [Serializable]
-    internal class MutationSwapPos : Mutation
+    public override void Activate(SaveGame saveGame)
     {
-        public override void Activate(SaveGame saveGame)
+        if (!saveGame.CheckIfRacialPowerWorks(15, 12, Ability.Dexterity, 16))
         {
-            if (!saveGame.CheckIfRacialPowerWorks(15, 12, Ability.Dexterity, 16))
-            {
-                return;
-            }
-            if (!saveGame.GetDirectionWithAim(out int dir))
-            {
-                return;
-            }
-            saveGame.TeleportSwap(dir);
+            return;
         }
+        if (!saveGame.GetDirectionWithAim(out int dir))
+        {
+            return;
+        }
+        saveGame.TeleportSwap(dir);
+    }
 
-        public override string ActivationSummary(int lvl)
-        {
-            return lvl < 15 ? "swap position    (unusable until level 15)" : "swap position    (cost 12, DEX based)";
-        }
+    public override string ActivationSummary(int lvl)
+    {
+        return lvl < 15 ? "swap position    (unusable until level 15)" : "swap position    (cost 12, DEX based)";
+    }
 
-        public override void Initialize()
-        {
-            Frequency = 2;
-            GainMessage = "You feel like walking a mile in someone else's shoes.";
-            HaveMessage = "You can switch locations with another being.";
-            LoseMessage = "You feel like staying in your own shoes.";
-        }
+    public override void Initialize()
+    {
+        Frequency = 2;
+        GainMessage = "You feel like walking a mile in someone else's shoes.";
+        HaveMessage = "You can switch locations with another being.";
+        LoseMessage = "You feel like staying in your own shoes.";
     }
 }

@@ -6,30 +6,29 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.RandomMutations
-{
-    [Serializable]
-    internal class MutationProdMana : Mutation
-    {
-        public override void Initialize()
-        {
-            Frequency = 1;
-            GainMessage = "You start producing magical energy uncontrollably.";
-            HaveMessage = "You are producing magical energy uncontrollably.";
-            LoseMessage = "You stop producing magical energy uncontrollably.";
-        }
+namespace AngbandOS.Core.Mutations.RandomMutations;
 
-        public override void OnProcessWorld(SaveGame saveGame)
+[Serializable]
+internal class MutationProdMana : Mutation
+{
+    public override void Initialize()
+    {
+        Frequency = 1;
+        GainMessage = "You start producing magical energy uncontrollably.";
+        HaveMessage = "You are producing magical energy uncontrollably.";
+        LoseMessage = "You stop producing magical energy uncontrollably.";
+    }
+
+    public override void OnProcessWorld(SaveGame saveGame)
+    {
+        if (saveGame.Player.HasAntiMagic || Program.Rng.DieRoll(9000) != 1)
         {
-            if (saveGame.Player.HasAntiMagic || Program.Rng.DieRoll(9000) != 1)
-            {
-                return;
-            }
-            saveGame.Disturb(false);
-            saveGame.MsgPrint("Magical energy flows through you! You must release it!");
-            saveGame.MsgPrint(null);
-            saveGame.GetDirectionNoAutoAim(out int dire);
-            saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), dire, saveGame.Player.Level * 2, 3);
+            return;
         }
+        saveGame.Disturb(false);
+        saveGame.MsgPrint("Magical energy flows through you! You must release it!");
+        saveGame.MsgPrint(null);
+        saveGame.GetDirectionNoAutoAim(out int dire);
+        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), dire, saveGame.Player.Level * 2, 3);
     }
 }

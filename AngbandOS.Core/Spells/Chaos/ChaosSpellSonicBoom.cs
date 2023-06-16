@@ -6,23 +6,22 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Chaos
-{
-    [Serializable]
-    internal class ChaosSpellSonicBoom : Spell
-    {
-        private ChaosSpellSonicBoom(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.Project(0, 2 + (SaveGame.Player.Level / 10), SaveGame.Player.MapY, SaveGame.Player.MapX, 45 + SaveGame.Player.Level,
-                SaveGame.SingletonRepository.Projectiles.Get<SoundProjectile>(), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
-        }
+namespace AngbandOS.Core.Spells.Chaos;
 
-        public override string Name => "Sonic Boom";
-        
-        protected override string? Info()
-        {
-            return $"dam {45 + SaveGame.Player.Level}";
-        }
+[Serializable]
+internal class ChaosSpellSonicBoom : Spell
+{
+    private ChaosSpellSonicBoom(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.Project(0, 2 + (SaveGame.Player.Level / 10), SaveGame.Player.MapY, SaveGame.Player.MapX, 45 + SaveGame.Player.Level,
+            SaveGame.SingletonRepository.Projectiles.Get<SoundProjectile>(), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
+    }
+
+    public override string Name => "Sonic Boom";
+    
+    protected override string? Info()
+    {
+        return $"dam {45 + SaveGame.Player.Level}";
     }
 }

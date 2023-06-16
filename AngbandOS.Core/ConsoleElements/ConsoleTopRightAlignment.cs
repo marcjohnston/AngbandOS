@@ -1,10 +1,9 @@
-﻿namespace AngbandOS.Core.ConsoleElements
+﻿namespace AngbandOS.Core.ConsoleElements;
+
+internal class ConsoleTopRightAlignment : ConsoleAlignment
 {
-    internal class ConsoleTopRightAlignment : ConsoleAlignment
+    public override ConsoleLocation ComputeTopLeftLocation(ConsoleElement consoleElement, ConsoleWindow parentWindow)
     {
-        public override ConsoleLocation ComputeTopLeftLocation(ConsoleElement consoleElement, ConsoleWindow parentWindow)
-        {
-            return parentWindow.TopRight.Offset(-consoleElement.Width + 1, 0);
-        }
+        return parentWindow.TopRight.Offset(-consoleElement.Width + 1, 0);
     }
 }

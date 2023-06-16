@@ -6,30 +6,29 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.PassiveMutations
+namespace AngbandOS.Core.Mutations.PassiveMutations;
+
+[Serializable]
+internal class MutationWartSkin : Mutation
 {
-    [Serializable]
-    internal class MutationWartSkin : Mutation
+    public override void Initialize()
     {
-        public override void Initialize()
-        {
-            Frequency = 1;
-            GainMessage = "Disgusting warts appear everywhere on you!";
-            HaveMessage = "Your skin is covered with warts (-2 CHR, +5 AC).";
-            LoseMessage = "Your warts disappear!";
-            Group = MutationGroup.Skin;
-        }
+        Frequency = 1;
+        GainMessage = "Disgusting warts appear everywhere on you!";
+        HaveMessage = "Your skin is covered with warts (-2 CHR, +5 AC).";
+        LoseMessage = "Your warts disappear!";
+        Group = MutationGroup.Skin;
+    }
 
-        public override void OnGain(Genome genome)
-        {
-            genome.CharismaBonus -= 2;
-            genome.ArmourClassBonus += 5;
-        }
+    public override void OnGain(Genome genome)
+    {
+        genome.CharismaBonus -= 2;
+        genome.ArmourClassBonus += 5;
+    }
 
-        public override void OnLose(Genome genome)
-        {
-            genome.CharismaBonus += 2;
-            genome.ArmourClassBonus -= 5;
-        }
+    public override void OnLose(Genome genome)
+    {
+        genome.CharismaBonus += 2;
+        genome.ArmourClassBonus -= 5;
     }
 }

@@ -6,35 +6,34 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.RandomMutations
-{
-    [Serializable]
-    internal class MutationWeirdMind : Mutation
-    {
-        public override void Initialize()
-        {
-            Frequency = 2;
-            GainMessage = "Your thoughts suddenly take off in strange directions.";
-            HaveMessage = "Your mind randomly expands and contracts.";
-            LoseMessage = "Your thoughts return to boring paths.";
-        }
+namespace AngbandOS.Core.Mutations.RandomMutations;
 
-        public override void OnProcessWorld(SaveGame saveGame)
+[Serializable]
+internal class MutationWeirdMind : Mutation
+{
+    public override void Initialize()
+    {
+        Frequency = 2;
+        GainMessage = "Your thoughts suddenly take off in strange directions.";
+        HaveMessage = "Your mind randomly expands and contracts.";
+        LoseMessage = "Your thoughts return to boring paths.";
+    }
+
+    public override void OnProcessWorld(SaveGame saveGame)
+    {
+        if (saveGame.Player.HasAntiMagic || Program.Rng.DieRoll(3000) != 1)
         {
-            if (saveGame.Player.HasAntiMagic || Program.Rng.DieRoll(3000) != 1)
-            {
-                return;
-            }
-            if (saveGame.Player.TimedTelepathy.TurnsRemaining > 0)
-            {
-                saveGame.MsgPrint("Your mind feels cloudy!");
-                saveGame.Player.TimedTelepathy.ResetTimer();
-            }
-            else
-            {
-                saveGame.MsgPrint("Your mind expands!");
-                saveGame.Player.TimedTelepathy.SetTimer(saveGame.Player.Level);
-            }
+            return;
+        }
+        if (saveGame.Player.TimedTelepathy.TurnsRemaining > 0)
+        {
+            saveGame.MsgPrint("Your mind feels cloudy!");
+            saveGame.Player.TimedTelepathy.ResetTimer();
+        }
+        else
+        {
+            saveGame.MsgPrint("Your mind expands!");
+            saveGame.Player.TimedTelepathy.SetTimer(saveGame.Player.Level);
         }
     }
 }

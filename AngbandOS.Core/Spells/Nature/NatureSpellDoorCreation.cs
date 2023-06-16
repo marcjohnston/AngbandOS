@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Nature
-{
-    [Serializable]
-    internal class NatureSpellDoorCreation : Spell
-    {
-        private NatureSpellDoorCreation(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.DoorCreation();
-        }
+namespace AngbandOS.Core.Spells.Nature;
 
-        public override string Name => "Door Creation";
-        
+[Serializable]
+internal class NatureSpellDoorCreation : Spell
+{
+    private NatureSpellDoorCreation(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.DoorCreation();
     }
+
+    public override string Name => "Door Creation";
+    
 }

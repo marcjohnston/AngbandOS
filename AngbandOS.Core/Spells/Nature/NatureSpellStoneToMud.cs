@@ -6,22 +6,21 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Nature
-{
-    [Serializable]
-    internal class NatureSpellStoneToMud : Spell
-    {
-        private NatureSpellStoneToMud(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            if (!SaveGame.GetDirectionWithAim(out int dir))
-            {
-                return;
-            }
-            SaveGame.WallToMud(dir);
-        }
+namespace AngbandOS.Core.Spells.Nature;
 
-        public override string Name => "Stone to Mud";
-        
+[Serializable]
+internal class NatureSpellStoneToMud : Spell
+{
+    private NatureSpellStoneToMud(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
+        {
+            return;
+        }
+        SaveGame.WallToMud(dir);
     }
+
+    public override string Name => "Stone to Mud";
+    
 }

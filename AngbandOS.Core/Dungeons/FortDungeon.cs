@@ -8,23 +8,22 @@
 
 using static AngbandOS.Core.CelephaisDungeon;
 
-namespace AngbandOS.Core
-{
+namespace AngbandOS.Core;
+
 [Serializable]
-    internal class FortDungeon : Dungeon
-    {
-        private FortDungeon(SaveGame saveGame) : base(saveGame) { }
-        public override int BaseOffset => 1;
-        /// <summary>
-        /// Returns true because this dungeon is a tower.
-        /// </summary>
-        public override bool Tower => true;
-        public override int MaxLevel => 5;
-        public override MonsterSelector? Bias => new KoboldMonsterSelector();
-        public override string FirstGuardian => "Vort the Kobold Queen";
-        public override int FirstLevel => 5;
-        public override string Name => "the Kobold Fort";
-        public override string Shortname => "Fort";
-        public override string MapSymbol => "f";
-    }
+internal class FortDungeon : Dungeon
+{
+    private FortDungeon(SaveGame saveGame) : base(saveGame) { }
+    public override int BaseOffset => 1;
+    /// <summary>
+    /// Returns true because this dungeon is a tower.
+    /// </summary>
+    public override bool Tower => true;
+    public override int MaxLevel => 5;
+    public override MonsterSelector? Bias => new KoboldMonsterSelector();
+    public override string FirstGuardian => "Vort the Kobold Queen";
+    public override int FirstLevel => 5;
+    public override string Name => "the Kobold Fort";
+    public override string Shortname => "Fort";
+    public override string MapSymbol => "f";
 }

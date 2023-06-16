@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.InventorySlots
+namespace AngbandOS.Core.InventorySlots;
+
+[Serializable]
+internal class NeckInventorySlot : EquipmentInventorySlot
 {
-    [Serializable]
-    internal class NeckInventorySlot : EquipmentInventorySlot
-    {
-        private NeckInventorySlot(SaveGame saveGame) : base(saveGame) { }
-        public override int[] InventorySlots => new int[] { InventorySlot.Neck };
-        public override string Label(int index) => "f";
-        public override string Label(Item oPtr) => "f";
-        public override string MentionUse(int? index) => "Around neck";
-        public override string DescribeWieldLocation(int index) => "wearing around your neck";
-        public override string DescribeItemLocation(Item oPtr) => "wearing around your neck";
-        public override int SortOrder => 6;
-    }
+    private NeckInventorySlot(SaveGame saveGame) : base(saveGame) { }
+    public override int[] InventorySlots => new int[] { InventorySlot.Neck };
+    public override string Label(int index) => "f";
+    public override string Label(Item oPtr) => "f";
+    public override string MentionUse(int? index) => "Around neck";
+    public override string DescribeWieldLocation(int index) => "wearing around your neck";
+    public override string DescribeItemLocation(Item oPtr) => "wearing around your neck";
+    public override int SortOrder => 6;
 }

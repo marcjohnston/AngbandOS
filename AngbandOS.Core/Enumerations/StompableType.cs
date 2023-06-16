@@ -1,10 +1,9 @@
-﻿namespace AngbandOS.Core
+﻿namespace AngbandOS.Core;
+
+internal class StompableType
 {
-    internal class StompableType
-    {
-        public const int Broken = 0;
-        public const int Average = 1;
-        public const int Good = 2;
-        public const int Excellent = 3;
-    }
+    public const int Broken = 0;
+    public const int Average = 1;
+    public const int Good = 2;
+    public const int Excellent = 3;
 }

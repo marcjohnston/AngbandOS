@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Life
-{
-    [Serializable]
-    internal class LifeSpellRemoveFear : Spell
-    {
-        private LifeSpellRemoveFear(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.Player.TimedFear.ResetTimer();
-        }
+namespace AngbandOS.Core.Spells.Life;
 
-        public override string Name => "Remove Fear";
-        
+[Serializable]
+internal class LifeSpellRemoveFear : Spell
+{
+    private LifeSpellRemoveFear(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.Player.TimedFear.ResetTimer();
     }
+
+    public override string Name => "Remove Fear";
+    
 }

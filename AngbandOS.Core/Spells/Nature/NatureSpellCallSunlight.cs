@@ -6,29 +6,28 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Nature
-{
-    [Serializable]
-    internal class NatureSpellCallSunlight : Spell
-    {
-        private NatureSpellCallSunlight(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<LightProjectile>(), 0, 150, 8);
-            SaveGame.Level.WizLight();
-            if (!SaveGame.Player.Race.IsBurnedBySunlight || SaveGame.Player.HasLightResistance)
-            {
-                return;
-            }
-            SaveGame.MsgPrint("The sunlight scorches your flesh!");
-            SaveGame.Player.TakeHit(50, "sunlight");
-        }
+namespace AngbandOS.Core.Spells.Nature;
 
-        public override string Name => "Whirlpool";
-        
-        protected override string? Info()
+[Serializable]
+internal class NatureSpellCallSunlight : Spell
+{
+    private NatureSpellCallSunlight(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<LightProjectile>(), 0, 150, 8);
+        SaveGame.Level.WizLight();
+        if (!SaveGame.Player.Race.IsBurnedBySunlight || SaveGame.Player.HasLightResistance)
         {
-            return "dam 150";
+            return;
         }
+        SaveGame.MsgPrint("The sunlight scorches your flesh!");
+        SaveGame.Player.TakeHit(50, "sunlight");
+    }
+
+    public override string Name => "Whirlpool";
+    
+    protected override string? Info()
+    {
+        return "dam 150";
     }
 }

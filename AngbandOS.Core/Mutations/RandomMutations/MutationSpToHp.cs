@@ -6,37 +6,36 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.RandomMutations
-{
-    [Serializable]
-    internal class MutationSpToHp : Mutation
-    {
-        public override void Initialize()
-        {
-            Frequency = 2;
-            GainMessage = "You are subject to fits of magical healing.";
-            HaveMessage = "Your blood sometimes rushes to your muscles.";
-            LoseMessage = "You are no longer subject to fits of magical healing.";
-        }
+namespace AngbandOS.Core.Mutations.RandomMutations;
 
-        public override void OnProcessWorld(SaveGame saveGame)
+[Serializable]
+internal class MutationSpToHp : Mutation
+{
+    public override void Initialize()
+    {
+        Frequency = 2;
+        GainMessage = "You are subject to fits of magical healing.";
+        HaveMessage = "Your blood sometimes rushes to your muscles.";
+        LoseMessage = "You are no longer subject to fits of magical healing.";
+    }
+
+    public override void OnProcessWorld(SaveGame saveGame)
+    {
+        if (Program.Rng.DieRoll(2000) != 1)
         {
-            if (Program.Rng.DieRoll(2000) != 1)
-            {
-                return;
-            }
-            int wounds = saveGame.Player.MaxHealth - saveGame.Player.Health;
-            if (wounds <= 0)
-            {
-                return;
-            }
-            int healing = saveGame.Player.Mana;
-            if (healing > wounds)
-            {
-                healing = wounds;
-            }
-            saveGame.Player.RestoreHealth(healing);
-            saveGame.Player.Mana -= healing;
+            return;
         }
+        int wounds = saveGame.Player.MaxHealth - saveGame.Player.Health;
+        if (wounds <= 0)
+        {
+            return;
+        }
+        int healing = saveGame.Player.Mana;
+        if (healing > wounds)
+        {
+            healing = wounds;
+        }
+        saveGame.Player.RestoreHealth(healing);
+        saveGame.Player.Mana -= healing;
     }
 }

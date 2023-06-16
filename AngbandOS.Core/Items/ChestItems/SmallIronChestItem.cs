@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class SmallIronChestItem : ChestItem
-    {
-        public SmallIronChestItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ChestSmallIron>()) { }
-    }
+internal class SmallIronChestItem : ChestItem
+{
+    public SmallIronChestItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ChestSmallIron>()) { }
 }

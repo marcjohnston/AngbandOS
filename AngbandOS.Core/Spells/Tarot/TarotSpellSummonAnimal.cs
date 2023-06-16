@@ -6,37 +6,36 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Tarot
+namespace AngbandOS.Core.Spells.Tarot;
+
+[Serializable]
+internal class TarotSpellSummonAnimal : Spell
 {
-    [Serializable]
-    internal class TarotSpellSummonAnimal : Spell
+    private TarotSpellSummonAnimal(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
     {
-        private TarotSpellSummonAnimal(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
+        SaveGame.MsgPrint("You concentrate on the image of an animal...");
+        if (Program.Rng.DieRoll(5) > 2)
         {
-            SaveGame.MsgPrint("You concentrate on the image of an animal...");
-            if (Program.Rng.DieRoll(5) > 2)
-            {
-                if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new AnimalRangerMonsterSelector(), false))
-                {
-                    SaveGame.MsgPrint("No-one ever turns up.");
-                }
-            }
-            else if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new AnimalMonsterSelector()))
-            {
-                SaveGame.MsgPrint("The summoned animal gets angry!");
-            }
-            else
+            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new AnimalRangerMonsterSelector(), false))
             {
                 SaveGame.MsgPrint("No-one ever turns up.");
             }
         }
-
-        public override string Name => "Summon Animal";
-        
-        protected override string? Info()
+        else if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new AnimalMonsterSelector()))
         {
-            return "control 60%";
+            SaveGame.MsgPrint("The summoned animal gets angry!");
         }
+        else
+        {
+            SaveGame.MsgPrint("No-one ever turns up.");
+        }
+    }
+
+    public override string Name => "Summon Animal";
+    
+    protected override string? Info()
+    {
+        return "control 60%";
     }
 }

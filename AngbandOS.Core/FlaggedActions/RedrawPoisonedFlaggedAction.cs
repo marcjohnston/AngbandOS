@@ -1,22 +1,21 @@
 ﻿
-namespace AngbandOS.Core.FlaggedActions
+namespace AngbandOS.Core.FlaggedActions;
+
+[Serializable]
+internal class RedrawPoisonedFlaggedAction : FlaggedAction
 {
-    [Serializable]
-    internal class RedrawPoisonedFlaggedAction : FlaggedAction
+    private const int ColPoisoned = 33;
+    private const int RowPoisoned = 44;
+    public RedrawPoisonedFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    protected override void Execute()
     {
-        private const int ColPoisoned = 33;
-        private const int RowPoisoned = 44;
-        public RedrawPoisonedFlaggedAction(SaveGame saveGame) : base(saveGame) { }
-        protected override void Execute()
+        if (SaveGame.Player.TimedPoison.TurnsRemaining > 0)
         {
-            if (SaveGame.Player.TimedPoison.TurnsRemaining > 0)
-            {
-                SaveGame.Screen.Print(Colour.Orange, "Poisoned", RowPoisoned, ColPoisoned);
-            }
-            else
-            {
-                SaveGame.Screen.Print("        ", RowPoisoned, ColPoisoned);
-            }
+            SaveGame.Screen.Print(Colour.Orange, "Poisoned", RowPoisoned, ColPoisoned);
+        }
+        else
+        {
+            SaveGame.Screen.Print("        ", RowPoisoned, ColPoisoned);
         }
     }
 }

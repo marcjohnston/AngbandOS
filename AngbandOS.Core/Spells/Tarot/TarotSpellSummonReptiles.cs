@@ -6,37 +6,36 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Tarot
+namespace AngbandOS.Core.Spells.Tarot;
+
+[Serializable]
+internal class TarotSpellSummonReptiles : Spell
 {
-    [Serializable]
-    internal class TarotSpellSummonReptiles : Spell
+    private TarotSpellSummonReptiles(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
     {
-        private TarotSpellSummonReptiles(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
+        SaveGame.MsgPrint("You concentrate on the image of a reptile...");
+        if (Program.Rng.DieRoll(5) > 2)
         {
-            SaveGame.MsgPrint("You concentrate on the image of a reptile...");
-            if (Program.Rng.DieRoll(5) > 2)
-            {
-                if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new HydraMonsterSelector(), true))
-                {
-                    SaveGame.MsgPrint("No-one ever turns up.");
-                }
-            }
-            else if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new HydraMonsterSelector()))
-            {
-                SaveGame.MsgPrint("The summoned reptile gets angry!");
-            }
-            else
+            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new HydraMonsterSelector(), true))
             {
                 SaveGame.MsgPrint("No-one ever turns up.");
             }
         }
-
-        public override string Name => "Summon Reptiles";
-        
-        protected override string? Info()
+        else if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new HydraMonsterSelector()))
         {
-            return "control 60%";
+            SaveGame.MsgPrint("The summoned reptile gets angry!");
         }
+        else
+        {
+            SaveGame.MsgPrint("No-one ever turns up.");
+        }
+    }
+
+    public override string Name => "Summon Reptiles";
+    
+    protected override string? Info()
+    {
+        return "control 60%";
     }
 }

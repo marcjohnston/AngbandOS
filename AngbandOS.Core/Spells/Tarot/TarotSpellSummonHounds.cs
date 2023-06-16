@@ -6,37 +6,36 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Tarot
+namespace AngbandOS.Core.Spells.Tarot;
+
+[Serializable]
+internal class TarotSpellSummonHounds : Spell
 {
-    [Serializable]
-    internal class TarotSpellSummonHounds : Spell
+    private TarotSpellSummonHounds(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
     {
-        private TarotSpellSummonHounds(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
+        SaveGame.MsgPrint("You concentrate on the image of a hound...");
+        if (Program.Rng.DieRoll(5) > 2)
         {
-            SaveGame.MsgPrint("You concentrate on the image of a hound...");
-            if (Program.Rng.DieRoll(5) > 2)
-            {
-                if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new HoundMonsterSelector(), true))
-                {
-                    SaveGame.MsgPrint("No-one ever turns up.");
-                }
-            }
-            else if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new HoundMonsterSelector()))
-            {
-                SaveGame.MsgPrint("The summoned hounds get angry!");
-            }
-            else
+            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new HoundMonsterSelector(), true))
             {
                 SaveGame.MsgPrint("No-one ever turns up.");
             }
         }
-
-        public override string Name => "Summon Hounds";
-        
-        protected override string? Info()
+        else if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new HoundMonsterSelector()))
         {
-            return "control 60%";
+            SaveGame.MsgPrint("The summoned hounds get angry!");
         }
+        else
+        {
+            SaveGame.MsgPrint("No-one ever turns up.");
+        }
+    }
+
+    public override string Name => "Summon Hounds";
+    
+    protected override string? Info()
+    {
+        return "control 60%";
     }
 }

@@ -6,25 +6,24 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.RandomMutations
-{
-    [Serializable]
-    internal class MutationWalkShad : Mutation
-    {
-        public override void Initialize()
-        {
-            Frequency = 1;
-            GainMessage = "You feel like reality is as thin as paper.";
-            HaveMessage = "You occasionally stumble into other shadows.";
-            LoseMessage = "You feel like you're trapped in reality.";
-        }
+namespace AngbandOS.Core.Mutations.RandomMutations;
 
-        public override void OnProcessWorld(SaveGame saveGame)
+[Serializable]
+internal class MutationWalkShad : Mutation
+{
+    public override void Initialize()
+    {
+        Frequency = 1;
+        GainMessage = "You feel like reality is as thin as paper.";
+        HaveMessage = "You occasionally stumble into other shadows.";
+        LoseMessage = "You feel like you're trapped in reality.";
+    }
+
+    public override void OnProcessWorld(SaveGame saveGame)
+    {
+        if (!saveGame.Player.HasAntiMagic && Program.Rng.DieRoll(12000) == 1)
         {
-            if (!saveGame.Player.HasAntiMagic && Program.Rng.DieRoll(12000) == 1)
-            {
-                saveGame.AlterReality();
-            }
+            saveGame.AlterReality();
         }
     }
 }

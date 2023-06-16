@@ -1,12 +1,11 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class DetectInvisibleStaffItem : StaffItem
+internal class DetectInvisibleStaffItem : StaffItem
+{
+    public DetectInvisibleStaffItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<StaffDetectInvisible>()) { }
+    protected override void ApplyMagic(int level, int power, Store? store)
     {
-        public DetectInvisibleStaffItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<StaffDetectInvisible>()) { }
-        protected override void ApplyMagic(int level, int power, Store? store)
-        {
-            TypeSpecificValue = Program.Rng.DieRoll(15) + 8;
-        }
+        TypeSpecificValue = Program.Rng.DieRoll(15) + 8;
     }
 }

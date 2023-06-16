@@ -1,19 +1,18 @@
-﻿namespace AngbandOS.Core.StoreCommands
+﻿namespace AngbandOS.Core.StoreCommands;
+
+[Serializable]
+internal class RestStoreCommand : BaseStoreCommand
+
 {
-    [Serializable]
-    internal class RestStoreCommand : BaseStoreCommand
+    private RestStoreCommand(SaveGame saveGame) : base(saveGame) { }
+    public override char Key => 'r';
 
+    public override string Description => "Rest a while";
+
+    public override bool IsEnabled(Store store) => (store.StoreType == StoreType.StoreHome);
+
+    public override void Execute(StoreCommandEvent storeCommandEvent)
     {
-        private RestStoreCommand(SaveGame saveGame) : base(saveGame) { }
-        public override char Key => 'r';
-
-        public override string Description => "Rest a while";
-
-        public override bool IsEnabled(Store store) => (store.StoreType == StoreType.StoreHome);
-
-        public override void Execute(StoreCommandEvent storeCommandEvent)
-        {
-            storeCommandEvent.Store.Rest();
-        }
+        storeCommandEvent.Store.Rest();
     }
 }

@@ -6,27 +6,26 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.RandomMutations
+namespace AngbandOS.Core.Mutations.RandomMutations;
+
+[Serializable]
+internal class MutationChaosGift : Mutation
 {
-    [Serializable]
-    internal class MutationChaosGift : Mutation
+    public override void Initialize()
     {
-        public override void Initialize()
-        {
-            Frequency = 2;
-            GainMessage = "You attract the notice of a chaos deity!";
-            HaveMessage = "Chaos deities give you gifts.";
-            LoseMessage = "You lose the attention of the chaos deities.";
-        }
+        Frequency = 2;
+        GainMessage = "You attract the notice of a chaos deity!";
+        HaveMessage = "Chaos deities give you gifts.";
+        LoseMessage = "You lose the attention of the chaos deities.";
+    }
 
-        public override void OnGain(Genome genome)
-        {
-            genome.ChaosGift = true;
-        }
+    public override void OnGain(Genome genome)
+    {
+        genome.ChaosGift = true;
+    }
 
-        public override void OnLose(Genome genome)
-        {
-            genome.ChaosGift = false;
-        }
+    public override void OnLose(Genome genome)
+    {
+        genome.ChaosGift = false;
     }
 }

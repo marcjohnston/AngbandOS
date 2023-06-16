@@ -1,24 +1,23 @@
-﻿namespace AngbandOS.Core.ConsoleElements
+﻿namespace AngbandOS.Core.ConsoleElements;
+
+internal class ConsoleTableRow
 {
-    internal class ConsoleTableRow
+    private ConsoleTable Table { get; }
+    private Dictionary<string, ConsoleElement?> Data = new Dictionary<string, ConsoleElement?>();
+
+    public ConsoleElement? this[string columnName]
     {
-        private ConsoleTable Table { get; }
-        private Dictionary<string, ConsoleElement?> Data = new Dictionary<string, ConsoleElement?>();
+        get => Data[columnName];
+        set => Data[columnName] = value;
+    }
 
-        public ConsoleElement? this[string columnName]
+    public ConsoleTableRow(ConsoleTable table)
+    {
+        Table = table;
+
+        foreach (ConsoleTableColumn column in Table.Columns)
         {
-            get => Data[columnName];
-            set => Data[columnName] = value;
-        }
-
-        public ConsoleTableRow(ConsoleTable table)
-        {
-            Table = table;
-
-            foreach (ConsoleTableColumn column in Table.Columns)
-            {
-                Data.Add(column.Name, null);
-            }
+            Data.Add(column.Name, null);
         }
     }
 }

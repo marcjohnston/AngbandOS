@@ -8,19 +8,18 @@
 
 using static AngbandOS.Core.CelephaisDungeon;
 
-namespace AngbandOS.Core
-{
+namespace AngbandOS.Core;
+
 [Serializable]
-    internal class NirDungeon : Dungeon
-    {
-        private NirDungeon(SaveGame saveGame) : base(saveGame) { }
-        public override int BaseOffset => 0;
-        public override int MaxLevel => 7;
-        public override MonsterSelector? Bias => new HumanMonsterSelector();
-        public override string FirstGuardian => "Robin Hood, the Outlaw";
-        public override int FirstLevel => 7;
-        public override string Name => "the Sewers under Nir";
-        public override string Shortname => "Nir";
-        public override string MapSymbol => "N";
-    }
+internal class NirDungeon : Dungeon
+{
+    private NirDungeon(SaveGame saveGame) : base(saveGame) { }
+    public override int BaseOffset => 0;
+    public override int MaxLevel => 7;
+    public override MonsterSelector? Bias => new HumanMonsterSelector();
+    public override string FirstGuardian => "Robin Hood, the Outlaw";
+    public override int FirstLevel => 7;
+    public override string Name => "the Sewers under Nir";
+    public override string Shortname => "Nir";
+    public override string MapSymbol => "N";
 }

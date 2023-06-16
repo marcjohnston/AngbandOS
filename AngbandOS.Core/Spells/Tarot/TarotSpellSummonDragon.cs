@@ -6,37 +6,36 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Tarot
+namespace AngbandOS.Core.Spells.Tarot;
+
+[Serializable]
+internal class TarotSpellSummonDragon : Spell
 {
-    [Serializable]
-    internal class TarotSpellSummonDragon : Spell
+    private TarotSpellSummonDragon(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
     {
-        private TarotSpellSummonDragon(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
+        SaveGame.MsgPrint("You concentrate on the image of a dragon...");
+        if (Program.Rng.DieRoll(10) > 3)
         {
-            SaveGame.MsgPrint("You concentrate on the image of a dragon...");
-            if (Program.Rng.DieRoll(10) > 3)
-            {
-                if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new DragonMonsterSelector(), true))
-                {
-                    SaveGame.MsgPrint("No-one ever turns up.");
-                }
-            }
-            else if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new DragonMonsterSelector()))
-            {
-                SaveGame.MsgPrint("The summoned dragon gets angry!");
-            }
-            else
+            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new DragonMonsterSelector(), true))
             {
                 SaveGame.MsgPrint("No-one ever turns up.");
             }
         }
-
-        public override string Name => "Summon Dragon";
-        
-        protected override string? Info()
+        else if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new DragonMonsterSelector()))
         {
-            return "control 70%";
+            SaveGame.MsgPrint("The summoned dragon gets angry!");
         }
+        else
+        {
+            SaveGame.MsgPrint("No-one ever turns up.");
+        }
+    }
+
+    public override string Name => "Summon Dragon";
+    
+    protected override string? Info()
+    {
+        return "control 70%";
     }
 }

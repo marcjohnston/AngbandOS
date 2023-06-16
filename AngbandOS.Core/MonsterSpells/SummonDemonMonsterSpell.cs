@@ -1,12 +1,11 @@
-﻿namespace AngbandOS.Core.MonsterSpells
+﻿namespace AngbandOS.Core.MonsterSpells;
+
+[Serializable]
+internal class SummonDemonMonsterSpell : SummonMonsterSpell
 {
-    [Serializable]
-    internal class SummonDemonMonsterSpell : SummonMonsterSpell
-    {
-        protected override string SummonName(Monster monster) => "a demon";
+    protected override string SummonName(Monster monster) => "a demon";
 
-        protected override int MaximumSummonCount(SaveGame saveGame) => 1;
+    protected override int MaximumSummonCount(SaveGame saveGame) => 1;
 
-        protected override MonsterSelector? MonsterSelector(Monster monster) => new DemonMonsterSelector();
-    }
+    protected override MonsterSelector? MonsterSelector(Monster monster) => new DemonMonsterSelector();
 }

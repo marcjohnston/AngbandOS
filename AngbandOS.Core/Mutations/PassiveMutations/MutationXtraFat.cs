@@ -6,29 +6,28 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.PassiveMutations
+namespace AngbandOS.Core.Mutations.PassiveMutations;
+
+[Serializable]
+internal class MutationXtraFat : Mutation
 {
-    [Serializable]
-    internal class MutationXtraFat : Mutation
+    public override void Initialize()
     {
-        public override void Initialize()
-        {
-            Frequency = 2;
-            GainMessage = "You become sickeningly fat!";
-            HaveMessage = "You are extremely fat (+2 CON, -2 speed).";
-            LoseMessage = "You benefit from a miracle diet!";
-        }
+        Frequency = 2;
+        GainMessage = "You become sickeningly fat!";
+        HaveMessage = "You are extremely fat (+2 CON, -2 speed).";
+        LoseMessage = "You benefit from a miracle diet!";
+    }
 
-        public override void OnGain(Genome genome)
-        {
-            genome.ConstitutionBonus += 2;
-            genome.SpeedBonus -= 2;
-        }
+    public override void OnGain(Genome genome)
+    {
+        genome.ConstitutionBonus += 2;
+        genome.SpeedBonus -= 2;
+    }
 
-        public override void OnLose(Genome genome)
-        {
-            genome.ConstitutionBonus -= 2;
-            genome.SpeedBonus += 2;
-        }
+    public override void OnLose(Genome genome)
+    {
+        genome.ConstitutionBonus -= 2;
+        genome.SpeedBonus += 2;
     }
 }

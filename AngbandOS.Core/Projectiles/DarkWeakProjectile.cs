@@ -6,39 +6,38 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Projection
+namespace AngbandOS.Core.Projection;
+
+[Serializable]
+internal class DarkWeakProjectile : Projectile
 {
-    [Serializable]
-    internal class DarkWeakProjectile : Projectile
+    private DarkWeakProjectile(SaveGame saveGame) : base(saveGame) { }
+
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<GreyBoltProjectileGraphic>();
+
+    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<GreySplatProjectileGraphic>();
+
+    protected override bool AffectFloor(int y, int x)
     {
-        private DarkWeakProjectile(SaveGame saveGame) : base(saveGame) { }
-
-        protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<GreyBoltProjectileGraphic>();
-
-        protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<GreySplatProjectileGraphic>();
-
-        protected override bool AffectFloor(int y, int x)
+        GridTile cPtr = SaveGame.Level.Grid[y][x];
+        bool obvious = SaveGame.Level.PlayerCanSeeBold(y, x);
+        cPtr.TileFlags.Clear(GridTile.SelfLit);
+        if (cPtr.FeatureType.IsOpenFloor)
         {
-            GridTile cPtr = SaveGame.Level.Grid[y][x];
-            bool obvious = SaveGame.Level.PlayerCanSeeBold(y, x);
-            cPtr.TileFlags.Clear(GridTile.SelfLit);
-            if (cPtr.FeatureType.IsOpenFloor)
-            {
-                cPtr.TileFlags.Clear(GridTile.PlayerMemorised);
-                SaveGame.Level.NoteSpot(y, x);
-            }
-            SaveGame.Level.RedrawSingleLocation(y, x);
-            if (cPtr.MonsterIndex != 0)
-            {
-                SaveGame.Level.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
-            }
-            return obvious;
+            cPtr.TileFlags.Clear(GridTile.PlayerMemorised);
+            SaveGame.Level.NoteSpot(y, x);
         }
-
-        protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
+        SaveGame.Level.RedrawSingleLocation(y, x);
+        if (cPtr.MonsterIndex != 0)
         {
-            ApplyProjectileDamageToMonster(who, mPtr, dam, null);
-            return false;
+            SaveGame.Level.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
         }
+        return obvious;
+    }
+
+    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
+    {
+        ApplyProjectileDamageToMonster(who, mPtr, dam, null);
+        return false;
     }
 }

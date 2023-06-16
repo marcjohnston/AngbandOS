@@ -6,22 +6,21 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Folk
-{
-    [Serializable]
-    internal class FolkSpellTeleport : Spell
-    {
-        private FolkSpellTeleport(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.TeleportPlayer(SaveGame.Player.Level * 5);
-        }
+namespace AngbandOS.Core.Spells.Folk;
 
-        public override string Name => "Teleport";
-        
-        protected override string? Info()
-        {
-            return $"range {SaveGame.Player.Level * 5}";
-        }
+[Serializable]
+internal class FolkSpellTeleport : Spell
+{
+    private FolkSpellTeleport(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.TeleportPlayer(SaveGame.Player.Level * 5);
+    }
+
+    public override string Name => "Teleport";
+    
+    protected override string? Info()
+    {
+        return $"range {SaveGame.Player.Level * 5}";
     }
 }

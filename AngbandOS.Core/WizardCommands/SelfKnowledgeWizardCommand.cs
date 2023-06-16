@@ -1,19 +1,18 @@
-﻿namespace AngbandOS.Core.WizardCommands
+﻿namespace AngbandOS.Core.WizardCommands;
+
+[Serializable]
+internal class SelfKnowledgeWizardCommand : WizardCommand
 {
-    [Serializable]
-    internal class SelfKnowledgeWizardCommand : WizardCommand
+    private SelfKnowledgeWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+
+    public override char Key => 'k';
+
+    public override string HelpDescription => "Self Knowledge";
+
+    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardCharacterEditingHelpGroup>();
+
+    public override void Execute()
     {
-        private SelfKnowledgeWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-
-        public override char Key => 'k';
-
-        public override string HelpDescription => "Self Knowledge";
-
-        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardCharacterEditingHelpGroup>();
-
-        public override void Execute()
-        {
-            SaveGame.SelfKnowledge();
-        }
+        SaveGame.SelfKnowledge();
     }
 }

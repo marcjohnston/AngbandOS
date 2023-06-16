@@ -1,15 +1,14 @@
-﻿namespace AngbandOS.Core.Commands
+﻿namespace AngbandOS.Core.Commands;
+
+[Serializable]
+internal class CarriageReturnGameCommand : GameCommand
 {
-    [Serializable]
-    internal class CarriageReturnGameCommand : GameCommand
+    private CarriageReturnGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+
+    public override char Key => '\r';
+
+    public override bool Execute()
     {
-        private CarriageReturnGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-
-        public override char Key => '\r';
-
-        public override bool Execute()
-        {
-            return false;
-        }
+        return false;
     }
 }

@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class MasteryChaosBookItem : ChaosBookItem
-    {
-        public MasteryChaosBookItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<MasteryChaosBookItemFactory>()) { }
-    }
+internal class MasteryChaosBookItem : ChaosBookItem
+{
+    public MasteryChaosBookItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<MasteryChaosBookItemFactory>()) { }
 }

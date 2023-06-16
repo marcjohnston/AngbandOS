@@ -6,34 +6,33 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.AttackEffects
+namespace AngbandOS.Core.AttackEffects;
+
+[Serializable]
+internal class PoisonAttackEffect : BaseAttackEffect
 {
-    [Serializable]
-    internal class PoisonAttackEffect : BaseAttackEffect
+    public override int Power => 5;
+    public override string Description => "poison";
+    public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
-        public override int Power => 5;
-        public override string Description => "poison";
-        public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+        // Poison does additional damage
+        saveGame.Player.TakeHit(damage, monsterDescription);
+        if (!(saveGame.Player.HasPoisonResistance || saveGame.Player.TimedPoisonResistance.TurnsRemaining != 0))
         {
-            // Poison does additional damage
-            saveGame.Player.TakeHit(damage, monsterDescription);
-            if (!(saveGame.Player.HasPoisonResistance || saveGame.Player.TimedPoisonResistance.TurnsRemaining != 0))
+            // Hagarg Ryonis might save us from the additional damage
+            if (Program.Rng.DieRoll(10) <= saveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
             {
-                // Hagarg Ryonis might save us from the additional damage
-                if (Program.Rng.DieRoll(10) <= saveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
-                {
-                    saveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
-                }
-                else if (saveGame.Player.TimedPoison.AddTimer(Program.Rng.DieRoll(monsterLevel) + 5))
-                {
-                    obvious = true;
-                }
+                saveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
             }
-            saveGame.Level.UpdateSmartLearn(monster, new PoisSpellResistantDetection());
+            else if (saveGame.Player.TimedPoison.AddTimer(Program.Rng.DieRoll(monsterLevel) + 5))
+            {
+                obvious = true;
+            }
         }
-        public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
-        {
-            pt = saveGame.SingletonRepository.Projectiles.Get<PoisProjectile>();
-        }
+        saveGame.Level.UpdateSmartLearn(monster, new PoisSpellResistantDetection());
+    }
+    public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
+    {
+        pt = saveGame.SingletonRepository.Projectiles.Get<PoisProjectile>();
     }
 }

@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class FilthyRagSoftArmorItem : SoftArmorItem
-    {
-        public FilthyRagSoftArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<SoftArmorFilthyRag>()) { }
-    }
+internal class FilthyRagSoftArmorItem : SoftArmorItem
+{
+    public FilthyRagSoftArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<SoftArmorFilthyRag>()) { }
 }

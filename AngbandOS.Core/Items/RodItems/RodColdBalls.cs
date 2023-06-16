@@ -1,29 +1,28 @@
-namespace AngbandOS.Core.ItemCategories
+namespace AngbandOS.Core.ItemCategories;
+
+[Serializable]
+internal class RodColdBalls : RodItemFactory
 {
-    [Serializable]
-    internal class RodColdBalls : RodItemFactory
+    private RodColdBalls(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+
+    public override bool RequiresAiming => true;
+    public override char Character => '-';
+    public override string Name => "Cold Balls";
+
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
+    public override int Cost => 4500;
+    public override int Dd => 1;
+    public override int Ds => 1;
+    public override string FriendlyName => "Cold Balls";
+    public override int Level => 60;
+    public override int[] Locale => new int[] { 60, 0, 0, 0 };
+    public override int? SubCategory => 27;
+    public override int Weight => 15;
+    public override void Execute(ZapRodEvent zapRodEvent)
     {
-        private RodColdBalls(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-
-        public override bool RequiresAiming => true;
-        public override char Character => '-';
-        public override string Name => "Cold Balls";
-
-        public override int[] Chance => new int[] { 1, 0, 0, 0 };
-        public override int Cost => 4500;
-        public override int Dd => 1;
-        public override int Ds => 1;
-        public override string FriendlyName => "Cold Balls";
-        public override int Level => 60;
-        public override int[] Locale => new int[] { 60, 0, 0, 0 };
-        public override int? SubCategory => 27;
-        public override int Weight => 15;
-        public override void Execute(ZapRodEvent zapRodEvent)
-        {
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), zapRodEvent.Dir.Value, 48, 2);
-            zapRodEvent.Identified = true;
-            zapRodEvent.Item.TypeSpecificValue = 25;
-        }
-        public override Item CreateItem() => new ColdBallsRodItem(SaveGame);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), zapRodEvent.Dir.Value, 48, 2);
+        zapRodEvent.Identified = true;
+        zapRodEvent.Item.TypeSpecificValue = 25;
     }
+    public override Item CreateItem() => new ColdBallsRodItem(SaveGame);
 }

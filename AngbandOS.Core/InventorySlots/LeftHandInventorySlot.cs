@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.InventorySlots
+namespace AngbandOS.Core.InventorySlots;
+
+[Serializable]
+internal class LeftHandInventorySlot : EquipmentInventorySlot
 {
-    [Serializable]
-    internal class LeftHandInventorySlot : EquipmentInventorySlot
-    {
-        private LeftHandInventorySlot(SaveGame saveGame) : base(saveGame) { }
-        public override int[] InventorySlots => new int[] { InventorySlot.LeftHand };
-        public override string Label(int index) => "d";
-        public override string Label(Item oPtr) => "d";
-        public override string MentionUse(int? index) => "On left hand";
-        public override string DescribeItemLocation(Item oPtr) => "On left hand";
-        public override string DescribeWieldLocation(int index) => "wearing on your left hand";
-        public override int SortOrder => 4;
-    }
+    private LeftHandInventorySlot(SaveGame saveGame) : base(saveGame) { }
+    public override int[] InventorySlots => new int[] { InventorySlot.LeftHand };
+    public override string Label(int index) => "d";
+    public override string Label(Item oPtr) => "d";
+    public override string MentionUse(int? index) => "On left hand";
+    public override string DescribeItemLocation(Item oPtr) => "On left hand";
+    public override string DescribeWieldLocation(int index) => "wearing on your left hand";
+    public override int SortOrder => 4;
 }

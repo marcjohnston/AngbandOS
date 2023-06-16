@@ -6,27 +6,26 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.PassiveMutations
+namespace AngbandOS.Core.Mutations.PassiveMutations;
+
+[Serializable]
+internal class MutationVulnElem : Mutation
 {
-    [Serializable]
-    internal class MutationVulnElem : Mutation
+    public override void Initialize()
     {
-        public override void Initialize()
-        {
-            Frequency = 1;
-            GainMessage = "You feel strangely exposed.";
-            HaveMessage = "You are susceptible to damage from the elements.";
-            LoseMessage = "You feel less exposed.";
-        }
+        Frequency = 1;
+        GainMessage = "You feel strangely exposed.";
+        HaveMessage = "You are susceptible to damage from the elements.";
+        LoseMessage = "You feel less exposed.";
+    }
 
-        public override void OnGain(Genome genome)
-        {
-            genome.Vulnerable = true;
-        }
+    public override void OnGain(Genome genome)
+    {
+        genome.Vulnerable = true;
+    }
 
-        public override void OnLose(Genome genome)
-        {
-            genome.Vulnerable = false;
-        }
+    public override void OnLose(Genome genome)
+    {
+        genome.Vulnerable = false;
     }
 }

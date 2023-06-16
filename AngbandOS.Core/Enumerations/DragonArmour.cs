@@ -5,22 +5,21 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.Core
+namespace AngbandOS.Core;
+
+internal static class DragonArmour
 {
-    internal static class DragonArmour
-    {
-        public const int SvDragonBalance = 20;
-        public const int SvDragonBlack = 1;
-        public const int SvDragonBlue = 2;
-        public const int SvDragonBronze = 14;
-        public const int SvDragonChaos = 18;
-        public const int SvDragonGold = 16;
-        public const int SvDragonGreen = 5;
-        public const int SvDragonLaw = 12;
-        public const int SvDragonMultihued = 6;
-        public const int SvDragonPower = 30;
-        public const int SvDragonRed = 4;
-        public const int SvDragonShining = 10;
-        public const int SvDragonWhite = 3;
-    }
+    public const int SvDragonBalance = 20;
+    public const int SvDragonBlack = 1;
+    public const int SvDragonBlue = 2;
+    public const int SvDragonBronze = 14;
+    public const int SvDragonChaos = 18;
+    public const int SvDragonGold = 16;
+    public const int SvDragonGreen = 5;
+    public const int SvDragonLaw = 12;
+    public const int SvDragonMultihued = 6;
+    public const int SvDragonPower = 30;
+    public const int SvDragonRed = 4;
+    public const int SvDragonShining = 10;
+    public const int SvDragonWhite = 3;
 }

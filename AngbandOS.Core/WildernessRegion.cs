@@ -6,22 +6,21 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core
-{
-    [Serializable]
-    internal class WildernessRegion
-    {
-        public Dungeon Dungeon;
-        public int RoadMap;
-        public int Seed;
-        public Town Town;
+namespace AngbandOS.Core;
 
-        public WildernessRegion()
-        {
-            Dungeon = null;
-            Town = null;
-            Seed = 0;
-            RoadMap = 0;
-        }
+[Serializable]
+internal class WildernessRegion
+{
+    public Dungeon Dungeon;
+    public int RoadMap;
+    public int Seed;
+    public Town Town;
+
+    public WildernessRegion()
+    {
+        Dungeon = null;
+        Town = null;
+        Seed = 0;
+        RoadMap = 0;
     }
 }

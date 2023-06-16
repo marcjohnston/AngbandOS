@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Chaos
-{
-    [Serializable]
-    internal class ChaosSpellPolymorphSelf : Spell
-    {
-        private ChaosSpellPolymorphSelf(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.Player.PolymorphSelf(SaveGame);
-        }
+namespace AngbandOS.Core.Spells.Chaos;
 
-        public override string Name => "Polymorph Self";
-        
+[Serializable]
+internal class ChaosSpellPolymorphSelf : Spell
+{
+    private ChaosSpellPolymorphSelf(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.Player.PolymorphSelf(SaveGame);
     }
+
+    public override string Name => "Polymorph Self";
+    
 }

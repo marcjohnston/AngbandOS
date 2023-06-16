@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class TulwarSwordWeaponItem : SwordWeaponItem
-    {
-        public TulwarSwordWeaponItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<SwordTulwar>()) { }
-    }
+internal class TulwarSwordWeaponItem : SwordWeaponItem
+{
+    public TulwarSwordWeaponItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<SwordTulwar>()) { }
 }

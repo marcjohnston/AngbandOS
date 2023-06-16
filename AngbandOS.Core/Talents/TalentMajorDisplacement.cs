@@ -6,31 +6,30 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Talents
+namespace AngbandOS.Core.Talents;
+
+[Serializable]
+internal class TalentMajorDisplacement : Talent
 {
-    [Serializable]
-    internal class TalentMajorDisplacement : Talent
+    public override string Name => "Major Displacement";
+    public override void Initialise(int characterClass)
     {
-        public override string Name => "Major Displacement";
-        public override void Initialise(int characterClass)
-        {
-            Level = 7;
-            ManaCost = 6;
-            BaseFailure = 35;
-        }
+        Level = 7;
+        ManaCost = 6;
+        BaseFailure = 35;
+    }
 
-        public override void Use(SaveGame saveGame)
+    public override void Use(SaveGame saveGame)
+    {
+        saveGame.TeleportPlayer(saveGame.Player.Level * 5);
+        if (saveGame.Player.Level > 29)
         {
-            saveGame.TeleportPlayer(saveGame.Player.Level * 5);
-            if (saveGame.Player.Level > 29)
-            {
-                saveGame.BanishMonsters(saveGame.Player.Level);
-            }
+            saveGame.BanishMonsters(saveGame.Player.Level);
         }
+    }
 
-        protected override string Comment(Player player)
-        {
-            return $"range {player.Level * 5}";
-        }
+    protected override string Comment(Player player)
+    {
+        return $"range {player.Level * 5}";
     }
 }

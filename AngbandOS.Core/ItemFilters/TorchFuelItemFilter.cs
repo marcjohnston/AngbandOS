@@ -1,13 +1,12 @@
-﻿namespace AngbandOS.Core.ItemFilters
+﻿namespace AngbandOS.Core.ItemFilters;
+
+/// <summary>
+/// Represents an ItemFilter that filters items that can fuel a torch.
+/// </summary>
+internal class TorchFuelItemFilter : ItemFilter
 {
-    /// <summary>
-    /// Represents an ItemFilter that filters items that can fuel a torch.
-    /// </summary>
-    internal class TorchFuelItemFilter : ItemFilter
+    public override bool ItemMatches(Item item)
     {
-        public override bool ItemMatches(Item item)
-        {
-            return item.IsFuelForTorch;
-        }
+        return item.IsFuelForTorch;
     }
 }

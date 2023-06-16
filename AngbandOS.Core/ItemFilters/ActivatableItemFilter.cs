@@ -1,18 +1,17 @@
-﻿namespace AngbandOS.Core.ItemFilters
+﻿namespace AngbandOS.Core.ItemFilters;
+
+/// <summary>
+/// Represents an ItemFilter that filters out items that can be activated.
+/// </summary>
+internal class ActivatableItemFilter : ItemFilter
 {
-    /// <summary>
-    /// Represents an ItemFilter that filters out items that can be activated.
-    /// </summary>
-    internal class ActivatableItemFilter : ItemFilter
+    public override bool ItemMatches(Item item)
     {
-        public override bool ItemMatches(Item item)
+        if (!item.IsKnown())
         {
-            if (!item.IsKnown())
-            {
-                return false;
-            }
-            item.RefreshFlagBasedProperties();
-            return item.Characteristics.Activate;
+            return false;
         }
+        item.RefreshFlagBasedProperties();
+        return item.Characteristics.Activate;
     }
 }

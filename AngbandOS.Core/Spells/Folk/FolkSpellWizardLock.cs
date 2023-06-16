@@ -6,22 +6,21 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Folk
-{
-    [Serializable]
-    internal class FolkSpellWizardLock : Spell
-    {
-        private FolkSpellWizardLock(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            if (!SaveGame.GetDirectionWithAim(out int dir))
-            {
-                return;
-            }
-            SaveGame.WizardLock(dir);
-        }
+namespace AngbandOS.Core.Spells.Folk;
 
-        public override string Name => "Wizard Lock";
-        
+[Serializable]
+internal class FolkSpellWizardLock : Spell
+{
+    private FolkSpellWizardLock(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
+        {
+            return;
+        }
+        SaveGame.WizardLock(dir);
     }
+
+    public override string Name => "Wizard Lock";
+    
 }

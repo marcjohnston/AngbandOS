@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Sorcery
-{
-    [Serializable]
-    internal class SorcerySpellEnchantArmour : Spell
-    {
-        private SorcerySpellEnchantArmour(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.EnchantItem(0, 0, Program.Rng.RandomLessThan(3) + 2);
-        }
+namespace AngbandOS.Core.Spells.Sorcery;
 
-        public override string Name => "Enchant Armour";
-        
+[Serializable]
+internal class SorcerySpellEnchantArmour : Spell
+{
+    private SorcerySpellEnchantArmour(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.EnchantItem(0, 0, Program.Rng.RandomLessThan(3) + 2);
     }
+
+    public override string Name => "Enchant Armour";
+    
 }

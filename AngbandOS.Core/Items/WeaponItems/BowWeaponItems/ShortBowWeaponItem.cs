@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class ShortBowWeaponItem : BowWeaponItem
-    {
-        public ShortBowWeaponItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ShortBowWeaponItemFactory>()) { }
-    }
+internal class ShortBowWeaponItem : BowWeaponItem
+{
+    public ShortBowWeaponItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ShortBowWeaponItemFactory>()) { }
 }

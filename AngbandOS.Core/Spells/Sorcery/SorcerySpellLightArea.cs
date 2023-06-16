@@ -6,23 +6,22 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Sorcery
-{
-    [Serializable]
-    internal class SorcerySpellLightArea : Spell
-    {
-        private SorcerySpellLightArea(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.LightArea(Program.Rng.DiceRoll(2, SaveGame.Player.Level / 2), (SaveGame.Player.Level / 10) + 1);
-        }
+namespace AngbandOS.Core.Spells.Sorcery;
 
-        public override string Name => "Light Area";
-        
-        protected override string? Info()
-        {
-            return $"dam {10 + (SaveGame.Player.Level / 2)}";
-            ;
-        }
+[Serializable]
+internal class SorcerySpellLightArea : Spell
+{
+    private SorcerySpellLightArea(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.LightArea(Program.Rng.DiceRoll(2, SaveGame.Player.Level / 2), (SaveGame.Player.Level / 10) + 1);
+    }
+
+    public override string Name => "Light Area";
+    
+    protected override string? Info()
+    {
+        return $"dam {10 + (SaveGame.Player.Level / 2)}";
+        ;
     }
 }

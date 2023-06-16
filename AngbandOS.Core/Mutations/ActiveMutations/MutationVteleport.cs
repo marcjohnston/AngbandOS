@@ -6,32 +6,31 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.ActiveMutations
+namespace AngbandOS.Core.Mutations.ActiveMutations;
+
+[Serializable]
+internal class MutationVteleport : Mutation
 {
-    [Serializable]
-    internal class MutationVteleport : Mutation
+    public override void Activate(SaveGame saveGame)
     {
-        public override void Activate(SaveGame saveGame)
+        if (!saveGame.CheckIfRacialPowerWorks(7, 7, Ability.Wisdom, 15))
         {
-            if (!saveGame.CheckIfRacialPowerWorks(7, 7, Ability.Wisdom, 15))
-            {
-                return;
-            }
-            saveGame.MsgPrint("You concentrate...");
-            saveGame.TeleportPlayer(10 + (4 * saveGame.Player.Level));
+            return;
         }
+        saveGame.MsgPrint("You concentrate...");
+        saveGame.TeleportPlayer(10 + (4 * saveGame.Player.Level));
+    }
 
-        public override string ActivationSummary(int lvl)
-        {
-            return lvl < 7 ? "teleport         (unusable until level 7)" : "teleport         (cost 7, WIS based)";
-        }
+    public override string ActivationSummary(int lvl)
+    {
+        return lvl < 7 ? "teleport         (unusable until level 7)" : "teleport         (cost 7, WIS based)";
+    }
 
-        public override void Initialize()
-        {
-            Frequency = 3;
-            GainMessage = "You gain the power of teleportation at will.";
-            HaveMessage = "You can teleport at will.";
-            LoseMessage = "You lose the power of teleportation at will.";
-        }
+    public override void Initialize()
+    {
+        Frequency = 3;
+        GainMessage = "You gain the power of teleportation at will.";
+        HaveMessage = "You can teleport at will.";
+        LoseMessage = "You lose the power of teleportation at will.";
     }
 }

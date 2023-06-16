@@ -7,14 +7,13 @@
 // copies. Other copyrights may also apply.”
 
 
-namespace AngbandOS.Core.AttackEffects
+namespace AngbandOS.Core.AttackEffects;
+
+[Serializable]
+internal class Exp80AttackEffect : ExpAttackEffect
 {
-    [Serializable]
-    internal class Exp80AttackEffect : ExpAttackEffect
-    {
-        public override int Power => 5;
-        public override string Description => "lower experience (by 80d6+)";
-        protected override int HoldLifePercentChange => 50;
-        protected override int DiceCount => 80;
-    }
+    public override int Power => 5;
+    public override string Description => "lower experience (by 80d6+)";
+    protected override int HoldLifePercentChange => 50;
+    protected override int DiceCount => 80;
 }

@@ -6,30 +6,29 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.ActiveMutations
+namespace AngbandOS.Core.Mutations.ActiveMutations;
+
+[Serializable]
+internal class MutationSmellMon : Mutation
 {
-    [Serializable]
-    internal class MutationSmellMon : Mutation
+    public override void Activate(SaveGame saveGame)
     {
-        public override void Activate(SaveGame saveGame)
+        if (saveGame.CheckIfRacialPowerWorks(5, 4, Ability.Intelligence, 15))
         {
-            if (saveGame.CheckIfRacialPowerWorks(5, 4, Ability.Intelligence, 15))
-            {
-                saveGame.DetectMonstersNormal();
-            }
+            saveGame.DetectMonstersNormal();
         }
+    }
 
-        public override string ActivationSummary(int lvl)
-        {
-            return lvl < 5 ? "smell monsters   (unusable until level 5)" : "smell monsters   (cost 4, INT based)";
-        }
+    public override string ActivationSummary(int lvl)
+    {
+        return lvl < 5 ? "smell monsters   (unusable until level 5)" : "smell monsters   (cost 4, INT based)";
+    }
 
-        public override void Initialize()
-        {
-            Frequency = 4;
-            GainMessage = "You smell filthy monsters.";
-            HaveMessage = "You can smell nearby monsters.";
-            LoseMessage = "You no longer smell filthy monsters.";
-        }
+    public override void Initialize()
+    {
+        Frequency = 4;
+        GainMessage = "You smell filthy monsters.";
+        HaveMessage = "You can smell nearby monsters.";
+        LoseMessage = "You no longer smell filthy monsters.";
     }
 }

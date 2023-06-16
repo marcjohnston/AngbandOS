@@ -6,31 +6,30 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.ActiveMutations
+namespace AngbandOS.Core.Mutations.ActiveMutations;
+
+[Serializable]
+internal class MutationRecall : Mutation
 {
-    [Serializable]
-    internal class MutationRecall : Mutation
+    public override void Activate(SaveGame saveGame)
     {
-        public override void Activate(SaveGame saveGame)
+        if (!saveGame.CheckIfRacialPowerWorks(17, 50, Ability.Intelligence, 16))
         {
-            if (!saveGame.CheckIfRacialPowerWorks(17, 50, Ability.Intelligence, 16))
-            {
-                return;
-            }
-            saveGame.Player.ToggleRecall();
+            return;
         }
+        saveGame.Player.ToggleRecall();
+    }
 
-        public override string ActivationSummary(int lvl)
-        {
-            return lvl < 17 ? "recall           (unusable until level 17)" : "recall           (cost 50, INT based)";
-        }
+    public override string ActivationSummary(int lvl)
+    {
+        return lvl < 17 ? "recall           (unusable until level 17)" : "recall           (cost 50, INT based)";
+    }
 
-        public override void Initialize()
-        {
-            Frequency = 2;
-            GainMessage = "You feel briefly homesick, but it passes.";
-            HaveMessage = "You can travel between town and the depths.";
-            LoseMessage = "You feel briefly homesick.";
-        }
+    public override void Initialize()
+    {
+        Frequency = 2;
+        GainMessage = "You feel briefly homesick, but it passes.";
+        HaveMessage = "You can travel between town and the depths.";
+        LoseMessage = "You feel briefly homesick.";
     }
 }

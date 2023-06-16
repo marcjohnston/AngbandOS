@@ -1,39 +1,38 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal abstract class RodItem : Item
+internal abstract class RodItem : Item
+{
+    public RodItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
+    protected override bool FactoryCanAbsorbItem(Item other)
     {
-        public RodItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-        protected override bool FactoryCanAbsorbItem(Item other)
+        if (TypeSpecificValue != other.TypeSpecificValue)
         {
-            if (TypeSpecificValue != other.TypeSpecificValue)
-            {
-                return false;
-            }
-            return true;
+            return false;
         }
+        return true;
+    }
 
-        /// <summary>
-        /// Returns the factory that this item was created by; casted as an IFlavour.
-        /// </summary>
-        public IFlavour FlavourFactory => (IFlavour)Factory;
+    /// <summary>
+    /// Returns the factory that this item was created by; casted as an IFlavour.
+    /// </summary>
+    public IFlavour FlavourFactory => (IFlavour)Factory;
 
-        public override string GetDescription(bool includeCountPrefix)
+    public override string GetDescription(bool includeCountPrefix)
+    {
+        string flavour = IdentStoreb ? "" : $"{FlavourFactory.Flavour.Name} ";
+        string ofName = IsFlavourAware() ? $" of {Factory.FriendlyName}" : "";
+        string name = $"{flavour}{Pluralize("Rod", Count)}{ofName}";
+        return includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
+    }
+    public override string GetVerboseDescription()
+    {
+        string s = "";
+        if (IsKnown() && TypeSpecificValue != 0)
         {
-            string flavour = IdentStoreb ? "" : $"{FlavourFactory.Flavour.Name} ";
-            string ofName = IsFlavourAware() ? $" of {Factory.FriendlyName}" : "";
-            string name = $"{flavour}{Pluralize("Rod", Count)}{ofName}";
-            return includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
+            s += $" (charging)";
         }
-        public override string GetVerboseDescription()
-        {
-            string s = "";
-            if (IsKnown() && TypeSpecificValue != 0)
-            {
-                s += $" (charging)";
-            }
-            s += base.GetVerboseDescription();
-            return s;
-        }
+        s += base.GetVerboseDescription();
+        return s;
     }
 }

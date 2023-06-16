@@ -6,63 +6,62 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.RandomMutations
-{
-    [Serializable]
-    internal class MutationWarning : Mutation
-    {
-        public override void Initialize()
-        {
-            Frequency = 2;
-            GainMessage = "You suddenly feel paranoid.";
-            HaveMessage = "You receive warnings about your foes.";
-            LoseMessage = "You no longer feel paranoid.";
-        }
+namespace AngbandOS.Core.Mutations.RandomMutations;
 
-        public override void OnProcessWorld(SaveGame saveGame)
+[Serializable]
+internal class MutationWarning : Mutation
+{
+    public override void Initialize()
+    {
+        Frequency = 2;
+        GainMessage = "You suddenly feel paranoid.";
+        HaveMessage = "You receive warnings about your foes.";
+        LoseMessage = "You no longer feel paranoid.";
+    }
+
+    public override void OnProcessWorld(SaveGame saveGame)
+    {
+        if (Program.Rng.DieRoll(1000) != 1)
         {
-            if (Program.Rng.DieRoll(1000) != 1)
+            return;
+        }
+        int dangerAmount = 0;
+        for (int monster = 0; monster < saveGame.Level.MMax; monster++)
+        {
+            Monster mPtr = saveGame.Level.Monsters[monster];
+            MonsterRace rPtr = mPtr.Race;
+            if (mPtr.Race == null)
             {
-                return;
+                continue;
             }
-            int dangerAmount = 0;
-            for (int monster = 0; monster < saveGame.Level.MMax; monster++)
+            if (rPtr.Level >= saveGame.Player.Level)
             {
-                Monster mPtr = saveGame.Level.Monsters[monster];
-                MonsterRace rPtr = mPtr.Race;
-                if (mPtr.Race == null)
-                {
-                    continue;
-                }
-                if (rPtr.Level >= saveGame.Player.Level)
-                {
-                    dangerAmount += rPtr.Level - saveGame.Player.Level + 1;
-                }
+                dangerAmount += rPtr.Level - saveGame.Player.Level + 1;
             }
-            if (dangerAmount > 100)
-            {
-                saveGame.MsgPrint("You feel utterly terrified!");
-            }
-            else if (dangerAmount > 50)
-            {
-                saveGame.MsgPrint("You feel terrified!");
-            }
-            else if (dangerAmount > 20)
-            {
-                saveGame.MsgPrint("You feel very worried!");
-            }
-            else if (dangerAmount > 10)
-            {
-                saveGame.MsgPrint("You feel paranoid!");
-            }
-            else if (dangerAmount > 5)
-            {
-                saveGame.MsgPrint("You feel almost safe.");
-            }
-            else
-            {
-                saveGame.MsgPrint("You feel lonely.");
-            }
+        }
+        if (dangerAmount > 100)
+        {
+            saveGame.MsgPrint("You feel utterly terrified!");
+        }
+        else if (dangerAmount > 50)
+        {
+            saveGame.MsgPrint("You feel terrified!");
+        }
+        else if (dangerAmount > 20)
+        {
+            saveGame.MsgPrint("You feel very worried!");
+        }
+        else if (dangerAmount > 10)
+        {
+            saveGame.MsgPrint("You feel paranoid!");
+        }
+        else if (dangerAmount > 5)
+        {
+            saveGame.MsgPrint("You feel almost safe.");
+        }
+        else
+        {
+            saveGame.MsgPrint("You feel lonely.");
         }
     }
 }

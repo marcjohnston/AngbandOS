@@ -1,29 +1,28 @@
-namespace AngbandOS.Core.ItemCategories
+namespace AngbandOS.Core.ItemCategories;
+
+[Serializable]
+internal class RodRecall : RodItemFactory
 {
-    [Serializable]
-    internal class RodRecall : RodItemFactory
+    private RodRecall(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+
+    public override bool RequiresAiming => false;
+    public override char Character => '-';
+    public override string Name => "Recall";
+
+    public override int[] Chance => new int[] { 4, 0, 0, 0 };
+    public override int Cost => 4000;
+    public override int Dd => 1;
+    public override int Ds => 1;
+    public override string FriendlyName => "Recall";
+    public override int Level => 30;
+    public override int[] Locale => new int[] { 30, 0, 0, 0 };
+    public override int? SubCategory => 3;
+    public override int Weight => 15;
+    public override void Execute(ZapRodEvent zapRodEvent)
     {
-        private RodRecall(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-
-        public override bool RequiresAiming => false;
-        public override char Character => '-';
-        public override string Name => "Recall";
-
-        public override int[] Chance => new int[] { 4, 0, 0, 0 };
-        public override int Cost => 4000;
-        public override int Dd => 1;
-        public override int Ds => 1;
-        public override string FriendlyName => "Recall";
-        public override int Level => 30;
-        public override int[] Locale => new int[] { 30, 0, 0, 0 };
-        public override int? SubCategory => 3;
-        public override int Weight => 15;
-        public override void Execute(ZapRodEvent zapRodEvent)
-        {
-            SaveGame.Player.ToggleRecall();
-            zapRodEvent.Identified = true;
-            zapRodEvent.Item.TypeSpecificValue = 60;
-        }
-        public override Item CreateItem() => new RecallRodItem(SaveGame);
+        SaveGame.Player.ToggleRecall();
+        zapRodEvent.Identified = true;
+        zapRodEvent.Item.TypeSpecificValue = 60;
     }
+    public override Item CreateItem() => new RecallRodItem(SaveGame);
 }

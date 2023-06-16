@@ -1,47 +1,46 @@
-namespace AngbandOS.Core.MonsterRaces
-{
-    [Serializable]
-    internal class JabberwockMonsterRace : MonsterRace
-    {
-        protected JabberwockMonsterRace(SaveGame saveGame) : base(saveGame) { }
- 
-        public override MonsterSpellList Spells => new MonsterSpellList(
-            new BreatheChaosMonsterSpell(),
-            new CauseMortalWoundsMonsterSpell());
-        public override char Character => 'H';
-        public override Colour Colour => Colour.BrightRed;
-        public override string Name => "Jabberwock";
+namespace AngbandOS.Core.MonsterRaces;
 
-        public override bool Animal => true;
-        public override int ArmourClass => 125;
-        public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 10, 10),
-            new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 10, 10),
-            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 10, 10),
-            new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 10, 10)
-        };
-        public override bool AttrMulti => true;
-        public override bool BashDoor => true;
-        public override string Description => "'Beware the Jabberwock, my son!The jaws that bite, the claws that catch!'";
-        public override bool Drop60 => true;
-        public override bool Drop90 => true;
-        public override bool ForceMaxHp => true;
-        public override bool ForceSleep => true;
-        public override int FreqInate => 5;
-        public override int FreqSpell => 5;
-        public override string FriendlyName => "Jabberwock";
-        public override int Hdice => 32;
-        public override int Hside => 100;
-        public override int LevelFound => 65;
-        public override int Mexp => 19000;
-        public override int NoticeRange => 35;
-        public override bool OnlyDropItem => true;
-        public override int Rarity => 4;
-        public override bool ResistTeleport => true;
-        public override int Sleep => 255;
-        public override int Speed => 130;
-        public override string SplitName1 => "            ";
-        public override string SplitName2 => "            ";
-        public override string SplitName3 => " Jabberwock ";
-    }
+[Serializable]
+internal class JabberwockMonsterRace : MonsterRace
+{
+    protected JabberwockMonsterRace(SaveGame saveGame) : base(saveGame) { }
+
+    public override MonsterSpellList Spells => new MonsterSpellList(
+        new BreatheChaosMonsterSpell(),
+        new CauseMortalWoundsMonsterSpell());
+    public override char Character => 'H';
+    public override Colour Colour => Colour.BrightRed;
+    public override string Name => "Jabberwock";
+
+    public override bool Animal => true;
+    public override int ArmourClass => 125;
+    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
+        new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 10, 10),
+        new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 10, 10),
+        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 10, 10),
+        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 10, 10)
+    };
+    public override bool AttrMulti => true;
+    public override bool BashDoor => true;
+    public override string Description => "'Beware the Jabberwock, my son!The jaws that bite, the claws that catch!'";
+    public override bool Drop60 => true;
+    public override bool Drop90 => true;
+    public override bool ForceMaxHp => true;
+    public override bool ForceSleep => true;
+    public override int FreqInate => 5;
+    public override int FreqSpell => 5;
+    public override string FriendlyName => "Jabberwock";
+    public override int Hdice => 32;
+    public override int Hside => 100;
+    public override int LevelFound => 65;
+    public override int Mexp => 19000;
+    public override int NoticeRange => 35;
+    public override bool OnlyDropItem => true;
+    public override int Rarity => 4;
+    public override bool ResistTeleport => true;
+    public override int Sleep => 255;
+    public override int Speed => 130;
+    public override string SplitName1 => "            ";
+    public override string SplitName2 => "            ";
+    public override string SplitName3 => " Jabberwock ";
 }

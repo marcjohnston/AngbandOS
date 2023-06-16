@@ -1,49 +1,48 @@
-﻿namespace AngbandOS.Core.Races
+﻿namespace AngbandOS.Core.Races;
+
+[Serializable]
+internal class ElfRace : Race
 {
-    [Serializable]
-    internal class ElfRace : Race
+    private ElfRace(SaveGame saveGame) : base(saveGame) { }
+    public override string Title => "Elf";
+    public override int[] AbilityBonus => new int[] { -1, 2, 2, 1, -2, 2 };
+    public override int BaseDisarmBonus => 5;
+    public override int BaseDeviceBonus => 6;
+    public override int BaseSaveBonus => 6;
+    public override int BaseStealthBonus => 2;
+    public override int BaseSearchBonus => 8;
+    public override int BaseSearchFrequency => 12;
+    public override int BaseMeleeAttackBonus => -5;
+    public override int BaseRangedAttackBonus => 15;
+    public override int HitDieBonus => 8;
+    public override int ExperienceFactor => 120;
+    public override int BaseAge => 75;
+    public override int AgeRange => 75;
+    public override int MaleBaseHeight => 60;
+    public override int MaleHeightRange => 4;
+    public override int MaleBaseWeight => 100;
+    public override int MaleWeightRange => 6;
+    public override int FemaleBaseHeight => 54;
+    public override int FemaleHeightRange => 4;
+    public override int FemaleBaseWeight => 80;
+    public override int FemaleWeightRange => 6;
+    public override int Infravision => 3;
+    public override uint Choice => 0xFF5F;
+    public override string Description => "Elves are creatures of the woods, and cultivate a symbiotic\nrelationship with trees. While not the sturdiest of races,\nthey are dextrous and have excellent mental faculties.\nBecause they are partially photosynthetic, elves are able\nto resist light based attacks.";
+
+    /// <summary>
+    /// Elf 7->8->9->54->55->56->End 
+    /// </summary>
+    public override int Chart => 7;
+
+    public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
     {
-        private ElfRace(SaveGame saveGame) : base(saveGame) { }
-        public override string Title => "Elf";
-        public override int[] AbilityBonus => new int[] { -1, 2, 2, 1, -2, 2 };
-        public override int BaseDisarmBonus => 5;
-        public override int BaseDeviceBonus => 6;
-        public override int BaseSaveBonus => 6;
-        public override int BaseStealthBonus => 2;
-        public override int BaseSearchBonus => 8;
-        public override int BaseSearchFrequency => 12;
-        public override int BaseMeleeAttackBonus => -5;
-        public override int BaseRangedAttackBonus => 15;
-        public override int HitDieBonus => 8;
-        public override int ExperienceFactor => 120;
-        public override int BaseAge => 75;
-        public override int AgeRange => 75;
-        public override int MaleBaseHeight => 60;
-        public override int MaleHeightRange => 4;
-        public override int MaleBaseWeight => 100;
-        public override int MaleWeightRange => 6;
-        public override int FemaleBaseHeight => 54;
-        public override int FemaleHeightRange => 4;
-        public override int FemaleBaseWeight => 80;
-        public override int FemaleWeightRange => 6;
-        public override int Infravision => 3;
-        public override uint Choice => 0xFF5F;
-        public override string Description => "Elves are creatures of the woods, and cultivate a symbiotic\nrelationship with trees. While not the sturdiest of races,\nthey are dextrous and have excellent mental faculties.\nBecause they are partially photosynthetic, elves are able\nto resist light based attacks.";
+        itemCharacteristics.ResLight = true;
+    }
+    public override string CreateRandomName() => CreateRandomNameFromSyllables(new ElvishSyllables());
 
-        /// <summary>
-        /// Elf 7->8->9->54->55->56->End 
-        /// </summary>
-        public override int Chart => 7;
-
-        public override void UpdateRacialAbilities(int level, ItemCharacteristics itemCharacteristics)
-        {
-            itemCharacteristics.ResLight = true;
-        }
-        public override string CreateRandomName() => CreateRandomNameFromSyllables(new ElvishSyllables());
-
-        public override void CalcBonuses(SaveGame saveGame)
-        {
-            saveGame.Player.HasLightResistance = true;
-        }
+    public override void CalcBonuses(SaveGame saveGame)
+    {
+        saveGame.Player.HasLightResistance = true;
     }
 }

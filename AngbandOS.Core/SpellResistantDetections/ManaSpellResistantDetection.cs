@@ -1,13 +1,12 @@
-﻿namespace AngbandOS.Core.SpellResistantDetections
+﻿namespace AngbandOS.Core.SpellResistantDetections;
+
+internal class ManaSpellResistantDetection : SpellResistantDetection
 {
-    internal class ManaSpellResistantDetection : SpellResistantDetection
+    public override void Learn(SaveGame saveGame, Monster monster)
     {
-        public override void Learn(SaveGame saveGame, Monster monster)
+        if (saveGame.Player.MaxMana == 0)
         {
-            if (saveGame.Player.MaxMana == 0)
-            {
-                monster.SmImmMana = true;
-            }
+            monster.SmImmMana = true;
         }
     }
 }

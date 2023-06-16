@@ -6,21 +6,20 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.InventorySlots
+namespace AngbandOS.Core.InventorySlots;
+
+[Serializable]
+internal class FeetInventorySlot : EquipmentInventorySlot
 {
-    [Serializable]
-    internal class FeetInventorySlot : EquipmentInventorySlot
-    {
-        private FeetInventorySlot(SaveGame saveGame) : base(saveGame) { }
-        public override string Label(int index) => "m";
-        public override string Label(Item oPtr) => "m";
-        public override int[] InventorySlots => new int[] { InventorySlot.Feet };
-        public override string MentionUse(int? index) => "On feet";
-        public override string DescribeWieldLocation(int index) => "wearing on your feet";
-        public override string DescribeItemLocation(Item oPtr) => "wearing on your feet";
-        public override int BareArmourClassBonus => SaveGame.Player.Level / 3;
-        public override bool IsWeightRestricting => true;
-        public override bool IsArmour => true;
-        public override int SortOrder => 13;
-    }
+    private FeetInventorySlot(SaveGame saveGame) : base(saveGame) { }
+    public override string Label(int index) => "m";
+    public override string Label(Item oPtr) => "m";
+    public override int[] InventorySlots => new int[] { InventorySlot.Feet };
+    public override string MentionUse(int? index) => "On feet";
+    public override string DescribeWieldLocation(int index) => "wearing on your feet";
+    public override string DescribeItemLocation(Item oPtr) => "wearing on your feet";
+    public override int BareArmourClassBonus => SaveGame.Player.Level / 3;
+    public override bool IsWeightRestricting => true;
+    public override bool IsArmour => true;
+    public override int SortOrder => 13;
 }

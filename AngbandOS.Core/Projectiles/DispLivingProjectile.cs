@@ -6,50 +6,49 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Projection
+namespace AngbandOS.Core.Projection;
+
+[Serializable]
+internal class DispLivingProjectile : Projectile
 {
-    [Serializable]
-    internal class DispLivingProjectile : Projectile
+    private DispLivingProjectile(SaveGame saveGame) : base(saveGame) { }
+
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<GreenSplatProjectileGraphic>();
+
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<GreenExpandAnimation>();
+
+    protected override bool ProjectileAngersMonster(Monster mPtr)
     {
-        private DispLivingProjectile(SaveGame saveGame) : base(saveGame) { }
+        MonsterRace rPtr = mPtr.Race;
+        return !rPtr.Undead && !rPtr.Nonliving;
+    }
 
-        protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<GreenSplatProjectileGraphic>();
-
-        protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<GreenExpandAnimation>();
-
-        protected override bool ProjectileAngersMonster(Monster mPtr)
+    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
+    {
+        bool seen = mPtr.IsVisible;
+        bool obvious = false;
+        bool skipped = false;
+        string? note = null;
+        string? noteDies = null;
+        if (ProjectileAngersMonster(mPtr))
         {
-            MonsterRace rPtr = mPtr.Race;
-            return !rPtr.Undead && !rPtr.Nonliving;
+            if (seen)
+            {
+                obvious = true;
+            }
+            note = " shudders.";
+            noteDies = " dissolves!";
         }
-
-        protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
+        else
         {
-            bool seen = mPtr.IsVisible;
-            bool obvious = false;
-            bool skipped = false;
-            string? note = null;
-            string? noteDies = null;
-            if (ProjectileAngersMonster(mPtr))
-            {
-                if (seen)
-                {
-                    obvious = true;
-                }
-                note = " shudders.";
-                noteDies = " dissolves!";
-            }
-            else
-            {
-                skipped = true;
-                dam = 0;
-            }
-            if (skipped)
-            {
-                return false;
-            }
-            ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies);
-            return obvious;
+            skipped = true;
+            dam = 0;
         }
+        if (skipped)
+        {
+            return false;
+        }
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies);
+        return obvious;
     }
 }

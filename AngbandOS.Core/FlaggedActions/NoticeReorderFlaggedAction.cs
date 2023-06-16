@@ -1,16 +1,15 @@
-﻿namespace AngbandOS.Core.FlaggedActions
+﻿namespace AngbandOS.Core.FlaggedActions;
+
+[Serializable]
+internal class NoticeReorderFlaggedAction : FlaggedAction
 {
-    [Serializable]
-    internal class NoticeReorderFlaggedAction : FlaggedAction
+    public NoticeReorderFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    protected override void Execute()
     {
-        public NoticeReorderFlaggedAction(SaveGame saveGame) : base(saveGame) { }
-        protected override void Execute()
+        bool itemsWereReordered = SaveGame.SortPack();
+        if (itemsWereReordered)
         {
-            bool itemsWereReordered = SaveGame.SortPack();
-            if (itemsWereReordered)
-            {
-                SaveGame.MsgPrint("You reorder some items in your pack.");
-            }
+            SaveGame.MsgPrint("You reorder some items in your pack.");
         }
     }
 }

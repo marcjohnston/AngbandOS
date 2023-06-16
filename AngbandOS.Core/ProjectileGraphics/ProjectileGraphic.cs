@@ -6,30 +6,29 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ProjectileGraphics
+namespace AngbandOS.Core.ProjectileGraphics;
+
+[Serializable]
+internal abstract class ProjectileGraphic
 {
-    [Serializable]
-    internal abstract class ProjectileGraphic
+    protected SaveGame SaveGame;
+    protected ProjectileGraphic(SaveGame saveGame)
     {
-        protected SaveGame SaveGame;
-        protected ProjectileGraphic(SaveGame saveGame)
-        {
-            SaveGame = saveGame;
-        }
-
-        /// <summary>
-        /// The column from which to take the graphical tile.
-        /// </summary>
-        public abstract char Character { get; }
-
-        /// <summary>
-        /// The row from which to take the graphical tile
-        /// </summary>
-        public virtual Colour Colour => Colour.White; // TODO: Inject the color ... we have 3 variations of every object because of this.
-
-        /// <summary>
-        /// A unique identifier for the entity.  
-        /// </summary>
-        public abstract string Name { get; } // TODO: Are we actually using this?
+        SaveGame = saveGame;
     }
+
+    /// <summary>
+    /// The column from which to take the graphical tile.
+    /// </summary>
+    public abstract char Character { get; }
+
+    /// <summary>
+    /// The row from which to take the graphical tile
+    /// </summary>
+    public virtual Colour Colour => Colour.White; // TODO: Inject the color ... we have 3 variations of every object because of this.
+
+    /// <summary>
+    /// A unique identifier for the entity.  
+    /// </summary>
+    public abstract string Name { get; } // TODO: Are we actually using this?
 }

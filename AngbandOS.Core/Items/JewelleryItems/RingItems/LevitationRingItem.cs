@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class LevitationRingItem : RingItem
-    {
-        public LevitationRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<LevitationRingItemFactory>()) { }
-    }
+internal class LevitationRingItem : RingItem
+{
+    public LevitationRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<LevitationRingItemFactory>()) { }
 }

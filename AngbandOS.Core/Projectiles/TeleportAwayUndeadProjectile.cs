@@ -6,89 +6,88 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Projection
+namespace AngbandOS.Core.Projection;
+
+[Serializable]
+internal class TeleportAwayUndeadProjectile : Projectile
 {
-    [Serializable]
-    internal class TeleportAwayUndeadProjectile : Projectile
+    private TeleportAwayUndeadProjectile(SaveGame saveGame) : base(saveGame) { }
+
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<PinkBulletProjectileGraphic>();
+
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<PinkSwirlAnimation>();
+
+    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<PinkBulletProjectileGraphic>();
+
+    protected override bool ProjectileAngersMonster(Monster mPtr)
     {
-        private TeleportAwayUndeadProjectile(SaveGame saveGame) : base(saveGame) { }
+        return false;
+    }
 
-        protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<PinkBulletProjectileGraphic>();
-
-        protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<PinkSwirlAnimation>();
-
-        protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<PinkBulletProjectileGraphic>();
-
-        protected override bool ProjectileAngersMonster(Monster mPtr)
+    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
+    {
+        MonsterRace rPtr = mPtr.Race;
+        bool seen = mPtr.IsVisible;
+        bool obvious = false;
+        bool skipped = false;
+        int doDist = 0;
+        string? note = null;
+        if (rPtr.Undead)
         {
-            return false;
-        }
-
-        protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
-        {
-            MonsterRace rPtr = mPtr.Race;
-            bool seen = mPtr.IsVisible;
-            bool obvious = false;
-            bool skipped = false;
-            int doDist = 0;
-            string? note = null;
-            if (rPtr.Undead)
+            bool resistsTele = false;
+            if (rPtr.ResistTeleport)
             {
-                bool resistsTele = false;
-                if (rPtr.ResistTeleport)
-                {
-                    if (rPtr.Unique)
-                    {
-                        if (seen)
-                        {
-                            rPtr.Knowledge.Characteristics.ResistTeleport = true;
-                        }
-                        note = " is unaffected!";
-                        resistsTele = true;
-                    }
-                    else if (rPtr.Level > Program.Rng.DieRoll(100))
-                    {
-                        if (seen)
-                        {
-                            rPtr.Knowledge.Characteristics.ResistTeleport = true;
-                        }
-                        note = " resists!";
-                        resistsTele = true;
-                    }
-                }
-                if (!resistsTele)
+                if (rPtr.Unique)
                 {
                     if (seen)
                     {
-                        obvious = true;
+                        rPtr.Knowledge.Characteristics.ResistTeleport = true;
                     }
+                    note = " is unaffected!";
+                    resistsTele = true;
+                }
+                else if (rPtr.Level > Program.Rng.DieRoll(100))
+                {
                     if (seen)
                     {
-                        rPtr.Knowledge.Characteristics.Undead = true;
+                        rPtr.Knowledge.Characteristics.ResistTeleport = true;
                     }
-                    doDist = dam;
+                    note = " resists!";
+                    resistsTele = true;
                 }
             }
-            else
-            {
-                skipped = true;
-            }
-            dam = 0;
-            if (skipped)
-            {
-                return false;
-            }
-            if (doDist != 0)
+            if (!resistsTele)
             {
                 if (seen)
                 {
                     obvious = true;
                 }
-                note = " disappears!";
-                mPtr.TeleportAway(SaveGame, doDist);
+                if (seen)
+                {
+                    rPtr.Knowledge.Characteristics.Undead = true;
+                }
+                doDist = dam;
             }
-            ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-            return obvious;
         }
+        else
+        {
+            skipped = true;
+        }
+        dam = 0;
+        if (skipped)
+        {
+            return false;
+        }
+        if (doDist != 0)
+        {
+            if (seen)
+            {
+                obvious = true;
+            }
+            note = " disappears!";
+            mPtr.TeleportAway(SaveGame, doDist);
+        }
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        return obvious;
     }
 }

@@ -6,31 +6,30 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.ActiveMutations
+namespace AngbandOS.Core.Mutations.ActiveMutations;
+
+[Serializable]
+internal class MutationLauncher : Mutation
 {
-    [Serializable]
-    internal class MutationLauncher : Mutation
+    public override void Activate(SaveGame saveGame)
     {
-        public override void Activate(SaveGame saveGame)
+        if (!saveGame.CheckIfRacialPowerWorks(1, saveGame.Player.Level, Ability.Strength, 6))
         {
-            if (!saveGame.CheckIfRacialPowerWorks(1, saveGame.Player.Level, Ability.Strength, 6))
-            {
-                return;
-            }
-            saveGame.DoCmdThrow(2 + (saveGame.Player.Level / 16));
+            return;
         }
+        saveGame.DoCmdThrow(2 + (saveGame.Player.Level / 16));
+    }
 
-        public override string ActivationSummary(int lvl)
-        {
-            return "throw object     (cost lev, STR based)";
-        }
+    public override string ActivationSummary(int lvl)
+    {
+        return "throw object     (cost lev, STR based)";
+    }
 
-        public override void Initialize()
-        {
-            Frequency = 2;
-            GainMessage = "Your throwing arm feels much stronger.";
-            HaveMessage = "You can hurl objects with great force.";
-            LoseMessage = "Your throwing arm feels much weaker.";
-        }
+    public override void Initialize()
+    {
+        Frequency = 2;
+        GainMessage = "Your throwing arm feels much stronger.";
+        HaveMessage = "You can hurl objects with great force.";
+        LoseMessage = "Your throwing arm feels much weaker.";
     }
 }

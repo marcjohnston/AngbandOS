@@ -1,13 +1,12 @@
-﻿namespace AngbandOS.Core.SpellResistantDetections
+﻿namespace AngbandOS.Core.SpellResistantDetections;
+
+internal class ShardSpellResistantDetection : SpellResistantDetection
 {
-    internal class ShardSpellResistantDetection : SpellResistantDetection
+    public override void Learn(SaveGame saveGame, Monster monster)
     {
-        public override void Learn(SaveGame saveGame, Monster monster)
+        if (saveGame.Player.HasShardResistance)
         {
-            if (saveGame.Player.HasShardResistance)
-            {
-                monster.SmResShard = true;
-            }
+            monster.SmResShard = true;
         }
     }
 }

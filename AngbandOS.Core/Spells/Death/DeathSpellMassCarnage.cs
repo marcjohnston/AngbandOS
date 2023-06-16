@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Death
-{
-    [Serializable]
-    internal class DeathSpellMassCarnage : Spell
-    {
-        private DeathSpellMassCarnage(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.MassCarnage(true);
-        }
+namespace AngbandOS.Core.Spells.Death;
 
-        public override string Name => "Mass Carnage";
-        
+[Serializable]
+internal class DeathSpellMassCarnage : Spell
+{
+    private DeathSpellMassCarnage(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.MassCarnage(true);
     }
+
+    public override string Name => "Mass Carnage";
+    
 }

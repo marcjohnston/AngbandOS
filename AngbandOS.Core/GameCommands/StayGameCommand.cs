@@ -1,21 +1,20 @@
-﻿namespace AngbandOS.Core.Commands
+﻿namespace AngbandOS.Core.Commands;
+
+/// <summary>
+/// Stand still for a turn without picking up any items
+/// </summary>
+[Serializable]
+internal class StayGameCommand : GameCommand
 {
-    /// <summary>
-    /// Stand still for a turn without picking up any items
-    /// </summary>
-    [Serializable]
-    internal class StayGameCommand : GameCommand
+    private StayGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+
+    public override char Key => 'g';
+
+    public override int? Repeat => null;
+
+    public override bool Execute()
     {
-        private StayGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-
-        public override char Key => 'g';
-
-        public override int? Repeat => null;
-
-        public override bool Execute()
-        {
-            SaveGame.DoCmdStay(false);
-            return false;
-        }
+        SaveGame.DoCmdStay(false);
+        return false;
     }
 }

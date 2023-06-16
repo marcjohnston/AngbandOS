@@ -6,22 +6,21 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Folk
-{
-    [Serializable]
-    internal class FolkSpellBlink : Spell
-    {
-        private FolkSpellBlink(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.TeleportPlayer(10);
-        }
+namespace AngbandOS.Core.Spells.Folk;
 
-        public override string Name => "Blink";
-        
-        protected override string? Info()
-        {
-            return "range 10";
-        }
+[Serializable]
+internal class FolkSpellBlink : Spell
+{
+    private FolkSpellBlink(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.TeleportPlayer(10);
+    }
+
+    public override string Name => "Blink";
+    
+    protected override string? Info()
+    {
+        return "range 10";
     }
 }

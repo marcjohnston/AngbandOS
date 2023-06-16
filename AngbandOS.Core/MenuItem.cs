@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core
-{
-    [Serializable]
-    internal class MenuItem<T>
-    {
-        public readonly T Item;
-        public readonly string Text;
+namespace AngbandOS.Core;
 
-        public MenuItem(string text, T item)
-        {
-            Text = text;
-            Item = item;
-        }
+[Serializable]
+internal class MenuItem<T>
+{
+    public readonly T Item;
+    public readonly string Text;
+
+    public MenuItem(string text, T item)
+    {
+        Text = text;
+        Item = item;
     }
 }

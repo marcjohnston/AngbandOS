@@ -1,20 +1,19 @@
-﻿namespace AngbandOS.Core.MonsterSelectors
+﻿namespace AngbandOS.Core.MonsterSelectors;
+
+[Serializable]
+internal class TreasureMonsterSelector : MonsterSelector
 {
-    [Serializable]
-    internal class TreasureMonsterSelector : MonsterSelector
+    public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
     {
-        public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
+        if (rPtr.Unique)
         {
-            if (rPtr.Unique)
-            {
-                return false;
-            }
-            if (!(rPtr.Character == '!' || rPtr.Character == '|' || rPtr.Character == '$' || rPtr.Character == '?' ||
-                  rPtr.Character == '='))
-            {
-                return false;
-            }
-            return true;
+            return false;
         }
+        if (!(rPtr.Character == '!' || rPtr.Character == '|' || rPtr.Character == '$' || rPtr.Character == '?' ||
+              rPtr.Character == '='))
+        {
+            return false;
+        }
+        return true;
     }
 }

@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Tarot
-{
-    [Serializable]
-    internal class TarotSpellAstralLore : Spell
-    {
-        private TarotSpellAstralLore(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.IdentifyFully();
-        }
+namespace AngbandOS.Core.Spells.Tarot;
 
-        public override string Name => "Astral Lore";
-        
+[Serializable]
+internal class TarotSpellAstralLore : Spell
+{
+    private TarotSpellAstralLore(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.IdentifyFully();
     }
+
+    public override string Name => "Astral Lore";
+    
 }

@@ -1,50 +1,49 @@
-namespace AngbandOS.Core.ItemCategories
+namespace AngbandOS.Core.ItemCategories;
+
+[Serializable]
+internal class DragonsBreathWandItemFactory : WandItemFactory
 {
-    [Serializable]
-    internal class DragonsBreathWandItemFactory : WandItemFactory
+    private DragonsBreathWandItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+
+    public override char Character => '-';
+    public override string Name => "Dragon's Breath";
+
+    public override int[] Chance => new int[] { 4, 0, 0, 0 };
+    public override int Cost => 2400;
+    public override int Dd => 1;
+    public override int Ds => 1;
+    public override string FriendlyName => "Dragon's Breath";
+    public override bool IgnoreAcid => true;
+    public override bool IgnoreCold => true;
+    public override bool IgnoreElec => true;
+    public override bool IgnoreFire => true;
+    public override int Level => 60;
+    public override int[] Locale => new int[] { 60, 0, 0, 0 };
+    public override int? SubCategory => WandType.DragonBreath;
+    public override int Weight => 10;
+    public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {
-        private DragonsBreathWandItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-
-        public override char Character => '-';
-        public override string Name => "Dragon's Breath";
-
-        public override int[] Chance => new int[] { 4, 0, 0, 0 };
-        public override int Cost => 2400;
-        public override int Dd => 1;
-        public override int Ds => 1;
-        public override string FriendlyName => "Dragon's Breath";
-        public override bool IgnoreAcid => true;
-        public override bool IgnoreCold => true;
-        public override bool IgnoreElec => true;
-        public override bool IgnoreFire => true;
-        public override int Level => 60;
-        public override int[] Locale => new int[] { 60, 0, 0, 0 };
-        public override int? SubCategory => WandType.DragonBreath;
-        public override int Weight => 10;
-        public override bool ExecuteActivation(SaveGame saveGame, int dir)
+        switch (Program.Rng.RandomLessThan(5))
         {
-            switch (Program.Rng.RandomLessThan(5))
-            {
-                case 0:
-                    saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir, 100, -3);
-                    break;
-                case 1:
-                    saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, 80, -3);
-                    break;
-                case 2:
-                    saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, 100, -3);
-                    break;
-                case 3:
-                    saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 80, -3);
-                    break;
-                case 4:
-                    saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), dir, 60, -3);
-                    break;
-                default:
-                    throw new Exception("Internal error.");
-            }
-            return true;
+            case 0:
+                saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir, 100, -3);
+                break;
+            case 1:
+                saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, 80, -3);
+                break;
+            case 2:
+                saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, 100, -3);
+                break;
+            case 3:
+                saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 80, -3);
+                break;
+            case 4:
+                saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), dir, 60, -3);
+                break;
+            default:
+                throw new Exception("Internal error.");
         }
-        public override Item CreateItem() => new DragonsBreathWandItem(SaveGame);
+        return true;
     }
+    public override Item CreateItem() => new DragonsBreathWandItem(SaveGame);
 }

@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class DarknessScrollItem : ScrollItem
-    {
-        public DarknessScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ScrollDarkness>()) { }
-    }
+internal class DarknessScrollItem : ScrollItem
+{
+    public DarknessScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ScrollDarkness>()) { }
 }

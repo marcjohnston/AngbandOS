@@ -1,24 +1,23 @@
-namespace AngbandOS.Core.ItemCategories
+namespace AngbandOS.Core.ItemCategories;
+
+[Serializable]
+internal class HelmSteelHelm : HelmItemClass
 {
-    [Serializable]
-    internal class HelmSteelHelm : HelmItemClass
-    {
-        private HelmSteelHelm(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private HelmSteelHelm(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-        public override char Character => ']';
-        public override Colour Colour => Colour.BrightWhite;
-        public override string Name => "Steel Helm";
+    public override char Character => ']';
+    public override Colour Colour => Colour.BrightWhite;
+    public override string Name => "Steel Helm";
 
-        public override int Ac => 6;
-        public override int[] Chance => new int[] { 1, 0, 0, 0 };
-        public override int Cost => 200;
-        public override int Dd => 1;
-        public override int Ds => 3;
-        public override string FriendlyName => "& Steel Helm~";
-        public override int Level => 40;
-        public override int[] Locale => new int[] { 40, 0, 0, 0 };
-        public override int? SubCategory => 6;
-        public override int Weight => 60;
-        public override Item CreateItem() => new SteelHelmArmorItem(SaveGame);
-    }
+    public override int Ac => 6;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
+    public override int Cost => 200;
+    public override int Dd => 1;
+    public override int Ds => 3;
+    public override string FriendlyName => "& Steel Helm~";
+    public override int Level => 40;
+    public override int[] Locale => new int[] { 40, 0, 0, 0 };
+    public override int? SubCategory => 6;
+    public override int Weight => 60;
+    public override Item CreateItem() => new SteelHelmArmorItem(SaveGame);
 }

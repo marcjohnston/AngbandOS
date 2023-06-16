@@ -8,25 +8,24 @@
 
 using static AngbandOS.Core.CelephaisDungeon;
 
-namespace AngbandOS.Core
-{
+namespace AngbandOS.Core;
+
 [Serializable]
-    internal class NecropolisDungeon : Dungeon
-    {
-        private NecropolisDungeon(SaveGame saveGame) : base(saveGame) { }
-        public override int BaseOffset => 30;
-        /// <summary>
-        /// Returns true because this dungeon is a tower.
-        /// </summary>
-        public override bool Tower => true;
-        public override int MaxLevel => 40;
-        public override MonsterSelector? Bias => new HiUndeadMonsterSelector();
-        public override string FirstGuardian => "Fire Phantom";
-        public override string SecondGuardian => "Vecna, the Emperor Lich";
-        public override int FirstLevel => 1;
-        public override int SecondLevel => 40;
-        public override string Name => "the Necropolis";
-        public override string Shortname => "Necropolis";
-        public override string MapSymbol => "n";
-    }
+internal class NecropolisDungeon : Dungeon
+{
+    private NecropolisDungeon(SaveGame saveGame) : base(saveGame) { }
+    public override int BaseOffset => 30;
+    /// <summary>
+    /// Returns true because this dungeon is a tower.
+    /// </summary>
+    public override bool Tower => true;
+    public override int MaxLevel => 40;
+    public override MonsterSelector? Bias => new HiUndeadMonsterSelector();
+    public override string FirstGuardian => "Fire Phantom";
+    public override string SecondGuardian => "Vecna, the Emperor Lich";
+    public override int FirstLevel => 1;
+    public override int SecondLevel => 40;
+    public override string Name => "the Necropolis";
+    public override string Shortname => "Necropolis";
+    public override string MapSymbol => "n";
 }

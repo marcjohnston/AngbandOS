@@ -6,26 +6,25 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Chaos
-{
-    [Serializable]
-    internal class ChaosSpellInvokeChaos : Spell
-    {
-        private ChaosSpellInvokeChaos(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            if (!SaveGame.GetDirectionWithAim(out int dir))
-            {
-                return;
-            }
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>(), dir, 66 + SaveGame.Player.Level, SaveGame.Player.Level / 5);
-        }
+namespace AngbandOS.Core.Spells.Chaos;
 
-        public override string Name => "Invoke Chaos";
-        
-        protected override string? Info()
+[Serializable]
+internal class ChaosSpellInvokeChaos : Spell
+{
+    private ChaosSpellInvokeChaos(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
-            return $"dam {66 + SaveGame.Player.Level}";
+            return;
         }
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>(), dir, 66 + SaveGame.Player.Level, SaveGame.Player.Level / 5);
+    }
+
+    public override string Name => "Invoke Chaos";
+    
+    protected override string? Info()
+    {
+        return $"dam {66 + SaveGame.Player.Level}";
     }
 }

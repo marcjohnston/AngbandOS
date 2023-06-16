@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class Silver1GoldItem : GoldItem
-    {
-        public Silver1GoldItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<GoldSilver1>()) { }
-    }
+internal class Silver1GoldItem : GoldItem
+{
+    public Silver1GoldItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<GoldSilver1>()) { }
 }

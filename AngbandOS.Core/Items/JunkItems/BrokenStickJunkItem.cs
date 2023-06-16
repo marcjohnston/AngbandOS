@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class BrokenStickJunkItem : JunkItem
-    {
-        public BrokenStickJunkItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<JunkBrokenStick>()) { }
-    }
+internal class BrokenStickJunkItem : JunkItem
+{
+    public BrokenStickJunkItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<JunkBrokenStick>()) { }
 }

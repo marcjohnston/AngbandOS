@@ -1,12 +1,11 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class AcidRingItem : RingItem
+internal class AcidRingItem : RingItem
+{
+    public AcidRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<AcidRingItemFactory>()) { }
+    protected override void ApplyMagic(int level, int power, Store? store)
     {
-        public AcidRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<AcidRingItemFactory>()) { }
-        protected override void ApplyMagic(int level, int power, Store? store)
-        {
-            BonusArmorClass = 5 + Program.Rng.DieRoll(5) + GetBonusValue(10, level);
-        }
+        BonusArmorClass = 5 + Program.Rng.DieRoll(5) + GetBonusValue(10, level);
     }
 }

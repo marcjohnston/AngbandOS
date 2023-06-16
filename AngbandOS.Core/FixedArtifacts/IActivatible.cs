@@ -6,21 +6,20 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.FixedArtifacts
-{
-    internal interface IActivatible
-    {
-        /// <summary>
-        /// Activates the special ability of the fixed artifact.
-        /// </summary>
-        /// <param name="saveGame"></param>
-        /// <param name="item"></param>
-        public abstract void ActivateItem(SaveGame saveGame, Item item);
+namespace AngbandOS.Core.FixedArtifacts;
 
-        /// <summary>
-        /// Returns the description of the activation effect for the fixed artifact.
-        /// </summary>
-        /// <returns></returns>
-        public abstract string DescribeActivationEffect();
-    }
+internal interface IActivatible
+{
+    /// <summary>
+    /// Activates the special ability of the fixed artifact.
+    /// </summary>
+    /// <param name="saveGame"></param>
+    /// <param name="item"></param>
+    public abstract void ActivateItem(SaveGame saveGame, Item item);
+
+    /// <summary>
+    /// Returns the description of the activation effect for the fixed artifact.
+    /// </summary>
+    /// <returns></returns>
+    public abstract string DescribeActivationEffect();
 }

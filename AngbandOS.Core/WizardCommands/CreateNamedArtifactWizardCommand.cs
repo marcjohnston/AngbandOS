@@ -1,19 +1,18 @@
-﻿namespace AngbandOS.Core.WizardCommands
+﻿namespace AngbandOS.Core.WizardCommands;
+
+[Serializable]
+internal class CreateNamedArtifactWizardCommand : WizardCommand
 {
-    [Serializable]
-    internal class CreateNamedArtifactWizardCommand : WizardCommand
+    private CreateNamedArtifactWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+
+    public override char Key => 'C';
+
+    public override string HelpDescription => "Create Named Artifact";
+
+    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardObjectCommandsHelpGroup>();
+
+    public override void Execute()
     {
-        private CreateNamedArtifactWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-
-        public override char Key => 'C';
-
-        public override string HelpDescription => "Create Named Artifact";
-
-        public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardObjectCommandsHelpGroup>();
-
-        public override void Execute()
-        {
-            SaveGame.WizCreateNamedArt(SaveGame.CommandArgument);
-        }
+        SaveGame.WizCreateNamedArt(SaveGame.CommandArgument);
     }
 }

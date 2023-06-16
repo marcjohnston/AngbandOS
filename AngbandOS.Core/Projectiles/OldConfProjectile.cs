@@ -6,65 +6,64 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Projection
+namespace AngbandOS.Core.Projection;
+
+[Serializable]
+internal class OldConfProjectile : Projectile
 {
-    [Serializable]
-    internal class OldConfProjectile : Projectile
+    private OldConfProjectile(SaveGame saveGame) : base(saveGame) { }
+
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<GreySplatProjectileGraphic>();
+
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<GreyQuestionAnimation>();
+
+    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
-        private OldConfProjectile(SaveGame saveGame) : base(saveGame) { }
-
-        protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<GreySplatProjectileGraphic>();
-
-        protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<GreyQuestionAnimation>();
-
-        protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
+        MonsterRace rPtr = mPtr.Race;
+        bool seen = mPtr.IsVisible;
+        bool obvious = false;
+        string? note = null;
+        if (seen)
         {
-            MonsterRace rPtr = mPtr.Race;
-            bool seen = mPtr.IsVisible;
-            bool obvious = false;
-            string? note = null;
+            obvious = true;
+        }
+        int doConf = Program.Rng.DiceRoll(3, dam / 2) + 1;
+        if (rPtr.Unique || rPtr.ImmuneConfusion ||
+            rPtr.Level > Program.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+        {
+            if (rPtr.ImmuneConfusion)
+            {
+                if (seen)
+                {
+                    rPtr.Knowledge.Characteristics.ImmuneConfusion = true;
+                }
+            }
+            doConf = 0;
+            note = " is unaffected!";
+            obvious = false;
+        }
+        dam = 0;
+        if (doConf != 0 && !rPtr.ImmuneConfusion &&
+                 !rPtr.BreatheConfusion && !rPtr.BreatheChaos)
+        {
             if (seen)
             {
                 obvious = true;
             }
-            int doConf = Program.Rng.DiceRoll(3, dam / 2) + 1;
-            if (rPtr.Unique || rPtr.ImmuneConfusion ||
-                rPtr.Level > Program.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+            int tmp;
+            if (mPtr.ConfusionLevel != 0)
             {
-                if (rPtr.ImmuneConfusion)
-                {
-                    if (seen)
-                    {
-                        rPtr.Knowledge.Characteristics.ImmuneConfusion = true;
-                    }
-                }
-                doConf = 0;
-                note = " is unaffected!";
-                obvious = false;
+                note = " looks more confused.";
+                tmp = mPtr.ConfusionLevel + (doConf / 2);
             }
-            dam = 0;
-            if (doConf != 0 && !rPtr.ImmuneConfusion &&
-                     !rPtr.BreatheConfusion && !rPtr.BreatheChaos)
+            else
             {
-                if (seen)
-                {
-                    obvious = true;
-                }
-                int tmp;
-                if (mPtr.ConfusionLevel != 0)
-                {
-                    note = " looks more confused.";
-                    tmp = mPtr.ConfusionLevel + (doConf / 2);
-                }
-                else
-                {
-                    note = " looks confused.";
-                    tmp = doConf;
-                }
-                mPtr.ConfusionLevel = tmp < 200 ? tmp : 200;
+                note = " looks confused.";
+                tmp = doConf;
             }
-            ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-            return obvious;
+            mPtr.ConfusionLevel = tmp < 200 ? tmp : 200;
         }
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        return obvious;
     }
 }

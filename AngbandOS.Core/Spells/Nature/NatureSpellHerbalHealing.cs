@@ -6,25 +6,24 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Nature
-{
-    [Serializable]
-    internal class NatureSpellHerbalHealing : Spell
-    {
-        private NatureSpellHerbalHealing(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.Player.RestoreHealth(1000);
-            SaveGame.Player.TimedStun.ResetTimer();
-            SaveGame.Player.TimedBleeding.ResetTimer();
-            SaveGame.Player.TimedPoison.ResetTimer();
-        }
+namespace AngbandOS.Core.Spells.Nature;
 
-        public override string Name => "Herbal Healing";
-        
-        protected override string? Info()
-        {
-            return "heal 1000";
-        }
+[Serializable]
+internal class NatureSpellHerbalHealing : Spell
+{
+    private NatureSpellHerbalHealing(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.Player.RestoreHealth(1000);
+        SaveGame.Player.TimedStun.ResetTimer();
+        SaveGame.Player.TimedBleeding.ResetTimer();
+        SaveGame.Player.TimedPoison.ResetTimer();
+    }
+
+    public override string Name => "Herbal Healing";
+    
+    protected override string? Info()
+    {
+        return "heal 1000";
     }
 }

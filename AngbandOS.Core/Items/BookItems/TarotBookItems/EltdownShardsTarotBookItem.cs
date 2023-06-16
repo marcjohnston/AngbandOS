@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class EltdownShardsTarotBookItem : TarotBookItem
-    {
-        public EltdownShardsTarotBookItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<EltdownShardsTarotBookItemFactory>()) { }
-    }
+internal class EltdownShardsTarotBookItem : TarotBookItem
+{
+    public EltdownShardsTarotBookItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<EltdownShardsTarotBookItemFactory>()) { }
 }

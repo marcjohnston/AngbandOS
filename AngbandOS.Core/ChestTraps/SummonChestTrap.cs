@@ -1,24 +1,23 @@
-﻿namespace AngbandOS.Core.ChestTraps
+﻿namespace AngbandOS.Core.ChestTraps;
+
+internal class SummonChestTrap : BaseChestTrap
 {
-    internal class SummonChestTrap : BaseChestTrap
+    public override void Activate(ActivateChestTrapEventArgs eventArgs)
     {
-        public override void Activate(ActivateChestTrapEventArgs eventArgs)
+        int num = 2 + Program.Rng.DieRoll(3);
+        eventArgs.SaveGame.MsgPrint("You are enveloped in a cloud of smoke!");
+        for (int i = 0; i < num; i++)
         {
-            int num = 2 + Program.Rng.DieRoll(3);
-            eventArgs.SaveGame.MsgPrint("You are enveloped in a cloud of smoke!");
-            for (int i = 0; i < num; i++)
+            if (Program.Rng.DieRoll(100) < eventArgs.SaveGame.Difficulty)
             {
-                if (Program.Rng.DieRoll(100) < eventArgs.SaveGame.Difficulty)
-                {
-                    eventArgs.SaveGame.ActivateHiSummon();
-                }
-                else
-                {
-                    eventArgs.SaveGame.Level.SummonSpecific(eventArgs.Y, eventArgs.X, eventArgs.SaveGame.Difficulty, null);
-                }
+                eventArgs.SaveGame.ActivateHiSummon();
+            }
+            else
+            {
+                eventArgs.SaveGame.Level.SummonSpecific(eventArgs.Y, eventArgs.X, eventArgs.SaveGame.Difficulty, null);
             }
         }
-
-        public override string Description => "(Summoning Runes)";
     }
+
+    public override string Description => "(Summoning Runes)";
 }

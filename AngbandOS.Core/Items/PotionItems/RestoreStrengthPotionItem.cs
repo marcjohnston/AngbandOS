@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class RestoreStrengthPotionItem : PotionItem
-    {
-        public RestoreStrengthPotionItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<RestoreStrengthPotionItemFactory>()) { }
-    }
+internal class RestoreStrengthPotionItem : PotionItem
+{
+    public RestoreStrengthPotionItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<RestoreStrengthPotionItemFactory>()) { }
 }

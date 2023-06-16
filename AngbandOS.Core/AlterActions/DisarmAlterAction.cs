@@ -1,11 +1,10 @@
-﻿namespace AngbandOS.Core.AlterActions
+﻿namespace AngbandOS.Core.AlterActions;
+
+[Serializable]
+internal class DisarmAlterAction : AlterAction
 {
-    [Serializable]
-    internal class DisarmAlterAction : AlterAction
+    public override void Execute(AlterEventArgs alterEventArgs)
     {
-        public override void Execute(AlterEventArgs alterEventArgs)
-        {
-            alterEventArgs.More = alterEventArgs.SaveGame.DisarmTrap(alterEventArgs.Y, alterEventArgs.X);
-        }
+        alterEventArgs.More = alterEventArgs.SaveGame.DisarmTrap(alterEventArgs.Y, alterEventArgs.X);
     }
 }

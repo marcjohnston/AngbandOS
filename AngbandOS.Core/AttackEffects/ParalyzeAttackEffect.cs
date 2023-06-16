@@ -6,43 +6,42 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.AttackEffects
+namespace AngbandOS.Core.AttackEffects;
+
+[Serializable]
+internal class ParalyzeAttackEffect : BaseAttackEffect
 {
-    [Serializable]
-    internal class ParalyzeAttackEffect : BaseAttackEffect
+    public override int Power => 2;
+    public override string Description => "paralyze";
+    public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
-        public override int Power => 2;
-        public override string Description => "paralyze";
-        public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+        if (damage == 0)
         {
-            if (damage == 0)
+            damage = 1;
+        }
+        saveGame.Player.TakeHit(damage, monsterDescription);
+        if (saveGame.Player.HasFreeAction)
+        {
+            saveGame.MsgPrint("You are unaffected!");
+            obvious = true;
+        }
+        else if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
+        {
+            saveGame.MsgPrint("You resist the effects!");
+            obvious = true;
+        }
+        else
+        {
+            if (saveGame.Player.TimedParalysis.AddTimer(3 + Program.Rng.DieRoll(monsterLevel)))
             {
-                damage = 1;
-            }
-            saveGame.Player.TakeHit(damage, monsterDescription);
-            if (saveGame.Player.HasFreeAction)
-            {
-                saveGame.MsgPrint("You are unaffected!");
                 obvious = true;
             }
-            else if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
-            {
-                saveGame.MsgPrint("You resist the effects!");
-                obvious = true;
-            }
-            else
-            {
-                if (saveGame.Player.TimedParalysis.AddTimer(3 + Program.Rng.DieRoll(monsterLevel)))
-                {
-                    obvious = true;
-                }
-            }
-            saveGame.Level.UpdateSmartLearn(monster, new FreeSpellResistantDetection());
         }
-        public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
-        {
-            pt = saveGame.SingletonRepository.Projectiles.Get<OldSleepProjectile>();
-            damage = monster.Race.Level;
-        }
+        saveGame.Level.UpdateSmartLearn(monster, new FreeSpellResistantDetection());
+    }
+    public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
+    {
+        pt = saveGame.SingletonRepository.Projectiles.Get<OldSleepProjectile>();
+        damage = monster.Race.Level;
     }
 }

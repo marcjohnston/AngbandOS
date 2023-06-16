@@ -1,17 +1,16 @@
-﻿namespace AngbandOS.Core.ItemClasses
+﻿namespace AngbandOS.Core.ItemClasses;
+
+[Serializable]
+internal abstract class GlovesArmorItemFactory : ArmourItemFactory
 {
-    [Serializable]
-    internal abstract class GlovesArmorItemFactory : ArmourItemFactory
-    {
-        public GlovesArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
-        public override int PackSort => 26;
-        public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<HandsInventorySlot>();
-        public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Gloves;
-        public override bool HatesFire => true;
-        public override bool HatesAcid => true;
+    public GlovesArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
+    public override int PackSort => 26;
+    public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<HandsInventorySlot>();
+    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Gloves;
+    public override bool HatesFire => true;
+    public override bool HatesAcid => true;
 
-        public override Colour Colour => Colour.BrightBrown;
+    public override Colour Colour => Colour.BrightBrown;
 
-        public override int? SubCategory => null; // No longer being used
-    }
+    public override int? SubCategory => null; // No longer being used
 }

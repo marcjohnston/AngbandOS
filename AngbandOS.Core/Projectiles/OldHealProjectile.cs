@@ -6,62 +6,61 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Projection
+namespace AngbandOS.Core.Projection;
+
+[Serializable]
+internal class OldHealProjectile : Projectile
 {
-    [Serializable]
-    internal class OldHealProjectile : Projectile
+    private OldHealProjectile(SaveGame saveGame) : base(saveGame) { }
+
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<WhiteBulletProjectileGraphic>();
+
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<WhiteSparkleAnimation>();
+
+    protected override bool ProjectileAngersMonster(Monster mPtr)
     {
-        private OldHealProjectile(SaveGame saveGame) : base(saveGame) { }
+        return false;
+    }
 
-        protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<WhiteBulletProjectileGraphic>();
-
-        protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<WhiteSparkleAnimation>();
-
-        protected override bool ProjectileAngersMonster(Monster mPtr)
+    protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
+    {
+        GridTile cPtr = SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX];
+        MonsterRace rPtr = mPtr.Race;
+        bool seen = mPtr.IsVisible;
+        bool obvious = false;
+        if (seen)
         {
-            return false;
+            obvious = true;
         }
-
-        protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
+        mPtr.SleepLevel = 0;
+        mPtr.Health += dam;
+        if (mPtr.Health > mPtr.MaxHealth)
         {
-            GridTile cPtr = SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX];
-            MonsterRace rPtr = mPtr.Race;
-            bool seen = mPtr.IsVisible;
-            bool obvious = false;
-            if (seen)
-            {
-                obvious = true;
-            }
-            mPtr.SleepLevel = 0;
-            mPtr.Health += dam;
-            if (mPtr.Health > mPtr.MaxHealth)
-            {
-                mPtr.Health = mPtr.MaxHealth;
-            }
-            if (SaveGame.TrackedMonsterIndex == cPtr.MonsterIndex)
-            {
-                SaveGame.RedrawHealthFlaggedAction.Set();
-            }
-            string? note = " looks healthier.";
-            dam = 0;
-            ApplyProjectileDamageToMonster(who, mPtr, dam, note);
-            return obvious;
+            mPtr.Health = mPtr.MaxHealth;
         }
-
-        protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
+        if (SaveGame.TrackedMonsterIndex == cPtr.MonsterIndex)
         {
-            bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
-            if (dam > 1600)
-            {
-                dam = 1600;
-            }
-            dam = (dam + r) / (r + 1);
-            if (blind)
-            {
-                SaveGame.MsgPrint("You are hit by something invigorating!");
-            }
-            SaveGame.Player.RestoreHealth(dam);
-            return true;
+            SaveGame.RedrawHealthFlaggedAction.Set();
         }
+        string? note = " looks healthier.";
+        dam = 0;
+        ApplyProjectileDamageToMonster(who, mPtr, dam, note);
+        return obvious;
+    }
+
+    protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
+    {
+        bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        if (dam > 1600)
+        {
+            dam = 1600;
+        }
+        dam = (dam + r) / (r + 1);
+        if (blind)
+        {
+            SaveGame.MsgPrint("You are hit by something invigorating!");
+        }
+        SaveGame.Player.RestoreHealth(dam);
+        return true;
     }
 }

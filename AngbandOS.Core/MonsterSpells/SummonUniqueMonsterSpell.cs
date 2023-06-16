@@ -1,12 +1,11 @@
-﻿namespace AngbandOS.Core.MonsterSpells
+﻿namespace AngbandOS.Core.MonsterSpells;
+
+[Serializable]
+internal class SummonUniqueMonsterSpell : SummonMonsterSpell
 {
-    [Serializable]
-    internal class SummonUniqueMonsterSpell : SummonMonsterSpell
-    {
-        protected override string SummonName(Monster monster) => "special opponents";
+    protected override string SummonName(Monster monster) => "special opponents";
 
-        protected override MonsterSelector? MonsterSelector(Monster monster) => new UniqueMonsterSelector();
+    protected override MonsterSelector? MonsterSelector(Monster monster) => new UniqueMonsterSelector();
 
-        protected override string BlindNonZeroSummonedMessage => "You hear many powerful things appear nearby.";
-    }
+    protected override string BlindNonZeroSummonedMessage => "You hear many powerful things appear nearby.";
 }

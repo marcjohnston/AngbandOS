@@ -6,28 +6,27 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.PassiveMutations
+namespace AngbandOS.Core.Mutations.PassiveMutations;
+
+[Serializable]
+internal class MutationHyperStr : Mutation
 {
-    [Serializable]
-    internal class MutationHyperStr : Mutation
+    public override void Initialize()
     {
-        public override void Initialize()
-        {
-            Frequency = 3;
-            GainMessage = "You turn into a superhuman he-man!";
-            HaveMessage = "You are superhumanly strong (+4 STR).";
-            LoseMessage = "Your muscles revert to normal.";
-            Group = MutationGroup.Strength;
-        }
+        Frequency = 3;
+        GainMessage = "You turn into a superhuman he-man!";
+        HaveMessage = "You are superhumanly strong (+4 STR).";
+        LoseMessage = "Your muscles revert to normal.";
+        Group = MutationGroup.Strength;
+    }
 
-        public override void OnGain(Genome genome)
-        {
-            genome.StrengthBonus += 4;
-        }
+    public override void OnGain(Genome genome)
+    {
+        genome.StrengthBonus += 4;
+    }
 
-        public override void OnLose(Genome genome)
-        {
-            genome.StrengthBonus -= 4;
-        }
+    public override void OnLose(Genome genome)
+    {
+        genome.StrengthBonus -= 4;
     }
 }

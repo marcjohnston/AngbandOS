@@ -6,26 +6,25 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Nature
-{
-    [Serializable]
-    internal class NatureSpellLightningStorm : Spell
-    {
-        private NatureSpellLightningStorm(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            if (!SaveGame.GetDirectionWithAim(out int dir))
-            {
-                return;
-            }
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, 90 + SaveGame.Player.Level, (SaveGame.Player.Level / 12) + 1);
-        }
+namespace AngbandOS.Core.Spells.Nature;
 
-        public override string Name => "Lightning Storm";
-        
-        protected override string? Info()
+[Serializable]
+internal class NatureSpellLightningStorm : Spell
+{
+    private NatureSpellLightningStorm(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
-            return $"dam {90 + SaveGame.Player.Level}";
+            return;
         }
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, 90 + SaveGame.Player.Level, (SaveGame.Player.Level / 12) + 1);
+    }
+
+    public override string Name => "Lightning Storm";
+    
+    protected override string? Info()
+    {
+        return $"dam {90 + SaveGame.Player.Level}";
     }
 }

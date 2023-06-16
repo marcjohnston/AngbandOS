@@ -6,27 +6,26 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.PassiveMutations
+namespace AngbandOS.Core.Mutations.PassiveMutations;
+
+[Serializable]
+internal class MutationElecTouc : Mutation
 {
-    [Serializable]
-    internal class MutationElecTouc : Mutation
+    public override void Initialize()
     {
-        public override void Initialize()
-        {
-            Frequency = 2;
-            GainMessage = "Electricity starts running through you!";
-            HaveMessage = "Electricity is running through your veins.";
-            LoseMessage = "Electricity stops running through you.";
-        }
+        Frequency = 2;
+        GainMessage = "Electricity starts running through you!";
+        HaveMessage = "Electricity is running through your veins.";
+        LoseMessage = "Electricity stops running through you.";
+    }
 
-        public override void OnGain(Genome genome)
-        {
-            genome.ElecHit = true;
-        }
+    public override void OnGain(Genome genome)
+    {
+        genome.ElecHit = true;
+    }
 
-        public override void OnLose(Genome genome)
-        {
-            genome.ElecHit = false;
-        }
+    public override void OnLose(Genome genome)
+    {
+        genome.ElecHit = false;
     }
 }

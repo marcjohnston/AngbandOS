@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class DisenchantmentResistanceRingItem : RingItem
-    {
-        public DisenchantmentResistanceRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<DisenchantmentResistanceRingItemFactory>()) { }
-    }
+internal class DisenchantmentResistanceRingItem : RingItem
+{
+    public DisenchantmentResistanceRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<DisenchantmentResistanceRingItemFactory>()) { }
 }

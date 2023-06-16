@@ -6,22 +6,21 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Sorcery
-{
-    [Serializable]
-    internal class SorcerySpellCharmMonster : Spell
-    {
-        private SorcerySpellCharmMonster(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            if (!SaveGame.GetDirectionWithAim(out int dir))
-            {
-                return;
-            }
-            SaveGame.CharmMonster(dir, SaveGame.Player.Level);
-        }
+namespace AngbandOS.Core.Spells.Sorcery;
 
-        public override string Name => "Charm Monster";
-        
+[Serializable]
+internal class SorcerySpellCharmMonster : Spell
+{
+    private SorcerySpellCharmMonster(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
+        {
+            return;
+        }
+        SaveGame.CharmMonster(dir, SaveGame.Player.Level);
     }
+
+    public override string Name => "Charm Monster";
+    
 }

@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class NecklaceAmuletJeweleryItem : AmuletJeweleryItem
-    {
-        public NecklaceAmuletJeweleryItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<NecklaceAmuletJeweleryItemFactory>()) { }
-    }
+internal class NecklaceAmuletJeweleryItem : AmuletJeweleryItem
+{
+    public NecklaceAmuletJeweleryItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<NecklaceAmuletJeweleryItemFactory>()) { }
 }

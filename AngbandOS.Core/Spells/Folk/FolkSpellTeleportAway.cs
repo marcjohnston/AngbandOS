@@ -6,22 +6,21 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Folk
-{
-    [Serializable]
-    internal class FolkSpellTeleportAway : Spell
-    {
-        private FolkSpellTeleportAway(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            if (!SaveGame.GetDirectionWithAim(out int dir))
-            {
-                return;
-            }
-            SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<TeleportAwayAllProjectile>(), dir, SaveGame.Player.Level);
-        }
+namespace AngbandOS.Core.Spells.Folk;
 
-        public override string Name => "Teleport Away";
-        
+[Serializable]
+internal class FolkSpellTeleportAway : Spell
+{
+    private FolkSpellTeleportAway(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
+        {
+            return;
+        }
+        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<TeleportAwayAllProjectile>(), dir, SaveGame.Player.Level);
     }
+
+    public override string Name => "Teleport Away";
+    
 }

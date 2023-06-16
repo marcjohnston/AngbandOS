@@ -6,59 +6,58 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Talents
+namespace AngbandOS.Core.Talents;
+
+[Serializable]
+internal class TalentPrecognition : Talent
 {
-    [Serializable]
-    internal class TalentPrecognition : Talent
+    public override string Name => "Precognition";
+    public override void Initialise(int characterClass)
     {
-        public override string Name => "Precognition";
-        public override void Initialise(int characterClass)
-        {
-            Level = 1;
-            ManaCost = 1;
-            BaseFailure = 15;
-        }
+        Level = 1;
+        ManaCost = 1;
+        BaseFailure = 15;
+    }
 
-        public override void Use(SaveGame saveGame)
+    public override void Use(SaveGame saveGame)
+    {
+        if (saveGame.Player.Level > 44)
         {
-            if (saveGame.Player.Level > 44)
+            saveGame.Level.WizLight();
+        }
+        else if (saveGame.Player.Level > 19)
+        {
+            saveGame.Level.MapArea();
+        }
+        bool b;
+        if (saveGame.Player.Level < 30)
+        {
+            b = saveGame.DetectMonstersNormal();
+            if (saveGame.Player.Level > 14)
             {
-                saveGame.Level.WizLight();
+                b |= saveGame.DetectMonstersInvis();
             }
-            else if (saveGame.Player.Level > 19)
+            if (saveGame.Player.Level > 4)
             {
-                saveGame.Level.MapArea();
-            }
-            bool b;
-            if (saveGame.Player.Level < 30)
-            {
-                b = saveGame.DetectMonstersNormal();
-                if (saveGame.Player.Level > 14)
-                {
-                    b |= saveGame.DetectMonstersInvis();
-                }
-                if (saveGame.Player.Level > 4)
-                {
-                    b |= saveGame.DetectTraps();
-                }
-            }
-            else
-            {
-                b = saveGame.DetectAll();
-            }
-            if (saveGame.Player.Level > 24 && saveGame.Player.Level < 40)
-            {
-                saveGame.Player.TimedTelepathy.AddTimer(saveGame.Player.Level);
-            }
-            if (!b)
-            {
-                saveGame.MsgPrint("You feel safe.");
+                b |= saveGame.DetectTraps();
             }
         }
+        else
+        {
+            b = saveGame.DetectAll();
+        }
+        if (saveGame.Player.Level > 24 && saveGame.Player.Level < 40)
+        {
+            saveGame.Player.TimedTelepathy.AddTimer(saveGame.Player.Level);
+        }
+        if (!b)
+        {
+            saveGame.MsgPrint("You feel safe.");
+        }
+    }
 
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
+    protected override string Comment(Player player)
+    {
+        return string.Empty;
     }
 }

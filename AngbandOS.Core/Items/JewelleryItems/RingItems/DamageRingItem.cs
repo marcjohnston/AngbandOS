@@ -1,22 +1,21 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class DamageRingItem : RingItem
+internal class DamageRingItem : RingItem
+{
+    public DamageRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<DamageRingItemFactory>()) { }
+    protected override void ApplyMagic(int level, int power, Store? store)
     {
-        public DamageRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<DamageRingItemFactory>()) { }
-        protected override void ApplyMagic(int level, int power, Store? store)
+        if (power == 0 && Program.Rng.RandomLessThan(100) < 50)
         {
-            if (power == 0 && Program.Rng.RandomLessThan(100) < 50)
-            {
-                power = -1;
-            }
-            BonusDamage = 5 + Program.Rng.DieRoll(8) + GetBonusValue(10, level);
-            if (power < 0)
-            {
-                IdentBroken = true;
-                IdentCursed = true;
-                BonusDamage = 0 - BonusDamage;
-            }
+            power = -1;
+        }
+        BonusDamage = 5 + Program.Rng.DieRoll(8) + GetBonusValue(10, level);
+        if (power < 0)
+        {
+            IdentBroken = true;
+            IdentCursed = true;
+            BonusDamage = 0 - BonusDamage;
         }
     }
 }

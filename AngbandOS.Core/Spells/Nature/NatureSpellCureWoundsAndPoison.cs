@@ -6,19 +6,18 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Nature
-{
-    [Serializable]
-    internal class NatureSpellCureWoundsAndPoison : Spell
-    {
-        private NatureSpellCureWoundsAndPoison(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.Player.TimedBleeding.ResetTimer();
-            SaveGame.Player.TimedPoison.ResetTimer();
-        }
+namespace AngbandOS.Core.Spells.Nature;
 
-        public override string Name => "Cure Wounds and Poison";
-        
+[Serializable]
+internal class NatureSpellCureWoundsAndPoison : Spell
+{
+    private NatureSpellCureWoundsAndPoison(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.Player.TimedBleeding.ResetTimer();
+        SaveGame.Player.TimedPoison.ResetTimer();
     }
+
+    public override string Name => "Cure Wounds and Poison";
+    
 }

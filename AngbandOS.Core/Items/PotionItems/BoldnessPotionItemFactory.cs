@@ -1,27 +1,26 @@
-namespace AngbandOS.Core.ItemCategories
+namespace AngbandOS.Core.ItemCategories;
+
+[Serializable]
+internal class BoldnessPotionItemFactory : PotionItemFactory
 {
-    [Serializable]
-    internal class BoldnessPotionItemFactory : PotionItemFactory
+    private BoldnessPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+
+    public override char Character => '!';
+    public override string Name => "Boldness";
+
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
+    public override int Cost => 10;
+    public override int Dd => 1;
+    public override int Ds => 1;
+    public override string FriendlyName => "Boldness";
+    public override int Level => 1;
+    public override int[] Locale => new int[] { 1, 0, 0, 0 };
+    public override int? SubCategory => (int)PotionType.Boldness;
+    public override int Weight => 4;
+    public override bool Quaff(SaveGame saveGame)
     {
-        private BoldnessPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-
-        public override char Character => '!';
-        public override string Name => "Boldness";
-
-        public override int[] Chance => new int[] { 1, 0, 0, 0 };
-        public override int Cost => 10;
-        public override int Dd => 1;
-        public override int Ds => 1;
-        public override string FriendlyName => "Boldness";
-        public override int Level => 1;
-        public override int[] Locale => new int[] { 1, 0, 0, 0 };
-        public override int? SubCategory => (int)PotionType.Boldness;
-        public override int Weight => 4;
-        public override bool Quaff(SaveGame saveGame)
-        {
-            // Boldness stops you being afraid
-            return saveGame.Player.TimedFear.ResetTimer();
-        }
-        public override Item CreateItem() => new BoldnessPotionItem(SaveGame);
+        // Boldness stops you being afraid
+        return saveGame.Player.TimedFear.ResetTimer();
     }
+    public override Item CreateItem() => new BoldnessPotionItem(SaveGame);
 }

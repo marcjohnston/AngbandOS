@@ -1,32 +1,31 @@
-﻿namespace AngbandOS.Core.ArtifactBiases
+﻿namespace AngbandOS.Core.ArtifactBiases;
+
+[Serializable]
+internal class StrengthArtifactBias : ArtifactBias
 {
-    [Serializable]
-    internal class StrengthArtifactBias : ArtifactBias
+    private StrengthArtifactBias(SaveGame saveGame) : base(saveGame) { }
+    public override bool ApplyBonuses(Item item)
     {
-        private StrengthArtifactBias(SaveGame saveGame) : base(saveGame) { }
-        public override bool ApplyBonuses(Item item)
+        if (!item.RandartItemCharacteristics.Str)
         {
-            if (!item.RandartItemCharacteristics.Str)
+            item.RandartItemCharacteristics.Str = true;
+            if (Program.Rng.DieRoll(2) == 1) // 50% chance of being a "free" power
             {
-                item.RandartItemCharacteristics.Str = true;
-                if (Program.Rng.DieRoll(2) == 1) // 50% chance of being a "free" power
-                {
-                    return true;
-                }
+                return true;
             }
-            return false;
         }
-        public override bool ApplyMiscPowers(Item item)
+        return false;
+    }
+    public override bool ApplyMiscPowers(Item item)
+    {
+        if (!item.RandartItemCharacteristics.SustStr)
         {
-            if (!item.RandartItemCharacteristics.SustStr)
+            item.RandartItemCharacteristics.SustStr = true;
+            if (Program.Rng.DieRoll(2) == 1)
             {
-                item.RandartItemCharacteristics.SustStr = true;
-                if (Program.Rng.DieRoll(2) == 1)
-                {
-                    return true;
-                }
+                return true;
             }
-            return false;
         }
+        return false;
     }
 }

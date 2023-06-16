@@ -1,9 +1,8 @@
-﻿namespace AngbandOS.Core.EventArgs
+﻿namespace AngbandOS.Core.EventArgs;
+
+internal class ShowInventoryOptions
 {
-    internal class ShowInventoryOptions
-    {
-        public bool ShowEmptySlotsAsNothing = false;
-        public bool ShowFlavourColumn = false;
-        public bool ShowUsageColumn = false;
-    }
+    public bool ShowEmptySlotsAsNothing = false;
+    public bool ShowFlavourColumn = false;
+    public bool ShowUsageColumn = false;
 }

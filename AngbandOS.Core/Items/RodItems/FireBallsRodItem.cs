@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class FireBallsRodItem : RodItem
-    {
-        public FireBallsRodItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<RodFireBalls>()) { }
-    }
+internal class FireBallsRodItem : RodItem
+{
+    public FireBallsRodItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<RodFireBalls>()) { }
 }

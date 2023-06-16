@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class HighMassLifeBookItem : LifeBookItem
-    {
-        public HighMassLifeBookItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<HighMassLifeBookItemFactory>()) { }
-    }
+internal class HighMassLifeBookItem : LifeBookItem
+{
+    public HighMassLifeBookItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<HighMassLifeBookItemFactory>()) { }
 }

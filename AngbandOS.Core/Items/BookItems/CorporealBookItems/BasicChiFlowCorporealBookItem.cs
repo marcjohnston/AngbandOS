@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class BasicChiFlowCorporealBookItem : CorporealBookItem
-    {
-        public BasicChiFlowCorporealBookItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<BasicChiFlowCorporealBookItemFactory>()) { }
-    }
+internal class BasicChiFlowCorporealBookItem : CorporealBookItem
+{
+    public BasicChiFlowCorporealBookItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<BasicChiFlowCorporealBookItemFactory>()) { }
 }

@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class LeadFilledMaceHaftedWeaponItem : HaftedWeaponItem
-    {
-        public LeadFilledMaceHaftedWeaponItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<HaftedLeadFilledMace>()) { }
-    }
+internal class LeadFilledMaceHaftedWeaponItem : HaftedWeaponItem
+{
+    public LeadFilledMaceHaftedWeaponItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<HaftedLeadFilledMace>()) { }
 }

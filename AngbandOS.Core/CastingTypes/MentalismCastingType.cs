@@ -1,12 +1,11 @@
-namespace AngbandOS.Core.CastingTypes
+namespace AngbandOS.Core.CastingTypes;
+
+[Serializable]
+internal class MentalismCastingType : CastingType
 {
-    [Serializable]
-    internal class MentalismCastingType : CastingType
+    private MentalismCastingType(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
     {
-        private MentalismCastingType(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.DoCmdMentalism();
-        }
+        SaveGame.DoCmdMentalism();
     }
 }

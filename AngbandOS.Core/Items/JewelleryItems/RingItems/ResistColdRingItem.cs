@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class ResistColdRingItem : RingItem
-    {
-        public ResistColdRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ResistColdRingItemFactory>()) { }
-    }
+internal class ResistColdRingItem : RingItem
+{
+    public ResistColdRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ResistColdRingItemFactory>()) { }
 }

@@ -1,26 +1,25 @@
-namespace AngbandOS.Core.ItemCategories
+namespace AngbandOS.Core.ItemCategories;
+
+[Serializable]
+internal class StupidityMushroomFoodItemFactory : MushroomFoodItemFactory
 {
-    [Serializable]
-    internal class StupidityMushroomFoodItemFactory : MushroomFoodItemFactory
+    private StupidityMushroomFoodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+
+    public override char Character => ',';
+    public override string Name => "Stupidity";
+
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
+    public override string FriendlyName => "Stupidity";
+    public override int Level => 15;
+    public override int[] Locale => new int[] { 15, 0, 0, 0 };
+    public override int Pval => 500;
+    public override int? SubCategory => 8;
+    public override int Weight => 1;
+    public override bool Eat()
     {
-        private StupidityMushroomFoodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-
-        public override char Character => ',';
-        public override string Name => "Stupidity";
-
-        public override int[] Chance => new int[] { 1, 0, 0, 0 };
-        public override string FriendlyName => "Stupidity";
-        public override int Level => 15;
-        public override int[] Locale => new int[] { 15, 0, 0, 0 };
-        public override int Pval => 500;
-        public override int? SubCategory => 8;
-        public override int Weight => 1;
-        public override bool Eat()
-        {
-            SaveGame.Player.TakeHit(Program.Rng.DiceRoll(8, 8), "poisonous food.");
-            SaveGame.Player.TryDecreasingAbilityScore(Ability.Intelligence);
-            return true;
-        }
-        public override Item CreateItem() => new StupidityMushroomFoodItem(SaveGame);
+        SaveGame.Player.TakeHit(Program.Rng.DiceRoll(8, 8), "poisonous food.");
+        SaveGame.Player.TryDecreasingAbilityScore(Ability.Intelligence);
+        return true;
     }
+    public override Item CreateItem() => new StupidityMushroomFoodItem(SaveGame);
 }

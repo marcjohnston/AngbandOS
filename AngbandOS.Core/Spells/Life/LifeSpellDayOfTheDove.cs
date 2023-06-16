@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Life
-{
-    [Serializable]
-    internal class LifeSpellDayOfTheDove : Spell
-    {
-        private LifeSpellDayOfTheDove(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.CharmMonsters(SaveGame.Player.Level * 2);
-        }
+namespace AngbandOS.Core.Spells.Life;
 
-        public override string Name => "Day of the Dove";
-        
+[Serializable]
+internal class LifeSpellDayOfTheDove : Spell
+{
+    private LifeSpellDayOfTheDove(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.CharmMonsters(SaveGame.Player.Level * 2);
     }
+
+    public override string Name => "Day of the Dove";
+    
 }

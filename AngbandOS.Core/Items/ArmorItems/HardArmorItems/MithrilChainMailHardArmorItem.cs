@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class MithrilChainMailHardArmorItem : HardArmorItem
-    {
-        public MithrilChainMailHardArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<HardArmorMithrilChainMail>()) { }
-    }
+internal class MithrilChainMailHardArmorItem : HardArmorItem
+{
+    public MithrilChainMailHardArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<HardArmorMithrilChainMail>()) { }
 }

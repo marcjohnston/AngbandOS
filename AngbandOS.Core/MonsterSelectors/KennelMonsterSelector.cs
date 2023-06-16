@@ -1,15 +1,14 @@
-﻿namespace AngbandOS.Core.MonsterSelectors
+﻿namespace AngbandOS.Core.MonsterSelectors;
+
+[Serializable]
+internal class KennelMonsterSelector : MonsterSelector
 {
-    [Serializable]
-    internal class KennelMonsterSelector : MonsterSelector
+    public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
     {
-        public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
+        if (rPtr.Unique)
         {
-            if (rPtr.Unique)
-            {
-                return false;
-            }
-            return rPtr.Character == 'Z' || rPtr.Character == 'C';
+            return false;
         }
+        return rPtr.Character == 'Z' || rPtr.Character == 'C';
     }
 }

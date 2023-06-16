@@ -6,29 +6,28 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Sorcery
-{
-    [Serializable]
-    internal class SorcerySpellHasteSelf : Spell
-    {
-        private SorcerySpellHasteSelf(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            if (SaveGame.Player.TimedHaste.TurnsRemaining == 0)
-            {
-                SaveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(20 + SaveGame.Player.Level) + SaveGame.Player.Level);
-            }
-            else
-            {
-                SaveGame.Player.TimedHaste.AddTimer(Program.Rng.DieRoll(5));
-            }
-        }
+namespace AngbandOS.Core.Spells.Sorcery;
 
-        public override string Name => "Haste Self";
-        
-        protected override string? Info()
+[Serializable]
+internal class SorcerySpellHasteSelf : Spell
+{
+    private SorcerySpellHasteSelf(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        if (SaveGame.Player.TimedHaste.TurnsRemaining == 0)
         {
-            return $"dur {SaveGame.Player.Level}+d{SaveGame.Player.Level + 20}";
+            SaveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(20 + SaveGame.Player.Level) + SaveGame.Player.Level);
         }
+        else
+        {
+            SaveGame.Player.TimedHaste.AddTimer(Program.Rng.DieRoll(5));
+        }
+    }
+
+    public override string Name => "Haste Self";
+    
+    protected override string? Info()
+    {
+        return $"dur {SaveGame.Player.Level}+d{SaveGame.Player.Level + 20}";
     }
 }

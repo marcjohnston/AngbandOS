@@ -1,12 +1,11 @@
-﻿namespace AngbandOS.Core.EventArgs
+﻿namespace AngbandOS.Core.EventArgs;
+
+internal class ProcessWorldEventArgs
 {
-    internal class ProcessWorldEventArgs
+    public bool DisableRegeneration = false;
+    public SaveGame SaveGame { get; }
+    public ProcessWorldEventArgs(SaveGame saveGame)
     {
-        public bool DisableRegeneration = false;
-        public SaveGame SaveGame { get; }
-        public ProcessWorldEventArgs(SaveGame saveGame)
-        {
-            SaveGame = saveGame;
-        }
+        SaveGame = saveGame;
     }
 }

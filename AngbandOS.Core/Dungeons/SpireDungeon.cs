@@ -8,25 +8,24 @@
 
 using static AngbandOS.Core.CelephaisDungeon;
 
-namespace AngbandOS.Core
-{
+namespace AngbandOS.Core;
+
 [Serializable]
-    internal class SpireDungeon : Dungeon
-    {
-        private SpireDungeon(SaveGame saveGame) : base(saveGame) { }
-        public override int BaseOffset => 15;
-        /// <summary>
-        /// Returns true because this dungeon is a tower.
-        /// </summary>
-        public override bool Tower => true;
-        public override int MaxLevel => 20;
-        public override MonsterSelector? Bias => new DemonMonsterSelector();
-        public override string FirstGuardian => "The Emissary";
-        public override string SecondGuardian => "Glaryssa, Succubus Queen";
-        public override int FirstLevel => 1;
-        public override int SecondLevel => 20;
-        public override string Name => "the Demon Spire";
-        public override string Shortname => "Spire";
-        public override string MapSymbol => "d";
-    }
+internal class SpireDungeon : Dungeon
+{
+    private SpireDungeon(SaveGame saveGame) : base(saveGame) { }
+    public override int BaseOffset => 15;
+    /// <summary>
+    /// Returns true because this dungeon is a tower.
+    /// </summary>
+    public override bool Tower => true;
+    public override int MaxLevel => 20;
+    public override MonsterSelector? Bias => new DemonMonsterSelector();
+    public override string FirstGuardian => "The Emissary";
+    public override string SecondGuardian => "Glaryssa, Succubus Queen";
+    public override int FirstLevel => 1;
+    public override int SecondLevel => 20;
+    public override string Name => "the Demon Spire";
+    public override string Shortname => "Spire";
+    public override string MapSymbol => "d";
 }

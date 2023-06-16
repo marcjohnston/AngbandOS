@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class GnomishShovelDiggingWeaponItem : DiggingWeaponItem
-    {
-        public GnomishShovelDiggingWeaponItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<DiggingGnomishShovel>()) { }
-    }
+internal class GnomishShovelDiggingWeaponItem : DiggingWeaponItem
+{
+    public GnomishShovelDiggingWeaponItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<DiggingGnomishShovel>()) { }
 }

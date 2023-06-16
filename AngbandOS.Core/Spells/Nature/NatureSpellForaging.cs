@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Nature
-{
-    [Serializable]
-    internal class NatureSpellForaging : Spell
-    {
-        private NatureSpellForaging(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.Player.SetFood(Constants.PyFoodMax - 1);
-        }
+namespace AngbandOS.Core.Spells.Nature;
 
-        public override string Name => "Foraging";
-        
+[Serializable]
+internal class NatureSpellForaging : Spell
+{
+    private NatureSpellForaging(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.Player.SetFood(Constants.PyFoodMax - 1);
     }
+
+    public override string Name => "Foraging";
+    
 }

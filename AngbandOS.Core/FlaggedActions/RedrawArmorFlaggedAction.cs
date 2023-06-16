@@ -1,16 +1,15 @@
-﻿namespace AngbandOS.Core.FlaggedActions
+﻿namespace AngbandOS.Core.FlaggedActions;
+
+[Serializable]
+internal class RedrawArmorFlaggedAction : FlaggedAction
 {
-    [Serializable]
-    internal class RedrawArmorFlaggedAction : FlaggedAction
+    private const int ColAc = 0;
+    private const int RowAc = 22;
+    public RedrawArmorFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    protected override void Execute()
     {
-        private const int ColAc = 0;
-        private const int RowAc = 22;
-        public RedrawArmorFlaggedAction(SaveGame saveGame) : base(saveGame) { }
-        protected override void Execute()
-        {
-            SaveGame.Screen.Print("Cur AC ", RowAc, ColAc);
-            string tmp = (SaveGame.Player.DisplayedBaseArmourClass + SaveGame.Player.DisplayedArmourClassBonus).ToString().PadLeft(5);
-            SaveGame.Screen.Print(Colour.BrightGreen, tmp, RowAc, ColAc + 7);
-        }
+        SaveGame.Screen.Print("Cur AC ", RowAc, ColAc);
+        string tmp = (SaveGame.Player.DisplayedBaseArmourClass + SaveGame.Player.DisplayedArmourClassBonus).ToString().PadLeft(5);
+        SaveGame.Screen.Print(Colour.BrightGreen, tmp, RowAc, ColAc + 7);
     }
 }

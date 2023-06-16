@@ -6,22 +6,21 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Life
-{
-    [Serializable]
-    internal class LifeSpellPrayer : Spell
-    {
-        private LifeSpellPrayer(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.Player.TimedBlessing.AddTimer(Program.Rng.DieRoll(48) + 48);
-        }
+namespace AngbandOS.Core.Spells.Life;
 
-        public override string Name => "Prayer";
-        
-        protected override string? Info()
-        {
-            return "dur 48+d48";
-        }
+[Serializable]
+internal class LifeSpellPrayer : Spell
+{
+    private LifeSpellPrayer(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.Player.TimedBlessing.AddTimer(Program.Rng.DieRoll(48) + 48);
+    }
+
+    public override string Name => "Prayer";
+    
+    protected override string? Info()
+    {
+        return "dur 48+d48";
     }
 }

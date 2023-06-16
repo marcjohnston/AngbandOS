@@ -6,18 +6,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Death
-{
-    [Serializable]
-    internal class DeathSpellDetectUnlife : Spell
-    {
-        private DeathSpellDetectUnlife(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            SaveGame.DetectMonstersNonliving();
-        }
+namespace AngbandOS.Core.Spells.Death;
 
-        public override string Name => "Detect Unlife";
-        
+[Serializable]
+internal class DeathSpellDetectUnlife : Spell
+{
+    private DeathSpellDetectUnlife(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        SaveGame.DetectMonstersNonliving();
     }
+
+    public override string Name => "Detect Unlife";
+    
 }

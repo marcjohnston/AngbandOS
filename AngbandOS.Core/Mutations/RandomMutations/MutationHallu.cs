@@ -6,32 +6,31 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Mutations.RandomMutations
-{
-    [Serializable]
-    internal class MutationHallu : Mutation
-    {
-        public override void Initialize()
-        {
-            Frequency = 1;
-            GainMessage = "You are afflicted by a hallucinatory insanity!";
-            HaveMessage = "You have a hallucinatory insanity.";
-            LoseMessage = "You are no longer afflicted by a hallucinatory insanity!";
-        }
+namespace AngbandOS.Core.Mutations.RandomMutations;
 
-        public override void OnProcessWorld(SaveGame saveGame)
+[Serializable]
+internal class MutationHallu : Mutation
+{
+    public override void Initialize()
+    {
+        Frequency = 1;
+        GainMessage = "You are afflicted by a hallucinatory insanity!";
+        HaveMessage = "You have a hallucinatory insanity.";
+        LoseMessage = "You are no longer afflicted by a hallucinatory insanity!";
+    }
+
+    public override void OnProcessWorld(SaveGame saveGame)
+    {
+        if (Program.Rng.DieRoll(6400) != 42)
         {
-            if (Program.Rng.DieRoll(6400) != 42)
-            {
-                return;
-            }
-            if (saveGame.Player.HasChaosResistance)
-            {
-                return;
-            }
-            saveGame.Disturb(false);
-            saveGame.PrExtraRedrawAction.Set();
-            saveGame.Player.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(50) + 20);
+            return;
         }
+        if (saveGame.Player.HasChaosResistance)
+        {
+            return;
+        }
+        saveGame.Disturb(false);
+        saveGame.PrExtraRedrawAction.Set();
+        saveGame.Player.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(50) + 20);
     }
 }

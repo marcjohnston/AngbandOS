@@ -8,25 +8,24 @@
 
 using static AngbandOS.Core.CelephaisDungeon;
 
-namespace AngbandOS.Core
-{
+namespace AngbandOS.Core;
+
 [Serializable]
-    internal class ConfluxDungeon : Dungeon
-    {
-        private ConfluxDungeon(SaveGame saveGame) : base(saveGame) { }
-        public override int BaseOffset => 20;
-        /// <summary>
-        /// Returns true because this dungeon is a tower.
-        /// </summary>
-        public override bool Tower => true;
-        public override int MaxLevel => 20;
-        public override MonsterSelector? Bias => new ElementalMonsterSelector();
-        public override string FirstGuardian => "Lasha, Mistress of Water";
-        public override string SecondGuardian => "Grom, Master of Earth";
-        public override int FirstLevel => 15;
-        public override int SecondLevel => 20;
-        public override string Name => "the Conflux of the Elements";
-        public override string Shortname => "Conflux";
-        public override string MapSymbol => "e";
-    }
+internal class ConfluxDungeon : Dungeon
+{
+    private ConfluxDungeon(SaveGame saveGame) : base(saveGame) { }
+    public override int BaseOffset => 20;
+    /// <summary>
+    /// Returns true because this dungeon is a tower.
+    /// </summary>
+    public override bool Tower => true;
+    public override int MaxLevel => 20;
+    public override MonsterSelector? Bias => new ElementalMonsterSelector();
+    public override string FirstGuardian => "Lasha, Mistress of Water";
+    public override string SecondGuardian => "Grom, Master of Earth";
+    public override int FirstLevel => 15;
+    public override int SecondLevel => 20;
+    public override string Name => "the Conflux of the Elements";
+    public override string Shortname => "Conflux";
+    public override string MapSymbol => "e";
 }

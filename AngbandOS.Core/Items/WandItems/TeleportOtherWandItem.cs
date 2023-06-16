@@ -1,12 +1,11 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class TeleportOtherWandItem : WandItem
+internal class TeleportOtherWandItem : WandItem
+{
+    public TeleportOtherWandItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<TeleportOtherWandItemFactory>()) { }
+    protected override void ApplyMagic(int level, int power, Store? store)
     {
-        public TeleportOtherWandItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<TeleportOtherWandItemFactory>()) { }
-        protected override void ApplyMagic(int level, int power, Store? store)
-        {
-            TypeSpecificValue = Program.Rng.DieRoll(5) + 6;
-        }
+        TypeSpecificValue = Program.Rng.DieRoll(5) + 6;
     }
 }

@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class ProbingRodItem : RodItem
-    {
-        public ProbingRodItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<RodProbing>()) { }
-    }
+internal class ProbingRodItem : RodItem
+{
+    public ProbingRodItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<RodProbing>()) { }
 }

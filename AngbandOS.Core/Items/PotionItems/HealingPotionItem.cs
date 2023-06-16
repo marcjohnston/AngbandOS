@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class HealingPotionItem : PotionItem
-    {
-        public HealingPotionItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<HealingPotionItemFactory>()) { }
-    }
+internal class HealingPotionItem : PotionItem
+{
+    public HealingPotionItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<HealingPotionItemFactory>()) { }
 }

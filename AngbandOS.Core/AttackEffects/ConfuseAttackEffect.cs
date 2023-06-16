@@ -6,28 +6,27 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.AttackEffects
+namespace AngbandOS.Core.AttackEffects;
+
+[Serializable]
+internal class ConfuseAttackEffect : BaseAttackEffect
 {
-    [Serializable]
-    internal class ConfuseAttackEffect : BaseAttackEffect
+    public override int Power => 10;
+    public override string Description => "confuse";
+    public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
-        public override int Power => 10;
-        public override string Description => "confuse";
-        public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+        saveGame.Player.TakeHit(damage, monsterDescription);
+        if (!saveGame.Player.HasConfusionResistance)
         {
-            saveGame.Player.TakeHit(damage, monsterDescription);
-            if (!saveGame.Player.HasConfusionResistance)
+            if (saveGame.Player.TimedConfusion.AddTimer(3 + Program.Rng.DieRoll(monsterLevel)))
             {
-                if (saveGame.Player.TimedConfusion.AddTimer(3 + Program.Rng.DieRoll(monsterLevel)))
-                {
-                    obvious = true;
-                }
+                obvious = true;
             }
-            saveGame.Level.UpdateSmartLearn(monster, new ConfSpellResistantDetection());
         }
-        public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
-        {
-            pt = saveGame.SingletonRepository.Projectiles.Get<ConfusionProjectile>();
-        }
+        saveGame.Level.UpdateSmartLearn(monster, new ConfSpellResistantDetection());
+    }
+    public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
+    {
+        pt = saveGame.SingletonRepository.Projectiles.Get<ConfusionProjectile>();
     }
 }

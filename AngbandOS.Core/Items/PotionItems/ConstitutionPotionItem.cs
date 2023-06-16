@@ -1,8 +1,7 @@
-namespace AngbandOS.Core.Items
-{
+namespace AngbandOS.Core.Items;
+
 [Serializable]
-    internal class ConstitutionPotionItem : PotionItem
-    {
-        public ConstitutionPotionItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ConstitutionPotionItemFactory>()) { }
-    }
+internal class ConstitutionPotionItem : PotionItem
+{
+    public ConstitutionPotionItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ConstitutionPotionItemFactory>()) { }
 }

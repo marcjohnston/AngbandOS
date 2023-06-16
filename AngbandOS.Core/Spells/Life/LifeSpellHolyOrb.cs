@@ -6,32 +6,31 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Life
-{
-    [Serializable]
-    internal class LifeSpellHolyOrb : Spell
-    {
-        private LifeSpellHolyOrb(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
-        {
-            if (!SaveGame.GetDirectionWithAim(out int dir))
-            {
-                return;
-            }
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<HolyFireProjectile>(), dir,
-                Program.Rng.DiceRoll(3, 6) + SaveGame.Player.Level + (SaveGame.Player.Level /
-                (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Priest || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)),
-                SaveGame.Player.Level < 30 ? 2 : 3);
-        }
+namespace AngbandOS.Core.Spells.Life;
 
-        public override string Name => "Holy Orb";
-        
-        protected override string? Info()
+[Serializable]
+internal class LifeSpellHolyOrb : Spell
+{
+    private LifeSpellHolyOrb(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
-            int orb = SaveGame.Player.Level / (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Priest || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage
-                          ? 2
-                          : 4);
-            return $" dam 3d6+{SaveGame.Player.Level + orb}";
+            return;
         }
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<HolyFireProjectile>(), dir,
+            Program.Rng.DiceRoll(3, 6) + SaveGame.Player.Level + (SaveGame.Player.Level /
+            (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Priest || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)),
+            SaveGame.Player.Level < 30 ? 2 : 3);
+    }
+
+    public override string Name => "Holy Orb";
+    
+    protected override string? Info()
+    {
+        int orb = SaveGame.Player.Level / (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Priest || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage
+                      ? 2
+                      : 4);
+        return $" dam 3d6+{SaveGame.Player.Level + orb}";
     }
 }

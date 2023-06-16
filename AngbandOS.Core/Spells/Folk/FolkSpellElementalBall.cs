@@ -6,45 +6,44 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Folk
+namespace AngbandOS.Core.Spells.Folk;
+
+[Serializable]
+internal class FolkSpellElementalBall : Spell
 {
-    [Serializable]
-    internal class FolkSpellElementalBall : Spell
+    private FolkSpellElementalBall(SaveGame saveGame) : base(saveGame) { }
+    public override void Cast()
     {
-        private FolkSpellElementalBall(SaveGame saveGame) : base(saveGame) { }
-        public override void Cast()
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
-            if (!SaveGame.GetDirectionWithAim(out int dir))
-            {
-                return;
-            }
-            Projectile dummy;
-            switch (Program.Rng.DieRoll(4))
-            {
-                case 1:
-                    dummy = SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>();
-                    break;
-
-                case 2:
-                    dummy = SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>();
-                    break;
-
-                case 3:
-                    dummy = SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>();
-                    break;
-
-                default:
-                    dummy = SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>();
-                    break;
-            }
-            SaveGame.FireBall(dummy, dir, 75 + SaveGame.Player.Level, 2);
+            return;
         }
-
-        public override string Name => "Teleport Away";
-        
-        protected override string? Info()
+        Projectile dummy;
+        switch (Program.Rng.DieRoll(4))
         {
-            return $"dam {75 + SaveGame.Player.Level}";
+            case 1:
+                dummy = SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>();
+                break;
+
+            case 2:
+                dummy = SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>();
+                break;
+
+            case 3:
+                dummy = SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>();
+                break;
+
+            default:
+                dummy = SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>();
+                break;
         }
+        SaveGame.FireBall(dummy, dir, 75 + SaveGame.Player.Level, 2);
+    }
+
+    public override string Name => "Teleport Away";
+    
+    protected override string? Info()
+    {
+        return $"dam {75 + SaveGame.Player.Level}";
     }
 }

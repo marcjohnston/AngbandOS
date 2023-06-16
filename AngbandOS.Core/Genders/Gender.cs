@@ -1,18 +1,17 @@
-﻿namespace AngbandOS.Core.Genders
-{
-    [Serializable]
-    internal abstract class Gender
-    {
-        protected readonly SaveGame SaveGame;
-        protected Gender(SaveGame saveGame)
-        {
-            SaveGame = saveGame;
-        }
-        public abstract string Title { get; }
-        public abstract string Winner { get; }
+﻿namespace AngbandOS.Core.Genders;
 
-        public virtual bool CanBeRandomlySelected => true;
-        [Obsolete]
-        public abstract int Index { get; }
+[Serializable]
+internal abstract class Gender
+{
+    protected readonly SaveGame SaveGame;
+    protected Gender(SaveGame saveGame)
+    {
+        SaveGame = saveGame;
     }
+    public abstract string Title { get; }
+    public abstract string Winner { get; }
+
+    public virtual bool CanBeRandomlySelected => true;
+    [Obsolete]
+    public abstract int Index { get; }
 }

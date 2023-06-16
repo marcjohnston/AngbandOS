@@ -6,38 +6,37 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Talents
+namespace AngbandOS.Core.Talents;
+
+[Serializable]
+internal class TalentDomination : Talent
 {
-    [Serializable]
-    internal class TalentDomination : Talent
+    public override string Name => "Domination";
+    public override void Initialise(int characterClass)
     {
-        public override string Name => "Domination";
-        public override void Initialise(int characterClass)
-        {
-            Level = 9;
-            ManaCost = 7;
-            BaseFailure = 50;
-        }
+        Level = 9;
+        ManaCost = 7;
+        BaseFailure = 50;
+    }
 
-        public override void Use(SaveGame saveGame)
+    public override void Use(SaveGame saveGame)
+    {
+        if (saveGame.Player.Level < 30)
         {
-            if (saveGame.Player.Level < 30)
+            if (!saveGame.GetDirectionWithAim(out int dir))
             {
-                if (!saveGame.GetDirectionWithAim(out int dir))
-                {
-                    return;
-                }
-                saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<DominationProjectile>(), dir, saveGame.Player.Level, 0);
+                return;
             }
-            else
-            {
-                saveGame.CharmMonsters(saveGame.Player.Level * 2);
-            }
+            saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<DominationProjectile>(), dir, saveGame.Player.Level, 0);
         }
+        else
+        {
+            saveGame.CharmMonsters(saveGame.Player.Level * 2);
+        }
+    }
 
-        protected override string Comment(Player player)
-        {
-            return string.Empty;
-        }
+    protected override string Comment(Player player)
+    {
+        return string.Empty;
     }
 }
