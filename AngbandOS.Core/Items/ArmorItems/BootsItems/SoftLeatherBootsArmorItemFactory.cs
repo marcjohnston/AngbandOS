@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class BootsSoftLeatherBoots : BootsItemClass
+    internal class SoftLeatherBootsArmorItemFactory : BootsArmorItemFactory
     {
-        private BootsSoftLeatherBoots(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private SoftLeatherBootsArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => ']';
         public override Colour Colour => Colour.BrightBrown;
@@ -19,6 +19,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int[] Locale => new int[] { 3, 0, 0, 0 };
         public override int? SubCategory => 2;
         public override int Weight => 20;
-        public override Item CreateItem() => new SoftLeatherBootsItem(SaveGame);
+        public override Item CreateItem() => new SoftLeatherBootsArmorItem(SaveGame);
     }
 }

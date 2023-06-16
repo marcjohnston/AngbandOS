@@ -49,7 +49,7 @@
             {
                 new StockStoreInventoryItem(typeof(ArrowArrowAmmunitionItemFactory), 2),
                 new StockStoreInventoryItem(typeof(BoltBoltAmmunitionItemFactory), 2),
-                new StockStoreInventoryItem(typeof(Cloak), 3),
+                new StockStoreInventoryItem(typeof(ClothCloakCloakArmorItemFactory), 3),
                 new StockStoreInventoryItem(typeof(DiggingPick)),
                 new StockStoreInventoryItem(typeof(DiggingShovel), 2),
                 new StockStoreInventoryItem(typeof(OilFlaskItemFactory), 10),
@@ -78,7 +78,7 @@
                 case ArrowAmmunitionItemFactory _:
                 case BoltAmmunitionItemFactory _:
                 case DiggingItemClass _:
-                case CloakItemClass _:
+                case CloakArmorItemFactory _:
                 case BottleItemFactory _:
                     return item.Value() > 0;
                 default:

@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.Items
 {
 [Serializable]
-    internal abstract class GlovesArmourItem : ArmourItem
+    internal abstract class GlovesArmorItem : ArmourItem
     {
-        public GlovesArmourItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
+        public GlovesArmorItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
         public override int WieldSlot => InventorySlot.Hands;
 
         /// <summary>

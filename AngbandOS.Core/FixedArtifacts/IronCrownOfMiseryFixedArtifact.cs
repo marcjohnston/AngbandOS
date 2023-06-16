@@ -6,7 +6,7 @@ internal class IronCrownOfMiseryFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private IronCrownOfMiseryFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<CrownIron>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<IronCrownArmorItemFactory>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

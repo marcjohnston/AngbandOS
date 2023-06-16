@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class GlovesSetOfGauntlets : GlovesItemClass
+    internal class GauntletGlovesArmorItemFactory : GlovesArmorItemFactory
     {
-        private GlovesSetOfGauntlets(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private GauntletGlovesArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => ']';
         public override Colour Colour => Colour.BrightBrown;
@@ -18,6 +18,6 @@ namespace AngbandOS.Core.ItemCategories
         public override int Level => 10;
         public override int[] Locale => new int[] { 10, 0, 0, 0 };
         public override int Weight => 25;
-        public override Item CreateItem() => new SetOfGauntletsGlovesArmourItem(SaveGame);
+        public override Item CreateItem() => new GauntletGlovesArmourItem(SaveGame);
     }
 }

@@ -1,9 +1,9 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class CrownItemClass : ArmourItemFactory
+    internal abstract class CrownArmorItemFactory : ArmourItemFactory
     {
-        public CrownItemClass(SaveGame saveGame) : base(saveGame) { }
+        public CrownArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
         public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<HeadInventorySlot>();
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Crown;
         public override bool HatesAcid => true;

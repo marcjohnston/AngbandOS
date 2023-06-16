@@ -1,9 +1,9 @@
 ﻿namespace AngbandOS.Core.ItemClasses
 {
     [Serializable]
-    internal abstract class BootsItemClass : ArmourItemFactory
+    internal abstract class BootsArmorItemFactory : ArmourItemFactory
     {
-        public BootsItemClass(SaveGame saveGame) : base(saveGame) { }
+        public BootsArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
         public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<FeetInventorySlot>();
         public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Boots;
         public override bool HatesFire => true;

@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class CrownLead : CrownItemClass
+    internal class LeadCrownArmorItemFactory : CrownArmorItemFactory
     {
-        private CrownLead(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+        private LeadCrownArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
         public override char Character => ']';
         public override Colour Colour => Colour.Black;
