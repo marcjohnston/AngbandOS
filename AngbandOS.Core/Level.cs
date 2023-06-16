@@ -2719,35 +2719,50 @@ namespace AngbandOS.Core
 
         private bool PlaceMonsterOne(int y, int x, MonsterRace rPtr, bool slp, bool charm)
         {
+            // Monster must be provided.
             if (rPtr == null)
             {
                 return false;
             }
+
+            // Monster cannot be the player.
             if (rPtr.Name.StartsWith("Player"))
             {
                 return false;
             }
-            string name = rPtr.Name;
+
+            // Ensure the placement is within the bounds of the level.
             if (!SaveGame.Level.InBounds(y, x))
             {
                 return false;
             }
+
+            // Ensure the grid level is open.
             if (!SaveGame.Level.GridPassableNoCreature(y, x))
             {
                 return false;
             }
+
+            // Do not place monster on a sigil.
             if (SaveGame.Level.Grid[y][x].FeatureType.Category == FloorTileTypeCategory.Sigil)
             {
                 return false;
             }
+
+            // Ensure the monster name is not empty or null.
+            string name = rPtr.Name;
             if (string.IsNullOrEmpty(rPtr.Name))
             {
                 return false;
             }
+
+            // Do not place more than one if the monster is unique and already allocated.
             if (rPtr.Unique && rPtr.CurNum >= rPtr.MaxNum)
             {
                 return false;
             }
+
+            // Check to see if this is a quest guardian.
             if (rPtr.OnlyGuardian || rPtr.Guardian)
             {
                 int qIdx = SaveGame.GetQuestNumber();

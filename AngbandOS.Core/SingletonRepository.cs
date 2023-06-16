@@ -8,6 +8,7 @@ namespace AngbandOS.Core
     /// </summary>
     internal class SingletonRepository
     {
+        public SingletonDictionary<Dungeon> Dungeons;
         public SingletonDictionary<Gender> Genders;
         public SingletonDictionary<BaseBirthStage> BirthStages;
         public SingletonDictionary<Projectile> Projectiles;
@@ -111,6 +112,7 @@ namespace AngbandOS.Core
 
         public void Initialize(SaveGame saveGame)
         {
+            Dungeons = new SingletonDictionary<Dungeon>(saveGame, LoadTypesFromAssembly<Dungeon>(saveGame));
             Genders = new SingletonDictionary<Gender>(saveGame, LoadTypesFromAssembly<Gender>(saveGame));
             BirthStages = new SingletonDictionary<BaseBirthStage>(saveGame, LoadTypesFromAssembly<BaseBirthStage>(saveGame));
             ClassSpells = new SingletonList<ClassSpell>(saveGame, LoadTypesFromAssembly<ClassSpell>(saveGame));
@@ -192,6 +194,13 @@ namespace AngbandOS.Core
                 "There is a sign saying",
                 "Something is written on the staircase",
                 "You find a scroll with the following message");
+
+            // We need to initialize the monster race indexes.
+            for (int i = 0; i < MonsterRaces.Count; i++)
+            {
+                MonsterRace monsterRace = MonsterRaces[i];
+                monsterRace.Index = i;
+            }
         }
     }
 }

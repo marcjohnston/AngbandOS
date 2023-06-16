@@ -417,7 +417,7 @@
         /// <summary>
         /// Returns the index into the monster race array where the monster is.  Set just after construction.
         /// </summary>
-        public int Index;
+        public int Index; // TODO: Needs to be removed.
 
         public int GetCoinType()
         {

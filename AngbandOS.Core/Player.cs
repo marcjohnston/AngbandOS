@@ -864,7 +864,7 @@ namespace AngbandOS.Core
         public int GetScore(SaveGame saveGame)
         {
             int score = (MaxLevelGained - 1) * 100;
-            foreach (Dungeon dungeon in SaveGame.Dungeons)
+            foreach (Dungeon dungeon in SaveGame.SingletonRepository.Dungeons)
             {
                 if (dungeon.RecallLevel > 0)
                 {

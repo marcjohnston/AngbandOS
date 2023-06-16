@@ -94,7 +94,7 @@ namespace AngbandOS.Core
         public DateTime? LastInputReceived = null;
 
         public int CommandRepeat;
-        public readonly Dungeon[] Dungeons;
+//        public readonly Dungeon[] Dungeons;
      //   public readonly Patron[] PatronList;
         public readonly List<Quest> Quests;
         public readonly Island Wilderness = new Island();
@@ -397,7 +397,7 @@ namespace AngbandOS.Core
             Configure(configuration);
 
             Quests = new List<Quest>();
-            Dungeons = Dungeon.NewDungeonList(this);
+     //       Dungeons = Dungeon.NewDungeonList(this);
             InitializeAllocationTables();
         }
 
@@ -1107,7 +1107,7 @@ namespace AngbandOS.Core
                 Level = null;
                 _seedFlavor = Program.Rng.RandomLessThan(int.MaxValue);
                 CreateWorld();
-                foreach (var dungeon in Dungeons)
+                foreach (var dungeon in SingletonRepository.Dungeons)
                 {
                     dungeon.RandomiseOffset();
                 }
@@ -1118,7 +1118,7 @@ namespace AngbandOS.Core
                 {
                     CurTown = SingletonRepository.Towns[Program.Rng.RandomLessThan(SingletonRepository.Towns.Count)];
                 }
-                CurDungeon = Dungeons[CurTown.Index];
+                CurDungeon = SingletonRepository.Dungeons[CurTown.Index];
                 RecallDungeon = CurDungeon;
                 RecallDungeon.RecallLevel = 1;
                 DungeonDifficulty = 0;
@@ -1448,20 +1448,20 @@ namespace AngbandOS.Core
             Screen.Print(Colour.Purple, "+------------+", 14, 1);
             for (y = 0; y < DungeonCount; y++)
             {
-                Dungeon dungeon = Dungeons[y];
+                Dungeon dungeon = SingletonRepository.Dungeons[y];
                 int activeQuestCount = dungeon.ActiveQuestCount();
-                string depth = Dungeons[y].KnownDepth ? $"{dungeon.MaxLevel}" : "?";
-                string difficulty = Dungeons[y].KnownOffset ? $"{dungeon.Offset}" : "?";
+                string depth = SingletonRepository.Dungeons[y].KnownDepth ? $"{dungeon.MaxLevel}" : "?";
+                string difficulty = SingletonRepository.Dungeons[y].KnownOffset ? $"{dungeon.Offset}" : "?";
                 string buffer;
                 if (dungeon.Visited)
                 {
                     buffer = y < SingletonRepository.Towns.Count
-                        ? $"{Dungeons[y].MapSymbol} = {SingletonRepository.Towns[y].Name} (L:{depth}, D:{difficulty}, Q:{activeQuestCount})"
-                        : $"{Dungeons[y].MapSymbol} = {Dungeons[y].Name} (L:{depth}, D:{difficulty}, Q:{activeQuestCount})";
+                        ? $"{SingletonRepository.Dungeons[y].MapSymbol} = {SingletonRepository.Towns[y].Name} (L:{depth}, D:{difficulty}, Q:{activeQuestCount})"
+                        : $"{SingletonRepository.Dungeons[y].MapSymbol} = {SingletonRepository.Dungeons[y].Name} (L:{depth}, D:{difficulty}, Q:{activeQuestCount})";
                 }
                 else
                 {
-                    buffer = $"? = {Dungeons[y].Name} (L:{depth}, D:{difficulty}, Q:{activeQuestCount})";
+                    buffer = $"? = {SingletonRepository.Dungeons[y].Name} (L:{depth}, D:{difficulty}, Q:{activeQuestCount})";
                 }
                 Colour keyAttr = Colour.Brown;
                 if (y < SingletonRepository.Towns.Count)
@@ -2210,17 +2210,17 @@ namespace AngbandOS.Core
             }
             for (i = 0; i < DungeonCount; i++)
             {
-                Dungeons[i].X = 0;
-                Dungeons[i].Y = 0;
+                SingletonRepository.Dungeons[i].X = 0;
+                SingletonRepository.Dungeons[i].Y = 0;
             }
             for (i = 0; i < DungeonCount; i++)
             {
-                Dungeons[i].Visited = false;
-                Dungeons[i].KnownDepth = false;
-                Dungeons[i].KnownOffset = false;
+                SingletonRepository.Dungeons[i].Visited = false;
+                SingletonRepository.Dungeons[i].KnownDepth = false;
+                SingletonRepository.Dungeons[i].KnownOffset = false;
                 if (i < SingletonRepository.Towns.Count)
                 {
-                    Dungeons[i].Visited = true;
+                    SingletonRepository.Dungeons[i].Visited = true;
                     j = 0;
                     while (j == 0)
                     {
@@ -2251,15 +2251,15 @@ namespace AngbandOS.Core
                         }
                     }
                 }
-                Wilderness[y][x].Dungeon = Dungeons[i];
+                Wilderness[y][x].Dungeon = SingletonRepository.Dungeons[i];
                 if (i < SingletonRepository.Towns.Count)
                 {
                     Wilderness[y][x].Town = SingletonRepository.Towns[i];
                     SingletonRepository.Towns[i].X = x;
                     SingletonRepository.Towns[i].Y = y;
                 }
-                Dungeons[i].X = x;
-                Dungeons[i].Y = y;
+                SingletonRepository.Dungeons[i].X = x;
+                SingletonRepository.Dungeons[i].Y = y;
             }
             for (i = 0; i < SingletonRepository.Towns.Count - 1; i++)
             {
@@ -7784,14 +7784,14 @@ namespace AngbandOS.Core
             for (int i = 0; i < DungeonCount; i++)
             {
                 // Add a rumour for each dungeon we don't know the depth of
-                if (!Dungeons[i].KnownDepth)
+                if (!SingletonRepository.Dungeons[i].KnownDepth)
                 {
                     rumorType[maxRumor] = 'd';
                     rumorIndex[maxRumor] = i;
                     maxRumor++;
                 }
                 //Add a rumour for each dungeon we don't know the offset of
-                if (!Dungeons[i].KnownOffset)
+                if (!SingletonRepository.Dungeons[i].KnownOffset)
                 {
                     rumorType[maxRumor] = 'o';
                     rumorIndex[maxRumor] = i;
@@ -7824,7 +7824,7 @@ namespace AngbandOS.Core
             else if (type == 'd')
             {
                 // The rumour describes a dungeon depth
-                Dungeon d = Dungeons[index];
+                Dungeon d = SingletonRepository.Dungeons[index];
                 rumor = d.Tower
                     ? $"They say that {d.Name} has {d.MaxLevel} floors."
                     : $"They say that {d.Name} has {d.MaxLevel} levels.";
@@ -7833,7 +7833,7 @@ namespace AngbandOS.Core
             else
             {
                 // The rumour describes a dungeon difficulty
-                Dungeon d = Dungeons[index];
+                Dungeon d = SingletonRepository.Dungeons[index];
                 rumor = $"They say that {d.Name} has a relative difficulty of {d.Offset}.";
                 d.KnownOffset = true;
             }
@@ -19157,6 +19157,10 @@ namespace AngbandOS.Core
             return 0;
         }
 
+        /// <summary>
+        /// Returns the quest number for the current dungeon and the current level.
+        /// </summary>
+        /// <returns></returns>
         public int GetQuestNumber()
         {
             for (int i = 0; i < Quests.Count; i++)
@@ -19198,22 +19202,22 @@ namespace AngbandOS.Core
             }
             for (int i = 0; i < DungeonCount; i++)
             {
-                if (Dungeons[i].FirstGuardian != "")
+                if (SingletonRepository.Dungeons[i].FirstGuardian != "")
                 {
-                    Quests[index].Level = Dungeons[i].FirstLevel;
-                    Quests[index].RIdx = GetMonsterIndexFromName(Dungeons[i].FirstGuardian);
+                    Quests[index].Level = SingletonRepository.Dungeons[i].FirstLevel;
+                    Quests[index].RIdx = GetMonsterIndexFromName(SingletonRepository.Dungeons[i].FirstGuardian);
                     SingletonRepository.MonsterRaces[Quests[index].RIdx].OnlyGuardian = true;
-                    Quests[index].Dungeon = Dungeons[i];
+                    Quests[index].Dungeon = SingletonRepository.Dungeons[i];
                     Quests[index].ToKill = 1;
                     Quests[index].Killed = 0;
                     index++;
                 }
-                if (Dungeons[i].SecondGuardian != "")
+                if (SingletonRepository.Dungeons[i].SecondGuardian != "")
                 {
-                    Quests[index].Level = Dungeons[i].SecondLevel;
-                    Quests[index].RIdx = GetMonsterIndexFromName(Dungeons[i].SecondGuardian);
+                    Quests[index].Level = SingletonRepository.Dungeons[i].SecondLevel;
+                    Quests[index].RIdx = GetMonsterIndexFromName(SingletonRepository.Dungeons[i].SecondGuardian);
                     SingletonRepository.MonsterRaces[Quests[index].RIdx].OnlyGuardian = true;
-                    Quests[index].Dungeon = Dungeons[i];
+                    Quests[index].Dungeon = SingletonRepository.Dungeons[i];
                     Quests[index].ToKill = 1;
                     Quests[index].Killed = 0;
                     index++;
@@ -19246,17 +19250,17 @@ namespace AngbandOS.Core
                     SingletonRepository.MonsterRaces[Quests[index].RIdx].OnlyGuardian = true;
                 }
                 j = Program.Rng.RandomBetween(1, DungeonCount) - 1;
-                while (Quests[index].Level <= Dungeons[j].Offset ||
+                while (Quests[index].Level <= SingletonRepository.Dungeons[j].Offset ||
                        Quests[index].Level >
-                       Dungeons[j].MaxLevel + Dungeons[j].Offset ||
-                       Quests[index].Level == Dungeons[j].FirstLevel +
-                       Dungeons[j].Offset || Quests[index].Level ==
-                       Dungeons[j].SecondLevel + Dungeons[j].Offset)
+                       SingletonRepository.Dungeons[j].MaxLevel + SingletonRepository.Dungeons[j].Offset ||
+                       Quests[index].Level == SingletonRepository.Dungeons[j].FirstLevel +
+                       SingletonRepository.Dungeons[j].Offset || Quests[index].Level ==
+                       SingletonRepository.Dungeons[j].SecondLevel + SingletonRepository.Dungeons[j].Offset)
                 {
                     j = Program.Rng.RandomBetween(1, DungeonCount) - 1;
                 }
-                Quests[index].Dungeon = Dungeons[j];
-                Quests[index].Level -= Dungeons[j].Offset;
+                Quests[index].Dungeon = SingletonRepository.Dungeons[j];
+                Quests[index].Level -= SingletonRepository.Dungeons[j].Offset;
                 Quests[index].ToKill = GetNumberMonster(index);
                 Quests[index].Killed = 0;
                 index++;

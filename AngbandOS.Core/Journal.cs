@@ -833,7 +833,7 @@ namespace AngbandOS.Core
             int row = 3;
             for (int i = 0; i < SaveGame.DungeonCount; i++)
             {
-                int firstQuest = SaveGame.Dungeons[i].FirstQuest();
+                int firstQuest = SaveGame.SingletonRepository.Dungeons[i].FirstQuest();
                 if (firstQuest != -1)
                 {
                     string line = SaveGame.Quests[firstQuest].Describe();
@@ -861,7 +861,7 @@ namespace AngbandOS.Core
             SaveGame.Screen.Print(Colour.Blue, $"Your home town is {recallTown}.", 4, 0);
             if (SaveGame.Player.TownWithHouse > -1)
             {
-                recallTown = "your house in " + SaveGame.Dungeons[SaveGame.Player.TownWithHouse].Shortname;
+                recallTown = "your house in " + SaveGame.SingletonRepository.Dungeons[SaveGame.Player.TownWithHouse].Shortname;
             }
             SaveGame.Screen.Print(Colour.Brown,
                 SaveGame.CurrentDepth == 0
