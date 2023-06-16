@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class GlovesSetOfGauntlets : GlovesItemClass
+    internal class GlovesSetOfGauntlets : GlovesArmorItemFactory
     {
         private GlovesSetOfGauntlets(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 

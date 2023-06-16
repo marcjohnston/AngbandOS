@@ -6,7 +6,7 @@ internal class SetOfCestiOfCombatFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private SetOfCestiOfCombatFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<GlovesSetOfCesti>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<CestiGlovesArmorItemFactory>();
     }
 
     // Cesti shoot arrows

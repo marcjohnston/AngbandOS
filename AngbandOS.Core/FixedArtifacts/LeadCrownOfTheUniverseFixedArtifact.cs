@@ -6,7 +6,7 @@ internal class LeadCrownOfTheUniverseFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private LeadCrownOfTheUniverseFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<CrownLead>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<LeadCrownArmorItemFactory>();
     }
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;

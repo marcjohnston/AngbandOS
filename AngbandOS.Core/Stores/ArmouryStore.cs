@@ -42,10 +42,10 @@
         {
             return new[]
             {
-                new StockStoreInventoryItem(typeof(BootsHardLeatherBoots), 4),
-                new StockStoreInventoryItem(typeof(BootsSoftLeatherBoots), 2),
-                new StockStoreInventoryItem(typeof(GlovesSetOfGauntlets), 2),
-                new StockStoreInventoryItem(typeof(GlovesSetOfLeatherGloves), 3),
+                new StockStoreInventoryItem(typeof(HardLeatherBootsArmorItemFactory), 4),
+                new StockStoreInventoryItem(typeof(SoftLeatherBootsArmorItemFactory), 2),
+                new StockStoreInventoryItem(typeof(GauntletGlovesArmorItemFactory), 2),
+                new StockStoreInventoryItem(typeof(LeatherGlovesArmorItemFactory), 3),
                 new StockStoreInventoryItem(typeof(HardArmorAugmentedChainMail)),
                 new StockStoreInventoryItem(typeof(HardArmorBarChainMail)),
                 new StockStoreInventoryItem(typeof(HardArmorChainMail), 4),
@@ -70,12 +70,12 @@
         {
             switch (item.Factory)
             {
-                case BootsItemClass _:
-                case GlovesItemClass _:
-                case CrownItemClass _:
+                case BootsArmorItemFactory _:
+                case GlovesArmorItemFactory _:
+                case CrownArmorItemFactory _:
                 case HelmItemClass _:
                 case ShieldItemClass _:
-                case CloakItemClass _:
+                case CloakArmorItemFactory _:
                 case SoftArmorItemClass _:
                 case HardArmorItemClass _:
                 case DragonScaleMailArmorItemFactory _:

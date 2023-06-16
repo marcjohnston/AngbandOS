@@ -6,7 +6,7 @@ internal class CloakDarknessFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private CloakDarknessFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<Cloak>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<ClothCloakCloakArmorItemFactory>();
     }
 
     // Darkness sends monsters to sleep

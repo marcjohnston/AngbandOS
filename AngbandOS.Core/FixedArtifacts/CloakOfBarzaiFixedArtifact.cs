@@ -6,7 +6,7 @@ internal class CloakOfBarzaiFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private CloakOfBarzaiFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<Cloak>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<ClothCloakCloakArmorItemFactory>();
     }
 
     // Cloak of Barzai gives resistances

@@ -6,7 +6,7 @@ internal class CloakOfTheSwashbucklerFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private CloakOfTheSwashbucklerFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<Cloak>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<ClothCloakCloakArmorItemFactory>();
     }
 
     // Swashbuckler recharges items

@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class CloakShadow : CloakItemClass
+    internal class CloakShadow : CloakArmorItemFactory
     {
         private CloakShadow(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 

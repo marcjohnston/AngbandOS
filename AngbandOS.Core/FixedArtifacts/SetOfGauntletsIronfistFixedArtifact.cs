@@ -6,7 +6,7 @@ internal class SetOfGauntletsIronfistFixedArtifact : FixedArtifact, IActivatible
     private readonly ItemFactory _baseItemCategory;
     private SetOfGauntletsIronfistFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<GlovesSetOfGauntlets>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<GauntletGlovesArmorItemFactory>();
     }
 
     // Iron Fist shoots fire bolts

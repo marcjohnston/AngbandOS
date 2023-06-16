@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class CrownLead : CrownItemClass
+    internal class CrownLead : CrownArmorItemFactory
     {
         private CrownLead(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 

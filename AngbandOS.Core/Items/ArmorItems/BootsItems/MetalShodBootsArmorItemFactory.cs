@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.ItemCategories
 {
     [Serializable]
-    internal class BootsMetalShodBoots : BootsItemClass
+    internal class BootsMetalShodBoots : BootsItemFactory
     {
         private BootsMetalShodBoots(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 

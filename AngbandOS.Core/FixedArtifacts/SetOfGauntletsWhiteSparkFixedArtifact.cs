@@ -6,7 +6,7 @@ internal class SetOfGauntletsWhiteSparkFixedArtifact : FixedArtifact, IActivatib
     private readonly ItemFactory _baseItemCategory;
     private SetOfGauntletsWhiteSparkFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<GlovesSetOfGauntlets>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<GauntletGlovesArmorItemFactory>();
     }
 
     // White Spark shoot lightning bolts
