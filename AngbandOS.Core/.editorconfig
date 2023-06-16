@@ -1,0 +1,13 @@
+# All files
+[*]
+tab_width = 4
+indent_size = 4
+end_of_line = crlf
+file_header_template = AngbandOS: 2022 Marc Johnston\n\nThis game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.\nWilson, Robert A. Koeneke This software may be copied and distributed for educational, research,\nand not for profit purposes provided that this copyright and statement are included in all such\ncopies. Other copyrights may also apply.”
+spelling_exclusion_path = \exclusion.dic
+spelling_use_default_exclusion_dictionary = false
+
+[*.cs]
+csharp_using_directive_placement = outside_namespace:silent
+csharp_style_namespace_declarations = block_scoped:silent
+
