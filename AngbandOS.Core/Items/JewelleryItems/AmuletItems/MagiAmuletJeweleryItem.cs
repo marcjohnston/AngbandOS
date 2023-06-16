@@ -8,7 +8,7 @@ namespace AngbandOS.Core.Items
         protected override void ApplyMagic(int level, int power, Store? store)
         {
             TypeSpecificValue = Program.Rng.DieRoll(5) + GetBonusValue(5, level);
-            BonusArmourClass = Program.Rng.DieRoll(5) + GetBonusValue(5, level);
+            BonusArmorClass = Program.Rng.DieRoll(5) + GetBonusValue(5, level);
             if (Program.Rng.DieRoll(3) == 1)
             {
                 RandartItemCharacteristics.SlowDigest = true;

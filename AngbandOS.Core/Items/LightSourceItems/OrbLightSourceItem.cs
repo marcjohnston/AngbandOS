@@ -10,9 +10,9 @@ namespace AngbandOS.Core.Items
         /// </summary>
         /// <param name="oPtr"></param>
         /// <returns></returns>
-        public override int CalcTorch()
+        public override int CalculateTorch()
         {
-            return base.CalcTorch() + 2;
+            return base.CalculateTorch() + 2;
         }
         public override bool IdentityCanBeSensed => true;
     }

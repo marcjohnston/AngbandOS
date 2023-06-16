@@ -8,7 +8,7 @@ namespace AngbandOS.Core.Items
         {
             IdentBroken = true;
             IdentCursed = true;
-            BonusArmourClass = 0 - (5 + GetBonusValue(10, level));
+            BonusArmorClass = 0 - (5 + GetBonusValue(10, level));
             TypeSpecificValue = 0 - (1 + GetBonusValue(5, level));
         }
     }

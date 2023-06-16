@@ -1221,7 +1221,7 @@ namespace AngbandOS.Core.Stores
             {
                 return false;
             }
-            if (oPtr.BonusArmourClass != jPtr.BonusArmourClass)
+            if (oPtr.BonusArmorClass != jPtr.BonusArmorClass)
             {
                 return false;
             }
@@ -1249,7 +1249,7 @@ namespace AngbandOS.Core.Stores
             {
                 return false;
             }
-            if (oPtr.BaseArmourClass != jPtr.BaseArmourClass)
+            if (oPtr.BaseArmorClass != jPtr.BaseArmorClass)
             {
                 return false;
             }

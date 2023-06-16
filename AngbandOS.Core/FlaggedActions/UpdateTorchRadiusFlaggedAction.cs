@@ -18,7 +18,7 @@
                     Item? oPtr = SaveGame.GetInventoryItem(i);
                     if (oPtr != null)
                     {
-                        SaveGame.Player.LightLevel += oPtr.CalcTorch();
+                        SaveGame.Player.LightLevel += oPtr.CalculateTorch();
                     }
                 }
             }

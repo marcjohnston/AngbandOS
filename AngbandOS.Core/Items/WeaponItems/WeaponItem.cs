@@ -5,14 +5,14 @@ namespace AngbandOS.Core.Items
     {
         public WeaponItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
         public override bool CanApplyBlowsBonus => true;
-        public override bool CanApplyBonusArmourClassMiscPower => true;
+        public override bool CanApplyBonusArmorClassMiscPower => true;
         public override int? GetBonusRealValue(int value)
         {
             if (BonusToHit + BonusDamage < 0)
                 return null;
 
             int bonusValue = 0;
-            bonusValue += (BonusToHit + BonusDamage + BonusArmourClass) * 100;
+            bonusValue += (BonusToHit + BonusDamage + BonusArmorClass) * 100;
             if (DamageDice > Factory.Dd && DamageDiceSides == Factory.Ds)
             {
                 bonusValue += (DamageDice - Factory.Dd) * DamageDiceSides * 100;
@@ -106,20 +106,20 @@ namespace AngbandOS.Core.Items
             {
                 s += $" ({GetSignedValue(BonusToHit)},{GetSignedValue(BonusDamage)})";
 
-                if (BaseArmourClass != 0)
+                if (BaseArmorClass != 0)
                 {
                     // Add base armour class for all types of armour and when the base armour class is greater than zero.
-                    s += $" [{BaseArmourClass},{GetSignedValue(BonusArmourClass)}]";
+                    s += $" [{BaseArmorClass},{GetSignedValue(BonusArmorClass)}]";
                 }
-                else if (BonusArmourClass != 0)
+                else if (BonusArmorClass != 0)
                 {
                     // This is not armour, only show bonus armour class, if it is not zero and we know about it.
-                    s += $" [{GetSignedValue(BonusArmourClass)}]";
+                    s += $" [{GetSignedValue(BonusArmorClass)}]";
                 }
             }
-            else if (BaseArmourClass != 0)
+            else if (BaseArmorClass != 0)
             {
-                s += $" [{BaseArmourClass}]";
+                s += $" [{BaseArmorClass}]";
             }
             return s;
         }

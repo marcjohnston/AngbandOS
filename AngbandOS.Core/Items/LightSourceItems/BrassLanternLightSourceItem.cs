@@ -10,9 +10,9 @@ namespace AngbandOS.Core.Items
         /// </summary>
         /// <param name="oPtr"></param>
         /// <returns></returns>
-        public override int CalcTorch()
+        public override int CalculateTorch()
         {
-            return base.CalcTorch() + TypeSpecificValue > 0 ? 2 : 0;
+            return base.CalculateTorch() + TypeSpecificValue > 0 ? 2 : 0;
         }
 
         protected override void ApplyMagic(int level, int power, Store? store)

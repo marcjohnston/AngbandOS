@@ -102,20 +102,20 @@ namespace AngbandOS.Core.Items
             {
                 basenm += $" ({GetSignedValue(BonusToHit)},{GetSignedValue(BonusDamage)})";
 
-                if (BaseArmourClass != 0)
+                if (BaseArmorClass != 0)
                 {
                     // Add base armour class for all types of armour and when the base armour class is greater than zero.
-                    basenm += $" [{BaseArmourClass},{GetSignedValue(BonusArmourClass)}]";
+                    basenm += $" [{BaseArmorClass},{GetSignedValue(BonusArmorClass)}]";
                 }
-                else if (BonusArmourClass != 0)
+                else if (BonusArmorClass != 0)
                 {
                     // This is not armour, only show bonus armour class, if it is not zero and we know about it.
-                    basenm += $" [{GetSignedValue(BonusArmourClass)}]";
+                    basenm += $" [{GetSignedValue(BonusArmorClass)}]";
                 }
             }
-            else if (BaseArmourClass != 0)
+            else if (BaseArmorClass != 0)
             {
-                basenm += $" [{BaseArmourClass}]";
+                basenm += $" [{BaseArmorClass}]";
             }
             return basenm;
         }

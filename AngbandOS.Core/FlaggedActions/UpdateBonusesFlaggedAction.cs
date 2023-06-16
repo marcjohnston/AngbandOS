@@ -587,12 +587,12 @@ namespace AngbandOS.Core.FlaggedActions
                         {
                             SaveGame.Player.HasSustainCharisma = true;
                         }
-                        SaveGame.Player.BaseArmourClass += oPtr.BaseArmourClass;
-                        SaveGame.Player.DisplayedBaseArmourClass += oPtr.BaseArmourClass;
-                        SaveGame.Player.ArmourClassBonus += oPtr.BonusArmourClass;
+                        SaveGame.Player.BaseArmourClass += oPtr.BaseArmorClass;
+                        SaveGame.Player.DisplayedBaseArmourClass += oPtr.BaseArmorClass;
+                        SaveGame.Player.ArmourClassBonus += oPtr.BonusArmorClass;
                         if (oPtr.IsKnown())
                         {
-                            SaveGame.Player.DisplayedArmourClassBonus += oPtr.BonusArmourClass;
+                            SaveGame.Player.DisplayedArmourClassBonus += oPtr.BonusArmorClass;
                         }
                         if (inventorySlot.IsWeapon)
                         {

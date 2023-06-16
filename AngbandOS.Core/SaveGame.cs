@@ -3654,7 +3654,7 @@ namespace AngbandOS.Core
             {
                 return false;
             }
-            if (oPtr.BonusToHit <= 0 && oPtr.BonusDamage <= 0 && oPtr.BonusArmourClass <= 0)
+            if (oPtr.BonusToHit <= 0 && oPtr.BonusDamage <= 0 && oPtr.BonusArmorClass <= 0)
             {
                 return false;
             }
@@ -3682,13 +3682,13 @@ namespace AngbandOS.Core
             {
                 oPtr.BonusDamage--;
             }
-            if (oPtr.BonusArmourClass > 0)
+            if (oPtr.BonusArmorClass > 0)
             {
-                oPtr.BonusArmourClass--;
+                oPtr.BonusArmorClass--;
             }
-            if (oPtr.BonusArmourClass > 5 && Program.Rng.RandomLessThan(100) < 20)
+            if (oPtr.BonusArmorClass > 5 && Program.Rng.RandomLessThan(100) < 20)
             {
-                oPtr.BonusArmourClass--;
+                oPtr.BonusArmorClass--;
             }
             s = oPtr.Count != 1 ? "were" : "was";
             MsgPrint($"Your {oName} ({i.IndexToLabel()}) {s} disenchanted!");
@@ -3855,14 +3855,14 @@ namespace AngbandOS.Core
                 {
                     oPtr.BonusDamage--;
                 }
-                if (oPtr.BonusArmourClass > 0)
+                if (oPtr.BonusArmorClass > 0)
                 {
-                    oPtr.BonusArmourClass--;
+                    oPtr.BonusArmorClass--;
                     disHappened = true;
                 }
-                if (oPtr.BonusArmourClass > 5 && Program.Rng.RandomLessThan(100) < 33)
+                if (oPtr.BonusArmorClass > 5 && Program.Rng.RandomLessThan(100) < 33)
                 {
-                    oPtr.BonusArmourClass--;
+                    oPtr.BonusArmorClass--;
                 }
                 if (disHappened)
                 {
@@ -4386,7 +4386,7 @@ namespace AngbandOS.Core
                             tv == ItemTypeEnum.Potion || tv == ItemTypeEnum.LifeBook || tv == ItemTypeEnum.SorceryBook ||
                             tv == ItemTypeEnum.NatureBook || tv == ItemTypeEnum.ChaosBook || tv == ItemTypeEnum.DeathBook ||
                             tv == ItemTypeEnum.CorporealBook || tv == ItemTypeEnum.TarotBook || tv == ItemTypeEnum.FolkBook ||
-                            oPtr.BonusArmourClass > 0 || oPtr.BonusToHit + oPtr.BonusDamage > 0)
+                            oPtr.BonusArmorClass > 0 || oPtr.BonusToHit + oPtr.BonusDamage > 0)
                         {
                             oPtr.Marked = true;
                             Level.RedrawSingleLocation(y, x);
@@ -4969,23 +4969,23 @@ namespace AngbandOS.Core
                 }
                 if ((eflag & Constants.EnchToac) != 0)
                 {
-                    if (oPtr.BonusArmourClass < 0)
+                    if (oPtr.BonusArmorClass < 0)
                     {
                         chance = 0;
                     }
-                    else if (oPtr.BonusArmourClass > 15)
+                    else if (oPtr.BonusArmorClass > 15)
                     {
                         chance = 1000;
                     }
                     else
                     {
-                        chance = EnchantTable[oPtr.BonusArmourClass];
+                        chance = EnchantTable[oPtr.BonusArmorClass];
                     }
                     if (Program.Rng.DieRoll(1000) > chance && (!a || Program.Rng.RandomLessThan(100) < 50))
                     {
-                        oPtr.BonusArmourClass++;
+                        oPtr.BonusArmorClass++;
                         res = true;
-                        if (oPtr.IsCursed() && !oPtr.Characteristics.PermaCurse && oPtr.BonusArmourClass >= 0 &&
+                        if (oPtr.IsCursed() && !oPtr.Characteristics.PermaCurse && oPtr.BonusArmorClass >= 0 &&
                             Program.Rng.RandomLessThan(100) < 25)
                         {
                             MsgPrint("The curse is broken!");
@@ -6705,7 +6705,7 @@ namespace AngbandOS.Core
             {
                 return false;
             }
-            if (oPtr.BaseArmourClass + oPtr.BonusArmourClass <= 0)
+            if (oPtr.BaseArmorClass + oPtr.BonusArmorClass <= 0)
             {
                 return false;
             }
@@ -6717,7 +6717,7 @@ namespace AngbandOS.Core
                 return true;
             }
             MsgPrint($"Your {oName} is damaged!");
-            oPtr.BonusArmourClass--;
+            oPtr.BonusArmorClass--;
             UpdateBonusesFlaggedAction.Set();
             return true;
         }
@@ -7525,10 +7525,10 @@ namespace AngbandOS.Core
                 MsgPrint($"A terrible black aura blasts your {itemName}!");
                 item.FixedArtifact = null;
                 item.RareItemTypeIndex = RareItemTypeEnum.ArmourBlasted;
-                item.BonusArmourClass = 0 - Program.Rng.DieRoll(5) - Program.Rng.DieRoll(5);
+                item.BonusArmorClass = 0 - Program.Rng.DieRoll(5) - Program.Rng.DieRoll(5);
                 item.BonusToHit = 0;
                 item.BonusDamage = 0;
-                item.BaseArmourClass = 0;
+                item.BaseArmorClass = 0;
                 item.DamageDice = 0;
                 item.DamageDiceSides = 0;
                 item.RandartItemCharacteristics.Clear();
@@ -7568,8 +7568,8 @@ namespace AngbandOS.Core
                 item.RareItemTypeIndex = RareItemTypeEnum.WeaponShattered;
                 item.BonusToHit = 0 - Program.Rng.DieRoll(5) - Program.Rng.DieRoll(5);
                 item.BonusDamage = 0 - Program.Rng.DieRoll(5) - Program.Rng.DieRoll(5);
-                item.BonusArmourClass = 0;
-                item.BaseArmourClass = 0;
+                item.BonusArmorClass = 0;
+                item.BaseArmorClass = 0;
                 item.DamageDice = 0;
                 item.DamageDiceSides = 0;
                 item.RandartItemCharacteristics.Clear();
@@ -8941,11 +8941,11 @@ namespace AngbandOS.Core
             // Make sure the grammar of the message is correct
             string your = item.IsInInventory ? "Your" : "The";
             string s;
-            if (item.BonusArmourClass < 0 && !item.IdentCursed)
+            if (item.BonusArmorClass < 0 && !item.IdentCursed)
             {
                 s = item.Count > 1 ? "" : "s";
                 MsgPrint($"{your} {itenName} look{s} as good as new!");
-                item.BonusArmourClass = 0;
+                item.BonusArmorClass = 0;
             }
             s = item.Count > 1 ? "are" : "is";
             MsgPrint($"{your} {itenName} {s} now protected against corrosion.");
@@ -18700,10 +18700,10 @@ namespace AngbandOS.Core
             Item qPtr = aPtr.BaseItemCategory.CreateItem();
             qPtr.FixedArtifact = SingletonRepository.FixedArtifacts[aIdx];
             qPtr.TypeSpecificValue = aPtr.Pval;
-            qPtr.BaseArmourClass = aPtr.Ac;
+            qPtr.BaseArmorClass = aPtr.Ac;
             qPtr.DamageDice = aPtr.Dd;
             qPtr.DamageDiceSides = aPtr.Ds;
-            qPtr.BonusArmourClass = aPtr.ToA;
+            qPtr.BonusArmorClass = aPtr.ToA;
             qPtr.BonusToHit = aPtr.ToH;
             qPtr.BonusDamage = aPtr.ToD;
             qPtr.Weight = aPtr.Weight;
@@ -18727,8 +18727,8 @@ namespace AngbandOS.Core
             string buf = oPtr.StoreDescription(true, 3);
             Screen.PrintLine(buf, 2, j);
             Screen.PrintLine($"kind = {oPtr.Factory,5}  level = {oPtr.Factory.Level,4}  ItemType = {oPtr.Category,5}  ItemSubType = {oPtr.ItemSubCategory,5}", 4, j);
-            Screen.PrintLine($"number = {oPtr.Count,3}  wgt = {oPtr.Weight,6}  BaseArmourClass = {oPtr.BaseArmourClass,5}    damage = {oPtr.DamageDice}d{oPtr.DamageDiceSides}", 5, j);
-            Screen.PrintLine($"TypeSpecificValue = {oPtr.TypeSpecificValue,5}  toac = {oPtr.BonusArmourClass,5}  tohit = {oPtr.BonusToHit,4}  todam = {oPtr.BonusDamage,4}", 6, j);
+            Screen.PrintLine($"number = {oPtr.Count,3}  wgt = {oPtr.Weight,6}  BaseArmourClass = {oPtr.BaseArmorClass,5}    damage = {oPtr.DamageDice}d{oPtr.DamageDiceSides}", 5, j);
+            Screen.PrintLine($"TypeSpecificValue = {oPtr.TypeSpecificValue,5}  toac = {oPtr.BonusArmorClass,5}  tohit = {oPtr.BonusToHit,4}  todam = {oPtr.BonusDamage,4}", 6, j);
             Screen.PrintLine($"FixedArtifact = {(oPtr.FixedArtifact == null ? "no" : oPtr.FixedArtifact.Name),4}  name2 = {oPtr.RareItemTypeIndex,4}  cost = {oPtr.Value()}", 7, j);
             Screen.PrintLine($"IdentSense = {oPtr.IdentSense} IdentFixed = {oPtr.IdentFixed} IdentEmpty = {oPtr.IdentEmpty}", 8, j);
             Screen.PrintLine($"IdentKnown = {oPtr.IdentKnown} IdentStoreb = {oPtr.IdentStoreb} IdentMental = {oPtr.IdentMental}", 8, j);
@@ -19022,19 +19022,19 @@ namespace AngbandOS.Core
                         continue;
                     }
                     if (qPtr.TypeSpecificValue == oPtr.TypeSpecificValue &&
-                        qPtr.BonusArmourClass == oPtr.BonusArmourClass && qPtr.BonusToHit == oPtr.BonusToHit &&
+                        qPtr.BonusArmorClass == oPtr.BonusArmorClass && qPtr.BonusToHit == oPtr.BonusToHit &&
                         qPtr.BonusDamage == oPtr.BonusDamage)
                     {
                         matches++;
                     }
                     else if (qPtr.TypeSpecificValue >= oPtr.TypeSpecificValue &&
-                             qPtr.BonusArmourClass >= oPtr.BonusArmourClass && qPtr.BonusToHit >= oPtr.BonusToHit &&
+                             qPtr.BonusArmorClass >= oPtr.BonusArmorClass && qPtr.BonusToHit >= oPtr.BonusToHit &&
                              qPtr.BonusDamage >= oPtr.BonusDamage)
                     {
                         better++;
                     }
                     else if (qPtr.TypeSpecificValue <= oPtr.TypeSpecificValue &&
-                             qPtr.BonusArmourClass <= oPtr.BonusArmourClass && qPtr.BonusToHit <= oPtr.BonusToHit &&
+                             qPtr.BonusArmorClass <= oPtr.BonusArmorClass && qPtr.BonusToHit <= oPtr.BonusToHit &&
                              qPtr.BonusDamage <= oPtr.BonusDamage)
                     {
                         worse++;
@@ -19068,12 +19068,12 @@ namespace AngbandOS.Core
             oPtr.TypeSpecificValue = tmpVal.ToIntSafely();
             WizDisplayItem(oPtr);
             p = "Enter new 'BonusArmourClass' setting: ";
-            def = $"{oPtr.BonusArmourClass}";
+            def = $"{oPtr.BonusArmorClass}";
             if (!GetString(p, out tmpVal, def, 5))
             {
                 return;
             }
-            oPtr.BonusArmourClass = tmpVal.ToIntSafely();
+            oPtr.BonusArmorClass = tmpVal.ToIntSafely();
             WizDisplayItem(oPtr);
             p = "Enter new 'BonusToHit' setting: ";
             def = $"{oPtr.BonusToHit}";

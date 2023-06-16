@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Items
             IdentBroken = true;
             IdentCursed = true;
             TypeSpecificValue = 0 - (Program.Rng.DieRoll(5) + GetBonusValue(5, level));
-            BonusArmourClass = 0 - (Program.Rng.DieRoll(5) + GetBonusValue(5, level));
+            BonusArmorClass = 0 - (Program.Rng.DieRoll(5) + GetBonusValue(5, level));
         }
     }
 }

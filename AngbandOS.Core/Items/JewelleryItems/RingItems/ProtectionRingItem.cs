@@ -10,12 +10,12 @@ namespace AngbandOS.Core.Items
             {
                 power = -1;
             }
-            BonusArmourClass = 5 + Program.Rng.DieRoll(8) + GetBonusValue(10, level);
+            BonusArmorClass = 5 + Program.Rng.DieRoll(8) + GetBonusValue(10, level);
             if (power < 0)
             {
                 IdentBroken = true;
                 IdentCursed = true;
-                BonusArmourClass = 0 - BonusArmourClass;
+                BonusArmorClass = 0 - BonusArmorClass;
             }
         }
     }

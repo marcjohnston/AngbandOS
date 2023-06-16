@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Items
             {
                 ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(20) + 18);
             } while (Program.Rng.DieRoll(4) == 1);
-            BonusArmourClass = 10 + Program.Rng.DieRoll(5) + GetBonusValue(10, level);
+            BonusArmorClass = 10 + Program.Rng.DieRoll(5) + GetBonusValue(10, level);
             if (SaveGame.Level != null)
             {
                 SaveGame.Level.TreasureRating += 5;

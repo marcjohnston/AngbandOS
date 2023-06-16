@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.Items
 {
     [Serializable]
-    internal abstract class Item : IComparable<Item> // TODO: Should be abstract
+    internal abstract class Item : IComparable<Item>
     {
         /// <summary>
         /// Returns true, if the item can be used as fuel for a torch.
@@ -34,9 +34,9 @@ namespace AngbandOS.Core.Items
         public virtual int PercentageBreakageChance => 10;
 
         /// <summary>
-        /// Returns true, if the item can apply a bonus armour class for miscellaneous power.  Only weapons return true.  Returns false, by default.
+        /// Returns true, if the item can apply a bonus armor class for miscellaneous power.  Only weapons return true.  Returns false, by default.
         /// </summary>
-        public virtual bool CanApplyBonusArmourClassMiscPower => false;
+        public virtual bool CanApplyBonusArmorClassMiscPower => false;
 
         /// <summary>
         /// Returns true, if the item can apply a blows bonus.  All weapons, except for the bow, return true.  Returns false, by default.
@@ -54,7 +54,7 @@ namespace AngbandOS.Core.Items
         /// </summary>
         /// <param name="oPtr"></param>
         /// <returns></returns>
-        public virtual int CalcTorch()
+        public virtual int CalculateTorch()
         {
             RefreshFlagBasedProperties();
             if (Characteristics.Lightsource)
@@ -113,8 +113,8 @@ namespace AngbandOS.Core.Items
         public bool IdentBroken;
 
         public readonly ItemCharacteristics RandartItemCharacteristics = new ItemCharacteristics();
-        public int BaseArmourClass;
-        public int BonusArmourClass;
+        public int BaseArmorClass;
+        public int BonusArmorClass;
         public int BonusDamage;
         public Activation BonusPowerSubType;
         public RareItemTypeEnum BonusPowerType;
@@ -357,8 +357,8 @@ namespace AngbandOS.Core.Items
             Weight = Factory.Weight;
             BonusToHit = Factory.ToH;
             BonusDamage = Factory.ToD;
-            BonusArmourClass = Factory.ToA;
-            BaseArmourClass = Factory.Ac;
+            BonusArmorClass = Factory.ToA;
+            BaseArmorClass = Factory.Ac;
             DamageDice = Factory.Dd;
             DamageDiceSides = Factory.Ds;
             if (Factory.Cost <= 0)
@@ -491,7 +491,7 @@ namespace AngbandOS.Core.Items
         public Item Clone(int? newCount = null)
         {
             Item clonedItem = Factory.CreateItem();
-            clonedItem.BaseArmourClass = BaseArmourClass;
+            clonedItem.BaseArmorClass = BaseArmorClass;
             clonedItem.RandartItemCharacteristics.Copy(RandartItemCharacteristics);
             clonedItem.RandartName = RandartName;
             clonedItem.DamageDice = DamageDice;
@@ -518,7 +518,7 @@ namespace AngbandOS.Core.Items
             clonedItem.TypeSpecificValue = TypeSpecificValue;
             clonedItem.ItemSubCategory = ItemSubCategory;
             clonedItem.RechargeTimeLeft = RechargeTimeLeft;
-            clonedItem.BonusArmourClass = BonusArmourClass;
+            clonedItem.BonusArmorClass = BonusArmorClass;
             clonedItem.BonusDamage = BonusDamage;
             clonedItem.BonusToHit = BonusToHit;
             clonedItem.Weight = Weight;
@@ -815,7 +815,7 @@ namespace AngbandOS.Core.Items
             {
                 return false;
             }
-            if (BonusArmourClass != other.BonusArmourClass)
+            if (BonusArmorClass != other.BonusArmorClass)
             {
                 return false;
             }
@@ -843,7 +843,7 @@ namespace AngbandOS.Core.Items
             {
                 return false;
             }
-            if (BaseArmourClass != other.BaseArmourClass)
+            if (BaseArmorClass != other.BaseArmorClass)
             {
                 return false;
             }
@@ -1375,7 +1375,7 @@ namespace AngbandOS.Core.Items
             {
                 return "broken";
             }
-            if (BonusArmourClass > 0)
+            if (BonusArmorClass > 0)
             {
                 return "good";
             }
@@ -1454,7 +1454,7 @@ namespace AngbandOS.Core.Items
             {
                 return "good";
             }
-            if (BonusArmourClass > 0)
+            if (BonusArmorClass > 0)
             {
                 return "good";
             }
@@ -2139,10 +2139,10 @@ namespace AngbandOS.Core.Items
             {
                 FixedArtifact.CurNum = 1;
                 TypeSpecificValue = FixedArtifact.Pval;
-                BaseArmourClass = FixedArtifact.Ac;
+                BaseArmorClass = FixedArtifact.Ac;
                 DamageDice = FixedArtifact.Dd;
                 DamageDiceSides = FixedArtifact.Ds;
-                BonusArmourClass = FixedArtifact.ToA;
+                BonusArmorClass = FixedArtifact.ToA;
                 BonusToHit = FixedArtifact.ToH;
                 BonusDamage = FixedArtifact.ToD;
                 Weight = FixedArtifact.Weight;
@@ -2246,7 +2246,7 @@ namespace AngbandOS.Core.Items
                     }
                     if (ePtr.MaxToA != 0)
                     {
-                        BonusArmourClass -= Program.Rng.DieRoll(ePtr.MaxToA);
+                        BonusArmorClass -= Program.Rng.DieRoll(ePtr.MaxToA);
                     }
                     if (ePtr.MaxPval != 0)
                     {
@@ -2265,7 +2265,7 @@ namespace AngbandOS.Core.Items
                     }
                     if (ePtr.MaxToA != 0)
                     {
-                        BonusArmourClass += Program.Rng.DieRoll(ePtr.MaxToA);
+                        BonusArmorClass += Program.Rng.DieRoll(ePtr.MaxToA);
                     }
                     if (ePtr.MaxPval != 0)
                     {
@@ -2973,14 +2973,14 @@ namespace AngbandOS.Core.Items
                 case 24:
                 case 25:
                 case 26:
-                    if (!CanApplyBonusArmourClassMiscPower)
+                    if (!CanApplyBonusArmorClassMiscPower)
                     {
                         ApplyRandomMiscPower(ref artifactBias);
                     }
                     else
                     {
                         RandartItemCharacteristics.ShowMods = true;
-                        BonusArmourClass = 4 + Program.Rng.DieRoll(11);
+                        BonusArmorClass = 4 + Program.Rng.DieRoll(11);
                     }
                     break;
 
@@ -3172,9 +3172,9 @@ namespace AngbandOS.Core.Items
             {
                 TypeSpecificValue = 0 - (TypeSpecificValue + Program.Rng.DieRoll(4));
             }
-            if (BonusArmourClass != 0)
+            if (BonusArmorClass != 0)
             {
-                BonusArmourClass = 0 - (BonusArmourClass + Program.Rng.DieRoll(4));
+                BonusArmorClass = 0 - (BonusArmorClass + Program.Rng.DieRoll(4));
             }
             if (BonusToHit != 0)
             {
@@ -3440,15 +3440,15 @@ namespace AngbandOS.Core.Items
                     s += $" ({GetSignedValue(BonusDamage)})";
                 }
 
-                if (BaseArmourClass != 0)
+                if (BaseArmorClass != 0)
                 {
                     // Add base armour class for all types of armour and when the base armour class is greater than zero.
-                    s += $" [{BaseArmourClass},{GetSignedValue(BonusArmourClass)}]";
+                    s += $" [{BaseArmorClass},{GetSignedValue(BonusArmorClass)}]";
                 }
-                else if (BonusArmourClass != 0)
+                else if (BonusArmorClass != 0)
                 {
                     // This is not armour, only show bonus armour class, if it is not zero and we know about it.
-                    s += $" [{GetSignedValue(BonusArmourClass)}]";
+                    s += $" [{GetSignedValue(BonusArmorClass)}]";
                 }
             }
             return s;

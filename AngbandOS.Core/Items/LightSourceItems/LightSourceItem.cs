@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Items
         /// </summary>
         /// <param name="oPtr"></param>
         /// <returns></returns>
-        public override int CalcTorch()
+        public override int CalculateTorch()
         {
             if (FixedArtifact != null)
             {

@@ -7,10 +7,10 @@ namespace AngbandOS.Core.Items
         public override bool IdentityCanBeSensed => true;
         public override int? GetBonusRealValue(int value)
         {
-            if (BonusArmourClass < 0)
+            if (BonusArmorClass < 0)
                 return null;
 
-            return (BonusToHit + BonusDamage + BonusArmourClass) * 100;
+            return (BonusToHit + BonusDamage + BonusArmorClass) * 100;
         }
 
         protected void ApplyDragonscaleResistance()
@@ -104,20 +104,20 @@ namespace AngbandOS.Core.Items
             int toac2 = GetBonusValue(10, level);
             if (power > 0)
             {
-                BonusArmourClass += toac1;
+                BonusArmorClass += toac1;
                 if (power > 1)
                 {
-                    BonusArmourClass += toac2;
+                    BonusArmorClass += toac2;
                 }
             }
             else if (power < 0)
             {
-                BonusArmourClass -= toac1;
+                BonusArmorClass -= toac1;
                 if (power < -1)
                 {
-                    BonusArmourClass -= toac2;
+                    BonusArmorClass -= toac2;
                 }
-                if (BonusArmourClass < 0)
+                if (BonusArmorClass < 0)
                 {
                     IdentCursed = true;
                 }
@@ -126,7 +126,7 @@ namespace AngbandOS.Core.Items
 
         public override void ApplyRandartBonus()
         {
-            BonusArmourClass += Program.Rng.DieRoll(BonusArmourClass > 19 ? 1 : 20 - BonusArmourClass);
+            BonusArmorClass += Program.Rng.DieRoll(BonusArmorClass > 19 ? 1 : 20 - BonusArmorClass);
         }
 
         protected override bool FactoryCanAbsorbItem(Item other)
@@ -184,11 +184,11 @@ namespace AngbandOS.Core.Items
                 }
 
                 // Add base armour class for all types of armour and when the base armour class is greater than zero.
-                s += $" [{BaseArmourClass},{GetSignedValue(BonusArmourClass)}]";
+                s += $" [{BaseArmorClass},{GetSignedValue(BonusArmorClass)}]";
             }
-            else if (BaseArmourClass != 0)
+            else if (BaseArmorClass != 0)
             {
-                s += $" [{BaseArmourClass}]";
+                s += $" [{BaseArmorClass}]";
             }
             return s;
         }
@@ -199,7 +199,7 @@ namespace AngbandOS.Core.Items
             {
                 return true;
             }
-            if (BonusArmourClass < 0)
+            if (BonusArmorClass < 0)
             {
                 return true;
             }

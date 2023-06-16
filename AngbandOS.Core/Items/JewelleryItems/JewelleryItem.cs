@@ -6,10 +6,10 @@
         public JewelleryItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
         public override int? GetBonusRealValue(int value)
         {
-            if (BonusArmourClass < 0 || BonusToHit < 0 || BonusDamage < 0)
+            if (BonusArmorClass < 0 || BonusToHit < 0 || BonusDamage < 0)
                 return 0;
 
-            return (BonusToHit + BonusDamage + BonusArmourClass) * 100;
+            return (BonusToHit + BonusDamage + BonusArmorClass) * 100;
         }
         protected override bool FactoryCanAbsorbItem(Item other)
         {
@@ -30,7 +30,7 @@
         }
         public override bool IsStompable()
         {
-            if (BonusDamage < 0 || BonusArmourClass < 0 || BonusToHit < 0 || TypeSpecificValue < 0)
+            if (BonusDamage < 0 || BonusArmorClass < 0 || BonusToHit < 0 || TypeSpecificValue < 0)
             {
                 return true;
             }
@@ -38,7 +38,7 @@
         }
         public override bool IsWorthless()
         {
-            if (TypeSpecificValue < 0 || BonusArmourClass < 0 || BonusToHit < 0 || BonusDamage < 0)
+            if (TypeSpecificValue < 0 || BonusArmorClass < 0 || BonusToHit < 0 || BonusDamage < 0)
             {
                 return true;
             }
