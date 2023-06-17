@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.ItemCategories;
 
 [Serializable]
-internal class HardArmorMithrilChainMail : HardArmorItemClass
+internal class MithrilChainMailHardArmorItemFactory : HardArmorItemFactory
 {
-    private HardArmorMithrilChainMail(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private MithrilChainMailHardArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override char Character => '[';
     public override Colour Colour => Colour.BrightBlue;

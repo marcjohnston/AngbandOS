@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.ItemCategories;
 
 [Serializable]
-internal class SoftArmorLeatherScaleMail : SoftArmorItemClass
+internal class LeatherScaleMailSoftArmorItemFactory : SoftArmorItemClass
 {
-    private SoftArmorLeatherScaleMail(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LeatherScaleMailSoftArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override char Character => '(';
     public override Colour Colour => Colour.BrightBrown;

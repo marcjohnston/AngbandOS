@@ -65,6 +65,6 @@ internal class WarriorCharacterClass : BaseCharacterClass
     {
         SaveGame.SingletonRepository.ItemFactories.Get<FearResistanceRingItemFactory>(),
         SaveGame.SingletonRepository.ItemFactories.Get<SwordBroadSword>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<HardArmorChainMail>()
+        SaveGame.SingletonRepository.ItemFactories.Get<ChainMailHardArmorItemFactory>()
     };
 }

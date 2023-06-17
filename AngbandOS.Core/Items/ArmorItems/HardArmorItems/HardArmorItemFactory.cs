@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.ItemClasses;
 
 [Serializable]
-internal abstract class HardArmorItemClass : ArmourItemFactory
+internal abstract class HardArmorItemFactory : ArmourItemFactory
 {
-    public HardArmorItemClass(SaveGame saveGame) : base(saveGame) { }
+    public HardArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<BodyInventorySlot>();
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.HardArmor;
     public override int PackSort => 20;

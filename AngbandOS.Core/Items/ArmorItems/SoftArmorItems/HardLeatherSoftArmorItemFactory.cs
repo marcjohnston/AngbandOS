@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.ItemCategories;
 
 [Serializable]
-internal class SoftArmorHardLeatherArmour : SoftArmorItemClass
+internal class HardLeatherSoftArmorItemFactory : SoftArmorItemClass
 {
-    private SoftArmorHardLeatherArmour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private HardLeatherSoftArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override char Character => '(';
     public override Colour Colour => Colour.BrightBrown;
@@ -27,5 +27,5 @@ internal class SoftArmorHardLeatherArmour : SoftArmorItemClass
     public override int? SubCategory => 6;
     public override int ToH => -1;
     public override int Weight => 100;
-    public override Item CreateItem() => new HardLeatherArmourSoftArmorItem(SaveGame);
+    public override Item CreateItem() => new HardLeatherSoftArmorItem(SaveGame);
 }

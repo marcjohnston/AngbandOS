@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Items;
 
 [Serializable]
-internal class HardLeatherArmourSoftArmorItem : SoftArmorItem
+internal class MetalLamellarHardArmorItem : HardArmorItem
 {
-    public HardLeatherArmourSoftArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<SoftArmorHardLeatherArmour>()) { }
+    public MetalLamellarHardArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<MetalLamellarHardArmorItemFactory>()) { }
 }

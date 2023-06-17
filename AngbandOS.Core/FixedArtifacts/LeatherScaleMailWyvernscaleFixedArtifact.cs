@@ -13,7 +13,7 @@ internal class LeatherScaleMailWyvernscaleFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private LeatherScaleMailWyvernscaleFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<SoftArmorLeatherScaleMail>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<LeatherScaleMailSoftArmorItemFactory>();
     }
 
     public override void ApplyResistances(SaveGame saveGame, Item item)

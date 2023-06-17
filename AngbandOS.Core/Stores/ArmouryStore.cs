@@ -53,23 +53,23 @@ internal class ArmouryStore : Store
             new StockStoreInventoryItem(typeof(SoftLeatherBootsArmorItemFactory), 2),
             new StockStoreInventoryItem(typeof(GauntletGlovesArmorItemFactory), 2),
             new StockStoreInventoryItem(typeof(LeatherGlovesArmorItemFactory), 3),
-            new StockStoreInventoryItem(typeof(HardArmorAugmentedChainMail)),
-            new StockStoreInventoryItem(typeof(HardArmorBarChainMail)),
-            new StockStoreInventoryItem(typeof(HardArmorChainMail), 4),
-            new StockStoreInventoryItem(typeof(HardArmorDoubleChainMail)),
-            new StockStoreInventoryItem(typeof(HardArmorMetalBrigandineArmour)),
-            new StockStoreInventoryItem(typeof(HardArmorMetalScaleMail), 2),
+            new StockStoreInventoryItem(typeof(AugmentedChainMailHardArmorItemFactory)),
+            new StockStoreInventoryItem(typeof(BarChainMailHardArmorItemFactory)),
+            new StockStoreInventoryItem(typeof(ChainMailHardArmorItemFactory), 4),
+            new StockStoreInventoryItem(typeof(DoubleChainMailHardArmorItemFactory)),
+            new StockStoreInventoryItem(typeof(MetalBrigandineHardArmorItemFactory)),
+            new StockStoreInventoryItem(typeof(MetalScaleMailHardArmorItemFactory), 2),
             new StockStoreInventoryItem(typeof(HelmHardLeatherCap), 4),
             new StockStoreInventoryItem(typeof(HelmIronHelm)),
             new StockStoreInventoryItem(typeof(HelmMetalCap)),
             new StockStoreInventoryItem(typeof(ShieldLargeLeatherShield)),
             new StockStoreInventoryItem(typeof(ShieldSmallLeatherShield), 4),
             new StockStoreInventoryItem(typeof(ShieldSmallMetalShield)),
-            new StockStoreInventoryItem(typeof(SoftArmorHardLeatherArmour), 3),
-            new StockStoreInventoryItem(typeof(SoftArmorHardStuddedLeather), 2),
-            new StockStoreInventoryItem(typeof(SoftArmorLeatherScaleMail), 3),
-            new StockStoreInventoryItem(typeof(SoftArmorRobe), 3),
-            new StockStoreInventoryItem(typeof(SoftArmorSoftLeatherArmour), 4),
+            new StockStoreInventoryItem(typeof(HardLeatherSoftArmorItemFactory), 3),
+            new StockStoreInventoryItem(typeof(HardStuddedLeatherSoftArmorItemFactory), 2),
+            new StockStoreInventoryItem(typeof(LeatherScaleMailSoftArmorItemFactory), 3),
+            new StockStoreInventoryItem(typeof(RobeSoftArmorItemFactory), 3),
+            new StockStoreInventoryItem(typeof(SoftLeatherSoftArmorItemFactory), 4),
         };
     }
 
@@ -84,7 +84,7 @@ internal class ArmouryStore : Store
             case ShieldItemClass _:
             case CloakArmorItemFactory _:
             case SoftArmorItemClass _:
-            case HardArmorItemClass _:
+            case HardArmorItemFactory _:
             case DragonScaleMailArmorItemFactory _:
                 return item.Value() > 0;
             default:

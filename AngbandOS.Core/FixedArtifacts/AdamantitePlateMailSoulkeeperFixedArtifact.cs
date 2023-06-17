@@ -13,7 +13,7 @@ internal class AdamantitePlateMailSoulkeeperFixedArtifact : FixedArtifact, IActi
     private readonly ItemFactory _baseItemCategory;
     private AdamantitePlateMailSoulkeeperFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HardArmorAdamantitePlateMail>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<AdamantitePlateMailHardArmorItemFactory>();
     }
 
     // Soulkeeper heals you a lot

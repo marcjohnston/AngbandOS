@@ -13,7 +13,7 @@ internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact, IActivatibl
     private readonly ItemFactory _baseItemCategory;
     private MetalScaleMailOfTheOrcsFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HardArmorMetalScaleMail>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<MetalScaleMailHardArmorItemFactory>();
     }
 
     public override void ApplyResistances(SaveGame saveGame, Item item)

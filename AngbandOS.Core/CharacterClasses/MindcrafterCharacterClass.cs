@@ -51,6 +51,6 @@ internal class MindcrafterCharacterClass : BaseCharacterClass
     {
         SaveGame.SingletonRepository.ItemFactories.Get<SwordSmallSword>(),
         SaveGame.SingletonRepository.ItemFactories.Get<RestoreManaPotionItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<SoftArmorSoftLeatherArmour>()
+        SaveGame.SingletonRepository.ItemFactories.Get<SoftLeatherSoftArmorItemFactory>()
     };
 }

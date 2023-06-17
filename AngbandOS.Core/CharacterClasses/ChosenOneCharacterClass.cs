@@ -47,6 +47,6 @@ internal class ChosenOneCharacterClass : BaseCharacterClass
     {
         SaveGame.SingletonRepository.ItemFactories.Get<SwordSmallSword>(),
         SaveGame.SingletonRepository.ItemFactories.Get<HealingPotionItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<SoftArmorSoftLeatherArmour>()
+        SaveGame.SingletonRepository.ItemFactories.Get<SoftLeatherSoftArmorItemFactory>()
     };
 }

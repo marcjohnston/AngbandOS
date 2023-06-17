@@ -53,6 +53,6 @@ internal class MysticCharacterClass : BaseCharacterClass
     {
         SaveGame.SingletonRepository.ItemFactories.Get<SustainWisdomRingItemFactory>(),
         SaveGame.SingletonRepository.ItemFactories.Get<HealingPotionItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<SoftArmorSoftLeatherArmour>()
+        SaveGame.SingletonRepository.ItemFactories.Get<SoftLeatherSoftArmorItemFactory>()
     };
 }

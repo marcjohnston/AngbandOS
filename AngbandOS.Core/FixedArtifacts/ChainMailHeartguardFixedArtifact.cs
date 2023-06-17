@@ -13,7 +13,7 @@ internal class ChainMailHeartguardFixedArtifact : FixedArtifact
     private readonly ItemFactory _baseItemCategory;
     private ChainMailHeartguardFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HardArmorChainMail>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<ChainMailHardArmorItemFactory>();
     }
 
     public override void ApplyResistances(SaveGame saveGame, Item item)

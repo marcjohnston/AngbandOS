@@ -13,7 +13,7 @@ internal class MithrilChainMailOfTheVampireHunterFixedArtifact : FixedArtifact, 
     private readonly ItemFactory _baseItemCategory;
     private MithrilChainMailOfTheVampireHunterFixedArtifact(SaveGame saveGame) : base(saveGame)
     {
-        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<HardArmorMithrilChainMail>();
+        _baseItemCategory = saveGame.SingletonRepository.ItemFactories.Get<MithrilChainMailHardArmorItemFactory>();
     }
 
     // Vampire Hunter cures most ailments

@@ -76,7 +76,7 @@ internal class RogueCharacterClass : BaseCharacterClass
     {
         SaveGame.SingletonRepository.ItemFactories.Get<BeginnersHandbookSorceryBookItemFactory>(),
         SaveGame.SingletonRepository.ItemFactories.Get<SwordDagger>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<SoftArmorSoftLeatherArmour>()
+        SaveGame.SingletonRepository.ItemFactories.Get<SoftLeatherSoftArmorItemFactory>()
     };
 
     protected override void OutfitItem(Item item)

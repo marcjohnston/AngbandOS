@@ -76,6 +76,6 @@ internal class MonkCharacterClass : BaseCharacterClass
     {
         SaveGame.SingletonRepository.ItemFactories.Get<BeginnersHandbookSorceryBookItemFactory>(),
         SaveGame.SingletonRepository.ItemFactories.Get<HealingPotionItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<SoftArmorSoftLeatherArmour>()
+        SaveGame.SingletonRepository.ItemFactories.Get<SoftLeatherSoftArmorItemFactory>()
     };
 }

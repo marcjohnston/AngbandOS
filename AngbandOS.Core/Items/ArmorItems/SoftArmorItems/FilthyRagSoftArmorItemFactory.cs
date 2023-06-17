@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.ItemCategories;
 
 [Serializable]
-internal class SoftArmorFilthyRag : SoftArmorItemClass
+internal class FilthyRagSoftArmorItemFactory : SoftArmorItemClass
 {
-    private SoftArmorFilthyRag(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private FilthyRagSoftArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override char Character => '(';
     public override Colour Colour => Colour.Black;

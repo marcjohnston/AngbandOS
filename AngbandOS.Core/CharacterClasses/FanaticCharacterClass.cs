@@ -56,6 +56,6 @@ internal class FanaticCharacterClass : BaseCharacterClass
     {
         SaveGame.SingletonRepository.ItemFactories.Get<BeginnersHandbookSorceryBookItemFactory>(),
         SaveGame.SingletonRepository.ItemFactories.Get<SwordBroadSword>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<HardArmorMetalScaleMail>()
+        SaveGame.SingletonRepository.ItemFactories.Get<MetalScaleMailHardArmorItemFactory>()
     };
 }

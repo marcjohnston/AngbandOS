@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.ItemCategories;
 
 [Serializable]
-internal class HardArmorAdamantitePlateMail : HardArmorItemClass
+internal class AdamantitePlateMailHardArmorItemFactory : HardArmorItemFactory
 {
-    private HardArmorAdamantitePlateMail(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private AdamantitePlateMailHardArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override char Character => '[';
     public override Colour Colour => Colour.BrightGreen;
