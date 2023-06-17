@@ -420,4 +420,25 @@ internal abstract class ItemFactory : IItemCharacteristics
     /// Returns true, if the item provides sunlight, which burns certain races.  Returns false, by default.
     /// </summary>
     public virtual bool ProvidesSunlight => false;
+
+    /// <summary>
+    /// Returns true, if an item of this factory can have slaying bonus applied for biased artifacts.  Returns true, for all items except bows; which return false.
+    /// </summary>
+    public virtual bool CanApplyArtifactBiasSlaying => true;
+
+    /// <summary>
+    /// Returns true, if an item of this factory can have random resistance bonus applied for biased artifacts.  Returns false for all items except for cloaks, soft armor and hard armor; which return true.
+    /// </summary>
+    public virtual bool CanApplyArtifactBiasResistance => true;
+
+
+    /// <summary>
+    /// Returns true, if an item of this factory can have be blessed for priestly biased artifacts.  Returns false, for all items except swords and polearms; which return false.
+    /// </summary>
+    public virtual bool CanApplyBlessedArtifactBias => false;
+
+    /// <summary>
+    /// Returns true, if an item of this factory can be eaten by a monster with the eat food attack effect.  Returns false for all items except food items; which return true.
+    /// </summary>
+    public virtual bool CanBeEatenByMonsters => false;
 }

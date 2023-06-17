@@ -16,6 +16,6 @@ internal abstract class SwordItemClass : MeleeWeaponItemClass
     public override int PackSort => 28;
 
     public override Colour Colour => Colour.BrightWhite;
-
+    public override bool CanApplyBlessedArtifactBias => true;
 
 }

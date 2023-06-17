@@ -57,7 +57,7 @@ internal abstract class Item : IComparable<Item>
 
     /// <summary>
     /// Returns the intensity of light that the object emits.  By default, a value of 1 is returned, if the item has a 
-    /// lightsource characteristic.
+    /// light-source characteristic.
     /// </summary>
     /// <param name="oPtr"></param>
     /// <returns></returns>
@@ -151,21 +151,6 @@ internal abstract class Item : IComparable<Item>
         else
         {
             return null;
-        }
-    }
-
-    public void ReportChargeUsage()
-    {
-        if ((Category == ItemTypeEnum.Staff || Category == ItemTypeEnum.Wand) && IsKnown())
-        {
-            if (IsInInventory)
-            {
-                SaveGame.MsgPrint(TypeSpecificValue != 1 ? $"You have {TypeSpecificValue} charges remaining." : $"You have {TypeSpecificValue} charge remaining.");
-            }
-            else
-            {
-                SaveGame.MsgPrint(TypeSpecificValue != 1 ? $"There are {TypeSpecificValue} charges remaining." : $"There is {TypeSpecificValue} charge remaining.");
-            }
         }
     }
 
@@ -537,7 +522,7 @@ internal abstract class Item : IComparable<Item>
     public bool IsKnownArtifact => IsKnown() && (FixedArtifact != null || !string.IsNullOrEmpty(RandartName));
 
     [Obsolete]
-    public ItemTypeEnum Category => Factory == null ? ItemTypeEnum.None : Factory.CategoryEnum; // Provided for backwards compatability.  Will be deleted.
+    public ItemTypeEnum Category => Factory == null ? ItemTypeEnum.None : Factory.CategoryEnum; // TODO: Provided for backwards compatibility.  Will be deleted.
 
     public void Absorb(Item other)
     {

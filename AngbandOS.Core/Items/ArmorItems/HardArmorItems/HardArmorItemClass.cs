@@ -23,4 +23,5 @@ internal abstract class HardArmorItemClass : ArmourItemFactory
     public override bool CanProvideSheathOfFire => true;
 
     public override bool CanReflectBoltsAndArrows => true;
+    public override bool CanApplyArtifactBiasResistance => true;
 }

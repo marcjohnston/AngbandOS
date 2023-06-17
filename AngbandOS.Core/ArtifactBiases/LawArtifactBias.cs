@@ -13,7 +13,7 @@ internal class LawArtifactBias : ArtifactBias
     private LawArtifactBias(SaveGame saveGame) : base(saveGame) { }
     public override bool ApplySlaying(Item item)
     {
-        if (item.Category != ItemTypeEnum.Bow)
+        if (item.Factory.CanApplyArtifactBiasSlaying)
         {
             if (!item.RandartItemCharacteristics.SlayEvil)
             {

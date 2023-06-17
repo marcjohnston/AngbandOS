@@ -10514,6 +10514,21 @@ internal class SaveGame
         }
     }
 
+    public void ReportChargeUsage(Item item)
+    {
+        if (item.IsKnown())
+        {
+            if (item.IsInInventory)
+            {
+                MsgPrint(item.TypeSpecificValue != 1 ? $"You have {item.TypeSpecificValue} charges remaining." : $"You have {item.TypeSpecificValue} charge remaining.");
+            }
+            else
+            {
+                MsgPrint(item.TypeSpecificValue != 1 ? $"There are {item.TypeSpecificValue} charges remaining." : $"There is {item.TypeSpecificValue} charge remaining.");
+            }
+        }
+    }
+
     public void DoUseStaff()
     {
         if (!SelectItem(out Item? item, "Use which staff? ", false, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Staff)))
@@ -10609,7 +10624,7 @@ internal class SaveGame
                 MsgPrint("You unstack your staff.");
             }
             // Let the player know what happened
-            item.ReportChargeUsage();
+            ReportChargeUsage(item);
         }
     }
 
@@ -12170,7 +12185,7 @@ internal class SaveGame
                 MsgPrint("You unstack your wand.");
             }
             // Let us know we have used a charge
-            item.ReportChargeUsage();
+            ReportChargeUsage(item);
         }
     }
 

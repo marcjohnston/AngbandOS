@@ -21,7 +21,7 @@ internal class FireArtifactBias : ArtifactBias
                 return true;
             }
         }
-        if (item.Category >= ItemTypeEnum.Cloak && item.Category <= ItemTypeEnum.HardArmor && !item.RandartItemCharacteristics.ShFire)
+        if (item.Factory.CanApplyArtifactBiasResistance && !item.RandartItemCharacteristics.ShFire)
         {
             item.RandartItemCharacteristics.ShFire = true;
             if (Program.Rng.DieRoll(2) == 1)
@@ -51,7 +51,7 @@ internal class FireArtifactBias : ArtifactBias
 
     public override bool ApplySlaying(Item item)
     {
-        if (item.Category != ItemTypeEnum.Bow)
+        if (item.Factory.CanApplyArtifactBiasSlaying)
         {
             if (!item.RandartItemCharacteristics.BrandFire)
             {

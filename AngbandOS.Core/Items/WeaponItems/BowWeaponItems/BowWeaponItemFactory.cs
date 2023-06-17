@@ -25,4 +25,6 @@ internal abstract class BowWeaponItemFactory : WeaponItemClass // TODO: Should b
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
     public override Colour Colour => Colour.Brown;
+
+    public override bool CanApplyArtifactBiasSlaying => false;
 }

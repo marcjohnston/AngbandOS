@@ -26,4 +26,5 @@ internal abstract class FoodItemFactory : ItemFactory
     public virtual bool IsConsumedWhenEaten => true;
 
     public abstract bool Eat();
+    public override bool CanBeEatenByMonsters => true;
 }

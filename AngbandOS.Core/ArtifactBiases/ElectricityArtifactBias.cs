@@ -21,7 +21,7 @@ internal class ElectricityArtifactBias : ArtifactBias
                 return true;
             }
         }
-        if (item.Category >= ItemTypeEnum.Cloak && item.Category <= ItemTypeEnum.HardArmor && !item.RandartItemCharacteristics.ShElec)
+        if (item.Factory.CanApplyArtifactBiasResistance && !item.RandartItemCharacteristics.ShElec)
         {
             item.RandartItemCharacteristics.ShElec = true;
             if (Program.Rng.DieRoll(2) == 1)
@@ -42,7 +42,7 @@ internal class ElectricityArtifactBias : ArtifactBias
 
     public override bool ApplySlaying(Item item)
     {
-        if (item.Category != ItemTypeEnum.Bow)
+        if (item.Factory.CanApplyArtifactBiasSlaying)
         {
             if (!item.RandartItemCharacteristics.BrandElec)
             {

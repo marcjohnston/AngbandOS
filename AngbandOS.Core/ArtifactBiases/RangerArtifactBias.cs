@@ -54,7 +54,7 @@ internal class RangerArtifactBias : ArtifactBias
     }
     public override bool ApplySlaying(Item item)
     {
-        if (item.Category != ItemTypeEnum.Bow)
+        if (item.Factory.CanApplyArtifactBiasSlaying)
         {
             if (!item.RandartItemCharacteristics.SlayAnimal)
             {

@@ -26,7 +26,7 @@ internal class PriestlyArtifactBias : ArtifactBias
 
     public override bool ApplySlaying(Item item)
     {
-        if ((item.Category == ItemTypeEnum.Sword || item.Category == ItemTypeEnum.Polearm) && !item.RandartItemCharacteristics.Blessed)
+        if (item.Factory.CanApplyBlessedArtifactBias && !item.RandartItemCharacteristics.Blessed)
         {
             item.RandartItemCharacteristics.Blessed = true;
         }
