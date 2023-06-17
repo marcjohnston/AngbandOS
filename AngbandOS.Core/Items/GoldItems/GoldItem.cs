@@ -15,4 +15,6 @@ internal abstract class GoldItem : Item
         int cost = Factory.Cost;
         TypeSpecificValue = cost + (8 * Program.Rng.DieRoll(cost)) + Program.Rng.DieRoll(8);
     }
+
+    public override bool IsIgnoredByMonsters => true;
 }

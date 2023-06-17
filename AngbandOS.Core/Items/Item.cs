@@ -3576,4 +3576,9 @@ internal abstract class Item : IComparable<Item>
     /// Returns true, if the item is deemed as worthless.  Worthless items will ignore their RealValue and will always have 0 real value.  Returns false by default.
     /// </summary>
     public virtual bool IsWorthless() => false;
+
+    /// <summary>
+    /// Returns true, if the item is ignored by monsters.  Returns false for all items, except gold.  Gold isn't picked up by monsters.
+    /// </summary>
+    public virtual bool IsIgnoredByMonsters => false;
 }
