@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Items;
 
 [Serializable]
-internal class BalanceDragonScaleMailArmorItem : DragonScaleMailArmorItem
+internal class BalanceDragonScaleMailArmorItem : DragonScaleMailArmorItem, IFixedArtifactActivatible
 {
     public BalanceDragonScaleMailArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<BalanceDragonScaleMailArmorItemFactory>()) { }
     public override void DoActivate()

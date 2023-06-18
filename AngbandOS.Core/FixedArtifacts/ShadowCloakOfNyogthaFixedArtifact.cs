@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class ShadowCloakOfNyogthaFixedArtifact : FixedArtifact, IActivatible
+internal class ShadowCloakOfNyogthaFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
     private readonly ItemFactory _baseItemCategory;
     private ShadowCloakOfNyogthaFixedArtifact(SaveGame saveGame) : base(saveGame)

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class SetOfGauntletsWhiteSparkFixedArtifact : FixedArtifact, IActivatible
+internal class SetOfGauntletsWhiteSparkFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
     private readonly ItemFactory _baseItemCategory;
     private SetOfGauntletsWhiteSparkFixedArtifact(SaveGame saveGame) : base(saveGame)

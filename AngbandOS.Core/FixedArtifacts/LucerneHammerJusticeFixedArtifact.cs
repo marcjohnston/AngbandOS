@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class TheLucerneHammerJusticeFixedArtifact : FixedArtifact, IActivatible
+internal class TheLucerneHammerJusticeFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
     private readonly ItemFactory _baseItemCategory;
     private TheLucerneHammerJusticeFixedArtifact(SaveGame saveGame) : base(saveGame)

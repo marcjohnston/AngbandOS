@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class LongSwordOfEverflameFixedArtifact : FixedArtifact, IActivatible
+internal class LongSwordOfEverflameFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
     private readonly ItemFactory _baseItemCategory;
     private LongSwordOfEverflameFixedArtifact(SaveGame saveGame) : base(saveGame)

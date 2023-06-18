@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact, IActivatible
+internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
     private readonly ItemFactory _baseItemCategory;
     private GoldenCrownOfTheSunFixedArtifact(SaveGame saveGame) : base(saveGame)

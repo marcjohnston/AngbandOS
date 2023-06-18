@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class GreatAxeOfTheTrollsFixedArtifact : FixedArtifact, IActivatible
+internal class GreatAxeOfTheTrollsFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
     private readonly ItemFactory _baseItemCategory;
     private GreatAxeOfTheTrollsFixedArtifact(SaveGame saveGame) : base(saveGame)

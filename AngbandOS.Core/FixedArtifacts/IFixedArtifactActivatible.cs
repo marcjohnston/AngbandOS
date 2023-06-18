@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core.FixedArtifacts;
 
-internal interface IActivatible
+internal interface IFixedArtifactActivatible
 {
     /// <summary>
     /// Activates the special ability of the fixed artifact.

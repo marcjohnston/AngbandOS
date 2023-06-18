@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class AdamantitePlateMailSoulkeeperFixedArtifact : FixedArtifact, IActivatible
+internal class AdamantitePlateMailSoulkeeperFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
     private readonly ItemFactory _baseItemCategory;
     private AdamantitePlateMailSoulkeeperFixedArtifact(SaveGame saveGame) : base(saveGame)

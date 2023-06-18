@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class CloakOfTheSwashbucklerFixedArtifact : FixedArtifact, IActivatible
+internal class CloakOfTheSwashbucklerFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
     private readonly ItemFactory _baseItemCategory;
     private CloakOfTheSwashbucklerFixedArtifact(SaveGame saveGame) : base(saveGame)

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class IronHelmSkullkeeperFixedArtifact : FixedArtifact, IActivatible
+internal class IronHelmSkullkeeperFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
     private readonly ItemFactory _baseItemCategory;
     private IronHelmSkullkeeperFixedArtifact(SaveGame saveGame) : base(saveGame)

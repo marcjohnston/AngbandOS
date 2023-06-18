@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class StarEssenceOfPolarisFixedArtifact : FixedArtifact, IActivatible
+internal class StarEssenceOfPolarisFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
     private readonly ItemFactory _baseItemCategory;
     private StarEssenceOfPolarisFixedArtifact(SaveGame saveGame) : base(saveGame)

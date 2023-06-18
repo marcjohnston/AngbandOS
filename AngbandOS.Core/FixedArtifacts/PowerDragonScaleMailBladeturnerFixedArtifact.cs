@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact, IActivatible
+internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
     private readonly ItemFactory _baseItemCategory;
     private PowerDragonScaleMailBladeturnerFixedArtifact(SaveGame saveGame) : base(saveGame)

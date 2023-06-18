@@ -9024,9 +9024,9 @@ internal class SaveGame
         }
 
         // If it's a fixed artifact then use its ability
-        if (item.FixedArtifact != null && typeof(IActivatible).IsAssignableFrom(item.FixedArtifact.GetType()))
+        if (item.FixedArtifact != null && typeof(IFixedArtifactActivatible).IsAssignableFrom(item.FixedArtifact.GetType()))
         {
-            IActivatible activatibleFixedArtifact = (IActivatible)item.FixedArtifact;
+            IFixedArtifactActivatible activatibleFixedArtifact = (IFixedArtifactActivatible)item.FixedArtifact;
             activatibleFixedArtifact.ActivateItem(this, item);
             return;
         }

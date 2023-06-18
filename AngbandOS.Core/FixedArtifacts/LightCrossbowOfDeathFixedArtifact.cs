@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class LightCrossbowOfDeathFixedArtifact : FixedArtifact, IActivatible
+internal class LightCrossbowOfDeathFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
     private readonly ItemFactory _baseItemCategory;
     private LightCrossbowOfDeathFixedArtifact(SaveGame saveGame) : base(saveGame)

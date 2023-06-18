@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact, IActivatible
+internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
     private readonly ItemFactory _baseItemCategory;
     private IronHelmTerrorMaskFixedArtifact(SaveGame saveGame) : base(saveGame)

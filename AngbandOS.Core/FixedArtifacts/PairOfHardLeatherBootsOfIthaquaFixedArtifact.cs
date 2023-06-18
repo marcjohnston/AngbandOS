@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class PairOfHardLeatherBootsOfIthaquaFixedArtifact : FixedArtifact, IActivatible
+internal class PairOfHardLeatherBootsOfIthaquaFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
     private readonly ItemFactory _baseItemCategory;
     private PairOfHardLeatherBootsOfIthaquaFixedArtifact(SaveGame saveGame) : base(saveGame)

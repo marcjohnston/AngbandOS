@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class MorningStarFirestarterFixedArtifact : FixedArtifact, IActivatible
+internal class MorningStarFirestarterFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
     private readonly ItemFactory _baseItemCategory;
     private MorningStarFirestarterFixedArtifact(SaveGame saveGame) : base(saveGame)

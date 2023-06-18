@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class DaggerOfThothFixedArtifact : FixedArtifact, IActivatible
+internal class DaggerOfThothFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
     private readonly ItemFactory _baseItemCategory;
     private DaggerOfThothFixedArtifact(SaveGame saveGame) : base(saveGame)

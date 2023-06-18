@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class DragonHelmOfPowerFixedArtifact : FixedArtifact, IActivatible
+internal class DragonHelmOfPowerFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
     private readonly ItemFactory _baseItemCategory;
     private DragonHelmOfPowerFixedArtifact(SaveGame saveGame) : base(saveGame)

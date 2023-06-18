@@ -132,6 +132,10 @@ internal abstract class ItemFactory : IItemCharacteristics
     public abstract string Name { get; }
 
     public virtual int Ac => 0;
+
+    /// <summary>
+    /// Returns true, if items of this factory can be activated.  Returns true for all dragon scale mail and rings of ice, acid and flames.  Returns false, by default.
+    /// </summary>
     public virtual bool Activate { get; set; } = false;
     public virtual bool Aggravate { get; set; } = false;
     public virtual bool AntiTheft { get; set; } = false;

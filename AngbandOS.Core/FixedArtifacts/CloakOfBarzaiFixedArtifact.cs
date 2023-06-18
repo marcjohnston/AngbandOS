@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class CloakOfBarzaiFixedArtifact : FixedArtifact, IActivatible
+internal class CloakOfBarzaiFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
     private readonly ItemFactory _baseItemCategory;
     private CloakOfBarzaiFixedArtifact(SaveGame saveGame) : base(saveGame)

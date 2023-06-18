@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class MaceThunderFixedArtifact : FixedArtifact, IActivatible
+internal class MaceThunderFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
     private readonly ItemFactory _baseItemCategory;
     private MaceThunderFixedArtifact(SaveGame saveGame) : base(saveGame)

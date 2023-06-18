@@ -2062,9 +2062,9 @@ internal abstract class Item : IComparable<Item>
             return BonusPowerSubType.Description;
         }
 
-        if (FixedArtifact != null && typeof(IActivatible).IsAssignableFrom(FixedArtifact.GetType()))
+        if (FixedArtifact != null && typeof(IFixedArtifactActivatible).IsAssignableFrom(FixedArtifact.GetType()))
         {
-            IActivatible activatibleFixedArtifact = (IActivatible)FixedArtifact;
+            IFixedArtifactActivatible activatibleFixedArtifact = (IFixedArtifactActivatible)FixedArtifact;
             return activatibleFixedArtifact.DescribeActivationEffect();
         }
         if (RareItemTypeIndex == RareItemTypeEnum.WeaponPlanarWeapon)

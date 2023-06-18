@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class SpearOfDestinyFixedArtifact : FixedArtifact, IActivatible
+internal class SpearOfDestinyFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
     private readonly ItemFactory _baseItemCategory;
     private SpearOfDestinyFixedArtifact(SaveGame saveGame) : base(saveGame)

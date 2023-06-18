@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class RingOfElementalPowerStormFixedArtifact : FixedArtifact, IActivatible
+internal class RingOfElementalPowerStormFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
     private readonly ItemFactory _baseItemCategory;
     private RingOfElementalPowerStormFixedArtifact(SaveGame saveGame) : base(saveGame)
