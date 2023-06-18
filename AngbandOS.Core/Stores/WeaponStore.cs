@@ -49,8 +49,8 @@ internal class WeaponStore : Store
     {
         return new[]
         {
-            new StockStoreInventoryItem(typeof(ArrowArrowAmmunitionItemFactory), 4),
-            new StockStoreInventoryItem(typeof(BoltBoltAmmunitionItemFactory), 4),
+            new StockStoreInventoryItem(typeof(WoodenArrowAmmunitionItemFactory), 4),
+            new StockStoreInventoryItem(typeof(SteelBoltAmmunitionItemFactory), 4),
             new StockStoreInventoryItem(typeof(LightCrossbowBowWeaponItemFactory), 2),
             new StockStoreInventoryItem(typeof(LongBowWeaponItemFactory), 2),
             new StockStoreInventoryItem(typeof(ShortBowWeaponItemFactory), 2),

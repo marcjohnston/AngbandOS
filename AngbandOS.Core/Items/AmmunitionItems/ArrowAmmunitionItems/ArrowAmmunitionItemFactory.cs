@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemClasses;
 
 [Serializable]
-internal abstract class ArrowAmmunitionItemFactory : AmmunitionItemClass
+internal abstract class ArrowAmmunitionItemFactory : AmmunitionItemFactory
 {
     public ArrowAmmunitionItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Arrow;

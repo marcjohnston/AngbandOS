@@ -8,8 +8,8 @@
 namespace AngbandOS.Core.ItemClasses;
 
 [Serializable]
-internal abstract class AmmunitionItemClass : WeaponItemClass
+internal abstract class AmmunitionItemFactory : WeaponItemClass
 {
-    public AmmunitionItemClass(SaveGame saveGame) : base(saveGame) { }
+    public AmmunitionItemFactory(SaveGame saveGame) : base(saveGame) { }
 
 }

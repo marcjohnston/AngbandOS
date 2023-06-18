@@ -54,8 +54,8 @@ internal class GeneralStore : Store
     {
         return new[]
         {
-            new StockStoreInventoryItem(typeof(ArrowArrowAmmunitionItemFactory), 2),
-            new StockStoreInventoryItem(typeof(BoltBoltAmmunitionItemFactory), 2),
+            new StockStoreInventoryItem(typeof(WoodenArrowAmmunitionItemFactory), 2),
+            new StockStoreInventoryItem(typeof(SteelBoltAmmunitionItemFactory), 2),
             new StockStoreInventoryItem(typeof(ClothCloakCloakArmorItemFactory), 3),
             new StockStoreInventoryItem(typeof(DiggingPick)),
             new StockStoreInventoryItem(typeof(DiggingShovel), 2),
