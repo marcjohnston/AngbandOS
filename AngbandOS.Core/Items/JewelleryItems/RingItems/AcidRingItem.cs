@@ -8,9 +8,20 @@
 namespace AngbandOS.Core.Items;
 
 [Serializable]
-internal class AcidRingItem : RingItem
+internal class AcidRingItem : RingItem, IItemActivatable
 {
     public AcidRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<AcidRingItemFactory>()) { }
+    public void DoActivate()
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
+        {
+            return;
+        }
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir, 50, 2);
+        SaveGame.Player.TimedAcidResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
+        RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
+    }
+
     protected override void ApplyMagic(int level, int power, Store? store)
     {
         BonusArmorClass = 5 + Program.Rng.DieRoll(5) + GetBonusValue(10, level);

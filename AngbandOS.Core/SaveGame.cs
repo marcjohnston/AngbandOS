@@ -9040,46 +9040,14 @@ internal class SaveGame
             return;
         }
 
-        // Dragon armour gives you a ball of the relevant damage type
-        DragonScaleMailArmorItem? dragonScaleMailArmor = item.TryCast<DragonScaleMailArmorItem>();
-        if (dragonScaleMailArmor != null)
+        // Check to see if the item can be activated.
+        if (item.Factory.Activate)
         {
-            dragonScaleMailArmor.DoActivate();
+            IItemActivatable activatibleItem = (IItemActivatable)item;
+            activatibleItem.DoActivate();
             return;
         }
 
-        // Elemental rings give you a ball of the appropriate element
-        if (item.Category == ItemTypeEnum.Ring)
-        {
-            if (!GetDirectionWithAim(out int dir))
-            {
-                return;
-            }
-            switch (item.ItemSubCategory)
-            {
-                case RingType.Acid:
-                    {
-                        FireBall(SingletonRepository.Projectiles.Get<AcidProjectile>(), dir, 50, 2);
-                        Player.TimedAcidResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
-                        item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
-                        return;
-                    }
-                case RingType.Ice:
-                    {
-                        FireBall(SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 50, 2);
-                        Player.TimedColdResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
-                        item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
-                        return;
-                    }
-                case RingType.Flames:
-                    {
-                        FireBall(SingletonRepository.Projectiles.Get<FireProjectile>(), dir, 50, 2);
-                        Player.TimedFireResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
-                        item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
-                        return;
-                    }
-            }
-        }
         // We ran out of item types
         MsgPrint("Oops. That object cannot be activated.");
     }

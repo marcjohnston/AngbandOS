@@ -8,9 +8,19 @@
 namespace AngbandOS.Core.Items;
 
 [Serializable]
-internal class FlamesRingItem : RingItem
+internal class FlamesRingItem : RingItem, IItemActivatable
 {
     public FlamesRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<FlamesRingItemFactory>()) { }
+    public void DoActivate()
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
+        {
+            return;
+        }
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, 50, 2);
+        SaveGame.Player.TimedFireResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
+        RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
+    }
     protected override void ApplyMagic(int level, int power, Store? store)
     {
         BonusArmorClass = 5 + Program.Rng.DieRoll(5) + GetBonusValue(10, level);

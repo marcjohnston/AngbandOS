@@ -13,8 +13,6 @@ internal abstract class DragonScaleMailArmorItem : ArmourItem
     public DragonScaleMailArmorItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
     public override int WieldSlot => InventorySlot.Body;
 
-    public abstract void DoActivate();
-
     /// <summary>
     /// Applies special magic to dragon scale mail armour.
     /// </summary>

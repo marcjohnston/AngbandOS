@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.Items;
 
 [Serializable]
-internal class BronzeDragonScaleMailArmorItem : DragonScaleMailArmorItem
+internal class BronzeDragonScaleMailArmorItem : DragonScaleMailArmorItem, IItemActivatable
 {
     public BronzeDragonScaleMailArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<BronzeDragonScaleMailArmorItemFactory>()) { }
-    public override void DoActivate()
+    public void DoActivate()
     {
         if (!SaveGame.GetDirectionWithAim(out int dir))
         {
