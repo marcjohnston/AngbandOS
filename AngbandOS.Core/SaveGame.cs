@@ -11038,19 +11038,12 @@ internal class SaveGame
             return;
         }
 
-        // We don't actually eat dwarf bread
-        if (item.ItemSubCategory != FoodType.Dwarfbread)
-        {
-            PlaySound(SoundEffect.Eat);
-        }
-
         // Eating costs 100 energy
         EnergyUse = 100;
-        bool ident = false;
         int itemLevel = item.Factory.Level;
 
         // Allow the food item to process the consumption.
-        ident = foodItem.Factory.Eat();
+        bool ident = foodItem.Factory.Eat();
 
         NoticeCombineAndReorderFlaggedAction.Set();
 

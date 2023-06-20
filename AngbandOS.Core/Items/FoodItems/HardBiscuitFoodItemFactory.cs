@@ -23,6 +23,7 @@ internal class HardBiscuitFoodItemFactory : FoodItemFactory
     public override int Weight => 2;
     public override bool Eat()
     {
+        SaveGame.PlaySound(SoundEffect.Eat);
         SaveGame.MsgPrint("That tastes good.");
         return true;
     }

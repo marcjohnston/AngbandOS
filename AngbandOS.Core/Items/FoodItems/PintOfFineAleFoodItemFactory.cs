@@ -23,6 +23,7 @@ internal class PintOfFineAleFoodItemFactory : FoodItemFactory
     public override int Weight => 5;
     public override bool Eat()
     {
+        SaveGame.PlaySound(SoundEffect.Eat);
         SaveGame.MsgPrint("That tastes good.");
         return true;
     }

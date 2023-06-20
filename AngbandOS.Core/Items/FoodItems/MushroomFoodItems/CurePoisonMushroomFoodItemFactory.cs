@@ -25,6 +25,7 @@ internal class CurePoisonMushroomFoodItemFactory : MushroomFoodItemFactory
     public override int Weight => 1;
     public override bool Eat()
     {
+        SaveGame.PlaySound(SoundEffect.Eat);
         if (SaveGame.Player.TimedPoison.ResetTimer())
         {
             return true;

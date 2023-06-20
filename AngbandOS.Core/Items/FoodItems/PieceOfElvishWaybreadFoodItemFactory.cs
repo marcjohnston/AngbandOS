@@ -26,6 +26,7 @@ internal class PieceOfElvishWaybreadFoodItemFactory : FoodItemFactory
     public override int Weight => 3;
     public override bool Eat()
     {
+        SaveGame.PlaySound(SoundEffect.Eat);
         SaveGame.MsgPrint("That tastes good.");
         SaveGame.Player.TimedPoison.ResetTimer();
         SaveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8));

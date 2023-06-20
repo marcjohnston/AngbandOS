@@ -27,6 +27,7 @@ internal class WeaknessMushroomFoodItemFactory : MushroomFoodItemFactory
 
     public override bool Eat()
     {
+        SaveGame.PlaySound(SoundEffect.Eat);
         SaveGame.Player.TakeHit(Program.Rng.DiceRoll(6, 6), "poisonous food.");
         SaveGame.Player.TryDecreasingAbilityScore(Ability.Strength);
         return true;

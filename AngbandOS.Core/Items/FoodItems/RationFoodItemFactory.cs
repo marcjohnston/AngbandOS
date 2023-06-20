@@ -26,6 +26,7 @@ internal class RationFoodItemFactory : FoodItemFactory
 
     public override bool Eat()
     {
+        SaveGame.PlaySound(SoundEffect.Eat);
         SaveGame.MsgPrint("That tastes good.");
         return true;
     }

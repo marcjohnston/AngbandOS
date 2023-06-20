@@ -26,6 +26,7 @@ internal class SlimeMoldFoodItemFactory : FoodItemFactory
     public override int Weight => 5;
     public override bool Eat()
     {
+        SaveGame.PlaySound(SoundEffect.Eat);
         PotionItemFactory slimeMold = (PotionItemFactory)SaveGame.SingletonRepository.ItemFactories.Get<SlimeMoldJuicePotionItemFactory>();
         slimeMold.Quaff(SaveGame);
         return true;

@@ -27,6 +27,7 @@ internal class PieceOfWarpstoneFoodItemFactory : FoodItemFactory
     public override int Weight => 1;
     public override bool Eat()
     {
+        SaveGame.PlaySound(SoundEffect.Eat);
         SaveGame.MsgPrint("That tastes... funky.");
         SaveGame.Player.Dna.GainMutation();
         if (Program.Rng.DieRoll(3) == 1)

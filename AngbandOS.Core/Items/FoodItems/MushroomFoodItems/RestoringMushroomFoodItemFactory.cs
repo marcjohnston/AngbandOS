@@ -25,6 +25,7 @@ internal class RestoringMushroomFoodItemFactory : MushroomFoodItemFactory
     public override int Weight => 1;
     public override bool Eat()
     {
+        SaveGame.PlaySound(SoundEffect.Eat);
         bool ident = false;
         if (SaveGame.Player.TryRestoringAbilityScore(Ability.Strength))
         {
