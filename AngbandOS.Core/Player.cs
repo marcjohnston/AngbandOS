@@ -1025,6 +1025,7 @@ internal class Player
         }
     }
 
+    [Obsolete("Use PrintSpells(Spell[], int, int)")]
     public void PrintSpells(int[] spells, int y, int x, BaseRealm? realm)
     {
         int i;
@@ -1036,6 +1037,20 @@ internal class Player
         {
             int spell = spells[i];
             Spell sPtr = SaveGame.Spells[set][spell];
+            SaveGame.Screen.PrintLine($"{i.IndexToLetter()}) {sPtr.SummaryLine()}", y + i + 1, x);
+        }
+        SaveGame.Screen.PrintLine("", y + i + 1, x);
+    }
+
+    public void PrintSpells(Spell[] spells, int y, int x)
+    {
+        int i;
+        SaveGame.Screen.PrintLine("", y, x);
+        SaveGame.Screen.Print("Name", y, x + 5);
+        SaveGame.Screen.Print("Lv Mana Fail Info", y, x + 35);
+        for (i = 0; i < spells.Length; i++)
+        {
+            Spell sPtr = spells[i];
             SaveGame.Screen.PrintLine($"{i.IndexToLetter()}) {sPtr.SummaryLine()}", y + i + 1, x);
         }
         SaveGame.Screen.PrintLine("", y + i + 1, x);
@@ -1380,6 +1395,24 @@ internal class Player
         SaveGame.UpdateBonusesFlaggedAction.Set();
     }
 
+    public bool SpellOkay(Spell sPtr, bool known)
+    {
+        if (sPtr.Level > Level)
+        {
+            return false;
+        }
+        if (sPtr.Forgotten)
+        {
+            return false;
+        }
+        if (sPtr.Learned)
+        {
+            return known;
+        }
+        return !known;
+    }
+
+    [Obsolete("Use SpellOkay(Spell)")]
     public bool SpellOkay(int spell, bool known, bool realm2)
     {
         int set = realm2 ? 1 : 0;

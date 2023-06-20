@@ -548,7 +548,7 @@ internal abstract class Store : IItemFilter
         }
         ScreenBuffer savedScreen = SaveGame.Screen.Clone();
         BookItemFactory book = (BookItemFactory)oPtr.Factory;
-        SaveGame.Player.PrintSpells(spells.ToArray(), 1, 20, book.ToRealm);
+        SaveGame.Player.PrintSpells(book.Spells.ToArray(), 1, 20);
         SaveGame.Screen.PrintLine("", 0, 0);
         SaveGame.Screen.Print("[Press any key to continue]", 0, 23);
         SaveGame.Inkey();
@@ -1139,7 +1139,7 @@ internal abstract class Store : IItemFilter
         BookItem? bookItem = oPtr.TryCast<BookItem>();
         if (bookItem != null)
         {
-            if (SaveGame.Player.PrimaryRealm?.SpellBookItemCategory == bookItem.Category)
+            if (SaveGame.Player.PrimaryRealm?.SpellBookItemCategory == bookItem.Category || SaveGame.Player.SecondaryRealm?.SpellBookItemCategory == bookItem.Category)
             {
                 DoStoreBrowse(oPtr);
             }
@@ -1312,6 +1312,7 @@ internal abstract class Store : IItemFilter
             return;
         }
         int itemSubCategory = item.ItemSubCategory;
+        BookItem bookItem = (BookItem)item;
         bool useSetTwo = item.Category == SaveGame.Player.SecondaryRealm.SpellBookItemCategory;
         SaveGame.HandleStuff();
         int spellIndex;
@@ -1319,7 +1320,7 @@ internal abstract class Store : IItemFilter
         // Arcane casters can choose their spell
         if (SaveGame.Player.BaseCharacterClass.SpellCastingType.CanChooseSpellToStudy)
         {
-            if (!SaveGame.GetSpell(out spellIndex, "study", itemSubCategory, false, useSetTwo, SaveGame.Player) && spellIndex == -1)
+            if (!SaveGame.GetSpell(out spellIndex, "study", bookItem, false, useSetTwo, SaveGame.Player) && spellIndex == -1)
             {
                 return;
             }

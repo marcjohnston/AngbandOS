@@ -9052,7 +9052,7 @@ internal class SaveGame
         MsgPrint("Oops. That object cannot be activated.");
     }
 
-    public bool GetSpell(out int sn, string prompt, int spellBookSubcategory, bool known, bool realm2, Player player)
+    public bool GetSpell(out int sn, string prompt, BookItem spellBook, bool known, bool realm2, Player player)
     {
         int i;
         int spell;
@@ -9060,7 +9060,7 @@ internal class SaveGame
         string p = player.BaseCharacterClass.SpellCastingType.SpellNoun;
         for (spell = 0; spell < 32; spell++)
         {
-            if ((Constants.BookSpellFlags[spellBookSubcategory] & (1u << spell)) != 0)
+            if ((Constants.BookSpellFlags[spellBook.ItemSubCategory] & (1u << spell)) != 0)
             {
                 spells.Add(spell);
             }
@@ -11532,8 +11532,6 @@ internal class SaveGame
 
     public void DoCmdBrowse()
     {
-        int spell;
-        List<int> spells = new List<int>();
         // Make sure we can read
         if (!Player.CanCastSpells)
         {
@@ -11556,20 +11554,12 @@ internal class SaveGame
             MsgPrint("You can't read that.");
             return;
         }
-        int bookSubCategory = item.ItemSubCategory;
         HandleStuff();
-        // Find all spells in the book and add them to the array
-        for (spell = 0; spell < 32; spell++)
-        {
-            if ((Constants.BookSpellFlags[bookSubCategory] & (1u << spell)) != 0)
-            {
-                spells.Add(spell);
-            }
-        }
+
         // Save the screen and overprint the spells in the book
         ScreenBuffer savedScreen = Screen.Clone();
         BookItemFactory book = (BookItemFactory)item.Factory;
-        Player.PrintSpells(spells.ToArray(), 1, 20, book.ToRealm);
+        Player.PrintSpells(book.Spells.ToArray(), 1, 20);
         Screen.PrintLine("", 0, 0);
         // Wait for a keypress and re-load the screen
         Screen.Print("[Press any key to continue]", 0, 23);
@@ -11700,8 +11690,9 @@ internal class SaveGame
             return;
         }
         bool useSetTwo = oPtr.Category == Player.SecondaryRealm?.SpellBookItemCategory;
+        BookItem bookItem = (BookItem)oPtr;
         HandleStuff();
-        if (!GetSpell(out int spell, Player.BaseCharacterClass.SpellCastingType.CastVerb, oPtr.ItemSubCategory, true, useSetTwo, Player))
+        if (!GetSpell(out int spell, Player.BaseCharacterClass.SpellCastingType.CastVerb, bookItem, true, useSetTwo, Player))
         {
             if (spell == -2)
             {
