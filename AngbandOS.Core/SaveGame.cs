@@ -9052,6 +9052,10 @@ internal class SaveGame
         MsgPrint("Oops. That object cannot be activated.");
     }
 
+    /// <summary>
+    /// Returns an spell selected by the player.  If the player doesn't have any spells capable of being selected, false is returned; otherwise the spell selected by the user is returned on the output
+    /// parameter.  If the user cancels the selection, a true value is returned and the output spell parameter is set to null.
+    /// </summary>
     public bool GetSpell(out int sn, string prompt, BookItem spellBook, bool known, bool realm2, Player player)
     {
         int i;
