@@ -20,6 +20,11 @@ internal class DeathSpellEnslaveUndead : Spell
         SaveGame.ControlOneUndead(dir, SaveGame.Player.Level);
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(7, 0);
+    }
+
     public override string Name => "Enslave Undead";
     
 }

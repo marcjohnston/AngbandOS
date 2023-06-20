@@ -18,6 +18,11 @@ internal class DeathSpellBerserk : Spell
         SaveGame.Player.TimedFear.ResetTimer();
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(16, 2);
+    }
+
     public override string Name => "Berserk";
     
     protected override string? Info()

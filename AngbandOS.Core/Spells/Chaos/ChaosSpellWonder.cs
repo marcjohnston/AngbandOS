@@ -138,6 +138,11 @@ internal class ChaosSpellWonder : Spell
             SaveGame.Player.RestoreHealth(300);
         }
     }
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(8);
+    }
+
 
     public override string Name => "Wonder";
     

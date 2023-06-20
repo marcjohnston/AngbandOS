@@ -16,6 +16,11 @@ internal class DeathSpellVampiricBranding : Spell
         SaveGame.BrandWeapon(3);
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(21, 2);
+    }
+
     public override string Name => "Vampiric Branding";
     
 }

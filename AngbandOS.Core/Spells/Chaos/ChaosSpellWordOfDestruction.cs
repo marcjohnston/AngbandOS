@@ -16,6 +16,11 @@ internal class ChaosSpellWordOfDestruction : Spell
         SaveGame.DestroyArea(SaveGame.Player.MapY, SaveGame.Player.MapX, 15);
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(14);
+    }
+
     public override string Name => "Word of Destruction";
     
 }

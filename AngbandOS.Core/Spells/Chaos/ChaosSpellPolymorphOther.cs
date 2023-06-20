@@ -20,6 +20,11 @@ internal class ChaosSpellPolymorphOther : Spell
         SaveGame.PolyMonster(dir);
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(16);
+    }
+
     public override string Name => "Polymorph Other";
     
 }

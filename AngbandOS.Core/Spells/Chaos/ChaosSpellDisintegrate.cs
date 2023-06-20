@@ -21,6 +21,11 @@ internal class ChaosSpellDisintegrate : Spell
             3 + (SaveGame.Player.Level / 40));
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(19);
+    }
+
     public override string Name => "Disintegrate";
     
     protected override string? Info()

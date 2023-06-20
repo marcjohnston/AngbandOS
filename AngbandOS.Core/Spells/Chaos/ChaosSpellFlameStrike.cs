@@ -16,6 +16,11 @@ internal class ChaosSpellFlameStrike : Spell
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), 0, 150 + (2 * SaveGame.Player.Level), 8);
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(26);
+    }
+
     public override string Name => "Flame Strike";
     
     protected override string? Info()

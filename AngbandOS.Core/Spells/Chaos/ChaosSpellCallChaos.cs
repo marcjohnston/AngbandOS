@@ -16,6 +16,11 @@ internal class ChaosSpellCallChaos : Spell
         SaveGame.CallChaos();
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(27);
+    }
+
     public override string Name => "Call Chaos";
     
     protected override string? Info()

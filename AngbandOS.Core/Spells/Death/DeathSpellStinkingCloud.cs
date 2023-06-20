@@ -20,6 +20,11 @@ internal class DeathSpellStinkingCloud : Spell
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), dir, 10 + (SaveGame.Player.Level / 2), 2);
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(3, 0);
+    }
+
     public override string Name => "Stinking Cloud";
     
     protected override string? Info()

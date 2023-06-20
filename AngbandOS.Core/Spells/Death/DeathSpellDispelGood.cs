@@ -16,6 +16,11 @@ internal class DeathSpellDispelGood : Spell
         SaveGame.DispelGood(SaveGame.Player.Level * 4);
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(13, 1);
+    }
+
     public override string Name => "Dispel Good";
     
     protected override string? Info()

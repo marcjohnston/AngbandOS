@@ -39,6 +39,11 @@ internal class DeathSpellMalediction : Spell
         SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<StunProjectile>(), dir, SaveGame.Player.Level);
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(1, 0);
+    }
+
     public override string Name => "Malediction";
     
     protected override string? Info()

@@ -39,6 +39,11 @@ internal class ChaosSpellSummonDemon : Spell
         }
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(23);
+    }
+
     public override string Name => "Summon Demon";
     
     protected override string? Info()

@@ -20,6 +20,11 @@ internal class ChaosSpellManaStorm : Spell
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), dir, 300 + (SaveGame.Player.Level * 2), 4);
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(29);
+    }
+
     public override string Name => "Mana Storm";
     
     protected override string? Info()

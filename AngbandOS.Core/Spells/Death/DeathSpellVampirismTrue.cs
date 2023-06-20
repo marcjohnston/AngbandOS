@@ -26,6 +26,11 @@ internal class DeathSpellVampirismTrue : Spell
         }
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(20, 2);
+    }
+
     public override string Name => "Vampirism True";
     
     protected override string? Info()

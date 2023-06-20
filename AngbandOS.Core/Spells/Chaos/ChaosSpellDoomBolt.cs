@@ -20,6 +20,11 @@ internal class ChaosSpellDoomBolt : Spell
         SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), dir, Program.Rng.DiceRoll(11 + ((SaveGame.Player.Level - 5) / 4), 8));
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(11);
+    }
+
     public override string Name => "Doom Bolt";
     
     protected override string? Info()

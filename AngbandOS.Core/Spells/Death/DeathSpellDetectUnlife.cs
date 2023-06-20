@@ -16,6 +16,11 @@ internal class DeathSpellDetectUnlife : Spell
         SaveGame.DetectMonstersNonliving();
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(0, 0);
+    }
+
     public override string Name => "Detect Unlife";
     
 }

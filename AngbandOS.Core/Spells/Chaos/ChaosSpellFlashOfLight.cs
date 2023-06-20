@@ -16,6 +16,11 @@ internal class ChaosSpellFlashOfLight : Spell
         SaveGame.LightArea(Program.Rng.DiceRoll(2, SaveGame.Player.Level / 2), (SaveGame.Player.Level / 10) + 1);
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(2);
+    }
+
     public override string Name => "Flash of Light";
     
     protected override string? Info()

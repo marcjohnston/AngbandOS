@@ -35,6 +35,11 @@ internal class DeathSpellDarkBolt : Spell
         SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get<DarkProjectile>(), dir, Program.Rng.DiceRoll(4 + ((SaveGame.Player.Level - 5) / 4), 8));
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(18, 2);
+    }
+
     public override string Name => "Dark Bolt";
     
     protected override string? Info()

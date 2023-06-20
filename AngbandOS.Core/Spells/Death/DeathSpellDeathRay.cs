@@ -20,6 +20,11 @@ internal class DeathSpellDeathRay : Spell
         SaveGame.DeathRay(dir, SaveGame.Player.Level);
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(24, 3);
+    }
+
     public override string Name => "Death Ray";
     
 }

@@ -16,6 +16,11 @@ internal class ChaosSpellTrapAndDoorDestruction : Spell
         SaveGame.DestroyDoorsTouch();
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(1);
+    }
+
     public override string Name => "Trap and Door Destruction";
     
 }

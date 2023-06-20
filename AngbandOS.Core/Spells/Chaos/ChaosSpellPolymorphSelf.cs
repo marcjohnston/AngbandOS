@@ -16,6 +16,11 @@ internal class ChaosSpellPolymorphSelf : Spell
         SaveGame.Player.PolymorphSelf(SaveGame);
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(21);
+    }
+
     public override string Name => "Polymorph Self";
     
 }

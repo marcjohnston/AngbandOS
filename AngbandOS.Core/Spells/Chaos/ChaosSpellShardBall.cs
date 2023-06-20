@@ -20,6 +20,11 @@ internal class ChaosSpellShardBall : Spell
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ShardProjectile>(), dir, 120 + SaveGame.Player.Level, 2);
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(28);
+    }
+
     public override string Name => "Shard Ball";
     
     protected override string? Info()

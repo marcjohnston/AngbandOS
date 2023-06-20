@@ -16,6 +16,11 @@ internal class DeathSpellTerror : Spell
         SaveGame.TurnMonsters(30 + SaveGame.Player.Level);
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(10, 1);
+    }
+
     public override string Name => "Terror";
     
 }

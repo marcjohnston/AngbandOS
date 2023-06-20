@@ -22,6 +22,10 @@ internal class ChaosSpellManaBurst : Spell
             SaveGame.Player.Level < 30 ? 2 : 3);
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(4);
+    }
     public override string Name => "Mana Burst";
     
     protected override string? Info() // TODO: Player to SaveGame

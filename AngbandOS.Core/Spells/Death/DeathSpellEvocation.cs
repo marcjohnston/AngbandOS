@@ -18,6 +18,11 @@ internal class DeathSpellEvocation : Spell
         SaveGame.BanishMonsters(SaveGame.Player.Level * 4);
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(28, 3);
+    }
+
     public override string Name => "Evocation";
     
     protected override string? Info()

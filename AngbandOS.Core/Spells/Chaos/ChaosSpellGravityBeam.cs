@@ -21,6 +21,11 @@ internal class ChaosSpellGravityBeam : Spell
             Program.Rng.DiceRoll(9 + ((SaveGame.Player.Level - 5) / 4), 8));
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(24);
+    }
+
     public override string Name => "Gravity Beam";
     
     protected override string? Info()

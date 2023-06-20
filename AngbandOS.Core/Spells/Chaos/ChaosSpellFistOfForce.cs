@@ -21,6 +21,11 @@ internal class ChaosSpellFistOfForce : Spell
             Program.Rng.DiceRoll(8 + ((SaveGame.Player.Level - 5) / 4), 8), 0);
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(6);
+    }
+
     public override string Name => "Fist of Force";
     
     protected override string? Info()

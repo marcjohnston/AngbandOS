@@ -17,6 +17,11 @@ internal class ChaosSpellSonicBoom : Spell
             SaveGame.SingletonRepository.Projectiles.Get<SoundProjectile>(), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(10);
+    }
+
     public override string Name => "Sonic Boom";
     
     protected override string? Info()

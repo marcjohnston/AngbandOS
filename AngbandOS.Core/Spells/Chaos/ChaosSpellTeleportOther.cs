@@ -20,6 +20,11 @@ internal class ChaosSpellTeleportOther : Spell
         SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<TeleportAwayAllProjectile>(), dir, SaveGame.Player.Level);
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(13);
+    }
+
     public override string Name => "Teleport Other";
     
 }

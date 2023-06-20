@@ -15,6 +15,11 @@ internal class ChaosSpellArcaneBinding : Spell
     {
         SaveGame.Recharge(40);
     }
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(18);
+    }
+
 
     public override string Name => "Arcane Binding";
     

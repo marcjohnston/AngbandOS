@@ -144,6 +144,11 @@ internal class DeathSpellInvokeSpirits : Spell
         }
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(17, 2);
+    }
+
     public override string Name => "Invoke Spirits";
     
     protected override string? Info()

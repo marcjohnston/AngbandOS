@@ -16,6 +16,11 @@ internal class DeathSpellDetectEvil : Spell
         SaveGame.DetectMonstersEvil();
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(2, 0);
+    }
+
     public override string Name => "Detect Evil";
     
 }

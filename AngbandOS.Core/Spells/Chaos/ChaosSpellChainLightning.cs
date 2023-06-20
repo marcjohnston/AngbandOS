@@ -19,6 +19,11 @@ internal class ChaosSpellChainLightning : Spell
         }
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(17);
+    }
+
     public override string Name => "Chain Lightning";
     
     protected override string? Info()

@@ -16,6 +16,11 @@ internal class DeathSpellWordOfDeath : Spell
         SaveGame.DispelLiving(SaveGame.Player.Level * 3);
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(27, 3);
+    }
+
     public override string Name => "Word of Death";
     
     protected override string? Info()

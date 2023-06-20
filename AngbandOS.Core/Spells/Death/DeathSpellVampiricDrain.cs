@@ -30,6 +30,11 @@ internal class DeathSpellVampiricDrain : Spell
         }
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(11, 1);
+    }
+
     public override string Name => "Vampiric Drain";
     
     protected override string? Info()

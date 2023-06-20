@@ -16,6 +16,11 @@ internal class ChaosSpellTeleportSelf : Spell
         SaveGame.TeleportPlayer(SaveGame.Player.Level * 5);
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(7);
+    }
+
     public override string Name => "Teleport Self";
     
     protected override string? Info()

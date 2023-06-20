@@ -21,6 +21,11 @@ internal class DeathSpellHorrify : Spell
         SaveGame.StunMonster(dir, SaveGame.Player.Level);
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(6, 0);
+    }
+
     public override string Name => "Horrify";
     
 }

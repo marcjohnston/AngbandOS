@@ -26,6 +26,11 @@ internal class DeathSpellBattleFrenzy : Spell
         }
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(19, 2);
+    }
+
     public override string Name => "Battle Frenzy";
     
     protected override string? Info()

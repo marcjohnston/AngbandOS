@@ -11714,27 +11714,7 @@ internal class SaveGame
         if (Program.Rng.RandomLessThan(100) < chance)
         {
             MsgPrint($"You failed to get the {prayer} off!");
-            if (oPtr.Category == ItemTypeEnum.ChaosBook && Program.Rng.DieRoll(100) < spell)
-            {
-                MsgPrint("You produce a chaotic effect!");
-                WildMagic(spell);
-            }
-            else if (oPtr.Category == ItemTypeEnum.DeathBook && Program.Rng.DieRoll(100) < spell)
-            {
-                if (oPtr.ItemSubCategory == 3 && Program.Rng.DieRoll(2) == 1)
-                {
-                    Level.Monsters[0].SanityBlast(this, true);
-                }
-                else
-                {
-                    MsgPrint("It hurts!");
-                    Player.TakeHit(Program.Rng.DiceRoll(oPtr.ItemSubCategory + 1, 6), "a miscast Death spell");
-                    if (spell > 15 && Program.Rng.DieRoll(6) == 1 && !Player.HasHoldLife)
-                    {
-                        Player.LoseExperience(spell * 250);
-                    }
-                }
-            }
+            sPtr.CastFailed();
         }
         else
         {
@@ -11928,118 +11908,6 @@ internal class SaveGame
         }
         sn = i;
         return true;
-    }
-
-    private void WildMagic(int spell)
-    {
-        switch (Program.Rng.DieRoll(spell) + Program.Rng.DieRoll(8) + 1) // TODO: Convert this to WeightedRandom
-        {
-            case 1:
-            case 2:
-            case 3:
-                TeleportPlayer(10);
-                break;
-
-            case 4:
-            case 5:
-            case 6:
-                TeleportPlayer(100);
-                break;
-
-            case 7:
-            case 8:
-                TeleportPlayer(200);
-                break;
-
-            case 9:
-            case 10:
-            case 11:
-                UnlightArea(10, 3);
-                break;
-
-            case 12:
-            case 13:
-            case 14:
-                LightArea(Program.Rng.DiceRoll(2, 3), 2);
-                break;
-
-            case 15:
-                DestroyDoorsTouch();
-                break;
-
-            case 16:
-            case 17:
-                WallBreaker();
-                break;
-
-            case 18:
-                SleepMonstersTouch();
-                break;
-
-            case 19:
-            case 20:
-                TrapCreation();
-                break;
-
-            case 21:
-            case 22:
-                DoorCreation();
-                break;
-
-            case 23:
-            case 24:
-            case 25:
-                AggravateMonsters();
-                break;
-
-            case 26:
-                Earthquake(Player.MapY, Player.MapX, 5);
-                break;
-
-            case 27:
-            case 28:
-                Player.Dna.GainMutation();
-                break;
-
-            case 29:
-            case 30:
-                ApplyDisenchant();
-                break;
-
-            case 31:
-                LoseAllInfo();
-                break;
-
-            case 32:
-                FireBall(SingletonRepository.Projectiles.Get<ChaosProjectile>(), 0, spell + 5, 1 + (spell / 10));
-                break;
-
-            case 33:
-                WallStone();
-                break;
-
-            case 34:
-            case 35:
-                int counter = 0;
-                while (counter++ < 8)
-                {
-                    Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty * 3 / 2, MonsterSelector.RandomBizarre());
-                }
-                break;
-
-            case 36:
-            case 37:
-                ActivateHiSummon();
-                break;
-
-            case 38:
-                SummonReaver();
-                break;
-
-            default:
-                ActivateDreadCurse();
-                break;
-        }
     }
 
     public void DoAimWand()

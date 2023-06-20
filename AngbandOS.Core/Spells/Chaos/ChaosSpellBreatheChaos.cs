@@ -20,6 +20,11 @@ internal class ChaosSpellBreatheChaos : Spell
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>(), dir, SaveGame.Player.Health, -2);
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(30);
+    }
+
     public override string Name => "Breathe Chaos";
     
     protected override string? Info()

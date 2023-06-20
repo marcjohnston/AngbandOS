@@ -20,6 +20,11 @@ internal class DeathSpellDarknessStorm : Spell
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<DarkProjectile>(), dir, 120, 4);
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(22, 2);
+    }
+
     public override string Name => "Darkness Storm";
     
     protected override string? Info()

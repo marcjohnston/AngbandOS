@@ -36,6 +36,11 @@ internal class ChaosSpellMagicMissile : Spell
             Program.Rng.DiceRoll(3 + ((SaveGame.Player.Level - 1) / 5), 4));
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(0);
+    }
+
     public override string Name => "Magic Missile";
     
     protected override string? Info()

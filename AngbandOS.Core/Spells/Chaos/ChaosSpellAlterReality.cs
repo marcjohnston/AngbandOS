@@ -19,6 +19,11 @@ internal class ChaosSpellAlterReality : Spell
         SaveGame.CameFrom = LevelStart.StartRandom;
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(20);
+    }
+
     public override string Name => "Alter Reality";
 
 }

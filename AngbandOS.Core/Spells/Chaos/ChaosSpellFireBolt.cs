@@ -35,6 +35,11 @@ internal class ChaosSpellFireBolt : Spell
         SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, Program.Rng.DiceRoll(8 + ((SaveGame.Player.Level - 5) / 4), 8));
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(5);
+    }
+
     public override string Name => "Fire Bolt";
     
     protected override string? Info()

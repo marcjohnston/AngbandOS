@@ -21,6 +21,11 @@ internal class DeathSpellHellfire : Spell
         SaveGame.Player.TakeHit(50 + Program.Rng.DieRoll(50), "the strain of casting Hellfire");
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(29, 3);
+    }
+
     public override string Name => "Hellfire";
     
     protected override string? Info()

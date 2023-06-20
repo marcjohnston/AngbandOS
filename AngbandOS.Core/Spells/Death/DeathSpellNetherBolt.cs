@@ -36,6 +36,11 @@ internal class DeathSpellNetherBolt : Spell
             Program.Rng.DiceRoll(6 + ((SaveGame.Player.Level - 5) / 4), 8));
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(9, 1);
+    }
+
     public override string Name => "Nether Bolt";
     
     protected override string? Info()

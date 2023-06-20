@@ -43,6 +43,11 @@ internal class ChaosSpellMeteorSwarm : Spell
         }
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(25);
+    }
+
     public override string Name => "Meteor Swarm";
     
     protected override string? Info()

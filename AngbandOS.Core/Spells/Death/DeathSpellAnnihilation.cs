@@ -43,6 +43,11 @@ internal class DeathSpellAnnihilation : Spell
         SaveGame.Player.Mana += 100;
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(30, 3);
+    }
+
     public override string Name => "Annihilation";
     
 }

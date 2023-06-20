@@ -23,6 +23,11 @@ internal class DeathSpellOrbOfEntropy : Spell
             SaveGame.Player.Level < 30 ? 2 : 3);
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(8, 1);
+    }
+
     public override string Name => "Orb of Entropy";
     
     protected override string? Info()

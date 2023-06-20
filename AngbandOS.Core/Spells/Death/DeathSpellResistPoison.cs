@@ -16,6 +16,11 @@ internal class DeathSpellResistPoison : Spell
         SaveGame.Player.TimedPoisonResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(5, 0);
+    }
+
     public override string Name => "Resist Poison";
     
     protected override string? Info()

@@ -42,6 +42,11 @@ internal class DeathSpellRaiseTheDead : Spell
         }
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(25, 3);
+    }
+
     public override string Name => "Raise the Dead";
     
     protected override string? Info()

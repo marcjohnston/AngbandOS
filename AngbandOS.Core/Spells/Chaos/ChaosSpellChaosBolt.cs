@@ -36,6 +36,11 @@ internal class ChaosSpellChaosBolt : Spell
             Program.Rng.DiceRoll(10 + ((SaveGame.Player.Level - 5) / 4), 8));
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(9);
+    }
+
     public override string Name => "Chaos Bolt";
     
     protected override string? Info()

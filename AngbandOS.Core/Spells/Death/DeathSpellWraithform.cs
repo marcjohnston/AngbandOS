@@ -16,6 +16,11 @@ internal class DeathSpellWraithform : Spell
         SaveGame.Player.TimedEtherealness.AddTimer(Program.Rng.DieRoll(SaveGame.Player.Level / 2) + (SaveGame.Player.Level / 2));
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(31, 3);
+    }
+
     public override string Name => "Wraithform";
     
     protected override string? Info()

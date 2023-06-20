@@ -16,6 +16,11 @@ internal class DeathSpellRestoreLife : Spell
         SaveGame.Player.RestoreLevel();
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(15, 1);
+    }
+
     public override string Name => "Restore Life";
     
 }

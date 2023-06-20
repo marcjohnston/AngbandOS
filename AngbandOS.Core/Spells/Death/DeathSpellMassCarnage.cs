@@ -16,6 +16,11 @@ internal class DeathSpellMassCarnage : Spell
         SaveGame.MassCarnage(true);
     }
 
+    public override void CastFailed()
+    {
+        DoWildDeathMagic(23, 2);
+    }
+
     public override string Name => "Mass Carnage";
     
 }

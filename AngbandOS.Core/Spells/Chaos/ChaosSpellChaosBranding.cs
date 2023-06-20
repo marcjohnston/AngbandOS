@@ -16,6 +16,11 @@ internal class ChaosSpellChaosBranding : Spell
         SaveGame.BrandWeapon(1);
     }
 
+    public override void CastFailed()
+    {
+        DoWildChaoticMagic(22);
+    }
+
     public override string Name => "Chaos Branding";
     
 }

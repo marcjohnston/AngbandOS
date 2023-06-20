@@ -59,6 +59,11 @@ internal abstract class Spell
 
     public abstract void Cast();
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public virtual void CastFailed() { }
+
     public int FailureChance() 
     {
         BaseCharacterClass baseCharacterClass = SaveGame.Player.BaseCharacterClass;
@@ -167,4 +172,142 @@ internal abstract class Spell
     /// </summary>
     /// <returns></returns>
     protected virtual string? Info() => null;
+
+    protected void DoWildDeathMagic(int spell, int subCategory)
+    {
+        if (Program.Rng.DieRoll(100) < spell)
+        {
+            if (subCategory == 3 && Program.Rng.DieRoll(2) == 1)
+            {
+                SaveGame.Level.Monsters[0].SanityBlast(SaveGame, true);
+            }
+            else
+            {
+                SaveGame.MsgPrint("It hurts!");
+                SaveGame.Player.TakeHit(Program.Rng.DiceRoll(subCategory + 1, 6), "a miscast Death spell");
+                if (spell > 15 && Program.Rng.DieRoll(6) == 1 && !SaveGame.Player.HasHoldLife)
+                {
+                    SaveGame.Player.LoseExperience(spell * 250);
+                }
+            }
+        }
+    }
+
+    protected void DoWildChaoticMagic(int spell)
+    {
+        if (Program.Rng.DieRoll(100) >= spell)
+        {
+            return;
+        }
+
+        SaveGame.MsgPrint("You produce a chaotic effect!");
+        switch (Program.Rng.DieRoll(spell) + Program.Rng.DieRoll(8) + 1) // TODO: Convert this to WeightedRandom
+        {
+            case 1:
+            case 2:
+            case 3:
+                SaveGame.TeleportPlayer(10);
+                break;
+
+            case 4:
+            case 5:
+            case 6:
+                SaveGame.TeleportPlayer(100);
+                break;
+
+            case 7:
+            case 8:
+                SaveGame.TeleportPlayer(200);
+                break;
+
+            case 9:
+            case 10:
+            case 11:
+                SaveGame.UnlightArea(10, 3);
+                break;
+
+            case 12:
+            case 13:
+            case 14:
+                SaveGame.LightArea(Program.Rng.DiceRoll(2, 3), 2);
+                break;
+
+            case 15:
+                SaveGame.DestroyDoorsTouch();
+                break;
+
+            case 16:
+            case 17:
+                SaveGame.WallBreaker();
+                break;
+
+            case 18:
+                SaveGame.SleepMonstersTouch();
+                break;
+
+            case 19:
+            case 20:
+                SaveGame.TrapCreation();
+                break;
+
+            case 21:
+            case 22:
+                SaveGame.DoorCreation();
+                break;
+
+            case 23:
+            case 24:
+            case 25:
+                SaveGame.AggravateMonsters();
+                break;
+
+            case 26:
+                SaveGame.Earthquake(SaveGame.Player.MapY, SaveGame.Player.MapX, 5);
+                break;
+
+            case 27:
+            case 28:
+                SaveGame.Player.Dna.GainMutation();
+                break;
+
+            case 29:
+            case 30:
+                SaveGame.ApplyDisenchant();
+                break;
+
+            case 31:
+                SaveGame.LoseAllInfo();
+                break;
+
+            case 32:
+                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>(), 0, spell + 5, 1 + (spell / 10));
+                break;
+
+            case 33:
+                SaveGame.WallStone();
+                break;
+
+            case 34:
+            case 35:
+                int counter = 0;
+                while (counter++ < 8)
+                {
+                    SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Difficulty * 3 / 2, MonsterSelector.RandomBizarre());
+                }
+                break;
+
+            case 36:
+            case 37:
+                SaveGame.ActivateHiSummon();
+                break;
+
+            case 38:
+                SaveGame.SummonReaver();
+                break;
+
+            default:
+                SaveGame.ActivateDreadCurse();
+                break;
+        }
+    }
 }
