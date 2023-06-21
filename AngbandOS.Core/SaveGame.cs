@@ -18486,31 +18486,6 @@ internal class SaveGame
         MsgPrint("Allocated.");
     }
 
-    private void WizQuantityItem(Item oPtr)
-    {
-        if (oPtr.FixedArtifact != null || !string.IsNullOrEmpty(oPtr.RandartName))
-        {
-            return;
-        }
-        string def = $"{oPtr.Count}";
-        if (GetString("Quantity: ", out string tmpVal, def, 2))
-        {
-            if (!int.TryParse(tmpVal, out int tmpInt))
-            {
-                tmpInt = 1;
-            }
-            if (tmpInt < 1)
-            {
-                tmpInt = 1;
-            }
-            if (tmpInt > 99)
-            {
-                tmpInt = 99;
-            }
-            oPtr.Count = tmpInt;
-        }
-    }
-
     public void EnterWizardMode()
     {
         Screen.PrintLine("Enter Wizard Code: ", 0, 0);
