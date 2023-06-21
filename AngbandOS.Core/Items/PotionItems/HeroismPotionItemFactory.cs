@@ -22,7 +22,6 @@ internal class HeroismPotionItemFactory : PotionItemFactory
     public override string FriendlyName => "Heroism";
     public override int Level => 1;
     public override int[] Locale => new int[] { 1, 0, 0, 0 };
-    public override int? SubCategory => (int)PotionType.Heroism;
     public override int Weight => 4;
     public override bool Quaff(SaveGame saveGame)
     {

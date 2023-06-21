@@ -26,7 +26,6 @@ internal class AnnihilationWandItemFactory : WandItemFactory
     public override bool IgnoreFire => true;
     public override int Level => 60;
     public override int[] Locale => new int[] { 60, 0, 0, 0 };
-    public override int? SubCategory => WandType.Annihilation;
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {

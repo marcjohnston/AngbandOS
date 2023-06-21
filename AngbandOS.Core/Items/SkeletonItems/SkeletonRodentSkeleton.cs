@@ -22,7 +22,6 @@ internal class SkeletonRodentSkeleton : SkeletonItemClass
     public override string FriendlyName => "& Rodent Skeleton~";
     public override int Level => 1;
     public override int[] Locale => new int[] { 1, 0, 0, 0 };
-    public override int? SubCategory => 3;
     public override int Weight => 10;
     public override Item CreateItem() => new RodentSkeletonItem(SaveGame);
 }

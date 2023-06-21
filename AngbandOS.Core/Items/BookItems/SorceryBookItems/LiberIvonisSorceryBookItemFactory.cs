@@ -27,7 +27,6 @@ internal class LiberIvonisSorceryBookItemFactory : SorceryBookItemFactory
     public override bool IgnoreFire => true;
     public override int Level => 90;
     public override int[] Locale => new int[] { 90, 0, 0, 0 };
-    public override int? SubCategory => 3;
 
     /// <summary>
     /// Returns true, because this book is a high level book.

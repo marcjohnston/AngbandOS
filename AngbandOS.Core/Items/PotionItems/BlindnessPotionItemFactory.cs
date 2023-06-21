@@ -19,7 +19,6 @@ internal class BlindnessPotionItemFactory : PotionItemFactory
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Blindness";
-    public override int? SubCategory => (int)PotionType.Blindness;
     public override int Weight => 4;
 
     public override bool Quaff(SaveGame saveGame)

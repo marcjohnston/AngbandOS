@@ -24,7 +24,6 @@ internal class PolearmSpear : PolearmItemClass
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override bool ShowMods => true;
-    public override int? SubCategory => 2;
     public override int Weight => 50;
     public override Item CreateItem() => new SpearPolearmWeaponItem(SaveGame);
 }

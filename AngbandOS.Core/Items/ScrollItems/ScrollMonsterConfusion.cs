@@ -20,7 +20,6 @@ internal class ScrollMonsterConfusion : ScrollItemClass
     public override string FriendlyName => "Monster Confusion";
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
-    public override int? SubCategory => 36;
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

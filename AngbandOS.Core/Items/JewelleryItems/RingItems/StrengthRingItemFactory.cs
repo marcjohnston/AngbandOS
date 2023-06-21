@@ -22,7 +22,6 @@ internal class StrengthRingItemFactory : RingItemFactory
     public override int Level => 30;
     public override int[] Locale => new int[] { 30, 0, 0, 0 };
     public override bool Str => true;
-    public override int? SubCategory => 24;
     public override int Weight => 2;
     public override Item CreateItem() => new StrengthRingItem(SaveGame);
 }

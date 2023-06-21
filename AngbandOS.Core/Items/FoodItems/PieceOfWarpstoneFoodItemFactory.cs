@@ -23,7 +23,6 @@ internal class PieceOfWarpstoneFoodItemFactory : FoodItemFactory
     public override string FriendlyName => "& Piece~ of Warpstone";
     public override int Level => 30;
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
-    public override int? SubCategory => 40;
     public override int Weight => 1;
     public override bool Eat()
     {

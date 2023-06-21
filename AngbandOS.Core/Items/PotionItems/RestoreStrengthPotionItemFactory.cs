@@ -22,7 +22,6 @@ internal class RestoreStrengthPotionItemFactory : PotionItemFactory
     public override string FriendlyName => "Restore Strength";
     public override int Level => 25;
     public override int[] Locale => new int[] { 25, 0, 0, 0 };
-    public override int? SubCategory => (int)PotionType.ResStr;
     public override int Weight => 4;
     public override bool Quaff(SaveGame saveGame)
     {

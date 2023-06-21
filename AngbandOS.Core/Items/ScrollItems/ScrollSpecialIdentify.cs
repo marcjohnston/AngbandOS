@@ -20,7 +20,6 @@ internal class ScrollSpecialIdentify : ScrollItemClass
     public override string FriendlyName => "*Identify*";
     public override int Level => 30;
     public override int[] Locale => new int[] { 30, 50, 80, 100 };
-    public override int? SubCategory => 13;
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

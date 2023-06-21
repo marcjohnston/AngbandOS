@@ -22,7 +22,6 @@ internal class RobeSoftArmorItemFactory : SoftArmorItemClass
     public override string FriendlyName => "& Robe~";
     public override int Level => 1;
     public override int[] Locale => new int[] { 1, 50, 0, 0 };
-    public override int? SubCategory => 2;
     public override int Weight => 20;
     public override Item CreateItem() => new RobeSoftArmorItem(SaveGame);
 }

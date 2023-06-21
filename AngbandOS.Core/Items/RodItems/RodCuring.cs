@@ -23,7 +23,6 @@ internal class RodCuring : RodItemFactory
     public override string FriendlyName => "Curing";
     public override int Level => 65;
     public override int[] Locale => new int[] { 65, 0, 0, 0 };
-    public override int? SubCategory => 8;
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {

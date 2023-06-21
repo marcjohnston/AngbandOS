@@ -32,7 +32,6 @@ internal class ChaosDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
     public override int[] Locale => new int[] { 75, 0, 0, 0 };
     public override bool ResChaos => true;
     public override bool ResDisen => true;
-    public override int? SubCategory => 18;
     public override int ToA => 10;
     public override int ToH => -2;
     public override int Weight => 200;

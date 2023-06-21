@@ -22,7 +22,6 @@ internal class SoftLeatherSoftArmorItemFactory : SoftArmorItemClass
     public override string FriendlyName => "Soft Leather Armour~";
     public override int Level => 3;
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
-    public override int? SubCategory => 4;
     public override int Weight => 80;
     public override Item CreateItem() => new SoftLeatherSoftArmorItem(SaveGame);
 }

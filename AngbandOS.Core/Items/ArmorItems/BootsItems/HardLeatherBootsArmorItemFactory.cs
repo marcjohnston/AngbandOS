@@ -24,7 +24,6 @@ internal class HardLeatherBootsArmorItemFactory : BootsArmorItemFactory
     public override string FriendlyName => "& Pair~ of Hard Leather Boots";
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
-    public override int? SubCategory => 3;
     public override int Weight => 40;
     public override Item CreateItem() => new HardLeatherBootsArmorItem(SaveGame);
 }

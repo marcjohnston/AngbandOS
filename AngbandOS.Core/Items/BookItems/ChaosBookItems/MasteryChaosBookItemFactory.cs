@@ -23,7 +23,6 @@ internal class MasteryChaosBookItemFactory : ChaosBookItemFactory
     public override string FriendlyName => "[Chaos Mastery]";
     public override int Level => 20;
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
-    public override int? SubCategory => 1;
     public override int Weight => 30;
     public override bool KindIsGood => false;
     public override Item CreateItem() => new MasteryChaosBookItem(SaveGame);

@@ -20,7 +20,6 @@ internal class EmptyBottleItemFactory : BottleItemFactory
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "& Empty Bottle~";
-    public override int? SubCategory => 1;
     public override int Weight => 2;
     public override Item CreateItem() => new EmptyBottle(SaveGame);
 }

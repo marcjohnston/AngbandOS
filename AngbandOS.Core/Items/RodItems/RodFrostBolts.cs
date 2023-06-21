@@ -23,7 +23,6 @@ internal class RodFrostBolts : RodItemFactory
     public override string FriendlyName => "Frost Bolts";
     public override int Level => 25;
     public override int[] Locale => new int[] { 25, 0, 0, 0 };
-    public override int? SubCategory => 23;
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {

@@ -24,7 +24,6 @@ internal class MetalShodBootsArmorItemFactory : BootsArmorItemFactory
     public override string FriendlyName => "& Pair~ of Metal Shod Boots";
     public override int Level => 20;
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
-    public override int? SubCategory => 6;
     public override int Weight => 80;
     public override Item CreateItem() => new MetalShodBootsArmorItem(SaveGame);
 }

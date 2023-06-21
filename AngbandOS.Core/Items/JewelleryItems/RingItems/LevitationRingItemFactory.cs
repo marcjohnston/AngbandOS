@@ -22,7 +22,6 @@ internal class LevitationRingItemFactory : RingItemFactory
     public override string FriendlyName => "Levitation";
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
-    public override int? SubCategory => 7;
     public override int Weight => 2;
     public override Item CreateItem() => new LevitationRingItem(SaveGame);
 }

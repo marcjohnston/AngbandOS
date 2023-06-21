@@ -24,7 +24,6 @@ internal class PolearmPike : PolearmItemClass
     public override int Level => 15;
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
     public override bool ShowMods => true;
-    public override int? SubCategory => 8;
     public override int Weight => 160;
     public override Item CreateItem() => new PikePolearmWeaponItem(SaveGame);
 }

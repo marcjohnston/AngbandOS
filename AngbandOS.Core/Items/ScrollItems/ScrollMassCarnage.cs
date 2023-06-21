@@ -20,7 +20,6 @@ internal class ScrollMassCarnage : ScrollItemClass
     public override string FriendlyName => "Mass Carnage";
     public override int Level => 50;
     public override int[] Locale => new int[] { 50, 100, 0, 0 };
-    public override int? SubCategory => 45;
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

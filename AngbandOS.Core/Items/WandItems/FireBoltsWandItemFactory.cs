@@ -22,7 +22,6 @@ internal class FireBoltsWandItemFactory : WandItemFactory
     public override string FriendlyName => "Fire Bolts";
     public override int Level => 30;
     public override int[] Locale => new int[] { 30, 0, 0, 0 };
-    public override int? SubCategory => WandType.FireBolt;
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {

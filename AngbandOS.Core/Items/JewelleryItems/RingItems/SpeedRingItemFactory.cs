@@ -22,7 +22,6 @@ internal class SpeedRingItemFactory : RingItemFactory
     public override int Level => 80;
     public override int[] Locale => new int[] { 80, 0, 0, 0 };
     public override bool Speed => true;
-    public override int? SubCategory => 31;
     public override int Weight => 2;
 
     public override bool KindIsGood => true;

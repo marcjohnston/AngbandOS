@@ -20,7 +20,6 @@ internal class ScrollSatisfyHunger : ScrollItemClass
     public override string FriendlyName => "Satisfy Hunger";
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 20, 50, 75 };
-    public override int? SubCategory => 32;
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

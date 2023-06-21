@@ -21,7 +21,6 @@ internal class ClumsinessPotionItemFactory : PotionItemFactory
     public override string FriendlyName => "Clumsiness";
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
-    public override int? SubCategory => (int)PotionType.DecDex;
     public override int Weight => 4;
     public override bool Quaff(SaveGame saveGame)
     {

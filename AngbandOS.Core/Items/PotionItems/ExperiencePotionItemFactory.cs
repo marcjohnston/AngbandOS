@@ -22,7 +22,6 @@ internal class ExperiencePotionItemFactory : PotionItemFactory
     public override string FriendlyName => "Experience";
     public override int Level => 65;
     public override int[] Locale => new int[] { 65, 0, 0, 0 };
-    public override int? SubCategory => (int)PotionType.Experience;
     public override int Weight => 4;
     public override bool Quaff(SaveGame saveGame)
     {

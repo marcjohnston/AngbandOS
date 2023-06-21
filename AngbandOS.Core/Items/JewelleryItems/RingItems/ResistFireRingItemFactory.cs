@@ -23,7 +23,6 @@ internal class ResistFireRingItemFactory : RingItemFactory
     public override int Level => 10;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override bool ResFire => true;
-    public override int? SubCategory => 8;
     public override int Weight => 2;
     public override Item CreateItem() => new ResistFireRingItem(SaveGame);
 }

@@ -23,7 +23,6 @@ internal class NewLifePotionItemFactory : PotionItemFactory
     public override int Level => 50;
     public override int[] Locale => new int[] { 50, 100, 120, 0 };
     public override int Pval => 100;
-    public override int? SubCategory => (int)PotionType.NewLife;
     public override int Weight => 4;
     public override bool Quaff(SaveGame saveGame)
     {

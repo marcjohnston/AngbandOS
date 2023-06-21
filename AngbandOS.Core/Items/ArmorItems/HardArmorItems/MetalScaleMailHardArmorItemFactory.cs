@@ -24,7 +24,6 @@ internal class MetalScaleMailHardArmorItemFactory : HardArmorItemFactory
     public override string FriendlyName => "Metal Scale Mail~";
     public override int Level => 25;
     public override int[] Locale => new int[] { 25, 0, 0, 0 };
-    public override int? SubCategory => 3;
     public override int ToH => -2;
     public override int Weight => 250;
     public override Item CreateItem() => new MetalScaleMailHardArmorItem(SaveGame);

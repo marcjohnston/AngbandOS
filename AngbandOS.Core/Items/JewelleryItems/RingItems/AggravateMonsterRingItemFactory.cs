@@ -22,7 +22,6 @@ internal class AggravateMonsterRingItemFactory : RingItemFactory
     public override string FriendlyName => "Aggravate Monster";
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
-    public override int? SubCategory => 1;
     public override int Weight => 2;
     public override Item CreateItem() => new AggravateMonsterRingItem(SaveGame);
 }

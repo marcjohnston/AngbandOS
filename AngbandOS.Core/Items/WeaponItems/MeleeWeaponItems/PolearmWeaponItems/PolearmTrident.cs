@@ -24,7 +24,6 @@ internal class PolearmTrident : PolearmItemClass
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override bool ShowMods => true;
-    public override int? SubCategory => 5;
     public override int Weight => 70;
     public override Item CreateItem() => new TridentPolearmWeaponItem(SaveGame);
 }

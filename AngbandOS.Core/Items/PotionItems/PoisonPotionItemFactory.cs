@@ -21,7 +21,6 @@ internal class PoisonPotionItemFactory : PotionItemFactory
     public override string FriendlyName => "Poison";
     public override int Level => 3;
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
-    public override int? SubCategory => (int)PotionType.Poison;
     public override int Weight => 4;
 
     public override bool Quaff(SaveGame saveGame)

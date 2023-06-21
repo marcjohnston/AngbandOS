@@ -22,7 +22,6 @@ internal class TrapDoorDestructionWandItemFactory : WandItemFactory
     public override string FriendlyName => "Trap/Door Destruction";
     public override int Level => 10;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
-    public override int? SubCategory => WandType.TrapDoorDest;
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {

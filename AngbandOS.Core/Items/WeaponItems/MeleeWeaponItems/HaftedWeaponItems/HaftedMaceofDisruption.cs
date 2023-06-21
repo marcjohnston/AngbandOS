@@ -25,7 +25,6 @@ internal class HaftedMaceOfDisruption : HaftedItemClass
     public override int[] Locale => new int[] { 80, 0, 0, 0 };
     public override bool ShowMods => true;
     public override bool SlayUndead => true;
-    public override int? SubCategory => 20;
     public override int Weight => 400;
     public override Item CreateItem() => new MaceOfDisruptionHaftedWeaponItem(SaveGame);
 }

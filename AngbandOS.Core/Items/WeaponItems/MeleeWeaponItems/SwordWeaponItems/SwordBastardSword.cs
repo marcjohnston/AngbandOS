@@ -24,7 +24,6 @@ internal class SwordBastardSword : SwordItemClass
     public override int Level => 15;
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
     public override bool ShowMods => true;
-    public override int? SubCategory => 21;
     public override int Weight => 140;
     public override Item CreateItem() => new BastardSwordWeaponItem(SaveGame);
 }

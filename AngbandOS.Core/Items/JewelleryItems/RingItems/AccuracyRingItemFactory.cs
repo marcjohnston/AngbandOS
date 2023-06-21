@@ -20,7 +20,6 @@ internal class AccuracyRingItemFactory : RingItemFactory
     public override string FriendlyName => "Accuracy";
     public override int Level => 20;
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
-    public override int? SubCategory => 28;
     public override int Weight => 2;
     public override Item CreateItem() => new AccuracyRingItem(SaveGame);
 }

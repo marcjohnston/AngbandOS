@@ -24,7 +24,6 @@ internal class ScrollChaos : ScrollItemClass
     public override bool IgnoreFire => true;
     public override int Level => 100;
     public override int[] Locale => new int[] { 100, 0, 0, 0 };
-    public override int? SubCategory => 50;
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

@@ -23,7 +23,6 @@ internal class CardMasteryTarotBookItemFactory : TarotBookItemFactory
     public override string FriendlyName => "[Card Mastery]";
     public override int Level => 20;
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
-    public override int? SubCategory => 1;
     public override int Weight => 30;
     public override bool KindIsGood => false;
 

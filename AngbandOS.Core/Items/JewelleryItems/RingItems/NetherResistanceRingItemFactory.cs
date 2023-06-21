@@ -23,7 +23,6 @@ internal class NetherResistanceRingItemFactory : RingItemFactory
     public override int Level => 34;
     public override int[] Locale => new int[] { 34, 0, 0, 0 };
     public override bool ResNether => true;
-    public override int? SubCategory => 40;
     public override int Weight => 2;
     public override Item CreateItem() => new NetherResistanceRingItem(SaveGame);
 }

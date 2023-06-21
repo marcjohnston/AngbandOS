@@ -23,7 +23,6 @@ internal class RodHavoc : RodItemFactory
     public override string FriendlyName => "Havoc";
     public override int Level => 95;
     public override int[] Locale => new int[] { 100, 0, 0, 0 };
-    public override int? SubCategory => 28;
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {

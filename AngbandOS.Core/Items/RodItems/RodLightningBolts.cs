@@ -23,7 +23,6 @@ internal class RodLightningBolts : RodItemFactory
     public override string FriendlyName => "Lightning Bolts";
     public override int Level => 20;
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
-    public override int? SubCategory => 21;
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {

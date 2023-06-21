@@ -22,7 +22,6 @@ internal class SkeletonHumanSkeleton : SkeletonItemClass
     public override string FriendlyName => "& Human Skeleton~";
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
-    public override int? SubCategory => 8;
     public override int Weight => 60;
     public override Item CreateItem() => new HumanSkeletonItem(SaveGame);
 }

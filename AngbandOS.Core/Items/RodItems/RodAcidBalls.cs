@@ -23,7 +23,6 @@ internal class RodAcidBalls : RodItemFactory
     public override string FriendlyName => "Acid Balls";
     public override int Level => 70;
     public override int[] Locale => new int[] { 70, 0, 0, 0 };
-    public override int? SubCategory => 24;
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {

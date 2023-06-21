@@ -19,5 +19,4 @@ internal abstract class GlovesArmorItemFactory : ArmourItemFactory
 
     public override Colour Colour => Colour.BrightBrown;
 
-    public override int? SubCategory => null; // No longer being used
 }

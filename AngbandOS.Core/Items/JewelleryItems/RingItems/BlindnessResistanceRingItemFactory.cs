@@ -22,7 +22,6 @@ internal class BlindnessResistanceRingItemFactory : RingItemFactory
     public override int Level => 60;
     public override int[] Locale => new int[] { 60, 0, 0, 0 };
     public override bool ResBlind => true;
-    public override int? SubCategory => 47;
     public override int Weight => 2;
     public override Item CreateItem() => new BlindnessResistanceRingItem(SaveGame);
 }

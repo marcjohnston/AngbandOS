@@ -23,7 +23,6 @@ internal class ChaosResistanceRingItemFactory : RingItemFactory
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
     public override bool ResChaos => true;
     public override bool ResConf => true;
-    public override int? SubCategory => 46;
     public override int Weight => 2;
     public override Item CreateItem() => new ChaosResistanceRingItem(SaveGame);
 }

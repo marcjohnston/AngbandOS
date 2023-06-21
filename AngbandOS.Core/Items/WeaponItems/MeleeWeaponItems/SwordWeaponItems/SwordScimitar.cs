@@ -24,7 +24,6 @@ internal class SwordScimitar : SwordItemClass
     public override int Level => 10;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override bool ShowMods => true;
-    public override int? SubCategory => 18;
     public override int Weight => 130;
     public override Item CreateItem() => new ScimitarSwordWeaponItem(SaveGame);
 }

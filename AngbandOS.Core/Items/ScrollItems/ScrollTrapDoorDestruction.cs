@@ -20,7 +20,6 @@ internal class ScrollTrapDoorDestruction : ScrollItemClass
     public override string FriendlyName => "Trap/Door Destruction";
     public override int Level => 10;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
-    public override int? SubCategory => 39;
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

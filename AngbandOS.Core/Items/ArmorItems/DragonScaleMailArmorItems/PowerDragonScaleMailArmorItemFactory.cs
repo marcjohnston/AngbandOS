@@ -44,7 +44,6 @@ internal class PowerDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
     public override bool ResPois => true;
     public override bool ResShards => true;
     public override bool ResSound => true;
-    public override int? SubCategory => 30;
     public override int ToA => 15;
     public override int ToH => -3;
     public override int Weight => 250;

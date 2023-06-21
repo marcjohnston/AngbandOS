@@ -23,7 +23,6 @@ internal class LightningBallsWandItemFactory : WandItemFactory
     public override bool IgnoreElec => true;
     public override int Level => 35;
     public override int[] Locale => new int[] { 35, 0, 0, 0 };
-    public override int? SubCategory => WandType.ElecBall;
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {

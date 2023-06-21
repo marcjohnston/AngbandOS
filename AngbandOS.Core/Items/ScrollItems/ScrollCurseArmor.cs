@@ -19,7 +19,6 @@ internal class ScrollCurseArmor : ScrollItemClass
     public override string FriendlyName => "Curse Armor";
     public override int Level => 50;
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
-    public override int? SubCategory => 2;
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

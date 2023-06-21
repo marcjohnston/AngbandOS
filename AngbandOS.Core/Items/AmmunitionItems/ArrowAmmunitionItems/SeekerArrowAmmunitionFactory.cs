@@ -24,7 +24,6 @@ internal class SeekerArrowAmmunitionFactory : ArrowAmmunitionItemFactory
     public override int Level => 55;
     public override int[] Locale => new int[] { 55, 0, 0, 0 };
     public override bool ShowMods => true;
-    public override int? SubCategory => 2;
     public override int Weight => 2;
     public override Item CreateItem() => new SeekerArrowAmmunitionItem(SaveGame);
 }

@@ -22,7 +22,6 @@ internal class PoisonMushroomFoodItemFactory : MushroomFoodItemFactory
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 5, 0, 0 };
     public override int Pval => 500;
-    public override int? SubCategory => 0;
     public override int Weight => 1;
 
     public override bool Eat()

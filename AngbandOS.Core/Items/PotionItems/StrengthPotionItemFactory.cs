@@ -22,7 +22,6 @@ internal class StrengthPotionItemFactory : PotionItemFactory
     public override string FriendlyName => "Strength";
     public override int Level => 20;
     public override int[] Locale => new int[] { 20, 25, 30, 0 };
-    public override int? SubCategory => (int)PotionType.IncStr;
     public override int Weight => 4;
     public override bool Quaff(SaveGame saveGame)
     {

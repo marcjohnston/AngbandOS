@@ -25,7 +25,6 @@ internal class AdamantitePlateMailHardArmorItemFactory : HardArmorItemFactory
     public override bool IgnoreAcid => true;
     public override int Level => 75;
     public override int[] Locale => new int[] { 75, 0, 0, 0 };
-    public override int? SubCategory => 30;
     public override int ToH => -4;
     public override int Weight => 420;
     public override Item CreateItem() => new AdamantitePlateMailHardArmorItem(SaveGame);

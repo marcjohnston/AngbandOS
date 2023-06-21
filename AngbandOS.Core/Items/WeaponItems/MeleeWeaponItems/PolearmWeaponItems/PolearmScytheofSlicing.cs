@@ -24,7 +24,6 @@ internal class PolearmScytheOfSlicing : PolearmItemClass
     public override int Level => 60;
     public override int[] Locale => new int[] { 60, 0, 0, 0 };
     public override bool ShowMods => true;
-    public override int? SubCategory => 30;
     public override int Weight => 250;
     public override Item CreateItem() => new ScytheOfSlicingPolearmWeaponItem(SaveGame);
 }

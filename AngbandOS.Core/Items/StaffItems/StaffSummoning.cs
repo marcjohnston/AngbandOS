@@ -21,7 +21,6 @@ internal class StaffSummoning : StaffItemClass
     public override string FriendlyName => "Summoning";
     public override int Level => 10;
     public override int[] Locale => new int[] { 10, 50, 0, 0 };
-    public override int? SubCategory => 3;
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {

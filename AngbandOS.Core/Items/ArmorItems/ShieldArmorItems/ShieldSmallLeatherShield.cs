@@ -24,7 +24,6 @@ internal class ShieldSmallLeatherShield : ShieldItemClass
     public override string FriendlyName => "& Small Leather Shield~";
     public override int Level => 3;
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
-    public override int? SubCategory => 2;
     public override int Weight => 50;
     public override Item CreateItem() => new SmallLeatherShieldArmorItem(SaveGame);
 }

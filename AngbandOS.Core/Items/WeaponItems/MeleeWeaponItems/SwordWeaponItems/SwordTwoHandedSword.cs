@@ -24,7 +24,6 @@ internal class SwordTwoHandedSword : SwordItemClass
     public override int Level => 30;
     public override int[] Locale => new int[] { 30, 40, 0, 0 };
     public override bool ShowMods => true;
-    public override int? SubCategory => 25;
     public override int Weight => 200;
     public override Item CreateItem() => new TwoHandedSwordWeaponItem(SaveGame);
 }

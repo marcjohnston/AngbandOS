@@ -22,7 +22,6 @@ internal class DisenchantmentResistanceRingItemFactory : RingItemFactory
     public override int Level => 90;
     public override int[] Locale => new int[] { 90, 0, 0, 0 };
     public override bool ResDisen => true;
-    public override int? SubCategory => 45;
     public override int Weight => 2;
     public override Item CreateItem() => new DisenchantmentResistanceRingItem(SaveGame);
 }

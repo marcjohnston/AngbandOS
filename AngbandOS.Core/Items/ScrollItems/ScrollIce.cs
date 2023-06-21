@@ -21,7 +21,6 @@ internal class ScrollIce : ScrollItemClass
     public override bool IgnoreCold => true;
     public override int Level => 75;
     public override int[] Locale => new int[] { 75, 0, 0, 0 };
-    public override int? SubCategory => 49;
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

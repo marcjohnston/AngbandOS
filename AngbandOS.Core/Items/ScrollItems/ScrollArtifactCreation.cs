@@ -20,7 +20,6 @@ internal class ScrollArtifactCreation : ScrollItemClass
     public override string FriendlyName => "Artifact Creation";
     public override int Level => 70;
     public override int[] Locale => new int[] { 70, 0, 0, 0 };
-    public override int? SubCategory => 52;
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

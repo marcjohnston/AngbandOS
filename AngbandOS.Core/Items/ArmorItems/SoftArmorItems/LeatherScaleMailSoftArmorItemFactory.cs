@@ -24,7 +24,6 @@ internal class LeatherScaleMailSoftArmorItemFactory : SoftArmorItemClass
     public override string FriendlyName => "Leather Scale Mail~";
     public override int Level => 15;
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
-    public override int? SubCategory => 11;
     public override int ToH => -1;
     public override int Weight => 140;
     public override Item CreateItem() => new LeatherScaleMailSoftArmorItem(SaveGame);

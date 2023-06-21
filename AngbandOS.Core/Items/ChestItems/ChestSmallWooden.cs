@@ -23,7 +23,6 @@ internal class ChestSmallWooden : ChestItemClass
     public override string FriendlyName => "& Small wooden chest~";
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
-    public override int? SubCategory => 1;
     public override int Weight => 250;
     public override bool IsSmall => true;
     public override int NumberOfItemsContained => 2;

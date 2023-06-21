@@ -24,7 +24,6 @@ internal class PolearmLance : PolearmItemClass
     public override int Level => 10;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override bool ShowMods => true;
-    public override int? SubCategory => 20;
     public override int Weight => 300;
     public override Item CreateItem() => new LancePolearmWeaponItem(SaveGame);
 }

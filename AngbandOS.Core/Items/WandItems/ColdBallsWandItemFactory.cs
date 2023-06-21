@@ -23,7 +23,6 @@ internal class ColdBallsWandItemFactory : WandItemFactory
     public override bool IgnoreCold => true;
     public override int Level => 40;
     public override int[] Locale => new int[] { 40, 0, 0, 0 };
-    public override int? SubCategory => WandType.ColdBall;
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {

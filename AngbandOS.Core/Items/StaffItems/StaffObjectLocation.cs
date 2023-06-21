@@ -22,7 +22,6 @@ internal class StaffObjectLocation : StaffItemClass
     public override string FriendlyName => "Object Location";
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
-    public override int? SubCategory => 11;
     public override int Weight => 50;
 
     public override void UseStaff(UseStaffEvent eventArgs)

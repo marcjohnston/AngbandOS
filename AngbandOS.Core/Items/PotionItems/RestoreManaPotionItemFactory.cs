@@ -22,7 +22,6 @@ internal class RestoreManaPotionItemFactory : PotionItemFactory
     public override string FriendlyName => "Restore Mana";
     public override int Level => 25;
     public override int[] Locale => new int[] { 25, 0, 0, 0 };
-    public override int? SubCategory => (int)PotionType.RestoreMana;
     public override int Weight => 4;
     public override bool Quaff(SaveGame saveGame)
     {

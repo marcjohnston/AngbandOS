@@ -22,7 +22,6 @@ internal class SelfKnowledgePotionItemFactory : PotionItemFactory
     public override string FriendlyName => "Self Knowledge";
     public override int Level => 40;
     public override int[] Locale => new int[] { 40, 0, 0, 0 };
-    public override int? SubCategory => (int)PotionType.SelfKnowledge;
     public override int Weight => 4;
     public override bool Quaff(SaveGame saveGame)
     {

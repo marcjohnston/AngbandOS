@@ -19,7 +19,6 @@ internal class VilyaRingItemFactory : RingItemFactory
     public override string FriendlyName => "& Ring~"; // TODO: This appears to cause a defect in identification
     public override bool InstaArt => true;
     public override int Level => 100;
-    public override int? SubCategory => 36;
     public override int Weight => 2;
     public override Item CreateItem() => new VilyaRingItem(SaveGame);
 }

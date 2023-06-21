@@ -22,7 +22,6 @@ internal class EnlightenmentPotionItemFactory : PotionItemFactory
     public override string FriendlyName => "Enlightenment";
     public override int Level => 25;
     public override int[] Locale => new int[] { 25, 50, 100, 0 };
-    public override int? SubCategory => (int)PotionType.Enlightenment;
     public override int Weight => 4;
     public override bool Quaff(SaveGame saveGame)
     {

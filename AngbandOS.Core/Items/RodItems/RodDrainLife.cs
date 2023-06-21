@@ -23,7 +23,6 @@ internal class RodDrainLife : RodItemFactory
     public override string FriendlyName => "Drain Life";
     public override int Level => 75;
     public override int[] Locale => new int[] { 75, 0, 0, 0 };
-    public override int? SubCategory => 18;
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {

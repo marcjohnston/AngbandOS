@@ -134,9 +134,6 @@ internal abstract class Item : IComparable<Item>
     public int HoldingMonsterIndex;
     public string Inscription = "";
 
-    [Obsolete("To be deleted")]
-    public int ItemSubCategory;
-
     /// <summary>
     /// Tests an item to determine if it belongs to an Item type and returns a the item casted into that type; or null, if the item doesn't belong to the type.
     /// </summary>
@@ -343,7 +340,6 @@ internal abstract class Item : IComparable<Item>
     {
         SaveGame = saveGame;
         _factory = factory;
-        ItemSubCategory = Factory.SubCategory ?? 0;
         TypeSpecificValue = Factory.Pval;
         Count = 1;
         Weight = Factory.Weight;
@@ -432,16 +428,16 @@ internal abstract class Item : IComparable<Item>
             return 1;
         }
 
-        // Fifth level sort (subcategory).
-        // Sort items by their subcategory, in ascending order.
-        if (ItemSubCategory < oPtr.ItemSubCategory)
-        {
-            return -1;
-        }
-        if (ItemSubCategory > oPtr.ItemSubCategory)
-        {
-            return 1;
-        }
+        //// Fifth level sort (subcategory).
+        //// Sort items by their subcategory, in ascending order.
+        //if (Factory.PerCategorySortOrder < oPtr.Factory.PerCategorySortOrder)
+        //{
+        //    return -1;
+        //}
+        //if (Factory.PerCategorySortOrder > oPtr.Factory.PerCategorySortOrder)
+        //{
+        //    return 1;
+        //}
 
         // Sixth level sort (known before unknown).
         if (IsKnown() && !oPtr.IsKnown())
@@ -508,7 +504,6 @@ internal abstract class Item : IComparable<Item>
         clonedItem.Inscription = Inscription;
         clonedItem.Count = newCount ?? Count;
         clonedItem.TypeSpecificValue = TypeSpecificValue;
-        clonedItem.ItemSubCategory = ItemSubCategory;
         clonedItem.RechargeTimeLeft = RechargeTimeLeft;
         clonedItem.BonusArmorClass = BonusArmorClass;
         clonedItem.BonusDamage = BonusDamage;

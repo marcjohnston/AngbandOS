@@ -22,7 +22,6 @@ internal class NexusResistanceRingItemFactory : RingItemFactory
     public override int Level => 24;
     public override int[] Locale => new int[] { 24, 0, 0, 0 };
     public override bool ResNexus => true;
-    public override int? SubCategory => 41;
     public override int Weight => 2;
     public override Item CreateItem() => new NexusResistanceRingItem(SaveGame);
 }

@@ -24,7 +24,6 @@ internal class MetalLamellarHardArmorItemFactory : HardArmorItemFactory
     public override string FriendlyName => "Metal Lamellar Armour~";
     public override int Level => 45;
     public override int[] Locale => new int[] { 45, 0, 0, 0 };
-    public override int? SubCategory => 13;
     public override int ToH => -3;
     public override int Weight => 340;
     public override Item CreateItem() => new MetalLamellarHardArmorItem(SaveGame);

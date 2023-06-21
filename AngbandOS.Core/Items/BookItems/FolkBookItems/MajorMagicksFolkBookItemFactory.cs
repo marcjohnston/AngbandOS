@@ -23,7 +23,6 @@ internal class MajorMagicksFolkBookItemFactory : FolkBookItemFactory
     public override string FriendlyName => "[Major Magicks]";
     public override int Level => 10;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
-    public override int? SubCategory => 2;
 
     /// <summary>
     /// Returns true, because this book is a high level book.

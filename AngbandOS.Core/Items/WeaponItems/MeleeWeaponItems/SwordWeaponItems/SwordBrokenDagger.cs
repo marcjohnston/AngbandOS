@@ -22,7 +22,6 @@ internal class SwordBrokenDagger : SwordItemClass
     public override int Ds => 1;
     public override string FriendlyName => "& Broken Dagger~";
     public override bool ShowMods => true;
-    public override int? SubCategory => 1;
     public override int ToD => -4;
     public override int ToH => -2;
     public override int Weight => 5;

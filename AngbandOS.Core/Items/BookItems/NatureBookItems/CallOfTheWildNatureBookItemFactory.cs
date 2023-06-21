@@ -23,7 +23,6 @@ internal class CallOfTheWildNatureBookItemFactory : NatureBookItemFactory
     public override string FriendlyName => "[Call of the Wild]";
     public override int Level => 10;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
-    public override int? SubCategory => 0;
     public override int Weight => 30;
     public override bool KindIsGood => false;
     public override Item CreateItem() => new CallOfTheWildNatureBookItem(SaveGame);

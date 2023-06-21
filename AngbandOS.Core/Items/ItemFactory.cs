@@ -303,12 +303,6 @@ internal abstract class ItemFactory : IItemCharacteristics
     public virtual bool Str { get; set; } = false;
 
     /// <summary>
-    /// Returns the subcategory enumeration that the item belongs to.  This property is to be deleted.  Returns null, when not in use.
-    /// </summary>
-    [Obsolete("To be deleted")]
-    public abstract int? SubCategory { get; }
-
-    /// <summary>
     /// Tests an item to determine if it belongs to an Item type and returns a the item casted into that type; or null, if the item doesn't belong to the type.
     /// </summary>
     /// <typeparam name="T"></typeparam>

@@ -22,7 +22,6 @@ internal class CureLightWoundsPotionItemFactory : PotionItemFactory
     public override string FriendlyName => "Cure Light Wounds";
     public override int[] Locale => new int[] { 0, 1, 3, 0 };
     public override int Pval => 50;
-    public override int? SubCategory => (int)PotionType.CureLight;
     public override int Weight => 4;
     public override bool Quaff(SaveGame saveGame)
     {

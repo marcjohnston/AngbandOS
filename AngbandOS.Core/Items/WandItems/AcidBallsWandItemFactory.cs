@@ -23,7 +23,6 @@ internal class AcidBallsWandItemFactory : WandItemFactory
     public override bool IgnoreAcid => true;
     public override int Level => 50;
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
-    public override int? SubCategory => WandType.AcidBall;
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {

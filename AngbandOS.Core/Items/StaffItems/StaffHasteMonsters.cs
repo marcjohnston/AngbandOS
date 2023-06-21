@@ -21,7 +21,6 @@ internal class StaffHasteMonsters : StaffItemClass
     public override string FriendlyName => "Haste Monsters";
     public override int Level => 10;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
-    public override int? SubCategory => 2;
     public override int Weight => 50;
 
     public override void UseStaff(UseStaffEvent eventArgs)

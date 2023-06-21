@@ -24,7 +24,6 @@ internal class ShieldLargeMetalShield : ShieldItemClass
     public override string FriendlyName => "& Large Metal Shield~";
     public override int Level => 30;
     public override int[] Locale => new int[] { 30, 0, 0, 0 };
-    public override int? SubCategory => 5;
     public override int Weight => 120;
     public override Item CreateItem() => new LargeMetalShieldArmorItem(SaveGame);
 }

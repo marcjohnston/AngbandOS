@@ -20,7 +20,6 @@ internal class ScrollSpecialEnchantArmor : ScrollItemClass
     public override string FriendlyName => "*Enchant Armor*";
     public override int Level => 50;
     public override int[] Locale => new int[] { 50, 50, 0, 0 };
-    public override int? SubCategory => 20;
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

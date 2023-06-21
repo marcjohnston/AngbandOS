@@ -20,7 +20,6 @@ internal class DamageRingItemFactory : RingItemFactory
     public override string FriendlyName => "Damage";
     public override int Level => 20;
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
-    public override int? SubCategory => 29;
     public override int Weight => 2;
     public override Item CreateItem() => new DamageRingItem(SaveGame);
 }

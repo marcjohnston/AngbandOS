@@ -22,7 +22,6 @@ internal class StarEssenceGaladrielLightSourceItemFactory : LightSourceItemFacto
     public override string FriendlyName => "& Star Essence~"; // TODO: This appears to cause a defect in identification
     public override bool InstaArt => true;
     public override int Level => 1;
-    public override int? SubCategory => 4;
     public override int Weight => 10;
     public override bool ProvidesSunlight => true;
     public override Item CreateItem() => new StarEssenceGaladrielLightSourceItem(SaveGame);

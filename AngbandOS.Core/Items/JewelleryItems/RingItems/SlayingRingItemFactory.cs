@@ -21,7 +21,6 @@ internal class SlayingRingItemFactory : RingItemFactory
     public override int Level => 40;
     public override int[] Locale => new int[] { 40, 0, 0, 0 };
     public override bool ShowMods => true;
-    public override int? SubCategory => 30;
     public override int Weight => 2;
     public override Item CreateItem() => new SlayingRingItem(SaveGame);
 }

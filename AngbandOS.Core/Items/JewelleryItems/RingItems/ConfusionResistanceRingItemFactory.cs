@@ -22,7 +22,6 @@ internal class ConfusionResistanceRingItemFactory : RingItemFactory
     public override int Level => 22;
     public override int[] Locale => new int[] { 22, 0, 0, 0 };
     public override bool ResConf => true;
-    public override int? SubCategory => 43;
     public override int Weight => 2;
     public override Item CreateItem() => new ConfusionResistanceRingItem(SaveGame);
 }

@@ -21,7 +21,6 @@ internal class StaffSlowness : StaffItemClass
     public override string FriendlyName => "Slowness";
     public override int Level => 40;
     public override int[] Locale => new int[] { 40, 0, 0, 0 };
-    public override int? SubCategory => 1;
     public override int Weight => 50;
 
     public override void UseStaff(UseStaffEvent eventArgs)

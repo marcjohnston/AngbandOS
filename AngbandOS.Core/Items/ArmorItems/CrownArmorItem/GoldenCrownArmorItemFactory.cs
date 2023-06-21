@@ -24,7 +24,6 @@ internal class GoldenCrownArmorItemFactory : CrownArmorItemFactory
     public override bool IgnoreAcid => true;
     public override int Level => 45;
     public override int[] Locale => new int[] { 45, 0, 0, 0 };
-    public override int? SubCategory => 11;
     public override int Weight => 30;
     public override Item CreateItem() => new GoldenCrownArmorItem(SaveGame);
 }

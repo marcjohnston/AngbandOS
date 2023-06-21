@@ -20,7 +20,6 @@ internal class ScrollEnchantWeaponToHit : ScrollItemClass
     public override string FriendlyName => "Enchant Weapon To-Hit";
     public override int Level => 15;
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
-    public override int? SubCategory => 17;
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

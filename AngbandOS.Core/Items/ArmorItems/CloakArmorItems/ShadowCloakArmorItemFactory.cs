@@ -24,7 +24,6 @@ internal class ShadowCloakArmorItemFactory : CloakArmorItemFactory
     public override int[] Locale => new int[] { 75, 0, 0, 0 };
     public override bool ResDark => true;
     public override bool ResLight => true;
-    public override int? SubCategory => 6;
     public override int ToA => 4;
     public override int Weight => 5;
     public override Item CreateItem() => new ShadowCloakArmorItem(SaveGame);

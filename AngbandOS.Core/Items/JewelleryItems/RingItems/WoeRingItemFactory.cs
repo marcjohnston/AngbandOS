@@ -25,7 +25,6 @@ internal class WoeRingItemFactory : RingItemFactory
     public override int Pval => -5;
     public override bool Teleport => true;
     public override int Weight => 2;
-    public override int? SubCategory => 0;
     public override bool Wis => true;
     public override Item CreateItem() => new WoeRingItem(SaveGame);
 }

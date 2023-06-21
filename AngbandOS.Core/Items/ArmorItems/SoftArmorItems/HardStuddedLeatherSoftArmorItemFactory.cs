@@ -24,7 +24,6 @@ internal class HardStuddedLeatherSoftArmorItemFactory : SoftArmorItemClass
     public override string FriendlyName => "Hard Studded Leather~";
     public override int Level => 10;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
-    public override int? SubCategory => 7;
     public override int ToH => -1;
     public override int Weight => 110;
     public override Item CreateItem() => new HardStuddedLeatherSoftArmorItem(SaveGame);

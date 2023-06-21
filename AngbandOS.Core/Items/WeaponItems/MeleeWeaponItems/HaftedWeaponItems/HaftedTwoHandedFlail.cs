@@ -24,7 +24,6 @@ internal class HaftedTwoHandedFlail : HaftedItemClass
     public override int Level => 45;
     public override int[] Locale => new int[] { 45, 0, 0, 0 };
     public override bool ShowMods => true;
-    public override int? SubCategory => 18;
     public override int Weight => 280;
     public override Item CreateItem() => new TwoHandedFlailHaftedWeaponItem(SaveGame);
 }

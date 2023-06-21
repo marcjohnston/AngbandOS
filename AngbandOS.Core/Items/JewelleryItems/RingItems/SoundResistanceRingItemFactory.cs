@@ -22,7 +22,6 @@ internal class SoundResistanceRingItemFactory : RingItemFactory
     public override int Level => 26;
     public override int[] Locale => new int[] { 26, 0, 0, 0 };
     public override bool ResSound => true;
-    public override int? SubCategory => 42;
     public override int Weight => 2;
     public override Item CreateItem() => new SoundResistanceRingItem(SaveGame);
 }

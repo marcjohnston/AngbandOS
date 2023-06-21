@@ -21,7 +21,6 @@ internal class SustainWisdomRingItemFactory : RingItemFactory
     public override string FriendlyName => "Sustain Wisdom";
     public override int Level => 30;
     public override int[] Locale => new int[] { 30, 0, 0, 0 };
-    public override int? SubCategory => 12;
     public override bool SustWis => true;
     public override int Weight => 2;
     public override Item CreateItem() => new SustainWisdomRingItem(SaveGame);

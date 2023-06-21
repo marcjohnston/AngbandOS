@@ -24,7 +24,6 @@ internal class MetalBrigandineHardArmorItemFactory : HardArmorItemFactory
     public override string FriendlyName => "Metal Brigandine Armour~";
     public override int Level => 35;
     public override int[] Locale => new int[] { 35, 0, 0, 0 };
-    public override int? SubCategory => 9;
     public override int ToH => -3;
     public override int Weight => 290;
     public override Item CreateItem() => new MetalBrigandineHardArmorItem(SaveGame);

@@ -20,7 +20,6 @@ internal class ScrollTrapDetection : ScrollItemClass
     public override string FriendlyName => "Trap Detection";
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 10, 0, 0 };
-    public override int? SubCategory => 28;
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

@@ -19,7 +19,6 @@ internal class ScrollCurseWeapon : ScrollItemClass
     public override string FriendlyName => "Curse Weapon";
     public override int Level => 50;
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
-    public override int? SubCategory => 3;
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

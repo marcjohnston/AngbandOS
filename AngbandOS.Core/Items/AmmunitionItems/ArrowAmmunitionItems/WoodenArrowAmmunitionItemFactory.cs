@@ -24,7 +24,6 @@ internal class WoodenArrowAmmunitionItemFactory : ArrowAmmunitionItemFactory
     public override int Level => 3;
     public override int[] Locale => new int[] { 3, 15, 0, 0 };
     public override bool ShowMods => true;
-    public override int? SubCategory => 1;
     public override int Weight => 2;
     public override Item CreateItem() => new WoodenArrowAmmunitionItem(SaveGame);
 }

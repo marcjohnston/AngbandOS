@@ -19,7 +19,6 @@ internal class ScrollDarkness : ScrollItemClass
     public override string FriendlyName => "Darkness";
     public override int Level => 1;
     public override int[] Locale => new int[] { 1, 0, 0, 0 };
-    public override int? SubCategory => 0;
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

@@ -22,7 +22,6 @@ internal class TameMonsterWandItemFactory : WandItemFactory
     public override string FriendlyName => "Tame Monster";
     public override int Level => 30;
     public override int[] Locale => new int[] { 30, 0, 0, 0 };
-    public override int? SubCategory => WandType.CharmMonster;
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {

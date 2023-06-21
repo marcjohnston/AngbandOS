@@ -21,7 +21,6 @@ internal class SustainDexterityRingItemFactory : RingItemFactory
     public override string FriendlyName => "Sustain Dexterity";
     public override int Level => 30;
     public override int[] Locale => new int[] { 30, 0, 0, 0 };
-    public override int? SubCategory => 14;
     public override bool SustDex => true;
     public override int Weight => 2;
     public override Item CreateItem() => new SustainDexterityRingItem(SaveGame);

@@ -24,7 +24,6 @@ internal class SwordKatana : SwordItemClass
     public override int Level => 20;
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
     public override bool ShowMods => true;
-    public override int? SubCategory => 20;
     public override int Weight => 120;
     public override Item CreateItem() => new KatanaSwordWeaponItem(SaveGame);
 }

@@ -26,7 +26,6 @@ internal class WonderWandItemFactory : WandItemFactory
     public override bool IgnoreFire => true;
     public override int Level => 3;
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
-    public override int? SubCategory => WandType.Wonder;
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {

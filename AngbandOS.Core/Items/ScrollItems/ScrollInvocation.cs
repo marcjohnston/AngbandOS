@@ -20,7 +20,6 @@ internal class ScrollInvocation : ScrollItemClass
     public override string FriendlyName => "Invocation";
     public override int Level => 10;
     public override int[] Locale => new int[] { 10, 20, 40, 0 };
-    public override int? SubCategory => 6;
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

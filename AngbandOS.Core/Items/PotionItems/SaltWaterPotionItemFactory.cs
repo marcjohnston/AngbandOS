@@ -19,7 +19,6 @@ internal class SaltWaterPotionItemFactory : PotionItemFactory
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Salt Water";
-    public override int? SubCategory => (int)PotionType.SaltWater;
     public override int Weight => 4;
 
     public override bool Quaff(SaveGame saveGame)

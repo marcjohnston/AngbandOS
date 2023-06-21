@@ -24,7 +24,6 @@ internal class PolearmGlaive : PolearmItemClass
     public override int Level => 20;
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
     public override bool ShowMods => true;
-    public override int? SubCategory => 13;
     public override int Weight => 190;
     public override Item CreateItem() => new GlaivePolearmWeaponItem(SaveGame);
 }

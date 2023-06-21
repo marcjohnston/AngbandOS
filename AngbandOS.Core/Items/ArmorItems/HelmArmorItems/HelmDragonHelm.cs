@@ -28,7 +28,6 @@ internal class HelmDragonHelm : HelmItemClass
     public override bool IgnoreFire => true;
     public override int Level => 45;
     public override int[] Locale => new int[] { 80, 0, 0, 0 };
-    public override int? SubCategory => 7;
     public override int ToA => 10;
     public override int Weight => 50;
     public override Item CreateItem() => new DragonHelmArmorItem(SaveGame);

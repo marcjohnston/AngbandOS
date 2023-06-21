@@ -20,7 +20,6 @@ internal class ScrollMagicMapping : ScrollItemClass
     public override string FriendlyName => "Magic Mapping";
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
-    public override int? SubCategory => 25;
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

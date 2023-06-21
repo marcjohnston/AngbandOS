@@ -27,7 +27,6 @@ internal class RevelationsOfGlaakiNatureBookItemFactory : NatureBookItemFactory
     public override bool IgnoreFire => true;
     public override int Level => 50;
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
-    public override int? SubCategory => 2;
 
     /// <summary>
     /// Returns true, because this book is a high level book.

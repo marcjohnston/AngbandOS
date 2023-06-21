@@ -20,7 +20,6 @@ internal class SkeletonBrokenSkull : SkeletonItemClass
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "& Broken Skull~";
-    public override int? SubCategory => 1;
     public override int Weight => 1;
     public override Item CreateItem() => new BrokenSkullSkeletonItem(SaveGame);
 }

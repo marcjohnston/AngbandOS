@@ -20,7 +20,6 @@ internal class PowerRingItemFactory : RingItemFactory
     public override string FriendlyName => "& Ring~"; // TODO: This appears to cause a defect in identification
     public override bool InstaArt => true;
     public override int Level => 110;
-    public override int? SubCategory => 37;
     public override int Weight => 2;
     public override Item CreateItem() => new PowerRingItem(SaveGame);
 }

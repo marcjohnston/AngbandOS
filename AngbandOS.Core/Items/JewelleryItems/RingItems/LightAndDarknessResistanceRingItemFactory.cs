@@ -23,7 +23,6 @@ internal class LightAndDarknessResistanceRingItemFactory : RingItemFactory
     public override int[] Locale => new int[] { 30, 0, 0, 0 };
     public override bool ResDark => true;
     public override bool ResLight => true;
-    public override int? SubCategory => 39;
     public override int Weight => 2;
     public override Item CreateItem() => new LightAndDarknessResistanceRingItem(SaveGame);
 }

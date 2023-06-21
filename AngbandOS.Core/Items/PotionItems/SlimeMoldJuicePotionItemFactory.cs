@@ -21,7 +21,6 @@ internal class SlimeMoldJuicePotionItemFactory : PotionItemFactory
     public override int Ds => 1;
     public override string FriendlyName => "Slime Mold Juice";
     public override int Pval => 400;
-    public override int? SubCategory => (int)PotionType.SlimeMold;
     public override int Weight => 4;
     public override bool Quaff(SaveGame saveGame)
     {

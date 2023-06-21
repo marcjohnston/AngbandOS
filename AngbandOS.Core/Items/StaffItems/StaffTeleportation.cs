@@ -22,7 +22,6 @@ internal class StaffTeleportation : StaffItemClass
     public override string FriendlyName => "Teleportation";
     public override int Level => 20;
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
-    public override int? SubCategory => 4;
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {

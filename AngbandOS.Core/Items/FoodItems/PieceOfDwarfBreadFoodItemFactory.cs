@@ -24,7 +24,6 @@ internal class PieceOfDwarfBreadFoodItemFactory : FoodItemFactory
     public override int Level => 15;
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
     public override int Pval => 7500;
-    public override int? SubCategory => 41;
     public override int Weight => 3;
 
     /// <summary>

@@ -24,7 +24,6 @@ internal class DoubleChainMailHardArmorItemFactory : HardArmorItemFactory
     public override string FriendlyName => "Double Chain Mail~";
     public override int Level => 30;
     public override int[] Locale => new int[] { 30, 0, 0, 0 };
-    public override int? SubCategory => 7;
     public override int ToH => -2;
     public override int Weight => 250;
     public override Item CreateItem() => new DoubleChainMailHardArmorItem(SaveGame);

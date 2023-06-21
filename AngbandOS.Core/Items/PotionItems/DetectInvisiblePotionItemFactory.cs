@@ -24,7 +24,6 @@ internal class DetectInvisiblePotionItemFactory : PotionItemFactory
     public override string FriendlyName => "Detect Invisible";
     public override int Level => 3;
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
-    public override int? SubCategory => (int)PotionType.DetectInvis;
     public override int Weight => 4;
     public override bool Quaff(SaveGame saveGame)
     {

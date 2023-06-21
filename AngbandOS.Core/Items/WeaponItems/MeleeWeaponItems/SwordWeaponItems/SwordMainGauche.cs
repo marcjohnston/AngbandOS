@@ -24,7 +24,6 @@ internal class SwordMainGauche : SwordItemClass
     public override int Level => 3;
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
     public override bool ShowMods => true;
-    public override int? SubCategory => 5;
     public override int Weight => 30;
     public override Item CreateItem() => new MainGaucheSwordWeaponItem(SaveGame);
 }

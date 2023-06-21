@@ -24,7 +24,6 @@ internal class HaftedLeadFilledMace : HaftedItemClass
     public override int Level => 15;
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
     public override bool ShowMods => true;
-    public override int? SubCategory => 15;
     public override int Weight => 180;
     public override Item CreateItem() => new LeadFilledMaceHaftedWeaponItem(SaveGame);
 }

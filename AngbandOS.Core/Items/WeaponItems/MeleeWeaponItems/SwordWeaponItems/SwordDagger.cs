@@ -23,7 +23,6 @@ internal class SwordDagger : SwordItemClass
     public override string FriendlyName => "& Dagger~";
     public override int[] Locale => new int[] { 0, 5, 10, 20 };
     public override bool ShowMods => true;
-    public override int? SubCategory => 4;
     public override int Weight => 12;
     public override Item CreateItem() => new DaggerSwordWeaponItem(SaveGame);
 }

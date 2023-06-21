@@ -24,7 +24,6 @@ internal class PolearmBattleAxe : PolearmItemClass
     public override int Level => 15;
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
     public override bool ShowMods => true;
-    public override int? SubCategory => 22;
     public override int Weight => 170;
     public override Item CreateItem() => new BattleAxePolearmWeaponItem(SaveGame);
 }

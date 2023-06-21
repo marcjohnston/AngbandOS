@@ -23,7 +23,6 @@ internal class SpikeIronSpike : SpikeItemClass
     public override string FriendlyName => "& Iron Spike~";
     public override int Level => 1;
     public override int[] Locale => new int[] { 1, 0, 0, 0 };
-    public override int? SubCategory => 0;
     public override int Weight => 10;
     public override Item CreateItem() => new IronSpikeItem(SaveGame);
 }

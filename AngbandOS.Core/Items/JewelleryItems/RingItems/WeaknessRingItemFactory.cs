@@ -23,7 +23,6 @@ internal class WeaknessRingItemFactory : RingItemFactory
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override int Pval => -5;
     public override bool Str => true;
-    public override int? SubCategory => 2;
     public override int Weight => 2;
     public override Item CreateItem() => new WeaknessRingItem(SaveGame);
 }

@@ -19,7 +19,6 @@ internal class HardBiscuitFoodItemFactory : FoodItemFactory
     public override int Cost => 1;
     public override string FriendlyName => "& Hard Biscuit~";
     public override int Pval => 500;
-    public override int? SubCategory => 32;
     public override int Weight => 2;
     public override bool Eat()
     {

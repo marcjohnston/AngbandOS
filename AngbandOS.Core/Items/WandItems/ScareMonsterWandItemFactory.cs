@@ -22,7 +22,6 @@ internal class ScareMonsterWandItemFactory : WandItemFactory
     public override string FriendlyName => "Scare Monster";
     public override int Level => 10;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
-    public override int? SubCategory => WandType.FearMonster;
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {

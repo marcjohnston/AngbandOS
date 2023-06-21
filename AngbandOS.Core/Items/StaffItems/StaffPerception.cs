@@ -22,7 +22,6 @@ internal class StaffPerception : StaffItemClass
     public override string FriendlyName => "Perception";
     public override int Level => 10;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
-    public override int? SubCategory => 5;
     public override int Weight => 50;
 
     public override void UseStaff(UseStaffEvent eventArgs)

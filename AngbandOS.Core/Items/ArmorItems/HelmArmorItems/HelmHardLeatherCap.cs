@@ -22,7 +22,6 @@ internal class HelmHardLeatherCap : HelmItemClass
     public override string FriendlyName => "& Hard Leather Cap~";
     public override int Level => 3;
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
-    public override int? SubCategory => 2;
     public override int Weight => 15;
     public override Item CreateItem() => new HardLeatherCapHelmArmorItem(SaveGame);
 }

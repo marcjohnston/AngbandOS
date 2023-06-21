@@ -25,7 +25,6 @@ internal class MithrilPlateMailHardArmorItemFactory : HardArmorItemFactory
     public override bool IgnoreAcid => true;
     public override int Level => 60;
     public override int[] Locale => new int[] { 60, 0, 0, 0 };
-    public override int? SubCategory => 25;
     public override int ToH => -3;
     public override int Weight => 300;
     public override Item CreateItem() => new MithrilPlateMailHardArmorItem(SaveGame);

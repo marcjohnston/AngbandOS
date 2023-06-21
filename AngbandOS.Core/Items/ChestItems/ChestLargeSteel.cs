@@ -23,7 +23,6 @@ internal class ChestLargeSteel : ChestItemClass
     public override string FriendlyName => "& Large steel chest~";
     public override int Level => 55;
     public override int[] Locale => new int[] { 55, 0, 0, 0 };
-    public override int? SubCategory => 7;
     public override int Weight => 1000;
     public override bool IsSmall => false;
     public override int NumberOfItemsContained => 6;

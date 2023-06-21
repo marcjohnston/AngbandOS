@@ -19,7 +19,6 @@ internal class ScrollSummonUndead : ScrollItemClass
     public override string FriendlyName => "Summon Undead";
     public override int Level => 15;
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
-    public override int? SubCategory => 5;
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

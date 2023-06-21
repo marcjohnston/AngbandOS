@@ -22,7 +22,6 @@ internal class StaffProbing : StaffItemClass
     public override string FriendlyName => "Probing";
     public override int Level => 30;
     public override int[] Locale => new int[] { 30, 0, 0, 0 };
-    public override int? SubCategory => 23;
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {

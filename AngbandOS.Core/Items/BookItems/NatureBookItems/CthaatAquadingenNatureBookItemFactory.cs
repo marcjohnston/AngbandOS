@@ -27,7 +27,6 @@ internal class CthaatAquadingenNatureBookItemFactory : NatureBookItemFactory
     public override bool IgnoreFire => true;
     public override int Level => 80;
     public override int[] Locale => new int[] { 80, 0, 0, 0 };
-    public override int? SubCategory => 3;
 
     /// <summary>
     /// Returns true, because this book is a high level book.

@@ -24,7 +24,6 @@ internal class SwordShortSword : SwordItemClass
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override bool ShowMods => true;
-    public override int? SubCategory => 10;
     public override int Weight => 80;
     public override Item CreateItem() => new ShortSwordWeaponItem(SaveGame);
 }

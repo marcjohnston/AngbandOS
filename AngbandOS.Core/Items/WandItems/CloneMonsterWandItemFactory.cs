@@ -21,7 +21,6 @@ internal class CloneMonsterWandItemFactory : WandItemFactory
     public override string FriendlyName => "Clone Monster";
     public override int Level => 15;
     public override int[] Locale => new int[] { 15, 50, 0, 0 };
-    public override int? SubCategory => WandType.CloneMonster;
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {

@@ -22,7 +22,6 @@ internal class GemstoneLightSourceItemFactory : LightSourceItemFactory
     public override string FriendlyName => "& Gemstone~"; // TODO: This appears to cause a defect in identification
     public override bool InstaArt => true;
     public override int Level => 60;
-    public override int? SubCategory => LightType.Thrain;
     public override int Weight => 5;
 
     public override bool ProvidesSunlight => true;

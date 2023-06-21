@@ -22,7 +22,6 @@ internal class FrostBoltsWandItemFactory : WandItemFactory
     public override string FriendlyName => "Frost Bolts";
     public override int Level => 20;
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
-    public override int? SubCategory => WandType.ColdBolt;
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {

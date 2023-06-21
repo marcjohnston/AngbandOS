@@ -22,7 +22,6 @@ internal class ClothCloakCloakArmorItemFactory : CloakArmorItemFactory
     public override string FriendlyName => "& Cloak~";
     public override int Level => 1;
     public override int[] Locale => new int[] { 1, 20, 0, 0 };
-    public override int? SubCategory => 1;
     public override int Weight => 10;
     public override Item CreateItem() => new ClothCloakCloakArmorItem(SaveGame);
 }

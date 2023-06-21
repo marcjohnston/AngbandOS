@@ -20,7 +20,6 @@ internal class ScrollHolyChant : ScrollItemClass
     public override string FriendlyName => "Holy Chant";
     public override int Level => 10;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
-    public override int? SubCategory => 34;
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

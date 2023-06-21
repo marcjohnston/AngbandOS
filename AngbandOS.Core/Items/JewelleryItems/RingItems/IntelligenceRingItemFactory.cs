@@ -22,7 +22,6 @@ internal class IntelligenceRingItemFactory : RingItemFactory
     public override bool Int => true;
     public override int Level => 30;
     public override int[] Locale => new int[] { 30, 0, 0, 0 };
-    public override int? SubCategory => 25;
     public override int Weight => 2;
     public override Item CreateItem() => new IntelligenceRingItem(SaveGame);
 }

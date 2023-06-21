@@ -27,7 +27,6 @@ internal class AzathothChaosBookItemFactory : ChaosBookItemFactory
     public override bool IgnoreFire => true;
     public override int Level => 100;
     public override int[] Locale => new int[] { 100, 0, 0, 0 };
-    public override int? SubCategory => 3;
 
     /// <summary>
     /// Returns true, because this book is a high level book.

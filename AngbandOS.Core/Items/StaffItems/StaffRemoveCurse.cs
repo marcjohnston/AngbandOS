@@ -22,7 +22,6 @@ internal class StaffRemoveCurse : StaffItemClass
     public override string FriendlyName => "Remove Curse";
     public override int Level => 40;
     public override int[] Locale => new int[] { 40, 0, 0, 0 };
-    public override int? SubCategory => 6;
     public override int Weight => 50;
 
     public override void UseStaff(UseStaffEvent eventArgs)

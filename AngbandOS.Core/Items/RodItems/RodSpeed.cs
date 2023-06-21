@@ -23,7 +23,6 @@ internal class RodSpeed : RodItemFactory
     public override string FriendlyName => "Speed";
     public override int Level => 95;
     public override int[] Locale => new int[] { 95, 0, 0, 0 };
-    public override int? SubCategory => 11;
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {

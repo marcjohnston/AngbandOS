@@ -24,7 +24,6 @@ internal class RibbedPlateHardArmorItemFactory : HardArmorItemFactory
     public override string FriendlyName => "Ribbed Plate Armour~";
     public override int Level => 50;
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
-    public override int? SubCategory => 18;
     public override int ToH => -3;
     public override int Weight => 380;
     public override Item CreateItem() => new RibbedPlateHardArmorItem(SaveGame);

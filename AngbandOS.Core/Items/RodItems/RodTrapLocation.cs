@@ -23,7 +23,6 @@ internal class RodTrapLocation : RodItemFactory
     public override string FriendlyName => "Trap Location";
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
-    public override int? SubCategory => 0;
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {

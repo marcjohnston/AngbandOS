@@ -22,7 +22,6 @@ internal class SlownessPotionItemFactory : PotionItemFactory
     public override int Level => 1;
     public override int[] Locale => new int[] { 1, 0, 0, 0 };
     public override int Pval => 50;
-    public override int? SubCategory => (int)PotionType.Slowness;
     public override int Weight => 4;
 
     public override bool Quaff(SaveGame saveGame)

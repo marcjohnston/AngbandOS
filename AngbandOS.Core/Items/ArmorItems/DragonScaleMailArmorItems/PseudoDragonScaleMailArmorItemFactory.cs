@@ -32,7 +32,6 @@ internal class PseudoDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemF
     public override int[] Locale => new int[] { 65, 0, 0, 0 };
     public override bool ResDark => true;
     public override bool ResLight => true;
-    public override int? SubCategory => 10;
     public override int ToA => 10;
     public override int ToH => -2;
     public override int Weight => 200;

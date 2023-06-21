@@ -24,7 +24,6 @@ internal class HaftedMorningStar : HaftedItemClass
     public override int Level => 10;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override bool ShowMods => true;
-    public override int? SubCategory => 12;
     public override int Weight => 150;
     public override Item CreateItem() => new MorningStarHaftedWeaponItem(SaveGame);
 }

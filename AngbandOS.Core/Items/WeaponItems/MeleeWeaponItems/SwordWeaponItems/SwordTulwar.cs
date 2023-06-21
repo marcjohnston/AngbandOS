@@ -24,7 +24,6 @@ internal class SwordTulwar : SwordItemClass
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override bool ShowMods => true;
-    public override int? SubCategory => 15;
     public override int Weight => 100;
     public override Item CreateItem() => new TulwarSwordWeaponItem(SaveGame);
 }

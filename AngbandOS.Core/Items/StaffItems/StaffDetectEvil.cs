@@ -22,7 +22,6 @@ internal class StaffDetectEvil : StaffItemClass
     public override string FriendlyName => "Detect Evil";
     public override int Level => 20;
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
-    public override int? SubCategory => 15;
     public override int Weight => 50;
 
     public override void UseStaff(UseStaffEvent eventArgs)

@@ -20,7 +20,6 @@ internal class BoozePotionItemFactory : PotionItemFactory
     public override int Ds => 1;
     public override string FriendlyName => "Booze";
     public override int Pval => 50;
-    public override int? SubCategory => (int)PotionType.Confusion;
     public override int Weight => 4;
     public override bool Quaff(SaveGame saveGame)
     {

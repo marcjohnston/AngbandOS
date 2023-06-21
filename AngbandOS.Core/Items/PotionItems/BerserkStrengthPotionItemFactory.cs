@@ -22,7 +22,6 @@ internal class BerserkStrengthPotionItemFactory : PotionItemFactory
     public override string FriendlyName => "Berserk Strength";
     public override int Level => 3;
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
-    public override int? SubCategory => (int)PotionType.BeserkStrength;
     public override int Weight => 4;
     public override bool Quaff(SaveGame saveGame)
     {

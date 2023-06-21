@@ -22,7 +22,6 @@ internal class SpeedPotionItemFactory : PotionItemFactory
     public override string FriendlyName => "Speed";
     public override int Level => 1;
     public override int[] Locale => new int[] { 1, 40, 60, 0 };
-    public override int? SubCategory => (int)PotionType.Speed;
     public override int Weight => 4;
     public override bool Quaff(SaveGame saveGame)
     {

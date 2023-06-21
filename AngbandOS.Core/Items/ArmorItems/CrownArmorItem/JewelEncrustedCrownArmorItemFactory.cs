@@ -24,7 +24,6 @@ internal class JewelEncrustedCrownArmorItemFactory : CrownArmorItemFactory
     public override bool IgnoreAcid => true;
     public override int Level => 50;
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
-    public override int? SubCategory => 12;
     public override int Weight => 40;
     public override Item CreateItem() => new JewelEncrustedCrownArmorItem(SaveGame);
 }

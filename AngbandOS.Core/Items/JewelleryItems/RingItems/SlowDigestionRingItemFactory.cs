@@ -22,7 +22,6 @@ internal class SlowDigestionRingItemFactory : RingItemFactory
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override bool SlowDigest => true;
-    public override int? SubCategory => 6;
     public override int Weight => 2;
     public override Item CreateItem() => new SlowDigestionRingItem(SaveGame);
 }

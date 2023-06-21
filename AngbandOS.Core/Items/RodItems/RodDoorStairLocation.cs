@@ -23,7 +23,6 @@ internal class RodDoorStairLocation : RodItemFactory
     public override string FriendlyName => "Door/Stair Location";
     public override int Level => 15;
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
-    public override int? SubCategory => 1;
     public override int Weight => 15;
 
     public override void Execute(ZapRodEvent zapRodEvent)

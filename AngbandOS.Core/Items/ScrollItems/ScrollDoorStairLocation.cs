@@ -20,7 +20,6 @@ internal class ScrollDoorStairLocation : ScrollItemClass
     public override string FriendlyName => "Door/Stair Location";
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 10, 15, 0 };
-    public override int? SubCategory => 29;
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

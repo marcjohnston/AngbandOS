@@ -25,7 +25,6 @@ internal class CureCriticalWoundsPotionItemFactory : PotionItemFactory
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override int Pval => 100;
-    public override int? SubCategory => (int)PotionType.CureCritical;
     public override int Weight => 4;
     public override bool Quaff(SaveGame saveGame)
     {

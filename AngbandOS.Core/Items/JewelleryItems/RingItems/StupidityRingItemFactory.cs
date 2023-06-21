@@ -23,7 +23,6 @@ internal class StupidityRingItemFactory : RingItemFactory
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override int Pval => -5;
-    public override int? SubCategory => 3;
     public override int Weight => 2;
     public override Item CreateItem() => new StupidityRingItem(SaveGame);
 }

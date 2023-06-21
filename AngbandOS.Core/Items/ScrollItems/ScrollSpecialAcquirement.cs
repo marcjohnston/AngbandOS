@@ -20,7 +20,6 @@ internal class ScrollSpecialAcquirement : ScrollItemClass
     public override string FriendlyName => "*Acquirement*";
     public override int Level => 60;
     public override int[] Locale => new int[] { 60, 0, 0, 0 };
-    public override int? SubCategory => 47;
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

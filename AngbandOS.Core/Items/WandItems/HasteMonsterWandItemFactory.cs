@@ -21,7 +21,6 @@ internal class HasteMonsterWandItemFactory : WandItemFactory
     public override string FriendlyName => "Haste Monster";
     public override int Level => 2;
     public override int[] Locale => new int[] { 2, 0, 0, 0 };
-    public override int? SubCategory => WandType.HasteMonster;
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {

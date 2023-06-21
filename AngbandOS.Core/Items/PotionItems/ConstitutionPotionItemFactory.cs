@@ -22,7 +22,6 @@ internal class ConstitutionPotionItemFactory : PotionItemFactory
     public override string FriendlyName => "Constitution";
     public override int Level => 20;
     public override int[] Locale => new int[] { 20, 25, 30, 0 };
-    public override int? SubCategory => (int)PotionType.IncCon;
     public override int Weight => 4;
     public override bool Quaff(SaveGame saveGame)
     {

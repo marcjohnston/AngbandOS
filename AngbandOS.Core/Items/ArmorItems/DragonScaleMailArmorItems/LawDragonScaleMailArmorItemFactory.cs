@@ -32,7 +32,6 @@ internal class LawDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFact
     public override int[] Locale => new int[] { 80, 0, 0, 0 };
     public override bool ResShards => true;
     public override bool ResSound => true;
-    public override int? SubCategory => 12;
     public override int ToA => 10;
     public override int ToH => -2;
     public override int Weight => 200;

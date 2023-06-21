@@ -22,7 +22,6 @@ internal class LifePotionItemFactory : PotionItemFactory
     public override string FriendlyName => "Life";
     public override int Level => 60;
     public override int[] Locale => new int[] { 60, 100, 0, 0 };
-    public override int? SubCategory => (int)PotionType.Life;
     public override int Weight => 4;
     public override bool Quaff(SaveGame saveGame)
     {

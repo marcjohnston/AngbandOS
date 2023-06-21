@@ -22,7 +22,6 @@ internal class ShardResistanceRingItemFactory : RingItemFactory
     public override int Level => 25;
     public override int[] Locale => new int[] { 25, 0, 0, 0 };
     public override bool ResShards => true;
-    public override int? SubCategory => 44;
     public override int Weight => 2;
     public override Item CreateItem() => new ShardResistanceRingItem(SaveGame);
 }

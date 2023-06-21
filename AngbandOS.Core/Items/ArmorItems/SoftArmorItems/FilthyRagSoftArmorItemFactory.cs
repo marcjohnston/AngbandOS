@@ -20,7 +20,6 @@ internal class FilthyRagSoftArmorItemFactory : SoftArmorItemClass
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 1;
     public override string FriendlyName => "& Filthy Rag~";
-    public override int? SubCategory => 1;
     public override int ToA => -1;
     public override int Weight => 20;
     public override Item CreateItem() => new FilthyRagSoftArmorItem(SaveGame);

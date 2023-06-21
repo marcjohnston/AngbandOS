@@ -16,5 +16,4 @@ internal abstract class DiggingItemClass : WeaponItemClass
     public override int PackSort => 31;
     public override Colour Colour => Colour.Grey;
 
-    public override int? SubCategory => null; // Not used anymore
 }

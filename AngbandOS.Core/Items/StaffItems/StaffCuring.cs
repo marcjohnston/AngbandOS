@@ -22,7 +22,6 @@ internal class StaffCuring : StaffItemClass
     public override string FriendlyName => "Curing";
     public override int Level => 25;
     public override int[] Locale => new int[] { 25, 0, 0, 0 };
-    public override int? SubCategory => 17;
     public override int Weight => 50;
 
     public override void UseStaff(UseStaffEvent eventArgs)

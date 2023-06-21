@@ -22,7 +22,6 @@ internal class LightWandItemFactory : WandItemFactory
     public override string FriendlyName => "Light";
     public override int Level => 3;
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
-    public override int? SubCategory => WandType.Light;
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {

@@ -26,7 +26,6 @@ internal class ShardBallsWandItemFactory : WandItemFactory
     public override bool IgnoreFire => true;
     public override int Level => 75;
     public override int[] Locale => new int[] { 75, 0, 0, 0 };
-    public override int? SubCategory => WandType.Shard;
     public override int Weight => 10;
 
     public override bool ExecuteActivation(SaveGame saveGame, int dir)

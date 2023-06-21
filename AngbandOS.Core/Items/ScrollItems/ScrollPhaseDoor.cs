@@ -20,7 +20,6 @@ internal class ScrollPhaseDoor : ScrollItemClass
     public override string FriendlyName => "Phase Door";
     public override int Level => 1;
     public override int[] Locale => new int[] { 1, 0, 0, 0 };
-    public override int? SubCategory => 8;
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

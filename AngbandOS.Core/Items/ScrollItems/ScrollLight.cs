@@ -19,7 +19,6 @@ internal class ScrollLight : ScrollItemClass
     public override int Cost => 15;
     public override string FriendlyName => "Light";
     public override int[] Locale => new int[] { 0, 3, 10, 0 };
-    public override int? SubCategory => 24;
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

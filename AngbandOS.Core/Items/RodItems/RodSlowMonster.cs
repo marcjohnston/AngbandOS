@@ -23,7 +23,6 @@ internal class RodSlowMonster : RodItemFactory
     public override string FriendlyName => "Slow Monster";
     public override int Level => 30;
     public override int[] Locale => new int[] { 30, 0, 0, 0 };
-    public override int? SubCategory => 17;
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {

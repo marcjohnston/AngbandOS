@@ -31,7 +31,6 @@ internal class BronzeDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemF
     public override int Level => 55;
     public override int[] Locale => new int[] { 55, 0, 0, 0 };
     public override bool ResConf => true;
-    public override int? SubCategory => 14;
     public override int ToA => 10;
     public override int ToH => -2;
     public override int Weight => 200;

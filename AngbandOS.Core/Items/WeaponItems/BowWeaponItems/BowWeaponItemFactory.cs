@@ -16,7 +16,6 @@ internal abstract class BowWeaponItemFactory : WeaponItemClass // TODO: Should b
     /// Returns a damage multiplier when the missile weapon is used.
     /// </summary>
     public virtual int MissileDamageMultiplier => 1;
-    public override int? SubCategory => null; // The subcategory for all bows have been resolved.
 
     public override int PackSort => 32;
     public abstract ItemTypeEnum AmmunitionItemCategory { get; }

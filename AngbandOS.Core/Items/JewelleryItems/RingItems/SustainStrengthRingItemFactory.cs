@@ -21,7 +21,6 @@ internal class SustainStrengthRingItemFactory : RingItemFactory
     public override string FriendlyName => "Sustain Strength";
     public override int Level => 30;
     public override int[] Locale => new int[] { 30, 0, 0, 0 };
-    public override int? SubCategory => 10;
     public override bool SustStr => true;
     public override int Weight => 2;
     public override Item CreateItem() => new SustainStrengthRingItem(SaveGame);

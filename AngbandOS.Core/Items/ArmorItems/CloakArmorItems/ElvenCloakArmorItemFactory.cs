@@ -28,7 +28,6 @@ internal class ElvenCloakArmorItemFactory : CloakArmorItemFactory
     public override int[] Locale => new int[] { 30, 0, 0, 0 };
     public override bool Search => true;
     public override bool Stealth => true;
-    public override int? SubCategory => 2;
     public override int ToA => 4;
     public override int Weight => 5;
     public override Item CreateItem() => new ElvenCloakArmorItem(SaveGame);

@@ -22,7 +22,6 @@ internal class DetonationsPotionItemFactory : PotionItemFactory
     public override string FriendlyName => "Detonations";
     public override int Level => 60;
     public override int[] Locale => new int[] { 60, 0, 0, 0 };
-    public override int? SubCategory => (int)PotionType.Detonations;
     public override int Weight => 4;
     public override bool Quaff(SaveGame saveGame)
     {

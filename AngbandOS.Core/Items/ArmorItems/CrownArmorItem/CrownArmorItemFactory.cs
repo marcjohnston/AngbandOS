@@ -17,5 +17,4 @@ internal abstract class CrownArmorItemFactory : ArmourItemFactory
 
     public override int PackSort => 24;
     public override Colour Colour => Colour.BrightBrown;
-    public override int? SubCategory => null; // No longer used.
 }

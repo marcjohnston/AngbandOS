@@ -24,7 +24,6 @@ internal class PartialPlateHardArmorItemFactory : HardArmorItemFactory
     public override string FriendlyName => "Partial Plate Armour~";
     public override int Level => 45;
     public override int[] Locale => new int[] { 45, 0, 0, 0 };
-    public override int? SubCategory => 12;
     public override int ToH => -3;
     public override int Weight => 260;
     public override Item CreateItem() => new PartialPlateHardArmorItem(SaveGame);

@@ -21,7 +21,6 @@ internal class SicklinessPotionItemFactory : PotionItemFactory
     public override string FriendlyName => "Sickliness";
     public override int Level => 10;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
-    public override int? SubCategory => (int)PotionType.DecCon;
     public override int Weight => 4;
     public override bool Quaff(SaveGame saveGame)
     {

@@ -21,7 +21,6 @@ internal class RationFoodItemFactory : FoodItemFactory
     public override string FriendlyName => "& Ration~ of Food";
     public override int[] Locale => new int[] { 0, 5, 10, 0 };
     public override int Pval => 5000;
-    public override int? SubCategory => 35;
     public override int Weight => 10;
 
     public override bool Eat()

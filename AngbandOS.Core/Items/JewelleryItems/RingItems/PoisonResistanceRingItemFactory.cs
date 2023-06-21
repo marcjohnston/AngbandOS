@@ -22,7 +22,6 @@ internal class PoisonResistanceRingItemFactory : RingItemFactory
     public override int Level => 60;
     public override int[] Locale => new int[] { 60, 0, 0, 0 };
     public override bool ResPois => true;
-    public override int? SubCategory => 20;
     public override int Weight => 2;
     public override Item CreateItem() => new PoisonResistanceRingItem(SaveGame);
 }

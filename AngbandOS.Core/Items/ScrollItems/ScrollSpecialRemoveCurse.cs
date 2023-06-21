@@ -20,7 +20,6 @@ internal class ScrollSpecialRemoveCurse : ScrollItemClass
     public override string FriendlyName => "*Remove Curse*";
     public override int Level => 50;
     public override int[] Locale => new int[] { 50, 75, 85, 95 };
-    public override int? SubCategory => 15;
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

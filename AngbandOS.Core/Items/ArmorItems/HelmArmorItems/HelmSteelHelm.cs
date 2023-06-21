@@ -24,7 +24,6 @@ internal class HelmSteelHelm : HelmItemClass
     public override string FriendlyName => "& Steel Helm~";
     public override int Level => 40;
     public override int[] Locale => new int[] { 40, 0, 0, 0 };
-    public override int? SubCategory => 6;
     public override int Weight => 60;
     public override Item CreateItem() => new SteelHelmArmorItem(SaveGame);
 }

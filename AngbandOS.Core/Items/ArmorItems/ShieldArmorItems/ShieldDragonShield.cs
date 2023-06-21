@@ -28,7 +28,6 @@ internal class ShieldDragonShield : ShieldItemClass
     public override bool IgnoreFire => true;
     public override int Level => 70;
     public override int[] Locale => new int[] { 80, 0, 0, 0 };
-    public override int? SubCategory => 6;
     public override int ToA => 10;
     public override int Weight => 100;
     public override Item CreateItem() => new DragonShieldArmorItem(SaveGame);

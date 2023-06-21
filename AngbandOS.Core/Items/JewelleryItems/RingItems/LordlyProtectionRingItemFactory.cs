@@ -24,7 +24,6 @@ internal class LordlyProtectionRingItemFactory : RingItemFactory
     public override int[] Locale => new int[] { 100, 0, 0, 0 };
     public override bool ResDisen => true;
     public override bool ResPois => true;
-    public override int? SubCategory => 48;
     public override int Weight => 2;
     public override Item CreateItem() => new LordlyProtectionRingItem(SaveGame);
 }

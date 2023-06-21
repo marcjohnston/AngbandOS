@@ -26,7 +26,6 @@ internal class SwordBladeOfChaos : SwordItemClass
     public override int[] Locale => new int[] { 70, 0, 0, 0 };
     public override bool ResChaos => true;
     public override bool ShowMods => true;
-    public override int? SubCategory => 30;
     public override int Weight => 180;
     public override Item CreateItem() => new BladeOfChaosSwordWeaponItem(SaveGame);
 }

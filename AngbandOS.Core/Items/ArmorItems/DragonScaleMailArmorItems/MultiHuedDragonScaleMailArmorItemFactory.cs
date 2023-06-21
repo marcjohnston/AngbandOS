@@ -35,7 +35,6 @@ internal class MultiHuedDragonScaleMailArmorItemFactory : DragonScaleMailArmorIt
     public override bool ResElec => true;
     public override bool ResFire => true;
     public override bool ResPois => true;
-    public override int? SubCategory => 6;
     public override int ToA => 10;
     public override int ToH => -2;
     public override int Weight => 200;

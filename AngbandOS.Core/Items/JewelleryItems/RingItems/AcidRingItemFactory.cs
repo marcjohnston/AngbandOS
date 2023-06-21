@@ -24,7 +24,6 @@ internal class AcidRingItemFactory : RingItemFactory
     public override int Level => 50;
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
     public override bool ResAcid => true;
-    public override int? SubCategory => 17;
     public override int ToA => 15;
     public override int Weight => 2;
     public override Item CreateItem() => new AcidRingItem(SaveGame);

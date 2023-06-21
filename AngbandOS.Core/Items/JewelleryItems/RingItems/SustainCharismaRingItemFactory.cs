@@ -21,7 +21,6 @@ internal class SustainCharismaRingItemFactory : RingItemFactory
     public override string FriendlyName => "Sustain Charisma";
     public override int Level => 30;
     public override int[] Locale => new int[] { 30, 0, 0, 0 };
-    public override int? SubCategory => 15;
     public override bool SustCha => true;
     public override int Weight => 2;
     public override Item CreateItem() => new SustainCharismaRingItem(SaveGame);

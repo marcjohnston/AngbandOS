@@ -35,7 +35,6 @@ internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
     public override int Level => 1;
     public override int[] Locale => new int[] { 1, 0, 0, 0 };
     public override int Pval => 4000;
-    public override int? SubCategory => 0;
     public override int Weight => 30;
     /// <summary>
     /// Refill a torch from another torch

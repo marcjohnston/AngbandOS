@@ -22,7 +22,6 @@ internal class StaffStarlight : StaffItemClass
     public override string FriendlyName => "Starlight";
     public override int Level => 20;
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
-    public override int? SubCategory => 7;
     public override int Weight => 50;
 
     public override void UseStaff(UseStaffEvent eventArgs)

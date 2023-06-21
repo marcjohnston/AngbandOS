@@ -24,7 +24,6 @@ internal class SeekerBoltAmmunitionItemFactory : BoltAmmunitionItemFactory
     public override int Level => 65;
     public override int[] Locale => new int[] { 65, 0, 0, 0 };
     public override bool ShowMods => true;
-    public override int? SubCategory => 2;
     public override int Weight => 3;
     public override Item CreateItem() => new SeekerBoltAmmunitionItem(SaveGame);
 }
