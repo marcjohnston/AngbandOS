@@ -1311,16 +1311,23 @@ internal abstract class Store : IItemFilter
         {
             return;
         }
-        int itemSubCategory = item.ItemSubCategory;
         BookItem bookItem = (BookItem)item;
-        bool useSetTwo = item.Category == SaveGame.Player.SecondaryRealm.SpellBookItemCategory;
         SaveGame.HandleStuff();
-        int spellIndex;
 
         // Arcane casters can choose their spell
+        Spell? spell = null;
         if (SaveGame.Player.BaseCharacterClass.SpellCastingType.CanChooseSpellToStudy)
         {
-            if (!SaveGame.GetSpell(out spellIndex, "study", bookItem, false, useSetTwo, SaveGame.Player) && spellIndex == -1)
+            // Allow the user to select a spell.
+            if (!SaveGame.GetSpell(out spell, "study", bookItem, false, SaveGame.Player))
+            {
+                // There are no spells.
+                SaveGame.MsgPrint($"You cannot learn any {spellType}s from that book.");
+                return;
+            }
+
+            // Check to see if the user cancelled the selection.
+            if (spell == null)
             {
                 return;
             }
@@ -1329,27 +1336,21 @@ internal abstract class Store : IItemFilter
         {
             // We need to choose a spell at random
             int k = 0;
-            int gift = -1;
             // Gather the potential spells from the book
-            for (spellIndex = 0; spellIndex < 32; spellIndex++)
+            foreach (Spell sPtr in bookItem.Factory.Spells)
             {
-                if ((Constants.BookSpellFlags[itemSubCategory] & (1u << spellIndex)) != 0)
+                if (SaveGame.Player.SpellOkay(sPtr, false))
                 {
-                    if (!SaveGame.Player.SpellOkay(spellIndex, false, useSetTwo))
-                    {
-                        continue;
-                    }
                     k++;
                     if (Program.Rng.RandomLessThan(k) == 0)
                     {
-                        gift = spellIndex;
+                        spell = sPtr;
                     }
                 }
             }
-            spellIndex = gift;
         }
         // If we failed to get a spell, return
-        if (spellIndex < 0)
+        if (spell == null)
         {
             SaveGame.MsgPrint($"You cannot learn any {spellType}s from that book.");
             return;
@@ -1357,7 +1358,6 @@ internal abstract class Store : IItemFilter
         // Learning a spell takes a turn (although that's not very relevant)
         SaveGame.EnergyUse = 100;
         // Mark the spell as learned
-        Spell spell = useSetTwo ? SaveGame.Spells[1][spellIndex] : SaveGame.Spells[0][spellIndex];
         spell.Learned = true;
 
         // Mark the spell as the last spell learned, in case we need to start forgetting them

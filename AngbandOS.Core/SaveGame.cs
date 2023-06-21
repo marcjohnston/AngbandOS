@@ -9052,49 +9052,42 @@ internal class SaveGame
         MsgPrint("Oops. That object cannot be activated.");
     }
 
+    public Spell[] OkaySpells(BookItem spellBook, bool known)
+    {
+        List<Spell> okaySpells = new List<Spell>();
+        foreach (Spell spell in spellBook.Factory.Spells)
+        {
+            if (Player.SpellOkay(spell, known))
+            {
+                okaySpells.Add(spell);
+            }
+        }
+        return okaySpells.ToArray();
+    }
+
     /// <summary>
     /// Returns an spell selected by the player.  If the player doesn't have any spells capable of being selected, false is returned; otherwise the spell selected by the user is returned on the output
     /// parameter.  If the user cancels the selection, a true value is returned and the output spell parameter is set to null.
     /// </summary>
-    public bool GetSpell(out int sn, string prompt, BookItem spellBook, bool known, bool realm2, Player player)
+    public bool GetSpell(out Spell? selectedSpell, string prompt, BookItem spellBook, bool known, Player player)
     {
-        int i;
-        int spell;
-        List<int> spells = new List<int>();
-        string p = player.BaseCharacterClass.SpellCastingType.SpellNoun;
-        for (spell = 0; spell < 32; spell++)
-        {
-            if ((Constants.BookSpellFlags[spellBook.ItemSubCategory] & (1u << spell)) != 0)
-            {
-                spells.Add(spell);
-            }
-        }
-        bool okay = false;
-        sn = -2;
-        for (i = 0; i < spells.Count; i++)
-        {
-            if (player.SpellOkay(spells[i], known, realm2))
-            {
-                okay = true;
-            }
-        }
-        if (!okay)
+        selectedSpell = null;
+        Spell[] okaySpells = OkaySpells(spellBook, known);
+        if (okaySpells.Length == 0)
         {
             return false;
         }
-        sn = -1;
-        bool flag = false;
+        string spellNoun = player.BaseCharacterClass.SpellCastingType.SpellNoun;
         ScreenBuffer? savedScreen = null;
-        string outVal = $"({p}s {0.IndexToLetter()}-{(spells.Count - 1).IndexToLetter()}, *=List, ESC=exit) {prompt} which {p}? ";
-        while (!flag && GetCom(outVal, out char choice) && !Shutdown)
+        string outVal = $"({spellNoun}s {0.IndexToLetter()}-{(okaySpells.Length - 1).IndexToLetter()}, *=List, ESC=exit) {prompt} which {spellNoun}? ";
+        while (selectedSpell == null && GetCom(outVal, out char choice) && !Shutdown)
         {
             if (choice == ' ' || choice == '*' || choice == '?')
             {
                 if (savedScreen == null)
                 {
                     savedScreen = Screen.Clone();
-                    BaseRealm? useRealm = realm2 ? player.SecondaryRealm : player.PrimaryRealm;
-                    player.PrintSpells(spells.ToArray(), 1, 20, useRealm);
+                    player.PrintSpells(okaySpells, 1, 20);
                 }
                 else
                 {
@@ -9108,37 +9101,31 @@ internal class SaveGame
             {
                 choice = char.ToLower(choice);
             }
-            i = char.IsLower(choice) ? choice.LetterToNumber() : -1;
-            if (i < 0 || i >= spells.Count)
+            int i = char.IsLower(choice) ? choice.LetterToNumber() : -1;
+            if (i < 0 || i >= okaySpells.Length)
             {
                 continue;
             }
-            spell = spells[i];
-            if (!player.SpellOkay(spell, known, realm2))
+            Spell spell = okaySpells[i];
+            if (!player.SpellOkay(spell, known))
             {
-                MsgPrint($"You may not {prompt} that {p}.");
+                MsgPrint($"You may not {prompt} that {spellNoun}.");
                 continue;
             }
             if (ask)
             {
-                Spell sPtr = Spells[realm2 ? 1 : 0][spell % 32];
-                string tmpVal = $"{prompt} {sPtr.Name} ({sPtr.ManaCost} mana, {sPtr.FailureChance()}% fail)? ";
+                string tmpVal = $"{prompt} {spell.Name} ({spell.ManaCost} mana, {spell.FailureChance()}% fail)? ";
                 if (!GetCheck(tmpVal))
                 {
                     continue;
                 }
             }
-            flag = true;
+            selectedSpell = spell;
         }
         if (savedScreen != null)
         {
             Screen.Restore(savedScreen);
         }
-        if (!flag)
-        {
-            return false;
-        }
-        sn = spell;
         return true;
     }
 
@@ -11693,18 +11680,22 @@ internal class SaveGame
         {
             return;
         }
-        bool useSetTwo = oPtr.Category == Player.SecondaryRealm?.SpellBookItemCategory;
         BookItem bookItem = (BookItem)oPtr;
         HandleStuff();
-        if (!GetSpell(out int spell, Player.BaseCharacterClass.SpellCastingType.CastVerb, bookItem, true, useSetTwo, Player))
+
+        // Allow the player to select the spell.
+        if (!GetSpell(out Spell? sPtr, Player.BaseCharacterClass.SpellCastingType.CastVerb, bookItem, true, Player))
         {
-            if (spell == -2)
-            {
-                MsgPrint($"You don't know any {prayer}s in that book.");
-            }
+            MsgPrint($"You don't know any {prayer}s in that book.");
             return;
         }
-        Spell sPtr = useSetTwo ? Spells[1][spell] : Spells[0][spell];
+
+        // Check to see if the user cancelled the selection.
+        if (sPtr == null)
+        {
+            return;
+        }
+
         if (sPtr.ManaCost > Player.Mana)
         {
             string cast = Player.BaseCharacterClass.SpellCastingType.CastVerb;
