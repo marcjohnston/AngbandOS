@@ -538,14 +538,6 @@ internal abstract class Store : IItemFilter
 
     private void DoStoreBrowse(Item oPtr)
     {
-        List<int> spells = new List<int>();
-        for (int spell = 0; spell < 32; spell++)
-        {
-            if ((Constants.BookSpellFlags[oPtr.ItemSubCategory] & (1u << spell)) != 0)
-            {
-                spells.Add(spell);
-            }
-        }
         ScreenBuffer savedScreen = SaveGame.Screen.Clone();
         BookItemFactory book = (BookItemFactory)oPtr.Factory;
         SaveGame.Player.PrintSpells(book.Spells.ToArray(), 1, 20);
