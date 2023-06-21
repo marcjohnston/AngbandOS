@@ -518,7 +518,7 @@ internal class Journal
                     {
                         if (counts[i] > 1)
                         {
-                            string plural = names[i].PluraliseMonsterName();
+                            string plural = names[i].PluralizeMonsterName();
                             buf = $"You have killed {counts[i]} {plural}";
                         }
                         else

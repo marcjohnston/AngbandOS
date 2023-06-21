@@ -44,7 +44,7 @@ internal class Quest
             }
             else
             {
-                string plural = name.PluraliseMonsterName();
+                string plural = name.PluralizeMonsterName();
                 buf = $"You have defeated {qNum} {plural} in {dunName}";
             }
         }
@@ -60,7 +60,7 @@ internal class Quest
                 {
                     if (ToKill - Killed > 1)
                     {
-                        string plural = name.PluraliseMonsterName();
+                        string plural = name.PluralizeMonsterName();
                         buf = $"You must defeat {qNum} {plural} at lvl {lev} of {dunName}";
                     }
                     else

@@ -17,13 +17,6 @@ internal abstract class ItemFactory : IItemCharacteristics
 {
     public SaveGame SaveGame { get; }
 
-    /// <summary>
-    /// Returns a description of the activation effect for the item or null, if the item cannot be activated.  Returns null by default.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <returns></returns>
-    public virtual string? DescribeActivationEffect => null;
-
     ///// <summary>
     ///// Returns an activation power object that handles the activation properties for the item, if the item can be activated; null, if the item cannot be activated.  Returns 
     ///// null, by default.
@@ -36,6 +29,13 @@ internal abstract class ItemFactory : IItemCharacteristics
         FlavorCharacter = Character;
         FlavorColour = Colour;
     }
+
+    /// <summary>
+    /// Returns a description of the activation effect for the item or null, if the item cannot be activated.  Returns null by default.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    public virtual string? DescribeActivationEffect => null;
 
     /// <summary>
     /// Returns true, if the item is fuel for a lantern.  Returns false, by default.

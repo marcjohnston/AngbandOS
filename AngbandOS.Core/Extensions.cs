@@ -88,11 +88,11 @@ internal static class Extensions
     }
 
     /// <summary>
-    /// Pluralises a monster name, with various special cases for unusual names
+    /// Pluralizes a monster name, with various special cases for unusual names
     /// </summary>
-    /// <param name="name"> The name to pluralise </param>
-    /// <returns> The plural form of the name </returns>
-    public static string PluraliseMonsterName(this string name)
+    /// <param name="name"> The name to pluralize.</param>
+    /// <returns> The plural form of the name.</returns>
+    public static string PluralizeMonsterName(this string name)
     {
         string plural;
         // "X of Y" -> "Xs of Y"

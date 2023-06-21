@@ -18672,7 +18672,7 @@ internal class SaveGame
         }
         else if (qNum > 1)
         {
-            string plural = name.PluraliseMonsterName();
+            string plural = name.PluralizeMonsterName();
             MsgPrint($"You still have to kill {qNum} {plural}.");
         }
         else
@@ -18695,7 +18695,7 @@ internal class SaveGame
         }
         else
         {
-            string plural = name.PluraliseMonsterName();
+            string plural = name.PluralizeMonsterName();
             MsgPrint($"Be warned, this level is guarded by {qNum} {plural}!");
         }
         Quests[qIdx].Discovered = true;
