@@ -101,8 +101,6 @@ internal class SaveGame
     public DateTime? LastInputReceived = null;
 
     public int CommandRepeat;
-//        public readonly Dungeon[] Dungeons;
- //   public readonly Patron[] PatronList;
     public readonly List<Quest> Quests;
     public readonly Island Wilderness = new Island();
     public int AllocKindSize;
@@ -409,7 +407,6 @@ internal class SaveGame
         Configure(configuration);
 
         Quests = new List<Quest>();
- //       Dungeons = Dungeon.NewDungeonList(this);
         InitializeAllocationTables();
     }
 
