@@ -19,7 +19,6 @@ internal class JournalGameCommand : GameCommand
 
     public override bool Execute()
     {
-        SaveGame.RunScript<ShowJournalScript>();
-        return false;
+        return SaveGame.RunScript<JournalScript>();
     }
 }

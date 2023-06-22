@@ -12,6 +12,10 @@ namespace AngbandOS.Core.Scripts
     {
         private AlterScript(SaveGame saveGame) : base(saveGame) { }
 
+        /// <summary>
+        /// Gets a direction from the player and alters the tile in that direction.  Returns false, if the action fails due to chance.
+        /// </summary>
+        /// <returns></returns>
         public override bool Execute()
         {
             // Assume we won't disturb the player

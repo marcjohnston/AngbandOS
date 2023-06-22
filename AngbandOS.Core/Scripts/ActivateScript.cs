@@ -16,7 +16,7 @@ namespace AngbandOS.Core.Scripts
         private ActivateScript(SaveGame saveGame) : base(saveGame) { }
 
         /// <summary>
-        /// Returns true.
+        /// Allows the user to select an item and activates the special feature of that item.  Returns false, in all cases.
         /// </summary>
         /// <returns></returns>
         public override bool Execute()
@@ -63,14 +63,14 @@ namespace AngbandOS.Core.Scripts
             if (chance < Constants.UseDevice || Program.Rng.DieRoll(chance) < Constants.UseDevice)
             {
                 SaveGame.MsgPrint("You failed to activate it properly.");
-                return true;
+                return false;
             }
 
             // If the item is still recharging, then just tell us and quit
             if (item.RechargeTimeLeft != 0)
             {
                 SaveGame.MsgPrint("It whines, glows and fades...");
-                return true;
+                return false;
             }
 
             // We passed the checks, so the item is activated
@@ -81,7 +81,7 @@ namespace AngbandOS.Core.Scripts
             if (string.IsNullOrEmpty(item.RandartName) == false)
             {
                 ActivateRandomArtifact(item);
-                return true;
+                return false;
             }
 
             // If it's a fixed artifact then use its ability
@@ -98,7 +98,7 @@ namespace AngbandOS.Core.Scripts
             {
                 SaveGame.TeleportPlayer(100);
                 item.RechargeTimeLeft = 50 + Program.Rng.DieRoll(50);
-                return true;
+                return false;
             }
 
             // Check to see if the item can be activated.
@@ -106,7 +106,7 @@ namespace AngbandOS.Core.Scripts
             {
                 IItemActivatable activatibleItem = (IItemActivatable)item;
                 activatibleItem.DoActivate();
-                return true;
+                return false;
             }
 
             throw new Exception("Oops. That object cannot be activated.");

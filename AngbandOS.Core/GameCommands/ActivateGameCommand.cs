@@ -24,7 +24,6 @@ internal class ActivateGameCommand : GameCommand
 
     public override bool Execute()
     {
-        SaveGame.RunScript<ActivateScript>();
-        return false;
+        return SaveGame.RunScript<ActivateScript>();
     }
 }

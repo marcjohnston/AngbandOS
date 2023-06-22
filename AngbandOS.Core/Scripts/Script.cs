@@ -16,6 +16,10 @@ namespace AngbandOS.Core.Scripts
             SaveGame = saveGame;
         }
 
+        /// <summary>
+        /// Execute the script and return true, if the script fails due to chance.  A true return value indicates to the parent, that if the process is repeated, the process may succeed.
+        /// </summary>
+        /// <returns></returns>
         public abstract bool Execute();
     }
 }

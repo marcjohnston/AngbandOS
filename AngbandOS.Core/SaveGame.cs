@@ -9094,41 +9094,6 @@ internal class SaveGame
         return true;
     }
 
-    public void DoCmdDestroyAll()
-    {
-        int count = 0;
-        // Look for worthless items
-        for (int i = InventorySlot.PackCount - 1; i >= 0; i--)
-        {
-            Item? item = GetInventoryItem(i);
-            if (item == null)
-            {
-                continue;
-            }
-            // Only destroy if it's stompable (i.e. worthless or marked as unwanted)
-            if (!item.Stompable())
-            {
-                continue;
-            }
-            string itemName = item.Description(true, 3);
-            MsgPrint($"You destroy {itemName}.");
-            count++;
-            int amount = item.Count;
-            Player.InvenItemIncrease(i, -amount);
-            Player.InvenItemOptimize(i);
-        }
-        if (count == 0)
-        {
-            MsgPrint("You are carrying nothing worth destroying.");
-            EnergyUse = 0;
-        }
-        else
-        {
-            // If we destroyed at least one thing, take a turn
-            EnergyUse = 100;
-        }
-    }
-
     public void DoCmdDestroy()
     {
         int amount = 1;

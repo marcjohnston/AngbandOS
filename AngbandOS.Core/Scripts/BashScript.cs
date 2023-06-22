@@ -15,6 +15,10 @@ namespace AngbandOS.Core.Scripts
     {
         private BashScript(SaveGame saveGame) : base(saveGame) { }
 
+        /// <summary>
+        /// Allows the player to select a direction and bashes the object found in that direction.  Returns false, if the action fails due to chance.
+        /// </summary>
+        /// <returns></returns>
         public override bool Execute()
         {
             // Assume it won't disturb us

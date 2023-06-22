@@ -19,7 +19,6 @@ internal class DestroyAllGameCommand : GameCommand
 
     public override bool Execute()
     {
-        SaveGame.DoCmdDestroyAll();
-        return false;
+        return SaveGame.RunScript<DestroyAllScript>();
     }
 }

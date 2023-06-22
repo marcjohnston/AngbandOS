@@ -8,17 +8,17 @@
 namespace AngbandOS.Core.Scripts
 {
     [Serializable]
-    internal class ShowJournalScript : Script
+    internal class JournalScript : Script
     {
         private readonly Colour[] _menuColours = new Colour[128];
         private readonly int[] _menuIndices = new int[128];
         private readonly string[] _menuItem = new string[128];
         private int _menuLength;
 
-        private ShowJournalScript(SaveGame saveGame) : base(saveGame) { }
+        private JournalScript(SaveGame saveGame) : base(saveGame) { }
 
         /// <summary>
-        /// Returns true.
+        /// Renders the journal on the screen and returns false, in all cases.
         /// </summary>
         /// <returns></returns>
         public override bool Execute()
@@ -104,7 +104,7 @@ namespace AngbandOS.Core.Scripts
             SaveGame.SetBackground(BackgroundImage.Overhead);
             SaveGame.Screen.Restore(savedScreen);
             SaveGame.FullScreenOverlay = false;
-            return true;
+            return false;
         }
 
         private void DisplayStat(string title, int row, int col, Func<IItemCharacteristics, bool> getStat)
