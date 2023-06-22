@@ -7065,31 +7065,6 @@ internal class SaveGame
         Screen.PrintLine("Type '?' for a list of commands.", 0, 0);
     }
 
-    // Command Engine
-
-    /// <summary>
-    /// Activate a randomly generated artifact that will therefore have been given a random power
-    /// </summary>
-    /// <param name="item"> The artifact being activated.</param>
-    private void ActivateRandomArtifact(Item item)
-    {
-        // If we don't have a random artifact, abort
-        if (string.IsNullOrEmpty(item.RandartName))
-        {
-            return;
-        }
-        Activation artifactPower = item.BonusPowerSubType;
-
-        if (!String.IsNullOrEmpty(artifactPower.PreActivationMessage))
-        {
-            MsgPrint(artifactPower.PreActivationMessage);
-        }
-        if (artifactPower.Activate())
-        {
-            item.RechargeTimeLeft = artifactPower.RechargeTime(Player);
-        }
-    }
-
     /// <summary>
     /// 
     /// </summary>
@@ -9040,96 +9015,6 @@ internal class SaveGame
 
     public void DoActivate()
     {
-        // No item passed in, so get one; filtering to activatable items only
-        if (!SelectItem(out Item? item, "Activate which item? ", true, true, false, new ActivatableItemFilter()))
-        {
-            MsgPrint("You have nothing to activate.");
-            return;
-        }
-        // Get the item from the index
-        if (item == null)
-        {
-            return;
-        }
-
-        // Activating an item uses 100 energy
-        EnergyUse = 100;
-
-        // Get the level of the item
-        int itemLevel = item.Factory.Level;
-        if (item.FixedArtifact != null)
-        {
-            itemLevel = item.FixedArtifact.Level;
-        }
-
-        // Work out the chance of using the item successfully based on its level and the
-        // player's skill
-        int chance = Player.SkillUseDevice;
-        if (Player.TimedConfusion.TurnsRemaining != 0)
-        {
-            chance /= 2;
-        }
-
-        chance -= itemLevel > 50 ? 50 : itemLevel;
-
-        // Always give a slight chance of success
-        if (chance < Constants.UseDevice && Program.Rng.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
-        {
-            chance = Constants.UseDevice;
-        }
-
-        // If we fail our use item roll just tell us and quit
-        if (chance < Constants.UseDevice || Program.Rng.DieRoll(chance) < Constants.UseDevice)
-        {
-            MsgPrint("You failed to activate it properly.");
-            return;
-        }
-
-        // If the item is still recharging, then just tell us and quit
-        if (item.RechargeTimeLeft != 0)
-        {
-            MsgPrint("It whines, glows and fades...");
-            return;
-        }
-
-        // We passed the checks, so the item is activated
-        MsgPrint("You activate it...");
-        PlaySound(SoundEffect.ActivateArtifact);
-
-        // If it is a random artifact then use its ability and quit
-        if (string.IsNullOrEmpty(item.RandartName) == false)
-        {
-            ActivateRandomArtifact(item);
-            return;
-        }
-
-        // If it's a fixed artifact then use its ability
-        if (item.FixedArtifact != null && typeof(IFixedArtifactActivatible).IsAssignableFrom(item.FixedArtifact.GetType()))
-        {
-            IFixedArtifactActivatible activatibleFixedArtifact = (IFixedArtifactActivatible)item.FixedArtifact;
-            activatibleFixedArtifact.ActivateItem(this, item);
-            return;
-        }
-
-        // If it wasn't an artifact, then check the other types of activatable item Planar
-        // weapon teleports you
-        if (item.RareItemTypeIndex == RareItemTypeEnum.WeaponPlanarWeapon)
-        {
-            TeleportPlayer(100);
-            item.RechargeTimeLeft = 50 + Program.Rng.DieRoll(50);
-            return;
-        }
-
-        // Check to see if the item can be activated.
-        if (item.Factory.Activate)
-        {
-            IItemActivatable activatibleItem = (IItemActivatable)item;
-            activatibleItem.DoActivate();
-            return;
-        }
-
-        // We ran out of item types
-        MsgPrint("Oops. That object cannot be activated.");
     }
 
     public Spell[] OkaySpells(BookItem spellBook, bool known)
