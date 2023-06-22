@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Scripts
     /// <summary>
     /// Activate the special feature of an item.
     /// </summary>
+    [Serializable]
     internal class ActivateScript : Script
     {
         private ActivateScript(SaveGame saveGame) : base(saveGame) { }

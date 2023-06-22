@@ -9094,38 +9094,6 @@ internal class SaveGame
         return true;
     }
 
-    public bool DoBash()
-    {
-        // Assume it won't disturb us
-        bool more = false;
-
-        // Get the direction to bash
-        if (GetDirectionNoAim(out int dir))
-        {
-            int y = Player.MapY + Level.KeypadDirectionYOffset[dir];
-            int x = Player.MapX + Level.KeypadDirectionXOffset[dir];
-            GridTile tile = Level.Grid[y][x];
-            // Can only bash closed doors
-            if (!tile.FeatureType.IsClosedDoor)
-            {
-                MsgPrint("You see nothing there to bash.");
-            }
-            else if (tile.MonsterIndex != 0)
-            {
-                // Oops - a montser got in the way
-                EnergyUse = 100;
-                MsgPrint("There is a monster in the way!");
-                PlayerAttackMonster(y, x);
-            }
-            else
-            {
-                // Bash the door
-                more = BashClosedDoor(y, x);
-            }
-        }
-        return more;
-    }
-
     public void DoCmdDestroyAll()
     {
         int count = 0;

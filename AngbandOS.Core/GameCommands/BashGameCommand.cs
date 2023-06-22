@@ -21,6 +21,6 @@ internal class BashGameCommand : GameCommand
 
     public override bool Execute()
     {
-        return SaveGame.DoBash();
+        return SaveGame.RunScript<BashScript>();
     }
 }

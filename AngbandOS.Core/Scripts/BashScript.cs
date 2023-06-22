@@ -7,43 +7,41 @@
 
 namespace AngbandOS.Core.Scripts
 {
+    /// <summary>
+    /// Get a direction and bash a door, returning true, if the command can be repeated; false, if the command succeeds or is futile.</returns>
+    /// </summary>
     [Serializable]
-    internal class AlterScript : Script
+    internal class BashScript : Script
     {
-        private AlterScript(SaveGame saveGame) : base(saveGame) { }
+        private BashScript(SaveGame saveGame) : base(saveGame) { }
 
         public override bool Execute()
         {
-            // Assume we won't disturb the player
+            // Assume it won't disturb us
             bool more = false;
 
-            // Get the direction in which to alter something
+            // Get the direction to bash
             if (SaveGame.GetDirectionNoAim(out int dir))
             {
                 int y = SaveGame.Player.MapY + SaveGame.Level.KeypadDirectionYOffset[dir];
                 int x = SaveGame.Player.MapX + SaveGame.Level.KeypadDirectionXOffset[dir];
                 GridTile tile = SaveGame.Level.Grid[y][x];
-                // Altering a tile will take a turn
-                SaveGame.EnergyUse = 100;
-                // We 'alter' a tile by attacking it
-                if (tile.MonsterIndex != 0)
+                // Can only bash closed doors
+                if (!tile.FeatureType.IsClosedDoor)
                 {
+                    SaveGame.MsgPrint("You see nothing there to bash.");
+                }
+                else if (tile.MonsterIndex != 0)
+                {
+                    // Oops - a monster got in the way
+                    SaveGame.EnergyUse = 100;
+                    SaveGame.MsgPrint("There is a monster in the way!");
                     SaveGame.PlayerAttackMonster(y, x);
                 }
                 else
                 {
-                    // Check the action based on the type of tile
-                    AlterAction? alterAction = tile.FeatureType.AlterAction;
-                    if (alterAction == null)
-                    {
-                        SaveGame.MsgPrint("You're not sure what you can do with that...");
-                    }
-                    else
-                    {
-                        AlterEventArgs alterEventArgs = new AlterEventArgs(SaveGame, y, x);
-                        alterAction.Execute(alterEventArgs);
-                        more = alterEventArgs.More;
-                    }
+                    // Bash the door.
+                    more = SaveGame.BashClosedDoor(y, x);
                 }
             }
             return more;
