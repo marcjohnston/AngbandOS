@@ -20,6 +20,6 @@ internal class ActivatePowerWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.DoCmdWizActivatePower();
+        SaveGame.RunScript<WizardActivatePowerScript>();
     }
 }

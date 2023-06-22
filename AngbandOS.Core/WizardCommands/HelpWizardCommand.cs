@@ -20,6 +20,6 @@ internal class HelpWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.DoCmdWizHelp();
+        SaveGame.RunScript<WizardHelpScript>();
     }
 }
