@@ -15,6 +15,7 @@ namespace AngbandOS.Core;
 /// </summary>
 internal class SingletonRepository
 {
+    public SingletonDictionary<Script> Scripts;
     public SingletonDictionary<Dungeon> Dungeons;
     public SingletonDictionary<Gender> Genders;
     public SingletonDictionary<BaseBirthStage> BirthStages;
@@ -119,6 +120,7 @@ internal class SingletonRepository
 
     public void Initialize(SaveGame saveGame)
     {
+        Scripts = new SingletonDictionary<Script>(saveGame, LoadTypesFromAssembly<Script>(saveGame));
         Dungeons = new SingletonDictionary<Dungeon>(saveGame, LoadTypesFromAssembly<Dungeon>(saveGame));
         Genders = new SingletonDictionary<Gender>(saveGame, LoadTypesFromAssembly<Gender>(saveGame));
         BirthStages = new SingletonDictionary<BaseBirthStage>(saveGame, LoadTypesFromAssembly<BaseBirthStage>(saveGame));

@@ -51,7 +51,7 @@ internal class PopupMenu
         {
             saveGame.Screen.Print(Colour.White, _text[i], top + i + 1, left + 1);
         }
-        while (true && !saveGame.Shutdown)
+        while (!saveGame.Shutdown)
         {
             for (int i = 0; i < _items.Count; i++)
             {

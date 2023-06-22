@@ -32,6 +32,7 @@ global using AngbandOS.Core.HelpGroups;
 global using AngbandOS.Core.Hooks;
 global using AngbandOS.Core.Interface;
 global using AngbandOS.Core.InventorySlots;
+global using AngbandOS.Core.ItemActivations;
 global using AngbandOS.Core.ItemCategories;
 global using AngbandOS.Core.ItemClasses;
 global using AngbandOS.Core.ItemFilters;
@@ -52,6 +53,7 @@ global using AngbandOS.Core.RareItems;
 global using AngbandOS.Core.Realms;
 global using AngbandOS.Core.Rewards;
 global using AngbandOS.Core.RoomTypes;
+global using AngbandOS.Core.Scripts;
 global using AngbandOS.Core.SpellResistantDetections;
 global using AngbandOS.Core.Spells;
 global using AngbandOS.Core.Spells.Chaos;
@@ -72,11 +74,3 @@ global using AngbandOS.Core.Towns;
 global using AngbandOS.Core.Vaults;
 global using AngbandOS.Core.WeightedRandoms;
 global using AngbandOS.Core.WizardCommands;
-global // AngbandOS: 2022 Marc Johnston
-//
-// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
-// Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
-// and not for profit purposes provided that this copyright and statement are included in all such
-// copies. Other copyrights may also apply.”
-
-using AngbandOS.Core.ItemActivations;
