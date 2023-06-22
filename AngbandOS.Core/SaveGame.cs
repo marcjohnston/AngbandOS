@@ -297,53 +297,6 @@ internal class SaveGame
     private int _menuLength;
 
     /// <summary>
-    /// Removes all items from a grid tile.
-    /// </summary>
-    /// <param name="y"></param>
-    /// <param name="x"></param>
-    public void DeleteObject(int y, int x)
-    {
-        if (!Level.InBounds(y, x))
-        {
-            return;
-        }
-        GridTile cPtr = Level.Grid[y][x];
-        cPtr.Items.Clear();
-        Level.RedrawSingleLocation(y, x);
-    }
-
-    public bool AddItemToMonster(Item item, Monster monster)
-    {
-        item.HoldingMonsterIndex = monster.GetMonsterIndex();
-        monster.Items.Add(item);
-        return true;
-    }
-
-    public bool AddItemToGrid(Item item, int x, int y)
-    {
-        GridTile tile = Level.Grid[y][x];
-        item.Y = y;
-        item.X = x;
-        item.HoldingMonsterIndex = 0;
-        tile.Items.Add(item);
-        return true;
-    }
-
-    /// <summary>
-    /// Returns an item from the players inventory.  If there is no item at the desired slot, null is returned.
-    /// </summary>
-    /// <param name="index"></param>
-    /// <returns></returns>
-    public Item? GetInventoryItem(int index)
-    {
-        return Inventory[index];
-    }
-    public void SetInventoryItem(int index, Item? item)
-    {
-        Inventory[index] = item;
-    }
-
-    /// <summary>
     /// Creates a new game.
     /// </summary>
     /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
@@ -393,8 +346,8 @@ internal class SaveGame
         NoticeReorderFlaggedAction = new NoticeReorderFlaggedAction(this);
 
         NoticeCombineAndReorderFlaggedAction = new GroupSetFlaggedAction(this, NoticeCombineFlaggedAction, NoticeReorderFlaggedAction);
-        PrExtraRedrawAction = new GroupSetFlaggedAction(this, 
-            RedrawCutFlaggedAction, RedrawHungerFlaggedAction, RedrawDTrapFlaggedAction, RedrawBlindFlaggedAction, RedrawConfusedFlaggedAction, 
+        PrExtraRedrawAction = new GroupSetFlaggedAction(this,
+            RedrawCutFlaggedAction, RedrawHungerFlaggedAction, RedrawDTrapFlaggedAction, RedrawBlindFlaggedAction, RedrawConfusedFlaggedAction,
             RedrawAfraidFlaggedAction, RedrawPoisonedFlaggedAction, RedrawStateFlaggedAction, RedrawSpeedFlaggedAction, RedrawStudyFlaggedAction);
         PrBasicRedrawAction = new GroupSetFlaggedAction(this,
             RedrawPlayerFlaggedAction, RedrawTitleFlaggedAction, RedrawStatsFlaggedAction, RedrawLevelFlaggedAction, RedrawExpFlaggedAction, RedrawGoldFlaggedAction,
@@ -408,6 +361,87 @@ internal class SaveGame
 
         Quests = new List<Quest>();
         InitializeAllocationTables();
+    }
+
+    /// <summary>
+    /// Retrieves a save game from persistent storage.  If no persistent storage is specified, a new game is created. This static method is used as a factory
+    /// to generate the SaveGame object that can be played using the Play method.
+    /// </summary>
+    /// <param name="persistentStorage"></param>
+    /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
+    /// <returns></returns>
+    public static SaveGame Initialize(ICorePersistentStorage? persistentStorage, Configuration? configuration)
+    {
+        byte[]? data = null;
+
+        // Retrieve the game from the persistent storage.
+        if (persistentStorage != null)
+        {
+            // Retrieve the saved game from the persistent storage.  If the persistent storage doesn't find it, the return data is expected to be null; which
+            // will indicate that a new game needs to be created.
+            data = persistentStorage.ReadGame();
+        }
+
+        // Check to see if the game needs to be created?
+        if (data == null)
+        {
+            // The game doesn't exist.  Start a new one.
+            return new SaveGame(configuration);
+        }
+        else
+        {
+            // Deserialize the game.
+            BinaryFormatter formatter = new BinaryFormatter();
+            MemoryStream memoryStream = new MemoryStream(data);
+            return (SaveGame)formatter.Deserialize(memoryStream);
+        }
+    }
+
+    /// <summary>
+    /// Removes all items from a grid tile.
+    /// </summary>
+    /// <param name="y"></param>
+    /// <param name="x"></param>
+    public void DeleteObject(int y, int x)
+    {
+        if (!Level.InBounds(y, x))
+        {
+            return;
+        }
+        GridTile cPtr = Level.Grid[y][x];
+        cPtr.Items.Clear();
+        Level.RedrawSingleLocation(y, x);
+    }
+
+    public bool AddItemToMonster(Item item, Monster monster)
+    {
+        item.HoldingMonsterIndex = monster.GetMonsterIndex();
+        monster.Items.Add(item);
+        return true;
+    }
+
+    public bool AddItemToGrid(Item item, int x, int y)
+    {
+        GridTile tile = Level.Grid[y][x];
+        item.Y = y;
+        item.X = x;
+        item.HoldingMonsterIndex = 0;
+        tile.Items.Add(item);
+        return true;
+    }
+
+    /// <summary>
+    /// Returns an item from the players inventory.  If there is no item at the desired slot, null is returned.
+    /// </summary>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    public Item? GetInventoryItem(int index)
+    {
+        return Inventory[index];
+    }
+    public void SetInventoryItem(int index, Item? item)
+    {
+        Inventory[index] = item;
     }
 
     /// <summary>
@@ -1020,40 +1054,6 @@ internal class SaveGame
             Comments = ""
         };
         PersistentStorage?.WriteGame(gameDetails, memoryStream.ToArray());
-    }
-
-    /// <summary>
-    /// Retrieves a save game from persistent storage.  If no persistent storage is specified, a new game is created. This static method is used as a factory
-    /// to generate the SaveGame object that can be played using the Play method.
-    /// </summary>
-    /// <param name="persistentStorage"></param>
-    /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
-    /// <returns></returns>
-    public static SaveGame Initialize(ICorePersistentStorage? persistentStorage, Configuration? configuration)
-    {
-        byte[]? data = null;
-
-        // Retrieve the game from the persistent storage.
-        if (persistentStorage != null)
-        {
-            // Retrieve the saved game from the persistent storage.  If the persistent storage doesn't find it, the return data is expected to be null; which
-            // will indicate that a new game needs to be created.
-            data = persistentStorage.ReadGame();
-        }
-
-        // Check to see if the game needs to be created?
-        if (data == null)
-        {
-            // The game doesn't exist.  Start a new one.
-            return new SaveGame(configuration);
-        }
-        else
-        {
-            // Deserialize the game.
-            BinaryFormatter formatter = new BinaryFormatter();
-            MemoryStream memoryStream = new MemoryStream(data);
-            return (SaveGame)formatter.Deserialize(memoryStream);
-        }
     }
 
     private void ResetStompability()
