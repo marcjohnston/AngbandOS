@@ -17,7 +17,11 @@ namespace AngbandOS.Core.Scripts
 
         private ShowJournalScript(SaveGame saveGame) : base(saveGame) { }
 
-        public override void Execute()
+        /// <summary>
+        /// Returns true.
+        /// </summary>
+        /// <returns></returns>
+        public override bool Execute()
         {
             SaveGame.FullScreenOverlay = true;
             ScreenBuffer savedScreen = SaveGame.Screen.Clone();
@@ -100,6 +104,7 @@ namespace AngbandOS.Core.Scripts
             SaveGame.SetBackground(BackgroundImage.Overhead);
             SaveGame.Screen.Restore(savedScreen);
             SaveGame.FullScreenOverlay = false;
+            return true;
         }
 
         private void DisplayStat(string title, int row, int col, Func<IItemCharacteristics, bool> getStat)

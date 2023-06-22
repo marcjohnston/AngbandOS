@@ -16,6 +16,6 @@ namespace AngbandOS.Core.Scripts
             SaveGame = saveGame;
         }
 
-        public abstract void Execute();
+        public abstract bool Execute();
     }
 }

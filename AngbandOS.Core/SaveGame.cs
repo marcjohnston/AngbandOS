@@ -11437,7 +11437,7 @@ internal class SaveGame
         // Load the character viewer
         while (!Shutdown)
         {
-            ShowCharacterSheet showCharacterSheet = SingletonRepository.Scripts.Get<ShowCharacterSheet>();
+            ShowCharacterSheetScript showCharacterSheet = SingletonRepository.Scripts.Get<ShowCharacterSheetScript>();
             showCharacterSheet.Execute();
             Screen.Print(Colour.Orange, "[Press 'c' to change name, or ESC]", 43, 23);
             char keyPress = Inkey();
@@ -11567,13 +11567,6 @@ internal class SaveGame
         ShowManual();
     }
 
-    public void DoCmdJournal()
-    {
-        // Let the journal itself handle it from here
-        Script showJournalScript = SingletonRepository.Scripts.Get<ShowJournalScript>();
-        showJournalScript.Execute();
-    }
-
     public void DoCmdExamine()
     {
         // Get the item to examine
@@ -11679,41 +11672,10 @@ internal class SaveGame
         return itemsWereReordered;
     }
 
-    public bool DoAlter()
+    public bool RunScript<T>() where T : Script
     {
-        // Assume we won't disturb the player
-        bool more = false;
-
-        // Get the direction in which to alter something
-        if (GetDirectionNoAim(out int dir))
-        {
-            int y = Player.MapY + Level.KeypadDirectionYOffset[dir];
-            int x = Player.MapX + Level.KeypadDirectionXOffset[dir];
-            GridTile tile = Level.Grid[y][x];
-            // Altering a tile will take a turn
-            EnergyUse = 100;
-            // We 'alter' a tile by attacking it
-            if (tile.MonsterIndex != 0)
-            {
-                PlayerAttackMonster(y, x);
-            }
-            else
-            {
-                // Check the action based on the type of tile
-                AlterAction? alterAction = tile.FeatureType.AlterAction;
-                if (alterAction == null)
-                {
-                    MsgPrint("You're not sure what you can do with that...");
-                }
-                else
-                {
-                    AlterEventArgs alterEventArgs = new AlterEventArgs(this, y, x);
-                    alterAction.Execute(alterEventArgs);
-                    more = alterEventArgs.More;
-                }
-            }
-        }
-        return more;
+        Script script = SingletonRepository.Scripts.Get<T>();
+        return script.Execute();
     }
 
     public void DoCast()

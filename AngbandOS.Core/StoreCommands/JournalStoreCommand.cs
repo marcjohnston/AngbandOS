@@ -20,7 +20,7 @@ internal class JournalStoreCommand : BaseStoreCommand
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {
-        SaveGame.DoCmdJournal();
+        SaveGame.RunScript<ShowJournalScript>();
         storeCommandEvent.RequiresRerendering = true;
     }
 }

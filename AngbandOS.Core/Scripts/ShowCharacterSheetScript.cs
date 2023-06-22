@@ -7,14 +7,15 @@
 
 namespace AngbandOS.Core.Scripts
 {
-    internal class ShowCharacterSheet : Script
+    [Serializable]
+    internal class ShowCharacterSheetScript : Script
     {
-        private ShowCharacterSheet(SaveGame saveGame) : base(saveGame) { }
+        private ShowCharacterSheetScript(SaveGame saveGame) : base(saveGame) { }
 
         /// <summary>
-        /// Display the player's entire character sheet
+        /// Display the player's entire character sheet.  Returns true.
         /// </summary>
-        public override void Execute()
+        public override bool Execute()
         {
             SaveGame.Screen.Clear(0);
             DisplayPlayerTop();
@@ -23,6 +24,7 @@ namespace AngbandOS.Core.Scripts
             DisplayPlayerAbilityScoresWithModifiers();
             DisplayPlayerEssentials();
             DisplayPlayerSkills();
+            return true;
         }
 
         /// <summary>
