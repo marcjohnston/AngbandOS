@@ -102,7 +102,10 @@ internal class SaveGame
 
     public int CommandRepeat;
     public readonly List<Quest> Quests;
-    public readonly Island Wilderness = new Island();
+
+    public readonly WildernessRegion[][] Wilderness;
+    private byte[][] _elevationMap;
+
     public int AllocKindSize;
     public AllocationEntry[] AllocKindTable;
     public int AllocRaceSize;
@@ -353,6 +356,17 @@ internal class SaveGame
             RedrawPlayerFlaggedAction, RedrawTitleFlaggedAction, RedrawStatsFlaggedAction, RedrawLevelFlaggedAction, RedrawExpFlaggedAction, RedrawGoldFlaggedAction,
             RedrawArmorFlaggedAction, RedrawHpFlaggedAction, RedrawManaFlaggedAction, RedrawDepthFlaggedAction, RedrawHealthFlaggedAction, RedrawSpeedFlaggedAction);
 
+        // Create the wilderness regions.
+        Wilderness = new WildernessRegion[12][];
+        for (int i = 0; i < 12; i++)
+        {
+            Wilderness[i] = new WildernessRegion[12];
+            for (int j = 0; j < 12; j++)
+            {
+                Wilderness[i][j] = new WildernessRegion();
+            }
+        }
+
         // Load all of the predefined objects.
         SingletonRepository.Initialize(this);
 
@@ -395,6 +409,75 @@ internal class SaveGame
             MemoryStream memoryStream = new MemoryStream(data);
             return (SaveGame)formatter.Deserialize(memoryStream);
         }
+    }
+
+
+    public byte Elevation(int wildY, int wildX, int y, int x)
+    {
+        return _elevationMap[((wildY - 1) * (Constants.WildernessHeight - 1)) + y + 1][
+            ((wildX - 1) * (Constants.WildernessWidth - 1)) + x + 1];
+    }
+
+    public void MakeIslandContours()
+    {
+        do
+        {
+            bool reject = false;
+            PerlinNoise perlinNoise = new PerlinNoise(Program.Rng.RandomLessThan(int.MaxValue - 1));
+            const int mapWidth = (10 * (Constants.WildernessWidth - 1)) + 3;
+            const int mapHeight = (10 * (Constants.WildernessHeight - 1)) + 3;
+            const double widthDivisor = 1 / (double)mapWidth;
+            const double heightDivisor = 1 / (double)mapHeight;
+            _elevationMap = new byte[mapHeight][];
+            for (int row = 0; row < mapHeight; row++)
+            {
+                _elevationMap[row] = new byte[mapWidth];
+            }
+            for (int row = 0; row < mapHeight; row++)
+            {
+                for (int col = 0; col < mapWidth; col++)
+                {
+                    double v = perlinNoise.Noise(10 * col * widthDivisor, 10 * row * heightDivisor, -0.5);
+                    v = (v + 1) / 2;
+                    double dX = Math.Abs(col - (mapWidth / 2)) * widthDivisor;
+                    double dY = Math.Abs(row - (mapHeight / 2)) * heightDivisor;
+                    double d = Math.Max(dX, dY);
+                    const double elevation = 0.05;
+                    const double steepness = 6.0;
+                    const double dropoff = 50.0;
+                    v += elevation - (dropoff * Math.Pow(d, steepness));
+                    v = Math.Min(1, Math.Max(0, v));
+                    byte rounded = (byte)(v * 10);
+                    _elevationMap[row][col] = rounded;
+                }
+            }
+            for (int row = 0; row < mapHeight; row++)
+            {
+                if (_elevationMap[row][1] != 0)
+                {
+                    reject = true;
+                }
+                if (_elevationMap[row][mapWidth - 2] != 0)
+                {
+                    reject = true;
+                }
+            }
+            for (int col = 0; col < mapWidth; col++)
+            {
+                if (_elevationMap[1][col] != 0)
+                {
+                    reject = true;
+                }
+                if (_elevationMap[mapHeight - 2][col] != 0)
+                {
+                    reject = true;
+                }
+            }
+            if (!reject)
+            {
+                break;
+            }
+        } while (true);
     }
 
     /// <summary>
@@ -2199,7 +2282,7 @@ internal class SaveGame
         int j;
         int x = 0;
         int y = 0;
-        Wilderness.MakeIslandContours();
+        MakeIslandContours();
         for (i = 0; i < 12; i++)
         {
             for (j = 0; j < 12; j++)
@@ -15295,11 +15378,10 @@ internal class SaveGame
 
     private void MakeCornerTowers(int wildX, int wildY)
     {
-        Island wilderness = Wilderness;
         int height = Level.CurHgt;
         int width = Level.CurWid;
-        if ((wilderness[wildY][wildX].Town != null) || (wilderness[wildY - 1][wildX].Town != null) ||
-            (wilderness[wildY][wildX - 1].Town != null) || (wilderness[wildY - 1][wildX - 1].Town != null))
+        if ((Wilderness[wildY][wildX].Town != null) || (Wilderness[wildY - 1][wildX].Town != null) ||
+            (Wilderness[wildY][wildX - 1].Town != null) || (Wilderness[wildY - 1][wildX - 1].Town != null))
         {
             Level.Grid[0][0].SetBackgroundFeature("InsideGatehouse");
             Level.Grid[0][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
@@ -15318,8 +15400,8 @@ internal class SaveGame
             Level.Grid[0][1].SetFeature("TownWall");
             Level.Grid[0][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
         }
-        if ((wilderness[wildY][wildX].Town != null) || (wilderness[wildY - 1][wildX].Town != null) ||
-            (wilderness[wildY][wildX + 1].Town != null) || (wilderness[wildY - 1][wildX + 1].Town != null))
+        if ((Wilderness[wildY][wildX].Town != null) || (Wilderness[wildY - 1][wildX].Town != null) ||
+            (Wilderness[wildY][wildX + 1].Town != null) || (Wilderness[wildY - 1][wildX + 1].Town != null))
         {
             Level.Grid[0][width - 1].SetBackgroundFeature("InsideGatehouse");
             Level.Grid[0][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
@@ -15338,8 +15420,8 @@ internal class SaveGame
             Level.Grid[0][width - 2].SetFeature("TownWall");
             Level.Grid[0][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
         }
-        if ((wilderness[wildY][wildX].Town != null) || (wilderness[wildY + 1][wildX].Town != null) ||
-            (wilderness[wildY][wildX + 1].Town != null) || (wilderness[wildY + 1][wildX + 1].Town != null))
+        if ((Wilderness[wildY][wildX].Town != null) || (Wilderness[wildY + 1][wildX].Town != null) ||
+            (Wilderness[wildY][wildX + 1].Town != null) || (Wilderness[wildY + 1][wildX + 1].Town != null))
         {
             Level.Grid[height - 1][width - 1].SetBackgroundFeature("InsideGatehouse");
             Level.Grid[height - 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
@@ -15358,8 +15440,8 @@ internal class SaveGame
             Level.Grid[height - 1][width - 2].SetFeature("TownWall");
             Level.Grid[height - 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
         }
-        if ((wilderness[wildY][wildX].Town != null) || (wilderness[wildY + 1][wildX].Town != null) ||
-            (wilderness[wildY][wildX - 1].Town != null) || (wilderness[wildY + 1][wildX - 1].Town != null))
+        if ((Wilderness[wildY][wildX].Town != null) || (Wilderness[wildY + 1][wildX].Town != null) ||
+            (Wilderness[wildY][wildX - 1].Town != null) || (Wilderness[wildY + 1][wildX - 1].Town != null))
         {
             Level.Grid[height - 1][0].SetBackgroundFeature("InsideGatehouse");
             Level.Grid[height - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
@@ -16504,10 +16586,9 @@ internal class SaveGame
 
     private void MakeWildernessWalls(int wildX, int wildY)
     {
-        Island wilderness = Wilderness;
         int height = Level.CurHgt;
         int width = Level.CurWid;
-        if (wilderness[wildY - 1][wildX].Town != null)
+        if (Wilderness[wildY - 1][wildX].Town != null)
         {
             for (int x = 0; x < width; x++)
             {
@@ -16551,7 +16632,7 @@ internal class SaveGame
             Level.Grid[1][(width / 2) + 2].SetFeature("TownWall");
             Level.Grid[1][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
         }
-        if (wilderness[wildY + 1][wildX].Town != null)
+        if (Wilderness[wildY + 1][wildX].Town != null)
         {
             for (int x = 0; x < width; x++)
             {
@@ -16595,7 +16676,7 @@ internal class SaveGame
             Level.Grid[height - 2][(width / 2) + 2].SetFeature("TownWall");
             Level.Grid[height - 2][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
         }
-        if (wilderness[wildY][wildX - 1].Town != null)
+        if (Wilderness[wildY][wildX - 1].Town != null)
         {
             for (int y = 0; y < height; y++)
             {
@@ -16639,7 +16720,7 @@ internal class SaveGame
             Level.Grid[(height / 2) + 2][1].SetFeature("TownWall");
             Level.Grid[(height / 2) + 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
         }
-        if (wilderness[wildY][wildX + 1].Town != null)
+        if (Wilderness[wildY][wildX + 1].Town != null)
         {
             for (int y = 0; y < height; y++)
             {
@@ -17056,8 +17137,7 @@ internal class SaveGame
     private void WildernessGen()
     {
         Program.Rng.UseFixed = true;
-        Program.Rng.FixedSeed = Wilderness[Player.WildernessY][Player.WildernessX].Seed;
-        Island island = Wilderness;
+        Program.Rng.FixedSeed = this.Wilderness[Player.WildernessY][Player.WildernessX].Seed;
         Player player = Player;
         int x;
         int y;
@@ -17065,7 +17145,7 @@ internal class SaveGame
         {
             for (x = 0; x < Level.CurWid; x++)
             {
-                byte elevation = island.Elevation(player.WildernessY, player.WildernessX, y, x);
+                byte elevation = Elevation(player.WildernessY, player.WildernessX, y, x);
                 string floorName = "Water";
                 string featureName = "Water";
                 if (elevation > 0)
