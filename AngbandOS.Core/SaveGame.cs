@@ -17875,70 +17875,6 @@ internal class SaveGame
         Player.CheckExperience();
     }
 
-    public void DoCmdWizCureAll()
-    {
-        RemoveAllCurse();
-        Player.RestoreAbilityScore(Ability.Strength);
-        Player.RestoreAbilityScore(Ability.Intelligence);
-        Player.RestoreAbilityScore(Ability.Wisdom);
-        Player.RestoreAbilityScore(Ability.Constitution);
-        Player.RestoreAbilityScore(Ability.Dexterity);
-        Player.RestoreAbilityScore(Ability.Charisma);
-        Player.RestoreLevel();
-        Player.Health = Player.MaxHealth;
-        Player.FractionalHealth = 0;
-        Player.Mana = Player.MaxMana;
-        Player.FractionalMana = 0;
-        Player.TimedBlindness.ResetTimer();
-        Player.TimedConfusion.ResetTimer();
-        Player.TimedPoison.ResetTimer();
-        Player.TimedFear.ResetTimer();
-        Player.TimedParalysis.ResetTimer();
-        Player.TimedHallucinations.ResetTimer();
-        Player.TimedStun.ResetTimer();
-        Player.TimedBleeding.ResetTimer();
-        Player.TimedSlow.ResetTimer();
-        Player.SetFood(Constants.PyFoodMax - 1);
-        DoCmdRedraw();
-    }
-
-    public void DoCmdWizJump()
-    {
-        if (CommandArgument <= 0)
-        {
-            string ppp = $"Jump to level (0-{CurDungeon.MaxLevel}): ";
-            string def = $"{CurrentDepth}";
-            if (!GetString(ppp, out string tmpVal, def, 10))
-            {
-                return;
-            }
-            CommandArgument = int.TryParse(tmpVal, out int i) ? i : 0;
-        }
-        if (CommandArgument < 1)
-        {
-            CommandArgument = 1;
-        }
-        if (CommandArgument > CurDungeon.MaxLevel)
-        {
-            CommandArgument = CurDungeon.MaxLevel;
-        }
-        MsgPrint($"You jump to dungeon level {CommandArgument}.");
-        DoCmdSaveGame(true);
-        CurrentDepth = CommandArgument;
-        NewLevelFlag = true;
-    }
-
-    public void DoCmdWizLearn()
-    {
-        foreach (ItemFactory kPtr in SingletonRepository.ItemFactories)
-        {
-            if (kPtr.Level <= CommandArgument)
-            {
-                kPtr.FlavourAware = true;
-            }
-        }
-    }
-
     public void DoCmdWizNamed(int rIdx, bool slp)
     {
         if (rIdx >= SingletonRepository.MonsterRaces.Count - 1)
@@ -18528,8 +18464,6 @@ internal class SaveGame
         return rIdx;
     }
 
-
-    ///// CHARACTER VIEWER
     /// <summary>
     /// Display the 'Equippy' characters (the visual representation of a characters' equipment)
     /// </summary>

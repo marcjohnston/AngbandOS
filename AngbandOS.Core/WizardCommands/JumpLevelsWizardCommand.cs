@@ -20,6 +20,6 @@ internal class JumpLevelsWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.DoCmdWizJump();
+        SaveGame.RunScript<WizardJumpToLevelScript>();
     }
 }
