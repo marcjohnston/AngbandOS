@@ -20,7 +20,6 @@ internal class AimWandGameCommand : GameCommand
 
     public override bool Execute()
     {
-        SaveGame.DoAimWand();
-        return false;
+        return SaveGame.RunScript<AimWandScript>();
     }
 }

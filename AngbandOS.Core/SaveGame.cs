@@ -9013,10 +9013,6 @@ internal class SaveGame
         MsgPrint($"{your} {itenName} {s} now protected against corrosion.");
     }
 
-    public void DoActivate()
-    {
-    }
-
     public Spell[] OkaySpells(BookItem spellBook, bool known)
     {
         List<Spell> okaySpells = new List<Spell>();
@@ -11766,105 +11762,6 @@ internal class SaveGame
         return true;
     }
 
-    public void DoAimWand()
-    {
-        // Prompt for an item, showing only wands
-        if (!SelectItem(out Item? item, "Aim which wand? ", true, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Wand)))
-        {
-            MsgPrint("You have no wand to aim.");
-            return;
-        }
-        // Get the item and check if it is really a wand
-        if (item == null)
-        {
-            return;
-        }
-        if (!Player.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Wand)))
-        {
-            MsgPrint("That is not a wand!");
-            return;
-        }
-        // We can't use wands directly from the floor, since we need to aim them
-        if (!item.IsInInventory && item.Count > 1)
-        {
-            MsgPrint("You must first pick up the wand.");
-            return;
-        }
-        // Aim the wand
-        if (!GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        // Using a wand takes 100 energy
-        EnergyUse = 100;
-        bool ident = false;
-        int itemLevel = item.Factory.Level;
-        // Chance of success is your skill - item level, with item level capped at 50 and your
-        // skill halved if you're confused
-        int chance = Player.SkillUseDevice;
-        if (Player.TimedConfusion.TurnsRemaining != 0)
-        {
-            chance /= 2;
-        }
-        chance -= itemLevel > 50 ? 50 : itemLevel;
-        // Always a small chance of success
-        if (chance < Constants.UseDevice && Program.Rng.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
-        {
-            chance = Constants.UseDevice;
-        }
-        if (chance < Constants.UseDevice || Program.Rng.DieRoll(chance) < Constants.UseDevice)
-        {
-            MsgPrint("You failed to use the wand properly.");
-            return;
-        }
-        // Make sure we have charges
-        if (item.TypeSpecificValue <= 0)
-        {
-            MsgPrint("The wand has no charges left.");
-            item.IdentEmpty = true;
-            return;
-        }
-        PlaySound(SoundEffect.ZapRod);
-        WandItemFactory activateableItem = (WandItemFactory)item.Factory;
-        if (activateableItem.ExecuteActivation(this, dir))
-        {
-            ident = true;
-        }
-
-        NoticeCombineAndReorderFlaggedAction.Set();
-        // Mark the wand as having been tried
-        item.ObjectTried();
-        // If we just discovered the item's flavour, mark it as so
-        if (ident && !item.IsFlavourAware())
-        {
-            item.BecomeFlavourAware();
-            Player.GainExperience((itemLevel + (Player.Level >> 1)) / Player.Level);
-        }
-        // If we're a channeler then we should be using mana instead of charges
-        bool channeled = false;
-        if (Player.BaseCharacterClass.SpellCastingType.CanUseManaInsteadOfConsumingItem)
-        {
-            channeled = DoCmdChannel(item);
-        }
-        // We didn't use mana, so decrease the wand's charges
-        if (!channeled)
-        {
-            item.TypeSpecificValue--;
-            // If the wand is part of a stack, split it off from the others
-            if (item.IsInInventory && item.Count > 1)
-            {
-                Item splitItem = item.Clone(1);
-                item.TypeSpecificValue++;
-                item.Count--;
-                Player.WeightCarried -= splitItem.Weight;
-                Player.InvenCarry(splitItem);
-                MsgPrint("You unstack your wand.");
-            }
-            // Let us know we have used a charge
-            ReportChargeUsage(item);
-        }
-    }
-
     /// <summary>
     /// Search around the player for secret doors and traps
     /// </summary>
@@ -14325,9 +14222,6 @@ internal class SaveGame
             s = s.Substring(n).Trim();
         }
     }
-    ////////////////// PLAYER FACTORY
-
-    /// LEVEL FACTORY
 
     public void GenerateNewLevel()
     {
