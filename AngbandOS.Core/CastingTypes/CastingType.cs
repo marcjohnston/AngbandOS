@@ -56,7 +56,92 @@ internal class CastingType
     /// </summary>
     public virtual void Cast()
     {
-        SaveGame.DoCmdCast();
+        string prayer = SaveGame.Player.BaseCharacterClass.SpellCastingType.SpellNoun;
+        if (!SaveGame.Player.CanCastSpells)
+        {
+            SaveGame.MsgPrint("You cannot cast spells!");
+            return;
+        }
+        if (SaveGame.Player.TimedBlindness.TurnsRemaining != 0 || SaveGame.Level.NoLight())
+        {
+            SaveGame.MsgPrint("You cannot see!");
+            return;
+        }
+        if (SaveGame.Player.TimedConfusion.TurnsRemaining != 0)
+        {
+            SaveGame.MsgPrint("You are too confused!");
+            return;
+        }
+        if (!SaveGame.SelectItem(out Item? oPtr, "Use which book? ", false, true, true, new UsableSpellBookItemFilter(SaveGame)))
+        {
+            SaveGame.MsgPrint($"You have no {prayer} books!");
+            return;
+        }
+        if (oPtr == null)
+        {
+            return;
+        }
+        BookItem bookItem = (BookItem)oPtr;
+        SaveGame.HandleStuff();
+
+        // Allow the player to select the spell.
+        if (!SaveGame.GetSpell(out Spell? sPtr, SaveGame.Player.BaseCharacterClass.SpellCastingType.CastVerb, bookItem, true, SaveGame.Player))
+        {
+            SaveGame.MsgPrint($"You don't know any {prayer}s in that book.");
+            return;
+        }
+
+        // Check to see if the user cancelled the selection.
+        if (sPtr == null)
+        {
+            return;
+        }
+
+        if (sPtr.ManaCost > SaveGame.Player.Mana)
+        {
+            string cast = SaveGame.Player.BaseCharacterClass.SpellCastingType.CastVerb;
+            SaveGame.MsgPrint($"You do not have enough mana to {cast} this {prayer}.");
+            if (!SaveGame.GetCheck("Attempt it anyway? "))
+            {
+                return;
+            }
+        }
+        int chance = sPtr.FailureChance();
+        if (Program.Rng.RandomLessThan(100) < chance)
+        {
+            SaveGame.MsgPrint($"You failed to get the {prayer} off!");
+            sPtr.CastFailed();
+        }
+        else
+        {
+            sPtr.Cast();
+            if (!sPtr.Worked)
+            {
+                int e = sPtr.FirstCastExperience;
+                sPtr.Worked = true;
+                SaveGame.Player.GainExperience(e * sPtr.Level);
+            }
+        }
+        SaveGame.EnergyUse = 100;
+        if (sPtr.ManaCost <= SaveGame.Player.Mana)
+        {
+            SaveGame.Player.Mana -= sPtr.ManaCost;
+        }
+        else
+        {
+            int oops = sPtr.ManaCost - SaveGame.Player.Mana;
+            SaveGame.Player.Mana = 0;
+            SaveGame.Player.FractionalMana = 0;
+            SaveGame.MsgPrint("You faint from the effort!");
+            SaveGame.Player.TimedParalysis.AddTimer(Program.Rng.DieRoll((5 * oops) + 1));
+            if (Program.Rng.RandomLessThan(100) < 50)
+            {
+                bool perm = Program.Rng.RandomLessThan(100) < 25;
+                SaveGame.MsgPrint("You have damaged your health!");
+                SaveGame.Player.DecreaseAbilityScore(Ability.Constitution, 15 + Program.Rng.DieRoll(10), perm);
+            }
+        }
+        SaveGame.RedrawManaFlaggedAction.Set();
     }
 
     /// <summary>

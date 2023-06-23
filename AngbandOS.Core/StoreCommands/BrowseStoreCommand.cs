@@ -20,6 +20,6 @@ internal class BrowseStoreCommand : BaseStoreCommand
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {
-        SaveGame.DoCmdBrowse();
+        SaveGame.RunScript<BrowseScript>();
     }
 }
