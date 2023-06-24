@@ -20,6 +20,6 @@ internal class CreateItemWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.WizCreateItem();
+        SaveGame.RunScript<WizardCreateItemScript>();
     }
 }

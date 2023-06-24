@@ -31,7 +31,7 @@ internal class WizardModeGameCommand : GameCommand
         }
         else
         {
-            SaveGame.EnterWizardMode();
+            SaveGame.RunScript<EnterWizardModeScript>();
         }
         return false;
     }

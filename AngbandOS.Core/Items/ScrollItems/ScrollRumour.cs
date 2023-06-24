@@ -26,7 +26,7 @@ internal class ScrollRumour : ScrollItemClass
     {
         eventArgs.SaveGame.MsgPrint("There is message on the scroll. It says:");
         eventArgs.SaveGame.MsgPrint(null);
-        eventArgs.SaveGame.GetRumour();
+        eventArgs.SaveGame.RunScript<GetRumourScript>();
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new RumourScrollItem(SaveGame);
