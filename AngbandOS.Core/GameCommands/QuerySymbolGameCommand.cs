@@ -19,7 +19,6 @@ internal class QuerySymbolGameCommand : GameCommand
 
     public override bool Execute()
     {
-        SaveGame.DoCmdQuerySymbol();
-        return false;
+        return SaveGame.RunScript<QuerySymbolScript>();
     }
 }

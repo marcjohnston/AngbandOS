@@ -19,7 +19,6 @@ internal class InventoryGameCommand : GameCommand
 
     public override bool Execute()
     {
-        SaveGame.DoCmdInventory();
-        return false;
+        return SaveGame.RunScript<InventoryScript>();
     }
 }

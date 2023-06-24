@@ -20,6 +20,6 @@ internal class QuerySymbolStoreCommand : BaseStoreCommand
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {
-        SaveGame.DoCmdQuerySymbol();
+        SaveGame.RunScript<QuerySymbolScript>();
     }
 }

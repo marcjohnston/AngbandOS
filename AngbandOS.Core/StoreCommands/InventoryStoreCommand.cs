@@ -20,6 +20,6 @@ internal class InventoryStoreCommand : BaseStoreCommand
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {
-        SaveGame.DoCmdInventory();
+        SaveGame.RunScript<InventoryScript>();
     }
 }

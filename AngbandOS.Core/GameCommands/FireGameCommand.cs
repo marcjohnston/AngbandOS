@@ -19,7 +19,6 @@ internal class FireGameCommand : GameCommand
 
     public override bool Execute()
     {
-        SaveGame.DoCmdFire();
-        return false;
+        return SaveGame.RunScript<FireScript>();
     }
 }

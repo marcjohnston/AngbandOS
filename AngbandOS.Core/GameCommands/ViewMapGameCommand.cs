@@ -19,7 +19,6 @@ internal class ViewMapGameCommand : GameCommand
 
     public override bool Execute()
     {
-        SaveGame.DoViewMap();
-        return false;
+        return SaveGame.RunScript<ViewMapScript>();
     }
 }
