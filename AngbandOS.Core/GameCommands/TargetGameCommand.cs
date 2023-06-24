@@ -19,7 +19,6 @@ internal class TargetGameCommand : GameCommand
 
     public override bool Execute()
     {
-        SaveGame.DoCmdTarget();
-        return false;
+        return SaveGame.RunScript<TargetScript>();
     }
 }

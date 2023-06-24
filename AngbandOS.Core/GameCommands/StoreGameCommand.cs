@@ -19,7 +19,6 @@ internal class StoreGameCommand : GameCommand
 
     public override bool Execute()
     {
-        SaveGame.DoCmdStore();
-        return false;
+        return SaveGame.RunScript<StoreScript>();
     }
 }

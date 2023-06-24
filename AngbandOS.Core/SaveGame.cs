@@ -2528,7 +2528,7 @@ internal class SaveGame
         HackMind = true;
         if (CameFrom == LevelStart.StartHouse)
         {
-            DoCmdStore();
+            RunScript<StoreScript>();
             CameFrom = LevelStart.StartRandom;
         }
         if (CurrentDepth == 0)
@@ -9028,18 +9028,6 @@ internal class SaveGame
         }
     }
 
-    public void DoCmdTarget()
-    {
-        if (TargetSet(Constants.TargetKill))
-        {
-            MsgPrint(TargetWho > 0 ? "Target Selected." : "Location Targeted.");
-        }
-        else
-        {
-            MsgPrint("Target Aborted.");
-        }
-    }
-
     public void DoCmdThrow(int damageMultiplier)
     {
         // Get an item to throw
@@ -9232,39 +9220,8 @@ internal class SaveGame
         return more;
     }
 
-    public void DoCmdVersion()
-    {
-        AssemblyName assembly = Assembly.GetExecutingAssembly().GetName();
-        Version version = assembly.Version;
-        DateTime CompileTime = new DateTime(2000, 1, 1).AddDays(Assembly.GetExecutingAssembly().GetName().Version.Build).AddSeconds(Assembly.GetExecutingAssembly().GetName().Version.Revision * 2);
-        MsgPrint($"You are playing {Constants.VersionName} {version}.");
-        MsgPrint($"(Build time: {CompileTime})");
-    }
-
     public void DoCmdStore() // TODO: Move content
     {
-        GridTile tile = Level.Grid[Player.MapY][Player.MapX];
-        // Make sure we're actually on a shop tile
-        if (!tile.FeatureType.IsShop)
-        {
-            MsgPrint("You see no Stores here.");
-            return;
-        }
-        Store which = GetWhichStore();
-        // We can't enter a house unless we own it
-        if (which.DoorsLocked(this))
-        {
-            MsgPrint("The door is locked.");
-            return;
-        }
-        // Switch from the normal game interface to the store interface
-        RemoveLightFlaggedAction.Check(true);
-        RemoveViewFlaggedAction.Check(true);
-        FullScreenOverlay = true;
-        CommandArgument = 0;
-        //            CommandRepeat = 0; TODO: Confirm this is not needed
-        QueuedCommand = '\0';
-        which.EnterStore();
     }
 
     /// <param name="pickup"> Whether or not we should pick up an object in our location </param>
@@ -9635,43 +9592,6 @@ internal class SaveGame
                 MsgPrint(item.TypeSpecificValue != 1 ? $"There are {item.TypeSpecificValue} charges remaining." : $"There is {item.TypeSpecificValue} charge remaining.");
             }
         }
-    }
-
-    public void DoCmdRetire()
-    {
-        // If we're a winner it's a simple question with a more positive connotation
-        if (Player.IsWinner)
-        {
-            if (!GetCheck("Do you want to retire? "))
-            {
-                return;
-            }
-        }
-        else
-        {
-            // If we're not a winner, only ask if we're not also a wizard - giving up a wizard
-            // character doesn't need a prompt/confirmation
-            if (!Player.IsWizard)
-            {
-                if (!GetCheck("Do you really want to give up? "))
-                {
-                    return;
-                }
-                // Require a confirmation to make sure the player doesn't accidentally give up a
-                // long-running character
-                Screen.PrintLine("Type the '@' sign to give up (this character will no longer be playable): ", 0, 0);
-                int i = Inkey();
-                Screen.PrintLine("", 0, 0);
-                if (i != '@')
-                {
-                    return;
-                }
-            }
-        }
-        // Assuming whe player didn't give up, "kill" the character by quitting
-        Playing = false;
-        Player.IsDead = true;
-        DiedFrom = "quitting";
     }
 
     public void DoCmdRest()
