@@ -2270,7 +2270,7 @@ internal class SaveGame
         }
     }
 
-    private void CreateWorld()  // TODO: This method participated in a hang during startup
+    private void CreateWorld() 
     {
         int i;
         int j;
