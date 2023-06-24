@@ -5,20 +5,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Commands;
-
-/// <summary>
-/// Show the previous message
-/// </summary>
-[Serializable]
-internal class MessageOneGameCommand : GameCommand
+namespace AngbandOS.Core.Scripts
 {
-    private MessageOneGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-
-    public override char Key => 'O';
-
-    public override bool Execute()
+    [Serializable]
+    internal class MessageOneScript : Script
     {
-        return SaveGame.RunScript<MessageOneScript>();
+        private MessageOneScript(SaveGame saveGame) : base(saveGame) { }
+
+        public override bool Execute()
+        {
+            SaveGame.Screen.PrintLine($"> {SaveGame.MessageStr(0)}", 0, 0);
+            return false;
+        }
     }
 }

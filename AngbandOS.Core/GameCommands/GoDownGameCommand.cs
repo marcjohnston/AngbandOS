@@ -19,7 +19,6 @@ internal class GoDownGameCommand : GameCommand
 
     public override bool Execute()
     {
-        SaveGame.DoGoDown();
-        return false;
+        return SaveGame.RunScript<GoDownScript>();
     }
 }

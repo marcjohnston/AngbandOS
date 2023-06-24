@@ -20,6 +20,6 @@ internal class MessageOneStoreCommand : BaseStoreCommand
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {
-        SaveGame.DoCmdMessageOne();
+        SaveGame.RunScript<MessageOneScript>();
     }
 }

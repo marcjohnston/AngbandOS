@@ -19,7 +19,6 @@ internal class ExamineGameCommand : GameCommand
 
     public override bool Execute()
     {
-        SaveGame.DoCmdExamine();
-        return false;
+        return SaveGame.RunScript<ExamineScript>();
     }
 }

@@ -13,10 +13,50 @@ internal class NoticeReorderFlaggedAction : FlaggedAction
     public NoticeReorderFlaggedAction(SaveGame saveGame) : base(saveGame) { }
     protected override void Execute()
     {
-        bool itemsWereReordered = SaveGame.SortPack();
+        bool itemsWereReordered = SortPack();
         if (itemsWereReordered)
         {
             SaveGame.MsgPrint("You reorder some items in your pack.");
         }
     }
+    private bool SortPack()
+    {
+        PackInventorySlot packInventorySlot = SaveGame.SingletonRepository.InventorySlots.Get<PackInventorySlot>();
+
+        // Create a list for all of the pack items.
+        List<Item> packItems = new List<Item>();
+        foreach (int index in packInventorySlot.InventorySlots)
+        {
+            Item? item = SaveGame.GetInventoryItem(index);
+            if (item != null)
+            {
+                packItems.Add(item);
+            }
+        }
+
+        // Sort the pack.
+        packItems.Sort();
+
+        // Reinsert the items back into the inventory.
+        bool itemsWereReordered = false;
+        int packItemIndex = 0;
+        foreach (int index in packInventorySlot.InventorySlots)
+        {
+            if (packItemIndex < packItems.Count)
+            {
+                if (SaveGame.GetInventoryItem(index) != packItems[packItemIndex])
+                {
+                    itemsWereReordered = true;
+                }
+                SaveGame.SetInventoryItem(index, packItems[packItemIndex]);
+                packItemIndex++;
+            }
+            else
+            {
+                SaveGame.SetInventoryItem(index, null);
+            }
+        }
+        return itemsWereReordered;
+    }
+
 }

@@ -19,7 +19,6 @@ internal class ManualGameCommand : GameCommand
 
     public override bool Execute()
     {
-        SaveGame.DoCmdManual();
-        return false;
+        return SaveGame.RunScript<ShowManualScript>();
     }
 }

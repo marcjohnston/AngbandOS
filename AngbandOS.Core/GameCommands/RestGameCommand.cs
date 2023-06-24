@@ -19,7 +19,9 @@ internal class RestGameCommand : GameCommand
 
     public override bool Execute() // TODO: Why can't this command take in a count?
     {
-        SaveGame.DoCmdRest();
-        return true; // Do not disturb our rest.
+        SaveGame.RunScript<RestScript>();
+
+        // Do not disturb our rest.
+        return true;
     }
 }

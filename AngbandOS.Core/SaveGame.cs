@@ -5,7 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace AngbandOS.Core;
@@ -8162,12 +8161,11 @@ internal class SaveGame
         // If we're not actively searching, then have a chance of doing it passively
         if (Player.SkillSearchFrequency >= 50 || 0 == Program.Rng.RandomLessThan(50 - Player.SkillSearchFrequency))
         {
-            Search();
-        }
-        // If we're actively searching then always do it
-        if (Player.IsSearching)
+            RunScript<SearchScript>();
+        }        
+        else if (Player.IsSearching) // If we're actively searching then always do it
         {
-            Search();
+            RunScript<SearchScript>();
         }
         // Pick up an object on our tile if there is one
         PickUpItems(!dontPickup);
@@ -9220,10 +9218,6 @@ internal class SaveGame
         return more;
     }
 
-    public void DoCmdStore() // TODO: Move content
-    {
-    }
-
     /// <param name="pickup"> Whether or not we should pick up an object in our location </param>
     public void DoCmdStay(bool pickup) // TODO: Move to SaveGame or Commands
     {
@@ -9232,12 +9226,11 @@ internal class SaveGame
         // Periodically search if we're not actively in search mode
         if (Player.SkillSearchFrequency >= 50 || 0 == Program.Rng.RandomLessThan(50 - Player.SkillSearchFrequency))
         {
-            Search();
+            RunScript<SearchScript>();
         }
-        // Always search if we are actively in search mode
-        if (Player.IsSearching)
+        else if (Player.IsSearching) // Always search if we are actively in search mode
         {
-            Search();
+            RunScript<SearchScript>();
         }
         // Pick up items if we should
         PickUpItems(pickup);
@@ -9271,11 +9264,7 @@ internal class SaveGame
     public void DoCmdSearch()
     {
         EnergyUse = 100;
-        Search();
-    }
-
-    public void DoCmdMutantPower()
-    {
+        RunScript<SearchScript>();
     }
 
     public void DoCmdLook()
@@ -9359,173 +9348,6 @@ internal class SaveGame
         HandleStuff();
     }
 
-    public void DoGoDown()
-    {
-        bool isTrapDoor = false;
-        GridTile tile = Level.Grid[Player.MapY][Player.MapX];
-        if (tile.FeatureType.Category == FloorTileTypeCategory.TrapDoor)
-        {
-            isTrapDoor = true;
-        }
-        // Need to be on a staircase or trapdoor
-        if (tile.FeatureType.Name != "DownStair" && !isTrapDoor)
-        {
-            MsgPrint("I see no down staircase here.");
-            EnergyUse = 0;
-            return;
-        }
-        // Going onto a new level takes no energy, so the monsters on that level don't get to
-        // move before us
-        EnergyUse = 0;
-        if (isTrapDoor)
-        {
-            MsgPrint("You deliberately jump through the trap door.");
-        }
-        else
-        {
-            // If we're on the surface, enter the relevant dungeon
-            if (CurrentDepth == 0)
-            {
-                CurDungeon = Wilderness[Player.WildernessY][Player.WildernessX].Dungeon;
-                MsgPrint($"You enter {CurDungeon.Name}");
-            }
-            else
-            {
-                MsgPrint("You enter a maze of down staircases.");
-            }
-            // Save the game, just in case
-            DoCmdSaveGame(true);
-        }
-        // If we're in a tower, a down staircase reduces our level number
-        if (CurDungeon.Tower)
-        {
-            int stairLength = Program.Rng.DieRoll(5);
-            if (stairLength > CurrentDepth)
-            {
-                stairLength = 1;
-            }
-            CurrentDepth -= stairLength;
-            if (CurrentDepth < 0)
-            {
-                CurrentDepth = 0;
-            }
-            // If we left the dungeon, remember where we are
-            if (CurrentDepth == 0)
-            {
-                Player.WildernessX = CurDungeon.X;
-                Player.WildernessY = CurDungeon.Y;
-                CameFrom = LevelStart.StartStairs;
-            }
-        }
-        else
-        {
-            // We're not in a tower, so a down staircase increases our level number
-            int stairLength = Program.Rng.DieRoll(5);
-            if (stairLength > CurrentDepth)
-            {
-                stairLength = 1;
-            }
-            // Check if we're about to go past a quest level
-            for (int i = 0; i < stairLength; i++)
-            {
-                CurrentDepth++;
-                if (IsQuest(CurrentDepth))
-                {
-                    // Stop on the quest level
-                    break;
-                }
-            }
-            // Don't go past the max dungeon level
-            if (CurrentDepth > CurDungeon.MaxLevel)
-            {
-                CurrentDepth = CurDungeon.MaxLevel;
-            }
-            // From the surface we always go to the first level
-            if (CurrentDepth == 0)
-            {
-                CurrentDepth++;
-            }
-        }
-        // We need a new level
-        NewLevelFlag = true;
-        if (!isTrapDoor)
-        {
-            // Create an up staircase if we went down a staircase
-            CreateUpStair = true;
-        }
-    }
-
-    public void DoGoUp()
-    {
-        // We need to actually be on an up staircase
-        GridTile tile = Level.Grid[Player.MapY][Player.MapX];
-        if (tile.FeatureType.Name != "UpStair")
-        {
-            MsgPrint("I see no up staircase here.");
-            EnergyUse = 0;
-            return;
-        }
-        // Use no energy, so monsters in the new level don't get to go first
-        EnergyUse = 0;
-        // If we're outside then we must be entering a tower
-        if (CurrentDepth == 0)
-        {
-            CurDungeon = Wilderness[Player.WildernessY][Player.WildernessX].Dungeon;
-            MsgPrint($"You enter {CurDungeon.Name}");
-        }
-        else
-        {
-            MsgPrint("You enter a maze of up staircases.");
-        }
-        // Autosave, just in case
-        DoCmdSaveGame(true);
-        // In a tower, going up increases our level number
-        if (CurDungeon.Tower)
-        {
-            int stairLength = Program.Rng.DieRoll(5);
-            if (stairLength > CurrentDepth)
-            {
-                stairLength = 1;
-            }
-            // Make sure we don't go past a quest level
-            for (int i = 0; i < stairLength; i++)
-            {
-                CurrentDepth++;
-                if (IsQuest(CurrentDepth))
-                {
-                    break;
-                }
-            }
-            // Make sure we don't go deeper than the dungeon depth
-            if (CurrentDepth > CurDungeon.MaxLevel)
-            {
-                CurrentDepth = CurDungeon.MaxLevel;
-            }
-        }
-        else
-        {
-            // We're not in a tower, so going up decreases our level number
-            int j = Program.Rng.DieRoll(OneInChanceUpStairsReturnsToTownLevel);
-            if (j > CurrentDepth)
-            {
-                j = 1;
-            }
-            CurrentDepth -= j;
-            if (CurrentDepth < 0)
-            {
-                CurrentDepth = 0;
-            }
-            if (CurrentDepth == 0)
-            {
-                Player.WildernessX = CurDungeon.X;
-                Player.WildernessY = CurDungeon.Y;
-                CameFrom = LevelStart.StartStairs;
-            }
-        }
-        NewLevelFlag = true;
-        CreateDownStair = true;
-    }
-
     public void DoDropCmd()
     {
         int amount = 1;
@@ -9590,115 +9412,6 @@ internal class SaveGame
             else
             {
                 MsgPrint(item.TypeSpecificValue != 1 ? $"There are {item.TypeSpecificValue} charges remaining." : $"There is {item.TypeSpecificValue} charge remaining.");
-            }
-        }
-    }
-
-    public void DoCmdRest()
-    {
-        if (CommandArgument <= 0)
-        {
-            const string prompt = "Rest (0-9999, '*' for HP/SP, '&' as needed): ";
-            if (!GetString(prompt, out string choice, "&", 4))
-            {
-                return;
-            }
-            // Default to resting until we're fine
-            if (string.IsNullOrEmpty(choice))
-            {
-                choice = "&";
-            }
-            // -2 means rest until we're fine
-            if (choice[0] == '&')
-            {
-                CommandArgument = -2;
-            }
-            // -1 means rest until we're at full health, but don't worry about waiting for other
-            // status effects to go away
-            else if (choice[0] == '*')
-            {
-                CommandArgument = -1;
-            }
-            else
-            {
-                // A number means rest for that many turns
-                if (int.TryParse(choice, out int i))
-                {
-                    CommandArgument = i;
-                }
-                // The player might not have put a number in - so abandon if they didn't
-                if (CommandArgument <= 0)
-                {
-                    return;
-                }
-            }
-        }
-        // Can't rest for more than 9999 turns
-        if (CommandArgument > 9999)
-        {
-            CommandArgument = 9999;
-        }
-        // Resting takes at least one turn (we'll also be skipping future turns)
-        EnergyUse = 100;
-        Resting = CommandArgument;
-        Player.IsSearching = false;
-        UpdateBonusesFlaggedAction.Set();
-        RedrawStateFlaggedAction.Set();
-        HandleStuff();
-        UpdateScreen();
-    }
-
-    public void DoCmdSpike()
-    {
-        // Get the location to be spiked
-        if (GetDirectionNoAim(out int dir))
-        {
-            int y = Player.MapY + Level.KeypadDirectionYOffset[dir];
-            int x = Player.MapX + Level.KeypadDirectionXOffset[dir];
-            GridTile tile = Level.Grid[y][x];
-            // Make sure it can be spiked and we have spikes to do it with
-            if (!tile.FeatureType.IsClosedDoor)
-            {
-                MsgPrint("You see nothing there to spike.");
-            }
-            else
-            {
-                if (!GetSpike(out int itemIndex))
-                {
-                    MsgPrint("You have no spikes!");
-                }
-                // Can't close a door if there's someone in the way
-                else if (tile.MonsterIndex != 0)
-                {
-                    // Attempting costs a turn anyway
-                    EnergyUse = 100;
-                    MsgPrint("There is a monster in the way!");
-                    PlayerAttackMonster(y, x);
-                }
-                else
-                {
-                    // Spiking a door costs a turn
-                    EnergyUse = 100;
-                    MsgPrint("You jam the door with a spike.");
-                    // Replace the door feature with a jammed door
-                    if (tile.FeatureType.Category == FloorTileTypeCategory.LockedDoor)
-                    {
-                        tile.SetFeature(tile.FeatureType.Name.Replace("Locked", "Jammed"));
-                    }
-                    // If it's already jammed, strengthen it
-                    if (tile.FeatureType.Category == FloorTileTypeCategory.JammedDoor)
-                    {
-                        int strength = int.Parse(tile.FeatureType.Name.Substring(10));
-                        if (strength < 7)
-                        {
-                            tile.SetFeature($"JammedDoor{strength + 1}");
-                        }
-                    }
-                    // Use up the spike from the player's inventory
-                    Player.InvenItemIncrease(itemIndex, -1);
-                    Player.InvenItemDescribe(itemIndex);
-                    Player.InvenItemOptimize(itemIndex);
-                }
             }
         }
     }
@@ -9789,160 +9502,10 @@ internal class SaveGame
         }
     }
 
-    public void DoCmdMessageOne()
-    {
-        Screen.PrintLine($"> {MessageStr(0)}", 0, 0);
-    }
-
-    public void DoCmdManual()
-    {
-        ShowManual();
-    }
-
-    public void DoCmdExamine()
-    {
-        // Get the item to examine
-        if (!SelectItem(out Item? item, "Examine which item? ", true, true, true, null))
-        {
-            MsgPrint("You have nothing to examine.");
-            return;
-        }
-        if (item == null)
-        {
-            return;
-        }
-        // Do we know anything about it?
-        if (!item.IdentMental)
-        {
-            MsgPrint("You have no special knowledge about that item.");
-            return;
-        }
-        string itemName = item.Description(true, 3);
-        MsgPrint($"Examining {itemName}...");
-        // We're not actually identifying it, because it's already itentified, but we want to
-        // repeat the identification text
-        if (!item.IdentifyFully())
-        {
-            MsgPrint("You see nothing special.");
-        }
-    }
-
-    public bool SortPack()
-    {
-        PackInventorySlot packInventorySlot = SingletonRepository.InventorySlots.Get<PackInventorySlot>();
-
-        // Create a list for all of the pack items.
-        List<Item> packItems = new List<Item>();
-        foreach (int index in packInventorySlot.InventorySlots)
-        {
-            Item? item = GetInventoryItem(index);
-            if (item != null)
-            {
-                packItems.Add(item);
-            }
-        }
-
-        // Sort the pack.
-        packItems.Sort();
-
-        // Reinsert the items back into the inventory.
-        bool itemsWereReordered = false;
-        int packItemIndex = 0;
-        foreach (int index in packInventorySlot.InventorySlots)
-        {
-            if (packItemIndex < packItems.Count)
-            {
-                if (GetInventoryItem(index) != packItems[packItemIndex])
-                {
-                    itemsWereReordered = true;
-                }
-                SetInventoryItem(index, packItems[packItemIndex]);
-                packItemIndex++;
-            }
-            else
-            {
-                SetInventoryItem(index, null);
-            }
-        }
-        return itemsWereReordered;
-    }
-
     public bool RunScript<T>() where T : Script
     {
         Script script = SingletonRepository.Scripts.Get<T>();
         return script.Execute();
-    }
-
-    /// <summary>
-    /// Search around the player for secret doors and traps
-    /// </summary>
-    public void Search()
-    {
-        // The basic chance is equal to our searching skill
-        int chance = Player.SkillSearching;
-        // If we can't see it's hard to search
-        if (Player.TimedBlindness.TurnsRemaining != 0 || Level.NoLight())
-        {
-            chance /= 10;
-        }
-        // If we're confused it's hard to search
-        if (Player.TimedConfusion.TurnsRemaining != 0 || Player.TimedHallucinations.TurnsRemaining != 0)
-        {
-            chance /= 10;
-        }
-        // Check the eight squares around us
-        for (int y = Player.MapY - 1; y <= Player.MapY + 1; y++)
-        {
-            for (int x = Player.MapX - 1; x <= Player.MapX + 1; x++)
-            {
-                // Check if we succeed
-                if (Program.Rng.RandomLessThan(100) < chance)
-                {
-                    // If there's a trap, then find it
-                    GridTile tile = Level.Grid[y][x];
-                    if (tile.FeatureType.Name == "Invis")
-                    {
-                        // Pick a random trap to replace the undetected one with
-                        Level.PickTrap(y, x);
-                        MsgPrint("You have found a trap.");
-                        Disturb(false);
-                    }
-                    if (tile.FeatureType.Name == "SecretDoor")
-                    {
-                        // Replace the secret door with a visible door
-                        MsgPrint("You have found a secret door.");
-                        Player.GainExperience(1);
-                        Level.ReplaceSecretDoor(y, x);
-                        Disturb(false);
-                    }
-                    int nextItemIndex;
-                    // Check the items on the tile
-                    foreach (Item item in tile.Items)
-                    {
-                        // If one of them is a chest, determine if it is trapped
-                        if (item.Category != ItemTypeEnum.Chest)
-                        {
-                            continue;
-                        }
-                        if (item.TypeSpecificValue <= 0)
-                        {
-                            continue;
-                        }
-                        if (SingletonRepository.ChestTrapConfigurations[item.TypeSpecificValue].NotTrapped)
-                        {
-                            continue;
-                        }
-                        // It was a trapped chest - if we didn't already know that then let us know
-                        if (!item.IsKnown())
-                        {
-                            MsgPrint("You have discovered a trap on the chest!");
-                            item.BecomeKnown();
-                            Disturb(false);
-                        }
-                    }
-                }
-            }
-        }
     }
 
     /// <summary>
@@ -10150,7 +9713,7 @@ internal class SaveGame
         {
             MsgPrint($"The {tile.FeatureType.Description} resists your attempts to tunnel through it.");
             more = true;
-            Search();
+            RunScript<SearchScript>();
         }
         // If we successfully made the tunnel,
         if (!Level.GridPassable(y, x))
