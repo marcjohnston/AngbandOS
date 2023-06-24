@@ -25,7 +25,7 @@ namespace AngbandOS.Core.Scripts
                 return false;
             }
             // Get a new command
-            string outVal = $"Inventory: carrying {SaveGame.Player.WeightCarried / 10}.{SaveGame.Player.WeightCarried % 10} pounds ({Player.WeightCarried * 100 / (Player.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
+            string outVal = $"Inventory: carrying {SaveGame.Player.WeightCarried / 10}.{SaveGame.Player.WeightCarried % 10} pounds ({SaveGame.Player.WeightCarried * 100 / (SaveGame.Player.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
             SaveGame.Screen.PrintLine(outVal, 0, 0);
             SaveGame.QueuedCommand = SaveGame.Inkey();
             SaveGame.Screen.Restore(savedScreen);

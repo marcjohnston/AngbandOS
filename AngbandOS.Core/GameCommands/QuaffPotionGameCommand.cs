@@ -20,7 +20,6 @@ internal class QuaffPotionGameCommand : GameCommand
 
     public override bool Execute()
     {
-        SaveGame.DoCmdQuaff();
-        return false;
+        return SaveGame.RunScript<QuaffScript>();
     }
 }
