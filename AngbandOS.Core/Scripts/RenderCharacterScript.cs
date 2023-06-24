@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts
 {
     [Serializable]
-    internal class ShowCharacterSheetScript : Script
+    internal class RenderCharacterScript : Script
     {
-        private ShowCharacterSheetScript(SaveGame saveGame) : base(saveGame) { }
+        private RenderCharacterScript(SaveGame saveGame) : base(saveGame) { }
 
         /// <summary>
         /// Display the player's entire character sheet.  Returns true.

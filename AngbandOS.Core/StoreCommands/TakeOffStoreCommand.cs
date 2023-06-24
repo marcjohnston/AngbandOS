@@ -20,6 +20,6 @@ internal class TakeOffStoreCommand : BaseStoreCommand
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {
-        SaveGame.DoCmdTakeOff();
+        SaveGame.RunScript<TakeOffScript>();
     }
 }

@@ -46,7 +46,7 @@ internal class ConfirmationBirthStage : BaseBirthStage
         while (!SaveGame.Shutdown)
         {
             SaveGame.Screen.Print(Colour.Orange, "[Use return to confirm, or left to go back.]", 43, 1);
-            ShowCharacterSheetScript showCharacterSheet = SaveGame.SingletonRepository.Scripts.Get<ShowCharacterSheetScript>();
+            RenderCharacterScript showCharacterSheet = SaveGame.SingletonRepository.Scripts.Get<RenderCharacterScript>();
             showCharacterSheet.Execute();
             char c = SaveGame.Inkey();
             switch (c)

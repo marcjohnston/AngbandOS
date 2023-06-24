@@ -19,7 +19,6 @@ internal class ViewCharacterGameCommand : GameCommand
 
     public override bool Execute()
     {
-        SaveGame.DoCmdViewCharacter();
-        return false;
+        return SaveGame.RunScript<ViewCharacterScript>();
     }
 }

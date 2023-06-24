@@ -19,7 +19,7 @@ internal class TakeOffGameCommand : GameCommand
 
     public override bool Execute()
     {
-        SaveGame.DoCmdTakeOff();
+        SaveGame.RunScript<TakeOffScript>();
         return false;
     }
 }

@@ -19,7 +19,6 @@ internal class MessagesGameCommand : GameCommand
 
     public override bool Execute()
     {
-        SaveGame.DoCmdMessages();
-        return false;
+        return SaveGame.RunScript<MessagesScript>();
     }
 }
