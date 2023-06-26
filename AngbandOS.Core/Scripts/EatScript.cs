@@ -61,9 +61,10 @@ namespace AngbandOS.Core.Scripts
             }
 
             // Use up the item (if it fell to the floor this will have already been dealt with)
+            IItemContainer container = item.GetContainer();
             item.ItemIncrease(-1);
             item.ItemOptimize();
-            item.ItemDescribe();
+            container.ItemDescribe(item);
             return false;
         }
     }
