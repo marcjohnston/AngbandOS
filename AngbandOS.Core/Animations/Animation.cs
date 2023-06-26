@@ -22,7 +22,7 @@ internal abstract class Animation
     public abstract Colour AlternateColour { get; }
     public abstract string Sequence { get; }
 
-    public void Animate(SaveGame saveGame, Level level, int[] y, int[] x)
+    public void Animate(int[] y, int[] x)
     {
         int msec = Constants.DelayFactorInMilliseconds;
         int grids = x.Length;
@@ -32,17 +32,17 @@ internal abstract class Animation
         {
             for (int j = 0; j < grids; j++)
             {
-                if (level.PlayerHasLosBold(y[j], x[j]) && level.PanelContains(y[j], x[j]))
+                if (SaveGame.Level.PlayerHasLosBold(y[j], x[j]) && SaveGame.Level.PanelContains(y[j], x[j]))
                 {
                     Colour colour = oddFrame ? Colour : AlternateColour;
-                    level.PrintCharacterAtMapLocation(character, colour, y[j], x[j]);
+                    SaveGame.Level.PrintCharacterAtMapLocation(character, colour, y[j], x[j]);
                     drawn = true;
                 }
             }
             if (drawn)
             {
-                saveGame.UpdateScreen();
-                saveGame.Pause(msec);
+                SaveGame.UpdateScreen();
+                SaveGame.Pause(msec);
             }
             oddFrame = !oddFrame;
         }
@@ -50,12 +50,12 @@ internal abstract class Animation
         {
             for (int j = 0; j < grids; j++)
             {
-                if (level.PlayerHasLosBold(y[j], x[j]) && level.PanelContains(y[j], x[j]))
+                if (SaveGame.Level.PlayerHasLosBold(y[j], x[j]) && SaveGame.Level.PanelContains(y[j], x[j]))
                 {
-                    level.RedrawSingleLocation(y[j], x[j]);
+                    SaveGame.Level.RedrawSingleLocation(y[j], x[j]);
                 }
             }
-            saveGame.UpdateScreen();
+            SaveGame.UpdateScreen();
         }
     }
 }

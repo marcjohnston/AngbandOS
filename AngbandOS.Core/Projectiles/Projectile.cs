@@ -317,7 +317,7 @@ internal abstract class Projectile
 
         if (EffectAnimation != null)
         {
-            EffectAnimation.Animate(SaveGame, SaveGame.Level, gy, gx);
+            EffectAnimation.Animate(gy, gx);
         }
 
         if ((flg & ProjectionFlag.ProjectGrid) != 0)
