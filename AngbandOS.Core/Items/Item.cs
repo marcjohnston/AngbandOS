@@ -924,7 +924,7 @@ internal abstract class Item : IComparable<Item>
             {
                 RareItem ePtr = SaveGame.SingletonRepository.RareItems[RareItemTypeIndex];
                 basenm += ' ';
-                basenm += ePtr.Name;
+                basenm += ePtr.FriendlyName; // This used to be oPtr.Name ... but Long Bow Bow of Velocity is wrong
             }
         }
         if (mode < 1)
