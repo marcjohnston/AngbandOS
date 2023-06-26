@@ -8325,28 +8325,6 @@ internal class SaveGame
     /// <param name="x"> The x coordinate of the location being attacked </param>
     public void PlayerAttackMonster(int y, int x)
     {
-        MartialArtsAttack[] MaBlows =
-        {
-            new MartialArtsAttack("You punch {0}.", 1, 0, 1, 4, 0),
-            new MartialArtsAttack("You kick {0}.", 2, 0, 1, 6, 0),
-            new MartialArtsAttack("You strike {0}.", 3, 0, 1, 7, 0),
-            new MartialArtsAttack("You hit {0} with your knee.", 5, 5, 2, 3, Constants.MaKnee),
-            new MartialArtsAttack("You hit {0} with your elbow.", 7, 5, 1, 8, 0),
-            new MartialArtsAttack("You butt {0}.", 9, 10, 2, 5, 0),
-            new MartialArtsAttack("You kick {0}.", 11, 10, 3, 4, Constants.MaSlow),
-            new MartialArtsAttack("You uppercut {0}.", 13, 12, 4, 4, 6),
-            new MartialArtsAttack("You double-kick {0}.", 16, 15, 5, 4, 8),
-            new MartialArtsAttack("You hit {0} with a Cat's Claw.", 20, 20, 5, 5, 0),
-            new MartialArtsAttack("You hit {0} with a jump kick.", 25, 25, 5, 6, 10),
-            new MartialArtsAttack("You hit {0} with an Eagle's Claw.", 29, 25, 6, 6, 0),
-            new MartialArtsAttack("You hit {0} with a circle kick.", 33, 30, 6, 8, 10),
-            new MartialArtsAttack("You hit {0} with an Iron Fist.", 37, 35, 8, 8, 10),
-            new MartialArtsAttack("You hit {0} with a flying kick.", 41, 35, 8, 10, 12),
-            new MartialArtsAttack("You hit {0} with a Dragon Fist.", 45, 35, 10, 10, 16),
-            new MartialArtsAttack("You hit {0} with a Crushing Blow.", 48, 35, 10, 12, 18)
-        };
-
-
         GridTile tile = Level.Grid[y][x];
         Monster monster = Level.Monsters[tile.MonsterIndex];
         MonsterRace race = monster.Race;
@@ -8456,8 +8434,8 @@ internal class SaveGame
                     int specialEffect = 0;
                     int stunEffect = 0;
                     int times;
-                    MartialArtsAttack martialArtsAttack = MaBlows[0];
-                    MartialArtsAttack oldMartialArtsAttack = MaBlows[0];
+                    MartialArtsAttack martialArtsAttack = SingletonRepository.MartialArtsAttacks.Single(_martialArtsAttack => _martialArtsAttack.IsDefault);
+                    MartialArtsAttack oldMartialArtsAttack = martialArtsAttack;
                     // Monsters of various types resist being stunned by martial arts
                     int resistStun = 0;
                     if (race.Unique)
@@ -8483,7 +8461,7 @@ internal class SaveGame
                         // high level or we fail a chance roll
                         do
                         {
-                            martialArtsAttack = MaBlows[Program.Rng.DieRoll(Constants.MaxMa) - 1];
+                            martialArtsAttack = SingletonRepository.MartialArtsAttacks.ToWeightedRandom().Choose();
                         } while (martialArtsAttack.MinLevel > Player.Level || Program.Rng.DieRoll(Player.Level) < martialArtsAttack.Chance);
                         // We've chosen an attack, use it if it's better than the previous
                         // choice (unless we're stunned or confused in which case we're stuck
@@ -8806,58 +8784,6 @@ internal class SaveGame
             }
         }
         return damage;
-    }
-
-    /// <summary>
-    /// Invoke a random power from the Ring of Set
-    /// </summary>
-    /// <param name="direction"> The direction the player is aiming </param>
-    public void RingOfSetPower(int direction)
-    {
-        switch (Program.Rng.DieRoll(10))
-        {
-            case 1:
-            case 2:
-                {
-                    // Decrease all the players ability scores, bypassing sustain and divine protection
-                    MsgPrint("You are surrounded by a malignant aura.");
-                    Player.DecreaseAbilityScore(Ability.Strength, 50, true);
-                    Player.DecreaseAbilityScore(Ability.Intelligence, 50, true);
-                    Player.DecreaseAbilityScore(Ability.Wisdom, 50, true);
-                    Player.DecreaseAbilityScore(Ability.Dexterity, 50, true);
-                    Player.DecreaseAbilityScore(Ability.Constitution, 50, true);
-                    Player.DecreaseAbilityScore(Ability.Charisma, 50, true);
-                    // Reduce both experience and maximum experience
-                    Player.ExperiencePoints -= Player.ExperiencePoints / 4;
-                    Player.MaxExperienceGained -= Player.ExperiencePoints / 4;
-                    Player.CheckExperience();
-                    break;
-                }
-            case 3:
-                {
-                    // Dispel monsters
-                    MsgPrint("You are surrounded by a powerful aura.");
-                    DispelMonsters(1000);
-                    break;
-                }
-            case 4:
-            case 5:
-            case 6:
-                {
-                    // Do a 300 damage mana ball
-                    FireBall(SingletonRepository.Projectiles.Get<ManaProjectile>(), direction, 300, 3);
-                    break;
-                }
-            case 7:
-            case 8:
-            case 9:
-            case 10:
-                {
-                    // Do a 250 damage mana bolt
-                    FireBolt(SingletonRepository.Projectiles.Get<ManaProjectile>(), direction, 250);
-                    break;
-                }
-        }
     }
 
     /// <summary>

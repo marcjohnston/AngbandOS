@@ -24,7 +24,7 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
         {
             return;
         }
-        saveGame.RingOfSetPower(dir);
+        RingOfSetPower(dir);
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
     }
     public string DescribeActivationEffect() => "bizarre things every 450+d450 turns";
@@ -86,4 +86,57 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
     public override int ToH => 15;
     public override int Weight => 2;
     public override bool Wis => true;
+
+    /// <summary>
+    /// Invoke a random power from the Ring of Set
+    /// </summary>
+    /// <param name="direction"> The direction the player is aiming </param>
+    private void RingOfSetPower(int direction)
+    {
+        switch (Program.Rng.DieRoll(10))
+        {
+            case 1:
+            case 2:
+                {
+                    // Decrease all the players ability scores, bypassing sustain and divine protection
+                    SaveGame.MsgPrint("You are surrounded by a malignant aura.");
+                    SaveGame.Player.DecreaseAbilityScore(Ability.Strength, 50, true);
+                    SaveGame.Player.DecreaseAbilityScore(Ability.Intelligence, 50, true);
+                    SaveGame.Player.DecreaseAbilityScore(Ability.Wisdom, 50, true);
+                    SaveGame.Player.DecreaseAbilityScore(Ability.Dexterity, 50, true);
+                    SaveGame.Player.DecreaseAbilityScore(Ability.Constitution, 50, true);
+                    SaveGame.Player.DecreaseAbilityScore(Ability.Charisma, 50, true);
+                    // Reduce both experience and maximum experience
+                    SaveGame.Player.ExperiencePoints -= SaveGame.Player.ExperiencePoints / 4;
+                    SaveGame.Player.MaxExperienceGained -= SaveGame.Player.ExperiencePoints / 4;
+                    SaveGame.Player.CheckExperience();
+                    break;
+                }
+            case 3:
+                {
+                    // Dispel monsters
+                    SaveGame.MsgPrint("You are surrounded by a powerful aura.");
+                    SaveGame.DispelMonsters(1000);
+                    break;
+                }
+            case 4:
+            case 5:
+            case 6:
+                {
+                    // Do a 300 damage mana ball
+                    SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), direction, 300, 3);
+                    break;
+                }
+            case 7:
+            case 8:
+            case 9:
+            case 10:
+                {
+                    // Do a 250 damage mana bolt
+                    SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), direction, 250);
+                    break;
+                }
+        }
+    }
+
 }
