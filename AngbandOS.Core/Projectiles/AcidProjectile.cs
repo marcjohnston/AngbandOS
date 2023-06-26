@@ -21,7 +21,7 @@ internal class AcidProjectile : Projectile
         GridTile cPtr = SaveGame.Level.Grid[y][x];
         bool obvious = false;
         string oName = "";
-        foreach (Item oPtr in cPtr.Items)
+        foreach (Item oPtr in cPtr.Items.ToArray()) // Prevent collection modified error
         {
             bool isArt = false;
             bool ignore = false;
