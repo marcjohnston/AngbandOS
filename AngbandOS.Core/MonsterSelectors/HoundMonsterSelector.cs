@@ -12,6 +12,6 @@ internal class HoundMonsterSelector : MonsterSelector
 {
     public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
     {
-        return (rPtr.Character == 'C' || rPtr.Character == 'Z') && !rPtr.Unique;
+        return (rPtr.Symbol.Character == 'C' || rPtr.Symbol.Character == 'Z') && !rPtr.Unique;
     }
 }

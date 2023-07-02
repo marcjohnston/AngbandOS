@@ -15,10 +15,10 @@ internal abstract class WandItemFactory : ItemFactory, IFlavour
     /// <summary>
     /// Returns the want flavours repository because wands have flavours that need to be identified.
     /// </summary>
-    public IEnumerable<Flavour>? GetFlavourRepository() => SaveGame.SingletonRepository.WandFlavours;
+    public IEnumerable<Flavour>? GetFlavorRepository() => SaveGame.SingletonRepository.WandFlavours;
 
     /// <inheritdoc/>
-    public Flavour Flavour { get; set; }
+    public Flavour Flavor { get; set; }
 
     public override int PackSort => 14;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Wand;

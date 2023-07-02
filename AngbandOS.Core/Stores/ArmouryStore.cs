@@ -43,7 +43,7 @@ internal class ArmouryStore : Store
 
     public override string FeatureType => "Armoury";
     public override Colour Colour => Colour.Grey;
-    public override char Character => '2';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<NumberTwoSymbol>();
 
     protected override StockStoreInventoryItem[] GetStoreTable()
     {

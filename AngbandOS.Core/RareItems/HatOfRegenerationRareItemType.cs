@@ -11,7 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class HatOfRegenerationRareItem : RareItem
 {
     private HatOfRegenerationRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => ']';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBraceSymbol>();
     public override Colour Colour => Colour.Brown;
     public override string Name => "Hat of Regeneration";
     public override int Cost => 1500;

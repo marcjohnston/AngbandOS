@@ -15,7 +15,7 @@ internal class IceElementalMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new ColdBallMonsterSpell(),
         new IceBoltMonsterSpell());
-    public override char Character => 'E';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
     public override string Name => "Ice elemental";
 
     public override int ArmourClass => 60;

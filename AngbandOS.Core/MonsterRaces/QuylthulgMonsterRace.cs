@@ -15,7 +15,7 @@ internal class QuylthulgMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BlinkMonsterSpell(),
         new SummonMonsterMonsterSpell());
-    public override char Character => 'Q';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperQSymbol>();
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "Quylthulg";
 

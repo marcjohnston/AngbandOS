@@ -15,7 +15,7 @@ internal class TempleStore : Store
     public override StoreType StoreType => StoreType.StoreTemple;
     public override string FeatureType => "Temple";
     public override Colour Colour => Colour.Green;
-    public override char Character => '4';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<NumberFourSymbol>();
 
     protected override StoreOwner[] StoreOwners => new StoreOwner[]
     {

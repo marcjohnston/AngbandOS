@@ -17,7 +17,7 @@ internal class MagicMushroomPatchMonsterRace : MonsterRace
         new SlowMonsterSpell(),
         new BlinkMonsterSpell(),
         new DarknessMonsterSpell());
-    public override char Character => ',';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CommaSymbol>();
     public override Colour Colour => Colour.BrightBlue;
     public override string Name => "Magic mushroom patch";
 

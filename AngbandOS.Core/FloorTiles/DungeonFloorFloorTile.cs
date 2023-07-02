@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class DungeonFloorFloorTile : FloorTile
 {
     private DungeonFloorFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '·';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PeriodSymbol>();
     public override string Name => "DungeonFloor";
     public override string AppearAs => "DungeonFloor";
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Floor;

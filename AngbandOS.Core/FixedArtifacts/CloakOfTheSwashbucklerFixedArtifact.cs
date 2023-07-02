@@ -31,7 +31,7 @@ internal class CloakOfTheSwashbucklerFixedArtifact : FixedArtifact, IFixedArtifa
     }
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override char Character => '(';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenParenthesisSymbol>();
     public override Colour Colour => Colour.Green;
     public override string Name => "The Cloak of the Swashbuckler";
     public override int Ac => 1;

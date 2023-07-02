@@ -12,7 +12,7 @@ internal class DragonsBreathWandItemFactory : WandItemFactory
 {
     private DragonsBreathWandItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => '-';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<MinusSignSymbol>();
     public override string Name => "Dragon's Breath";
 
     public override int[] Chance => new int[] { 4, 0, 0, 0 };

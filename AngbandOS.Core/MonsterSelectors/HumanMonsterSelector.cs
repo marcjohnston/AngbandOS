@@ -12,6 +12,6 @@ internal class HumanMonsterSelector : MonsterSelector
 {
     public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
     {
-        return rPtr.Character == 'p' && !rPtr.Unique;
+        return rPtr.Symbol.Character == 'p' && !rPtr.Unique;
     }
 }

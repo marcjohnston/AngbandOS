@@ -20,7 +20,7 @@ internal class OgreShamanMonsterRace : MonsterRace
         new CreateTrapsMonsterSpell(),
         new SummonMonsterMonsterSpell(),
         new TeleportSelfMonsterSpell());
-    public override char Character => 'O';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperOSymbol>();
     public override Colour Colour => Colour.Blue;
     public override string Name => "Ogre shaman";
 

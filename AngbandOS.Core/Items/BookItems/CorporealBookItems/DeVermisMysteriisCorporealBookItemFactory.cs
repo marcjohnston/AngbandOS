@@ -12,7 +12,7 @@ internal class DeVermisMysteriisCorporealBookItemFactory : CorporealBookItemFact
 {
     private DeVermisMysteriisCorporealBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => '?';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<QuestionMarkSymbol>();
     public override Colour Colour => Colour.BrightYellow;
     public override string Name => "[De Vermis Mysteriis]";
 

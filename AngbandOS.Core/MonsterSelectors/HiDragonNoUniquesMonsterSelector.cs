@@ -12,6 +12,6 @@ internal class HiDragonNoUniquesMonsterSelector : MonsterSelector
 {
     public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
     {
-        return rPtr.Character == 'D' && !rPtr.Unique;
+        return rPtr.Symbol.Character == 'D' && !rPtr.Unique;
     }
 }

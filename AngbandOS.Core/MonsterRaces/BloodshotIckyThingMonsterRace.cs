@@ -14,7 +14,7 @@ internal class BloodshotIckyThingMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new DrainManaMonsterSpell());
-    public override char Character => 'i';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerISymbol>();
     public override Colour Colour => Colour.Red;
     public override string Name => "Bloodshot icky thing";
 

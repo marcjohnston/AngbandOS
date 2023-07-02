@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class ElderSignFloorTile : FloorTile
 {
     private ElderSignFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '*';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<AsteriskSymbol>();
     public override Colour Colour => Colour.Green;
     public override string Name => "ElderSign";
     public override string AppearAs => "ElderSign";

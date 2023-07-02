@@ -20,7 +20,7 @@ internal class VampireMonsterRace : MonsterRace
         new DarknessMonsterSpell(),
         new ForgetMonsterSpell(),
         new TeleportToMonsterSpell());
-    public override char Character => 'V';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperVSymbol>();
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "Vampire";
 

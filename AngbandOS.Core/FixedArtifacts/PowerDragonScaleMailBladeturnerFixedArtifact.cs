@@ -40,7 +40,7 @@ internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact, IFi
     public string DescribeActivationEffect() => "breathe elements (300), berserk rage, bless, and resistance";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override char Character => '[';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenBraceSymbol>();
     public override Colour Colour => Colour.Purple;
     public override string Name => "The Power Dragon Scale Mail 'Bladeturner'";
     public override int Ac => 50;

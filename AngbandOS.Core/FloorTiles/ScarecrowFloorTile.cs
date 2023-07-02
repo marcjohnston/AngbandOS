@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class ScarecrowFloorTile : FloorTile
 {
     private ScarecrowFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => 't';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerTSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Scarecrow";
     public override AlterAction? AlterAction => new TunnelAlterAction();

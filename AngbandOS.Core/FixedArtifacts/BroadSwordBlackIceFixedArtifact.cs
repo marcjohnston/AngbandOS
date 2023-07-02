@@ -31,7 +31,7 @@ internal class BroadSwordBlackIceFixedArtifact : FixedArtifact
             item.BonusPowerSubType = SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
         }
     }
-    public override char Character => '|';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "The Broad Sword 'Black Ice'";
     public override int Ac => 0;

@@ -12,7 +12,7 @@ internal class PhantomWarriorMonsterRace : MonsterRace
 {
     protected PhantomWarriorMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'G';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperGSymbol>();
     public override Colour Colour => Colour.BrightTurquoise;
     public override string Name => "Phantom warrior";
 

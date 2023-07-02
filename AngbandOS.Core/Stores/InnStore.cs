@@ -47,7 +47,7 @@ internal class InnStore : Store
 
     public override string FeatureType => "Inn";
     public override Colour Colour => Colour.Purple;
-    public override char Character => '&';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<AmpersandSymbol>();
 
     public override bool ItemMatches(Item item)
     {

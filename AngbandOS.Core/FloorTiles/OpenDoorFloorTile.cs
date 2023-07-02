@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class OpenDoorFloorTile : FloorTile
 {
     private OpenDoorFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '\'';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<SingleQuoteSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "OpenDoor";
     public override AlterAction? AlterAction => new CloseAlterAction();

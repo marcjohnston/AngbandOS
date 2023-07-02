@@ -18,7 +18,7 @@ internal class TrollThaumaturgistMonsterRace : MonsterRace
         new ScareMonsterSpell(),
         new BlinkMonsterSpell(),
         new DarknessMonsterSpell());
-    public override char Character => 'T';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperTSymbol>();
     public override Colour Colour => Colour.BrightPurple;
     public override string Name => "Troll thaumaturgist";
 

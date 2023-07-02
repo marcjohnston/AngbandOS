@@ -45,7 +45,7 @@ internal abstract class MonsterRace : IMonsterCharacteristics
     /// <returns></returns>
     public virtual string DeathNote()
     {
-        if (Demon || Undead || Cthuloid || Stupid || Nonliving || "Evg".Contains(Character.ToString()))
+        if (Demon || Undead || Cthuloid || Stupid || Nonliving || "Evg".Contains(Symbol.Character.ToString()))
         {
             return " is destroyed.";
         }
@@ -53,9 +53,9 @@ internal abstract class MonsterRace : IMonsterCharacteristics
     }
 
     /// <summary>
-    /// The character to render the monster as.
+    /// Returns the symbol to use for rendering.
     /// </summary>
-    public abstract char Character { get; }
+    public abstract Symbol Symbol { get; }
 
     /// <summary>
     /// The color to display the monster as.
@@ -428,7 +428,7 @@ internal abstract class MonsterRace : IMonsterCharacteristics
 
     public int GetCoinType()
     {
-        if (Character == '$')
+        if (Symbol.Character == '$')
         {
             if (Name.Contains(" copper "))
             {

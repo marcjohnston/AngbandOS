@@ -13,7 +13,7 @@ internal class FlamesRingItemFactory : RingItemFactory
     private FlamesRingItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override string? DescribeActivationEffect => "ball of fire and resist fire";
-    public override char Character => '=';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<EqualSignSymbol>();
     public override string Name => "Flames";
 
     public override bool Activate => true;

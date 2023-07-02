@@ -20,9 +20,10 @@ internal abstract class Flavour
     }
 
     /// <summary>
-    /// The character to use for the visual.
+    /// Returns the symbol to use for rendering.
     /// </summary>
-    public abstract char Character { get; }
+    public abstract Symbol Symbol { get; }
+
 
     /// <summary>
     /// The color to use for the visual.

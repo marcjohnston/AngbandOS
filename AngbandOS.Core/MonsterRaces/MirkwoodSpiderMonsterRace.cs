@@ -12,7 +12,7 @@ internal class MirkwoodSpiderMonsterRace : MonsterRace
 {
     protected MirkwoodSpiderMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'S';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperSSymbol>();
     public override Colour Colour => Colour.Brown;
     public override string Name => "Mirkwood spider";
 

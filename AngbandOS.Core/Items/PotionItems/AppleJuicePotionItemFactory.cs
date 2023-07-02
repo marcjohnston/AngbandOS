@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemCategories;
 internal class AppleJuicePotionItemFactory : PotionItemFactory
 {
     private AppleJuicePotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
-    public override char Character => '!';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ExclamationPointSymbol>();
     public override string Name => "Apple Juice";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -31,9 +31,9 @@ internal class AppleJuicePotionItemFactory : PotionItemFactory
     /// <summary>
     /// Returns null because the Apple Juice potion is always a light brown flavour.
     /// </summary>
-    public override IEnumerable<Flavour>? GetFlavourRepository()
+    public override IEnumerable<Flavour>? GetFlavorRepository()
     {
-        Flavour = SaveGame.SingletonRepository.PotionFlavours.Get<LightBrownPotionFlavour>();
+        Flavor = SaveGame.SingletonRepository.PotionFlavours.Get<LightBrownPotionFlavour>();
         return null;
     }
 

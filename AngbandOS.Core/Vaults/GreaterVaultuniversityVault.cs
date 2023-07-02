@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.Vaults;
 
 [Serializable]
-internal class GreaterVaultuniversityVault : Vault
+internal class GreaterVaultUniversityVault : Vault
 {
-    private GreaterVaultuniversityVault(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '#';
+    private GreaterVaultUniversityVault(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PoundSignSymbol>();
     public override string Name => "Greater vault (university)";
     public override int Category => 8;
     public override int Height => 29;

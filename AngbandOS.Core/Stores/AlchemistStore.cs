@@ -39,7 +39,7 @@ internal class AlchemistStore : Store
 
     public override string FeatureType => "Alchemist";
     public override Colour Colour => Colour.Blue;
-    public override char Character => '5';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<NumberFiveSymbol>();
     public override string Description => "Alchemy Shop";
 
     protected override StockStoreInventoryItem[] GetStoreTable()

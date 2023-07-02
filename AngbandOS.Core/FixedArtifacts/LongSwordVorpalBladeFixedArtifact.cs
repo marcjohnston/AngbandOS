@@ -30,7 +30,7 @@ internal class LongSwordVorpalBladeFixedArtifact : FixedArtifact
 
     public override bool IsVorpalBlade => true;
 
-    public override char Character => '|';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "The Long Sword 'Vorpal Blade'";
     public override int Ac => 0;

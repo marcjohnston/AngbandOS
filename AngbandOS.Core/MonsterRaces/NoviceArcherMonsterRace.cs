@@ -14,7 +14,7 @@ internal class NoviceArcherMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new Arrow1D6MonsterSpell());
-    public override char Character => 'p';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override Colour Colour => Colour.BrightGreen;
     public override string Name => "Novice archer";
 

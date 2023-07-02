@@ -175,7 +175,7 @@ namespace AngbandOS.Core.Scripts
         {
             for (int i = 0; Constants.SymbolIdentification[i] != null; i++)
             {
-                if (Constants.SymbolIdentification[i][0] == SaveGame.SingletonRepository.MonsterRaces[rIdx].Character)
+                if (Constants.SymbolIdentification[i][0] == SaveGame.SingletonRepository.MonsterRaces[rIdx].Symbol.Character)
                 {
                     string name = Constants.SymbolIdentification[i].Substring(2);
                     string buf = $"Monster Type: {name} ({num + 1} of {of})";
@@ -192,7 +192,7 @@ namespace AngbandOS.Core.Scripts
         private void DisplayMonsterHeader(int rIdx)
         {
             MonsterRace rPtr = SaveGame.SingletonRepository.MonsterRaces[rIdx];
-            char c1 = rPtr.Character;
+            char c1 = rPtr.Symbol.Character;
             Colour a1 = rPtr.Colour;
             if (!rPtr.Unique)
             {
@@ -581,7 +581,7 @@ namespace AngbandOS.Core.Scripts
                 {
                     seen[maxSeen] = i;
                     maxSeen++;
-                    char symbol = SaveGame.SingletonRepository.MonsterRaces[i].Character;
+                    char symbol = SaveGame.SingletonRepository.MonsterRaces[i].Symbol.Character;
                     if (!filterMask[symbol])
                     {
                         filterMask[symbol] = true;
@@ -617,7 +617,7 @@ namespace AngbandOS.Core.Scripts
                 int maxFiltered = 0;
                 for (int i = 0; i < maxSeen; i++)
                 {
-                    if (SaveGame.SingletonRepository.MonsterRaces[seen[i]].Character == currentFilter)
+                    if (SaveGame.SingletonRepository.MonsterRaces[seen[i]].Symbol.Character == currentFilter)
                     {
                         filtered[maxFiltered] = seen[i];
                         maxFiltered++;

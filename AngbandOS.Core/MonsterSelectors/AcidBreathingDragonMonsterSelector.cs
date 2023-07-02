@@ -12,6 +12,6 @@ internal class AcidBreathingDragonMonsterSelector : MonsterSelector
 {
     public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
     {
-        return !rPtr.Unique && "Dd".Contains(rPtr.Character.ToString()) && rPtr.BreatheAcid;
+        return !rPtr.Unique && "Dd".Contains(rPtr.Symbol.Character.ToString()) && rPtr.BreatheAcid;
     }
 }

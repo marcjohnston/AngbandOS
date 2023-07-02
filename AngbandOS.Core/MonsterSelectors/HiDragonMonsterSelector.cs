@@ -12,6 +12,6 @@ internal class HiDragonMonsterSelector : MonsterSelector
 {
     public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
     {
-        return rPtr.Character == 'D';
+        return rPtr.Symbol.Character == 'D';
     }
 }

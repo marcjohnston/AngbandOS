@@ -14,7 +14,7 @@ internal class MemoryMossMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new ForgetMonsterSpell());
-    public override char Character => ',';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CommaSymbol>();
     public override Colour Colour => Colour.Blue;
     public override string Name => "Memory moss";
 

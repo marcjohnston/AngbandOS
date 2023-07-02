@@ -21,7 +21,7 @@ internal class TheLerneanHydraMonsterRace : MonsterRace
         new PoisonBallMonsterSpell(),
         new ScareMonsterSpell(),
         new SummonHydraMonsterSpell());
-    public override char Character => 'M';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperMSymbol>();
     public override Colour Colour => Colour.BrightTurquoise;
     public override string Name => "The Lernean Hydra";
 

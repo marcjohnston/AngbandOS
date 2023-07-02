@@ -13,7 +13,7 @@ internal class MultiHuedDragonScaleMailArmorItemFactory : DragonScaleMailArmorIt
     private MultiHuedDragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override string? DescribeActivationEffect => "breathe multi-hued (250) every 225+d225 turns";
-    public override char Character => '[';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenBraceSymbol>();
     public override Colour Colour => Colour.Purple;
     public override string Name => "Multi-Hued Dragon Scale Mail";
 

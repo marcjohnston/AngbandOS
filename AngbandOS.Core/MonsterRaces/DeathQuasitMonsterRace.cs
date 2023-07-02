@@ -19,7 +19,7 @@ internal class DeathQuasitMonsterRace : MonsterRace
         new ScareMonsterSpell(),
         new ForgetMonsterSpell(),
         new SummonDemonMonsterSpell());
-    public override char Character => 'u';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerUSymbol>();
     public override string Name => "Death quasit";
 
     public override int ArmourClass => 80;

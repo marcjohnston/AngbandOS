@@ -15,10 +15,10 @@ internal abstract class StaffItemClass : ItemFactory, IFlavour
     /// <summary>
     /// Returns the staff flavours repository because staves have flavours that need to be identified.
     /// </summary>
-    public IEnumerable<Flavour>? GetFlavourRepository() => SaveGame.SingletonRepository.StaffFlavours;
+    public IEnumerable<Flavour>? GetFlavorRepository() => SaveGame.SingletonRepository.StaffFlavours;
 
     /// <inheritdoc/>
-    public Flavour Flavour { get; set; }
+    public Flavour Flavor { get; set; }
 
     /// <summary>
     /// Executes the staff action.  Returns true, if the usage identifies the staff.

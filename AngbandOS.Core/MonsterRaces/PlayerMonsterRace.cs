@@ -12,7 +12,7 @@ internal class PlayerMonsterRace : MonsterRace
 {
     protected PlayerMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => '@';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<AtSymbol>();
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "Player";
 

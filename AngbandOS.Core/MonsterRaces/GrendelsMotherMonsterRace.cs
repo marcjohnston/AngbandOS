@@ -12,7 +12,7 @@ internal class GrendelsMotherMonsterRace : MonsterRace
 {
     protected GrendelsMotherMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'O';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperOSymbol>();
     public override Colour Colour => Colour.Green;
     public override string Name => "Grendel's mother";
 

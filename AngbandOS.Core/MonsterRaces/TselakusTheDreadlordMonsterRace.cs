@@ -20,7 +20,7 @@ internal class TselakusTheDreadlordMonsterRace : MonsterRace
         new NetherBallMonsterSpell(),
         new SummonHiUndeadMonsterSpell(),
         new SummonKinMonsterSpell());
-    public override char Character => 'G';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperGSymbol>();
     public override Colour Colour => Colour.Red;
     public override string Name => "Tselakus, the Dreadlord";
 

@@ -22,7 +22,7 @@ internal class SkullDrujMonsterRace : MonsterRace
         new WaterBallMonsterSpell(),
         new CreateTrapsMonsterSpell(),
         new SummonUndeadMonsterSpell());
-    public override char Character => 's';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerSSymbol>();
     public override Colour Colour => Colour.BrightGrey;
     public override string Name => "Skull druj";
 

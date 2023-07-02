@@ -23,7 +23,7 @@ internal class ShelobSpiderOfDarknessMonsterRace : MonsterRace
         new CreateTrapsMonsterSpell(),
         new HealMonsterSpell(),
         new SummonSpiderMonsterSpell());
-    public override char Character => 'S';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperSSymbol>();
     public override Colour Colour => Colour.Black;
     public override string Name => "Shelob, Spider of Darkness";
 

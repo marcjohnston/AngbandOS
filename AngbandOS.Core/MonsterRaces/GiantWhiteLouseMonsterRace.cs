@@ -12,7 +12,7 @@ internal class GiantWhiteLouseMonsterRace : MonsterRace
 {
     protected GiantWhiteLouseMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'l';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerLSymbol>();
     public override string Name => "Giant white louse";
 
     public override bool Animal => true;

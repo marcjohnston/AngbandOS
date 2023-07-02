@@ -29,7 +29,7 @@ internal class HypnosMonsterRace : MonsterRace
         new TeleportLevelMonsterSpell(),
         new TeleportToMonsterSpell(),
         new TeleportSelfMonsterSpell());
-    public override char Character => 'p';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "Hypnos";
 

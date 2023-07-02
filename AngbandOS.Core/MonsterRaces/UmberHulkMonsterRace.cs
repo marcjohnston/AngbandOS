@@ -12,7 +12,7 @@ internal class UmberHulkMonsterRace : MonsterRace
 {
     protected UmberHulkMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'x';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerXSymbol>();
     public override Colour Colour => Colour.Brown;
     public override string Name => "Umber hulk";
 

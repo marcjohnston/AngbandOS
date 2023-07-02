@@ -14,7 +14,7 @@ internal class UltraEliteFanaticMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new HealMonsterSpell());
-    public override char Character => 'p';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override string Name => "Ultra-elite fanatic";
 
     public override int ArmourClass => 100;

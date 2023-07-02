@@ -1263,13 +1263,13 @@ internal class Level
 
     private void ImageMonster(out Colour ap, out char cp)
     {
-        cp = SaveGame.SingletonRepository.MonsterRaces[Program.Rng.DieRoll(SaveGame.SingletonRepository.MonsterRaces.Count - 2)].Character;
+        cp = SaveGame.SingletonRepository.MonsterRaces[Program.Rng.DieRoll(SaveGame.SingletonRepository.MonsterRaces.Count - 2)].Symbol.Character;
         ap = SaveGame.SingletonRepository.MonsterRaces[Program.Rng.DieRoll(SaveGame.SingletonRepository.MonsterRaces.Count - 2)].Colour;
     }
 
     private void ImageObject(out Colour ap, out char cp)
     {
-        cp = SaveGame.SingletonRepository.ItemFactories[Program.Rng.DieRoll(SaveGame.SingletonRepository.ItemFactories.Count - 1)].FlavorCharacter;
+        cp = SaveGame.SingletonRepository.ItemFactories[Program.Rng.DieRoll(SaveGame.SingletonRepository.ItemFactories.Count - 1)].FlavorSymbol.Character;
         ap = SaveGame.SingletonRepository.ItemFactories[Program.Rng.DieRoll(SaveGame.SingletonRepository.ItemFactories.Count - 1)].FlavorColour;
     }
 
@@ -1298,7 +1298,7 @@ internal class Level
                 ((cPtr.TileFlags.IsSet(GridTile.PlayerLit) || (cPtr.TileFlags.IsSet(GridTile.SelfLit) &&
                  cPtr.TileFlags.IsSet(GridTile.IsVisible))) && SaveGame.Player.TimedBlindness.TurnsRemaining == 0))
             {
-                c = feat.Character;
+                c = feat.Symbol.Character;
                 a = feat.Colour;
                 if (feat.DimsOutsideLOS)
                 {
@@ -1350,7 +1350,7 @@ internal class Level
             else
             {
                 a = SaveGame.SingletonRepository.FloorTileTypes["Nothing"].Colour;
-                c = SaveGame.SingletonRepository.FloorTileTypes["Nothing"].Character;
+                c = SaveGame.SingletonRepository.FloorTileTypes["Nothing"].Symbol.Character;
             }
         }
         else
@@ -1360,7 +1360,7 @@ internal class Level
                 feat = string.IsNullOrEmpty(feat.AppearAs)
                     ? SaveGame.SingletonRepository.FloorTileTypes[cPtr.BackgroundFeature.AppearAs]
                     : SaveGame.SingletonRepository.FloorTileTypes[feat.AppearAs];
-                c = feat.Character;
+                c = feat.Symbol.Character;
                 a = feat.Colour;
                 if (feat.DimsOutsideLOS)
                 {
@@ -1400,7 +1400,7 @@ internal class Level
             else
             {
                 a = SaveGame.SingletonRepository.FloorTileTypes["Nothing"].Colour;
-                c = SaveGame.SingletonRepository.FloorTileTypes["Nothing"].Character;
+                c = SaveGame.SingletonRepository.FloorTileTypes["Nothing"].Symbol.Character;
             }
         }
         if (SaveGame.Player.TimedHallucinations.TurnsRemaining != 0 && Program.Rng.RandomLessThan(256) == 0 && (!cPtr.FeatureType.IsWall))
@@ -1416,7 +1416,7 @@ internal class Level
         {
             if (oPtr.Marked)
             {
-                cp = oPtr.Factory.FlavorCharacter;
+                cp = oPtr.Factory.FlavorSymbol.Character;
                 ap = oPtr.Factory.FlavorColour;
                 if (SaveGame.Player.TimedHallucinations.TurnsRemaining != 0)
                 {
@@ -1432,7 +1432,7 @@ internal class Level
             {
                 MonsterRace rPtr = mPtr.Race;
                 a = rPtr.Colour;
-                c = rPtr.Character;
+                c = rPtr.Symbol.Character;
                 if (rPtr.AttrMulti)
                 {
                     if (rPtr.Shapechanger)
@@ -1509,7 +1509,7 @@ internal class Level
         {
             MonsterRace rPtr = SaveGame.SingletonRepository.MonsterRaces[0];
             a = rPtr.Colour;
-            c = rPtr.Character;
+            c = rPtr.Symbol.Character;
             ap = a;
             cp = c;
         }
@@ -1584,7 +1584,7 @@ internal class Level
         Monster mPtr = Monsters[_hackMIdxIi];
         for (attempts = Program.Rng.DieRoll(10) + 5; attempts != 0; attempts--)
         {
-            SummonSpecific(mPtr.MapY, mPtr.MapX, SaveGame.Difficulty, new KinMonsterSelector(rPtr.Character));
+            SummonSpecific(mPtr.MapY, mPtr.MapX, SaveGame.Difficulty, new KinMonsterSelector(rPtr.Symbol.Character));
         }
         return true;
     }
@@ -1738,7 +1738,7 @@ internal class Level
             }
             else if (rPtr.Demon || rPtr.Undead ||
                      rPtr.Cthuloid || rPtr.Stupid ||
-                     rPtr.Nonliving || "Evg".Contains(rPtr.Character.ToString()))
+                     rPtr.Nonliving || "Evg".Contains(rPtr.Symbol.Character.ToString()))
             {
                 SaveGame.MsgPrint($"You have destroyed {mName}.");
             }
@@ -2052,7 +2052,7 @@ internal class Level
         long oldhp = newhp + dam;
         long tmp = newhp * 100L / oldhp;
         int percentage = (int)tmp;
-        if ("jmvQ".Contains(rPtr.Character.ToString()))
+        if ("jmvQ".Contains(rPtr.Symbol.Character.ToString()))
         {
             if (percentage > 95)
             {
@@ -2083,7 +2083,7 @@ internal class Level
                 SaveGame.MsgPrint($"{mName} jerks limply.");
             }
         }
-        else if ("CZ".Contains(rPtr.Character.ToString()))
+        else if ("CZ".Contains(rPtr.Symbol.Character.ToString()))
         {
             if (percentage > 95)
             {
@@ -2114,7 +2114,7 @@ internal class Level
                 SaveGame.MsgPrint($"{mName} yelps feebly.");
             }
         }
-        else if ("FIKMRSXabclqrst".Contains(rPtr.Character.ToString()))
+        else if ("FIKMRSXabclqrst".Contains(rPtr.Symbol.Character.ToString()))
         {
             if (percentage > 95)
             {

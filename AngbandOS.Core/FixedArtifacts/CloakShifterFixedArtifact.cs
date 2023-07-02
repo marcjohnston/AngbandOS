@@ -26,7 +26,7 @@ internal class CloakShifterFixedArtifact : FixedArtifact, IFixedArtifactActivati
     public string DescribeActivationEffect() => "teleport every 45 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override char Character => '(';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenParenthesisSymbol>();
     public override Colour Colour => Colour.Green;
     public override string Name => "The Cloak 'Shifter'";
     public override int Ac => 1;

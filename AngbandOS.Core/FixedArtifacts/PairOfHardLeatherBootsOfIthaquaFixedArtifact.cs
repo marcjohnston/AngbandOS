@@ -33,7 +33,7 @@ internal class PairOfHardLeatherBootsOfIthaquaFixedArtifact : FixedArtifact, IFi
     public string DescribeActivationEffect() => "haste self (20+d20 turns) every 200 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override char Character => ']';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBraceSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "The Pair of Hard Leather Boots of Ithaqua";
     public override int Ac => 3;

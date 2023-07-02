@@ -20,7 +20,7 @@ internal class MedusaTheGorgonMonsterRace : MonsterRace
         new PoisonBallMonsterSpell(),
         new ScareMonsterSpell(),
         new SummonHydraMonsterSpell());
-    public override char Character => 'n';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerNSymbol>();
     public override Colour Colour => Colour.Purple;
     public override string Name => "Medusa, the Gorgon";
 

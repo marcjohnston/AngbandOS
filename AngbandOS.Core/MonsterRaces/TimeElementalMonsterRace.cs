@@ -15,7 +15,7 @@ internal class TimeElementalMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BreatheTimeMonsterSpell(),
         new SlowMonsterSpell());
-    public override char Character => 'E';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
     public override Colour Colour => Colour.BrightGreen;
     public override string Name => "Time elemental";
 

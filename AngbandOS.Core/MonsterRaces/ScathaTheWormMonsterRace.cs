@@ -16,7 +16,7 @@ internal class ScathaTheWormMonsterRace : MonsterRace
         new BreatheColdMonsterSpell(),
         new CauseCriticalWoundsMonsterSpell(),
         new ConfuseMonsterSpell());
-    public override char Character => 'D';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
     public override Colour Colour => Colour.BrightPink;
     public override string Name => "Scatha the Worm";
 

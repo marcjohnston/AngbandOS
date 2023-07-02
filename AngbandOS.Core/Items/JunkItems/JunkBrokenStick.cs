@@ -12,7 +12,7 @@ internal class JunkBrokenStick : JunkItemClass
 {
     private JunkBrokenStick(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => '~';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<TildeSymbol>();
     public override Colour Colour => Colour.Red;
     public override string Name => "Broken Stick";
 

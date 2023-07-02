@@ -23,7 +23,7 @@ internal class SmallMetalShieldVitriolFixedArtifact : FixedArtifact
     }
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override char Character => ')';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseParenthesisSymbol>();
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Small Metal Shield 'Vitriol'";
     public override int Ac => 3;

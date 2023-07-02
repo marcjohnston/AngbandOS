@@ -12,7 +12,7 @@ internal class GiantSpiderMonsterRace : MonsterRace
 {
     protected GiantSpiderMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'S';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperSSymbol>();
     public override Colour Colour => Colour.Grey;
     public override string Name => "Giant spider";
 

@@ -17,7 +17,7 @@ internal class DracoliskMonsterRace : MonsterRace
         new BreatheNetherMonsterSpell(),
         new HoldMonsterSpell(),
         new ScareMonsterSpell());
-    public override char Character => 'D';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
     public override Colour Colour => Colour.Chartreuse;
     public override string Name => "Dracolisk";
 

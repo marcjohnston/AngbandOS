@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemCategories;
 internal class WaterPotionItemFactory : PotionItemFactory
 {
     private WaterPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
-    public override char Character => '!';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ExclamationPointSymbol>();
     public override string Name => "Water";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -32,9 +32,9 @@ internal class WaterPotionItemFactory : PotionItemFactory
     /// <summary>
     /// Returns null because water potions are always clear flavour.
     /// </summary>
-    public override IEnumerable<Flavour>? GetFlavourRepository()
+    public override IEnumerable<Flavour>? GetFlavorRepository()
     {
-        Flavour = SaveGame.SingletonRepository.PotionFlavours.Get<ClearPotionFlavour>();
+        Flavor = SaveGame.SingletonRepository.PotionFlavours.Get<ClearPotionFlavour>();
         return null;
     }
 

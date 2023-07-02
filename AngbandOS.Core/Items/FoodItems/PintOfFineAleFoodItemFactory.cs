@@ -12,7 +12,7 @@ internal class PintOfFineAleFoodItemFactory : FoodItemFactory
 {
     private PintOfFineAleFoodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => ',';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CommaSymbol>();
     public override Colour Colour => Colour.Yellow;
     public override string Name => "Pint of Fine Ale";
 

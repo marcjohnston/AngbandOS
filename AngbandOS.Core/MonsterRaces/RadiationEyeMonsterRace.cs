@@ -14,7 +14,7 @@ internal class RadiationEyeMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new DrainManaMonsterSpell());
-    public override char Character => 'e';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerESymbol>();
     public override Colour Colour => Colour.BrightRed;
     public override string Name => "Radiation eye";
 

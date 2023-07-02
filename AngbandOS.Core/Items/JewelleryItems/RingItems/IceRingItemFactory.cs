@@ -13,7 +13,7 @@ internal class IceRingItemFactory : RingItemFactory
     private IceRingItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override string? DescribeActivationEffect => "ball of cold and resist cold";
-    public override char Character => '=';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<EqualSignSymbol>();
     public override string Name => "Ice";
 
     public override bool Activate => true;

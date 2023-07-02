@@ -37,7 +37,7 @@ internal abstract class ScrollItem : Item
 
     public override string GetDescription(bool includeCountPrefix)
     {
-        string flavour = IdentStoreb ? "" : $" titled \"{FlavourFactory.Flavour.Name}\"";
+        string flavour = IdentStoreb ? "" : $" titled \"{FlavourFactory.Flavor.Name}\"";
         string ofName = IsFlavourAware() ? $" of {Factory.FriendlyName}" : "";
         string name = $"{Pluralize("Scroll", Count)}{flavour}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;

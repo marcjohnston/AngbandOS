@@ -12,7 +12,7 @@ internal class LesserWallMonsterMonsterRace : MonsterRace
 {
     protected LesserWallMonsterMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => '#';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PoundSignSymbol>();
     public override string Name => "Lesser wall monster";
 
     public override int ArmourClass => 75;

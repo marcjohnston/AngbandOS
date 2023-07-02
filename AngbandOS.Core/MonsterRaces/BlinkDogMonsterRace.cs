@@ -15,7 +15,7 @@ internal class BlinkDogMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BlinkMonsterSpell(),
         new TeleportToMonsterSpell());
-    public override char Character => 'C';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperCSymbol>();
     public override Colour Colour => Colour.BrightBlue;
     public override string Name => "Blink dog";
 

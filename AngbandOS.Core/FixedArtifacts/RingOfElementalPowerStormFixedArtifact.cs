@@ -35,7 +35,7 @@ internal class RingOfElementalPowerStormFixedArtifact : FixedArtifact, IFixedArt
     }
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override char Character => '=';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<EqualSignSymbol>();
     public override string Name => "The Ring of Elemental Power (Storm)";
     public override int Ac => 0;
     public override bool Activate => true;

@@ -14,7 +14,7 @@ internal class RedDragonBatMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BreatheFireMonsterSpell());
-    public override char Character => 'b';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerBSymbol>();
     public override Colour Colour => Colour.BrightRed;
     public override string Name => "Red dragon bat";
 

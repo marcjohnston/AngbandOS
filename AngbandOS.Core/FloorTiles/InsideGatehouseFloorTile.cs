@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class InsideGatehouseFloorTile : FloorTile
 {
     private InsideGatehouseFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '·';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PeriodSymbol>();
     public override string Name => "InsideGatehouse";
     public override string AppearAs => "InsideGatehouse";
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Miscellaneous;

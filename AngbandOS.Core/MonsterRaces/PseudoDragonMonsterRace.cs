@@ -17,7 +17,7 @@ internal class PseudoDragonMonsterRace : MonsterRace
         new BreatheLightMonsterSpell(),
         new ConfuseMonsterSpell(),
         new ScareMonsterSpell());
-    public override char Character => 'd';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
     public override Colour Colour => Colour.BrightPink;
     public override string Name => "Pseudo dragon";
 

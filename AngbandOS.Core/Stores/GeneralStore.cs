@@ -47,7 +47,7 @@ internal class GeneralStore : Store
 
     public override string FeatureType => "GeneralStore";
     public override Colour Colour => Colour.BrightBrown;
-    public override char Character => '1';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<NumberOneSymbol>();
     public override string Description => "General Store";
 
     protected override StockStoreInventoryItem[] GetStoreTable()

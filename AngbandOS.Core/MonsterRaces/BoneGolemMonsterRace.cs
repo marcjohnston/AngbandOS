@@ -24,7 +24,7 @@ internal class BoneGolemMonsterRace : MonsterRace
         new NetherBallMonsterSpell(),
         new SummonUndeadMonsterSpell(),
         new TeleportToMonsterSpell());
-    public override char Character => 'g';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerGSymbol>();
     public override Colour Colour => Colour.BrightBeige;
     public override string Name => "Bone golem";
 

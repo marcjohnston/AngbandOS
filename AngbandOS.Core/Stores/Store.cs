@@ -162,11 +162,15 @@ internal abstract class Store : IItemFilter
     /// </summary>
     protected virtual bool RenderWeightUnitOfMeasurement => false;
 
-    public abstract char Character { get; }
+    /// <summary>
+    /// The symbol to use for rendering.
+    /// </summary>
+    public abstract Symbol Symbol { get; }
+
     public abstract Colour Colour { get; }
     public virtual string Description => FeatureType;
 
-    public StoreFloorTile CreateFloorTileType() => new StoreFloorTile(SaveGame, Character, Colour, FeatureType, FeatureType, Description);
+    public StoreFloorTile CreateFloorTileType() => new StoreFloorTile(SaveGame, Symbol, Colour, FeatureType, FeatureType, Description);
 
     protected Store(SaveGame saveGame)
     {
@@ -415,7 +419,7 @@ internal abstract class Store : IItemFilter
         string outVal = $"{i.IndexToLetter()}) ";
         SaveGame.Screen.PrintLine(outVal, i + 6, 0);
         Colour a = oPtr.Factory.FlavorColour;
-        char c = oPtr.Factory.FlavorCharacter;
+        char c = oPtr.Factory.FlavorSymbol.Character;
         SaveGame.Screen.Print(a, c.ToString(), i + 6, 3);
         oName = GetItemDescription(oPtr);
         if (maxwid < oName.Length)

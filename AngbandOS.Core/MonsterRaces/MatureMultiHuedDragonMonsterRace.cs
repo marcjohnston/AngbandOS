@@ -21,7 +21,7 @@ internal class MatureMultiHuedDragonMonsterRace : MonsterRace
         new BlindnessMonsterSpell(),
         new ConfuseMonsterSpell(),
         new ScareMonsterSpell());
-    public override char Character => 'd';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
     public override Colour Colour => Colour.Purple;
     public override string Name => "Mature multi-hued dragon";
 

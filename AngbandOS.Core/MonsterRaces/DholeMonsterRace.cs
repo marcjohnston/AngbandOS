@@ -14,7 +14,7 @@ internal class DholeMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BreatheAcidMonsterSpell());
-    public override char Character => 'A';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperASymbol>();
     public override Colour Colour => Colour.Beige;
     public override string Name => "Dhole";
 

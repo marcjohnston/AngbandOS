@@ -12,7 +12,7 @@ internal class HellbatMonsterRace : MonsterRace
 {
     protected HellbatMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'b';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerBSymbol>();
     public override Colour Colour => Colour.Red;
     public override string Name => "Hellbat";
 

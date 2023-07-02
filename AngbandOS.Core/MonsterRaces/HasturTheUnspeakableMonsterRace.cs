@@ -28,7 +28,7 @@ internal class HasturTheUnspeakableMonsterRace : MonsterRace
         new TeleportAwayMonsterSpell(),
         new TeleportToMonsterSpell(),
         new TeleportSelfMonsterSpell());
-    public override char Character => 'X';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperXSymbol>();
     public override Colour Colour => Colour.Blue;
     public override string Name => "Hastur the Unspeakable";
 

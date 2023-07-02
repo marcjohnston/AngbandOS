@@ -19,6 +19,6 @@ internal class SymbolMonsterSelector : MonsterSelector
 
     public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
     {
-        return rPtr.Character == _character && !rPtr.Unique;
+        return rPtr.Symbol.Character == _character && !rPtr.Unique;
     }
 }

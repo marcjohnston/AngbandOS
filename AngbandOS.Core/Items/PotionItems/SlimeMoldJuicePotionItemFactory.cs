@@ -12,7 +12,7 @@ internal class SlimeMoldJuicePotionItemFactory : PotionItemFactory
 {
     private SlimeMoldJuicePotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
 
-    public override char Character => '!';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ExclamationPointSymbol>();
     public override string Name => "Slime Mold Juice";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -34,9 +34,9 @@ internal class SlimeMoldJuicePotionItemFactory : PotionItemFactory
     /// <summary>
     /// Returns null because the slime-mold potion is always an icky-green flavour.
     /// </summary>
-    public override IEnumerable<Flavour>? GetFlavourRepository()
+    public override IEnumerable<Flavour>? GetFlavorRepository()
     {
-        Flavour = SaveGame.SingletonRepository.PotionFlavours.Get<IckyGreenPotionFlavour>();
+        Flavor = SaveGame.SingletonRepository.PotionFlavours.Get<IckyGreenPotionFlavour>();
         return null;
     }
 

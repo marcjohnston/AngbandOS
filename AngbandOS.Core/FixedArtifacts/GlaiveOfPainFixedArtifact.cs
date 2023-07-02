@@ -18,7 +18,7 @@ internal class GlaiveOfPainFixedArtifact : FixedArtifact
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override char Character => '/';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ForwardSlashSymbol>();
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Glaive of Pain";
     public override int Ac => 0;

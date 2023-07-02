@@ -12,7 +12,7 @@ internal class SkeletonBrokenSkull : SkeletonItemClass
 {
     private SkeletonBrokenSkull(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => '~';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<TildeSymbol>();
     public override Colour Colour => Colour.Beige;
     public override string Name => "Broken Skull";
 

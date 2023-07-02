@@ -14,7 +14,7 @@ internal class HeadlessMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new ScareMonsterSpell());
-    public override char Character => 'H';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperHSymbol>();
     public override Colour Colour => Colour.BrightGreen;
     public override string Name => "Headless";
 

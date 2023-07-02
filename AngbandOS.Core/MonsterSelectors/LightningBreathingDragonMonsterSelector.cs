@@ -12,6 +12,6 @@ internal class LightningBreathingDragonMonsterSelector : MonsterSelector
 {
     public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
     {
-        return !rPtr.Unique && "Dd".Contains(rPtr.Character.ToString()) && rPtr.BreatheLightning;
+        return !rPtr.Unique && "Dd".Contains(rPtr.Symbol.Character.ToString()) && rPtr.BreatheLightning;
     }
 }

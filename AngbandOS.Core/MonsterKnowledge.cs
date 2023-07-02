@@ -1356,7 +1356,7 @@ internal class MonsterKnowledge
 
     private void DisplayHeader()
     {
-        char c1 = _monsterType.Character;
+        char c1 = _monsterType.Symbol.Character;
         Colour a1 = _monsterType.Colour;
         SaveGame.Screen.Erase(0, 0);
         SaveGame.Screen.Goto(0, 0);

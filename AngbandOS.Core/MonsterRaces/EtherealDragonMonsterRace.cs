@@ -18,7 +18,7 @@ internal class EtherealDragonMonsterRace : MonsterRace
         new BreatheLightMonsterSpell(),
         new BlindnessMonsterSpell(),
         new ConfuseMonsterSpell());
-    public override char Character => 'D';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
     public override Colour Colour => Colour.BrightGrey;
     public override string Name => "Ethereal dragon";
 

@@ -12,7 +12,7 @@ internal class FlyingSkullMonsterRace : MonsterRace
 {
     protected FlyingSkullMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 's';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerSSymbol>();
     public override Colour Colour => Colour.Beige;
     public override string Name => "Flying skull";
 

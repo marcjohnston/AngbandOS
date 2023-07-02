@@ -35,7 +35,7 @@ internal class TridentOfTheGnorriFixedArtifact : FixedArtifact, IFixedArtifactAc
     public string DescribeActivationEffect() => "teleport away every 150 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override char Character => '/';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ForwardSlashSymbol>();
     public override Colour Colour => Colour.Yellow;
     public override string Name => "The Trident of the Gnorri";
     public override int Ac => 0;

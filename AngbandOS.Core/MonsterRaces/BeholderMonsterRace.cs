@@ -24,7 +24,7 @@ internal class BeholderMonsterRace : MonsterRace
         new SlowMonsterSpell(),
         new DarknessMonsterSpell(),
         new ForgetMonsterSpell());
-    public override char Character => 'e';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerESymbol>();
     public override Colour Colour => Colour.Green;
     public override string Name => "Beholder";
 

@@ -12,7 +12,7 @@ internal class FireSpiritMonsterRace : MonsterRace
 {
     protected FireSpiritMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'E';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
     public override Colour Colour => Colour.BrightRed;
     public override string Name => "Fire spirit";
 

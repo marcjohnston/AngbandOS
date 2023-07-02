@@ -17,7 +17,7 @@ internal class GreatIceWyrmMonsterRace : MonsterRace
         new BlindnessMonsterSpell(),
         new ConfuseMonsterSpell(),
         new ScareMonsterSpell());
-    public override char Character => 'D';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
     public override string Name => "Great ice wyrm";
 
     public override int ArmourClass => 170;

@@ -18,7 +18,7 @@ internal class EtherealDrakeMonsterRace : MonsterRace
         new ConfuseMonsterSpell(),
         new ScareMonsterSpell(),
         new SlowMonsterSpell());
-    public override char Character => 'd';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
     public override Colour Colour => Colour.BrightGrey;
     public override string Name => "Ethereal drake";
 

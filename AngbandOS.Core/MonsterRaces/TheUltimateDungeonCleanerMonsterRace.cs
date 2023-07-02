@@ -12,7 +12,7 @@ internal class TheUltimateDungeonCleanerMonsterRace : MonsterRace
 {
     protected TheUltimateDungeonCleanerMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'g';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerGSymbol>();
     public override Colour Colour => Colour.Black;
     public override string Name => "The Ultimate Dungeon Cleaner";
 

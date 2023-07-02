@@ -16,7 +16,7 @@ internal class GiantMonsterSelector : MonsterSelector
         {
             return false;
         }
-        if (rPtr.Character != 'P')
+        if (rPtr.Symbol.Character != 'P')
         {
             return false;
         }

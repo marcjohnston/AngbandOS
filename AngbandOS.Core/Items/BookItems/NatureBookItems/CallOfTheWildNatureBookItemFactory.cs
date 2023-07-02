@@ -12,7 +12,7 @@ internal class CallOfTheWildNatureBookItemFactory : NatureBookItemFactory
 {
     private CallOfTheWildNatureBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => '?';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<QuestionMarkSymbol>();
     public override Colour Colour => Colour.BrightGreen;
     public override string Name => "[Call of the Wild]";
 

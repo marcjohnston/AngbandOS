@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class TownWallFloorTile : FloorTile
 {
     private TownWallFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '#';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PoundSignSymbol>();
     public override string Name => "TownWall";
     public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "TownWall";

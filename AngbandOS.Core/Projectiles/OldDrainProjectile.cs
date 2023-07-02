@@ -26,7 +26,7 @@ internal class OldDrainProjectile : Projectile
         {
             obvious = true;
         }
-        if (rPtr.Undead || rPtr.Demon || rPtr.Nonliving || "Egv".Contains(rPtr.Character.ToString()))
+        if (rPtr.Undead || rPtr.Demon || rPtr.Nonliving || "Egv".Contains(rPtr.Symbol.Character.ToString()))
         {
             if (rPtr.Undead)
             {

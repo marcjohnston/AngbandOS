@@ -18,7 +18,7 @@ internal class PotionMimicMonsterRace : MonsterRace
         new ColdBoltMonsterSpell(),
         new ConfuseMonsterSpell(),
         new ScareMonsterSpell());
-    public override char Character => '!';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ExclamationPointSymbol>();
     public override string Name => "Potion mimic";
 
     public override int ArmourClass => 30;

@@ -12,7 +12,7 @@ internal class ShadowCreatureMonsterRace : MonsterRace
 {
     protected ShadowCreatureMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'h';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
     public override Colour Colour => Colour.Grey;
     public override string Name => "Shadow creature";
 

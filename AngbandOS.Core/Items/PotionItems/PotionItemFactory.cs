@@ -16,10 +16,10 @@ internal abstract class PotionItemFactory : ItemFactory, IFlavour
     /// Returns the potions flavours repository because potions have flavours that need to be identified.  The Apple Juice, Water and Slime-Mold
     /// potions override this
     /// </summary>
-    public virtual IEnumerable<Flavour>? GetFlavourRepository() => SaveGame.SingletonRepository.PotionFlavours;
+    public virtual IEnumerable<Flavour>? GetFlavorRepository() => SaveGame.SingletonRepository.PotionFlavours;
 
     /// <inheritdoc/>
-    public Flavour Flavour { get; set; }
+    public Flavour Flavor { get; set; }
 
     public override bool EasyKnow => true;
     public override int PackSort => 11;

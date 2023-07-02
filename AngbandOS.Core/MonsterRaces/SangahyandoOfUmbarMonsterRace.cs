@@ -15,7 +15,7 @@ internal class SangahyandoOfUmbarMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new SlowMonsterSpell(),
         new ForgetMonsterSpell());
-    public override char Character => 'p';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override Colour Colour => Colour.Orange;
     public override string Name => "Sangahyando of Umbar";
 

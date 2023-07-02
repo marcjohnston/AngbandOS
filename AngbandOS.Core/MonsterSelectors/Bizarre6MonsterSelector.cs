@@ -12,6 +12,6 @@ internal class Bizarre6MonsterSelector : MonsterSelector
 {
     public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
     {
-        return (rPtr.Character == '!' || rPtr.Character == '?' || rPtr.Character == '=' || rPtr.Character == '$' || rPtr.Character == '|') && !rPtr.Unique;
+        return (rPtr.Symbol.Character == '!' || rPtr.Symbol.Character == '?' || rPtr.Symbol.Character == '=' || rPtr.Symbol.Character == '$' || rPtr.Symbol.Character == '|') && !rPtr.Unique;
     }
 }

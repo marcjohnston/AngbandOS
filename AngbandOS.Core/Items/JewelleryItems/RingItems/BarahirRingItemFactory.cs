@@ -12,7 +12,7 @@ internal class BarahirRingItemFactory : RingItemFactory
 {
     private BarahirRingItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => '=';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<EqualSignSymbol>();
     public override string Name => "Barahir";
 
     public override int Cost => 65000;

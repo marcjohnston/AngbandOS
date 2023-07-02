@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class WallPermBuildingFloorTile : FloorTile
 {
     private WallPermBuildingFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '#';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PoundSignSymbol>();
     public override string Name => "WallPermBuilding";
     public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "WallPermBuilding";

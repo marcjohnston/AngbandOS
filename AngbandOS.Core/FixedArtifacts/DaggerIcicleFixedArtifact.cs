@@ -30,7 +30,7 @@ internal class DaggerIcicleFixedArtifact : FixedArtifact, IFixedArtifactActivati
     public string DescribeActivationEffect() => "frost ball (48) every 5+d5 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override char Character => '|';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "The Dagger 'Icicle'";
     public override int Ac => 0;

@@ -19,7 +19,7 @@ internal class PlaceMonsterOkayMonsterSelector : MonsterSelector
     public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
     {
         MonsterRace pPtr = saveGame.SingletonRepository.MonsterRaces[_placeMonsterIdx];
-        if (rPtr.Character != pPtr.Character)
+        if (rPtr.Symbol.Character != pPtr.Symbol.Character)
         {
             return false;
         }

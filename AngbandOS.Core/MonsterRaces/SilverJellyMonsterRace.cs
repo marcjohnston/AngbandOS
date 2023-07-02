@@ -14,7 +14,7 @@ internal class SilverJellyMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new DrainManaMonsterSpell());
-    public override char Character => 'j';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerJSymbol>();
     public override Colour Colour => Colour.Silver;
     public override string Name => "Silver jelly";
 

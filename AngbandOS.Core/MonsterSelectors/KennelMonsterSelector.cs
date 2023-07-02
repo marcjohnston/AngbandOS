@@ -16,6 +16,6 @@ internal class KennelMonsterSelector : MonsterSelector
         {
             return false;
         }
-        return rPtr.Character == 'Z' || rPtr.Character == 'C';
+        return rPtr.Symbol.Character == 'Z' || rPtr.Symbol.Character == 'C';
     }
 }

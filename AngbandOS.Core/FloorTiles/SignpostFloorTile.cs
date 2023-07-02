@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class SignpostFloorTile : FloorTile
 {
     private SignpostFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => ':';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ColonSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Signpost";
     public override AlterAction? AlterAction => new TunnelAlterAction();

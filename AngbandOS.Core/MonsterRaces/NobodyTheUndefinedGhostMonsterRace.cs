@@ -12,7 +12,7 @@ internal class NobodyTheUndefinedGhostMonsterRace : MonsterRace
 {
     protected NobodyTheUndefinedGhostMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'G';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperGSymbol>();
     public override string Name => "Nobody, the Undefined Ghost";
 
     public override int ArmourClass => 0;

@@ -16,7 +16,7 @@ internal class TheInsaneCrusaderMonsterRace : MonsterRace
         new ShriekMonsterSpell(),
         new ScareMonsterSpell(),
         new TeleportToMonsterSpell());
-    public override char Character => 'p';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override Colour Colour => Colour.BrightYellow;
     public override string Name => "The Insane Crusader";
 

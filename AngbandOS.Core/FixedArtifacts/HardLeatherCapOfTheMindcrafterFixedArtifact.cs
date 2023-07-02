@@ -23,7 +23,7 @@ internal class HardLeatherCapOfTheMindcrafterFixedArtifact : FixedArtifact
     }
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override char Character => ']';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBraceSymbol>();
     public override Colour Colour => Colour.Brown;
     public override string Name => "The Hard Leather Cap of the Mindcrafter";
     public override int Ac => 2;

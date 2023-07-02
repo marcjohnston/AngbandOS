@@ -12,6 +12,6 @@ internal class OrcMonsterSelector : MonsterSelector
 {
     public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
     {
-        return rPtr.Character == 'o' && !rPtr.Unique;
+        return rPtr.Symbol.Character == 'o' && !rPtr.Unique;
     }
 }

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class FieldFloorTile : FloorTile
 {
     private FieldFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '·';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PeriodSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Field";
     public override string AppearAs => "Field";

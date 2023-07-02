@@ -12,7 +12,7 @@ internal class StaffCarnage : StaffItemClass
 {
     private StaffCarnage(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => '_';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UnderscoreSymbol>();
     public override string Name => "Carnage";
 
     public override int[] Chance => new int[] { 4, 0, 0, 0 };

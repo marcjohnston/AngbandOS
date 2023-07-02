@@ -12,7 +12,7 @@ internal class StaffSpeed : StaffItemClass
 {
     private StaffSpeed(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => '_';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UnderscoreSymbol>();
     public override string Name => "Speed";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

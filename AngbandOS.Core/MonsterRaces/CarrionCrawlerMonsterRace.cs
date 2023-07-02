@@ -12,7 +12,7 @@ internal class CarrionCrawlerMonsterRace : MonsterRace
 {
     protected CarrionCrawlerMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'c';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerCSymbol>();
     public override Colour Colour => Colour.Green;
     public override string Name => "Carrion crawler";
 

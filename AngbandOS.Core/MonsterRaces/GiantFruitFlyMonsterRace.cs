@@ -12,7 +12,7 @@ internal class GiantFruitFlyMonsterRace : MonsterRace
 {
     protected GiantFruitFlyMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'I';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperISymbol>();
     public override Colour Colour => Colour.BrightOrange;
     public override string Name => "Giant fruit fly";
 

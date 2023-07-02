@@ -17,7 +17,7 @@ internal class GlaurungFatherOfTheDragonsMonsterRace : MonsterRace
         new CauseCriticalWoundsMonsterSpell(),
         new ConfuseMonsterSpell(),
         new SummonDragonMonsterSpell());
-    public override char Character => 'D';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
     public override Colour Colour => Colour.Orange;
     public override string Name => "Glaurung, Father of the Dragons";
 

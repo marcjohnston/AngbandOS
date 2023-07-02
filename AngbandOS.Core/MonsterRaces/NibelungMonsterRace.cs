@@ -12,7 +12,7 @@ internal class NibelungMonsterRace : MonsterRace
 {
     protected NibelungMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'h';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
     public override Colour Colour => Colour.Silver;
     public override string Name => "Nibelung";
 

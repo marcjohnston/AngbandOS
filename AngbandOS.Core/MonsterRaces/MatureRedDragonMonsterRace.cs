@@ -16,7 +16,7 @@ internal class MatureRedDragonMonsterRace : MonsterRace
         new BreatheFireMonsterSpell(),
         new ConfuseMonsterSpell(),
         new ScareMonsterSpell());
-    public override char Character => 'd';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
     public override Colour Colour => Colour.Red;
     public override string Name => "Mature red dragon";
 

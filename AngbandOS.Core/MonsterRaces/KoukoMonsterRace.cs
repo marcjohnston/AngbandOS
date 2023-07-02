@@ -15,7 +15,7 @@ internal class KoukoMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new DrainManaMonsterSpell(),
         new ScareMonsterSpell());
-    public override char Character => 'W';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperWSymbol>();
     public override Colour Colour => Colour.BrightGreen;
     public override string Name => "Kouko";
 

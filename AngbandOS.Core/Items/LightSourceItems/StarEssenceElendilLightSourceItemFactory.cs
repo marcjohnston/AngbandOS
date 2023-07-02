@@ -12,7 +12,7 @@ internal class StarEssenceElendilLightSourceItemFactory : LightSourceItemFactory
 {
     private StarEssenceElendilLightSourceItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => '*';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<AsteriskSymbol>();
     public override Colour Colour => Colour.Yellow;
     public override string Name => "Star Essence Elendil";
 

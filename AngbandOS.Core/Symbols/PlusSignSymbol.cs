@@ -1,7 +1,7 @@
 [Serializable]
-internal class PlusSymbol : Symbol
+internal class PlusSignSymbol : Symbol
 {
-    private PlusSymbol(SaveGame saveGame) : base(saveGame) { }
+    private PlusSignSymbol(SaveGame saveGame) : base(saveGame) { }
     public override char Character => '+';
     public override string Name => "A closed door";
 }

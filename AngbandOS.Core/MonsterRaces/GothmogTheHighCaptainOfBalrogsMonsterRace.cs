@@ -22,7 +22,7 @@ internal class GothmogTheHighCaptainOfBalrogsMonsterRace : MonsterRace
         new SummonHiUndeadMonsterSpell(),
         new SummonKinMonsterSpell(),
         new SummonReaverMonsterSpell());
-    public override char Character => 'U';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperUSymbol>();
     public override Colour Colour => Colour.Red;
     public override string Name => "Gothmog, the High Captain of Balrogs";
 

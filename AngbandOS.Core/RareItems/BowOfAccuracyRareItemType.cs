@@ -11,7 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class BowOfAccuracyRareItem : RareItem
 {
     private BowOfAccuracyRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '}';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBracketSymbol>();
     public override Colour Colour => Colour.Brown;
     public override string Name => "Bow of Accuracy";
     public override int Cost => 1000;

@@ -22,7 +22,7 @@ internal class ShuddeMellMonsterRace : MonsterRace
         new HasteMonsterSpell(),
         new HealMonsterSpell(),
         new SummonCthuloidMonsterSpell());
-    public override char Character => 'X';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperXSymbol>();
     public override Colour Colour => Colour.Brown;
     public override string Name => "Shudde M'ell";
 

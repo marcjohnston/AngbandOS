@@ -14,7 +14,7 @@ internal class BlinkingDotMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BlinkMonsterSpell());
-    public override char Character => ',';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CommaSymbol>();
     public override Colour Colour => Colour.Grey;
     public override string Name => "Blinking dot";
 

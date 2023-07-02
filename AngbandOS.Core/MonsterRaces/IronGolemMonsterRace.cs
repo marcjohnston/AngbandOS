@@ -14,7 +14,7 @@ internal class IronGolemMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new SlowMonsterSpell());
-    public override char Character => 'g';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerGSymbol>();
     public override Colour Colour => Colour.BrightGrey;
     public override string Name => "Iron golem";
 

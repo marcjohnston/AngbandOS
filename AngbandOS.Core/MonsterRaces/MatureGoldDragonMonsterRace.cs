@@ -16,7 +16,7 @@ internal class MatureGoldDragonMonsterRace : MonsterRace
         new BreatheSoundMonsterSpell(),
         new ConfuseMonsterSpell(),
         new ScareMonsterSpell());
-    public override char Character => 'd';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
     public override Colour Colour => Colour.Yellow;
     public override string Name => "Mature gold dragon";
 

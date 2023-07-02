@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class MagmaVisTreasFloorTile : FloorTile
 {
     private MagmaVisTreasFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '*';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<AsteriskSymbol>();
     public override Colour Colour => Colour.BrightOrange;
     public override string Name => "MagmaVisTreas";
     public override AlterAction? AlterAction => new TunnelAlterAction();

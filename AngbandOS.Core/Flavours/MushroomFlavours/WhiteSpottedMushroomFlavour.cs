@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Flavours;
 internal class WhiteSpottedMushroomFlavour : MushroomFlavour
 {
     private WhiteSpottedMushroomFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => ',';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CommaSymbol>();
     public override Colour Colour => Colour.Silver;
     public override string Name => "White Spotted";
 }

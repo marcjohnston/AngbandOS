@@ -16,7 +16,7 @@ internal class TrollMonsterSelector : MonsterSelector
         {
             return false;
         }
-        if (rPtr.Character != 'T')
+        if (rPtr.Symbol.Character != 'T')
         {
             return false;
         }

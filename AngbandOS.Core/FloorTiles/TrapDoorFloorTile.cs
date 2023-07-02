@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class TrapDoorFloorTile : FloorTile
 {
     private TrapDoorFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '^';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CaretSymbol>();
     public override string Name => "TrapDoor";
     public override AlterAction? AlterAction => new DisarmAlterAction();
     public override string AppearAs => "TrapDoor";

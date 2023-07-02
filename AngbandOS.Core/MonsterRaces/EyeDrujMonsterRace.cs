@@ -17,7 +17,7 @@ internal class EyeDrujMonsterRace : MonsterRace
         new NetherBallMonsterSpell(),
         new NetherBoltMonsterSpell(),
         new SummonUndeadMonsterSpell());
-    public override char Character => 's';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerSSymbol>();
     public override Colour Colour => Colour.BrightGrey;
     public override string Name => "Eye druj";
 

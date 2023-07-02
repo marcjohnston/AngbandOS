@@ -25,7 +25,7 @@ internal class IpsissimusMonsterRace : MonsterRace
         new SummonUndeadMonsterSpell(),
         new TeleportToMonsterSpell(),
         new TeleportSelfMonsterSpell());
-    public override char Character => 'p';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override Colour Colour => Colour.Red;
     public override string Name => "Ipsissimus";
 

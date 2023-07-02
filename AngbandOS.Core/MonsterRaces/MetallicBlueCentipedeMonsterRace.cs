@@ -12,7 +12,7 @@ internal class MetallicBlueCentipedeMonsterRace : MonsterRace
 {
     protected MetallicBlueCentipedeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'c';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerCSymbol>();
     public override Colour Colour => Colour.BrightBlue;
     public override string Name => "Metallic blue centipede";
 

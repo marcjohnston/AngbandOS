@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class QuartzVisTreasFloorTile : FloorTile
 {
     private QuartzVisTreasFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '*';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<AsteriskSymbol>();
     public override Colour Colour => Colour.BrightRed;
     public override string Name => "QuartzVisTreas";
     public override AlterAction? AlterAction => new TunnelAlterAction();

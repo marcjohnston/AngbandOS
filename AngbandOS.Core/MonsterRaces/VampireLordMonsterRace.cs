@@ -22,7 +22,7 @@ internal class VampireLordMonsterRace : MonsterRace
         new NetherBoltMonsterSpell(),
         new ScareMonsterSpell(),
         new DarknessMonsterSpell());
-    public override char Character => 'V';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperVSymbol>();
     public override Colour Colour => Colour.Blue;
     public override string Name => "Vampire lord";
 

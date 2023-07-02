@@ -23,7 +23,7 @@ internal class SoftLeatherArmourOfTheKoboldChiefFixedArtifact : FixedArtifact
     }
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override char Character => '(';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenParenthesisSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "The Soft Leather Armour of the Kobold Chief";
     public override int Ac => 4;

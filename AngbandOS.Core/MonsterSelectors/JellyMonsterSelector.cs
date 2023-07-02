@@ -20,7 +20,7 @@ internal class JellyMonsterSelector : MonsterSelector
         {
             return false;
         }
-        if (!"ijm,".Contains(rPtr.Character.ToString()))
+        if (!"ijm,".Contains(rPtr.Symbol.Character.ToString()))
         {
             return false;
         }

@@ -14,7 +14,7 @@ internal class TimeHoundMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BreatheTimeMonsterSpell());
-    public override char Character => 'Z';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperZSymbol>();
     public override Colour Colour => Colour.BrightGreen;
     public override string Name => "Time hound";
 

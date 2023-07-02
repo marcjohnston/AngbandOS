@@ -14,7 +14,7 @@ internal class ChaosVortexMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BreatheChaosMonsterSpell());
-    public override char Character => 'v';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerVSymbol>();
     public override Colour Colour => Colour.Purple;
     public override string Name => "Chaos vortex";
 

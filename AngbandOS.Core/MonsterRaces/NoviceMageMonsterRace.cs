@@ -17,7 +17,7 @@ internal class NoviceMageMonsterRace : MonsterRace
         new ConfuseMonsterSpell(),
         new MagicMissileMonsterSpell(),
         new BlinkMonsterSpell());
-    public override char Character => 'p';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override Colour Colour => Colour.BrightRed;
     public override string Name => "Novice mage";
 

@@ -12,7 +12,7 @@ internal class TeleportationRingItemFactory : RingItemFactory
 {
     private TeleportationRingItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => '=';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<EqualSignSymbol>();
     public override string Name => "Teleportation";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

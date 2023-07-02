@@ -11,7 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class BootsOfStealthRareItem : RareItem
 {
     private BootsOfStealthRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => ']';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBraceSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Boots of Stealth";
     public override int Cost => 500;

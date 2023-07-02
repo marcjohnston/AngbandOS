@@ -17,7 +17,7 @@ internal class AncientBlackDragonMonsterRace : MonsterRace
         new BlindnessMonsterSpell(),
         new ConfuseMonsterSpell(),
         new ScareMonsterSpell());
-    public override char Character => 'D';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
     public override Colour Colour => Colour.Black;
     public override string Name => "Ancient black dragon";
 

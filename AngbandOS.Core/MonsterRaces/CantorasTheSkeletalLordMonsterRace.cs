@@ -23,7 +23,7 @@ internal class CantorasTheSkeletalLordMonsterRace : MonsterRace
         new WaterBallMonsterSpell(),
         new SummonHiUndeadMonsterSpell(),
         new TeleportToMonsterSpell());
-    public override char Character => 's';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerSSymbol>();
     public override Colour Colour => Colour.BrightBlue;
     public override string Name => "Cantoras, the Skeletal Lord";
 

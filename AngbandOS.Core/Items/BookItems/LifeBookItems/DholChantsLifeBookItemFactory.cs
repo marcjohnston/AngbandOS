@@ -12,7 +12,7 @@ internal class DholChantsLifeBookItemFactory : LifeBookItemFactory
 {
     private DholChantsLifeBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => '?';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<QuestionMarkSymbol>();
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "[Dhol Chants]";
 

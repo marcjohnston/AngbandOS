@@ -12,7 +12,7 @@ internal class EmptyBottleItemFactory : BottleItemFactory
 {
     private EmptyBottleItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => '!';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ExclamationPointSymbol>();
     public override string Name => "Empty Bottle";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

@@ -14,7 +14,7 @@ internal class DarkElvenWarriorMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new MagicMissileMonsterSpell());
-    public override char Character => 'h';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
     public override Colour Colour => Colour.Black;
     public override string Name => "Dark elven warrior";
 

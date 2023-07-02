@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class NothingFloorTile : FloorTile
 {
     private NothingFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => ' ';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<SpaceBarSymbol>();
     public override string Name => "Nothing";
     public override string AppearAs => "Nothing";
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.Miscellaneous;

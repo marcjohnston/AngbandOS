@@ -14,7 +14,7 @@ internal class GravityHoundMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BreatheGravityMonsterSpell());
-    public override char Character => 'Z';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperZSymbol>();
     public override Colour Colour => Colour.Turquoise;
     public override string Name => "Gravity hound";
 

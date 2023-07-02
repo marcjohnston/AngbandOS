@@ -16,7 +16,7 @@ internal class ChaosShapechangerMonsterRace : MonsterRace
         new ColdBoltMonsterSpell(),
         new ConfuseMonsterSpell(),
         new FireBoltMonsterSpell());
-    public override char Character => 'H';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperHSymbol>();
     public override Colour Colour => Colour.Purple;
     public override string Name => "Chaos shapechanger";
 

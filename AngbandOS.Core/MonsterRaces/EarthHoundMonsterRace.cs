@@ -14,7 +14,7 @@ internal class EarthHoundMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BreatheShardsMonsterSpell());
-    public override char Character => 'Z';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperZSymbol>();
     public override Colour Colour => Colour.Brown;
     public override string Name => "Earth hound";
 

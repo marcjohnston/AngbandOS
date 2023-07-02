@@ -13,7 +13,7 @@ internal class RodLightningBolts : RodItemFactory
     private RodLightningBolts(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override bool RequiresAiming => true;
-    public override char Character => '-';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<MinusSignSymbol>();
     public override string Name => "Lightning Bolts";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

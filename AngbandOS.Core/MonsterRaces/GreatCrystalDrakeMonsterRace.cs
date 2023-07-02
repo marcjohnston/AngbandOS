@@ -17,7 +17,7 @@ internal class GreatCrystalDrakeMonsterRace : MonsterRace
         new ConfuseMonsterSpell(),
         new ScareMonsterSpell(),
         new SlowMonsterSpell());
-    public override char Character => 'D';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
     public override Colour Colour => Colour.Diamond;
     public override string Name => "Great crystal drake";
 

@@ -30,7 +30,7 @@ internal class SetOfGauntletsWhiteSparkFixedArtifact : FixedArtifact, IFixedArti
     public string DescribeActivationEffect() => "lightning bolt (4d8) every 6+d6 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override char Character => ']';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBraceSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "The Set of Gauntlets 'White Spark'";
     public override int Ac => 2;

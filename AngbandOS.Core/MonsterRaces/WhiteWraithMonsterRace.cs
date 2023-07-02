@@ -16,7 +16,7 @@ internal class WhiteWraithMonsterRace : MonsterRace
         new CauseSeriousWoundsMonsterSpell(),
         new ScareMonsterSpell(),
         new DarknessMonsterSpell());
-    public override char Character => 'W';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperWSymbol>();
     public override string Name => "White wraith";
 
     public override int ArmourClass => 40;

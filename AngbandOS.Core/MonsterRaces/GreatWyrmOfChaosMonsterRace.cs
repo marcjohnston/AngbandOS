@@ -19,7 +19,7 @@ internal class GreatWyrmOfChaosMonsterRace : MonsterRace
         new ConfuseMonsterSpell(),
         new ScareMonsterSpell(),
         new SummonDragonMonsterSpell());
-    public override char Character => 'D';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
     public override Colour Colour => Colour.Purple;
     public override string Name => "Great Wyrm of Chaos";
 

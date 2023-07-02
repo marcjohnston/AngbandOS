@@ -17,7 +17,7 @@ internal class GreyWraithMonsterRace : MonsterRace
         new HoldMonsterSpell(),
         new ScareMonsterSpell(),
         new DarknessMonsterSpell());
-    public override char Character => 'W';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperWSymbol>();
     public override Colour Colour => Colour.BrightGrey;
     public override string Name => "Grey wraith";
 

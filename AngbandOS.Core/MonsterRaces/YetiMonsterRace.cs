@@ -12,7 +12,7 @@ internal class YetiMonsterRace : MonsterRace
 {
     protected YetiMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'Y';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperYSymbol>();
     public override string Name => "Yeti";
 
     public override bool Animal => true;

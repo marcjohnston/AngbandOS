@@ -14,7 +14,7 @@ internal class QuiverSlotMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new Arrow1D6MonsterSpell());
-    public override char Character => ',';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CommaSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Quiver slot";
 

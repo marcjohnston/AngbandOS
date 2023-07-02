@@ -16,7 +16,7 @@ internal class MatureBronzeDragonMonsterRace : MonsterRace
         new BreatheConfusionMonsterSpell(),
         new ConfuseMonsterSpell(),
         new ScareMonsterSpell());
-    public override char Character => 'd';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Mature bronze dragon";
 

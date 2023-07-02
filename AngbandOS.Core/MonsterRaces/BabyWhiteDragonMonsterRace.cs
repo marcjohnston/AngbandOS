@@ -14,7 +14,7 @@ internal class BabyWhiteDragonMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BreatheColdMonsterSpell());
-    public override char Character => 'd';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "Baby white dragon";
 

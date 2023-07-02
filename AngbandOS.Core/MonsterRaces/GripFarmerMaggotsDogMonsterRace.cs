@@ -12,7 +12,7 @@ internal class GripFarmerMaggotsDogMonsterRace : MonsterRace
 {
     protected GripFarmerMaggotsDogMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'C';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperCSymbol>();
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "Grip, Farmer Maggot's dog";
 

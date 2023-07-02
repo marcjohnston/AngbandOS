@@ -17,7 +17,7 @@ internal class GnomeMageMonsterRace : MonsterRace
         new BlinkMonsterSpell(),
         new DarknessMonsterSpell(),
         new SummonMonsterMonsterSpell());
-    public override char Character => 'h';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
     public override Colour Colour => Colour.BrightRed;
     public override string Name => "Gnome mage";
 

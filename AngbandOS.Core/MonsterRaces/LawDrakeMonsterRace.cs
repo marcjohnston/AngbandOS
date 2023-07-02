@@ -18,7 +18,7 @@ internal class LawDrakeMonsterRace : MonsterRace
         new ConfuseMonsterSpell(),
         new ScareMonsterSpell(),
         new SlowMonsterSpell());
-    public override char Character => 'd';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
     public override Colour Colour => Colour.Silver;
     public override string Name => "Law drake";
 

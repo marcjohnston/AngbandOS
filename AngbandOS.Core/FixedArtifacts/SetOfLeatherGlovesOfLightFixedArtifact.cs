@@ -30,7 +30,7 @@ internal class SetOfLeatherGlovesOfLightFixedArtifact : FixedArtifact, IFixedArt
     public string DescribeActivationEffect() => "magic missile (2d6) every 2 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override char Character => ']';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBraceSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "The Set of Leather Gloves of Light";
     public override int Ac => 1;

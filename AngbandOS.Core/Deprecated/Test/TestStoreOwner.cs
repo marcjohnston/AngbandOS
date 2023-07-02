@@ -44,7 +44,7 @@ internal class DbStore : Store
 
     private string _featureType;
     private StoreOwner[] _storeOwners;
-    private char _character;
+    private Symbol _symbol;
     private Colour _colour;
     public override string FeatureType => _featureType;
 
@@ -53,13 +53,13 @@ internal class DbStore : Store
     public override bool ItemMatches(Item item) => false;
 
     protected override StockStoreInventoryItem[] GetStoreTable() => null;
-    public override char Character => _character;
+    public override Symbol Symbol => _symbol;
     public override Colour Colour => _colour;
-    public DbStore(SaveGame saveGame, char character, Colour colour, string featureType, string storeOwner) : base(saveGame)
+    public DbStore(SaveGame saveGame, Symbol symbol, Colour colour, string featureType, string storeOwner) : base(saveGame)
     {
         _storeOwners = new StoreOwner[] { SaveGame.SingletonRepository.StoreOwners.Get(storeOwner) };
         _featureType = featureType;
-        _character = character;
+        _symbol = symbol;
         _colour = colour;
     }
 }

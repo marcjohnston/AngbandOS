@@ -17,7 +17,7 @@ internal class HoundOfTindalosMonsterRace : MonsterRace
         new BreatheTimeMonsterSpell(),
         new BlinkMonsterSpell(),
         new TeleportToMonsterSpell());
-    public override char Character => 'C';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperCSymbol>();
     public override Colour Colour => Colour.Chartreuse;
     public override string Name => "Hound of Tindalos";
 

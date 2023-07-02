@@ -14,7 +14,7 @@ internal class ManticoreMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new Arrow7D6MonsterSpell());
-    public override char Character => 'H';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperHSymbol>();
     public override Colour Colour => Colour.Orange;
     public override string Name => "Manticore";
 

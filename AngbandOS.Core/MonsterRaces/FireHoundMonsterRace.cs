@@ -14,7 +14,7 @@ internal class FireHoundMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BreatheFireMonsterSpell());
-    public override char Character => 'Z';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperZSymbol>();
     public override Colour Colour => Colour.Red;
     public override string Name => "Fire hound";
 

@@ -18,7 +18,7 @@ internal class ShadowDrakeMonsterRace : MonsterRace
         new SlowMonsterSpell(),
         new DarknessMonsterSpell(),
         new HasteMonsterSpell());
-    public override char Character => 'd';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
     public override Colour Colour => Colour.Black;
     public override string Name => "Shadow drake";
 

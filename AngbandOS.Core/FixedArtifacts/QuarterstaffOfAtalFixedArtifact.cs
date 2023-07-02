@@ -33,7 +33,7 @@ internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact, IFixedArtifactAc
     public string DescribeActivationEffect() => "probing, detection and full id  every 1000 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override char Character => '\\';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<BackSlashSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "The Quarterstaff of Atal";
     public override int Ac => 0;

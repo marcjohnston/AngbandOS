@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Vaults;
 internal class TheBankFromHellVault : Vault
 {
     private TheBankFromHellVault(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '#';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PoundSignSymbol>();
     public override string Name => "The Bank From Hell";
     public override int Category => 8;
     public override int Height => 20;

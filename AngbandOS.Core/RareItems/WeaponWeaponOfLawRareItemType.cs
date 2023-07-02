@@ -11,7 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class WeaponWeaponOfLawRareItem : RareItem
 {
     private WeaponWeaponOfLawRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '|';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "Weapon (Weapon of Law)";
     public override bool Con => true;

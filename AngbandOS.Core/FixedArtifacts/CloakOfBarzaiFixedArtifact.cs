@@ -30,7 +30,7 @@ internal class CloakOfBarzaiFixedArtifact : FixedArtifact, IFixedArtifactActivat
     public string DescribeActivationEffect() => "resistance (20+d20 turns) every 111 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override char Character => '(';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenParenthesisSymbol>();
     public override Colour Colour => Colour.Green;
     public override string Name => "The Cloak of Barzai";
     public override int Ac => 1;

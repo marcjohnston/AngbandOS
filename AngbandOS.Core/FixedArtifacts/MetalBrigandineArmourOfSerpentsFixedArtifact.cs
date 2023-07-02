@@ -23,7 +23,7 @@ internal class MetalBrigandineArmourOfSerpentsFixedArtifact : FixedArtifact
     }
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override char Character => '[';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenBraceSymbol>();
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Metal Brigandine Armour of Serpents";
     public override int Ac => 19;

@@ -19,7 +19,7 @@ internal class FthagghuaLordOfTheFireVampiresMonsterRace : MonsterRace
         new FireBoltMonsterSpell(),
         new ManaBoltMonsterSpell(),
         new TeleportToMonsterSpell());
-    public override char Character => 'X';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperXSymbol>();
     public override Colour Colour => Colour.BrightRed;
     public override string Name => "Fthagghua, Lord of the fire vampires";
 

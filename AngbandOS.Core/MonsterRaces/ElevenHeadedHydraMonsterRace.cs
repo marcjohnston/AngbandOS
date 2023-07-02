@@ -18,7 +18,7 @@ internal class ElevenHeadedHydraMonsterRace : MonsterRace
         new FireBoltMonsterSpell(),
         new PlasmaBoltMonsterSpell(),
         new ScareMonsterSpell());
-    public override char Character => 'M';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperMSymbol>();
     public override Colour Colour => Colour.Green;
     public override string Name => "11-headed hydra";
 

@@ -13,7 +13,7 @@ internal class RodProbing : RodItemFactory
     private RodProbing(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override bool RequiresAiming => false;
-    public override char Character => '-';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<MinusSignSymbol>();
     public override string Name => "Probing";
 
     public override int[] Chance => new int[] { 4, 0, 0, 0 };

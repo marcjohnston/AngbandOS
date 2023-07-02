@@ -11,7 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class AmmoOfHurtAnimalRareItem : RareItem
 {
     private AmmoOfHurtAnimalRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '{';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenBracketSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Ammo of Hurt Animal";
     public override int Cost => 25;

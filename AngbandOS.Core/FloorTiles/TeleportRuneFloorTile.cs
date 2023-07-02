@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class TeleportRuneFloorTile : FloorTile
 {
     private TeleportRuneFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '^';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CaretSymbol>();
     public override Colour Colour => Colour.Purple;
     public override string Name => "TeleportRune";
     public override AlterAction? AlterAction => new DisarmAlterAction();

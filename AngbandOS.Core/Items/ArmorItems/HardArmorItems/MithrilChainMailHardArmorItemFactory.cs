@@ -12,7 +12,7 @@ internal class MithrilChainMailHardArmorItemFactory : HardArmorItemFactory
 {
     private MithrilChainMailHardArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => '[';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenBraceSymbol>();
     public override Colour Colour => Colour.BrightBlue;
     public override string Name => "Mithril Chain Mail";
 

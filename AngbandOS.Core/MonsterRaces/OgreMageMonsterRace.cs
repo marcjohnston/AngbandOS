@@ -18,7 +18,7 @@ internal class OgreMageMonsterRace : MonsterRace
         new CreateTrapsMonsterSpell(),
         new HealMonsterSpell(),
         new SummonMonsterMonsterSpell());
-    public override char Character => 'O';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperOSymbol>();
     public override Colour Colour => Colour.Orange;
     public override string Name => "Ogre mage";
 

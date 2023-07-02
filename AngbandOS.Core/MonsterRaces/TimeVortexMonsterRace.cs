@@ -14,7 +14,7 @@ internal class TimeVortexMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BreatheTimeMonsterSpell());
-    public override char Character => 'v';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerVSymbol>();
     public override Colour Colour => Colour.BrightGreen;
     public override string Name => "Time vortex";
 

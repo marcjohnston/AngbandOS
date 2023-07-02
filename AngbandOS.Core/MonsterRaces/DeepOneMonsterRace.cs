@@ -18,7 +18,7 @@ internal class DeepOneMonsterRace : MonsterRace
         new MagicMissileMonsterSpell(),
         new ScareMonsterSpell(),
         new ForgetMonsterSpell());
-    public override char Character => 'h';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
     public override Colour Colour => Colour.Green;
     public override string Name => "Deep One";
 

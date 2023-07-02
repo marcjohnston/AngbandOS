@@ -14,7 +14,7 @@ internal class ShamblerMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BreatheLightningMonsterSpell());
-    public override char Character => 'E';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "Shambler";
 

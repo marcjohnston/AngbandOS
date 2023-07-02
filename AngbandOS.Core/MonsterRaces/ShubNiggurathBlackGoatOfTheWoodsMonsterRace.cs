@@ -27,7 +27,7 @@ internal class ShubNiggurathBlackGoatOfTheWoodsMonsterRace : MonsterRace
         new SummonHiUndeadMonsterSpell(),
         new SummonMonstersMonsterSpell(),
         new SummonUniqueMonsterSpell());
-    public override char Character => 'X';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperXSymbol>();
     public override Colour Colour => Colour.BrightGreen;
     public override string Name => "Shub-Niggurath, Black Goat of the Woods";
 

@@ -16,7 +16,7 @@ internal class ByakheeMonsterRace : MonsterRace
         new ConfuseMonsterSpell(),
         new FireBoltMonsterSpell(),
         new SummonDemonMonsterSpell());
-    public override char Character => 'B';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperBSymbol>();
     public override Colour Colour => Colour.Black;
     public override string Name => "Byakhee";
 

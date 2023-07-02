@@ -22,7 +22,7 @@ internal class MasterVampireMonsterRace : MonsterRace
         new DarknessMonsterSpell(),
         new ForgetMonsterSpell(),
         new TeleportToMonsterSpell());
-    public override char Character => 'V';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperVSymbol>();
     public override Colour Colour => Colour.Grey;
     public override string Name => "Master vampire";
 

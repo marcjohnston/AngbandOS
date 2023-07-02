@@ -30,7 +30,7 @@ internal class BeakedAxeOfTheodenFixedArtifact : FixedArtifact, IFixedArtifactAc
     public string DescribeActivationEffect() => "drain life (120) every 400 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override char Character => '/';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ForwardSlashSymbol>();
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Beaked Axe of Theoden";
     public override int Ac => 0;

@@ -12,7 +12,7 @@ internal class SkeletonHumanMonsterRace : MonsterRace
 {
     protected SkeletonHumanMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 's';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerSSymbol>();
     public override Colour Colour => Colour.BrightBeige;
     public override string Name => "Skeleton human";
 

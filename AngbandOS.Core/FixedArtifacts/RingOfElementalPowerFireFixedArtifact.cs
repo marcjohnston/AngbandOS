@@ -30,7 +30,7 @@ internal class RingOfElementalPowerFireFixedArtifact : FixedArtifact, IFixedArti
     public string DescribeActivationEffect() => "large fire ball (120) every 225+d225 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override char Character => '=';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<EqualSignSymbol>();
     public override string Name => "The Ring of Elemental Power (Fire)";
     public override int Ac => 0;
     public override bool Activate => true;

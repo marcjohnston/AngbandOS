@@ -16,7 +16,7 @@ internal class GhostMonsterRace : MonsterRace
         new BlindnessMonsterSpell(),
         new DrainManaMonsterSpell(),
         new HoldMonsterSpell());
-    public override char Character => 'G';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperGSymbol>();
     public override string Name => "Ghost";
 
     public override int ArmourClass => 30;

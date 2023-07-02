@@ -14,7 +14,7 @@ internal class FireVortexMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BreatheFireMonsterSpell());
-    public override char Character => 'v';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerVSymbol>();
     public override Colour Colour => Colour.Red;
     public override string Name => "Fire vortex";
 

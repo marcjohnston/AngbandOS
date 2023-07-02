@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class PathJunctionFloorTile : FloorTile
 {
     private PathJunctionFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '+';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PlusSignSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "PathJunction";
     public override string AppearAs => "PathJunction";

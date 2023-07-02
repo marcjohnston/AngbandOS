@@ -14,7 +14,7 @@ internal class EarthElementalMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new AcidBoltMonsterSpell());
-    public override char Character => 'E';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
     public override Colour Colour => Colour.Brown;
     public override string Name => "Earth elemental";
 

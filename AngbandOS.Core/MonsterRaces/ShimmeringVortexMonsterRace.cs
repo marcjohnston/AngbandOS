@@ -15,7 +15,7 @@ internal class ShimmeringVortexMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BreatheLightMonsterSpell(),
         new ShriekMonsterSpell());
-    public override char Character => 'v';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerVSymbol>();
     public override Colour Colour => Colour.Purple;
     public override string Name => "Shimmering vortex";
 

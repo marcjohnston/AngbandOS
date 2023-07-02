@@ -93,7 +93,7 @@ internal class RoomType5 : RoomType
                      saveGame.Difficulty + Program.Rng.DieRoll(5));
             if (Program.Rng.DieRoll(2) != 1 && saveGame.Difficulty >= 25 + Program.Rng.DieRoll(15))
             {
-                getMonNumHook = new SymbolMonsterSelector(saveGame.SingletonRepository.MonsterRaces[_templateRace].Character);
+                getMonNumHook = new SymbolMonsterSelector(saveGame.SingletonRepository.MonsterRaces[_templateRace].Symbol.Character);
             }
             else
             {

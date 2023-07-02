@@ -18,7 +18,7 @@ internal class WormtongueAgentOfSarumanMonsterRace : MonsterRace
         new SlowMonsterSpell(),
         new CreateTrapsMonsterSpell(),
         new HealMonsterSpell());
-    public override char Character => 'p';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override Colour Colour => Colour.Yellow;
     public override string Name => "Wormtongue, Agent of Saruman";
 

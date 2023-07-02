@@ -14,7 +14,7 @@ internal class BlackOozeMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new DrainManaMonsterSpell());
-    public override char Character => 'j';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerJSymbol>();
     public override Colour Colour => Colour.Grey;
     public override string Name => "Black ooze";
 

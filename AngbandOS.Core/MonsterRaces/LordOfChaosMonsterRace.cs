@@ -19,7 +19,7 @@ internal class LordOfChaosMonsterRace : MonsterRace
         new SummonDemonMonsterSpell(),
         new SummonHoundMonsterSpell(),
         new SummonSpiderMonsterSpell());
-    public override char Character => 'p';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override Colour Colour => Colour.Purple;
     public override string Name => "Lord of Chaos";
 

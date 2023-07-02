@@ -12,7 +12,7 @@ internal class TheStormbringerMonsterRace : MonsterRace
 {
     protected TheStormbringerMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => '|';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
     public override Colour Colour => Colour.Black;
     public override string Name => "The Stormbringer";
 

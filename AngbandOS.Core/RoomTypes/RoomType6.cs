@@ -104,7 +104,7 @@ internal class RoomType6 : RoomType
                 } while (saveGame.SingletonRepository.MonsterRaces[_templateRace].Unique ||
                          saveGame.SingletonRepository.MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
                          saveGame.Difficulty + Program.Rng.DieRoll(5));
-                getMonNumHook = new SymbolMonsterSelector(saveGame.SingletonRepository.MonsterRaces[_templateRace].Character);
+                getMonNumHook = new SymbolMonsterSelector(saveGame.SingletonRepository.MonsterRaces[_templateRace].Symbol.Character);
             }
             else
             {

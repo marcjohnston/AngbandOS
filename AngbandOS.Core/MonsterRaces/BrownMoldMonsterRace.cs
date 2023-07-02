@@ -12,7 +12,7 @@ internal class BrownMoldMonsterRace : MonsterRace
 {
     protected BrownMoldMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'm';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerMSymbol>();
     public override Colour Colour => Colour.Brown;
     public override string Name => "Brown mold";
 

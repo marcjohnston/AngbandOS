@@ -12,7 +12,7 @@ internal class RedJellyMonsterRace : MonsterRace
 {
     protected RedJellyMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'j';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerJSymbol>();
     public override Colour Colour => Colour.BrightRed;
     public override string Name => "Red jelly";
 

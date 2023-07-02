@@ -13,7 +13,7 @@ internal class AnimalRangerMonsterSelector : MonsterSelector
     public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
     {
         return rPtr.Animal &&
-                "abcflqrwBCIJKMRS".Contains(rPtr.Character.ToString()) &&
+                "abcflqrwBCIJKMRS".Contains(rPtr.Symbol.Character.ToString()) &&
                 !rPtr.Dragon &&
                 !rPtr.Evil &&
                 !rPtr.Undead &&

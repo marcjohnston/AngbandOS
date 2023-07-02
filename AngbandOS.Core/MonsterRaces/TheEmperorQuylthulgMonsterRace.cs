@@ -16,7 +16,7 @@ internal class TheEmperorQuylthulgMonsterRace : MonsterRace
         new BrainSmashMonsterSpell(),
         new SummonHiDragonMonsterSpell(),
         new SummonHiUndeadMonsterSpell());
-    public override char Character => 'Q';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperQSymbol>();
     public override Colour Colour => Colour.BrightPink;
     public override string Name => "The Emperor Quylthulg";
 

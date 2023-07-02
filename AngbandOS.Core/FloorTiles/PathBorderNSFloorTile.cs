@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class PathBorderNSFloorTile : FloorTile
 {
     private PathBorderNSFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '|';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "PathBorderNS";
     public override string AppearAs => "PathBorderNS";

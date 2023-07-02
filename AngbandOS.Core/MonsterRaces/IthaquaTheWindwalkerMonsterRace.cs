@@ -25,7 +25,7 @@ internal class IthaquaTheWindwalkerMonsterRace : MonsterRace
         new SummonCthuloidMonsterSpell(),
         new SummonHiUndeadMonsterSpell(),
         new SummonKinMonsterSpell());
-    public override char Character => 'X';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperXSymbol>();
     public override Colour Colour => Colour.BrightBlue;
     public override string Name => "Ithaqua the Windwalker";
 

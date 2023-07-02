@@ -9,7 +9,7 @@ namespace AngbandOS.Core.ItemClasses;
 
 /// <summary>
 /// Represents different variations (ItemType) of item categories (ItemCategory).  E.g. different types of food that belong to the food category.  Several of the
-/// properties are modifyable.
+/// properties are modifiable.
 /// </summary>
 [Serializable]
 
@@ -17,16 +17,10 @@ internal abstract class ItemFactory : IItemCharacteristics
 {
     public SaveGame SaveGame { get; }
 
-    ///// <summary>
-    ///// Returns an activation power object that handles the activation properties for the item, if the item can be activated; null, if the item cannot be activated.  Returns 
-    ///// null, by default.
-    ///// </summary>
-    //public virtual Activation? ActivationPower => null;
-
     public ItemFactory(SaveGame saveGame)
     {
         SaveGame = saveGame;
-        FlavorCharacter = Character;
+        FlavorSymbol = Symbol;
         FlavorColour = Colour;
     }
 
@@ -73,7 +67,7 @@ internal abstract class ItemFactory : IItemCharacteristics
     /// that have flavor may override this character and replace it with a different character from the flavor.
     /// </summary>
     [Obsolete("This property is available via the IFlavour.Flavour property.")]
-    public char FlavorCharacter;
+    public Symbol FlavorSymbol;
 
     /// <summary>
     /// Returns the color to be used for items of this type.  This color is initially set from the BaseItemCategory, but item categories
@@ -115,10 +109,10 @@ internal abstract class ItemFactory : IItemCharacteristics
     public bool Tried;
 
     /// <summary>
-    /// Returns the character to be used when displaying items of this category.  This character will be initially used to set the FlavorCharacter and item
+    /// Returns the symbol to use for rendering. This symbol will be initially used to set the FlavorCharacter and item
     /// categories that have flavor may change the FlavorCharacter based on the flavor.
     /// </summary>
-    public abstract char Character { get; }
+    public abstract Symbol Symbol { get; }
 
     /// <summary>
     /// Returns the color that items of this type should be rendered with.  This color will be initially used to set the FlavorColor and item categories

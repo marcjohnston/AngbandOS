@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class BlindGasFloorTile : FloorTile
 {
     private BlindGasFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '^';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CaretSymbol>();
     public override Colour Colour => Colour.Green;
     public override string Name => "BlindGas";
     public override AlterAction? AlterAction => new DisarmAlterAction();

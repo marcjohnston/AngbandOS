@@ -12,7 +12,7 @@ internal class BlackOgreMonsterRace : MonsterRace
 {
     protected BlackOgreMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'O';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperOSymbol>();
     public override Colour Colour => Colour.Black;
     public override string Name => "Black ogre";
 

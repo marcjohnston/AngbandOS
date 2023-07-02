@@ -18,7 +18,7 @@ internal class DarkElvenMageMonsterRace : MonsterRace
         new MagicMissileMonsterSpell(),
         new PoisonBallMonsterSpell(),
         new DarknessMonsterSpell());
-    public override char Character => 'h';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
     public override Colour Colour => Colour.BrightRed;
     public override string Name => "Dark elven mage";
 

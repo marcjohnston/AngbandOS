@@ -12,7 +12,7 @@ internal class CommonPrayerLifeBookItemFactory : LifeBookItemFactory
 {
     private CommonPrayerLifeBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => '?';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<QuestionMarkSymbol>();
     public override string Name => "[Book of Common Prayer]";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

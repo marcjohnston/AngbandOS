@@ -14,7 +14,7 @@ internal class FourHeadedHydraMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new ScareMonsterSpell());
-    public override char Character => 'M';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperMSymbol>();
     public override Colour Colour => Colour.Chartreuse;
     public override string Name => "4-headed hydra";
 

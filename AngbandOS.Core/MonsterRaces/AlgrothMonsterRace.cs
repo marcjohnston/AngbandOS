@@ -12,7 +12,7 @@ internal class AlgrothMonsterRace : MonsterRace
 {
     protected AlgrothMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'T';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperTSymbol>();
     public override Colour Colour => Colour.Grey;
     public override string Name => "Algroth";
 

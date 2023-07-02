@@ -12,7 +12,7 @@ internal class SeeInvisibleRingItemFactory : RingItemFactory
 {
     private SeeInvisibleRingItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => '=';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<EqualSignSymbol>();
     public override string Name => "See Invisible";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

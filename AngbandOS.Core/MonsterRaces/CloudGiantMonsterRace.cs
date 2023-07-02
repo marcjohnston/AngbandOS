@@ -12,7 +12,7 @@ internal class CloudGiantMonsterRace : MonsterRace
 {
     protected CloudGiantMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'P';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperPSymbol>();
     public override Colour Colour => Colour.BrightBlue;
     public override string Name => "Cloud giant";
 

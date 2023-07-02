@@ -12,7 +12,7 @@ internal class WhiteWormMassMonsterRace : MonsterRace
 {
     protected WhiteWormMassMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'w';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerWSymbol>();
     public override string Name => "White worm mass";
 
     public override bool Animal => true;

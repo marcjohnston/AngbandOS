@@ -27,7 +27,7 @@ internal class IronHelmSkullkeeperFixedArtifact : FixedArtifact, IFixedArtifactA
     public string DescribeActivationEffect() => "detection every 55+d55 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override char Character => ']';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBraceSymbol>();
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Iron Helm 'Skullkeeper'";
     public override int Ac => 5;

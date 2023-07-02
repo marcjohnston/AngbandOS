@@ -15,7 +15,7 @@ internal class MatureWhiteDragonMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BreatheColdMonsterSpell(),
         new ScareMonsterSpell());
-    public override char Character => 'd';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
     public override string Name => "Mature white dragon";
 
     public override int ArmourClass => 65;

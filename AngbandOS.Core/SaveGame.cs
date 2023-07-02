@@ -2198,7 +2198,7 @@ internal class SaveGame
                 IFlavour flavourFactory = (IFlavour)kPtr;
 
                 // Get the repository for the flavours.
-                IEnumerable<Flavour>? flavourRepository = flavourFactory.GetFlavourRepository();
+                IEnumerable<Flavour>? flavourRepository = flavourFactory.GetFlavorRepository();
 
                 // Check to see if the repository indicates that the flavours need to be assigned.
                 if (flavourRepository != null)
@@ -2227,11 +2227,11 @@ internal class SaveGame
                     Flavour flavour = flavourEnumerator.Current;
 
                     // Assign the flavour details.
-                    flavourFactory.Flavour = flavour;
+                    flavourFactory.Flavor = flavour;
                 }
 
-                kPtr.FlavorCharacter = flavourFactory.Flavour.Character;
-                kPtr.FlavorColour = flavourFactory.Flavour.Colour;
+                kPtr.FlavorSymbol = flavourFactory.Flavor.Symbol;
+                kPtr.FlavorColour = flavourFactory.Flavor.Colour;
             }
         }
     }
@@ -2645,7 +2645,7 @@ internal class SaveGame
                 {
                     int index = Program.Rng.RandomLessThan(SingletonRepository.ScrollFlavours.Count);
                     BaseScrollFlavour baseFlavour = SingletonRepository.ScrollFlavours[index];
-                    ScrollFlavour flavour = new ScrollFlavour(this, baseFlavour.Character, baseFlavour.Colour, name);
+                    ScrollFlavour flavour = new ScrollFlavour(this, baseFlavour.Symbol, baseFlavour.Colour, name);
                     ScrollFlavours.Add(flavour);
                     break;
                 }
@@ -4057,7 +4057,7 @@ internal class SaveGame
             {
                 continue;
             }
-            if (rPtr.Character != typ)
+            if (rPtr.Symbol.Character != typ)
             {
                 continue;
             }
@@ -6739,7 +6739,7 @@ internal class SaveGame
             {
                 continue;
             }
-            if (match.Contains(rPtr.Character.ToString()))
+            if (match.Contains(rPtr.Symbol.Character.ToString()))
             {
                 Level.RepairMonsters = true;
                 mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
@@ -8494,7 +8494,7 @@ internal class SaveGame
                     else if (martialArtsAttack.Effect == Constants.MaSlow)
                     {
                         if (!race.NeverMove ||
-                            "UjmeEv$,DdsbBFIJQSXclnw!=?".Contains(race.Character.ToString()))
+                            "UjmeEv$,DdsbBFIJQSXclnw!=?".Contains(race.Symbol.Character.ToString()))
                         {
                             MsgPrint($"You kick {monsterName} in the ankle.");
                             specialEffect = Constants.MaSlow;
@@ -8978,7 +8978,7 @@ internal class SaveGame
         item.ItemOptimize();
         string missileName = missile.Description(false, 3);
         Colour missileColour = missile.Factory.FlavorColour;
-        char missileCharacter = missile.Factory.FlavorCharacter;
+        char missileCharacter = missile.Factory.FlavorSymbol.Character;
         // Thrown distance is based on the weight of the missile
         int multiplier = 10 + (2 * (damageMultiplier - 1));
         int divider = missile.Weight > 10 ? missile.Weight : 10;
@@ -9054,7 +9054,7 @@ internal class SaveGame
                     string noteDies = " dies.";
                     if (race.Demon || race.Undead ||
                         race.Cthuloid || race.Stupid ||
-                        "Evg".Contains(race.Character.ToString()))
+                        "Evg".Contains(race.Symbol.Character.ToString()))
                     {
                         noteDies = " is destroyed.";
                     }
@@ -14854,7 +14854,7 @@ internal class SaveGame
         {
             living = false;
         }
-        if ("Egv".Contains(rPtr.Character.ToString()))
+        if ("Egv".Contains(rPtr.Symbol.Character.ToString()))
         {
             living = false;
         }
@@ -15762,7 +15762,7 @@ internal class SaveGame
                 if (item != null)
                 {
                     colour = item.Factory.FlavorColour;
-                    character = item.Factory.FlavorCharacter;
+                    character = item.Factory.FlavorSymbol.Character;
                 }
                 Screen.Print(colour, character, screenRow, screenCol + column);
                 column++;

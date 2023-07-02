@@ -25,7 +25,7 @@ internal class SorcererMonsterRace : MonsterRace
         new SummonMonsterMonsterSpell(),
         new SummonUndeadMonsterSpell(),
         new TeleportToMonsterSpell());
-    public override char Character => 'p';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override Colour Colour => Colour.Gold;
     public override string Name => "Sorcerer";
 

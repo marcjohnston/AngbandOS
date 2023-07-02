@@ -36,7 +36,7 @@ internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact, IFixedArtifactA
     }
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override char Character => ']';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBraceSymbol>();
     public override Colour Colour => Colour.Yellow;
     public override string Name => "The Golden Crown of the Sun";
     public override int Ac => 0;

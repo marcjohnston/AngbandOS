@@ -17,7 +17,7 @@ internal class CultistMonsterRace : MonsterRace
         new ScareMonsterSpell(),
         new HealMonsterSpell(),
         new SummonMonsterMonsterSpell());
-    public override char Character => 'p';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override Colour Colour => Colour.Turquoise;
     public override string Name => "Cultist";
 

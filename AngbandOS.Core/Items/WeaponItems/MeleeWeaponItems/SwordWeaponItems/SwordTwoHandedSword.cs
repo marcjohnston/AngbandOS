@@ -12,7 +12,7 @@ internal class SwordTwoHandedSword : SwordItemClass
 {
     private SwordTwoHandedSword(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => '|';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "Two-Handed Sword";
 

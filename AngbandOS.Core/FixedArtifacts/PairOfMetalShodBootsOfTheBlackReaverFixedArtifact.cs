@@ -23,7 +23,7 @@ internal class PairOfMetalShodBootsOfTheBlackReaverFixedArtifact : FixedArtifact
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
     }
-    public override char Character => ']';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBraceSymbol>();
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Pair of Metal Shod Boots of the Black Reaver";
     public override int Ac => 6;

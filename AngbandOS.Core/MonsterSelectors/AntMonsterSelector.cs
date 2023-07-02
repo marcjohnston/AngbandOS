@@ -12,6 +12,6 @@ internal class AntMonsterSelector : MonsterSelector
 {
     public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
     {
-        return rPtr.Character == 'a' && !rPtr.Unique;
+        return rPtr.Symbol.Character == 'a' && !rPtr.Unique;
     }
 }

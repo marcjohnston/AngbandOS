@@ -1840,7 +1840,7 @@ internal class Monster : IItemContainer
                 // Some non-living things are destroyed rather than dying
                 else if (Race.Demon || Race.Undead ||
                          Race.Cthuloid || Race.Stupid ||
-                         Race.Nonliving || "Evg".Contains(Race.Character.ToString()))
+                         Race.Nonliving || "Evg".Contains(Race.Symbol.Character.ToString()))
                 {
                     saveGame.MsgPrint($"{monsterName} is destroyed.");
                 }

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class WaterBorderFloorTile : FloorTile
 {
     private WaterBorderFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '~';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<TildeSymbol>();
     public override Colour Colour => Colour.BrightBlue;
     public override string Name => "WaterBorder";
     public override string AppearAs => "Water";

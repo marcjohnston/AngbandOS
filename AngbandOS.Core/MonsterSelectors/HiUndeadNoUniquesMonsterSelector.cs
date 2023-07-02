@@ -12,6 +12,6 @@ internal class HiUndeadNoUniquesMonsterSelector : MonsterSelector
 {
     public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
     {
-        return (rPtr.Character == 'L' || rPtr.Character == 'V' || rPtr.Character == 'W') && !rPtr.Unique;
+        return (rPtr.Symbol.Character == 'L' || rPtr.Symbol.Character == 'V' || rPtr.Symbol.Character == 'W') && !rPtr.Unique;
     }
 }

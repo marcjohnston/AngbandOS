@@ -24,7 +24,7 @@ internal class MasterLichMonsterRace : MonsterRace
         new BlinkMonsterSpell(),
         new SummonUndeadMonsterSpell(),
         new TeleportToMonsterSpell());
-    public override char Character => 'L';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperLSymbol>();
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "Master lich";
 

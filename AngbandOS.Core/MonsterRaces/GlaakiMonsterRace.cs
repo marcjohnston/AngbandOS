@@ -38,7 +38,7 @@ internal class GlaakiMonsterRace : MonsterRace
         new TeleportAwayMonsterSpell(),
         new TeleportToMonsterSpell(),
         new TeleportSelfMonsterSpell());
-    public override char Character => 'X';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperXSymbol>();
     public override string Name => "Glaaki";
 
     public override int ArmourClass => 100;

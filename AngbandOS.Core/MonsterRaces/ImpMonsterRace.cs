@@ -21,7 +21,7 @@ internal class ImpMonsterRace : MonsterRace
         new TeleportLevelMonsterSpell(),
         new TeleportToMonsterSpell(),
         new TeleportSelfMonsterSpell());
-    public override char Character => 'u';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerUSymbol>();
     public override Colour Colour => Colour.Red;
     public override string Name => "Imp";
 

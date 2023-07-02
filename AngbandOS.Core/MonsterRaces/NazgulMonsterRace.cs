@@ -17,7 +17,7 @@ internal class NazgulMonsterRace : MonsterRace
         new DrainManaMonsterSpell(),
         new HoldMonsterSpell(),
         new ScareMonsterSpell());
-    public override char Character => 'W';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperWSymbol>();
     public override Colour Colour => Colour.Black;
     public override string Name => "Nazgul";
 

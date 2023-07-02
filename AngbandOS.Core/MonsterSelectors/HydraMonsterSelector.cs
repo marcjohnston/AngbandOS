@@ -12,6 +12,6 @@ internal class HydraMonsterSelector : MonsterSelector
 {
     public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
     {
-        return rPtr.Character == 'M' && !rPtr.Unique;
+        return rPtr.Symbol.Character == 'M' && !rPtr.Unique;
     }
 }

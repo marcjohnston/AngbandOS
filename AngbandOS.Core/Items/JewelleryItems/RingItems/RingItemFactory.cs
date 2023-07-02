@@ -15,10 +15,10 @@ internal abstract class RingItemFactory : JewelleryItemFactory, IFlavour
     /// <summary>
     /// Returns the ring flavours repository because rings have flavours that need to be identified.
     /// </summary>
-    public IEnumerable<Flavour> GetFlavourRepository() => SaveGame.SingletonRepository.RingFlavours;
+    public IEnumerable<Flavour> GetFlavorRepository() => SaveGame.SingletonRepository.RingFlavours;
 
     /// <inheritdoc/>
-    public Flavour Flavour { get; set; }
+    public Flavour Flavor { get; set; }
 
     public override BaseInventorySlot BaseWieldSlot
     {

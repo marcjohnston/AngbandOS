@@ -18,7 +18,7 @@ internal class MightyHammerOfWorldsFixedArtifact : FixedArtifact
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override char Character => '\\';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<BackSlashSymbol>();
     public override Colour Colour => Colour.Black;
     public override string Name => "The Mighty Hammer of Worlds";
     public override int Ac => 0;

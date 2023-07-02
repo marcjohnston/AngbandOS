@@ -27,7 +27,7 @@ internal abstract class RodItem : Item
 
     public override string GetDescription(bool includeCountPrefix)
     {
-        string flavour = IdentStoreb ? "" : $"{FlavourFactory.Flavour.Name} ";
+        string flavour = IdentStoreb ? "" : $"{FlavourFactory.Flavor.Name} ";
         string ofName = IsFlavourAware() ? $" of {Factory.FriendlyName}" : "";
         string name = $"{flavour}{Pluralize("Rod", Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;

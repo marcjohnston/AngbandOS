@@ -12,7 +12,7 @@ internal class SoftLeatherSoftArmorItemFactory : SoftArmorItemClass
 {
     private SoftLeatherSoftArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => '(';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenParenthesisSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Soft Leather Armour";
 

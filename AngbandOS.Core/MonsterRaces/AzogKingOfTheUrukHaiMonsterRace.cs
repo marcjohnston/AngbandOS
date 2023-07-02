@@ -12,7 +12,7 @@ internal class AzogKingOfTheUrukHaiMonsterRace : MonsterRace
 {
     protected AzogKingOfTheUrukHaiMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'o';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerOSymbol>();
     public override Colour Colour => Colour.Red;
     public override string Name => "Azog, King of the Uruk-Hai";
 

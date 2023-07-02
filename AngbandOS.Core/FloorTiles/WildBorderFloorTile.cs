@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class WildBorderFloorTile : FloorTile
 {
     private WildBorderFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '·';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PeriodSymbol>();
     public override Colour Colour => Colour.BrightGreen;
     public override string Name => "WildBorder";
     public override string AppearAs => "Grass";

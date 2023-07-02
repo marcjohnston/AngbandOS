@@ -24,7 +24,7 @@ internal class GoatOfMendesMonsterRace : MonsterRace
         new ForgetMonsterSpell(),
         new SummonDemonMonsterSpell(),
         new SummonUndeadMonsterSpell());
-    public override char Character => 'q';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerQSymbol>();
     public override Colour Colour => Colour.Red;
     public override string Name => "Goat of Mendes";
 

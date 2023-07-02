@@ -14,7 +14,7 @@ internal class ColbranMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new LightningBoltMonsterSpell());
-    public override char Character => 'g';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerGSymbol>();
     public override Colour Colour => Colour.Blue;
     public override string Name => "Colbran";
 

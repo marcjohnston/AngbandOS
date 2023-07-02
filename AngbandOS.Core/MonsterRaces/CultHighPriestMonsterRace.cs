@@ -21,7 +21,7 @@ internal class CultHighPriestMonsterRace : MonsterRace
         new SummonCthuloidMonsterSpell(),
         new SummonMonstersMonsterSpell(),
         new SummonUndeadMonsterSpell());
-    public override char Character => 'p';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override Colour Colour => Colour.Diamond;
     public override string Name => "Cult high priest";
 

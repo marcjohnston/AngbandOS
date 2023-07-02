@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class PoisonPitFloorTile : FloorTile
 {
     private PoisonPitFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '^';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CaretSymbol>();
     public override Colour Colour => Colour.Grey;
     public override string Name => "PoisonPit";
     public override AlterAction? AlterAction => new DisarmAlterAction();

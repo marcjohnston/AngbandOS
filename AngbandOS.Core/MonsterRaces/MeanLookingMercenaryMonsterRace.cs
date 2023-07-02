@@ -12,7 +12,7 @@ internal class MeanLookingMercenaryMonsterRace : MonsterRace
 {
     protected MeanLookingMercenaryMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 't';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerTSymbol>();
     public override Colour Colour => Colour.BrightRed;
     public override string Name => "Mean looking mercenary";
 

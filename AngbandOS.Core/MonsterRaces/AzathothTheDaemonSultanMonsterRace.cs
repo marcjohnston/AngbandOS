@@ -30,7 +30,7 @@ internal class AzathothTheDaemonSultanMonsterRace : MonsterRace
         new SummonMonstersMonsterSpell(),
         new SummonReaverMonsterSpell(),
         new SummonUniqueMonsterSpell());
-    public override char Character => 'X';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperXSymbol>();
     public override Colour Colour => Colour.Pink;
     public override string Name => "Azathoth, The Daemon Sultan";
 

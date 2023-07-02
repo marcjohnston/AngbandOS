@@ -12,7 +12,7 @@ internal class GorbagTheOrcCaptainMonsterRace : MonsterRace
 {
     protected GorbagTheOrcCaptainMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'o';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerOSymbol>();
     public override Colour Colour => Colour.Orange;
     public override string Name => "Gorbag, the Orc Captain";
 

@@ -16,7 +16,7 @@ internal class GreaterRottingQuylthulgMonsterRace : MonsterRace
         new BlinkMonsterSpell(),
         new SummonHiUndeadMonsterSpell(),
         new TeleportToMonsterSpell());
-    public override char Character => 'Q';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperQSymbol>();
     public override Colour Colour => Colour.Brown;
     public override string Name => "Greater rotting quylthulg";
 

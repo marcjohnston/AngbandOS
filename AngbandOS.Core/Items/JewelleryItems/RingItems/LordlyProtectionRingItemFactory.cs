@@ -12,7 +12,7 @@ internal class LordlyProtectionRingItemFactory : RingItemFactory
 {
     private LordlyProtectionRingItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => '=';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<EqualSignSymbol>();
     public override string Name => "Lordly Protection";
 
     public override int[] Chance => new int[] { 5, 0, 0, 0 };

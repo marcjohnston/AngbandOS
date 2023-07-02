@@ -12,7 +12,7 @@ internal class NightMareMonsterRace : MonsterRace
 {
     protected NightMareMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'q';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerQSymbol>();
     public override Colour Colour => Colour.Black;
     public override string Name => "Night mare";
 

@@ -8,18 +8,18 @@
 namespace AngbandOS.Core.Flavours;
 
 /// <summary>
-/// Represents the interface an item factory needs to implement for the item to have a flavour.
+/// Represents the interface an item factory needs to implement for the item to have a flavor.
 /// </summary>
 internal interface IFlavour
 {
     /// <summary>
-    /// Returns the repository to use for the issuance of the flavours or null, if the factory shouldn't be issued a flavour.  Null is returned
-    /// when an item has a predefined flavour.  Apple juice, water and slime-mold item factories use pre-defined flavours. 
+    /// Returns the repository to use for the issuance of the flavors or null, if the factory shouldn't be issued a flavor.  Null is returned
+    /// when an item has a predefined flavor.  Apple juice, water and slime-mold item factories use pre-defined flavors. 
     /// </summary>
-    IEnumerable<Flavour>? GetFlavourRepository();
+    IEnumerable<Flavour>? GetFlavorRepository();
 
     /// <summary>
-    /// Returns the flavour that was issued to the item factory.
+    /// Returns the flavor that was issued to the item factory.
     /// </summary>
-    Flavour Flavour { get; set; }
+    Flavour Flavor { get; set; }
 }

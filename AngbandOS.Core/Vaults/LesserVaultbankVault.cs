@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.Vaults;
 
 [Serializable]
-internal class LesserVaultbankVault : Vault
+internal class LesserVaultBankVault : Vault
 {
-    private LesserVaultbankVault(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '#';
+    private LesserVaultBankVault(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PoundSignSymbol>();
     public override string Name => "Lesser vault (bank)";
     public override int Category => 7;
     public override int Height => 9;

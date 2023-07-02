@@ -16,7 +16,7 @@ internal class MimeTheNibelungMonsterRace : MonsterRace
         new FireBoltMonsterSpell(),
         new HasteMonsterSpell(),
         new HealMonsterSpell());
-    public override char Character => 'h';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
     public override Colour Colour => Colour.Brown;
     public override string Name => "Mime, the Nibelung";
 

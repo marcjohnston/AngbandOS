@@ -13,7 +13,7 @@ internal class GreenDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
     private GreenDragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override string? DescribeActivationEffect => "breathe poison gas (150) every 450+d450 turns";
-    public override char Character => '[';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenBraceSymbol>();
     public override Colour Colour => Colour.Green;
     public override string Name => "Green Dragon Scale Mail";
 

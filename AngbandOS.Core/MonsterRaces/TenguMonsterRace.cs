@@ -17,7 +17,7 @@ internal class TenguMonsterRace : MonsterRace
         new TeleportAwayMonsterSpell(),
         new TeleportToMonsterSpell(),
         new TeleportSelfMonsterSpell());
-    public override char Character => 'u';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerUSymbol>();
     public override Colour Colour => Colour.Blue;
     public override string Name => "Tengu";
 

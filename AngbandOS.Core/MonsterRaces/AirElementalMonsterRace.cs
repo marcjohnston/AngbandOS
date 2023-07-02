@@ -14,7 +14,7 @@ internal class AirElementalMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new LightningBoltMonsterSpell());
-    public override char Character => 'E';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
     public override Colour Colour => Colour.BrightBlue;
     public override string Name => "Air elemental";
 

@@ -49,7 +49,11 @@ internal abstract class FixedArtifact : IItemCharacteristics
     /// </summary>
     public virtual int VorpalExtraAttacks1InChance => 4;
 
-    public abstract char Character { get; }
+    /// <summary>
+    /// Returns the symbol to use for rendering.
+    /// </summary>
+    public abstract Symbol Symbol { get; }
+
     public virtual Colour Colour => Colour.White;
     public abstract string Name { get; }
 

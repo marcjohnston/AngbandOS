@@ -17,7 +17,11 @@ internal abstract class FloorTile : ISingletonDictionary<string>
     }
 
     public string GetKey => Name;
-    public abstract char Character { get; }
+    /// <summary>
+    /// Returns the symbol to use for rendering.
+    /// </summary>
+    public abstract Symbol Symbol { get; }
+
     public virtual Colour Colour => Colour.White;
     public abstract string Name { get; }
 

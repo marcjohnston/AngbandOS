@@ -21,7 +21,7 @@ internal class DreadmasterMonsterRace : MonsterRace
         new NetherBoltMonsterSpell(),
         new SummonUndeadMonsterSpell(),
         new TeleportLevelMonsterSpell());
-    public override char Character => 'G';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperGSymbol>();
     public override Colour Colour => Colour.Orange;
     public override string Name => "Dreadmaster";
 

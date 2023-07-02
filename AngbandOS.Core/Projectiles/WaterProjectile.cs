@@ -27,7 +27,7 @@ internal class WaterProjectile : Projectile
         {
             obvious = true;
         }
-        if (rPtr.Character == 'E' && (name.StartsWith("W") || rPtr.Name.Contains("Unmaker")))
+        if (rPtr.Symbol.Character == 'E' && (name.StartsWith("W") || rPtr.Name.Contains("Unmaker")))
         {
             note = " is immune.";
             dam = 0;

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class YellowSignFloorTile : FloorTile
 {
     private YellowSignFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => ';';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<SemiColonSymbol>();
     public override Colour Colour => Colour.BrightYellow;
     public override string Name => "YellowSign";
     public override string AppearAs => "YellowSign";

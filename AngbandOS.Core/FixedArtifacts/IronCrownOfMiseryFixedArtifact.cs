@@ -23,7 +23,7 @@ internal class IronCrownOfMiseryFixedArtifact : FixedArtifact
         item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
         item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
     }
-    public override char Character => ']';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBraceSymbol>();
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Iron Crown of Misery";
     public override int Ac => 0;

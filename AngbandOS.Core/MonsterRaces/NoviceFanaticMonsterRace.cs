@@ -15,7 +15,7 @@ internal class NoviceFanaticMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new CauseLightWoundsMonsterSpell(),
         new ScareMonsterSpell());
-    public override char Character => 'p';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override string Name => "Novice fanatic";
 
     public override int ArmourClass => 16;

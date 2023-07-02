@@ -12,7 +12,7 @@ internal class GridBugMonsterRace : MonsterRace
 {
     protected GridBugMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'I';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperISymbol>();
     public override Colour Colour => Colour.BrightPurple;
     public override string Name => "Grid bug";
 

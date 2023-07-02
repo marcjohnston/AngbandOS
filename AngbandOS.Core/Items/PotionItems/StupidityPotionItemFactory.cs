@@ -12,7 +12,7 @@ internal class StupidityPotionItemFactory : PotionItemFactory
 {
     private StupidityPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => '!';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ExclamationPointSymbol>();
     public override string Name => "Stupidity";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

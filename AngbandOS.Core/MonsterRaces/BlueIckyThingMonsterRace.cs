@@ -16,7 +16,7 @@ internal class BlueIckyThingMonsterRace : MonsterRace
         new BlindnessMonsterSpell(),
         new ConfuseMonsterSpell(),
         new ScareMonsterSpell());
-    public override char Character => 'i';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerISymbol>();
     public override Colour Colour => Colour.Blue;
     public override string Name => "Blue icky thing";
 

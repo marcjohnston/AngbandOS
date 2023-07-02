@@ -12,7 +12,7 @@ internal class GapingMawMonsterRace : MonsterRace
 {
     protected GapingMawMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => '·';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PeriodSymbol>();
     public override string Name => "Gaping Maw";
 
     public override int ArmourClass => 14;

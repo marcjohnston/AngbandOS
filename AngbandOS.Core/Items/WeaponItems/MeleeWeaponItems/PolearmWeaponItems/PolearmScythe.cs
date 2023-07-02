@@ -12,7 +12,7 @@ internal class PolearmScythe : PolearmItemClass
 {
     private PolearmScythe(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => '/';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ForwardSlashSymbol>();
     public override Colour Colour => Colour.Grey;
     public override string Name => "Scythe";
 

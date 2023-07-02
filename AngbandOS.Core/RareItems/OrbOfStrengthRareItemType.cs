@@ -11,7 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class OrbOfStrengthRareItem : RareItem
 {
     private OrbOfStrengthRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '~';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<TildeSymbol>();
     public override Colour Colour => Colour.Purple;
     public override string Name => "Orb of Strength";
     public override int Cost => 1000;

@@ -12,7 +12,7 @@ internal class SasquatchMonsterRace : MonsterRace
 {
     protected SasquatchMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'Y';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperYSymbol>();
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "Sasquatch";
 

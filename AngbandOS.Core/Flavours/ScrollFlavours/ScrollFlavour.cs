@@ -10,16 +10,16 @@ namespace AngbandOS.Core.Flavours;
 [Serializable]
 internal class ScrollFlavour : Flavour
 {
-    private readonly char _character;
+    private readonly Symbol _symbol;
     private readonly Colour _colour;
     private readonly string _name;
 
-    public override char Character => _character;
+    public override Symbol Symbol => _symbol;
     public override Colour Colour => _colour;
     public override string Name => _name;
-    public ScrollFlavour(SaveGame saveGame, char character, Colour color, string Name) : base(saveGame)
+    public ScrollFlavour(SaveGame saveGame, Symbol symbol, Colour color, string Name) : base(saveGame)
     {
-        _character = character;
+        _symbol = symbol;
         _colour = color;
         _name = Name;
     }

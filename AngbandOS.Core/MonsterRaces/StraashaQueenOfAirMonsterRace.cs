@@ -16,7 +16,7 @@ internal class StraashaQueenOfAirMonsterRace : MonsterRace
         new ColdBallMonsterSpell(),
         new LightningBallMonsterSpell(),
         new LightningBoltMonsterSpell());
-    public override char Character => 'E';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
     public override Colour Colour => Colour.BrightBlue;
     public override string Name => "Straasha, Queen of Air";
 

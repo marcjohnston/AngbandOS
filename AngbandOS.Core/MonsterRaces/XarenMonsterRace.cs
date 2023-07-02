@@ -12,7 +12,7 @@ internal class XarenMonsterRace : MonsterRace
 {
     protected XarenMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'x';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerXSymbol>();
     public override Colour Colour => Colour.Yellow;
     public override string Name => "Xaren";
 

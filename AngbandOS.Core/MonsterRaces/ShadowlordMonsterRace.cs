@@ -25,7 +25,7 @@ internal class ShadowlordMonsterRace : MonsterRace
         new SummonUndeadMonsterSpell(),
         new TeleportToMonsterSpell(),
         new TeleportSelfMonsterSpell());
-    public override char Character => 'G';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperGSymbol>();
     public override Colour Colour => Colour.Blue;
     public override string Name => "Shadowlord";
 

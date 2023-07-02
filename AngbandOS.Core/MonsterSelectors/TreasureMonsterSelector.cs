@@ -16,8 +16,7 @@ internal class TreasureMonsterSelector : MonsterSelector
         {
             return false;
         }
-        if (!(rPtr.Character == '!' || rPtr.Character == '|' || rPtr.Character == '$' || rPtr.Character == '?' ||
-              rPtr.Character == '='))
+        if (!(rPtr.Symbol.Character == '!' || rPtr.Symbol.Character == '|' || rPtr.Symbol.Character == '$' || rPtr.Symbol.Character == '?' || rPtr.Symbol.Character == '='))
         {
             return false;
         }

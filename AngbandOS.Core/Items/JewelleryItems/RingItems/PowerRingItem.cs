@@ -17,7 +17,7 @@ internal class PowerRingItem : RingItem
         {
             return base.GetDescription(includeCountPrefix);
         }
-        string flavour = IdentStoreb ? "" : $"{FlavourFactory.Flavour.Name} ";
+        string flavour = IdentStoreb ? "" : $"{FlavourFactory.Flavor.Name} ";
         if (!IsFlavourAware())
         {
             flavour = "Plain Gold ";

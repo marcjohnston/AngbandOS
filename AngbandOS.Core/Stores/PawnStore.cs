@@ -39,7 +39,7 @@ internal class PawnStore : Store
 
     public override string FeatureType => "Pawnbrokers";
     public override Colour Colour => Colour.Turquoise;
-    public override char Character => '0';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<NumberZeroSymbol>();
 
     public override bool ItemMatches(Item item)
     {

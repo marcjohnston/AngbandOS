@@ -21,7 +21,7 @@ internal class NightwingMonsterRace : MonsterRace
         new NetherBoltMonsterSpell(),
         new ScareMonsterSpell(),
         new SummonUndeadMonsterSpell());
-    public override char Character => 'z';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerZSymbol>();
     public override Colour Colour => Colour.Black;
     public override string Name => "Nightwing";
 

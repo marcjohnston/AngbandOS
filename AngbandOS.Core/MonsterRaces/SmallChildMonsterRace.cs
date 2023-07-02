@@ -12,7 +12,7 @@ internal class SmallChildMonsterRace : MonsterRace
 {
     protected SmallChildMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 't';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerTSymbol>();
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "Small child";
 

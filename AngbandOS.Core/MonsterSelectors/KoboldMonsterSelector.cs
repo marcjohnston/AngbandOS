@@ -12,6 +12,6 @@ internal class KoboldMonsterSelector : MonsterSelector
 {
     public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
     {
-        return rPtr.Character == 'k' && !rPtr.Unique;
+        return rPtr.Symbol.Character == 'k' && !rPtr.Unique;
     }
 }

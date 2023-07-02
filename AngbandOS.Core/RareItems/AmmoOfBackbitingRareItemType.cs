@@ -11,7 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class AmmoOfBackbitingRareItem : RareItem
 {
     private AmmoOfBackbitingRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '{';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenBracketSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Ammo of Backbiting";
     public override int Cost => 0;

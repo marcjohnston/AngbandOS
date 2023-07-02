@@ -23,7 +23,7 @@ internal class RingMimicMonsterRace : MonsterRace
         new ScareMonsterSpell(),
         new ForgetMonsterSpell(),
         new SummonMonsterMonsterSpell());
-    public override char Character => '=';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<EqualSignSymbol>();
     public override Colour Colour => Colour.Gold;
     public override string Name => "Ring mimic";
 

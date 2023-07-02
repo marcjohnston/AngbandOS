@@ -12,7 +12,7 @@ internal class ShieldLargeLeatherShield : ShieldItemClass
 {
     private ShieldLargeLeatherShield(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => ')';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseParenthesisSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Large Leather Shield";
 

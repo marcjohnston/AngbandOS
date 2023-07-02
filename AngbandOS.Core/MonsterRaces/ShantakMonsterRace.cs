@@ -15,7 +15,7 @@ internal class ShantakMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new ScareMonsterSpell(),
         new HasteMonsterSpell());
-    public override char Character => 'B';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperBSymbol>();
     public override Colour Colour => Colour.Yellow;
     public override string Name => "Shantak";
 

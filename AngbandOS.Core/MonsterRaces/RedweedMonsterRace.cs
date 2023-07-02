@@ -14,7 +14,7 @@ internal class RedweedMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BlinkMonsterSpell());
-    public override char Character => 'm';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerMSymbol>();
     public override Colour Colour => Colour.BrightRed;
     public override string Name => "Redweed";
 

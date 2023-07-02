@@ -19,7 +19,7 @@ internal class DarkElvenDemonologistMonsterRace : MonsterRace
         new MagicMissileMonsterSpell(),
         new DarknessMonsterSpell(),
         new HealMonsterSpell());
-    public override char Character => 'h';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
     public override Colour Colour => Colour.Red;
     public override string Name => "Dark elven demonologist";
 

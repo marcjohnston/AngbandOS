@@ -12,7 +12,7 @@ internal class AvatarOfNyarlathotepMonsterRace : MonsterRace
 {
     protected AvatarOfNyarlathotepMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'p';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override Colour Colour => Colour.BrightRed;
     public override string Name => "Avatar of Nyarlathotep";
 

@@ -12,7 +12,7 @@ internal class FoolhardyAdolescentMonsterRace : MonsterRace
 {
     protected FoolhardyAdolescentMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 't';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerTSymbol>();
     public override Colour Colour => Colour.Blue;
     public override string Name => "Foolhardy adolescent";
 

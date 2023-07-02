@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class DownStairFloorTile : FloorTile
 {
     private DownStairFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '>';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<GreaterThanSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "DownStair";
     public override string AppearAs => "DownStair";

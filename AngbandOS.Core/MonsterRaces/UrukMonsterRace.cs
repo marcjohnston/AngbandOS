@@ -14,7 +14,7 @@ internal class UrukMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new Arrow1D6MonsterSpell());
-    public override char Character => 'o';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerOSymbol>();
     public override string Name => "Uruk";
 
     public override int ArmourClass => 50;

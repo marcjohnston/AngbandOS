@@ -2026,7 +2026,7 @@ internal class Player
                     if (oPtr.Factory != null)
                     {
                         // Apply flavour visuals
-                        consoleRow["flavour"] = new ConsoleChar(oPtr.Factory.FlavorColour, oPtr.Factory.FlavorCharacter);
+                        consoleRow["flavour"] = new ConsoleChar(oPtr.Factory.FlavorColour, oPtr.Factory.FlavorSymbol.Character);
                     }
                     else
                     {

@@ -18,7 +18,7 @@ internal class DrolemMonsterRace : MonsterRace
         new BlindnessMonsterSpell(),
         new ConfuseMonsterSpell(),
         new SlowMonsterSpell());
-    public override char Character => 'g';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerGSymbol>();
     public override Colour Colour => Colour.Green;
     public override string Name => "Drolem";
 

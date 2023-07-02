@@ -12,7 +12,7 @@ internal class GolfimbulTheHillOrcChiefMonsterRace : MonsterRace
 {
     protected GolfimbulTheHillOrcChiefMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'o';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerOSymbol>();
     public override Colour Colour => Colour.Copper;
     public override string Name => "Golfimbul, the Hill Orc Chief";
 

@@ -15,7 +15,7 @@ internal class YoungGreenDragonMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BreathePoisonMonsterSpell(),
         new ScareMonsterSpell());
-    public override char Character => 'd';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
     public override Colour Colour => Colour.Green;
     public override string Name => "Young green dragon";
 

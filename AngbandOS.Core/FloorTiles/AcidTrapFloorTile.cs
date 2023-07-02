@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class AcidTrapFloorTile : FloorTile
 {
     private AcidTrapFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '^';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CaretSymbol>();
     public override Colour Colour => Colour.Brown;
     public override string Name => "AcidTrap";
     public override AlterAction? AlterAction => new DisarmAlterAction();

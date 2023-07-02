@@ -21,7 +21,7 @@ internal class CultLeaderMonsterRace : MonsterRace
         new SummonCthuloidMonsterSpell(),
         new SummonMonsterMonsterSpell(),
         new SummonUndeadMonsterSpell());
-    public override char Character => 'p';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override Colour Colour => Colour.BrightTurquoise;
     public override string Name => "Cult leader";
 

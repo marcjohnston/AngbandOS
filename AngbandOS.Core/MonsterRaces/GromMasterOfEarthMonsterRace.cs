@@ -15,7 +15,7 @@ internal class GromMasterOfEarthMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new AcidBallMonsterSpell(),
         new AcidBoltMonsterSpell());
-    public override char Character => 'E';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
     public override Colour Colour => Colour.Brown;
     public override string Name => "Grom, Master of Earth";
 

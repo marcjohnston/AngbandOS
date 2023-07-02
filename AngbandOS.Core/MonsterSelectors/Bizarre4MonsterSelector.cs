@@ -12,6 +12,6 @@ internal class Bizarre4MonsterSelector : MonsterSelector
 {
     public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
     {
-        return rPtr.Character == 'v' && !rPtr.Unique;
+        return rPtr.Symbol.Character == 'v' && !rPtr.Unique;
     }
 }

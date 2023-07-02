@@ -32,7 +32,7 @@ internal class MithrilChainMailOfTheVampireHunterFixedArtifact : FixedArtifact, 
     public string DescribeActivationEffect() => "heal (777), curing and heroism every 300 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override char Character => '[';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenBraceSymbol>();
     public override Colour Colour => Colour.BrightBlue;
     public override string Name => "The Mithril Chain Mail of the Vampire Hunter";
     public override int Ac => 28;

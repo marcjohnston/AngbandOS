@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class InvisFloorTile : FloorTile
 {
     private InvisFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '·';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PeriodSymbol>();
     public override string Name => "Invis";
     public override string AppearAs => "Invis";
     public override FloorTileTypeCategory Category => FloorTileTypeCategory.UnidentifiedTrap;

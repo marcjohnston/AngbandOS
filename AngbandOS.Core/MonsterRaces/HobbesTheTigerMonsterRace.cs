@@ -12,7 +12,7 @@ internal class HobbesTheTigerMonsterRace : MonsterRace
 {
     protected HobbesTheTigerMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'f';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerFSymbol>();
     public override Colour Colour => Colour.BrightYellow;
     public override string Name => "Hobbes the Tiger";
 

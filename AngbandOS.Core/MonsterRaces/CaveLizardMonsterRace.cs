@@ -12,7 +12,7 @@ internal class CaveLizardMonsterRace : MonsterRace
 {
     protected CaveLizardMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'R';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperRSymbol>();
     public override Colour Colour => Colour.Brown;
     public override string Name => "Cave lizard";
 

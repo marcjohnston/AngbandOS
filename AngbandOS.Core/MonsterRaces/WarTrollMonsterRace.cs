@@ -12,7 +12,7 @@ internal class WarTrollMonsterRace : MonsterRace
 {
     protected WarTrollMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'T';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperTSymbol>();
     public override Colour Colour => Colour.Red;
     public override string Name => "War troll";
 

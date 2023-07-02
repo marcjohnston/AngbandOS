@@ -20,7 +20,7 @@ internal class ShamanMonsterRace : MonsterRace
         new SlowMonsterSpell(),
         new BlinkMonsterSpell(),
         new HasteMonsterSpell());
-    public override char Character => 'p';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override Colour Colour => Colour.Blue;
     public override string Name => "Shaman";
 

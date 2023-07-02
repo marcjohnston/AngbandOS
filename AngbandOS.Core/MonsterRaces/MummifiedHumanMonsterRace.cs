@@ -12,7 +12,7 @@ internal class MummifiedHumanMonsterRace : MonsterRace
 {
     protected MummifiedHumanMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'z';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerZSymbol>();
     public override Colour Colour => Colour.Beige;
     public override string Name => "Mummified human";
 

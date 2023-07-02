@@ -15,7 +15,7 @@ internal class CryptCreepMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new CauseLightWoundsMonsterSpell(),
         new SummonUndeadMonsterSpell());
-    public override char Character => 's';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerSSymbol>();
     public override Colour Colour => Colour.Black;
     public override string Name => "Crypt creep";
 

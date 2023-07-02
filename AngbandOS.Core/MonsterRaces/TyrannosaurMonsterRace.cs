@@ -12,7 +12,7 @@ internal class TyrannosaurMonsterRace : MonsterRace
 {
     protected TyrannosaurMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'R';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperRSymbol>();
     public override Colour Colour => Colour.Green;
     public override string Name => "Tyrannosaur";
 

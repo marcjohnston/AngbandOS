@@ -21,7 +21,7 @@ internal class HomeStore : Store
 
     public override string FeatureType => "Home";
     public override Colour Colour => Colour.Pink;
-    public override char Character => '@';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<AtSymbol>();
 
     public override bool ItemMatches(Item item)
     {

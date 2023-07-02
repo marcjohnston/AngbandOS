@@ -17,7 +17,7 @@ internal class HuntingHorrorMonsterRace : MonsterRace
         new BlindnessMonsterSpell(),
         new ConfuseMonsterSpell(),
         new SummonCthuloidMonsterSpell());
-    public override char Character => 'U';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperUSymbol>();
     public override Colour Colour => Colour.Black;
     public override string Name => "Hunting horror";
 

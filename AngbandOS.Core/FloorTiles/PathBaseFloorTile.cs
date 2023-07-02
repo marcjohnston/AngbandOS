@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class PathBaseFloorTile : FloorTile
 {
     private PathBaseFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '·';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PeriodSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "PathBase";
     public override string AppearAs => "PathBase";

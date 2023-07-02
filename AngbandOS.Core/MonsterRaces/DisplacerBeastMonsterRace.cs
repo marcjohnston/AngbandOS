@@ -12,7 +12,7 @@ internal class DisplacerBeastMonsterRace : MonsterRace
 {
     protected DisplacerBeastMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'f';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerFSymbol>();
     public override Colour Colour => Colour.Blue;
     public override string Name => "Displacer beast";
 

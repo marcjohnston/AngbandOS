@@ -31,7 +31,7 @@ internal class TwoHandedSwordDragonslayerFixedArtifact : FixedArtifact
             item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
         }
     }
-    public override char Character => '|';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "The Two-Handed Sword 'Dragonslayer'";
     public override int Ac => 0;

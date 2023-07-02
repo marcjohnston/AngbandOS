@@ -18,6 +18,6 @@ internal class KinMonsterSelector : MonsterSelector
 
     public override bool Matches(SaveGame saveGame, MonsterRace rPtr)
     {
-        return rPtr.Character == _summonKinType && !rPtr.Unique;
+        return rPtr.Symbol.Character == _summonKinType && !rPtr.Unique;
     }
 }

@@ -12,7 +12,7 @@ internal class FloatingEyeMonsterRace : MonsterRace
 {
     protected FloatingEyeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'e';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerESymbol>();
     public override string Name => "Floating eye";
 
     public override int ArmourClass => 6;

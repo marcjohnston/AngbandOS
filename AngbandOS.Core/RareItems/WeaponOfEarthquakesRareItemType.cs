@@ -11,7 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class WeaponOfEarthquakesRareItem : RareItem
 {
     private WeaponOfEarthquakesRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '|';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "Weapon of Earthquakes";
     public override int Cost => 4000;

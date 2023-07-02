@@ -20,7 +20,7 @@ internal class DimensionalShamblerMonsterRace : MonsterRace
         new HasteMonsterSpell(),
         new HealMonsterSpell(),
         new TeleportSelfMonsterSpell());
-    public override char Character => 'A';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperASymbol>();
     public override Colour Colour => Colour.BrightBlue;
     public override string Name => "Dimensional shambler";
 

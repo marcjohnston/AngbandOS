@@ -19,7 +19,7 @@ internal class MasterQuylthulgMonsterRace : MonsterRace
         new SummonMonsterMonsterSpell(),
         new SummonMonstersMonsterSpell(),
         new SummonUndeadMonsterSpell());
-    public override char Character => 'Q';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperQSymbol>();
     public override Colour Colour => Colour.Blue;
     public override string Name => "Master quylthulg";
 

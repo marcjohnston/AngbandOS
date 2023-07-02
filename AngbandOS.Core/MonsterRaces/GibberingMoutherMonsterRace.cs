@@ -16,7 +16,7 @@ internal class GibberingMoutherMonsterRace : MonsterRace
         new BreatheLightMonsterSpell(),
         new ConfuseMonsterSpell(),
         new ScareMonsterSpell());
-    public override char Character => 'j';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerJSymbol>();
     public override Colour Colour => Colour.Orange;
     public override string Name => "Gibbering mouther";
 

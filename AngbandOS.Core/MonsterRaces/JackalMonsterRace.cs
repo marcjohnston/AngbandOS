@@ -12,7 +12,7 @@ internal class JackalMonsterRace : MonsterRace
 {
     protected JackalMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'C';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperCSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Jackal";
 

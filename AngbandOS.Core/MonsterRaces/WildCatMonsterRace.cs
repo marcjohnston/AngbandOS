@@ -12,7 +12,7 @@ internal class WildCatMonsterRace : MonsterRace
 {
     protected WildCatMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'f';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerFSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Wild cat";
 

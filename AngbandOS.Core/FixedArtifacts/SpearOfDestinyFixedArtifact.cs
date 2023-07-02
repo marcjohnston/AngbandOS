@@ -30,7 +30,7 @@ internal class SpearOfDestinyFixedArtifact : FixedArtifact, IFixedArtifactActiva
     public string DescribeActivationEffect() => "stone to mud every 5 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override char Character => '/';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ForwardSlashSymbol>();
     public override Colour Colour => Colour.Grey;
     public override string Name => "The Spear of Destiny";
     public override int Ac => 0;

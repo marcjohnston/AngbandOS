@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class FountainFloorTile : FloorTile
 {
     private FountainFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '~';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<TildeSymbol>();
     public override Colour Colour => Colour.BrightBlue;
     public override string Name => "Fountain";
     public override AlterAction? AlterAction => new TunnelAlterAction();

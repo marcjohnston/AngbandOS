@@ -13,7 +13,7 @@ internal class BlackDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
     private BlackDragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override string? DescribeActivationEffect => "breathe acid (130) every 450+d450 turns";
-    public override char Character => '[';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenBraceSymbol>();
     public override Colour Colour => Colour.Black;
     public override string Name => "Black Dragon Scale Mail";
 

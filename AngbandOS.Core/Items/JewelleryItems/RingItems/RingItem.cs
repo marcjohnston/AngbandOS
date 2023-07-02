@@ -33,7 +33,7 @@ internal abstract class RingItem : JewelleryItem
         {
             return base.GetDescription(includeCountPrefix);
         }
-        string flavour = IdentStoreb ? "" : $"{FlavourFactory.Flavour.Name} ";
+        string flavour = IdentStoreb ? "" : $"{FlavourFactory.Flavor.Name} ";
         string ofName = IsFlavourAware() ? $" of {Factory.FriendlyName}" : "";
         string name = $"{flavour}{Pluralize("Ring", Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class LockedDoor7FloorTile : FloorTile
 {
     private LockedDoor7FloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '+';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PlusSignSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "LockedDoor7";
     public override AlterAction? AlterAction => new OpenAlterAction();

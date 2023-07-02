@@ -12,7 +12,7 @@ internal class DisenchantmentResistanceRingItemFactory : RingItemFactory
 {
     private DisenchantmentResistanceRingItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => '=';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<EqualSignSymbol>();
     public override string Name => "Disenchantment Resistance";
 
     public override int[] Chance => new int[] { 10, 0, 0, 0 };

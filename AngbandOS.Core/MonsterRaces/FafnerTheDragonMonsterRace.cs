@@ -18,7 +18,7 @@ internal class FafnerTheDragonMonsterRace : MonsterRace
         new CauseCriticalWoundsMonsterSpell(),
         new ConfuseMonsterSpell(),
         new ScareMonsterSpell());
-    public override char Character => 'D';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
     public override Colour Colour => Colour.BrightGreen;
     public override string Name => "Fafner the Dragon";
 

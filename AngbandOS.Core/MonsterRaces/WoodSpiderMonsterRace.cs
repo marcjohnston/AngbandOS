@@ -12,7 +12,7 @@ internal class WoodSpiderMonsterRace : MonsterRace
 {
     protected WoodSpiderMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'S';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperSSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Wood spider";
 

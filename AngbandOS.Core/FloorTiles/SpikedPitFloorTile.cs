@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class SpikedPitFloorTile : FloorTile
 {
     private SpikedPitFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '^';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CaretSymbol>();
     public override Colour Colour => Colour.Grey;
     public override string Name => "SpikedPit";
     public override AlterAction? AlterAction => new DisarmAlterAction();

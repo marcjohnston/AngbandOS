@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Vaults;
 internal class LesserVaulttempleOfDenderehVault : Vault
 {
     private LesserVaulttempleOfDenderehVault(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '#';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PoundSignSymbol>();
     public override string Name => "Lesser vault (temple of dendereh)";
     public override int Category => 7;
     public override int Height => 20;

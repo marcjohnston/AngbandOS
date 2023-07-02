@@ -17,7 +17,7 @@ internal class WillOTheWispMonsterRace : MonsterRace
         new ConfuseMonsterSpell(),
         new BlinkMonsterSpell(),
         new TeleportSelfMonsterSpell());
-    public override char Character => 'E';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
     public override Colour Colour => Colour.BrightTurquoise;
     public override string Name => "Will o' the wisp";
 

@@ -12,7 +12,7 @@ internal class ScrollRemoveCurse : ScrollItemClass
 {
     private ScrollRemoveCurse(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => '?';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<QuestionMarkSymbol>();
     public override string Name => "Remove Curse";
 
     public override int[] Chance => new int[] { 1, 2, 2, 0 };

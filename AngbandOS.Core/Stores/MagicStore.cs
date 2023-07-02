@@ -43,7 +43,7 @@ internal class MagicStore : Store
 
     public override string FeatureType => "MagicShop";
     public override Colour Colour => Colour.Red;
-    public override char Character => '6';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<NumberSixSymbol>();
     public override string Description => "Magic Shop";
 
     protected override StockStoreInventoryItem[] GetStoreTable()

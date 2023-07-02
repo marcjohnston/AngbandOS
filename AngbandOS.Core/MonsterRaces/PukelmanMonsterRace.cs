@@ -16,7 +16,7 @@ internal class PukelmanMonsterRace : MonsterRace
         new AcidBoltMonsterSpell(),
         new ConfuseMonsterSpell(),
         new SlowMonsterSpell());
-    public override char Character => 'g';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerGSymbol>();
     public override Colour Colour => Colour.Brown;
     public override string Name => "Pukelman";
 

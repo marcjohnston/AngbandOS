@@ -12,7 +12,7 @@ internal class CreepingCopperCoinsMonsterRace : MonsterRace
 {
     protected CreepingCopperCoinsMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => '$';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<DollarSignSymbol>();
     public override Colour Colour => Colour.Copper;
     public override string Name => "Creeping copper coins";
 

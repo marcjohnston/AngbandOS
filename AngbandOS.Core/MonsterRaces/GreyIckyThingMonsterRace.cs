@@ -12,7 +12,7 @@ internal class GreyIckyThingMonsterRace : MonsterRace
 {
     protected GreyIckyThingMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'i';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerISymbol>();
     public override Colour Colour => Colour.Grey;
     public override string Name => "Grey icky thing";
 

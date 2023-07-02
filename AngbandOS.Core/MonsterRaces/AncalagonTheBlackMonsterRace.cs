@@ -19,7 +19,7 @@ internal class AncalagonTheBlackMonsterRace : MonsterRace
         new ScareMonsterSpell(),
         new SummonDragonMonsterSpell(),
         new SummonHiDragonMonsterSpell());
-    public override char Character => 'D';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
     public override Colour Colour => Colour.Black;
     public override string Name => "Ancalagon the Black";
 

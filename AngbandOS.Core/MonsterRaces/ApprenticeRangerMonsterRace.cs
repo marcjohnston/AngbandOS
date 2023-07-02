@@ -14,7 +14,7 @@ internal class ApprenticeRangerMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new Arrow3D6MonsterSpell());
-    public override char Character => 'p';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override Colour Colour => Colour.Green;
     public override string Name => "Apprentice ranger";
 

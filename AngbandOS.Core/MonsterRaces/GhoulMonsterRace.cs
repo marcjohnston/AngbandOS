@@ -15,7 +15,7 @@ internal class GhoulMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new HoldMonsterSpell(),
         new ScareMonsterSpell());
-    public override char Character => 'z';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerZSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Ghoul";
 

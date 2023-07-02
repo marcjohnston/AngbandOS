@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FloorTileTypes;
 internal class GraveFloorTile : FloorTile
 {
     private GraveFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '+';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PlusSignSymbol>();
     public override string Name => "Grave";
     public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "Grave";

@@ -12,7 +12,7 @@ internal class NewtMonsterRace : MonsterRace
 {
     protected NewtMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'R';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperRSymbol>();
     public override Colour Colour => Colour.Orange;
     public override string Name => "Newt";
 

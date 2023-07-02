@@ -43,7 +43,7 @@ internal class LibraryStore : Store
 
     public override string FeatureType => "Bookstore";
     public override Colour Colour => Colour.Orange;
-    public override char Character => '9';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<NumberNineSymbol>();
 
     protected override StockStoreInventoryItem[] GetStoreTable()
     {

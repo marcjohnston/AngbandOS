@@ -12,7 +12,7 @@ internal class SignOfChaosChaosBookItemFactory : ChaosBookItemFactory
 {
     private SignOfChaosChaosBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => '?';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<QuestionMarkSymbol>();
     public override Colour Colour => Colour.BrightRed;
     public override string Name => "[Sign of Chaos]";
 

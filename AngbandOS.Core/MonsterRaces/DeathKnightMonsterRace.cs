@@ -18,7 +18,7 @@ internal class DeathKnightMonsterRace : MonsterRace
         new NetherBoltMonsterSpell(),
         new ScareMonsterSpell(),
         new SummonMonstersMonsterSpell());
-    public override char Character => 'p';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override Colour Colour => Colour.Grey;
     public override string Name => "Death knight";
 

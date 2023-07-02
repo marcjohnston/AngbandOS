@@ -12,7 +12,7 @@ internal class KingCobraMonsterRace : MonsterRace
 {
     protected KingCobraMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'J';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperJSymbol>();
     public override Colour Colour => Colour.Yellow;
     public override string Name => "King cobra";
 

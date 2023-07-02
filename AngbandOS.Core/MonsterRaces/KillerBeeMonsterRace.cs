@@ -12,7 +12,7 @@ internal class KillerBeeMonsterRace : MonsterRace
 {
     protected KillerBeeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override char Character => 'I';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperISymbol>();
     public override Colour Colour => Colour.BrightYellow;
     public override string Name => "Killer bee";
 

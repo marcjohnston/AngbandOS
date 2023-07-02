@@ -14,7 +14,7 @@ internal class GiantBronzeDragonFlyMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BreatheConfusionMonsterSpell());
-    public override char Character => 'F';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperFSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Giant bronze dragon fly";
 

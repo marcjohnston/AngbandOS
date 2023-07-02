@@ -15,7 +15,7 @@ internal class MatureBlueDragonMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BreatheLightningMonsterSpell(),
         new ScareMonsterSpell());
-    public override char Character => 'd';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
     public override Colour Colour => Colour.Blue;
     public override string Name => "Mature blue dragon";
 

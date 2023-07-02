@@ -26,7 +26,7 @@ internal class OmaraxTheEyeTyrantMonsterRace : MonsterRace
         new DarknessMonsterSpell(),
         new ForgetMonsterSpell(),
         new SummonKinMonsterSpell());
-    public override char Character => 'e';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerESymbol>();
     public override Colour Colour => Colour.Yellow;
     public override string Name => "Omarax the Eye Tyrant";
 

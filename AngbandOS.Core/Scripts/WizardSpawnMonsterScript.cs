@@ -27,7 +27,7 @@ namespace AngbandOS.Core.Scripts
                 {
                     ConsoleTableRow tableRow = table.AddRow();
                     tableRow["Name"] = new ConsoleString(Colour.White, monsterRace.Name);
-                    tableRow["Character"] = new ConsoleString(Colour.White, monsterRace.Character.ToString());
+                    tableRow["Character"] = new ConsoleString(Colour.White, monsterRace.Symbol.Character.ToString());
                     tableRow["Level"] = new ConsoleString(Colour.White, monsterRace.LevelFound.ToString());
                 }
 

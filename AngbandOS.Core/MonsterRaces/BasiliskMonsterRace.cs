@@ -14,7 +14,7 @@ internal class BasiliskMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BreathePoisonMonsterSpell());
-    public override char Character => 'R';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperRSymbol>();
     public override Colour Colour => Colour.Black;
     public override string Name => "Basilisk";
 

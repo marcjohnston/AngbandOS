@@ -28,7 +28,7 @@ internal class ItMonsterRace : MonsterRace
         new SummonUndeadMonsterSpell(),
         new TeleportAwayMonsterSpell(),
         new TeleportToMonsterSpell());
-    public override char Character => '·';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PeriodSymbol>();
     public override Colour Colour => Colour.BrightWhite;
     public override string Name => "It";
 

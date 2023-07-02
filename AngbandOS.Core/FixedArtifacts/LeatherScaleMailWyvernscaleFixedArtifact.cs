@@ -23,7 +23,7 @@ internal class LeatherScaleMailWyvernscaleFixedArtifact : FixedArtifact
     }
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override char Character => '(';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenParenthesisSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "The Leather Scale Mail 'Wyvernscale'";
     public override int Ac => 11;

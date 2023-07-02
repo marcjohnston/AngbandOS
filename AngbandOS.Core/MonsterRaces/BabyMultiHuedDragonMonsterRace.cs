@@ -18,7 +18,7 @@ internal class BabyMultiHuedDragonMonsterRace : MonsterRace
         new BreatheLightningMonsterSpell(),
         new BreatheFireMonsterSpell(),
         new BreathePoisonMonsterSpell());
-    public override char Character => 'd';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
     public override Colour Colour => Colour.Purple;
     public override string Name => "Baby multi-hued dragon";
 

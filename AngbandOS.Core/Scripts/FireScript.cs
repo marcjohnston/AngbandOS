@@ -51,7 +51,7 @@ namespace AngbandOS.Core.Scripts
             // Get the details of the shot
             string missileName = individualAmmunition.Description(false, 3);
             Colour missileColour = individualAmmunition.Factory.FlavorColour;
-            char missileCharacter = individualAmmunition.Factory.FlavorCharacter;
+            char missileCharacter = individualAmmunition.Factory.FlavorSymbol.Character;
             int shotSpeed = SaveGame.Player.MissileAttacksPerRound;
             int shotDamage = Program.Rng.DiceRoll(individualAmmunition.DamageDice, individualAmmunition.DamageDiceSides) + individualAmmunition.BonusDamage + missileWeapon.BonusDamage;
             int attackBonus = SaveGame.Player.AttackBonus + individualAmmunition.BonusToHit + missileWeapon.BonusToHit;
@@ -127,9 +127,7 @@ namespace AngbandOS.Core.Scripts
                     if (SaveGame.PlayerCheckRangedHitOnMonster(chanceToHit - curDis, race.ArmourClass, monster.IsVisible))
                     {
                         string noteDies = " dies.";
-                        if (race.Demon || race.Undead ||
-                            race.Cthuloid || race.Stupid ||
-                            "Evg".Contains(race.Character.ToString()))
+                        if (race.Demon || race.Undead || race.Cthuloid || race.Stupid || "Evg".Contains(race.Symbol.Character.ToString()))
                         {
                             noteDies = " is destroyed.";
                         }

@@ -19,7 +19,7 @@ internal class OrfaxSonOfBoldorMonsterRace : MonsterRace
         new HealMonsterSpell(),
         new SummonMonsterMonsterSpell(),
         new TeleportToMonsterSpell());
-    public override char Character => 'y';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerYSymbol>();
     public override Colour Colour => Colour.BrightBlue;
     public override string Name => "Orfax, Son of Boldor";
 

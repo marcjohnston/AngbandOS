@@ -32,7 +32,7 @@ internal class AetherHoundMonsterRace : MonsterRace
         new BreatheShardsMonsterSpell(),
         new BreatheSoundMonsterSpell(),
         new BreatheTimeMonsterSpell());
-    public override char Character => 'Z';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperZSymbol>();
     public override Colour Colour => Colour.BrightGrey;
     public override string Name => "Aether hound";
 

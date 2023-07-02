@@ -12,7 +12,7 @@ internal class RationFoodItemFactory : FoodItemFactory
 {
     private RationFoodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => ',';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CommaSymbol>();
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Ration of Food";
 

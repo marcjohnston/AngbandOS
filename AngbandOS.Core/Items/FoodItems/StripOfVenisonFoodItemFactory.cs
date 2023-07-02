@@ -12,7 +12,7 @@ internal class StripOfVenisonFoodItemFactory : FoodItemFactory
 {
     private StripOfVenisonFoodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => ',';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CommaSymbol>();
     public override Colour Colour => Colour.Brown;
     public override string Name => "Strip of Venison";
 

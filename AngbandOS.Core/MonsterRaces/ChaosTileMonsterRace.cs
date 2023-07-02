@@ -19,7 +19,7 @@ internal class ChaosTileMonsterRace : MonsterRace
         new ScareMonsterSpell(),
         new BlinkMonsterSpell(),
         new SummonMonsterMonsterSpell());
-    public override char Character => '·';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PeriodSymbol>();
     public override Colour Colour => Colour.Purple;
     public override string Name => "Chaos tile";
 

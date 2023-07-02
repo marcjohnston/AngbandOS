@@ -22,7 +22,7 @@ internal class GreatWyrmOfBalanceMonsterRace : MonsterRace
         new ScareMonsterSpell(),
         new SummonDragonMonsterSpell(),
         new SummonHiDragonMonsterSpell());
-    public override char Character => 'D';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
     public override Colour Colour => Colour.Grey;
     public override string Name => "Great Wyrm of Balance";
 

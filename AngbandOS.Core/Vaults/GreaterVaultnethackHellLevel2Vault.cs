@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.Vaults;
 
 [Serializable]
-internal class GreaterVaultnethackHellLevel2Vault : Vault
+internal class GreaterVaultNethackHellLevel2Vault : Vault
 {
-    private GreaterVaultnethackHellLevel2Vault(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override char Character => '#';
+    private GreaterVaultNethackHellLevel2Vault(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PoundSignSymbol>();
     public override string Name => "Greater vault (nethack hell level #2)";
     public override int Category => 8;
     public override int Height => 15;

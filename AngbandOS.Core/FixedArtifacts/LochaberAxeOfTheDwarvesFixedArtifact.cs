@@ -18,7 +18,7 @@ internal class LochaberAxeOfTheDwarvesFixedArtifact : FixedArtifact
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override char Character => '/';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ForwardSlashSymbol>();
     public override Colour Colour => Colour.Black;
     public override string Name => "The Lochaber Axe of the Dwarves";
     public override int Ac => 0;

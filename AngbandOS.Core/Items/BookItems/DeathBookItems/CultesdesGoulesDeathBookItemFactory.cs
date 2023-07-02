@@ -12,7 +12,7 @@ internal class CultesdesGoulesDeathBookItemFactory : DeathBookItemFactory
 {
     private CultesdesGoulesDeathBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Character => '?';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<QuestionMarkSymbol>();
     public override Colour Colour => Colour.Black;
     public override string Name => "[Cultes des Goules]";
 

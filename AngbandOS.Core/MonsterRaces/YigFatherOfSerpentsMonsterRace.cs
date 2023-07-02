@@ -16,7 +16,7 @@ internal class YigFatherOfSerpentsMonsterRace : MonsterRace
         new BreatheAcidMonsterSpell(),
         new BreatheDisenchantMonsterSpell(),
         new BreathePoisonMonsterSpell());
-    public override char Character => 'J';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperJSymbol>();
     public override Colour Colour => Colour.Green;
     public override string Name => "Yig, Father of Serpents";
 

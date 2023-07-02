@@ -15,7 +15,7 @@ internal class NexusQuylthulgMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BlinkMonsterSpell(),
         new TeleportAwayMonsterSpell());
-    public override char Character => 'Q';
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperQSymbol>();
     public override Colour Colour => Colour.Pink;
     public override string Name => "Nexus quylthulg";
 

@@ -15,10 +15,10 @@ internal abstract class ScrollItemClass : ItemFactory, IFlavour
     /// <summary>
     /// Returns the scroll flavours repository because scrolls have flavours that need to be identified.
     /// </summary>
-    public IEnumerable<Flavour>? GetFlavourRepository() => SaveGame.ScrollFlavours;
+    public IEnumerable<Flavour>? GetFlavorRepository() => SaveGame.ScrollFlavours;
 
     /// <inheritdoc/>
-    public Flavour Flavour { get; set; }
+    public Flavour Flavor { get; set; }
 
     public override bool EasyKnow => true;
     public override int PackSort => 12;
