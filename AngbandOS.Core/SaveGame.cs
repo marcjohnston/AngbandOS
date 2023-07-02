@@ -6780,7 +6780,12 @@ internal class SaveGame
 
     private bool MinusAc()
     {
-        BaseInventorySlot? inventorySlot = new ArmourInventorySlotWeightedRandom(this).Choose();
+        // Generate a weighted random for armor inventory slots.
+        WeightedRandom<BaseInventorySlot> inventorySlotsWeightedRandom = new WeightedRandom<BaseInventorySlot>(SingletonRepository.InventorySlots, _inventorySlot => _inventorySlot.IsArmour);
+
+        // Choose one of those inventory slots.
+        BaseInventorySlot? inventorySlot = inventorySlotsWeightedRandom.Choose();
+
         if (inventorySlot == null)
         {
             // No inventory slots are affected by acid or the slot is empty.
