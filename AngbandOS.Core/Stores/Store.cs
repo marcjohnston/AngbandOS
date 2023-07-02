@@ -166,7 +166,7 @@ internal abstract class Store : IItemFilter
     public abstract Colour Colour { get; }
     public virtual string Description => FeatureType;
 
-    public StoreFloorTileType CreateFloorTileType() => new StoreFloorTileType(SaveGame, Character, Colour, FeatureType, FeatureType, Description);
+    public StoreFloorTile CreateFloorTileType() => new StoreFloorTile(SaveGame, Character, Colour, FeatureType, FeatureType, Description);
 
     protected Store(SaveGame saveGame)
     {

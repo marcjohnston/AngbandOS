@@ -12197,7 +12197,7 @@ internal class SaveGame
         int y, x;
         GridTile cPtr;
 
-        StoreFloorTileType storeFloorTileType = store.CreateFloorTileType();
+        StoreFloorTile storeFloorTileType = store.CreateFloorTileType();
         if (!SingletonRepository.FloorTileTypes.Contains(storeFloorTileType))
         {
             SingletonRepository.FloorTileTypes.Add(storeFloorTileType);
