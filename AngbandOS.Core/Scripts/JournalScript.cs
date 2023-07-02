@@ -173,15 +173,16 @@ namespace AngbandOS.Core.Scripts
 
         private void DisplayMonster(int rIdx, int num, int of)
         {
-            for (int i = 0; Constants.SymbolIdentification[i] != null; i++)
+            foreach (Symbol symbol in SaveGame.SingletonRepository.Symbols)
             {
-                if (Constants.SymbolIdentification[i][0] == SaveGame.SingletonRepository.MonsterRaces[rIdx].Symbol.Character)
+                if (symbol.Character == SaveGame.SingletonRepository.MonsterRaces[rIdx].Symbol.Character)
                 {
-                    string name = Constants.SymbolIdentification[i].Substring(2);
+                    string name = symbol.Name;
                     string buf = $"Monster Type: {name} ({num + 1} of {of})";
                     SaveGame.Screen.Print(Colour.Blue, buf, 3, 0);
                     break;
                 }
+
             }
             SaveGame.Screen.Goto(5, 0);
             DisplayMonsterHeader(rIdx);
@@ -612,7 +613,7 @@ namespace AngbandOS.Core.Scripts
             int currentFilterIndex = 0;
             char currentFilter = usedFilters[0];
             bool useMax = false;
-            while (true)
+            while (!SaveGame.Shutdown)
             {
                 int maxFiltered = 0;
                 for (int i = 0; i < maxSeen; i++)
@@ -635,8 +636,7 @@ namespace AngbandOS.Core.Scripts
                     SaveGame.Screen.Print(Colour.Blue, "Monsters Seen", 0, 1);
                     SaveGame.Screen.Print(Colour.Blue, "=============", 1, 1);
                     DisplayMonster(filtered[currentIndex], currentIndex, maxFiltered);
-                    SaveGame.Screen.Print(Colour.Orange,
-                        "[Up and down to change type, left and right to change monster, Esc to finish]", 43, 1);
+                    SaveGame.Screen.Print(Colour.Orange, "[Up and down to change type, left and right to change monster, Esc to finish]", 43, 1);
                     c = SaveGame.Inkey();
                     if (c == '4')
                     {

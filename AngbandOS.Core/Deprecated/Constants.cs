@@ -169,27 +169,4 @@ internal static class Constants
     public static readonly string[] StatNames = { "STR: ", "INT: ", "WIS: ", "DEX: ", "CON: ", "CHA: " };
 
     public static readonly string[] StatNamesReduced = { "str: ", "int: ", "wis: ", "dex: ", "con: ", "cha: " };
-
-    public static readonly string[] SymbolIdentification =
-                                                            {
-        " :A dark grid", "!:A potion (or oil)", "\":An amulet (or necklace)", "#:A wall (or secret door)",
-        "$:Treasure (gold or gems)", "%:A vein (magma or quartz)", "&:Entrance to Inn", "':An open door",
-        "(:Soft armour", "):A shield", "*:A vein with treasure", "+:A closed door", ",:Food (or mushroom patch)",
-        "-:A wand (or rod)", ".:Floor", "/:A polearm (Axe/Pike/etc)", "0:Entrance to Pawnbrokers",
-        "1:Entrance to General Store", "2:Entrance to Armoury", "3:Entrance to Weaponsmith", "4:Entrance to Temple",
-        "5:Entrance to Alchemy shop", "6:Entrance to Magic Stores", "7:Entrance to Black Market",
-        "8:Entrance to Hall of Records", "9:Entrance to Bookstore", "::Rubble",
-        ";:An Elder Sign / Yellow Sign", "<:An up staircase", "=:A ring", ">:A down staircase",
-        "?:A scroll", "@:You (or the entrance to your home)", "A:Abomination", "B:Bird", "C:Canine",
-        "D:Ancient Dragon/Wyrm", "E:Elemental", "F:Dragon Fly", "G:Ghost", "H:Hybrid", "I:Insect", "J:Snake",
-        "K:Killer Beetle", "L:Lich", "M:Multi-Headed Reptile", "O:Ogre", "P:Giant Humanoid",
-        "Q:Quylthulg (Pulsing Flesh Mound)", "R:Reptile/Amphibian", "S:Spider/Scorpion/Tick", "T:Troll",
-        "U:Major Demon", "V:Vampire", "W:Wight/Wraith/etc", "X:Extradimensional Entity", "Y:Yeti", "Z:Zephyr Hound",
-        "[:Hard armour", "\\:A hafted weapon (mace/whip/etc)", "]:Misc. armour", "^:A trap", "_:A staff", "a:Ant",
-        "b:Bat", "c:Centipede", "d:Dragon", "e:Floating Eye", "f:Feline", "g:Golem", "h:Hobbit/Elf/Dwarf",
-        "i:Icky Thing", "j:Jelly", "k:Kobold", "l:Louse", "m:Mold", "n:Naga", "o:Orc", "p:Person/Human",
-        "q:Quadruped", "r:Rodent", "s:Skeleton", "t:Townsperson", "u:Minor Demon", "v:Vortex", "w:Worm/Worm-Mass",
-        "x:Xorn/Xaren/etc", "y:Yeek", "z:Zombie/Mummy", "{:A missile (arrow/bolt/shot)", "|:An edged weapon (sword/dagger/etc)",
-        "}:A launcher (bow/crossbow/sling)", "~:A tool (or miscellaneous item)", null
-    };
 }

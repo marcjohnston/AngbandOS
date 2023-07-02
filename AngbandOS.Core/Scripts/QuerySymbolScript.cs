@@ -14,25 +14,24 @@ namespace AngbandOS.Core.Scripts
 
         public override bool Execute()
         {
-            int index;
-            // Get the symbol
-            if (!SaveGame.GetCom("Enter character to be identified: ", out char symbol))
+            // Query the user for the symbol to identify.
+            if (!SaveGame.GetCom("Enter character to be identified: ", out char querySymbol))
             {
                 return false;
             }
-            // Run through the identification array till we find the symbol
-            for (index = 0; Constants.SymbolIdentification[index] != null; ++index)
+
+            // Run through the identification array till we find the symbol.
+            foreach (Symbol symbol in SaveGame.SingletonRepository.Symbols)
             {
-                if (symbol == Constants.SymbolIdentification[index][0])
+                if (querySymbol == symbol.Character)
                 {
-                    break;
+                    SaveGame.MsgPrint($"{querySymbol} - {symbol.Name}");
+                    return false;
                 }
             }
-            // Display the symbol and its idenfitication
-            string buf = Constants.SymbolIdentification[index] != null
-                ? $"{symbol} - {Constants.SymbolIdentification[index].Substring(2)}."
-                : $"{symbol} - Unknown Symbol";
-            SaveGame.MsgPrint(buf);
+
+            // Display the symbol and its identification.
+            SaveGame.MsgPrint($"{querySymbol} - Unknown Symbol");
             return false;
         }
     }
