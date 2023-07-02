@@ -69,6 +69,7 @@ global using AngbandOS.Core.StoreCommands;
 global using AngbandOS.Core.StoreOwners;
 global using AngbandOS.Core.Stores;
 global using AngbandOS.Core.Syllables;
+global using AngbandOS.Core.Symbols;
 global using AngbandOS.Core.Talents;
 global using AngbandOS.Core.TimedActions;
 global using AngbandOS.Core.Towns;

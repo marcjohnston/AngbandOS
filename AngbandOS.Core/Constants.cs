@@ -192,10 +192,4 @@ internal static class Constants
         "x:Xorn/Xaren/etc", "y:Yeek", "z:Zombie/Mummy", "{:A missile (arrow/bolt/shot)", "|:An edged weapon (sword/dagger/etc)",
         "}:A launcher (bow/crossbow/sling)", "~:A tool (or miscellaneous item)", null
     };
-
-    public static readonly int VersionMajor = Assembly.GetExecutingAssembly().GetName().Version.Major;
-    public static readonly int VersionMinor = Assembly.GetExecutingAssembly().GetName().Version.Minor;
-    public static readonly int VersionBuild = Assembly.GetExecutingAssembly().GetName().Version.Build;
-    public static readonly string VersionName = Assembly.GetExecutingAssembly().GetName().Name;
-    public static readonly string VersionStamp = $"Version {VersionMajor}.{VersionMinor}.{VersionBuild}";
 }
