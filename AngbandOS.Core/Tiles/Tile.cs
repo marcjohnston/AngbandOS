@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.FloorTileTypes;
+namespace AngbandOS.Core.Tiles;
 
 [Serializable]
 internal abstract class Tile : ISingletonDictionary<string>
@@ -59,7 +59,7 @@ internal abstract class Tile : ISingletonDictionary<string>
     /// <summary>
     /// The category of this tile.
     /// </summary>
-    public abstract FloorTileTypeCategory Category { get; }
+    public abstract TileCategory Category { get; }
 
     /// <summary>
     /// A text description of the tile.

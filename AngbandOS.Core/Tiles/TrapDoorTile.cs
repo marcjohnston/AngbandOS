@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.FloorTileTypes;
+namespace AngbandOS.Core.Tiles;
 
 [Serializable]
 internal class TrapDoorTile : Tile
@@ -15,7 +15,7 @@ internal class TrapDoorTile : Tile
     public override string Name => "TrapDoor";
     public override AlterAction? AlterAction => new DisarmAlterAction();
     public override string AppearAs => "TrapDoor";
-    public override FloorTileTypeCategory Category => FloorTileTypeCategory.TrapDoor;
+    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<TrapDoorTileCategory>();
     public override string Description => "trap door";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

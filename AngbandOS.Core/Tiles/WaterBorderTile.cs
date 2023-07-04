@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.FloorTileTypes;
+namespace AngbandOS.Core.Tiles;
 
 [Serializable]
 internal class WaterBorderTile : Tile
@@ -16,7 +16,7 @@ internal class WaterBorderTile : Tile
     public override string Name => "WaterBorder";
     public override string AppearAs => "Water";
     public override bool BlocksLos => true;
-    public override FloorTileTypeCategory Category => FloorTileTypeCategory.Border;
+    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<BorderTileCategory>();
     public override string Description => "sea";
     public override bool DimsOutsideLOS => true;
     public override bool IsPermanent => true;

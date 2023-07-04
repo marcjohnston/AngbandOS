@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.FloorTileTypes;
+namespace AngbandOS.Core.Tiles;
 
 [Serializable]
 internal class FieldTile : Tile
@@ -15,7 +15,7 @@ internal class FieldTile : Tile
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Field";
     public override string AppearAs => "Field";
-    public override FloorTileTypeCategory Category => FloorTileTypeCategory.Floor;
+    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<FloorTileCategory>();
     public override string Description => "field";
     public override bool DimsOutsideLOS => true;
     public override bool IsOpenFloor => true;

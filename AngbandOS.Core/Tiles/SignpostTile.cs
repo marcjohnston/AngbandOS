@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.FloorTileTypes;
+namespace AngbandOS.Core.Tiles;
 
 [Serializable]
 internal class SignpostTile : Tile
@@ -16,7 +16,7 @@ internal class SignpostTile : Tile
     public override string Name => "Signpost";
     public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "Signpost";
-    public override FloorTileTypeCategory Category => FloorTileTypeCategory.Tree;
+    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<TreeTileCategory>();
     public override string Description => "signpost";
     public override bool DimsOutsideLOS => true;
     public override int MapPriority => 0;

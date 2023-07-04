@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.FloorTileTypes;
+namespace AngbandOS.Core.Tiles;
 
 [Serializable]
 internal class WildPathNSTile : Tile
@@ -15,7 +15,7 @@ internal class WildPathNSTile : Tile
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "WildPathNS";
     public override string AppearAs => "WildPathNS";
-    public override FloorTileTypeCategory Category => FloorTileTypeCategory.Other;
+    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<OtherTileCategory>();
     public override string Description => "path";
     public override bool DimsOutsideLOS => true;
     public override bool IsPassable => true;

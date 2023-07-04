@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.FloorTileTypes;
+namespace AngbandOS.Core.Tiles;
 
 [Serializable]
 internal class WaterTile : Tile
@@ -15,7 +15,7 @@ internal class WaterTile : Tile
     public override Colour Colour => Colour.Blue;
     public override string Name => "Water";
     public override string AppearAs => "Water";
-    public override FloorTileTypeCategory Category => FloorTileTypeCategory.Other;
+    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<OtherTileCategory>();
     public override string Description => "water";
     public override bool DimsOutsideLOS => true;
     public override int MapPriority => 0;

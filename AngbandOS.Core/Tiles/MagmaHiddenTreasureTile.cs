@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.FloorTileTypes;
+namespace AngbandOS.Core.Tiles;
 
 [Serializable]
 internal class MagmaHiddenTreasureTile : Tile
@@ -18,7 +18,7 @@ internal class MagmaHiddenTreasureTile : Tile
     public override string AppearAs => "Magma";
     public override bool BlocksLos => true;
     public override string? HiddenTreasureFor => "MagmaVisTreas";
-    public override FloorTileTypeCategory Category => FloorTileTypeCategory.Vein;
+    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<VeinTileCategory>();
     public override string Description => "magma vein";
     public override bool DimsOutsideLOS => true;
     public override bool IsWall => true;

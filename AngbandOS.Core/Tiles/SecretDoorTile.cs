@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.FloorTileTypes;
+namespace AngbandOS.Core.Tiles;
 
 [Serializable]
 internal class SecretDoorTile : Tile
@@ -22,7 +22,7 @@ internal class SecretDoorTile : Tile
     /// </summary>
     public override bool BlocksScent => false;
 
-    public override FloorTileTypeCategory Category => FloorTileTypeCategory.SecretDoor;
+    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<SecretDoorTileCategory>();
     public override string Description => "granite wall";
     public override bool DimsOutsideLOS => true;
     public override bool IsWall => true;

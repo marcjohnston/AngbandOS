@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.FloorTileTypes;
+namespace AngbandOS.Core.Tiles;
 
 [Serializable]
 internal class ConDartTile : Tile
@@ -16,7 +16,7 @@ internal class ConDartTile : Tile
     public override string Name => "ConDart";
     public override AlterAction? AlterAction => new DisarmAlterAction();
     public override string AppearAs => "ConDart";
-    public override FloorTileTypeCategory Category => FloorTileTypeCategory.Other;
+    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<OtherTileCategory>();
     public override string Description => "dart trap";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

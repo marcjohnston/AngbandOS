@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.FloorTileTypes;
+namespace AngbandOS.Core.Tiles;
 
 [Serializable]
 internal class QuartzHiddenTreasureTile : Tile
@@ -17,7 +17,7 @@ internal class QuartzHiddenTreasureTile : Tile
     public override string AppearAs => "Quartz";
     public override bool BlocksLos => true;
     public override string? HiddenTreasureFor => "QuartzVisTreas";
-    public override FloorTileTypeCategory Category => FloorTileTypeCategory.Vein;
+    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<VeinTileCategory>();
     public override string Description => "quartz vein";
     public override bool DimsOutsideLOS => true;
     public override bool IsWall => true;

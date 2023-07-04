@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.FloorTileTypes;
+namespace AngbandOS.Core.Tiles;
 
 [Serializable]
 internal class PathBorderEWTile : Tile
@@ -16,7 +16,7 @@ internal class PathBorderEWTile : Tile
     public override string Name => "PathBorderEW";
     public override string AppearAs => "PathBorderEW";
     public override bool BlocksLos => true;
-    public override FloorTileTypeCategory Category => FloorTileTypeCategory.Border;
+    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<BorderTileCategory>();
     public override string Description => "path";
     public override bool DimsOutsideLOS => true;
     public override bool IsPermanent => true;

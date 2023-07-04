@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.FloorTileTypes;
+namespace AngbandOS.Core.Tiles;
 
 [Serializable]
 internal class JammedDoor0Tile : Tile
@@ -17,7 +17,7 @@ internal class JammedDoor0Tile : Tile
     public override AlterAction? AlterAction => new BashAlterAction();
     public override string AppearAs => "LockedDoor0";
     public override bool BlocksLos => true;
-    public override FloorTileTypeCategory Category => FloorTileTypeCategory.JammedDoor;
+    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<JammedDoorTileCategory>();
     public override string Description => "jammed door";
     public override bool DimsOutsideLOS => true;
     public override bool IsClosedDoor => true;

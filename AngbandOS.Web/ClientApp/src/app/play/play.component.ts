@@ -130,7 +130,7 @@ export class PlayComponent implements OnInit, OnDestroy {
   }
 
   public macroClicked(key: string) {
-    if (this.connection && this.preferences !== undefined) {
+    if (this.connection !== undefined && this.preferences !== undefined) {
       let macro: string | null = null; // We use null, if there is no setting.
       switch (key) {
         case "F1":
@@ -171,7 +171,7 @@ export class PlayComponent implements OnInit, OnDestroy {
           break;
       }
 
-      if (macro && macro !== null) {
+      if (macro !== null) {
         do {
           const index: number = macro.indexOf("\\x");
           if (index === -1) {

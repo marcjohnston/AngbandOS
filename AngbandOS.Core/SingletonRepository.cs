@@ -15,6 +15,7 @@ namespace AngbandOS.Core;
 /// </summary>
 internal class SingletonRepository
 {
+    public SingletonDictionary<TileCategory> TileCategories;
     public SingletonDictionary<Symbol> Symbols;
     public SingletonDictionary<MartialArtsAttack> MartialArtsAttacks;
     public SingletonDictionary<Script> Scripts;
@@ -100,6 +101,7 @@ internal class SingletonRepository
 
     public void Initialize(SaveGame saveGame)
     {
+        TileCategories = new SingletonDictionary<TileCategory>(saveGame, LoadTypesFromAssembly<TileCategory>(saveGame));
         Symbols = new SingletonDictionary<Symbol>(saveGame, LoadTypesFromAssembly<Symbol>(saveGame));
         MartialArtsAttacks = new SingletonDictionary<MartialArtsAttack>(saveGame, LoadTypesFromAssembly<MartialArtsAttack>(saveGame));
         Scripts = new SingletonDictionary<Script>(saveGame, LoadTypesFromAssembly<Script>(saveGame));

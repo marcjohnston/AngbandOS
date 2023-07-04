@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.FloorTileTypes;
+namespace AngbandOS.Core.Tiles;
 
 [Serializable]
 internal class YellowSignTile : Tile
@@ -15,7 +15,7 @@ internal class YellowSignTile : Tile
     public override Colour Colour => Colour.BrightYellow;
     public override string Name => "YellowSign";
     public override string AppearAs => "YellowSign";
-    public override FloorTileTypeCategory Category => FloorTileTypeCategory.Sigil;
+    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<SigilTileCategory>();
     public override string Description => "Yellow Sign";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

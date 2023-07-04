@@ -27,7 +27,7 @@ namespace AngbandOS.Core.Scripts
                 int x = SaveGame.Player.MapX + SaveGame.Level.KeypadDirectionXOffset[dir];
                 GridTile tile = SaveGame.Level.Grid[y][x];
                 // Can only close actual open doors
-                if (tile.FeatureType.Category != FloorTileTypeCategory.OpenDoorway)
+                if (tile.FeatureType.Category.CategoryEnum != FloorTileTypeCategory.OpenDoorway)
                 {
                     SaveGame.MsgPrint("You see nothing there to close.");
                 }

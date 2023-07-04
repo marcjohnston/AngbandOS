@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.FloorTileTypes;
+namespace AngbandOS.Core.Tiles;
 
 [Serializable]
 internal class WallOuterTile : Tile
@@ -16,7 +16,7 @@ internal class WallOuterTile : Tile
     public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "WallBasic";
     public override bool BlocksLos => true;
-    public override FloorTileTypeCategory Category => FloorTileTypeCategory.Other;
+    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<OtherTileCategory>();
     public override string Description => "granite wall";
     public override bool DimsOutsideLOS => true;
     public override bool IsBasicWall => true;

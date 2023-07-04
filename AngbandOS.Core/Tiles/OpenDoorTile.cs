@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.FloorTileTypes;
+namespace AngbandOS.Core.Tiles;
 
 [Serializable]
 internal class OpenDoorTile : Tile
@@ -16,7 +16,7 @@ internal class OpenDoorTile : Tile
     public override string Name => "OpenDoor";
     public override AlterAction? AlterAction => new CloseAlterAction();
     public override string AppearAs => "OpenDoor";
-    public override FloorTileTypeCategory Category => FloorTileTypeCategory.OpenDoorway;
+    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<OpenDoorwayTileCategory>();
     public override string Description => "open door";
     public override bool DimsOutsideLOS => true;
     public override bool IsPassable => true;

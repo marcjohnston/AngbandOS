@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.FloorTileTypes;
+namespace AngbandOS.Core.Tiles;
 
 [Serializable]
 internal class RubbleTile : Tile
@@ -16,7 +16,7 @@ internal class RubbleTile : Tile
     public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "Rubble";
     public override bool BlocksLos => true;
-    public override FloorTileTypeCategory Category => FloorTileTypeCategory.Rubble;
+    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<RubbleTileCategory>();
     public override string Description => "pile of rubble";
     public override bool DimsOutsideLOS => true;
     public override bool IsInteresting => true;

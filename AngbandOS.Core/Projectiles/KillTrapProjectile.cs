@@ -18,7 +18,7 @@ internal class KillTrapProjectile : Projectile
     {
         GridTile cPtr = SaveGame.Level.Grid[y][x];
         bool obvious = false;
-        if (cPtr.FeatureType.Category == FloorTileTypeCategory.UnidentifiedTrap || cPtr.FeatureType.IsTrap)
+        if (cPtr.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.UnidentifiedTrap || cPtr.FeatureType.IsTrap)
         {
             if (SaveGame.Level.PlayerHasLosBold(y, x))
             {
@@ -28,8 +28,8 @@ internal class KillTrapProjectile : Projectile
             cPtr.TileFlags.Clear(GridTile.PlayerMemorised);
             SaveGame.Level.RevertTileToBackground(y, x);
         }
-        else if (cPtr.FeatureType.Category == FloorTileTypeCategory.SecretDoor ||
-                 cPtr.FeatureType.Category == FloorTileTypeCategory.LockedDoor)
+        else if (cPtr.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.SecretDoor ||
+                 cPtr.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.LockedDoor)
         {
             SaveGame.Level.CaveSetFeat(y, x, "LockedDoor0");
             if (SaveGame.Level.PlayerHasLosBold(y, x))

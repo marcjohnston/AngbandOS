@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.FloorTileTypes;
+namespace AngbandOS.Core.Tiles;
 
 [Serializable]
 internal class ElderSignTile : Tile
@@ -15,7 +15,7 @@ internal class ElderSignTile : Tile
     public override Colour Colour => Colour.Green;
     public override string Name => "ElderSign";
     public override string AppearAs => "ElderSign";
-    public override FloorTileTypeCategory Category => FloorTileTypeCategory.Sigil;
+    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<SigilTileCategory>();
     public override string Description => "Elder Sign";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

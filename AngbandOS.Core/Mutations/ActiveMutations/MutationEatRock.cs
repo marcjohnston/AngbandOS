@@ -38,16 +38,16 @@ internal class MutationEatRock : Mutation
             saveGame.MsgPrint("There's something in the way!");
             return;
         }
-        if (cPtr.FeatureType.Category == FloorTileTypeCategory.Tree)
+        if (cPtr.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.Tree)
         {
             saveGame.MsgPrint("You don't like the woody taste!");
             return;
         }
-        if (cPtr.FeatureType.IsClosedDoor || cPtr.FeatureType.Category == FloorTileTypeCategory.SecretDoor || cPtr.FeatureType.Category == FloorTileTypeCategory.Rubble)
+        if (cPtr.FeatureType.IsClosedDoor || cPtr.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.SecretDoor || cPtr.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.Rubble)
         {
             saveGame.Player.SetFood(saveGame.Player.Food + 3000);
         }
-        else if (cPtr.FeatureType.Category == FloorTileTypeCategory.Vein)
+        else if (cPtr.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.Vein)
         {
             saveGame.Player.SetFood(saveGame.Player.Food + 5000);
         }

@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.FloorTileTypes;
+namespace AngbandOS.Core.Tiles;
 
 [Serializable]
 internal class LockedDoor5Tile : Tile
@@ -17,7 +17,7 @@ internal class LockedDoor5Tile : Tile
     public override AlterAction? AlterAction => new OpenAlterAction();
     public override string AppearAs => "LockedDoor0";
     public override bool BlocksLos => true;
-    public override FloorTileTypeCategory Category => FloorTileTypeCategory.LockedDoor;
+    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<LockedDoorTileCategory>();
     public override string Description => "locked door";
     public override bool DimsOutsideLOS => true;
     public override bool IsClosedDoor => true;

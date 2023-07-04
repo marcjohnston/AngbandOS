@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.FloorTileTypes;
+namespace AngbandOS.Core.Tiles;
 
 [Serializable]
 internal class TeleportRuneTile : Tile
@@ -16,7 +16,7 @@ internal class TeleportRuneTile : Tile
     public override string Name => "TeleportRune";
     public override AlterAction? AlterAction => new DisarmAlterAction();
     public override string AppearAs => "TeleportRune";
-    public override FloorTileTypeCategory Category => FloorTileTypeCategory.Other;
+    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<OtherTileCategory>();
     public override string Description => "strange rune";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

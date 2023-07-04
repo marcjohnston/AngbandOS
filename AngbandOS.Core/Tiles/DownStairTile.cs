@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.FloorTileTypes;
+namespace AngbandOS.Core.Tiles;
 
 [Serializable]
 internal class DownStairTile : Tile
@@ -15,7 +15,7 @@ internal class DownStairTile : Tile
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "DownStair";
     public override string AppearAs => "DownStair";
-    public override FloorTileTypeCategory Category => FloorTileTypeCategory.DownStair;
+    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<DownStairTileCategory>();
     public override string Description => "down staircase";
     public override bool DimsOutsideLOS => true;
     public override bool IsInteresting => true;

@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.FloorTileTypes;
+namespace AngbandOS.Core.Tiles;
 
 [Serializable]
 internal class InvisibleTile : Tile
@@ -14,7 +14,7 @@ internal class InvisibleTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PeriodSymbol>();
     public override string Name => "Invis";
     public override string AppearAs => "Invis";
-    public override FloorTileTypeCategory Category => FloorTileTypeCategory.UnidentifiedTrap;
+    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<UnidentifiedTrapTileCategory>();
     public override string Description => "invisible trap";
     public override bool DimsOutsideLOS => true;
     public override bool IsPassable => true;

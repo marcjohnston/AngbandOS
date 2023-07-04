@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.FloorTileTypes;
+namespace AngbandOS.Core.Tiles;
 
 [Serializable]
 internal class TowerFloorTile : Tile
@@ -14,7 +14,7 @@ internal class TowerFloorTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PeriodSymbol>();
     public override string Name => "TowerFloor";
     public override string AppearAs => "TowerFloor";
-    public override FloorTileTypeCategory Category => FloorTileTypeCategory.Floor;
+    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<FloorTileCategory>();
     public override string Description => "open floor";
     public override bool DimsOutsideLOS => true;
     public override bool IsOpenFloor => true;

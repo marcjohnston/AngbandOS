@@ -2274,7 +2274,7 @@ internal class Level
             {
                 continue;
             }
-            if (SaveGame.Level.Grid[y][x].FeatureType.Category == FloorTileTypeCategory.Sigil)
+            if (SaveGame.Level.Grid[y][x].FeatureType.Category.CategoryEnum == FloorTileTypeCategory.Sigil)
             {
                 continue;
             }
@@ -2319,7 +2319,7 @@ internal class Level
             {
                 continue;
             }
-            if (SaveGame.Level.Grid[y][x].FeatureType.Category == FloorTileTypeCategory.Sigil)
+            if (SaveGame.Level.Grid[y][x].FeatureType.Category.CategoryEnum == FloorTileTypeCategory.Sigil)
             {
                 continue;
             }
@@ -2743,7 +2743,7 @@ internal class Level
         }
 
         // Do not place monster on a sigil.
-        if (SaveGame.Level.Grid[y][x].FeatureType.Category == FloorTileTypeCategory.Sigil)
+        if (SaveGame.Level.Grid[y][x].FeatureType.Category.CategoryEnum == FloorTileTypeCategory.Sigil)
         {
             return false;
         }
