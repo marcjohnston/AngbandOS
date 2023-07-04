@@ -14,10 +14,6 @@ internal class IckyGreenPotionFlavour : PotionFlavour
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ExclamationPointSymbol>();
     public override Colour Colour => Colour.BrightGreen;
     public override string Name => "Icky Green";
-    /// <summary>
-    /// Returns a shuffle weight of 1, so that it appears after the light brown potion, but before all other unweighted potions.
-    /// </summary>
-    public override int ShuffleWeight => 1;
 
     /// <summary>
     /// Returns false because the icky green potion flavour is manually assigned to the slime mold juice potion.

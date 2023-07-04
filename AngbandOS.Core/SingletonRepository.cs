@@ -97,28 +97,6 @@ internal class SingletonRepository
     }
 
     private T[] Shuffle<T>(IEnumerable<T> items) => items.OrderBy(_item => Program.Rng.RandomLessThan(int.MaxValue)).ToArray();
-    private T[] WeightedShuffle<T>(T[] items) where T : IWeightedShuffle
-    {
-        Dictionary<int, List<T>> itemsByWeight = new Dictionary<int, List<T>>();
-        foreach (T item in items)
-        {
-            List<T>? list = null;
-            if (!itemsByWeight.TryGetValue(item.ShuffleWeight, out list))
-            {
-                list = new List<T>();
-                itemsByWeight.Add(item.ShuffleWeight, list);
-            }
-            list.Add(item);
-        }
-
-        // Sort the dictionary.
-        List<T> shuffledList = new List<T>();
-        foreach (KeyValuePair<int, List<T>> weightAndItem in itemsByWeight.OrderByDescending(_weightAndItem => _weightAndItem.Key))
-        {
-            shuffledList.AddRange(Shuffle(weightAndItem.Value));
-        }           
-        return shuffledList.ToArray();
-    }
 
     public void Initialize(SaveGame saveGame)
     {
@@ -146,7 +124,7 @@ internal class SingletonRepository
         Towns = new SingletonDictionary<Town>(saveGame, LoadTypesFromAssembly<Town>(saveGame));
         AmuletFlavours = new SingletonDictionary<AmuletFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<AmuletFlavour>(saveGame)));
         MushroomFlavours = new SingletonDictionary<MushroomFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<MushroomFlavour>(saveGame)));
-        PotionFlavours = new SingletonDictionary<PotionFlavour>(saveGame, WeightedShuffle(LoadTypesFromAssembly<PotionFlavour>(saveGame)));
+        PotionFlavours = new SingletonDictionary<PotionFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<PotionFlavour>(saveGame)));
         RingFlavours = new SingletonDictionary<RingFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<RingFlavour>(saveGame)));
         RodFlavours = new SingletonDictionary<RodFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<RodFlavour>(saveGame)));
         ScrollFlavours = new SingletonDictionary<BaseScrollFlavour>(saveGame, LoadTypesFromAssembly<BaseScrollFlavour>(saveGame));
