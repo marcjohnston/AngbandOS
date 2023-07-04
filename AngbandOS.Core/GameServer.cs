@@ -8,7 +8,7 @@
 namespace AngbandOS.Core;
 
 /// <summary>
-/// Represents an encapsulating wrapper for an in-progrss game.  This wrapper exposes public functionality.
+/// Represents an encapsulating wrapper for an in-progress game.  This wrapper exposes public functionality.
 /// SaveGame objects are internal.
 /// </summary>
 public class GameServer
