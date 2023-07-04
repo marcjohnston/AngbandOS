@@ -7885,14 +7885,14 @@ internal class SaveGame
     /// </summary>
     /// <param name="direction"> The direction in which to move </param>
     /// <param name="dontPickup"> Whether or not to skip picking up any objects we step on </param>
-    public void MovePlayer(int direction, bool dontPickup)
+    private void MovePlayer(int direction, bool dontPickup)
     {
         int newY = Player.MapY + Level.KeypadDirectionYOffset[direction];
         int newX = Player.MapX + Level.KeypadDirectionXOffset[direction];
         MovePlayer(newY, newX, dontPickup);
     }
 
-    public void MovePlayer(int newY, int newX, bool dontPickup)
+    private void MovePlayer(int newY, int newX, bool dontPickup)
     { 
         bool canPassWalls = false;
         GridTile tile = Level.Grid[newY][newX];
