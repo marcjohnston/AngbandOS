@@ -74,12 +74,12 @@ internal class GridTile : IItemContainer
     /// <summary>
     /// The type of feature in this grid tile
     /// </summary>
-    public FloorTile BackgroundFeature;
+    public Tile BackgroundFeature;
 
     /// <summary>
     /// The type of feature in this grid tile
     /// </summary>
-    public FloorTile FeatureType;
+    public Tile FeatureType;
 
     /// <summary>
     /// The index of the first item that is in this grid tile

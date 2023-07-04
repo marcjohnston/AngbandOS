@@ -26,7 +26,7 @@ internal class SingletonRepository
     public SingletonDictionary<Animation> Animations;
     public SingletonDictionary<FixedArtifact> FixedArtifacts;
     [Obsolete("Needs to be non-keyed")]
-    public SingletonKeyedDictionary<string, FloorTile> FloorTileTypes;
+    public SingletonKeyedDictionary<string, Tile> FloorTileTypes;
     public SingletonDictionary<GameCommand> GameCommands;
     public SingletonDictionary<ArtifactBias> ArtifactBiases;
     public SingletonDictionary<BaseInventorySlot> InventorySlots;
@@ -134,7 +134,7 @@ internal class SingletonRepository
         ProjectileGraphics = new SingletonDictionary<ProjectileGraphic>(saveGame, LoadTypesFromAssembly<ProjectileGraphic>(saveGame));
         Animations = new SingletonDictionary<Animation>(saveGame, LoadTypesFromAssembly<Animation>(saveGame));
         Vaults = new SingletonDictionary<Vault>(saveGame, LoadTypesFromAssembly<Vault>(saveGame));
-        FloorTileTypes = new SingletonKeyedDictionary<string, FloorTile>(saveGame, LoadTypesFromAssembly<FloorTile>(saveGame));
+        FloorTileTypes = new SingletonKeyedDictionary<string, Tile>(saveGame, LoadTypesFromAssembly<Tile>(saveGame));
         RareItems = new SingletonKeyedDictionary<RareItemTypeEnum, RareItem>(saveGame, LoadTypesFromAssembly<RareItem>(saveGame));
         FixedArtifacts = new SingletonDictionary<FixedArtifact>(saveGame, LoadTypesFromAssembly<FixedArtifact>(saveGame));
         MonsterRaces = new SingletonDictionary<MonsterRace>(saveGame, LoadTypesFromAssembly<MonsterRace>(saveGame).OrderBy(_monsterRace => _monsterRace.LevelFound));

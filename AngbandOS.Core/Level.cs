@@ -1291,7 +1291,7 @@ internal class Level
         Colour a;
         char c;
         GridTile cPtr = Grid[y][x];
-        FloorTile feat = cPtr.FeatureType;
+        Tile feat = cPtr.FeatureType;
         if (feat.IsOpenFloor)
         {
             if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorised) ||
