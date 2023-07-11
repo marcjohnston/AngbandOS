@@ -4266,8 +4266,7 @@ internal class SaveGame
                 {
                     Level.ReplaceSecretDoor(y, x);
                 }
-                if (cPtr.FeatureType.IsClosedDoor ||
-                    cPtr.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.OpenDoorway)
+                if (cPtr.FeatureType.IsClosedDoor || cPtr.FeatureType.IsOpenDoor)
                 {
                     cPtr.TileFlags.Set(GridTile.PlayerMemorized);
                     Level.RedrawSingleLocation(y, x);

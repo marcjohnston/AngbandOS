@@ -16,9 +16,13 @@ internal class OpenDoorTile : Tile
     public override string Name => "OpenDoor";
     public override AlterAction? AlterAction => new CloseAlterAction();
     public override string AppearAs => "OpenDoor";
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<OpenDoorwayTileCategory>();
     public override string Description => "open door";
     public override bool DimsOutsideLOS => true;
     public override bool IsPassable => true;
     public override int MapPriority => 17;
+
+    /// <summary>
+    /// Returns true, because this tile is an open door.
+    /// </summary>
+    public override bool IsOpenDoor => true;
 }

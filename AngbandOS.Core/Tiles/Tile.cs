@@ -165,4 +165,9 @@ internal abstract class Tile : ISingletonDictionary<string>
     /// Returns true, if the tile is rubble.  Returns false, by default.  Rubble returns true.
     /// </summary>
     public virtual bool IsRubble => false;
+
+    /// <summary>
+    /// Returns true, if the tile is an open door.  Returns false, by default.  Open and broken doors returns true.
+    /// </summary>
+    public virtual bool IsOpenDoor => false;
 }

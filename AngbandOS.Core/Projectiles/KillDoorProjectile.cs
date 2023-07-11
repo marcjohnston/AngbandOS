@@ -18,7 +18,7 @@ internal class KillDoorProjectile : Projectile
     {
         GridTile cPtr = SaveGame.Level.Grid[y][x];
         bool obvious = false;
-        if (cPtr.FeatureType.IsClosedDoor || cPtr.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.OpenDoorway || cPtr.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.UnidentifiedTrap || cPtr.FeatureType.IsTrap)
+        if (cPtr.FeatureType.IsClosedDoor || cPtr.FeatureType.IsOpenDoor || cPtr.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.UnidentifiedTrap || cPtr.FeatureType.IsTrap)
         {
             if (SaveGame.Level.PlayerHasLosBold(y, x))
             {
