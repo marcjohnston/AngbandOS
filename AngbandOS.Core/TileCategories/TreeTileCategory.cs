@@ -7,6 +7,7 @@
 
 namespace AngbandOS.Core.TileCategories;
 
+[Serializable]
 internal class TreeTileCategory : TileCategory
 {
     private TreeTileCategory(SaveGame saveGame) : base(saveGame) { }

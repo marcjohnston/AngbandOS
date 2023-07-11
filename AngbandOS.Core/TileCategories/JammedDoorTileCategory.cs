@@ -7,6 +7,7 @@
 
 namespace AngbandOS.Core.TileCategories;
 
+[Serializable]
 internal class JammedDoorTileCategory : TileCategory
 {
     private JammedDoorTileCategory(SaveGame saveGame) : base(saveGame) { }

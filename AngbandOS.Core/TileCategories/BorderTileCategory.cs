@@ -7,6 +7,7 @@
 
 namespace AngbandOS.Core.TileCategories;
 
+[Serializable]
 internal class BorderTileCategory : TileCategory
 {
     private BorderTileCategory(SaveGame saveGame) : base(saveGame) { }

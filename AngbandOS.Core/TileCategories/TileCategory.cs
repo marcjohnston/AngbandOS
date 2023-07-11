@@ -7,6 +7,7 @@
 
 namespace AngbandOS.Core.TileCategories;
 
+[Serializable]
 internal abstract class TileCategory
 {
     protected readonly SaveGame SaveGame;

@@ -23,7 +23,7 @@ internal class MakeDoorProjectile : Projectile
             return false;
         }
         SaveGame.Level.CaveSetFeat(y, x, "LockedDoor0");
-        if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorised))
+        if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized))
         {
             obvious = true;
         }

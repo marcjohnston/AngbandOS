@@ -866,7 +866,7 @@ internal class Monster : IItemContainer
                 }
                 // Remove the wall (and the player's memory of it) and remind ourselves to
                 // update the view if the player can see it
-                tile.TileFlags.Clear(GridTile.PlayerMemorised);
+                tile.TileFlags.Clear(GridTile.PlayerMemorized);
                 saveGame.Level.RevertTileToBackground(newY, newX);
                 if (saveGame.Level.PlayerHasLosBold(newY, newX))
                 {
@@ -938,11 +938,11 @@ internal class Monster : IItemContainer
                 if (Program.Rng.DieRoll(BreakElderSign) < Race.Level)
                 {
                     // If the player knows the sign is there, let them know it was broken
-                    if (tile.TileFlags.IsSet(GridTile.PlayerMemorised))
+                    if (tile.TileFlags.IsSet(GridTile.PlayerMemorized))
                     {
                         saveGame.MsgPrint("The Elder Sign is broken!");
                     }
-                    tile.TileFlags.Clear(GridTile.PlayerMemorised);
+                    tile.TileFlags.Clear(GridTile.PlayerMemorized);
                     saveGame.Level.RevertTileToBackground(newY, newX);
                     // Breaking the sign means we can move after all
                     doMove = true;
@@ -958,7 +958,7 @@ internal class Monster : IItemContainer
                 if (Program.Rng.DieRoll(Constants.BreakYellowSign) < Race.Level)
                 {
                     // If the player knows about the sign, let them know it was broken
-                    if (tile.TileFlags.IsSet(GridTile.PlayerMemorised))
+                    if (tile.TileFlags.IsSet(GridTile.PlayerMemorized))
                     {
                         // If the player was on the sign, hurt them
                         if (newY == saveGame.Player.MapY && newX == saveGame.Player.MapX)
@@ -971,7 +971,7 @@ internal class Monster : IItemContainer
                             saveGame.MsgPrint("An Yellow Sign was disarmed.");
                         }
                     }
-                    tile.TileFlags.Clear(GridTile.PlayerMemorised);
+                    tile.TileFlags.Clear(GridTile.PlayerMemorized);
                     saveGame.Level.RevertTileToBackground(newY, newX);
                     // We can do the move after all
                     doMove = true;

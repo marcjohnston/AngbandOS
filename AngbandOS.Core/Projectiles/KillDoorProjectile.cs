@@ -31,7 +31,7 @@ internal class KillDoorProjectile : Projectile
                     SaveGame.UpdateViewFlaggedAction.Set();
                 }
             }
-            cPtr.TileFlags.Clear(GridTile.PlayerMemorised);
+            cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
             SaveGame.Level.RevertTileToBackground(y, x);
         }
         return obvious;

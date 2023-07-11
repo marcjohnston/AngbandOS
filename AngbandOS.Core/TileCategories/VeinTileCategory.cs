@@ -7,6 +7,7 @@
 
 namespace AngbandOS.Core.TileCategories;
 
+[Serializable]
 internal class VeinTileCategory : TileCategory
 {
     private VeinTileCategory(SaveGame saveGame) : base(saveGame) { }

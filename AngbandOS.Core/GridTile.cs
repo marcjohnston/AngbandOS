@@ -13,10 +13,14 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class GridTile : IItemContainer
 {
-    protected SaveGame SaveGame; // TODO: Remove this because it is heavyweight for GridTile objects
-    public GridTile(SaveGame saveGame)
+    protected readonly SaveGame SaveGame;
+    public readonly int X;
+    public readonly int Y;
+    public GridTile(SaveGame saveGame, int x, int y)
     {
         SaveGame = saveGame;
+        X = x;
+        Y = y;
         BackgroundFeature = SaveGame.SingletonRepository.FloorTileTypes["Nothing"];
         FeatureType = SaveGame.SingletonRepository.FloorTileTypes["Nothing"];
     }
@@ -49,7 +53,7 @@ internal class GridTile : IItemContainer
     /// <summary>
     /// Set if the player should remember the grid's contents
     /// </summary>
-    public const int PlayerMemorised = 0x0001;
+    public const int PlayerMemorized = 0x0001;
 
     /// <summary>
     /// Set if the grid tile is lit independently of the player's light source
@@ -138,7 +142,7 @@ internal class GridTile : IItemContainer
     }
 
     /// <summary>
-    /// Checks the quantity of an item and removes it, when the quanity is zero. 
+    /// Checks the quantity of an item and removes it, when the quantity is zero. 
     /// </summary>
     /// <param name="oPtr"></param>
     public void ItemOptimize(Item oPtr)

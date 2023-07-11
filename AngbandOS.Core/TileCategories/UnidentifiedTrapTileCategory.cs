@@ -7,6 +7,7 @@
 
 namespace AngbandOS.Core.TileCategories;
 
+[Serializable]
 internal class UnidentifiedTrapTileCategory : TileCategory
 {
     private UnidentifiedTrapTileCategory(SaveGame saveGame) : base(saveGame) { }

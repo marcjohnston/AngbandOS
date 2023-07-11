@@ -59,12 +59,12 @@ internal class Level
     public Level(SaveGame saveGame)
     {
         SaveGame = saveGame;
-        for (int i = 0; i < MaxHgt; i++)
+        for (int y = 0; y < MaxHgt; y++)
         {
-            Grid[i] = new GridTile[MaxWid];
-            for (int j = 0; j < MaxWid; j++)
+            Grid[y] = new GridTile[MaxWid];
+            for (int x = 0; x < MaxWid; x++)
             {
-                Grid[i][j] = new GridTile(saveGame);
+                Grid[y][x] = new GridTile(saveGame, x, y);
             }
         }
         Monsters = new Monster[Constants.MaxMIdx];
@@ -709,14 +709,14 @@ internal class Level
                 {
                     if (!cPtr.FeatureType.IsOpenFloor)
                     {
-                        cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+                        cPtr.TileFlags.Set(GridTile.PlayerMemorized);
                     }
                     for (int i = 0; i < 8; i++)
                     {
                         cPtr = Grid[y + OrderedDirectionYOffset[i]][x + OrderedDirectionXOffset[i]];
                         if (cPtr.FeatureType.IsWall)
                         {
-                            cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+                            cPtr.TileFlags.Set(GridTile.PlayerMemorized);
                         }
                     }
                 }
@@ -789,19 +789,19 @@ internal class Level
         {
             oPtr.Marked = true;
         }
-        if (cPtr.TileFlags.IsClear(GridTile.PlayerMemorised))
+        if (cPtr.TileFlags.IsClear(GridTile.PlayerMemorized))
         {
             if (cPtr.FeatureType.IsOpenFloor)
             {
-                cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+                cPtr.TileFlags.Set(GridTile.PlayerMemorized);
             }
             else if (cPtr.FeatureType.IsPassable)
             {
-                cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+                cPtr.TileFlags.Set(GridTile.PlayerMemorized);
             }
             else if (cPtr.TileFlags.IsSet(GridTile.PlayerLit))
             {
-                cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+                cPtr.TileFlags.Set(GridTile.PlayerMemorized);
             }
             else
             {
@@ -809,7 +809,7 @@ internal class Level
                 int xx = x < SaveGame.Player.MapX ? x + 1 : x > SaveGame.Player.MapX ? x - 1 : x;
                 if (Grid[yy][xx].TileFlags.IsSet(GridTile.SelfLit))
                 {
-                    cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+                    cPtr.TileFlags.Set(GridTile.PlayerMemorized);
                 }
             }
         }
@@ -1155,7 +1155,7 @@ internal class Level
             for (int x = 0; x < CurWid; x++)
             {
                 GridTile cPtr = Grid[y][x];
-                cPtr.TileFlags.Clear(GridTile.PlayerMemorised);
+                cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
                 foreach (Item oPtr in cPtr.Items)
                 {
                     oPtr.Marked = false;
@@ -1187,9 +1187,9 @@ internal class Level
                         cPtr.TileFlags.Set(GridTile.SelfLit);
                         if (!cPtr.FeatureType.IsOpenFloor)
                         {
-                            cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+                            cPtr.TileFlags.Set(GridTile.PlayerMemorized);
                         }
-                        cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+                        cPtr.TileFlags.Set(GridTile.PlayerMemorized);
                     }
                 }
                 foreach (Item oPtr in cPtr.Items)
@@ -1294,7 +1294,7 @@ internal class Level
         Tile feat = cPtr.FeatureType;
         if (feat.IsOpenFloor)
         {
-            if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorised) ||
+            if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized) ||
                 ((cPtr.TileFlags.IsSet(GridTile.PlayerLit) || (cPtr.TileFlags.IsSet(GridTile.SelfLit) &&
                  cPtr.TileFlags.IsSet(GridTile.IsVisible))) && SaveGame.Player.TimedBlindness.TurnsRemaining == 0))
             {
@@ -1355,7 +1355,7 @@ internal class Level
         }
         else
         {
-            if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorised))
+            if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized))
             {
                 feat = string.IsNullOrEmpty(feat.AppearAs)
                     ? SaveGame.SingletonRepository.FloorTileTypes[cPtr.BackgroundFeature.AppearAs]

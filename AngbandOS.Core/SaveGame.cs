@@ -648,7 +648,7 @@ internal class SaveGame
             }
             bool tileUnseen = true;
             // If the tile is something we should not run past then we must stop moving
-            if (tile.TileFlags.IsSet(GridTile.PlayerMemorised))
+            if (tile.TileFlags.IsSet(GridTile.PlayerMemorized))
             {
                 bool notice = !tile.FeatureType.RunPast;
                 if (notice)
@@ -720,7 +720,7 @@ internal class SaveGame
                 row = player.MapY + level.KeypadDirectionYOffset[newDirection];
                 col = player.MapX + level.KeypadDirectionXOffset[newDirection];
                 tile = level.Grid[row][col];
-                if (tile.TileFlags.IsClear(GridTile.PlayerMemorised) || !tile.FeatureType.IsWall)
+                if (tile.TileFlags.IsClear(GridTile.PlayerMemorized) || !tile.FeatureType.IsWall)
                 {
                     if (_findBreakright)
                     {
@@ -742,7 +742,7 @@ internal class SaveGame
                 row = player.MapY + level.KeypadDirectionYOffset[newDirection];
                 col = player.MapX + level.KeypadDirectionXOffset[newDirection];
                 tile = level.Grid[row][col];
-                if (tile.TileFlags.IsClear(GridTile.PlayerMemorised) || !tile.FeatureType.IsWall)
+                if (tile.TileFlags.IsClear(GridTile.PlayerMemorized) || !tile.FeatureType.IsWall)
                 {
                     if (_findBreakleft)
                     {
@@ -822,7 +822,7 @@ internal class SaveGame
             return false;
         }
         // If we don't know what's there it's okay
-        if (Level.Grid[y][x].TileFlags.IsClear(GridTile.PlayerMemorised))
+        if (Level.Grid[y][x].TileFlags.IsClear(GridTile.PlayerMemorized))
         {
             return false;
         }
@@ -847,7 +847,7 @@ internal class SaveGame
             return true;
         }
         // Unknown tiles are not empty
-        if (Level.Grid[y][x].TileFlags.IsSet(GridTile.PlayerMemorised))
+        if (Level.Grid[y][x].TileFlags.IsSet(GridTile.PlayerMemorized))
         {
             return false;
         }
@@ -3003,7 +3003,7 @@ internal class SaveGame
                     {
                         GridTile cPtr = Level.Grid[y][x];
                         cPtr.TileFlags.Set(GridTile.SelfLit);
-                        cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+                        cPtr.TileFlags.Set(GridTile.PlayerMemorized);
                         Level.NoteSpot(y, x);
                     }
                 }
@@ -4178,7 +4178,7 @@ internal class SaveGame
                 }
                 GridTile cPtr = Level.Grid[y][x];
                 cPtr.TileFlags.Clear(GridTile.InRoom | GridTile.InVault);
-                cPtr.TileFlags.Clear(GridTile.PlayerMemorised | GridTile.SelfLit);
+                cPtr.TileFlags.Clear(GridTile.PlayerMemorized | GridTile.SelfLit);
                 if (x == Player.MapX && y == Player.MapY)
                 {
                     flag = true;
@@ -4269,7 +4269,7 @@ internal class SaveGame
                 if (cPtr.FeatureType.IsClosedDoor ||
                     cPtr.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.OpenDoorway)
                 {
-                    cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+                    cPtr.TileFlags.Set(GridTile.PlayerMemorized);
                     Level.RedrawSingleLocation(y, x);
                     detect = true;
                 }
@@ -4531,7 +4531,7 @@ internal class SaveGame
                 GridTile cPtr = Level.Grid[y][x];
                 if (cPtr.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.UpStair || cPtr.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.DownStair)
                 {
-                    cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+                    cPtr.TileFlags.Set(GridTile.PlayerMemorized);
                     Level.RedrawSingleLocation(y, x);
                     detect = true;
                 }
@@ -4560,7 +4560,7 @@ internal class SaveGame
                 }
                 if (cPtr.FeatureType.IsTrap)
                 {
-                    cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+                    cPtr.TileFlags.Set(GridTile.PlayerMemorized);
                     detect = true;
                 }
             }
@@ -4588,7 +4588,7 @@ internal class SaveGame
                 }
                 if (cPtr.FeatureType.IsVisibleTreasure)
                 {
-                    cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+                    cPtr.TileFlags.Set(GridTile.PlayerMemorized);
                     Level.RedrawSingleLocation(y, x);
                     detect = true;
                 }
@@ -4694,7 +4694,7 @@ internal class SaveGame
                 }
                 cPtr = Level.Grid[yy][xx];
                 cPtr.TileFlags.Clear(GridTile.InRoom | GridTile.InVault);
-                cPtr.TileFlags.Clear(GridTile.SelfLit | GridTile.PlayerMemorised);
+                cPtr.TileFlags.Clear(GridTile.SelfLit | GridTile.PlayerMemorized);
                 if (dx == 0 && dy == 0)
                 {
                     continue;
@@ -6710,7 +6710,7 @@ internal class SaveGame
             cPtr.TileFlags.Clear(GridTile.SelfLit);
             if (cPtr.FeatureType.IsOpenFloor)
             {
-                cPtr.TileFlags.Clear(GridTile.PlayerMemorised);
+                cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
                 Level.NoteSpot(y, x);
             }
             if (cPtr.MonsterIndex != 0)
@@ -7421,7 +7421,7 @@ internal class SaveGame
             int yy = Player.MapY + Level.OrderedDirectionYOffset[orderedDirection];
             int xx = Player.MapX + Level.OrderedDirectionXOffset[orderedDirection];
             // We need to be aware of the door
-            if (Level.Grid[yy][xx].TileFlags.IsClear(GridTile.PlayerMemorised))
+            if (Level.Grid[yy][xx].TileFlags.IsClear(GridTile.PlayerMemorized))
             {
                 continue;
             }
@@ -7459,7 +7459,7 @@ internal class SaveGame
             int yy = Player.MapY + Level.OrderedDirectionYOffset[orderedDirection];
             int xx = Player.MapX + Level.OrderedDirectionXOffset[orderedDirection];
             // We need to be aware of the trap
-            if (Level.Grid[yy][xx].TileFlags.IsClear(GridTile.PlayerMemorised))
+            if (Level.Grid[yy][xx].TileFlags.IsClear(GridTile.PlayerMemorized))
             {
                 continue;
             }
@@ -7492,7 +7492,7 @@ internal class SaveGame
             int yy = Player.MapY + Level.OrderedDirectionYOffset[orderedDirection];
             int xx = Player.MapX + Level.OrderedDirectionXOffset[orderedDirection];
             // We must be aware of the door
-            if (Level.Grid[yy][xx].TileFlags.IsClear(GridTile.PlayerMemorised))
+            if (Level.Grid[yy][xx].TileFlags.IsClear(GridTile.PlayerMemorized))
             {
                 continue;
             }
@@ -7748,7 +7748,7 @@ internal class SaveGame
         {
             MsgPrint($"You have disarmed the {trapName}.");
             Player.GainExperience(power);
-            tile.TileFlags.Clear(GridTile.PlayerMemorised);
+            tile.TileFlags.Clear(GridTile.PlayerMemorized);
             Level.RevertTileToBackground(y, x);
             MovePlayer(y, x, true);
         }
@@ -7960,31 +7960,31 @@ internal class SaveGame
         {
             Disturb(false);
             // If we can't see it and haven't memories it, tell us what we bumped into
-            if (tile.TileFlags.IsClear(GridTile.PlayerMemorised) &&
+            if (tile.TileFlags.IsClear(GridTile.PlayerMemorized) &&
                 (Player.TimedBlindness.TurnsRemaining != 0 || tile.TileFlags.IsClear(GridTile.PlayerLit)))
             {
                 if (tile.FeatureType.Name == "Rubble")
                 {
                     MsgPrint("You feel some rubble blocking your way.");
-                    tile.TileFlags.Set(GridTile.PlayerMemorised);
+                    tile.TileFlags.Set(GridTile.PlayerMemorized);
                     Level.RedrawSingleLocation(newY, newX);
                 }
                 else if (tile.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.Tree)
                 {
                     MsgPrint($"You feel a {tile.FeatureType.Description} blocking your way.");
-                    tile.TileFlags.Set(GridTile.PlayerMemorised);
+                    tile.TileFlags.Set(GridTile.PlayerMemorized);
                     Level.RedrawSingleLocation(newY, newX);
                 }
                 else if (tile.FeatureType.Name == "Pillar")
                 {
                     MsgPrint("You feel a pillar blocking your way.");
-                    tile.TileFlags.Set(GridTile.PlayerMemorised);
+                    tile.TileFlags.Set(GridTile.PlayerMemorized);
                     Level.RedrawSingleLocation(newY, newX);
                 }
                 else if (tile.FeatureType.Name.Contains("Water"))
                 {
                     MsgPrint("Your way seems to be blocked by water.");
-                    tile.TileFlags.Set(GridTile.PlayerMemorised);
+                    tile.TileFlags.Set(GridTile.PlayerMemorized);
                     Level.RedrawSingleLocation(newY, newX);
                 }
                 // If we're moving onto a border, change wilderness location
@@ -8029,13 +8029,13 @@ internal class SaveGame
                 else if (tile.FeatureType.IsClosedDoor)
                 {
                     MsgPrint("You feel a closed door blocking your way.");
-                    tile.TileFlags.Set(GridTile.PlayerMemorised);
+                    tile.TileFlags.Set(GridTile.PlayerMemorized);
                     Level.RedrawSingleLocation(newY, newX);
                 }
                 else
                 {
                     MsgPrint($"You feel a {tile.FeatureType.Description} blocking your way.");
-                    tile.TileFlags.Set(GridTile.PlayerMemorised);
+                    tile.TileFlags.Set(GridTile.PlayerMemorized);
                     Level.RedrawSingleLocation(newY, newX);
                 }
             }
@@ -8053,19 +8053,19 @@ internal class SaveGame
                 else if (tile.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.Tree)
                 {
                     MsgPrint($"There is a {tile.FeatureType.Description} blocking your way.");
-                    tile.TileFlags.Set(GridTile.PlayerMemorised);
+                    tile.TileFlags.Set(GridTile.PlayerMemorized);
                     Level.RedrawSingleLocation(newY, newX);
                 }
                 else if (tile.FeatureType.Name == "Pillar")
                 {
                     MsgPrint("There is a pillar blocking your way.");
-                    tile.TileFlags.Set(GridTile.PlayerMemorised);
+                    tile.TileFlags.Set(GridTile.PlayerMemorized);
                     Level.RedrawSingleLocation(newY, newX);
                 }
                 else if (tile.FeatureType.Name.Contains("Water"))
                 {
                     MsgPrint("You cannot swim.");
-                    tile.TileFlags.Set(GridTile.PlayerMemorised);
+                    tile.TileFlags.Set(GridTile.PlayerMemorized);
                     Level.RedrawSingleLocation(newY, newX);
                 }
                 // Again, walking onto a border means a change of wilderness grid
@@ -9883,7 +9883,7 @@ internal class SaveGame
             return false;
         }
         // Clear the tile
-        tile.TileFlags.Clear(GridTile.PlayerMemorised);
+        tile.TileFlags.Clear(GridTile.PlayerMemorized);
         Level.RevertTileToBackground(y, x);
         UpdateScentFlaggedAction.Set();
         UpdateMonstersFlaggedAction.Set();
@@ -10022,7 +10022,7 @@ internal class SaveGame
                 {
                     MsgPrint("There is a flash of shimmering light!");
                     // Trap disappears when triggered
-                    tile.TileFlags.Clear(GridTile.PlayerMemorised);
+                    tile.TileFlags.Clear(GridTile.PlayerMemorized);
                     Level.RevertTileToBackground(Player.MapY, Player.MapX);
                     // Summon 1d3+2 monsters
                     int num = 2 + Program.Rng.DieRoll(3);
@@ -11825,23 +11825,24 @@ internal class SaveGame
             bool okay = true;
 
             // Allocate and reset the grid tiles.
-            for (int i = 0; i < Level.MaxHgt; i++)
+            for (int y = 0; y < Level.MaxHgt; y++)
             {
-                Level.Grid[i] = new GridTile[Level.MaxWid];
-                for (int j = 0; j < Level.MaxWid; j++)
+                Level.Grid[y] = new GridTile[Level.MaxWid];
+                for (int x = 0; x < Level.MaxWid; x++)
                 {
-                    Level.Grid[i][j] = new GridTile(this);
+                    GridTile newTile = new GridTile(this, x, y);
+                    Level.Grid[y][x] = newTile;
                     if (CurrentDepth == 0)
                     {
-                        Level.Grid[i][j].SetBackgroundFeature("Grass");
+                        newTile.SetBackgroundFeature("Grass");
                     }
                     else if (Wilderness[Player.WildernessY][Player.WildernessX].Dungeon.Tower)
                     {
-                        Level.Grid[i][j].SetBackgroundFeature("TowerFloor");
+                        newTile.SetBackgroundFeature("TowerFloor");
                     }
                     else
                     {
-                        Level.Grid[i][j].SetBackgroundFeature("DungeonFloor");
+                        newTile.SetBackgroundFeature("DungeonFloor");
                     }
                 }
             }
@@ -12271,7 +12272,7 @@ internal class SaveGame
                         cPtr.SetFeature("Roof");
                     }
                 }
-                cPtr.TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                cPtr.TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             }
         }
         y = y2;
@@ -12569,7 +12570,7 @@ internal class SaveGame
                             cPtr.RevertToBackground();
                         }
                         cPtr.TileFlags.Clear(GridTile.InRoom | GridTile.InVault);
-                        cPtr.TileFlags.Clear(GridTile.PlayerMemorised | GridTile.SelfLit);
+                        cPtr.TileFlags.Clear(GridTile.PlayerMemorized | GridTile.SelfLit);
                     }
                 }
             }
@@ -12649,81 +12650,81 @@ internal class SaveGame
             (Wilderness[wildY][wildX - 1].Town != null) || (Wilderness[wildY - 1][wildX - 1].Town != null))
         {
             Level.Grid[0][0].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[0][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[0][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[1][0].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[1][1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[0][1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[0][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[0][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[0][0].RevertToBackground();
-            Level.Grid[0][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[0][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[1][0].SetFeature("TownWall");
-            Level.Grid[1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[1][1].SetFeature("TownWall");
-            Level.Grid[1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[0][1].SetFeature("TownWall");
-            Level.Grid[0][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[0][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         }
         if ((Wilderness[wildY][wildX].Town != null) || (Wilderness[wildY - 1][wildX].Town != null) ||
             (Wilderness[wildY][wildX + 1].Town != null) || (Wilderness[wildY - 1][wildX + 1].Town != null))
         {
             Level.Grid[0][width - 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[0][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[0][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[1][width - 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[1][width - 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[0][width - 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[0][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[0][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[0][width - 1].RevertToBackground();
-            Level.Grid[0][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[0][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[1][width - 1].SetFeature("TownWall");
-            Level.Grid[1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[1][width - 2].SetFeature("TownWall");
-            Level.Grid[1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[0][width - 2].SetFeature("TownWall");
-            Level.Grid[0][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[0][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         }
         if ((Wilderness[wildY][wildX].Town != null) || (Wilderness[wildY + 1][wildX].Town != null) ||
             (Wilderness[wildY][wildX + 1].Town != null) || (Wilderness[wildY + 1][wildX + 1].Town != null))
         {
             Level.Grid[height - 1][width - 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 2][width - 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 2][width - 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 1][width - 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 1][width - 1].RevertToBackground();
-            Level.Grid[height - 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 2][width - 1].SetFeature("TownWall");
-            Level.Grid[height - 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 2][width - 2].SetFeature("TownWall");
-            Level.Grid[height - 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 1][width - 2].SetFeature("TownWall");
-            Level.Grid[height - 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         }
         if ((Wilderness[wildY][wildX].Town != null) || (Wilderness[wildY + 1][wildX].Town != null) ||
             (Wilderness[wildY][wildX - 1].Town != null) || (Wilderness[wildY + 1][wildX - 1].Town != null))
         {
             Level.Grid[height - 1][0].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 2][0].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 2][1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 1][1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 1][0].RevertToBackground();
-            Level.Grid[height - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 2][0].SetFeature("TownWall");
-            Level.Grid[height - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 2][1].SetFeature("TownWall");
-            Level.Grid[height - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 1][1].SetFeature("TownWall");
-            Level.Grid[height - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         }
     }
 
@@ -13113,80 +13114,80 @@ internal class SaveGame
         for (i = -2; i < 3; i++)
         {
             Level.Grid[y][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            Level.Grid[y][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -4; i < 5; i++)
         {
             Level.Grid[y - 1][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 1][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            Level.Grid[y - 1][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -5; i < 6; i++)
         {
             Level.Grid[y - 2][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 2][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            Level.Grid[y - 2][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -6; i < 7; i++)
         {
             Level.Grid[y - 3][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 3][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            Level.Grid[y - 3][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -6; i < 7; i++)
         {
             Level.Grid[y - 4][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 4][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            Level.Grid[y - 4][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -7; i < 8; i++)
         {
             Level.Grid[y - 5][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 5][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            Level.Grid[y - 5][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -7; i < 8; i++)
         {
             Level.Grid[y - 6][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 6][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            Level.Grid[y - 6][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -7; i < 8; i++)
         {
             Level.Grid[y - 7][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 7][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            Level.Grid[y - 7][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -7; i < 8; i++)
         {
             Level.Grid[y - 8][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 8][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            Level.Grid[y - 8][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -7; i < 8; i++)
         {
             Level.Grid[y - 9][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 9][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            Level.Grid[y - 9][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -6; i < 7; i++)
         {
             Level.Grid[y - 10][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 10][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            Level.Grid[y - 10][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -6; i < 7; i++)
         {
             Level.Grid[y - 11][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 11][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            Level.Grid[y - 11][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -5; i < 6; i++)
         {
             Level.Grid[y - 12][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 12][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            Level.Grid[y - 12][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -4; i < 5; i++)
         {
             Level.Grid[y - 13][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 13][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            Level.Grid[y - 13][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -2; i < 4; i++)
         {
             Level.Grid[y - 14][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 14][x + i].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+            Level.Grid[y - 14][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         Level.Grid[y][x].SetFeature("UpStair");
-        Level.Grid[y][x].TileFlags.Set(GridTile.PlayerMemorised | GridTile.SelfLit);
+        Level.Grid[y][x].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         for (i = -3; i < 4; i++)
         {
             if (Level.Grid[y + 1][x + i].FeatureType.Category.CategoryEnum == FloorTileTypeCategory.Tree)
@@ -13340,7 +13341,7 @@ internal class SaveGame
             if (cPtr.FeatureType.Name == cPtr.BackgroundFeature.Name)
             {
                 cPtr.SetFeature("Rock");
-                cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+                cPtr.TileFlags.Set(GridTile.PlayerMemorized);
             }
         }
     }
@@ -13356,7 +13357,7 @@ internal class SaveGame
             if (cPtr.FeatureType.Name == cPtr.BackgroundFeature.Name)
             {
                 cPtr.SetFeature("Tree");
-                cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+                cPtr.TileFlags.Set(GridTile.PlayerMemorized);
             }
         }
     }
@@ -13372,7 +13373,7 @@ internal class SaveGame
             if (cPtr.FeatureType.Name == cPtr.BackgroundFeature.Name)
             {
                 cPtr.SetFeature("Bush");
-                cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+                cPtr.TileFlags.Set(GridTile.PlayerMemorized);
             }
         }
     }
@@ -13384,22 +13385,22 @@ internal class SaveGame
         int x = Level.CurWid / 2;
         cPtr = Level.Grid[0][x];
         cPtr.SetFeature("PathBorderNS");
-        cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+        cPtr.TileFlags.Set(GridTile.PlayerMemorized);
         x = Level.CurWid - 2;
         int y = Level.CurHgt / 2;
         cPtr = Level.Grid[y][x + 1];
         cPtr.SetFeature("PathBorderEW");
-        cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+        cPtr.TileFlags.Set(GridTile.PlayerMemorized);
         x = Level.CurWid / 2;
         y = Level.CurHgt - 2;
         cPtr = Level.Grid[y + 1][x];
         cPtr.SetFeature("PathBorderNS");
-        cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+        cPtr.TileFlags.Set(GridTile.PlayerMemorized);
         x = 1;
         y = Level.CurHgt / 2;
         cPtr = Level.Grid[y][0];
         cPtr.SetFeature("PathBorderEW");
-        cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+        cPtr.TileFlags.Set(GridTile.PlayerMemorized);
     }
 
     private GridCoordinate AddStairsDown()
@@ -13420,7 +13421,7 @@ internal class SaveGame
         } while (true);
         cPtr = Level.Grid[y][x];
         cPtr.SetFeature("DownStair");
-        cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+        cPtr.TileFlags.Set(GridTile.PlayerMemorized);
         return new GridCoordinate(x, y);
     }
 
@@ -13483,164 +13484,164 @@ internal class SaveGame
         {
             cPtr = Level.Grid[0][x];
             cPtr.SetFeature("TownWall");
-            cPtr.TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            cPtr.TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             cPtr = Level.Grid[Level.CurHgt - 1][x];
             cPtr.SetFeature("TownWall");
-            cPtr.TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            cPtr.TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         }
         for (y = 0; y < Level.CurHgt; y++)
         {
             cPtr = Level.Grid[y][0];
             cPtr.SetFeature("TownWall");
-            cPtr.TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            cPtr.TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             cPtr = Level.Grid[y][Level.CurWid - 1];
             cPtr.SetFeature("TownWall");
-            cPtr.TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            cPtr.TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         }
         Level.Grid[0][(Level.CurWid / 2) - 2].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[0][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[0][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[0][(Level.CurWid / 2) - 1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[0][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[0][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[0][(Level.CurWid / 2) + 1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[0][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[0][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[0][(Level.CurWid / 2) + 2].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[0][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[0][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[1][(Level.CurWid / 2) - 2].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[1][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[1][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[1][(Level.CurWid / 2) - 1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[1][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[1][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[1][(Level.CurWid / 2) + 1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[1][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[1][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[1][(Level.CurWid / 2) + 2].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[1][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[1][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[0][(Level.CurWid / 2) - 2].SetFeature("TownWall");
-        Level.Grid[0][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[0][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[0][(Level.CurWid / 2) - 1].SetFeature("TownWall");
-        Level.Grid[0][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[0][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[0][Level.CurWid / 2].SetFeature("PathBorderNS");
-        Level.Grid[0][Level.CurWid / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[0][Level.CurWid / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[0][(Level.CurWid / 2) + 1].SetFeature("TownWall");
-        Level.Grid[0][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[0][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[0][(Level.CurWid / 2) + 2].SetFeature("TownWall");
-        Level.Grid[0][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[0][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[1][(Level.CurWid / 2) - 2].SetFeature("TownWall");
-        Level.Grid[1][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[1][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[1][(Level.CurWid / 2) - 1].SetFeature("TownWall");
-        Level.Grid[1][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[1][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[1][Level.CurWid / 2].SetFeature("PathBase");
-        Level.Grid[1][Level.CurWid / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[1][Level.CurWid / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[1][(Level.CurWid / 2) + 1].SetFeature("TownWall");
-        Level.Grid[1][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[1][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[1][(Level.CurWid / 2) + 2].SetFeature("TownWall");
-        Level.Grid[1][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[1][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 2].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 2].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 2].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 2].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 2].SetFeature("TownWall");
-        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 1].SetFeature("TownWall");
-        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[Level.CurHgt - 1][Level.CurWid / 2].SetFeature("PathBorderNS");
-        Level.Grid[Level.CurHgt - 1][Level.CurWid / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[Level.CurHgt - 1][Level.CurWid / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 1].SetFeature("TownWall");
-        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 2].SetFeature("TownWall");
-        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 2].SetFeature("TownWall");
-        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 1].SetFeature("TownWall");
-        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[Level.CurHgt - 2][Level.CurWid / 2].SetFeature("PathBase");
-        Level.Grid[Level.CurHgt - 2][Level.CurWid / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[Level.CurHgt - 2][Level.CurWid / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 1].SetFeature("TownWall");
-        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 2].SetFeature("TownWall");
-        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) - 2][0].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) - 1][0].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) + 1][0].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) + 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) + 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) + 2][0].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) + 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) + 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) - 2][1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) - 1][1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) + 1][1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) + 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) + 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) + 2][1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) + 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) + 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) - 2][0].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) - 1][0].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[Level.CurHgt / 2][0].SetFeature("PathBorderEW");
-        Level.Grid[Level.CurHgt / 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[Level.CurHgt / 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) + 1][0].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) + 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) + 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) + 2][0].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) + 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) + 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) - 2][1].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) - 1][1].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[Level.CurHgt / 2][1].SetFeature("PathBase");
-        Level.Grid[Level.CurHgt / 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[Level.CurHgt / 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) + 1][1].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) + 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) + 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) + 2][1].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) + 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) + 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 2].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 2].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 2].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 2].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 1].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 1].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[Level.CurHgt / 2][Level.CurWid - 1].SetFeature("PathBorderEW");
-        Level.Grid[Level.CurHgt / 2][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[Level.CurHgt / 2][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 1].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 1].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 2].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 2].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[Level.CurHgt / 2][Level.CurWid - 2].SetFeature("PathBase");
-        Level.Grid[Level.CurHgt / 2][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[Level.CurHgt / 2][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 2].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 2].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+        Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
     }
 
     private void MakeWildernessFeatures(int wildx, int wildy, out int stairX, out int stairY)
@@ -13858,176 +13859,176 @@ internal class SaveGame
             for (int x = 0; x < width; x++)
             {
                 Level.Grid[0][x].SetFeature("TownWall");
-                Level.Grid[0][x].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[0][x].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             }
             Level.Grid[0][(width / 2) - 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[0][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[0][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[0][(width / 2) - 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[0][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[0][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[0][(width / 2) + 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[0][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[0][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[0][(width / 2) + 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[0][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[0][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[1][(width / 2) - 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[1][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[1][(width / 2) - 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[1][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[1][(width / 2) + 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[1][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[1][(width / 2) + 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[1][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[0][(width / 2) - 2].SetFeature("TownWall");
-            Level.Grid[0][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[0][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[0][(width / 2) - 1].SetFeature("TownWall");
-            Level.Grid[0][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[0][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[0][width / 2].SetFeature("PathBorderNS");
-            Level.Grid[0][width / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[0][width / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[0][(width / 2) + 1].SetFeature("TownWall");
-            Level.Grid[0][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[0][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[0][(width / 2) + 2].SetFeature("TownWall");
-            Level.Grid[0][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[0][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[1][(width / 2) - 2].SetFeature("TownWall");
-            Level.Grid[1][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[1][(width / 2) - 1].SetFeature("TownWall");
-            Level.Grid[1][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[1][width / 2].SetFeature("PathBase");
-            Level.Grid[1][width / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][width / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[1][(width / 2) + 1].SetFeature("TownWall");
-            Level.Grid[1][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[1][(width / 2) + 2].SetFeature("TownWall");
-            Level.Grid[1][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[1][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         }
         if (Wilderness[wildY + 1][wildX].Town != null)
         {
             for (int x = 0; x < width; x++)
             {
                 Level.Grid[height - 1][x].SetFeature("TownWall");
-                Level.Grid[height - 1][x].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[height - 1][x].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             }
             Level.Grid[height - 1][(width / 2) - 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 1][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 1][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 1][(width / 2) - 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 1][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 1][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 1][(width / 2) + 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 1][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 1][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 1][(width / 2) + 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 1][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 1][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 2][(width / 2) - 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 2][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 2][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 2][(width / 2) - 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 2][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 2][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 2][(width / 2) + 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 2][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 2][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 2][(width / 2) + 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 2][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 2][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 1][(width / 2) - 2].SetFeature("TownWall");
-            Level.Grid[height - 1][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 1][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 1][(width / 2) - 1].SetFeature("TownWall");
-            Level.Grid[height - 1][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 1][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 1][width / 2].SetFeature("PathBorderNS");
-            Level.Grid[height - 1][width / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 1][width / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 1][(width / 2) + 1].SetFeature("TownWall");
-            Level.Grid[height - 1][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 1][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 1][(width / 2) + 2].SetFeature("TownWall");
-            Level.Grid[height - 1][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 1][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 2][(width / 2) - 2].SetFeature("TownWall");
-            Level.Grid[height - 2][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 2][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 2][(width / 2) - 1].SetFeature("TownWall");
-            Level.Grid[height - 2][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 2][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 2][width / 2].SetFeature("PathBase");
-            Level.Grid[height - 2][width / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 2][width / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 2][(width / 2) + 1].SetFeature("TownWall");
-            Level.Grid[height - 2][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 2][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height - 2][(width / 2) + 2].SetFeature("TownWall");
-            Level.Grid[height - 2][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height - 2][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         }
         if (Wilderness[wildY][wildX - 1].Town != null)
         {
             for (int y = 0; y < height; y++)
             {
                 Level.Grid[y][0].SetFeature("TownWall");
-                Level.Grid[y][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[y][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             }
             Level.Grid[(height / 2) - 2][0].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) - 1][0].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) + 1][0].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) + 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) + 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) + 2][0].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) + 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) + 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) - 2][1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) - 1][1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) + 1][1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) + 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) + 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) + 2][1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) + 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) + 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) - 2][0].SetFeature("TownWall");
-            Level.Grid[(height / 2) - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) - 1][0].SetFeature("TownWall");
-            Level.Grid[(height / 2) - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height / 2][0].SetFeature("PathBorderEW");
-            Level.Grid[height / 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height / 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) + 1][0].SetFeature("TownWall");
-            Level.Grid[(height / 2) + 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) + 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) + 2][0].SetFeature("TownWall");
-            Level.Grid[(height / 2) + 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) + 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) - 2][1].SetFeature("TownWall");
-            Level.Grid[(height / 2) - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) - 1][1].SetFeature("TownWall");
-            Level.Grid[(height / 2) - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height / 2][1].SetFeature("PathBase");
-            Level.Grid[height / 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height / 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) + 1][1].SetFeature("TownWall");
-            Level.Grid[(height / 2) + 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) + 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) + 2][1].SetFeature("TownWall");
-            Level.Grid[(height / 2) + 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) + 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         }
         if (Wilderness[wildY][wildX + 1].Town != null)
         {
             for (int y = 0; y < height; y++)
             {
                 Level.Grid[y][width - 1].SetFeature("TownWall");
-                Level.Grid[y][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+                Level.Grid[y][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             }
             Level.Grid[(height / 2) - 2][width - 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) - 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) - 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) - 1][width - 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) - 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) - 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) + 1][width - 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) + 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) + 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) + 2][width - 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) + 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) + 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) - 2][width - 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) - 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) - 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) - 1][width - 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) - 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) - 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) + 1][width - 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) + 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) + 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) + 2][width - 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) + 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) + 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) - 2][width - 1].SetFeature("TownWall");
-            Level.Grid[(height / 2) - 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) - 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) - 1][width - 1].SetFeature("TownWall");
-            Level.Grid[(height / 2) - 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) - 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height / 2][width - 1].SetFeature("PathBorderEW");
-            Level.Grid[height / 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height / 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) + 1][width - 1].SetFeature("TownWall");
-            Level.Grid[(height / 2) + 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) + 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) + 2][width - 1].SetFeature("TownWall");
-            Level.Grid[(height / 2) + 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) + 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) - 2][width - 2].SetFeature("TownWall");
-            Level.Grid[(height / 2) - 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) - 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) - 1][width - 2].SetFeature("TownWall");
-            Level.Grid[(height / 2) - 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) - 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[height / 2][width - 2].SetFeature("PathBase");
-            Level.Grid[height / 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[height / 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) + 1][width - 2].SetFeature("TownWall");
-            Level.Grid[(height / 2) + 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) + 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             Level.Grid[(height / 2) + 2][width - 2].SetFeature("TownWall");
-            Level.Grid[(height / 2) + 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorised);
+            Level.Grid[(height / 2) + 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         }
     }
 
@@ -14296,7 +14297,7 @@ internal class SaveGame
                 {
                     cPtr = Level.Grid[y][x];
                     cPtr.TileFlags.Set(GridTile.SelfLit);
-                    cPtr.TileFlags.Set(GridTile.PlayerMemorised);
+                    cPtr.TileFlags.Set(GridTile.PlayerMemorized);
                 }
             }
             for (i = 0; i < Constants.MinMAllocTd; i++)
@@ -14501,7 +14502,7 @@ internal class SaveGame
                 for (x = 0; x < Level.CurWid; x++)
                 {
                     Level.Grid[y][x].TileFlags.Set(GridTile.SelfLit);
-                    Level.Grid[y][x].TileFlags.Set(GridTile.PlayerMemorised);
+                    Level.Grid[y][x].TileFlags.Set(GridTile.PlayerMemorized);
                 }
             }
         }
@@ -14932,7 +14933,7 @@ internal class SaveGame
                 return true;
             }
         }
-        if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorised))
+        if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized))
         {
             return cPtr.FeatureType.IsInteresting;
         }
@@ -15092,7 +15093,7 @@ internal class SaveGame
                 break;
             }
             string feat = string.IsNullOrEmpty(cPtr.FeatureType.AppearAs) ? SingletonRepository.FloorTileTypes[cPtr.BackgroundFeature.AppearAs].Name : SingletonRepository.FloorTileTypes[cPtr.FeatureType.AppearAs].Name;
-            if (cPtr.TileFlags.IsClear(GridTile.PlayerMemorised) && !Level.PlayerCanSeeBold(y, x))
+            if (cPtr.TileFlags.IsClear(GridTile.PlayerMemorized) && !Level.PlayerCanSeeBold(y, x))
             {
                 feat = string.Empty;
             }

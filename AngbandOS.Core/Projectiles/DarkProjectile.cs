@@ -23,7 +23,7 @@ internal class DarkProjectile : Projectile
         cPtr.TileFlags.Clear(GridTile.SelfLit);
         if (cPtr.FeatureType.IsOpenFloor)
         {
-            cPtr.TileFlags.Clear(GridTile.PlayerMemorised);
+            cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
             SaveGame.Level.NoteSpot(y, x);
         }
         SaveGame.Level.RedrawSingleLocation(y, x);

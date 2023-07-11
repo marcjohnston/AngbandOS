@@ -7,6 +7,7 @@
 
 namespace AngbandOS.Core.TileCategories;
 
+[Serializable]
 internal class OpenDoorwayTileCategory : TileCategory
 {
     private OpenDoorwayTileCategory(SaveGame saveGame) : base(saveGame) { }

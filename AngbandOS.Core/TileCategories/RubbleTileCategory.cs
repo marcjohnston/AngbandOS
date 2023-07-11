@@ -7,6 +7,7 @@
 
 namespace AngbandOS.Core.TileCategories;
 
+[Serializable]
 internal class RubbleTileCategory : TileCategory
 {
     private RubbleTileCategory(SaveGame saveGame) : base(saveGame) { }
