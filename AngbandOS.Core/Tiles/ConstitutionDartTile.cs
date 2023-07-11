@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Tiles;
 
 [Serializable]
-internal class ConDartTile : Tile
+internal class ConstitutionDartTile : Tile
 {
-    private ConDartTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ConstitutionDartTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CaretSymbol>();
     public override Colour Colour => Colour.Red;
     public override string Name => "ConDart";
