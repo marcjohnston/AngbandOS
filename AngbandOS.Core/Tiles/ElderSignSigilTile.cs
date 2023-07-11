@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Tiles;
 
 [Serializable]
-internal class ElderSignTile : Tile
+internal class ElderSignSigilTile : Tile
 {
-    private ElderSignTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ElderSignSigilTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<AsteriskSymbol>();
     public override Colour Colour => Colour.Green;
     public override string Name => "ElderSign";
@@ -20,4 +20,14 @@ internal class ElderSignTile : Tile
     public override bool IsInteresting => true;
     public override bool IsPassable => true;
     public override int MapPriority => 20;
+
+    /// <summary>
+    /// Returns false, because pets cannot occupy Sigil tiles.
+    /// </summary>
+    public override bool AllowPetToOccupy => false;
+
+    /// <summary>
+    /// Returns false, because monsters cannot occupy Sigil tiles.
+    /// </summary>
+    public override bool AllowMonsterToOccupy => false;
 }

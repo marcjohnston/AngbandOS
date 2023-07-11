@@ -20,6 +20,5 @@ internal enum FloorTileTypeCategory
     Rubble,
     Vein,
     OpenDoorway,
-    Sigil,
     Border
 }

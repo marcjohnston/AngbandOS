@@ -2274,7 +2274,7 @@ internal class Level
             {
                 continue;
             }
-            if (SaveGame.Level.Grid[y][x].FeatureType.Category.CategoryEnum == FloorTileTypeCategory.Sigil)
+            if (!SaveGame.Level.Grid[y][x].FeatureType.AllowPetToOccupy)
             {
                 continue;
             }
@@ -2319,7 +2319,7 @@ internal class Level
             {
                 continue;
             }
-            if (SaveGame.Level.Grid[y][x].FeatureType.Category.CategoryEnum == FloorTileTypeCategory.Sigil)
+            if (!SaveGame.Level.Grid[y][x].FeatureType.AllowMonsterToOccupy)
             {
                 continue;
             }
@@ -2743,7 +2743,7 @@ internal class Level
         }
 
         // Do not place monster on a sigil.
-        if (SaveGame.Level.Grid[y][x].FeatureType.Category.CategoryEnum == FloorTileTypeCategory.Sigil)
+        if (!SaveGame.Level.Grid[y][x].FeatureType.AllowMonsterToOccupy)
         {
             return false;
         }

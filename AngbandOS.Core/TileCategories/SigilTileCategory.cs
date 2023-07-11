@@ -11,5 +11,4 @@ namespace AngbandOS.Core.TileCategories;
 internal class SigilTileCategory : TileCategory
 {
     private SigilTileCategory(SaveGame saveGame) : base(saveGame) { }
-    public override FloorTileTypeCategory CategoryEnum => FloorTileTypeCategory.Sigil;
 }
