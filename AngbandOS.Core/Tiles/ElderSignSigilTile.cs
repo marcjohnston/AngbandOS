@@ -15,7 +15,6 @@ internal class ElderSignSigilTile : Tile
     public override Colour Colour => Colour.Green;
     public override string Name => "ElderSign";
     public override string AppearAs => "ElderSign";
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<SigilTileCategory>();
     public override string Description => "Elder Sign";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

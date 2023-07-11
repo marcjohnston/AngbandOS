@@ -15,7 +15,6 @@ internal class DownStairTile : Tile
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "DownStair";
     public override string AppearAs => "DownStair";
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<DownStairTileCategory>();
     public override string Description => "down staircase";
     public override bool DimsOutsideLOS => true;
     public override bool IsInteresting => true;

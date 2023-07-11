@@ -15,7 +15,6 @@ internal class YellowSignSigilTile : Tile
     public override Colour Colour => Colour.BrightYellow;
     public override string Name => "YellowSign";
     public override string AppearAs => "YellowSign";
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<SigilTileCategory>();
     public override string Description => "Yellow Sign";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

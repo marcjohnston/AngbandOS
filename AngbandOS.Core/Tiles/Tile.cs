@@ -59,7 +59,7 @@ internal abstract class Tile : ISingletonDictionary<string>
     /// <summary>
     /// The category of this tile.
     /// </summary>
-    public abstract TileCategory Category { get; }
+    public virtual TileCategory Category => null;
 
     /// <summary>
     /// A text description of the tile.
