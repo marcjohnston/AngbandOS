@@ -21,6 +21,5 @@ internal enum FloorTileTypeCategory
     Vein,
     OpenDoorway,
     Sigil,
-    Border,
-    DownStair
+    Border
 }
