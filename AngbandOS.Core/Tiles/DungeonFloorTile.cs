@@ -14,7 +14,6 @@ internal class DungeonFloorTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PeriodSymbol>();
     public override string Name => "DungeonFloor";
     public override string AppearAs => "DungeonFloor";
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<FloorTileCategory>();
     public override string Description => "open floor";
     public override bool DimsOutsideLOS => true;
     public override bool IsOpenFloor => true;

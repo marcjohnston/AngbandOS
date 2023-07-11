@@ -160,4 +160,9 @@ internal abstract class Tile : ISingletonDictionary<string>
     /// Returns true, if the tile is a trap door.  Returns false, by default.  Trap doors all return true.
     /// </summary>
     public virtual bool IsTrapDoor => false;
+
+    /// <summary>
+    /// Returns true, if the tile is the floor.  Returns false, by default.  Trap doors all return true.
+    /// </summary>
+    public virtual bool IsFloor => false;
 }

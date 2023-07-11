@@ -14,7 +14,6 @@ internal class TowerFloorTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PeriodSymbol>();
     public override string Name => "TowerFloor";
     public override string AppearAs => "TowerFloor";
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<FloorTileCategory>();
     public override string Description => "open floor";
     public override bool DimsOutsideLOS => true;
     public override bool IsOpenFloor => true;

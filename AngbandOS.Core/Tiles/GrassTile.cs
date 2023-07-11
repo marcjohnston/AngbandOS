@@ -15,7 +15,6 @@ internal class GrassTile : Tile
     public override Colour Colour => Colour.BrightGreen;
     public override string Name => "Grass";
     public override string AppearAs => "Grass";
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<FloorTileCategory>();
     public override string Description => "open floor";
     public override bool DimsOutsideLOS => true;
     public override bool IsOpenFloor => true;

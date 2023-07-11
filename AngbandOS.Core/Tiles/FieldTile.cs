@@ -15,7 +15,6 @@ internal class FieldTile : Tile
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "Field";
     public override string AppearAs => "Field";
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<FloorTileCategory>();
     public override string Description => "field";
     public override bool DimsOutsideLOS => true;
     public override bool IsOpenFloor => true;
