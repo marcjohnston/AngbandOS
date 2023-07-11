@@ -16,7 +16,6 @@ internal class WaterBorderTile : Tile
     public override string Name => "WaterBorder";
     public override string AppearAs => "Water";
     public override bool BlocksLos => true;
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<BorderTileCategory>();
     public override string Description => "sea";
     public override bool DimsOutsideLOS => true;
     public override bool IsPermanent => true;

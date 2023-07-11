@@ -19,6 +19,5 @@ internal enum FloorTileTypeCategory
     UnidentifiedTrap,
     Rubble,
     Vein,
-    OpenDoorway,
-    Border
+    OpenDoorway
 }

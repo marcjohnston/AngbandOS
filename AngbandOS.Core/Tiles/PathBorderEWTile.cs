@@ -16,7 +16,6 @@ internal class PathBorderEWTile : Tile
     public override string Name => "PathBorderEW";
     public override string AppearAs => "PathBorderEW";
     public override bool BlocksLos => true;
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<BorderTileCategory>();
     public override string Description => "path";
     public override bool DimsOutsideLOS => true;
     public override bool IsPermanent => true;
