@@ -17,9 +17,13 @@ internal class LockedDoor2Tile : Tile
     public override AlterAction? AlterAction => new OpenAlterAction();
     public override string AppearAs => "LockedDoor0";
     public override bool BlocksLos => true;
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<LockedDoorTileCategory>();
     public override string Description => "locked door";
     public override bool DimsOutsideLOS => true;
     public override bool IsClosedDoor => true;
     public override int MapPriority => 17;
+
+    /// <summary>
+    /// Returns true, because this tile is a locked door.
+    /// </summary>
+    public override bool IsLockedDoor => true;
 }

@@ -45,7 +45,7 @@ namespace AngbandOS.Core.Scripts
                         SaveGame.EnergyUse = 100;
                         SaveGame.MsgPrint("You jam the door with a spike.");
                         // Replace the door feature with a jammed door
-                        if (tile.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.LockedDoor)
+                        if (tile.FeatureType.IsLockedDoor)
                         {
                             tile.SetFeature(tile.FeatureType.Name.Replace("Locked", "Jammed"));
                         }

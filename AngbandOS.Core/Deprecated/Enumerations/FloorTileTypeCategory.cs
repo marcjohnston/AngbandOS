@@ -12,8 +12,6 @@ internal enum FloorTileTypeCategory
     Other,
     Floor,
     Tree,
-    SecretDoor,
-    LockedDoor,
     JammedDoor,
     TrapDoor,
     UnidentifiedTrap,

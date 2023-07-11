@@ -145,4 +145,9 @@ internal abstract class Tile : ISingletonDictionary<string>
     /// Returns true, if the tile is a secret door.  Returns false, by default.  Secret doors return true.
     /// </summary>
     public virtual bool IsSecretDoor => false;
+
+    /// <summary>
+    /// Returns true, if the tile is a locked door.  Returns false, by default.  Locked doors all return true.
+    /// </summary>
+    public virtual bool IsLockedDoor => false;
 }
