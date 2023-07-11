@@ -17,8 +17,12 @@ internal class TreeTile : Tile
     public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "Tree";
     public override bool BlocksLos => true;
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<TreeTileCategory>();
     public override string Description => "tree";
     public override bool DimsOutsideLOS => true;
     public override int MapPriority => 0;
+
+    /// <summary>
+    /// Returns true, because this tile is a tree.
+    /// </summary>
+    public override bool IsTree => true;
 }

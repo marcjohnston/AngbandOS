@@ -182,4 +182,8 @@ internal abstract class Tile : ISingletonDictionary<string>
     /// Returns true, if the tile is an unidentified trap.  Returns false, by default.  Invisible traps return true.
     /// </summary>
     public virtual bool IsUnidentifiedTrap => false;
+
+    /// <summary>
+    /// Returns true, if the tile is a tree.  Returns false, by default.  Bush, scarecrow, signpost and tree tiles all return true.
+    public virtual bool IsTree => false;
 }

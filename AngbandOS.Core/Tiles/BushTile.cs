@@ -17,10 +17,14 @@ internal class BushTile : Tile
     public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "Bush";
     public override bool BlocksLos => true;
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<TreeTileCategory>();
     public override string Description => "bush";
     public override bool DimsOutsideLOS => true;
     public override bool IsPassable => true;
     public override bool IsPermanent => true;
     public override int MapPriority => 0;
+
+    /// <summary>
+    /// Returns true, because a bush is considered a tree.
+    /// </summary>
+    public override bool IsTree => true;
 }

@@ -16,8 +16,12 @@ internal class SignpostTile : Tile
     public override string Name => "Signpost";
     public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "Signpost";
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<TreeTileCategory>();
     public override string Description => "signpost";
     public override bool DimsOutsideLOS => true;
     public override int MapPriority => 0;
+
+    /// <summary>
+    /// Returns true, because a signpost is considered a tree.
+    /// </summary>
+    public override bool IsTree => true;
 }

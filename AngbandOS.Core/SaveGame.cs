@@ -7968,7 +7968,7 @@ internal class SaveGame
                     tile.TileFlags.Set(GridTile.PlayerMemorized);
                     Level.RedrawSingleLocation(newY, newX);
                 }
-                else if (tile.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.Tree)
+                else if (tile.FeatureType.IsTree)
                 {
                     MsgPrint($"You feel a {tile.FeatureType.Description} blocking your way.");
                     tile.TileFlags.Set(GridTile.PlayerMemorized);
@@ -8049,7 +8049,7 @@ internal class SaveGame
                         EnergyUse = 0;
                     }
                 }
-                else if (tile.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.Tree)
+                else if (tile.FeatureType.IsTree)
                 {
                     MsgPrint($"There is a {tile.FeatureType.Description} blocking your way.");
                     tile.TileFlags.Set(GridTile.PlayerMemorized);
@@ -9520,7 +9520,7 @@ internal class SaveGame
         EnergyUse = 100;
         GridTile tile = Level.Grid[y][x];
         // Trees are easy to chop down
-        if (tile.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.Tree)
+        if (tile.FeatureType.IsTree)
         {
             if (Player.SkillDigging > 40 + Program.Rng.RandomLessThan(100) && RemoveTileViaTunnelling(y, x))
             {
@@ -13189,14 +13189,14 @@ internal class SaveGame
         Level.Grid[y][x].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         for (i = -3; i < 4; i++)
         {
-            if (Level.Grid[y + 1][x + i].FeatureType.Category.CategoryEnum == FloorTileTypeCategory.Tree)
+            if (Level.Grid[y + 1][x + i].FeatureType.IsTree)
             {
                 Level.Grid[y + 1][x + i].RevertToBackground();
             }
         }
         for (i = -2; i < 3; i++)
         {
-            if (Level.Grid[y + 2][x + i].FeatureType.Category.CategoryEnum == FloorTileTypeCategory.Tree)
+            if (Level.Grid[y + 2][x + i].FeatureType.IsTree)
             {
                 Level.Grid[y + 2][x + i].RevertToBackground();
             }
@@ -14477,8 +14477,7 @@ internal class SaveGame
         }
         else if (CameFrom == LevelStart.StartWalk)
         {
-            if (Level.Grid[Player.MapY][Player.MapX].FeatureType.Category.CategoryEnum == FloorTileTypeCategory.Tree ||
-                Level.Grid[Player.MapY][Player.MapX].FeatureType.Name == "Water")
+            if (Level.Grid[Player.MapY][Player.MapX].FeatureType.IsTree || Level.Grid[Player.MapY][Player.MapX].FeatureType.Name == "Water")
             {
                 Level.Grid[Player.MapY][Player.MapX].RevertToBackground();
             }

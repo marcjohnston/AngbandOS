@@ -38,7 +38,7 @@ internal class MutationEatRock : Mutation
             saveGame.MsgPrint("There's something in the way!");
             return;
         }
-        if (cPtr.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.Tree)
+        if (cPtr.FeatureType.IsTree)
         {
             saveGame.MsgPrint("You don't like the woody taste!");
             return;

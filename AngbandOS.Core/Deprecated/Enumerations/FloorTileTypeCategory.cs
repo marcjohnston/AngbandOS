@@ -9,7 +9,5 @@ namespace AngbandOS.Core;
 
 internal enum FloorTileTypeCategory
 {
-    Other,
-    Tree,
-    UnidentifiedTrap
+    Other
 }
