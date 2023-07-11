@@ -43,7 +43,7 @@ internal class MutationEatRock : Mutation
             saveGame.MsgPrint("You don't like the woody taste!");
             return;
         }
-        if (cPtr.FeatureType.IsClosedDoor || cPtr.FeatureType.IsSecretDoor || cPtr.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.Rubble)
+        if (cPtr.FeatureType.IsClosedDoor || cPtr.FeatureType.IsSecretDoor || cPtr.FeatureType.IsRubble)
         {
             saveGame.Player.SetFood(saveGame.Player.Food + 3000);
         }

@@ -16,10 +16,14 @@ internal class RubbleTile : Tile
     public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "Rubble";
     public override bool BlocksLos => true;
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<RubbleTileCategory>();
     public override string Description => "pile of rubble";
     public override bool DimsOutsideLOS => true;
     public override bool IsInteresting => true;
     public override int MapPriority => 12;
     public override bool YellowInTorchlight => true;
+
+    /// <summary>
+    /// Returns true, because this tile is rubble.
+    /// </summary>
+    public override bool IsRubble => true;
 }
