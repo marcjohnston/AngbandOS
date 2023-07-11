@@ -19,6 +19,6 @@ internal class SpikeGameCommand : GameCommand
 
     public override bool Execute()
     {
-        return SaveGame.RunScript<SpikeScript>();
+        return SaveGame.RunScript<SpikeClosedDoorScript>();
     }
 }

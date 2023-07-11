@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts
 {
     [Serializable]
-    internal class SpikeScript : Script
+    internal class SpikeClosedDoorScript : Script
     {
-        private SpikeScript(SaveGame saveGame) : base(saveGame) { }
+        private SpikeClosedDoorScript(SaveGame saveGame) : base(saveGame) { }
 
         public override bool Execute()
         {
