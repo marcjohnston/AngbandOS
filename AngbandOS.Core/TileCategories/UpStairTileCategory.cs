@@ -11,5 +11,4 @@ namespace AngbandOS.Core.TileCategories;
 internal class UpStairTileCategory : TileCategory
 {
     private UpStairTileCategory(SaveGame saveGame) : base(saveGame) { }
-    public override FloorTileTypeCategory CategoryEnum => FloorTileTypeCategory.UpStair;
 }

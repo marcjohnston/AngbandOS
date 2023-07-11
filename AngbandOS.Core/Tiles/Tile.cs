@@ -127,7 +127,12 @@ internal abstract class Tile : ISingletonDictionary<string>
     public virtual bool RunPast => false;
 
     /// <summary>
-    /// The the tile this one should appear to be when looked at.
+    /// The tile this one should appear to be when looked at.
     /// </summary>
     public virtual bool YellowInTorchlight => false;
+
+    /// <summary>
+    /// Returns true, if the tile should be revealed with the detect stairs script.  Returns false, by default.  UpStairs and DownStairs tiles return true.
+    /// </summary>
+    public virtual bool IsRevealedWithDetectStairsScript => false;
 }

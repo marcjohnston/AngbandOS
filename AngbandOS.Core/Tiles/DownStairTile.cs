@@ -22,4 +22,9 @@ internal class DownStairTile : Tile
     public override bool IsPassable => true;
     public override bool IsPermanent => true;
     public override int MapPriority => 25;
+
+    /// <summary>
+    /// Returns true, because down stairs should be reveals with the DetectStairsScript.
+    /// </summary>
+    public override bool IsRevealedWithDetectStairsScript => true;
 }

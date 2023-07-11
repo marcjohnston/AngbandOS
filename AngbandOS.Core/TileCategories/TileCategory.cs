@@ -17,5 +17,5 @@ internal abstract class TileCategory
     }
 
     [Obsolete("For backwards compatability only")]
-    public abstract FloorTileTypeCategory CategoryEnum { get; }
+    public virtual FloorTileTypeCategory CategoryEnum => FloorTileTypeCategory.Other;
 }

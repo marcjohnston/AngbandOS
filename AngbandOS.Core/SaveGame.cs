@@ -4529,7 +4529,7 @@ internal class SaveGame
             for (int x = Level.PanelColMin; x <= Level.PanelColMax; x++)
             {
                 GridTile cPtr = Level.Grid[y][x];
-                if (cPtr.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.UpStair || cPtr.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.DownStair)
+                if (cPtr.FeatureType.IsRevealedWithDetectStairsScript)
                 {
                     cPtr.TileFlags.Set(GridTile.PlayerMemorized);
                     Level.RedrawSingleLocation(y, x);
