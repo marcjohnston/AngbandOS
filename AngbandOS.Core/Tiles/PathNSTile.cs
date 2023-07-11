@@ -15,7 +15,6 @@ internal class PathNSTile : Tile
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "PathNS";
     public override string AppearAs => "PathNS";
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<OtherTileCategory>();
     public override string Description => "path";
     public override bool DimsOutsideLOS => true;
     public override bool IsPassable => true;

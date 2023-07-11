@@ -72,7 +72,6 @@ global using AngbandOS.Core.Syllables;
 global using AngbandOS.Core.Symbols;
 global using AngbandOS.Core.Talents;
 global using AngbandOS.Core.Tiles;
-global using AngbandOS.Core.TileCategories;
 global using AngbandOS.Core.TimedActions;
 global using AngbandOS.Core.Towns;
 global using AngbandOS.Core.Vaults;

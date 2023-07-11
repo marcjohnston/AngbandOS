@@ -16,7 +16,6 @@ internal class TeleportRuneTile : Tile
     public override string Name => "TeleportRune";
     public override AlterAction? AlterAction => new DisarmAlterAction();
     public override string AppearAs => "TeleportRune";
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<OtherTileCategory>();
     public override string Description => "strange rune";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

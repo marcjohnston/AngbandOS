@@ -16,7 +16,6 @@ internal class StoreFloorTile : Tile
     private string _appearAs;
     private string _description;
 
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<OtherTileCategory>();
     public override bool BlocksLos => true;
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

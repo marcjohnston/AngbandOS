@@ -16,7 +16,6 @@ internal class SummonRuneTile : Tile
     public override string Name => "SummonRune";
     public override AlterAction? AlterAction => new DisarmAlterAction();
     public override string AppearAs => "SummonRune";
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<OtherTileCategory>();
     public override string Description => "strange rune";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

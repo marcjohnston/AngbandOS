@@ -15,7 +15,6 @@ internal class PathBaseTile : Tile
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "PathBase";
     public override string AppearAs => "PathBase";
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<OtherTileCategory>();
     public override string Description => "path base";
     public override bool DimsOutsideLOS => true;
     public override bool IsPassable => true;

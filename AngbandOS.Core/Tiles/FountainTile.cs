@@ -17,7 +17,6 @@ internal class FountainTile : Tile
     public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "Fountain";
     public override bool BlocksLos => true;
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<OtherTileCategory>();
     public override string Description => "fountain";
     public override bool DimsOutsideLOS => true;
     public override int MapPriority => 0;

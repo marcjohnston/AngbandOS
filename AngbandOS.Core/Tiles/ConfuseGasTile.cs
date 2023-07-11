@@ -16,7 +16,6 @@ internal class ConfuseGasTile : Tile
     public override string Name => "ConfuseGas";
     public override AlterAction? AlterAction => new DisarmAlterAction();
     public override string AppearAs => "ConfuseGas";
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<OtherTileCategory>();
     public override string Description => "gas trap";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

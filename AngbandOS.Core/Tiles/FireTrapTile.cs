@@ -16,7 +16,6 @@ internal class FireTrapTile : Tile
     public override string Name => "FireTrap";
     public override AlterAction? AlterAction => new DisarmAlterAction();
     public override string AppearAs => "FireTrap";
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<OtherTileCategory>();
     public override string Description => "discolored spot";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

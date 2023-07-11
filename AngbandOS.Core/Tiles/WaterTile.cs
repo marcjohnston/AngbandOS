@@ -15,7 +15,6 @@ internal class WaterTile : Tile
     public override Colour Colour => Colour.Blue;
     public override string Name => "Water";
     public override string AppearAs => "Water";
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<OtherTileCategory>();
     public override string Description => "water";
     public override bool DimsOutsideLOS => true;
     public override int MapPriority => 0;

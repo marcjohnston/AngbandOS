@@ -16,7 +16,6 @@ internal class WallPermanentInnerTile : Tile
     public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "WallPermInner";
     public override bool BlocksLos => true;
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<OtherTileCategory>();
     public override string Description => "magically reinforced wall";
     public override bool DimsOutsideLOS => true;
     public override bool IsPermanent => true;

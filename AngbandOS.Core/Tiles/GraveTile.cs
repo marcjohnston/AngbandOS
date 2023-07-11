@@ -16,7 +16,6 @@ internal class GraveTile : Tile
     public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "Grave";
     public override bool BlocksLos => true;
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<OtherTileCategory>();
     public override string Description => "grave";
     public override bool DimsOutsideLOS => true;
     public override int MapPriority => 0;

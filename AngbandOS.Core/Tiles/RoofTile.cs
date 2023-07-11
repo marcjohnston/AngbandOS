@@ -17,7 +17,6 @@ internal class RoofTile : Tile
     public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "Roof";
     public override bool BlocksLos => true;
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<OtherTileCategory>();
     public override string Description => "building";
     public override bool DimsOutsideLOS => true;
     public override bool IsPermanent => true;

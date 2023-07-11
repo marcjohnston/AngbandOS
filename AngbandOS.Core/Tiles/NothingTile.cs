@@ -14,7 +14,6 @@ internal class NothingTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<SpaceBarSymbol>();
     public override string Name => "Nothing";
     public override string AppearAs => "Nothing";
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<OtherTileCategory>();
     public override string Description => "nothing";
     public override int MapPriority => 0;
 }

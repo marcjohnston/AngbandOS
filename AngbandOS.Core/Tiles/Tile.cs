@@ -57,11 +57,6 @@ internal abstract class Tile : ISingletonDictionary<string>
     public virtual bool BlocksLos => false;
 
     /// <summary>
-    /// The category of this tile.
-    /// </summary>
-    public virtual TileCategory Category => null;
-
-    /// <summary>
     /// A text description of the tile.
     /// </summary>
     public abstract string Description { get; }

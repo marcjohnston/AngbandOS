@@ -16,7 +16,6 @@ internal class PoisonPitTile : Tile
     public override string Name => "PoisonPit";
     public override AlterAction? AlterAction => new DisarmAlterAction();
     public override string AppearAs => "PoisonPit";
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<OtherTileCategory>();
     public override string Description => "pit";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

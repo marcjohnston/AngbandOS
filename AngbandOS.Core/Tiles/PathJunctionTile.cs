@@ -15,7 +15,6 @@ internal class PathJunctionTile : Tile
     public override Colour Colour => Colour.BrightBrown;
     public override string Name => "PathJunction";
     public override string AppearAs => "PathJunction";
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<OtherTileCategory>();
     public override string Description => "path";
     public override bool DimsOutsideLOS => true;
     public override bool IsPassable => true;

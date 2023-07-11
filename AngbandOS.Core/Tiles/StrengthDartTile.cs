@@ -16,7 +16,6 @@ internal class StrengthDartTile : Tile
     public override string Name => "StrDart";
     public override AlterAction? AlterAction => new DisarmAlterAction();
     public override string AppearAs => "StrDart";
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<OtherTileCategory>();
     public override string Description => "dart trap";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

@@ -16,7 +16,6 @@ internal class StatueTile : Tile
     public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "Statue";
     public override bool BlocksLos => true;
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<OtherTileCategory>();
     public override string Description => "statue";
     public override bool DimsOutsideLOS => true;
     public override int MapPriority => 0;

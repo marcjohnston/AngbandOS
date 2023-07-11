@@ -14,7 +14,6 @@ internal class InsideGatehouseTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PeriodSymbol>();
     public override string Name => "InsideGatehouse";
     public override string AppearAs => "InsideGatehouse";
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<OtherTileCategory>();
     public override string Description => "open floor";
     public override bool DimsOutsideLOS => true;
     public override int MapPriority => 0;
