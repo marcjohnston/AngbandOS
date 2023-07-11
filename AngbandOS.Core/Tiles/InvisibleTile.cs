@@ -14,11 +14,15 @@ internal class InvisibleTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PeriodSymbol>();
     public override string Name => "Invis";
     public override string AppearAs => "Invis";
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<UnidentifiedTrapTileCategory>();
     public override string Description => "invisible trap";
     public override bool DimsOutsideLOS => true;
     public override bool IsPassable => true;
     public override int MapPriority => 5;
     public override bool RunPast => true;
     public override bool YellowInTorchlight => true;
+
+    /// <summary>
+    /// Returns true because this tile is an unidentified trap.
+    /// </summary>
+    public override bool IsUnidentifiedTrap => true;
 }

@@ -18,7 +18,7 @@ internal class KillTrapProjectile : Projectile
     {
         GridTile cPtr = SaveGame.Level.Grid[y][x];
         bool obvious = false;
-        if (cPtr.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.UnidentifiedTrap || cPtr.FeatureType.IsTrap)
+        if (cPtr.FeatureType.IsUnidentifiedTrap || cPtr.FeatureType.IsTrap)
         {
             if (SaveGame.Level.PlayerHasLosBold(y, x))
             {

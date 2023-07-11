@@ -177,4 +177,9 @@ internal abstract class Tile : ISingletonDictionary<string>
     /// quartz hidden, quartz and quartz visible treasure tiles all returns true.
     /// </summary>
     public virtual bool IsVein => false;
+
+    /// <summary>
+    /// Returns true, if the tile is an unidentified trap.  Returns false, by default.  Invisible traps return true.
+    /// </summary>
+    public virtual bool IsUnidentifiedTrap => false;
 }

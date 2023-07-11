@@ -4553,7 +4553,7 @@ internal class SaveGame
                 GridTile cPtr = Level.Grid[y][x];
                 cPtr.TileFlags.Set(GridTile.TrapsDetected);
                 Level.RedrawSingleLocation(y, x);
-                if (cPtr.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.UnidentifiedTrap)
+                if (cPtr.FeatureType.IsUnidentifiedTrap)
                 {
                     Level.PickTrap(y, x);
                 }
