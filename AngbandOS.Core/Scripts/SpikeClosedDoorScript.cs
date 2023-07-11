@@ -50,7 +50,7 @@ namespace AngbandOS.Core.Scripts
                             tile.SetFeature(tile.FeatureType.Name.Replace("Locked", "Jammed"));
                         }
                         // If it's already jammed, strengthen it
-                        if (tile.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.JammedDoor)
+                        if (tile.FeatureType.IsJammedDoor)
                         {
                             int strength = int.Parse(tile.FeatureType.Name.Substring(10));
                             if (strength < 7)

@@ -17,9 +17,13 @@ internal class JammedDoor7Tile : Tile
     public override AlterAction? AlterAction => new BashAlterAction();
     public override string AppearAs => "LockedDoor0";
     public override bool BlocksLos => true;
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<JammedDoorTileCategory>();
     public override string Description => "jammed door";
     public override bool DimsOutsideLOS => true;
     public override bool IsClosedDoor => true;
     public override int MapPriority => 17;
+
+    /// <summary>
+    /// Returns true, because this tile is a jammed door.
+    /// </summary>
+    public override bool IsJammedDoor => true;
 }
