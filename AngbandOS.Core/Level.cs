@@ -2274,7 +2274,7 @@ internal class Level
             {
                 continue;
             }
-            if (!SaveGame.Level.Grid[y][x].FeatureType.AllowPetToOccupy)
+            if (!SaveGame.Level.Grid[y][x].FeatureType.AllowMonsterToOccupy)
             {
                 continue;
             }

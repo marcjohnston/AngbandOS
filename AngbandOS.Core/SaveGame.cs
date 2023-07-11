@@ -4262,7 +4262,7 @@ internal class SaveGame
             for (int x = Level.PanelColMin; x <= Level.PanelColMax; x++)
             {
                 GridTile cPtr = Level.Grid[y][x];
-                if (cPtr.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.SecretDoor)
+                if (cPtr.FeatureType.IsSecretDoor)
                 {
                     Level.ReplaceSecretDoor(y, x);
                 }

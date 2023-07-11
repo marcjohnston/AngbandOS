@@ -21,11 +21,6 @@ internal class ElderSignSigilTile : Tile
     public override int MapPriority => 20;
 
     /// <summary>
-    /// Returns false, because pets cannot occupy Sigil tiles.
-    /// </summary>
-    public override bool AllowPetToOccupy => false;
-
-    /// <summary>
     /// Returns false, because monsters cannot occupy Sigil tiles.
     /// </summary>
     public override bool AllowMonsterToOccupy => false;

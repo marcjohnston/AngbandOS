@@ -137,12 +137,12 @@ internal abstract class Tile : ISingletonDictionary<string>
     public virtual bool IsRevealedWithDetectStairsScript => false;
 
     /// <summary>
-    /// Returns true, if the tile allows a pet to occupy it.  Returns true, by default.  YellowSignSigils and ElderSignSigils return false.
-    /// </summary>
-    public virtual bool AllowPetToOccupy => true;
-
-    /// <summary>
     /// Returns true, if the tile allows a monster to occupy it.  Returns true, by default.  YellowSignSigils and ElderSignSigils return false.
     /// </summary>
     public virtual bool AllowMonsterToOccupy => true;
+
+    /// <summary>
+    /// Returns true, if the tile is a secret door.  Returns false, by default.  Secret doors return true.
+    /// </summary>
+    public virtual bool IsSecretDoor => false;
 }

@@ -22,11 +22,15 @@ internal class SecretDoorTile : Tile
     /// </summary>
     public override bool BlocksScent => false;
 
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<SecretDoorTileCategory>();
     public override string Description => "granite wall";
     public override bool DimsOutsideLOS => true;
     public override bool IsWall => true;
     public override int MapPriority => 10;
     public override bool RunPast => true;
     public override bool YellowInTorchlight => true;
+
+    /// <summary>
+    /// Returns true, because this is a secret door tile.
+    /// </summary>
+    public override bool IsSecretDoor => true;
 }
