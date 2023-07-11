@@ -152,7 +152,12 @@ internal abstract class Tile : ISingletonDictionary<string>
     public virtual bool IsLockedDoor => false;
 
     /// <summary>
-    /// Returns true, if the tile is a jammed door.  Returns false, by default.  Locked doors all return true.
+    /// Returns true, if the tile is a jammed door.  Returns false, by default.  Jammed doors all return true.
     /// </summary>
     public virtual bool IsJammedDoor => false;
+
+    /// <summary>
+    /// Returns true, if the tile is a trap door.  Returns false, by default.  Trap doors all return true.
+    /// </summary>
+    public virtual bool IsTrapDoor => false;
 }

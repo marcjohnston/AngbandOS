@@ -16,7 +16,7 @@ namespace AngbandOS.Core.Scripts
         {
             bool isTrapDoor = false;
             GridTile tile = SaveGame.Level.Grid[SaveGame.Player.MapY][SaveGame.Player.MapX];
-            if (tile.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.TrapDoor)
+            if (tile.FeatureType.IsTrapDoor)
             {
                 isTrapDoor = true;
             }

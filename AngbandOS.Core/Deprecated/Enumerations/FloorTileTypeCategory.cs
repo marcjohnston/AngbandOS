@@ -12,7 +12,6 @@ internal enum FloorTileTypeCategory
     Other,
     Floor,
     Tree,
-    TrapDoor,
     UnidentifiedTrap,
     Rubble,
     Vein,
