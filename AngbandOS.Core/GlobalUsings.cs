@@ -21,6 +21,7 @@ global using AngbandOS.Core.ChestTrapConfigurations;
 global using AngbandOS.Core.ChestTraps;
 global using AngbandOS.Core.Commands;
 global using AngbandOS.Core.ConsoleElements;
+global using AngbandOS.Core.Dungeons;
 global using AngbandOS.Core.EventArgs;
 global using AngbandOS.Core.EventsArgs;
 global using AngbandOS.Core.FixedArtifacts;
