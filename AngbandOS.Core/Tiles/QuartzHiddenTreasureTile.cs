@@ -17,11 +17,15 @@ internal class QuartzHiddenTreasureTile : Tile
     public override string AppearAs => "Quartz";
     public override bool BlocksLos => true;
     public override string? HiddenTreasureFor => "QuartzVisTreas";
-    public override TileCategory Category => SaveGame.SingletonRepository.TileCategories.Get<VeinTileCategory>();
     public override string Description => "quartz vein";
     public override bool DimsOutsideLOS => true;
     public override bool IsWall => true;
     public override int MapPriority => 11;
     public override bool RunPast => true;
     public override bool YellowInTorchlight => true;
+
+    /// <summary>
+    /// Returns true because this tile is a vein.
+    /// </summary>
+    public override bool IsVein => true;
 }

@@ -170,4 +170,11 @@ internal abstract class Tile : ISingletonDictionary<string>
     /// Returns true, if the tile is an open door.  Returns false, by default.  Open and broken doors returns true.
     /// </summary>
     public virtual bool IsOpenDoor => false;
+
+
+    /// <summary>
+    /// Returns true, if the tile is a vein.  Returns false, by default.  Magma hidden treasure, magma, magma visible treasure, 
+    /// quartz hidden, quartz and quartz visible treasure tiles all returns true.
+    /// </summary>
+    public virtual bool IsVein => false;
 }

@@ -11,6 +11,5 @@ internal enum FloorTileTypeCategory
 {
     Other,
     Tree,
-    UnidentifiedTrap,
-    Vein,
+    UnidentifiedTrap
 }

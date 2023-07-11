@@ -47,7 +47,7 @@ internal class MutationEatRock : Mutation
         {
             saveGame.Player.SetFood(saveGame.Player.Food + 3000);
         }
-        else if (cPtr.FeatureType.Category.CategoryEnum == FloorTileTypeCategory.Vein)
+        else if (cPtr.FeatureType.IsVein)
         {
             saveGame.Player.SetFood(saveGame.Player.Food + 5000);
         }
