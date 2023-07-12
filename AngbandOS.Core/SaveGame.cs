@@ -174,7 +174,7 @@ internal class SaveGame
     private ICorePersistentStorage PersistentStorage;
 
     /// <summary>
-    /// Returns the object used to provide game updates to the calling application.  Returns null, when the calling application did not present an update notififying object.
+    /// Returns the object used to provide game updates to the calling application.  Returns null, when the calling application did not provide an UpdateNotifier object.
     /// </summary>
     [NonSerialized]
     public IUpdateNotifier? UpdateNotifier;
@@ -373,7 +373,7 @@ internal class SaveGame
 
     /// <summary>
     /// Retrieves a save game from persistent storage.  If no persistent storage is specified, a new game is created. This static method is used as a factory
-    /// to generate the SaveGame object that can be played using the Play method.
+    /// to generate the SaveGame object that can be played using the Play method.  This is the only static method.
     /// </summary>
     /// <param name="persistentStorage"></param>
     /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
@@ -1160,7 +1160,7 @@ internal class SaveGame
     /// <param name="console"></param>
     /// <param name="persistentStorage"></param>
     /// <param name="updateNotification"></param>
-    public void Play(IConsole console, ICorePersistentStorage persistentStorage, IUpdateNotifier updateNotification)
+    public void Play(IConsole console, ICorePersistentStorage persistentStorage, IUpdateNotifier? updateNotification)
     {
         _console = console;
         LastInputReceived = DateTime.Now;
