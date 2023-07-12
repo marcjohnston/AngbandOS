@@ -1,9 +1,9 @@
 ﻿namespace AngbandOS.Core.Interface
 {
     /// <summary>
-    /// Represents an interface for a game to send notifications back to the calling application when intersting events happen during game play.
+    /// Represents an interface for a game to send notifications back to the calling application when interesting events happen during game play.
     /// </summary>
-    public interface IUpdateNotifier
+    public interface IUpdateMonitor
     {
         /// <summary>
         /// Called when the player dies.

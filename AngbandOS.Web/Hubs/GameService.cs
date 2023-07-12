@@ -377,8 +377,8 @@ namespace AngbandOS.Web.Hubs
             // Create a new instance of the Sql persistent storage so that concurrent games do not interfere with each other.
             ICorePersistentStorage persistentStorage = new CoreSqlPersistentStorage(ConnectionString, userId, guid);
 
-            // Construct an update notifier that is used when the game notifies us that interesting event happen in the game.
-            Action<SignalRConsole, GameUpdateNotificationEnum, string> gameUpdateNotifier = async (SignalRConsole signalRConsole, GameUpdateNotificationEnum gameUpdateNotification, string message) =>
+            // Construct an update monitor that is used when the game notifies us that interesting event happen in the game.
+            Action<SignalRConsole, GameUpdateNotificationEnum, string> gameUpdateMonitor = async (SignalRConsole signalRConsole, GameUpdateNotificationEnum gameUpdateNotification, string message) =>
             {
                 // Update all clients that the active games has been updated.
                 await ServiceHub.Clients.All.ActiveGamesUpdated(GetActiveGames());
@@ -415,7 +415,7 @@ namespace AngbandOS.Web.Hubs
             };
 
             // Create a background worker object that runs the game and receives messages from the game to send to the client.
-            SignalRConsole console = new SignalRConsole(context, gameHub, persistentStorage, userId, username, gameUpdateNotifier);
+            SignalRConsole console = new SignalRConsole(context, gameHub, persistentStorage, userId, username, gameUpdateMonitor);
 
             console.ThreadName = $"Game: {userId}/{guid}";
 

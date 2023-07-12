@@ -174,10 +174,10 @@ internal class SaveGame
     private ICorePersistentStorage PersistentStorage;
 
     /// <summary>
-    /// Returns the object used to provide game updates to the calling application.  Returns null, when the calling application did not provide an UpdateNotifier object.
+    /// Returns the object used to provide game updates to the calling application.  Returns null, when the calling application did not provide an UpdateMonitor object.
     /// </summary>
     [NonSerialized]
-    public IUpdateNotifier? UpdateNotifier;
+    public IUpdateMonitor? UpdateMonitor;
 
     /// <summary>
     /// Returns the object that the calling application provided to be used to connect the game input and output to the calling application.
@@ -378,7 +378,7 @@ internal class SaveGame
     /// <param name="persistentStorage"></param>
     /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
     /// <returns></returns>
-    public static SaveGame Initialize(ICorePersistentStorage? persistentStorage, Configuration? configuration)
+    public static SaveGame Initialize(ICorePersistentStorage? persistentStorage, Configuration? configuration) // TODO: This needs to be converted into CreateNew and PlayExisting methods.
     {
         byte[]? data = null;
 
@@ -404,7 +404,6 @@ internal class SaveGame
             return (SaveGame)formatter.Deserialize(memoryStream);
         }
     }
-
 
     public byte Elevation(int wildY, int wildX, int y, int x)
     {
@@ -1159,13 +1158,13 @@ internal class SaveGame
     /// </summary>
     /// <param name="console"></param>
     /// <param name="persistentStorage"></param>
-    /// <param name="updateNotification"></param>
-    public void Play(IConsole console, ICorePersistentStorage persistentStorage, IUpdateNotifier? updateNotification)
+    /// <param name="updateMonitor"></param>
+    public void Play(IConsole console, ICorePersistentStorage persistentStorage, IUpdateMonitor? updateMonitor)
     {
         _console = console;
         LastInputReceived = DateTime.Now;
         PersistentStorage = persistentStorage;
-        UpdateNotifier = updateNotification;
+        UpdateMonitor = updateMonitor;
         InitializeDisplay(Constants.ConsoleWidth, Constants.ConsoleHeight, 256);
         MapMovementKeys();
 
@@ -1212,7 +1211,7 @@ internal class SaveGame
             Player.WildernessY = CurTown.Y;
             CameFrom = LevelStart.StartRandom;
         }
-        UpdateNotifier?.GameStarted();
+        UpdateMonitor?.GameStarted();
         MsgFlag = false;
         MsgPrint(null);
         UpdateScreen();
@@ -1254,7 +1253,7 @@ internal class SaveGame
             MsgPrint(null);
             if (Player.IsDead)
             {
-                UpdateNotifier?.PlayerDied(Player.Name, DiedFrom, Player.Level);
+                UpdateMonitor?.PlayerDied(Player.Name, DiedFrom, Player.Level);
 
                 // Store the player info
                 ExPlayer = new ExPlayer(Player);
@@ -1264,7 +1263,7 @@ internal class SaveGame
             GenerateNewLevel();
             Level.ReplacePets(Player.MapY, Player.MapX, _petList);
         }
-        UpdateNotifier?.GameStopped();
+        UpdateMonitor?.GameStopped();
         CloseGame();
     }
 
@@ -10854,7 +10853,7 @@ internal class SaveGame
             {
                 EnqueueKey(_console.WaitForKey());
                 LastInputReceived = DateTime.Now;
-                UpdateNotifier?.InputReceived();
+                UpdateMonitor?.InputReceived();
             }
         }
         if (KeyHead == KeyTail)

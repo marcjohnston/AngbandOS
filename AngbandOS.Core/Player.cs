@@ -46,7 +46,7 @@ internal class Player
         set
         {
             _gold = value;
-            SaveGame.UpdateNotifier?.GoldUpdated(_gold);
+            SaveGame.UpdateMonitor?.GoldUpdated(_gold);
         }
     }
     public Patron GooPatron;
@@ -122,7 +122,7 @@ internal class Player
         set
         {
             _level = value;
-            SaveGame.UpdateNotifier?.LevelChanged(_level);
+            SaveGame.UpdateMonitor?.LevelChanged(_level);
         }
     }
 
@@ -146,7 +146,7 @@ internal class Player
         set
         {
             _name = value;
-            SaveGame.UpdateNotifier?.CharacterRenamed(_name);
+            SaveGame.UpdateMonitor?.CharacterRenamed(_name);
         }
     }
     public int OldSpareSpellSlots;

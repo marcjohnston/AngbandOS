@@ -114,20 +114,20 @@ public class GameServer
     /// </summary>
     /// <param name="console"></param>
     /// <param name="persistentStorage"></param>
-    /// <param name="updateNotifier"></param>
+    /// <param name="updateMonitor"></param>
     /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
     /// <returns></returns>
-    public bool Play(IConsole console, ICorePersistentStorage persistentStorage, IUpdateNotifier updateNotifier, Configuration? configuration = null)
+    public bool Play(IConsole console, ICorePersistentStorage persistentStorage, IUpdateMonitor? updateMonitor, Configuration? configuration = null)
     {
         try
         {
             // Retrieve the game from persistent storage
             SaveGame = SaveGame.Initialize(persistentStorage, configuration);
-            SaveGame.Play(console, persistentStorage, updateNotifier);
+            SaveGame.Play(console, persistentStorage, updateMonitor);
         }
         catch (Exception ex)
         {
-            updateNotifier?.GameExceptionThrown(ex.Message);
+            updateMonitor?.GameExceptionThrown(ex.Message);
             return false;
         }
         return true;

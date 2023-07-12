@@ -3,15 +3,15 @@
 namespace AngbandOS.Web.Hubs
 {
     /// <summary>
-    /// Represents an object that implements the IUpdateNotifier interface so that the SignalRConsole can receive interesting updates from the game.
-    /// This notifier object converts the game notifications into meaningful messages that the game service can process.
+    /// Represents an object that implements the IUpdateMonitor interface so that the SignalRConsole can receive interesting updates from the game.
+    /// This monitor object converts the game notifications into meaningful messages that the game service can process.
     /// </summary>
-    public class UpdateNotifier : IUpdateNotifier
+    public class UpdateMonitor : IUpdateMonitor
     {
         private readonly SignalRConsole SignalRConsole;
         private readonly Action<SignalRConsole, GameUpdateNotificationEnum, string> Action;
 
-        public UpdateNotifier(SignalRConsole signalRConsole, Action<SignalRConsole, GameUpdateNotificationEnum, string> action)
+        public UpdateMonitor(SignalRConsole signalRConsole, Action<SignalRConsole, GameUpdateNotificationEnum, string> action)
         {
             Action = action;
             SignalRConsole = signalRConsole;

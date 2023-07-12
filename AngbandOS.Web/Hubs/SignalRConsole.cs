@@ -115,7 +115,7 @@ namespace AngbandOS.Web.Hubs
 
             // This thread will initiate the play command on the game with this SignalRConsole object also acting as the injected
             // IConsole to receive and process print and wait for key requests.
-            if (_gameServer.Play(this, PersistentStorage, new UpdateNotifier(this, NotificationAction)))
+            if (_gameServer.Play(this, PersistentStorage, new UpdateMonitor(this, NotificationAction)))
             {
                 // The game is over.  Let the client know.
                 GameOver();
