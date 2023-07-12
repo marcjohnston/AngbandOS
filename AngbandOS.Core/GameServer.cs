@@ -119,6 +119,11 @@ public class GameServer
     /// <returns></returns>
     public bool Play(IConsole console, ICorePersistentStorage? persistentStorage, IUpdateMonitor? updateMonitor, Configuration? configuration = null)
     {
+        if (console == null)
+        {
+            throw new ArgumentNullException("console", "A console object must be provided and cannot be null.");
+        }
+
         try
         {
             // Retrieve the game from persistent storage
