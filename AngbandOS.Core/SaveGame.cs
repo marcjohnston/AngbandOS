@@ -629,7 +629,6 @@ internal class SaveGame
         // Search to either side from right to left with a width equal to the search width
         for (i = -searchWidth; i <= searchWidth; i++)
         {
-            int nextItemIndex;
             // Pick up the tile 0-2 rotations from the direction we previously moved
             newDirection = _directionCycle[_cycleEntryPoint[previousDirection] + i];
             row = player.MapY + level.KeypadDirectionYOffset[newDirection];
@@ -1504,7 +1503,7 @@ internal class SaveGame
 
     public void DisplayWildMap()
     {
-        int y, i;
+        int y;
         for (y = 0; y < 12; y++)
         {
             for (int x = 0; x < 12; x++)
@@ -1680,8 +1679,6 @@ internal class SaveGame
     public bool SelectItem(out Item? itemIndex, string prompt, bool canChooseFromEquipment, bool canChooseFromInventory, bool canChooseFromFloor, IItemFilter? itemFilter)
     {
         GridTile tile = Level.Grid[Player.MapY][Player.MapX];
-        int currentItemIndex;
-        int nextItemIndex;
         bool allowFloor = false;
         MsgPrint(null);
         bool done = false;
@@ -1973,7 +1970,6 @@ internal class SaveGame
         int number = 0;
         int qIdx = 0;
         bool quest = false;
-        int nextOIdx;
         Monster mPtr = Level.Monsters[mIdx];
         MonsterRace rPtr = mPtr.Race;
         if (rPtr == null)
@@ -8280,7 +8276,6 @@ internal class SaveGame
     public void PickUpItems(bool pickup)
     {
         GridTile tile = Level.Grid[Player.MapY][Player.MapX];
-        int nextItemIndex;
         foreach (Item item in tile.Items.ToArray()) // We need a ToArray to prevent the collection from being modified error
         {
             string itemName = item.Description(true, 3);
@@ -14912,7 +14907,6 @@ internal class SaveGame
 
     private bool TargetSetAccept(int y, int x)
     {
-        int nextOIdx;
         if (y == Player.MapY && x == Player.MapX)
         {
             return true;
@@ -14979,8 +14973,6 @@ internal class SaveGame
                 }
                 continue;
             }
-            int thisOIdx;
-            int nextOIdx;
             if (cPtr.MonsterIndex != 0)
             {
                 Monster mPtr = Level.Monsters[cPtr.MonsterIndex];

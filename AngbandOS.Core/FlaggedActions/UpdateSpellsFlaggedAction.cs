@@ -21,7 +21,7 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
     public UpdateSpellsFlaggedAction(SaveGame saveGame) : base(saveGame) { }
     protected override void Execute()
     {
-        int i, j;
+        int j;
         Spell sPtr;
         if (SaveGame.Player == null)
         {

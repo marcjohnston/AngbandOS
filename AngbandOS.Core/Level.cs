@@ -310,7 +310,6 @@ internal class Level
     public void DropNear(Item jPtr, int chance, int y, int x)
     {
         int ty, tx;
-        int thisOIdx, nextOIdx;
         GridTile cPtr;
         bool flag = false;
         bool done = false;
@@ -454,9 +453,6 @@ internal class Level
 
     public void ExciseObject(Item jPtr)
     {
-        int thisOIdx, nextOIdx;
-        int prevOIdx = 0;
-
         // Check to see if the object is being held by a monster.
         if (jPtr.HoldingMonsterIndex != 0)
         {
@@ -769,7 +765,6 @@ internal class Level
     public void NoteSpot(int y, int x)
     {
         GridTile cPtr = Grid[y][x];
-        int nextOIdx;
         if (SaveGame.Player.TimedBlindness.TurnsRemaining != 0)
         {
             return;
@@ -1287,7 +1282,6 @@ internal class Level
 
     public void MapInfo(int y, int x, out ColourEnum ap, out char cp)
     {
-        int nextOIdx;
         ColourEnum a;
         char c;
         GridTile cPtr = Grid[y][x];
@@ -1832,7 +1826,6 @@ internal class Level
         {
             return;
         }
-        int nextOIdx;
         int y = mPtr.MapY;
         int x = mPtr.MapX;
         rPtr.CurNum--;

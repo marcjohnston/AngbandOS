@@ -1034,7 +1034,6 @@ internal class Monster : IItemContainer
             // If we're going to do a move
             if (doMove)
             {
-                int nextItemIndex;
                 doTurn = true;
                 // Swap positions with the monster that is in the tile we're aiming for
                 saveGame.Level.Grid[oldY][oldX].MonsterIndex = tile.MonsterIndex;

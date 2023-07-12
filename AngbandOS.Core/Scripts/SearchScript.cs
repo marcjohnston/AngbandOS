@@ -54,7 +54,6 @@ namespace AngbandOS.Core.Scripts
                             SaveGame.Level.ReplaceSecretDoor(y, x);
                             SaveGame.Disturb(false);
                         }
-                        int nextItemIndex;
                         // Check the items on the tile
                         foreach (Item item in tile.Items)
                         {

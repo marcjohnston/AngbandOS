@@ -40,7 +40,6 @@ internal class KillDoorProjectile : Projectile
     protected override bool AffectItem(int who, int y, int x)
     {
         GridTile cPtr = SaveGame.Level.Grid[y][x];
-        int nextOIdx;
         bool obvious = false;
         foreach (Item oPtr in cPtr.Items)
         {

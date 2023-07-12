@@ -5,8 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.Hooks;
-
 namespace AngbandOS.Core.Projection;
 
 [Serializable]
@@ -21,7 +19,6 @@ internal class HellFireProjectile : Projectile
     protected override bool AffectItem(int who, int y, int x)
     {
         GridTile cPtr = SaveGame.Level.Grid[y][x];
-        int nextOIdx;
         bool obvious = false;
         string oName = "";
         foreach (Item oPtr in cPtr.Items)
