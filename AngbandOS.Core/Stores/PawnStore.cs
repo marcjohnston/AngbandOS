@@ -12,7 +12,6 @@ internal class PawnStore : Store
 {
     public PawnStore(SaveGame saveGame) : base(saveGame) { }
 
-    public override StoreType StoreType => StoreType.StorePawn;
     protected override StoreOwner[] StoreOwners => new StoreOwner[]
     {
         SaveGame.SingletonRepository.StoreOwners.Get<MagdTheRuthlessStoreOwner>(),

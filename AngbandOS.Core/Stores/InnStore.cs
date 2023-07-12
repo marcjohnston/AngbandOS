@@ -12,7 +12,6 @@ internal class InnStore : Store
 {
     public InnStore(SaveGame saveGame) : base(saveGame) { }
 
-    public override StoreType StoreType => StoreType.StoreInn;
     protected override StoreOwner[] StoreOwners => new StoreOwner[]
     {
         SaveGame.SingletonRepository.StoreOwners.Get<MordsanStoreOwner>(),

@@ -15,7 +15,7 @@ internal class EnchantArmorStoreCommand : BaseStoreCommand
 
     public override string Description => "Enchant your armour";
 
-    public override bool IsEnabled(Store store) => (store.StoreType == StoreType.StoreArmoury);
+    public override bool IsEnabled(Store store) => (store.GetType() == typeof(ArmouryStore));
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {

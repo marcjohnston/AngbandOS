@@ -12,7 +12,6 @@ internal class LibraryStore : Store
 {
     public LibraryStore(SaveGame saveGame) : base(saveGame) { }
 
-    public override StoreType StoreType => StoreType.StoreLibrary;
     protected override StoreOwner[] StoreOwners => new StoreOwner[]
     {
         SaveGame.SingletonRepository.StoreOwners.Get<RandolphCarterStoreOwner>(),

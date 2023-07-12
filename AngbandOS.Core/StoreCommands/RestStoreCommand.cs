@@ -16,7 +16,7 @@ internal class RestStoreCommand : BaseStoreCommand
 
     public override string Description => "Rest a while";
 
-    public override bool IsEnabled(Store store) => (store.StoreType == StoreType.StoreHome);
+    public override bool IsEnabled(Store store) => (store.GetType() == typeof(HomeStore));
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {

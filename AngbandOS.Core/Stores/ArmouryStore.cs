@@ -12,7 +12,6 @@ internal class ArmouryStore : Store
 {
     public ArmouryStore(SaveGame saveGame) : base(saveGame) { }
 
-    public override StoreType StoreType => StoreType.StoreArmoury;
     protected override StoreOwner[] StoreOwners => new StoreOwner[]
     {
         SaveGame.SingletonRepository.StoreOwners.Get<KonDarTheUglyStoreOwner>(),

@@ -12,7 +12,6 @@ internal class HomeStore : Store
 {
     public HomeStore(SaveGame saveGame) : base(saveGame) { }
 
-    public override StoreType StoreType => StoreType.StoreHome;
     public override int MaxInventory => 100;
     protected override StoreOwner[] StoreOwners => new StoreOwner[]
     {

@@ -40,8 +40,6 @@ internal class DbStoreOwner : StoreOwner
 [Serializable]
 internal class DbStore : Store
 {
-    public override StoreType StoreType => StoreType.StoreHome;
-
     private string _featureType;
     private StoreOwner[] _storeOwners;
     private Symbol _symbol;

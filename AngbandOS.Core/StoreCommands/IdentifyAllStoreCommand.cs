@@ -15,7 +15,7 @@ internal class IdentifyAllStoreCommand : BaseStoreCommand
 
     public override string Description => "Identify all";
 
-    public override bool IsEnabled(Store store) => (store.StoreType == StoreType.StorePawn);
+    public override bool IsEnabled(Store store) => (store.GetType() == typeof(PawnStore));
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {

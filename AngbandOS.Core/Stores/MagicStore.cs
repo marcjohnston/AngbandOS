@@ -12,7 +12,6 @@ internal class MagicStore : Store
 {
     public MagicStore(SaveGame saveGame) : base(saveGame) { }
 
-    public override StoreType StoreType => StoreType.StoreMagic;
     protected override StoreOwner[] StoreOwners => new StoreOwner[]
     {
         SaveGame.SingletonRepository.StoreOwners.Get<SkidneyTheSorcererStoreOwner>(),

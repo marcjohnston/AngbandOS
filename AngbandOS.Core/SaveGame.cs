@@ -1268,7 +1268,7 @@ internal class SaveGame
         CloseGame();
     }
 
-    public HomeStore FindHomeStore(int town) => (HomeStore)Array.Find(SingletonRepository.Towns[town].Stores, store => store.StoreType == StoreType.StoreHome);
+    public HomeStore FindHomeStore(int town) => (HomeStore)Array.Find(SingletonRepository.Towns[town].Stores, store => store.GetType() == typeof(HomeStore));
 
     public void MoveHouse(int oldTown, int newTown)
     {
@@ -12210,7 +12210,7 @@ internal class SaveGame
 
         if (CurTown.Char != 'K')
         {
-            if (store.StoreType == StoreType.StoreEmptyLot)
+            if (store.GetType() == typeof(EmptyLotStore))
             {
                 switch (Program.Rng.DieRoll(10))
                 {
@@ -13444,7 +13444,7 @@ internal class SaveGame
             case LevelStart.StartHouse:
                 foreach (Store store in CurTown.Stores)
                 {
-                    if (store.StoreType != StoreType.StoreHome)
+                    if (store.GetType() != typeof(HomeStore))
                     {
                         continue;
                     }

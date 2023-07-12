@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Stores;
 internal class GeneralStore : Store
 {
     public GeneralStore(SaveGame saveGame) : base(saveGame) { }
-    public override StoreType StoreType => StoreType.StoreGeneral;
 
     protected override StoreOwner[] StoreOwners => new StoreOwner[]
     {

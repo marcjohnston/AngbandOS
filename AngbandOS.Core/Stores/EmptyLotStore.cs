@@ -12,7 +12,6 @@ internal class EmptyLotStore : Store
 {
     public EmptyLotStore(SaveGame saveGame) : base(saveGame) { }
 
-    public override StoreType StoreType => StoreType.StoreEmptyLot;
     protected override StoreOwner[] StoreOwners => new StoreOwner[]
     {
         SaveGame.SingletonRepository.StoreOwners.Get<EmptyLotStoreOwner>()

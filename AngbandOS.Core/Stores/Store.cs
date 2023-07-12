@@ -15,8 +15,6 @@ internal abstract class Store : IItemFilter
 
     protected readonly SaveGame SaveGame;
 
-    public abstract StoreType StoreType { get; }
-
     public virtual int PageSize => 26;
 
     /// <summary>
@@ -268,7 +266,7 @@ internal abstract class Store : IItemFilter
             Item? oPtr = SaveGame.GetInventoryItem(itemIndex);
             if (oPtr != null)
             {
-                if (StoreType != StoreType.StoreHome)
+                if (this.GetType() != typeof(HomeStore))
                 {
                     SaveGame.MsgPrint("Your pack is so full that you flee the Stores...");
                     _leaveStore = true;

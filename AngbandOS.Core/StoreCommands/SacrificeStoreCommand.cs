@@ -15,8 +15,8 @@ internal class SacrificeStoreCommand : BaseStoreCommand
 
     public override string Description => "Sacrifice Item";
 
-    public override bool IsEnabled(Store store) => (store.StoreType == StoreType.StoreTemple);
-
+    public override bool IsEnabled(Store store) => (store.GetType() == typeof(TempleStore));
+    
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {
         storeCommandEvent.Store.SacrificeItem();

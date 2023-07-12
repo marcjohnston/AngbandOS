@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Stores;
 internal class HallStore : Store
 {
     public HallStore(SaveGame saveGame) : base(saveGame) { }
-    public override StoreType StoreType => StoreType.StoreHall;
 
     protected override StoreOwner[] StoreOwners => new StoreOwner[]
     {

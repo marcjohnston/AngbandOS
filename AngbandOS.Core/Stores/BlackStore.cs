@@ -12,7 +12,6 @@ internal class BlackStore : Store
 {
     public BlackStore(SaveGame saveGame) : base(saveGame) { }
 
-    public override StoreType StoreType => StoreType.StoreBlack;
     public override int MaxInventory => 75;
     public override int StoreMinKeep => 35;
     public override int StoreMaxKeep => 65;

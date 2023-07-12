@@ -15,7 +15,7 @@ internal class RemoveCurseStoreCommand : BaseStoreCommand
 
     public override string Description => "buy Remove Curse";
 
-    public override bool IsEnabled(Store store) => (store.StoreType == StoreType.StoreTemple);
+    public override bool IsEnabled(Store store) => (store.GetType() == typeof(TempleStore));
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {

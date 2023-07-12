@@ -12,7 +12,6 @@ internal class AlchemistStore : Store
 {
     public AlchemistStore(SaveGame saveGame) : base(saveGame) { }
 
-    public override StoreType StoreType => StoreType.StoreAlchemist;
     protected override StoreOwner[] StoreOwners => new StoreOwner[]
     {
         SaveGame.SingletonRepository.StoreOwners.Get<MauserTheChemistStoreOwner>(),
