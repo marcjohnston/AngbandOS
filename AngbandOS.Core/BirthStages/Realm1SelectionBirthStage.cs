@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System;
+
 namespace AngbandOS.Core.BirthStages;
 
 [Serializable]
@@ -19,6 +21,13 @@ internal class Realm1SelectionBirthStage : BaseBirthStage
             .Select(_availablePrimaryRealms => _availablePrimaryRealms.Name)
             .ToArray();
         SaveGame.Screen.Print(ColourEnum.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+
+        // The index might be out of range if the user switches between classes.
+        if (currentSelection >= SaveGame.Player.BaseCharacterClass.AvailablePrimaryRealms.Length)
+        {
+            currentSelection = SaveGame.Player.BaseCharacterClass.AvailablePrimaryRealms.Length - 1;
+        }
+
         while (!SaveGame.Shutdown)
         {
             SaveGame.MenuDisplay(currentSelection, menuItems);
