@@ -170,8 +170,11 @@ internal class SaveGame
                                                           
     public TalentList Talents;
 
+    /// <summary>
+    /// Represents the object responsible for saving the game, when needed.  If null, the game cannot be saved.
+    /// </summary>
     [NonSerialized]
-    private ICorePersistentStorage PersistentStorage;
+    private ICorePersistentStorage? PersistentStorage;
 
     /// <summary>
     /// Returns the object used to provide game updates to the calling application.  Returns null, when the calling application did not provide an UpdateMonitor object.
@@ -1159,7 +1162,7 @@ internal class SaveGame
     /// <param name="console"></param>
     /// <param name="persistentStorage"></param>
     /// <param name="updateMonitor"></param>
-    public void Play(IConsole console, ICorePersistentStorage persistentStorage, IUpdateMonitor? updateMonitor)
+    public void Play(IConsole console, ICorePersistentStorage? persistentStorage, IUpdateMonitor? updateMonitor)
     {
         _console = console;
         LastInputReceived = DateTime.Now;
