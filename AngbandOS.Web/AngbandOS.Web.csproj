@@ -35,7 +35,6 @@
     <None Remove="ClientApp\src\app\home\active-game-details.ts" />
     <None Remove="ClientApp\src\app\home\active-user-details.ts" />
     <None Remove="ClientApp\src\app\home\saved-game-details.ts" />
-    <None Remove="ClientApp\src\app\manual\manual.css" />
     <None Remove="ClientApp\src\app\modules\colour-enum\colour-enum.module.ts" />
     <None Remove="ClientApp\src\app\modules\colours-map\colours-map.module.ts" />
     <None Remove="ClientApp\src\app\modules\html-console\html-console.module.ts" />
@@ -54,12 +53,6 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\play\get-user-preferences.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="ClientApp\src\app\manual\manual.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>
