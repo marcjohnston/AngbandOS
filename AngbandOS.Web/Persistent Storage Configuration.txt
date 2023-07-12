@@ -1,0 +1,43 @@
+﻿Switching between storage providers.
+
+1. Update the connection string as needed.  This is stored as a user secret.
+
+SQL:
+"ConnectionString": "Server=192.168.1.3;Database=AngbandOS;user=;password=",
+
+or 
+
+MySQL:
+"ConnectionString": "Server=192.168.1.3;Database=AngbandOS;user=;password=",
+
+2. Update the dependency injection service for the desired WebPersistentStorage:
+
+SQL:
+builder.Services.AddScoped(typeof(IWebPersistentStorage), typeof(SqlWebPersistentStorage)); // Persistent storage driver
+
+or 
+
+MySQL:
+builder.Services.AddScoped(typeof(IWebPersistentStorage), typeof(MySqlWebPersistentStorage)); // Persistent storage driver
+
+3. Update the desired DbContext to use.
+
+SQL:
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+
+or
+
+MySQL:
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseMySQL(connectionString));
+
+4. Update the Hub/GameService CorePersistentStorage:
+
+SQL:
+ICorePersistentStorage corePersistentStorage =  new SqlCorePersistentStorage(ConnectionString, userId, guid);
+
+or
+
+MySQL:
+ICorePersistentStorage corePersistentStorage =  new MySqlCorePersistentStorage(ConnectionString, userId, guid);
+
+
