@@ -51,9 +51,6 @@ internal class RangerCharacterClass : BaseCharacterClass
         SaveGame.SingletonRepository.Realms.Get<NatureRealm>()
     };
     public override BaseRealm[] AvailableSecondaryRealms => new BaseRealm[] {
-        SaveGame.SingletonRepository.Realms.Get<LifeRealm>(),
-        SaveGame.SingletonRepository.Realms.Get<SorceryRealm>(),
-        SaveGame.SingletonRepository.Realms.Get<NatureRealm>(),
         SaveGame.SingletonRepository.Realms.Get<ChaosRealm>(),
         SaveGame.SingletonRepository.Realms.Get<DeathRealm>(),
         SaveGame.SingletonRepository.Realms.Get<TarotRealm>(),
