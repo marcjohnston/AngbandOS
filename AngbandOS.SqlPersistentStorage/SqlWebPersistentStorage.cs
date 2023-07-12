@@ -1,4 +1,4 @@
-﻿using AngbandOS.PersistentStorage.MySql.Entities;
+﻿using AngbandOS.PersistentStorage.Sql.Entities;
 using AngbandOS.Web.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -9,16 +9,24 @@ namespace AngbandOS.PersistentStorage
     /// Represents a Sql driver for AngbandOS to read and write saved games to a Sql database.  
     /// Also supports the ability for a front-end to retrieve SavedGameDetails for a user.
     /// </summary>
-    public class WebSqlPersistentStorage : IWebPersistentStorage
+    public class SqlWebPersistentStorage : IWebPersistentStorage
     {
         /// <summary>
         /// Returns the connection string to the database.
         /// </summary>
         protected string ConnectionString { get; }
 
-        public WebSqlPersistentStorage(IConfiguration configuration)
+        public SqlWebPersistentStorage(IConfiguration configuration)
         {
             ConnectionString = configuration["ConnectionString"];
+        }
+
+        public async Task EnsureCreated()
+        {
+            using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
+            {
+                await context.Database.EnsureCreatedAsync();
+            }
         }
 
         public async Task<UserSettingsDetails?> GetPreferences(string userId)
@@ -178,9 +186,9 @@ namespace AngbandOS.PersistentStorage
         /// <inheritdoc/>
         public async Task<MessageDetails[]> GetMessagesAsync(string? userId, int? mostRecentMessageId, MessageTypeEnum[]? types)
         {
+            await EnsureCreated();
             using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
             {
-                context.Database.EnsureCreated();
                 IQueryable<Message> messagesQuery = context.Messages;
                 if (userId == null)
                     messagesQuery = messagesQuery.Where(_message => _message.ToUserId == null);

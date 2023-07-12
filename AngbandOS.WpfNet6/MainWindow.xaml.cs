@@ -199,7 +199,14 @@ namespace Cthangband
             string savePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string saveFilename = Path.Combine(savePath, "My Games\\angbandos.savefile");
             ICorePersistentStorage persistentStorage = new AngbandOS.PersistentStorage.FileSystemPersistentStorage(saveFilename);
-            gameServer.Play(this, persistentStorage, null);
+            if (persistentStorage.GameExists())
+            {
+                gameServer.PlayExistingGame(this, persistentStorage);
+            }
+            else
+            {
+                gameServer.PlayNewGame(this, persistentStorage);
+            }
         }
 
         public BackgroundImageEnum BackgroundImage

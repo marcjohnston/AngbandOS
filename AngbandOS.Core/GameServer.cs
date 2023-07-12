@@ -106,18 +106,20 @@ public class GameServer
     public void InitiateShutDown()
     {
         if (SaveGame != null)
+        {
             SaveGame.Shutdown = true;
+        }
     }
 
     /// <summary>
-    /// Plays a game and returns false, if the game cannot be played, true when the game is over.
+    /// Plays a game.  If the game cannot be played false is immediately returned; otherwise, the game is played out and true is returned when the game is over.
     /// </summary>
     /// <param name="console"></param>
-    /// <param name="persistentStorage"></param>
+    /// <param name="persistentStorage">The object responsible for saving the game.  If this object is not provided, the game will not be saved.</param>
     /// <param name="updateMonitor"></param>
     /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
     /// <returns></returns>
-    public bool Play(IConsole console, ICorePersistentStorage? persistentStorage, IUpdateMonitor? updateMonitor, Configuration? configuration = null)
+    public bool PlayNewGame(IConsole console, ICorePersistentStorage? persistentStorage, IUpdateMonitor? updateMonitor = null, Configuration? configuration = null)
     {
         if (console == null)
         {
@@ -126,8 +128,39 @@ public class GameServer
 
         try
         {
-            // Retrieve the game from persistent storage
-            SaveGame = SaveGame.Initialize(persistentStorage, configuration);
+            SaveGame = SaveGame.CreateNew(configuration);
+            SaveGame.Play(console, persistentStorage, updateMonitor);
+        }
+        catch (Exception ex)
+        {
+            updateMonitor?.GameExceptionThrown(ex.Message);
+            return false;
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// Plays an existing game.  If the game cannot be played false is immediately returned; otherwise, the game is played out and true is returned when the game is over.
+    /// </summary>
+    /// <param name="console"></param>
+    /// <param name="persistentStorage"></param>
+    /// <param name="updateMonitor"></param>
+    /// <returns></returns>
+    public bool PlayExistingGame(IConsole console, ICorePersistentStorage persistentStorage, IUpdateMonitor? updateMonitor = null)
+    {
+        if (console == null)
+        {
+            throw new ArgumentNullException("console", "A console object must be provided and cannot be null.");
+        }
+        if (persistentStorage == null)
+        {
+            throw new ArgumentNullException("persistentStorage", "A persistentStorage object must be provided to retrieve the game from persistent storage and cannot be null.");
+        }
+
+        try
+        {
+            // Retrieve the game from persistent storage.
+            SaveGame = SaveGame.LoadGame(persistentStorage);
             SaveGame.Play(console, persistentStorage, updateMonitor);
         }
         catch (Exception ex)

@@ -1,4 +1,4 @@
-﻿using AngbandOS.PersistentStorage.Sql.Entities;
+﻿using AngbandOS.PersistentStorage.MySql.Entities;
 using AngbandOS.Web.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -9,29 +9,21 @@ namespace AngbandOS.PersistentStorage
     /// Represents a Sql driver for AngbandOS to read and write saved games to a Sql database.  
     /// Also supports the ability for a front-end to retrieve SavedGameDetails for a user.
     /// </summary>
-    public class WebSqlPersistentStorage : IWebPersistentStorage
+    public class MySqlWebPersistentStorage : IWebPersistentStorage
     {
         /// <summary>
         /// Returns the connection string to the database.
         /// </summary>
         protected string ConnectionString { get; }
 
-        public WebSqlPersistentStorage(IConfiguration configuration)
+        public MySqlWebPersistentStorage(IConfiguration configuration)
         {
             ConnectionString = configuration["ConnectionString"];
         }
 
-        public async Task EnsureCreated()
-        {
-            using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
-            {
-                await context.Database.EnsureCreatedAsync();
-            }
-        }
-
         public async Task<UserSettingsDetails?> GetPreferences(string userId)
         {
-            using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
+            using (AngbandOSMySqlContext context = new AngbandOSMySqlContext(ConnectionString))
             {
                 UserSetting? userSetting = await context.UserSettings.SingleOrDefaultAsync(_userSetting => _userSetting.UserId == userId);
                 if (userSetting == null)
@@ -58,7 +50,7 @@ namespace AngbandOS.PersistentStorage
 
         public async Task<UserSettingsDetails> WritePreferencesAsync(string userId, UserSettingsDetails userSettingsDetails)
         {
-            using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
+            using (AngbandOSMySqlContext context = new AngbandOSMySqlContext(ConnectionString))
             {
                 UserSetting? userSetting = await context.UserSettings.SingleOrDefaultAsync(_userSetting => _userSetting.UserId == userId);
                 if (userSetting == null)
@@ -109,7 +101,7 @@ namespace AngbandOS.PersistentStorage
         public async Task<bool> DeleteAsync(string id, string username)
         {
             Guid guid = Guid.Parse(id);
-            using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
+            using (AngbandOSMySqlContext context = new AngbandOSMySqlContext(ConnectionString))
             {
                 SavedGame? savedGame = await context.SavedGames.SingleOrDefaultAsync(_savedGame => _savedGame.Username == username && _savedGame.Guid == guid);
                 if (savedGame == null)
@@ -127,7 +119,7 @@ namespace AngbandOS.PersistentStorage
         /// <inheritdoc/>
         public async Task<SavedGameDetails[]> ListAsync(string username)
         {
-            using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
+            using (AngbandOSMySqlContext context = new AngbandOSMySqlContext(ConnectionString))
             {
                 SavedGameDetails[] savedGames = await context.SavedGames
                     .Where(_savedGame => _savedGame.Username == username)
@@ -149,7 +141,7 @@ namespace AngbandOS.PersistentStorage
         /// <inheritdoc/>
         public async Task<MessageDetails?> WriteMessageAsync(string fromId, string? toId, string content, MessageTypeEnum type, string? gameId)
         {
-            using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
+            using (AngbandOSMySqlContext context = new AngbandOSMySqlContext(ConnectionString))
             {
                 Message newMessage = new Message()
                 {
@@ -186,9 +178,9 @@ namespace AngbandOS.PersistentStorage
         /// <inheritdoc/>
         public async Task<MessageDetails[]> GetMessagesAsync(string? userId, int? mostRecentMessageId, MessageTypeEnum[]? types)
         {
-            await EnsureCreated();
-            using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
+            using (AngbandOSMySqlContext context = new AngbandOSMySqlContext(ConnectionString))
             {
+                context.Database.EnsureCreated();
                 IQueryable<Message> messagesQuery = context.Messages;
                 if (userId == null)
                     messagesQuery = messagesQuery.Where(_message => _message.ToUserId == null);

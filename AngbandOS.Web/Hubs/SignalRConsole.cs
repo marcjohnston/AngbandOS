@@ -7,7 +7,7 @@ using System.ComponentModel;
 namespace AngbandOS.Web.Hubs
 {
     /// <summary>
-    /// Represents a console interface to accept messages from an active game and send the message via a SignalR hub.  This class operates 
+    /// Represents a console interface to accept messages from an active game (AngbandOS.Core) and send the message to the client browser via a SignalR hub.  This class operates 
     /// as a background worker to process incoming messages and send outgoing messages without blocking the main thread.
     /// </summary>
     public class SignalRConsole : BackgroundWorker, IConsole
@@ -16,7 +16,7 @@ namespace AngbandOS.Web.Hubs
         private readonly IGameHub _consoleGameHub; // This is the signal-r hub that the console is communicating on.
         private readonly List<ISpectatorsHub> _spectators = new List<ISpectatorsHub>(); // This is the list of people watching the game.
         private readonly ICorePersistentStorage PersistentStorage; // This is the game persistence.
-        private GameServer _gameServer; // This is the actual game.
+        private GameServer? _gameServer = null; // This is the actual game.  The game is null, until the thread is started.
         public readonly string UserId; // This is the ID of the player.
         public readonly string Username; // This is the username of the player.
         private readonly Action<SignalRConsole, GameUpdateNotificationEnum, string> NotificationAction; // This is the notification channel.
@@ -37,7 +37,9 @@ namespace AngbandOS.Web.Hubs
         {
             // Set the game flag to shut down.  Do this first, because we need to game to exit quickly when keypresses are bypassed.
             if (_gameServer != null)
+            {
                 _gameServer.InitiateShutDown();
+            }
 
             // Set the flag to force the input queue to shut down.  This will bypass the keystrokes.
             ShuttingDown = true;
@@ -115,10 +117,21 @@ namespace AngbandOS.Web.Hubs
 
             // This thread will initiate the play command on the game with this SignalRConsole object also acting as the injected
             // IConsole to receive and process print and wait for key requests.
-            if (_gameServer.Play(this, PersistentStorage, new UpdateMonitor(this, NotificationAction)))
+            if (PersistentStorage.GameExists())
             {
-                // The game is over.  Let the client know.
-                GameOver();
+                if (_gameServer.PlayExistingGame(this, PersistentStorage, new UpdateMonitor(this, NotificationAction)))
+                {
+                    // The game is over.  Let the client know.
+                    GameOver();
+                }
+            }
+            else
+            {
+                if (_gameServer.PlayNewGame(this, PersistentStorage, new UpdateMonitor(this, NotificationAction)))
+                {
+                    // The game is over.  Let the client know.
+                    GameOver();
+                }
             }
             DisconnectSpectators();
 

@@ -375,37 +375,41 @@ internal class SaveGame
     }
 
     /// <summary>
+    /// Creates a new game that can be played.
+    /// </summary>
+    /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
+    /// <returns></returns>
+    public static SaveGame CreateNew(Configuration? configuration)
+    {
+        return new SaveGame(configuration);
+    }
+
+    /// <summary>
     /// Retrieves a save game from persistent storage.  If no persistent storage is specified, a new game is created. This static method is used as a factory
     /// to generate the SaveGame object that can be played using the Play method.  This is the only static method.
     /// </summary>
     /// <param name="persistentStorage"></param>
-    /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
     /// <returns></returns>
-    public static SaveGame Initialize(ICorePersistentStorage? persistentStorage, Configuration? configuration) // TODO: This needs to be converted into CreateNew and PlayExisting methods.
+    public static SaveGame LoadGame(ICorePersistentStorage persistentStorage)
     {
-        byte[]? data = null;
-
-        // Retrieve the game from the persistent storage.
-        if (persistentStorage != null)
+        if (persistentStorage == null)
         {
-            // Retrieve the saved game from the persistent storage.  If the persistent storage doesn't find it, the return data is expected to be null; which
-            // will indicate that a new game needs to be created.
-            data = persistentStorage.ReadGame();
+            throw new ArgumentNullException("persistentStorage", "A persistentStorage object must be provided to load the game and cannot be null.");
         }
 
-        // Check to see if the game needs to be created?
+        // Retrieve the saved game from the persistent storage.  If the persistent storage doesn't find it, the return data is expected to be null; which
+        // will indicate that a new game needs to be created.
+        byte[]? data = persistentStorage.ReadGame();
+
         if (data == null)
         {
-            // The game doesn't exist.  Start a new one.
-            return new SaveGame(configuration);
+            throw new Exception("Saved game does not exist.");
         }
-        else
-        {
-            // Deserialize the game.
-            BinaryFormatter formatter = new BinaryFormatter();
-            MemoryStream memoryStream = new MemoryStream(data);
-            return (SaveGame)formatter.Deserialize(memoryStream);
-        }
+
+        // Deserialize the game.
+        BinaryFormatter formatter = new BinaryFormatter();
+        MemoryStream memoryStream = new MemoryStream(data);
+        return (SaveGame)formatter.Deserialize(memoryStream);
     }
 
     public byte Elevation(int wildY, int wildX, int y, int x)

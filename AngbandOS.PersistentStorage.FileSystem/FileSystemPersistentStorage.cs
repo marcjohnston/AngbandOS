@@ -11,6 +11,11 @@ namespace AngbandOS.PersistentStorage
             SaveFilename = filename;
         }
 
+        public bool GameExists()
+        {
+            return File.Exists(SaveFilename);
+        }
+
         public byte[]? ReadGame()
         {
             byte[]? data = null;

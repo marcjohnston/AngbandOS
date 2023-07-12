@@ -6,11 +6,11 @@ namespace AngbandOS.PersistentStorage
     /// <summary>
     /// Encapsulates the connection string needed to access the database entities.
     /// </summary>
-    public class AngbandOSSqlContext : AngbandOSContext
+    public class AngbandOSMySqlContext : AngbandOSContext
     {
         protected string ConnectionString { get; }
 
-        public AngbandOSSqlContext(string connectionString)
+        public AngbandOSMySqlContext(string connectionString)
         {
             ConnectionString = connectionString;
         }

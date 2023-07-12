@@ -6,7 +6,7 @@
 public interface ICorePersistentStorage
 {
     /// <summary>
-    /// Reads and returns a saved game from the persistent storage.
+    /// Reads and returns a saved game from the persistent storage.  Returns null, if the game does not exist.
     /// </summary>
     /// <returns></returns>
     byte[]? ReadGame();
@@ -18,4 +18,10 @@ public interface ICorePersistentStorage
     /// <param name="value">The save game to write.</param>
     /// <returns></returns>
     bool WriteGame(GameDetails gameDetails, byte[] value);
+
+    /// <summary>
+    /// Returns true, if a persisted game exists.  False, otherwise.
+    /// </summary>
+    /// <returns></returns>
+    bool GameExists();
 }
