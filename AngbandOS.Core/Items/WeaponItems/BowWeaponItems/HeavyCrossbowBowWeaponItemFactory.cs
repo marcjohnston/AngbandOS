@@ -13,7 +13,7 @@ internal class HeavyCrossbowBowWeaponItemFactory : BowWeaponItemFactory
     private HeavyCrossbowBowWeaponItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBracketSymbol>();
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Heavy Crossbow";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

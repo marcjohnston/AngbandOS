@@ -32,7 +32,7 @@ internal class TwoHandedSwordDragonslayerFixedArtifact : FixedArtifact
         }
     }
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
-    public override Colour Colour => Colour.BrightWhite;
+    public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "The Two-Handed Sword 'Dragonslayer'";
     public override int Ac => 0;
     public override int Cost => 100000;

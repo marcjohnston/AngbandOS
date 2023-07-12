@@ -15,7 +15,7 @@ internal class DisenchanterEyeMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new DrainManaMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerESymbol>();
-    public override Colour Colour => Colour.Chartreuse;
+    public override ColourEnum Colour => ColourEnum.Chartreuse;
     public override string Name => "Disenchanter eye";
 
     public override int ArmourClass => 10;

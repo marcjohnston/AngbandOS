@@ -12,7 +12,7 @@ internal class WeaponDefenderRareItem : RareItem
 {
     private WeaponDefenderRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
-    public override Colour Colour => Colour.BrightWhite;
+    public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "Weapon (Defender)";
     public override int Cost => 15000;
     public override bool Feather => true;

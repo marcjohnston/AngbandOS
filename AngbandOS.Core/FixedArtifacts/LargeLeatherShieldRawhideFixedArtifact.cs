@@ -24,7 +24,7 @@ internal class LargeLeatherShieldRawhideFixedArtifact : FixedArtifact
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseParenthesisSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "The Large Leather Shield 'Rawhide'";
     public override int Ac => 4;
     public override int Cost => 12000;

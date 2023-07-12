@@ -13,7 +13,7 @@ internal class FrumiousBandersnatchMonsterRace : MonsterRace
     protected FrumiousBandersnatchMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerCSymbol>();
-    public override Colour Colour => Colour.BrightOrange;
+    public override ColourEnum Colour => ColourEnum.BrightOrange;
     public override string Name => "Frumious bandersnatch";
 
     public override bool Animal => true;

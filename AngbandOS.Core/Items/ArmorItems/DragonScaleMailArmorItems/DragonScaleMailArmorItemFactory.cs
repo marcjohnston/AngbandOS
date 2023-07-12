@@ -16,5 +16,5 @@ internal abstract class DragonScaleMailArmorItemFactory : ArmourItemFactory
     public override int PackSort => 19;
     public override bool HatesAcid => true;
 
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
 }

@@ -45,11 +45,11 @@ internal class MonsterKnowledge
     {
         SaveGame.MsgPrint(null);
         SaveGame.Screen.Erase(1, 0);
-        DisplayBody(Colour.White);
+        DisplayBody(ColourEnum.White);
         DisplayHeader();
     }
 
-    public void DisplayBody(Colour bodyColour)
+    public void DisplayBody(ColourEnum bodyColour)
     {
         int m;
         int msex = 0;
@@ -1357,17 +1357,17 @@ internal class MonsterKnowledge
     private void DisplayHeader()
     {
         char c1 = _monsterType.Symbol.Character;
-        Colour a1 = _monsterType.Colour;
+        ColourEnum a1 = _monsterType.Colour;
         SaveGame.Screen.Erase(0, 0);
         SaveGame.Screen.Goto(0, 0);
         if (!_monsterType.Unique)
         {
-            SaveGame.Screen.Print(Colour.White, "The ");
+            SaveGame.Screen.Print(ColourEnum.White, "The ");
         }
-        SaveGame.Screen.Print(Colour.White, _monsterType.Name);
-        SaveGame.Screen.Print(Colour.White, " ('");
+        SaveGame.Screen.Print(ColourEnum.White, _monsterType.Name);
+        SaveGame.Screen.Print(ColourEnum.White, " ('");
         SaveGame.Screen.Print(a1, c1.ToString());
-        SaveGame.Screen.Print(Colour.White, "')");
+        SaveGame.Screen.Print(ColourEnum.White, "')");
     }
 
     private bool KnowArmour(MonsterRace monsterType, MonsterKnowledge knowledge)

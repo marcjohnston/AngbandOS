@@ -19,12 +19,12 @@ internal class RedrawLevelFlaggedAction : FlaggedAction
         if (SaveGame.Player.Level >= SaveGame.Player.MaxLevelGained)
         {
             SaveGame.Screen.Print("LEVEL ", RowLevel, 0);
-            SaveGame.Screen.Print(Colour.BrightGreen, tmp, RowLevel, ColLevel + 6);
+            SaveGame.Screen.Print(ColourEnum.BrightGreen, tmp, RowLevel, ColLevel + 6);
         }
         else
         {
             SaveGame.Screen.Print("Level ", RowLevel, 0);
-            SaveGame.Screen.Print(Colour.Yellow, tmp, RowLevel, ColLevel + 6);
+            SaveGame.Screen.Print(ColourEnum.Yellow, tmp, RowLevel, ColLevel + 6);
         }
     }
 }

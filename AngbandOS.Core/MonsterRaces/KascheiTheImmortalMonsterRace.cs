@@ -26,7 +26,7 @@ internal class KascheiTheImmortalMonsterRace : MonsterRace
         new SummonMonstersMonsterSpell(),
         new TeleportSelfMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperLSymbol>();
-    public override Colour Colour => Colour.Purple;
+    public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Kaschei the Immortal";
 
     public override int ArmourClass => 100;

@@ -13,7 +13,7 @@ internal class VortTheKoboldQueenMonsterRace : MonsterRace
     protected VortTheKoboldQueenMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerKSymbol>();
-    public override Colour Colour => Colour.Blue;
+    public override ColourEnum Colour => ColourEnum.Blue;
     public override string Name => "Vort the Kobold Queen";
 
     public override int ArmourClass => 20;

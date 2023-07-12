@@ -18,7 +18,7 @@ internal class ChaosMasterMonsterRace : MonsterRace
         new SummonDemonMonsterSpell(),
         new SummonSpiderMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
-    public override Colour Colour => Colour.Purple;
+    public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Chaos master";
 
     public override int ArmourClass => 50;

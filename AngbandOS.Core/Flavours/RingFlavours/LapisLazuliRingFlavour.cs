@@ -12,6 +12,6 @@ internal class LapisLazuliRingFlavour : RingFlavour
 {
     private LapisLazuliRingFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<EqualSignSymbol>();
-    public override Colour Colour => Colour.Turquoise;
+    public override ColourEnum Colour => ColourEnum.Turquoise;
     public override string Name => "Lapis Lazuli";
 }

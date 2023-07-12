@@ -165,7 +165,7 @@ internal abstract class Store : IItemFilter
     /// </summary>
     public abstract Symbol Symbol { get; }
 
-    public abstract Colour Colour { get; }
+    public abstract ColourEnum Colour { get; }
     public virtual string Description => FeatureType;
 
     public StoreFloorTile CreateFloorTileType() => new StoreFloorTile(SaveGame, Symbol, Colour, FeatureType, FeatureType, Description);
@@ -305,7 +305,7 @@ internal abstract class Store : IItemFilter
         SaveGame.ViewingItemList = false;
         SaveGame.MsgPrint(null); // TODO: This is a PrWipeRedrawAction
         SaveGame.Screen.Clear();// TODO: This is a PrWipeRedrawAction
-        SaveGame.SetBackground(BackgroundImage.Overhead);
+        SaveGame.SetBackground(BackgroundImageEnum.Overhead);
         SaveGame.UpdateLightFlaggedAction.Set();
         SaveGame.UpdateViewFlaggedAction.Set();
         SaveGame.UpdateMonstersFlaggedAction.Set();
@@ -416,7 +416,7 @@ internal abstract class Store : IItemFilter
         int i = pos % PageSize;
         string outVal = $"{i.IndexToLetter()}) ";
         SaveGame.Screen.PrintLine(outVal, i + 6, 0);
-        Colour a = oPtr.Factory.FlavorColour;
+        ColourEnum a = oPtr.Factory.FlavorColour;
         char c = oPtr.Factory.FlavorSymbol.Character;
         SaveGame.Screen.Print(a, c.ToString(), i + 6, 3);
         oName = GetItemDescription(oPtr);
@@ -509,7 +509,7 @@ internal abstract class Store : IItemFilter
     private void DisplayStore()
     {
         SaveGame.Screen.Clear();
-        SaveGame.SetBackground(BackgroundImage.Normal);
+        SaveGame.SetBackground(BackgroundImageEnum.Normal);
         string ownerName = OwnerName;
         if (String.IsNullOrEmpty(ownerName))
         {
@@ -559,9 +559,9 @@ internal abstract class Store : IItemFilter
             string outVal = $"Destination town ({keys[0].ToString().ToLower()} to {keys[keys.Count - 1].ToString().ToLower()})? ";
             for (int i = 0; i < keys.Count; i++)
             {
-                SaveGame.Screen.Print(Colour.White, $" {keys[i].ToString().ToLower()}) {towns[keys[i]].Name}".PadRight(60), i + 1, 20);
+                SaveGame.Screen.Print(ColourEnum.White, $" {keys[i].ToString().ToLower()}) {towns[keys[i]].Name}".PadRight(60), i + 1, 20);
             }
-            SaveGame.Screen.Print(Colour.White, "".PadRight(60), keys.Count + 1, 20);
+            SaveGame.Screen.Print(ColourEnum.White, "".PadRight(60), keys.Count + 1, 20);
             while (SaveGame.GetCom(outVal, out char choice))
             {
                 choice = choice.ToString().ToUpper()[0];
@@ -599,9 +599,9 @@ internal abstract class Store : IItemFilter
             string outVal = $"Destination town ({keys[0].ToString().ToLower()} to {keys[keys.Count - 1].ToString().ToLower()})? ";
             for (int i = 0; i < keys.Count; i++)
             {
-                SaveGame.Screen.Print(Colour.White, $" {keys[i].ToString().ToLower()}) {names[i]}".PadRight(60), i + 1, 20);
+                SaveGame.Screen.Print(ColourEnum.White, $" {keys[i].ToString().ToLower()}) {names[i]}".PadRight(60), i + 1, 20);
             }
-            SaveGame.Screen.Print(Colour.White, "".PadRight(60), keys.Count + 1, 20);
+            SaveGame.Screen.Print(ColourEnum.White, "".PadRight(60), keys.Count + 1, 20);
             while (SaveGame.GetCom(outVal, out char choice))
             {
                 choice = choice.ToString().ToUpper()[0];
@@ -811,22 +811,22 @@ internal abstract class Store : IItemFilter
         if (value <= 0 && price > value)
         {
             SaveGame.MsgPrint(SaveGame.SingletonRepository.ShopKeeperWorthlessComments.ToWeightedRandom().Choose());
-            SaveGame.PlaySound(SoundEffect.StoreSoldWorthless);
+            SaveGame.PlaySound(SoundEffectEnum.StoreSoldWorthless);
         }
         else if (value < guess && price > value)
         {
             SaveGame.MsgPrint(SaveGame.SingletonRepository.ShopKeeperLessThanGuessComments.ToWeightedRandom().Choose());
-            SaveGame.PlaySound(SoundEffect.StoreSoldBargain);
+            SaveGame.PlaySound(SoundEffectEnum.StoreSoldBargain);
         }
         else if (value > guess && value < 4 * guess && price < value)
         {
             SaveGame.MsgPrint(SaveGame.SingletonRepository.ShopKeeperGoodComments.ToWeightedRandom().Choose());
-            SaveGame.PlaySound(SoundEffect.StoreSoldCheaply);
+            SaveGame.PlaySound(SoundEffectEnum.StoreSoldCheaply);
         }
         else if (value > guess && price < value)
         {
             SaveGame.MsgPrint(SaveGame.SingletonRepository.ShopKeeperBargainComments.ToWeightedRandom().Choose());
-            SaveGame.PlaySound(SoundEffect.StoreSoldExtraCheaply);
+            SaveGame.PlaySound(SoundEffectEnum.StoreSoldExtraCheaply);
         }
     }
 
@@ -1359,7 +1359,7 @@ internal abstract class Store : IItemFilter
 
         // Let the player know they've learned a spell
         SaveGame.MsgPrint($"You have learned the {spellType} of {spell.Name}.");
-        SaveGame.PlaySound(SoundEffect.Study);
+        SaveGame.PlaySound(SoundEffectEnum.Study);
         SaveGame.Player.SpareSpellSlots--;
         if (SaveGame.Player.SpareSpellSlots != 0)
         {
@@ -1422,7 +1422,7 @@ internal abstract class Store : IItemFilter
             {
                 SaveGame.Player.Gold -= price;
                 SayComment_1();
-                SaveGame.PlaySound(SoundEffect.StoreTransaction);
+                SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                 StorePrtGold();
                 SaveGame.IdentifyPack();
                 SaveGame.MsgPrint("All your goods have been identified.");
@@ -1451,7 +1451,7 @@ internal abstract class Store : IItemFilter
                 {
                     SaveGame.Player.Gold -= price;
                     SayComment_1();
-                    SaveGame.PlaySound(SoundEffect.StoreTransaction);
+                    SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                     StorePrtGold();
                     RoomRest(SaveGame.Player.Race.RestsTillDuskInsteadOfDawn);
                 }
@@ -1489,7 +1489,7 @@ internal abstract class Store : IItemFilter
             {
                 SaveGame.Player.Gold -= price;
                 SayComment_1();
-                SaveGame.PlaySound(SoundEffect.StoreTransaction);
+                SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                 StorePrtGold();
                 SaveGame.IdentifyFully();
             }
@@ -1510,7 +1510,7 @@ internal abstract class Store : IItemFilter
             {
                 SaveGame.Player.Gold -= price;
                 SayComment_1();
-                SaveGame.PlaySound(SoundEffect.StoreTransaction);
+                SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                 StorePrtGold();
                 SaveGame.Player.TryRestoringAbilityScore(Ability.Strength);
                 SaveGame.Player.TryRestoringAbilityScore(Ability.Intelligence);
@@ -1537,7 +1537,7 @@ internal abstract class Store : IItemFilter
             {
                 SaveGame.Player.Gold -= price;
                 SayComment_1();
-                SaveGame.PlaySound(SoundEffect.StoreTransaction);
+                SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                 StorePrtGold();
                 SaveGame.RemoveCurse();
             }
@@ -1558,7 +1558,7 @@ internal abstract class Store : IItemFilter
             {
                 SaveGame.Player.Gold -= price;
                 SayComment_1();
-                SaveGame.PlaySound(SoundEffect.StoreTransaction);
+                SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                 StorePrtGold();
                 SaveGame.EnchantItem(4, 4, 0);
             }
@@ -1579,7 +1579,7 @@ internal abstract class Store : IItemFilter
             {
                 SaveGame.Player.Gold -= price;
                 SayComment_1();
-                SaveGame.PlaySound(SoundEffect.StoreTransaction);
+                SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                 StorePrtGold();
                 SaveGame.EnchantItem(0, 0, 4);
             }
@@ -1618,7 +1618,7 @@ internal abstract class Store : IItemFilter
                     {
                         SaveGame.Player.Gold -= price;
                         SayComment_1();
-                        SaveGame.PlaySound(SoundEffect.StoreTransaction);
+                        SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                         StorePrtGold();
                         SaveGame.Player.WildernessX = destination.X;
                         SaveGame.Player.WildernessY = destination.Y;
@@ -1726,7 +1726,7 @@ internal abstract class Store : IItemFilter
                 if (SaveGame.Player.Gold >= price)
                 {
                     SayComment_1();
-                    SaveGame.PlaySound(SoundEffect.StoreTransaction);
+                    SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                     SaveGame.Player.Gold -= price;
                     StorePrtGold();
                     if (StoreIdentifiesItems)
@@ -1891,7 +1891,7 @@ internal abstract class Store : IItemFilter
             if (!choice)
             {
                 SayComment_1();
-                SaveGame.PlaySound(SoundEffect.StoreTransaction);
+                SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                 SaveGame.Player.Gold += price;
                 StorePrtGold();
                 int guess = qPtr.Value() * qPtr.Count;

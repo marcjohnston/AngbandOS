@@ -21,7 +21,7 @@ internal class OgreShamanMonsterRace : MonsterRace
         new SummonMonsterMonsterSpell(),
         new TeleportSelfMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperOSymbol>();
-    public override Colour Colour => Colour.Blue;
+    public override ColourEnum Colour => ColourEnum.Blue;
     public override string Name => "Ogre shaman";
 
     public override int ArmourClass => 55;

@@ -12,6 +12,6 @@ internal class RunedStaffFlavour : StaffFlavour
 {
     private RunedStaffFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UnderscoreSymbol>();
-    public override Colour Colour => Colour.Purple;
+    public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Runed";
 }

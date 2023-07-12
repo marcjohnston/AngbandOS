@@ -17,7 +17,7 @@ internal class NineHeadedHydraMonsterRace : MonsterRace
         new FireBoltMonsterSpell(),
         new ScareMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperMSymbol>();
-    public override Colour Colour => Colour.BrightGreen;
+    public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "9-headed hydra";
 
     public override bool Animal => true;

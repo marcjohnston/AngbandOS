@@ -13,7 +13,7 @@ internal class FasoltTheGiantMonsterRace : MonsterRace
     protected FasoltTheGiantMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperPSymbol>();
-    public override Colour Colour => Colour.Brown;
+    public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Fasolt the Giant";
 
     public override int ArmourClass => 70;

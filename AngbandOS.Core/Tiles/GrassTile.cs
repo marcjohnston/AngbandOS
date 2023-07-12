@@ -12,7 +12,7 @@ internal class GrassTile : Tile
 {
     private GrassTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PeriodSymbol>();
-    public override Colour Colour => Colour.BrightGreen;
+    public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Grass";
     public override string AppearAs => "Grass";
     public override string Description => "open floor";

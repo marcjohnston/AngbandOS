@@ -36,7 +36,7 @@ internal class AbhothSourceOfUncleannessMonsterRace : MonsterRace
         new TeleportToMonsterSpell(),
         new TeleportSelfMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperXSymbol>();
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Abhoth, Source of Uncleanness";
 
     public override int ArmourClass => 100;

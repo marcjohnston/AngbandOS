@@ -26,7 +26,7 @@ internal class KhamulTheEasterlingMonsterRace : MonsterRace
         new SummonUndeadMonsterSpell(),
         new TeleportLevelMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperWSymbol>();
-    public override Colour Colour => Colour.Black;
+    public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Khamul the Easterling";
 
     public override int ArmourClass => 100;

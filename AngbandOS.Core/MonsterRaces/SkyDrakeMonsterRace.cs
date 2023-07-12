@@ -21,7 +21,7 @@ internal class SkyDrakeMonsterRace : MonsterRace
         new SummonDragonMonsterSpell(),
         new SummonHiDragonMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
-    public override Colour Colour => Colour.BrightBlue;
+    public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "Sky Drake";
 
     public override int ArmourClass => 200;

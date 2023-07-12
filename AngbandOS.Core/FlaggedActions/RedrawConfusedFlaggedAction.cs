@@ -17,7 +17,7 @@ internal class RedrawConfusedFlaggedAction : FlaggedAction
     {
         if (SaveGame.Player.TimedConfusion.TurnsRemaining > 0)
         {
-            SaveGame.Screen.Print(Colour.Orange, "Confused", RowConfused, ColConfused);
+            SaveGame.Screen.Print(ColourEnum.Orange, "Confused", RowConfused, ColConfused);
         }
         else
         {

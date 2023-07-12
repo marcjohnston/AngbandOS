@@ -18,7 +18,7 @@ internal class LesserTitanMonsterRace : MonsterRace
         new SummonMonstersMonsterSpell(),
         new TeleportToMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperPSymbol>();
-    public override Colour Colour => Colour.Yellow;
+    public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "Lesser titan";
 
     public override int ArmourClass => 80;

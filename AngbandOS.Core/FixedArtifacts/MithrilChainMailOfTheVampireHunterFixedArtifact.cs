@@ -33,7 +33,7 @@ internal class MithrilChainMailOfTheVampireHunterFixedArtifact : FixedArtifact, 
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenBraceSymbol>();
-    public override Colour Colour => Colour.BrightBlue;
+    public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "The Mithril Chain Mail of the Vampire Hunter";
     public override int Ac => 28;
     public override bool Activate => true;

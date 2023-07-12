@@ -30,7 +30,7 @@ internal class VecnaTheEmperorLichMonsterRace : MonsterRace
         new SummonUndeadMonsterSpell(),
         new TeleportToMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperLSymbol>();
-    public override Colour Colour => Colour.Gold;
+    public override ColourEnum Colour => ColourEnum.Gold;
     public override string Name => "Vecna, the Emperor Lich";
 
     public override int ArmourClass => 85;

@@ -34,7 +34,7 @@ internal class PairOfHardLeatherBootsOfIthaquaFixedArtifact : FixedArtifact, IFi
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBraceSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "The Pair of Hard Leather Boots of Ithaqua";
     public override int Ac => 3;
     public override bool Activate => true;

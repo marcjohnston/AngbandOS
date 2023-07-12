@@ -77,7 +77,7 @@ namespace AngbandOS.Core.Scripts
                 SaveGame.MsgPrint("The rod is still charging.");
                 return false;
             }
-            SaveGame.PlaySound(SoundEffect.ZapRod);
+            SaveGame.PlaySound(SoundEffectEnum.ZapRod);
             // Do the rod-specific effect
             bool useCharge = true;
             RodItemFactory rodItem = (RodItemFactory)item.Factory;

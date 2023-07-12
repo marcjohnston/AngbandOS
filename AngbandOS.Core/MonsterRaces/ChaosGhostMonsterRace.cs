@@ -18,7 +18,7 @@ internal class ChaosGhostMonsterRace : MonsterRace
         new HoldMonsterSpell(),
         new ForgetMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperGSymbol>();
-    public override Colour Colour => Colour.Purple;
+    public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Chaos ghost";
 
     public override int ArmourClass => 30;

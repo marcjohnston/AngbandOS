@@ -1,6 +1,6 @@
 ﻿namespace AngbandOS.Core.Interface;
 
-public enum MusicTrack
+public enum MusicTrackEnum
 {
     None,
     Menu,

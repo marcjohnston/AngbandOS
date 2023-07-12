@@ -13,7 +13,7 @@ internal class NightLizardMonsterRace : MonsterRace
     protected NightLizardMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperRSymbol>();
-    public override Colour Colour => Colour.Yellow;
+    public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "Night lizard";
 
     public override bool Animal => true;

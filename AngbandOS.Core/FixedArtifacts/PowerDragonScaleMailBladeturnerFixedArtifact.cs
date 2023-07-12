@@ -41,7 +41,7 @@ internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact, IFi
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenBraceSymbol>();
-    public override Colour Colour => Colour.Purple;
+    public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "The Power Dragon Scale Mail 'Bladeturner'";
     public override int Ac => 50;
     public override bool Activate => true;

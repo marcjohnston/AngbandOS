@@ -13,7 +13,7 @@ internal class MangyLookingLeperMonsterRace : MonsterRace
     protected MangyLookingLeperMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerTSymbol>();
-    public override Colour Colour => Colour.Brown;
+    public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Mangy looking leper";
 
     public override int ArmourClass => 1;

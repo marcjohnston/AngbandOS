@@ -22,7 +22,7 @@ internal class TheKingInYellowMonsterRace : MonsterRace
         new PoisonBallMonsterSpell(),
         new WaterBoltMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<QuestionMarkSymbol>();
-    public override Colour Colour => Colour.BrightYellow;
+    public override ColourEnum Colour => ColourEnum.BrightYellow;
     public override string Name => "The King in Yellow";
 
     public override int ArmourClass => 150;

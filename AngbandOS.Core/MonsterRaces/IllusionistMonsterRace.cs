@@ -22,7 +22,7 @@ internal class IllusionistMonsterRace : MonsterRace
         new HasteMonsterSpell(),
         new TeleportSelfMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
-    public override Colour Colour => Colour.Pink;
+    public override ColourEnum Colour => ColourEnum.Pink;
     public override string Name => "Illusionist";
 
     public override int ArmourClass => 10;

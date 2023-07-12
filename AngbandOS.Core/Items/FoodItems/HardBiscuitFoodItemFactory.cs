@@ -13,7 +13,7 @@ internal class HardBiscuitFoodItemFactory : FoodItemFactory
     private HardBiscuitFoodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CommaSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Hard Biscuit";
 
     public override int Cost => 1;
@@ -22,7 +22,7 @@ internal class HardBiscuitFoodItemFactory : FoodItemFactory
     public override int Weight => 2;
     public override bool Eat()
     {
-        SaveGame.PlaySound(SoundEffect.Eat);
+        SaveGame.PlaySound(SoundEffectEnum.Eat);
         SaveGame.MsgPrint("That tastes good.");
         return true;
     }

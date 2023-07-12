@@ -16,7 +16,7 @@ internal class ClubberDemonMonsterRace : MonsterRace
         new BlindnessMonsterSpell(),
         new ConfuseMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperUSymbol>();
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Clubber demon";
 
     public override int ArmourClass => 50;

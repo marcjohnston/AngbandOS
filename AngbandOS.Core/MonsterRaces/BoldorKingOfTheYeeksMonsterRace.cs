@@ -20,7 +20,7 @@ internal class BoldorKingOfTheYeeksMonsterRace : MonsterRace
         new SummonKinMonsterSpell(),
         new TeleportSelfMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerYSymbol>();
-    public override Colour Colour => Colour.Purple;
+    public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Boldor, King of the Yeeks";
 
     public override bool Animal => true;

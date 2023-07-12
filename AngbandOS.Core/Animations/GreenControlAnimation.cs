@@ -12,8 +12,8 @@ internal class GreenControlAnimation : Animation
 {
     private GreenControlAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '*';
-    public override Colour Colour => Colour.Green;
+    public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "GreenControl";
-    public override Colour AlternateColour => Colour.BrightGreen;
+    public override ColourEnum AlternateColour => ColourEnum.BrightGreen;
     public override string Sequence => @"!!!!";
 }

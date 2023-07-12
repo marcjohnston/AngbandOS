@@ -19,7 +19,7 @@ internal class MoonBeastMonsterRace : MonsterRace
         new DarknessMonsterSpell(),
         new HealMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperASymbol>();
-    public override Colour Colour => Colour.BrightWhite;
+    public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "Moon beast";
 
     public override bool Animal => true;

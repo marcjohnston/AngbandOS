@@ -13,7 +13,7 @@ internal class LeatherScaleMailSoftArmorItemFactory : SoftArmorItemClass
     private LeatherScaleMailSoftArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenParenthesisSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Leather Scale Mail";
 
     public override int Ac => 11;

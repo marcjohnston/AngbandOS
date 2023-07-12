@@ -16,12 +16,12 @@ public class SpectatorConsole : IConsole
         _gameHub.Clear();
     }
 
-    public void PlayMusic(MusicTrack music)
+    public void PlayMusic(MusicTrackEnum music)
     {
         _gameHub.PlayMusic(music);
     }
 
-    public void PlaySound(SoundEffect sound)
+    public void PlaySound(SoundEffectEnum sound)
     {
         _gameHub.PlaySound(sound);
     }
@@ -31,7 +31,7 @@ public class SpectatorConsole : IConsole
         _gameHub.BatchPrint(printLines);
     }
 
-    public void SetBackground(BackgroundImage image)
+    public void SetBackground(BackgroundImageEnum image)
     {
         _gameHub.SetBackground(image);
     }

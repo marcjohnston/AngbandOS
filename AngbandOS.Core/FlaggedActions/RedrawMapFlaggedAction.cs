@@ -22,14 +22,14 @@ internal class RedrawMapFlaggedAction : FlaggedAction
         {
             for (int x = SaveGame.Level.PanelColMin; x <= SaveGame.Level.PanelColMax; x++)
             {
-                SaveGame.Level.MapInfo(y, x, out Colour a, out char c);
+                SaveGame.Level.MapInfo(y, x, out ColourEnum a, out char c);
                 if (SaveGame.Player.TimedInvulnerability.TurnsRemaining != 0)
                 {
-                    a = Colour.White;
+                    a = ColourEnum.White;
                 }
                 else if (SaveGame.Player.TimedEtherealness.TurnsRemaining != 0)
                 {
-                    a = Colour.Black;
+                    a = ColourEnum.Black;
                 }
                 SaveGame.Screen.Print(a, c, y - SaveGame.Level.PanelRowPrt, x - SaveGame.Level.PanelColPrt);
             }

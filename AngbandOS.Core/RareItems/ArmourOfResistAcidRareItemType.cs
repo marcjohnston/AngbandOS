@@ -12,7 +12,7 @@ internal class ArmourOfResistAcidRareItem : RareItem
 {
     private ArmourOfResistAcidRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenBraceSymbol>();
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Armour of Resist Acid";
     public override int Cost => 1000;
     public override string FriendlyName => "of Resist Acid";

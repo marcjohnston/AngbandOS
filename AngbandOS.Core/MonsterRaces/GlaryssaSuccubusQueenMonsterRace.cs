@@ -23,7 +23,7 @@ internal class GlaryssaSuccubusQueenMonsterRace : MonsterRace
         new ForgetMonsterSpell(),
         new SummonDemonMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperUSymbol>();
-    public override Colour Colour => Colour.BrightPink;
+    public override ColourEnum Colour => ColourEnum.BrightPink;
     public override string Name => "Glaryssa, Succubus Queen";
 
     public override int ArmourClass => 60;

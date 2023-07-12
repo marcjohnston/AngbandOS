@@ -21,7 +21,7 @@ internal class BalanceDrakeMonsterRace : MonsterRace
         new ScareMonsterSpell(),
         new SlowMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Balance drake";
 
     public override int ArmourClass => 100;

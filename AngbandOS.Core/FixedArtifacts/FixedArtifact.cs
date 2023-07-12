@@ -54,7 +54,7 @@ internal abstract class FixedArtifact : IItemCharacteristics
     /// </summary>
     public abstract Symbol Symbol { get; }
 
-    public virtual Colour Colour => Colour.White;
+    public virtual ColourEnum Colour => ColourEnum.White;
     public abstract string Name { get; }
 
     public abstract int Ac { get; }

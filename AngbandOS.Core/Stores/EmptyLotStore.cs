@@ -18,7 +18,7 @@ internal class EmptyLotStore : Store
     };
 
     public override string FeatureType => "";
-    public override Colour Colour => Colour.White;
+    public override ColourEnum Colour => ColourEnum.White;
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<SpaceBarSymbol>();
 
     public override bool ItemMatches(Item item)

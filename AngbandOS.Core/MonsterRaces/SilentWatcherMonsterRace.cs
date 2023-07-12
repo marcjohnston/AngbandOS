@@ -21,7 +21,7 @@ internal class SilentWatcherMonsterRace : MonsterRace
         new SummonMonsterMonsterSpell(),
         new SummonMonstersMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerGSymbol>();
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Silent watcher";
 
     public override int ArmourClass => 80;

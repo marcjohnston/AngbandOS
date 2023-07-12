@@ -18,7 +18,7 @@ internal class SpectatorMonsterRace : MonsterRace
         new SlowMonsterSpell(),
         new ForgetMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerESymbol>();
-    public override Colour Colour => Colour.BrightGreen;
+    public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Spectator";
 
     public override int ArmourClass => 1;

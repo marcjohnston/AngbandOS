@@ -35,19 +35,19 @@ public interface ISpectatorsHub
     /// </summary>
     /// <param name="image"></param>
     /// <returns></returns>
-    Task SetBackground(BackgroundImage image);
+    Task SetBackground(BackgroundImageEnum image);
 
     /// <summary>
     /// Outgoing message to a web client to play a sound.
     /// </summary>
     /// <param name="sound"></param>
     /// <returns></returns>
-    Task PlaySound(SoundEffect sound);
+    Task PlaySound(SoundEffectEnum sound);
 
     /// <summary>
     /// Outgoing message to a web client to play a music track.
     /// </summary>
     /// <param name="music"></param>
     /// <returns></returns>
-    Task PlayMusic(MusicTrack music);
+    Task PlayMusic(MusicTrackEnum music);
 }

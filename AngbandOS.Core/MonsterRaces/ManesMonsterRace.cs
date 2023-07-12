@@ -13,7 +13,7 @@ internal class ManesMonsterRace : MonsterRace
     protected ManesMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerUSymbol>();
-    public override Colour Colour => Colour.BrightRed;
+    public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Manes";
 
     public override int ArmourClass => 32;

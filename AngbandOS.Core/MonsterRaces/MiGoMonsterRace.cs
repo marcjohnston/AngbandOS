@@ -17,7 +17,7 @@ internal class MiGoMonsterRace : MonsterRace
         new SummonCthuloidMonsterSpell(),
         new SummonMonsterMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperASymbol>();
-    public override Colour Colour => Colour.BrightPink;
+    public override ColourEnum Colour => ColourEnum.BrightPink;
     public override string Name => "Mi-Go";
 
     public override bool Animal => true;

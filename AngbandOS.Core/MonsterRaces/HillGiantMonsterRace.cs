@@ -13,7 +13,7 @@ internal class HillGiantMonsterRace : MonsterRace
     protected HillGiantMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperPSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Hill giant";
 
     public override int ArmourClass => 45;

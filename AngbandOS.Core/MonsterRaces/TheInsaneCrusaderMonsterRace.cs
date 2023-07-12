@@ -17,7 +17,7 @@ internal class TheInsaneCrusaderMonsterRace : MonsterRace
         new ScareMonsterSpell(),
         new TeleportToMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
-    public override Colour Colour => Colour.BrightYellow;
+    public override ColourEnum Colour => ColourEnum.BrightYellow;
     public override string Name => "The Insane Crusader";
 
     public override int ArmourClass => 100;

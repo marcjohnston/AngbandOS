@@ -24,7 +24,7 @@ internal abstract class ProjectileGraphic
     /// <summary>
     /// The row from which to take the graphical tile
     /// </summary>
-    public virtual Colour Colour => Colour.White; // TODO: Inject the color ... we have 3 variations of every object because of this.
+    public virtual ColourEnum Colour => ColourEnum.White; // TODO: Inject the color ... we have 3 variations of every object because of this.
 
     /// <summary>
     /// A unique identifier for the entity.  

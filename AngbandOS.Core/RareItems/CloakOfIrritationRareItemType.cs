@@ -12,7 +12,7 @@ internal class CloakOfIrritationRareItem : RareItem
 {
     private CloakOfIrritationRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenParenthesisSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Cloak of Irritation";
     public override bool Aggravate => true;
     public override int Cost => 0;

@@ -41,7 +41,7 @@ internal class WeaponStore : Store
     };
 
     public override string FeatureType => "Weaponsmiths";
-    public override Colour Colour => Colour.White;
+    public override ColourEnum Colour => ColourEnum.White;
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<NumberThreeSymbol>();
 
     protected override StockStoreInventoryItem[] GetStoreTable()

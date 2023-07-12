@@ -12,7 +12,7 @@ internal class BushTile : Tile
 {
     private BushTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<AsteriskSymbol>();
-    public override Colour Colour => Colour.BrightGreen;
+    public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Bush";
     public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "Bush";

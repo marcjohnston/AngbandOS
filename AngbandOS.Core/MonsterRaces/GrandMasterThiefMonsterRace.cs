@@ -15,7 +15,7 @@ internal class GrandMasterThiefMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new CreateTrapsMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
-    public override Colour Colour => Colour.Black;
+    public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Grand master thief";
 
     public override int ArmourClass => 90;

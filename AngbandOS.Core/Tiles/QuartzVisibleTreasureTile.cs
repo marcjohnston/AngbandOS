@@ -12,7 +12,7 @@ internal class QuartzVisibleTreasureTile : Tile
 {
     private QuartzVisibleTreasureTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<AsteriskSymbol>();
-    public override Colour Colour => Colour.BrightRed;
+    public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "QuartzVisTreas";
     public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "QuartzVisTreas";

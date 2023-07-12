@@ -16,7 +16,7 @@ internal abstract class HardArmorItemFactory : ArmourItemFactory
     public override int PackSort => 20;
     public override bool HatesAcid => true;
 
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
 
     public override bool CanProvideSheathOfElectricity => true;
 

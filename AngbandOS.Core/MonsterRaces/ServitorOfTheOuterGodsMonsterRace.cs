@@ -22,7 +22,7 @@ internal class ServitorOfTheOuterGodsMonsterRace : MonsterRace
         new SummonUndeadMonsterSpell(),
         new TeleportToMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperASymbol>();
-    public override Colour Colour => Colour.BrightGreen;
+    public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Servitor of the outer gods";
 
     public override int ArmourClass => 140;

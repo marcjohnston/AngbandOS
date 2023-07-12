@@ -40,7 +40,7 @@ internal class GreatCthulhuMonsterRace : MonsterRace
         new SummonReaverMonsterSpell(),
         new TeleportSelfMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperXSymbol>();
-    public override Colour Colour => Colour.Green;
+    public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "Great Cthulhu";
 
     public override int ArmourClass => 140;

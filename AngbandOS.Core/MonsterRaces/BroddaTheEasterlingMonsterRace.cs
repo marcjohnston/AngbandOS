@@ -13,7 +13,7 @@ internal class BroddaTheEasterlingMonsterRace : MonsterRace
     protected BroddaTheEasterlingMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
-    public override Colour Colour => Colour.Orange;
+    public override ColourEnum Colour => ColourEnum.Orange;
     public override string Name => "Brodda, the Easterling";
 
     public override int ArmourClass => 25;

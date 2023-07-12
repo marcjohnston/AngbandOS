@@ -28,7 +28,7 @@ internal abstract class Flavour
     /// <summary>
     /// The color to use for the visual.
     /// </summary>
-    public virtual Colour Colour => Colour.White;
+    public virtual ColourEnum Colour => ColourEnum.White;
 
     /// <summary>
     /// A unique identifier for the inscription.

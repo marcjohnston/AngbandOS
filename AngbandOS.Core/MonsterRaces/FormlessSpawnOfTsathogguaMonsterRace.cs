@@ -19,7 +19,7 @@ internal class FormlessSpawnOfTsathogguaMonsterRace : MonsterRace
         new DarknessMonsterSpell(),
         new SummonCthuloidMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperASymbol>();
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Formless spawn of Tsathoggua";
 
     public override int ArmourClass => 40;

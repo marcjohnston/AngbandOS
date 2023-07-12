@@ -16,7 +16,7 @@ internal class YoungRedDragonMonsterRace : MonsterRace
         new BreatheFireMonsterSpell(),
         new ScareMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
-    public override Colour Colour => Colour.Red;
+    public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Young red dragon";
 
     public override int ArmourClass => 63;

@@ -717,7 +717,7 @@ internal abstract class Projectile
                 }
                 if ((fear || addFear > 0) && mPtr.IsVisible)
                 {
-                    SaveGame.PlaySound(SoundEffect.MonsterFlees);
+                    SaveGame.PlaySound(SoundEffectEnum.MonsterFlees);
                     SaveGame.MsgPrint($"{mName} flees in terror!");
                 }
             }

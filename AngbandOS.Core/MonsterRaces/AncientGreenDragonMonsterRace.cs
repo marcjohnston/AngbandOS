@@ -18,7 +18,7 @@ internal class AncientGreenDragonMonsterRace : MonsterRace
         new ConfuseMonsterSpell(),
         new ScareMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
-    public override Colour Colour => Colour.Green;
+    public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "Ancient green dragon";
 
     public override int ArmourClass => 85;

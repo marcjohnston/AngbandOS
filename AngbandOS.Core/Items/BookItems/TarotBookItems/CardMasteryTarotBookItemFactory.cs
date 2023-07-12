@@ -13,7 +13,7 @@ internal class CardMasteryTarotBookItemFactory : TarotBookItemFactory
     private CardMasteryTarotBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<QuestionMarkSymbol>();
-    public override Colour Colour => Colour.BrightPink;
+    public override ColourEnum Colour => ColourEnum.BrightPink;
     public override string Name => "[Card Mastery]";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

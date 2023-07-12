@@ -15,11 +15,11 @@ internal class RedrawStateFlaggedAction : FlaggedAction
     public RedrawStateFlaggedAction(SaveGame saveGame) : base(saveGame) { }
     protected override void Execute()
     {
-        Colour attr = Colour.White;
+        ColourEnum attr = ColourEnum.White;
         string text;
         if (SaveGame.Player.TimedParalysis.TurnsRemaining > 0)
         {
-            attr = Colour.Red;
+            attr = ColourEnum.Red;
             text = "Paralyzed!";
         }
         else if (SaveGame.Resting != 0)

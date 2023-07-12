@@ -70,7 +70,7 @@ internal class ConsoleCard : ConsoleElement
     /// <param name="row">0-based row to print on.</param>
     /// <param name="colour"></param>
     /// <param name="text"></param>
-    public void Print(int col, int row, Colour colour, string text)
+    public void Print(int col, int row, ColourEnum colour, string text)
     {
         if (text.Length > 0)
         {

@@ -21,7 +21,7 @@ internal class DarkElvenLordMonsterRace : MonsterRace
         new DarknessMonsterSpell(),
         new HasteMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
-    public override Colour Colour => Colour.BrightPurple;
+    public override ColourEnum Colour => ColourEnum.BrightPurple;
     public override string Name => "Dark elven lord";
 
     public override int ArmourClass => 40;

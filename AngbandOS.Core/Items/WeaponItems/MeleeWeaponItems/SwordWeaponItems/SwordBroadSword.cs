@@ -13,7 +13,7 @@ internal class SwordBroadSword : SwordItemClass
     private SwordBroadSword(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
-    public override Colour Colour => Colour.BrightWhite;
+    public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "Broad Sword";
 
     public override int[] Chance => new int[] { 1, 1, 0, 0 };

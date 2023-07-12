@@ -13,7 +13,7 @@ internal class SwordBladeOfChaos : SwordItemClass
     private SwordBladeOfChaos(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
-    public override Colour Colour => Colour.Purple;
+    public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Blade of Chaos";
 
     public override bool Chaotic => true;

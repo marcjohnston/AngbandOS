@@ -12,7 +12,7 @@ internal class BowOfExtraShotsRareItem : RareItem
 {
     private BowOfExtraShotsRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBracketSymbol>();
-    public override Colour Colour => Colour.Brown;
+    public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Bow of Extra Shots";
     public override int Cost => 10000;
     public override string FriendlyName => "of Extra Shots";

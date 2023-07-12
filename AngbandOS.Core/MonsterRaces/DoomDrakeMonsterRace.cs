@@ -15,7 +15,7 @@ internal class DoomDrakeMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BreatheFireMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
-    public override Colour Colour => Colour.Beige;
+    public override ColourEnum Colour => ColourEnum.Beige;
     public override string Name => "Doom drake";
 
     public override int ArmourClass => 100;

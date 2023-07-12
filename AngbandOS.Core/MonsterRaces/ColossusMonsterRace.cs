@@ -15,7 +15,7 @@ internal class ColossusMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new Arrow7D6MonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerGSymbol>();
-    public override Colour Colour => Colour.Yellow;
+    public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "Colossus";
 
     public override int ArmourClass => 150;

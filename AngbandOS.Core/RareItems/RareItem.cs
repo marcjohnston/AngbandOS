@@ -22,7 +22,7 @@ internal abstract class RareItem : IItemCharacteristics, ISingletonDictionary<Ra
     /// </summary>
     public abstract Symbol Symbol { get; }
 
-    public virtual Colour Colour => Colour.White;
+    public virtual ColourEnum Colour => ColourEnum.White;
     public abstract string Name { get; }
 
     public virtual bool Activate { get; set; } = false;

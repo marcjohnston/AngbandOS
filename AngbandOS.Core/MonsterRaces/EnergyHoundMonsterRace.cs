@@ -15,7 +15,7 @@ internal class EnergyHoundMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BreatheLightningMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperZSymbol>();
-    public override Colour Colour => Colour.BrightYellow;
+    public override ColourEnum Colour => ColourEnum.BrightYellow;
     public override string Name => "Energy hound";
 
     public override bool Animal => true;

@@ -19,7 +19,7 @@ internal class ChaosDrakeMonsterRace : MonsterRace
         new ScareMonsterSpell(),
         new SlowMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
-    public override Colour Colour => Colour.Purple;
+    public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Chaos drake";
 
     public override int ArmourClass => 100;

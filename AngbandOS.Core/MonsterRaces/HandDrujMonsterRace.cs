@@ -21,7 +21,7 @@ internal class HandDrujMonsterRace : MonsterRace
         new ForgetMonsterSpell(),
         new TeleportAwayMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerSSymbol>();
-    public override Colour Colour => Colour.BrightGrey;
+    public override ColourEnum Colour => ColourEnum.BrightGrey;
     public override string Name => "Hand druj";
 
     public override int ArmourClass => 110;

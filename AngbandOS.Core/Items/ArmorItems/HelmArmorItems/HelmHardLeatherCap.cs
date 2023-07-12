@@ -13,7 +13,7 @@ internal class HelmHardLeatherCap : HelmItemClass
     private HelmHardLeatherCap(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBraceSymbol>();
-    public override Colour Colour => Colour.Brown;
+    public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Hard Leather Cap";
 
     public override int Ac => 2;

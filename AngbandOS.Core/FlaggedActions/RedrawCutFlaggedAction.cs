@@ -18,31 +18,31 @@ internal class RedrawCutFlaggedAction : FlaggedAction
         int c = SaveGame.Player.TimedBleeding.TurnsRemaining;
         if (c > 1000)
         {
-            SaveGame.Screen.Print(Colour.BrightRed, "Mortal wound", RowCut, ColCut);
+            SaveGame.Screen.Print(ColourEnum.BrightRed, "Mortal wound", RowCut, ColCut);
         }
         else if (c > 200)
         {
-            SaveGame.Screen.Print(Colour.Red, "Deep gash   ", RowCut, ColCut);
+            SaveGame.Screen.Print(ColourEnum.Red, "Deep gash   ", RowCut, ColCut);
         }
         else if (c > 100)
         {
-            SaveGame.Screen.Print(Colour.Red, "Severe cut  ", RowCut, ColCut);
+            SaveGame.Screen.Print(ColourEnum.Red, "Severe cut  ", RowCut, ColCut);
         }
         else if (c > 50)
         {
-            SaveGame.Screen.Print(Colour.Orange, "Nasty cut   ", RowCut, ColCut);
+            SaveGame.Screen.Print(ColourEnum.Orange, "Nasty cut   ", RowCut, ColCut);
         }
         else if (c > 25)
         {
-            SaveGame.Screen.Print(Colour.Orange, "Bad cut     ", RowCut, ColCut);
+            SaveGame.Screen.Print(ColourEnum.Orange, "Bad cut     ", RowCut, ColCut);
         }
         else if (c > 10)
         {
-            SaveGame.Screen.Print(Colour.Yellow, "Light cut   ", RowCut, ColCut);
+            SaveGame.Screen.Print(ColourEnum.Yellow, "Light cut   ", RowCut, ColCut);
         }
         else if (c > 0)
         {
-            SaveGame.Screen.Print(Colour.Yellow, "Graze       ", RowCut, ColCut);
+            SaveGame.Screen.Print(ColourEnum.Yellow, "Graze       ", RowCut, ColCut);
         }
         else
         {

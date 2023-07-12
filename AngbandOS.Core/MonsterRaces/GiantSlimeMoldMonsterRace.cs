@@ -15,7 +15,7 @@ internal class GiantSlimeMoldMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new ShriekMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CommaSymbol>();
-    public override Colour Colour => Colour.Green;
+    public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "Giant slime mold";
 
     public override int ArmourClass => 16;

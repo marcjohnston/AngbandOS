@@ -13,7 +13,7 @@ internal class MinotaurMonsterRace : MonsterRace
     protected MinotaurMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperHSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Minotaur";
 
     public override int ArmourClass => 25;

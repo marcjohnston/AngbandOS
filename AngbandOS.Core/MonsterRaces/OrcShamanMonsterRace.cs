@@ -17,7 +17,7 @@ internal class OrcShamanMonsterRace : MonsterRace
         new MagicMissileMonsterSpell(),
         new BlinkMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerOSymbol>();
-    public override Colour Colour => Colour.Blue;
+    public override ColourEnum Colour => ColourEnum.Blue;
     public override string Name => "Orc shaman";
 
     public override int ArmourClass => 15;

@@ -20,7 +20,7 @@ internal class MasterQuylthulgMonsterRace : MonsterRace
         new SummonMonstersMonsterSpell(),
         new SummonUndeadMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperQSymbol>();
-    public override Colour Colour => Colour.Blue;
+    public override ColourEnum Colour => ColourEnum.Blue;
     public override string Name => "Master quylthulg";
 
     public override bool Animal => true;

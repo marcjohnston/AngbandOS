@@ -26,7 +26,7 @@ namespace Cthangband
         private const float StartupSoundVolume = 100;
         public readonly Queue<char> KeyQueue = new Queue<char>();
         public TextBlock[][] Cells = new TextBlock[45][];
-        private BackgroundImage _backgroundImage = BackgroundImage.None;
+        private BackgroundImageEnum _backgroundImage = BackgroundImageEnum.None;
         public Mixer Mixer = new Mixer();
         private string[] coloursMap = new string[32];
         private BackgroundWorker thread = new BackgroundWorker();
@@ -35,7 +35,7 @@ namespace Cthangband
         /// Plays a sound
         /// </summary>
         /// <param name="val"> The sound to play </param>
-        public void PlaySound(SoundEffect sound)
+        public void PlaySound(SoundEffectEnum sound)
         {
             Dispatcher.Invoke(new Action(() =>
             {
@@ -46,7 +46,7 @@ namespace Cthangband
             }));
         }
 
-        public void PlayMusic(MusicTrack musicTrack)
+        public void PlayMusic(MusicTrackEnum musicTrack)
         {
             Dispatcher.Invoke(new Action(() =>
             {
@@ -60,7 +60,7 @@ namespace Cthangband
             {
                 if (Mixer.SoundVolume > 0)
                 {
-                    Color backColor = FromHex(coloursMap[(int)Colour.Background]);
+                    Color backColor = FromHex(coloursMap[(int)ColourEnum.Background]);
                     foreach (TextBlock[] line in Cells)
                     {
                         foreach (TextBlock textBlock in line)
@@ -82,7 +82,7 @@ namespace Cthangband
             }));
         }
 
-        private void Print(int row, int col, string text, Colour foreColour, Colour backColour)
+        private void Print(int row, int col, string text, ColourEnum foreColour, ColourEnum backColour)
         {
             Color foreColor = FromHex(coloursMap[(int)foreColour]);
             Color backColor = FromHex(coloursMap[(int)backColour]);
@@ -104,7 +104,7 @@ namespace Cthangband
             }
         }
 
-        public void SetBackground(BackgroundImage image)
+        public void SetBackground(BackgroundImageEnum image)
         {
             Dispatcher.Invoke(new Action(() =>
             {
@@ -139,38 +139,38 @@ namespace Cthangband
         {
             InitializeComponent();
 
-            coloursMap[(int)Colour.Background] = "#000000";
-            coloursMap[(int)Colour.Black] = "#2F4F4F";
-            coloursMap[(int)Colour.Grey] = "#696969";
-            coloursMap[(int)Colour.BrightGrey] = "#A9A9A9";
-            coloursMap[(int)Colour.Silver] = "#778899";
-            coloursMap[(int)Colour.Beige] = "#FFE4B5";
-            coloursMap[(int)Colour.BrightBeige] = "#F5F5DC";
-            coloursMap[(int)Colour.White] = "#D3D3D3";
-            coloursMap[(int)Colour.BrightWhite] = "#FFFFFF";
-            coloursMap[(int)Colour.Red] = "#8B0000";
-            coloursMap[(int)Colour.BrightRed] = "#FF0000";
-            coloursMap[(int)Colour.Copper] = "#D2691E";
-            coloursMap[(int)Colour.Orange] = "#FF4500";
-            coloursMap[(int)Colour.BrightOrange] = "#FFA500";
-            coloursMap[(int)Colour.Brown] = "#8B4513";
-            coloursMap[(int)Colour.BrightBrown] = "#DEB887";
-            coloursMap[(int)Colour.Gold] = "#FFD700";
-            coloursMap[(int)Colour.Yellow] = "#F0E68C";
-            coloursMap[(int)Colour.BrightYellow] = "#FFFF00";
-            coloursMap[(int)Colour.Chartreuse] = "#9ACD32";
-            coloursMap[(int)Colour.BrightChartreuse] = "#7FFF00";
-            coloursMap[(int)Colour.Green] = "#006400";
-            coloursMap[(int)Colour.BrightGreen] = "#32CD32";
-            coloursMap[(int)Colour.Turquoise] = "#00CED1";
-            coloursMap[(int)Colour.BrightTurquoise] = "#00FFFF";
-            coloursMap[(int)Colour.Blue] = "#0000CD";
-            coloursMap[(int)Colour.BrightBlue] = "#00BFFF";
-            coloursMap[(int)Colour.Diamond] = "#E0FFFF";
-            coloursMap[(int)Colour.Purple] = "#800080";
-            coloursMap[(int)Colour.BrightPurple] = "#EE82EE";
-            coloursMap[(int)Colour.Pink] = "#FF1493";
-            coloursMap[(int)Colour.BrightPink] = "#FF69B4";
+            coloursMap[(int)ColourEnum.Background] = "#000000";
+            coloursMap[(int)ColourEnum.Black] = "#2F4F4F";
+            coloursMap[(int)ColourEnum.Grey] = "#696969";
+            coloursMap[(int)ColourEnum.BrightGrey] = "#A9A9A9";
+            coloursMap[(int)ColourEnum.Silver] = "#778899";
+            coloursMap[(int)ColourEnum.Beige] = "#FFE4B5";
+            coloursMap[(int)ColourEnum.BrightBeige] = "#F5F5DC";
+            coloursMap[(int)ColourEnum.White] = "#D3D3D3";
+            coloursMap[(int)ColourEnum.BrightWhite] = "#FFFFFF";
+            coloursMap[(int)ColourEnum.Red] = "#8B0000";
+            coloursMap[(int)ColourEnum.BrightRed] = "#FF0000";
+            coloursMap[(int)ColourEnum.Copper] = "#D2691E";
+            coloursMap[(int)ColourEnum.Orange] = "#FF4500";
+            coloursMap[(int)ColourEnum.BrightOrange] = "#FFA500";
+            coloursMap[(int)ColourEnum.Brown] = "#8B4513";
+            coloursMap[(int)ColourEnum.BrightBrown] = "#DEB887";
+            coloursMap[(int)ColourEnum.Gold] = "#FFD700";
+            coloursMap[(int)ColourEnum.Yellow] = "#F0E68C";
+            coloursMap[(int)ColourEnum.BrightYellow] = "#FFFF00";
+            coloursMap[(int)ColourEnum.Chartreuse] = "#9ACD32";
+            coloursMap[(int)ColourEnum.BrightChartreuse] = "#7FFF00";
+            coloursMap[(int)ColourEnum.Green] = "#006400";
+            coloursMap[(int)ColourEnum.BrightGreen] = "#32CD32";
+            coloursMap[(int)ColourEnum.Turquoise] = "#00CED1";
+            coloursMap[(int)ColourEnum.BrightTurquoise] = "#00FFFF";
+            coloursMap[(int)ColourEnum.Blue] = "#0000CD";
+            coloursMap[(int)ColourEnum.BrightBlue] = "#00BFFF";
+            coloursMap[(int)ColourEnum.Diamond] = "#E0FFFF";
+            coloursMap[(int)ColourEnum.Purple] = "#800080";
+            coloursMap[(int)ColourEnum.BrightPurple] = "#EE82EE";
+            coloursMap[(int)ColourEnum.Pink] = "#FF1493";
+            coloursMap[(int)ColourEnum.BrightPink] = "#FF69B4";
 
             KeyDown += MainWindow_KeyDown;
             Closing += MainWindow_Closing;
@@ -202,7 +202,7 @@ namespace Cthangband
             gameServer.Play(this, persistentStorage, null);
         }
 
-        public BackgroundImage BackgroundImage
+        public BackgroundImageEnum BackgroundImage
         {
             set
             {
@@ -216,57 +216,57 @@ namespace Cthangband
                 Uri uri;
                 switch (value)
                 {
-                    case BackgroundImage.Splash:
+                    case BackgroundImageEnum.Splash:
                         uri = new Uri("Backgrounds/splash.png", UriKind.Relative);
                         bitmapImage.UriSource = uri;
                         break;
 
-                    case BackgroundImage.Normal:
+                    case BackgroundImageEnum.Normal:
                         uri = new Uri("Backgrounds/Default.png", UriKind.Relative);
                         bitmapImage.UriSource = uri;
                         break;
 
-                    case BackgroundImage.Overhead:
+                    case BackgroundImageEnum.Overhead:
                         uri = new Uri("Backgrounds/InGame.png", UriKind.Relative);
                         bitmapImage.UriSource = uri;
                         break;
 
-                    case BackgroundImage.Paper:
+                    case BackgroundImageEnum.Paper:
                         uri = new Uri("Backgrounds/Paper.png", UriKind.Relative);
                         bitmapImage.UriSource = uri;
                         break;
 
-                    case BackgroundImage.Menu:
+                    case BackgroundImageEnum.Menu:
                         uri = new Uri("Backgrounds/Menu.png", UriKind.Relative);
                         bitmapImage.UriSource = uri;
                         break;
 
-                    case BackgroundImage.Options:
+                    case BackgroundImageEnum.Options:
                         uri = new Uri("Backgrounds/Options.png", UriKind.Relative);
                         bitmapImage.UriSource = uri;
                         break;
 
-                    case BackgroundImage.Tomb:
+                    case BackgroundImageEnum.Tomb:
                         uri = new Uri("Backgrounds/Tomb.png", UriKind.Relative);
                         bitmapImage.UriSource = uri;
                         break;
 
-                    case BackgroundImage.Crown:
+                    case BackgroundImageEnum.Crown:
                         uri = new Uri("Backgrounds/Crown.png", UriKind.Relative);
                         bitmapImage.UriSource = uri;
                         break;
 
-                    case BackgroundImage.Sunset:
+                    case BackgroundImageEnum.Sunset:
                         uri = new Uri("Backgrounds/Sunset.png", UriKind.Relative);
                         bitmapImage.UriSource = uri;
                         break;
 
-                    case BackgroundImage.Map:
+                    case BackgroundImageEnum.Map:
                         uri = new Uri("Backgrounds/Map.png", UriKind.Relative);
                         bitmapImage.UriSource = uri;
                         break;
 
-                    case BackgroundImage.WildMap:
+                    case BackgroundImageEnum.WildMap:
                         uri = new Uri("Backgrounds/WildMap.png", UriKind.Relative);
                         bitmapImage.UriSource = uri;
                         break;
@@ -279,7 +279,7 @@ namespace Cthangband
 
         public void InitializeGrid()
         {
-            BackgroundImage = BackgroundImage.Menu;
+            BackgroundImage = BackgroundImageEnum.Menu;
             Content = null;
             UniformGrid grid = new UniformGrid();
             AddChild(grid);

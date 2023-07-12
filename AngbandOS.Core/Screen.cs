@@ -25,7 +25,7 @@ internal class Screen
     /// </summary>
     private UpdateWindow UpdateWindow;
 
-    private Colour AttrBlank;
+    private ColourEnum AttrBlank;
     private char CharBlank;
 
     /// <summary>
@@ -216,7 +216,7 @@ internal class Screen
         {
             // Turn off the old cursor position.
             int indexForOldCursor = RowStartingIndexArray[OldScreen.Cy] + OldScreen.Cx; // This is the index to the row of characters in the screen array.
-            batchPrintLines.Add(new PrintLine(OldScreen.Cy, OldScreen.Cx, OldScreen.Vc[indexForOldCursor].ToString(), OldScreen.Va[indexForOldCursor], Colour.Background));
+            batchPrintLines.Add(new PrintLine(OldScreen.Cy, OldScreen.Cx, OldScreen.Vc[indexForOldCursor].ToString(), OldScreen.Va[indexForOldCursor], ColourEnum.Background));
         }
 
         // Loop through each row of the entire "defined" display.  It may be smaller than the full 45 rows.
@@ -229,18 +229,18 @@ internal class Screen
                 int rowStartingIndex = RowStartingIndexArray[y];
                 int currentMatchingLength = 0;
                 int currentMatchStartingIndex = 0;
-                Colour currentMatchingColor = AttrBlank;
+                ColourEnum currentMatchingColor = AttrBlank;
                 for (int x = x1; x <= x2; x++)
                 {
-                    Colour oa = OldScreen.Va[rowStartingIndex + x];
+                    ColourEnum oa = OldScreen.Va[rowStartingIndex + x];
                     char oc = OldScreen.Vc[rowStartingIndex + x];
-                    Colour na = ActiveScreen.Va[rowStartingIndex + x];
+                    ColourEnum na = ActiveScreen.Va[rowStartingIndex + x];
                     char nc = ActiveScreen.Vc[rowStartingIndex + x];
                     if (na == oa && nc == oc)
                     {
                         if (currentMatchingLength != 0)
                         {
-                            batchPrintLines.Add(new PrintLine(y, currentMatchStartingIndex, new string(ActiveScreen.Vc, rowStartingIndex + currentMatchStartingIndex, currentMatchingLength), currentMatchingColor, Colour.Background));
+                            batchPrintLines.Add(new PrintLine(y, currentMatchStartingIndex, new string(ActiveScreen.Vc, rowStartingIndex + currentMatchStartingIndex, currentMatchingLength), currentMatchingColor, ColourEnum.Background));
                             currentMatchingLength = 0;
                         }
                         continue;
@@ -251,7 +251,7 @@ internal class Screen
                     {
                         if (currentMatchingLength != 0)
                         {
-                            batchPrintLines.Add(new PrintLine(y, currentMatchStartingIndex, new string(ActiveScreen.Vc, rowStartingIndex + currentMatchStartingIndex, currentMatchingLength), currentMatchingColor, Colour.Background));
+                            batchPrintLines.Add(new PrintLine(y, currentMatchStartingIndex, new string(ActiveScreen.Vc, rowStartingIndex + currentMatchStartingIndex, currentMatchingLength), currentMatchingColor, ColourEnum.Background));
                             currentMatchingLength = 0;
                         }
                         currentMatchingColor = na;
@@ -263,7 +263,7 @@ internal class Screen
                 }
                 if (currentMatchingLength != 0)
                 {
-                    batchPrintLines.Add(new PrintLine(y, currentMatchStartingIndex, new string(ActiveScreen.Vc, rowStartingIndex + currentMatchStartingIndex, currentMatchingLength), currentMatchingColor, Colour.Background));
+                    batchPrintLines.Add(new PrintLine(y, currentMatchStartingIndex, new string(ActiveScreen.Vc, rowStartingIndex + currentMatchStartingIndex, currentMatchingLength), currentMatchingColor, ColourEnum.Background));
                 }
 
                 UpdateWindow.X1[y] = Width;
@@ -278,7 +278,7 @@ internal class Screen
         {
             // Turn on the new cursor position.
             int indexForNewCursor = RowStartingIndexArray[ActiveScreen.Cy] + ActiveScreen.Cx; // This is the index to the row of characters in the screen array.
-            batchPrintLines.Add(new PrintLine(ActiveScreen.Cy, ActiveScreen.Cx, ActiveScreen.Vc[indexForNewCursor].ToString(), ActiveScreen.Va[indexForNewCursor], Colour.Purple));
+            batchPrintLines.Add(new PrintLine(ActiveScreen.Cy, ActiveScreen.Cx, ActiveScreen.Vc[indexForNewCursor].ToString(), ActiveScreen.Va[indexForNewCursor], ColourEnum.Purple));
         }
 
         OldScreen.CursorVisible = CursorVisible;
@@ -306,16 +306,16 @@ internal class Screen
             int scrAa = RowStartingIndexArray[y];
             int fn = 0;
             int fx = 0;
-            Colour currentColor = AttrBlank;
+            ColourEnum currentColor = AttrBlank;
             for (int x = 0; x < Width; x++)
             {
-                Colour na = ActiveScreen.Va[scrAa + x];
+                ColourEnum na = ActiveScreen.Va[scrAa + x];
                 char nc = ActiveScreen.Vc[scrAa + x];
                 if (currentColor != na)
                 {
                     if (fn != 0)
                     {
-                        batchPrintLines.Add(new PrintLine(y, fx, new string(ActiveScreen.Vc, scrAa + fx, fn), currentColor, Colour.Background));
+                        batchPrintLines.Add(new PrintLine(y, fx, new string(ActiveScreen.Vc, scrAa + fx, fn), currentColor, ColourEnum.Background));
                         fn = 0;
                     }
                     currentColor = na;
@@ -327,14 +327,14 @@ internal class Screen
             }
             if (fn != 0)
             {
-                batchPrintLines.Add(new PrintLine(y, fx, new string(ActiveScreen.Vc, scrAa + fx, fn), currentColor, Colour.Background));
+                batchPrintLines.Add(new PrintLine(y, fx, new string(ActiveScreen.Vc, scrAa + fx, fn), currentColor, ColourEnum.Background));
             }
         }
 
         if (CursorVisible)
         {
             int scrCc = RowStartingIndexArray[ActiveScreen.Cy]; // This is the index to the row of characters in the screen array.
-            batchPrintLines.Add(new PrintLine(ActiveScreen.Cy, ActiveScreen.Cx, ActiveScreen.Vc[scrCc + ActiveScreen.Cx].ToString(), ActiveScreen.Va[scrCc + ActiveScreen.Cx], Colour.Purple));
+            batchPrintLines.Add(new PrintLine(ActiveScreen.Cy, ActiveScreen.Cx, ActiveScreen.Vc[scrCc + ActiveScreen.Cx].ToString(), ActiveScreen.Va[scrCc + ActiveScreen.Cx], ColourEnum.Purple));
         }
 
         if (batchPrintLines.Count > 0)
@@ -357,7 +357,7 @@ internal class Screen
         int w = Width;
         int x1 = -1;
         int x2 = -1;
-        Colour na = AttrBlank;
+        ColourEnum na = AttrBlank;
         char nc = CharBlank;
         Goto(row, col);
         if (col + length > w)
@@ -367,7 +367,7 @@ internal class Screen
         int scrAa = RowStartingIndexArray[row];
         for (int i = 0; i < length; i++, col++)
         {
-            Colour oa = ActiveScreen.Va[scrAa + col];
+            ColourEnum oa = ActiveScreen.Va[scrAa + col];
             int oc = ActiveScreen.Vc[scrAa + col];
             if (oa == na && oc == nc)
             {
@@ -394,7 +394,7 @@ internal class Screen
     /// <param name="ch"> The character to print </param>
     /// <param name="row"> The y position at which to print </param>
     /// <param name="col"> The x position at which to print </param>
-    public void Print(Colour attr, char ch, int row, int col)
+    public void Print(ColourEnum attr, char ch, int row, int col)
     {
         Goto(row, col);
         Print(attr, ch.ToString());
@@ -407,7 +407,7 @@ internal class Screen
     /// <param name="str"> The string to print </param>
     /// <param name="row"> The y position at which to print the string </param>
     /// <param name="col"> The x position at which to print the string </param>
-    public void Print(Colour attr, string str, int row, int col)
+    public void Print(ColourEnum attr, string str, int row, int col)
     {
         Goto(row, col);
         Print(attr, str);
@@ -418,7 +418,7 @@ internal class Screen
     /// </summary>
     /// <param name="a"> The colour in which to print </param>
     /// <param name="str"> The string to print </param>
-    public void PrintWrap(Colour a, string str)
+    public void PrintWrap(ColourEnum a, string str)
     {
         int y = ActiveScreen.Cy;
         int x = ActiveScreen.Cx;
@@ -474,7 +474,7 @@ internal class Screen
     public void Print(string str, int row, int col)
     {
         Goto(row, col);
-        Print(Colour.White, str);
+        Print(ColourEnum.White, str);
     }
 
     /// <summary>
@@ -484,7 +484,7 @@ internal class Screen
     /// <param name="str"> The string to print </param>
     /// <param name="row"> The row at which to print </param>
     /// <param name="col"> The column at which to print </param>
-    public void PrintLine(Colour attr, string str, int row, int col)
+    public void PrintLine(ColourEnum attr, string str, int row, int col)
     {
         Erase(row, col);
         Print(attr, str);
@@ -498,7 +498,7 @@ internal class Screen
     /// <param name="col"> The column at which to print </param>
     public void PrintLine(string str, int row, int col)
     {
-        PrintLine(Colour.White, str, row, col);
+        PrintLine(ColourEnum.White, str, row, col);
     }
 
     /// <summary>
@@ -507,7 +507,7 @@ internal class Screen
     /// <param name="attr"> The colour in which to print the string </param>
     /// <param name="str"> The string to print </param>
     /// <param name="length"> The number of characters to print (-1 for all) </param>
-    public void Print(Colour attr, string str)
+    public void Print(ColourEnum attr, string str)
     {
         if (string.IsNullOrEmpty(str))
         {
@@ -537,7 +537,7 @@ internal class Screen
     /// <param name="ch"> The character to place </param>
     /// <param name="row"> The row at which to place the character </param>
     /// <param name="col"> The column at which to place the character </param>
-    public void PutChar(Colour attr, char ch, int row, int col)
+    public void PutChar(ColourEnum attr, char ch, int row, int col)
     {
         if (col < 0 || col >= Width)
         {
@@ -562,14 +562,14 @@ internal class Screen
     /// <param name="n"> The number of characters to display (-1 for all) </param>
     /// <param name="a"> The colour in which to display the string </param>
     /// <param name="s"> The string to print </param>
-    public void RenderString(int x, int y, Colour a, string s)
+    public void RenderString(int x, int y, ColourEnum a, string s)
     {
         int? x1 = null;
         int? x2 = null;
         int scrAa = RowStartingIndexArray[y];
         foreach (char c in s)
         {
-            Colour oa = ActiveScreen.Va[scrAa + x];
+            ColourEnum oa = ActiveScreen.Va[scrAa + x];
             int oc = ActiveScreen.Vc[scrAa + x];
             if (oa == a && oc == c)
             {

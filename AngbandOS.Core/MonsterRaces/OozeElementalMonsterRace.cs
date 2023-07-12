@@ -16,7 +16,7 @@ internal class OozeElementalMonsterRace : MonsterRace
         new AcidBallMonsterSpell(),
         new AcidBoltMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Ooze elemental";
 
     public override int ArmourClass => 80;

@@ -22,7 +22,7 @@ internal class AncientMultiHuedDragonMonsterRace : MonsterRace
         new ConfuseMonsterSpell(),
         new ScareMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
-    public override Colour Colour => Colour.Purple;
+    public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Ancient multi-hued dragon";
 
     public override int ArmourClass => 100;

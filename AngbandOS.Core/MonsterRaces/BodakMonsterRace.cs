@@ -17,7 +17,7 @@ internal class BodakMonsterRace : MonsterRace
         new FireBoltMonsterSpell(),
         new SummonDemonMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerUSymbol>();
-    public override Colour Colour => Colour.Black;
+    public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Bodak";
 
     public override int ArmourClass => 68;

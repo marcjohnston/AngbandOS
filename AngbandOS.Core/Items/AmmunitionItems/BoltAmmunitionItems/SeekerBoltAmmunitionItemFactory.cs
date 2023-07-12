@@ -13,7 +13,7 @@ internal class SeekerBoltAmmunitionItemFactory : BoltAmmunitionItemFactory
     private SeekerBoltAmmunitionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenBracketSymbol>();
-    public override Colour Colour => Colour.BrightBlue;
+    public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "Seeker Bolt";
 
     public override int[] Chance => new int[] { 4, 0, 0, 0 };

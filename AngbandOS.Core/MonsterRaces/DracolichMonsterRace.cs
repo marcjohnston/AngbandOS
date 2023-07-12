@@ -18,7 +18,7 @@ internal class DracolichMonsterRace : MonsterRace
         new ConfuseMonsterSpell(),
         new ScareMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
-    public override Colour Colour => Colour.BrightBeige;
+    public override ColourEnum Colour => ColourEnum.BrightBeige;
     public override string Name => "Dracolich";
 
     public override int ArmourClass => 120;

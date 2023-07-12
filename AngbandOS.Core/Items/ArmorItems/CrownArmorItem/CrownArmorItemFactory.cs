@@ -16,5 +16,5 @@ internal abstract class CrownArmorItemFactory : ArmourItemFactory
     public override bool HatesAcid => true;
 
     public override int PackSort => 24;
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
 }

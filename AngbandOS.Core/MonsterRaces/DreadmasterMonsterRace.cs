@@ -22,7 +22,7 @@ internal class DreadmasterMonsterRace : MonsterRace
         new SummonUndeadMonsterSpell(),
         new TeleportLevelMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperGSymbol>();
-    public override Colour Colour => Colour.Orange;
+    public override ColourEnum Colour => ColourEnum.Orange;
     public override string Name => "Dreadmaster";
 
     public override int ArmourClass => 100;

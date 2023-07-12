@@ -13,7 +13,7 @@ internal class SpottedMushroomPatchMonsterRace : MonsterRace
     protected SpottedMushroomPatchMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CommaSymbol>();
-    public override Colour Colour => Colour.Orange;
+    public override ColourEnum Colour => ColourEnum.Orange;
     public override string Name => "Spotted mushroom patch";
 
     public override int ArmourClass => 1;

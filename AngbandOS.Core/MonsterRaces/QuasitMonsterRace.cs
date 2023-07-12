@@ -21,7 +21,7 @@ internal class QuasitMonsterRace : MonsterRace
         new TeleportToMonsterSpell(),
         new TeleportSelfMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerUSymbol>();
-    public override Colour Colour => Colour.BrightWhite;
+    public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "Quasit";
 
     public override int ArmourClass => 30;

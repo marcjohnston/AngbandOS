@@ -13,7 +13,7 @@ internal class HaftedMaceOfDisruption : HaftedItemClass
     private HaftedMaceOfDisruption(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<BackSlashSymbol>();
-    public override Colour Colour => Colour.Purple;
+    public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Mace of Disruption";
 
     public override int[] Chance => new int[] { 8, 0, 0, 0 };

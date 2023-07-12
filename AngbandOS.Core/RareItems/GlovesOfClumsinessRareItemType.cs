@@ -12,7 +12,7 @@ internal class GlovesOfClumsinessRareItem : RareItem
 {
     private GlovesOfClumsinessRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBraceSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Gloves of Clumsiness";
     public override int Cost => 0;
     public override bool Dex => true;

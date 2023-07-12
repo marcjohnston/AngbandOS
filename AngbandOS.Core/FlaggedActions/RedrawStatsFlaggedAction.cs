@@ -19,13 +19,13 @@ internal class RedrawStatsFlaggedAction : FlaggedAction
         {
             SaveGame.Screen.Print(Constants.StatNamesReduced[stat], RowStat + stat, 0);
             string tmp = SaveGame.Player.AbilityScores[stat].Adjusted.StatToString();
-            SaveGame.Screen.Print(Colour.Yellow, tmp, RowStat + stat, ColStat);
+            SaveGame.Screen.Print(ColourEnum.Yellow, tmp, RowStat + stat, ColStat);
         }
         else
         {
             SaveGame.Screen.Print(Constants.StatNames[stat], RowStat + stat, 0);
             string tmp = SaveGame.Player.AbilityScores[stat].Adjusted.StatToString();
-            SaveGame.Screen.Print(Colour.BrightGreen, tmp, RowStat + stat, ColStat);
+            SaveGame.Screen.Print(ColourEnum.BrightGreen, tmp, RowStat + stat, ColStat);
         }
         if (SaveGame.Player.AbilityScores[stat].InnateMax == 18 + 100)
         {

@@ -13,7 +13,7 @@ internal class ForestTrollMonsterRace : MonsterRace
     protected ForestTrollMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperTSymbol>();
-    public override Colour Colour => Colour.BrightGreen;
+    public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Forest troll";
 
     public override int ArmourClass => 50;

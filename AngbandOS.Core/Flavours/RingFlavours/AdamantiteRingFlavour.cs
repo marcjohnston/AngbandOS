@@ -12,6 +12,6 @@ internal class AdamantiteRingFlavour : RingFlavour
 {
     private AdamantiteRingFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<EqualSignSymbol>();
-    public override Colour Colour => Colour.Chartreuse;
+    public override ColourEnum Colour => ColourEnum.Chartreuse;
     public override string Name => "Adamantite";
 }

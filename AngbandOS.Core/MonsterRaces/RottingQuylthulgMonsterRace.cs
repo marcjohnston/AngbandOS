@@ -17,7 +17,7 @@ internal class RottingQuylthulgMonsterRace : MonsterRace
         new SummonUndeadMonsterSpell(),
         new TeleportSelfMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperQSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Rotting quylthulg";
 
     public override bool Animal => true;

@@ -13,7 +13,7 @@ internal class RottingCorpseMonsterRace : MonsterRace
     protected RottingCorpseMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerZSymbol>();
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Rotting corpse";
 
     public override int ArmourClass => 20;

@@ -16,7 +16,7 @@ internal class ConsoleString : ConsoleElement, IEnumerable<ConsoleChar>
 {
     private List<ConsoleChar> characters = new List<ConsoleChar>();
 
-    public ConsoleString(Colour colour, string text)
+    public ConsoleString(ColourEnum colour, string text)
     {
         foreach (char c in text)
         {
@@ -24,9 +24,9 @@ internal class ConsoleString : ConsoleElement, IEnumerable<ConsoleChar>
         }
     }
 
-    public ConsoleString(string text) : this(Colour.White, text) { }
+    public ConsoleString(string text) : this(ColourEnum.White, text) { }
 
-    public void Append(Colour colour, string text)
+    public void Append(ColourEnum colour, string text)
     {
         foreach (char c in text)
         {
@@ -34,7 +34,7 @@ internal class ConsoleString : ConsoleElement, IEnumerable<ConsoleChar>
         }
     }
 
-    public void Append(Colour colour, char c)
+    public void Append(ColourEnum colour, char c)
     {
         characters.Add(new ConsoleChar(colour, c));
     }
@@ -53,7 +53,7 @@ internal class ConsoleString : ConsoleElement, IEnumerable<ConsoleChar>
     {
         ConsoleAlignment alignment = Alignment ?? parentAlignment;
         ConsoleLocation location = alignment.ComputeTopLeftLocation(this, containerWindow);
-        location.ToWindow(Width, Height).Clear(saveGame, Colour.Background);
+        location.ToWindow(Width, Height).Clear(saveGame, ColourEnum.Background);
 
         foreach (ConsoleChar consoleChar in characters)
         {

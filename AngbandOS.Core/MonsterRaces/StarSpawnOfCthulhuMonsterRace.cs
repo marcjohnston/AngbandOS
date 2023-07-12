@@ -28,7 +28,7 @@ internal class StarSpawnOfCthulhuMonsterRace : MonsterRace
         new SummonUndeadMonsterSpell(),
         new TeleportSelfMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperUSymbol>();
-    public override Colour Colour => Colour.BrightGreen;
+    public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Star-spawn of Cthulhu";
 
     public override int ArmourClass => 90;

@@ -19,7 +19,7 @@ internal class DeathKnightMonsterRace : MonsterRace
         new ScareMonsterSpell(),
         new SummonMonstersMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Death knight";
 
     public override int ArmourClass => 100;

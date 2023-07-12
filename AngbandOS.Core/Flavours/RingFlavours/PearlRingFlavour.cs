@@ -12,6 +12,6 @@ internal class PearlRingFlavour : RingFlavour
 {
     private PearlRingFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<EqualSignSymbol>();
-    public override Colour Colour => Colour.BrightBeige;
+    public override ColourEnum Colour => ColourEnum.BrightBeige;
     public override string Name => "Pearl";
 }

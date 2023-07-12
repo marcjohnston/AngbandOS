@@ -19,7 +19,7 @@ internal class MultiHuedHoundMonsterRace : MonsterRace
         new BreatheFireMonsterSpell(),
         new BreathePoisonMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperZSymbol>();
-    public override Colour Colour => Colour.Purple;
+    public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Multi-hued hound";
 
     public override bool Animal => true;

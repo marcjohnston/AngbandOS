@@ -18,7 +18,7 @@ internal class HoundOfTindalosMonsterRace : MonsterRace
         new BlinkMonsterSpell(),
         new TeleportToMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperCSymbol>();
-    public override Colour Colour => Colour.Chartreuse;
+    public override ColourEnum Colour => ColourEnum.Chartreuse;
     public override string Name => "Hound of Tindalos";
 
     public override bool Animal => true;

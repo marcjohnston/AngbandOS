@@ -13,7 +13,7 @@ internal class GrishnakhTheHillOrcMonsterRace : MonsterRace
     protected GrishnakhTheHillOrcMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerOSymbol>();
-    public override Colour Colour => Colour.Brown;
+    public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Grishnakh, the Hill Orc";
 
     public override int ArmourClass => 20;

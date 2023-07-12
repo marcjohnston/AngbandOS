@@ -18,7 +18,7 @@ internal class EyeDrujMonsterRace : MonsterRace
         new NetherBoltMonsterSpell(),
         new SummonUndeadMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerSSymbol>();
-    public override Colour Colour => Colour.BrightGrey;
+    public override ColourEnum Colour => ColourEnum.BrightGrey;
     public override string Name => "Eye druj";
 
     public override int ArmourClass => 90;

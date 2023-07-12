@@ -16,7 +16,7 @@ internal class LawGhostMonsterRace : MonsterRace
         new MindBlastMonsterSpell(),
         new ForgetMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperGSymbol>();
-    public override Colour Colour => Colour.Silver;
+    public override ColourEnum Colour => ColourEnum.Silver;
     public override string Name => "Law ghost";
 
     public override int ArmourClass => 30;

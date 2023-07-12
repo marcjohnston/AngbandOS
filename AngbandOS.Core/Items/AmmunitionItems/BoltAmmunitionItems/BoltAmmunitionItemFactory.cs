@@ -13,7 +13,7 @@ internal abstract class BoltAmmunitionItemFactory : AmmunitionItemFactory
     public BoltAmmunitionItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Bolt;
     public override int PackSort => 33;
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
 
     /// <summary>
     /// Returns true for all bolts.

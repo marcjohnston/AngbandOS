@@ -19,7 +19,7 @@ internal class DeepOneMonsterRace : MonsterRace
         new ScareMonsterSpell(),
         new ForgetMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
-    public override Colour Colour => Colour.Green;
+    public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "Deep One";
 
     public override int ArmourClass => 60;

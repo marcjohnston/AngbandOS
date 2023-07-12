@@ -15,7 +15,7 @@ internal class OrcCaptainMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new Arrow1D6MonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerOSymbol>();
-    public override Colour Colour => Colour.Green;
+    public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "Orc captain";
 
     public override int ArmourClass => 59;

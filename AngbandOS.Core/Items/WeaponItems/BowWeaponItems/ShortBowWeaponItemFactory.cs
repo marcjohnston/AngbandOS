@@ -13,7 +13,7 @@ internal class ShortBowWeaponItemFactory : BowWeaponItemFactory
     private ShortBowWeaponItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBracketSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Short Bow";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

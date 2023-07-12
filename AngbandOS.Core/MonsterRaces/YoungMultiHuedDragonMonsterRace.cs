@@ -20,7 +20,7 @@ internal class YoungMultiHuedDragonMonsterRace : MonsterRace
         new BreathePoisonMonsterSpell(),
         new ScareMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
-    public override Colour Colour => Colour.Purple;
+    public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Young multi-hued dragon";
 
     public override int ArmourClass => 60;

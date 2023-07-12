@@ -15,7 +15,7 @@ internal class NexusVortexMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BreatheNexusMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerVSymbol>();
-    public override Colour Colour => Colour.Pink;
+    public override ColourEnum Colour => ColourEnum.Pink;
     public override string Name => "Nexus vortex";
 
     public override int ArmourClass => 40;

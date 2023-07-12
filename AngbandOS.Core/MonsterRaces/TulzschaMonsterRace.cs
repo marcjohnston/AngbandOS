@@ -25,7 +25,7 @@ internal class TulzschaMonsterRace : MonsterRace
         new TeleportToMonsterSpell(),
         new TeleportSelfMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperXSymbol>();
-    public override Colour Colour => Colour.Chartreuse;
+    public override ColourEnum Colour => ColourEnum.Chartreuse;
     public override string Name => "Tulzscha";
 
     public override int ArmourClass => 170;

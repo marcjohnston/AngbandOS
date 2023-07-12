@@ -15,7 +15,7 @@ internal class DisenchanterMoldMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new DrainManaMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerMSymbol>();
-    public override Colour Colour => Colour.Chartreuse;
+    public override ColourEnum Colour => ColourEnum.Chartreuse;
     public override string Name => "Disenchanter mold";
 
     public override int ArmourClass => 20;

@@ -13,7 +13,7 @@ internal class ShadowCloakArmorItemFactory : CloakArmorItemFactory
     private ShadowCloakArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenParenthesisSymbol>();
-    public override Colour Colour => Colour.Black;
+    public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Shadow Cloak";
 
     public override int Ac => 6;

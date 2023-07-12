@@ -12,7 +12,7 @@ internal class AcidTrapTile : Tile
 {
     private AcidTrapTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CaretSymbol>();
-    public override Colour Colour => Colour.Brown;
+    public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "AcidTrap";
     public override AlterAction? AlterAction => new DisarmAlterAction();
     public override string AppearAs => "AcidTrap";

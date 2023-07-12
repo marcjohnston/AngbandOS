@@ -13,7 +13,7 @@ internal class SalamanderMonsterRace : MonsterRace
     protected SalamanderMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperRSymbol>();
-    public override Colour Colour => Colour.BrightYellow;
+    public override ColourEnum Colour => ColourEnum.BrightYellow;
     public override string Name => "Salamander";
 
     public override bool Animal => true;

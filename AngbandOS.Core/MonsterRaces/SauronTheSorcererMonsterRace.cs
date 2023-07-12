@@ -35,7 +35,7 @@ internal class SauronTheSorcererMonsterRace : MonsterRace
         new TeleportLevelMonsterSpell(),
         new TeleportSelfMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
-    public override Colour Colour => Colour.Gold;
+    public override ColourEnum Colour => ColourEnum.Gold;
     public override string Name => "Sauron, the Sorcerer";
 
     public override int ArmourClass => 160;

@@ -17,9 +17,9 @@ internal abstract class Animation
     }
 
     public abstract char Character { get; }
-    public abstract Colour Colour { get; }
+    public abstract ColourEnum Colour { get; }
     public abstract string Name { get; }
-    public abstract Colour AlternateColour { get; }
+    public abstract ColourEnum AlternateColour { get; }
     public abstract string Sequence { get; }
 
     public void Animate(int[] y, int[] x)
@@ -34,7 +34,7 @@ internal abstract class Animation
             {
                 if (SaveGame.Level.PlayerHasLosBold(y[j], x[j]) && SaveGame.Level.PanelContains(y[j], x[j]))
                 {
-                    Colour colour = oddFrame ? Colour : AlternateColour;
+                    ColourEnum colour = oddFrame ? Colour : AlternateColour;
                     SaveGame.Level.PrintCharacterAtMapLocation(character, colour, y[j], x[j]);
                     drawn = true;
                 }

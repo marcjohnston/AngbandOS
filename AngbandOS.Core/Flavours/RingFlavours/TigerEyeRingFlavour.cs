@@ -12,6 +12,6 @@ internal class TigerEyeRingFlavour : RingFlavour
 {
     private TigerEyeRingFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<EqualSignSymbol>();
-    public override Colour Colour => Colour.Orange;
+    public override ColourEnum Colour => ColourEnum.Orange;
     public override string Name => "Tiger Eye";
 }

@@ -16,7 +16,7 @@ internal class PhaseSpiderMonsterRace : MonsterRace
         new BlinkMonsterSpell(),
         new TeleportToMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperSSymbol>();
-    public override Colour Colour => Colour.Pink;
+    public override ColourEnum Colour => ColourEnum.Pink;
     public override string Name => "Phase spider";
 
     public override bool Animal => true;

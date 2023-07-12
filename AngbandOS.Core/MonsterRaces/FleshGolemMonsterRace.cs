@@ -13,7 +13,7 @@ internal class FleshGolemMonsterRace : MonsterRace
     protected FleshGolemMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerGSymbol>();
-    public override Colour Colour => Colour.Orange;
+    public override ColourEnum Colour => ColourEnum.Orange;
     public override string Name => "Flesh golem";
 
     public override int ArmourClass => 30;

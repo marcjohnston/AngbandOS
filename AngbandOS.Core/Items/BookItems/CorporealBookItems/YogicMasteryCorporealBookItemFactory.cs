@@ -13,7 +13,7 @@ internal class YogicMasteryCorporealBookItemFactory : CorporealBookItemFactory
     private YogicMasteryCorporealBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<QuestionMarkSymbol>();
-    public override Colour Colour => Colour.Yellow;
+    public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "[Yogic Mastery]";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

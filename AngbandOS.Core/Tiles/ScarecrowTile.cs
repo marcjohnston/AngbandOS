@@ -12,7 +12,7 @@ internal class ScarecrowTile : Tile
 {
     private ScarecrowTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerTSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Scarecrow";
     public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "Scarecrow";

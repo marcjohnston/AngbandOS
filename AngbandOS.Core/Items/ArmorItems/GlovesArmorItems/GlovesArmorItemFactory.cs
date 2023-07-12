@@ -17,6 +17,6 @@ internal abstract class GlovesArmorItemFactory : ArmourItemFactory
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
 
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
 
 }

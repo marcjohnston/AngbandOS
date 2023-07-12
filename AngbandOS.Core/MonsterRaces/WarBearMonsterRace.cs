@@ -13,7 +13,7 @@ internal class WarBearMonsterRace : MonsterRace
     protected WarBearMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerQSymbol>();
-    public override Colour Colour => Colour.Brown;
+    public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "War bear";
 
     public override bool Animal => true;

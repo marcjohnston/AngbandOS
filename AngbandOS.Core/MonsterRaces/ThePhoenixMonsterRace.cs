@@ -20,7 +20,7 @@ internal class ThePhoenixMonsterRace : MonsterRace
         new FireBoltMonsterSpell(),
         new PlasmaBoltMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperBSymbol>();
-    public override Colour Colour => Colour.Red;
+    public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "The Phoenix";
 
     public override bool Animal => true;

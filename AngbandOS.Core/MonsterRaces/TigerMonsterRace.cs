@@ -13,7 +13,7 @@ internal class TigerMonsterRace : MonsterRace
     protected TigerMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerFSymbol>();
-    public override Colour Colour => Colour.BrightOrange;
+    public override ColourEnum Colour => ColourEnum.BrightOrange;
     public override string Name => "Tiger";
 
     public override bool Animal => true;

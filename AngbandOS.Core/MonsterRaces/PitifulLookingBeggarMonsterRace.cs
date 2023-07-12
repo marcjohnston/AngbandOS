@@ -13,7 +13,7 @@ internal class PitifulLookingBeggarMonsterRace : MonsterRace
     protected PitifulLookingBeggarMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerTSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Pitiful looking beggar";
 
     public override int ArmourClass => 1;

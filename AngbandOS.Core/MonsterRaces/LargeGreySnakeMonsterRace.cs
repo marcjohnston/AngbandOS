@@ -13,7 +13,7 @@ internal class LargeGreySnakeMonsterRace : MonsterRace
     protected LargeGreySnakeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperJSymbol>();
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Large grey snake";
 
     public override bool Animal => true;

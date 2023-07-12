@@ -18,7 +18,7 @@ internal class DracoliskMonsterRace : MonsterRace
         new HoldMonsterSpell(),
         new ScareMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
-    public override Colour Colour => Colour.Chartreuse;
+    public override ColourEnum Colour => ColourEnum.Chartreuse;
     public override string Name => "Dracolisk";
 
     public override bool Animal => true;

@@ -15,7 +15,7 @@ internal class ShadowDemonMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new NetherBoltMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperGSymbol>();
-    public override Colour Colour => Colour.Black;
+    public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Shadow demon";
 
     public override int ArmourClass => 30;

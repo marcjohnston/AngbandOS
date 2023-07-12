@@ -1169,7 +1169,7 @@ internal class SaveGame
         MapMovementKeys();
 
         FullScreenOverlay = true;
-        SetBackground(BackgroundImage.Normal);
+        SetBackground(BackgroundImageEnum.Normal);
         Screen.CursorVisible = false;
         if (Program.Rng.UseFixed)
         {
@@ -1223,7 +1223,7 @@ internal class SaveGame
             GenerateNewLevel();
         }
         FullScreenOverlay = false;
-        SetBackground(BackgroundImage.Overhead);
+        SetBackground(BackgroundImageEnum.Overhead);
         Playing = true;
         if (Player.Health < 0)
         {
@@ -1378,18 +1378,18 @@ internal class SaveGame
                     split = check;
                 }
             }
-            Screen.Print(Colour.White, t.Substring(0, split), 0, 0);
+            Screen.Print(ColourEnum.White, t.Substring(0, split), 0, 0);
             MsgFlush(split + 1);
             t = t.Substring(split);
             n -= split;
         }
-        Screen.Print(Colour.White, t.Substring(0, n), 0, _msgPrintP);
+        Screen.Print(ColourEnum.White, t.Substring(0, n), 0, _msgPrintP);
         MsgFlag = true;
         _msgPrintP += n + 1;
     }
     private void MsgFlush(int x)
     {
-        const Colour a = Colour.BrightBlue;
+        const ColourEnum a = ColourEnum.BrightBlue;
         Screen.Print(a, "-more-", 0, x);
         while (!Shutdown)
         {
@@ -1503,34 +1503,34 @@ internal class SaveGame
             for (int x = 0; x < 12; x++)
             {
                 string wildMapSymbol = "^";
-                Colour wildMapAttr = Colour.Green;
+                ColourEnum wildMapAttr = ColourEnum.Green;
                 if (Wilderness[y][x].Dungeon != null)
                 {
                     Dungeon dungeon = Wilderness[y][x].Dungeon;
                     wildMapSymbol = dungeon.Visited ? dungeon.MapSymbol : "?";
-                    wildMapAttr = Wilderness[y][x].Town != null ? Colour.Grey : Colour.Brown;
+                    wildMapAttr = Wilderness[y][x].Town != null ? ColourEnum.Grey : ColourEnum.Brown;
 
                     // Check to see if there are any active quests in the dungeon and show them in bright red.
                     if (Wilderness[y][x].Dungeon.ActiveQuestCount() != 0) 
                     {
-                        wildMapAttr = Colour.BrightRed;
+                        wildMapAttr = ColourEnum.BrightRed;
                     }
                 }
                 if (x == 0 || y == 0 || x == 11 || y == 11)
                 {
                     wildMapSymbol = "~";
-                    wildMapAttr = Colour.Blue;
+                    wildMapAttr = ColourEnum.Blue;
                 }
                 Screen.Print(wildMapAttr, wildMapSymbol, y + 2, x + 2);
             }
         }
-        Screen.Print(Colour.Purple, "+------------+", 1, 1);
+        Screen.Print(ColourEnum.Purple, "+------------+", 1, 1);
         for (y = 0; y < 12; y++)
         {
-            Screen.Print(Colour.Purple, "|", y + 2, 1);
-            Screen.Print(Colour.Purple, "|", y + 2, 14);
+            Screen.Print(ColourEnum.Purple, "|", y + 2, 1);
+            Screen.Print(ColourEnum.Purple, "|", y + 2, 14);
         }
-        Screen.Print(Colour.Purple, "+------------+", 14, 1);
+        Screen.Print(ColourEnum.Purple, "+------------+", 14, 1);
         for (y = 0; y < DungeonCount; y++)
         {
             Dungeon dungeon = SingletonRepository.Dungeons[y];
@@ -1548,21 +1548,21 @@ internal class SaveGame
             {
                 buffer = $"? = {SingletonRepository.Dungeons[y].Name} (L:{depth}, D:{difficulty}, Q:{activeQuestCount})";
             }
-            Colour keyAttr = Colour.Brown;
+            ColourEnum keyAttr = ColourEnum.Brown;
             if (y < SingletonRepository.Towns.Count)
             {
-                keyAttr = Colour.Grey;
+                keyAttr = ColourEnum.Grey;
             }
             if (activeQuestCount != 0)
             {
-                keyAttr = Colour.BrightRed;
+                keyAttr = ColourEnum.BrightRed;
             }
             Screen.Print(keyAttr, buffer, y + 1, 19);
         }
-        Screen.Print(Colour.Purple, "L:levels", 16, 1);
-        Screen.Print(Colour.Purple, "D:difficulty", 17, 1);
-        Screen.Print(Colour.Purple, "Q:quests", 18, 1);
-        Screen.Print(Colour.Purple, "(Your position is marked with the cursor)", DungeonCount + 2, 19);
+        Screen.Print(ColourEnum.Purple, "L:levels", 16, 1);
+        Screen.Print(ColourEnum.Purple, "D:difficulty", 17, 1);
+        Screen.Print(ColourEnum.Purple, "Q:quests", 18, 1);
+        Screen.Print(ColourEnum.Purple, "(Your position is marked with the cursor)", DungeonCount + 2, 19);
     }
 
     /// <summary>
@@ -2533,22 +2533,22 @@ internal class SaveGame
         {
             if (Difficulty == 0)
             {
-                PlayMusic(MusicTrack.Town);
+                PlayMusic(MusicTrackEnum.Town);
             }
             else
             {
-                PlayMusic(MusicTrack.Wilderness);
+                PlayMusic(MusicTrackEnum.Wilderness);
             }
         }
         else
         {
             if (IsQuest(CurrentDepth))
             {
-                PlayMusic(MusicTrack.QuestLevel);
+                PlayMusic(MusicTrackEnum.QuestLevel);
             }
             else
             {
-                PlayMusic(MusicTrack.Dungeon);
+                PlayMusic(MusicTrackEnum.Dungeon);
             }
         }
         while (!Shutdown)
@@ -2770,7 +2770,7 @@ internal class SaveGame
         Player.ExperiencePoints = Player.MaxExperienceGained;
         Player.Level = Player.MaxLevelGained;
         Player.Gold += 10000000;
-        SetBackground(BackgroundImage.Crown);
+        SetBackground(BackgroundImageEnum.Crown);
         Screen.Clear();
         AnyKey(44);
     }
@@ -2781,13 +2781,13 @@ internal class SaveGame
             DateTime ct = DateTime.Now;
             if (corpse.IsWinner)
             {
-                SetBackground(BackgroundImage.Sunset);
-                PlayMusic(MusicTrack.Victory);
+                SetBackground(BackgroundImageEnum.Sunset);
+                PlayMusic(MusicTrackEnum.Victory);
             }
             else
             {
-                SetBackground(BackgroundImage.Tomb);
-                PlayMusic(MusicTrack.Death);
+                SetBackground(BackgroundImageEnum.Tomb);
+                PlayMusic(MusicTrackEnum.Death);
             }
             Screen.Clear();
             string buf = corpse.Name.Trim() + corpse.Generation.ToRoman(true);
@@ -3391,7 +3391,7 @@ internal class SaveGame
                     }
                     NewLevelFlag = true;
                 }
-                PlaySound(SoundEffect.TeleportLevel);
+                PlaySound(SoundEffectEnum.TeleportLevel);
             }
         }
     }
@@ -6344,7 +6344,7 @@ internal class SaveGame
             dis *= 2;
             min /= 2;
         }
-        PlaySound(SoundEffect.Teleport);
+        PlaySound(SoundEffectEnum.Teleport);
         int oy = Player.MapY;
         int ox = Player.MapX;
         Player.MapY = y;
@@ -6427,7 +6427,7 @@ internal class SaveGame
         DoCmdSaveGame(true);
         CurrentDepth++;
         NewLevelFlag = true;
-        PlaySound(SoundEffect.TeleportLevel);
+        PlaySound(SoundEffectEnum.TeleportLevel);
     }
 
     public void TeleportPlayerTo(int ny, int nx)
@@ -6459,7 +6459,7 @@ internal class SaveGame
                 dis++;
             }
         }
-        PlaySound(SoundEffect.Teleport);
+        PlaySound(SoundEffectEnum.Teleport);
         int oy = Player.MapY;
         int ox = Player.MapX;
         Player.MapY = y;
@@ -6502,7 +6502,7 @@ internal class SaveGame
             }
             else
             {
-                PlaySound(SoundEffect.Teleport);
+                PlaySound(SoundEffectEnum.Teleport);
                 Level.Grid[Player.MapY][Player.MapX].MonsterIndex = cPtr.MonsterIndex;
                 cPtr.MonsterIndex = 0;
                 mPtr.MapY = Player.MapY;
@@ -6989,7 +6989,7 @@ internal class SaveGame
         {
             return;
         }
-        PlaySound(SoundEffect.Teleport);
+        PlaySound(SoundEffectEnum.Teleport);
         Level.Grid[ny][nx].MonsterIndex = mIdx;
         Level.Grid[oy][ox].MonsterIndex = 0;
         mPtr.MapY = ny;
@@ -7090,7 +7090,7 @@ internal class SaveGame
         {
             MsgPrint("The door crashes open!");
             Level.CaveSetFeat(y, x, Program.Rng.RandomLessThan(100) < 50 ? "BrokenDoor" : "OpenDoor");
-            PlaySound(SoundEffect.OpenDoor);
+            PlaySound(SoundEffectEnum.OpenDoor);
             MovePlayer(y, x, false);
             UpdateLightFlaggedAction.Set();
             UpdateViewFlaggedAction.Set();
@@ -7360,7 +7360,7 @@ internal class SaveGame
             UpdateMonstersFlaggedAction.Set();
             UpdateLightFlaggedAction.Set();
             UpdateViewFlaggedAction.Set();
-            PlaySound(SoundEffect.ShutDoor);
+            PlaySound(SoundEffectEnum.ShutDoor);
         }
         return false;
     }
@@ -8123,7 +8123,7 @@ internal class SaveGame
                     }
                 }
             }
-            PlaySound(SoundEffect.BumpWall);
+            PlaySound(SoundEffectEnum.BumpWall);
             return;
         }
         // Assuming we didn't bump into anything, maybe we can actually move
@@ -8242,7 +8242,7 @@ internal class SaveGame
                 UpdateMonstersFlaggedAction.Set();
                 UpdateLightFlaggedAction.Set();
                 UpdateViewFlaggedAction.Set();
-                PlaySound(SoundEffect.LockpickSuccess);
+                PlaySound(SoundEffectEnum.LockpickSuccess);
                 // Picking a lock gains you an experience point
                 Player.GainExperience(1);
             }
@@ -8259,7 +8259,7 @@ internal class SaveGame
             UpdateMonstersFlaggedAction.Set();
             UpdateLightFlaggedAction.Set();
             UpdateViewFlaggedAction.Set();
-            PlaySound(SoundEffect.OpenDoor);
+            PlaySound(SoundEffectEnum.OpenDoor);
         }
         return more;
     }
@@ -8390,7 +8390,7 @@ internal class SaveGame
             // Check if we hit
             if (PlayerCheckHitOnMonster(chance, race.ArmourClass, monster.IsVisible))
             {
-                PlaySound(SoundEffect.MeleeHit);
+                PlaySound(SoundEffectEnum.MeleeHit);
                 // Tell the player they hit it with the appropriate message
                 if (!(backstab || stabFleeing))
                 {
@@ -8704,7 +8704,7 @@ internal class SaveGame
             // We missed
             else
             {
-                PlaySound(SoundEffect.Miss);
+                PlaySound(SoundEffectEnum.Miss);
                 MsgPrint($"You miss {monsterName}.");
             }
         }
@@ -8718,7 +8718,7 @@ internal class SaveGame
         }
         if (fear && monster.IsVisible && !noExtra)
         {
-            PlaySound(SoundEffect.MonsterFlees);
+            PlaySound(SoundEffectEnum.MonsterFlees);
             MsgPrint($"{monsterName} flees in terror!");
         }
         if (doQuake)
@@ -8980,7 +8980,7 @@ internal class SaveGame
         }
         item.ItemOptimize();
         string missileName = missile.Description(false, 3);
-        Colour missileColour = missile.Factory.FlavorColour;
+        ColourEnum missileColour = missile.Factory.FlavorColour;
         char missileCharacter = missile.Factory.FlavorSymbol.Character;
         // Thrown distance is based on the weight of the missile
         int multiplier = 10 + (2 * (damageMultiplier - 1));
@@ -9098,7 +9098,7 @@ internal class SaveGame
                         }
                         if (fear && monster.IsVisible)
                         {
-                            PlaySound(SoundEffect.MonsterFlees);
+                            PlaySound(SoundEffectEnum.MonsterFlees);
                             string mName = monster.Name;
                             MsgPrint($"{mName} flees in terror!");
                         }
@@ -9654,7 +9654,7 @@ internal class SaveGame
         }
         if (!more)
         {
-            PlaySound(SoundEffect.Dig);
+            PlaySound(SoundEffectEnum.Dig);
         }
         return more;
     }
@@ -9706,7 +9706,7 @@ internal class SaveGame
                 UpdateMonstersFlaggedAction.Set();
                 UpdateLightFlaggedAction.Set();
                 UpdateViewFlaggedAction.Set();
-                PlaySound(SoundEffect.LockpickSuccess);
+                PlaySound(SoundEffectEnum.LockpickSuccess);
                 Player.GainExperience(1);
             }
             // If we failed, simply let us know
@@ -9722,7 +9722,7 @@ internal class SaveGame
             UpdateMonstersFlaggedAction.Set();
             UpdateLightFlaggedAction.Set();
             UpdateViewFlaggedAction.Set();
-            PlaySound(SoundEffect.OpenDoor);
+            PlaySound(SoundEffectEnum.OpenDoor);
         }
         return true;
     }
@@ -9821,7 +9821,7 @@ internal class SaveGame
         if (PlayerCheckHitOnMonster(chance, race.ArmourClass, monster.IsVisible))
         {
             // It was a hit, so let the player know
-            PlaySound(SoundEffect.MeleeHit);
+            PlaySound(SoundEffectEnum.MeleeHit);
             MsgPrint($"You hit {monsterName} with your {attackDescription}.");
             // Roll the damage, with possible critical damage
             int damage = Program.Rng.DiceRoll(damageDice, damageSides);
@@ -9861,7 +9861,7 @@ internal class SaveGame
         else
         {
             // We missed, so just let us know
-            PlaySound(SoundEffect.Miss);
+            PlaySound(SoundEffectEnum.Miss);
             MsgPrint($"You miss {monsterName}.");
         }
     }
@@ -10427,7 +10427,7 @@ internal class SaveGame
     public void AnyKey(int row)
     {
         Screen.PrintLine("", row, 0);
-        Screen.Print(Colour.Orange, "[Press any key to continue]", row, 27);
+        Screen.Print(ColourEnum.Orange, "[Press any key to continue]", row, 27);
         Inkey();
         Screen.PrintLine("", row, 0);
     }
@@ -10452,7 +10452,7 @@ internal class SaveGame
             len = Constants.ConsoleWidth - cursorPosition.X;
         }
         Screen.Erase(cursorPosition.Y, cursorPosition.X, len);
-        Screen.Print(Colour.Grey, buf, cursorPosition.Y, cursorPosition.X);
+        Screen.Print(ColourEnum.Grey, buf, cursorPosition.Y, cursorPosition.X);
         while (!done && !Shutdown)
         {
             Screen.Goto(cursorPosition.Y, cursorPosition.X + k);
@@ -10488,7 +10488,7 @@ internal class SaveGame
                     break;
             }
             Screen.Erase(cursorPosition.Y, cursorPosition.X, len);
-            Screen.Print(Colour.Black, buf, cursorPosition.Y, cursorPosition.X);
+            Screen.Print(ColourEnum.Black, buf, cursorPosition.Y, cursorPosition.X);
         }
         return i != '\x1b';
     }
@@ -10696,7 +10696,7 @@ internal class SaveGame
     /// Plays a sound
     /// </summary>
     /// <param name="val"> The sound to play </param>
-    public void PlaySound(SoundEffect sound)
+    public void PlaySound(SoundEffectEnum sound)
     {
     //    _console.PlaySound(sound);
     }
@@ -10709,7 +10709,7 @@ internal class SaveGame
         Screen.UpdateScreen(_console);
     }
 
-    public void PlayMusic(MusicTrack musicTrack)
+    public void PlayMusic(MusicTrackEnum musicTrack)
     {
     //    _console.PlayMusic(musicTrack);
     }
@@ -10814,7 +10814,7 @@ internal class SaveGame
     {
     }
 
-    internal void SetBackground(BackgroundImage image)
+    internal void SetBackground(BackgroundImageEnum image)
     {
         _console.SetBackground(image);
     }
@@ -10918,8 +10918,8 @@ internal class SaveGame
 
     public bool CharacterGeneration()
     {
-        SetBackground(BackgroundImage.Paper);
-        PlayMusic(MusicTrack.Chargen);
+        SetBackground(BackgroundImageEnum.Paper);
+        PlayMusic(MusicTrackEnum.Chargen);
         Inventory = new Item[InventorySlot.Total];
         for (int i = 0; i < InventorySlot.Total; i++)
         {
@@ -10938,7 +10938,7 @@ internal class SaveGame
     public void DisplayAPlusB(int x, int y, int initial, int bonus)
     {
         string buf = $"{initial:00}% + {bonus / 10}.{bonus % 10}%/lv";
-        Screen.Print(Colour.Black, buf, y, x);
+        Screen.Print(ColourEnum.Black, buf, y, x);
     }
 
     public void DisplayRealmInfo(BaseRealm prealm)
@@ -10946,7 +10946,7 @@ internal class SaveGame
         int y = 30;
         foreach (string info in prealm.Info)
         {
-            Screen.Print(Colour.Purple, info, y, 20);
+            Screen.Print(ColourEnum.Purple, info, y, 20);
             y++;
         }
     }
@@ -10956,17 +10956,17 @@ internal class SaveGame
         string buf;
         if (bonus == 0)
         {
-            Screen.Print(Colour.Black, "+0", y, x);
+            Screen.Print(ColourEnum.Black, "+0", y, x);
         }
         else if (bonus < 0)
         {
             buf = bonus.ToString();
-            Screen.Print(Colour.BrightRed, buf, y, x);
+            Screen.Print(ColourEnum.BrightRed, buf, y, x);
         }
         else
         {
             buf = "+" + bonus;
-            Screen.Print(Colour.Green, buf, y, x);
+            Screen.Print(ColourEnum.Green, buf, y, x);
         }
     }
 
@@ -11088,16 +11088,16 @@ internal class SaveGame
     public void MenuDisplay(int current, string[] menuItems)
     {
         Screen.Clear(30);
-        Screen.Print(Colour.Orange, "=>", 35, 0);
+        Screen.Print(ColourEnum.Orange, "=>", 35, 0);
         for (int i = 0; i < menuItems.Length; i++)
         {
             int row = 35 + i - current;
             if (row >= 30 && row <= 40)
             {
-                Colour a = Colour.Purple;
+                ColourEnum a = ColourEnum.Purple;
                 if (i == current)
                 {
-                    a = Colour.Pink;
+                    a = ColourEnum.Pink;
                 }
                 Screen.Print(a, menuItems[i], row, 2);
             }
@@ -14991,7 +14991,7 @@ internal class SaveGame
                         {
                             ScreenBuffer savedScreen = Screen.Clone();
                             rPtr.Knowledge.Display();
-                            Screen.Print(Colour.White, $"  [r,{info}]");
+                            Screen.Print(ColourEnum.White, $"  [r,{info}]");
                             query = Inkey();
                             Screen.Restore(savedScreen);
                         }
@@ -15432,11 +15432,11 @@ internal class SaveGame
     {
         if (isSet)
         {
-            Screen.Print(Colour.Blue, '*', row, col);
+            Screen.Print(ColourEnum.Blue, '*', row, col);
         }
         else
         {
-            Screen.Print(Colour.White, '-', row, col);
+            Screen.Print(ColourEnum.White, '-', row, col);
         }
     }
 
@@ -15759,7 +15759,7 @@ internal class SaveGame
             foreach (int index in inventorySlot.InventorySlots)
             {
                 Item? item = GetInventoryItem(index);
-                Colour colour = Colour.Background;
+                ColourEnum colour = ColourEnum.Background;
                 char character = ' ';
                 // Only print items that exist
                 if (item != null)

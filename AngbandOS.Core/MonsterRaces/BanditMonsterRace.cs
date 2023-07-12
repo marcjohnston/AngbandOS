@@ -13,7 +13,7 @@ internal class BanditMonsterRace : MonsterRace
     protected BanditMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
-    public override Colour Colour => Colour.Black;
+    public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Bandit";
 
     public override int ArmourClass => 24;

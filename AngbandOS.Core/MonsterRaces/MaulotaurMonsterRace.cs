@@ -17,7 +17,7 @@ internal class MaulotaurMonsterRace : MonsterRace
         new FireBoltMonsterSpell(),
         new PlasmaBoltMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperHSymbol>();
-    public override Colour Colour => Colour.Brown;
+    public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Maulotaur";
 
     public override int ArmourClass => 50;

@@ -19,7 +19,7 @@ internal class DrolemMonsterRace : MonsterRace
         new ConfuseMonsterSpell(),
         new SlowMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerGSymbol>();
-    public override Colour Colour => Colour.Green;
+    public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "Drolem";
 
     public override int ArmourClass => 130;

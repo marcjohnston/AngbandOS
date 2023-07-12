@@ -19,7 +19,7 @@ internal class Realm2SelectionBirthStage : BaseBirthStage
             .Where(_realm => _realm != SaveGame.Player.PrimaryRealm)
             .Select(_realm => _realm.Name)
             .ToArray(); ;
-        SaveGame.Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+        SaveGame.Screen.Print(ColourEnum.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
         while (!SaveGame.Shutdown)
         {
             SaveGame.MenuDisplay(currentSelection, menuItems);

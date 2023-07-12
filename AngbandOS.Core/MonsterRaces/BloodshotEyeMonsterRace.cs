@@ -15,7 +15,7 @@ internal class BloodshotEyeMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new DrainManaMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerESymbol>();
-    public override Colour Colour => Colour.Red;
+    public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Bloodshot eye";
 
     public override int ArmourClass => 6;

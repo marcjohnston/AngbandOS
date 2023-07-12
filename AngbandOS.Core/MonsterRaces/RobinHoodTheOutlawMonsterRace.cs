@@ -17,7 +17,7 @@ internal class RobinHoodTheOutlawMonsterRace : MonsterRace
         new CreateTrapsMonsterSpell(),
         new HealMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
-    public override Colour Colour => Colour.BrightChartreuse;
+    public override ColourEnum Colour => ColourEnum.BrightChartreuse;
     public override string Name => "Robin Hood, the Outlaw";
 
     public override int ArmourClass => 30;

@@ -22,7 +22,7 @@ internal class TheLerneanHydraMonsterRace : MonsterRace
         new ScareMonsterSpell(),
         new SummonHydraMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperMSymbol>();
-    public override Colour Colour => Colour.BrightTurquoise;
+    public override ColourEnum Colour => ColourEnum.BrightTurquoise;
     public override string Name => "The Lernean Hydra";
 
     public override bool Animal => true;

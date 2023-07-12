@@ -23,7 +23,7 @@ internal class KavlaxTheManyHeadedMonsterRace : MonsterRace
         new BreatheShardsMonsterSpell(),
         new BreatheSoundMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
-    public override Colour Colour => Colour.Purple;
+    public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Kavlax the Many-Headed";
 
     public override int ArmourClass => 85;

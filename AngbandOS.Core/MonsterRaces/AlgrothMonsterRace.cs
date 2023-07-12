@@ -13,7 +13,7 @@ internal class AlgrothMonsterRace : MonsterRace
     protected AlgrothMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperTSymbol>();
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Algroth";
 
     public override int ArmourClass => 60;

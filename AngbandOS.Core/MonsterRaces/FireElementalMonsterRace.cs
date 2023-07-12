@@ -15,7 +15,7 @@ internal class FireElementalMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new FireBoltMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
-    public override Colour Colour => Colour.Red;
+    public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Fire elemental";
 
     public override int ArmourClass => 50;

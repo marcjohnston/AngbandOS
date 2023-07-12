@@ -12,6 +12,6 @@ internal class MetallicBluePotionFlavour : PotionFlavour
 {
     private MetallicBluePotionFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ExclamationPointSymbol>();
-    public override Colour Colour => Colour.BrightBlue;
+    public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "Metallic Blue";
 }

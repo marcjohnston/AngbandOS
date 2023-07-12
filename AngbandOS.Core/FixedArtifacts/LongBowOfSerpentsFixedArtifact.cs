@@ -32,7 +32,7 @@ internal class LongBowOfSerpentsFixedArtifact : FixedArtifact
         }
     }
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBracketSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "The Long Bow of Serpents";
     public override int Ac => 0;
     public override int Cost => 20000;

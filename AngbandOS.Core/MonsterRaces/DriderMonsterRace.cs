@@ -19,7 +19,7 @@ internal class DriderMonsterRace : MonsterRace
         new MagicMissileMonsterSpell(),
         new DarknessMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperSSymbol>();
-    public override Colour Colour => Colour.Blue;
+    public override ColourEnum Colour => ColourEnum.Blue;
     public override string Name => "Drider";
 
     public override int ArmourClass => 30;

@@ -13,7 +13,7 @@ internal class SwordBrokenDagger : SwordItemClass
     private SwordBrokenDagger(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
-    public override Colour Colour => Colour.Black;
+    public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Broken Dagger";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

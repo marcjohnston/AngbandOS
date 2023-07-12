@@ -12,6 +12,6 @@ internal class PewterAmuletFlavour : AmuletFlavour
 {
     private PewterAmuletFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<DoubleQuoteSymbol>();
-    public override Colour Colour => Colour.BrightGrey;
+    public override ColourEnum Colour => ColourEnum.BrightGrey;
     public override string Name => "Pewter";
 }

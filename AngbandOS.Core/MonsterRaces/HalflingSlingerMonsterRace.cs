@@ -15,7 +15,7 @@ internal class HalflingSlingerMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new Arrow7D6MonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Halfling slinger";
 
     public override int ArmourClass => 40;

@@ -13,7 +13,7 @@ internal class ChaosSpawnMonsterRace : MonsterRace
     protected ChaosSpawnMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerESymbol>();
-    public override Colour Colour => Colour.Purple;
+    public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Chaos spawn";
 
     public override int ArmourClass => 50;

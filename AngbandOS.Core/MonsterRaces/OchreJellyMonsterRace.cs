@@ -13,7 +13,7 @@ internal class OchreJellyMonsterRace : MonsterRace
     protected OchreJellyMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerJSymbol>();
-    public override Colour Colour => Colour.Yellow;
+    public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "Ochre jelly";
 
     public override int ArmourClass => 18;

@@ -36,7 +36,7 @@ internal class TheLucerneHammerJusticeFixedArtifact : FixedArtifact, IFixedArtif
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<BackSlashSymbol>();
-    public override Colour Colour => Colour.BrightBlue;
+    public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "The Lucerne Hammer 'Justice'";
     public override int Ac => 0;
     public override bool Activate => true;

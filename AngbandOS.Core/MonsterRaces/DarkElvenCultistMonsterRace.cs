@@ -20,7 +20,7 @@ internal class DarkElvenCultistMonsterRace : MonsterRace
         new SummonMonsterMonsterSpell(),
         new SummonSpiderMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
-    public override Colour Colour => Colour.Turquoise;
+    public override ColourEnum Colour => ColourEnum.Turquoise;
     public override string Name => "Dark elven cultist";
 
     public override int ArmourClass => 75;

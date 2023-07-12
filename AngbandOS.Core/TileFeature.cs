@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class TileFeature
 {
-    public Colour Attr;
+    public ColourEnum Attr;
     public char Char;
     public int Mimic;
     public string Name;

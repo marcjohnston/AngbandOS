@@ -19,7 +19,7 @@ internal class SpectralTyrannosaurMonsterRace : MonsterRace
         new HoldMonsterSpell(),
         new ScareMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperRSymbol>();
-    public override Colour Colour => Colour.Turquoise;
+    public override ColourEnum Colour => ColourEnum.Turquoise;
     public override string Name => "Spectral tyrannosaur";
 
     public override bool Animal => true;

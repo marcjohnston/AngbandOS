@@ -44,7 +44,7 @@ internal class LongSwordOfEverflameFixedArtifact : FixedArtifact, IFixedArtifact
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
-    public override Colour Colour => Colour.BrightWhite;
+    public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "The Long Sword of Everflame";
     public override int Ac => 0;
     public override bool Activate => true;

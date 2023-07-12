@@ -13,7 +13,7 @@ internal class MummifiedOrcMonsterRace : MonsterRace
     protected MummifiedOrcMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerZSymbol>();
-    public override Colour Colour => Colour.Yellow;
+    public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "Mummified orc";
 
     public override int ArmourClass => 28;

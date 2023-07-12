@@ -12,7 +12,7 @@ internal class FireTrapTile : Tile
 {
     private FireTrapTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CaretSymbol>();
-    public override Colour Colour => Colour.Brown;
+    public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "FireTrap";
     public override AlterAction? AlterAction => new DisarmAlterAction();
     public override string AppearAs => "FireTrap";

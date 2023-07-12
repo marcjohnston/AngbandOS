@@ -13,7 +13,7 @@ internal class HairyMoldMonsterRace : MonsterRace
     protected HairyMoldMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerMSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Hairy mold";
 
     public override int ArmourClass => 15;

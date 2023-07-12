@@ -20,11 +20,11 @@ namespace AngbandOS.Core.Scripts
         {
             SaveGame.FullScreenOverlay = true;
             ScreenBuffer savedScreen = SaveGame.Screen.Clone();
-            SaveGame.SetBackground(BackgroundImage.Normal);
+            SaveGame.SetBackground(BackgroundImageEnum.Normal);
             int kIdx = WizCreateItemtype();
             SaveGame.Screen.Restore(savedScreen);
             SaveGame.FullScreenOverlay = false;
-            SaveGame.SetBackground(BackgroundImage.Overhead);
+            SaveGame.SetBackground(BackgroundImageEnum.Overhead);
             if (kIdx == 0)
             {
                 return false;

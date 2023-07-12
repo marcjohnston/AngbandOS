@@ -15,7 +15,7 @@ internal class SnakeOfYigMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BreathePoisonMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperJSymbol>();
-    public override Colour Colour => Colour.BrightGreen;
+    public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Snake of Yig";
 
     public override bool Animal => true;

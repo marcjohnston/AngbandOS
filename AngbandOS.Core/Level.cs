@@ -196,12 +196,12 @@ internal class Level
     public void DisplayMap(out int cy, out int cx)
     {
         int x, y, maxy;
-        Colour ta;
+        ColourEnum ta;
         char tc;
-        Colour[][] ma = new Colour[_mapHgt + 2][];
+        ColourEnum[][] ma = new ColourEnum[_mapHgt + 2][];
         for (int i = 0; i < _mapHgt + 2; i++)
         {
-            ma[i] = new Colour[_mapWid + 2];
+            ma[i] = new ColourEnum[_mapWid + 2];
         }
         char[][] mc = new char[_mapHgt + 2][];
         for (int i = 0; i < _mapHgt + 2; i++)
@@ -217,7 +217,7 @@ internal class Level
         {
             for (x = 0; x < _mapWid + 2; ++x)
             {
-                ma[y][x] = Colour.White;
+                ma[y][x] = ColourEnum.White;
                 mc[y][x] = ' ';
                 mp[y][x] = 0;
             }
@@ -239,7 +239,7 @@ internal class Level
                 }
                 MapInfo(j, i, out ta, out tc);
                 int tp = Grid[j][i].FeatureType.MapPriority;
-                if (ta == Colour.Background)
+                if (ta == ColourEnum.Background)
                 {
                     tp = 0;
                 }
@@ -256,26 +256,26 @@ internal class Level
         int xOffset = (80 - x) / 2;
         int yOffset = (44 - y) / 2;
         mc[0][0] = '+';
-        ma[0][0] = Colour.Purple;
+        ma[0][0] = ColourEnum.Purple;
         mc[0][x] = '+';
-        ma[0][x] = Colour.Purple;
+        ma[0][x] = ColourEnum.Purple;
         mc[y][0] = '+';
-        ma[y][0] = Colour.Purple;
+        ma[y][0] = ColourEnum.Purple;
         mc[y][x] = '+';
-        ma[y][x] = Colour.Purple;
+        ma[y][x] = ColourEnum.Purple;
         for (x = 1; x <= maxx; x++)
         {
             mc[0][x] = '-';
-            ma[0][x] = Colour.Purple;
+            ma[0][x] = ColourEnum.Purple;
             mc[maxy + 1][x] = '-';
-            ma[maxy + 1][x] = Colour.Purple;
+            ma[maxy + 1][x] = ColourEnum.Purple;
         }
         for (y = 1; y <= maxy; y++)
         {
             mc[y][0] = '|';
-            ma[y][0] = Colour.Purple;
+            ma[y][0] = ColourEnum.Purple;
             mc[y][maxx + 1] = '|';
-            ma[y][maxx + 1] = Colour.Purple;
+            ma[y][maxx + 1] = ColourEnum.Purple;
         }
         for (y = 0; y < maxy + 2; ++y)
         {
@@ -286,11 +286,11 @@ internal class Level
                 tc = mc[y][x];
                 if (SaveGame.Player.TimedInvulnerability.TurnsRemaining != 0)
                 {
-                    ta = Colour.White;
+                    ta = ColourEnum.White;
                 }
                 else if (SaveGame.Player.TimedEtherealness.TurnsRemaining != 0)
                 {
-                    ta = Colour.Black;
+                    ta = ColourEnum.Black;
                 }
                 SaveGame.Screen.Print(ta, tc.ToString());
             }
@@ -445,7 +445,7 @@ internal class Level
         }
         NoteSpot(by, bx);
         RedrawSingleLocation(by, bx);
-        SaveGame.PlaySound(SoundEffect.Drop);
+        SaveGame.PlaySound(SoundEffectEnum.Drop);
         if (chance != 0 && by == SaveGame.Player.MapY && bx == SaveGame.Player.MapX)
         {
             SaveGame.MsgPrint("You feel something roll beneath your feet.");
@@ -1000,17 +1000,17 @@ internal class Level
         return Grid[y][x].TileFlags.IsSet(GridTile.IsVisible);
     }
 
-    public void PrintCharacterAtMapLocation(char c, Colour a, int y, int x)
+    public void PrintCharacterAtMapLocation(char c, ColourEnum a, int y, int x)
     {
         if (PanelContains(y, x))
         {
             if (SaveGame.Player.TimedInvulnerability.TurnsRemaining != 0)
             {
-                a = Colour.White;
+                a = ColourEnum.White;
             }
             else if (SaveGame.Player.TimedEtherealness.TurnsRemaining != 0)
             {
-                a = Colour.Black;
+                a = ColourEnum.Black;
             }
             SaveGame.Screen.PutChar(a, c, y - PanelRowPrt, x - PanelColPrt);
         }
@@ -1067,18 +1067,18 @@ internal class Level
     {
         if (PanelContains(y, x))
         {
-            Colour a;
+            ColourEnum a;
             char c;
             {
                 MapInfo(y, x, out a, out c);
             }
             if (SaveGame.Player.TimedInvulnerability.TurnsRemaining != 0)
             {
-                a = Colour.White;
+                a = ColourEnum.White;
             }
             else if (SaveGame.Player.TimedEtherealness.TurnsRemaining != 0)
             {
-                a = Colour.Black;
+                a = ColourEnum.Black;
             }
             SaveGame.Screen.Print(a, c, y - PanelRowPrt, x - PanelColPrt);
         }
@@ -1202,54 +1202,54 @@ internal class Level
         SaveGame.RedrawMapFlaggedAction.Set();
     }
 
-    private Colour DimColour(Colour a)
+    private ColourEnum DimColour(ColourEnum a)
     {
         switch (a)
         {
-            case Colour.BrightBlue:
-                return Colour.Blue;
+            case ColourEnum.BrightBlue:
+                return ColourEnum.Blue;
 
-            case Colour.BrightGreen:
-                return Colour.Green;
+            case ColourEnum.BrightGreen:
+                return ColourEnum.Green;
 
-            case Colour.BrightRed:
-                return Colour.Red;
+            case ColourEnum.BrightRed:
+                return ColourEnum.Red;
 
-            case Colour.BrightWhite:
-                return Colour.White;
+            case ColourEnum.BrightWhite:
+                return ColourEnum.White;
 
-            case Colour.BrightBeige:
-                return Colour.Beige;
+            case ColourEnum.BrightBeige:
+                return ColourEnum.Beige;
 
-            case Colour.BrightChartreuse:
-                return Colour.Chartreuse;
+            case ColourEnum.BrightChartreuse:
+                return ColourEnum.Chartreuse;
 
-            case Colour.BrightGrey:
-                return Colour.Grey;
+            case ColourEnum.BrightGrey:
+                return ColourEnum.Grey;
 
-            case Colour.BrightOrange:
-                return Colour.Orange;
+            case ColourEnum.BrightOrange:
+                return ColourEnum.Orange;
 
-            case Colour.BrightYellow:
-                return Colour.Yellow;
+            case ColourEnum.BrightYellow:
+                return ColourEnum.Yellow;
 
-            case Colour.BrightBrown:
-                return Colour.Brown;
+            case ColourEnum.BrightBrown:
+                return ColourEnum.Brown;
 
-            case Colour.BrightTurquoise:
-                return Colour.Turquoise;
+            case ColourEnum.BrightTurquoise:
+                return ColourEnum.Turquoise;
 
-            case Colour.BrightPink:
-                return Colour.Pink;
+            case ColourEnum.BrightPink:
+                return ColourEnum.Pink;
 
-            case Colour.Grey:
-                return Colour.Black;
+            case ColourEnum.Grey:
+                return ColourEnum.Black;
 
-            case Colour.White:
-                return Colour.Grey;
+            case ColourEnum.White:
+                return ColourEnum.Grey;
 
-            case Colour.Yellow:
-                return Colour.BrightBrown;
+            case ColourEnum.Yellow:
+                return ColourEnum.BrightBrown;
 
             default:
                 return a;
@@ -1261,19 +1261,19 @@ internal class Level
         return Grid[y][x].FeatureType.BlocksLos;
     }
 
-    private void ImageMonster(out Colour ap, out char cp)
+    private void ImageMonster(out ColourEnum ap, out char cp)
     {
         cp = SaveGame.SingletonRepository.MonsterRaces[Program.Rng.DieRoll(SaveGame.SingletonRepository.MonsterRaces.Count - 2)].Symbol.Character;
         ap = SaveGame.SingletonRepository.MonsterRaces[Program.Rng.DieRoll(SaveGame.SingletonRepository.MonsterRaces.Count - 2)].Colour;
     }
 
-    private void ImageObject(out Colour ap, out char cp)
+    private void ImageObject(out ColourEnum ap, out char cp)
     {
         cp = SaveGame.SingletonRepository.ItemFactories[Program.Rng.DieRoll(SaveGame.SingletonRepository.ItemFactories.Count - 1)].FlavorSymbol.Character;
         ap = SaveGame.SingletonRepository.ItemFactories[Program.Rng.DieRoll(SaveGame.SingletonRepository.ItemFactories.Count - 1)].FlavorColour;
     }
 
-    private void ImageRandom(out Colour ap, out char cp)
+    private void ImageRandom(out ColourEnum ap, out char cp)
     {
         if (Program.Rng.RandomLessThan(100) < 75)
         {
@@ -1285,10 +1285,10 @@ internal class Level
         }
     }
 
-    public void MapInfo(int y, int x, out Colour ap, out char cp)
+    public void MapInfo(int y, int x, out ColourEnum ap, out char cp)
     {
         int nextOIdx;
-        Colour a;
+        ColourEnum a;
         char c;
         GridTile cPtr = Grid[y][x];
         Tile feat = cPtr.FeatureType;
@@ -1304,18 +1304,18 @@ internal class Level
                 {
                     if (SaveGame.Player.TimedBlindness.TurnsRemaining != 0)
                     {
-                        a = Colour.Black;
+                        a = ColourEnum.Black;
                     }
                     else if (cPtr.TileFlags.IsSet(GridTile.PlayerLit))
                     {
                         if (feat.YellowInTorchlight)
                         {
-                            a = Colour.BrightYellow;
+                            a = ColourEnum.BrightYellow;
                         }
                     }
                     else if (cPtr.TileFlags.IsClear(GridTile.SelfLit))
                     {
-                        a = Colour.Black;
+                        a = ColourEnum.Black;
                     }
                     else if (cPtr.TileFlags.IsClear(GridTile.IsVisible))
                     {
@@ -1342,7 +1342,7 @@ internal class Level
                         }
                         if (count != 4)
                         {
-                            a = Colour.BrightChartreuse;
+                            a = ColourEnum.BrightChartreuse;
                         }
                     }
                 }
@@ -1366,13 +1366,13 @@ internal class Level
                 {
                     if (SaveGame.Player.TimedBlindness.TurnsRemaining != 0)
                     {
-                        a = Colour.Black;
+                        a = ColourEnum.Black;
                     }
                     else if (cPtr.TileFlags.IsSet(GridTile.PlayerLit))
                     {
                         if (feat.YellowInTorchlight)
                         {
-                            a = Colour.Yellow;
+                            a = ColourEnum.Yellow;
                         }
                     }
                     else
@@ -1447,38 +1447,38 @@ internal class Level
                     }
                     if (rPtr.AttrAny)
                     {
-                        ap = (Colour)Program.Rng.DieRoll(15);
+                        ap = (ColourEnum)Program.Rng.DieRoll(15);
                     }
                     else
                     {
                         switch (Program.Rng.DieRoll(7))
                         {
                             case 1:
-                                ap = Colour.Red;
+                                ap = ColourEnum.Red;
                                 break;
 
                             case 2:
-                                ap = Colour.BrightRed;
+                                ap = ColourEnum.BrightRed;
                                 break;
 
                             case 3:
-                                ap = Colour.White;
+                                ap = ColourEnum.White;
                                 break;
 
                             case 4:
-                                ap = Colour.BrightGreen;
+                                ap = ColourEnum.BrightGreen;
                                 break;
 
                             case 5:
-                                ap = Colour.Blue;
+                                ap = ColourEnum.Blue;
                                 break;
 
                             case 6:
-                                ap = Colour.Black;
+                                ap = ColourEnum.Black;
                                 break;
 
                             case 7:
-                                ap = Colour.Green;
+                                ap = ColourEnum.Green;
                                 break;
                         }
                     }
@@ -1727,7 +1727,7 @@ internal class Level
                     } while (--curses != 0);
                 }
             }
-            SaveGame.PlaySound(SoundEffect.MonsterDies);
+            SaveGame.PlaySound(SoundEffectEnum.MonsterDies);
             if (string.IsNullOrEmpty(note) == false)
             {
                 SaveGame.MsgPrint($"{mName}{note}");

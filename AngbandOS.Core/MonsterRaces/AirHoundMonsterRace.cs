@@ -15,7 +15,7 @@ internal class AirHoundMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BreathePoisonMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperZSymbol>();
-    public override Colour Colour => Colour.BrightBlue;
+    public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "Air hound";
 
     public override bool Animal => true;

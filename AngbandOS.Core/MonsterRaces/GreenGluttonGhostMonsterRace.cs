@@ -13,7 +13,7 @@ internal class GreenGluttonGhostMonsterRace : MonsterRace
     protected GreenGluttonGhostMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperGSymbol>();
-    public override Colour Colour => Colour.Green;
+    public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "Green glutton ghost";
 
     public override int ArmourClass => 20;

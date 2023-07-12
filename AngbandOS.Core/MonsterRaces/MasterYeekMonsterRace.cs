@@ -20,7 +20,7 @@ internal class MasterYeekMonsterRace : MonsterRace
         new SummonMonsterMonsterSpell(),
         new TeleportSelfMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerYSymbol>();
-    public override Colour Colour => Colour.Green;
+    public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "Master yeek";
 
     public override bool Animal => true;

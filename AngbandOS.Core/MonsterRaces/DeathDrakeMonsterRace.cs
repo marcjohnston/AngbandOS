@@ -18,7 +18,7 @@ internal class DeathDrakeMonsterRace : MonsterRace
         new ScareMonsterSpell(),
         new SlowMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
-    public override Colour Colour => Colour.Brown;
+    public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Death drake";
 
     public override int ArmourClass => 100;

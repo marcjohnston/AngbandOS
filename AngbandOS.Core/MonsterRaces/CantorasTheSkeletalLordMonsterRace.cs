@@ -24,7 +24,7 @@ internal class CantorasTheSkeletalLordMonsterRace : MonsterRace
         new SummonHiUndeadMonsterSpell(),
         new TeleportToMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerSSymbol>();
-    public override Colour Colour => Colour.BrightBlue;
+    public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "Cantoras, the Skeletal Lord";
 
     public override int ArmourClass => 120;

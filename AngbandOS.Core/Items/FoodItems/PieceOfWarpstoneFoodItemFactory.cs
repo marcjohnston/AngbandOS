@@ -13,7 +13,7 @@ internal class PieceOfWarpstoneFoodItemFactory : FoodItemFactory
     private PieceOfWarpstoneFoodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<AsteriskSymbol>();
-    public override Colour Colour => Colour.Purple;
+    public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Piece of Warpstone";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -26,7 +26,7 @@ internal class PieceOfWarpstoneFoodItemFactory : FoodItemFactory
     public override int Weight => 1;
     public override bool Eat()
     {
-        SaveGame.PlaySound(SoundEffect.Eat);
+        SaveGame.PlaySound(SoundEffectEnum.Eat);
         SaveGame.MsgPrint("That tastes... funky.");
         SaveGame.Player.Dna.GainMutation();
         if (Program.Rng.DieRoll(3) == 1)

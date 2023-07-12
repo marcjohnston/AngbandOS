@@ -13,7 +13,7 @@ internal class DeathMoldMonsterRace : MonsterRace
     protected DeathMoldMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerMSymbol>();
-    public override Colour Colour => Colour.Black;
+    public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Death mold";
 
     public override int ArmourClass => 60;

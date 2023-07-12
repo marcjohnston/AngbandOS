@@ -12,7 +12,7 @@ internal class HatOfRegenerationRareItem : RareItem
 {
     private HatOfRegenerationRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBraceSymbol>();
-    public override Colour Colour => Colour.Brown;
+    public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Hat of Regeneration";
     public override int Cost => 1500;
     public override string FriendlyName => "of Regeneration";

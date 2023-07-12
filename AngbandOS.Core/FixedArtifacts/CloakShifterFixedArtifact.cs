@@ -27,7 +27,7 @@ internal class CloakShifterFixedArtifact : FixedArtifact, IFixedArtifactActivati
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenParenthesisSymbol>();
-    public override Colour Colour => Colour.Green;
+    public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "The Cloak 'Shifter'";
     public override int Ac => 1;
     public override bool Activate => true;

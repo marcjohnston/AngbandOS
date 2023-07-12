@@ -23,7 +23,7 @@ internal class FatherDagonMonsterRace : MonsterRace
         new TeleportToMonsterSpell(),
         new TeleportSelfMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperXSymbol>();
-    public override Colour Colour => Colour.BrightChartreuse;
+    public override ColourEnum Colour => ColourEnum.BrightChartreuse;
     public override string Name => "Father Dagon";
 
     public override int ArmourClass => 50;

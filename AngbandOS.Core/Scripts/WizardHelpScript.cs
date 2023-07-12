@@ -20,9 +20,9 @@ namespace AngbandOS.Core.Scripts
             {
                 SaveGame.UpdateScreen();
                 SaveGame.Screen.Clear();
-                SaveGame.SetBackground(BackgroundImage.Normal);
-                SaveGame.Screen.Print(Colour.Red, "Wizard Commands", 1, 31);
-                SaveGame.Screen.Print(Colour.Red, "===============", 2, 31);
+                SaveGame.SetBackground(BackgroundImageEnum.Normal);
+                SaveGame.Screen.Print(ColourEnum.Red, "Wizard Commands", 1, 31);
+                SaveGame.Screen.Print(ColourEnum.Red, "===============", 2, 31);
 
                 List<IHelpCommand> allCommands = new List<IHelpCommand>();
                 foreach (IHelpCommand command in SaveGame.SingletonRepository.WizardCommands)
@@ -53,12 +53,12 @@ namespace AngbandOS.Core.Scripts
                         .ToList();
 
                     ConsoleCard card = new ConsoleCard();
-                    card.Print(0, 0, Colour.Red, helpGroup.Title);
-                    card.Print(0, 1, Colour.Red, new string('=', helpGroup.Title.Length));
+                    card.Print(0, 0, ColourEnum.Red, helpGroup.Title);
+                    card.Print(0, 1, ColourEnum.Red, new string('=', helpGroup.Title.Length));
                     int row = 3;
                     foreach (IHelpCommand command in groupCommands)
                     {
-                        card.Print(0, row, Colour.White, $"{command.Key} = {command.HelpDescription}");
+                        card.Print(0, row, ColourEnum.White, $"{command.Key} = {command.HelpDescription}");
                         row++;
                     }
                     consoleGrid.AddCard(card);
@@ -70,7 +70,7 @@ namespace AngbandOS.Core.Scripts
             finally
             {
                 SaveGame.Screen.Restore(savedScreen);
-                SaveGame.SetBackground(BackgroundImage.Overhead);
+                SaveGame.SetBackground(BackgroundImageEnum.Overhead);
                 SaveGame.FullScreenOverlay = false;
             }
 

@@ -15,7 +15,7 @@ internal class ShriekerMushroomPatchMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new ShriekMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CommaSymbol>();
-    public override Colour Colour => Colour.BrightRed;
+    public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Shrieker mushroom patch";
 
     public override int ArmourClass => 1;

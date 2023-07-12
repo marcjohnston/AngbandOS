@@ -13,7 +13,7 @@ internal class ChestRuined : ChestItemClass
     private ChestRuined(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<TildeSymbol>();
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Ruined chest";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

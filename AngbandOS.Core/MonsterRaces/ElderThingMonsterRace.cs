@@ -22,7 +22,7 @@ internal class ElderThingMonsterRace : MonsterRace
         new SummonUndeadMonsterSpell(),
         new TeleportAwayMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperASymbol>();
-    public override Colour Colour => Colour.Purple;
+    public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Elder thing";
 
     public override int ArmourClass => 70;

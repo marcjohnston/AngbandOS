@@ -15,7 +15,7 @@ internal class FireVampireMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BlinkMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperASymbol>();
-    public override Colour Colour => Colour.Red;
+    public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Fire vampire";
 
     public override int ArmourClass => 6;

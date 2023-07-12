@@ -13,7 +13,7 @@ internal class EogGolemMonsterRace : MonsterRace
     protected EogGolemMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerGSymbol>();
-    public override Colour Colour => Colour.BrightRed;
+    public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Eog golem";
 
     public override int ArmourClass => 125;

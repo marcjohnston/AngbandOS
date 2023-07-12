@@ -13,7 +13,7 @@ internal class GrendelMonsterRace : MonsterRace
     protected GrendelMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperOSymbol>();
-    public override Colour Colour => Colour.Green;
+    public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "Grendel";
 
     public override int ArmourClass => 100;

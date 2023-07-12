@@ -13,7 +13,7 @@ internal class SmeagolMonsterRace : MonsterRace
     protected SmeagolMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
-    public override Colour Colour => Colour.Beige;
+    public override ColourEnum Colour => ColourEnum.Beige;
     public override string Name => "Smeagol";
 
     public override int ArmourClass => 12;

@@ -15,7 +15,7 @@ internal class NexusHoundMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new BreatheNexusMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperZSymbol>();
-    public override Colour Colour => Colour.Pink;
+    public override ColourEnum Colour => ColourEnum.Pink;
     public override string Name => "Nexus hound";
 
     public override bool Animal => true;

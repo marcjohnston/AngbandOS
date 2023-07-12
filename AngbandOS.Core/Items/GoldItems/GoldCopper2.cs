@@ -13,7 +13,7 @@ internal class GoldCopper2 : GoldItemClass
     private GoldCopper2(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<DollarSignSymbol>();
-    public override Colour Colour => Colour.Copper;
+    public override ColourEnum Colour => ColourEnum.Copper;
     public override string Name => "copper**";
 
     public override int Cost => 5;

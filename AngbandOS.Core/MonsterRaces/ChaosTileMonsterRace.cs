@@ -20,7 +20,7 @@ internal class ChaosTileMonsterRace : MonsterRace
         new BlinkMonsterSpell(),
         new SummonMonsterMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PeriodSymbol>();
-    public override Colour Colour => Colour.Purple;
+    public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Chaos tile";
 
     public override int ArmourClass => 60;

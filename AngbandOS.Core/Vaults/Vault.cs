@@ -21,7 +21,7 @@ internal abstract class Vault
     /// </summary>
     public abstract Symbol Symbol { get; }
 
-    public virtual Colour Colour => Colour.White;
+    public virtual ColourEnum Colour => ColourEnum.White;
     public abstract string Name { get; }
     public abstract int Category { get; }
     public abstract int Height { get; }

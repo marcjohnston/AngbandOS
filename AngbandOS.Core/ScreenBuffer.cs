@@ -16,7 +16,7 @@ internal class ScreenBuffer
     /// <summary>
     /// Array of color data for the entire screen.
     /// </summary>
-    public readonly Colour[] Va;
+    public readonly ColourEnum[] Va;
 
     /// <summary>
     /// Array of character data for the entire screen.
@@ -40,7 +40,7 @@ internal class ScreenBuffer
 
     public ScreenBuffer(int width, int height)
     {
-        Va = new Colour[width * height];
+        Va = new ColourEnum[width * height];
         Vc = new char[width * height];
     }
 }

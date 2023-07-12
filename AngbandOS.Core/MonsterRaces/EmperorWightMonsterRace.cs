@@ -18,7 +18,7 @@ internal class EmperorWightMonsterRace : MonsterRace
         new NetherBoltMonsterSpell(),
         new ScareMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperWSymbol>();
-    public override Colour Colour => Colour.Yellow;
+    public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "Emperor wight";
 
     public override int ArmourClass => 40;

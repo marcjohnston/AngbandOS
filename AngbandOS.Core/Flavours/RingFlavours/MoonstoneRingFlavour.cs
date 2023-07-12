@@ -12,6 +12,6 @@ internal class MoonstoneRingFlavour : RingFlavour
 {
     private MoonstoneRingFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<EqualSignSymbol>();
-    public override Colour Colour => Colour.Beige;
+    public override ColourEnum Colour => ColourEnum.Beige;
     public override string Name => "Moonstone";
 }

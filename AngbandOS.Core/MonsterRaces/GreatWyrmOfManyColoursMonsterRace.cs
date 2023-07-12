@@ -22,7 +22,7 @@ internal class GreatWyrmOfManyColoursMonsterRace : MonsterRace
         new ConfuseMonsterSpell(),
         new ScareMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
-    public override Colour Colour => Colour.Purple;
+    public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Great Wyrm of Many Colours";
 
     public override int ArmourClass => 170;

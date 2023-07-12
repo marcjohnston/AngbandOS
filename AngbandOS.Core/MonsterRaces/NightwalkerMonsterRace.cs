@@ -21,7 +21,7 @@ internal class NightwalkerMonsterRace : MonsterRace
         new ScareMonsterSpell(),
         new SummonUndeadMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerZSymbol>();
-    public override Colour Colour => Colour.Black;
+    public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Nightwalker";
 
     public override int ArmourClass => 175;

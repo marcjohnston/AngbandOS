@@ -20,7 +20,7 @@ internal class MindFlayerMonsterRace : MonsterRace
         new ScareMonsterSpell(),
         new ForgetMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
-    public override Colour Colour => Colour.Pink;
+    public override ColourEnum Colour => ColourEnum.Pink;
     public override string Name => "Mind flayer";
 
     public override int ArmourClass => 60;

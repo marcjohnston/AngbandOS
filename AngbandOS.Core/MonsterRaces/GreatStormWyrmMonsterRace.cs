@@ -18,7 +18,7 @@ internal class GreatStormWyrmMonsterRace : MonsterRace
         new ConfuseMonsterSpell(),
         new ScareMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
-    public override Colour Colour => Colour.BrightTurquoise;
+    public override ColourEnum Colour => ColourEnum.BrightTurquoise;
     public override string Name => "Great storm wyrm";
 
     public override int ArmourClass => 150;

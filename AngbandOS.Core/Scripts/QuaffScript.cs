@@ -29,7 +29,7 @@ namespace AngbandOS.Core.Scripts
                 SaveGame.MsgPrint("That is not a potion!");
                 return false;
             }
-            SaveGame.PlaySound(SoundEffect.Quaff);
+            SaveGame.PlaySound(SoundEffectEnum.Quaff);
             // Drinking a potion costs a whole turn
             SaveGame.EnergyUse = 100;
             int itemLevel = item.Factory.Level;

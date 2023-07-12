@@ -23,25 +23,25 @@ internal class RedrawManaFlaggedAction : FlaggedAction
         }
         SaveGame.Screen.Print("Max SP ", RowMaxsp, ColMaxsp);
         string tmp = SaveGame.Player.MaxMana.ToString().PadLeft(5);
-        Colour colour = Colour.BrightGreen;
+        ColourEnum colour = ColourEnum.BrightGreen;
         SaveGame.Screen.Print(colour, tmp, RowMaxsp, ColMaxsp + 7);
         SaveGame.Screen.Print("Cur SP ", RowCursp, ColCursp);
         tmp = SaveGame.Player.Mana.ToString().PadLeft(5);
         if (SaveGame.Player.Mana >= SaveGame.Player.MaxMana)
         {
-            colour = Colour.BrightGreen;
+            colour = ColourEnum.BrightGreen;
         }
         else if (SaveGame.Player.Mana > SaveGame.Player.MaxMana * Constants.HitpointWarn / 5)
         {
-            colour = Colour.BrightYellow;
+            colour = ColourEnum.BrightYellow;
         }
         else if (SaveGame.Player.Mana > SaveGame.Player.MaxMana * Constants.HitpointWarn / 10)
         {
-            colour = Colour.Orange;
+            colour = ColourEnum.Orange;
         }
         else
         {
-            colour = Colour.BrightRed;
+            colour = ColourEnum.BrightRed;
         }
         SaveGame.Screen.Print(colour, tmp, RowCursp, ColCursp + 7);
     }

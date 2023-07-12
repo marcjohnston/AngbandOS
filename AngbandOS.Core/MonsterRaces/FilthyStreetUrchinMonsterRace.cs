@@ -13,7 +13,7 @@ internal class FilthyStreetUrchinMonsterRace : MonsterRace
     protected FilthyStreetUrchinMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerTSymbol>();
-    public override Colour Colour => Colour.BrightGrey;
+    public override ColourEnum Colour => ColourEnum.BrightGrey;
     public override string Name => "Filthy street urchin";
 
     public override int ArmourClass => 1;

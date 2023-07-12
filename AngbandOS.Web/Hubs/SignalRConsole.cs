@@ -170,7 +170,7 @@ namespace AngbandOS.Web.Hubs
                 gameHub.Clear();
         }
 
-        public void PlayMusic(MusicTrack music)
+        public void PlayMusic(MusicTrackEnum music)
         {
             // Forward the play music command from the game to the signal-r hub.
             _consoleGameHub.PlayMusic(music);
@@ -180,7 +180,7 @@ namespace AngbandOS.Web.Hubs
                 gameHub.PlayMusic(music);
         }
 
-        public void PlaySound(SoundEffect sound)
+        public void PlaySound(SoundEffectEnum sound)
         {
             // Forward the play sound command from the game to the signal-r hub.
             _consoleGameHub.PlaySound(sound);
@@ -200,7 +200,7 @@ namespace AngbandOS.Web.Hubs
                 spectatorHub.BatchPrint(printLines);
         }
 
-        public void SetBackground(BackgroundImage image)
+        public void SetBackground(BackgroundImageEnum image)
         {
             // Forward the set background command from the game to the signal-r hub.
             _consoleGameHub.SetBackground(image);

@@ -15,7 +15,7 @@ internal class WildManMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new Arrow1D6MonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
-    public override Colour Colour => Colour.BrightGreen;
+    public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Wild man";
 
     public override int ArmourClass => 10;

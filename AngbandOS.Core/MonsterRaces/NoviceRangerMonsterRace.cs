@@ -15,7 +15,7 @@ internal class NoviceRangerMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new Arrow3D6MonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
-    public override Colour Colour => Colour.Green;
+    public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "Novice ranger";
 
     public override int ArmourClass => 6;

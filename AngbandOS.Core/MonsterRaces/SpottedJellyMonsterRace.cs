@@ -13,7 +13,7 @@ internal class SpottedJellyMonsterRace : MonsterRace
     protected SpottedJellyMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerJSymbol>();
-    public override Colour Colour => Colour.BrightPink;
+    public override ColourEnum Colour => ColourEnum.BrightPink;
     public override string Name => "Spotted jelly";
 
     public override int ArmourClass => 18;

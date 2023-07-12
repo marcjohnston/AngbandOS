@@ -13,7 +13,7 @@ internal class DiggingShovel : DiggingItemClass
     private DiggingShovel(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<BackSlashSymbol>();
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Shovel";
 
     public override int[] Chance => new int[] { 16, 0, 0, 0 };

@@ -67,7 +67,7 @@ namespace AngbandOS.Core.Scripts
                 item.IdentEmpty = true;
                 return false;
             }
-            SaveGame.PlaySound(SoundEffect.UseStaff);
+            SaveGame.PlaySound(SoundEffectEnum.UseStaff);
             UseStaffEvent useStaffEventArgs = new UseStaffEvent(SaveGame);
 
             // Do the specific effect for the type of staff

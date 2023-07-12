@@ -20,7 +20,7 @@ internal class AlberichTheNibelungKingMonsterRace : MonsterRace
         new SummonMonsterMonsterSpell(),
         new TeleportSelfMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
-    public override Colour Colour => Colour.Gold;
+    public override ColourEnum Colour => ColourEnum.Gold;
     public override string Name => "Alberich, the Nibelung King";
 
     public override int ArmourClass => 80;

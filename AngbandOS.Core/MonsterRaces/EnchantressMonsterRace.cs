@@ -16,7 +16,7 @@ internal class EnchantressMonsterRace : MonsterRace
         new BlindnessMonsterSpell(),
         new SummonDragonMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
-    public override Colour Colour => Colour.Yellow;
+    public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "Enchantress";
 
     public override int ArmourClass => 60;

@@ -22,5 +22,5 @@ internal abstract class ChestItemClass : ItemFactory
     public override int PackSort => 36;
     public abstract int NumberOfItemsContained { get; }
 
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
 }

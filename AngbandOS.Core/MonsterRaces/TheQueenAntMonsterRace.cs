@@ -15,7 +15,7 @@ internal class TheQueenAntMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new SummonAntMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerASymbol>();
-    public override Colour Colour => Colour.Gold;
+    public override ColourEnum Colour => ColourEnum.Gold;
     public override string Name => "The Queen Ant";
 
     public override bool Animal => true;

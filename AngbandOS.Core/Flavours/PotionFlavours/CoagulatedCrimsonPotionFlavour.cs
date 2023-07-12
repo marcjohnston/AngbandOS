@@ -12,6 +12,6 @@ internal class CoagulatedCrimsonPotionFlavour : PotionFlavour
 {
     private CoagulatedCrimsonPotionFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ExclamationPointSymbol>();
-    public override Colour Colour => Colour.BrightRed;
+    public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Coagulated Crimson";
 }

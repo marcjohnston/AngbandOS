@@ -13,7 +13,7 @@ internal class DiggingOrcishPick : DiggingItemClass
     private DiggingOrcishPick(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<BackSlashSymbol>();
-    public override Colour Colour => Colour.Green;
+    public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "Orcish Pick";
 
     public override int[] Chance => new int[] { 4, 0, 0, 0 };

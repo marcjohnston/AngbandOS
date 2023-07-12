@@ -13,7 +13,7 @@ internal class SingingHappyDrunkMonsterRace : MonsterRace
     protected SingingHappyDrunkMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerTSymbol>();
-    public override Colour Colour => Colour.Yellow;
+    public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "Singing, happy drunk";
 
     public override int ArmourClass => 1;

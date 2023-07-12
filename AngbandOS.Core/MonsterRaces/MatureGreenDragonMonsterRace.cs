@@ -16,7 +16,7 @@ internal class MatureGreenDragonMonsterRace : MonsterRace
         new BreathePoisonMonsterSpell(),
         new ScareMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
-    public override Colour Colour => Colour.Green;
+    public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "Mature green dragon";
 
     public override int ArmourClass => 70;

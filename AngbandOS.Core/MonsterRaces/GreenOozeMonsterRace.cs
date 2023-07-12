@@ -13,7 +13,7 @@ internal class GreenOozeMonsterRace : MonsterRace
     protected GreenOozeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerJSymbol>();
-    public override Colour Colour => Colour.BrightGreen;
+    public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Green ooze";
 
     public override int ArmourClass => 16;

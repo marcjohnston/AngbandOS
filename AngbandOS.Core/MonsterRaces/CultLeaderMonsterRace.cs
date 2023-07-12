@@ -22,7 +22,7 @@ internal class CultLeaderMonsterRace : MonsterRace
         new SummonMonsterMonsterSpell(),
         new SummonUndeadMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
-    public override Colour Colour => Colour.BrightTurquoise;
+    public override ColourEnum Colour => ColourEnum.BrightTurquoise;
     public override string Name => "Cult leader";
 
     public override int ArmourClass => 60;

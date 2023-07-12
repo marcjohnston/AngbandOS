@@ -1,6 +1,6 @@
 ﻿namespace AngbandOS.Core.Interface;
 
-public enum BackgroundImage
+public enum BackgroundImageEnum
 {
     None,
     Splash,

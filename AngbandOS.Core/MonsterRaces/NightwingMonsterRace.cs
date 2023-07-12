@@ -22,7 +22,7 @@ internal class NightwingMonsterRace : MonsterRace
         new ScareMonsterSpell(),
         new SummonUndeadMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerZSymbol>();
-    public override Colour Colour => Colour.Black;
+    public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Nightwing";
 
     public override int ArmourClass => 120;

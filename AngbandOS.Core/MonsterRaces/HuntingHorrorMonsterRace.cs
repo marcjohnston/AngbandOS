@@ -18,7 +18,7 @@ internal class HuntingHorrorMonsterRace : MonsterRace
         new ConfuseMonsterSpell(),
         new SummonCthuloidMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperUSymbol>();
-    public override Colour Colour => Colour.Black;
+    public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Hunting horror";
 
     public override int ArmourClass => 90;

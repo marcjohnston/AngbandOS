@@ -19,7 +19,7 @@ internal class ShadowCloakOfTheShoggothFixedArtifact : FixedArtifact
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenParenthesisSymbol>();
-    public override Colour Colour => Colour.Black;
+    public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "The Shadow Cloak of the Shoggoth";
     public override int Ac => 6;
     public override int Cost => 35000;

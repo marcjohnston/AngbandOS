@@ -146,20 +146,20 @@ namespace AngbandOS.Core.Scripts
                 // If they've been drained, make them visually distinct
                 if (SaveGame.Player.AbilityScores[i].Innate < SaveGame.Player.AbilityScores[i].InnateMax)
                 {
-                    SaveGame.Screen.Print(Colour.Blue, Constants.StatNamesReduced[i], 14 + i, 1);
+                    SaveGame.Screen.Print(ColourEnum.Blue, Constants.StatNamesReduced[i], 14 + i, 1);
                     int value = SaveGame.Player.AbilityScores[i].Adjusted;
                     buf = value.StatToString();
-                    SaveGame.Screen.Print(Colour.Grey, buf, 14 + i, 6);
+                    SaveGame.Screen.Print(ColourEnum.Grey, buf, 14 + i, 6);
                     buf = AbilitySummary(i);
-                    SaveGame.Screen.Print(Colour.Grey, buf, i + 14, 13);
+                    SaveGame.Screen.Print(ColourEnum.Grey, buf, i + 14, 13);
                 }
                 else
                 {
-                    SaveGame.Screen.Print(Colour.Blue, Constants.StatNames[i], 14 + i, 1);
+                    SaveGame.Screen.Print(ColourEnum.Blue, Constants.StatNames[i], 14 + i, 1);
                     buf = SaveGame.Player.AbilityScores[i].Adjusted.StatToString();
-                    SaveGame.Screen.Print(Colour.Green, buf, 14 + i, 6);
+                    SaveGame.Screen.Print(ColourEnum.Green, buf, 14 + i, 6);
                     buf = AbilitySummary(i);
-                    SaveGame.Screen.Print(Colour.Green, buf, i + 14, 13);
+                    SaveGame.Screen.Print(ColourEnum.Green, buf, i + 14, 13);
                 }
             }
         }
@@ -169,7 +169,7 @@ namespace AngbandOS.Core.Scripts
             if (hasSustain)
             {
                 // Sustains show a green 's'
-                SaveGame.Screen.Print(Colour.Green, "s", row, col);
+                SaveGame.Screen.Print(ColourEnum.Green, "s", row, col);
             }
             else if (hasStat)
             {
@@ -177,28 +177,28 @@ namespace AngbandOS.Core.Scripts
                 if (typeSpecificValue <= -10)
                 {
                     // Max display for negative value
-                    SaveGame.Screen.Print(Colour.Red, "*", row, col);
+                    SaveGame.Screen.Print(ColourEnum.Red, "*", row, col);
                 }
                 else if (typeSpecificValue < 0)
                 {
                     // Display negative value
-                    SaveGame.Screen.Print(Colour.Red, (char)('0' - (char)typeSpecificValue), row, col);
+                    SaveGame.Screen.Print(ColourEnum.Red, (char)('0' - (char)typeSpecificValue), row, col);
                 }
                 else if (typeSpecificValue >= 10)
                 {
                     // Display max 
-                    SaveGame.Screen.Print(Colour.Green, "*", row, col);
+                    SaveGame.Screen.Print(ColourEnum.Green, "*", row, col);
                 }
                 else if (typeSpecificValue > 0)
                 {
                     // Display positive value
-                    SaveGame.Screen.Print(Colour.Green, (char)('0' + (char)typeSpecificValue), row, col);
+                    SaveGame.Screen.Print(ColourEnum.Green, (char)('0' + (char)typeSpecificValue), row, col);
                 }
             }
             else
             {
                 // Display neutral
-                SaveGame.Screen.Print(Colour.Grey, ".", row, col);
+                SaveGame.Screen.Print(ColourEnum.Grey, ".", row, col);
             }
         }
 
@@ -209,10 +209,10 @@ namespace AngbandOS.Core.Scripts
         {
             const int statCol = 1;
             const int row = 22;
-            SaveGame.Screen.Print(Colour.Purple, "Initial", row - 1, statCol + 5);
-            SaveGame.Screen.Print(Colour.Brown, "Race Class Mods", row - 1, statCol + 13);
-            SaveGame.Screen.Print(Colour.Green, "Actual", row - 1, statCol + 29);
-            SaveGame.Screen.Print(Colour.Red, "Reduced", row - 1, statCol + 36);
+            SaveGame.Screen.Print(ColourEnum.Purple, "Initial", row - 1, statCol + 5);
+            SaveGame.Screen.Print(ColourEnum.Brown, "Race Class Mods", row - 1, statCol + 13);
+            SaveGame.Screen.Print(ColourEnum.Green, "Actual", row - 1, statCol + 29);
+            SaveGame.Screen.Print(ColourEnum.Red, "Reduced", row - 1, statCol + 36);
             // Loop through the scores
             for (int i = 0; i < 6; i++)
             {
@@ -238,28 +238,28 @@ namespace AngbandOS.Core.Scripts
                 equipmentBonuses -= SaveGame.Player.Race.AbilityBonus[i];
                 equipmentBonuses -= SaveGame.Player.BaseCharacterClass.AbilityBonus[i];
                 // Print each of the scores and bonuses
-                SaveGame.Screen.Print(Colour.Blue, Constants.StatNames[i], row + i, statCol);
+                SaveGame.Screen.Print(ColourEnum.Blue, Constants.StatNames[i], row + i, statCol);
                 string buf = SaveGame.Player.AbilityScores[i].InnateMax.StatToString();
-                SaveGame.Screen.Print(Colour.Purple, buf, row + i, statCol + 4);
+                SaveGame.Screen.Print(ColourEnum.Purple, buf, row + i, statCol + 4);
                 buf = SaveGame.Player.Race.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
-                SaveGame.Screen.Print(Colour.Brown, buf, row + i, statCol + 13);
+                SaveGame.Screen.Print(ColourEnum.Brown, buf, row + i, statCol + 13);
                 buf = SaveGame.Player.BaseCharacterClass.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
-                SaveGame.Screen.Print(Colour.Brown, buf, row + i, statCol + 19);
+                SaveGame.Screen.Print(ColourEnum.Brown, buf, row + i, statCol + 19);
                 buf = equipmentBonuses.ToString("+0;-0;+0").PadLeft(3);
-                SaveGame.Screen.Print(Colour.Brown, buf, row + i, statCol + 24);
+                SaveGame.Screen.Print(ColourEnum.Brown, buf, row + i, statCol + 24);
                 buf = SaveGame.Player.AbilityScores[i].AdjustedMax.StatToString();
-                SaveGame.Screen.Print(Colour.Green, buf, row + i, statCol + 27);
+                SaveGame.Screen.Print(ColourEnum.Green, buf, row + i, statCol + 27);
                 if (SaveGame.Player.AbilityScores[i].Adjusted < SaveGame.Player.AbilityScores[i].AdjustedMax)
                 {
                     buf = SaveGame.Player.AbilityScores[i].Adjusted.StatToString();
-                    SaveGame.Screen.Print(Colour.Red, buf, row + i, statCol + 35);
+                    SaveGame.Screen.Print(ColourEnum.Red, buf, row + i, statCol + 35);
                 }
             }
 
             // Print the bonuses for each score and each item we have
             int col = statCol + 44;
-            SaveGame.Screen.Print(Colour.Blue, "abcdefghijklm@", row - 1, col);
-            SaveGame.Screen.Print(Colour.Blue, "Modifications", row + 6, col);
+            SaveGame.Screen.Print(ColourEnum.Blue, "abcdefghijklm@", row - 1, col);
+            SaveGame.Screen.Print(ColourEnum.Blue, "Modifications", row + 6, col);
             foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsEquipment))
             {
                 foreach (int i in inventorySlot.InventorySlots)
@@ -300,14 +300,14 @@ namespace AngbandOS.Core.Scripts
 
         private void DisplayPlayerStatWithModification(int extraModifier, bool isSet, int row, int col)
         {
-            Colour a = Colour.Grey;
+            ColourEnum a = ColourEnum.Grey;
             char c = '.';
             if (extraModifier != 0)
             {
                 c = '*';
                 if (extraModifier > 0)
                 {
-                    a = Colour.Green;
+                    a = ColourEnum.Green;
                     if (extraModifier < 10)
                     {
                         c = (char)('0' + (char)extraModifier);
@@ -315,7 +315,7 @@ namespace AngbandOS.Core.Scripts
                 }
                 if (extraModifier < 0)
                 {
-                    a = Colour.Red;
+                    a = ColourEnum.Red;
                     if (extraModifier < 10)
                     {
                         c = (char)('0' - (char)extraModifier);
@@ -324,7 +324,7 @@ namespace AngbandOS.Core.Scripts
             }
             if (isSet)
             {
-                a = Colour.Green;
+                a = ColourEnum.Green;
                 c = 's';
             }
             SaveGame.Screen.Print(a, c, row, col);
@@ -346,53 +346,53 @@ namespace AngbandOS.Core.Scripts
                 showTodam += item.BonusDamage;
             }
             // Print some basics
-            PrintBonus("+ To Hit    ", showTohit, 30, 1, Colour.Brown);
-            PrintBonus("+ To Damage ", showTodam, 31, 1, Colour.Brown);
-            PrintBonus("+ To AC     ", SaveGame.Player.DisplayedArmourClassBonus, 32, 1, Colour.Brown);
-            PrintShortScore("  Base AC   ", SaveGame.Player.DisplayedBaseArmourClass, 33, 1, Colour.Brown);
-            PrintShortScore("Level      ", SaveGame.Player.Level, 30, 28, Colour.Green);
+            PrintBonus("+ To Hit    ", showTohit, 30, 1, ColourEnum.Brown);
+            PrintBonus("+ To Damage ", showTodam, 31, 1, ColourEnum.Brown);
+            PrintBonus("+ To AC     ", SaveGame.Player.DisplayedArmourClassBonus, 32, 1, ColourEnum.Brown);
+            PrintShortScore("  Base AC   ", SaveGame.Player.DisplayedBaseArmourClass, 33, 1, ColourEnum.Brown);
+            PrintShortScore("Level      ", SaveGame.Player.Level, 30, 28, ColourEnum.Green);
             PrintLongScore("Experience ", SaveGame.Player.ExperiencePoints, 31, 28,
-                SaveGame.Player.ExperiencePoints >= SaveGame.Player.MaxExperienceGained ? Colour.Green : Colour.Red);
-            PrintLongScore("Max Exp    ", SaveGame.Player.MaxExperienceGained, 32, 28, Colour.Green);
+                SaveGame.Player.ExperiencePoints >= SaveGame.Player.MaxExperienceGained ? ColourEnum.Green : ColourEnum.Red);
+            PrintLongScore("Max Exp    ", SaveGame.Player.MaxExperienceGained, 32, 28, ColourEnum.Green);
             // If we're max level we don't have any experience to advance
             if (SaveGame.Player.Level >= Constants.PyMaxLevel)
             {
-                SaveGame.Screen.Print(Colour.Blue, "Exp to Adv.", 33, 28);
-                SaveGame.Screen.Print(Colour.Green, "    *****", 33, 28 + 11);
+                SaveGame.Screen.Print(ColourEnum.Blue, "Exp to Adv.", 33, 28);
+                SaveGame.Screen.Print(ColourEnum.Green, "    *****", 33, 28 + 11);
             }
             else
             {
                 PrintLongScore("Exp to Adv.", (int)(Constants.PlayerExp[SaveGame.Player.Level - 1] * SaveGame.Player.ExperienceMultiplier / 100L), 33, 28,
-                    Colour.Green);
+                    ColourEnum.Green);
             }
-            PrintLongScore("Exp Factor ", SaveGame.Player.ExperienceMultiplier, 34, 28, Colour.Green);
-            PrintShortScore("Max Hit Points ", SaveGame.Player.MaxHealth, 30, 52, Colour.Green);
+            PrintLongScore("Exp Factor ", SaveGame.Player.ExperienceMultiplier, 34, 28, ColourEnum.Green);
+            PrintShortScore("Max Hit Points ", SaveGame.Player.MaxHealth, 30, 52, ColourEnum.Green);
             if (SaveGame.Player.Health >= SaveGame.Player.MaxHealth)
             {
-                PrintShortScore("Cur Hit Points ", SaveGame.Player.Health, 31, 52, Colour.Green);
+                PrintShortScore("Cur Hit Points ", SaveGame.Player.Health, 31, 52, ColourEnum.Green);
             }
             else if (SaveGame.Player.Health > SaveGame.Player.MaxHealth * Constants.HitpointWarn / 10)
             {
-                PrintShortScore("Cur Hit Points ", SaveGame.Player.Health, 31, 52, Colour.BrightYellow);
+                PrintShortScore("Cur Hit Points ", SaveGame.Player.Health, 31, 52, ColourEnum.BrightYellow);
             }
             else
             {
-                PrintShortScore("Cur Hit Points ", SaveGame.Player.Health, 31, 52, Colour.BrightRed);
+                PrintShortScore("Cur Hit Points ", SaveGame.Player.Health, 31, 52, ColourEnum.BrightRed);
             }
-            PrintShortScore("Max SP (Mana)  ", SaveGame.Player.MaxMana, 32, 52, Colour.Green);
+            PrintShortScore("Max SP (Mana)  ", SaveGame.Player.MaxMana, 32, 52, ColourEnum.Green);
             if (SaveGame.Player.Mana >= SaveGame.Player.MaxMana)
             {
-                PrintShortScore("Cur SP (Mana)  ", SaveGame.Player.Mana, 33, 52, Colour.Green);
+                PrintShortScore("Cur SP (Mana)  ", SaveGame.Player.Mana, 33, 52, ColourEnum.Green);
             }
             else if (SaveGame.Player.Mana > SaveGame.Player.MaxMana * Constants.HitpointWarn / 10)
             {
-                PrintShortScore("Cur SP (Mana)  ", SaveGame.Player.Mana, 33, 52, Colour.BrightYellow);
+                PrintShortScore("Cur SP (Mana)  ", SaveGame.Player.Mana, 33, 52, ColourEnum.BrightYellow);
             }
             else
             {
-                PrintShortScore("Cur SP (Mana)  ", SaveGame.Player.Mana, 33, 52, Colour.BrightRed);
+                PrintShortScore("Cur SP (Mana)  ", SaveGame.Player.Mana, 33, 52, ColourEnum.BrightRed);
             }
-            PrintLongScore("Gold           ", SaveGame.Player.Gold, 34, 52, Colour.Green);
+            PrintLongScore("Gold           ", SaveGame.Player.Gold, 34, 52, ColourEnum.Green);
         }
 
         /// <summary>
@@ -402,7 +402,7 @@ namespace AngbandOS.Core.Scripts
         {
             for (int i = 0; i < 4; i++)
             {
-                SaveGame.Screen.Print(Colour.Brown, SaveGame.Player.History[i], i + 9, 10);
+                SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.Player.History[i], i + 9, 10);
             }
         }
 
@@ -447,25 +447,25 @@ namespace AngbandOS.Core.Scripts
             int stealth = SaveGame.Player.SkillStealth;
             int searching = SaveGame.Player.SkillSearching;
             int searchFrequency = SaveGame.Player.SkillSearchFrequency;
-            SaveGame.Screen.Print(Colour.Blue, "Fighting    :", 36, 1);
+            SaveGame.Screen.Print(ColourEnum.Blue, "Fighting    :", 36, 1);
             PrintCategorisedNumber(fighting, 12, 36, 15);
-            SaveGame.Screen.Print(Colour.Blue, "Shooting    :", 37, 1);
+            SaveGame.Screen.Print(ColourEnum.Blue, "Shooting    :", 37, 1);
             PrintCategorisedNumber(shooting, 12, 37, 15);
-            SaveGame.Screen.Print(Colour.Blue, "Saving Throw:", 38, 1);
+            SaveGame.Screen.Print(ColourEnum.Blue, "Saving Throw:", 38, 1);
             PrintCategorisedNumber(savingThrow, 6, 38, 15);
-            SaveGame.Screen.Print(Colour.Blue, "Stealth     :", 39, 1);
+            SaveGame.Screen.Print(ColourEnum.Blue, "Stealth     :", 39, 1);
             PrintCategorisedNumber(stealth, 1, 39, 15);
-            SaveGame.Screen.Print(Colour.Blue, "Perception  :", 36, 28);
+            SaveGame.Screen.Print(ColourEnum.Blue, "Perception  :", 36, 28);
             PrintCategorisedNumber(searchFrequency, 6, 36, 42);
-            SaveGame.Screen.Print(Colour.Blue, "Searching   :", 37, 28);
+            SaveGame.Screen.Print(ColourEnum.Blue, "Searching   :", 37, 28);
             PrintCategorisedNumber(searching, 6, 37, 42);
-            SaveGame.Screen.Print(Colour.Blue, "Disarming   :", 38, 28);
+            SaveGame.Screen.Print(ColourEnum.Blue, "Disarming   :", 38, 28);
             PrintCategorisedNumber(disarmTraps, 8, 38, 42);
-            SaveGame.Screen.Print(Colour.Blue, "Magic Device:", 39, 28);
+            SaveGame.Screen.Print(ColourEnum.Blue, "Magic Device:", 39, 28);
             PrintCategorisedNumber(useDevice, 6, 39, 42);
-            SaveGame.Screen.Print(Colour.Blue, "Blows/Action:", 36, 55);
-            SaveGame.Screen.Print(Colour.Green, $"{SaveGame.Player.MeleeAttacksPerRound}", 36, 69);
-            SaveGame.Screen.Print(Colour.Blue, "Tot.Dmg./Act:", 37, 55);
+            SaveGame.Screen.Print(ColourEnum.Blue, "Blows/Action:", 36, 55);
+            SaveGame.Screen.Print(ColourEnum.Green, $"{SaveGame.Player.MeleeAttacksPerRound}", 36, 69);
+            SaveGame.Screen.Print(ColourEnum.Blue, "Tot.Dmg./Act:", 37, 55);
             // Work out damage per action
             var buf = string.Empty;
             if (damdice == 0 || damsides == 0)
@@ -478,11 +478,11 @@ namespace AngbandOS.Core.Scripts
                     ? $"{attacksPerRound * damdice}d{damsides}"
                     : $"{attacksPerRound * damdice}d{damsides}{attacksPerRound * dambonus:+0;-0;+0}";
             }
-            SaveGame.Screen.Print(Colour.Green, buf, 37, 69);
-            SaveGame.Screen.Print(Colour.Blue, "Shots/Action:", 38, 55);
-            SaveGame.Screen.Print(Colour.Green, $"{SaveGame.Player.MissileAttacksPerRound}", 38, 69);
-            SaveGame.Screen.Print(Colour.Blue, "Infra-Vision:", 39, 55);
-            SaveGame.Screen.Print(Colour.Green, $"{SaveGame.Player.InfravisionRange * 10} feet", 39, 69);
+            SaveGame.Screen.Print(ColourEnum.Green, buf, 37, 69);
+            SaveGame.Screen.Print(ColourEnum.Blue, "Shots/Action:", 38, 55);
+            SaveGame.Screen.Print(ColourEnum.Green, $"{SaveGame.Player.MissileAttacksPerRound}", 38, 69);
+            SaveGame.Screen.Print(ColourEnum.Blue, "Infra-Vision:", 39, 55);
+            SaveGame.Screen.Print(ColourEnum.Green, $"{SaveGame.Player.InfravisionRange * 10} feet", 39, 69);
         }
 
         /// <summary>
@@ -490,43 +490,43 @@ namespace AngbandOS.Core.Scripts
         /// </summary>
         private void DisplayPlayerTop()
         {
-            SaveGame.Screen.Print(Colour.Blue, "Name        :", 2, 1);
-            SaveGame.Screen.Print(Colour.Blue, "Gender      :", 3, 1);
-            SaveGame.Screen.Print(Colour.Blue, "Race        :", 4, 1);
-            SaveGame.Screen.Print(Colour.Blue, "Class       :", 5, 1);
+            SaveGame.Screen.Print(ColourEnum.Blue, "Name        :", 2, 1);
+            SaveGame.Screen.Print(ColourEnum.Blue, "Gender      :", 3, 1);
+            SaveGame.Screen.Print(ColourEnum.Blue, "Race        :", 4, 1);
+            SaveGame.Screen.Print(ColourEnum.Blue, "Class       :", 5, 1);
             if (SaveGame.Player.CanCastSpells)
             {
-                SaveGame.Screen.Print(Colour.Blue, "Magic       :", 6, 1);
+                SaveGame.Screen.Print(ColourEnum.Blue, "Magic       :", 6, 1);
             }
-            SaveGame.Screen.Print(Colour.Brown, SaveGame.Player.Name, 2, 15);
-            SaveGame.Screen.Print(Colour.Brown, SaveGame.Player.Gender.Title, 3, 15);
-            SaveGame.Screen.Print(Colour.Brown, SaveGame.Player.Race.Title, 4, 15);
-            SaveGame.Screen.Print(Colour.Brown, SaveGame.Player.BaseCharacterClass.ClassSubName(SaveGame.Player.PrimaryRealm), 5, 15);
+            SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.Player.Name, 2, 15);
+            SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.Player.Gender.Title, 3, 15);
+            SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.Player.Race.Title, 4, 15);
+            SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.Player.BaseCharacterClass.ClassSubName(SaveGame.Player.PrimaryRealm), 5, 15);
             // Only print realms if we have them
             if (SaveGame.Player.PrimaryRealm != null)
             {
                 string realmBuff = SaveGame.RealmNames(SaveGame.Player.PrimaryRealm, SaveGame.Player.SecondaryRealm);
-                SaveGame.Screen.Print(Colour.Brown, realmBuff, 6, 15);
+                SaveGame.Screen.Print(ColourEnum.Brown, realmBuff, 6, 15);
             }
             // Fanatics and Cultists get a patron
             if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Fanatic || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Cultist)
             {
-                SaveGame.Screen.Print(Colour.Blue, "Patron      :", 7, 1);
-                SaveGame.Screen.Print(Colour.Brown, SaveGame.Player.GooPatron.LongName, 7, 15);
+                SaveGame.Screen.Print(ColourEnum.Blue, "Patron      :", 7, 1);
+                SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.Player.GooPatron.LongName, 7, 15);
             }
             // Priests get a deity
             if (SaveGame.Player.Religion.Deity != GodName.None)
             {
-                SaveGame.Screen.Print(Colour.Blue, "Deity       :", 7, 1);
-                SaveGame.Screen.Print(Colour.Brown, SaveGame.Player.Religion.GetPatronDeity().LongName, 7, 15);
+                SaveGame.Screen.Print(ColourEnum.Blue, "Deity       :", 7, 1);
+                SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.Player.Religion.GetPatronDeity().LongName, 7, 15);
             }
-            SaveGame.Screen.Print(Colour.Blue, "Birthday", 2, 32);
+            SaveGame.Screen.Print(ColourEnum.Blue, "Birthday", 2, 32);
             string dateBuff = SaveGame.Player.GameTime.BirthdayText.PadLeft(8);
-            SaveGame.Screen.Print(Colour.Brown, dateBuff, 2, 46);
-            PrintShortScore("Age          ", SaveGame.Player.Age, 3, 32, Colour.Brown);
-            PrintShortScore("Height       ", SaveGame.Player.Height, 4, 32, Colour.Brown);
-            PrintShortScore("Weight       ", SaveGame.Player.Weight, 5, 32, Colour.Brown);
-            PrintShortScore("Social Class ", SaveGame.Player.SocialClass, 6, 32, Colour.Brown);
+            SaveGame.Screen.Print(ColourEnum.Brown, dateBuff, 2, 46);
+            PrintShortScore("Age          ", SaveGame.Player.Age, 3, 32, ColourEnum.Brown);
+            PrintShortScore("Height       ", SaveGame.Player.Height, 4, 32, ColourEnum.Brown);
+            PrintShortScore("Weight       ", SaveGame.Player.Weight, 5, 32, ColourEnum.Brown);
+            PrintShortScore("Social Class ", SaveGame.Player.SocialClass, 6, 32, ColourEnum.Brown);
             int i;
             // Print a quick summary of ability scores, but no detail
             for (i = 0; i < 6; i++)
@@ -534,19 +534,19 @@ namespace AngbandOS.Core.Scripts
                 string buf;
                 if (SaveGame.Player.AbilityScores[i].Innate < SaveGame.Player.AbilityScores[i].InnateMax)
                 {
-                    SaveGame.Screen.Print(Colour.Blue, Constants.StatNamesReduced[i], 2 + i, 61);
+                    SaveGame.Screen.Print(ColourEnum.Blue, Constants.StatNamesReduced[i], 2 + i, 61);
                     int value = SaveGame.Player.AbilityScores[i].Adjusted;
                     buf = value.StatToString();
-                    SaveGame.Screen.Print(Colour.Red, buf, 2 + i, 66);
+                    SaveGame.Screen.Print(ColourEnum.Red, buf, 2 + i, 66);
                     value = SaveGame.Player.AbilityScores[i].AdjustedMax;
                     buf = value.StatToString();
-                    SaveGame.Screen.Print(Colour.Green, buf, 2 + i, 73);
+                    SaveGame.Screen.Print(ColourEnum.Green, buf, 2 + i, 73);
                 }
                 else
                 {
-                    SaveGame.Screen.Print(Colour.Blue, Constants.StatNames[i], 2 + i, 61);
+                    SaveGame.Screen.Print(ColourEnum.Blue, Constants.StatNames[i], 2 + i, 61);
                     buf = SaveGame.Player.AbilityScores[i].Adjusted.StatToString();
-                    SaveGame.Screen.Print(Colour.Green, buf, 2 + i, 66);
+                    SaveGame.Screen.Print(ColourEnum.Green, buf, 2 + i, 66);
                 }
             }
         }
@@ -559,11 +559,11 @@ namespace AngbandOS.Core.Scripts
         /// <param name="row"> The row on which to print </param>
         /// <param name="col"> The column in which to start printing </param>
         /// <param name="colour"> The colour in which to print the number </param>
-        private void PrintBonus(string header, int num, int row, int col, Colour colour)
+        private void PrintBonus(string header, int num, int row, int col, ColourEnum colour)
         {
             int len = header.Length;
-            SaveGame.Screen.Print(Colour.Blue, header, row, col);
-            SaveGame.Screen.Print(Colour.Blue, "   ", row, col + len);
+            SaveGame.Screen.Print(ColourEnum.Blue, header, row, col);
+            SaveGame.Screen.Print(ColourEnum.Blue, "   ", row, col + len);
             string outVal = num.ToString("+0;-0;0").PadLeft(6);
             SaveGame.Screen.Print(colour, outVal, row, col + len + 3);
         }
@@ -581,12 +581,12 @@ namespace AngbandOS.Core.Scripts
             {
                 divider = 1;
             }
-            Colour colour;
+            ColourEnum colour;
             string text;
             var scoreString = (score.ToString() + "%").PadLeft(4);
             if (score < 0)
             {
-                colour = Colour.Black;
+                colour = ColourEnum.Black;
                 text = $"Awful {score}%";
             }
             else
@@ -596,39 +596,39 @@ namespace AngbandOS.Core.Scripts
                     case 0:
                     case 1:
                         {
-                            colour = Colour.Red;
+                            colour = ColourEnum.Red;
                             text = $"Bad     {scoreString}";
                             break;
                         }
                     case 2:
                         {
-                            colour = Colour.BrightRed;
+                            colour = ColourEnum.BrightRed;
                             text = $"Poor    {scoreString}";
                             break;
                         }
                     case 3:
                     case 4:
                         {
-                            colour = Colour.Pink;
+                            colour = ColourEnum.Pink;
                             text = $"Medium  {scoreString}";
                             break;
                         }
                     case 5:
                         {
-                            colour = Colour.Orange;
+                            colour = ColourEnum.Orange;
                             text = $"Fair    {scoreString}";
                             break;
                         }
                     case 6:
                         {
-                            colour = Colour.BrightYellow;
+                            colour = ColourEnum.BrightYellow;
                             text = $"Good    {scoreString}";
                             break;
                         }
                     case 7:
                     case 8:
                         {
-                            colour = Colour.Green;
+                            colour = ColourEnum.Green;
                             text = $"Great   {scoreString}";
                             break;
                         }
@@ -638,7 +638,7 @@ namespace AngbandOS.Core.Scripts
                     case 12:
                     case 13:
                         {
-                            colour = Colour.BrightGreen;
+                            colour = ColourEnum.BrightGreen;
                             text = $"Superb  {scoreString}";
                             break;
                         }
@@ -647,13 +647,13 @@ namespace AngbandOS.Core.Scripts
                     case 16:
                     case 17:
                         {
-                            colour = Colour.Blue;
+                            colour = ColourEnum.Blue;
                             text = $"Amazing {scoreString}";
                             break;
                         }
                     default:
                         {
-                            colour = Colour.Purple;
+                            colour = ColourEnum.Purple;
                             text = $"Stellar {scoreString}";
                             break;
                         }
@@ -670,10 +670,10 @@ namespace AngbandOS.Core.Scripts
         /// <param name="row"> The row on which to print </param>
         /// <param name="col"> The column in which to start printing </param>
         /// <param name="colour"> The colour in which to print the number </param>
-        private void PrintLongScore(string title, int number, int row, int col, Colour colour)
+        private void PrintLongScore(string title, int number, int row, int col, ColourEnum colour)
         {
             int len = title.Length;
-            SaveGame.Screen.Print(Colour.Blue, title, row, col);
+            SaveGame.Screen.Print(ColourEnum.Blue, title, row, col);
             string outVal = number.ToString().PadLeft(9);
             SaveGame.Screen.Print(colour, outVal, row, col + len);
         }
@@ -686,11 +686,11 @@ namespace AngbandOS.Core.Scripts
         /// <param name="row"> The row on which to print </param>
         /// <param name="col"> The column in which to start printing </param>
         /// <param name="colour"> The colour in which to print the number </param>
-        private void PrintShortScore(string header, int num, int row, int col, Colour colour)
+        private void PrintShortScore(string header, int num, int row, int col, ColourEnum colour)
         {
             int len = header.Length;
-            SaveGame.Screen.Print(Colour.Blue, header, row, col);
-            SaveGame.Screen.Print(Colour.Blue, "   ", row, col + len);
+            SaveGame.Screen.Print(ColourEnum.Blue, header, row, col);
+            SaveGame.Screen.Print(ColourEnum.Blue, "   ", row, col + len);
             string outVal = num.ToString().PadLeft(6);
             SaveGame.Screen.Print(colour, outVal, row, col + len + 3);
         }

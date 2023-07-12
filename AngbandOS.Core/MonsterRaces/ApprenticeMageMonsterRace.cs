@@ -18,7 +18,7 @@ internal class ApprenticeMageMonsterRace : MonsterRace
         new MagicMissileMonsterSpell(),
         new BlinkMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
-    public override Colour Colour => Colour.BrightRed;
+    public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Apprentice mage";
 
     public override int ArmourClass => 6;

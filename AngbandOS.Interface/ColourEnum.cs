@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.Interface;
 
 //The possible colours in which to display things
-public enum Colour
+public enum ColourEnum
 {
     Background = 0,
     Black = 1,

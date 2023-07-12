@@ -22,7 +22,7 @@ internal class ConsoleWindow
 
     public int Width => Right - Left + 1;
 
-    public void Clear(SaveGame saveGame, Colour colour)
+    public void Clear(SaveGame saveGame, ColourEnum colour)
     {
         for (int y = Top; y <= Bottom; y++)
         {

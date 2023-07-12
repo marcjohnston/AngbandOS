@@ -19,7 +19,7 @@ internal class HomeStore : Store
     };
 
     public override string FeatureType => "Home";
-    public override Colour Colour => Colour.Pink;
+    public override ColourEnum Colour => ColourEnum.Pink;
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<AtSymbol>();
 
     public override bool ItemMatches(Item item)
@@ -84,7 +84,7 @@ internal class HomeStore : Store
                 {
                     player.Gold -= price;
                     SayComment_1();
-                    SaveGame.PlaySound(SoundEffect.StoreTransaction);
+                    SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                     StorePrtGold();
                     int oldHouse = player.TownWithHouse;
                     player.TownWithHouse = SaveGame.CurTown.Index;

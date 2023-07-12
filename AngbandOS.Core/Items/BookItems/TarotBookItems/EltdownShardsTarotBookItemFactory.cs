@@ -13,7 +13,7 @@ internal class EltdownShardsTarotBookItemFactory : TarotBookItemFactory
     private EltdownShardsTarotBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<QuestionMarkSymbol>();
-    public override Colour Colour => Colour.Pink;
+    public override ColourEnum Colour => ColourEnum.Pink;
     public override string Name => "[Eltdown Shards]";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

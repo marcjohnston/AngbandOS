@@ -24,7 +24,7 @@ internal class LeatherScaleMailWyvernscaleFixedArtifact : FixedArtifact
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenParenthesisSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "The Leather Scale Mail 'Wyvernscale'";
     public override int Ac => 11;
     public override int Cost => 25000;

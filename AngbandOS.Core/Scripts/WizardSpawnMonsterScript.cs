@@ -16,7 +16,7 @@ namespace AngbandOS.Core.Scripts
         {
             SaveGame.FullScreenOverlay = true;
             ScreenBuffer savedScreen = SaveGame.Screen.Clone();
-            SaveGame.SetBackground(BackgroundImage.Normal);
+            SaveGame.SetBackground(BackgroundImageEnum.Normal);
             SaveGame.Screen.Clear();
 
             try
@@ -26,9 +26,9 @@ namespace AngbandOS.Core.Scripts
                 foreach (MonsterRace monsterRace in monsterRaces)
                 {
                     ConsoleTableRow tableRow = table.AddRow();
-                    tableRow["Name"] = new ConsoleString(Colour.White, monsterRace.Name);
-                    tableRow["Character"] = new ConsoleString(Colour.White, monsterRace.Symbol.Character.ToString());
-                    tableRow["Level"] = new ConsoleString(Colour.White, monsterRace.LevelFound.ToString());
+                    tableRow["Name"] = new ConsoleString(ColourEnum.White, monsterRace.Name);
+                    tableRow["Character"] = new ConsoleString(ColourEnum.White, monsterRace.Symbol.Character.ToString());
+                    tableRow["Level"] = new ConsoleString(ColourEnum.White, monsterRace.LevelFound.ToString());
                 }
 
                 ConsoleWindow consoleWindow = new ConsoleWindow(0, 1, 79, 42);
@@ -55,7 +55,7 @@ namespace AngbandOS.Core.Scripts
                     ConsoleString s = (ConsoleString)table.Rows[selectedIndex]["Name"];
                     foreach (ConsoleChar c in s)
                     {
-                        c.Colour = Colour.Red;
+                        c.Colour = ColourEnum.Red;
                     }
 
                     table.Render(SaveGame, consoleWindow, new ConsoleTopLeftAlignment());
@@ -67,7 +67,7 @@ namespace AngbandOS.Core.Scripts
 
                     foreach (ConsoleChar c in s)
                     {
-                        c.Colour = Colour.White;
+                        c.Colour = ColourEnum.White;
                     }
                     switch (ch)
                     {
@@ -95,7 +95,7 @@ namespace AngbandOS.Core.Scripts
             {
                 SaveGame.Screen.Restore(savedScreen);
                 SaveGame.FullScreenOverlay = false;
-                SaveGame.SetBackground(BackgroundImage.Overhead);
+                SaveGame.SetBackground(BackgroundImageEnum.Overhead);
             }
             return false;
         }

@@ -12,7 +12,7 @@ internal class BrokenDoorTile : Tile
 {
     private BrokenDoorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<SingleQuoteSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "BrokenDoor";
     public override AlterAction? AlterAction => new CloseAlterAction();
     public override string AppearAs => "BrokenDoor";

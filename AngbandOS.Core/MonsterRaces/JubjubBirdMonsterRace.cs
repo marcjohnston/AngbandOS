@@ -13,7 +13,7 @@ internal class JubjubBirdMonsterRace : MonsterRace
     protected JubjubBirdMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperBSymbol>();
-    public override Colour Colour => Colour.Pink;
+    public override ColourEnum Colour => ColourEnum.Pink;
     public override string Name => "Jubjub bird";
 
     public override bool Animal => true;

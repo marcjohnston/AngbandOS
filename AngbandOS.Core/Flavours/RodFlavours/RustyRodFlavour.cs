@@ -12,6 +12,6 @@ internal class RustyRodFlavour : RodFlavour
 {
     private RustyRodFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<MinusSignSymbol>();
-    public override Colour Colour => Colour.BrightOrange;
+    public override ColourEnum Colour => ColourEnum.BrightOrange;
     public override string Name => "Rusty";
 }

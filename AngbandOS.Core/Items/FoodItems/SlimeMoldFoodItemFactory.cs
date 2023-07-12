@@ -13,7 +13,7 @@ internal class SlimeMoldFoodItemFactory : FoodItemFactory
     private SlimeMoldFoodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CommaSymbol>();
-    public override Colour Colour => Colour.Green;
+    public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "Slime Mold";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -25,7 +25,7 @@ internal class SlimeMoldFoodItemFactory : FoodItemFactory
     public override int Weight => 5;
     public override bool Eat()
     {
-        SaveGame.PlaySound(SoundEffect.Eat);
+        SaveGame.PlaySound(SoundEffectEnum.Eat);
         PotionItemFactory slimeMold = (PotionItemFactory)SaveGame.SingletonRepository.ItemFactories.Get<SlimeMoldJuicePotionItemFactory>();
         slimeMold.Quaff(SaveGame);
         return true;

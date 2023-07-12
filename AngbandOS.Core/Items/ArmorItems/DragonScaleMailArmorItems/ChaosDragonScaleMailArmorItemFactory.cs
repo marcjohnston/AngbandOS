@@ -14,7 +14,7 @@ internal class ChaosDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
 
     public override string? DescribeActivationEffect => "breathe chaos/disenchant (220) every 300+d300 turns";
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenBraceSymbol>();
-    public override Colour Colour => Colour.Purple;
+    public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Chaos Dragon Scale Mail";
 
     public override int Ac => 30;

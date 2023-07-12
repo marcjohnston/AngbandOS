@@ -16,7 +16,7 @@ internal class KarakalSpiritOfFireMonsterRace : MonsterRace
         new FireBallMonsterSpell(),
         new PlasmaBoltMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
-    public override Colour Colour => Colour.Red;
+    public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Karakal, Spirit of Fire";
 
     public override int ArmourClass => 50;

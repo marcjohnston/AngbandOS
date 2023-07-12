@@ -30,7 +30,7 @@ internal class QuarterstaffEririlFixedArtifact : FixedArtifact, IFixedArtifactAc
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<BackSlashSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "The Quarterstaff 'Eriril'";
     public override int Ac => 0;
     public override bool Activate => true;

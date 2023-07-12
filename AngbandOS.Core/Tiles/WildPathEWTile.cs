@@ -12,7 +12,7 @@ internal class WildPathEWTile : Tile
 {
     private WildPathEWTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<MinusSignSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "WildPathEW";
     public override string AppearAs => "WildPathEW";
     public override string Description => "path";

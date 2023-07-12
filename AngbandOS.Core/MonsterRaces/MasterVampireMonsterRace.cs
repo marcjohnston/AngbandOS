@@ -23,7 +23,7 @@ internal class MasterVampireMonsterRace : MonsterRace
         new ForgetMonsterSpell(),
         new TeleportToMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperVSymbol>();
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Master vampire";
 
     public override int ArmourClass => 60;

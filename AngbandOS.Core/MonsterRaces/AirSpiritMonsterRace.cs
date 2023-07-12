@@ -13,7 +13,7 @@ internal class AirSpiritMonsterRace : MonsterRace
     protected AirSpiritMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
-    public override Colour Colour => Colour.Diamond;
+    public override ColourEnum Colour => ColourEnum.Diamond;
     public override string Name => "Air spirit";
 
     public override int ArmourClass => 40;

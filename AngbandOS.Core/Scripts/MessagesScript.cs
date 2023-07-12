@@ -19,7 +19,7 @@ namespace AngbandOS.Core.Scripts
             int horizontalOffset = 0;
             SaveGame.FullScreenOverlay = true;
             ScreenBuffer savedScreen = SaveGame.Screen.Clone();
-            SaveGame.SetBackground(BackgroundImage.Normal);
+            SaveGame.SetBackground(BackgroundImageEnum.Normal);
             // Infinite loop showing a page of messages from the index
             while (!SaveGame.Shutdown)
             {
@@ -31,7 +31,7 @@ namespace AngbandOS.Core.Scripts
                 {
                     string msg = SaveGame.MessageStr((short)(index + row));
                     msg = msg.Length >= horizontalOffset ? msg.Substring(horizontalOffset) : "";
-                    SaveGame.Screen.Print(Colour.White, msg, 41 - row, 0);
+                    SaveGame.Screen.Print(ColourEnum.White, msg, 41 - row, 0);
                 }
                 // Get a command
                 SaveGame.Screen.PrintLine($"Message Recall ({index}-{index + row - 1} of {messageNumber}), Offset {horizontalOffset}", 0, 0);

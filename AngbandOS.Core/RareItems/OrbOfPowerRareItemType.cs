@@ -12,7 +12,7 @@ internal class OrbOfPowerRareItem : RareItem
 {
     private OrbOfPowerRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<TildeSymbol>();
-    public override Colour Colour => Colour.Purple;
+    public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Orb of Power";
     public override int Cost => 10000;
     public override string FriendlyName => "of Power";

@@ -13,7 +13,7 @@ internal class ShagratTheOrcCaptainMonsterRace : MonsterRace
     protected ShagratTheOrcCaptainMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerOSymbol>();
-    public override Colour Colour => Colour.Orange;
+    public override ColourEnum Colour => ColourEnum.Orange;
     public override string Name => "Shagrat, the Orc Captain";
 
     public override int ArmourClass => 60;

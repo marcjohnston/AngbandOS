@@ -13,7 +13,7 @@ internal class NightStalkerMonsterRace : MonsterRace
     protected NightStalkerMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Night stalker";
 
     public override int ArmourClass => 46;

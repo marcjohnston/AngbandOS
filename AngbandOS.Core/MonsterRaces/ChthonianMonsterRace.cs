@@ -23,7 +23,7 @@ internal class ChthonianMonsterRace : MonsterRace
         new HealMonsterSpell(),
         new SummonDemonMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperASymbol>();
-    public override Colour Colour => Colour.Yellow;
+    public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "Chthonian";
 
     public override int ArmourClass => 90;

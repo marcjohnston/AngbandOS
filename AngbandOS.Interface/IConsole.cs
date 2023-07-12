@@ -26,17 +26,17 @@ public interface IConsole
     /// Set the background image.
     /// </summary>
     /// <param name="image"></param>
-    void SetBackground(BackgroundImage image);
+    void SetBackground(BackgroundImageEnum image);
 
     /// <summary>
     /// Play a sound.
     /// </summary>
     /// <param name="sound"></param>
-    void PlaySound(SoundEffect sound);
+    void PlaySound(SoundEffectEnum sound);
 
     /// <summary>
     /// Play music.
     /// </summary>
     /// <param name="music"></param>
-    void PlayMusic(MusicTrack music);
+    void PlayMusic(MusicTrackEnum music);
 }

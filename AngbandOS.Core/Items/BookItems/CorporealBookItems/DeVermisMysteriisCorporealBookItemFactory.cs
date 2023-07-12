@@ -13,7 +13,7 @@ internal class DeVermisMysteriisCorporealBookItemFactory : CorporealBookItemFact
     private DeVermisMysteriisCorporealBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<QuestionMarkSymbol>();
-    public override Colour Colour => Colour.BrightYellow;
+    public override ColourEnum Colour => ColourEnum.BrightYellow;
     public override string Name => "[De Vermis Mysteriis]";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

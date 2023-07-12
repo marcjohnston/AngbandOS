@@ -25,7 +25,7 @@ internal class MephistophelesLordOfHellMonsterRace : MonsterRace
         new SummonUndeadMonsterSpell(),
         new TeleportToMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperUSymbol>();
-    public override Colour Colour => Colour.Red;
+    public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Mephistopheles, Lord of Hell";
 
     public override int ArmourClass => 150;

@@ -13,5 +13,5 @@ internal abstract class ShotAmmunitionItemFactory : AmmunitionItemFactory
     public ShotAmmunitionItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Shot;
     public override int PackSort => 35;
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
 }

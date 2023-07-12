@@ -13,7 +13,7 @@ internal class GemstoneLightSourceItemFactory : LightSourceItemFactory
     private GemstoneLightSourceItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<AsteriskSymbol>();
-    public override Colour Colour => Colour.Diamond;
+    public override ColourEnum Colour => ColourEnum.Diamond;
     public override string Name => "Gemstone";
 
     public override int Cost => 60000;

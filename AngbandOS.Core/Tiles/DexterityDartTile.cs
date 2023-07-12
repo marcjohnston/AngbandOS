@@ -12,7 +12,7 @@ internal class DexterityDartTile : Tile
 {
     private DexterityDartTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CaretSymbol>();
-    public override Colour Colour => Colour.Red;
+    public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "DexDart";
     public override AlterAction? AlterAction => new DisarmAlterAction();
     public override string AppearAs => "DexDart";

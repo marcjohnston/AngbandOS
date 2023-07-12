@@ -17,7 +17,7 @@ internal class DraconicQuylthulgMonsterRace : MonsterRace
         new SummonDragonMonsterSpell(),
         new TeleportSelfMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperQSymbol>();
-    public override Colour Colour => Colour.BrightGreen;
+    public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Draconic quylthulg";
 
     public override bool Animal => true;

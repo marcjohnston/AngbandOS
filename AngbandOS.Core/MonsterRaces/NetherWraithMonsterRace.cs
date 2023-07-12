@@ -20,7 +20,7 @@ internal class NetherWraithMonsterRace : MonsterRace
         new ScareMonsterSpell(),
         new DarknessMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperWSymbol>();
-    public override Colour Colour => Colour.BrightRed;
+    public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Nether wraith";
 
     public override int ArmourClass => 55;

@@ -13,7 +13,7 @@ internal class ScruffyLittleDogMonsterRace : MonsterRace
     protected ScruffyLittleDogMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperCSymbol>();
-    public override Colour Colour => Colour.BrightGrey;
+    public override ColourEnum Colour => ColourEnum.BrightGrey;
     public override string Name => "Scruffy little dog";
 
     public override bool Animal => true;

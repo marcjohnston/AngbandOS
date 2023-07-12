@@ -13,7 +13,7 @@ internal class WargMonsterRace : MonsterRace
     protected WargMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperCSymbol>();
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Warg";
 
     public override bool Animal => true;

@@ -32,7 +32,7 @@ internal class AetherVortexMonsterRace : MonsterRace
         new BreatheSoundMonsterSpell(),
         new BreatheTimeMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerVSymbol>();
-    public override Colour Colour => Colour.BrightGrey;
+    public override ColourEnum Colour => ColourEnum.BrightGrey;
     public override string Name => "Aether vortex";
 
     public override int ArmourClass => 40;

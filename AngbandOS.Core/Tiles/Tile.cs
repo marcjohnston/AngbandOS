@@ -22,7 +22,7 @@ internal abstract class Tile : ISingletonDictionary<string>
     /// </summary>
     public abstract Symbol Symbol { get; }
 
-    public virtual Colour Colour => Colour.White;
+    public virtual ColourEnum Colour => ColourEnum.White;
     public abstract string Name { get; }
 
     /// <summary>

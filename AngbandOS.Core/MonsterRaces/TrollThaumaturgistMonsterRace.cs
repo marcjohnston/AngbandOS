@@ -19,7 +19,7 @@ internal class TrollThaumaturgistMonsterRace : MonsterRace
         new BlinkMonsterSpell(),
         new DarknessMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperTSymbol>();
-    public override Colour Colour => Colour.BrightPurple;
+    public override ColourEnum Colour => ColourEnum.BrightPurple;
     public override string Name => "Troll thaumaturgist";
 
     public override int ArmourClass => 50;

@@ -20,7 +20,7 @@ internal class StormGiantMonsterRace : MonsterRace
         new BlinkMonsterSpell(),
         new TeleportToMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperPSymbol>();
-    public override Colour Colour => Colour.BrightTurquoise;
+    public override ColourEnum Colour => ColourEnum.BrightTurquoise;
     public override string Name => "Storm giant";
 
     public override int ArmourClass => 60;

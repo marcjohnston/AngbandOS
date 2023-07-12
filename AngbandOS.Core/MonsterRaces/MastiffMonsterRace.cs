@@ -13,7 +13,7 @@ internal class MastiffMonsterRace : MonsterRace
     protected MastiffMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperCSymbol>();
-    public override Colour Colour => Colour.Beige;
+    public override ColourEnum Colour => ColourEnum.Beige;
     public override string Name => "Mastiff";
 
     public override bool Animal => true;

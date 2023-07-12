@@ -24,7 +24,7 @@ internal class RingMimicMonsterRace : MonsterRace
         new ForgetMonsterSpell(),
         new SummonMonsterMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<EqualSignSymbol>();
-    public override Colour Colour => Colour.Gold;
+    public override ColourEnum Colour => ColourEnum.Gold;
     public override string Name => "Ring mimic";
 
     public override int ArmourClass => 60;

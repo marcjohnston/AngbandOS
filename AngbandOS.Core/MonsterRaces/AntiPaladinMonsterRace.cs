@@ -22,7 +22,7 @@ internal class AntiPaladinMonsterRace : MonsterRace
         new ForgetMonsterSpell(),
         new HasteMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Anti-paladin";
 
     public override int ArmourClass => 50;

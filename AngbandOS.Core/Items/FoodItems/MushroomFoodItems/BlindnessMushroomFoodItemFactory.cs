@@ -24,7 +24,7 @@ internal class BlindnessMushroomFoodItemFactory : MushroomFoodItemFactory
 
     public override bool Eat()
     {
-        SaveGame.PlaySound(SoundEffect.Eat);
+        SaveGame.PlaySound(SoundEffectEnum.Eat);
         if (!SaveGame.Player.HasBlindnessResistance)
         {
             if (SaveGame.Player.TimedBlindness.AddTimer(Program.Rng.RandomLessThan(200) + 200))

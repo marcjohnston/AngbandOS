@@ -23,7 +23,7 @@ internal class ThuringwethilMonsterRace : MonsterRace
         new ScareMonsterSpell(),
         new SummonKinMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperVSymbol>();
-    public override Colour Colour => Colour.Black;
+    public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Thuringwethil";
 
     public override int ArmourClass => 145;

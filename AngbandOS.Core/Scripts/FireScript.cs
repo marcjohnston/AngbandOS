@@ -47,10 +47,10 @@ namespace AngbandOS.Core.Scripts
                 ammunitionStack.ItemDescribe();
             }
             ammunitionStack.ItemOptimize();
-            SaveGame.PlaySound(SoundEffect.Shoot);
+            SaveGame.PlaySound(SoundEffectEnum.Shoot);
             // Get the details of the shot
             string missileName = individualAmmunition.Description(false, 3);
-            Colour missileColour = individualAmmunition.Factory.FlavorColour;
+            ColourEnum missileColour = individualAmmunition.Factory.FlavorColour;
             char missileCharacter = individualAmmunition.Factory.FlavorSymbol.Character;
             int shotSpeed = SaveGame.Player.MissileAttacksPerRound;
             int shotDamage = Program.Rng.DiceRoll(individualAmmunition.DamageDice, individualAmmunition.DamageDiceSides) + individualAmmunition.BonusDamage + missileWeapon.BonusDamage;
@@ -167,7 +167,7 @@ namespace AngbandOS.Core.Scripts
                             SaveGame.Level.MessagePain(tile.MonsterIndex, shotDamage);
                             if (fear && monster.IsVisible)
                             {
-                                SaveGame.PlaySound(SoundEffect.MonsterFlees);
+                                SaveGame.PlaySound(SoundEffectEnum.MonsterFlees);
                                 string mName = monster.Name;
                                 SaveGame.MsgPrint($"{mName} flees in terror!");
                             }

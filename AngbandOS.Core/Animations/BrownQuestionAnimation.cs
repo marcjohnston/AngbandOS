@@ -12,8 +12,8 @@ internal class BrownQuestionAnimation : Animation
 {
     private BrownQuestionAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '*';
-    public override Colour Colour => Colour.Brown;
+    public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "BrownQuestion";
-    public override Colour AlternateColour => Colour.BrightBrown;
+    public override ColourEnum AlternateColour => ColourEnum.BrightBrown;
     public override string Sequence => @"??????";
 }

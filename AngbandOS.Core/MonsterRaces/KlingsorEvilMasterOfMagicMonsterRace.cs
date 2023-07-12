@@ -28,7 +28,7 @@ internal class KlingsorEvilMasterOfMagicMonsterRace : MonsterRace
         new SummonHiUndeadMonsterSpell(),
         new TeleportToMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
-    public override Colour Colour => Colour.Yellow;
+    public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "Klingsor, Evil Master of Magic";
 
     public override int ArmourClass => 100;

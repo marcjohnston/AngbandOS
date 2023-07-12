@@ -74,7 +74,7 @@ internal abstract class ItemFactory : IItemCharacteristics
     /// that have flavor may override this color and replace it with a different color from the flavor.
     /// </summary>
     [Obsolete("This property is available via the IFlavour.Flavour property.")]
-    public Colour FlavorColour;
+    public ColourEnum FlavorColour;
 
     /// <summary>
     /// Returns true, if the item category has any of the following properties: Str, Int, Wis, Dex, Con, Cha, Stealth, Search, Infra, Tunnel, Speed or Blows.
@@ -118,7 +118,7 @@ internal abstract class ItemFactory : IItemCharacteristics
     /// Returns the color that items of this type should be rendered with.  This color will be initially used to set the FlavorColor and item categories
     /// that have flavor may change the FlavorColor based on the flavor.
     /// </summary>
-    public virtual Colour Colour => Colour.White;
+    public virtual ColourEnum Colour => ColourEnum.White;
 
     /// <summary>
     /// A unique identifier for the entity

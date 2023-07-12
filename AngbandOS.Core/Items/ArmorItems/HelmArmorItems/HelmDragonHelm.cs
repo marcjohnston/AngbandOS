@@ -13,7 +13,7 @@ internal class HelmDragonHelm : HelmItemClass
     private HelmDragonHelm(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBraceSymbol>();
-    public override Colour Colour => Colour.BrightGreen;
+    public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Dragon Helm";
 
     public override int Ac => 8;

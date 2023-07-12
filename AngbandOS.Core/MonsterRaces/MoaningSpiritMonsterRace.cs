@@ -16,7 +16,7 @@ internal class MoaningSpiritMonsterRace : MonsterRace
         new ScareMonsterSpell(),
         new TeleportSelfMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperGSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Moaning spirit";
 
     public override int ArmourClass => 20;

@@ -11,13 +11,13 @@ namespace AngbandOS.Core.Flavours;
 internal class ScrollFlavour : Flavour
 {
     private readonly Symbol _symbol;
-    private readonly Colour _colour;
+    private readonly ColourEnum _colour;
     private readonly string _name;
 
     public override Symbol Symbol => _symbol;
-    public override Colour Colour => _colour;
+    public override ColourEnum Colour => _colour;
     public override string Name => _name;
-    public ScrollFlavour(SaveGame saveGame, Symbol symbol, Colour color, string Name) : base(saveGame)
+    public ScrollFlavour(SaveGame saveGame, Symbol symbol, ColourEnum color, string Name) : base(saveGame)
     {
         _symbol = symbol;
         _colour = color;

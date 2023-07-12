@@ -16,7 +16,7 @@ internal class StairwayToHellMonsterRace : MonsterRace
         new ShriekMonsterSpell(),
         new SummonDemonMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<GreaterThanSymbol>();
-    public override Colour Colour => Colour.Red;
+    public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Stairway to hell";
 
     public override int ArmourClass => 40;

@@ -21,7 +21,7 @@ internal class FlyingPolypMonsterRace : MonsterRace
         new SummonMonstersMonsterSpell(),
         new TeleportAwayMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperASymbol>();
-    public override Colour Colour => Colour.Diamond;
+    public override ColourEnum Colour => ColourEnum.Diamond;
     public override string Name => "Flying polyp";
 
     public override int ArmourClass => 68;

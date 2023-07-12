@@ -60,7 +60,7 @@ internal abstract class MonsterRace : IMonsterCharacteristics
     /// <summary>
     /// The color to display the monster as.
     /// </summary>
-    public virtual Colour Colour => Colour.White;
+    public virtual ColourEnum Colour => ColourEnum.White;
 
     /// <summary>
     /// A unique identifier for the entity

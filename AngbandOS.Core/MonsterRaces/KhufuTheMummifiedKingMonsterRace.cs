@@ -21,7 +21,7 @@ internal class KhufuTheMummifiedKingMonsterRace : MonsterRace
         new SummonKinMonsterSpell(),
         new SummonUndeadMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerZSymbol>();
-    public override Colour Colour => Colour.Gold;
+    public override ColourEnum Colour => ColourEnum.Gold;
     public override string Name => "Khufu the mummified King";
 
     public override int ArmourClass => 40;

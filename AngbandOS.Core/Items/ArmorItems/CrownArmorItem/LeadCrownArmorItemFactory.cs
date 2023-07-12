@@ -13,7 +13,7 @@ internal class LeadCrownArmorItemFactory : CrownArmorItemFactory
     private LeadCrownArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBraceSymbol>();
-    public override Colour Colour => Colour.Black;
+    public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Lead Crown";
 
     public override int Cost => 1000;

@@ -23,7 +23,7 @@ internal class StupidityMushroomFoodItemFactory : MushroomFoodItemFactory
     public override int Weight => 1;
     public override bool Eat()
     {
-        SaveGame.PlaySound(SoundEffect.Eat);
+        SaveGame.PlaySound(SoundEffectEnum.Eat);
         SaveGame.Player.TakeHit(Program.Rng.DiceRoll(8, 8), "poisonous food.");
         SaveGame.Player.TryDecreasingAbilityScore(Ability.Intelligence);
         return true;

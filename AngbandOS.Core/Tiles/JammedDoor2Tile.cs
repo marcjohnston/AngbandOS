@@ -12,7 +12,7 @@ internal class JammedDoor2Tile : Tile
 {
     private JammedDoor2Tile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PlusSignSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "JammedDoor2";
     public override AlterAction? AlterAction => new BashAlterAction();
     public override string AppearAs => "LockedDoor0";

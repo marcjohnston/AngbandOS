@@ -12,7 +12,7 @@ internal class BootsWingedRareItem : RareItem
 {
     private BootsWingedRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBraceSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Boots (Winged)";
     public override int Cost => 250;
     public override bool Feather => true;

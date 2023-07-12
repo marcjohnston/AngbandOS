@@ -17,7 +17,7 @@ internal class HagenSonOfAlberichMonsterRace : MonsterRace
         new HasteMonsterSpell(),
         new HealMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
-    public override Colour Colour => Colour.Orange;
+    public override ColourEnum Colour => ColourEnum.Orange;
     public override string Name => "Hagen, son of Alberich";
 
     public override int ArmourClass => 80;

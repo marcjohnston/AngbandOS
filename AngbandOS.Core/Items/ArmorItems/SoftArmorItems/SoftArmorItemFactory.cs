@@ -17,7 +17,7 @@ internal abstract class SoftArmorItemClass : ArmourItemFactory
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
 
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
 
     public override bool CanProvideSheathOfElectricity => true;
 

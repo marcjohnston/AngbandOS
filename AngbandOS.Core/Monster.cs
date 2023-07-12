@@ -1827,7 +1827,7 @@ internal class Monster : IItemContainer
             {
                 // Construct a message telling the player what happened
                 string monsterName = Name;
-                saveGame.PlaySound(SoundEffect.MonsterDies);
+                saveGame.PlaySound(SoundEffectEnum.MonsterDies);
                 // Append the note if there is one
                 if (!string.IsNullOrEmpty(note))
                 {
@@ -2952,7 +2952,7 @@ internal class Monster : IItemContainer
         // If the monster just got scared, let the player know
         if (IsVisible && fear)
         {
-            saveGame.PlaySound(SoundEffect.MonsterFlees);
+            saveGame.PlaySound(SoundEffectEnum.MonsterFlees);
             saveGame.MsgPrint($"{monsterName} flees in terror!");
         }
     }
@@ -3009,7 +3009,7 @@ internal class Monster : IItemContainer
             dis *= 2;
             min /= 2;
         }
-        saveGame.PlaySound(SoundEffect.Teleport);
+        saveGame.PlaySound(SoundEffectEnum.Teleport);
         saveGame.Level.Grid[ny][nx].MonsterIndex = GetMonsterIndex();
         saveGame.Level.Grid[oy][ox].MonsterIndex = 0;
         MapY = ny;

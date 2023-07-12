@@ -18,7 +18,7 @@ internal class Realm1SelectionBirthStage : BaseBirthStage
         string[]? menuItems = SaveGame.Player.BaseCharacterClass.AvailablePrimaryRealms
             .Select(_availablePrimaryRealms => _availablePrimaryRealms.Name)
             .ToArray();
-        SaveGame.Screen.Print(Colour.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+        SaveGame.Screen.Print(ColourEnum.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
         while (!SaveGame.Shutdown)
         {
             SaveGame.MenuDisplay(currentSelection, menuItems);

@@ -16,7 +16,7 @@ internal abstract class CloakArmorItemFactory : ArmourItemFactory
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
 
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override int PackSort => 22;
 
     public override bool CanProvideSheathOfElectricity => true;

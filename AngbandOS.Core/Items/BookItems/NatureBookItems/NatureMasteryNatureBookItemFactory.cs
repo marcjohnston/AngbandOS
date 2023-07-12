@@ -13,7 +13,7 @@ internal class NatureMasteryNatureBookItemFactory : NatureBookItemFactory
     private NatureMasteryNatureBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<QuestionMarkSymbol>();
-    public override Colour Colour => Colour.BrightGreen;
+    public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "[Nature Mastery]";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

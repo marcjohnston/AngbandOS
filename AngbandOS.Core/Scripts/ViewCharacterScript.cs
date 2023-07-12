@@ -17,13 +17,13 @@ namespace AngbandOS.Core.Scripts
             // Save the current screen
             SaveGame.FullScreenOverlay = true;
             ScreenBuffer savedScreen = SaveGame.Screen.Clone();
-            SaveGame.SetBackground(BackgroundImage.Paper);
+            SaveGame.SetBackground(BackgroundImageEnum.Paper);
             // Load the character viewer
             while (!SaveGame.Shutdown)
             {
                 RenderCharacterScript showCharacterSheet = SaveGame.SingletonRepository.Scripts.Get<RenderCharacterScript>();
                 showCharacterSheet.Execute();
-                SaveGame.Screen.Print(Colour.Orange, "[Press 'c' to change name, or ESC]", 43, 23);
+                SaveGame.Screen.Print(ColourEnum.Orange, "[Press 'c' to change name, or ESC]", 43, 23);
                 char keyPress = SaveGame.Inkey();
                 // Escape breaks us out of the loop
                 if (keyPress == '\x1b')
@@ -38,7 +38,7 @@ namespace AngbandOS.Core.Scripts
                 SaveGame.MsgPrint(null);
             }
             // Restore the screen
-            SaveGame.SetBackground(BackgroundImage.Overhead);
+            SaveGame.SetBackground(BackgroundImageEnum.Overhead);
             SaveGame.Screen.Restore(savedScreen);
             SaveGame.FullScreenOverlay = false;
             SaveGame.RedrawMapFlaggedAction.Set();

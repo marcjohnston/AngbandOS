@@ -13,7 +13,7 @@ internal class GrooTheWandererMonsterRace : MonsterRace
     protected GrooTheWandererMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
-    public override Colour Colour => Colour.BrightOrange;
+    public override ColourEnum Colour => ColourEnum.BrightOrange;
     public override string Name => "Groo the Wanderer";
 
     public override int ArmourClass => 70;

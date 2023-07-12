@@ -16,7 +16,7 @@ internal class BansheeMonsterRace : MonsterRace
         new DrainManaMonsterSpell(),
         new TeleportSelfMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperGSymbol>();
-    public override Colour Colour => Colour.BrightBlue;
+    public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "Banshee";
 
     public override int ArmourClass => 24;

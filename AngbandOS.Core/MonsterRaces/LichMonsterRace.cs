@@ -24,7 +24,7 @@ internal class LichMonsterRace : MonsterRace
         new TeleportAwayMonsterSpell(),
         new TeleportToMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperLSymbol>();
-    public override Colour Colour => Colour.BrightBeige;
+    public override ColourEnum Colour => ColourEnum.BrightBeige;
     public override string Name => "Lich";
 
     public override int ArmourClass => 60;

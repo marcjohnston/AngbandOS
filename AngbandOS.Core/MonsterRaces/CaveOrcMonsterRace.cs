@@ -13,7 +13,7 @@ internal class CaveOrcMonsterRace : MonsterRace
     protected CaveOrcMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerOSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Cave orc";
 
     public override int ArmourClass => 32;

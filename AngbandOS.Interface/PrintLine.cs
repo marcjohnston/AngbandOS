@@ -23,14 +23,14 @@ public class PrintLine
     /// <summary>
     /// The foreground color to render the text.
     /// </summary>
-    public Colour foreColour { get; set; }
+    public ColourEnum foreColour { get; set; }
 
     /// <summary>
     /// The background color to render the text.
     /// </summary>
-    public Colour backColour { get; set; }
+    public ColourEnum backColour { get; set; }
 
-    public PrintLine(int row, int col, string text, Colour foreColour, Colour backColour)
+    public PrintLine(int row, int col, string text, ColourEnum foreColour, ColourEnum backColour)
     {
         this.row = row;
         this.col = col;

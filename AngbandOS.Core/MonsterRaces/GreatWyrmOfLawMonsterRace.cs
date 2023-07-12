@@ -20,7 +20,7 @@ internal class GreatWyrmOfLawMonsterRace : MonsterRace
         new ScareMonsterSpell(),
         new SummonDragonMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
-    public override Colour Colour => Colour.Silver;
+    public override ColourEnum Colour => ColourEnum.Silver;
     public override string Name => "Great Wyrm of Law";
 
     public override int ArmourClass => 170;

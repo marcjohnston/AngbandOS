@@ -70,7 +70,7 @@ namespace AngbandOS.Core.Scripts
                 item.IdentEmpty = true;
                 return false;
             }
-            SaveGame.PlaySound(SoundEffect.ZapRod);
+            SaveGame.PlaySound(SoundEffectEnum.ZapRod);
             WandItemFactory activateableItem = (WandItemFactory)item.Factory;
             if (activateableItem.ExecuteActivation(SaveGame, dir))
             {

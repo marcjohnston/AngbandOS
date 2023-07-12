@@ -13,7 +13,7 @@ namespace AngbandOS.Core.ConsoleElements;
 internal class ConsoleChar : ConsoleElement
 {
     public char Char { get; set; }
-    public Colour Colour { get; set; }
+    public ColourEnum Colour { get; set; }
 
     public override int Width => 1;
 
@@ -23,11 +23,11 @@ internal class ConsoleChar : ConsoleElement
     {
         ConsoleAlignment alignment = Alignment ?? parentAlignment;
         ConsoleLocation location = alignment.ComputeTopLeftLocation(this, containerWindow);
-        location.ToWindow(Width, Height).Clear(saveGame, Colour.Background);
+        location.ToWindow(Width, Height).Clear(saveGame, ColourEnum.Background);
         saveGame.Screen.Print(Colour, Char, location.Y, location.X);
     }
 
-    public ConsoleChar(Colour colour, char c)
+    public ConsoleChar(ColourEnum colour, char c)
     {
         Colour = colour;
         Char = c;

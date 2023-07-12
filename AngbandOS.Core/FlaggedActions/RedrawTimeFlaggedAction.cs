@@ -17,9 +17,9 @@ internal class RedrawTimeFlaggedAction : FlaggedAction
     public RedrawTimeFlaggedAction(SaveGame saveGame) : base(saveGame) { }
     protected override void Execute()
     {
-        SaveGame.Screen.Print(Colour.White, "Time", RowTime, ColTime);
-        SaveGame.Screen.Print(Colour.White, "Day", RowDate, ColDate);
-        SaveGame.Screen.Print(Colour.BrightGreen, SaveGame.Player.GameTime.TimeText.PadLeft(8), RowTime, ColTime + 4);
-        SaveGame.Screen.Print(Colour.BrightGreen, SaveGame.Player.GameTime.DateText.PadLeft(8), RowDate, ColDate + 4);
+        SaveGame.Screen.Print(ColourEnum.White, "Time", RowTime, ColTime);
+        SaveGame.Screen.Print(ColourEnum.White, "Day", RowDate, ColDate);
+        SaveGame.Screen.Print(ColourEnum.BrightGreen, SaveGame.Player.GameTime.TimeText.PadLeft(8), RowTime, ColTime + 4);
+        SaveGame.Screen.Print(ColourEnum.BrightGreen, SaveGame.Player.GameTime.DateText.PadLeft(8), RowDate, ColDate + 4);
     }
 }

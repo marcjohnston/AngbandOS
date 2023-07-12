@@ -13,7 +13,7 @@ internal class CestiGlovesArmorItemFactory : GlovesArmorItemFactory
     private CestiGlovesArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBraceSymbol>();
-    public override Colour Colour => Colour.BrightWhite;
+    public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "Set of Cesti";
 
     public override int Ac => 5;

@@ -13,7 +13,7 @@ internal class VermiciousKnidMonsterRace : MonsterRace
     protected VermiciousKnidMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperASymbol>();
-    public override Colour Colour => Colour.Brown;
+    public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Vermicious Knid";
 
     public override int ArmourClass => 55;

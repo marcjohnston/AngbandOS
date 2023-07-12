@@ -13,7 +13,7 @@ internal class NoviceWarriorMonsterRace : MonsterRace
     protected NoviceWarriorMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Novice warrior";
 
     public override int ArmourClass => 16;

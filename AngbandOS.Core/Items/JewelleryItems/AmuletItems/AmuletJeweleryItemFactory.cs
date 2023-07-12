@@ -15,7 +15,7 @@ internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory, IFlavo
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Amulet;
     public override int PackSort => 17;
     public override int BaseValue => 45;
-    public override Colour Colour => Colour.Orange;
+    public override ColourEnum Colour => ColourEnum.Orange;
 
     /// <summary>
     /// Returns the amulet flavours repository because amulets have flavours that need to be identified.

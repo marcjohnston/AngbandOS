@@ -13,7 +13,7 @@ internal class HomonculousMonsterRace : MonsterRace
     protected HomonculousMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerUSymbol>();
-    public override Colour Colour => Colour.Yellow;
+    public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "Homonculous";
 
     public override int ArmourClass => 32;

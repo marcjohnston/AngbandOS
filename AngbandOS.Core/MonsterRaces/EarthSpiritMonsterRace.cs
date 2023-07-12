@@ -13,7 +13,7 @@ internal class EarthSpiritMonsterRace : MonsterRace
     protected EarthSpiritMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Earth spirit";
 
     public override int ArmourClass => 40;

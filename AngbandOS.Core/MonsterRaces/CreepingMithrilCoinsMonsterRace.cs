@@ -13,7 +13,7 @@ internal class CreepingMithrilCoinsMonsterRace : MonsterRace
     protected CreepingMithrilCoinsMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<DollarSignSymbol>();
-    public override Colour Colour => Colour.BrightBlue;
+    public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "Creeping mithril coins";
 
     public override bool Animal => true;

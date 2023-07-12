@@ -18,7 +18,7 @@ namespace AngbandOS.Core.Scripts
             ScreenBuffer savedScreen = SaveGame.Screen.Clone();
             try
             {
-                SaveGame.SetBackground(BackgroundImage.Normal);
+                SaveGame.SetBackground(BackgroundImageEnum.Normal);
 
                 SaveGame.Screen.Clear();
                 int index = 0;
@@ -51,7 +51,7 @@ namespace AngbandOS.Core.Scripts
             {
                 SaveGame.Screen.Restore(savedScreen);
                 SaveGame.FullScreenOverlay = false;
-                SaveGame.SetBackground(BackgroundImage.Overhead);
+                SaveGame.SetBackground(BackgroundImageEnum.Overhead);
             }
             return false;
         }

@@ -12,6 +12,6 @@ internal class DriftwoodAmuletFlavour : AmuletFlavour
 {
     private DriftwoodAmuletFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<DoubleQuoteSymbol>();
-    public override Colour Colour => Colour.Brown;
+    public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Driftwood";
 }

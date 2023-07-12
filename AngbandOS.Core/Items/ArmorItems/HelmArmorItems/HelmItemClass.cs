@@ -16,6 +16,6 @@ internal abstract class HelmItemClass : ArmourItemFactory
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Helm;
     public override bool HatesAcid => true;
 
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override bool CanReflectBoltsAndArrows => true;
 }

@@ -13,7 +13,7 @@ internal class StoneGiantMonsterRace : MonsterRace
     protected StoneGiantMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperPSymbol>();
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Stone giant";
 
     public override int ArmourClass => 75;

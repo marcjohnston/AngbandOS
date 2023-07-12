@@ -16,7 +16,7 @@ internal class LostSoulMonsterRace : MonsterRace
         new DrainManaMonsterSpell(),
         new TeleportSelfMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperGSymbol>();
-    public override Colour Colour => Colour.Brown;
+    public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Lost soul";
 
     public override int ArmourClass => 10;

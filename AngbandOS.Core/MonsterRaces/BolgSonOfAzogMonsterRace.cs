@@ -13,7 +13,7 @@ internal class BolgSonOfAzogMonsterRace : MonsterRace
     protected BolgSonOfAzogMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerOSymbol>();
-    public override Colour Colour => Colour.BrightRed;
+    public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Bolg, Son of Azog";
 
     public override int ArmourClass => 50;

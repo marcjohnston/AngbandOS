@@ -434,7 +434,7 @@ internal class Player
                     }
                 }
             }
-            SaveGame.PlaySound(SoundEffect.LevelGain);
+            SaveGame.PlaySound(SoundEffectEnum.LevelGain);
             SaveGame.MsgPrint($"Welcome to level {Level}.");
             SaveGame.UpdateHealthFlaggedAction.Set();
             SaveGame.UpdateManaFlaggedAction.Set();
@@ -908,7 +908,7 @@ internal class Player
     public void InputPlayerName()
     {
         SaveGame.Screen.Clear(42);
-        SaveGame.Screen.PrintLine(Colour.Orange, "[Enter your player's name above, or hit ESCAPE]", 43, 2);
+        SaveGame.Screen.PrintLine(ColourEnum.Orange, "[Enter your player's name above, or hit ESCAPE]", 43, 2);
         const int col = 15;
         while (!SaveGame.Shutdown)
         {
@@ -927,7 +927,7 @@ internal class Player
             break;
         }
         Name = Name.PadRight(12);
-        SaveGame.Screen.Print(Colour.Brown, Name, 2, col);
+        SaveGame.Screen.Print(ColourEnum.Brown, Name, 2, col);
         //SaveGame.Screen.Clear(22);
     }
 
@@ -1481,7 +1481,7 @@ internal class Player
                 }
                 else
                 {
-                    SaveGame.PlaySound(SoundEffect.PlayerDeath);
+                    SaveGame.PlaySound(SoundEffectEnum.PlayerDeath);
                     SaveGame.MsgPrint("You die.");
                     SaveGame.MsgPrint(null);
                     SaveGame.DiedFrom = hitFrom;
@@ -1497,7 +1497,7 @@ internal class Player
         }
         if (Health < warning)
         {
-            SaveGame.PlaySound(SoundEffect.HealthWarning);
+            SaveGame.PlaySound(SoundEffectEnum.HealthWarning);
             SaveGame.MsgPrint("*** LOW HITPOINT WARNING! ***");
             SaveGame.MsgPrint(null);
         }
@@ -2021,7 +2021,7 @@ internal class Player
                 if (oPtr != null && (itemFilter == null || itemFilter.ItemMatches(oPtr)))
                 {
                     ConsoleTableRow consoleRow = consoleTable.AddRow();
-                    consoleRow["label"] = new ConsoleString(Colour.White, $"{index.IndexToLabel()})");
+                    consoleRow["label"] = new ConsoleString(ColourEnum.White, $"{index.IndexToLabel()})");
 
                     if (oPtr.Factory != null)
                     {
@@ -2031,25 +2031,25 @@ internal class Player
                     else
                     {
                         // There is no item.
-                        consoleRow["flavour"] = new ConsoleChar(Colour.Background, ' ');
+                        consoleRow["flavour"] = new ConsoleChar(ColourEnum.Background, ' ');
                     }
-                    consoleRow["usage"] = new ConsoleString(Colour.White, $"{inventorySlot.MentionUse(index)}:");
+                    consoleRow["usage"] = new ConsoleString(ColourEnum.White, $"{inventorySlot.MentionUse(index)}:");
 
-                    Colour colour = oPtr.Factory == null ? Colour.White : oPtr.Factory.Colour;
+                    ColourEnum colour = oPtr.Factory == null ? ColourEnum.White : oPtr.Factory.Colour;
                     consoleRow["description"] = new ConsoleString(colour, oPtr.Description(true, 3));
 
                     int wgt = oPtr.Weight * oPtr.Count;
-                    consoleRow["weight"] = new ConsoleString(Colour.White, $"{wgt / 10}.{wgt % 10} lb");
+                    consoleRow["weight"] = new ConsoleString(ColourEnum.White, $"{wgt / 10}.{wgt % 10} lb");
                     slotIsEmpty = false;
                 }
             }
             if (options.ShowEmptySlotsAsNothing && slotIsEmpty)
             {
                 ConsoleTableRow consoleRow = consoleTable.AddRow();
-                consoleRow["label"] = new ConsoleString(Colour.White, $"{labels[consoleTable.Rows.Count() - 1]})");
-                consoleRow["usage"] = new ConsoleString(Colour.White, $"{inventorySlot.MentionUse(null)}:");
-                consoleRow["description"] = new ConsoleString(Colour.White, "(nothing)");
-                consoleRow["weight"] = new ConsoleString(Colour.White, $"0.0 lb");
+                consoleRow["label"] = new ConsoleString(ColourEnum.White, $"{labels[consoleTable.Rows.Count() - 1]})");
+                consoleRow["usage"] = new ConsoleString(ColourEnum.White, $"{inventorySlot.MentionUse(null)}:");
+                consoleRow["description"] = new ConsoleString(ColourEnum.White, "(nothing)");
+                consoleRow["weight"] = new ConsoleString(ColourEnum.White, $"0.0 lb");
             }
         }
 
@@ -2058,7 +2058,7 @@ internal class Player
             if (consoleTable.Width < 29)
             {
                 ConsoleWindow container = new ConsoleWindow(50, 1, 79, consoleTable.Height);
-                container.Clear(SaveGame, Colour.Background);
+                container.Clear(SaveGame, ColourEnum.Background);
                 consoleTable.Render(SaveGame, container, new ConsoleTopLeftAlignment());
             }
             else

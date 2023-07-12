@@ -13,7 +13,7 @@ internal class WyvernMonsterRace : MonsterRace
     protected WyvernMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
-    public override Colour Colour => Colour.Brown;
+    public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Wyvern";
 
     public override bool Animal => true;

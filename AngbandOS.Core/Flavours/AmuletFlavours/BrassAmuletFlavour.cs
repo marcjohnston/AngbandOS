@@ -12,6 +12,6 @@ internal class BrassAmuletFlavour : AmuletFlavour
 {
     private BrassAmuletFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<DoubleQuoteSymbol>();
-    public override Colour Colour => Colour.Copper;
+    public override ColourEnum Colour => ColourEnum.Copper;
     public override string Name => "Brass";
 }

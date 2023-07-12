@@ -12,6 +12,6 @@ internal class TortoiseShellRingFlavour : RingFlavour
 {
     private TortoiseShellRingFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<EqualSignSymbol>();
-    public override Colour Colour => Colour.Yellow;
+    public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "Tortoise Shell";
 }

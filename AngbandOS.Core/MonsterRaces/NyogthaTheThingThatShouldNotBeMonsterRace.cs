@@ -26,7 +26,7 @@ internal class NyogthaTheThingThatShouldNotBeMonsterRace : MonsterRace
         new SummonUndeadMonsterSpell(),
         new TeleportSelfMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperXSymbol>();
-    public override Colour Colour => Colour.Black;
+    public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Nyogtha, the Thing that Should not Be";
 
     public override int ArmourClass => 120;

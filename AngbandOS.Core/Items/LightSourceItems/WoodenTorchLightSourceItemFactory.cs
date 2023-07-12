@@ -18,7 +18,7 @@ internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
     public override int BurnRate => 1;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<TildeSymbol>();
-    public override Colour Colour => Colour.Brown;
+    public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Wooden Torch";
 
     /// <summary>

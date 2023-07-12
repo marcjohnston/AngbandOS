@@ -13,7 +13,7 @@ internal class DiggingGnomishShovel : DiggingItemClass
     private DiggingGnomishShovel(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<BackSlashSymbol>();
-    public override Colour Colour => Colour.BrightGreen;
+    public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Gnomish Shovel";
 
     public override int[] Chance => new int[] { 4, 0, 0, 0 };

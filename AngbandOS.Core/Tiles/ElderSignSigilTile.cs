@@ -12,7 +12,7 @@ internal class ElderSignSigilTile : Tile
 {
     private ElderSignSigilTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<AsteriskSymbol>();
-    public override Colour Colour => Colour.Green;
+    public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "ElderSign";
     public override string AppearAs => "ElderSign";
     public override string Description => "Elder Sign";

@@ -23,7 +23,7 @@ internal class VampireLordMonsterRace : MonsterRace
         new ScareMonsterSpell(),
         new DarknessMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperVSymbol>();
-    public override Colour Colour => Colour.Blue;
+    public override ColourEnum Colour => ColourEnum.Blue;
     public override string Name => "Vampire lord";
 
     public override int ArmourClass => 70;

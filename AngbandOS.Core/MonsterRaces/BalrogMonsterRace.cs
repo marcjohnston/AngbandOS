@@ -23,7 +23,7 @@ internal class BalrogMonsterRace : MonsterRace
         new SummonHiUndeadMonsterSpell(),
         new SummonUndeadMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperUSymbol>();
-    public override Colour Colour => Colour.BrightRed;
+    public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Balrog";
 
     public override int ArmourClass => 80;

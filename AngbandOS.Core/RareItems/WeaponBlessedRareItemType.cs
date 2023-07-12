@@ -12,7 +12,7 @@ internal class WeaponBlessedRareItem : RareItem
 {
     private WeaponBlessedRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
-    public override Colour Colour => Colour.BrightWhite;
+    public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "Weapon (Blessed)";
     public override bool Blessed => true;
     public override int Cost => 5000;

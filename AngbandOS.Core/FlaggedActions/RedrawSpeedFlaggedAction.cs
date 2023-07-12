@@ -16,7 +16,7 @@ internal class RedrawSpeedFlaggedAction : FlaggedAction
     protected override void Execute()
     {
         int i = SaveGame.Player.Speed;
-        Colour attr = Colour.White;
+        ColourEnum attr = ColourEnum.White;
         string buf = "";
         if (SaveGame.Player.IsSearching)
         {
@@ -25,12 +25,12 @@ internal class RedrawSpeedFlaggedAction : FlaggedAction
         int energy = Constants.ExtractEnergy[i];
         if (i > 110)
         {
-            attr = Colour.BrightGreen;
+            attr = ColourEnum.BrightGreen;
             buf = $"Fast {energy / 10.0}";
         }
         else if (i < 110)
         {
-            attr = Colour.BrightBrown;
+            attr = ColourEnum.BrightBrown;
             buf = $"Slow {energy / 10.0}";
         }
         SaveGame.Screen.Print(attr, buf.PadRight(14), RowSpeed, ColSpeed);

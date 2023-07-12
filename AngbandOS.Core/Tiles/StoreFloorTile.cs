@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Tiles;
 internal class StoreFloorTile : Tile
 {
     private Symbol _symbol;
-    private Colour _colour;
+    private ColourEnum _colour;
     private string _name;
     private string _appearAs;
     private string _description;
@@ -23,11 +23,11 @@ internal class StoreFloorTile : Tile
     public override bool IsShop => true;
     public override int MapPriority => 0;
     public override Symbol Symbol => _symbol;
-    public override Colour Colour => _colour;
+    public override ColourEnum Colour => _colour;
     public override string Name => _name;
     public override string AppearAs => _appearAs;
     public override string Description => _description;
-    public StoreFloorTile(SaveGame saveGame, Symbol symbol, Colour colour, string name, string appearAs, string description) : base(saveGame)
+    public StoreFloorTile(SaveGame saveGame, Symbol symbol, ColourEnum colour, string name, string appearAs, string description) : base(saveGame)
     {
         _symbol = symbol;
         _colour = colour;

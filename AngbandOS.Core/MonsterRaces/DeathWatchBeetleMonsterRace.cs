@@ -13,7 +13,7 @@ internal class DeathWatchBeetleMonsterRace : MonsterRace
     protected DeathWatchBeetleMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperKSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Death watch beetle";
 
     public override bool Animal => true;

@@ -14,7 +14,7 @@ internal class BronzeDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemF
 
     public override string? DescribeActivationEffect => "breathe confusion (120) every 450+d450 turns";
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenBraceSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Bronze Dragon Scale Mail";
 
     public override int Ac => 30;

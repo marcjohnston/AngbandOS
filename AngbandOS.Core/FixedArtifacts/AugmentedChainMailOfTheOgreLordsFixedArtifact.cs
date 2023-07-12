@@ -32,7 +32,7 @@ internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : FixedArtifact, IF
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenBraceSymbol>();
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "The Augmented Chain Mail of the Ogre Lords";
     public override int Ac => 16;
     public override bool Activate => true;

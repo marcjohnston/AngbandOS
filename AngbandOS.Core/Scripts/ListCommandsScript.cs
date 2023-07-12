@@ -18,15 +18,15 @@ namespace AngbandOS.Core.Scripts
             ScreenBuffer savedScreen = SaveGame.Screen.Clone();
             SaveGame.UpdateScreen();
             SaveGame.Screen.Clear();
-            SaveGame.SetBackground(BackgroundImage.Normal);
-            SaveGame.Screen.Print(Colour.Yellow, "Numpad", 1, 1);
+            SaveGame.SetBackground(BackgroundImageEnum.Normal);
+            SaveGame.Screen.Print(ColourEnum.Yellow, "Numpad", 1, 1);
             SaveGame.Screen.Print("7 8 9", 3, 1);
             SaveGame.Screen.Print(" \\|/", 4, 1);
             SaveGame.Screen.Print("4- -6 = Move", 5, 1);
             SaveGame.Screen.Print(" /|\\    (+Shift = run)", 6, 1);
             SaveGame.Screen.Print("1 2 3", 7, 1);
             SaveGame.Screen.Print("5 = Stand still", 8, 1);
-            SaveGame.Screen.Print(Colour.Yellow, "Other Symbols", 10, 1);
+            SaveGame.Screen.Print(ColourEnum.Yellow, "Other Symbols", 10, 1);
             SaveGame.Screen.Print(". = Run", 12, 1);
             SaveGame.Screen.Print("< = Go up stairs", 13, 1);
             SaveGame.Screen.Print("> = Go down stairs", 14, 1);
@@ -35,7 +35,7 @@ namespace AngbandOS.Core.Scripts
             SaveGame.Screen.Print("/ = Identify a symbol", 17, 1);
             SaveGame.Screen.Print("? = Command list", 18, 1);
             SaveGame.Screen.Print("Esc = Save and quit", 20, 1);
-            SaveGame.Screen.Print(Colour.Yellow, "Without Shift", 1, 25);
+            SaveGame.Screen.Print(ColourEnum.Yellow, "Without Shift", 1, 25);
             SaveGame.Screen.Print("a = Aim a wand", 3, 25);
             SaveGame.Screen.Print("b = Browse a book", 4, 25);
             SaveGame.Screen.Print("c = Close a door", 5, 25);
@@ -62,7 +62,7 @@ namespace AngbandOS.Core.Scripts
             SaveGame.Screen.Print("x = Examine an object", 26, 25);
             SaveGame.Screen.Print("y =", 27, 25);
             SaveGame.Screen.Print("z = Zap a rod", 28, 25);
-            SaveGame.Screen.Print(Colour.Yellow, "With Shift", 1, 52);
+            SaveGame.Screen.Print(ColourEnum.Yellow, "With Shift", 1, 52);
             SaveGame.Screen.Print("A = Activate an artifact", 3, 52);
             SaveGame.Screen.Print("B = Bash a stuck door", 4, 52);
             SaveGame.Screen.Print("C = View your character", 5, 52);
@@ -87,7 +87,7 @@ namespace AngbandOS.Core.Scripts
             }
             SaveGame.AnyKey(44);
             SaveGame.Screen.Restore(savedScreen);
-            SaveGame.SetBackground(BackgroundImage.Overhead);
+            SaveGame.SetBackground(BackgroundImageEnum.Overhead);
             SaveGame.FullScreenOverlay = false;
             return false;
         }

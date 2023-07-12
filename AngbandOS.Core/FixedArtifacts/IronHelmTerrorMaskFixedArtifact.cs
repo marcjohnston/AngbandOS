@@ -46,7 +46,7 @@ internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact, IFixedArtifactAc
     public string DescribeActivationEffect() => "rays of fear in every direction";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBraceSymbol>();
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "The Iron Helm 'Terror Mask'";
     public override int Ac => 5;
     public override bool Activate => true;

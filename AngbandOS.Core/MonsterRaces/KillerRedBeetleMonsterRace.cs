@@ -13,7 +13,7 @@ internal class KillerRedBeetleMonsterRace : MonsterRace
     protected KillerRedBeetleMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperKSymbol>();
-    public override Colour Colour => Colour.Red;
+    public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Killer red beetle";
 
     public override bool Animal => true;

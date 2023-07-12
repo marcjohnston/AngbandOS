@@ -24,7 +24,7 @@ internal class ChainMailHeartguardFixedArtifact : FixedArtifact
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenBraceSymbol>();
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "The Chain Mail 'Heartguard'";
     public override int Ac => 14;
     public override bool Cha => true;

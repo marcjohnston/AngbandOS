@@ -13,7 +13,7 @@ internal class TheDisembodiedHandMonsterRace : MonsterRace
     protected TheDisembodiedHandMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerZSymbol>();
-    public override Colour Colour => Colour.Green;
+    public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "The disembodied hand";
 
     public override int ArmourClass => 15;

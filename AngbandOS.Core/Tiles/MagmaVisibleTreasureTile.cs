@@ -12,7 +12,7 @@ internal class MagmaVisibleTreasureTile : Tile
 {
     private MagmaVisibleTreasureTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<AsteriskSymbol>();
-    public override Colour Colour => Colour.BrightOrange;
+    public override ColourEnum Colour => ColourEnum.BrightOrange;
     public override string Name => "MagmaVisTreas";
     public override AlterAction? AlterAction => new TunnelAlterAction();
     public override string AppearAs => "MagmaVisTreas";

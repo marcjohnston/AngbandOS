@@ -13,7 +13,7 @@ internal class StripOfVenisonFoodItemFactory : FoodItemFactory
     private StripOfVenisonFoodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CommaSymbol>();
-    public override Colour Colour => Colour.Brown;
+    public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Strip of Venison";
 
     public override int Cost => 2;
@@ -22,7 +22,7 @@ internal class StripOfVenisonFoodItemFactory : FoodItemFactory
     public override int Weight => 2;
     public override bool Eat()
     {
-        SaveGame.PlaySound(SoundEffect.Eat);
+        SaveGame.PlaySound(SoundEffectEnum.Eat);
         SaveGame.MsgPrint("That tastes good.");
         return true;
     }

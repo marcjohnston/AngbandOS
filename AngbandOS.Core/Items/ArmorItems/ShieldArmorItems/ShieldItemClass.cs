@@ -16,7 +16,7 @@ internal abstract class ShieldItemClass : ArmourItemFactory
     public override int PackSort => 23;
     public override bool HatesAcid => true;
 
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
 
     public override bool CanReflectBoltsAndArrows => true;
 }

@@ -18,7 +18,7 @@ internal class DarkYoungOfShubNiggurathMonsterRace : MonsterRace
         new HealMonsterSpell(),
         new SummonCthuloidMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperASymbol>();
-    public override Colour Colour => Colour.Green;
+    public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "Dark young of Shub-Niggurath";
 
     public override int ArmourClass => 75;

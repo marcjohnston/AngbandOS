@@ -18,7 +18,7 @@ internal class TheIckyQueenMonsterRace : MonsterRace
         new DrainManaMonsterSpell(),
         new ScareMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerISymbol>();
-    public override Colour Colour => Colour.Chartreuse;
+    public override ColourEnum Colour => ColourEnum.Chartreuse;
     public override string Name => "The Icky Queen";
 
     public override int ArmourClass => 50;

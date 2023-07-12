@@ -45,6 +45,6 @@ internal abstract class PotionItemFactory : ItemFactory, IFlavour
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Potion;
     public override int BaseValue => 20;
     public override bool HatesCold => true;
-    public override Colour Colour => Colour.Blue;
+    public override ColourEnum Colour => ColourEnum.Blue;
 
 }

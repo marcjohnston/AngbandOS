@@ -24,7 +24,7 @@ internal class MandorMasterOfChaosMonsterRace : MonsterRace
         new HealMonsterSpell(),
         new SummonMonsterMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
-    public override Colour Colour => Colour.Purple;
+    public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Mandor, Master of Chaos";
 
     public override int ArmourClass => 90;

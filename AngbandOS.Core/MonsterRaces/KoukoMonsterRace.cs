@@ -16,7 +16,7 @@ internal class KoukoMonsterRace : MonsterRace
         new DrainManaMonsterSpell(),
         new ScareMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperWSymbol>();
-    public override Colour Colour => Colour.BrightGreen;
+    public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Kouko";
 
     public override int ArmourClass => 30;

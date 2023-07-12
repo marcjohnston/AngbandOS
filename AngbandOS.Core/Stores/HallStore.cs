@@ -18,7 +18,7 @@ internal class HallStore : Store
     };
 
     public override string FeatureType => "HallOfRecords";
-    public override Colour Colour => Colour.Yellow;
+    public override ColourEnum Colour => ColourEnum.Yellow;
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<NumberEightSymbol>();
     public override string Description => "Hall of Records";
 

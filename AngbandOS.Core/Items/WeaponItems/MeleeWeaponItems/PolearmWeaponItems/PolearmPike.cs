@@ -13,7 +13,7 @@ internal class PolearmPike : PolearmItemClass
     private PolearmPike(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ForwardSlashSymbol>();
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Pike";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

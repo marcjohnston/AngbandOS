@@ -15,7 +15,7 @@ internal class BaronOfHellMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         new PlasmaBoltMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperUSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Baron of hell";
 
     public override int ArmourClass => 130;

@@ -19,7 +19,7 @@ internal class TwoHandedFlailThunderfistFixedArtifact : FixedArtifact
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<BackSlashSymbol>();
-    public override Colour Colour => Colour.Yellow;
+    public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "The Two-Handed Flail 'Thunderfist'";
     public override int Ac => 0;
     public override bool BrandElec => true;

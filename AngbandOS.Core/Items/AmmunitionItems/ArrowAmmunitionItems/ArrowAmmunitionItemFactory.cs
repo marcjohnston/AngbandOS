@@ -21,5 +21,5 @@ internal abstract class ArrowAmmunitionItemFactory : AmmunitionItemFactory
     public override bool KindIsGood => true;
 
 
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
 }

@@ -16,7 +16,7 @@ internal class QuylthulgMonsterRace : MonsterRace
         new BlinkMonsterSpell(),
         new SummonMonsterMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperQSymbol>();
-    public override Colour Colour => Colour.BrightWhite;
+    public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "Quylthulg";
 
     public override int ArmourClass => 1;

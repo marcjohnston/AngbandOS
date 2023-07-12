@@ -12,6 +12,6 @@ internal class MahoganyStaffFlavour : StaffFlavour
 {
     private MahoganyStaffFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UnderscoreSymbol>();
-    public override Colour Colour => Colour.Brown;
+    public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Mahogany";
 }

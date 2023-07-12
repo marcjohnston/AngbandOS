@@ -1,6 +1,6 @@
 ﻿namespace AngbandOS.Core.Interface;
 
-public enum SoundEffect
+public enum SoundEffectEnum
 {
     EnterTownDay = 0,
     EnterTownNight = 1,

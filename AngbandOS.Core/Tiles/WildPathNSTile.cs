@@ -12,7 +12,7 @@ internal class WildPathNSTile : Tile
 {
     private WildPathNSTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "WildPathNS";
     public override string AppearAs => "WildPathNS";
     public override string Description => "path";

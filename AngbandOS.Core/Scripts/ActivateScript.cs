@@ -75,7 +75,7 @@ namespace AngbandOS.Core.Scripts
 
             // We passed the checks, so the item is activated
             SaveGame.MsgPrint("You activate it...");
-            SaveGame.PlaySound(SoundEffect.ActivateArtifact);
+            SaveGame.PlaySound(SoundEffectEnum.ActivateArtifact);
 
             // If it is a random artifact then use its ability and quit
             if (string.IsNullOrEmpty(item.RandartName) == false)

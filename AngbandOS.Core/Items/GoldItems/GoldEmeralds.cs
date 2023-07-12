@@ -13,7 +13,7 @@ internal class GoldEmeralds : GoldItemClass
     private GoldEmeralds(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<DollarSignSymbol>();
-    public override Colour Colour => Colour.Green;
+    public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "emeralds";
 
     public override int Cost => 32;

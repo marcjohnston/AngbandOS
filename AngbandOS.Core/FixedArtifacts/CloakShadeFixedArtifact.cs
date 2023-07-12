@@ -19,7 +19,7 @@ internal class CloakShadeFixedArtifact : FixedArtifact
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenParenthesisSymbol>();
-    public override Colour Colour => Colour.Green;
+    public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "The Cloak 'Shade'";
     public override int Ac => 1;
     public override int Cost => 8000;

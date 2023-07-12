@@ -21,7 +21,7 @@ internal class TselakusTheDreadlordMonsterRace : MonsterRace
         new SummonHiUndeadMonsterSpell(),
         new SummonKinMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperGSymbol>();
-    public override Colour Colour => Colour.Red;
+    public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Tselakus, the Dreadlord";
 
     public override int ArmourClass => 150;

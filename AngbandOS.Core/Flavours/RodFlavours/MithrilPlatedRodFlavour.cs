@@ -12,6 +12,6 @@ internal class MithrilPlatedRodFlavour : RodFlavour
 {
     private MithrilPlatedRodFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<MinusSignSymbol>();
-    public override Colour Colour => Colour.BrightBlue;
+    public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "Mithril-Plated";
 }

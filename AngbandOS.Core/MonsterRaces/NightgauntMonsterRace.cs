@@ -17,7 +17,7 @@ internal class NightgauntMonsterRace : MonsterRace
         new ConfuseMonsterSpell(),
         new FireBoltMonsterSpell());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperUSymbol>();
-    public override Colour Colour => Colour.Purple;
+    public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Nightgaunt";
 
     public override int ArmourClass => 50;

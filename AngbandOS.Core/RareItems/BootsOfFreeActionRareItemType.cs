@@ -12,7 +12,7 @@ internal class BootsOfFreeActionRareItem : RareItem
 {
     private BootsOfFreeActionRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBraceSymbol>();
-    public override Colour Colour => Colour.BrightBrown;
+    public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Boots of Free Action";
     public override int Cost => 1000;
     public override bool FreeAct => true;

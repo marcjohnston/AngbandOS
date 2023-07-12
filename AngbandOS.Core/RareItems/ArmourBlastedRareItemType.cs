@@ -12,7 +12,7 @@ internal class ArmourBlastedRareItem : RareItem
 {
     private ArmourBlastedRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenBraceSymbol>();
-    public override Colour Colour => Colour.Grey;
+    public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Armour (Blasted)";
     public override int Cost => 0;
     public override string FriendlyName => "(Blasted)";

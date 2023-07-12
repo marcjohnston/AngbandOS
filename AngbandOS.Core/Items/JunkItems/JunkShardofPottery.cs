@@ -13,7 +13,7 @@ internal class JunkShardOfPottery : JunkItemClass
     private JunkShardOfPottery(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<TildeSymbol>();
-    public override Colour Colour => Colour.Red;
+    public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Shard of Pottery";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

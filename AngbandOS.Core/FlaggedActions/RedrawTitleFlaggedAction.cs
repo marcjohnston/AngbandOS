@@ -15,8 +15,8 @@ internal class RedrawTitleFlaggedAction : FlaggedAction
     public RedrawTitleFlaggedAction(SaveGame saveGame) : base(saveGame) { }
     private void PrtField(string info, int row, int col) // TODO: Duplicate with PrPlayerRedrawAction
     {
-        SaveGame.Screen.Print(Colour.White, "             ", row, col);
-        SaveGame.Screen.Print(Colour.BrightBlue, info, row, col);
+        SaveGame.Screen.Print(ColourEnum.White, "             ", row, col);
+        SaveGame.Screen.Print(ColourEnum.BrightBlue, info, row, col);
     }
     protected override void Execute()
     {

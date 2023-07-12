@@ -28,7 +28,7 @@ internal class StarEssenceOfPolarisFixedArtifact : FixedArtifact, IFixedArtifact
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<AsteriskSymbol>();
-    public override Colour Colour => Colour.Yellow;
+    public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "The Star Essence of Polaris";
     public override int Ac => 0;
     public override bool Activate => true;
