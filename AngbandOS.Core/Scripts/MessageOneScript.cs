@@ -5,17 +5,16 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Scripts
-{
-    [Serializable]
-    internal class MessageOneScript : Script
-    {
-        private MessageOneScript(SaveGame saveGame) : base(saveGame) { }
+namespace AngbandOS.Core.Scripts;
 
-        public override bool Execute()
-        {
-            SaveGame.Screen.PrintLine($"> {SaveGame.MessageStr(0)}", 0, 0);
-            return false;
-        }
+[Serializable]
+internal class MessageOneScript : Script
+{
+    private MessageOneScript(SaveGame saveGame) : base(saveGame) { }
+
+    public override bool Execute()
+    {
+        SaveGame.Screen.PrintLine($"> {SaveGame.MessageStr(0)}", 0, 0);
+        return false;
     }
 }

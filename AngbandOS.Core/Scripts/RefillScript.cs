@@ -5,43 +5,42 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Scripts
+namespace AngbandOS.Core.Scripts;
+
+[Serializable]
+internal class RefillScript : Script
 {
-    [Serializable]
-    internal class RefillScript : Script
+    private RefillScript(SaveGame saveGame) : base(saveGame) { }
+
+    public override bool Execute()
     {
-        private RefillScript(SaveGame saveGame) : base(saveGame) { }
+        // Make sure we actually have a light source to refuel.           
+        BaseInventorySlot? chosenLightSourceInventorySlot = SaveGame.SingletonRepository.InventorySlots.ToWeightedRandom(inventorySlot => inventorySlot.ProvidesLight).Choose();
 
-        public override bool Execute()
+        // Check to ensure there is an inventory slot for light sources.
+        if (chosenLightSourceInventorySlot == null)
         {
-            // Make sure we actually have a light source to refuel.           
-            BaseInventorySlot? chosenLightSourceInventorySlot = SaveGame.SingletonRepository.InventorySlots.ToWeightedRandom(inventorySlot => inventorySlot.ProvidesLight).Choose();
-
-            // Check to ensure there is an inventory slot for light sources.
-            if (chosenLightSourceInventorySlot == null)
-            {
-                SaveGame.MsgPrint("You are not wielding a light.");
-                return false;
-            }
-
-            // Now choose a light source item.
-            int? i = chosenLightSourceInventorySlot.WeightedRandom.Choose();
-            if (i == null)
-            {
-                SaveGame.MsgPrint("You are not wielding a light.");
-                return false;
-            }
-
-            Item? lightSource = SaveGame.GetInventoryItem(i.Value);
-            if (lightSource == null)
-            {
-                SaveGame.MsgPrint("You are not wielding a light.");
-                return false;
-            }
-
-            LightSourceItemFactory lightSourceItem = (LightSourceItemFactory)lightSource.Factory;
-            lightSourceItem.Refill(SaveGame, lightSource);
+            SaveGame.MsgPrint("You are not wielding a light.");
             return false;
         }
+
+        // Now choose a light source item.
+        int? i = chosenLightSourceInventorySlot.WeightedRandom.Choose();
+        if (i == null)
+        {
+            SaveGame.MsgPrint("You are not wielding a light.");
+            return false;
+        }
+
+        Item? lightSource = SaveGame.GetInventoryItem(i.Value);
+        if (lightSource == null)
+        {
+            SaveGame.MsgPrint("You are not wielding a light.");
+            return false;
+        }
+
+        LightSourceItemFactory lightSourceItem = (LightSourceItemFactory)lightSource.Factory;
+        lightSourceItem.Refill(SaveGame, lightSource);
+        return false;
     }
 }

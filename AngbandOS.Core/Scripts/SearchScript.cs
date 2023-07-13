@@ -5,83 +5,82 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Scripts
-{
-    /// <summary>
-    /// Search around the player for secret doors and traps
-    /// </summary>
-    [Serializable]
-    internal class SearchScript : Script
-    {
-        private SearchScript(SaveGame saveGame) : base(saveGame) { }
+namespace AngbandOS.Core.Scripts;
 
-        public override bool Execute()
+/// <summary>
+/// Search around the player for secret doors and traps
+/// </summary>
+[Serializable]
+internal class SearchScript : Script
+{
+    private SearchScript(SaveGame saveGame) : base(saveGame) { }
+
+    public override bool Execute()
+    {
+        // The basic chance is equal to our searching skill
+        int chance = SaveGame.Player.SkillSearching;
+        // If we can't see it's hard to search
+        if (SaveGame.Player.TimedBlindness.TurnsRemaining != 0 || SaveGame.Level.NoLight())
         {
-            // The basic chance is equal to our searching skill
-            int chance = SaveGame.Player.SkillSearching;
-            // If we can't see it's hard to search
-            if (SaveGame.Player.TimedBlindness.TurnsRemaining != 0 || SaveGame.Level.NoLight())
+            chance /= 10;
+        }
+        // If we're confused it's hard to search
+        if (SaveGame.Player.TimedConfusion.TurnsRemaining != 0 || SaveGame.Player.TimedHallucinations.TurnsRemaining != 0)
+        {
+            chance /= 10;
+        }
+        // Check the eight squares around us
+        for (int y = SaveGame.Player.MapY - 1; y <= SaveGame.Player.MapY + 1; y++)
+        {
+            for (int x = SaveGame.Player.MapX - 1; x <= SaveGame.Player.MapX + 1; x++)
             {
-                chance /= 10;
-            }
-            // If we're confused it's hard to search
-            if (SaveGame.Player.TimedConfusion.TurnsRemaining != 0 || SaveGame.Player.TimedHallucinations.TurnsRemaining != 0)
-            {
-                chance /= 10;
-            }
-            // Check the eight squares around us
-            for (int y = SaveGame.Player.MapY - 1; y <= SaveGame.Player.MapY + 1; y++)
-            {
-                for (int x = SaveGame.Player.MapX - 1; x <= SaveGame.Player.MapX + 1; x++)
+                // Check if we succeed
+                if (Program.Rng.RandomLessThan(100) < chance)
                 {
-                    // Check if we succeed
-                    if (Program.Rng.RandomLessThan(100) < chance)
+                    // If there's a trap, then find it
+                    GridTile tile = SaveGame.Level.Grid[y][x];
+                    if (tile.FeatureType.Name == "Invis")
                     {
-                        // If there's a trap, then find it
-                        GridTile tile = SaveGame.Level.Grid[y][x];
-                        if (tile.FeatureType.Name == "Invis")
+                        // Pick a random trap to replace the undetected one with
+                        SaveGame.Level.PickTrap(y, x);
+                        SaveGame.MsgPrint("You have found a trap.");
+                        SaveGame.Disturb(false);
+                    }
+                    if (tile.FeatureType.Name == "SecretDoor")
+                    {
+                        // Replace the secret door with a visible door
+                        SaveGame.MsgPrint("You have found a secret door.");
+                        SaveGame.Player.GainExperience(1);
+                        SaveGame.Level.ReplaceSecretDoor(y, x);
+                        SaveGame.Disturb(false);
+                    }
+                    // Check the items on the tile
+                    foreach (Item item in tile.Items)
+                    {
+                        // If one of them is a chest, determine if it is trapped
+                        if (item.Category != ItemTypeEnum.Chest)
                         {
-                            // Pick a random trap to replace the undetected one with
-                            SaveGame.Level.PickTrap(y, x);
-                            SaveGame.MsgPrint("You have found a trap.");
-                            SaveGame.Disturb(false);
+                            continue;
                         }
-                        if (tile.FeatureType.Name == "SecretDoor")
+                        if (item.TypeSpecificValue <= 0)
                         {
-                            // Replace the secret door with a visible door
-                            SaveGame.MsgPrint("You have found a secret door.");
-                            SaveGame.Player.GainExperience(1);
-                            SaveGame.Level.ReplaceSecretDoor(y, x);
-                            SaveGame.Disturb(false);
+                            continue;
                         }
-                        // Check the items on the tile
-                        foreach (Item item in tile.Items)
+                        if (SaveGame.SingletonRepository.ChestTrapConfigurations[item.TypeSpecificValue].NotTrapped)
                         {
-                            // If one of them is a chest, determine if it is trapped
-                            if (item.Category != ItemTypeEnum.Chest)
-                            {
-                                continue;
-                            }
-                            if (item.TypeSpecificValue <= 0)
-                            {
-                                continue;
-                            }
-                            if (SaveGame.SingletonRepository.ChestTrapConfigurations[item.TypeSpecificValue].NotTrapped)
-                            {
-                                continue;
-                            }
-                            // It was a trapped chest - if we didn't already know that then let us know
-                            if (!item.IsKnown())
-                            {
-                                SaveGame.MsgPrint("You have discovered a trap on the chest!");
-                                item.BecomeKnown();
-                                SaveGame.Disturb(false);
-                            }
+                            continue;
+                        }
+                        // It was a trapped chest - if we didn't already know that then let us know
+                        if (!item.IsKnown())
+                        {
+                            SaveGame.MsgPrint("You have discovered a trap on the chest!");
+                            item.BecomeKnown();
+                            SaveGame.Disturb(false);
                         }
                     }
                 }
             }
-            return false;
         }
+        return false;
     }
 }

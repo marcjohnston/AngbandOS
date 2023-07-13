@@ -5,17 +5,16 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Scripts
-{
-    [Serializable]
-    internal class ShowManualScript : Script
-    {
-        private ShowManualScript(SaveGame saveGame) : base(saveGame) { }
+namespace AngbandOS.Core.Scripts;
 
-        public override bool Execute()
-        {
-            SaveGame.ShowManual();
-            return false;
-        }
+[Serializable]
+internal class ShowManualScript : Script
+{
+    private ShowManualScript(SaveGame saveGame) : base(saveGame) { }
+
+    public override bool Execute()
+    {
+        SaveGame.ShowManual();
+        return false;
     }
 }

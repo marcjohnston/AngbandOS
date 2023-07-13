@@ -5,36 +5,35 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Scripts
-{
-    [Serializable]
-    internal class TakeOffScript : Script
-    {
-        private TakeOffScript(SaveGame saveGame) : base(saveGame) { }
+namespace AngbandOS.Core.Scripts;
 
-        public override bool Execute()
+[Serializable]
+internal class TakeOffScript : Script
+{
+    private TakeOffScript(SaveGame saveGame) : base(saveGame) { }
+
+    public override bool Execute()
+    {
+        // Get the item to take off
+        if (!SaveGame.SelectItem(out Item? item, "Take off which item? ", true, false, false, null))
         {
-            // Get the item to take off
-            if (!SaveGame.SelectItem(out Item? item, "Take off which item? ", true, false, false, null))
-            {
-                SaveGame.MsgPrint("You are not wearing anything to take off.");
-                return false;
-            }
-            if (item == null)
-            {
-                return false;
-            }
-            // Can't take of cursed items
-            if (item.IsCursed())
-            {
-                SaveGame.MsgPrint("Hmmm, it seems to be cursed.");
-                return false;
-            }
-            // Take off the item
-            SaveGame.EnergyUse = 50;
-            SaveGame.Player.InvenTakeoff(item, 255);
-            SaveGame.RedrawEquippyFlaggedAction.Set();
+            SaveGame.MsgPrint("You are not wearing anything to take off.");
             return false;
         }
+        if (item == null)
+        {
+            return false;
+        }
+        // Can't take of cursed items
+        if (item.IsCursed())
+        {
+            SaveGame.MsgPrint("Hmmm, it seems to be cursed.");
+            return false;
+        }
+        // Take off the item
+        SaveGame.EnergyUse = 50;
+        SaveGame.Player.InvenTakeoff(item, 255);
+        SaveGame.RedrawEquippyFlaggedAction.Set();
+        return false;
     }
 }

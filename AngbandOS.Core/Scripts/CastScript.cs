@@ -5,30 +5,29 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Scripts
-{
-    [Serializable]
-    internal class CastScript : Script
-    {
-        private CastScript(SaveGame saveGame) : base(saveGame) { }
+namespace AngbandOS.Core.Scripts;
 
-        public override bool Execute()
+[Serializable]
+internal class CastScript : Script
+{
+    private CastScript(SaveGame saveGame) : base(saveGame) { }
+
+    public override bool Execute()
+    {
+        if (SaveGame.Player.HasAntiMagic)
         {
-            if (SaveGame.Player.HasAntiMagic)
+            string whichMagicType = SaveGame.Player.BaseCharacterClass.SpellCastingType.MagicType;
+            if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mindcrafter || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mystic)
             {
-                string whichMagicType = SaveGame.Player.BaseCharacterClass.SpellCastingType.MagicType;
-                if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mindcrafter || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mystic)
-                {
-                    whichMagicType = "psychic talents";
-                }
-                SaveGame.MsgPrint($"An anti-magic shell disrupts your {whichMagicType}!");
-                SaveGame.EnergyUse = 5;
+                whichMagicType = "psychic talents";
             }
-            else
-            {
-                SaveGame.Player.BaseCharacterClass.SpellCastingType.Cast();
-            }
-            return false;
+            SaveGame.MsgPrint($"An anti-magic shell disrupts your {whichMagicType}!");
+            SaveGame.EnergyUse = 5;
         }
+        else
+        {
+            SaveGame.Player.BaseCharacterClass.SpellCastingType.Cast();
+        }
+        return false;
     }
 }

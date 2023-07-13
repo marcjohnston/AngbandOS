@@ -7,19 +7,18 @@
 
 using System.Reflection;
 
-namespace AngbandOS.Core.Scripts
+namespace AngbandOS.Core.Scripts;
+
+[Serializable]
+internal class VersionScript : Script
 {
-    [Serializable]
-    internal class VersionScript : Script
+
+    private VersionScript(SaveGame saveGame) : base(saveGame) { }
+
+    public override bool Execute()
     {
-
-        private VersionScript(SaveGame saveGame) : base(saveGame) { }
-
-        public override bool Execute()
-        {
-            AssemblyName assembly = Assembly.GetExecutingAssembly().GetName();
-            SaveGame.MsgPrint($"You are playing {assembly.Name} {assembly.Version}.");
-            return false;
-        }
+        AssemblyName assembly = Assembly.GetExecutingAssembly().GetName();
+        SaveGame.MsgPrint($"You are playing {assembly.Name} {assembly.Version}.");
+        return false;
     }
 }

@@ -5,24 +5,23 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Scripts
-{
-    [Serializable]
-    internal class TargetScript : Script
-    {
-        private TargetScript(SaveGame saveGame) : base(saveGame) { }
+namespace AngbandOS.Core.Scripts;
 
-        public override bool Execute()
+[Serializable]
+internal class TargetScript : Script
+{
+    private TargetScript(SaveGame saveGame) : base(saveGame) { }
+
+    public override bool Execute()
+    {
+        if (SaveGame.TargetSet(Constants.TargetKill))
         {
-            if (SaveGame.TargetSet(Constants.TargetKill))
-            {
-                SaveGame.MsgPrint(SaveGame.TargetWho > 0 ? "Target Selected." : "Location Targeted.");
-            }
-            else
-            {
-                SaveGame.MsgPrint("Target Aborted.");
-            }
-            return false;
+            SaveGame.MsgPrint(SaveGame.TargetWho > 0 ? "Target Selected." : "Location Targeted.");
         }
+        else
+        {
+            SaveGame.MsgPrint("Target Aborted.");
+        }
+        return false;
     }
 }

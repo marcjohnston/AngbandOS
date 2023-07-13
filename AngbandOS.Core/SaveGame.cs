@@ -13,6 +13,7 @@ namespace AngbandOS.Core;
 internal class SaveGame
 {
     public const int DungeonCount = 20;
+    public Configuration Configuration;
 
     public const int OneInChanceUpStairsReturnsToTownLevel = 5;
     public FlaggedAction RedrawMapFlaggedAction { get; }
@@ -970,25 +971,30 @@ internal class SaveGame
 
     private void Configure(Configuration? configuration)
     {
-        if (configuration != null)
+        // We need a default configuration, if one isn't provided.
+        if (configuration == null)
         {
-            // Stores repo.
-            if (configuration.StoresRepo != null)
-            {
-                foreach (StoreConfiguration storeConfiguration in configuration.StoresRepo)
-                {
+            configuration = new Configuration();
+        }
 
-                }
+        Configuration = configuration;
+
+        // Stores repo.
+        if (configuration.StoresRepo != null)
+        {
+            foreach (StoreConfiguration storeConfiguration in configuration.StoresRepo)
+            {
+
             }
+        }
 
-            // Stores.
-            if (configuration.StoresRepo != null)
+        // Stores.
+        if (configuration.StoresRepo != null)
+        {
+            //SingletonRepository.sto
+            foreach (string storeName in configuration.StoreNames)
             {
-                //SingletonRepository.sto
-                foreach (string storeName in configuration.StoreNames)
-                {
 
-                }
             }
         }
     }
@@ -1315,11 +1321,15 @@ internal class SaveGame
         // We're still here, so we just add ourselves
         _messageBuf.Add(str);
         _messageCounts.Add(1);
+
         // Limit the size
-        if (_messageBuf.Count > 2048)
+        if (Configuration.MaxHistoryLogItems != null)
         {
-            _messageBuf.RemoveAt(0);
-            _messageCounts.RemoveAt(0);
+            while (_messageBuf.Count > Configuration.MaxHistoryLogItems)
+            {
+                _messageBuf.RemoveAt(0);
+                _messageCounts.RemoveAt(0);
+            }
         }
     }
 

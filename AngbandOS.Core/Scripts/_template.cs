@@ -5,16 +5,15 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Scripts
-{
-    [Serializable]
-    internal class _template : Script
-    {
-        private _template(SaveGame saveGame) : base(saveGame) { }
+namespace AngbandOS.Core.Scripts;
 
-        public override bool Execute()
-        {
-            throw new NotImplementedException();
-        }
+[Serializable]
+internal class _template : Script
+{
+    private _template(SaveGame saveGame) : base(saveGame) { }
+
+    public override bool Execute()
+    {
+        throw new NotImplementedException();
     }
 }

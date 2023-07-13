@@ -5,23 +5,22 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Scripts
-{
-    [Serializable]
-    internal class WizardLearnScript : Script
-    {
-        private WizardLearnScript(SaveGame saveGame) : base(saveGame) { }
+namespace AngbandOS.Core.Scripts;
 
-        public override bool Execute()
+[Serializable]
+internal class WizardLearnScript : Script
+{
+    private WizardLearnScript(SaveGame saveGame) : base(saveGame) { }
+
+    public override bool Execute()
+    {
+        foreach (ItemFactory kPtr in SaveGame.SingletonRepository.ItemFactories)
         {
-            foreach (ItemFactory kPtr in SaveGame.SingletonRepository.ItemFactories)
+            if (kPtr.Level <= SaveGame.CommandArgument)
             {
-                if (kPtr.Level <= SaveGame.CommandArgument)
-                {
-                    kPtr.FlavourAware = true;
-                }
+                kPtr.FlavourAware = true;
             }
-            return false;
         }
+        return false;
     }
 }
