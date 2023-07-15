@@ -29,7 +29,6 @@ global using AngbandOS.Core.FlaggedActions;
 global using AngbandOS.Core.Flavours;
 global using AngbandOS.Core.Genders;
 global using AngbandOS.Core.HelpGroups;
-global using AngbandOS.Core.Hooks;
 global using AngbandOS.Core.Interface;
 global using AngbandOS.Core.InventorySlots;
 global using AngbandOS.Core.ItemActivations;
