@@ -111,6 +111,11 @@ namespace Cthangband
             }));
         }
 
+        public bool KeyQueueIsEmpty()
+        {
+            return KeyQueue.Count == 0;
+        }
+
         public char WaitForKey()
         {
             while (KeyQueue.Count == 0)

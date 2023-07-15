@@ -194,12 +194,6 @@ internal class SaveGame
     public char CurrentCommand;
 
     /// <summary>
-    /// Set to skip waiting for a keypress in the Inkey() function.  Set to true when running which disturbs the player when a keystroke is found
-    /// and also set to true, during wizard play with object statistics command.
-    /// </summary>
-    public bool DoNotWaitOnInkey;
-
-    /// <summary>
     /// Set to indicate that there is a full screen overlay covering the normally updated locations
     /// </summary>
     public bool FullScreenOverlay;
@@ -2856,8 +2850,7 @@ internal class SaveGame
         }
         if (Running != 0 || CommandRepeat != 0 || (Resting != 0 && (Resting & 0x0F) == 0))
         {
-            DoNotWaitOnInkey = true;
-            if (Inkey() != 0)
+            if (Inkey(true) != 0)
             {
                 Disturb(false);
                 MsgPrint("Cancelled.");
@@ -10633,24 +10626,22 @@ internal class SaveGame
     }
 
     /// <summary>
-    /// Returns the next keypress. The behaviour of this function is modified by other class properties
+    /// Returns the next keypress. The behavior of this function is modified by other class properties
     /// </summary>
     /// <returns> The next key pressed </returns>
-    public char Inkey()
+    public char Inkey(bool doNotWaitOnInkey = false)
     {
         char ch = '\0';
-        bool done = false;
         if (!string.IsNullOrEmpty(_keyBuffer))
         {
             ch = _keyBuffer[0];
             _keyBuffer = _keyBuffer.Remove(0, 1);
             HideCursorOnFullScreenInkey = false;
-            DoNotWaitOnInkey = false;
             return ch;
         }
         _keyBuffer = null;
         bool v = Screen.CursorVisible;
-        if (!DoNotWaitOnInkey && (!HideCursorOnFullScreenInkey || FullScreenOverlay))
+        if (!doNotWaitOnInkey && (!HideCursorOnFullScreenInkey || FullScreenOverlay))
         {
             Screen.CursorVisible = true;
         }
@@ -10660,17 +10651,12 @@ internal class SaveGame
         }
         while (ch == 0 && !Shutdown)
         {
-            if (DoNotWaitOnInkey && GetKeypress(out char kk, false, false))
+            if (doNotWaitOnInkey && GetKeypress(out char kk, false, false))
             {
                 ch = kk;
                 break;
             }
-            if (!done && GetKeypress(out _, false, false))
-            {
-                UpdateScreen();
-                done = true;
-            }
-            if (DoNotWaitOnInkey)
+            if (doNotWaitOnInkey)
             {
                 break;
             }
@@ -10691,7 +10677,6 @@ internal class SaveGame
         }
         Screen.CursorVisible = v;
         HideCursorOnFullScreenInkey = false;
-        DoNotWaitOnInkey = false;
         return ch;
     }
 
@@ -10866,6 +10851,13 @@ internal class SaveGame
                 EnqueueKey(_console.WaitForKey());
                 LastInputReceived = DateTime.Now;
                 UpdateMonitor?.InputReceived();
+            }
+        }
+        else
+        {
+            if (!_console.KeyQueueIsEmpty())
+            {
+                EnqueueKey(_console.WaitForKey());
             }
         }
         if (KeyHead == KeyTail)

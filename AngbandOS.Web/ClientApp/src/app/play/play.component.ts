@@ -321,9 +321,11 @@ export class PlayComponent implements OnInit, OnDestroy {
             });
           });
           this.connection.on("GameOver", () => {
+            this.GameInProgress = false;
             this._router.navigate(['/']);
           });
 
+          this.GameInProgress = true;
           this.connection.send("play", this.gameGuid);
         }
       }, () => {
@@ -332,6 +334,11 @@ export class PlayComponent implements OnInit, OnDestroy {
       });
     }
   }
+
+  /*
+   * Returns true, if the game is still in progress; false, otherwise.  This is used for the can-deactivate-play component to throw a warning dialog box, if they exist the screen. 
+   */
+  public GameInProgress: boolean = false;
 
   private showSnackBar(message: string) {
     this._snackBar.open(message, undefined, {

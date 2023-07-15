@@ -40,4 +40,9 @@ public class SpectatorConsole : IConsole
     {
         throw new NotImplementedException();
     }
+
+    public bool KeyQueueIsEmpty()
+    {
+        throw new NotImplementedException();
+    }
 }

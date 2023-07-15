@@ -39,4 +39,6 @@ public interface IConsole
     /// </summary>
     /// <param name="music"></param>
     void PlayMusic(MusicTrackEnum music);
+
+    bool KeyQueueIsEmpty();
 }

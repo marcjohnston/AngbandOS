@@ -238,6 +238,11 @@ namespace AngbandOS.Web.Hubs
             }
         }
 
+        public bool KeyQueueIsEmpty()
+        {
+            return KeyQueue.IsEmpty;
+        }
+
         /// <summary>
         /// This message is received from the game when a key is needed.
         /// </summary>

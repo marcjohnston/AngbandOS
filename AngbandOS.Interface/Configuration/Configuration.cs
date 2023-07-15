@@ -4,6 +4,7 @@
 /// Represents an interface that describes the configuration data that the GameServer.Play method accepts.  This configuration data is used to completely
 /// configure a new game.  Use the ConfigurationMetadata object to get metadata details that can be used to generate configuration data.
 /// </summary>
+[Serializable]
 public class Configuration
 {
     /// <summary>
