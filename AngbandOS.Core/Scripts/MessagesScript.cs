@@ -25,14 +25,16 @@ internal class MessagesScript : Script
         {
             // Clear the screen
             SaveGame.Screen.Clear();
-            int row;
+
             // Print the messages
+            int row;
             for (row = 0; row < 40 && index + row < messageNumber; row++)
             {
                 string msg = SaveGame.MessageStr((short)(index + row));
                 msg = msg.Length >= horizontalOffset ? msg.Substring(horizontalOffset) : "";
                 SaveGame.Screen.Print(ColourEnum.White, msg, 41 - row, 0);
             }
+
             // Get a command
             SaveGame.Screen.PrintLine($"Message Recall ({index}-{index + row - 1} of {messageNumber}), Offset {horizontalOffset}", 0, 0);
             SaveGame.Screen.PrintLine("[Press 'p' for older, 'n' for newer, <dir> to scroll, or ESCAPE]", 43, 0);
