@@ -4,17 +4,6 @@
   display: flex;
   flex-direction: row;
 
-  & #links-pane {
-    font-size: 0.9rem;
-    width: 150px;
-
-    & a {
-      color: rgb(13, 110, 253);
-      text-decoration: underline;
-      cursor: pointer;
-    }
-  }
-
   & #vertical-panes {
     display: flex;
     flex-direction: column;
@@ -52,6 +41,20 @@
       height: 100%;
       object-fit: none;
       object-position: left top;
+    }
+
+    & #in-game-menu {
+      position: absolute;
+
+      & #in-game-menu-flex-box {
+        display: flex;
+        flex-direction: column;
+
+        & button {
+          padding: 0;
+          margin: 0;
+        }
+      }
     }
   }
 

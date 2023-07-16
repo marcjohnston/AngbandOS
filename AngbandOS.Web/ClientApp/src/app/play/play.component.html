@@ -1,9 +1,7 @@
 <div id="container">
-  <div id="links-pane">
-    <a (click)="onEditPreferencesClick()" *ngIf="preferences !== undefined">Edit Preferences</a>
-  </div>
   <div id="vertical-panes">
     <div id="macros-div" *ngIf="preferences !== undefined">
+      <button (click)="showDropDown()">=</button>
       <button (click)="macroClicked('F1')">ALT-F1<br />{{preferences.f1Macro}}</button>
       <button (click)="macroClicked('F2')">ALT-F2<br />{{preferences.f2Macro}}</button>
       <button (click)="macroClicked('F3')">ALT-F3<br />{{preferences.f3Macro}}</button>
@@ -18,6 +16,16 @@
       <button (click)="macroClicked('F12')">ALT-F12<br />{{preferences.f12Macro}}</button>
     </div>
     <div #canvasContainer id="canvas-pane" (keydown)="onKeyDown($event)" title="ConnectionId: {{connectionId}} Game Guid: {{gameGuid}}">
+      <div #inGameMenu id="in-game-menu">
+        <div id="in-game-menu-flex-box">
+          <button (click)="onEditPreferencesClick()" *ngIf="preferences !== undefined">Preferences</button>
+          <button>Show Messages</button>
+          <button>Show Inventory</button>
+          <button>Character</button>
+          <button>Monster Knowledge</button>
+          <button>Statistics</button>
+        </div>
+      </div>
       <canvas #console></canvas>
     </div>
   </div>

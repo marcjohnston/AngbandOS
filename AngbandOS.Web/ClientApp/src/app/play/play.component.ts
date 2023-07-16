@@ -25,6 +25,7 @@ import { PutUserPreferences } from './put-user-preferences';
 })
 export class PlayComponent implements OnInit, OnDestroy {
   @ViewChild('console', { static: true }) private canvasRef: ElementRef | undefined;
+  @ViewChild('inGameMenu', { static: true }) private inGameMenuRef: ElementRef | undefined;
   private connection: SignalR.HubConnection | undefined;
   public connectionId: string | null = null;
   public gameGuid: string | null | undefined = undefined; // Represents the unique identifier for the game to play; null, to start a new game; otherwise, undefined when the guid hasn't been retrieved yet.
@@ -321,8 +322,10 @@ export class PlayComponent implements OnInit, OnDestroy {
             });
           });
           this.connection.on("GameOver", () => {
-            this.GameInProgress = false;
-            this._router.navigate(['/']);
+            this._zone.run(() => {
+              this.GameInProgress = false;
+              this._router.navigate(['/']);
+            });
           });
 
           this.GameInProgress = true;
@@ -333,6 +336,17 @@ export class PlayComponent implements OnInit, OnDestroy {
         this._router.navigate(['/']);
       });
     }
+  }
+
+  public showDropDown() {
+    this._zone.run(() => {
+      const inGameMenuElement: HTMLDivElement = this.inGameMenuRef?.nativeElement;
+      if (inGameMenuElement.style.display === "none") {
+        inGameMenuElement.style.display = "block";
+      } else {
+        inGameMenuElement.style.display = "none";
+      }
+    });
   }
 
   /*
@@ -356,6 +370,9 @@ export class PlayComponent implements OnInit, OnDestroy {
       // Create an HTML console module to handle all of the interaction.
       this._htmlConsole = new HtmlConsole(this.canvasRef);
 
+      const inGameMenuElement: HTMLDivElement = this.inGameMenuRef?.nativeElement;
+      inGameMenuElement.style.display = "none";
+      
       // Wait for the authentication.  Games can only be played with authenticated.
       this._initSubscriptions.add(this._authenticationService.currentUser.subscribe((_currentUser: UserDetails | null) => {
         if (_currentUser === null) {

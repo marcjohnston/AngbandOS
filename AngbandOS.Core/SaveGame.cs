@@ -230,6 +230,7 @@ internal class SaveGame
     /// <summary>
     /// Returns true, if the parent is requesting the game to shut down immediately.  Returns false, by default.
     /// </summary>
+    [NonSerialized]
     public bool Shutdown = false;
 
     /// GUI
@@ -1168,6 +1169,7 @@ internal class SaveGame
     public void Play(IConsole console, ICorePersistentStorage? persistentStorage, IUpdateMonitor? updateMonitor)
     {
         _console = console;
+        Shutdown = false;
         LastInputReceived = DateTime.Now;
         PersistentStorage = persistentStorage;
         UpdateMonitor = updateMonitor;
