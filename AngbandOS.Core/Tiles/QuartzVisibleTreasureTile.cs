@@ -14,7 +14,7 @@ internal class QuartzVisibleTreasureTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<AsteriskSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "QuartzVisTreas";
-    public override AlterAction? AlterAction => new TunnelAlterAction();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<TunnelAlterAction>();
     public override string AppearAs => "QuartzVisTreas";
     public override bool BlocksLos => true;
     public override bool IsVisibleTreasure => true;

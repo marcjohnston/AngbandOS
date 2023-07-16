@@ -24,7 +24,7 @@ internal class ScrollDispelUndead : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (eventArgs.SaveGame.DispelUndead(60))
+        if (SaveGame.DispelUndead(60))
         {
             eventArgs.Identified = true;
         }

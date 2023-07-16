@@ -14,7 +14,7 @@ internal class FireTrapTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CaretSymbol>();
     public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "FireTrap";
-    public override AlterAction? AlterAction => new DisarmAlterAction();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<DisarmAlterAction>();
     public override string AppearAs => "FireTrap";
     public override string Description => "discolored spot";
     public override bool IsInteresting => true;

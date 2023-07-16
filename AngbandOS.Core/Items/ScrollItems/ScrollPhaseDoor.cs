@@ -24,7 +24,7 @@ internal class ScrollPhaseDoor : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        eventArgs.SaveGame.TeleportPlayer(10);
+        SaveGame.TeleportPlayer(10);
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new PhaseDoorScrollItem(SaveGame);

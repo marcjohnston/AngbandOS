@@ -14,7 +14,7 @@ internal class StrengthDartTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CaretSymbol>();
     public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "StrDart";
-    public override AlterAction? AlterAction => new DisarmAlterAction();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<DisarmAlterAction>();
     public override string AppearAs => "StrDart";
     public override string Description => "dart trap";
     public override bool IsInteresting => true;

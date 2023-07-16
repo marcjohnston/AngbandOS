@@ -51,7 +51,7 @@ internal class ReadScrollScript : Script
         //bool usedUp = true;
 
         ScrollItemClass scrollItem = (ScrollItemClass)item.Factory;
-        ReadScrollEvent readScrollEventArgs = new ReadScrollEvent(SaveGame);
+        ReadScrollEvent readScrollEventArgs = new ReadScrollEvent();
         scrollItem.Read(readScrollEventArgs);
 
         SaveGame.NoticeCombineAndReorderFlaggedAction.Set();

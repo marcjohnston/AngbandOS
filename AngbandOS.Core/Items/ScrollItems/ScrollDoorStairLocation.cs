@@ -24,11 +24,11 @@ internal class ScrollDoorStairLocation : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (eventArgs.SaveGame.DetectDoors())
+        if (SaveGame.DetectDoors())
         {
             eventArgs.Identified = true;
         }
-        if (eventArgs.SaveGame.DetectStairs())
+        if (SaveGame.DetectStairs())
         {
             eventArgs.Identified = true;
         }

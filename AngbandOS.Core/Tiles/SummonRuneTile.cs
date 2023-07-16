@@ -14,7 +14,7 @@ internal class SummonRuneTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CaretSymbol>();
     public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "SummonRune";
-    public override AlterAction? AlterAction => new DisarmAlterAction();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<DisarmAlterAction>();
     public override string AppearAs => "SummonRune";
     public override string Description => "strange rune";
     public override bool IsInteresting => true;

@@ -24,10 +24,10 @@ internal class ScrollMonsterConfusion : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (!eventArgs.SaveGame.Player.HasConfusingTouch)
+        if (!SaveGame.Player.HasConfusingTouch)
         {
-            eventArgs.SaveGame.MsgPrint("Your hands begin to glow.");
-            eventArgs.SaveGame.Player.HasConfusingTouch = true;
+            SaveGame.MsgPrint("Your hands begin to glow.");
+            SaveGame.Player.HasConfusingTouch = true;
             eventArgs.Identified = true;
         }
     }

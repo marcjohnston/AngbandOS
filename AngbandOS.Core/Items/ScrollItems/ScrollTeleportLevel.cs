@@ -23,7 +23,7 @@ internal class ScrollTeleportLevel : ScrollItemClass
     public override int Weight => 5;
     public override void Read(ReadScrollEvent eventArgs)
     {
-        eventArgs.SaveGame.TeleportPlayerLevel();
+        SaveGame.TeleportPlayerLevel();
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new TeleportLevelScrollItem(SaveGame);

@@ -14,7 +14,7 @@ internal class SleepGasTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CaretSymbol>();
     public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "SleepGas";
-    public override AlterAction? AlterAction => new DisarmAlterAction();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<DisarmAlterAction>();
     public override string AppearAs => "SleepGas";
     public override string Description => "gas trap";
     public override bool IsInteresting => true;

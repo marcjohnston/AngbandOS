@@ -24,7 +24,7 @@ internal class ScrollCarnage : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        eventArgs.SaveGame.Carnage(true);
+        SaveGame.Carnage(true);
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new CarnageScrollItem(SaveGame);

@@ -23,7 +23,7 @@ internal class ScrollLight : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (eventArgs.SaveGame.LightArea(Program.Rng.DiceRoll(2, 8), 2))
+        if (SaveGame.LightArea(Program.Rng.DiceRoll(2, 8), 2))
         {
             eventArgs.Identified = true;
         }

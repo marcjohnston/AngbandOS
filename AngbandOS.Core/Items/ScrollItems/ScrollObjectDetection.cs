@@ -22,7 +22,7 @@ internal class ScrollObjectDetection : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (eventArgs.SaveGame.DetectObjectsNormal())
+        if (SaveGame.DetectObjectsNormal())
         {
             eventArgs.Identified = true;
         }

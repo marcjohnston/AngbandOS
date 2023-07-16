@@ -14,7 +14,7 @@ internal class SpikedPitTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CaretSymbol>();
     public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "SpikedPit";
-    public override AlterAction? AlterAction => new DisarmAlterAction();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<DisarmAlterAction>();
     public override string AppearAs => "SpikedPit";
     public override string Description => "pit";
     public override bool IsInteresting => true;

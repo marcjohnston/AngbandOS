@@ -23,7 +23,7 @@ internal class ScrollCurseWeapon : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (eventArgs.SaveGame.CurseWeapon())
+        if (SaveGame.CurseWeapon())
         {
             eventArgs.Identified = true;
         }

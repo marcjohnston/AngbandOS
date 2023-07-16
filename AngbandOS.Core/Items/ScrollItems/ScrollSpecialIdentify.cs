@@ -25,7 +25,7 @@ internal class ScrollSpecialIdentify : ScrollItemClass
     public override void Read(ReadScrollEvent eventArgs)
     {
         eventArgs.Identified = true;
-        if (!eventArgs.SaveGame.IdentifyFully())
+        if (!SaveGame.IdentifyFully())
         {
             eventArgs.UsedUp = false;
         }

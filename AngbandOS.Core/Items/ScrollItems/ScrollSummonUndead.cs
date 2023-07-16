@@ -25,7 +25,7 @@ internal class ScrollSummonUndead : ScrollItemClass
     {
         for (int i = 0; i < Program.Rng.DieRoll(3); i++)
         {
-            if (eventArgs.SaveGame.Level.SummonSpecific(eventArgs.SaveGame.Player.MapY, eventArgs.SaveGame.Player.MapX, eventArgs.SaveGame.Difficulty, new UndeadMonsterSelector()))
+            if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Difficulty, new UndeadMonsterSelector()))
             {
                 eventArgs.Identified = true;
             }

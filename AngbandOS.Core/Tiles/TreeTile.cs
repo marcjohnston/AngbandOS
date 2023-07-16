@@ -14,7 +14,7 @@ internal class TreeTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PoundSignSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Tree";
-    public override AlterAction? AlterAction => new TunnelAlterAction();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<TunnelAlterAction>();
     public override string AppearAs => "Tree";
     public override bool BlocksLos => true;
     public override string Description => "tree";

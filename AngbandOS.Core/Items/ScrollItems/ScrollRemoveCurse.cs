@@ -24,9 +24,9 @@ internal class ScrollRemoveCurse : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (eventArgs.SaveGame.RemoveCurse())
+        if (SaveGame.RemoveCurse())
         {
-            eventArgs.SaveGame.MsgPrint("You feel as if someone is watching over you.");
+            SaveGame.MsgPrint("You feel as if someone is watching over you.");
             eventArgs.Identified = true;
         }
     }

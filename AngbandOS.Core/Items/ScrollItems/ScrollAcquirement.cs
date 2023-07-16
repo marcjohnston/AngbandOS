@@ -24,7 +24,7 @@ internal class ScrollAcquirement : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        eventArgs.SaveGame.Level.Acquirement(eventArgs.SaveGame.Player.MapY, eventArgs.SaveGame.Player.MapX, 1, true);
+        SaveGame.Level.Acquirement(SaveGame.Player.MapY, SaveGame.Player.MapX, 1, true);
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new AcquirementScrollItem(SaveGame);

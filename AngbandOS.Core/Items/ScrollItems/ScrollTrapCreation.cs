@@ -23,7 +23,7 @@ internal class ScrollTrapCreation : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (eventArgs.SaveGame.TrapCreation())
+        if (SaveGame.TrapCreation())
         {
             eventArgs.Identified = true;
         }

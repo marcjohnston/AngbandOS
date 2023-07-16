@@ -44,7 +44,7 @@ internal class AlterScript : Script
                 }
                 else
                 {
-                    AlterEventArgs alterEventArgs = new AlterEventArgs(SaveGame, y, x);
+                    AlterEventArgs alterEventArgs = new AlterEventArgs(y, x);
                     alterAction.Execute(alterEventArgs);
                     more = alterEventArgs.More;
                 }

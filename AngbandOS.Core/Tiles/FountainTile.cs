@@ -14,7 +14,7 @@ internal class FountainTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<TildeSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "Fountain";
-    public override AlterAction? AlterAction => new TunnelAlterAction();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<TunnelAlterAction>();
     public override string AppearAs => "Fountain";
     public override bool BlocksLos => true;
     public override string Description => "fountain";

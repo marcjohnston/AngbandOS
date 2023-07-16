@@ -24,7 +24,7 @@ internal class ScrollEnchantWeaponToHit : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (!eventArgs.SaveGame.EnchantItem(1, 0, 0))
+        if (!SaveGame.EnchantItem(1, 0, 0))
         {
             eventArgs.UsedUp = false;
         }

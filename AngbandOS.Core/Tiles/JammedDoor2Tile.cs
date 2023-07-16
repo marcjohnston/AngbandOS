@@ -14,7 +14,7 @@ internal class JammedDoor2Tile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PlusSignSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "JammedDoor2";
-    public override AlterAction? AlterAction => new BashAlterAction();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<BashAlterAction>();
     public override string AppearAs => "LockedDoor0";
     public override bool BlocksLos => true;
     public override string Description => "jammed door";

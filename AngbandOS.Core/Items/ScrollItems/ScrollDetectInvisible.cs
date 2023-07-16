@@ -24,7 +24,7 @@ internal class ScrollDetectInvisible : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (eventArgs.SaveGame.DetectMonstersInvis())
+        if (SaveGame.DetectMonstersInvis())
         {
             eventArgs.Identified = true;
         }

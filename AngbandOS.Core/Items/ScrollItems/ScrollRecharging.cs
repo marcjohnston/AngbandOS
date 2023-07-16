@@ -24,7 +24,7 @@ internal class ScrollRecharging : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (!eventArgs.SaveGame.Recharge(60))
+        if (!SaveGame.Recharge(60))
         {
             eventArgs.UsedUp = false;
         }

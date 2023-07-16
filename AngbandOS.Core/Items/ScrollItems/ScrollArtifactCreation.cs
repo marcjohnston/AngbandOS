@@ -24,7 +24,7 @@ internal class ScrollArtifactCreation : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        eventArgs.SaveGame.ArtifactScroll();
+        SaveGame.ArtifactScroll();
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new ArtifactCreationScrollItem(SaveGame);

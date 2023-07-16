@@ -23,7 +23,7 @@ internal class ScrollTeleportation : ScrollItemClass
     public override int Weight => 5;
     public override void Read(ReadScrollEvent eventArgs)
     {
-        eventArgs.SaveGame.TeleportPlayer(100);
+        SaveGame.TeleportPlayer(100);
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new TeleportationScrollItem(SaveGame);

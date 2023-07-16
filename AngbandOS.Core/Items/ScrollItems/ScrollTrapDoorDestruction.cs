@@ -24,7 +24,7 @@ internal class ScrollTrapDoorDestruction : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (eventArgs.SaveGame.DestroyDoorsTouch())
+        if (SaveGame.DestroyDoorsTouch())
         {
             eventArgs.Identified = true;
         }

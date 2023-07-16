@@ -24,9 +24,9 @@ internal class ScrollInvocation : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        var patron = eventArgs.SaveGame.SingletonRepository.Patrons.ToWeightedRandom().Choose();
-        eventArgs.SaveGame.MsgPrint($"You invoke the secret name of {patron.LongName}.");
-        patron.GetReward(eventArgs.SaveGame);
+        var patron = SaveGame.SingletonRepository.Patrons.ToWeightedRandom().Choose();
+        SaveGame.MsgPrint($"You invoke the secret name of {patron.LongName}.");
+        patron.GetReward();
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new InvocationScrollItem(SaveGame);

@@ -23,7 +23,7 @@ internal abstract class Patron
     protected abstract Reward[] Rewards { get; }
     public abstract string ShortName { get; }
 
-    public void GetReward(SaveGame saveGame)
+    public void GetReward()
     {
         int type;
         int dummy;
@@ -33,15 +33,15 @@ internal abstract class Patron
             return;
         }
         MultiRew = true;
-        if (saveGame.Player.Level == 13)
+        if (SaveGame.Player.Level == 13)
         {
             nastyChance = 2;
         }
-        else if (saveGame.Player.Level % 13 == 0)
+        else if (SaveGame.Player.Level % 13 == 0)
         {
             nastyChance = 3;
         }
-        else if (saveGame.Player.Level % 14 == 0)
+        else if (SaveGame.Player.Level % 14 == 0)
         {
             nastyChance = 12;
         }
@@ -65,8 +65,8 @@ internal abstract class Patron
         Reward effect = Rewards[type];
         if (Program.Rng.DieRoll(6) == 1)
         {
-            saveGame.MsgPrint($"{ShortName} rewards you with a mutation!");
-            saveGame.Player.Dna.GainMutation();
+            SaveGame.MsgPrint($"{ShortName} rewards you with a mutation!");
+            SaveGame.Player.Dna.GainMutation();
             return;
         }
         effect.GetReward(this);

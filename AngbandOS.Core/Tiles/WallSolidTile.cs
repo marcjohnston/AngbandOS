@@ -13,7 +13,7 @@ internal class WallSolidTile : Tile
     private WallSolidTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PoundSignSymbol>();
     public override string Name => "WallSolid";
-    public override AlterAction? AlterAction => new TunnelAlterAction();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<TunnelAlterAction>();
     public override string AppearAs => "WallBasic";
     public override bool BlocksLos => true;
     public override string Description => "granite wall";

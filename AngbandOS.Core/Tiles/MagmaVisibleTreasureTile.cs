@@ -14,7 +14,7 @@ internal class MagmaVisibleTreasureTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<AsteriskSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightOrange;
     public override string Name => "MagmaVisTreas";
-    public override AlterAction? AlterAction => new TunnelAlterAction();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<TunnelAlterAction>();
     public override string AppearAs => "MagmaVisTreas";
     public override bool BlocksLos => true;
     public override bool IsVisibleTreasure => true;

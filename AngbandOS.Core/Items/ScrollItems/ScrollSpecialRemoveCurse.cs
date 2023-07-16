@@ -24,7 +24,7 @@ internal class ScrollSpecialRemoveCurse : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        eventArgs.SaveGame.RemoveAllCurse();
+        SaveGame.RemoveAllCurse();
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new SpecialRemoveCurseScrollItem(SaveGame);

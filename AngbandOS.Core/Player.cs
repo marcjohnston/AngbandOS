@@ -630,7 +630,7 @@ internal class Player
 
     public void GainLevelReward()
     {
-        GooPatron.GetReward(SaveGame);
+        GooPatron.GetReward();
     }
 
     public ItemCharacteristics GetAbilitiesAsItemFlags()

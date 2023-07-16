@@ -13,7 +13,7 @@ internal class StatueTile : Tile
     private StatueTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ColonSymbol>();
     public override string Name => "Statue";
-    public override AlterAction? AlterAction => new TunnelAlterAction();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<TunnelAlterAction>();
     public override string AppearAs => "Statue";
     public override bool BlocksLos => true;
     public override string Description => "statue";

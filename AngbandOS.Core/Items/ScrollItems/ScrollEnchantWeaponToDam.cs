@@ -24,7 +24,7 @@ internal class ScrollEnchantWeaponToDam : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (!eventArgs.SaveGame.EnchantItem(0, 1, 0))
+        if (!SaveGame.EnchantItem(0, 1, 0))
         {
             eventArgs.UsedUp = false;
         }

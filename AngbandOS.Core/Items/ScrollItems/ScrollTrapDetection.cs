@@ -24,7 +24,7 @@ internal class ScrollTrapDetection : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (eventArgs.SaveGame.DetectTraps())
+        if (SaveGame.DetectTraps())
         {
             eventArgs.Identified = true;
         }

@@ -14,7 +14,7 @@ internal class SignpostTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ColonSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Signpost";
-    public override AlterAction? AlterAction => new TunnelAlterAction();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<TunnelAlterAction>();
     public override string AppearAs => "Signpost";
     public override string Description => "signpost";
     public override bool DimsOutsideLOS => true;

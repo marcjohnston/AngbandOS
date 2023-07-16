@@ -14,7 +14,7 @@ internal class OpenDoorTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<SingleQuoteSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "OpenDoor";
-    public override AlterAction? AlterAction => new CloseAlterAction();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<CloseAlterAction>();
     public override string AppearAs => "OpenDoor";
     public override string Description => "open door";
     public override bool DimsOutsideLOS => true;

@@ -14,7 +14,7 @@ internal class ScarecrowTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerTSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Scarecrow";
-    public override AlterAction? AlterAction => new TunnelAlterAction();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<TunnelAlterAction>();
     public override string AppearAs => "Scarecrow";
     public override bool BlocksLos => true;
     public override string Description => "scarecrow";

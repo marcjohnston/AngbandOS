@@ -23,8 +23,8 @@ internal class ScrollAggravateMonster : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        eventArgs.SaveGame.MsgPrint("There is a high pitched humming noise.");
-        eventArgs.SaveGame.AggravateMonsters();
+        SaveGame.MsgPrint("There is a high pitched humming noise.");
+        SaveGame.AggravateMonsters();
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new AggravateMonsterScrollItem(SaveGame);

@@ -24,7 +24,7 @@ internal class ScrollRuneOfProtection : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        eventArgs.SaveGame.ElderSign();
+        SaveGame.ElderSign();
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new RuneOfProtectionScrollItem(SaveGame);

@@ -14,7 +14,7 @@ internal class AcidTrapTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CaretSymbol>();
     public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "AcidTrap";
-    public override AlterAction? AlterAction => new DisarmAlterAction();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<DisarmAlterAction>();
     public override string AppearAs => "AcidTrap";
     public override string Description => "discolored spot";
     public override bool IsInteresting => true;

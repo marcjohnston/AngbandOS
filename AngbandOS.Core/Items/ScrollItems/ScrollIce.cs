@@ -25,10 +25,10 @@ internal class ScrollIce : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        eventArgs.SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<IceProjectile>(), 0, 175, 4);
-        if (!(eventArgs.SaveGame.Player.TimedColdResistance.TurnsRemaining != 0 || eventArgs.SaveGame.Player.HasColdResistance || eventArgs.SaveGame.Player.HasColdImmunity))
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<IceProjectile>(), 0, 175, 4);
+        if (!(SaveGame.Player.TimedColdResistance.TurnsRemaining != 0 || SaveGame.Player.HasColdResistance || SaveGame.Player.HasColdImmunity))
         {
-            eventArgs.SaveGame.Player.TakeHit(100 + Program.Rng.DieRoll(100), "a Scroll of Ice");
+            SaveGame.Player.TakeHit(100 + Program.Rng.DieRoll(100), "a Scroll of Ice");
         }
         eventArgs.Identified = true;
     }

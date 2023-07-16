@@ -14,7 +14,7 @@ internal class TeleportRuneTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CaretSymbol>();
     public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "TeleportRune";
-    public override AlterAction? AlterAction => new DisarmAlterAction();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<DisarmAlterAction>();
     public override string AppearAs => "TeleportRune";
     public override string Description => "strange rune";
     public override bool IsInteresting => true;

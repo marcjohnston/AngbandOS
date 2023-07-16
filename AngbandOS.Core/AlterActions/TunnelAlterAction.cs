@@ -10,8 +10,9 @@ namespace AngbandOS.Core.AlterActions;
 [Serializable]
 internal class TunnelAlterAction : AlterAction
 {
+    private TunnelAlterAction(SaveGame saveGame) : base(saveGame) { }
     public override void Execute(AlterEventArgs alterEventArgs)
     {
-        alterEventArgs.More = alterEventArgs.SaveGame.TunnelThroughTile(alterEventArgs.Y, alterEventArgs.X);
+        alterEventArgs.More = SaveGame.TunnelThroughTile(alterEventArgs.Y, alterEventArgs.X);
     }
 }

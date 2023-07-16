@@ -10,5 +10,11 @@ namespace AngbandOS.Core.AlterActions;
 [Serializable]
 internal abstract class AlterAction
 {
+    protected readonly SaveGame SaveGame;
+    protected AlterAction(SaveGame saveGame)
+    {
+        SaveGame = saveGame;
+    }
+
     public abstract void Execute(AlterEventArgs alterEventArgs);
 }
