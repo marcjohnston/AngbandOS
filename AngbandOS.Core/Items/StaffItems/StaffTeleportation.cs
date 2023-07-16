@@ -25,7 +25,7 @@ internal class StaffTeleportation : StaffItemClass
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        eventArgs.SaveGame.TeleportPlayer(100);
+        SaveGame.TeleportPlayer(100);
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new TeleportationStaffItem(SaveGame);

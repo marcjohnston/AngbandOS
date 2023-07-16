@@ -26,7 +26,7 @@ internal class StaffTrapLocation : StaffItemClass
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (eventArgs.SaveGame.DetectTraps())
+        if (SaveGame.DetectTraps())
         {
             eventArgs.Identified = true;
         }

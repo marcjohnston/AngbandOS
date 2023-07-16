@@ -25,15 +25,15 @@ internal class StaffHealing : StaffItemClass
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (eventArgs.SaveGame.Player.RestoreHealth(300))
+        if (SaveGame.Player.RestoreHealth(300))
         {
             eventArgs.Identified = true;
         }
-        if (eventArgs.SaveGame.Player.TimedStun.ResetTimer())
+        if (SaveGame.Player.TimedStun.ResetTimer())
         {
             eventArgs.Identified = true;
         }
-        if (eventArgs.SaveGame.Player.TimedBleeding.ResetTimer())
+        if (SaveGame.Player.TimedBleeding.ResetTimer())
         {
             eventArgs.Identified = true;
         }

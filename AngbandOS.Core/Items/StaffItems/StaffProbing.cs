@@ -25,7 +25,7 @@ internal class StaffProbing : StaffItemClass
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        eventArgs.SaveGame.Probing();
+        SaveGame.Probing();
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new ProbingStaffItem(SaveGame);

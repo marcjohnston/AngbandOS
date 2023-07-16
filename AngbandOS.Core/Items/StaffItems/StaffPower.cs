@@ -25,7 +25,7 @@ internal class StaffPower : StaffItemClass
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (eventArgs.SaveGame.DispelMonsters(120))
+        if (SaveGame.DispelMonsters(120))
         {
             eventArgs.Identified = true;
         }

@@ -26,7 +26,7 @@ internal class StaffDetectEvil : StaffItemClass
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (eventArgs.SaveGame.DetectMonstersEvil())
+        if (SaveGame.DetectMonstersEvil())
         {
             eventArgs.Identified = true;
         }

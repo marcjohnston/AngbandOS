@@ -53,21 +53,21 @@ internal abstract class EquipmentInventorySlot : BaseInventorySlot
             }
         }
 
-        if (processWorldEventArgs.SaveGame.Player.Race.IsBurnedBySunlight) // TODO: This needs to use a hook.
+        if (SaveGame.Player.Race.IsBurnedBySunlight) // TODO: This needs to use a hook.
         {
             foreach (int index in InventorySlots)
             {
-                Item? oPtr = processWorldEventArgs.SaveGame.GetInventoryItem(index);
-                if (oPtr != null && oPtr.Factory.ProvidesSunlight && !processWorldEventArgs.SaveGame.Player.HasLightResistance)
+                Item? oPtr = SaveGame.GetInventoryItem(index);
+                if (oPtr != null && oPtr.Factory.ProvidesSunlight && !SaveGame.Player.HasLightResistance)
                 {
                     string oName = oPtr.Description(false, 0);
-                    processWorldEventArgs.SaveGame.MsgPrint($"The {oName} scorches your undead flesh!");
+                    SaveGame.MsgPrint($"The {oName} scorches your undead flesh!");
                     processWorldEventArgs.DisableRegeneration = true;
                     oName = oPtr.Description(true, 0);
                     string ouch = $"wielding {oName}";
-                    if (processWorldEventArgs.SaveGame.Player.TimedInvulnerability.TurnsRemaining == 0)
+                    if (SaveGame.Player.TimedInvulnerability.TurnsRemaining == 0)
                     {
-                        processWorldEventArgs.SaveGame.Player.TakeHit(1, ouch);
+                        SaveGame.Player.TakeHit(1, ouch);
                     }
                 }
             }

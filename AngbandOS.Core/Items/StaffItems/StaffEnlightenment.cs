@@ -26,7 +26,7 @@ internal class StaffEnlightenment : StaffItemClass
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        eventArgs.SaveGame.Level.MapArea();
+        SaveGame.Level.MapArea();
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new EnlightenmentStaffItem(SaveGame);

@@ -25,14 +25,14 @@ internal class StaffDarkness : StaffItemClass
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (!eventArgs.SaveGame.Player.HasBlindnessResistance && !eventArgs.SaveGame.Player.HasDarkResistance)
+        if (!SaveGame.Player.HasBlindnessResistance && !SaveGame.Player.HasDarkResistance)
         {
-            if (eventArgs.SaveGame.Player.TimedBlindness.AddTimer(3 + Program.Rng.DieRoll(5)))
+            if (SaveGame.Player.TimedBlindness.AddTimer(3 + Program.Rng.DieRoll(5)))
             {
                 eventArgs.Identified = true;
             }
         }
-        if (eventArgs.SaveGame.UnlightArea(10, 3))
+        if (SaveGame.UnlightArea(10, 3))
         {
             eventArgs.Identified = true;
         }

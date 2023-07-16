@@ -26,16 +26,16 @@ internal class StaffSpeed : StaffItemClass
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (eventArgs.SaveGame.Player.TimedHaste.TurnsRemaining == 0)
+        if (SaveGame.Player.TimedHaste.TurnsRemaining == 0)
         {
-            if (eventArgs.SaveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(30) + 15))
+            if (SaveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(30) + 15))
             {
                 eventArgs.Identified = true;
             }
         }
         else
         {
-            eventArgs.SaveGame.Player.TimedHaste.AddTimer(5);
+            SaveGame.Player.TimedHaste.AddTimer(5);
         }
     }
     public override Item CreateItem() => new SpeedStaffItem(SaveGame);

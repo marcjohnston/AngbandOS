@@ -26,7 +26,7 @@ internal class StaffObjectLocation : StaffItemClass
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (eventArgs.SaveGame.DetectObjectsNormal())
+        if (SaveGame.DetectObjectsNormal())
         {
             eventArgs.Identified = true;
         }

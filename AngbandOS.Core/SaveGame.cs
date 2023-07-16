@@ -3074,7 +3074,7 @@ internal class SaveGame
         // Allow all inventory slots access to the process world.
         foreach (BaseInventorySlot inventorySlot in SingletonRepository.InventorySlots)
         {
-            ProcessWorldEventArgs inventorySlotProcessWorldEventArgs = new ProcessWorldEventArgs(this);
+            ProcessWorldEventArgs inventorySlotProcessWorldEventArgs = new ProcessWorldEventArgs();
             inventorySlot.ProcessWorldHook(inventorySlotProcessWorldEventArgs);
             if (inventorySlotProcessWorldEventArgs.DisableRegeneration)
             {
@@ -3083,7 +3083,7 @@ internal class SaveGame
         }
 
         // Allow the race access to the process world.
-        ProcessWorldEventArgs processWorldEventArgs = new ProcessWorldEventArgs(this);
+        ProcessWorldEventArgs processWorldEventArgs = new ProcessWorldEventArgs();
         Player.Race.ProcessWorld(processWorldEventArgs);
         if (processWorldEventArgs.DisableRegeneration)
         {

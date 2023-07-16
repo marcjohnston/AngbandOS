@@ -26,7 +26,7 @@ internal class StaffCureLightWounds : StaffItemClass
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (eventArgs.SaveGame.Player.RestoreHealth(Program.Rng.DieRoll(8)))
+        if (SaveGame.Player.RestoreHealth(Program.Rng.DieRoll(8)))
         {
             eventArgs.Identified = true;
         }

@@ -26,7 +26,7 @@ internal class StaffSleepMonsters : StaffItemClass
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (eventArgs.SaveGame.SleepMonsters())
+        if (SaveGame.SleepMonsters())
         {
             eventArgs.Identified = true;
         }

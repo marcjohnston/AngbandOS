@@ -25,7 +25,7 @@ internal class StaffDestruction : StaffItemClass
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        eventArgs.SaveGame.DestroyArea(eventArgs.SaveGame.Player.MapY, eventArgs.SaveGame.Player.MapX, 15);
+        SaveGame.DestroyArea(SaveGame.Player.MapY, SaveGame.Player.MapX, 15);
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new DestructionStaffItem(SaveGame);

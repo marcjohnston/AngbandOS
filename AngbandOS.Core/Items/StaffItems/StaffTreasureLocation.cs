@@ -26,11 +26,11 @@ internal class StaffTreasureLocation : StaffItemClass
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (eventArgs.SaveGame.DetectTreasure())
+        if (SaveGame.DetectTreasure())
         {
             eventArgs.Identified = true;
         }
-        if (eventArgs.SaveGame.DetectObjectsGold())
+        if (SaveGame.DetectObjectsGold())
         {
             eventArgs.Identified = true;
         }

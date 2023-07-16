@@ -137,15 +137,15 @@ internal class VampireRace : Race
 
     public override void ProcessWorld(ProcessWorldEventArgs processWorldEventArgs)
     {
-        if (processWorldEventArgs.SaveGame.CurrentDepth <= 0 && 
-            !processWorldEventArgs.SaveGame.Player.HasLightResistance &&
-            processWorldEventArgs.SaveGame.Player.TimedInvulnerability.TurnsRemaining == 0 &&
-            processWorldEventArgs.SaveGame.Player.GameTime.IsLight)
+        if (SaveGame.CurrentDepth <= 0 && 
+            !SaveGame.Player.HasLightResistance &&
+            SaveGame.Player.TimedInvulnerability.TurnsRemaining == 0 &&
+            SaveGame.Player.GameTime.IsLight)
         {
-            if (processWorldEventArgs.SaveGame.Level.Grid[processWorldEventArgs.SaveGame.Player.MapY][processWorldEventArgs.SaveGame.Player.MapX].TileFlags.IsSet(GridTile.SelfLit))
+            if (SaveGame.Level.Grid[SaveGame.Player.MapY][SaveGame.Player.MapX].TileFlags.IsSet(GridTile.SelfLit))
             {
-                processWorldEventArgs.SaveGame.MsgPrint("The sun's rays scorch your undead flesh!");
-                processWorldEventArgs.SaveGame.Player.TakeHit(1, "sunlight");
+                SaveGame.MsgPrint("The sun's rays scorch your undead flesh!");
+                SaveGame.Player.TakeHit(1, "sunlight");
                 processWorldEventArgs.DisableRegeneration = true;
             }
         }

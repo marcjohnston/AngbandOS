@@ -25,7 +25,7 @@ internal class StaffSlowMonsters : StaffItemClass
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (eventArgs.SaveGame.SlowMonsters())
+        if (SaveGame.SlowMonsters())
         {
             eventArgs.Identified = true;
         }

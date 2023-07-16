@@ -26,7 +26,7 @@ internal class StaffPerception : StaffItemClass
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (!eventArgs.SaveGame.IdentifyItem())
+        if (!SaveGame.IdentifyItem())
         {
             eventArgs.ChargeUsed = false;
         }

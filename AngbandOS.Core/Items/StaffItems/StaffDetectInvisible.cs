@@ -26,7 +26,7 @@ internal class StaffDetectInvisible : StaffItemClass
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (eventArgs.SaveGame.DetectMonstersInvis())
+        if (SaveGame.DetectMonstersInvis())
         {
             eventArgs.Identified = true;
         }

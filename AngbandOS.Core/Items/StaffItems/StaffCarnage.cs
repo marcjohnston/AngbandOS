@@ -25,7 +25,7 @@ internal class StaffCarnage : StaffItemClass
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        eventArgs.SaveGame.Carnage(true);
+        SaveGame.Carnage(true);
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new CarnageStaffItem(SaveGame);

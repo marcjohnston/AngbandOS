@@ -25,32 +25,32 @@ internal class StaffHoliness : StaffItemClass
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (eventArgs.SaveGame.DispelEvil(120))
+        if (SaveGame.DispelEvil(120))
         {
             eventArgs.Identified = true;
         }
-        int k = 3 * eventArgs.SaveGame.Player.Level;
-        if (eventArgs.SaveGame.Player.TimedProtectionFromEvil.AddTimer(Program.Rng.DieRoll(25) + k))
+        int k = 3 * SaveGame.Player.Level;
+        if (SaveGame.Player.TimedProtectionFromEvil.AddTimer(Program.Rng.DieRoll(25) + k))
         {
             eventArgs.Identified = true;
         }
-        if (eventArgs.SaveGame.Player.TimedPoison.ResetTimer())
+        if (SaveGame.Player.TimedPoison.ResetTimer())
         {
             eventArgs.Identified = true;
         }
-        if (eventArgs.SaveGame.Player.TimedFear.ResetTimer())
+        if (SaveGame.Player.TimedFear.ResetTimer())
         {
             eventArgs.Identified = true;
         }
-        if (eventArgs.SaveGame.Player.RestoreHealth(50))
+        if (SaveGame.Player.RestoreHealth(50))
         {
             eventArgs.Identified = true;
         }
-        if (eventArgs.SaveGame.Player.TimedStun.ResetTimer())
+        if (SaveGame.Player.TimedStun.ResetTimer())
         {
             eventArgs.Identified = true;
         }
-        if (eventArgs.SaveGame.Player.TimedBleeding.ResetTimer())
+        if (SaveGame.Player.TimedBleeding.ResetTimer())
         {
             eventArgs.Identified = true;
         }

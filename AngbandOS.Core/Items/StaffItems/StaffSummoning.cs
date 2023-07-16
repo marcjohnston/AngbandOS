@@ -26,7 +26,7 @@ internal class StaffSummoning : StaffItemClass
     {
         for (int k = 0; k < Program.Rng.DieRoll(4); k++)
         {
-            if (eventArgs.SaveGame.Level.SummonSpecific(eventArgs.SaveGame.Player.MapY, eventArgs.SaveGame.Player.MapX, eventArgs.SaveGame.Difficulty, null))
+            if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Difficulty, null))
             {
                 eventArgs.Identified = true;
             }

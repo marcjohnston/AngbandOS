@@ -25,7 +25,7 @@ internal class StaffHasteMonsters : StaffItemClass
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (eventArgs.SaveGame.HasteMonsters())
+        if (SaveGame.HasteMonsters())
         {
             eventArgs.Identified = true;
         }

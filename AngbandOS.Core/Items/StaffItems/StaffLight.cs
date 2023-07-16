@@ -26,7 +26,7 @@ internal class StaffLight : StaffItemClass
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (eventArgs.SaveGame.LightArea(Program.Rng.DiceRoll(2, 8), 2))
+        if (SaveGame.LightArea(Program.Rng.DiceRoll(2, 8), 2))
         {
             eventArgs.Identified = true;
         }

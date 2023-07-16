@@ -26,13 +26,13 @@ internal class StaffStarlight : StaffItemClass
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (eventArgs.SaveGame.Player.TimedBlindness.TurnsRemaining == 0)
+        if (SaveGame.Player.TimedBlindness.TurnsRemaining == 0)
         {
-            eventArgs.SaveGame.MsgPrint("The end of the staff glows brightly...");
+            SaveGame.MsgPrint("The end of the staff glows brightly...");
         }
         for (int k = 0; k < 8; k++)
         {
-            eventArgs.SaveGame.LightLine(eventArgs.SaveGame.Level.OrderedDirection[k]);
+            SaveGame.LightLine(SaveGame.Level.OrderedDirection[k]);
         }
         eventArgs.Identified = true;
     }

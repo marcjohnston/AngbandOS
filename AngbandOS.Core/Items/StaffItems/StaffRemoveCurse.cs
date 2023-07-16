@@ -26,11 +26,11 @@ internal class StaffRemoveCurse : StaffItemClass
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (eventArgs.SaveGame.RemoveCurse())
+        if (SaveGame.RemoveCurse())
         {
-            if (eventArgs.SaveGame.Player.TimedBlindness.TurnsRemaining == 0)
+            if (SaveGame.Player.TimedBlindness.TurnsRemaining == 0)
             {
-                eventArgs.SaveGame.MsgPrint("The staff glows blue for a moment...");
+                SaveGame.MsgPrint("The staff glows blue for a moment...");
             }
             eventArgs.Identified = true;
         }

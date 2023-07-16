@@ -26,17 +26,17 @@ internal class StaffOfTheMagi : StaffItemClass
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (eventArgs.SaveGame.Player.TryRestoringAbilityScore(Ability.Intelligence))
+        if (SaveGame.Player.TryRestoringAbilityScore(Ability.Intelligence))
         {
             eventArgs.Identified = true;
         }
-        if (eventArgs.SaveGame.Player.Mana < eventArgs.SaveGame.Player.MaxMana)
+        if (SaveGame.Player.Mana < SaveGame.Player.MaxMana)
         {
-            eventArgs.SaveGame.Player.Mana = eventArgs.SaveGame.Player.MaxMana;
-            eventArgs.SaveGame.Player.FractionalMana = 0;
+            SaveGame.Player.Mana = SaveGame.Player.MaxMana;
+            SaveGame.Player.FractionalMana = 0;
             eventArgs.Identified = true;
-            eventArgs.SaveGame.MsgPrint("Your feel your head clear.");
-            eventArgs.SaveGame.RedrawManaFlaggedAction.Set();
+            SaveGame.MsgPrint("Your feel your head clear.");
+            SaveGame.RedrawManaFlaggedAction.Set();
         }
     }
     public override Item CreateItem() => new OfTheMagiStaffItem(SaveGame);

@@ -25,7 +25,7 @@ internal class StaffEarthquakes : StaffItemClass
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        eventArgs.SaveGame.Earthquake(eventArgs.SaveGame.Player.MapY, eventArgs.SaveGame.Player.MapX, 10);
+        SaveGame.Earthquake(SaveGame.Player.MapY, SaveGame.Player.MapX, 10);
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new EarthquakesStaffItem(SaveGame);

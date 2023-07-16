@@ -26,11 +26,11 @@ internal class StaffDoorStairLocation : StaffItemClass
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (eventArgs.SaveGame.DetectDoors())
+        if (SaveGame.DetectDoors())
         {
             eventArgs.Identified = true;
         }
-        if (eventArgs.SaveGame.DetectStairs())
+        if (SaveGame.DetectStairs())
         {
             eventArgs.Identified = true;
         }

@@ -68,7 +68,7 @@ internal class UseStaffScript : Script
             return false;
         }
         SaveGame.PlaySound(SoundEffectEnum.UseStaff);
-        UseStaffEvent useStaffEventArgs = new UseStaffEvent(SaveGame);
+        UseStaffEvent useStaffEventArgs = new UseStaffEvent();
 
         // Do the specific effect for the type of staff
         staffItem.UseStaff(useStaffEventArgs);
