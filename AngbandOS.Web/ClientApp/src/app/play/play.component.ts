@@ -327,6 +327,11 @@ export class PlayComponent implements OnInit, OnDestroy {
               this._router.navigate(['/']);
             });
           });
+          this.connection.on("GameStarted", (gameGuid: string) => {
+            this._zone.run(() => {
+              this.gameGuid = gameGuid;
+            });
+          });
 
           this.GameInProgress = true;
           this.connection.send("play", this.gameGuid);
@@ -350,7 +355,8 @@ export class PlayComponent implements OnInit, OnDestroy {
   }
 
   /*
-   * Returns true, if the game is still in progress; false, otherwise.  This is used for the can-deactivate-play component to throw a warning dialog box, if they exist the screen. 
+   * Returns true, if the game is still in progress; false, otherwise.  This is used for the can-deactivate-play component to throw a warning dialog box,
+   * if the game is still in-progress. 
    */
   public GameInProgress: boolean = false;
 
@@ -358,6 +364,10 @@ export class PlayComponent implements OnInit, OnDestroy {
     this._snackBar.open(message, undefined, {
       duration: 2000,
     });
+  }
+
+  public openMessagesWindow() {
+    window.open(`/watch/${this.gameGuid}/messages`, "AngbandOS Messages", `height=${window.outerHeight},width=400`);
   }
 
   ngOnInit() {
@@ -400,6 +410,7 @@ export class PlayComponent implements OnInit, OnDestroy {
 
       // Retrieve the game guid from the query.
       this._initSubscriptions.add(this._activatedRoute.paramMap.subscribe((paramMap) => {
+        // Retrieve the guid for the game to play.  If this is a new game, gameGuid will be returned as null.
         this.gameGuid = paramMap.get("guid");
         this.check();
       }));
@@ -452,6 +463,7 @@ export class PlayComponent implements OnInit, OnDestroy {
       this.connection.off("PlaySound");
       this.connection.off("PlayMusic");
       this.connection.off("GameOver");
+      this.connection.off("GameStarted");
       this.connection.off("SendMessage");
       this.connection.off("GameIncompatible");
       this.connection.stop();

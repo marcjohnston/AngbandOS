@@ -371,7 +371,12 @@ namespace AngbandOS.Web.Hubs
                 // It is, create a new guid for the game.
                 guid = Guid.NewGuid().ToString();
 
+                // Write a message in the log that a new game was created.
                 await WriteMessageAsync(context.User, null, "Game created.", MessageTypeEnum.GameCreated, guid);
+
+                // Send a message to the client, so that the client knows the GUID for the game it is about to play.  We will wait for the call, but this wait may not be
+                // necessary.
+                await gameHub.GameStarted(guid);
             }
 
             // Create a new instance of the Sql persistent storage so that concurrent games do not interfere with each other.
@@ -417,6 +422,7 @@ namespace AngbandOS.Web.Hubs
             // Create a background worker object that runs the game and receives messages from the game to send to the client.
             SignalRConsole console = new SignalRConsole(context, gameHub, corePersistentStorage, userId, username, gameUpdateMonitor);
 
+            // For debugging purposes, we will provide a name for the thread that indicates the ID of the user and the game GUID.
             console.ThreadName = $"Game: {userId}/{guid}";
 
             // We need to track this game by the connection ID so that messages on the signal-r connection can be quickly correlated to the associated game.

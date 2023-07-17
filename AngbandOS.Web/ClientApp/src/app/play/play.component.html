@@ -19,7 +19,7 @@
       <div #inGameMenu id="in-game-menu">
         <div id="in-game-menu-flex-box">
           <button (click)="onEditPreferencesClick()" *ngIf="preferences !== undefined">Preferences</button>
-          <button>Show Messages</button>
+          <button (click)="openMessagesWindow()">Show Messages</button>
           <button>Show Inventory</button>
           <button>Character</button>
           <button>Monster Knowledge</button>

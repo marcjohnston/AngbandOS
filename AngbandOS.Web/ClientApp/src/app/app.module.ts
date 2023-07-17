@@ -43,6 +43,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PreferencesDialogComponent } from './preferences-dialog/preferences-dialog.component';
 import { GameDesignerComponent } from './game-designer/game-designer.component';
 import { CanDeactivatePlay } from './can-deactivate-play/can-deactivate-play';
+import { MessagesWindowComponent } from './messages-window/messages-window.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { CanDeactivatePlay } from './can-deactivate-play/can-deactivate-play';
     ChatComponent,
     DashboardComponent,
     PreferencesDialogComponent,
-    GameDesignerComponent
+    GameDesignerComponent,
+    MessagesWindowComponent
   ],
   imports: [
     MatTableModule,
@@ -93,6 +95,7 @@ import { CanDeactivatePlay } from './can-deactivate-play/can-deactivate-play';
       { path: 'play', component: PlayComponent, canDeactivate: [CanDeactivatePlay] },
       { path: 'play/:guid', component: PlayComponent },
       { path: 'watch/:guid', component: WatchComponent },
+      { path: 'watch/:guid/messages', component: MessagesWindowComponent },
 
       { path: 'ui', component: UiComponent },
       { path: 'game-designer', component: GameDesignerComponent },

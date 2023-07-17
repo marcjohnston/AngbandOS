@@ -7,6 +7,7 @@
 
 namespace AngbandOS.Core;
 
+[Serializable]
 internal class Message
 {
     public int Count;

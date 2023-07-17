@@ -12,15 +12,54 @@ namespace AngbandOS.Web.Hubs
     /// </summary>
     public class SignalRConsole : BackgroundWorker, IConsole
     {
-        public readonly ConcurrentQueue<char> KeyQueue = new ConcurrentQueue<char>(); // This is the queue of keystrokes provided by the player.
-        private readonly IGameHub _consoleGameHub; // This is the signal-r hub that the console is communicating on.
-        private readonly List<ISpectatorsHub> _spectators = new List<ISpectatorsHub>(); // This is the list of people watching the game.
-        private readonly ICorePersistentStorage PersistentStorage; // This is the game persistence.
-        private GameServer? _gameServer = null; // This is the actual game.  The game is null, until the thread is started.
-        public readonly string UserId; // This is the ID of the player.
-        public readonly string Username; // This is the username of the player.
-        private readonly Action<SignalRConsole, GameUpdateNotificationEnum, string> NotificationAction; // This is the notification channel.
-        private readonly HubCallerContext Context; // Used to abort the signal-r connection and terminate the game instantly.
+        /// <summary>
+        /// Returns the queue of keystrokes that is being used to store the keystrokes provided by the player.
+        /// </summary>
+        public readonly ConcurrentQueue<char> KeyQueue = new ConcurrentQueue<char>();
+
+        /// <summary>
+        /// Returns the signal-r hub that the console is communicating on.        
+        /// </summary>
+        private readonly IGameHub _consoleGameHub;
+
+        /// <summary>
+        /// Returns the list of people watching the game.
+        /// </summary>
+        private readonly List<ISpectatorsHub> _spectators = new List<ISpectatorsHub>();
+
+        /// <summary>
+        /// Returns the object resposible for the persistence of the game.
+        /// </summary>
+        private readonly ICorePersistentStorage PersistentStorage;
+
+        /// <summary>
+        /// Returns the actual game.  The game is null, until the thread is started.
+        /// </summary>
+        private GameServer? _gameServer = null;
+
+        /// <summary>
+        /// Return the ID of the player.
+        /// </summary>
+        public readonly string UserId;
+
+        /// <summary>
+        /// Returns the username of the player.
+        /// </summary>
+        public readonly string Username;
+
+        /// <summary>
+        /// Returns object that handles the notification channel.
+        /// </summary>
+        private readonly Action<SignalRConsole, GameUpdateNotificationEnum, string> NotificationAction;
+
+        /// <summary>
+        /// Returns the context for the GameHub.  This is used to abort the signal-r connection and terminate the game instantly.
+        /// </summary>
+        private readonly HubCallerContext Context;
+
+        /// <summary>
+        /// Returns true, when a request to shut the game down has been received.
+        /// </summary>
         private bool ShuttingDown = false;
 
         public SignalRConsole(HubCallerContext context, IGameHub gameHub, ICorePersistentStorage persistentStorage, string userId, string username, Action<SignalRConsole, GameUpdateNotificationEnum, string> notificationAction)

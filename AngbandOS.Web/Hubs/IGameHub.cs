@@ -4,7 +4,7 @@ namespace AngbandOS.Web.Hubs;
 
 /// <summary>
 /// Represents an interface that defines the outgoing signal-r methods that the game can send.  This interface is
-/// used for both playing games.
+/// just used for playing games--not spectating games.
 /// </summary>
 public interface IGameHub
 {
@@ -21,6 +21,13 @@ public interface IGameHub
     /// <param name="message"></param>
     /// <returns></returns>
     Task GameIncompatible();
+
+    /// <summary>
+    /// Outgoing message to the client that the game started.  The primary purpose for this message is for the client
+    /// to be able to receive the guid for a new game that was created.
+    /// </summary>
+    /// <returns></returns>
+    Task GameStarted(string guid);
 
     /// <summary>
     /// Outgoing message to a web client that the game is over.
