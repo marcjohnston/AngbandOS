@@ -1,42 +1,4 @@
 #container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-
-  @media (min-width: 768px) {
-    & #component-window {
-      display: flex;
-      flex-direction: row;
-      width: 100%;
-      height: 100%;
-      padding: 0 25px 25px 25px;
-
-      & #router-outlet-container {
-        width: 100%;
-      }
-    }
-  }
-
-  @media (max-width: 767px) {
-    & #component-window {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      height: 100%;
-
-      & #router-outlet-container {
-        width: 100%;
-        margin-bottom: 10px;
-      }
-    }
-  }
-
-  & #footer {
-    margin: 0 25px 5px 25px;
-    padding-top: 5px;
-    border-top: 1px solid white;
-    font-size: 10px;
-    text-align: center;
-  }
+  width: 100%; // AngbandOS will consume the full width of the <body>.
+  height: 100%; // AngbandOS will consume the full height of the <body>.
 }

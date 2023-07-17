@@ -1,118 +1,127 @@
 <div id="container">
-  <ng-container *ngIf="activeGames !== undefined">
-    <h6 id="active-games-span">Active Games</h6>
-    <table mat-table [dataSource]="activeGames">
-      <ng-container matColumnDef="username">
-        <th mat-header-cell *matHeaderCellDef>
-          Username
-        </th>
-        <td mat-cell *matCellDef="let activeGame">{{activeGame.username}}</td>
+  <app-nav-menu></app-nav-menu>
+  <div id="component-window">
+    <div id="main-component">
+      <ng-container *ngIf="activeGames !== undefined">
+        <h6 id="active-games-span">Active Games</h6>
+        <table mat-table [dataSource]="activeGames">
+          <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef>
+              Username
+            </th>
+            <td mat-cell *matCellDef="let activeGame">{{activeGame.username}}</td>
+          </ng-container>
+          <ng-container matColumnDef="character-name">
+            <th mat-header-cell *matHeaderCellDef>
+              Character Name
+            </th>
+            <td mat-cell *matCellDef="let activeGame">{{activeGame.characterName}}</td>
+          </ng-container>
+          <ng-container matColumnDef="gold">
+            <th mat-header-cell *matHeaderCellDef>
+              Gold
+            </th>
+            <td mat-cell *matCellDef="let activeGame">{{activeGame.gold}}</td>
+          </ng-container>
+          <ng-container matColumnDef="level">
+            <th mat-header-cell *matHeaderCellDef>
+              Level
+            </th>
+            <td mat-cell *matCellDef="let activeGame">{{activeGame.level}}</td>
+          </ng-container>
+          <ng-container matColumnDef="last-input-received">
+            <th mat-header-cell *matHeaderCellDef>
+              Idle
+            </th>
+            <td mat-cell class="idle-time-span" *matCellDef="let activeGame">{{activeGame.idleTimeSpan}}</td>
+          </ng-container>
+          <ng-container matColumnDef="game-time">
+            <th mat-header-cell *matHeaderCellDef>
+              Game Time
+            </th>
+            <td mat-cell class="game-time-span" *matCellDef="let activeGame">{{timeSpanAsString(activeGame.elapsedGameTime)}}</td>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef class="right-most-column">
+              Actions
+            </th>
+            <td mat-cell *matCellDef="let activeGame" class="right-most-column">
+              <mat-icon *ngIf="isAdministrator" aria-hidden="false" title="Force stop this active game." aria-label="Delete Saved Game" fontIcon="delete" (click)="killActiveGame(activeGame)">delete</mat-icon>
+              <mat-icon aria-hidden="false" title="Watch This Game" aria-label="Watch Saved Game" (click)="onActiveGameRowClick(activeGame)">visibility</mat-icon>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="activeGamesDisplayedColumns"></tr>
+          <tr mat-row *matRowDef="let activeGame; columns: activeGamesDisplayedColumns" [ngClass]="{'highlight': activeGame === selectedActiveGame}"></tr>
+        </table>
       </ng-container>
-      <ng-container matColumnDef="character-name">
-        <th mat-header-cell *matHeaderCellDef>
-          Character Name
-        </th>
-        <td mat-cell *matCellDef="let activeGame">{{activeGame.characterName}}</td>
+      <ng-container *ngIf="isAuthenticated">
+        <ng-container *ngIf="savedGames !== undefined">
+          <h6 id="saved-games-span">Your Saved Games</h6>
+          <table mat-table [dataSource]="savedGames">
+            <ng-container matColumnDef="guid">
+              <th mat-header-cell *matHeaderCellDef>
+                Guid
+              </th>
+              <td mat-cell *matCellDef="let savedGame">{{savedGame.guid}}</td>
+            </ng-container>
+            <ng-container matColumnDef="character-name">
+              <th mat-header-cell *matHeaderCellDef>
+                Character Name
+              </th>
+              <td mat-cell *matCellDef="let savedGame">{{savedGame.characterName}}</td>
+            </ng-container>
+            <ng-container matColumnDef="gold">
+              <th mat-header-cell *matHeaderCellDef>
+                Gold
+              </th>
+              <td mat-cell *matCellDef="let savedGame">{{savedGame.gold}}</td>
+            </ng-container>
+            <ng-container matColumnDef="level">
+              <th mat-header-cell *matHeaderCellDef>
+                Level
+              </th>
+              <td mat-cell *matCellDef="let savedGame">{{savedGame.level}}</td>
+            </ng-container>
+            <ng-container matColumnDef="is-alive">
+              <th mat-header-cell *matHeaderCellDef>
+                Health
+              </th>
+              <td mat-cell *matCellDef="let savedGame">{{savedGame.isAlive ? "Alive and well" : "Dead"}}</td>
+            </ng-container>
+            <ng-container matColumnDef="last-saved">
+              <th mat-header-cell *matHeaderCellDef>
+                Last Saved
+              </th>
+              <td mat-cell *matCellDef="let savedGame">{{savedGame.savedDateTime | date: 'M/d/yy, h:mm a z'}}</td>
+            </ng-container>
+            <ng-container matColumnDef="notes">
+              <th mat-header-cell *matHeaderCellDef>
+                Notes
+              </th>
+              <td mat-cell *matCellDef="let savedGame">{{savedGame.comments}}</td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef class="right-most-column">
+                Actions
+              </th>
+              <td mat-cell *matCellDef="let savedGame" class="right-most-column">
+                <mat-icon aria-hidden="false" title="Delete This Saved Game" aria-label="Delete Saved Game" fontIcon="delete" (click)="deleteSavedGame(savedGame)">delete</mat-icon>
+                <mat-icon aria-hidden="false" title="Play This Game" aria-label="Play Saved Game" (click)="onSavedGameRowClick(savedGame)">slideshow</mat-icon>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="savedGamesDisplayedColumns"></tr>
+            <tr mat-row *matRowDef="let savedGame; columns: savedGamesDisplayedColumns" [ngClass]="{'highlight': savedGame === selectedSavedGame}"></tr>
+          </table>
+        </ng-container>
+        <button mat-flat-button (click)="onNewGame()">Play New Game</button>
       </ng-container>
-      <ng-container matColumnDef="gold">
-        <th mat-header-cell *matHeaderCellDef>
-          Gold
-        </th>
-        <td mat-cell *matCellDef="let activeGame">{{activeGame.gold}}</td>
+      <ng-container *ngIf="(isAuthenticated) === false">
+        Welcome to AngbandOS.  You must login to play.
       </ng-container>
-      <ng-container matColumnDef="level">
-        <th mat-header-cell *matHeaderCellDef>
-          Level
-        </th>
-        <td mat-cell *matCellDef="let activeGame">{{activeGame.level}}</td>
-      </ng-container>
-      <ng-container matColumnDef="last-input-received">
-        <th mat-header-cell *matHeaderCellDef>
-          Idle
-        </th>
-        <td mat-cell class="idle-time-span" *matCellDef="let activeGame">{{activeGame.idleTimeSpan}}</td>
-      </ng-container>
-      <ng-container matColumnDef="game-time">
-        <th mat-header-cell *matHeaderCellDef>
-          Game Time
-        </th>
-        <td mat-cell class="game-time-span" *matCellDef="let activeGame">{{timeSpanAsString(activeGame.elapsedGameTime)}}</td>
-      </ng-container>
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef class="right-most-column">
-          Actions
-        </th>
-        <td mat-cell *matCellDef="let activeGame" class="right-most-column">
-          <mat-icon *ngIf="isAdministrator" aria-hidden="false" title="Force stop this active game." aria-label="Delete Saved Game" fontIcon="delete" (click)="killActiveGame(activeGame)">delete</mat-icon>
-          <mat-icon aria-hidden="false" title="Watch This Game" aria-label="Watch Saved Game" (click)="onActiveGameRowClick(activeGame)">visibility</mat-icon>
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="activeGamesDisplayedColumns"></tr>
-      <tr mat-row *matRowDef="let activeGame; columns: activeGamesDisplayedColumns" [ngClass]="{'highlight': activeGame === selectedActiveGame}"></tr>
-    </table>
-  </ng-container>
-  <ng-container *ngIf="isAuthenticated">
-    <ng-container *ngIf="savedGames !== undefined">
-      <h6 id="saved-games-span">Your Saved Games</h6>
-      <table mat-table [dataSource]="savedGames">
-        <ng-container matColumnDef="guid">
-          <th mat-header-cell *matHeaderCellDef>
-            Guid
-          </th>
-          <td mat-cell *matCellDef="let savedGame">{{savedGame.guid}}</td>
-        </ng-container>
-        <ng-container matColumnDef="character-name">
-          <th mat-header-cell *matHeaderCellDef>
-            Character Name
-          </th>
-          <td mat-cell *matCellDef="let savedGame">{{savedGame.characterName}}</td>
-        </ng-container>
-        <ng-container matColumnDef="gold">
-          <th mat-header-cell *matHeaderCellDef>
-            Gold
-          </th>
-          <td mat-cell *matCellDef="let savedGame">{{savedGame.gold}}</td>
-        </ng-container>
-        <ng-container matColumnDef="level">
-          <th mat-header-cell *matHeaderCellDef>
-            Level
-          </th>
-          <td mat-cell *matCellDef="let savedGame">{{savedGame.level}}</td>
-        </ng-container>
-        <ng-container matColumnDef="is-alive">
-          <th mat-header-cell *matHeaderCellDef>
-            Health
-          </th>
-          <td mat-cell *matCellDef="let savedGame">{{savedGame.isAlive ? "Alive and well" : "Dead"}}</td>
-        </ng-container>
-        <ng-container matColumnDef="last-saved">
-          <th mat-header-cell *matHeaderCellDef>
-            Last Saved
-          </th>
-          <td mat-cell *matCellDef="let savedGame">{{savedGame.savedDateTime | date: 'M/d/yy, h:mm a z'}}</td>
-        </ng-container>
-        <ng-container matColumnDef="notes">
-          <th mat-header-cell *matHeaderCellDef>
-            Notes
-          </th>
-          <td mat-cell *matCellDef="let savedGame">{{savedGame.comments}}</td>
-        </ng-container>
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef class="right-most-column">
-            Actions
-          </th>
-          <td mat-cell *matCellDef="let savedGame" class="right-most-column">
-            <mat-icon aria-hidden="false" title="Delete This Saved Game" aria-label="Delete Saved Game" fontIcon="delete" (click)="deleteSavedGame(savedGame)">delete</mat-icon>
-            <mat-icon aria-hidden="false" title="Play This Game" aria-label="Play Saved Game" (click)="onSavedGameRowClick(savedGame)">slideshow</mat-icon>
-          </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="savedGamesDisplayedColumns"></tr>
-        <tr mat-row *matRowDef="let savedGame; columns: savedGamesDisplayedColumns" [ngClass]="{'highlight': savedGame === selectedSavedGame}"></tr>
-      </table>
-    </ng-container>
-    <button mat-flat-button (click)="onNewGame()">Play New Game</button>
-  </ng-container>
-  <ng-container *ngIf="(isAuthenticated) === false">
-    Welcome to AngbandOS.  You must login to play.
-  </ng-container>
+    </div>
+    <div id="chat">
+      <app-chat></app-chat>
+    </div>
+  </div>
+  <app-footer></app-footer>
 </div>

@@ -2,57 +2,69 @@
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 
-  & #vertical-panes {
+  & #component-window {
     display: flex;
-    flex-direction: column;
-    align-self: flex-start;
-
-    & #macros-div {
-      display: flex;
-      flex-direction: row;
-
-      & button {
-        flex-grow: 1;
-        height: 2.5rem;
-        margin-bottom: 5px;
-        line-height: 1rem;
-      }
-    }
-  }
-
-  & #left-pane {
-    width: 0px;
-  }
-
-  & #right-pane {
-    width: 0px;
-  }
-
-  & #canvas-pane {
+    flex-direction: row;
     width: 100%;
     height: 100%;
-    display: flex;
+    padding: 0 25px 25px 25px;
 
-    & canvas {
-      background-color: black;
+    & #main-component {
       width: 100%;
-      height: 100%;
-      object-fit: none;
-      object-position: left top;
     }
 
-    & #in-game-menu {
-      position: absolute;
+    & #vertical-panes {
+      display: flex;
+      flex-direction: column;
+      align-self: flex-start;
 
-      & #in-game-menu-flex-box {
+      & #macros-div {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
 
         & button {
-          padding: 0;
-          margin: 0;
+          flex-grow: 1;
+          height: 2.5rem;
+          margin-bottom: 5px;
+          line-height: 1rem;
+        }
+      }
+    }
+
+    & #left-pane {
+      width: 0px;
+    }
+
+    & #right-pane {
+      width: 0px;
+    }
+
+    & #canvas-pane {
+      width: 100%;
+      height: 100%;
+      display: flex;
+
+      & canvas {
+        background-color: black;
+        width: 100%;
+        height: 100%;
+        object-fit: none;
+        object-position: left top;
+      }
+
+      & #in-game-menu {
+        position: absolute;
+
+        & #in-game-menu-flex-box {
+          display: flex;
+          flex-direction: column;
+
+          & button {
+            padding: 0;
+            margin: 0;
+          }
         }
       }
     }

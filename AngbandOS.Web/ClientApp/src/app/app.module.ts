@@ -44,6 +44,7 @@ import { PreferencesDialogComponent } from './preferences-dialog/preferences-dia
 import { GameDesignerComponent } from './game-designer/game-designer.component';
 import { CanDeactivatePlay } from './can-deactivate-play/can-deactivate-play';
 import { MessagesWindowComponent } from './messages-window/messages-window.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { MessagesWindowComponent } from './messages-window/messages-window.compo
     DashboardComponent,
     PreferencesDialogComponent,
     GameDesignerComponent,
-    MessagesWindowComponent
+    MessagesWindowComponent,
+    FooterComponent
   ],
   imports: [
     MatTableModule,

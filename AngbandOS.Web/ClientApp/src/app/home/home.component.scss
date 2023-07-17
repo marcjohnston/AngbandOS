@@ -7,11 +7,39 @@
   display: flex;
   flex-direction: column;
 
-  #active-games-span, #saved-games-span {
+  @media (min-width: 768px) {
+    & #component-window {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      height: 100%;
+      padding: 0 25px 25px 25px;
+
+      & #main-component {
+        width: 100%;
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    & #component-window {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+
+      & #main-component {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  & #active-games-span, #saved-games-span {
     margin-top: 25px;
   }
 
-  table {
+  & table {
     width: 100%;
 
     & .right-most-column {
@@ -29,7 +57,7 @@
     }
 
     & .idle-time-span, .game-time-span {
-        min-width: 100px;
+      min-width: 100px;
     }
 
     & .highlight {
