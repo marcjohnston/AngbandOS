@@ -9,5 +9,4 @@ spelling_use_default_exclusion_dictionary = false
 
 [*.cs]
 csharp_using_directive_placement = outside_namespace:silent
-csharp_style_namespace_declarations = block_scoped:silent
-
+csharp_style_namespace_declarations = file_scoped:silent

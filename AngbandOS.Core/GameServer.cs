@@ -8,8 +8,8 @@
 namespace AngbandOS.Core;
 
 /// <summary>
-/// Represents an encapsulating wrapper for an in-progress game.  This wrapper exposes public functionality.
-/// SaveGame objects are internal.
+/// Represents a wrapper for an in-progress game.  The SaveGame object has an "internal" scope that prevents the SaveGame and ANY associated objects from being exposed publically.
+/// This GameServer object encapsulates the SaveGame object and provides a wrapper that exposes limited functionality as public.
 /// </summary>
 public class GameServer
 {
@@ -98,6 +98,16 @@ public class GameServer
     public void RefreshSpectatorConsole(IConsole spectatorConsole)
     {
         SaveGame.Screen.RefreshSpectatorConsole(spectatorConsole);
+    }
+
+    /// <summary>
+    /// Retrieves a block of messages.  Messages are assigned a unique sequential index when they are generated.
+    /// </summary>
+    /// <param name="firstMessageIndex">The zero-based index of the first message to retrieve.  Defaults to index 0.</param>
+    /// <param name="lastMessageIndex">The index of the last message to retrieve.  Defaults to null, to retrieve all remaining messages.</param>
+    public void GetMessages(int firstIndex = 0, int? lastIndex = null)
+    {
+
     }
 
     /// <summary>

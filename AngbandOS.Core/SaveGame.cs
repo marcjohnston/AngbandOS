@@ -151,10 +151,6 @@ internal class SaveGame
     public const int HurtChance = 16;
 
     public ExPlayer ExPlayer;
-    private readonly List<string> _messageBuf = new List<string>();
-    private readonly List<int> _messageCounts = new List<int>();
-    private int _msgPrintP;
-    public bool MsgFlag;
 
     public int SpellFirst;
 
@@ -407,6 +403,175 @@ internal class SaveGame
         MemoryStream memoryStream = new MemoryStream(data);
         return (SaveGame)formatter.Deserialize(memoryStream);
     }
+
+    // PROFILE MESSAGING START
+    /// <summary>
+    /// Returns the queue that stores all of the messages.  An actual Queue isn't being used because the Count property for the last item 
+    /// in the queue is being updated when non-empty duplicate messages are rendered sequentially.
+    /// </summary>
+    private readonly List<Message> MessageLog = new List<Message>();
+    private readonly List<Message> RecentMessages = new List<Message>();
+    private Message[] PreviousMessages;
+
+    /// <summary>
+    /// Returns the current X position of the cursor when rendering messages.
+    /// </summary>
+    private int MessageXCursorPos;
+
+    /// <summary>
+    /// Returns true, if the next message to be rendered to the player should be rendered on the same line; false, if the next message
+    /// should restart at the cursor X position of 0.  No "more" prompt will be rendered when set to false.
+    /// </summary>
+    private bool MessageAppendNextMessage;
+
+    /// <summary>
+    /// Returns the unique index of the first message in the MessageLog.  When messages drop out of the list due to the size of the MessageLog, this index is incremented
+    /// by one.  We do not actually store indexes with each message because they are one-to-one with the list.
+    /// </summary>
+    public int MessageFirstQueueIndex = 0;
+
+    private void MessageAdd(string str)
+    {
+        // Generate the message that will be stored.
+        Message message = new Message(str);
+
+        // simple case - list is empty
+        if (MessageLog.Count == 0)
+        {
+            MessageLog.Add(message);
+            RecentMessages.Add(message);
+            return;
+        }
+
+        // If it's not blank it might be a repeat
+        if (!string.IsNullOrEmpty(str))
+        {
+            Message lastMessage = MessageLog.Last();
+            if (lastMessage.Text == str)
+            {
+                // Same as last - just increment the count
+                lastMessage.Count++;
+                return;
+            }
+        }
+
+        // We're still here, so we just add ourselves
+        MessageLog.Add(message);
+        RecentMessages.Add(message);
+    }
+
+    public int MessageNum()
+    {
+        return MessageLog.Count;
+    }
+
+    public string GetMessageText(int age)
+    {
+        if (age >= MessageLog.Count)
+        {
+            return string.Empty;
+        }
+        Message agedMessage = MessageLog[MessageLog.Count - age - 1];
+        string message = agedMessage.Text;
+        if (agedMessage.Count > 1)
+        {
+            message += $" (x{agedMessage.Count})";
+        }
+        return message;
+    }
+
+    /// <summary>
+    /// Indicates the beginning of a new command being issues by the player.  All messages that have been rendered to the player are batched together and stores into a fixed length queue.
+    /// This MessageFlush is called in the RequestCommand method during the dungeon game play and when in a store.
+    /// </summary>
+    public void MessageFlush()
+    {
+        // Batch all of the message together from the last command and store them as the previous messages.
+        PreviousMessages = RecentMessages.ToArray();
+
+        // Empty the recent list of messages to prepare for the next command.
+        RecentMessages.Clear();
+
+        // Limit the length of the queue.
+        if (Configuration.MaxMessageLogLength != null)
+        {
+            while (MessageLog.Count > Configuration.MaxMessageLogLength)
+            {
+                // Drop the first message.
+                MessageLog.RemoveAt(0);
+
+                // To maintain track of the indexes for each message, we need to increment the index value that we are tracking for the first message.
+                MessageFirstQueueIndex++;
+            }
+        }
+
+        MessageAppendNextMessage = false;
+    }
+
+    public void MsgPrint(string msg)
+    {
+        if (!MessageAppendNextMessage)
+        {
+            MessageXCursorPos = 0;
+        }
+
+        // Determine if we need to render the More prompt.  A More prompt will not be rendered if the cursor is still at position 0,
+        // or the message to be rendered is empty or the message rendered message will not exceed the screen width.
+        int messageLength = string.IsNullOrEmpty(msg) ? 0 : msg.Length;
+        if (MessageXCursorPos != 0 && (string.IsNullOrEmpty(msg) || MessageXCursorPos + messageLength > 72))
+        {
+            MsgFlush(MessageXCursorPos);
+            //MessageAppendNextMessage = false;
+            MessageXCursorPos = 0;
+        }
+        if (string.IsNullOrEmpty(msg))
+        {
+            return;
+        }
+        if (msg.Length > 2)
+        {
+            msg = msg.Substring(0, 1).ToUpper() + msg.Substring(1);
+        }
+        if (messageLength > 1000)
+        {
+            return;
+        }
+        if (Player != null)
+        {
+            MessageAdd(msg);
+        }
+        string buf = msg;
+        string t = buf;
+        while (messageLength > 72)
+        {
+            int split = 72;
+            for (int check = 40; check < 72; check++)
+            {
+                if (t[check] == ' ')
+                {
+                    split = check;
+                }
+            }
+            Screen.Print(ColourEnum.White, t.Substring(0, split), 0, 0);
+            MsgFlush(split + 1);
+            t = t.Substring(split);
+            messageLength -= split;
+        }
+        Screen.Print(ColourEnum.White, t.Substring(0, messageLength), 0, MessageXCursorPos);
+        MessageAppendNextMessage = true;
+        MessageXCursorPos += messageLength + 1;
+    }
+    private void MsgFlush(int cursorXPosition)
+    {
+        Screen.Print(ColourEnum.BrightBlue, "-more-", 0, cursorXPosition);
+        while (!Shutdown)
+        {
+            Inkey();
+            break;
+        }
+        Screen.Erase(0, 0);
+    }
+    // PROFILE MESSAGING END
 
     public byte Elevation(int wildY, int wildX, int y, int x)
     {
@@ -1220,7 +1385,7 @@ internal class SaveGame
             CameFrom = LevelStart.StartRandom;
         }
         UpdateMonitor?.GameStarted();
-        MsgFlag = false;
+        //MessageAppendNextMessage = false;
         MsgPrint(null);
         UpdateScreen();
         FlavorInit();
@@ -1291,126 +1456,6 @@ internal class SaveGame
         }
         oldStore.MoveInventoryToAnotherStore(newStore);
     }
-
-    // PROFILE MESSAGING START
-    public void MessageAdd(string str)
-    {
-        // simple case - list is empty
-        if (_messageBuf.Count == 0)
-        {
-            _messageBuf.Add(str);
-            _messageCounts.Add(1);
-            return;
-        }
-
-        // If it's not blank it might be a repeat
-        if (!string.IsNullOrEmpty(str))
-        {
-            if (_messageBuf[_messageBuf.Count - 1] == str)
-            {
-                // Same as last - just increment the count
-                _messageCounts[_messageCounts.Count - 1]++;
-                return;
-            }
-        }
-
-        // We're still here, so we just add ourselves
-        _messageBuf.Add(str);
-        _messageCounts.Add(1);
-
-        // Limit the size
-        if (Configuration.MaxHistoryLogItems != null)
-        {
-            while (_messageBuf.Count > Configuration.MaxHistoryLogItems)
-            {
-                _messageBuf.RemoveAt(0);
-                _messageCounts.RemoveAt(0);
-            }
-        }
-    }
-
-    public int MessageNum()
-    {
-        return _messageBuf.Count;
-    }
-
-    public string MessageStr(int age)
-    {
-        if (age >= _messageBuf.Count)
-        {
-            return string.Empty;
-        }
-        string message = _messageBuf[_messageBuf.Count - age - 1];
-        int count = _messageCounts[_messageCounts.Count - age - 1];
-        if (count > 1)
-        {
-            message += $" (x{count})";
-        }
-        return message;
-    }
-
-    public void MsgPrint(string msg)
-    {
-        if (!MsgFlag)
-        {
-            _msgPrintP = 0;
-        }
-        int n = string.IsNullOrEmpty(msg) ? 0 : msg.Length;
-        if (_msgPrintP != 0 && (string.IsNullOrEmpty(msg) || _msgPrintP + n > 72))
-        {
-            MsgFlush(_msgPrintP);
-            MsgFlag = false;
-            _msgPrintP = 0;
-        }
-        if (string.IsNullOrEmpty(msg))
-        {
-            return;
-        }
-        if (msg.Length > 2)
-        {
-            msg = msg.Substring(0, 1).ToUpper() + msg.Substring(1);
-        }
-        if (n > 1000)
-        {
-            return;
-        }
-        if (Player != null)
-        {
-            MessageAdd(msg);
-        }
-        string buf = msg;
-        string t = buf;
-        while (n > 72)
-        {
-            int split = 72;
-            for (int check = 40; check < 72; check++)
-            {
-                if (t[check] == ' ')
-                {
-                    split = check;
-                }
-            }
-            Screen.Print(ColourEnum.White, t.Substring(0, split), 0, 0);
-            MsgFlush(split + 1);
-            t = t.Substring(split);
-            n -= split;
-        }
-        Screen.Print(ColourEnum.White, t.Substring(0, n), 0, _msgPrintP);
-        MsgFlag = true;
-        _msgPrintP += n + 1;
-    }
-    private void MsgFlush(int x)
-    {
-        const ColourEnum a = ColourEnum.BrightBlue;
-        Screen.Print(a, "-more-", 0, x);
-        while (!Shutdown)
-        {
-            Inkey();
-            break;
-        }
-        Screen.Erase(0, 0);
-    }
-    // PROFILE MESSAGING END
 
     public int Difficulty => CurrentDepth + DungeonDifficulty;
 
@@ -2909,7 +2954,7 @@ internal class SaveGame
                 CommandRepeat--;
                 RedrawStateFlaggedAction.Set();
                 RedrawStuff();
-                MsgFlag = false;
+                //MessageAppendNextMessage = false;
                 Screen.PrintLine("", 0, 0);
                 ProcessCommand(true);
             }
@@ -10631,7 +10676,7 @@ internal class SaveGame
     /// Returns the next keypress. The behavior of this function is modified by other class properties
     /// </summary>
     /// <returns> The next key pressed </returns>
-    public char Inkey(bool doNotWaitOnInkey = false)
+    public char Inkey(bool doNotWaitOnInkey = false) // TODO: Change the signature to return null when Shutdown == true
     {
         char ch = '\0';
         if (!string.IsNullOrEmpty(_keyBuffer))
@@ -10730,7 +10775,8 @@ internal class SaveGame
             }
             else
             {
-                MsgFlag = false;
+                MessageFlush();
+                //MessageAppendNextMessage = false;
                 HideCursorOnFullScreenInkey = true;
                 cmd = Inkey();
             }
@@ -11138,11 +11184,6 @@ internal class SaveGame
         }
         Player.RaceAtBirth = Player.Race;
         PlayerBirthQuests();
-        MessageAdd(" ");
-        MessageAdd("  ");
-        MessageAdd("====================");
-        MessageAdd("  ");
-        MessageAdd(" ");
         Player.IsDead = false;
         PlayerOutfit();
         return true;

@@ -30,7 +30,7 @@ internal class MessagesScript : Script
             int row;
             for (row = 0; row < 40 && index + row < messageNumber; row++)
             {
-                string msg = SaveGame.MessageStr((short)(index + row));
+                string msg = SaveGame.GetMessageText((short)(index + row));
                 msg = msg.Length >= horizontalOffset ? msg.Substring(horizontalOffset) : "";
                 SaveGame.Screen.Print(ColourEnum.White, msg, 41 - row, 0);
             }

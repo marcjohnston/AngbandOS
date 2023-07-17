@@ -17,7 +17,7 @@ public class Configuration
     /// <summary>
     /// Returns the number of log items that the message history is allowed to store.  A null value indicates that there is no limit.  The default value is 2048.
     /// </summary>
-    public virtual int? MaxHistoryLogItems => 2048;
+    public virtual int? MaxMessageLogLength => 2048;
 }
 
 public class StoreConfiguration
