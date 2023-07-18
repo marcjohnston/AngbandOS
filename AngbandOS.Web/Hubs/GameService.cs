@@ -14,10 +14,22 @@ namespace AngbandOS.Web.Hubs
     /// </summary>
     public class GameService
     {
-        private readonly ConcurrentDictionary<string, SignalRConsole> Consoles = new ConcurrentDictionary<string, SignalRConsole>(); // Tracks the console by connection id.
-        private readonly ConcurrentDictionary<SignalRConsole, string> ConnectionIds = new ConcurrentDictionary<SignalRConsole, string>(); // Tracks the connection id by console.
-        private readonly ConcurrentDictionary<string, ChatRecipient> ChatRecipients = new ConcurrentDictionary<string, ChatRecipient>(); // Track chat recipient capabilities by connection ID.
+        /// <summary>
+        /// Returns a dictionary that returns a SignalRConsole when given a Signal-R connection id.
+        /// </summary>
+        private readonly ConcurrentDictionary<string, SignalRConsole> SignalRConsoles = new ConcurrentDictionary<string, SignalRConsole>();
 
+        /// <summary>
+        /// Returns a dictionary that returns the Signal-R connection id when given a SignalRConsole.
+        /// </summary>
+        private readonly ConcurrentDictionary<SignalRConsole, string> ConnectionIds = new ConcurrentDictionary<SignalRConsole, string>();
+
+        /// <summary>
+        /// Returns a dictionary that returns the ChatRecipient when given a Signal-R connection ID.
+        /// </summary>
+        private readonly ConcurrentDictionary<string, ChatRecipient> ChatRecipients = new ConcurrentDictionary<string, ChatRecipient>();
+
+        private readonly HubConnectionsMonitor messagesHubConnections = new HubConnectionsMonitor();
         private readonly HubConnectionsMonitor gameHubConnections = new HubConnectionsMonitor();
         private readonly HubConnectionsMonitor chatHubConnections = new HubConnectionsMonitor();
         private readonly HubConnectionsMonitor spectatorsHubConnections = new HubConnectionsMonitor();
@@ -93,10 +105,10 @@ namespace AngbandOS.Web.Hubs
             gameHubConnections.Disconnected(connectionId);
 
             // Get the console running the game.  It may still be active.
-            if (Consoles.TryGetValue(connectionId, out SignalRConsole? console))
+            if (SignalRConsoles.TryGetValue(connectionId, out SignalRConsole? console))
             {
                 // Remove the connection from the consoles.
-                Consoles.Remove(connectionId, out _);
+                SignalRConsoles.Remove(connectionId, out _);
 
                 // Force a shutdown of the console thread.
                 console.Shutdown();
@@ -136,6 +148,22 @@ namespace AngbandOS.Web.Hubs
         public void SpectatorsHubDisconnected(string connectionId)
         {
             spectatorsHubConnections.Disconnected(connectionId);
+            SendHubConnectionsUpdate();
+        }
+
+        public void MessagesHubConnected(string connectionId)
+        {
+            messagesHubConnections.Connected(connectionId, null);
+            SendHubConnectionsUpdate();
+        }
+
+        /// <summary>
+        /// Handles spectator signal-r disconnections.
+        /// </summary>
+        /// <param name="connectionId"></param>
+        public void MessagesHubDisconnected(string connectionId)
+        {
+            messagesHubConnections.Disconnected(connectionId);
             SendHubConnectionsUpdate();
         }
 
@@ -186,7 +214,7 @@ namespace AngbandOS.Web.Hubs
         public bool KillGame(string connectionId)
         {
             // Retrieve the console for the game to be killed.
-            if (Consoles.TryGetValue(connectionId, out SignalRConsole? console))
+            if (SignalRConsoles.TryGetValue(connectionId, out SignalRConsole? console))
             {
                 console.Kill();
                 return true;
@@ -220,7 +248,7 @@ namespace AngbandOS.Web.Hubs
         public ActiveGameDetails[] GetActiveGames()
         {
             List<ActiveGameDetails> activeGames = new List<ActiveGameDetails>();
-            foreach (KeyValuePair<string, SignalRConsole> console in Consoles)
+            foreach (KeyValuePair<string, SignalRConsole> console in SignalRConsoles)
             {
                 ActiveGameDetails activeGameDetails = new ActiveGameDetails()
                 {
@@ -239,19 +267,38 @@ namespace AngbandOS.Web.Hubs
         }
 
         /// <summary>
+        /// Process an incoming web client request to retrieve a batch of messages.
+        /// </summary>
+        /// <param name="connectionId">The connection identifier.</param>
+        /// <param name="firstIndex">The first index.</param>
+        /// <param name="lastIndex">The last index.</param>
+        /// <param name="maximumMessagesToRetrieve">The maximum messages to retrieve.</param>
+        /// <returns></returns>
+        public PageOfGameMessages? GetGameMessages(string gameSignalRConnectionId, int? firstIndex = null, int lastIndex = 0, int? maximumMessagesToRetrieve = null)
+        {
+            // Get the signal-r console object that is hosting the game.
+            if (SignalRConsoles.TryGetValue(gameSignalRConnectionId, out SignalRConsole? signalRConsole))
+            {
+                PageOfGameMessages? gameMessages = signalRConsole.GetGameMessages(firstIndex, lastIndex, maximumMessagesToRetrieve);
+                return gameMessages;
+            }
+            return null;
+        }
+
+        /// <summary>
         /// Process a request from the watcherConnectionId to watch the game hosted by the watchingConnectionId.
         /// </summary>
-        /// <param name="watcherConnectionId"></param>
-        /// <param name="watchingConnectionId"></param>
-        public void Watch(string watcherConnectionId, string watchingConnectionId)
+        /// <param name="watchWindowConnectionId"></param>
+        /// <param name="gameSignalRConnectionId"></param>
+        public void Watch(string watchWindowConnectionId, string gameSignalRConnectionId)
         {
-            // Get the console belonging to the game.
-            if (Consoles.TryGetValue(watchingConnectionId, out SignalRConsole? console))
+            // Get the signal-r console object that is hosting the game.
+            if (SignalRConsoles.TryGetValue(gameSignalRConnectionId, out SignalRConsole? signalRConsole))
             {
                 // Retrieve the spectator hub client for the connection.  This signal-r interface is how the game will communicate to the client.
-                ISpectatorsHub spectatorHub = SpectatorsHub.Clients.Client(watcherConnectionId);
+                ISpectatorsHub spectatorHub = SpectatorsHub.Clients.Client(watchWindowConnectionId);
 
-                console.AddWatcher(spectatorHub);
+                signalRConsole.AddWatcher(spectatorHub);
             }
         }
 
@@ -426,7 +473,7 @@ namespace AngbandOS.Web.Hubs
             console.ThreadName = $"Game: {userId}/{guid}";
 
             // We need to track this game by the connection ID so that messages on the signal-r connection can be quickly correlated to the associated game.
-            if (!Consoles.TryAdd(connectionId, console))
+            if (!SignalRConsoles.TryAdd(connectionId, console))
             {
                 // We were unable to track this game.  Kill it and abort the play request.
                 console.Kill();
@@ -437,7 +484,7 @@ namespace AngbandOS.Web.Hubs
             if (!ConnectionIds.TryAdd(console, connectionId))
             {
                 // We were unable to track this game.  Remove the entry we added for the console, kill the game and abort the play request.
-                Consoles.Remove(connectionId, out _);
+                SignalRConsoles.Remove(connectionId, out _);
                 console.Kill();
                 return;
             }
@@ -484,7 +531,7 @@ namespace AngbandOS.Web.Hubs
         /// <param name="keys">The key that was pressed.</param>
         public void Keypressed(string connectionId, string keys)
         {
-            if (Consoles.TryGetValue(connectionId, out SignalRConsole console))
+            if (SignalRConsoles.TryGetValue(connectionId, out SignalRConsole console))
                 console.Keypressed(keys);
         }
 

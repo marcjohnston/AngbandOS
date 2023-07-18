@@ -36,6 +36,10 @@
     <None Remove="ClientApp\src\app\home\active-game-details.ts" />
     <None Remove="ClientApp\src\app\home\active-user-details.ts" />
     <None Remove="ClientApp\src\app\home\saved-game-details.ts" />
+    <None Remove="ClientApp\src\app\messages-window\game-message.ts" />
+    <None Remove="ClientApp\src\app\messages-window\json-game-message.ts" />
+    <None Remove="ClientApp\src\app\messages-window\json-page-of-game-messages.ts" />
+    <None Remove="ClientApp\src\app\messages-window\page-of-game-messages.ts" />
     <None Remove="ClientApp\src\app\modules\colour-enum\colour-enum.module.ts" />
     <None Remove="ClientApp\src\app\modules\colours-map\colours-map.module.ts" />
     <None Remove="ClientApp\src\app\modules\html-console\html-console.module.ts" />
@@ -53,6 +57,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\messages-window\json-game-message.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\messages-window\json-page-of-game-messages.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\messages-window\page-of-game-messages.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\messages-window\game-message.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\play\get-user-preferences.ts" />
   </ItemGroup>
 

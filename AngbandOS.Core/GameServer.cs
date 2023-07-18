@@ -101,13 +101,34 @@ public class GameServer
     }
 
     /// <summary>
-    /// Retrieves a block of messages.  Messages are assigned a unique sequential index when they are generated.
+    /// Retrieves a block of messages.  Messages are assigned a unique sequential 0-based index when they are generated with the earliest message assigned an index of 0.  Messages
+    /// are retrieved in reverse order; in other words, the index of the first message to retrieve must be higher than the index of the last index to retrieve.  For example, requesting
+    /// the messages with the first index = 100 and the last index = 50 will retrieve messages from index 100 down to index 50.  This is done to assist in retrieval efforts for 
+    /// maintaining recent messages and scrolling through older messages.
+    /// 
+    /// Usage scenarios:
+    /// FirstIndex  LastIndex   MaximumCount    Description
+    /// null        0           null            Will retrieve all messages from the log.  This is useful to obtain the entire log.
+    /// null        0           50              Up to 50 of the most recent messages from the log will be returned.  This is useful for rendering the first screen of a scrollable log.
+    /// 50          0           50              Will return a block of up to 50 messages starting from index 50 going down to 0.  This is useful when the user is scrolling.
+    /// null        51          null            Will return all of the messages that have been generated up to and including index 51.  This is useful when an updating an existing window of messages.
+    /// 
+    /// 50          50          null            Will return message 50 and only message 50, if it exists.
+    /// 50          50          0               Will not return any messages.
+    /// 50          50          2               Will return message 50 and only message 50, if it exists.
+    ///
+    /// Special considerations:
+    /// 50          100         null            Will throw an exception because the last index must be smaller than the first index and there is no maximum count to override the last index.
+    /// 50          0           10              The LastIndex value will be ignored and will return a block of up to 10 messages starting from index 50 going down to 40.
+    /// 50          100         10              Will throw an exception because the last index must be smaller than the first index and there is no maximum count to override the last index.
+    /// <0          <0          <0              Will throw an exception if any parameter is less than zero.
     /// </summary>
-    /// <param name="firstMessageIndex">The zero-based index of the first message to retrieve.  Defaults to index 0.</param>
-    /// <param name="lastMessageIndex">The index of the last message to retrieve.  Defaults to null, to retrieve all remaining messages.</param>
-    public void GetMessages(int firstIndex = 0, int? lastIndex = null)
+    /// <param name="firstMessageIndex">The zero-based index of the first message to retrieve.  Defaults to null, which indicates to retrieve the most-recent message from the log.</param>
+    /// <param name="lastMessageIndex">The zero-based index of the last message to retrieve.  Defaults to 0, which indicates to retrieve the oldest message from the log.</param>
+    /// <param name="firstIndex">The maximum number of records to return.  Defaults to null, which does not limit the number of records.</param>
+    public PageOfGameMessages? GetPageOfGameMessages(int? firstIndex = null, int lastIndex = 0, int? maximumMessagesToRetrieve = null)
     {
-
+        return SaveGame.GetPageOfGameMessages(firstIndex, lastIndex, maximumMessagesToRetrieve);
     }
 
     /// <summary>

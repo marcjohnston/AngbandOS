@@ -1,0 +1,24 @@
+#container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  & #scrollDiv {
+    flex-grow: 1;
+    overflow-y: scroll;
+  }
+
+  & table {
+    font-family: monospace; // We want the font to be monospaced.
+    width: 100%; // We want the table to span the entire window.
+
+    & tr {
+      height: 1rem; // The row heights should only be enough for the text with no extra padding.
+    }
+
+    & td {
+      padding: 0; // Remove the padding around the cells.
+      border: none;
+    }
+  }
+}

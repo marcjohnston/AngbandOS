@@ -409,9 +409,9 @@ internal class SaveGame
     /// Returns the queue that stores all of the messages.  An actual Queue isn't being used because the Count property for the last item 
     /// in the queue is being updated when non-empty duplicate messages are rendered sequentially.
     /// </summary>
-    private readonly List<Message> MessageLog = new List<Message>();
-    private readonly List<Message> RecentMessages = new List<Message>();
-    private Message[] PreviousMessages;
+    private readonly List<GameMessage> MessageLog = new List<GameMessage>();
+    private readonly List<GameMessage> RecentMessages = new List<GameMessage>();
+    private GameMessage[] PreviousMessages;
 
     /// <summary>
     /// Returns the current X position of the cursor when rendering messages.
@@ -430,10 +430,73 @@ internal class SaveGame
     /// </summary>
     public int MessageFirstQueueIndex = 0;
 
+    public PageOfGameMessages? GetPageOfGameMessages(int? firstIndex = null, int lastIndex = 0, int? maximumMessagesToRetrieve = null)
+    {
+        int firstIndexValue;
+
+        // Resolve a null firstIndex.
+        if (firstIndex == null)
+        {
+            // If the message log is empty, return null.
+            if (MessageLog.Count == 0)
+            {
+                return null;
+            }
+            firstIndexValue = MessageLog.Count - 1;
+        }
+        else
+        {
+            firstIndexValue = firstIndex.Value;
+        }
+
+        // Resolve the lastIndex, based on a maximum number of messages to retrieve.
+        if (maximumMessagesToRetrieve != null)
+        {
+            lastIndex = firstIndexValue - maximumMessagesToRetrieve.Value;
+            if (lastIndex < 0)
+            {
+                lastIndex = 0;
+            }
+        }
+
+        // If messages have dropped out of the queue, we may need to shorten the list.
+        if (lastIndex < MessageFirstQueueIndex)
+        {
+            lastIndex = MessageFirstQueueIndex;
+        }
+
+        // Validate the request.
+        if (firstIndex >= MessageLog.Count)
+        {
+            throw new ArgumentException("The firstIndex refers to a message that does not exist.");
+        }
+        if (lastIndex > firstIndex)
+        {
+            throw new ArgumentException("The lastIndex cannot be larger than the firstIndex.");
+        }
+        if (firstIndex < 0 || lastIndex < 0 || maximumMessagesToRetrieve < 0)
+        {
+            throw new ArgumentException("Parameters do not support values less than zero.");
+        }
+
+        // Gather the messages.
+        int recordCount = firstIndexValue - lastIndex + 1;
+        GameMessage[] messages = MessageLog.GetRange(lastIndex, recordCount).ToArray();
+
+        if (messages.Length == 0)
+        {
+            return null;
+        }
+
+        // Build the return object.
+        PageOfGameMessages messageBatch = new PageOfGameMessages(messages, firstIndexValue, lastIndex);
+        return messageBatch;
+    }
+
     private void MessageAdd(string str)
     {
         // Generate the message that will be stored.
-        Message message = new Message(str);
+        GameMessage message = new GameMessage(str);
 
         // simple case - list is empty
         if (MessageLog.Count == 0)
@@ -446,7 +509,7 @@ internal class SaveGame
         // If it's not blank it might be a repeat
         if (!string.IsNullOrEmpty(str))
         {
-            Message lastMessage = MessageLog.Last();
+            GameMessage lastMessage = MessageLog.Last();
             if (lastMessage.Text == str)
             {
                 // Same as last - just increment the count
@@ -471,7 +534,7 @@ internal class SaveGame
         {
             return string.Empty;
         }
-        Message agedMessage = MessageLog[MessageLog.Count - age - 1];
+        GameMessage agedMessage = MessageLog[MessageLog.Count - age - 1];
         string message = agedMessage.Text;
         if (agedMessage.Count > 1)
         {

@@ -7,7 +7,7 @@ using System.ComponentModel;
 namespace AngbandOS.Web.Hubs
 {
     /// <summary>
-    /// Represents a console interface to accept messages from an active game (AngbandOS.Core) and send the message to the client browser via a SignalR hub.  This class operates 
+    /// Represents an object that accept messages from an active game (AngbandOS.Core) and send the message to the client browser via a SignalR hub.  This class operates 
     /// as a background worker to process incoming messages and send outgoing messages without blocking the main thread.
     /// </summary>
     public class SignalRConsole : BackgroundWorker, IConsole
@@ -28,7 +28,7 @@ namespace AngbandOS.Web.Hubs
         private readonly List<ISpectatorsHub> _spectators = new List<ISpectatorsHub>();
 
         /// <summary>
-        /// Returns the object resposible for the persistence of the game.
+        /// Returns the object responsible for the persistence of the game.
         /// </summary>
         private readonly ICorePersistentStorage PersistentStorage;
 
@@ -212,6 +212,14 @@ namespace AngbandOS.Web.Hubs
             _consoleGameHub.GameIncompatible();
         }
 
+        public PageOfGameMessages? GetGameMessages(int? firstIndex = null, int lastIndex = 0, int? maximumMessagesToRetrieve = null)
+        {
+            return _gameServer.GetPageOfGameMessages(firstIndex, lastIndex, maximumMessagesToRetrieve);
+        }
+
+        /// <summary>
+        /// Accepts a Clear command sent by the AngbandOS core game and forwards the event to the console and all spectators.
+        /// </summary>
         public void Clear()
         {
             // Forward the clear command from the game to the signal-r hub.
@@ -219,9 +227,15 @@ namespace AngbandOS.Web.Hubs
 
             // These messages are relayed to all spectators.
             foreach (ISpectatorsHub gameHub in _spectators)
+            {
                 gameHub.Clear();
+            }
         }
 
+        /// <summary>
+        /// Accepts a PlayMusic command sent by the AngbandOS core game and forwards the event to the console and all spectators.
+        /// </summary>
+        /// <param name="music"></param>
         public void PlayMusic(MusicTrackEnum music)
         {
             // Forward the play music command from the game to the signal-r hub.
@@ -229,9 +243,15 @@ namespace AngbandOS.Web.Hubs
 
             // These messages are relayed to all spectators.
             foreach (ISpectatorsHub gameHub in _spectators)
+            {
                 gameHub.PlayMusic(music);
+            }
         }
 
+        /// <summary>
+        /// Accepts a PlaySound command sent by the AngbandOS core game and forwards the event to the console and all spectators.
+        /// </summary>
+        /// <param name="sound"></param>
         public void PlaySound(SoundEffectEnum sound)
         {
             // Forward the play sound command from the game to the signal-r hub.
@@ -239,9 +259,15 @@ namespace AngbandOS.Web.Hubs
 
             // These messages are relayed to all spectators.
             foreach (ISpectatorsHub gameHub in _spectators)
+            {
                 gameHub.PlaySound(sound);
+            }
         }
 
+        /// <summary>
+        /// Accepts a BatchPrint command sent by the AngbandOS core game and forwards the event to the console and all spectators.
+        /// </summary>
+        /// <param name="printLines"></param>
         public void BatchPrint(PrintLine[] printLines)
         {
             // Forward the print command from the game to the signal-r hub.
@@ -249,9 +275,15 @@ namespace AngbandOS.Web.Hubs
 
             // These messages are relayed to all spectators.
             foreach (ISpectatorsHub spectatorHub in _spectators)
+            {
                 spectatorHub.BatchPrint(printLines);
+            }
         }
 
+        /// <summary>
+        /// Accepts a SetBackground command sent by the AngbandOS core game and forwards the event to the console and all spectators.
+        /// </summary>
+        /// <param name="image"></param>
         public void SetBackground(BackgroundImageEnum image)
         {
             // Forward the set background command from the game to the signal-r hub.
@@ -259,7 +291,9 @@ namespace AngbandOS.Web.Hubs
 
             // These messages are relayed to all spectators.
             foreach (ISpectatorsHub gameHub in _spectators)
+            {
                 gameHub.SetBackground(image);
+            }
         }
 
         /// <summary>

@@ -40,11 +40,15 @@ namespace AngbandOS.Web.Hubs
         {
             // Ensure there is a user and that the message is not empty.
             if (message.Length == 0 || Context.User == null)
+            {
                 return;
+            }
 
             bool success = await GameService.WriteMessageAsync(Context.User, toUsername, message, MessageTypeEnum.UserMessage, null);
             if (!success)
+            {
                 await Clients.Client(Context.ConnectionId).MessageFailed();
+            }
         }
 
         public async Task RefreshChat(int? endingId)

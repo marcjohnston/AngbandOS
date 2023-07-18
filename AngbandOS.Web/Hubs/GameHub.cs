@@ -26,11 +26,11 @@ namespace AngbandOS.Web.Hubs
             UserManager = userManager;
         }
 
-        ///// <summary>
-        ///// Process the incoming web client request to play a game.
-        ///// </summary>
-        ///// <param name="guid">The unique identifier for the game to be played.  Must be owned by the user.  Null, to start a new game.</param>
-        ///// <returns></returns>
+        /// <summary>
+        /// Process the incoming web client request to play a game.
+        /// </summary>
+        /// <param name="guid">The unique identifier for the game to be played.  Must be owned by the user.  Null, to start a new game.</param>
+        /// <returns></returns>
         public async Task Play(string guid)
         {
             // We need to ensure the user is authenticated.

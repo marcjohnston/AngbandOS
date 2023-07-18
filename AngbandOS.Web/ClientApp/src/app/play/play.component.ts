@@ -367,7 +367,7 @@ export class PlayComponent implements OnInit, OnDestroy {
   }
 
   public openMessagesWindow() {
-    window.open(`/watch/${this.gameGuid}/messages`, "AngbandOS Messages", `height=${window.outerHeight},width=400`);
+    window.open(`/watch/${this.connectionId}/messages`, "AngbandOS Messages", `height=${window.outerHeight},width=400`);
   }
 
   ngOnInit() {
@@ -380,6 +380,7 @@ export class PlayComponent implements OnInit, OnDestroy {
       // Create an HTML console module to handle all of the interaction.
       this._htmlConsole = new HtmlConsole(this.canvasRef);
 
+      // Setup the in-game drop-down menu.
       const inGameMenuElement: HTMLDivElement = this.inGameMenuRef?.nativeElement;
       inGameMenuElement.style.display = "none";
       

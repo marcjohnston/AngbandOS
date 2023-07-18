@@ -8,11 +8,11 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class Message
+internal class GameMessage : IGameMessage
 {
-    public int Count;
-    public readonly string Text;
-    public Message(string text)
+    public int Count { get; set; }
+    public string Text { get; }
+    public GameMessage(string text)
     {
         Text = text;
         Count = 1;
