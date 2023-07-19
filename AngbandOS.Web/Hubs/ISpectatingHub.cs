@@ -3,10 +3,10 @@
 namespace AngbandOS.Web.Hubs;
 
 /// <summary>
-/// Represents an interface that defines the outgoing signal-r methods that the game can send.  This interface is
+/// Represents an interface that defines the outgoing signal-r methods that the a spectating client can receive.  There is no WaitForKey or inputs from a spectating client.
 /// used for playing games.
 /// </summary>
-public interface ISpectatorsHub
+public interface ISpectatingHub
 {
     /// <summary>
     /// Outgoing message to a web client that the game is over.

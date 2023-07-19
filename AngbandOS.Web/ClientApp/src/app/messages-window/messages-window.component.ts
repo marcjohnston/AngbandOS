@@ -75,6 +75,11 @@ export class MessagesWindowComponent implements OnInit {
                 window.close();
               });
             });
+            this.connection.on("GameMessagesUpdated", () => {
+              this._zone.run(() => {
+                this.refresh();
+              });
+            });
             this.connection.on("GameMessagesReceived", (jsonPageOfGameMessages: JsonPageOfGameMessages | null) => {
               this._zone.run(() => {
                 // Check to see if we have any messages recevied from the game.
@@ -131,7 +136,7 @@ export class MessagesWindowComponent implements OnInit {
     // Send a message to the hub to receive the current messages.
     this.masterPageOfGameMessages = null;
     if (this.connection) {
-      this.connection.send("GetGameMessages", this.gameConnectionId, null, 0, 20);
+      this.connection.send("MonitorGameMessages", this.gameConnectionId, 20);
     }
   }
 

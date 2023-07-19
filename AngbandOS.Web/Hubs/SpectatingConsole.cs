@@ -2,11 +2,11 @@
 
 namespace AngbandOS.Web.Hubs;
 
-public class SpectatorConsole : IConsole
+public class SpectatingConsole : IConsole
 {
-    private readonly ISpectatorsHub _gameHub;
+    private readonly ISpectatingHub _gameHub;
 
-    public SpectatorConsole(ISpectatorsHub gameHub)
+    public SpectatingConsole(ISpectatingHub gameHub)
     {
         _gameHub = gameHub;
     }
@@ -42,6 +42,11 @@ public class SpectatorConsole : IConsole
     }
 
     public bool KeyQueueIsEmpty()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void MessagesUpdated()
     {
         throw new NotImplementedException();
     }

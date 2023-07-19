@@ -3,6 +3,7 @@ using AngbandOS.Core.Interface;
 using Microsoft.AspNetCore.SignalR;
 using System.Collections.Concurrent;
 using System.ComponentModel;
+using System.Drawing;
 
 namespace AngbandOS.Web.Hubs
 {
@@ -12,6 +13,7 @@ namespace AngbandOS.Web.Hubs
     /// </summary>
     public class SignalRConsole : BackgroundWorker, IConsole
     {
+        #region State Date
         /// <summary>
         /// Returns the queue of keystrokes that is being used to store the keystrokes provided by the player.
         /// </summary>
@@ -25,7 +27,12 @@ namespace AngbandOS.Web.Hubs
         /// <summary>
         /// Returns the list of people watching the game.
         /// </summary>
-        private readonly List<ISpectatorsHub> _spectators = new List<ISpectatorsHub>();
+        private readonly List<ISpectatingHub> _spectators = new List<ISpectatingHub>();
+
+        /// <summary>
+        /// Returns the list of windows that are monitoring the game messages.
+        /// </summary>
+        private readonly List<IGameMessagesHub> _gameMessagesMonitors = new List<IGameMessagesHub>();
 
         /// <summary>
         /// Returns the object responsible for the persistence of the game.
@@ -61,7 +68,9 @@ namespace AngbandOS.Web.Hubs
         /// Returns true, when a request to shut the game down has been received.
         /// </summary>
         private bool ShuttingDown = false;
+        #endregion
 
+        #region Constructor
         public SignalRConsole(HubCallerContext context, IGameHub gameHub, ICorePersistentStorage persistentStorage, string userId, string username, Action<SignalRConsole, GameUpdateNotificationEnum, string> notificationAction)
         {
             _consoleGameHub = gameHub;
@@ -71,7 +80,120 @@ namespace AngbandOS.Web.Hubs
             NotificationAction = notificationAction;
             Context = context;
         }
+        #endregion
 
+        #region IConsole Explicit Implementation
+        /// <summary>
+        /// Accepts a Clear command sent by the AngbandOS core game and forwards the event to the console and all spectators.
+        /// </summary>
+        void IConsole.Clear()
+        {
+            // Forward the clear command from the game to the signal-r hub.
+            _consoleGameHub.Clear();
+
+            // These messages are relayed to all spectators.
+            foreach (ISpectatingHub gameHub in _spectators)
+            {
+                gameHub.Clear();
+            }
+        }
+
+        /// <summary>
+        /// Accepts a PlayMusic command sent by the AngbandOS core game and forwards the event to the console and all spectators.
+        /// </summary>
+        /// <param name="music"></param>
+        void IConsole.PlayMusic(MusicTrackEnum music)
+        {
+            // Forward the play music command from the game to the signal-r hub.
+            _consoleGameHub.PlayMusic(music);
+
+            // These messages are relayed to all spectators.
+            foreach (ISpectatingHub gameHub in _spectators)
+            {
+                gameHub.PlayMusic(music);
+            }
+        }
+
+        /// <summary>
+        /// Accepts a PlaySound command sent by the AngbandOS core game and forwards the event to the console and all spectators.
+        /// </summary>
+        /// <param name="sound"></param>
+        void IConsole.PlaySound(SoundEffectEnum sound)
+        {
+            // Forward the play sound command from the game to the signal-r hub.
+            _consoleGameHub.PlaySound(sound);
+
+            // These messages are relayed to all spectators.
+            foreach (ISpectatingHub gameHub in _spectators)
+            {
+                gameHub.PlaySound(sound);
+            }
+        }
+
+        /// <summary>
+        /// Accepts a BatchPrint command sent by the AngbandOS core game and forwards the event to the console and all spectators.
+        /// </summary>
+        /// <param name="printLines"></param>
+        void IConsole.BatchPrint(PrintLine[] printLines)
+        {
+            // Forward the print command from the game to the signal-r hub.
+            _consoleGameHub.BatchPrint(printLines);
+
+            // These messages are relayed to all spectators.
+            foreach (ISpectatingHub spectatorHub in _spectators)
+            {
+                spectatorHub.BatchPrint(printLines);
+            }
+        }
+
+        /// <summary>
+        /// Accepts a SetBackground command sent by the AngbandOS core game and forwards the event to the console and all spectators.
+        /// </summary>
+        /// <param name="image"></param>
+        void IConsole.SetBackground(BackgroundImageEnum image)
+        {
+            // Forward the set background command from the game to the signal-r hub.
+            _consoleGameHub.SetBackground(image);
+
+            // These messages are relayed to all spectators.
+            foreach (ISpectatingHub gameHub in _spectators)
+            {
+                gameHub.SetBackground(image);
+            }
+        }
+
+        bool IConsole.KeyQueueIsEmpty()
+        {
+            return KeyQueue.IsEmpty;
+        }
+
+        /// <summary>
+        /// This message is received from the game when a key is needed.
+        /// </summary>
+        /// <returns></returns>
+        char IConsole.WaitForKey()
+        {
+            char c;
+
+            // Wait until there is a key from the client.
+            while (!KeyQueue.TryDequeue(out c) && !ShuttingDown)
+            {
+                Thread.Sleep(5); // TODO: Use a wait event
+            }
+            // Return the key.
+            return c;
+        }
+
+        void IConsole.MessagesUpdated()
+        {
+            foreach (IGameMessagesHub gameMessageHub in _gameMessagesMonitors)
+            {
+                gameMessageHub.GameMessagesUpdated();
+            }
+        }
+        #endregion
+
+        #region Game Play
         public void Shutdown()
         {
             // Set the game flag to shut down.  Do this first, because we need to game to exit quickly when keypresses are bypassed.
@@ -85,22 +207,9 @@ namespace AngbandOS.Web.Hubs
 
         }
 
-        public void Kill()
+        public void Kill() // TODO: Alias for Shutdown
         {
             Shutdown();
-        }
-
-        public void AddWatcher(ISpectatorsHub watcherHub)
-        {
-            _spectators.Add(watcherHub);
-
-            // Send a request to the game to refresh the screen.
-            _gameServer.RefreshSpectatorConsole(new SpectatorConsole(watcherHub));
-        }
-
-        public void RemoveWatcher(ISpectatorsHub watcherHub)
-        {
-            _spectators.Remove(watcherHub);
         }
 
         /// <summary>
@@ -172,17 +281,13 @@ namespace AngbandOS.Web.Hubs
                     GameOver();
                 }
             }
+
+            // We need to send the game-over message to all clients monitoring the game.
             DisconnectSpectators();
+            DisconnectGameMessagesMonitors();
 
             // Abort the context.  This will throw the signal-r disconnect?
             Context.Abort();
-        }
-
-        private void DisconnectSpectators()
-        {
-            // These messages are relayed to all spectators.
-            foreach (ISpectatorsHub gameHub in _spectators)
-                gameHub.GameOver();
         }
 
         /// <summary>
@@ -195,15 +300,6 @@ namespace AngbandOS.Web.Hubs
         }
 
         /// <summary>
-        /// Sends a generic message to the console.
-        /// </summary>
-        /// <param name="message"></param>
-        public void SendConsoleMessage(string message)
-        {
-            _consoleGameHub.SendMessage(message);
-        }
-
-        /// <summary>
         /// Sends a message to the console that the game cannot be played because it is incompatible.
         /// </summary>
         /// <param name="message"></param>
@@ -212,89 +308,8 @@ namespace AngbandOS.Web.Hubs
             _consoleGameHub.GameIncompatible();
         }
 
-        public PageOfGameMessages? GetGameMessages(int? firstIndex = null, int lastIndex = 0, int? maximumMessagesToRetrieve = null)
-        {
-            return _gameServer.GetPageOfGameMessages(firstIndex, lastIndex, maximumMessagesToRetrieve);
-        }
 
-        /// <summary>
-        /// Accepts a Clear command sent by the AngbandOS core game and forwards the event to the console and all spectators.
-        /// </summary>
-        public void Clear()
-        {
-            // Forward the clear command from the game to the signal-r hub.
-            _consoleGameHub.Clear();
 
-            // These messages are relayed to all spectators.
-            foreach (ISpectatorsHub gameHub in _spectators)
-            {
-                gameHub.Clear();
-            }
-        }
-
-        /// <summary>
-        /// Accepts a PlayMusic command sent by the AngbandOS core game and forwards the event to the console and all spectators.
-        /// </summary>
-        /// <param name="music"></param>
-        public void PlayMusic(MusicTrackEnum music)
-        {
-            // Forward the play music command from the game to the signal-r hub.
-            _consoleGameHub.PlayMusic(music);
-
-            // These messages are relayed to all spectators.
-            foreach (ISpectatorsHub gameHub in _spectators)
-            {
-                gameHub.PlayMusic(music);
-            }
-        }
-
-        /// <summary>
-        /// Accepts a PlaySound command sent by the AngbandOS core game and forwards the event to the console and all spectators.
-        /// </summary>
-        /// <param name="sound"></param>
-        public void PlaySound(SoundEffectEnum sound)
-        {
-            // Forward the play sound command from the game to the signal-r hub.
-            _consoleGameHub.PlaySound(sound);
-
-            // These messages are relayed to all spectators.
-            foreach (ISpectatorsHub gameHub in _spectators)
-            {
-                gameHub.PlaySound(sound);
-            }
-        }
-
-        /// <summary>
-        /// Accepts a BatchPrint command sent by the AngbandOS core game and forwards the event to the console and all spectators.
-        /// </summary>
-        /// <param name="printLines"></param>
-        public void BatchPrint(PrintLine[] printLines)
-        {
-            // Forward the print command from the game to the signal-r hub.
-            _consoleGameHub.BatchPrint(printLines);
-
-            // These messages are relayed to all spectators.
-            foreach (ISpectatorsHub spectatorHub in _spectators)
-            {
-                spectatorHub.BatchPrint(printLines);
-            }
-        }
-
-        /// <summary>
-        /// Accepts a SetBackground command sent by the AngbandOS core game and forwards the event to the console and all spectators.
-        /// </summary>
-        /// <param name="image"></param>
-        public void SetBackground(BackgroundImageEnum image)
-        {
-            // Forward the set background command from the game to the signal-r hub.
-            _consoleGameHub.SetBackground(image);
-
-            // These messages are relayed to all spectators.
-            foreach (ISpectatorsHub gameHub in _spectators)
-            {
-                gameHub.SetBackground(image);
-            }
-        }
 
         /// <summary>
         /// Inserts a new keystroke into the queue for the game to use.
@@ -310,27 +325,91 @@ namespace AngbandOS.Web.Hubs
                 }
             }
         }
+        #endregion
 
-        public bool KeyQueueIsEmpty()
+        #region Spectating
+        /// <summary>
+        /// Adds a spectating window to the list of windows spectating the game.
+        /// </summary>
+        /// <param name="spectatorHub">The watcher hub.</param>
+        public void AddSpectator(ISpectatingHub spectatorHub)
         {
-            return KeyQueue.IsEmpty;
+            _spectators.Add(spectatorHub);
+
+            // Send a request to the game to refresh the screen.
+            _gameServer.RefreshSpectatorConsole(new SpectatingConsole(spectatorHub));
         }
 
         /// <summary>
-        /// This message is received from the game when a key is needed.
+        /// Removes a spectating window from the list of windows spectating the game.
         /// </summary>
-        /// <returns></returns>
-        public char WaitForKey()
+        /// <param name="spectatorHub">The watcher hub.</param>
+        public void RemoveSpectator(ISpectatingHub spectatorHub)
         {
-            char c;
-
-            // Wait until there is a key from the client.
-            while (!KeyQueue.TryDequeue(out c) && !ShuttingDown)
-            {
-                Thread.Sleep(5); // TODO: Use a wait event
-            }
-            // Return the key.
-            return c;
+            _spectators.Remove(spectatorHub);
         }
+
+        /// <summary>
+        /// Send the game over message to all of the spectating windows, so that they disconnect.  We don't actually try to force a signal-r disconnect or window close.  It
+        /// is the responsibility of the receiving window to process the game over message.
+        /// </summary>
+        private void DisconnectSpectators()
+        {
+            // These messages are relayed to all spectators.
+            foreach (ISpectatingHub spectatorHub in _spectators)
+            {
+                spectatorHub.GameOver();
+            }
+        }
+        #endregion
+
+        #region Game Messages Monitoring
+        /// <summary>
+        /// Accepts a request from a web-client to monitor the game messages.
+        /// </summary>
+        /// <param name="gameMessagesHub">The signal-r hub for the monitor.</param>
+        /// <param name="maximumMessagesToRetrieve">The maximum messages to retrieve.</param>
+        public void MonitorGameMessages(IGameMessagesHub gameMessagesHub, int? maximumMessagesToRetrieve = null)
+        {
+            // Add the monitor to the collection of monitors.
+            _gameMessagesMonitors.Add(gameMessagesHub);
+
+            // Send a request to the game to get the initial page of game messages.
+            PageOfGameMessages? pageOfGameMessages = _gameServer.GetPageOfGameMessages();
+
+            // If there are messages, send them to the hub for the monitor.
+            if (pageOfGameMessages != null)
+            {
+                gameMessagesHub.GameMessagesReceived(pageOfGameMessages);
+            }
+        }
+
+        /// <summary>
+        /// Removes a monitor from the list of clients that are monitoring the game messages.
+        /// </summary>
+        /// <param name="watcherHub">The watcher hub.</param>
+        public void RemoveGameMessagesMonitor(IGameMessagesHub gameMessagesWindow)
+        {
+            _gameMessagesMonitors.Remove(gameMessagesWindow);
+        }
+
+        /// <summary>
+        /// Send the game over message to all of the spectating windows, so that they disconnect.  We don't actually try to force a signal-r disconnect or window close.  It
+        /// is the responsibility of the receiving window to process the game over message.
+        /// </summary>
+        private void DisconnectGameMessagesMonitors()
+        {
+            // These messages are relayed to all spectators.
+            foreach (IGameMessagesHub monitorHub in _gameMessagesMonitors)
+            {
+                monitorHub.GameOver();
+            }
+        }
+
+        public PageOfGameMessages? GetGameMessages(int? firstIndex = null, int lastIndex = 0, int? maximumMessagesToRetrieve = null)
+        {
+            return _gameServer.GetPageOfGameMessages(firstIndex, lastIndex, maximumMessagesToRetrieve);
+        }
+        #endregion
     }
 }

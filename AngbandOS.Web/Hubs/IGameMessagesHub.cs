@@ -19,4 +19,9 @@ public interface IGameMessagesHub
     /// </summary>
     /// <returns></returns>
     Task GameMessagesReceived(PageOfGameMessages? pageOfGameMessages);
+
+    /// <summary>
+    /// Outgoing message to a web client that the game messages have been updated.  The web client should request additional messages.
+    /// </summary>
+    Task GameMessagesUpdated();
 }

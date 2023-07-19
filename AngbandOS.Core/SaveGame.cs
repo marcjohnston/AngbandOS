@@ -502,6 +502,9 @@ internal class SaveGame
         if (MessageLog.Count == 0)
         {
             MessageLog.Add(message);
+
+            // Fire the event that the game messages have been updated.
+            _console.MessagesUpdated();
             RecentMessages.Add(message);
             return;
         }
@@ -520,6 +523,9 @@ internal class SaveGame
 
         // We're still here, so we just add ourselves
         MessageLog.Add(message);
+
+        // Fire the event that the game messages have been updated.
+        _console.MessagesUpdated();
         RecentMessages.Add(message);
     }
 

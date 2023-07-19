@@ -10,10 +10,13 @@ using System.Security.Claims;
 namespace AngbandOS.Web.Hubs
 {
     /// <summary>
-    /// Represents a singleton service that maintains the active state for the AngbandOS.
+    /// Represents a singleton service that maintains the active state for AngbandOS.  The primary purpose of this game service singleton is that it can forward requests from
+    /// a client to a game that is in progress.  Games in progress are maintained by a SignalRConsole object.  This game service singleton maintains those games by their signal-r
+    /// connection id.  This object is divided using regions to segregate the major functionality areas it maintains.
     /// </summary>
     public class GameService
     {
+        #region State Data
         /// <summary>
         /// Returns a dictionary that returns a SignalRConsole when given a Signal-R connection id.
         /// </summary>
@@ -29,7 +32,7 @@ namespace AngbandOS.Web.Hubs
         /// </summary>
         private readonly ConcurrentDictionary<string, ChatRecipient> ChatRecipients = new ConcurrentDictionary<string, ChatRecipient>();
 
-        private readonly HubConnectionsMonitor messagesHubConnections = new HubConnectionsMonitor();
+        private readonly HubConnectionsMonitor gameMessagesHubConnections = new HubConnectionsMonitor();
         private readonly HubConnectionsMonitor gameHubConnections = new HubConnectionsMonitor();
         private readonly HubConnectionsMonitor chatHubConnections = new HubConnectionsMonitor();
         private readonly HubConnectionsMonitor spectatorsHubConnections = new HubConnectionsMonitor();
@@ -40,17 +43,19 @@ namespace AngbandOS.Web.Hubs
         private readonly IHubContext<AdminHub, IAdminHub> AdminHub;
         private readonly IHubContext<ServiceHub, IServiceHub> ServiceHub;
         private readonly IHubContext<ChatHub, IChatHub> ChatHub;
-        private readonly IHubContext<SpectatorsHub, ISpectatorsHub> SpectatorsHub;
+        private readonly IHubContext<SpectatingHub, ISpectatingHub> SpectatorsHub;
         private readonly IConfiguration Configuration;
         private readonly string ConnectionString;
         private readonly IServiceScopeFactory ServiceScopeFactory;
+        #endregion
 
+        #region Constructor
         public GameService(
             IHubContext<GameHub, IGameHub> gameHub,
             IHubContext<ServiceHub, IServiceHub> serviceHub,
             IHubContext<ChatHub, IChatHub> chatHub,
             IHubContext<AdminHub, IAdminHub> adminHub,
-            IHubContext<SpectatorsHub, ISpectatorsHub> spectatorsHub,
+            IHubContext<SpectatingHub, ISpectatingHub> spectatorsHub,
             IConfiguration config,
             IServiceScopeFactory serviceScopeFactory
         )
@@ -64,28 +69,9 @@ namespace AngbandOS.Web.Hubs
             ServiceScopeFactory = serviceScopeFactory;
             ConnectionString = Configuration["ConnectionString"];
         }
+        #endregion
 
-        /// <summary>
-        /// Adds a user to the chat system.
-        /// </summary>
-        /// <param name="connectionId"></param>
-        /// <param name="chatRecipient"></param>
-        public void ChatConnected(string connectionId, ChatRecipient chatRecipient)
-        {
-            ChatRecipients.TryAdd(connectionId, chatRecipient);
-            ServiceHub.Clients.All.ActiveUsersRefreshed(GetChatUsers());
-        }
-
-        /// <summary>
-        /// Removes a user from the chat system.
-        /// </summary>
-        /// <param name="connectionId"></param>
-        public void ChatDisconnected(string connectionId)
-        {
-            ChatRecipients.Remove(connectionId, out _);
-            ServiceHub.Clients.All.ActiveUsersRefreshed(GetChatUsers());
-        }
-
+        #region Game Play
         public async Task GameHubConnectedAsync(string connectionId, string username)
         {
             gameHubConnections.Connected(connectionId, username);
@@ -119,98 +105,6 @@ namespace AngbandOS.Web.Hubs
             SendHubConnectionsUpdate();
         }
 
-        public void ChatHubConnected(string connectionId, string username)
-        {
-            chatHubConnections.Connected(connectionId, username);
-            SendHubConnectionsUpdate();
-        }
-
-        /// <summary>
-        /// Handles spectator signal-r disconnections.
-        /// </summary>
-        /// <param name="connectionId"></param>
-        public void ChatHubDisconnected(string connectionId)
-        {
-            chatHubConnections.Disconnected(connectionId);
-            SendHubConnectionsUpdate();
-        }
-
-        public void SpectatorsHubConnected(string connectionId)
-        {
-            spectatorsHubConnections.Connected(connectionId, null);
-            SendHubConnectionsUpdate();
-        }
-
-        /// <summary>
-        /// Handles spectator signal-r disconnections.
-        /// </summary>
-        /// <param name="connectionId"></param>
-        public void SpectatorsHubDisconnected(string connectionId)
-        {
-            spectatorsHubConnections.Disconnected(connectionId);
-            SendHubConnectionsUpdate();
-        }
-
-        public void MessagesHubConnected(string connectionId)
-        {
-            messagesHubConnections.Connected(connectionId, null);
-            SendHubConnectionsUpdate();
-        }
-
-        /// <summary>
-        /// Handles spectator signal-r disconnections.
-        /// </summary>
-        /// <param name="connectionId"></param>
-        public void MessagesHubDisconnected(string connectionId)
-        {
-            messagesHubConnections.Disconnected(connectionId);
-            SendHubConnectionsUpdate();
-        }
-
-        /// <summary>
-        /// Adds a connection to the service hub monitor and sends updates to the dashboard.
-        /// </summary>
-        /// <param name="connectionId"></param>
-        public void ServiceHubConnected(string connectionId)
-        {
-            serviceHubConnections.Connected(connectionId, null);
-            SendHubConnectionsUpdate();
-        }
-
-        /// <summary>
-        /// Handles spectator signal-r disconnections.
-        /// </summary>
-        /// <param name="connectionId"></param>
-        public void ServiceHubDisconnected(string connectionId)
-        {
-            serviceHubConnections.Disconnected(connectionId);
-            SendHubConnectionsUpdate();
-        }
-
-        public void AdminHubConnected(string connectionId, string username)
-        {
-            adminHubConnections.Connected(connectionId, username);
-            SendHubConnectionsUpdate();
-        }
-
-        /// <summary>
-        /// Handles spectator signal-r disconnections.
-        /// </summary>
-        /// <param name="connectionId"></param>
-        public void AdminHubDisconnected(string connectionId)
-        {
-            adminHubConnections.Disconnected(connectionId);
-            SendHubConnectionsUpdate();
-        }
-
-        /// <summary>
-        /// Sends an update to the admin hub, when a connection or disconnection to any hub is made.
-        /// </summary>
-        private void SendHubConnectionsUpdate()
-        {
-            AdminHub.Clients.All.HubConnectionsUpdated(GetConnections());
-        }
-
         public bool KillGame(string connectionId)
         {
             // Retrieve the console for the game to be killed.
@@ -221,184 +115,6 @@ namespace AngbandOS.Web.Hubs
             }
             else
                 return false;
-        }
-
-        public HubConnections GetConnections()
-        {
-            return new HubConnections()
-            {
-                AdminHubConnections = adminHubConnections.GetAll(),
-                ChatHubConnections = chatHubConnections.GetAll(),
-                GameHubConnections = gameHubConnections.GetAll(),
-                ServiceHubConnections = serviceHubConnections.GetAll(),
-                SpectatorsHubConnections = spectatorsHubConnections.GetAll()
-            };
-        }
-
-        public ActiveUserDetails[] GetChatUsers()
-        {
-            return ChatRecipients.Select(_connectionIdAndChatRecipient => new ActiveUserDetails()
-            {
-                Username = _connectionIdAndChatRecipient.Value.Username,
-                ConnectionId = _connectionIdAndChatRecipient.Key,
-                DateTime = _connectionIdAndChatRecipient.Value.DateTime
-            }).ToArray();
-        }
-
-        public ActiveGameDetails[] GetActiveGames()
-        {
-            List<ActiveGameDetails> activeGames = new List<ActiveGameDetails>();
-            foreach (KeyValuePair<string, SignalRConsole> console in SignalRConsoles)
-            {
-                ActiveGameDetails activeGameDetails = new ActiveGameDetails()
-                {
-                    CharacterName = console.Value.CharacterName,
-                    Gold = console.Value.Gold,
-                    Level = console.Value.Level,
-                    ElapsedGameTime = console.Value.ElapsedGameTime,
-                    LastInputReceived = console.Value.LastInputReceived,
-                    ConnectionId = console.Key,
-                    UserId = console.Value.UserId,
-                    Username = console.Value.Username,
-                };
-                activeGames.Add(activeGameDetails);
-            }
-            return activeGames.ToArray();
-        }
-
-        /// <summary>
-        /// Process an incoming web client request to retrieve a batch of messages.
-        /// </summary>
-        /// <param name="connectionId">The connection identifier.</param>
-        /// <param name="firstIndex">The first index.</param>
-        /// <param name="lastIndex">The last index.</param>
-        /// <param name="maximumMessagesToRetrieve">The maximum messages to retrieve.</param>
-        /// <returns></returns>
-        public PageOfGameMessages? GetGameMessages(string gameSignalRConnectionId, int? firstIndex = null, int lastIndex = 0, int? maximumMessagesToRetrieve = null)
-        {
-            // Get the signal-r console object that is hosting the game.
-            if (SignalRConsoles.TryGetValue(gameSignalRConnectionId, out SignalRConsole? signalRConsole))
-            {
-                PageOfGameMessages? gameMessages = signalRConsole.GetGameMessages(firstIndex, lastIndex, maximumMessagesToRetrieve);
-                return gameMessages;
-            }
-            return null;
-        }
-
-        /// <summary>
-        /// Process a request from the watcherConnectionId to watch the game hosted by the watchingConnectionId.
-        /// </summary>
-        /// <param name="watchWindowConnectionId"></param>
-        /// <param name="gameSignalRConnectionId"></param>
-        public void Watch(string watchWindowConnectionId, string gameSignalRConnectionId)
-        {
-            // Get the signal-r console object that is hosting the game.
-            if (SignalRConsoles.TryGetValue(gameSignalRConnectionId, out SignalRConsole? signalRConsole))
-            {
-                // Retrieve the spectator hub client for the connection.  This signal-r interface is how the game will communicate to the client.
-                ISpectatorsHub spectatorHub = SpectatorsHub.Clients.Client(watchWindowConnectionId);
-
-                signalRConsole.AddWatcher(spectatorHub);
-            }
-        }
-
-        private async Task<ChatMessage> GetChatMessageAsync(MessageDetails message)
-        {
-            string fromUsername = await GetUsernameAsync(message.FromId);
-            string toUsername = await GetUsernameAsync(message.ToId);
-            return new ChatMessage
-            {
-                FromUsername = fromUsername,
-                Message = message.Message,
-                SentDateTime = message.SentDateTime,
-                Id = message.Id
-            };
-        }
-
-        /// <summary>
-        /// Retrieves chat messages from the database for a user.
-        /// </summary>
-        /// <param name="endingId"></param>
-        /// <returns></returns>
-        public async Task<ChatMessage[]> GetChatMessagesAsync(string connectionId, int? endingId)
-        {
-            // Determine if the current user is an administrator.
-            ChatRecipients.TryGetValue(connectionId, out ChatRecipient? chatRecipient);
-
-            // Retrieve the messages from the database.
-            using (IServiceScope scope = ServiceScopeFactory.CreateScope())
-            {
-                IWebPersistentStorage webPersistentStorage = scope.ServiceProvider.GetRequiredService<IWebPersistentStorage>();
-                MessageDetails[] messages = await chatRecipient.GetMessagesAsync(webPersistentStorage, endingId);
-
-                // Convert the messages into chat format that they can be sent to the client.
-                List<ChatMessage> chatMessages = new List<ChatMessage>();
-                foreach (MessageDetails message in messages)
-                    chatMessages.Add(await GetChatMessageAsync(message));
-                return chatMessages.ToArray();
-            }
-        }
-
-        /// <summary>
-        /// Writes a message to the messages database, if needed and sends out proper responses to all clients, if needed.
-        /// </summary>
-        /// <param name="fromId"></param>
-        /// <param name="toUsername"></param>
-        /// <param name="message"></param>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public async Task<bool> WriteMessageAsync(ClaimsPrincipal fromUser, string? toUsername, string message, MessageTypeEnum type, string? gameId)
-        {
-            // Get the details of the user sending the message and who the message is being sent to.
-            string? fromEmailAddress = fromUser.FindFirst(ClaimTypes.Email)?.Value;
-            ApplicationUser? fromAppUser = null;
-            ApplicationUser? toAppUser = null; // Sent to the general public.
-
-            using (IServiceScope scope = ServiceScopeFactory.CreateScope())
-            {
-                UserManager<ApplicationUser> userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-                fromAppUser = await userManager.FindByEmailAsync(fromEmailAddress);
-
-                // Validate the user the message is from.
-                if (fromAppUser == null)
-                    return false;
-
-                // Get the details of the user for which the message is to be sent to.
-                if (toUsername != null)
-                {
-                    toAppUser = await userManager.FindByNameAsync(toUsername);
-                    if (toAppUser == null)
-                        return false;
-
-                    // Set the Id of the user it was sent to.
-                    toUsername = toAppUser.Id;
-                }
-            }
-
-            // Write the message to the database.
-            try
-            {
-                using (IServiceScope scope = ServiceScopeFactory.CreateScope())
-                {
-                    IWebPersistentStorage webPersistentStorage = scope.ServiceProvider.GetRequiredService<IWebPersistentStorage>();
-                    MessageDetails? messageWritten = await webPersistentStorage.WriteMessageAsync(fromAppUser.Id, toAppUser?.Id, message, type, gameId);
-                    if (messageWritten == null)
-                        return false;
-
-                    // Relay the message to all clients.
-                    foreach (KeyValuePair<string, ChatRecipient> connectionIdAndChatRecipient in ChatRecipients)
-                    {
-                        ChatRecipient chatRecipient = connectionIdAndChatRecipient.Value;
-                        ChatMessage chatMessage = await GetChatMessageAsync(messageWritten);
-                        await chatRecipient.SendUpdateAsync(messageWritten.Type, messageWritten.ToId, chatMessage);
-                    }
-                    return true;
-                }
-            }
-            catch (Exception)
-            {
-                return false;
-            }
         }
 
         /// <summary>
@@ -427,7 +143,7 @@ namespace AngbandOS.Web.Hubs
             }
 
             // Create a new instance of the Sql persistent storage so that concurrent games do not interfere with each other.
-            ICorePersistentStorage corePersistentStorage =  new SqlCorePersistentStorage(ConnectionString, userId, guid);
+            ICorePersistentStorage corePersistentStorage = new SqlCorePersistentStorage(ConnectionString, userId, guid);
 
             // Construct an update monitor that is used when the game notifies us that interesting event happen in the game.
             Action<SignalRConsole, GameUpdateNotificationEnum, string> gameUpdateMonitor = async (SignalRConsole signalRConsole, GameUpdateNotificationEnum gameUpdateNotification, string message) =>
@@ -492,12 +208,8 @@ namespace AngbandOS.Web.Hubs
             // Add an event for when the game is over, that we can disconnect the client.
             console.RunWorkerCompleted += Console_RunWorkerCompleted;
 
-            // await WriteMessageAsync(userId, null, guid.ToString(), MessageTypeEnum.GameStarted, guid);
-
             // Run the background thread and the game.
             console.RunWorkerAsync();
-
-            // await WriteMessageAsync(userId, null, guid.ToString(), MessageTypeEnum.GameStopped, guid);
 
             // Run the update notifications.
             await ServiceHub.Clients.All.ActiveGamesUpdated(GetActiveGames());
@@ -534,6 +246,92 @@ namespace AngbandOS.Web.Hubs
             if (SignalRConsoles.TryGetValue(connectionId, out SignalRConsole console))
                 console.Keypressed(keys);
         }
+        #endregion
+
+        #region Chat
+        public void ChatHubConnected(string connectionId, string username)
+        {
+            chatHubConnections.Connected(connectionId, username);
+            SendHubConnectionsUpdate();
+        }
+
+        /// <summary>
+        /// Handles spectator signal-r disconnections.
+        /// </summary>
+        /// <param name="connectionId"></param>
+        public void ChatHubDisconnected(string connectionId)
+        {
+            chatHubConnections.Disconnected(connectionId);
+            SendHubConnectionsUpdate();
+        }
+
+        /// <summary>
+        /// Adds a user to the chat system.
+        /// </summary>
+        /// <param name="connectionId"></param>
+        /// <param name="chatRecipient"></param>
+        public void ChatConnected(string connectionId, ChatRecipient chatRecipient)
+        {
+            ChatRecipients.TryAdd(connectionId, chatRecipient);
+            ServiceHub.Clients.All.ActiveUsersRefreshed(GetChatUsers());
+        }
+
+        /// <summary>
+        /// Removes a user from the chat system.
+        /// </summary>
+        /// <param name="connectionId"></param>
+        public void ChatDisconnected(string connectionId)
+        {
+            ChatRecipients.Remove(connectionId, out _);
+            ServiceHub.Clients.All.ActiveUsersRefreshed(GetChatUsers());
+        }
+
+        public ActiveUserDetails[] GetChatUsers()
+        {
+            return ChatRecipients.Select(_connectionIdAndChatRecipient => new ActiveUserDetails()
+            {
+                Username = _connectionIdAndChatRecipient.Value.Username,
+                ConnectionId = _connectionIdAndChatRecipient.Key,
+                DateTime = _connectionIdAndChatRecipient.Value.DateTime
+            }).ToArray();
+        }
+
+        /// <summary>
+        /// Retrieves chat messages from the database for a user.
+        /// </summary>
+        /// <param name="endingId"></param>
+        /// <returns></returns>
+        public async Task<ChatMessage[]> GetChatMessagesAsync(string connectionId, int? endingId)
+        {
+            // Determine if the current user is an administrator.
+            ChatRecipients.TryGetValue(connectionId, out ChatRecipient? chatRecipient);
+
+            // Retrieve the messages from the database.
+            using (IServiceScope scope = ServiceScopeFactory.CreateScope())
+            {
+                IWebPersistentStorage webPersistentStorage = scope.ServiceProvider.GetRequiredService<IWebPersistentStorage>();
+                MessageDetails[] messages = await chatRecipient.GetMessagesAsync(webPersistentStorage, endingId);
+
+                // Convert the messages into chat format that they can be sent to the client.
+                List<ChatMessage> chatMessages = new List<ChatMessage>();
+                foreach (MessageDetails message in messages)
+                    chatMessages.Add(await GetChatMessageAsync(message));
+                return chatMessages.ToArray();
+            }
+        }
+
+        private async Task<ChatMessage> GetChatMessageAsync(MessageDetails message)
+        {
+            string fromUsername = await GetUsernameAsync(message.FromId);
+            string toUsername = await GetUsernameAsync(message.ToId);
+            return new ChatMessage
+            {
+                FromUsername = fromUsername,
+                Message = message.Message,
+                SentDateTime = message.SentDateTime,
+                Id = message.Id
+            };
+        }
 
         /// <summary>
         /// Returns the username from a users' ID.
@@ -552,5 +350,242 @@ namespace AngbandOS.Web.Hubs
                     return "unknown";
             }
         }
+        #endregion
+
+        #region Game Spectating
+        public void SpectatingHubConnected(string connectionId)
+        {
+            spectatorsHubConnections.Connected(connectionId, null);
+            SendHubConnectionsUpdate();
+        }
+
+        /// <summary>
+        /// Handles spectator signal-r disconnections.
+        /// </summary>
+        /// <param name="connectionId"></param>
+        public void SpectatingHubDisconnected(string connectionId)
+        {
+            spectatorsHubConnections.Disconnected(connectionId);
+            SendHubConnectionsUpdate();
+        }
+
+        /// <summary>
+        /// Process a request from the watcherConnectionId to watch the game hosted by the watchingConnectionId.
+        /// </summary>
+        /// <param name="spectatorConnectionId"></param>
+        /// <param name="gameToSpectateSignalRConnectionId"></param>
+        public void Spectate(string spectatorConnectionId, string gameToSpectateSignalRConnectionId)
+        {
+            // Get the signal-r console object that is hosting the game.
+            if (SignalRConsoles.TryGetValue(gameToSpectateSignalRConnectionId, out SignalRConsole? signalRConsole))
+            {
+                // Retrieve the spectator hub client for the connection.  This signal-r interface is how the game will communicate to the client.
+                ISpectatingHub spectatorHub = SpectatorsHub.Clients.Client(spectatorConnectionId);
+
+                signalRConsole.AddSpectator(spectatorHub);
+            }
+        }
+        #endregion
+
+        #region Game Messages
+        /// <summary>
+        /// Adds a connection to the game messages hub monitor and sends updates to the administrative dashboard.
+        /// </summary>
+        /// <param name="connectionId"></param>
+        public void GameMessagesHubConnected(string connectionId)
+        {
+            gameMessagesHubConnections.Connected(connectionId, null);
+            SendHubConnectionsUpdate();
+        }
+
+        /// <summary>
+        /// Removes a connection from the game messages hub monitor and sends updates to the administrative dashboard.
+        /// </summary>
+        /// <param name="connectionId"></param>
+        public void GameMessagesHubDisconnected(string connectionId)
+        {
+            gameMessagesHubConnections.Disconnected(connectionId);
+            SendHubConnectionsUpdate();
+        }
+
+        /// <summary>
+        /// Process an incoming web client request to retrieve a batch of messages.
+        /// </summary>
+        /// <param name="connectionId">The connection identifier.</param>
+        /// <param name="firstIndex">The first index.</param>
+        /// <param name="lastIndex">The last index.</param>
+        /// <param name="maximumMessagesToRetrieve">The maximum messages to retrieve.</param>
+        /// <returns></returns>
+        public PageOfGameMessages? GetGameMessages(string gameSignalRConnectionId, int? firstIndex = null, int lastIndex = 0, int? maximumMessagesToRetrieve = null)
+        {
+            // Get the signal-r console object that is hosting the game.
+            if (SignalRConsoles.TryGetValue(gameSignalRConnectionId, out SignalRConsole? signalRConsole))
+            {
+                PageOfGameMessages? gameMessages = signalRConsole.GetGameMessages(firstIndex, lastIndex, maximumMessagesToRetrieve);
+                return gameMessages;
+            }
+            return null;
+        }
+
+        public void MonitorGameMessages(IGameMessagesHub monitorHub, string gameSignalRConnectionId, int? maximumMessagesToRetrieve = null)
+        {
+            // Get the signal-r console object that is hosting the game that needs to be monitored.
+            if (SignalRConsoles.TryGetValue(gameSignalRConnectionId, out SignalRConsole? signalRConsole))
+            {
+                // Add the hub for the monitor to the game.
+                signalRConsole.MonitorGameMessages(monitorHub, maximumMessagesToRetrieve);
+            }
+        }
+        #endregion
+
+        #region Administrative Dashboard
+        public void AdminHubConnected(string connectionId, string username)
+        {
+            adminHubConnections.Connected(connectionId, username);
+            SendHubConnectionsUpdate();
+        }
+
+        /// <summary>
+        /// Handles spectator signal-r disconnections.
+        /// </summary>
+        /// <param name="connectionId"></param>
+        public void AdminHubDisconnected(string connectionId)
+        {
+            adminHubConnections.Disconnected(connectionId);
+            SendHubConnectionsUpdate();
+        }
+
+        /// <summary>
+        /// Sends an update to the admin hub, when a connection or disconnection to any hub is made.  This allows an administrative screen to monitor active connections and
+        /// disconnections.
+        /// </summary>
+        private void SendHubConnectionsUpdate()
+        {
+            AdminHub.Clients.All.HubConnectionsUpdated(GetConnections());
+        }
+
+        /// <summary>
+        /// Returns all of the current hub connections to an administrative screen.
+        /// </summary>
+        /// <returns></returns>
+        public HubConnections GetConnections()
+        {
+            return new HubConnections()
+            {
+                AdminHubConnections = adminHubConnections.GetAll(),
+                ChatHubConnections = chatHubConnections.GetAll(),
+                GameHubConnections = gameHubConnections.GetAll(),
+                ServiceHubConnections = serviceHubConnections.GetAll(),
+                SpectatorsHubConnections = spectatorsHubConnections.GetAll()
+            };
+        }
+        #endregion
+
+        #region AngbandOS Service (Home Screen)
+        /// <summary>
+        /// Adds a connection to the service hub monitor and sends updates to the dashboard.
+        /// </summary>
+        /// <param name="connectionId"></param>
+        public void ServiceHubConnected(string connectionId)
+        {
+            serviceHubConnections.Connected(connectionId, null);
+            SendHubConnectionsUpdate();
+        }
+
+        /// <summary>
+        /// Handles spectator signal-r disconnections.
+        /// </summary>
+        /// <param name="connectionId"></param>
+        public void ServiceHubDisconnected(string connectionId)
+        {
+            serviceHubConnections.Disconnected(connectionId);
+            SendHubConnectionsUpdate();
+        }
+
+        public ActiveGameDetails[] GetActiveGames()
+        {
+            List<ActiveGameDetails> activeGames = new List<ActiveGameDetails>();
+            foreach (KeyValuePair<string, SignalRConsole> console in SignalRConsoles)
+            {
+                ActiveGameDetails activeGameDetails = new ActiveGameDetails()
+                {
+                    CharacterName = console.Value.CharacterName,
+                    Gold = console.Value.Gold,
+                    Level = console.Value.Level,
+                    ElapsedGameTime = console.Value.ElapsedGameTime,
+                    LastInputReceived = console.Value.LastInputReceived,
+                    ConnectionId = console.Key,
+                    UserId = console.Value.UserId,
+                    Username = console.Value.Username,
+                };
+                activeGames.Add(activeGameDetails);
+            }
+            return activeGames.ToArray();
+        }
+        #endregion
+
+        #region Logging
+        /// <summary>
+        /// Writes a message to the messages database, if needed and sends out proper responses to all clients, if needed.
+        /// </summary>
+        /// <param name="fromId"></param>
+        /// <param name="toUsername"></param>
+        /// <param name="message"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public async Task<bool> WriteMessageAsync(ClaimsPrincipal fromUser, string? toUsername, string message, MessageTypeEnum type, string? gameId)
+        {
+            // Get the details of the user sending the message and who the message is being sent to.
+            string? fromEmailAddress = fromUser.FindFirst(ClaimTypes.Email)?.Value;
+            ApplicationUser? fromAppUser = null;
+            ApplicationUser? toAppUser = null; // Sent to the general public.
+
+            using (IServiceScope scope = ServiceScopeFactory.CreateScope())
+            {
+                UserManager<ApplicationUser> userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+                fromAppUser = await userManager.FindByEmailAsync(fromEmailAddress);
+
+                // Validate the user the message is from.
+                if (fromAppUser == null)
+                    return false;
+
+                // Get the details of the user for which the message is to be sent to.
+                if (toUsername != null)
+                {
+                    toAppUser = await userManager.FindByNameAsync(toUsername);
+                    if (toAppUser == null)
+                        return false;
+
+                    // Set the Id of the user it was sent to.
+                    toUsername = toAppUser.Id;
+                }
+            }
+
+            // Write the message to the database.
+            try
+            {
+                using (IServiceScope scope = ServiceScopeFactory.CreateScope())
+                {
+                    IWebPersistentStorage webPersistentStorage = scope.ServiceProvider.GetRequiredService<IWebPersistentStorage>();
+                    MessageDetails? messageWritten = await webPersistentStorage.WriteMessageAsync(fromAppUser.Id, toAppUser?.Id, message, type, gameId);
+                    if (messageWritten == null)
+                        return false;
+
+                    // Relay the message to all clients.
+                    foreach (KeyValuePair<string, ChatRecipient> connectionIdAndChatRecipient in ChatRecipients)
+                    {
+                        ChatRecipient chatRecipient = connectionIdAndChatRecipient.Value;
+                        ChatMessage chatMessage = await GetChatMessageAsync(messageWritten);
+                        await chatRecipient.SendUpdateAsync(messageWritten.Type, messageWritten.ToId, chatMessage);
+                    }
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        #endregion
     }
 }

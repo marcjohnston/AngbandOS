@@ -118,7 +118,7 @@ app.UseAuthorization();
 
 app.MapHub<GameHub>("/apiv1/game-hub"); // Processes actual game play
 app.MapHub<ServiceHub>("/apiv1/service-hub"); // Processes active game list
-app.MapHub<SpectatorsHub>("/apiv1/spectators-hub"); // Processes spectating games
+app.MapHub<SpectatingHub>("/apiv1/spectators-hub"); // Processes spectating games
 app.MapHub<GameMessagesHub>("/apiv1/game-messages-hub"); // Processes game-messages windows
 app.MapHub<ChatHub>("/apiv1/chat-hub"); // Processes the chat messaging system
 app.MapHub<AdminHub>("/apiv1/admin-hub"); // Processes the chat messaging system

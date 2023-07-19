@@ -41,4 +41,9 @@ public interface IConsole
     void PlayMusic(MusicTrackEnum music);
 
     bool KeyQueueIsEmpty();
+
+    /// <summary>
+    /// Called when the in-game messages have been updated.
+    /// </summary>
+    void MessagesUpdated();
 }
