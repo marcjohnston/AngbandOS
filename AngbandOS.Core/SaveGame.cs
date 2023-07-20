@@ -1472,32 +1472,36 @@ internal class SaveGame
             // Play the current dungeon level.
             DungeonLoop();
 
-            // The dungeon level is changing.
-            NoticeStuff();
-            UpdateStuff();
-            RedrawStuff();
-            TargetWho = 0;
-            HealthTrack(0);
-            RemoveLightFlaggedAction.Check(true);
-            RemoveViewFlaggedAction.Check(true);
-            if (!Playing && !Player.IsDead)
+            // We need to detect if the shutdown has happened, or if we are changing the dungeon level.
+            if (!Shutdown)
             {
-                break;
-            }
-            _petList = Level.GetPets();
-            Level.WipeMList();
-            MsgPrint(null);
-            if (Player.IsDead)
-            {
-                Console.PlayerDied(Player.Name, DiedFrom, Player.Level);
+                // The dungeon level is changing.
+                NoticeStuff();
+                UpdateStuff();
+                RedrawStuff();
+                TargetWho = 0;
+                HealthTrack(0);
+                RemoveLightFlaggedAction.Check(true);
+                RemoveViewFlaggedAction.Check(true);
+                if (!Playing && !Player.IsDead)
+                {
+                    break;
+                }
+                _petList = Level.GetPets();
+                Level.WipeMList();
+                MsgPrint(null);
+                if (Player.IsDead)
+                {
+                    Console.PlayerDied(Player.Name, DiedFrom, Player.Level);
 
-                // Store the player info
-                ExPlayer = new ExPlayer(Player);
-                break;
+                    // Store the player info
+                    ExPlayer = new ExPlayer(Player);
+                    break;
+                }
+                Level = new Level(this);
+                GenerateNewLevel();
+                Level.ReplacePets(Player.MapY, Player.MapX, _petList);
             }
-            Level = new Level(this);
-            GenerateNewLevel();
-            Level.ReplacePets(Player.MapY, Player.MapX, _petList);
         }
         Console.GameStopped();
         CloseGame();

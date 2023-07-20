@@ -95,7 +95,7 @@ import { FooterComponent } from './footer/footer.component';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'play', component: PlayComponent, canDeactivate: [CanDeactivatePlay] },
-      { path: 'play/:guid', component: PlayComponent },
+      { path: 'play/:guid', component: PlayComponent, canDeactivate: [CanDeactivatePlay] },
       { path: 'watch/:guid', component: WatchComponent },
       { path: 'watch/:guid/messages', component: MessagesWindowComponent },
 

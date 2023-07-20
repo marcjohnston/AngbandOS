@@ -6,7 +6,7 @@ export class ConsoleConfiguration {
   public ySpacing = 15; // The number of pixels allocated to each row.
   public xOffset = 1; // The number of pixels to horizontally offset the drawing of the character.
   public yOffset = 0; // The number of pixels to vertically offset the drawing of the character.
-  public width = 80; // The number of column wide for the screen.
+  public width = 80; // The number of columns wide for the screen.
   public height = 45; // The number of rows high for the screen.
   public colours = ColoursMap.getColoursMap(); // An RGB conversion map from game colours to screen colours.
 }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, NgZone, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import * as SignalR from "@microsoft/signalr";
@@ -15,6 +15,7 @@ import { MatRow } from '@angular/material/table';
 })
 export class MessagesWindowComponent implements OnInit {
   @ViewChildren(MatRow, { read: ElementRef }) tableRows!: QueryList<ElementRef<HTMLTableRowElement>>;
+  @ViewChild('scrollDiv', { static: true }) private scrollDivRef: ElementRef<HTMLDivElement> | undefined;
 
   /** Returns the subscriptions that were created and which need to be unsubscribes when the component is destroyed. */
   private _initSubscriptions = new Subscription();
@@ -33,6 +34,9 @@ export class MessagesWindowComponent implements OnInit {
 
   /** Returns the names of the columns that are being displayed. */
   public gameMessagesDisplayedColumns: string[] = ["text"];
+
+  /** Returns true, upon intial load or reload.  When true, requests for messages are sent in an attempt to fill the screen height. */
+  public fillMode = false;
 
   constructor(
     private _activatedRoute: ActivatedRoute,
@@ -64,6 +68,57 @@ export class MessagesWindowComponent implements OnInit {
     return new PageOfGameMessages(jsonPageOfGameMessages.firstIndex, jsonPageOfGameMessages.lastIndex, gameMessages);
   }
 
+  private isFullyVisible(tableRow: HTMLTableRowElement) {
+    const tableRowClientRect = tableRow.getBoundingClientRect();
+    const windowRect = this.scrollDivRef?.nativeElement.getBoundingClientRect();
+
+    const isVisible = (tableRowClientRect.top >= 0) && (tableRowClientRect.bottom <= windowRect!.height);
+
+    return isVisible;
+  }
+
+  private isPartiallyVisible(tableRow: HTMLTableRowElement) {
+    var tableRowClientRect = tableRow.getBoundingClientRect();
+    const windowRect = this.scrollDivRef?.nativeElement.getBoundingClientRect();
+
+    const isVisible = tableRowClientRect.top < windowRect!.height && tableRowClientRect.bottom >= 0;
+    return isVisible;
+  }
+
+  /** Brings the most recent message into view. */
+  private bringMostRecentMessageIntoView() {
+    // Bring the last table row into view.  This needs to be done via a timer, to allow Angular to update the list and create any new table rows
+    // subsequent to any messages we just added.
+    setTimeout(() => {
+      const lastRow = this.tableRows.last;
+      lastRow?.nativeElement.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    });
+  }
+
+  private requestMoreMessagesForFillMode() {
+    // We need to set a timer for this action to be done, to allow Angular to update the list and create any new table rows subsequent to any messages
+    // we just added.
+    setTimeout(() => {
+      if (this.fillMode) {
+        // Check to see if we have all of the possible messages.
+        if (this.masterPageOfGameMessages != null && this.masterPageOfGameMessages.lastIndex === 0) {
+          // There are no more messages that we can request.
+          this.fillMode = false;
+        } else {
+          // Check to see if there is room for more messages in the scrollable area.
+          const lastRow = this.tableRows.last;
+          const lastRowClientRect = lastRow.nativeElement.getBoundingClientRect();
+          const scrollDivRect = this.scrollDivRef!.nativeElement.getBoundingClientRect();
+          const lastRowPartiallyOrFullyHidden = lastRowClientRect.bottom >= scrollDivRect.bottom;
+          if (!lastRowPartiallyOrFullyHidden) {
+            // Request more messages.
+            this.requestEarlierMessages();
+          }
+        }
+      }
+    });
+  }
+
   ngOnInit(): void {
     // Connect to the messages hub.
     this.connection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/game-messages-hub").build();
@@ -89,7 +144,7 @@ export class MessagesWindowComponent implements OnInit {
             });
             this.connection.on("GameMessagesReceived", (jsonPageOfGameMessages: JsonPageOfGameMessages | null) => {
               this._zone.run(() => {
-                // Check to see if we have any messages recevied from the game.
+                // Check to see if we have any messages received from the game.
                 if (jsonPageOfGameMessages != null) {
                   // Validate the JSON structure.
                   const pageOfGameMessages: PageOfGameMessages | null = this.validatePageOfGameMessages(jsonPageOfGameMessages);
@@ -98,6 +153,7 @@ export class MessagesWindowComponent implements OnInit {
                     if (this.masterPageOfGameMessages === null) {
                       // This the initial load.
                       this.masterPageOfGameMessages = pageOfGameMessages;
+                      this.bringMostRecentMessageIntoView();
                     } else {
                       // Here we will need to update the existing page of messages that we ave.  Check to see if the page should be appended to the end.
                       if (pageOfGameMessages.lastIndex === this.masterPageOfGameMessages.firstIndex) {
@@ -110,6 +166,7 @@ export class MessagesWindowComponent implements OnInit {
 
                         // Reset the index for the most-recent message.
                         this.masterPageOfGameMessages.firstIndex = pageOfGameMessages.firstIndex;
+                        this.bringMostRecentMessageIntoView();
                       } else {
                         // Check to see if there is a gap.  If a gap occurs, we will discard the existing page and restart.  Normally, messages are requested to ensure
                         // there is no gap from the existing master list.  If this gap should does occur, then there messages that were deleted from the game--the log is too long.
@@ -117,10 +174,12 @@ export class MessagesWindowComponent implements OnInit {
                         if (pageOfGameMessages.lastIndex > this.masterPageOfGameMessages.firstIndex) {
                           // There is a gap.  Discard the master list.
                           this.masterPageOfGameMessages = pageOfGameMessages;
+                          this.bringMostRecentMessageIntoView();
                         } else {
                           // Check to see if the page should be inserted at the beginning.
                           if (pageOfGameMessages.firstIndex + 1 === this.masterPageOfGameMessages.lastIndex) {
-                            // There is no gap.  Concatenate the messages together.  This will be happening when the user is scrolling up.
+                            // There is no gap.  Concatenate the messages together.  This will be happening when the user is scrolling up.  With this process, we are not
+                            // bringing the most-recent message into view.
                             this.masterPageOfGameMessages.gameMessages = pageOfGameMessages.gameMessages.concat(this.masterPageOfGameMessages.gameMessages);
                             this.masterPageOfGameMessages.lastIndex = pageOfGameMessages.lastIndex;
                           } else {
@@ -128,17 +187,16 @@ export class MessagesWindowComponent implements OnInit {
                             // have an incorrect list.  We will simply ignore the received page of messages.
                           }
                         }
-                      } 
+                      }
                     }
-
-                    // Bring the last table row into view.  This needs to be done via a timer, to allow Angular to update the list and create any new table rows
-                    // subsequent to any messages we just added.
-                    setTimeout(() => {
-                      const lastRow = this.tableRows.last;
-                      lastRow?.nativeElement.scrollIntoView({ block: 'center', behavior: 'smooth' });
-                    });
                   }
+
+                  // Detect if we are in fill mode and request more messages, if we are.
+                  this.requestMoreMessagesForFillMode();
+                } else {
+                  this.fillMode = false;
                 }
+
               });
             });
 
@@ -156,8 +214,19 @@ export class MessagesWindowComponent implements OnInit {
   public reload() {
     // Send a message to the hub to receive the current messages.
     this.masterPageOfGameMessages = null;
+
+    // We are turning on the fill mode so that we can request more messages in an attempt to fill the viewable area of the scroll window.
+    this.fillMode = true;
     if (this.connection) {
       this.connection.send("MonitorGameMessages", this.gameConnectionId, 20);
+    }
+  }
+
+  private requestEarlierMessages() {
+    // Send a message to the hub to receive the current messages.  We can only do this, if the oldest message is greater than 0.
+    if (this.connection && this.masterPageOfGameMessages !== null && this.masterPageOfGameMessages.lastIndex > 0) {
+      // Request an update from the game.  We will also request the most-recent message that we already have.  This is to catch updates in counts (x1), (x2) etc.
+      this.connection.send("GetGameMessages", this.gameConnectionId, this.masterPageOfGameMessages.lastIndex - 1, 0, null);
     }
   }
 
