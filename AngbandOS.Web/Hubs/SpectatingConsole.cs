@@ -2,7 +2,7 @@
 
 namespace AngbandOS.Web.Hubs;
 
-public class SpectatingConsole : IConsole
+public class SpectatingConsole : ISpectator
 {
     private readonly ISpectatingHub _gameHub;
 
@@ -35,17 +35,6 @@ public class SpectatingConsole : IConsole
     {
         _gameHub.SetBackground(image);
     }
-
-    public char WaitForKey()
-    {
-        throw new NotImplementedException();
-    }
-
-    public bool KeyQueueIsEmpty()
-    {
-        throw new NotImplementedException();
-    }
-
     public void MessagesUpdated()
     {
         throw new NotImplementedException();

@@ -95,7 +95,7 @@ public class GameServer
     /// Refresh a spectator console.  
     /// </summary>
     /// <param name="spectatorConsole"></param>
-    public void RefreshSpectatorConsole(IConsole spectatorConsole)
+    public void RefreshSpectatorConsole(ISpectator spectatorConsole)
     {
         SaveGame.Screen.RefreshSpectatorConsole(spectatorConsole);
     }

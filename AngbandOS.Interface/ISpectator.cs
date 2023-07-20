@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents the "console" interface that needs to be implemented to play a game.
 /// </summary>
-public interface IConsole : ISpectator
+public interface ISpectator
 {
     /// <summary>
     /// Clear the entire screen.
@@ -15,12 +15,6 @@ public interface IConsole : ISpectator
     /// </summary>
     /// <param name="printLines"></param>
     void BatchPrint(PrintLine[] printLines);
-
-    /// <summary>
-    /// Retrieve a keypress from the user.
-    /// </summary>
-    /// <returns></returns>
-    char WaitForKey();
 
     /// <summary>
     /// Set the background image.
@@ -39,8 +33,6 @@ public interface IConsole : ISpectator
     /// </summary>
     /// <param name="music"></param>
     void PlayMusic(MusicTrackEnum music);
-
-    bool KeyQueueIsEmpty();
 
     /// <summary>
     /// Called when the in-game messages have been updated.

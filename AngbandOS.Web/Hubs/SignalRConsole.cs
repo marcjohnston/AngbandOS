@@ -82,11 +82,11 @@ namespace AngbandOS.Web.Hubs
         }
         #endregion
 
-        #region IConsole Explicit Implementation
+        #region IConsole Implementation
         /// <summary>
         /// Accepts a Clear command sent by the AngbandOS core game and forwards the event to the console and all spectators.
         /// </summary>
-        void IConsole.Clear()
+        public void Clear()
         {
             // Forward the clear command from the game to the signal-r hub.
             _consoleGameHub.Clear();
@@ -102,7 +102,7 @@ namespace AngbandOS.Web.Hubs
         /// Accepts a PlayMusic command sent by the AngbandOS core game and forwards the event to the console and all spectators.
         /// </summary>
         /// <param name="music"></param>
-        void IConsole.PlayMusic(MusicTrackEnum music)
+        public void PlayMusic(MusicTrackEnum music)
         {
             // Forward the play music command from the game to the signal-r hub.
             _consoleGameHub.PlayMusic(music);
@@ -118,7 +118,7 @@ namespace AngbandOS.Web.Hubs
         /// Accepts a PlaySound command sent by the AngbandOS core game and forwards the event to the console and all spectators.
         /// </summary>
         /// <param name="sound"></param>
-        void IConsole.PlaySound(SoundEffectEnum sound)
+        public void PlaySound(SoundEffectEnum sound)
         {
             // Forward the play sound command from the game to the signal-r hub.
             _consoleGameHub.PlaySound(sound);
@@ -134,7 +134,7 @@ namespace AngbandOS.Web.Hubs
         /// Accepts a BatchPrint command sent by the AngbandOS core game and forwards the event to the console and all spectators.
         /// </summary>
         /// <param name="printLines"></param>
-        void IConsole.BatchPrint(PrintLine[] printLines)
+        public void BatchPrint(PrintLine[] printLines)
         {
             // Forward the print command from the game to the signal-r hub.
             _consoleGameHub.BatchPrint(printLines);
@@ -150,7 +150,7 @@ namespace AngbandOS.Web.Hubs
         /// Accepts a SetBackground command sent by the AngbandOS core game and forwards the event to the console and all spectators.
         /// </summary>
         /// <param name="image"></param>
-        void IConsole.SetBackground(BackgroundImageEnum image)
+        public void SetBackground(BackgroundImageEnum image)
         {
             // Forward the set background command from the game to the signal-r hub.
             _consoleGameHub.SetBackground(image);
@@ -162,7 +162,7 @@ namespace AngbandOS.Web.Hubs
             }
         }
 
-        bool IConsole.KeyQueueIsEmpty()
+        public bool KeyQueueIsEmpty()
         {
             return KeyQueue.IsEmpty;
         }
@@ -171,7 +171,7 @@ namespace AngbandOS.Web.Hubs
         /// This message is received from the game when a key is needed.
         /// </summary>
         /// <returns></returns>
-        char IConsole.WaitForKey()
+        public char WaitForKey()
         {
             char c;
 
@@ -184,7 +184,7 @@ namespace AngbandOS.Web.Hubs
             return c;
         }
 
-        void IConsole.MessagesUpdated()
+        public void MessagesUpdated()
         {
             foreach (IGameMessagesHub gameMessageHub in _gameMessagesMonitors)
             {

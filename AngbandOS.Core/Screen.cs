@@ -295,7 +295,7 @@ internal class Screen
     /// <summary>
     /// Refresh a spectator window.  The contents of the current screen are batch printed to the spectator console.
     /// </summary>
-    public void RefreshSpectatorConsole(IConsole spectatorConsole)
+    public void RefreshSpectatorConsole(ISpectator spectatorConsole)
     {
         List<PrintLine> batchPrintLines = new List<PrintLine>();
         spectatorConsole.Clear();
