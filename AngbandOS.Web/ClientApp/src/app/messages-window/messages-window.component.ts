@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import * as SignalR from "@microsoft/signalr";
@@ -6,6 +6,7 @@ import { PageOfGameMessages } from './page-of-game-messages';
 import { GameMessage } from './game-message';
 import { JsonPageOfGameMessages } from './json-page-of-game-messages';
 import { JsonGameMessage } from './json-game-message';
+import { MatRow } from '@angular/material/table';
 
 @Component({
   selector: 'app-messages-window',
@@ -13,6 +14,8 @@ import { JsonGameMessage } from './json-game-message';
   styleUrls: ['./messages-window.component.scss']
 })
 export class MessagesWindowComponent implements OnInit {
+  @ViewChildren(MatRow, { read: ElementRef }) tableRows!: QueryList<ElementRef<HTMLTableRowElement>>;
+
   /** Returns the subscriptions that were created and which need to be unsubscribes when the component is destroyed. */
   private _initSubscriptions = new Subscription();
 
@@ -108,7 +111,7 @@ export class MessagesWindowComponent implements OnInit {
                         // Check to see if this is a gap.
                         if (pageOfGameMessages.firstIndex + 1 < this.masterPageOfGameMessages.lastIndex) {
                           // There is a gap.  Something unexpected happened with the request and there is nothing we can do.  We do not want to
-                          // have in incorrect list.  We will simply ignore the page.
+                          // have an incorrect list.  We will simply ignore the received page of messages.
                         } else {
                           // There is no gap.  Concatenate the messages together.
                           this.masterPageOfGameMessages.gameMessages = pageOfGameMessages.gameMessages.concat(this.masterPageOfGameMessages.gameMessages);
@@ -116,6 +119,10 @@ export class MessagesWindowComponent implements OnInit {
                         }
                       }
                     }
+
+                    // Bring the last table row into view.
+                    const lastRow = this.tableRows.last;
+                    lastRow?.nativeElement.scrollIntoView({ block: 'center', behavior: 'smooth' });
                   }
                 }
               });
