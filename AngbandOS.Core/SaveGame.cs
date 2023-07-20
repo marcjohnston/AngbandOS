@@ -496,10 +496,10 @@ internal class SaveGame
         if (MessageLog.Count == 0)
         {
             MessageLog.Add(message);
+            RecentMessages.Add(message);
 
             // Fire the event that the game messages have been updated.
             Console.MessagesUpdated();
-            RecentMessages.Add(message);
             return;
         }
 
@@ -511,16 +511,17 @@ internal class SaveGame
             {
                 // Same as last - just increment the count
                 lastMessage.Count++;
+                Console.MessagesUpdated();
                 return;
             }
         }
 
         // We're still here, so we just add ourselves
         MessageLog.Add(message);
+        RecentMessages.Add(message);
 
         // Fire the event that the game messages have been updated.
         Console.MessagesUpdated();
-        RecentMessages.Add(message);
     }
 
     public int MessageNum()

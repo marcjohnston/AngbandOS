@@ -6,7 +6,7 @@
     <ng-container *ngIf="masterPageOfGameMessages !== null">
       <table mat-table [dataSource]="masterPageOfGameMessages.gameMessages">
         <ng-container matColumnDef="text">
-          <td mat-cell *matCellDef="let gameMessage">{{gameMessage.text}}</td>
+          <td mat-cell *matCellDef="let gameMessage">{{gameMessage}}</td>
         </ng-container>
         <tr mat-row *matRowDef="let gameMessage; columns: gameMessagesDisplayedColumns"></tr>
       </table>

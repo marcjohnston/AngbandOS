@@ -11,9 +11,9 @@ export class PageOfGameMessages {
   public lastIndex: number;
 
   /** Returns the page of game messages. */
-  public gameMessages: GameMessage[];
+  public gameMessages: string[];
 
-  constructor(firstIndex: number, lastIndex: number, gameMessages: GameMessage[]) {
+  constructor(firstIndex: number, lastIndex: number, gameMessages: string[]) {
     this.firstIndex = firstIndex;
     this.lastIndex = lastIndex;
     this.gameMessages = gameMessages;

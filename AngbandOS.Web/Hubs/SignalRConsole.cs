@@ -421,10 +421,13 @@ namespace AngbandOS.Web.Hubs
         public void MonitorGameMessages(IGameMessagesHub gameMessagesHub, int? maximumMessagesToRetrieve = null)
         {
             // Add the monitor to the collection of monitors.
-            _gameMessagesMonitors.Add(gameMessagesHub);
+            if (!_gameMessagesMonitors.Contains(gameMessagesHub))
+            {
+                _gameMessagesMonitors.Add(gameMessagesHub);
+            }
 
             // Send a request to the game to get the initial page of game messages.
-            PageOfGameMessages? pageOfGameMessages = _gameServer.GetPageOfGameMessages();
+            PageOfGameMessages? pageOfGameMessages = _gameServer.GetPageOfGameMessages(null, 0, maximumMessagesToRetrieve);
 
             // If there are messages, send them to the hub for the monitor.
             if (pageOfGameMessages != null)

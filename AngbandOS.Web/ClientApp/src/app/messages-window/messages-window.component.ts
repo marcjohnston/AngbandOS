@@ -48,13 +48,17 @@ export class MessagesWindowComponent implements OnInit {
       return null;
     }
 
-    var gameMessages: GameMessage[] = [];
+    var gameMessages: string[] = [];
     for (var i = 0; i < jsonPageOfGameMessages.gameMessages.length; i++) {
       const jsonGameMessage: JsonGameMessage = jsonPageOfGameMessages.gameMessages[i];
       if (jsonGameMessage.text === undefined || jsonGameMessage.count === undefined) {
         return null;
       }
-      gameMessages.push(new GameMessage(jsonGameMessage.text, jsonGameMessage.count));
+      if (jsonGameMessage.count > 1) {
+        gameMessages.push(`${jsonGameMessage.text} (x${jsonGameMessage.count})`);
+      } else {
+        gameMessages.push(jsonGameMessage.text);
+      }
     }
 
     return new PageOfGameMessages(jsonPageOfGameMessages.firstIndex, jsonPageOfGameMessages.lastIndex, gameMessages);
@@ -90,39 +94,49 @@ export class MessagesWindowComponent implements OnInit {
                   // Validate the JSON structure.
                   const pageOfGameMessages: PageOfGameMessages | null = this.validatePageOfGameMessages(jsonPageOfGameMessages);
                   if (pageOfGameMessages !== null) {
-                    // Is this the initial load.
+                    // Check to see if we have an existing page of messages to work with.
                     if (this.masterPageOfGameMessages === null) {
+                      // This the initial load.
                       this.masterPageOfGameMessages = pageOfGameMessages;
                     } else {
-                      // Update the master list of game messages.  Check to see if the page should be appended to the end.
-                      if (pageOfGameMessages.lastIndex > this.masterPageOfGameMessages.firstIndex) {
+                      // Here we will need to update the existing page of messages that we ave.  Check to see if the page should be appended to the end.
+                      if (pageOfGameMessages.lastIndex === this.masterPageOfGameMessages.firstIndex) {
+                        // There is no gap and the oldest message received replaces the most-recent message that we have.  We will need to replace the most-recent message and append the rest.
+                        // Drop the most-recent message.
+                        this.masterPageOfGameMessages.gameMessages.pop();
+
+                        // Now append the new messages.
+                        this.masterPageOfGameMessages.gameMessages = this.masterPageOfGameMessages.gameMessages.concat(pageOfGameMessages.gameMessages!);
+
+                        // Reset the index for the most-recent message.
+                        this.masterPageOfGameMessages.firstIndex = pageOfGameMessages.firstIndex;
+                      } else {
                         // Check to see if there is a gap.  If a gap occurs, we will discard the existing page and restart.  Normally, messages are requested to ensure
                         // there is no gap from the existing master list.  If this gap should does occur, then there messages that were deleted from the game--the log is too long.
                         // In this scenario, we have to assume all previous messages are also gone.  So we will discard the master list and show what we have.
-                        if (pageOfGameMessages.lastIndex > this.masterPageOfGameMessages.firstIndex + 1) {
+                        if (pageOfGameMessages.lastIndex > this.masterPageOfGameMessages.firstIndex) {
                           // There is a gap.  Discard the master list.
                           this.masterPageOfGameMessages = pageOfGameMessages;
                         } else {
-                          // There is no gap.  Append the messages.
-                          this.masterPageOfGameMessages.gameMessages = this.masterPageOfGameMessages.gameMessages.concat(pageOfGameMessages.gameMessages!);
-                          this.masterPageOfGameMessages.firstIndex = pageOfGameMessages.firstIndex;
+                          // Check to see if the page should be inserted at the beginning.
+                          if (pageOfGameMessages.firstIndex + 1 === this.masterPageOfGameMessages.lastIndex) {
+                            // There is no gap.  Concatenate the messages together.  This will be happening when the user is scrolling up.
+                            this.masterPageOfGameMessages.gameMessages = pageOfGameMessages.gameMessages.concat(this.masterPageOfGameMessages.gameMessages);
+                            this.masterPageOfGameMessages.lastIndex = pageOfGameMessages.lastIndex;
+                          } else {
+                            // There is a gap.  Something unexpected happened with the request and there is nothing we can do.  We do not want to
+                            // have an incorrect list.  We will simply ignore the received page of messages.
+                          }
                         }
-                      } else if (pageOfGameMessages.firstIndex < this.masterPageOfGameMessages.lastIndex) { // Check to see if the page should be inserted at the beginning.
-                        // Check to see if this is a gap.
-                        if (pageOfGameMessages.firstIndex + 1 < this.masterPageOfGameMessages.lastIndex) {
-                          // There is a gap.  Something unexpected happened with the request and there is nothing we can do.  We do not want to
-                          // have an incorrect list.  We will simply ignore the received page of messages.
-                        } else {
-                          // There is no gap.  Concatenate the messages together.
-                          this.masterPageOfGameMessages.gameMessages = pageOfGameMessages.gameMessages.concat(this.masterPageOfGameMessages.gameMessages);
-                          this.masterPageOfGameMessages.lastIndex = pageOfGameMessages.lastIndex;
-                        }
-                      }
+                      } 
                     }
 
-                    // Bring the last table row into view.
-                    const lastRow = this.tableRows.last;
-                    lastRow?.nativeElement.scrollIntoView({ block: 'center', behavior: 'smooth' });
+                    // Bring the last table row into view.  This needs to be done via a timer, to allow Angular to update the list and create any new table rows
+                    // subsequent to any messages we just added.
+                    setTimeout(() => {
+                      const lastRow = this.tableRows.last;
+                      lastRow?.nativeElement.scrollIntoView({ block: 'center', behavior: 'smooth' });
+                    });
                   }
                 }
               });
@@ -150,7 +164,8 @@ export class MessagesWindowComponent implements OnInit {
   public refresh() {
     // Send a message to the hub to receive the current messages.
     if (this.connection && this.masterPageOfGameMessages !== null) {
-      this.connection.send("GetGameMessages", this.gameConnectionId, null, this.masterPageOfGameMessages.firstIndex + 1, null);
+      // Request an update from the game.  We will also request the most-recent message that we already have.  This is to catch updates in counts (x1), (x2) etc.
+      this.connection.send("GetGameMessages", this.gameConnectionId, null, this.masterPageOfGameMessages.firstIndex, null);
     }
   }
 
