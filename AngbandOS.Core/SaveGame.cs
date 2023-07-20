@@ -174,16 +174,10 @@ internal class SaveGame
     private ICorePersistentStorage? PersistentStorage;
 
     /// <summary>
-    /// Returns the object used to provide game updates to the calling application.  Returns null, when the calling application did not provide an UpdateMonitor object.
-    /// </summary>
-    [NonSerialized]
-    public IUpdateMonitor? UpdateMonitor;
-
-    /// <summary>
     /// Returns the object that the calling application provided to be used to connect the game input and output to the calling application.
     /// </summary>
     [NonSerialized]
-    private IConsole _console;
+    public IConsole Console;
 
     public int CommandArgument;
     public int CommandDirection;
@@ -504,7 +498,7 @@ internal class SaveGame
             MessageLog.Add(message);
 
             // Fire the event that the game messages have been updated.
-            _console.MessagesUpdated();
+            Console.MessagesUpdated();
             RecentMessages.Add(message);
             return;
         }
@@ -525,7 +519,7 @@ internal class SaveGame
         MessageLog.Add(message);
 
         // Fire the event that the game messages have been updated.
-        _console.MessagesUpdated();
+        Console.MessagesUpdated();
         RecentMessages.Add(message);
     }
 
@@ -1400,13 +1394,12 @@ internal class SaveGame
     /// <param name="console"></param>
     /// <param name="persistentStorage"></param>
     /// <param name="updateMonitor"></param>
-    public void Play(IConsole console, ICorePersistentStorage? persistentStorage, IUpdateMonitor? updateMonitor)
+    public void Play(IConsole console, ICorePersistentStorage? persistentStorage)
     {
-        _console = console;
+        Console = console;
         Shutdown = false;
         LastInputReceived = DateTime.Now;
         PersistentStorage = persistentStorage;
-        UpdateMonitor = updateMonitor;
         InitializeDisplay(Constants.ConsoleWidth, Constants.ConsoleHeight, 256);
         MapMovementKeys();
 
@@ -1453,7 +1446,7 @@ internal class SaveGame
             Player.WildernessY = CurTown.Y;
             CameFrom = LevelStart.StartRandom;
         }
-        UpdateMonitor?.GameStarted();
+        Console.GameStarted();
         //MessageAppendNextMessage = false;
         MsgPrint(null);
         UpdateScreen();
@@ -1495,7 +1488,7 @@ internal class SaveGame
             MsgPrint(null);
             if (Player.IsDead)
             {
-                UpdateMonitor?.PlayerDied(Player.Name, DiedFrom, Player.Level);
+                Console.PlayerDied(Player.Name, DiedFrom, Player.Level);
 
                 // Store the player info
                 ExPlayer = new ExPlayer(Player);
@@ -1505,7 +1498,7 @@ internal class SaveGame
             GenerateNewLevel();
             Level.ReplacePets(Player.MapY, Player.MapX, _petList);
         }
-        UpdateMonitor?.GameStopped();
+        Console.GameStopped();
         CloseGame();
     }
 
@@ -10577,7 +10570,7 @@ internal class SaveGame
         while (!done && !Shutdown)
         {
             Screen.Goto(cursorPosition.Y, cursorPosition.X + k);
-            Screen.UpdateScreen(_console);
+            Screen.UpdateScreen(Console);
             i = Inkey();
             switch (i)
             {
@@ -10819,7 +10812,7 @@ internal class SaveGame
     /// </summary>
     public void UpdateScreen()
     {
-        Screen.UpdateScreen(_console);
+        Screen.UpdateScreen(Console);
     }
 
     public void PlayMusic(MusicTrackEnum musicTrack)
@@ -10930,7 +10923,7 @@ internal class SaveGame
 
     internal void SetBackground(BackgroundImageEnum image)
     {
-        _console.SetBackground(image);
+        Console.SetBackground(image);
     }
 
     /// <summary>
@@ -10965,16 +10958,16 @@ internal class SaveGame
             UpdateScreen();
             while (KeyHead == KeyTail && !Shutdown)
             {
-                EnqueueKey(_console.WaitForKey());
+                EnqueueKey(Console.WaitForKey());
                 LastInputReceived = DateTime.Now;
-                UpdateMonitor?.InputReceived();
+                Console.InputReceived();
             }
         }
         else
         {
-            if (!_console.KeyQueueIsEmpty())
+            if (!Console.KeyQueueIsEmpty())
             {
-                EnqueueKey(_console.WaitForKey());
+                EnqueueKey(Console.WaitForKey());
             }
         }
         if (KeyHead == KeyTail)
@@ -15147,7 +15140,7 @@ internal class SaveGame
                         string oName = oPtr.Description(true, 3);
                         outVal = $"{s1}{s2}{s3}{oName} [{info}]";
                         Screen.PrintLine(outVal, 0, 0);
-                        Screen.UpdateScreen(_console);
+                        Screen.UpdateScreen(Console);
                         Level.MoveCursorRelative(y, x);
                         query = Inkey();
                         if (query != '\r' && query != '\n' && query != ' ')

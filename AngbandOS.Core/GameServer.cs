@@ -150,7 +150,7 @@ public class GameServer
     /// <param name="updateMonitor"></param>
     /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
     /// <returns></returns>
-    public bool PlayNewGame(IConsole console, ICorePersistentStorage? persistentStorage, IUpdateMonitor? updateMonitor = null, Configuration? configuration = null)
+    public bool PlayNewGame(IConsole console, ICorePersistentStorage? persistentStorage, Configuration? configuration = null)
     {
         if (console == null)
         {
@@ -160,11 +160,11 @@ public class GameServer
         try
         {
             SaveGame = SaveGame.CreateNew(configuration);
-            SaveGame.Play(console, persistentStorage, updateMonitor);
+            SaveGame.Play(console, persistentStorage);
         }
         catch (Exception ex)
         {
-            updateMonitor?.GameExceptionThrown(ex.Message);
+            console.GameExceptionThrown(ex.Message);
             return false;
         }
         return true;
@@ -177,7 +177,7 @@ public class GameServer
     /// <param name="persistentStorage"></param>
     /// <param name="updateMonitor"></param>
     /// <returns></returns>
-    public bool PlayExistingGame(IConsole console, ICorePersistentStorage persistentStorage, IUpdateMonitor? updateMonitor = null)
+    public bool PlayExistingGame(IConsole console, ICorePersistentStorage persistentStorage)
     {
         if (console == null)
         {
@@ -192,11 +192,11 @@ public class GameServer
         {
             // Retrieve the game from persistent storage.
             SaveGame = SaveGame.LoadGame(persistentStorage);
-            SaveGame.Play(console, persistentStorage, updateMonitor);
+            SaveGame.Play(console, persistentStorage);
         }
         catch (Exception ex)
         {
-            updateMonitor?.GameExceptionThrown(ex.Message);
+            console.GameExceptionThrown(ex.Message);
             return false;
         }
         return true;

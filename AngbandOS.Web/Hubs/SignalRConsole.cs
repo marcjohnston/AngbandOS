@@ -191,6 +191,58 @@ namespace AngbandOS.Web.Hubs
                 gameMessageHub.GameMessagesUpdated();
             }
         }
+
+        /// <summary>
+        /// Processes the PlayerDied message from the in progress game.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="diedFrom"></param>
+        /// <param name="level"></param>
+        public void PlayerDied(string name, string diedFrom, int level)
+        {
+            string message = $"{name.Trim()} was just killed by {diedFrom} on level {level}.";
+            NotificationAction(this, GameUpdateNotificationEnum.PlayerDied, message);
+        }
+
+        public void CharacterRenamed(string name)
+        {
+            string message = $"{name} was just birthed.";
+            NotificationAction(this, GameUpdateNotificationEnum.CharacterRenamed, message);
+        }
+
+        public void GameStarted()
+        {
+            NotificationAction(this, GameUpdateNotificationEnum.GameStarted, "Game started.");
+        }
+
+        public void GoldUpdated(int gold)
+        {
+            NotificationAction(this, GameUpdateNotificationEnum.GoldUpdated, "Gold updated.");
+        }
+
+        public void LevelChanged(int level)
+        {
+            NotificationAction(this, GameUpdateNotificationEnum.LevelChanged, "Level changed.");
+        }
+        public void GameStopped()
+        {
+            NotificationAction(this, GameUpdateNotificationEnum.GameStopped, "Game stopped.");
+        }
+
+        public void GameExceptionThrown(string message)
+        {
+            NotificationAction(this, GameUpdateNotificationEnum.GameExceptionThrown, message);
+        }
+
+        public void GameTimeElapsed()
+        {
+            NotificationAction(this, GameUpdateNotificationEnum.GameTimeElapsed, "Game time elapsed.");
+        }
+
+        public void InputReceived()
+        {
+            NotificationAction(this, GameUpdateNotificationEnum.InputReceived, "Game input received.");
+        }
         #endregion
 
         #region Game Play
@@ -267,7 +319,7 @@ namespace AngbandOS.Web.Hubs
             // IConsole to receive and process print and wait for key requests.
             if (PersistentStorage.GameExists())
             {
-                if (_gameServer.PlayExistingGame(this, PersistentStorage, new UpdateMonitor(this, NotificationAction)))
+                if (_gameServer.PlayExistingGame(this, PersistentStorage))
                 {
                     // The game is over.  Let the client know.
                     GameOver();
@@ -275,7 +327,7 @@ namespace AngbandOS.Web.Hubs
             }
             else
             {
-                if (_gameServer.PlayNewGame(this, PersistentStorage, new UpdateMonitor(this, NotificationAction)))
+                if (_gameServer.PlayNewGame(this, PersistentStorage))
                 {
                     // The game is over.  Let the client know.
                     GameOver();

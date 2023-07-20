@@ -447,5 +447,45 @@ namespace Cthangband
         {
             Application.Current.Shutdown();
         }
+
+        public void MessagesUpdated()
+        {
+        }
+
+        public void PlayerDied(string name, string diedFrom, int level)
+        {
+        }
+
+        public void GoldUpdated(int gold)
+        {
+        }
+
+        public void CharacterRenamed(string name)
+        {
+        }
+
+        public void LevelChanged(int level)
+        {
+        }
+
+        public void GameStarted()
+        {
+        }
+
+        public void GameStopped()
+        {
+        }
+
+        public void GameExceptionThrown(string message)
+        {
+        }
+
+        public void GameTimeElapsed()
+        {
+        }
+
+        public void InputReceived()
+        {
+        }
     }
 }
