@@ -44,13 +44,13 @@ namespace AngbandOS.Web.Hubs
         }
 
         /// <summary>
-        /// Process an incoming message from a web client of a keypress.
+        /// Process an incoming keypressed message from the web client.
         /// </summary>
         /// <returns></returns>
-        public void Keypressed(string keys)
+        public void KeyPressed(string keys)
         {
             // Route this keypress message to the correct game console.
-            GameService.Keypressed(Context.ConnectionId, keys);
+            GameService.KeyPressed(Context.ConnectionId, keys);
         }
 
         public async override Task OnConnectedAsync()

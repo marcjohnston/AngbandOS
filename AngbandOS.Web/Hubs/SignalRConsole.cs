@@ -308,14 +308,11 @@ namespace AngbandOS.Web.Hubs
             _consoleGameHub.GameIncompatible();
         }
 
-
-
-
         /// <summary>
-        /// Inserts a new keystroke into the queue for the game to use.
+        /// Processes an incoming keystroke from the web client and inserts it into the queue for the game to use.
         /// </summary>
         /// <param name="c"></param>
-        public void Keypressed(string keys)
+        public void KeyPressed(string keys)
         {
             if (keys != null)
             {

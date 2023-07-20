@@ -145,7 +145,7 @@ namespace AngbandOS.Web.Hubs
             // Create a new instance of the Sql persistent storage so that concurrent games do not interfere with each other.
             ICorePersistentStorage corePersistentStorage = new SqlCorePersistentStorage(ConnectionString, userId, guid);
 
-            // Construct an update monitor that is used when the game notifies us that interesting event happen in the game.
+            // Construct an update monitor that is used when the game notifies us that interesting events that happen in the game.
             Action<SignalRConsole, GameUpdateNotificationEnum, string> gameUpdateMonitor = async (SignalRConsole signalRConsole, GameUpdateNotificationEnum gameUpdateNotification, string message) =>
             {
                 // Update all clients that the active games has been updated.
@@ -241,10 +241,10 @@ namespace AngbandOS.Web.Hubs
         /// </summary>
         /// <param name="connectionId">The signal-r connection id from which the event was received from.</param>
         /// <param name="keys">The key that was pressed.</param>
-        public void Keypressed(string connectionId, string keys)
+        public void KeyPressed(string connectionId, string keys)
         {
             if (SignalRConsoles.TryGetValue(connectionId, out SignalRConsole console))
-                console.Keypressed(keys);
+                console.KeyPressed(keys);
         }
         #endregion
 
