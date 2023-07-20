@@ -145,8 +145,6 @@ namespace AngbandOS.Web.Hubs
             // Create a new instance of the Sql persistent storage so that concurrent games do not interfere with each other.
             ICorePersistentStorage corePersistentStorage = new SqlCorePersistentStorage(ConnectionString, userId, guid);
 
-            UpdateMonitor updateMonitor = new UpdateMonitor(context.User, guid, ServiceHub);
-
             // Construct an update monitor that is used when the game notifies us that interesting events that happen in the game.
             Action<SignalRConsole, GameUpdateNotificationEnum, string> gameUpdateMonitor = async (SignalRConsole signalRConsole, GameUpdateNotificationEnum gameUpdateNotification, string message) =>
             {
