@@ -151,12 +151,12 @@ internal class Genome
 
     public bool HasMutations => _possessed.Count > 0;
 
-    public List<Mutation> ActivatableMutations(Player player)
+    public List<Mutation> ActivatableMutations()
     {
         List<Mutation> list = new List<Mutation>();
         foreach (Mutation mutation in _possessed)
         {
-            if (string.IsNullOrEmpty(mutation.ActivationSummary(player.ExperienceLevel)))
+            if (string.IsNullOrEmpty(mutation.ActivationSummary(SaveGame.Player.ExperienceLevel)))
             {
                 continue;
             }
