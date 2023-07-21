@@ -3436,7 +3436,7 @@ internal class SaveGame
                     }
                 }
             }
-            Player.Dna.OnProcessWorld(this, Player, Level);
+            Player.Dna.OnProcessWorld();
             if (oPtr == null)
             {
                 continue;
