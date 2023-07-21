@@ -2,7 +2,7 @@
 
 namespace AngbandOS.Web.Hubs;
 
-public class SpectatingConsole : ISpectator
+public class SpectatingConsole : IViewPort
 {
     private readonly ISpectatingHub _gameHub;
 

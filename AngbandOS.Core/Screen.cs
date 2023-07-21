@@ -184,7 +184,7 @@ internal class Screen
     /// <summary>
     /// Update the screen using a double buffer.  Only the window portion of the screen is checked.  The update window will be reverse reset so that no update would happen.
     /// </summary>
-    public void UpdateScreen(IConsole console)
+    public void UpdateScreen(IConsoleViewPort console)
     {
         // All commands to be sent to the console will be queued into a single response.
         List<PrintLine> batchPrintLines = new List<PrintLine>();
@@ -295,7 +295,7 @@ internal class Screen
     /// <summary>
     /// Refresh a spectator window.  The contents of the current screen are batch printed to the spectator console.
     /// </summary>
-    public void RefreshSpectatorConsole(ISpectator spectatorConsole)
+    public void RefreshSpectatorConsole(IViewPort spectatorConsole)
     {
         List<PrintLine> batchPrintLines = new List<PrintLine>();
         spectatorConsole.Clear();

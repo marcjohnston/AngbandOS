@@ -1,9 +1,9 @@
 ﻿namespace AngbandOS.Core.Interface;
 
 /// <summary>
-/// Represents the "console" interface that needs to be implemented to play a game.
+/// Represents the interface that needs to be implemented to play a game.  It requires a viewport interface.
 /// </summary>
-public interface IConsole : ISpectator
+public interface IConsoleViewPort : IViewPort
 {
     /// <summary>
     /// Clear the entire screen.

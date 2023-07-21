@@ -176,7 +176,7 @@ internal class GameTime
         }
 
         // Send an update to the calling application, that the game time has changed.
-        SaveGame.Console.GameTimeElapsed();
+        SaveGame.ConsoleViewPort.GameTimeElapsed();
     }
 
     public void ToNextDawn()

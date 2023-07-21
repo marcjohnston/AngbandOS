@@ -11,7 +11,7 @@ namespace AngbandOS.Web.Hubs
     /// Represents an object that accept messages from an active game (AngbandOS.Core) and send the message to the client browser via a SignalR hub.  This class operates 
     /// as a background worker to process incoming messages and send outgoing messages without blocking the main thread.
     /// </summary>
-    public class SignalRConsole : BackgroundWorker, IConsole
+    public class SignalRConsole : BackgroundWorker, IConsoleViewPort
     {
         #region State Date
         /// <summary>

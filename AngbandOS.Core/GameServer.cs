@@ -95,7 +95,7 @@ public class GameServer
     /// Refresh a spectator console.  
     /// </summary>
     /// <param name="spectatorConsole"></param>
-    public void RefreshSpectatorConsole(ISpectator spectatorConsole)
+    public void RefreshSpectatorConsole(IViewPort spectatorConsole)
     {
         SaveGame.Screen.RefreshSpectatorConsole(spectatorConsole);
     }
@@ -150,7 +150,7 @@ public class GameServer
     /// <param name="updateMonitor"></param>
     /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
     /// <returns></returns>
-    public bool PlayNewGame(IConsole console, ICorePersistentStorage? persistentStorage, Configuration? configuration = null)
+    public bool PlayNewGame(IConsoleViewPort console, ICorePersistentStorage? persistentStorage, Configuration? configuration = null)
     {
         if (console == null)
         {
@@ -177,7 +177,7 @@ public class GameServer
     /// <param name="persistentStorage"></param>
     /// <param name="updateMonitor"></param>
     /// <returns></returns>
-    public bool PlayExistingGame(IConsole console, ICorePersistentStorage persistentStorage)
+    public bool PlayExistingGame(IConsoleViewPort console, ICorePersistentStorage persistentStorage)
     {
         if (console == null)
         {

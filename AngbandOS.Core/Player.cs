@@ -46,7 +46,7 @@ internal class Player
         set
         {
             _gold = value;
-            SaveGame.Console.GoldUpdated(_gold);
+            SaveGame.ConsoleViewPort.GoldUpdated(_gold);
         }
     }
     public Patron GooPatron;
@@ -122,7 +122,7 @@ internal class Player
         set
         {
             _level = value;
-            SaveGame.Console.LevelChanged(_level);
+            SaveGame.ConsoleViewPort.LevelChanged(_level);
         }
     }
 
@@ -146,7 +146,7 @@ internal class Player
         set
         {
             _name = value;
-            SaveGame.Console.CharacterRenamed(_name);
+            SaveGame.ConsoleViewPort.CharacterRenamed(_name);
         }
     }
     public int OldSpareSpellSlots;

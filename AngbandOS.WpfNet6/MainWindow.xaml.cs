@@ -16,7 +16,7 @@ namespace Cthangband
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, IConsole
+    public partial class MainWindow : Window, IConsoleViewPort
     {
         private const int ConsoleWidth = 80;
         private const int ConsoleHeight = 45;
