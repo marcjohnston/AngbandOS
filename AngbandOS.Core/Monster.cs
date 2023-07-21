@@ -380,7 +380,6 @@ internal class Monster : IItemContainer
 
     public void SanityBlast(bool necro)
     {
-        Player player = this.SaveGame.Player;
         bool happened = false;
         int power = 100;
         if (necro)
@@ -418,17 +417,17 @@ internal class Monster : IItemContainer
             {
                 return;
             }
-            if (Program.Rng.DieRoll(power) < player.SkillSavingThrow)
+            if (Program.Rng.DieRoll(power) < SaveGame.Player.SkillSavingThrow)
             {
                 return;
             }
-            if (player.TimedHallucinations.TurnsRemaining != 0)
+            if (SaveGame.Player.TimedHallucinations.TurnsRemaining != 0)
             {
                 this.SaveGame.MsgPrint($"You behold the {this.SaveGame.SingletonRepository.FunnyDescriptions.ToWeightedRandom().Choose()} visage of {mName}!");
                 if (Program.Rng.DieRoll(3) == 1)
                 {
                     this.SaveGame.MsgPrint(this.SaveGame.SingletonRepository.FunnyComments.ToWeightedRandom().Choose());
-                    player.TimedHallucinations.AddTimer(Program.Rng.DieRoll(Race.Level));
+                    SaveGame.Player.TimedHallucinations.AddTimer(Program.Rng.DieRoll(Race.Level));
                 }
                 return;
             }
@@ -436,60 +435,60 @@ internal class Monster : IItemContainer
             Race.Knowledge.Characteristics.EldritchHorror = true;
 
             // Allow the race to resist.
-            if (Program.Rng.DieRoll(100) < player.Race.ChanceOfSanityBlastImmunity(player.ExperienceLevel))
+            if (Program.Rng.DieRoll(100) < SaveGame.Player.Race.ChanceOfSanityBlastImmunity(SaveGame.Player.ExperienceLevel))
             {
                 return;
             }
         }
-        if (Program.Rng.DieRoll(power) < player.SkillSavingThrow)
+        if (Program.Rng.DieRoll(power) < SaveGame.Player.SkillSavingThrow)
         {
-            if (!player.HasConfusionResistance)
+            if (!SaveGame.Player.HasConfusionResistance)
             {
-                player.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(4) + 4);
+                SaveGame.Player.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(4) + 4);
             }
-            if (!player.HasChaosResistance && Program.Rng.DieRoll(3) == 1)
+            if (!SaveGame.Player.HasChaosResistance && Program.Rng.DieRoll(3) == 1)
             {
-                player.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(250) + 150);
+                SaveGame.Player.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(250) + 150);
             }
             return;
         }
-        if (Program.Rng.DieRoll(power) < player.SkillSavingThrow)
+        if (Program.Rng.DieRoll(power) < SaveGame.Player.SkillSavingThrow)
         {
-            player.TryDecreasingAbilityScore(Ability.Intelligence);
-            player.TryDecreasingAbilityScore(Ability.Wisdom);
+            SaveGame.Player.TryDecreasingAbilityScore(Ability.Intelligence);
+            SaveGame.Player.TryDecreasingAbilityScore(Ability.Wisdom);
             return;
         }
-        if (Program.Rng.DieRoll(power) < player.SkillSavingThrow)
+        if (Program.Rng.DieRoll(power) < SaveGame.Player.SkillSavingThrow)
         {
-            if (!player.HasConfusionResistance)
+            if (!SaveGame.Player.HasConfusionResistance)
             {
-                player.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(4) + 4);
+                SaveGame.Player.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(4) + 4);
             }
-            if (!player.HasFreeAction)
+            if (!SaveGame.Player.HasFreeAction)
             {
-                player.TimedParalysis.AddTimer(Program.Rng.RandomLessThan(4) + 4);
+                SaveGame.Player.TimedParalysis.AddTimer(Program.Rng.RandomLessThan(4) + 4);
             }
-            while (Program.Rng.RandomLessThan(100) > player.SkillSavingThrow)
+            while (Program.Rng.RandomLessThan(100) > SaveGame.Player.SkillSavingThrow)
             {
-                player.TryDecreasingAbilityScore(Ability.Intelligence);
+                SaveGame.Player.TryDecreasingAbilityScore(Ability.Intelligence);
             }
-            while (Program.Rng.RandomLessThan(100) > player.SkillSavingThrow)
+            while (Program.Rng.RandomLessThan(100) > SaveGame.Player.SkillSavingThrow)
             {
-                player.TryDecreasingAbilityScore(Ability.Wisdom);
+                SaveGame.Player.TryDecreasingAbilityScore(Ability.Wisdom);
             }
-            if (!player.HasChaosResistance)
+            if (!SaveGame.Player.HasChaosResistance)
             {
-                player.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(250) + 150);
+                SaveGame.Player.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(250) + 150);
             }
             return;
         }
-        if (Program.Rng.DieRoll(power) < player.SkillSavingThrow)
+        if (Program.Rng.DieRoll(power) < SaveGame.Player.SkillSavingThrow)
         {
-            if (player.DecreaseAbilityScore(Ability.Intelligence, 10, true))
+            if (SaveGame.Player.DecreaseAbilityScore(Ability.Intelligence, 10, true))
             {
                 happened = true;
             }
-            if (player.DecreaseAbilityScore(Ability.Wisdom, 10, true))
+            if (SaveGame.Player.DecreaseAbilityScore(Ability.Wisdom, 10, true))
             {
                 happened = true;
             }
@@ -499,7 +498,7 @@ internal class Monster : IItemContainer
             }
             return;
         }
-        if (Program.Rng.DieRoll(power) < player.SkillSavingThrow)
+        if (Program.Rng.DieRoll(power) < SaveGame.Player.SkillSavingThrow)
         {
             if (this.SaveGame.LoseAllInfo())
             {
@@ -508,7 +507,7 @@ internal class Monster : IItemContainer
             return;
         }
         this.SaveGame.MsgPrint("The exposure to eldritch forces warps you.");
-        player.Dna.GainMutation();
+        SaveGame.Player.Dna.GainMutation();
         this.SaveGame.UpdateBonusesFlaggedAction.Set();
         this.SaveGame.HandleStuff();
     }
