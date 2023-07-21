@@ -15,12 +15,6 @@ internal class SaveGame
     public const int DungeonCount = 20;
     public Configuration Configuration;
 
-    /// <summary>
-    /// Returns the 
-    /// </summary>
-    public int PlayableScreenWidth;
-    public int PlayableScreenHeight;
-
     public const int OneInChanceUpStairsReturnsToTownLevel = 5;
     public FlaggedAction RedrawMapFlaggedAction { get; }
     public FlaggedAction RedrawEquippyFlaggedAction { get; }
@@ -14936,7 +14930,7 @@ internal class SaveGame
                         {
                             x--;
                         }
-                        else if (x <= 0 || x <= Level.PanelColMin)
+                        else if (x <= 0 || x < Level.PanelColMin)
                         {
                             x++;
                         }
@@ -14944,7 +14938,7 @@ internal class SaveGame
                         {
                             y--;
                         }
-                        else if (y <= 0 || y <= Level.PanelRowMin)
+                        else if (y <= 0 || y < Level.PanelRowMin)
                         {
                             y++;
                         }
