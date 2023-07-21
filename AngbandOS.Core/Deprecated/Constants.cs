@@ -13,8 +13,6 @@ internal static class Constants
 {
     public const int BreakYellowSign = 99;
     public const int BthPlusAdj = 3;
-    public const int ConsoleHeight = 45;
-    public const int ConsoleWidth = 80;
     public const int EnchToac = 0x04;
     public const int EnchTodam = 0x02;
     public const int EnchTohit = 0x01;

@@ -6,6 +6,16 @@
 public interface IViewPort
 {
     /// <summary>
+    /// Returns the number of rows high for the viewport.  The implementing object needs to return a minimum value of 45.
+    /// </summary>
+    int Height { get; }
+
+    /// <summary>
+    /// Returns the number of columns wide for the viewport.  The implementing object needs to return a minimum value of 80.
+    /// </summary>
+    int Width { get; }
+
+    /// <summary>
     /// Clear the entire screen.
     /// </summary>
     void Clear();

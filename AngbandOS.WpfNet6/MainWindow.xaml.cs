@@ -18,8 +18,6 @@ namespace Cthangband
     /// </summary>
     public partial class MainWindow : Window, IConsoleViewPort
     {
-        private const int ConsoleWidth = 80;
-        private const int ConsoleHeight = 45;
         private const bool Fullscreen = false;
         private const float StartupMusicVolume = 100;
         private const float StartupSoundVolume = 100;
@@ -29,6 +27,15 @@ namespace Cthangband
         public Mixer Mixer = new Mixer();
         private string[] coloursMap = new string[32];
         private BackgroundWorker thread = new BackgroundWorker();
+
+        public int ViewPortHeight => 45;
+        public int ViewPortWidth => 80;
+
+        int IViewPort.Height => ViewPortHeight;
+
+        int IViewPort.Width => ViewPortWidth;
+
+        public int MaximumKeyQueueLength => 256;
 
         /// <summary>
         /// Plays a sound
@@ -87,7 +94,7 @@ namespace Cthangband
             Color backColor = FromHex(coloursMap[(int)backColour]);
             foreach (char c in text)
             {
-                if (row >= 0 && row < ConsoleHeight && col >= 0 && col < 80)
+                if (row >= 0 && row < ViewPortHeight && col >= 0 && col < 80)
                 {
                     char printable = c;
                     if (printable < 32)
@@ -294,18 +301,18 @@ namespace Cthangband
             Content = null;
             UniformGrid grid = new UniformGrid();
             AddChild(grid);
-            grid.Rows = ConsoleHeight;
-            grid.Columns = ConsoleWidth;
+            grid.Rows = ViewPortHeight;
+            grid.Columns = ViewPortWidth;
             grid.Background = null;
             grid.IsHitTestVisible = false;
             grid.IsEnabled = false;
             grid.Cursor = Cursors.None;
             FontFamily family = new FontFamily("Courier New");
-            Cells = new TextBlock[ConsoleHeight][];
-            for (int row = 0; row < ConsoleHeight; row++)
+            Cells = new TextBlock[ViewPortHeight][];
+            for (int row = 0; row < ViewPortHeight; row++)
             {
-                Cells[row] = new TextBlock[ConsoleWidth];
-                for (int col = 0; col < ConsoleWidth; col++)
+                Cells[row] = new TextBlock[ViewPortWidth];
+                for (int col = 0; col < ViewPortWidth; col++)
                 {
                     Viewbox v = new Viewbox();
                     TextBlock x = new TextBlock();

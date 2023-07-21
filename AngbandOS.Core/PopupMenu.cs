@@ -36,8 +36,8 @@ internal class PopupMenu
 
     public int DisplayMenu(SaveGame saveGame)
     {
-        var top = Constants.ConsoleHeight / 2 - (_items.Count + _text.Count) / 2;
-        var left = Constants.ConsoleWidth / 2 - _menuWidth / 2;
+        var top = saveGame.ConsoleViewPort.Height / 2 - (_items.Count + _text.Count) / 2;
+        var left = saveGame.ConsoleViewPort.Width / 2 - _menuWidth / 2;
         var topBottomBorder = "+" + new string('-', _menuWidth) + "+";
         var leftRightBorder = "|" + new string(' ', _menuWidth) + "|";
         var chosenItem = 0;

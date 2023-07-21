@@ -198,6 +198,8 @@ internal class SaveGame
     public char QueuedCommand;
     /// DISPLAY
     public char[] KeyQueue;
+
+    [Obsolete("Use KeyQueue.length")]
     public int KeySize;
 
     /// <summary>
@@ -1401,7 +1403,9 @@ internal class SaveGame
         Shutdown = false;
         LastInputReceived = DateTime.Now;
         PersistentStorage = persistentStorage;
-        InitializeDisplay(Constants.ConsoleWidth, Constants.ConsoleHeight, 256);
+        KeySize = ConsoleViewPort.MaximumKeyQueueLength;
+        KeyQueue = new char[ConsoleViewPort.MaximumKeyQueueLength];
+        Screen = new Screen(ConsoleViewPort.Width, ConsoleViewPort.Height);
         MapMovementKeys();
 
         FullScreenOverlay = true;
@@ -2278,13 +2282,6 @@ internal class SaveGame
         Level.ObjectLevel = Difficulty;
         chestItem.TypeSpecificValue = 0;
         chestItem.BecomeKnown();
-    }
-
-    private void InitializeDisplay(int screenWidth, int screenHeight, int k)
-    {
-        KeySize = k;
-        KeyQueue = new char[k];
-        Screen = new Screen(screenWidth, screenHeight);
     }
 
     public void UpdateStuff()
@@ -10562,13 +10559,13 @@ internal class SaveGame
         {
             len = 1;
         }
-        if (cursorPosition.X < 0 || cursorPosition.X >= Constants.ConsoleWidth)
+        if (cursorPosition.X < 0 || cursorPosition.X >= ConsoleViewPort.Width)
         {
             cursorPosition = new GridCoordinate(0, cursorPosition.Y);
         }
-        if (cursorPosition.X + len > Constants.ConsoleWidth)
+        if (cursorPosition.X + len > ConsoleViewPort.Width)
         {
-            len = Constants.ConsoleWidth - cursorPosition.X;
+            len = ConsoleViewPort.Width - cursorPosition.X;
         }
         Screen.Erase(cursorPosition.Y, cursorPosition.X, len);
         Screen.Print(ColourEnum.Grey, buf, cursorPosition.Y, cursorPosition.X);
