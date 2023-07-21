@@ -18,7 +18,7 @@ internal class BoCold1Activation : DirectionalActivation
 
     public override string? PreActivationMessage => "It is covered in frost...";
 
-    public override int RechargeTime(Player player) => Program.Rng.RandomLessThan(7) + 7;
+    public override int RechargeTime() => Program.Rng.RandomLessThan(7) + 7;
 
     protected override bool Activate(int direction)
     {

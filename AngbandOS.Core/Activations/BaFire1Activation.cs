@@ -15,7 +15,7 @@ internal class BaFire1Activation : DirectionalActivation
 
     public override string? PreActivationMessage => "It glows an intense red...";
 
-    public override int RechargeTime(Player player) => 400;
+    public override int RechargeTime() => 400;
 
     protected override bool Activate(int direction)
     {

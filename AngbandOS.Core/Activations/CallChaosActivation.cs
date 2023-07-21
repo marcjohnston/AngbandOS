@@ -18,7 +18,7 @@ internal class CallChaosActivation : Activation
 
     public override string? PreActivationMessage => "It glows in scintillating colours...";
 
-    public override int RechargeTime(Player player) => 350;
+    public override int RechargeTime() => 350;
 
     public override bool Activate()
     {

@@ -131,7 +131,7 @@ internal class ActivateScript : Script
         }
         if (artifactPower.Activate())
         {
-            item.RechargeTimeLeft = artifactPower.RechargeTime(SaveGame.Player);
+            item.RechargeTimeLeft = artifactPower.RechargeTime();
         }
     }
 }

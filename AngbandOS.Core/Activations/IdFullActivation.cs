@@ -24,7 +24,7 @@ internal class IdFullActivation : Activation
         return true;
     }
 
-    public override int RechargeTime(Player player) => 750;
+    public override int RechargeTime() => 750;
 
     public override int Value => 10000;
 

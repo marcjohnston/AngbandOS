@@ -38,7 +38,7 @@ internal abstract class Activation
     /// <summary>
     /// Returns the amount of time the artifact needs to recharge, if the Activate method returns true.
     /// </summary>
-    public abstract int RechargeTime(Player player);
+    public abstract int RechargeTime();
 
     /// <summary>
     /// Returns the chance this ArtifactPower will be selected when being chosen randomly.  

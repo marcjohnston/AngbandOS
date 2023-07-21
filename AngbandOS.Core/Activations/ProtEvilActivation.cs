@@ -25,7 +25,7 @@ internal class ProtEvilActivation : Activation
         return true;
     }
 
-    public override int RechargeTime(Player player) => Program.Rng.RandomLessThan(225) + 225;
+    public override int RechargeTime() => Program.Rng.RandomLessThan(225) + 225;
 
     public override int Value => 5000;
 

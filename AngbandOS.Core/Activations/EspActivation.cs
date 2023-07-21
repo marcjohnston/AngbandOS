@@ -24,7 +24,7 @@ internal class EspActivation : Activation
         return true;
     }
 
-    public override int RechargeTime(Player player) => 200;
+    public override int RechargeTime() => 200;
 
     public override int Value => 1500;
 

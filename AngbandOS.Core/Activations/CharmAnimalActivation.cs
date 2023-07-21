@@ -18,7 +18,7 @@ internal class CharmAnimalActivation : DirectionalActivation
 
     public override string? PreActivationMessage => "";
 
-    public override int RechargeTime(Player player) => 300;
+    public override int RechargeTime() => 300;
 
     protected override bool Activate(int direction)
     {

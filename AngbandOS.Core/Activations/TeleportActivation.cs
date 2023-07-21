@@ -24,7 +24,7 @@ internal class TeleportActivation : Activation
         return true;
     }
 
-    public override int RechargeTime(Player player) => 45;
+    public override int RechargeTime() => 45;
 
     public override int Value => 2000;
 

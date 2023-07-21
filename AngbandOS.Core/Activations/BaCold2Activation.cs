@@ -18,7 +18,7 @@ internal class BaCold2Activation : DirectionalActivation
 
     public override string? PreActivationMessage => "It glows an intense blue...";
 
-    public override int RechargeTime(Player player) => 300;
+    public override int RechargeTime() => 300;
 
     protected override bool Activate(int direction)
     {

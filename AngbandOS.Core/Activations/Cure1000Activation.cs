@@ -26,7 +26,7 @@ internal class Cure1000Activation : Activation
         return true;
     }
 
-    public override int RechargeTime(Player player) => 888;
+    public override int RechargeTime() => 888;
 
     public override int Value => 15000;
 

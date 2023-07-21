@@ -16,7 +16,7 @@ internal class ShardActivation : DirectionalActivation
     private ShardActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 0; // TODO: Confirm this artifact does not have a corresponding random chance.  It is only used with biased artifacts.
 
-    public override int RechargeTime(Player player) => 400;
+    public override int RechargeTime() => 400;
 
     protected override bool Activate(int direction)
     {

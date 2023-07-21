@@ -31,7 +31,7 @@ internal class SpeedActivation : Activation
         return true;
     }
 
-    public override int RechargeTime(Player player) => 250;
+    public override int RechargeTime() => 250;
 
     public override int Value => 15000;
 

@@ -18,7 +18,7 @@ internal class CharmAnimalsActivation : Activation
 
     public override string? PreActivationMessage => "";
 
-    public override int RechargeTime(Player player) => 500;
+    public override int RechargeTime() => 500;
 
     public override bool Activate()
     {

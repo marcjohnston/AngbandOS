@@ -20,7 +20,7 @@ internal class BaMiss3Activation : DirectionalActivation
 
     protected override string? PostAimingMessage => "You breathe the elements.";
 
-    public override int RechargeTime(Player player) => 500;
+    public override int RechargeTime() => 500;
 
     protected override bool Activate(int direction)
     {

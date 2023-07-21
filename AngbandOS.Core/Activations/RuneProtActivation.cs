@@ -24,7 +24,7 @@ internal class RuneProtActivation : Activation
         return true;
     }
 
-    public override int RechargeTime(Player player) => 400;
+    public override int RechargeTime() => 400;
 
     public override int Value => 10000;
 

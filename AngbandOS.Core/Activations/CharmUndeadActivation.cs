@@ -18,7 +18,7 @@ internal class CharmUndeadActivation : DirectionalActivation
 
     public override string? PreActivationMessage => "";
 
-    public override int RechargeTime(Player player) => 333;
+    public override int RechargeTime() => 333;
 
     protected override bool Activate(int direction)
     {

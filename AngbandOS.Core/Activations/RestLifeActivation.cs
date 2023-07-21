@@ -24,7 +24,7 @@ internal class RestLifeActivation : Activation
         return true;
     }
 
-    public override int RechargeTime(Player player) => 450;
+    public override int RechargeTime() => 450;
 
     public override int Value => 7500;
 

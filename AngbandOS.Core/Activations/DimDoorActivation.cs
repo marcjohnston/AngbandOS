@@ -41,7 +41,7 @@ internal class DimDoorActivation : Activation
         return true;
     }
 
-    public override int RechargeTime(Player player) => 100;
+    public override int RechargeTime() => 100;
 
     public override int Value => 10000;
 

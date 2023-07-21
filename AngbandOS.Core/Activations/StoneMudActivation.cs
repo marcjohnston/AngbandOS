@@ -18,7 +18,7 @@ internal class StoneMudActivation : DirectionalActivation
 
     public override string? PreActivationMessage => "It pulsates...";
 
-    public override int RechargeTime(Player player) => 5;
+    public override int RechargeTime() => 5;
 
     protected override bool Activate(int direction)
     {

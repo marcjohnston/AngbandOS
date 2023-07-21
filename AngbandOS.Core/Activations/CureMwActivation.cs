@@ -25,7 +25,7 @@ internal class CureMwActivation : Activation
         return true;
     }
 
-    public override int RechargeTime(Player player) => Program.Rng.RandomLessThan(3) + 3;
+    public override int RechargeTime() => Program.Rng.RandomLessThan(3) + 3;
 
     public override int Value => 750;
 

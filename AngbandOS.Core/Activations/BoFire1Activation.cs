@@ -18,7 +18,7 @@ internal class BoFire1Activation : DirectionalActivation
 
     public override string? PreActivationMessage => "It is covered in fire...";
 
-    public override int RechargeTime(Player player) => Program.Rng.RandomLessThan(8) + 8;
+    public override int RechargeTime() => Program.Rng.RandomLessThan(8) + 8;
 
     protected override bool Activate(int direction)
     {

@@ -18,7 +18,7 @@ internal class Drain2Activation : DirectionalActivation
 
     public override string? PreActivationMessage => "It glows black...";
 
-    public override int RechargeTime(Player player) => 400;
+    public override int RechargeTime() => 400;
 
     protected override bool Activate(int direction)
     {

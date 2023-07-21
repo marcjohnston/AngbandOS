@@ -24,7 +24,7 @@ internal class DestDoorActivation : Activation
         return true;
     }
 
-    public override int RechargeTime(Player player) => 10;
+    public override int RechargeTime() => 10;
 
     public override int Value => 100;
 

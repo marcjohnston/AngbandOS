@@ -24,7 +24,7 @@ internal class InvulnActivation : Activation
         return true;
     }
 
-    public override int RechargeTime(Player player) => 1000;
+    public override int RechargeTime() => 1000;
 
     public override int Value => 25000;
 

@@ -18,7 +18,7 @@ internal class BaElec2Activation : DirectionalActivation
 
     public override string? PreActivationMessage => "It crackles with electricity...";
 
-    public override int RechargeTime(Player player) => 500;
+    public override int RechargeTime() => 500;
 
     protected override bool Activate(int direction)
     {

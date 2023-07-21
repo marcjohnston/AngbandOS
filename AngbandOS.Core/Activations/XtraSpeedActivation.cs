@@ -31,7 +31,7 @@ internal class XtraSpeedActivation : Activation
         return true;
     }
 
-    public override int RechargeTime(Player player) => Program.Rng.RandomLessThan(200) + 200;
+    public override int RechargeTime() => Program.Rng.RandomLessThan(200) + 200;
 
     public override int Value => 25000;
 

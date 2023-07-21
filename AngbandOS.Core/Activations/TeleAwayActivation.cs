@@ -16,7 +16,7 @@ internal class TeleAwayActivation : DirectionalActivation
     private TeleAwayActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 85;
 
-    public override int RechargeTime(Player player) => 200;
+    public override int RechargeTime() => 200;
 
     protected override bool Activate(int direction)
     {

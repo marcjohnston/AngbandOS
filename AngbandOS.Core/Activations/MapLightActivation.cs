@@ -25,7 +25,7 @@ internal class MapLightActivation : Activation
         return true;
     }
 
-    public override int RechargeTime(Player player) => Program.Rng.RandomLessThan(50) + 50;
+    public override int RechargeTime() => Program.Rng.RandomLessThan(50) + 50;
 
     public override int Value => 500;
 

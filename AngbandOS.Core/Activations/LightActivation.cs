@@ -24,7 +24,7 @@ internal class LightActivation : Activation
         return true;
     }
 
-    public override int RechargeTime(Player player) => Program.Rng.RandomLessThan(10) + 10;
+    public override int RechargeTime() => Program.Rng.RandomLessThan(10) + 10;
 
     public override int Value => 150;
 

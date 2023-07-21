@@ -18,7 +18,7 @@ internal class ConfuseActivation : DirectionalActivation
 
     public override string? PreActivationMessage => "It glows in scintillating colours...";
 
-    public override int RechargeTime(Player player) => 15;
+    public override int RechargeTime() => 15;
 
     protected override bool Activate(int direction)
     {

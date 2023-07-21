@@ -18,7 +18,7 @@ internal class BoMiss1Activation : DirectionalActivation
 
     public override string? PreActivationMessage => "It glows extremely brightly...";
 
-    public override int RechargeTime(Player player) => 2;
+    public override int RechargeTime() => 2;
 
     protected override bool Activate(int direction)
     {
