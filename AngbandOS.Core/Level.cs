@@ -76,21 +76,21 @@ internal class Level
 
     public void PanelBounds()
     {
-        PanelRowMin = PanelRow * (Constants.ScreenHgt / 2);
-        PanelRowMax = PanelRowMin + Constants.ScreenHgt - 1;
+        PanelRowMin = PanelRow * (Constants.PlayableScreenHeight / 2);
+        PanelRowMax = PanelRowMin + Constants.PlayableScreenHeight - 1;
         PanelRowPrt = PanelRowMin - 1;
-        PanelColMin = PanelCol * (Constants.ScreenWid / 2);
-        PanelColMax = PanelColMin + Constants.ScreenWid - 1;
+        PanelColMin = PanelCol * (Constants.PlayableScreenWidth / 2);
+        PanelColMax = PanelColMin + Constants.PlayableScreenWidth - 1;
         PanelColPrt = PanelColMin - 13;
     }
 
     public void PanelBoundsCenter()
     {
-        PanelRow = PanelRowMin / (Constants.ScreenHgt / 2);
-        PanelRowMax = PanelRowMin + Constants.ScreenHgt - 1;
+        PanelRow = PanelRowMin / (Constants.PlayableScreenHeight / 2);
+        PanelRowMax = PanelRowMin + Constants.PlayableScreenHeight - 1;
         PanelRowPrt = PanelRowMin - 1;
-        PanelCol = PanelColMin / (Constants.ScreenWid / 2);
-        PanelColMax = PanelColMin + Constants.ScreenWid - 1;
+        PanelCol = PanelColMin / (Constants.PlayableScreenWidth / 2);
+        PanelColMax = PanelColMin + Constants.PlayableScreenWidth - 1;
         PanelColPrt = PanelColMin - 13;
     }
 

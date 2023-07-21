@@ -308,9 +308,9 @@ internal class Player
     {
         int y = MapY;
         int x = MapX;
-        int maxProwMin = SaveGame.Level.MaxPanelRows * (Constants.ScreenHgt / 2);
-        int maxPcolMin = SaveGame.Level.MaxPanelCols * (Constants.ScreenWid / 2);
-        int prowMin = y - (Constants.ScreenHgt / 2);
+        int maxProwMin = SaveGame.Level.MaxPanelRows * (Constants.PlayableScreenHeight / 2);
+        int maxPcolMin = SaveGame.Level.MaxPanelCols * (Constants.PlayableScreenWidth / 2);
+        int prowMin = y - (Constants.PlayableScreenHeight / 2);
         if (prowMin > maxProwMin)
         {
             prowMin = maxProwMin;
@@ -319,7 +319,7 @@ internal class Player
         {
             prowMin = 0;
         }
-        int pcolMin = x - (Constants.ScreenWid / 2);
+        int pcolMin = x - (Constants.PlayableScreenWidth / 2);
         if (pcolMin > maxPcolMin)
         {
             pcolMin = maxPcolMin;

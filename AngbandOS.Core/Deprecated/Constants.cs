@@ -95,8 +95,16 @@ internal static class Constants
     public const int RoadLeft = 0x01;
     public const int RoadRight = 0x08;
     public const int RoadUp = 0x02;
-    public const int ScreenHgt = 42;
-    public const int ScreenWid = 66;
+
+    /// <summary>
+    /// Returns the number of rows that the screen can accommodate for the playing field.  This is the ConsoleHeight - 3.
+    /// </summary>
+    public const int PlayableScreenHeight = 42;
+
+    /// <summary>
+    /// Returns the number of columns that the screen can accommodate for the playing field.  This is the ConsoleWidth - 14;
+    /// </summary>
+    public const int PlayableScreenWidth = 66;
     public const int SexFemale = 0;
     public const int SexMale = 1;
     public const int StoreObjLevel = 5;

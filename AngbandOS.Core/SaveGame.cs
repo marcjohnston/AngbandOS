@@ -2280,11 +2280,11 @@ internal class SaveGame
         chestItem.BecomeKnown();
     }
 
-    private void InitializeDisplay(int w, int h, int k)
+    private void InitializeDisplay(int screenWidth, int screenHeight, int k)
     {
         KeySize = k;
         KeyQueue = new char[k];
-        Screen = new Screen(w, h);
+        Screen = new Screen(screenWidth, screenHeight);
     }
 
     public void UpdateStuff()
@@ -12004,10 +12004,10 @@ internal class SaveGame
             Level.DangerRating = 0;
             if (CurrentDepth == 0)
             {
-                Level.CurHgt = Constants.ScreenHgt;
-                Level.CurWid = Constants.ScreenWid;
-                Level.MaxPanelRows = (Level.CurHgt / Constants.ScreenHgt * 2) - 2;
-                Level.MaxPanelCols = (Level.CurWid / Constants.ScreenWid * 2) - 2;
+                Level.CurHgt = Constants.PlayableScreenHeight;
+                Level.CurWid = Constants.PlayableScreenWidth;
+                Level.MaxPanelRows = (Level.CurHgt / Constants.PlayableScreenHeight * 2) - 2;
+                Level.MaxPanelCols = (Level.CurWid / Constants.PlayableScreenWidth * 2) - 2;
                 Level.PanelRow = Level.MaxPanelRows;
                 Level.PanelCol = Level.MaxPanelCols;
                 if (Wilderness[Player.WildernessY][Player.WildernessX].Town != null)
@@ -12023,8 +12023,8 @@ internal class SaveGame
             {
                 if (CurDungeon.Tower)
                 {
-                    Level.CurHgt = Constants.ScreenHgt;
-                    Level.CurWid = Constants.ScreenWid;
+                    Level.CurHgt = Constants.PlayableScreenHeight;
+                    Level.CurWid = Constants.PlayableScreenWidth;
                     Level.MaxPanelRows = 0;
                     Level.MaxPanelCols = 0;
                     Level.PanelRow = 0;
@@ -12034,12 +12034,12 @@ internal class SaveGame
                 {
                     if (Program.Rng.DieRoll(_smallLevel) == 1)
                     {
-                        int tester1 = Program.Rng.DieRoll(Level.MaxHgt / Constants.ScreenHgt);
-                        int tester2 = Program.Rng.DieRoll(Level.MaxWid / Constants.ScreenWid);
-                        Level.CurHgt = tester1 * Constants.ScreenHgt;
-                        Level.CurWid = tester2 * Constants.ScreenWid;
-                        Level.MaxPanelRows = (Level.CurHgt / Constants.ScreenHgt * 2) - 2;
-                        Level.MaxPanelCols = (Level.CurWid / Constants.ScreenWid * 2) - 2;
+                        int tester1 = Program.Rng.DieRoll(Level.MaxHgt / Constants.PlayableScreenHeight);
+                        int tester2 = Program.Rng.DieRoll(Level.MaxWid / Constants.PlayableScreenWidth);
+                        Level.CurHgt = tester1 * Constants.PlayableScreenHeight;
+                        Level.CurWid = tester2 * Constants.PlayableScreenWidth;
+                        Level.MaxPanelRows = (Level.CurHgt / Constants.PlayableScreenHeight * 2) - 2;
+                        Level.MaxPanelCols = (Level.CurWid / Constants.PlayableScreenWidth * 2) - 2;
                         Level.PanelRow = Level.MaxPanelRows;
                         Level.PanelCol = Level.MaxPanelCols;
                     }
@@ -12047,8 +12047,8 @@ internal class SaveGame
                     {
                         Level.CurHgt = Level.MaxHgt;
                         Level.CurWid = Level.MaxWid;
-                        Level.MaxPanelRows = (Level.CurHgt / Constants.ScreenHgt * 2) - 2;
-                        Level.MaxPanelCols = (Level.CurWid / Constants.ScreenWid * 2) - 2;
+                        Level.MaxPanelRows = (Level.CurHgt / Constants.PlayableScreenHeight * 2) - 2;
+                        Level.MaxPanelCols = (Level.CurWid / Constants.PlayableScreenWidth * 2) - 2;
                         Level.PanelRow = Level.MaxPanelRows;
                         Level.PanelCol = Level.MaxPanelCols;
                     }
@@ -14929,7 +14929,7 @@ internal class SaveGame
                         }
                         x += Level.KeypadDirectionXOffset[d];
                         y += Level.KeypadDirectionYOffset[d];
-                        if (x >= Level.CurWid - 1 || x >= Level.PanelColMin + Constants.ScreenWid)
+                        if (x >= Level.CurWid - 1 || x >= Level.PanelColMin + Constants.PlayableScreenWidth)
                         {
                             x--;
                         }
@@ -14937,7 +14937,7 @@ internal class SaveGame
                         {
                             x++;
                         }
-                        if (y >= Level.CurHgt - 1 || y >= Level.PanelRowMin + Constants.ScreenHgt)
+                        if (y >= Level.CurHgt - 1 || y >= Level.PanelRowMin + Constants.PlayableScreenHeight)
                         {
                             y--;
                         }
