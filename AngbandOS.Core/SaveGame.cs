@@ -1205,24 +1205,24 @@ internal class SaveGame
 
         Configuration = configuration;
 
-        // Stores repo.
-        if (configuration.StoresRepo != null)
-        {
-            foreach (StoreConfiguration storeConfiguration in configuration.StoresRepo)
-            {
+        //// Stores repo.
+        //if (configuration.StoresRepo != null)
+        //{
+        //    foreach (StoreConfiguration storeConfiguration in configuration.StoresRepo)
+        //    {
 
-            }
-        }
+        //    }
+        //}
 
-        // Stores.
-        if (configuration.StoresRepo != null)
-        {
-            //SingletonRepository.sto
-            foreach (string storeName in configuration.StoreNames)
-            {
+        //// Stores.
+        //if (configuration.StoresRepo != null)
+        //{
+        //    //SingletonRepository.sto
+        //    foreach (string storeName in configuration.StoreNames)
+        //    {
 
-            }
-        }
+        //    }
+        //}
     }
 
     public int GetMonsterIndexFromName(string name)
