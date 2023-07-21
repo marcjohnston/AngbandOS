@@ -1313,7 +1313,7 @@ internal abstract class Store : IItemFilter
         if (SaveGame.Player.BaseCharacterClass.SpellCastingType.CanChooseSpellToStudy)
         {
             // Allow the user to select a spell.
-            if (!SaveGame.GetSpell(out spell, "study", bookItem, false, SaveGame.Player))
+            if (!SaveGame.GetSpell(out spell, "study", bookItem, false))
             {
                 // There are no spells.
                 SaveGame.MsgPrint($"You cannot learn any {spellType}s from that book.");

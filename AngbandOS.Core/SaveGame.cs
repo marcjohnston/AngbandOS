@@ -9005,7 +9005,7 @@ internal class SaveGame
     /// Returns an spell selected by the player.  If the player doesn't have any spells capable of being selected, false is returned; otherwise the spell selected by the user is returned on the output
     /// parameter.  If the user cancels the selection, a true value is returned and the output spell parameter is set to null.
     /// </summary>
-    public bool GetSpell(out Spell? selectedSpell, string prompt, BookItem spellBook, bool known, Player player)
+    public bool GetSpell(out Spell? selectedSpell, string prompt, BookItem spellBook, bool known)
     {
         selectedSpell = null;
         Spell[] okaySpells = OkaySpells(spellBook, known);
@@ -9013,7 +9013,7 @@ internal class SaveGame
         {
             return false;
         }
-        string spellNoun = player.BaseCharacterClass.SpellCastingType.SpellNoun;
+        string spellNoun = Player.BaseCharacterClass.SpellCastingType.SpellNoun;
         ScreenBuffer? savedScreen = null;
         string outVal = $"({spellNoun}s {0.IndexToLetter()}-{(okaySpells.Length - 1).IndexToLetter()}, *=List, ESC=exit) {prompt} which {spellNoun}? ";
         while (selectedSpell == null && GetCom(outVal, out char choice) && !Shutdown)
@@ -9023,7 +9023,7 @@ internal class SaveGame
                 if (savedScreen == null)
                 {
                     savedScreen = Screen.Clone();
-                    player.PrintSpells(okaySpells, 1, 20);
+                    Player.PrintSpells(okaySpells, 1, 20);
                 }
                 else
                 {
@@ -9043,7 +9043,7 @@ internal class SaveGame
                 continue;
             }
             Spell spell = okaySpells[i];
-            if (!player.SpellOkay(spell, known))
+            if (!Player.SpellOkay(spell, known))
             {
                 MsgPrint($"You may not {prompt} that {spellNoun}.");
                 continue;

@@ -85,7 +85,7 @@ internal class CastingType
         SaveGame.HandleStuff();
 
         // Allow the player to select the spell.
-        if (!SaveGame.GetSpell(out Spell? sPtr, SaveGame.Player.BaseCharacterClass.SpellCastingType.CastVerb, bookItem, true, SaveGame.Player))
+        if (!SaveGame.GetSpell(out Spell? sPtr, SaveGame.Player.BaseCharacterClass.SpellCastingType.CastVerb, bookItem, true))
         {
             SaveGame.MsgPrint($"You don't know any {prayer}s in that book.");
             return;
