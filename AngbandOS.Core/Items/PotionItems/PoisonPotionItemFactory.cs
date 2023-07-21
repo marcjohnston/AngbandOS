@@ -23,17 +23,17 @@ internal class PoisonPotionItemFactory : PotionItemFactory
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
     public override int Weight => 4;
 
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Poison simply poisons you
-        if (!(saveGame.Player.HasPoisonResistance || saveGame.Player.TimedPoisonResistance.TurnsRemaining != 0))
+        if (!(SaveGame.Player.HasPoisonResistance || SaveGame.Player.TimedPoisonResistance.TurnsRemaining != 0))
         {
             // Hagarg Ryonis can protect you against poison
-            if (Program.Rng.DieRoll(10) <= saveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+            if (Program.Rng.DieRoll(10) <= SaveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
             {
-                saveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
+                SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
             }
-            else if (saveGame.Player.TimedPoison.AddTimer(Program.Rng.RandomLessThan(15) + 10))
+            else if (SaveGame.Player.TimedPoison.AddTimer(Program.Rng.RandomLessThan(15) + 10))
             {
                 return true;
             }
@@ -41,9 +41,9 @@ internal class PoisonPotionItemFactory : PotionItemFactory
         return false;
     }
 
-    public override bool Smash(SaveGame saveGame, int who, int y, int x)
+    public override bool Smash(int who, int y, int x)
     {
-        saveGame.Project(who, 2, y, x, 3, saveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        SaveGame.Project(who, 2, y, x, 3, SaveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return true;
     }
     public override Item CreateItem() => new PoisonPotionItem(SaveGame);

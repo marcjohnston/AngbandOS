@@ -22,12 +22,12 @@ internal class ClumsinessPotionItemFactory : PotionItemFactory
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Clumsiness tries to reduce your dexterity
-        return saveGame.Player.TryDecreasingAbilityScore(Ability.Dexterity);
+        return SaveGame.Player.TryDecreasingAbilityScore(Ability.Dexterity);
     }
-    public override bool Smash(SaveGame saveGame, int who, int y, int x)
+    public override bool Smash(int who, int y, int x)
     {
         return true;
     }

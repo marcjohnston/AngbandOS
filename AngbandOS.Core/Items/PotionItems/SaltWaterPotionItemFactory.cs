@@ -21,17 +21,17 @@ internal class SaltWaterPotionItemFactory : PotionItemFactory
     public override string FriendlyName => "Salt Water";
     public override int Weight => 4;
 
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Salt water makes you vomit, but gets rid of poison
-        saveGame.MsgPrint("The saltiness makes you vomit!");
-        saveGame.Player.SetFood(Constants.PyFoodStarve - 1);
-        saveGame.Player.TimedPoison.ResetTimer();
-        saveGame.Player.TimedParalysis.AddTimer(4);
+        SaveGame.MsgPrint("The saltiness makes you vomit!");
+        SaveGame.Player.SetFood(Constants.PyFoodStarve - 1);
+        SaveGame.Player.TimedPoison.ResetTimer();
+        SaveGame.Player.TimedParalysis.AddTimer(4);
         return true;
     }
 
-    public override bool Smash(SaveGame saveGame, int who, int y, int x)
+    public override bool Smash(int who, int y, int x)
     {
         return true;
     }

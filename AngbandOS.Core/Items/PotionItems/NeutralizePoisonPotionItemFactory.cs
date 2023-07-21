@@ -23,10 +23,10 @@ internal class NeutralizePoisonPotionItemFactory : PotionItemFactory
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Cure poison removes any poison you have
-        return saveGame.Player.TimedPoison.ResetTimer();
+        return SaveGame.Player.TimedPoison.ResetTimer();
     }
     public override Item CreateItem() => new NeutralizePoisonPotionItem(SaveGame);
 }

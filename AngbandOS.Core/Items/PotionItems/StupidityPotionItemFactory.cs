@@ -22,12 +22,12 @@ internal class StupidityPotionItemFactory : PotionItemFactory
     public override int Level => 20;
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Stupidity tries to reduce your intelligence
-        return saveGame.Player.TryDecreasingAbilityScore(Ability.Intelligence);
+        return SaveGame.Player.TryDecreasingAbilityScore(Ability.Intelligence);
     }
-    public override bool Smash(SaveGame saveGame, int who, int y, int x)
+    public override bool Smash(int who, int y, int x)
     {
         return true;
     }

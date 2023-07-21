@@ -24,10 +24,10 @@ internal class RestoreCharismaPotionItemFactory : PotionItemFactory
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
     public override int Weight => 4;
 
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Restore charisma restores your charisma
-        return saveGame.Player.TryRestoringAbilityScore(Ability.Charisma);
+        return SaveGame.Player.TryRestoringAbilityScore(Ability.Charisma);
     }
     public override Item CreateItem() => new RestoreCharismaPotionItem(SaveGame);
 }

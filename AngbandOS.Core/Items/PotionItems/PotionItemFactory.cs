@@ -27,7 +27,7 @@ internal abstract class PotionItemFactory : ItemFactory, IFlavour
     /// Have a potion affect the player.  Activates the potion effect.
     /// </summary>
     /// <returns> True, if drinking the potion identified it; false, to keep the potion as unidentified.</returns>
-    public abstract bool Quaff(SaveGame saveGame);
+    public abstract bool Quaff();
 
     /// <summary>
     /// Perform a smash effect for the potion.
@@ -37,7 +37,7 @@ internal abstract class PotionItemFactory : ItemFactory, IFlavour
     /// <param name="y"></param>
     /// <param name="x"></param>
     /// <returns>Returns whether or not the action causes pets to become angry and turn against their owner.  Returns false, by default.</returns>
-    public virtual bool Smash(SaveGame saveGame, int who, int y, int x)
+    public virtual bool Smash(int who, int y, int x)
     {
         return false;
     }

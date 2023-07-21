@@ -22,12 +22,12 @@ internal class WeaknessPotionItemFactory : PotionItemFactory
     public override int Level => 3;
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Weakness tries to reduce your strength
-        return saveGame.Player.TryDecreasingAbilityScore(Ability.Strength);
+        return SaveGame.Player.TryDecreasingAbilityScore(Ability.Strength);
     }
-    public override bool Smash(SaveGame saveGame, int who, int y, int x)
+    public override bool Smash(int who, int y, int x)
     {
         return true;
     }

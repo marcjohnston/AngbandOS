@@ -23,26 +23,26 @@ internal class SpeedPotionItemFactory : PotionItemFactory
     public override int Level => 1;
     public override int[] Locale => new int[] { 1, 40, 60, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Speed temporarily hastes you.  But it is not additive.
-        if (saveGame.Player.TimedHaste.TurnsRemaining == 0)
+        if (SaveGame.Player.TimedHaste.TurnsRemaining == 0)
         {
-            if (saveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(25) + 15))
+            if (SaveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(25) + 15))
             {
                 return true;
             }
         }
         else
         {
-            saveGame.Player.TimedHaste.AddTimer(5);
+            SaveGame.Player.TimedHaste.AddTimer(5);
         }
         return false;
     }
 
-    public override bool Smash(SaveGame saveGame, int who, int y, int x)
+    public override bool Smash(int who, int y, int x)
     {
-        saveGame.Project(who, 2, y, x, 0, saveGame.SingletonRepository.Projectiles.Get<OldSpeedProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        SaveGame.Project(who, 2, y, x, 0, SaveGame.SingletonRepository.Projectiles.Get<OldSpeedProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return false;
     }
     public override Item CreateItem() => new SpeedPotionItem(SaveGame);

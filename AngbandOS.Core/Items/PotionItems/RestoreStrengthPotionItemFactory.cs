@@ -23,10 +23,10 @@ internal class RestoreStrengthPotionItemFactory : PotionItemFactory
     public override int Level => 25;
     public override int[] Locale => new int[] { 25, 0, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Restore strength restores your strength
-        return saveGame.Player.TryRestoringAbilityScore(Ability.Strength);
+        return SaveGame.Player.TryRestoringAbilityScore(Ability.Strength);
     }
     public override Item CreateItem() => new RestoreStrengthPotionItem(SaveGame);
 }

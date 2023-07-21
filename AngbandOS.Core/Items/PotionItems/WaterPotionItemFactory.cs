@@ -22,10 +22,10 @@ internal class WaterPotionItemFactory : PotionItemFactory
     public override int Pval => 200;
     public override int Weight => 4;
 
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Water has no effect
-        saveGame.MsgPrint("You feel less thirsty.");
+        SaveGame.MsgPrint("You feel less thirsty.");
         return true;
     }
 
@@ -38,7 +38,7 @@ internal class WaterPotionItemFactory : PotionItemFactory
         return null;
     }
 
-    public override bool Smash(SaveGame saveGame, int who, int y, int x)
+    public override bool Smash(int who, int y, int x)
     {
         return true;
     }

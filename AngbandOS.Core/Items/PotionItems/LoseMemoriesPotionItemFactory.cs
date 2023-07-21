@@ -22,18 +22,18 @@ internal class LoseMemoriesPotionItemFactory : PotionItemFactory
     public override int Level => 10;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Lose Memories reduces your experience
-        if (!saveGame.Player.HasHoldLife && saveGame.Player.ExperiencePoints > 0)
+        if (!SaveGame.Player.HasHoldLife && SaveGame.Player.ExperiencePoints > 0)
         {
-            saveGame.MsgPrint("You feel your memories fade.");
-            saveGame.Player.LoseExperience(saveGame.Player.ExperiencePoints / 4);
+            SaveGame.MsgPrint("You feel your memories fade.");
+            SaveGame.Player.LoseExperience(SaveGame.Player.ExperiencePoints / 4);
             return true;
         }
         return false;
     }
-    public override bool Smash(SaveGame saveGame, int who, int y, int x)
+    public override bool Smash(int who, int y, int x)
     {
         return true;
     }

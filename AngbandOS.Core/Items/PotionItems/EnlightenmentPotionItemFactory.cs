@@ -23,11 +23,11 @@ internal class EnlightenmentPotionItemFactory : PotionItemFactory
     public override int Level => 25;
     public override int[] Locale => new int[] { 25, 50, 100, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Enlightenment shows you the whole level
-        saveGame.MsgPrint("An image of your surroundings forms in your mind...");
-        saveGame.Level.WizLight();
+        SaveGame.MsgPrint("An image of your surroundings forms in your mind...");
+        SaveGame.Level.WizLight();
         return true;
     }
     public override Item CreateItem() => new EnlightenmentPotionItem(SaveGame);

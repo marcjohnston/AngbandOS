@@ -25,10 +25,10 @@ internal class DetectInvisiblePotionItemFactory : PotionItemFactory
     public override int Level => 3;
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Detect invisible gives you times see invisibility
-        return saveGame.Player.TimedSeeInvisibility.AddTimer(12 + Program.Rng.DieRoll(12));
+        return SaveGame.Player.TimedSeeInvisibility.AddTimer(12 + Program.Rng.DieRoll(12));
     }
     public override Item CreateItem() => new DetectInvisiblePotionItem(SaveGame);
 }

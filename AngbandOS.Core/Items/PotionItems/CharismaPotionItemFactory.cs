@@ -23,12 +23,12 @@ internal class CharismaPotionItemFactory : PotionItemFactory
     public override int Level => 20;
     public override int[] Locale => new int[] { 20, 25, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Charisma increases your charisma
-        return saveGame.Player.TryIncreasingAbilityScore(Ability.Charisma);
+        return SaveGame.Player.TryIncreasingAbilityScore(Ability.Charisma);
     }
-    public override bool Smash(SaveGame saveGame, int who, int y, int x)
+    public override bool Smash(int who, int y, int x)
     {
         return true;
     }

@@ -21,10 +21,10 @@ internal class AppleJuicePotionItemFactory : PotionItemFactory
     public override string FriendlyName => "Apple Juice";
     public override int Pval => 250;
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Apple juice has no effect
-        saveGame.MsgPrint("You feel less thirsty.");
+        SaveGame.MsgPrint("You feel less thirsty.");
         return true;
     }
 
@@ -37,7 +37,7 @@ internal class AppleJuicePotionItemFactory : PotionItemFactory
         return null;
     }
 
-    public override bool Smash(SaveGame saveGame, int who, int y, int x)
+    public override bool Smash(int who, int y, int x)
     {
         return true;
     }

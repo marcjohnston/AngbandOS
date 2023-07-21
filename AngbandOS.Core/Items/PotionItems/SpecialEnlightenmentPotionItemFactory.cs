@@ -23,23 +23,23 @@ internal class SpecialEnlightenmentPotionItemFactory : PotionItemFactory
     public override int Level => 70;
     public override int[] Locale => new int[] { 70, 0, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // *Enlightenment* shows you the whole level, increases your intelligence and
         // wisdom, identifies all your items, and detects everything
-        saveGame.MsgPrint("You begin to feel more enlightened...");
-        saveGame.MsgPrint(null);
-        saveGame.Level.WizLight();
-        saveGame.Player.TryIncreasingAbilityScore(Ability.Intelligence);
-        saveGame.Player.TryIncreasingAbilityScore(Ability.Wisdom);
-        saveGame.DetectTraps();
-        saveGame.DetectDoors();
-        saveGame.DetectStairs();
-        saveGame.DetectTreasure();
-        saveGame.DetectObjectsGold();
-        saveGame.DetectObjectsNormal();
-        saveGame.IdentifyPack();
-        saveGame.SelfKnowledge();
+        SaveGame.MsgPrint("You begin to feel more enlightened...");
+        SaveGame.MsgPrint(null);
+        SaveGame.Level.WizLight();
+        SaveGame.Player.TryIncreasingAbilityScore(Ability.Intelligence);
+        SaveGame.Player.TryIncreasingAbilityScore(Ability.Wisdom);
+        SaveGame.DetectTraps();
+        SaveGame.DetectDoors();
+        SaveGame.DetectStairs();
+        SaveGame.DetectTreasure();
+        SaveGame.DetectObjectsGold();
+        SaveGame.DetectObjectsNormal();
+        SaveGame.IdentifyPack();
+        SaveGame.SelfKnowledge();
         return true;
     }
     public override Item CreateItem() => new SpecialEnlightenmentPotionItem(SaveGame);

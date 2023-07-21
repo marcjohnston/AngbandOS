@@ -23,10 +23,10 @@ internal class SlowPoisonPotionItemFactory : PotionItemFactory
     public override int Level => 1;
     public override int[] Locale => new int[] { 1, 0, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Slow poison halves the remaining duration of any poison you have
-        return saveGame.Player.TimedPoison.SetTimer(saveGame.Player.TimedPoison.TurnsRemaining / 2);
+        return SaveGame.Player.TimedPoison.SetTimer(SaveGame.Player.TimedPoison.TurnsRemaining / 2);
     }
     public override Item CreateItem() => new SlowPoisonPotionItem(SaveGame);
 }

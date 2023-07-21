@@ -23,33 +23,33 @@ internal class SpecialHealingPotionItemFactory : PotionItemFactory
     public override int Level => 40;
     public override int[] Locale => new int[] { 40, 60, 80, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         bool identified = false;
 
         // *Healing* heals you 1200 health, and cures blindness, confusion, stun, poison,
         // and bleeding
-        if (saveGame.Player.RestoreHealth(1200))
+        if (SaveGame.Player.RestoreHealth(1200))
         {
             identified = true;
         }
-        if (saveGame.Player.TimedBlindness.ResetTimer())
+        if (SaveGame.Player.TimedBlindness.ResetTimer())
         {
             identified = true;
         }
-        if (saveGame.Player.TimedConfusion.ResetTimer())
+        if (SaveGame.Player.TimedConfusion.ResetTimer())
         {
             identified = true;
         }
-        if (saveGame.Player.TimedPoison.ResetTimer())
+        if (SaveGame.Player.TimedPoison.ResetTimer())
         {
             identified = true;
         }
-        if (saveGame.Player.TimedStun.ResetTimer())
+        if (SaveGame.Player.TimedStun.ResetTimer())
         {
             identified = true;
         }
-        if (saveGame.Player.TimedBleeding.ResetTimer())
+        if (SaveGame.Player.TimedBleeding.ResetTimer())
         {
             identified = true;
         }
@@ -57,9 +57,9 @@ internal class SpecialHealingPotionItemFactory : PotionItemFactory
         return identified;
     }
 
-    public override bool Smash(SaveGame saveGame, int who, int y, int x)
+    public override bool Smash(int who, int y, int x)
     {
-        saveGame.Project(who, 1, y, x, Program.Rng.DiceRoll(50, 50), saveGame.SingletonRepository.Projectiles.Get<OldHealProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        SaveGame.Project(who, 1, y, x, Program.Rng.DiceRoll(50, 50), SaveGame.SingletonRepository.Projectiles.Get<OldHealProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return false;
     }
     public override Item CreateItem() => new SpecialHealingPotionItem(SaveGame);

@@ -23,10 +23,10 @@ internal class BoldnessPotionItemFactory : PotionItemFactory
     public override int Level => 1;
     public override int[] Locale => new int[] { 1, 0, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Boldness stops you being afraid
-        return saveGame.Player.TimedFear.ResetTimer();
+        return SaveGame.Player.TimedFear.ResetTimer();
     }
     public override Item CreateItem() => new BoldnessPotionItem(SaveGame);
 }

@@ -82,7 +82,7 @@ internal class MeteorProjectile : Projectile
                     if (isPotion)
                     {
                         PotionItemFactory potion = (PotionItemFactory)oPtr.Factory;
-                        potion.Smash(SaveGame, who, y, x);
+                        potion.Smash(who, y, x);
                     }
                     SaveGame.Level.RedrawSingleLocation(y, x);
                 }

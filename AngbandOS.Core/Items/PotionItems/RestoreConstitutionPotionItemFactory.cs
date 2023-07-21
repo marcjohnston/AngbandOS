@@ -23,10 +23,10 @@ internal class RestoreConstitutionPotionItemFactory : PotionItemFactory
     public override int Level => 25;
     public override int[] Locale => new int[] { 25, 0, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Restore constitution restores your constitution
-        return saveGame.Player.TryRestoringAbilityScore(Ability.Constitution);
+        return SaveGame.Player.TryRestoringAbilityScore(Ability.Constitution);
     }
     public override Item CreateItem() => new RestoreConstitutionPotionItem(SaveGame);
 }

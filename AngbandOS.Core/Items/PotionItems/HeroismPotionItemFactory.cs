@@ -23,19 +23,19 @@ internal class HeroismPotionItemFactory : PotionItemFactory
     public override int Level => 1;
     public override int[] Locale => new int[] { 1, 0, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         bool identified = false;
         // Heroism removes fear, cures 10 health, and gives you timed heroism
-        if (saveGame.Player.TimedFear.ResetTimer())
+        if (SaveGame.Player.TimedFear.ResetTimer())
         {
             identified = true;
         }
-        if (saveGame.Player.TimedHeroism.AddTimer(Program.Rng.DieRoll(25) + 25))
+        if (SaveGame.Player.TimedHeroism.AddTimer(Program.Rng.DieRoll(25) + 25))
         {
             identified = true;
         }
-        if (saveGame.Player.RestoreHealth(10))
+        if (SaveGame.Player.RestoreHealth(10))
         {
             identified = true;
         }

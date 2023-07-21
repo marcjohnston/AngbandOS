@@ -24,15 +24,15 @@ internal class SlownessPotionItemFactory : PotionItemFactory
     public override int Pval => 50;
     public override int Weight => 4;
 
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Slowness slows you down.
-        return saveGame.Player.TimedSlow.AddTimer(Program.Rng.DieRoll(25) + 15);
+        return SaveGame.Player.TimedSlow.AddTimer(Program.Rng.DieRoll(25) + 15);
     }
 
-    public override bool Smash(SaveGame saveGame, int who, int y, int x)
+    public override bool Smash(int who, int y, int x)
     {
-        saveGame.Project(who, 2, y, x, 5, saveGame.SingletonRepository.Projectiles.Get<OldSlowProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        SaveGame.Project(who, 2, y, x, 5, SaveGame.SingletonRepository.Projectiles.Get<OldSlowProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return true;
     }
     public override Item CreateItem() => new SlownessPotionItem(SaveGame);

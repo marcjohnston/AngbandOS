@@ -21,21 +21,21 @@ internal class BoozePotionItemFactory : PotionItemFactory
     public override string FriendlyName => "Booze";
     public override int Pval => 50;
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         bool identified = false;
 
         // Confusion makes you confused and possibly other effects
-        if (!(saveGame.Player.HasConfusionResistance || saveGame.Player.HasChaosResistance))
+        if (!(SaveGame.Player.HasConfusionResistance || SaveGame.Player.HasChaosResistance))
         {
-            if (saveGame.Player.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(20) + 15))
+            if (SaveGame.Player.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(20) + 15))
             {
                 identified = true;
             }
             // 50% chance of having hallucinations
             if (Program.Rng.DieRoll(2) == 1)
             {
-                if (saveGame.Player.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(150) + 150))
+                if (SaveGame.Player.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(150) + 150))
                 {
                     identified = true;
                 }
@@ -47,24 +47,24 @@ internal class BoozePotionItemFactory : PotionItemFactory
                 // 1 in 3 chance of losing your memories after blacking out
                 if (Program.Rng.DieRoll(3) == 1)
                 {
-                    saveGame.LoseAllInfo();
+                    SaveGame.LoseAllInfo();
                 }
                 else
                 {
-                    saveGame.Level.WizDark();
+                    SaveGame.Level.WizDark();
                 }
-                saveGame.TeleportPlayer(100);
-                saveGame.Level.WizDark();
-                saveGame.MsgPrint("You wake up somewhere with a sore head...");
-                saveGame.MsgPrint("You can't remember a thing, or how you got here!");
+                SaveGame.TeleportPlayer(100);
+                SaveGame.Level.WizDark();
+                SaveGame.MsgPrint("You wake up somewhere with a sore head...");
+                SaveGame.MsgPrint("You can't remember a thing, or how you got here!");
             }
         }
         return identified;
     }
 
-    public override bool Smash(SaveGame saveGame, int who, int y, int x)
+    public override bool Smash(int who, int y, int x)
     {
-        saveGame.Project(who, 2, y, x, 0, saveGame.SingletonRepository.Projectiles.Get<OldConfProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        SaveGame.Project(who, 2, y, x, 0, SaveGame.SingletonRepository.Projectiles.Get<OldConfProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return true;
     }
     public override Item CreateItem() => new BoozePotionItem(SaveGame);

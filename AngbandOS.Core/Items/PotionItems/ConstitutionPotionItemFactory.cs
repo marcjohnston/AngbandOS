@@ -23,10 +23,10 @@ internal class ConstitutionPotionItemFactory : PotionItemFactory
     public override int Level => 20;
     public override int[] Locale => new int[] { 20, 25, 30, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Constitution increases your constitution
-        return saveGame.Player.TryIncreasingAbilityScore(Ability.Constitution);
+        return SaveGame.Player.TryIncreasingAbilityScore(Ability.Constitution);
     }
     public override Item CreateItem() => new ConstitutionPotionItem(SaveGame);
 }

@@ -22,10 +22,10 @@ internal class UglinessPotionItemFactory : PotionItemFactory
     public override int Level => 20;
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Ugliness tries to reduce your charisma
-        return saveGame.Player.TryDecreasingAbilityScore(Ability.Charisma);
+        return SaveGame.Player.TryDecreasingAbilityScore(Ability.Charisma);
     }
     public override Item CreateItem() => new UglinessPotionItem(SaveGame);
 }

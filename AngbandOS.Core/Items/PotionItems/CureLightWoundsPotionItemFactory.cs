@@ -23,24 +23,24 @@ internal class CureLightWoundsPotionItemFactory : PotionItemFactory
     public override int[] Locale => new int[] { 0, 1, 3, 0 };
     public override int Pval => 50;
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         bool identified = false;
         // Cure light wounds heals you 2d8 health and reduces bleeding
-        if (saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(2, 8)))
+        if (SaveGame.Player.RestoreHealth(Program.Rng.DiceRoll(2, 8)))
         {
             identified = true;
         }
-        if (saveGame.Player.TimedBleeding.AddTimer(-10))
+        if (SaveGame.Player.TimedBleeding.AddTimer(-10))
         {
             identified = true;
         }
         return identified;
     }
 
-    public override bool Smash(SaveGame saveGame, int who, int y, int x)
+    public override bool Smash(int who, int y, int x)
     {
-        saveGame.Project(who, 2, y, x, Program.Rng.DiceRoll(2, 3), saveGame.SingletonRepository.Projectiles.Get<OldHealProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        SaveGame.Project(who, 2, y, x, Program.Rng.DiceRoll(2, 3), SaveGame.SingletonRepository.Projectiles.Get<OldHealProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return false;
     }
     public override Item CreateItem() => new CureLightWoundsPotionItem(SaveGame);

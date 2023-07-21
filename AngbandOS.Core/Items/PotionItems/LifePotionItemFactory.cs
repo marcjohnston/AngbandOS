@@ -23,30 +23,30 @@ internal class LifePotionItemFactory : PotionItemFactory
     public override int Level => 60;
     public override int[] Locale => new int[] { 60, 100, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Life heals you 5000 health, removes experience and ability score drains, and
         // cures blindness, confusion, stun, poison, and bleeding
-        saveGame.MsgPrint("You feel life flow through your body!");
-        saveGame.Player.RestoreLevel();
-        saveGame.Player.RestoreHealth(5000);
-        saveGame.Player.TimedPoison.ResetTimer();
-        saveGame.Player.TimedBlindness.ResetTimer();
-        saveGame.Player.TimedConfusion.ResetTimer();
-        saveGame.Player.TimedHallucinations.ResetTimer();
-        saveGame.Player.TimedStun.ResetTimer();
-        saveGame.Player.TimedBleeding.ResetTimer();
-        saveGame.Player.TryRestoringAbilityScore(Ability.Strength);
-        saveGame.Player.TryRestoringAbilityScore(Ability.Constitution);
-        saveGame.Player.TryRestoringAbilityScore(Ability.Dexterity);
-        saveGame.Player.TryRestoringAbilityScore(Ability.Wisdom);
-        saveGame.Player.TryRestoringAbilityScore(Ability.Intelligence);
-        saveGame.Player.TryRestoringAbilityScore(Ability.Charisma);
+        SaveGame.MsgPrint("You feel life flow through your body!");
+        SaveGame.Player.RestoreLevel();
+        SaveGame.Player.RestoreHealth(5000);
+        SaveGame.Player.TimedPoison.ResetTimer();
+        SaveGame.Player.TimedBlindness.ResetTimer();
+        SaveGame.Player.TimedConfusion.ResetTimer();
+        SaveGame.Player.TimedHallucinations.ResetTimer();
+        SaveGame.Player.TimedStun.ResetTimer();
+        SaveGame.Player.TimedBleeding.ResetTimer();
+        SaveGame.Player.TryRestoringAbilityScore(Ability.Strength);
+        SaveGame.Player.TryRestoringAbilityScore(Ability.Constitution);
+        SaveGame.Player.TryRestoringAbilityScore(Ability.Dexterity);
+        SaveGame.Player.TryRestoringAbilityScore(Ability.Wisdom);
+        SaveGame.Player.TryRestoringAbilityScore(Ability.Intelligence);
+        SaveGame.Player.TryRestoringAbilityScore(Ability.Charisma);
         return true;
     }
-    public override bool Smash(SaveGame saveGame, int who, int y, int x)
+    public override bool Smash(int who, int y, int x)
     {
-        saveGame.Project(who, 1, y, x, Program.Rng.DiceRoll(50, 50), saveGame.SingletonRepository.Projectiles.Get<OldHealProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        SaveGame.Project(who, 1, y, x, Program.Rng.DiceRoll(50, 50), SaveGame.SingletonRepository.Projectiles.Get<OldHealProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return false;
     }
     public override Item CreateItem() => new LifePotionItem(SaveGame);

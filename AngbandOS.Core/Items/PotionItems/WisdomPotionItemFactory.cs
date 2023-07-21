@@ -23,10 +23,10 @@ internal class WisdomPotionItemFactory : PotionItemFactory
     public override int Level => 20;
     public override int[] Locale => new int[] { 20, 25, 30, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Wisdom increases your wisdom
-        return saveGame.Player.TryIncreasingAbilityScore(Ability.Wisdom);
+        return SaveGame.Player.TryIncreasingAbilityScore(Ability.Wisdom);
     }
     public override Item CreateItem() => new WisdomPotionItem(SaveGame);
 }

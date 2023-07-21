@@ -22,12 +22,12 @@ internal class SicklinessPotionItemFactory : PotionItemFactory
     public override int Level => 10;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Sickliness tries to reduce your constitution
-        return saveGame.Player.TryDecreasingAbilityScore(Ability.Constitution);
+        return SaveGame.Player.TryDecreasingAbilityScore(Ability.Constitution);
     }
-    public override bool Smash(SaveGame saveGame, int who, int y, int x)
+    public override bool Smash(int who, int y, int x)
     {
         return true;
     }

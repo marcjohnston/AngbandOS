@@ -9243,7 +9243,7 @@ internal class SaveGame
             {
                 PotionItemFactory potion = (PotionItemFactory)missile.Factory;
                 MsgPrint($"The {missileName} shatters!");
-                if (potion.Smash(this, 1, y, x))
+                if (potion.Smash(1, y, x))
                 {
                     if (Level.Grid[y][x].MonsterIndex != 0 && Level.Monsters[Level.Grid[y][x].MonsterIndex].SmFriendly)
                     {

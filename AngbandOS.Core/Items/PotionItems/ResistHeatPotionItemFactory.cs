@@ -25,10 +25,10 @@ internal class ResistHeatPotionItemFactory : PotionItemFactory
     public override int Level => 1;
     public override int[] Locale => new int[] { 1, 0, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Resist heat gives you timed fire resistance
-        return saveGame.Player.TimedFireResistance.AddTimer(Program.Rng.DieRoll(10) + 10);
+        return SaveGame.Player.TimedFireResistance.AddTimer(Program.Rng.DieRoll(10) + 10);
     }
     public override Item CreateItem() => new ResistHeatPotionItem(SaveGame);
 }

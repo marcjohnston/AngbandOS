@@ -28,14 +28,14 @@ internal class ResistancePotionItemFactory : PotionItemFactory
     public override int[] Locale => new int[] { 20, 45, 80, 100 };
     public override int Pval => 100;
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Resistance gives you all timed resistances
-        saveGame.Player.TimedAcidResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
-        saveGame.Player.TimedLightningResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
-        saveGame.Player.TimedFireResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
-        saveGame.Player.TimedColdResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
-        saveGame.Player.TimedPoisonResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
+        SaveGame.Player.TimedAcidResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
+        SaveGame.Player.TimedLightningResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
+        SaveGame.Player.TimedFireResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
+        SaveGame.Player.TimedColdResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
+        SaveGame.Player.TimedPoisonResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
         return true;
     }
     public override Item CreateItem() => new ResistancePotionItem(SaveGame);

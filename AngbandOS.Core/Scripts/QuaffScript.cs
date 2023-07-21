@@ -35,7 +35,7 @@ internal class QuaffScript : Script
         int itemLevel = item.Factory.Level;
         // Do the actual potion effect
         PotionItemFactory potion = (PotionItemFactory)item.Factory; // The item will be a potion.
-        bool identified = potion.Quaff(SaveGame);
+        bool identified = potion.Quaff();
 
         // Skeletons are messy drinkers
         SaveGame.Player.Race.Quaff(SaveGame, potion);

@@ -23,20 +23,20 @@ internal class BerserkStrengthPotionItemFactory : PotionItemFactory
     public override int Level => 3;
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         bool identified = false;
 
         // Berserk strength removes fear, heals 30 health, and gives you timed super heroism
-        if (saveGame.Player.TimedFear.ResetTimer())
+        if (SaveGame.Player.TimedFear.ResetTimer())
         {
             identified = true;
         }
-        if (saveGame.Player.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(25) + 25))
+        if (SaveGame.Player.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(25) + 25))
         {
             identified = true;
         }
-        if (saveGame.Player.RestoreHealth(30))
+        if (SaveGame.Player.RestoreHealth(30))
         {
             identified = true;
         }

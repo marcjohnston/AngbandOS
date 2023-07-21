@@ -23,19 +23,19 @@ internal class DetonationsPotionItemFactory : PotionItemFactory
     public override int Level => 60;
     public override int[] Locale => new int[] { 60, 0, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Detonations does 50d20 damage, stuns you, and gives you a stupid amount of bleeding
-        saveGame.MsgPrint("Massive explosions rupture your body!");
-        saveGame.Player.TakeHit(Program.Rng.DiceRoll(50, 20), "a potion of Detonation");
-        saveGame.Player.TimedStun.AddTimer(75);
-        saveGame.Player.TimedBleeding.AddTimer(5000);
+        SaveGame.MsgPrint("Massive explosions rupture your body!");
+        SaveGame.Player.TakeHit(Program.Rng.DiceRoll(50, 20), "a potion of Detonation");
+        SaveGame.Player.TimedStun.AddTimer(75);
+        SaveGame.Player.TimedBleeding.AddTimer(5000);
         return true;
     }
 
-    public override bool Smash(SaveGame saveGame, int who, int y, int x)
+    public override bool Smash(int who, int y, int x)
     {
-        saveGame.Project(who, 2, y, x, Program.Rng.DiceRoll(25, 25), saveGame.SingletonRepository.Projectiles.Get<ExplodeProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        SaveGame.Project(who, 2, y, x, Program.Rng.DiceRoll(25, 25), SaveGame.SingletonRepository.Projectiles.Get<ExplodeProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return true;
     }
     public override Item CreateItem() => new DetonationsPotionItem(SaveGame);

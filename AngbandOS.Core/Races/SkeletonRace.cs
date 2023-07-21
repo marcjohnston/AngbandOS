@@ -99,7 +99,7 @@ internal class SkeletonRace : Race
         if (Program.Rng.DieRoll(12) == 1)
         {
             saveGame.MsgPrint("Some of the fluid falls through your jaws!");
-            potion.Smash(saveGame, 0, saveGame.Player.MapY, saveGame.Player.MapX);
+            potion.Smash(0, saveGame.Player.MapY, saveGame.Player.MapX);
         }
     }
     public override bool CanBleed(int level) => false;

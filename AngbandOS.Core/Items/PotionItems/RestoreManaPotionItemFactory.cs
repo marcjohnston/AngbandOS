@@ -23,23 +23,23 @@ internal class RestoreManaPotionItemFactory : PotionItemFactory
     public override int Level => 25;
     public override int[] Locale => new int[] { 25, 0, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Restore mana restores your to maximum mana
-        if (saveGame.Player.Mana < saveGame.Player.MaxMana)
+        if (SaveGame.Player.Mana < SaveGame.Player.MaxMana)
         {
-            saveGame.Player.Mana = saveGame.Player.MaxMana;
-            saveGame.Player.FractionalMana = 0;
-            saveGame.MsgPrint("Your feel your head clear.");
-            saveGame.RedrawManaFlaggedAction.Set();
+            SaveGame.Player.Mana = SaveGame.Player.MaxMana;
+            SaveGame.Player.FractionalMana = 0;
+            SaveGame.MsgPrint("Your feel your head clear.");
+            SaveGame.RedrawManaFlaggedAction.Set();
             return true;
         }
         return false;
     }
 
-    public override bool Smash(SaveGame saveGame, int who, int y, int x)
+    public override bool Smash(int who, int y, int x)
     {
-        saveGame.Project(who, 1, y, x, Program.Rng.DiceRoll(10, 10), saveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        SaveGame.Project(who, 1, y, x, Program.Rng.DiceRoll(10, 10), SaveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return false;
     }
     public override Item CreateItem() => new RestoreManaPotionItem(SaveGame);

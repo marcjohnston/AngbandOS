@@ -23,12 +23,12 @@ internal class SelfKnowledgePotionItemFactory : PotionItemFactory
     public override int Level => 40;
     public override int[] Locale => new int[] { 40, 0, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Self knowledge gives you information about yourself
-        saveGame.MsgPrint("You begin to know yourself a little better...");
-        saveGame.MsgPrint(null);
-        saveGame.SelfKnowledge();
+        SaveGame.MsgPrint("You begin to know yourself a little better...");
+        SaveGame.MsgPrint(null);
+        SaveGame.SelfKnowledge();
         return true;
     }
     public override Item CreateItem() => new SelfKnowledgePotionItem(SaveGame);

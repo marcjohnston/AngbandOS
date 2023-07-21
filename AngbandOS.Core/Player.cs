@@ -1772,7 +1772,7 @@ internal class Player
                     if (oPtr.Factory.CategoryEnum == ItemTypeEnum.Potion)
                     {
                         PotionItemFactory potion = (PotionItemFactory)oPtr.Factory;
-                        potion.Smash(SaveGame, 0, SaveGame.Player.MapY, SaveGame.Player.MapX);
+                        potion.Smash(0, SaveGame.Player.MapY, SaveGame.Player.MapX);
                     }
                     InvenItemIncrease(i, -amt);
                     InvenItemOptimize(i);

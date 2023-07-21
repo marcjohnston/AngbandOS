@@ -22,12 +22,12 @@ internal class SlimeMoldJuicePotionItemFactory : PotionItemFactory
     public override string FriendlyName => "Slime Mold Juice";
     public override int Pval => 400;
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Slime mold juice has a random effect (calling this function again recusively)
-        saveGame.MsgPrint("That tastes awful.");
-        PotionItemFactory potion = RandomPotion(saveGame);
-        potion.Quaff(saveGame);
+        SaveGame.MsgPrint("That tastes awful.");
+        PotionItemFactory potion = RandomPotion(SaveGame);
+        potion.Quaff();
         return true;
     }
 
@@ -40,7 +40,7 @@ internal class SlimeMoldJuicePotionItemFactory : PotionItemFactory
         return null;
     }
 
-    public override bool Smash(SaveGame saveGame, int who, int y, int x)
+    public override bool Smash(int who, int y, int x)
     {
         return true;
     }

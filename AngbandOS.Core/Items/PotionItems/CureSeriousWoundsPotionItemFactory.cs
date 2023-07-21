@@ -24,34 +24,34 @@ internal class CureSeriousWoundsPotionItemFactory : PotionItemFactory
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
     public override int Pval => 100;
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         bool identified = false;
 
         // Cure serious wounds heals you 4d8 health, cures blindness and confusion, and
         // reduces bleeding
-        if (saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8)))
+        if (SaveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8)))
         {
             identified = true;
         }
-        if (saveGame.Player.TimedBlindness.ResetTimer())
+        if (SaveGame.Player.TimedBlindness.ResetTimer())
         {
             identified = true;
         }
-        if (saveGame.Player.TimedConfusion.ResetTimer())
+        if (SaveGame.Player.TimedConfusion.ResetTimer())
         {
             identified = true;
         }
-        if (saveGame.Player.TimedBleeding.SetTimer((saveGame.Player.TimedBleeding.TurnsRemaining / 2) - 50))
+        if (SaveGame.Player.TimedBleeding.SetTimer((SaveGame.Player.TimedBleeding.TurnsRemaining / 2) - 50))
         {
             identified = true;
         }
         return identified;
     }
 
-    public override bool Smash(SaveGame saveGame, int who, int y, int x)
+    public override bool Smash(int who, int y, int x)
     {
-        saveGame.Project(who, 2, y, x, Program.Rng.DiceRoll(4, 3), saveGame.SingletonRepository.Projectiles.Get<OldHealProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        SaveGame.Project(who, 2, y, x, Program.Rng.DiceRoll(4, 3), SaveGame.SingletonRepository.Projectiles.Get<OldHealProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return false;
     }
     public override Item CreateItem() => new CureSeriousWoundsPotionItem(SaveGame);

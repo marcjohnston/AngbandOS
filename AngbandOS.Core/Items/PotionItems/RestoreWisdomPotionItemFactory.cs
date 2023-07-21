@@ -23,10 +23,10 @@ internal class RestoreWisdomPotionItemFactory : PotionItemFactory
     public override int Level => 25;
     public override int[] Locale => new int[] { 25, 0, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Restore wisdom restores your wisdom
-        return saveGame.Player.TryRestoringAbilityScore(Ability.Wisdom);
+        return SaveGame.Player.TryRestoringAbilityScore(Ability.Wisdom);
     }
     public override Item CreateItem() => new RestoreWisdomPotionItem(SaveGame);
 }

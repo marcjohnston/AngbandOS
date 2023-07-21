@@ -23,10 +23,10 @@ internal class RestoreLifeLevelsPotionItemFactory : PotionItemFactory
     public override int Level => 40;
     public override int[] Locale => new int[] { 40, 0, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Restore life levels restores any lost experience
-        return saveGame.Player.RestoreLevel();
+        return SaveGame.Player.RestoreLevel();
     }
     public override Item CreateItem() => new RestoreLifeLevelsPotionItem(SaveGame);
 }

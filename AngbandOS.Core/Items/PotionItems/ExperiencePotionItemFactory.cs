@@ -23,19 +23,19 @@ internal class ExperiencePotionItemFactory : PotionItemFactory
     public override int Level => 65;
     public override int[] Locale => new int[] { 65, 0, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Experience increases your experience points by 50%, with a minimum of +10 and
         // maximuum of +10,000
-        if (saveGame.Player.ExperiencePoints < Constants.PyMaxExp)
+        if (SaveGame.Player.ExperiencePoints < Constants.PyMaxExp)
         {
-            int ee = (saveGame.Player.ExperiencePoints / 2) + 10;
+            int ee = (SaveGame.Player.ExperiencePoints / 2) + 10;
             if (ee > 100000)
             {
                 ee = 100000;
             }
-            saveGame.MsgPrint("You feel more experienced.");
-            saveGame.Player.GainExperience(ee);
+            SaveGame.MsgPrint("You feel more experienced.");
+            SaveGame.Player.GainExperience(ee);
             return true;
         }
         return false;

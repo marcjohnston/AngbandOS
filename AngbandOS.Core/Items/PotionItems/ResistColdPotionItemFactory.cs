@@ -23,10 +23,10 @@ internal class ResistColdPotionItemFactory : PotionItemFactory
     public override int Level => 1;
     public override int[] Locale => new int[] { 1, 0, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Resist cold gives you timed frost resistance
-        return saveGame.Player.TimedColdResistance.AddTimer(Program.Rng.DieRoll(10) + 10);
+        return SaveGame.Player.TimedColdResistance.AddTimer(Program.Rng.DieRoll(10) + 10);
     }
     public override Item CreateItem() => new ResistColdPotionItem(SaveGame);
 }

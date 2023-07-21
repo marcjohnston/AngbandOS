@@ -24,23 +24,23 @@ internal class NewLifePotionItemFactory : PotionItemFactory
     public override int[] Locale => new int[] { 50, 100, 120, 0 };
     public override int Pval => 100;
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // New life rerolls your health, cures all mutations, and restores you to your birth race
-        saveGame.Player.RerollHitPoints();
-        if (saveGame.Player.Dna.HasMutations)
+        SaveGame.Player.RerollHitPoints();
+        if (SaveGame.Player.Dna.HasMutations)
         {
-            saveGame.MsgPrint("You are cured of all mutations.");
-            saveGame.Player.Dna.LoseAllMutations();
-            saveGame.UpdateBonusesFlaggedAction.Set();
-            saveGame.HandleStuff();
+            SaveGame.MsgPrint("You are cured of all mutations.");
+            SaveGame.Player.Dna.LoseAllMutations();
+            SaveGame.UpdateBonusesFlaggedAction.Set();
+            SaveGame.HandleStuff();
         }
-        if (!(saveGame.Player.Race.GetType() == saveGame.Player.RaceAtBirth.GetType()))
+        if (!(SaveGame.Player.Race.GetType() == SaveGame.Player.RaceAtBirth.GetType()))
         {
-            var oldRaceName = saveGame.Player.RaceAtBirth.Title;
-            saveGame.MsgPrint($"You feel more {oldRaceName} again.");
-            saveGame.Player.ChangeRace(saveGame.Player.RaceAtBirth);
-            saveGame.Level.RedrawSingleLocation(saveGame.Player.MapY, saveGame.Player.MapX);
+            var oldRaceName = SaveGame.Player.RaceAtBirth.Title;
+            SaveGame.MsgPrint($"You feel more {oldRaceName} again.");
+            SaveGame.Player.ChangeRace(SaveGame.Player.RaceAtBirth);
+            SaveGame.Level.RedrawSingleLocation(SaveGame.Player.MapY, SaveGame.Player.MapX);
         }
         return true;
     }

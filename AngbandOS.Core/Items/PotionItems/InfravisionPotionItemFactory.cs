@@ -23,10 +23,10 @@ internal class InfravisionPotionItemFactory : PotionItemFactory
     public override int Level => 3;
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         // Infravision gives you timed infravision
-        return saveGame.Player.TimedInfravision.AddTimer(100 + Program.Rng.DieRoll(100));
+        return SaveGame.Player.TimedInfravision.AddTimer(100 + Program.Rng.DieRoll(100));
     }
     public override Item CreateItem() => new InfravisionPotionItem(SaveGame);
 }

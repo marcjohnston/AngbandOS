@@ -24,44 +24,44 @@ internal class CuringPotionItemFactory : PotionItemFactory
     public override int[] Locale => new int[] { 18, 40, 0, 0 };
     public override int Pval => 100;
     public override int Weight => 4;
-    public override bool Quaff(SaveGame saveGame)
+    public override bool Quaff()
     {
         bool identified = false;
         // Curing heals you 50 health, and cures blindness, confusion, stun, poison,
         // bleeding, and hallucinations
-        if (saveGame.Player.RestoreHealth(50))
+        if (SaveGame.Player.RestoreHealth(50))
         {
             identified = true;
         }
-        if (saveGame.Player.TimedBlindness.ResetTimer())
+        if (SaveGame.Player.TimedBlindness.ResetTimer())
         {
             identified = true;
         }
-        if (saveGame.Player.TimedPoison.ResetTimer())
+        if (SaveGame.Player.TimedPoison.ResetTimer())
         {
             identified = true;
         }
-        if (saveGame.Player.TimedConfusion.ResetTimer())
+        if (SaveGame.Player.TimedConfusion.ResetTimer())
         {
             identified = true;
         }
-        if (saveGame.Player.TimedStun.ResetTimer())
+        if (SaveGame.Player.TimedStun.ResetTimer())
         {
             identified = true;
         }
-        if (saveGame.Player.TimedBleeding.ResetTimer())
+        if (SaveGame.Player.TimedBleeding.ResetTimer())
         {
             identified = true;
         }
-        if (saveGame.Player.TimedHallucinations.ResetTimer())
+        if (SaveGame.Player.TimedHallucinations.ResetTimer())
         {
             identified = true;
         }
         return identified;
     }
-    public override bool Smash(SaveGame saveGame, int who, int y, int x)
+    public override bool Smash(int who, int y, int x)
     {
-        saveGame.Project(who, 2, y, x, Program.Rng.DiceRoll(6, 3), saveGame.SingletonRepository.Projectiles.Get<OldHealProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        SaveGame.Project(who, 2, y, x, Program.Rng.DiceRoll(6, 3), SaveGame.SingletonRepository.Projectiles.Get<OldHealProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return false;
     }
     public override Item CreateItem() => new CuringPotionItem(SaveGame);
