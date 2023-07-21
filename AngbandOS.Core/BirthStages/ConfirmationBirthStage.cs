@@ -22,8 +22,12 @@ internal class ConfirmationBirthStage : BaseBirthStage
 
         SaveGame.Spells[0] = SaveGame.Player.PrimaryRealm == null ? new Spell[] { } : SaveGame.Player.PrimaryRealm.SpellList(SaveGame.Player.BaseCharacterClass);
         SaveGame.Spells[1] = SaveGame.Player.SecondaryRealm == null ? new Spell[] { } : SaveGame.Player.SecondaryRealm.SpellList(SaveGame.Player.BaseCharacterClass);
-        SaveGame.Talents = new TalentList(SaveGame.Player.BaseCharacterClass.ID);
-        SaveGame.SpellFirst = 100;
+        SaveGame.Talents = new List<Talent>();
+        foreach (Talent talent in SaveGame.SingletonRepository.Talents)
+        {
+            SaveGame.Talents.Add(talent);
+            talent.Initialize(SaveGame.Player.BaseCharacterClass.ID);
+        }
         foreach (Spell[] bookset in SaveGame.Spells)
         {
             foreach (Spell spell in bookset)

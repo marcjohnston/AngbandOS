@@ -8,10 +8,11 @@
 namespace AngbandOS.Core.Talents;
 
 [Serializable]
-internal class TalentPrecognition : Talent
+internal class PrecognitionTalent : Talent
 {
+    private PrecognitionTalent(SaveGame saveGame) : base(saveGame) { }
     public override string Name => "Precognition";
-    public override void Initialise(int characterClass)
+    public override void Initialize(int characterClass)
     {
         Level = 1;
         ManaCost = 1;

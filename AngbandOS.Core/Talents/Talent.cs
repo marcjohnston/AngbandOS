@@ -10,6 +10,12 @@ namespace AngbandOS.Core.Talents;
 [Serializable]
 internal abstract class Talent
 {
+    protected readonly SaveGame SaveGame;
+    protected Talent(SaveGame saveGame)
+    {
+        SaveGame = saveGame;
+    }
+
     public abstract string Name { get; }
 
     public int Level
@@ -56,7 +62,7 @@ internal abstract class Talent
         return chance;
     }
 
-    public abstract void Initialise(int characterClass);
+    public abstract void Initialize(int characterClass);
 
     public string SummaryLine(Player player)
     {

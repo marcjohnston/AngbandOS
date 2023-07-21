@@ -8,10 +8,11 @@
 namespace AngbandOS.Core.Talents;
 
 [Serializable]
-internal class TalentMajorDisplacement : Talent
+internal class MajorDisplacementTalent : Talent
 {
+    private MajorDisplacementTalent(SaveGame saveGame) : base(saveGame) { }
     public override string Name => "Major Displacement";
-    public override void Initialise(int characterClass)
+    public override void Initialize(int characterClass)
     {
         Level = 7;
         ManaCost = 6;

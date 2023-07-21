@@ -8,10 +8,11 @@
 namespace AngbandOS.Core.Talents;
 
 [Serializable]
-internal class TalentMindWave : Talent
+internal class MindWaveTalent : Talent
 {
+    private MindWaveTalent(SaveGame saveGame) : base(saveGame) { }
     public override string Name => "Mind Wave";
-    public override void Initialise(int characterClass)
+    public override void Initialize(int characterClass)
     {
         Level = 18;
         ManaCost = 10;

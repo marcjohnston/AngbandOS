@@ -103,7 +103,7 @@ internal class MentalismCastingType : CastingType
         sn = -1;
         bool flag = false;
         ScreenBuffer? savedScreen = null;
-        TalentList talents = SaveGame.Talents;
+        List<Talent> talents = SaveGame.Talents;
         for (i = 0; i < talents.Count; i++)
         {
             if (talents[i].Level <= plev)

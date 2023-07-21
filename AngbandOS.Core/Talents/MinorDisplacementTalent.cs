@@ -8,10 +8,11 @@
 namespace AngbandOS.Core.Talents;
 
 [Serializable]
-internal class TalentMinorDisplacement : Talent
+internal class MinorDisplacementTalent : Talent
 {
+    private MinorDisplacementTalent(SaveGame saveGame) : base(saveGame) { }
     public override string Name => "Minor Displacement";
-    public override void Initialise(int characterClass)
+    public override void Initialize(int characterClass)
     {
         Level = 3;
         ManaCost = 2;

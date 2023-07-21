@@ -8,10 +8,12 @@
 namespace AngbandOS.Core.Talents;
 
 [Serializable]
-internal class TalentAdrenalineChanneling : Talent
+internal class AdrenalineChannelingTalent : Talent
 {
+    private AdrenalineChannelingTalent(SaveGame saveGame) : base(saveGame) { }
+
     public override string Name => "Adrenaline Channeling";
-    public override void Initialise(int characterClass)
+    public override void Initialize(int characterClass)
     {
         Level = 23;
         ManaCost = 15;

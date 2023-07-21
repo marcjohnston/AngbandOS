@@ -176,7 +176,7 @@ internal class SaveGame
     /// </summary>
     public readonly Spell[][] Spells = new Spell[2][];
                                                           
-    public TalentList Talents;
+    public List<Talent> Talents;
 
     /// <summary>
     /// Represents the object responsible for saving the game, when needed.  If null, the game cannot be saved.

@@ -8,10 +8,11 @@
 namespace AngbandOS.Core.Talents;
 
 [Serializable]
-internal class TalentPsychometry : Talent
+internal class PsychometryTalent : Talent
 {
+    private PsychometryTalent(SaveGame saveGame) : base(saveGame) { }
     public override string Name => "Psychometry";
-    public override void Initialise(int characterClass)
+    public override void Initialize(int characterClass)
     {
         Level = 15;
         ManaCost = 12;
