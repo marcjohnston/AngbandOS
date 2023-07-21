@@ -378,14 +378,14 @@ internal class Monster : IItemContainer
         return desc;
     }
 
-    public void SanityBlast(SaveGame saveGame, bool necro)
+    public void SanityBlast(bool necro)
     {
-        Player player = SaveGame.Player;
+        Player player = this.SaveGame.Player;
         bool happened = false;
         int power = 100;
         if (necro)
         {
-            SaveGame.MsgPrint("Your sanity is shaken by reading the Necronomicon!");
+            this.SaveGame.MsgPrint("Your sanity is shaken by reading the Necronomicon!");
         }
         else
         {
@@ -402,7 +402,7 @@ internal class Monster : IItemContainer
                     power /= 2;
                 }
             }
-            if (!SaveGame.HackMind)
+            if (!this.SaveGame.HackMind)
             {
                 return;
             }
@@ -424,15 +424,15 @@ internal class Monster : IItemContainer
             }
             if (player.TimedHallucinations.TurnsRemaining != 0)
             {
-                SaveGame.MsgPrint($"You behold the {SaveGame.SingletonRepository.FunnyDescriptions.ToWeightedRandom().Choose()} visage of {mName}!");
+                this.SaveGame.MsgPrint($"You behold the {this.SaveGame.SingletonRepository.FunnyDescriptions.ToWeightedRandom().Choose()} visage of {mName}!");
                 if (Program.Rng.DieRoll(3) == 1)
                 {
-                    SaveGame.MsgPrint(SaveGame.SingletonRepository.FunnyComments.ToWeightedRandom().Choose());
+                    this.SaveGame.MsgPrint(this.SaveGame.SingletonRepository.FunnyComments.ToWeightedRandom().Choose());
                     player.TimedHallucinations.AddTimer(Program.Rng.DieRoll(Race.Level));
                 }
                 return;
             }
-            SaveGame.MsgPrint($"You behold the {SaveGame.SingletonRepository.HorrificDescriptions.ToWeightedRandom().Choose()} visage of {mName}!");
+            this.SaveGame.MsgPrint($"You behold the {this.SaveGame.SingletonRepository.HorrificDescriptions.ToWeightedRandom().Choose()} visage of {mName}!");
             Race.Knowledge.Characteristics.EldritchHorror = true;
 
             // Allow the race to resist.
@@ -495,22 +495,22 @@ internal class Monster : IItemContainer
             }
             if (happened)
             {
-                SaveGame.MsgPrint("You feel much less sane than before.");
+                this.SaveGame.MsgPrint("You feel much less sane than before.");
             }
             return;
         }
         if (Program.Rng.DieRoll(power) < player.SkillSavingThrow)
         {
-            if (SaveGame.LoseAllInfo())
+            if (this.SaveGame.LoseAllInfo())
             {
-                SaveGame.MsgPrint("You forget everything in your utmost terror!");
+                this.SaveGame.MsgPrint("You forget everything in your utmost terror!");
             }
             return;
         }
-        SaveGame.MsgPrint("The exposure to eldritch forces warps you.");
+        this.SaveGame.MsgPrint("The exposure to eldritch forces warps you.");
         player.Dna.GainMutation();
-        SaveGame.UpdateBonusesFlaggedAction.Set();
-        SaveGame.HandleStuff();
+        this.SaveGame.UpdateBonusesFlaggedAction.Set();
+        this.SaveGame.HandleStuff();
     }
 
     /// <summary>

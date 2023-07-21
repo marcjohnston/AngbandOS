@@ -177,7 +177,7 @@ internal abstract class Spell
         {
             if (subCategory == 3 && Program.Rng.DieRoll(2) == 1)
             {
-                SaveGame.Level.Monsters[0].SanityBlast(SaveGame, true);
+                SaveGame.Level.Monsters[0].SanityBlast(true);
             }
             else
             {

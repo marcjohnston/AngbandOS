@@ -2567,7 +2567,7 @@ internal class Level
             {
                 if (rPtr.EldritchHorror)
                 {
-                    mPtr.SanityBlast(SaveGame, false);
+                    mPtr.SanityBlast(false);
                 }
             }
             if ((mPtr.IndividualMonsterFlags & Constants.MflagView) == 0)
