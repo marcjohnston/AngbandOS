@@ -27,7 +27,7 @@ internal class CloseScript : Script
             int x = SaveGame.Player.MapX + SaveGame.Level.KeypadDirectionXOffset[dir];
             GridTile tile = SaveGame.Level.Grid[y][x];
             // Can only close actual open doors
-            if (tile.FeatureType.IsOpenDoor)
+            if (!tile.FeatureType.IsOpenDoor)
             {
                 SaveGame.MsgPrint("You see nothing there to close.");
             }
