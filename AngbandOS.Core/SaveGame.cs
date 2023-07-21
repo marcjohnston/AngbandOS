@@ -1405,7 +1405,7 @@ internal class SaveGame
         PersistentStorage = persistentStorage;
         KeySize = ConsoleViewPort.MaximumKeyQueueLength;
         KeyQueue = new char[ConsoleViewPort.MaximumKeyQueueLength];
-        Screen = new Screen(ConsoleViewPort.Width, ConsoleViewPort.Height);
+        Screen = new Screen(consoleViewPort);
         MapMovementKeys();
 
         FullScreenOverlay = true;
@@ -10559,20 +10559,20 @@ internal class SaveGame
         {
             len = 1;
         }
-        if (cursorPosition.X < 0 || cursorPosition.X >= ConsoleViewPort.Width)
+        if (cursorPosition.X < 0 || cursorPosition.X >= Screen.Width)
         {
             cursorPosition = new GridCoordinate(0, cursorPosition.Y);
         }
-        if (cursorPosition.X + len > ConsoleViewPort.Width)
+        if (cursorPosition.X + len > Screen.Width)
         {
-            len = ConsoleViewPort.Width - cursorPosition.X;
+            len = Screen.Width - cursorPosition.X;
         }
         Screen.Erase(cursorPosition.Y, cursorPosition.X, len);
         Screen.Print(ColourEnum.Grey, buf, cursorPosition.Y, cursorPosition.X);
         while (!done && !Shutdown)
         {
             Screen.Goto(cursorPosition.Y, cursorPosition.X + k);
-            Screen.UpdateScreen(ConsoleViewPort);
+            Screen.UpdateScreen();
             i = Inkey();
             switch (i)
             {
@@ -10814,7 +10814,7 @@ internal class SaveGame
     /// </summary>
     public void UpdateScreen()
     {
-        Screen.UpdateScreen(ConsoleViewPort);
+        Screen.UpdateScreen();
     }
 
     public void PlayMusic(MusicTrackEnum musicTrack)
@@ -15142,7 +15142,7 @@ internal class SaveGame
                         string oName = oPtr.Description(true, 3);
                         outVal = $"{s1}{s2}{s3}{oName} [{info}]";
                         Screen.PrintLine(outVal, 0, 0);
-                        Screen.UpdateScreen(ConsoleViewPort);
+                        Screen.UpdateScreen();
                         Level.MoveCursorRelative(y, x);
                         query = Inkey();
                         if (query != '\r' && query != '\n' && query != ' ')

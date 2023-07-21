@@ -53,10 +53,13 @@ internal class Screen
     /// </summary>
     public GridCoordinate CursorPosition => new GridCoordinate(ActiveScreen.Cx, ActiveScreen.Cy);
 
-    public Screen(int w, int h)
+    private IConsoleViewPort _consoleViewPort;
+
+    public Screen(IConsoleViewPort consoleViewPort)
     {
-        Width = w;
-        Height = h;
+        _consoleViewPort = consoleViewPort;    
+        Width = _consoleViewPort.Width;
+        Height = _consoleViewPort.Height;
 
         ActiveScreen = new ScreenBuffer(Width, Height);
         OldScreen = new ScreenBuffer(Width, Height);
@@ -69,10 +72,10 @@ internal class Screen
         TotalErase = true;
 
         // Initialize A, C, Va and Vc.  A and C are character indexes for each row so that we do not have to multiply.
-        RowStartingIndexArray = new int[h];
-        for (int y = 0; y < h; y++)
+        RowStartingIndexArray = new int[Height];
+        for (int y = 0; y < Height; y++)
         {
-            RowStartingIndexArray[y] = w * y;
+            RowStartingIndexArray[y] = Width * y;
         }
     }
 
@@ -184,7 +187,7 @@ internal class Screen
     /// <summary>
     /// Update the screen using a double buffer.  Only the window portion of the screen is checked.  The update window will be reverse reset so that no update would happen.
     /// </summary>
-    public void UpdateScreen(IConsoleViewPort console)
+    public void UpdateScreen()
     {
         // All commands to be sent to the console will be queued into a single response.
         List<PrintLine> batchPrintLines = new List<PrintLine>();
@@ -192,7 +195,7 @@ internal class Screen
         if (TotalErase)
         {
             // Emit a clear to the console.
-            console.Clear();
+            _consoleViewPort.Clear();
 
             // Clear out the double buffer so that all screen updates will write.
             Clear(OldScreen);
@@ -288,7 +291,7 @@ internal class Screen
         // Now emit the batched print objects to the console.
         if (batchPrintLines.Count > 0)
         {
-            console.BatchPrint(batchPrintLines.ToArray());
+            _consoleViewPort.BatchPrint(batchPrintLines.ToArray());
         }
     }
 

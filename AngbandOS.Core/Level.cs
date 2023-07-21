@@ -20,8 +20,17 @@ internal class Level
     public readonly int[] OrderedDirectionYOffset = { 1, -1, 0, 0, 1, 1, -1, -1, 0 };
     public readonly int[] TempX = new int[Constants.TempMax]; // TODO: Use CursorPositon and combine TempX and TempY into a list to absolve TempN
     public readonly int[] TempY = new int[Constants.TempMax];
+
+    /// <summary>
+    /// Appears to be the height of the level.
+    /// </summary>
     public int CurHgt;
+
+    /// <summary>
+    /// Appears to be the width of the level.
+    /// </summary>
     public int CurWid;
+
     public int DangerFeeling;
     public int DangerRating;
     public int MaxPanelCols;
@@ -32,13 +41,35 @@ internal class Level
     public int ObjectLevel;
 
     public int PanelCol;
+
+    /// <summary>
+    /// Returns the last level column of the playable area that is visible in the viewport.
+    /// </summary>
     public int PanelColMax;
+
+    /// <summary>
+    /// Returns the first level column of the playable area that is visible in the viewport.
+    /// </summary>
     public int PanelColMin;
+    
+    /// <summary>
+    /// Returns the first level column
+    /// </summary>
     public int PanelColPrt;
     public int PanelRow;
+
+    /// <summary>
+    /// Returns the last level row of the playable area that is visible in the viewport.
+    /// </summary>
     public int PanelRowMax;
+
+    /// <summary>
+    /// Returns the first level row of the playable area that is visible in the viewport.
+    /// </summary>
     public int PanelRowMin;
+
     public int PanelRowPrt;
+
     public bool SpecialDanger;
     public bool SpecialTreasure;
     public int TempN;
