@@ -253,8 +253,8 @@ internal class Level
         }
         x = maxx + 1;
         y = maxy + 1;
-        int xOffset = (80 - x) / 2;
-        int yOffset = (44 - y) / 2;
+        int xOffset = (SaveGame.Screen.Width - x) / 2;
+        int yOffset = (SaveGame.Screen.Height - 1 - y) / 2;
         mc[0][0] = '+';
         ma[0][0] = ColourEnum.Purple;
         mc[0][x] = '+';

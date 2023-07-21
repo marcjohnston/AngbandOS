@@ -29,14 +29,14 @@ internal class Screen
     private char CharBlank;
 
     /// <summary>
-    /// The height of the screen.
+    /// Returns the height of the screen.
     /// </summary>
-    private int Height;
+    public readonly int Height;
 
     /// <summary>
-    /// The width of the screen.
+    /// Returns the width of the screen.
     /// </summary>
-    private int Width;
+    public readonly int Width;
 
     /// <summary>
     /// Represents fast character index into the color and character array for each row.  0, 80, 160 etc
