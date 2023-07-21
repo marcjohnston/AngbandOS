@@ -45,7 +45,7 @@ internal class QuaffScript : Script
         if (identified && !item.IsFlavourAware())
         {
             item.BecomeFlavourAware();
-            SaveGame.Player.GainExperience((itemLevel + (SaveGame.Player.Level >> 1)) / SaveGame.Player.Level);
+            SaveGame.Player.GainExperience((itemLevel + (SaveGame.Player.ExperienceLevel >> 1)) / SaveGame.Player.ExperienceLevel);
         }
         // Most potions give us a bit of food too
         SaveGame.Player.SetFood(SaveGame.Player.Food + item.TypeSpecificValue);

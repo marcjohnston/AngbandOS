@@ -17,7 +17,7 @@ internal class FeetInventorySlot : EquipmentInventorySlot
     public override string MentionUse(int? index) => "On feet";
     public override string DescribeWieldLocation(int index) => "wearing on your feet";
     public override string DescribeItemLocation(Item oPtr) => "wearing on your feet";
-    public override int BareArmourClassBonus => SaveGame.Player.Level / 3;
+    public override int BareArmourClassBonus => SaveGame.Player.ExperienceLevel / 3;
     public override bool IsWeightRestricting => true;
     public override bool IsArmour => true;
     public override int SortOrder => 13;

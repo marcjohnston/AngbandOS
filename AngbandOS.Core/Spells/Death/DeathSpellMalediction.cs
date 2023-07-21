@@ -18,7 +18,7 @@ internal class DeathSpellMalediction : Spell
             return;
         }
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<HellFireProjectile>(), dir,
-            Program.Rng.DiceRoll(3 + ((SaveGame.Player.Level - 1) / 5), 3), 0);
+            Program.Rng.DiceRoll(3 + ((SaveGame.Player.ExperienceLevel - 1) / 5), 3), 0);
         if (Program.Rng.DieRoll(5) != 1)
         {
             return;
@@ -26,17 +26,17 @@ internal class DeathSpellMalediction : Spell
         int dummy = Program.Rng.DieRoll(1000);
         if (dummy == 666)
         {
-            SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<DeathRayProjectile>(), dir, SaveGame.Player.Level);
+            SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<DeathRayProjectile>(), dir, SaveGame.Player.ExperienceLevel);
         }
         if (dummy < 500)
         {
-            SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<TurnAllProjectile>(), dir, SaveGame.Player.Level);
+            SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<TurnAllProjectile>(), dir, SaveGame.Player.ExperienceLevel);
         }
         if (dummy < 800)
         {
-            SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<OldConfProjectile>(), dir, SaveGame.Player.Level);
+            SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<OldConfProjectile>(), dir, SaveGame.Player.ExperienceLevel);
         }
-        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<StunProjectile>(), dir, SaveGame.Player.Level);
+        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<StunProjectile>(), dir, SaveGame.Player.ExperienceLevel);
     }
 
     public override void CastFailed()
@@ -48,6 +48,6 @@ internal class DeathSpellMalediction : Spell
     
     protected override string? Info()
     {
-        return $"dam {3 + ((SaveGame.Player.Level - 1) / 5)}d3";
+        return $"dam {3 + ((SaveGame.Player.ExperienceLevel - 1) / 5)}d3";
     }
 }

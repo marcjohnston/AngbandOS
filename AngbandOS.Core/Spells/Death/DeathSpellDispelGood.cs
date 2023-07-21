@@ -13,7 +13,7 @@ internal class DeathSpellDispelGood : Spell
     private DeathSpellDispelGood(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.DispelGood(SaveGame.Player.Level * 4);
+        SaveGame.DispelGood(SaveGame.Player.ExperienceLevel * 4);
     }
 
     public override void CastFailed()
@@ -25,6 +25,6 @@ internal class DeathSpellDispelGood : Spell
     
     protected override string? Info()
     {
-        return $"dam {4 * SaveGame.Player.Level}";
+        return $"dam {4 * SaveGame.Player.ExperienceLevel}";
     }
 }

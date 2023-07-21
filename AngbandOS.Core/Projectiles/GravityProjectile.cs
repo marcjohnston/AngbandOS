@@ -71,7 +71,7 @@ internal class GravityProjectile : Projectile
                 }
                 note = " starts moving slower.";
             }
-            doStun = Program.Rng.DiceRoll((SaveGame.Player.Level / 10) + 3, dam) + 1;
+            doStun = Program.Rng.DiceRoll((SaveGame.Player.ExperienceLevel / 10) + 3, dam) + 1;
             if (rPtr.Unique || rPtr.Level > Program.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
             {
                 doStun = 0;

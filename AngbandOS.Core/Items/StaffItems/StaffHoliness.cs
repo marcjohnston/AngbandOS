@@ -29,7 +29,7 @@ internal class StaffHoliness : StaffItemClass
         {
             eventArgs.Identified = true;
         }
-        int k = 3 * SaveGame.Player.Level;
+        int k = 3 * SaveGame.Player.ExperienceLevel;
         if (SaveGame.Player.TimedProtectionFromEvil.AddTimer(Program.Rng.DieRoll(25) + k))
         {
             eventArgs.Identified = true;

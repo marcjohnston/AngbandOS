@@ -70,7 +70,7 @@ internal abstract class Spell
             return 100;
         }
         int chance = BaseFailure;
-        chance -= 3 * (SaveGame.Player.Level - Level);
+        chance -= 3 * (SaveGame.Player.ExperienceLevel - Level);
         chance -= 3 * (SaveGame.Player.AbilityScores[baseCharacterClass.SpellStat].SpellFailureReduction - 1);
         if (ManaCost > SaveGame.Player.Mana)
         {

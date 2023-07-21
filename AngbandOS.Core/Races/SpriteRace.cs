@@ -68,7 +68,7 @@ internal class SpriteRace : Race
         saveGame.Player.HasFeatherFall = true;
         saveGame.Player.HasGlow = true;
         saveGame.Player.HasLightResistance = true;
-        saveGame.Player.Speed += saveGame.Player.Level / 10;
+        saveGame.Player.Speed += saveGame.Player.ExperienceLevel / 10;
     }
 
     public override void UseRacialPower(SaveGame saveGame)
@@ -77,7 +77,7 @@ internal class SpriteRace : Race
         if (saveGame.CheckIfRacialPowerWorks(12, 12, Ability.Intelligence, 15))
         {
             saveGame.MsgPrint("You throw some magic dust...");
-            if (saveGame.Player.Level < 25)
+            if (saveGame.Player.ExperienceLevel < 25)
             {
                 saveGame.SleepMonstersTouch();
             }

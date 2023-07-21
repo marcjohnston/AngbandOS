@@ -25,7 +25,7 @@ internal class MutationFlatulent : Mutation
             saveGame.Disturb(false);
             saveGame.MsgPrint("BRRAAAP! Oops.");
             saveGame.MsgPrint(null);
-            saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), 0, saveGame.Player.Level, 3);
+            saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), 0, saveGame.Player.ExperienceLevel, 3);
         }
     }
 }

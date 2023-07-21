@@ -17,22 +17,22 @@ internal class DeathSpellDarkBolt : Spell
         switch (SaveGame.Player.BaseCharacterClass.ID)
         {
             case CharacterClass.Mage:
-                beam = SaveGame.Player.Level;
+                beam = SaveGame.Player.ExperienceLevel;
                 break;
 
             case CharacterClass.HighMage:
-                beam = SaveGame.Player.Level + 10;
+                beam = SaveGame.Player.ExperienceLevel + 10;
                 break;
 
             default:
-                beam = SaveGame.Player.Level / 2;
+                beam = SaveGame.Player.ExperienceLevel / 2;
                 break;
         }
         if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get<DarkProjectile>(), dir, Program.Rng.DiceRoll(4 + ((SaveGame.Player.Level - 5) / 4), 8));
+        SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get<DarkProjectile>(), dir, Program.Rng.DiceRoll(4 + ((SaveGame.Player.ExperienceLevel - 5) / 4), 8));
     }
 
     public override void CastFailed()
@@ -44,6 +44,6 @@ internal class DeathSpellDarkBolt : Spell
     
     protected override string? Info()
     {
-        return $"dam {4 + ((SaveGame.Player.Level - 5) / 4)}d8";
+        return $"dam {4 + ((SaveGame.Player.ExperienceLevel - 5) / 4)}d8";
     }
 }

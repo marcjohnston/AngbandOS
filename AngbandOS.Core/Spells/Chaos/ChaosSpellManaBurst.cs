@@ -17,9 +17,9 @@ internal class ChaosSpellManaBurst : Spell
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), dir, Program.Rng.DiceRoll(3, 5) + SaveGame.Player.Level + (SaveGame.Player.Level /
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), dir, Program.Rng.DiceRoll(3, 5) + SaveGame.Player.ExperienceLevel + (SaveGame.Player.ExperienceLevel /
             (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mage || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)),
-            SaveGame.Player.Level < 30 ? 2 : 3);
+            SaveGame.Player.ExperienceLevel < 30 ? 2 : 3);
     }
 
     public override void CastFailed()
@@ -30,7 +30,7 @@ internal class ChaosSpellManaBurst : Spell
     
     protected override string? Info() // TODO: Player to SaveGame
     {
-        int i = SaveGame.Player.Level + (SaveGame.Player.Level / (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mage || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4));
+        int i = SaveGame.Player.ExperienceLevel + (SaveGame.Player.ExperienceLevel / (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mage || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4));
         return $"dam 3d5+{i}";
     }
 }

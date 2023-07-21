@@ -17,8 +17,8 @@ internal class CorporealSpellHorrificVisage : Spell
         {
             return;
         }
-        SaveGame.FearMonster(dir, SaveGame.Player.Level);
-        SaveGame.StunMonster(dir, SaveGame.Player.Level);
+        SaveGame.FearMonster(dir, SaveGame.Player.ExperienceLevel);
+        SaveGame.StunMonster(dir, SaveGame.Player.ExperienceLevel);
     }
 
     public override string Name => "Horrific Visage";

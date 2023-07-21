@@ -19,7 +19,7 @@ internal class MutationTelekines : Mutation
         saveGame.MsgPrint("You concentrate...");
         if (saveGame.GetDirectionWithAim(out int dir))
         {
-            saveGame.SummonItem(dir, saveGame.Player.Level * 10, true);
+            saveGame.SummonItem(dir, saveGame.Player.ExperienceLevel * 10, true);
         }
     }
 

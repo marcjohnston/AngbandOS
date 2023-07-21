@@ -18,7 +18,7 @@ internal class DeathSpellBattleFrenzy : Spell
         SaveGame.Player.TimedFear.ResetTimer();
         if (SaveGame.Player.TimedHaste.TurnsRemaining == 0)
         {
-            SaveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(20 + (SaveGame.Player.Level / 2)) + (SaveGame.Player.Level / 2));
+            SaveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(20 + (SaveGame.Player.ExperienceLevel / 2)) + (SaveGame.Player.ExperienceLevel / 2));
         }
         else
         {

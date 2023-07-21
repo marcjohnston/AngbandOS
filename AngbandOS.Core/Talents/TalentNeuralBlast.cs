@@ -24,20 +24,20 @@ internal class TalentNeuralBlast : Talent
         {
             return;
         }
-        if (Program.Rng.DieRoll(100) < saveGame.Player.Level * 2)
+        if (Program.Rng.DieRoll(100) < saveGame.Player.ExperienceLevel * 2)
         {
             saveGame.FireBeam(saveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir,
-                Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 4), 3 + (saveGame.Player.Level / 15)));
+                Program.Rng.DiceRoll(3 + ((saveGame.Player.ExperienceLevel - 1) / 4), 3 + (saveGame.Player.ExperienceLevel / 15)));
         }
         else
         {
             saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir,
-                Program.Rng.DiceRoll(3 + ((saveGame.Player.Level - 1) / 4), 3 + (saveGame.Player.Level / 15)), 0);
+                Program.Rng.DiceRoll(3 + ((saveGame.Player.ExperienceLevel - 1) / 4), 3 + (saveGame.Player.ExperienceLevel / 15)), 0);
         }
     }
 
     protected override string Comment(Player player)
     {
-        return $"dam {3 + ((player.Level - 1) / 4)}d{3 + (player.Level / 15)}";
+        return $"dam {3 + ((player.ExperienceLevel - 1) / 4)}d{3 + (player.ExperienceLevel / 15)}";
     }
 }

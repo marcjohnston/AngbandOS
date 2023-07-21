@@ -38,7 +38,7 @@ internal class ChaosSpellMeteorSwarm : Spell
                 break;
             }
             count = 0;
-            SaveGame.Project(0, 2, y, x, SaveGame.Player.Level * 3 / 2, SaveGame.SingletonRepository.Projectiles.Get<MeteorProjectile>(),
+            SaveGame.Project(0, 2, y, x, SaveGame.Player.ExperienceLevel * 3 / 2, SaveGame.SingletonRepository.Projectiles.Get<MeteorProjectile>(),
                 ProjectionFlag.ProjectKill | ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem);
         }
     }
@@ -52,6 +52,6 @@ internal class ChaosSpellMeteorSwarm : Spell
     
     protected override string? Info()
     {
-        return $"dam {3 * SaveGame.Player.Level / 2} each";
+        return $"dam {3 * SaveGame.Player.ExperienceLevel / 2} each";
     }
 }

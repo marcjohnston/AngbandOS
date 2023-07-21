@@ -19,7 +19,7 @@ internal class MutationSpitAcid : Mutation
         saveGame.MsgPrint("You spit acid...");
         if (saveGame.GetDirectionWithAim(out int dir))
         {
-            saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir, saveGame.Player.Level, 1 + (saveGame.Player.Level / 30));
+            saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir, saveGame.Player.ExperienceLevel, 1 + (saveGame.Player.ExperienceLevel / 30));
         }
     }
 

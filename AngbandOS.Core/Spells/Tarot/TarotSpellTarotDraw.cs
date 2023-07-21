@@ -17,7 +17,7 @@ internal class TarotSpellTarotDraw : Spell
         int die = Program.Rng.DieRoll(120);
         if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Rogue || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage)
         {
-            die = Program.Rng.DieRoll(110) + (SaveGame.Player.Level / 5);
+            die = Program.Rng.DieRoll(110) + (SaveGame.Player.ExperienceLevel / 5);
         }
         SaveGame.MsgPrint("You shuffle your Tarot deck and draw a card...");
         if (die < 7)
@@ -76,7 +76,7 @@ internal class TarotSpellTarotDraw : Spell
         else if (die < 42)
         {
             SaveGame.MsgPrint("It's the Star.");
-            SaveGame.Player.TimedBlessing.AddTimer(SaveGame.Player.Level);
+            SaveGame.Player.TimedBlessing.AddTimer(SaveGame.Player.ExperienceLevel);
         }
         else if (die < 47)
         {
@@ -142,7 +142,7 @@ internal class TarotSpellTarotDraw : Spell
             {
                 return;
             }
-            SaveGame.CharmMonster(dir, Math.Min(SaveGame.Player.Level, 20));
+            SaveGame.CharmMonster(dir, Math.Min(SaveGame.Player.ExperienceLevel, 20));
         }
         else if (die < 101)
         {

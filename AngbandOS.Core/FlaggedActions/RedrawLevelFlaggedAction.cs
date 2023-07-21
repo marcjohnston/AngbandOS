@@ -15,8 +15,8 @@ internal class RedrawLevelFlaggedAction : FlaggedAction
     public RedrawLevelFlaggedAction(SaveGame saveGame) : base (saveGame) { }
     protected override void Execute()
     {
-        string tmp = SaveGame.Player.Level.ToString().PadLeft(6);
-        if (SaveGame.Player.Level >= SaveGame.Player.MaxLevelGained)
+        string tmp = SaveGame.Player.ExperienceLevel.ToString().PadLeft(6);
+        if (SaveGame.Player.ExperienceLevel >= SaveGame.Player.MaxLevelGained)
         {
             SaveGame.Screen.Print("LEVEL ", RowLevel, 0);
             SaveGame.Screen.Print(ColourEnum.BrightGreen, tmp, RowLevel, ColLevel + 6);

@@ -121,7 +121,18 @@ internal class SaveGame
     public int DungeonDifficulty;
     public int EnergyUse;
     public bool HackMind;
-    public Level Level;
+    private Level _level;
+    public Level Level
+    {
+        get
+        {
+            return _level;
+        }
+        set
+        {
+            _level = value;
+        }
+    }
     public bool NewLevelFlag;
     public Player Player;
     public bool Playing;
@@ -1362,7 +1373,7 @@ internal class SaveGame
         GameDetails gameDetails = new GameDetails()
         {
             CharacterName = player.Name, // The player parameter
-            Level = player.Level, // The player parameter
+            Level = player.ExperienceLevel, // The player parameter
             Gold = player.Gold, // The parameter
             IsAlive = Player != null, // If the player is dead, then the savegame Player will be null.
             Comments = ""
@@ -1496,7 +1507,7 @@ internal class SaveGame
                 MsgPrint(null);
                 if (Player.IsDead)
                 {
-                    ConsoleViewPort.PlayerDied(Player.Name, DiedFrom, Player.Level);
+                    ConsoleViewPort.PlayerDied(Player.Name, DiedFrom, Player.ExperienceLevel);
 
                     // Store the player info
                     ExPlayer = new ExPlayer(Player);
@@ -2565,9 +2576,9 @@ internal class SaveGame
         Level.ShimmerMonsters = true;
         Level.RepairMonsters = true;
         Disturb(true);
-        if (Player.MaxLevelGained < Player.Level)
+        if (Player.MaxLevelGained < Player.ExperienceLevel)
         {
-            Player.MaxLevelGained = Player.Level;
+            Player.MaxLevelGained = Player.ExperienceLevel;
         }
         if (CurDungeon.RecallLevel < CurrentDepth)
         {
@@ -2886,7 +2897,7 @@ internal class SaveGame
         CurrentDepth = 0;
         DiedFrom = "Ripe Old Age";
         Player.ExperiencePoints = Player.MaxExperienceGained;
-        Player.Level = Player.MaxLevelGained;
+        Player.ExperienceLevel = Player.MaxLevelGained;
         Player.Gold += 10000000;
         SetBackground(BackgroundImageEnum.Crown);
         Screen.Clear();
@@ -2909,12 +2920,12 @@ internal class SaveGame
             }
             Screen.Clear();
             string buf = corpse.Name.Trim() + corpse.Generation.ToRoman(true);
-            if (corpse.IsWinner || corpse.Level > Constants.PyMaxLevel)
+            if (corpse.IsWinner || corpse.ExperienceLevel > Constants.PyMaxLevel)
             {
                 buf += " the Magnificent";
             }
             Screen.Print(buf, 39, 1);
-            buf = $"Level {corpse.Level} {corpse.BaseCharacterClass.ClassSubName(corpse.PrimaryRealm)}";
+            buf = $"Level {corpse.ExperienceLevel} {corpse.BaseCharacterClass.ClassSubName(corpse.PrimaryRealm)}";
             Screen.Print(buf, 40, 1);
             string tmp = $"Killed on Level {CurrentDepth}".PadLeft(45);
             Screen.Print(tmp, 39, 34);
@@ -3202,7 +3213,7 @@ internal class SaveGame
         if (!Level.GridPassable(Player.MapY, Player.MapX))
         {
             caveNoRegen = true;
-            if (Player.TimedInvulnerability.TurnsRemaining == 0 && Player.TimedEtherealness.TurnsRemaining == 0 && (Player.Health > Player.Level / 5 || Player.Race.IsEthereal))
+            if (Player.TimedInvulnerability.TurnsRemaining == 0 && Player.TimedEtherealness.TurnsRemaining == 0 && (Player.Health > Player.ExperienceLevel / 5 || Player.Race.IsEthereal))
             {
                 string damDesc;
                 if (Player.Race.IsEthereal)
@@ -3215,7 +3226,7 @@ internal class SaveGame
                     MsgPrint("You are being crushed!");
                     damDesc = "solid rock";
                 }
-                Player.TakeHit(1 + (Player.Level / 5), damDesc);
+                Player.TakeHit(1 + (Player.ExperienceLevel / 5), damDesc);
             }
         }
         if (Player.TimedBleeding.TurnsRemaining != 0 && Player.TimedInvulnerability.TurnsRemaining == 0)
@@ -3312,7 +3323,7 @@ internal class SaveGame
             {
                 upkeepDivider = 12;
             }
-            if (TotalFriends > 1 + (Player.Level / upkeepDivider))
+            if (TotalFriends > 1 + (Player.ExperienceLevel / upkeepDivider))
             {
                 upkeepFactor = TotalFriendLevels;
                 if (upkeepFactor > 100)
@@ -4079,7 +4090,7 @@ internal class SaveGame
 
     public void CallChaos()
     {
-        int plev = Player.Level;
+        int plev = Player.ExperienceLevel;
         bool lineChaos = false;
         Projectile[] hurtTypes =
         {
@@ -5325,7 +5336,7 @@ internal class SaveGame
 
     public bool HasteMonsters()
     {
-        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get<OldSpeedProjectile>(), Player.Level);
+        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get<OldSpeedProjectile>(), Player.ExperienceLevel);
     }
 
     public bool HealMonster(int dir)
@@ -5518,7 +5529,7 @@ internal class SaveGame
     public bool PolyMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get<OldPolyProjectile>(), dir, Player.Level, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get<OldPolyProjectile>(), dir, Player.ExperienceLevel, flg);
     }
 
     public int PolymorphMonster(MonsterRace rPtr)
@@ -5825,7 +5836,7 @@ internal class SaveGame
                 inventoryCharacteristics.Merge(oPtr.Characteristics);
             }
         }
-        string[]? selfKnowledgeInfo = Player.Race.SelfKnowledge(Player.Level);
+        string[]? selfKnowledgeInfo = Player.Race.SelfKnowledge(Player.ExperienceLevel);
         if (selfKnowledgeInfo != null)
         {
             foreach (string infoLine in selfKnowledgeInfo)
@@ -6314,35 +6325,35 @@ internal class SaveGame
     public bool SleepMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get<OldSleepProjectile>(), dir, Player.Level, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get<OldSleepProjectile>(), dir, Player.ExperienceLevel, flg);
     }
 
     public bool SleepMonsters()
     {
-        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get<OldSleepProjectile>(), Player.Level);
+        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get<OldSleepProjectile>(), Player.ExperienceLevel);
     }
 
     public void SleepMonstersTouch()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectKill | ProjectionFlag.ProjectHide;
-        Project(0, 1, Player.MapY, Player.MapX, Player.Level, SingletonRepository.Projectiles.Get<OldSleepProjectile>(), flg);
+        Project(0, 1, Player.MapY, Player.MapX, Player.ExperienceLevel, SingletonRepository.Projectiles.Get<OldSleepProjectile>(), flg);
     }
 
     public bool SlowMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get<OldSlowProjectile>(), dir, Player.Level, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get<OldSlowProjectile>(), dir, Player.ExperienceLevel, flg);
     }
 
     public bool SlowMonsters()
     {
-        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get<OldSlowProjectile>(), Player.Level);
+        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get<OldSlowProjectile>(), Player.ExperienceLevel);
     }
 
     public bool SpeedMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get<OldSpeedProjectile>(), dir, Player.Level, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get<OldSpeedProjectile>(), dir, Player.ExperienceLevel, flg);
     }
 
     public void StairCreation()
@@ -6376,7 +6387,7 @@ internal class SaveGame
     public void StasisMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        TargetedProject(SingletonRepository.Projectiles.Get<StasisProjectile>(), dir, Player.Level, flg);
+        TargetedProject(SingletonRepository.Projectiles.Get<StasisProjectile>(), dir, Player.ExperienceLevel, flg);
     }
 
     public void StasisMonsters(int dam)
@@ -6695,7 +6706,7 @@ internal class SaveGame
     public void WallBreaker()
     {
         int dummy;
-        if (Program.Rng.DieRoll(80 + Player.Level) < 70)
+        if (Program.Rng.DieRoll(80 + Player.ExperienceLevel) < 70)
         {
             do
             {
@@ -7213,7 +7224,7 @@ internal class SaveGame
             UpdateViewFlaggedAction.Set();
             UpdateDistancesFlaggedAction.Set();
         }
-        else if (Program.Rng.RandomLessThan(100) < Player.AbilityScores[Ability.Dexterity].DexTheftAvoidance + Player.Level)
+        else if (Program.Rng.RandomLessThan(100) < Player.AbilityScores[Ability.Dexterity].DexTheftAvoidance + Player.ExperienceLevel)
         {
             MsgPrint("The door holds firm.");
             more = true;
@@ -7371,7 +7382,7 @@ internal class SaveGame
             string spell = Player.BaseCharacterClass.SpellCastingType.SpellNoun;
             MsgPrint($"You {cast} the {spell} too close to a wall!");
             MsgPrint("There is a loud explosion!");
-            DestroyArea(Player.MapY, Player.MapX, 20 + Player.Level);
+            DestroyArea(Player.MapY, Player.MapX, 20 + Player.ExperienceLevel);
             MsgPrint("The dungeon collapses...");
             Player.TakeHit(100 + Program.Rng.DieRoll(150), "a suicidal Call the Void");
         }
@@ -7390,7 +7401,7 @@ internal class SaveGame
         // If we don't have enough mana we'll use health instead
         bool useHealth = Player.Mana < cost;
         // Can't use it if we're too low level
-        if (Player.Level < minLevel)
+        if (Player.ExperienceLevel < minLevel)
         {
             MsgPrint($"You need to attain level {minLevel} to use this power.");
             EnergyUse = 0;
@@ -7418,9 +7429,9 @@ internal class SaveGame
             difficulty += Player.TimedStun.TurnsRemaining;
         }
         // Easier to use powers if you're higher level than you need to be
-        else if (Player.Level > minLevel)
+        else if (Player.ExperienceLevel > minLevel)
         {
-            int levAdj = (Player.Level - minLevel) / 3;
+            int levAdj = (Player.ExperienceLevel - minLevel) / 3;
             if (levAdj > 10)
             {
                 levAdj = 10;
@@ -8574,14 +8585,14 @@ internal class SaveGame
                         resistStun += 88;
                     }
                     // Have a number of attempts to choose a martial arts attack
-                    for (times = 0; times < (Player.Level < 7 ? 1 : Player.Level / 7); times++)
+                    for (times = 0; times < (Player.ExperienceLevel < 7 ? 1 : Player.ExperienceLevel / 7); times++)
                     {
                         // Choose an attack randomly, but reject it and re-choose if it's too
                         // high level or we fail a chance roll
                         do
                         {
                             martialArtsAttack = SingletonRepository.MartialArtsAttacks.ToWeightedRandom().Choose();
-                        } while (martialArtsAttack.MinLevel > Player.Level || Program.Rng.DieRoll(Player.Level) < martialArtsAttack.Chance);
+                        } while (martialArtsAttack.MinLevel > Player.ExperienceLevel || Program.Rng.DieRoll(Player.ExperienceLevel) < martialArtsAttack.Chance);
                         // We've chosen an attack, use it if it's better than the previous
                         // choice (unless we're stunned or confused in which case we're stuck
                         // with the weakest attack type
@@ -8633,7 +8644,7 @@ internal class SaveGame
                         MsgPrint(string.Format(martialArtsAttack.Desc, monsterName));
                     }
                     // It might be a critical hit
-                    totalDamage = PlayerCriticalMelee(Player.Level * Program.Rng.DieRoll(10), martialArtsAttack.MinLevel, totalDamage);
+                    totalDamage = PlayerCriticalMelee(Player.ExperienceLevel * Program.Rng.DieRoll(10), martialArtsAttack.MinLevel, totalDamage);
                     // Make a groin attack into a stunning attack
                     if (specialEffect == Constants.MaKnee && totalDamage + Player.DamageBonus < monster.Health)
                     {
@@ -8644,7 +8655,7 @@ internal class SaveGame
                     // Slow if we had a knee attack
                     else if (specialEffect == Constants.MaSlow && totalDamage + Player.DamageBonus < monster.Health)
                     {
-                        if (!race.Unique && Program.Rng.DieRoll(Player.Level) > race.Level &&
+                        if (!race.Unique && Program.Rng.DieRoll(Player.ExperienceLevel) > race.Level &&
                             monster.Speed > 60)
                         {
                             MsgPrint($"{monsterName} starts limping slower.");
@@ -8654,7 +8665,7 @@ internal class SaveGame
                     // Stun if we had a stunning attack
                     if (stunEffect != 0 && totalDamage + Player.DamageBonus < monster.Health)
                     {
-                        if (Player.Level > Program.Rng.DieRoll(race.Level + resistStun + 10))
+                        if (Player.ExperienceLevel > Program.Rng.DieRoll(race.Level + resistStun + 10))
                         {
                             MsgPrint(monster.StunLevel != 0 ? $"{monsterName} is more stunned." : $"{monsterName} is stunned.");
                             monster.StunLevel += stunEffect;
@@ -8670,7 +8681,7 @@ internal class SaveGame
                     // Extra damage for backstabbing
                     if (backstab)
                     {
-                        totalDamage *= 3 + (Player.Level / 40);
+                        totalDamage *= 3 + (Player.ExperienceLevel / 40);
                     }
                     else if (stabFleeing)
                     {
@@ -8779,7 +8790,7 @@ internal class SaveGame
                     else
                     {
                         MsgPrint($"{monsterName} appears confused.");
-                        monster.ConfusionLevel += 10 + (Program.Rng.RandomLessThan(Player.Level) / 5);
+                        monster.ConfusionLevel += 10 + (Program.Rng.RandomLessThan(Player.ExperienceLevel) / 5);
                     }
                 }
                 // A chaos blade might teleport the monster away
@@ -8882,7 +8893,7 @@ internal class SaveGame
     public int PlayerCriticalRanged(int weight, int plus, int damage)
     {
         // Chance of a critical is based on weight, level, and plusses
-        int i = weight + ((Player.AttackBonus + plus) * 4) + (Player.Level * 2);
+        int i = weight + ((Player.AttackBonus + plus) * 4) + (Player.ExperienceLevel * 2);
         if (Program.Rng.DieRoll(5000) <= i)
         {
             int k = weight + Program.Rng.DieRoll(500);
@@ -9880,7 +9891,7 @@ internal class SaveGame
     /// <returns> The damage total modified for a critical hit </returns>
     private int PlayerCriticalMelee(int weight, int plus, int damage)
     {
-        int i = weight + ((Player.AttackBonus + plus) * 5) + (Player.Level * 3);
+        int i = weight + ((Player.AttackBonus + plus) * 5) + (Player.ExperienceLevel * 3);
         if (Program.Rng.DieRoll(5000) <= i)
         {
             int k = weight + Program.Rng.DieRoll(650);
@@ -11121,7 +11132,7 @@ internal class SaveGame
     {
         int i;
         Player.MaxLevelGained = 1;
-        Player.Level = 1;
+        Player.ExperienceLevel = 1;
         Player.ExperienceMultiplier = Player.Race.ExperienceFactor + Player.BaseCharacterClass.ExperienceFactor;
         Player.HitDie = Player.Race.HitDieBonus + Player.BaseCharacterClass.HitDieBonus;
         Player.MaxHealth = Player.HitDie;
@@ -15307,7 +15318,7 @@ internal class SaveGame
                 }
             }
         }
-        return martialArtistArmWgt > 100 + (Player.Level * 4);
+        return martialArtistArmWgt > 100 + (Player.ExperienceLevel * 4);
     }
 
     public string RealmNames(BaseRealm? primaryRealm, BaseRealm? secondaryRealm, string defaultTitle = "None")
@@ -15880,4 +15891,13 @@ internal class SaveGame
             }
         }
     }
+
+
+    //////////////////////////////////////////////
+    // PLAYER START
+    //////////////////////////////////////////////
+
+    //////////////////////////////////////////////
+    // PLAYER END
+    //////////////////////////////////////////////
 }

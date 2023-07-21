@@ -49,7 +49,7 @@ internal class DeathRayProjectile : Projectile
         }
         else
         {
-            dam = SaveGame.Player.Level * 200;
+            dam = SaveGame.Player.ExperienceLevel * 200;
         }
         ApplyProjectileDamageToMonster(who, mPtr, dam, note);
         return obvious;

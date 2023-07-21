@@ -18,10 +18,10 @@ internal class SorcerySpellDimensionDoor : Spell
         {
             return;
         }
-        SaveGame.Player.Energy -= 60 - SaveGame.Player.Level;
+        SaveGame.Player.Energy -= 60 - SaveGame.Player.ExperienceLevel;
         if (!SaveGame.Level.GridPassableNoCreature(ij, ii) || SaveGame.Level.Grid[ij][ii].TileFlags.IsSet(GridTile.InVault) ||
-            SaveGame.Level.Distance(ij, ii, SaveGame.Player.MapY, SaveGame.Player.MapX) > SaveGame.Player.Level + 2 ||
-            Program.Rng.RandomLessThan(SaveGame.Player.Level * SaveGame.Player.Level / 2) == 0)
+            SaveGame.Level.Distance(ij, ii, SaveGame.Player.MapY, SaveGame.Player.MapX) > SaveGame.Player.ExperienceLevel + 2 ||
+            Program.Rng.RandomLessThan(SaveGame.Player.ExperienceLevel * SaveGame.Player.ExperienceLevel / 2) == 0)
         {
             SaveGame.MsgPrint("You fail to exit the astral plane correctly!");
             SaveGame.Player.Energy -= 100;
@@ -37,6 +37,6 @@ internal class SorcerySpellDimensionDoor : Spell
     
     protected override string? Info()
     {
-        return $"range {SaveGame.Player.Level + 2}";
+        return $"range {SaveGame.Player.ExperienceLevel + 2}";
     }
 }

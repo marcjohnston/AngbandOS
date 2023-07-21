@@ -17,15 +17,15 @@ internal class NatureSpellLightningBolt : Spell
         switch (SaveGame.Player.BaseCharacterClass.ID)
         {
             case CharacterClass.Mage:
-                beam = SaveGame.Player.Level;
+                beam = SaveGame.Player.ExperienceLevel;
                 break;
 
             case CharacterClass.HighMage:
-                beam = SaveGame.Player.Level + 10;
+                beam = SaveGame.Player.ExperienceLevel + 10;
                 break;
 
             default:
-                beam = SaveGame.Player.Level / 2;
+                beam = SaveGame.Player.ExperienceLevel / 2;
                 break;
         }
         if (!SaveGame.GetDirectionWithAim(out int dir))
@@ -33,13 +33,13 @@ internal class NatureSpellLightningBolt : Spell
             return;
         }
         SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir,
-            Program.Rng.DiceRoll(3 + ((SaveGame.Player.Level - 5) / 4), 8));
+            Program.Rng.DiceRoll(3 + ((SaveGame.Player.ExperienceLevel - 5) / 4), 8));
     }
 
     public override string Name => "Lightning Bolt";
     
     protected override string? Info()
     {
-        return $"dam {3 + ((SaveGame.Player.Level - 5) / 4)}d8";
+        return $"dam {3 + ((SaveGame.Player.ExperienceLevel - 5) / 4)}d8";
     }
 }

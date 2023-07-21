@@ -16,7 +16,7 @@ internal class ChaosWpReward : Reward
         SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
         SaveGame.MsgPrint("'Thy deed hath earned thee a worthy blade.'");
         ItemFactory reward;
-        switch (Program.Rng.DieRoll(SaveGame.Player.Level))
+        switch (Program.Rng.DieRoll(SaveGame.Player.ExperienceLevel))
         {
             case 1:
             case 2:

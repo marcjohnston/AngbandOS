@@ -20,7 +20,7 @@ internal class TalentMinorDisplacement : Talent
 
     public override void Use(SaveGame saveGame)
     {
-        if (saveGame.Player.Level < 25)
+        if (saveGame.Player.ExperienceLevel < 25)
         {
             saveGame.TeleportPlayer(10);
         }
@@ -31,11 +31,11 @@ internal class TalentMinorDisplacement : Talent
             {
                 return;
             }
-            saveGame.Player.Energy -= 60 - saveGame.Player.Level;
+            saveGame.Player.Energy -= 60 - saveGame.Player.ExperienceLevel;
             if (!saveGame.Level.GridPassableNoCreature(j, i) || saveGame.Level.Grid[j][i].TileFlags.IsSet(GridTile.InVault) ||
                 saveGame.Level.Grid[j][i].FeatureType.Name != "Water" ||
-                saveGame.Level.Distance(j, i, saveGame.Player.MapY, saveGame.Player.MapX) > saveGame.Player.Level + 2 ||
-                Program.Rng.RandomLessThan(saveGame.Player.Level * saveGame.Player.Level / 2) == 0)
+                saveGame.Level.Distance(j, i, saveGame.Player.MapY, saveGame.Player.MapX) > saveGame.Player.ExperienceLevel + 2 ||
+                Program.Rng.RandomLessThan(saveGame.Player.ExperienceLevel * saveGame.Player.ExperienceLevel / 2) == 0)
             {
                 saveGame.MsgPrint("Something disrupts your concentration!");
                 saveGame.Player.Energy -= 100;
@@ -50,6 +50,6 @@ internal class TalentMinorDisplacement : Talent
 
     protected override string Comment(Player player)
     {
-        return $"range {(player.Level < 25 ? 10 : player.Level + 2)}";
+        return $"range {(player.ExperienceLevel < 25 ? 10 : player.ExperienceLevel + 2)}";
     }
 }

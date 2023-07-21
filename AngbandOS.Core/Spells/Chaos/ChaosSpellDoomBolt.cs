@@ -17,7 +17,7 @@ internal class ChaosSpellDoomBolt : Spell
         {
             return;
         }
-        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), dir, Program.Rng.DiceRoll(11 + ((SaveGame.Player.Level - 5) / 4), 8));
+        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), dir, Program.Rng.DiceRoll(11 + ((SaveGame.Player.ExperienceLevel - 5) / 4), 8));
     }
 
     public override void CastFailed()
@@ -29,6 +29,6 @@ internal class ChaosSpellDoomBolt : Spell
     
     protected override string? Info()
     {
-        return $"dam {11 + ((SaveGame.Player.Level - 5) / 4)}d8";
+        return $"dam {11 + ((SaveGame.Player.ExperienceLevel - 5) / 4)}d8";
     }
 }

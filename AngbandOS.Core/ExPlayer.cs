@@ -77,7 +77,7 @@ internal class ExPlayer
         PrimaryRealm = player.PrimaryRealm;
         SecondaryRealm = player.SecondaryRealm;
         Name = player.Name;
-        Level = player.Level;
+        Level = player.ExperienceLevel;
         Generation = player.Generation;
     }
 }

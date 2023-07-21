@@ -13,9 +13,9 @@ internal class DeathSpellEvocation : Spell
     private DeathSpellEvocation(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.DispelMonsters(SaveGame.Player.Level * 4);
-        SaveGame.TurnMonsters(SaveGame.Player.Level * 4);
-        SaveGame.BanishMonsters(SaveGame.Player.Level * 4);
+        SaveGame.DispelMonsters(SaveGame.Player.ExperienceLevel * 4);
+        SaveGame.TurnMonsters(SaveGame.Player.ExperienceLevel * 4);
+        SaveGame.BanishMonsters(SaveGame.Player.ExperienceLevel * 4);
     }
 
     public override void CastFailed()
@@ -27,6 +27,6 @@ internal class DeathSpellEvocation : Spell
     
     protected override string? Info()
     {
-        return $"dam {SaveGame.Player.Level * 4}";
+        return $"dam {SaveGame.Player.ExperienceLevel * 4}";
     }
 }

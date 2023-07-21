@@ -68,7 +68,7 @@ internal class HalfTrollRace : Race
     public override void CalcBonuses(SaveGame saveGame)
     {
         saveGame.Player.HasSustainStrength = true;
-        if (saveGame.Player.Level > 14)
+        if (saveGame.Player.ExperienceLevel > 14)
         {
             saveGame.Player.HasRegeneration = true;
             saveGame.Player.HasSlowDigestion = true;
@@ -82,7 +82,7 @@ internal class HalfTrollRace : Race
         {
             saveGame.MsgPrint("RAAAGH!");
             saveGame.Player.TimedFear.ResetTimer();
-            saveGame.Player.TimedSuperheroism.AddTimer(10 + Program.Rng.DieRoll(saveGame.Player.Level));
+            saveGame.Player.TimedSuperheroism.AddTimer(10 + Program.Rng.DieRoll(saveGame.Player.ExperienceLevel));
             saveGame.Player.RestoreHealth(30);
         }
     }

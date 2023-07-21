@@ -13,7 +13,7 @@ internal class ChaosSpellSonicBoom : Spell
     private ChaosSpellSonicBoom(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Project(0, 2 + (SaveGame.Player.Level / 10), SaveGame.Player.MapY, SaveGame.Player.MapX, 45 + SaveGame.Player.Level,
+        SaveGame.Project(0, 2 + (SaveGame.Player.ExperienceLevel / 10), SaveGame.Player.MapY, SaveGame.Player.MapX, 45 + SaveGame.Player.ExperienceLevel,
             SaveGame.SingletonRepository.Projectiles.Get<SoundProjectile>(), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
     }
 
@@ -26,6 +26,6 @@ internal class ChaosSpellSonicBoom : Spell
     
     protected override string? Info()
     {
-        return $"dam {45 + SaveGame.Player.Level}";
+        return $"dam {45 + SaveGame.Player.ExperienceLevel}";
     }
 }

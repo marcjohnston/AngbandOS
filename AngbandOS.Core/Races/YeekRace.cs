@@ -64,7 +64,7 @@ internal class YeekRace : Race
     public override void CalcBonuses(SaveGame saveGame)
     {
         saveGame.Player.HasAcidResistance = true;
-        if (saveGame.Player.Level > 19)
+        if (saveGame.Player.ExperienceLevel > 19)
         {
             saveGame.Player.HasAcidImmunity = true;
         }
@@ -78,7 +78,7 @@ internal class YeekRace : Race
             if (saveGame.GetDirectionWithAim(out int direction))
             {
                 saveGame.MsgPrint("You make a horrible scream!");
-                saveGame.FearMonster(direction, saveGame.Player.Level);
+                saveGame.FearMonster(direction, saveGame.Player.ExperienceLevel);
             }
         }
     }

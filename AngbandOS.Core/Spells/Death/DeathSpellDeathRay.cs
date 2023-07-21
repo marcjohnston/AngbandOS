@@ -17,7 +17,7 @@ internal class DeathSpellDeathRay : Spell
         {
             return;
         }
-        SaveGame.DeathRay(dir, SaveGame.Player.Level);
+        SaveGame.DeathRay(dir, SaveGame.Player.ExperienceLevel);
     }
 
     public override void CastFailed()

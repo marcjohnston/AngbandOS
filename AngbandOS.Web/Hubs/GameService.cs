@@ -173,7 +173,7 @@ namespace AngbandOS.Web.Hubs
                         break;
 
                     // These events will not write a message to the database.
-                    case GameUpdateNotificationEnum.LevelChanged:
+                    case GameUpdateNotificationEnum.ExperienceLevelChanged:
                     case GameUpdateNotificationEnum.CharacterRenamed:
                     case GameUpdateNotificationEnum.GameTimeElapsed:
                     case GameUpdateNotificationEnum.InputReceived:
@@ -511,7 +511,7 @@ namespace AngbandOS.Web.Hubs
                 {
                     CharacterName = console.Value.CharacterName,
                     Gold = console.Value.Gold,
-                    Level = console.Value.Level,
+                    ExperienceLevel = console.Value.Level,
                     ElapsedGameTime = console.Value.ElapsedGameTime,
                     LastInputReceived = console.Value.LastInputReceived,
                     ConnectionId = console.Key,

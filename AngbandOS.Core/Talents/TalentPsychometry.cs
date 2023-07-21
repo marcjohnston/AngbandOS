@@ -20,7 +20,7 @@ internal class TalentPsychometry : Talent
 
     public override void Use(SaveGame saveGame)
     {
-        if (saveGame.Player.Level < 40)
+        if (saveGame.Player.ExperienceLevel < 40)
         {
             Psychometry(saveGame);
         }

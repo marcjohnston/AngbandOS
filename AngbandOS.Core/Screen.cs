@@ -53,6 +53,7 @@ internal class Screen
     /// </summary>
     public GridCoordinate CursorPosition => new GridCoordinate(ActiveScreen.Cx, ActiveScreen.Cy);
 
+    [NonSerialized]
     private IConsoleViewPort _consoleViewPort;
 
     public Screen(IConsoleViewPort consoleViewPort)

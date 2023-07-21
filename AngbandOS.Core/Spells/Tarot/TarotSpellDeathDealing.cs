@@ -13,13 +13,13 @@ internal class TarotSpellDeathDealing : Spell
     private TarotSpellDeathDealing(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.DispelLiving(SaveGame.Player.Level * 3);
+        SaveGame.DispelLiving(SaveGame.Player.ExperienceLevel * 3);
     }
 
     public override string Name => "Death Dealing";
     
     protected override string? Info()
     {
-        return $"dam {SaveGame.Player.Level * 3}";
+        return $"dam {SaveGame.Player.ExperienceLevel * 3}";
     }
 }

@@ -18,9 +18,9 @@
         public string ConnectionId { get; set; }
 
         /// <summary>
-        /// Returns the current level of the player or null, if the player is dead.
+        /// Returns the current experience level of the player or null, if the player is dead.
         /// </summary>
-        public int? Level { get; set; }
+        public int? ExperienceLevel { get; set; }
 
         /// <summary>
         /// Returns the current amount of gold the player has or null, if the player is dead.

@@ -27,6 +27,6 @@ internal class MutationWraith : Mutation
         saveGame.Disturb(false);
         saveGame.MsgPrint("You feel insubstantial!");
         saveGame.MsgPrint(null);
-        saveGame.Player.TimedEtherealness.AddTimer(Program.Rng.DieRoll(saveGame.Player.Level / 2) + saveGame.Player.Level / 2);
+        saveGame.Player.TimedEtherealness.AddTimer(Program.Rng.DieRoll(saveGame.Player.ExperienceLevel / 2) + saveGame.Player.ExperienceLevel / 2);
     }
 }

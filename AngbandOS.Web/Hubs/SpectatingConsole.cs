@@ -6,6 +6,10 @@ public class SpectatingConsole : IViewPort
 {
     private readonly ISpectatingHub _gameHub;
 
+    public int Height => 45;
+
+    public int Width => 80;
+
     public SpectatingConsole(ISpectatingHub gameHub)
     {
         _gameHub = gameHub;
@@ -52,7 +56,7 @@ public class SpectatingConsole : IViewPort
     {
     }
 
-    public void LevelChanged(int level)
+    public void ExperienceLevelChanged(int level)
     {
     }
 

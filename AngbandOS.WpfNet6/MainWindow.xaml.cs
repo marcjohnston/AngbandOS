@@ -471,7 +471,7 @@ namespace Cthangband
         {
         }
 
-        public void LevelChanged(int level)
+        public void ExperienceLevelChanged(int level)
         {
         }
 

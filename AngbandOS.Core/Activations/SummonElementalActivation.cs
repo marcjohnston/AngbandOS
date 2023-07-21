@@ -20,7 +20,7 @@ internal class SummonElementalActivation : Activation
     {
         if (Program.Rng.DieRoll(3) == 1)
         {
-            if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, (int)(SaveGame.Player.Level * 1.5), new ElementalMonsterSelector()))
+            if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, (int)(SaveGame.Player.ExperienceLevel * 1.5), new ElementalMonsterSelector()))
             {
                 SaveGame.MsgPrint("An elemental materializes...");
                 SaveGame.MsgPrint("You fail to control it!");
@@ -28,7 +28,7 @@ internal class SummonElementalActivation : Activation
         }
         else
         {
-            if (SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, (int)(SaveGame.Player.Level * 1.5), new ElementalMonsterSelector(), SaveGame.Player.Level == 50))
+            if (SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, (int)(SaveGame.Player.ExperienceLevel * 1.5), new ElementalMonsterSelector(), SaveGame.Player.ExperienceLevel == 50))
             {
                 SaveGame.MsgPrint("An elemental materializes...");
                 SaveGame.MsgPrint("It seems obedient to you.");

@@ -89,7 +89,7 @@ internal class DisintegrateProjectile : Projectile
         }
         if (rPtr.Unique)
         {
-            if (Program.Rng.RandomLessThan(rPtr.Level + 10) > Program.Rng.RandomLessThan(SaveGame.Player.Level))
+            if (Program.Rng.RandomLessThan(rPtr.Level + 10) > Program.Rng.RandomLessThan(SaveGame.Player.ExperienceLevel))
             {
                 note = " resists.";
                 dam >>= 3;

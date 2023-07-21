@@ -29,7 +29,7 @@ public class GameServer
             if (SaveGame?.Player == null)
                 return null;
             else
-                return SaveGame.Player.Level;
+                return SaveGame.Player.ExperienceLevel;
         }
     }
 

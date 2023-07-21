@@ -13,7 +13,7 @@ internal class ChaosSpellFlameStrike : Spell
     private ChaosSpellFlameStrike(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), 0, 150 + (2 * SaveGame.Player.Level), 8);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), 0, 150 + (2 * SaveGame.Player.ExperienceLevel), 8);
     }
 
     public override void CastFailed()
@@ -25,6 +25,6 @@ internal class ChaosSpellFlameStrike : Spell
     
     protected override string? Info()
     {
-        return $"dam {150 + (SaveGame.Player.Level * 2)}";
+        return $"dam {150 + (SaveGame.Player.ExperienceLevel * 2)}";
     }
 }

@@ -20,6 +20,6 @@ internal class SorcerySpellYellowSign : Spell
     
     protected override string? Info()
     {
-        return $"dam 7d7+{SaveGame.Player.Level / 2}";
+        return $"dam 7d7+{SaveGame.Player.ExperienceLevel / 2}";
     }
 }

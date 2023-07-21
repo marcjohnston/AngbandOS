@@ -45,7 +45,7 @@ internal class DominationProjectile : Projectile
                 }
             }
             doConf = 0;
-            if ((rPtr.Undead || rPtr.Demon) && rPtr.Level > SaveGame.Player.Level / 2 && Program.Rng.DieRoll(2) == 1)
+            if ((rPtr.Undead || rPtr.Demon) && rPtr.Level > SaveGame.Player.ExperienceLevel / 2 && Program.Rng.DieRoll(2) == 1)
             {
                 string s = seen ? "'s" : "s";
                 SaveGame.MsgPrint($"{mName}{s} corrupted mind backlashes your attack!");

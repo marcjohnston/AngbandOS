@@ -100,7 +100,7 @@ internal class BleedingTimedAction : TimedAction
 
     public override bool SetTimer(int value)
     {
-        if (!SaveGame.Player.Race.CanBleed(SaveGame.Player.Level))
+        if (!SaveGame.Player.Race.CanBleed(SaveGame.Player.ExperienceLevel))
         {
             value = 0;
         }

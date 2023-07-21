@@ -18,7 +18,7 @@ internal class ChaosSpellGravityBeam : Spell
             return;
         }
         SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<GravityProjectile>(), dir,
-            Program.Rng.DiceRoll(9 + ((SaveGame.Player.Level - 5) / 4), 8));
+            Program.Rng.DiceRoll(9 + ((SaveGame.Player.ExperienceLevel - 5) / 4), 8));
     }
 
     public override void CastFailed()
@@ -30,6 +30,6 @@ internal class ChaosSpellGravityBeam : Spell
     
     protected override string? Info()
     {
-        return $"dam {9 + ((SaveGame.Player.Level - 5) / 4)}d8";
+        return $"dam {9 + ((SaveGame.Player.ExperienceLevel - 5) / 4)}d8";
     }
 }

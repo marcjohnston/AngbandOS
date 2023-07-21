@@ -21,19 +21,19 @@ internal class TalentMindWave : Talent
     public override void Use(SaveGame saveGame)
     {
         saveGame.MsgPrint("Mind-warping forces emanate from your brain!");
-        if (saveGame.Player.Level < 25)
+        if (saveGame.Player.ExperienceLevel < 25)
         {
-            saveGame.Project(0, 2 + (saveGame.Player.Level / 10), saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.Level * 3 / 2,
+            saveGame.Project(0, 2 + (saveGame.Player.ExperienceLevel / 10), saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.ExperienceLevel * 3 / 2,
                 saveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), ProjectionFlag.ProjectKill);
         }
         else
         {
-            saveGame.MindblastMonsters(saveGame.Player.Level * (((saveGame.Player.Level - 5) / 10) + 1));
+            saveGame.MindblastMonsters(saveGame.Player.ExperienceLevel * (((saveGame.Player.ExperienceLevel - 5) / 10) + 1));
         }
     }
 
     protected override string Comment(Player player)
     {
-        return player.Level < 25 ? $"dam {player.Level * 3 / 2}" : $"dam {player.Level * (((player.Level - 5) / 10) + 1)}";
+        return player.ExperienceLevel < 25 ? $"dam {player.ExperienceLevel * 3 / 2}" : $"dam {player.ExperienceLevel * (((player.ExperienceLevel - 5) / 10) + 1)}";
     }
 }

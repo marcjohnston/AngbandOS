@@ -32,7 +32,7 @@ internal class MutationWeirdMind : Mutation
         else
         {
             saveGame.MsgPrint("Your mind expands!");
-            saveGame.Player.TimedTelepathy.SetTimer(saveGame.Player.Level);
+            saveGame.Player.TimedTelepathy.SetTimer(saveGame.Player.ExperienceLevel);
         }
     }
 }

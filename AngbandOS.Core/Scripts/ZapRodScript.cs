@@ -89,7 +89,7 @@ internal class ZapRodScript : Script
         if (identified && !item.IsFlavourAware())
         {
             item.BecomeFlavourAware();
-            SaveGame.Player.GainExperience((itemLevel + (SaveGame.Player.Level >> 1)) / SaveGame.Player.Level);
+            SaveGame.Player.GainExperience((itemLevel + (SaveGame.Player.ExperienceLevel >> 1)) / SaveGame.Player.ExperienceLevel);
         }
         // We may not have actually used a charge
         if (!useCharge)

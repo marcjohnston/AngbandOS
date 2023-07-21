@@ -17,7 +17,7 @@ internal class GemstoneLightSourceItem : LightSourceItem
             if (SaveGame.Player.TimedInvulnerability.TurnsRemaining == 0)
             {
                 SaveGame.MsgPrint("The Jewel of Judgement drains life from you!");
-                SaveGame.Player.TakeHit(Math.Min(SaveGame.Player.Level, 50), "the Jewel of Judgement");
+                SaveGame.Player.TakeHit(Math.Min(SaveGame.Player.ExperienceLevel, 50), "the Jewel of Judgement");
             }
         }
     }

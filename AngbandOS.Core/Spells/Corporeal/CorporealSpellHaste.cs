@@ -15,7 +15,7 @@ internal class CorporealSpellHaste : Spell
     {
         if (SaveGame.Player.TimedHaste.TurnsRemaining == 0)
         {
-            SaveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(20 + SaveGame.Player.Level) + SaveGame.Player.Level);
+            SaveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(20 + SaveGame.Player.ExperienceLevel) + SaveGame.Player.ExperienceLevel);
         }
         else
         {
@@ -27,6 +27,6 @@ internal class CorporealSpellHaste : Spell
     
     protected override string? Info()
     {
-        return $"dur {SaveGame.Player.Level}+d{20 + SaveGame.Player.Level}";
+        return $"dur {SaveGame.Player.ExperienceLevel}+d{20 + SaveGame.Player.ExperienceLevel}";
     }
 }

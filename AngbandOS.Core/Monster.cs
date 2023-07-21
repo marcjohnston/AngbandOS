@@ -436,7 +436,7 @@ internal class Monster : IItemContainer
             Race.Knowledge.Characteristics.EldritchHorror = true;
 
             // Allow the race to resist.
-            if (Program.Rng.DieRoll(100) < player.Race.ChanceOfSanityBlastImmunity(player.Level))
+            if (Program.Rng.DieRoll(100) < player.Race.ChanceOfSanityBlastImmunity(player.ExperienceLevel))
             {
                 return;
             }
@@ -964,7 +964,7 @@ internal class Monster : IItemContainer
                         if (newY == saveGame.Player.MapY && newX == saveGame.Player.MapX)
                         {
                             saveGame.MsgPrint("The rune explodes!");
-                            saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), 0, 2 * ((saveGame.Player.Level / 2) + Program.Rng.DiceRoll(7, 7)), 2);
+                            saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), 0, 2 * ((saveGame.Player.ExperienceLevel / 2) + Program.Rng.DiceRoll(7, 7)), 2);
                         }
                         else
                         {
@@ -2643,7 +2643,7 @@ internal class Monster : IItemContainer
         {
             return false;
         }
-        int playerLevel = saveGame.Player.Level;
+        int playerLevel = saveGame.Player.ExperienceLevel;
         int monsterLevel = Race.Level + (GetMonsterIndex() & 0x08) + 25;
         // If we're tougher than the player, don't move away
         if (monsterLevel > playerLevel + 4)
@@ -2733,7 +2733,7 @@ internal class Monster : IItemContainer
                 {
                     saveGame.Disturb(true);
                     // Protection From Evil might repel the attack
-                    if (saveGame.Player.TimedProtectionFromEvil.TurnsRemaining > 0 && Race.Evil && saveGame.Player.Level >= monsterLevel && Program.Rng.RandomLessThan(100) + saveGame.Player.Level > 50)
+                    if (saveGame.Player.TimedProtectionFromEvil.TurnsRemaining > 0 && Race.Evil && saveGame.Player.ExperienceLevel >= monsterLevel && Program.Rng.RandomLessThan(100) + saveGame.Player.ExperienceLevel > 50)
                     {
                         if (IsVisible)
                         {

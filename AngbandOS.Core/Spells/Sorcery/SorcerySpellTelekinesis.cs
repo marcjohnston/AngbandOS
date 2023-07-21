@@ -17,13 +17,13 @@ internal class SorcerySpellTelekinesis : Spell
         {
             return;
         }
-        SaveGame.SummonItem(dir, SaveGame.Player.Level * 15, false);
+        SaveGame.SummonItem(dir, SaveGame.Player.ExperienceLevel * 15, false);
     }
 
     public override string Name => "Telekinesis";
     
     protected override string? Info()
     {
-        return $"max wgt {SaveGame.Player.Level * 15 / 10}";
+        return $"max wgt {SaveGame.Player.ExperienceLevel * 15 / 10}";
     }
 }

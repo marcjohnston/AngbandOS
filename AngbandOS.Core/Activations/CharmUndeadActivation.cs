@@ -22,7 +22,7 @@ internal class CharmUndeadActivation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.ControlOneUndead(direction, SaveGame.Player.Level);
+        SaveGame.ControlOneUndead(direction, SaveGame.Player.ExperienceLevel);
         return true;
     }
 

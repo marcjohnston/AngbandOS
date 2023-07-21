@@ -17,7 +17,7 @@ internal class DeathSpellVampiricDrain : Spell
         {
             return;
         }
-        int dummy = SaveGame.Player.Level + (Program.Rng.DieRoll(SaveGame.Player.Level) * Math.Max(1, SaveGame.Player.Level / 10));
+        int dummy = SaveGame.Player.ExperienceLevel + (Program.Rng.DieRoll(SaveGame.Player.ExperienceLevel) * Math.Max(1, SaveGame.Player.ExperienceLevel / 10));
         if (!SaveGame.DrainLife(dir, dummy))
         {
             return;
@@ -39,6 +39,6 @@ internal class DeathSpellVampiricDrain : Spell
     
     protected override string? Info()
     {
-        return $"dam {Math.Max(1, SaveGame.Player.Level / 10)}d{SaveGame.Player.Level}+{SaveGame.Player.Level}";
+        return $"dam {Math.Max(1, SaveGame.Player.ExperienceLevel / 10)}d{SaveGame.Player.ExperienceLevel}+{SaveGame.Player.ExperienceLevel}";
     }
 }

@@ -113,58 +113,58 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         SaveGame.Player.SkillRanged = SaveGame.Player.Race.BaseRangedAttackBonus + SaveGame.Player.BaseCharacterClass.BaseRangedAttackBonus;
         SaveGame.Player.SkillThrowing = SaveGame.Player.Race.BaseRangedAttackBonus + SaveGame.Player.BaseCharacterClass.BaseRangedAttackBonus;
         SaveGame.Player.SkillDigging = 0;
-        if ((SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Warrior && SaveGame.Player.Level > 29) ||
-            (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Paladin && SaveGame.Player.Level > 39) ||
-            (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Fanatic && SaveGame.Player.Level > 39))
+        if ((SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Warrior && SaveGame.Player.ExperienceLevel > 29) ||
+            (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Paladin && SaveGame.Player.ExperienceLevel > 39) ||
+            (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Fanatic && SaveGame.Player.ExperienceLevel > 39))
         {
             SaveGame.Player.HasFearResistance = true;
         }
-        if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Fanatic && SaveGame.Player.Level > 29)
+        if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Fanatic && SaveGame.Player.ExperienceLevel > 29)
         {
             SaveGame.Player.HasChaosResistance = true;
         }
-        if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Cultist && SaveGame.Player.Level > 19)
+        if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Cultist && SaveGame.Player.ExperienceLevel > 19)
         {
             SaveGame.Player.HasChaosResistance = true;
         }
         if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mindcrafter)
         {
-            if (SaveGame.Player.Level > 9)
+            if (SaveGame.Player.ExperienceLevel > 9)
             {
                 SaveGame.Player.HasFearResistance = true;
             }
-            if (SaveGame.Player.Level > 19)
+            if (SaveGame.Player.ExperienceLevel > 19)
             {
                 SaveGame.Player.HasSustainWisdom = true;
             }
-            if (SaveGame.Player.Level > 29)
+            if (SaveGame.Player.ExperienceLevel > 29)
             {
                 SaveGame.Player.HasConfusionResistance = true;
             }
-            if (SaveGame.Player.Level > 39)
+            if (SaveGame.Player.ExperienceLevel > 39)
             {
                 SaveGame.Player.HasTelepathy = true;
             }
         }
-        if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Monk && SaveGame.Player.Level > 24 && !SaveGame.MartialArtistHeavyArmour())
+        if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Monk && SaveGame.Player.ExperienceLevel > 24 && !SaveGame.MartialArtistHeavyArmour())
         {
             SaveGame.Player.HasFreeAction = true;
         }
         if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mystic)
         {
-            if (SaveGame.Player.Level > 9)
+            if (SaveGame.Player.ExperienceLevel > 9)
             {
                 SaveGame.Player.HasConfusionResistance = true;
             }
-            if (SaveGame.Player.Level > 24)
+            if (SaveGame.Player.ExperienceLevel > 24)
             {
                 SaveGame.Player.HasFearResistance = true;
             }
-            if (SaveGame.Player.Level > 29 && !SaveGame.MartialArtistHeavyArmour())
+            if (SaveGame.Player.ExperienceLevel > 29 && !SaveGame.MartialArtistHeavyArmour())
             {
                 SaveGame.Player.HasFreeAction = true;
             }
-            if (SaveGame.Player.Level > 39)
+            if (SaveGame.Player.ExperienceLevel > 39)
             {
                 SaveGame.Player.HasTelepathy = true;
             }
@@ -172,103 +172,103 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.ChosenOne)
         {
             SaveGame.Player.HasGlow = true;
-            if (SaveGame.Player.Level >= 2)
+            if (SaveGame.Player.ExperienceLevel >= 2)
             {
                 SaveGame.Player.HasConfusionResistance = true;
             }
-            if (SaveGame.Player.Level >= 4)
+            if (SaveGame.Player.ExperienceLevel >= 4)
             {
                 SaveGame.Player.HasFearResistance = true;
             }
-            if (SaveGame.Player.Level >= 6)
+            if (SaveGame.Player.ExperienceLevel >= 6)
             {
                 SaveGame.Player.HasBlindnessResistance = true;
             }
-            if (SaveGame.Player.Level >= 8)
+            if (SaveGame.Player.ExperienceLevel >= 8)
             {
                 SaveGame.Player.HasFeatherFall = true;
             }
-            if (SaveGame.Player.Level >= 10)
+            if (SaveGame.Player.ExperienceLevel >= 10)
             {
                 SaveGame.Player.HasSeeInvisibility = true;
             }
-            if (SaveGame.Player.Level >= 12)
+            if (SaveGame.Player.ExperienceLevel >= 12)
             {
                 SaveGame.Player.HasSlowDigestion = true;
             }
-            if (SaveGame.Player.Level >= 14)
+            if (SaveGame.Player.ExperienceLevel >= 14)
             {
                 SaveGame.Player.HasSustainConstitution = true;
             }
-            if (SaveGame.Player.Level >= 16)
+            if (SaveGame.Player.ExperienceLevel >= 16)
             {
                 SaveGame.Player.HasPoisonResistance = true;
             }
-            if (SaveGame.Player.Level >= 18)
+            if (SaveGame.Player.ExperienceLevel >= 18)
             {
                 SaveGame.Player.HasSustainDexterity = true;
             }
-            if (SaveGame.Player.Level >= 20)
+            if (SaveGame.Player.ExperienceLevel >= 20)
             {
                 SaveGame.Player.HasSustainStrength = true;
             }
-            if (SaveGame.Player.Level >= 22)
+            if (SaveGame.Player.ExperienceLevel >= 22)
             {
                 SaveGame.Player.HasHoldLife = true;
             }
-            if (SaveGame.Player.Level >= 24)
+            if (SaveGame.Player.ExperienceLevel >= 24)
             {
                 SaveGame.Player.HasFreeAction = true;
             }
-            if (SaveGame.Player.Level >= 26)
+            if (SaveGame.Player.ExperienceLevel >= 26)
             {
                 SaveGame.Player.HasTelepathy = true;
             }
-            if (SaveGame.Player.Level >= 28)
+            if (SaveGame.Player.ExperienceLevel >= 28)
             {
                 SaveGame.Player.HasDarkResistance = true;
             }
-            if (SaveGame.Player.Level >= 30)
+            if (SaveGame.Player.ExperienceLevel >= 30)
             {
                 SaveGame.Player.HasLightResistance = true;
             }
-            if (SaveGame.Player.Level >= 32)
+            if (SaveGame.Player.ExperienceLevel >= 32)
             {
                 SaveGame.Player.HasSustainCharisma = true;
             }
-            if (SaveGame.Player.Level >= 34)
+            if (SaveGame.Player.ExperienceLevel >= 34)
             {
                 SaveGame.Player.HasSoundResistance = true;
             }
-            if (SaveGame.Player.Level >= 36)
+            if (SaveGame.Player.ExperienceLevel >= 36)
             {
                 SaveGame.Player.HasDisenchantResistance = true;
             }
-            if (SaveGame.Player.Level >= 38)
+            if (SaveGame.Player.ExperienceLevel >= 38)
             {
                 SaveGame.Player.HasRegeneration = true;
             }
-            if (SaveGame.Player.Level >= 40)
+            if (SaveGame.Player.ExperienceLevel >= 40)
             {
                 SaveGame.Player.HasSustainIntelligence = true;
             }
-            if (SaveGame.Player.Level >= 42)
+            if (SaveGame.Player.ExperienceLevel >= 42)
             {
                 SaveGame.Player.HasChaosResistance = true;
             }
-            if (SaveGame.Player.Level >= 44)
+            if (SaveGame.Player.ExperienceLevel >= 44)
             {
                 SaveGame.Player.HasSustainWisdom = true;
             }
-            if (SaveGame.Player.Level >= 46)
+            if (SaveGame.Player.ExperienceLevel >= 46)
             {
                 SaveGame.Player.HasNexusResistance = true;
             }
-            if (SaveGame.Player.Level >= 48)
+            if (SaveGame.Player.ExperienceLevel >= 48)
             {
                 SaveGame.Player.HasShardResistance = true;
             }
-            if (SaveGame.Player.Level >= 50)
+            if (SaveGame.Player.ExperienceLevel >= 50)
             {
                 SaveGame.Player.HasNetherResistance = true;
             }
@@ -307,7 +307,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         SaveGame.Player.HasElementalVulnerability |= SaveGame.Player.Dna.Vulnerable;
         if (SaveGame.Player.Dna.MagicResistance)
         {
-            SaveGame.Player.SkillSavingThrow += 15 + (SaveGame.Player.Level / 5);
+            SaveGame.Player.SkillSavingThrow += 15 + (SaveGame.Player.ExperienceLevel / 5);
         }
         if (SaveGame.Player.Dna.SuppressRegen)
         {
@@ -320,23 +320,23 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         if (SaveGame.Player.Dna.SustainAll)
         {
             SaveGame.Player.HasSustainConstitution = true;
-            if (SaveGame.Player.Level > 9)
+            if (SaveGame.Player.ExperienceLevel > 9)
             {
                 SaveGame.Player.HasSustainStrength = true;
             }
-            if (SaveGame.Player.Level > 19)
+            if (SaveGame.Player.ExperienceLevel > 19)
             {
                 SaveGame.Player.HasSustainDexterity = true;
             }
-            if (SaveGame.Player.Level > 29)
+            if (SaveGame.Player.ExperienceLevel > 29)
             {
                 SaveGame.Player.HasSustainWisdom = true;
             }
-            if (SaveGame.Player.Level > 39)
+            if (SaveGame.Player.ExperienceLevel > 39)
             {
                 SaveGame.Player.HasSustainIntelligence = true;
             }
-            if (SaveGame.Player.Level > 49)
+            if (SaveGame.Player.ExperienceLevel > 49)
             {
                 SaveGame.Player.HasSustainCharisma = true;
             }
@@ -647,9 +647,9 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 .ModifyStatValue(SaveGame.Player.AbilityScores[i].Innate, SaveGame.Player.AbilityScores[i].Bonus);
             if (i == Ability.Charisma && SaveGame.Player.Dna.CharismaOverride)
             {
-                if (use < 8 + (2 * SaveGame.Player.Level))
+                if (use < 8 + (2 * SaveGame.Player.ExperienceLevel))
                 {
-                    use = 8 + (2 * SaveGame.Player.Level);
+                    use = 8 + (2 * SaveGame.Player.ExperienceLevel);
                 }
             }
             if (SaveGame.Player.AbilityScores[i].Adjusted != use)
@@ -761,7 +761,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         }
         if ((SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Monk || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mystic) && !SaveGame.MartialArtistHeavyArmour())
         {
-            SaveGame.Player.Speed += SaveGame.Player.Level / 10;
+            SaveGame.Player.Speed += SaveGame.Player.ExperienceLevel / 10;
         }
         if (SaveGame.Player.TimedTelepathy.TurnsRemaining != 0)
         {
@@ -846,11 +846,11 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                         SaveGame.Player.AmmunitionItemCategory = missileWeaponItemCategory.AmmunitionItemCategory;
                         if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Ranger && SaveGame.Player.AmmunitionItemCategory == ItemTypeEnum.Arrow)
                         {
-                            if (SaveGame.Player.Level >= 20)
+                            if (SaveGame.Player.ExperienceLevel >= 20)
                             {
                                 SaveGame.Player.MissileAttacksPerRound++;
                             }
-                            if (SaveGame.Player.Level >= 40)
+                            if (SaveGame.Player.ExperienceLevel >= 40)
                             {
                                 SaveGame.Player.MissileAttacksPerRound++;
                             }
@@ -858,11 +858,11 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                         if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Warrior && SaveGame.Player.AmmunitionItemCategory <= ItemTypeEnum.Bolt &&
                             SaveGame.Player.AmmunitionItemCategory >= ItemTypeEnum.Shot)
                         {
-                            if (SaveGame.Player.Level >= 25)
+                            if (SaveGame.Player.ExperienceLevel >= 25)
                             {
                                 SaveGame.Player.MissileAttacksPerRound++;
                             }
-                            if (SaveGame.Player.Level >= 50)
+                            if (SaveGame.Player.ExperienceLevel >= 50)
                             {
                                 SaveGame.Player.MissileAttacksPerRound++;
                             }
@@ -891,7 +891,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 }
                 if (oPtr != null && !SaveGame.Player.HasHeavyWeapon)
                 {
-                    int num = SaveGame.Player.BaseCharacterClass.MaximumMeleeAttacksPerRound(SaveGame.Player.Level);
+                    int num = SaveGame.Player.BaseCharacterClass.MaximumMeleeAttacksPerRound(SaveGame.Player.ExperienceLevel);
                     int wgt = SaveGame.Player.BaseCharacterClass.MaximumWeight;
                     int mul = SaveGame.Player.BaseCharacterClass.AttackSpeedMultiplier;
                     int div = oPtr.Weight < wgt ? wgt : oPtr.Weight;
@@ -913,7 +913,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     SaveGame.Player.MeleeAttacksPerRound += extraBlows;
                     if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Warrior)
                     {
-                        SaveGame.Player.MeleeAttacksPerRound += SaveGame.Player.Level / 15;
+                        SaveGame.Player.MeleeAttacksPerRound += SaveGame.Player.ExperienceLevel / 15;
                     }
                     if (SaveGame.Player.MeleeAttacksPerRound < 1)
                     {
@@ -924,31 +924,31 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 else if ((SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Monk || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mystic) && SaveGame.MartialArtistEmptyHands())
                 {
                     SaveGame.Player.MeleeAttacksPerRound = 0;
-                    if (SaveGame.Player.Level > 9)
+                    if (SaveGame.Player.ExperienceLevel > 9)
                     {
                         SaveGame.Player.MeleeAttacksPerRound++;
                     }
-                    if (SaveGame.Player.Level > 19)
+                    if (SaveGame.Player.ExperienceLevel > 19)
                     {
                         SaveGame.Player.MeleeAttacksPerRound++;
                     }
-                    if (SaveGame.Player.Level > 29)
+                    if (SaveGame.Player.ExperienceLevel > 29)
                     {
                         SaveGame.Player.MeleeAttacksPerRound++;
                     }
-                    if (SaveGame.Player.Level > 34)
+                    if (SaveGame.Player.ExperienceLevel > 34)
                     {
                         SaveGame.Player.MeleeAttacksPerRound++;
                     }
-                    if (SaveGame.Player.Level > 39)
+                    if (SaveGame.Player.ExperienceLevel > 39)
                     {
                         SaveGame.Player.MeleeAttacksPerRound++;
                     }
-                    if (SaveGame.Player.Level > 44)
+                    if (SaveGame.Player.ExperienceLevel > 44)
                     {
                         SaveGame.Player.MeleeAttacksPerRound++;
                     }
-                    if (SaveGame.Player.Level > 49)
+                    if (SaveGame.Player.ExperienceLevel > 49)
                     {
                         SaveGame.Player.MeleeAttacksPerRound++;
                     }
@@ -959,10 +959,10 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     SaveGame.Player.MeleeAttacksPerRound += 1 + extraBlows;
                     if (!SaveGame.MartialArtistHeavyArmour())
                     {
-                        SaveGame.Player.AttackBonus += SaveGame.Player.Level / 3;
-                        SaveGame.Player.DamageBonus += SaveGame.Player.Level / 3;
-                        SaveGame.Player.DisplayedAttackBonus += SaveGame.Player.Level / 3;
-                        SaveGame.Player.DisplayedDamageBonus += SaveGame.Player.Level / 3;
+                        SaveGame.Player.AttackBonus += SaveGame.Player.ExperienceLevel / 3;
+                        SaveGame.Player.DamageBonus += SaveGame.Player.ExperienceLevel / 3;
+                        SaveGame.Player.DisplayedAttackBonus += SaveGame.Player.ExperienceLevel / 3;
+                        SaveGame.Player.DisplayedDamageBonus += SaveGame.Player.ExperienceLevel / 3;
                     }
                 }
 
@@ -970,10 +970,10 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 MartialArtistArmourAux = false;
                 if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Warrior)
                 {
-                    SaveGame.Player.AttackBonus += SaveGame.Player.Level / 5;
-                    SaveGame.Player.DamageBonus += SaveGame.Player.Level / 5;
-                    SaveGame.Player.DisplayedAttackBonus += SaveGame.Player.Level / 5;
-                    SaveGame.Player.DisplayedDamageBonus += SaveGame.Player.Level / 5;
+                    SaveGame.Player.AttackBonus += SaveGame.Player.ExperienceLevel / 5;
+                    SaveGame.Player.DamageBonus += SaveGame.Player.ExperienceLevel / 5;
+                    SaveGame.Player.DisplayedAttackBonus += SaveGame.Player.ExperienceLevel / 5;
+                    SaveGame.Player.DisplayedDamageBonus += SaveGame.Player.ExperienceLevel / 5;
                 }
                 if ((SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Priest || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Druid) && !SaveGame.Player.HasBlessedBlade && oPtr != null && (oPtr.Category == ItemTypeEnum.Sword || oPtr.Category == ItemTypeEnum.Polearm))
                 {
@@ -998,15 +998,15 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         SaveGame.Player.SkillUseDevice += SaveGame.Player.AbilityScores[Ability.Intelligence].IntUseDeviceBonus;
         SaveGame.Player.SkillSavingThrow += SaveGame.Player.AbilityScores[Ability.Wisdom].WisSavingThrowBonus;
         SaveGame.Player.SkillDigging += SaveGame.Player.AbilityScores[Ability.Strength].StrDiggingBonus;
-        SaveGame.Player.SkillDisarmTraps += (SaveGame.Player.BaseCharacterClass.DisarmBonusPerLevel * SaveGame.Player.Level) / 10;
-        SaveGame.Player.SkillUseDevice += (SaveGame.Player.BaseCharacterClass.DeviceBonusPerLevel * SaveGame.Player.Level) / 10;
-        SaveGame.Player.SkillSavingThrow += (SaveGame.Player.BaseCharacterClass.SaveBonusPerLevel * SaveGame.Player.Level) / 10;
-        SaveGame.Player.SkillStealth += (SaveGame.Player.BaseCharacterClass.StealthBonusPerLevel * SaveGame.Player.Level) / 10;
-        SaveGame.Player.SkillSearching += (SaveGame.Player.BaseCharacterClass.SearchBonusPerLevel * SaveGame.Player.Level) / 10;
-        SaveGame.Player.SkillSearchFrequency += (SaveGame.Player.BaseCharacterClass.SearchFrequencyPerLevel * SaveGame.Player.Level) / 10;
-        SaveGame.Player.SkillMelee += (SaveGame.Player.BaseCharacterClass.MeleeAttackBonusPerLevel * SaveGame.Player.Level) / 10;
-        SaveGame.Player.SkillRanged += (SaveGame.Player.BaseCharacterClass.RangedAttackBonusPerLevel * SaveGame.Player.Level) / 10;
-        SaveGame.Player.SkillThrowing += (SaveGame.Player.BaseCharacterClass.RangedAttackBonusPerLevel * SaveGame.Player.Level) / 10;
+        SaveGame.Player.SkillDisarmTraps += (SaveGame.Player.BaseCharacterClass.DisarmBonusPerLevel * SaveGame.Player.ExperienceLevel) / 10;
+        SaveGame.Player.SkillUseDevice += (SaveGame.Player.BaseCharacterClass.DeviceBonusPerLevel * SaveGame.Player.ExperienceLevel) / 10;
+        SaveGame.Player.SkillSavingThrow += (SaveGame.Player.BaseCharacterClass.SaveBonusPerLevel * SaveGame.Player.ExperienceLevel) / 10;
+        SaveGame.Player.SkillStealth += (SaveGame.Player.BaseCharacterClass.StealthBonusPerLevel * SaveGame.Player.ExperienceLevel) / 10;
+        SaveGame.Player.SkillSearching += (SaveGame.Player.BaseCharacterClass.SearchBonusPerLevel * SaveGame.Player.ExperienceLevel) / 10;
+        SaveGame.Player.SkillSearchFrequency += (SaveGame.Player.BaseCharacterClass.SearchFrequencyPerLevel * SaveGame.Player.ExperienceLevel) / 10;
+        SaveGame.Player.SkillMelee += (SaveGame.Player.BaseCharacterClass.MeleeAttackBonusPerLevel * SaveGame.Player.ExperienceLevel) / 10;
+        SaveGame.Player.SkillRanged += (SaveGame.Player.BaseCharacterClass.RangedAttackBonusPerLevel * SaveGame.Player.ExperienceLevel) / 10;
+        SaveGame.Player.SkillThrowing += (SaveGame.Player.BaseCharacterClass.RangedAttackBonusPerLevel * SaveGame.Player.ExperienceLevel) / 10;
         if (SaveGame.Player.SkillStealth > 30)
         {
             SaveGame.Player.SkillStealth = 30;

@@ -18,7 +18,7 @@ internal class CastingType
     {
         SaveGame = saveGame;
     }
-    public virtual int Levels => SaveGame.Player.Level;
+    public virtual int Levels => SaveGame.Player.ExperienceLevel;
 
     /// <summary>
     /// Returns the verb to use for casting.  Returns "cast" by default.  Divine casting type returns "recite".

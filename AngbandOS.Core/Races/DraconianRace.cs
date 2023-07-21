@@ -77,23 +77,23 @@ internal class DraconianRace : Race
     public override void CalcBonuses(SaveGame saveGame)
     {
         saveGame.Player.HasFeatherFall = true;
-        if (saveGame.Player.Level > 4)
+        if (saveGame.Player.ExperienceLevel > 4)
         {
             saveGame.Player.HasFireResistance = true;
         }
-        if (saveGame.Player.Level > 9)
+        if (saveGame.Player.ExperienceLevel > 9)
         {
             saveGame.Player.HasColdResistance = true;
         }
-        if (saveGame.Player.Level > 14)
+        if (saveGame.Player.ExperienceLevel > 14)
         {
             saveGame.Player.HasAcidResistance = true;
         }
-        if (saveGame.Player.Level > 19)
+        if (saveGame.Player.ExperienceLevel > 19)
         {
             saveGame.Player.HasLightningResistance = true;
         }
-        if (saveGame.Player.Level > 34)
+        if (saveGame.Player.ExperienceLevel > 34)
         {
             saveGame.Player.HasPoisonResistance = true;
         }
@@ -118,7 +118,7 @@ internal class DraconianRace : Race
         }
 
         // Chance of replacing the default fire/cold element with a special one
-        if (Program.Rng.DieRoll(100) < saveGame.Player.Level)
+        if (Program.Rng.DieRoll(100) < saveGame.Player.ExperienceLevel)
         {
             switch (saveGame.Player.BaseCharacterClass.ID)
             {
@@ -223,12 +223,12 @@ internal class DraconianRace : Race
                     break;
             }
         }
-        if (saveGame.CheckIfRacialPowerWorks(1, saveGame.Player.Level, Ability.Constitution, 12))
+        if (saveGame.CheckIfRacialPowerWorks(1, saveGame.Player.ExperienceLevel, Ability.Constitution, 12))
         {
             if (saveGame.GetDirectionWithAim(out int direction))
             {
                 saveGame.MsgPrint($"You breathe {projectileDescription}.");
-                saveGame.FireBall(projectile, direction, saveGame.Player.Level * 2, -(saveGame.Player.Level / 15) + 1);
+                saveGame.FireBall(projectile, direction, saveGame.Player.ExperienceLevel * 2, -(saveGame.Player.ExperienceLevel / 15) + 1);
             }
         }
     }

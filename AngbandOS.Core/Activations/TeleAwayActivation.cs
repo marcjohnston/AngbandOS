@@ -20,7 +20,7 @@ internal class TeleAwayActivation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<TeleportAwayAllProjectile>(), direction, SaveGame.Player.Level);
+        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<TeleportAwayAllProjectile>(), direction, SaveGame.Player.ExperienceLevel);
         return true;
     }
 

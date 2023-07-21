@@ -70,10 +70,10 @@ public interface IViewPort
     void CharacterRenamed(string name);
 
     /// <summary>
-    /// Called when the level that the player is on changes.
+    /// Called when the experience level for the player changes.
     /// </summary>
     /// <param name="level"></param>
-    void LevelChanged(int level);
+    void ExperienceLevelChanged(int level);
 
     /// <summary>
     /// Called when the game starts.

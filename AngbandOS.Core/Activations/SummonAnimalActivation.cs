@@ -18,7 +18,7 @@ internal class SummonAnimalActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new AnimalRangerMonsterSelector(), true);
+        SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.ExperienceLevel, new AnimalRangerMonsterSelector(), true);
         return true;
     }
 

@@ -24,7 +24,7 @@ internal class RedrawTitleFlaggedAction : FlaggedAction
         {
             PrtField("-=<WIZARD>=-", RowTitle, ColTitle);
         }
-        else if (SaveGame.Player.IsWinner || SaveGame.Player.Level > Constants.PyMaxLevel)
+        else if (SaveGame.Player.IsWinner || SaveGame.Player.ExperienceLevel > Constants.PyMaxLevel)
         {
             PrtField("***WINNER***", RowTitle, ColTitle);
         }

@@ -17,8 +17,8 @@ internal class ChaosSpellDisintegrate : Spell
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<DisintegrateProjectile>(), dir, 80 + SaveGame.Player.Level,
-            3 + (SaveGame.Player.Level / 40));
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<DisintegrateProjectile>(), dir, 80 + SaveGame.Player.ExperienceLevel,
+            3 + (SaveGame.Player.ExperienceLevel / 40));
     }
 
     public override void CastFailed()
@@ -30,6 +30,6 @@ internal class ChaosSpellDisintegrate : Spell
     
     protected override string? Info()
     {
-        return $"dam {80 + SaveGame.Player.Level}";
+        return $"dam {80 + SaveGame.Player.ExperienceLevel}";
     }
 }

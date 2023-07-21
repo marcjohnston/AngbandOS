@@ -78,7 +78,7 @@ internal class SpectreRace : Race
         saveGame.Player.HasSlowDigestion = true;
         saveGame.Player.HasColdResistance = true;
         saveGame.Player.HasGlow = true;
-        if (saveGame.Player.Level > 34)
+        if (saveGame.Player.ExperienceLevel > 34)
         {
             saveGame.Player.HasTelepathy = true;
         }
@@ -104,7 +104,7 @@ internal class SpectreRace : Race
             saveGame.MsgPrint("You emit an eldritch howl!");
             if (saveGame.GetDirectionWithAim(out int direction))
             {
-                saveGame.FearMonster(direction, saveGame.Player.Level);
+                saveGame.FearMonster(direction, saveGame.Player.ExperienceLevel);
             }
         }
     }

@@ -13,7 +13,7 @@ internal class SorcerySpellRecharging : Spell
     private SorcerySpellRecharging(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Recharge(SaveGame.Player.Level * 2);
+        SaveGame.Recharge(SaveGame.Player.ExperienceLevel * 2);
     }
 
     public override string Name => "Recharging";

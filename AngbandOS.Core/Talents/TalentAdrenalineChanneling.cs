@@ -22,9 +22,9 @@ internal class TalentAdrenalineChanneling : Talent
     {
         saveGame.Player.TimedFear.ResetTimer();
         saveGame.Player.TimedStun.ResetTimer();
-        saveGame.Player.RestoreHealth(saveGame.Player.Level);
-        int i = 10 + Program.Rng.DieRoll(saveGame.Player.Level * 3 / 2);
-        if (saveGame.Player.Level < 35)
+        saveGame.Player.RestoreHealth(saveGame.Player.ExperienceLevel);
+        int i = 10 + Program.Rng.DieRoll(saveGame.Player.ExperienceLevel * 3 / 2);
+        if (saveGame.Player.ExperienceLevel < 35)
         {
             saveGame.Player.TimedHeroism.AddTimer(i);
         }
@@ -44,6 +44,6 @@ internal class TalentAdrenalineChanneling : Talent
 
     protected override string Comment(Player player)
     {
-        return $"dur 10+d{player.Level * 3 / 2}";
+        return $"dur 10+d{player.ExperienceLevel * 3 / 2}";
     }
 }

@@ -17,7 +17,7 @@ internal class ChaosSpellTeleportOther : Spell
         {
             return;
         }
-        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<TeleportAwayAllProjectile>(), dir, SaveGame.Player.Level);
+        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<TeleportAwayAllProjectile>(), dir, SaveGame.Player.ExperienceLevel);
     }
 
     public override void CastFailed()

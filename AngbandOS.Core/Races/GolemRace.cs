@@ -68,7 +68,7 @@ internal class GolemRace : Race
     }
     public override void CalcBonuses(SaveGame saveGame)
     {
-        if (saveGame.Player.Level > 34)
+        if (saveGame.Player.ExperienceLevel > 34)
         {
             saveGame.Player.HasHoldLife = true;
         }
@@ -76,8 +76,8 @@ internal class GolemRace : Race
         saveGame.Player.HasFreeAction = true;
         saveGame.Player.HasSeeInvisibility = true;
         saveGame.Player.HasPoisonResistance = true;
-        saveGame.Player.ArmourClassBonus += 20 + (saveGame.Player.Level / 5);
-        saveGame.Player.DisplayedArmourClassBonus += 20 + (saveGame.Player.Level / 5);
+        saveGame.Player.ArmourClassBonus += 20 + (saveGame.Player.ExperienceLevel / 5);
+        saveGame.Player.DisplayedArmourClassBonus += 20 + (saveGame.Player.ExperienceLevel / 5);
     }
 
     public override void Eat(FoodItem item)

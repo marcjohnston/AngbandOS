@@ -17,7 +17,7 @@ internal class CorporealSpellHypnoticEyes : Spell
         {
             return;
         }
-        SaveGame.CharmMonster(dir, SaveGame.Player.Level);
+        SaveGame.CharmMonster(dir, SaveGame.Player.ExperienceLevel);
     }
 
     public override string Name => "Hypnotic Eyes";

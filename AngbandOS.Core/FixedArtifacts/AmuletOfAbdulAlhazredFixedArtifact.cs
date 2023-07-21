@@ -20,7 +20,7 @@ internal class AmuletOfAbdulAlhazredFixedArtifact : FixedArtifact, IFixedArtifac
     public void ActivateItem(SaveGame saveGame, Item item)
     {
         saveGame.MsgPrint("The amulet floods the area with goodness...");
-        saveGame.DispelEvil(saveGame.Player.Level * 5);
+        saveGame.DispelEvil(saveGame.Player.ExperienceLevel * 5);
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
     }
     public string DescribeActivationEffect() => "dispel evil (x5) every 300+d300 turns";

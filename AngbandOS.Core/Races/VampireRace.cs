@@ -92,7 +92,7 @@ internal class VampireRace : Race
     public override void UseRacialPower(SaveGame saveGame)
     {
         // Vampires can drain health
-        if (saveGame.CheckIfRacialPowerWorks(2, 1 + (saveGame.Player.Level / 3), Ability.Constitution, 9))
+        if (saveGame.CheckIfRacialPowerWorks(2, 1 + (saveGame.Player.ExperienceLevel / 3), Ability.Constitution, 9))
         {
             if (saveGame.GetDirectionNoAim(out int direction))
             {
@@ -106,7 +106,7 @@ internal class VampireRace : Race
                 else
                 {
                     saveGame.MsgPrint("You grin and bare your fangs...");
-                    int dummy = saveGame.Player.Level + (Program.Rng.DieRoll(saveGame.Player.Level) * Math.Max(1, saveGame.Player.Level / 10));
+                    int dummy = saveGame.Player.ExperienceLevel + (Program.Rng.DieRoll(saveGame.Player.ExperienceLevel) * Math.Max(1, saveGame.Player.ExperienceLevel / 10));
                     if (saveGame.DrainLife(direction, dummy))
                     {
                         if (saveGame.Player.Food < Constants.PyFoodFull)

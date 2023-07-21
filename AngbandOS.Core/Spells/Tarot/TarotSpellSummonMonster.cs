@@ -16,12 +16,12 @@ internal class TarotSpellSummonMonster : Spell
         SaveGame.MsgPrint("You concentrate on the image of a monster...");
         if (Program.Rng.DieRoll(5) > 2)
         {
-            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new NoUniquesMonsterSelector(), false))
+            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.ExperienceLevel, new NoUniquesMonsterSelector(), false))
             {
                 SaveGame.MsgPrint("No-one ever turns up.");
             }
         }
-        else if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, null))
+        else if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.ExperienceLevel, null))
         {
             SaveGame.MsgPrint("The summoned creature gets angry!");
         }

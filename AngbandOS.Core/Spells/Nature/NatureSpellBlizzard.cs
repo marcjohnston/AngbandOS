@@ -17,13 +17,13 @@ internal class NatureSpellBlizzard : Spell
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 70 + SaveGame.Player.Level, (SaveGame.Player.Level / 12) + 1);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 70 + SaveGame.Player.ExperienceLevel, (SaveGame.Player.ExperienceLevel / 12) + 1);
     }
 
     public override string Name => "Blizzard";
     
     protected override string? Info()
     {
-        return $"dam {70 + SaveGame.Player.Level}";
+        return $"dam {70 + SaveGame.Player.ExperienceLevel}";
     }
 }

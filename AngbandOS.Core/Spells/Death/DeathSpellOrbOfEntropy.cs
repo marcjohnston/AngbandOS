@@ -18,9 +18,9 @@ internal class DeathSpellOrbOfEntropy : Spell
             return;
         }
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<OldDrainProjectile>(), dir,
-            Program.Rng.DiceRoll(3, 6) + SaveGame.Player.Level + (SaveGame.Player.Level /
+            Program.Rng.DiceRoll(3, 6) + SaveGame.Player.ExperienceLevel + (SaveGame.Player.ExperienceLevel /
             (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mage || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)),
-            SaveGame.Player.Level < 30 ? 2 : 3);
+            SaveGame.Player.ExperienceLevel < 30 ? 2 : 3);
     }
 
     public override void CastFailed()
@@ -32,7 +32,7 @@ internal class DeathSpellOrbOfEntropy : Spell
     
     protected override string? Info()
     {
-        int s = SaveGame.Player.Level + (SaveGame.Player.Level / (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mage || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4));
+        int s = SaveGame.Player.ExperienceLevel + (SaveGame.Player.ExperienceLevel / (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mage || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4));
         return $"dam 3d6+{s}";
     }
 }

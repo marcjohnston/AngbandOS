@@ -17,7 +17,7 @@ internal class DeathSpellEnslaveUndead : Spell
         {
             return;
         }
-        SaveGame.ControlOneUndead(dir, SaveGame.Player.Level);
+        SaveGame.ControlOneUndead(dir, SaveGame.Player.ExperienceLevel);
     }
 
     public override void CastFailed()

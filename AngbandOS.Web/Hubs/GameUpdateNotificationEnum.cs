@@ -14,7 +14,7 @@
         /// <summary>
         /// Represents an event received from the game that the players' dungeon level has changed.
         /// </summary>
-        LevelChanged = 1,
+        ExperienceLevelChanged = 1,
 
         /// <summary>
         /// Represents an event received from the game that the players' characters' name has changed.

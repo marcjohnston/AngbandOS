@@ -112,17 +112,17 @@ internal class Player
     public bool IsSearching;
     public bool IsWinner;
     public bool IsWizard;
-    private int _level;
-    public int Level
+    private int _experienceLevel;
+    public int ExperienceLevel
     {
         get
         {
-            return _level;
+            return _experienceLevel;
         }
         set
         {
-            _level = value;
-            SaveGame.ConsoleViewPort.LevelChanged(_level);
+            _experienceLevel = value;
+            SaveGame.ConsoleViewPort.ExperienceLevelChanged(_experienceLevel);
         }
     }
 
@@ -367,7 +367,7 @@ internal class Player
             }
         }
         CheckExperience();
-        MaxLevelGained = Level;
+        MaxLevelGained = ExperienceLevel;
         SaveGame.PrBasicRedrawAction.Set();
         SaveGame.UpdateBonusesFlaggedAction.Set();
         SaveGame.HandleStuff();
@@ -399,9 +399,9 @@ internal class Player
         }
         SaveGame.RedrawExpFlaggedAction.Set();
         SaveGame.HandleStuff();
-        while (Level > 1 && ExperiencePoints < Constants.PlayerExp[Level - 2] * ExperienceMultiplier / 100L)
+        while (ExperienceLevel > 1 && ExperiencePoints < Constants.PlayerExp[ExperienceLevel - 2] * ExperienceMultiplier / 100L)
         {
-            Level--;
+            ExperienceLevel--;
             SaveGame.Level.RedrawSingleLocation(MapY, MapX);
             SaveGame.UpdateHealthFlaggedAction.Set();
             SaveGame.UpdateManaFlaggedAction.Set();
@@ -411,13 +411,13 @@ internal class Player
             SaveGame.RedrawLevelFlaggedAction.Set();
             SaveGame.HandleStuff();
         }
-        while (Level < Constants.PyMaxLevel && ExperiencePoints >= Constants.PlayerExp[Level - 1] * ExperienceMultiplier / 100L)
+        while (ExperienceLevel < Constants.PyMaxLevel && ExperiencePoints >= Constants.PlayerExp[ExperienceLevel - 1] * ExperienceMultiplier / 100L)
         {
-            Level++;
+            ExperienceLevel++;
             SaveGame.Level.RedrawSingleLocation(MapY, MapX);
-            if (Level > MaxLevelGained)
+            if (ExperienceLevel > MaxLevelGained)
             {
-                MaxLevelGained = Level;
+                MaxLevelGained = ExperienceLevel;
                 if (BaseCharacterClass.ID == CharacterClass.Fanatic || BaseCharacterClass.ID == CharacterClass.Cultist)
                 {
                     levelReward = true;
@@ -435,7 +435,7 @@ internal class Player
                 }
             }
             SaveGame.PlaySound(SoundEffectEnum.LevelGain);
-            SaveGame.MsgPrint($"Welcome to level {Level}.");
+            SaveGame.MsgPrint($"Welcome to level {ExperienceLevel}.");
             SaveGame.UpdateHealthFlaggedAction.Set();
             SaveGame.UpdateManaFlaggedAction.Set();
             SaveGame.UpdateSpellsFlaggedAction.Set();
@@ -636,64 +636,64 @@ internal class Player
     public ItemCharacteristics GetAbilitiesAsItemFlags()
     {
         ItemCharacteristics itemCharacteristics = new ItemCharacteristics();
-        if ((BaseCharacterClass.ID == CharacterClass.Warrior && Level > 29) || (BaseCharacterClass.ID == CharacterClass.Paladin && Level > 39) || (BaseCharacterClass.ID == CharacterClass.Fanatic && Level > 39))
+        if ((BaseCharacterClass.ID == CharacterClass.Warrior && ExperienceLevel > 29) || (BaseCharacterClass.ID == CharacterClass.Paladin && ExperienceLevel > 39) || (BaseCharacterClass.ID == CharacterClass.Fanatic && ExperienceLevel > 39))
         {
             itemCharacteristics.ResFear = true;
         }
-        if (BaseCharacterClass.ID == CharacterClass.Fanatic && Level > 29)
+        if (BaseCharacterClass.ID == CharacterClass.Fanatic && ExperienceLevel > 29)
         {
             itemCharacteristics.ResChaos = true;
         }
-        if (BaseCharacterClass.ID == CharacterClass.Cultist && Level > 19)
+        if (BaseCharacterClass.ID == CharacterClass.Cultist && ExperienceLevel > 19)
         {
             itemCharacteristics.ResChaos = true;
         }
-        if (BaseCharacterClass.ID == CharacterClass.Monk && Level > 9 && !SaveGame.MartialArtistHeavyArmour())
+        if (BaseCharacterClass.ID == CharacterClass.Monk && ExperienceLevel > 9 && !SaveGame.MartialArtistHeavyArmour())
         {
             itemCharacteristics.Speed = true;
         }
-        if (BaseCharacterClass.ID == CharacterClass.Monk && Level > 24 && !SaveGame.MartialArtistHeavyArmour())
+        if (BaseCharacterClass.ID == CharacterClass.Monk && ExperienceLevel > 24 && !SaveGame.MartialArtistHeavyArmour())
         {
             itemCharacteristics.FreeAct = true;
         }
         if (BaseCharacterClass.ID == CharacterClass.Mindcrafter)
         {
-            if (Level > 9)
+            if (ExperienceLevel > 9)
             {
                 itemCharacteristics.ResFear = true;
             }
-            if (Level > 19)
+            if (ExperienceLevel > 19)
             {
                 itemCharacteristics.SustWis = true;
             }
-            if (Level > 29)
+            if (ExperienceLevel > 29)
             {
                 itemCharacteristics.ResConf = true;
             }
-            if (Level > 39)
+            if (ExperienceLevel > 39)
             {
                 itemCharacteristics.Telepathy = true;
             }
         }
         if (BaseCharacterClass.ID == CharacterClass.Mystic)
         {
-            if (Level > 9)
+            if (ExperienceLevel > 9)
             {
                 itemCharacteristics.ResConf = true;
             }
-            if (Level > 9 && !SaveGame.MartialArtistHeavyArmour())
+            if (ExperienceLevel > 9 && !SaveGame.MartialArtistHeavyArmour())
             {
                 itemCharacteristics.Speed = true;
             }
-            if (Level > 24)
+            if (ExperienceLevel > 24)
             {
                 itemCharacteristics.ResFear = true;
             }
-            if (Level > 29 && !SaveGame.MartialArtistHeavyArmour())
+            if (ExperienceLevel > 29 && !SaveGame.MartialArtistHeavyArmour())
             {
                 itemCharacteristics.FreeAct = true;
             }
-            if (Level > 39)
+            if (ExperienceLevel > 39)
             {
                 itemCharacteristics.Telepathy = true;
             }
@@ -701,109 +701,109 @@ internal class Player
         if (BaseCharacterClass.ID == CharacterClass.ChosenOne)
         {
             itemCharacteristics.Lightsource = true;
-            if (Level >= 2)
+            if (ExperienceLevel >= 2)
             {
                 itemCharacteristics.ResConf = true;
             }
-            if (Level >= 4)
+            if (ExperienceLevel >= 4)
             {
                 itemCharacteristics.ResFear = true;
             }
-            if (Level >= 6)
+            if (ExperienceLevel >= 6)
             {
                 itemCharacteristics.ResBlind = true;
             }
-            if (Level >= 8)
+            if (ExperienceLevel >= 8)
             {
                 itemCharacteristics.Feather = true;
             }
-            if (Level >= 10)
+            if (ExperienceLevel >= 10)
             {
                 itemCharacteristics.SeeInvis = true;
             }
-            if (Level >= 12)
+            if (ExperienceLevel >= 12)
             {
                 itemCharacteristics.SlowDigest = true;
             }
-            if (Level >= 14)
+            if (ExperienceLevel >= 14)
             {
                 itemCharacteristics.SustCon = true;
             }
-            if (Level >= 16)
+            if (ExperienceLevel >= 16)
             {
                 itemCharacteristics.ResPois = true;
             }
-            if (Level >= 18)
+            if (ExperienceLevel >= 18)
             {
                 itemCharacteristics.SustDex = true;
             }
-            if (Level >= 20)
+            if (ExperienceLevel >= 20)
             {
                 itemCharacteristics.SustStr = true;
             }
-            if (Level >= 22)
+            if (ExperienceLevel >= 22)
             {
                 itemCharacteristics.HoldLife = true;
             }
-            if (Level >= 24)
+            if (ExperienceLevel >= 24)
             {
                 itemCharacteristics.FreeAct = true;
             }
-            if (Level >= 26)
+            if (ExperienceLevel >= 26)
             {
                 itemCharacteristics.Telepathy = true;
             }
-            if (Level >= 28)
+            if (ExperienceLevel >= 28)
             {
                 itemCharacteristics.ResDark = true;
             }
-            if (Level >= 30)
+            if (ExperienceLevel >= 30)
             {
                 itemCharacteristics.ResLight = true;
             }
-            if (Level >= 32)
+            if (ExperienceLevel >= 32)
             {
                 itemCharacteristics.SustCha = true;
             }
-            if (Level >= 34)
+            if (ExperienceLevel >= 34)
             {
                 itemCharacteristics.ResSound = true;
             }
-            if (Level >= 36)
+            if (ExperienceLevel >= 36)
             {
                 itemCharacteristics.ResDisen = true;
             }
-            if (Level >= 38)
+            if (ExperienceLevel >= 38)
             {
                 itemCharacteristics.Regen = true;
             }
-            if (Level >= 40)
+            if (ExperienceLevel >= 40)
             {
                 itemCharacteristics.SustInt = true;
             }
-            if (Level >= 42)
+            if (ExperienceLevel >= 42)
             {
                 itemCharacteristics.ResChaos = true;
             }
-            if (Level >= 44)
+            if (ExperienceLevel >= 44)
             {
                 itemCharacteristics.SustWis = true;
             }
-            if (Level >= 46)
+            if (ExperienceLevel >= 46)
             {
                 itemCharacteristics.ResNexus = true;
             }
-            if (Level >= 48)
+            if (ExperienceLevel >= 48)
             {
                 itemCharacteristics.ResShards = true;
             }
-            if (Level >= 50)
+            if (ExperienceLevel >= 50)
             {
                 itemCharacteristics.ResNether = true;
             }
         }
 
-        Race.UpdateRacialAbilities(Level, itemCharacteristics);
+        Race.UpdateRacialAbilities(ExperienceLevel, itemCharacteristics);
         if (Dna.Regen)
         {
             itemCharacteristics.Regen = true;
@@ -844,23 +844,23 @@ internal class Player
         if (Dna.SustainAll)
         {
             itemCharacteristics.SustCon = true;
-            if (Level > 9)
+            if (ExperienceLevel > 9)
             {
                 itemCharacteristics.SustStr = true;
             }
-            if (Level > 19)
+            if (ExperienceLevel > 19)
             {
                 itemCharacteristics.SustDex = true;
             }
-            if (Level > 29)
+            if (ExperienceLevel > 29)
             {
                 itemCharacteristics.SustWis = true;
             }
-            if (Level > 39)
+            if (ExperienceLevel > 39)
             {
                 itemCharacteristics.SustInt = true;
             }
-            if (Level > 49)
+            if (ExperienceLevel > 49)
             {
                 itemCharacteristics.SustCha = true;
             }
@@ -989,7 +989,7 @@ internal class Player
                     if (Program.Rng.DieRoll(6) == 1)
                     {
                         SaveGame.MsgPrint("You find living difficult in your present form!");
-                        TakeHit(Program.Rng.DiceRoll(Program.Rng.DieRoll(Level), Level), "a lethal mutation");
+                        TakeHit(Program.Rng.DiceRoll(Program.Rng.DieRoll(ExperienceLevel), ExperienceLevel), "a lethal mutation");
                     }
                     ShuffleAbilityScores();
                     break;
@@ -1005,7 +1005,7 @@ internal class Player
     {
         int wounds = TimedBleeding.TurnsRemaining;
         int hitP = MaxHealth - Health;
-        int change = Program.Rng.DiceRoll(Level, 5);
+        int change = Program.Rng.DiceRoll(ExperienceLevel, 5);
         bool nastyEffect = Program.Rng.DieRoll(5) == 1;
         if (!(wounds != 0 || hitP != 0 || nastyEffect))
         {
@@ -1203,12 +1203,12 @@ internal class Player
 
     public void SenseInventory()
     {
-        int playerLevel = Level;
+        int playerLevel = ExperienceLevel;
         if (TimedConfusion.TurnsRemaining != 0)
         {
             return;
         }
-        if (!BaseCharacterClass.SenseInventoryTest(Level))
+        if (!BaseCharacterClass.SenseInventoryTest(ExperienceLevel))
         {
             return;
         }
@@ -1397,7 +1397,7 @@ internal class Player
 
     public bool SpellOkay(Spell sPtr, bool known)
     {
-        if (sPtr.Level > Level)
+        if (sPtr.Level > ExperienceLevel)
         {
             return false;
         }
@@ -1417,7 +1417,7 @@ internal class Player
     {
         int set = realm2 ? 1 : 0;
         Spell sPtr = SaveGame.Spells[set][spell % 32];
-        if (sPtr.Level > Level)
+        if (sPtr.Level > ExperienceLevel)
         {
             return false;
         }

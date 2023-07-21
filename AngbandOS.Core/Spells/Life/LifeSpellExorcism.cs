@@ -13,15 +13,15 @@ internal class LifeSpellExorcism : Spell
     private LifeSpellExorcism(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.DispelUndead(SaveGame.Player.Level);
-        SaveGame.DispelDemons(SaveGame.Player.Level);
-        SaveGame.TurnEvil(SaveGame.Player.Level);
+        SaveGame.DispelUndead(SaveGame.Player.ExperienceLevel);
+        SaveGame.DispelDemons(SaveGame.Player.ExperienceLevel);
+        SaveGame.TurnEvil(SaveGame.Player.ExperienceLevel);
     }
 
     public override string Name => "Exorcism";
     
     protected override string? Info()
     {
-        return $"dam {SaveGame.Player.Level}+{SaveGame.Player.Level}";
+        return $"dam {SaveGame.Player.ExperienceLevel}+{SaveGame.Player.ExperienceLevel}";
     }
 }

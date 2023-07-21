@@ -3,7 +3,6 @@ using AngbandOS.Core.Interface;
 using Microsoft.AspNetCore.SignalR;
 using System.Collections.Concurrent;
 using System.ComponentModel;
-using System.Drawing;
 
 namespace AngbandOS.Web.Hubs
 {
@@ -83,6 +82,11 @@ namespace AngbandOS.Web.Hubs
         #endregion
 
         #region IConsole Implementation
+        public int Height => 45;
+
+        public int Width => 80;
+        public int MaximumKeyQueueLength => 256;
+
         /// <summary>
         /// Accepts a Clear command sent by the AngbandOS core game and forwards the event to the console and all spectators.
         /// </summary>
@@ -220,9 +224,9 @@ namespace AngbandOS.Web.Hubs
             NotificationAction(this, GameUpdateNotificationEnum.GoldUpdated, "Gold updated.");
         }
 
-        public void LevelChanged(int level)
+        public void ExperienceLevelChanged(int level)
         {
-            NotificationAction(this, GameUpdateNotificationEnum.LevelChanged, "Level changed.");
+            NotificationAction(this, GameUpdateNotificationEnum.ExperienceLevelChanged, "Experience level changed.");
         }
         public void GameStopped()
         {

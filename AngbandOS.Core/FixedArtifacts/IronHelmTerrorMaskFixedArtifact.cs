@@ -40,8 +40,8 @@ internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact, IFixedArtifactAc
     // Dragon Helm and Terror Mask cause fear
     public void ActivateItem(SaveGame saveGame, Item item)
     {
-        saveGame.TurnMonsters(40 + saveGame.Player.Level);
-        item.RechargeTimeLeft = 3 * (saveGame.Player.Level + 10);
+        saveGame.TurnMonsters(40 + saveGame.Player.ExperienceLevel);
+        item.RechargeTimeLeft = 3 * (saveGame.Player.ExperienceLevel + 10);
     }
     public string DescribeActivationEffect() => "rays of fear in every direction";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

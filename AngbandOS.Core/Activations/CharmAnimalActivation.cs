@@ -22,7 +22,7 @@ internal class CharmAnimalActivation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.CharmAnimal(direction, SaveGame.Player.Level);
+        SaveGame.CharmAnimal(direction, SaveGame.Player.ExperienceLevel);
         return true;
     }
 

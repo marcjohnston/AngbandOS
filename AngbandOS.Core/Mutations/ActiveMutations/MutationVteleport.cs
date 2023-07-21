@@ -17,7 +17,7 @@ internal class MutationVteleport : Mutation
             return;
         }
         saveGame.MsgPrint("You concentrate...");
-        saveGame.TeleportPlayer(10 + (4 * saveGame.Player.Level));
+        saveGame.TeleportPlayer(10 + (4 * saveGame.Player.ExperienceLevel));
     }
 
     public override string ActivationSummary(int lvl)

@@ -30,7 +30,7 @@ internal abstract class Talent
     public int FailureChance(Player player)
     {
         int chance = BaseFailure;
-        chance -= 3 * (player.Level - Level);
+        chance -= 3 * (player.ExperienceLevel - Level);
         chance -= 3 * (player.AbilityScores[player.BaseCharacterClass.SpellStat].SpellFailureReduction - 1);
         if (ManaCost > player.Mana)
         {

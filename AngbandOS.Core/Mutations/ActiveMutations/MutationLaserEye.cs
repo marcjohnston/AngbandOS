@@ -20,7 +20,7 @@ internal class MutationLaserEye : Mutation
         {
             return;
         }
-        saveGame.FireBeam(saveGame.SingletonRepository.Projectiles.Get<LightProjectile>(), dir, 2 * saveGame.Player.Level);
+        saveGame.FireBeam(saveGame.SingletonRepository.Projectiles.Get<LightProjectile>(), dir, 2 * saveGame.Player.ExperienceLevel);
     }
 
     public override string ActivationSummary(int lvl)

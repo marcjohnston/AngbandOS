@@ -15,18 +15,18 @@ internal class LifeSpellDivineIntervention : Spell
     {
         SaveGame.Project(0, 1, SaveGame.Player.MapY, SaveGame.Player.MapX, 777, SaveGame.SingletonRepository.Projectiles.Get<HolyFireProjectile>(),
             ProjectionFlag.ProjectKill);
-        SaveGame.DispelMonsters(SaveGame.Player.Level * 4);
+        SaveGame.DispelMonsters(SaveGame.Player.ExperienceLevel * 4);
         SaveGame.SlowMonsters();
-        SaveGame.StunMonsters(SaveGame.Player.Level * 4);
-        SaveGame.ConfuseMonsters(SaveGame.Player.Level * 4);
-        SaveGame.TurnMonsters(SaveGame.Player.Level * 4);
-        SaveGame.StasisMonsters(SaveGame.Player.Level * 4);
-        SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.Level, new CthuloidMonsterSelector(), true);
+        SaveGame.StunMonsters(SaveGame.Player.ExperienceLevel * 4);
+        SaveGame.ConfuseMonsters(SaveGame.Player.ExperienceLevel * 4);
+        SaveGame.TurnMonsters(SaveGame.Player.ExperienceLevel * 4);
+        SaveGame.StasisMonsters(SaveGame.Player.ExperienceLevel * 4);
+        SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.ExperienceLevel, new CthuloidMonsterSelector(), true);
         SaveGame.Player.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(25) + 25);
         SaveGame.Player.RestoreHealth(300);
         if (SaveGame.Player.TimedHaste.TurnsRemaining == 0)
         {
-            SaveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(20 + SaveGame.Player.Level) + SaveGame.Player.Level);
+            SaveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(20 + SaveGame.Player.ExperienceLevel) + SaveGame.Player.ExperienceLevel);
         }
         else
         {
@@ -39,6 +39,6 @@ internal class LifeSpellDivineIntervention : Spell
     
     protected override string? Info()
     {
-        return $"h300/d{SaveGame.Player.Level * 4}+777";
+        return $"h300/d{SaveGame.Player.ExperienceLevel * 4}+777";
     }
 }

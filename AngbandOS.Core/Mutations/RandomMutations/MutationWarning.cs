@@ -33,9 +33,9 @@ internal class MutationWarning : Mutation
             {
                 continue;
             }
-            if (rPtr.Level >= saveGame.Player.Level)
+            if (rPtr.Level >= saveGame.Player.ExperienceLevel)
             {
-                dangerAmount += rPtr.Level - saveGame.Player.Level + 1;
+                dangerAmount += rPtr.Level - saveGame.Player.ExperienceLevel + 1;
             }
         }
         if (dangerAmount > 100)
