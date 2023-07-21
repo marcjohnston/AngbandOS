@@ -21,6 +21,6 @@ internal class BuyHouseStoreCommand : BaseStoreCommand
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {
         HomeStore homeStore = SaveGame.FindHomeStore(SaveGame.CurTown.Index);
-        homeStore.BuyHouse(SaveGame.Player);
+        homeStore.BuyHouse();
     }
 }

@@ -65,10 +65,10 @@ internal class HomeStore : Store
 
     protected override bool PerformsMaintenanceWhenResting => false;
 
-    public void BuyHouse(Player player)
+    public void BuyHouse()
     {
         int price;
-        if (player.TownWithHouse == SaveGame.CurTown.Index)
+        if (SaveGame.Player.TownWithHouse == SaveGame.CurTown.Index)
         {
             SaveGame.MsgPrint("You already have the deeds!");
         }
@@ -76,18 +76,18 @@ internal class HomeStore : Store
         {
             if (!ServiceHaggle(SaveGame.CurTown.HousePrice, out price))
             {
-                if (price >= player.Gold)
+                if (price >= SaveGame.Player.Gold)
                 {
                     SaveGame.MsgPrint("You do not have the gold!");
                 }
                 else
                 {
-                    player.Gold -= price;
+                    SaveGame.Player.Gold -= price;
                     SayComment_1();
                     SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                     StorePrtGold();
-                    int oldHouse = player.TownWithHouse;
-                    player.TownWithHouse = SaveGame.CurTown.Index;
+                    int oldHouse = SaveGame.Player.TownWithHouse;
+                    SaveGame.Player.TownWithHouse = SaveGame.CurTown.Index;
                     if (oldHouse == -1)
                     {
                         SaveGame.MsgPrint("You may move in at once.");
@@ -96,7 +96,7 @@ internal class HomeStore : Store
                     {
                         SaveGame.MsgPrint(
                             "I've sold your old house to pay for the removal service.");
-                        SaveGame.MoveHouse(oldHouse, player.TownWithHouse);
+                        SaveGame.MoveHouse(oldHouse, SaveGame.Player.TownWithHouse);
                     }
                 }
                 SaveGame.HandleStuff();
