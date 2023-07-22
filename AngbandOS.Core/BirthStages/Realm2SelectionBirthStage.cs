@@ -60,14 +60,14 @@ internal class Realm2SelectionBirthStage : BirthStage
 
     private bool RenderSelection(int index)
     {
-        BaseRealm[] remainingRealms = SaveGame.BaseCharacterClass.AvailableSecondaryRealms.Where(_realm => _realm != SaveGame.PrimaryRealm).ToArray();
-        BaseRealm realm = remainingRealms[index];
+        Realm[] remainingRealms = SaveGame.BaseCharacterClass.AvailableSecondaryRealms.Where(_realm => _realm != SaveGame.PrimaryRealm).ToArray();
+        Realm realm = remainingRealms[index];
         SaveGame.DisplayRealmInfo(realm);
         return true;
     }
     private BirthStage? GoForward(int index)
     {
-        BaseRealm[] remainingRealms = SaveGame.BaseCharacterClass.AvailableSecondaryRealms.Where(_realm => _realm != SaveGame.PrimaryRealm).ToArray();
+        Realm[] remainingRealms = SaveGame.BaseCharacterClass.AvailableSecondaryRealms.Where(_realm => _realm != SaveGame.PrimaryRealm).ToArray();
         SaveGame.SecondaryRealm = remainingRealms[index];
         SaveGame.Religion.Deity = SaveGame.BaseCharacterClass.DefaultDeity(SaveGame.SecondaryRealm);
         return SaveGame.SingletonRepository.BirthStages.Get<GenderSelectionBirthStage>();

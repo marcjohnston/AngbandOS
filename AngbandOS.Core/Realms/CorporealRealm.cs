@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Realms;
 
 [Serializable]
-internal class CorporealRealm : BaseRealm
+internal class CorporealRealm : Realm
 {
     private CorporealRealm(SaveGame savedGame) : base(savedGame) { }
 

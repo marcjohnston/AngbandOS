@@ -15,5 +15,5 @@ internal abstract class LifeBookItemFactory : BookItemFactory
     public override bool HatesFire => true;
     public override int PackSort => 8;
     public override ColourEnum Colour => ColourEnum.BrightWhite;
-    public override BaseRealm? ToRealm => SaveGame.SingletonRepository.Realms.Get<LifeRealm>();
+    public override Realm? ToRealm => SaveGame.SingletonRepository.Realms.Get<LifeRealm>();
 }

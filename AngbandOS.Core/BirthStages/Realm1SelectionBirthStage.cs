@@ -60,15 +60,15 @@ internal class Realm1SelectionBirthStage : BirthStage
     }
     private bool RenderSelection(int index)
     {
-        BaseRealm realm = SaveGame.BaseCharacterClass.AvailablePrimaryRealms[index];
+        Realm realm = SaveGame.BaseCharacterClass.AvailablePrimaryRealms[index];
         SaveGame.DisplayRealmInfo(realm);
         return true;
     }
     private BirthStage? GoForward(int index)
     {
-        BaseRealm realm = SaveGame.BaseCharacterClass.AvailablePrimaryRealms[index];
+        Realm realm = SaveGame.BaseCharacterClass.AvailablePrimaryRealms[index];
         SaveGame.PrimaryRealm = realm;
-        BaseRealm[] remainingAvailableSecondaryRealms = SaveGame.BaseCharacterClass.RemainingAvailableSecondaryRealms();
+        Realm[] remainingAvailableSecondaryRealms = SaveGame.BaseCharacterClass.RemainingAvailableSecondaryRealms();
         int remainingAvailableSecondaryRealmCount = remainingAvailableSecondaryRealms.Length;
         if (remainingAvailableSecondaryRealmCount == 0)
         {

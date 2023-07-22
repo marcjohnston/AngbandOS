@@ -16,7 +16,7 @@ internal abstract class BookItemFactory : ItemFactory
     /// </summary>
     public override bool EasyKnow => true;
 
-    public abstract BaseRealm? ToRealm { get; }
+    public abstract Realm? ToRealm { get; }
 
     public abstract Spell[] Spells { get; }
 

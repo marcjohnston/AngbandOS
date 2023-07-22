@@ -15,5 +15,5 @@ internal abstract class SorceryBookItemFactory : BookItemFactory
     public override bool HatesFire => true;
     public override int PackSort => 7;
     public override ColourEnum Colour => ColourEnum.BrightBlue;
-    public override BaseRealm? ToRealm => SaveGame.SingletonRepository.Realms.Get<SorceryRealm>();
+    public override Realm? ToRealm => SaveGame.SingletonRepository.Realms.Get<SorceryRealm>();
 }

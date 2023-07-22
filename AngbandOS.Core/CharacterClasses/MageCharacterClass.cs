@@ -46,7 +46,7 @@ internal class MageCharacterClass : BaseCharacterClass
     public override int AttackSpeedMultiplier => 2;
     public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get<MageArtifactBias>();
     public override bool SenseInventoryTest(int level) => (0 != Program.Rng.RandomLessThan(240000 / (level + 5)));
-    public override BaseRealm[] AvailablePrimaryRealms => new BaseRealm[] {
+    public override Realm[] AvailablePrimaryRealms => new Realm[] {
         SaveGame.SingletonRepository.Realms.Get<LifeRealm>(),
         SaveGame.SingletonRepository.Realms.Get<SorceryRealm>(),
         SaveGame.SingletonRepository.Realms.Get<NatureRealm>(),
@@ -56,7 +56,7 @@ internal class MageCharacterClass : BaseCharacterClass
         SaveGame.SingletonRepository.Realms.Get<FolkRealm>(),
         SaveGame.SingletonRepository.Realms.Get<CorporealRealm>()
     };
-    public override BaseRealm[] AvailableSecondaryRealms => new BaseRealm[] {
+    public override Realm[] AvailableSecondaryRealms => new Realm[] {
         SaveGame.SingletonRepository.Realms.Get<LifeRealm>(),
         SaveGame.SingletonRepository.Realms.Get<SorceryRealm>(),
         SaveGame.SingletonRepository.Realms.Get<NatureRealm>(),

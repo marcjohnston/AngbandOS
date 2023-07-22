@@ -67,7 +67,7 @@ internal abstract class BaseCharacterClass
 
     public abstract string Title { get; }
 
-    public virtual string ClassSubName(BaseRealm? realm) => Title;
+    public virtual string ClassSubName(Realm? realm) => Title;
     public abstract int PrimeStat { get; }
 
     public abstract string[] Info { get; }
@@ -94,15 +94,15 @@ internal abstract class BaseCharacterClass
     /// Represents realms that are available to the character class.  Returns an empty array, if the character class cannot cast spells.
     /// </summary>
     /// <value>The available realms.</value>
-    public virtual BaseRealm[] AvailablePrimaryRealms => new BaseRealm[] { };
+    public virtual Realm[] AvailablePrimaryRealms => new Realm[] { };
 
     /// <summary>
     /// Represents realms that are available to the character class.  Returns an empty array, if the character class cannot cast spells.
     /// </summary>
     /// <value>The available realms.</value>
-    public virtual BaseRealm[] AvailableSecondaryRealms => new BaseRealm[] { };
+    public virtual Realm[] AvailableSecondaryRealms => new Realm[] { };
 
-    public BaseRealm[] RemainingAvailableSecondaryRealms()
+    public Realm[] RemainingAvailableSecondaryRealms()
     {
         return AvailableSecondaryRealms.Where(_realm => _realm != SaveGame.PrimaryRealm).ToArray();
     }
@@ -112,7 +112,7 @@ internal abstract class BaseCharacterClass
     /// <summary>
     /// Returns the default deity that the character class worships.  This is used when randomly choosing a CharacterClass.  Defaults to None.
     /// </summary>
-    public virtual GodName DefaultDeity(BaseRealm? realm) => GodName.None;
+    public virtual GodName DefaultDeity(Realm? realm) => GodName.None;
 
     /// <summary>
     /// Gains the experience when the character class destroys a spell book.  Derived classes must determine if the character class gains experience when they destroy a

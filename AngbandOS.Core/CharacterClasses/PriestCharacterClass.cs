@@ -32,7 +32,7 @@ internal class PriestCharacterClass : BaseCharacterClass
     public override int RangedAttackBonusPerLevel => 20;
     public override int HitDieBonus => 2;
     public override int ExperienceFactor => 20;
-    public override string ClassSubName(BaseRealm? realm)
+    public override string ClassSubName(Realm? realm)
     {
         switch (realm)
         {
@@ -54,11 +54,11 @@ internal class PriestCharacterClass : BaseCharacterClass
     public override int SpellStat => Ability.Wisdom;
     public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get<PriestlyArtifactBias>();
     public override bool SenseInventoryTest(int level) => (0 != Program.Rng.RandomLessThan(10000 / ((level * level) + 40)));
-    public override BaseRealm[] AvailablePrimaryRealms => new BaseRealm[] {
+    public override Realm[] AvailablePrimaryRealms => new Realm[] {
         SaveGame.SingletonRepository.Realms.Get<LifeRealm>(),
         SaveGame.SingletonRepository.Realms.Get<DeathRealm>()
     };
-    public override BaseRealm[] AvailableSecondaryRealms => new BaseRealm[] {
+    public override Realm[] AvailableSecondaryRealms => new Realm[] {
         SaveGame.SingletonRepository.Realms.Get<NatureRealm>(),
         SaveGame.SingletonRepository.Realms.Get<ChaosRealm>(),
         SaveGame.SingletonRepository.Realms.Get<TarotRealm>(),
@@ -67,7 +67,7 @@ internal class PriestCharacterClass : BaseCharacterClass
     };
     public override bool WorshipsADeity => true;
 
-    public override GodName DefaultDeity(BaseRealm? realm)
+    public override GodName DefaultDeity(Realm? realm)
     {
         switch (realm)
         {

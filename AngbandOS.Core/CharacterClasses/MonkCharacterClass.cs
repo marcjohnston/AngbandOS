@@ -33,7 +33,7 @@ internal class MonkCharacterClass : BaseCharacterClass
     public override int HitDieBonus => 6;
     public override int ExperienceFactor => 40;
 
-    public override string ClassSubName(BaseRealm? realm)
+    public override string ClassSubName(Realm? realm)
     {
         switch (realm)
         {
@@ -66,7 +66,7 @@ internal class MonkCharacterClass : BaseCharacterClass
     public override int AttackSpeedMultiplier => 4;
     public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get<PriestlyArtifactBias>();
     public override bool SenseInventoryTest(int level) => (0 != Program.Rng.RandomLessThan(20000 / ((level * level) + 40)));
-    public override BaseRealm[] AvailablePrimaryRealms => new BaseRealm[] {
+    public override Realm[] AvailablePrimaryRealms => new Realm[] {
         SaveGame.SingletonRepository.Realms.Get<ChaosRealm>(),
         SaveGame.SingletonRepository.Realms.Get<TarotRealm>(),
         SaveGame.SingletonRepository.Realms.Get<CorporealRealm>()

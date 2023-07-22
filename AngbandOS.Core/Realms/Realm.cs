@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.Realms;
 
 [Serializable]
-internal abstract class BaseRealm
+internal abstract class Realm
 {
     protected SaveGame SaveGame { get; }
-    protected BaseRealm(SaveGame saveGame)
+    protected Realm(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }

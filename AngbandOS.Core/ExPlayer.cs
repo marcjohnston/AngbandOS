@@ -57,18 +57,18 @@ internal class ExPlayer
     /// <summary>
     /// The character's first realm of magic (if any)
     /// </summary>
-    public readonly BaseRealm? PrimaryRealm;
+    public readonly Realm? PrimaryRealm;
 
     /// <summary>
     /// The character's second realm of magic (if any)
     /// </summary>
-    public readonly BaseRealm? SecondaryRealm;
+    public readonly Realm? SecondaryRealm;
 
     /// <summary>
     /// Make an ex-player from a player, remembering the essential information about the character
     /// </summary>
     /// <param name="player"> The player character from which to create the ex player </param>
-    public ExPlayer(Gender gender, Race race, Race raceAtBirth, string characterClassName, BaseRealm? primaryRealm, BaseRealm? secondaryRealm, string name, int experienceLevel, int generation)
+    public ExPlayer(Gender gender, Race race, Race raceAtBirth, string characterClassName, Realm? primaryRealm, Realm? secondaryRealm, string name, int experienceLevel, int generation)
     {
         Gender = gender;
         Race = race;

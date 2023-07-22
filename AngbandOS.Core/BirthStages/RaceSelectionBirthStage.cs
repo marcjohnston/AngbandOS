@@ -119,7 +119,7 @@ internal class RaceSelectionBirthStage : BirthStage
 
         // Check to see how many realms the player can study.
         int availablePrimaryRealmCount = SaveGame.BaseCharacterClass.AvailablePrimaryRealms.Length;
-        BaseRealm[] remainingAvailableSecondaryRealms = SaveGame.BaseCharacterClass.RemainingAvailableSecondaryRealms();
+        Realm[] remainingAvailableSecondaryRealms = SaveGame.BaseCharacterClass.RemainingAvailableSecondaryRealms();
         int remainingAvailableSecondaryRealmCount = remainingAvailableSecondaryRealms.Length;
         if (availablePrimaryRealmCount == 0)
         {

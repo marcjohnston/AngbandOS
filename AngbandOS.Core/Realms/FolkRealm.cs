@@ -10,7 +10,7 @@ using AngbandOS.Core.ItemCategories;
 namespace AngbandOS.Core.Realms;
 
 [Serializable]
-internal class FolkRealm : BaseRealm
+internal class FolkRealm : Realm
 {
     private FolkRealm(SaveGame savedGame) : base(savedGame) { }
 

@@ -45,7 +45,7 @@ internal class SingletonRepository
     public SingletonDictionary<WizardCommand> WizardCommands;
     public SingletonDictionary<TimedAction> TimedActions;
     public SingletonDictionary<BaseCharacterClass> CharacterClasses;
-    public SingletonDictionary<BaseRealm> Realms;
+    public SingletonDictionary<Realm> Realms;
     public SingletonDictionary<Town> Towns;
     public SingletonDictionary<AmuletFlavour> AmuletFlavours;
     public SingletonDictionary<MushroomFlavour> MushroomFlavours;
@@ -126,7 +126,7 @@ internal class SingletonRepository
         ArtifactBiases = new SingletonDictionary<ArtifactBias>(saveGame, LoadTypesFromAssembly<ArtifactBias>(saveGame));
         Activations = new SingletonDictionary<Activation>(saveGame, LoadTypesFromAssembly<Activation>(saveGame));
         CharacterClasses = new SingletonDictionary<BaseCharacterClass>(saveGame, LoadTypesFromAssembly<BaseCharacterClass>(saveGame));
-        Realms = new SingletonDictionary<BaseRealm>(saveGame, LoadTypesFromAssembly<BaseRealm>(saveGame));
+        Realms = new SingletonDictionary<Realm>(saveGame, LoadTypesFromAssembly<Realm>(saveGame));
         Towns = new SingletonDictionary<Town>(saveGame, LoadTypesFromAssembly<Town>(saveGame));
         AmuletFlavours = new SingletonDictionary<AmuletFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<AmuletFlavour>(saveGame)));
         MushroomFlavours = new SingletonDictionary<MushroomFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<MushroomFlavour>(saveGame)));

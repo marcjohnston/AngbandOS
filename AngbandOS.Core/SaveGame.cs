@@ -11031,8 +11031,8 @@ internal class SaveGame
     /// </summary>
     public Race? _prevRace = null;
 
-    public BaseRealm? _prevPrimaryRealm;
-    public BaseRealm? _prevSecondaryRealm;
+    public Realm? _prevPrimaryRealm;
+    public Realm? _prevSecondaryRealm;
 
     public Gender _prevSex;
 
@@ -11067,7 +11067,7 @@ internal class SaveGame
         Screen.Print(ColourEnum.Black, buf, y, x);
     }
 
-    public void DisplayRealmInfo(BaseRealm prealm)
+    public void DisplayRealmInfo(Realm prealm)
     {
         int y = 30;
         foreach (string info in prealm.Info)
@@ -15319,7 +15319,7 @@ internal class SaveGame
         return martialArtistArmWgt > 100 + (ExperienceLevel * 4);
     }
 
-    public string RealmNames(BaseRealm? primaryRealm, BaseRealm? secondaryRealm, string defaultTitle = "None")
+    public string RealmNames(Realm? primaryRealm, Realm? secondaryRealm, string defaultTitle = "None")
     {
         if (primaryRealm != null && secondaryRealm != null)
         {
@@ -16053,13 +16053,13 @@ internal class SaveGame
     /// Returns the primary realm that the player studies.
     /// </summary>
     /// <value>The realm1.</value>
-    public BaseRealm? PrimaryRealm = null;
+    public Realm? PrimaryRealm = null;
 
     /// <summary>
     /// Returns the secondary realm that the player studies.
     /// </summary>
     /// <value>The realm2.</value>
-    public BaseRealm? SecondaryRealm = null;
+    public Realm? SecondaryRealm = null;
 
     /// <summary>
     /// Returns true, if the player can cast spells and/or read books.  True, for character classes that can choose either a primary and/or secondary realm.
@@ -16071,7 +16071,7 @@ internal class SaveGame
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public bool Studies<T>() where T : BaseRealm => (PrimaryRealm != null && typeof(T).IsAssignableFrom(PrimaryRealm.GetType())) || (SecondaryRealm != null && typeof(T).IsAssignableFrom(SecondaryRealm.GetType()));
+    public bool Studies<T>() where T : Realm => (PrimaryRealm != null && typeof(T).IsAssignableFrom(PrimaryRealm.GetType())) || (SecondaryRealm != null && typeof(T).IsAssignableFrom(SecondaryRealm.GetType()));
 
     public Religion Religion = new Religion();
     public int SkillDigging;
@@ -16907,7 +16907,7 @@ internal class SaveGame
     }
 
     [Obsolete("Use PrintSpells(Spell[], int, int)")]
-    public void PrintSpells(int[] spells, int y, int x, BaseRealm? realm)
+    public void PrintSpells(int[] spells, int y, int x, Realm? realm)
     {
         int i;
         int set = realm == PrimaryRealm ? 0 : 1;

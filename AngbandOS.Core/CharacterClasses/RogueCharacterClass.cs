@@ -32,7 +32,7 @@ internal class RogueCharacterClass : BaseCharacterClass
     public override int RangedAttackBonusPerLevel => 10;
     public override int HitDieBonus => 6;
     public override int ExperienceFactor => 25;
-    public override string ClassSubName(BaseRealm? realm)
+    public override string ClassSubName(Realm? realm)
     {
         switch (realm)
         {
@@ -65,7 +65,7 @@ internal class RogueCharacterClass : BaseCharacterClass
     public override int FromScrollWarriorArtifactBiasPercentageChance => 25;
     public override bool SenseInventoryTest(int level) => (0 != Program.Rng.RandomLessThan(20000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
-    public override BaseRealm[] AvailablePrimaryRealms => new BaseRealm[] {
+    public override Realm[] AvailablePrimaryRealms => new Realm[] {
         SaveGame.SingletonRepository.Realms.Get<SorceryRealm>(),
         SaveGame.SingletonRepository.Realms.Get<DeathRealm>(),
         SaveGame.SingletonRepository.Realms.Get<TarotRealm>(),

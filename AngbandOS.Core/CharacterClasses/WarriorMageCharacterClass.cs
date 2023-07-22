@@ -46,10 +46,10 @@ internal class WarriorMageCharacterClass : BaseCharacterClass
     public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get<MageArtifactBias>();
     public override int FromScrollWarriorArtifactBiasPercentageChance => 40;
     public override bool SenseInventoryTest(int level) => (0 != Program.Rng.RandomLessThan(75000 / ((level * level) + 40)));
-    public override BaseRealm[] AvailablePrimaryRealms => new BaseRealm[] {
+    public override Realm[] AvailablePrimaryRealms => new Realm[] {
         SaveGame.SingletonRepository.Realms.Get<NatureRealm>()
     };
-    public override BaseRealm[] AvailableSecondaryRealms => new BaseRealm[] {
+    public override Realm[] AvailableSecondaryRealms => new Realm[] {
         SaveGame.SingletonRepository.Realms.Get<LifeRealm>(),
         SaveGame.SingletonRepository.Realms.Get<SorceryRealm>(),
         SaveGame.SingletonRepository.Realms.Get<NatureRealm>(),
