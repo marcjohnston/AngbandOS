@@ -13,17 +13,17 @@ internal class MephistophelesLordOfHellMonsterRace : MonsterRace
     protected MephistophelesLordOfHellMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheFireMonsterSpell(),
-        new BreatheNetherMonsterSpell(),
-        new BrainSmashMonsterSpell(),
-        new HoldMonsterSpell(),
-        new ScareMonsterSpell(),
-        new DreadCurseMonsterSpell(),
-        new SummonDemonMonsterSpell(),
-        new SummonHiUndeadMonsterSpell(),
-        new SummonReaverMonsterSpell(),
-        new SummonUndeadMonsterSpell(),
-        new TeleportToMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheFireMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheNetherMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BrainSmashMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HoldMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<DreadCurseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonDemonMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonHiUndeadMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonReaverMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonUndeadMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperUSymbol>();
     public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Mephistopheles, Lord of Hell";

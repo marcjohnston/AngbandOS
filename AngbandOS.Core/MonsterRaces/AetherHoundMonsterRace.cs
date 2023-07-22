@@ -13,25 +13,25 @@ internal class AetherHoundMonsterRace : MonsterRace
     protected AetherHoundMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheAcidMonsterSpell(),
-        new BreatheChaosMonsterSpell(),
-        new BreatheColdMonsterSpell(),
-        new BreatheConfusionMonsterSpell(),
-        new BreatheDarkMonsterSpell(),
-        new BreatheDisenchantMonsterSpell(),
-        new BreatheLightningMonsterSpell(),
-        new BreatheFireMonsterSpell(),
-        new BreatheForceMonsterSpell(),
-        new BreatheGravityMonsterSpell(),
-        new BreatheInertiaMonsterSpell(),
-        new BreatheLightMonsterSpell(),
-        new BreatheNetherMonsterSpell(),
-        new BreatheNexusMonsterSpell(),
-        new BreathePlasmaMonsterSpell(),
-        new BreathePoisonMonsterSpell(),
-        new BreatheShardsMonsterSpell(),
-        new BreatheSoundMonsterSpell(),
-        new BreatheTimeMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheAcidMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheChaosMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheColdMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheConfusionMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheDarkMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheDisenchantMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheLightningMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheFireMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheForceMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheGravityMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheInertiaMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheLightMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheNetherMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheNexusMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreathePlasmaMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreathePoisonMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheShardsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheSoundMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheTimeMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperZSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightGrey;
     public override string Name => "Aether hound";

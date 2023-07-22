@@ -13,7 +13,7 @@ internal class HalflingSlingerMonsterRace : MonsterRace
     protected HalflingSlingerMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new Arrow7D6MonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<Arrow7D6MonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Halfling slinger";

@@ -13,15 +13,15 @@ internal class SkullDrujMonsterRace : MonsterRace
     protected SkullDrujMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BrainSmashMonsterSpell(),
-        new CauseMortalWoundsMonsterSpell(),
-        new MindBlastMonsterSpell(),
-        new NetherBoltMonsterSpell(),
-        new PlasmaBoltMonsterSpell(),
-        new SlowMonsterSpell(),
-        new WaterBallMonsterSpell(),
-        new CreateTrapsMonsterSpell(),
-        new SummonUndeadMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BrainSmashMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseMortalWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<MindBlastMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<NetherBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<PlasmaBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SlowMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<WaterBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<CreateTrapsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonUndeadMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerSSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightGrey;
     public override string Name => "Skull druj";

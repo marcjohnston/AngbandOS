@@ -13,10 +13,10 @@ internal class GreyWraithMonsterRace : MonsterRace
     protected GreyWraithMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new CauseCriticalWoundsMonsterSpell(),
-        new HoldMonsterSpell(),
-        new ScareMonsterSpell(),
-        new DarknessMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseCriticalWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HoldMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<DarknessMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperWSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightGrey;
     public override string Name => "Grey wraith";

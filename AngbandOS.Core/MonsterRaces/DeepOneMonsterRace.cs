@@ -13,11 +13,11 @@ internal class DeepOneMonsterRace : MonsterRace
     protected DeepOneMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BlindnessMonsterSpell(),
-        new ConfuseMonsterSpell(),
-        new MagicMissileMonsterSpell(),
-        new ScareMonsterSpell(),
-        new ForgetMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<MagicMissileMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ForgetMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
     public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "Deep One";

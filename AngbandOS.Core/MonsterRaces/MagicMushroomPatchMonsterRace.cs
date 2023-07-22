@@ -13,10 +13,10 @@ internal class MagicMushroomPatchMonsterRace : MonsterRace
     protected MagicMushroomPatchMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new ScareMonsterSpell(),
-        new SlowMonsterSpell(),
-        new BlinkMonsterSpell(),
-        new DarknessMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SlowMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<DarknessMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CommaSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "Magic mushroom patch";

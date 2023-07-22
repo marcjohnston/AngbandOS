@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class AcidBallMonsterSpell : BallProjectileMonsterSpell
 {
+    private AcidBallMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool UsesAcid => true;
     public override bool IsAttack => true;
     protected override string ActionName => "casts an acid ball";

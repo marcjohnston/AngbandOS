@@ -13,10 +13,10 @@ internal class DaolothMonsterRace : MonsterRace
     protected DaolothMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BlindnessMonsterSpell(),
-        new ManaBoltMonsterSpell(),
-        new SummonKinMonsterSpell(),
-        new TeleportToMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ManaBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonKinMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperXSymbol>();
     public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "Daoloth";

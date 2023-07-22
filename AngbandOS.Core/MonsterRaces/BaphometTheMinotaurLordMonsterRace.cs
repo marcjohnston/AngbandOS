@@ -13,12 +13,12 @@ internal class BaphometTheMinotaurLordMonsterRace : MonsterRace
     protected BaphometTheMinotaurLordMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new Arrow7D6MonsterSpell(),
-        new BreatheForceMonsterSpell(),
-        new LightningBallMonsterSpell(),
-        new ManaBoltMonsterSpell(),
-        new PlasmaBoltMonsterSpell(),
-        new SlowMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<Arrow7D6MonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheForceMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<LightningBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ManaBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<PlasmaBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SlowMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperHSymbol>();
     public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Baphomet, the Minotaur Lord";

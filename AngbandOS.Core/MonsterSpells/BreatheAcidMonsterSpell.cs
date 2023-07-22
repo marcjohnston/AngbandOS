@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class BreatheAcidMonsterSpell : BreatheProjectileMonsterSpell
 {
+    private BreatheAcidMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool UsesAcid => true;
     protected override string ElementName => "acid";
     protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get<AcidProjectile>();

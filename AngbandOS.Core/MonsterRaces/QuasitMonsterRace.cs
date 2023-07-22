@@ -13,13 +13,13 @@ internal class QuasitMonsterRace : MonsterRace
     protected QuasitMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BlindnessMonsterSpell(),
-        new ConfuseMonsterSpell(),
-        new ScareMonsterSpell(),
-        new BlinkMonsterSpell(),
-        new TeleportLevelMonsterSpell(),
-        new TeleportToMonsterSpell(),
-        new TeleportSelfMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportLevelMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportSelfMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerUSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "Quasit";

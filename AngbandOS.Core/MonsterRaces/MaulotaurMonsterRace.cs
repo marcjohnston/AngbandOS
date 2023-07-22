@@ -13,9 +13,9 @@ internal class MaulotaurMonsterRace : MonsterRace
     protected MaulotaurMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new FireBallMonsterSpell(),
-        new FireBoltMonsterSpell(),
-        new PlasmaBoltMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<FireBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<FireBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<PlasmaBoltMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperHSymbol>();
     public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Maulotaur";

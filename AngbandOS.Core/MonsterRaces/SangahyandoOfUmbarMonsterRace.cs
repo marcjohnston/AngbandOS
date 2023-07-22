@@ -13,8 +13,8 @@ internal class SangahyandoOfUmbarMonsterRace : MonsterRace
     protected SangahyandoOfUmbarMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new SlowMonsterSpell(),
-        new ForgetMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<SlowMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ForgetMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override ColourEnum Colour => ColourEnum.Orange;
     public override string Name => "Sangahyando of Umbar";

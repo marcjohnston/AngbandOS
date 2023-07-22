@@ -13,14 +13,14 @@ internal class AntiPaladinMonsterRace : MonsterRace
     protected AntiPaladinMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BlindnessMonsterSpell(),
-        new CauseCriticalWoundsMonsterSpell(),
-        new HoldMonsterSpell(),
-        new ScareMonsterSpell(),
-        new CreateTrapsMonsterSpell(),
-        new DarknessMonsterSpell(),
-        new ForgetMonsterSpell(),
-        new HasteMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseCriticalWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HoldMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<CreateTrapsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<DarknessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ForgetMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HasteMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Anti-paladin";

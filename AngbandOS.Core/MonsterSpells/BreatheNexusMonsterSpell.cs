@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class BreatheNexusMonsterSpell : BreatheProjectileMonsterSpell
 {
+    private BreatheNexusMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool UsesNexus => true;
     protected override string ElementName => "nexus";
     protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get<NexusProjectile>();

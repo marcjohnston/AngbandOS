@@ -13,18 +13,18 @@ internal class SorcererMonsterRace : MonsterRace
     protected SorcererMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new AcidBoltMonsterSpell(),
-        new BlindnessMonsterSpell(),
-        new CauseCriticalWoundsMonsterSpell(),
-        new ColdBallMonsterSpell(),
-        new ConfuseMonsterSpell(),
-        new FireBallMonsterSpell(),
-        new BlinkMonsterSpell(),
-        new CreateTrapsMonsterSpell(),
-        new SummonDragonMonsterSpell(),
-        new SummonMonsterMonsterSpell(),
-        new SummonUndeadMonsterSpell(),
-        new TeleportToMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<AcidBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseCriticalWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ColdBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<FireBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<CreateTrapsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonDragonMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonsterMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonUndeadMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override ColourEnum Colour => ColourEnum.Gold;
     public override string Name => "Sorcerer";

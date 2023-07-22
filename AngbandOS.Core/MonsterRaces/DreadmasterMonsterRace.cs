@@ -13,14 +13,14 @@ internal class DreadmasterMonsterRace : MonsterRace
     protected DreadmasterMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BlindnessMonsterSpell(),
-        new CauseMortalWoundsMonsterSpell(),
-        new ConfuseMonsterSpell(),
-        new DrainManaMonsterSpell(),
-        new HoldMonsterSpell(),
-        new NetherBoltMonsterSpell(),
-        new SummonUndeadMonsterSpell(),
-        new TeleportLevelMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseMortalWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<DrainManaMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HoldMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<NetherBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonUndeadMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportLevelMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperGSymbol>();
     public override ColourEnum Colour => ColourEnum.Orange;
     public override string Name => "Dreadmaster";

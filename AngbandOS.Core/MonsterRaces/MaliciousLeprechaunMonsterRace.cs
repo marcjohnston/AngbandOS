@@ -13,10 +13,10 @@ internal class MaliciousLeprechaunMonsterRace : MonsterRace
     protected MaliciousLeprechaunMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new CauseLightWoundsMonsterSpell(),
-        new BlinkMonsterSpell(),
-        new TeleportToMonsterSpell(),
-        new TeleportSelfMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseLightWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportSelfMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
     public override ColourEnum Colour => ColourEnum.Chartreuse;
     public override string Name => "Malicious leprechaun";

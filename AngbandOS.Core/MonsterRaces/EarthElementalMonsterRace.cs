@@ -13,7 +13,7 @@ internal class EarthElementalMonsterRace : MonsterRace
     protected EarthElementalMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new AcidBoltMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<AcidBoltMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
     public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Earth elemental";

@@ -13,12 +13,12 @@ internal class NetherWraithMonsterRace : MonsterRace
     protected NetherWraithMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BlindnessMonsterSpell(),
-        new CauseCriticalWoundsMonsterSpell(),
-        new MindBlastMonsterSpell(),
-        new NetherBoltMonsterSpell(),
-        new ScareMonsterSpell(),
-        new DarknessMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseCriticalWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<MindBlastMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<NetherBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<DarknessMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperWSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Nether wraith";

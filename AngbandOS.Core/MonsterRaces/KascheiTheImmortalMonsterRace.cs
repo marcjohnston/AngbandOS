@@ -13,18 +13,18 @@ internal class KascheiTheImmortalMonsterRace : MonsterRace
     protected KascheiTheImmortalMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BlindnessMonsterSpell(),
-        new BrainSmashMonsterSpell(),
-        new CauseMortalWoundsMonsterSpell(),
-        new FireBallMonsterSpell(),
-        new ManaBallMonsterSpell(),
-        new ManaBoltMonsterSpell(),
-        new ScareMonsterSpell(),
-        new DreadCurseMonsterSpell(),
-        new SummonDemonMonsterSpell(),
-        new SummonHiUndeadMonsterSpell(),
-        new SummonMonstersMonsterSpell(),
-        new TeleportSelfMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BrainSmashMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseMortalWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<FireBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ManaBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ManaBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<DreadCurseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonDemonMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonHiUndeadMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonstersMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportSelfMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperLSymbol>();
     public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Kaschei the Immortal";

@@ -13,12 +13,12 @@ internal class AncalagonTheBlackMonsterRace : MonsterRace
     protected AncalagonTheBlackMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheAcidMonsterSpell(),
-        new BlindnessMonsterSpell(),
-        new ConfuseMonsterSpell(),
-        new ScareMonsterSpell(),
-        new SummonDragonMonsterSpell(),
-        new SummonHiDragonMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheAcidMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonDragonMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonHiDragonMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Ancalagon the Black";

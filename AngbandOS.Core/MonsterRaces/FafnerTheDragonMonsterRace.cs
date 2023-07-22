@@ -13,11 +13,11 @@ internal class FafnerTheDragonMonsterRace : MonsterRace
     protected FafnerTheDragonMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheFireMonsterSpell(),
-        new BreathePoisonMonsterSpell(),
-        new CauseCriticalWoundsMonsterSpell(),
-        new ConfuseMonsterSpell(),
-        new ScareMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheFireMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreathePoisonMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseCriticalWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Fafner the Dragon";

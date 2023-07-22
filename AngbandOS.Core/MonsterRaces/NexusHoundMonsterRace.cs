@@ -13,7 +13,7 @@ internal class NexusHoundMonsterRace : MonsterRace
     protected NexusHoundMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheNexusMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheNexusMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperZSymbol>();
     public override ColourEnum Colour => ColourEnum.Pink;
     public override string Name => "Nexus hound";

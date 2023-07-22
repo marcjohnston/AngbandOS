@@ -13,22 +13,22 @@ internal class HypnosMonsterRace : MonsterRace
     protected HypnosMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new CauseMortalWoundsMonsterSpell(),
-        new ConfuseMonsterSpell(),
-        new DrainManaMonsterSpell(),
-        new HoldMonsterSpell(),
-        new ScareMonsterSpell(),
-        new CreateTrapsMonsterSpell(),
-        new ForgetMonsterSpell(),
-        new HealMonsterSpell(),
-        new SummonCthuloidMonsterSpell(),
-        new SummonDemonMonsterSpell(),
-        new SummonHiDragonMonsterSpell(),
-        new SummonMonstersMonsterSpell(),
-        new TeleportAwayMonsterSpell(),
-        new TeleportLevelMonsterSpell(),
-        new TeleportToMonsterSpell(),
-        new TeleportSelfMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseMortalWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<DrainManaMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HoldMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<CreateTrapsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ForgetMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HealMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonCthuloidMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonDemonMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonHiDragonMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonstersMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportAwayMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportLevelMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportSelfMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "Hypnos";

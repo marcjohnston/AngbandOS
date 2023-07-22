@@ -13,12 +13,12 @@ internal class AlberichTheNibelungKingMonsterRace : MonsterRace
     protected AlberichTheNibelungKingMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new AcidBallMonsterSpell(),
-        new AcidBoltMonsterSpell(),
-        new ScareMonsterSpell(),
-        new HealMonsterSpell(),
-        new SummonMonsterMonsterSpell(),
-        new TeleportSelfMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<AcidBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<AcidBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HealMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonsterMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportSelfMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
     public override ColourEnum Colour => ColourEnum.Gold;
     public override string Name => "Alberich, the Nibelung King";

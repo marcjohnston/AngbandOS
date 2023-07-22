@@ -13,11 +13,11 @@ internal class ShadowDrakeMonsterRace : MonsterRace
     protected ShadowDrakeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new ConfuseMonsterSpell(),
-        new ScareMonsterSpell(),
-        new SlowMonsterSpell(),
-        new DarknessMonsterSpell(),
-        new HasteMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SlowMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<DarknessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HasteMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Shadow drake";

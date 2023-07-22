@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class ChaosBallMonsterSpell : BallProjectileMonsterSpell
 {
+    private ChaosBallMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     /// <summary>
     /// Returns a message that the monster is mumbling something frighteningly.
     /// </summary>

@@ -13,7 +13,7 @@ internal class PlasmaHoundMonsterRace : MonsterRace
     protected PlasmaHoundMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreathePlasmaMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreathePlasmaMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperZSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Plasma hound";

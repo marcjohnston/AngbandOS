@@ -13,14 +13,14 @@ internal class ServitorOfTheOuterGodsMonsterRace : MonsterRace
     protected ServitorOfTheOuterGodsMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BlindnessMonsterSpell(),
-        new CauseSeriousWoundsMonsterSpell(),
-        new CauseMortalWoundsMonsterSpell(),
-        new ManaBoltMonsterSpell(),
-        new ScareMonsterSpell(),
-        new SummonCthuloidMonsterSpell(),
-        new SummonUndeadMonsterSpell(),
-        new TeleportToMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseSeriousWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseMortalWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ManaBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonCthuloidMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonUndeadMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperASymbol>();
     public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Servitor of the outer gods";

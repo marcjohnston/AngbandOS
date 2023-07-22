@@ -13,14 +13,14 @@ internal class IllusionistMonsterRace : MonsterRace
     protected IllusionistMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BlindnessMonsterSpell(),
-        new ConfuseMonsterSpell(),
-        new HoldMonsterSpell(),
-        new SlowMonsterSpell(),
-        new BlinkMonsterSpell(),
-        new DarknessMonsterSpell(),
-        new HasteMonsterSpell(),
-        new TeleportSelfMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HoldMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SlowMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<DarknessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HasteMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportSelfMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override ColourEnum Colour => ColourEnum.Pink;
     public override string Name => "Illusionist";

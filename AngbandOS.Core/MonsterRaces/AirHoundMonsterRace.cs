@@ -13,7 +13,7 @@ internal class AirHoundMonsterRace : MonsterRace
     protected AirHoundMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreathePoisonMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreathePoisonMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperZSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "Air hound";

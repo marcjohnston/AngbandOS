@@ -13,7 +13,7 @@ internal class NetherHoundMonsterRace : MonsterRace
     protected NetherHoundMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheNetherMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheNetherMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperZSymbol>();
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Nether hound";

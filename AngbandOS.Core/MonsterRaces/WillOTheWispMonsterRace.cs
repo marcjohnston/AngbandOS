@@ -13,10 +13,10 @@ internal class WillOTheWispMonsterRace : MonsterRace
     protected WillOTheWispMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new CauseSeriousWoundsMonsterSpell(),
-        new ConfuseMonsterSpell(),
-        new BlinkMonsterSpell(),
-        new TeleportSelfMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseSeriousWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportSelfMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
     public override ColourEnum Colour => ColourEnum.BrightTurquoise;
     public override string Name => "Will o' the wisp";

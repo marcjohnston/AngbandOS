@@ -11,6 +11,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class ShardBallMonsterSpell : BallProjectileMonsterSpell
 {
+    private ShardBallMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool IsInnate => true;
     public override bool UsesShards => true;
     public override bool IsAttack => true;

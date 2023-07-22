@@ -13,7 +13,7 @@ internal class BlackOrcMonsterRace : MonsterRace
     protected BlackOrcMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new Arrow1D6MonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<Arrow1D6MonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerOSymbol>();
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Black orc";

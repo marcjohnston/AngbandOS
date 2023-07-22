@@ -13,17 +13,17 @@ internal class BoneGolemMonsterRace : MonsterRace
     protected BoneGolemMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BlindnessMonsterSpell(),
-        new BrainSmashMonsterSpell(),
-        new CauseCriticalWoundsMonsterSpell(),
-        new CauseMortalWoundsMonsterSpell(),
-        new ConfuseMonsterSpell(),
-        new DrainManaMonsterSpell(),
-        new HoldMonsterSpell(),
-        new ManaBallMonsterSpell(),
-        new NetherBallMonsterSpell(),
-        new SummonUndeadMonsterSpell(),
-        new TeleportToMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BrainSmashMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseCriticalWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseMortalWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<DrainManaMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HoldMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ManaBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<NetherBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonUndeadMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerGSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightBeige;
     public override string Name => "Bone golem";

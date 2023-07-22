@@ -13,7 +13,7 @@ internal class AirElementalMonsterRace : MonsterRace
     protected AirElementalMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new LightningBoltMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<LightningBoltMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
     public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "Air elemental";

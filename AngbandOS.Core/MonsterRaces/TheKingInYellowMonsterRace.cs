@@ -13,14 +13,14 @@ internal class TheKingInYellowMonsterRace : MonsterRace
     protected TheKingInYellowMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheColdMonsterSpell(),
-        new BreatheFireMonsterSpell(),
-        new BreatheNetherMonsterSpell(),
-        new BreathePoisonMonsterSpell(),
-        new AcidBoltMonsterSpell(),
-        new ManaBoltMonsterSpell(),
-        new PoisonBallMonsterSpell(),
-        new WaterBoltMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheColdMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheFireMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheNetherMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreathePoisonMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<AcidBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ManaBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<PoisonBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<WaterBoltMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<QuestionMarkSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightYellow;
     public override string Name => "The King in Yellow";

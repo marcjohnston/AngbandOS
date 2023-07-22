@@ -13,7 +13,7 @@ internal class ColdVortexMonsterRace : MonsterRace
     protected ColdVortexMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheColdMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheColdMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerVSymbol>();
     public override ColourEnum Colour => ColourEnum.Diamond;
     public override string Name => "Cold vortex";

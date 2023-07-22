@@ -13,12 +13,12 @@ internal class DeathQuasitMonsterRace : MonsterRace
     protected DeathQuasitMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BlindnessMonsterSpell(),
-        new CauseCriticalWoundsMonsterSpell(),
-        new ConfuseMonsterSpell(),
-        new ScareMonsterSpell(),
-        new ForgetMonsterSpell(),
-        new SummonDemonMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseCriticalWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ForgetMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonDemonMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerUSymbol>();
     public override string Name => "Death quasit";
 

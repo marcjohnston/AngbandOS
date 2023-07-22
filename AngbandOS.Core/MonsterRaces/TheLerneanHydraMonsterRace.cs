@@ -13,14 +13,14 @@ internal class TheLerneanHydraMonsterRace : MonsterRace
     protected TheLerneanHydraMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheFireMonsterSpell(),
-        new BreathePoisonMonsterSpell(),
-        new FireBallMonsterSpell(),
-        new FireBoltMonsterSpell(),
-        new PlasmaBoltMonsterSpell(),
-        new PoisonBallMonsterSpell(),
-        new ScareMonsterSpell(),
-        new SummonHydraMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheFireMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreathePoisonMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<FireBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<FireBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<PlasmaBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<PoisonBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonHydraMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperMSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightTurquoise;
     public override string Name => "The Lernean Hydra";

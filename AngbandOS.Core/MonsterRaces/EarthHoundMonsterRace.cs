@@ -13,7 +13,7 @@ internal class EarthHoundMonsterRace : MonsterRace
     protected EarthHoundMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheShardsMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheShardsMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperZSymbol>();
     public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Earth hound";

@@ -13,9 +13,9 @@ internal class DemonicQuylthulgMonsterRace : MonsterRace
     protected DemonicQuylthulgMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BlinkMonsterSpell(),
-        new SummonDemonMonsterSpell(),
-        new TeleportSelfMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonDemonMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportSelfMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperQSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Demonic quylthulg";

@@ -13,8 +13,8 @@ internal class MatureBlackDragonMonsterRace : MonsterRace
     protected MatureBlackDragonMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheAcidMonsterSpell(),
-        new ScareMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheAcidMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Mature black dragon";

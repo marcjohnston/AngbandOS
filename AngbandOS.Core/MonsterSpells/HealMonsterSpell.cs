@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class HealMonsterSpell : MonsterSpell
 {
+    private HealMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool IsIntelligent => true;
     public override bool Heals => true;
 

@@ -13,7 +13,7 @@ internal class GiantGoldDragonFlyMonsterRace : MonsterRace
     protected GiantGoldDragonFlyMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheSoundMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheSoundMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperFSymbol>();
     public override ColourEnum Colour => ColourEnum.Gold;
     public override string Name => "Giant gold dragon fly";

@@ -13,7 +13,7 @@ internal class ImpactHoundMonsterRace : MonsterRace
     protected ImpactHoundMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheForceMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheForceMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperZSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Impact hound";

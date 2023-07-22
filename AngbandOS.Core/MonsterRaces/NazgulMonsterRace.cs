@@ -13,10 +13,10 @@ internal class NazgulMonsterRace : MonsterRace
     protected NazgulMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheNetherMonsterSpell(),
-        new DrainManaMonsterSpell(),
-        new HoldMonsterSpell(),
-        new ScareMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheNetherMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<DrainManaMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HoldMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperWSymbol>();
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Nazgul";

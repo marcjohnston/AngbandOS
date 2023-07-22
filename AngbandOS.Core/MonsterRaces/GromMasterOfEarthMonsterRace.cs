@@ -13,8 +13,8 @@ internal class GromMasterOfEarthMonsterRace : MonsterRace
     protected GromMasterOfEarthMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new AcidBallMonsterSpell(),
-        new AcidBoltMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<AcidBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<AcidBoltMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
     public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Grom, Master of Earth";

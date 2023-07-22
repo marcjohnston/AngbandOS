@@ -13,7 +13,7 @@ internal class BlackOozeMonsterRace : MonsterRace
     protected BlackOozeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new DrainManaMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<DrainManaMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerJSymbol>();
     public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Black ooze";

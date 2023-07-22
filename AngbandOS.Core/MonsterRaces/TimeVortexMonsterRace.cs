@@ -13,7 +13,7 @@ internal class TimeVortexMonsterRace : MonsterRace
     protected TimeVortexMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheTimeMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheTimeMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerVSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Time vortex";

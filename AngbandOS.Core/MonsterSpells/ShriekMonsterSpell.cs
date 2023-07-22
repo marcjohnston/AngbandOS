@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class ShriekMonsterSpell : MonsterSpell
 {
+    private ShriekMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool IsInnate => true;
     public override bool Annoys => true;
 

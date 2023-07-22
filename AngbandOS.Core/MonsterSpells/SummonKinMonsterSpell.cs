@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class SummonKinMonsterSpell : SummonMonsterSpell
 {
+    private SummonKinMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     /// <summary>
     /// Returns an empty string because all messages are overridden.
     /// </summary>

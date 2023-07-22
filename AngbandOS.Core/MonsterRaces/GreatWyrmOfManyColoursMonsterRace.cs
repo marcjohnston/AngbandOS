@@ -13,14 +13,14 @@ internal class GreatWyrmOfManyColoursMonsterRace : MonsterRace
     protected GreatWyrmOfManyColoursMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheAcidMonsterSpell(),
-        new BreatheColdMonsterSpell(),
-        new BreatheLightningMonsterSpell(),
-        new BreatheFireMonsterSpell(),
-        new BreathePoisonMonsterSpell(),
-        new BlindnessMonsterSpell(),
-        new ConfuseMonsterSpell(),
-        new ScareMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheAcidMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheColdMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheLightningMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheFireMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreathePoisonMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
     public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Great Wyrm of Many Colours";

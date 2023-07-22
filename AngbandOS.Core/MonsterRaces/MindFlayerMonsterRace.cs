@@ -13,12 +13,12 @@ internal class MindFlayerMonsterRace : MonsterRace
     protected MindFlayerMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BlindnessMonsterSpell(),
-        new BrainSmashMonsterSpell(),
-        new HoldMonsterSpell(),
-        new MindBlastMonsterSpell(),
-        new ScareMonsterSpell(),
-        new ForgetMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BrainSmashMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HoldMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<MindBlastMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ForgetMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
     public override ColourEnum Colour => ColourEnum.Pink;
     public override string Name => "Mind flayer";

@@ -13,7 +13,7 @@ internal class NoviceArcherMonsterRace : MonsterRace
     protected NoviceArcherMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new Arrow1D6MonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<Arrow1D6MonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Novice archer";

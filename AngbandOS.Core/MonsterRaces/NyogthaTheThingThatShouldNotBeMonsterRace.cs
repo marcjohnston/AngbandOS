@@ -13,18 +13,18 @@ internal class NyogthaTheThingThatShouldNotBeMonsterRace : MonsterRace
     protected NyogthaTheThingThatShouldNotBeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheAcidMonsterSpell(),
-        new BreatheDarkMonsterSpell(),
-        new BreathePoisonMonsterSpell(),
-        new BreatheRadiationMonsterSpell(),
-        new BrainSmashMonsterSpell(),
-        new MindBlastMonsterSpell(),
-        new HasteMonsterSpell(),
-        new SummonCthuloidMonsterSpell(),
-        new SummonHiUndeadMonsterSpell(),
-        new SummonKinMonsterSpell(),
-        new SummonUndeadMonsterSpell(),
-        new TeleportSelfMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheAcidMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheDarkMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreathePoisonMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheRadiationMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BrainSmashMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<MindBlastMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HasteMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonCthuloidMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonHiUndeadMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonKinMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonUndeadMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportSelfMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperXSymbol>();
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Nyogtha, the Thing that Should not Be";

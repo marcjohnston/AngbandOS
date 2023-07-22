@@ -13,7 +13,7 @@ internal class ShamblerMonsterRace : MonsterRace
     protected ShamblerMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheLightningMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheLightningMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
     public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "Shambler";

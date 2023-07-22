@@ -13,13 +13,13 @@ internal class SkyDrakeMonsterRace : MonsterRace
     protected SkyDrakeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheLightningMonsterSpell(),
-        new BreatheGravityMonsterSpell(),
-        new BreatheLightMonsterSpell(),
-        new BlindnessMonsterSpell(),
-        new ScareMonsterSpell(),
-        new SummonDragonMonsterSpell(),
-        new SummonHiDragonMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheLightningMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheGravityMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheLightMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonDragonMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonHiDragonMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "Sky Drake";

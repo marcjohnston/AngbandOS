@@ -13,7 +13,7 @@ internal class LightHoundMonsterRace : MonsterRace
     protected LightHoundMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheLightMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheLightMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperZSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "Light hound";

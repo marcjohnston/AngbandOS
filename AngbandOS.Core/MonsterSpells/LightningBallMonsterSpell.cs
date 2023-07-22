@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class LightningBallMonsterSpell : BallProjectileMonsterSpell
 {
+    private LightningBallMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool UsesLightning => true;
     public override bool IsAttack => true;
     protected override string ActionName => "casts a lightning ball";

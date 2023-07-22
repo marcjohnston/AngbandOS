@@ -13,11 +13,11 @@ internal class FormlessSpawnOfTsathogguaMonsterRace : MonsterRace
     protected FormlessSpawnOfTsathogguaMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new AcidBoltMonsterSpell(),
-        new FireBoltMonsterSpell(),
-        new MindBlastMonsterSpell(),
-        new DarknessMonsterSpell(),
-        new SummonCthuloidMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<AcidBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<FireBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<MindBlastMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<DarknessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonCthuloidMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperASymbol>();
     public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Formless spawn of Tsathoggua";

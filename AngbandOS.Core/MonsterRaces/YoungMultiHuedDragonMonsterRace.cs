@@ -13,12 +13,12 @@ internal class YoungMultiHuedDragonMonsterRace : MonsterRace
     protected YoungMultiHuedDragonMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheAcidMonsterSpell(),
-        new BreatheColdMonsterSpell(),
-        new BreatheLightningMonsterSpell(),
-        new BreatheFireMonsterSpell(),
-        new BreathePoisonMonsterSpell(),
-        new ScareMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheAcidMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheColdMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheLightningMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheFireMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreathePoisonMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
     public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Young multi-hued dragon";

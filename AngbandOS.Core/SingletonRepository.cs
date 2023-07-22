@@ -15,6 +15,7 @@ namespace AngbandOS.Core;
 /// </summary>
 internal class SingletonRepository
 {
+    public SingletonDictionary<MonsterSpell> MonsterSpells;
     public SingletonDictionary<Talent> Talents;
     public SingletonDictionary<AlterAction> AlterActions;
     public SingletonDictionary<Symbol> Symbols;
@@ -102,6 +103,7 @@ internal class SingletonRepository
 
     public void Initialize(SaveGame saveGame)
     {
+        MonsterSpells = new SingletonDictionary<MonsterSpell>(saveGame, LoadTypesFromAssembly<MonsterSpell>(saveGame));
         Talents = new SingletonDictionary<Talent>(saveGame, LoadTypesFromAssembly<Talent>(saveGame));
         AlterActions = new SingletonDictionary<AlterAction>(saveGame, LoadTypesFromAssembly<AlterAction>(saveGame));
         Symbols = new SingletonDictionary<Symbol>(saveGame, LoadTypesFromAssembly<Symbol>(saveGame));

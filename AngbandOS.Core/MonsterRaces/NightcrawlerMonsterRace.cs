@@ -13,14 +13,14 @@ internal class NightcrawlerMonsterRace : MonsterRace
     protected NightcrawlerMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheNetherMonsterSpell(),
-        new BlindnessMonsterSpell(),
-        new BrainSmashMonsterSpell(),
-        new ManaBoltMonsterSpell(),
-        new NetherBallMonsterSpell(),
-        new NetherBoltMonsterSpell(),
-        new ScareMonsterSpell(),
-        new SummonUndeadMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheNetherMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BrainSmashMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ManaBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<NetherBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<NetherBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonUndeadMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerZSymbol>();
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Nightcrawler";

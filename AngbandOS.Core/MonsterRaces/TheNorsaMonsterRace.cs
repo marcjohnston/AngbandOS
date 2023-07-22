@@ -13,16 +13,16 @@ internal class TheNorsaMonsterRace : MonsterRace
     protected TheNorsaMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheAcidMonsterSpell(),
-        new BreatheColdMonsterSpell(),
-        new BreatheLightningMonsterSpell(),
-        new BreatheFireMonsterSpell(),
-        new BreathePoisonMonsterSpell(),
-        new BlindnessMonsterSpell(),
-        new ConfuseMonsterSpell(),
-        new ScareMonsterSpell(),
-        new SummonHiDragonMonsterSpell(),
-        new SummonMonstersMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheAcidMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheColdMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheLightningMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheFireMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreathePoisonMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonHiDragonMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonstersMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperHSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "The Norsa";

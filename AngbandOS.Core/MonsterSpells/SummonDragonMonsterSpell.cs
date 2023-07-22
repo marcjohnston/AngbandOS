@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class SummonDragonMonsterSpell : SummonMonsterSpell
 {
+    private SummonDragonMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     protected override string SummonName(Monster monster) => "a dragon";
 
     protected override int MaximumSummonCount(SaveGame saveGame) => 1;

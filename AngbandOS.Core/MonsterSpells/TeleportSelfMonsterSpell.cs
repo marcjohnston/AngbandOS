@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class TeleportSelfMonsterSpell : MonsterSpell
 {
+    private TeleportSelfMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool IsIntelligent => true;
     public override bool ProvidesEscape => true;
 

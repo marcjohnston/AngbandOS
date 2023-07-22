@@ -13,13 +13,13 @@ internal class FlyingPolypMonsterRace : MonsterRace
     protected FlyingPolypMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new ConfuseMonsterSpell(),
-        new ManaBoltMonsterSpell(),
-        new PlasmaBoltMonsterSpell(),
-        new HasteMonsterSpell(),
-        new HealMonsterSpell(),
-        new SummonMonstersMonsterSpell(),
-        new TeleportAwayMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ManaBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<PlasmaBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HasteMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HealMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonstersMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportAwayMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperASymbol>();
     public override ColourEnum Colour => ColourEnum.Diamond;
     public override string Name => "Flying polyp";

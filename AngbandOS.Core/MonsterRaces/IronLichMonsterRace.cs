@@ -13,15 +13,15 @@ internal class IronLichMonsterRace : MonsterRace
     protected IronLichMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheFireMonsterSpell(),
-        new BrainSmashMonsterSpell(),
-        new CauseMortalWoundsMonsterSpell(),
-        new ColdBallMonsterSpell(),
-        new DrainManaMonsterSpell(),
-        new IceBoltMonsterSpell(),
-        new LightningBallMonsterSpell(),
-        new WaterBallMonsterSpell(),
-        new SummonUndeadMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheFireMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BrainSmashMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseMortalWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ColdBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<DrainManaMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<IceBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<LightningBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<WaterBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonUndeadMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperLSymbol>();
     public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Iron lich";

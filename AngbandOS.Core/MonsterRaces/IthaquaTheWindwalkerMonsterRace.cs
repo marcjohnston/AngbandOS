@@ -13,18 +13,18 @@ internal class IthaquaTheWindwalkerMonsterRace : MonsterRace
     protected IthaquaTheWindwalkerMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheColdMonsterSpell(),
-        new ChaosBallMonsterSpell(),
-        new CauseMortalWoundsMonsterSpell(),
-        new LightningBallMonsterSpell(),
-        new LightningBoltMonsterSpell(),
-        new ManaBoltMonsterSpell(),
-        new MindBlastMonsterSpell(),
-        new ScareMonsterSpell(),
-        new WaterBallMonsterSpell(),
-        new SummonCthuloidMonsterSpell(),
-        new SummonHiUndeadMonsterSpell(),
-        new SummonKinMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheColdMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ChaosBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseMortalWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<LightningBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<LightningBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ManaBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<MindBlastMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<WaterBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonCthuloidMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonHiUndeadMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonKinMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperXSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "Ithaqua the Windwalker";

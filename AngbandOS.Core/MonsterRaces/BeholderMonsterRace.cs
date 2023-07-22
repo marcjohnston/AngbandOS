@@ -13,17 +13,17 @@ internal class BeholderMonsterRace : MonsterRace
     protected BeholderMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new AcidBoltMonsterSpell(),
-        new BlindnessMonsterSpell(),
-        new ColdBoltMonsterSpell(),
-        new ConfuseMonsterSpell(),
-        new DrainManaMonsterSpell(),
-        new FireBoltMonsterSpell(),
-        new MindBlastMonsterSpell(),
-        new ScareMonsterSpell(),
-        new SlowMonsterSpell(),
-        new DarknessMonsterSpell(),
-        new ForgetMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<AcidBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ColdBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<DrainManaMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<FireBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<MindBlastMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SlowMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<DarknessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ForgetMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerESymbol>();
     public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "Beholder";

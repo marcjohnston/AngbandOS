@@ -13,11 +13,11 @@ internal class EtherealDragonMonsterRace : MonsterRace
     protected EtherealDragonMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheConfusionMonsterSpell(),
-        new BreatheDarkMonsterSpell(),
-        new BreatheLightMonsterSpell(),
-        new BlindnessMonsterSpell(),
-        new ConfuseMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheConfusionMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheDarkMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheLightMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightGrey;
     public override string Name => "Ethereal dragon";

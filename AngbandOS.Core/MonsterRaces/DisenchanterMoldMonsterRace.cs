@@ -13,7 +13,7 @@ internal class DisenchanterMoldMonsterRace : MonsterRace
     protected DisenchanterMoldMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new DrainManaMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<DrainManaMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerMSymbol>();
     public override ColourEnum Colour => ColourEnum.Chartreuse;
     public override string Name => "Disenchanter mold";

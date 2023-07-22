@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal abstract class CauseWoundsMonsterSpell : MonsterSpell
 {
+    protected CauseWoundsMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool IsAttack => true;
     public override bool Annoys => true;
 

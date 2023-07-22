@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class ForgetMonsterSpell : MonsterSpell
 {
+    private ForgetMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool Annoys => true;
 
     public override string? VsPlayerBlindMessage => $"Someone tries to blank your mind.";

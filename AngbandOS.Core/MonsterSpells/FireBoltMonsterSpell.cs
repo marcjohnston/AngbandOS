@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class FireBoltMonsterSpell : BoltProjectileMonsterSpell
 {
+    private FireBoltMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool UsesFire => true;
     public override bool CanBeReflected => true;
     public override bool IsAttack => true;

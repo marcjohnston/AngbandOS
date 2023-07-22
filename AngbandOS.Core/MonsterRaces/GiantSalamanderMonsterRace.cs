@@ -13,7 +13,7 @@ internal class GiantSalamanderMonsterRace : MonsterRace
     protected GiantSalamanderMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheFireMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheFireMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperRSymbol>();
     public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Giant salamander";

@@ -13,7 +13,7 @@ internal class ChaosVortexMonsterRace : MonsterRace
     protected ChaosVortexMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheChaosMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheChaosMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerVSymbol>();
     public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Chaos vortex";

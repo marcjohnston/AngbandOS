@@ -13,7 +13,7 @@ internal class QuiverSlotMonsterRace : MonsterRace
     protected QuiverSlotMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new Arrow1D6MonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<Arrow1D6MonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CommaSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Quiver slot";

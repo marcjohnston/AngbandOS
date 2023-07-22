@@ -13,11 +13,11 @@ internal class DriderMonsterRace : MonsterRace
     protected DriderMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new Arrow3D6MonsterSpell(),
-        new CauseLightWoundsMonsterSpell(),
-        new ConfuseMonsterSpell(),
-        new MagicMissileMonsterSpell(),
-        new DarknessMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<Arrow3D6MonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseLightWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<MagicMissileMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<DarknessMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperSSymbol>();
     public override ColourEnum Colour => ColourEnum.Blue;
     public override string Name => "Drider";

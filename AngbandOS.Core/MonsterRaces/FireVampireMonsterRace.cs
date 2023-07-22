@@ -13,7 +13,7 @@ internal class FireVampireMonsterRace : MonsterRace
     protected FireVampireMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BlinkMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperASymbol>();
     public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Fire vampire";

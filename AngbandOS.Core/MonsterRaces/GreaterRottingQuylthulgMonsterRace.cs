@@ -13,9 +13,9 @@ internal class GreaterRottingQuylthulgMonsterRace : MonsterRace
     protected GreaterRottingQuylthulgMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BlinkMonsterSpell(),
-        new SummonHiUndeadMonsterSpell(),
-        new TeleportToMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonHiUndeadMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperQSymbol>();
     public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Greater rotting quylthulg";

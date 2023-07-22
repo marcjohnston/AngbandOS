@@ -13,7 +13,7 @@ internal class TheQueenAntMonsterRace : MonsterRace
     protected TheQueenAntMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new SummonAntMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonAntMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerASymbol>();
     public override ColourEnum Colour => ColourEnum.Gold;
     public override string Name => "The Queen Ant";

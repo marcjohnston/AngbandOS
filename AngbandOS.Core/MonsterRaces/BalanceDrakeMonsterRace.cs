@@ -13,13 +13,13 @@ internal class BalanceDrakeMonsterRace : MonsterRace
     protected BalanceDrakeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheChaosMonsterSpell(),
-        new BreatheDisenchantMonsterSpell(),
-        new BreatheShardsMonsterSpell(),
-        new BreatheSoundMonsterSpell(),
-        new ConfuseMonsterSpell(),
-        new ScareMonsterSpell(),
-        new SlowMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheChaosMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheDisenchantMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheShardsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheSoundMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SlowMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
     public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Balance drake";

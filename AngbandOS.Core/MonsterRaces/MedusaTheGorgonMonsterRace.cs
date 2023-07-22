@@ -13,13 +13,13 @@ internal class MedusaTheGorgonMonsterRace : MonsterRace
     protected MedusaTheGorgonMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new CauseCriticalWoundsMonsterSpell(),
-        new FireBoltMonsterSpell(),
-        new HoldMonsterSpell(),
-        new PlasmaBoltMonsterSpell(),
-        new PoisonBallMonsterSpell(),
-        new ScareMonsterSpell(),
-        new SummonHydraMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseCriticalWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<FireBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HoldMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<PlasmaBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<PoisonBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonHydraMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerNSymbol>();
     public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Medusa, the Gorgon";

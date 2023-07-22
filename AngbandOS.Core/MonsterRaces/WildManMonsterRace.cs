@@ -13,7 +13,7 @@ internal class WildManMonsterRace : MonsterRace
     protected WildManMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new Arrow1D6MonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<Arrow1D6MonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Wild man";

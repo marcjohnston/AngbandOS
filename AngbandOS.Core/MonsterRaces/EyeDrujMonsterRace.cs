@@ -13,10 +13,10 @@ internal class EyeDrujMonsterRace : MonsterRace
     protected EyeDrujMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new ManaBoltMonsterSpell(),
-        new NetherBallMonsterSpell(),
-        new NetherBoltMonsterSpell(),
-        new SummonUndeadMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<ManaBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<NetherBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<NetherBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonUndeadMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerSSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightGrey;
     public override string Name => "Eye druj";

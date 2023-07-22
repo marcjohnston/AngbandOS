@@ -13,7 +13,7 @@ internal class ColossusMonsterRace : MonsterRace
     protected ColossusMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new Arrow7D6MonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<Arrow7D6MonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerGSymbol>();
     public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "Colossus";

@@ -13,16 +13,16 @@ internal class AtlachNachaTheSpiderGodMonsterRace : MonsterRace
     protected AtlachNachaTheSpiderGodMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheDarkMonsterSpell(),
-        new BreathePoisonMonsterSpell(),
-        new BlindnessMonsterSpell(),
-        new ConfuseMonsterSpell(),
-        new DarkBallMonsterSpell(),
-        new HoldMonsterSpell(),
-        new ScareMonsterSpell(),
-        new DarknessMonsterSpell(),
-        new SummonCthuloidMonsterSpell(),
-        new SummonSpiderMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheDarkMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreathePoisonMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<DarkBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HoldMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<DarknessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonCthuloidMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonSpiderMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperSSymbol>();
     public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Atlach-Nacha, the Spider God";

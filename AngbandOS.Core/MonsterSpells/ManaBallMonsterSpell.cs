@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class ManaBallMonsterSpell : BallProjectileMonsterSpell
 {
+    private ManaBallMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool IsAttack => true;
 
     /// <summary>

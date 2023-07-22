@@ -13,12 +13,12 @@ internal class StormGiantMonsterRace : MonsterRace
     protected StormGiantMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new ConfuseMonsterSpell(),
-        new LightningBallMonsterSpell(),
-        new LightningBoltMonsterSpell(),
-        new ScareMonsterSpell(),
-        new BlinkMonsterSpell(),
-        new TeleportToMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<LightningBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<LightningBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperPSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightTurquoise;
     public override string Name => "Storm giant";

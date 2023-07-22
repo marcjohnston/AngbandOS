@@ -13,11 +13,11 @@ internal class SpectralTyrannosaurMonsterRace : MonsterRace
     protected SpectralTyrannosaurMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheNetherMonsterSpell(),
-        new BreatheNexusMonsterSpell(),
-        new BreathePoisonMonsterSpell(),
-        new HoldMonsterSpell(),
-        new ScareMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheNetherMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheNexusMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreathePoisonMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HoldMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperRSymbol>();
     public override ColourEnum Colour => ColourEnum.Turquoise;
     public override string Name => "Spectral tyrannosaur";

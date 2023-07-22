@@ -13,7 +13,7 @@ internal class ShadowDemonMonsterRace : MonsterRace
     protected ShadowDemonMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new NetherBoltMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<NetherBoltMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperGSymbol>();
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Shadow demon";

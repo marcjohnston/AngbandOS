@@ -13,8 +13,8 @@ internal class BansheeMonsterRace : MonsterRace
     protected BansheeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new DrainManaMonsterSpell(),
-        new TeleportSelfMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<DrainManaMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportSelfMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperGSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "Banshee";

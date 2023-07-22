@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal abstract class ArrowProjectileMonsterSpell : BoltProjectileMonsterSpell
 {
+    protected ArrowProjectileMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool IsInnate => true;
     public override bool CanBeReflected => true;
     public override bool IsAttack => true;

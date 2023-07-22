@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class HasteMonsterSpell : MonsterSpell
 {
+    private HasteMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool IsIntelligent => true;
     public override bool Hastens => true;
 

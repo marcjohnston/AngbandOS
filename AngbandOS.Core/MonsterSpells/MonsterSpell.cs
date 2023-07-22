@@ -10,6 +10,11 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal abstract class MonsterSpell
 {
+    protected readonly SaveGame SaveGame;
+    protected MonsterSpell(SaveGame saveGame) 
+    {
+        SaveGame = saveGame;
+    }
     /// <summary>
     /// Returns true, if the spell is an innate ability.  Returns false, by default.  Spells that return true represent spells in the Flags4 flag-set.
     /// </summary>

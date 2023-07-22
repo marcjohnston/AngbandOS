@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class ConfuseMonsterSpell : MonsterSpell
 {
+    private ConfuseMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool IsIntelligent => true;
     public override bool UsesConfusion => true;
     public override bool Annoys => true;

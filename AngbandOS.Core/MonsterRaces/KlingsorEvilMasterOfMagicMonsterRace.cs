@@ -13,20 +13,20 @@ internal class KlingsorEvilMasterOfMagicMonsterRace : MonsterRace
     protected KlingsorEvilMasterOfMagicMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new ChaosBallMonsterSpell(),
-        new CauseCriticalWoundsMonsterSpell(),
-        new DarkBallMonsterSpell(),
-        new DrainManaMonsterSpell(),
-        new FireBallMonsterSpell(),
-        new HoldMonsterSpell(),
-        new ManaBallMonsterSpell(),
-        new NetherBallMonsterSpell(),
-        new PlasmaBoltMonsterSpell(),
-        new WaterBallMonsterSpell(),
-        new CreateTrapsMonsterSpell(),
-        new DreadCurseMonsterSpell(),
-        new SummonHiUndeadMonsterSpell(),
-        new TeleportToMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<ChaosBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseCriticalWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<DarkBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<DrainManaMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<FireBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HoldMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ManaBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<NetherBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<PlasmaBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<WaterBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<CreateTrapsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<DreadCurseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonHiUndeadMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "Klingsor, Evil Master of Magic";

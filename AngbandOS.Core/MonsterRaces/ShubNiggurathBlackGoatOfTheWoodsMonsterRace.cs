@@ -13,20 +13,20 @@ internal class ShubNiggurathBlackGoatOfTheWoodsMonsterRace : MonsterRace
     protected ShubNiggurathBlackGoatOfTheWoodsMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheChaosMonsterSpell(),
-        new BreatheConfusionMonsterSpell(),
-        new BreathePoisonMonsterSpell(),
-        new BreatheRadiationMonsterSpell(),
-        new ChaosBallMonsterSpell(),
-        new BrainSmashMonsterSpell(),
-        new CauseMortalWoundsMonsterSpell(),
-        new DarkBallMonsterSpell(),
-        new ManaBoltMonsterSpell(),
-        new HealMonsterSpell(),
-        new SummonCthuloidMonsterSpell(),
-        new SummonHiUndeadMonsterSpell(),
-        new SummonMonstersMonsterSpell(),
-        new SummonUniqueMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheChaosMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheConfusionMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreathePoisonMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheRadiationMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ChaosBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BrainSmashMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseMortalWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<DarkBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ManaBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HealMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonCthuloidMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonHiUndeadMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonstersMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonUniqueMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperXSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Shub-Niggurath, Black Goat of the Woods";

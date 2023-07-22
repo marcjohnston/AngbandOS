@@ -13,10 +13,10 @@ internal class SpectatorMonsterRace : MonsterRace
     protected SpectatorMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new CauseSeriousWoundsMonsterSpell(),
-        new HoldMonsterSpell(),
-        new SlowMonsterSpell(),
-        new ForgetMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseSeriousWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HoldMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SlowMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ForgetMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerESymbol>();
     public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Spectator";

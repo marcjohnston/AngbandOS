@@ -13,23 +13,23 @@ internal class AzathothTheDaemonSultanMonsterRace : MonsterRace
     protected AzathothTheDaemonSultanMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheChaosMonsterSpell(),
-        new BreatheDisintegrationMonsterSpell(),
-        new BreatheManaMonsterSpell(),
-        new BreatheNetherMonsterSpell(),
-        new BreathePoisonMonsterSpell(),
-        new BreatheRadiationMonsterSpell(),
-        new ChaosBallMonsterSpell(),
-        new BrainSmashMonsterSpell(),
-        new DreadCurseMonsterSpell(),
-        new HasteMonsterSpell(),
-        new SummonCthuloidMonsterSpell(),
-        new SummonGreatOldOneMonsterSpell(),
-        new SummonHiDragonMonsterSpell(),
-        new SummonHiUndeadMonsterSpell(),
-        new SummonMonstersMonsterSpell(),
-        new SummonReaverMonsterSpell(),
-        new SummonUniqueMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheChaosMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheDisintegrationMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheManaMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheNetherMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreathePoisonMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheRadiationMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ChaosBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BrainSmashMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<DreadCurseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HasteMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonCthuloidMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonGreatOldOneMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonHiDragonMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonHiUndeadMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonstersMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonReaverMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonUniqueMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperXSymbol>();
     public override ColourEnum Colour => ColourEnum.Pink;
     public override string Name => "Azathoth, The Daemon Sultan";

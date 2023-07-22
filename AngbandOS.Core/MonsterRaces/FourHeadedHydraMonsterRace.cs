@@ -13,7 +13,7 @@ internal class FourHeadedHydraMonsterRace : MonsterRace
     protected FourHeadedHydraMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new ScareMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperMSymbol>();
     public override ColourEnum Colour => ColourEnum.Chartreuse;
     public override string Name => "4-headed hydra";

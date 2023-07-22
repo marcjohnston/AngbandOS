@@ -13,10 +13,10 @@ internal class GlaurungFatherOfTheDragonsMonsterRace : MonsterRace
     protected GlaurungFatherOfTheDragonsMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheFireMonsterSpell(),
-        new CauseCriticalWoundsMonsterSpell(),
-        new ConfuseMonsterSpell(),
-        new SummonDragonMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheFireMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseCriticalWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonDragonMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
     public override ColourEnum Colour => ColourEnum.Orange;
     public override string Name => "Glaurung, Father of the Dragons";

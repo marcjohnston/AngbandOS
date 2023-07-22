@@ -13,15 +13,15 @@ internal class KavlaxTheManyHeadedMonsterRace : MonsterRace
     protected KavlaxTheManyHeadedMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheAcidMonsterSpell(),
-        new BreatheColdMonsterSpell(),
-        new BreatheConfusionMonsterSpell(),
-        new BreatheLightningMonsterSpell(),
-        new BreatheFireMonsterSpell(),
-        new BreatheGravityMonsterSpell(),
-        new BreatheNexusMonsterSpell(),
-        new BreatheShardsMonsterSpell(),
-        new BreatheSoundMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheAcidMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheColdMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheConfusionMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheLightningMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheFireMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheGravityMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheNexusMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheShardsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheSoundMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
     public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Kavlax the Many-Headed";

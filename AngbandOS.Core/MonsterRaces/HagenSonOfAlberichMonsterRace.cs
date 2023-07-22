@@ -13,9 +13,9 @@ internal class HagenSonOfAlberichMonsterRace : MonsterRace
     protected HagenSonOfAlberichMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new FireBoltMonsterSpell(),
-        new HasteMonsterSpell(),
-        new HealMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<FireBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HasteMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HealMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
     public override ColourEnum Colour => ColourEnum.Orange;
     public override string Name => "Hagen, son of Alberich";

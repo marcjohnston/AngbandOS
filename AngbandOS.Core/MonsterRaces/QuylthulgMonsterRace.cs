@@ -13,8 +13,8 @@ internal class QuylthulgMonsterRace : MonsterRace
     protected QuylthulgMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BlinkMonsterSpell(),
-        new SummonMonsterMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonsterMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperQSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "Quylthulg";

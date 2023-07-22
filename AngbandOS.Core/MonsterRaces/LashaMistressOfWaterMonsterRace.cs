@@ -13,10 +13,10 @@ internal class LashaMistressOfWaterMonsterRace : MonsterRace
     protected LashaMistressOfWaterMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new ColdBallMonsterSpell(),
-        new IceBoltMonsterSpell(),
-        new WaterBallMonsterSpell(),
-        new WaterBoltMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<ColdBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<IceBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<WaterBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<WaterBoltMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
     public override ColourEnum Colour => ColourEnum.Blue;
     public override string Name => "Lasha, Mistress of Water";

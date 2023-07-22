@@ -13,21 +13,21 @@ internal class QlzqqlzuupTheLordOfFleshMonsterRace : MonsterRace
     protected QlzqqlzuupTheLordOfFleshMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new SummonAntMonsterSpell(),
-        new SummonCthuloidMonsterSpell(),
-        new SummonDemonMonsterSpell(),
-        new SummonDragonMonsterSpell(),
-        new SummonGreatOldOneMonsterSpell(),
-        new SummonHiDragonMonsterSpell(),
-        new SummonHiUndeadMonsterSpell(),
-        new SummonHoundMonsterSpell(),
-        new SummonHydraMonsterSpell(),
-        new SummonKinMonsterSpell(),
-        new SummonMonsterMonsterSpell(),
-        new SummonMonstersMonsterSpell(),
-        new SummonSpiderMonsterSpell(),
-        new SummonUndeadMonsterSpell(),
-        new SummonUniqueMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonAntMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonCthuloidMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonDemonMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonDragonMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonGreatOldOneMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonHiDragonMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonHiUndeadMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonHoundMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonHydraMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonKinMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonsterMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonstersMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonSpiderMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonUndeadMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonUniqueMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperQSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "Qlzqqlzuup, the Lord of Flesh";

@@ -13,7 +13,7 @@ internal class InertiaHoundMonsterRace : MonsterRace
     protected InertiaHoundMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheInertiaMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheInertiaMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperZSymbol>();
     public override ColourEnum Colour => ColourEnum.Orange;
     public override string Name => "Inertia hound";

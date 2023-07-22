@@ -13,8 +13,8 @@ internal class ClubberDemonMonsterRace : MonsterRace
     protected ClubberDemonMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BlindnessMonsterSpell(),
-        new ConfuseMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperUSymbol>();
     public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Clubber demon";

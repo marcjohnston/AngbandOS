@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class BreatheFireMonsterSpell : BreatheProjectileMonsterSpell
 {
+    private BreatheFireMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool UsesFire => true;
     protected override string ElementName => "fire";
     protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get<FireProjectile>();

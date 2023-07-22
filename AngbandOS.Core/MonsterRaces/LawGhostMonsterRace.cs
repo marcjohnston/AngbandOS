@@ -13,8 +13,8 @@ internal class LawGhostMonsterRace : MonsterRace
     protected LawGhostMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new MindBlastMonsterSpell(),
-        new ForgetMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<MindBlastMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ForgetMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperGSymbol>();
     public override ColourEnum Colour => ColourEnum.Silver;
     public override string Name => "Law ghost";

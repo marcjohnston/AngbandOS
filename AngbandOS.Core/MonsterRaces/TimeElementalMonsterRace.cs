@@ -13,8 +13,8 @@ internal class TimeElementalMonsterRace : MonsterRace
     protected TimeElementalMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheTimeMonsterSpell(),
-        new SlowMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheTimeMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SlowMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
     public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Time elemental";

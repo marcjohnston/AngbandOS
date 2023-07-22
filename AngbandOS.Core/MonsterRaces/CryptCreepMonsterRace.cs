@@ -13,8 +13,8 @@ internal class CryptCreepMonsterRace : MonsterRace
     protected CryptCreepMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new CauseLightWoundsMonsterSpell(),
-        new SummonUndeadMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseLightWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonUndeadMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerSSymbol>();
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Crypt creep";

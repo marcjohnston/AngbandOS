@@ -13,8 +13,8 @@ internal class OozeElementalMonsterRace : MonsterRace
     protected OozeElementalMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new AcidBallMonsterSpell(),
-        new AcidBoltMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<AcidBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<AcidBoltMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
     public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Ooze elemental";

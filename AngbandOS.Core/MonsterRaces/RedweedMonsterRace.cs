@@ -13,7 +13,7 @@ internal class RedweedMonsterRace : MonsterRace
     protected RedweedMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BlinkMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerMSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Redweed";

@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal abstract class SummonMonsterSpell : MonsterSpell
 {
+    protected SummonMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     /// <summary>
     /// Returns true because all summoning magic spells require intelligence.
     /// </summary>

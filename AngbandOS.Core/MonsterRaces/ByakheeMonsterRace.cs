@@ -13,9 +13,9 @@ internal class ByakheeMonsterRace : MonsterRace
     protected ByakheeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new ConfuseMonsterSpell(),
-        new FireBoltMonsterSpell(),
-        new SummonDemonMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<FireBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonDemonMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperBSymbol>();
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Byakhee";

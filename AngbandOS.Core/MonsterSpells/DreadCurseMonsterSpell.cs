@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class DreadCurseMonsterSpell : MonsterSpell
 {
+    private DreadCurseMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool IsAttack => true;
     public override string? VsPlayerBlindMessage => "You hear someone invoke the Dread Curse of Azathoth!";
     public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} invokes the Dread Curse of Azathoth!";

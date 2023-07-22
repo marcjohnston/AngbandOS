@@ -13,7 +13,7 @@ internal class BloodshotEyeMonsterRace : MonsterRace
     protected BloodshotEyeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new DrainManaMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<DrainManaMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerESymbol>();
     public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Bloodshot eye";

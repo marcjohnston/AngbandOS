@@ -13,7 +13,7 @@ internal class PlasmaVortexMonsterRace : MonsterRace
     protected PlasmaVortexMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreathePlasmaMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreathePlasmaMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerVSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Plasma vortex";

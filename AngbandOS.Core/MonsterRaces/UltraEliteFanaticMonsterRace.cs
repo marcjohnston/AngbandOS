@@ -13,7 +13,7 @@ internal class UltraEliteFanaticMonsterRace : MonsterRace
     protected UltraEliteFanaticMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new HealMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<HealMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override string Name => "Ultra-elite fanatic";
 

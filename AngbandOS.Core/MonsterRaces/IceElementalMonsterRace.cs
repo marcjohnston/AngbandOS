@@ -13,8 +13,8 @@ internal class IceElementalMonsterRace : MonsterRace
     protected IceElementalMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new ColdBallMonsterSpell(),
-        new IceBoltMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<ColdBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<IceBoltMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
     public override string Name => "Ice elemental";
 

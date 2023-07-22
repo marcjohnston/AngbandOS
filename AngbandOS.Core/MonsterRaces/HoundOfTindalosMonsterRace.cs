@@ -13,10 +13,10 @@ internal class HoundOfTindalosMonsterRace : MonsterRace
     protected HoundOfTindalosMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheNetherMonsterSpell(),
-        new BreatheTimeMonsterSpell(),
-        new BlinkMonsterSpell(),
-        new TeleportToMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheNetherMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheTimeMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperCSymbol>();
     public override ColourEnum Colour => ColourEnum.Chartreuse;
     public override string Name => "Hound of Tindalos";

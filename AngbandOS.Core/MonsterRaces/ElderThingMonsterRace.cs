@@ -13,14 +13,14 @@ internal class ElderThingMonsterRace : MonsterRace
     protected ElderThingMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new RadiationBallMonsterSpell(),
-        new CauseMortalWoundsMonsterSpell(),
-        new ConfuseMonsterSpell(),
-        new PoisonBallMonsterSpell(),
-        new ScareMonsterSpell(),
-        new SummonCthuloidMonsterSpell(),
-        new SummonUndeadMonsterSpell(),
-        new TeleportAwayMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<RadiationBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseMortalWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<PoisonBallMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonCthuloidMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SummonUndeadMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportAwayMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperASymbol>();
     public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Elder thing";

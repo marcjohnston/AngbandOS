@@ -13,7 +13,7 @@ internal class BlinkingDotMonsterRace : MonsterRace
     protected BlinkingDotMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BlinkMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CommaSymbol>();
     public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Blinking dot";

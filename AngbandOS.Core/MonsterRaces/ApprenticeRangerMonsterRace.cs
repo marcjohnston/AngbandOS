@@ -13,7 +13,7 @@ internal class ApprenticeRangerMonsterRace : MonsterRace
     protected ApprenticeRangerMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new Arrow3D6MonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<Arrow3D6MonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
     public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "Apprentice ranger";

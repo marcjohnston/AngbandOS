@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class NetherBallMonsterSpell : BallProjectileMonsterSpell
 {
+    private NetherBallMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool UsesNether => true;
     public override bool IsAttack => true;
     protected override string ActionName => "casts an nether ball";

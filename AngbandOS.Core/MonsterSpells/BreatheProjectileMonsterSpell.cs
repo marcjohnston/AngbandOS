@@ -15,6 +15,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal abstract class BreatheProjectileMonsterSpell : BallProjectileMonsterSpell
 {
+    protected BreatheProjectileMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     /// <summary>
     /// Returns true because all breathe attacks are innate.
     /// </summary>

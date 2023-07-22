@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class TeleportToMonsterSpell : MonsterSpell
 {
+    private TeleportToMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool Annoys => true;
 
     public override string? VsPlayerBlindMessage => $"Someone commands you to return.";

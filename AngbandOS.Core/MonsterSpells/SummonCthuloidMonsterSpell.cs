@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class SummonCthuloidMonsterSpell : SummonMonsterSpell
 {
+    private SummonCthuloidMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     protected override string SummonName(Monster monster) => "a Cthuloid entity";
 
     protected override int MaximumSummonCount(SaveGame saveGame) => 1;

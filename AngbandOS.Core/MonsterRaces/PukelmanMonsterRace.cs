@@ -13,9 +13,9 @@ internal class PukelmanMonsterRace : MonsterRace
     protected PukelmanMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new AcidBoltMonsterSpell(),
-        new ConfuseMonsterSpell(),
-        new SlowMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<AcidBoltMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<SlowMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerGSymbol>();
     public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Pukelman";

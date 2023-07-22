@@ -13,8 +13,8 @@ internal class ShantakMonsterRace : MonsterRace
     protected ShantakMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new ScareMonsterSpell(),
-        new HasteMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<HasteMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperBSymbol>();
     public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "Shantak";

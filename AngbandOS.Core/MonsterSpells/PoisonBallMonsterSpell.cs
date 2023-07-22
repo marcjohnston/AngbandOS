@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class PoisonBallMonsterSpell : BallProjectileMonsterSpell
 {
+    private PoisonBallMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool UsesPoison => true;
     public override bool IsAttack => true;
     protected override string ActionName => "casts a stinking cloud";

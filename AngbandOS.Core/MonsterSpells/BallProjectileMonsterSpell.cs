@@ -14,6 +14,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal abstract class BallProjectileMonsterSpell : BoltProjectileMonsterSpell
 {
+    protected BallProjectileMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     /// <summary>
     /// Returns the radius of the damage.  Returns 2, by default.
     /// </summary>

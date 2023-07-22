@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class RadiationBallMonsterSpell : BallProjectileMonsterSpell
 {
+    private RadiationBallMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool IsInnate => true;
     public override bool UsesRadiation => true;
     public override bool IsAttack => true;

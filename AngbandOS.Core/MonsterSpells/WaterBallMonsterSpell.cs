@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class WaterBallMonsterSpell : BallProjectileMonsterSpell
 {
+    private WaterBallMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool IsAttack => true;
     protected override string ActionName => "gestures fluidly";
     protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get<WaterProjectile>();

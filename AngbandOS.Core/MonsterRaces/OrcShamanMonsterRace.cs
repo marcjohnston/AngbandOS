@@ -13,9 +13,9 @@ internal class OrcShamanMonsterRace : MonsterRace
     protected OrcShamanMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new CauseLightWoundsMonsterSpell(),
-        new MagicMissileMonsterSpell(),
-        new BlinkMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseLightWoundsMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<MagicMissileMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerOSymbol>();
     public override ColourEnum Colour => ColourEnum.Blue;
     public override string Name => "Orc shaman";

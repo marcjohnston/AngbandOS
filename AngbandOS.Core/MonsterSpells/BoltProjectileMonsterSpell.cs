@@ -13,6 +13,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal abstract class BoltProjectileMonsterSpell : MonsterSpell
 {
+    protected BoltProjectileMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     /// <summary>
     /// Returns a message that the monster performed an action specified by the protected ActionName method.
     /// </summary>

@@ -13,7 +13,7 @@ internal class ChimeraMonsterRace : MonsterRace
     protected ChimeraMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheFireMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheFireMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperHSymbol>();
     public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "Chimera";

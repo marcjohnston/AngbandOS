@@ -13,8 +13,8 @@ internal class JabberwockMonsterRace : MonsterRace
     protected JabberwockMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheChaosMonsterSpell(),
-        new CauseMortalWoundsMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheChaosMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<CauseMortalWoundsMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperHSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Jabberwock";

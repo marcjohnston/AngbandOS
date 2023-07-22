@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class BreatheRadiationMonsterSpell : BreatheProjectileMonsterSpell
 {
+    private BreatheRadiationMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool UsesRadiation => true;
     protected override string ElementName => "toxic waste";
     protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get<NukeProjectile>();

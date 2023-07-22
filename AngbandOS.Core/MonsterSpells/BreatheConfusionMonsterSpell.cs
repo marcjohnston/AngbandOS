@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class BreatheConfusionMonsterSpell : BreatheProjectileMonsterSpell
 {
+    private BreatheConfusionMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool UsesConfusion => true;
     protected override string ElementName => "confusion";
     protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get<ConfusionProjectile>();

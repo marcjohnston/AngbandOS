@@ -10,6 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class DrainManaMonsterSpell : MonsterSpell
 {
+    private DrainManaMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     /// <summary>
     /// Returns null, because the drain mana process cannot be seen.  If the player cannot see either monster, the player will not have
     /// any message indicating such.

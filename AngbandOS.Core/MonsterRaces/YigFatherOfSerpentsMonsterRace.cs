@@ -13,9 +13,9 @@ internal class YigFatherOfSerpentsMonsterRace : MonsterRace
     protected YigFatherOfSerpentsMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreatheAcidMonsterSpell(),
-        new BreatheDisenchantMonsterSpell(),
-        new BreathePoisonMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheAcidMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheDisenchantMonsterSpell>(),
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreathePoisonMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperJSymbol>();
     public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "Yig, Father of Serpents";

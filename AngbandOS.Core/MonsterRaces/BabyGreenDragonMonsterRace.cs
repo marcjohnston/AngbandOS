@@ -13,7 +13,7 @@ internal class BabyGreenDragonMonsterRace : MonsterRace
     protected BabyGreenDragonMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        new BreathePoisonMonsterSpell());
+        SaveGame.SingletonRepository.MonsterSpells.Get<BreathePoisonMonsterSpell>());
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
     public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Baby green dragon";
