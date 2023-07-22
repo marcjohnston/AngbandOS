@@ -19,22 +19,22 @@ internal class MindWaveTalent : Talent
         BaseFailure = 45;
     }
 
-    public override void Use(SaveGame saveGame)
+    public override void Use()
     {
-        saveGame.MsgPrint("Mind-warping forces emanate from your brain!");
-        if (saveGame.Player.ExperienceLevel < 25)
+        SaveGame.MsgPrint("Mind-warping forces emanate from your brain!");
+        if (SaveGame.Player.ExperienceLevel < 25)
         {
-            saveGame.Project(0, 2 + (saveGame.Player.ExperienceLevel / 10), saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Player.ExperienceLevel * 3 / 2,
-                saveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), ProjectionFlag.ProjectKill);
+            SaveGame.Project(0, 2 + (SaveGame.Player.ExperienceLevel / 10), SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.ExperienceLevel * 3 / 2,
+                SaveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), ProjectionFlag.ProjectKill);
         }
         else
         {
-            saveGame.MindblastMonsters(saveGame.Player.ExperienceLevel * (((saveGame.Player.ExperienceLevel - 5) / 10) + 1));
+            SaveGame.MindblastMonsters(SaveGame.Player.ExperienceLevel * (((SaveGame.Player.ExperienceLevel - 5) / 10) + 1));
         }
     }
 
-    protected override string Comment(Player player)
+    protected override string Comment()
     {
-        return player.ExperienceLevel < 25 ? $"dam {player.ExperienceLevel * 3 / 2}" : $"dam {player.ExperienceLevel * (((player.ExperienceLevel - 5) / 10) + 1)}";
+        return SaveGame.Player.ExperienceLevel < 25 ? $"dam {SaveGame.Player.ExperienceLevel * 3 / 2}" : $"dam {SaveGame.Player.ExperienceLevel * (((SaveGame.Player.ExperienceLevel - 5) / 10) + 1)}";
     }
 }

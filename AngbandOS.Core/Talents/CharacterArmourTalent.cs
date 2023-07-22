@@ -19,33 +19,33 @@ internal class CharacterArmourTalent : Talent
         BaseFailure = 50;
     }
 
-    public override void Use(SaveGame saveGame)
+    public override void Use()
     {
-        saveGame.Player.TimedStoneskin.AddTimer(saveGame.Player.ExperienceLevel);
-        if (saveGame.Player.ExperienceLevel > 14)
+        SaveGame.Player.TimedStoneskin.AddTimer(SaveGame.Player.ExperienceLevel);
+        if (SaveGame.Player.ExperienceLevel > 14)
         {
-            saveGame.Player.TimedAcidResistance.AddTimer(saveGame.Player.ExperienceLevel);
+            SaveGame.Player.TimedAcidResistance.AddTimer(SaveGame.Player.ExperienceLevel);
         }
-        if (saveGame.Player.ExperienceLevel > 19)
+        if (SaveGame.Player.ExperienceLevel > 19)
         {
-            saveGame.Player.TimedFireResistance.AddTimer(saveGame.Player.ExperienceLevel);
+            SaveGame.Player.TimedFireResistance.AddTimer(SaveGame.Player.ExperienceLevel);
         }
-        if (saveGame.Player.ExperienceLevel > 24)
+        if (SaveGame.Player.ExperienceLevel > 24)
         {
-            saveGame.Player.TimedColdResistance.AddTimer(saveGame.Player.ExperienceLevel);
+            SaveGame.Player.TimedColdResistance.AddTimer(SaveGame.Player.ExperienceLevel);
         }
-        if (saveGame.Player.ExperienceLevel > 29)
+        if (SaveGame.Player.ExperienceLevel > 29)
         {
-            saveGame.Player.TimedLightningResistance.AddTimer(saveGame.Player.ExperienceLevel);
+            SaveGame.Player.TimedLightningResistance.AddTimer(SaveGame.Player.ExperienceLevel);
         }
-        if (saveGame.Player.ExperienceLevel > 34)
+        if (SaveGame.Player.ExperienceLevel > 34)
         {
-            saveGame.Player.TimedPoisonResistance.AddTimer(saveGame.Player.ExperienceLevel);
+            SaveGame.Player.TimedPoisonResistance.AddTimer(SaveGame.Player.ExperienceLevel);
         }
     }
 
-    protected override string Comment(Player player)
+    protected override string Comment()
     {
-        return $"dur {player.ExperienceLevel}";
+        return $"dur {SaveGame.Player.ExperienceLevel}";
     }
 }

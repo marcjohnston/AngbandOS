@@ -19,19 +19,19 @@ internal class PulveriseTalent : Talent
         BaseFailure = 30;
     }
 
-    public override void Use(SaveGame saveGame)
+    public override void Use()
     {
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<SoundProjectile>(), dir,
-            Program.Rng.DiceRoll(8 + ((saveGame.Player.ExperienceLevel - 5) / 4), 8), saveGame.Player.ExperienceLevel > 20 ? ((saveGame.Player.ExperienceLevel - 20) / 8) + 1 : 0);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<SoundProjectile>(), dir,
+            Program.Rng.DiceRoll(8 + ((SaveGame.Player.ExperienceLevel - 5) / 4), 8), SaveGame.Player.ExperienceLevel > 20 ? ((SaveGame.Player.ExperienceLevel - 20) / 8) + 1 : 0);
     }
 
-    protected override string Comment(Player player)
+    protected override string Comment()
     {
-        return $"dam {8 + ((player.ExperienceLevel - 5) / 4)}d8";
+        return $"dam {8 + ((SaveGame.Player.ExperienceLevel - 5) / 4)}d8";
         ;
     }
 }

@@ -19,44 +19,44 @@ internal class PrecognitionTalent : Talent
         BaseFailure = 15;
     }
 
-    public override void Use(SaveGame saveGame)
+    public override void Use()
     {
-        if (saveGame.Player.ExperienceLevel > 44)
+        if (SaveGame.Player.ExperienceLevel > 44)
         {
-            saveGame.Level.WizLight();
+            SaveGame.Level.WizLight();
         }
-        else if (saveGame.Player.ExperienceLevel > 19)
+        else if (SaveGame.Player.ExperienceLevel > 19)
         {
-            saveGame.Level.MapArea();
+            SaveGame.Level.MapArea();
         }
         bool b;
-        if (saveGame.Player.ExperienceLevel < 30)
+        if (SaveGame.Player.ExperienceLevel < 30)
         {
-            b = saveGame.DetectMonstersNormal();
-            if (saveGame.Player.ExperienceLevel > 14)
+            b = SaveGame.DetectMonstersNormal();
+            if (SaveGame.Player.ExperienceLevel > 14)
             {
-                b |= saveGame.DetectMonstersInvis();
+                b |= SaveGame.DetectMonstersInvis();
             }
-            if (saveGame.Player.ExperienceLevel > 4)
+            if (SaveGame.Player.ExperienceLevel > 4)
             {
-                b |= saveGame.DetectTraps();
+                b |= SaveGame.DetectTraps();
             }
         }
         else
         {
-            b = saveGame.DetectAll();
+            b = SaveGame.DetectAll();
         }
-        if (saveGame.Player.ExperienceLevel > 24 && saveGame.Player.ExperienceLevel < 40)
+        if (SaveGame.Player.ExperienceLevel > 24 && SaveGame.Player.ExperienceLevel < 40)
         {
-            saveGame.Player.TimedTelepathy.AddTimer(saveGame.Player.ExperienceLevel);
+            SaveGame.Player.TimedTelepathy.AddTimer(SaveGame.Player.ExperienceLevel);
         }
         if (!b)
         {
-            saveGame.MsgPrint("You feel safe.");
+            SaveGame.MsgPrint("You feel safe.");
         }
     }
 
-    protected override string Comment(Player player)
+    protected override string Comment()
     {
         return string.Empty;
     }

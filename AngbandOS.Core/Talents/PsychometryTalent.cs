@@ -19,28 +19,28 @@ internal class PsychometryTalent : Talent
         BaseFailure = 60;
     }
 
-    public override void Use(SaveGame saveGame)
+    public override void Use()
     {
-        if (saveGame.Player.ExperienceLevel < 40)
+        if (SaveGame.Player.ExperienceLevel < 40)
         {
-            Psychometry(saveGame);
+            Psychometry();
         }
         else
         {
-            saveGame.IdentifyItem();
+            SaveGame.IdentifyItem();
         }
     }
 
-    protected override string Comment(Player player)
+    protected override string Comment()
     {
         return string.Empty;
     }
 
-    private void Psychometry(SaveGame saveGame)
+    private void Psychometry()
     {
-        if (!saveGame.SelectItem(out Item? oPtr, "Meditate on which item? ", true, true, true, null))
+        if (!SaveGame.SelectItem(out Item? oPtr, "Meditate on which item? ", true, true, true, null))
         {
-            saveGame.MsgPrint("You have nothing appropriate.");
+            SaveGame.MsgPrint("You have nothing appropriate.");
             return;
         }
         if (oPtr == null)
@@ -49,23 +49,23 @@ internal class PsychometryTalent : Talent
         }
         if (oPtr.IsKnown() || oPtr.IdentSense)
         {
-            saveGame.MsgPrint("You cannot find out anything more about that.");
+            SaveGame.MsgPrint("You cannot find out anything more about that.");
             return;
         }
         string feel = oPtr.GetDetailedFeeling();
         string oName = oPtr.Description(false, 0);
         if (string.IsNullOrEmpty(feel))
         {
-            saveGame.MsgPrint($"You do not perceive anything unusual about the {oName}.");
+            SaveGame.MsgPrint($"You do not perceive anything unusual about the {oName}.");
             return;
         }
         string s = oPtr.Count == 1 ? "is" : "are";
-        saveGame.MsgPrint($"You feel that the {oName} {s} {feel}...");
+        SaveGame.MsgPrint($"You feel that the {oName} {s} {feel}...");
         oPtr.IdentSense = true;
         if (string.IsNullOrEmpty(oPtr.Inscription))
         {
             oPtr.Inscription = feel;
         }
-        saveGame.NoticeCombineAndReorderFlaggedAction.Set();
+        SaveGame.NoticeCombineAndReorderFlaggedAction.Set();
     }
 }

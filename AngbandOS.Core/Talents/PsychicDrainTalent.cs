@@ -19,21 +19,21 @@ internal class PsychicDrainTalent : Talent
         BaseFailure = 40;
     }
 
-    public override void Use(SaveGame saveGame)
+    public override void Use()
     {
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        int i = Program.Rng.DiceRoll(saveGame.Player.ExperienceLevel / 2, 6);
-        if (saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<PsiDrainProjectile>(), dir, i, 0 + ((saveGame.Player.ExperienceLevel - 25) / 10)))
+        int i = Program.Rng.DiceRoll(SaveGame.Player.ExperienceLevel / 2, 6);
+        if (SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<PsiDrainProjectile>(), dir, i, 0 + ((SaveGame.Player.ExperienceLevel - 25) / 10)))
         {
-            saveGame.Player.Energy -= Program.Rng.DieRoll(150);
+            SaveGame.Player.Energy -= Program.Rng.DieRoll(150);
         }
     }
 
-    protected override string Comment(Player player)
+    protected override string Comment()
     {
-        return $"dam {player.ExperienceLevel / 2}d6";
+        return $"dam {SaveGame.Player.ExperienceLevel / 2}d6";
     }
 }

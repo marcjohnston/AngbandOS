@@ -33,25 +33,25 @@ internal abstract class Talent
         private get; set;
     }
 
-    public int FailureChance(Player player)
+    public int FailureChance()
     {
         int chance = BaseFailure;
-        chance -= 3 * (player.ExperienceLevel - Level);
-        chance -= 3 * (player.AbilityScores[player.BaseCharacterClass.SpellStat].SpellFailureReduction - 1);
-        if (ManaCost > player.Mana)
+        chance -= 3 * (SaveGame.Player.ExperienceLevel - Level);
+        chance -= 3 * (SaveGame.Player.AbilityScores[SaveGame.Player.BaseCharacterClass.SpellStat].SpellFailureReduction - 1);
+        if (ManaCost > SaveGame.Player.Mana)
         {
-            chance += 5 * (ManaCost - player.Mana);
+            chance += 5 * (ManaCost - SaveGame.Player.Mana);
         }
-        int minfail = player.AbilityScores[player.BaseCharacterClass.SpellStat].SpellMinFailChance;
+        int minfail = SaveGame.Player.AbilityScores[SaveGame.Player.BaseCharacterClass.SpellStat].SpellMinFailChance;
         if (chance < minfail)
         {
             chance = minfail;
         }
-        if (player.TimedStun.TurnsRemaining > 50)
+        if (SaveGame.Player.TimedStun.TurnsRemaining > 50)
         {
             chance += 25;
         }
-        else if (player.TimedStun.TurnsRemaining != 0)
+        else if (SaveGame.Player.TimedStun.TurnsRemaining != 0)
         {
             chance += 15;
         }
@@ -64,9 +64,9 @@ internal abstract class Talent
 
     public abstract void Initialize(int characterClass);
 
-    public string SummaryLine(Player player)
+    public string SummaryLine()
     {
-        return $"{Name,-30}{Level,2} {ManaCost,4} {FailureChance(player),3}% {Comment(player)}";
+        return $"{Name,-30}{Level,2} {ManaCost,4} {FailureChance(),3}% {Comment()}";
     }
 
     public override string ToString()
@@ -74,7 +74,7 @@ internal abstract class Talent
         return $"{Name} ({Level}, {ManaCost}, {BaseFailure})";
     }
 
-    public abstract void Use(SaveGame saveGame);
+    public abstract void Use();
 
-    protected abstract string Comment(Player player);
+    protected abstract string Comment();
 }

@@ -19,38 +19,38 @@ internal class MinorDisplacementTalent : Talent
         BaseFailure = 25;
     }
 
-    public override void Use(SaveGame saveGame)
+    public override void Use()
     {
-        if (saveGame.Player.ExperienceLevel < 25)
+        if (SaveGame.Player.ExperienceLevel < 25)
         {
-            saveGame.TeleportPlayer(10);
+            SaveGame.TeleportPlayer(10);
         }
         else
         {
-            saveGame.MsgPrint("Choose a destination.");
-            if (!saveGame.TgtPt(out int i, out int j))
+            SaveGame.MsgPrint("Choose a destination.");
+            if (!SaveGame.TgtPt(out int i, out int j))
             {
                 return;
             }
-            saveGame.Player.Energy -= 60 - saveGame.Player.ExperienceLevel;
-            if (!saveGame.Level.GridPassableNoCreature(j, i) || saveGame.Level.Grid[j][i].TileFlags.IsSet(GridTile.InVault) ||
-                saveGame.Level.Grid[j][i].FeatureType.Name != "Water" ||
-                saveGame.Level.Distance(j, i, saveGame.Player.MapY, saveGame.Player.MapX) > saveGame.Player.ExperienceLevel + 2 ||
-                Program.Rng.RandomLessThan(saveGame.Player.ExperienceLevel * saveGame.Player.ExperienceLevel / 2) == 0)
+            SaveGame.Player.Energy -= 60 - SaveGame.Player.ExperienceLevel;
+            if (!SaveGame.Level.GridPassableNoCreature(j, i) || SaveGame.Level.Grid[j][i].TileFlags.IsSet(GridTile.InVault) ||
+                SaveGame.Level.Grid[j][i].FeatureType.Name != "Water" ||
+                SaveGame.Level.Distance(j, i, SaveGame.Player.MapY, SaveGame.Player.MapX) > SaveGame.Player.ExperienceLevel + 2 ||
+                Program.Rng.RandomLessThan(SaveGame.Player.ExperienceLevel * SaveGame.Player.ExperienceLevel / 2) == 0)
             {
-                saveGame.MsgPrint("Something disrupts your concentration!");
-                saveGame.Player.Energy -= 100;
-                saveGame.TeleportPlayer(20);
+                SaveGame.MsgPrint("Something disrupts your concentration!");
+                SaveGame.Player.Energy -= 100;
+                SaveGame.TeleportPlayer(20);
             }
             else
             {
-                saveGame.TeleportPlayerTo(j, i);
+                SaveGame.TeleportPlayerTo(j, i);
             }
         }
     }
 
-    protected override string Comment(Player player)
+    protected override string Comment()
     {
-        return $"range {(player.ExperienceLevel < 25 ? 10 : player.ExperienceLevel + 2)}";
+        return $"range {(SaveGame.Player.ExperienceLevel < 25 ? 10 : SaveGame.Player.ExperienceLevel + 2)}";
     }
 }

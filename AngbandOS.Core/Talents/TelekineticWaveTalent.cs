@@ -19,16 +19,16 @@ internal class TelekineticWaveTalent : Talent
         BaseFailure = 45;
     }
 
-    public override void Use(SaveGame saveGame)
+    public override void Use()
     {
-        saveGame.MsgPrint("A wave of pure physical force radiates out from your body!");
-        saveGame.Project(0, 3 + (saveGame.Player.ExperienceLevel / 10), saveGame.Player.MapY, saveGame.Player.MapX,
-            saveGame.Player.ExperienceLevel * (saveGame.Player.ExperienceLevel > 39 ? 4 : 3), saveGame.SingletonRepository.Projectiles.Get<TelekinesisProjectile>(),
+        SaveGame.MsgPrint("A wave of pure physical force radiates out from your body!");
+        SaveGame.Project(0, 3 + (SaveGame.Player.ExperienceLevel / 10), SaveGame.Player.MapY, SaveGame.Player.MapX,
+            SaveGame.Player.ExperienceLevel * (SaveGame.Player.ExperienceLevel > 39 ? 4 : 3), SaveGame.SingletonRepository.Projectiles.Get<TelekinesisProjectile>(),
             ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectGrid);
     }
 
-    protected override string Comment(Player player)
+    protected override string Comment()
     {
-        return $"dam {player.ExperienceLevel * (player.ExperienceLevel > 39 ? 4 : 3)}";
+        return $"dam {SaveGame.Player.ExperienceLevel * (SaveGame.Player.ExperienceLevel > 39 ? 4 : 3)}";
     }
 }

@@ -19,26 +19,26 @@ internal class NeuralBlastTalent : Talent
         BaseFailure = 20;
     }
 
-    public override void Use(SaveGame saveGame)
+    public override void Use()
     {
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        if (Program.Rng.DieRoll(100) < saveGame.Player.ExperienceLevel * 2)
+        if (Program.Rng.DieRoll(100) < SaveGame.Player.ExperienceLevel * 2)
         {
-            saveGame.FireBeam(saveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir,
-                Program.Rng.DiceRoll(3 + ((saveGame.Player.ExperienceLevel - 1) / 4), 3 + (saveGame.Player.ExperienceLevel / 15)));
+            SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir,
+                Program.Rng.DiceRoll(3 + ((SaveGame.Player.ExperienceLevel - 1) / 4), 3 + (SaveGame.Player.ExperienceLevel / 15)));
         }
         else
         {
-            saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir,
-                Program.Rng.DiceRoll(3 + ((saveGame.Player.ExperienceLevel - 1) / 4), 3 + (saveGame.Player.ExperienceLevel / 15)), 0);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir,
+                Program.Rng.DiceRoll(3 + ((SaveGame.Player.ExperienceLevel - 1) / 4), 3 + (SaveGame.Player.ExperienceLevel / 15)), 0);
         }
     }
 
-    protected override string Comment(Player player)
+    protected override string Comment()
     {
-        return $"dam {3 + ((player.ExperienceLevel - 1) / 4)}d{3 + (player.ExperienceLevel / 15)}";
+        return $"dam {3 + ((SaveGame.Player.ExperienceLevel - 1) / 4)}d{3 + (SaveGame.Player.ExperienceLevel / 15)}";
     }
 }

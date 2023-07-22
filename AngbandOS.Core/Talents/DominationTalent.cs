@@ -19,23 +19,23 @@ internal class DominationTalent : Talent
         BaseFailure = 50;
     }
 
-    public override void Use(SaveGame saveGame)
+    public override void Use()
     {
-        if (saveGame.Player.ExperienceLevel < 30)
+        if (SaveGame.Player.ExperienceLevel < 30)
         {
-            if (!saveGame.GetDirectionWithAim(out int dir))
+            if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<DominationProjectile>(), dir, saveGame.Player.ExperienceLevel, 0);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<DominationProjectile>(), dir, SaveGame.Player.ExperienceLevel, 0);
         }
         else
         {
-            saveGame.CharmMonsters(saveGame.Player.ExperienceLevel * 2);
+            SaveGame.CharmMonsters(SaveGame.Player.ExperienceLevel * 2);
         }
     }
 
-    protected override string Comment(Player player)
+    protected override string Comment()
     {
         return string.Empty;
     }

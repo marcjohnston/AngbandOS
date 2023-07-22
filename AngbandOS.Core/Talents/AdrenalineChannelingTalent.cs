@@ -20,32 +20,32 @@ internal class AdrenalineChannelingTalent : Talent
         BaseFailure = 50;
     }
 
-    public override void Use(SaveGame saveGame)
+    public override void Use()
     {
-        saveGame.Player.TimedFear.ResetTimer();
-        saveGame.Player.TimedStun.ResetTimer();
-        saveGame.Player.RestoreHealth(saveGame.Player.ExperienceLevel);
-        int i = 10 + Program.Rng.DieRoll(saveGame.Player.ExperienceLevel * 3 / 2);
-        if (saveGame.Player.ExperienceLevel < 35)
+        SaveGame.Player.TimedFear.ResetTimer();
+        SaveGame.Player.TimedStun.ResetTimer();
+        SaveGame.Player.RestoreHealth(SaveGame.Player.ExperienceLevel);
+        int i = 10 + Program.Rng.DieRoll(SaveGame.Player.ExperienceLevel * 3 / 2);
+        if (SaveGame.Player.ExperienceLevel < 35)
         {
-            saveGame.Player.TimedHeroism.AddTimer(i);
+            SaveGame.Player.TimedHeroism.AddTimer(i);
         }
         else
         {
-            saveGame.Player.TimedSuperheroism.AddTimer(i);
+            SaveGame.Player.TimedSuperheroism.AddTimer(i);
         }
-        if (saveGame.Player.TimedHaste.TurnsRemaining == 0)
+        if (SaveGame.Player.TimedHaste.TurnsRemaining == 0)
         {
-            saveGame.Player.TimedHaste.SetTimer(i);
+            SaveGame.Player.TimedHaste.SetTimer(i);
         }
         else
         {
-            saveGame.Player.TimedHaste.AddTimer(i);
+            SaveGame.Player.TimedHaste.AddTimer(i);
         }
     }
 
-    protected override string Comment(Player player)
+    protected override string Comment()
     {
-        return $"dur 10+d{player.ExperienceLevel * 3 / 2}";
+        return $"dur 10+d{SaveGame.Player.ExperienceLevel * 3 / 2}";
     }
 }
