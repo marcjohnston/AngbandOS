@@ -111,7 +111,7 @@ internal class OpenScript : Script
         // If we successfully opened it, set of any traps and then actually open the chest
         if (openedSuccessfully)
         {
-            SaveGame.ChestTrap(y, x, chestItem);
+            SaveGame.ActivateChestTrap(y, x, chestItem);
             SaveGame.OpenChest(y, x, chestItem);
         }
         return more;

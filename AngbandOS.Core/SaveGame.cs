@@ -1624,7 +1624,7 @@ internal class SaveGame
         } while (Program.Rng.DieRoll(3) == 1);
     }
 
-    public void ChestTrap(int y, int x, Item chestItem)
+    public void ActivateChestTrap(int y, int x, Item chestItem)
     {
         if (chestItem.TypeSpecificValue <= 0)
         {
@@ -7832,7 +7832,7 @@ internal class SaveGame
         else
         {
             MsgPrint("You set off a trap!");
-            ChestTrap(y, x, chestItem);
+            ActivateChestTrap(y, x, chestItem);
         }
         return allowAdditionalDisarmAttempts;
     }

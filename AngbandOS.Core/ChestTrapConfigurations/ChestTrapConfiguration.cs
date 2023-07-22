@@ -16,7 +16,7 @@ internal abstract class ChestTrapConfiguration
         SaveGame = saveGame;
     }
 
-    public abstract BaseChestTrap[] Traps { get; }
+    public abstract ChestTrap[] Traps { get; }
     public bool NotTrapped => Traps.Length == 0;
     public bool IsTrapped => Traps.Length > 0;
     public string Description
@@ -39,7 +39,7 @@ internal abstract class ChestTrapConfiguration
     }
     public void Activate(SaveGame saveGame, Item chestItem)
     {
-        foreach (BaseChestTrap trap in Traps)
+        foreach (ChestTrap trap in Traps)
         {
             ActivateChestTrapEventArgs eventArgs = new ActivateChestTrapEventArgs(saveGame, saveGame.MapX, saveGame.MapY);
             trap.Activate(eventArgs);

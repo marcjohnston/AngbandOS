@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core.ChestTraps;
 
-internal class PoisonChestTrap : BaseChestTrap
+internal class PoisonChestTrap : ChestTrap
 {
     public override void Activate(ActivateChestTrapEventArgs eventArgs)
     {
