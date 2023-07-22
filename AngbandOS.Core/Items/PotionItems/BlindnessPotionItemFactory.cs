@@ -24,8 +24,8 @@ internal class BlindnessPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Blindness makes you blind
-        if (!SaveGame.Player.HasBlindnessResistance)
-            return SaveGame.Player.TimedBlindness.AddTimer(Program.Rng.RandomLessThan(100) + 100);
+        if (!SaveGame.HasBlindnessResistance)
+            return SaveGame.TimedBlindness.AddTimer(Program.Rng.RandomLessThan(100) + 100);
         return false;
     }
 

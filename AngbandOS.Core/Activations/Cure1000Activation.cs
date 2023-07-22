@@ -21,8 +21,8 @@ internal class Cure1000Activation : Activation
     public override bool Activate()
     {
         SaveGame.MsgPrint("You feel much better...");
-        SaveGame.Player.RestoreHealth(1000);
-        SaveGame.Player.TimedBleeding.ResetTimer();
+        SaveGame.RestoreHealth(1000);
+        SaveGame.TimedBleeding.ResetTimer();
         return true;
     }
 

@@ -20,13 +20,13 @@ internal class ConfirmationBirthStage : BaseBirthStage
         SaveGame.GetHistory();
         SaveGame.GetMoney();
 
-        SaveGame.Spells[0] = SaveGame.Player.PrimaryRealm == null ? new Spell[] { } : SaveGame.Player.PrimaryRealm.SpellList(SaveGame.Player.BaseCharacterClass);
-        SaveGame.Spells[1] = SaveGame.Player.SecondaryRealm == null ? new Spell[] { } : SaveGame.Player.SecondaryRealm.SpellList(SaveGame.Player.BaseCharacterClass);
+        SaveGame.Spells[0] = SaveGame.PrimaryRealm == null ? new Spell[] { } : SaveGame.PrimaryRealm.SpellList(SaveGame.BaseCharacterClass);
+        SaveGame.Spells[1] = SaveGame.SecondaryRealm == null ? new Spell[] { } : SaveGame.SecondaryRealm.SpellList(SaveGame.BaseCharacterClass);
         SaveGame.Talents = new List<Talent>();
         foreach (Talent talent in SaveGame.SingletonRepository.Talents)
         {
             SaveGame.Talents.Add(talent);
-            talent.Initialize(SaveGame.Player.BaseCharacterClass.ID);
+            talent.Initialize(SaveGame.BaseCharacterClass.ID);
         }
         foreach (Spell[] bookset in SaveGame.Spells)
         {
@@ -40,13 +40,13 @@ internal class ConfirmationBirthStage : BaseBirthStage
         }
         SaveGame.SpellOrder.Clear();
 
-        SaveGame.Player.GooPatron = SaveGame.SingletonRepository.Patrons.ToWeightedRandom().Choose();
+        SaveGame.GooPatron = SaveGame.SingletonRepository.Patrons.ToWeightedRandom().Choose();
         SaveGame.UpdateHealthFlaggedAction.Set();
         SaveGame.UpdateBonusesFlaggedAction.Set();
         SaveGame.UpdateStuff();
-        SaveGame.Player.Health = SaveGame.Player.MaxHealth;
-        SaveGame.Player.Mana = SaveGame.Player.MaxMana;
-        SaveGame.Player.Energy = 150;
+        SaveGame.Health = SaveGame.MaxHealth;
+        SaveGame.Mana = SaveGame.MaxMana;
+        SaveGame.Energy = 150;
         while (!SaveGame.Shutdown)
         {
             SaveGame.Screen.Print(ColourEnum.Orange, "[Use return to confirm, or left to go back.]", 43, 1);

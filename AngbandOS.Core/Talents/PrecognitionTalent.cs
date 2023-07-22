@@ -21,23 +21,23 @@ internal class PrecognitionTalent : Talent
 
     public override void Use()
     {
-        if (SaveGame.Player.ExperienceLevel > 44)
+        if (SaveGame.ExperienceLevel > 44)
         {
             SaveGame.Level.WizLight();
         }
-        else if (SaveGame.Player.ExperienceLevel > 19)
+        else if (SaveGame.ExperienceLevel > 19)
         {
             SaveGame.Level.MapArea();
         }
         bool b;
-        if (SaveGame.Player.ExperienceLevel < 30)
+        if (SaveGame.ExperienceLevel < 30)
         {
             b = SaveGame.DetectMonstersNormal();
-            if (SaveGame.Player.ExperienceLevel > 14)
+            if (SaveGame.ExperienceLevel > 14)
             {
                 b |= SaveGame.DetectMonstersInvis();
             }
-            if (SaveGame.Player.ExperienceLevel > 4)
+            if (SaveGame.ExperienceLevel > 4)
             {
                 b |= SaveGame.DetectTraps();
             }
@@ -46,9 +46,9 @@ internal class PrecognitionTalent : Talent
         {
             b = SaveGame.DetectAll();
         }
-        if (SaveGame.Player.ExperienceLevel > 24 && SaveGame.Player.ExperienceLevel < 40)
+        if (SaveGame.ExperienceLevel > 24 && SaveGame.ExperienceLevel < 40)
         {
-            SaveGame.Player.TimedTelepathy.AddTimer(SaveGame.Player.ExperienceLevel);
+            SaveGame.TimedTelepathy.AddTimer(SaveGame.ExperienceLevel);
         }
         if (!b)
         {

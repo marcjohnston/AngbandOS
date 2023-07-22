@@ -15,7 +15,7 @@ internal class RedrawBlindFlaggedAction : FlaggedAction
     public RedrawBlindFlaggedAction(SaveGame saveGame) : base(saveGame) { }
     protected override void Execute()
     {
-        if (SaveGame.Player.TimedBlindness.TurnsRemaining > 0)
+        if (SaveGame.TimedBlindness.TurnsRemaining > 0)
         {
             SaveGame.Screen.Print(ColourEnum.Orange, "Blind", RowBlind, ColBlind);
         }

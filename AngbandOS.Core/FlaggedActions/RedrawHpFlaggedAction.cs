@@ -18,20 +18,20 @@ internal class RedrawHpFlaggedAction : FlaggedAction
     protected override void Execute()
     {
         SaveGame.Screen.Print("Max HP ", RowMaxhp, ColMaxhp);
-        string tmp = SaveGame.Player.MaxHealth.ToString().PadLeft(5);
+        string tmp = SaveGame.MaxHealth.ToString().PadLeft(5);
         ColourEnum colour = ColourEnum.BrightGreen;
         SaveGame.Screen.Print(colour, tmp, RowMaxhp, ColMaxhp + 7);
         SaveGame.Screen.Print("Cur HP ", RowCurhp, ColCurhp);
-        tmp = SaveGame.Player.Health.ToString().PadLeft(5);
-        if (SaveGame.Player.Health >= SaveGame.Player.MaxHealth)
+        tmp = SaveGame.Health.ToString().PadLeft(5);
+        if (SaveGame.Health >= SaveGame.MaxHealth)
         {
             colour = ColourEnum.BrightGreen;
         }
-        else if (SaveGame.Player.Health > SaveGame.Player.MaxHealth * Constants.HitpointWarn / 5)
+        else if (SaveGame.Health > SaveGame.MaxHealth * Constants.HitpointWarn / 5)
         {
             colour = ColourEnum.BrightYellow;
         }
-        else if (SaveGame.Player.Health > SaveGame.Player.MaxHealth * Constants.HitpointWarn / 10)
+        else if (SaveGame.Health > SaveGame.MaxHealth * Constants.HitpointWarn / 10)
         {
             colour = ColourEnum.Orange;
         }

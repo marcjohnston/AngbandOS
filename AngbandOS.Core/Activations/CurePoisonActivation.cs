@@ -20,8 +20,8 @@ internal class CurePoisonActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.Player.TimedFear.ResetTimer();
-        SaveGame.Player.TimedPoison.ResetTimer();
+        SaveGame.TimedFear.ResetTimer();
+        SaveGame.TimedPoison.ResetTimer();
         return true;
     }
 

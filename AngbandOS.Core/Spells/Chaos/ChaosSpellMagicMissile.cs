@@ -14,18 +14,18 @@ internal class ChaosSpellMagicMissile : Spell
     public override void Cast()
     {
         int beam;
-        switch (SaveGame.Player.BaseCharacterClass.ID)
+        switch (SaveGame.BaseCharacterClass.ID)
         {
             case CharacterClass.Mage:
-                beam = SaveGame.Player.ExperienceLevel;
+                beam = SaveGame.ExperienceLevel;
                 break;
 
             case CharacterClass.HighMage:
-                beam = SaveGame.Player.ExperienceLevel + 10;
+                beam = SaveGame.ExperienceLevel + 10;
                 break;
 
             default:
-                beam = SaveGame.Player.ExperienceLevel / 2;
+                beam = SaveGame.ExperienceLevel / 2;
                 break;
         }
         if (!SaveGame.GetDirectionWithAim(out int dir))
@@ -33,7 +33,7 @@ internal class ChaosSpellMagicMissile : Spell
             return;
         }
         SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), dir,
-            Program.Rng.DiceRoll(3 + ((SaveGame.Player.ExperienceLevel - 1) / 5), 4));
+            Program.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 4));
     }
 
     public override void CastFailed()
@@ -45,6 +45,6 @@ internal class ChaosSpellMagicMissile : Spell
     
     protected override string? Info()
     {
-        return $"dam {3 + ((SaveGame.Player.ExperienceLevel - 1) / 5)}d4";
+        return $"dam {3 + ((SaveGame.ExperienceLevel - 1) / 5)}d4";
     }
 }

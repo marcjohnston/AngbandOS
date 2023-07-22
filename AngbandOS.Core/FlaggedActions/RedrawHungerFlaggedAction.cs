@@ -15,23 +15,23 @@ internal class RedrawHungerFlaggedAction : FlaggedAction
     public RedrawHungerFlaggedAction(SaveGame saveGame) : base(saveGame) { }
     protected override void Execute()
     {
-        if (SaveGame.Player.Food < Constants.PyFoodFaint)
+        if (SaveGame.Food < Constants.PyFoodFaint)
         {
             SaveGame.Screen.Print(ColourEnum.Red, "Weak  ", RowHungry, ColHungry);
         }
-        else if (SaveGame.Player.Food < Constants.PyFoodWeak)
+        else if (SaveGame.Food < Constants.PyFoodWeak)
         {
             SaveGame.Screen.Print(ColourEnum.Orange, "Weak  ", RowHungry, ColHungry);
         }
-        else if (SaveGame.Player.Food < Constants.PyFoodAlert)
+        else if (SaveGame.Food < Constants.PyFoodAlert)
         {
             SaveGame.Screen.Print(ColourEnum.Yellow, "Hungry", RowHungry, ColHungry);
         }
-        else if (SaveGame.Player.Food < Constants.PyFoodFull)
+        else if (SaveGame.Food < Constants.PyFoodFull)
         {
             SaveGame.Screen.Print(ColourEnum.BrightGreen, "      ", RowHungry, ColHungry);
         }
-        else if (SaveGame.Player.Food < Constants.PyFoodMax)
+        else if (SaveGame.Food < Constants.PyFoodMax)
         {
             SaveGame.Screen.Print(ColourEnum.BrightGreen, "Full  ", RowHungry, ColHungry);
         }

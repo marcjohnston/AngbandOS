@@ -11,7 +11,7 @@ internal class DisenSpellResistantDetection : SpellResistantDetection
 {
     public override void Learn(SaveGame saveGame, Monster monster)
     {
-        if (saveGame.Player.HasDisenchantResistance)
+        if (saveGame.HasDisenchantResistance)
         {
             monster.SmResDisen = true;
         }

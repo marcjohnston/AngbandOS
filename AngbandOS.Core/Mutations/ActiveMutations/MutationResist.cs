@@ -14,31 +14,31 @@ internal class MutationResist : Mutation
     {
         if (saveGame.CheckIfRacialPowerWorks(10, 12, Ability.Constitution, 12))
         {
-            int num = saveGame.Player.ExperienceLevel / 10;
+            int num = saveGame.ExperienceLevel / 10;
             int dur = Program.Rng.DieRoll(20) + 20;
             if (Program.Rng.RandomLessThan(5) < num)
             {
-                saveGame.Player.TimedAcidResistance.AddTimer(dur);
+                saveGame.TimedAcidResistance.AddTimer(dur);
                 num--;
             }
             if (Program.Rng.RandomLessThan(4) < num)
             {
-                saveGame.Player.TimedLightningResistance.AddTimer(dur);
+                saveGame.TimedLightningResistance.AddTimer(dur);
                 num--;
             }
             if (Program.Rng.RandomLessThan(3) < num)
             {
-                saveGame.Player.TimedFireResistance.AddTimer(dur);
+                saveGame.TimedFireResistance.AddTimer(dur);
                 num--;
             }
             if (Program.Rng.RandomLessThan(2) < num)
             {
-                saveGame.Player.TimedColdResistance.AddTimer(dur);
+                saveGame.TimedColdResistance.AddTimer(dur);
                 num--;
             }
             if (num != 0)
             {
-                saveGame.Player.TimedPoisonResistance.AddTimer(dur);
+                saveGame.TimedPoisonResistance.AddTimer(dur);
             }
         }
     }

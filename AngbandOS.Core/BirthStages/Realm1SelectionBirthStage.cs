@@ -17,15 +17,15 @@ internal class Realm1SelectionBirthStage : BaseBirthStage
     public override BaseBirthStage? Render()
     {
         DisplayPartialCharacter();
-        string[]? menuItems = SaveGame.Player.BaseCharacterClass.AvailablePrimaryRealms
+        string[]? menuItems = SaveGame.BaseCharacterClass.AvailablePrimaryRealms
             .Select(_availablePrimaryRealms => _availablePrimaryRealms.Name)
             .ToArray();
         SaveGame.Screen.Print(ColourEnum.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
 
         // The index might be out of range if the user switches between classes.
-        if (currentSelection >= SaveGame.Player.BaseCharacterClass.AvailablePrimaryRealms.Length)
+        if (currentSelection >= SaveGame.BaseCharacterClass.AvailablePrimaryRealms.Length)
         {
-            currentSelection = SaveGame.Player.BaseCharacterClass.AvailablePrimaryRealms.Length - 1;
+            currentSelection = SaveGame.BaseCharacterClass.AvailablePrimaryRealms.Length - 1;
         }
 
         while (!SaveGame.Shutdown)
@@ -60,24 +60,24 @@ internal class Realm1SelectionBirthStage : BaseBirthStage
     }
     private bool RenderSelection(int index)
     {
-        BaseRealm realm = SaveGame.Player.BaseCharacterClass.AvailablePrimaryRealms[index];
+        BaseRealm realm = SaveGame.BaseCharacterClass.AvailablePrimaryRealms[index];
         SaveGame.DisplayRealmInfo(realm);
         return true;
     }
     private BaseBirthStage? GoForward(int index)
     {
-        BaseRealm realm = SaveGame.Player.BaseCharacterClass.AvailablePrimaryRealms[index];
-        SaveGame.Player.PrimaryRealm = realm;
-        BaseRealm[] remainingAvailableSecondaryRealms = SaveGame.Player.BaseCharacterClass.RemainingAvailableSecondaryRealms();
+        BaseRealm realm = SaveGame.BaseCharacterClass.AvailablePrimaryRealms[index];
+        SaveGame.PrimaryRealm = realm;
+        BaseRealm[] remainingAvailableSecondaryRealms = SaveGame.BaseCharacterClass.RemainingAvailableSecondaryRealms();
         int remainingAvailableSecondaryRealmCount = remainingAvailableSecondaryRealms.Length;
         if (remainingAvailableSecondaryRealmCount == 0)
         {
-            SaveGame.Player.SecondaryRealm = null;
+            SaveGame.SecondaryRealm = null;
             return SaveGame.SingletonRepository.BirthStages.Get<GenderSelectionBirthStage>();
         }
         else if (remainingAvailableSecondaryRealmCount == 1)
         {
-            SaveGame.Player.SecondaryRealm = remainingAvailableSecondaryRealms[0];
+            SaveGame.SecondaryRealm = remainingAvailableSecondaryRealms[0];
             return SaveGame.SingletonRepository.BirthStages.Get<GenderSelectionBirthStage>();
         }
         return SaveGame.SingletonRepository.BirthStages.Get<Realm2SelectionBirthStage>();

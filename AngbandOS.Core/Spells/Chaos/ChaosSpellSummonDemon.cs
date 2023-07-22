@@ -15,7 +15,7 @@ internal class ChaosSpellSummonDemon : Spell
     {
         if (Program.Rng.DieRoll(3) == 1)
         {
-            if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.ExperienceLevel * 3 / 2, new DemonMonsterSelector()))
+            if (SaveGame.Level.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel * 3 / 2, new DemonMonsterSelector()))
             {
                 SaveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
                 SaveGame.MsgPrint("'NON SERVIAM! Wretch! I shall feast on thy mortal soul!'");
@@ -27,7 +27,7 @@ internal class ChaosSpellSummonDemon : Spell
         }
         else
         {
-            if (SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.ExperienceLevel * 3 / 2, new DemonMonsterSelector(), SaveGame.Player.ExperienceLevel == 50))
+            if (SaveGame.Level.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel * 3 / 2, new DemonMonsterSelector(), SaveGame.ExperienceLevel == 50))
             {
                 SaveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
                 SaveGame.MsgPrint("'What is thy bidding... Master?'");

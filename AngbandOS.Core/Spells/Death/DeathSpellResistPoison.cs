@@ -13,7 +13,7 @@ internal class DeathSpellResistPoison : Spell
     private DeathSpellResistPoison(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Player.TimedPoisonResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
+        SaveGame.TimedPoisonResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
     }
 
     public override void CastFailed()

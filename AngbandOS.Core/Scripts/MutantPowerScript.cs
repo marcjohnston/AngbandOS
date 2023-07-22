@@ -22,15 +22,15 @@ internal class MutantPowerScript : Script
         int petCtr;
         bool allPets = false;
         Monster monster;
-        bool hasRacial = SaveGame.Player.Race.HasRacialPowers;
-        string racialPowersDescription = SaveGame.Player.Race.RacialPowersDescription(SaveGame.Player.ExperienceLevel);
+        bool hasRacial = SaveGame.Race.HasRacialPowers;
+        string racialPowersDescription = SaveGame.Race.RacialPowersDescription(SaveGame.ExperienceLevel);
         for (num = 0; num < 36; num++)
         {
             powers[num] = 0;
             powerDesc[num] = "";
         }
         num = 0;
-        if (SaveGame.Player.TimedConfusion.TurnsRemaining != 0)
+        if (SaveGame.TimedConfusion.TurnsRemaining != 0)
         {
             SaveGame.MsgPrint("You are too confused to use any powers!");
             SaveGame.EnergyUse = 0;
@@ -44,7 +44,7 @@ internal class MutantPowerScript : Script
                 pets++;
             }
         }
-        List<Mutation> activeMutations = SaveGame.Player.Dna.ActivatableMutations();
+        List<Mutation> activeMutations = SaveGame.Dna.ActivatableMutations();
         if (!hasRacial && activeMutations.Count == 0 && pets == 0)
         {
             SaveGame.MsgPrint("You have no powers to activate.");
@@ -60,7 +60,7 @@ internal class MutantPowerScript : Script
         for (int j = 0; j < activeMutations.Count; j++)
         {
             powers[num] = j + 100;
-            powerDesc[num] = activeMutations[j].ActivationSummary(SaveGame.Player.ExperienceLevel);
+            powerDesc[num] = activeMutations[j].ActivationSummary(SaveGame.ExperienceLevel);
             num++;
         }
         if (pets > 0)
@@ -183,7 +183,7 @@ internal class MutantPowerScript : Script
     public void UseRacialPower()
     {
         // Check the player's race to see what their power is
-        SaveGame.Player.Race.UseRacialPower(SaveGame);
+        SaveGame.Race.UseRacialPower(SaveGame);
         SaveGame.RedrawHpFlaggedAction.Set();
         SaveGame.RedrawManaFlaggedAction.Set();
     }

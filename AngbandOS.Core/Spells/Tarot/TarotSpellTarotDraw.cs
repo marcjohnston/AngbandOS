@@ -15,9 +15,9 @@ internal class TarotSpellTarotDraw : Spell
     {
         bool noneCame = false;
         int die = Program.Rng.DieRoll(120);
-        if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Rogue || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage)
+        if (SaveGame.BaseCharacterClass.ID == CharacterClass.Rogue || SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage)
         {
-            die = Program.Rng.DieRoll(110) + (SaveGame.Player.ExperienceLevel / 5);
+            die = Program.Rng.DieRoll(110) + (SaveGame.ExperienceLevel / 5);
         }
         SaveGame.MsgPrint("You shuffle your Tarot deck and draw a card...");
         if (die < 7)
@@ -31,7 +31,7 @@ internal class TarotSpellTarotDraw : Spell
         else if (die < 14)
         {
             SaveGame.MsgPrint("Oh no! It's the Devil!");
-            SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Difficulty, new DemonMonsterSelector());
+            SaveGame.Level.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, new DemonMonsterSelector());
         }
         else if (die < 18)
         {
@@ -46,14 +46,14 @@ internal class TarotSpellTarotDraw : Spell
         else if (die < 26)
         {
             SaveGame.MsgPrint("It's the Fool.");
-            SaveGame.Player.TryDecreasingAbilityScore(Ability.Intelligence);
-            SaveGame.Player.TryDecreasingAbilityScore(Ability.Wisdom);
+            SaveGame.TryDecreasingAbilityScore(Ability.Intelligence);
+            SaveGame.TryDecreasingAbilityScore(Ability.Wisdom);
         }
         else if (die < 30)
         {
             SaveGame.MsgPrint("It's a picture of a strange monster.");
 
-            if (!SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Difficulty * 3 / 2, MonsterSelector.RandomBizarre()))
+            if (!SaveGame.Level.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty * 3 / 2, MonsterSelector.RandomBizarre()))
             {
                 noneCame = true;
             }
@@ -76,7 +76,7 @@ internal class TarotSpellTarotDraw : Spell
         else if (die < 42)
         {
             SaveGame.MsgPrint("It's the Star.");
-            SaveGame.Player.TimedBlessing.AddTimer(SaveGame.Player.ExperienceLevel);
+            SaveGame.TimedBlessing.AddTimer(SaveGame.ExperienceLevel);
         }
         else if (die < 47)
         {
@@ -101,12 +101,12 @@ internal class TarotSpellTarotDraw : Spell
         else if (die < 80)
         {
             SaveGame.MsgPrint("It's the Tower.");
-            SaveGame.Earthquake(SaveGame.Player.MapY, SaveGame.Player.MapX, 5);
+            SaveGame.Earthquake(SaveGame.MapY, SaveGame.MapX, 5);
         }
         else if (die < 82)
         {
             SaveGame.MsgPrint("It's a picture of a friendly monster.");
-            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Difficulty * 3 / 2, new Bizarre1MonsterSelector(), false))
+            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty * 3 / 2, new Bizarre1MonsterSelector(), false))
             {
                 noneCame = true;
             }
@@ -114,7 +114,7 @@ internal class TarotSpellTarotDraw : Spell
         else if (die < 84)
         {
             SaveGame.MsgPrint("It's a picture of a friendly monster.");
-            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Difficulty * 3 / 2, new Bizarre2MonsterSelector(), false))
+            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty * 3 / 2, new Bizarre2MonsterSelector(), false))
             {
                 noneCame = true;
             }
@@ -122,7 +122,7 @@ internal class TarotSpellTarotDraw : Spell
         else if (die < 86)
         {
             SaveGame.MsgPrint("It's a picture of a friendly monster.");
-            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Difficulty * 3 / 2, new Bizarre4MonsterSelector(), false))
+            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty * 3 / 2, new Bizarre4MonsterSelector(), false))
             {
                 noneCame = true;
             }
@@ -130,7 +130,7 @@ internal class TarotSpellTarotDraw : Spell
         else if (die < 88)
         {
             SaveGame.MsgPrint("It's a picture of a friendly monster.");
-            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Difficulty * 3 / 2, new Bizarre5MonsterSelector(), false))
+            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty * 3 / 2, new Bizarre5MonsterSelector(), false))
             {
                 noneCame = true;
             }
@@ -142,7 +142,7 @@ internal class TarotSpellTarotDraw : Spell
             {
                 return;
             }
-            SaveGame.CharmMonster(dir, Math.Min(SaveGame.Player.ExperienceLevel, 20));
+            SaveGame.CharmMonster(dir, Math.Min(SaveGame.ExperienceLevel, 20));
         }
         else if (die < 101)
         {
@@ -152,11 +152,11 @@ internal class TarotSpellTarotDraw : Spell
         else if (die < 111)
         {
             SaveGame.MsgPrint("It's the Judgement.");
-            SaveGame.Player.RerollHitPoints();
-            if (SaveGame.Player.Dna.HasMutations)
+            SaveGame.RerollHitPoints();
+            if (SaveGame.Dna.HasMutations)
             {
                 SaveGame.MsgPrint("You are cured of all mutations.");
-                SaveGame.Player.Dna.LoseAllMutations();
+                SaveGame.Dna.LoseAllMutations();
                 SaveGame.UpdateBonusesFlaggedAction.Set();
                 SaveGame.HandleStuff();
             }
@@ -169,15 +169,15 @@ internal class TarotSpellTarotDraw : Spell
         else
         {
             SaveGame.MsgPrint("It's the World.");
-            if (SaveGame.Player.ExperiencePoints < Constants.PyMaxExp)
+            if (SaveGame.ExperiencePoints < Constants.PyMaxExp)
             {
-                int ee = (SaveGame.Player.ExperiencePoints / 25) + 1;
+                int ee = (SaveGame.ExperiencePoints / 25) + 1;
                 if (ee > 5000)
                 {
                     ee = 5000;
                 }
                 SaveGame.MsgPrint("You feel more experienced.");
-                SaveGame.Player.GainExperience(ee);
+                SaveGame.GainExperience(ee);
             }
         }
         if (noneCame)
@@ -256,12 +256,12 @@ internal class TarotSpellTarotDraw : Spell
                 break;
 
             case 26:
-                SaveGame.Earthquake(SaveGame.Player.MapY, SaveGame.Player.MapX, 5);
+                SaveGame.Earthquake(SaveGame.MapY, SaveGame.MapX, 5);
                 break;
 
             case 27:
             case 28:
-                SaveGame.Player.Dna.GainMutation();
+                SaveGame.Dna.GainMutation();
                 break;
 
             case 29:
@@ -286,7 +286,7 @@ internal class TarotSpellTarotDraw : Spell
                 int counter = 0;
                 while (counter++ < 8)
                 {
-                    SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Difficulty * 3 / 2, MonsterSelector.RandomBizarre());
+                    SaveGame.Level.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty * 3 / 2, MonsterSelector.RandomBizarre());
                 }
                 break;
 

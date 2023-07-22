@@ -71,7 +71,7 @@ internal class NukeProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
         if (dam > 1600)
         {
             dam = 1600;
@@ -83,33 +83,33 @@ internal class NukeProjectile : Projectile
         {
             SaveGame.MsgPrint("You are hit by radiation!");
         }
-        if (SaveGame.Player.HasPoisonResistance)
+        if (SaveGame.HasPoisonResistance)
         {
             dam = ((2 * dam) + 2) / 5;
         }
-        if (SaveGame.Player.TimedPoisonResistance.TurnsRemaining != 0)
+        if (SaveGame.TimedPoisonResistance.TurnsRemaining != 0)
         {
             dam = ((2 * dam) + 2) / 5;
         }
-        SaveGame.Player.TakeHit(dam, killer);
-        if (!(SaveGame.Player.HasPoisonResistance || SaveGame.Player.TimedPoisonResistance.TurnsRemaining != 0))
+        SaveGame.TakeHit(dam, killer);
+        if (!(SaveGame.HasPoisonResistance || SaveGame.TimedPoisonResistance.TurnsRemaining != 0))
         {
-            SaveGame.Player.TimedPoison.AddTimer(Program.Rng.RandomLessThan(dam) + 10);
+            SaveGame.TimedPoison.AddTimer(Program.Rng.RandomLessThan(dam) + 10);
             if (Program.Rng.DieRoll(5) == 1)
             {
                 SaveGame.MsgPrint("You undergo a freakish metamorphosis!");
                 if (Program.Rng.DieRoll(4) == 1)
                 {
-                    SaveGame.Player.PolymorphSelf(SaveGame);
+                    SaveGame.PolymorphSelf(SaveGame);
                 }
                 else
                 {
-                    SaveGame.Player.ShuffleAbilityScores();
+                    SaveGame.ShuffleAbilityScores();
                 }
             }
             if (Program.Rng.DieRoll(6) == 1)
             {
-                SaveGame.Player.InvenDamage(SaveGame.SetAcidDestroy, 2);
+                SaveGame.InvenDamage(SaveGame.SetAcidDestroy, 2);
             }
         }
         return true;

@@ -18,14 +18,14 @@ internal class RedrawDepthFlaggedAction : FlaggedAction
         string depths;
         if (SaveGame.CurrentDepth == 0)
         {
-            if (SaveGame.Wilderness[SaveGame.Player.WildernessY][SaveGame.Player.WildernessX].Dungeon != null)
+            if (SaveGame.Wilderness[SaveGame.WildernessY][SaveGame.WildernessX].Dungeon != null)
             {
-                depths = SaveGame.Wilderness[SaveGame.Player.WildernessY][SaveGame.Player.WildernessX].Dungeon.Shortname;
-                SaveGame.Wilderness[SaveGame.Player.WildernessY][SaveGame.Player.WildernessX].Dungeon.Visited = true;
+                depths = SaveGame.Wilderness[SaveGame.WildernessY][SaveGame.WildernessX].Dungeon.Shortname;
+                SaveGame.Wilderness[SaveGame.WildernessY][SaveGame.WildernessX].Dungeon.Visited = true;
             }
             else
             {
-                depths = $"Wild ({SaveGame.Player.WildernessX},{SaveGame.Player.WildernessY})";
+                depths = $"Wild ({SaveGame.WildernessX},{SaveGame.WildernessY})";
             }
         }
         else

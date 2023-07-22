@@ -13,11 +13,11 @@ internal class NamingBirthStage : BaseBirthStage
     private NamingBirthStage(SaveGame saveGame) : base(saveGame) { }
     public override BaseBirthStage? Render()
     {
-        if (string.IsNullOrEmpty(SaveGame.Player.Name))
+        if (string.IsNullOrEmpty(SaveGame.Name))
         {
-            SaveGame.Player.Name = SaveGame.Player.Race.CreateRandomName();
+            SaveGame.Name = SaveGame.Race.CreateRandomName();
         }
-        SaveGame.Player.InputPlayerName();
+        SaveGame.InputPlayerName();
         return null;
     }
 }

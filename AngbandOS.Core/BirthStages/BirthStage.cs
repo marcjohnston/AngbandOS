@@ -27,17 +27,17 @@ internal abstract class BaseBirthStage
         const string spaces = "                 ";
         SaveGame.Screen.Clear(0);
         SaveGame.Screen.Print(ColourEnum.Blue, "Name        :", 2, 1);
-        SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.Player.Name ?? spaces, 2, 15);
+        SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.Name ?? spaces, 2, 15);
         SaveGame.Screen.Print(ColourEnum.Blue, "Gender      :", 3, 1);
-        SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.Player.Gender?.Title ?? spaces, 3, 15);
+        SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.Gender?.Title ?? spaces, 3, 15);
         SaveGame.Screen.Print(ColourEnum.Blue, "Race        :", 4, 1);
-        SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.Player.Race?.Title ?? spaces, 4, 15);
+        SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.Race?.Title ?? spaces, 4, 15);
         SaveGame.Screen.Print(ColourEnum.Blue, "Class       :", 5, 1);
-        SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.Player.BaseCharacterClass?.Title ?? spaces, 5, 15);
-        if (SaveGame.Player.CanCastSpells)
+        SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.BaseCharacterClass?.Title ?? spaces, 5, 15);
+        if (SaveGame.CanCastSpells)
         {
             SaveGame.Screen.Print(ColourEnum.Blue, "Magic       :", 6, 1);
-            SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.RealmNames(SaveGame.Player.PrimaryRealm, SaveGame.Player.SecondaryRealm, spaces), 6, 15);
+            SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.RealmNames(SaveGame.PrimaryRealm, SaveGame.SecondaryRealm, spaces), 6, 15);
         }
         SaveGame.Screen.Print(ColourEnum.Blue, "Birthday", 2, 32);
         SaveGame.Screen.Print(ColourEnum.Blue, "Age          ", 3, 32);
@@ -76,12 +76,12 @@ internal abstract class BaseBirthStage
         SaveGame.Screen.Print(ColourEnum.Blue, "Modifications", 28, 45);
         for (int i = 0; i < 6; i++)
         {
-            string characterClassAbilityBonus = SaveGame.Player.BaseCharacterClass?.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3) ?? "   ";
+            string characterClassAbilityBonus = SaveGame.BaseCharacterClass?.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3) ?? "   ";
             SaveGame.Screen.Print(ColourEnum.Brown, characterClassAbilityBonus, 22 + i, 20);
         }
         for (int i = 0; i < 6; i++)
         {
-            string raceAbilityBonus = SaveGame.Player.Race?.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3) ?? "   ";
+            string raceAbilityBonus = SaveGame.Race?.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3) ?? "   ";
             SaveGame.Screen.Print(ColourEnum.Brown, raceAbilityBonus, 22 + i, 14);
         }
     }

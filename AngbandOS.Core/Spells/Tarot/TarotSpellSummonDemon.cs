@@ -16,12 +16,12 @@ internal class TarotSpellSummonDemon : Spell
         SaveGame.MsgPrint("You concentrate on the image of a demon...");
         if (Program.Rng.DieRoll(10) > 3)
         {
-            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.ExperienceLevel, new DemonMonsterSelector(), true))
+            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new DemonMonsterSelector(), true))
             {
                 SaveGame.MsgPrint("No-one ever turns up.");
             }
         }
-        else if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.ExperienceLevel, new DemonMonsterSelector()))
+        else if (SaveGame.Level.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new DemonMonsterSelector()))
         {
             SaveGame.MsgPrint("The summoned demon gets angry!");
         }

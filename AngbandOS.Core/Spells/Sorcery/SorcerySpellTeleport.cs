@@ -13,13 +13,13 @@ internal class SorcerySpellTeleport : Spell
     private SorcerySpellTeleport(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.TeleportPlayer(SaveGame.Player.ExperienceLevel * 5);
+        SaveGame.TeleportPlayer(SaveGame.ExperienceLevel * 5);
     }
 
     public override string Name => "Teleport";
     
     protected override string? Info()
     {
-        return $"range {SaveGame.Player.ExperienceLevel * 5}";
+        return $"range {SaveGame.ExperienceLevel * 5}";
     }
 }

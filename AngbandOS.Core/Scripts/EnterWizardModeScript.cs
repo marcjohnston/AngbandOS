@@ -23,7 +23,7 @@ internal class EnterWizardModeScript : Script
         SaveGame.Screen.Erase(0, 0);
         if (tmp == "Dumbledore")
         {
-            SaveGame.Player.IsWizard = true;
+            SaveGame.IsWizard = true;
             SaveGame.MsgPrint("Wizard mode activated.");
             SaveGame.RedrawTitleFlaggedAction.Set();
         }

@@ -16,12 +16,12 @@ internal class TarotSpellSummonReptiles : Spell
         SaveGame.MsgPrint("You concentrate on the image of a reptile...");
         if (Program.Rng.DieRoll(5) > 2)
         {
-            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.ExperienceLevel, new HydraMonsterSelector(), true))
+            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new HydraMonsterSelector(), true))
             {
                 SaveGame.MsgPrint("No-one ever turns up.");
             }
         }
-        else if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.ExperienceLevel, new HydraMonsterSelector()))
+        else if (SaveGame.Level.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new HydraMonsterSelector()))
         {
             SaveGame.MsgPrint("The summoned reptile gets angry!");
         }

@@ -81,7 +81,7 @@ internal class RogueCharacterClass : BaseCharacterClass
 
     protected override void OutfitItem(Item item)
     {
-        if (item.Factory.CategoryEnum == ItemTypeEnum.Sword && SaveGame.Player.Studies<DeathRealm>())
+        if (item.Factory.CategoryEnum == ItemTypeEnum.Sword && SaveGame.Studies<DeathRealm>())
         {
             item.RareItemTypeIndex = RareItemTypeEnum.WeaponOfPoisoning;
         }

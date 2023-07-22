@@ -21,7 +21,7 @@ internal class DeathSpellVampirismTrue : Spell
         {
             if (SaveGame.DrainLife(dir, 100))
             {
-                SaveGame.Player.RestoreHealth(100);
+                SaveGame.RestoreHealth(100);
             }
         }
     }

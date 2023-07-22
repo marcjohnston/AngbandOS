@@ -21,15 +21,15 @@ internal class MajorDisplacementTalent : Talent
 
     public override void Use()
     {
-        SaveGame.TeleportPlayer(SaveGame.Player.ExperienceLevel * 5);
-        if (SaveGame.Player.ExperienceLevel > 29)
+        SaveGame.TeleportPlayer(SaveGame.ExperienceLevel * 5);
+        if (SaveGame.ExperienceLevel > 29)
         {
-            SaveGame.BanishMonsters(SaveGame.Player.ExperienceLevel);
+            SaveGame.BanishMonsters(SaveGame.ExperienceLevel);
         }
     }
 
     protected override string Comment()
     {
-        return $"range {SaveGame.Player.ExperienceLevel * 5}";
+        return $"range {SaveGame.ExperienceLevel * 5}";
     }
 }

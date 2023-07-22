@@ -20,7 +20,7 @@ internal class SummonPhantomActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Difficulty, new PhantomMonsterSelector(), true);
+        SaveGame.Level.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, new PhantomMonsterSelector(), true);
         return true;
     }
 

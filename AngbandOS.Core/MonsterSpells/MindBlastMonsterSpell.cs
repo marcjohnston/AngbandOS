@@ -25,35 +25,35 @@ internal class MindBlastMonsterSpell : MonsterSpell
 
     public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
     {
-        if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
+        if (Program.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
         {
             saveGame.MsgPrint("You resist the effects!");
         }
         else
         {
             saveGame.MsgPrint("Your mind is blasted by psionic energy.");
-            if (!saveGame.Player.HasConfusionResistance)
+            if (!saveGame.HasConfusionResistance)
             {
-                saveGame.Player.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(4) + 4);
+                saveGame.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(4) + 4);
             }
-            if (!saveGame.Player.HasChaosResistance && Program.Rng.DieRoll(3) == 1)
+            if (!saveGame.HasChaosResistance && Program.Rng.DieRoll(3) == 1)
             {
-                saveGame.Player.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(250) + 150);
+                saveGame.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(250) + 150);
             }
 
             string monsterDescription = monster.IndefiniteVisibleName;
-            saveGame.Player.TakeHit(Program.Rng.DiceRoll(8, 8), monsterDescription);
+            saveGame.TakeHit(Program.Rng.DiceRoll(8, 8), monsterDescription);
         }
     }
 
     public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        bool playerIsBlind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool playerIsBlind = saveGame.TimedBlindness.TurnsRemaining != 0;
         bool seen = !playerIsBlind && monster.IsVisible;
         string monsterName = monster.Name;
         string targetName = target.Name;
-        bool blind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = saveGame.TimedBlindness.TurnsRemaining != 0;
         MonsterRace targetRace = target.Race;
 
         if (targetRace.Unique || targetRace.ImmuneConfusion || targetRace.Level > Program.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)

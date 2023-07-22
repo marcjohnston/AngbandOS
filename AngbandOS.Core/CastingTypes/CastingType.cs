@@ -18,7 +18,7 @@ internal class CastingType
     {
         SaveGame = saveGame;
     }
-    public virtual int Levels => SaveGame.Player.ExperienceLevel;
+    public virtual int Levels => SaveGame.ExperienceLevel;
 
     /// <summary>
     /// Returns the verb to use for casting.  Returns "cast" by default.  Divine casting type returns "recite".
@@ -56,18 +56,18 @@ internal class CastingType
     /// </summary>
     public virtual void Cast()
     {
-        string prayer = SaveGame.Player.BaseCharacterClass.SpellCastingType.SpellNoun;
-        if (!SaveGame.Player.CanCastSpells)
+        string prayer = SaveGame.BaseCharacterClass.SpellCastingType.SpellNoun;
+        if (!SaveGame.CanCastSpells)
         {
             SaveGame.MsgPrint("You cannot cast spells!");
             return;
         }
-        if (SaveGame.Player.TimedBlindness.TurnsRemaining != 0 || SaveGame.Level.NoLight())
+        if (SaveGame.TimedBlindness.TurnsRemaining != 0 || SaveGame.Level.NoLight())
         {
             SaveGame.MsgPrint("You cannot see!");
             return;
         }
-        if (SaveGame.Player.TimedConfusion.TurnsRemaining != 0)
+        if (SaveGame.TimedConfusion.TurnsRemaining != 0)
         {
             SaveGame.MsgPrint("You are too confused!");
             return;
@@ -85,7 +85,7 @@ internal class CastingType
         SaveGame.HandleStuff();
 
         // Allow the player to select the spell.
-        if (!SaveGame.GetSpell(out Spell? sPtr, SaveGame.Player.BaseCharacterClass.SpellCastingType.CastVerb, bookItem, true))
+        if (!SaveGame.GetSpell(out Spell? sPtr, SaveGame.BaseCharacterClass.SpellCastingType.CastVerb, bookItem, true))
         {
             SaveGame.MsgPrint($"You don't know any {prayer}s in that book.");
             return;
@@ -97,9 +97,9 @@ internal class CastingType
             return;
         }
 
-        if (sPtr.ManaCost > SaveGame.Player.Mana)
+        if (sPtr.ManaCost > SaveGame.Mana)
         {
-            string cast = SaveGame.Player.BaseCharacterClass.SpellCastingType.CastVerb;
+            string cast = SaveGame.BaseCharacterClass.SpellCastingType.CastVerb;
             SaveGame.MsgPrint($"You do not have enough mana to {cast} this {prayer}.");
             if (!SaveGame.GetCheck("Attempt it anyway? "))
             {
@@ -119,26 +119,26 @@ internal class CastingType
             {
                 int e = sPtr.FirstCastExperience;
                 sPtr.Worked = true;
-                SaveGame.Player.GainExperience(e * sPtr.Level);
+                SaveGame.GainExperience(e * sPtr.Level);
             }
         }
         SaveGame.EnergyUse = 100;
-        if (sPtr.ManaCost <= SaveGame.Player.Mana)
+        if (sPtr.ManaCost <= SaveGame.Mana)
         {
-            SaveGame.Player.Mana -= sPtr.ManaCost;
+            SaveGame.Mana -= sPtr.ManaCost;
         }
         else
         {
-            int oops = sPtr.ManaCost - SaveGame.Player.Mana;
-            SaveGame.Player.Mana = 0;
-            SaveGame.Player.FractionalMana = 0;
+            int oops = sPtr.ManaCost - SaveGame.Mana;
+            SaveGame.Mana = 0;
+            SaveGame.FractionalMana = 0;
             SaveGame.MsgPrint("You faint from the effort!");
-            SaveGame.Player.TimedParalysis.AddTimer(Program.Rng.DieRoll((5 * oops) + 1));
+            SaveGame.TimedParalysis.AddTimer(Program.Rng.DieRoll((5 * oops) + 1));
             if (Program.Rng.RandomLessThan(100) < 50)
             {
                 bool perm = Program.Rng.RandomLessThan(100) < 25;
                 SaveGame.MsgPrint("You have damaged your health!");
-                SaveGame.Player.DecreaseAbilityScore(Ability.Constitution, 15 + Program.Rng.DieRoll(10), perm);
+                SaveGame.DecreaseAbilityScore(Ability.Constitution, 15 + Program.Rng.DieRoll(10), perm);
             }
         }
         SaveGame.RedrawManaFlaggedAction.Set();

@@ -26,7 +26,7 @@ internal class RestoreStrengthPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Restore strength restores your strength
-        return SaveGame.Player.TryRestoringAbilityScore(Ability.Strength);
+        return SaveGame.TryRestoringAbilityScore(Ability.Strength);
     }
     public override Item CreateItem() => new RestoreStrengthPotionItem(SaveGame);
 }

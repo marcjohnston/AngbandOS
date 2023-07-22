@@ -20,15 +20,15 @@ internal class MutationColdTouch : Mutation
         {
             return;
         }
-        int y = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
-        int x = saveGame.Player.MapX + saveGame.Level.KeypadDirectionXOffset[dir];
+        int y = saveGame.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
+        int x = saveGame.MapX + saveGame.Level.KeypadDirectionXOffset[dir];
         GridTile cPtr = saveGame.Level.Grid[y][x];
         if (cPtr.MonsterIndex == 0)
         {
             saveGame.MsgPrint("You wave your hands in the air.");
             return;
         }
-        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 2 * saveGame.Player.ExperienceLevel);
+        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 2 * saveGame.ExperienceLevel);
     }
 
     public override string ActivationSummary(int lvl)

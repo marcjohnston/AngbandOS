@@ -159,7 +159,7 @@ internal class JournalScript : Script
             }
         }
 
-        ItemCharacteristics playerCharacteristics = SaveGame.Player.GetAbilitiesAsItemFlags();
+        ItemCharacteristics playerCharacteristics = SaveGame.GetAbilitiesAsItemFlags();
         if (getStat(playerCharacteristics))
         {
             SaveGame.Screen.Print(baseColour, "+", row, col + 10 + 26); // col + 10 + InventorySlot.Total - InventorySlot.MeleeWeapon + 1);
@@ -333,7 +333,7 @@ internal class JournalScript : Script
         SaveGame.Screen.Print(ColourEnum.Blue, "======================", 1, 1);
         int row = 3;
         God patron = null;
-        foreach (var deity in SaveGame.Player.Religion.GetAllDeities())
+        foreach (var deity in SaveGame.Religion.GetAllDeities())
         {
             var text = deity.ShortName;
             if (deity.IsPatron)
@@ -578,7 +578,7 @@ internal class JournalScript : Script
         }
         for (int i = 1; i < SaveGame.SingletonRepository.MonsterRaces.Count; i++)
         {
-            if (SaveGame.SingletonRepository.MonsterRaces[i].Knowledge.RSights != 0 || SaveGame.Player.IsWizard)
+            if (SaveGame.SingletonRepository.MonsterRaces[i].Knowledge.RSights != 0 || SaveGame.IsWizard)
             {
                 seen[maxSeen] = i;
                 maxSeen++;
@@ -711,7 +711,7 @@ internal class JournalScript : Script
 
     private void JournalMutations()
     {
-        string[] features = SaveGame.Player.Dna.GetMutationList();
+        string[] features = SaveGame.Dna.GetMutationList();
         int maxFeature = features.Length;
         int first = 0;
         while (!SaveGame.Shutdown)
@@ -855,14 +855,14 @@ internal class JournalScript : Script
         SaveGame.Screen.Clear();
         SaveGame.Screen.Print(ColourEnum.Blue, "Word of Recall", 0, 1);
         SaveGame.Screen.Print(ColourEnum.Blue, "==============", 1, 1);
-        string recallTown = SaveGame.Player.TownWithHouse > -1 ? SaveGame.SingletonRepository.Towns[SaveGame.Player.TownWithHouse].Name : SaveGame.CurTown.Name;
+        string recallTown = SaveGame.TownWithHouse > -1 ? SaveGame.SingletonRepository.Towns[SaveGame.TownWithHouse].Name : SaveGame.CurTown.Name;
         string recallDungeon = SaveGame.RecallDungeon.Name;
         int recallLev = SaveGame.RecallDungeon.RecallLevel;
         SaveGame.Screen.Print(ColourEnum.Blue, $"Your Word of Recall position is level {recallLev} of {recallDungeon}.", 3, 0);
         SaveGame.Screen.Print(ColourEnum.Blue, $"Your home town is {recallTown}.", 4, 0);
-        if (SaveGame.Player.TownWithHouse > -1)
+        if (SaveGame.TownWithHouse > -1)
         {
-            recallTown = "your house in " + SaveGame.SingletonRepository.Dungeons[SaveGame.Player.TownWithHouse].Shortname;
+            recallTown = "your house in " + SaveGame.SingletonRepository.Dungeons[SaveGame.TownWithHouse].Shortname;
         }
         SaveGame.Screen.Print(ColourEnum.Brown,
             SaveGame.CurrentDepth == 0
@@ -890,7 +890,7 @@ internal class JournalScript : Script
         {
             MonsterRace monster = SaveGame.SingletonRepository.MonsterRaces[i];
             if (monster.Unique &&
-                (monster.Knowledge.RSights > 0 || SaveGame.Player.IsWizard))
+                (monster.Knowledge.RSights > 0 || SaveGame.IsWizard))
             {
                 names[maxCount] = monster.Name;
                 bool dead = monster.MaxNum == 0;

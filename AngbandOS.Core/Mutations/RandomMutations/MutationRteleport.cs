@@ -24,7 +24,7 @@ internal class MutationRteleport : Mutation
         {
             return;
         }
-        if (saveGame.Player.HasNexusResistance || saveGame.Player.HasAntiTeleport)
+        if (saveGame.HasNexusResistance || saveGame.HasAntiTeleport)
         {
             return;
         }

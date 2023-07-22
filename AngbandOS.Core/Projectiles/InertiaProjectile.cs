@@ -54,7 +54,7 @@ internal class InertiaProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
         if (dam > 1600)
         {
             dam = 1600;
@@ -66,8 +66,8 @@ internal class InertiaProjectile : Projectile
         {
             SaveGame.MsgPrint("You are hit by something slow!");
         }
-        SaveGame.Player.TimedSlow.AddTimer(Program.Rng.RandomLessThan(4) + 4);
-        SaveGame.Player.TakeHit(dam, killer);
+        SaveGame.TimedSlow.AddTimer(Program.Rng.RandomLessThan(4) + 4);
+        SaveGame.TakeHit(dam, killer);
         return true;
     }
 }

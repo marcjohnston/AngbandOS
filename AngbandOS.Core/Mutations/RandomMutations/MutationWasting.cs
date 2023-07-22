@@ -29,42 +29,42 @@ internal class MutationWasting : Mutation
         switch (whichStat)
         {
             case Ability.Strength:
-                if (saveGame.Player.HasSustainStrength)
+                if (saveGame.HasSustainStrength)
                 {
                     sustained = true;
                 }
                 break;
 
             case Ability.Intelligence:
-                if (saveGame.Player.HasSustainIntelligence)
+                if (saveGame.HasSustainIntelligence)
                 {
                     sustained = true;
                 }
                 break;
 
             case Ability.Wisdom:
-                if (saveGame.Player.HasSustainWisdom)
+                if (saveGame.HasSustainWisdom)
                 {
                     sustained = true;
                 }
                 break;
 
             case Ability.Dexterity:
-                if (saveGame.Player.HasSustainDexterity)
+                if (saveGame.HasSustainDexterity)
                 {
                     sustained = true;
                 }
                 break;
 
             case Ability.Constitution:
-                if (saveGame.Player.HasSustainConstitution)
+                if (saveGame.HasSustainConstitution)
                 {
                     sustained = true;
                 }
                 break;
 
             case Ability.Charisma:
-                if (saveGame.Player.HasSustainCharisma)
+                if (saveGame.HasSustainCharisma)
                 {
                     sustained = true;
                 }
@@ -80,7 +80,7 @@ internal class MutationWasting : Mutation
             return;
         }
         saveGame.Disturb(false);
-        if (Program.Rng.DieRoll(10) <= saveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Lobon).AdjustedFavour)
+        if (Program.Rng.DieRoll(10) <= saveGame.Religion.GetNamedDeity(Pantheon.GodName.Lobon).AdjustedFavour)
         {
             saveGame.MsgPrint("Lobon's favour protects you from wasting away!");
             saveGame.MsgPrint(null);
@@ -88,6 +88,6 @@ internal class MutationWasting : Mutation
         }
         saveGame.MsgPrint("You can feel yourself wasting away!");
         saveGame.MsgPrint(null);
-        saveGame.Player.DecreaseAbilityScore(whichStat, Program.Rng.DieRoll(6) + 6, Program.Rng.DieRoll(3) == 1);
+        saveGame.DecreaseAbilityScore(whichStat, Program.Rng.DieRoll(6) + 6, Program.Rng.DieRoll(3) == 1);
     }
 }

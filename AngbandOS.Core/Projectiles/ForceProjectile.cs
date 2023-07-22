@@ -113,7 +113,7 @@ internal class ForceProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
         if (dam > 1600)
         {
             dam = 1600;
@@ -125,11 +125,11 @@ internal class ForceProjectile : Projectile
         {
             SaveGame.MsgPrint("You are hit by kinetic force!");
         }
-        if (!SaveGame.Player.HasSoundResistance)
+        if (!SaveGame.HasSoundResistance)
         {
-            SaveGame.Player.TimedStun.AddTimer(Program.Rng.DieRoll(20));
+            SaveGame.TimedStun.AddTimer(Program.Rng.DieRoll(20));
         }
-        SaveGame.Player.TakeHit(dam, killer);
+        SaveGame.TakeHit(dam, killer);
         return true;
     }
 }

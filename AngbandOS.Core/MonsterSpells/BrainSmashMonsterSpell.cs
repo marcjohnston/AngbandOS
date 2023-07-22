@@ -22,51 +22,51 @@ internal class BrainSmashMonsterSpell : MonsterSpell
 
     public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
     {
-        bool playerIsBlind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool playerIsBlind = saveGame.TimedBlindness.TurnsRemaining != 0;
         string monsterDescription = monster.IndefiniteVisibleName;
 
-        if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
+        if (Program.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
         {
             saveGame.MsgPrint("You resist the effects!");
         }
         else
         {
             saveGame.MsgPrint("Your mind is blasted by psionic energy.");
-            saveGame.Player.TakeHit(Program.Rng.DiceRoll(12, 15), monsterDescription);
-            if (!saveGame.Player.HasBlindnessResistance)
+            saveGame.TakeHit(Program.Rng.DiceRoll(12, 15), monsterDescription);
+            if (!saveGame.HasBlindnessResistance)
             {
-                saveGame.Player.TimedBlindness.AddTimer(8 + Program.Rng.RandomLessThan(8));
+                saveGame.TimedBlindness.AddTimer(8 + Program.Rng.RandomLessThan(8));
             }
-            if (!saveGame.Player.HasConfusionResistance)
+            if (!saveGame.HasConfusionResistance)
             {
-                saveGame.Player.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(4) + 4);
+                saveGame.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(4) + 4);
             }
-            if (!saveGame.Player.HasFreeAction)
+            if (!saveGame.HasFreeAction)
             {
-                saveGame.Player.TimedParalysis.AddTimer(Program.Rng.RandomLessThan(4) + 4);
+                saveGame.TimedParalysis.AddTimer(Program.Rng.RandomLessThan(4) + 4);
             }
-            saveGame.Player.TimedSlow.AddTimer(Program.Rng.RandomLessThan(4) + 4);
-            while (Program.Rng.RandomLessThan(100) > saveGame.Player.SkillSavingThrow)
+            saveGame.TimedSlow.AddTimer(Program.Rng.RandomLessThan(4) + 4);
+            while (Program.Rng.RandomLessThan(100) > saveGame.SkillSavingThrow)
             {
-                saveGame.Player.TryDecreasingAbilityScore(Ability.Intelligence);
+                saveGame.TryDecreasingAbilityScore(Ability.Intelligence);
             }
-            while (Program.Rng.RandomLessThan(100) > saveGame.Player.SkillSavingThrow)
+            while (Program.Rng.RandomLessThan(100) > saveGame.SkillSavingThrow)
             {
-                saveGame.Player.TryDecreasingAbilityScore(Ability.Wisdom);
+                saveGame.TryDecreasingAbilityScore(Ability.Wisdom);
             }
-            if (!saveGame.Player.HasChaosResistance)
+            if (!saveGame.HasChaosResistance)
             {
-                saveGame.Player.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(250) + 150);
+                saveGame.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(250) + 150);
             }
         }
     }
     public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        bool playerIsBlind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool playerIsBlind = saveGame.TimedBlindness.TurnsRemaining != 0;
         bool seen = !playerIsBlind && monster.IsVisible;
         string targetName = target.Name;
-        bool blind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = saveGame.TimedBlindness.TurnsRemaining != 0;
         bool seeTarget = !blind && target.IsVisible;
         MonsterRace targetRace = target.Race;
 

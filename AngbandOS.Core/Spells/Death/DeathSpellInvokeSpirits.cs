@@ -14,21 +14,21 @@ internal class DeathSpellInvokeSpirits : Spell
     public override void Cast()
     {
         int beam;
-        switch (SaveGame.Player.BaseCharacterClass.ID)
+        switch (SaveGame.BaseCharacterClass.ID)
         {
             case CharacterClass.Mage:
-                beam = SaveGame.Player.ExperienceLevel;
+                beam = SaveGame.ExperienceLevel;
                 break;
 
             case CharacterClass.HighMage:
-                beam = SaveGame.Player.ExperienceLevel + 10;
+                beam = SaveGame.ExperienceLevel + 10;
                 break;
 
             default:
-                beam = SaveGame.Player.ExperienceLevel / 2;
+                beam = SaveGame.ExperienceLevel / 2;
                 break;
         }
-        int die = Program.Rng.DieRoll(100) + (SaveGame.Player.ExperienceLevel / 5);
+        int die = Program.Rng.DieRoll(100) + (SaveGame.ExperienceLevel / 5);
         if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
@@ -41,17 +41,17 @@ internal class DeathSpellInvokeSpirits : Spell
         if (die < 8)
         {
             SaveGame.MsgPrint("Oh no! Mouldering forms rise from the earth around you!");
-            SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Difficulty, new UndeadMonsterSelector());
+            SaveGame.Level.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, new UndeadMonsterSelector());
         }
         if (die < 14)
         {
             SaveGame.MsgPrint("An unnamable evil brushes against your mind...");
-            SaveGame.Player.TimedFear.AddTimer(Program.Rng.DieRoll(4) + 4);
+            SaveGame.TimedFear.AddTimer(Program.Rng.DieRoll(4) + 4);
         }
         if (die < 26)
         {
             SaveGame.MsgPrint("Your head is invaded by a horde of gibbering spectral voices...");
-            SaveGame.Player.TimedConfusion.AddTimer(Program.Rng.DieRoll(4) + 4);
+            SaveGame.TimedConfusion.AddTimer(Program.Rng.DieRoll(4) + 4);
         }
         if (die < 31)
         {
@@ -60,15 +60,15 @@ internal class DeathSpellInvokeSpirits : Spell
         if (die < 36)
         {
             SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), dir,
-                Program.Rng.DiceRoll(3 + ((SaveGame.Player.ExperienceLevel - 1) / 5), 4));
+                Program.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 4));
         }
         if (die < 41)
         {
-            SaveGame.ConfuseMonster(dir, SaveGame.Player.ExperienceLevel);
+            SaveGame.ConfuseMonster(dir, SaveGame.ExperienceLevel);
         }
         if (die < 46)
         {
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), dir, 20 + (SaveGame.Player.ExperienceLevel / 2), 3);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), dir, 20 + (SaveGame.ExperienceLevel / 2), 3);
         }
         if (die < 51)
         {
@@ -77,22 +77,22 @@ internal class DeathSpellInvokeSpirits : Spell
         if (die < 56)
         {
             SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir,
-                Program.Rng.DiceRoll(3 + ((SaveGame.Player.ExperienceLevel - 5) / 4), 8));
+                Program.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
         }
         if (die < 61)
         {
             SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir,
-                Program.Rng.DiceRoll(5 + ((SaveGame.Player.ExperienceLevel - 5) / 4), 8));
+                Program.Rng.DiceRoll(5 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
         }
         if (die < 66)
         {
             SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir,
-                Program.Rng.DiceRoll(6 + ((SaveGame.Player.ExperienceLevel - 5) / 4), 8));
+                Program.Rng.DiceRoll(6 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
         }
         if (die < 71)
         {
             SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir,
-                Program.Rng.DiceRoll(8 + ((SaveGame.Player.ExperienceLevel - 5) / 4), 8));
+                Program.Rng.DiceRoll(8 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
         }
         if (die < 76)
         {
@@ -100,31 +100,31 @@ internal class DeathSpellInvokeSpirits : Spell
         }
         if (die < 81)
         {
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, 30 + (SaveGame.Player.ExperienceLevel / 2), 2);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, 30 + (SaveGame.ExperienceLevel / 2), 2);
         }
         if (die < 86)
         {
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir, 40 + SaveGame.Player.ExperienceLevel, 2);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir, 40 + SaveGame.ExperienceLevel, 2);
         }
         if (die < 91)
         {
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<IceProjectile>(), dir, 70 + SaveGame.Player.ExperienceLevel, 3);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<IceProjectile>(), dir, 70 + SaveGame.ExperienceLevel, 3);
         }
         if (die < 96)
         {
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, 80 + SaveGame.Player.ExperienceLevel, 3);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, 80 + SaveGame.ExperienceLevel, 3);
         }
         if (die < 101)
         {
-            SaveGame.DrainLife(dir, 100 + SaveGame.Player.ExperienceLevel);
+            SaveGame.DrainLife(dir, 100 + SaveGame.ExperienceLevel);
         }
         if (die < 104)
         {
-            SaveGame.Earthquake(SaveGame.Player.MapY, SaveGame.Player.MapX, 12);
+            SaveGame.Earthquake(SaveGame.MapY, SaveGame.MapX, 12);
         }
         if (die < 106)
         {
-            SaveGame.DestroyArea(SaveGame.Player.MapY, SaveGame.Player.MapX, 15);
+            SaveGame.DestroyArea(SaveGame.MapY, SaveGame.MapX, 15);
         }
         if (die < 108)
         {
@@ -137,7 +137,7 @@ internal class DeathSpellInvokeSpirits : Spell
         SaveGame.DispelMonsters(150);
         SaveGame.SlowMonsters();
         SaveGame.SleepMonsters();
-        SaveGame.Player.RestoreHealth(300);
+        SaveGame.RestoreHealth(300);
         if (die < 31)
         {
             SaveGame.MsgPrint("Sepulchral voices chuckle. 'Soon you will join us, mortal.'");

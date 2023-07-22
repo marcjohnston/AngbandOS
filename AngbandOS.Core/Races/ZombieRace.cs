@@ -68,14 +68,14 @@ internal class ZombieRace : Race
     }
     public override void CalcBonuses(SaveGame saveGame)
     {
-        saveGame.Player.HasNetherResistance = true;
-        saveGame.Player.HasHoldLife = true;
-        saveGame.Player.HasSeeInvisibility = true;
-        saveGame.Player.HasPoisonResistance = true;
-        saveGame.Player.HasSlowDigestion = true;
-        if (saveGame.Player.ExperienceLevel > 4)
+        saveGame.HasNetherResistance = true;
+        saveGame.HasHoldLife = true;
+        saveGame.HasSeeInvisibility = true;
+        saveGame.HasPoisonResistance = true;
+        saveGame.HasSlowDigestion = true;
+        if (saveGame.ExperienceLevel > 4)
         {
-            saveGame.Player.HasColdResistance = true;
+            saveGame.HasColdResistance = true;
         }
     }
     public override bool RestsTillDuskInsteadOfDawn => true;
@@ -83,7 +83,7 @@ internal class ZombieRace : Race
     {
         // This race only gets 1/20th of the food value
         SaveGame.MsgPrint("The food of mortals is poor sustenance for you.");
-        SaveGame.Player.SetFood(SaveGame.Player.Food + (item.TypeSpecificValue / 20));
+        SaveGame.SetFood(SaveGame.Food + (item.TypeSpecificValue / 20));
     }
     public override bool CanBleed(int level) => (level > 11);
 
@@ -93,7 +93,7 @@ internal class ZombieRace : Race
         if (saveGame.CheckIfRacialPowerWorks(30, 30, Ability.Wisdom, 18))
         {
             saveGame.MsgPrint("You attempt to restore your lost energies.");
-            saveGame.Player.RestoreLevel();
+            saveGame.RestoreLevel();
         }
     }
 

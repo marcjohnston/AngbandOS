@@ -41,7 +41,7 @@ internal abstract class ChestTrapConfiguration
     {
         foreach (BaseChestTrap trap in Traps)
         {
-            ActivateChestTrapEventArgs eventArgs = new ActivateChestTrapEventArgs(saveGame, saveGame.Player.MapX, saveGame.Player.MapY);
+            ActivateChestTrapEventArgs eventArgs = new ActivateChestTrapEventArgs(saveGame, saveGame.MapX, saveGame.MapY);
             trap.Activate(eventArgs);
 
             if (eventArgs.DestroysContents)

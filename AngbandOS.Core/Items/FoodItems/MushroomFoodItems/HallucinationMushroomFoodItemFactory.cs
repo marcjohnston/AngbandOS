@@ -25,9 +25,9 @@ internal class HallucinationMushroomFoodItemFactory : MushroomFoodItemFactory
     public override bool Eat()
     {
         SaveGame.PlaySound(SoundEffectEnum.Eat);
-        if (!SaveGame.Player.HasChaosResistance)
+        if (!SaveGame.HasChaosResistance)
         {
-            if (SaveGame.Player.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(250) + 250))
+            if (SaveGame.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(250) + 250))
             {
                 return true;
             }

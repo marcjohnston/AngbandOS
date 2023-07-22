@@ -13,7 +13,7 @@ internal class LifeSpellDayOfTheDove : Spell
     private LifeSpellDayOfTheDove(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.CharmMonsters(SaveGame.Player.ExperienceLevel * 2);
+        SaveGame.CharmMonsters(SaveGame.ExperienceLevel * 2);
     }
 
     public override string Name => "Day of the Dove";

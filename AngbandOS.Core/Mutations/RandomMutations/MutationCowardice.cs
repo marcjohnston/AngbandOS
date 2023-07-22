@@ -25,13 +25,13 @@ internal class MutationCowardice : Mutation
         {
             return;
         }
-        if (saveGame.Player.HasFearResistance || saveGame.Player.TimedHeroism.TurnsRemaining != 0 || saveGame.Player.TimedSuperheroism.TurnsRemaining != 0)
+        if (saveGame.HasFearResistance || saveGame.TimedHeroism.TurnsRemaining != 0 || saveGame.TimedSuperheroism.TurnsRemaining != 0)
         {
             return;
         }
         saveGame.Disturb(false);
         saveGame.MsgPrint("It's so dark... so scary!");
         saveGame.RedrawAfraidFlaggedAction.Set();
-        saveGame.Player.TimedFear.AddTimer(13 + Program.Rng.DieRoll(26));
+        saveGame.TimedFear.AddTimer(13 + Program.Rng.DieRoll(26));
     }
 }

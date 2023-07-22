@@ -12,12 +12,12 @@ internal class GemstoneLightSourceItem : LightSourceItem
 {
     public override void EquipmentProcessWorldHook()
     {
-        if (Program.Rng.DieRoll(999) == 1 && !SaveGame.Player.HasAntiMagic)
+        if (Program.Rng.DieRoll(999) == 1 && !SaveGame.HasAntiMagic)
         {
-            if (SaveGame.Player.TimedInvulnerability.TurnsRemaining == 0)
+            if (SaveGame.TimedInvulnerability.TurnsRemaining == 0)
             {
                 SaveGame.MsgPrint("The Jewel of Judgement drains life from you!");
-                SaveGame.Player.TakeHit(Math.Min(SaveGame.Player.ExperienceLevel, 50), "the Jewel of Judgement");
+                SaveGame.TakeHit(Math.Min(SaveGame.ExperienceLevel, 50), "the Jewel of Judgement");
             }
         }
     }

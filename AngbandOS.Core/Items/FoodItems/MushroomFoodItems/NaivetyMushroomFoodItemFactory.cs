@@ -24,8 +24,8 @@ internal class NaivetyMushroomFoodItemFactory : MushroomFoodItemFactory
     public override bool Eat()
     {
         SaveGame.PlaySound(SoundEffectEnum.Eat);
-        SaveGame.Player.TakeHit(Program.Rng.DiceRoll(8, 8), "poisonous food.");
-        SaveGame.Player.TryDecreasingAbilityScore(Ability.Wisdom);
+        SaveGame.TakeHit(Program.Rng.DiceRoll(8, 8), "poisonous food.");
+        SaveGame.TryDecreasingAbilityScore(Ability.Wisdom);
         return true;
     }
     public override Item CreateItem() => new NaivetyMushroomFoodItem(SaveGame);

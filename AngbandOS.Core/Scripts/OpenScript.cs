@@ -31,8 +31,8 @@ internal class OpenScript : Script
         // If we don't already have a direction, prompt for one
         if (SaveGame.GetDirectionNoAim(out int dir))
         {
-            int y = SaveGame.Player.MapY + SaveGame.Level.KeypadDirectionYOffset[dir];
-            int x = SaveGame.Player.MapX + SaveGame.Level.KeypadDirectionXOffset[dir];
+            int y = SaveGame.MapY + SaveGame.Level.KeypadDirectionYOffset[dir];
+            int x = SaveGame.MapX + SaveGame.Level.KeypadDirectionXOffset[dir];
             GridTile tile = SaveGame.Level.Grid[y][x];
             Item? chestItem = SaveGame.Level.ChestCheck(y, x);
             // Make sure there is something to open in the direction we chose
@@ -78,14 +78,14 @@ internal class OpenScript : Script
         {
             openedSuccessfully = false;
             // Our disable traps skill also doubles up as a lockpicking skill
-            int i = SaveGame.Player.SkillDisarmTraps;
+            int i = SaveGame.SkillDisarmTraps;
             // Hard to pick locks in the dark
-            if (SaveGame.Player.TimedBlindness.TurnsRemaining != 0 || SaveGame.Level.NoLight())
+            if (SaveGame.TimedBlindness.TurnsRemaining != 0 || SaveGame.Level.NoLight())
             {
                 i /= 10;
             }
             // Hard to pick locks when you're confused or hallucinating
-            if (SaveGame.Player.TimedConfusion.TurnsRemaining != 0 || SaveGame.Player.TimedHallucinations.TurnsRemaining != 0)
+            if (SaveGame.TimedConfusion.TurnsRemaining != 0 || SaveGame.TimedHallucinations.TurnsRemaining != 0)
             {
                 i /= 10;
             }
@@ -99,7 +99,7 @@ internal class OpenScript : Script
             if (Program.Rng.RandomLessThan(100) < j)
             {
                 SaveGame.MsgPrint("You have picked the lock.");
-                SaveGame.Player.GainExperience(1);
+                SaveGame.GainExperience(1);
                 openedSuccessfully = true;
             }
             else

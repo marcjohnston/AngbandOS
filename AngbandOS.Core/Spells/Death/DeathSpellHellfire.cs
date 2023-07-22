@@ -18,7 +18,7 @@ internal class DeathSpellHellfire : Spell
             return;
         }
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<HellFireProjectile>(), dir, 666, 3);
-        SaveGame.Player.TakeHit(50 + Program.Rng.DieRoll(50), "the strain of casting Hellfire");
+        SaveGame.TakeHit(50 + Program.Rng.DieRoll(50), "the strain of casting Hellfire");
     }
 
     public override void CastFailed()

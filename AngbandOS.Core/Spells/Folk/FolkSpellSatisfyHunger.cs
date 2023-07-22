@@ -13,7 +13,7 @@ internal class FolkSpellSatisfyHunger : Spell
     private FolkSpellSatisfyHunger(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Player.SetFood(Constants.PyFoodMax - 1);
+        SaveGame.SetFood(Constants.PyFoodMax - 1);
     }
 
     public override string Name => "Satisfy Hunger";

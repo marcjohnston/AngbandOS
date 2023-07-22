@@ -14,10 +14,10 @@ internal class CastScript : Script
 
     public override bool Execute()
     {
-        if (SaveGame.Player.HasAntiMagic)
+        if (SaveGame.HasAntiMagic)
         {
-            string whichMagicType = SaveGame.Player.BaseCharacterClass.SpellCastingType.MagicType;
-            if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mindcrafter || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Mystic)
+            string whichMagicType = SaveGame.BaseCharacterClass.SpellCastingType.MagicType;
+            if (SaveGame.BaseCharacterClass.ID == CharacterClass.Mindcrafter || SaveGame.BaseCharacterClass.ID == CharacterClass.Mystic)
             {
                 whichMagicType = "psychic talents";
             }
@@ -26,7 +26,7 @@ internal class CastScript : Script
         }
         else
         {
-            SaveGame.Player.BaseCharacterClass.SpellCastingType.Cast();
+            SaveGame.BaseCharacterClass.SpellCastingType.Cast();
         }
         return false;
     }

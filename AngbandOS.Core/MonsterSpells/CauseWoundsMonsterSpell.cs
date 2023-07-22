@@ -40,7 +40,7 @@ internal abstract class CauseWoundsMonsterSpell : MonsterSpell
     protected virtual int TimedBleeding => 0;
     public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
     {
-        if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
+        if (Program.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
         {
             saveGame.MsgPrint("You resist the effects!");
         }
@@ -48,12 +48,12 @@ internal abstract class CauseWoundsMonsterSpell : MonsterSpell
         {
             string monsterDescription = monster.IndefiniteVisibleName;
 
-            saveGame.Player.CurseEquipment(CurseEquipmentChance, HeavyCurseEquipmentChance);
-            saveGame.Player.TakeHit(Damage, monsterDescription);
+            saveGame.CurseEquipment(CurseEquipmentChance, HeavyCurseEquipmentChance);
+            saveGame.TakeHit(Damage, monsterDescription);
 
             if (TimedBleeding > 0)
             {
-                saveGame.Player.TimedBleeding.AddTimer(TimedBleeding);
+                saveGame.TimedBleeding.AddTimer(TimedBleeding);
             }
         }
     }
@@ -62,7 +62,7 @@ internal abstract class CauseWoundsMonsterSpell : MonsterSpell
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         string targetName = target.Name;
-        bool blind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = saveGame.TimedBlindness.TurnsRemaining != 0;
         bool seeTarget = !blind && target.IsVisible;
         MonsterRace targetRace = target.Race;
 

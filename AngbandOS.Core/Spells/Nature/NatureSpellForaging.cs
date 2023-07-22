@@ -13,7 +13,7 @@ internal class NatureSpellForaging : Spell
     private NatureSpellForaging(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Player.SetFood(Constants.PyFoodMax - 1);
+        SaveGame.SetFood(Constants.PyFoodMax - 1);
     }
 
     public override string Name => "Foraging";

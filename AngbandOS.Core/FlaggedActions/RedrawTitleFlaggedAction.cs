@@ -20,11 +20,11 @@ internal class RedrawTitleFlaggedAction : FlaggedAction
     }
     protected override void Execute()
     {
-        if (SaveGame.Player.IsWizard)
+        if (SaveGame.IsWizard)
         {
             PrtField("-=<WIZARD>=-", RowTitle, ColTitle);
         }
-        else if (SaveGame.Player.IsWinner || SaveGame.Player.ExperienceLevel > Constants.PyMaxLevel)
+        else if (SaveGame.IsWinner || SaveGame.ExperienceLevel > Constants.PyMaxLevel)
         {
             PrtField("***WINNER***", RowTitle, ColTitle);
         }

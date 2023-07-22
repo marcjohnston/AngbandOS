@@ -25,7 +25,7 @@ internal class WeaknessPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Weakness tries to reduce your strength
-        return SaveGame.Player.TryDecreasingAbilityScore(Ability.Strength);
+        return SaveGame.TryDecreasingAbilityScore(Ability.Strength);
     }
     public override bool Smash(int who, int y, int x)
     {

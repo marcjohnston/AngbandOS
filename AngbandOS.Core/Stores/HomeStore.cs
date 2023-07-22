@@ -68,7 +68,7 @@ internal class HomeStore : Store
     public void BuyHouse()
     {
         int price;
-        if (SaveGame.Player.TownWithHouse == SaveGame.CurTown.Index)
+        if (SaveGame.TownWithHouse == SaveGame.CurTown.Index)
         {
             SaveGame.MsgPrint("You already have the deeds!");
         }
@@ -76,18 +76,18 @@ internal class HomeStore : Store
         {
             if (!ServiceHaggle(SaveGame.CurTown.HousePrice, out price))
             {
-                if (price >= SaveGame.Player.Gold)
+                if (price >= SaveGame.Gold)
                 {
                     SaveGame.MsgPrint("You do not have the gold!");
                 }
                 else
                 {
-                    SaveGame.Player.Gold -= price;
+                    SaveGame.Gold -= price;
                     SayComment_1();
                     SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                     StorePrtGold();
-                    int oldHouse = SaveGame.Player.TownWithHouse;
-                    SaveGame.Player.TownWithHouse = SaveGame.CurTown.Index;
+                    int oldHouse = SaveGame.TownWithHouse;
+                    SaveGame.TownWithHouse = SaveGame.CurTown.Index;
                     if (oldHouse == -1)
                     {
                         SaveGame.MsgPrint("You may move in at once.");
@@ -96,7 +96,7 @@ internal class HomeStore : Store
                     {
                         SaveGame.MsgPrint(
                             "I've sold your old house to pay for the removal service.");
-                        SaveGame.MoveHouse(oldHouse, SaveGame.Player.TownWithHouse);
+                        SaveGame.MoveHouse(oldHouse, SaveGame.TownWithHouse);
                     }
                 }
                 SaveGame.HandleStuff();
@@ -111,6 +111,6 @@ internal class HomeStore : Store
     /// <returns></returns>
     public override bool DoorsLocked(SaveGame saveGame)
     {
-        return saveGame.Player.TownWithHouse != saveGame.CurTown.Index;
+        return saveGame.TownWithHouse != saveGame.CurTown.Index;
     }
 }

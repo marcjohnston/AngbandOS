@@ -65,13 +65,13 @@ internal class SkeletonRace : Race
     }
     public override void CalcBonuses(SaveGame saveGame)
     {
-        saveGame.Player.HasShardResistance = true;
-        saveGame.Player.HasHoldLife = true;
-        saveGame.Player.HasSeeInvisibility = true;
-        saveGame.Player.HasPoisonResistance = true;
-        if (saveGame.Player.ExperienceLevel > 9)
+        saveGame.HasShardResistance = true;
+        saveGame.HasHoldLife = true;
+        saveGame.HasSeeInvisibility = true;
+        saveGame.HasPoisonResistance = true;
+        if (saveGame.ExperienceLevel > 9)
         {
-            saveGame.Player.HasColdResistance = true;
+            saveGame.HasColdResistance = true;
         }
     }
     public override bool RestsTillDuskInsteadOfDawn => true;
@@ -90,7 +90,7 @@ internal class SkeletonRace : Race
             // Spawn a new food item on the floor to make up for the one that will be destroyed
             Item floorItem = item.Factory.CreateItem();
             SaveGame.MsgPrint("The food falls through your jaws!");
-            SaveGame.Level.DropNear(floorItem, -1, SaveGame.Player.MapY, SaveGame.Player.MapX);
+            SaveGame.Level.DropNear(floorItem, -1, SaveGame.MapY, SaveGame.MapX);
         }
     }
 
@@ -99,7 +99,7 @@ internal class SkeletonRace : Race
         if (Program.Rng.DieRoll(12) == 1)
         {
             saveGame.MsgPrint("Some of the fluid falls through your jaws!");
-            potion.Smash(0, saveGame.Player.MapY, saveGame.Player.MapX);
+            potion.Smash(0, saveGame.MapY, saveGame.MapX);
         }
     }
     public override bool CanBleed(int level) => false;
@@ -109,7 +109,7 @@ internal class SkeletonRace : Race
         if (saveGame.CheckIfRacialPowerWorks(30, 30, Ability.Wisdom, 18))
         {
             saveGame.MsgPrint("You attempt to restore your lost energies.");
-            saveGame.Player.RestoreLevel();
+            saveGame.RestoreLevel();
         }
     }
     public override bool OutfitsWithScrollsOfSatisfyHunger => true;

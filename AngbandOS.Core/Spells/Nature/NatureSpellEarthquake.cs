@@ -13,7 +13,7 @@ internal class NatureSpellEarthquake : Spell
     private NatureSpellEarthquake(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Earthquake(SaveGame.Player.MapY, SaveGame.Player.MapX, 10);
+        SaveGame.Earthquake(SaveGame.MapY, SaveGame.MapX, 10);
     }
 
     public override string Name => "Earthquake";

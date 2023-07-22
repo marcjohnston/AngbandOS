@@ -23,13 +23,13 @@ internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact, IFixed
         saveGame.MsgPrint("The gemstone flashes bright red!");
         saveGame.Level.WizLight();
         saveGame.MsgPrint("The gemstone drains your vitality...");
-        saveGame.Player.TakeHit(Program.Rng.DiceRoll(3, 8), "the Gemstone 'Trapezohedron'");
+        saveGame.TakeHit(Program.Rng.DiceRoll(3, 8), "the Gemstone 'Trapezohedron'");
         saveGame.DetectTraps();
         saveGame.DetectDoors();
         saveGame.DetectStairs();
         if (saveGame.GetCheck("Activate recall? "))
         {
-            saveGame.Player.ToggleRecall();
+            saveGame.ToggleRecall();
         }
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(20) + 20;
     }

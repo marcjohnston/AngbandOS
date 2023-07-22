@@ -18,18 +18,18 @@ internal class LifeSpellHolyOrb : Spell
             return;
         }
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<HolyFireProjectile>(), dir,
-            Program.Rng.DiceRoll(3, 6) + SaveGame.Player.ExperienceLevel + (SaveGame.Player.ExperienceLevel /
-            (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Priest || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)),
-            SaveGame.Player.ExperienceLevel < 30 ? 2 : 3);
+            Program.Rng.DiceRoll(3, 6) + SaveGame.ExperienceLevel + (SaveGame.ExperienceLevel /
+            (SaveGame.BaseCharacterClass.ID == CharacterClass.Priest || SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)),
+            SaveGame.ExperienceLevel < 30 ? 2 : 3);
     }
 
     public override string Name => "Holy Orb";
     
     protected override string? Info()
     {
-        int orb = SaveGame.Player.ExperienceLevel / (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Priest || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage
+        int orb = SaveGame.ExperienceLevel / (SaveGame.BaseCharacterClass.ID == CharacterClass.Priest || SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage
                       ? 2
                       : 4);
-        return $" dam 3d6+{SaveGame.Player.ExperienceLevel + orb}";
+        return $" dam 3d6+{SaveGame.ExperienceLevel + orb}";
     }
 }

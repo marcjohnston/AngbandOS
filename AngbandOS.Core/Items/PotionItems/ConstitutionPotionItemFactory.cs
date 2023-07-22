@@ -26,7 +26,7 @@ internal class ConstitutionPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Constitution increases your constitution
-        return SaveGame.Player.TryIncreasingAbilityScore(Ability.Constitution);
+        return SaveGame.TryIncreasingAbilityScore(Ability.Constitution);
     }
     public override Item CreateItem() => new ConstitutionPotionItem(SaveGame);
 }

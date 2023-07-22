@@ -13,9 +13,9 @@ internal class CorporealSpellHealingTrue : Spell
     private CorporealSpellHealingTrue(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Player.RestoreHealth(2000);
-        SaveGame.Player.TimedStun.ResetTimer();
-        SaveGame.Player.TimedBleeding.ResetTimer();
+        SaveGame.RestoreHealth(2000);
+        SaveGame.TimedStun.ResetTimer();
+        SaveGame.TimedBleeding.ResetTimer();
     }
 
     public override string Name => "Healing True";

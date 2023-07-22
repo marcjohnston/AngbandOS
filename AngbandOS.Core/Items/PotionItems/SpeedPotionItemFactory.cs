@@ -26,16 +26,16 @@ internal class SpeedPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Speed temporarily hastes you.  But it is not additive.
-        if (SaveGame.Player.TimedHaste.TurnsRemaining == 0)
+        if (SaveGame.TimedHaste.TurnsRemaining == 0)
         {
-            if (SaveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(25) + 15))
+            if (SaveGame.TimedHaste.SetTimer(Program.Rng.DieRoll(25) + 15))
             {
                 return true;
             }
         }
         else
         {
-            SaveGame.Player.TimedHaste.AddTimer(5);
+            SaveGame.TimedHaste.AddTimer(5);
         }
         return false;
     }

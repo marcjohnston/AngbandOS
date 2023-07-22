@@ -13,32 +13,32 @@ internal class LifeSpellDivineIntervention : Spell
     private LifeSpellDivineIntervention(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Project(0, 1, SaveGame.Player.MapY, SaveGame.Player.MapX, 777, SaveGame.SingletonRepository.Projectiles.Get<HolyFireProjectile>(),
+        SaveGame.Project(0, 1, SaveGame.MapY, SaveGame.MapX, 777, SaveGame.SingletonRepository.Projectiles.Get<HolyFireProjectile>(),
             ProjectionFlag.ProjectKill);
-        SaveGame.DispelMonsters(SaveGame.Player.ExperienceLevel * 4);
+        SaveGame.DispelMonsters(SaveGame.ExperienceLevel * 4);
         SaveGame.SlowMonsters();
-        SaveGame.StunMonsters(SaveGame.Player.ExperienceLevel * 4);
-        SaveGame.ConfuseMonsters(SaveGame.Player.ExperienceLevel * 4);
-        SaveGame.TurnMonsters(SaveGame.Player.ExperienceLevel * 4);
-        SaveGame.StasisMonsters(SaveGame.Player.ExperienceLevel * 4);
-        SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.ExperienceLevel, new CthuloidMonsterSelector(), true);
-        SaveGame.Player.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(25) + 25);
-        SaveGame.Player.RestoreHealth(300);
-        if (SaveGame.Player.TimedHaste.TurnsRemaining == 0)
+        SaveGame.StunMonsters(SaveGame.ExperienceLevel * 4);
+        SaveGame.ConfuseMonsters(SaveGame.ExperienceLevel * 4);
+        SaveGame.TurnMonsters(SaveGame.ExperienceLevel * 4);
+        SaveGame.StasisMonsters(SaveGame.ExperienceLevel * 4);
+        SaveGame.Level.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new CthuloidMonsterSelector(), true);
+        SaveGame.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(25) + 25);
+        SaveGame.RestoreHealth(300);
+        if (SaveGame.TimedHaste.TurnsRemaining == 0)
         {
-            SaveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(20 + SaveGame.Player.ExperienceLevel) + SaveGame.Player.ExperienceLevel);
+            SaveGame.TimedHaste.SetTimer(Program.Rng.DieRoll(20 + SaveGame.ExperienceLevel) + SaveGame.ExperienceLevel);
         }
         else
         {
-            SaveGame.Player.TimedHaste.AddTimer(Program.Rng.DieRoll(5));
+            SaveGame.TimedHaste.AddTimer(Program.Rng.DieRoll(5));
         }
-        SaveGame.Player.TimedFear.ResetTimer();
+        SaveGame.TimedFear.ResetTimer();
     }
 
     public override string Name => "Divine Intervention";
     
     protected override string? Info()
     {
-        return $"h300/d{SaveGame.Player.ExperienceLevel * 4}+777";
+        return $"h300/d{SaveGame.ExperienceLevel * 4}+777";
     }
 }

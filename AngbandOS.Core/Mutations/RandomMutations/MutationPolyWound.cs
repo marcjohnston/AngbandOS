@@ -22,7 +22,7 @@ internal class MutationPolyWound : Mutation
     {
         if (Program.Rng.DieRoll(3000) == 1)
         {
-            saveGame.Player.PolymorphWounds();
+            saveGame.PolymorphWounds();
         }
     }
 }

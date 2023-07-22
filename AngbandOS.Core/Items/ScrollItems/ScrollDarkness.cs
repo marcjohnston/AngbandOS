@@ -23,9 +23,9 @@ internal class ScrollDarkness : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (!SaveGame.Player.HasBlindnessResistance && !SaveGame.Player.HasDarkResistance)
+        if (!SaveGame.HasBlindnessResistance && !SaveGame.HasDarkResistance)
         {
-            SaveGame.Player.TimedBlindness.AddTimer(3 + Program.Rng.DieRoll(5));
+            SaveGame.TimedBlindness.AddTimer(3 + Program.Rng.DieRoll(5));
         }
         if (SaveGame.UnlightArea(10, 3))
         {

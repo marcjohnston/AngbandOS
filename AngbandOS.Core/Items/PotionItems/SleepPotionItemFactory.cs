@@ -25,9 +25,9 @@ internal class SleepPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Sleep paralyses you
-        if (!SaveGame.Player.HasFreeAction)
+        if (!SaveGame.HasFreeAction)
         {
-            if (SaveGame.Player.TimedParalysis.AddTimer(Program.Rng.RandomLessThan(4) + 4))
+            if (SaveGame.TimedParalysis.AddTimer(Program.Rng.RandomLessThan(4) + 4))
             {
                 return true;
             }

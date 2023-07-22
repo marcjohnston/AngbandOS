@@ -16,7 +16,7 @@ internal class RedrawGoldFlaggedAction : FlaggedAction
     protected override void Execute()
     {
         SaveGame.Screen.Print("GP ", RowGold, ColGold);
-        string tmp = SaveGame.Player.Gold.ToString().PadLeft(9);
+        string tmp = SaveGame.Gold.ToString().PadLeft(9);
         SaveGame.Screen.Print(ColourEnum.BrightGreen, tmp, RowGold, ColGold + 3);
     }
 }

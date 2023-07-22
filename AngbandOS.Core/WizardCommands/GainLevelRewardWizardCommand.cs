@@ -20,6 +20,6 @@ internal class GainLevelRewardWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.Player.GainLevelReward();
+        SaveGame.GainLevelReward();
     }
 }

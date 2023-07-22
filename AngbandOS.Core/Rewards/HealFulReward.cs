@@ -15,17 +15,17 @@ internal class HealFulReward : Reward
     {
         SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
         SaveGame.MsgPrint("'Rise, my servant!'");
-        SaveGame.Player.RestoreLevel();
-        SaveGame.Player.TimedPoison.ResetTimer();
-        SaveGame.Player.TimedBlindness.ResetTimer();
-        SaveGame.Player.TimedConfusion.ResetTimer();
-        SaveGame.Player.TimedHallucinations.ResetTimer();
-        SaveGame.Player.TimedStun.ResetTimer();
-        SaveGame.Player.TimedBleeding.ResetTimer();
-        SaveGame.Player.RestoreHealth(5000);
+        SaveGame.RestoreLevel();
+        SaveGame.TimedPoison.ResetTimer();
+        SaveGame.TimedBlindness.ResetTimer();
+        SaveGame.TimedConfusion.ResetTimer();
+        SaveGame.TimedHallucinations.ResetTimer();
+        SaveGame.TimedStun.ResetTimer();
+        SaveGame.TimedBleeding.ResetTimer();
+        SaveGame.RestoreHealth(5000);
         for (int dummy = 0; dummy < 6; dummy++)
         {
-            SaveGame.Player.TryRestoringAbilityScore(dummy);
+            SaveGame.TryRestoringAbilityScore(dummy);
         }
     }
 }

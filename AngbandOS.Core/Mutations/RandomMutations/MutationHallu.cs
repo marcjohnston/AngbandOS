@@ -24,12 +24,12 @@ internal class MutationHallu : Mutation
         {
             return;
         }
-        if (saveGame.Player.HasChaosResistance)
+        if (saveGame.HasChaosResistance)
         {
             return;
         }
         saveGame.Disturb(false);
         saveGame.PrExtraRedrawAction.Set();
-        saveGame.Player.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(50) + 20);
+        saveGame.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(50) + 20);
     }
 }

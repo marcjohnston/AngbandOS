@@ -20,18 +20,18 @@ internal class MutationAttDragon : Mutation
 
     public override void OnProcessWorld(SaveGame saveGame)
     {
-        if (saveGame.Player.HasAntiMagic || Program.Rng.DieRoll(3000) != 13)
+        if (saveGame.HasAntiMagic || Program.Rng.DieRoll(3000) != 13)
         {
             return;
         }
         bool dSummon;
         if (Program.Rng.DieRoll(5) == 1)
         {
-            dSummon = saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new DragonMonsterSelector(), true);
+            dSummon = saveGame.Level.SummonSpecificFriendly(saveGame.MapY, saveGame.MapX, saveGame.Difficulty, new DragonMonsterSelector(), true);
         }
         else
         {
-            dSummon = saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new DragonMonsterSelector());
+            dSummon = saveGame.Level.SummonSpecific(saveGame.MapY, saveGame.MapX, saveGame.Difficulty, new DragonMonsterSelector());
         }
         if (!dSummon)
         {

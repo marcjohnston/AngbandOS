@@ -59,7 +59,7 @@ internal class UpdateViewFlaggedAction : FlaggedAction
             CaveViewHack(cPtr, y, x);
             return true;
         }
-        if (SaveGame.Level.Los(SaveGame.Player.MapY, SaveGame.Player.MapX, y, x))
+        if (SaveGame.Level.Los(SaveGame.MapY, SaveGame.MapX, y, x))
         {
             CaveViewHack(cPtr, y, x);
             return false;
@@ -86,8 +86,8 @@ internal class UpdateViewFlaggedAction : FlaggedAction
             SaveGame.Level.TempN++;
         }
         SaveGame.Level.View.Clear();
-        y = SaveGame.Player.MapY;
-        x = SaveGame.Player.MapX;
+        y = SaveGame.MapY;
+        x = SaveGame.MapX;
         cPtr = SaveGame.Level.Grid[y][x];
         cPtr.TileFlags.Set(GridTile.EasyVisibility);
         CaveViewHack(cPtr, y, x);

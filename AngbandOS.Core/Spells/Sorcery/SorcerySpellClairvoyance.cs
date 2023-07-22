@@ -14,9 +14,9 @@ internal class SorcerySpellClairvoyance : Spell
     public override void Cast()
     {
         SaveGame.Level.WizLight();
-        if (!SaveGame.Player.HasTelepathy)
+        if (!SaveGame.HasTelepathy)
         {
-            SaveGame.Player.TimedTelepathy.AddTimer(Program.Rng.DieRoll(30) + 25);
+            SaveGame.TimedTelepathy.AddTimer(Program.Rng.DieRoll(30) + 25);
         }
     }
 

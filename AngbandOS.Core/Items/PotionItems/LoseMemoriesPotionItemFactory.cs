@@ -25,10 +25,10 @@ internal class LoseMemoriesPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Lose Memories reduces your experience
-        if (!SaveGame.Player.HasHoldLife && SaveGame.Player.ExperiencePoints > 0)
+        if (!SaveGame.HasHoldLife && SaveGame.ExperiencePoints > 0)
         {
             SaveGame.MsgPrint("You feel your memories fade.");
-            SaveGame.Player.LoseExperience(SaveGame.Player.ExperiencePoints / 4);
+            SaveGame.LoseExperience(SaveGame.ExperiencePoints / 4);
             return true;
         }
         return false;

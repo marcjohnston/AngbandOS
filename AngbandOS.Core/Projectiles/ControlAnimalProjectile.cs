@@ -45,7 +45,7 @@ internal class ControlAnimalProjectile : Projectile
             note = " is unaffected!";
             obvious = false;
         }
-        else if (SaveGame.Player.HasAggravation || rPtr.Guardian)
+        else if (SaveGame.HasAggravation || rPtr.Guardian)
         {
             note = " hates you too much!";
         }

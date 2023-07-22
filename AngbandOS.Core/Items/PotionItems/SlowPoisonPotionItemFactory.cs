@@ -26,7 +26,7 @@ internal class SlowPoisonPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Slow poison halves the remaining duration of any poison you have
-        return SaveGame.Player.TimedPoison.SetTimer(SaveGame.Player.TimedPoison.TurnsRemaining / 2);
+        return SaveGame.TimedPoison.SetTimer(SaveGame.TimedPoison.TurnsRemaining / 2);
     }
     public override Item CreateItem() => new SlowPoisonPotionItem(SaveGame);
 }

@@ -22,7 +22,7 @@ internal class QuakeActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.Earthquake(SaveGame.Player.MapY, SaveGame.Player.MapX, 10);
+        SaveGame.Earthquake(SaveGame.MapY, SaveGame.MapX, 10);
         return true;
     }
 

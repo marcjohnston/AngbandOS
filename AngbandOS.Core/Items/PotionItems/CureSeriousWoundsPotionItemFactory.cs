@@ -30,19 +30,19 @@ internal class CureSeriousWoundsPotionItemFactory : PotionItemFactory
 
         // Cure serious wounds heals you 4d8 health, cures blindness and confusion, and
         // reduces bleeding
-        if (SaveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8)))
+        if (SaveGame.RestoreHealth(Program.Rng.DiceRoll(4, 8)))
         {
             identified = true;
         }
-        if (SaveGame.Player.TimedBlindness.ResetTimer())
+        if (SaveGame.TimedBlindness.ResetTimer())
         {
             identified = true;
         }
-        if (SaveGame.Player.TimedConfusion.ResetTimer())
+        if (SaveGame.TimedConfusion.ResetTimer())
         {
             identified = true;
         }
-        if (SaveGame.Player.TimedBleeding.SetTimer((SaveGame.Player.TimedBleeding.TurnsRemaining / 2) - 50))
+        if (SaveGame.TimedBleeding.SetTimer((SaveGame.TimedBleeding.TurnsRemaining / 2) - 50))
         {
             identified = true;
         }

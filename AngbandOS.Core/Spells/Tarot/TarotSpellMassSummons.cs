@@ -15,16 +15,16 @@ internal class TarotSpellMassSummons : Spell
     {
         bool noneCame = true;
         SaveGame.MsgPrint("You concentrate on several images at once...");
-        for (int dummy = 0; dummy < 3 + (SaveGame.Player.ExperienceLevel / 10); dummy++)
+        for (int dummy = 0; dummy < 3 + (SaveGame.ExperienceLevel / 10); dummy++)
         {
             if (Program.Rng.DieRoll(10) > 3)
             {
-                if (SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.ExperienceLevel, new NoUniquesMonsterSelector(), false))
+                if (SaveGame.Level.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new NoUniquesMonsterSelector(), false))
                 {
                     noneCame = false;
                 }
             }
-            else if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.ExperienceLevel, null))
+            else if (SaveGame.Level.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, null))
             {
                 SaveGame.MsgPrint("A summoned creature gets angry!");
                 noneCame = false;

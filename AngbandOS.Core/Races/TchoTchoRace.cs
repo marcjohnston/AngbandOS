@@ -60,7 +60,7 @@ internal class TchoTchoRace : Race
     }
     public override void CalcBonuses(SaveGame saveGame)
     {
-        saveGame.Player.HasFearResistance = true;
+        saveGame.HasFearResistance = true;
     }
 
     public override void UseRacialPower(SaveGame saveGame)

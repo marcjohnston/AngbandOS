@@ -141,7 +141,7 @@ internal class ChaosProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
         if (dam > 1600)
         {
             dam = 1600;
@@ -153,51 +153,51 @@ internal class ChaosProjectile : Projectile
         {
             SaveGame.MsgPrint("You are hit by a wave of anarchy!");
         }
-        if (SaveGame.Player.HasChaosResistance)
+        if (SaveGame.HasChaosResistance)
         {
             dam *= 6;
             dam /= Program.Rng.DieRoll(6) + 6;
         }
-        if (!SaveGame.Player.HasConfusionResistance)
+        if (!SaveGame.HasConfusionResistance)
         {
-            SaveGame.Player.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(20) + 10);
+            SaveGame.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(20) + 10);
         }
-        if (!SaveGame.Player.HasChaosResistance)
+        if (!SaveGame.HasChaosResistance)
         {
-            SaveGame.Player.TimedHallucinations.AddTimer(Program.Rng.DieRoll(10));
+            SaveGame.TimedHallucinations.AddTimer(Program.Rng.DieRoll(10));
             if (Program.Rng.DieRoll(3) == 1)
             {
                 SaveGame.MsgPrint("Your body is twisted by chaos!");
-                SaveGame.Player.Dna.GainMutation();
+                SaveGame.Dna.GainMutation();
             }
         }
-        if (!SaveGame.Player.HasNetherResistance && !SaveGame.Player.HasChaosResistance)
+        if (!SaveGame.HasNetherResistance && !SaveGame.HasChaosResistance)
         {
-            if (SaveGame.Player.HasHoldLife && Program.Rng.RandomLessThan(100) < 75)
+            if (SaveGame.HasHoldLife && Program.Rng.RandomLessThan(100) < 75)
             {
                 SaveGame.MsgPrint("You keep hold of your life force!");
             }
-            else if (Program.Rng.DieRoll(10) <= SaveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+            else if (Program.Rng.DieRoll(10) <= SaveGame.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
             {
                 SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
             }
-            else if (SaveGame.Player.HasHoldLife)
+            else if (SaveGame.HasHoldLife)
             {
                 SaveGame.MsgPrint("You feel your life slipping away!");
-                SaveGame.Player.LoseExperience(500 + (SaveGame.Player.ExperiencePoints / 1000 * Constants.MonDrainLife));
+                SaveGame.LoseExperience(500 + (SaveGame.ExperiencePoints / 1000 * Constants.MonDrainLife));
             }
             else
             {
                 SaveGame.MsgPrint("You feel your life draining away!");
-                SaveGame.Player.LoseExperience(5000 + (SaveGame.Player.ExperiencePoints / 100 * Constants.MonDrainLife));
+                SaveGame.LoseExperience(5000 + (SaveGame.ExperiencePoints / 100 * Constants.MonDrainLife));
             }
         }
-        if (!SaveGame.Player.HasChaosResistance || Program.Rng.DieRoll(9) == 1)
+        if (!SaveGame.HasChaosResistance || Program.Rng.DieRoll(9) == 1)
         {
-            SaveGame.Player.InvenDamage(SaveGame.SetElecDestroy, 2);
-            SaveGame.Player.InvenDamage(SaveGame.SetFireDestroy, 2);
+            SaveGame.InvenDamage(SaveGame.SetElecDestroy, 2);
+            SaveGame.InvenDamage(SaveGame.SetFireDestroy, 2);
         }
-        SaveGame.Player.TakeHit(dam, killer);
+        SaveGame.TakeHit(dam, killer);
         return true;
     }
 }

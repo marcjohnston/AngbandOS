@@ -63,7 +63,7 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
         }
 
         // Make sure our item is suitable fuel
-        if (!saveGame.Player.ItemMatchesFilter(fuelSource, new LanternFuelItemFilter()))
+        if (!saveGame.ItemMatchesFilter(fuelSource, new LanternFuelItemFilter()))
         {
             saveGame.MsgPrint("You can't refill a lantern from that!");
             return;

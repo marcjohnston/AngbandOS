@@ -70,8 +70,8 @@ internal class GreatOneRace : Race
 
     public override void CalcBonuses(SaveGame saveGame)
     {
-        saveGame.Player.HasSustainConstitution = true;
-        saveGame.Player.HasRegeneration = true;
+        saveGame.HasSustainConstitution = true;
+        saveGame.HasRegeneration = true;
     }
 
     public override void UseRacialPower(SaveGame saveGame)
@@ -101,19 +101,19 @@ internal class GreatOneRace : Race
             if (saveGame.CheckIfRacialPowerWorks(40, 75, Ability.Wisdom, 50))
             {
                 saveGame.MsgPrint("You dream of a time of health and peace...");
-                saveGame.Player.TimedPoison.ResetTimer();
-                saveGame.Player.TimedHallucinations.ResetTimer();
-                saveGame.Player.TimedStun.ResetTimer();
-                saveGame.Player.TimedBleeding.ResetTimer();
-                saveGame.Player.TimedBlindness.ResetTimer();
-                saveGame.Player.TimedFear.ResetTimer();
-                saveGame.Player.TryRestoringAbilityScore(Ability.Strength);
-                saveGame.Player.TryRestoringAbilityScore(Ability.Intelligence);
-                saveGame.Player.TryRestoringAbilityScore(Ability.Wisdom);
-                saveGame.Player.TryRestoringAbilityScore(Ability.Dexterity);
-                saveGame.Player.TryRestoringAbilityScore(Ability.Constitution);
-                saveGame.Player.TryRestoringAbilityScore(Ability.Charisma);
-                saveGame.Player.RestoreLevel();
+                saveGame.TimedPoison.ResetTimer();
+                saveGame.TimedHallucinations.ResetTimer();
+                saveGame.TimedStun.ResetTimer();
+                saveGame.TimedBleeding.ResetTimer();
+                saveGame.TimedBlindness.ResetTimer();
+                saveGame.TimedFear.ResetTimer();
+                saveGame.TryRestoringAbilityScore(Ability.Strength);
+                saveGame.TryRestoringAbilityScore(Ability.Intelligence);
+                saveGame.TryRestoringAbilityScore(Ability.Wisdom);
+                saveGame.TryRestoringAbilityScore(Ability.Dexterity);
+                saveGame.TryRestoringAbilityScore(Ability.Constitution);
+                saveGame.TryRestoringAbilityScore(Ability.Charisma);
+                saveGame.RestoreLevel();
             }
         }
         else if (dreamPower == 2)

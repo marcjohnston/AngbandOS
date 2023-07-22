@@ -11,7 +11,7 @@ internal class NexusSpellResistantDetection : SpellResistantDetection
 {
     public override void Learn(SaveGame saveGame, Monster monster)
     {
-        if (saveGame.Player.HasNexusResistance)
+        if (saveGame.HasNexusResistance)
         {
             monster.SmResNexus = true;
         }

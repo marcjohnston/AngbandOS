@@ -13,7 +13,7 @@ internal class ChaosSpellPolymorphSelf : Spell
     private ChaosSpellPolymorphSelf(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Player.PolymorphSelf(SaveGame);
+        SaveGame.PolymorphSelf(SaveGame);
     }
 
     public override void CastFailed()

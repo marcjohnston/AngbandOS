@@ -13,7 +13,7 @@ internal class TarotSpellWordOfRecall : Spell
     private TarotSpellWordOfRecall(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Player.ToggleRecall();
+        SaveGame.ToggleRecall();
     }
 
     public override string Name => "Word of Recall";

@@ -62,8 +62,8 @@ internal class HalfGiantRace : Race
 
     public override void CalcBonuses(SaveGame saveGame)
     {
-        saveGame.Player.HasSustainStrength = true;
-        saveGame.Player.HasShardResistance = true;
+        saveGame.HasSustainStrength = true;
+        saveGame.HasShardResistance = true;
     }
 
     public override void UseRacialPower(SaveGame saveGame)

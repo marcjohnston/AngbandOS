@@ -36,27 +36,27 @@ internal class StunTimedAction : TimedAction
             SaveGame.MsgPrint("A vicious Attack hits your head.");
             if (Program.Rng.DieRoll(3) == 1)
             {
-                if (!SaveGame.Player.HasSustainIntelligence)
+                if (!SaveGame.HasSustainIntelligence)
                 {
-                    SaveGame.Player.TryDecreasingAbilityScore(Ability.Intelligence);
+                    SaveGame.TryDecreasingAbilityScore(Ability.Intelligence);
                 }
-                if (!SaveGame.Player.HasSustainWisdom)
+                if (!SaveGame.HasSustainWisdom)
                 {
-                    SaveGame.Player.TryDecreasingAbilityScore(Ability.Wisdom);
+                    SaveGame.TryDecreasingAbilityScore(Ability.Wisdom);
                 }
             }
             else if (Program.Rng.DieRoll(2) == 1)
             {
-                if (!SaveGame.Player.HasSustainIntelligence)
+                if (!SaveGame.HasSustainIntelligence)
                 {
-                    SaveGame.Player.TryDecreasingAbilityScore(Ability.Intelligence);
+                    SaveGame.TryDecreasingAbilityScore(Ability.Intelligence);
                 }
             }
             else
             {
-                if (!SaveGame.Player.HasSustainWisdom)
+                if (!SaveGame.HasSustainWisdom)
                 {
-                    SaveGame.Player.TryDecreasingAbilityScore(Ability.Wisdom);
+                    SaveGame.TryDecreasingAbilityScore(Ability.Wisdom);
                 }
             }
         }
@@ -65,7 +65,7 @@ internal class StunTimedAction : TimedAction
     {
         if (TurnsRemaining != 0)
         {
-            int adjust = SaveGame.Player.AbilityScores[Ability.Constitution].ConRecoverySpeed + 1;
+            int adjust = SaveGame.AbilityScores[Ability.Constitution].ConRecoverySpeed + 1;
             AddTimer(-adjust);
         }
     }

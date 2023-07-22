@@ -27,11 +27,11 @@ internal class CureLightWoundsPotionItemFactory : PotionItemFactory
     {
         bool identified = false;
         // Cure light wounds heals you 2d8 health and reduces bleeding
-        if (SaveGame.Player.RestoreHealth(Program.Rng.DiceRoll(2, 8)))
+        if (SaveGame.RestoreHealth(Program.Rng.DiceRoll(2, 8)))
         {
             identified = true;
         }
-        if (SaveGame.Player.TimedBleeding.AddTimer(-10))
+        if (SaveGame.TimedBleeding.AddTimer(-10))
         {
             identified = true;
         }

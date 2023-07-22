@@ -14,7 +14,7 @@ internal class TarotSpellExtradimensionalBeing : Spell
     public override void Cast()
     {
         SaveGame.MsgPrint("You have turned into a Extradimensional Being.");
-        SaveGame.Player.Dna.GainMutation();
+        SaveGame.Dna.GainMutation();
     }
 
     public override string Name => "Extradimensional Being";

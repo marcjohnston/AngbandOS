@@ -20,7 +20,7 @@ internal class ViewClassHeroesStoreCommand : BaseStoreCommand
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {
         //SaveGame.SaveScreen();
-        //Program.HiScores.ClassFilter = saveGame.Player.ProfessionIndex;
+        //Program.HiScores.ClassFilter = saveGame.ProfessionIndex;
         //Program.HiScores.DisplayScores(new HighScore(saveGame));
         //Program.HiScores.ClassFilter = -1;
         //SaveGame.Load();

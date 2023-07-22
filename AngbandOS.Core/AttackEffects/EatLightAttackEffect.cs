@@ -14,7 +14,7 @@ internal class EatLightAttackEffect : BaseAttackEffect
     public override string Description => "absorb light";
     public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
-        saveGame.Player.TakeHit(damage, monsterDescription);
+        saveGame.TakeHit(damage, monsterDescription);
 
         // Choose an inventory slot for lights.
         BaseInventorySlot? chosenLightSourceInventorySlot = saveGame.SingletonRepository.InventorySlots.ToWeightedRandom(inventorySlot => inventorySlot.ProvidesLight).Choose();
@@ -56,7 +56,7 @@ internal class EatLightAttackEffect : BaseAttackEffect
             {
                 item.TypeSpecificValue = 1;
             }
-            if (saveGame.Player.TimedBlindness.TurnsRemaining == 0)
+            if (saveGame.TimedBlindness.TurnsRemaining == 0)
             {
                 saveGame.MsgPrint("Your light dims.");
                 obvious = true;

@@ -65,7 +65,7 @@ internal class RaceSelectionBirthStage : BaseBirthStage
         SaveGame.Screen.Print(ColourEnum.Purple, "CHA:", 41, 21);
         for (int i = 0; i < 6; i++)
         {
-            int bonus = race.AbilityBonus[i] + SaveGame.Player.BaseCharacterClass.AbilityBonus[i];
+            int bonus = race.AbilityBonus[i] + SaveGame.BaseCharacterClass.AbilityBonus[i];
             SaveGame.DisplayStatBonus(26, 36 + i, bonus);
         }
         SaveGame.Screen.Print(ColourEnum.Purple, "Disarming   :", 36, 53);
@@ -79,14 +79,14 @@ internal class RaceSelectionBirthStage : BaseBirthStage
         SaveGame.Screen.Print(ColourEnum.Purple, "Infravision :", 38, 31);
         SaveGame.Screen.Print(ColourEnum.Purple, "Searching   :", 39, 31);
         SaveGame.Screen.Print(ColourEnum.Purple, "Perception  :", 40, 31);
-        SaveGame.DisplayAPlusB(67, 36, SaveGame.Player.BaseCharacterClass.BaseDisarmBonus + race.BaseDisarmBonus, SaveGame.Player.BaseCharacterClass.DisarmBonusPerLevel);
-        SaveGame.DisplayAPlusB(67, 37, SaveGame.Player.BaseCharacterClass.BaseDeviceBonus + race.BaseDeviceBonus, SaveGame.Player.BaseCharacterClass.DeviceBonusPerLevel);
-        SaveGame.DisplayAPlusB(67, 38, SaveGame.Player.BaseCharacterClass.BaseSaveBonus + race.BaseSaveBonus, SaveGame.Player.BaseCharacterClass.SaveBonusPerLevel);
-        SaveGame.DisplayAPlusB(67, 39, (SaveGame.Player.BaseCharacterClass.BaseStealthBonus * 4) + (race.BaseStealthBonus * 4), SaveGame.Player.BaseCharacterClass.StealthBonusPerLevel * 4);
-        SaveGame.DisplayAPlusB(67, 40, SaveGame.Player.BaseCharacterClass.BaseMeleeAttackBonus + race.BaseMeleeAttackBonus, SaveGame.Player.BaseCharacterClass.MeleeAttackBonusPerLevel);
-        SaveGame.DisplayAPlusB(67, 41, SaveGame.Player.BaseCharacterClass.BaseRangedAttackBonus + race.BaseRangedAttackBonus, SaveGame.Player.BaseCharacterClass.RangedAttackBonusPerLevel);
-        SaveGame.Screen.Print(ColourEnum.Black, race.ExperienceFactor + SaveGame.Player.BaseCharacterClass.ExperienceFactor + "%", 36, 45);
-        SaveGame.Screen.Print(ColourEnum.Black, "1d" + (race.HitDieBonus + SaveGame.Player.BaseCharacterClass.HitDieBonus), 37, 45);
+        SaveGame.DisplayAPlusB(67, 36, SaveGame.BaseCharacterClass.BaseDisarmBonus + race.BaseDisarmBonus, SaveGame.BaseCharacterClass.DisarmBonusPerLevel);
+        SaveGame.DisplayAPlusB(67, 37, SaveGame.BaseCharacterClass.BaseDeviceBonus + race.BaseDeviceBonus, SaveGame.BaseCharacterClass.DeviceBonusPerLevel);
+        SaveGame.DisplayAPlusB(67, 38, SaveGame.BaseCharacterClass.BaseSaveBonus + race.BaseSaveBonus, SaveGame.BaseCharacterClass.SaveBonusPerLevel);
+        SaveGame.DisplayAPlusB(67, 39, (SaveGame.BaseCharacterClass.BaseStealthBonus * 4) + (race.BaseStealthBonus * 4), SaveGame.BaseCharacterClass.StealthBonusPerLevel * 4);
+        SaveGame.DisplayAPlusB(67, 40, SaveGame.BaseCharacterClass.BaseMeleeAttackBonus + race.BaseMeleeAttackBonus, SaveGame.BaseCharacterClass.MeleeAttackBonusPerLevel);
+        SaveGame.DisplayAPlusB(67, 41, SaveGame.BaseCharacterClass.BaseRangedAttackBonus + race.BaseRangedAttackBonus, SaveGame.BaseCharacterClass.RangedAttackBonusPerLevel);
+        SaveGame.Screen.Print(ColourEnum.Black, race.ExperienceFactor + SaveGame.BaseCharacterClass.ExperienceFactor + "%", 36, 45);
+        SaveGame.Screen.Print(ColourEnum.Black, "1d" + (race.HitDieBonus + SaveGame.BaseCharacterClass.HitDieBonus), 37, 45);
         if (race.Infravision == 0)
         {
             SaveGame.Screen.Print(ColourEnum.Black, "nil", 38, 45);
@@ -95,8 +95,8 @@ internal class RaceSelectionBirthStage : BaseBirthStage
         {
             SaveGame.Screen.Print(ColourEnum.Green, race.Infravision + "0 feet", 38, 45);
         }
-        SaveGame.Screen.Print(ColourEnum.Black, $"{race.BaseSearchBonus + SaveGame.Player.BaseCharacterClass.BaseSearchBonus:00}%", 39, 45);
-        SaveGame.Screen.Print(ColourEnum.Black, $"{race.BaseSearchFrequency + SaveGame.Player.BaseCharacterClass.BaseSearchFrequency:00}%", 40, 45);
+        SaveGame.Screen.Print(ColourEnum.Black, $"{race.BaseSearchBonus + SaveGame.BaseCharacterClass.BaseSearchBonus:00}%", 39, 45);
+        SaveGame.Screen.Print(ColourEnum.Black, $"{race.BaseSearchFrequency + SaveGame.BaseCharacterClass.BaseSearchFrequency:00}%", 40, 45);
 
         // Retrieve the description for the race and split the description into lines.
         string[] description = race.Description.Split("\n");
@@ -114,35 +114,35 @@ internal class RaceSelectionBirthStage : BaseBirthStage
         Race[] races = SaveGame.SingletonRepository.Races
             .OrderBy((Race race) => race.Title)
             .ToArray();
-        SaveGame.Player.Race = races[index];
-        SaveGame.Player.GetFirstLevelMutation = SaveGame.Player.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
+        SaveGame.Race = races[index];
+        SaveGame.GetFirstLevelMutation = SaveGame.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
 
         // Check to see how many realms the player can study.
-        int availablePrimaryRealmCount = SaveGame.Player.BaseCharacterClass.AvailablePrimaryRealms.Length;
-        BaseRealm[] remainingAvailableSecondaryRealms = SaveGame.Player.BaseCharacterClass.RemainingAvailableSecondaryRealms();
+        int availablePrimaryRealmCount = SaveGame.BaseCharacterClass.AvailablePrimaryRealms.Length;
+        BaseRealm[] remainingAvailableSecondaryRealms = SaveGame.BaseCharacterClass.RemainingAvailableSecondaryRealms();
         int remainingAvailableSecondaryRealmCount = remainingAvailableSecondaryRealms.Length;
         if (availablePrimaryRealmCount == 0)
         {
             // The player cannot study any realms.
-            SaveGame.Player.PrimaryRealm = null;
-            SaveGame.Player.SecondaryRealm = null;
+            SaveGame.PrimaryRealm = null;
+            SaveGame.SecondaryRealm = null;
             return SaveGame.SingletonRepository.BirthStages.Get<GenderSelectionBirthStage>();
         }
         else if (availablePrimaryRealmCount == 1)
         {
             // There is only one realm, auto select it.
-            SaveGame.Player.PrimaryRealm = SaveGame.Player.BaseCharacterClass.AvailablePrimaryRealms[0];
+            SaveGame.PrimaryRealm = SaveGame.BaseCharacterClass.AvailablePrimaryRealms[0];
 
             // Check the secondary realm selection.
             if (remainingAvailableSecondaryRealmCount == 0)
             {
-                SaveGame.Player.SecondaryRealm = null;
+                SaveGame.SecondaryRealm = null;
                 return SaveGame.SingletonRepository.BirthStages.Get<GenderSelectionBirthStage>();
             }
             else if (remainingAvailableSecondaryRealmCount == 1)
             {
                 // There is only one realm, auto select it.
-                SaveGame.Player.SecondaryRealm = remainingAvailableSecondaryRealms[0];
+                SaveGame.SecondaryRealm = remainingAvailableSecondaryRealms[0];
                 return SaveGame.SingletonRepository.BirthStages.Get<GenderSelectionBirthStage>();
             }
             else

@@ -26,27 +26,27 @@ internal class StaffCuring : StaffItemClass
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.Player.TimedBlindness.ResetTimer())
+        if (SaveGame.TimedBlindness.ResetTimer())
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.Player.TimedPoison.ResetTimer())
+        if (SaveGame.TimedPoison.ResetTimer())
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.Player.TimedConfusion.ResetTimer())
+        if (SaveGame.TimedConfusion.ResetTimer())
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.Player.TimedStun.ResetTimer())
+        if (SaveGame.TimedStun.ResetTimer())
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.Player.TimedBleeding.ResetTimer())
+        if (SaveGame.TimedBleeding.ResetTimer())
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.Player.TimedHallucinations.ResetTimer())
+        if (SaveGame.TimedHallucinations.ResetTimer())
         {
             eventArgs.Identified = true;
         }

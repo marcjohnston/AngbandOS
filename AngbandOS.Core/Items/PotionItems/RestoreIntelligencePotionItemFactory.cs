@@ -26,7 +26,7 @@ internal class RestoreIntelligencePotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Restore intelligence restores your intelligence
-        return SaveGame.Player.TryRestoringAbilityScore(Ability.Intelligence);
+        return SaveGame.TryRestoringAbilityScore(Ability.Intelligence);
     }
     public override Item CreateItem() => new RestoreIntelligencePotionItem(SaveGame);
 }

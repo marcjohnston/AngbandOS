@@ -14,7 +14,7 @@ internal class TarotSpellPhantasmalServant : Spell
     public override void Cast()
     {
         SaveGame.MsgPrint(
-            SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.ExperienceLevel * 3 / 2, new PhantomMonsterSelector(), false)
+            SaveGame.Level.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel * 3 / 2, new PhantomMonsterSelector(), false)
                 ? "'Your wish, master?'"
                 : "No-one ever turns up.");
     }

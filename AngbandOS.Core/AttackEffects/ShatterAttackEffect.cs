@@ -16,7 +16,7 @@ internal class ShatterAttackEffect : BaseAttackEffect
     {
         obvious = true;
         damage -= damage * (armourClass < 150 ? armourClass : 150) / 250;
-        saveGame.Player.TakeHit(damage, monsterDescription);
+        saveGame.TakeHit(damage, monsterDescription);
         // Do an earthquake only if we did enough damage on the hit
         if (damage > 23)
         {

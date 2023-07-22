@@ -77,11 +77,11 @@ internal class CultistCharacterClass : BaseCharacterClass
             oPtr.RefreshFlagBasedProperties();
             if (!oPtr.Characteristics.Chaotic)
             {
-                SaveGame.Player.AttackBonus -= 10;
-                SaveGame.Player.DamageBonus -= 10;
-                SaveGame.Player.DisplayedAttackBonus -= 10;
-                SaveGame.Player.DisplayedDamageBonus -= 10;
-                SaveGame.Player.HasUnpriestlyWeapon = true;
+                SaveGame.AttackBonus -= 10;
+                SaveGame.DamageBonus -= 10;
+                SaveGame.DisplayedAttackBonus -= 10;
+                SaveGame.DisplayedDamageBonus -= 10;
+                SaveGame.HasUnpriestlyWeapon = true;
             }
         }
     }

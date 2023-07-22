@@ -13,7 +13,7 @@ internal class CorporealSpellBravery : Spell
     private CorporealSpellBravery(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Player.TimedFear.ResetTimer();
+        SaveGame.TimedFear.ResetTimer();
     }
 
     public override string Name => "Bravery";

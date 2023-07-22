@@ -71,7 +71,7 @@ internal class GravityProjectile : Projectile
                 }
                 note = " starts moving slower.";
             }
-            doStun = Program.Rng.DiceRoll((SaveGame.Player.ExperienceLevel / 10) + 3, dam) + 1;
+            doStun = Program.Rng.DiceRoll((SaveGame.ExperienceLevel / 10) + 3, dam) + 1;
             if (rPtr.Unique || rPtr.Level > Program.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
             {
                 doStun = 0;
@@ -113,7 +113,7 @@ internal class GravityProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
         if (dam > 1600)
         {
             dam = 1600;
@@ -127,24 +127,24 @@ internal class GravityProjectile : Projectile
         }
         SaveGame.MsgPrint("Gravity warps around you.");
         SaveGame.TeleportPlayer(5);
-        if (!SaveGame.Player.HasFeatherFall)
+        if (!SaveGame.HasFeatherFall)
         {
-            SaveGame.Player.TimedSlow.AddTimer(Program.Rng.RandomLessThan(4) + 4);
+            SaveGame.TimedSlow.AddTimer(Program.Rng.RandomLessThan(4) + 4);
         }
-        if (!(SaveGame.Player.HasSoundResistance || SaveGame.Player.HasFeatherFall))
+        if (!(SaveGame.HasSoundResistance || SaveGame.HasFeatherFall))
         {
             int kk = Program.Rng.DieRoll(dam > 90 ? 35 : (dam / 3) + 5);
-            SaveGame.Player.TimedStun.AddTimer(kk);
+            SaveGame.TimedStun.AddTimer(kk);
         }
-        if (SaveGame.Player.HasFeatherFall)
+        if (SaveGame.HasFeatherFall)
         {
             dam = dam * 2 / 3;
         }
-        if (!SaveGame.Player.HasFeatherFall || Program.Rng.DieRoll(13) == 1)
+        if (!SaveGame.HasFeatherFall || Program.Rng.DieRoll(13) == 1)
         {
-            SaveGame.Player.InvenDamage(SaveGame.SetColdDestroy, 2);
+            SaveGame.InvenDamage(SaveGame.SetColdDestroy, 2);
         }
-        SaveGame.Player.TakeHit(dam, killer);
+        SaveGame.TakeHit(dam, killer);
         return true;
     }
 }

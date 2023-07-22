@@ -14,18 +14,18 @@ internal class TarotSpellMindBlast : Spell
     public override void Cast()
     {
         int beam;
-        switch (SaveGame.Player.BaseCharacterClass.ID)
+        switch (SaveGame.BaseCharacterClass.ID)
         {
             case CharacterClass.Mage:
-                beam = SaveGame.Player.ExperienceLevel;
+                beam = SaveGame.ExperienceLevel;
                 break;
 
             case CharacterClass.HighMage:
-                beam = SaveGame.Player.ExperienceLevel + 10;
+                beam = SaveGame.ExperienceLevel + 10;
                 break;
 
             default:
-                beam = SaveGame.Player.ExperienceLevel / 2;
+                beam = SaveGame.ExperienceLevel / 2;
                 break;
         }
         if (!SaveGame.GetDirectionWithAim(out int dir))
@@ -33,13 +33,13 @@ internal class TarotSpellMindBlast : Spell
             return;
         }
         SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir,
-            Program.Rng.DiceRoll(3 + ((SaveGame.Player.ExperienceLevel - 1) / 5), 3));
+            Program.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 3));
     }
 
     public override string Name => "Mind Blast";
     
     protected override string? Info()
     {
-        return $"dam {3 + ((SaveGame.Player.ExperienceLevel - 1) / 5)}d3";
+        return $"dam {3 + ((SaveGame.ExperienceLevel - 1) / 5)}d3";
     }
 }

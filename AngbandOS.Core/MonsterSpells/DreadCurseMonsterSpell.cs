@@ -17,19 +17,19 @@ internal class DreadCurseMonsterSpell : MonsterSpell
 
     public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
     {
-        if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
+        if (Program.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
         {
             saveGame.MsgPrint("You resist the effects!");
         }
         else
         {
-            int dummy = (65 + Program.Rng.DieRoll(25)) * saveGame.Player.Health / 100;
+            int dummy = (65 + Program.Rng.DieRoll(25)) * saveGame.Health / 100;
             saveGame.MsgPrint("Your feel your life fade away!");
-            saveGame.Player.TakeHit(dummy, monster.Name);
-            saveGame.Player.CurseEquipment(100, 20);
-            if (saveGame.Player.Health < 1)
+            saveGame.TakeHit(dummy, monster.Name);
+            saveGame.CurseEquipment(100, 20);
+            if (saveGame.Health < 1)
             {
-                saveGame.Player.Health = 1;
+                saveGame.Health = 1;
             }
         }
     }
@@ -37,7 +37,7 @@ internal class DreadCurseMonsterSpell : MonsterSpell
     public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
     {
         string targetName = target.Name;
-        bool blind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = saveGame.TimedBlindness.TurnsRemaining != 0;
         bool seeTarget = !blind && target.IsVisible;
         MonsterRace targetRace = target.Race;
 

@@ -20,17 +20,17 @@ internal class ConfuseMonsterSpell : MonsterSpell
 
     public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
     {
-        if (saveGame.Player.HasConfusionResistance)
+        if (saveGame.HasConfusionResistance)
         {
             saveGame.MsgPrint("You disbelieve the feeble spell.");
         }
-        else if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
+        else if (Program.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
         {
             saveGame.MsgPrint("You disbelieve the feeble spell.");
         }
         else
         {
-            saveGame.Player.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(4) + 4);
+            saveGame.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(4) + 4);
         }
         saveGame.Level.UpdateSmartLearn(monster, new ConfSpellResistantDetection());
     }
@@ -38,7 +38,7 @@ internal class ConfuseMonsterSpell : MonsterSpell
     public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        bool blind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = saveGame.TimedBlindness.TurnsRemaining != 0;
         bool seeTarget = !blind && target.IsVisible;
         string targetName = target.Name;
         MonsterRace targetRace = target.Race;

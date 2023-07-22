@@ -17,7 +17,7 @@ internal class DeathSpellStinkingCloud : Spell
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), dir, 10 + (SaveGame.Player.ExperienceLevel / 2), 2);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), dir, 10 + (SaveGame.ExperienceLevel / 2), 2);
     }
 
     public override void CastFailed()
@@ -29,6 +29,6 @@ internal class DeathSpellStinkingCloud : Spell
     
     protected override string? Info()
     {
-        return $"dam {10 + (SaveGame.Player.ExperienceLevel / 2)}";
+        return $"dam {10 + (SaveGame.ExperienceLevel / 2)}";
     }
 }

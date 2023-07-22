@@ -385,22 +385,22 @@ internal abstract class Item : IComparable<Item>
         BookItemFactory? oPtrBookFactory = oPtr.Factory.TryCast<BookItemFactory>();
         if (thisBookFactory != null && oPtrBookFactory != null)
         {
-            if (thisBookFactory.ToRealm == SaveGame.Player.PrimaryRealm && oPtrBookFactory.ToRealm != SaveGame.Player.PrimaryRealm)
+            if (thisBookFactory.ToRealm == SaveGame.PrimaryRealm && oPtrBookFactory.ToRealm != SaveGame.PrimaryRealm)
             {
                 return -1;
             }
-            if (thisBookFactory.ToRealm != SaveGame.Player.PrimaryRealm && oPtrBookFactory.ToRealm == SaveGame.Player.PrimaryRealm)
+            if (thisBookFactory.ToRealm != SaveGame.PrimaryRealm && oPtrBookFactory.ToRealm == SaveGame.PrimaryRealm)
             {
                 return 1;
             }
 
             // Second level sort (secondary realm spell books).
             // A book that matches the second realm, will always come before a book that doesn't match the second realm.
-            if (thisBookFactory.ToRealm == SaveGame.Player.SecondaryRealm && oPtrBookFactory.ToRealm != SaveGame.Player.SecondaryRealm)
+            if (thisBookFactory.ToRealm == SaveGame.SecondaryRealm && oPtrBookFactory.ToRealm != SaveGame.SecondaryRealm)
             {
                 return 1;
             }
-            if (thisBookFactory.ToRealm != SaveGame.Player.SecondaryRealm && oPtrBookFactory.ToRealm == SaveGame.Player.SecondaryRealm)
+            if (thisBookFactory.ToRealm != SaveGame.SecondaryRealm && oPtrBookFactory.ToRealm == SaveGame.SecondaryRealm)
             {
                 return -1;
             }
@@ -2537,8 +2537,8 @@ internal abstract class Item : IComparable<Item>
         IArtifactBias? artifactBias = null;
         if (fromScroll && Program.Rng.DieRoll(4) == 1)
         {
-            artifactBias = SaveGame.Player.BaseCharacterClass.ArtifactBias;
-            warriorArtifactBias = SaveGame.Player.BaseCharacterClass.FromScrollWarriorArtifactBiasPercentageChance;
+            artifactBias = SaveGame.BaseCharacterClass.ArtifactBias;
+            warriorArtifactBias = SaveGame.BaseCharacterClass.FromScrollWarriorArtifactBiasPercentageChance;
         }
         if (Program.Rng.DieRoll(100) <= warriorArtifactBias && fromScroll)
         {
@@ -3197,7 +3197,7 @@ internal abstract class Item : IComparable<Item>
         {
             RandartItemCharacteristics.NoTele = true;
         }
-        if (SaveGame.Player.BaseCharacterClass.ID != CharacterClass.Warrior && Program.Rng.DieRoll(3) == 1)
+        if (SaveGame.BaseCharacterClass.ID != CharacterClass.Warrior && Program.Rng.DieRoll(3) == 1)
         {
             RandartItemCharacteristics.NoMagic = true;
         }

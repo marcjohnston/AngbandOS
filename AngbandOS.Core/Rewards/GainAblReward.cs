@@ -17,11 +17,11 @@ internal class GainAblReward : Reward
         SaveGame.MsgPrint("'Stay, mortal, and let me mould thee.'");
         if (Program.Rng.DieRoll(3) == 1 && !(patron.PreferredAbility < 0))
         {
-            SaveGame.Player.TryIncreasingAbilityScore(patron.PreferredAbility);
+            SaveGame.TryIncreasingAbilityScore(patron.PreferredAbility);
         }
         else
         {
-            SaveGame.Player.TryIncreasingAbilityScore(Program.Rng.DieRoll(6) - 1);
+            SaveGame.TryIncreasingAbilityScore(Program.Rng.DieRoll(6) - 1);
         }
     }
 }

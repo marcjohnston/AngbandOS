@@ -11,15 +11,15 @@ internal class AcidSpellResistantDetection : SpellResistantDetection
 {
     public override void Learn(SaveGame saveGame, Monster monster)
     {
-        if (saveGame.Player.HasAcidResistance)
+        if (saveGame.HasAcidResistance)
         {
             monster.SmResAcid = true;
         }
-        if (saveGame.Player.TimedAcidResistance.TurnsRemaining != 0)
+        if (saveGame.TimedAcidResistance.TurnsRemaining != 0)
         {
             monster.SmOppAcid = true;
         }
-        if (saveGame.Player.HasAcidImmunity)
+        if (saveGame.HasAcidImmunity)
         {
             monster.SmImmAcid = true;
         }

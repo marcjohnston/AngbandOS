@@ -15,7 +15,7 @@ internal class RedrawCutFlaggedAction : FlaggedAction
     public RedrawCutFlaggedAction(SaveGame saveGame) : base(saveGame) { }
     protected override void Execute()
     {
-        int c = SaveGame.Player.TimedBleeding.TurnsRemaining;
+        int c = SaveGame.TimedBleeding.TurnsRemaining;
         if (c > 1000)
         {
             SaveGame.Screen.Print(ColourEnum.BrightRed, "Mortal wound", RowCut, ColCut);

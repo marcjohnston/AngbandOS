@@ -26,7 +26,7 @@ internal class RedrawHealthFlaggedAction : FlaggedAction
         {
             SaveGame.Screen.Print(ColourEnum.White, "[----------]", RowInfo, ColInfo);
         }
-        else if (SaveGame.Player.TimedHallucinations.TurnsRemaining != 0)
+        else if (SaveGame.TimedHallucinations.TurnsRemaining != 0)
         {
             SaveGame.Screen.Print(ColourEnum.White, "[----------]", RowInfo, ColInfo);
         }

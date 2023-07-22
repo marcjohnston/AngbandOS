@@ -17,7 +17,7 @@ internal class ChaosSpellBreatheChaos : Spell
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>(), dir, SaveGame.Player.Health, -2);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>(), dir, SaveGame.Health, -2);
     }
 
     public override void CastFailed()
@@ -29,6 +29,6 @@ internal class ChaosSpellBreatheChaos : Spell
     
     protected override string? Info()
     {
-        return $"dam {SaveGame.Player.Health}";
+        return $"dam {SaveGame.Health}";
     }
 }

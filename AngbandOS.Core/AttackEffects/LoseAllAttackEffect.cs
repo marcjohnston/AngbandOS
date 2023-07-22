@@ -15,28 +15,28 @@ internal class LoseAllAttackEffect : BaseAttackEffect
     public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         // Try to decrease all six ability scores
-        saveGame.Player.TakeHit(damage, monsterDescription);
-        if (saveGame.Player.TryDecreasingAbilityScore(Ability.Strength))
+        saveGame.TakeHit(damage, monsterDescription);
+        if (saveGame.TryDecreasingAbilityScore(Ability.Strength))
         {
             obvious = true;
         }
-        if (saveGame.Player.TryDecreasingAbilityScore(Ability.Dexterity))
+        if (saveGame.TryDecreasingAbilityScore(Ability.Dexterity))
         {
             obvious = true;
         }
-        if (saveGame.Player.TryDecreasingAbilityScore(Ability.Constitution))
+        if (saveGame.TryDecreasingAbilityScore(Ability.Constitution))
         {
             obvious = true;
         }
-        if (saveGame.Player.TryDecreasingAbilityScore(Ability.Intelligence))
+        if (saveGame.TryDecreasingAbilityScore(Ability.Intelligence))
         {
             obvious = true;
         }
-        if (saveGame.Player.TryDecreasingAbilityScore(Ability.Wisdom))
+        if (saveGame.TryDecreasingAbilityScore(Ability.Wisdom))
         {
             obvious = true;
         }
-        if (saveGame.Player.TryDecreasingAbilityScore(Ability.Charisma))
+        if (saveGame.TryDecreasingAbilityScore(Ability.Charisma))
         {
             obvious = true;
         }

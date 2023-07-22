@@ -15,6 +15,6 @@ internal class GreaObjReward : Reward
     {
         SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
         SaveGame.MsgPrint("'Use my gift wisely.'");
-        SaveGame.Level.Acquirement(SaveGame.Player.MapY, SaveGame.Player.MapX, 1, true);
+        SaveGame.Level.Acquirement(SaveGame.MapY, SaveGame.MapX, 1, true);
     }
 }

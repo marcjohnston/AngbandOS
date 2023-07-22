@@ -33,7 +33,7 @@ internal class WieldScript : Script
         if (wieldingItem != null && wieldingItem.IsCursed())
         {
             string cursedItemName = wieldingItem.Description(false, 0);
-            SaveGame.MsgPrint($"The {cursedItemName} you are {SaveGame.Player.DescribeWieldLocation(slot)} appears to be cursed.");
+            SaveGame.MsgPrint($"The {cursedItemName} you are {SaveGame.DescribeWieldLocation(slot)} appears to be cursed.");
             return false;
         }
 
@@ -62,12 +62,12 @@ internal class WieldScript : Script
         Item? wasWieldingItem = SaveGame.GetInventoryItem(slot);
         if (wasWieldingItem != null)
         {
-            SaveGame.Player.InvenTakeoff(slot, 255);
+            SaveGame.InvenTakeoff(slot, 255);
         }
         // Put the item into the wield slot
         SaveGame.SetInventoryItem(slot, wornItem);
         // Add the weight of the item
-        SaveGame.Player.WeightCarried += wornItem.Weight;
+        SaveGame.WeightCarried += wornItem.Weight;
 
         // Inform us what we did
         BaseInventorySlot inventorySlot = SaveGame.SingletonRepository.InventorySlots.Single(_inventorySlot => _inventorySlot.InventorySlots.Contains(slot));

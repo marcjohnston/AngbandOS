@@ -19,7 +19,7 @@ internal class HealMonsterSpell : MonsterSpell
     {
         string monsterPossessive = monster.PossessiveName;
         string monsterName = monster.Name;
-        bool playerIsBlind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool playerIsBlind = saveGame.TimedBlindness.TurnsRemaining != 0;
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         bool seenByPlayer = !playerIsBlind && monster.IsVisible;
 
@@ -48,7 +48,7 @@ internal class HealMonsterSpell : MonsterSpell
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         string monsterName = monster.Name;
-        bool blind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = saveGame.TimedBlindness.TurnsRemaining != 0;
         bool seen = !blind && monster.IsVisible;
 
         monster.Health += rlev * 6;

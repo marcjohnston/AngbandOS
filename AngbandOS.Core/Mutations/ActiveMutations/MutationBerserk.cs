@@ -16,9 +16,9 @@ internal class MutationBerserk : Mutation
         {
             return;
         }
-        saveGame.Player.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(25) + 25);
-        saveGame.Player.RestoreHealth(30);
-        saveGame.Player.TimedFear.ResetTimer();
+        saveGame.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(25) + 25);
+        saveGame.RestoreHealth(30);
+        saveGame.TimedFear.ResetTimer();
     }
 
     public override string ActivationSummary(int lvl)

@@ -17,13 +17,13 @@ internal class TarotSpellSummonObject : Spell
         {
             return;
         }
-        SaveGame.SummonItem(dir, SaveGame.Player.ExperienceLevel * 15, true);
+        SaveGame.SummonItem(dir, SaveGame.ExperienceLevel * 15, true);
     }
 
     public override string Name => "Summon Object";
     
     protected override string? Info()
     {
-        return $"max wgt {SaveGame.Player.ExperienceLevel * 15 / 10}";
+        return $"max wgt {SaveGame.ExperienceLevel * 15 / 10}";
     }
 }

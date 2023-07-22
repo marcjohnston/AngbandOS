@@ -22,11 +22,11 @@ internal class GainExperienceWizardCommand : WizardCommand
     {
         if (SaveGame.CommandArgument != 0)
         {
-            SaveGame.Player.GainExperience(SaveGame.CommandArgument);
+            SaveGame.GainExperience(SaveGame.CommandArgument);
         }
         else
         {
-            SaveGame.Player.GainExperience(SaveGame.Player.ExperiencePoints + 1);
+            SaveGame.GainExperience(SaveGame.ExperiencePoints + 1);
         }
     }
 }

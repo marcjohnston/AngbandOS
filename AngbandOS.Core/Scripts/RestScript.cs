@@ -59,7 +59,7 @@ internal class RestScript : Script
         // Resting takes at least one turn (we'll also be skipping future turns)
         SaveGame.EnergyUse = 100;
         SaveGame.Resting = SaveGame.CommandArgument;
-        SaveGame.Player.IsSearching = false;
+        SaveGame.IsSearching = false;
         SaveGame.UpdateBonusesFlaggedAction.Set();
         SaveGame.RedrawStateFlaggedAction.Set();
         SaveGame.HandleStuff();

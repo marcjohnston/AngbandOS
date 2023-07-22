@@ -137,7 +137,7 @@ internal abstract class Race
     public virtual void Eat(FoodItem item)
     {
         // Everyone else gets the full value
-        SaveGame.Player.SetFood(SaveGame.Player.Food + item.TypeSpecificValue);
+        SaveGame.SetFood(SaveGame.Food + item.TypeSpecificValue);
     }
 
     /// <summary>

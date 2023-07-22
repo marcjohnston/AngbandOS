@@ -64,9 +64,9 @@ internal class KlackonRace : Race
     }
     public override void CalcBonuses(SaveGame saveGame)
     {
-        saveGame.Player.HasConfusionResistance = true;
-        saveGame.Player.HasAcidResistance = true;
-        saveGame.Player.Speed += saveGame.Player.ExperienceLevel / 10;
+        saveGame.HasConfusionResistance = true;
+        saveGame.HasAcidResistance = true;
+        saveGame.Speed += saveGame.ExperienceLevel / 10;
     }
     public override void UseRacialPower(SaveGame saveGame)
     {
@@ -76,13 +76,13 @@ internal class KlackonRace : Race
             if (saveGame.GetDirectionWithAim(out int direction))
             {
                 saveGame.MsgPrint("You spit acid.");
-                if (saveGame.Player.ExperienceLevel < 25)
+                if (saveGame.ExperienceLevel < 25)
                 {
-                    saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), direction, saveGame.Player.ExperienceLevel);
+                    saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), direction, saveGame.ExperienceLevel);
                 }
                 else
                 {
-                    saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), direction, saveGame.Player.ExperienceLevel, 2);
+                    saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), direction, saveGame.ExperienceLevel, 2);
                 }
             }
         }

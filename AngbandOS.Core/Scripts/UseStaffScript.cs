@@ -24,7 +24,7 @@ internal class UseStaffScript : Script
             return false;
         }
         // Make sure the item is actually a staff
-        if (!SaveGame.Player.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Staff)))
+        if (!SaveGame.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Staff)))
         {
             SaveGame.MsgPrint("That is not a staff!");
             return false;
@@ -43,8 +43,8 @@ internal class UseStaffScript : Script
         int itemLevel = item.Factory.Level;
         // We have a chance of the device working equal to skill (halved if confused) - item
         // level (capped at 50)
-        int chance = SaveGame.Player.SkillUseDevice;
-        if (SaveGame.Player.TimedConfusion.TurnsRemaining != 0)
+        int chance = SaveGame.SkillUseDevice;
+        if (SaveGame.TimedConfusion.TurnsRemaining != 0)
         {
             chance /= 2;
         }
@@ -79,7 +79,7 @@ internal class UseStaffScript : Script
         if (useStaffEventArgs.Identified && !item.IsFlavourAware())
         {
             item.BecomeFlavourAware();
-            SaveGame.Player.GainExperience((itemLevel + (SaveGame.Player.ExperienceLevel >> 1)) / SaveGame.Player.ExperienceLevel);
+            SaveGame.GainExperience((itemLevel + (SaveGame.ExperienceLevel >> 1)) / SaveGame.ExperienceLevel);
         }
         // We may not have used up a charge
         if (!useStaffEventArgs.ChargeUsed)
@@ -88,7 +88,7 @@ internal class UseStaffScript : Script
         }
         // Channelers can use mana instead of a charge
         bool channeled = false;
-        if (SaveGame.Player.BaseCharacterClass.SpellCastingType.CanUseManaInsteadOfConsumingItem)
+        if (SaveGame.BaseCharacterClass.SpellCastingType.CanUseManaInsteadOfConsumingItem)
         {
             channeled = SaveGame.DoCmdChannel(item);
         }
@@ -102,8 +102,8 @@ internal class UseStaffScript : Script
                 Item singleStaff = item.Clone(1);
                 item.TypeSpecificValue++;
                 item.Count--;
-                SaveGame.Player.WeightCarried -= singleStaff.Weight;
-                SaveGame.Player.InvenCarry(singleStaff);
+                SaveGame.WeightCarried -= singleStaff.Weight;
+                SaveGame.InvenCarry(singleStaff);
                 SaveGame.MsgPrint("You unstack your staff.");
             }
             // Let the player know what happened

@@ -33,15 +33,15 @@ internal abstract class Patron
             return;
         }
         MultiRew = true;
-        if (SaveGame.Player.ExperienceLevel == 13)
+        if (SaveGame.ExperienceLevel == 13)
         {
             nastyChance = 2;
         }
-        else if (SaveGame.Player.ExperienceLevel % 13 == 0)
+        else if (SaveGame.ExperienceLevel % 13 == 0)
         {
             nastyChance = 3;
         }
-        else if (SaveGame.Player.ExperienceLevel % 14 == 0)
+        else if (SaveGame.ExperienceLevel % 14 == 0)
         {
             nastyChance = 12;
         }
@@ -66,7 +66,7 @@ internal abstract class Patron
         if (Program.Rng.DieRoll(6) == 1)
         {
             SaveGame.MsgPrint($"{ShortName} rewards you with a mutation!");
-            SaveGame.Player.Dna.GainMutation();
+            SaveGame.Dna.GainMutation();
             return;
         }
         effect.GetReward(this);

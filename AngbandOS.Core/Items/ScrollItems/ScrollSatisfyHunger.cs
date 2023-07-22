@@ -24,7 +24,7 @@ internal class ScrollSatisfyHunger : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (SaveGame.Player.SetFood(Constants.PyFoodMax - 1))
+        if (SaveGame.SetFood(Constants.PyFoodMax - 1))
         {
             eventArgs.Identified = true;
         }

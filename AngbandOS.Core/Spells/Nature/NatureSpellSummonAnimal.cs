@@ -13,7 +13,7 @@ internal class NatureSpellSummonAnimal : Spell
     private NatureSpellSummonAnimal(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.ExperienceLevel, new AnimalRangerMonsterSelector(), true))
+        if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new AnimalRangerMonsterSelector(), true))
         {
             SaveGame.MsgPrint("No-one ever turns up.");
         }

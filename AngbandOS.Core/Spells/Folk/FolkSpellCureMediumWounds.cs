@@ -13,8 +13,8 @@ internal class FolkSpellCureMediumWounds : Spell
     private FolkSpellCureMediumWounds(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8));
-        SaveGame.Player.TimedBleeding.SetTimer((SaveGame.Player.TimedBleeding.TurnsRemaining / 2) - 50);
+        SaveGame.RestoreHealth(Program.Rng.DiceRoll(4, 8));
+        SaveGame.TimedBleeding.SetTimer((SaveGame.TimedBleeding.TurnsRemaining / 2) - 50);
     }
 
     public override string Name => "Cure Medium Wounds";

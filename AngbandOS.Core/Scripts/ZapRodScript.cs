@@ -24,7 +24,7 @@ internal class ZapRodScript : Script
             return false;
         }
         // Make sure the item is actually a rod
-        if (!SaveGame.Player.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Rod)))
+        if (!SaveGame.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Rod)))
         {
             SaveGame.MsgPrint("That is not a rod!");
             return false;
@@ -54,8 +54,8 @@ internal class ZapRodScript : Script
         bool identified = false;
         int itemLevel = item.Factory.Level;
         // Chance to successfully use it is skill (halved if confused) - rod level (capped at 50)
-        int chance = SaveGame.Player.SkillUseDevice;
-        if (SaveGame.Player.TimedConfusion.TurnsRemaining != 0)
+        int chance = SaveGame.SkillUseDevice;
+        if (SaveGame.TimedConfusion.TurnsRemaining != 0)
         {
             chance /= 2;
         }
@@ -89,7 +89,7 @@ internal class ZapRodScript : Script
         if (identified && !item.IsFlavourAware())
         {
             item.BecomeFlavourAware();
-            SaveGame.Player.GainExperience((itemLevel + (SaveGame.Player.ExperienceLevel >> 1)) / SaveGame.Player.ExperienceLevel);
+            SaveGame.GainExperience((itemLevel + (SaveGame.ExperienceLevel >> 1)) / SaveGame.ExperienceLevel);
         }
         // We may not have actually used a charge
         if (!useCharge)
@@ -100,7 +100,7 @@ internal class ZapRodScript : Script
 
         // Channelers can spend mana instead of a charge
         bool channeled = false;
-        if (SaveGame.Player.BaseCharacterClass.SpellCastingType.CanUseManaInsteadOfConsumingItem)
+        if (SaveGame.BaseCharacterClass.SpellCastingType.CanUseManaInsteadOfConsumingItem)
         {
             channeled = SaveGame.DoCmdChannel(item);
             if (channeled)
@@ -117,8 +117,8 @@ internal class ZapRodScript : Script
                 Item singleRod = item.Clone(1);
                 item.TypeSpecificValue = 0;
                 item.Count--;
-                SaveGame.Player.WeightCarried -= singleRod.Weight;
-                SaveGame.Player.InvenCarry(singleRod);
+                SaveGame.WeightCarried -= singleRod.Weight;
+                SaveGame.InvenCarry(singleRod);
                 SaveGame.MsgPrint("You unstack your rod.");
             }
         }

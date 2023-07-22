@@ -18,7 +18,7 @@ internal class MutationEarthquake : Mutation
         }
         if (!saveGame.IsQuest(saveGame.CurrentDepth) && saveGame.CurrentDepth != 0)
         {
-            saveGame.Earthquake(saveGame.Player.MapY, saveGame.Player.MapX, 10);
+            saveGame.Earthquake(saveGame.MapY, saveGame.MapX, 10);
         }
     }
 

@@ -15,27 +15,27 @@ internal class WizardCureAllScript : Script
     public override bool Execute()
     {
         SaveGame.RemoveAllCurse();
-        SaveGame.Player.RestoreAbilityScore(Ability.Strength);
-        SaveGame.Player.RestoreAbilityScore(Ability.Intelligence);
-        SaveGame.Player.RestoreAbilityScore(Ability.Wisdom);
-        SaveGame.Player.RestoreAbilityScore(Ability.Constitution);
-        SaveGame.Player.RestoreAbilityScore(Ability.Dexterity);
-        SaveGame.Player.RestoreAbilityScore(Ability.Charisma);
-        SaveGame.Player.RestoreLevel();
-        SaveGame.Player.Health = SaveGame.Player.MaxHealth;
-        SaveGame.Player.FractionalHealth = 0;
-        SaveGame.Player.Mana = SaveGame.Player.MaxMana;
-        SaveGame.Player.FractionalMana = 0;
-        SaveGame.Player.TimedBlindness.ResetTimer();
-        SaveGame.Player.TimedConfusion.ResetTimer();
-        SaveGame.Player.TimedPoison.ResetTimer();
-        SaveGame.Player.TimedFear.ResetTimer();
-        SaveGame.Player.TimedParalysis.ResetTimer();
-        SaveGame.Player.TimedHallucinations.ResetTimer();
-        SaveGame.Player.TimedStun.ResetTimer();
-        SaveGame.Player.TimedBleeding.ResetTimer();
-        SaveGame.Player.TimedSlow.ResetTimer();
-        SaveGame.Player.SetFood(Constants.PyFoodMax - 1);
+        SaveGame.RestoreAbilityScore(Ability.Strength);
+        SaveGame.RestoreAbilityScore(Ability.Intelligence);
+        SaveGame.RestoreAbilityScore(Ability.Wisdom);
+        SaveGame.RestoreAbilityScore(Ability.Constitution);
+        SaveGame.RestoreAbilityScore(Ability.Dexterity);
+        SaveGame.RestoreAbilityScore(Ability.Charisma);
+        SaveGame.RestoreLevel();
+        SaveGame.Health = SaveGame.MaxHealth;
+        SaveGame.FractionalHealth = 0;
+        SaveGame.Mana = SaveGame.MaxMana;
+        SaveGame.FractionalMana = 0;
+        SaveGame.TimedBlindness.ResetTimer();
+        SaveGame.TimedConfusion.ResetTimer();
+        SaveGame.TimedPoison.ResetTimer();
+        SaveGame.TimedFear.ResetTimer();
+        SaveGame.TimedParalysis.ResetTimer();
+        SaveGame.TimedHallucinations.ResetTimer();
+        SaveGame.TimedStun.ResetTimer();
+        SaveGame.TimedBleeding.ResetTimer();
+        SaveGame.TimedSlow.ResetTimer();
+        SaveGame.SetFood(Constants.PyFoodMax - 1);
         SaveGame.DoCmdRedraw();
         return false;
     }

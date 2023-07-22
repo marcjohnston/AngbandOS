@@ -54,7 +54,7 @@ internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
         }
 
         // Check that our fuel is suitable
-        if (!saveGame.Player.ItemMatchesFilter(fuelSource, new TorchFuelItemFilter()))
+        if (!saveGame.ItemMatchesFilter(fuelSource, new TorchFuelItemFilter()))
         {
             saveGame.MsgPrint("You can't refill a torch with that!");
             return;

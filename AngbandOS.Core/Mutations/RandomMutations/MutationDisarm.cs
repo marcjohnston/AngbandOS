@@ -26,7 +26,7 @@ internal class MutationDisarm : Mutation
         }
         saveGame.Disturb(false);
         saveGame.MsgPrint("You trip over your own feet!");
-        saveGame.Player.TakeHit(Program.Rng.DieRoll(saveGame.Player.Weight / 6), "tripping");
+        saveGame.TakeHit(Program.Rng.DieRoll(saveGame.Weight / 6), "tripping");
         saveGame.MsgPrint(null);
         Item? oPtr = saveGame.GetInventoryItem(InventorySlot.MeleeWeapon);
         if (oPtr == null)
@@ -34,6 +34,6 @@ internal class MutationDisarm : Mutation
             return;
         }
         saveGame.MsgPrint("You drop your weapon!");
-        saveGame.Player.InvenDrop(InventorySlot.MeleeWeapon, 1);
+        saveGame.InvenDrop(InventorySlot.MeleeWeapon, 1);
     }
 }

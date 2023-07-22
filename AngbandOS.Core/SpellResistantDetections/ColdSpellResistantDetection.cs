@@ -11,15 +11,15 @@ internal class ColdSpellResistantDetection : SpellResistantDetection
 {
     public override void Learn(SaveGame saveGame, Monster monster)
     {
-        if (saveGame.Player.HasColdResistance)
+        if (saveGame.HasColdResistance)
         {
             monster.SmResCold = true;
         }
-        if (saveGame.Player.TimedColdResistance.TurnsRemaining != 0)
+        if (saveGame.TimedColdResistance.TurnsRemaining != 0)
         {
             monster.SmOppCold = true;
         }
-        if (saveGame.Player.HasColdImmunity)
+        if (saveGame.HasColdImmunity)
         {
             monster.SmImmCold = true;
         }

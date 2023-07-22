@@ -20,8 +20,8 @@ internal class ProtEvilActivation : Activation
 
     public override bool Activate()
     {
-        int k = 3 * SaveGame.Player.ExperienceLevel;
-        SaveGame.Player.TimedProtectionFromEvil.AddTimer(Program.Rng.DieRoll(25) + k);
+        int k = 3 * SaveGame.ExperienceLevel;
+        SaveGame.TimedProtectionFromEvil.AddTimer(Program.Rng.DieRoll(25) + k);
         return true;
     }
 

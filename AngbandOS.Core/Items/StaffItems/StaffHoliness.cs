@@ -29,28 +29,28 @@ internal class StaffHoliness : StaffItemClass
         {
             eventArgs.Identified = true;
         }
-        int k = 3 * SaveGame.Player.ExperienceLevel;
-        if (SaveGame.Player.TimedProtectionFromEvil.AddTimer(Program.Rng.DieRoll(25) + k))
+        int k = 3 * SaveGame.ExperienceLevel;
+        if (SaveGame.TimedProtectionFromEvil.AddTimer(Program.Rng.DieRoll(25) + k))
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.Player.TimedPoison.ResetTimer())
+        if (SaveGame.TimedPoison.ResetTimer())
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.Player.TimedFear.ResetTimer())
+        if (SaveGame.TimedFear.ResetTimer())
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.Player.RestoreHealth(50))
+        if (SaveGame.RestoreHealth(50))
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.Player.TimedStun.ResetTimer())
+        if (SaveGame.TimedStun.ResetTimer())
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.Player.TimedBleeding.ResetTimer())
+        if (SaveGame.TimedBleeding.ResetTimer())
         {
             eventArgs.Identified = true;
         }

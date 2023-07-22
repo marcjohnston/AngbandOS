@@ -248,7 +248,7 @@ internal abstract class Store : IItemFilter
         while (!_leaveStore)
         {
             SaveGame.Screen.PrintLine("", 1, 0);
-            int tmpCha = SaveGame.Player.AbilityScores[Ability.Charisma].Adjusted;
+            int tmpCha = SaveGame.AbilityScores[Ability.Charisma].Adjusted;
             SaveGame.Screen.Clear(41);
             SaveGame.Screen.PrintLine(" ESC) Exit from Building.", 42, 0);
             RenderAdvertisedCommand(AdvertisedStoreCommand1, 42, 31);
@@ -282,9 +282,9 @@ internal abstract class Store : IItemFilter
                     Item qPtr = oPtr.Clone();
                     string oName = qPtr.Description(true, 3);
                     SaveGame.MsgPrint($"You drop {oName} ({itemIndex.IndexToLabel()}).");
-                    SaveGame.Player.InvenItemIncrease(itemIndex, -255);
-                    SaveGame.Player.InvenItemDescribe(itemIndex);
-                    SaveGame.Player.InvenItemOptimize(itemIndex);
+                    SaveGame.InvenItemIncrease(itemIndex, -255);
+                    SaveGame.InvenItemDescribe(itemIndex);
+                    SaveGame.InvenItemOptimize(itemIndex);
                     SaveGame.HandleStuff();
                     int itemPos = HomeCarry(qPtr);
                     if (itemPos >= 0)
@@ -294,7 +294,7 @@ internal abstract class Store : IItemFilter
                     }
                 }
             }
-            if (tmpCha != SaveGame.Player.AbilityScores[Ability.Charisma].Adjusted)
+            if (tmpCha != SaveGame.AbilityScores[Ability.Charisma].Adjusted)
             {
                 DisplayInventory();
             }
@@ -542,7 +542,7 @@ internal abstract class Store : IItemFilter
     {
         ScreenBuffer savedScreen = SaveGame.Screen.Clone();
         BookItemFactory book = (BookItemFactory)oPtr.Factory;
-        SaveGame.Player.PrintSpells(book.Spells.ToArray(), 1, 20);
+        SaveGame.PrintSpells(book.Spells.ToArray(), 1, 20);
         SaveGame.Screen.PrintLine("", 0, 0);
         SaveGame.Screen.Print("[Press any key to continue]", 0, 23);
         SaveGame.Inkey();
@@ -586,7 +586,7 @@ internal abstract class Store : IItemFilter
         ScreenBuffer savedScreen = SaveGame.Screen.Clone();
         try
         {
-            var deities = SaveGame.Player.Religion.GetAllDeities();
+            var deities = SaveGame.Religion.GetAllDeities();
             var names = new List<string>();
             var keys = new List<char>();
             foreach (var deity in deities)
@@ -780,7 +780,7 @@ internal abstract class Store : IItemFilter
             return 0;
         }
         int factor = 100;
-        factor += SaveGame.Player.AbilityScores[Ability.Charisma].ChaPriceAdjustment;
+        factor += SaveGame.AbilityScores[Ability.Charisma].ChaPriceAdjustment;
         if (trueToMarkDownFalseToMarkUp == true)
         {
             adjust = 100 + (300 - (greed + factor));
@@ -850,20 +850,20 @@ internal abstract class Store : IItemFilter
     {
         if (toDusk)
         {
-            SaveGame.Player.GameTime.ToNextDusk();
+            SaveGame.GameTime.ToNextDusk();
             SaveGame.MsgPrint("You awake, ready for the night.");
             SaveGame.MsgPrint("You eat a tasty supper.");
         }
         else
         {
-            SaveGame.Player.GameTime.ToNextDawn();
+            SaveGame.GameTime.ToNextDawn();
             SaveGame.MsgPrint("You awake refreshed for the new day.");
             SaveGame.MsgPrint("You eat a hearty breakfast.");
         }
-        SaveGame.Player.Religion.DecayFavour();
+        SaveGame.Religion.DecayFavour();
         SaveGame.UpdateHealthFlaggedAction.Set();
         SaveGame.UpdateManaFlaggedAction.Set();
-        SaveGame.Player.SetFood(Constants.PyFoodMax - 1);
+        SaveGame.SetFood(Constants.PyFoodMax - 1);
         foreach (Town town in SaveGame.SingletonRepository.Towns)
         {
             foreach (Store store in town.Stores)
@@ -874,35 +874,35 @@ internal abstract class Store : IItemFilter
                 }
             }
         }
-        SaveGame.Player.TimedHaste.SetValue();
-        SaveGame.Player.TimedSlow.SetValue();
-        SaveGame.Player.TimedBlindness.SetValue();
-        SaveGame.Player.TimedParalysis.SetValue();
-        SaveGame.Player.TimedConfusion.SetValue();
-        SaveGame.Player.TimedFear.SetValue();
-        SaveGame.Player.TimedHallucinations.SetValue();
-        SaveGame.Player.TimedPoison.SetValue();
-        SaveGame.Player.TimedBleeding.SetValue();
-        SaveGame.Player.TimedStun.SetValue();
-        SaveGame.Player.TimedProtectionFromEvil.SetValue();
-        SaveGame.Player.TimedInvulnerability.SetValue();
-        SaveGame.Player.TimedHeroism.SetValue();
-        SaveGame.Player.TimedSuperheroism.SetValue();
-        SaveGame.Player.TimedStoneskin.SetValue();
-        SaveGame.Player.TimedBlessing.SetValue();
-        SaveGame.Player.TimedSeeInvisibility.SetValue();
-        SaveGame.Player.TimedEtherealness.SetValue();
-        SaveGame.Player.TimedInfravision.SetValue();
-        SaveGame.Player.TimedAcidResistance.SetValue();
-        SaveGame.Player.TimedLightningResistance.SetValue();
-        SaveGame.Player.TimedFireResistance.SetValue();
-        SaveGame.Player.TimedColdResistance.SetValue();
-        SaveGame.Player.TimedPoisonResistance.SetValue();
-        SaveGame.Player.Health = SaveGame.Player.MaxHealth;
-        SaveGame.Player.Mana = SaveGame.Player.MaxMana;
-        SaveGame.Player.TimedBlindness.SetValue();
-        SaveGame.Player.TimedConfusion.SetValue();
-        SaveGame.Player.TimedStun.SetValue();
+        SaveGame.TimedHaste.SetValue();
+        SaveGame.TimedSlow.SetValue();
+        SaveGame.TimedBlindness.SetValue();
+        SaveGame.TimedParalysis.SetValue();
+        SaveGame.TimedConfusion.SetValue();
+        SaveGame.TimedFear.SetValue();
+        SaveGame.TimedHallucinations.SetValue();
+        SaveGame.TimedPoison.SetValue();
+        SaveGame.TimedBleeding.SetValue();
+        SaveGame.TimedStun.SetValue();
+        SaveGame.TimedProtectionFromEvil.SetValue();
+        SaveGame.TimedInvulnerability.SetValue();
+        SaveGame.TimedHeroism.SetValue();
+        SaveGame.TimedSuperheroism.SetValue();
+        SaveGame.TimedStoneskin.SetValue();
+        SaveGame.TimedBlessing.SetValue();
+        SaveGame.TimedSeeInvisibility.SetValue();
+        SaveGame.TimedEtherealness.SetValue();
+        SaveGame.TimedInfravision.SetValue();
+        SaveGame.TimedAcidResistance.SetValue();
+        SaveGame.TimedLightningResistance.SetValue();
+        SaveGame.TimedFireResistance.SetValue();
+        SaveGame.TimedColdResistance.SetValue();
+        SaveGame.TimedPoisonResistance.SetValue();
+        SaveGame.Health = SaveGame.MaxHealth;
+        SaveGame.Mana = SaveGame.MaxMana;
+        SaveGame.TimedBlindness.SetValue();
+        SaveGame.TimedConfusion.SetValue();
+        SaveGame.TimedStun.SetValue();
         SaveGame.NewLevelFlag = true;
         SaveGame.CameFrom = LevelStart.StartWalk;
     }
@@ -914,7 +914,7 @@ internal abstract class Store : IItemFilter
         {
             return;
         }
-        var deity = SaveGame.Player.Religion.GetNamedDeity(godName);
+        var deity = SaveGame.Religion.GetNamedDeity(godName);
         string pmt = "Sacrifice which item? ";
         if (!SaveGame.SelectItem(out Item? oPtr, pmt, true, true, false, null))
         {
@@ -954,7 +954,7 @@ internal abstract class Store : IItemFilter
         }
         var favour = finalAsk / 10;
         var oldFavour = deity.AdjustedFavour;
-        SaveGame.Player.Religion.AddFavour(godName, favour);
+        SaveGame.Religion.AddFavour(godName, favour);
         var newFavour = deity.AdjustedFavour;
         var change = newFavour - oldFavour;
         if (change < 0)
@@ -1133,7 +1133,7 @@ internal abstract class Store : IItemFilter
         BookItem? bookItem = oPtr.TryCast<BookItem>();
         if (bookItem != null)
         {
-            if (SaveGame.Player.PrimaryRealm?.SpellBookItemCategory == bookItem.Category || SaveGame.Player.SecondaryRealm?.SpellBookItemCategory == bookItem.Category)
+            if (SaveGame.PrimaryRealm?.SpellBookItemCategory == bookItem.Category || SaveGame.SecondaryRealm?.SpellBookItemCategory == bookItem.Category)
             {
                 DoStoreBrowse(oPtr);
             }
@@ -1267,32 +1267,32 @@ internal abstract class Store : IItemFilter
 
     private void DoCmdStudy()
     {
-        string spellType = SaveGame.Player.BaseCharacterClass.SpellCastingType.SpellNoun;
+        string spellType = SaveGame.BaseCharacterClass.SpellCastingType.SpellNoun;
         // If we don't have a realm then we can't do anything
-        if (!SaveGame.Player.CanCastSpells)
+        if (!SaveGame.CanCastSpells)
         {
             SaveGame.MsgPrint("You cannot read books!");
             return;
         }
         // We can't learn spells if we're blind or confused
-        if (SaveGame.Player.TimedBlindness.TurnsRemaining != 0)
+        if (SaveGame.TimedBlindness.TurnsRemaining != 0)
         {
             SaveGame.MsgPrint("You cannot see!");
             return;
         }
-        if (SaveGame.Player.TimedConfusion.TurnsRemaining != 0)
+        if (SaveGame.TimedConfusion.TurnsRemaining != 0)
         {
             SaveGame.MsgPrint("You are too confused!");
             return;
         }
         // We can only learn new spells if we have spare slots
-        if (SaveGame.Player.SpareSpellSlots == 0)
+        if (SaveGame.SpareSpellSlots == 0)
         {
             SaveGame.MsgPrint($"You cannot learn any new {spellType}s!");
             return;
         }
-        string plural = SaveGame.Player.SpareSpellSlots == 1 ? "" : "s";
-        SaveGame.MsgPrint($"You can learn {SaveGame.Player.SpareSpellSlots} new {spellType}{plural}.");
+        string plural = SaveGame.SpareSpellSlots == 1 ? "" : "s";
+        SaveGame.MsgPrint($"You can learn {SaveGame.SpareSpellSlots} new {spellType}{plural}.");
         SaveGame.MsgPrint(null);
         // Get the spell books we have
         if (!SaveGame.SelectItem(out Item? item, "Study which book? ", false, true, true, new UsableSpellBookItemFilter(SaveGame)))
@@ -1310,7 +1310,7 @@ internal abstract class Store : IItemFilter
 
         // Arcane casters can choose their spell
         Spell? spell = null;
-        if (SaveGame.Player.BaseCharacterClass.SpellCastingType.CanChooseSpellToStudy)
+        if (SaveGame.BaseCharacterClass.SpellCastingType.CanChooseSpellToStudy)
         {
             // Allow the user to select a spell.
             if (!SaveGame.GetSpell(out spell, "study", bookItem, false))
@@ -1333,7 +1333,7 @@ internal abstract class Store : IItemFilter
             // Gather the potential spells from the book
             foreach (Spell sPtr in bookItem.Factory.Spells)
             {
-                if (SaveGame.Player.SpellOkay(sPtr, false))
+                if (SaveGame.SpellOkay(sPtr, false))
                 {
                     k++;
                     if (Program.Rng.RandomLessThan(k) == 0)
@@ -1360,13 +1360,13 @@ internal abstract class Store : IItemFilter
         // Let the player know they've learned a spell
         SaveGame.MsgPrint($"You have learned the {spellType} of {spell.Name}.");
         SaveGame.PlaySound(SoundEffectEnum.Study);
-        SaveGame.Player.SpareSpellSlots--;
-        if (SaveGame.Player.SpareSpellSlots != 0)
+        SaveGame.SpareSpellSlots--;
+        if (SaveGame.SpareSpellSlots != 0)
         {
-            plural = SaveGame.Player.SpareSpellSlots != 1 ? "s" : "";
-            SaveGame.MsgPrint($"You can learn {SaveGame.Player.SpareSpellSlots} more {spellType}{plural}.");
+            plural = SaveGame.SpareSpellSlots != 1 ? "s" : "";
+            SaveGame.MsgPrint($"You can learn {SaveGame.SpareSpellSlots} more {spellType}{plural}.");
         }
-        SaveGame.Player.OldSpareSpellSlots = SaveGame.Player.SpareSpellSlots;
+        SaveGame.OldSpareSpellSlots = SaveGame.SpareSpellSlots;
         SaveGame.RedrawStudyFlaggedAction.Set();
     }
 
@@ -1414,13 +1414,13 @@ internal abstract class Store : IItemFilter
         int price;
         if (!ServiceHaggle(500, out price))
         {
-            if (price >= SaveGame.Player.Gold)
+            if (price >= SaveGame.Gold)
             {
                 SaveGame.MsgPrint("You do not have the gold!");
             }
             else
             {
-                SaveGame.Player.Gold -= price;
+                SaveGame.Gold -= price;
                 SayComment_1();
                 SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                 StorePrtGold();
@@ -1434,7 +1434,7 @@ internal abstract class Store : IItemFilter
     public void HireRoom()
     {
         int price;
-        if (SaveGame.Player.TimedPoison.TurnsRemaining > 0 || SaveGame.Player.TimedBleeding.TurnsRemaining > 0)
+        if (SaveGame.TimedPoison.TurnsRemaining > 0 || SaveGame.TimedBleeding.TurnsRemaining > 0)
         {
             SaveGame.MsgPrint("You need a healer, not a room!");
             SaveGame.MsgPrint("I'm sorry, but  I don't want anyone dying in here.");
@@ -1443,17 +1443,17 @@ internal abstract class Store : IItemFilter
         {
             if (!ServiceHaggle(10, out price))
             {
-                if (price >= SaveGame.Player.Gold)
+                if (price >= SaveGame.Gold)
                 {
                     SaveGame.MsgPrint("You do not have the gold!");
                 }
                 else
                 {
-                    SaveGame.Player.Gold -= price;
+                    SaveGame.Gold -= price;
                     SayComment_1();
                     SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                     StorePrtGold();
-                    RoomRest(SaveGame.Player.Race.RestsTillDuskInsteadOfDawn);
+                    RoomRest(SaveGame.Race.RestsTillDuskInsteadOfDawn);
                 }
             }
         }
@@ -1466,13 +1466,13 @@ internal abstract class Store : IItemFilter
 
     public void Rest()
     {
-        if (SaveGame.Player.TimedPoison.TurnsRemaining > 0 || SaveGame.Player.TimedBleeding.TurnsRemaining > 0)
+        if (SaveGame.TimedPoison.TurnsRemaining > 0 || SaveGame.TimedBleeding.TurnsRemaining > 0)
         {
             SaveGame.MsgPrint("Your wounds prevent you from sleeping.");
         }
         else
         {
-            RoomRest(SaveGame.Player.Race.RestsTillDuskInsteadOfDawn);
+            RoomRest(SaveGame.Race.RestsTillDuskInsteadOfDawn);
         }
     }
 
@@ -1481,13 +1481,13 @@ internal abstract class Store : IItemFilter
         int price;
         if (!ServiceHaggle(2000, out price))
         {
-            if (price > SaveGame.Player.Gold)
+            if (price > SaveGame.Gold)
             {
                 SaveGame.MsgPrint("You do not have the gold!");
             }
             else
             {
-                SaveGame.Player.Gold -= price;
+                SaveGame.Gold -= price;
                 SayComment_1();
                 SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                 StorePrtGold();
@@ -1502,23 +1502,23 @@ internal abstract class Store : IItemFilter
         int price;
         if (!ServiceHaggle(750, out price))
         {
-            if (price > SaveGame.Player.Gold)
+            if (price > SaveGame.Gold)
             {
                 SaveGame.MsgPrint("You do not have the gold!");
             }
             else
             {
-                SaveGame.Player.Gold -= price;
+                SaveGame.Gold -= price;
                 SayComment_1();
                 SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                 StorePrtGold();
-                SaveGame.Player.TryRestoringAbilityScore(Ability.Strength);
-                SaveGame.Player.TryRestoringAbilityScore(Ability.Intelligence);
-                SaveGame.Player.TryRestoringAbilityScore(Ability.Wisdom);
-                SaveGame.Player.TryRestoringAbilityScore(Ability.Dexterity);
-                SaveGame.Player.TryRestoringAbilityScore(Ability.Constitution);
-                SaveGame.Player.TryRestoringAbilityScore(Ability.Charisma);
-                SaveGame.Player.RestoreLevel();
+                SaveGame.TryRestoringAbilityScore(Ability.Strength);
+                SaveGame.TryRestoringAbilityScore(Ability.Intelligence);
+                SaveGame.TryRestoringAbilityScore(Ability.Wisdom);
+                SaveGame.TryRestoringAbilityScore(Ability.Dexterity);
+                SaveGame.TryRestoringAbilityScore(Ability.Constitution);
+                SaveGame.TryRestoringAbilityScore(Ability.Charisma);
+                SaveGame.RestoreLevel();
             }
             SaveGame.HandleStuff();
         }
@@ -1529,13 +1529,13 @@ internal abstract class Store : IItemFilter
         int price;
         if (!ServiceHaggle(500, out price))
         {
-            if (price > SaveGame.Player.Gold)
+            if (price > SaveGame.Gold)
             {
                 SaveGame.MsgPrint("You do not have the gold!");
             }
             else
             {
-                SaveGame.Player.Gold -= price;
+                SaveGame.Gold -= price;
                 SayComment_1();
                 SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                 StorePrtGold();
@@ -1550,13 +1550,13 @@ internal abstract class Store : IItemFilter
         int price;
         if (!ServiceHaggle(800, out price))
         {
-            if (price > SaveGame.Player.Gold)
+            if (price > SaveGame.Gold)
             {
                 SaveGame.MsgPrint("You do not have the gold!");
             }
             else
             {
-                SaveGame.Player.Gold -= price;
+                SaveGame.Gold -= price;
                 SayComment_1();
                 SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                 StorePrtGold();
@@ -1571,13 +1571,13 @@ internal abstract class Store : IItemFilter
         int price;
         if (!ServiceHaggle(400, out price))
         {
-            if (price > SaveGame.Player.Gold)
+            if (price > SaveGame.Gold)
             {
                 SaveGame.MsgPrint("You do not have the gold!");
             }
             else
             {
-                SaveGame.Player.Gold -= price;
+                SaveGame.Gold -= price;
                 SayComment_1();
                 SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                 StorePrtGold();
@@ -1610,23 +1610,23 @@ internal abstract class Store : IItemFilter
             {
                 if (!ServiceHaggle(200, out price))
                 {
-                    if (price > SaveGame.Player.Gold)
+                    if (price > SaveGame.Gold)
                     {
                         SaveGame.MsgPrint("You do not have the gold!");
                     }
                     else
                     {
-                        SaveGame.Player.Gold -= price;
+                        SaveGame.Gold -= price;
                         SayComment_1();
                         SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                         StorePrtGold();
-                        SaveGame.Player.WildernessX = destination.X;
-                        SaveGame.Player.WildernessY = destination.Y;
+                        SaveGame.WildernessX = destination.X;
+                        SaveGame.WildernessY = destination.Y;
                         SaveGame.CurTown = destination;
                         SaveGame.NewLevelFlag = true;
                         SaveGame.CameFrom = LevelStart.StartRandom;
                         SaveGame.MsgPrint("The journey takes all day.");
-                        SaveGame.Player.GameTime.ToNextDusk();
+                        SaveGame.GameTime.ToNextDusk();
                         _leaveStore = true;
                     }
                 }
@@ -1638,7 +1638,7 @@ internal abstract class Store : IItemFilter
     protected void StorePrtGold()
     {
         SaveGame.Screen.PrintLine("Gold Remaining: ", 39, 53);
-        string outVal = $"{SaveGame.Player.Gold,9}";
+        string outVal = $"{SaveGame.Gold,9}";
         SaveGame.Screen.PrintLine(outVal, 39, 68);
     }
 
@@ -1673,7 +1673,7 @@ internal abstract class Store : IItemFilter
         Item oPtr = _storeInventoryList[item];
         int amt = 1;
         Item jPtr = oPtr.Clone(amt);
-        if (!SaveGame.Player.InvenCarryOkay(jPtr))
+        if (!SaveGame.InvenCarryOkay(jPtr))
         {
             SaveGame.MsgPrint("You cannot carry that many different items.");
             return;
@@ -1685,7 +1685,7 @@ internal abstract class Store : IItemFilter
             {
                 SaveGame.MsgPrint($"That costs {best} gold per item.");
             }
-            int maxBuy = Math.Min(SaveGame.Player.Gold / best, oPtr.Count);
+            int maxBuy = Math.Min(SaveGame.Gold / best, oPtr.Count);
             if (maxBuy < 2)
             {
                 amt = 1;
@@ -1700,7 +1700,7 @@ internal abstract class Store : IItemFilter
             }
         }
         jPtr = oPtr.Clone(amt);
-        if (!SaveGame.Player.InvenCarryOkay(jPtr))
+        if (!SaveGame.InvenCarryOkay(jPtr))
         {
             SaveGame.MsgPrint("You cannot carry that many items.");
             return;
@@ -1723,11 +1723,11 @@ internal abstract class Store : IItemFilter
             }
             if (!choice)
             {
-                if (SaveGame.Player.Gold >= price)
+                if (SaveGame.Gold >= price)
                 {
                     SayComment_1();
                     SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-                    SaveGame.Player.Gold -= price;
+                    SaveGame.Gold -= price;
                     StorePrtGold();
                     if (StoreIdentifiesItems)
                     {
@@ -1737,7 +1737,7 @@ internal abstract class Store : IItemFilter
                     oName = jPtr.Description(true, 3);
                     SaveGame.MsgPrint(BoughtMessage(oName, price));
                     jPtr.Inscription = "";
-                    itemNew = SaveGame.Player.InvenCarry(jPtr);
+                    itemNew = SaveGame.InvenCarry(jPtr);
                     Item? newItemInInventory = SaveGame.GetInventoryItem(itemNew);
                     if (newItemInInventory == null)
                     {
@@ -1791,7 +1791,7 @@ internal abstract class Store : IItemFilter
         }
         else
         {
-            itemNew = SaveGame.Player.InvenCarry(jPtr);
+            itemNew = SaveGame.InvenCarry(jPtr);
             Item? newItemInInventory = SaveGame.GetInventoryItem(itemNew);
             if (newItemInInventory == null)
             {
@@ -1892,7 +1892,7 @@ internal abstract class Store : IItemFilter
             {
                 SayComment_1();
                 SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-                SaveGame.Player.Gold += price;
+                SaveGame.Gold += price;
                 StorePrtGold();
                 int guess = qPtr.Value() * qPtr.Count;
                 if (StoreIdentifiesItems)

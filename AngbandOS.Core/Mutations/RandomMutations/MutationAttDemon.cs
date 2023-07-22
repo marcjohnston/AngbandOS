@@ -20,18 +20,18 @@ internal class MutationAttDemon : Mutation
 
     public override void OnProcessWorld(SaveGame saveGame)
     {
-        if (saveGame.Player.HasAntiMagic || Program.Rng.DieRoll(6666) != 666)
+        if (saveGame.HasAntiMagic || Program.Rng.DieRoll(6666) != 666)
         {
             return;
         }
         bool dSummon;
         if (Program.Rng.DieRoll(6) == 1)
         {
-            dSummon = saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new DemonMonsterSelector(), true);
+            dSummon = saveGame.Level.SummonSpecificFriendly(saveGame.MapY, saveGame.MapX, saveGame.Difficulty, new DemonMonsterSelector(), true);
         }
         else
         {
-            dSummon = saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new DemonMonsterSelector());
+            dSummon = saveGame.Level.SummonSpecific(saveGame.MapY, saveGame.MapX, saveGame.Difficulty, new DemonMonsterSelector());
         }
         if (!dSummon)
         {

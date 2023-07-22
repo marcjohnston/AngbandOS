@@ -26,7 +26,7 @@ internal class StrengthPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Strength increases your strength
-        return SaveGame.Player.TryIncreasingAbilityScore(Ability.Strength);
+        return SaveGame.TryIncreasingAbilityScore(Ability.Strength);
     }
     public override Item CreateItem() => new StrengthPotionItem(SaveGame);
 }

@@ -17,7 +17,7 @@ internal class HurtAttackEffect : BaseAttackEffect
         // Normal damage is reduced by armour
         obvious = true;
         damage -= damage * (armourClass < 150 ? armourClass : 150) / 250;
-        saveGame.Player.TakeHit(damage, monsterDescription);
+        saveGame.TakeHit(damage, monsterDescription);
     }
 
     public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)

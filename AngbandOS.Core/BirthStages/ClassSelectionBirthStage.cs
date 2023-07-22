@@ -115,7 +115,7 @@ internal class ClassSelectionBirthStage : BaseBirthStage
             .OrderBy(_characterClass => _characterClass.Title)
             .ToArray();
 
-        SaveGame.Player.BaseCharacterClass = classes[index];
+        SaveGame.BaseCharacterClass = classes[index];
         return SaveGame.SingletonRepository.BirthStages.Get<RaceSelectionBirthStage>();
     }
 

@@ -26,7 +26,7 @@ internal class MeleeWeaponInventorySlot : EquipmentInventorySlot
         if (Count > 0 && index.HasValue)
         {
             Item? oPtr = SaveGame.GetInventoryItem(index.Value);
-            if (oPtr != null && SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
+            if (oPtr != null && SaveGame.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
             {
                 p = "Just lifting";
             }
@@ -40,7 +40,7 @@ internal class MeleeWeaponInventorySlot : EquipmentInventorySlot
         if (Count > 0)
         {
             Item? oPtr = SaveGame.GetInventoryItem(index);
-            if (oPtr != null && SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
+            if (oPtr != null && SaveGame.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
             {
                 p = "just lifting";
             }
@@ -53,7 +53,7 @@ internal class MeleeWeaponInventorySlot : EquipmentInventorySlot
         string p = "attacking monsters with";
 
         // Check to see if we have a weapon.
-        if (oPtr != null && SaveGame.Player.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
+        if (oPtr != null && SaveGame.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
         {
             p = "just lifting";
         }

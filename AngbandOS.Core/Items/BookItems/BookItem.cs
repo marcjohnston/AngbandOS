@@ -24,7 +24,7 @@ internal abstract class BookItem : Item
 
     public override string GetDescription(bool includeCountPrefix)
     {
-        string name = SaveGame.Player.BaseCharacterClass.SpellCastingType.GetBookTitle(this);
+        string name = SaveGame.BaseCharacterClass.SpellCastingType.GetBookTitle(this);
         name = $"{name} {Factory.FriendlyName}";
         return includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
     }

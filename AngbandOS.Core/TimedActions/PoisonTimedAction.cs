@@ -23,7 +23,7 @@ internal class PoisonTimedAction : TimedAction
     {
         if (TurnsRemaining != 0)
         {
-            int adjust = SaveGame.Player.AbilityScores[Ability.Constitution].ConRecoverySpeed + 1;
+            int adjust = SaveGame.AbilityScores[Ability.Constitution].ConRecoverySpeed + 1;
             AddTimer(-adjust);
         }
     }   

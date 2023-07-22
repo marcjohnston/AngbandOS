@@ -13,7 +13,7 @@ internal class DeathSpellRestoreLife : Spell
     private DeathSpellRestoreLife(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Player.RestoreLevel();
+        SaveGame.RestoreLevel();
     }
 
     public override void CastFailed()

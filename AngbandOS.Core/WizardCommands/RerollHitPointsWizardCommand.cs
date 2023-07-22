@@ -22,6 +22,6 @@ internal class RerollHitPointsWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.Player.RerollHitPoints();
+        SaveGame.RerollHitPoints();
     }
 }

@@ -15,7 +15,7 @@ internal class ChaosSpellChainLightning : Spell
     {
         for (int dir = 0; dir <= 9; dir++)
         {
-            SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, Program.Rng.DiceRoll(5 + (SaveGame.Player.ExperienceLevel / 10), 8));
+            SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, Program.Rng.DiceRoll(5 + (SaveGame.ExperienceLevel / 10), 8));
         }
     }
 
@@ -28,6 +28,6 @@ internal class ChaosSpellChainLightning : Spell
     
     protected override string? Info()
     {
-        return $"dam {5 + (SaveGame.Player.ExperienceLevel / 10)}d8";
+        return $"dam {5 + (SaveGame.ExperienceLevel / 10)}d8";
     }
 }

@@ -26,12 +26,12 @@ internal class PulveriseTalent : Talent
             return;
         }
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<SoundProjectile>(), dir,
-            Program.Rng.DiceRoll(8 + ((SaveGame.Player.ExperienceLevel - 5) / 4), 8), SaveGame.Player.ExperienceLevel > 20 ? ((SaveGame.Player.ExperienceLevel - 20) / 8) + 1 : 0);
+            Program.Rng.DiceRoll(8 + ((SaveGame.ExperienceLevel - 5) / 4), 8), SaveGame.ExperienceLevel > 20 ? ((SaveGame.ExperienceLevel - 20) / 8) + 1 : 0);
     }
 
     protected override string Comment()
     {
-        return $"dam {8 + ((SaveGame.Player.ExperienceLevel - 5) / 4)}d8";
+        return $"dam {8 + ((SaveGame.ExperienceLevel - 5) / 4)}d8";
         ;
     }
 }

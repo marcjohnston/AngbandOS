@@ -16,7 +16,7 @@ internal class MutationRecall : Mutation
         {
             return;
         }
-        saveGame.Player.ToggleRecall();
+        saveGame.ToggleRecall();
     }
 
     public override string ActivationSummary(int lvl)

@@ -27,8 +27,8 @@ internal class PieceOfElvishWaybreadFoodItemFactory : FoodItemFactory
     {
         SaveGame.PlaySound(SoundEffectEnum.Eat);
         SaveGame.MsgPrint("That tastes good.");
-        SaveGame.Player.TimedPoison.ResetTimer();
-        SaveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8));
+        SaveGame.TimedPoison.ResetTimer();
+        SaveGame.RestoreHealth(Program.Rng.DiceRoll(4, 8));
         return true;
     }
 

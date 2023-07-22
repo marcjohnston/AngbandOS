@@ -101,7 +101,7 @@ internal class HellFireProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
         if (dam > 1600)
         {
             dam = 1600;
@@ -114,15 +114,15 @@ internal class HellFireProjectile : Projectile
             SaveGame.MsgPrint("You are hit by something!");
         }
         
-        if (SaveGame.Player.PrimaryRealm.ResistantToHolyAndHellProjectiles || SaveGame.Player.SecondaryRealm.ResistantToHolyAndHellProjectiles)
+        if (SaveGame.PrimaryRealm.ResistantToHolyAndHellProjectiles || SaveGame.SecondaryRealm.ResistantToHolyAndHellProjectiles)
         {
             dam /= 2;
         }
-        else if (SaveGame.Player.PrimaryRealm.SusceptibleToHolyAndHellProjectiles || SaveGame.Player.SecondaryRealm.SusceptibleToHolyAndHellProjectiles)
+        else if (SaveGame.PrimaryRealm.SusceptibleToHolyAndHellProjectiles || SaveGame.SecondaryRealm.SusceptibleToHolyAndHellProjectiles)
         {
             dam *= 2;
         }
-        SaveGame.Player.TakeHit(dam, killer);
+        SaveGame.TakeHit(dam, killer);
         return true;
     }
 }

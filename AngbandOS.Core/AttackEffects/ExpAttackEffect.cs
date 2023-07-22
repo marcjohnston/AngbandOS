@@ -16,28 +16,28 @@ internal abstract class ExpAttackEffect : BaseAttackEffect
     public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         obvious = true;
-        saveGame.Player.TakeHit(damage, monsterDescription);
-        if (saveGame.Player.HasHoldLife && Program.Rng.RandomLessThan(100) < HoldLifePercentChange)
+        saveGame.TakeHit(damage, monsterDescription);
+        if (saveGame.HasHoldLife && Program.Rng.RandomLessThan(100) < HoldLifePercentChange)
         {
             saveGame.MsgPrint("You keep hold of your life force!");
         }
-        else if (Program.Rng.DieRoll(10) <= saveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+        else if (Program.Rng.DieRoll(10) <= saveGame.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
         {
             // Hagarg Ryonis can protect us from experience loss
             saveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
         }
         else
         {
-            int d = Program.Rng.DiceRoll(10, 6) + (saveGame.Player.ExperiencePoints / 100 * Constants.MonDrainLife);
-            if (saveGame.Player.HasHoldLife)
+            int d = Program.Rng.DiceRoll(10, 6) + (saveGame.ExperiencePoints / 100 * Constants.MonDrainLife);
+            if (saveGame.HasHoldLife)
             {
                 saveGame.MsgPrint("You feel your life slipping away!");
-                saveGame.Player.LoseExperience(d / 10);
+                saveGame.LoseExperience(d / 10);
             }
             else
             {
                 saveGame.MsgPrint("You feel your life draining away!");
-                saveGame.Player.LoseExperience(d);
+                saveGame.LoseExperience(d);
             }
         }
     }

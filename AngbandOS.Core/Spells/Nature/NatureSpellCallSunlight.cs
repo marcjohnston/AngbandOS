@@ -15,12 +15,12 @@ internal class NatureSpellCallSunlight : Spell
     {
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<LightProjectile>(), 0, 150, 8);
         SaveGame.Level.WizLight();
-        if (!SaveGame.Player.Race.IsBurnedBySunlight || SaveGame.Player.HasLightResistance)
+        if (!SaveGame.Race.IsBurnedBySunlight || SaveGame.HasLightResistance)
         {
             return;
         }
         SaveGame.MsgPrint("The sunlight scorches your flesh!");
-        SaveGame.Player.TakeHit(50, "sunlight");
+        SaveGame.TakeHit(50, "sunlight");
     }
 
     public override string Name => "Whirlpool";

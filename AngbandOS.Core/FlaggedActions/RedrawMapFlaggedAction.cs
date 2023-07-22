@@ -23,18 +23,18 @@ internal class RedrawMapFlaggedAction : FlaggedAction
             for (int x = SaveGame.Level.PanelColMin; x <= SaveGame.Level.PanelColMax; x++)
             {
                 SaveGame.Level.MapInfo(y, x, out ColourEnum a, out char c);
-                if (SaveGame.Player.TimedInvulnerability.TurnsRemaining != 0)
+                if (SaveGame.TimedInvulnerability.TurnsRemaining != 0)
                 {
                     a = ColourEnum.White;
                 }
-                else if (SaveGame.Player.TimedEtherealness.TurnsRemaining != 0)
+                else if (SaveGame.TimedEtherealness.TurnsRemaining != 0)
                 {
                     a = ColourEnum.Black;
                 }
                 SaveGame.Screen.Print(a, c, y - SaveGame.Level.PanelRowPrt, x - SaveGame.Level.PanelColPrt);
             }
         }
-        SaveGame.Level.RedrawSingleLocation(SaveGame.Player.MapY, SaveGame.Player.MapX);
+        SaveGame.Level.RedrawSingleLocation(SaveGame.MapY, SaveGame.MapX);
 
         // Restore the cursor visible.
         SaveGame.Screen.CursorVisible = v;

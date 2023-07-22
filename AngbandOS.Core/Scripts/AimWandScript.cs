@@ -25,7 +25,7 @@ internal class AimWandScript : Script
         {
             return false;
         }
-        if (!SaveGame.Player.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Wand)))
+        if (!SaveGame.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Wand)))
         {
             SaveGame.MsgPrint("That is not a wand!");
             return false;
@@ -47,8 +47,8 @@ internal class AimWandScript : Script
         int itemLevel = item.Factory.Level;
         // Chance of success is your skill - item level, with item level capped at 50 and your
         // skill halved if you're confused
-        int chance = SaveGame.Player.SkillUseDevice;
-        if (SaveGame.Player.TimedConfusion.TurnsRemaining != 0)
+        int chance = SaveGame.SkillUseDevice;
+        if (SaveGame.TimedConfusion.TurnsRemaining != 0)
         {
             chance /= 2;
         }
@@ -84,11 +84,11 @@ internal class AimWandScript : Script
         if (ident && !item.IsFlavourAware())
         {
             item.BecomeFlavourAware();
-            SaveGame.Player.GainExperience((itemLevel + (SaveGame.Player.ExperienceLevel >> 1)) / SaveGame.Player.ExperienceLevel);
+            SaveGame.GainExperience((itemLevel + (SaveGame.ExperienceLevel >> 1)) / SaveGame.ExperienceLevel);
         }
         // If we're a channeler then we should be using mana instead of charges
         bool channeled = false;
-        if (SaveGame.Player.BaseCharacterClass.SpellCastingType.CanUseManaInsteadOfConsumingItem)
+        if (SaveGame.BaseCharacterClass.SpellCastingType.CanUseManaInsteadOfConsumingItem)
         {
             channeled = SaveGame.DoCmdChannel(item);
         }
@@ -102,8 +102,8 @@ internal class AimWandScript : Script
                 Item splitItem = item.Clone(1);
                 item.TypeSpecificValue++;
                 item.Count--;
-                SaveGame.Player.WeightCarried -= splitItem.Weight;
-                SaveGame.Player.InvenCarry(splitItem);
+                SaveGame.WeightCarried -= splitItem.Weight;
+                SaveGame.InvenCarry(splitItem);
                 SaveGame.MsgPrint("You unstack your wand.");
             }
             // Let us know we have used a charge

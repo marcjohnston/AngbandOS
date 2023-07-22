@@ -26,7 +26,7 @@ internal class StaffStarlight : StaffItemClass
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.Player.TimedBlindness.TurnsRemaining == 0)
+        if (SaveGame.TimedBlindness.TurnsRemaining == 0)
         {
             SaveGame.MsgPrint("The end of the staff glows brightly...");
         }

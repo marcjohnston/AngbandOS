@@ -11,7 +11,7 @@ internal class NethSpellResistantDetection : SpellResistantDetection
 {
     public override void Learn(SaveGame saveGame, Monster monster)
     {
-        if (saveGame.Player.HasNetherResistance)
+        if (saveGame.HasNetherResistance)
         {
             monster.SmResNeth = true;
         }

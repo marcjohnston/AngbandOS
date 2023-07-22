@@ -17,7 +17,7 @@ internal class SorcerySpellConfuseMonster : Spell
         {
             return;
         }
-        SaveGame.ConfuseMonster(dir, SaveGame.Player.ExperienceLevel * 3 / 2);
+        SaveGame.ConfuseMonster(dir, SaveGame.ExperienceLevel * 3 / 2);
     }
 
     public override string Name => "Confuse Monster";

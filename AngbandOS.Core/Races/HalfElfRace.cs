@@ -50,6 +50,6 @@ internal class HalfElfRace : Race
     public override string CreateRandomName() => CreateRandomNameFromSyllables(new ElvishSyllables());
     public override void CalcBonuses(SaveGame saveGame)
     {
-        saveGame.Player.HasLightResistance = true;
+        saveGame.HasLightResistance = true;
     }
 }

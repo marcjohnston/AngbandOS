@@ -36,22 +36,22 @@ internal abstract class Talent
     public int FailureChance()
     {
         int chance = BaseFailure;
-        chance -= 3 * (SaveGame.Player.ExperienceLevel - Level);
-        chance -= 3 * (SaveGame.Player.AbilityScores[SaveGame.Player.BaseCharacterClass.SpellStat].SpellFailureReduction - 1);
-        if (ManaCost > SaveGame.Player.Mana)
+        chance -= 3 * (SaveGame.ExperienceLevel - Level);
+        chance -= 3 * (SaveGame.AbilityScores[SaveGame.BaseCharacterClass.SpellStat].SpellFailureReduction - 1);
+        if (ManaCost > SaveGame.Mana)
         {
-            chance += 5 * (ManaCost - SaveGame.Player.Mana);
+            chance += 5 * (ManaCost - SaveGame.Mana);
         }
-        int minfail = SaveGame.Player.AbilityScores[SaveGame.Player.BaseCharacterClass.SpellStat].SpellMinFailChance;
+        int minfail = SaveGame.AbilityScores[SaveGame.BaseCharacterClass.SpellStat].SpellMinFailChance;
         if (chance < minfail)
         {
             chance = minfail;
         }
-        if (SaveGame.Player.TimedStun.TurnsRemaining > 50)
+        if (SaveGame.TimedStun.TurnsRemaining > 50)
         {
             chance += 25;
         }
-        else if (SaveGame.Player.TimedStun.TurnsRemaining != 0)
+        else if (SaveGame.TimedStun.TurnsRemaining != 0)
         {
             chance += 15;
         }

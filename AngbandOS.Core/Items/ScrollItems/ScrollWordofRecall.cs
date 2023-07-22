@@ -24,7 +24,7 @@ internal class ScrollWordOfRecall : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        SaveGame.Player.ToggleRecall();
+        SaveGame.ToggleRecall();
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new WordOfRecallScrollItem(SaveGame);

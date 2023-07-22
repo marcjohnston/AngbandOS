@@ -21,8 +21,8 @@ internal class AdamantitePlateMailSoulkeeperFixedArtifact : FixedArtifact, IFixe
     {
         saveGame.MsgPrint("Your armor glows a bright white...");
         saveGame.MsgPrint("You feel much better...");
-        saveGame.Player.RestoreHealth(1000);
-        saveGame.Player.TimedBleeding.ResetTimer();
+        saveGame.RestoreHealth(1000);
+        saveGame.TimedBleeding.ResetTimer();
         item.RechargeTimeLeft = 888;
     }
     public string DescribeActivationEffect() => "heal (1000) every 888 turns";

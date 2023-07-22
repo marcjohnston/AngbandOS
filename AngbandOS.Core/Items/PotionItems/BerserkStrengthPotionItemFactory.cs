@@ -28,15 +28,15 @@ internal class BerserkStrengthPotionItemFactory : PotionItemFactory
         bool identified = false;
 
         // Berserk strength removes fear, heals 30 health, and gives you timed super heroism
-        if (SaveGame.Player.TimedFear.ResetTimer())
+        if (SaveGame.TimedFear.ResetTimer())
         {
             identified = true;
         }
-        if (SaveGame.Player.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(25) + 25))
+        if (SaveGame.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(25) + 25))
         {
             identified = true;
         }
-        if (SaveGame.Player.RestoreHealth(30))
+        if (SaveGame.RestoreHealth(30))
         {
             identified = true;
         }

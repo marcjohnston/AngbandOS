@@ -15,8 +15,8 @@ internal class NatureSpellWhirlwindAttack : Spell
     {
         for (int dir = 0; dir <= 9; dir++)
         {
-            int y = SaveGame.Player.MapY + SaveGame.Level.KeypadDirectionYOffset[dir];
-            int x = SaveGame.Player.MapX + SaveGame.Level.KeypadDirectionXOffset[dir];
+            int y = SaveGame.MapY + SaveGame.Level.KeypadDirectionYOffset[dir];
+            int x = SaveGame.MapX + SaveGame.Level.KeypadDirectionXOffset[dir];
             GridTile cPtr = SaveGame.Level.Grid[y][x];
             Monster mPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex];
             if (cPtr.MonsterIndex != 0 && (mPtr.IsVisible || SaveGame.Level.GridPassable(y, x)))

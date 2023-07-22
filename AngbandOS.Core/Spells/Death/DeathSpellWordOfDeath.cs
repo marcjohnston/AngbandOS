@@ -13,7 +13,7 @@ internal class DeathSpellWordOfDeath : Spell
     private DeathSpellWordOfDeath(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.DispelLiving(SaveGame.Player.ExperienceLevel * 3);
+        SaveGame.DispelLiving(SaveGame.ExperienceLevel * 3);
     }
 
     public override void CastFailed()
@@ -25,6 +25,6 @@ internal class DeathSpellWordOfDeath : Spell
     
     protected override string? Info()
     {
-        return $"dam {SaveGame.Player.ExperienceLevel * 3}";
+        return $"dam {SaveGame.ExperienceLevel * 3}";
     }
 }

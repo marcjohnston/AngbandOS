@@ -25,7 +25,7 @@ internal class NaivetyPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Naivety tries to reduce your wisdom
-        return SaveGame.Player.TryDecreasingAbilityScore(Ability.Wisdom);
+        return SaveGame.TryDecreasingAbilityScore(Ability.Wisdom);
     }
     public override bool Smash(int who, int y, int x)
     {

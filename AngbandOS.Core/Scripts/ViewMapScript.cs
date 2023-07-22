@@ -35,7 +35,7 @@ internal class ViewMapScript : Script
         SaveGame.Screen.Print(ColourEnum.Orange, "[Press any key to continue]", 43, 26);
         if (SaveGame.CurrentDepth == 0)
         {
-            SaveGame.Screen.Goto(SaveGame.Player.WildernessY + 2, SaveGame.Player.WildernessX + 2);
+            SaveGame.Screen.Goto(SaveGame.WildernessY + 2, SaveGame.WildernessX + 2);
         }
         else
         {

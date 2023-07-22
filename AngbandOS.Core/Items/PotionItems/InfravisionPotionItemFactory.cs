@@ -26,7 +26,7 @@ internal class InfravisionPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Infravision gives you timed infravision
-        return SaveGame.Player.TimedInfravision.AddTimer(100 + Program.Rng.DieRoll(100));
+        return SaveGame.TimedInfravision.AddTimer(100 + Program.Rng.DieRoll(100));
     }
     public override Item CreateItem() => new InfravisionPotionItem(SaveGame);
 }

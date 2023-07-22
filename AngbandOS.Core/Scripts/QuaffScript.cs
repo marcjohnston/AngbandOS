@@ -24,7 +24,7 @@ internal class QuaffScript : Script
             return false;
         }
         // Make sure the item is a potion
-        if (!SaveGame.Player.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Potion)))
+        if (!SaveGame.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Potion)))
         {
             SaveGame.MsgPrint("That is not a potion!");
             return false;
@@ -38,20 +38,20 @@ internal class QuaffScript : Script
         bool identified = potion.Quaff();
 
         // Skeletons are messy drinkers
-        SaveGame.Player.Race.Quaff(SaveGame, potion);
+        SaveGame.Race.Quaff(SaveGame, potion);
         SaveGame.NoticeCombineAndReorderFlaggedAction.Set();
         // We may now know the potion's type
         item.ObjectTried();
         if (identified && !item.IsFlavourAware())
         {
             item.BecomeFlavourAware();
-            SaveGame.Player.GainExperience((itemLevel + (SaveGame.Player.ExperienceLevel >> 1)) / SaveGame.Player.ExperienceLevel);
+            SaveGame.GainExperience((itemLevel + (SaveGame.ExperienceLevel >> 1)) / SaveGame.ExperienceLevel);
         }
         // Most potions give us a bit of food too
-        SaveGame.Player.SetFood(SaveGame.Player.Food + item.TypeSpecificValue);
+        SaveGame.SetFood(SaveGame.Food + item.TypeSpecificValue);
         bool channeled = false;
         // If we're a channeler, we might be able to spend mana instead of using it up
-        if (SaveGame.Player.BaseCharacterClass.SpellCastingType.CanUseManaInsteadOfConsumingItem)
+        if (SaveGame.BaseCharacterClass.SpellCastingType.CanUseManaInsteadOfConsumingItem)
         {
             channeled = SaveGame.DoCmdChannel(item);
         }

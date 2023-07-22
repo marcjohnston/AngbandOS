@@ -71,7 +71,7 @@ internal class PaladinCharacterClass : BaseCharacterClass
         if (SaveGame.ItemFilterHighLevelBook(item))
         {
             BookItem bookItem = (BookItem)item;
-            if (SaveGame.Player.Studies<LifeRealm>())
+            if (SaveGame.Studies<LifeRealm>())
             {
                 if (item.Category == ItemTypeEnum.DeathBook)
                 {

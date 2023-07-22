@@ -22,7 +22,7 @@ internal class CharmOtherActivation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.CharmMonster(direction, SaveGame.Player.ExperienceLevel);
+        SaveGame.CharmMonster(direction, SaveGame.ExperienceLevel);
         return true;
     }
 

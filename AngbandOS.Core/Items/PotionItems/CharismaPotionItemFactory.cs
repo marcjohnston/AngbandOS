@@ -26,7 +26,7 @@ internal class CharismaPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Charisma increases your charisma
-        return SaveGame.Player.TryIncreasingAbilityScore(Ability.Charisma);
+        return SaveGame.TryIncreasingAbilityScore(Ability.Charisma);
     }
     public override bool Smash(int who, int y, int x)
     {

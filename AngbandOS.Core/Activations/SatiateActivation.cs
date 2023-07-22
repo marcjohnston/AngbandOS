@@ -18,7 +18,7 @@ internal class SatiateActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.Player.SetFood(Constants.PyFoodMax - 1);
+        SaveGame.SetFood(Constants.PyFoodMax - 1);
         return true;
     }
 

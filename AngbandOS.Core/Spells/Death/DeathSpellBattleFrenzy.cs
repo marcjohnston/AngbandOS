@@ -13,16 +13,16 @@ internal class DeathSpellBattleFrenzy : Spell
     private DeathSpellBattleFrenzy(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Player.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(25) + 25);
-        SaveGame.Player.RestoreHealth(30);
-        SaveGame.Player.TimedFear.ResetTimer();
-        if (SaveGame.Player.TimedHaste.TurnsRemaining == 0)
+        SaveGame.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(25) + 25);
+        SaveGame.RestoreHealth(30);
+        SaveGame.TimedFear.ResetTimer();
+        if (SaveGame.TimedHaste.TurnsRemaining == 0)
         {
-            SaveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(20 + (SaveGame.Player.ExperienceLevel / 2)) + (SaveGame.Player.ExperienceLevel / 2));
+            SaveGame.TimedHaste.SetTimer(Program.Rng.DieRoll(20 + (SaveGame.ExperienceLevel / 2)) + (SaveGame.ExperienceLevel / 2));
         }
         else
         {
-            SaveGame.Player.TimedHaste.AddTimer(Program.Rng.DieRoll(5));
+            SaveGame.TimedHaste.AddTimer(Program.Rng.DieRoll(5));
         }
     }
 

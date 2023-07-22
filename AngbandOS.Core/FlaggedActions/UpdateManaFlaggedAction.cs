@@ -21,21 +21,21 @@ internal class UpdateManaFlaggedAction : FlaggedAction
     protected override void Execute()
     {
         
-        if (SaveGame.Player.BaseCharacterClass.SpellCastingType == null)
+        if (SaveGame.BaseCharacterClass.SpellCastingType == null)
         {
             return;
         }
-        int levels = SaveGame.Player.BaseCharacterClass.SpellCastingType.Levels;
+        int levels = SaveGame.BaseCharacterClass.SpellCastingType.Levels;
         if (levels < 0)
         {
             levels = 0;
         }
-        int msp = SaveGame.Player.AbilityScores[SaveGame.Player.BaseCharacterClass.SpellStat].ManaBonus * levels / 2;
+        int msp = SaveGame.AbilityScores[SaveGame.BaseCharacterClass.SpellStat].ManaBonus * levels / 2;
         if (msp != 0)
         {
             msp++;
         }
-        if (msp != 0 && SaveGame.Player.BaseCharacterClass.ID == CharacterClass.HighMage)
+        if (msp != 0 && SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage)
         {
             msp += msp / 4;
         }
@@ -47,7 +47,7 @@ internal class UpdateManaFlaggedAction : FlaggedAction
             msp = inventorySlot.CalcMana(SaveGame, msp);
         }
 
-        if (SaveGame.Player.BaseCharacterClass.SpellCastingType.WeightEncumbersMovement)
+        if (SaveGame.BaseCharacterClass.SpellCastingType.WeightEncumbersMovement)
         {
             int curWgt = 0;
             foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots)
@@ -64,7 +64,7 @@ internal class UpdateManaFlaggedAction : FlaggedAction
                     }
                 }
             }
-            int maxWgt = SaveGame.Player.BaseCharacterClass.SpellWeight;
+            int maxWgt = SaveGame.BaseCharacterClass.SpellWeight;
             if ((curWgt - maxWgt) / 10 > 0)
             {
                 msp -= (curWgt - maxWgt) / 10;
@@ -89,17 +89,17 @@ internal class UpdateManaFlaggedAction : FlaggedAction
             msp = 0;
         }
 
-        var mult = SaveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Tamash).AdjustedFavour + 10;
+        var mult = SaveGame.Religion.GetNamedDeity(Pantheon.GodName.Tamash).AdjustedFavour + 10;
         msp *= mult;
         msp /= 10;
-        if (SaveGame.Player.MaxMana != msp)
+        if (SaveGame.MaxMana != msp)
         {
-            if (SaveGame.Player.Mana >= msp)
+            if (SaveGame.Mana >= msp)
             {
-                SaveGame.Player.Mana = msp;
-                SaveGame.Player.FractionalMana = 0;
+                SaveGame.Mana = msp;
+                SaveGame.FractionalMana = 0;
             }
-            SaveGame.Player.MaxMana = msp;
+            SaveGame.MaxMana = msp;
             SaveGame.RedrawManaFlaggedAction.Set();
         }
     }

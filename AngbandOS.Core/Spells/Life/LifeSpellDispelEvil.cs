@@ -13,13 +13,13 @@ internal class LifeSpellDispelEvil : Spell
     private LifeSpellDispelEvil(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.DispelEvil(SaveGame.Player.ExperienceLevel * 4);
+        SaveGame.DispelEvil(SaveGame.ExperienceLevel * 4);
     }
 
     public override string Name => "Dispel Evil";
     
     protected override string? Info()
     {
-        return $"dam {4 * SaveGame.Player.ExperienceLevel}";
+        return $"dam {4 * SaveGame.ExperienceLevel}";
     }
 }

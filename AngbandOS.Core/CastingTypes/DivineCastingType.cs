@@ -11,7 +11,7 @@ namespace AngbandOS.Core.CastingTypes;
 internal class DivineCastingType : CastingType
 {
     private DivineCastingType(SaveGame saveGame) : base(saveGame) { }
-    public override int Levels => SaveGame.Player.ExperienceLevel - SaveGame.SpellFirst + 1;
+    public override int Levels => SaveGame.ExperienceLevel - SaveGame.SpellFirst + 1;
 
     /// <summary>
     /// Returns "recite" because the divine casting type recites prayers; as opposed to casting spells.

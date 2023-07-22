@@ -24,8 +24,8 @@ internal class RedrawPlayerFlaggedAction : FlaggedAction
     }
     protected override void Execute()
     {
-        PrtField(SaveGame.Player.Name, RowName, ColName);
-        PrtField(SaveGame.Player.Race.Title, RowRace, ColRace);
-        PrtField(SaveGame.Player.BaseCharacterClass.ClassSubName(SaveGame.Player.PrimaryRealm), RowClass, ColClass);
+        PrtField(SaveGame.Name, RowName, ColName);
+        PrtField(SaveGame.Race.Title, RowRace, ColRace);
+        PrtField(SaveGame.BaseCharacterClass.ClassSubName(SaveGame.PrimaryRealm), RowClass, ColClass);
     }
 }

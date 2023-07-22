@@ -13,9 +13,9 @@ internal class NatureSpellNaturesWrath : Spell
     private NatureSpellNaturesWrath(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.DispelMonsters(SaveGame.Player.ExperienceLevel * 4);
-        SaveGame.Earthquake(SaveGame.Player.MapY, SaveGame.Player.MapX, 20 + (SaveGame.Player.ExperienceLevel / 2));
-        SaveGame.Project(0, 1 + (SaveGame.Player.ExperienceLevel / 12), SaveGame.Player.MapY, SaveGame.Player.MapX, 100 + SaveGame.Player.ExperienceLevel,
+        SaveGame.DispelMonsters(SaveGame.ExperienceLevel * 4);
+        SaveGame.Earthquake(SaveGame.MapY, SaveGame.MapX, 20 + (SaveGame.ExperienceLevel / 2));
+        SaveGame.Project(0, 1 + (SaveGame.ExperienceLevel / 12), SaveGame.MapY, SaveGame.MapX, 100 + SaveGame.ExperienceLevel,
             SaveGame.SingletonRepository.Projectiles.Get<DisintegrateProjectile>(), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
     }
 
@@ -23,6 +23,6 @@ internal class NatureSpellNaturesWrath : Spell
     
     protected override string? Info()
     {
-        return $"dam {4 * SaveGame.Player.ExperienceLevel}+{100 + SaveGame.Player.ExperienceLevel}";
+        return $"dam {4 * SaveGame.ExperienceLevel}+{100 + SaveGame.ExperienceLevel}";
     }
 }

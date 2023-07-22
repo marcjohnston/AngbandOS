@@ -24,17 +24,17 @@ internal class MutationSpToHp : Mutation
         {
             return;
         }
-        int wounds = saveGame.Player.MaxHealth - saveGame.Player.Health;
+        int wounds = saveGame.MaxHealth - saveGame.Health;
         if (wounds <= 0)
         {
             return;
         }
-        int healing = saveGame.Player.Mana;
+        int healing = saveGame.Mana;
         if (healing > wounds)
         {
             healing = wounds;
         }
-        saveGame.Player.RestoreHealth(healing);
-        saveGame.Player.Mana -= healing;
+        saveGame.RestoreHealth(healing);
+        saveGame.Mana -= healing;
     }
 }

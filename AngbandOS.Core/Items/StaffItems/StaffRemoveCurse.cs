@@ -28,7 +28,7 @@ internal class StaffRemoveCurse : StaffItemClass
     {
         if (SaveGame.RemoveCurse())
         {
-            if (SaveGame.Player.TimedBlindness.TurnsRemaining == 0)
+            if (SaveGame.TimedBlindness.TurnsRemaining == 0)
             {
                 SaveGame.MsgPrint("The staff glows blue for a moment...");
             }

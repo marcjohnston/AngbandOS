@@ -41,7 +41,7 @@ internal class RenderCharacterScript : Script
         string bonus4 = string.Empty;
         string bonus5 = string.Empty;
         // Get the score
-        AbilityScore ability = SaveGame.Player.AbilityScores[abilityIndex];
+        AbilityScore ability = SaveGame.AbilityScores[abilityIndex];
         // Fill in up to five pieces of bonus text
         switch (abilityIndex)
         {
@@ -101,13 +101,13 @@ internal class RenderCharacterScript : Script
                 break;
         }
         // Add the bonus text for spell casting abilities
-        if (SaveGame.Player.BaseCharacterClass.SpellStat == abilityIndex && abilityIndex != Ability.Strength)
+        if (SaveGame.BaseCharacterClass.SpellStat == abilityIndex && abilityIndex != Ability.Strength)
         {
             int mana = ability.ManaBonus;
             // Casting abilities only have one or two inherent bonuses, so it's safe to start at three
             bonus3 = mana % 2 == 0 ? $", {mana / 2} SP/lvl" : $", {mana / 2}.5 SP/lvl";
             // Not all casting classes have actual spells
-            if (SaveGame.Player.BaseCharacterClass.ID != CharacterClass.Mindcrafter && SaveGame.Player.BaseCharacterClass.ID != CharacterClass.Mystic && SaveGame.Player.BaseCharacterClass.ID != CharacterClass.Channeler)
+            if (SaveGame.BaseCharacterClass.ID != CharacterClass.Mindcrafter && SaveGame.BaseCharacterClass.ID != CharacterClass.Mystic && SaveGame.BaseCharacterClass.ID != CharacterClass.Channeler)
             {
                 int spells = ability.HalfSpellsPerLevel;
                 if (spells == 2)
@@ -124,7 +124,7 @@ internal class RenderCharacterScript : Script
                 }
             }
             // Almost all casting classes have a failure chance
-            if (SaveGame.Player.BaseCharacterClass.ID != CharacterClass.Channeler)
+            if (SaveGame.BaseCharacterClass.ID != CharacterClass.Channeler)
             {
                 int fail = ability.SpellMinFailChance;
                 bonus5 = $", {fail}% min fail";
@@ -144,10 +144,10 @@ internal class RenderCharacterScript : Script
         {
             string buf;
             // If they've been drained, make them visually distinct
-            if (SaveGame.Player.AbilityScores[i].Innate < SaveGame.Player.AbilityScores[i].InnateMax)
+            if (SaveGame.AbilityScores[i].Innate < SaveGame.AbilityScores[i].InnateMax)
             {
                 SaveGame.Screen.Print(ColourEnum.Blue, Constants.StatNamesReduced[i], 14 + i, 1);
-                int value = SaveGame.Player.AbilityScores[i].Adjusted;
+                int value = SaveGame.AbilityScores[i].Adjusted;
                 buf = value.StatToString();
                 SaveGame.Screen.Print(ColourEnum.Grey, buf, 14 + i, 6);
                 buf = AbilitySummary(i);
@@ -156,7 +156,7 @@ internal class RenderCharacterScript : Script
             else
             {
                 SaveGame.Screen.Print(ColourEnum.Blue, Constants.StatNames[i], 14 + i, 1);
-                buf = SaveGame.Player.AbilityScores[i].Adjusted.StatToString();
+                buf = SaveGame.AbilityScores[i].Adjusted.StatToString();
                 SaveGame.Screen.Print(ColourEnum.Green, buf, 14 + i, 6);
                 buf = AbilitySummary(i);
                 SaveGame.Screen.Print(ColourEnum.Green, buf, i + 14, 13);
@@ -218,40 +218,40 @@ internal class RenderCharacterScript : Script
         {
             // Reverse engineer our equipment bonuses from our score
             int equipmentBonuses = 0;
-            if (SaveGame.Player.AbilityScores[i].InnateMax > 18 && SaveGame.Player.AbilityScores[i].AdjustedMax > 18)
+            if (SaveGame.AbilityScores[i].InnateMax > 18 && SaveGame.AbilityScores[i].AdjustedMax > 18)
             {
-                equipmentBonuses = (SaveGame.Player.AbilityScores[i].AdjustedMax - SaveGame.Player.AbilityScores[i].InnateMax) / 10;
+                equipmentBonuses = (SaveGame.AbilityScores[i].AdjustedMax - SaveGame.AbilityScores[i].InnateMax) / 10;
             }
-            if (SaveGame.Player.AbilityScores[i].InnateMax <= 18 && SaveGame.Player.AbilityScores[i].AdjustedMax <= 18)
+            if (SaveGame.AbilityScores[i].InnateMax <= 18 && SaveGame.AbilityScores[i].AdjustedMax <= 18)
             {
-                equipmentBonuses = SaveGame.Player.AbilityScores[i].AdjustedMax - SaveGame.Player.AbilityScores[i].InnateMax;
+                equipmentBonuses = SaveGame.AbilityScores[i].AdjustedMax - SaveGame.AbilityScores[i].InnateMax;
             }
-            if (SaveGame.Player.AbilityScores[i].InnateMax <= 18 && SaveGame.Player.AbilityScores[i].AdjustedMax > 18)
+            if (SaveGame.AbilityScores[i].InnateMax <= 18 && SaveGame.AbilityScores[i].AdjustedMax > 18)
             {
-                equipmentBonuses = ((SaveGame.Player.AbilityScores[i].AdjustedMax - 18) / 10) - SaveGame.Player.AbilityScores[i].InnateMax + 18;
+                equipmentBonuses = ((SaveGame.AbilityScores[i].AdjustedMax - 18) / 10) - SaveGame.AbilityScores[i].InnateMax + 18;
             }
-            if (SaveGame.Player.AbilityScores[i].InnateMax > 18 && SaveGame.Player.AbilityScores[i].AdjustedMax <= 18)
+            if (SaveGame.AbilityScores[i].InnateMax > 18 && SaveGame.AbilityScores[i].AdjustedMax <= 18)
             {
-                equipmentBonuses = SaveGame.Player.AbilityScores[i].AdjustedMax - ((SaveGame.Player.AbilityScores[i].InnateMax - 18) / 10) - 19;
+                equipmentBonuses = SaveGame.AbilityScores[i].AdjustedMax - ((SaveGame.AbilityScores[i].InnateMax - 18) / 10) - 19;
             }
             // Take out the bonuses we got for our our race and profession
-            equipmentBonuses -= SaveGame.Player.Race.AbilityBonus[i];
-            equipmentBonuses -= SaveGame.Player.BaseCharacterClass.AbilityBonus[i];
+            equipmentBonuses -= SaveGame.Race.AbilityBonus[i];
+            equipmentBonuses -= SaveGame.BaseCharacterClass.AbilityBonus[i];
             // Print each of the scores and bonuses
             SaveGame.Screen.Print(ColourEnum.Blue, Constants.StatNames[i], row + i, statCol);
-            string buf = SaveGame.Player.AbilityScores[i].InnateMax.StatToString();
+            string buf = SaveGame.AbilityScores[i].InnateMax.StatToString();
             SaveGame.Screen.Print(ColourEnum.Purple, buf, row + i, statCol + 4);
-            buf = SaveGame.Player.Race.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
+            buf = SaveGame.Race.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
             SaveGame.Screen.Print(ColourEnum.Brown, buf, row + i, statCol + 13);
-            buf = SaveGame.Player.BaseCharacterClass.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
+            buf = SaveGame.BaseCharacterClass.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3);
             SaveGame.Screen.Print(ColourEnum.Brown, buf, row + i, statCol + 19);
             buf = equipmentBonuses.ToString("+0;-0;+0").PadLeft(3);
             SaveGame.Screen.Print(ColourEnum.Brown, buf, row + i, statCol + 24);
-            buf = SaveGame.Player.AbilityScores[i].AdjustedMax.StatToString();
+            buf = SaveGame.AbilityScores[i].AdjustedMax.StatToString();
             SaveGame.Screen.Print(ColourEnum.Green, buf, row + i, statCol + 27);
-            if (SaveGame.Player.AbilityScores[i].Adjusted < SaveGame.Player.AbilityScores[i].AdjustedMax)
+            if (SaveGame.AbilityScores[i].Adjusted < SaveGame.AbilityScores[i].AdjustedMax)
             {
-                buf = SaveGame.Player.AbilityScores[i].Adjusted.StatToString();
+                buf = SaveGame.AbilityScores[i].Adjusted.StatToString();
                 SaveGame.Screen.Print(ColourEnum.Red, buf, row + i, statCol + 35);
             }
         }
@@ -289,13 +289,13 @@ internal class RenderCharacterScript : Script
             }
         }
 
-        ItemCharacteristics playerCharacteristics = SaveGame.Player.GetAbilitiesAsItemFlags();
-        DisplayPlayerStatWithModification(SaveGame.Player.Dna.StrengthBonus, playerCharacteristics.Str, row + 0, col);
-        DisplayPlayerStatWithModification(SaveGame.Player.Dna.IntelligenceBonus, playerCharacteristics.Int, row + 1, col);
-        DisplayPlayerStatWithModification(SaveGame.Player.Dna.WisdomBonus, playerCharacteristics.Wis, row + 2, col);
-        DisplayPlayerStatWithModification(SaveGame.Player.Dna.DexterityBonus, playerCharacteristics.Dex, row + 3, col);
-        DisplayPlayerStatWithModification(SaveGame.Player.Dna.ConstitutionBonus, playerCharacteristics.Con, row + 4, col);
-        DisplayPlayerStatWithModification(SaveGame.Player.Dna.CharismaBonus, playerCharacteristics.Cha, row + 5, col);
+        ItemCharacteristics playerCharacteristics = SaveGame.GetAbilitiesAsItemFlags();
+        DisplayPlayerStatWithModification(SaveGame.Dna.StrengthBonus, playerCharacteristics.Str, row + 0, col);
+        DisplayPlayerStatWithModification(SaveGame.Dna.IntelligenceBonus, playerCharacteristics.Int, row + 1, col);
+        DisplayPlayerStatWithModification(SaveGame.Dna.WisdomBonus, playerCharacteristics.Wis, row + 2, col);
+        DisplayPlayerStatWithModification(SaveGame.Dna.DexterityBonus, playerCharacteristics.Dex, row + 3, col);
+        DisplayPlayerStatWithModification(SaveGame.Dna.ConstitutionBonus, playerCharacteristics.Con, row + 4, col);
+        DisplayPlayerStatWithModification(SaveGame.Dna.CharismaBonus, playerCharacteristics.Cha, row + 5, col);
     }
 
     private void DisplayPlayerStatWithModification(int extraModifier, bool isSet, int row, int col)
@@ -335,8 +335,8 @@ internal class RenderCharacterScript : Script
     /// </summary>
     private void DisplayPlayerEssentials()
     {
-        int showTohit = SaveGame.Player.DisplayedAttackBonus;
-        int showTodam = SaveGame.Player.DisplayedDamageBonus;
+        int showTohit = SaveGame.DisplayedAttackBonus;
+        int showTodam = SaveGame.DisplayedDamageBonus;
         MeleeWeaponInventorySlot meeleeWeaponInventorySlot = SaveGame.SingletonRepository.InventorySlots.Get<MeleeWeaponInventorySlot>();
         Item? item = SaveGame.GetInventoryItem(meeleeWeaponInventorySlot.WeightedRandom.Choose());
         // Only show bonuses if we know them
@@ -348,51 +348,51 @@ internal class RenderCharacterScript : Script
         // Print some basics
         PrintBonus("+ To Hit    ", showTohit, 30, 1, ColourEnum.Brown);
         PrintBonus("+ To Damage ", showTodam, 31, 1, ColourEnum.Brown);
-        PrintBonus("+ To AC     ", SaveGame.Player.DisplayedArmourClassBonus, 32, 1, ColourEnum.Brown);
-        PrintShortScore("  Base AC   ", SaveGame.Player.DisplayedBaseArmourClass, 33, 1, ColourEnum.Brown);
-        PrintShortScore("Level      ", SaveGame.Player.ExperienceLevel, 30, 28, ColourEnum.Green);
-        PrintLongScore("Experience ", SaveGame.Player.ExperiencePoints, 31, 28,
-            SaveGame.Player.ExperiencePoints >= SaveGame.Player.MaxExperienceGained ? ColourEnum.Green : ColourEnum.Red);
-        PrintLongScore("Max Exp    ", SaveGame.Player.MaxExperienceGained, 32, 28, ColourEnum.Green);
+        PrintBonus("+ To AC     ", SaveGame.DisplayedArmourClassBonus, 32, 1, ColourEnum.Brown);
+        PrintShortScore("  Base AC   ", SaveGame.DisplayedBaseArmourClass, 33, 1, ColourEnum.Brown);
+        PrintShortScore("Level      ", SaveGame.ExperienceLevel, 30, 28, ColourEnum.Green);
+        PrintLongScore("Experience ", SaveGame.ExperiencePoints, 31, 28,
+            SaveGame.ExperiencePoints >= SaveGame.MaxExperienceGained ? ColourEnum.Green : ColourEnum.Red);
+        PrintLongScore("Max Exp    ", SaveGame.MaxExperienceGained, 32, 28, ColourEnum.Green);
         // If we're max level we don't have any experience to advance
-        if (SaveGame.Player.ExperienceLevel >= Constants.PyMaxLevel)
+        if (SaveGame.ExperienceLevel >= Constants.PyMaxLevel)
         {
             SaveGame.Screen.Print(ColourEnum.Blue, "Exp to Adv.", 33, 28);
             SaveGame.Screen.Print(ColourEnum.Green, "    *****", 33, 28 + 11);
         }
         else
         {
-            PrintLongScore("Exp to Adv.", (int)(Constants.PlayerExp[SaveGame.Player.ExperienceLevel - 1] * SaveGame.Player.ExperienceMultiplier / 100L), 33, 28,
+            PrintLongScore("Exp to Adv.", (int)(Constants.PlayerExp[SaveGame.ExperienceLevel - 1] * SaveGame.ExperienceMultiplier / 100L), 33, 28,
                 ColourEnum.Green);
         }
-        PrintLongScore("Exp Factor ", SaveGame.Player.ExperienceMultiplier, 34, 28, ColourEnum.Green);
-        PrintShortScore("Max Hit Points ", SaveGame.Player.MaxHealth, 30, 52, ColourEnum.Green);
-        if (SaveGame.Player.Health >= SaveGame.Player.MaxHealth)
+        PrintLongScore("Exp Factor ", SaveGame.ExperienceMultiplier, 34, 28, ColourEnum.Green);
+        PrintShortScore("Max Hit Points ", SaveGame.MaxHealth, 30, 52, ColourEnum.Green);
+        if (SaveGame.Health >= SaveGame.MaxHealth)
         {
-            PrintShortScore("Cur Hit Points ", SaveGame.Player.Health, 31, 52, ColourEnum.Green);
+            PrintShortScore("Cur Hit Points ", SaveGame.Health, 31, 52, ColourEnum.Green);
         }
-        else if (SaveGame.Player.Health > SaveGame.Player.MaxHealth * Constants.HitpointWarn / 10)
+        else if (SaveGame.Health > SaveGame.MaxHealth * Constants.HitpointWarn / 10)
         {
-            PrintShortScore("Cur Hit Points ", SaveGame.Player.Health, 31, 52, ColourEnum.BrightYellow);
-        }
-        else
-        {
-            PrintShortScore("Cur Hit Points ", SaveGame.Player.Health, 31, 52, ColourEnum.BrightRed);
-        }
-        PrintShortScore("Max SP (Mana)  ", SaveGame.Player.MaxMana, 32, 52, ColourEnum.Green);
-        if (SaveGame.Player.Mana >= SaveGame.Player.MaxMana)
-        {
-            PrintShortScore("Cur SP (Mana)  ", SaveGame.Player.Mana, 33, 52, ColourEnum.Green);
-        }
-        else if (SaveGame.Player.Mana > SaveGame.Player.MaxMana * Constants.HitpointWarn / 10)
-        {
-            PrintShortScore("Cur SP (Mana)  ", SaveGame.Player.Mana, 33, 52, ColourEnum.BrightYellow);
+            PrintShortScore("Cur Hit Points ", SaveGame.Health, 31, 52, ColourEnum.BrightYellow);
         }
         else
         {
-            PrintShortScore("Cur SP (Mana)  ", SaveGame.Player.Mana, 33, 52, ColourEnum.BrightRed);
+            PrintShortScore("Cur Hit Points ", SaveGame.Health, 31, 52, ColourEnum.BrightRed);
         }
-        PrintLongScore("Gold           ", SaveGame.Player.Gold, 34, 52, ColourEnum.Green);
+        PrintShortScore("Max SP (Mana)  ", SaveGame.MaxMana, 32, 52, ColourEnum.Green);
+        if (SaveGame.Mana >= SaveGame.MaxMana)
+        {
+            PrintShortScore("Cur SP (Mana)  ", SaveGame.Mana, 33, 52, ColourEnum.Green);
+        }
+        else if (SaveGame.Mana > SaveGame.MaxMana * Constants.HitpointWarn / 10)
+        {
+            PrintShortScore("Cur SP (Mana)  ", SaveGame.Mana, 33, 52, ColourEnum.BrightYellow);
+        }
+        else
+        {
+            PrintShortScore("Cur SP (Mana)  ", SaveGame.Mana, 33, 52, ColourEnum.BrightRed);
+        }
+        PrintLongScore("Gold           ", SaveGame.Gold, 34, 52, ColourEnum.Green);
     }
 
     /// <summary>
@@ -402,7 +402,7 @@ internal class RenderCharacterScript : Script
     {
         for (int i = 0; i < 4; i++)
         {
-            SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.Player.History[i], i + 9, 10);
+            SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.History[i], i + 9, 10);
         }
     }
 
@@ -415,11 +415,11 @@ internal class RenderCharacterScript : Script
         int index = meeleeWeaponInventorySlot.WeightedRandom.Choose();
         Item? meeleeItem = SaveGame.GetInventoryItem(index);
 
-        int dambonus = SaveGame.Player.DisplayedDamageBonus;
+        int dambonus = SaveGame.DisplayedDamageBonus;
         // Only include weapon damage if the player knows what it is
         int damdice = 0;
         int damsides = 0;
-        int fighting = SaveGame.Player.SkillMelee + (SaveGame.Player.AttackBonus * Constants.BthPlusAdj);
+        int fighting = SaveGame.SkillMelee + (SaveGame.AttackBonus * Constants.BthPlusAdj);
         if (meeleeItem != null)
         {
             fighting += meeleeItem.BonusToHit * Constants.BthPlusAdj;
@@ -434,19 +434,19 @@ internal class RenderCharacterScript : Script
 
         RangedWeaponInventorySlot rangedWeaponInventorySlot = SaveGame.SingletonRepository.InventorySlots.Get<RangedWeaponInventorySlot>();
         Item? rangedItem = SaveGame.GetInventoryItem(rangedWeaponInventorySlot.WeightedRandom.Choose());
-        int shooting = SaveGame.Player.SkillRanged + (SaveGame.Player.AttackBonus * Constants.BthPlusAdj);
+        int shooting = SaveGame.SkillRanged + (SaveGame.AttackBonus * Constants.BthPlusAdj);
         if (rangedItem != null)
         {
             shooting += rangedItem.BonusToHit * Constants.BthPlusAdj;
         }
 
-        int attacksPerRound = SaveGame.Player.MeleeAttacksPerRound;
-        int disarmTraps = SaveGame.Player.SkillDisarmTraps;
-        int useDevice = SaveGame.Player.SkillUseDevice;
-        int savingThrow = SaveGame.Player.SkillSavingThrow;
-        int stealth = SaveGame.Player.SkillStealth;
-        int searching = SaveGame.Player.SkillSearching;
-        int searchFrequency = SaveGame.Player.SkillSearchFrequency;
+        int attacksPerRound = SaveGame.MeleeAttacksPerRound;
+        int disarmTraps = SaveGame.SkillDisarmTraps;
+        int useDevice = SaveGame.SkillUseDevice;
+        int savingThrow = SaveGame.SkillSavingThrow;
+        int stealth = SaveGame.SkillStealth;
+        int searching = SaveGame.SkillSearching;
+        int searchFrequency = SaveGame.SkillSearchFrequency;
         SaveGame.Screen.Print(ColourEnum.Blue, "Fighting    :", 36, 1);
         PrintCategorisedNumber(fighting, 12, 36, 15);
         SaveGame.Screen.Print(ColourEnum.Blue, "Shooting    :", 37, 1);
@@ -464,7 +464,7 @@ internal class RenderCharacterScript : Script
         SaveGame.Screen.Print(ColourEnum.Blue, "Magic Device:", 39, 28);
         PrintCategorisedNumber(useDevice, 6, 39, 42);
         SaveGame.Screen.Print(ColourEnum.Blue, "Blows/Action:", 36, 55);
-        SaveGame.Screen.Print(ColourEnum.Green, $"{SaveGame.Player.MeleeAttacksPerRound}", 36, 69);
+        SaveGame.Screen.Print(ColourEnum.Green, $"{SaveGame.MeleeAttacksPerRound}", 36, 69);
         SaveGame.Screen.Print(ColourEnum.Blue, "Tot.Dmg./Act:", 37, 55);
         // Work out damage per action
         var buf = string.Empty;
@@ -480,9 +480,9 @@ internal class RenderCharacterScript : Script
         }
         SaveGame.Screen.Print(ColourEnum.Green, buf, 37, 69);
         SaveGame.Screen.Print(ColourEnum.Blue, "Shots/Action:", 38, 55);
-        SaveGame.Screen.Print(ColourEnum.Green, $"{SaveGame.Player.MissileAttacksPerRound}", 38, 69);
+        SaveGame.Screen.Print(ColourEnum.Green, $"{SaveGame.MissileAttacksPerRound}", 38, 69);
         SaveGame.Screen.Print(ColourEnum.Blue, "Infra-Vision:", 39, 55);
-        SaveGame.Screen.Print(ColourEnum.Green, $"{SaveGame.Player.InfravisionRange * 10} feet", 39, 69);
+        SaveGame.Screen.Print(ColourEnum.Green, $"{SaveGame.InfravisionRange * 10} feet", 39, 69);
     }
 
     /// <summary>
@@ -494,58 +494,58 @@ internal class RenderCharacterScript : Script
         SaveGame.Screen.Print(ColourEnum.Blue, "Gender      :", 3, 1);
         SaveGame.Screen.Print(ColourEnum.Blue, "Race        :", 4, 1);
         SaveGame.Screen.Print(ColourEnum.Blue, "Class       :", 5, 1);
-        if (SaveGame.Player.CanCastSpells)
+        if (SaveGame.CanCastSpells)
         {
             SaveGame.Screen.Print(ColourEnum.Blue, "Magic       :", 6, 1);
         }
-        SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.Player.Name, 2, 15);
-        SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.Player.Gender.Title, 3, 15);
-        SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.Player.Race.Title, 4, 15);
-        SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.Player.BaseCharacterClass.ClassSubName(SaveGame.Player.PrimaryRealm), 5, 15);
+        SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.Name, 2, 15);
+        SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.Gender.Title, 3, 15);
+        SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.Race.Title, 4, 15);
+        SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.BaseCharacterClass.ClassSubName(SaveGame.PrimaryRealm), 5, 15);
         // Only print realms if we have them
-        if (SaveGame.Player.PrimaryRealm != null)
+        if (SaveGame.PrimaryRealm != null)
         {
-            string realmBuff = SaveGame.RealmNames(SaveGame.Player.PrimaryRealm, SaveGame.Player.SecondaryRealm);
+            string realmBuff = SaveGame.RealmNames(SaveGame.PrimaryRealm, SaveGame.SecondaryRealm);
             SaveGame.Screen.Print(ColourEnum.Brown, realmBuff, 6, 15);
         }
         // Fanatics and Cultists get a patron
-        if (SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Fanatic || SaveGame.Player.BaseCharacterClass.ID == CharacterClass.Cultist)
+        if (SaveGame.BaseCharacterClass.ID == CharacterClass.Fanatic || SaveGame.BaseCharacterClass.ID == CharacterClass.Cultist)
         {
             SaveGame.Screen.Print(ColourEnum.Blue, "Patron      :", 7, 1);
-            SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.Player.GooPatron.LongName, 7, 15);
+            SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.GooPatron.LongName, 7, 15);
         }
         // Priests get a deity
-        if (SaveGame.Player.Religion.Deity != GodName.None)
+        if (SaveGame.Religion.Deity != GodName.None)
         {
             SaveGame.Screen.Print(ColourEnum.Blue, "Deity       :", 7, 1);
-            SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.Player.Religion.GetPatronDeity().LongName, 7, 15);
+            SaveGame.Screen.Print(ColourEnum.Brown, SaveGame.Religion.GetPatronDeity().LongName, 7, 15);
         }
         SaveGame.Screen.Print(ColourEnum.Blue, "Birthday", 2, 32);
-        string dateBuff = SaveGame.Player.GameTime.BirthdayText.PadLeft(8);
+        string dateBuff = SaveGame.GameTime.BirthdayText.PadLeft(8);
         SaveGame.Screen.Print(ColourEnum.Brown, dateBuff, 2, 46);
-        PrintShortScore("Age          ", SaveGame.Player.Age, 3, 32, ColourEnum.Brown);
-        PrintShortScore("Height       ", SaveGame.Player.Height, 4, 32, ColourEnum.Brown);
-        PrintShortScore("Weight       ", SaveGame.Player.Weight, 5, 32, ColourEnum.Brown);
-        PrintShortScore("Social Class ", SaveGame.Player.SocialClass, 6, 32, ColourEnum.Brown);
+        PrintShortScore("Age          ", SaveGame.Age, 3, 32, ColourEnum.Brown);
+        PrintShortScore("Height       ", SaveGame.Height, 4, 32, ColourEnum.Brown);
+        PrintShortScore("Weight       ", SaveGame.Weight, 5, 32, ColourEnum.Brown);
+        PrintShortScore("Social Class ", SaveGame.SocialClass, 6, 32, ColourEnum.Brown);
         int i;
         // Print a quick summary of ability scores, but no detail
         for (i = 0; i < 6; i++)
         {
             string buf;
-            if (SaveGame.Player.AbilityScores[i].Innate < SaveGame.Player.AbilityScores[i].InnateMax)
+            if (SaveGame.AbilityScores[i].Innate < SaveGame.AbilityScores[i].InnateMax)
             {
                 SaveGame.Screen.Print(ColourEnum.Blue, Constants.StatNamesReduced[i], 2 + i, 61);
-                int value = SaveGame.Player.AbilityScores[i].Adjusted;
+                int value = SaveGame.AbilityScores[i].Adjusted;
                 buf = value.StatToString();
                 SaveGame.Screen.Print(ColourEnum.Red, buf, 2 + i, 66);
-                value = SaveGame.Player.AbilityScores[i].AdjustedMax;
+                value = SaveGame.AbilityScores[i].AdjustedMax;
                 buf = value.StatToString();
                 SaveGame.Screen.Print(ColourEnum.Green, buf, 2 + i, 73);
             }
             else
             {
                 SaveGame.Screen.Print(ColourEnum.Blue, Constants.StatNames[i], 2 + i, 61);
-                buf = SaveGame.Player.AbilityScores[i].Adjusted.StatToString();
+                buf = SaveGame.AbilityScores[i].Adjusted.StatToString();
                 SaveGame.Screen.Print(ColourEnum.Green, buf, 2 + i, 66);
             }
         }

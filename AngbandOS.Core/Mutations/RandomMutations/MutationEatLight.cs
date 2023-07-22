@@ -26,9 +26,9 @@ internal class MutationEatLight : Mutation
         }
         saveGame.MsgPrint("A shadow passes over you.");
         saveGame.MsgPrint(null);
-        if (saveGame.Level.Grid[saveGame.Player.MapY][saveGame.Player.MapX].TileFlags.IsSet(GridTile.SelfLit))
+        if (saveGame.Level.Grid[saveGame.MapY][saveGame.MapX].TileFlags.IsSet(GridTile.SelfLit))
         {
-            saveGame.Player.RestoreHealth(10);
+            saveGame.RestoreHealth(10);
         }
         BaseInventorySlot? inventorySlot = saveGame.SingletonRepository.InventorySlots.ToWeightedRandom(_inventorySlot => _inventorySlot.ProvidesLight).Choose();
         if (inventorySlot == null)
@@ -42,10 +42,10 @@ internal class MutationEatLight : Mutation
             LightSourceItem? lightSourceItem = oPtr.TryCast<LightSourceItem>();
             if (lightSourceItem != null && lightSourceItem.Factory.BurnRate > 0 && oPtr.TypeSpecificValue > 0)
             {
-                saveGame.Player.RestoreHealth(oPtr.TypeSpecificValue / 20);
+                saveGame.RestoreHealth(oPtr.TypeSpecificValue / 20);
                 oPtr.TypeSpecificValue /= 2;
                 saveGame.MsgPrint("You absorb energy from your light!");
-                if (saveGame.Player.TimedBlindness.TurnsRemaining != 0)
+                if (saveGame.TimedBlindness.TurnsRemaining != 0)
                 {
                     if (oPtr.TypeSpecificValue == 0)
                     {

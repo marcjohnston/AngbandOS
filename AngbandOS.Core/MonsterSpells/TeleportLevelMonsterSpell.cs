@@ -20,11 +20,11 @@ internal class TeleportLevelMonsterSpell : MonsterSpell
     public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
     {
 
-        if (saveGame.Player.HasNexusResistance)
+        if (saveGame.HasNexusResistance)
         {
             saveGame.MsgPrint("You are unaffected!");
         }
-        else if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
+        else if (Program.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
         {
             saveGame.MsgPrint("You resist the effects!");
         }

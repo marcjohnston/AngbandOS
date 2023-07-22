@@ -18,21 +18,21 @@ internal class SearchScript : Script
     public override bool Execute()
     {
         // The basic chance is equal to our searching skill
-        int chance = SaveGame.Player.SkillSearching;
+        int chance = SaveGame.SkillSearching;
         // If we can't see it's hard to search
-        if (SaveGame.Player.TimedBlindness.TurnsRemaining != 0 || SaveGame.Level.NoLight())
+        if (SaveGame.TimedBlindness.TurnsRemaining != 0 || SaveGame.Level.NoLight())
         {
             chance /= 10;
         }
         // If we're confused it's hard to search
-        if (SaveGame.Player.TimedConfusion.TurnsRemaining != 0 || SaveGame.Player.TimedHallucinations.TurnsRemaining != 0)
+        if (SaveGame.TimedConfusion.TurnsRemaining != 0 || SaveGame.TimedHallucinations.TurnsRemaining != 0)
         {
             chance /= 10;
         }
         // Check the eight squares around us
-        for (int y = SaveGame.Player.MapY - 1; y <= SaveGame.Player.MapY + 1; y++)
+        for (int y = SaveGame.MapY - 1; y <= SaveGame.MapY + 1; y++)
         {
-            for (int x = SaveGame.Player.MapX - 1; x <= SaveGame.Player.MapX + 1; x++)
+            for (int x = SaveGame.MapX - 1; x <= SaveGame.MapX + 1; x++)
             {
                 // Check if we succeed
                 if (Program.Rng.RandomLessThan(100) < chance)
@@ -50,7 +50,7 @@ internal class SearchScript : Script
                     {
                         // Replace the secret door with a visible door
                         SaveGame.MsgPrint("You have found a secret door.");
-                        SaveGame.Player.GainExperience(1);
+                        SaveGame.GainExperience(1);
                         SaveGame.Level.ReplaceSecretDoor(y, x);
                         SaveGame.Disturb(false);
                     }

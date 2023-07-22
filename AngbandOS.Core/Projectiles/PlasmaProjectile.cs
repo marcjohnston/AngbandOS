@@ -118,7 +118,7 @@ internal class PlasmaProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
         if (dam > 1600)
         {
             dam = 1600;
@@ -130,15 +130,15 @@ internal class PlasmaProjectile : Projectile
         {
             SaveGame.MsgPrint("You are hit by something *HOT*!");
         }
-        SaveGame.Player.TakeHit(dam, killer);
-        if (!SaveGame.Player.HasSoundResistance)
+        SaveGame.TakeHit(dam, killer);
+        if (!SaveGame.HasSoundResistance)
         {
             int kk = Program.Rng.DieRoll(dam > 40 ? 35 : (dam * 3 / 4) + 5);
-            SaveGame.Player.TimedStun.AddTimer(kk);
+            SaveGame.TimedStun.AddTimer(kk);
         }
-        if (!(SaveGame.Player.HasFireResistance || SaveGame.Player.TimedFireResistance.TurnsRemaining != 0 || SaveGame.Player.HasFireImmunity))
+        if (!(SaveGame.HasFireResistance || SaveGame.TimedFireResistance.TurnsRemaining != 0 || SaveGame.HasFireImmunity))
         {
-            SaveGame.Player.InvenDamage(SaveGame.SetAcidDestroy, 3);
+            SaveGame.InvenDamage(SaveGame.SetAcidDestroy, 3);
         }
         return true;
     }

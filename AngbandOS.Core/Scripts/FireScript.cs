@@ -24,7 +24,7 @@ internal class FireScript : Script
             return false;
         }
         // Get the ammunition to fire
-        if (!SaveGame.SelectItem(out Item? ammunitionStack, "Fire which item? ", false, true, true, new ItemCategoryItemFilter(SaveGame.Player.AmmunitionItemCategory)))
+        if (!SaveGame.SelectItem(out Item? ammunitionStack, "Fire which item? ", false, true, true, new ItemCategoryItemFilter(SaveGame.AmmunitionItemCategory)))
         {
             SaveGame.MsgPrint("You have nothing to fire.");
             return false;
@@ -52,15 +52,15 @@ internal class FireScript : Script
         string missileName = individualAmmunition.Description(false, 3);
         ColourEnum missileColour = individualAmmunition.Factory.FlavorColour;
         char missileCharacter = individualAmmunition.Factory.FlavorSymbol.Character;
-        int shotSpeed = SaveGame.Player.MissileAttacksPerRound;
+        int shotSpeed = SaveGame.MissileAttacksPerRound;
         int shotDamage = Program.Rng.DiceRoll(individualAmmunition.DamageDice, individualAmmunition.DamageDiceSides) + individualAmmunition.BonusDamage + missileWeapon.BonusDamage;
-        int attackBonus = SaveGame.Player.AttackBonus + individualAmmunition.BonusToHit + missileWeapon.BonusToHit;
-        int chanceToHit = SaveGame.Player.SkillRanged + (attackBonus * Constants.BthPlusAdj);
+        int attackBonus = SaveGame.AttackBonus + individualAmmunition.BonusToHit + missileWeapon.BonusToHit;
+        int chanceToHit = SaveGame.SkillRanged + (attackBonus * Constants.BthPlusAdj);
         // Damage multiplier depends on weapon
         BowWeaponItemFactory missileWeaponItemCategory = (BowWeaponItemFactory)missileWeapon.Factory;
         int damageMultiplier = missileWeaponItemCategory.MissileDamageMultiplier;
         // Extra might gives us an increased multiplier
-        if (SaveGame.Player.HasExtraMight)
+        if (SaveGame.HasExtraMight)
         {
             damageMultiplier++;
         }
@@ -69,10 +69,10 @@ internal class FireScript : Script
         int shotDistance = 10 + (5 * damageMultiplier);
         // Divide by our shot speed to give the equivalent of x shots per turn
         SaveGame.EnergyUse = 100 / shotSpeed;
-        int y = SaveGame.Player.MapY;
-        int x = SaveGame.Player.MapX;
-        int targetX = SaveGame.Player.MapX + (99 * SaveGame.Level.KeypadDirectionXOffset[dir]);
-        int targetY = SaveGame.Player.MapY + (99 * SaveGame.Level.KeypadDirectionYOffset[dir]);
+        int y = SaveGame.MapY;
+        int x = SaveGame.MapX;
+        int targetX = SaveGame.MapX + (99 * SaveGame.Level.KeypadDirectionXOffset[dir]);
+        int targetY = SaveGame.MapY + (99 * SaveGame.Level.KeypadDirectionYOffset[dir]);
         // Special case for if we're hitting our own square
         if (dir == 5 && SaveGame.TargetOkay())
         {
@@ -89,7 +89,7 @@ internal class FireScript : Script
                 break;
             }
             // Move a step towards the target
-            SaveGame.Level.MoveOneStepTowards(out int newY, out int newX, y, x, SaveGame.Player.MapY, SaveGame.Player.MapX, targetY, targetX);
+            SaveGame.Level.MoveOneStepTowards(out int newY, out int newX, y, x, SaveGame.MapY, SaveGame.MapX, targetY, targetX);
             // If we were blocked by a wall or something then stop short
             if (!SaveGame.Level.GridPassable(newY, newX))
             {

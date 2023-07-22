@@ -13,13 +13,13 @@ internal class LifeSpellRestoration : Spell
     private LifeSpellRestoration(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Player.TryRestoringAbilityScore(Ability.Strength);
-        SaveGame.Player.TryRestoringAbilityScore(Ability.Intelligence);
-        SaveGame.Player.TryRestoringAbilityScore(Ability.Wisdom);
-        SaveGame.Player.TryRestoringAbilityScore(Ability.Dexterity);
-        SaveGame.Player.TryRestoringAbilityScore(Ability.Constitution);
-        SaveGame.Player.TryRestoringAbilityScore(Ability.Charisma);
-        SaveGame.Player.RestoreLevel();
+        SaveGame.TryRestoringAbilityScore(Ability.Strength);
+        SaveGame.TryRestoringAbilityScore(Ability.Intelligence);
+        SaveGame.TryRestoringAbilityScore(Ability.Wisdom);
+        SaveGame.TryRestoringAbilityScore(Ability.Dexterity);
+        SaveGame.TryRestoringAbilityScore(Ability.Constitution);
+        SaveGame.TryRestoringAbilityScore(Ability.Charisma);
+        SaveGame.RestoreLevel();
     }
 
     public override string Name => "Restoration";

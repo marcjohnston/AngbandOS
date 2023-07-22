@@ -12,8 +12,8 @@ internal class LoseStrChestTrap : BaseChestTrap
     public override void Activate(ActivateChestTrapEventArgs eventArgs)
     {
         eventArgs.SaveGame.MsgPrint("A small needle has pricked you!");
-        eventArgs.SaveGame.Player.TakeHit(Program.Rng.DiceRoll(1, 4), "a poison needle");
-        eventArgs.SaveGame.Player.TryDecreasingAbilityScore(Ability.Strength);
+        eventArgs.SaveGame.TakeHit(Program.Rng.DiceRoll(1, 4), "a poison needle");
+        eventArgs.SaveGame.TryDecreasingAbilityScore(Ability.Strength);
     }
     public override string Description => "(Poison Needle)";
 }

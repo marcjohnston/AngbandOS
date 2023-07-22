@@ -25,7 +25,7 @@ internal class StupidityPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Stupidity tries to reduce your intelligence
-        return SaveGame.Player.TryDecreasingAbilityScore(Ability.Intelligence);
+        return SaveGame.TryDecreasingAbilityScore(Ability.Intelligence);
     }
     public override bool Smash(int who, int y, int x)
     {

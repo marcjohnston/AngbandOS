@@ -16,7 +16,7 @@ internal class MutationShriek : Mutation
         {
             return;
         }
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<SoundProjectile>(), 0, 4 * saveGame.Player.ExperienceLevel, 8);
+        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<SoundProjectile>(), 0, 4 * saveGame.ExperienceLevel, 8);
         saveGame.AggravateMonsters();
     }
 

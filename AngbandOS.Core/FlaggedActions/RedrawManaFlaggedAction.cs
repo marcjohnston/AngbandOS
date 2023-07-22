@@ -17,25 +17,25 @@ internal class RedrawManaFlaggedAction : FlaggedAction
     public RedrawManaFlaggedAction(SaveGame saveGame) : base(saveGame) { }
     protected override void Execute()
     {
-        if (SaveGame.Player.BaseCharacterClass.SpellCastingType == null)
+        if (SaveGame.BaseCharacterClass.SpellCastingType == null)
         {
             return;
         }
         SaveGame.Screen.Print("Max SP ", RowMaxsp, ColMaxsp);
-        string tmp = SaveGame.Player.MaxMana.ToString().PadLeft(5);
+        string tmp = SaveGame.MaxMana.ToString().PadLeft(5);
         ColourEnum colour = ColourEnum.BrightGreen;
         SaveGame.Screen.Print(colour, tmp, RowMaxsp, ColMaxsp + 7);
         SaveGame.Screen.Print("Cur SP ", RowCursp, ColCursp);
-        tmp = SaveGame.Player.Mana.ToString().PadLeft(5);
-        if (SaveGame.Player.Mana >= SaveGame.Player.MaxMana)
+        tmp = SaveGame.Mana.ToString().PadLeft(5);
+        if (SaveGame.Mana >= SaveGame.MaxMana)
         {
             colour = ColourEnum.BrightGreen;
         }
-        else if (SaveGame.Player.Mana > SaveGame.Player.MaxMana * Constants.HitpointWarn / 5)
+        else if (SaveGame.Mana > SaveGame.MaxMana * Constants.HitpointWarn / 5)
         {
             colour = ColourEnum.BrightYellow;
         }
-        else if (SaveGame.Player.Mana > SaveGame.Player.MaxMana * Constants.HitpointWarn / 10)
+        else if (SaveGame.Mana > SaveGame.MaxMana * Constants.HitpointWarn / 10)
         {
             colour = ColourEnum.Orange;
         }

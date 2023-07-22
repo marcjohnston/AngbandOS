@@ -48,7 +48,7 @@ internal class WaterProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
         if (dam > 1600)
         {
             dam = 1600;
@@ -60,19 +60,19 @@ internal class WaterProjectile : Projectile
         {
             SaveGame.MsgPrint("You are hit by something wet!");
         }
-        if (!SaveGame.Player.HasSoundResistance)
+        if (!SaveGame.HasSoundResistance)
         {
-            SaveGame.Player.TimedStun.AddTimer(Program.Rng.DieRoll(40));
+            SaveGame.TimedStun.AddTimer(Program.Rng.DieRoll(40));
         }
-        if (!SaveGame.Player.HasConfusionResistance)
+        if (!SaveGame.HasConfusionResistance)
         {
-            SaveGame.Player.TimedConfusion.AddTimer(Program.Rng.DieRoll(5) + 5);
+            SaveGame.TimedConfusion.AddTimer(Program.Rng.DieRoll(5) + 5);
         }
         if (Program.Rng.DieRoll(5) == 1)
         {
-            SaveGame.Player.InvenDamage(SaveGame.SetColdDestroy, 3);
+            SaveGame.InvenDamage(SaveGame.SetColdDestroy, 3);
         }
-        SaveGame.Player.TakeHit(dam, killer);
+        SaveGame.TakeHit(dam, killer);
         return true;
     }
 }

@@ -25,9 +25,9 @@ internal class ConfusionMushroomFoodItemFactory : MushroomFoodItemFactory
     public override bool Eat()
     {
         SaveGame.PlaySound(SoundEffectEnum.Eat);
-        if (!SaveGame.Player.HasConfusionResistance)
+        if (!SaveGame.HasConfusionResistance)
         {
-            if (SaveGame.Player.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(10) + 10))
+            if (SaveGame.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(10) + 10))
             {
                 return true;
             }

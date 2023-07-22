@@ -27,20 +27,20 @@ internal class NewLifePotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // New life rerolls your health, cures all mutations, and restores you to your birth race
-        SaveGame.Player.RerollHitPoints();
-        if (SaveGame.Player.Dna.HasMutations)
+        SaveGame.RerollHitPoints();
+        if (SaveGame.Dna.HasMutations)
         {
             SaveGame.MsgPrint("You are cured of all mutations.");
-            SaveGame.Player.Dna.LoseAllMutations();
+            SaveGame.Dna.LoseAllMutations();
             SaveGame.UpdateBonusesFlaggedAction.Set();
             SaveGame.HandleStuff();
         }
-        if (!(SaveGame.Player.Race.GetType() == SaveGame.Player.RaceAtBirth.GetType()))
+        if (!(SaveGame.Race.GetType() == SaveGame.RaceAtBirth.GetType()))
         {
-            var oldRaceName = SaveGame.Player.RaceAtBirth.Title;
+            var oldRaceName = SaveGame.RaceAtBirth.Title;
             SaveGame.MsgPrint($"You feel more {oldRaceName} again.");
-            SaveGame.Player.ChangeRace(SaveGame.Player.RaceAtBirth);
-            SaveGame.Level.RedrawSingleLocation(SaveGame.Player.MapY, SaveGame.Player.MapX);
+            SaveGame.ChangeRace(SaveGame.RaceAtBirth);
+            SaveGame.Level.RedrawSingleLocation(SaveGame.MapY, SaveGame.MapX);
         }
         return true;
     }

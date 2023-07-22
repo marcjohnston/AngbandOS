@@ -46,29 +46,29 @@ internal class PsiProjectile : Projectile
         {
             dam /= 3;
             note = " resists.";
-            if ((rPtr.Undead || rPtr.Demon) && rPtr.Level > SaveGame.Player.ExperienceLevel / 2 && Program.Rng.DieRoll(2) == 1)
+            if ((rPtr.Undead || rPtr.Demon) && rPtr.Level > SaveGame.ExperienceLevel / 2 && Program.Rng.DieRoll(2) == 1)
             {
                 note = null;
                 string s = seen ? "'s" : "s";
                 SaveGame.MsgPrint($"{mName}{s} corrupted mind backlashes your attack!");
-                if (Program.Rng.RandomLessThan(100) < SaveGame.Player.SkillSavingThrow)
+                if (Program.Rng.RandomLessThan(100) < SaveGame.SkillSavingThrow)
                 {
                     SaveGame.MsgPrint("You resist the effects!");
                 }
                 else
                 {
                     string killer = mPtr.IndefiniteVisibleName;
-                    SaveGame.Player.TakeHit(dam, killer);
+                    SaveGame.TakeHit(dam, killer);
                     if (Program.Rng.DieRoll(4) == 1)
                     {
                         switch (Program.Rng.DieRoll(4))
                         {
                             case 1:
-                                SaveGame.Player.TimedConfusion.AddTimer(3 + Program.Rng.DieRoll(dam));
+                                SaveGame.TimedConfusion.AddTimer(3 + Program.Rng.DieRoll(dam));
                                 break;
 
                             case 2:
-                                SaveGame.Player.TimedStun.AddTimer(Program.Rng.DieRoll(dam));
+                                SaveGame.TimedStun.AddTimer(Program.Rng.DieRoll(dam));
                                 break;
 
                             case 3:
@@ -79,15 +79,15 @@ internal class PsiProjectile : Projectile
                                     }
                                     else
                                     {
-                                        SaveGame.Player.TimedFear.AddTimer(3 + Program.Rng.DieRoll(dam));
+                                        SaveGame.TimedFear.AddTimer(3 + Program.Rng.DieRoll(dam));
                                     }
                                 }
                                 break;
 
                             default:
-                                if (!SaveGame.Player.HasFreeAction)
+                                if (!SaveGame.HasFreeAction)
                                 {
-                                    SaveGame.Player.TimedParalysis.AddTimer(Program.Rng.DieRoll(dam));
+                                    SaveGame.TimedParalysis.AddTimer(Program.Rng.DieRoll(dam));
                                 }
                                 break;
                         }

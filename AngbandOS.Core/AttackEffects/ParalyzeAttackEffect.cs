@@ -18,20 +18,20 @@ internal class ParalyzeAttackEffect : BaseAttackEffect
         {
             damage = 1;
         }
-        saveGame.Player.TakeHit(damage, monsterDescription);
-        if (saveGame.Player.HasFreeAction)
+        saveGame.TakeHit(damage, monsterDescription);
+        if (saveGame.HasFreeAction)
         {
             saveGame.MsgPrint("You are unaffected!");
             obvious = true;
         }
-        else if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
+        else if (Program.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
         {
             saveGame.MsgPrint("You resist the effects!");
             obvious = true;
         }
         else
         {
-            if (saveGame.Player.TimedParalysis.AddTimer(3 + Program.Rng.DieRoll(monsterLevel)))
+            if (saveGame.TimedParalysis.AddTimer(3 + Program.Rng.DieRoll(monsterLevel)))
             {
                 obvious = true;
             }

@@ -13,7 +13,7 @@ internal class ChaosSpellFlashOfLight : Spell
     private ChaosSpellFlashOfLight(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.LightArea(Program.Rng.DiceRoll(2, SaveGame.Player.ExperienceLevel / 2), (SaveGame.Player.ExperienceLevel / 10) + 1);
+        SaveGame.LightArea(Program.Rng.DiceRoll(2, SaveGame.ExperienceLevel / 2), (SaveGame.ExperienceLevel / 10) + 1);
     }
 
     public override void CastFailed()
@@ -25,6 +25,6 @@ internal class ChaosSpellFlashOfLight : Spell
     
     protected override string? Info()
     {
-        return $"dam 2d{SaveGame.Player.ExperienceLevel / 2}";
+        return $"dam 2d{SaveGame.ExperienceLevel / 2}";
     }
 }

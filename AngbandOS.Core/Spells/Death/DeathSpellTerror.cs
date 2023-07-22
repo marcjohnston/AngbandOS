@@ -13,7 +13,7 @@ internal class DeathSpellTerror : Spell
     private DeathSpellTerror(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.TurnMonsters(30 + SaveGame.Player.ExperienceLevel);
+        SaveGame.TurnMonsters(30 + SaveGame.ExperienceLevel);
     }
 
     public override void CastFailed()

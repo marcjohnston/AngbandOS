@@ -18,7 +18,7 @@ internal class RuinAblReward : Reward
         SaveGame.MsgPrint("You feel less powerful!");
         for (int dummy = 0; dummy < 6; dummy++)
         {
-            SaveGame.Player.DecreaseAbilityScore(dummy, 10 + Program.Rng.DieRoll(15), true);
+            SaveGame.DecreaseAbilityScore(dummy, 10 + Program.Rng.DieRoll(15), true);
         }
     }
 }

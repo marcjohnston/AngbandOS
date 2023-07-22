@@ -43,7 +43,7 @@ internal class PoisProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
         if (dam > 1600)
         {
             dam = 1600;
@@ -55,29 +55,29 @@ internal class PoisProjectile : Projectile
         {
             SaveGame.MsgPrint("You are hit by poison!");
         }
-        if (SaveGame.Player.HasPoisonResistance)
+        if (SaveGame.HasPoisonResistance)
         {
             dam = (dam + 2) / 3;
         }
-        if (SaveGame.Player.TimedPoisonResistance.TurnsRemaining != 0)
+        if (SaveGame.TimedPoisonResistance.TurnsRemaining != 0)
         {
             dam = (dam + 2) / 3;
         }
-        if (!(SaveGame.Player.TimedPoisonResistance.TurnsRemaining != 0 || SaveGame.Player.HasPoisonResistance) &&
+        if (!(SaveGame.TimedPoisonResistance.TurnsRemaining != 0 || SaveGame.HasPoisonResistance) &&
             Program.Rng.DieRoll(SaveGame.HurtChance) == 1)
         {
-            SaveGame.Player.TryDecreasingAbilityScore(Ability.Constitution);
+            SaveGame.TryDecreasingAbilityScore(Ability.Constitution);
         }
-        SaveGame.Player.TakeHit(dam, killer);
-        if (!(SaveGame.Player.HasPoisonResistance || SaveGame.Player.TimedPoisonResistance.TurnsRemaining != 0))
+        SaveGame.TakeHit(dam, killer);
+        if (!(SaveGame.HasPoisonResistance || SaveGame.TimedPoisonResistance.TurnsRemaining != 0))
         {
-            if (Program.Rng.DieRoll(10) <= SaveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+            if (Program.Rng.DieRoll(10) <= SaveGame.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
             {
                 SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
             }
             else
             {
-                SaveGame.Player.TimedPoison.AddTimer(Program.Rng.RandomLessThan(dam) + 10);
+                SaveGame.TimedPoison.AddTimer(Program.Rng.RandomLessThan(dam) + 10);
             }
         }
         return true;

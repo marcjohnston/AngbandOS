@@ -11,7 +11,7 @@ internal class DarkSpellResistantDetection : SpellResistantDetection
 {
     public override void Learn(SaveGame saveGame, Monster monster)
     {
-        if (saveGame.Player.HasDarkResistance)
+        if (saveGame.HasDarkResistance)
         {
             monster.SmResDark = true;
         }

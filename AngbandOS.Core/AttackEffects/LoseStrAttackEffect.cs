@@ -14,8 +14,8 @@ internal class LoseStrAttackEffect : BaseAttackEffect
     public override string Description => "reduce strength";
     public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
-        saveGame.Player.TakeHit(damage, monsterDescription);
-        if (saveGame.Player.TryDecreasingAbilityScore(Ability.Strength))
+        saveGame.TakeHit(damage, monsterDescription);
+        if (saveGame.TryDecreasingAbilityScore(Ability.Strength))
         {
             obvious = true;
         }

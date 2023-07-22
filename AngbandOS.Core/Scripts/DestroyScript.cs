@@ -83,7 +83,7 @@ internal class DestroyScript : Script
         }
         SaveGame.MsgPrint($"You destroy {itemName}.");
 
-        SaveGame.Player.BaseCharacterClass.ItemDestroyed(item, amount);
+        SaveGame.BaseCharacterClass.ItemDestroyed(item, amount);
 
         // Tidy up the player's inventory
         item.ItemIncrease(-amount);

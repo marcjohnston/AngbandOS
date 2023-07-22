@@ -18,7 +18,7 @@ internal class ForgetMonsterSpell : MonsterSpell
     {
         string monsterName = monster.Name;
 
-        if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
+        if (Program.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
         {
             saveGame.MsgPrint("You resist the effects!");
         }

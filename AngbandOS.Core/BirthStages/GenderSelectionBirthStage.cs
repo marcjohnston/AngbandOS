@@ -57,14 +57,14 @@ internal class GenderSelectionBirthStage : BaseBirthStage
     }
     private BaseBirthStage? GoForward(int index)
     {
-        SaveGame.Player.Gender = SaveGame.SingletonRepository.Genders[index];
+        SaveGame.Gender = SaveGame.SingletonRepository.Genders[index];
         return SaveGame.SingletonRepository.BirthStages.Get<ConfirmationBirthStage>();
     }
 
     private BaseBirthStage? GoBack()
     {
-        int availablePrimaryRealmCount = SaveGame.Player.BaseCharacterClass.AvailablePrimaryRealms.Length;
-        int remainingAvailableSecondaryRealmCount = SaveGame.Player.BaseCharacterClass.RemainingAvailableSecondaryRealms().Length;
+        int availablePrimaryRealmCount = SaveGame.BaseCharacterClass.AvailablePrimaryRealms.Length;
+        int remainingAvailableSecondaryRealmCount = SaveGame.BaseCharacterClass.RemainingAvailableSecondaryRealms().Length;
         if (remainingAvailableSecondaryRealmCount <= 1 && availablePrimaryRealmCount <= 1)
         {
             return SaveGame.SingletonRepository.BirthStages.Get<RaceSelectionBirthStage>();

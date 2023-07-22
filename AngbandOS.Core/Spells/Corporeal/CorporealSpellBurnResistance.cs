@@ -13,9 +13,9 @@ internal class CorporealSpellBurnResistance : Spell
     private CorporealSpellBurnResistance(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Player.TimedFireResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
-        SaveGame.Player.TimedLightningResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
-        SaveGame.Player.TimedAcidResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
+        SaveGame.TimedFireResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
+        SaveGame.TimedLightningResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
+        SaveGame.TimedAcidResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
     }
 
     public override string Name => "Burn Resistance";

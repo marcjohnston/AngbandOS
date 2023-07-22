@@ -19,17 +19,17 @@ internal class HoldMonsterSpell : MonsterSpell
 
     public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
     {
-        if (saveGame.Player.HasFreeAction)
+        if (saveGame.HasFreeAction)
         {
             saveGame.MsgPrint("You are unaffected!");
         }
-        else if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
+        else if (Program.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
         {
             saveGame.MsgPrint("You resist the effects!");
         }
         else
         {
-            saveGame.Player.TimedParalysis.AddTimer(Program.Rng.RandomLessThan(4) + 4);
+            saveGame.TimedParalysis.AddTimer(Program.Rng.RandomLessThan(4) + 4);
         }
         saveGame.Level.UpdateSmartLearn(monster, new FreeSpellResistantDetection());
     }
@@ -38,7 +38,7 @@ internal class HoldMonsterSpell : MonsterSpell
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         string targetName = target.Name;
-        bool blind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = saveGame.TimedBlindness.TurnsRemaining != 0;
         bool seeTarget = !blind && target.IsVisible;
         MonsterRace targetRace = target.Race;
 

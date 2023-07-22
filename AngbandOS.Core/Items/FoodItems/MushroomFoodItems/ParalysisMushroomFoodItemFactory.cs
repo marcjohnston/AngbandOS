@@ -25,9 +25,9 @@ internal class ParalysisMushroomFoodItemFactory : MushroomFoodItemFactory
     public override bool Eat()
     {
         SaveGame.PlaySound(SoundEffectEnum.Eat);
-        if (!SaveGame.Player.HasFreeAction)
+        if (!SaveGame.HasFreeAction)
         {
-            if (SaveGame.Player.TimedParalysis.AddTimer(Program.Rng.RandomLessThan(10) + 10))
+            if (SaveGame.TimedParalysis.AddTimer(Program.Rng.RandomLessThan(10) + 10))
             {
                 return true;
             }

@@ -20,7 +20,7 @@ internal class RestLifeActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.Player.RestoreLevel();
+        SaveGame.RestoreLevel();
         return true;
     }
 

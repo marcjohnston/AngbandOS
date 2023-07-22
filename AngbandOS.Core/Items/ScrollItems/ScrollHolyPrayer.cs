@@ -24,7 +24,7 @@ internal class ScrollHolyPrayer : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (SaveGame.Player.TimedBlessing.AddTimer(Program.Rng.DieRoll(48) + 24))
+        if (SaveGame.TimedBlessing.AddTimer(Program.Rng.DieRoll(48) + 24))
         {
             eventArgs.Identified = true;
         }

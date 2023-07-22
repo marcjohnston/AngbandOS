@@ -13,7 +13,7 @@ internal class ChaosSpellTeleportSelf : Spell
     private ChaosSpellTeleportSelf(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.TeleportPlayer(SaveGame.Player.ExperienceLevel * 5);
+        SaveGame.TeleportPlayer(SaveGame.ExperienceLevel * 5);
     }
 
     public override void CastFailed()
@@ -25,6 +25,6 @@ internal class ChaosSpellTeleportSelf : Spell
     
     protected override string? Info()
     {
-        return $"range {SaveGame.Player.ExperienceLevel * 5}";
+        return $"range {SaveGame.ExperienceLevel * 5}";
     }
 }

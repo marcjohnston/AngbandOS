@@ -20,8 +20,8 @@ internal class CureLwActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.Player.TimedFear.ResetTimer();
-        SaveGame.Player.RestoreHealth(30);
+        SaveGame.TimedFear.ResetTimer();
+        SaveGame.RestoreHealth(30);
         return true;
     }
 

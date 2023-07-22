@@ -13,13 +13,13 @@ internal class SorcerySpellHasteSelf : Spell
     private SorcerySpellHasteSelf(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (SaveGame.Player.TimedHaste.TurnsRemaining == 0)
+        if (SaveGame.TimedHaste.TurnsRemaining == 0)
         {
-            SaveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(20 + SaveGame.Player.ExperienceLevel) + SaveGame.Player.ExperienceLevel);
+            SaveGame.TimedHaste.SetTimer(Program.Rng.DieRoll(20 + SaveGame.ExperienceLevel) + SaveGame.ExperienceLevel);
         }
         else
         {
-            SaveGame.Player.TimedHaste.AddTimer(Program.Rng.DieRoll(5));
+            SaveGame.TimedHaste.AddTimer(Program.Rng.DieRoll(5));
         }
     }
 
@@ -27,6 +27,6 @@ internal class SorcerySpellHasteSelf : Spell
     
     protected override string? Info()
     {
-        return $"dur {SaveGame.Player.ExperienceLevel}+d{SaveGame.Player.ExperienceLevel + 20}";
+        return $"dur {SaveGame.ExperienceLevel}+d{SaveGame.ExperienceLevel + 20}";
     }
 }

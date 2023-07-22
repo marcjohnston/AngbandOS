@@ -16,24 +16,24 @@ internal class RedrawDTrapFlaggedAction : FlaggedAction
     protected override void Execute()
     {
         int count = 0;
-        if (SaveGame.Level.Grid[SaveGame.Player.MapY][SaveGame.Player.MapX].TileFlags.IsClear(GridTile.TrapsDetected))
+        if (SaveGame.Level.Grid[SaveGame.MapY][SaveGame.MapX].TileFlags.IsClear(GridTile.TrapsDetected))
         {
             SaveGame.Screen.Print(ColourEnum.Green, "     ", RowDtrap, ColDtrap);
             return;
         }
-        if (SaveGame.Level.Grid[SaveGame.Player.MapY - 1][SaveGame.Player.MapX].TileFlags.IsSet(GridTile.TrapsDetected))
+        if (SaveGame.Level.Grid[SaveGame.MapY - 1][SaveGame.MapX].TileFlags.IsSet(GridTile.TrapsDetected))
         {
             count++;
         }
-        if (SaveGame.Level.Grid[SaveGame.Player.MapY + 1][SaveGame.Player.MapX].TileFlags.IsSet(GridTile.TrapsDetected))
+        if (SaveGame.Level.Grid[SaveGame.MapY + 1][SaveGame.MapX].TileFlags.IsSet(GridTile.TrapsDetected))
         {
             count++;
         }
-        if (SaveGame.Level.Grid[SaveGame.Player.MapY][SaveGame.Player.MapX - 1].TileFlags.IsSet(GridTile.TrapsDetected))
+        if (SaveGame.Level.Grid[SaveGame.MapY][SaveGame.MapX - 1].TileFlags.IsSet(GridTile.TrapsDetected))
         {
             count++;
         }
-        if (SaveGame.Level.Grid[SaveGame.Player.MapY][SaveGame.Player.MapX + 1].TileFlags.IsSet(GridTile.TrapsDetected))
+        if (SaveGame.Level.Grid[SaveGame.MapY][SaveGame.MapX + 1].TileFlags.IsSet(GridTile.TrapsDetected))
         {
             count++;
         }

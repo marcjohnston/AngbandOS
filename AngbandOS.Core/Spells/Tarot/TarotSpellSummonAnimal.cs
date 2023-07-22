@@ -16,12 +16,12 @@ internal class TarotSpellSummonAnimal : Spell
         SaveGame.MsgPrint("You concentrate on the image of an animal...");
         if (Program.Rng.DieRoll(5) > 2)
         {
-            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.ExperienceLevel, new AnimalRangerMonsterSelector(), false))
+            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new AnimalRangerMonsterSelector(), false))
             {
                 SaveGame.MsgPrint("No-one ever turns up.");
             }
         }
-        else if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.ExperienceLevel, new AnimalMonsterSelector()))
+        else if (SaveGame.Level.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new AnimalMonsterSelector()))
         {
             SaveGame.MsgPrint("The summoned animal gets angry!");
         }

@@ -15,19 +15,19 @@ internal class RedrawStatsFlaggedAction : FlaggedAction
     public RedrawStatsFlaggedAction(SaveGame saveGame) : base(saveGame) { }
     private void PrtStat(int stat)
     {
-        if (SaveGame.Player.AbilityScores[stat].Innate < SaveGame.Player.AbilityScores[stat].InnateMax)
+        if (SaveGame.AbilityScores[stat].Innate < SaveGame.AbilityScores[stat].InnateMax)
         {
             SaveGame.Screen.Print(Constants.StatNamesReduced[stat], RowStat + stat, 0);
-            string tmp = SaveGame.Player.AbilityScores[stat].Adjusted.StatToString();
+            string tmp = SaveGame.AbilityScores[stat].Adjusted.StatToString();
             SaveGame.Screen.Print(ColourEnum.Yellow, tmp, RowStat + stat, ColStat);
         }
         else
         {
             SaveGame.Screen.Print(Constants.StatNames[stat], RowStat + stat, 0);
-            string tmp = SaveGame.Player.AbilityScores[stat].Adjusted.StatToString();
+            string tmp = SaveGame.AbilityScores[stat].Adjusted.StatToString();
             SaveGame.Screen.Print(ColourEnum.BrightGreen, tmp, RowStat + stat, ColStat);
         }
-        if (SaveGame.Player.AbilityScores[stat].InnateMax == 18 + 100)
+        if (SaveGame.AbilityScores[stat].InnateMax == 18 + 100)
         {
             SaveGame.Screen.Print("!", RowStat + stat, 3);
         }

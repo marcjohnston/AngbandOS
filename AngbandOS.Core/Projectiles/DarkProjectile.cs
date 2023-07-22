@@ -63,7 +63,7 @@ internal class DarkProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
         if (dam > 1600)
         {
             dam = 1600;
@@ -75,26 +75,26 @@ internal class DarkProjectile : Projectile
         {
             SaveGame.MsgPrint("You are hit by something!");
         }
-        if (SaveGame.Player.HasDarkResistance)
+        if (SaveGame.HasDarkResistance)
         {
             dam *= 4;
             dam /= Program.Rng.DieRoll(6) + 6;
-            if (!SaveGame.Player.Race.IsDamagedByDarkness)
+            if (!SaveGame.Race.IsDamagedByDarkness)
             {
                 dam = 0;
             }
         }
-        else if (!blind && !SaveGame.Player.HasBlindnessResistance)
+        else if (!blind && !SaveGame.HasBlindnessResistance)
         {
-            SaveGame.Player.TimedBlindness.AddTimer(Program.Rng.DieRoll(5) + 2);
+            SaveGame.TimedBlindness.AddTimer(Program.Rng.DieRoll(5) + 2);
         }
-        if (SaveGame.Player.TimedEtherealness.TurnsRemaining != 0)
+        if (SaveGame.TimedEtherealness.TurnsRemaining != 0)
         {
-            SaveGame.Player.RestoreHealth(dam);
+            SaveGame.RestoreHealth(dam);
         }
         else
         {
-            SaveGame.Player.TakeHit(dam, killer);
+            SaveGame.TakeHit(dam, killer);
         }
         return true;
     }

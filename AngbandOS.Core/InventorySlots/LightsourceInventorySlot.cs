@@ -45,7 +45,7 @@ internal class LightsourceInventorySlot : EquipmentInventorySlot
                     oPtr.TypeSpecificValue -= oPtr.Factory.BurnRate;
 
                     // If the player is blind, do not allow the light to go out completely.
-                    if (SaveGame.Player.TimedBlindness.TurnsRemaining != 0)
+                    if (SaveGame.TimedBlindness.TurnsRemaining != 0)
                     {
                         if (oPtr.TypeSpecificValue == 0)
                         {

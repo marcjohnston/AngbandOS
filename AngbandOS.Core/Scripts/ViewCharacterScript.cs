@@ -33,7 +33,7 @@ internal class ViewCharacterScript : Script
             // 'c' changes name
             if (keyPress == 'c' || keyPress == 'C')
             {
-                SaveGame.Player.InputPlayerName();
+                SaveGame.InputPlayerName();
             }
             SaveGame.MsgPrint(null);
         }

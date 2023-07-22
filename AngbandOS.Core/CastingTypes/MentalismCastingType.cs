@@ -13,8 +13,8 @@ internal class MentalismCastingType : CastingType
     private MentalismCastingType(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        int plev = SaveGame.Player.ExperienceLevel;
-        if (SaveGame.Player.TimedConfusion.TurnsRemaining != 0)
+        int plev = SaveGame.ExperienceLevel;
+        if (SaveGame.TimedConfusion.TurnsRemaining != 0)
         {
             SaveGame.MsgPrint("You are too confused!");
             return;
@@ -24,7 +24,7 @@ internal class MentalismCastingType : CastingType
             return;
         }
         Talents.Talent talent = SaveGame.Talents[n];
-        if (talent.ManaCost > SaveGame.Player.Mana)
+        if (talent.ManaCost > SaveGame.Mana)
         {
             SaveGame.MsgPrint("You do not have enough mana to use this talent.");
             if (!SaveGame.GetCheck("Attempt it anyway? "))
@@ -47,22 +47,22 @@ internal class MentalismCastingType : CastingType
                 else if (i < 15)
                 {
                     SaveGame.MsgPrint("Weird visions seem to dance before your eyes...");
-                    SaveGame.Player.TimedHallucinations.AddTimer(5 + Program.Rng.DieRoll(10));
+                    SaveGame.TimedHallucinations.AddTimer(5 + Program.Rng.DieRoll(10));
                 }
                 else if (i < 45)
                 {
                     SaveGame.MsgPrint("Your brain is addled!");
-                    SaveGame.Player.TimedConfusion.AddTimer(Program.Rng.DieRoll(8));
+                    SaveGame.TimedConfusion.AddTimer(Program.Rng.DieRoll(8));
                 }
                 else if (i < 90)
                 {
-                    SaveGame.Player.TimedStun.AddTimer(Program.Rng.DieRoll(8));
+                    SaveGame.TimedStun.AddTimer(Program.Rng.DieRoll(8));
                 }
                 else
                 {
                     SaveGame.MsgPrint("Your mind unleashes its power in an uncontrollable storm!");
-                    SaveGame.Project(1, 2 + (plev / 10), SaveGame.Player.MapY, SaveGame.Player.MapX, plev * 2, SaveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectKill | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem);
-                    SaveGame.Player.Mana = Math.Max(0, SaveGame.Player.Mana - (plev * Math.Max(1, plev / 10)));
+                    SaveGame.Project(1, 2 + (plev / 10), SaveGame.MapY, SaveGame.MapX, plev * 2, SaveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectKill | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem);
+                    SaveGame.Mana = Math.Max(0, SaveGame.Mana - (plev * Math.Max(1, plev / 10)));
                 }
             }
         }
@@ -71,22 +71,22 @@ internal class MentalismCastingType : CastingType
             talent.Use();
         }
         SaveGame.EnergyUse = 100;
-        if (talent.ManaCost <= SaveGame.Player.Mana)
+        if (talent.ManaCost <= SaveGame.Mana)
         {
-            SaveGame.Player.Mana -= talent.ManaCost;
+            SaveGame.Mana -= talent.ManaCost;
         }
         else
         {
-            int oops = talent.ManaCost - SaveGame.Player.Mana;
-            SaveGame.Player.Mana = 0;
-            SaveGame.Player.FractionalMana = 0;
+            int oops = talent.ManaCost - SaveGame.Mana;
+            SaveGame.Mana = 0;
+            SaveGame.FractionalMana = 0;
             SaveGame.MsgPrint("You faint from the effort!");
-            SaveGame.Player.TimedParalysis.AddTimer(Program.Rng.DieRoll((5 * oops) + 1));
+            SaveGame.TimedParalysis.AddTimer(Program.Rng.DieRoll((5 * oops) + 1));
             if (Program.Rng.RandomLessThan(100) < 50)
             {
                 bool perm = Program.Rng.RandomLessThan(100) < 25;
                 SaveGame.MsgPrint("You have damaged your mind!");
-                SaveGame.Player.DecreaseAbilityScore(Ability.Wisdom, 15 + Program.Rng.DieRoll(10), perm);
+                SaveGame.DecreaseAbilityScore(Ability.Wisdom, 15 + Program.Rng.DieRoll(10), perm);
             }
         }
         SaveGame.RedrawManaFlaggedAction.Set();
@@ -98,7 +98,7 @@ internal class MentalismCastingType : CastingType
         int num = 0;
         int y = 1;
         int x = 20;
-        int plev = SaveGame.Player.ExperienceLevel;
+        int plev = SaveGame.ExperienceLevel;
         string p = "talent";
         sn = -1;
         bool flag = false;

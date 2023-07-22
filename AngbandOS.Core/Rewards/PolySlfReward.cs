@@ -15,6 +15,6 @@ internal class PolySlfReward : Reward
     {
         SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
         SaveGame.MsgPrint("'Thou needst a new form, mortal!'");
-        SaveGame.Player.PolymorphSelf(SaveGame);
+        SaveGame.PolymorphSelf(SaveGame);
     }
 }

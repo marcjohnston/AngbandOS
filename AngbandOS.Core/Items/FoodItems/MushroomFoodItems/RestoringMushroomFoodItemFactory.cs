@@ -26,27 +26,27 @@ internal class RestoringMushroomFoodItemFactory : MushroomFoodItemFactory
     {
         SaveGame.PlaySound(SoundEffectEnum.Eat);
         bool ident = false;
-        if (SaveGame.Player.TryRestoringAbilityScore(Ability.Strength))
+        if (SaveGame.TryRestoringAbilityScore(Ability.Strength))
         {
             ident = true;
         }
-        if (SaveGame.Player.TryRestoringAbilityScore(Ability.Intelligence))
+        if (SaveGame.TryRestoringAbilityScore(Ability.Intelligence))
         {
             ident = true;
         }
-        if (SaveGame.Player.TryRestoringAbilityScore(Ability.Wisdom))
+        if (SaveGame.TryRestoringAbilityScore(Ability.Wisdom))
         {
             ident = true;
         }
-        if (SaveGame.Player.TryRestoringAbilityScore(Ability.Dexterity))
+        if (SaveGame.TryRestoringAbilityScore(Ability.Dexterity))
         {
             ident = true;
         }
-        if (SaveGame.Player.TryRestoringAbilityScore(Ability.Constitution))
+        if (SaveGame.TryRestoringAbilityScore(Ability.Constitution))
         {
             ident = true;
         }
-        if (SaveGame.Player.TryRestoringAbilityScore(Ability.Charisma))
+        if (SaveGame.TryRestoringAbilityScore(Ability.Charisma))
         {
             ident = true;
         }

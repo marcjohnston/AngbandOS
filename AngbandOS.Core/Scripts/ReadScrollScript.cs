@@ -15,7 +15,7 @@ internal class ReadScrollScript : Script
     public override bool Execute()
     {
         // Make sure we're in a situation where we can read
-        if (SaveGame.Player.TimedBlindness.TurnsRemaining != 0)
+        if (SaveGame.TimedBlindness.TurnsRemaining != 0)
         {
             SaveGame.MsgPrint("You can't see anything.");
             return false;
@@ -25,7 +25,7 @@ internal class ReadScrollScript : Script
             SaveGame.MsgPrint("You have no light to read by.");
             return false;
         }
-        if (SaveGame.Player.TimedConfusion.TurnsRemaining != 0)
+        if (SaveGame.TimedConfusion.TurnsRemaining != 0)
         {
             SaveGame.MsgPrint("You are too confused!");
             return false;
@@ -40,7 +40,7 @@ internal class ReadScrollScript : Script
             return false;
         }
         // Make sure the item is actually a scroll
-        if (!SaveGame.Player.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Scroll)))
+        if (!SaveGame.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Scroll)))
         {
             SaveGame.MsgPrint("That is not a scroll!");
             return false;
@@ -61,11 +61,11 @@ internal class ReadScrollScript : Script
         {
             item.BecomeFlavourAware();
             int itemLevel = item.Factory.Level;
-            SaveGame.Player.GainExperience((itemLevel + (SaveGame.Player.ExperienceLevel >> 1)) / SaveGame.Player.ExperienceLevel);
+            SaveGame.GainExperience((itemLevel + (SaveGame.ExperienceLevel >> 1)) / SaveGame.ExperienceLevel);
         }
         bool channeled = false;
         // Channelers can use mana instead of the scroll being used up
-        if (SaveGame.Player.BaseCharacterClass.SpellCastingType.CanUseManaInsteadOfConsumingItem)
+        if (SaveGame.BaseCharacterClass.SpellCastingType.CanUseManaInsteadOfConsumingItem)
         {
             channeled = SaveGame.DoCmdChannel(item);
         }

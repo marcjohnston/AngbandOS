@@ -15,8 +15,8 @@ internal class UnBonusAttackEffect : BaseAttackEffect
     public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         // Disenchantment might ruin our items
-        saveGame.Player.TakeHit(damage, monsterDescription);
-        if (!saveGame.Player.HasDisenchantResistance)
+        saveGame.TakeHit(damage, monsterDescription);
+        if (!saveGame.HasDisenchantResistance)
         {
             if (saveGame.ApplyDisenchant())
             {

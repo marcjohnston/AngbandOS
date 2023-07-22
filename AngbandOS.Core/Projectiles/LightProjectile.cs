@@ -71,7 +71,7 @@ internal class LightProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
         if (dam > 1600)
         {
             dam = 1600;
@@ -83,24 +83,24 @@ internal class LightProjectile : Projectile
         {
             SaveGame.MsgPrint("You are hit by something!");
         }
-        if (SaveGame.Player.HasLightResistance)
+        if (SaveGame.HasLightResistance)
         {
             dam *= 4;
             dam /= Program.Rng.DieRoll(6) + 6;
         }
-        else if (!blind && !SaveGame.Player.HasBlindnessResistance)
+        else if (!blind && !SaveGame.HasBlindnessResistance)
         {
-            SaveGame.Player.TimedBlindness.AddTimer(Program.Rng.DieRoll(5) + 2);
+            SaveGame.TimedBlindness.AddTimer(Program.Rng.DieRoll(5) + 2);
         }
-        if (SaveGame.Player.Race.IsBurnedBySunlight)
+        if (SaveGame.Race.IsBurnedBySunlight)
         {
             SaveGame.MsgPrint("The light scorches your flesh!");
             dam *= 2;
         }
-        SaveGame.Player.TakeHit(dam, killer);
-        if (SaveGame.Player.TimedEtherealness.TurnsRemaining != 0)
+        SaveGame.TakeHit(dam, killer);
+        if (SaveGame.TimedEtherealness.TurnsRemaining != 0)
         {
-            SaveGame.Player.TimedEtherealness.SetValue();
+            SaveGame.TimedEtherealness.SetValue();
             SaveGame.MsgPrint("The light forces you out of your incorporeal shadow form.");
             SaveGame.RedrawMapFlaggedAction.Set();
             SaveGame.UpdateMonstersFlaggedAction.Set();

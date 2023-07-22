@@ -22,7 +22,7 @@ internal class MutationNormality : Mutation
     {
         if (Program.Rng.DieRoll(5000) == 1)
         {
-            saveGame.Player.Dna.LoseMutation();
+            saveGame.Dna.LoseMutation();
         }
     }
 }

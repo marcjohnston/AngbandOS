@@ -43,12 +43,12 @@ internal class PsiDrainProjectile : Projectile
         {
             dam /= 3;
             note = " resists.";
-            if ((rPtr.Undead || rPtr.Demon) && rPtr.Level > SaveGame.Player.ExperienceLevel / 2 && Program.Rng.DieRoll(2) == 1)
+            if ((rPtr.Undead || rPtr.Demon) && rPtr.Level > SaveGame.ExperienceLevel / 2 && Program.Rng.DieRoll(2) == 1)
             {
                 note = null;
                 string s = seen ? "'s" : "s";
                 SaveGame.MsgPrint($"{mName}{s} corrupted mind backlashes your attack!");
-                if (Program.Rng.RandomLessThan(100) < SaveGame.Player.SkillSavingThrow)
+                if (Program.Rng.RandomLessThan(100) < SaveGame.SkillSavingThrow)
                 {
                     SaveGame.MsgPrint("You resist the effects!");
                 }
@@ -56,9 +56,9 @@ internal class PsiDrainProjectile : Projectile
                 {
                     string killer = mPtr.IndefiniteVisibleName;
                     SaveGame.MsgPrint("Your psychic energy is drained!");
-                    SaveGame.Player.Mana = Math.Max(0, SaveGame.Player.Mana - (Program.Rng.DiceRoll(5, dam) / 2));
+                    SaveGame.Mana = Math.Max(0, SaveGame.Mana - (Program.Rng.DiceRoll(5, dam) / 2));
                     SaveGame.RedrawManaFlaggedAction.Set();
-                    SaveGame.Player.TakeHit(dam, killer);
+                    SaveGame.TakeHit(dam, killer);
                 }
                 dam = 0;
             }
@@ -68,8 +68,8 @@ internal class PsiDrainProjectile : Projectile
             int b = Program.Rng.DiceRoll(5, dam) / 4;
             string s = seen ? "'s" : "s";
             SaveGame.MsgPrint($"You convert {mName}{s} pain into psychic energy!");
-            b = Math.Min(SaveGame.Player.MaxMana, SaveGame.Player.Mana + b);
-            SaveGame.Player.Mana = b;
+            b = Math.Min(SaveGame.MaxMana, SaveGame.Mana + b);
+            SaveGame.Mana = b;
             SaveGame.RedrawManaFlaggedAction.Set();
         }
         string noteDies = " collapses, a mindless husk.";

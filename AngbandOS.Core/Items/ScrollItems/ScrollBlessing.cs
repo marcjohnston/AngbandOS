@@ -24,7 +24,7 @@ internal class ScrollBlessing : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (SaveGame.Player.TimedBlessing.AddTimer(Program.Rng.DieRoll(12) + 6))
+        if (SaveGame.TimedBlessing.AddTimer(Program.Rng.DieRoll(12) + 6))
         {
             eventArgs.Identified = true;
         }

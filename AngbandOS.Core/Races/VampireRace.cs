@@ -65,12 +65,12 @@ internal class VampireRace : Race
     }
     public override void CalcBonuses(SaveGame saveGame)
     {
-        saveGame.Player.HasDarkResistance = true;
-        saveGame.Player.HasHoldLife = true;
-        saveGame.Player.HasNetherResistance = true;
-        saveGame.Player.HasColdResistance = true;
-        saveGame.Player.HasPoisonResistance = true;
-        saveGame.Player.HasGlow = true;
+        saveGame.HasDarkResistance = true;
+        saveGame.HasHoldLife = true;
+        saveGame.HasNetherResistance = true;
+        saveGame.HasColdResistance = true;
+        saveGame.HasPoisonResistance = true;
+        saveGame.HasGlow = true;
     }
     public override bool RestsTillDuskInsteadOfDawn => true;
 
@@ -81,9 +81,9 @@ internal class VampireRace : Race
     public override void Eat(FoodItem item)
     {
         // Vampires only get 1/10th of the food value
-        SaveGame.Player.SetFood(SaveGame.Player.Food + (item.TypeSpecificValue / 10));
+        SaveGame.SetFood(SaveGame.Food + (item.TypeSpecificValue / 10));
         SaveGame.MsgPrint("Mere victuals hold scant sustenance for a being such as yourself.");
-        if (SaveGame.Player.Food < Constants.PyFoodAlert)
+        if (SaveGame.Food < Constants.PyFoodAlert)
         {
             SaveGame.MsgPrint("Your hunger can only be satisfied with fresh blood!");
         }
@@ -92,12 +92,12 @@ internal class VampireRace : Race
     public override void UseRacialPower(SaveGame saveGame)
     {
         // Vampires can drain health
-        if (saveGame.CheckIfRacialPowerWorks(2, 1 + (saveGame.Player.ExperienceLevel / 3), Ability.Constitution, 9))
+        if (saveGame.CheckIfRacialPowerWorks(2, 1 + (saveGame.ExperienceLevel / 3), Ability.Constitution, 9))
         {
             if (saveGame.GetDirectionNoAim(out int direction))
             {
-                int y = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[direction];
-                int x = saveGame.Player.MapX + saveGame.Level.KeypadDirectionXOffset[direction];
+                int y = saveGame.MapY + saveGame.Level.KeypadDirectionYOffset[direction];
+                int x = saveGame.MapX + saveGame.Level.KeypadDirectionXOffset[direction];
                 GridTile tile = saveGame.Level.Grid[y][x];
                 if (tile.MonsterIndex == 0)
                 {
@@ -106,21 +106,21 @@ internal class VampireRace : Race
                 else
                 {
                     saveGame.MsgPrint("You grin and bare your fangs...");
-                    int dummy = saveGame.Player.ExperienceLevel + (Program.Rng.DieRoll(saveGame.Player.ExperienceLevel) * Math.Max(1, saveGame.Player.ExperienceLevel / 10));
+                    int dummy = saveGame.ExperienceLevel + (Program.Rng.DieRoll(saveGame.ExperienceLevel) * Math.Max(1, saveGame.ExperienceLevel / 10));
                     if (saveGame.DrainLife(direction, dummy))
                     {
-                        if (saveGame.Player.Food < Constants.PyFoodFull)
+                        if (saveGame.Food < Constants.PyFoodFull)
                         {
-                            saveGame.Player.RestoreHealth(dummy);
+                            saveGame.RestoreHealth(dummy);
                         }
                         else
                         {
                             saveGame.MsgPrint("You were not hungry.");
                         }
-                        dummy = saveGame.Player.Food + Math.Min(5000, 100 * dummy);
-                        if (saveGame.Player.Food < Constants.PyFoodMax)
+                        dummy = saveGame.Food + Math.Min(5000, 100 * dummy);
+                        if (saveGame.Food < Constants.PyFoodMax)
                         {
-                            saveGame.Player.SetFood(dummy >= Constants.PyFoodMax ? Constants.PyFoodMax - 1 : dummy);
+                            saveGame.SetFood(dummy >= Constants.PyFoodMax ? Constants.PyFoodMax - 1 : dummy);
                         }
                     }
                     else
@@ -138,14 +138,14 @@ internal class VampireRace : Race
     public override void ProcessWorld(ProcessWorldEventArgs processWorldEventArgs)
     {
         if (SaveGame.CurrentDepth <= 0 && 
-            !SaveGame.Player.HasLightResistance &&
-            SaveGame.Player.TimedInvulnerability.TurnsRemaining == 0 &&
-            SaveGame.Player.GameTime.IsLight)
+            !SaveGame.HasLightResistance &&
+            SaveGame.TimedInvulnerability.TurnsRemaining == 0 &&
+            SaveGame.GameTime.IsLight)
         {
-            if (SaveGame.Level.Grid[SaveGame.Player.MapY][SaveGame.Player.MapX].TileFlags.IsSet(GridTile.SelfLit))
+            if (SaveGame.Level.Grid[SaveGame.MapY][SaveGame.MapX].TileFlags.IsSet(GridTile.SelfLit))
             {
                 SaveGame.MsgPrint("The sun's rays scorch your undead flesh!");
-                SaveGame.Player.TakeHit(1, "sunlight");
+                SaveGame.TakeHit(1, "sunlight");
                 processWorldEventArgs.DisableRegeneration = true;
             }
         }

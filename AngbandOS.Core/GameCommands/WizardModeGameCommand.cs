@@ -16,7 +16,7 @@ internal class WizardModeGameCommand : GameCommand
 
     public override bool Execute()
     {
-        if (SaveGame.Player.IsWizard)
+        if (SaveGame.IsWizard)
         {
             SaveGame.GetCom("Wizard Command: ", out char cmd);
             foreach (WizardCommand wizardCommand in SaveGame.SingletonRepository.WizardCommands)

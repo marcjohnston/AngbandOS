@@ -29,7 +29,7 @@ internal abstract class Spell
     public bool Learned;
 
     /// <summary>
-    /// Returns the name of the spell, as rendered to the SaveGame.Player.
+    /// Returns the name of the spell, as rendered to the SaveGame.
     /// </summary>
     public abstract string Name { get; }
 
@@ -64,19 +64,19 @@ internal abstract class Spell
 
     public int FailureChance() 
     {
-        BaseCharacterClass baseCharacterClass = SaveGame.Player.BaseCharacterClass;
+        BaseCharacterClass baseCharacterClass = SaveGame.BaseCharacterClass;
         if (baseCharacterClass.SpellCastingType == null)
         {
             return 100;
         }
         int chance = BaseFailure;
-        chance -= 3 * (SaveGame.Player.ExperienceLevel - Level);
-        chance -= 3 * (SaveGame.Player.AbilityScores[baseCharacterClass.SpellStat].SpellFailureReduction - 1);
-        if (ManaCost > SaveGame.Player.Mana)
+        chance -= 3 * (SaveGame.ExperienceLevel - Level);
+        chance -= 3 * (SaveGame.AbilityScores[baseCharacterClass.SpellStat].SpellFailureReduction - 1);
+        if (ManaCost > SaveGame.Mana)
         {
-            chance += 5 * (ManaCost - SaveGame.Player.Mana);
+            chance += 5 * (ManaCost - SaveGame.Mana);
         }
-        int minfail = SaveGame.Player.AbilityScores[baseCharacterClass.SpellStat].SpellMinFailChance;
+        int minfail = SaveGame.AbilityScores[baseCharacterClass.SpellStat].SpellMinFailChance;
         if (baseCharacterClass.ID != CharacterClass.Priest && baseCharacterClass.ID != CharacterClass.Druid &&
             baseCharacterClass.ID != CharacterClass.Mage && baseCharacterClass.ID != CharacterClass.HighMage &&
             baseCharacterClass.ID != CharacterClass.Cultist)
@@ -86,11 +86,11 @@ internal abstract class Spell
                 minfail = 5;
             }
         }
-        if ((baseCharacterClass.ID == CharacterClass.Priest || baseCharacterClass.ID == CharacterClass.Druid) && SaveGame.Player.HasUnpriestlyWeapon)
+        if ((baseCharacterClass.ID == CharacterClass.Priest || baseCharacterClass.ID == CharacterClass.Druid) && SaveGame.HasUnpriestlyWeapon)
         {
             chance += 25;
         }
-        if (baseCharacterClass.ID == CharacterClass.Cultist && SaveGame.Player.HasUnpriestlyWeapon)
+        if (baseCharacterClass.ID == CharacterClass.Cultist && SaveGame.HasUnpriestlyWeapon)
         {
             chance += 25;
         }
@@ -98,11 +98,11 @@ internal abstract class Spell
         {
             chance = minfail;
         }
-        if (SaveGame.Player.TimedStun.TurnsRemaining > 50)
+        if (SaveGame.TimedStun.TurnsRemaining > 50)
         {
             chance += 25;
         }
-        else if (SaveGame.Player.TimedStun.TurnsRemaining != 0)
+        else if (SaveGame.TimedStun.TurnsRemaining != 0)
         {
             chance += 15;
         }
@@ -182,10 +182,10 @@ internal abstract class Spell
             else
             {
                 SaveGame.MsgPrint("It hurts!");
-                SaveGame.Player.TakeHit(Program.Rng.DiceRoll(subCategory + 1, 6), "a miscast Death spell");
-                if (spell > 15 && Program.Rng.DieRoll(6) == 1 && !SaveGame.Player.HasHoldLife)
+                SaveGame.TakeHit(Program.Rng.DiceRoll(subCategory + 1, 6), "a miscast Death spell");
+                if (spell > 15 && Program.Rng.DieRoll(6) == 1 && !SaveGame.HasHoldLife)
                 {
-                    SaveGame.Player.LoseExperience(spell * 250);
+                    SaveGame.LoseExperience(spell * 250);
                 }
             }
         }
@@ -260,12 +260,12 @@ internal abstract class Spell
                 break;
 
             case 26:
-                SaveGame.Earthquake(SaveGame.Player.MapY, SaveGame.Player.MapX, 5);
+                SaveGame.Earthquake(SaveGame.MapY, SaveGame.MapX, 5);
                 break;
 
             case 27:
             case 28:
-                SaveGame.Player.Dna.GainMutation();
+                SaveGame.Dna.GainMutation();
                 break;
 
             case 29:
@@ -290,7 +290,7 @@ internal abstract class Spell
                 int counter = 0;
                 while (counter++ < 8)
                 {
-                    SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Difficulty * 3 / 2, MonsterSelector.RandomBizarre());
+                    SaveGame.Level.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty * 3 / 2, MonsterSelector.RandomBizarre());
                 }
                 break;
 

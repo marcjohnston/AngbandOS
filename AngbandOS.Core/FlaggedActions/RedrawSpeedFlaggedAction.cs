@@ -15,10 +15,10 @@ internal class RedrawSpeedFlaggedAction : FlaggedAction
     public RedrawSpeedFlaggedAction(SaveGame saveGame) : base(saveGame) { }
     protected override void Execute()
     {
-        int i = SaveGame.Player.Speed;
+        int i = SaveGame.Speed;
         ColourEnum attr = ColourEnum.White;
         string buf = "";
-        if (SaveGame.Player.IsSearching)
+        if (SaveGame.IsSearching)
         {
             i += 10;
         }

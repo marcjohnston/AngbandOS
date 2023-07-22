@@ -13,7 +13,7 @@ internal class ChaosSpellWordOfDestruction : Spell
     private ChaosSpellWordOfDestruction(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.DestroyArea(SaveGame.Player.MapY, SaveGame.Player.MapX, 15);
+        SaveGame.DestroyArea(SaveGame.MapY, SaveGame.MapX, 15);
     }
 
     public override void CastFailed()

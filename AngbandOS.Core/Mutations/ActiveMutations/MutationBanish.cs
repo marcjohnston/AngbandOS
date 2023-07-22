@@ -20,8 +20,8 @@ internal class MutationBanish : Mutation
         {
             return;
         }
-        int y = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
-        int x = saveGame.Player.MapX + saveGame.Level.KeypadDirectionXOffset[dir];
+        int y = saveGame.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
+        int x = saveGame.MapX + saveGame.Level.KeypadDirectionXOffset[dir];
         GridTile cPtr = saveGame.Level.Grid[y][x];
         if (cPtr.MonsterIndex == 0)
         {

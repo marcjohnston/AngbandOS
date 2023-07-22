@@ -13,19 +13,19 @@ internal class NatureSpellDaylight : Spell
     private NatureSpellDaylight(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.LightArea(Program.Rng.DiceRoll(2, SaveGame.Player.ExperienceLevel / 2), (SaveGame.Player.ExperienceLevel / 10) + 1);
-        if (!SaveGame.Player.Race.IsBurnedBySunlight || SaveGame.Player.HasLightResistance)
+        SaveGame.LightArea(Program.Rng.DiceRoll(2, SaveGame.ExperienceLevel / 2), (SaveGame.ExperienceLevel / 10) + 1);
+        if (!SaveGame.Race.IsBurnedBySunlight || SaveGame.HasLightResistance)
         {
             return;
         }
         SaveGame.MsgPrint("The daylight scorches your flesh!");
-        SaveGame.Player.TakeHit(Program.Rng.DiceRoll(2, 2), "daylight");
+        SaveGame.TakeHit(Program.Rng.DiceRoll(2, 2), "daylight");
     }
 
     public override string Name => "Daylight";
     
     protected override string? Info()
     {
-        return $"dam 2d{SaveGame.Player.ExperienceLevel / 2}";
+        return $"dam 2d{SaveGame.ExperienceLevel / 2}";
     }
 }

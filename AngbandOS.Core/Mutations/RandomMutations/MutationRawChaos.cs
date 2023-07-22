@@ -20,13 +20,13 @@ internal class MutationRawChaos : Mutation
 
     public override void OnProcessWorld(SaveGame saveGame)
     {
-        if (saveGame.Player.HasAntiMagic || Program.Rng.DieRoll(8000) != 1)
+        if (saveGame.HasAntiMagic || Program.Rng.DieRoll(8000) != 1)
         {
             return;
         }
         saveGame.Disturb(false);
         saveGame.MsgPrint("You feel the world warping around you!");
         saveGame.MsgPrint(null);
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>(), 0, saveGame.Player.ExperienceLevel, 8);
+        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>(), 0, saveGame.ExperienceLevel, 8);
     }
 }

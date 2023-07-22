@@ -14,12 +14,12 @@ internal class UsableSpellBookItemFilter : ItemCategoryItemFilter
 {
     public UsableSpellBookItemFilter(SaveGame saveGame) : base()
     {
-        if (saveGame.Player.PrimaryRealm != null)
+        if (saveGame.PrimaryRealm != null)
         {
-            ItemCategories.Add(saveGame.Player.PrimaryRealm.SpellBookItemCategory);
-            if (saveGame.Player.SecondaryRealm != null)
+            ItemCategories.Add(saveGame.PrimaryRealm.SpellBookItemCategory);
+            if (saveGame.SecondaryRealm != null)
             {
-                ItemCategories.Add(saveGame.Player.SecondaryRealm.SpellBookItemCategory);
+                ItemCategories.Add(saveGame.SecondaryRealm.SpellBookItemCategory);
             }
         }
     }

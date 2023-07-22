@@ -28,20 +28,20 @@ internal class LifePotionItemFactory : PotionItemFactory
         // Life heals you 5000 health, removes experience and ability score drains, and
         // cures blindness, confusion, stun, poison, and bleeding
         SaveGame.MsgPrint("You feel life flow through your body!");
-        SaveGame.Player.RestoreLevel();
-        SaveGame.Player.RestoreHealth(5000);
-        SaveGame.Player.TimedPoison.ResetTimer();
-        SaveGame.Player.TimedBlindness.ResetTimer();
-        SaveGame.Player.TimedConfusion.ResetTimer();
-        SaveGame.Player.TimedHallucinations.ResetTimer();
-        SaveGame.Player.TimedStun.ResetTimer();
-        SaveGame.Player.TimedBleeding.ResetTimer();
-        SaveGame.Player.TryRestoringAbilityScore(Ability.Strength);
-        SaveGame.Player.TryRestoringAbilityScore(Ability.Constitution);
-        SaveGame.Player.TryRestoringAbilityScore(Ability.Dexterity);
-        SaveGame.Player.TryRestoringAbilityScore(Ability.Wisdom);
-        SaveGame.Player.TryRestoringAbilityScore(Ability.Intelligence);
-        SaveGame.Player.TryRestoringAbilityScore(Ability.Charisma);
+        SaveGame.RestoreLevel();
+        SaveGame.RestoreHealth(5000);
+        SaveGame.TimedPoison.ResetTimer();
+        SaveGame.TimedBlindness.ResetTimer();
+        SaveGame.TimedConfusion.ResetTimer();
+        SaveGame.TimedHallucinations.ResetTimer();
+        SaveGame.TimedStun.ResetTimer();
+        SaveGame.TimedBleeding.ResetTimer();
+        SaveGame.TryRestoringAbilityScore(Ability.Strength);
+        SaveGame.TryRestoringAbilityScore(Ability.Constitution);
+        SaveGame.TryRestoringAbilityScore(Ability.Dexterity);
+        SaveGame.TryRestoringAbilityScore(Ability.Wisdom);
+        SaveGame.TryRestoringAbilityScore(Ability.Intelligence);
+        SaveGame.TryRestoringAbilityScore(Ability.Charisma);
         return true;
     }
     public override bool Smash(int who, int y, int x)

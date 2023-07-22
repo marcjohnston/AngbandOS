@@ -15,9 +15,9 @@ internal class EatGoldAttackEffect : BaseAttackEffect
     public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         // Steal some money
-        saveGame.Player.TakeHit(damage, monsterDescription);
+        saveGame.TakeHit(damage, monsterDescription);
         obvious = true;
-        if ((saveGame.Player.TimedParalysis.TurnsRemaining == 0 && Program.Rng.RandomLessThan(100) < saveGame.Player.AbilityScores[Ability.Dexterity].DexTheftAvoidance + saveGame.Player.ExperienceLevel) || saveGame.Player.HasAntiTheft)
+        if ((saveGame.TimedParalysis.TurnsRemaining == 0 && Program.Rng.RandomLessThan(100) < saveGame.AbilityScores[Ability.Dexterity].DexTheftAvoidance + saveGame.ExperienceLevel) || saveGame.HasAntiTheft)
         {
             saveGame.MsgPrint("You quickly protect your money pouch!");
             if (Program.Rng.RandomLessThan(3) != 0)
@@ -28,20 +28,20 @@ internal class EatGoldAttackEffect : BaseAttackEffect
         else
         {
             // The amount of gold taken depends on how much you're carrying
-            int gold = (saveGame.Player.Gold / 10) + Program.Rng.DieRoll(25);
+            int gold = (saveGame.Gold / 10) + Program.Rng.DieRoll(25);
             if (gold < 2)
             {
                 gold = 2;
             }
             if (gold > 5000)
             {
-                gold = (saveGame.Player.Gold / 20) + Program.Rng.DieRoll(3000);
+                gold = (saveGame.Gold / 20) + Program.Rng.DieRoll(3000);
             }
-            if (gold > saveGame.Player.Gold)
+            if (gold > saveGame.Gold)
             {
-                gold = saveGame.Player.Gold;
+                gold = saveGame.Gold;
             }
-            saveGame.Player.Gold -= gold;
+            saveGame.Gold -= gold;
             // The monster gets the gold it stole, in case you kill it
             // before leaving the level
             monster.StolenGold += gold;
@@ -50,7 +50,7 @@ internal class EatGoldAttackEffect : BaseAttackEffect
             {
                 saveGame.MsgPrint("Nothing was stolen.");
             }
-            else if (saveGame.Player.Gold != 0)
+            else if (saveGame.Gold != 0)
             {
                 saveGame.MsgPrint("Your purse feels lighter.");
                 saveGame.MsgPrint($"{gold} coins were stolen!");

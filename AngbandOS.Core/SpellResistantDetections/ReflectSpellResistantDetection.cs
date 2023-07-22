@@ -11,7 +11,7 @@ internal class ReflectSpellResistantDetection : SpellResistantDetection
 {
     public override void Learn(SaveGame saveGame, Monster monster)
     {
-        if (saveGame.Player.HasReflection)
+        if (saveGame.HasReflection)
         {
             monster.SmImmReflect = true;
         }

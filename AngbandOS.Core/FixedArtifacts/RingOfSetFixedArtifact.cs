@@ -100,16 +100,16 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
                 {
                     // Decrease all the players ability scores, bypassing sustain and divine protection
                     SaveGame.MsgPrint("You are surrounded by a malignant aura.");
-                    SaveGame.Player.DecreaseAbilityScore(Ability.Strength, 50, true);
-                    SaveGame.Player.DecreaseAbilityScore(Ability.Intelligence, 50, true);
-                    SaveGame.Player.DecreaseAbilityScore(Ability.Wisdom, 50, true);
-                    SaveGame.Player.DecreaseAbilityScore(Ability.Dexterity, 50, true);
-                    SaveGame.Player.DecreaseAbilityScore(Ability.Constitution, 50, true);
-                    SaveGame.Player.DecreaseAbilityScore(Ability.Charisma, 50, true);
+                    SaveGame.DecreaseAbilityScore(Ability.Strength, 50, true);
+                    SaveGame.DecreaseAbilityScore(Ability.Intelligence, 50, true);
+                    SaveGame.DecreaseAbilityScore(Ability.Wisdom, 50, true);
+                    SaveGame.DecreaseAbilityScore(Ability.Dexterity, 50, true);
+                    SaveGame.DecreaseAbilityScore(Ability.Constitution, 50, true);
+                    SaveGame.DecreaseAbilityScore(Ability.Charisma, 50, true);
                     // Reduce both experience and maximum experience
-                    SaveGame.Player.ExperiencePoints -= SaveGame.Player.ExperiencePoints / 4;
-                    SaveGame.Player.MaxExperienceGained -= SaveGame.Player.ExperiencePoints / 4;
-                    SaveGame.Player.CheckExperience();
+                    SaveGame.ExperiencePoints -= SaveGame.ExperiencePoints / 4;
+                    SaveGame.MaxExperienceGained -= SaveGame.ExperiencePoints / 4;
+                    SaveGame.CheckExperience();
                     break;
                 }
             case 3:

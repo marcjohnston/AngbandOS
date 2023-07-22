@@ -66,7 +66,7 @@ internal class UpdateScentFlaggedAction : FlaggedAction
         _flowN++;
         _flowHead = 0;
         _flowTail = 0;
-        UpdateFlowAux(SaveGame.Player.MapY, SaveGame.Player.MapX, 0);
+        UpdateFlowAux(SaveGame.MapY, SaveGame.MapX, 0);
         while (_flowHead != _flowTail)
         {
             y = SaveGame.Level.TempY[_flowTail];

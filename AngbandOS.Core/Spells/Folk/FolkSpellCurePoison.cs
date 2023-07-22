@@ -13,7 +13,7 @@ internal class FolkSpellCurePoison : Spell
     private FolkSpellCurePoison(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Player.TimedPoison.ResetTimer();
+        SaveGame.TimedPoison.ResetTimer();
     }
 
     public override string Name => "Cure Poison";

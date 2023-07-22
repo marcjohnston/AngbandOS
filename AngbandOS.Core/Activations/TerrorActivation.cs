@@ -16,11 +16,11 @@ internal class TerrorActivation : Activation
     private TerrorActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 75;
 
-    public override int RechargeTime() => 3 * (SaveGame.Player.ExperienceLevel + 10);
+    public override int RechargeTime() => 3 * (SaveGame.ExperienceLevel + 10);
 
     public override bool Activate()
     {
-        SaveGame.TurnMonsters(40 + SaveGame.Player.ExperienceLevel);
+        SaveGame.TurnMonsters(40 + SaveGame.ExperienceLevel);
         return true;
     }
 

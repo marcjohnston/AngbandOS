@@ -27,13 +27,13 @@ internal class RuinationPotionItemFactory : PotionItemFactory
         // Ruination does 10d10 damage and reduces all your ability scores, bypassing
         // sustains and divine protection
         SaveGame.MsgPrint("Your nerves and muscles feel weak and lifeless!");
-        SaveGame.Player.TakeHit(Program.Rng.DiceRoll(10, 10), "a potion of Ruination");
-        SaveGame.Player.DecreaseAbilityScore(Ability.Dexterity, 25, true);
-        SaveGame.Player.DecreaseAbilityScore(Ability.Wisdom, 25, true);
-        SaveGame.Player.DecreaseAbilityScore(Ability.Constitution, 25, true);
-        SaveGame.Player.DecreaseAbilityScore(Ability.Strength, 25, true);
-        SaveGame.Player.DecreaseAbilityScore(Ability.Charisma, 25, true);
-        SaveGame.Player.DecreaseAbilityScore(Ability.Intelligence, 25, true);
+        SaveGame.TakeHit(Program.Rng.DiceRoll(10, 10), "a potion of Ruination");
+        SaveGame.DecreaseAbilityScore(Ability.Dexterity, 25, true);
+        SaveGame.DecreaseAbilityScore(Ability.Wisdom, 25, true);
+        SaveGame.DecreaseAbilityScore(Ability.Constitution, 25, true);
+        SaveGame.DecreaseAbilityScore(Ability.Strength, 25, true);
+        SaveGame.DecreaseAbilityScore(Ability.Charisma, 25, true);
+        SaveGame.DecreaseAbilityScore(Ability.Intelligence, 25, true);
         return true;
     }
 

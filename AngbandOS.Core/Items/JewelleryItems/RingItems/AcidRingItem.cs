@@ -18,7 +18,7 @@ internal class AcidRingItem : RingItem, IItemActivatable
             return;
         }
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir, 50, 2);
-        SaveGame.Player.TimedAcidResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
+        SaveGame.TimedAcidResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
         RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
     }
 

@@ -50,6 +50,6 @@ internal class ElfRace : Race
 
     public override void CalcBonuses(SaveGame saveGame)
     {
-        saveGame.Player.HasLightResistance = true;
+        saveGame.HasLightResistance = true;
     }
 }

@@ -53,15 +53,15 @@ internal abstract class SummonMonsterSpell : MonsterSpell
     /// <returns></returns>
     protected virtual bool Summon(SaveGame saveGame, Monster monster)
     {
-        int playerX = saveGame.Player.MapX;
-        int playerY = saveGame.Player.MapY;
+        int playerX = saveGame.MapX;
+        int playerY = saveGame.MapY;
 
         return saveGame.Level.SummonSpecific(playerY, playerX, SummonLevel(monster), MonsterSelector(monster));
     }
 
     public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
     {
-        bool playerIsBlind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool playerIsBlind = saveGame.TimedBlindness.TurnsRemaining != 0;
         int count = 0;
 
         for (int k = 0; k < MaximumSummonCount(saveGame); k++)
@@ -85,7 +85,7 @@ internal abstract class SummonMonsterSpell : MonsterSpell
 
     public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
     {
-        bool playerIsBlind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool playerIsBlind = saveGame.TimedBlindness.TurnsRemaining != 0;
         bool friendly = monster.SmFriendly;
         int count = 0;
 

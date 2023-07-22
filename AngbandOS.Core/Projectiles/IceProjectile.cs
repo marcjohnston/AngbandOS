@@ -116,7 +116,7 @@ internal class IceProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
         if (dam > 1600)
         {
             dam = 1600;
@@ -129,19 +129,19 @@ internal class IceProjectile : Projectile
             SaveGame.MsgPrint("You are hit by something sharp and cold!");
         }
         SaveGame.ColdDam(dam, killer);
-        if (!SaveGame.Player.HasShardResistance)
+        if (!SaveGame.HasShardResistance)
         {
-            SaveGame.Player.TimedBleeding.AddTimer(Program.Rng.DiceRoll(5, 8));
+            SaveGame.TimedBleeding.AddTimer(Program.Rng.DiceRoll(5, 8));
         }
-        if (!SaveGame.Player.HasSoundResistance)
+        if (!SaveGame.HasSoundResistance)
         {
-            SaveGame.Player.TimedStun.AddTimer(Program.Rng.DieRoll(15));
+            SaveGame.TimedStun.AddTimer(Program.Rng.DieRoll(15));
         }
-        if (!(SaveGame.Player.HasColdResistance || SaveGame.Player.TimedColdResistance.TurnsRemaining != 0) || Program.Rng.DieRoll(12) == 1)
+        if (!(SaveGame.HasColdResistance || SaveGame.TimedColdResistance.TurnsRemaining != 0) || Program.Rng.DieRoll(12) == 1)
         {
-            if (!SaveGame.Player.HasColdImmunity)
+            if (!SaveGame.HasColdImmunity)
             {
-                SaveGame.Player.InvenDamage(SaveGame.SetColdDestroy, 3);
+                SaveGame.InvenDamage(SaveGame.SetColdDestroy, 3);
             }
         }
         return true;

@@ -12,11 +12,11 @@ internal class MutationLauncher : Mutation
 {
     public override void Activate(SaveGame saveGame)
     {
-        if (!saveGame.CheckIfRacialPowerWorks(1, saveGame.Player.ExperienceLevel, Ability.Strength, 6))
+        if (!saveGame.CheckIfRacialPowerWorks(1, saveGame.ExperienceLevel, Ability.Strength, 6))
         {
             return;
         }
-        saveGame.DoCmdThrow(2 + (saveGame.Player.ExperienceLevel / 16));
+        saveGame.DoCmdThrow(2 + (saveGame.ExperienceLevel / 16));
     }
 
     public override string ActivationSummary(int lvl)

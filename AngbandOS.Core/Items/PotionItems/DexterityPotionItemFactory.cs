@@ -26,7 +26,7 @@ internal class DexterityPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Dexterity increases your dexterity
-        return SaveGame.Player.TryIncreasingAbilityScore(Ability.Dexterity);
+        return SaveGame.TryIncreasingAbilityScore(Ability.Dexterity);
     }
     public override Item CreateItem() => new DexterityPotionItem(SaveGame);
 }

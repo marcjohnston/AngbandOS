@@ -114,7 +114,7 @@ internal class SoundProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
         if (dam > 1600)
         {
             dam = 1600;
@@ -126,7 +126,7 @@ internal class SoundProjectile : Projectile
         {
             SaveGame.MsgPrint("You are hit by a loud noise!");
         }
-        if (SaveGame.Player.HasSoundResistance)
+        if (SaveGame.HasSoundResistance)
         {
             dam *= 5;
             dam /= Program.Rng.DieRoll(6) + 6;
@@ -134,13 +134,13 @@ internal class SoundProjectile : Projectile
         else
         {
             int kk = Program.Rng.DieRoll(dam > 90 ? 35 : (dam / 3) + 5);
-            SaveGame.Player.TimedStun.AddTimer(kk);
+            SaveGame.TimedStun.AddTimer(kk);
         }
-        if (!SaveGame.Player.HasSoundResistance || Program.Rng.DieRoll(13) == 1)
+        if (!SaveGame.HasSoundResistance || Program.Rng.DieRoll(13) == 1)
         {
-            SaveGame.Player.InvenDamage(SaveGame.SetColdDestroy, 2);
+            SaveGame.InvenDamage(SaveGame.SetColdDestroy, 2);
         }
-        SaveGame.Player.TakeHit(dam, killer);
+        SaveGame.TakeHit(dam, killer);
         return true;
     }
 }

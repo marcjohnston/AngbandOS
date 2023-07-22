@@ -20,8 +20,8 @@ internal class BattleAxeSpleenSlicerFixedArtifact : FixedArtifact, IFixedArtifac
     public void ActivateItem(SaveGame saveGame, Item item)
     {
         saveGame.MsgPrint("Your battle axe radiates deep purple...");
-        saveGame.Player.RestoreHealth(Program.Rng.DiceRoll(4, 8));
-        saveGame.Player.TimedBleeding.SetTimer((saveGame.Player.TimedBleeding.TurnsRemaining / 2) - 50);
+        saveGame.RestoreHealth(Program.Rng.DiceRoll(4, 8));
+        saveGame.TimedBleeding.SetTimer((saveGame.TimedBleeding.TurnsRemaining / 2) - 50);
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(3) + 3;
     }
     public string DescribeActivationEffect() => "cure wounds (4d7) every 3+d3 turns";

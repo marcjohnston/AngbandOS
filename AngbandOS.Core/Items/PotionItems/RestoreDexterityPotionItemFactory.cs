@@ -26,7 +26,7 @@ internal class RestoreDexterityPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Restore wisdom restores your wisdom
-        return SaveGame.Player.TryRestoringAbilityScore(Ability.Wisdom);
+        return SaveGame.TryRestoringAbilityScore(Ability.Wisdom);
     }
     public override Item CreateItem() => new RestoreDexterityPotionItem(SaveGame);
 }

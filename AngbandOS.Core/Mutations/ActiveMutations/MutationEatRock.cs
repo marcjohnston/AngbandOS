@@ -20,8 +20,8 @@ internal class MutationEatRock : Mutation
         {
             return;
         }
-        int y = saveGame.Player.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
-        int x = saveGame.Player.MapX + saveGame.Level.KeypadDirectionXOffset[dir];
+        int y = saveGame.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
+        int x = saveGame.MapX + saveGame.Level.KeypadDirectionXOffset[dir];
         GridTile cPtr = saveGame.Level.Grid[y][x];
         if (saveGame.Level.GridPassable(y, x))
         {
@@ -45,25 +45,25 @@ internal class MutationEatRock : Mutation
         }
         if (cPtr.FeatureType.IsClosedDoor || cPtr.FeatureType.IsSecretDoor || cPtr.FeatureType.IsRubble)
         {
-            saveGame.Player.SetFood(saveGame.Player.Food + 3000);
+            saveGame.SetFood(saveGame.Food + 3000);
         }
         else if (cPtr.FeatureType.IsVein)
         {
-            saveGame.Player.SetFood(saveGame.Player.Food + 5000);
+            saveGame.SetFood(saveGame.Food + 5000);
         }
         else
         {
             saveGame.MsgPrint("This granite is very filling!");
-            saveGame.Player.SetFood(saveGame.Player.Food + 10000);
+            saveGame.SetFood(saveGame.Food + 10000);
         }
         saveGame.WallToMud(dir);
-        int oy = saveGame.Player.MapY;
-        int ox = saveGame.Player.MapX;
-        saveGame.Player.MapY = y;
-        saveGame.Player.MapX = x;
-        saveGame.Level.RedrawSingleLocation(saveGame.Player.MapY, saveGame.Player.MapX);
+        int oy = saveGame.MapY;
+        int ox = saveGame.MapX;
+        saveGame.MapY = y;
+        saveGame.MapX = x;
+        saveGame.Level.RedrawSingleLocation(saveGame.MapY, saveGame.MapX);
         saveGame.Level.RedrawSingleLocation(oy, ox);
-        saveGame.Player.RecenterScreenAroundPlayer();
+        saveGame.RecenterScreenAroundPlayer();
         saveGame.UpdateScentFlaggedAction.Set();
         saveGame.UpdateLightFlaggedAction.Set();
         saveGame.UpdateViewFlaggedAction.Set();

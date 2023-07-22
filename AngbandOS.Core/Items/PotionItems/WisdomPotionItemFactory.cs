@@ -26,7 +26,7 @@ internal class WisdomPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Wisdom increases your wisdom
-        return SaveGame.Player.TryIncreasingAbilityScore(Ability.Wisdom);
+        return SaveGame.TryIncreasingAbilityScore(Ability.Wisdom);
     }
     public override Item CreateItem() => new WisdomPotionItem(SaveGame);
 }

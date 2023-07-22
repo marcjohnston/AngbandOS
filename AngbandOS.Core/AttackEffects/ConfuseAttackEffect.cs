@@ -14,10 +14,10 @@ internal class ConfuseAttackEffect : BaseAttackEffect
     public override string Description => "confuse";
     public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
-        saveGame.Player.TakeHit(damage, monsterDescription);
-        if (!saveGame.Player.HasConfusionResistance)
+        saveGame.TakeHit(damage, monsterDescription);
+        if (!saveGame.HasConfusionResistance)
         {
-            if (saveGame.Player.TimedConfusion.AddTimer(3 + Program.Rng.DieRoll(monsterLevel)))
+            if (saveGame.TimedConfusion.AddTimer(3 + Program.Rng.DieRoll(monsterLevel)))
             {
                 obvious = true;
             }

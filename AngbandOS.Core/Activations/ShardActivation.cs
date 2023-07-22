@@ -20,7 +20,7 @@ internal class ShardActivation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ShardProjectile>(), direction, 120 + SaveGame.Player.ExperienceLevel, 2);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ShardProjectile>(), direction, 120 + SaveGame.ExperienceLevel, 2);
         return true;
     }
 

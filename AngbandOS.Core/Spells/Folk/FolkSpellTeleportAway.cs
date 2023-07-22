@@ -17,7 +17,7 @@ internal class FolkSpellTeleportAway : Spell
         {
             return;
         }
-        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<TeleportAwayAllProjectile>(), dir, SaveGame.Player.ExperienceLevel);
+        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<TeleportAwayAllProjectile>(), dir, SaveGame.ExperienceLevel);
     }
 
     public override string Name => "Teleport Away";

@@ -45,11 +45,11 @@ internal class DominationProjectile : Projectile
                 }
             }
             doConf = 0;
-            if ((rPtr.Undead || rPtr.Demon) && rPtr.Level > SaveGame.Player.ExperienceLevel / 2 && Program.Rng.DieRoll(2) == 1)
+            if ((rPtr.Undead || rPtr.Demon) && rPtr.Level > SaveGame.ExperienceLevel / 2 && Program.Rng.DieRoll(2) == 1)
             {
                 string s = seen ? "'s" : "s";
                 SaveGame.MsgPrint($"{mName}{s} corrupted mind backlashes your attack!");
-                if (Program.Rng.RandomLessThan(100) < SaveGame.Player.SkillSavingThrow)
+                if (Program.Rng.RandomLessThan(100) < SaveGame.SkillSavingThrow)
                 {
                     SaveGame.MsgPrint("You resist the effects!");
                 }
@@ -58,11 +58,11 @@ internal class DominationProjectile : Projectile
                     switch (Program.Rng.DieRoll(4))
                     {
                         case 1:
-                            SaveGame.Player.TimedStun.AddTimer((dam / 2));
+                            SaveGame.TimedStun.AddTimer((dam / 2));
                             break;
 
                         case 2:
-                            SaveGame.Player.TimedConfusion.AddTimer((dam / 2));
+                            SaveGame.TimedConfusion.AddTimer((dam / 2));
                             break;
 
                         default:
@@ -73,7 +73,7 @@ internal class DominationProjectile : Projectile
                                 }
                                 else
                                 {
-                                    SaveGame.Player.TimedFear.AddTimer(dam);
+                                    SaveGame.TimedFear.AddTimer(dam);
                                 }
                                 break;
                             }

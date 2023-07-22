@@ -25,7 +25,7 @@ internal class CharmProjectile : Projectile
         bool seen = mPtr.IsVisible;
         bool obvious = false;
         string? note = null;
-        dam += SaveGame.Player.AbilityScores[Ability.Charisma].ConRecoverySpeed - 1;
+        dam += SaveGame.AbilityScores[Ability.Charisma].ConRecoverySpeed - 1;
         if (seen)
         {
             obvious = true;
@@ -42,7 +42,7 @@ internal class CharmProjectile : Projectile
             note = " is unaffected!";
             obvious = false;
         }
-        else if (SaveGame.Player.HasAggravation || rPtr.Guardian)
+        else if (SaveGame.HasAggravation || rPtr.Guardian)
         {
             note = " hates you too much!";
         }

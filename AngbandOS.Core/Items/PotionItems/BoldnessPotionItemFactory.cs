@@ -26,7 +26,7 @@ internal class BoldnessPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Boldness stops you being afraid
-        return SaveGame.Player.TimedFear.ResetTimer();
+        return SaveGame.TimedFear.ResetTimer();
     }
     public override Item CreateItem() => new BoldnessPotionItem(SaveGame);
 }

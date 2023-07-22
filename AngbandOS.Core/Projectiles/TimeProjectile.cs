@@ -39,7 +39,7 @@ internal class TimeProjectile : Projectile
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
         int k = 0;
-        bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
         string act = null;
         if (dam > 1600)
         {
@@ -52,7 +52,7 @@ internal class TimeProjectile : Projectile
         {
             SaveGame.MsgPrint("You are hit by a blast from the past!");
         }
-        if (SaveGame.Player.HasTimeResistance)
+        if (SaveGame.HasTimeResistance)
         {
             dam *= 4;
             dam /= Program.Rng.DieRoll(6) + 6;
@@ -69,7 +69,7 @@ internal class TimeProjectile : Projectile
                 case 5:
                     {
                         SaveGame.MsgPrint("You feel life has clocked back.");
-                        SaveGame.Player.LoseExperience(100 + (SaveGame.Player.ExperiencePoints / 100 * Constants.MonDrainLife));
+                        SaveGame.LoseExperience(100 + (SaveGame.ExperiencePoints / 100 * Constants.MonDrainLife));
                         break;
                     }
                 case 6:
@@ -110,10 +110,10 @@ internal class TimeProjectile : Projectile
                                 break;
                         }
                         SaveGame.MsgPrint($"You're not as {act} as you used to be...");
-                        SaveGame.Player.AbilityScores[k].Innate = SaveGame.Player.AbilityScores[k].Innate * 3 / 4;
-                        if (SaveGame.Player.AbilityScores[k].Innate < 3)
+                        SaveGame.AbilityScores[k].Innate = SaveGame.AbilityScores[k].Innate * 3 / 4;
+                        if (SaveGame.AbilityScores[k].Innate < 3)
                         {
-                            SaveGame.Player.AbilityScores[k].Innate = 3;
+                            SaveGame.AbilityScores[k].Innate = 3;
                         }
                         SaveGame.UpdateBonusesFlaggedAction.Set();
                         break;
@@ -123,10 +123,10 @@ internal class TimeProjectile : Projectile
                         SaveGame.MsgPrint("You're not as powerful as you used to be...");
                         for (k = 0; k < 6; k++)
                         {
-                            SaveGame.Player.AbilityScores[k].Innate = SaveGame.Player.AbilityScores[k].Innate * 3 / 4;
-                            if (SaveGame.Player.AbilityScores[k].Innate < 3)
+                            SaveGame.AbilityScores[k].Innate = SaveGame.AbilityScores[k].Innate * 3 / 4;
+                            if (SaveGame.AbilityScores[k].Innate < 3)
                             {
-                                SaveGame.Player.AbilityScores[k].Innate = 3;
+                                SaveGame.AbilityScores[k].Innate = 3;
                             }
                         }
                         SaveGame.UpdateBonusesFlaggedAction.Set();
@@ -134,7 +134,7 @@ internal class TimeProjectile : Projectile
                     }
             }
         }
-        SaveGame.Player.TakeHit(dam, killer);
+        SaveGame.TakeHit(dam, killer);
         return true;
     }
 }

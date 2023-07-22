@@ -18,14 +18,14 @@ internal class InventoryScript : Script
         SaveGame.ViewingEquipment = false;
         ScreenBuffer savedScreen = SaveGame.Screen.Clone();
         // We want to see everything
-        bool inventoryShown = SaveGame.Player.ShowInven(_inventorySlot => !_inventorySlot.IsEquipment, null);
+        bool inventoryShown = SaveGame.ShowInven(_inventorySlot => !_inventorySlot.IsEquipment, null);
         if (!inventoryShown)
         {
             SaveGame.MsgPrint("You have nothing.");
             return false;
         }
         // Get a new command
-        string outVal = $"Inventory: carrying {SaveGame.Player.WeightCarried / 10}.{SaveGame.Player.WeightCarried % 10} pounds ({SaveGame.Player.WeightCarried * 100 / (SaveGame.Player.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
+        string outVal = $"Inventory: carrying {SaveGame.WeightCarried / 10}.{SaveGame.WeightCarried % 10} pounds ({SaveGame.WeightCarried * 100 / (SaveGame.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
         SaveGame.Screen.PrintLine(outVal, 0, 0);
         SaveGame.QueuedCommand = SaveGame.Inkey();
         SaveGame.Screen.Restore(savedScreen);

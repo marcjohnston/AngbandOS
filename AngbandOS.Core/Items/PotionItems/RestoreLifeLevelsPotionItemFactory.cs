@@ -26,7 +26,7 @@ internal class RestoreLifeLevelsPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Restore life levels restores any lost experience
-        return SaveGame.Player.RestoreLevel();
+        return SaveGame.RestoreLevel();
     }
     public override Item CreateItem() => new RestoreLifeLevelsPotionItem(SaveGame);
 }

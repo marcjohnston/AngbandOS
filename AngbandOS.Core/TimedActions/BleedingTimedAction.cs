@@ -52,10 +52,10 @@ internal class BleedingTimedAction : TimedAction
     {
         if (Program.Rng.DieRoll(1000) < newRate || Program.Rng.DieRoll(16) == 1)
         {
-            if (!SaveGame.Player.HasSustainCharisma)
+            if (!SaveGame.HasSustainCharisma)
             {
                 SaveGame.MsgPrint("You have been horribly scarred.");
-                SaveGame.Player.TryDecreasingAbilityScore(Ability.Charisma);
+                SaveGame.TryDecreasingAbilityScore(Ability.Charisma);
             }
         }
         switch (newRate)
@@ -100,7 +100,7 @@ internal class BleedingTimedAction : TimedAction
 
     public override bool SetTimer(int value)
     {
-        if (!SaveGame.Player.Race.CanBleed(SaveGame.Player.ExperienceLevel))
+        if (!SaveGame.Race.CanBleed(SaveGame.ExperienceLevel))
         {
             value = 0;
         }
@@ -114,7 +114,7 @@ internal class BleedingTimedAction : TimedAction
     {
         if (TurnsRemaining > 0)
         {
-            int adjust = SaveGame.Player.AbilityScores[Ability.Constitution].ConRecoverySpeed + 1;
+            int adjust = SaveGame.AbilityScores[Ability.Constitution].ConRecoverySpeed + 1;
             if (TurnsRemaining > 1000)
             {
                 adjust = 0;

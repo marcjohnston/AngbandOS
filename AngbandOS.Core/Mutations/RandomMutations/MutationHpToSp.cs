@@ -20,21 +20,21 @@ internal class MutationHpToSp : Mutation
 
     public override void OnProcessWorld(SaveGame saveGame)
     {
-        if (saveGame.Player.HasAntiMagic || Program.Rng.DieRoll(4000) != 1)
+        if (saveGame.HasAntiMagic || Program.Rng.DieRoll(4000) != 1)
         {
             return;
         }
-        int wounds = saveGame.Player.MaxMana - saveGame.Player.Mana;
+        int wounds = saveGame.MaxMana - saveGame.Mana;
         if (wounds <= 0)
         {
             return;
         }
-        int healing = saveGame.Player.Health;
+        int healing = saveGame.Health;
         if (healing > wounds)
         {
             healing = wounds;
         }
-        saveGame.Player.Mana += healing;
-        saveGame.Player.TakeHit(healing, "blood rushing to the head");
+        saveGame.Mana += healing;
+        saveGame.TakeHit(healing, "blood rushing to the head");
     }
 }

@@ -15,12 +15,12 @@ internal class TarotSpellConjureElemental : Spell
     {
         if (Program.Rng.DieRoll(6) > 3)
         {
-            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.ExperienceLevel, new ElementalMonsterSelector(), false))
+            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new ElementalMonsterSelector(), false))
             {
                 SaveGame.MsgPrint("No-one ever turns up.");
             }
         }
-        else if (SaveGame.Level.SummonSpecific(SaveGame.Player.MapY, SaveGame.Player.MapX, SaveGame.Player.ExperienceLevel, new ElementalMonsterSelector()))
+        else if (SaveGame.Level.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new ElementalMonsterSelector()))
         {
             SaveGame.MsgPrint("You fail to control the elemental creature!");
         }

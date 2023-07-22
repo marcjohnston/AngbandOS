@@ -35,7 +35,7 @@ internal class MutationEatMagic : Mutation
             }
             else
             {
-                saveGame.Player.Mana += 2 * lev;
+                saveGame.Mana += 2 * lev;
                 oPtr.TypeSpecificValue = 500;
             }
         }
@@ -43,7 +43,7 @@ internal class MutationEatMagic : Mutation
         {
             if (oPtr.TypeSpecificValue > 0)
             {
-                saveGame.Player.Mana += oPtr.TypeSpecificValue * lev;
+                saveGame.Mana += oPtr.TypeSpecificValue * lev;
                 oPtr.TypeSpecificValue = 0;
             }
             else
@@ -52,9 +52,9 @@ internal class MutationEatMagic : Mutation
             }
             oPtr.IdentEmpty = true;
         }
-        if (saveGame.Player.Mana > saveGame.Player.MaxMana)
+        if (saveGame.Mana > saveGame.MaxMana)
         {
-            saveGame.Player.Mana = saveGame.Player.MaxMana;
+            saveGame.Mana = saveGame.MaxMana;
         }
         saveGame.NoticeCombineAndReorderFlaggedAction.Set();
     }

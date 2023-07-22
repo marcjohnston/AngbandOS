@@ -24,7 +24,7 @@ internal class Vampire1Activation : DirectionalActivation
         {
             if (SaveGame.DrainLife(direction, 50))
             {
-                SaveGame.Player.RestoreHealth(50);
+                SaveGame.RestoreHealth(50);
             }
         }
         return true;

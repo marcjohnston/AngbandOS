@@ -15,7 +15,7 @@ internal class RedrawAfraidFlaggedAction : FlaggedAction
     public RedrawAfraidFlaggedAction(SaveGame saveGame) : base(saveGame) { }
     protected override void Execute()
     {
-        if (SaveGame.Player.TimedFear.TurnsRemaining > 0)
+        if (SaveGame.TimedFear.TurnsRemaining > 0)
         {
             SaveGame.Screen.Print(ColourEnum.Orange, "Afraid", RowAfraid, ColAfraid);
         }

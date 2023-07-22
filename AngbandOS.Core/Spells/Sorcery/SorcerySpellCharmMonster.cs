@@ -17,7 +17,7 @@ internal class SorcerySpellCharmMonster : Spell
         {
             return;
         }
-        SaveGame.CharmMonster(dir, SaveGame.Player.ExperienceLevel);
+        SaveGame.CharmMonster(dir, SaveGame.ExperienceLevel);
     }
 
     public override string Name => "Charm Monster";

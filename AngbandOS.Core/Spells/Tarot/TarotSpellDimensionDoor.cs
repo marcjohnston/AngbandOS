@@ -18,13 +18,13 @@ internal class TarotSpellDimensionDoor : Spell
         {
             return;
         }
-        SaveGame.Player.Energy -= 60 - SaveGame.Player.ExperienceLevel;
+        SaveGame.Energy -= 60 - SaveGame.ExperienceLevel;
         if (!SaveGame.Level.GridPassableNoCreature(ij, ii) || SaveGame.Level.Grid[ij][ii].TileFlags.IsSet(GridTile.InVault) ||
-            SaveGame.Level.Distance(ij, ii, SaveGame.Player.MapY, SaveGame.Player.MapX) > SaveGame.Player.ExperienceLevel + 2 ||
-            Program.Rng.RandomLessThan(SaveGame.Player.ExperienceLevel * SaveGame.Player.ExperienceLevel / 2) == 0)
+            SaveGame.Level.Distance(ij, ii, SaveGame.MapY, SaveGame.MapX) > SaveGame.ExperienceLevel + 2 ||
+            Program.Rng.RandomLessThan(SaveGame.ExperienceLevel * SaveGame.ExperienceLevel / 2) == 0)
         {
             SaveGame.MsgPrint("You fail to exit the astral plane correctly!");
-            SaveGame.Player.Energy -= 100;
+            SaveGame.Energy -= 100;
             SaveGame.TeleportPlayer(10);
         }
         SaveGame.TeleportPlayerTo(ij, ii);
@@ -34,6 +34,6 @@ internal class TarotSpellDimensionDoor : Spell
     
     protected override string? Info()
     {
-        return $"range {SaveGame.Player.ExperienceLevel + 2}";
+        return $"range {SaveGame.ExperienceLevel + 2}";
     }
 }

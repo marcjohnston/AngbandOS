@@ -13,13 +13,13 @@ internal class CorporealSpellWraithform : Spell
     private CorporealSpellWraithform(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Player.TimedEtherealness.AddTimer(Program.Rng.DieRoll(SaveGame.Player.ExperienceLevel / 2) + (SaveGame.Player.ExperienceLevel / 2));
+        SaveGame.TimedEtherealness.AddTimer(Program.Rng.DieRoll(SaveGame.ExperienceLevel / 2) + (SaveGame.ExperienceLevel / 2));
     }
 
     public override string Name => "Wraithform";
     
     protected override string? Info()
     {
-        return $"dur {SaveGame.Player.ExperienceLevel / 2}+d{SaveGame.Player.ExperienceLevel / 2}";
+        return $"dur {SaveGame.ExperienceLevel / 2}+d{SaveGame.ExperienceLevel / 2}";
     }
 }

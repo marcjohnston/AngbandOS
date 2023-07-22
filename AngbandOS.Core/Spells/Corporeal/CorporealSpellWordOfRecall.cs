@@ -13,7 +13,7 @@ internal class CorporealSpellWordOfRecall : Spell
     private CorporealSpellWordOfRecall(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Player.ToggleRecall();
+        SaveGame.ToggleRecall();
     }
 
     public override string Name => "Word of Recall";

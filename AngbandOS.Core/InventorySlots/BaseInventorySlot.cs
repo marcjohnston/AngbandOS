@@ -50,7 +50,7 @@ internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IS
         if (num != 0)
         {
             oPtr.Count += num;
-            SaveGame.Player.WeightCarried += num * oPtr.Weight;
+            SaveGame.WeightCarried += num * oPtr.Weight;
             SaveGame.UpdateBonusesFlaggedAction.Set();
             SaveGame.UpdateManaFlaggedAction.Set();
             SaveGame.NoticeCombineAndReorderFlaggedAction.Set();

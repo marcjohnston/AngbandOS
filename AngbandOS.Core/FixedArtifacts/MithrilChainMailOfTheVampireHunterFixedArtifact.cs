@@ -20,13 +20,13 @@ internal class MithrilChainMailOfTheVampireHunterFixedArtifact : FixedArtifact, 
     public void ActivateItem(SaveGame saveGame, Item item)
     {
         saveGame.MsgPrint("A heavenly choir sings...");
-        saveGame.Player.TimedPoison.ResetTimer();
-        saveGame.Player.TimedBleeding.ResetTimer();
-        saveGame.Player.TimedStun.ResetTimer();
-        saveGame.Player.TimedConfusion.ResetTimer();
-        saveGame.Player.TimedBlindness.ResetTimer();
-        saveGame.Player.TimedHeroism.AddTimer(Program.Rng.DieRoll(25) + 25);
-        saveGame.Player.RestoreHealth(777);
+        saveGame.TimedPoison.ResetTimer();
+        saveGame.TimedBleeding.ResetTimer();
+        saveGame.TimedStun.ResetTimer();
+        saveGame.TimedConfusion.ResetTimer();
+        saveGame.TimedBlindness.ResetTimer();
+        saveGame.TimedHeroism.AddTimer(Program.Rng.DieRoll(25) + 25);
+        saveGame.RestoreHealth(777);
         item.RechargeTimeLeft = 300;
     }
     public string DescribeActivationEffect() => "heal (777), curing and heroism every 300 turns";

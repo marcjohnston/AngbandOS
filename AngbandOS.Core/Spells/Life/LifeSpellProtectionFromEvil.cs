@@ -13,13 +13,13 @@ internal class LifeSpellProtectionFromEvil : Spell
     private LifeSpellProtectionFromEvil(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Player.TimedProtectionFromEvil.AddTimer(Program.Rng.DieRoll(25) + (3 * SaveGame.Player.ExperienceLevel));
+        SaveGame.TimedProtectionFromEvil.AddTimer(Program.Rng.DieRoll(25) + (3 * SaveGame.ExperienceLevel));
     }
 
     public override string Name => "Protection from Evil";
     
     protected override string? Info()
     {
-        return $"dur d25+{3 * SaveGame.Player.ExperienceLevel}";
+        return $"dur d25+{3 * SaveGame.ExperienceLevel}";
     }
 }

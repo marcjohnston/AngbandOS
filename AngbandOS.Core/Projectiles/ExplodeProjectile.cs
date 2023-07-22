@@ -98,7 +98,7 @@ internal class ExplodeProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
         if (dam > 1600)
         {
             dam = 1600;
@@ -110,20 +110,20 @@ internal class ExplodeProjectile : Projectile
         {
             SaveGame.MsgPrint("You are hit by an explosion of shrapnel!");
         }
-        if (SaveGame.Player.HasShardResistance)
+        if (SaveGame.HasShardResistance)
         {
             dam *= 6;
             dam /= Program.Rng.DieRoll(6) + 6;
         }
         else
         {
-            SaveGame.Player.TimedBleeding.AddTimer(dam);
+            SaveGame.TimedBleeding.AddTimer(dam);
         }
-        if (!SaveGame.Player.HasShardResistance || Program.Rng.DieRoll(13) == 1)
+        if (!SaveGame.HasShardResistance || Program.Rng.DieRoll(13) == 1)
         {
-            SaveGame.Player.InvenDamage(SaveGame.SetColdDestroy, 2);
+            SaveGame.InvenDamage(SaveGame.SetColdDestroy, 2);
         }
-        SaveGame.Player.TakeHit(dam, killer);
+        SaveGame.TakeHit(dam, killer);
         return true;
     }
 }

@@ -69,15 +69,15 @@ internal class MindFlayerRace : Race
     }
     public override void CalcBonuses(SaveGame saveGame)
     {
-        saveGame.Player.HasSustainIntelligence = true;
-        saveGame.Player.HasSustainWisdom = true;
-        if (saveGame.Player.ExperienceLevel > 14)
+        saveGame.HasSustainIntelligence = true;
+        saveGame.HasSustainWisdom = true;
+        if (saveGame.ExperienceLevel > 14)
         {
-            saveGame.Player.HasSeeInvisibility = true;
+            saveGame.HasSeeInvisibility = true;
         }
-        if (saveGame.Player.ExperienceLevel > 29)
+        if (saveGame.ExperienceLevel > 29)
         {
-            saveGame.Player.HasTelepathy = true;
+            saveGame.HasTelepathy = true;
         }
     }
 
@@ -89,7 +89,7 @@ internal class MindFlayerRace : Race
             if (saveGame.GetDirectionWithAim(out int direction))
             {
                 saveGame.MsgPrint("You concentrate and your eyes glow red...");
-                saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), direction, saveGame.Player.ExperienceLevel);
+                saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), direction, saveGame.ExperienceLevel);
             }
         }
     }

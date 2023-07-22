@@ -13,10 +13,10 @@ internal class ChaosSpellTouchOfConfusion : Spell
     private ChaosSpellTouchOfConfusion(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.Player.HasConfusingTouch)
+        if (!SaveGame.HasConfusingTouch)
         {
             SaveGame.MsgPrint("Your hands start glowing.");
-            SaveGame.Player.HasConfusingTouch = true;
+            SaveGame.HasConfusingTouch = true;
         }
     }
 

@@ -26,7 +26,7 @@ internal class RestoreConstitutionPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Restore constitution restores your constitution
-        return SaveGame.Player.TryRestoringAbilityScore(Ability.Constitution);
+        return SaveGame.TryRestoringAbilityScore(Ability.Constitution);
     }
     public override Item CreateItem() => new RestoreConstitutionPotionItem(SaveGame);
 }

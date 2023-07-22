@@ -12,7 +12,7 @@ internal class MutationVampirism : Mutation
 {
     public override void Activate(SaveGame saveGame)
     {
-        if (!saveGame.CheckIfRacialPowerWorks(13, saveGame.Player.ExperienceLevel, Ability.Constitution, 14))
+        if (!saveGame.CheckIfRacialPowerWorks(13, saveGame.ExperienceLevel, Ability.Constitution, 14))
         {
             return;
         }
@@ -20,9 +20,9 @@ internal class MutationVampirism : Mutation
         {
             return;
         }
-        if (saveGame.DrainLife(dir, saveGame.Player.ExperienceLevel * 2))
+        if (saveGame.DrainLife(dir, saveGame.ExperienceLevel * 2))
         {
-            saveGame.Player.RestoreHealth(saveGame.Player.ExperienceLevel + Program.Rng.DieRoll(saveGame.Player.ExperienceLevel));
+            saveGame.RestoreHealth(saveGame.ExperienceLevel + Program.Rng.DieRoll(saveGame.ExperienceLevel));
         }
     }
 

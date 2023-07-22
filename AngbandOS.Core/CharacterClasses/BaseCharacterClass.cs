@@ -104,7 +104,7 @@ internal abstract class BaseCharacterClass
 
     public BaseRealm[] RemainingAvailableSecondaryRealms()
     {
-        return AvailableSecondaryRealms.Where(_realm => _realm != SaveGame.Player.PrimaryRealm).ToArray();
+        return AvailableSecondaryRealms.Where(_realm => _realm != SaveGame.PrimaryRealm).ToArray();
     }
 
     public virtual bool WorshipsADeity => false; // TODO: Only priests have a godname ... this seems off.
@@ -122,9 +122,9 @@ internal abstract class BaseCharacterClass
     /// <param name="amount">The amount.</param>
     protected void GainExperienceFromSpellBookDestroy(BookItem item, int amount)
     {
-        if (SaveGame.Player.ExperiencePoints < Constants.PyMaxExp)
+        if (SaveGame.ExperiencePoints < Constants.PyMaxExp)
         {
-            int testerExp = SaveGame.Player.MaxExperienceGained / 20;
+            int testerExp = SaveGame.MaxExperienceGained / 20;
             if (testerExp > 10000)
             {
                 testerExp = 10000;
@@ -135,7 +135,7 @@ internal abstract class BaseCharacterClass
                 testerExp = 1;
             }
             SaveGame.MsgPrint("You feel more experienced.");
-            SaveGame.Player.GainExperience(testerExp * amount);
+            SaveGame.GainExperience(testerExp * amount);
         }
     }
 
@@ -157,7 +157,7 @@ internal abstract class BaseCharacterClass
         foreach (ItemFactory itemClass in Outfit)
         {
             // Allow the race to modify the item as the race sees fit.
-            ItemFactory outfitItem = SaveGame.Player.Race.OutfitItemClass(itemClass);
+            ItemFactory outfitItem = SaveGame.Race.OutfitItemClass(itemClass);
             Item item = outfitItem.CreateItem();
             if (outfitItem.CategoryEnum == ItemTypeEnum.Wand)
             {
@@ -169,12 +169,12 @@ internal abstract class BaseCharacterClass
             int slot = item.WieldSlot;
             if (slot == -1)
             {
-                SaveGame.Player.InvenCarry(item);
+                SaveGame.InvenCarry(item);
             }
             else
             {
                 SaveGame.SetInventoryItem(slot, item);
-                SaveGame.Player.WeightCarried += item.Weight;
+                SaveGame.WeightCarried += item.Weight;
             }
 
             // Allow the character class a chance to modify the item.

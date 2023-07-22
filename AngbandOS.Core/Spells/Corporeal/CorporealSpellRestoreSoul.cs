@@ -13,7 +13,7 @@ internal class CorporealSpellRestoreSoul : Spell
     private CorporealSpellRestoreSoul(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Player.RestoreLevel();
+        SaveGame.RestoreLevel();
     }
 
     public override string Name => "Restore Soul";

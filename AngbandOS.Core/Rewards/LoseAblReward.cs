@@ -17,11 +17,11 @@ internal class LoseAblReward : Reward
         SaveGame.MsgPrint("'I grow tired of thee, mortal.'");
         if (Program.Rng.DieRoll(3) == 1 && !(patron.PreferredAbility < 0))
         {
-            SaveGame.Player.TryDecreasingAbilityScore(patron.PreferredAbility);
+            SaveGame.TryDecreasingAbilityScore(patron.PreferredAbility);
         }
         else
         {
-            SaveGame.Player.TryDecreasingAbilityScore(Program.Rng.DieRoll(6) - 1);
+            SaveGame.TryDecreasingAbilityScore(Program.Rng.DieRoll(6) - 1);
         }
     }
 }

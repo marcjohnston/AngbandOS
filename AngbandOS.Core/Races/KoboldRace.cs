@@ -60,7 +60,7 @@ internal class KoboldRace : Race
     }
     public override void CalcBonuses(SaveGame saveGame)
     {
-        saveGame.Player.HasPoisonResistance = true;
+        saveGame.HasPoisonResistance = true;
     }
 
     public override void UseRacialPower(SaveGame saveGame)
@@ -71,7 +71,7 @@ internal class KoboldRace : Race
             if (saveGame.GetDirectionWithAim(out int direction))
             {
                 saveGame.MsgPrint("You throw a dart of poison.");
-                saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), direction, saveGame.Player.ExperienceLevel);
+                saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), direction, saveGame.ExperienceLevel);
             }
         }
     }

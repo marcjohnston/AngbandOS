@@ -21,17 +21,17 @@ internal class DominationTalent : Talent
 
     public override void Use()
     {
-        if (SaveGame.Player.ExperienceLevel < 30)
+        if (SaveGame.ExperienceLevel < 30)
         {
             if (!SaveGame.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<DominationProjectile>(), dir, SaveGame.Player.ExperienceLevel, 0);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<DominationProjectile>(), dir, SaveGame.ExperienceLevel, 0);
         }
         else
         {
-            SaveGame.CharmMonsters(SaveGame.Player.ExperienceLevel * 2);
+            SaveGame.CharmMonsters(SaveGame.ExperienceLevel * 2);
         }
     }
 

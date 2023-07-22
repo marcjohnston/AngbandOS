@@ -17,7 +17,7 @@ internal class RedrawStateFlaggedAction : FlaggedAction
     {
         ColourEnum attr = ColourEnum.White;
         string text;
-        if (SaveGame.Player.TimedParalysis.TurnsRemaining > 0)
+        if (SaveGame.TimedParalysis.TurnsRemaining > 0)
         {
             attr = ColourEnum.Red;
             text = "Paralyzed!";
@@ -53,7 +53,7 @@ internal class RedrawStateFlaggedAction : FlaggedAction
                 text = "Repeat " + SaveGame.CommandRepeat.ToString().PadRight(3);
             }
         }
-        else if (SaveGame.Player.IsSearching)
+        else if (SaveGame.IsSearching)
         {
             text = "Searching ";
         }

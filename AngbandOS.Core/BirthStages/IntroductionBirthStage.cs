@@ -50,12 +50,12 @@ internal class IntroductionBirthStage : BaseBirthStage
 
     private string[]? GetMenu()
     {
-        SaveGame.Player.Name = SaveGame._prevName;
-        SaveGame.Player.Gender = SaveGame._prevSex;
-        SaveGame.Player.Race = SaveGame._prevRace;
-        SaveGame.Player.BaseCharacterClass = SaveGame._prevCharacterClass;
-        SaveGame.Player.PrimaryRealm = SaveGame._prevPrimaryRealm;
-        SaveGame.Player.SecondaryRealm = SaveGame._prevSecondaryRealm;
+        SaveGame.Name = SaveGame._prevName;
+        SaveGame.Gender = SaveGame._prevSex;
+        SaveGame.Race = SaveGame._prevRace;
+        SaveGame.BaseCharacterClass = SaveGame._prevCharacterClass;
+        SaveGame.PrimaryRealm = SaveGame._prevPrimaryRealm;
+        SaveGame.SecondaryRealm = SaveGame._prevSecondaryRealm;
 
         DisplayPartialCharacter();
         List<string> menuItems = new List<string>();
@@ -87,57 +87,57 @@ internal class IntroductionBirthStage : BaseBirthStage
 
     private BaseBirthStage GoForward(int index)
     {
-        SaveGame.Player.Religion.Deity = GodName.None;
+        SaveGame.Religion.Deity = GodName.None;
         if (index == 1) // Random
         {
-            SaveGame.Player.BaseCharacterClass = SaveGame.SingletonRepository.CharacterClasses.ToWeightedRandom().Choose();
+            SaveGame.BaseCharacterClass = SaveGame.SingletonRepository.CharacterClasses.ToWeightedRandom().Choose();
             do
             {
                 int raceIndex = Program.Rng.RandomLessThan(SaveGame.SingletonRepository.Races.Count);
-                SaveGame.Player.Race = SaveGame.SingletonRepository.Races[raceIndex];
-                SaveGame.Player.GetFirstLevelMutation = SaveGame.Player.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
+                SaveGame.Race = SaveGame.SingletonRepository.Races[raceIndex];
+                SaveGame.GetFirstLevelMutation = SaveGame.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
             }
-            while ((SaveGame.Player.Race.Choice & (1L << SaveGame.Player.BaseCharacterClass.ID)) == 0);
+            while ((SaveGame.Race.Choice & (1L << SaveGame.BaseCharacterClass.ID)) == 0);
 
             // Use a weighted random to choose a the realms.
-            SaveGame.Player.PrimaryRealm = new WeightedRandom<BaseRealm>(SaveGame.Player.BaseCharacterClass.AvailablePrimaryRealms).Choose();
+            SaveGame.PrimaryRealm = new WeightedRandom<BaseRealm>(SaveGame.BaseCharacterClass.AvailablePrimaryRealms).Choose();
 
             // We need to get the available secondary realms.  Note that we need to exclude the primary realm.
-            SaveGame.Player.SecondaryRealm = new WeightedRandom<BaseRealm>(SaveGame.Player.BaseCharacterClass.RemainingAvailableSecondaryRealms()).Choose();
-            if (SaveGame.Player.BaseCharacterClass.WorshipsADeity)
+            SaveGame.SecondaryRealm = new WeightedRandom<BaseRealm>(SaveGame.BaseCharacterClass.RemainingAvailableSecondaryRealms()).Choose();
+            if (SaveGame.BaseCharacterClass.WorshipsADeity)
             {
-                SaveGame.Player.Religion.Deity = SaveGame.Player.BaseCharacterClass.DefaultDeity(SaveGame.Player.SecondaryRealm);
+                SaveGame.Religion.Deity = SaveGame.BaseCharacterClass.DefaultDeity(SaveGame.SecondaryRealm);
             }
 
             Gender[] availableRandomGenders = SaveGame.SingletonRepository.Genders.Where(_gender => _gender.CanBeRandomlySelected).ToArray();
             int genderIndex = Program.Rng.RandomBetween(0, availableRandomGenders.Length - 1);
-            SaveGame.Player.Gender = availableRandomGenders[genderIndex];
-            SaveGame.Player.Name = SaveGame.Player.Race.CreateRandomName();
-            SaveGame.Player.Generation = 1;
+            SaveGame.Gender = availableRandomGenders[genderIndex];
+            SaveGame.Name = SaveGame.Race.CreateRandomName();
+            SaveGame.Generation = 1;
             return SaveGame.SingletonRepository.BirthStages.Get<ConfirmationBirthStage>();
         }
         else if (index == 2) // Previous
         {
-            SaveGame.Player.BaseCharacterClass = SaveGame._prevCharacterClass;
-            SaveGame.Player.Race = SaveGame._prevRace;
-            SaveGame.Player.GetFirstLevelMutation = SaveGame.Player.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
-            SaveGame.Player.PrimaryRealm = SaveGame._prevPrimaryRealm;
-            SaveGame.Player.SecondaryRealm = SaveGame._prevSecondaryRealm;
-            SaveGame.Player.Religion.Deity = SaveGame.Player.BaseCharacterClass.DefaultDeity(SaveGame.Player.SecondaryRealm);
-            SaveGame.Player.Gender = SaveGame._prevSex;
-            SaveGame.Player.Name = SaveGame._prevName;
-            SaveGame.Player.Generation = SaveGame._prevGeneration + 1;
+            SaveGame.BaseCharacterClass = SaveGame._prevCharacterClass;
+            SaveGame.Race = SaveGame._prevRace;
+            SaveGame.GetFirstLevelMutation = SaveGame.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
+            SaveGame.PrimaryRealm = SaveGame._prevPrimaryRealm;
+            SaveGame.SecondaryRealm = SaveGame._prevSecondaryRealm;
+            SaveGame.Religion.Deity = SaveGame.BaseCharacterClass.DefaultDeity(SaveGame.SecondaryRealm);
+            SaveGame.Gender = SaveGame._prevSex;
+            SaveGame.Name = SaveGame._prevName;
+            SaveGame.Generation = SaveGame._prevGeneration + 1;
             return SaveGame.SingletonRepository.BirthStages.Get<ConfirmationBirthStage>();
         }
         else
         {
-            SaveGame.Player.Name = "";
-            SaveGame.Player.Generation = 1;
-            SaveGame.Player.Gender = null; // Wait until the player has selected the gender.
-            SaveGame.Player.BaseCharacterClass = null; // Wait until the player has selected the character class.
-            SaveGame.Player.Race = null; // Wait until the player has selected the race.
-            SaveGame.Player.PrimaryRealm = null; // Wait until the player has selected a primary realm.
-            SaveGame.Player.SecondaryRealm = null; // Wait until the player has selected secondary realm.
+            SaveGame.Name = "";
+            SaveGame.Generation = 1;
+            SaveGame.Gender = null; // Wait until the player has selected the gender.
+            SaveGame.BaseCharacterClass = null; // Wait until the player has selected the character class.
+            SaveGame.Race = null; // Wait until the player has selected the race.
+            SaveGame.PrimaryRealm = null; // Wait until the player has selected a primary realm.
+            SaveGame.SecondaryRealm = null; // Wait until the player has selected secondary realm.
         }
         return SaveGame.SingletonRepository.BirthStages.Get<ClassSelectionBirthStage>();
     }

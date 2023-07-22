@@ -16,18 +16,18 @@ internal class RedrawExpFlaggedAction : FlaggedAction
     protected override void Execute()
     {
         ColourEnum colour = ColourEnum.BrightGreen;
-        if (SaveGame.Player.ExperiencePoints < SaveGame.Player.MaxExperienceGained)
+        if (SaveGame.ExperiencePoints < SaveGame.MaxExperienceGained)
         {
             colour = ColourEnum.Yellow;
         }
         SaveGame.Screen.Print("NEXT", RowExp, 0);
-        if (SaveGame.Player.ExperienceLevel >= Constants.PyMaxLevel)
+        if (SaveGame.ExperienceLevel >= Constants.PyMaxLevel)
         {
             SaveGame.Screen.Print(ColourEnum.BrightGreen, "   *****", RowExp, ColExp + 4);
         }
         else
         {
-            string outVal = ((Constants.PlayerExp[SaveGame.Player.ExperienceLevel - 1] * SaveGame.Player.ExperienceMultiplier / 100) - SaveGame.Player.ExperiencePoints).ToString()
+            string outVal = ((Constants.PlayerExp[SaveGame.ExperienceLevel - 1] * SaveGame.ExperienceMultiplier / 100) - SaveGame.ExperiencePoints).ToString()
                 .PadLeft(8);
             SaveGame.Screen.Print(colour, outVal, RowExp, ColExp + 4);
         }

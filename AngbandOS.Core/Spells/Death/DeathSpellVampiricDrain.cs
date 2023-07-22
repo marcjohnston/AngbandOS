@@ -17,16 +17,16 @@ internal class DeathSpellVampiricDrain : Spell
         {
             return;
         }
-        int dummy = SaveGame.Player.ExperienceLevel + (Program.Rng.DieRoll(SaveGame.Player.ExperienceLevel) * Math.Max(1, SaveGame.Player.ExperienceLevel / 10));
+        int dummy = SaveGame.ExperienceLevel + (Program.Rng.DieRoll(SaveGame.ExperienceLevel) * Math.Max(1, SaveGame.ExperienceLevel / 10));
         if (!SaveGame.DrainLife(dir, dummy))
         {
             return;
         }
-        SaveGame.Player.RestoreHealth(dummy);
-        dummy = SaveGame.Player.Food + Math.Min(5000, 100 * dummy);
-        if (SaveGame.Player.Food < Constants.PyFoodMax)
+        SaveGame.RestoreHealth(dummy);
+        dummy = SaveGame.Food + Math.Min(5000, 100 * dummy);
+        if (SaveGame.Food < Constants.PyFoodMax)
         {
-            SaveGame.Player.SetFood(dummy >= Constants.PyFoodMax ? Constants.PyFoodMax - 1 : dummy);
+            SaveGame.SetFood(dummy >= Constants.PyFoodMax ? Constants.PyFoodMax - 1 : dummy);
         }
     }
 
@@ -39,6 +39,6 @@ internal class DeathSpellVampiricDrain : Spell
     
     protected override string? Info()
     {
-        return $"dam {Math.Max(1, SaveGame.Player.ExperienceLevel / 10)}d{SaveGame.Player.ExperienceLevel}+{SaveGame.Player.ExperienceLevel}";
+        return $"dam {Math.Max(1, SaveGame.ExperienceLevel / 10)}d{SaveGame.ExperienceLevel}+{SaveGame.ExperienceLevel}";
     }
 }

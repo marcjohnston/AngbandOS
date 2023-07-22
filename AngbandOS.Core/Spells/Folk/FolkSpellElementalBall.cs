@@ -36,13 +36,13 @@ internal class FolkSpellElementalBall : Spell
                 dummy = SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>();
                 break;
         }
-        SaveGame.FireBall(dummy, dir, 75 + SaveGame.Player.ExperienceLevel, 2);
+        SaveGame.FireBall(dummy, dir, 75 + SaveGame.ExperienceLevel, 2);
     }
 
     public override string Name => "Teleport Away";
     
     protected override string? Info()
     {
-        return $"dam {75 + SaveGame.Player.ExperienceLevel}";
+        return $"dam {75 + SaveGame.ExperienceLevel}";
     }
 }

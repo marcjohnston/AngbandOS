@@ -76,26 +76,26 @@ internal class DraconianRace : Race
     }
     public override void CalcBonuses(SaveGame saveGame)
     {
-        saveGame.Player.HasFeatherFall = true;
-        if (saveGame.Player.ExperienceLevel > 4)
+        saveGame.HasFeatherFall = true;
+        if (saveGame.ExperienceLevel > 4)
         {
-            saveGame.Player.HasFireResistance = true;
+            saveGame.HasFireResistance = true;
         }
-        if (saveGame.Player.ExperienceLevel > 9)
+        if (saveGame.ExperienceLevel > 9)
         {
-            saveGame.Player.HasColdResistance = true;
+            saveGame.HasColdResistance = true;
         }
-        if (saveGame.Player.ExperienceLevel > 14)
+        if (saveGame.ExperienceLevel > 14)
         {
-            saveGame.Player.HasAcidResistance = true;
+            saveGame.HasAcidResistance = true;
         }
-        if (saveGame.Player.ExperienceLevel > 19)
+        if (saveGame.ExperienceLevel > 19)
         {
-            saveGame.Player.HasLightningResistance = true;
+            saveGame.HasLightningResistance = true;
         }
-        if (saveGame.Player.ExperienceLevel > 34)
+        if (saveGame.ExperienceLevel > 34)
         {
-            saveGame.Player.HasPoisonResistance = true;
+            saveGame.HasPoisonResistance = true;
         }
     }
 
@@ -118,9 +118,9 @@ internal class DraconianRace : Race
         }
 
         // Chance of replacing the default fire/cold element with a special one
-        if (Program.Rng.DieRoll(100) < saveGame.Player.ExperienceLevel)
+        if (Program.Rng.DieRoll(100) < saveGame.ExperienceLevel)
         {
-            switch (saveGame.Player.BaseCharacterClass.ID)
+            switch (saveGame.BaseCharacterClass.ID)
             {
                 case CharacterClass.Warrior:
                 case CharacterClass.Ranger:
@@ -223,12 +223,12 @@ internal class DraconianRace : Race
                     break;
             }
         }
-        if (saveGame.CheckIfRacialPowerWorks(1, saveGame.Player.ExperienceLevel, Ability.Constitution, 12))
+        if (saveGame.CheckIfRacialPowerWorks(1, saveGame.ExperienceLevel, Ability.Constitution, 12))
         {
             if (saveGame.GetDirectionWithAim(out int direction))
             {
                 saveGame.MsgPrint($"You breathe {projectileDescription}.");
-                saveGame.FireBall(projectile, direction, saveGame.Player.ExperienceLevel * 2, -(saveGame.Player.ExperienceLevel / 15) + 1);
+                saveGame.FireBall(projectile, direction, saveGame.ExperienceLevel * 2, -(saveGame.ExperienceLevel / 15) + 1);
             }
         }
     }

@@ -15,6 +15,6 @@ internal class GoodObsReward : Reward
     {
         SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
         SaveGame.MsgPrint("'Thy deed hath earned thee a worthy reward.'");
-        SaveGame.Level.Acquirement(SaveGame.Player.MapY, SaveGame.Player.MapX, Program.Rng.DieRoll(2) + 1, false);
+        SaveGame.Level.Acquirement(SaveGame.MapY, SaveGame.MapX, Program.Rng.DieRoll(2) + 1, false);
     }
 }

@@ -15,7 +15,7 @@ internal class RetireScript : Script
     public override bool Execute()
     {
         // If we're a winner it's a simple question with a more positive connotation
-        if (SaveGame.Player.IsWinner)
+        if (SaveGame.IsWinner)
         {
             if (!SaveGame.GetCheck("Do you want to retire? "))
             {
@@ -26,7 +26,7 @@ internal class RetireScript : Script
         {
             // If we're not a winner, only ask if we're not also a wizard - giving up a wizard
             // character doesn't need a prompt/confirmation
-            if (!SaveGame.Player.IsWizard)
+            if (!SaveGame.IsWizard)
             {
                 if (!SaveGame.GetCheck("Do you really want to give up? "))
                 {

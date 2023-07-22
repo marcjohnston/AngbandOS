@@ -26,15 +26,15 @@ internal class RodHealing : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        if (SaveGame.Player.RestoreHealth(500))
+        if (SaveGame.RestoreHealth(500))
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.Player.TimedStun.ResetTimer())
+        if (SaveGame.TimedStun.ResetTimer())
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.Player.TimedBleeding.ResetTimer())
+        if (SaveGame.TimedBleeding.ResetTimer())
         {
             zapRodEvent.Identified = true;
         }

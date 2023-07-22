@@ -26,27 +26,27 @@ internal class RodCuring : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        if (SaveGame.Player.TimedBlindness.ResetTimer())
+        if (SaveGame.TimedBlindness.ResetTimer())
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.Player.TimedPoison.ResetTimer())
+        if (SaveGame.TimedPoison.ResetTimer())
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.Player.TimedConfusion.ResetTimer())
+        if (SaveGame.TimedConfusion.ResetTimer())
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.Player.TimedStun.ResetTimer())
+        if (SaveGame.TimedStun.ResetTimer())
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.Player.TimedBleeding.ResetTimer())
+        if (SaveGame.TimedBleeding.ResetTimer())
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.Player.TimedHallucinations.ResetTimer())
+        if (SaveGame.TimedHallucinations.ResetTimer())
         {
             zapRodEvent.Identified = true;
         }

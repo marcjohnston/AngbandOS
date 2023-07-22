@@ -26,14 +26,14 @@ internal class StaffOfTheMagi : StaffItemClass
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.Player.TryRestoringAbilityScore(Ability.Intelligence))
+        if (SaveGame.TryRestoringAbilityScore(Ability.Intelligence))
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.Player.Mana < SaveGame.Player.MaxMana)
+        if (SaveGame.Mana < SaveGame.MaxMana)
         {
-            SaveGame.Player.Mana = SaveGame.Player.MaxMana;
-            SaveGame.Player.FractionalMana = 0;
+            SaveGame.Mana = SaveGame.MaxMana;
+            SaveGame.FractionalMana = 0;
             eventArgs.Identified = true;
             SaveGame.MsgPrint("Your feel your head clear.");
             SaveGame.RedrawManaFlaggedAction.Set();

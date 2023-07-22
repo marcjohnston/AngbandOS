@@ -20,7 +20,7 @@ internal class MutationProdMana : Mutation
 
     public override void OnProcessWorld(SaveGame saveGame)
     {
-        if (saveGame.Player.HasAntiMagic || Program.Rng.DieRoll(9000) != 1)
+        if (saveGame.HasAntiMagic || Program.Rng.DieRoll(9000) != 1)
         {
             return;
         }
@@ -28,6 +28,6 @@ internal class MutationProdMana : Mutation
         saveGame.MsgPrint("Magical energy flows through you! You must release it!");
         saveGame.MsgPrint(null);
         saveGame.GetDirectionNoAutoAim(out int dire);
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), dire, saveGame.Player.ExperienceLevel * 2, 3);
+        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), dire, saveGame.ExperienceLevel * 2, 3);
     }
 }

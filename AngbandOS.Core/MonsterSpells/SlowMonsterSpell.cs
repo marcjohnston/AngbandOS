@@ -28,17 +28,17 @@ internal class SlowMonsterSpell : MonsterSpell
     {
         string monsterName = monster.Name;
 
-        if (saveGame.Player.HasFreeAction)
+        if (saveGame.HasFreeAction)
         {
             saveGame.MsgPrint("You are unaffected!");
         }
-        else if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
+        else if (Program.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
         {
             saveGame.MsgPrint("You resist the effects!");
         }
         else
         {
-            saveGame.Player.TimedSlow.AddTimer(Program.Rng.RandomLessThan(4) + 4);
+            saveGame.TimedSlow.AddTimer(Program.Rng.RandomLessThan(4) + 4);
         }
         saveGame.Level.UpdateSmartLearn(monster, new FreeSpellResistantDetection());
     }
@@ -46,7 +46,7 @@ internal class SlowMonsterSpell : MonsterSpell
     public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        bool blind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = saveGame.TimedBlindness.TurnsRemaining != 0;
         bool seeTarget = !blind && target.IsVisible;
         MonsterRace targetRace = target.Race;
         string targetName = target.Name;

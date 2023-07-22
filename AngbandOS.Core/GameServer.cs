@@ -29,7 +29,7 @@ public class GameServer
             if (SaveGame == null || SaveGame.IsDead)
                 return null;
             else
-                return SaveGame.Player.ExperienceLevel;
+                return SaveGame.ExperienceLevel;
         }
     }
 
@@ -44,7 +44,7 @@ public class GameServer
             if (SaveGame == null || SaveGame.IsDead)
                 return null;
             else
-                return SaveGame.Player.Gold;
+                return SaveGame.Gold;
         }
     }
 
@@ -59,7 +59,7 @@ public class GameServer
             if (SaveGame == null || SaveGame.IsDead)
                 return null;
             else
-                return SaveGame.Player.Name;
+                return SaveGame.Name;
         }
     }
 
@@ -70,9 +70,11 @@ public class GameServer
     {
         get
         {
-            if (SaveGame?.Player?.GameTime == null)
+            if (SaveGame == null || SaveGame.GameTime == null)
+            {
                 return null;
-            return SaveGame.Player.GameTime.ElapsedGameTime;
+            }
+            return SaveGame.GameTime.ElapsedGameTime;
         }
     }
 

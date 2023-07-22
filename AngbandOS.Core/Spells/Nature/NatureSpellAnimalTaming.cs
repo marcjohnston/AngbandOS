@@ -17,7 +17,7 @@ internal class NatureSpellAnimalTaming : Spell
         {
             return;
         }
-        SaveGame.CharmAnimal(dir, SaveGame.Player.ExperienceLevel);
+        SaveGame.CharmAnimal(dir, SaveGame.ExperienceLevel);
     }
 
     public override string Name => "Animal Taming";

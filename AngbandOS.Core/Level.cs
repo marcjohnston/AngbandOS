@@ -191,8 +191,8 @@ internal class Level
     public int CoordsToDir(int y, int x)
     {
         int[][] d = { new[] { 7, 4, 1 }, new[] { 8, 5, 2 }, new[] { 9, 6, 3 } };
-        int dy = y - SaveGame.Player.MapY;
-        int dx = x - SaveGame.Player.MapX;
+        int dy = y - SaveGame.MapY;
+        int dx = x - SaveGame.MapX;
         if (Math.Abs(dx) > 1 || Math.Abs(dy) > 1)
         {
             return 0;
@@ -315,19 +315,19 @@ internal class Level
             {
                 ta = ma[y][x];
                 tc = mc[y][x];
-                if (SaveGame.Player.TimedInvulnerability.TurnsRemaining != 0)
+                if (SaveGame.TimedInvulnerability.TurnsRemaining != 0)
                 {
                     ta = ColourEnum.White;
                 }
-                else if (SaveGame.Player.TimedEtherealness.TurnsRemaining != 0)
+                else if (SaveGame.TimedEtherealness.TurnsRemaining != 0)
                 {
                     ta = ColourEnum.Black;
                 }
                 SaveGame.Screen.Print(ta, tc.ToString());
             }
         }
-        cy = yOffset + (SaveGame.Player.MapY / _ratio) + 1;
-        cx = xOffset + (SaveGame.Player.MapX / _ratio) + 1;
+        cy = yOffset + (SaveGame.MapY / _ratio) + 1;
+        cx = xOffset + (SaveGame.MapX / _ratio) + 1;
     }
 
     public int Distance(int y1, int x1, int y2, int x2)
@@ -476,7 +476,7 @@ internal class Level
         NoteSpot(by, bx);
         RedrawSingleLocation(by, bx);
         SaveGame.PlaySound(SoundEffectEnum.Drop);
-        if (chance != 0 && by == SaveGame.Player.MapY && bx == SaveGame.Player.MapX)
+        if (chance != 0 && by == SaveGame.MapY && bx == SaveGame.MapX)
         {
             SaveGame.MsgPrint("You feel something roll beneath your feet.");
         }
@@ -509,7 +509,7 @@ internal class Level
 
     public bool GridOpenNoItemOrCreature(int y, int x)
     {
-        return Grid[y][x].FeatureType.IsOpenFloor && Grid[y][x].Items.Count == 0 && Grid[y][x].MonsterIndex == 0 && !(y == SaveGame.Player.MapY && x == SaveGame.Player.MapX);
+        return Grid[y][x].FeatureType.IsOpenFloor && Grid[y][x].Items.Count == 0 && Grid[y][x].MonsterIndex == 0 && !(y == SaveGame.MapY && x == SaveGame.MapX);
     }
 
     public bool GridPassable(int y, int x)
@@ -519,7 +519,7 @@ internal class Level
 
     public bool GridPassableNoCreature(int y, int x)
     {
-        return GridPassable(y, x) && Grid[y][x].MonsterIndex == 0 && !(y == SaveGame.Player.MapY && x == SaveGame.Player.MapX);
+        return GridPassable(y, x) && Grid[y][x].MonsterIndex == 0 && !(y == SaveGame.MapY && x == SaveGame.MapX);
     }
 
     public bool InBounds(int y, int x)
@@ -790,13 +790,13 @@ internal class Level
 
     public bool NoLight()
     {
-        return !PlayerCanSeeBold(SaveGame.Player.MapY, SaveGame.Player.MapX);
+        return !PlayerCanSeeBold(SaveGame.MapY, SaveGame.MapX);
     }
 
     public void NoteSpot(int y, int x)
     {
         GridTile cPtr = Grid[y][x];
-        if (SaveGame.Player.TimedBlindness.TurnsRemaining != 0)
+        if (SaveGame.TimedBlindness.TurnsRemaining != 0)
         {
             return;
         }
@@ -831,8 +831,8 @@ internal class Level
             }
             else
             {
-                int yy = y < SaveGame.Player.MapY ? y + 1 : y > SaveGame.Player.MapY ? y - 1 : y;
-                int xx = x < SaveGame.Player.MapX ? x + 1 : x > SaveGame.Player.MapX ? x - 1 : x;
+                int yy = y < SaveGame.MapY ? y + 1 : y > SaveGame.MapY ? y - 1 : y;
+                int xx = x < SaveGame.MapX ? x + 1 : x > SaveGame.MapX ? x - 1 : x;
                 if (Grid[yy][xx].TileFlags.IsSet(GridTile.SelfLit))
                 {
                     cPtr.TileFlags.Set(GridTile.PlayerMemorized);
@@ -995,7 +995,7 @@ internal class Level
 
     public bool PlayerCanSeeBold(int y, int x)
     {
-        if (SaveGame.Player.TimedBlindness.TurnsRemaining != 0)
+        if (SaveGame.TimedBlindness.TurnsRemaining != 0)
         {
             return false;
         }
@@ -1016,8 +1016,8 @@ internal class Level
         {
             return true;
         }
-        int yy = y < SaveGame.Player.MapY ? y + 1 : y > SaveGame.Player.MapY ? y - 1 : y;
-        int xx = x < SaveGame.Player.MapX ? x + 1 : x > SaveGame.Player.MapX ? x - 1 : x;
+        int yy = y < SaveGame.MapY ? y + 1 : y > SaveGame.MapY ? y - 1 : y;
+        int xx = x < SaveGame.MapX ? x + 1 : x > SaveGame.MapX ? x - 1 : x;
         return Grid[yy][xx].TileFlags.IsSet(GridTile.SelfLit);
     }
 
@@ -1030,11 +1030,11 @@ internal class Level
     {
         if (PanelContains(y, x))
         {
-            if (SaveGame.Player.TimedInvulnerability.TurnsRemaining != 0)
+            if (SaveGame.TimedInvulnerability.TurnsRemaining != 0)
             {
                 a = ColourEnum.White;
             }
-            else if (SaveGame.Player.TimedEtherealness.TurnsRemaining != 0)
+            else if (SaveGame.TimedEtherealness.TurnsRemaining != 0)
             {
                 a = ColourEnum.Black;
             }
@@ -1080,7 +1080,7 @@ internal class Level
                     continue;
                 }
                 {
-                    if (Distance(y, x, SaveGame.Player.MapY, SaveGame.Player.MapX) > 15)
+                    if (Distance(y, x, SaveGame.MapY, SaveGame.MapX) > 15)
                     {
                         break;
                     }
@@ -1098,11 +1098,11 @@ internal class Level
             {
                 MapInfo(y, x, out a, out c);
             }
-            if (SaveGame.Player.TimedInvulnerability.TurnsRemaining != 0)
+            if (SaveGame.TimedInvulnerability.TurnsRemaining != 0)
             {
                 a = ColourEnum.White;
             }
-            else if (SaveGame.Player.TimedEtherealness.TurnsRemaining != 0)
+            else if (SaveGame.TimedEtherealness.TurnsRemaining != 0)
             {
                 a = ColourEnum.Black;
             }
@@ -1321,13 +1321,13 @@ internal class Level
         {
             if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized) ||
                 ((cPtr.TileFlags.IsSet(GridTile.PlayerLit) || (cPtr.TileFlags.IsSet(GridTile.SelfLit) &&
-                 cPtr.TileFlags.IsSet(GridTile.IsVisible))) && SaveGame.Player.TimedBlindness.TurnsRemaining == 0))
+                 cPtr.TileFlags.IsSet(GridTile.IsVisible))) && SaveGame.TimedBlindness.TurnsRemaining == 0))
             {
                 c = feat.Symbol.Character;
                 a = feat.Colour;
                 if (feat.DimsOutsideLOS)
                 {
-                    if (SaveGame.Player.TimedBlindness.TurnsRemaining != 0)
+                    if (SaveGame.TimedBlindness.TurnsRemaining != 0)
                     {
                         a = ColourEnum.Black;
                     }
@@ -1389,7 +1389,7 @@ internal class Level
                 a = feat.Colour;
                 if (feat.DimsOutsideLOS)
                 {
-                    if (SaveGame.Player.TimedBlindness.TurnsRemaining != 0)
+                    if (SaveGame.TimedBlindness.TurnsRemaining != 0)
                     {
                         a = ColourEnum.Black;
                     }
@@ -1412,8 +1412,8 @@ internal class Level
                         }
                         else
                         {
-                            int yy = y < SaveGame.Player.MapY ? y + 1 : y > SaveGame.Player.MapY ? y - 1 : y;
-                            int xx = x < SaveGame.Player.MapX ? x + 1 : x > SaveGame.Player.MapX ? x - 1 : x;
+                            int yy = y < SaveGame.MapY ? y + 1 : y > SaveGame.MapY ? y - 1 : y;
+                            int xx = x < SaveGame.MapX ? x + 1 : x > SaveGame.MapX ? x - 1 : x;
                             if (Grid[yy][xx].TileFlags.IsClear(GridTile.SelfLit))
                             {
                                 a = DimColour(a);
@@ -1428,7 +1428,7 @@ internal class Level
                 c = SaveGame.SingletonRepository.FloorTileTypes["Nothing"].Symbol.Character;
             }
         }
-        if (SaveGame.Player.TimedHallucinations.TurnsRemaining != 0 && Program.Rng.RandomLessThan(256) == 0 && (!cPtr.FeatureType.IsWall))
+        if (SaveGame.TimedHallucinations.TurnsRemaining != 0 && Program.Rng.RandomLessThan(256) == 0 && (!cPtr.FeatureType.IsWall))
         {
             ImageRandom(out ap, out cp);
         }
@@ -1443,7 +1443,7 @@ internal class Level
             {
                 cp = oPtr.Factory.FlavorSymbol.Character;
                 ap = oPtr.Factory.FlavorColour;
-                if (SaveGame.Player.TimedHallucinations.TurnsRemaining != 0)
+                if (SaveGame.TimedHallucinations.TurnsRemaining != 0)
                 {
                     ImageObject(out ap, out cp);
                 }
@@ -1524,13 +1524,13 @@ internal class Level
                         ap = a;
                     }
                 }
-                if (SaveGame.Player.TimedHallucinations.TurnsRemaining != 0)
+                if (SaveGame.TimedHallucinations.TurnsRemaining != 0)
                 {
                     ImageMonster(out ap, out cp);
                 }
             }
         }
-        if (y == SaveGame.Player.MapY && x == SaveGame.Player.MapX)
+        if (y == SaveGame.MapY && x == SaveGame.MapX)
         {
             MonsterRace rPtr = SaveGame.SingletonRepository.MonsterRaces[0];
             a = rPtr.Colour;
@@ -1627,7 +1627,7 @@ internal class Level
             {
                 continue;
             }
-            if (SaveGame.Level.Distance(y, x, SaveGame.Player.MapY, SaveGame.Player.MapX) > dis)
+            if (SaveGame.Level.Distance(y, x, SaveGame.MapY, SaveGame.MapX) > dis)
             {
                 break;
             }
@@ -1745,7 +1745,7 @@ internal class Level
                 {
                     int curses = 1 + Program.Rng.DieRoll(3);
                     SaveGame.MsgPrint("Nyarlathotep puts a terrible curse on you!");
-                    SaveGame.Player.CurseEquipment(100, 50);
+                    SaveGame.CurseEquipment(100, 50);
                     do
                     {
                         SaveGame.ActivateDreadCurse();
@@ -1771,7 +1771,7 @@ internal class Level
             {
                 SaveGame.MsgPrint($"You have slain {mName}.");
             }
-            int div = 10 * SaveGame.Player.MaxLevelGained;
+            int div = 10 * SaveGame.MaxLevelGained;
             if (rPtr.Knowledge.RPkills >= 19)
             {
                 div *= 2;
@@ -1793,17 +1793,17 @@ internal class Level
                 div = 1;
             }
             int newExp = rPtr.Mexp * rPtr.Level * 10 / div;
-            int newExpFrac = (rPtr.Mexp * rPtr.Level % div * 0x10000 / div) + SaveGame.Player.FractionalExperiencePoints;
+            int newExpFrac = (rPtr.Mexp * rPtr.Level % div * 0x10000 / div) + SaveGame.FractionalExperiencePoints;
             if (newExpFrac >= 0x10000)
             {
                 newExp++;
-                SaveGame.Player.FractionalExperiencePoints = newExpFrac - 0x10000;
+                SaveGame.FractionalExperiencePoints = newExpFrac - 0x10000;
             }
             else
             {
-                SaveGame.Player.FractionalExperiencePoints = newExpFrac;
+                SaveGame.FractionalExperiencePoints = newExpFrac;
             }
-            SaveGame.Player.GainExperience(newExp);
+            SaveGame.GainExperience(newExp);
             SaveGame.MonsterDeath(mIdx);
             if (rPtr.Unique)
             {
@@ -2418,12 +2418,12 @@ internal class Level
         int fx = mPtr.MapX;
         if (full)
         {
-            int dy = SaveGame.Player.MapY > fy
-                ? SaveGame.Player.MapY - fy
-                : fy - SaveGame.Player.MapY;
-            int dx = SaveGame.Player.MapX > fx
-                ? SaveGame.Player.MapX - fx
-                : fx - SaveGame.Player.MapX;
+            int dy = SaveGame.MapY > fy
+                ? SaveGame.MapY - fy
+                : fy - SaveGame.MapY;
+            int dx = SaveGame.MapX > fx
+                ? SaveGame.MapX - fx
+                : fx - SaveGame.MapX;
             int d = dy > dx ? dy + (dx >> 1) : dx + (dy >> 1);
             mPtr.DistanceFromPlayer = d < 255 ? d : 255;
         }
@@ -2449,9 +2449,9 @@ internal class Level
         else if (SaveGame.Level.PanelContains(fy, fx))
         {
             GridTile cPtr = SaveGame.Level.Grid[fy][fx];
-            if (cPtr.TileFlags.IsSet(GridTile.IsVisible) && SaveGame.Player.TimedBlindness.TurnsRemaining == 0)
+            if (cPtr.TileFlags.IsSet(GridTile.IsVisible) && SaveGame.TimedBlindness.TurnsRemaining == 0)
             {
-                if (mPtr.DistanceFromPlayer <= SaveGame.Player.InfravisionRange)
+                if (mPtr.DistanceFromPlayer <= SaveGame.InfravisionRange)
                 {
                     if (rPtr.ColdBlood)
                     {
@@ -2469,14 +2469,14 @@ internal class Level
                     {
                         doInvisible = true;
                     }
-                    if (!doInvisible || SaveGame.Player.HasSeeInvisibility)
+                    if (!doInvisible || SaveGame.HasSeeInvisibility)
                     {
                         easy = true;
                         flag = true;
                     }
                 }
             }
-            if (SaveGame.Player.HasTelepathy)
+            if (SaveGame.HasTelepathy)
             {
                 if (rPtr.EmptyMind)
                 {
@@ -2501,7 +2501,7 @@ internal class Level
             {
                 flag = true;
             }
-            if (SaveGame.Player.IsWizard)
+            if (SaveGame.IsWizard)
             {
                 flag = true;
             }

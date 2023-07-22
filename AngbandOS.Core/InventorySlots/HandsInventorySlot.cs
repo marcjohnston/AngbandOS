@@ -18,14 +18,14 @@ internal class HandsInventorySlot : EquipmentInventorySlot
     public override string MentionUse(int? index) => "On hands";
     public override string DescribeWieldLocation(int index) => "wearing on your hands";
     public override string DescribeItemLocation(Item oPtr) => "wearing on your hands";
-    public override int BareArmourClassBonus => SaveGame.Player.ExperienceLevel > 4 ? SaveGame.Player.ExperienceLevel / 2 : 0;
+    public override int BareArmourClassBonus => SaveGame.ExperienceLevel > 4 ? SaveGame.ExperienceLevel / 2 : 0;
     public override bool IsWeightRestricting => true;
     public override bool IsArmour => true;
     public override int SortOrder => 12;
 
     public override int CalcMana(SaveGame saveGame, int msp)
     {
-        if (SaveGame.Player.BaseCharacterClass.SpellCastingType.CoveredHandsRestrictCasting)
+        if (SaveGame.BaseCharacterClass.SpellCastingType.CoveredHandsRestrictCasting)
         {
             bool previousRestrictingGloves = RestrictingGloves;
             RestrictingGloves = false;

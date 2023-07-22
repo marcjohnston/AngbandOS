@@ -28,27 +28,27 @@ internal class AugmentationPotionItemFactory : PotionItemFactory
         bool identified = false;
 
         // Augmentation increases all ability scores
-        if (SaveGame.Player.TryIncreasingAbilityScore(Ability.Strength))
+        if (SaveGame.TryIncreasingAbilityScore(Ability.Strength))
         {
             identified = true;
         }
-        if (SaveGame.Player.TryIncreasingAbilityScore(Ability.Intelligence))
+        if (SaveGame.TryIncreasingAbilityScore(Ability.Intelligence))
         {
             identified = true;
         }
-        if (SaveGame.Player.TryIncreasingAbilityScore(Ability.Wisdom))
+        if (SaveGame.TryIncreasingAbilityScore(Ability.Wisdom))
         {
             identified = true;
         }
-        if (SaveGame.Player.TryIncreasingAbilityScore(Ability.Dexterity))
+        if (SaveGame.TryIncreasingAbilityScore(Ability.Dexterity))
         {
             identified = true;
         }
-        if (SaveGame.Player.TryIncreasingAbilityScore(Ability.Constitution))
+        if (SaveGame.TryIncreasingAbilityScore(Ability.Constitution))
         {
             identified = true;
         }
-        if (SaveGame.Player.TryIncreasingAbilityScore(Ability.Charisma))
+        if (SaveGame.TryIncreasingAbilityScore(Ability.Charisma))
         {
             identified = true;
         }

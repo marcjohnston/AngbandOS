@@ -25,7 +25,7 @@ internal class SicklinessPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Sickliness tries to reduce your constitution
-        return SaveGame.Player.TryDecreasingAbilityScore(Ability.Constitution);
+        return SaveGame.TryDecreasingAbilityScore(Ability.Constitution);
     }
     public override bool Smash(int who, int y, int x)
     {

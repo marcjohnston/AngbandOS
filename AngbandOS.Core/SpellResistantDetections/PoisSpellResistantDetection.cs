@@ -11,11 +11,11 @@ internal class PoisSpellResistantDetection : SpellResistantDetection
 {
     public override void Learn(SaveGame saveGame, Monster monster)
     {
-        if (saveGame.Player.HasPoisonResistance)
+        if (saveGame.HasPoisonResistance)
         {
             monster.SmResPois = true;
         }
-        if (saveGame.Player.TimedPoisonResistance.TurnsRemaining != 0)
+        if (saveGame.TimedPoisonResistance.TurnsRemaining != 0)
         {
             monster.SmOppPois = true;
         }

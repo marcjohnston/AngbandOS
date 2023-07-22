@@ -23,7 +23,7 @@ internal class ScrollDestruction : ScrollItemClass
     public override int Weight => 5;
     public override void Read(ReadScrollEvent eventArgs)
     {
-        SaveGame.DestroyArea(SaveGame.Player.MapY, SaveGame.Player.MapX, 15);
+        SaveGame.DestroyArea(SaveGame.MapY, SaveGame.MapX, 15);
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new DestructionScrollItem(SaveGame);

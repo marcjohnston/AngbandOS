@@ -14,18 +14,18 @@ internal class DeathSpellNetherBolt : Spell
     public override void Cast()
     {
         int beam;
-        switch (SaveGame.Player.BaseCharacterClass.ID)
+        switch (SaveGame.BaseCharacterClass.ID)
         {
             case CharacterClass.Mage:
-                beam = SaveGame.Player.ExperienceLevel;
+                beam = SaveGame.ExperienceLevel;
                 break;
 
             case CharacterClass.HighMage:
-                beam = SaveGame.Player.ExperienceLevel + 10;
+                beam = SaveGame.ExperienceLevel + 10;
                 break;
 
             default:
-                beam = SaveGame.Player.ExperienceLevel / 2;
+                beam = SaveGame.ExperienceLevel / 2;
                 break;
         }
         if (!SaveGame.GetDirectionWithAim(out int dir))
@@ -33,7 +33,7 @@ internal class DeathSpellNetherBolt : Spell
             return;
         }
         SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get<NetherProjectile>(), dir,
-            Program.Rng.DiceRoll(6 + ((SaveGame.Player.ExperienceLevel - 5) / 4), 8));
+            Program.Rng.DiceRoll(6 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
     }
 
     public override void CastFailed()
@@ -45,6 +45,6 @@ internal class DeathSpellNetherBolt : Spell
     
     protected override string? Info()
     {
-        return $"dam {6 + ((SaveGame.Player.ExperienceLevel - 5) / 4)}d8";
+        return $"dam {6 + ((SaveGame.ExperienceLevel - 5) / 4)}d8";
     }
 }

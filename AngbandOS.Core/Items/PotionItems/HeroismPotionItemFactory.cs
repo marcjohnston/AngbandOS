@@ -27,15 +27,15 @@ internal class HeroismPotionItemFactory : PotionItemFactory
     {
         bool identified = false;
         // Heroism removes fear, cures 10 health, and gives you timed heroism
-        if (SaveGame.Player.TimedFear.ResetTimer())
+        if (SaveGame.TimedFear.ResetTimer())
         {
             identified = true;
         }
-        if (SaveGame.Player.TimedHeroism.AddTimer(Program.Rng.DieRoll(25) + 25))
+        if (SaveGame.TimedHeroism.AddTimer(Program.Rng.DieRoll(25) + 25))
         {
             identified = true;
         }
-        if (SaveGame.Player.RestoreHealth(10))
+        if (SaveGame.RestoreHealth(10))
         {
             identified = true;
         }

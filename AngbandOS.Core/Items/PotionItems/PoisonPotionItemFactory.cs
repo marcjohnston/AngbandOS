@@ -26,14 +26,14 @@ internal class PoisonPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Poison simply poisons you
-        if (!(SaveGame.Player.HasPoisonResistance || SaveGame.Player.TimedPoisonResistance.TurnsRemaining != 0))
+        if (!(SaveGame.HasPoisonResistance || SaveGame.TimedPoisonResistance.TurnsRemaining != 0))
         {
             // Hagarg Ryonis can protect you against poison
-            if (Program.Rng.DieRoll(10) <= SaveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+            if (Program.Rng.DieRoll(10) <= SaveGame.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
             {
                 SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
             }
-            else if (SaveGame.Player.TimedPoison.AddTimer(Program.Rng.RandomLessThan(15) + 10))
+            else if (SaveGame.TimedPoison.AddTimer(Program.Rng.RandomLessThan(15) + 10))
             {
                 return true;
             }

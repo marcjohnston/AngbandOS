@@ -13,8 +13,8 @@ internal class ChaosSpellMeteorSwarm : Spell
     private ChaosSpellMeteorSwarm(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        int x = SaveGame.Player.MapX;
-        int y = SaveGame.Player.MapY;
+        int x = SaveGame.MapX;
+        int y = SaveGame.MapY;
         int count = 0;
         int b = 10 + Program.Rng.DieRoll(10);
         for (int i = 0; i < b; i++)
@@ -27,10 +27,10 @@ internal class ChaosSpellMeteorSwarm : Spell
                 {
                     break;
                 }
-                x = SaveGame.Player.MapX - 5 + Program.Rng.DieRoll(10);
-                y = SaveGame.Player.MapY - 5 + Program.Rng.DieRoll(10);
-                int dx = SaveGame.Player.MapX > x ? SaveGame.Player.MapX - x : x - SaveGame.Player.MapX;
-                int dy = SaveGame.Player.MapY > y ? SaveGame.Player.MapY - y : y - SaveGame.Player.MapY;
+                x = SaveGame.MapX - 5 + Program.Rng.DieRoll(10);
+                y = SaveGame.MapY - 5 + Program.Rng.DieRoll(10);
+                int dx = SaveGame.MapX > x ? SaveGame.MapX - x : x - SaveGame.MapX;
+                int dy = SaveGame.MapY > y ? SaveGame.MapY - y : y - SaveGame.MapY;
                 d = dy > dx ? dy + (dx >> 1) : dx + (dy >> 1);
             } while (d > 5 || !SaveGame.Level.PlayerHasLosBold(y, x));
             if (count > 1000)
@@ -38,7 +38,7 @@ internal class ChaosSpellMeteorSwarm : Spell
                 break;
             }
             count = 0;
-            SaveGame.Project(0, 2, y, x, SaveGame.Player.ExperienceLevel * 3 / 2, SaveGame.SingletonRepository.Projectiles.Get<MeteorProjectile>(),
+            SaveGame.Project(0, 2, y, x, SaveGame.ExperienceLevel * 3 / 2, SaveGame.SingletonRepository.Projectiles.Get<MeteorProjectile>(),
                 ProjectionFlag.ProjectKill | ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem);
         }
     }
@@ -52,6 +52,6 @@ internal class ChaosSpellMeteorSwarm : Spell
     
     protected override string? Info()
     {
-        return $"dam {3 * SaveGame.Player.ExperienceLevel / 2} each";
+        return $"dam {3 * SaveGame.ExperienceLevel / 2} each";
     }
 }

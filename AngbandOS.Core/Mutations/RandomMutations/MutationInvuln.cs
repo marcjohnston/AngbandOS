@@ -20,12 +20,12 @@ internal class MutationInvuln : Mutation
 
     public override void OnProcessWorld(SaveGame saveGame)
     {
-        if (!saveGame.Player.HasAntiMagic && Program.Rng.DieRoll(5000) == 1)
+        if (!saveGame.HasAntiMagic && Program.Rng.DieRoll(5000) == 1)
         {
             saveGame.Disturb(false);
             saveGame.MsgPrint("You feel invincible!");
             saveGame.MsgPrint(null);
-            saveGame.Player.TimedInvulnerability.AddTimer(Program.Rng.DieRoll(8) + 8);
+            saveGame.TimedInvulnerability.AddTimer(Program.Rng.DieRoll(8) + 8);
         }
     }
 }

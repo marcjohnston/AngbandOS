@@ -11,7 +11,7 @@ internal class SoundSpellResistantDetection : SpellResistantDetection
 {
     public override void Learn(SaveGame saveGame, Monster monster)
     {
-        if (saveGame.Player.HasSoundResistance)
+        if (saveGame.HasSoundResistance)
         {
             monster.SmResSound = true;
         }

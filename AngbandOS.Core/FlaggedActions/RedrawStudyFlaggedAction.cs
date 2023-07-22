@@ -15,6 +15,6 @@ internal class RedrawStudyFlaggedAction : FlaggedAction
     public RedrawStudyFlaggedAction(SaveGame saveGame) : base(saveGame) { }
     protected override void Execute()
     {
-        SaveGame.Screen.Print(SaveGame.Player.SpareSpellSlots != 0 ? "Study" : "     ", RowStudy, ColStudy);
+        SaveGame.Screen.Print(SaveGame.SpareSpellSlots != 0 ? "Study" : "     ", RowStudy, ColStudy);
     }
 }

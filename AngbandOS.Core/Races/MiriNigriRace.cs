@@ -50,8 +50,8 @@ internal class MiriNigriRace : Race
     public override string CreateRandomName() => CreateRandomNameFromSyllables(new CthuloidSyllables());
     public override void CalcBonuses(SaveGame saveGame)
     {
-        saveGame.Player.HasConfusionResistance = true;
-        saveGame.Player.HasSoundResistance = true;
+        saveGame.HasConfusionResistance = true;
+        saveGame.HasSoundResistance = true;
     }
 
     public override bool AutomaticallyGainsFirstLevelMutationAtBirth => true;

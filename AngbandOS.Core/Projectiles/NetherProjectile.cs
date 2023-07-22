@@ -60,7 +60,7 @@ internal class NetherProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
         if (dam > 1600)
         {
             dam = 1600;
@@ -72,9 +72,9 @@ internal class NetherProjectile : Projectile
         {
             SaveGame.MsgPrint("You are hit by nether forces!");
         }
-        if (SaveGame.Player.HasNetherResistance)
+        if (SaveGame.HasNetherResistance)
         {
-            if (SaveGame.Player.Race.NegatesNetherResistance)
+            if (SaveGame.Race.NegatesNetherResistance)
             {
                 dam *= 6;
             }
@@ -82,33 +82,33 @@ internal class NetherProjectile : Projectile
         }
         else
         {
-            if (SaveGame.Player.HasHoldLife && Program.Rng.RandomLessThan(100) < 75)
+            if (SaveGame.HasHoldLife && Program.Rng.RandomLessThan(100) < 75)
             {
                 SaveGame.MsgPrint("You keep hold of your life force!");
             }
-            else if (Program.Rng.DieRoll(10) <= SaveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+            else if (Program.Rng.DieRoll(10) <= SaveGame.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
             {
                 SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
             }
-            else if (SaveGame.Player.HasHoldLife)
+            else if (SaveGame.HasHoldLife)
             {
                 SaveGame.MsgPrint("You feel your life slipping away!");
-                SaveGame.Player.LoseExperience(200 + (SaveGame.Player.ExperiencePoints / 1000 * Constants.MonDrainLife));
+                SaveGame.LoseExperience(200 + (SaveGame.ExperiencePoints / 1000 * Constants.MonDrainLife));
             }
             else
             {
                 SaveGame.MsgPrint("You feel your life draining away!");
-                SaveGame.Player.LoseExperience(200 + (SaveGame.Player.ExperiencePoints / 100 * Constants.MonDrainLife));
+                SaveGame.LoseExperience(200 + (SaveGame.ExperiencePoints / 100 * Constants.MonDrainLife));
             }
         }
-        if (SaveGame.Player.Race.ProjectingNetherRestoresHealth)
+        if (SaveGame.Race.ProjectingNetherRestoresHealth)
         {
             SaveGame.MsgPrint("You feel invigorated!");
-            SaveGame.Player.RestoreHealth(dam / 4);
+            SaveGame.RestoreHealth(dam / 4);
         }
         else
         {
-            SaveGame.Player.TakeHit(dam, killer);
+            SaveGame.TakeHit(dam, killer);
         }
         return true;
     }

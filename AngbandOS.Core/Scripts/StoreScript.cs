@@ -14,7 +14,7 @@ internal class StoreScript : Script
 
     public override bool Execute()
     {
-        GridTile tile = SaveGame.Level.Grid[SaveGame.Player.MapY][SaveGame.Player.MapX];
+        GridTile tile = SaveGame.Level.Grid[SaveGame.MapY][SaveGame.MapX];
         // Make sure we're actually on a shop tile
         if (!tile.FeatureType.IsShop)
         {

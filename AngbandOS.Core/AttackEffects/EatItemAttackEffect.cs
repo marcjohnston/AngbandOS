@@ -15,8 +15,8 @@ internal class EatItemAttackEffect : BaseAttackEffect
     public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         // Steal an item
-        saveGame.Player.TakeHit(damage, monsterDescription);
-        if ((saveGame.Player.TimedParalysis.TurnsRemaining == 0 && Program.Rng.RandomLessThan(100) < saveGame.Player.AbilityScores[Ability.Dexterity].DexTheftAvoidance + saveGame.Player.ExperienceLevel) || saveGame.Player.HasAntiTheft)
+        saveGame.TakeHit(damage, monsterDescription);
+        if ((saveGame.TimedParalysis.TurnsRemaining == 0 && Program.Rng.RandomLessThan(100) < saveGame.AbilityScores[Ability.Dexterity].DexTheftAvoidance + saveGame.ExperienceLevel) || saveGame.HasAntiTheft)
         {
             saveGame.MsgPrint("You grab hold of your backpack!");
             blinked = true;
@@ -42,8 +42,8 @@ internal class EatItemAttackEffect : BaseAttackEffect
 
                 saveGame.AddItemToMonster(item.Clone(), monster);
 
-                saveGame.Player.InvenItemIncrease(i, -1);
-                saveGame.Player.InvenItemOptimize(i);
+                saveGame.InvenItemIncrease(i, -1);
+                saveGame.InvenItemOptimize(i);
                 obvious = true;
                 blinked = true;
                 return;

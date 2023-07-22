@@ -38,7 +38,7 @@ internal class ShardProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
         if (dam > 1600)
         {
             dam = 1600;
@@ -50,23 +50,23 @@ internal class ShardProjectile : Projectile
         {
             SaveGame.MsgPrint("You are hit by shards of crystal!");
         }
-        if (!SaveGame.Player.HasSoundResistance)
+        if (!SaveGame.HasSoundResistance)
         {
-            SaveGame.Player.TimedStun.AddTimer(Program.Rng.DieRoll(20));
+            SaveGame.TimedStun.AddTimer(Program.Rng.DieRoll(20));
         }
-        if (SaveGame.Player.HasShardResistance)
+        if (SaveGame.HasShardResistance)
         {
             dam /= 2;
         }
         else
         {
-            SaveGame.Player.TimedBleeding.AddTimer((dam / 2));
+            SaveGame.TimedBleeding.AddTimer((dam / 2));
         }
-        if (!SaveGame.Player.HasShardResistance || Program.Rng.DieRoll(12) == 1)
+        if (!SaveGame.HasShardResistance || Program.Rng.DieRoll(12) == 1)
         {
-            SaveGame.Player.InvenDamage(SaveGame.SetColdDestroy, 3);
+            SaveGame.InvenDamage(SaveGame.SetColdDestroy, 3);
         }
-        SaveGame.Player.TakeHit(dam, killer);
+        SaveGame.TakeHit(dam, killer);
         return true;
     }
 }

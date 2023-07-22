@@ -23,17 +23,17 @@ internal class ScareMonsterSpell : MonsterSpell
 
     public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
     {
-        if (saveGame.Player.HasFearResistance)
+        if (saveGame.HasFearResistance)
         {
             saveGame.MsgPrint("You refuse to be frightened.");
         }
-        else if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
+        else if (Program.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
         {
             saveGame.MsgPrint("You refuse to be frightened.");
         }
         else
         {
-            saveGame.Player.TimedFear.AddTimer(Program.Rng.RandomLessThan(4) + 4);
+            saveGame.TimedFear.AddTimer(Program.Rng.RandomLessThan(4) + 4);
         }
         saveGame.Level.UpdateSmartLearn(monster, new FearSpellResistantDetection());
     }
@@ -41,7 +41,7 @@ internal class ScareMonsterSpell : MonsterSpell
     public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
     {
         MonsterRace targetRace = target.Race;
-        bool playerIsBlind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool playerIsBlind = saveGame.TimedBlindness.TurnsRemaining != 0;
         bool seeTarget = !playerIsBlind && target.IsVisible;
         string targetName = target.Name;
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;

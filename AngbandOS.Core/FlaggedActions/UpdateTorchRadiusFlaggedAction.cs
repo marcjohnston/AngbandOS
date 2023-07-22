@@ -17,7 +17,7 @@ internal class UpdateTorchRadiusFlaggedAction : FlaggedAction
     /// </summary>
     protected override void Execute()
     {
-        SaveGame.Player.LightLevel = 0;
+        SaveGame.LightLevel = 0;
         foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsEquipment))
         {
             foreach (int i in inventorySlot.InventorySlots)
@@ -25,23 +25,23 @@ internal class UpdateTorchRadiusFlaggedAction : FlaggedAction
                 Item? oPtr = SaveGame.GetInventoryItem(i);
                 if (oPtr != null)
                 {
-                    SaveGame.Player.LightLevel += oPtr.CalculateTorch();
+                    SaveGame.LightLevel += oPtr.CalculateTorch();
                 }
             }
         }
-        if (SaveGame.Player.LightLevel > 5)
+        if (SaveGame.LightLevel > 5)
         {
-            SaveGame.Player.LightLevel = 5;
+            SaveGame.LightLevel = 5;
         }
-        if (SaveGame.Player.LightLevel == 0 && SaveGame.Player.HasGlow)
+        if (SaveGame.LightLevel == 0 && SaveGame.HasGlow)
         {
-            SaveGame.Player.LightLevel = 1;
+            SaveGame.LightLevel = 1;
         }
-        if (OldLightLevel != SaveGame.Player.LightLevel)
+        if (OldLightLevel != SaveGame.LightLevel)
         {
             SaveGame.UpdateLightFlaggedAction.Set();
             SaveGame.UpdateMonstersFlaggedAction.Set();
-            OldLightLevel = SaveGame.Player.LightLevel;
+            OldLightLevel = SaveGame.LightLevel;
         }
     }
 }

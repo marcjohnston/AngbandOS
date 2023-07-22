@@ -20,18 +20,18 @@ internal class MutationAttAnimal : Mutation
 
     public override void OnProcessWorld(SaveGame saveGame)
     {
-        if (saveGame.Player.HasAntiMagic || Program.Rng.DieRoll(7000) != 1)
+        if (saveGame.HasAntiMagic || Program.Rng.DieRoll(7000) != 1)
         {
             return;
         }
         bool aSummon;
         if (Program.Rng.DieRoll(3) == 1)
         {
-            aSummon = saveGame.Level.SummonSpecificFriendly(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new AnimalMonsterSelector(), true);
+            aSummon = saveGame.Level.SummonSpecificFriendly(saveGame.MapY, saveGame.MapX, saveGame.Difficulty, new AnimalMonsterSelector(), true);
         }
         else
         {
-            aSummon = saveGame.Level.SummonSpecific(saveGame.Player.MapY, saveGame.Player.MapX, saveGame.Difficulty, new AnimalMonsterSelector());
+            aSummon = saveGame.Level.SummonSpecific(saveGame.MapY, saveGame.MapX, saveGame.Difficulty, new AnimalMonsterSelector());
         }
         if (!aSummon)
         {

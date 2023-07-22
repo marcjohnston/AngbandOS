@@ -20,19 +20,19 @@ internal class MutationWeirdMind : Mutation
 
     public override void OnProcessWorld(SaveGame saveGame)
     {
-        if (saveGame.Player.HasAntiMagic || Program.Rng.DieRoll(3000) != 1)
+        if (saveGame.HasAntiMagic || Program.Rng.DieRoll(3000) != 1)
         {
             return;
         }
-        if (saveGame.Player.TimedTelepathy.TurnsRemaining > 0)
+        if (saveGame.TimedTelepathy.TurnsRemaining > 0)
         {
             saveGame.MsgPrint("Your mind feels cloudy!");
-            saveGame.Player.TimedTelepathy.ResetTimer();
+            saveGame.TimedTelepathy.ResetTimer();
         }
         else
         {
             saveGame.MsgPrint("Your mind expands!");
-            saveGame.Player.TimedTelepathy.SetTimer(saveGame.Player.ExperienceLevel);
+            saveGame.TimedTelepathy.SetTimer(saveGame.ExperienceLevel);
         }
     }
 }

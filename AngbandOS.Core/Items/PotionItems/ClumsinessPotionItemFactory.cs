@@ -25,7 +25,7 @@ internal class ClumsinessPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Clumsiness tries to reduce your dexterity
-        return SaveGame.Player.TryDecreasingAbilityScore(Ability.Dexterity);
+        return SaveGame.TryDecreasingAbilityScore(Ability.Dexterity);
     }
     public override bool Smash(int who, int y, int x)
     {

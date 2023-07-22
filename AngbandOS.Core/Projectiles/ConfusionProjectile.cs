@@ -59,7 +59,7 @@ internal class ConfusionProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
         if (dam > 1600)
         {
             dam = 1600;
@@ -71,16 +71,16 @@ internal class ConfusionProjectile : Projectile
         {
             SaveGame.MsgPrint("You are hit by something puzzling!");
         }
-        if (SaveGame.Player.HasConfusionResistance)
+        if (SaveGame.HasConfusionResistance)
         {
             dam *= 5;
             dam /= Program.Rng.DieRoll(6) + 6;
         }
-        if (!SaveGame.Player.HasConfusionResistance)
+        if (!SaveGame.HasConfusionResistance)
         {
-            SaveGame.Player.TimedConfusion.AddTimer(Program.Rng.DieRoll(20) + 10);
+            SaveGame.TimedConfusion.AddTimer(Program.Rng.DieRoll(20) + 10);
         }
-        SaveGame.Player.TakeHit(dam, killer);
+        SaveGame.TakeHit(dam, killer);
         return true;
     }
 }

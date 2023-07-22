@@ -70,17 +70,17 @@ internal class SpectreRace : Race
     }
     public override void CalcBonuses(SaveGame saveGame)
     {
-        saveGame.Player.HasFeatherFall = true;
-        saveGame.Player.HasNetherResistance = true;
-        saveGame.Player.HasHoldLife = true;
-        saveGame.Player.HasSeeInvisibility = true;
-        saveGame.Player.HasPoisonResistance = true;
-        saveGame.Player.HasSlowDigestion = true;
-        saveGame.Player.HasColdResistance = true;
-        saveGame.Player.HasGlow = true;
-        if (saveGame.Player.ExperienceLevel > 34)
+        saveGame.HasFeatherFall = true;
+        saveGame.HasNetherResistance = true;
+        saveGame.HasHoldLife = true;
+        saveGame.HasSeeInvisibility = true;
+        saveGame.HasPoisonResistance = true;
+        saveGame.HasSlowDigestion = true;
+        saveGame.HasColdResistance = true;
+        saveGame.HasGlow = true;
+        if (saveGame.ExperienceLevel > 34)
         {
-            saveGame.Player.HasTelepathy = true;
+            saveGame.HasTelepathy = true;
         }
     }
     public override bool RestsTillDuskInsteadOfDawn => true;
@@ -88,7 +88,7 @@ internal class SpectreRace : Race
     {
         // This race only gets 1/20th of the food value
         SaveGame.MsgPrint("The food of mortals is poor sustenance for you.");
-        SaveGame.Player.SetFood(SaveGame.Player.Food + (item.TypeSpecificValue / 20));
+        SaveGame.SetFood(SaveGame.Food + (item.TypeSpecificValue / 20));
     }
     public override bool CanBleed(int level) => false;
 
@@ -104,7 +104,7 @@ internal class SpectreRace : Race
             saveGame.MsgPrint("You emit an eldritch howl!");
             if (saveGame.GetDirectionWithAim(out int direction))
             {
-                saveGame.FearMonster(direction, saveGame.Player.ExperienceLevel);
+                saveGame.FearMonster(direction, saveGame.ExperienceLevel);
             }
         }
     }

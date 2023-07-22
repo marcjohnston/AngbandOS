@@ -17,7 +17,7 @@ internal class ChaosSpellManaStorm : Spell
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), dir, 300 + (SaveGame.Player.ExperienceLevel * 2), 4);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), dir, 300 + (SaveGame.ExperienceLevel * 2), 4);
     }
 
     public override void CastFailed()
@@ -29,6 +29,6 @@ internal class ChaosSpellManaStorm : Spell
     
     protected override string? Info()
     {
-        return $"dam {300 + (SaveGame.Player.ExperienceLevel * 2)}";
+        return $"dam {300 + (SaveGame.ExperienceLevel * 2)}";
     }
 }

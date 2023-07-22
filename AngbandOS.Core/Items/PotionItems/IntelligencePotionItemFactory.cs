@@ -26,7 +26,7 @@ internal class IntelligencePotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Intelligence increases your intelligence
-        return SaveGame.Player.TryIncreasingAbilityScore(Ability.Intelligence);
+        return SaveGame.TryIncreasingAbilityScore(Ability.Intelligence);
     }
     public override Item CreateItem() => new IntelligencePotionItem(SaveGame);
 }

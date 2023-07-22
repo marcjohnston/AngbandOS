@@ -20,13 +20,13 @@ internal class MutationNausea : Mutation
 
     public override void OnProcessWorld(SaveGame saveGame)
     {
-        if (saveGame.Player.HasSlowDigestion || Program.Rng.DieRoll(9000) != 1)
+        if (saveGame.HasSlowDigestion || Program.Rng.DieRoll(9000) != 1)
         {
             return;
         }
         saveGame.Disturb(false);
         saveGame.MsgPrint("Your stomach roils, and you lose your lunch!");
         saveGame.MsgPrint(null);
-        saveGame.Player.SetFood(Constants.PyFoodWeak);
+        saveGame.SetFood(Constants.PyFoodWeak);
     }
 }

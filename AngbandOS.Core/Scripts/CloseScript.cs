@@ -23,8 +23,8 @@ internal class CloseScript : Script
         // Get the location to close
         if (SaveGame.GetDirectionNoAim(out int dir))
         {
-            int y = SaveGame.Player.MapY + SaveGame.Level.KeypadDirectionYOffset[dir];
-            int x = SaveGame.Player.MapX + SaveGame.Level.KeypadDirectionXOffset[dir];
+            int y = SaveGame.MapY + SaveGame.Level.KeypadDirectionYOffset[dir];
+            int x = SaveGame.MapX + SaveGame.Level.KeypadDirectionXOffset[dir];
             GridTile tile = SaveGame.Level.Grid[y][x];
             // Can only close actual open doors
             if (!tile.FeatureType.IsOpenDoor)

@@ -12,9 +12,9 @@ internal class ParalyzeChestTrap : BaseChestTrap
     public override void Activate(ActivateChestTrapEventArgs eventArgs)
     {
         eventArgs.SaveGame.MsgPrint("A puff of yellow gas surrounds you!");
-        if (!eventArgs.SaveGame.Player.HasFreeAction)
+        if (!eventArgs.SaveGame.HasFreeAction)
         {
-            eventArgs.SaveGame.Player.TimedParalysis.AddTimer(10 + Program.Rng.DieRoll(20));
+            eventArgs.SaveGame.TimedParalysis.AddTimer(10 + Program.Rng.DieRoll(20));
         }
     }
 

@@ -156,7 +156,7 @@ internal class Genome
         List<Mutation> list = new List<Mutation>();
         foreach (Mutation mutation in _possessed)
         {
-            if (string.IsNullOrEmpty(mutation.ActivationSummary(SaveGame.Player.ExperienceLevel)))
+            if (string.IsNullOrEmpty(mutation.ActivationSummary(SaveGame.ExperienceLevel)))
             {
                 continue;
             }

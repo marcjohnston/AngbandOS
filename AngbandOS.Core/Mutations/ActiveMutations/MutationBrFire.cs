@@ -12,14 +12,14 @@ internal class MutationBrFire : Mutation
 {
     public override void Activate(SaveGame saveGame)
     {
-        if (!saveGame.CheckIfRacialPowerWorks(20, saveGame.Player.ExperienceLevel, Ability.Constitution, 18))
+        if (!saveGame.CheckIfRacialPowerWorks(20, saveGame.ExperienceLevel, Ability.Constitution, 18))
         {
             return;
         }
         saveGame.MsgPrint("You breathe fire...");
         if (saveGame.GetDirectionWithAim(out int dir))
         {
-            saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, saveGame.Player.ExperienceLevel * 2, -(1 + (saveGame.Player.ExperienceLevel / 20)));
+            saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, saveGame.ExperienceLevel * 2, -(1 + (saveGame.ExperienceLevel / 20)));
         }
     }
 

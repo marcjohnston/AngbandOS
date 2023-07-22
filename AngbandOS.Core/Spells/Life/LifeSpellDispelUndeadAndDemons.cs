@@ -13,14 +13,14 @@ internal class LifeSpellDispelUndeadAndDemons : Spell
     private LifeSpellDispelUndeadAndDemons(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.DispelUndead(SaveGame.Player.ExperienceLevel * 3);
-        SaveGame.DispelDemons(SaveGame.Player.ExperienceLevel * 3);
+        SaveGame.DispelUndead(SaveGame.ExperienceLevel * 3);
+        SaveGame.DispelDemons(SaveGame.ExperienceLevel * 3);
     }
 
     public override string Name => "Dispel Undead & Demons";
     
     protected override string? Info()
     {
-        return $"dam {3 * SaveGame.Player.ExperienceLevel}+{3 * SaveGame.Player.ExperienceLevel}";
+        return $"dam {3 * SaveGame.ExperienceLevel}+{3 * SaveGame.ExperienceLevel}";
     }
 }

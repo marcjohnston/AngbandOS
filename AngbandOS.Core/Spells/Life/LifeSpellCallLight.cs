@@ -13,13 +13,13 @@ internal class LifeSpellCallLight : Spell
     private LifeSpellCallLight(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.LightArea(Program.Rng.DiceRoll(2, SaveGame.Player.ExperienceLevel / 2), (SaveGame.Player.ExperienceLevel / 10) + 1);
+        SaveGame.LightArea(Program.Rng.DiceRoll(2, SaveGame.ExperienceLevel / 2), (SaveGame.ExperienceLevel / 10) + 1);
     }
 
     public override string Name => "Call Light";
     
     protected override string? Info()
     {
-        return $"dam {10 + (SaveGame.Player.ExperienceLevel / 2)}";
+        return $"dam {10 + (SaveGame.ExperienceLevel / 2)}";
     }
 }

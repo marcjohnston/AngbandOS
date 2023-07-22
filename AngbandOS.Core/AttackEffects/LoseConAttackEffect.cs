@@ -14,8 +14,8 @@ internal class LoseConAttackEffect : BaseAttackEffect
     public override string Description => "reduce constitution";
     public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
-        saveGame.Player.TakeHit(damage, monsterDescription);
-        if (saveGame.Player.TryDecreasingAbilityScore(Ability.Constitution))
+        saveGame.TakeHit(damage, monsterDescription);
+        if (saveGame.TryDecreasingAbilityScore(Ability.Constitution))
         {
             obvious = true;
         }

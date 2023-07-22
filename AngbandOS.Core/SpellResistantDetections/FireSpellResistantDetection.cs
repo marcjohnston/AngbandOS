@@ -11,15 +11,15 @@ internal class FireSpellResistantDetection : SpellResistantDetection
 {
     public override void Learn(SaveGame saveGame, Monster monster)
     {
-        if (saveGame.Player.HasFireResistance)
+        if (saveGame.HasFireResistance)
         {
             monster.SmResFire = true;
         }
-        if (saveGame.Player.TimedFireResistance.TurnsRemaining != 0)
+        if (saveGame.TimedFireResistance.TurnsRemaining != 0)
         {
             monster.SmOppFire = true;
         }
-        if (saveGame.Player.HasFireImmunity)
+        if (saveGame.HasFireImmunity)
         {
             monster.SmImmFire = true;
         }

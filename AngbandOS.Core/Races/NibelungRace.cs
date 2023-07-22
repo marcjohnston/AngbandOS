@@ -63,8 +63,8 @@ internal class NibelungRace : Race
 
     public override void CalcBonuses(SaveGame saveGame)
     {
-        saveGame.Player.HasDisenchantResistance = true;
-        saveGame.Player.HasDarkResistance = true;
+        saveGame.HasDisenchantResistance = true;
+        saveGame.HasDarkResistance = true;
     }
 
     public override void UseRacialPower(SaveGame saveGame)

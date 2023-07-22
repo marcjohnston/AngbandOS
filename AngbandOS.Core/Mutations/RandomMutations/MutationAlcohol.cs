@@ -24,7 +24,7 @@ internal class MutationAlcohol : Mutation
         {
             return;
         }
-        if (saveGame.Player.HasChaosResistance && saveGame.Player.HasConfusionResistance)
+        if (saveGame.HasChaosResistance && saveGame.HasConfusionResistance)
         {
             return;
         }
@@ -49,14 +49,14 @@ internal class MutationAlcohol : Mutation
         }
         else
         {
-            if (!saveGame.Player.HasConfusionResistance)
+            if (!saveGame.HasConfusionResistance)
             {
-                saveGame.Player.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(20) + 15);
+                saveGame.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(20) + 15);
             }
-            if (Program.Rng.DieRoll(3) == 1 && !saveGame.Player.HasChaosResistance)
+            if (Program.Rng.DieRoll(3) == 1 && !saveGame.HasChaosResistance)
             {
                 saveGame.MsgPrint("Thishcischs GooDSChtuff!");
-                saveGame.Player.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(150) + 150);
+                saveGame.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(150) + 150);
             }
         }
     }

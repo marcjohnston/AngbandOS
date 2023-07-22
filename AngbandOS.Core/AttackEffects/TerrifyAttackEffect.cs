@@ -14,20 +14,20 @@ internal class TerrifyAttackEffect : BaseAttackEffect
     public override string Description => "terrify";
     public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
-        saveGame.Player.TakeHit(damage, monsterDescription);
-        if (saveGame.Player.HasFearResistance)
+        saveGame.TakeHit(damage, monsterDescription);
+        if (saveGame.HasFearResistance)
         {
             saveGame.MsgPrint("You stand your ground!");
             obvious = true;
         }
-        else if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
+        else if (Program.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
         {
             saveGame.MsgPrint("You stand your ground!");
             obvious = true;
         }
         else
         {
-            if (saveGame.Player.TimedFear.AddTimer(3 + Program.Rng.DieRoll(monsterLevel)))
+            if (saveGame.TimedFear.AddTimer(3 + Program.Rng.DieRoll(monsterLevel)))
             {
                 obvious = true;
             }

@@ -13,9 +13,9 @@ internal class CorporealSpellCureCriticalWounds : Spell
     private CorporealSpellCureCriticalWounds(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Player.RestoreHealth(Program.Rng.DiceRoll(8, 10));
-        SaveGame.Player.TimedStun.ResetTimer();
-        SaveGame.Player.TimedBleeding.ResetTimer();
+        SaveGame.RestoreHealth(Program.Rng.DiceRoll(8, 10));
+        SaveGame.TimedStun.ResetTimer();
+        SaveGame.TimedBleeding.ResetTimer();
     }
 
     public override string Name => "Cure Critical Wounds";

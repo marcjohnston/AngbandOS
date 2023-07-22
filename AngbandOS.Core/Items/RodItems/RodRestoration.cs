@@ -26,31 +26,31 @@ internal class RodRestoration : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        if (SaveGame.Player.RestoreLevel())
+        if (SaveGame.RestoreLevel())
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.Player.TryRestoringAbilityScore(Ability.Strength))
+        if (SaveGame.TryRestoringAbilityScore(Ability.Strength))
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.Player.TryRestoringAbilityScore(Ability.Intelligence))
+        if (SaveGame.TryRestoringAbilityScore(Ability.Intelligence))
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.Player.TryRestoringAbilityScore(Ability.Wisdom))
+        if (SaveGame.TryRestoringAbilityScore(Ability.Wisdom))
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.Player.TryRestoringAbilityScore(Ability.Dexterity))
+        if (SaveGame.TryRestoringAbilityScore(Ability.Dexterity))
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.Player.TryRestoringAbilityScore(Ability.Constitution))
+        if (SaveGame.TryRestoringAbilityScore(Ability.Constitution))
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.Player.TryRestoringAbilityScore(Ability.Charisma))
+        if (SaveGame.TryRestoringAbilityScore(Ability.Charisma))
         {
             zapRodEvent.Identified = true;
         }

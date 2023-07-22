@@ -20,8 +20,8 @@ internal class AmuletOfLobonFixedArtifact : FixedArtifact, IFixedArtifactActivat
     public void ActivateItem(SaveGame saveGame, Item item)
     {
         saveGame.MsgPrint("The amulet lets out a shrill wail...");
-        int k = 3 * saveGame.Player.ExperienceLevel;
-        saveGame.Player.TimedProtectionFromEvil.AddTimer(Program.Rng.DieRoll(25) + k);
+        int k = 3 * saveGame.ExperienceLevel;
+        saveGame.TimedProtectionFromEvil.AddTimer(Program.Rng.DieRoll(25) + k);
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(225) + 225;
     }
     public string DescribeActivationEffect() => "protection from evil every 225+d225 turns";

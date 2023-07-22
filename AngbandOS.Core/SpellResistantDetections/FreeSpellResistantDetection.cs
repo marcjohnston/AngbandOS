@@ -11,7 +11,7 @@ internal class FreeSpellResistantDetection : SpellResistantDetection
 {
     public override void Learn(SaveGame saveGame, Monster monster)
     {
-        if (saveGame.Player.HasFreeAction)
+        if (saveGame.HasFreeAction)
         {
             monster.SmImmFree = true;
         }

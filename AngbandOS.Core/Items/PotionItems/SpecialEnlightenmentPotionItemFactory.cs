@@ -30,8 +30,8 @@ internal class SpecialEnlightenmentPotionItemFactory : PotionItemFactory
         SaveGame.MsgPrint("You begin to feel more enlightened...");
         SaveGame.MsgPrint(null);
         SaveGame.Level.WizLight();
-        SaveGame.Player.TryIncreasingAbilityScore(Ability.Intelligence);
-        SaveGame.Player.TryIncreasingAbilityScore(Ability.Wisdom);
+        SaveGame.TryIncreasingAbilityScore(Ability.Intelligence);
+        SaveGame.TryIncreasingAbilityScore(Ability.Wisdom);
         SaveGame.DetectTraps();
         SaveGame.DetectDoors();
         SaveGame.DetectStairs();

@@ -13,9 +13,9 @@ internal class DeathSpellBerserk : Spell
     private DeathSpellBerserk(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Player.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(25) + 25);
-        SaveGame.Player.RestoreHealth(30);
-        SaveGame.Player.TimedFear.ResetTimer();
+        SaveGame.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(25) + 25);
+        SaveGame.RestoreHealth(30);
+        SaveGame.TimedFear.ResetTimer();
     }
 
     public override void CastFailed()

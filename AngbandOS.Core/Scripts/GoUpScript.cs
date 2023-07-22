@@ -15,7 +15,7 @@ internal class GoUpScript : Script
     public override bool Execute()
     {
         // We need to actually be on an up staircase
-        GridTile tile = SaveGame.Level.Grid[SaveGame.Player.MapY][SaveGame.Player.MapX];
+        GridTile tile = SaveGame.Level.Grid[SaveGame.MapY][SaveGame.MapX];
         if (tile.FeatureType.Name != "UpStair")
         {
             SaveGame.MsgPrint("I see no up staircase here.");
@@ -27,7 +27,7 @@ internal class GoUpScript : Script
         // If we're outside then we must be entering a tower
         if (SaveGame.CurrentDepth == 0)
         {
-            SaveGame.CurDungeon = SaveGame.Wilderness[SaveGame.Player.WildernessY][SaveGame.Player.WildernessX].Dungeon;
+            SaveGame.CurDungeon = SaveGame.Wilderness[SaveGame.WildernessY][SaveGame.WildernessX].Dungeon;
             SaveGame.MsgPrint($"You enter {SaveGame.CurDungeon.Name}");
         }
         else
@@ -74,8 +74,8 @@ internal class GoUpScript : Script
             }
             if (SaveGame.CurrentDepth == 0)
             {
-                SaveGame.Player.WildernessX = SaveGame.CurDungeon.X;
-                SaveGame.Player.WildernessY = SaveGame.CurDungeon.Y;
+                SaveGame.WildernessX = SaveGame.CurDungeon.X;
+                SaveGame.WildernessY = SaveGame.CurDungeon.Y;
                 SaveGame.CameFrom = LevelStart.StartStairs;
             }
         }

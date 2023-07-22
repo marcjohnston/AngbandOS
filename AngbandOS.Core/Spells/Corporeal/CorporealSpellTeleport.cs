@@ -13,13 +13,13 @@ internal class CorporealSpellTeleport : Spell
     private CorporealSpellTeleport(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.TeleportPlayer(SaveGame.Player.ExperienceLevel * 3);
+        SaveGame.TeleportPlayer(SaveGame.ExperienceLevel * 3);
     }
 
     public override string Name => "Teleport";
     
     protected override string? Info()
     {
-        return $"range {SaveGame.Player.ExperienceLevel * 3}";
+        return $"range {SaveGame.ExperienceLevel * 3}";
     }
 }

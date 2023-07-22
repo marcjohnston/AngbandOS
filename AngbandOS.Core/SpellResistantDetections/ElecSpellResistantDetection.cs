@@ -11,15 +11,15 @@ internal class ElecSpellResistantDetection : SpellResistantDetection
 {
     public override void Learn(SaveGame saveGame, Monster monster)
     {
-        if (saveGame.Player.HasLightningResistance)
+        if (saveGame.HasLightningResistance)
         {
             monster.SmResElec = true;
         }
-        if (saveGame.Player.TimedLightningResistance.TurnsRemaining != 0)
+        if (saveGame.TimedLightningResistance.TurnsRemaining != 0)
         {
             monster.SmOppElec = true;
         }
-        if (saveGame.Player.HasLightningImmunity)
+        if (saveGame.HasLightningImmunity)
         {
             monster.SmImmElec = true;
         }

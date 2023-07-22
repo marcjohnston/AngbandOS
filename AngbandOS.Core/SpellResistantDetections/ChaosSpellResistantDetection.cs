@@ -11,7 +11,7 @@ internal class ChaosSpellResistantDetection : SpellResistantDetection
 {
     public override void Learn(SaveGame saveGame, Monster monster)
     {
-        if (saveGame.Player.HasChaosResistance)
+        if (saveGame.HasChaosResistance)
         {
             monster.SmResChaos = true;
         }

@@ -27,7 +27,7 @@ internal class RestoreCharismaPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Restore charisma restores your charisma
-        return SaveGame.Player.TryRestoringAbilityScore(Ability.Charisma);
+        return SaveGame.TryRestoringAbilityScore(Ability.Charisma);
     }
     public override Item CreateItem() => new RestoreCharismaPotionItem(SaveGame);
 }

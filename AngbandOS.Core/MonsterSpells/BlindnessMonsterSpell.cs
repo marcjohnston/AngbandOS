@@ -26,17 +26,17 @@ internal class BlindnessMonsterSpell : MonsterSpell
     public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
     {
 
-        if (saveGame.Player.HasBlindnessResistance)
+        if (saveGame.HasBlindnessResistance)
         {
             saveGame.MsgPrint("You are unaffected!");
         }
-        else if (Program.Rng.RandomLessThan(100) < saveGame.Player.SkillSavingThrow)
+        else if (Program.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
         {
             saveGame.MsgPrint("You resist the effects!");
         }
         else
         {
-            saveGame.Player.TimedBlindness.SetTimer(12 + Program.Rng.RandomLessThan(4));
+            saveGame.TimedBlindness.SetTimer(12 + Program.Rng.RandomLessThan(4));
         }
         saveGame.Level.UpdateSmartLearn(monster, new BlindSpellResistantDetection());
     }
@@ -45,7 +45,7 @@ internal class BlindnessMonsterSpell : MonsterSpell
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         string targetName = target.Name;
-        bool blind = saveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = saveGame.TimedBlindness.TurnsRemaining != 0;
         bool seeTarget = !blind && target.IsVisible;
         MonsterRace targetRace = target.Race;
 

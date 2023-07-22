@@ -22,30 +22,30 @@ internal class AdrenalineChannelingTalent : Talent
 
     public override void Use()
     {
-        SaveGame.Player.TimedFear.ResetTimer();
-        SaveGame.Player.TimedStun.ResetTimer();
-        SaveGame.Player.RestoreHealth(SaveGame.Player.ExperienceLevel);
-        int i = 10 + Program.Rng.DieRoll(SaveGame.Player.ExperienceLevel * 3 / 2);
-        if (SaveGame.Player.ExperienceLevel < 35)
+        SaveGame.TimedFear.ResetTimer();
+        SaveGame.TimedStun.ResetTimer();
+        SaveGame.RestoreHealth(SaveGame.ExperienceLevel);
+        int i = 10 + Program.Rng.DieRoll(SaveGame.ExperienceLevel * 3 / 2);
+        if (SaveGame.ExperienceLevel < 35)
         {
-            SaveGame.Player.TimedHeroism.AddTimer(i);
+            SaveGame.TimedHeroism.AddTimer(i);
         }
         else
         {
-            SaveGame.Player.TimedSuperheroism.AddTimer(i);
+            SaveGame.TimedSuperheroism.AddTimer(i);
         }
-        if (SaveGame.Player.TimedHaste.TurnsRemaining == 0)
+        if (SaveGame.TimedHaste.TurnsRemaining == 0)
         {
-            SaveGame.Player.TimedHaste.SetTimer(i);
+            SaveGame.TimedHaste.SetTimer(i);
         }
         else
         {
-            SaveGame.Player.TimedHaste.AddTimer(i);
+            SaveGame.TimedHaste.AddTimer(i);
         }
     }
 
     protected override string Comment()
     {
-        return $"dur 10+d{SaveGame.Player.ExperienceLevel * 3 / 2}";
+        return $"dur 10+d{SaveGame.ExperienceLevel * 3 / 2}";
     }
 }

@@ -14,6 +14,6 @@ internal class PolyWndReward : Reward
     public override void GetReward(Patron patron)
     {
         SaveGame.MsgPrint($"You feel the power of {patron.ShortName} touch you.");
-        SaveGame.Player.PolymorphWounds();
+        SaveGame.PolymorphWounds();
     }
 }

@@ -61,7 +61,7 @@ internal class HalfTitanRace : Race
     }
     public override void CalcBonuses(SaveGame saveGame)
     {
-        saveGame.Player.HasChaosResistance = true;
+        saveGame.HasChaosResistance = true;
     }
 
     public override void UseRacialPower(SaveGame saveGame)

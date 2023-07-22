@@ -32,8 +32,8 @@ internal class DestroyAllScript : Script
             SaveGame.MsgPrint($"You destroy {itemName}.");
             count++;
             int amount = item.Count;
-            SaveGame.Player.InvenItemIncrease(i, -amount);
-            SaveGame.Player.InvenItemOptimize(i);
+            SaveGame.InvenItemIncrease(i, -amount);
+            SaveGame.InvenItemOptimize(i);
         }
         if (count == 0)
         {

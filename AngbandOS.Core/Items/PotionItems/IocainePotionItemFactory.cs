@@ -26,7 +26,7 @@ internal class IocainePotionItemFactory : PotionItemFactory
     {
         // Iocaine simply does 5000 damage
         SaveGame.MsgPrint("A feeling of Death flows through your body.");
-        SaveGame.Player.TakeHit(5000, "a potion of Death");
+        SaveGame.TakeHit(5000, "a potion of Death");
         return true;
     }
 

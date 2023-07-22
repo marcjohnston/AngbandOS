@@ -15,7 +15,7 @@ internal class GoDownScript : Script
     public override bool Execute()
     {
         bool isTrapDoor = false;
-        GridTile tile = SaveGame.Level.Grid[SaveGame.Player.MapY][SaveGame.Player.MapX];
+        GridTile tile = SaveGame.Level.Grid[SaveGame.MapY][SaveGame.MapX];
         if (tile.FeatureType.IsTrapDoor)
         {
             isTrapDoor = true;
@@ -39,7 +39,7 @@ internal class GoDownScript : Script
             // If we're on the surface, enter the relevant dungeon
             if (SaveGame.CurrentDepth == 0)
             {
-                SaveGame.CurDungeon = SaveGame.Wilderness[SaveGame.Player.WildernessY][SaveGame.Player.WildernessX].Dungeon;
+                SaveGame.CurDungeon = SaveGame.Wilderness[SaveGame.WildernessY][SaveGame.WildernessX].Dungeon;
                 SaveGame.MsgPrint($"You enter {SaveGame.CurDungeon.Name}");
             }
             else
@@ -65,8 +65,8 @@ internal class GoDownScript : Script
             // If we left the dungeon, remember where we are
             if (SaveGame.CurrentDepth == 0)
             {
-                SaveGame.Player.WildernessX = SaveGame.CurDungeon.X;
-                SaveGame.Player.WildernessY = SaveGame.CurDungeon.Y;
+                SaveGame.WildernessX = SaveGame.CurDungeon.X;
+                SaveGame.WildernessY = SaveGame.CurDungeon.Y;
                 SaveGame.CameFrom = LevelStart.StartStairs;
             }
         }

@@ -13,7 +13,7 @@ internal class SorcerySpellSenseMinds : Spell
     private SorcerySpellSenseMinds(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Player.TimedTelepathy.AddTimer(Program.Rng.DieRoll(30) + 25);
+        SaveGame.TimedTelepathy.AddTimer(Program.Rng.DieRoll(30) + 25);
     }
 
     public override string Name => "Sense Minds";

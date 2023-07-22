@@ -11,7 +11,7 @@ internal class LightSpellResistantDetection : SpellResistantDetection
 {
     public override void Learn(SaveGame saveGame, Monster monster)
     {
-        if (saveGame.Player.HasLightResistance)
+        if (saveGame.HasLightResistance)
         {
             monster.SmResLight = true;
         }

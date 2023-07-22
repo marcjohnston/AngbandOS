@@ -48,11 +48,11 @@ internal class EatScript : Script
         if (ident && !item.IsFlavourAware())
         {
             item.BecomeFlavourAware();
-            SaveGame.Player.GainExperience((itemLevel + (SaveGame.Player.ExperienceLevel >> 1)) / SaveGame.Player.ExperienceLevel);
+            SaveGame.GainExperience((itemLevel + (SaveGame.ExperienceLevel >> 1)) / SaveGame.ExperienceLevel);
         }
 
         // Now races process the sustenance.
-        SaveGame.Player.Race.Eat(foodItem);
+        SaveGame.Race.Eat(foodItem);
 
         // Dwarf bread isn't actually eaten so return early
         if (!foodItem.Factory.IsConsumedWhenEaten)

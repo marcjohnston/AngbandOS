@@ -18,7 +18,7 @@ internal class ChaosSpellFistOfForce : Spell
             return;
         }
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<DisintegrateProjectile>(), dir,
-            Program.Rng.DiceRoll(8 + ((SaveGame.Player.ExperienceLevel - 5) / 4), 8), 0);
+            Program.Rng.DiceRoll(8 + ((SaveGame.ExperienceLevel - 5) / 4), 8), 0);
     }
 
     public override void CastFailed()
@@ -30,6 +30,6 @@ internal class ChaosSpellFistOfForce : Spell
     
     protected override string? Info()
     {
-        return $"dam {8 + ((SaveGame.Player.ExperienceLevel - 5) / 4)}d8";
+        return $"dam {8 + ((SaveGame.ExperienceLevel - 5) / 4)}d8";
     }
 }

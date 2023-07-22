@@ -135,7 +135,6 @@ internal class SaveGame
         }
     }
     public bool NewLevelFlag;
-    public Player Player;
     public bool Playing;
     public Dungeon RecallDungeon;
     public int Resting;
@@ -302,6 +301,8 @@ internal class SaveGame
     /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
     public SaveGame(Configuration? configuration)
     {
+        IsDead = true;
+
         RedrawMapFlaggedAction = new RedrawMapFlaggedAction(this);
         RedrawEquippyFlaggedAction = new RedrawEquippyFlaggedAction(this);
         RedrawTitleFlaggedAction = new RedrawTitleFlaggedAction(this);
@@ -352,8 +353,6 @@ internal class SaveGame
         PrBasicRedrawAction = new GroupSetFlaggedAction(this,
             RedrawPlayerFlaggedAction, RedrawTitleFlaggedAction, RedrawStatsFlaggedAction, RedrawLevelFlaggedAction, RedrawExpFlaggedAction, RedrawGoldFlaggedAction,
             RedrawArmorFlaggedAction, RedrawHpFlaggedAction, RedrawManaFlaggedAction, RedrawDepthFlaggedAction, RedrawHealthFlaggedAction, RedrawSpeedFlaggedAction);
-
-        IsDead = true;
 
         // Create the wilderness regions.
         Wilderness = new WildernessRegion[12][];
@@ -616,7 +615,7 @@ internal class SaveGame
         {
             return;
         }
-        if (Player != null)
+        if (!IsDead)
         {
             MessageAdd(msg);
         }
@@ -783,14 +782,13 @@ internal class SaveGame
         bool wallDoubleAheadRight = false;
         bool wallAheadRight = false;
         bool wallAheadLeft = false;
-        var player = Player;
         // Get the row and column of the first step in the run
-        int row = player.MapY + Level.KeypadDirectionYOffset[direction];
-        int col = player.MapX + Level.KeypadDirectionXOffset[direction];
+        int row = MapY + Level.KeypadDirectionYOffset[direction];
+        int col = MapX + Level.KeypadDirectionXOffset[direction];
         // Get the index of our run direction in the cycle
         int cycleIndex = _cycleEntryPoint[direction];
         // If there's a wall ahead-left of us, remember that
-        if (SeeWall(_directionCycle[cycleIndex + 1], player.MapY, player.MapX))
+        if (SeeWall(_directionCycle[cycleIndex + 1], MapY, MapX))
         {
             _findBreakleft = true;
             wallAheadLeft = true;
@@ -802,7 +800,7 @@ internal class SaveGame
             wallDoubleAheadLeft = true;
         }
         // If there's a wall ahead-right of us, remember that
-        if (SeeWall(_directionCycle[cycleIndex - 1], player.MapY, player.MapX))
+        if (SeeWall(_directionCycle[cycleIndex - 1], MapY, MapX))
         {
             _findBreakright = true;
             wallAheadRight = true;
@@ -864,7 +862,6 @@ internal class SaveGame
         int option2 = 0;
         int previousDirection = _previousRunDirection;
         var level = Level;
-        var player = Player;
         // Set our search width to 1 if we're moving diagonally, or two if we're moving orthogonally
         int searchWidth = (previousDirection & 0x01) + 1;
         // Search to either side from right to left with a width equal to the search width
@@ -872,8 +869,8 @@ internal class SaveGame
         {
             // Pick up the tile 0-2 rotations from the direction we previously moved
             newDirection = _directionCycle[_cycleEntryPoint[previousDirection] + i];
-            row = player.MapY + level.KeypadDirectionYOffset[newDirection];
-            col = player.MapX + level.KeypadDirectionXOffset[newDirection];
+            row = MapY + level.KeypadDirectionYOffset[newDirection];
+            col = MapX + level.KeypadDirectionXOffset[newDirection];
             tile = level.Grid[row][col];
             // If there's a monster there we must stop moving
             if (tile.MonsterIndex != 0)
@@ -963,8 +960,8 @@ internal class SaveGame
             for (i = -searchWidth; i < 0; i++)
             {
                 newDirection = _directionCycle[_cycleEntryPoint[previousDirection] + i];
-                row = player.MapY + level.KeypadDirectionYOffset[newDirection];
-                col = player.MapX + level.KeypadDirectionXOffset[newDirection];
+                row = MapY + level.KeypadDirectionYOffset[newDirection];
+                col = MapX + level.KeypadDirectionXOffset[newDirection];
                 tile = level.Grid[row][col];
                 if (tile.TileFlags.IsClear(GridTile.PlayerMemorized) || !tile.FeatureType.IsWall)
                 {
@@ -985,8 +982,8 @@ internal class SaveGame
             for (i = searchWidth; i > 0; i--)
             {
                 newDirection = _directionCycle[_cycleEntryPoint[previousDirection] + i];
-                row = player.MapY + level.KeypadDirectionYOffset[newDirection];
-                col = player.MapX + level.KeypadDirectionXOffset[newDirection];
+                row = MapY + level.KeypadDirectionYOffset[newDirection];
+                col = MapX + level.KeypadDirectionXOffset[newDirection];
                 tile = level.Grid[row][col];
                 if (tile.TileFlags.IsClear(GridTile.PlayerMemorized) || !tile.FeatureType.IsWall)
                 {
@@ -1021,8 +1018,8 @@ internal class SaveGame
             // if we don't see a wall in one of our two options, take that one
             else
             {
-                row = player.MapY + level.KeypadDirectionYOffset[option];
-                col = player.MapX + level.KeypadDirectionXOffset[option];
+                row = MapY + level.KeypadDirectionYOffset[option];
+                col = MapX + level.KeypadDirectionXOffset[option];
                 if (!SeeWall(option, row, col) || !SeeWall(checkDir, row, col))
                 {
                     if (SeeNothing(option, row, col) && SeeNothing(option2, row, col))
@@ -1043,7 +1040,7 @@ internal class SaveGame
             }
         }
         // No options, so just return whether or not we can move forward
-        return SeeWall(CurrentRunDirection, player.MapY, player.MapX);
+        return SeeWall(CurrentRunDirection, MapY, MapX);
     }
 
     /// <summary>
@@ -1375,9 +1372,9 @@ internal class SaveGame
         memoryStream.Position = 0;
         GameDetails gameDetails = new GameDetails()
         {
-            CharacterName = Player.Name, // The player parameter
-            Level = Player.ExperienceLevel, // The player parameter
-            Gold = Player.Gold, // The parameter
+            CharacterName = Name, // The player parameter
+            Level = ExperienceLevel, // The player parameter
+            Gold = Gold, // The parameter
             IsAlive = !IsDead, // If the player is dead, then the savegame Player will be null.
             Comments = ""
         };
@@ -1461,8 +1458,8 @@ internal class SaveGame
             RecallDungeon = CurDungeon;
             RecallDungeon.RecallLevel = 1;
             DungeonDifficulty = 0;
-            Player.WildernessX = CurTown.X;
-            Player.WildernessY = CurTown.Y;
+            WildernessX = CurTown.X;
+            WildernessY = CurTown.Y;
             CameFrom = LevelStart.StartRandom;
         }
         ConsoleViewPort.GameStarted();
@@ -1479,7 +1476,7 @@ internal class SaveGame
         FullScreenOverlay = false;
         SetBackground(BackgroundImageEnum.Overhead);
         Playing = true;
-        if (Player.Health < 0)
+        if (Health < 0)
         {
             IsDead = true;
         }
@@ -1510,15 +1507,15 @@ internal class SaveGame
                 MsgPrint(null);
                 if (IsDead)
                 {
-                    ConsoleViewPort.PlayerDied(Player.Name, DiedFrom, Player.ExperienceLevel);
+                    ConsoleViewPort.PlayerDied(Name, DiedFrom, ExperienceLevel);
 
                     // Store the player info
-                    ExPlayer = new ExPlayer(Player.Gender, Player.Race, Player.RaceAtBirth, Player.BaseCharacterClass?.GetType().Name, Player.PrimaryRealm, Player.SecondaryRealm, Player.Name, Player.ExperienceLevel, Player.Generation);
+                    ExPlayer = new ExPlayer(Gender, Race, RaceAtBirth, BaseCharacterClass?.GetType().Name, PrimaryRealm, SecondaryRealm, Name, ExperienceLevel, Generation);
                     break;
                 }
                 Level = new Level(this);
                 GenerateNewLevel();
-                Level.ReplacePets(Player.MapY, Player.MapX, _petList);
+                Level.ReplacePets(MapY, MapX, _petList);
             }
         }
         ConsoleViewPort.GameStopped();
@@ -1569,14 +1566,14 @@ internal class SaveGame
                 case 8:
                 case 9:
                 case 18:
-                    Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, null);
+                    Level.SummonSpecific(MapY, MapX, Difficulty, null);
                     break;
 
                 case 10:
                 case 11:
                 case 12:
                     MsgPrint("You feel your life draining away...");
-                    Player.LoseExperience(Player.ExperiencePoints / 16);
+                    LoseExperience(ExperiencePoints / 16);
                     break;
 
                 case 13:
@@ -1584,16 +1581,16 @@ internal class SaveGame
                 case 15:
                 case 19:
                 case 20:
-                    if (!Player.HasFreeAction || Program.Rng.DieRoll(100) >= Player.SkillSavingThrow)
+                    if (!HasFreeAction || Program.Rng.DieRoll(100) >= SkillSavingThrow)
                     {
                         MsgPrint("You feel like a statue!");
-                        if (Player.HasFreeAction)
+                        if (HasFreeAction)
                         {
-                            Player.TimedParalysis.AddTimer(Program.Rng.DieRoll(3));
+                            TimedParalysis.AddTimer(Program.Rng.DieRoll(3));
                         }
                         else
                         {
-                            Player.TimedParalysis.AddTimer(Program.Rng.DieRoll(13));
+                            TimedParalysis.AddTimer(Program.Rng.DieRoll(13));
                         }
                     }
                     break;
@@ -1601,7 +1598,7 @@ internal class SaveGame
                 case 21:
                 case 22:
                 case 23:
-                    Player.TryDecreasingAbilityScore(Program.Rng.DieRoll(6) - 1);
+                    TryDecreasingAbilityScore(Program.Rng.DieRoll(6) - 1);
                     break;
 
                 case 24:
@@ -1618,7 +1615,7 @@ internal class SaveGame
                     {
                         do
                         {
-                            Player.TryDecreasingAbilityScore(i);
+                            TryDecreasingAbilityScore(i);
                         } while (Program.Rng.DieRoll(2) == 1);
                         i++;
                     }
@@ -1728,9 +1725,9 @@ internal class SaveGame
             Running = 0;
             UpdateTorchRadiusFlaggedAction.Set();
         }
-        if (stopSearch && Player.IsSearching)
+        if (stopSearch && IsSearching)
         {
-            Player.IsSearching = false;
+            IsSearching = false;
             UpdateBonusesFlaggedAction.Set();
             RedrawStateFlaggedAction.Set();
         }
@@ -1814,7 +1811,7 @@ internal class SaveGame
     /// <returns></returns>
     public bool SelectItem(out Item? itemIndex, string prompt, bool canChooseFromEquipment, bool canChooseFromInventory, bool canChooseFromFloor, IItemFilter? itemFilter)
     {
-        GridTile tile = Level.Grid[Player.MapY][Player.MapX];
+        GridTile tile = Level.Grid[MapY][MapX];
         bool allowFloor = false;
         MsgPrint(null);
         bool done = false;
@@ -1851,7 +1848,7 @@ internal class SaveGame
         {
             foreach (Item oPtr in tile.Items)
             {
-                if (Player.ItemMatchesFilter(oPtr, itemFilter))
+                if (ItemMatchesFilter(oPtr, itemFilter))
                 {
                     allowFloor = true;
                 }
@@ -1894,11 +1891,11 @@ internal class SaveGame
             {
                 if (ViewingEquipment)
                 {
-                    Player.ShowEquip(itemFilter);
+                    ShowEquip(itemFilter);
                 }
                 else
                 {
-                    Player.ShowInven(_inventorySlot => !_inventorySlot.IsEquipment, itemFilter);
+                    ShowInven(_inventorySlot => !_inventorySlot.IsEquipment, itemFilter);
                 }
             }
             string tmpVal;
@@ -1989,7 +1986,7 @@ internal class SaveGame
                         {
                             foreach (Item oPtr in tile.Items)
                             {
-                                if (Player.ItemMatchesFilter(oPtr, itemFilter))
+                                if (ItemMatchesFilter(oPtr, itemFilter))
                                 {
                                     itemIndex = oPtr;
                                     item = true;
@@ -2015,7 +2012,7 @@ internal class SaveGame
                             k = equipment.Count == 1 ? equipment[0] : -1;
                         }
                         Item? oPtr = GetInventoryItem(k);
-                        if (!Player.GetItemOkay(oPtr, itemFilter))
+                        if (!GetItemOkay(oPtr, itemFilter))
                         {
                             break;
                         }
@@ -2031,7 +2028,7 @@ internal class SaveGame
                         {
                             which = char.ToLower(which);
                         }
-                        k = !ViewingEquipment ? Player.LabelToInven(which) : Player.LabelToEquip(which);
+                        k = !ViewingEquipment ? LabelToInven(which) : LabelToEquip(which);
                         if (k < 0 || k >= InventorySlot.Total)
                         {
                             break;
@@ -2041,7 +2038,7 @@ internal class SaveGame
                         {
                             break;
                         }
-                        if (!Player.GetItemOkay(oPtr, itemFilter))
+                        if (!GetItemOkay(oPtr, itemFilter))
                         {
                             break;
                         }
@@ -2074,7 +2071,7 @@ internal class SaveGame
     {
         foreach (Store store in CurTown.Stores)
         {
-            if (Player.MapX == store.X && Player.MapY == store.Y)
+            if (MapX == store.X && MapY == store.Y)
             {
                 return store;
             }
@@ -2252,7 +2249,7 @@ internal class SaveGame
 
     public void Winner()
     {
-        Player.IsWinner = true;
+        IsWinner = true;
         RedrawTitleFlaggedAction.Set();
         MsgPrint("*** CONGRATULATIONS ***");
         MsgPrint("You have won the game!");
@@ -2374,7 +2371,7 @@ internal class SaveGame
         FullScreenOverlay = true;
         if (IsDead)
         {
-            if (Player.IsWinner)
+            if (IsWinner)
             {
                 Kingly();
             }
@@ -2382,7 +2379,7 @@ internal class SaveGame
             //HighScore score = new HighScore(this);
             SavePlayer();
             PrintTomb();
-            if (Player.IsWizard)
+            if (IsWizard)
             {
                 return;
             }
@@ -2578,9 +2575,9 @@ internal class SaveGame
         Level.ShimmerMonsters = true;
         Level.RepairMonsters = true;
         Disturb(true);
-        if (Player.MaxLevelGained < Player.ExperienceLevel)
+        if (MaxLevelGained < ExperienceLevel)
         {
-            Player.MaxLevelGained = Player.ExperienceLevel;
+            MaxLevelGained = ExperienceLevel;
         }
         if (CurDungeon.RecallLevel < CurrentDepth)
         {
@@ -2604,15 +2601,15 @@ internal class SaveGame
         }
         if (CreateUpStair || CreateDownStair)
         {
-            if (Level.CaveValidBold(Player.MapY, Player.MapX))
+            if (Level.CaveValidBold(MapY, MapX))
             {
-                DeleteObject(Player.MapY, Player.MapX);
-                Level.CaveSetFeat(Player.MapY, Player.MapX, CreateDownStair ? "DownStair" : "UpStair");
+                DeleteObject(MapY, MapX);
+                Level.CaveSetFeat(MapY, MapX, CreateDownStair ? "DownStair" : "UpStair");
             }
             CreateDownStair = false;
             CreateUpStair = false;
         }
-        Player.RecenterScreenAroundPlayer();
+        RecenterScreenAroundPlayer();
         Level.PanelBoundsCenter();
         MsgPrint(null);
         CharacterXtra = true;
@@ -2697,7 +2694,7 @@ internal class SaveGame
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
-            Level.MoveCursorRelative(Player.MapY, Player.MapX);
+            Level.MoveCursorRelative(MapY, MapX);
             if (!Playing || IsDead || NewLevelFlag)
             {
                 break;
@@ -2708,7 +2705,7 @@ internal class SaveGame
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
-            Level.MoveCursorRelative(Player.MapY, Player.MapX);
+            Level.MoveCursorRelative(MapY, MapX);
             if (!Playing || IsDead || NewLevelFlag)
             {
                 break;
@@ -2717,13 +2714,13 @@ internal class SaveGame
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
-            Level.MoveCursorRelative(Player.MapY, Player.MapX);
+            Level.MoveCursorRelative(MapY, MapX);
             if (!Playing || IsDead || NewLevelFlag)
             {
                 break;
             }
-            Player.GameTime.Tick();
-            if (!Player.GameTime.IsFeelTime)
+            GameTime.Tick();
+            if (!GameTime.IsFeelTime)
             {
                 continue;
             }
@@ -2898,9 +2895,9 @@ internal class SaveGame
     {
         CurrentDepth = 0;
         DiedFrom = "Ripe Old Age";
-        Player.ExperiencePoints = Player.MaxExperienceGained;
-        Player.ExperienceLevel = Player.MaxLevelGained;
-        Player.Gold += 10000000;
+        ExperiencePoints = MaxExperienceGained;
+        ExperienceLevel = MaxLevelGained;
+        Gold += 10000000;
         SetBackground(BackgroundImageEnum.Crown);
         Screen.Clear();
         AnyKey(44);
@@ -2910,7 +2907,7 @@ internal class SaveGame
     {
         {
             DateTime ct = DateTime.Now;
-            if (Player.IsWinner)
+            if (IsWinner)
             {
                 SetBackground(BackgroundImageEnum.Sunset);
                 PlayMusic(MusicTrackEnum.Victory);
@@ -2921,13 +2918,13 @@ internal class SaveGame
                 PlayMusic(MusicTrackEnum.Death);
             }
             Screen.Clear();
-            string buf = Player.Name.Trim() + Player.Generation.ToRoman(true);
-            if (Player.IsWinner || Player.ExperienceLevel > Constants.PyMaxLevel)
+            string buf = Name.Trim() + Generation.ToRoman(true);
+            if (IsWinner || ExperienceLevel > Constants.PyMaxLevel)
             {
                 buf += " the Magnificent";
             }
             Screen.Print(buf, 39, 1);
-            buf = $"Level {Player.ExperienceLevel} {Player.BaseCharacterClass.ClassSubName(Player.PrimaryRealm)}";
+            buf = $"Level {ExperienceLevel} {BaseCharacterClass.ClassSubName(PrimaryRealm)}";
             Screen.Print(buf, 40, 1);
             string tmp = $"Killed on Level {CurrentDepth}".PadLeft(45);
             Screen.Print(tmp, 39, 34);
@@ -2941,14 +2938,14 @@ internal class SaveGame
 
     private void ProcessPlayer()
     {
-        if (Player.GetFirstLevelMutation)
+        if (GetFirstLevelMutation)
         {
             MsgPrint("You feel different!");
-            Player.Dna.GainMutation();
-            Player.GetFirstLevelMutation = false;
+            Dna.GainMutation();
+            GetFirstLevelMutation = false;
         }
-        Player.Energy += Constants.ExtractEnergy[Player.Speed];
-        if (Player.Energy < 100)
+        Energy += Constants.ExtractEnergy[Speed];
+        if (Energy < 100)
         {
             return;
         }
@@ -2956,17 +2953,17 @@ internal class SaveGame
         {
             if (Resting == -1)
             {
-                if (Player.Health == Player.MaxHealth && Player.Mana >= Player.MaxMana)
+                if (Health == MaxHealth && Mana >= MaxMana)
                 {
                     Disturb(false);
                 }
             }
             else if (Resting == -2)
             {
-                if (Player.Health == Player.MaxHealth && Player.Mana == Player.MaxMana && Player.TimedBlindness.TurnsRemaining == 0 &&
-                    Player.TimedConfusion.TurnsRemaining == 0 && Player.TimedPoison.TurnsRemaining == 0 && Player.TimedFear.TurnsRemaining == 0 && Player.TimedStun.TurnsRemaining == 0 &&
-                    Player.TimedBleeding.TurnsRemaining == 0 && Player.TimedSlow.TurnsRemaining == 0 && Player.TimedParalysis.TurnsRemaining == 0 && Player.TimedHallucinations.TurnsRemaining == 0 &&
-                    Player.WordOfRecallDelay == 0)
+                if (Health == MaxHealth && Mana == MaxMana && TimedBlindness.TurnsRemaining == 0 &&
+                    TimedConfusion.TurnsRemaining == 0 && TimedPoison.TurnsRemaining == 0 && TimedFear.TurnsRemaining == 0 && TimedStun.TurnsRemaining == 0 &&
+                    TimedBleeding.TurnsRemaining == 0 && TimedSlow.TurnsRemaining == 0 && TimedParalysis.TurnsRemaining == 0 && TimedHallucinations.TurnsRemaining == 0 &&
+                    WordOfRecallDelay == 0)
                 {
                     Disturb(false);
                 }
@@ -2980,13 +2977,13 @@ internal class SaveGame
                 MsgPrint("Cancelled.");
             }
         }
-        while (Player.Energy >= 100 && !Shutdown)
+        while (Energy >= 100 && !Shutdown)
         {
             RedrawDTrapFlaggedAction.Set();
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
-            Level.MoveCursorRelative(Player.MapY, Player.MapX);
+            Level.MoveCursorRelative(MapY, MapX);
             UpdateScreen();
             const int item = InventorySlot.PackCount;
             Item? oPtr = GetInventoryItem(item);
@@ -2996,10 +2993,10 @@ internal class SaveGame
                 MsgPrint("Your pack overflows!");
                 string oName = oPtr.Description(true, 3);
                 MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
-                Level.DropNear(oPtr, 0, Player.MapY, Player.MapX);
-                Player.InvenItemIncrease(item, -255);
-                Player.InvenItemDescribe(item);
-                Player.InvenItemOptimize(item);
+                Level.DropNear(oPtr, 0, MapY, MapX);
+                InvenItemIncrease(item, -255);
+                InvenItemDescribe(item);
+                InvenItemOptimize(item);
                 NoticeStuff();
                 UpdateStuff();
                 RedrawStuff();
@@ -3009,7 +3006,7 @@ internal class SaveGame
                 ViewingItemList = false;
             }
             EnergyUse = 0;
-            if (Player.TimedParalysis.TurnsRemaining != 0 || Player.TimedStun.TurnsRemaining >= 100)
+            if (TimedParalysis.TurnsRemaining != 0 || TimedStun.TurnsRemaining >= 100)
             {
                 EnergyUse = 100;
             }
@@ -3037,13 +3034,13 @@ internal class SaveGame
             }
             else
             {
-                Level.MoveCursorRelative(Player.MapY, Player.MapX);
+                Level.MoveCursorRelative(MapY, MapX);
                 RequestCommand(false);
                 ProcessCommand(false);
             }
             if (EnergyUse != 0)
             {
-                Player.Energy -= EnergyUse;
+                Energy -= EnergyUse;
                 int i;
                 if (Level.ShimmerMonsters)
                 {
@@ -3105,25 +3102,25 @@ internal class SaveGame
 
     private void ProcessWorld()
     {
-        if (Player.GameTime.IsBirthday)
+        if (GameTime.IsBirthday)
         {
             MsgPrint("Happy Birthday!");
-            Level.Acquirement(Player.MapY, Player.MapX, Program.Rng.DieRoll(2) + 1, true);
-            Player.Age++;
+            Level.Acquirement(MapY, MapX, Program.Rng.DieRoll(2) + 1, true);
+            Age++;
         }
-        if (Player.GameTime.IsNewYear)
+        if (GameTime.IsNewYear)
         {
             MsgPrint("Happy New Year!");
-            Level.Acquirement(Player.MapY, Player.MapX, Program.Rng.DieRoll(2) + 1, true);
+            Level.Acquirement(MapY, MapX, Program.Rng.DieRoll(2) + 1, true);
         }
-        if (Player.GameTime.IsHalloween)
+        if (GameTime.IsHalloween)
         {
             MsgPrint("All Hallows Eve and the ghouls come out to play...");
-            Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new UndeadMonsterSelector());
+            Level.SummonSpecific(MapY, MapX, Difficulty, new UndeadMonsterSelector());
         }
         if (CurrentDepth <= 0)
         {
-            if (Player.GameTime.IsDawn)
+            if (GameTime.IsDawn)
             {
                 MsgPrint("The sun has risen.");
                 for (int y = 0; y < Level.CurHgt; y++)
@@ -3137,7 +3134,7 @@ internal class SaveGame
                     }
                 }
             }
-            else if (Player.GameTime.IsDusk)
+            else if (GameTime.IsDusk)
             {
                 MsgPrint("The sun has fallen.");
                 for (int y = 0; y < Level.CurHgt; y++)
@@ -3156,9 +3153,9 @@ internal class SaveGame
             UpdateMonstersFlaggedAction.Set();
             RedrawMapFlaggedAction.Set();
         }
-        if (Player.GameTime.IsMidnight)
+        if (GameTime.IsMidnight)
         {
-            Player.Religion.DecayFavour();
+            Religion.DecayFavour();
             UpdateHealthFlaggedAction.Set();
             UpdateManaFlaggedAction.Set();
             foreach (Town town in SingletonRepository.Towns)
@@ -3175,7 +3172,7 @@ internal class SaveGame
                 SingletonRepository.Towns[town].Stores[store].StoreShuffle();
             }
         }
-        if (!Player.GameTime.IsTurnTen)
+        if (!GameTime.IsTurnTen)
         {
             return;
         }
@@ -3183,13 +3180,13 @@ internal class SaveGame
         {
             Level.AllocMonster(Constants.MaxSight + 5, false);
         }
-        if (Player.GameTime.IsTurnHundred)
+        if (GameTime.IsTurnHundred)
         {
             RegenMonsters();
         }
-        if (Player.TimedPoison.TurnsRemaining != 0 && Player.TimedInvulnerability.TurnsRemaining == 0)
+        if (TimedPoison.TurnsRemaining != 0 && TimedInvulnerability.TurnsRemaining == 0)
         {
-            Player.TakeHit(1, "poison");
+            TakeHit(1, "poison");
         }
         bool caveNoRegen = false;
 
@@ -3206,19 +3203,19 @@ internal class SaveGame
 
         // Allow the race access to the process world.
         ProcessWorldEventArgs processWorldEventArgs = new ProcessWorldEventArgs();
-        Player.Race.ProcessWorld(processWorldEventArgs);
+        Race.ProcessWorld(processWorldEventArgs);
         if (processWorldEventArgs.DisableRegeneration)
         {
             caveNoRegen = true;
         }
 
-        if (!Level.GridPassable(Player.MapY, Player.MapX))
+        if (!Level.GridPassable(MapY, MapX))
         {
             caveNoRegen = true;
-            if (Player.TimedInvulnerability.TurnsRemaining == 0 && Player.TimedEtherealness.TurnsRemaining == 0 && (Player.Health > Player.ExperienceLevel / 5 || Player.Race.IsEthereal))
+            if (TimedInvulnerability.TurnsRemaining == 0 && TimedEtherealness.TurnsRemaining == 0 && (Health > ExperienceLevel / 5 || Race.IsEthereal))
             {
                 string damDesc;
-                if (Player.Race.IsEthereal)
+                if (Race.IsEthereal)
                 {
                     MsgPrint("Your body feels disrupted!");
                     damDesc = "density";
@@ -3228,17 +3225,17 @@ internal class SaveGame
                     MsgPrint("You are being crushed!");
                     damDesc = "solid rock";
                 }
-                Player.TakeHit(1 + (Player.ExperienceLevel / 5), damDesc);
+                TakeHit(1 + (ExperienceLevel / 5), damDesc);
             }
         }
-        if (Player.TimedBleeding.TurnsRemaining != 0 && Player.TimedInvulnerability.TurnsRemaining == 0)
+        if (TimedBleeding.TurnsRemaining != 0 && TimedInvulnerability.TurnsRemaining == 0)
         {
             int damage;
-            if (Player.TimedBleeding.TurnsRemaining > 200)
+            if (TimedBleeding.TurnsRemaining > 200)
             {
                 damage = 3;
             }
-            else if (Player.TimedBleeding.TurnsRemaining > 100)
+            else if (TimedBleeding.TurnsRemaining > 100)
             {
                 damage = 2;
             }
@@ -3246,18 +3243,18 @@ internal class SaveGame
             {
                 damage = 1;
             }
-            Player.TakeHit(damage, "a fatal wound");
+            TakeHit(damage, "a fatal wound");
         }
-        if (Player.Food < Constants.PyFoodMax)
+        if (Food < Constants.PyFoodMax)
         {
-            if (Player.GameTime.IsTurnHundred)
+            if (GameTime.IsTurnHundred)
             {
-                int additionalEnergy = Constants.ExtractEnergy[Player.Speed] * 2;
-                if (Player.HasRegeneration)
+                int additionalEnergy = Constants.ExtractEnergy[Speed] * 2;
+                if (HasRegeneration)
                 {
                     additionalEnergy += 30;
                 }
-                if (Player.HasSlowDigestion)
+                if (HasSlowDigestion)
                 {
                     additionalEnergy -= 10;
                 }
@@ -3265,29 +3262,29 @@ internal class SaveGame
                 {
                     additionalEnergy = 1;
                 }
-                Player.SetFood(Player.Food - additionalEnergy);
+                SetFood(Food - additionalEnergy);
             }
         }
         else
         {
-            Player.SetFood(Player.Food - 100);
+            SetFood(Food - 100);
         }
-        if (Player.Food < Constants.PyFoodStarve)
+        if (Food < Constants.PyFoodStarve)
         {
-            int i = (Constants.PyFoodStarve - Player.Food) / 10;
-            if (Player.TimedInvulnerability.TurnsRemaining == 0)
+            int i = (Constants.PyFoodStarve - Food) / 10;
+            if (TimedInvulnerability.TurnsRemaining == 0)
             {
-                Player.TakeHit(i, "starvation");
+                TakeHit(i, "starvation");
             }
         }
         int regenAmount = Constants.PyRegenNormal;
-        if (Player.Food < Constants.PyFoodWeak)
+        if (Food < Constants.PyFoodWeak)
         {
-            if (Player.Food < Constants.PyFoodStarve)
+            if (Food < Constants.PyFoodStarve)
             {
                 regenAmount = 0;
             }
-            else if (Player.Food < Constants.PyFoodFaint)
+            else if (Food < Constants.PyFoodFaint)
             {
                 regenAmount = Constants.PyRegenFaint;
             }
@@ -3295,21 +3292,21 @@ internal class SaveGame
             {
                 regenAmount = Constants.PyRegenWeak;
             }
-            if (Player.Food < Constants.PyFoodFaint)
+            if (Food < Constants.PyFoodFaint)
             {
-                if (Player.TimedParalysis.TurnsRemaining == 0 && Program.Rng.RandomLessThan(100) < 10)
+                if (TimedParalysis.TurnsRemaining == 0 && Program.Rng.RandomLessThan(100) < 10)
                 {
                     MsgPrint("You faint from the lack of food.");
                     Disturb(true);
-                    Player.TimedParalysis.AddTimer(1 + Program.Rng.RandomLessThan(5));
+                    TimedParalysis.AddTimer(1 + Program.Rng.RandomLessThan(5));
                 }
             }
         }
-        if (Player.HasRegeneration)
+        if (HasRegeneration)
         {
             regenAmount *= 2;
         }
-        if (Player.IsSearching || Resting != 0)
+        if (IsSearching || Resting != 0)
         {
             regenAmount *= 2;
         }
@@ -3317,15 +3314,15 @@ internal class SaveGame
         if (TotalFriends != 0)
         {
             int upkeepDivider = 20;
-            if (Player.BaseCharacterClass.ID == CharacterClass.Mage)
+            if (BaseCharacterClass.ID == CharacterClass.Mage)
             {
                 upkeepDivider = 15;
             }
-            else if (Player.BaseCharacterClass.ID == CharacterClass.HighMage)
+            else if (BaseCharacterClass.ID == CharacterClass.HighMage)
             {
                 upkeepDivider = 12;
             }
-            if (TotalFriends > 1 + (Player.ExperienceLevel / upkeepDivider))
+            if (TotalFriends > 1 + (ExperienceLevel / upkeepDivider))
             {
                 upkeepFactor = TotalFriendLevels;
                 if (upkeepFactor > 100)
@@ -3338,23 +3335,23 @@ internal class SaveGame
                 }
             }
         }
-        if (Player.Mana < Player.MaxMana)
+        if (Mana < MaxMana)
         {
             if (upkeepFactor != 0)
             {
                 int upkeepRegen = (100 - upkeepFactor) * regenAmount / 100;
-                Player.RegenerateMana(upkeepRegen);
+                RegenerateMana(upkeepRegen);
             }
             else
             {
-                Player.RegenerateMana(regenAmount);
+                RegenerateMana(regenAmount);
             }
         }
-        if (Player.TimedPoison.TurnsRemaining != 0)
+        if (TimedPoison.TurnsRemaining != 0)
         {
             regenAmount = 0;
         }
-        if (Player.TimedBleeding.TurnsRemaining != 0)
+        if (TimedBleeding.TurnsRemaining != 0)
         {
             regenAmount = 0;
         }
@@ -3362,52 +3359,52 @@ internal class SaveGame
         {
             regenAmount = 0;
         }
-        if (Player.Health < Player.MaxHealth && !caveNoRegen)
+        if (Health < MaxHealth && !caveNoRegen)
         {
-            Player.RegenerateHealth(regenAmount);
+            RegenerateHealth(regenAmount);
         }
-        if (Player.GooPatron.MultiRew)
+        if (GooPatron.MultiRew)
         {
-            Player.GooPatron.MultiRew = false;
+            GooPatron.MultiRew = false;
         }
         //foreach (TimedAction timedAction in SingletonRepository.TimedActions)
         //{
         //    timedAction.ProcessWorld();
         //}
-        Player.TimedBlindness.ProcessWorld();
-        Player.TimedSeeInvisibility.ProcessWorld();
-        Player.TimedTelepathy.ProcessWorld();
-        Player.TimedInfravision.ProcessWorld();
-        Player.TimedParalysis.ProcessWorld();
-        Player.TimedConfusion.ProcessWorld();
-        Player.TimedFear.ProcessWorld();
-        Player.TimedHaste.ProcessWorld();
-        Player.TimedSlow.ProcessWorld();
-        Player.TimedProtectionFromEvil.ProcessWorld();
-        Player.TimedInvulnerability.ProcessWorld();
-        Player.TimedEtherealness.ProcessWorld();
-        Player.TimedHeroism.ProcessWorld();
-        Player.TimedSuperheroism.ProcessWorld();
-        Player.TimedBlessing.ProcessWorld();
-        Player.TimedStoneskin.ProcessWorld();
-        Player.TimedAcidResistance.ProcessWorld();
-        Player.TimedLightningResistance.ProcessWorld();
-        Player.TimedFireResistance.ProcessWorld();
-        Player.TimedColdResistance.ProcessWorld();
-        Player.TimedPoisonResistance.ProcessWorld();
-        Player.TimedPoison.ProcessWorld();
-        Player.TimedStun.ProcessWorld();
-        Player.TimedBleeding.ProcessWorld();
-        Player.TimedHallucinations.ProcessWorld();
+        TimedBlindness.ProcessWorld();
+        TimedSeeInvisibility.ProcessWorld();
+        TimedTelepathy.ProcessWorld();
+        TimedInfravision.ProcessWorld();
+        TimedParalysis.ProcessWorld();
+        TimedConfusion.ProcessWorld();
+        TimedFear.ProcessWorld();
+        TimedHaste.ProcessWorld();
+        TimedSlow.ProcessWorld();
+        TimedProtectionFromEvil.ProcessWorld();
+        TimedInvulnerability.ProcessWorld();
+        TimedEtherealness.ProcessWorld();
+        TimedHeroism.ProcessWorld();
+        TimedSuperheroism.ProcessWorld();
+        TimedBlessing.ProcessWorld();
+        TimedStoneskin.ProcessWorld();
+        TimedAcidResistance.ProcessWorld();
+        TimedLightningResistance.ProcessWorld();
+        TimedFireResistance.ProcessWorld();
+        TimedColdResistance.ProcessWorld();
+        TimedPoisonResistance.ProcessWorld();
+        TimedPoison.ProcessWorld();
+        TimedStun.ProcessWorld();
+        TimedBleeding.ProcessWorld();
+        TimedHallucinations.ProcessWorld();
 
         UpdateTorchRadiusFlaggedAction.Set();
-        if (Player.HasExperienceDrain)
+        if (HasExperienceDrain)
         {
-            if (Program.Rng.RandomLessThan(100) < 10 && Player.ExperiencePoints > 0)
+            if (Program.Rng.RandomLessThan(100) < 10 && ExperiencePoints > 0)
             {
-                Player.ExperiencePoints--;
-                Player.MaxExperienceGained--;
-                Player.CheckExperience();
+                ExperiencePoints--;
+                MaxExperienceGained--;
+                CheckExperience();
             }
         }
         bool combineFlags = false;
@@ -3423,7 +3420,7 @@ internal class SaveGame
                 }
                 if (oPtr.Characteristics.Teleport && Program.Rng.RandomLessThan(100) < 1)
                 {
-                    if (oPtr.IdentCursed && !Player.HasAntiTeleport)
+                    if (oPtr.IdentCursed && !HasAntiTeleport)
                     {
                         Disturb(true);
                         TeleportPlayer(40);
@@ -3438,7 +3435,7 @@ internal class SaveGame
                     }
                 }
             }
-            Player.Dna.OnProcessWorld();
+            Dna.OnProcessWorld();
             if (oPtr == null)
             {
                 continue;
@@ -3468,7 +3465,7 @@ internal class SaveGame
         {
             NoticeCombineFlaggedAction.Set();
         }
-        Player.SenseInventory();
+        SenseInventory();
         for (int y = 1; y < Level.CurHgt - 1; y++)
         {
             for (int x = 1; x < Level.CurWid - 1; x++)
@@ -3479,10 +3476,10 @@ internal class SaveGame
         }
         Level.ProcessWorld();
 
-        if (Player.WordOfRecallDelay != 0)
+        if (WordOfRecallDelay != 0)
         {
-            Player.WordOfRecallDelay--;
-            if (Player.WordOfRecallDelay == 0)
+            WordOfRecallDelay--;
+            if (WordOfRecallDelay == 0)
             {
                 Disturb(false);
                 if (CurrentDepth != 0)
@@ -3491,18 +3488,18 @@ internal class SaveGame
                     DoCmdSaveGame(true);
                     RecallDungeon = CurDungeon;
                     CurrentDepth = 0;
-                    if (Player.TownWithHouse > -1)
+                    if (TownWithHouse > -1)
                     {
-                        CurTown = SingletonRepository.Towns[Player.TownWithHouse];
-                        Player.WildernessX = CurTown.X;
-                        Player.WildernessY = CurTown.Y;
+                        CurTown = SingletonRepository.Towns[TownWithHouse];
+                        WildernessX = CurTown.X;
+                        WildernessY = CurTown.Y;
                         NewLevelFlag = true;
                         CameFrom = LevelStart.StartHouse;
                     }
                     else
                     {
-                        Player.WildernessX = CurTown.X;
-                        Player.WildernessY = CurTown.Y;
+                        WildernessX = CurTown.X;
+                        WildernessY = CurTown.Y;
                         NewLevelFlag = true;
                         CameFrom = LevelStart.StartRandom;
                     }
@@ -3512,8 +3509,8 @@ internal class SaveGame
                     MsgPrint(RecallDungeon.Tower ? "You feel yourself yanked upwards!" : "You feel yourself yanked downwards!");
                     DoCmdSaveGame(true);
                     CurDungeon = RecallDungeon;
-                    Player.WildernessX = CurDungeon.X;
-                    Player.WildernessY = CurDungeon.Y;
+                    WildernessX = CurDungeon.X;
+                    WildernessY = CurDungeon.Y;
                     CurrentDepth = CurDungeon.RecallLevel;
                     if (CurrentDepth < 1)
                     {
@@ -3609,34 +3606,34 @@ internal class SaveGame
     public void AcidDam(int dam, string kbStr)
     {
         int inv = dam < 30 ? 1 : dam < 60 ? 2 : 3;
-        if (Player.HasAcidImmunity || dam <= 0)
+        if (HasAcidImmunity || dam <= 0)
         {
             return;
         }
-        if (Player.HasElementalVulnerability)
+        if (HasElementalVulnerability)
         {
             dam *= 2;
         }
-        if (Player.HasAcidResistance)
+        if (HasAcidResistance)
         {
             dam = (dam + 2) / 3;
         }
-        if (Player.TimedAcidResistance.TurnsRemaining != 0)
+        if (TimedAcidResistance.TurnsRemaining != 0)
         {
             dam = (dam + 2) / 3;
         }
-        if (!(Player.TimedAcidResistance.TurnsRemaining != 0 || Player.HasAcidResistance) && Program.Rng.DieRoll(HurtChance) == 1)
+        if (!(TimedAcidResistance.TurnsRemaining != 0 || HasAcidResistance) && Program.Rng.DieRoll(HurtChance) == 1)
         {
-            Player.TryDecreasingAbilityScore(Ability.Charisma);
+            TryDecreasingAbilityScore(Ability.Charisma);
         }
         if (MinusAc())
         {
             dam = (dam + 1) / 2;
         }
-        Player.TakeHit(dam, kbStr);
-        if (!(Player.TimedAcidResistance.TurnsRemaining != 0 && Player.HasAcidResistance))
+        TakeHit(dam, kbStr);
+        if (!(TimedAcidResistance.TurnsRemaining != 0 && HasAcidResistance))
         {
-            Player.InvenDamage(SetAcidDestroy, inv);
+            InvenDamage(SetAcidDestroy, inv);
         }
     }
 
@@ -3649,70 +3646,70 @@ internal class SaveGame
             {
                 case 1:
                 case 2:
-                    Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new AntMonsterSelector());
+                    Level.SummonSpecific(MapY, MapX, Difficulty, new AntMonsterSelector());
                     break;
 
                 case 3:
                 case 4:
-                    Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new SpiderMonsterSelector());
+                    Level.SummonSpecific(MapY, MapX, Difficulty, new SpiderMonsterSelector());
                     break;
 
                 case 5:
                 case 6:
-                    Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new HoundMonsterSelector());
+                    Level.SummonSpecific(MapY, MapX, Difficulty, new HoundMonsterSelector());
                     break;
 
                 case 7:
                 case 8:
-                    Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new HydraMonsterSelector());
+                    Level.SummonSpecific(MapY, MapX, Difficulty, new HydraMonsterSelector());
                     break;
 
                 case 9:
                 case 10:
-                    Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new CthuloidMonsterSelector());
+                    Level.SummonSpecific(MapY, MapX, Difficulty, new CthuloidMonsterSelector());
                     break;
 
                 case 11:
                 case 12:
-                    Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new UndeadMonsterSelector());
+                    Level.SummonSpecific(MapY, MapX, Difficulty, new UndeadMonsterSelector());
                     break;
 
                 case 13:
                 case 14:
-                    Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new DragonMonsterSelector());
+                    Level.SummonSpecific(MapY, MapX, Difficulty, new DragonMonsterSelector());
                     break;
 
                 case 15:
                 case 16:
-                    Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new DemonMonsterSelector());
+                    Level.SummonSpecific(MapY, MapX, Difficulty, new DemonMonsterSelector());
                     break;
 
                 case 17:
-                    Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new GooMonsterSelector());
+                    Level.SummonSpecific(MapY, MapX, Difficulty, new GooMonsterSelector());
                     break;
 
                 case 18:
                 case 19:
-                    Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new UniqueMonsterSelector());
+                    Level.SummonSpecific(MapY, MapX, Difficulty, new UniqueMonsterSelector());
                     break;
 
                 case 20:
                 case 21:
-                    Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new HiUndeadMonsterSelector());
+                    Level.SummonSpecific(MapY, MapX, Difficulty, new HiUndeadMonsterSelector());
                     break;
 
                 case 22:
                 case 23:
-                    Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, new HiDragonMonsterSelector());
+                    Level.SummonSpecific(MapY, MapX, Difficulty, new HiDragonMonsterSelector());
                     break;
 
                 case 24:
                 case 25:
-                    Level.SummonSpecific(Player.MapY, Player.MapX, 100, new ReaverMonsterSelector());
+                    Level.SummonSpecific(MapY, MapX, 100, new ReaverMonsterSelector());
                     break;
 
                 default:
-                    Level.SummonSpecific(Player.MapY, Player.MapX, (Difficulty * 3 / 2) + 5, null);
+                    Level.SummonSpecific(MapY, MapX, (Difficulty * 3 / 2) + 5, null);
                     break;
             }
         }
@@ -3834,7 +3831,7 @@ internal class SaveGame
                 price = 30000;
             }
             MsgPrint($"You turn {oName} to {price} coins worth of gold.");
-            Player.Gold += price;
+            Gold += price;
             RedrawGoldFlaggedAction.Set();
         }
         oPtr.ItemIncrease(-amt);
@@ -3930,7 +3927,7 @@ internal class SaveGame
                 }
             case 6:
                 {
-                    if (Program.Rng.RandomLessThan(100) < Player.SkillSavingThrow)
+                    if (Program.Rng.RandomLessThan(100) < SkillSavingThrow)
                     {
                         MsgPrint("You resist the effects!");
                         break;
@@ -3940,13 +3937,13 @@ internal class SaveGame
                 }
             case 7:
                 {
-                    if (Program.Rng.RandomLessThan(100) < Player.SkillSavingThrow)
+                    if (Program.Rng.RandomLessThan(100) < SkillSavingThrow)
                     {
                         MsgPrint("You resist the effects!");
                         break;
                     }
                     MsgPrint("Your body starts to scramble...");
-                    Player.ShuffleAbilityScores();
+                    ShuffleAbilityScores();
                     break;
                 }
         }
@@ -4092,7 +4089,7 @@ internal class SaveGame
 
     public void CallChaos()
     {
-        int plev = Player.ExperienceLevel;
+        int plev = ExperienceLevel;
         bool lineChaos = false;
         Projectile[] hurtTypes =
         {
@@ -4197,9 +4194,9 @@ internal class SaveGame
             Level.DeleteMonsterByIndex(i, true);
             if (playerCast)
             {
-                Player.TakeHit(Program.Rng.DieRoll(4), "the strain of casting Carnage");
+                TakeHit(Program.Rng.DieRoll(4), "the strain of casting Carnage");
             }
-            Level.MoveCursorRelative(Player.MapY, Player.MapX);
+            Level.MoveCursorRelative(MapY, MapX);
             RedrawHpFlaggedAction.Set();
             HandleStuff();
             UpdateScreen();
@@ -4238,30 +4235,30 @@ internal class SaveGame
     public void ColdDam(int dam, string kbStr)
     {
         int inv = dam < 30 ? 1 : dam < 60 ? 2 : 3;
-        if (Player.HasColdImmunity || dam <= 0)
+        if (HasColdImmunity || dam <= 0)
         {
             return;
         }
-        if (Player.HasElementalVulnerability)
+        if (HasElementalVulnerability)
         {
             dam *= 2;
         }
-        if (Player.HasColdResistance)
+        if (HasColdResistance)
         {
             dam = (dam + 2) / 3;
         }
-        if (Player.TimedColdResistance.TurnsRemaining != 0)
+        if (TimedColdResistance.TurnsRemaining != 0)
         {
             dam = (dam + 2) / 3;
         }
-        if (!(Player.TimedColdResistance.TurnsRemaining != 0 || Player.HasColdResistance) && Program.Rng.DieRoll(HurtChance) == 1)
+        if (!(TimedColdResistance.TurnsRemaining != 0 || HasColdResistance) && Program.Rng.DieRoll(HurtChance) == 1)
         {
-            Player.TryDecreasingAbilityScore(Ability.Strength);
+            TryDecreasingAbilityScore(Ability.Strength);
         }
-        Player.TakeHit(dam, kbStr);
-        if (!(Player.HasColdResistance && Player.TimedColdResistance.TurnsRemaining != 0))
+        TakeHit(dam, kbStr);
+        if (!(HasColdResistance && TimedColdResistance.TurnsRemaining != 0))
         {
-            Player.InvenDamage(SetColdDestroy, inv);
+            InvenDamage(SetColdDestroy, inv);
         }
     }
 
@@ -4308,7 +4305,7 @@ internal class SaveGame
                 GridTile cPtr = Level.Grid[y][x];
                 cPtr.TileFlags.Clear(GridTile.InRoom | GridTile.InVault);
                 cPtr.TileFlags.Clear(GridTile.PlayerMemorized | GridTile.SelfLit);
-                if (x == Player.MapX && y == Player.MapY)
+                if (x == MapX && y == MapY)
                 {
                     flag = true;
                     continue;
@@ -4344,9 +4341,9 @@ internal class SaveGame
         if (flag)
         {
             MsgPrint("There is a searing blast of light!");
-            if (!Player.HasBlindnessResistance && !Player.HasLightResistance)
+            if (!HasBlindnessResistance && !HasLightResistance)
             {
-                Player.TimedBlindness.AddTimer(10 + Program.Rng.DieRoll(10));
+                TimedBlindness.AddTimer(10 + Program.Rng.DieRoll(10));
             }
         }
         RemoveLightFlaggedAction.Set();
@@ -4367,7 +4364,7 @@ internal class SaveGame
     public bool DestroyDoorsTouch()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-        return Project(0, 1, Player.MapY, Player.MapX, 0, SingletonRepository.Projectiles.Get<KillDoorProjectile>(), flg);
+        return Project(0, 1, MapY, MapX, 0, SingletonRepository.Projectiles.Get<KillDoorProjectile>(), flg);
     }
 
     public bool DetectAll()
@@ -4528,7 +4525,7 @@ internal class SaveGame
             {
                 continue;
             }
-            if (!rPtr.Invisible || Player.HasSeeInvisibility || Player.TimedSeeInvisibility.TurnsRemaining != 0)
+            if (!rPtr.Invisible || HasSeeInvisibility || TimedSeeInvisibility.TurnsRemaining != 0)
             {
                 Level.RepairMonsters = true;
                 mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
@@ -4768,7 +4765,7 @@ internal class SaveGame
     public void DoorCreation()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-        Project(0, 1, Player.MapY, Player.MapX, 0, SingletonRepository.Projectiles.Get<MakeDoorProjectile>(), flg);
+        Project(0, 1, MapY, MapX, 0, SingletonRepository.Projectiles.Get<MakeDoorProjectile>(), flg);
     }
 
     /// <summary>
@@ -4832,7 +4829,7 @@ internal class SaveGame
                     continue;
                 }
                 map[16 + yy - cy][16 + xx - cx] = true;
-                if (yy == Player.MapY && xx == Player.MapX)
+                if (yy == MapY && xx == MapX)
                 {
                     hurt = true;
                 }
@@ -4842,8 +4839,8 @@ internal class SaveGame
         {
             for (i = 0; i < 8; i++)
             {
-                y = Player.MapY + Level.KeypadDirectionYOffset[i];
-                x = Player.MapX + Level.KeypadDirectionXOffset[i];
+                y = MapY + Level.KeypadDirectionYOffset[i];
+                x = MapX + Level.KeypadDirectionXOffset[i];
                 if (!Level.GridPassableNoCreature(y, x))
                 {
                     continue;
@@ -4897,29 +4894,29 @@ internal class SaveGame
                         {
                             MsgPrint("You are bashed by rubble!");
                             damage = Program.Rng.DiceRoll(10, 4);
-                            Player.TimedStun.AddTimer(Program.Rng.DieRoll(50));
+                            TimedStun.AddTimer(Program.Rng.DieRoll(50));
                             break;
                         }
                     case 3:
                         {
                             MsgPrint("You are crushed between the floor and ceiling!");
                             damage = Program.Rng.DiceRoll(10, 4);
-                            Player.TimedStun.AddTimer(Program.Rng.DieRoll(50));
+                            TimedStun.AddTimer(Program.Rng.DieRoll(50));
                             break;
                         }
                 }
-                int oy = Player.MapY;
-                int ox = Player.MapX;
-                Player.MapY = sy;
-                Player.MapX = sx;
+                int oy = MapY;
+                int ox = MapX;
+                MapY = sy;
+                MapX = sx;
                 Level.RedrawSingleLocation(oy, ox);
-                Level.RedrawSingleLocation(Player.MapY, Player.MapX);
-                Player.RecenterScreenAroundPlayer();
+                Level.RedrawSingleLocation(MapY, MapX);
+                RecenterScreenAroundPlayer();
             }
-            map[16 + Player.MapY - cy][16 + Player.MapX - cx] = false;
+            map[16 + MapY - cy][16 + MapX - cx] = false;
             if (damage != 0)
             {
-                Player.TakeHit(damage, "an earthquake");
+                TakeHit(damage, "an earthquake");
             }
         }
         for (dy = -r; dy <= r; dy++)
@@ -5008,7 +5005,7 @@ internal class SaveGame
                     continue;
                 }
                 cPtr = Level.Grid[yy][xx];
-                if (yy == Player.MapY && xx == Player.MapX)
+                if (yy == MapY && xx == MapX)
                 {
                     continue;
                 }
@@ -5048,47 +5045,47 @@ internal class SaveGame
 
     public void ElderSign()
     {
-        if (!Level.GridOpenNoItem(Player.MapY, Player.MapX))
+        if (!Level.GridOpenNoItem(MapY, MapX))
         {
             MsgPrint("The object resists the spell.");
             return;
         }
-        Level.CaveSetFeat(Player.MapY, Player.MapX, "ElderSign");
+        Level.CaveSetFeat(MapY, MapX, "ElderSign");
     }
 
     public void ElderSignCreation()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
-        Project(0, 1, Player.MapY, Player.MapX, 0, SingletonRepository.Projectiles.Get<MakeElderSignProjectile>(), flg);
+        Project(0, 1, MapY, MapX, 0, SingletonRepository.Projectiles.Get<MakeElderSignProjectile>(), flg);
     }
 
     public void ElecDam(int dam, string kbStr)
     {
         int inv = dam < 30 ? 1 : dam < 60 ? 2 : 3;
-        if (Player.HasLightningImmunity || dam <= 0)
+        if (HasLightningImmunity || dam <= 0)
         {
             return;
         }
-        if (Player.HasElementalVulnerability)
+        if (HasElementalVulnerability)
         {
             dam *= 2;
         }
-        if (Player.TimedLightningResistance.TurnsRemaining != 0)
+        if (TimedLightningResistance.TurnsRemaining != 0)
         {
             dam = (dam + 2) / 3;
         }
-        if (Player.HasLightningResistance)
+        if (HasLightningResistance)
         {
             dam = (dam + 2) / 3;
         }
-        if (!(Player.TimedLightningResistance.TurnsRemaining != 0 || Player.HasLightningResistance) && Program.Rng.DieRoll(HurtChance) == 1)
+        if (!(TimedLightningResistance.TurnsRemaining != 0 || HasLightningResistance) && Program.Rng.DieRoll(HurtChance) == 1)
         {
-            Player.TryDecreasingAbilityScore(Ability.Dexterity);
+            TryDecreasingAbilityScore(Ability.Dexterity);
         }
-        Player.TakeHit(dam, kbStr);
-        if (!(Player.TimedLightningResistance.TurnsRemaining != 0 && Player.HasLightningResistance))
+        TakeHit(dam, kbStr);
+        if (!(TimedLightningResistance.TurnsRemaining != 0 && HasLightningResistance))
         {
-            Player.InvenDamage(SetElecDestroy, inv);
+            InvenDamage(SetElecDestroy, inv);
         }
     }
 
@@ -5271,8 +5268,8 @@ internal class SaveGame
     public bool FireBall(Projectile projectile, int dir, int dam, int rad)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
-        int tx = Player.MapX + (99 * Level.KeypadDirectionXOffset[dir]);
-        int ty = Player.MapY + (99 * Level.KeypadDirectionYOffset[dir]);
+        int tx = MapX + (99 * Level.KeypadDirectionXOffset[dir]);
+        int ty = MapY + (99 * Level.KeypadDirectionYOffset[dir]);
         if (dir == 5 && TargetOkay())
         {
             flg &= ~ProjectionFlag.ProjectStop;
@@ -5309,36 +5306,36 @@ internal class SaveGame
     public void FireDam(int dam, string kbStr)
     {
         int inv = dam < 30 ? 1 : dam < 60 ? 2 : 3;
-        if (Player.HasFireImmunity || dam <= 0)
+        if (HasFireImmunity || dam <= 0)
         {
             return;
         }
-        if (Player.HasElementalVulnerability)
+        if (HasElementalVulnerability)
         {
             dam *= 2;
         }
-        if (Player.HasFireResistance)
+        if (HasFireResistance)
         {
             dam = (dam + 2) / 3;
         }
-        if (Player.TimedFireResistance.TurnsRemaining != 0)
+        if (TimedFireResistance.TurnsRemaining != 0)
         {
             dam = (dam + 2) / 3;
         }
-        if (!(Player.TimedFireResistance.TurnsRemaining != 0 || Player.HasFireResistance) && Program.Rng.DieRoll(HurtChance) == 1)
+        if (!(TimedFireResistance.TurnsRemaining != 0 || HasFireResistance) && Program.Rng.DieRoll(HurtChance) == 1)
         {
-            Player.TryDecreasingAbilityScore(Ability.Strength);
+            TryDecreasingAbilityScore(Ability.Strength);
         }
-        Player.TakeHit(dam, kbStr);
-        if (!(Player.HasFireResistance && Player.TimedFireResistance.TurnsRemaining != 0))
+        TakeHit(dam, kbStr);
+        if (!(HasFireResistance && TimedFireResistance.TurnsRemaining != 0))
         {
-            Player.InvenDamage(SetFireDestroy, inv);
+            InvenDamage(SetFireDestroy, inv);
         }
     }
 
     public bool HasteMonsters()
     {
-        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get<OldSpeedProjectile>(), Player.ExperienceLevel);
+        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get<OldSpeedProjectile>(), ExperienceLevel);
     }
 
     public bool HealMonster(int dir)
@@ -5430,8 +5427,8 @@ internal class SaveGame
                 string itemName = oPtr.Description(true, 3);
                 MsgPrint($"You destroy {itemName}.");
                 int amount = oPtr.Count;
-                Player.InvenItemIncrease(i, -amount);
-                Player.InvenItemOptimize(i);
+                InvenItemIncrease(i, -amount);
+                InvenItemOptimize(i);
                 i--;
             }
         }
@@ -5440,12 +5437,12 @@ internal class SaveGame
     public bool LightArea(int dam, int rad)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill;
-        if (Player.TimedBlindness.TurnsRemaining == 0)
+        if (TimedBlindness.TurnsRemaining == 0)
         {
             MsgPrint("You are surrounded by a white light.");
         }
-        Project(0, rad, Player.MapY, Player.MapX, dam, SingletonRepository.Projectiles.Get<LightWeakProjectile>(), flg);
-        LightRoom(Player.MapY, Player.MapX);
+        Project(0, rad, MapY, MapX, dam, SingletonRepository.Projectiles.Get<LightWeakProjectile>(), flg);
+        LightRoom(MapY, MapX);
         return true;
     }
 
@@ -5513,9 +5510,9 @@ internal class SaveGame
             Level.DeleteMonsterByIndex(i, true);
             if (playerCast)
             {
-                Player.TakeHit(Program.Rng.DieRoll(3), "the strain of casting Mass Carnage");
+                TakeHit(Program.Rng.DieRoll(3), "the strain of casting Mass Carnage");
             }
-            Level.MoveCursorRelative(Player.MapY, Player.MapX);
+            Level.MoveCursorRelative(MapY, MapX);
             RedrawHpFlaggedAction.Set();
             HandleStuff();
             UpdateScreen();
@@ -5531,7 +5528,7 @@ internal class SaveGame
     public bool PolyMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get<OldPolyProjectile>(), dir, Player.ExperienceLevel, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get<OldPolyProjectile>(), dir, ExperienceLevel, flg);
     }
 
     public int PolymorphMonster(MonsterRace rPtr)
@@ -5704,99 +5701,99 @@ internal class SaveGame
         int i = 0, j, k;
         string[] info = new string[128];
         int[] info2 = new int[128];
-        if (Player.TimedBlindness.TurnsRemaining != 0)
+        if (TimedBlindness.TurnsRemaining != 0)
         {
-            info2[i] = ReportMagicsAux(Player.TimedBlindness.TurnsRemaining);
+            info2[i] = ReportMagicsAux(TimedBlindness.TurnsRemaining);
             info[i++] = "You cannot see";
         }
-        if (Player.TimedConfusion.TurnsRemaining != 0)
+        if (TimedConfusion.TurnsRemaining != 0)
         {
-            info2[i] = ReportMagicsAux(Player.TimedConfusion.TurnsRemaining);
+            info2[i] = ReportMagicsAux(TimedConfusion.TurnsRemaining);
             info[i++] = "You are confused";
         }
-        if (Player.TimedFear.TurnsRemaining != 0)
+        if (TimedFear.TurnsRemaining != 0)
         {
-            info2[i] = ReportMagicsAux(Player.TimedFear.TurnsRemaining);
+            info2[i] = ReportMagicsAux(TimedFear.TurnsRemaining);
             info[i++] = "You are terrified";
         }
-        if (Player.TimedPoison.TurnsRemaining != 0)
+        if (TimedPoison.TurnsRemaining != 0)
         {
-            info2[i] = ReportMagicsAux(Player.TimedPoison.TurnsRemaining);
+            info2[i] = ReportMagicsAux(TimedPoison.TurnsRemaining);
             info[i++] = "You are poisoned";
         }
-        if (Player.TimedHallucinations.TurnsRemaining != 0)
+        if (TimedHallucinations.TurnsRemaining != 0)
         {
-            info2[i] = ReportMagicsAux(Player.TimedHallucinations.TurnsRemaining);
+            info2[i] = ReportMagicsAux(TimedHallucinations.TurnsRemaining);
             info[i++] = "You are hallucinating";
         }
-        if (Player.TimedBlessing.TurnsRemaining != 0)
+        if (TimedBlessing.TurnsRemaining != 0)
         {
-            info2[i] = ReportMagicsAux(Player.TimedBlessing.TurnsRemaining);
+            info2[i] = ReportMagicsAux(TimedBlessing.TurnsRemaining);
             info[i++] = "You feel rightous";
         }
-        if (Player.TimedHeroism.TurnsRemaining != 0)
+        if (TimedHeroism.TurnsRemaining != 0)
         {
-            info2[i] = ReportMagicsAux(Player.TimedHeroism.TurnsRemaining);
+            info2[i] = ReportMagicsAux(TimedHeroism.TurnsRemaining);
             info[i++] = "You feel heroic";
         }
-        if (Player.TimedSuperheroism.TurnsRemaining != 0)
+        if (TimedSuperheroism.TurnsRemaining != 0)
         {
-            info2[i] = ReportMagicsAux(Player.TimedSuperheroism.TurnsRemaining);
+            info2[i] = ReportMagicsAux(TimedSuperheroism.TurnsRemaining);
             info[i++] = "You are in a battle rage";
         }
-        if (Player.TimedProtectionFromEvil.TurnsRemaining != 0)
+        if (TimedProtectionFromEvil.TurnsRemaining != 0)
         {
-            info2[i] = ReportMagicsAux(Player.TimedProtectionFromEvil.TurnsRemaining);
+            info2[i] = ReportMagicsAux(TimedProtectionFromEvil.TurnsRemaining);
             info[i++] = "You are protected from evil";
         }
-        if (Player.TimedStoneskin.TurnsRemaining != 0)
+        if (TimedStoneskin.TurnsRemaining != 0)
         {
-            info2[i] = ReportMagicsAux(Player.TimedStoneskin.TurnsRemaining);
+            info2[i] = ReportMagicsAux(TimedStoneskin.TurnsRemaining);
             info[i++] = "You are protected by a mystic shield";
         }
-        if (Player.TimedInvulnerability.TurnsRemaining != 0)
+        if (TimedInvulnerability.TurnsRemaining != 0)
         {
-            info2[i] = ReportMagicsAux(Player.TimedInvulnerability.TurnsRemaining);
+            info2[i] = ReportMagicsAux(TimedInvulnerability.TurnsRemaining);
             info[i++] = "You are invulnerable";
         }
-        if (Player.TimedEtherealness.TurnsRemaining != 0)
+        if (TimedEtherealness.TurnsRemaining != 0)
         {
-            info2[i] = ReportMagicsAux(Player.TimedEtherealness.TurnsRemaining);
+            info2[i] = ReportMagicsAux(TimedEtherealness.TurnsRemaining);
             info[i++] = "You are incorporeal";
         }
-        if (Player.HasConfusingTouch)
+        if (HasConfusingTouch)
         {
             info2[i] = 7;
             info[i++] = "Your hands are glowing dull red.";
         }
-        if (Player.WordOfRecallDelay != 0)
+        if (WordOfRecallDelay != 0)
         {
-            info2[i] = ReportMagicsAux(Player.WordOfRecallDelay);
+            info2[i] = ReportMagicsAux(WordOfRecallDelay);
             info[i++] = "You waiting to be recalled";
         }
-        if (Player.TimedAcidResistance.TurnsRemaining != 0)
+        if (TimedAcidResistance.TurnsRemaining != 0)
         {
-            info2[i] = ReportMagicsAux(Player.TimedAcidResistance.TurnsRemaining);
+            info2[i] = ReportMagicsAux(TimedAcidResistance.TurnsRemaining);
             info[i++] = "You are resistant to acid";
         }
-        if (Player.TimedLightningResistance.TurnsRemaining != 0)
+        if (TimedLightningResistance.TurnsRemaining != 0)
         {
-            info2[i] = ReportMagicsAux(Player.TimedLightningResistance.TurnsRemaining);
+            info2[i] = ReportMagicsAux(TimedLightningResistance.TurnsRemaining);
             info[i++] = "You are resistant to lightning";
         }
-        if (Player.TimedFireResistance.TurnsRemaining != 0)
+        if (TimedFireResistance.TurnsRemaining != 0)
         {
-            info2[i] = ReportMagicsAux(Player.TimedFireResistance.TurnsRemaining);
+            info2[i] = ReportMagicsAux(TimedFireResistance.TurnsRemaining);
             info[i++] = "You are resistant to fire";
         }
-        if (Player.TimedColdResistance.TurnsRemaining != 0)
+        if (TimedColdResistance.TurnsRemaining != 0)
         {
-            info2[i] = ReportMagicsAux(Player.TimedColdResistance.TurnsRemaining);
+            info2[i] = ReportMagicsAux(TimedColdResistance.TurnsRemaining);
             info[i++] = "You are resistant to cold";
         }
-        if (Player.TimedPoisonResistance.TurnsRemaining != 0)
+        if (TimedPoisonResistance.TurnsRemaining != 0)
         {
-            info2[i] = ReportMagicsAux(Player.TimedPoisonResistance.TurnsRemaining);
+            info2[i] = ReportMagicsAux(TimedPoisonResistance.TurnsRemaining);
             info[i++] = "You are resistant to poison";
         }
         ScreenBuffer savedScreen = Screen.Clone();
@@ -5838,7 +5835,7 @@ internal class SaveGame
                 inventoryCharacteristics.Merge(oPtr.Characteristics);
             }
         }
-        string[]? selfKnowledgeInfo = Player.Race.SelfKnowledge(Player.ExperienceLevel);
+        string[]? selfKnowledgeInfo = Race.SelfKnowledge(ExperienceLevel);
         if (selfKnowledgeInfo != null)
         {
             foreach (string infoLine in selfKnowledgeInfo)
@@ -5846,7 +5843,7 @@ internal class SaveGame
                 info[infoCount++] = infoLine;
             }
         }
-        string[] mutations = Player.Dna.GetMutationList();
+        string[] mutations = Dna.GetMutationList();
         if (mutations.Length > 0)
         {
             foreach (string m in mutations)
@@ -5854,263 +5851,263 @@ internal class SaveGame
                 info[infoCount++] = m;
             }
         }
-        if (Player.TimedBlindness.TurnsRemaining != 0)
+        if (TimedBlindness.TurnsRemaining != 0)
         {
             info[infoCount++] = "You cannot see.";
         }
-        if (Player.TimedConfusion.TurnsRemaining != 0)
+        if (TimedConfusion.TurnsRemaining != 0)
         {
             info[infoCount++] = "You are confused.";
         }
-        if (Player.TimedFear.TurnsRemaining != 0)
+        if (TimedFear.TurnsRemaining != 0)
         {
             info[infoCount++] = "You are terrified.";
         }
-        if (Player.TimedBleeding.TurnsRemaining != 0)
+        if (TimedBleeding.TurnsRemaining != 0)
         {
             info[infoCount++] = "You are bleeding.";
         }
-        if (Player.TimedStun.TurnsRemaining != 0)
+        if (TimedStun.TurnsRemaining != 0)
         {
             info[infoCount++] = "You are stunned.";
         }
-        if (Player.TimedPoison.TurnsRemaining != 0)
+        if (TimedPoison.TurnsRemaining != 0)
         {
             info[infoCount++] = "You are poisoned.";
         }
-        if (Player.TimedHallucinations.TurnsRemaining != 0)
+        if (TimedHallucinations.TurnsRemaining != 0)
         {
             info[infoCount++] = "You are hallucinating.";
         }
-        if (Player.HasAggravation)
+        if (HasAggravation)
         {
             info[infoCount++] = "You aggravate monsters.";
         }
-        if (Player.HasRandomTeleport)
+        if (HasRandomTeleport)
         {
             info[infoCount++] = "Your position is very uncertain.";
         }
-        if (Player.TimedBlessing.TurnsRemaining != 0)
+        if (TimedBlessing.TurnsRemaining != 0)
         {
             info[infoCount++] = "You feel rightous.";
         }
-        if (Player.TimedHeroism.TurnsRemaining != 0)
+        if (TimedHeroism.TurnsRemaining != 0)
         {
             info[infoCount++] = "You feel heroic.";
         }
-        if (Player.TimedSuperheroism.TurnsRemaining != 0)
+        if (TimedSuperheroism.TurnsRemaining != 0)
         {
             info[infoCount++] = "You are in a battle rage.";
         }
-        if (Player.TimedProtectionFromEvil.TurnsRemaining != 0)
+        if (TimedProtectionFromEvil.TurnsRemaining != 0)
         {
             info[infoCount++] = "You are protected from evil.";
         }
-        if (Player.TimedStoneskin.TurnsRemaining != 0)
+        if (TimedStoneskin.TurnsRemaining != 0)
         {
             info[infoCount++] = "You are protected by a mystic shield.";
         }
-        if (Player.TimedInvulnerability.TurnsRemaining != 0)
+        if (TimedInvulnerability.TurnsRemaining != 0)
         {
             info[infoCount++] = "You are temporarily invulnerable.";
         }
-        if (Player.TimedEtherealness.TurnsRemaining != 0)
+        if (TimedEtherealness.TurnsRemaining != 0)
         {
             info[infoCount++] = "You are temporarily incorporeal.";
         }
-        if (Player.HasConfusingTouch)
+        if (HasConfusingTouch)
         {
             info[infoCount++] = "Your hands are glowing dull red.";
         }
-        if (Player.IsSearching)
+        if (IsSearching)
         {
             info[infoCount++] = "You are looking around very carefully.";
         }
-        if (Player.SpareSpellSlots != 0)
+        if (SpareSpellSlots != 0)
         {
             info[infoCount++] = "You can learn some spells/prayers.";
         }
-        if (Player.WordOfRecallDelay != 0)
+        if (WordOfRecallDelay != 0)
         {
             info[infoCount++] = "You will soon be recalled.";
         }
-        if (Player.InfravisionRange != 0)
+        if (InfravisionRange != 0)
         {
             info[infoCount++] = "Your eyes are sensitive to infrared light.";
         }
-        if (Player.HasSeeInvisibility)
+        if (HasSeeInvisibility)
         {
             info[infoCount++] = "You can see invisible creatures.";
         }
-        if (Player.HasFeatherFall)
+        if (HasFeatherFall)
         {
             info[infoCount++] = "You can fly.";
         }
-        if (Player.HasFreeAction)
+        if (HasFreeAction)
         {
             info[infoCount++] = "You have free action.";
         }
-        if (Player.HasRegeneration)
+        if (HasRegeneration)
         {
             info[infoCount++] = "You regenerate quickly.";
         }
-        if (Player.HasSlowDigestion)
+        if (HasSlowDigestion)
         {
             info[infoCount++] = "Your appetite is small.";
         }
-        if (Player.HasTelepathy)
+        if (HasTelepathy)
         {
             info[infoCount++] = "You have ESP.";
         }
-        if (Player.HasHoldLife)
+        if (HasHoldLife)
         {
             info[infoCount++] = "You have a firm hold on your life force.";
         }
-        if (Player.HasReflection)
+        if (HasReflection)
         {
             info[infoCount++] = "You reflect arrows and bolts.";
         }
-        if (Player.HasFireShield)
+        if (HasFireShield)
         {
             info[infoCount++] = "You are surrounded with a fiery aura.";
         }
-        if (Player.HasLightningShield)
+        if (HasLightningShield)
         {
             info[infoCount++] = "You are surrounded with electricity.";
         }
-        if (Player.HasAntiMagic)
+        if (HasAntiMagic)
         {
             info[infoCount++] = "You are surrounded by an anti-magic shell.";
         }
-        if (Player.HasAntiTeleport)
+        if (HasAntiTeleport)
         {
             info[infoCount++] = "You cannot teleport.";
         }
-        if (Player.HasGlow)
+        if (HasGlow)
         {
             info[infoCount++] = "You are carrying a permanent light.";
         }
-        if (Player.HasAcidImmunity)
+        if (HasAcidImmunity)
         {
             info[infoCount++] = "You are completely immune to acid.";
         }
-        else if (Player.HasAcidResistance && Player.TimedAcidResistance.TurnsRemaining != 0)
+        else if (HasAcidResistance && TimedAcidResistance.TurnsRemaining != 0)
         {
             info[infoCount++] = "You resist acid exceptionally well.";
         }
-        else if (Player.HasAcidResistance || Player.TimedAcidResistance.TurnsRemaining != 0)
+        else if (HasAcidResistance || TimedAcidResistance.TurnsRemaining != 0)
         {
             info[infoCount++] = "You are resistant to acid.";
         }
-        if (Player.HasLightningImmunity)
+        if (HasLightningImmunity)
         {
             info[infoCount++] = "You are completely immune to lightning.";
         }
-        else if (Player.HasLightningResistance && Player.TimedLightningResistance.TurnsRemaining != 0)
+        else if (HasLightningResistance && TimedLightningResistance.TurnsRemaining != 0)
         {
             info[infoCount++] = "You resist lightning exceptionally well.";
         }
-        else if (Player.HasLightningResistance || Player.TimedLightningResistance.TurnsRemaining != 0)
+        else if (HasLightningResistance || TimedLightningResistance.TurnsRemaining != 0)
         {
             info[infoCount++] = "You are resistant to lightning.";
         }
-        if (Player.HasFireImmunity)
+        if (HasFireImmunity)
         {
             info[infoCount++] = "You are completely immune to fire.";
         }
-        else if (Player.HasFireResistance && Player.TimedFireResistance.TurnsRemaining != 0)
+        else if (HasFireResistance && TimedFireResistance.TurnsRemaining != 0)
         {
             info[infoCount++] = "You resist fire exceptionally well.";
         }
-        else if (Player.HasFireResistance || Player.TimedFireResistance.TurnsRemaining != 0)
+        else if (HasFireResistance || TimedFireResistance.TurnsRemaining != 0)
         {
             info[infoCount++] = "You are resistant to fire.";
         }
-        if (Player.HasColdImmunity)
+        if (HasColdImmunity)
         {
             info[infoCount++] = "You are completely immune to cold.";
         }
-        else if (Player.HasColdResistance && Player.TimedColdResistance.TurnsRemaining != 0)
+        else if (HasColdResistance && TimedColdResistance.TurnsRemaining != 0)
         {
             info[infoCount++] = "You resist cold exceptionally well.";
         }
-        else if (Player.HasColdResistance || Player.TimedColdResistance.TurnsRemaining != 0)
+        else if (HasColdResistance || TimedColdResistance.TurnsRemaining != 0)
         {
             info[infoCount++] = "You are resistant to cold.";
         }
-        if (Player.HasPoisonResistance && Player.TimedPoisonResistance.TurnsRemaining != 0)
+        if (HasPoisonResistance && TimedPoisonResistance.TurnsRemaining != 0)
         {
             info[infoCount++] = "You resist poison exceptionally well.";
         }
-        else if (Player.HasPoisonResistance || Player.TimedPoisonResistance.TurnsRemaining != 0)
+        else if (HasPoisonResistance || TimedPoisonResistance.TurnsRemaining != 0)
         {
             info[infoCount++] = "You are resistant to poison.";
         }
-        if (Player.HasLightResistance)
+        if (HasLightResistance)
         {
             info[infoCount++] = "You are resistant to bright light.";
         }
-        if (Player.HasDarkResistance)
+        if (HasDarkResistance)
         {
             info[infoCount++] = "You are resistant to darkness.";
         }
-        if (Player.HasConfusionResistance)
+        if (HasConfusionResistance)
         {
             info[infoCount++] = "You are resistant to confusion.";
         }
-        if (Player.HasSoundResistance)
+        if (HasSoundResistance)
         {
             info[infoCount++] = "You are resistant to sonic attacks.";
         }
-        if (Player.HasDisenchantResistance)
+        if (HasDisenchantResistance)
         {
             info[infoCount++] = "You are resistant to disenchantment.";
         }
-        if (Player.HasChaosResistance)
+        if (HasChaosResistance)
         {
             info[infoCount++] = "You are resistant to chaos.";
         }
-        if (Player.HasShardResistance)
+        if (HasShardResistance)
         {
             info[infoCount++] = "You are resistant to blasts of shards.";
         }
-        if (Player.HasNexusResistance)
+        if (HasNexusResistance)
         {
             info[infoCount++] = "You are resistant to nexus attacks.";
         }
-        if (Player.HasNetherResistance)
+        if (HasNetherResistance)
         {
             info[infoCount++] = "You are resistant to nether forces.";
         }
-        if (Player.HasFearResistance)
+        if (HasFearResistance)
         {
             info[infoCount++] = "You are completely fearless.";
         }
-        if (Player.HasBlindnessResistance)
+        if (HasBlindnessResistance)
         {
             info[infoCount++] = "Your eyes are resistant to blindness.";
         }
-        if (Player.HasSustainStrength)
+        if (HasSustainStrength)
         {
             info[infoCount++] = "Your strength is sustained.";
         }
-        if (Player.HasSustainIntelligence)
+        if (HasSustainIntelligence)
         {
             info[infoCount++] = "Your intelligence is sustained.";
         }
-        if (Player.HasSustainWisdom)
+        if (HasSustainWisdom)
         {
             info[infoCount++] = "Your wisdom is sustained.";
         }
-        if (Player.HasSustainConstitution)
+        if (HasSustainConstitution)
         {
             info[infoCount++] = "Your constitution is sustained.";
         }
-        if (Player.HasSustainDexterity)
+        if (HasSustainDexterity)
         {
             info[infoCount++] = "Your dexterity is sustained.";
         }
-        if (Player.HasSustainCharisma)
+        if (HasSustainCharisma)
         {
             info[infoCount++] = "Your charisma is sustained.";
         }
@@ -6327,69 +6324,69 @@ internal class SaveGame
     public bool SleepMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get<OldSleepProjectile>(), dir, Player.ExperienceLevel, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get<OldSleepProjectile>(), dir, ExperienceLevel, flg);
     }
 
     public bool SleepMonsters()
     {
-        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get<OldSleepProjectile>(), Player.ExperienceLevel);
+        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get<OldSleepProjectile>(), ExperienceLevel);
     }
 
     public void SleepMonstersTouch()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectKill | ProjectionFlag.ProjectHide;
-        Project(0, 1, Player.MapY, Player.MapX, Player.ExperienceLevel, SingletonRepository.Projectiles.Get<OldSleepProjectile>(), flg);
+        Project(0, 1, MapY, MapX, ExperienceLevel, SingletonRepository.Projectiles.Get<OldSleepProjectile>(), flg);
     }
 
     public bool SlowMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get<OldSlowProjectile>(), dir, Player.ExperienceLevel, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get<OldSlowProjectile>(), dir, ExperienceLevel, flg);
     }
 
     public bool SlowMonsters()
     {
-        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get<OldSlowProjectile>(), Player.ExperienceLevel);
+        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get<OldSlowProjectile>(), ExperienceLevel);
     }
 
     public bool SpeedMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get<OldSpeedProjectile>(), dir, Player.ExperienceLevel, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get<OldSpeedProjectile>(), dir, ExperienceLevel, flg);
     }
 
     public void StairCreation()
     {
-        if (!Level.CaveValidBold(Player.MapY, Player.MapX))
+        if (!Level.CaveValidBold(MapY, MapX))
         {
             MsgPrint("The object resists the spell.");
             return;
         }
-        DeleteObject(Player.MapY, Player.MapX);
+        DeleteObject(MapY, MapX);
         if (CurrentDepth <= 0)
         {
-            Level.CaveSetFeat(Player.MapY, Player.MapX, "DownStair");
+            Level.CaveSetFeat(MapY, MapX, "DownStair");
         }
         else if (IsQuest(CurrentDepth) ||
                  CurrentDepth >= CurDungeon.MaxLevel)
         {
-            Level.CaveSetFeat(Player.MapY, Player.MapX,
+            Level.CaveSetFeat(MapY, MapX,
                 CurDungeon.Tower ? "DownStair" : "UpStair");
         }
         else if (Program.Rng.RandomLessThan(100) < 50)
         {
-            Level.CaveSetFeat(Player.MapY, Player.MapX, "DownStair");
+            Level.CaveSetFeat(MapY, MapX, "DownStair");
         }
         else
         {
-            Level.CaveSetFeat(Player.MapY, Player.MapX, "UpStair");
+            Level.CaveSetFeat(MapY, MapX, "UpStair");
         }
     }
 
     public void StasisMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        TargetedProject(SingletonRepository.Projectiles.Get<StasisProjectile>(), dir, Player.ExperienceLevel, flg);
+        TargetedProject(SingletonRepository.Projectiles.Get<StasisProjectile>(), dir, ExperienceLevel, flg);
     }
 
     public void StasisMonsters(int dam)
@@ -6413,7 +6410,7 @@ internal class SaveGame
         int maxReaver = (Difficulty / 50) + Program.Rng.DieRoll(6);
         for (int i = 0; i < maxReaver; i++)
         {
-            Level.SummonSpecific(Player.MapY, Player.MapX, 100, new ReaverMonsterSelector());
+            Level.SummonSpecific(MapY, MapX, 100, new ReaverMonsterSelector());
         }
     }
 
@@ -6425,10 +6422,10 @@ internal class SaveGame
 
     public void TeleportPlayer(int dis)
     {
-        int x = Player.MapY, y = Player.MapX;
+        int x = MapY, y = MapX;
         int xx = -1;
         bool look = true;
-        if (Player.HasAntiTeleport)
+        if (HasAntiTeleport)
         {
             MsgPrint("A mysterious force prevents you from teleporting!");
             return;
@@ -6448,9 +6445,9 @@ internal class SaveGame
             {
                 while (true)
                 {
-                    y = Program.Rng.RandomSpread(Player.MapY, dis);
-                    x = Program.Rng.RandomSpread(Player.MapX, dis);
-                    int d = Level.Distance(Player.MapY, Player.MapX, y, x);
+                    y = Program.Rng.RandomSpread(MapY, dis);
+                    x = Program.Rng.RandomSpread(MapX, dis);
+                    int d = Level.Distance(MapY, MapX, y, x);
                     if (d >= min && d <= dis)
                     {
                         break;
@@ -6475,10 +6472,10 @@ internal class SaveGame
             min /= 2;
         }
         PlaySound(SoundEffectEnum.Teleport);
-        int oy = Player.MapY;
-        int ox = Player.MapX;
-        Player.MapY = y;
-        Player.MapX = x;
+        int oy = MapY;
+        int ox = MapX;
+        MapY = y;
+        MapX = x;
         Level.RedrawSingleLocation(oy, ox);
         while (xx < 2)
         {
@@ -6506,8 +6503,8 @@ internal class SaveGame
             }
             xx++;
         }
-        Level.RedrawSingleLocation(Player.MapY, Player.MapX);
-        Player.RecenterScreenAroundPlayer();
+        Level.RedrawSingleLocation(MapY, MapX);
+        RecenterScreenAroundPlayer();
         UpdateScentFlaggedAction.Set();
         UpdateLightFlaggedAction.Set();
         UpdateViewFlaggedAction.Set();
@@ -6517,7 +6514,7 @@ internal class SaveGame
 
     public void TeleportPlayerLevel()
     {
-        if (Player.HasAntiTeleport)
+        if (HasAntiTeleport)
         {
             MsgPrint("A mysterious force prevents you from teleporting!");
             return;
@@ -6563,7 +6560,7 @@ internal class SaveGame
     public void TeleportPlayerTo(int ny, int nx)
     {
         int y, x, dis = 0, ctr = 0;
-        if (Player.HasAntiTeleport)
+        if (HasAntiTeleport)
         {
             MsgPrint("A mysterious force prevents you from teleporting!");
             return;
@@ -6590,13 +6587,13 @@ internal class SaveGame
             }
         }
         PlaySound(SoundEffectEnum.Teleport);
-        int oy = Player.MapY;
-        int ox = Player.MapX;
-        Player.MapY = y;
-        Player.MapX = x;
+        int oy = MapY;
+        int ox = MapX;
+        MapY = y;
+        MapX = x;
         Level.RedrawSingleLocation(oy, ox);
-        Level.RedrawSingleLocation(Player.MapY, Player.MapX);
-        Player.RecenterScreenAroundPlayer();
+        Level.RedrawSingleLocation(MapY, MapX);
+        RecenterScreenAroundPlayer();
         UpdateScentFlaggedAction.Set();
         UpdateLightFlaggedAction.Set();
         UpdateViewFlaggedAction.Set();
@@ -6614,8 +6611,8 @@ internal class SaveGame
         }
         else
         {
-            tx = Player.MapX + Level.KeypadDirectionXOffset[dir];
-            ty = Player.MapY + Level.KeypadDirectionYOffset[dir];
+            tx = MapX + Level.KeypadDirectionXOffset[dir];
+            ty = MapY + Level.KeypadDirectionYOffset[dir];
         }
         GridTile cPtr = Level.Grid[ty][tx];
         if (cPtr.MonsterIndex == 0)
@@ -6633,18 +6630,18 @@ internal class SaveGame
             else
             {
                 PlaySound(SoundEffectEnum.Teleport);
-                Level.Grid[Player.MapY][Player.MapX].MonsterIndex = cPtr.MonsterIndex;
+                Level.Grid[MapY][MapX].MonsterIndex = cPtr.MonsterIndex;
                 cPtr.MonsterIndex = 0;
-                mPtr.MapY = Player.MapY;
-                mPtr.MapX = Player.MapX;
-                Player.MapX = tx;
-                Player.MapY = ty;
+                mPtr.MapY = MapY;
+                mPtr.MapX = MapX;
+                MapX = tx;
+                MapY = ty;
                 tx = mPtr.MapX;
                 ty = mPtr.MapY;
                 Level.UpdateMonsterVisibility(Level.Grid[ty][tx].MonsterIndex, true);
                 Level.RedrawSingleLocation(ty, tx);
-                Level.RedrawSingleLocation(Player.MapY, Player.MapX);
-                Player.RecenterScreenAroundPlayer();
+                Level.RedrawSingleLocation(MapY, MapX);
+                RecenterScreenAroundPlayer();
                 UpdateScentFlaggedAction.Set();
                 UpdateLightFlaggedAction.Set();
                 UpdateViewFlaggedAction.Set();
@@ -6657,7 +6654,7 @@ internal class SaveGame
     public bool TrapCreation()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-        return Project(0, 1, Player.MapY, Player.MapX, 0, SingletonRepository.Projectiles.Get<MakeTrapProjectile>(), flg);
+        return Project(0, 1, MapY, MapX, 0, SingletonRepository.Projectiles.Get<MakeTrapProjectile>(), flg);
     }
 
     public void TurnEvil(int dam)
@@ -6673,12 +6670,12 @@ internal class SaveGame
     public bool UnlightArea(int dam, int rad)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill;
-        if (Player.TimedBlindness.TurnsRemaining == 0)
+        if (TimedBlindness.TurnsRemaining == 0)
         {
             MsgPrint("Darkness surrounds you.");
         }
-        Project(0, rad, Player.MapY, Player.MapX, dam, SingletonRepository.Projectiles.Get<DarkWeakProjectile>(), flg);
-        UnlightRoom(Player.MapY, Player.MapX);
+        Project(0, rad, MapY, MapX, dam, SingletonRepository.Projectiles.Get<DarkWeakProjectile>(), flg);
+        UnlightRoom(MapY, MapX);
         return true;
     }
 
@@ -6708,7 +6705,7 @@ internal class SaveGame
     public void WallBreaker()
     {
         int dummy;
-        if (Program.Rng.DieRoll(80 + Player.ExperienceLevel) < 70)
+        if (Program.Rng.DieRoll(80 + ExperienceLevel) < 70)
         {
             do
             {
@@ -6718,7 +6715,7 @@ internal class SaveGame
         }
         else if (Program.Rng.DieRoll(100) > 30)
         {
-            Earthquake(Player.MapY, Player.MapX, 1);
+            Earthquake(MapY, MapX, 1);
         }
         else
         {
@@ -6735,7 +6732,7 @@ internal class SaveGame
     public void WallStone()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
-        _ = Project(0, 1, Player.MapY, Player.MapX, 0, SingletonRepository.Projectiles.Get<StoneWallProjectile>(), flg);
+        _ = Project(0, 1, MapY, MapX, 0, SingletonRepository.Projectiles.Get<StoneWallProjectile>(), flg);
         UpdateScentFlaggedAction.Set();
         UpdateLightFlaggedAction.Set();
         UpdateViewFlaggedAction.Set();
@@ -6759,12 +6756,12 @@ internal class SaveGame
 
     public void YellowSign()
     {
-        if (!Level.GridOpenNoItem(Player.MapY, Player.MapX))
+        if (!Level.GridOpenNoItem(MapY, MapX))
         {
             MsgPrint("The object resists the spell.");
             return;
         }
-        Level.CaveSetFeat(Player.MapY, Player.MapX, "YellowSign");
+        Level.CaveSetFeat(MapY, MapX, "YellowSign");
     }
 
     private void CaveTempRoomAux(int y, int x)
@@ -7046,8 +7043,8 @@ internal class SaveGame
     private bool TargetedProject(Projectile projectile, int dir, int dam, ProjectionFlag flg)
     {
         flg |= ProjectionFlag.ProjectThru;
-        int tx = Player.MapX + Level.KeypadDirectionXOffset[dir];
-        int ty = Player.MapY + Level.KeypadDirectionYOffset[dir];
+        int tx = MapX + Level.KeypadDirectionXOffset[dir];
+        int ty = MapY + Level.KeypadDirectionYOffset[dir];
         if (dir == 5 && TargetOkay())
         {
             tx = TargetCol;
@@ -7058,8 +7055,8 @@ internal class SaveGame
 
     private void TeleportToPlayer(int mIdx)
     {
-        int ny = Player.MapY;
-        int nx = Player.MapX;
+        int ny = MapY;
+        int nx = MapX;
         int dis = 2;
         bool look = true;
         Monster mPtr = Level.Monsters[mIdx];
@@ -7085,9 +7082,9 @@ internal class SaveGame
             {
                 while (true)
                 {
-                    ny = Program.Rng.RandomSpread(Player.MapY, dis);
-                    nx = Program.Rng.RandomSpread(Player.MapX, dis);
-                    int d = Level.Distance(Player.MapY, Player.MapX, ny, nx);
+                    ny = Program.Rng.RandomSpread(MapY, dis);
+                    nx = Program.Rng.RandomSpread(MapX, dis);
+                    int d = Level.Distance(MapY, MapX, ny, nx);
                     if (d >= min && d <= dis)
                     {
                         break;
@@ -7135,9 +7132,9 @@ internal class SaveGame
         ViewingEquipment = true;
         ScreenBuffer savedScreen = Screen.Clone();
         // We're interested in seeing everything
-        Player.ShowEquip(null);
+        ShowEquip(null);
         // Get a command
-        string outVal = $"Equipment: carrying {Player.WeightCarried / 10}.{Player.WeightCarried % 10} pounds ({Player.WeightCarried * 100 / (Player.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
+        string outVal = $"Equipment: carrying {WeightCarried / 10}.{WeightCarried % 10} pounds ({WeightCarried * 100 / (AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
         Screen.PrintLine(outVal, 0, 0);
         QueuedCommand = Inkey();
         Screen.Restore(savedScreen);
@@ -7209,7 +7206,7 @@ internal class SaveGame
         EnergyUse = 100;
         GridTile cPtr = Level.Grid[y][x];
         MsgPrint("You smash into the door!");
-        int bash = Player.AbilityScores[Ability.Strength].StrAttackSpeedComponent;
+        int bash = AbilityScores[Ability.Strength].StrAttackSpeedComponent;
         int temp = int.Parse(cPtr.FeatureType.Name.Substring(10));
         temp = bash - (temp * 10);
         if (temp < 1)
@@ -7226,7 +7223,7 @@ internal class SaveGame
             UpdateViewFlaggedAction.Set();
             UpdateDistancesFlaggedAction.Set();
         }
-        else if (Program.Rng.RandomLessThan(100) < Player.AbilityScores[Ability.Dexterity].DexTheftAvoidance + Player.ExperienceLevel)
+        else if (Program.Rng.RandomLessThan(100) < AbilityScores[Ability.Dexterity].DexTheftAvoidance + ExperienceLevel)
         {
             MsgPrint("The door holds firm.");
             more = true;
@@ -7234,7 +7231,7 @@ internal class SaveGame
         else
         {
             MsgPrint("You are off-balance.");
-            Player.TimedParalysis.AddTimer(2 + Program.Rng.RandomLessThan(2));
+            TimedParalysis.AddTimer(2 + Program.Rng.RandomLessThan(2));
         }
         return more;
     }
@@ -7348,10 +7345,10 @@ internal class SaveGame
     public void CallTheVoid()
     {
         // Make sure we're not next to a wall
-        if (Level.GridPassable(Player.MapY - 1, Player.MapX - 1) && Level.GridPassable(Player.MapY - 1, Player.MapX) &&
-            Level.GridPassable(Player.MapY - 1, Player.MapX + 1) && Level.GridPassable(Player.MapY, Player.MapX - 1) &&
-            Level.GridPassable(Player.MapY, Player.MapX + 1) && Level.GridPassable(Player.MapY + 1, Player.MapX - 1) &&
-            Level.GridPassable(Player.MapY + 1, Player.MapX) && Level.GridPassable(Player.MapY + 1, Player.MapX + 1))
+        if (Level.GridPassable(MapY - 1, MapX - 1) && Level.GridPassable(MapY - 1, MapX) &&
+            Level.GridPassable(MapY - 1, MapX + 1) && Level.GridPassable(MapY, MapX - 1) &&
+            Level.GridPassable(MapY, MapX + 1) && Level.GridPassable(MapY + 1, MapX - 1) &&
+            Level.GridPassable(MapY + 1, MapX) && Level.GridPassable(MapY + 1, MapX + 1))
         {
             // Fire area effect shards, mana, and nukes in all directions
             int i;
@@ -7380,13 +7377,13 @@ internal class SaveGame
         else
         {
             // We were too close to a wall, so earthquake instead
-            string cast = Player.BaseCharacterClass.SpellCastingType.CastVerb;
-            string spell = Player.BaseCharacterClass.SpellCastingType.SpellNoun;
+            string cast = BaseCharacterClass.SpellCastingType.CastVerb;
+            string spell = BaseCharacterClass.SpellCastingType.SpellNoun;
             MsgPrint($"You {cast} the {spell} too close to a wall!");
             MsgPrint("There is a loud explosion!");
-            DestroyArea(Player.MapY, Player.MapX, 20 + Player.ExperienceLevel);
+            DestroyArea(MapY, MapX, 20 + ExperienceLevel);
             MsgPrint("The dungeon collapses...");
-            Player.TakeHit(100 + Program.Rng.DieRoll(150), "a suicidal Call the Void");
+            TakeHit(100 + Program.Rng.DieRoll(150), "a suicidal Call the Void");
         }
     }
 
@@ -7401,23 +7398,23 @@ internal class SaveGame
     public bool CheckIfRacialPowerWorks(int minLevel, int cost, int useStat, int difficulty)
     {
         // If we don't have enough mana we'll use health instead
-        bool useHealth = Player.Mana < cost;
+        bool useHealth = Mana < cost;
         // Can't use it if we're too low level
-        if (Player.ExperienceLevel < minLevel)
+        if (ExperienceLevel < minLevel)
         {
             MsgPrint($"You need to attain level {minLevel} to use this power.");
             EnergyUse = 0;
             return false;
         }
         // Can't use it if we're confused
-        if (Player.TimedConfusion.TurnsRemaining != 0)
+        if (TimedConfusion.TurnsRemaining != 0)
         {
             MsgPrint("You are too confused to use this power.");
             EnergyUse = 0;
             return false;
         }
         // If we're about to kill ourselves, give us chance to back out
-        if (useHealth && Player.Health < cost)
+        if (useHealth && Health < cost)
         {
             if (!GetCheck("Really use the power in your weakened state? "))
             {
@@ -7426,14 +7423,14 @@ internal class SaveGame
             }
         }
         // Harder to use powers when you're stunned
-        if (Player.TimedStun.TurnsRemaining != 0)
+        if (TimedStun.TurnsRemaining != 0)
         {
-            difficulty += Player.TimedStun.TurnsRemaining;
+            difficulty += TimedStun.TurnsRemaining;
         }
         // Easier to use powers if you're higher level than you need to be
-        else if (Player.ExperienceLevel > minLevel)
+        else if (ExperienceLevel > minLevel)
         {
-            int levAdj = (Player.ExperienceLevel - minLevel) / 3;
+            int levAdj = (ExperienceLevel - minLevel) / 3;
             if (levAdj > 10)
             {
                 levAdj = 10;
@@ -7450,17 +7447,17 @@ internal class SaveGame
         // Reduce our health or mana
         if (useHealth)
         {
-            Player.TakeHit((cost / 2) + Program.Rng.DieRoll(cost / 2), "concentrating too hard");
+            TakeHit((cost / 2) + Program.Rng.DieRoll(cost / 2), "concentrating too hard");
         }
         else
         {
-            Player.Mana -= (cost / 2) + Program.Rng.DieRoll(cost / 2);
+            Mana -= (cost / 2) + Program.Rng.DieRoll(cost / 2);
         }
         // We'll need to redraw
         RedrawHpFlaggedAction.Set();
         RedrawManaFlaggedAction.Set();
         // Check to see if we were successful
-        if (Program.Rng.DieRoll(Player.AbilityScores[useStat].Innate) >=
+        if (Program.Rng.DieRoll(AbilityScores[useStat].Innate) >=
             (difficulty / 2) + Program.Rng.DieRoll(difficulty / 2))
         {
             return true;
@@ -7508,8 +7505,8 @@ internal class SaveGame
         mapCoordinate = null;
         for (int orderedDirection = 0; orderedDirection < 9; orderedDirection++)
         {
-            int yy = Player.MapY + Level.OrderedDirectionYOffset[orderedDirection];
-            int xx = Player.MapX + Level.OrderedDirectionXOffset[orderedDirection];
+            int yy = MapY + Level.OrderedDirectionYOffset[orderedDirection];
+            int xx = MapX + Level.OrderedDirectionXOffset[orderedDirection];
             // Get the index of first item in the tile that is a chest
             Item? chestItem = Level.ChestCheck(yy, xx);
             if (chestItem == null)
@@ -7546,8 +7543,8 @@ internal class SaveGame
         mapCoordinate = null;
         for (int orderedDirection = 0; orderedDirection < 9; orderedDirection++)
         {
-            int yy = Player.MapY + Level.OrderedDirectionYOffset[orderedDirection];
-            int xx = Player.MapX + Level.OrderedDirectionXOffset[orderedDirection];
+            int yy = MapY + Level.OrderedDirectionYOffset[orderedDirection];
+            int xx = MapX + Level.OrderedDirectionXOffset[orderedDirection];
             // We need to be aware of the door
             if (Level.Grid[yy][xx].TileFlags.IsClear(GridTile.PlayerMemorized))
             {
@@ -7584,8 +7581,8 @@ internal class SaveGame
         mapCoordinate = null;
         for (int orderedDirection = 0; orderedDirection < 9; orderedDirection++)
         {
-            int yy = Player.MapY + Level.OrderedDirectionYOffset[orderedDirection];
-            int xx = Player.MapX + Level.OrderedDirectionXOffset[orderedDirection];
+            int yy = MapY + Level.OrderedDirectionYOffset[orderedDirection];
+            int xx = MapX + Level.OrderedDirectionXOffset[orderedDirection];
             // We need to be aware of the trap
             if (Level.Grid[yy][xx].TileFlags.IsClear(GridTile.PlayerMemorized))
             {
@@ -7617,8 +7614,8 @@ internal class SaveGame
         mapCoordinate = null;
         for (int orderedDirection = 0; orderedDirection < 9; orderedDirection++)
         {
-            int yy = Player.MapY + Level.OrderedDirectionYOffset[orderedDirection];
-            int xx = Player.MapX + Level.OrderedDirectionXOffset[orderedDirection];
+            int yy = MapY + Level.OrderedDirectionYOffset[orderedDirection];
+            int xx = MapX + Level.OrderedDirectionXOffset[orderedDirection];
             // We must be aware of the door
             if (Level.Grid[yy][xx].TileFlags.IsClear(GridTile.PlayerMemorized))
             {
@@ -7787,14 +7784,14 @@ internal class SaveGame
         bool allowAdditionalDisarmAttempts = false;
         // Disarming a chest takes a turn
         EnergyUse = 100;
-        int i = Player.SkillDisarmTraps;
+        int i = SkillDisarmTraps;
         // Disarming is tricky when you can't see
-        if (Player.TimedBlindness.TurnsRemaining != 0 || Level.NoLight())
+        if (TimedBlindness.TurnsRemaining != 0 || Level.NoLight())
         {
             i /= 10;
         }
         // Disarming is tricky when confused
-        if (Player.TimedConfusion.TurnsRemaining != 0 || Player.TimedHallucinations.TurnsRemaining != 0)
+        if (TimedConfusion.TurnsRemaining != 0 || TimedHallucinations.TurnsRemaining != 0)
         {
             i /= 10;
         }
@@ -7823,7 +7820,7 @@ internal class SaveGame
         else if (Program.Rng.RandomLessThan(100) < j)
         {
             MsgPrint("You have disarmed the chest.");
-            Player.GainExperience(chestItem.TypeSpecificValue);
+            GainExperience(chestItem.TypeSpecificValue);
             chestItem.TypeSpecificValue = 0 - chestItem.TypeSpecificValue;
         }
         // If we failed to disarm it there's a chance it goes off
@@ -7854,14 +7851,14 @@ internal class SaveGame
         EnergyUse = 100;
         GridTile tile = Level.Grid[y][x];
         string trapName = tile.FeatureType.Description;
-        int i = Player.SkillDisarmTraps;
+        int i = SkillDisarmTraps;
         // Difficult, but possible, to disarm by feel
-        if (Player.TimedBlindness.TurnsRemaining != 0 || Level.NoLight())
+        if (TimedBlindness.TurnsRemaining != 0 || Level.NoLight())
         {
             i /= 10;
         }
         // Difficult to disarm when we're confused
-        if (Player.TimedConfusion.TurnsRemaining != 0 || Player.TimedHallucinations.TurnsRemaining != 0)
+        if (TimedConfusion.TurnsRemaining != 0 || TimedHallucinations.TurnsRemaining != 0)
         {
             i /= 10;
         }
@@ -7875,7 +7872,7 @@ internal class SaveGame
         if (Program.Rng.RandomLessThan(100) < j)
         {
             MsgPrint($"You have disarmed the {trapName}.");
-            Player.GainExperience(power);
+            GainExperience(power);
             tile.TileFlags.Clear(GridTile.PlayerMemorized);
             Level.RevertTileToBackground(y, x);
             MovePlayer(y, x, true);
@@ -7941,16 +7938,16 @@ internal class SaveGame
             cost = 1;
         }
         // Spend the mana if we can
-        if (cost <= Player.Mana)
+        if (cost <= Mana)
         {
             MsgPrint("You channel mana to power the effect.");
-            Player.Mana -= cost;
+            Mana -= cost;
             RedrawManaFlaggedAction.Set();
             return true;
         }
         // Use some mana in the attempt, even if we failed
         MsgPrint("You mana is insufficient to power the effect.");
-        Player.Mana -= Program.Rng.RandomLessThan(Player.Mana / 2);
+        Mana -= Program.Rng.RandomLessThan(Mana / 2);
         RedrawManaFlaggedAction.Set();
         return false;
     }
@@ -8015,8 +8012,8 @@ internal class SaveGame
     /// <param name="dontPickup"> Whether or not to skip picking up any objects we step on </param>
     private void MovePlayer(int direction, bool dontPickup)
     {
-        int newY = Player.MapY + Level.KeypadDirectionYOffset[direction];
-        int newX = Player.MapX + Level.KeypadDirectionXOffset[direction];
+        int newY = MapY + Level.KeypadDirectionYOffset[direction];
+        int newX = MapX + Level.KeypadDirectionXOffset[direction];
         MovePlayer(newY, newX, dontPickup);
     }
 
@@ -8026,7 +8023,7 @@ internal class SaveGame
         GridTile tile = Level.Grid[newY][newX];
         Monster monster = Level.Monsters[tile.MonsterIndex];
         // Check if we can pass through walls
-        if (Player.TimedEtherealness.TurnsRemaining != 0 || Player.Race.IsEthereal)
+        if (TimedEtherealness.TurnsRemaining != 0 || Race.IsEthereal)
         {
             canPassWalls = true;
             // Permanent features can't be passed through even if we could otherwise
@@ -8040,7 +8037,7 @@ internal class SaveGame
         if (tile.MonsterIndex != 0 && (monster.IsVisible || Level.GridPassable(newY, newX) || canPassWalls))
         {
             // Check if it's a friend, and if we are in a fit state to distinguish friend from foe
-            if (monster.SmFriendly && !(Player.TimedConfusion.TurnsRemaining != 0 || Player.TimedHallucinations.TurnsRemaining != 0 || !monster.IsVisible || Player.TimedStun.TurnsRemaining != 0) &&
+            if (monster.SmFriendly && !(TimedConfusion.TurnsRemaining != 0 || TimedHallucinations.TurnsRemaining != 0 || !monster.IsVisible || TimedStun.TurnsRemaining != 0) &&
                 (Level.GridPassable(newY, newX) || canPassWalls))
             {
                 // Wake up the monster, and track it
@@ -8052,14 +8049,14 @@ internal class SaveGame
                     HealthTrack(tile.MonsterIndex);
                 }
                 // If we can't see it then let us push past it and tell us what happened
-                else if (Level.GridPassable(Player.MapY, Player.MapX) || monster.Race.PassWall)
+                else if (Level.GridPassable(MapY, MapX) || monster.Race.PassWall)
                 {
                     MsgPrint($"You push past {monsterName}.");
-                    monster.MapY = Player.MapY;
-                    monster.MapX = Player.MapX;
-                    Level.Grid[Player.MapY][Player.MapX].MonsterIndex = tile.MonsterIndex;
+                    monster.MapY = MapY;
+                    monster.MapX = MapX;
+                    Level.Grid[MapY][MapX].MonsterIndex = tile.MonsterIndex;
                     tile.MonsterIndex = 0;
-                    Level.UpdateMonsterVisibility(Level.Grid[Player.MapY][Player.MapX].MonsterIndex, true);
+                    Level.UpdateMonsterVisibility(Level.Grid[MapY][MapX].MonsterIndex, true);
                 }
                 // If we couldn't push past it, tell us it was in the way
                 else
@@ -8089,7 +8086,7 @@ internal class SaveGame
             Disturb(false);
             // If we can't see it and haven't memories it, tell us what we bumped into
             if (tile.TileFlags.IsClear(GridTile.PlayerMemorized) &&
-                (Player.TimedBlindness.TurnsRemaining != 0 || tile.TileFlags.IsClear(GridTile.PlayerLit)))
+                (TimedBlindness.TurnsRemaining != 0 || tile.TileFlags.IsClear(GridTile.PlayerLit)))
             {
                 if (tile.FeatureType.Name == "Rubble")
                 {
@@ -8118,34 +8115,34 @@ internal class SaveGame
                 // If we're moving onto a border, change wilderness location
                 else if (tile.FeatureType.Name.Contains("Border"))
                 {
-                    if (Wilderness[Player.WildernessY][Player.WildernessX].Town != null)
+                    if (Wilderness[WildernessY][WildernessX].Town != null)
                     {
-                        CurTown = Wilderness[Player.WildernessY][Player.WildernessX].Town;
+                        CurTown = Wilderness[WildernessY][WildernessX].Town;
                         MsgPrint($"You stumble out of {CurTown.Name}.");
                     }
                     if (newY == 0)
                     {
-                        Player.MapY = Level.CurHgt - 2;
-                        Player.WildernessY--;
+                        MapY = Level.CurHgt - 2;
+                        WildernessY--;
                     }
                     if (newY == Level.CurHgt - 1)
                     {
-                        Player.MapY = 1;
-                        Player.WildernessY++;
+                        MapY = 1;
+                        WildernessY++;
                     }
                     if (newX == 0)
                     {
-                        Player.MapX = Level.CurWid - 2;
-                        Player.WildernessX--;
+                        MapX = Level.CurWid - 2;
+                        WildernessX--;
                     }
                     if (newX == Level.CurWid - 1)
                     {
-                        Player.MapX = 1;
-                        Player.WildernessX++;
+                        MapX = 1;
+                        WildernessX++;
                     }
-                    if (Wilderness[Player.WildernessY][Player.WildernessX].Town != null)
+                    if (Wilderness[WildernessY][WildernessX].Town != null)
                     {
-                        CurTown = Wilderness[Player.WildernessY][Player.WildernessX].Town;
+                        CurTown = Wilderness[WildernessY][WildernessX].Town;
                         MsgPrint($"You stumble into {CurTown.Name}.");
                         CurTown.Visited = true;
                     }
@@ -8173,7 +8170,7 @@ internal class SaveGame
                 if (tile.FeatureType.Name == "Rubble")
                 {
                     MsgPrint("There is rubble blocking your way.");
-                    if (!(Player.TimedConfusion.TurnsRemaining != 0 || Player.TimedStun.TurnsRemaining != 0 || Player.TimedHallucinations.TurnsRemaining != 0))
+                    if (!(TimedConfusion.TurnsRemaining != 0 || TimedStun.TurnsRemaining != 0 || TimedHallucinations.TurnsRemaining != 0))
                     {
                         EnergyUse = 0;
                     }
@@ -8199,35 +8196,35 @@ internal class SaveGame
                 // Again, walking onto a border means a change of wilderness grid
                 else if (tile.FeatureType.Name.Contains("Border"))
                 {
-                    if (Wilderness[Player.WildernessY][Player.WildernessX].Town != null)
+                    if (Wilderness[WildernessY][WildernessX].Town != null)
                     {
-                        CurTown = Wilderness[Player.WildernessY][Player.WildernessX].Town;
+                        CurTown = Wilderness[WildernessY][WildernessX].Town;
                         MsgPrint($"You leave {CurTown.Name}.");
                         CurTown.Visited = true;
                     }
                     if (newY == 0)
                     {
-                        Player.MapY = Level.CurHgt - 2;
-                        Player.WildernessY--;
+                        MapY = Level.CurHgt - 2;
+                        WildernessY--;
                     }
                     if (newY == Level.CurHgt - 1)
                     {
-                        Player.MapY = 1;
-                        Player.WildernessY++;
+                        MapY = 1;
+                        WildernessY++;
                     }
                     if (newX == 0)
                     {
-                        Player.MapX = Level.CurWid - 2;
-                        Player.WildernessX--;
+                        MapX = Level.CurWid - 2;
+                        WildernessX--;
                     }
                     if (newX == Level.CurWid - 1)
                     {
-                        Player.MapX = 1;
-                        Player.WildernessX++;
+                        MapX = 1;
+                        WildernessX++;
                     }
-                    if (Wilderness[Player.WildernessY][Player.WildernessX].Town != null)
+                    if (Wilderness[WildernessY][WildernessX].Town != null)
                     {
-                        CurTown = Wilderness[Player.WildernessY][Player.WildernessX].Town;
+                        CurTown = Wilderness[WildernessY][WildernessX].Town;
                         MsgPrint($"You enter {CurTown.Name}.");
                         CurTown.Visited = true;
                     }
@@ -8247,7 +8244,7 @@ internal class SaveGame
                 else
                 {
                     MsgPrint($"There is a {tile.FeatureType.Description} blocking your way.");
-                    if (!(Player.TimedConfusion.TurnsRemaining != 0 || Player.TimedStun.TurnsRemaining != 0 || Player.TimedHallucinations.TurnsRemaining != 0))
+                    if (!(TimedConfusion.TurnsRemaining != 0 || TimedStun.TurnsRemaining != 0 || TimedHallucinations.TurnsRemaining != 0))
                     {
                         EnergyUse = 0;
                     }
@@ -8257,7 +8254,7 @@ internal class SaveGame
             return;
         }
         // Assuming we didn't bump into anything, maybe we can actually move
-        bool oldTrapsDetected = Level.Grid[Player.MapY][Player.MapX].TileFlags.IsSet(GridTile.TrapsDetected);
+        bool oldTrapsDetected = Level.Grid[MapY][MapX].TileFlags.IsSet(GridTile.TrapsDetected);
         bool newTrapsDetected = Level.Grid[newY][newX].TileFlags.IsSet(GridTile.TrapsDetected);
         // If we're moving into or out of an area where we've detected traps, remember to redraw
         // the notification
@@ -8268,7 +8265,7 @@ internal class SaveGame
         // If we're leaving an area where we've detected traps at a run, then stop running
         if (Running != 0 && oldTrapsDetected && !newTrapsDetected)
         {
-            if (!(Player.TimedConfusion.TurnsRemaining != 0 || Player.TimedStun.TurnsRemaining != 0 || Player.TimedHallucinations.TurnsRemaining != 0))
+            if (!(TimedConfusion.TurnsRemaining != 0 || TimedStun.TurnsRemaining != 0 || TimedHallucinations.TurnsRemaining != 0))
             {
                 EnergyUse = 0;
             }
@@ -8276,15 +8273,15 @@ internal class SaveGame
             return;
         }
         // We've run out of things that could prevent us moving, so do the move
-        int oldY = Player.MapY;
-        int oldX = Player.MapX;
-        Player.MapY = newY;
-        Player.MapX = newX;
+        int oldY = MapY;
+        int oldX = MapX;
+        MapY = newY;
+        MapX = newX;
         // Redraw our old and new locations
-        Level.RedrawSingleLocation(Player.MapY, Player.MapX);
+        Level.RedrawSingleLocation(MapY, MapX);
         Level.RedrawSingleLocation(oldY, oldX);
         // Recenter the screen if we have to
-        Player.RecenterScreenAroundPlayer();
+        RecenterScreenAroundPlayer();
         // We'll need to update and redraw various things
         UpdateScentFlaggedAction.Set();
         UpdateLightFlaggedAction.Set();
@@ -8292,11 +8289,11 @@ internal class SaveGame
         UpdateDistancesFlaggedAction.Set();
         RedrawMapFlaggedAction.Set();
         // If we're not actively searching, then have a chance of doing it passively
-        if (Player.SkillSearchFrequency >= 50 || 0 == Program.Rng.RandomLessThan(50 - Player.SkillSearchFrequency))
+        if (SkillSearchFrequency >= 50 || 0 == Program.Rng.RandomLessThan(50 - SkillSearchFrequency))
         {
             RunScript<SearchScript>();
         }        
-        else if (Player.IsSearching) // If we're actively searching then always do it
+        else if (IsSearching) // If we're actively searching then always do it
         {
             RunScript<SearchScript>();
         }
@@ -8313,7 +8310,7 @@ internal class SaveGame
         {
             Disturb(false);
             MsgPrint("You found a trap!");
-            Level.PickTrap(Player.MapY, Player.MapX);
+            Level.PickTrap(MapY, MapX);
             StepOnTrap();
         }
         // If it's a trap we couldn't (or didn't) disarm, then activate it
@@ -8346,14 +8343,14 @@ internal class SaveGame
         else if (tile.FeatureType.Name != "LockedDoor0")
         {
             // Our disarm traps skill doubles up as a lockpicking skill
-            int i = Player.SkillDisarmTraps;
+            int i = SkillDisarmTraps;
             // Hard to pick locks when you can't see
-            if (Player.TimedBlindness.TurnsRemaining != 0 || Level.NoLight())
+            if (TimedBlindness.TurnsRemaining != 0 || Level.NoLight())
             {
                 i /= 10;
             }
             // Hard to pick locks when you're confused or hallucinating
-            if (Player.TimedConfusion.TurnsRemaining != 0 || Player.TimedHallucinations.TurnsRemaining != 0)
+            if (TimedConfusion.TurnsRemaining != 0 || TimedHallucinations.TurnsRemaining != 0)
             {
                 i /= 10;
             }
@@ -8374,7 +8371,7 @@ internal class SaveGame
                 UpdateViewFlaggedAction.Set();
                 PlaySound(SoundEffectEnum.LockpickSuccess);
                 // Picking a lock gains you an experience point
-                Player.GainExperience(1);
+                GainExperience(1);
             }
             else
             {
@@ -8402,7 +8399,7 @@ internal class SaveGame
     /// </param>
     public void PickUpItems(bool pickup)
     {
-        GridTile tile = Level.Grid[Player.MapY][Player.MapX];
+        GridTile tile = Level.Grid[MapY][MapX];
         foreach (Item item in tile.Items.ToArray()) // We need a ToArray to prevent the collection from being modified error
         {
             string itemName = item.Description(true, 3);
@@ -8411,7 +8408,7 @@ internal class SaveGame
             if (item.Category == ItemTypeEnum.Gold)
             {
                 MsgPrint($"You collect {item.TypeSpecificValue} gold pieces worth of {itemName}.");
-                Player.Gold += item.TypeSpecificValue;
+                Gold += item.TypeSpecificValue;
                 RedrawGoldFlaggedAction.Set();
                 Level.DeleteObject(item);
             }
@@ -8429,14 +8426,14 @@ internal class SaveGame
                     MsgPrint($"You stomp on {itemName}.");
                 }
                 // If we can't carry the item, let us know
-                else if (!Player.InvenCarryOkay(item))
+                else if (!InvenCarryOkay(item))
                 {
                     MsgPrint($"You have no room for {itemName}.");
                 }
                 else
                 {
                     // Actually pick up the item
-                    int slot = Player.InvenCarry(item);
+                    int slot = InvenCarry(item);
                     Item? inventoryItem = GetInventoryItem(slot);
                     if (inventoryItem == null)
                     {
@@ -8470,7 +8467,7 @@ internal class SaveGame
         bool noExtra = false;
         Disturb(false);
         // If we're a rogue then we can backstab monsters
-        if (Player.BaseCharacterClass.ID == CharacterClass.Rogue)
+        if (BaseCharacterClass.ID == CharacterClass.Rogue)
         {
             if (monster.SleepLevel != 0 && monster.IsVisible)
             {
@@ -8491,30 +8488,30 @@ internal class SaveGame
             HealthTrack(tile.MonsterIndex);
         }
         // if the monster is our friend and we're not confused, we can avoid hitting it
-        if (monster.SmFriendly && !(Player.TimedStun.TurnsRemaining != 0 || Player.TimedConfusion.TurnsRemaining != 0 || Player.TimedHallucinations.TurnsRemaining != 0 || !monster.IsVisible))
+        if (monster.SmFriendly && !(TimedStun.TurnsRemaining != 0 || TimedConfusion.TurnsRemaining != 0 || TimedHallucinations.TurnsRemaining != 0 || !monster.IsVisible))
         {
             MsgPrint($"You stop to avoid hitting {monsterName}.");
             return;
         }
         // Can't attack if we're afraid
-        if (Player.TimedFear.TurnsRemaining != 0)
+        if (TimedFear.TurnsRemaining != 0)
         {
             MsgPrint(monster.IsVisible ? $"You are too afraid to attack {monsterName}!" : "There is something scary in your way!");
             return;
         }
-        int bonus = Player.AttackBonus;
+        int bonus = AttackBonus;
         bool chaosEffect = false;
         Item? meleeItem = GetInventoryItem(InventorySlot.MeleeWeapon);
         if (meleeItem != null)
         {
             bonus += meleeItem.BonusToHit;
         }
-        int chance = Player.SkillMelee + (bonus * Constants.BthPlusAdj);
+        int chance = SkillMelee + (bonus * Constants.BthPlusAdj);
         // Attacking uses a full turn
         EnergyUse = 100;
         int num = 0;
         // We have a number of attacks per round
-        while (num++ < Player.MeleeAttacksPerRound)
+        while (num++ < MeleeAttacksPerRound)
         {
             // Check if we hit
             if (PlayerCheckHitOnMonster(chance, race.ArmourClass, monster.IsVisible))
@@ -8523,7 +8520,7 @@ internal class SaveGame
                 // Tell the player they hit it with the appropriate message
                 if (!(backstab || stabFleeing))
                 {
-                    if (!((Player.BaseCharacterClass.ID == CharacterClass.Monk || Player.BaseCharacterClass.ID == CharacterClass.Mystic) && MartialArtistEmptyHands()))
+                    if (!((BaseCharacterClass.ID == CharacterClass.Monk || BaseCharacterClass.ID == CharacterClass.Mystic) && MartialArtistEmptyHands()))
                     {
                         MsgPrint($"You hit {monsterName}.");
                     }
@@ -8561,7 +8558,7 @@ internal class SaveGame
                     }
                 }
                 // If we're a martial artist then we have special attacks
-                if ((Player.BaseCharacterClass.ID == CharacterClass.Monk || Player.BaseCharacterClass.ID == CharacterClass.Mystic) && MartialArtistEmptyHands())
+                if ((BaseCharacterClass.ID == CharacterClass.Monk || BaseCharacterClass.ID == CharacterClass.Mystic) && MartialArtistEmptyHands())
                 {
                     int specialEffect = 0;
                     int stunEffect = 0;
@@ -8587,18 +8584,18 @@ internal class SaveGame
                         resistStun += 88;
                     }
                     // Have a number of attempts to choose a martial arts attack
-                    for (times = 0; times < (Player.ExperienceLevel < 7 ? 1 : Player.ExperienceLevel / 7); times++)
+                    for (times = 0; times < (ExperienceLevel < 7 ? 1 : ExperienceLevel / 7); times++)
                     {
                         // Choose an attack randomly, but reject it and re-choose if it's too
                         // high level or we fail a chance roll
                         do
                         {
                             martialArtsAttack = SingletonRepository.MartialArtsAttacks.ToWeightedRandom().Choose();
-                        } while (martialArtsAttack.MinLevel > Player.ExperienceLevel || Program.Rng.DieRoll(Player.ExperienceLevel) < martialArtsAttack.Chance);
+                        } while (martialArtsAttack.MinLevel > ExperienceLevel || Program.Rng.DieRoll(ExperienceLevel) < martialArtsAttack.Chance);
                         // We've chosen an attack, use it if it's better than the previous
                         // choice (unless we're stunned or confused in which case we're stuck
                         // with the weakest attack type
-                        if (martialArtsAttack.MinLevel > oldMartialArtsAttack.MinLevel && !(Player.TimedStun.TurnsRemaining != 0 || Player.TimedConfusion.TurnsRemaining != 0))
+                        if (martialArtsAttack.MinLevel > oldMartialArtsAttack.MinLevel && !(TimedStun.TurnsRemaining != 0 || TimedConfusion.TurnsRemaining != 0))
                         {
                             oldMartialArtsAttack = martialArtsAttack;
                         }
@@ -8646,18 +8643,18 @@ internal class SaveGame
                         MsgPrint(string.Format(martialArtsAttack.Desc, monsterName));
                     }
                     // It might be a critical hit
-                    totalDamage = PlayerCriticalMelee(Player.ExperienceLevel * Program.Rng.DieRoll(10), martialArtsAttack.MinLevel, totalDamage);
+                    totalDamage = PlayerCriticalMelee(ExperienceLevel * Program.Rng.DieRoll(10), martialArtsAttack.MinLevel, totalDamage);
                     // Make a groin attack into a stunning attack
-                    if (specialEffect == Constants.MaKnee && totalDamage + Player.DamageBonus < monster.Health)
+                    if (specialEffect == Constants.MaKnee && totalDamage + DamageBonus < monster.Health)
                     {
                         MsgPrint($"{monsterName} moans in agony!");
                         stunEffect = 7 + Program.Rng.DieRoll(13);
                         resistStun /= 3;
                     }
                     // Slow if we had a knee attack
-                    else if (specialEffect == Constants.MaSlow && totalDamage + Player.DamageBonus < monster.Health)
+                    else if (specialEffect == Constants.MaSlow && totalDamage + DamageBonus < monster.Health)
                     {
-                        if (!race.Unique && Program.Rng.DieRoll(Player.ExperienceLevel) > race.Level &&
+                        if (!race.Unique && Program.Rng.DieRoll(ExperienceLevel) > race.Level &&
                             monster.Speed > 60)
                         {
                             MsgPrint($"{monsterName} starts limping slower.");
@@ -8665,9 +8662,9 @@ internal class SaveGame
                         }
                     }
                     // Stun if we had a stunning attack
-                    if (stunEffect != 0 && totalDamage + Player.DamageBonus < monster.Health)
+                    if (stunEffect != 0 && totalDamage + DamageBonus < monster.Health)
                     {
-                        if (Player.ExperienceLevel > Program.Rng.DieRoll(race.Level + resistStun + 10))
+                        if (ExperienceLevel > Program.Rng.DieRoll(race.Level + resistStun + 10))
                         {
                             MsgPrint(monster.StunLevel != 0 ? $"{monsterName} is more stunned." : $"{monsterName} is stunned.");
                             monster.StunLevel += stunEffect;
@@ -8683,14 +8680,14 @@ internal class SaveGame
                     // Extra damage for backstabbing
                     if (backstab)
                     {
-                        totalDamage *= 3 + (Player.ExperienceLevel / 40);
+                        totalDamage *= 3 + (ExperienceLevel / 40);
                     }
                     else if (stabFleeing)
                     {
                         totalDamage = 3 * totalDamage / 2;
                     }
                     // We might need to do an earthquake
-                    if ((Player.HasQuakeWeapon && (totalDamage > 50 || Program.Rng.DieRoll(7) == 1)) || (chaosEffect && Program.Rng.DieRoll(250) == 1))
+                    if ((HasQuakeWeapon && (totalDamage > 50 || Program.Rng.DieRoll(7) == 1)) || (chaosEffect && Program.Rng.DieRoll(250) == 1))
                     {
                         doQuake = true;
                         chaosEffect = false;
@@ -8718,7 +8715,7 @@ internal class SaveGame
                     totalDamage += meleeItem.BonusDamage;
                 }
                 // Add bonus damage for strength etc.
-                totalDamage += Player.DamageBonus;
+                totalDamage += DamageBonus;
                 // Can't do negative damage
                 if (totalDamage < 0)
                 {
@@ -8761,15 +8758,15 @@ internal class SaveGame
                             {
                                 MsgPrint($"Your weapon drains life from {monsterName}!");
                             }
-                            Player.RestoreHealth(drainHeal);
+                            RestoreHealth(drainHeal);
                         }
                     }
                 }
                 // We might have a confusing touch (or have this effect from a chaos blade)
-                if (Player.HasConfusingTouch || (chaosEffect && Program.Rng.DieRoll(10) != 1))
+                if (HasConfusingTouch || (chaosEffect && Program.Rng.DieRoll(10) != 1))
                 {
                     // If it wasn't from a chaos blade, cancel the confusing touch and let us know
-                    Player.HasConfusingTouch = false;
+                    HasConfusingTouch = false;
                     if (!chaosEffect)
                     {
                         MsgPrint("Your hands stop glowing.");
@@ -8792,7 +8789,7 @@ internal class SaveGame
                     else
                     {
                         MsgPrint($"{monsterName} appears confused.");
-                        monster.ConfusionLevel += 10 + (Program.Rng.RandomLessThan(Player.ExperienceLevel) / 5);
+                        monster.ConfusionLevel += 10 + (Program.Rng.RandomLessThan(ExperienceLevel) / 5);
                     }
                 }
                 // A chaos blade might teleport the monster away
@@ -8838,7 +8835,7 @@ internal class SaveGame
             }
         }
         // Only make extra attacks if the monster is still there
-        foreach (Mutation naturalAttack in Player.Dna.NaturalAttacks)
+        foreach (Mutation naturalAttack in Dna.NaturalAttacks)
         {
             if (!noExtra && tile.MonsterIndex != 0)
             {
@@ -8852,7 +8849,7 @@ internal class SaveGame
         }
         if (doQuake)
         {
-            Earthquake(Player.MapY, Player.MapX, 10);
+            Earthquake(MapY, MapX, 10);
         }
     }
 
@@ -8895,7 +8892,7 @@ internal class SaveGame
     public int PlayerCriticalRanged(int weight, int plus, int damage)
     {
         // Chance of a critical is based on weight, level, and plusses
-        int i = weight + ((Player.AttackBonus + plus) * 4) + (Player.ExperienceLevel * 2);
+        int i = weight + ((AttackBonus + plus) * 4) + (ExperienceLevel * 2);
         if (Program.Rng.DieRoll(5000) <= i)
         {
             int k = weight + Program.Rng.DieRoll(500);
@@ -8930,7 +8927,7 @@ internal class SaveGame
         if (direction != 0)
         {
             // Check if we can actually run in that direction
-            if (SeeWall(direction, Player.MapY, Player.MapX))
+            if (SeeWall(direction, MapY, MapX))
             {
                 MsgPrint("You cannot run in that direction.");
                 Disturb(false);
@@ -8995,7 +8992,7 @@ internal class SaveGame
         List<Spell> okaySpells = new List<Spell>();
         foreach (Spell spell in spellBook.Factory.Spells)
         {
-            if (Player.SpellOkay(spell, known))
+            if (SpellOkay(spell, known))
             {
                 okaySpells.Add(spell);
             }
@@ -9015,7 +9012,7 @@ internal class SaveGame
         {
             return false;
         }
-        string spellNoun = Player.BaseCharacterClass.SpellCastingType.SpellNoun;
+        string spellNoun = BaseCharacterClass.SpellCastingType.SpellNoun;
         ScreenBuffer? savedScreen = null;
         string outVal = $"({spellNoun}s {0.IndexToLetter()}-{(okaySpells.Length - 1).IndexToLetter()}, *=List, ESC=exit) {prompt} which {spellNoun}? ";
         while (selectedSpell == null && GetCom(outVal, out char choice) && !Shutdown)
@@ -9025,7 +9022,7 @@ internal class SaveGame
                 if (savedScreen == null)
                 {
                     savedScreen = Screen.Clone();
-                    Player.PrintSpells(okaySpells, 1, 20);
+                    PrintSpells(okaySpells, 1, 20);
                 }
                 else
                 {
@@ -9045,7 +9042,7 @@ internal class SaveGame
                 continue;
             }
             Spell spell = okaySpells[i];
-            if (!Player.SpellOkay(spell, known))
+            if (!SpellOkay(spell, known))
             {
                 MsgPrint($"You may not {prompt} that {spellNoun}.");
                 continue;
@@ -9069,15 +9066,15 @@ internal class SaveGame
 
     public void DoToggleSearch()
     {
-        if (Player.IsSearching)
+        if (IsSearching)
         {
-            Player.IsSearching = false;
+            IsSearching = false;
             UpdateBonusesFlaggedAction.Set();
             RedrawStateFlaggedAction.Set();
         }
         else
         {
-            Player.IsSearching = true;
+            IsSearching = true;
             UpdateBonusesFlaggedAction.Set();
             RedrawStateFlaggedAction.Set();
             RedrawSpeedFlaggedAction.Set();
@@ -9114,7 +9111,7 @@ internal class SaveGame
         // Thrown distance is based on the weight of the missile
         int multiplier = 10 + (2 * (damageMultiplier - 1));
         int divider = missile.Weight > 10 ? missile.Weight : 10;
-        int throwDistance = (Player.AbilityScores[Ability.Strength].StrAttackSpeedComponent + 20) * multiplier / divider;
+        int throwDistance = (AbilityScores[Ability.Strength].StrAttackSpeedComponent + 20) * multiplier / divider;
         if (throwDistance > 10)
         {
             throwDistance = 10;
@@ -9122,21 +9119,21 @@ internal class SaveGame
         // Work out the damage done
         int damage = Program.Rng.DiceRoll(missile.DamageDice, missile.DamageDiceSides) + missile.BonusDamage;
         damage *= damageMultiplier;
-        int chance = Player.SkillThrowing + (Player.AttackBonus * Constants.BthPlusAdj);
+        int chance = SkillThrowing + (AttackBonus * Constants.BthPlusAdj);
         // Throwing something always uses a full turn, even if you can make multiple missile attacks
         EnergyUse = 100;
-        int y = Player.MapY;
-        int x = Player.MapX;
-        int targetX = Player.MapX + (99 * Level.KeypadDirectionXOffset[dir]);
-        int targetY = Player.MapY + (99 * Level.KeypadDirectionYOffset[dir]);
+        int y = MapY;
+        int x = MapX;
+        int targetX = MapX + (99 * Level.KeypadDirectionXOffset[dir]);
+        int targetY = MapY + (99 * Level.KeypadDirectionYOffset[dir]);
         if (dir == 5 && TargetOkay())
         {
             targetX = TargetCol;
             targetY = TargetRow;
         }
         HandleStuff();
-        int newY = Player.MapY;
-        int newX = Player.MapX;
+        int newY = MapY;
+        int newX = MapX;
         bool hitBody = false;
         // Send the thrown object in the right direction one square at a time
         for (int curDis = 0; curDis <= throwDistance;)
@@ -9146,7 +9143,7 @@ internal class SaveGame
             {
                 break;
             }
-            Level.MoveOneStepTowards(out newY, out newX, y, x, Player.MapY, Player.MapX, targetY, targetX);
+            Level.MoveOneStepTowards(out newY, out newX, y, x, MapY, MapX, targetY, targetX);
             // If we hit a wall or something stop moving
             if (!Level.GridPassable(newY, newX))
             {
@@ -9282,18 +9279,18 @@ internal class SaveGame
         // Standing still takes a turn
         EnergyUse = 100;
         // Periodically search if we're not actively in search mode
-        if (Player.SkillSearchFrequency >= 50 || 0 == Program.Rng.RandomLessThan(50 - Player.SkillSearchFrequency))
+        if (SkillSearchFrequency >= 50 || 0 == Program.Rng.RandomLessThan(50 - SkillSearchFrequency))
         {
             RunScript<SearchScript>();
         }
-        else if (Player.IsSearching) // Always search if we are actively in search mode
+        else if (IsSearching) // Always search if we are actively in search mode
         {
             RunScript<SearchScript>();
         }
         // Pick up items if we should
         PickUpItems(pickup);
         // If we're in a shop doorway, enter the shop
-        GridTile tile = Level.Grid[Player.MapY][Player.MapX];
+        GridTile tile = Level.Grid[MapY][MapX];
         if (tile.FeatureType.IsShop)
         {
             Disturb(false);
@@ -9400,7 +9397,7 @@ internal class SaveGame
             }
         }
         // We've finished, so snap back to the player's location
-        Player.RecenterScreenAroundPlayer();
+        RecenterScreenAroundPlayer();
         UpdateMonstersFlaggedAction.Set();
         RedrawMapFlaggedAction.Set();
         HandleStuff();
@@ -9437,14 +9434,14 @@ internal class SaveGame
         // Dropping things takes half a turn
         EnergyUse = 50;
         // Drop it
-        Player.InvenDrop(item, amount);
+        InvenDrop(item, amount);
         RedrawEquippyFlaggedAction.Set();
     }
 
     public void DoCmdRun()
     {
         // Can't run if we're confused
-        if (Player.TimedConfusion.TurnsRemaining != 0)
+        if (TimedConfusion.TurnsRemaining != 0)
         {
             MsgPrint("You are too confused!");
             return;
@@ -9516,13 +9513,13 @@ internal class SaveGame
             // If we need to say where we are, do so
             if (!feelingOnly)
             {
-                if (Wilderness[Player.WildernessY][Player.WildernessX].Town != null)
+                if (Wilderness[WildernessY][WildernessX].Town != null)
                 {
                     MsgPrint($"You are in {CurTown.Name}.");
                 }
-                else if (Wilderness[Player.WildernessY][Player.WildernessX].Dungeon != null)
+                else if (Wilderness[WildernessY][WildernessX].Dungeon != null)
                 {
-                    MsgPrint($"You are outside {Wilderness[Player.WildernessY][Player.WildernessX].Dungeon.Name}.");
+                    MsgPrint($"You are outside {Wilderness[WildernessY][WildernessX].Dungeon.Name}.");
                 }
                 else
                 {
@@ -9545,7 +9542,7 @@ internal class SaveGame
         if (Level.DangerFeeling == 1 || Level.TreasureFeeling == 1)
         {
             string message = DangerFeelingText[1];
-            MsgPrint(Player.GameTime.LevelFeel ? message : DangerFeelingText[0]);
+            MsgPrint(GameTime.LevelFeel ? message : DangerFeelingText[0]);
         }
         else
         {
@@ -9556,7 +9553,7 @@ internal class SaveGame
                 conjunction = ", but ";
             }
             string message = DangerFeelingText[Level.DangerFeeling] + conjunction + TreasureFeelingText[Level.TreasureFeeling];
-            MsgPrint(Player.GameTime.LevelFeel ? message : DangerFeelingText[0]);
+            MsgPrint(GameTime.LevelFeel ? message : DangerFeelingText[0]);
         }
     }
 
@@ -9578,7 +9575,7 @@ internal class SaveGame
         int targetX;
         GridTile tile;
         // Can't summon something if we're already standing on something
-        if (Level.Grid[Player.MapY][Player.MapX].Items.Count > 0)
+        if (Level.Grid[MapY][MapX].Items.Count > 0)
         {
             MsgPrint("You can't fetch when you're already standing on something.");
             return;
@@ -9589,7 +9586,7 @@ internal class SaveGame
             targetX = TargetCol;
             targetY = TargetRow;
             // Check the range
-            if (Level.Distance(Player.MapY, Player.MapX, targetY, targetX) > Constants.MaxRange)
+            if (Level.Distance(MapY, MapX, targetY, targetX) > Constants.MaxRange)
             {
                 MsgPrint("You can't fetch something that far away!");
                 return;
@@ -9605,15 +9602,15 @@ internal class SaveGame
         else
         {
             // We have a direction, so move along it until we find an item
-            targetY = Player.MapY;
-            targetX = Player.MapX;
+            targetY = MapY;
+            targetX = MapX;
             do
             {
                 targetY += Level.KeypadDirectionYOffset[dir];
                 targetX += Level.KeypadDirectionXOffset[dir];
                 tile = Level.Grid[targetY][targetX];
                 // Stop if we hit max range or we're blocked by something
-                if (Level.Distance(Player.MapY, Player.MapX, targetY, targetX) > Constants.MaxRange || !Level.GridPassable(targetY, targetX))
+                if (Level.Distance(MapY, MapX, targetY, targetX) > Constants.MaxRange || !Level.GridPassable(targetY, targetX))
                 {
                     return;
                 }
@@ -9627,11 +9624,11 @@ internal class SaveGame
             return;
         }
         // Remove the entire item stack from the tile and move it to the player's tile
-        Level.Grid[Player.MapY][Player.MapX].Items.Add(item);
+        Level.Grid[MapY][MapX].Items.Add(item);
         tile.Items.Remove(item);
-        item.Y = Player.MapY;
-        item.X = Player.MapX;
-        Level.NoteSpot(Player.MapY, Player.MapX);
+        item.Y = MapY;
+        item.X = MapX;
+        Level.NoteSpot(MapY, MapX);
         RedrawMapFlaggedAction.Set();
     }
 
@@ -9650,7 +9647,7 @@ internal class SaveGame
         // Trees are easy to chop down
         if (tile.FeatureType.IsTree)
         {
-            if (Player.SkillDigging > 40 + Program.Rng.RandomLessThan(100) && RemoveTileViaTunnelling(y, x))
+            if (SkillDigging > 40 + Program.Rng.RandomLessThan(100) && RemoveTileViaTunnelling(y, x))
             {
                 MsgPrint($"You have chopped down the {tile.FeatureType.Description}.");
             }
@@ -9663,7 +9660,7 @@ internal class SaveGame
         // Pillars are a bit easier than walls
         else if (tile.FeatureType.Name == "Pillar")
         {
-            if (Player.SkillDigging > 40 + Program.Rng.RandomLessThan(300) && RemoveTileViaTunnelling(y, x))
+            if (SkillDigging > 40 + Program.Rng.RandomLessThan(300) && RemoveTileViaTunnelling(y, x))
             {
                 MsgPrint("You have broken down the pillar.");
             }
@@ -9686,7 +9683,7 @@ internal class SaveGame
         // It's a wall, so we tunnel normally
         else if (tile.FeatureType.Name.Contains("Wall"))
         {
-            if (Player.SkillDigging > 40 + Program.Rng.RandomLessThan(1600) && RemoveTileViaTunnelling(y, x))
+            if (SkillDigging > 40 + Program.Rng.RandomLessThan(1600) && RemoveTileViaTunnelling(y, x))
             {
                 MsgPrint("You have finished the tunnel.");
             }
@@ -9713,11 +9710,11 @@ internal class SaveGame
             // Magma needs a higher tunneling skill than quartz
             if (isMagma)
             {
-                okay = Player.SkillDigging > 20 + Program.Rng.RandomLessThan(800);
+                okay = SkillDigging > 20 + Program.Rng.RandomLessThan(800);
             }
             else
             {
-                okay = Player.SkillDigging > 10 + Program.Rng.RandomLessThan(400);
+                okay = SkillDigging > 10 + Program.Rng.RandomLessThan(400);
             }
             // Do the actual tunnelling
             if (okay && RemoveTileViaTunnelling(y, x))
@@ -9747,7 +9744,7 @@ internal class SaveGame
         // Rubble is easy to tunnel through
         else if (tile.FeatureType.Name == "Rubble")
         {
-            if (Player.SkillDigging > Program.Rng.RandomLessThan(200) && RemoveTileViaTunnelling(y, x))
+            if (SkillDigging > Program.Rng.RandomLessThan(200) && RemoveTileViaTunnelling(y, x))
             {
                 MsgPrint("You have removed the rubble.");
                 // 10% chance of finding something
@@ -9810,14 +9807,14 @@ internal class SaveGame
         // Most doors are locked, so try to pick the lock
         else if (!tile.FeatureType.Name.Contains("0"))
         {
-            int skill = Player.SkillDisarmTraps;
+            int skill = SkillDisarmTraps;
             // Lockpicking is hard in the dark
-            if (Player.TimedBlindness.TurnsRemaining != 0 || Level.NoLight())
+            if (TimedBlindness.TurnsRemaining != 0 || Level.NoLight())
             {
                 skill /= 10;
             }
             // Lockpicking is hard when you're confused
-            if (Player.TimedConfusion.TurnsRemaining != 0 || Player.TimedHallucinations.TurnsRemaining != 0)
+            if (TimedConfusion.TurnsRemaining != 0 || TimedHallucinations.TurnsRemaining != 0)
             {
                 skill /= 10;
             }
@@ -9836,7 +9833,7 @@ internal class SaveGame
                 UpdateLightFlaggedAction.Set();
                 UpdateViewFlaggedAction.Set();
                 PlaySound(SoundEffectEnum.LockpickSuccess);
-                Player.GainExperience(1);
+                GainExperience(1);
             }
             // If we failed, simply let us know
             else
@@ -9893,7 +9890,7 @@ internal class SaveGame
     /// <returns> The damage total modified for a critical hit </returns>
     private int PlayerCriticalMelee(int weight, int plus, int damage)
     {
-        int i = weight + ((Player.AttackBonus + plus) * 5) + (Player.ExperienceLevel * 3);
+        int i = weight + ((AttackBonus + plus) * 5) + (ExperienceLevel * 3);
         if (Program.Rng.DieRoll(5000) <= i)
         {
             int k = weight + Program.Rng.DieRoll(650);
@@ -9945,8 +9942,8 @@ internal class SaveGame
         string attackDescription = mutation.AttackDescription;
         string monsterName = monster.Name;
         // See if the player hit the monster
-        int bonus = Player.AttackBonus;
-        int chance = Player.SkillMelee + (bonus * Constants.BthPlusAdj);
+        int bonus = AttackBonus;
+        int chance = SkillMelee + (bonus * Constants.BthPlusAdj);
         if (PlayerCheckHitOnMonster(chance, race.ArmourClass, monster.IsVisible))
         {
             // It was a hit, so let the player know
@@ -9954,8 +9951,8 @@ internal class SaveGame
             MsgPrint($"You hit {monsterName} with your {attackDescription}.");
             // Roll the damage, with possible critical damage
             int damage = Program.Rng.DiceRoll(damageDice, damageSides);
-            damage = PlayerCriticalMelee(effectiveWeight, Player.AttackBonus, damage);
-            damage += Player.DamageBonus;
+            damage = PlayerCriticalMelee(effectiveWeight, AttackBonus, damage);
+            damage += DamageBonus;
             // Can't have negative damage
             if (damage < 0)
             {
@@ -10027,14 +10024,14 @@ internal class SaveGame
         int damage;
         string name = "a trap";
         Disturb(false);
-        GridTile tile = Level.Grid[Player.MapY][Player.MapX];
+        GridTile tile = Level.Grid[MapY][MapX];
         // Check the type of trap
         switch (tile.FeatureType.Name)
         {
             case "TrapDoor":
                 {
                     // Trap doors can be flown over with feather fall
-                    if (Player.HasFeatherFall)
+                    if (HasFeatherFall)
                     {
                         MsgPrint("You fly over a trap door.");
                     }
@@ -10044,9 +10041,9 @@ internal class SaveGame
                         // Trap doors do 2d8 fall damage
                         damage = Program.Rng.DiceRoll(2, 8);
                         name = "a trap door";
-                        Player.TakeHit(damage, name);
+                        TakeHit(damage, name);
                         // Even if we survived, we need a new level
-                        if (Player.Health >= 0)
+                        if (Health >= 0)
                         {
                             DoCmdSaveGame(true);
                         }
@@ -10067,7 +10064,7 @@ internal class SaveGame
             case "Pit":
                 {
                     // A pit can be flown over with feather fall
-                    if (Player.HasFeatherFall)
+                    if (HasFeatherFall)
                     {
                         MsgPrint("You fly over a pit trap.");
                     }
@@ -10077,14 +10074,14 @@ internal class SaveGame
                         // Pits do 2d6 fall damage
                         damage = Program.Rng.DiceRoll(2, 6);
                         name = "a pit trap";
-                        Player.TakeHit(damage, name);
+                        TakeHit(damage, name);
                     }
                     break;
                 }
             case "SpikedPit":
                 {
                     // A pit can be flown over with feather fall
-                    if (Player.HasFeatherFall)
+                    if (HasFeatherFall)
                     {
                         MsgPrint("You fly over a spiked pit.");
                     }
@@ -10100,16 +10097,16 @@ internal class SaveGame
                             MsgPrint("You are impaled!");
                             name = "a spiked pit";
                             damage *= 2;
-                            Player.TimedBleeding.AddTimer(Program.Rng.DieRoll(damage));
+                            TimedBleeding.AddTimer(Program.Rng.DieRoll(damage));
                         }
-                        Player.TakeHit(damage, name);
+                        TakeHit(damage, name);
                     }
                     break;
                 }
             case "PoisonPit":
                 {
                     // A pit can be flown over with feather fall
-                    if (Player.HasFeatherFall)
+                    if (HasFeatherFall)
                     {
                         MsgPrint("You fly over a spiked pit.");
                     }
@@ -10125,23 +10122,23 @@ internal class SaveGame
                             MsgPrint("You are impaled on poisonous spikes!");
                             name = "a spiked pit";
                             damage *= 2;
-                            Player.TimedBleeding.AddTimer(Program.Rng.DieRoll(damage));
+                            TimedBleeding.AddTimer(Program.Rng.DieRoll(damage));
                             // Hagarg Ryonis can save us from the poison
-                            if (Player.HasPoisonResistance || Player.TimedPoisonResistance.TurnsRemaining != 0)
+                            if (HasPoisonResistance || TimedPoisonResistance.TurnsRemaining != 0)
                             {
                                 MsgPrint("The poison does not affect you!");
                             }
-                            else if (Program.Rng.DieRoll(10) <= Player.Religion.GetNamedDeity(GodName.Hagarg_Ryonis).AdjustedFavour)
+                            else if (Program.Rng.DieRoll(10) <= Religion.GetNamedDeity(GodName.Hagarg_Ryonis).AdjustedFavour)
                             {
                                 MsgPrint("Hagarg Ryonis's favour protects you!");
                             }
                             else
                             {
                                 damage *= 2;
-                                Player.TimedPoison.AddTimer(Program.Rng.DieRoll(damage));
+                                TimedPoison.AddTimer(Program.Rng.DieRoll(damage));
                             }
                         }
-                        Player.TakeHit(damage, name);
+                        TakeHit(damage, name);
                     }
                     break;
                 }
@@ -10150,12 +10147,12 @@ internal class SaveGame
                     MsgPrint("There is a flash of shimmering light!");
                     // Trap disappears when triggered
                     tile.TileFlags.Clear(GridTile.PlayerMemorized);
-                    Level.RevertTileToBackground(Player.MapY, Player.MapX);
+                    Level.RevertTileToBackground(MapY, MapX);
                     // Summon 1d3+2 monsters
                     int num = 2 + Program.Rng.DieRoll(3);
                     for (int i = 0; i < num; i++)
                     {
-                        Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, null);
+                        Level.SummonSpecific(MapY, MapX, Difficulty, null);
                     }
                     // Have a chance of also cursing the player
                     if (Difficulty > Program.Rng.DieRoll(100))
@@ -10198,8 +10195,8 @@ internal class SaveGame
                         MsgPrint("A small dart hits you!");
                         // Do 1d4 damage plus slow
                         damage = Program.Rng.DiceRoll(1, 4);
-                        Player.TakeHit(damage, name);
-                        Player.TimedSlow.AddTimer(Program.Rng.RandomLessThan(20) + 20);
+                        TakeHit(damage, name);
+                        TimedSlow.AddTimer(Program.Rng.RandomLessThan(20) + 20);
                     }
                     else
                     {
@@ -10215,8 +10212,8 @@ internal class SaveGame
                         MsgPrint("A small dart hits you!");
                         // Do 1d4 damage plus strength drain
                         damage = Program.Rng.DiceRoll(1, 4);
-                        Player.TakeHit(damage, "a dart trap");
-                        Player.TryDecreasingAbilityScore(Ability.Strength);
+                        TakeHit(damage, "a dart trap");
+                        TryDecreasingAbilityScore(Ability.Strength);
                     }
                     else
                     {
@@ -10232,8 +10229,8 @@ internal class SaveGame
                         MsgPrint("A small dart hits you!");
                         // Do 1d4 damage plus dexterity drain
                         damage = Program.Rng.DiceRoll(1, 4);
-                        Player.TakeHit(damage, "a dart trap");
-                        Player.TryDecreasingAbilityScore(Ability.Dexterity);
+                        TakeHit(damage, "a dart trap");
+                        TryDecreasingAbilityScore(Ability.Dexterity);
                     }
                     else
                     {
@@ -10249,8 +10246,8 @@ internal class SaveGame
                         MsgPrint("A small dart hits you!");
                         // Do 1d4 damage plus constitution drain
                         damage = Program.Rng.DiceRoll(1, 4);
-                        Player.TakeHit(damage, "a dart trap");
-                        Player.TryDecreasingAbilityScore(Ability.Constitution);
+                        TakeHit(damage, "a dart trap");
+                        TryDecreasingAbilityScore(Ability.Constitution);
                     }
                     else
                     {
@@ -10262,9 +10259,9 @@ internal class SaveGame
                 {
                     // Blind the player
                     MsgPrint("A black gas surrounds you!");
-                    if (!Player.HasBlindnessResistance)
+                    if (!HasBlindnessResistance)
                     {
-                        Player.TimedBlindness.AddTimer(Program.Rng.RandomLessThan(50) + 25);
+                        TimedBlindness.AddTimer(Program.Rng.RandomLessThan(50) + 25);
                     }
                     break;
                 }
@@ -10272,9 +10269,9 @@ internal class SaveGame
                 {
                     // Confuse the player
                     MsgPrint("A gas of scintillating colours surrounds you!");
-                    if (!Player.HasConfusionResistance)
+                    if (!HasConfusionResistance)
                     {
-                        Player.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(20) + 10);
+                        TimedConfusion.AddTimer(Program.Rng.RandomLessThan(20) + 10);
                     }
                     break;
                 }
@@ -10282,16 +10279,16 @@ internal class SaveGame
                 {
                     // Poison the player
                     MsgPrint("A pungent green gas surrounds you!");
-                    if (!Player.HasPoisonResistance && Player.TimedPoisonResistance.TurnsRemaining == 0)
+                    if (!HasPoisonResistance && TimedPoisonResistance.TurnsRemaining == 0)
                     {
                         // Hagarg Ryonis may save you from the poison
-                        if (Program.Rng.DieRoll(10) <= Player.Religion.GetNamedDeity(GodName.Hagarg_Ryonis).AdjustedFavour)
+                        if (Program.Rng.DieRoll(10) <= Religion.GetNamedDeity(GodName.Hagarg_Ryonis).AdjustedFavour)
                         {
                             MsgPrint("Hagarg Ryonis's favour protects you!");
                         }
                         else
                         {
-                            Player.TimedPoison.AddTimer(Program.Rng.RandomLessThan(20) + 10);
+                            TimedPoison.AddTimer(Program.Rng.RandomLessThan(20) + 10);
                         }
                     }
                     break;
@@ -10300,9 +10297,9 @@ internal class SaveGame
                 {
                     // Paralyse the player
                     MsgPrint("A strange white mist surrounds you!");
-                    if (!Player.HasFreeAction)
+                    if (!HasFreeAction)
                     {
-                        Player.TimedParalysis.AddTimer(Program.Rng.RandomLessThan(10) + 5);
+                        TimedParalysis.AddTimer(Program.Rng.RandomLessThan(10) + 5);
                     }
                     break;
                 }
@@ -10320,39 +10317,39 @@ internal class SaveGame
         // If we have a fire aura, apply it
         if (race.FireAura)
         {
-            if (!Player.HasFireImmunity)
+            if (!HasFireImmunity)
             {
                 auraDamage = Program.Rng.DiceRoll(1 + (race.Level / 26), 1 + (race.Level / 17));
                 string auraDam = monster.IndefiniteVisibleName;
                 MsgPrint("You are suddenly very hot!");
-                if (Player.TimedFireResistance.TurnsRemaining != 0)
+                if (TimedFireResistance.TurnsRemaining != 0)
                 {
                     auraDamage = (auraDamage + 2) / 3;
                 }
-                if (Player.HasFireResistance)
+                if (HasFireResistance)
                 {
                     auraDamage = (auraDamage + 2) / 3;
                 }
-                Player.TakeHit(auraDamage, auraDam);
+                TakeHit(auraDamage, auraDam);
                 race.Knowledge.Characteristics.FireAura = true;
                 HandleStuff();
             }
         }
         // If we have a lightning aura, apply it
-        if (race.LightningAura && !Player.HasLightningImmunity)
+        if (race.LightningAura && !HasLightningImmunity)
         {
             auraDamage = Program.Rng.DiceRoll(1 + (race.Level / 26), 1 + (race.Level / 17));
             string auraDam = monster.IndefiniteVisibleName;
-            if (Player.TimedLightningResistance.TurnsRemaining != 0)
+            if (TimedLightningResistance.TurnsRemaining != 0)
             {
                 auraDamage = (auraDamage + 2) / 3;
             }
-            if (Player.HasLightningResistance)
+            if (HasLightningResistance)
             {
                 auraDamage = (auraDamage + 2) / 3;
             }
             MsgPrint("You get zapped!");
-            Player.TakeHit(auraDamage, auraDam);
+            TakeHit(auraDamage, auraDam);
             race.Knowledge.Characteristics.LightningAura = true;
             HandleStuff();
         }
@@ -10377,7 +10374,7 @@ internal class SaveGame
             return false;
         }
         // Roll for the attack
-        int armourClass = Player.BaseArmourClass + Player.ArmourClassBonus;
+        int armourClass = BaseArmourClass + ArmourClassBonus;
         return Program.Rng.DieRoll(attackStrength) > armourClass * 3 / 4;
     }
 
@@ -10388,7 +10385,7 @@ internal class SaveGame
     public void ProcessAllMonsters()
     {
         // The noise the player is making is based on their stealth score
-        uint noise = 1u << (30 - Player.SkillStealth);
+        uint noise = 1u << (30 - SkillStealth);
         // Go through all the monster slots on the level
         for (int i = Level.MMax - 1; i >= 1; i--)
         {
@@ -10434,12 +10431,12 @@ internal class SaveGame
                 test = true;
             }
             // 2) We're aggravating
-            else if (monster.DistanceFromPlayer <= Constants.MaxSight && (Level.PlayerHasLosBold(monsterY, monsterX) || Player.HasAggravation))
+            else if (monster.DistanceFromPlayer <= Constants.MaxSight && (Level.PlayerHasLosBold(monsterY, monsterX) || HasAggravation))
             {
                 test = true;
             }
             // 3) We've left scent where the monster is so it can smell us
-            else if (Level.Grid[Player.MapY][Player.MapX].ScentAge == Level.Grid[monsterY][monsterX].ScentAge &&
+            else if (Level.Grid[MapY][MapX].ScentAge == Level.Grid[monsterY][monsterX].ScentAge &&
                      Level.Grid[monsterY][monsterX].ScentStrength < Constants.MonsterFlowDepth &&
                      Level.Grid[monsterY][monsterX].ScentStrength < race.NoticeRange)
             {
@@ -10452,7 +10449,7 @@ internal class SaveGame
             }
             Level.CurrentlyActingMonster = i;
             // Process the individual monster
-            monster.ProcessMonster(this, noise);
+            monster.ProcessMonster(noise);
             // If the monster killed the player or sent us to a new level, then stop processing
             if (!Playing || IsDead || NewLevelFlag)
             {
@@ -11056,7 +11053,7 @@ internal class SaveGame
         }
         _invenCnt = 0;
 
-        Player = new Player(this);
+        InitializePlayer();
         if (PlayerBirth())
         {
             return true;
@@ -11101,31 +11098,31 @@ internal class SaveGame
 
     public void GetAhw()
     {
-        Player.Age = Player.Race.BaseAge + Program.Rng.DieRoll(Player.Race.AgeRange);
-        bool startAtDusk = Player.Race.RestsTillDuskInsteadOfDawn;
-        Player.GameTime = new GameTime(this, Program.Rng.DieRoll(365), startAtDusk);
+        Age = Race.BaseAge + Program.Rng.DieRoll(Race.AgeRange);
+        bool startAtDusk = Race.RestsTillDuskInsteadOfDawn;
+        GameTime = new GameTime(this, Program.Rng.DieRoll(365), startAtDusk);
 
-        if (Player.Gender.Index == Constants.SexMale)
+        if (Gender.Index == Constants.SexMale)
         {
-            Player.Height = Program.Rng.RandomNormal(Player.Race.MaleBaseHeight, Player.Race.MaleHeightRange);
-            Player.Weight = Program.Rng.RandomNormal(Player.Race.MaleBaseWeight, Player.Race.MaleWeightRange);
+            Height = Program.Rng.RandomNormal(Race.MaleBaseHeight, Race.MaleHeightRange);
+            Weight = Program.Rng.RandomNormal(Race.MaleBaseWeight, Race.MaleWeightRange);
         }
-        else if (Player.Gender.Index == Constants.SexFemale)
+        else if (Gender.Index == Constants.SexFemale)
         {
-            Player.Height = Program.Rng.RandomNormal(Player.Race.FemaleBaseHeight, Player.Race.FemaleHeightRange);
-            Player.Weight = Program.Rng.RandomNormal(Player.Race.FemaleBaseWeight, Player.Race.FemaleWeightRange);
+            Height = Program.Rng.RandomNormal(Race.FemaleBaseHeight, Race.FemaleHeightRange);
+            Weight = Program.Rng.RandomNormal(Race.FemaleBaseWeight, Race.FemaleWeightRange);
         }
         else
         {
             if (Program.Rng.DieRoll(2) == 1)
             {
-                Player.Height = Program.Rng.RandomNormal(Player.Race.MaleBaseHeight, Player.Race.MaleHeightRange);
-                Player.Weight = Program.Rng.RandomNormal(Player.Race.MaleBaseWeight, Player.Race.MaleWeightRange);
+                Height = Program.Rng.RandomNormal(Race.MaleBaseHeight, Race.MaleHeightRange);
+                Weight = Program.Rng.RandomNormal(Race.MaleBaseWeight, Race.MaleWeightRange);
             }
             else
             {
-                Player.Height = Program.Rng.RandomNormal(Player.Race.FemaleBaseHeight, Player.Race.FemaleHeightRange);
-                Player.Weight = Program.Rng.RandomNormal(Player.Race.FemaleBaseWeight, Player.Race.FemaleWeightRange);
+                Height = Program.Rng.RandomNormal(Race.FemaleBaseHeight, Race.FemaleHeightRange);
+                Weight = Program.Rng.RandomNormal(Race.FemaleBaseWeight, Race.FemaleWeightRange);
             }
         }
     }
@@ -11133,62 +11130,62 @@ internal class SaveGame
     public void GetExtra()
     {
         int i;
-        Player.MaxLevelGained = 1;
-        Player.ExperienceLevel = 1;
-        Player.ExperienceMultiplier = Player.Race.ExperienceFactor + Player.BaseCharacterClass.ExperienceFactor;
-        Player.HitDie = Player.Race.HitDieBonus + Player.BaseCharacterClass.HitDieBonus;
-        Player.MaxHealth = Player.HitDie;
-        Player.PlayerHp[0] = Player.HitDie;
-        int lastroll = Player.HitDie;
+        MaxLevelGained = 1;
+        ExperienceLevel = 1;
+        ExperienceMultiplier = Race.ExperienceFactor + BaseCharacterClass.ExperienceFactor;
+        HitDie = Race.HitDieBonus + BaseCharacterClass.HitDieBonus;
+        MaxHealth = HitDie;
+        PlayerHp[0] = HitDie;
+        int lastroll = HitDie;
         for (i = 1; i < Constants.PyMaxLevel; i++)
         {
-            Player.PlayerHp[i] = lastroll;
+            PlayerHp[i] = lastroll;
             lastroll--;
             if (lastroll < 1)
             {
-                lastroll = Player.HitDie;
+                lastroll = HitDie;
             }
         }
         for (i = 1; i < Constants.PyMaxLevel; i++)
         {
             int j = Program.Rng.DieRoll(Constants.PyMaxLevel - 1);
-            lastroll = Player.PlayerHp[i];
-            Player.PlayerHp[i] = Player.PlayerHp[j];
-            Player.PlayerHp[j] = lastroll;
+            lastroll = PlayerHp[i];
+            PlayerHp[i] = PlayerHp[j];
+            PlayerHp[j] = lastroll;
         }
         for (i = 1; i < Constants.PyMaxLevel; i++)
         {
-            Player.PlayerHp[i] = Player.PlayerHp[i - 1] + Player.PlayerHp[i];
+            PlayerHp[i] = PlayerHp[i - 1] + PlayerHp[i];
         }
     }
 
     public void GetMoney()
     {
-        int gold = (Player.SocialClass * 6) + Program.Rng.DieRoll(100) + 300;
+        int gold = (SocialClass * 6) + Program.Rng.DieRoll(100) + 300;
         for (int i = 0; i < 6; i++)
         {
-            if (Player.AbilityScores[i].Adjusted >= 18 + 50)
+            if (AbilityScores[i].Adjusted >= 18 + 50)
             {
                 gold -= 300;
             }
-            else if (Player.AbilityScores[i].Adjusted >= 18 + 20)
+            else if (AbilityScores[i].Adjusted >= 18 + 20)
             {
                 gold -= 200;
             }
-            else if (Player.AbilityScores[i].Adjusted > 18)
+            else if (AbilityScores[i].Adjusted > 18)
             {
                 gold -= 150;
             }
             else
             {
-                gold -= (Player.AbilityScores[i].Adjusted - 8) * 10;
+                gold -= (AbilityScores[i].Adjusted - 8) * 10;
             }
         }
         if (gold < 100)
         {
             gold = 100;
         }
-        Player.Gold = gold;
+        Gold = gold;
     }
 
     public void GetStats()
@@ -11202,12 +11199,12 @@ internal class SaveGame
                 int index = Program.Rng.DieRoll(dice.Count) - 1;
                 j = dice[index];
                 dice.RemoveAt(index);
-                Player.AbilityScores[i].InnateMax = j;
-                int bonus = Player.Race.AbilityBonus[i] + Player.BaseCharacterClass.AbilityBonus[i];
-                Player.AbilityScores[i].Innate = Player.AbilityScores[i].InnateMax;
-                Player.AbilityScores[i].Adjusted = Player.AbilityScores[i].ModifyStatValue(Player.AbilityScores[i].InnateMax, bonus);
+                AbilityScores[i].InnateMax = j;
+                int bonus = Race.AbilityBonus[i] + BaseCharacterClass.AbilityBonus[i];
+                AbilityScores[i].Innate = AbilityScores[i].InnateMax;
+                AbilityScores[i].Adjusted = AbilityScores[i].ModifyStatValue(AbilityScores[i].InnateMax, bonus);
             }
-            if (Player.AbilityScores[Player.BaseCharacterClass.PrimeStat].InnateMax > 13)
+            if (AbilityScores[BaseCharacterClass.PrimeStat].InnateMax > 13)
             {
                 break;
             }
@@ -11259,7 +11256,7 @@ internal class SaveGame
         {
             return false;
         }
-        Player.RaceAtBirth = Player.Race;
+        RaceAtBirth = Race;
         PlayerBirthQuests();
         IsDead = false;
         PlayerOutfit();
@@ -11279,7 +11276,7 @@ internal class SaveGame
 
     private void PlayerOutfit()
     {
-        if (Player.Race.OutfitsWithScrollsOfSatisfyHunger)
+        if (Race.OutfitsWithScrollsOfSatisfyHunger)
         {
             ItemFactory scrollSatisfyHungerItemClass = SingletonRepository.ItemFactories.Get<ScrollSatisfyHunger>();
             Item item = scrollSatisfyHungerItemClass.CreateItem();
@@ -11287,7 +11284,7 @@ internal class SaveGame
             item.BecomeFlavourAware();
             item.BecomeKnown();
             item.IdentStoreb = true;
-            Player.InvenCarry(item);
+            InvenCarry(item);
         }
         else
         {
@@ -11296,9 +11293,9 @@ internal class SaveGame
             item.Count = Program.Rng.RandomBetween(3, 7);
             item.BecomeFlavourAware();
             item.BecomeKnown();
-            Player.InvenCarry(item);
+            InvenCarry(item);
         }
-        if (Player.Race.OutfitsWithScrollsOfLight || Player.BaseCharacterClass.OutfitsWithScrollsOfLight)
+        if (Race.OutfitsWithScrollsOfLight || BaseCharacterClass.OutfitsWithScrollsOfLight)
         {
             ItemFactory scrollLightItemClass = SingletonRepository.ItemFactories.Get<ScrollLight>();
             Item item = scrollLightItemClass .CreateItem();
@@ -11306,7 +11303,7 @@ internal class SaveGame
             item.BecomeFlavourAware();
             item.BecomeKnown();
             item.IdentStoreb = true;
-            Player.InvenCarry(item);
+            InvenCarry(item);
         }
         else
         {
@@ -11316,13 +11313,13 @@ internal class SaveGame
             item.TypeSpecificValue = Program.Rng.RandomBetween(3, 7) * 500;
             item.BecomeFlavourAware();
             item.BecomeKnown();
-            Player.InvenCarry(item);
+            InvenCarry(item);
             Item carried = item.Clone(1);
             LightsourceInventorySlot lightsourceInventorySlot = SingletonRepository.InventorySlots.Get<LightsourceInventorySlot>();
             SetInventoryItem(lightsourceInventorySlot.WeightedRandom.Choose(), carried);
-            Player.WeightCarried += carried.Weight;
+            WeightCarried += carried.Weight;
         }
-        Player.BaseCharacterClass.OutfitPlayer();
+        BaseCharacterClass.OutfitPlayer();
     }
 
     /// <summary>
@@ -11886,12 +11883,12 @@ internal class SaveGame
         int i;
         for (i = 0; i < 4; i++)
         {
-            Player.History[i] = string.Empty;
+            History[i] = string.Empty;
         }
         string fullHistory = string.Empty;
         int socialClass = Program.Rng.DieRoll(4);
         // Start on a chart based on the character's race
-        int chart = Player.Race.Chart;
+        int chart = Race.Chart;
 
         // Keep going till we get to an end
         while (chart != 0)
@@ -11919,7 +11916,7 @@ internal class SaveGame
         {
             socialClass = 1;
         }
-        Player.SocialClass = socialClass;
+        SocialClass = socialClass;
         // Split the buffer into four strings to fit on four lines of the screen
         string s = fullHistory.Trim();
         i = 0;
@@ -11928,13 +11925,13 @@ internal class SaveGame
             int n = s.Length;
             if (n < 60)
             {
-                Player.History[i] = s;
+                History[i] = s;
                 break;
             }
             for (n = 60; n > 0 && s[n - 1] != ' '; n--)
             {
             }
-            Player.History[i++] = s.Substring(0, n).Trim();
+            History[i++] = s.Substring(0, n).Trim();
             s = s.Substring(n).Trim();
         }
     }
@@ -11958,7 +11955,7 @@ internal class SaveGame
                     {
                         newTile.SetBackgroundFeature("Grass");
                     }
-                    else if (Wilderness[Player.WildernessY][Player.WildernessX].Dungeon.Tower)
+                    else if (Wilderness[WildernessY][WildernessX].Dungeon.Tower)
                     {
                         newTile.SetBackgroundFeature("TowerFloor");
                     }
@@ -11975,25 +11972,25 @@ internal class SaveGame
             Level.PanelColMax = 0;
             if (CurrentDepth == 0)
             {
-                if (Wilderness[Player.WildernessY][Player.WildernessX].Town != null)
+                if (Wilderness[WildernessY][WildernessX].Town != null)
                 {
-                    CurTown = Wilderness[Player.WildernessY][Player.WildernessX].Town;
+                    CurTown = Wilderness[WildernessY][WildernessX].Town;
                     DungeonDifficulty = 0;
                     Level.DunBias = null;
-                    if (Wilderness[Player.WildernessY][Player.WildernessX].Town.Char == 'K')
+                    if (Wilderness[WildernessY][WildernessX].Town.Char == 'K')
                     {
                         DungeonDifficulty = 35;
                         Level.DunBias = new CthuloidMonsterSelector();
                     }
                 }
-                else if (Wilderness[Player.WildernessY][Player.WildernessX].Dungeon != null)
+                else if (Wilderness[WildernessY][WildernessX].Dungeon != null)
                 {
-                    DungeonDifficulty = Wilderness[Player.WildernessY][Player.WildernessX].Dungeon.Offset / 2;
+                    DungeonDifficulty = Wilderness[WildernessY][WildernessX].Dungeon.Offset / 2;
                     if (DungeonDifficulty < 4)
                     {
                         DungeonDifficulty = 4;
                     }
-                    Level.DunBias = Wilderness[Player.WildernessY][Player.WildernessX].Dungeon.Bias;
+                    Level.DunBias = Wilderness[WildernessY][WildernessX].Dungeon.Bias;
                 }
                 else
                 {
@@ -12020,7 +12017,7 @@ internal class SaveGame
                 Level.MaxPanelCols = (Level.CurWid / Constants.PlayableScreenWidth * 2) - 2;
                 Level.PanelRow = Level.MaxPanelRows;
                 Level.PanelCol = Level.MaxPanelCols;
-                if (Wilderness[Player.WildernessY][Player.WildernessX].Town != null)
+                if (Wilderness[WildernessY][WildernessX].Town != null)
                 {
                     TownGen();
                 }
@@ -12177,7 +12174,7 @@ internal class SaveGame
             // Reset the level so that we can attempt again.
             Level.WipeMList();
         }
-        Player.GameTime.MarkLevelEntry();
+        GameTime.MarkLevelEntry();
     }
 
     private void AllocObject(int set, int typ, int num)
@@ -13557,8 +13554,8 @@ internal class SaveGame
                 break;
 
             case LevelStart.StartStairs:
-                Player.MapY = downStairsLocation.Y;
-                Player.MapX = downStairsLocation.X;
+                MapY = downStairsLocation.Y;
+                MapX = downStairsLocation.X;
                 break;
 
             case LevelStart.StartWalk:
@@ -13571,8 +13568,8 @@ internal class SaveGame
                     {
                         continue;
                     }
-                    Player.MapY = store.Y;
-                    Player.MapX = store.X;
+                    MapY = store.Y;
+                    MapX = store.X;
                 }
                 break;
 
@@ -14177,8 +14174,8 @@ internal class SaveGame
         {
             return false;
         }
-        Player.MapY = y;
-        Player.MapX = x;
+        MapY = y;
+        MapX = x;
         return true;
     }
 
@@ -14408,10 +14405,10 @@ internal class SaveGame
             }
         }
         MakeTownWalls();
-        MakeCornerTowers(Player.WildernessX, Player.WildernessY);
+        MakeCornerTowers(WildernessX, WildernessY);
         MakeTownContents();
         ResolvePaths();
-        if (Player.GameTime.IsLight)
+        if (GameTime.IsLight)
         {
             for (y = 0; y < Level.CurHgt; y++)
             {
@@ -14525,14 +14522,14 @@ internal class SaveGame
     private void WildernessGen()
     {
         Program.Rng.UseFixed = true;
-        Program.Rng.FixedSeed = this.Wilderness[this.Player.WildernessY][this.Player.WildernessX].Seed;
+        Program.Rng.FixedSeed = this.Wilderness[this.WildernessY][this.WildernessX].Seed;
         int x;
         int y;
         for (y = 0; y < Level.CurHgt; y++)
         {
             for (x = 0; x < Level.CurWid; x++)
             {
-                byte elevation = Elevation(Player.WildernessY, Player.WildernessX, y, x);
+                byte elevation = Elevation(WildernessY, WildernessX, y, x);
                 string floorName = "Water";
                 string featureName = "Water";
                 if (elevation > 0)
@@ -14572,10 +14569,10 @@ internal class SaveGame
             cPtr = Level.Grid[y][Level.CurWid - 1];
             cPtr.SetFeature(cPtr.BackgroundFeature.Name.StartsWith("Water") ? "WaterBorder" : "WildBorder");
         }
-        MakeWildernessWalls(this.Player.WildernessX, this.Player.WildernessY);
-        MakeCornerTowers(this.Player.WildernessX, this.Player.WildernessY);
-        MakeWildernessPaths(this.Player.WildernessX, this.Player.WildernessY);
-        MakeWildernessFeatures(this.Player.WildernessX, this.Player.WildernessY, out int stairX, out int stairY);
+        MakeWildernessWalls(this.WildernessX, this.WildernessY);
+        MakeCornerTowers(this.WildernessX, this.WildernessY);
+        MakeWildernessPaths(this.WildernessX, this.WildernessY);
+        MakeWildernessFeatures(this.WildernessX, this.WildernessY, out int stairX, out int stairY);
         int rocks = Program.Rng.RandomBetween(1, 10);
         for (int i = 0; i < rocks; i++)
         {
@@ -14594,14 +14591,14 @@ internal class SaveGame
         }
         else if (CameFrom == LevelStart.StartStairs)
         {
-            this.Player.MapY = stairY;
-            this.Player.MapX = stairX;
+            this.MapY = stairY;
+            this.MapX = stairX;
         }
         else if (CameFrom == LevelStart.StartWalk)
         {
-            if (Level.Grid[this.Player.MapY][this.Player.MapX].FeatureType.IsTree || Level.Grid[this.Player.MapY][this.Player.MapX].FeatureType.Name == "Water")
+            if (Level.Grid[this.MapY][this.MapX].FeatureType.IsTree || Level.Grid[this.MapY][this.MapX].FeatureType.Name == "Water")
             {
-                Level.Grid[this.Player.MapY][this.Player.MapX].RevertToBackground();
+                Level.Grid[this.MapY][this.MapX].RevertToBackground();
             }
         }
         ResolvePaths();
@@ -14615,7 +14612,7 @@ internal class SaveGame
                 }
             }
         }
-        if (this.Player.GameTime.IsLight)
+        if (this.GameTime.IsLight)
         {
             for (y = 0; y < Level.CurHgt; y++)
             {
@@ -14654,7 +14651,7 @@ internal class SaveGame
             return false;
         }
         CommandDirection = dir;
-        if (Player.TimedConfusion.TurnsRemaining != 0)
+        if (TimedConfusion.TurnsRemaining != 0)
         {
             if (Program.Rng.RandomLessThan(100) < 75)
             {
@@ -14717,7 +14714,7 @@ internal class SaveGame
             return;
         }
         CommandDirection = dir;
-        if (Player.TimedConfusion.TurnsRemaining != 0)
+        if (TimedConfusion.TurnsRemaining != 0)
         {
             dir = Level.OrderedDirection[Program.Rng.RandomLessThan(8)];
         }
@@ -14780,7 +14777,7 @@ internal class SaveGame
             return false;
         }
         CommandDirection = dir;
-        if (Player.TimedConfusion.TurnsRemaining != 0)
+        if (TimedConfusion.TurnsRemaining != 0)
         {
             dir = Level.OrderedDirection[Program.Rng.RandomLessThan(8)];
         }
@@ -14810,8 +14807,8 @@ internal class SaveGame
 
     public bool TargetSet(int mode)
     {
-        int y = Player.MapY;
-        int x = Player.MapX;
+        int y = MapY;
+        int x = MapX;
         bool done = false;
         TargetWho = 0;
         TargetSetPrepare(mode);
@@ -14911,8 +14908,8 @@ internal class SaveGame
     {
         char ch = '\0';
         bool success = false;
-        x = Player.MapX;
-        y = Player.MapY;
+        x = MapX;
+        y = MapY;
         bool cv = Screen.CursorVisible;
         Screen.CursorVisible = true;
         MsgPrint("Select a point and press space.");
@@ -15015,11 +15012,11 @@ internal class SaveGame
         {
             return false;
         }
-        if (!Level.Projectable(Player.MapY, Player.MapX, mPtr.MapY, mPtr.MapX))
+        if (!Level.Projectable(MapY, MapX, mPtr.MapY, mPtr.MapX))
         {
             return false;
         }
-        if (Player.TimedHallucinations.TurnsRemaining != 0)
+        if (TimedHallucinations.TurnsRemaining != 0)
         {
             return false;
         }
@@ -15028,11 +15025,11 @@ internal class SaveGame
 
     private bool TargetSetAccept(int y, int x)
     {
-        if (y == Player.MapY && x == Player.MapX)
+        if (y == MapY && x == MapX)
         {
             return true;
         }
-        if (Player.TimedHallucinations.TurnsRemaining != 0)
+        if (TimedHallucinations.TurnsRemaining != 0)
         {
             return false;
         }
@@ -15070,13 +15067,13 @@ internal class SaveGame
             string s1 = "You see ";
             string s2 = "";
             string s3 = "";
-            if (y == Player.MapY && x == Player.MapX)
+            if (y == MapY && x == MapX)
             {
                 s1 = "You are ";
                 s2 = "on ";
             }
             string outVal;
-            if (Player.TimedHallucinations.TurnsRemaining != 0)
+            if (TimedHallucinations.TurnsRemaining != 0)
             {
                 const string name = "something strange";
                 outVal = $"{s1}{s2}{s3}{name} [{info}]";
@@ -15275,7 +15272,7 @@ internal class SaveGame
         for (int i = 0; i < Level.TempN; i++)
         {
             list.Add(new TargetLocation(Level.TempY[i], Level.TempX[i],
-                Level.Distance(Level.TempY[i], Level.TempX[i], Player.MapY, Player.MapX)));
+                Level.Distance(Level.TempY[i], Level.TempX[i], MapY, MapX)));
         }
         list.Sort();
         for (int i = 0; i < Level.TempN; i++)
@@ -15287,7 +15284,7 @@ internal class SaveGame
 
     public bool MartialArtistEmptyHands()
     {
-        if (Player.BaseCharacterClass.ID != CharacterClass.Monk && Player.BaseCharacterClass.ID != CharacterClass.Mystic)
+        if (BaseCharacterClass.ID != CharacterClass.Monk && BaseCharacterClass.ID != CharacterClass.Mystic)
         {
             return false;
         }
@@ -15297,7 +15294,7 @@ internal class SaveGame
     public bool MartialArtistHeavyArmour()
     {
         int martialArtistArmWgt = 0;
-        if (Player.BaseCharacterClass.ID != CharacterClass.Monk && Player.BaseCharacterClass.ID != CharacterClass.Mystic)
+        if (BaseCharacterClass.ID != CharacterClass.Monk && BaseCharacterClass.ID != CharacterClass.Mystic)
         {
             return false;
         }
@@ -15319,7 +15316,7 @@ internal class SaveGame
                 }
             }
         }
-        return martialArtistArmWgt > 100 + (Player.ExperienceLevel * 4);
+        return martialArtistArmWgt > 100 + (ExperienceLevel * 4);
     }
 
     public string RealmNames(BaseRealm? primaryRealm, BaseRealm? secondaryRealm, string defaultTitle = "None")
@@ -15363,11 +15360,11 @@ internal class SaveGame
 
     public void DoCmdSummonHorde()
     {
-        int wy = Player.MapY, wx = Player.MapX;
+        int wy = MapY, wx = MapX;
         int attempts = 1000;
         while (--attempts != 0)
         {
-            Level.Scatter(out wy, out wx, Player.MapY, Player.MapX, 3);
+            Level.Scatter(out wy, out wx, MapY, MapX, 3);
             if (Level.GridOpenNoItemOrCreature(wy, wx))
             {
                 break;
@@ -15383,8 +15380,8 @@ internal class SaveGame
         {
             return;
         }
-        int tx = Player.MapX + (99 * Level.KeypadDirectionXOffset[dir]);
-        int ty = Player.MapY + (99 * Level.KeypadDirectionYOffset[dir]);
+        int tx = MapX + (99 * Level.KeypadDirectionXOffset[dir]);
+        int ty = MapY + (99 * Level.KeypadDirectionYOffset[dir]);
         if (dir == 5 && TargetOkay())
         {
             flg &= ~ProjectionFlag.ProjectStop;
@@ -15416,7 +15413,7 @@ internal class SaveGame
         for (int i = 0; i < 6; i++)
         {
             string ppp = $"{Constants.StatNames[i]} (3-118): ";
-            if (!GetString(ppp, out tmpVal, $"{Player.AbilityScores[i].InnateMax}", 3))
+            if (!GetString(ppp, out tmpVal, $"{AbilityScores[i].InnateMax}", 3))
             {
                 return;
             }
@@ -15432,10 +15429,10 @@ internal class SaveGame
             {
                 tmpInt = 3;
             }
-            Player.AbilityScores[i].Innate = tmpInt;
-            Player.AbilityScores[i].InnateMax = tmpInt;
+            AbilityScores[i].Innate = tmpInt;
+            AbilityScores[i].InnateMax = tmpInt;
         }
-        string def = $"{Player.Gold}";
+        string def = $"{Gold}";
         if (!GetString("Gold: ", out tmpVal, def, 9))
         {
             return;
@@ -15448,9 +15445,9 @@ internal class SaveGame
         {
             tmpInt = 0;
         }
-        Player.Gold = tmpInt;
+        Gold = tmpInt;
 
-        string mana = $"{Player.Mana}";
+        string mana = $"{Mana}";
         if (!GetString("Mana: ", out tmpVal, def, 9))
         {
             return;
@@ -15463,9 +15460,9 @@ internal class SaveGame
         {
             tmpInt = 0;
         }
-        Player.Mana = tmpInt;
+        Mana = tmpInt;
 
-        def = $"{Player.MaxExperienceGained}";
+        def = $"{MaxExperienceGained}";
         if (!GetString("Experience: ", out tmpVal, def, 9))
         {
             return;
@@ -15478,8 +15475,8 @@ internal class SaveGame
         {
             tmpInt = 0;
         }
-        Player.MaxExperienceGained = tmpInt;
-        Player.CheckExperience();
+        MaxExperienceGained = tmpInt;
+        CheckExperience();
     }
 
     public void DoCmdWizNamed(int rIdx, bool slp)
@@ -15491,7 +15488,7 @@ internal class SaveGame
         for (int i = 0; i < 10; i++)
         {
             const int d = 1;
-            Level.Scatter(out int y, out int x, Player.MapY, Player.MapX, d);
+            Level.Scatter(out int y, out int x, MapY, MapX, d);
             if (!Level.GridPassableNoCreature(y, x))
             {
                 continue;
@@ -15512,7 +15509,7 @@ internal class SaveGame
         for (int i = 0; i < 10; i++)
         {
             const int d = 1;
-            Level.Scatter(out int y, out int x, Player.MapY, Player.MapX, d);
+            Level.Scatter(out int y, out int x, MapY, MapX, d);
             if (!Level.GridPassableNoCreature(y, x))
             {
                 continue;
@@ -15528,7 +15525,7 @@ internal class SaveGame
     {
         for (int i = 0; i < num; i++)
         {
-            Level.SummonSpecific(Player.MapY, Player.MapX, Difficulty, null);
+            Level.SummonSpecific(MapY, MapX, Difficulty, null);
         }
     }
 
@@ -15588,7 +15585,7 @@ internal class SaveGame
             qPtr.IdentCursed = true;
         }
         qPtr.GetFixedArtifactResistances();
-        Level.DropNear(qPtr, -1, Player.MapY, Player.MapX);
+        Level.DropNear(qPtr, -1, MapY, MapX);
         MsgPrint("Allocated.");
     }
 
@@ -15897,7 +15894,2061 @@ internal class SaveGame
     //////////////////////////////////////////////
     // PLAYER START
     //////////////////////////////////////////////
+    public readonly AbilityScore[] AbilityScores = new AbilityScore[6];
+    public Genome Dna;
+    public readonly string[] History = new string[4];
+    public readonly int[] MaxDlv = new int[DungeonCount];
+    public readonly int[] PlayerHp = new int[Constants.PyMaxLevel];
+    public int Age;
+    public ItemTypeEnum AmmunitionItemCategory; // TODO: This needs to be a property of the missileweaponitemcategory
+    public int ArmourClassBonus;
+    public int AttackBonus;
+    public int BaseArmourClass;
+    public int DamageBonus;
+    public int DisplayedArmourClassBonus;
+    public int DisplayedAttackBonus;
+    public int DisplayedBaseArmourClass;
+    public int DisplayedDamageBonus;
+    public int Energy;
+    public int ExperienceMultiplier;
+    public int ExperiencePoints;
+    public int Food;
+    public int FractionalExperiencePoints;
+    public int FractionalHealth;
+    public int FractionalMana;
+    public GameTime GameTime;
+    public Gender? Gender = null; // The gender will be null until the player has selected the gender.
+    public int Generation; // This is how many times the character name has changed.
+    public bool GetFirstLevelMutation;
+    private int _gold;
+    public int Gold
+    {
+        get
+        {
+            return _gold;
+        }
+        set
+        {
+            _gold = value;
+            ConsoleViewPort.GoldUpdated(_gold);
+        }
+    }
+    public Patron GooPatron;
+    public bool HasAcidImmunity;
+    public bool HasAcidResistance;
+    public bool HasAggravation;
+    public bool HasAntiMagic;
+    public bool HasAntiTeleport;
+    public bool HasAntiTheft;
+    public bool HasBlessedBlade;
+    public bool HasBlindnessResistance;
+    public bool HasChaosResistance;
+    public bool HasColdImmunity;
+    public bool HasColdResistance;
+    public bool HasConfusingTouch;
+    public bool HasConfusionResistance;
+    public bool HasDarkResistance;
+    public bool HasDisenchantResistance;
+    public bool HasElementalVulnerability;
+    public bool HasExperienceDrain;
+    public bool HasExtraMight;
+    public bool HasFearResistance;
+    public bool HasFeatherFall;
+    public bool HasFireImmunity;
+    public bool HasFireResistance;
+    public bool HasFireShield;
+    public bool HasFreeAction;
+    public bool HasGlow;
+    public bool HasHeavyBow;
+    public bool HasHeavyWeapon;
+    public bool HasHoldLife;
+    public bool HasLightningImmunity;
+    public bool HasLightningResistance;
+    public bool HasLightningShield;
+    public bool HasLightResistance;
+    public bool HasNetherResistance;
+    public bool HasNexusResistance;
+    public bool HasPoisonResistance;
+    public bool HasQuakeWeapon;
+    public bool HasRandomTeleport;
+    public bool HasReflection;
+    public bool HasRegeneration;
+    public bool HasRestrictingArmour;
+    public bool HasRestrictingGloves;
+    public bool HasSeeInvisibility;
+    public bool HasShardResistance;
+    public bool HasSlowDigestion;
+    public bool HasSoundResistance;
+    public bool HasSustainCharisma;
+    public bool HasSustainConstitution;
+    public bool HasSustainDexterity;
+    public bool HasSustainIntelligence;
+    public bool HasSustainStrength;
+    public bool HasSustainWisdom;
+    public bool HasTelepathy;
+    public bool HasTimeResistance;
+    public bool HasUnpriestlyWeapon;
+    public int Health;
+    public int Height;
+    public int HitDie;
+    public int InfravisionRange;
+    public bool IsSearching;
+    public bool IsWinner;
+    public bool IsWizard;
+    private int _experienceLevel;
+    public int ExperienceLevel
+    {
+        get
+        {
+            return _experienceLevel;
+        }
+        set
+        {
+            _experienceLevel = value;
+            ConsoleViewPort.ExperienceLevelChanged(_experienceLevel);
+        }
+    }
 
+    public int LightLevel;
+    public int Mana;
+    public int MapX;
+    public int MapY;
+    public int MaxExperienceGained;
+    public int MaxHealth;
+    public int MaxLevelGained;
+    public int MaxMana;
+    public int MeleeAttacksPerRound;
+    public int MissileAttacksPerRound;
+    private string _name;
+    public string Name
+    {
+        get
+        {
+            return _name;
+        }
+        set
+        {
+            _name = value;
+            ConsoleViewPort.CharacterRenamed(_name);
+        }
+    }
+    public int OldSpareSpellSlots;
+
+    /// <summary>
+    /// Represents the character class of the player.  Will be null prior to the character class birth selection.
+    /// </summary>
+    public BaseCharacterClass? BaseCharacterClass = null;
+
+    /// <summary>
+    /// Returns the current race of the character.  Will be null before the player is birthed.
+    /// </summary>
+    public Race? Race = null;
+
+    /// <summary>
+    /// Returns the race the character was first assigned at birth.
+    /// </summary>
+    public Race RaceAtBirth;
+
+    /// <summary>
+    /// Returns the primary realm that the player studies.
+    /// </summary>
+    /// <value>The realm1.</value>
+    public BaseRealm? PrimaryRealm = null;
+
+    /// <summary>
+    /// Returns the secondary realm that the player studies.
+    /// </summary>
+    /// <value>The realm2.</value>
+    public BaseRealm? SecondaryRealm = null;
+
+    /// <summary>
+    /// Returns true, if the player can cast spells and/or read books.  True, for character classes that can choose either a primary and/or secondary realm.
+    /// </summary>
+    public bool CanCastSpells => PrimaryRealm != null || SecondaryRealm != null;
+
+    /// <summary>
+    /// Returns true, if the player has chosen the realm <T> for either the primary or secondary realms to study.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public bool Studies<T>() where T : BaseRealm => (PrimaryRealm != null && typeof(T).IsAssignableFrom(PrimaryRealm.GetType())) || (SecondaryRealm != null && typeof(T).IsAssignableFrom(SecondaryRealm.GetType()));
+
+    public Religion Religion = new Religion();
+    public int SkillDigging;
+    public int SkillDisarmTraps;
+    public int SkillMelee;
+    public int SkillRanged;
+    public int SkillSavingThrow;
+    public int SkillSearchFrequency;
+    public int SkillSearching;
+    public int SkillStealth;
+    public int SkillThrowing;
+    public int SkillUseDevice;
+    public int SocialClass;
+    public int SpareSpellSlots;
+    public int Speed;
+    public TimedAction TimedAcidResistance;
+    public TimedAction TimedBleeding;
+    public TimedAction TimedBlessing;
+    public TimedAction TimedBlindness;
+    public TimedAction TimedColdResistance;
+    public TimedAction TimedConfusion;
+    public TimedAction TimedEtherealness;
+    public TimedAction TimedFear;
+    public TimedAction TimedFireResistance;
+    public TimedAction TimedHallucinations;
+    public TimedAction TimedHaste;
+    public TimedAction TimedHeroism;
+    public TimedAction TimedInfravision;
+    public TimedAction TimedInvulnerability;
+    public TimedAction TimedLightningResistance;
+    public TimedAction TimedParalysis;
+    public TimedAction TimedPoison;
+    public TimedAction TimedPoisonResistance;
+    public TimedAction TimedProtectionFromEvil;
+    public TimedAction TimedSeeInvisibility;
+    public TimedAction TimedSlow;
+    public TimedAction TimedStoneskin;
+    public TimedAction TimedStun;
+    public TimedAction TimedSuperheroism;
+    public TimedAction TimedTelepathy;
+    public int TownWithHouse;
+    public int Weight;
+    public int WeightCarried;
+    public int WildernessX;
+    public int WildernessY;
+    public int WordOfRecallDelay;
+
+    private void InitializePlayer()
+    {
+        TimedAcidResistance = new AcidResistanceTimedAction(this);
+        TimedBleeding = new BleedingTimedAction(this);
+        TimedBlessing = new BlessingTimedAction(this);
+        TimedBlindness = new BlindnessTimedAction(this);
+        TimedColdResistance = new ColdResistanceTimedAction(this);
+        TimedConfusion = new ConfusionTimedAction(this);
+        TimedEtherealness = new EtherealnessTimedAction(this);
+        TimedFear = new FearTimedAction(this);
+        TimedFireResistance = new FireResistanceTimedAction(this);
+        TimedHallucinations = new HallucinationsTimedAction(this);
+        TimedHaste = new HasteTimedAction(this);
+        TimedHeroism = new HeroismTimedAction(this);
+        TimedInfravision = new InfravisionTimedAction(this);
+        TimedInvulnerability = new InvulnerabilityTimedAction(this);
+        TimedLightningResistance = new LightningResistanceTimedAction(this);
+        TimedParalysis = new ParalysisTimedAction(this);
+        TimedPoison = new PoisonTimedAction(this);
+        TimedPoisonResistance = new PoisonResistanceTimedAction(this);
+        TimedProtectionFromEvil = new ProtectionFromEvilTimedAction(this);
+        TimedSeeInvisibility = new SeeInvisibilityTimedAction(this);
+        TimedSlow = new SlowTimedAction(this);
+        TimedStoneskin = new StoneskinTimedAction(this);
+        TimedStun = new StunTimedAction(this);
+        TimedSuperheroism = new SuperHeroismTimedAction(this);
+        TimedTelepathy = new TelepathyTimedAction(this);
+        Dna = new Genome(this);
+        for (int i = 0; i < 4; i++)
+        {
+            History[i] = "";
+        }
+        for (int i = 0; i < 6; i++)
+        {
+            AbilityScores[i] = new AbilityScore();
+        }
+        WeightCarried = 0;
+
+        foreach (FixedArtifact aPtr in SingletonRepository.FixedArtifacts)
+        {
+            aPtr.CurNum = 0;
+        }
+        foreach (ItemFactory kPtr in SingletonRepository.ItemFactories)
+        {
+            kPtr.Tried = false;
+            kPtr.FlavourAware = false;
+        }
+        for (int i = 1; i < SingletonRepository.MonsterRaces.Count; i++)
+        {
+            MonsterRace rPtr = SingletonRepository.MonsterRaces[i];
+            rPtr.CurNum = 0;
+            rPtr.MaxNum = 100;
+            if (rPtr.Unique)
+            {
+                rPtr.MaxNum = 1;
+            }
+            rPtr.Knowledge.RPkills = 0;
+        }
+        SingletonRepository.MonsterRaces[SingletonRepository.MonsterRaces.Count - 1].MaxNum = 0;
+        Food = Constants.PyFoodFull - 1;
+        IsWizard = false;
+        IsWinner = false;
+        TownWithHouse = -1;
+        Generation = 1;
+    }
+
+    public void RecenterScreenAroundPlayer()
+    {
+        int y = MapY;
+        int x = MapX;
+        int maxProwMin = Level.MaxPanelRows * (Constants.PlayableScreenHeight / 2);
+        int maxPcolMin = Level.MaxPanelCols * (Constants.PlayableScreenWidth / 2);
+        int prowMin = y - (Constants.PlayableScreenHeight / 2);
+        if (prowMin > maxProwMin)
+        {
+            prowMin = maxProwMin;
+        }
+        else if (prowMin < 0)
+        {
+            prowMin = 0;
+        }
+        int pcolMin = x - (Constants.PlayableScreenWidth / 2);
+        if (pcolMin > maxPcolMin)
+        {
+            pcolMin = maxPcolMin;
+        }
+        else if (pcolMin < 0)
+        {
+            pcolMin = 0;
+        }
+        if (prowMin == Level.PanelRowMin && pcolMin == Level.PanelColMin)
+        {
+            return;
+        }
+        Level.PanelRowMin = prowMin;
+        Level.PanelColMin = pcolMin;
+        Level.PanelBoundsCenter();
+        UpdateMonstersFlaggedAction.Set();
+        RedrawMapFlaggedAction.Set();
+    }
+
+    public void ChangeRace(Race newRace)
+    {
+        Race = newRace;
+        ExperienceMultiplier = Race.ExperienceFactor + BaseCharacterClass.ExperienceFactor;
+        if (Gender.Index == Constants.SexMale)
+        {
+            Height = Program.Rng.RandomNormal(Race.MaleBaseHeight, Race.MaleHeightRange);
+            Weight = Program.Rng.RandomNormal(Race.MaleBaseWeight, Race.MaleWeightRange);
+        }
+        else if (Gender.Index == Constants.SexFemale)
+        {
+            Height = Program.Rng.RandomNormal(Race.FemaleBaseHeight, Race.FemaleHeightRange);
+            Weight = Program.Rng.RandomNormal(Race.FemaleBaseWeight, Race.FemaleWeightRange);
+        }
+        else
+        {
+            if (Program.Rng.DieRoll(2) == 1)
+            {
+                Height = Program.Rng.RandomNormal(Race.MaleBaseHeight, Race.MaleHeightRange);
+                Weight = Program.Rng.RandomNormal(Race.MaleBaseWeight, Race.MaleWeightRange);
+            }
+            else
+            {
+                Height = Program.Rng.RandomNormal(Race.FemaleBaseHeight, Race.FemaleHeightRange);
+                Weight = Program.Rng.RandomNormal(Race.FemaleBaseWeight, Race.FemaleWeightRange);
+            }
+        }
+        CheckExperience();
+        MaxLevelGained = ExperienceLevel;
+        PrBasicRedrawAction.Set();
+        UpdateBonusesFlaggedAction.Set();
+        HandleStuff();
+    }
+
+    public void CheckExperience()
+    {
+        bool levelReward = false;
+        bool levelMutation = false;
+        if (ExperiencePoints < 0)
+        {
+            ExperiencePoints = 0;
+        }
+        if (MaxExperienceGained < 0)
+        {
+            MaxExperienceGained = 0;
+        }
+        if (ExperiencePoints > Constants.PyMaxExp)
+        {
+            ExperiencePoints = Constants.PyMaxExp;
+        }
+        if (MaxExperienceGained > Constants.PyMaxExp)
+        {
+            MaxExperienceGained = Constants.PyMaxExp;
+        }
+        if (ExperiencePoints > MaxExperienceGained)
+        {
+            MaxExperienceGained = ExperiencePoints;
+        }
+        RedrawExpFlaggedAction.Set();
+        HandleStuff();
+        while (ExperienceLevel > 1 && ExperiencePoints < Constants.PlayerExp[ExperienceLevel - 2] * ExperienceMultiplier / 100L)
+        {
+            ExperienceLevel--;
+            Level.RedrawSingleLocation(MapY, MapX);
+            UpdateHealthFlaggedAction.Set();
+            UpdateManaFlaggedAction.Set();
+            UpdateSpellsFlaggedAction.Set();
+            UpdateBonusesFlaggedAction.Set();
+            RedrawTitleFlaggedAction.Set();
+            RedrawLevelFlaggedAction.Set();
+            HandleStuff();
+        }
+        while (ExperienceLevel < Constants.PyMaxLevel && ExperiencePoints >= Constants.PlayerExp[ExperienceLevel - 1] * ExperienceMultiplier / 100L)
+        {
+            ExperienceLevel++;
+            Level.RedrawSingleLocation(MapY, MapX);
+            if (ExperienceLevel > MaxLevelGained)
+            {
+                MaxLevelGained = ExperienceLevel;
+                if (BaseCharacterClass.ID == CharacterClass.Fanatic || BaseCharacterClass.ID == CharacterClass.Cultist)
+                {
+                    levelReward = true;
+                }
+                if (Dna.ChaosGift)
+                {
+                    levelReward = true;
+                }
+                if (Race.AutomaticallyGainsFirstLevelMutationAtBirth)
+                {
+                    if (Program.Rng.DieRoll(5) == 1)
+                    {
+                        levelMutation = true;
+                    }
+                }
+            }
+            PlaySound(SoundEffectEnum.LevelGain);
+            MsgPrint($"Welcome to level {ExperienceLevel}.");
+            UpdateHealthFlaggedAction.Set();
+            UpdateManaFlaggedAction.Set();
+            UpdateSpellsFlaggedAction.Set();
+            UpdateBonusesFlaggedAction.Set();
+            RedrawTitleFlaggedAction.Set();
+            RedrawLevelFlaggedAction.Set();
+            RedrawExpFlaggedAction.Set();
+            HandleStuff();
+            if (levelReward)
+            {
+                GainLevelReward();
+                levelReward = false;
+            }
+            if (levelMutation)
+            {
+                MsgPrint("You feel different...");
+                Dna.GainMutation();
+                levelMutation = false;
+            }
+        }
+    }
+
+    public void CurseEquipment(int chance, int heavyChance)
+    {
+        bool changed = false;
+        if (Program.Rng.DieRoll(100) > chance)
+        {
+            return;
+        }
+        Item? oPtr = GetInventoryItem(InventorySlot.MeleeWeapon - 1 + Program.Rng.DieRoll(12));
+        if (oPtr == null)
+        {
+            return;
+        }
+        oPtr.RefreshFlagBasedProperties();
+        if (oPtr.Characteristics.Blessed && Program.Rng.DieRoll(888) > chance)
+        {
+            string oName = oPtr.Description(false, 0);
+            string s = oPtr.Count > 1 ? "" : "s";
+            MsgPrint($"Your {oName} resist{s} cursing!");
+            return;
+        }
+        if (Program.Rng.DieRoll(100) <= heavyChance && (oPtr.FixedArtifact != null || oPtr.RareItemTypeIndex != 0 || !string.IsNullOrEmpty(oPtr.RandartName)))
+        {
+            if (!oPtr.Characteristics.HeavyCurse)
+            {
+                changed = true;
+            }
+            oPtr.RandartItemCharacteristics.HeavyCurse = true;
+            oPtr.RandartItemCharacteristics.Cursed = true;
+            oPtr.IdentCursed = true;
+        }
+        else
+        {
+            if (!oPtr.IdentCursed)
+            {
+                changed = true;
+            }
+            oPtr.RandartItemCharacteristics.Cursed = true;
+            oPtr.IdentCursed = true;
+        }
+        if (changed)
+        {
+            MsgPrint("There is a malignant black aura surrounding you...");
+            if (!string.IsNullOrEmpty(oPtr.Inscription))
+            {
+                if (oPtr.Inscription == "uncursed")
+                {
+                    oPtr.Inscription = string.Empty;
+                }
+            }
+        }
+    }
+
+    public bool DecreaseAbilityScore(int stat, int amount, bool permanent)
+    {
+        int loss;
+        bool res = false;
+        int cur = AbilityScores[stat].Innate;
+        int max = AbilityScores[stat].InnateMax;
+        bool same = cur == max;
+        if (cur > 3)
+        {
+            if (cur <= 18)
+            {
+                if (amount > 90)
+                {
+                    cur--;
+                }
+                if (amount > 50)
+                {
+                    cur--;
+                }
+                if (amount > 20)
+                {
+                    cur--;
+                }
+                cur--;
+            }
+            else
+            {
+                loss = ((((cur - 18) / 2) + 1) / 2) + 1;
+                if (loss < 1)
+                {
+                    loss = 1;
+                }
+                loss = (Program.Rng.DieRoll(loss) + loss) * amount / 100;
+                if (loss < amount / 2)
+                {
+                    loss = amount / 2;
+                }
+                cur -= loss;
+                if (cur < 18)
+                {
+                    cur = amount <= 20 ? 18 : 17;
+                }
+            }
+            if (cur < 3)
+            {
+                cur = 3;
+            }
+            if (cur != AbilityScores[stat].Innate)
+            {
+                res = true;
+            }
+        }
+        if (permanent && max > 3)
+        {
+            if (max <= 18)
+            {
+                if (amount > 90)
+                {
+                    max--;
+                }
+                if (amount > 50)
+                {
+                    max--;
+                }
+                if (amount > 20)
+                {
+                    max--;
+                }
+                max--;
+            }
+            else
+            {
+                loss = ((((max - 18) / 2) + 1) / 2) + 1;
+                loss = (Program.Rng.DieRoll(loss) + loss) * amount / 100;
+                if (loss < amount / 2)
+                {
+                    loss = amount / 2;
+                }
+                max -= loss;
+                if (max < 18)
+                {
+                    max = amount <= 20 ? 18 : 17;
+                }
+            }
+            if (same || max < cur)
+            {
+                max = cur;
+            }
+            if (max != AbilityScores[stat].InnateMax)
+            {
+                res = true;
+            }
+        }
+        if (res)
+        {
+            AbilityScores[stat].Innate = cur;
+            AbilityScores[stat].InnateMax = max;
+            UpdateBonusesFlaggedAction.Set();
+        }
+        return res;
+    }
+
+    public string DescribeWieldLocation(int index)
+    {
+        BaseInventorySlot inventorySlot = SingletonRepository.InventorySlots.Single(_inventorySlot => _inventorySlot.InventorySlots.Contains(index));
+        return inventorySlot.DescribeWieldLocation(index);
+    }
+
+    public void GainExperience(int amount)
+    {
+        ExperiencePoints += amount;
+        if (ExperiencePoints < MaxExperienceGained)
+        {
+            MaxExperienceGained += amount / 5;
+        }
+        CheckExperience();
+    }
+
+    public void GainLevelReward()
+    {
+        GooPatron.GetReward();
+    }
+
+    public ItemCharacteristics GetAbilitiesAsItemFlags()
+    {
+        ItemCharacteristics itemCharacteristics = new ItemCharacteristics();
+        if ((BaseCharacterClass.ID == CharacterClass.Warrior && ExperienceLevel > 29) || (BaseCharacterClass.ID == CharacterClass.Paladin && ExperienceLevel > 39) || (BaseCharacterClass.ID == CharacterClass.Fanatic && ExperienceLevel > 39))
+        {
+            itemCharacteristics.ResFear = true;
+        }
+        if (BaseCharacterClass.ID == CharacterClass.Fanatic && ExperienceLevel > 29)
+        {
+            itemCharacteristics.ResChaos = true;
+        }
+        if (BaseCharacterClass.ID == CharacterClass.Cultist && ExperienceLevel > 19)
+        {
+            itemCharacteristics.ResChaos = true;
+        }
+        if (BaseCharacterClass.ID == CharacterClass.Monk && ExperienceLevel > 9 && !MartialArtistHeavyArmour())
+        {
+            itemCharacteristics.Speed = true;
+        }
+        if (BaseCharacterClass.ID == CharacterClass.Monk && ExperienceLevel > 24 && !MartialArtistHeavyArmour())
+        {
+            itemCharacteristics.FreeAct = true;
+        }
+        if (BaseCharacterClass.ID == CharacterClass.Mindcrafter)
+        {
+            if (ExperienceLevel > 9)
+            {
+                itemCharacteristics.ResFear = true;
+            }
+            if (ExperienceLevel > 19)
+            {
+                itemCharacteristics.SustWis = true;
+            }
+            if (ExperienceLevel > 29)
+            {
+                itemCharacteristics.ResConf = true;
+            }
+            if (ExperienceLevel > 39)
+            {
+                itemCharacteristics.Telepathy = true;
+            }
+        }
+        if (BaseCharacterClass.ID == CharacterClass.Mystic)
+        {
+            if (ExperienceLevel > 9)
+            {
+                itemCharacteristics.ResConf = true;
+            }
+            if (ExperienceLevel > 9 && !MartialArtistHeavyArmour())
+            {
+                itemCharacteristics.Speed = true;
+            }
+            if (ExperienceLevel > 24)
+            {
+                itemCharacteristics.ResFear = true;
+            }
+            if (ExperienceLevel > 29 && !MartialArtistHeavyArmour())
+            {
+                itemCharacteristics.FreeAct = true;
+            }
+            if (ExperienceLevel > 39)
+            {
+                itemCharacteristics.Telepathy = true;
+            }
+        }
+        if (BaseCharacterClass.ID == CharacterClass.ChosenOne)
+        {
+            itemCharacteristics.Lightsource = true;
+            if (ExperienceLevel >= 2)
+            {
+                itemCharacteristics.ResConf = true;
+            }
+            if (ExperienceLevel >= 4)
+            {
+                itemCharacteristics.ResFear = true;
+            }
+            if (ExperienceLevel >= 6)
+            {
+                itemCharacteristics.ResBlind = true;
+            }
+            if (ExperienceLevel >= 8)
+            {
+                itemCharacteristics.Feather = true;
+            }
+            if (ExperienceLevel >= 10)
+            {
+                itemCharacteristics.SeeInvis = true;
+            }
+            if (ExperienceLevel >= 12)
+            {
+                itemCharacteristics.SlowDigest = true;
+            }
+            if (ExperienceLevel >= 14)
+            {
+                itemCharacteristics.SustCon = true;
+            }
+            if (ExperienceLevel >= 16)
+            {
+                itemCharacteristics.ResPois = true;
+            }
+            if (ExperienceLevel >= 18)
+            {
+                itemCharacteristics.SustDex = true;
+            }
+            if (ExperienceLevel >= 20)
+            {
+                itemCharacteristics.SustStr = true;
+            }
+            if (ExperienceLevel >= 22)
+            {
+                itemCharacteristics.HoldLife = true;
+            }
+            if (ExperienceLevel >= 24)
+            {
+                itemCharacteristics.FreeAct = true;
+            }
+            if (ExperienceLevel >= 26)
+            {
+                itemCharacteristics.Telepathy = true;
+            }
+            if (ExperienceLevel >= 28)
+            {
+                itemCharacteristics.ResDark = true;
+            }
+            if (ExperienceLevel >= 30)
+            {
+                itemCharacteristics.ResLight = true;
+            }
+            if (ExperienceLevel >= 32)
+            {
+                itemCharacteristics.SustCha = true;
+            }
+            if (ExperienceLevel >= 34)
+            {
+                itemCharacteristics.ResSound = true;
+            }
+            if (ExperienceLevel >= 36)
+            {
+                itemCharacteristics.ResDisen = true;
+            }
+            if (ExperienceLevel >= 38)
+            {
+                itemCharacteristics.Regen = true;
+            }
+            if (ExperienceLevel >= 40)
+            {
+                itemCharacteristics.SustInt = true;
+            }
+            if (ExperienceLevel >= 42)
+            {
+                itemCharacteristics.ResChaos = true;
+            }
+            if (ExperienceLevel >= 44)
+            {
+                itemCharacteristics.SustWis = true;
+            }
+            if (ExperienceLevel >= 46)
+            {
+                itemCharacteristics.ResNexus = true;
+            }
+            if (ExperienceLevel >= 48)
+            {
+                itemCharacteristics.ResShards = true;
+            }
+            if (ExperienceLevel >= 50)
+            {
+                itemCharacteristics.ResNether = true;
+            }
+        }
+
+        Race.UpdateRacialAbilities(ExperienceLevel, itemCharacteristics);
+        if (Dna.Regen)
+        {
+            itemCharacteristics.Regen = true;
+        }
+        if (Dna.SuppressRegen)
+        {
+            itemCharacteristics.Regen = false;
+        }
+        if (Dna.SpeedBonus != 0)
+        {
+            itemCharacteristics.Speed = true;
+        }
+        if (Dna.ElecHit)
+        {
+            itemCharacteristics.ShElec = true;
+        }
+        if (Dna.FireHit)
+        {
+            itemCharacteristics.ShFire = true;
+            itemCharacteristics.Lightsource = true;
+        }
+        if (Dna.FeatherFall)
+        {
+            itemCharacteristics.Feather = true;
+        }
+        if (Dna.ResFear)
+        {
+            itemCharacteristics.ResFear = true;
+        }
+        if (Dna.Esp)
+        {
+            itemCharacteristics.Telepathy = true;
+        }
+        if (Dna.FreeAction)
+        {
+            itemCharacteristics.FreeAct = true;
+        }
+        if (Dna.SustainAll)
+        {
+            itemCharacteristics.SustCon = true;
+            if (ExperienceLevel > 9)
+            {
+                itemCharacteristics.SustStr = true;
+            }
+            if (ExperienceLevel > 19)
+            {
+                itemCharacteristics.SustDex = true;
+            }
+            if (ExperienceLevel > 29)
+            {
+                itemCharacteristics.SustWis = true;
+            }
+            if (ExperienceLevel > 39)
+            {
+                itemCharacteristics.SustInt = true;
+            }
+            if (ExperienceLevel > 49)
+            {
+                itemCharacteristics.SustCha = true;
+            }
+        }
+        return itemCharacteristics;
+    }
+
+    public int GetScore(SaveGame saveGame)
+    {
+        int score = (MaxLevelGained - 1) * 100;
+        foreach (Dungeon dungeon in SingletonRepository.Dungeons)
+        {
+            if (dungeon.RecallLevel > 0)
+            {
+                score += ((dungeon.RecallLevel + dungeon.Offset) * 10);
+            }
+        }
+        for (int i = 0; i < Quests.Count; i++)
+        {
+            if (Quests[i].Level == 0)
+            {
+                score += 100;
+            }
+        }
+        if (IsWinner)
+        {
+            score += 1000;
+        }
+        if (MaxLevelGained < 50)
+        {
+            int prev = 0;
+            if (MaxLevelGained > 1)
+            {
+                prev = Constants.PlayerExp[MaxLevelGained - 2] * ExperienceMultiplier / 100;
+            }
+            int next = Constants.PlayerExp[MaxLevelGained - 1] * ExperienceMultiplier / 100;
+            int numerator = MaxExperienceGained - prev;
+            int denominator = next - prev;
+            int fraction = 100 * numerator / denominator;
+            score += fraction;
+        }
+        return score;
+    }
+
+    public void InputPlayerName()
+    {
+        Screen.Clear(42);
+        Screen.PrintLine(ColourEnum.Orange, "[Enter your player's name above, or hit ESCAPE]", 43, 2);
+        const int col = 15;
+        while (!Shutdown)
+        {
+            Screen.Goto(2, col);
+            if (AskforAux(out string newName, Name, 12))
+            {
+                Name = newName;
+
+                // Check to see if the name has actually changed (excluding any leading or trailing spaces).
+                if (newName.Trim() != Name.Trim())
+                {
+                    Generation = 1;
+                }
+            }
+
+            break;
+        }
+        Name = Name.PadRight(12);
+        Screen.Print(ColourEnum.Brown, Name, 2, col);
+        //Screen.Clear(22);
+    }
+
+    public void LoseExperience(int amount)
+    {
+        if (amount > ExperiencePoints)
+        {
+            amount = ExperiencePoints;
+        }
+        ExperiencePoints -= amount;
+        CheckExperience();
+    }
+
+    public void PolymorphSelf(SaveGame saveGame)
+    {
+        int effects = Program.Rng.DieRoll(2);
+        int tmp = 0;
+        bool moreEffects = true;
+        MsgPrint("You feel a change coming over you...");
+        while (effects-- != 0 && moreEffects)
+        {
+            switch (Program.Rng.DieRoll(12))
+            {
+                case 1:
+                case 2:
+                case 3:
+                    PolymorphWounds();
+                    break;
+
+                case 4:
+                case 5:
+                case 6:
+                    Dna.GainMutation();
+                    break;
+
+                case 7:
+                    {
+                        int newRaceIndex;
+                        Race newRace;
+                        do
+                        {
+                            newRaceIndex = Program.Rng.RandomLessThan(SingletonRepository.Races.Count);
+                            newRace = SingletonRepository.Races[newRaceIndex];
+                        } while (newRace is Race);
+                        MsgPrint($"You turn into {newRace.IndefiniteArticleForTitle} {newRace.Title}!");
+                        ChangeRace(newRace);
+                    }
+                    Level.RedrawSingleLocation(MapY, MapX);
+                    moreEffects = false;
+                    break;
+
+                case 8:
+                    MsgPrint("You polymorph into an abomination!");
+                    while (tmp < 6)
+                    {
+                        DecreaseAbilityScore(tmp, Program.Rng.FixedSeed + 6, Program.Rng.DieRoll(3) == 1);
+                        tmp++;
+                    }
+                    if (Program.Rng.DieRoll(6) == 1)
+                    {
+                        MsgPrint("You find living difficult in your present form!");
+                        TakeHit(Program.Rng.DiceRoll(Program.Rng.DieRoll(ExperienceLevel), ExperienceLevel), "a lethal mutation");
+                    }
+                    ShuffleAbilityScores();
+                    break;
+
+                default:
+                    ShuffleAbilityScores();
+                    break;
+            }
+        }
+    }
+
+    public void PolymorphWounds()
+    {
+        int wounds = TimedBleeding.TurnsRemaining;
+        int hitP = MaxHealth - Health;
+        int change = Program.Rng.DiceRoll(ExperienceLevel, 5);
+        bool nastyEffect = Program.Rng.DieRoll(5) == 1;
+        if (!(wounds != 0 || hitP != 0 || nastyEffect))
+        {
+            return;
+        }
+        if (nastyEffect)
+        {
+            MsgPrint("A new wound was created!");
+            TakeHit(change, "a polymorphed wound");
+            TimedBleeding.SetTimer(change);
+        }
+        else
+        {
+            MsgPrint("Your wounds are polymorphed into less serious ones.");
+            RestoreHealth(change);
+            TimedBleeding.SetTimer(TimedBleeding.TurnsRemaining - (change / 2));
+        }
+    }
+
+    [Obsolete("Use PrintSpells(Spell[], int, int)")]
+    public void PrintSpells(int[] spells, int y, int x, BaseRealm? realm)
+    {
+        int i;
+        int set = realm == PrimaryRealm ? 0 : 1;
+        Screen.PrintLine("", y, x);
+        Screen.Print("Name", y, x + 5);
+        Screen.Print("Lv Mana Fail Info", y, x + 35);
+        for (i = 0; i < spells.Length; i++)
+        {
+            int spell = spells[i];
+            Spell sPtr = Spells[set][spell];
+            Screen.PrintLine($"{i.IndexToLetter()}) {sPtr.SummaryLine()}", y + i + 1, x);
+        }
+        Screen.PrintLine("", y + i + 1, x);
+    }
+
+    public void PrintSpells(Spell[] spells, int y, int x)
+    {
+        int i;
+        Screen.PrintLine("", y, x);
+        Screen.Print("Name", y, x + 5);
+        Screen.Print("Lv Mana Fail Info", y, x + 35);
+        for (i = 0; i < spells.Length; i++)
+        {
+            Spell sPtr = spells[i];
+            Screen.PrintLine($"{i.IndexToLetter()}) {sPtr.SummaryLine()}", y + i + 1, x);
+        }
+        Screen.PrintLine("", y + i + 1, x);
+    }
+
+    public void RegenerateHealth(int percent)
+    {
+        int oldHealth = Health;
+        int newHealth = (MaxHealth * percent) + Constants.PyRegenHpbase;
+        Health += newHealth >> 16;
+        if (Health < 0 && oldHealth > 0)
+        {
+            Health = Constants.MaxShort;
+        }
+        int newFractionalHealth = (newHealth & 0xFFFF) + FractionalHealth;
+        if (newFractionalHealth >= 0x10000)
+        {
+            FractionalHealth = newFractionalHealth - 0x10000;
+            Health++;
+        }
+        else
+        {
+            FractionalHealth = newFractionalHealth;
+        }
+        if (Health >= MaxHealth)
+        {
+            Health = MaxHealth;
+            FractionalHealth = 0;
+        }
+        if (oldHealth != Health)
+        {
+            RedrawHpFlaggedAction.Set();
+        }
+    }
+
+    public void RegenerateMana(int percent)
+    {
+        int oldMana = Mana;
+        int newMana = (MaxMana * percent) + Constants.PyRegenMnbase;
+        Mana += newMana >> 16;
+        if (Mana < 0 && oldMana > 0)
+        {
+            Mana = Constants.MaxShort;
+        }
+        int newFractionalMana = (newMana & 0xFFFF) + FractionalMana;
+        if (newFractionalMana >= 0x10000L)
+        {
+            FractionalMana = newFractionalMana - 0x10000;
+            Mana++;
+        }
+        else
+        {
+            FractionalMana = newFractionalMana;
+        }
+        if (Mana >= MaxMana)
+        {
+            Mana = MaxMana;
+            FractionalMana = 0;
+        }
+        if (oldMana != Mana)
+        {
+            RedrawManaFlaggedAction.Set();
+        }
+    }
+
+    public void RerollHitPoints()
+    {
+        int i;
+        PlayerHp[0] = HitDie;
+        int lastroll = HitDie;
+        for (i = 1; i < Constants.PyMaxLevel; i++)
+        {
+            PlayerHp[i] = lastroll;
+            lastroll--;
+            if (lastroll < 1)
+            {
+                lastroll = HitDie;
+            }
+        }
+        for (i = 1; i < Constants.PyMaxLevel; i++)
+        {
+            int j = Program.Rng.DieRoll(Constants.PyMaxLevel - 1);
+            lastroll = PlayerHp[i];
+            PlayerHp[i] = PlayerHp[j];
+            PlayerHp[j] = lastroll;
+        }
+        for (i = 1; i < Constants.PyMaxLevel; i++)
+        {
+            PlayerHp[i] = PlayerHp[i - 1] + PlayerHp[i];
+        }
+        UpdateHealthFlaggedAction.Set();
+        RedrawHpFlaggedAction.Set();
+        HandleStuff();
+    }
+
+    public bool RestoreAbilityScore(int stat)
+    {
+        if (AbilityScores[stat].Innate != AbilityScores[stat].InnateMax)
+        {
+            AbilityScores[stat].Innate = AbilityScores[stat].InnateMax;
+            UpdateBonusesFlaggedAction.Set();
+            return true;
+        }
+        return false;
+    }
+
+    public bool RestoreHealth(int num)
+    {
+        if (Health < MaxHealth)
+        {
+            Health += num;
+            if (Health >= MaxHealth)
+            {
+                Health = MaxHealth;
+                FractionalHealth = 0;
+            }
+            RedrawHpFlaggedAction.Set();
+            if (num < 5)
+            {
+                MsgPrint("You feel a little better.");
+            }
+            else if (num < 15)
+            {
+                MsgPrint("You feel better.");
+            }
+            else if (num < 35)
+            {
+                MsgPrint("You feel much better.");
+            }
+            else
+            {
+                MsgPrint("You feel very good.");
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public bool RestoreLevel()
+    {
+        if (ExperiencePoints < MaxExperienceGained)
+        {
+            MsgPrint("You feel your life energies returning.");
+            ExperiencePoints = MaxExperienceGained;
+            CheckExperience();
+            return true;
+        }
+        return false;
+    }
+
+    public void SenseInventory()
+    {
+        int playerLevel = ExperienceLevel;
+        if (TimedConfusion.TurnsRemaining != 0)
+        {
+            return;
+        }
+        if (!BaseCharacterClass.SenseInventoryTest(ExperienceLevel))
+        {
+            return;
+        }
+        bool detailed = BaseCharacterClass.DetailedSenseInventory;
+
+        // Enumerate each of the inventory slots.
+        foreach (BaseInventorySlot inventorySlot in SingletonRepository.InventorySlots)
+        {
+            // Enumerate each of the items in the inventory slot.
+            foreach (int i in inventorySlot)
+            {
+                Item? item = GetInventoryItem(i);
+                if (item == null)
+                {
+                    continue;
+                }
+                bool okay = item.IdentityCanBeSensed;
+                if (!okay)
+                {
+                    continue;
+                }
+                if (item.IdentSense)
+                {
+                    continue;
+                }
+                if (item.IsKnown())
+                {
+                    continue;
+                }
+                if (!inventorySlot.IdentitySenseChanceTest)
+                {
+                    continue;
+                }
+                string feel = detailed ? item.GetDetailedFeeling() : item.GetVagueFeeling();
+                if (string.IsNullOrEmpty(feel))
+                {
+                    continue;
+                }
+                string oName = item.Description(false, 0);
+                string isare = item.Count == 1 ? "is" : "are";
+                MsgPrint($"You feel the {oName} ({i.IndexToLabel()}) {inventorySlot.SenseLocation(i)} {isare} {feel}...");
+                item.IdentSense = true;
+                if (string.IsNullOrEmpty(item.Inscription))
+                {
+                    item.Inscription = feel;
+                }
+                NoticeCombineAndReorderFlaggedAction.Set();
+            }
+        }
+    }
+
+    public bool SetFood(int v)
+    {
+        int oldAux, newAux;
+        bool notice = false;
+        v = v > 20000 ? 20000 : v < 0 ? 0 : v;
+        if (Food < Constants.PyFoodFaint)
+        {
+            oldAux = 0;
+        }
+        else if (Food < Constants.PyFoodWeak)
+        {
+            oldAux = 1;
+        }
+        else if (Food < Constants.PyFoodAlert)
+        {
+            oldAux = 2;
+        }
+        else if (Food < Constants.PyFoodFull)
+        {
+            oldAux = 3;
+        }
+        else if (Food < Constants.PyFoodMax)
+        {
+            oldAux = 4;
+        }
+        else
+        {
+            oldAux = 5;
+        }
+        if (v < Constants.PyFoodFaint)
+        {
+            newAux = 0;
+        }
+        else if (v < Constants.PyFoodWeak)
+        {
+            newAux = 1;
+        }
+        else if (v < Constants.PyFoodAlert)
+        {
+            newAux = 2;
+        }
+        else if (v < Constants.PyFoodFull)
+        {
+            newAux = 3;
+        }
+        else if (v < Constants.PyFoodMax)
+        {
+            newAux = 4;
+        }
+        else
+        {
+            newAux = 5;
+        }
+        if (newAux > oldAux)
+        {
+            switch (newAux)
+            {
+                case 1:
+                    MsgPrint("You are still weak.");
+                    break;
+
+                case 2:
+                    MsgPrint("You are still hungry.");
+                    break;
+
+                case 3:
+                    MsgPrint("You are no longer hungry.");
+                    break;
+
+                case 4:
+                    MsgPrint("You are full!");
+                    break;
+
+                case 5:
+                    MsgPrint("You have gorged yourself!");
+                    break;
+            }
+            notice = true;
+        }
+        else if (newAux < oldAux)
+        {
+            switch (newAux)
+            {
+                case 0:
+                    MsgPrint("You are getting faint from hunger!");
+                    break;
+
+                case 1:
+                    MsgPrint("You are getting weak from hunger!");
+                    break;
+
+                case 2:
+                    MsgPrint("You are getting hungry.");
+                    break;
+
+                case 3:
+                    MsgPrint("You are no longer full.");
+                    break;
+
+                case 4:
+                    MsgPrint("You are no longer gorged.");
+                    break;
+            }
+            notice = true;
+        }
+        Food = v;
+        if (!notice)
+        {
+            return false;
+        }
+        Disturb(false);
+        UpdateBonusesFlaggedAction.Set();
+        RedrawHungerFlaggedAction.Set();
+        HandleStuff();
+        return true;
+    }
+
+    public void ShuffleAbilityScores()
+    {
+        int jj;
+        int ii = Program.Rng.RandomLessThan(6);
+        for (jj = ii; jj != ii; jj = Program.Rng.RandomLessThan(6))
+        {
+        }
+        int max1 = AbilityScores[ii].InnateMax;
+        int cur1 = AbilityScores[ii].Innate;
+        int max2 = AbilityScores[jj].InnateMax;
+        int cur2 = AbilityScores[jj].Innate;
+        AbilityScores[ii].InnateMax = max2;
+        AbilityScores[ii].Innate = cur2;
+        AbilityScores[jj].InnateMax = max1;
+        AbilityScores[jj].Innate = cur1;
+        UpdateBonusesFlaggedAction.Set();
+    }
+
+    public bool SpellOkay(Spell sPtr, bool known)
+    {
+        if (sPtr.Level > ExperienceLevel)
+        {
+            return false;
+        }
+        if (sPtr.Forgotten)
+        {
+            return false;
+        }
+        if (sPtr.Learned)
+        {
+            return known;
+        }
+        return !known;
+    }
+
+    [Obsolete("Use SpellOkay(Spell)")]
+    public bool SpellOkay(int spell, bool known, bool realm2)
+    {
+        int set = realm2 ? 1 : 0;
+        Spell sPtr = Spells[set][spell % 32];
+        if (sPtr.Level > ExperienceLevel)
+        {
+            return false;
+        }
+        if (sPtr.Forgotten)
+        {
+            return false;
+        }
+        if (sPtr.Learned)
+        {
+            return known;
+        }
+        return !known;
+    }
+
+    public void TakeHit(int damage, string hitFrom)
+    {
+        bool penInvuln = false;
+        int warning = MaxHealth * Constants.HitpointWarn / 10;
+        if (IsDead)
+        {
+            return;
+        }
+        Disturb(true);
+        if (TimedInvulnerability.TurnsRemaining != 0 && damage < 9000)
+        {
+            if (Program.Rng.DieRoll(Constants.PenetrateInvulnerability) == 1)
+            {
+                penInvuln = true;
+            }
+            else
+            {
+                return;
+            }
+        }
+        if (TimedEtherealness.TurnsRemaining != 0)
+        {
+            damage /= 10;
+            if (damage == 0 && Program.Rng.DieRoll(10) == 1)
+            {
+                damage = 1;
+            }
+        }
+        Health -= damage;
+        RedrawHpFlaggedAction.Set();
+        if (penInvuln)
+        {
+            MsgPrint("The attack penetrates your shield of invulnerability!");
+        }
+        if (Health < 0)
+        {
+            if (Program.Rng.DieRoll(10) <= Religion.GetNamedDeity(GodName.Zo_Kalar).AdjustedFavour)
+            {
+                MsgPrint("Zo-Kalar's favour saves you from death!");
+                Health += damage;
+            }
+            else
+            {
+                if (IsWizard && !GetCheck("Die? "))
+                {
+                    Health += damage;
+                }
+                else
+                {
+                    PlaySound(SoundEffectEnum.PlayerDeath);
+                    MsgPrint("You die.");
+                    MsgPrint(null);
+                    DiedFrom = hitFrom;
+                    if (TimedHallucinations.TurnsRemaining != 0)
+                    {
+                        DiedFrom += "(?)";
+                    }
+                    IsWinner = false;
+                    IsDead = true;
+                    return;
+                }
+            }
+        }
+        if (Health < warning)
+        {
+            PlaySound(SoundEffectEnum.HealthWarning);
+            MsgPrint("*** LOW HITPOINT WARNING! ***");
+            MsgPrint(null);
+        }
+    }
+
+    public void ToggleRecall()
+    {
+        if (WordOfRecallDelay == 0)
+        {
+            WordOfRecallDelay = Program.Rng.DieRoll(20) + 15;
+            MsgPrint("The air about you becomes charged...");
+        }
+        else
+        {
+            WordOfRecallDelay = 0;
+            MsgPrint("A tension leaves the air around you...");
+        }
+    }
+
+    public bool TryDecreasingAbilityScore(int stat)
+    {
+        bool sust = false;
+        switch (stat)
+        {
+            case Ability.Strength:
+                if (HasSustainStrength)
+                {
+                    sust = true;
+                }
+                break;
+
+            case Ability.Intelligence:
+                if (HasSustainIntelligence)
+                {
+                    sust = true;
+                }
+                break;
+
+            case Ability.Wisdom:
+                if (HasSustainWisdom)
+                {
+                    sust = true;
+                }
+                break;
+
+            case Ability.Dexterity:
+                if (HasSustainDexterity)
+                {
+                    sust = true;
+                }
+                break;
+
+            case Ability.Constitution:
+                if (HasSustainConstitution)
+                {
+                    sust = true;
+                }
+                break;
+
+            case Ability.Charisma:
+                if (HasSustainCharisma)
+                {
+                    sust = true;
+                }
+                break;
+        }
+        if (sust)
+        {
+            MsgPrint($"You feel {Constants.DescStatNeg[stat]} for a moment, but the feeling passes.");
+            return true;
+        }
+        if (Program.Rng.DieRoll(10) <= Religion.GetNamedDeity(GodName.Lobon).AdjustedFavour)
+        {
+            MsgPrint($"You feel {Constants.DescStatNeg[stat]} for a moment, but Lobon's favour protects you.");
+            return true;
+        }
+        if (DecreaseAbilityScore(stat, 10, false))
+        {
+            MsgPrint($"You feel very {Constants.DescStatNeg[stat]}.");
+            return true;
+        }
+        return false;
+    }
+
+    public bool TryIncreasingAbilityScore(int stat)
+    {
+        bool res = RestoreAbilityScore(stat);
+        if (IncreaseAbilityScore(stat))
+        {
+            MsgPrint($"Wow!  You feel very {Constants.DescStatPos[stat]}!");
+            return true;
+        }
+        if (res)
+        {
+            MsgPrint($"You feel less {Constants.DescStatNeg[stat]}.");
+            return true;
+        }
+        return false;
+    }
+
+    public bool TryRestoringAbilityScore(int stat)
+    {
+        if (RestoreAbilityScore(stat))
+        {
+            MsgPrint($"You feel less {Constants.DescStatNeg[stat]}.");
+            return true;
+        }
+        return false;
+    }
+
+    private bool IncreaseAbilityScore(int which)
+    {
+        int value = AbilityScores[which].Innate;
+        if (value < 18 + 100)
+        {
+            int gain;
+            if (value < 18)
+            {
+                gain = Program.Rng.RandomLessThan(100) < 75 ? 1 : 2;
+                value += gain;
+            }
+            else if (value < 18 + 98)
+            {
+                gain = (((18 + 100 - value) / 2) + 3) / 2;
+                if (gain < 1)
+                {
+                    gain = 1;
+                }
+                value += Program.Rng.DieRoll(gain) + (gain / 2);
+                if (value > 18 + 99)
+                {
+                    value = 18 + 99;
+                }
+            }
+            else
+            {
+                value++;
+            }
+            AbilityScores[which].Innate = value;
+            if (value > AbilityScores[which].InnateMax)
+            {
+                AbilityScores[which].InnateMax = value;
+            }
+            UpdateBonusesFlaggedAction.Set();
+            return true;
+        }
+        return false;
+    }
+
+    public bool GetItemOkay(Item? item, IItemFilter? itemFilter)
+    {
+        if (item == null)
+        {
+            return false;
+        }
+        return ItemMatchesFilter(item, itemFilter);
+    }
+
+    public int InvenCarry(Item oPtr)
+    {
+        int j;
+        int n = -1;
+        for (j = 0; j < InventorySlot.PackCount; j++)
+        {
+            Item? jPtr = GetInventoryItem(j);
+            if (jPtr == null)
+            {
+                continue;
+            }
+            n = j;
+            if (oPtr.CanAbsorb(jPtr))
+            {
+                jPtr.Absorb(oPtr);
+                WeightCarried += oPtr.Count * oPtr.Weight;
+                UpdateBonusesFlaggedAction.Set();
+                return j;
+            }
+        }
+        if (_invenCnt > InventorySlot.PackCount)
+        {
+            return -1;
+        }
+        for (j = 0; j <= InventorySlot.PackCount; j++)
+        {
+            Item? jPtr = GetInventoryItem(j);
+            if (jPtr == null)
+            {
+                break;
+            }
+        }
+        int i = j;
+        if (i < InventorySlot.PackCount)
+        {
+            for (j = 0; j < InventorySlot.PackCount; j++)
+            {
+                Item? jPtr = GetInventoryItem(j);
+                if (jPtr == null)
+                {
+                    break;
+                }
+                int compare = oPtr.CompareTo(jPtr);
+                if (compare == -1)
+                {
+                    break;
+                }
+            }
+            i = j;
+            for (int k = n; k >= i; k--)
+            {
+                SetInventoryItem(k + 1, GetInventoryItem(k));
+            }
+            SetInventoryItem(i, null);
+        }
+
+        SetInventoryItem(i, oPtr.Clone());
+        oPtr = GetInventoryItem(i);
+        oPtr.Y = 0;
+        oPtr.X = 0;
+        oPtr.HoldingMonsterIndex = 0;
+        WeightCarried += oPtr.Count * oPtr.Weight;
+        _invenCnt++;
+        UpdateBonusesFlaggedAction.Set();
+        NoticeCombineAndReorderFlaggedAction.Set();
+        return i;
+    }
+
+    public bool InvenCarryOkay(Item oPtr)
+    {
+        if (_invenCnt < InventorySlot.PackCount)
+        {
+            return true;
+        }
+        for (int j = 0; j < InventorySlot.PackCount; j++)
+        {
+            Item? jPtr = GetInventoryItem(j);
+            if (jPtr == null)
+            {
+                continue;
+            }
+            if (jPtr.CanAbsorb(oPtr))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int InvenDamage(Func<Item, bool> testerFunc, int perc)
+    {
+        int k = 0;
+        for (int i = 0; i < InventorySlot.PackCount; i++)
+        {
+            Item oPtr = GetInventoryItem(i);
+            if (oPtr != null && oPtr.FixedArtifact == null && string.IsNullOrEmpty(oPtr.RandartName) && testerFunc(oPtr))
+            {
+                int j;
+                int amt;
+                for (amt = j = 0; j < oPtr.Count; ++j)
+                {
+                    if (Program.Rng.RandomLessThan(100) < perc)
+                    {
+                        amt++;
+                    }
+                }
+                if (amt != 0)
+                {
+                    string oName = oPtr.Description(false, 3);
+                    string y = oPtr.Count > 1 ? (amt == oPtr.Count ? "All of y" : (amt > 1 ? "Some of y" : "One of y")) : "Y";
+                    string w = amt > 1 ? "were" : "was";
+                    MsgPrint($"{y}our {oName} ({i.IndexToLabel()}) {w} destroyed!");
+                    if (oPtr.Factory.CategoryEnum == ItemTypeEnum.Potion)
+                    {
+                        PotionItemFactory potion = (PotionItemFactory)oPtr.Factory;
+                        potion.Smash(0, MapY, MapX);
+                    }
+                    InvenItemIncrease(i, -amt);
+                    InvenItemOptimize(i);
+                    k += amt;
+                }
+            }
+        }
+        return k;
+    }
+    public void InvenDrop(Item oPtr, int amt)
+    {
+        if (amt <= 0)
+        {
+            return;
+        }
+        if (amt > oPtr.Count)
+        {
+            amt = oPtr.Count;
+        }
+        if (oPtr.IsInEquipment)
+        {
+            // Take the item off first.
+            int? newItem = InvenTakeoff(oPtr, amt);
+            if (newItem == null)
+            {
+                return;
+            }
+
+            oPtr = GetInventoryItem(newItem.Value);
+
+            // We took off the item, check to ensure that the item is not missing.
+            if (oPtr == null)
+            {
+                return;
+            }
+        }
+        Item qPtr = oPtr.Clone(amt);
+        string oName = qPtr.Description(true, 3);
+        MsgPrint($"You drop {oName} ({oPtr.Label}).");
+        Level.DropNear(qPtr, 0, MapY, MapX);
+        oPtr.ItemIncrease(-amt);
+        oPtr.ItemDescribe();
+        oPtr.ItemOptimize();
+    }
+
+    [Obsolete("Use InvenDrop(Item, int)")]
+    public void InvenDrop(int item, int amt)
+    {
+        Item? oPtr = GetInventoryItem(item);
+        if (oPtr == null)
+        {
+            return;
+        }
+        InvenDrop(oPtr, amt);
+    }
+
+    public void InvenItemDescribe(int item)
+    {
+        Item? oPtr = GetInventoryItem(item);
+        if (oPtr == null)
+        {
+            return;
+        }
+        string oName = oPtr.Description(true, 3);
+        MsgPrint($"You have {oName}.");
+    }
+
+    public void InvenItemIncrease(int item, int num)
+    {
+        Item? oPtr = GetInventoryItem(item);
+        if (oPtr == null)
+        {
+            return;
+        }
+        num += oPtr.Count;
+        if (num > 255)
+        {
+            num = 255;
+        }
+        else if (num < 0)
+        {
+            num = 0;
+        }
+        num -= oPtr.Count;
+        if (num != 0)
+        {
+            oPtr.Count += num;
+            WeightCarried += num * oPtr.Weight;
+            UpdateBonusesFlaggedAction.Set();
+            UpdateManaFlaggedAction.Set();
+            NoticeCombineAndReorderFlaggedAction.Set();
+        }
+    }
+
+    public void InvenItemOptimize(int item)
+    {
+        Item? oPtr = GetInventoryItem(item);
+        if (oPtr == null)
+        {
+            return;
+        }
+        if (oPtr.Count > 0)
+        {
+            return;
+        }
+        if (item < InventorySlot.MeleeWeapon)
+        {
+            int i;
+            _invenCnt--;
+            for (i = item; i < InventorySlot.PackCount; i++)
+            {
+                SetInventoryItem(i, GetInventoryItem(i + 1));
+            }
+            SetInventoryItem(i, null);
+        }
+        else
+        {
+            SetInventoryItem(item, null);
+            UpdateBonusesFlaggedAction.Set();
+            UpdateTorchRadiusFlaggedAction.Set();
+            UpdateManaFlaggedAction.Set();
+        }
+    }
+
+    public int? InvenTakeoff(Item oPtr, int amt)
+    {
+        string act;
+        if (amt <= 0)
+        {
+            return null;
+        }
+        if (amt > oPtr.Count)
+        {
+            amt = oPtr.Count;
+        }
+        Item qPtr = oPtr.Clone(amt);
+        string oName = qPtr.Description(true, 3);
+        act = oPtr.TakeOffMessage;
+        oPtr.ItemIncrease(-amt);
+        oPtr.ItemOptimize();
+        int slot = InvenCarry(qPtr);
+        MsgPrint($"{act} {oName} ({slot.IndexToLabel()}).");
+        return slot;
+    }
+
+    [Obsolete("Use InvenTakeOff(Item, int)")]
+    public int? InvenTakeoff(int item, int amt)
+    {
+        Item? oPtr = GetInventoryItem(item);
+        if (oPtr == null)
+        {
+            return null;
+        }
+        return InvenTakeoff(oPtr, amt);
+    }
+
+    public bool ItemMatchesFilter(Item item, IItemFilter? itemFilter)
+    {
+        if (item.Factory == null)
+        {
+            return false;
+        }
+        if (item.Category == ItemTypeEnum.Gold)
+        {
+            return false;
+        }
+        if (itemFilter != null)
+        {
+            if (!itemFilter.ItemMatches(item))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int LabelToEquip(char c)
+    {
+        int i = (char.IsLower(c) ? c.LetterToNumber() : -1) + InventorySlot.MeleeWeapon;
+        if (i < InventorySlot.MeleeWeapon || i >= InventorySlot.Total)
+        {
+            return -1; // TODO: Return null
+        }
+        if (GetInventoryItem(i) == null)
+        {
+            return -1; // TODO: Return null
+        }
+        return i;
+    }
+
+    public int LabelToInven(char c)
+    {
+        int i = char.IsLower(c) ? c.LetterToNumber() : -1;
+        if (i < 0 || i > InventorySlot.PackCount)
+        {
+            return -1; // TODO: Return null
+        }
+        if (GetInventoryItem(i) == null)
+        {
+            return -1; // TODO: Return null
+        }
+        return i;
+    }
+
+    public void ShowEquip(IItemFilter? itemFilter)
+    {
+        ShowInventoryOptions options = new ShowInventoryOptions()
+        {
+            ShowEmptySlotsAsNothing = true,
+            ShowFlavourColumn = true,
+            ShowUsageColumn = true
+        };
+        ShowInven(_inventorySlot => _inventorySlot.IsEquipment, itemFilter, options);
+    }
+
+    /// <summary>
+    /// Shows the players inventory on the screen.  Returns false, if the player has nothing in their inventory.
+    /// </summary>
+    /// <param name="inventorySlotPredicate"></param>
+    /// <param name="itemFilter"></param>
+    /// <param name="options"></param>
+    /// <returns></returns>
+    public bool ShowInven(Func<BaseInventorySlot, bool> inventorySlotPredicate, IItemFilter? itemFilter, ShowInventoryOptions? options = null)
+    {
+        if (options == null)
+        {
+            options = new ShowInventoryOptions();
+        }
+
+        BaseInventorySlot[] inventorySlots = SingletonRepository.InventorySlots
+            .Where(_inventorySlot => inventorySlotPredicate(_inventorySlot))
+            .OrderBy(_inventorySlot => _inventorySlot.SortOrder)
+            .ToArray();
+
+        const string labels = "abcdefghijklmnopqrstuvwxyz";
+        ConsoleTable consoleTable = new ConsoleTable("label", "flavour", "usage", "description", "weight");
+        consoleTable.Column("flavour").IsVisible = options.ShowFlavourColumn;
+        consoleTable.Column("usage").IsVisible = options.ShowFlavourColumn;
+        consoleTable.Column("weight").Alignment = new ConsoleTopRightAlignment();
+        foreach (BaseInventorySlot inventorySlot in inventorySlots)
+        {
+            bool slotIsEmpty = true;
+            foreach (int index in inventorySlot.InventorySlots)
+            {
+                Item? oPtr = GetInventoryItem(index);
+                if (oPtr != null && (itemFilter == null || itemFilter.ItemMatches(oPtr)))
+                {
+                    ConsoleTableRow consoleRow = consoleTable.AddRow();
+                    consoleRow["label"] = new ConsoleString(ColourEnum.White, $"{index.IndexToLabel()})");
+
+                    if (oPtr.Factory != null)
+                    {
+                        // Apply flavour visuals
+                        consoleRow["flavour"] = new ConsoleChar(oPtr.Factory.FlavorColour, oPtr.Factory.FlavorSymbol.Character);
+                    }
+                    else
+                    {
+                        // There is no item.
+                        consoleRow["flavour"] = new ConsoleChar(ColourEnum.Background, ' ');
+                    }
+                    consoleRow["usage"] = new ConsoleString(ColourEnum.White, $"{inventorySlot.MentionUse(index)}:");
+
+                    ColourEnum colour = oPtr.Factory == null ? ColourEnum.White : oPtr.Factory.Colour;
+                    consoleRow["description"] = new ConsoleString(colour, oPtr.Description(true, 3));
+
+                    int wgt = oPtr.Weight * oPtr.Count;
+                    consoleRow["weight"] = new ConsoleString(ColourEnum.White, $"{wgt / 10}.{wgt % 10} lb");
+                    slotIsEmpty = false;
+                }
+            }
+            if (options.ShowEmptySlotsAsNothing && slotIsEmpty)
+            {
+                ConsoleTableRow consoleRow = consoleTable.AddRow();
+                consoleRow["label"] = new ConsoleString(ColourEnum.White, $"{labels[consoleTable.Rows.Count() - 1]})");
+                consoleRow["usage"] = new ConsoleString(ColourEnum.White, $"{inventorySlot.MentionUse(null)}:");
+                consoleRow["description"] = new ConsoleString(ColourEnum.White, "(nothing)");
+                consoleRow["weight"] = new ConsoleString(ColourEnum.White, $"0.0 lb");
+            }
+        }
+
+        if (consoleTable.Rows.Count() > 0)
+        {
+            if (consoleTable.Width < 29)
+            {
+                ConsoleWindow container = new ConsoleWindow(50, 1, 79, consoleTable.Height);
+                container.Clear(this, ColourEnum.Background);
+                consoleTable.Render(this, container, new ConsoleTopLeftAlignment());
+            }
+            else
+            {
+                consoleTable.Render(this, new ConsoleWindow(0, 1, 79, 26), new ConsoleTopRightAlignment());
+            }
+            return true;
+        }
+        return false;
+    }
     //////////////////////////////////////////////
     // PLAYER END
     //////////////////////////////////////////////

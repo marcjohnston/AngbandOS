@@ -14,10 +14,10 @@ internal class BlindAttackEffect : BaseAttackEffect
     public override string Description => "blind";
     public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
-        saveGame.Player.TakeHit(damage, monsterDescription);
-        if (!saveGame.Player.HasBlindnessResistance)
+        saveGame.TakeHit(damage, monsterDescription);
+        if (!saveGame.HasBlindnessResistance)
         {
-            if (saveGame.Player.TimedBlindness.AddTimer(10 + Program.Rng.DieRoll(monsterLevel)))
+            if (saveGame.TimedBlindness.AddTimer(10 + Program.Rng.DieRoll(monsterLevel)))
             {
                 obvious = true;
             }

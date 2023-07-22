@@ -22,7 +22,7 @@ internal class CharmAnimalsActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.CharmAnimals(SaveGame.Player.ExperienceLevel * 2);
+        SaveGame.CharmAnimals(SaveGame.ExperienceLevel * 2);
         return true;
     }
 

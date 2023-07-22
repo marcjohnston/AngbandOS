@@ -21,8 +21,8 @@ internal class Cure700Activation : Activation
     public override bool Activate()
     {
         SaveGame.MsgPrint("You feel a warm tingling inside...");
-        SaveGame.Player.RestoreHealth(700);
-        SaveGame.Player.TimedBleeding.ResetTimer();
+        SaveGame.RestoreHealth(700);
+        SaveGame.TimedBleeding.ResetTimer();
         return true;
     }
 

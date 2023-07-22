@@ -17,13 +17,13 @@ internal class NatureSpellWhirlpool : Spell
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<WaterProjectile>(), dir, 100 + SaveGame.Player.ExperienceLevel, (SaveGame.Player.ExperienceLevel / 12) + 1);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<WaterProjectile>(), dir, 100 + SaveGame.ExperienceLevel, (SaveGame.ExperienceLevel / 12) + 1);
     }
 
     public override string Name => "Whirlpool";
     
     protected override string? Info()
     {
-        return $"dam {100 + SaveGame.Player.ExperienceLevel}";
+        return $"dam {100 + SaveGame.ExperienceLevel}";
     }
 }

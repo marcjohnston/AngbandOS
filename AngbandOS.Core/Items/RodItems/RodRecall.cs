@@ -26,7 +26,7 @@ internal class RodRecall : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        SaveGame.Player.ToggleRecall();
+        SaveGame.ToggleRecall();
         zapRodEvent.Identified = true;
         zapRodEvent.Item.TypeSpecificValue = 60;
     }

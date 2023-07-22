@@ -20,13 +20,13 @@ internal class SpeedActivation : Activation
 
     public override bool Activate()
     {
-        if (SaveGame.Player.TimedHaste.TurnsRemaining == 0)
+        if (SaveGame.TimedHaste.TurnsRemaining == 0)
         {
-            SaveGame.Player.TimedHaste.SetTimer(Program.Rng.DieRoll(20) + 20);
+            SaveGame.TimedHaste.SetTimer(Program.Rng.DieRoll(20) + 20);
         }
         else
         {
-            SaveGame.Player.TimedHaste.AddTimer(5);
+            SaveGame.TimedHaste.AddTimer(5);
         }
         return true;
     }

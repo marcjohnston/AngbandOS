@@ -29,27 +29,27 @@ internal class SpecialHealingPotionItemFactory : PotionItemFactory
 
         // *Healing* heals you 1200 health, and cures blindness, confusion, stun, poison,
         // and bleeding
-        if (SaveGame.Player.RestoreHealth(1200))
+        if (SaveGame.RestoreHealth(1200))
         {
             identified = true;
         }
-        if (SaveGame.Player.TimedBlindness.ResetTimer())
+        if (SaveGame.TimedBlindness.ResetTimer())
         {
             identified = true;
         }
-        if (SaveGame.Player.TimedConfusion.ResetTimer())
+        if (SaveGame.TimedConfusion.ResetTimer())
         {
             identified = true;
         }
-        if (SaveGame.Player.TimedPoison.ResetTimer())
+        if (SaveGame.TimedPoison.ResetTimer())
         {
             identified = true;
         }
-        if (SaveGame.Player.TimedStun.ResetTimer())
+        if (SaveGame.TimedStun.ResetTimer())
         {
             identified = true;
         }
-        if (SaveGame.Player.TimedBleeding.ResetTimer())
+        if (SaveGame.TimedBleeding.ResetTimer())
         {
             identified = true;
         }

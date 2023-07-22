@@ -62,7 +62,7 @@ internal class CyclopsRace : Race
     }
     public override void CalcBonuses(SaveGame saveGame)
     {
-        saveGame.Player.HasSoundResistance = true;
+        saveGame.HasSoundResistance = true;
     }
 
     public override void UseRacialPower(SaveGame saveGame)
@@ -73,7 +73,7 @@ internal class CyclopsRace : Race
             if (saveGame.GetDirectionWithAim(out int direction))
             {
                 saveGame.MsgPrint("You throw a huge boulder.");
-                saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), direction, 3 * saveGame.Player.ExperienceLevel / 2);
+                saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), direction, 3 * saveGame.ExperienceLevel / 2);
             }
         }
     }

@@ -11,7 +11,7 @@ internal class BlindSpellResistantDetection : SpellResistantDetection
 {
     public override void Learn(SaveGame saveGame, Monster monster)
     {
-        if (saveGame.Player.HasBlindnessResistance)
+        if (saveGame.HasBlindnessResistance)
         {
             monster.SmResBlind = true;
         }

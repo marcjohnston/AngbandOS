@@ -68,23 +68,23 @@ internal class GolemRace : Race
     }
     public override void CalcBonuses(SaveGame saveGame)
     {
-        if (saveGame.Player.ExperienceLevel > 34)
+        if (saveGame.ExperienceLevel > 34)
         {
-            saveGame.Player.HasHoldLife = true;
+            saveGame.HasHoldLife = true;
         }
-        saveGame.Player.HasSlowDigestion = true;
-        saveGame.Player.HasFreeAction = true;
-        saveGame.Player.HasSeeInvisibility = true;
-        saveGame.Player.HasPoisonResistance = true;
-        saveGame.Player.ArmourClassBonus += 20 + (saveGame.Player.ExperienceLevel / 5);
-        saveGame.Player.DisplayedArmourClassBonus += 20 + (saveGame.Player.ExperienceLevel / 5);
+        saveGame.HasSlowDigestion = true;
+        saveGame.HasFreeAction = true;
+        saveGame.HasSeeInvisibility = true;
+        saveGame.HasPoisonResistance = true;
+        saveGame.ArmourClassBonus += 20 + (saveGame.ExperienceLevel / 5);
+        saveGame.DisplayedArmourClassBonus += 20 + (saveGame.ExperienceLevel / 5);
     }
 
     public override void Eat(FoodItem item)
     {
         // This race only gets 1/20th of the food value
         SaveGame.MsgPrint("The food of mortals is poor sustenance for you.");
-        SaveGame.Player.SetFood(SaveGame.Player.Food + (item.TypeSpecificValue / 20));
+        SaveGame.SetFood(SaveGame.Food + (item.TypeSpecificValue / 20));
     }
 
     public override bool CanBleed(int level) => false;
@@ -94,7 +94,7 @@ internal class GolemRace : Race
         // Golems can harden their skin
         if (saveGame.CheckIfRacialPowerWorks(20, 15, Ability.Constitution, 8))
         {
-            saveGame.Player.TimedStoneskin.AddTimer(Program.Rng.DieRoll(20) + 30);
+            saveGame.TimedStoneskin.AddTimer(Program.Rng.DieRoll(20) + 30);
         }
     }
     public override bool OutfitsWithScrollsOfSatisfyHunger => true;

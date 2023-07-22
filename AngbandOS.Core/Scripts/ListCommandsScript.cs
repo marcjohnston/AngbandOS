@@ -81,7 +81,7 @@ internal class ListCommandsScript : Script
         SaveGame.Screen.Print("S = Auto-search on/off", 21, 52);
         SaveGame.Screen.Print("T = Tunnel", 22, 52);
         SaveGame.Screen.Print("V = Version info", 24, 52);
-        if (SaveGame.Player.IsWizard)
+        if (SaveGame.IsWizard)
         {
             SaveGame.Screen.Print("W = Wizard command", 25, 52);
         }

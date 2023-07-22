@@ -15,15 +15,15 @@ internal class PoisonAttackEffect : BaseAttackEffect
     public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         // Poison does additional damage
-        saveGame.Player.TakeHit(damage, monsterDescription);
-        if (!(saveGame.Player.HasPoisonResistance || saveGame.Player.TimedPoisonResistance.TurnsRemaining != 0))
+        saveGame.TakeHit(damage, monsterDescription);
+        if (!(saveGame.HasPoisonResistance || saveGame.TimedPoisonResistance.TurnsRemaining != 0))
         {
             // Hagarg Ryonis might save us from the additional damage
-            if (Program.Rng.DieRoll(10) <= saveGame.Player.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+            if (Program.Rng.DieRoll(10) <= saveGame.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
             {
                 saveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
             }
-            else if (saveGame.Player.TimedPoison.AddTimer(Program.Rng.DieRoll(monsterLevel) + 5))
+            else if (saveGame.TimedPoison.AddTimer(Program.Rng.DieRoll(monsterLevel) + 5))
             {
                 obvious = true;
             }

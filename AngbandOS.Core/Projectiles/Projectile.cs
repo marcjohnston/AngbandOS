@@ -46,7 +46,7 @@ internal abstract class Projectile
         bool visual = false;
         bool drawn = false;
         bool breath = false;
-        bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
         int grids = 0;
         int[] gx = new int[256];
         int[] gy = new int[256];
@@ -59,8 +59,8 @@ internal abstract class Projectile
         }
         else if (who == 0)
         {
-            x1 = SaveGame.Player.MapX;
-            y1 = SaveGame.Player.MapY;
+            x1 = SaveGame.MapX;
+            y1 = SaveGame.MapY;
         }
         else
         {
@@ -441,7 +441,7 @@ internal abstract class Projectile
                 x = gx[i];
 
                 // Check to see if the projectile can affect the player.
-                if (x == SaveGame.Player.MapX && y == SaveGame.Player.MapY && who != 0)
+                if (x == SaveGame.MapX && y == SaveGame.MapY && who != 0)
                 {
                     // Check to see if the projectile attack bounces off the player.
                     if (!CheckBounceOffPlayer(who, dam, rad))
@@ -473,9 +473,9 @@ internal abstract class Projectile
     /// <returns></returns>
     protected virtual bool CheckBounceOffPlayer(int who, int dam, int aRad)
     {
-        if (SaveGame.Player.HasReflection && aRad == 0 && Program.Rng.DieRoll(10) != 1)
+        if (SaveGame.HasReflection && aRad == 0 && Program.Rng.DieRoll(10) != 1)
         {
-            bool blind = SaveGame.Player.TimedBlindness.TurnsRemaining != 0;
+            bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
             SaveGame.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
 
             int tY;

@@ -13,8 +13,8 @@ internal class NatureSpellCureWoundsAndPoison : Spell
     private NatureSpellCureWoundsAndPoison(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Player.TimedBleeding.ResetTimer();
-        SaveGame.Player.TimedPoison.ResetTimer();
+        SaveGame.TimedBleeding.ResetTimer();
+        SaveGame.TimedPoison.ResetTimer();
     }
 
     public override string Name => "Cure Wounds and Poison";
