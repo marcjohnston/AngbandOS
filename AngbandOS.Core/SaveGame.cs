@@ -412,8 +412,17 @@ internal class SaveGame
 
     public int LightLevel;
     public int Mana;
+
+    /// <summary>
+    /// The current player X position.
+    /// </summary>
     public int MapX;
+
+    /// <summary>
+    /// The current player Y position.
+    /// </summary>
     public int MapY;
+
     public int MaxExperienceGained;
     public int MaxHealth;
     public int MaxLevelGained;

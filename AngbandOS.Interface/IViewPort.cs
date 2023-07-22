@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.Interface;
 
 /// <summary>
-/// Represents the interface that needs to be implemented to view a game.
+/// Represents the interface that needs to be implemented to view a game.  The viewport represents a coordinate system from 0, 0 to width - 1, height - 1.
 /// </summary>
 public interface IViewPort
 {

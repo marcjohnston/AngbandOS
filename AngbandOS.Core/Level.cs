@@ -10,8 +10,16 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class Level
 {
+    /// <summary>
+    /// Returns the maximum height of any level.
+    /// </summary>
     public const int MaxHgt = 126;
+
+    /// <summary>
+    /// Returns the maximum width of any level.
+    /// </summary>
     public const int MaxWid = 198;
+
     public readonly GridTile[][] Grid = new GridTile[MaxHgt][];
     public readonly int[] KeypadDirectionXOffset = { 0, -1, 0, 1, -1, 0, 1, -1, 0, 1 };
     public readonly int[] KeypadDirectionYOffset = { 0, 1, 1, 1, 0, 0, 0, -1, -1, -1 };
@@ -40,7 +48,15 @@ internal class Level
     public int MonsterLevel;
     public int ObjectLevel;
 
+    /// <summary>
+    /// Returns the map sector.
+    /// </summary>
     public int PanelCol;
+
+    /// <summary>
+    /// Returns the map sector.
+    /// </summary>
+    public int PanelRow;
 
     /// <summary>
     /// Returns the last level column of the playable area that is visible in the viewport.
@@ -53,12 +69,6 @@ internal class Level
     public int PanelColMin;
     
     /// <summary>
-    /// Returns the first level column
-    /// </summary>
-    public int PanelColPrt;
-    public int PanelRow;
-
-    /// <summary>
     /// Returns the last level row of the playable area that is visible in the viewport.
     /// </summary>
     public int PanelRowMax;
@@ -68,7 +78,15 @@ internal class Level
     /// </summary>
     public int PanelRowMin;
 
+    /// <summary>
+    /// Returns the first level row that is visible in the viewport.
+    /// </summary>
     public int PanelRowPrt;
+
+    /// <summary>
+    /// Returns the first level column that is visible in the viewport.
+    /// </summary>
+    public int PanelColPrt;
 
     public bool SpecialDanger;
     public bool SpecialTreasure;
@@ -752,11 +770,14 @@ internal class Level
         SaveGame.RedrawMapFlaggedAction.Set();
     }
 
+    /// <summary>
+    /// Locate the cursor in the viewport at a specific level grid x, y coordinate.
+    /// </summary>
+    /// <param name="row"></param>
+    /// <param name="col"></param>
     public void MoveCursorRelative(int row, int col)
     {
-        row -= PanelRowPrt;
-        col -= PanelColPrt;
-        SaveGame.Screen.Goto(row, col);
+        SaveGame.Screen.Goto(row - PanelRowPrt, col - PanelColPrt);
     }
 
     public void MoveOneStepTowards(out int newY, out int newX, int currentY, int currentX, int startY, int startX, int targetY, int targetX)
@@ -1093,11 +1114,7 @@ internal class Level
     {
         if (PanelContains(y, x))
         {
-            ColourEnum a;
-            char c;
-            {
-                MapInfo(y, x, out a, out c);
-            }
+            MapInfo(y, x, out ColourEnum a, out char c);
             if (SaveGame.TimedInvulnerability.TurnsRemaining != 0)
             {
                 a = ColourEnum.White;
