@@ -11266,7 +11266,7 @@ internal class SaveGame
     private bool PlayerBirthAux()
     {
         Screen.Clear();
-        BaseBirthStage? birthStage = SingletonRepository.BirthStages.Get<IntroductionBirthStage>();
+        BirthStage? birthStage = SingletonRepository.BirthStages.Get<IntroductionBirthStage>();
         while (birthStage != null && !Shutdown)
         {
             birthStage = birthStage.Render();

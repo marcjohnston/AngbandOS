@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.BirthStages;
 
 [Serializable]
-internal class NamingBirthStage : BaseBirthStage
+internal class NamingBirthStage : BirthStage
 {
     private NamingBirthStage(SaveGame saveGame) : base(saveGame) { }
-    public override BaseBirthStage? Render()
+    public override BirthStage? Render()
     {
         if (string.IsNullOrEmpty(SaveGame.Name))
         {

@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.BirthStages;
 
 [Serializable]
-internal class RaceSelectionBirthStage : BaseBirthStage
+internal class RaceSelectionBirthStage : BirthStage
 {
     private int currentSelection = 16;
     private RaceSelectionBirthStage(SaveGame saveGame) : base(saveGame) { }
-    public override BaseBirthStage? Render()
+    public override BirthStage? Render()
     {
         DisplayPartialCharacter();
         string[]? menuItems = SaveGame.SingletonRepository.Races
@@ -109,7 +109,7 @@ internal class RaceSelectionBirthStage : BaseBirthStage
         }
         return true;
     }
-    private BaseBirthStage? GoForward(int index)
+    private BirthStage? GoForward(int index)
     {
         Race[] races = SaveGame.SingletonRepository.Races
             .OrderBy((Race race) => race.Title)
@@ -154,7 +154,7 @@ internal class RaceSelectionBirthStage : BaseBirthStage
         return SaveGame.SingletonRepository.BirthStages.Get<Realm1SelectionBirthStage>();
     }
 
-    private BaseBirthStage? GoBack()
+    private BirthStage? GoBack()
     {
         return SaveGame.SingletonRepository.BirthStages.Get<ClassSelectionBirthStage>();
     }

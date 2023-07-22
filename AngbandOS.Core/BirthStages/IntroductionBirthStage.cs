@@ -8,12 +8,12 @@
 namespace AngbandOS.Core.BirthStages;
 
 [Serializable]
-internal class IntroductionBirthStage : BaseBirthStage
+internal class IntroductionBirthStage : BirthStage
 {
     private int currentSelection = 0;
     private IntroductionBirthStage(SaveGame saveGame) : base(saveGame) { }
 
-    public override BaseBirthStage? Render()
+    public override BirthStage? Render()
     {
         string[]? menuItems = GetMenu();
         SaveGame.Screen.Print(ColourEnum.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
@@ -85,7 +85,7 @@ internal class IntroductionBirthStage : BaseBirthStage
         return true;
     }
 
-    private BaseBirthStage GoForward(int index)
+    private BirthStage GoForward(int index)
     {
         SaveGame.Religion.Deity = GodName.None;
         if (index == 1) // Random

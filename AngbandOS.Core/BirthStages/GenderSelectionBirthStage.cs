@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.BirthStages;
 
 [Serializable]
-internal class GenderSelectionBirthStage : BaseBirthStage
+internal class GenderSelectionBirthStage : BirthStage
 {
     private int currentSelection = 0;
     private GenderSelectionBirthStage(SaveGame saveGame) : base(saveGame) { }
-    public override BaseBirthStage? Render()
+    public override BirthStage? Render()
     {
         DisplayPartialCharacter();
         string[]? menuItems = SaveGame.SingletonRepository.Genders
@@ -55,13 +55,13 @@ internal class GenderSelectionBirthStage : BaseBirthStage
         SaveGame.Screen.Print(ColourEnum.Purple, "Your sex has no effect on gameplay.", 35, 21);
         return true;
     }
-    private BaseBirthStage? GoForward(int index)
+    private BirthStage? GoForward(int index)
     {
         SaveGame.Gender = SaveGame.SingletonRepository.Genders[index];
         return SaveGame.SingletonRepository.BirthStages.Get<ConfirmationBirthStage>();
     }
 
-    private BaseBirthStage? GoBack()
+    private BirthStage? GoBack()
     {
         int availablePrimaryRealmCount = SaveGame.BaseCharacterClass.AvailablePrimaryRealms.Length;
         int remainingAvailableSecondaryRealmCount = SaveGame.BaseCharacterClass.RemainingAvailableSecondaryRealms().Length;

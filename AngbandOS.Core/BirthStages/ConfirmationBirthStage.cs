@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.BirthStages;
 
 [Serializable]
-internal class ConfirmationBirthStage : BaseBirthStage
+internal class ConfirmationBirthStage : BirthStage
 {
     private ConfirmationBirthStage(SaveGame saveGame) : base(saveGame) { }
 
-    public override BaseBirthStage? Render()
+    public override BirthStage? Render()
     {
         SaveGame.GetStats();
         SaveGame.GetExtra();

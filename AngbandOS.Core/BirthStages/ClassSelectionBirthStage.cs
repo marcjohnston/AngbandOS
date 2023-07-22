@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.BirthStages;
 
 [Serializable]
-internal class ClassSelectionBirthStage : BaseBirthStage
+internal class ClassSelectionBirthStage : BirthStage
 {
     private int currentSelection = 14;
     private ClassSelectionBirthStage(SaveGame saveGame) : base(saveGame) { }
-    public override BaseBirthStage? Render()
+    public override BirthStage? Render()
     {
         DisplayPartialCharacter();
         string[]? menuItems = SaveGame.SingletonRepository.CharacterClasses
@@ -109,7 +109,7 @@ internal class ClassSelectionBirthStage : BaseBirthStage
         }
         return true;
     }
-    private BaseBirthStage? GoForward(int index)
+    private BirthStage? GoForward(int index)
     {
         BaseCharacterClass[] classes = SaveGame.SingletonRepository.CharacterClasses
             .OrderBy(_characterClass => _characterClass.Title)
@@ -119,7 +119,7 @@ internal class ClassSelectionBirthStage : BaseBirthStage
         return SaveGame.SingletonRepository.BirthStages.Get<RaceSelectionBirthStage>();
     }
 
-    private BaseBirthStage? GoBack()
+    private BirthStage? GoBack()
     {
         return SaveGame.SingletonRepository.BirthStages.Get<IntroductionBirthStage>();
     }

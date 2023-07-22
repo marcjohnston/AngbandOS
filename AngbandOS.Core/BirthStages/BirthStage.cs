@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.BirthStages;
 
 [Serializable]
-internal abstract class BaseBirthStage
+internal abstract class BirthStage
 {
     protected readonly SaveGame SaveGame;
-    protected BaseBirthStage(SaveGame saveGame)
+    protected BirthStage(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
@@ -20,7 +20,7 @@ internal abstract class BaseBirthStage
     /// Renders the birth stage and returns the next birth stage to render or null when either the birth stage is complete or the SaveGame.Shutdown is true.
     /// </summary>
     /// <returns></returns>
-    public abstract BaseBirthStage? Render();
+    public abstract BirthStage? Render();
 
     protected void DisplayPartialCharacter()
     {

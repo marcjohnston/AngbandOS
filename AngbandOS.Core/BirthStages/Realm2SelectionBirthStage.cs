@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.BirthStages;
 
 [Serializable]
-internal class Realm2SelectionBirthStage : BaseBirthStage
+internal class Realm2SelectionBirthStage : BirthStage
 {
     private int currentSelection = 0;
     private Realm2SelectionBirthStage(SaveGame saveGame) : base(saveGame) { }
-    public override BaseBirthStage? Render()
+    public override BirthStage? Render()
     {
         DisplayPartialCharacter();
         string[]? menuItems = SaveGame.BaseCharacterClass.AvailableSecondaryRealms
@@ -65,7 +65,7 @@ internal class Realm2SelectionBirthStage : BaseBirthStage
         SaveGame.DisplayRealmInfo(realm);
         return true;
     }
-    private BaseBirthStage? GoForward(int index)
+    private BirthStage? GoForward(int index)
     {
         BaseRealm[] remainingRealms = SaveGame.BaseCharacterClass.AvailableSecondaryRealms.Where(_realm => _realm != SaveGame.PrimaryRealm).ToArray();
         SaveGame.SecondaryRealm = remainingRealms[index];
@@ -73,7 +73,7 @@ internal class Realm2SelectionBirthStage : BaseBirthStage
         return SaveGame.SingletonRepository.BirthStages.Get<GenderSelectionBirthStage>();
     }
 
-    private BaseBirthStage? GoBack()
+    private BirthStage? GoBack()
     {
         int availablePrimaryRealmCount = SaveGame.BaseCharacterClass.AvailablePrimaryRealms.Length;
         if (availablePrimaryRealmCount <= 1)

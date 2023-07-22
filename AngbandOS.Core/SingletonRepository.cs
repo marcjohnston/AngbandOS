@@ -23,7 +23,7 @@ internal class SingletonRepository
     public SingletonDictionary<Script> Scripts;
     public SingletonDictionary<Dungeon> Dungeons;
     public SingletonDictionary<Gender> Genders;
-    public SingletonDictionary<BaseBirthStage> BirthStages;
+    public SingletonDictionary<BirthStage> BirthStages;
     public SingletonDictionary<Projectile> Projectiles;
     public SingletonDictionary<Patron> Patrons;
     public SingletonDictionary<Animation> Animations;
@@ -111,7 +111,7 @@ internal class SingletonRepository
         Scripts = new SingletonDictionary<Script>(saveGame, LoadTypesFromAssembly<Script>(saveGame));
         Dungeons = new SingletonDictionary<Dungeon>(saveGame, LoadTypesFromAssembly<Dungeon>(saveGame));
         Genders = new SingletonDictionary<Gender>(saveGame, LoadTypesFromAssembly<Gender>(saveGame));
-        BirthStages = new SingletonDictionary<BaseBirthStage>(saveGame, LoadTypesFromAssembly<BaseBirthStage>(saveGame));
+        BirthStages = new SingletonDictionary<BirthStage>(saveGame, LoadTypesFromAssembly<BirthStage>(saveGame));
         ClassSpells = new SingletonList<ClassSpell>(saveGame, LoadTypesFromAssembly<ClassSpell>(saveGame));
         Rewards = new SingletonDictionary<Reward>(saveGame, LoadTypesFromAssembly<Reward>(saveGame));
         Projectiles = new SingletonDictionary<Projectile>(saveGame, LoadTypesFromAssembly<Projectile>(saveGame));
