@@ -23,7 +23,7 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
     {
         int j;
         Spell sPtr;
-        if (SaveGame.Player == null)
+        if (SaveGame.IsDead)
         {
             return;
         }

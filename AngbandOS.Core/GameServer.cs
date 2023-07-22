@@ -26,7 +26,7 @@ public class GameServer
     {
         get
         {
-            if (SaveGame?.Player == null)
+            if (SaveGame == null || SaveGame.IsDead)
                 return null;
             else
                 return SaveGame.Player.ExperienceLevel;
@@ -41,7 +41,7 @@ public class GameServer
     {
         get
         {
-            if (SaveGame?.Player == null)
+            if (SaveGame == null || SaveGame.IsDead)
                 return null;
             else
                 return SaveGame.Player.Gold;
@@ -56,7 +56,7 @@ public class GameServer
     {
         get
         {
-            if (SaveGame?.Player == null)
+            if (SaveGame == null || SaveGame.IsDead)
                 return null;
             else
                 return SaveGame.Player.Name;

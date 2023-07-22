@@ -108,7 +108,6 @@ internal class Player
     public int Height;
     public int HitDie;
     public int InfravisionRange;
-    public bool IsDead;
     public bool IsSearching;
     public bool IsWinner;
     public bool IsWizard;
@@ -1436,7 +1435,7 @@ internal class Player
     {
         bool penInvuln = false;
         int warning = MaxHealth * Constants.HitpointWarn / 10;
-        if (IsDead)
+        if (SaveGame.IsDead)
         {
             return;
         }
@@ -1490,7 +1489,7 @@ internal class Player
                         SaveGame.DiedFrom += "(?)";
                     }
                     IsWinner = false;
-                    IsDead = true;
+                    SaveGame.IsDead = true;
                     return;
                 }
             }

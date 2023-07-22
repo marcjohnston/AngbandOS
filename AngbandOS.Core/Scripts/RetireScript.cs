@@ -45,7 +45,7 @@ internal class RetireScript : Script
         }
         // Assuming whe player didn't give up, "kill" the character by quitting
         SaveGame.Playing = false;
-        SaveGame.Player.IsDead = true;
+        SaveGame.IsDead = true;
         SaveGame.DiedFrom = "quitting";
         return false;
     }

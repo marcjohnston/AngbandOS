@@ -17,7 +17,7 @@ internal class ConfirmationBirthStage : BaseBirthStage
         SaveGame.GetStats();
         SaveGame.GetExtra();
         SaveGame.GetAhw();
-        SaveGame.GetHistory(SaveGame.Player);
+        SaveGame.GetHistory();
         SaveGame.GetMoney();
 
         SaveGame.Spells[0] = SaveGame.Player.PrimaryRealm == null ? new Spell[] { } : SaveGame.Player.PrimaryRealm.SpellList(SaveGame.Player.BaseCharacterClass);

@@ -1488,7 +1488,7 @@ internal class Monster : IItemContainer
         }
 
         // If the player's already dead or off the saveGame.Level, don't cast
-        if (!saveGame.Playing || saveGame.Player.IsDead || saveGame.NewLevelFlag)
+        if (!saveGame.Playing || saveGame.IsDead || saveGame.NewLevelFlag)
         {
             return false;
         }
@@ -1554,7 +1554,7 @@ internal class Monster : IItemContainer
             }
         }
         // If we killed the player, let their descendants remember that
-        if (saveGame.Player.IsDead && Race.Knowledge.RDeaths < Constants.MaxShort)
+        if (saveGame.IsDead && Race.Knowledge.RDeaths < Constants.MaxShort)
         {
             Race.Knowledge.RDeaths++;
         }
@@ -1653,7 +1653,7 @@ internal class Monster : IItemContainer
             }
 
             // If the player's already dead or off the level, don't cast
-            if (!saveGame.Playing || saveGame.Player.IsDead || saveGame.NewLevelFlag)
+            if (!saveGame.Playing || saveGame.IsDead || saveGame.NewLevelFlag)
             {
                 return false;
             }
@@ -1710,7 +1710,7 @@ internal class Monster : IItemContainer
                 }
             }
             // If we killed the player, let their descendants remember that
-            if (saveGame.Player.IsDead && Race.Knowledge.RDeaths < Constants.MaxShort)
+            if (saveGame.IsDead && Race.Knowledge.RDeaths < Constants.MaxShort)
             {
                 Race.Knowledge.RDeaths++;
             }
@@ -2713,7 +2713,7 @@ internal class Monster : IItemContainer
                 int damageSides = Race.Attacks[attackNumber].DSide;
 
                 // Stop if player is dead or gone
-                if (!alive || saveGame.Player.IsDead || saveGame.NewLevelFlag)
+                if (!alive || saveGame.IsDead || saveGame.NewLevelFlag)
                 {
                     break;
                 }
@@ -2943,7 +2943,7 @@ internal class Monster : IItemContainer
         }
         // If the attack just killed the player, let future generations remember what killed
         // their ancestor
-        if (saveGame.Player.IsDead && Race.Knowledge.RDeaths < Constants.MaxShort)
+        if (saveGame.IsDead && Race.Knowledge.RDeaths < Constants.MaxShort)
         {
             Race.Knowledge.RDeaths++;
         }

@@ -14,6 +14,7 @@ internal class SaveGame
 {
     public const int DungeonCount = 20;
     public Configuration Configuration;
+    public bool IsDead;
 
     public const int OneInChanceUpStairsReturnsToTownLevel = 5;
     public FlaggedAction RedrawMapFlaggedAction { get; }
@@ -351,6 +352,8 @@ internal class SaveGame
         PrBasicRedrawAction = new GroupSetFlaggedAction(this,
             RedrawPlayerFlaggedAction, RedrawTitleFlaggedAction, RedrawStatsFlaggedAction, RedrawLevelFlaggedAction, RedrawExpFlaggedAction, RedrawGoldFlaggedAction,
             RedrawArmorFlaggedAction, RedrawHpFlaggedAction, RedrawManaFlaggedAction, RedrawDepthFlaggedAction, RedrawHealthFlaggedAction, RedrawSpeedFlaggedAction);
+
+        IsDead = true;
 
         // Create the wilderness regions.
         Wilderness = new WildernessRegion[12][];
@@ -1363,8 +1366,8 @@ internal class SaveGame
     /// <summary>
     /// Serializes an object and uses the persistent storage services to write the object to the desired facilities.
     /// </summary>
-    /// <param name="player">The player to save.  If the player is dead (Player == null), then this should be the corpse.</param>
-    public void SavePlayer(Player player)
+    /// <param name="player">The player to save.  If the player is dead, then this should be the corpse.</param>
+    public void SavePlayer()
     {
         BinaryFormatter formatter = new BinaryFormatter();
         MemoryStream memoryStream = new MemoryStream();
@@ -1372,10 +1375,10 @@ internal class SaveGame
         memoryStream.Position = 0;
         GameDetails gameDetails = new GameDetails()
         {
-            CharacterName = player.Name, // The player parameter
-            Level = player.ExperienceLevel, // The player parameter
-            Gold = player.Gold, // The parameter
-            IsAlive = Player != null, // If the player is dead, then the savegame Player will be null.
+            CharacterName = Player.Name, // The player parameter
+            Level = Player.ExperienceLevel, // The player parameter
+            Gold = Player.Gold, // The parameter
+            IsAlive = !IsDead, // If the player is dead, then the savegame Player will be null.
             Comments = ""
         };
         PersistentStorage?.WriteGame(gameDetails, memoryStream.ToArray());
@@ -1426,7 +1429,7 @@ internal class SaveGame
         {
             Program.Rng.UseFixed = false;
         }
-        if (Player == null)
+        if (IsDead)
         {
             if (!CharacterGeneration())
             {
@@ -1478,7 +1481,7 @@ internal class SaveGame
         Playing = true;
         if (Player.Health < 0)
         {
-            Player.IsDead = true;
+            IsDead = true;
         }
 
         // Repeat the dungeon loop until normal game ends or the shutdown flag is raised.
@@ -1498,19 +1501,19 @@ internal class SaveGame
                 HealthTrack(0);
                 RemoveLightFlaggedAction.Check(true);
                 RemoveViewFlaggedAction.Check(true);
-                if (!Playing && !Player.IsDead)
+                if (!Playing && !IsDead)
                 {
                     break;
                 }
                 _petList = Level.GetPets();
                 Level.WipeMList();
                 MsgPrint(null);
-                if (Player.IsDead)
+                if (IsDead)
                 {
                     ConsoleViewPort.PlayerDied(Player.Name, DiedFrom, Player.ExperienceLevel);
 
                     // Store the player info
-                    ExPlayer = new ExPlayer(Player);
+                    ExPlayer = new ExPlayer(Player.Gender, Player.Race, Player.RaceAtBirth, Player.BaseCharacterClass?.GetType().Name, Player.PrimaryRealm, Player.SecondaryRealm, Player.Name, Player.ExperienceLevel, Player.Generation);
                     break;
                 }
                 Level = new Level(this);
@@ -1743,7 +1746,7 @@ internal class SaveGame
         HandleStuff();
         UpdateScreen();
         DiedFrom = "(saved)";
-        SavePlayer(Player);
+        SavePlayer();
         UpdateScreen();
         DiedFrom = "(alive and well)";
     }
@@ -2082,7 +2085,7 @@ internal class SaveGame
     public void HandleStuff()
     {
         // Oops - we might have just died...
-        if (Player == null)
+        if (IsDead)
         {
             return;
         }
@@ -2369,18 +2372,17 @@ internal class SaveGame
         HandleStuff();
         MsgPrint(null);
         FullScreenOverlay = true;
-        if (Player.IsDead)
+        if (IsDead)
         {
             if (Player.IsWinner)
             {
                 Kingly();
             }
-            Player corpse = Player;
+
             //HighScore score = new HighScore(this);
-            Player = null;
-            SavePlayer(corpse);
-            PrintTomb(corpse);
-            if (corpse.IsWizard)
+            SavePlayer();
+            PrintTomb();
+            if (Player.IsWizard)
             {
                 return;
             }
@@ -2642,7 +2644,7 @@ internal class SaveGame
         UpdateStuff();
         RedrawStuff();
         UpdateScreen();
-        if (!Playing || Player.IsDead || NewLevelFlag)
+        if (!Playing || IsDead || NewLevelFlag)
         {
             return;
         }
@@ -2696,7 +2698,7 @@ internal class SaveGame
             UpdateStuff();
             RedrawStuff();
             Level.MoveCursorRelative(Player.MapY, Player.MapX);
-            if (!Playing || Player.IsDead || NewLevelFlag)
+            if (!Playing || IsDead || NewLevelFlag)
             {
                 break;
             }
@@ -2707,7 +2709,7 @@ internal class SaveGame
             UpdateStuff();
             RedrawStuff();
             Level.MoveCursorRelative(Player.MapY, Player.MapX);
-            if (!Playing || Player.IsDead || NewLevelFlag)
+            if (!Playing || IsDead || NewLevelFlag)
             {
                 break;
             }
@@ -2716,7 +2718,7 @@ internal class SaveGame
             UpdateStuff();
             RedrawStuff();
             Level.MoveCursorRelative(Player.MapY, Player.MapX);
-            if (!Playing || Player.IsDead || NewLevelFlag)
+            if (!Playing || IsDead || NewLevelFlag)
             {
                 break;
             }
@@ -2904,11 +2906,11 @@ internal class SaveGame
         AnyKey(44);
     }
 
-    private void PrintTomb(Player corpse)
+    private void PrintTomb()
     {
         {
             DateTime ct = DateTime.Now;
-            if (corpse.IsWinner)
+            if (Player.IsWinner)
             {
                 SetBackground(BackgroundImageEnum.Sunset);
                 PlayMusic(MusicTrackEnum.Victory);
@@ -2919,13 +2921,13 @@ internal class SaveGame
                 PlayMusic(MusicTrackEnum.Death);
             }
             Screen.Clear();
-            string buf = corpse.Name.Trim() + corpse.Generation.ToRoman(true);
-            if (corpse.IsWinner || corpse.ExperienceLevel > Constants.PyMaxLevel)
+            string buf = Player.Name.Trim() + Player.Generation.ToRoman(true);
+            if (Player.IsWinner || Player.ExperienceLevel > Constants.PyMaxLevel)
             {
                 buf += " the Magnificent";
             }
             Screen.Print(buf, 39, 1);
-            buf = $"Level {corpse.ExperienceLevel} {corpse.BaseCharacterClass.ClassSubName(corpse.PrimaryRealm)}";
+            buf = $"Level {Player.ExperienceLevel} {Player.BaseCharacterClass.ClassSubName(Player.PrimaryRealm)}";
             Screen.Print(buf, 40, 1);
             string tmp = $"Killed on Level {CurrentDepth}".PadLeft(45);
             Screen.Print(tmp, 39, 34);
@@ -3094,7 +3096,7 @@ internal class SaveGame
                     }
                 }
             }
-            if (!Playing || Player.IsDead || NewLevelFlag)
+            if (!Playing || IsDead || NewLevelFlag)
             {
                 break;
             }
@@ -10452,7 +10454,7 @@ internal class SaveGame
             // Process the individual monster
             monster.ProcessMonster(this, noise);
             // If the monster killed the player or sent us to a new level, then stop processing
-            if (!Playing || Player.IsDead || NewLevelFlag)
+            if (!Playing || IsDead || NewLevelFlag)
             {
                 break;
             }
@@ -11259,7 +11261,7 @@ internal class SaveGame
         }
         Player.RaceAtBirth = Player.Race;
         PlayerBirthQuests();
-        Player.IsDead = false;
+        IsDead = false;
         PlayerOutfit();
         return true;
     }
@@ -11879,17 +11881,17 @@ internal class SaveGame
     /// based on their race
     /// </summary>
     /// <param name="player"> The player that needs a background </param>
-    public void GetHistory(Player player)
+    public void GetHistory()
     {
         int i;
         for (i = 0; i < 4; i++)
         {
-            player.History[i] = string.Empty;
+            Player.History[i] = string.Empty;
         }
         string fullHistory = string.Empty;
         int socialClass = Program.Rng.DieRoll(4);
         // Start on a chart based on the character's race
-        int chart = player.Race.Chart;
+        int chart = Player.Race.Chart;
 
         // Keep going till we get to an end
         while (chart != 0)
@@ -11917,7 +11919,7 @@ internal class SaveGame
         {
             socialClass = 1;
         }
-        player.SocialClass = socialClass;
+        Player.SocialClass = socialClass;
         // Split the buffer into four strings to fit on four lines of the screen
         string s = fullHistory.Trim();
         i = 0;
@@ -11926,13 +11928,13 @@ internal class SaveGame
             int n = s.Length;
             if (n < 60)
             {
-                player.History[i] = s;
+                Player.History[i] = s;
                 break;
             }
             for (n = 60; n > 0 && s[n - 1] != ' '; n--)
             {
             }
-            player.History[i++] = s.Substring(0, n).Trim();
+            Player.History[i++] = s.Substring(0, n).Trim();
             s = s.Substring(n).Trim();
         }
     }
@@ -14523,15 +14525,14 @@ internal class SaveGame
     private void WildernessGen()
     {
         Program.Rng.UseFixed = true;
-        Program.Rng.FixedSeed = this.Wilderness[Player.WildernessY][Player.WildernessX].Seed;
-        Player player = Player;
+        Program.Rng.FixedSeed = this.Wilderness[this.Player.WildernessY][this.Player.WildernessX].Seed;
         int x;
         int y;
         for (y = 0; y < Level.CurHgt; y++)
         {
             for (x = 0; x < Level.CurWid; x++)
             {
-                byte elevation = Elevation(player.WildernessY, player.WildernessX, y, x);
+                byte elevation = Elevation(Player.WildernessY, Player.WildernessX, y, x);
                 string floorName = "Water";
                 string featureName = "Water";
                 if (elevation > 0)
@@ -14571,10 +14572,10 @@ internal class SaveGame
             cPtr = Level.Grid[y][Level.CurWid - 1];
             cPtr.SetFeature(cPtr.BackgroundFeature.Name.StartsWith("Water") ? "WaterBorder" : "WildBorder");
         }
-        MakeWildernessWalls(Player.WildernessX, Player.WildernessY);
-        MakeCornerTowers(Player.WildernessX, Player.WildernessY);
-        MakeWildernessPaths(Player.WildernessX, Player.WildernessY);
-        MakeWildernessFeatures(Player.WildernessX, Player.WildernessY, out int stairX, out int stairY);
+        MakeWildernessWalls(this.Player.WildernessX, this.Player.WildernessY);
+        MakeCornerTowers(this.Player.WildernessX, this.Player.WildernessY);
+        MakeWildernessPaths(this.Player.WildernessX, this.Player.WildernessY);
+        MakeWildernessFeatures(this.Player.WildernessX, this.Player.WildernessY, out int stairX, out int stairY);
         int rocks = Program.Rng.RandomBetween(1, 10);
         for (int i = 0; i < rocks; i++)
         {
@@ -14593,14 +14594,14 @@ internal class SaveGame
         }
         else if (CameFrom == LevelStart.StartStairs)
         {
-            Player.MapY = stairY;
-            Player.MapX = stairX;
+            this.Player.MapY = stairY;
+            this.Player.MapX = stairX;
         }
         else if (CameFrom == LevelStart.StartWalk)
         {
-            if (Level.Grid[Player.MapY][Player.MapX].FeatureType.IsTree || Level.Grid[Player.MapY][Player.MapX].FeatureType.Name == "Water")
+            if (Level.Grid[this.Player.MapY][this.Player.MapX].FeatureType.IsTree || Level.Grid[this.Player.MapY][this.Player.MapX].FeatureType.Name == "Water")
             {
-                Level.Grid[Player.MapY][Player.MapX].RevertToBackground();
+                Level.Grid[this.Player.MapY][this.Player.MapX].RevertToBackground();
             }
         }
         ResolvePaths();
@@ -14614,7 +14615,7 @@ internal class SaveGame
                 }
             }
         }
-        if (Player.GameTime.IsLight)
+        if (this.Player.GameTime.IsLight)
         {
             for (y = 0; y < Level.CurHgt; y++)
             {

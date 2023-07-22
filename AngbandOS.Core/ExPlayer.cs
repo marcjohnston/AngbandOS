@@ -68,16 +68,16 @@ internal class ExPlayer
     /// Make an ex-player from a player, remembering the essential information about the character
     /// </summary>
     /// <param name="player"> The player character from which to create the ex player </param>
-    public ExPlayer(Player player)
+    public ExPlayer(Gender gender, Race race, Race raceAtBirth, string characterClassName, BaseRealm? primaryRealm, BaseRealm? secondaryRealm, string name, int experienceLevel, int generation)
     {
-        Gender = player.Gender;
-        Race = player.Race;
-        RaceAtBirth = player.RaceAtBirth;
-        CharacterClassName = player.BaseCharacterClass.GetType().Name;
-        PrimaryRealm = player.PrimaryRealm;
-        SecondaryRealm = player.SecondaryRealm;
-        Name = player.Name;
-        Level = player.ExperienceLevel;
-        Generation = player.Generation;
+        Gender = gender;
+        Race = race;
+        RaceAtBirth = raceAtBirth;
+        CharacterClassName = characterClassName;
+        PrimaryRealm = primaryRealm;
+        SecondaryRealm = secondaryRealm;
+        Name = name;
+        Level = experienceLevel;
+        Generation = generation;
     }
 }

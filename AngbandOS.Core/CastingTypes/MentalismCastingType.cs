@@ -32,7 +32,7 @@ internal class MentalismCastingType : CastingType
                 return;
             }
         }
-        int chance = talent.FailureChance(SaveGame.Player);
+        int chance = talent.FailureChance();
         if (Program.Rng.RandomLessThan(100) < chance)
         {
             SaveGame.MsgPrint("You failed to concentrate hard enough!");
@@ -68,7 +68,7 @@ internal class MentalismCastingType : CastingType
         }
         else
         {
-            talent.Use(SaveGame);
+            talent.Use();
         }
         SaveGame.EnergyUse = 100;
         if (talent.ManaCost <= SaveGame.Player.Mana)
@@ -129,7 +129,7 @@ internal class MentalismCastingType : CastingType
                         {
                             break;
                         }
-                        string psiDesc = $"  {i.IndexToLetter()}) {talent.SummaryLine(SaveGame.Player)}";
+                        string psiDesc = $"  {i.IndexToLetter()}) {talent.SummaryLine()}";
                         SaveGame.Screen.PrintLine(psiDesc, y + i + 1, x);
                     }
                     SaveGame.Screen.PrintLine("", y + i + 1, x);
