@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationSusStats : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "You feel like you can recover from anything.";
-        HaveMessage = "Your body resists serious damage.";
-        LoseMessage = "You no longer feel like you can recover from anything.";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "You feel like you can recover from anything.";
+    public override string HaveMessage => "Your body resists serious damage.";
+    public override string LoseMessage => "You no longer feel like you can recover from anything.";
 
     public override void OnGain(Genome genome)
     {

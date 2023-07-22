@@ -10,14 +10,11 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationWartSkin : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 1;
-        GainMessage = "Disgusting warts appear everywhere on you!";
-        HaveMessage = "Your skin is covered with warts (-2 CHR, +5 AC).";
-        LoseMessage = "Your warts disappear!";
-        Group = MutationGroup.Skin;
-    }
+    public override int Frequency => 1;
+    public override string GainMessage => "Disgusting warts appear everywhere on you!";
+    public override string HaveMessage => "Your skin is covered with warts (-2 CHR, +5 AC).";
+    public override string LoseMessage => "Your warts disappear!";
+    public override MutationGroup Group => MutationGroup.Skin;
 
     public override void OnGain(Genome genome)
     {

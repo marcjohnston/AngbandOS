@@ -10,14 +10,11 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationFleshRot : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 3;
-        GainMessage = "Your flesh is afflicted by a rotting disease!";
-        HaveMessage = "Your flesh is rotting (-2 CON, -1 CHR).";
-        LoseMessage = "Your flesh is no longer afflicted by a rotting disease!";
-        Group = MutationGroup.Skin;
-    }
+    public override int Frequency => 3;
+    public override string GainMessage => "Your flesh is afflicted by a rotting disease!";
+    public override string HaveMessage => "Your flesh is rotting (-2 CON, -1 CHR).";
+    public override string LoseMessage => "Your flesh is no longer afflicted by a rotting disease!";
+    public override MutationGroup Group => MutationGroup.Skin;
 
     public override void OnGain(Genome genome)
     {

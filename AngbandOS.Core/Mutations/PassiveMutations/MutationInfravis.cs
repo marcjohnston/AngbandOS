@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationInfravis : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 3;
-        GainMessage = "Your infravision is improved.";
-        HaveMessage = "You have remarkable infravision (+3).";
-        LoseMessage = "Your infravision is degraded.";
-    }
+    public override int Frequency => 3;
+    public override string GainMessage => "Your infravision is improved.";
+    public override string HaveMessage => "You have remarkable infravision (+3).";
+    public override string LoseMessage => "Your infravision is degraded.";
 
     public override void OnGain(Genome genome)
     {

@@ -10,18 +10,15 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class MutationScorTail : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "You grow a scorpion tail!";
-        HaveMessage = "You have a scorpion tail (poison, 3d7).";
-        LoseMessage = "You lose your scorpion tail!";
-        DamageDiceSize = 3;
-        DamageDiceNumber = 7;
-        EquivalentWeaponWeight = 5;
-        AttackDescription = "tail";
-        MutationAttackType = MutationAttackType.Poison;
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "You grow a scorpion tail!";
+    public override string HaveMessage => "You have a scorpion tail (poison, 3d7).";
+    public override string LoseMessage => "You lose your scorpion tail!";
+    public override int DamageDiceSize => 3;
+    public override int DamageDiceNumber => 7;
+    public override int EquivalentWeaponWeight => 5;
+    public override string AttackDescription => "tail";
+    public override MutationAttackType MutationAttackType => MutationAttackType.Poison;
 
     public override void OnGain(Genome genome)
     {

@@ -143,10 +143,6 @@ internal class Genome
         _notPossessed.Add(new MutationWasting());
         _notPossessed.Add(new MutationWeirdMind());
         _notPossessed.Add(new MutationWraith());
-        foreach (Mutation mutation in _notPossessed)
-        {
-            mutation.Initialize();
-        }
     }
 
     public bool HasMutations => _possessed.Count > 0;

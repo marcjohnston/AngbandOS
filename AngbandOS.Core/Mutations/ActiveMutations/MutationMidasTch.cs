@@ -23,11 +23,8 @@ internal class MutationMidasTch : Mutation
         return lvl < 10 ? "midas touch      (unusable until level 10)" : "midas touch      (cost 5, INT based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "You gain the Midas touch.";
-        HaveMessage = "You can turn ordinary items to gold.";
-        LoseMessage = "You lose the Midas touch.";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "You gain the Midas touch.";
+    public override string HaveMessage => "You can turn ordinary items to gold.";
+    public override string LoseMessage => "You lose the Midas touch.";
 }

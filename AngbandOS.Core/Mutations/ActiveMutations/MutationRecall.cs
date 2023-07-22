@@ -24,11 +24,8 @@ internal class MutationRecall : Mutation
         return lvl < 17 ? "recall           (unusable until level 17)" : "recall           (cost 50, INT based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "You feel briefly homesick, but it passes.";
-        HaveMessage = "You can travel between town and the depths.";
-        LoseMessage = "You feel briefly homesick.";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "You feel briefly homesick, but it passes.";
+    public override string HaveMessage => "You can travel between town and the depths.";
+    public override string LoseMessage => "You feel briefly homesick.";
 }

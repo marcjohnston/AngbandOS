@@ -10,18 +10,15 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class MutationTentacles : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "Evil-looking tentacles sprout from your sides.";
-        HaveMessage = "You have evil looking tentacles (dam 2d5).";
-        LoseMessage = "Your tentacles vanish from your sides.";
-        DamageDiceSize = 2;
-        DamageDiceNumber = 5;
-        EquivalentWeaponWeight = 5;
-        AttackDescription = "tentacles";
-        MutationAttackType = MutationAttackType.Hellfire;
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "Evil-looking tentacles sprout from your sides.";
+    public override string HaveMessage => "You have evil looking tentacles (dam 2d5).";
+    public override string LoseMessage => "Your tentacles vanish from your sides.";
+    public override int DamageDiceSize => 2;
+    public override int DamageDiceNumber => 5;
+    public override int EquivalentWeaponWeight => 5;
+    public override string AttackDescription => "tentacles";
+    public override MutationAttackType MutationAttackType => MutationAttackType.Hellfire;
 
     public override void OnGain(Genome genome)
     {

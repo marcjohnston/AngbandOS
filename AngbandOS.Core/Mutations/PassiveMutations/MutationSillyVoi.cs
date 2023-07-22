@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationSillyVoi : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "Your voice turns into a ridiculous squeak!";
-        HaveMessage = "Your voice is a silly squeak (-4 CHR).";
-        LoseMessage = "Your voice returns to normal.";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "Your voice turns into a ridiculous squeak!";
+    public override string HaveMessage => "Your voice is a silly squeak (-4 CHR).";
+    public override string LoseMessage => "Your voice returns to normal.";
 
     public override void OnGain(Genome genome)
     {

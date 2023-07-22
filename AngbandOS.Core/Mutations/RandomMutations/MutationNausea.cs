@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class MutationNausea : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 1;
-        GainMessage = "Your stomach starts to roil nauseously.";
-        HaveMessage = "You have a seriously upset stomach.";
-        LoseMessage = "Your stomach stops roiling.";
-    }
+    public override int Frequency => 1;
+    public override string GainMessage => "Your stomach starts to roil nauseously.";
+    public override string HaveMessage => "You have a seriously upset stomach.";
+    public override string LoseMessage => "Your stomach stops roiling.";
 
     public override void OnProcessWorld(SaveGame saveGame)
     {

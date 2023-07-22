@@ -25,11 +25,8 @@ internal class MutationVteleport : Mutation
         return lvl < 7 ? "teleport         (unusable until level 7)" : "teleport         (cost 7, WIS based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 3;
-        GainMessage = "You gain the power of teleportation at will.";
-        HaveMessage = "You can teleport at will.";
-        LoseMessage = "You lose the power of teleportation at will.";
-    }
+    public override int Frequency => 3;
+    public override string GainMessage => "You gain the power of teleportation at will.";
+    public override string HaveMessage => "You can teleport at will.";
+    public override string LoseMessage => "You lose the power of teleportation at will.";
 }

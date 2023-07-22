@@ -75,11 +75,8 @@ internal class MutationEatRock : Mutation
         return lvl < 8 ? "eat rock         (unusable until level 8)" : "eat rock         (cost 12, CON based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "The walls look delicious.";
-        HaveMessage = "You can consume solid rock.";
-        LoseMessage = "The walls look unappetizing.";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "The walls look delicious.";
+    public override string HaveMessage => "You can consume solid rock.";
+    public override string LoseMessage => "The walls look unappetizing.";
 }

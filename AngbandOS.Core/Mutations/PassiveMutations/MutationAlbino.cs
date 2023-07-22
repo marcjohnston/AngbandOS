@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationAlbino : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "You turn into an albino! You feel frail...";
-        HaveMessage = "You are albino (-4 CON).";
-        LoseMessage = "You are no longer an albino!";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "You turn into an albino! You feel frail...";
+    public override string HaveMessage => "You are albino (-4 CON).";
+    public override string LoseMessage => "You are no longer an albino!";
 
     public override void OnGain(Genome genome)
     {

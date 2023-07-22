@@ -28,11 +28,8 @@ internal class MutationLaserEye : Mutation
         return lvl < 7 ? "laser eyes        (unusable until level 7)" : "laser eyes        (cost 10, WIS based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 3;
-        GainMessage = "Your eyes burn for a moment.";
-        HaveMessage = "Your eyes can fire laser beams.";
-        LoseMessage = "Your eyes burn for a moment, then feel soothed.";
-    }
+    public override int Frequency => 3;
+    public override string GainMessage => "Your eyes burn for a moment.";
+    public override string HaveMessage => "Your eyes can fire laser beams.";
+    public override string LoseMessage => "Your eyes burn for a moment, then feel soothed.";
 }

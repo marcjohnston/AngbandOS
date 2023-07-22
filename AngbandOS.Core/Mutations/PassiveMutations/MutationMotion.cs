@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationMotion : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 3;
-        GainMessage = "You move with new assurance.";
-        HaveMessage = "Your movements are precise and forceful (+1 STL).";
-        LoseMessage = "You move with less assurance.";
-    }
+    public override int Frequency => 3;
+    public override string GainMessage => "You move with new assurance.";
+    public override string HaveMessage => "Your movements are precise and forceful (+1 STL).";
+    public override string LoseMessage => "You move with less assurance.";
 
     public override void OnGain(Genome genome)
     {

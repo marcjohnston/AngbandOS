@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class MutationProdMana : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 1;
-        GainMessage = "You start producing magical energy uncontrollably.";
-        HaveMessage = "You are producing magical energy uncontrollably.";
-        LoseMessage = "You stop producing magical energy uncontrollably.";
-    }
+    public override int Frequency => 1;
+    public override string GainMessage => "You start producing magical energy uncontrollably.";
+    public override string HaveMessage => "You are producing magical energy uncontrollably.";
+    public override string LoseMessage => "You stop producing magical energy uncontrollably.";
 
     public override void OnProcessWorld(SaveGame saveGame)
     {

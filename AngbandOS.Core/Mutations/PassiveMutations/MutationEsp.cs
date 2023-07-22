@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationEsp : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "You develop a telepathic ability!";
-        HaveMessage = "You are telepathic.";
-        LoseMessage = "You lose your telepathic ability!";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "You develop a telepathic ability!";
+    public override string HaveMessage => "You are telepathic.";
+    public override string LoseMessage => "You lose your telepathic ability!";
 
     public override void OnGain(Genome genome)
     {

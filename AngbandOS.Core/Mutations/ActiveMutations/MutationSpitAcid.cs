@@ -30,11 +30,8 @@ internal class MutationSpitAcid : Mutation
             : $"spit acid        (cost 9, dam {lvl}, DEX based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 4;
-        GainMessage = "You gain the ability to spit acid.";
-        HaveMessage = "You can spit acid (dam lvl).";
-        LoseMessage = "You lose the ability to spit acid.";
-    }
+    public override int Frequency => 4;
+    public override string GainMessage => "You gain the ability to spit acid.";
+    public override string HaveMessage => "You can spit acid (dam lvl).";
+    public override string LoseMessage => "You lose the ability to spit acid.";
 }

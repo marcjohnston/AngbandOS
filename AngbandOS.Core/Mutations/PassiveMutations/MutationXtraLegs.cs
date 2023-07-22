@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationXtraLegs : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "You grow an extra pair of legs!";
-        HaveMessage = "You have an extra pair of legs (+3 speed).";
-        LoseMessage = "Your extra legs disappear!";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "You grow an extra pair of legs!";
+    public override string HaveMessage => "You have an extra pair of legs (+3 speed).";
+    public override string LoseMessage => "Your extra legs disappear!";
 
     public override void OnGain(Genome genome)
     {

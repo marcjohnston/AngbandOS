@@ -26,11 +26,8 @@ internal class MutationDazzle : Mutation
         return lvl < 7 ? "dazzle           (unusable until level 7)" : "dazzle           (cost 15, CHA based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 3;
-        GainMessage = "You gain the ability to emit dazzling lights.";
-        HaveMessage = "You can emit confusing, blinding radiation.";
-        LoseMessage = "You lose the ability to emit dazzling lights.";
-    }
+    public override int Frequency => 3;
+    public override string GainMessage => "You gain the ability to emit dazzling lights.";
+    public override string HaveMessage => "You can emit confusing, blinding radiation.";
+    public override string LoseMessage => "You lose the ability to emit dazzling lights.";
 }

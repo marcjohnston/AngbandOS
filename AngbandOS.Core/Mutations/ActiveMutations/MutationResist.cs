@@ -48,11 +48,8 @@ internal class MutationResist : Mutation
         return lvl < 10 ? "resist elements  (unusable until level 10)" : "resist elements  (cost 12, CON based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 3;
-        GainMessage = "You feel like you can protect yourself.";
-        HaveMessage = "You can harden yourself to the ravages of the elements.";
-        LoseMessage = "You feel like you might be vulnerable.";
-    }
+    public override int Frequency => 3;
+    public override string GainMessage => "You feel like you can protect yourself.";
+    public override string HaveMessage => "You can harden yourself to the ravages of the elements.";
+    public override string LoseMessage => "You feel like you might be vulnerable.";
 }

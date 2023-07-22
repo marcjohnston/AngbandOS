@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationFireBody : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "Your body is enveloped in flames!";
-        HaveMessage = "Your body is enveloped in flames.";
-        LoseMessage = "Your body is no longer enveloped in flames.";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "Your body is enveloped in flames!";
+    public override string HaveMessage => "Your body is enveloped in flames.";
+    public override string LoseMessage => "Your body is no longer enveloped in flames.";
 
     public override void OnGain(Genome genome)
     {

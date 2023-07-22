@@ -29,11 +29,8 @@ internal class MutationMindBlst : Mutation
         return lvl < 5 ? "mind blast       (unusable until level 5)" : "mind blast       (cost 3, WIS based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "You gain the power of Mind Blast.";
-        HaveMessage = "You can Mind Blast your enemies.";
-        LoseMessage = "You lose the power of Mind Blast.";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "You gain the power of Mind Blast.";
+    public override string HaveMessage => "You can Mind Blast your enemies.";
+    public override string LoseMessage => "You lose the power of Mind Blast.";
 }

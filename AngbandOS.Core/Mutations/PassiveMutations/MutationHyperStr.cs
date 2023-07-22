@@ -10,14 +10,11 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationHyperStr : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 3;
-        GainMessage = "You turn into a superhuman he-man!";
-        HaveMessage = "You are superhumanly strong (+4 STR).";
-        LoseMessage = "Your muscles revert to normal.";
-        Group = MutationGroup.Strength;
-    }
+    public override int Frequency => 3;
+    public override string GainMessage => "You turn into a superhuman he-man!";
+    public override string HaveMessage => "You are superhumanly strong (+4 STR).";
+    public override string LoseMessage => "Your muscles revert to normal.";
+    public override MutationGroup Group => MutationGroup.Strength;
 
     public override void OnGain(Genome genome)
     {

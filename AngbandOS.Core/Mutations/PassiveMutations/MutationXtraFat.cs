@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationXtraFat : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "You become sickeningly fat!";
-        HaveMessage = "You are extremely fat (+2 CON, -2 speed).";
-        LoseMessage = "You benefit from a miracle diet!";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "You become sickeningly fat!";
+    public override string HaveMessage => "You are extremely fat (+2 CON, -2 speed).";
+    public override string LoseMessage => "You benefit from a miracle diet!";
 
     public override void OnGain(Genome genome)
     {

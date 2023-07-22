@@ -10,18 +10,15 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class MutationTrunk : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "Your nose grows into an elephant-like trunk.";
-        HaveMessage = "You have an elephantine trunk (dam 1d4).";
-        LoseMessage = "Your nose returns to a normal length.";
-        Group = MutationGroup.Mouth;
-        DamageDiceSize = 1;
-        DamageDiceNumber = 4;
-        EquivalentWeaponWeight = 35;
-        AttackDescription = "trunk";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "Your nose grows into an elephant-like trunk.";
+    public override string HaveMessage => "You have an elephantine trunk (dam 1d4).";
+    public override string LoseMessage => "Your nose returns to a normal length.";
+    public override MutationGroup Group => MutationGroup.Mouth;
+    public override int DamageDiceSize => 1;
+    public override int DamageDiceNumber => 4;
+    public override int EquivalentWeaponWeight => 35;
+    public override string AttackDescription => "trunk";
 
     public override void OnGain(Genome genome)
     {

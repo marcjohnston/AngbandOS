@@ -27,11 +27,8 @@ internal class MutationGrowMold : Mutation
         return lvl < 1 ? "grow mold        (unusable until level 1)" : "grow mold        (cost 6, CON based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 1;
-        GainMessage = "You feel a sudden affinity for mold.";
-        HaveMessage = "You can cause mold to grow near you.";
-        LoseMessage = "You feel a sudden dislike for mold.";
-    }
+    public override int Frequency => 1;
+    public override string GainMessage => "You feel a sudden affinity for mold.";
+    public override string HaveMessage => "You can cause mold to grow near you.";
+    public override string LoseMessage => "You feel a sudden dislike for mold.";
 }

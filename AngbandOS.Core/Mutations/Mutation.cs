@@ -10,16 +10,16 @@ namespace AngbandOS.Core.Mutations;
 [Serializable]
 internal abstract class Mutation
 {
-    public string AttackDescription;
-    public int DamageDiceNumber;
-    public int DamageDiceSize;
-    public int EquivalentWeaponWeight;
-    public int Frequency;
-    public string GainMessage;
-    public MutationGroup Group = MutationGroup.None;
-    public string HaveMessage;
-    public string LoseMessage;
-    public MutationAttackType MutationAttackType = MutationAttackType.Physical;
+    public virtual string AttackDescription => "";
+    public virtual int DamageDiceNumber => 0;
+    public virtual int DamageDiceSize => 0;
+    public virtual int EquivalentWeaponWeight => 0;
+    public abstract int Frequency { get; }
+    public abstract string GainMessage { get; }
+    public virtual MutationGroup Group => MutationGroup.None;
+    public abstract string HaveMessage { get; }
+    public abstract string LoseMessage { get; }
+    public virtual MutationAttackType MutationAttackType => MutationAttackType.Physical;
 
     public virtual void Activate(SaveGame saveGame)
     {
@@ -29,8 +29,6 @@ internal abstract class Mutation
     {
         return string.Empty;
     }
-
-    public abstract void Initialize();
 
     public virtual void OnGain(Genome genome)
     {

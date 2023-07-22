@@ -10,18 +10,15 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class MutationBeak : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "Your mouth turns into a sharp, powerful beak!";
-        HaveMessage = "You have a beak (dam. 2d4).";
-        LoseMessage = "Your mouth reverts to normal!";
-        Group = MutationGroup.Mouth;
-        DamageDiceSize = 2;
-        DamageDiceNumber = 4;
-        EquivalentWeaponWeight = 5;
-        AttackDescription = "beak";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "Your mouth turns into a sharp, powerful beak!";
+    public override string HaveMessage => "You have a beak (dam. 2d4).";
+    public override string LoseMessage => "Your mouth reverts to normal!";
+    public override MutationGroup Group => MutationGroup.Mouth;
+    public override int DamageDiceSize => 2;
+    public override int DamageDiceNumber => 4;
+    public override int EquivalentWeaponWeight => 5;
+    public override string AttackDescription => "beak";
 
     public override void OnGain(Genome genome)
     {

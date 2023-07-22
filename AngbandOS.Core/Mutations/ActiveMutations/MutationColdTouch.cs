@@ -36,11 +36,8 @@ internal class MutationColdTouch : Mutation
         return lvl < 2 ? "cold touch       (unusable until level 2)" : "cold touch       (cost 2, CON based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "Your hands get very cold.";
-        HaveMessage = "You can freeze things with a touch.";
-        LoseMessage = "Your hands warm up.";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "Your hands get very cold.";
+    public override string HaveMessage => "You can freeze things with a touch.";
+    public override string LoseMessage => "Your hands warm up.";
 }

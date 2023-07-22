@@ -10,14 +10,11 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationIronSkin : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "Your skin turns to steel!";
-        HaveMessage = "Your skin is made of steel (-1 DEX, +25 AC).";
-        LoseMessage = "Your skin reverts to flesh!";
-        Group = MutationGroup.Skin;
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "Your skin turns to steel!";
+    public override string HaveMessage => "Your skin is made of steel (-1 DEX, +25 AC).";
+    public override string LoseMessage => "Your skin reverts to flesh!";
+    public override MutationGroup Group => MutationGroup.Skin;
 
     public override void OnGain(Genome genome)
     {

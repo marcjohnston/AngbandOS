@@ -27,11 +27,8 @@ internal class MutationRadiation : Mutation
             : "produce radiation   (cost 15, CON based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "You start emitting hard radiation.";
-        HaveMessage = "You can emit hard radiation at will.";
-        LoseMessage = "You stop emitting hard radiation.";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "You start emitting hard radiation.";
+    public override string HaveMessage => "You can emit hard radiation at will.";
+    public override string LoseMessage => "You stop emitting hard radiation.";
 }

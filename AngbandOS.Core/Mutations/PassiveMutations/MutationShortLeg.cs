@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationShortLeg : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "Your legs turn into short stubs!";
-        HaveMessage = "Your legs are short stubs (-3 speed).";
-        LoseMessage = "Your legs lengthen to normal.";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "Your legs turn into short stubs!";
+    public override string HaveMessage => "Your legs are short stubs (-3 speed).";
+    public override string LoseMessage => "Your legs lengthen to normal.";
 
     public override void OnGain(Genome genome)
     {

@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationVulnElem : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 1;
-        GainMessage = "You feel strangely exposed.";
-        HaveMessage = "You are susceptible to damage from the elements.";
-        LoseMessage = "You feel less exposed.";
-    }
+    public override int Frequency => 1;
+    public override string GainMessage => "You feel strangely exposed.";
+    public override string HaveMessage => "You are susceptible to damage from the elements.";
+    public override string LoseMessage => "You feel less exposed.";
 
     public override void OnGain(Genome genome)
     {

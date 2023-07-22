@@ -10,14 +10,11 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationPuny : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 3;
-        GainMessage = "Your muscles wither away...";
-        HaveMessage = "You are puny (-4 STR).";
-        LoseMessage = "Your muscles revert to normal.";
-        Group = MutationGroup.Strength;
-    }
+    public override int Frequency => 3;
+    public override string GainMessage => "Your muscles wither away...";
+    public override string HaveMessage => "You are puny (-4 STR).";
+    public override string LoseMessage => "Your muscles revert to normal.";
+    public override MutationGroup Group => MutationGroup.Strength;
 
     public override void OnGain(Genome genome)
     {

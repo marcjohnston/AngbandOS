@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class MutationRawChaos : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 1;
-        GainMessage = "You feel the universe is less stable around you.";
-        HaveMessage = "You occasionally are surrounded with raw chaos.";
-        LoseMessage = "You feel the universe is more stable around you.";
-    }
+    public override int Frequency => 1;
+    public override string GainMessage => "You feel the universe is less stable around you.";
+    public override string HaveMessage => "You occasionally are surrounded with raw chaos.";
+    public override string LoseMessage => "You feel the universe is more stable around you.";
 
     public override void OnProcessWorld(SaveGame saveGame)
     {

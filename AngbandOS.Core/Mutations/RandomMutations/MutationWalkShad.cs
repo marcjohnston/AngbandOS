@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class MutationWalkShad : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 1;
-        GainMessage = "You feel like reality is as thin as paper.";
-        HaveMessage = "You occasionally stumble into other shadows.";
-        LoseMessage = "You feel like you're trapped in reality.";
-    }
+    public override int Frequency => 1;
+    public override string GainMessage => "You feel like reality is as thin as paper.";
+    public override string HaveMessage => "You occasionally stumble into other shadows.";
+    public override string LoseMessage => "You feel like you're trapped in reality.";
 
     public override void OnProcessWorld(SaveGame saveGame)
     {

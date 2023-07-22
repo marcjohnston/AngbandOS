@@ -10,14 +10,11 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationHyperInt : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 3;
-        GainMessage = "Your brain evolves into a living computer!";
-        HaveMessage = "Your brain is a living computer (+4 INT/WIS).";
-        LoseMessage = "Your brain reverts to normal.";
-        Group = MutationGroup.Smarts;
-    }
+    public override int Frequency => 3;
+    public override string GainMessage => "Your brain evolves into a living computer!";
+    public override string HaveMessage => "Your brain is a living computer (+4 INT/WIS).";
+    public override string LoseMessage => "Your brain reverts to normal.";
+    public override MutationGroup Group => MutationGroup.Smarts;
 
     public override void OnGain(Genome genome)
     {

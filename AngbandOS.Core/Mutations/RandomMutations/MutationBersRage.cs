@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class MutationBersRage : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 1;
-        GainMessage = "You become subject to fits of berserk rage!";
-        HaveMessage = "You are subject to berserker fits.";
-        LoseMessage = "You are no longer subject to fits of berserk rage!";
-    }
+    public override int Frequency => 1;
+    public override string GainMessage => "You become subject to fits of berserk rage!";
+    public override string HaveMessage => "You are subject to berserker fits.";
+    public override string LoseMessage => "You are no longer subject to fits of berserk rage!";
 
     public override void OnProcessWorld(SaveGame saveGame)
     {

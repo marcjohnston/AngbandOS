@@ -27,11 +27,8 @@ internal class MutationEarthquake : Mutation
         return lvl < 12 ? "earthquake       (unusable until level 12)" : "earthquake       (cost 12, STR based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 3;
-        GainMessage = "You gain the ability to wreck the dungeon.";
-        HaveMessage = "You can bring down the dungeon around your ears.";
-        LoseMessage = "You lose the ability to wreck the dungeon.";
-    }
+    public override int Frequency => 3;
+    public override string GainMessage => "You gain the ability to wreck the dungeon.";
+    public override string HaveMessage => "You can bring down the dungeon around your ears.";
+    public override string LoseMessage => "You lose the ability to wreck the dungeon.";
 }

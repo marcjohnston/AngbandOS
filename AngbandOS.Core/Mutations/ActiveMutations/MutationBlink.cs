@@ -23,11 +23,8 @@ internal class MutationBlink : Mutation
         return lvl < 3 ? "blink            (unusable until level 3)" : "blink            (cost 3, WIS based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 3;
-        GainMessage = "You gain the power of minor teleportation.";
-        HaveMessage = "You can teleport yourself short distances.";
-        LoseMessage = "You lose the power of minor teleportation.";
-    }
+    public override int Frequency => 3;
+    public override string GainMessage => "You gain the power of minor teleportation.";
+    public override string HaveMessage => "You can teleport yourself short distances.";
+    public override string LoseMessage => "You lose the power of minor teleportation.";
 }

@@ -10,14 +10,11 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationLimber : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 3;
-        GainMessage = "Your muscles become limber.";
-        HaveMessage = "Your body is very limber (+3 DEX).";
-        LoseMessage = "Your muscles stiffen.";
-        Group = MutationGroup.Joints;
-    }
+    public override int Frequency => 3;
+    public override string GainMessage => "Your muscles become limber.";
+    public override string HaveMessage => "Your body is very limber (+3 DEX).";
+    public override string LoseMessage => "Your muscles stiffen.";
+    public override MutationGroup Group => MutationGroup.Joints;
 
     public override void OnGain(Genome genome)
     {

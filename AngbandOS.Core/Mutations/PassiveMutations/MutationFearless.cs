@@ -10,14 +10,11 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationFearless : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 3;
-        GainMessage = "You become completely fearless.";
-        HaveMessage = "You are completely fearless.";
-        LoseMessage = "You begin to feel fear again.";
-        Group = MutationGroup.Bravery;
-    }
+    public override int Frequency => 3;
+    public override string GainMessage => "You become completely fearless.";
+    public override string HaveMessage => "You are completely fearless.";
+    public override string LoseMessage => "You begin to feel fear again.";
+    public override MutationGroup Group => MutationGroup.Bravery;
 
     public override void OnGain(Genome genome)
     {

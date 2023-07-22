@@ -33,11 +33,8 @@ internal class MutationVampirism : Mutation
             : $"vampiric drain   (cost {lvl}, CON based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "You become vampiric.";
-        HaveMessage = "You can drain life from a foe like a vampire.";
-        LoseMessage = "You are no longer vampiric.";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "You become vampiric.";
+    public override string HaveMessage => "You can drain life from a foe like a vampire.";
+    public override string LoseMessage => "You are no longer vampiric.";
 }

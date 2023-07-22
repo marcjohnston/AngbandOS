@@ -23,11 +23,8 @@ internal class MutationSmellMon : Mutation
         return lvl < 5 ? "smell monsters   (unusable until level 5)" : "smell monsters   (cost 4, INT based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 4;
-        GainMessage = "You smell filthy monsters.";
-        HaveMessage = "You can smell nearby monsters.";
-        LoseMessage = "You no longer smell filthy monsters.";
-    }
+    public override int Frequency => 4;
+    public override string GainMessage => "You smell filthy monsters.";
+    public override string HaveMessage => "You can smell nearby monsters.";
+    public override string LoseMessage => "You no longer smell filthy monsters.";
 }

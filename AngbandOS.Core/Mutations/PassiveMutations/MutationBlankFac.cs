@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationBlankFac : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "Your face becomes completely featureless!";
-        HaveMessage = "Your face is featureless (-1 CHR).";
-        LoseMessage = "Your facial features return.";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "Your face becomes completely featureless!";
+    public override string HaveMessage => "Your face is featureless (-1 CHR).";
+    public override string LoseMessage => "Your facial features return.";
 
     public override void OnGain(Genome genome)
     {

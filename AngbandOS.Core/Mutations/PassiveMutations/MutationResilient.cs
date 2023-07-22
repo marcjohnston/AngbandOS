@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationResilient : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "You become extraordinarily resilient.";
-        HaveMessage = "You are very resilient (+4 CON).";
-        LoseMessage = "You become ordinarily resilient again.";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "You become extraordinarily resilient.";
+    public override string HaveMessage => "You are very resilient (+4 CON).";
+    public override string LoseMessage => "You become ordinarily resilient again.";
 
     public override void OnGain(Genome genome)
     {

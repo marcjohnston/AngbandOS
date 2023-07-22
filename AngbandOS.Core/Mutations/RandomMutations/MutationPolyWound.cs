@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class MutationPolyWound : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 1;
-        GainMessage = "You feel forces of chaos entering your old scars.";
-        HaveMessage = "Your health is subject to chaotic forces.";
-        LoseMessage = "You feel forces of chaos departing your old scars.";
-    }
+    public override int Frequency => 1;
+    public override string GainMessage => "You feel forces of chaos entering your old scars.";
+    public override string HaveMessage => "Your health is subject to chaotic forces.";
+    public override string LoseMessage => "You feel forces of chaos departing your old scars.";
 
     public override void OnProcessWorld(SaveGame saveGame)
     {

@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationXtraNois : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 3;
-        GainMessage = "You start making strange noise!";
-        HaveMessage = "You make a lot of strange noise (-3 stealth).";
-        LoseMessage = "You stop making strange noise!";
-    }
+    public override int Frequency => 3;
+    public override string GainMessage => "You start making strange noise!";
+    public override string HaveMessage => "You make a lot of strange noise (-3 stealth).";
+    public override string LoseMessage => "You stop making strange noise!";
 
     public override void OnGain(Genome genome)
     {

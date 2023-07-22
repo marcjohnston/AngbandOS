@@ -35,11 +35,8 @@ internal class MutationDetCurse : Mutation
         return lvl < 7 ? "detect curses    (unusable until level 7)" : "detect curses    (cost 14, WIS based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "You can feel evil magics.";
-        HaveMessage = "You can feel the danger of evil magic.";
-        LoseMessage = "You can no longer feel evil magics.";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "You can feel evil magics.";
+    public override string HaveMessage => "You can feel the danger of evil magic.";
+    public override string LoseMessage => "You can no longer feel evil magics.";
 }

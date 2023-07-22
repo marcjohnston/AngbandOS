@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationIllNorm : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 1;
-        GainMessage = "You start projecting a reassuring image.";
-        HaveMessage = "Your appearance is masked with illusion.";
-        LoseMessage = "You stop projecting a reassuring image.";
-    }
+    public override int Frequency => 1;
+    public override string GainMessage => "You start projecting a reassuring image.";
+    public override string HaveMessage => "Your appearance is masked with illusion.";
+    public override string LoseMessage => "You stop projecting a reassuring image.";
 
     public override void OnGain(Genome genome)
     {

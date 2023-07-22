@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class MutationChaosGift : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "You attract the notice of a chaos deity!";
-        HaveMessage = "Chaos deities give you gifts.";
-        LoseMessage = "You lose the attention of the chaos deities.";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "You attract the notice of a chaos deity!";
+    public override string HaveMessage => "Chaos deities give you gifts.";
+    public override string LoseMessage => "You lose the attention of the chaos deities.";
 
     public override void OnGain(Genome genome)
     {

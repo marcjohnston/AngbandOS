@@ -28,11 +28,8 @@ internal class MutationSwapPos : Mutation
         return lvl < 15 ? "swap position    (unusable until level 15)" : "swap position    (cost 12, DEX based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "You feel like walking a mile in someone else's shoes.";
-        HaveMessage = "You can switch locations with another being.";
-        LoseMessage = "You feel like staying in your own shoes.";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "You feel like walking a mile in someone else's shoes.";
+    public override string HaveMessage => "You can switch locations with another being.";
+    public override string LoseMessage => "You feel like staying in your own shoes.";
 }

@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationElecTouc : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "Electricity starts running through you!";
-        HaveMessage = "Electricity is running through your veins.";
-        LoseMessage = "Electricity stops running through you.";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "Electricity starts running through you!";
+    public override string HaveMessage => "Electricity is running through your veins.";
+    public override string LoseMessage => "Electricity stops running through you.";
 
     public override void OnGain(Genome genome)
     {

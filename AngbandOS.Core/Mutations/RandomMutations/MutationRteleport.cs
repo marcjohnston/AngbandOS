@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class MutationRteleport : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 1;
-        GainMessage = "Your position seems very uncertain...";
-        HaveMessage = "You are teleporting randomly.";
-        LoseMessage = "Your position seems more certain.";
-    }
+    public override int Frequency => 1;
+    public override string GainMessage => "Your position seems very uncertain...";
+    public override string HaveMessage => "You are teleporting randomly.";
+    public override string LoseMessage => "Your position seems more certain.";
 
     public override void OnProcessWorld(SaveGame saveGame)
     {

@@ -30,11 +30,8 @@ internal class MutationBrFire : Mutation
             : $"fire breath      (cost {lvl}, dam {lvl * 2}, CON based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 3;
-        GainMessage = "You gain the ability to breathe fire.";
-        HaveMessage = "You can breathe fire (dam lvl * 2).";
-        LoseMessage = "You lose the ability to breathe fire.";
-    }
+    public override int Frequency => 3;
+    public override string GainMessage => "You gain the ability to breathe fire.";
+    public override string HaveMessage => "You can breathe fire (dam lvl * 2).";
+    public override string LoseMessage => "You lose the ability to breathe fire.";
 }

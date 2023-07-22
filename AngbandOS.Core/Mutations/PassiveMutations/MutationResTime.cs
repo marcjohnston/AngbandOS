@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationResTime : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 1;
-        GainMessage = "You feel immortal.";
-        HaveMessage = "You are protected from the ravages of time.";
-        LoseMessage = "You feel all too mortal.";
-    }
+    public override int Frequency => 1;
+    public override string GainMessage => "You feel immortal.";
+    public override string HaveMessage => "You are protected from the ravages of time.";
+    public override string LoseMessage => "You feel all too mortal.";
 
     public override void OnGain(Genome genome)
     {

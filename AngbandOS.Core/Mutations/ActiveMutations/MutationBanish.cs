@@ -46,11 +46,8 @@ internal class MutationBanish : Mutation
         return lvl < 25 ? "banish evil      (unusable until level 25)" : "banish evil      (cost 25, WIS based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 1;
-        GainMessage = "You feel a holy wrath fill you.";
-        HaveMessage = "You can send evil creatures directly to Hell.";
-        LoseMessage = "You no longer feel a holy wrath.";
-    }
+    public override int Frequency => 1;
+    public override string GainMessage => "You feel a holy wrath fill you.";
+    public override string HaveMessage => "You can send evil creatures directly to Hell.";
+    public override string LoseMessage => "You no longer feel a holy wrath.";
 }

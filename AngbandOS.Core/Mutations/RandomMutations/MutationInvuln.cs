@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class MutationInvuln : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 1;
-        GainMessage = "You are blessed with fits of invulnerability.";
-        HaveMessage = "You occasionally feel invincible.";
-        LoseMessage = "You are no longer blessed with fits of invulnerability.";
-    }
+    public override int Frequency => 1;
+    public override string GainMessage => "You are blessed with fits of invulnerability.";
+    public override string HaveMessage => "You occasionally feel invincible.";
+    public override string LoseMessage => "You are no longer blessed with fits of invulnerability.";
 
     public override void OnProcessWorld(SaveGame saveGame)
     {

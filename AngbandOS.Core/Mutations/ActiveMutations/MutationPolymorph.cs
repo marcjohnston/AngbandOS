@@ -23,11 +23,8 @@ internal class MutationPolymorph : Mutation
         return lvl < 18 ? "polymorph        (unusable until level 18)" : "polymorph        (cost 20, CON based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 1;
-        GainMessage = "Your body seems mutable.";
-        HaveMessage = "You can polymorph yourself at will.";
-        LoseMessage = "Your body seems stable.";
-    }
+    public override int Frequency => 1;
+    public override string GainMessage => "Your body seems mutable.";
+    public override string HaveMessage => "You can polymorph yourself at will.";
+    public override string LoseMessage => "Your body seems stable.";
 }

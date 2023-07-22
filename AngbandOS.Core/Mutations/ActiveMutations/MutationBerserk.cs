@@ -26,11 +26,8 @@ internal class MutationBerserk : Mutation
         return lvl < 8 ? "berserk          (unusable until level 8)" : "berserk          (cost 8, STR based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 3;
-        GainMessage = "You feel a controlled rage.";
-        HaveMessage = "You can drive yourself into a berserk frenzy.";
-        LoseMessage = "You no longer feel a controlled rage.";
-    }
+    public override int Frequency => 3;
+    public override string GainMessage => "You feel a controlled rage.";
+    public override string HaveMessage => "You can drive yourself into a berserk frenzy.";
+    public override string LoseMessage => "You no longer feel a controlled rage.";
 }

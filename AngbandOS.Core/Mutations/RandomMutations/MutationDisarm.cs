@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class MutationDisarm : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 1;
-        GainMessage = "Your feet grow to four times their former size.";
-        HaveMessage = "You occasionally stumble and drop things.";
-        LoseMessage = "Your feet shrink to their former size.";
-    }
+    public override int Frequency => 1;
+    public override string GainMessage => "Your feet grow to four times their former size.";
+    public override string HaveMessage => "You occasionally stumble and drop things.";
+    public override string LoseMessage => "Your feet shrink to their former size.";
 
     public override void OnProcessWorld(SaveGame saveGame)
     {

@@ -39,11 +39,8 @@ internal class MutationPanicHit : Mutation
         return lvl < 10 ? "panic hit        (unusable until level 10)" : "panic hit        (cost 12, DEX based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "You suddenly understand how thieves feel.";
-        HaveMessage = "You can run for your life after hitting something.";
-        LoseMessage = "You no longer feel jumpy.";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "You suddenly understand how thieves feel.";
+    public override string HaveMessage => "You can run for your life after hitting something.";
+    public override string LoseMessage => "You no longer feel jumpy.";
 }

@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class MutationBanishAll : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "You feel a terrifying power lurking behind you.";
-        HaveMessage = "You sometimes cause nearby creatures to vanish.";
-        LoseMessage = "You no longer feel a terrifying power lurking behind you.";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "You feel a terrifying power lurking behind you.";
+    public override string HaveMessage => "You sometimes cause nearby creatures to vanish.";
+    public override string LoseMessage => "You no longer feel a terrifying power lurking behind you.";
 
     public override void OnProcessWorld(SaveGame saveGame)
     {

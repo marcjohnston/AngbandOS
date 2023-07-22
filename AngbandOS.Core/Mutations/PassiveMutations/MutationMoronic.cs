@@ -10,14 +10,11 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationMoronic : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 3;
-        GainMessage = "Your brain withers away...";
-        HaveMessage = "You are moronic (-4 INT/WIS).";
-        LoseMessage = "Your brain reverts to normal";
-        Group = MutationGroup.Smarts;
-    }
+    public override int Frequency => 3;
+    public override string GainMessage => "Your brain withers away...";
+    public override string HaveMessage => "You are moronic (-4 INT/WIS).";
+    public override string LoseMessage => "Your brain reverts to normal";
+    public override MutationGroup Group => MutationGroup.Smarts;
 
     public override void OnGain(Genome genome)
     {

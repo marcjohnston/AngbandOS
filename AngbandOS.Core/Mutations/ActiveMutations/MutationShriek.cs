@@ -25,11 +25,8 @@ internal class MutationShriek : Mutation
         return lvl < 4 ? "shriek           (unusable until level 4)" : "shriek           (cost 4, CON based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 3;
-        GainMessage = "Your vocal cords get much tougher.";
-        HaveMessage = "You can emit a horrible shriek.";
-        LoseMessage = "Your vocal cords get much weaker.";
-    }
+    public override int Frequency => 3;
+    public override string GainMessage => "Your vocal cords get much tougher.";
+    public override string HaveMessage => "You can emit a horrible shriek.";
+    public override string LoseMessage => "Your vocal cords get much weaker.";
 }

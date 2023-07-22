@@ -10,14 +10,11 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class MutationCowardice : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 1;
-        GainMessage = "You become an incredible coward!";
-        HaveMessage = "You are subject to cowardice.";
-        LoseMessage = "You are no longer an incredible coward!";
-        Group = MutationGroup.Bravery;
-    }
+    public override int Frequency => 1;
+    public override string GainMessage => "You become an incredible coward!";
+    public override string HaveMessage => "You are subject to cowardice.";
+    public override string LoseMessage => "You are no longer an incredible coward!";
+    public override MutationGroup Group => MutationGroup.Bravery;
 
     public override void OnProcessWorld(SaveGame saveGame)
     {

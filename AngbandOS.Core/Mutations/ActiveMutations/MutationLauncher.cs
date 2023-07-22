@@ -24,11 +24,8 @@ internal class MutationLauncher : Mutation
         return "throw object     (cost lev, STR based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "Your throwing arm feels much stronger.";
-        HaveMessage = "You can hurl objects with great force.";
-        LoseMessage = "Your throwing arm feels much weaker.";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "Your throwing arm feels much stronger.";
+    public override string HaveMessage => "You can hurl objects with great force.";
+    public override string LoseMessage => "Your throwing arm feels much weaker.";
 }

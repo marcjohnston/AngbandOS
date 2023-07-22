@@ -23,11 +23,8 @@ internal class MutationSmellMet : Mutation
         return lvl < 3 ? "smell metal      (unusable until level 3)" : "smell metal      (cost 2, INT based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 3;
-        GainMessage = "You smell a metallic odor.";
-        HaveMessage = "You can smell nearby precious metal.";
-        LoseMessage = "You no longer smell a metallic odor.";
-    }
+    public override int Frequency => 3;
+    public override string GainMessage => "You smell a metallic odor.";
+    public override string HaveMessage => "You can smell nearby precious metal.";
+    public override string LoseMessage => "You no longer smell a metallic odor.";
 }

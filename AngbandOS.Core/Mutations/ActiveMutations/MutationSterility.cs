@@ -26,11 +26,8 @@ internal class MutationSterility : Mutation
         return lvl < 20 ? "sterilize        (unusable until level 20)" : "sterilize        (cost 40, CHA based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 1;
-        GainMessage = "You can give everything around you a headache.";
-        HaveMessage = "You can cause mass impotence.";
-        LoseMessage = "You hear a massed sigh of relief.";
-    }
+    public override int Frequency => 1;
+    public override string GainMessage => "You can give everything around you a headache.";
+    public override string HaveMessage => "You can cause mass impotence.";
+    public override string LoseMessage => "You hear a massed sigh of relief.";
 }

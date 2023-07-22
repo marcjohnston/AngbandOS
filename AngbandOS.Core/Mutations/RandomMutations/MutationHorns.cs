@@ -5,22 +5,21 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Security.Cryptography.X509Certificates;
+
 namespace AngbandOS.Core.Mutations.RandomMutations;
 
 [Serializable]
 internal class MutationHorns : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "Horns pop forth into your forehead!";
-        HaveMessage = "You have horns (dam. 2d6).";
-        LoseMessage = "Your horns vanish from your forehead!";
-        DamageDiceSize = 2;
-        DamageDiceNumber = 6;
-        EquivalentWeaponWeight = 15;
-        AttackDescription = "horns";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "Horns pop forth into your forehead!";
+    public override string HaveMessage => "You have horns (dam. 2d6).";
+    public override string LoseMessage => "Your horns vanish from your forehead!";
+    public override int DamageDiceSize => 2;
+    public override int DamageDiceNumber => 6;
+    public override int EquivalentWeaponWeight => 15;
+    public override string AttackDescription => "horns";
 
     public override void OnGain(Genome genome)
     {

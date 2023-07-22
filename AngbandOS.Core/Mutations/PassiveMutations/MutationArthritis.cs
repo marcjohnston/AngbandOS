@@ -10,14 +10,11 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationArthritis : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 3;
-        GainMessage = "Your joints suddenly hurt.";
-        HaveMessage = "Your joints ache constantly (-3 DEX).";
-        LoseMessage = "Your joints stop hurting.";
-        Group = MutationGroup.Joints;
-    }
+    public override int Frequency => 3;
+    public override string GainMessage => "Your joints suddenly hurt.";
+    public override string HaveMessage => "Your joints ache constantly (-3 DEX).";
+    public override string LoseMessage => "Your joints stop hurting.";
+    public override MutationGroup Group => MutationGroup.Joints;
 
     public override void OnGain(Genome genome)
     {

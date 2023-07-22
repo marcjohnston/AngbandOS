@@ -23,11 +23,8 @@ internal class MutationIllumine : Mutation
         return lvl < 3 ? "illuminate       (unusable until level 3)" : "illuminate       (cost 2, INT based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 3;
-        GainMessage = "You can light up rooms with your presence.";
-        HaveMessage = "You can emit bright light.";
-        LoseMessage = "You can no longer light up rooms with your presence.";
-    }
+    public override int Frequency => 3;
+    public override string GainMessage => "You can light up rooms with your presence.";
+    public override string HaveMessage => "You can emit bright light.";
+    public override string LoseMessage => "You can no longer light up rooms with your presence.";
 }

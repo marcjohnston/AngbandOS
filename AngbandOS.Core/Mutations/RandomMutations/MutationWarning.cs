@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class MutationWarning : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "You suddenly feel paranoid.";
-        HaveMessage = "You receive warnings about your foes.";
-        LoseMessage = "You no longer feel paranoid.";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "You suddenly feel paranoid.";
+    public override string HaveMessage => "You receive warnings about your foes.";
+    public override string LoseMessage => "You no longer feel paranoid.";
 
     public override void OnProcessWorld(SaveGame saveGame)
     {

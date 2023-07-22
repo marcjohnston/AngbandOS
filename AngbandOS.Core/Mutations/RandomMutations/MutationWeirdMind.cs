@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class MutationWeirdMind : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "Your thoughts suddenly take off in strange directions.";
-        HaveMessage = "Your mind randomly expands and contracts.";
-        LoseMessage = "Your thoughts return to boring paths.";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "Your thoughts suddenly take off in strange directions.";
+    public override string HaveMessage => "Your mind randomly expands and contracts.";
+    public override string LoseMessage => "Your thoughts return to boring paths.";
 
     public override void OnProcessWorld(SaveGame saveGame)
     {

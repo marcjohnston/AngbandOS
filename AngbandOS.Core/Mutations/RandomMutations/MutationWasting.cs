@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class MutationWasting : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 1;
-        GainMessage = "You suddenly contract a horrible wasting disease.";
-        HaveMessage = "You have a horrible wasting disease.";
-        LoseMessage = "You are cured of the horrible wasting disease!";
-    }
+    public override int Frequency => 1;
+    public override string GainMessage => "You suddenly contract a horrible wasting disease.";
+    public override string HaveMessage => "You have a horrible wasting disease.";
+    public override string LoseMessage => "You are cured of the horrible wasting disease!";
 
     public override void OnProcessWorld(SaveGame saveGame)
     {

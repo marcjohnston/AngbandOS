@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MutationRegen : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "You start regenerating.";
-        HaveMessage = "You are regenerating.";
-        LoseMessage = "You stop regenerating.";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "You start regenerating.";
+    public override string HaveMessage => "You are regenerating.";
+    public override string LoseMessage => "You stop regenerating.";
 
     public override void OnGain(Genome genome)
     {

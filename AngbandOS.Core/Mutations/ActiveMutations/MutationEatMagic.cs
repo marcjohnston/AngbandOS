@@ -64,11 +64,8 @@ internal class MutationEatMagic : Mutation
         return lvl < 17 ? "eat magic        (unusable until level 17)" : "eat magic        (cost 1, WIS based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 1;
-        GainMessage = "Your magic items look delicious.";
-        HaveMessage = "You can consume magic energy for your own use.";
-        LoseMessage = "Your magic items no longer look delicious.";
-    }
+    public override int Frequency => 1;
+    public override string GainMessage => "Your magic items look delicious.";
+    public override string HaveMessage => "You can consume magic energy for your own use.";
+    public override string LoseMessage => "Your magic items no longer look delicious.";
 }

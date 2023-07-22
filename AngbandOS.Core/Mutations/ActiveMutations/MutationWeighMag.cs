@@ -23,11 +23,8 @@ internal class MutationWeighMag : Mutation
         return lvl < 6 ? "weigh magic      (unusable until level 6)" : "weigh magic      (cost 6, INT based)";
     }
 
-    public override void Initialize()
-    {
-        Frequency = 2;
-        GainMessage = "You feel you can better understand the magic around you.";
-        HaveMessage = "You can feel the strength of the magics affecting you.";
-        LoseMessage = "You no longer sense magic.";
-    }
+    public override int Frequency => 2;
+    public override string GainMessage => "You feel you can better understand the magic around you.";
+    public override string HaveMessage => "You can feel the strength of the magics affecting you.";
+    public override string LoseMessage => "You no longer sense magic.";
 }

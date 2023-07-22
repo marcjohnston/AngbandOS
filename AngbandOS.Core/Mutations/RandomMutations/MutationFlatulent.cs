@@ -10,13 +10,10 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class MutationFlatulent : Mutation
 {
-    public override void Initialize()
-    {
-        Frequency = 1;
-        GainMessage = "You become subject to uncontrollable flatulence.";
-        HaveMessage = "You are subject to uncontrollable flatulence.";
-        LoseMessage = "You are no longer subject to uncontrollable flatulence.";
-    }
+    public override int Frequency => 1;
+    public override string GainMessage => "You become subject to uncontrollable flatulence.";
+    public override string HaveMessage => "You are subject to uncontrollable flatulence.";
+    public override string LoseMessage => "You are no longer subject to uncontrollable flatulence.";
 
     public override void OnProcessWorld(SaveGame saveGame)
     {
