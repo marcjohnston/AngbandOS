@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal class KickAttackType : BaseAttackType
+internal class KickAttackType : AttackType
 {
     public override string MonsterAction(Monster monster) => $"kicks {monster.Name}";
     public override string PlayerAction(SaveGame saveGame) => $"kicks you";

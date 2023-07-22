@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal abstract class BaseAttackType
+internal abstract class AttackType
 {
     /// <summary>
     /// Returns the action message to be displayed, when the attack targets another monster.

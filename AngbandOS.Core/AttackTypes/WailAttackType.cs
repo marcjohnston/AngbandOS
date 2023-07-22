@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal class WailAttackType : BaseAttackType
+internal class WailAttackType : AttackType
 {
     public override string MonsterAction(Monster monster) => $"wails at {monster.Name}";
     public override string PlayerAction(SaveGame saveGame) => $"wails at you";

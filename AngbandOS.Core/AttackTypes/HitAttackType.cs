@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal class HitAttackType : BaseAttackType
+internal class HitAttackType : AttackType
 {
     public override string MonsterAction(Monster monster) => $"hits {monster.Name}";
     public override string PlayerAction(SaveGame saveGame) => $"hits you";

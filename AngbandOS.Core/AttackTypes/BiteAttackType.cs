@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal class BiteAttackType : BaseAttackType
+internal class BiteAttackType : AttackType
 {
     public override string MonsterAction(Monster monster) => $"bites {monster.Name}";
     public override string PlayerAction(SaveGame saveGame) => $"bites you";

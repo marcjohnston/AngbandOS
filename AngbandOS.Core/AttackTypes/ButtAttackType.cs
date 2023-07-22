@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal class ButtAttackType : BaseAttackType
+internal class ButtAttackType : AttackType
 {
     public override string MonsterAction(Monster monster) => $"butts {monster.Name}";
     public override string PlayerAction(SaveGame saveGame) => $"butts you";

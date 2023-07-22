@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal class GazeAttackType : BaseAttackType
+internal class GazeAttackType : AttackType
 {
     public override string MonsterAction(Monster monster) => $"gazes at {monster.Name}";
     public override string PlayerAction(SaveGame saveGame) => $"gazes at you";

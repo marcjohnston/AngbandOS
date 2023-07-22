@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal class EngulfAttackType : BaseAttackType
+internal class EngulfAttackType : AttackType
 {
     public override string MonsterAction(Monster monster) => $"engulfs {monster.Name}";
     public override string PlayerAction(SaveGame saveGame) => $"engulfs you";

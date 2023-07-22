@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal class CrushAttackType : BaseAttackType
+internal class CrushAttackType : AttackType
 {
     public override string MonsterAction(Monster monster) => $"crushes {monster.Name}";
     public override string PlayerAction(SaveGame saveGame) => $"crushes you";

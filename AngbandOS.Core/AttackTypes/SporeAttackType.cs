@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal class SporeAttackType : BaseAttackType
+internal class SporeAttackType : AttackType
 {
     public override string MonsterAction(Monster monster) => $"releases spores at {monster.Name}";
     public override string PlayerAction(SaveGame saveGame) => $"releases spores at you";

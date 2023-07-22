@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal class SpitAttackType : BaseAttackType
+internal class SpitAttackType : AttackType
 {
     public override string MonsterAction(Monster monster) => $"spits on {monster.Name}";
     public override string PlayerAction(SaveGame saveGame) => $"spits on you";

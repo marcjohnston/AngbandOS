@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal class MoanAttackType : BaseAttackType
+internal class MoanAttackType : AttackType
 {
     public override string MonsterAction(Monster monster) => $"moans at {monster.Name}";
     public override string PlayerAction(SaveGame saveGame) => saveGame.SingletonRepository.MoanPlayerAttacks.ToWeightedRandom().Choose();

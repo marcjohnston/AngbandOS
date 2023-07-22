@@ -13,9 +13,9 @@ internal class MonsterAttack
     public int DDice;
     public int DSide;
     public AttackEffect? Effect;
-    public BaseAttackType Method;
+    public AttackType Method;
 
-    public MonsterAttack(BaseAttackType method, AttackEffect? effect, int dice, int sides)
+    public MonsterAttack(AttackType method, AttackEffect? effect, int dice, int sides)
     {
         Method = method;
         Effect = effect;

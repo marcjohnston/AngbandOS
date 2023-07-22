@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal class ClawAttackType : BaseAttackType
+internal class ClawAttackType : AttackType
 {
     public override string MonsterAction(Monster monster) => $"claws {monster.Name}";
     public override string PlayerAction(SaveGame saveGame) => $"claws you";

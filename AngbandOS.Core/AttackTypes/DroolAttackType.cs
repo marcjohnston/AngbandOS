@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal  class DroolAttackType : BaseAttackType
+internal  class DroolAttackType : AttackType
 {
     public override string MonsterAction(Monster monster) => $"drools on {monster.Name}";
     public override string PlayerAction(SaveGame saveGame) => $"drools on you";
