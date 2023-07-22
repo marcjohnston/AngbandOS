@@ -295,6 +295,231 @@ internal class SaveGame
     private int TunnN;
     private int WallN;
 
+    public readonly AbilityScore[] AbilityScores = new AbilityScore[6];
+    public Genome Dna;
+    public readonly string[] History = new string[4];
+    public readonly int[] MaxDlv = new int[DungeonCount];
+    public readonly int[] PlayerHp = new int[Constants.PyMaxLevel];
+    public int Age;
+    public ItemTypeEnum AmmunitionItemCategory; // TODO: This needs to be a property of the missileweaponitemcategory
+    public int ArmourClassBonus;
+    public int AttackBonus;
+    public int BaseArmourClass;
+    public int DamageBonus;
+    public int DisplayedArmourClassBonus;
+    public int DisplayedAttackBonus;
+    public int DisplayedBaseArmourClass;
+    public int DisplayedDamageBonus;
+    public int Energy;
+    public int ExperienceMultiplier;
+    public int ExperiencePoints;
+    public int Food;
+    public int FractionalExperiencePoints;
+    public int FractionalHealth;
+    public int FractionalMana;
+    public GameTime GameTime;
+    public Gender? Gender = null; // The gender will be null until the player has selected the gender.
+    public int Generation; // This is how many times the character name has changed.
+    public bool GetFirstLevelMutation;
+    private int _gold;
+    public int Gold
+    {
+        get
+        {
+            return _gold;
+        }
+        set
+        {
+            _gold = value;
+            ConsoleViewPort.GoldUpdated(_gold);
+        }
+    }
+    public Patron GooPatron;
+    public bool HasAcidImmunity;
+    public bool HasAcidResistance;
+    public bool HasAggravation;
+    public bool HasAntiMagic;
+    public bool HasAntiTeleport;
+    public bool HasAntiTheft;
+    public bool HasBlessedBlade;
+    public bool HasBlindnessResistance;
+    public bool HasChaosResistance;
+    public bool HasColdImmunity;
+    public bool HasColdResistance;
+    public bool HasConfusingTouch;
+    public bool HasConfusionResistance;
+    public bool HasDarkResistance;
+    public bool HasDisenchantResistance;
+    public bool HasElementalVulnerability;
+    public bool HasExperienceDrain;
+    public bool HasExtraMight;
+    public bool HasFearResistance;
+    public bool HasFeatherFall;
+    public bool HasFireImmunity;
+    public bool HasFireResistance;
+    public bool HasFireShield;
+    public bool HasFreeAction;
+    public bool HasGlow;
+    public bool HasHeavyBow;
+    public bool HasHeavyWeapon;
+    public bool HasHoldLife;
+    public bool HasLightningImmunity;
+    public bool HasLightningResistance;
+    public bool HasLightningShield;
+    public bool HasLightResistance;
+    public bool HasNetherResistance;
+    public bool HasNexusResistance;
+    public bool HasPoisonResistance;
+    public bool HasQuakeWeapon;
+    public bool HasRandomTeleport;
+    public bool HasReflection;
+    public bool HasRegeneration;
+    public bool HasRestrictingArmour;
+    public bool HasRestrictingGloves;
+    public bool HasSeeInvisibility;
+    public bool HasShardResistance;
+    public bool HasSlowDigestion;
+    public bool HasSoundResistance;
+    public bool HasSustainCharisma;
+    public bool HasSustainConstitution;
+    public bool HasSustainDexterity;
+    public bool HasSustainIntelligence;
+    public bool HasSustainStrength;
+    public bool HasSustainWisdom;
+    public bool HasTelepathy;
+    public bool HasTimeResistance;
+    public bool HasUnpriestlyWeapon;
+    public int Health;
+    public int Height;
+    public int HitDie;
+    public int InfravisionRange;
+    public bool IsSearching;
+    public bool IsWinner;
+    public bool IsWizard;
+    private int _experienceLevel;
+    public int ExperienceLevel
+    {
+        get
+        {
+            return _experienceLevel;
+        }
+        set
+        {
+            _experienceLevel = value;
+            ConsoleViewPort.ExperienceLevelChanged(_experienceLevel);
+        }
+    }
+
+    public int LightLevel;
+    public int Mana;
+    public int MapX;
+    public int MapY;
+    public int MaxExperienceGained;
+    public int MaxHealth;
+    public int MaxLevelGained;
+    public int MaxMana;
+    public int MeleeAttacksPerRound;
+    public int MissileAttacksPerRound;
+    private string _name;
+    public string Name
+    {
+        get
+        {
+            return _name;
+        }
+        set
+        {
+            _name = value;
+            ConsoleViewPort.CharacterRenamed(_name);
+        }
+    }
+    public int OldSpareSpellSlots;
+
+    /// <summary>
+    /// Represents the character class of the player.  Will be null prior to the character class birth selection.
+    /// </summary>
+    public BaseCharacterClass? BaseCharacterClass = null;
+
+    /// <summary>
+    /// Returns the current race of the character.  Will be null before the player is birthed.
+    /// </summary>
+    public Race? Race = null;
+
+    /// <summary>
+    /// Returns the race the character was first assigned at birth.
+    /// </summary>
+    public Race RaceAtBirth;
+
+    /// <summary>
+    /// Returns the primary realm that the player studies.
+    /// </summary>
+    /// <value>The realm1.</value>
+    public Realm? PrimaryRealm = null;
+
+    /// <summary>
+    /// Returns the secondary realm that the player studies.
+    /// </summary>
+    /// <value>The realm2.</value>
+    public Realm? SecondaryRealm = null;
+
+    /// <summary>
+    /// Returns true, if the player can cast spells and/or read books.  True, for character classes that can choose either a primary and/or secondary realm.
+    /// </summary>
+    public bool CanCastSpells => PrimaryRealm != null || SecondaryRealm != null;
+
+    /// <summary>
+    /// Returns true, if the player has chosen the realm <T> for either the primary or secondary realms to study.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public bool Studies<T>() where T : Realm => (PrimaryRealm != null && typeof(T).IsAssignableFrom(PrimaryRealm.GetType())) || (SecondaryRealm != null && typeof(T).IsAssignableFrom(SecondaryRealm.GetType()));
+
+    public Religion Religion = new Religion();
+    public int SkillDigging;
+    public int SkillDisarmTraps;
+    public int SkillMelee;
+    public int SkillRanged;
+    public int SkillSavingThrow;
+    public int SkillSearchFrequency;
+    public int SkillSearching;
+    public int SkillStealth;
+    public int SkillThrowing;
+    public int SkillUseDevice;
+    public int SocialClass;
+    public int SpareSpellSlots;
+    public int Speed;
+    public TimedAction TimedAcidResistance;
+    public TimedAction TimedBleeding;
+    public TimedAction TimedBlessing;
+    public TimedAction TimedBlindness;
+    public TimedAction TimedColdResistance;
+    public TimedAction TimedConfusion;
+    public TimedAction TimedEtherealness;
+    public TimedAction TimedFear;
+    public TimedAction TimedFireResistance;
+    public TimedAction TimedHallucinations;
+    public TimedAction TimedHaste;
+    public TimedAction TimedHeroism;
+    public TimedAction TimedInfravision;
+    public TimedAction TimedInvulnerability;
+    public TimedAction TimedLightningResistance;
+    public TimedAction TimedParalysis;
+    public TimedAction TimedPoison;
+    public TimedAction TimedPoisonResistance;
+    public TimedAction TimedProtectionFromEvil;
+    public TimedAction TimedSeeInvisibility;
+    public TimedAction TimedSlow;
+    public TimedAction TimedStoneskin;
+    public TimedAction TimedStun;
+    public TimedAction TimedSuperheroism;
+    public TimedAction TimedTelepathy;
+    public int TownWithHouse;
+    public int Weight;
+    public int WeightCarried;
+    public int WildernessX;
+    public int WildernessY;
+    public int WordOfRecallDelay;
+
     /// <summary>
     /// Creates a new game.
     /// </summary>
@@ -15894,231 +16119,6 @@ internal class SaveGame
     //////////////////////////////////////////////
     // PLAYER START
     //////////////////////////////////////////////
-    public readonly AbilityScore[] AbilityScores = new AbilityScore[6];
-    public Genome Dna;
-    public readonly string[] History = new string[4];
-    public readonly int[] MaxDlv = new int[DungeonCount];
-    public readonly int[] PlayerHp = new int[Constants.PyMaxLevel];
-    public int Age;
-    public ItemTypeEnum AmmunitionItemCategory; // TODO: This needs to be a property of the missileweaponitemcategory
-    public int ArmourClassBonus;
-    public int AttackBonus;
-    public int BaseArmourClass;
-    public int DamageBonus;
-    public int DisplayedArmourClassBonus;
-    public int DisplayedAttackBonus;
-    public int DisplayedBaseArmourClass;
-    public int DisplayedDamageBonus;
-    public int Energy;
-    public int ExperienceMultiplier;
-    public int ExperiencePoints;
-    public int Food;
-    public int FractionalExperiencePoints;
-    public int FractionalHealth;
-    public int FractionalMana;
-    public GameTime GameTime;
-    public Gender? Gender = null; // The gender will be null until the player has selected the gender.
-    public int Generation; // This is how many times the character name has changed.
-    public bool GetFirstLevelMutation;
-    private int _gold;
-    public int Gold
-    {
-        get
-        {
-            return _gold;
-        }
-        set
-        {
-            _gold = value;
-            ConsoleViewPort.GoldUpdated(_gold);
-        }
-    }
-    public Patron GooPatron;
-    public bool HasAcidImmunity;
-    public bool HasAcidResistance;
-    public bool HasAggravation;
-    public bool HasAntiMagic;
-    public bool HasAntiTeleport;
-    public bool HasAntiTheft;
-    public bool HasBlessedBlade;
-    public bool HasBlindnessResistance;
-    public bool HasChaosResistance;
-    public bool HasColdImmunity;
-    public bool HasColdResistance;
-    public bool HasConfusingTouch;
-    public bool HasConfusionResistance;
-    public bool HasDarkResistance;
-    public bool HasDisenchantResistance;
-    public bool HasElementalVulnerability;
-    public bool HasExperienceDrain;
-    public bool HasExtraMight;
-    public bool HasFearResistance;
-    public bool HasFeatherFall;
-    public bool HasFireImmunity;
-    public bool HasFireResistance;
-    public bool HasFireShield;
-    public bool HasFreeAction;
-    public bool HasGlow;
-    public bool HasHeavyBow;
-    public bool HasHeavyWeapon;
-    public bool HasHoldLife;
-    public bool HasLightningImmunity;
-    public bool HasLightningResistance;
-    public bool HasLightningShield;
-    public bool HasLightResistance;
-    public bool HasNetherResistance;
-    public bool HasNexusResistance;
-    public bool HasPoisonResistance;
-    public bool HasQuakeWeapon;
-    public bool HasRandomTeleport;
-    public bool HasReflection;
-    public bool HasRegeneration;
-    public bool HasRestrictingArmour;
-    public bool HasRestrictingGloves;
-    public bool HasSeeInvisibility;
-    public bool HasShardResistance;
-    public bool HasSlowDigestion;
-    public bool HasSoundResistance;
-    public bool HasSustainCharisma;
-    public bool HasSustainConstitution;
-    public bool HasSustainDexterity;
-    public bool HasSustainIntelligence;
-    public bool HasSustainStrength;
-    public bool HasSustainWisdom;
-    public bool HasTelepathy;
-    public bool HasTimeResistance;
-    public bool HasUnpriestlyWeapon;
-    public int Health;
-    public int Height;
-    public int HitDie;
-    public int InfravisionRange;
-    public bool IsSearching;
-    public bool IsWinner;
-    public bool IsWizard;
-    private int _experienceLevel;
-    public int ExperienceLevel
-    {
-        get
-        {
-            return _experienceLevel;
-        }
-        set
-        {
-            _experienceLevel = value;
-            ConsoleViewPort.ExperienceLevelChanged(_experienceLevel);
-        }
-    }
-
-    public int LightLevel;
-    public int Mana;
-    public int MapX;
-    public int MapY;
-    public int MaxExperienceGained;
-    public int MaxHealth;
-    public int MaxLevelGained;
-    public int MaxMana;
-    public int MeleeAttacksPerRound;
-    public int MissileAttacksPerRound;
-    private string _name;
-    public string Name
-    {
-        get
-        {
-            return _name;
-        }
-        set
-        {
-            _name = value;
-            ConsoleViewPort.CharacterRenamed(_name);
-        }
-    }
-    public int OldSpareSpellSlots;
-
-    /// <summary>
-    /// Represents the character class of the player.  Will be null prior to the character class birth selection.
-    /// </summary>
-    public BaseCharacterClass? BaseCharacterClass = null;
-
-    /// <summary>
-    /// Returns the current race of the character.  Will be null before the player is birthed.
-    /// </summary>
-    public Race? Race = null;
-
-    /// <summary>
-    /// Returns the race the character was first assigned at birth.
-    /// </summary>
-    public Race RaceAtBirth;
-
-    /// <summary>
-    /// Returns the primary realm that the player studies.
-    /// </summary>
-    /// <value>The realm1.</value>
-    public Realm? PrimaryRealm = null;
-
-    /// <summary>
-    /// Returns the secondary realm that the player studies.
-    /// </summary>
-    /// <value>The realm2.</value>
-    public Realm? SecondaryRealm = null;
-
-    /// <summary>
-    /// Returns true, if the player can cast spells and/or read books.  True, for character classes that can choose either a primary and/or secondary realm.
-    /// </summary>
-    public bool CanCastSpells => PrimaryRealm != null || SecondaryRealm != null;
-
-    /// <summary>
-    /// Returns true, if the player has chosen the realm <T> for either the primary or secondary realms to study.
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <returns></returns>
-    public bool Studies<T>() where T : Realm => (PrimaryRealm != null && typeof(T).IsAssignableFrom(PrimaryRealm.GetType())) || (SecondaryRealm != null && typeof(T).IsAssignableFrom(SecondaryRealm.GetType()));
-
-    public Religion Religion = new Religion();
-    public int SkillDigging;
-    public int SkillDisarmTraps;
-    public int SkillMelee;
-    public int SkillRanged;
-    public int SkillSavingThrow;
-    public int SkillSearchFrequency;
-    public int SkillSearching;
-    public int SkillStealth;
-    public int SkillThrowing;
-    public int SkillUseDevice;
-    public int SocialClass;
-    public int SpareSpellSlots;
-    public int Speed;
-    public TimedAction TimedAcidResistance;
-    public TimedAction TimedBleeding;
-    public TimedAction TimedBlessing;
-    public TimedAction TimedBlindness;
-    public TimedAction TimedColdResistance;
-    public TimedAction TimedConfusion;
-    public TimedAction TimedEtherealness;
-    public TimedAction TimedFear;
-    public TimedAction TimedFireResistance;
-    public TimedAction TimedHallucinations;
-    public TimedAction TimedHaste;
-    public TimedAction TimedHeroism;
-    public TimedAction TimedInfravision;
-    public TimedAction TimedInvulnerability;
-    public TimedAction TimedLightningResistance;
-    public TimedAction TimedParalysis;
-    public TimedAction TimedPoison;
-    public TimedAction TimedPoisonResistance;
-    public TimedAction TimedProtectionFromEvil;
-    public TimedAction TimedSeeInvisibility;
-    public TimedAction TimedSlow;
-    public TimedAction TimedStoneskin;
-    public TimedAction TimedStun;
-    public TimedAction TimedSuperheroism;
-    public TimedAction TimedTelepathy;
-    public int TownWithHouse;
-    public int Weight;
-    public int WeightCarried;
-    public int WildernessX;
-    public int WildernessY;
-    public int WordOfRecallDelay;
-
     private void InitializePlayer()
     {
         TimedAcidResistance = new AcidResistanceTimedAction(this);

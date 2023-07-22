@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Mutations;
 
 [Serializable]
-internal class Genome
+internal class Genome // TODO: This is just a container
 {
     public readonly List<Mutation> NaturalAttacks = new List<Mutation>();
     public int ArmourClassBonus;
