@@ -82,5 +82,5 @@ internal class AlchemistStore : Store
                 return false;
         }
     }
-    protected override BaseStoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get<RestorationStoreCommand>();
+    protected override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get<RestorationStoreCommand>();
 }

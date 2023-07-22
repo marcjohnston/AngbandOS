@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.StoreCommands;
 
 [Serializable]
-internal class RestorationStoreCommand : BaseStoreCommand
+internal class RestorationStoreCommand : StoreCommand
 
 {
     private RestorationStoreCommand(SaveGame saveGame) : base(saveGame) { }

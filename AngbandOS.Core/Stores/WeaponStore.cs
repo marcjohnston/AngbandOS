@@ -97,5 +97,5 @@ internal class WeaponStore : Store
                 return false;
         }
     }
-    protected override BaseStoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get<EnchantWeaponStoreCommand>();
+    protected override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get<EnchantWeaponStoreCommand>();
 }

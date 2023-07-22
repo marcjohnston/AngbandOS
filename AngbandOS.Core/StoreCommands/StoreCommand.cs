@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.StoreCommands;
 
 [Serializable]
-internal abstract class BaseStoreCommand
+internal abstract class StoreCommand
 {
     protected SaveGame SaveGame { get; }
-    protected BaseStoreCommand(SaveGame saveGame)
+    protected StoreCommand(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }

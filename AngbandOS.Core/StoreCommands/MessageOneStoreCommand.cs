@@ -11,7 +11,7 @@ namespace AngbandOS.Core.StoreCommands;
 /// Show the previous message
 /// </summary>
 [Serializable]
-internal class MessageOneStoreCommand : BaseStoreCommand
+internal class MessageOneStoreCommand : StoreCommand
 {
     private MessageOneStoreCommand(SaveGame saveGame) : base(saveGame) { }
     public override char Key => 'O';

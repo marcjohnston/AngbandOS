@@ -11,7 +11,7 @@ namespace AngbandOS.Core.StoreCommands;
 /// Examine an item from the player's inventory
 /// </summary>
 [Serializable]
-internal class ExamineInventoryStoreCommand : BaseStoreCommand
+internal class ExamineInventoryStoreCommand : StoreCommand
 {
     private ExamineInventoryStoreCommand(SaveGame saveGame) : base(saveGame) { }
     public override char Key => 'I';

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.StoreCommands;
 /// Wield/wear an item
 /// </summary>
 [Serializable]
-internal class WieldStoreCommand : BaseStoreCommand
+internal class WieldStoreCommand : StoreCommand
 {
     private WieldStoreCommand(SaveGame saveGame) : base(saveGame) { }
     public override char Key => 'w';

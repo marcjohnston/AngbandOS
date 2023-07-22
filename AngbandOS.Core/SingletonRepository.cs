@@ -40,7 +40,7 @@ internal class SingletonRepository
     public SingletonDictionary<Race> Races;
     [Obsolete("Needs to be non-keyed")]
     public SingletonKeyedDictionary<RareItemTypeEnum, RareItem> RareItems;
-    public SingletonDictionary<BaseStoreCommand> StoreCommands;
+    public SingletonDictionary<StoreCommand> StoreCommands;
     public SingletonDictionary<Vault> Vaults;
     public SingletonDictionary<WizardCommand> WizardCommands;
     public SingletonDictionary<TimedAction> TimedActions;
@@ -122,7 +122,7 @@ internal class SingletonRepository
         WizardCommands = new SingletonDictionary<WizardCommand>(saveGame, LoadTypesFromAssembly<WizardCommand>(saveGame));
         ItemFactories = new SingletonDictionary<ItemFactory>(saveGame, LoadTypesFromAssembly<ItemFactory>(saveGame));
         InventorySlots = new SingletonDictionary<BaseInventorySlot>(saveGame, LoadTypesFromAssembly<BaseInventorySlot>(saveGame));
-        StoreCommands = new SingletonDictionary<BaseStoreCommand>(saveGame, LoadTypesFromAssembly<BaseStoreCommand>(saveGame));
+        StoreCommands = new SingletonDictionary<StoreCommand>(saveGame, LoadTypesFromAssembly<StoreCommand>(saveGame));
         ArtifactBiases = new SingletonDictionary<ArtifactBias>(saveGame, LoadTypesFromAssembly<ArtifactBias>(saveGame));
         Activations = new SingletonDictionary<Activation>(saveGame, LoadTypesFromAssembly<Activation>(saveGame));
         CharacterClasses = new SingletonDictionary<BaseCharacterClass>(saveGame, LoadTypesFromAssembly<BaseCharacterClass>(saveGame));

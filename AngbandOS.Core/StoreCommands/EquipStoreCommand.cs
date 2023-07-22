@@ -11,7 +11,7 @@ namespace AngbandOS.Core.StoreCommands;
 /// Equip an item
 /// </summary>
 [Serializable]
-internal class EquipStoreCommand : BaseStoreCommand
+internal class EquipStoreCommand : StoreCommand
 {
     private EquipStoreCommand(SaveGame saveGame) : base(saveGame) { }
     public override char Key => 'e';

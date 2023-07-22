@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.StoreCommands;
 
 [Serializable]
-internal class BuyHouseStoreCommand : BaseStoreCommand
+internal class BuyHouseStoreCommand : StoreCommand
 
 {
     private BuyHouseStoreCommand(SaveGame saveGame) : base(saveGame) { }

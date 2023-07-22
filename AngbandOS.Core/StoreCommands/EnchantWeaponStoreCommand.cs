@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.StoreCommands;
 
 [Serializable]
-internal class EnchantWeaponStoreCommand : BaseStoreCommand
+internal class EnchantWeaponStoreCommand : StoreCommand
 
 {
     private EnchantWeaponStoreCommand(SaveGame saveGame) : base(saveGame) { }

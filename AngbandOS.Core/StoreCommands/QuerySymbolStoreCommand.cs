@@ -11,7 +11,7 @@ namespace AngbandOS.Core.StoreCommands;
 /// Show the player what a particular symbol represents
 /// </summary>
 [Serializable]
-internal class QuerySymbolStoreCommand : BaseStoreCommand
+internal class QuerySymbolStoreCommand : StoreCommand
 {
     private QuerySymbolStoreCommand(SaveGame saveGame) : base(saveGame) { }
     public override char Key => '/';

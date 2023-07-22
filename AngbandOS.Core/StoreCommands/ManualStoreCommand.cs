@@ -11,7 +11,7 @@ namespace AngbandOS.Core.StoreCommands;
 /// Show the game manual
 /// </summary>
 [Serializable]
-internal class ManualStoreCommand : BaseStoreCommand
+internal class ManualStoreCommand : StoreCommand
 {
     private ManualStoreCommand(SaveGame saveGame) : base(saveGame) { }
     public override char Key => 'h';

@@ -110,5 +110,5 @@ internal class MagicStore : Store
                 return false;
         }
     }
-    protected override BaseStoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get<ResearchItemStoreCommand>();
+    protected override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get<ResearchItemStoreCommand>();
 }

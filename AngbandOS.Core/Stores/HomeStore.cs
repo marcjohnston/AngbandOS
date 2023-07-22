@@ -46,9 +46,9 @@ internal class HomeStore : Store
     protected override string NoStockMessage => "Your home is empty.";
     protected override string PurchaseMessage => "Which item do you want to take? ";
 
-    protected override BaseStoreCommand AdvertisedStoreCommand1 => SaveGame.SingletonRepository.StoreCommands.Get<GetStoreCommand>();
-    protected override BaseStoreCommand AdvertisedStoreCommand2 => SaveGame.SingletonRepository.StoreCommands.Get<DropStoreCommand>();
-    protected override BaseStoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get<RestStoreCommand>();
+    protected override StoreCommand AdvertisedStoreCommand1 => SaveGame.SingletonRepository.StoreCommands.Get<GetStoreCommand>();
+    protected override StoreCommand AdvertisedStoreCommand2 => SaveGame.SingletonRepository.StoreCommands.Get<DropStoreCommand>();
+    protected override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get<RestStoreCommand>();
     protected override string FleeMessage => "Your pack is so full that you flee your home...";
 
     protected override string GetItemDescription(Item oPtr)

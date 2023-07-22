@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.StoreCommands;
 
 [Serializable]
-internal class ResearchItemStoreCommand : BaseStoreCommand
+internal class ResearchItemStoreCommand : StoreCommand
 
 {
     private ResearchItemStoreCommand(SaveGame saveGame) : base(saveGame) { }

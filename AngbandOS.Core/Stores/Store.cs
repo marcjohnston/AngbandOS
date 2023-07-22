@@ -112,7 +112,7 @@ internal abstract class Store : IItemFilter
     /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
     /// won't affect game play.
     /// </remarks>
-    protected virtual BaseStoreCommand AdvertisedStoreCommand1 => SaveGame.SingletonRepository.StoreCommands.Get<PurchaseStoreCommand>();
+    protected virtual StoreCommand AdvertisedStoreCommand1 => SaveGame.SingletonRepository.StoreCommands.Get<PurchaseStoreCommand>();
 
     /// <summary>
     /// Returns the store command that should be advertised to the player @ position 43, 31.
@@ -121,7 +121,7 @@ internal abstract class Store : IItemFilter
     /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
     /// won't affect game play.
     /// </remarks>
-    protected virtual BaseStoreCommand AdvertisedStoreCommand2 => SaveGame.SingletonRepository.StoreCommands.Get<SellStoreCommand>();
+    protected virtual StoreCommand AdvertisedStoreCommand2 => SaveGame.SingletonRepository.StoreCommands.Get<SellStoreCommand>();
 
     /// <summary>
     /// Returns the store command that should be advertised to the player @ position 42, 56.
@@ -130,7 +130,7 @@ internal abstract class Store : IItemFilter
     /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
     /// won't affect game play.
     /// </remarks>
-    protected virtual BaseStoreCommand AdvertisedStoreCommand3 => SaveGame.SingletonRepository.StoreCommands.Get<ExamineStoreCommand>();
+    protected virtual StoreCommand AdvertisedStoreCommand3 => SaveGame.SingletonRepository.StoreCommands.Get<ExamineStoreCommand>();
 
     /// <summary>
     /// Returns the store command that should be advertised to the player @ position 43, 56.
@@ -139,7 +139,7 @@ internal abstract class Store : IItemFilter
     /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
     /// won't affect game play.
     /// </remarks>
-    protected virtual BaseStoreCommand AdvertisedStoreCommand4 => null;
+    protected virtual StoreCommand AdvertisedStoreCommand4 => null;
 
     /// <summary>
     /// Returns the store command that should be advertised to the player @ position 43, 0.
@@ -148,7 +148,7 @@ internal abstract class Store : IItemFilter
     /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
     /// won't affect game play.
     /// </remarks>
-    protected virtual BaseStoreCommand AdvertisedStoreCommand5 => null;
+    protected virtual StoreCommand AdvertisedStoreCommand5 => null;
 
     /// <summary>
     /// Returns the width of the description column for rendering items in the store inventory.
@@ -232,7 +232,7 @@ internal abstract class Store : IItemFilter
         _y = y;
     }
 
-    private void RenderAdvertisedCommand(BaseStoreCommand command, int row, int col)
+    private void RenderAdvertisedCommand(StoreCommand command, int row, int col)
     {
         if (command != null)
         {
@@ -1376,7 +1376,7 @@ internal abstract class Store : IItemFilter
         bool matchingCommandFound = false;
 
         // Process commands
-        foreach (BaseStoreCommand command in SaveGame.SingletonRepository.StoreCommands)
+        foreach (StoreCommand command in SaveGame.SingletonRepository.StoreCommands)
         {
             // TODO: The IF statement below can be converted into a dictionary with the applicable object 
             // attached for improved performance.

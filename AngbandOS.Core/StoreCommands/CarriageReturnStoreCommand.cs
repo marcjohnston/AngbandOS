@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.StoreCommands;
 
 [Serializable]
-internal class CarriageReturnStoreCommand : BaseStoreCommand
+internal class CarriageReturnStoreCommand : StoreCommand
 {
     private CarriageReturnStoreCommand(SaveGame saveGame) : base(saveGame) { }
     public override char Key => '\r';

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.StoreCommands;
 
 [Serializable]
-internal class ResearchSpellStoreCommand : BaseStoreCommand
+internal class ResearchSpellStoreCommand : StoreCommand
 
 {
     private ResearchSpellStoreCommand(SaveGame saveGame) : base(saveGame) { }

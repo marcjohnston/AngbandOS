@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.StoreCommands;
 
 [Serializable]
-internal class RemoveCurseStoreCommand : BaseStoreCommand
+internal class RemoveCurseStoreCommand : StoreCommand
 {
     private RemoveCurseStoreCommand(SaveGame saveGame) : base(saveGame) { }
     public override char Key => 'r';

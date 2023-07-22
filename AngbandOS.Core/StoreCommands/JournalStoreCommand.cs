@@ -11,7 +11,7 @@ namespace AngbandOS.Core.StoreCommands;
 /// Look in the player's journal for any one of a number of different reasons
 /// </summary>
 [Serializable]
-internal class JournalStoreCommand : BaseStoreCommand
+internal class JournalStoreCommand : StoreCommand
 {
     private JournalStoreCommand(SaveGame saveGame) : base(saveGame) { }
     public override char Key => 'J';

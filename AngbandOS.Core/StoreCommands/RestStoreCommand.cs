@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.StoreCommands;
 
 [Serializable]
-internal class RestStoreCommand : BaseStoreCommand
+internal class RestStoreCommand : StoreCommand
 
 {
     private RestStoreCommand(SaveGame saveGame) : base(saveGame) { }

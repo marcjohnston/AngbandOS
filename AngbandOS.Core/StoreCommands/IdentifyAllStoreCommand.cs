@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.StoreCommands;
 
 [Serializable]
-internal class IdentifyAllStoreCommand : BaseStoreCommand
+internal class IdentifyAllStoreCommand : StoreCommand
 {
     private IdentifyAllStoreCommand(SaveGame saveGame) : base(saveGame) { }
     public override char Key => 'r';

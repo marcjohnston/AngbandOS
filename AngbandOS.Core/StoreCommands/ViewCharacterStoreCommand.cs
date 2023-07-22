@@ -11,7 +11,7 @@ namespace AngbandOS.Core.StoreCommands;
 /// View the character sheet
 /// </summary>
 [Serializable]
-internal class ViewCharacterStoreCommand : BaseStoreCommand
+internal class ViewCharacterStoreCommand : StoreCommand
 {
     private ViewCharacterStoreCommand(SaveGame saveGame) : base(saveGame) { }
     public override char Key => 'C';

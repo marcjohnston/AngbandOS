@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.StoreCommands;
 
 [Serializable]
-internal class EnchantArmorStoreCommand : BaseStoreCommand
+internal class EnchantArmorStoreCommand : StoreCommand
 {
     private EnchantArmorStoreCommand(SaveGame saveGame) : base(saveGame) { }
     public override char Key => 'r';

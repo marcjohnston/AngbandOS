@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.StoreCommands;
 
 [Serializable]
-internal class ExamineStoreCommand : BaseStoreCommand
+internal class ExamineStoreCommand : StoreCommand
 {
     private ExamineStoreCommand(SaveGame saveGame) : base(saveGame) { }
     public override char Key => 'x';

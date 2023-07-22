@@ -11,7 +11,7 @@ namespace AngbandOS.Core.StoreCommands;
 /// Destroy all worthless items in your pack
 /// </summary>
 [Serializable]
-internal class DestroyAllStoreCommand : BaseStoreCommand
+internal class DestroyAllStoreCommand : StoreCommand
 {
     private DestroyAllStoreCommand(SaveGame saveGame) : base(saveGame) { }
     public override char Key => 'K';

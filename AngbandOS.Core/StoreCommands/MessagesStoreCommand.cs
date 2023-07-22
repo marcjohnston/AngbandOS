@@ -11,7 +11,7 @@ namespace AngbandOS.Core.StoreCommands;
 /// Let the player scroll through previous messages
 /// </summary>
 [Serializable]
-internal class MessagesStoreCommand : BaseStoreCommand
+internal class MessagesStoreCommand : StoreCommand
 {
     private MessagesStoreCommand(SaveGame saveGame) : base(saveGame) { }
     public override char Key => 'P';
