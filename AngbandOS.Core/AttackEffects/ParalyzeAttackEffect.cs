@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.AttackEffects;
 
 [Serializable]
-internal class ParalyzeAttackEffect : BaseAttackEffect
+internal class ParalyzeAttackEffect : AttackEffect
 {
     public override int Power => 2;
     public override string Description => "paralyze";

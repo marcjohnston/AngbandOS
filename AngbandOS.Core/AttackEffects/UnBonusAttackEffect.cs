@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.AttackEffects;
 
 [Serializable]
-internal class UnBonusAttackEffect : BaseAttackEffect
+internal class UnBonusAttackEffect : AttackEffect
 {
     public override int Power => 20;
     public override string Description => "disenchant";

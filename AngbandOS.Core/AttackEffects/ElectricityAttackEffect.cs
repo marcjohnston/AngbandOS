@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.AttackEffects;
 
 [Serializable]
-internal class ElectricityAttackEffect : BaseAttackEffect
+internal class ElectricityAttackEffect : AttackEffect
 {
     public override int Power => 10;
     public override string Description => "electrocute";

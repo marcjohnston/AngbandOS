@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.AttackEffects;
 
 [Serializable]
-internal class PoisonAttackEffect : BaseAttackEffect
+internal class PoisonAttackEffect : AttackEffect
 {
     public override int Power => 5;
     public override string Description => "poison";

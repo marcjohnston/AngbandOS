@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.AttackEffects;
 
 [Serializable]
-internal class EatItemAttackEffect : BaseAttackEffect
+internal class EatItemAttackEffect : AttackEffect
 {
     public override int Power => 5;
     public override string Description => "steal items";

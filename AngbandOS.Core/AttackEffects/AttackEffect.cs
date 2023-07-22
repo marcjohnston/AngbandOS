@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.AttackEffects;
 
 [Serializable]
-internal abstract class BaseAttackEffect
+internal abstract class AttackEffect
 {
     public abstract string Description { get; }
     public abstract int Power { get; }

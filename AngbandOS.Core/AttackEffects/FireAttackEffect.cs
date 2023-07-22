@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.AttackEffects;
 
 [Serializable]
-internal class FireAttackEffect : BaseAttackEffect
+internal class FireAttackEffect : AttackEffect
 {
     public override int Power => 10;
     public override string Description => "burn";

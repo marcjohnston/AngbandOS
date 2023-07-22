@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.AttackEffects;
 
 [Serializable]
-internal class ColdAttackEffect : BaseAttackEffect
+internal class ColdAttackEffect : AttackEffect
 {
     public override int Power => 10;
     public override string Description => "freeze";

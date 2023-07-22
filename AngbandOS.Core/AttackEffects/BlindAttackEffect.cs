@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.AttackEffects;
 
 [Serializable]
-internal class BlindAttackEffect : BaseAttackEffect
+internal class BlindAttackEffect : AttackEffect
 {
     public override int Power => 2;
     public override string Description => "blind";

@@ -1257,7 +1257,7 @@ internal class Monster : IItemContainer
                 bool visible = false;
                 bool obvious = false;
                 int damage = 0;
-                BaseAttackEffect? effect = Race.Attacks[attackNumber].Effect;
+                AttackEffect? effect = Race.Attacks[attackNumber].Effect;
                 BaseAttackType method = Race.Attacks[attackNumber].Method;
                 int dDice = Race.Attacks[attackNumber].DDice;
                 int dSide = Race.Attacks[attackNumber].DSide;
@@ -2707,7 +2707,7 @@ internal class Monster : IItemContainer
                 bool obvious = false;
                 int power = 0;
                 int damage = 0;
-                BaseAttackEffect? effect = Race.Attacks[attackNumber].Effect;
+                AttackEffect? effect = Race.Attacks[attackNumber].Effect;
                 BaseAttackType method = Race.Attacks[attackNumber].Method;
                 int damageDice = Race.Attacks[attackNumber].DDice;
                 int damageSides = Race.Attacks[attackNumber].DSide;

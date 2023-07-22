@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.AttackEffects;
 
 [Serializable]
-internal class UnPowerAttackEffect : BaseAttackEffect
+internal class UnPowerAttackEffect : AttackEffect
 {
     public override int Power => 15;
     public override string Description => "drain charges";

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.AttackEffects;
 
 [Serializable]
-internal abstract class ExpAttackEffect : BaseAttackEffect
+internal abstract class ExpAttackEffect : AttackEffect
 {
     protected abstract int HoldLifePercentChange { get; }
     protected abstract int DiceCount { get; }

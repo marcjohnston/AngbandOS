@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.AttackEffects;
 
 [Serializable]
-internal class LoseChaAttackEffect : BaseAttackEffect
+internal class LoseChaAttackEffect : AttackEffect
 {
     public override int Power => 0;
     public override string Description => "reduce charisma";

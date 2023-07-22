@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.AttackEffects;
 
 [Serializable]
-internal class LoseIntAttackEffect : BaseAttackEffect
+internal class LoseIntAttackEffect : AttackEffect
 {
     public override int Power => 0;
     public override string Description => "reduce intelligence";

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.AttackEffects;
 
 [Serializable]
-internal class TerrifyAttackEffect : BaseAttackEffect
+internal class TerrifyAttackEffect : AttackEffect
 {
     public override int Power => 10;
     public override string Description => "terrify";

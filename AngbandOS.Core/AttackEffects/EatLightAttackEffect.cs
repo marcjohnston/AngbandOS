@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.AttackEffects;
 
 [Serializable]
-internal class EatLightAttackEffect : BaseAttackEffect
+internal class EatLightAttackEffect : AttackEffect
 {
     public override int Power => 5;
     public override string Description => "absorb light";

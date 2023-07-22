@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.AttackEffects;
 
 [Serializable]
-internal class ShatterAttackEffect : BaseAttackEffect
+internal class ShatterAttackEffect : AttackEffect
 {
     public override int Power => 60;
     public override string Description => "shatter";

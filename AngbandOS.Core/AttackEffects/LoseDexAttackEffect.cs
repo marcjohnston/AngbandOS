@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.AttackEffects;
 
 [Serializable]
-internal class LoseDexAttackEffect : BaseAttackEffect
+internal class LoseDexAttackEffect : AttackEffect
 {
     public override int Power => 0;
     public override string Description => "reduce dexterity";

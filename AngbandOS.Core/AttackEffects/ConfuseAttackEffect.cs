@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.AttackEffects;
 
 [Serializable]
-internal class ConfuseAttackEffect : BaseAttackEffect
+internal class ConfuseAttackEffect : AttackEffect
 {
     public override int Power => 10;
     public override string Description => "confuse";
