@@ -23,7 +23,7 @@ internal class RoomType1 : RoomType
         {
             for (x = x1 - 1; x <= x2 + 1; x++)
             {
-                cPtr = saveGame.Level.Grid[y][x];
+                cPtr = saveGame.Grid[y][x];
                 cPtr.RevertToBackground();
                 cPtr.TileFlags.Set(GridTile.InRoom);
                 if (light)
@@ -34,16 +34,16 @@ internal class RoomType1 : RoomType
         }
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
-            cPtr = saveGame.Level.Grid[y][x1 - 1];
+            cPtr = saveGame.Grid[y][x1 - 1];
             cPtr.SetFeature("WallOuter");
-            cPtr = saveGame.Level.Grid[y][x2 + 1];
+            cPtr = saveGame.Grid[y][x2 + 1];
             cPtr.SetFeature("WallOuter");
         }
         for (x = x1 - 1; x <= x2 + 1; x++)
         {
-            cPtr = saveGame.Level.Grid[y1 - 1][x];
+            cPtr = saveGame.Grid[y1 - 1][x];
             cPtr.SetFeature("WallOuter");
-            cPtr = saveGame.Level.Grid[y2 + 1][x];
+            cPtr = saveGame.Grid[y2 + 1][x];
             cPtr.SetFeature("WallOuter");
         }
         if (Program.Rng.RandomLessThan(20) == 0)
@@ -52,7 +52,7 @@ internal class RoomType1 : RoomType
             {
                 for (x = x1; x <= x2; x += 2)
                 {
-                    cPtr = saveGame.Level.Grid[y][x];
+                    cPtr = saveGame.Grid[y][x];
                     cPtr.SetFeature("Pillar");
                 }
             }
@@ -61,16 +61,16 @@ internal class RoomType1 : RoomType
         {
             for (y = y1 + 2; y <= y2 - 2; y += 2)
             {
-                cPtr = saveGame.Level.Grid[y][x1];
+                cPtr = saveGame.Grid[y][x1];
                 cPtr.SetFeature("Pillar");
-                cPtr = saveGame.Level.Grid[y][x2];
+                cPtr = saveGame.Grid[y][x2];
                 cPtr.SetFeature("Pillar");
             }
             for (x = x1 + 2; x <= x2 - 2; x += 2)
             {
-                cPtr = saveGame.Level.Grid[y1][x];
+                cPtr = saveGame.Grid[y1][x];
                 cPtr.SetFeature("Pillar");
-                cPtr = saveGame.Level.Grid[y2][x];
+                cPtr = saveGame.Grid[y2][x];
                 cPtr.SetFeature("Pillar");
             }
         }

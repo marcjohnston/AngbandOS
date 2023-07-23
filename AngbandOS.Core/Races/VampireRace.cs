@@ -96,9 +96,9 @@ internal class VampireRace : Race
         {
             if (saveGame.GetDirectionNoAim(out int direction))
             {
-                int y = saveGame.MapY + saveGame.Level.KeypadDirectionYOffset[direction];
-                int x = saveGame.MapX + saveGame.Level.KeypadDirectionXOffset[direction];
-                GridTile tile = saveGame.Level.Grid[y][x];
+                int y = saveGame.MapY + saveGame.KeypadDirectionYOffset[direction];
+                int x = saveGame.MapX + saveGame.KeypadDirectionXOffset[direction];
+                GridTile tile = saveGame.Grid[y][x];
                 if (tile.MonsterIndex == 0)
                 {
                     saveGame.MsgPrint("You bite into thin air!");
@@ -142,7 +142,7 @@ internal class VampireRace : Race
             SaveGame.TimedInvulnerability.TurnsRemaining == 0 &&
             SaveGame.GameTime.IsLight)
         {
-            if (SaveGame.Level.Grid[SaveGame.MapY][SaveGame.MapX].TileFlags.IsSet(GridTile.SelfLit))
+            if (SaveGame.Grid[SaveGame.MapY][SaveGame.MapX].TileFlags.IsSet(GridTile.SelfLit))
             {
                 SaveGame.MsgPrint("The sun's rays scorch your undead flesh!");
                 SaveGame.TakeHit(1, "sunlight");

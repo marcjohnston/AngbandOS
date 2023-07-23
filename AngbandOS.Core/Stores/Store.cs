@@ -326,7 +326,7 @@ internal abstract class Store : IItemFilter
         int oldRating = 0;
         if (SaveGame.Level != null)
         {
-            oldRating = SaveGame.Level.TreasureRating;
+            oldRating = SaveGame.TreasureRating;
         }
         if (!MaintainsStockLevels)
         {
@@ -370,7 +370,7 @@ internal abstract class Store : IItemFilter
         }
         if (SaveGame.Level != null)
         {
-            SaveGame.Level.TreasureRating = oldRating;
+            SaveGame.TreasureRating = oldRating;
         }
     }
 

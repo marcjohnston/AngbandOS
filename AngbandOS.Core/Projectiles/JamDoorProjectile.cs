@@ -16,7 +16,7 @@ internal class JamDoorProjectile : Projectile
 
     protected override bool AffectFloor(int y, int x)
     {
-        GridTile cPtr = SaveGame.Level.Grid[y][x];
+        GridTile cPtr = SaveGame.Grid[y][x];
         bool obvious = false;
         if (cPtr.FeatureType.IsClosedDoor)
         {
@@ -29,7 +29,7 @@ internal class JamDoorProjectile : Projectile
             {
                 cPtr.SetFeature($"JammedDoor{strength + 1}");
             }
-            if (SaveGame.Level.PlayerHasLosBold(y, x))
+            if (SaveGame.PlayerHasLosBold(y, x))
             {
                 SaveGame.MsgPrint("The door seems stuck.");
                 obvious = true;

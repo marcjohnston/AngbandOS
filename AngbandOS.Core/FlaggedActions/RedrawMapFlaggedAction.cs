@@ -18,11 +18,11 @@ internal class RedrawMapFlaggedAction : FlaggedAction
 
         // Turn off the cursor visible.
         SaveGame.Screen.CursorVisible = false; // TODO: Is this really needed, if we have a double-buffer?
-        for (int y = SaveGame.Level.PanelRowMin; y <= SaveGame.Level.PanelRowMax; y++)
+        for (int y = SaveGame.PanelRowMin; y <= SaveGame.PanelRowMax; y++)
         {
-            for (int x = SaveGame.Level.PanelColMin; x <= SaveGame.Level.PanelColMax; x++)
+            for (int x = SaveGame.PanelColMin; x <= SaveGame.PanelColMax; x++)
             {
-                SaveGame.Level.MapInfo(y, x, out ColourEnum a, out char c);
+                SaveGame.MapInfo(y, x, out ColourEnum a, out char c);
                 if (SaveGame.TimedInvulnerability.TurnsRemaining != 0)
                 {
                     a = ColourEnum.White;
@@ -31,10 +31,10 @@ internal class RedrawMapFlaggedAction : FlaggedAction
                 {
                     a = ColourEnum.Black;
                 }
-                SaveGame.Screen.Print(a, c, y - SaveGame.Level.PanelRowPrt, x - SaveGame.Level.PanelColPrt);
+                SaveGame.Screen.Print(a, c, y - SaveGame.PanelRowPrt, x - SaveGame.PanelColPrt);
             }
         }
-        SaveGame.Level.RedrawSingleLocation(SaveGame.MapY, SaveGame.MapX);
+        SaveGame.RedrawSingleLocation(SaveGame.MapY, SaveGame.MapX);
 
         // Restore the cursor visible.
         SaveGame.Screen.CursorVisible = v;

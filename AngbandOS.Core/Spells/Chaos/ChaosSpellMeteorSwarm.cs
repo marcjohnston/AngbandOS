@@ -32,7 +32,7 @@ internal class ChaosSpellMeteorSwarm : Spell
                 int dx = SaveGame.MapX > x ? SaveGame.MapX - x : x - SaveGame.MapX;
                 int dy = SaveGame.MapY > y ? SaveGame.MapY - y : y - SaveGame.MapY;
                 d = dy > dx ? dy + (dx >> 1) : dx + (dy >> 1);
-            } while (d > 5 || !SaveGame.Level.PlayerHasLosBold(y, x));
+            } while (d > 5 || !SaveGame.PlayerHasLosBold(y, x));
             if (count > 1000)
             {
                 break;

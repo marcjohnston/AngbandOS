@@ -18,7 +18,7 @@ internal class MutationSterility : Mutation
         }
         saveGame.MsgPrint("You suddenly have a headache!");
         saveGame.TakeHit(Program.Rng.DieRoll(30) + 30, "the strain of forcing abstinence");
-        saveGame.Level.NumRepro += Constants.MaxRepro;
+        saveGame.NumRepro += Constants.MaxRepro;
     }
 
     public override string ActivationSummary(int lvl)

@@ -71,8 +71,8 @@ internal class FireScript : Script
         SaveGame.EnergyUse = 100 / shotSpeed;
         int y = SaveGame.MapY;
         int x = SaveGame.MapX;
-        int targetX = SaveGame.MapX + (99 * SaveGame.Level.KeypadDirectionXOffset[dir]);
-        int targetY = SaveGame.MapY + (99 * SaveGame.Level.KeypadDirectionYOffset[dir]);
+        int targetX = SaveGame.MapX + (99 * SaveGame.KeypadDirectionXOffset[dir]);
+        int targetY = SaveGame.MapY + (99 * SaveGame.KeypadDirectionYOffset[dir]);
         // Special case for if we're hitting our own square
         if (dir == 5 && SaveGame.TargetOkay())
         {
@@ -89,9 +89,9 @@ internal class FireScript : Script
                 break;
             }
             // Move a step towards the target
-            SaveGame.Level.MoveOneStepTowards(out int newY, out int newX, y, x, SaveGame.MapY, SaveGame.MapX, targetY, targetX);
+            SaveGame.MoveOneStepTowards(out int newY, out int newX, y, x, SaveGame.MapY, SaveGame.MapX, targetY, targetX);
             // If we were blocked by a wall or something then stop short
-            if (!SaveGame.Level.GridPassable(newY, newX))
+            if (!SaveGame.GridPassable(newY, newX))
             {
                 break;
             }
@@ -100,13 +100,13 @@ internal class FireScript : Script
             y = newY;
             int msec = Constants.DelayFactorInMilliseconds;
             // If we can see the current projectile location, show it briefly
-            if (SaveGame.Level.PanelContains(y, x) && SaveGame.Level.PlayerCanSeeBold(y, x))
+            if (SaveGame.PanelContains(y, x) && SaveGame.PlayerCanSeeBold(y, x))
             {
-                SaveGame.Level.PrintCharacterAtMapLocation(missileCharacter, missileColour, y, x);
-                SaveGame.Level.MoveCursorRelative(y, x);
+                SaveGame.PrintCharacterAtMapLocation(missileCharacter, missileColour, y, x);
+                SaveGame.MoveCursorRelative(y, x);
                 SaveGame.UpdateScreen();
                 SaveGame.Pause(msec);
-                SaveGame.Level.RedrawSingleLocation(y, x);
+                SaveGame.RedrawSingleLocation(y, x);
                 SaveGame.UpdateScreen();
             }
             else
@@ -116,10 +116,10 @@ internal class FireScript : Script
                 SaveGame.Pause(msec);
             }
             // Check if we might hit a monster (not necessarily the one we were aiming at)
-            if (SaveGame.Level.Grid[y][x].MonsterIndex != 0)
+            if (SaveGame.Grid[y][x].MonsterIndex != 0)
             {
-                GridTile tile = SaveGame.Level.Grid[y][x];
-                Monster monster = SaveGame.Level.Monsters[tile.MonsterIndex];
+                GridTile tile = SaveGame.Grid[y][x];
+                Monster monster = SaveGame.Monsters[tile.MonsterIndex];
                 MonsterRace race = monster.Race;
                 bool visible = monster.IsVisible;
                 hitBody = true;
@@ -158,13 +158,13 @@ internal class FireScript : Script
                     {
                         shotDamage = 0;
                     }
-                    if (SaveGame.Level.DamageMonster(tile.MonsterIndex, shotDamage, out bool fear, noteDies))
+                    if (SaveGame.DamageMonster(tile.MonsterIndex, shotDamage, out bool fear, noteDies))
                     {
                         // The monster is dead, so don't add further statuses or messages
                     }
                     else
                     {
-                        SaveGame.Level.MessagePain(tile.MonsterIndex, shotDamage);
+                        SaveGame.MessagePain(tile.MonsterIndex, shotDamage);
                         if (fear && monster.IsVisible)
                         {
                             SaveGame.PlaySound(SoundEffectEnum.MonsterFlees);
@@ -180,7 +180,7 @@ internal class FireScript : Script
         // If we hit something we have a chance to break the ammo, otherwise it just drops at
         // the end of its travel
         int j = hitBody ? individualAmmunition.BreakageChance() : 0;
-        SaveGame.Level.DropNear(individualAmmunition, j, y, x);
+        SaveGame.DropNear(individualAmmunition, j, y, x);
         return false;
     }
 }

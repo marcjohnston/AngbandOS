@@ -24,7 +24,7 @@ internal class OldCloneProjectile : Projectile
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
-        GridTile cPtr = SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX];
+        GridTile cPtr = SaveGame.Grid[mPtr.MapY][mPtr.MapX];
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
         bool obvious = false;
@@ -43,8 +43,8 @@ internal class OldCloneProjectile : Projectile
         {
             mPtr.Speed += 10;
         }
-        Monster targetMonster = SaveGame.Level.Monsters[cPtr.MonsterIndex];
-        if (SaveGame.Level.MultiplyMonster(targetMonster, isFriend, true))
+        Monster targetMonster = SaveGame.Monsters[cPtr.MonsterIndex];
+        if (SaveGame.MultiplyMonster(targetMonster, isFriend, true))
         {
             note = " spawns!";
         }

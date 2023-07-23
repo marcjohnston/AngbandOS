@@ -23,11 +23,11 @@ internal class PrecognitionTalent : Talent
     {
         if (SaveGame.ExperienceLevel > 44)
         {
-            SaveGame.Level.WizLight();
+            SaveGame.WizLight();
         }
         else if (SaveGame.ExperienceLevel > 19)
         {
-            SaveGame.Level.MapArea();
+            SaveGame.MapArea();
         }
         bool b;
         if (SaveGame.ExperienceLevel < 30)

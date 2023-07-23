@@ -20,6 +20,6 @@ internal class WizardLightWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.Level.WizLight();
+        SaveGame.WizLight();
     }
 }

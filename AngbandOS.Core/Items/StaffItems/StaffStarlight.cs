@@ -32,7 +32,7 @@ internal class StaffStarlight : StaffItemClass
         }
         for (int k = 0; k < 8; k++)
         {
-            SaveGame.LightLine(SaveGame.Level.OrderedDirection[k]);
+            SaveGame.LightLine(SaveGame.OrderedDirection[k]);
         }
         eventArgs.Identified = true;
     }

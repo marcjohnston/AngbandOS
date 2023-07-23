@@ -21,7 +21,7 @@ internal class SummonChestTrap : ChestTrap
             }
             else
             {
-                eventArgs.SaveGame.Level.SummonSpecific(eventArgs.Y, eventArgs.X, eventArgs.SaveGame.Difficulty, null);
+                eventArgs.SaveGame.SummonSpecific(eventArgs.Y, eventArgs.X, eventArgs.SaveGame.Difficulty, null);
             }
         }
     }

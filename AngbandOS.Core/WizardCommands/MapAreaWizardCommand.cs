@@ -20,6 +20,6 @@ internal class MapAreaWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.Level.MapArea();
+        SaveGame.MapArea();
     }
 }

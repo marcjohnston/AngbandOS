@@ -18,7 +18,7 @@ internal class ColdProjectile : Projectile
 
     protected override bool AffectItem(int who, int y, int x)
     {
-        GridTile cPtr = SaveGame.Level.Grid[y][x];
+        GridTile cPtr = SaveGame.Grid[y][x];
         bool obvious = false;
         string oName = "";
         foreach (Item oPtr in cPtr.Items)
@@ -68,13 +68,13 @@ internal class ColdProjectile : Projectile
                         SaveGame.MsgPrint($"The {oName}{noteKill}");
                     }
                     bool isPotion = oPtr.Factory.CategoryEnum == ItemTypeEnum.Potion;
-                    SaveGame.Level.DeleteObject(oPtr);
+                    SaveGame.DeleteObject(oPtr);
                     if (isPotion)
                     {
                         PotionItemFactory potion = (PotionItemFactory)oPtr.Factory;
                         potion.Smash(who, y, x);
                     }
-                    SaveGame.Level.RedrawSingleLocation(y, x);
+                    SaveGame.RedrawSingleLocation(y, x);
                 }
             }
         }
@@ -112,7 +112,7 @@ internal class ColdProjectile : Projectile
             dam = 1600;
         }
         dam = (dam + r) / (r + 1);
-        Monster mPtr = SaveGame.Level.Monsters[who];
+        Monster mPtr = SaveGame.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
         if (blind)
         {

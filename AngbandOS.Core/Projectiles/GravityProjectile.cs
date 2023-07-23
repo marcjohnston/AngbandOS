@@ -119,7 +119,7 @@ internal class GravityProjectile : Projectile
             dam = 1600;
         }
         dam = (dam + r) / (r + 1);
-        Monster mPtr = SaveGame.Level.Monsters[who];
+        Monster mPtr = SaveGame.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
         if (blind)
         {

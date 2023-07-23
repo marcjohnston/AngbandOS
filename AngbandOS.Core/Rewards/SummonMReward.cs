@@ -17,7 +17,7 @@ internal class SummonMReward : Reward
         SaveGame.MsgPrint("'My pets, destroy the arrogant mortal!'");
         for (int dummy = 0; dummy < Program.Rng.DieRoll(5) + 1; dummy++)
         {
-            SaveGame.Level.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, null);
+            SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, null);
         }
     }
 }

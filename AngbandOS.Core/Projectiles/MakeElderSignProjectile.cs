@@ -16,11 +16,11 @@ internal class MakeElderSignProjectile : Projectile
 
     protected override bool AffectFloor(int y, int x)
     {
-        if (!SaveGame.Level.GridOpenNoItemOrCreature(y, x))
+        if (!SaveGame.GridOpenNoItemOrCreature(y, x))
         {
             return false;
         }
-        SaveGame.Level.CaveSetFeat(y, x, "ElderSign");
+        SaveGame.CaveSetFeat(y, x, "ElderSign");
         return false;
     }
 

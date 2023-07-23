@@ -22,9 +22,9 @@ internal class MutationWarning : Mutation
             return;
         }
         int dangerAmount = 0;
-        for (int monster = 0; monster < saveGame.Level.MMax; monster++)
+        for (int monster = 0; monster < saveGame.MMax; monster++)
         {
-            Monster mPtr = saveGame.Level.Monsters[monster];
+            Monster mPtr = saveGame.Monsters[monster];
             MonsterRace rPtr = mPtr.Race;
             if (mPtr.Race == null)
             {

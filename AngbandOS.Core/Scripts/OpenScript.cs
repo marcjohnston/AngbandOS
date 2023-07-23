@@ -25,16 +25,16 @@ internal class OpenScript : Script
             {
                 // There's only one thing we can open, so assume we mean that thing
                 GridCoordinate coord = numDoors == 1 ? doorCoord : chestCoord;
-                SaveGame.CommandDirection = SaveGame.Level.CoordsToDir(coord.Y, coord.X);
+                SaveGame.CommandDirection = SaveGame.CoordsToDir(coord.Y, coord.X);
             }
         }
         // If we don't already have a direction, prompt for one
         if (SaveGame.GetDirectionNoAim(out int dir))
         {
-            int y = SaveGame.MapY + SaveGame.Level.KeypadDirectionYOffset[dir];
-            int x = SaveGame.MapX + SaveGame.Level.KeypadDirectionXOffset[dir];
-            GridTile tile = SaveGame.Level.Grid[y][x];
-            Item? chestItem = SaveGame.Level.ChestCheck(y, x);
+            int y = SaveGame.MapY + SaveGame.KeypadDirectionYOffset[dir];
+            int x = SaveGame.MapX + SaveGame.KeypadDirectionXOffset[dir];
+            GridTile tile = SaveGame.Grid[y][x];
+            Item? chestItem = SaveGame.ChestCheck(y, x);
             // Make sure there is something to open in the direction we chose
             if (!tile.FeatureType.IsClosedDoor && chestItem == null)
             {
@@ -80,7 +80,7 @@ internal class OpenScript : Script
             // Our disable traps skill also doubles up as a lockpicking skill
             int i = SaveGame.SkillDisarmTraps;
             // Hard to pick locks in the dark
-            if (SaveGame.TimedBlindness.TurnsRemaining != 0 || SaveGame.Level.NoLight())
+            if (SaveGame.TimedBlindness.TurnsRemaining != 0 || SaveGame.NoLight())
             {
                 i /= 10;
             }

@@ -20,7 +20,7 @@ internal class StarEssenceOfXothFixedArtifact : FixedArtifact, IFixedArtifactAct
     public void ActivateItem(SaveGame saveGame, Item item)
     {
         saveGame.MsgPrint("The essence shines brightly...");
-        saveGame.Level.MapArea();
+        saveGame.MapArea();
         saveGame.LightArea(Program.Rng.DiceRoll(2, 15), 3);
         item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
     }

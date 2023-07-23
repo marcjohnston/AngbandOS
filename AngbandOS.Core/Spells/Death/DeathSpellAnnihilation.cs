@@ -14,9 +14,9 @@ internal class DeathSpellAnnihilation : Spell
     public override void Cast()
     {
         SaveGame.Mana -= 100;
-        for (int i = 1; i < SaveGame.Level.MMax; i++)
+        for (int i = 1; i < SaveGame.MMax; i++)
         {
-            Monster mPtr = SaveGame.Level.Monsters[i];
+            Monster mPtr = SaveGame.Monsters[i];
             MonsterRace rPtr = mPtr.Race;
             if (mPtr.Race == null)
             {
@@ -30,10 +30,10 @@ internal class DeathSpellAnnihilation : Spell
             {
                 continue;
             }
-            SaveGame.Level.DeleteMonsterByIndex(i, true);
+            SaveGame.DeleteMonsterByIndex(i, true);
             SaveGame.TakeHit(Program.Rng.DieRoll(4), "the strain of casting Annihilation");
             SaveGame.Mana++;
-            SaveGame.Level.MoveCursorRelative(SaveGame.MapY, SaveGame.MapX);
+            SaveGame.MoveCursorRelative(SaveGame.MapY, SaveGame.MapX);
             SaveGame.RedrawHpFlaggedAction.Set();
             SaveGame.RedrawManaFlaggedAction.Set();
             SaveGame.HandleStuff();

@@ -37,10 +37,10 @@ internal class MutationAlcohol : Mutation
             }
             else
             {
-                saveGame.Level.WizDark();
+                saveGame.WizDark();
             }
             saveGame.TeleportPlayer(100);
-            saveGame.Level.WizDark();
+            saveGame.WizDark();
             saveGame.MsgPrint("You wake up somewhere with a sore head...");
             saveGame.MsgPrint("You can't remember a thing, or how you got here!");
         }

@@ -25,17 +25,17 @@ internal class DisarmScript : Script
             if (!tooMany)
             {
                 GridCoordinate coord = numTraps == 1 ? trapCoord : chestCoord;
-                SaveGame.CommandDirection = SaveGame.Level.CoordsToDir(coord.Y, coord.X);
+                SaveGame.CommandDirection = SaveGame.CoordsToDir(coord.Y, coord.X);
             }
         }
         // Get a direction if we don't already have one
         if (SaveGame.GetDirectionNoAim(out int dir))
         {
-            int y = SaveGame.MapY + SaveGame.Level.KeypadDirectionYOffset[dir];
-            int x = SaveGame.MapX + SaveGame.Level.KeypadDirectionXOffset[dir];
-            GridTile tile = SaveGame.Level.Grid[y][x];
+            int y = SaveGame.MapY + SaveGame.KeypadDirectionYOffset[dir];
+            int x = SaveGame.MapX + SaveGame.KeypadDirectionXOffset[dir];
+            GridTile tile = SaveGame.Grid[y][x];
             // Check for a chest
-            Item? chestItem = SaveGame.Level.ChestCheck(y, x);
+            Item? chestItem = SaveGame.ChestCheck(y, x);
             if (!tile.FeatureType.IsTrap && chestItem == null)
             {
                 SaveGame.MsgPrint("You see nothing there to disarm.");

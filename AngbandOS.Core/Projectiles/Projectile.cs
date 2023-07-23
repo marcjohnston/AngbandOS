@@ -64,8 +64,8 @@ internal abstract class Projectile
         }
         else
         {
-            x1 = SaveGame.Level.Monsters[who].MapX;
-            y1 = SaveGame.Level.Monsters[who].MapY;
+            x1 = SaveGame.Monsters[who].MapX;
+            y1 = SaveGame.Monsters[who].MapY;
         }
         int ySaver = y1;
         int xSaver = x1;
@@ -101,16 +101,16 @@ internal abstract class Projectile
                 grids++;
             }
             if (!blind && (flg & ProjectionFlag.ProjectHide) == 0 && dist != 0 &&
-                (flg & ProjectionFlag.ProjectBeam) != 0 && SaveGame.Level.PanelContains(y, x) &&
-                SaveGame.Level.PlayerHasLosBold(y, x))
+                (flg & ProjectionFlag.ProjectBeam) != 0 && SaveGame.PanelContains(y, x) &&
+                SaveGame.PlayerHasLosBold(y, x))
             {
                 if (ImpactProjectileGraphic != null)
                 {
-                    SaveGame.Level.PrintCharacterAtMapLocation(ImpactProjectileGraphic.Character, ImpactProjectileGraphic.Colour, y, x);
+                    SaveGame.PrintCharacterAtMapLocation(ImpactProjectileGraphic.Character, ImpactProjectileGraphic.Colour, y, x);
                 }
             }
-            cPtr = SaveGame.Level.Grid[y][x];
-            if (dist != 0 && !SaveGame.Level.GridPassable(y, x))
+            cPtr = SaveGame.Grid[y][x];
+            if (dist != 0 && !SaveGame.GridPassable(y, x))
             {
                 break;
             }
@@ -122,8 +122,8 @@ internal abstract class Projectile
             {
                 break;
             }
-            SaveGame.Level.MoveOneStepTowards(out int y9, out int x9, y, x, y1, x1, y2, x2);
-            if (!SaveGame.Level.GridPassable(y9, x9) && rad > 0)
+            SaveGame.MoveOneStepTowards(out int y9, out int x9, y, x, y1, x1, y2, x2);
+            if (!SaveGame.GridPassable(y9, x9) && rad > 0)
             {
                 break;
             }
@@ -134,7 +134,7 @@ internal abstract class Projectile
             }
             if (!blind && (flg & ProjectionFlag.ProjectHide) == 0)
             {
-                if (SaveGame.Level.PlayerHasLosBold(y9, x9) && SaveGame.Level.PanelContains(y9, x9))
+                if (SaveGame.PlayerHasLosBold(y9, x9) && SaveGame.PanelContains(y9, x9))
                 {
                     if (BoltProjectileGraphic != null)
                     {
@@ -143,12 +143,12 @@ internal abstract class Projectile
                         {
                             directionalCharacter = BoltChar(y, x, y9, x9);
                         }
-                        SaveGame.Level.PrintCharacterAtMapLocation(directionalCharacter, BoltProjectileGraphic.Colour, y9, x9);
-                        SaveGame.Level.MoveCursorRelative(y9, x9);
+                        SaveGame.PrintCharacterAtMapLocation(directionalCharacter, BoltProjectileGraphic.Colour, y9, x9);
+                        SaveGame.MoveCursorRelative(y9, x9);
                         SaveGame.UpdateScreen();
                         visual = true;
                         SaveGame.Pause(msec);
-                        SaveGame.Level.RedrawSingleLocation(y9, x9);
+                        SaveGame.RedrawSingleLocation(y9, x9);
                         SaveGame.UpdateScreen();
                     }
                 }
@@ -187,19 +187,19 @@ internal abstract class Projectile
                         {
                             for (x = bx - cdis; x <= bx + cdis; x++)
                             {
-                                if (!SaveGame.Level.InBounds(y, x))
+                                if (!SaveGame.InBounds(y, x))
                                 {
                                     continue;
                                 }
-                                if (SaveGame.Level.Distance(y1, x1, y, x) != bdis)
+                                if (SaveGame.Distance(y1, x1, y, x) != bdis)
                                 {
                                     continue;
                                 }
-                                if (SaveGame.Level.Distance(by, bx, y, x) != cdis)
+                                if (SaveGame.Distance(by, bx, y, x) != cdis)
                                 {
                                     continue;
                                 }
-                                if (!SaveGame.Level.Los(by, bx, y, x))
+                                if (!SaveGame.Los(by, bx, y, x))
                                 {
                                     continue;
                                 }
@@ -219,7 +219,7 @@ internal abstract class Projectile
                         bdis++;
                         continue;
                     }
-                    SaveGame.Level.MoveOneStepTowards(out by, out bx, by, bx, y1, x1, y2, x2);
+                    SaveGame.MoveOneStepTowards(out by, out bx, by, bx, y1, x1, y2, x2);
                     bdis++;
                     brad = rad * bdis / dist;
                 }
@@ -233,19 +233,19 @@ internal abstract class Projectile
                     {
                         for (x = x2 - dist; x <= x2 + dist; x++)
                         {
-                            if (!SaveGame.Level.InBounds2(y, x))
+                            if (!SaveGame.InBounds2(y, x))
                             {
                                 continue;
                             }
-                            if (SaveGame.Level.Distance(y2, x2, y, x) != dist)
+                            if (SaveGame.Distance(y2, x2, y, x) != dist)
                             {
                                 continue;
                             }
                             if (GetType().Name == "ProjectDisintegrate")
                             {
-                                if (SaveGame.Level.CaveValidBold(y, x))
+                                if (SaveGame.CaveValidBold(y, x))
                                 {
-                                    SaveGame.Level.RevertTileToBackground(y, x);
+                                    SaveGame.RevertTileToBackground(y, x);
                                 }
                                 SaveGame.UpdateScentFlaggedAction.Set();
                                 SaveGame.UpdateMonstersFlaggedAction.Set();
@@ -254,7 +254,7 @@ internal abstract class Projectile
                             }
                             else
                             {
-                                if (!SaveGame.Level.Los(y2, x2, y, x))
+                                if (!SaveGame.Los(y2, x2, y, x))
                                 {
                                     continue;
                                 }
@@ -280,18 +280,18 @@ internal abstract class Projectile
                 {
                     y = gy[i];
                     x = gx[i];
-                    if (SaveGame.Level.PlayerHasLosBold(y, x) && SaveGame.Level.PanelContains(y, x))
+                    if (SaveGame.PlayerHasLosBold(y, x) && SaveGame.PanelContains(y, x))
                     {
                         if (ImpactProjectileGraphic != null)
                         {
                             drawn = true;
-                            SaveGame.Level.PrintCharacterAtMapLocation(ImpactProjectileGraphic.Character, ImpactProjectileGraphic.Colour, y, x);
+                            SaveGame.PrintCharacterAtMapLocation(ImpactProjectileGraphic.Character, ImpactProjectileGraphic.Colour, y, x);
                         }
                     }
                 }
                 if (ImpactProjectileGraphic != null)
                 {
-                    SaveGame.Level.MoveCursorRelative(y2, x2);
+                    SaveGame.MoveCursorRelative(y2, x2);
                     SaveGame.UpdateScreen();
                     if (visual || drawn)
                     {
@@ -305,12 +305,12 @@ internal abstract class Projectile
                 {
                     y = gy[i];
                     x = gx[i];
-                    if (SaveGame.Level.PlayerHasLosBold(y, x) && SaveGame.Level.PanelContains(y, x))
+                    if (SaveGame.PlayerHasLosBold(y, x) && SaveGame.PanelContains(y, x))
                     {
-                        SaveGame.Level.RedrawSingleLocation(y, x);
+                        SaveGame.RedrawSingleLocation(y, x);
                     }
                 }
-                SaveGame.Level.MoveCursorRelative(y2, x2);
+                SaveGame.MoveCursorRelative(y2, x2);
                 SaveGame.UpdateScreen();
             }
         }
@@ -381,7 +381,7 @@ internal abstract class Projectile
                     {
                         continue;
                     }
-                    MonsterRace refPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex].Race;
+                    MonsterRace refPtr = SaveGame.Monsters[cPtr.MonsterIndex].Race;
                     if (refPtr.Reflecting && Program.Rng.DieRoll(10) != 1 && distHack > 1 && GetType().Name != "ProjectWizardBolt")
                     {
                         int tY, tX;
@@ -391,13 +391,13 @@ internal abstract class Projectile
                             tY = ySaver - 1 + Program.Rng.DieRoll(3);
                             tX = xSaver - 1 + Program.Rng.DieRoll(3);
                             maxAttempts--;
-                        } while (maxAttempts > 0 && SaveGame.Level.InBounds2(tY, tX) && !SaveGame.Level.Los(y, x, tY, tX));
+                        } while (maxAttempts > 0 && SaveGame.InBounds2(tY, tX) && !SaveGame.Los(y, x, tY, tX));
                         if (maxAttempts < 1)
                         {
                             tY = ySaver;
                             tX = xSaver;
                         }
-                        if (SaveGame.Level.Monsters[cPtr.MonsterIndex].IsVisible)
+                        if (SaveGame.Monsters[cPtr.MonsterIndex].IsVisible)
                         {
                             SaveGame.MsgPrint("The attack bounces!");
                             refPtr.Knowledge.Characteristics.Reflecting = true;
@@ -417,10 +417,10 @@ internal abstract class Projectile
             {
                 x = ProjectMx;
                 y = ProjectMy;
-                cPtr = SaveGame.Level.Grid[y][x];
+                cPtr = SaveGame.Grid[y][x];
                 if (cPtr.MonsterIndex != 0)
                 {
-                    Monster mPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex];
+                    Monster mPtr = SaveGame.Monsters[cPtr.MonsterIndex];
                     if (mPtr.IsVisible)
                     {
                         SaveGame.HealthTrack(cPtr.MonsterIndex);
@@ -483,14 +483,14 @@ internal abstract class Projectile
             int maxAttempts = 10;
             do
             {
-                tY = SaveGame.Level.Monsters[who].MapY - 1 + Program.Rng.DieRoll(3);
-                tX = SaveGame.Level.Monsters[who].MapX - 1 + Program.Rng.DieRoll(3);
+                tY = SaveGame.Monsters[who].MapY - 1 + Program.Rng.DieRoll(3);
+                tX = SaveGame.Monsters[who].MapX - 1 + Program.Rng.DieRoll(3);
                 maxAttempts--;
-            } while (maxAttempts > 0 && SaveGame.Level.InBounds2(tY, tX) && !SaveGame.Level.PlayerHasLosBold(tY, tX));
+            } while (maxAttempts > 0 && SaveGame.InBounds2(tY, tX) && !SaveGame.PlayerHasLosBold(tY, tX));
             if (maxAttempts < 1)
             {
-                tY = SaveGame.Level.Monsters[who].MapY;
-                tX = SaveGame.Level.Monsters[who].MapX;
+                tY = SaveGame.Monsters[who].MapY;
+                tX = SaveGame.Monsters[who].MapX;
             }
             Fire(0, 0, tY, tX, dam, ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill);
             SaveGame.Disturb(true);
@@ -519,7 +519,7 @@ internal abstract class Projectile
     protected bool AffectMonster(int who, int r, int y, int x, int dam)
     {
         // Get the grid tile for the location in question.
-        GridTile cPtr = SaveGame.Level.Grid[y][x];
+        GridTile cPtr = SaveGame.Grid[y][x];
 
         // Check to see if there is a monster at this location.
         if (cPtr.MonsterIndex == 0)
@@ -534,7 +534,7 @@ internal abstract class Projectile
         }
 
         // Get a reference to the monster in question.
-        Monster mPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex];
+        Monster mPtr = SaveGame.Monsters[cPtr.MonsterIndex];
 
         // Modify the damage based on the distance from the attacker.
         dam = (dam + r) / (r + 1);
@@ -550,9 +550,9 @@ internal abstract class Projectile
 
         bool notice = AffectMonster(who, mPtr, dam, r);
 
-        GridTile newGridTile = SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX];
-        SaveGame.Level.UpdateMonsterVisibility(newGridTile.MonsterIndex, false);
-        SaveGame.Level.RedrawSingleLocation(y, x);
+        GridTile newGridTile = SaveGame.Grid[mPtr.MapY][mPtr.MapX];
+        SaveGame.UpdateMonsterVisibility(newGridTile.MonsterIndex, false);
+        SaveGame.RedrawSingleLocation(y, x);
         ProjectMn++;
         ProjectMx = mPtr.MapX;
         ProjectMy = mPtr.MapY;
@@ -651,7 +651,7 @@ internal abstract class Projectile
         }
 
         string mName = mPtr.Name;
-        GridTile cPtr = SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX];
+        GridTile cPtr = SaveGame.Grid[mPtr.MapY][mPtr.MapX];
         MonsterRace rPtr = mPtr.Race;
 
         if (noteDies == null)
@@ -678,7 +678,7 @@ internal abstract class Projectile
             {
                 bool sad = mPtr.SmFriendly && !mPtr.IsVisible;
                 SaveGame.MonsterDeath(cPtr.MonsterIndex);
-                SaveGame.Level.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
+                SaveGame.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                 if (string.IsNullOrEmpty(note) == false)
                 {
                     SaveGame.MsgPrint($"{mName}{note}");
@@ -696,13 +696,13 @@ internal abstract class Projectile
                 }
                 else if (dam > 0)
                 {
-                    SaveGame.Level.MessagePain(cPtr.MonsterIndex, dam);
+                    SaveGame.MessagePain(cPtr.MonsterIndex, dam);
                 }
             }
         }
         else
         {
-            if (SaveGame.Level.DamageMonster(cPtr.MonsterIndex, dam, out bool fear, noteDies))
+            if (SaveGame.DamageMonster(cPtr.MonsterIndex, dam, out bool fear, noteDies))
             {
             }
             else
@@ -713,7 +713,7 @@ internal abstract class Projectile
                 }
                 else if (dam > 0)
                 {
-                    SaveGame.Level.MessagePain(cPtr.MonsterIndex, dam);
+                    SaveGame.MessagePain(cPtr.MonsterIndex, dam);
                 }
                 if ((fear || addFear > 0) && mPtr.IsVisible)
                 {

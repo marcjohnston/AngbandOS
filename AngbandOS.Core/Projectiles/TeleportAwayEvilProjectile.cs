@@ -25,7 +25,7 @@ internal class TeleportAwayEvilProjectile : Projectile
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
-        GridTile cPtr = SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX];
+        GridTile cPtr = SaveGame.Grid[mPtr.MapY][mPtr.MapX];
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
         bool obvious = false;
@@ -86,7 +86,7 @@ internal class TeleportAwayEvilProjectile : Projectile
             }
             note = " disappears!";
             mPtr.TeleportAway(SaveGame, doDist);
-            cPtr = SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX];
+            cPtr = SaveGame.Grid[mPtr.MapY][mPtr.MapX];
         }
         ApplyProjectileDamageToMonster(who, mPtr, dam, note);
         return obvious;

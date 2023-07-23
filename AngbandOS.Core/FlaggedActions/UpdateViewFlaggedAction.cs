@@ -15,13 +15,13 @@ internal class UpdateViewFlaggedAction : FlaggedAction
     private void CaveViewHack(GridTile c, int y, int x)
     {
         c.TileFlags.Set(GridTile.IsVisible);
-        SaveGame.Level.View.Add(new GridCoordinate(x, y));
+        SaveGame.View.Add(new GridCoordinate(x, y));
     }
 
     private bool UpdateViewAux(int y, int x, int y1, int x1, int y2, int x2)
     {
-        GridTile g1CPtr = SaveGame.Level.Grid[y1][x1];
-        GridTile g2CPtr = SaveGame.Level.Grid[y2][x2];
+        GridTile g1CPtr = SaveGame.Grid[y1][x1];
+        GridTile g2CPtr = SaveGame.Grid[y2][x2];
         bool f1 = !g1CPtr.FeatureType.BlocksLos;
         bool f2 = !g2CPtr.FeatureType.BlocksLos;
         if (!f1 && !f2)
@@ -34,7 +34,7 @@ internal class UpdateViewFlaggedAction : FlaggedAction
         {
             return true;
         }
-        GridTile cPtr = SaveGame.Level.Grid[y][x];
+        GridTile cPtr = SaveGame.Grid[y][x];
         bool wall = cPtr.FeatureType.BlocksLos;
         bool z1 = v1 && g1CPtr.TileFlags.IsSet(GridTile.EasyVisibility);
         bool z2 = v2 && g2CPtr.TileFlags.IsSet(GridTile.EasyVisibility);
@@ -59,7 +59,7 @@ internal class UpdateViewFlaggedAction : FlaggedAction
             CaveViewHack(cPtr, y, x);
             return true;
         }
-        if (SaveGame.Level.Los(SaveGame.MapY, SaveGame.MapX, y, x))
+        if (SaveGame.Los(SaveGame.MapY, SaveGame.MapX, y, x))
         {
             CaveViewHack(cPtr, y, x);
             return false;
@@ -71,93 +71,93 @@ internal class UpdateViewFlaggedAction : FlaggedAction
         int n;
         int d;
         int y, x;
-        int yMax = SaveGame.Level.CurHgt - 1;
-        int xMax = SaveGame.Level.CurWid - 1;
+        int yMax = SaveGame.CurHgt - 1;
+        int xMax = SaveGame.CurWid - 1;
         GridTile cPtr;
         const int full = Constants.MaxSight;
         const int over = Constants.MaxSight * 3 / 2;
-        foreach (GridCoordinate gridCoordinate in SaveGame.Level.View)
+        foreach (GridCoordinate gridCoordinate in SaveGame.View)
         {
-            cPtr = SaveGame.Level.Grid[gridCoordinate.Y][gridCoordinate.X];
+            cPtr = SaveGame.Grid[gridCoordinate.Y][gridCoordinate.X];
             cPtr.TileFlags.Clear(GridTile.IsVisible);
             cPtr.TileFlags.Set(GridTile.TempFlag);
-            SaveGame.Level.TempY[SaveGame.Level.TempN] = gridCoordinate.Y;
-            SaveGame.Level.TempX[SaveGame.Level.TempN] = gridCoordinate.X;
-            SaveGame.Level.TempN++;
+            SaveGame.TempY[SaveGame.TempN] = gridCoordinate.Y;
+            SaveGame.TempX[SaveGame.TempN] = gridCoordinate.X;
+            SaveGame.TempN++;
         }
-        SaveGame.Level.View.Clear();
+        SaveGame.View.Clear();
         y = SaveGame.MapY;
         x = SaveGame.MapX;
-        cPtr = SaveGame.Level.Grid[y][x];
+        cPtr = SaveGame.Grid[y][x];
         cPtr.TileFlags.Set(GridTile.EasyVisibility);
         CaveViewHack(cPtr, y, x);
         int z = full * 2 / 3;
         for (d = 1; d <= z; d++)
         {
-            cPtr = SaveGame.Level.Grid[y + d][x + d];
+            cPtr = SaveGame.Grid[y + d][x + d];
             cPtr.TileFlags.Set(GridTile.EasyVisibility);
             CaveViewHack(cPtr, y + d, x + d);
             if (cPtr.FeatureType.BlocksLos)
             {
                 break;
             }
-            if (!SaveGame.Level.InBounds2(y + d, x + d))
+            if (!SaveGame.InBounds2(y + d, x + d))
             {
                 break;
             }
         }
         for (d = 1; d <= z; d++)
         {
-            cPtr = SaveGame.Level.Grid[y + d][x - d];
+            cPtr = SaveGame.Grid[y + d][x - d];
             cPtr.TileFlags.Set(GridTile.EasyVisibility);
             CaveViewHack(cPtr, y + d, x - d);
             if (cPtr.FeatureType.BlocksLos)
             {
                 break;
             }
-            if (!SaveGame.Level.InBounds2(y + d, x - d))
+            if (!SaveGame.InBounds2(y + d, x - d))
             {
                 break;
             }
         }
         for (d = 1; d <= z; d++)
         {
-            cPtr = SaveGame.Level.Grid[y - d][x + d];
+            cPtr = SaveGame.Grid[y - d][x + d];
             cPtr.TileFlags.Set(GridTile.EasyVisibility);
             CaveViewHack(cPtr, y - d, x + d);
             if (cPtr.FeatureType.BlocksLos)
             {
                 break;
             }
-            if (!SaveGame.Level.InBounds2(y - d, x + d))
+            if (!SaveGame.InBounds2(y - d, x + d))
             {
                 break;
             }
         }
         for (d = 1; d <= z; d++)
         {
-            cPtr = SaveGame.Level.Grid[y - d][x - d];
+            cPtr = SaveGame.Grid[y - d][x - d];
             cPtr.TileFlags.Set(GridTile.EasyVisibility);
             CaveViewHack(cPtr, y - d, x - d);
             if (cPtr.FeatureType.BlocksLos)
             {
                 break;
             }
-            if (!SaveGame.Level.InBounds2(y - d, x - d))
+            if (!SaveGame.InBounds2(y - d, x - d))
             {
                 break;
             }
         }
         for (d = 1; d <= full; d++)
         {
-            cPtr = SaveGame.Level.Grid[y + d][x];
+            cPtr = SaveGame.Grid[y + d][x];
             cPtr.TileFlags.Set(GridTile.EasyVisibility);
             CaveViewHack(cPtr, y + d, x);
             if (cPtr.FeatureType.BlocksLos)
             {
                 break;
             }
-            if (!SaveGame.Level.InBounds2(y + d, x))
+            if (!SaveGame.InBounds2(y + d, x))
             {
                 break;
             }
@@ -166,14 +166,14 @@ internal class UpdateViewFlaggedAction : FlaggedAction
         int sw = d;
         for (d = 1; d <= full; d++)
         {
-            cPtr = SaveGame.Level.Grid[y - d][x];
+            cPtr = SaveGame.Grid[y - d][x];
             cPtr.TileFlags.Set(GridTile.EasyVisibility);
             CaveViewHack(cPtr, y - d, x);
             if (cPtr.FeatureType.BlocksLos)
             {
                 break;
             }
-            if (!SaveGame.Level.InBounds2(y - d, x))
+            if (!SaveGame.InBounds2(y - d, x))
             {
                 break;
             }
@@ -182,14 +182,14 @@ internal class UpdateViewFlaggedAction : FlaggedAction
         int nw = d;
         for (d = 1; d <= full; d++)
         {
-            cPtr = SaveGame.Level.Grid[y][x + d];
+            cPtr = SaveGame.Grid[y][x + d];
             cPtr.TileFlags.Set(GridTile.EasyVisibility);
             CaveViewHack(cPtr, y, x + d);
             if (cPtr.FeatureType.BlocksLos)
             {
                 break;
             }
-            if (!SaveGame.Level.InBounds2(y, x + d))
+            if (!SaveGame.InBounds2(y, x + d))
             {
                 break;
             }
@@ -198,14 +198,14 @@ internal class UpdateViewFlaggedAction : FlaggedAction
         int en = d;
         for (d = 1; d <= full; d++)
         {
-            cPtr = SaveGame.Level.Grid[y][x - d];
+            cPtr = SaveGame.Grid[y][x - d];
             cPtr.TileFlags.Set(GridTile.EasyVisibility);
             CaveViewHack(cPtr, y, x - d);
             if (cPtr.FeatureType.BlocksLos)
             {
                 break;
             }
-            if (!SaveGame.Level.InBounds2(y, x - d))
+            if (!SaveGame.InBounds2(y, x - d))
             {
                 break;
             }
@@ -390,29 +390,29 @@ internal class UpdateViewFlaggedAction : FlaggedAction
                 }
             }
         }
-        foreach (GridCoordinate gridCoordinate in SaveGame.Level.View)
+        foreach (GridCoordinate gridCoordinate in SaveGame.View)
         {
-            cPtr = SaveGame.Level.Grid[gridCoordinate.Y][gridCoordinate.X];
+            cPtr = SaveGame.Grid[gridCoordinate.Y][gridCoordinate.X];
             cPtr.TileFlags.Clear(GridTile.EasyVisibility);
             if (cPtr.TileFlags.IsSet(GridTile.TempFlag))
             {
                 continue;
             }
-            SaveGame.Level.NoteSpot(gridCoordinate.Y, gridCoordinate.X);
-            SaveGame.Level.RedrawSingleLocation(gridCoordinate.Y, gridCoordinate.X);
+            SaveGame.NoteSpot(gridCoordinate.Y, gridCoordinate.X);
+            SaveGame.RedrawSingleLocation(gridCoordinate.Y, gridCoordinate.X);
         }
-        for (n = 0; n < SaveGame.Level.TempN; n++)
+        for (n = 0; n < SaveGame.TempN; n++)
         {
-            y = SaveGame.Level.TempY[n];
-            x = SaveGame.Level.TempX[n];
-            cPtr = SaveGame.Level.Grid[y][x];
+            y = SaveGame.TempY[n];
+            x = SaveGame.TempX[n];
+            cPtr = SaveGame.Grid[y][x];
             cPtr.TileFlags.Clear(GridTile.TempFlag);
             if (cPtr.TileFlags.IsSet(GridTile.IsVisible))
             {
                 continue;
             }
-            SaveGame.Level.RedrawSingleLocation(y, x);
+            SaveGame.RedrawSingleLocation(y, x);
         }
-        SaveGame.Level.TempN = 0;
+        SaveGame.TempN = 0;
     }
 }

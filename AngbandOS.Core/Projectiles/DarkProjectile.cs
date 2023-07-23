@@ -18,18 +18,18 @@ internal class DarkProjectile : Projectile
 
     protected override bool AffectFloor(int y, int x)
     {
-        GridTile cPtr = SaveGame.Level.Grid[y][x];
-        bool obvious = SaveGame.Level.PlayerCanSeeBold(y, x);
+        GridTile cPtr = SaveGame.Grid[y][x];
+        bool obvious = SaveGame.PlayerCanSeeBold(y, x);
         cPtr.TileFlags.Clear(GridTile.SelfLit);
         if (cPtr.FeatureType.IsOpenFloor)
         {
             cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
-            SaveGame.Level.NoteSpot(y, x);
+            SaveGame.NoteSpot(y, x);
         }
-        SaveGame.Level.RedrawSingleLocation(y, x);
+        SaveGame.RedrawSingleLocation(y, x);
         if (cPtr.MonsterIndex != 0)
         {
-            SaveGame.Level.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
+            SaveGame.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
         }
         return obvious;
     }
@@ -69,7 +69,7 @@ internal class DarkProjectile : Projectile
             dam = 1600;
         }
         dam = (dam + r) / (r + 1);
-        Monster mPtr = SaveGame.Level.Monsters[who];
+        Monster mPtr = SaveGame.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
         if (blind)
         {

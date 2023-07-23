@@ -33,7 +33,7 @@ internal class TeleportLevelMonsterSpell : MonsterSpell
         {
             saveGame.TeleportPlayerLevel();
         }
-        saveGame.Level.UpdateSmartLearn(monster, new NexusSpellResistantDetection());
+        saveGame.UpdateSmartLearn(monster, new NexusSpellResistantDetection());
     }
 
     public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)

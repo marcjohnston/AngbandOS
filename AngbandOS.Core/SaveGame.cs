@@ -239,8 +239,8 @@ internal class SaveGame
     /// GUI
     public const int CentMax = 100;
     public const int DoorMax = 200;
-    public const int MaxRoomsCol = Level.MaxWid / _blockWid;
-    public const int MaxRoomsRow = Level.MaxHgt / _blockHgt;
+    public const int MaxRoomsCol = MaxWid / _blockWid;
+    public const int MaxRoomsRow = MaxHgt / _blockHgt;
     public const int SafeMaxAttempts = 5000;
     public const int TunnMax = 900;
     public const int WallMax = 500;
@@ -961,13 +961,13 @@ internal class SaveGame
     /// <param name="x"></param>
     public void DeleteObject(int y, int x)
     {
-        if (!Level.InBounds(y, x))
+        if (!InBounds(y, x))
         {
             return;
         }
-        GridTile cPtr = Level.Grid[y][x];
+        GridTile cPtr = Grid[y][x];
         cPtr.Items.Clear();
-        Level.RedrawSingleLocation(y, x);
+        RedrawSingleLocation(y, x);
     }
 
     public bool AddItemToMonster(Item item, Monster monster)
@@ -979,7 +979,7 @@ internal class SaveGame
 
     public bool AddItemToGrid(Item item, int x, int y)
     {
-        GridTile tile = Level.Grid[y][x];
+        GridTile tile = Grid[y][x];
         item.Y = y;
         item.X = x;
         item.HoldingMonsterIndex = 0;
@@ -1017,8 +1017,8 @@ internal class SaveGame
         bool wallAheadRight = false;
         bool wallAheadLeft = false;
         // Get the row and column of the first step in the run
-        int row = MapY + Level.KeypadDirectionYOffset[direction];
-        int col = MapX + Level.KeypadDirectionXOffset[direction];
+        int row = MapY + KeypadDirectionYOffset[direction];
+        int col = MapX + KeypadDirectionXOffset[direction];
         // Get the index of our run direction in the cycle
         int cycleIndex = _cycleEntryPoint[direction];
         // If there's a wall ahead-left of us, remember that
@@ -1103,13 +1103,13 @@ internal class SaveGame
         {
             // Pick up the tile 0-2 rotations from the direction we previously moved
             newDirection = _directionCycle[_cycleEntryPoint[previousDirection] + i];
-            row = MapY + level.KeypadDirectionYOffset[newDirection];
-            col = MapX + level.KeypadDirectionXOffset[newDirection];
-            tile = level.Grid[row][col];
+            row = MapY + KeypadDirectionYOffset[newDirection];
+            col = MapX + KeypadDirectionXOffset[newDirection];
+            tile = Grid[row][col];
             // If there's a monster there we must stop moving
             if (tile.MonsterIndex != 0)
             {
-                Monster monster = level.Monsters[tile.MonsterIndex];
+                Monster monster = Monsters[tile.MonsterIndex];
                 if (monster.IsVisible)
                 {
                     return true;
@@ -1135,7 +1135,7 @@ internal class SaveGame
                 tileUnseen = false;
             }
             // We can enter the tile or it's unseen
-            if (tileUnseen || level.GridPassable(row, col))
+            if (tileUnseen || GridPassable(row, col))
             {
                 if (_findOpenarea)
                 {
@@ -1194,9 +1194,9 @@ internal class SaveGame
             for (i = -searchWidth; i < 0; i++)
             {
                 newDirection = _directionCycle[_cycleEntryPoint[previousDirection] + i];
-                row = MapY + level.KeypadDirectionYOffset[newDirection];
-                col = MapX + level.KeypadDirectionXOffset[newDirection];
-                tile = level.Grid[row][col];
+                row = MapY + KeypadDirectionYOffset[newDirection];
+                col = MapX + KeypadDirectionXOffset[newDirection];
+                tile = Grid[row][col];
                 if (tile.TileFlags.IsClear(GridTile.PlayerMemorized) || !tile.FeatureType.IsWall)
                 {
                     if (_findBreakright)
@@ -1216,9 +1216,9 @@ internal class SaveGame
             for (i = searchWidth; i > 0; i--)
             {
                 newDirection = _directionCycle[_cycleEntryPoint[previousDirection] + i];
-                row = MapY + level.KeypadDirectionYOffset[newDirection];
-                col = MapX + level.KeypadDirectionXOffset[newDirection];
-                tile = level.Grid[row][col];
+                row = MapY + KeypadDirectionYOffset[newDirection];
+                col = MapX + KeypadDirectionXOffset[newDirection];
+                tile = Grid[row][col];
                 if (tile.TileFlags.IsClear(GridTile.PlayerMemorized) || !tile.FeatureType.IsWall)
                 {
                     if (_findBreakleft)
@@ -1252,8 +1252,8 @@ internal class SaveGame
             // if we don't see a wall in one of our two options, take that one
             else
             {
-                row = MapY + level.KeypadDirectionYOffset[option];
-                col = MapX + level.KeypadDirectionXOffset[option];
+                row = MapY + KeypadDirectionYOffset[option];
+                col = MapX + KeypadDirectionXOffset[option];
                 if (!SeeWall(option, row, col) || !SeeWall(checkDir, row, col))
                 {
                     if (SeeNothing(option, row, col) && SeeNothing(option2, row, col))
@@ -1286,20 +1286,20 @@ internal class SaveGame
     /// <returns> True if we can see a wall, false if not </returns>
     public bool SeeWall(int direction, int y, int x)
     {
-        y += Level.KeypadDirectionYOffset[direction];
-        x += Level.KeypadDirectionXOffset[direction];
+        y += KeypadDirectionYOffset[direction];
+        x += KeypadDirectionXOffset[direction];
         // Out of bounds is not a wall
-        if (!Level.InBounds2(y, x))
+        if (!InBounds2(y, x))
         {
             return false;
         }
         // Any passable grid is okay
-        if (Level.GridPassable(y, x))
+        if (GridPassable(y, x))
         {
             return false;
         }
         // If we don't know what's there it's okay
-        if (Level.Grid[y][x].TileFlags.IsClear(GridTile.PlayerMemorized))
+        if (Grid[y][x].TileFlags.IsClear(GridTile.PlayerMemorized))
         {
             return false;
         }
@@ -1316,25 +1316,25 @@ internal class SaveGame
     /// <returns> </returns>
     private bool SeeNothing(int direction, int y, int x)
     {
-        y += Level.KeypadDirectionYOffset[direction];
-        x += Level.KeypadDirectionXOffset[direction];
+        y += KeypadDirectionYOffset[direction];
+        x += KeypadDirectionXOffset[direction];
         // Out of bounds is empty
-        if (!Level.InBounds2(y, x))
+        if (!InBounds2(y, x))
         {
             return true;
         }
         // Unknown tiles are not empty
-        if (Level.Grid[y][x].TileFlags.IsSet(GridTile.PlayerMemorized))
+        if (Grid[y][x].TileFlags.IsSet(GridTile.PlayerMemorized))
         {
             return false;
         }
         // Anything we can walk through is empty
-        if (!Level.GridPassable(y, x))
+        if (!GridPassable(y, x))
         {
             return true;
         }
         // It's empty if we can't see it
-        return !Level.PlayerCanSeeBold(y, x);
+        return !PlayerCanSeeBold(y, x);
     }
 
     private Item? MakeFixedArtifact()
@@ -1362,9 +1362,9 @@ internal class SaveGame
                 return null;
             }
             ItemFactory kIdx = aPtr.BaseItemCategory;
-            if (kIdx.Level > Level.ObjectLevel)
+            if (kIdx.Level > ObjectLevel)
             {
-                int d = (kIdx.Level - Level.ObjectLevel) * 5;
+                int d = (kIdx.Level - ObjectLevel) * 5;
                 if (Program.Rng.RandomLessThan(d) != 0)
                 {
                     continue;
@@ -1380,7 +1380,7 @@ internal class SaveGame
     public Item? MakeObject(bool good, bool great, bool doNotAllowChestToBeCreated)
     {
         int prob = good ? 10 : 1000;
-        int baselevel = good ? Level.ObjectLevel + 10 : Level.ObjectLevel;
+        int baselevel = good ? ObjectLevel + 10 : ObjectLevel;
 
         Item? item = null;
 
@@ -1400,13 +1400,13 @@ internal class SaveGame
             }
             item = kIdx.CreateItem();
         }
-        item.ApplyMagic(Level.ObjectLevel, true, good, great, null);
+        item.ApplyMagic(ObjectLevel, true, good, great, null);
         item.Count = item.MakeObjectCount;
         if (!item.IsCursed() && !item.IsBroken() && item.Factory.Level > Difficulty)
         {
             if (Level != null)
             {
-                Level.TreasureRating += item.Factory.Level - Difficulty;
+                TreasureRating += item.Factory.Level - Difficulty;
             }
         }
         return item;
@@ -1421,12 +1421,12 @@ internal class SaveGame
         if (goldType == null)
         {
             // The type of gold to be created depends on the level it is found.
-            goldType = ((Program.Rng.DieRoll(Level.ObjectLevel + 2) + 2) / 2) - 1;
+            goldType = ((Program.Rng.DieRoll(ObjectLevel + 2) + 2) / 2) - 1;
 
             // A great find has some probability.
             if (Program.Rng.RandomLessThan(OneInProbabilityGoldItemIsGreat) == 0)
             {
-                goldType += Program.Rng.DieRoll(Level.ObjectLevel + 1);
+                goldType += Program.Rng.DieRoll(ObjectLevel + 1);
             }
         }
 
@@ -1704,7 +1704,7 @@ internal class SaveGame
         ApplyFlavourVisuals();
         if (Level == null)
         {
-            Level = new Level(this);
+            InitializeLevel();
             GenerateNewLevel();
         }
         FullScreenOverlay = false;
@@ -1718,10 +1718,10 @@ internal class SaveGame
         // Repeat the dungeon loop until normal game ends or the shutdown flag is raised.
         while (!Shutdown)
         {
-            // Play the current dungeon level.
+            // Play the current dungeon 
             DungeonLoop();
 
-            // We need to detect if the shutdown has happened, or if we are changing the dungeon level.
+            // We need to detect if the shutdown has happened, or if we are changing the dungeon 
             if (!Shutdown)
             {
                 // The dungeon level is changing.
@@ -1736,8 +1736,8 @@ internal class SaveGame
                 {
                     break;
                 }
-                _petList = Level.GetPets();
-                Level.WipeMList();
+                _petList = GetPets();
+                WipeMList();
                 MsgPrint(null);
                 if (IsDead)
                 {
@@ -1747,9 +1747,9 @@ internal class SaveGame
                     ExPlayer = new ExPlayer(Gender, Race, RaceAtBirth, BaseCharacterClass?.GetType().Name, PrimaryRealm, SecondaryRealm, Name, ExperienceLevel, Generation);
                     break;
                 }
-                Level = new Level(this);
+                InitializeLevel();
                 GenerateNewLevel();
-                Level.ReplacePets(MapY, MapX, _petList);
+                ReplacePets(MapY, MapX, _petList);
             }
         }
         ConsoleViewPort.GameStopped();
@@ -1800,7 +1800,7 @@ internal class SaveGame
                 case 8:
                 case 9:
                 case 18:
-                    Level.SummonSpecific(MapY, MapX, Difficulty, null);
+                    SummonSpecific(MapY, MapX, Difficulty, null);
                     break;
 
                 case 10:
@@ -2045,7 +2045,7 @@ internal class SaveGame
     /// <returns></returns>
     public bool SelectItem(out Item? itemIndex, string prompt, bool canChooseFromEquipment, bool canChooseFromInventory, bool canChooseFromFloor, IItemFilter? itemFilter)
     {
-        GridTile tile = Level.Grid[MapY][MapX];
+        GridTile tile = Grid[MapY][MapX];
         bool allowFloor = false;
         MsgPrint(null);
         bool done = false;
@@ -2337,7 +2337,7 @@ internal class SaveGame
         int number = 0;
         int qIdx = 0;
         bool quest = false;
-        Monster mPtr = Level.Monsters[mIdx];
+        Monster mPtr = Monsters[mIdx];
         MonsterRace rPtr = mPtr.Race;
         if (rPtr == null)
         {
@@ -2359,13 +2359,13 @@ internal class SaveGame
         foreach (Item oPtr in mPtr.Items)
         {
             oPtr.HoldingMonsterIndex = 0;
-            Level.DropNear(oPtr, -1, y, x);
+            DropNear(oPtr, -1, y, x);
         }
         if (mPtr.StolenGold > 0)
         {
             Item oPtr = MakeGold(10);
             oPtr.TypeSpecificValue = mPtr.StolenGold;
-            Level.DropNear(oPtr, -1, y, x);
+            DropNear(oPtr, -1, y, x);
         }
         mPtr.Items.Clear();
         if (rPtr.Drop60 && Program.Rng.RandomLessThan(100) < 60)
@@ -2410,13 +2410,13 @@ internal class SaveGame
                 Quests[qIdx].Level = 0;
             }
         }
-        Level.ObjectLevel = (Difficulty + rPtr.Level) / 2;
+        ObjectLevel = (Difficulty + rPtr.Level) / 2;
         for (int j = 0; j < number; j++)
         {
             if (doGold && (!doItem || Program.Rng.RandomLessThan(100) < 50))
             {
                 GoldItem qPtr = MakeGold(forceCoin);
-                Level.DropNear(qPtr, -1, y, x);
+                DropNear(qPtr, -1, y, x);
                 dumpGold++;
             }
             else
@@ -2426,7 +2426,7 @@ internal class SaveGame
                     Item? qPtr = this.MakeObject(good, great, false);
                     if (qPtr != null)
                     {
-                        Level.DropNear(qPtr, -1, y, x);
+                        DropNear(qPtr, -1, y, x);
                         dumpItem++;
                     }
                 }
@@ -2435,16 +2435,16 @@ internal class SaveGame
                     Item? qPtr = this.MakeObject(true, true, false);
                     if (qPtr != null)
                     {
-                        Level.DropNear(qPtr, -1, y, x);
+                        DropNear(qPtr, -1, y, x);
                         dumpItem++;
                     }
                 }
             }
         }
-        Level.ObjectLevel = Difficulty;
+        ObjectLevel = Difficulty;
         if (visible && (dumpItem != 0 || dumpGold != 0))
         {
-            Level.LoreTreasure(mIdx, dumpItem, dumpGold);
+            LoreTreasure(mIdx, dumpItem, dumpGold);
         }
         if (!rPtr.Guardian)
         {
@@ -2463,16 +2463,16 @@ internal class SaveGame
         {
             if (CurrentDepth < CurDungeon.MaxLevel)
             {
-                while (!Level.CaveValidBold(y, x))
+                while (!CaveValidBold(y, x))
                 {
                     const int d = 1;
-                    Level.Scatter(out int ny, out int nx, y, x, d);
+                    Scatter(out int ny, out int nx, y, x, d);
                     y = ny;
                     x = nx;
                 }
                 DeleteObject(y, x);
                 MsgPrint("A magical stairway appears...");
-                Level.CaveSetFeat(y, x, CurDungeon.Tower ? "UpStair" : "DownStair");
+                CaveSetFeat(y, x, CurDungeon.Tower ? "UpStair" : "DownStair");
                 UpdateScentFlaggedAction.Set();
                 UpdateMonstersFlaggedAction.Set();
                 UpdateLightFlaggedAction.Set();
@@ -2507,24 +2507,24 @@ internal class SaveGame
         {
             number = 0;
         }
-        Level.ObjectLevel = Math.Abs(chestItem.TypeSpecificValue) + 10;
+        ObjectLevel = Math.Abs(chestItem.TypeSpecificValue) + 10;
         for (; number > 0; --number)
         {
             if (small && Program.Rng.RandomLessThan(100) < 75)
             {
                 Item qPtr = MakeGold();
-                Level.DropNear(qPtr, -1, y, x);
+                DropNear(qPtr, -1, y, x);
             }
             else
             {
                 Item qPtr = this.MakeObject(false, false, true);
                 if (qPtr != null)
                 {
-                    Level.DropNear(qPtr, -1, y, x);
+                    DropNear(qPtr, -1, y, x);
                 }
             }
         }
-        Level.ObjectLevel = Difficulty;
+        ObjectLevel = Difficulty;
         chestItem.TypeSpecificValue = 0;
         chestItem.BecomeKnown();
     }
@@ -2806,8 +2806,8 @@ internal class SaveGame
         CommandDirection = 0;
         TargetWho = 0;
         HealthTrack(0);
-        Level.ShimmerMonsters = true;
-        Level.RepairMonsters = true;
+        ShimmerMonsters = true;
+        RepairMonsters = true;
         Disturb(true);
         if (MaxLevelGained < ExperienceLevel)
         {
@@ -2835,16 +2835,16 @@ internal class SaveGame
         }
         if (CreateUpStair || CreateDownStair)
         {
-            if (Level.CaveValidBold(MapY, MapX))
+            if (CaveValidBold(MapY, MapX))
             {
                 DeleteObject(MapY, MapX);
-                Level.CaveSetFeat(MapY, MapX, CreateDownStair ? "DownStair" : "UpStair");
+                CaveSetFeat(MapY, MapX, CreateDownStair ? "DownStair" : "UpStair");
             }
             CreateDownStair = false;
             CreateUpStair = false;
         }
         RecenterScreenAroundPlayer();
-        Level.PanelBoundsCenter();
+        PanelBoundsCenter();
         MsgPrint(null);
         CharacterXtra = true;
         RedrawEquippyFlaggedAction.Set();
@@ -2883,8 +2883,8 @@ internal class SaveGame
         {
             QuestDiscovery();
         }
-        Level.MonsterLevel = Difficulty;
-        Level.ObjectLevel = Difficulty;
+        MonsterLevel = Difficulty;
+        ObjectLevel = Difficulty;
         HackMind = true;
         if (CameFrom == LevelStart.StartHouse)
         {
@@ -2915,20 +2915,20 @@ internal class SaveGame
         }
         while (!Shutdown)
         {
-            if (Level.MCnt + 32 > Constants.MaxMIdx)
+            if (MCnt + 32 > Constants.MaxMIdx)
             {
-                Level.CompactMonsters(64);
+                CompactMonsters(64);
             }
-            if (Level.MCnt + 32 < Level.MMax)
+            if (MCnt + 32 < MMax)
             {
-                Level.CompactMonsters(0);
+                CompactMonsters(0);
             }
             ProcessPlayer();
 
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
-            Level.MoveCursorRelative(MapY, MapX);
+            MoveCursorRelative(MapY, MapX);
             if (!Playing || IsDead || NewLevelFlag)
             {
                 break;
@@ -2939,7 +2939,7 @@ internal class SaveGame
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
-            Level.MoveCursorRelative(MapY, MapX);
+            MoveCursorRelative(MapY, MapX);
             if (!Playing || IsDead || NewLevelFlag)
             {
                 break;
@@ -2948,7 +2948,7 @@ internal class SaveGame
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
-            Level.MoveCursorRelative(MapY, MapX);
+            MoveCursorRelative(MapY, MapX);
             if (!Playing || IsDead || NewLevelFlag)
             {
                 break;
@@ -3217,7 +3217,7 @@ internal class SaveGame
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
-            Level.MoveCursorRelative(MapY, MapX);
+            MoveCursorRelative(MapY, MapX);
             UpdateScreen();
             const int item = InventorySlot.PackCount;
             Item? oPtr = GetInventoryItem(item);
@@ -3227,7 +3227,7 @@ internal class SaveGame
                 MsgPrint("Your pack overflows!");
                 string oName = oPtr.Description(true, 3);
                 MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
-                Level.DropNear(oPtr, 0, MapY, MapX);
+                DropNear(oPtr, 0, MapY, MapX);
                 InvenItemIncrease(item, -255);
                 InvenItemDescribe(item);
                 InvenItemOptimize(item);
@@ -3268,7 +3268,7 @@ internal class SaveGame
             }
             else
             {
-                Level.MoveCursorRelative(MapY, MapX);
+                MoveCursorRelative(MapY, MapX);
                 RequestCommand(false);
                 ProcessCommand(false);
             }
@@ -3276,12 +3276,12 @@ internal class SaveGame
             {
                 Energy -= EnergyUse;
                 int i;
-                if (Level.ShimmerMonsters)
+                if (ShimmerMonsters)
                 {
-                    Level.ShimmerMonsters = false;
-                    for (i = 1; i < Level.MMax; i++)
+                    ShimmerMonsters = false;
+                    for (i = 1; i < MMax; i++)
                     {
-                        Monster mPtr = Level.Monsters[i];
+                        Monster mPtr = Monsters[i];
                         if (mPtr.Race == null)
                         {
                             continue;
@@ -3291,16 +3291,16 @@ internal class SaveGame
                         {
                             continue;
                         }
-                        Level.ShimmerMonsters = true;
-                        Level.RedrawSingleLocation(mPtr.MapY, mPtr.MapX);
+                        ShimmerMonsters = true;
+                        RedrawSingleLocation(mPtr.MapY, mPtr.MapX);
                     }
                 }
-                if (Level.RepairMonsters)
+                if (RepairMonsters)
                 {
-                    Level.RepairMonsters = false;
-                    for (i = 1; i < Level.MMax; i++)
+                    RepairMonsters = false;
+                    for (i = 1; i < MMax; i++)
                     {
-                        Monster mPtr = Level.Monsters[i];
+                        Monster mPtr = Monsters[i];
                         if (mPtr.Race == null)
                         {
                             continue;
@@ -3314,14 +3314,14 @@ internal class SaveGame
                             if ((mPtr.IndividualMonsterFlags & Constants.MflagShow) != 0)
                             {
                                 mPtr.IndividualMonsterFlags &= ~Constants.MflagShow;
-                                Level.RepairMonsters = true;
+                                RepairMonsters = true;
                             }
                             else
                             {
                                 mPtr.IndividualMonsterFlags &= ~Constants.MflagMark;
                                 mPtr.IsVisible = false;
-                                Level.UpdateMonsterVisibility(i, false);
-                                Level.RedrawSingleLocation(mPtr.MapY, mPtr.MapX);
+                                UpdateMonsterVisibility(i, false);
+                                RedrawSingleLocation(mPtr.MapY, mPtr.MapX);
                             }
                         }
                     }
@@ -3339,47 +3339,47 @@ internal class SaveGame
         if (GameTime.IsBirthday)
         {
             MsgPrint("Happy Birthday!");
-            Level.Acquirement(MapY, MapX, Program.Rng.DieRoll(2) + 1, true);
+            Acquirement(MapY, MapX, Program.Rng.DieRoll(2) + 1, true);
             Age++;
         }
         if (GameTime.IsNewYear)
         {
             MsgPrint("Happy New Year!");
-            Level.Acquirement(MapY, MapX, Program.Rng.DieRoll(2) + 1, true);
+            Acquirement(MapY, MapX, Program.Rng.DieRoll(2) + 1, true);
         }
         if (GameTime.IsHalloween)
         {
             MsgPrint("All Hallows Eve and the ghouls come out to play...");
-            Level.SummonSpecific(MapY, MapX, Difficulty, new UndeadMonsterSelector());
+            SummonSpecific(MapY, MapX, Difficulty, new UndeadMonsterSelector());
         }
         if (CurrentDepth <= 0)
         {
             if (GameTime.IsDawn)
             {
                 MsgPrint("The sun has risen.");
-                for (int y = 0; y < Level.CurHgt; y++)
+                for (int y = 0; y < CurHgt; y++)
                 {
-                    for (int x = 0; x < Level.CurWid; x++)
+                    for (int x = 0; x < CurWid; x++)
                     {
-                        GridTile cPtr = Level.Grid[y][x];
+                        GridTile cPtr = Grid[y][x];
                         cPtr.TileFlags.Set(GridTile.SelfLit);
                         cPtr.TileFlags.Set(GridTile.PlayerMemorized);
-                        Level.NoteSpot(y, x);
+                        NoteSpot(y, x);
                     }
                 }
             }
             else if (GameTime.IsDusk)
             {
                 MsgPrint("The sun has fallen.");
-                for (int y = 0; y < Level.CurHgt; y++)
+                for (int y = 0; y < CurHgt; y++)
                 {
-                    for (int x = 0; x < Level.CurWid; x++)
+                    for (int x = 0; x < CurWid; x++)
                     {
-                        GridTile cPtr = Level.Grid[y][x];
+                        GridTile cPtr = Grid[y][x];
                         if (cPtr.FeatureType.IsOpenFloor)
                         {
                             cPtr.TileFlags.Clear(GridTile.SelfLit);
-                            Level.NoteSpot(y, x);
+                            NoteSpot(y, x);
                         }
                     }
                 }
@@ -3412,7 +3412,7 @@ internal class SaveGame
         }
         if (Program.Rng.RandomLessThan(Constants.MaxMAllocChance) == 0)
         {
-            Level.AllocMonster(Constants.MaxSight + 5, false);
+            AllocMonster(Constants.MaxSight + 5, false);
         }
         if (GameTime.IsTurnHundred)
         {
@@ -3443,7 +3443,7 @@ internal class SaveGame
             caveNoRegen = true;
         }
 
-        if (!Level.GridPassable(MapY, MapX))
+        if (!GridPassable(MapY, MapX))
         {
             caveNoRegen = true;
             if (TimedInvulnerability.TurnsRemaining == 0 && TimedEtherealness.TurnsRemaining == 0 && (Health > ExperienceLevel / 5 || Race.IsEthereal))
@@ -3700,15 +3700,18 @@ internal class SaveGame
             NoticeCombineFlaggedAction.Set();
         }
         SenseInventory();
-        for (int y = 1; y < Level.CurHgt - 1; y++)
+        for (int y = 1; y < CurHgt - 1; y++)
         {
-            for (int x = 1; x < Level.CurWid - 1; x++)
+            for (int x = 1; x < CurWid - 1; x++)
             {
-                GridTile cPtr = Level.Grid[y][x];
+                GridTile cPtr = Grid[y][x];
                 cPtr.ProcessWorld();
             }
         }
-        Level.ProcessWorld();
+        foreach (Monster monster in Monsters)
+        {
+            monster.ProcessWorld();
+        }
 
         if (WordOfRecallDelay != 0)
         {
@@ -3796,9 +3799,9 @@ internal class SaveGame
 
     private void RegenMonsters()
     {
-        for (int i = 1; i < Level.MMax; i++)
+        for (int i = 1; i < MMax; i++)
         {
-            Monster mPtr = Level.Monsters[i];
+            Monster mPtr = Monsters[i];
             MonsterRace rPtr = mPtr.Race;
             if (mPtr.Race == null)
             {
@@ -3880,70 +3883,70 @@ internal class SaveGame
             {
                 case 1:
                 case 2:
-                    Level.SummonSpecific(MapY, MapX, Difficulty, new AntMonsterSelector());
+                    SummonSpecific(MapY, MapX, Difficulty, new AntMonsterSelector());
                     break;
 
                 case 3:
                 case 4:
-                    Level.SummonSpecific(MapY, MapX, Difficulty, new SpiderMonsterSelector());
+                    SummonSpecific(MapY, MapX, Difficulty, new SpiderMonsterSelector());
                     break;
 
                 case 5:
                 case 6:
-                    Level.SummonSpecific(MapY, MapX, Difficulty, new HoundMonsterSelector());
+                    SummonSpecific(MapY, MapX, Difficulty, new HoundMonsterSelector());
                     break;
 
                 case 7:
                 case 8:
-                    Level.SummonSpecific(MapY, MapX, Difficulty, new HydraMonsterSelector());
+                    SummonSpecific(MapY, MapX, Difficulty, new HydraMonsterSelector());
                     break;
 
                 case 9:
                 case 10:
-                    Level.SummonSpecific(MapY, MapX, Difficulty, new CthuloidMonsterSelector());
+                    SummonSpecific(MapY, MapX, Difficulty, new CthuloidMonsterSelector());
                     break;
 
                 case 11:
                 case 12:
-                    Level.SummonSpecific(MapY, MapX, Difficulty, new UndeadMonsterSelector());
+                    SummonSpecific(MapY, MapX, Difficulty, new UndeadMonsterSelector());
                     break;
 
                 case 13:
                 case 14:
-                    Level.SummonSpecific(MapY, MapX, Difficulty, new DragonMonsterSelector());
+                    SummonSpecific(MapY, MapX, Difficulty, new DragonMonsterSelector());
                     break;
 
                 case 15:
                 case 16:
-                    Level.SummonSpecific(MapY, MapX, Difficulty, new DemonMonsterSelector());
+                    SummonSpecific(MapY, MapX, Difficulty, new DemonMonsterSelector());
                     break;
 
                 case 17:
-                    Level.SummonSpecific(MapY, MapX, Difficulty, new GooMonsterSelector());
+                    SummonSpecific(MapY, MapX, Difficulty, new GooMonsterSelector());
                     break;
 
                 case 18:
                 case 19:
-                    Level.SummonSpecific(MapY, MapX, Difficulty, new UniqueMonsterSelector());
+                    SummonSpecific(MapY, MapX, Difficulty, new UniqueMonsterSelector());
                     break;
 
                 case 20:
                 case 21:
-                    Level.SummonSpecific(MapY, MapX, Difficulty, new HiUndeadMonsterSelector());
+                    SummonSpecific(MapY, MapX, Difficulty, new HiUndeadMonsterSelector());
                     break;
 
                 case 22:
                 case 23:
-                    Level.SummonSpecific(MapY, MapX, Difficulty, new HiDragonMonsterSelector());
+                    SummonSpecific(MapY, MapX, Difficulty, new HiDragonMonsterSelector());
                     break;
 
                 case 24:
                 case 25:
-                    Level.SummonSpecific(MapY, MapX, 100, new ReaverMonsterSelector());
+                    SummonSpecific(MapY, MapX, 100, new ReaverMonsterSelector());
                     break;
 
                 default:
-                    Level.SummonSpecific(MapY, MapX, (Difficulty * 3 / 2) + 5, null);
+                    SummonSpecific(MapY, MapX, (Difficulty * 3 / 2) + 5, null);
                     break;
             }
         }
@@ -3953,9 +3956,9 @@ internal class SaveGame
     {
         bool sleep = false;
         bool speed = false;
-        for (int i = 0; i < Level.MMax; i++)
+        for (int i = 0; i < MMax; i++)
         {
-            Monster mPtr = Level.Monsters[i];
+            Monster mPtr = Monsters[i];
             MonsterRace rPtr = mPtr.Race;
             if (mPtr.Race == null)
             {
@@ -3973,7 +3976,7 @@ internal class SaveGame
                     sleep = true;
                 }
             }
-            if (Level.PlayerHasLosBold(mPtr.MapY, mPtr.MapX))
+            if (PlayerHasLosBold(mPtr.MapY, mPtr.MapX))
             {
                 if (mPtr.Speed < rPtr.Speed + 10)
                 {
@@ -4405,9 +4408,9 @@ internal class SaveGame
     {
         int msec = Constants.DelayFactorInMilliseconds;
         GetCom("Choose a monster race (by symbol) to carnage: ", out char typ);
-        for (int i = 1; i < Level.MMax; i++)
+        for (int i = 1; i < MMax; i++)
         {
-            Monster mPtr = Level.Monsters[i];
+            Monster mPtr = Monsters[i];
             MonsterRace rPtr = mPtr.Race;
             if (mPtr.Race == null)
             {
@@ -4425,12 +4428,12 @@ internal class SaveGame
             {
                 continue;
             }
-            Level.DeleteMonsterByIndex(i, true);
+            DeleteMonsterByIndex(i, true);
             if (playerCast)
             {
                 TakeHit(Program.Rng.DieRoll(4), "the strain of casting Carnage");
             }
-            Level.MoveCursorRelative(MapY, MapX);
+            MoveCursorRelative(MapY, MapX);
             RedrawHpFlaggedAction.Set();
             HandleStuff();
             UpdateScreen();
@@ -4527,16 +4530,16 @@ internal class SaveGame
         {
             for (x = x1 - r; x <= x1 + r; x++)
             {
-                if (!Level.InBounds(y, x))
+                if (!InBounds(y, x))
                 {
                     continue;
                 }
-                int k = Level.Distance(y1, x1, y, x);
+                int k = Distance(y1, x1, y, x);
                 if (k > r)
                 {
                     continue;
                 }
-                GridTile cPtr = Level.Grid[y][x];
+                GridTile cPtr = Grid[y][x];
                 cPtr.TileFlags.Clear(GridTile.InRoom | GridTile.InVault);
                 cPtr.TileFlags.Clear(GridTile.PlayerMemorized | GridTile.SelfLit);
                 if (x == MapX && y == MapY)
@@ -4548,8 +4551,8 @@ internal class SaveGame
                 {
                     continue;
                 }
-                Level.DeleteMonster(y, x);
-                if (Level.CaveValidBold(y, x))
+                DeleteMonster(y, x);
+                if (CaveValidBold(y, x))
                 {
                     DeleteObject(y, x);
                     int t = Program.Rng.RandomLessThan(200);
@@ -4617,19 +4620,19 @@ internal class SaveGame
     public bool DetectDoors()
     {
         bool detect = false;
-        for (int y = Level.PanelRowMin; y <= Level.PanelRowMax; y++)
+        for (int y = PanelRowMin; y <= PanelRowMax; y++)
         {
-            for (int x = Level.PanelColMin; x <= Level.PanelColMax; x++)
+            for (int x = PanelColMin; x <= PanelColMax; x++)
             {
-                GridTile cPtr = Level.Grid[y][x];
+                GridTile cPtr = Grid[y][x];
                 if (cPtr.FeatureType.IsSecretDoor)
                 {
-                    Level.ReplaceSecretDoor(y, x);
+                    ReplaceSecretDoor(y, x);
                 }
                 if (cPtr.FeatureType.IsClosedDoor || cPtr.FeatureType.IsOpenDoor)
                 {
                     cPtr.TileFlags.Set(GridTile.PlayerMemorized);
-                    Level.RedrawSingleLocation(y, x);
+                    RedrawSingleLocation(y, x);
                     detect = true;
                 }
             }
@@ -4644,9 +4647,9 @@ internal class SaveGame
     public bool DetectMonstersEvil()
     {
         bool flag = false;
-        for (int i = 1; i < Level.MMax; i++)
+        for (int i = 1; i < MMax; i++)
         {
-            Monster mPtr = Level.Monsters[i];
+            Monster mPtr = Monsters[i];
             MonsterRace rPtr = mPtr.Race;
             if (mPtr.Race == null)
             {
@@ -4654,17 +4657,17 @@ internal class SaveGame
             }
             int y = mPtr.MapY;
             int x = mPtr.MapX;
-            if (!Level.PanelContains(y, x))
+            if (!PanelContains(y, x))
             {
                 continue;
             }
             if (rPtr.Evil)
             {
                 rPtr.Knowledge.Characteristics.Evil = true;
-                Level.RepairMonsters = true;
+                RepairMonsters = true;
                 mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
                 mPtr.IsVisible = true;
-                Level.RedrawSingleLocation(y, x);
+                RedrawSingleLocation(y, x);
                 flag = true;
             }
         }
@@ -4678,9 +4681,9 @@ internal class SaveGame
     public bool DetectMonstersInvis()
     {
         bool flag = false;
-        for (int i = 1; i < Level.MMax; i++)
+        for (int i = 1; i < MMax; i++)
         {
-            Monster mPtr = Level.Monsters[i];
+            Monster mPtr = Monsters[i];
             MonsterRace rPtr = mPtr.Race;
             if (mPtr.Race == null)
             {
@@ -4688,17 +4691,17 @@ internal class SaveGame
             }
             int y = mPtr.MapY;
             int x = mPtr.MapX;
-            if (!Level.PanelContains(y, x))
+            if (!PanelContains(y, x))
             {
                 continue;
             }
             if (rPtr.Invisible)
             {
                 rPtr.Knowledge.Characteristics.Invisible = true;
-                Level.RepairMonsters = true;
+                RepairMonsters = true;
                 mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
                 mPtr.IsVisible = true;
-                Level.RedrawSingleLocation(y, x);
+                RedrawSingleLocation(y, x);
                 flag = true;
             }
         }
@@ -4712,9 +4715,9 @@ internal class SaveGame
     public void DetectMonstersNonliving()
     {
         bool flag = false;
-        for (int i = 1; i < Level.MMax; i++)
+        for (int i = 1; i < MMax; i++)
         {
-            Monster mPtr = Level.Monsters[i];
+            Monster mPtr = Monsters[i];
             MonsterRace rPtr = mPtr.Race;
             if (mPtr.Race == null)
             {
@@ -4722,17 +4725,17 @@ internal class SaveGame
             }
             int y = mPtr.MapY;
             int x = mPtr.MapX;
-            if (!Level.PanelContains(y, x))
+            if (!PanelContains(y, x))
             {
                 continue;
             }
             if (rPtr.Nonliving || rPtr.Undead ||
                 rPtr.Cthuloid || rPtr.Demon)
             {
-                Level.RepairMonsters = true;
+                RepairMonsters = true;
                 mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
                 mPtr.IsVisible = true;
-                Level.RedrawSingleLocation(y, x);
+                RedrawSingleLocation(y, x);
                 flag = true;
             }
         }
@@ -4745,9 +4748,9 @@ internal class SaveGame
     public bool DetectMonstersNormal()
     {
         bool flag = false;
-        for (int i = 1; i < Level.MMax; i++)
+        for (int i = 1; i < MMax; i++)
         {
-            Monster mPtr = Level.Monsters[i];
+            Monster mPtr = Monsters[i];
             MonsterRace rPtr = mPtr.Race;
             if (mPtr.Race == null)
             {
@@ -4755,16 +4758,16 @@ internal class SaveGame
             }
             int y = mPtr.MapY;
             int x = mPtr.MapX;
-            if (!Level.PanelContains(y, x))
+            if (!PanelContains(y, x))
             {
                 continue;
             }
             if (!rPtr.Invisible || HasSeeInvisibility || TimedSeeInvisibility.TurnsRemaining != 0)
             {
-                Level.RepairMonsters = true;
+                RepairMonsters = true;
                 mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
                 mPtr.IsVisible = true;
-                Level.RedrawSingleLocation(y, x);
+                RedrawSingleLocation(y, x);
                 flag = true;
             }
         }
@@ -4778,21 +4781,21 @@ internal class SaveGame
     public bool DetectObjectsGold()
     {
         bool detect = false;
-        for (int y = 1; y < Level.CurHgt - 1; y++)
+        for (int y = 1; y < CurHgt - 1; y++)
         {
-            for (int x = 1; x < Level.CurWid - 1; x++)
+            for (int x = 1; x < CurWid - 1; x++)
             {
-                GridTile cPtr = Level.Grid[y][x];
+                GridTile cPtr = Grid[y][x];
                 foreach (Item oPtr in cPtr.Items)
                 {
-                    if (!Level.PanelContains(y, x))
+                    if (!PanelContains(y, x))
                     {
                         continue;
                     }
                     if (oPtr.Category == ItemTypeEnum.Gold)
                     {
                         oPtr.Marked = true;
-                        Level.RedrawSingleLocation(y, x);
+                        RedrawSingleLocation(y, x);
                         detect = true;
                     }
                 }
@@ -4813,14 +4816,14 @@ internal class SaveGame
     public void DetectObjectsMagic()
     {
         bool detect = false;
-        for (int y = 1; y < Level.CurHgt - 1; y++)
+        for (int y = 1; y < CurHgt - 1; y++)
         {
-            for (int x = 1; x < Level.CurWid - 1; x++)
+            for (int x = 1; x < CurWid - 1; x++)
             {
-                GridTile cPtr = Level.Grid[y][x];
+                GridTile cPtr = Grid[y][x];
                 foreach (Item oPtr in cPtr.Items)
                 {
-                    if (!Level.PanelContains(y, x))
+                    if (!PanelContains(y, x))
                     {
                         continue;
                     }
@@ -4834,7 +4837,7 @@ internal class SaveGame
                         oPtr.BonusArmorClass > 0 || oPtr.BonusToHit + oPtr.BonusDamage > 0)
                     {
                         oPtr.Marked = true;
-                        Level.RedrawSingleLocation(y, x);
+                        RedrawSingleLocation(y, x);
                         detect = true;
                     }
                 }
@@ -4849,21 +4852,21 @@ internal class SaveGame
     public bool DetectObjectsNormal()
     {
         bool detect = false;
-        for (int y = 1; y < Level.CurHgt - 1; y++)
+        for (int y = 1; y < CurHgt - 1; y++)
         {
-            for (int x = 1; x < Level.CurWid - 1; x++)
+            for (int x = 1; x < CurWid - 1; x++)
             {
-                GridTile cPtr = Level.Grid[y][x];
+                GridTile cPtr = Grid[y][x];
                 foreach (Item oPtr in cPtr.Items)
                 {
-                    if (!Level.PanelContains(y, x))
+                    if (!PanelContains(y, x))
                     {
                         continue;
                     }
                     if (oPtr.Category != ItemTypeEnum.Gold)
                     {
                         oPtr.Marked = true;
-                        Level.RedrawSingleLocation(y, x);
+                        RedrawSingleLocation(y, x);
                         detect = true;
                     }
                 }
@@ -4883,15 +4886,15 @@ internal class SaveGame
     public bool DetectStairs()
     {
         bool detect = false;
-        for (int y = Level.PanelRowMin; y <= Level.PanelRowMax; y++)
+        for (int y = PanelRowMin; y <= PanelRowMax; y++)
         {
-            for (int x = Level.PanelColMin; x <= Level.PanelColMax; x++)
+            for (int x = PanelColMin; x <= PanelColMax; x++)
             {
-                GridTile cPtr = Level.Grid[y][x];
+                GridTile cPtr = Grid[y][x];
                 if (cPtr.FeatureType.IsRevealedWithDetectStairsScript)
                 {
                     cPtr.TileFlags.Set(GridTile.PlayerMemorized);
-                    Level.RedrawSingleLocation(y, x);
+                    RedrawSingleLocation(y, x);
                     detect = true;
                 }
             }
@@ -4906,16 +4909,16 @@ internal class SaveGame
     public bool DetectTraps()
     {
         bool detect = false;
-        for (int y = Level.PanelRowMin; y <= Level.PanelRowMax; y++)
+        for (int y = PanelRowMin; y <= PanelRowMax; y++)
         {
-            for (int x = Level.PanelColMin; x <= Level.PanelColMax; x++)
+            for (int x = PanelColMin; x <= PanelColMax; x++)
             {
-                GridTile cPtr = Level.Grid[y][x];
+                GridTile cPtr = Grid[y][x];
                 cPtr.TileFlags.Set(GridTile.TrapsDetected);
-                Level.RedrawSingleLocation(y, x);
+                RedrawSingleLocation(y, x);
                 if (cPtr.FeatureType.IsUnidentifiedTrap)
                 {
-                    Level.PickTrap(y, x);
+                    PickTrap(y, x);
                 }
                 if (cPtr.FeatureType.IsTrap)
                 {
@@ -4936,11 +4939,11 @@ internal class SaveGame
     public bool DetectTreasure()
     {
         bool detect = false;
-        for (int y = Level.PanelRowMin; y <= Level.PanelRowMax; y++)
+        for (int y = PanelRowMin; y <= PanelRowMax; y++)
         {
-            for (int x = Level.PanelColMin; x <= Level.PanelColMax; x++)
+            for (int x = PanelColMin; x <= PanelColMax; x++)
             {
-                GridTile cPtr = Level.Grid[y][x];
+                GridTile cPtr = Grid[y][x];
                 if (cPtr.FeatureType.HiddenTreasureFor != null)
                 {
                     cPtr.SetFeature(cPtr.FeatureType.HiddenTreasureFor);
@@ -4948,7 +4951,7 @@ internal class SaveGame
                 if (cPtr.FeatureType.IsVisibleTreasure)
                 {
                     cPtr.TileFlags.Set(GridTile.PlayerMemorized);
-                    Level.RedrawSingleLocation(y, x);
+                    RedrawSingleLocation(y, x);
                     detect = true;
                 }
             }
@@ -5043,15 +5046,15 @@ internal class SaveGame
             {
                 yy = cy + dy;
                 xx = cx + dx;
-                if (!Level.InBounds(yy, xx))
+                if (!InBounds(yy, xx))
                 {
                     continue;
                 }
-                if (Level.Distance(cy, cx, yy, xx) > r)
+                if (Distance(cy, cx, yy, xx) > r)
                 {
                     continue;
                 }
-                cPtr = Level.Grid[yy][xx];
+                cPtr = Grid[yy][xx];
                 cPtr.TileFlags.Clear(GridTile.InRoom | GridTile.InVault);
                 cPtr.TileFlags.Clear(GridTile.SelfLit | GridTile.PlayerMemorized);
                 if (dx == 0 && dy == 0)
@@ -5073,9 +5076,9 @@ internal class SaveGame
         {
             for (i = 0; i < 8; i++)
             {
-                y = MapY + Level.KeypadDirectionYOffset[i];
-                x = MapX + Level.KeypadDirectionXOffset[i];
-                if (!Level.GridPassableNoCreature(y, x))
+                y = MapY + KeypadDirectionYOffset[i];
+                x = MapX + KeypadDirectionXOffset[i];
+                if (!GridPassableNoCreature(y, x))
                 {
                     continue;
                 }
@@ -5095,17 +5098,17 @@ internal class SaveGame
             {
                 case 1:
                     {
-                        MsgPrint("The Level.Grid ceiling collapses!");
+                        MsgPrint("The Grid ceiling collapses!");
                         break;
                     }
                 case 2:
                     {
-                        MsgPrint("The Level.Grid floor twists in an unnatural way!");
+                        MsgPrint("The Grid floor twists in an unnatural way!");
                         break;
                     }
                 default:
                     {
-                        MsgPrint("The Level.Grid quakes!  You are pummeled with debris!");
+                        MsgPrint("The Grid quakes!  You are pummeled with debris!");
                         break;
                     }
             }
@@ -5143,8 +5146,8 @@ internal class SaveGame
                 int ox = MapX;
                 MapY = sy;
                 MapX = sx;
-                Level.RedrawSingleLocation(oy, ox);
-                Level.RedrawSingleLocation(MapY, MapX);
+                RedrawSingleLocation(oy, ox);
+                RedrawSingleLocation(MapY, MapX);
                 RecenterScreenAroundPlayer();
             }
             map[16 + MapY - cy][16 + MapX - cx] = false;
@@ -5163,10 +5166,10 @@ internal class SaveGame
                 {
                     continue;
                 }
-                cPtr = Level.Grid[yy][xx];
+                cPtr = Grid[yy][xx];
                 if (cPtr.MonsterIndex != 0)
                 {
-                    Monster mPtr = Level.Monsters[cPtr.MonsterIndex];
+                    Monster mPtr = Monsters[cPtr.MonsterIndex];
                     MonsterRace rPtr = mPtr.Race;
                     if (!rPtr.KillWall && !rPtr.PassWall)
                     {
@@ -5175,17 +5178,17 @@ internal class SaveGame
                         {
                             for (i = 0; i < 8; i++)
                             {
-                                y = yy + Level.KeypadDirectionYOffset[i];
-                                x = xx + Level.KeypadDirectionXOffset[i];
-                                if (!Level.GridPassableNoCreature(y, x))
+                                y = yy + KeypadDirectionYOffset[i];
+                                x = xx + KeypadDirectionXOffset[i];
+                                if (!GridPassableNoCreature(y, x))
                                 {
                                     continue;
                                 }
-                                if (Level.Grid[y][x].FeatureType.Name == "ElderSign")
+                                if (Grid[y][x].FeatureType.Name == "ElderSign")
                                 {
                                     continue;
                                 }
-                                if (Level.Grid[y][x].FeatureType.Name == "YellowSign")
+                                if (Grid[y][x].FeatureType.Name == "YellowSign")
                                 {
                                     continue;
                                 }
@@ -5210,19 +5213,19 @@ internal class SaveGame
                         if (mPtr.Health < 0)
                         {
                             MsgPrint($"{mName} is embedded in the rock!");
-                            Level.DeleteMonster(yy, xx);
+                            DeleteMonster(yy, xx);
                             sn = 0;
                         }
                         if (sn != 0)
                         {
-                            int mIdx = Level.Grid[yy][xx].MonsterIndex;
-                            Level.Grid[sy][sx].MonsterIndex = mIdx;
-                            Level.Grid[yy][xx].MonsterIndex = 0;
+                            int mIdx = Grid[yy][xx].MonsterIndex;
+                            Grid[sy][sx].MonsterIndex = mIdx;
+                            Grid[yy][xx].MonsterIndex = 0;
                             mPtr.MapY = sy;
                             mPtr.MapX = sx;
-                            Level.UpdateMonsterVisibility(mIdx, true);
-                            Level.RedrawSingleLocation(yy, xx);
-                            Level.RedrawSingleLocation(sy, sx);
+                            UpdateMonsterVisibility(mIdx, true);
+                            RedrawSingleLocation(yy, xx);
+                            RedrawSingleLocation(sy, sx);
                         }
                     }
                 }
@@ -5238,14 +5241,14 @@ internal class SaveGame
                 {
                     continue;
                 }
-                cPtr = Level.Grid[yy][xx];
+                cPtr = Grid[yy][xx];
                 if (yy == MapY && xx == MapX)
                 {
                     continue;
                 }
-                if (Level.CaveValidBold(yy, xx))
+                if (CaveValidBold(yy, xx))
                 {
-                    bool floor = Level.GridPassable(yy, xx);
+                    bool floor = GridPassable(yy, xx);
                     DeleteObject(yy, xx);
                     int t = floor ? Program.Rng.RandomLessThan(100) : 200;
                     if (t < 20)
@@ -5279,12 +5282,12 @@ internal class SaveGame
 
     public void ElderSign()
     {
-        if (!Level.GridOpenNoItem(MapY, MapX))
+        if (!GridOpenNoItem(MapY, MapX))
         {
             MsgPrint("The object resists the spell.");
             return;
         }
-        Level.CaveSetFeat(MapY, MapX, "ElderSign");
+        CaveSetFeat(MapY, MapX, "ElderSign");
     }
 
     public void ElderSignCreation()
@@ -5502,8 +5505,8 @@ internal class SaveGame
     public bool FireBall(Projectile projectile, int dir, int dam, int rad)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
-        int tx = MapX + (99 * Level.KeypadDirectionXOffset[dir]);
-        int ty = MapY + (99 * Level.KeypadDirectionYOffset[dir]);
+        int tx = MapX + (99 * KeypadDirectionXOffset[dir]);
+        int ty = MapY + (99 * KeypadDirectionYOffset[dir]);
         if (dir == 5 && TargetOkay())
         {
             flg &= ~ProjectionFlag.ProjectStop;
@@ -5714,16 +5717,16 @@ internal class SaveGame
         }
         UpdateBonusesFlaggedAction.Set();
         NoticeCombineAndReorderFlaggedAction.Set();
-        Level.WizDark();
+        WizDark();
         return true;
     }
 
     public void MassCarnage(bool playerCast)
     {
         int msec = Constants.DelayFactorInMilliseconds;
-        for (int i = 1; i < Level.MMax; i++)
+        for (int i = 1; i < MMax; i++)
         {
-            Monster mPtr = Level.Monsters[i];
+            Monster mPtr = Monsters[i];
             MonsterRace rPtr = mPtr.Race;
             if (mPtr.Race == null)
             {
@@ -5741,12 +5744,12 @@ internal class SaveGame
             {
                 continue;
             }
-            Level.DeleteMonsterByIndex(i, true);
+            DeleteMonsterByIndex(i, true);
             if (playerCast)
             {
                 TakeHit(Program.Rng.DieRoll(3), "the strain of casting Mass Carnage");
             }
-            Level.MoveCursorRelative(MapY, MapX);
+            MoveCursorRelative(MapY, MapX);
             RedrawHpFlaggedAction.Set();
             HandleStuff();
             UpdateScreen();
@@ -5776,7 +5779,7 @@ internal class SaveGame
         int lev2 = rPtr.Level + (Program.Rng.DieRoll(20) / Program.Rng.DieRoll(9)) + 1;
         for (int i = 0; i < 1000; i++)
         {
-            int r = Level.GetMonNum(((Difficulty + rPtr.Level) / 2) + 5, null);
+            int r = GetMonNum(((Difficulty + rPtr.Level) / 2) + 5, null);
             if (r == 0)
             {
                 break;
@@ -5799,14 +5802,14 @@ internal class SaveGame
     public void Probing()
     {
         bool probe = false;
-        for (int i = 1; i < Level.MMax; i++)
+        for (int i = 1; i < MMax; i++)
         {
-            Monster mPtr = Level.Monsters[i];
+            Monster mPtr = Monsters[i];
             if (mPtr.Race == null)
             {
                 continue;
             }
-            if (!Level.PlayerHasLosBold(mPtr.MapY, mPtr.MapX))
+            if (!PlayerHasLosBold(mPtr.MapY, mPtr.MapX))
             {
                 continue;
             }
@@ -5818,7 +5821,7 @@ internal class SaveGame
                 }
                 string mName = mPtr.IndefiniteWhenHiddenName;
                 MsgPrint($"{mName} has {mPtr.Health} hit points.");
-                Level.LoreDoProbe(i);
+                LoreDoProbe(i);
                 probe = true;
             }
         }
@@ -6591,7 +6594,7 @@ internal class SaveGame
 
     public void StairCreation()
     {
-        if (!Level.CaveValidBold(MapY, MapX))
+        if (!CaveValidBold(MapY, MapX))
         {
             MsgPrint("The object resists the spell.");
             return;
@@ -6599,21 +6602,21 @@ internal class SaveGame
         DeleteObject(MapY, MapX);
         if (CurrentDepth <= 0)
         {
-            Level.CaveSetFeat(MapY, MapX, "DownStair");
+            CaveSetFeat(MapY, MapX, "DownStair");
         }
         else if (IsQuest(CurrentDepth) ||
                  CurrentDepth >= CurDungeon.MaxLevel)
         {
-            Level.CaveSetFeat(MapY, MapX,
+            CaveSetFeat(MapY, MapX,
                 CurDungeon.Tower ? "DownStair" : "UpStair");
         }
         else if (Program.Rng.RandomLessThan(100) < 50)
         {
-            Level.CaveSetFeat(MapY, MapX, "DownStair");
+            CaveSetFeat(MapY, MapX, "DownStair");
         }
         else
         {
-            Level.CaveSetFeat(MapY, MapX, "UpStair");
+            CaveSetFeat(MapY, MapX, "UpStair");
         }
     }
 
@@ -6644,7 +6647,7 @@ internal class SaveGame
         int maxReaver = (Difficulty / 50) + Program.Rng.DieRoll(6);
         for (int i = 0; i < maxReaver; i++)
         {
-            Level.SummonSpecific(MapY, MapX, 100, new ReaverMonsterSelector());
+            SummonSpecific(MapY, MapX, 100, new ReaverMonsterSelector());
         }
     }
 
@@ -6681,21 +6684,21 @@ internal class SaveGame
                 {
                     y = Program.Rng.RandomSpread(MapY, dis);
                     x = Program.Rng.RandomSpread(MapX, dis);
-                    int d = Level.Distance(MapY, MapX, y, x);
+                    int d = Distance(MapY, MapX, y, x);
                     if (d >= min && d <= dis)
                     {
                         break;
                     }
                 }
-                if (!Level.InBounds(y, x))
+                if (!InBounds(y, x))
                 {
                     continue;
                 }
-                if (!Level.GridOpenNoItemOrCreature(y, x))
+                if (!GridOpenNoItemOrCreature(y, x))
                 {
                     continue;
                 }
-                if (Level.Grid[y][x].TileFlags.IsSet(GridTile.InVault))
+                if (Grid[y][x].TileFlags.IsSet(GridTile.InVault))
                 {
                     continue;
                 }
@@ -6710,7 +6713,7 @@ internal class SaveGame
         int ox = MapX;
         MapY = y;
         MapX = x;
-        Level.RedrawSingleLocation(oy, ox);
+        RedrawSingleLocation(oy, ox);
         while (xx < 2)
         {
             int yy = -1;
@@ -6721,14 +6724,14 @@ internal class SaveGame
                 }
                 else
                 {
-                    if (Level.Grid[oy + yy][ox + xx].MonsterIndex != 0)
+                    if (Grid[oy + yy][ox + xx].MonsterIndex != 0)
                     {
-                        if (Level.Monsters[Level.Grid[oy + yy][ox + xx].MonsterIndex].Race.TeleportSelf &&
-                            !Level.Monsters[Level.Grid[oy + yy][ox + xx].MonsterIndex].Race.ResistTeleport)
+                        if (Monsters[Grid[oy + yy][ox + xx].MonsterIndex].Race.TeleportSelf &&
+                            !Monsters[Grid[oy + yy][ox + xx].MonsterIndex].Race.ResistTeleport)
                         {
-                            if (Level.Monsters[Level.Grid[oy + yy][ox + xx].MonsterIndex].SleepLevel == 0)
+                            if (Monsters[Grid[oy + yy][ox + xx].MonsterIndex].SleepLevel == 0)
                             {
-                                TeleportToPlayer(Level.Grid[oy + yy][ox + xx].MonsterIndex);
+                                TeleportToPlayer(Grid[oy + yy][ox + xx].MonsterIndex);
                             }
                         }
                     }
@@ -6737,7 +6740,7 @@ internal class SaveGame
             }
             xx++;
         }
-        Level.RedrawSingleLocation(MapY, MapX);
+        RedrawSingleLocation(MapY, MapX);
         RecenterScreenAroundPlayer();
         UpdateScentFlaggedAction.Set();
         UpdateLightFlaggedAction.Set();
@@ -6805,12 +6808,12 @@ internal class SaveGame
             {
                 y = Program.Rng.RandomSpread(ny, dis);
                 x = Program.Rng.RandomSpread(nx, dis);
-                if (Level.InBounds(y, x))
+                if (InBounds(y, x))
                 {
                     break;
                 }
             }
-            if (Level.GridOpenNoItemOrCreature(y, x))
+            if (GridOpenNoItemOrCreature(y, x))
             {
                 break;
             }
@@ -6825,8 +6828,8 @@ internal class SaveGame
         int ox = MapX;
         MapY = y;
         MapX = x;
-        Level.RedrawSingleLocation(oy, ox);
-        Level.RedrawSingleLocation(MapY, MapX);
+        RedrawSingleLocation(oy, ox);
+        RedrawSingleLocation(MapY, MapX);
         RecenterScreenAroundPlayer();
         UpdateScentFlaggedAction.Set();
         UpdateLightFlaggedAction.Set();
@@ -6845,17 +6848,17 @@ internal class SaveGame
         }
         else
         {
-            tx = MapX + Level.KeypadDirectionXOffset[dir];
-            ty = MapY + Level.KeypadDirectionYOffset[dir];
+            tx = MapX + KeypadDirectionXOffset[dir];
+            ty = MapY + KeypadDirectionYOffset[dir];
         }
-        GridTile cPtr = Level.Grid[ty][tx];
+        GridTile cPtr = Grid[ty][tx];
         if (cPtr.MonsterIndex == 0)
         {
             MsgPrint("You can't trade places with that!");
         }
         else
         {
-            Monster mPtr = Level.Monsters[cPtr.MonsterIndex];
+            Monster mPtr = Monsters[cPtr.MonsterIndex];
             MonsterRace rPtr = mPtr.Race;
             if (rPtr.ResistTeleport)
             {
@@ -6864,7 +6867,7 @@ internal class SaveGame
             else
             {
                 PlaySound(SoundEffectEnum.Teleport);
-                Level.Grid[MapY][MapX].MonsterIndex = cPtr.MonsterIndex;
+                Grid[MapY][MapX].MonsterIndex = cPtr.MonsterIndex;
                 cPtr.MonsterIndex = 0;
                 mPtr.MapY = MapY;
                 mPtr.MapX = MapX;
@@ -6872,9 +6875,9 @@ internal class SaveGame
                 MapY = ty;
                 tx = mPtr.MapX;
                 ty = mPtr.MapY;
-                Level.UpdateMonsterVisibility(Level.Grid[ty][tx].MonsterIndex, true);
-                Level.RedrawSingleLocation(ty, tx);
-                Level.RedrawSingleLocation(MapY, MapX);
+                UpdateMonsterVisibility(Grid[ty][tx].MonsterIndex, true);
+                RedrawSingleLocation(ty, tx);
+                RedrawSingleLocation(MapY, MapX);
                 RecenterScreenAroundPlayer();
                 UpdateScentFlaggedAction.Set();
                 UpdateLightFlaggedAction.Set();
@@ -6916,11 +6919,11 @@ internal class SaveGame
     public void UnlightRoom(int y1, int x1)
     {
         CaveTempRoomAux(y1, x1);
-        for (int i = 0; i < Level.TempN; i++)
+        for (int i = 0; i < TempN; i++)
         {
-            int x = Level.TempX[i];
-            int y = Level.TempY[i];
-            if (!Level.GridPassable(y, x))
+            int x = TempX[i];
+            int y = TempY[i];
+            if (!GridPassable(y, x))
             {
                 continue;
             }
@@ -6990,17 +6993,17 @@ internal class SaveGame
 
     public void YellowSign()
     {
-        if (!Level.GridOpenNoItem(MapY, MapX))
+        if (!GridOpenNoItem(MapY, MapX))
         {
             MsgPrint("The object resists the spell.");
             return;
         }
-        Level.CaveSetFeat(MapY, MapX, "YellowSign");
+        CaveSetFeat(MapY, MapX, "YellowSign");
     }
 
     private void CaveTempRoomAux(int y, int x)
     {
-        GridTile cPtr = Level.Grid[y][x];
+        GridTile cPtr = Grid[y][x];
         if (cPtr.TileFlags.IsSet(GridTile.TempFlag))
         {
             return;
@@ -7009,31 +7012,31 @@ internal class SaveGame
         {
             return;
         }
-        if (Level.TempN == Constants.TempMax)
+        if (TempN == Constants.TempMax)
         {
             return;
         }
         cPtr.TileFlags.Set(GridTile.TempFlag);
-        Level.TempY[Level.TempN] = y;
-        Level.TempX[Level.TempN] = x;
-        Level.TempN++;
+        TempY[TempN] = y;
+        TempX[TempN] = x;
+        TempN++;
     }
 
     private void CaveTempRoomLight()
     {
-        for (int i = 0; i < Level.TempN; i++)
+        for (int i = 0; i < TempN; i++)
         {
-            int y = Level.TempY[i];
-            int x = Level.TempX[i];
-            GridTile cPtr = Level.Grid[y][x];
+            int y = TempY[i];
+            int x = TempX[i];
+            GridTile cPtr = Grid[y][x];
             cPtr.TileFlags.Clear(GridTile.TempFlag);
             cPtr.TileFlags.Set(GridTile.SelfLit);
             if (cPtr.MonsterIndex != 0)
             {
                 int chance = 25;
-                Monster mPtr = Level.Monsters[cPtr.MonsterIndex];
+                Monster mPtr = Monsters[cPtr.MonsterIndex];
                 MonsterRace rPtr = mPtr.Race;
-                Level.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
+                UpdateMonsterVisibility(cPtr.MonsterIndex, false);
                 if (rPtr.Stupid)
                 {
                     chance = 10;
@@ -7052,41 +7055,41 @@ internal class SaveGame
                     }
                 }
             }
-            Level.NoteSpot(y, x);
-            Level.RedrawSingleLocation(y, x);
+            NoteSpot(y, x);
+            RedrawSingleLocation(y, x);
         }
-        Level.TempN = 0;
+        TempN = 0;
     }
 
     private void CaveTempRoomUnlight()
     {
-        for (int i = 0; i < Level.TempN; i++)
+        for (int i = 0; i < TempN; i++)
         {
-            int y = Level.TempY[i];
-            int x = Level.TempX[i];
-            GridTile cPtr = Level.Grid[y][x];
+            int y = TempY[i];
+            int x = TempX[i];
+            GridTile cPtr = Grid[y][x];
             cPtr.TileFlags.Clear(GridTile.TempFlag);
             cPtr.TileFlags.Clear(GridTile.SelfLit);
             if (cPtr.FeatureType.IsOpenFloor)
             {
                 cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
-                Level.NoteSpot(y, x);
+                NoteSpot(y, x);
             }
             if (cPtr.MonsterIndex != 0)
             {
-                Level.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
+                UpdateMonsterVisibility(cPtr.MonsterIndex, false);
             }
-            Level.RedrawSingleLocation(y, x);
+            RedrawSingleLocation(y, x);
         }
-        Level.TempN = 0;
+        TempN = 0;
     }
 
     private bool DetectMonstersString(string match)
     {
         bool flag = false;
-        for (int i = 1; i < Level.MMax; i++)
+        for (int i = 1; i < MMax; i++)
         {
-            Monster mPtr = Level.Monsters[i];
+            Monster mPtr = Monsters[i];
             MonsterRace rPtr = mPtr.Race;
             if (mPtr.Race == null)
             {
@@ -7094,16 +7097,16 @@ internal class SaveGame
             }
             int y = mPtr.MapY;
             int x = mPtr.MapX;
-            if (!Level.PanelContains(y, x))
+            if (!PanelContains(y, x))
             {
                 continue;
             }
             if (match.Contains(rPtr.Symbol.Character.ToString()))
             {
-                Level.RepairMonsters = true;
+                RepairMonsters = true;
                 mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
                 mPtr.IsVisible = true;
-                Level.RedrawSingleLocation(y, x);
+                RedrawSingleLocation(y, x);
                 flag = true;
             }
         }
@@ -7117,11 +7120,11 @@ internal class SaveGame
     private void LightRoom(int y1, int x1)
     {
         CaveTempRoomAux(y1, x1);
-        for (int i = 0; i < Level.TempN; i++)
+        for (int i = 0; i < TempN; i++)
         {
-            int x = Level.TempX[i];
-            int y = Level.TempY[i];
-            if (!Level.GridPassable(y, x))
+            int x = TempX[i];
+            int y = TempY[i];
+            if (!GridPassable(y, x))
             {
                 continue;
             }
@@ -7176,16 +7179,16 @@ internal class SaveGame
     {
         ProjectionFlag flg = ProjectionFlag.ProjectJump | ProjectionFlag.ProjectKill | ProjectionFlag.ProjectHide;
         bool obvious = false;
-        for (int i = 1; i < Level.MMax; i++)
+        for (int i = 1; i < MMax; i++)
         {
-            Monster mPtr = Level.Monsters[i];
+            Monster mPtr = Monsters[i];
             if (mPtr.Race == null)
             {
                 continue;
             }
             int y = mPtr.MapY;
             int x = mPtr.MapX;
-            if (!Level.PlayerHasLosBold(y, x))
+            if (!PlayerHasLosBold(y, x))
             {
                 continue;
             }
@@ -7277,8 +7280,8 @@ internal class SaveGame
     private bool TargetedProject(Projectile projectile, int dir, int dam, ProjectionFlag flg)
     {
         flg |= ProjectionFlag.ProjectThru;
-        int tx = MapX + Level.KeypadDirectionXOffset[dir];
-        int ty = MapY + Level.KeypadDirectionYOffset[dir];
+        int tx = MapX + KeypadDirectionXOffset[dir];
+        int ty = MapY + KeypadDirectionYOffset[dir];
         if (dir == 5 && TargetOkay())
         {
             tx = TargetCol;
@@ -7293,7 +7296,7 @@ internal class SaveGame
         int nx = MapX;
         int dis = 2;
         bool look = true;
-        Monster mPtr = Level.Monsters[mIdx];
+        Monster mPtr = Monsters[mIdx];
         int attempts = 500;
         if (mPtr.Race == null)
         {
@@ -7318,25 +7321,25 @@ internal class SaveGame
                 {
                     ny = Program.Rng.RandomSpread(MapY, dis);
                     nx = Program.Rng.RandomSpread(MapX, dis);
-                    int d = Level.Distance(MapY, MapX, ny, nx);
+                    int d = Distance(MapY, MapX, ny, nx);
                     if (d >= min && d <= dis)
                     {
                         break;
                     }
                 }
-                if (!Level.InBounds(ny, nx))
+                if (!InBounds(ny, nx))
                 {
                     continue;
                 }
-                if (!Level.GridPassableNoCreature(ny, nx))
+                if (!GridPassableNoCreature(ny, nx))
                 {
                     continue;
                 }
-                if (Level.Grid[ny][nx].FeatureType.Name == "ElderSign")
+                if (Grid[ny][nx].FeatureType.Name == "ElderSign")
                 {
                     continue;
                 }
-                if (Level.Grid[ny][nx].FeatureType.Name == "YellowSign")
+                if (Grid[ny][nx].FeatureType.Name == "YellowSign")
                 {
                     continue;
                 }
@@ -7351,13 +7354,13 @@ internal class SaveGame
             return;
         }
         PlaySound(SoundEffectEnum.Teleport);
-        Level.Grid[ny][nx].MonsterIndex = mIdx;
-        Level.Grid[oy][ox].MonsterIndex = 0;
+        Grid[ny][nx].MonsterIndex = mIdx;
+        Grid[oy][ox].MonsterIndex = 0;
         mPtr.MapY = ny;
         mPtr.MapX = nx;
-        Level.UpdateMonsterVisibility(mIdx, true);
-        Level.RedrawSingleLocation(oy, ox);
-        Level.RedrawSingleLocation(ny, nx);
+        UpdateMonsterVisibility(mIdx, true);
+        RedrawSingleLocation(oy, ox);
+        RedrawSingleLocation(ny, nx);
     }
 
     public void DoCmdEquip()
@@ -7438,7 +7441,7 @@ internal class SaveGame
     {
         bool more = false;
         EnergyUse = 100;
-        GridTile cPtr = Level.Grid[y][x];
+        GridTile cPtr = Grid[y][x];
         MsgPrint("You smash into the door!");
         int bash = AbilityScores[Ability.Strength].StrAttackSpeedComponent;
         int temp = int.Parse(cPtr.FeatureType.Name.Substring(10));
@@ -7450,7 +7453,7 @@ internal class SaveGame
         if (Program.Rng.RandomLessThan(100) < temp)
         {
             MsgPrint("The door crashes open!");
-            Level.CaveSetFeat(y, x, Program.Rng.RandomLessThan(100) < 50 ? "BrokenDoor" : "OpenDoor");
+            CaveSetFeat(y, x, Program.Rng.RandomLessThan(100) < 50 ? "BrokenDoor" : "OpenDoor");
             PlaySound(SoundEffectEnum.OpenDoor);
             MovePlayer(y, x, false);
             UpdateLightFlaggedAction.Set();
@@ -7579,10 +7582,10 @@ internal class SaveGame
     public void CallTheVoid()
     {
         // Make sure we're not next to a wall
-        if (Level.GridPassable(MapY - 1, MapX - 1) && Level.GridPassable(MapY - 1, MapX) &&
-            Level.GridPassable(MapY - 1, MapX + 1) && Level.GridPassable(MapY, MapX - 1) &&
-            Level.GridPassable(MapY, MapX + 1) && Level.GridPassable(MapY + 1, MapX - 1) &&
-            Level.GridPassable(MapY + 1, MapX) && Level.GridPassable(MapY + 1, MapX + 1))
+        if (GridPassable(MapY - 1, MapX - 1) && GridPassable(MapY - 1, MapX) &&
+            GridPassable(MapY - 1, MapX + 1) && GridPassable(MapY, MapX - 1) &&
+            GridPassable(MapY, MapX + 1) && GridPassable(MapY + 1, MapX - 1) &&
+            GridPassable(MapY + 1, MapX) && GridPassable(MapY + 1, MapX + 1))
         {
             // Fire area effect shards, mana, and nukes in all directions
             int i;
@@ -7710,14 +7713,14 @@ internal class SaveGame
     public bool CloseDoor(int y, int x)
     {
         EnergyUse = 100;
-        GridTile cPtr = Level.Grid[y][x];
+        GridTile cPtr = Grid[y][x];
         if (cPtr.FeatureType.Name == "BrokenDoor")
         {
             MsgPrint("The door appears to be broken.");
         }
         else
         {
-            Level.CaveSetFeat(y, x, "LockedDoor0");
+            CaveSetFeat(y, x, "LockedDoor0");
             UpdateMonstersFlaggedAction.Set();
             UpdateLightFlaggedAction.Set();
             UpdateViewFlaggedAction.Set();
@@ -7739,10 +7742,10 @@ internal class SaveGame
         mapCoordinate = null;
         for (int orderedDirection = 0; orderedDirection < 9; orderedDirection++)
         {
-            int yy = MapY + Level.OrderedDirectionYOffset[orderedDirection];
-            int xx = MapX + Level.OrderedDirectionXOffset[orderedDirection];
+            int yy = MapY + OrderedDirectionYOffset[orderedDirection];
+            int xx = MapX + OrderedDirectionXOffset[orderedDirection];
             // Get the index of first item in the tile that is a chest
-            Item? chestItem = Level.ChestCheck(yy, xx);
+            Item? chestItem = ChestCheck(yy, xx);
             if (chestItem == null)
             {
                 // There wasn't a chest on the grid so skip
@@ -7777,20 +7780,20 @@ internal class SaveGame
         mapCoordinate = null;
         for (int orderedDirection = 0; orderedDirection < 9; orderedDirection++)
         {
-            int yy = MapY + Level.OrderedDirectionYOffset[orderedDirection];
-            int xx = MapX + Level.OrderedDirectionXOffset[orderedDirection];
+            int yy = MapY + OrderedDirectionYOffset[orderedDirection];
+            int xx = MapX + OrderedDirectionXOffset[orderedDirection];
             // We need to be aware of the door
-            if (Level.Grid[yy][xx].TileFlags.IsClear(GridTile.PlayerMemorized))
+            if (Grid[yy][xx].TileFlags.IsClear(GridTile.PlayerMemorized))
             {
                 continue;
             }
             // It needs to be an actual door
-            if (!Level.Grid[yy][xx].FeatureType.IsClosedDoor)
+            if (!Grid[yy][xx].FeatureType.IsClosedDoor)
             {
                 continue;
             }
             // It can't be a secret door
-            if (Level.Grid[yy][xx].FeatureType.Name == "SecretDoor")
+            if (Grid[yy][xx].FeatureType.Name == "SecretDoor")
             {
                 continue;
             }
@@ -7815,15 +7818,15 @@ internal class SaveGame
         mapCoordinate = null;
         for (int orderedDirection = 0; orderedDirection < 9; orderedDirection++)
         {
-            int yy = MapY + Level.OrderedDirectionYOffset[orderedDirection];
-            int xx = MapX + Level.OrderedDirectionXOffset[orderedDirection];
+            int yy = MapY + OrderedDirectionYOffset[orderedDirection];
+            int xx = MapX + OrderedDirectionXOffset[orderedDirection];
             // We need to be aware of the trap
-            if (Level.Grid[yy][xx].TileFlags.IsClear(GridTile.PlayerMemorized))
+            if (Grid[yy][xx].TileFlags.IsClear(GridTile.PlayerMemorized))
             {
                 continue;
             }
             // It needs to actually be a trap
-            if (!Level.Grid[yy][xx].FeatureType.IsTrap)
+            if (!Grid[yy][xx].FeatureType.IsTrap)
             {
                 continue;
             }
@@ -7848,15 +7851,15 @@ internal class SaveGame
         mapCoordinate = null;
         for (int orderedDirection = 0; orderedDirection < 9; orderedDirection++)
         {
-            int yy = MapY + Level.OrderedDirectionYOffset[orderedDirection];
-            int xx = MapX + Level.OrderedDirectionXOffset[orderedDirection];
+            int yy = MapY + OrderedDirectionYOffset[orderedDirection];
+            int xx = MapX + OrderedDirectionXOffset[orderedDirection];
             // We must be aware of the door
-            if (Level.Grid[yy][xx].TileFlags.IsClear(GridTile.PlayerMemorized))
+            if (Grid[yy][xx].TileFlags.IsClear(GridTile.PlayerMemorized))
             {
                 continue;
             }
             // It must actually be an open door
-            if (Level.Grid[yy][xx].FeatureType.Name != "OpenDoor")
+            if (Grid[yy][xx].FeatureType.Name != "OpenDoor")
             {
                 continue;
             }
@@ -8020,7 +8023,7 @@ internal class SaveGame
         EnergyUse = 100;
         int i = SkillDisarmTraps;
         // Disarming is tricky when you can't see
-        if (TimedBlindness.TurnsRemaining != 0 || Level.NoLight())
+        if (TimedBlindness.TurnsRemaining != 0 || NoLight())
         {
             i /= 10;
         }
@@ -8083,11 +8086,11 @@ internal class SaveGame
         bool more = false;
         // Disarming a trap costs a turn
         EnergyUse = 100;
-        GridTile tile = Level.Grid[y][x];
+        GridTile tile = Grid[y][x];
         string trapName = tile.FeatureType.Description;
         int i = SkillDisarmTraps;
         // Difficult, but possible, to disarm by feel
-        if (TimedBlindness.TurnsRemaining != 0 || Level.NoLight())
+        if (TimedBlindness.TurnsRemaining != 0 || NoLight())
         {
             i /= 10;
         }
@@ -8108,7 +8111,7 @@ internal class SaveGame
             MsgPrint($"You have disarmed the {trapName}.");
             GainExperience(power);
             tile.TileFlags.Clear(GridTile.PlayerMemorized);
-            Level.RevertTileToBackground(y, x);
+            RevertTileToBackground(y, x);
             MovePlayer(y, x, true);
         }
         // We might set the trap off if we failed to disarm it
@@ -8246,33 +8249,33 @@ internal class SaveGame
     /// <param name="dontPickup"> Whether or not to skip picking up any objects we step on </param>
     private void MovePlayer(int direction, bool dontPickup)
     {
-        int newY = MapY + Level.KeypadDirectionYOffset[direction];
-        int newX = MapX + Level.KeypadDirectionXOffset[direction];
+        int newY = MapY + KeypadDirectionYOffset[direction];
+        int newX = MapX + KeypadDirectionXOffset[direction];
         MovePlayer(newY, newX, dontPickup);
     }
 
     private void MovePlayer(int newY, int newX, bool dontPickup)
     { 
         bool canPassWalls = false;
-        GridTile tile = Level.Grid[newY][newX];
-        Monster monster = Level.Monsters[tile.MonsterIndex];
+        GridTile tile = Grid[newY][newX];
+        Monster monster = Monsters[tile.MonsterIndex];
         // Check if we can pass through walls
         if (TimedEtherealness.TurnsRemaining != 0 || Race.IsEthereal)
         {
             canPassWalls = true;
             // Permanent features can't be passed through even if we could otherwise
-            if (Level.Grid[newY][newX].FeatureType.IsPermanent)
+            if (Grid[newY][newX].FeatureType.IsPermanent)
             {
                 canPassWalls = false;
             }
         }
         // If there's a monster we can see or an invisible monster on a tile we can move to,
         // deal with it
-        if (tile.MonsterIndex != 0 && (monster.IsVisible || Level.GridPassable(newY, newX) || canPassWalls))
+        if (tile.MonsterIndex != 0 && (monster.IsVisible || GridPassable(newY, newX) || canPassWalls))
         {
             // Check if it's a friend, and if we are in a fit state to distinguish friend from foe
             if (monster.SmFriendly && !(TimedConfusion.TurnsRemaining != 0 || TimedHallucinations.TurnsRemaining != 0 || !monster.IsVisible || TimedStun.TurnsRemaining != 0) &&
-                (Level.GridPassable(newY, newX) || canPassWalls))
+                (GridPassable(newY, newX) || canPassWalls))
             {
                 // Wake up the monster, and track it
                 monster.SleepLevel = 0;
@@ -8283,14 +8286,14 @@ internal class SaveGame
                     HealthTrack(tile.MonsterIndex);
                 }
                 // If we can't see it then let us push past it and tell us what happened
-                else if (Level.GridPassable(MapY, MapX) || monster.Race.PassWall)
+                else if (GridPassable(MapY, MapX) || monster.Race.PassWall)
                 {
                     MsgPrint($"You push past {monsterName}.");
                     monster.MapY = MapY;
                     monster.MapX = MapX;
-                    Level.Grid[MapY][MapX].MonsterIndex = tile.MonsterIndex;
+                    Grid[MapY][MapX].MonsterIndex = tile.MonsterIndex;
                     tile.MonsterIndex = 0;
-                    Level.UpdateMonsterVisibility(Level.Grid[MapY][MapX].MonsterIndex, true);
+                    UpdateMonsterVisibility(Grid[MapY][MapX].MonsterIndex, true);
                 }
                 // If we couldn't push past it, tell us it was in the way
                 else
@@ -8315,7 +8318,7 @@ internal class SaveGame
             return;
         }
         // If the tile we're moving onto isn't passable then we can't move onto it
-        if (!Level.GridPassable(newY, newX) && !canPassWalls)
+        if (!GridPassable(newY, newX) && !canPassWalls)
         {
             Disturb(false);
             // If we can't see it and haven't memories it, tell us what we bumped into
@@ -8326,25 +8329,25 @@ internal class SaveGame
                 {
                     MsgPrint("You feel some rubble blocking your way.");
                     tile.TileFlags.Set(GridTile.PlayerMemorized);
-                    Level.RedrawSingleLocation(newY, newX);
+                    RedrawSingleLocation(newY, newX);
                 }
                 else if (tile.FeatureType.IsTree)
                 {
                     MsgPrint($"You feel a {tile.FeatureType.Description} blocking your way.");
                     tile.TileFlags.Set(GridTile.PlayerMemorized);
-                    Level.RedrawSingleLocation(newY, newX);
+                    RedrawSingleLocation(newY, newX);
                 }
                 else if (tile.FeatureType.Name == "Pillar")
                 {
                     MsgPrint("You feel a pillar blocking your way.");
                     tile.TileFlags.Set(GridTile.PlayerMemorized);
-                    Level.RedrawSingleLocation(newY, newX);
+                    RedrawSingleLocation(newY, newX);
                 }
                 else if (tile.FeatureType.Name.Contains("Water"))
                 {
                     MsgPrint("Your way seems to be blocked by water.");
                     tile.TileFlags.Set(GridTile.PlayerMemorized);
-                    Level.RedrawSingleLocation(newY, newX);
+                    RedrawSingleLocation(newY, newX);
                 }
                 // If we're moving onto a border, change wilderness location
                 else if (tile.FeatureType.Name.Contains("Border"))
@@ -8356,20 +8359,20 @@ internal class SaveGame
                     }
                     if (newY == 0)
                     {
-                        MapY = Level.CurHgt - 2;
+                        MapY = CurHgt - 2;
                         WildernessY--;
                     }
-                    if (newY == Level.CurHgt - 1)
+                    if (newY == CurHgt - 1)
                     {
                         MapY = 1;
                         WildernessY++;
                     }
                     if (newX == 0)
                     {
-                        MapX = Level.CurWid - 2;
+                        MapX = CurWid - 2;
                         WildernessX--;
                     }
-                    if (newX == Level.CurWid - 1)
+                    if (newX == CurWid - 1)
                     {
                         MapX = 1;
                         WildernessX++;
@@ -8389,13 +8392,13 @@ internal class SaveGame
                 {
                     MsgPrint("You feel a closed door blocking your way.");
                     tile.TileFlags.Set(GridTile.PlayerMemorized);
-                    Level.RedrawSingleLocation(newY, newX);
+                    RedrawSingleLocation(newY, newX);
                 }
                 else
                 {
                     MsgPrint($"You feel a {tile.FeatureType.Description} blocking your way.");
                     tile.TileFlags.Set(GridTile.PlayerMemorized);
-                    Level.RedrawSingleLocation(newY, newX);
+                    RedrawSingleLocation(newY, newX);
                 }
             }
             // We can see it, so give a different message
@@ -8413,19 +8416,19 @@ internal class SaveGame
                 {
                     MsgPrint($"There is a {tile.FeatureType.Description} blocking your way.");
                     tile.TileFlags.Set(GridTile.PlayerMemorized);
-                    Level.RedrawSingleLocation(newY, newX);
+                    RedrawSingleLocation(newY, newX);
                 }
                 else if (tile.FeatureType.Name == "Pillar")
                 {
                     MsgPrint("There is a pillar blocking your way.");
                     tile.TileFlags.Set(GridTile.PlayerMemorized);
-                    Level.RedrawSingleLocation(newY, newX);
+                    RedrawSingleLocation(newY, newX);
                 }
                 else if (tile.FeatureType.Name.Contains("Water"))
                 {
                     MsgPrint("You cannot swim.");
                     tile.TileFlags.Set(GridTile.PlayerMemorized);
-                    Level.RedrawSingleLocation(newY, newX);
+                    RedrawSingleLocation(newY, newX);
                 }
                 // Again, walking onto a border means a change of wilderness grid
                 else if (tile.FeatureType.Name.Contains("Border"))
@@ -8438,20 +8441,20 @@ internal class SaveGame
                     }
                     if (newY == 0)
                     {
-                        MapY = Level.CurHgt - 2;
+                        MapY = CurHgt - 2;
                         WildernessY--;
                     }
-                    if (newY == Level.CurHgt - 1)
+                    if (newY == CurHgt - 1)
                     {
                         MapY = 1;
                         WildernessY++;
                     }
                     if (newX == 0)
                     {
-                        MapX = Level.CurWid - 2;
+                        MapX = CurWid - 2;
                         WildernessX--;
                     }
-                    if (newX == Level.CurWid - 1)
+                    if (newX == CurWid - 1)
                     {
                         MapX = 1;
                         WildernessX++;
@@ -8488,8 +8491,8 @@ internal class SaveGame
             return;
         }
         // Assuming we didn't bump into anything, maybe we can actually move
-        bool oldTrapsDetected = Level.Grid[MapY][MapX].TileFlags.IsSet(GridTile.TrapsDetected);
-        bool newTrapsDetected = Level.Grid[newY][newX].TileFlags.IsSet(GridTile.TrapsDetected);
+        bool oldTrapsDetected = Grid[MapY][MapX].TileFlags.IsSet(GridTile.TrapsDetected);
+        bool newTrapsDetected = Grid[newY][newX].TileFlags.IsSet(GridTile.TrapsDetected);
         // If we're moving into or out of an area where we've detected traps, remember to redraw
         // the notification
         if (oldTrapsDetected != newTrapsDetected)
@@ -8512,8 +8515,8 @@ internal class SaveGame
         MapY = newY;
         MapX = newX;
         // Redraw our old and new locations
-        Level.RedrawSingleLocation(MapY, MapX);
-        Level.RedrawSingleLocation(oldY, oldX);
+        RedrawSingleLocation(MapY, MapX);
+        RedrawSingleLocation(oldY, oldX);
         // Recenter the screen if we have to
         RecenterScreenAroundPlayer();
         // We'll need to update and redraw various things
@@ -8544,7 +8547,7 @@ internal class SaveGame
         {
             Disturb(false);
             MsgPrint("You found a trap!");
-            Level.PickTrap(MapY, MapX);
+            PickTrap(MapY, MapX);
             StepOnTrap();
         }
         // If it's a trap we couldn't (or didn't) disarm, then activate it
@@ -8567,7 +8570,7 @@ internal class SaveGame
         bool more = false;
         // Opening a door takes an action
         EnergyUse = 100;
-        GridTile tile = Level.Grid[y][x];
+        GridTile tile = Grid[y][x];
         // Some doors are simply jammed
         if (tile.FeatureType.Name.Contains("Jammed"))
         {
@@ -8579,7 +8582,7 @@ internal class SaveGame
             // Our disarm traps skill doubles up as a lockpicking skill
             int i = SkillDisarmTraps;
             // Hard to pick locks when you can't see
-            if (TimedBlindness.TurnsRemaining != 0 || Level.NoLight())
+            if (TimedBlindness.TurnsRemaining != 0 || NoLight())
             {
                 i /= 10;
             }
@@ -8599,7 +8602,7 @@ internal class SaveGame
             if (Program.Rng.RandomLessThan(100) < j)
             {
                 MsgPrint("You have picked the lock.");
-                Level.CaveSetFeat(y, x, "OpenDoor");
+                CaveSetFeat(y, x, "OpenDoor");
                 UpdateMonstersFlaggedAction.Set();
                 UpdateLightFlaggedAction.Set();
                 UpdateViewFlaggedAction.Set();
@@ -8616,7 +8619,7 @@ internal class SaveGame
         // If the door wasn't locked, simply open it
         else
         {
-            Level.CaveSetFeat(y, x, "OpenDoor");
+            CaveSetFeat(y, x, "OpenDoor");
             UpdateMonstersFlaggedAction.Set();
             UpdateLightFlaggedAction.Set();
             UpdateViewFlaggedAction.Set();
@@ -8633,7 +8636,7 @@ internal class SaveGame
     /// </param>
     public void PickUpItems(bool pickup)
     {
-        GridTile tile = Level.Grid[MapY][MapX];
+        GridTile tile = Grid[MapY][MapX];
         foreach (Item item in tile.Items.ToArray()) // We need a ToArray to prevent the collection from being modified error
         {
             string itemName = item.Description(true, 3);
@@ -8644,7 +8647,7 @@ internal class SaveGame
                 MsgPrint($"You collect {item.TypeSpecificValue} gold pieces worth of {itemName}.");
                 Gold += item.TypeSpecificValue;
                 RedrawGoldFlaggedAction.Set();
-                Level.DeleteObject(item);
+                DeleteObject(item);
             }
             else
             {
@@ -8656,7 +8659,7 @@ internal class SaveGame
                 // If it's worthless, stomp on it
                 else if (item.Stompable())
                 {
-                    Level.DeleteObject(item);
+                    DeleteObject(item);
                     MsgPrint($"You stomp on {itemName}.");
                 }
                 // If we can't carry the item, let us know
@@ -8675,7 +8678,7 @@ internal class SaveGame
                     }
                     itemName = inventoryItem.Description(true, 3);
                     MsgPrint($"You have {itemName} ({slot.IndexToLabel()}).");
-                    Level.DeleteObject(item);
+                    DeleteObject(item);
                 }
             }
         }
@@ -8688,8 +8691,8 @@ internal class SaveGame
     /// <param name="x"> The x coordinate of the location being attacked </param>
     public void PlayerAttackMonster(int y, int x)
     {
-        GridTile tile = Level.Grid[y][x];
-        Monster monster = Level.Monsters[tile.MonsterIndex];
+        GridTile tile = Grid[y][x];
+        Monster monster = Monsters[tile.MonsterIndex];
         MonsterRace race = monster.Race;
         bool fear = false;
         bool backstab = false;
@@ -8956,7 +8959,7 @@ internal class SaveGame
                     totalDamage = 0;
                 }
                 // Apply damage to the monster
-                if (Level.DamageMonster(tile.MonsterIndex, totalDamage, out fear, null))
+                if (DamageMonster(tile.MonsterIndex, totalDamage, out fear, null))
                 {
                     // Can't have any more attacks because the monster's dead
                     noExtra = true;
@@ -9036,7 +9039,7 @@ internal class SaveGame
                     break;
                 }
                 // a chaos blade might polymorph the monsterf
-                else if (chaosEffect && Level.GridPassable(y, x) && Program.Rng.DieRoll(90) > race.Level)
+                else if (chaosEffect && GridPassable(y, x) && Program.Rng.DieRoll(90) > race.Level)
                 {
                     // Can't polymorph a unique or a guardian
                     if (!(race.Unique || race.BreatheChaos ||
@@ -9046,10 +9049,10 @@ internal class SaveGame
                         if (newRaceIndex != monster.Race.Index)
                         {
                             MsgPrint($"{monsterName} changes!");
-                            Level.DeleteMonsterByIndex(tile.MonsterIndex, true);
+                            DeleteMonsterByIndex(tile.MonsterIndex, true);
                             MonsterRace newRace = SingletonRepository.MonsterRaces[newRaceIndex];
-                            Level.PlaceMonsterAux(y, x, newRace, false, false, false);
-                            monster = Level.Monsters[tile.MonsterIndex];
+                            PlaceMonsterAux(y, x, newRace, false, false, false);
+                            monster = Monsters[tile.MonsterIndex];
                             monsterName = monster.Name;
                             fear = false;
                         }
@@ -9358,8 +9361,8 @@ internal class SaveGame
         EnergyUse = 100;
         int y = MapY;
         int x = MapX;
-        int targetX = MapX + (99 * Level.KeypadDirectionXOffset[dir]);
-        int targetY = MapY + (99 * Level.KeypadDirectionYOffset[dir]);
+        int targetX = MapX + (99 * KeypadDirectionXOffset[dir]);
+        int targetY = MapY + (99 * KeypadDirectionYOffset[dir]);
         if (dir == 5 && TargetOkay())
         {
             targetX = TargetCol;
@@ -9377,9 +9380,9 @@ internal class SaveGame
             {
                 break;
             }
-            Level.MoveOneStepTowards(out newY, out newX, y, x, MapY, MapX, targetY, targetX);
+            MoveOneStepTowards(out newY, out newX, y, x, MapY, MapX, targetY, targetX);
             // If we hit a wall or something stop moving
-            if (!Level.GridPassable(newY, newX))
+            if (!GridPassable(newY, newX))
             {
                 break;
             }
@@ -9388,13 +9391,13 @@ internal class SaveGame
             y = newY;
             const int msec = Constants.DelayFactorInMilliseconds;
             // If we can see, display the thrown item with a suitable delay
-            if (Level.PanelContains(y, x) && Level.PlayerCanSeeBold(y, x))
+            if (PanelContains(y, x) && PlayerCanSeeBold(y, x))
             {
-                Level.PrintCharacterAtMapLocation(missileCharacter, missileColour, y, x);
-                Level.MoveCursorRelative(y, x);
+                PrintCharacterAtMapLocation(missileCharacter, missileColour, y, x);
+                MoveCursorRelative(y, x);
                 UpdateScreen();
                 Pause(msec);
-                Level.RedrawSingleLocation(y, x);
+                RedrawSingleLocation(y, x);
                 UpdateScreen();
             }
             else
@@ -9404,10 +9407,10 @@ internal class SaveGame
             }
             // If there's a monster in the way, we might hit it regardless of whether or not it
             // is our intended target
-            if (Level.Grid[y][x].MonsterIndex != 0)
+            if (Grid[y][x].MonsterIndex != 0)
             {
-                GridTile tile = Level.Grid[y][x];
-                Monster monster = Level.Monsters[tile.MonsterIndex];
+                GridTile tile = Grid[y][x];
+                Monster monster = Monsters[tile.MonsterIndex];
                 MonsterRace race = monster.Race;
                 bool visible = monster.IsVisible;
                 hitBody = true;
@@ -9442,14 +9445,14 @@ internal class SaveGame
                     {
                         damage = 0;
                     }
-                    if (Level.DamageMonster(tile.MonsterIndex, damage, out bool fear, noteDies))
+                    if (DamageMonster(tile.MonsterIndex, damage, out bool fear, noteDies))
                     {
                         // The monster is dead, so don't add further statuses or messages
                     }
                     else
                     {
                         // Let the player know what happens to the monster
-                        Level.MessagePain(tile.MonsterIndex, damage);
+                        MessagePain(tile.MonsterIndex, damage);
                         if (monster.SmFriendly && missile.Factory.CategoryEnum != ItemTypeEnum.Potion)
                         {
                             string mName = monster.Name;
@@ -9472,17 +9475,17 @@ internal class SaveGame
         // If we hit with a potion, the potion might affect the creature
         if (missile.Factory.CategoryEnum == ItemTypeEnum.Potion)
         {
-            if (hitBody || !Level.GridPassable(newY, newX) || Program.Rng.DieRoll(100) < chanceToBreak)
+            if (hitBody || !GridPassable(newY, newX) || Program.Rng.DieRoll(100) < chanceToBreak)
             {
                 PotionItemFactory potion = (PotionItemFactory)missile.Factory;
                 MsgPrint($"The {missileName} shatters!");
                 if (potion.Smash(1, y, x))
                 {
-                    if (Level.Grid[y][x].MonsterIndex != 0 && Level.Monsters[Level.Grid[y][x].MonsterIndex].SmFriendly)
+                    if (Grid[y][x].MonsterIndex != 0 && Monsters[Grid[y][x].MonsterIndex].SmFriendly)
                     {
-                        string mName = Level.Monsters[Level.Grid[y][x].MonsterIndex].Name;
+                        string mName = Monsters[Grid[y][x].MonsterIndex].Name;
                         MsgPrint($"{mName} gets angry!");
-                        Level.Monsters[Level.Grid[y][x].MonsterIndex].SmFriendly = false;
+                        Monsters[Grid[y][x].MonsterIndex].SmFriendly = false;
                     }
                 }
                 return;
@@ -9490,7 +9493,7 @@ internal class SaveGame
             chanceToBreak = 0;
         }
         // Drop the item on the floor
-        Level.DropNear(missile, chanceToBreak, y, x);
+        DropNear(missile, chanceToBreak, y, x);
     }
 
     public bool DoCmdWalk(bool dontPickup)
@@ -9524,7 +9527,7 @@ internal class SaveGame
         // Pick up items if we should
         PickUpItems(pickup);
         // If we're in a shop doorway, enter the shop
-        GridTile tile = Level.Grid[MapY][MapX];
+        GridTile tile = Grid[MapY][MapX];
         if (tile.FeatureType.IsShop)
         {
             Disturb(false);
@@ -9566,8 +9569,8 @@ internal class SaveGame
 
     public void DoCmdLocate()
     {
-        int startRow = Level.PanelRow;
-        int startCol = Level.PanelCol;
+        int startRow = PanelRow;
+        int startCol = PanelCol;
         int currentRow = startRow;
         int currentCol = startCol;
         // Enter a loop so the player can browse the level
@@ -9601,30 +9604,30 @@ internal class SaveGame
                 break;
             }
             // Move the view based on the direction
-            currentRow += Level.KeypadDirectionYOffset[dir];
-            currentCol += Level.KeypadDirectionXOffset[dir];
-            if (currentRow > Level.MaxPanelRows)
+            currentRow += KeypadDirectionYOffset[dir];
+            currentCol += KeypadDirectionXOffset[dir];
+            if (currentRow > MaxPanelRows)
             {
-                currentRow = Level.MaxPanelRows;
+                currentRow = MaxPanelRows;
             }
             else if (currentRow < 0)
             {
                 currentRow = 0;
             }
-            if (currentCol > Level.MaxPanelCols)
+            if (currentCol > MaxPanelCols)
             {
-                currentCol = Level.MaxPanelCols;
+                currentCol = MaxPanelCols;
             }
             else if (currentCol < 0)
             {
                 currentCol = 0;
             }
             // Update the view if necessary
-            if (currentRow != Level.PanelRow || currentCol != Level.PanelCol)
+            if (currentRow != PanelRow || currentCol != PanelCol)
             {
-                Level.PanelRow = currentRow;
-                Level.PanelCol = currentCol;
-                Level.PanelBounds();
+                PanelRow = currentRow;
+                PanelCol = currentCol;
+                PanelBounds();
                 UpdateMonstersFlaggedAction.Set();
                 RedrawMapFlaggedAction.Set();
                 HandleStuff();
@@ -9709,7 +9712,7 @@ internal class SaveGame
     {
         string[] DangerFeelingText =
         {
-            "You're not sure about this level yet", "You feel there is something special about this level.",
+            "You're not sure about this level yet", "You feel there is something special about this ",
             "You nearly faint as horrible visions of death fill your mind", "This level looks very dangerous",
             "You have a very bad feeling", "You have a bad feeling", "You feel nervous",
             "You feel unsafe", "You don't like the look of this place",
@@ -9726,21 +9729,21 @@ internal class SaveGame
         };
 
         // Some sanity checks
-        if (Level.DangerFeeling < 0)
+        if (DangerFeeling < 0)
         {
-            Level.DangerFeeling = 0;
+            DangerFeeling = 0;
         }
-        if (Level.DangerFeeling > 10)
+        if (DangerFeeling > 10)
         {
-            Level.DangerFeeling = 10;
+            DangerFeeling = 10;
         }
-        if (Level.TreasureFeeling < 0)
+        if (TreasureFeeling < 0)
         {
-            Level.TreasureFeeling = 0;
+            TreasureFeeling = 0;
         }
-        if (Level.TreasureFeeling > 10)
+        if (TreasureFeeling > 10)
         {
-            Level.TreasureFeeling = 10;
+            TreasureFeeling = 10;
         }
         if (CurrentDepth <= 0)
         {
@@ -9773,7 +9776,7 @@ internal class SaveGame
             }
         }
         // Special feeling overrides the normal two-part feeling
-        if (Level.DangerFeeling == 1 || Level.TreasureFeeling == 1)
+        if (DangerFeeling == 1 || TreasureFeeling == 1)
         {
             string message = DangerFeelingText[1];
             MsgPrint(GameTime.LevelFeel ? message : DangerFeelingText[0]);
@@ -9782,11 +9785,11 @@ internal class SaveGame
         {
             // Make the two-part feeling make a bit more sense by using the correct conjunction
             string conjunction = ", and ";
-            if ((Level.DangerFeeling > 5 && Level.TreasureFeeling < 6) || (Level.DangerFeeling < 6 && Level.TreasureFeeling > 5))
+            if ((DangerFeeling > 5 && TreasureFeeling < 6) || (DangerFeeling < 6 && TreasureFeeling > 5))
             {
                 conjunction = ", but ";
             }
-            string message = DangerFeelingText[Level.DangerFeeling] + conjunction + TreasureFeelingText[Level.TreasureFeeling];
+            string message = DangerFeelingText[DangerFeeling] + conjunction + TreasureFeelingText[TreasureFeeling];
             MsgPrint(GameTime.LevelFeel ? message : DangerFeelingText[0]);
         }
     }
@@ -9809,7 +9812,7 @@ internal class SaveGame
         int targetX;
         GridTile tile;
         // Can't summon something if we're already standing on something
-        if (Level.Grid[MapY][MapX].Items.Count > 0)
+        if (Grid[MapY][MapX].Items.Count > 0)
         {
             MsgPrint("You can't fetch when you're already standing on something.");
             return;
@@ -9820,14 +9823,14 @@ internal class SaveGame
             targetX = TargetCol;
             targetY = TargetRow;
             // Check the range
-            if (Level.Distance(MapY, MapX, targetY, targetX) > Constants.MaxRange)
+            if (Distance(MapY, MapX, targetY, targetX) > Constants.MaxRange)
             {
                 MsgPrint("You can't fetch something that far away!");
                 return;
             }
             // Check the line of sight if needed
-            tile = Level.Grid[targetY][targetX];
-            if (requireLos && !Level.PlayerHasLosBold(targetY, targetX))
+            tile = Grid[targetY][targetX];
+            if (requireLos && !PlayerHasLosBold(targetY, targetX))
             {
                 MsgPrint("You have no direct line of sight to that location.");
                 return;
@@ -9840,11 +9843,11 @@ internal class SaveGame
             targetX = MapX;
             do
             {
-                targetY += Level.KeypadDirectionYOffset[dir];
-                targetX += Level.KeypadDirectionXOffset[dir];
-                tile = Level.Grid[targetY][targetX];
+                targetY += KeypadDirectionYOffset[dir];
+                targetX += KeypadDirectionXOffset[dir];
+                tile = Grid[targetY][targetX];
                 // Stop if we hit max range or we're blocked by something
-                if (Level.Distance(MapY, MapX, targetY, targetX) > Constants.MaxRange || !Level.GridPassable(targetY, targetX))
+                if (Distance(MapY, MapX, targetY, targetX) > Constants.MaxRange || !GridPassable(targetY, targetX))
                 {
                     return;
                 }
@@ -9858,11 +9861,11 @@ internal class SaveGame
             return;
         }
         // Remove the entire item stack from the tile and move it to the player's tile
-        Level.Grid[MapY][MapX].Items.Add(item);
+        Grid[MapY][MapX].Items.Add(item);
         tile.Items.Remove(item);
         item.Y = MapY;
         item.X = MapX;
-        Level.NoteSpot(MapY, MapX);
+        NoteSpot(MapY, MapX);
         RedrawMapFlaggedAction.Set();
     }
 
@@ -9877,7 +9880,7 @@ internal class SaveGame
         bool more = false;
         // Tunnelling uses an entire turn
         EnergyUse = 100;
-        GridTile tile = Level.Grid[y][x];
+        GridTile tile = Grid[y][x];
         // Trees are easy to chop down
         if (tile.FeatureType.IsTree)
         {
@@ -9955,7 +9958,7 @@ internal class SaveGame
             {
                 if (hasValue)
                 {
-                    Level.PlaceGold(y, x);
+                    PlaceGold(y, x);
                     MsgPrint("You have found something!");
                 }
                 else
@@ -9984,8 +9987,8 @@ internal class SaveGame
                 // 10% chance of finding something
                 if (Program.Rng.RandomLessThan(100) < 10)
                 {
-                    Level.PlaceObject(y, x, false, false);
-                    if (Level.PlayerCanSeeBold(y, x))
+                    PlaceObject(y, x, false, false);
+                    if (PlayerCanSeeBold(y, x))
                     {
                         MsgPrint("You have found something!");
                     }
@@ -10005,7 +10008,7 @@ internal class SaveGame
             RunScript<SearchScript>();
         }
         // If we successfully made the tunnel,
-        if (!Level.GridPassable(y, x))
+        if (!GridPassable(y, x))
         {
             UpdateScentFlaggedAction.Set();
             UpdateMonstersFlaggedAction.Set();
@@ -10027,7 +10030,7 @@ internal class SaveGame
     /// <returns> True if we opened it, false otherwise </returns>
     private bool EasyOpenDoor(int y, int x)
     {
-        GridTile tile = Level.Grid[y][x];
+        GridTile tile = Grid[y][x];
         // If it isn't closed, we can't open it
         if (!tile.FeatureType.IsClosedDoor)
         {
@@ -10043,7 +10046,7 @@ internal class SaveGame
         {
             int skill = SkillDisarmTraps;
             // Lockpicking is hard in the dark
-            if (TimedBlindness.TurnsRemaining != 0 || Level.NoLight())
+            if (TimedBlindness.TurnsRemaining != 0 || NoLight())
             {
                 skill /= 10;
             }
@@ -10062,7 +10065,7 @@ internal class SaveGame
             if (Program.Rng.RandomLessThan(100) < chance)
             {
                 MsgPrint("You have picked the lock.");
-                Level.CaveSetFeat(y, x, "OpenDoor");
+                CaveSetFeat(y, x, "OpenDoor");
                 UpdateMonstersFlaggedAction.Set();
                 UpdateLightFlaggedAction.Set();
                 UpdateViewFlaggedAction.Set();
@@ -10078,7 +10081,7 @@ internal class SaveGame
         // It wasn't locked, so simply open it
         else
         {
-            Level.CaveSetFeat(y, x, "OpenDoor");
+            CaveSetFeat(y, x, "OpenDoor");
             UpdateMonstersFlaggedAction.Set();
             UpdateLightFlaggedAction.Set();
             UpdateViewFlaggedAction.Set();
@@ -10168,7 +10171,7 @@ internal class SaveGame
     {
         fear = false;
         monsterDies = false;
-        Monster monster = Level.Monsters[monsterIndex];
+        Monster monster = Monsters[monsterIndex];
         MonsterRace race = monster.Race;
         int damageSides = mutation.DamageDiceSize;
         int damageDice = mutation.DamageDiceNumber;
@@ -10202,7 +10205,7 @@ internal class SaveGame
             switch (mutation.MutationAttackType)
             {
                 case MutationAttackType.Physical:
-                    monsterDies = Level.DamageMonster(monsterIndex, damage, out fear, null);
+                    monsterDies = DamageMonster(monsterIndex, damage, out fear, null);
                     break;
 
                 case MutationAttackType.Poison:
@@ -10234,15 +10237,15 @@ internal class SaveGame
     /// <returns> True if the tunnel succeeded, false if not </returns>
     private bool RemoveTileViaTunnelling(int y, int x)
     {
-        GridTile tile = Level.Grid[y][x];
+        GridTile tile = Grid[y][x];
         // If we can already get through it, we can't tunnel through it
-        if (Level.GridPassable(y, x))
+        if (GridPassable(y, x))
         {
             return false;
         }
         // Clear the tile
         tile.TileFlags.Clear(GridTile.PlayerMemorized);
-        Level.RevertTileToBackground(y, x);
+        RevertTileToBackground(y, x);
         UpdateScentFlaggedAction.Set();
         UpdateMonstersFlaggedAction.Set();
         UpdateLightFlaggedAction.Set();
@@ -10258,7 +10261,7 @@ internal class SaveGame
         int damage;
         string name = "a trap";
         Disturb(false);
-        GridTile tile = Level.Grid[MapY][MapX];
+        GridTile tile = Grid[MapY][MapX];
         // Check the type of trap
         switch (tile.FeatureType.Name)
         {
@@ -10381,12 +10384,12 @@ internal class SaveGame
                     MsgPrint("There is a flash of shimmering light!");
                     // Trap disappears when triggered
                     tile.TileFlags.Clear(GridTile.PlayerMemorized);
-                    Level.RevertTileToBackground(MapY, MapX);
+                    RevertTileToBackground(MapY, MapX);
                     // Summon 1d3+2 monsters
                     int num = 2 + Program.Rng.DieRoll(3);
                     for (int i = 0; i < num; i++)
                     {
-                        Level.SummonSpecific(MapY, MapX, Difficulty, null);
+                        SummonSpecific(MapY, MapX, Difficulty, null);
                     }
                     // Have a chance of also cursing the player
                     if (Difficulty > Program.Rng.DieRoll(100))
@@ -10621,9 +10624,9 @@ internal class SaveGame
         // The noise the player is making is based on their stealth score
         uint noise = 1u << (30 - SkillStealth);
         // Go through all the monster slots on the level
-        for (int i = Level.MMax - 1; i >= 1; i--)
+        for (int i = MMax - 1; i >= 1; i--)
         {
-            Monster monster = Level.Monsters[i];
+            Monster monster = Monsters[i];
             // If the monster slot is empty, skip it
             if (monster.Race == null)
             {
@@ -10665,14 +10668,14 @@ internal class SaveGame
                 test = true;
             }
             // 2) We're aggravating
-            else if (monster.DistanceFromPlayer <= Constants.MaxSight && (Level.PlayerHasLosBold(monsterY, monsterX) || HasAggravation))
+            else if (monster.DistanceFromPlayer <= Constants.MaxSight && (PlayerHasLosBold(monsterY, monsterX) || HasAggravation))
             {
                 test = true;
             }
             // 3) We've left scent where the monster is so it can smell us
-            else if (Level.Grid[MapY][MapX].ScentAge == Level.Grid[monsterY][monsterX].ScentAge &&
-                     Level.Grid[monsterY][monsterX].ScentStrength < Constants.MonsterFlowDepth &&
-                     Level.Grid[monsterY][monsterX].ScentStrength < race.NoticeRange)
+            else if (Grid[MapY][MapX].ScentAge == Grid[monsterY][monsterX].ScentAge &&
+                     Grid[monsterY][monsterX].ScentStrength < Constants.MonsterFlowDepth &&
+                     Grid[monsterY][monsterX].ScentStrength < race.NoticeRange)
             {
                 test = true;
             }
@@ -10681,7 +10684,7 @@ internal class SaveGame
             {
                 continue;
             }
-            Level.CurrentlyActingMonster = i;
+            CurrentlyActingMonster = i;
             // Process the individual monster
             monster.ProcessMonster(noise);
             // If the monster killed the player or sent us to a new level, then stop processing
@@ -10690,7 +10693,7 @@ internal class SaveGame
                 break;
             }
         }
-        Level.CurrentlyActingMonster = 0;
+        CurrentlyActingMonster = 0;
     }
 
     /// <summary>
@@ -10710,14 +10713,14 @@ internal class SaveGame
         for (int distance = 0; distance <= Constants.MaxRange; distance++)
         {
             // If our location is blocked, give up
-            if (distance != 0 && !Level.GridPassable(y, x))
+            if (distance != 0 && !GridPassable(y, x))
             {
                 break;
             }
             // If there's another monster in the way and it is friendly, give up
-            if (distance != 0 && Level.Grid[y][x].MonsterIndex > 0)
+            if (distance != 0 && Grid[y][x].MonsterIndex > 0)
             {
-                if (!Level.Monsters[Level.Grid[y][x].MonsterIndex].SmFriendly)
+                if (!Monsters[Grid[y][x].MonsterIndex].SmFriendly)
                 {
                     break;
                 }
@@ -10728,7 +10731,7 @@ internal class SaveGame
                 return true;
             }
             // Move closer
-            Level.MoveOneStepTowards(out y, out x, y, x, startY, startX, targetY, targetX);
+            MoveOneStepTowards(out y, out x, y, x, startY, startX, targetY, targetX);
         }
         // If we gave up or ran out of distance we don't have a clean shot
         return false;
@@ -10749,27 +10752,27 @@ internal class SaveGame
             for (x = targetX - 2; x <= targetX + 2; x++)
             {
                 // Can't summon out of bounds
-                if (!Level.InBounds(y, x))
+                if (!InBounds(y, x))
                 {
                     continue;
                 }
                 // Can't summon too far away from the target location
-                if (Level.Distance(targetY, targetX, y, x) > 2)
+                if (Distance(targetY, targetX, y, x) > 2)
                 {
                     continue;
                 }
                 // Can't summon onto an Elder Sign
-                if (Level.Grid[y][x].FeatureType.Name == "ElderSign")
+                if (Grid[y][x].FeatureType.Name == "ElderSign")
                 {
                     continue;
                 }
                 // Can't summon onto a Yellow Sign
-                if (Level.Grid[y][x].FeatureType.Name == "YellowSign")
+                if (Grid[y][x].FeatureType.Name == "YellowSign")
                 {
                     continue;
                 }
                 // An empty tile in line of sight is acceptable
-                if (Level.GridPassableNoCreature(y, x) && Level.Los(targetY, targetX, y, x))
+                if (GridPassableNoCreature(y, x) && Los(targetY, targetX, y, x))
                 {
                     return true;
                 }
@@ -12172,19 +12175,19 @@ internal class SaveGame
 
     public void GenerateNewLevel()
     {
-        // Loop until we are able to build the level.  Keep track of the number of attempts.
+        // Loop until we are able to build the   Keep track of the number of attempts.
         for (int generateAttemptNumber = 0; ; generateAttemptNumber++)
         {
             bool okay = true;
 
             // Allocate and reset the grid tiles.
-            for (int y = 0; y < Level.MaxHgt; y++)
+            for (int y = 0; y < MaxHgt; y++)
             {
-                Level.Grid[y] = new GridTile[Level.MaxWid];
-                for (int x = 0; x < Level.MaxWid; x++)
+                Grid[y] = new GridTile[MaxWid];
+                for (int x = 0; x < MaxWid; x++)
                 {
                     GridTile newTile = new GridTile(this, x, y);
-                    Level.Grid[y][x] = newTile;
+                    Grid[y][x] = newTile;
                     if (CurrentDepth == 0)
                     {
                         newTile.SetBackgroundFeature("Grass");
@@ -12200,21 +12203,21 @@ internal class SaveGame
                 }
             }
 
-            Level.PanelRowMin = 0;
-            Level.PanelRowMax = 0;
-            Level.PanelColMin = 0;
-            Level.PanelColMax = 0;
+            PanelRowMin = 0;
+            PanelRowMax = 0;
+            PanelColMin = 0;
+            PanelColMax = 0;
             if (CurrentDepth == 0)
             {
                 if (Wilderness[WildernessY][WildernessX].Town != null)
                 {
                     CurTown = Wilderness[WildernessY][WildernessX].Town;
                     DungeonDifficulty = 0;
-                    Level.DunBias = null;
+                    DunBias = null;
                     if (Wilderness[WildernessY][WildernessX].Town.Char == 'K')
                     {
                         DungeonDifficulty = 35;
-                        Level.DunBias = new CthuloidMonsterSelector();
+                        DunBias = new CthuloidMonsterSelector();
                     }
                 }
                 else if (Wilderness[WildernessY][WildernessX].Dungeon != null)
@@ -12224,33 +12227,33 @@ internal class SaveGame
                     {
                         DungeonDifficulty = 4;
                     }
-                    Level.DunBias = Wilderness[WildernessY][WildernessX].Dungeon.Bias;
+                    DunBias = Wilderness[WildernessY][WildernessX].Dungeon.Bias;
                 }
                 else
                 {
                     DungeonDifficulty = 2;
-                    Level.DunBias = new AnimalMonsterSelector();
+                    DunBias = new AnimalMonsterSelector();
                 }
             }
             else
             {
                 DungeonDifficulty = CurDungeon.Offset;
-                Level.DunBias = CurDungeon.Bias;
+                DunBias = CurDungeon.Bias;
             }
-            Level.MonsterLevel = Difficulty;
-            Level.ObjectLevel = Difficulty;
-            Level.SpecialTreasure = false;
-            Level.SpecialDanger = false;
-            Level.TreasureRating = 0;
-            Level.DangerRating = 0;
+            MonsterLevel = Difficulty;
+            ObjectLevel = Difficulty;
+            SpecialTreasure = false;
+            SpecialDanger = false;
+            TreasureRating = 0;
+            DangerRating = 0;
             if (CurrentDepth == 0)
             {
-                Level.CurHgt = Constants.PlayableScreenHeight;
-                Level.CurWid = Constants.PlayableScreenWidth;
-                Level.MaxPanelRows = (Level.CurHgt / Constants.PlayableScreenHeight * 2) - 2;
-                Level.MaxPanelCols = (Level.CurWid / Constants.PlayableScreenWidth * 2) - 2;
-                Level.PanelRow = Level.MaxPanelRows;
-                Level.PanelCol = Level.MaxPanelCols;
+                CurHgt = Constants.PlayableScreenHeight;
+                CurWid = Constants.PlayableScreenWidth;
+                MaxPanelRows = (CurHgt / Constants.PlayableScreenHeight * 2) - 2;
+                MaxPanelCols = (CurWid / Constants.PlayableScreenWidth * 2) - 2;
+                PanelRow = MaxPanelRows;
+                PanelCol = MaxPanelCols;
                 if (Wilderness[WildernessY][WildernessX].Town != null)
                 {
                     TownGen();
@@ -12264,34 +12267,34 @@ internal class SaveGame
             {
                 if (CurDungeon.Tower)
                 {
-                    Level.CurHgt = Constants.PlayableScreenHeight;
-                    Level.CurWid = Constants.PlayableScreenWidth;
-                    Level.MaxPanelRows = 0;
-                    Level.MaxPanelCols = 0;
-                    Level.PanelRow = 0;
-                    Level.PanelCol = 0;
+                    CurHgt = Constants.PlayableScreenHeight;
+                    CurWid = Constants.PlayableScreenWidth;
+                    MaxPanelRows = 0;
+                    MaxPanelCols = 0;
+                    PanelRow = 0;
+                    PanelCol = 0;
                 }
                 else
                 {
                     if (Program.Rng.DieRoll(_smallLevel) == 1)
                     {
-                        int tester1 = Program.Rng.DieRoll(Level.MaxHgt / Constants.PlayableScreenHeight);
-                        int tester2 = Program.Rng.DieRoll(Level.MaxWid / Constants.PlayableScreenWidth);
-                        Level.CurHgt = tester1 * Constants.PlayableScreenHeight;
-                        Level.CurWid = tester2 * Constants.PlayableScreenWidth;
-                        Level.MaxPanelRows = (Level.CurHgt / Constants.PlayableScreenHeight * 2) - 2;
-                        Level.MaxPanelCols = (Level.CurWid / Constants.PlayableScreenWidth * 2) - 2;
-                        Level.PanelRow = Level.MaxPanelRows;
-                        Level.PanelCol = Level.MaxPanelCols;
+                        int tester1 = Program.Rng.DieRoll(MaxHgt / Constants.PlayableScreenHeight);
+                        int tester2 = Program.Rng.DieRoll(MaxWid / Constants.PlayableScreenWidth);
+                        CurHgt = tester1 * Constants.PlayableScreenHeight;
+                        CurWid = tester2 * Constants.PlayableScreenWidth;
+                        MaxPanelRows = (CurHgt / Constants.PlayableScreenHeight * 2) - 2;
+                        MaxPanelCols = (CurWid / Constants.PlayableScreenWidth * 2) - 2;
+                        PanelRow = MaxPanelRows;
+                        PanelCol = MaxPanelCols;
                     }
                     else
                     {
-                        Level.CurHgt = Level.MaxHgt;
-                        Level.CurWid = Level.MaxWid;
-                        Level.MaxPanelRows = (Level.CurHgt / Constants.PlayableScreenHeight * 2) - 2;
-                        Level.MaxPanelCols = (Level.CurWid / Constants.PlayableScreenWidth * 2) - 2;
-                        Level.PanelRow = Level.MaxPanelRows;
-                        Level.PanelCol = Level.MaxPanelCols;
+                        CurHgt = MaxHgt;
+                        CurWid = MaxWid;
+                        MaxPanelRows = (CurHgt / Constants.PlayableScreenHeight * 2) - 2;
+                        MaxPanelCols = (CurWid / Constants.PlayableScreenWidth * 2) - 2;
+                        PanelRow = MaxPanelRows;
+                        PanelCol = MaxPanelCols;
                     }
                 }
                 if (!UndergroundGen())
@@ -12299,98 +12302,98 @@ internal class SaveGame
                     okay = false;
                 }
             }
-            if (Level.TreasureRating > 100)
+            if (TreasureRating > 100)
             {
-                Level.TreasureFeeling = 2;
+                TreasureFeeling = 2;
             }
-            else if (Level.TreasureRating > 80)
+            else if (TreasureRating > 80)
             {
-                Level.TreasureFeeling = 3;
+                TreasureFeeling = 3;
             }
-            else if (Level.TreasureRating > 60)
+            else if (TreasureRating > 60)
             {
-                Level.TreasureFeeling = 4;
+                TreasureFeeling = 4;
             }
-            else if (Level.TreasureRating > 40)
+            else if (TreasureRating > 40)
             {
-                Level.TreasureFeeling = 5;
+                TreasureFeeling = 5;
             }
-            else if (Level.TreasureRating > 30)
+            else if (TreasureRating > 30)
             {
-                Level.TreasureFeeling = 6;
+                TreasureFeeling = 6;
             }
-            else if (Level.TreasureRating > 20)
+            else if (TreasureRating > 20)
             {
-                Level.TreasureFeeling = 7;
+                TreasureFeeling = 7;
             }
-            else if (Level.TreasureRating > 10)
+            else if (TreasureRating > 10)
             {
-                Level.TreasureFeeling = 8;
+                TreasureFeeling = 8;
             }
-            else if (Level.TreasureRating > 0)
+            else if (TreasureRating > 0)
             {
-                Level.TreasureFeeling = 9;
-            }
-            else
-            {
-                Level.TreasureFeeling = 10;
-            }
-            if (Level.SpecialTreasure)
-            {
-                Level.TreasureRating = 1;
-            }
-            if (Level.DangerRating > 100)
-            {
-                Level.DangerFeeling = 2;
-            }
-            else if (Level.DangerRating > 80)
-            {
-                Level.DangerFeeling = 3;
-            }
-            else if (Level.DangerRating > 60)
-            {
-                Level.DangerFeeling = 4;
-            }
-            else if (Level.DangerRating > 40)
-            {
-                Level.DangerFeeling = 5;
-            }
-            else if (Level.DangerRating > 30)
-            {
-                Level.DangerFeeling = 6;
-            }
-            else if (Level.DangerRating > 20)
-            {
-                Level.DangerFeeling = 7;
-            }
-            else if (Level.DangerRating > 10)
-            {
-                Level.DangerFeeling = 8;
-            }
-            else if (Level.DangerRating > 0)
-            {
-                Level.DangerFeeling = 9;
+                TreasureFeeling = 9;
             }
             else
             {
-                Level.DangerFeeling = 10;
+                TreasureFeeling = 10;
             }
-            if (Level.SpecialDanger)
+            if (SpecialTreasure)
             {
-                Level.DangerFeeling = 1;
+                TreasureRating = 1;
+            }
+            if (DangerRating > 100)
+            {
+                DangerFeeling = 2;
+            }
+            else if (DangerRating > 80)
+            {
+                DangerFeeling = 3;
+            }
+            else if (DangerRating > 60)
+            {
+                DangerFeeling = 4;
+            }
+            else if (DangerRating > 40)
+            {
+                DangerFeeling = 5;
+            }
+            else if (DangerRating > 30)
+            {
+                DangerFeeling = 6;
+            }
+            else if (DangerRating > 20)
+            {
+                DangerFeeling = 7;
+            }
+            else if (DangerRating > 10)
+            {
+                DangerFeeling = 8;
+            }
+            else if (DangerRating > 0)
+            {
+                DangerFeeling = 9;
+            }
+            else
+            {
+                DangerFeeling = 10;
+            }
+            if (SpecialDanger)
+            {
+                DangerFeeling = 1;
             }
             if (CurrentDepth <= 0)
             {
-                Level.TreasureFeeling = 0;
-                Level.DangerFeeling = 0;
+                TreasureFeeling = 0;
+                DangerFeeling = 0;
             }
-            if (Level.MMax >= Constants.MaxMIdx)
+            if (MMax >= Constants.MaxMIdx)
             {
                 okay = false;
             }
             if (generateAttemptNumber < 100)
             {
-                int totalFeeling = Level.TreasureFeeling + Level.DangerFeeling;
+                int totalFeeling = TreasureFeeling + DangerFeeling;
                 if (totalFeeling > 18 ||
                     (Difficulty >= 5 && totalFeeling > 16) ||
                     (Difficulty >= 10 && totalFeeling > 14) ||
@@ -12406,7 +12409,7 @@ internal class SaveGame
             }
 
             // Reset the level so that we can attempt again.
-            Level.WipeMList();
+            WipeMList();
         }
         GameTime.MarkLevelEntry();
     }
@@ -12421,13 +12424,13 @@ internal class SaveGame
             while (dummy < SafeMaxAttempts)
             {
                 dummy++;
-                y = Program.Rng.RandomLessThan(Level.CurHgt);
-                x = Program.Rng.RandomLessThan(Level.CurWid);
-                if (!Level.GridOpenNoItemOrCreature(y, x))
+                y = Program.Rng.RandomLessThan(CurHgt);
+                x = Program.Rng.RandomLessThan(CurWid);
+                if (!GridOpenNoItemOrCreature(y, x))
                 {
                     continue;
                 }
-                bool isRoom = Level.Grid[y][x].TileFlags.IsSet(GridTile.InRoom);
+                bool isRoom = Grid[y][x].TileFlags.IsSet(GridTile.InRoom);
                 if (set == _allocSetCorr && isRoom)
                 {
                     continue;
@@ -12451,17 +12454,17 @@ internal class SaveGame
                     }
                 case _allocTypTrap:
                     {
-                        Level.PlaceTrap(y, x);
+                        PlaceTrap(y, x);
                         break;
                     }
                 case _allocTypGold:
                     {
-                        Level.PlaceGold(y, x);
+                        PlaceGold(y, x);
                         break;
                     }
                 case _allocTypObject:
                     {
-                        Level.PlaceObject(y, x, false, false);
+                        PlaceObject(y, x, false, false);
                         break;
                     }
             }
@@ -12476,9 +12479,9 @@ internal class SaveGame
             {
                 for (int j = 0; !flag && j <= 3000; j++)
                 {
-                    int y = Program.Rng.RandomLessThan(Level.CurHgt);
-                    int x = Program.Rng.RandomLessThan(Level.CurWid);
-                    if (!Level.GridOpenNoItemOrCreature(y, x))
+                    int y = Program.Rng.RandomLessThan(CurHgt);
+                    int x = Program.Rng.RandomLessThan(CurWid);
+                    if (!GridOpenNoItemOrCreature(y, x))
                     {
                         continue;
                     }
@@ -12486,7 +12489,7 @@ internal class SaveGame
                     {
                         continue;
                     }
-                    GridTile cPtr = Level.Grid[y][x];
+                    GridTile cPtr = Grid[y][x];
                     if (CurrentDepth <= 0)
                     {
                         cPtr.SetFeature("DownStair");
@@ -12523,15 +12526,15 @@ internal class SaveGame
         {
             for (int y = y1; y < y2; y++)
             {
-                Level.Grid[y][x].SetFeature(feature);
-                Level.Grid[y][x].SetBackgroundFeature(feature);
+                Grid[y][x].SetFeature(feature);
+                Grid[y][x].SetBackgroundFeature(feature);
             }
         }
         if (Program.Rng.DieRoll(5) == 4)
         {
             int x = Program.Rng.RandomBetween(x1, x2);
             int y = Program.Rng.RandomBetween(y1, y2);
-            Level.Grid[y][x].SetFeature("Scarecrow");
+            Grid[y][x].SetFeature("Scarecrow");
         }
     }
 
@@ -12547,7 +12550,7 @@ internal class SaveGame
         {
             int x = (Program.Rng.RandomBetween(x1, x2) / 2 * 2) + 1;
             int y = (Program.Rng.RandomBetween(y1, y2) / 2 * 2) + 1;
-            Level.Grid[y][x].SetFeature("Grave");
+            Grid[y][x].SetFeature("Grave");
         }
     }
 
@@ -12598,7 +12601,7 @@ internal class SaveGame
         {
             for (x = x1; x <= x2; x++)
             {
-                cPtr = Level.Grid[y][x];
+                cPtr = Grid[y][x];
                 if (CurTown.Char == 'K')
                 {
                     switch (Program.Rng.DieRoll(6))
@@ -12630,7 +12633,7 @@ internal class SaveGame
         }
         y = y2;
         x = Program.Rng.RandomBetween(x1 + 1, x2 - 2);
-        cPtr = Level.Grid[y][x];
+        cPtr = Grid[y][x];
         if (CurTown.Char == 'K')
         {
             if (Program.Rng.DieRoll(8) == 6)
@@ -12645,14 +12648,14 @@ internal class SaveGame
         store.SetLocation(x, y);
         for (++y; y < y0 + 7; y++)
         {
-            cPtr = Level.Grid[y][x];
+            cPtr = Grid[y][x];
             cPtr.SetFeature("PathBase");
         }
         y--;
-        int dX = Math.Sign((Level.CurWid / 2) - x);
-        for (x += dX; x != Level.CurWid / 2; x += dX)
+        int dX = Math.Sign((CurWid / 2) - x);
+        for (x += dX; x != CurWid / 2; x += dX)
         {
-            cPtr = Level.Grid[y][x];
+            cPtr = Grid[y][x];
             cPtr.SetFeature("PathBase");
         }
     }
@@ -12660,9 +12663,9 @@ internal class SaveGame
     private void BuildStreamer(string feat, int chance)
     {
         int dummy = 0;
-        int y = Program.Rng.RandomSpread(Level.CurHgt / 2, 10);
-        int x = Program.Rng.RandomSpread(Level.CurWid / 2, 15);
-        int dir = Level.OrderedDirection[Program.Rng.RandomLessThan(8)];
+        int y = Program.Rng.RandomSpread(CurHgt / 2, 10);
+        int x = Program.Rng.RandomSpread(CurWid / 2, 15);
+        int dir = OrderedDirection[Program.Rng.RandomLessThan(8)];
         while (dummy < SafeMaxAttempts)
         {
             dummy++;
@@ -12675,13 +12678,13 @@ internal class SaveGame
                 {
                     ty = Program.Rng.RandomSpread(y, d);
                     tx = Program.Rng.RandomSpread(x, d);
-                    if (!Level.InBounds2(ty, tx))
+                    if (!InBounds2(ty, tx))
                     {
                         continue;
                     }
                     break;
                 }
-                GridTile cPtr = Level.Grid[ty][tx];
+                GridTile cPtr = Grid[ty][tx];
 
                 if (!cPtr.FeatureType.IsBasicWall)
                 {
@@ -12697,9 +12700,9 @@ internal class SaveGame
             {
                 return;
             }
-            y += Level.KeypadDirectionYOffset[dir];
-            x += Level.KeypadDirectionXOffset[dir];
-            if (!Level.InBounds(y, x))
+            y += KeypadDirectionYOffset[dir];
+            x += KeypadDirectionXOffset[dir];
+            if (!InBounds(y, x))
             {
                 break;
             }
@@ -12733,7 +12736,7 @@ internal class SaveGame
             }
             int tmpRow = row1 + rowDir;
             int tmpCol = col1 + colDir;
-            while (!Level.InBounds(tmpRow, tmpCol))
+            while (!InBounds(tmpRow, tmpCol))
             {
                 CorrectDir(out rowDir, out colDir, row1, col1, row2, col2);
                 if (Program.Rng.RandomLessThan(100) < _dunTunRnd)
@@ -12743,7 +12746,7 @@ internal class SaveGame
                 tmpRow = row1 + rowDir;
                 tmpCol = col1 + colDir;
             }
-            cPtr = Level.Grid[tmpRow][tmpCol];
+            cPtr = Grid[tmpRow][tmpCol];
             if (cPtr.FeatureType.Name == "WallPermSolid")
             {
                 continue;
@@ -12760,19 +12763,19 @@ internal class SaveGame
             {
                 y = tmpRow + rowDir;
                 x = tmpCol + colDir;
-                if (Level.Grid[y][x].FeatureType.Name == "WallPermSolid")
+                if (Grid[y][x].FeatureType.Name == "WallPermSolid")
                 {
                     continue;
                 }
-                if (Level.Grid[y][x].FeatureType.Name == "WallPermOuter")
+                if (Grid[y][x].FeatureType.Name == "WallPermOuter")
                 {
                     continue;
                 }
-                if (Level.Grid[y][x].FeatureType.Name == "WallOuter")
+                if (Grid[y][x].FeatureType.Name == "WallOuter")
                 {
                     continue;
                 }
-                if (Level.Grid[y][x].FeatureType.Name == "WallSolid")
+                if (Grid[y][x].FeatureType.Name == "WallSolid")
                 {
                     continue;
                 }
@@ -12787,9 +12790,9 @@ internal class SaveGame
                 {
                     for (x = col1 - 1; x <= col1 + 1; x++)
                     {
-                        if (Level.Grid[y][x].FeatureType.Name == "WallOuter")
+                        if (Grid[y][x].FeatureType.Name == "WallOuter")
                         {
-                            Level.Grid[y][x].SetFeature("WallSolid");
+                            Grid[y][x].SetFeature("WallSolid");
                         }
                     }
                 }
@@ -12846,14 +12849,14 @@ internal class SaveGame
         {
             y = Tunn[i].Y;
             x = Tunn[i].X;
-            cPtr = Level.Grid[y][x];
+            cPtr = Grid[y][x];
             cPtr.RevertToBackground();
         }
         for (i = 0; i < WallN; i++)
         {
             y = Wall[i].Y;
             x = Wall[i].X;
-            cPtr = Level.Grid[y][x];
+            cPtr = Grid[y][x];
             cPtr.RevertToBackground();
             if (Program.Rng.RandomLessThan(100) < _dunTunPen)
             {
@@ -12883,28 +12886,28 @@ internal class SaveGame
     {
         for (int n = 0; n < Program.Rng.DieRoll(5); n++)
         {
-            int x1 = Program.Rng.RandomBetween(5, Level.CurWid - 1 - 5);
-            int y1 = Program.Rng.RandomBetween(5, Level.CurHgt - 1 - 5);
+            int x1 = Program.Rng.RandomBetween(5, CurWid - 1 - 5);
+            int y1 = Program.Rng.RandomBetween(5, CurHgt - 1 - 5);
             int y;
             for (y = y1 - 15; y <= y1 + 15; y++)
             {
                 int x;
                 for (x = x1 - 15; x <= x1 + 15; x++)
                 {
-                    if (!Level.InBounds(y, x))
+                    if (!InBounds(y, x))
                     {
                         continue;
                     }
-                    int k = Level.Distance(y1, x1, y, x);
+                    int k = Distance(y1, x1, y, x);
                     if (k >= 16)
                     {
                         continue;
                     }
-                    Level.DeleteMonster(y, x);
-                    if (Level.CaveValidBold(y, x))
+                    DeleteMonster(y, x);
+                    if (CaveValidBold(y, x))
                     {
                         DeleteObject(y, x);
-                        GridTile cPtr = Level.Grid[y][x];
+                        GridTile cPtr = Grid[y][x];
                         int t = Program.Rng.RandomLessThan(200);
                         if (t < 20)
                         {
@@ -12933,17 +12936,17 @@ internal class SaveGame
     private void MakeCavernLevel()
     {
         PerlinNoise perlinNoise = new PerlinNoise(Program.Rng.RandomBetween(0, int.MaxValue - 1));
-        double widthDivisor = 1 / (double)Level.CurWid;
-        double heightDivisor = 1 / (double)Level.CurHgt;
-        for (int y = 0; y < Level.CurHgt; y++)
+        double widthDivisor = 1 / (double)CurWid;
+        double heightDivisor = 1 / (double)CurHgt;
+        for (int y = 0; y < CurHgt; y++)
         {
-            for (int x = 0; x < Level.CurWid; x++)
+            for (int x = 0; x < CurWid; x++)
             {
-                GridTile cPtr = Level.Grid[y][x];
+                GridTile cPtr = Grid[y][x];
                 double v = perlinNoise.Noise(10 * x * widthDivisor, 10 * y * heightDivisor, -0.5);
                 v = (v + 1) / 2;
-                double dX = Math.Abs(x - (Level.CurWid / 2)) * widthDivisor;
-                double dY = Math.Abs(y - (Level.CurHgt / 2)) * heightDivisor;
+                double dX = Math.Abs(x - (CurWid / 2)) * widthDivisor;
+                double dY = Math.Abs(y - (CurHgt / 2)) * heightDivisor;
                 double d = Math.Max(dX, dY);
                 const double elevation = 0.05;
                 const double steepness = 6.0;
@@ -12969,115 +12972,115 @@ internal class SaveGame
         {
             BuildStreamer("Quartz", _dunStrQc);
         }
-        for (int x = 0; x < Level.CurWid; x++)
+        for (int x = 0; x < CurWid; x++)
         {
-            GridTile cPtr = Level.Grid[0][x];
+            GridTile cPtr = Grid[0][x];
             cPtr.SetFeature("WallPermSolid");
         }
-        for (int x = 0; x < Level.CurWid; x++)
+        for (int x = 0; x < CurWid; x++)
         {
-            GridTile cPtr = Level.Grid[Level.CurHgt - 1][x];
+            GridTile cPtr = Grid[CurHgt - 1][x];
             cPtr.SetFeature("WallPermSolid");
         }
-        for (int y = 0; y < Level.CurHgt; y++)
+        for (int y = 0; y < CurHgt; y++)
         {
-            GridTile cPtr = Level.Grid[y][0];
+            GridTile cPtr = Grid[y][0];
             cPtr.SetFeature("WallPermSolid");
         }
-        for (int y = 0; y < Level.CurHgt; y++)
+        for (int y = 0; y < CurHgt; y++)
         {
-            GridTile cPtr = Level.Grid[y][Level.CurWid - 1];
+            GridTile cPtr = Grid[y][CurWid - 1];
             cPtr.SetFeature("WallPermSolid");
         }
         if (Program.Rng.DieRoll(_darkEmpty) != 1 || Program.Rng.DieRoll(100) > Difficulty)
         {
-            Level.WizLight();
+            WizLight();
         }
     }
 
     private void MakeCornerTowers(int wildX, int wildY)
     {
-        int height = Level.CurHgt;
-        int width = Level.CurWid;
+        int height = CurHgt;
+        int width = CurWid;
         if ((Wilderness[wildY][wildX].Town != null) || (Wilderness[wildY - 1][wildX].Town != null) ||
             (Wilderness[wildY][wildX - 1].Town != null) || (Wilderness[wildY - 1][wildX - 1].Town != null))
         {
-            Level.Grid[0][0].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[0][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[1][0].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[1][1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[0][1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[0][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[0][0].RevertToBackground();
-            Level.Grid[0][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[1][0].SetFeature("TownWall");
-            Level.Grid[1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[1][1].SetFeature("TownWall");
-            Level.Grid[1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[0][1].SetFeature("TownWall");
-            Level.Grid[0][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[0][0].SetBackgroundFeature("InsideGatehouse");
+            Grid[0][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[1][0].SetBackgroundFeature("InsideGatehouse");
+            Grid[1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[1][1].SetBackgroundFeature("InsideGatehouse");
+            Grid[1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[0][1].SetBackgroundFeature("InsideGatehouse");
+            Grid[0][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[0][0].RevertToBackground();
+            Grid[0][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[1][0].SetFeature("TownWall");
+            Grid[1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[1][1].SetFeature("TownWall");
+            Grid[1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[0][1].SetFeature("TownWall");
+            Grid[0][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         }
         if ((Wilderness[wildY][wildX].Town != null) || (Wilderness[wildY - 1][wildX].Town != null) ||
             (Wilderness[wildY][wildX + 1].Town != null) || (Wilderness[wildY - 1][wildX + 1].Town != null))
         {
-            Level.Grid[0][width - 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[0][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[1][width - 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[1][width - 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[0][width - 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[0][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[0][width - 1].RevertToBackground();
-            Level.Grid[0][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[1][width - 1].SetFeature("TownWall");
-            Level.Grid[1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[1][width - 2].SetFeature("TownWall");
-            Level.Grid[1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[0][width - 2].SetFeature("TownWall");
-            Level.Grid[0][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[0][width - 1].SetBackgroundFeature("InsideGatehouse");
+            Grid[0][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[1][width - 1].SetBackgroundFeature("InsideGatehouse");
+            Grid[1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[1][width - 2].SetBackgroundFeature("InsideGatehouse");
+            Grid[1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[0][width - 2].SetBackgroundFeature("InsideGatehouse");
+            Grid[0][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[0][width - 1].RevertToBackground();
+            Grid[0][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[1][width - 1].SetFeature("TownWall");
+            Grid[1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[1][width - 2].SetFeature("TownWall");
+            Grid[1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[0][width - 2].SetFeature("TownWall");
+            Grid[0][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         }
         if ((Wilderness[wildY][wildX].Town != null) || (Wilderness[wildY + 1][wildX].Town != null) ||
             (Wilderness[wildY][wildX + 1].Town != null) || (Wilderness[wildY + 1][wildX + 1].Town != null))
         {
-            Level.Grid[height - 1][width - 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 2][width - 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 2][width - 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 1][width - 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 1][width - 1].RevertToBackground();
-            Level.Grid[height - 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 2][width - 1].SetFeature("TownWall");
-            Level.Grid[height - 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 2][width - 2].SetFeature("TownWall");
-            Level.Grid[height - 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 1][width - 2].SetFeature("TownWall");
-            Level.Grid[height - 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 1][width - 1].SetBackgroundFeature("InsideGatehouse");
+            Grid[height - 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 2][width - 1].SetBackgroundFeature("InsideGatehouse");
+            Grid[height - 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 2][width - 2].SetBackgroundFeature("InsideGatehouse");
+            Grid[height - 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 1][width - 2].SetBackgroundFeature("InsideGatehouse");
+            Grid[height - 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 1][width - 1].RevertToBackground();
+            Grid[height - 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 2][width - 1].SetFeature("TownWall");
+            Grid[height - 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 2][width - 2].SetFeature("TownWall");
+            Grid[height - 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 1][width - 2].SetFeature("TownWall");
+            Grid[height - 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         }
         if ((Wilderness[wildY][wildX].Town != null) || (Wilderness[wildY + 1][wildX].Town != null) ||
             (Wilderness[wildY][wildX - 1].Town != null) || (Wilderness[wildY + 1][wildX - 1].Town != null))
         {
-            Level.Grid[height - 1][0].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 2][0].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 2][1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 1][1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 1][0].RevertToBackground();
-            Level.Grid[height - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 2][0].SetFeature("TownWall");
-            Level.Grid[height - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 2][1].SetFeature("TownWall");
-            Level.Grid[height - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 1][1].SetFeature("TownWall");
-            Level.Grid[height - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 1][0].SetBackgroundFeature("InsideGatehouse");
+            Grid[height - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 2][0].SetBackgroundFeature("InsideGatehouse");
+            Grid[height - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 2][1].SetBackgroundFeature("InsideGatehouse");
+            Grid[height - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 1][1].SetBackgroundFeature("InsideGatehouse");
+            Grid[height - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 1][0].RevertToBackground();
+            Grid[height - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 2][0].SetFeature("TownWall");
+            Grid[height - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 2][1].SetFeature("TownWall");
+            Grid[height - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 1][1].SetFeature("TownWall");
+            Grid[height - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         }
     }
 
@@ -13091,26 +13094,26 @@ internal class SaveGame
             dummy++;
             y = Program.Rng.RandomBetween(top, top + height);
             x = Program.Rng.RandomBetween(left, left + width);
-            if (Level.GridOpenNoItemOrCreature(y, x))
+            if (GridOpenNoItemOrCreature(y, x))
             {
                 break;
             }
         }
-        Level.Grid[y - 2][x].RevertToBackground();
-        Level.Grid[y - 1][x - 1].RevertToBackground();
-        Level.Grid[y - 1][x].RevertToBackground();
-        Level.Grid[y - 1][x + 1].RevertToBackground();
-        Level.Grid[y][x - 2].RevertToBackground();
-        Level.Grid[y][x - 1].RevertToBackground();
-        Level.Grid[y][x].SetFeature("DownStair");
+        Grid[y - 2][x].RevertToBackground();
+        Grid[y - 1][x - 1].RevertToBackground();
+        Grid[y - 1][x].RevertToBackground();
+        Grid[y - 1][x + 1].RevertToBackground();
+        Grid[y][x - 2].RevertToBackground();
+        Grid[y][x - 1].RevertToBackground();
+        Grid[y][x].SetFeature("DownStair");
         stairX = x;
         stairY = y;
-        Level.Grid[y][x + 1].RevertToBackground();
-        Level.Grid[y][x + 2].RevertToBackground();
-        Level.Grid[y + 1][x - 1].RevertToBackground();
-        Level.Grid[y + 1][x].RevertToBackground();
-        Level.Grid[y + 1][x + 1].RevertToBackground();
-        Level.Grid[y + 2][x].RevertToBackground();
+        Grid[y][x + 1].RevertToBackground();
+        Grid[y][x + 2].RevertToBackground();
+        Grid[y + 1][x - 1].RevertToBackground();
+        Grid[y + 1][x].RevertToBackground();
+        Grid[y + 1][x + 1].RevertToBackground();
+        Grid[y + 2][x].RevertToBackground();
     }
 
     private void MakeDungeonLevel()
@@ -13148,11 +13151,11 @@ internal class SaveGame
             RoomMap[i] = new bool[MaxRoomsCol];
         }
 
-        if (Level.MaxPanelRows == 0)
+        if (MaxPanelRows == 0)
         {
             maxVaultOk--;
         }
-        if (Level.MaxPanelCols == 0)
+        if (MaxPanelCols == 0)
         {
             maxVaultOk--;
         }
@@ -13160,11 +13163,11 @@ internal class SaveGame
         {
             emptyLevel = true;
         }
-        for (y = 0; y < Level.CurHgt; y++)
+        for (y = 0; y < CurHgt; y++)
         {
-            for (x = 0; x < Level.CurWid; x++)
+            for (x = 0; x < CurWid; x++)
             {
-                GridTile cPtr = Level.Grid[y][x];
+                GridTile cPtr = Grid[y][x];
                 if (emptyLevel)
                 {
                     cPtr.RevertToBackground();
@@ -13183,8 +13186,8 @@ internal class SaveGame
         {
             destroyed = false;
         }
-        RowRooms = Level.CurHgt / _blockHgt;
-        ColRooms = Level.CurWid / _blockWid;
+        RowRooms = CurHgt / _blockHgt;
+        ColRooms = CurWid / _blockWid;
         for (y = 0; y < RowRooms; y++)
         {
             for (x = 0; x < ColRooms; x++)
@@ -13264,24 +13267,24 @@ internal class SaveGame
             {
             }
         }
-        for (x = 0; x < Level.CurWid; x++)
+        for (x = 0; x < CurWid; x++)
         {
-            GridTile cPtr = Level.Grid[0][x];
+            GridTile cPtr = Grid[0][x];
             cPtr.SetFeature("WallPermSolid");
         }
-        for (x = 0; x < Level.CurWid; x++)
+        for (x = 0; x < CurWid; x++)
         {
-            GridTile cPtr = Level.Grid[Level.CurHgt - 1][x];
+            GridTile cPtr = Grid[CurHgt - 1][x];
             cPtr.SetFeature("WallPermSolid");
         }
-        for (y = 0; y < Level.CurHgt; y++)
+        for (y = 0; y < CurHgt; y++)
         {
-            GridTile cPtr = Level.Grid[y][0];
+            GridTile cPtr = Grid[y][0];
             cPtr.SetFeature("WallPermSolid");
         }
-        for (y = 0; y < Level.CurHgt; y++)
+        for (y = 0; y < CurHgt; y++)
         {
-            GridTile cPtr = Level.Grid[y][Level.CurWid - 1];
+            GridTile cPtr = Grid[y][CurWid - 1];
             cPtr.SetFeature("WallPermSolid");
         }
         for (int i = 0; i < CentN; i++)
@@ -13326,7 +13329,7 @@ internal class SaveGame
         if (emptyLevel && (Program.Rng.DieRoll(_darkEmpty) != 1 ||
                            Program.Rng.DieRoll(100) > Difficulty))
         {
-            Level.WizLight();
+            WizLight();
         }
     }
 
@@ -13336,90 +13339,90 @@ internal class SaveGame
         int midY = top + (height / 2);
         for (int y = midY - 3; y < midY + 3; y++)
         {
-            Level.Grid[y][midX - 7].SetBackgroundFeature("Grass");
-            Level.Grid[y][midX - 7].SetFeature("Grass");
+            Grid[y][midX - 7].SetBackgroundFeature("Grass");
+            Grid[y][midX - 7].SetFeature("Grass");
         }
         for (int y = midY - 5; y < midY + 5; y++)
         {
-            Level.Grid[y][midX - 6].SetBackgroundFeature("Grass");
-            Level.Grid[y][midX - 6].SetFeature("Grass");
+            Grid[y][midX - 6].SetBackgroundFeature("Grass");
+            Grid[y][midX - 6].SetFeature("Grass");
         }
         for (int y = midY - 6; y < midY + 6; y++)
         {
-            Level.Grid[y][midX - 5].SetBackgroundFeature("Grass");
-            Level.Grid[y][midX - 5].SetFeature("Grass");
+            Grid[y][midX - 5].SetBackgroundFeature("Grass");
+            Grid[y][midX - 5].SetFeature("Grass");
         }
         for (int y = midY - 6; y < midY + 6; y++)
         {
-            Level.Grid[y][midX - 4].SetBackgroundFeature("Grass");
-            Level.Grid[y][midX - 4].SetFeature("Grass");
+            Grid[y][midX - 4].SetBackgroundFeature("Grass");
+            Grid[y][midX - 4].SetFeature("Grass");
         }
         for (int y = midY - 7; y < midY + 6; y++)
         {
-            Level.Grid[y][midX - 3].SetBackgroundFeature("Grass");
-            Level.Grid[y][midX - 3].SetFeature("Grass");
+            Grid[y][midX - 3].SetBackgroundFeature("Grass");
+            Grid[y][midX - 3].SetFeature("Grass");
         }
         for (int y = midY - 7; y < midY + 6; y++)
         {
-            Level.Grid[y][midX - 2].SetBackgroundFeature("Grass");
-            Level.Grid[y][midX - 2].SetFeature("Grass");
+            Grid[y][midX - 2].SetBackgroundFeature("Grass");
+            Grid[y][midX - 2].SetFeature("Grass");
         }
         for (int y = midY - 6; y < midY + 6; y++)
         {
-            Level.Grid[y][midX - 1].SetBackgroundFeature("Grass");
-            Level.Grid[y][midX - 1].SetFeature("Grass");
+            Grid[y][midX - 1].SetBackgroundFeature("Grass");
+            Grid[y][midX - 1].SetFeature("Grass");
         }
         for (int y = midY - 7; y < midY + 6; y++)
         {
-            Level.Grid[y][midX].SetBackgroundFeature("Grass");
-            Level.Grid[y][midX].SetFeature("Grass");
+            Grid[y][midX].SetBackgroundFeature("Grass");
+            Grid[y][midX].SetFeature("Grass");
         }
         for (int y = midY - 7; y < midY + 6; y++)
         {
-            Level.Grid[y][midX + 1].SetBackgroundFeature("Grass");
-            Level.Grid[y][midX + 1].SetFeature("Grass");
+            Grid[y][midX + 1].SetBackgroundFeature("Grass");
+            Grid[y][midX + 1].SetFeature("Grass");
         }
         for (int y = midY - 6; y < midY + 6; y++)
         {
-            Level.Grid[y][midX + 2].SetBackgroundFeature("Grass");
-            Level.Grid[y][midX + 2].SetFeature("Grass");
+            Grid[y][midX + 2].SetBackgroundFeature("Grass");
+            Grid[y][midX + 2].SetFeature("Grass");
         }
         for (int y = midY - 7; y < midY + 6; y++)
         {
-            Level.Grid[y][midX + 3].SetBackgroundFeature("Grass");
-            Level.Grid[y][midX + 3].SetFeature("Grass");
+            Grid[y][midX + 3].SetBackgroundFeature("Grass");
+            Grid[y][midX + 3].SetFeature("Grass");
         }
         for (int y = midY - 6; y < midY + 6; y++)
         {
-            Level.Grid[y][midX + 4].SetBackgroundFeature("Grass");
-            Level.Grid[y][midX + 4].SetFeature("Grass");
+            Grid[y][midX + 4].SetBackgroundFeature("Grass");
+            Grid[y][midX + 4].SetFeature("Grass");
         }
         for (int y = midY - 5; y < midY + 5; y++)
         {
-            Level.Grid[y][midX + 5].SetBackgroundFeature("Grass");
-            Level.Grid[y][midX + 5].SetFeature("Grass");
+            Grid[y][midX + 5].SetBackgroundFeature("Grass");
+            Grid[y][midX + 5].SetFeature("Grass");
         }
         for (int y = midY - 3; y < midY + 3; y++)
         {
-            Level.Grid[y][midX + 6].SetBackgroundFeature("Grass");
-            Level.Grid[y][midX + 6].SetFeature("Grass");
+            Grid[y][midX + 6].SetBackgroundFeature("Grass");
+            Grid[y][midX + 6].SetFeature("Grass");
         }
-        Level.Grid[midY - 6][midX].SetFeature("Rock");
-        Level.Grid[midY - 6][midX - 1].SetFeature("Rock");
-        Level.Grid[midY - 5][midX - 4].SetFeature("Rock");
-        Level.Grid[midY - 4][midX - 5].SetFeature("Rock");
-        Level.Grid[midY - 1][midX - 6].SetFeature("Rock");
-        Level.Grid[midY][midX - 6].SetFeature("Rock");
-        Level.Grid[midY + 3][midX - 5].SetFeature("Rock");
-        Level.Grid[midY + 4][midX - 4].SetFeature("Rock");
-        Level.Grid[midY + 5][midX - 1].SetFeature("Rock");
-        Level.Grid[midY + 5][midX].SetFeature("Rock");
-        Level.Grid[midY + 4][midX + 3].SetFeature("Rock");
-        Level.Grid[midY + 3][midX + 4].SetFeature("Rock");
-        Level.Grid[midY][midX + 5].SetFeature("Rock");
-        Level.Grid[midY - 1][midX + 5].SetFeature("Rock");
-        Level.Grid[midY - 4][midX + 4].SetFeature("Rock");
-        Level.Grid[midY - 5][midX + 3].SetFeature("Rock");
+        Grid[midY - 6][midX].SetFeature("Rock");
+        Grid[midY - 6][midX - 1].SetFeature("Rock");
+        Grid[midY - 5][midX - 4].SetFeature("Rock");
+        Grid[midY - 4][midX - 5].SetFeature("Rock");
+        Grid[midY - 1][midX - 6].SetFeature("Rock");
+        Grid[midY][midX - 6].SetFeature("Rock");
+        Grid[midY + 3][midX - 5].SetFeature("Rock");
+        Grid[midY + 4][midX - 4].SetFeature("Rock");
+        Grid[midY + 5][midX - 1].SetFeature("Rock");
+        Grid[midY + 5][midX].SetFeature("Rock");
+        Grid[midY + 4][midX + 3].SetFeature("Rock");
+        Grid[midY + 3][midX + 4].SetFeature("Rock");
+        Grid[midY][midX + 5].SetFeature("Rock");
+        Grid[midY - 1][midX + 5].SetFeature("Rock");
+        Grid[midY - 4][midX + 4].SetFeature("Rock");
+        Grid[midY - 5][midX + 3].SetFeature("Rock");
     }
 
     private void MakeLake(int minX, int minY, int width, int height)
@@ -13431,7 +13434,7 @@ internal class SaveGame
         {
             for (int x = 0; x < width; x++)
             {
-                GridTile cPtr = Level.Grid[minY + y][minX + x];
+                GridTile cPtr = Grid[minY + y][minX + x];
                 double v = perlinNoise.Noise(10 * x * widthDivisor, 10 * y * heightDivisor, -0.5);
                 v = (v + 1) / 2;
                 double dX = Math.Abs(x - (width / 2)) * widthDivisor;
@@ -13466,126 +13469,126 @@ internal class SaveGame
         stairY = y;
         for (i = -2; i < 3; i++)
         {
-            Level.Grid[y][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
+            Grid[y][x + i].SetFeature("WallPermBuilding");
+            Grid[y][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -4; i < 5; i++)
         {
-            Level.Grid[y - 1][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 1][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
+            Grid[y - 1][x + i].SetFeature("WallPermBuilding");
+            Grid[y - 1][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -5; i < 6; i++)
         {
-            Level.Grid[y - 2][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 2][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
+            Grid[y - 2][x + i].SetFeature("WallPermBuilding");
+            Grid[y - 2][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -6; i < 7; i++)
         {
-            Level.Grid[y - 3][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 3][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
+            Grid[y - 3][x + i].SetFeature("WallPermBuilding");
+            Grid[y - 3][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -6; i < 7; i++)
         {
-            Level.Grid[y - 4][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 4][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
+            Grid[y - 4][x + i].SetFeature("WallPermBuilding");
+            Grid[y - 4][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -7; i < 8; i++)
         {
-            Level.Grid[y - 5][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 5][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
+            Grid[y - 5][x + i].SetFeature("WallPermBuilding");
+            Grid[y - 5][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -7; i < 8; i++)
         {
-            Level.Grid[y - 6][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 6][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
+            Grid[y - 6][x + i].SetFeature("WallPermBuilding");
+            Grid[y - 6][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -7; i < 8; i++)
         {
-            Level.Grid[y - 7][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 7][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
+            Grid[y - 7][x + i].SetFeature("WallPermBuilding");
+            Grid[y - 7][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -7; i < 8; i++)
         {
-            Level.Grid[y - 8][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 8][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
+            Grid[y - 8][x + i].SetFeature("WallPermBuilding");
+            Grid[y - 8][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -7; i < 8; i++)
         {
-            Level.Grid[y - 9][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 9][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
+            Grid[y - 9][x + i].SetFeature("WallPermBuilding");
+            Grid[y - 9][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -6; i < 7; i++)
         {
-            Level.Grid[y - 10][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 10][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
+            Grid[y - 10][x + i].SetFeature("WallPermBuilding");
+            Grid[y - 10][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -6; i < 7; i++)
         {
-            Level.Grid[y - 11][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 11][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
+            Grid[y - 11][x + i].SetFeature("WallPermBuilding");
+            Grid[y - 11][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -5; i < 6; i++)
         {
-            Level.Grid[y - 12][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 12][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
+            Grid[y - 12][x + i].SetFeature("WallPermBuilding");
+            Grid[y - 12][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -4; i < 5; i++)
         {
-            Level.Grid[y - 13][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 13][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
+            Grid[y - 13][x + i].SetFeature("WallPermBuilding");
+            Grid[y - 13][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
         for (i = -2; i < 4; i++)
         {
-            Level.Grid[y - 14][x + i].SetFeature("WallPermBuilding");
-            Level.Grid[y - 14][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
+            Grid[y - 14][x + i].SetFeature("WallPermBuilding");
+            Grid[y - 14][x + i].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         }
-        Level.Grid[y][x].SetFeature("UpStair");
-        Level.Grid[y][x].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
+        Grid[y][x].SetFeature("UpStair");
+        Grid[y][x].TileFlags.Set(GridTile.PlayerMemorized | GridTile.SelfLit);
         for (i = -3; i < 4; i++)
         {
-            if (Level.Grid[y + 1][x + i].FeatureType.IsTree)
+            if (Grid[y + 1][x + i].FeatureType.IsTree)
             {
-                Level.Grid[y + 1][x + i].RevertToBackground();
+                Grid[y + 1][x + i].RevertToBackground();
             }
         }
         for (i = -2; i < 3; i++)
         {
-            if (Level.Grid[y + 2][x + i].FeatureType.IsTree)
+            if (Grid[y + 2][x + i].FeatureType.IsTree)
             {
-                Level.Grid[y + 2][x + i].RevertToBackground();
+                Grid[y + 2][x + i].RevertToBackground();
             }
         }
     }
 
     private void MakeTownCentre()
     {
-        int xx = Level.CurWid / 2;
-        int yy = Level.CurHgt / 2;
+        int xx = CurWid / 2;
+        int yy = CurHgt / 2;
         switch (Program.Rng.DieRoll(12))
         {
             case 1:
             case 3:
-                Level.Grid[yy - 1][xx - 1].SetFeature("PathBase");
-                Level.Grid[yy][xx - 1].SetFeature("PathBase");
-                Level.Grid[yy + 1][xx - 1].SetFeature("PathBase");
-                Level.Grid[yy - 1][xx].SetFeature("PathBase");
-                Level.Grid[yy + 1][xx].SetFeature("PathBase");
-                Level.Grid[yy - 1][xx + 1].SetFeature("PathBase");
-                Level.Grid[yy][xx + 1].SetFeature("PathBase");
-                Level.Grid[yy + 1][xx + 1].SetFeature("PathBase");
+                Grid[yy - 1][xx - 1].SetFeature("PathBase");
+                Grid[yy][xx - 1].SetFeature("PathBase");
+                Grid[yy + 1][xx - 1].SetFeature("PathBase");
+                Grid[yy - 1][xx].SetFeature("PathBase");
+                Grid[yy + 1][xx].SetFeature("PathBase");
+                Grid[yy - 1][xx + 1].SetFeature("PathBase");
+                Grid[yy][xx + 1].SetFeature("PathBase");
+                Grid[yy + 1][xx + 1].SetFeature("PathBase");
                 switch (Program.Rng.DieRoll(6))
                 {
                     case 4:
                     case 1:
-                        Level.Grid[yy][xx].RevertToBackground();
+                        Grid[yy][xx].RevertToBackground();
                         break;
 
                     case 2:
-                        Level.Grid[yy][xx].SetFeature("Statue");
+                        Grid[yy][xx].SetFeature("Statue");
                         break;
 
                     default:
-                        Level.Grid[yy][xx].SetFeature("Fountain");
+                        Grid[yy][xx].SetFeature("Fountain");
                         break;
                 }
                 return;
@@ -13604,7 +13607,7 @@ internal class SaveGame
                 {
                     y = yy + 1;
                 }
-                Level.Grid[y][x].SetFeature("Signpost");
+                Grid[y][x].SetFeature("Signpost");
                 break;
 
             default:
@@ -13671,15 +13674,15 @@ internal class SaveGame
 
     private void BuildPath()
     {
-        int yy = Level.CurHgt / 2;
-        for (int x = 1; x < Level.CurWid - 1; x++)
+        int yy = CurHgt / 2;
+        for (int x = 1; x < CurWid - 1; x++)
         {
-            Level.Grid[yy][x].SetFeature("PathBase");
+            Grid[yy][x].SetFeature("PathBase");
         }
-        int xx = Level.CurWid / 2;
-        for (int y = 1; y < Level.CurHgt - 1; y++)
+        int xx = CurWid / 2;
+        for (int y = 1; y < CurHgt - 1; y++)
         {
-            Level.Grid[y][xx].SetFeature("PathBase");
+            Grid[y][xx].SetFeature("PathBase");
         }
     }
 
@@ -13688,9 +13691,9 @@ internal class SaveGame
         GridTile cPtr;
         for (int n = 0; n < Program.Rng.RandomBetween(1, 10) - 6; n++)
         {
-            int x = Program.Rng.RandomBetween(1, Level.CurWid - 2);
-            int y = Program.Rng.RandomBetween(1, Level.CurHgt - 2);
-            cPtr = Level.Grid[y][x];
+            int x = Program.Rng.RandomBetween(1, CurWid - 2);
+            int y = Program.Rng.RandomBetween(1, CurHgt - 2);
+            cPtr = Grid[y][x];
             if (cPtr.FeatureType.Name == cPtr.BackgroundFeature.Name)
             {
                 cPtr.SetFeature("Rock");
@@ -13704,9 +13707,9 @@ internal class SaveGame
         GridTile cPtr;
         for (int n = 0; n < Program.Rng.RandomBetween(5, 10); n++)
         {
-            int x = Program.Rng.RandomBetween(1, Level.CurWid - 2);
-            int y = Program.Rng.RandomBetween(1, Level.CurHgt - 2);
-            cPtr = Level.Grid[y][x];
+            int x = Program.Rng.RandomBetween(1, CurWid - 2);
+            int y = Program.Rng.RandomBetween(1, CurHgt - 2);
+            cPtr = Grid[y][x];
             if (cPtr.FeatureType.Name == cPtr.BackgroundFeature.Name)
             {
                 cPtr.SetFeature("Tree");
@@ -13720,9 +13723,9 @@ internal class SaveGame
         GridTile cPtr;
         for (int n = 0; n < Program.Rng.RandomBetween(5, 10); n++)
         {
-            int x = Program.Rng.RandomBetween(1, Level.CurWid - 2);
-            int y = Program.Rng.RandomBetween(1, Level.CurHgt - 2);
-            cPtr = Level.Grid[y][x];
+            int x = Program.Rng.RandomBetween(1, CurWid - 2);
+            int y = Program.Rng.RandomBetween(1, CurHgt - 2);
+            cPtr = Grid[y][x];
             if (cPtr.FeatureType.Name == cPtr.BackgroundFeature.Name)
             {
                 cPtr.SetFeature("Bush");
@@ -13735,23 +13738,23 @@ internal class SaveGame
     private void AddPaths()
     {
         GridTile cPtr;
-        int x = Level.CurWid / 2;
-        cPtr = Level.Grid[0][x];
+        int x = CurWid / 2;
+        cPtr = Grid[0][x];
         cPtr.SetFeature("PathBorderNS");
         cPtr.TileFlags.Set(GridTile.PlayerMemorized);
-        x = Level.CurWid - 2;
-        int y = Level.CurHgt / 2;
-        cPtr = Level.Grid[y][x + 1];
+        x = CurWid - 2;
+        int y = CurHgt / 2;
+        cPtr = Grid[y][x + 1];
         cPtr.SetFeature("PathBorderEW");
         cPtr.TileFlags.Set(GridTile.PlayerMemorized);
-        x = Level.CurWid / 2;
-        y = Level.CurHgt - 2;
-        cPtr = Level.Grid[y + 1][x];
+        x = CurWid / 2;
+        y = CurHgt - 2;
+        cPtr = Grid[y + 1][x];
         cPtr.SetFeature("PathBorderNS");
         cPtr.TileFlags.Set(GridTile.PlayerMemorized);
         x = 1;
-        y = Level.CurHgt / 2;
-        cPtr = Level.Grid[y][0];
+        y = CurHgt / 2;
+        cPtr = Grid[y][0];
         cPtr.SetFeature("PathBorderEW");
         cPtr.TileFlags.Set(GridTile.PlayerMemorized);
     }
@@ -13767,12 +13770,12 @@ internal class SaveGame
             dummy++;
             y = Program.Rng.RandomBetween(12, 29);
             x = Program.Rng.RandomBetween(17, 46);
-            if (Level.GridOpenNoItemOrCreature(y, x))
+            if (GridOpenNoItemOrCreature(y, x))
             {
                 break;
             }
         } while (true);
-        cPtr = Level.Grid[y][x];
+        cPtr = Grid[y][x];
         cPtr.SetFeature("DownStair");
         cPtr.TileFlags.Set(GridTile.PlayerMemorized);
         return new GridCoordinate(x, y);
@@ -13833,174 +13836,174 @@ internal class SaveGame
         int x;
         int y;
         GridTile cPtr;
-        for (x = 0; x < Level.CurWid; x++)
+        for (x = 0; x < CurWid; x++)
         {
-            cPtr = Level.Grid[0][x];
+            cPtr = Grid[0][x];
             cPtr.SetFeature("TownWall");
             cPtr.TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            cPtr = Level.Grid[Level.CurHgt - 1][x];
+            cPtr = Grid[CurHgt - 1][x];
             cPtr.SetFeature("TownWall");
             cPtr.TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         }
-        for (y = 0; y < Level.CurHgt; y++)
+        for (y = 0; y < CurHgt; y++)
         {
-            cPtr = Level.Grid[y][0];
+            cPtr = Grid[y][0];
             cPtr.SetFeature("TownWall");
             cPtr.TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            cPtr = Level.Grid[y][Level.CurWid - 1];
+            cPtr = Grid[y][CurWid - 1];
             cPtr.SetFeature("TownWall");
             cPtr.TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         }
-        Level.Grid[0][(Level.CurWid / 2) - 2].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[0][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[0][(Level.CurWid / 2) - 1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[0][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[0][(Level.CurWid / 2) + 1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[0][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[0][(Level.CurWid / 2) + 2].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[0][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[1][(Level.CurWid / 2) - 2].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[1][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[1][(Level.CurWid / 2) - 1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[1][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[1][(Level.CurWid / 2) + 1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[1][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[1][(Level.CurWid / 2) + 2].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[1][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[0][(Level.CurWid / 2) - 2].SetFeature("TownWall");
-        Level.Grid[0][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[0][(Level.CurWid / 2) - 1].SetFeature("TownWall");
-        Level.Grid[0][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[0][Level.CurWid / 2].SetFeature("PathBorderNS");
-        Level.Grid[0][Level.CurWid / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[0][(Level.CurWid / 2) + 1].SetFeature("TownWall");
-        Level.Grid[0][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[0][(Level.CurWid / 2) + 2].SetFeature("TownWall");
-        Level.Grid[0][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[1][(Level.CurWid / 2) - 2].SetFeature("TownWall");
-        Level.Grid[1][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[1][(Level.CurWid / 2) - 1].SetFeature("TownWall");
-        Level.Grid[1][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[1][Level.CurWid / 2].SetFeature("PathBase");
-        Level.Grid[1][Level.CurWid / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[1][(Level.CurWid / 2) + 1].SetFeature("TownWall");
-        Level.Grid[1][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[1][(Level.CurWid / 2) + 2].SetFeature("TownWall");
-        Level.Grid[1][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 2].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 2].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 2].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 2].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 2].SetFeature("TownWall");
-        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 1].SetFeature("TownWall");
-        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[Level.CurHgt - 1][Level.CurWid / 2].SetFeature("PathBorderNS");
-        Level.Grid[Level.CurHgt - 1][Level.CurWid / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 1].SetFeature("TownWall");
-        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 2].SetFeature("TownWall");
-        Level.Grid[Level.CurHgt - 1][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 2].SetFeature("TownWall");
-        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 1].SetFeature("TownWall");
-        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[Level.CurHgt - 2][Level.CurWid / 2].SetFeature("PathBase");
-        Level.Grid[Level.CurHgt - 2][Level.CurWid / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 1].SetFeature("TownWall");
-        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 2].SetFeature("TownWall");
-        Level.Grid[Level.CurHgt - 2][(Level.CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) - 2][0].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) - 1][0].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) + 1][0].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) + 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) + 2][0].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) + 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) - 2][1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) - 1][1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) + 1][1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) + 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) + 2][1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) + 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) - 2][0].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) - 1][0].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[Level.CurHgt / 2][0].SetFeature("PathBorderEW");
-        Level.Grid[Level.CurHgt / 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) + 1][0].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) + 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) + 2][0].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) + 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) - 2][1].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) - 1][1].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[Level.CurHgt / 2][1].SetFeature("PathBase");
-        Level.Grid[Level.CurHgt / 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) + 1][1].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) + 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) + 2][1].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) + 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 1].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 2].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 2].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 2].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 2].SetBackgroundFeature("InsideGatehouse");
-        Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 1].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 1].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[Level.CurHgt / 2][Level.CurWid - 1].SetFeature("PathBorderEW");
-        Level.Grid[Level.CurHgt / 2][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 1].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 1].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 2].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) - 2][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 2].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) - 1][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[Level.CurHgt / 2][Level.CurWid - 2].SetFeature("PathBase");
-        Level.Grid[Level.CurHgt / 2][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 2].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) + 1][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-        Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 2].SetFeature("TownWall");
-        Level.Grid[(Level.CurHgt / 2) + 2][Level.CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[0][(CurWid / 2) - 2].SetBackgroundFeature("InsideGatehouse");
+        Grid[0][(CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[0][(CurWid / 2) - 1].SetBackgroundFeature("InsideGatehouse");
+        Grid[0][(CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[0][(CurWid / 2) + 1].SetBackgroundFeature("InsideGatehouse");
+        Grid[0][(CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[0][(CurWid / 2) + 2].SetBackgroundFeature("InsideGatehouse");
+        Grid[0][(CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[1][(CurWid / 2) - 2].SetBackgroundFeature("InsideGatehouse");
+        Grid[1][(CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[1][(CurWid / 2) - 1].SetBackgroundFeature("InsideGatehouse");
+        Grid[1][(CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[1][(CurWid / 2) + 1].SetBackgroundFeature("InsideGatehouse");
+        Grid[1][(CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[1][(CurWid / 2) + 2].SetBackgroundFeature("InsideGatehouse");
+        Grid[1][(CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[0][(CurWid / 2) - 2].SetFeature("TownWall");
+        Grid[0][(CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[0][(CurWid / 2) - 1].SetFeature("TownWall");
+        Grid[0][(CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[0][CurWid / 2].SetFeature("PathBorderNS");
+        Grid[0][CurWid / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[0][(CurWid / 2) + 1].SetFeature("TownWall");
+        Grid[0][(CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[0][(CurWid / 2) + 2].SetFeature("TownWall");
+        Grid[0][(CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[1][(CurWid / 2) - 2].SetFeature("TownWall");
+        Grid[1][(CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[1][(CurWid / 2) - 1].SetFeature("TownWall");
+        Grid[1][(CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[1][CurWid / 2].SetFeature("PathBase");
+        Grid[1][CurWid / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[1][(CurWid / 2) + 1].SetFeature("TownWall");
+        Grid[1][(CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[1][(CurWid / 2) + 2].SetFeature("TownWall");
+        Grid[1][(CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[CurHgt - 1][(CurWid / 2) - 2].SetBackgroundFeature("InsideGatehouse");
+        Grid[CurHgt - 1][(CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[CurHgt - 1][(CurWid / 2) - 1].SetBackgroundFeature("InsideGatehouse");
+        Grid[CurHgt - 1][(CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[CurHgt - 1][(CurWid / 2) + 1].SetBackgroundFeature("InsideGatehouse");
+        Grid[CurHgt - 1][(CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[CurHgt - 1][(CurWid / 2) + 2].SetBackgroundFeature("InsideGatehouse");
+        Grid[CurHgt - 1][(CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[CurHgt - 2][(CurWid / 2) - 2].SetBackgroundFeature("InsideGatehouse");
+        Grid[CurHgt - 2][(CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[CurHgt - 2][(CurWid / 2) - 1].SetBackgroundFeature("InsideGatehouse");
+        Grid[CurHgt - 2][(CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[CurHgt - 2][(CurWid / 2) + 1].SetBackgroundFeature("InsideGatehouse");
+        Grid[CurHgt - 2][(CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[CurHgt - 2][(CurWid / 2) + 2].SetBackgroundFeature("InsideGatehouse");
+        Grid[CurHgt - 2][(CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[CurHgt - 1][(CurWid / 2) - 2].SetFeature("TownWall");
+        Grid[CurHgt - 1][(CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[CurHgt - 1][(CurWid / 2) - 1].SetFeature("TownWall");
+        Grid[CurHgt - 1][(CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[CurHgt - 1][CurWid / 2].SetFeature("PathBorderNS");
+        Grid[CurHgt - 1][CurWid / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[CurHgt - 1][(CurWid / 2) + 1].SetFeature("TownWall");
+        Grid[CurHgt - 1][(CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[CurHgt - 1][(CurWid / 2) + 2].SetFeature("TownWall");
+        Grid[CurHgt - 1][(CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[CurHgt - 2][(CurWid / 2) - 2].SetFeature("TownWall");
+        Grid[CurHgt - 2][(CurWid / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[CurHgt - 2][(CurWid / 2) - 1].SetFeature("TownWall");
+        Grid[CurHgt - 2][(CurWid / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[CurHgt - 2][CurWid / 2].SetFeature("PathBase");
+        Grid[CurHgt - 2][CurWid / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[CurHgt - 2][(CurWid / 2) + 1].SetFeature("TownWall");
+        Grid[CurHgt - 2][(CurWid / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[CurHgt - 2][(CurWid / 2) + 2].SetFeature("TownWall");
+        Grid[CurHgt - 2][(CurWid / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) - 2][0].SetBackgroundFeature("InsideGatehouse");
+        Grid[(CurHgt / 2) - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) - 1][0].SetBackgroundFeature("InsideGatehouse");
+        Grid[(CurHgt / 2) - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) + 1][0].SetBackgroundFeature("InsideGatehouse");
+        Grid[(CurHgt / 2) + 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) + 2][0].SetBackgroundFeature("InsideGatehouse");
+        Grid[(CurHgt / 2) + 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) - 2][1].SetBackgroundFeature("InsideGatehouse");
+        Grid[(CurHgt / 2) - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) - 1][1].SetBackgroundFeature("InsideGatehouse");
+        Grid[(CurHgt / 2) - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) + 1][1].SetBackgroundFeature("InsideGatehouse");
+        Grid[(CurHgt / 2) + 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) + 2][1].SetBackgroundFeature("InsideGatehouse");
+        Grid[(CurHgt / 2) + 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) - 2][0].SetFeature("TownWall");
+        Grid[(CurHgt / 2) - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) - 1][0].SetFeature("TownWall");
+        Grid[(CurHgt / 2) - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[CurHgt / 2][0].SetFeature("PathBorderEW");
+        Grid[CurHgt / 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) + 1][0].SetFeature("TownWall");
+        Grid[(CurHgt / 2) + 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) + 2][0].SetFeature("TownWall");
+        Grid[(CurHgt / 2) + 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) - 2][1].SetFeature("TownWall");
+        Grid[(CurHgt / 2) - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) - 1][1].SetFeature("TownWall");
+        Grid[(CurHgt / 2) - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[CurHgt / 2][1].SetFeature("PathBase");
+        Grid[CurHgt / 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) + 1][1].SetFeature("TownWall");
+        Grid[(CurHgt / 2) + 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) + 2][1].SetFeature("TownWall");
+        Grid[(CurHgt / 2) + 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) - 2][CurWid - 1].SetBackgroundFeature("InsideGatehouse");
+        Grid[(CurHgt / 2) - 2][CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) - 1][CurWid - 1].SetBackgroundFeature("InsideGatehouse");
+        Grid[(CurHgt / 2) - 1][CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) + 1][CurWid - 1].SetBackgroundFeature("InsideGatehouse");
+        Grid[(CurHgt / 2) + 1][CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) + 2][CurWid - 1].SetBackgroundFeature("InsideGatehouse");
+        Grid[(CurHgt / 2) + 2][CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) - 2][CurWid - 2].SetBackgroundFeature("InsideGatehouse");
+        Grid[(CurHgt / 2) - 2][CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) - 1][CurWid - 2].SetBackgroundFeature("InsideGatehouse");
+        Grid[(CurHgt / 2) - 1][CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) + 1][CurWid - 2].SetBackgroundFeature("InsideGatehouse");
+        Grid[(CurHgt / 2) + 1][CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) + 2][CurWid - 2].SetBackgroundFeature("InsideGatehouse");
+        Grid[(CurHgt / 2) + 2][CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) - 2][CurWid - 1].SetFeature("TownWall");
+        Grid[(CurHgt / 2) - 2][CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) - 1][CurWid - 1].SetFeature("TownWall");
+        Grid[(CurHgt / 2) - 1][CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[CurHgt / 2][CurWid - 1].SetFeature("PathBorderEW");
+        Grid[CurHgt / 2][CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) + 1][CurWid - 1].SetFeature("TownWall");
+        Grid[(CurHgt / 2) + 1][CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) + 2][CurWid - 1].SetFeature("TownWall");
+        Grid[(CurHgt / 2) + 2][CurWid - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) - 2][CurWid - 2].SetFeature("TownWall");
+        Grid[(CurHgt / 2) - 2][CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) - 1][CurWid - 2].SetFeature("TownWall");
+        Grid[(CurHgt / 2) - 1][CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[CurHgt / 2][CurWid - 2].SetFeature("PathBase");
+        Grid[CurHgt / 2][CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) + 1][CurWid - 2].SetFeature("TownWall");
+        Grid[(CurHgt / 2) + 1][CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+        Grid[(CurHgt / 2) + 2][CurWid - 2].SetFeature("TownWall");
+        Grid[(CurHgt / 2) + 2][CurWid - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
     }
 
     private void MakeWildernessFeatures(int wildx, int wildy, out int stairX, out int stairY)
     {
-        stairX = Level.CurWid / 2;
-        stairY = Level.CurHgt / 2;
+        stairX = CurWid / 2;
+        stairY = CurHgt / 2;
         if (wildx == 1 || wildx == 10 || wildy == 1 || wildy == 10)
         {
             return;
@@ -14015,23 +14018,23 @@ internal class SaveGame
                 break;
 
             case 2:
-                dungeonX = Level.CurWid / 2;
+                dungeonX = CurWid / 2;
                 dungeonY = 0;
                 break;
 
             case 3:
                 dungeonX = 0;
-                dungeonY = Level.CurHgt / 2;
+                dungeonY = CurHgt / 2;
                 break;
 
             case 4:
-                dungeonX = Level.CurWid / 2;
-                dungeonY = Level.CurHgt / 2;
+                dungeonX = CurWid / 2;
+                dungeonY = CurHgt / 2;
                 break;
         }
-        for (int offsetX = 0; offsetX < Level.CurWid - 1; offsetX += Level.CurWid / 2)
+        for (int offsetX = 0; offsetX < CurWid - 1; offsetX += CurWid / 2)
         {
-            for (int offsetY = 0; offsetY < Level.CurHgt - 1; offsetY += Level.CurHgt / 2)
+            for (int offsetY = 0; offsetY < CurHgt - 1; offsetY += CurHgt / 2)
             {
                 if (offsetX == dungeonX && offsetY == dungeonY)
                 {
@@ -14039,13 +14042,13 @@ internal class SaveGame
                     {
                         if (Wilderness[wildy][wildx].Dungeon.Tower)
                         {
-                            MakeTower(offsetX + 4, offsetY + 4, (Level.CurWid / 2) - 8, (Level.CurHgt / 2) - 8, out int x, out int y);
+                            MakeTower(offsetX + 4, offsetY + 4, (CurWid / 2) - 8, (CurHgt / 2) - 8, out int x, out int y);
                             stairX = x;
                             stairY = y;
                         }
                         else
                         {
-                            MakeDungeonEntrance(offsetX + 4, offsetY + 4, (Level.CurWid / 2) - 8, (Level.CurHgt / 2) - 8, out int x, out int y);
+                            MakeDungeonEntrance(offsetX + 4, offsetY + 4, (CurWid / 2) - 8, (CurHgt / 2) - 8, out int x, out int y);
                             stairX = x;
                             stairY = y;
                         }
@@ -14057,11 +14060,11 @@ internal class SaveGame
                     {
                         case 7:
                         case 22:
-                            MakeLake(offsetX + 4, offsetY + 4, (Level.CurWid / 2) - 8, (Level.CurHgt / 2) - 8);
+                            MakeLake(offsetX + 4, offsetY + 4, (CurWid / 2) - 8, (CurHgt / 2) - 8);
                             break;
 
                         case 15:
-                            MakeHenge(offsetX + 4, offsetY + 4, (Level.CurWid / 2) - 8, (Level.CurHgt / 2) - 8);
+                            MakeHenge(offsetX + 4, offsetY + 4, (CurWid / 2) - 8, (CurHgt / 2) - 8);
                             break;
                     }
                 }
@@ -14074,27 +14077,27 @@ internal class SaveGame
         int x;
         int y;
 
-        int midX = Level.CurWid / 2;
-        int midY = Level.CurHgt / 2;
+        int midX = CurWid / 2;
+        int midY = CurHgt / 2;
         if (Wilderness[wildy][wildx].RoadMap == 0)
         {
             return;
         }
-        Level.Grid[midY - 1][midX - 1].SetFeature("Grass");
-        Level.Grid[midY - 1][midX].SetFeature("Grass");
-        Level.Grid[midY - 1][midX + 1].SetFeature("Grass");
-        Level.Grid[midY][midX - 1].SetFeature("Grass");
-        Level.Grid[midY][midX].SetFeature("PathBase");
-        Level.Grid[midY][midX + 1].SetFeature("Grass");
-        Level.Grid[midY + 1][midX - 1].SetFeature("Grass");
-        Level.Grid[midY + 1][midX].SetFeature("Grass");
-        Level.Grid[midY + 1][midX + 1].SetFeature("Grass");
+        Grid[midY - 1][midX - 1].SetFeature("Grass");
+        Grid[midY - 1][midX].SetFeature("Grass");
+        Grid[midY - 1][midX + 1].SetFeature("Grass");
+        Grid[midY][midX - 1].SetFeature("Grass");
+        Grid[midY][midX].SetFeature("PathBase");
+        Grid[midY][midX + 1].SetFeature("Grass");
+        Grid[midY + 1][midX - 1].SetFeature("Grass");
+        Grid[midY + 1][midX].SetFeature("Grass");
+        Grid[midY + 1][midX + 1].SetFeature("Grass");
         if ((Wilderness[wildy][wildx].RoadMap & Constants.RoadUp) != 0)
         {
             x = 0;
-            Level.Grid[0][midX].SetFeature("PathBorderNS");
-            Level.Grid[1][midX].SetFeature("PathBase");
-            Level.Grid[midY - 1][midX].SetFeature("PathBase");
+            Grid[0][midX].SetFeature("PathBorderNS");
+            Grid[1][midX].SetFeature("PathBase");
+            Grid[midY - 1][midX].SetFeature("PathBase");
             for (y = 2; y < midY - 1; y++)
             {
                 x += Program.Rng.RandomBetween(-2, 2) / 2;
@@ -14106,24 +14109,24 @@ internal class SaveGame
                 {
                     x = -(midY - 1 - y);
                 }
-                if (!Level.Grid[y][midX - 1 + x].FeatureType.Name.StartsWith("WildPath"))
+                if (!Grid[y][midX - 1 + x].FeatureType.Name.StartsWith("WildPath"))
                 {
-                    Level.Grid[y][midX - 1 + x].SetFeature("Grass");
+                    Grid[y][midX - 1 + x].SetFeature("Grass");
                 }
-                Level.Grid[y][midX + x].SetFeature("WildPathNS");
-                if (!Level.Grid[y][midX + 1 + x].FeatureType.Name.StartsWith("WildPath"))
+                Grid[y][midX + x].SetFeature("WildPathNS");
+                if (!Grid[y][midX + 1 + x].FeatureType.Name.StartsWith("WildPath"))
                 {
-                    Level.Grid[y][midX + 1 + x].SetFeature("Grass");
+                    Grid[y][midX + 1 + x].SetFeature("Grass");
                 }
             }
         }
         if ((Wilderness[wildy][wildx].RoadMap & Constants.RoadDown) != 0)
         {
             x = 0;
-            Level.Grid[Level.CurHgt - 1][midX].SetFeature("PathBorderNS");
-            Level.Grid[Level.CurHgt - 2][midX].SetFeature("PathBase");
-            Level.Grid[midY + 1][midX].SetFeature("PathBase");
-            for (y = Level.CurHgt - 3; y > midY + 1; y--)
+            Grid[CurHgt - 1][midX].SetFeature("PathBorderNS");
+            Grid[CurHgt - 2][midX].SetFeature("PathBase");
+            Grid[midY + 1][midX].SetFeature("PathBase");
+            for (y = CurHgt - 3; y > midY + 1; y--)
             {
                 x += Program.Rng.RandomBetween(-2, 2) / 2;
                 if (x > y - (midY + 1))
@@ -14134,23 +14137,23 @@ internal class SaveGame
                 {
                     x = -(y - (midY + 1));
                 }
-                if (!Level.Grid[y][midX - 1 + x].FeatureType.Name.StartsWith("WildPath"))
+                if (!Grid[y][midX - 1 + x].FeatureType.Name.StartsWith("WildPath"))
                 {
-                    Level.Grid[y][midX - 1 + x].SetFeature("Grass");
+                    Grid[y][midX - 1 + x].SetFeature("Grass");
                 }
-                Level.Grid[y][midX + x].SetFeature("WildPathNS");
-                if (!Level.Grid[y][midX + 1 + x].FeatureType.Name.StartsWith("WildPath"))
+                Grid[y][midX + x].SetFeature("WildPathNS");
+                if (!Grid[y][midX + 1 + x].FeatureType.Name.StartsWith("WildPath"))
                 {
-                    Level.Grid[y][midX + 1 + x].SetFeature("Grass");
+                    Grid[y][midX + 1 + x].SetFeature("Grass");
                 }
             }
         }
         if ((Wilderness[wildy][wildx].RoadMap & Constants.RoadLeft) != 0)
         {
             y = 0;
-            Level.Grid[midY][0].SetFeature("PathBorderEW");
-            Level.Grid[midY][1].SetFeature("PathBase");
-            Level.Grid[midY][midX - 1].SetFeature("PathBase");
+            Grid[midY][0].SetFeature("PathBorderEW");
+            Grid[midY][1].SetFeature("PathBase");
+            Grid[midY][midX - 1].SetFeature("PathBase");
             for (x = 2; x < midX - 1; x++)
             {
                 y += Program.Rng.RandomBetween(-2, 2) / 2;
@@ -14162,24 +14165,24 @@ internal class SaveGame
                 {
                     y = -(midX - 1 - x);
                 }
-                if (!Level.Grid[midY - 1 + y][x].FeatureType.Name.StartsWith("WildPath"))
+                if (!Grid[midY - 1 + y][x].FeatureType.Name.StartsWith("WildPath"))
                 {
-                    Level.Grid[midY - 1 + y][x].SetFeature("Grass");
+                    Grid[midY - 1 + y][x].SetFeature("Grass");
                 }
-                Level.Grid[midY + y][x].SetFeature("WildPathEW");
-                if (!Level.Grid[midY + 1 + y][x].FeatureType.Name.StartsWith("WildPath"))
+                Grid[midY + y][x].SetFeature("WildPathEW");
+                if (!Grid[midY + 1 + y][x].FeatureType.Name.StartsWith("WildPath"))
                 {
-                    Level.Grid[midY + 1 + y][x].SetFeature("Grass");
+                    Grid[midY + 1 + y][x].SetFeature("Grass");
                 }
             }
         }
         if ((Wilderness[wildy][wildx].RoadMap & Constants.RoadRight) != 0)
         {
             y = 0;
-            Level.Grid[midY][Level.CurWid - 1].SetFeature("PathBorderEW");
-            Level.Grid[midY][Level.CurWid - 2].SetFeature("PathBase");
-            Level.Grid[midY][midX + 1].SetFeature("PathBase");
-            for (x = Level.CurWid - 3; x > midX + 1; x--)
+            Grid[midY][CurWid - 1].SetFeature("PathBorderEW");
+            Grid[midY][CurWid - 2].SetFeature("PathBase");
+            Grid[midY][midX + 1].SetFeature("PathBase");
+            for (x = CurWid - 3; x > midX + 1; x--)
             {
                 y += Program.Rng.RandomBetween(-2, 2) / 2;
                 if (y > x - (midX + 1))
@@ -14190,14 +14193,14 @@ internal class SaveGame
                 {
                     y = -(x - (midX + 1));
                 }
-                if (!Level.Grid[midY - 1 + y][x].FeatureType.Name.StartsWith("WildPath"))
+                if (!Grid[midY - 1 + y][x].FeatureType.Name.StartsWith("WildPath"))
                 {
-                    Level.Grid[midY - 1 + y][x].SetFeature("Grass");
+                    Grid[midY - 1 + y][x].SetFeature("Grass");
                 }
-                Level.Grid[midY + y][x].SetFeature("WildPathEW");
-                if (!Level.Grid[midY + 1 + y][x].FeatureType.Name.StartsWith("WildPath"))
+                Grid[midY + y][x].SetFeature("WildPathEW");
+                if (!Grid[midY + 1 + y][x].FeatureType.Name.StartsWith("WildPath"))
                 {
-                    Level.Grid[midY + 1 + y][x].SetFeature("Grass");
+                    Grid[midY + 1 + y][x].SetFeature("Grass");
                 }
             }
         }
@@ -14205,183 +14208,183 @@ internal class SaveGame
 
     private void MakeWildernessWalls(int wildX, int wildY)
     {
-        int height = Level.CurHgt;
-        int width = Level.CurWid;
+        int height = CurHgt;
+        int width = CurWid;
         if (Wilderness[wildY - 1][wildX].Town != null)
         {
             for (int x = 0; x < width; x++)
             {
-                Level.Grid[0][x].SetFeature("TownWall");
-                Level.Grid[0][x].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+                Grid[0][x].SetFeature("TownWall");
+                Grid[0][x].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             }
-            Level.Grid[0][(width / 2) - 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[0][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[0][(width / 2) - 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[0][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[0][(width / 2) + 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[0][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[0][(width / 2) + 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[0][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[1][(width / 2) - 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[1][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[1][(width / 2) - 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[1][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[1][(width / 2) + 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[1][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[1][(width / 2) + 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[1][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[0][(width / 2) - 2].SetFeature("TownWall");
-            Level.Grid[0][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[0][(width / 2) - 1].SetFeature("TownWall");
-            Level.Grid[0][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[0][width / 2].SetFeature("PathBorderNS");
-            Level.Grid[0][width / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[0][(width / 2) + 1].SetFeature("TownWall");
-            Level.Grid[0][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[0][(width / 2) + 2].SetFeature("TownWall");
-            Level.Grid[0][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[1][(width / 2) - 2].SetFeature("TownWall");
-            Level.Grid[1][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[1][(width / 2) - 1].SetFeature("TownWall");
-            Level.Grid[1][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[1][width / 2].SetFeature("PathBase");
-            Level.Grid[1][width / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[1][(width / 2) + 1].SetFeature("TownWall");
-            Level.Grid[1][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[1][(width / 2) + 2].SetFeature("TownWall");
-            Level.Grid[1][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[0][(width / 2) - 2].SetBackgroundFeature("InsideGatehouse");
+            Grid[0][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[0][(width / 2) - 1].SetBackgroundFeature("InsideGatehouse");
+            Grid[0][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[0][(width / 2) + 1].SetBackgroundFeature("InsideGatehouse");
+            Grid[0][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[0][(width / 2) + 2].SetBackgroundFeature("InsideGatehouse");
+            Grid[0][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[1][(width / 2) - 2].SetBackgroundFeature("InsideGatehouse");
+            Grid[1][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[1][(width / 2) - 1].SetBackgroundFeature("InsideGatehouse");
+            Grid[1][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[1][(width / 2) + 1].SetBackgroundFeature("InsideGatehouse");
+            Grid[1][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[1][(width / 2) + 2].SetBackgroundFeature("InsideGatehouse");
+            Grid[1][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[0][(width / 2) - 2].SetFeature("TownWall");
+            Grid[0][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[0][(width / 2) - 1].SetFeature("TownWall");
+            Grid[0][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[0][width / 2].SetFeature("PathBorderNS");
+            Grid[0][width / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[0][(width / 2) + 1].SetFeature("TownWall");
+            Grid[0][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[0][(width / 2) + 2].SetFeature("TownWall");
+            Grid[0][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[1][(width / 2) - 2].SetFeature("TownWall");
+            Grid[1][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[1][(width / 2) - 1].SetFeature("TownWall");
+            Grid[1][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[1][width / 2].SetFeature("PathBase");
+            Grid[1][width / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[1][(width / 2) + 1].SetFeature("TownWall");
+            Grid[1][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[1][(width / 2) + 2].SetFeature("TownWall");
+            Grid[1][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         }
         if (Wilderness[wildY + 1][wildX].Town != null)
         {
             for (int x = 0; x < width; x++)
             {
-                Level.Grid[height - 1][x].SetFeature("TownWall");
-                Level.Grid[height - 1][x].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+                Grid[height - 1][x].SetFeature("TownWall");
+                Grid[height - 1][x].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             }
-            Level.Grid[height - 1][(width / 2) - 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 1][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 1][(width / 2) - 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 1][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 1][(width / 2) + 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 1][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 1][(width / 2) + 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 1][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 2][(width / 2) - 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 2][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 2][(width / 2) - 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 2][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 2][(width / 2) + 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 2][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 2][(width / 2) + 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[height - 2][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 1][(width / 2) - 2].SetFeature("TownWall");
-            Level.Grid[height - 1][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 1][(width / 2) - 1].SetFeature("TownWall");
-            Level.Grid[height - 1][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 1][width / 2].SetFeature("PathBorderNS");
-            Level.Grid[height - 1][width / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 1][(width / 2) + 1].SetFeature("TownWall");
-            Level.Grid[height - 1][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 1][(width / 2) + 2].SetFeature("TownWall");
-            Level.Grid[height - 1][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 2][(width / 2) - 2].SetFeature("TownWall");
-            Level.Grid[height - 2][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 2][(width / 2) - 1].SetFeature("TownWall");
-            Level.Grid[height - 2][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 2][width / 2].SetFeature("PathBase");
-            Level.Grid[height - 2][width / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 2][(width / 2) + 1].SetFeature("TownWall");
-            Level.Grid[height - 2][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height - 2][(width / 2) + 2].SetFeature("TownWall");
-            Level.Grid[height - 2][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 1][(width / 2) - 2].SetBackgroundFeature("InsideGatehouse");
+            Grid[height - 1][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 1][(width / 2) - 1].SetBackgroundFeature("InsideGatehouse");
+            Grid[height - 1][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 1][(width / 2) + 1].SetBackgroundFeature("InsideGatehouse");
+            Grid[height - 1][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 1][(width / 2) + 2].SetBackgroundFeature("InsideGatehouse");
+            Grid[height - 1][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 2][(width / 2) - 2].SetBackgroundFeature("InsideGatehouse");
+            Grid[height - 2][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 2][(width / 2) - 1].SetBackgroundFeature("InsideGatehouse");
+            Grid[height - 2][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 2][(width / 2) + 1].SetBackgroundFeature("InsideGatehouse");
+            Grid[height - 2][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 2][(width / 2) + 2].SetBackgroundFeature("InsideGatehouse");
+            Grid[height - 2][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 1][(width / 2) - 2].SetFeature("TownWall");
+            Grid[height - 1][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 1][(width / 2) - 1].SetFeature("TownWall");
+            Grid[height - 1][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 1][width / 2].SetFeature("PathBorderNS");
+            Grid[height - 1][width / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 1][(width / 2) + 1].SetFeature("TownWall");
+            Grid[height - 1][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 1][(width / 2) + 2].SetFeature("TownWall");
+            Grid[height - 1][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 2][(width / 2) - 2].SetFeature("TownWall");
+            Grid[height - 2][(width / 2) - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 2][(width / 2) - 1].SetFeature("TownWall");
+            Grid[height - 2][(width / 2) - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 2][width / 2].SetFeature("PathBase");
+            Grid[height - 2][width / 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 2][(width / 2) + 1].SetFeature("TownWall");
+            Grid[height - 2][(width / 2) + 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height - 2][(width / 2) + 2].SetFeature("TownWall");
+            Grid[height - 2][(width / 2) + 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         }
         if (Wilderness[wildY][wildX - 1].Town != null)
         {
             for (int y = 0; y < height; y++)
             {
-                Level.Grid[y][0].SetFeature("TownWall");
-                Level.Grid[y][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+                Grid[y][0].SetFeature("TownWall");
+                Grid[y][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             }
-            Level.Grid[(height / 2) - 2][0].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) - 1][0].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) + 1][0].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) + 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) + 2][0].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) + 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) - 2][1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) - 1][1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) + 1][1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) + 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) + 2][1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) + 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) - 2][0].SetFeature("TownWall");
-            Level.Grid[(height / 2) - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) - 1][0].SetFeature("TownWall");
-            Level.Grid[(height / 2) - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height / 2][0].SetFeature("PathBorderEW");
-            Level.Grid[height / 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) + 1][0].SetFeature("TownWall");
-            Level.Grid[(height / 2) + 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) + 2][0].SetFeature("TownWall");
-            Level.Grid[(height / 2) + 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) - 2][1].SetFeature("TownWall");
-            Level.Grid[(height / 2) - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) - 1][1].SetFeature("TownWall");
-            Level.Grid[(height / 2) - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height / 2][1].SetFeature("PathBase");
-            Level.Grid[height / 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) + 1][1].SetFeature("TownWall");
-            Level.Grid[(height / 2) + 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) + 2][1].SetFeature("TownWall");
-            Level.Grid[(height / 2) + 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) - 2][0].SetBackgroundFeature("InsideGatehouse");
+            Grid[(height / 2) - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) - 1][0].SetBackgroundFeature("InsideGatehouse");
+            Grid[(height / 2) - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) + 1][0].SetBackgroundFeature("InsideGatehouse");
+            Grid[(height / 2) + 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) + 2][0].SetBackgroundFeature("InsideGatehouse");
+            Grid[(height / 2) + 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) - 2][1].SetBackgroundFeature("InsideGatehouse");
+            Grid[(height / 2) - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) - 1][1].SetBackgroundFeature("InsideGatehouse");
+            Grid[(height / 2) - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) + 1][1].SetBackgroundFeature("InsideGatehouse");
+            Grid[(height / 2) + 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) + 2][1].SetBackgroundFeature("InsideGatehouse");
+            Grid[(height / 2) + 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) - 2][0].SetFeature("TownWall");
+            Grid[(height / 2) - 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) - 1][0].SetFeature("TownWall");
+            Grid[(height / 2) - 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height / 2][0].SetFeature("PathBorderEW");
+            Grid[height / 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) + 1][0].SetFeature("TownWall");
+            Grid[(height / 2) + 1][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) + 2][0].SetFeature("TownWall");
+            Grid[(height / 2) + 2][0].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) - 2][1].SetFeature("TownWall");
+            Grid[(height / 2) - 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) - 1][1].SetFeature("TownWall");
+            Grid[(height / 2) - 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height / 2][1].SetFeature("PathBase");
+            Grid[height / 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) + 1][1].SetFeature("TownWall");
+            Grid[(height / 2) + 1][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) + 2][1].SetFeature("TownWall");
+            Grid[(height / 2) + 2][1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         }
         if (Wilderness[wildY][wildX + 1].Town != null)
         {
             for (int y = 0; y < height; y++)
             {
-                Level.Grid[y][width - 1].SetFeature("TownWall");
-                Level.Grid[y][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+                Grid[y][width - 1].SetFeature("TownWall");
+                Grid[y][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
             }
-            Level.Grid[(height / 2) - 2][width - 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) - 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) - 1][width - 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) - 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) + 1][width - 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) + 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) + 2][width - 1].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) + 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) - 2][width - 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) - 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) - 1][width - 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) - 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) + 1][width - 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) + 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) + 2][width - 2].SetBackgroundFeature("InsideGatehouse");
-            Level.Grid[(height / 2) + 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) - 2][width - 1].SetFeature("TownWall");
-            Level.Grid[(height / 2) - 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) - 1][width - 1].SetFeature("TownWall");
-            Level.Grid[(height / 2) - 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height / 2][width - 1].SetFeature("PathBorderEW");
-            Level.Grid[height / 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) + 1][width - 1].SetFeature("TownWall");
-            Level.Grid[(height / 2) + 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) + 2][width - 1].SetFeature("TownWall");
-            Level.Grid[(height / 2) + 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) - 2][width - 2].SetFeature("TownWall");
-            Level.Grid[(height / 2) - 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) - 1][width - 2].SetFeature("TownWall");
-            Level.Grid[(height / 2) - 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[height / 2][width - 2].SetFeature("PathBase");
-            Level.Grid[height / 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) + 1][width - 2].SetFeature("TownWall");
-            Level.Grid[(height / 2) + 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
-            Level.Grid[(height / 2) + 2][width - 2].SetFeature("TownWall");
-            Level.Grid[(height / 2) + 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) - 2][width - 1].SetBackgroundFeature("InsideGatehouse");
+            Grid[(height / 2) - 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) - 1][width - 1].SetBackgroundFeature("InsideGatehouse");
+            Grid[(height / 2) - 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) + 1][width - 1].SetBackgroundFeature("InsideGatehouse");
+            Grid[(height / 2) + 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) + 2][width - 1].SetBackgroundFeature("InsideGatehouse");
+            Grid[(height / 2) + 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) - 2][width - 2].SetBackgroundFeature("InsideGatehouse");
+            Grid[(height / 2) - 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) - 1][width - 2].SetBackgroundFeature("InsideGatehouse");
+            Grid[(height / 2) - 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) + 1][width - 2].SetBackgroundFeature("InsideGatehouse");
+            Grid[(height / 2) + 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) + 2][width - 2].SetBackgroundFeature("InsideGatehouse");
+            Grid[(height / 2) + 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) - 2][width - 1].SetFeature("TownWall");
+            Grid[(height / 2) - 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) - 1][width - 1].SetFeature("TownWall");
+            Grid[(height / 2) - 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height / 2][width - 1].SetFeature("PathBorderEW");
+            Grid[height / 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) + 1][width - 1].SetFeature("TownWall");
+            Grid[(height / 2) + 1][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) + 2][width - 1].SetFeature("TownWall");
+            Grid[(height / 2) + 2][width - 1].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) - 2][width - 2].SetFeature("TownWall");
+            Grid[(height / 2) - 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) - 1][width - 2].SetFeature("TownWall");
+            Grid[(height / 2) - 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[height / 2][width - 2].SetFeature("PathBase");
+            Grid[height / 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) + 1][width - 2].SetFeature("TownWall");
+            Grid[(height / 2) + 1][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
+            Grid[(height / 2) + 2][width - 2].SetFeature("TownWall");
+            Grid[(height / 2) + 2][width - 2].TileFlags.Set(GridTile.SelfLit | GridTile.PlayerMemorized);
         }
     }
 
@@ -14392,13 +14395,13 @@ internal class SaveGame
         int maxAttempts = 5000;
         while (maxAttempts-- != 0)
         {
-            y = Program.Rng.RandomBetween(1, Level.CurHgt - 2);
-            x = Program.Rng.RandomBetween(1, Level.CurWid - 2);
-            if (!Level.GridOpenNoItemOrCreature(y, x))
+            y = Program.Rng.RandomBetween(1, CurHgt - 2);
+            x = Program.Rng.RandomBetween(1, CurWid - 2);
+            if (!GridOpenNoItemOrCreature(y, x))
             {
                 continue;
             }
-            if (Level.Grid[y][x].TileFlags.IsSet(GridTile.InVault))
+            if (Grid[y][x].TileFlags.IsSet(GridTile.InVault))
             {
                 continue;
             }
@@ -14418,13 +14421,13 @@ internal class SaveGame
         int k = 0;
         for (int i = 0; i < 4; i++)
         {
-            int y = y1 + Level.OrderedDirectionYOffset[i];
-            int x = x1 + Level.OrderedDirectionXOffset[i];
-            if (!Level.GridPassable(y, x))
+            int y = y1 + OrderedDirectionYOffset[i];
+            int x = x1 + OrderedDirectionXOffset[i];
+            if (!GridPassable(y, x))
             {
                 continue;
             }
-            GridTile cPtr = Level.Grid[y][x];
+            GridTile cPtr = Grid[y][x];
             if (!cPtr.FeatureType.IsOpenFloor)
             {
                 continue;
@@ -14441,19 +14444,19 @@ internal class SaveGame
     private int NextToWalls(int y, int x)
     {
         int k = 0;
-        if (Level.Grid[y + 1][x].FeatureType.IsWall)
+        if (Grid[y + 1][x].FeatureType.IsWall)
         {
             k++;
         }
-        if (Level.Grid[y - 1][x].FeatureType.IsWall)
+        if (Grid[y - 1][x].FeatureType.IsWall)
         {
             k++;
         }
-        if (Level.Grid[y][x + 1].FeatureType.IsWall)
+        if (Grid[y][x + 1].FeatureType.IsWall)
         {
             k++;
         }
-        if (Level.Grid[y][x - 1].FeatureType.IsWall)
+        if (Grid[y][x - 1].FeatureType.IsWall)
         {
             k++;
         }
@@ -14462,7 +14465,7 @@ internal class SaveGame
 
     private void PlaceRandomDoor(int y, int x)
     {
-        GridTile cPtr = Level.Grid[y][x];
+        GridTile cPtr = Grid[y][x];
         int tmp = Program.Rng.RandomLessThan(1000);
         if (tmp < 300)
         {
@@ -14492,7 +14495,7 @@ internal class SaveGame
 
     private void PlaceRubble(int y, int x)
     {
-        GridTile cPtr = Level.Grid[y][x];
+        GridTile cPtr = Grid[y][x];
         cPtr.SetFeature("Rubble");
     }
 
@@ -14500,13 +14503,13 @@ internal class SaveGame
     {
         if (NextToCorr(y, x) >= 2)
         {
-            if (Level.Grid[y - 1][x].FeatureType.IsWall &&
-                Level.Grid[y + 1][x].FeatureType.IsWall)
+            if (Grid[y - 1][x].FeatureType.IsWall &&
+                Grid[y + 1][x].FeatureType.IsWall)
             {
                 return true;
             }
-            if (Level.Grid[y][x - 1].FeatureType.IsWall &&
-                Level.Grid[y][x + 1].FeatureType.IsWall)
+            if (Grid[y][x - 1].FeatureType.IsWall &&
+                Grid[y][x + 1].FeatureType.IsWall)
             {
                 return true;
             }
@@ -14517,34 +14520,34 @@ internal class SaveGame
     private void RandDir(out int rdir, out int cdir)
     {
         int i = Program.Rng.RandomLessThan(4);
-        rdir = Level.OrderedDirectionYOffset[i];
-        cdir = Level.OrderedDirectionXOffset[i];
+        rdir = OrderedDirectionYOffset[i];
+        cdir = OrderedDirectionXOffset[i];
     }
 
     private void ResolvePaths()
     {
-        for (int x = 1; x < Level.CurWid - 1; x++)
+        for (int x = 1; x < CurWid - 1; x++)
         {
-            for (int y = 1; y < Level.CurHgt - 1; y++)
+            for (int y = 1; y < CurHgt - 1; y++)
             {
-                if (Level.Grid[y][x].FeatureType.Name != "PathBase")
+                if (Grid[y][x].FeatureType.Name != "PathBase")
                 {
                     continue;
                 }
                 int map = 0;
-                if (Level.Grid[y - 1][x].FeatureType.Name.StartsWith("Path"))
+                if (Grid[y - 1][x].FeatureType.Name.StartsWith("Path"))
                 {
                     map++;
                 }
-                if (Level.Grid[y][x + 1].FeatureType.Name.StartsWith("Path"))
+                if (Grid[y][x + 1].FeatureType.Name.StartsWith("Path"))
                 {
                     map += 2;
                 }
-                if (Level.Grid[y + 1][x].FeatureType.Name.StartsWith("Path"))
+                if (Grid[y + 1][x].FeatureType.Name.StartsWith("Path"))
                 {
                     map += 4;
                 }
-                if (Level.Grid[y][x - 1].FeatureType.Name.StartsWith("Path"))
+                if (Grid[y][x - 1].FeatureType.Name.StartsWith("Path"))
                 {
                     map += 8;
                 }
@@ -14553,17 +14556,17 @@ internal class SaveGame
                     case 1:
                     case 4:
                     case 5:
-                        Level.Grid[y][x].SetFeature("PathNS");
+                        Grid[y][x].SetFeature("PathNS");
                         break;
 
                     case 2:
                     case 8:
                     case 10:
-                        Level.Grid[y][x].SetFeature("PathEW");
+                        Grid[y][x].SetFeature("PathEW");
                         break;
 
                     default:
-                        Level.Grid[y][x].SetFeature("PathJunction");
+                        Grid[y][x].SetFeature("PathJunction");
                         break;
                 }
             }
@@ -14630,11 +14633,11 @@ internal class SaveGame
     {
         int i, y, x;
         GridTile cPtr;
-        for (y = 0; y < Level.CurHgt; y++)
+        for (y = 0; y < CurHgt; y++)
         {
-            for (x = 0; x < Level.CurWid; x++)
+            for (x = 0; x < CurWid; x++)
             {
-                cPtr = Level.Grid[y][x];
+                cPtr = Grid[y][x];
                 cPtr.RevertToBackground();
             }
         }
@@ -14644,40 +14647,40 @@ internal class SaveGame
         ResolvePaths();
         if (GameTime.IsLight)
         {
-            for (y = 0; y < Level.CurHgt; y++)
+            for (y = 0; y < CurHgt; y++)
             {
-                for (x = 0; x < Level.CurWid; x++)
+                for (x = 0; x < CurWid; x++)
                 {
-                    cPtr = Level.Grid[y][x];
+                    cPtr = Grid[y][x];
                     cPtr.TileFlags.Set(GridTile.SelfLit);
                     cPtr.TileFlags.Set(GridTile.PlayerMemorized);
                 }
             }
             for (i = 0; i < Constants.MinMAllocTd; i++)
             {
-                Level.AllocMonster(3, true);
+                AllocMonster(3, true);
             }
         }
         else
         {
             for (i = 0; i < Constants.MinMAllocTn; i++)
             {
-                Level.AllocMonster(3, true);
+                AllocMonster(3, true);
             }
         }
     }
 
     private void TryDoor(int y, int x)
     {
-        if (!Level.InBounds(y, x))
+        if (!InBounds(y, x))
         {
             return;
         }
-        if (Level.Grid[y][x].FeatureType.IsWall)
+        if (Grid[y][x].FeatureType.IsWall)
         {
             return;
         }
-        if (Level.Grid[y][x].TileFlags.IsSet(GridTile.InRoom))
+        if (Grid[y][x].TileFlags.IsSet(GridTile.InRoom))
         {
             return;
         }
@@ -14725,15 +14728,15 @@ internal class SaveGame
             int qIdx = GetQuestNumber();
             while (SingletonRepository.MonsterRaces[rIdx].CurNum < (Quests[qIdx].ToKill - Quests[qIdx].Killed))
             {
-                Level.PutQuestMonster(Quests[qIdx].RIdx);
+                PutQuestMonster(Quests[qIdx].RIdx);
             }
         }
         i = Constants.MinMAllocLevel;
-        if (Level.CurHgt < Level.MaxHgt || Level.CurWid < Level.MaxWid)
+        if (CurHgt < MaxHgt || CurWid < MaxWid)
         {
             int smallTester = i;
-            i = i * Level.CurHgt / Level.MaxHgt;
-            i = i * Level.CurWid / Level.MaxWid;
+            i = i * CurHgt / MaxHgt;
+            i = i * CurWid / MaxWid;
             i++;
             if (i > smallTester)
             {
@@ -14743,7 +14746,7 @@ internal class SaveGame
         i += Program.Rng.DieRoll(8);
         for (i += k; i > 0; i--)
         {
-            Level.AllocMonster(0, true);
+            AllocMonster(0, true);
         }
         AllocObject(_allocSetBoth, _allocTypTrap, Program.Rng.DieRoll(k));
         AllocObject(_allocSetCorr, _allocTypRubble, Program.Rng.DieRoll(k));
@@ -14759,9 +14762,9 @@ internal class SaveGame
         Program.Rng.FixedSeed = this.Wilderness[this.WildernessY][this.WildernessX].Seed;
         int x;
         int y;
-        for (y = 0; y < Level.CurHgt; y++)
+        for (y = 0; y < CurHgt; y++)
         {
-            for (x = 0; x < Level.CurWid; x++)
+            for (x = 0; x < CurWid; x++)
             {
                 byte elevation = Elevation(WildernessY, WildernessX, y, x);
                 string floorName = "Water";
@@ -14785,22 +14788,22 @@ internal class SaveGame
                         featureName = "Grass";
                     }
                 }
-                Level.Grid[y][x].SetFeature(featureName);
-                Level.Grid[y][x].SetBackgroundFeature(floorName);
+                Grid[y][x].SetFeature(featureName);
+                Grid[y][x].SetBackgroundFeature(floorName);
             }
         }
-        for (x = 0; x < Level.CurWid; x++)
+        for (x = 0; x < CurWid; x++)
         {
-            GridTile cPtr = Level.Grid[0][x];
+            GridTile cPtr = Grid[0][x];
             cPtr.SetFeature(cPtr.BackgroundFeature.Name.StartsWith("Water") ? "WaterBorder" : "WildBorder");
-            cPtr = Level.Grid[Level.CurHgt - 1][x];
+            cPtr = Grid[CurHgt - 1][x];
             cPtr.SetFeature(cPtr.BackgroundFeature.Name.StartsWith("Water") ? "WaterBorder" : "WildBorder");
         }
-        for (y = 0; y < Level.CurHgt; y++)
+        for (y = 0; y < CurHgt; y++)
         {
-            GridTile cPtr = Level.Grid[y][0];
+            GridTile cPtr = Grid[y][0];
             cPtr.SetFeature(cPtr.BackgroundFeature.Name.StartsWith("Water") ? "WaterBorder" : "WildBorder");
-            cPtr = Level.Grid[y][Level.CurWid - 1];
+            cPtr = Grid[y][CurWid - 1];
             cPtr.SetFeature(cPtr.BackgroundFeature.Name.StartsWith("Water") ? "WaterBorder" : "WildBorder");
         }
         MakeWildernessWalls(this.WildernessX, this.WildernessY);
@@ -14810,13 +14813,13 @@ internal class SaveGame
         int rocks = Program.Rng.RandomBetween(1, 10);
         for (int i = 0; i < rocks; i++)
         {
-            x = Program.Rng.DieRoll(Level.CurWid - 2);
-            y = Program.Rng.DieRoll(Level.CurHgt - 2);
-            if (Level.Grid[y][x].FeatureType.Name != "Grass")
+            x = Program.Rng.DieRoll(CurWid - 2);
+            y = Program.Rng.DieRoll(CurHgt - 2);
+            if (Grid[y][x].FeatureType.Name != "Grass")
             {
                 continue;
             }
-            Level.Grid[y][x].SetFeature("Rock");
+            Grid[y][x].SetFeature("Rock");
         }
         Program.Rng.UseFixed = false;
         if (CameFrom == LevelStart.StartRandom)
@@ -14830,36 +14833,36 @@ internal class SaveGame
         }
         else if (CameFrom == LevelStart.StartWalk)
         {
-            if (Level.Grid[this.MapY][this.MapX].FeatureType.IsTree || Level.Grid[this.MapY][this.MapX].FeatureType.Name == "Water")
+            if (Grid[this.MapY][this.MapX].FeatureType.IsTree || Grid[this.MapY][this.MapX].FeatureType.Name == "Water")
             {
-                Level.Grid[this.MapY][this.MapX].RevertToBackground();
+                Grid[this.MapY][this.MapX].RevertToBackground();
             }
         }
         ResolvePaths();
-        for (y = 1; y < Level.CurHgt - 1; y++)
+        for (y = 1; y < CurHgt - 1; y++)
         {
-            for (x = 1; x < Level.CurWid - 1; x++)
+            for (x = 1; x < CurWid - 1; x++)
             {
-                if (Level.Grid[y][x].FeatureType.IsOpenFloor)
+                if (Grid[y][x].FeatureType.IsOpenFloor)
                 {
-                    Level.Grid[y][x].TileFlags.Set(GridTile.InRoom);
+                    Grid[y][x].TileFlags.Set(GridTile.InRoom);
                 }
             }
         }
         if (this.GameTime.IsLight)
         {
-            for (y = 0; y < Level.CurHgt; y++)
+            for (y = 0; y < CurHgt; y++)
             {
-                for (x = 0; x < Level.CurWid; x++)
+                for (x = 0; x < CurWid; x++)
                 {
-                    Level.Grid[y][x].TileFlags.Set(GridTile.SelfLit);
-                    Level.Grid[y][x].TileFlags.Set(GridTile.PlayerMemorized);
+                    Grid[y][x].TileFlags.Set(GridTile.SelfLit);
+                    Grid[y][x].TileFlags.Set(GridTile.PlayerMemorized);
                 }
             }
         }
         for (x = 0; x < Constants.MinMAllocLevel; x++)
         {
-            Level.AllocMonster(3, true);
+            AllocMonster(3, true);
         }
         ///LEVEL FACTORY
     }
@@ -14889,7 +14892,7 @@ internal class SaveGame
         {
             if (Program.Rng.RandomLessThan(100) < 75)
             {
-                dir = Level.OrderedDirection[Program.Rng.RandomLessThan(8)];
+                dir = OrderedDirection[Program.Rng.RandomLessThan(8)];
             }
         }
         if (CommandDirection != dir)
@@ -14950,7 +14953,7 @@ internal class SaveGame
         CommandDirection = dir;
         if (TimedConfusion.TurnsRemaining != 0)
         {
-            dir = Level.OrderedDirection[Program.Rng.RandomLessThan(8)];
+            dir = OrderedDirection[Program.Rng.RandomLessThan(8)];
         }
         if (CommandDirection != dir)
         {
@@ -15013,7 +15016,7 @@ internal class SaveGame
         CommandDirection = dir;
         if (TimedConfusion.TurnsRemaining != 0)
         {
-            dir = Level.OrderedDirection[Program.Rng.RandomLessThan(8)];
+            dir = OrderedDirection[Program.Rng.RandomLessThan(8)];
         }
         if (CommandDirection != dir)
         {
@@ -15033,7 +15036,7 @@ internal class SaveGame
         {
             return false;
         }
-        Monster mPtr = Level.Monsters[TargetWho];
+        Monster mPtr = Monsters[TargetWho];
         TargetRow = mPtr.MapY;
         TargetCol = mPtr.MapX;
         return true;
@@ -15047,14 +15050,14 @@ internal class SaveGame
         TargetWho = 0;
         TargetSetPrepare(mode);
         int m = 0;
-        if (Level.TempN != 0)
+        if (TempN != 0)
         {
-            y = Level.TempY[m];
-            x = Level.TempX[m];
+            y = TempY[m];
+            x = TempX[m];
         }
         while (!done)
         {
-            GridTile cPtr = Level.Grid[y][x];
+            GridTile cPtr = Grid[y][x];
             string info = TargetAble(cPtr.MonsterIndex) ? "t,T,*" : "T,*";
             char query = TargetSetAux(y, x, mode | Constants.TargetLook, info);
             switch (query)
@@ -15085,23 +15088,23 @@ internal class SaveGame
 
                 case '*':
                     {
-                        if (x == Level.TempX[m] && y == Level.TempY[m])
+                        if (x == TempX[m] && y == TempY[m])
                         {
-                            if (++m >= Level.TempN)
+                            if (++m >= TempN)
                             {
                                 m = 0;
                                 done = true;
                             }
                             else
                             {
-                                y = Level.TempY[m];
-                                x = Level.TempX[m];
+                                y = TempY[m];
+                                x = TempX[m];
                             }
                         }
                         else
                         {
-                            y = Level.TempY[m];
-                            x = Level.TempX[m];
+                            y = TempY[m];
+                            x = TempX[m];
                         }
                         break;
                     }
@@ -15110,21 +15113,21 @@ internal class SaveGame
                         int d = GetKeymapDir(query);
                         if (d != 0)
                         {
-                            x += Level.KeypadDirectionXOffset[d];
-                            y += Level.KeypadDirectionYOffset[d];
-                            if (x >= Level.CurWid - 1 || x > Level.PanelColMax)
+                            x += KeypadDirectionXOffset[d];
+                            y += KeypadDirectionYOffset[d];
+                            if (x >= CurWid - 1 || x > PanelColMax)
                             {
                                 x--;
                             }
-                            else if (x <= 0 || x < Level.PanelColMin)
+                            else if (x <= 0 || x < PanelColMin)
                             {
                                 x++;
                             }
-                            if (y >= Level.CurHgt - 1 || y > Level.PanelRowMax)
+                            if (y >= CurHgt - 1 || y > PanelRowMax)
                             {
                                 y--;
                             }
-                            else if (y <= 0 || y < Level.PanelRowMin)
+                            else if (y <= 0 || y < PanelRowMin)
                             {
                                 y++;
                             }
@@ -15133,7 +15136,7 @@ internal class SaveGame
                     }
             }
         }
-        Level.TempN = 0;
+        TempN = 0;
         Screen.PrintLine("", 0, 0);
         return TargetWho != 0;
     }
@@ -15149,7 +15152,7 @@ internal class SaveGame
         MsgPrint("Select a point and press space.");
         while (ch != 27 && ch != ' ' && !Shutdown)
         {
-            Level.MoveCursorRelative(y, x);
+            MoveCursorRelative(y, x);
             ch = Inkey();
             switch (ch)
             {
@@ -15167,21 +15170,21 @@ internal class SaveGame
                         {
                             break;
                         }
-                        x += Level.KeypadDirectionXOffset[d];
-                        y += Level.KeypadDirectionYOffset[d];
-                        if (x >= Level.CurWid - 1 || x >= Level.PanelColMin + Constants.PlayableScreenWidth)
+                        x += KeypadDirectionXOffset[d];
+                        y += KeypadDirectionYOffset[d];
+                        if (x >= CurWid - 1 || x >= PanelColMin + Constants.PlayableScreenWidth)
                         {
                             x--;
                         }
-                        else if (x <= 0 || x < Level.PanelColMin)
+                        else if (x <= 0 || x < PanelColMin)
                         {
                             x++;
                         }
-                        if (y >= Level.CurHgt - 1 || y >= Level.PanelRowMin + Constants.PlayableScreenHeight)
+                        if (y >= CurHgt - 1 || y >= PanelRowMin + Constants.PlayableScreenHeight)
                         {
                             y--;
                         }
-                        else if (y <= 0 || y < Level.PanelRowMin)
+                        else if (y <= 0 || y < PanelRowMin)
                         {
                             y++;
                         }
@@ -15196,7 +15199,7 @@ internal class SaveGame
 
     private string LookMonDesc(int mIdx)
     {
-        Monster mPtr = Level.Monsters[mIdx];
+        Monster mPtr = Monsters[mIdx];
         MonsterRace rPtr = mPtr.Race;
         bool living = !rPtr.Undead;
         if (rPtr.Demon)
@@ -15237,7 +15240,7 @@ internal class SaveGame
 
     private bool TargetAble(int mIdx)
     {
-        Monster mPtr = Level.Monsters[mIdx];
+        Monster mPtr = Monsters[mIdx];
         if (mPtr.Race == null)
         {
             return false;
@@ -15246,7 +15249,7 @@ internal class SaveGame
         {
             return false;
         }
-        if (!Level.Projectable(MapY, MapX, mPtr.MapY, mPtr.MapX))
+        if (!Projectable(MapY, MapX, mPtr.MapY, mPtr.MapX))
         {
             return false;
         }
@@ -15267,10 +15270,10 @@ internal class SaveGame
         {
             return false;
         }
-        GridTile cPtr = Level.Grid[y][x];
+        GridTile cPtr = Grid[y][x];
         if (cPtr.MonsterIndex != 0)
         {
-            Monster mPtr = Level.Monsters[cPtr.MonsterIndex];
+            Monster mPtr = Monsters[cPtr.MonsterIndex];
             if (mPtr.IsVisible)
             {
                 return true;
@@ -15292,7 +15295,7 @@ internal class SaveGame
 
     private char TargetSetAux(int y, int x, int mode, string info)
     {
-        GridTile cPtr = Level.Grid[y][x];
+        GridTile cPtr = Grid[y][x];
         char query;
         do
         {
@@ -15312,7 +15315,7 @@ internal class SaveGame
                 const string name = "something strange";
                 outVal = $"{s1}{s2}{s3}{name} [{info}]";
                 Screen.PrintLine(outVal, 0, 0);
-                Level.MoveCursorRelative(y, x);
+                MoveCursorRelative(y, x);
                 query = Inkey();
                 if (!Shutdown)
                 {
@@ -15327,7 +15330,7 @@ internal class SaveGame
             }
             if (cPtr.MonsterIndex != 0)
             {
-                Monster mPtr = Level.Monsters[cPtr.MonsterIndex];
+                Monster mPtr = Monsters[cPtr.MonsterIndex];
                 MonsterRace rPtr = mPtr.Race;
                 if (mPtr.IsVisible)
                 {
@@ -15352,7 +15355,7 @@ internal class SaveGame
                             string a = mPtr.SmFriendly ? " (allied) " : " ";
                             outVal = $"{s1}{s2}{s3}{mName} ({LookMonDesc(cPtr.MonsterIndex)}){c}{a}[r,{info}]";
                             Screen.PrintLine(outVal, 0, 0);
-                            Level.MoveCursorRelative(y, x);
+                            MoveCursorRelative(y, x);
                             query = Inkey();
                         }
                         if (query != 'r')
@@ -15386,7 +15389,7 @@ internal class SaveGame
                         outVal = $"{s1}{s2}{s3}{oName} [{info}]";
                         Screen.PrintLine(outVal, 0, 0);
                         Screen.UpdateScreen();
-                        Level.MoveCursorRelative(y, x);
+                        MoveCursorRelative(y, x);
                         query = Inkey();
                         if (query != '\r' && query != '\n' && query != ' ')
                         {
@@ -15416,7 +15419,7 @@ internal class SaveGame
                     string oName = oPtr.Description(true, 3);
                     outVal = $"{s1}{s2}{s3}{oName} [{info}]";
                     Screen.PrintLine(outVal, 0, 0);
-                    Level.MoveCursorRelative(y, x);
+                    MoveCursorRelative(y, x);
                     query = Inkey();
                     if (query != '\r' && query != '\n' && query != ' ')
                     {
@@ -15441,7 +15444,7 @@ internal class SaveGame
                 break;
             }
             string feat = string.IsNullOrEmpty(cPtr.FeatureType.AppearAs) ? SingletonRepository.FloorTileTypes[cPtr.BackgroundFeature.AppearAs].Name : SingletonRepository.FloorTileTypes[cPtr.FeatureType.AppearAs].Name;
-            if (cPtr.TileFlags.IsClear(GridTile.PlayerMemorized) && !Level.PlayerCanSeeBold(y, x))
+            if (cPtr.TileFlags.IsClear(GridTile.PlayerMemorized) && !PlayerCanSeeBold(y, x))
             {
                 feat = string.Empty;
             }
@@ -15463,7 +15466,7 @@ internal class SaveGame
                 }
                 outVal = $"{s1}{s2}{s3}{name} [{info}]";
                 Screen.PrintLine(outVal, 0, 0);
-                Level.MoveCursorRelative(y, x);
+                MoveCursorRelative(y, x);
                 query = Inkey();
                 if (query != '\r' && query != '\n' && query != ' ')
                 {
@@ -15478,14 +15481,14 @@ internal class SaveGame
     private void TargetSetPrepare(int mode)
     {
         int y;
-        Level.TempN = 0;
-        for (y = Level.PanelRowMin; y <= Level.PanelRowMax; y++)
+        TempN = 0;
+        for (y = PanelRowMin; y <= PanelRowMax; y++)
         {
             int x;
-            for (x = Level.PanelColMin; x <= Level.PanelColMax; x++)
+            for (x = PanelColMin; x <= PanelColMax; x++)
             {
-                GridTile cPtr = Level.Grid[y][x];
-                if (!Level.PlayerHasLosBold(y, x))
+                GridTile cPtr = Grid[y][x];
+                if (!PlayerHasLosBold(y, x))
                 {
                     continue;
                 }
@@ -15497,22 +15500,22 @@ internal class SaveGame
                 {
                     continue;
                 }
-                Level.TempX[Level.TempN] = x;
-                Level.TempY[Level.TempN] = y;
-                Level.TempN++;
+                TempX[TempN] = x;
+                TempY[TempN] = y;
+                TempN++;
             }
         }
         List<TargetLocation> list = new List<TargetLocation>();
-        for (int i = 0; i < Level.TempN; i++)
+        for (int i = 0; i < TempN; i++)
         {
-            list.Add(new TargetLocation(Level.TempY[i], Level.TempX[i],
-                Level.Distance(Level.TempY[i], Level.TempX[i], MapY, MapX)));
+            list.Add(new TargetLocation(TempY[i], TempX[i],
+                Distance(TempY[i], TempX[i], MapY, MapX)));
         }
         list.Sort();
-        for (int i = 0; i < Level.TempN; i++)
+        for (int i = 0; i < TempN; i++)
         {
-            Level.TempX[i] = list[i].X;
-            Level.TempY[i] = list[i].Y;
+            TempX[i] = list[i].X;
+            TempY[i] = list[i].Y;
         }
     }
 
@@ -15598,13 +15601,13 @@ internal class SaveGame
         int attempts = 1000;
         while (--attempts != 0)
         {
-            Level.Scatter(out wy, out wx, MapY, MapX, 3);
-            if (Level.GridOpenNoItemOrCreature(wy, wx))
+            Scatter(out wy, out wx, MapY, MapX, 3);
+            if (GridOpenNoItemOrCreature(wy, wx))
             {
                 break;
             }
         }
-        Level.AllocHorde(wy, wx);
+        AllocHorde(wy, wx);
     }
 
     public void DoCmdWizardBolt()
@@ -15614,8 +15617,8 @@ internal class SaveGame
         {
             return;
         }
-        int tx = MapX + (99 * Level.KeypadDirectionXOffset[dir]);
-        int ty = MapY + (99 * Level.KeypadDirectionYOffset[dir]);
+        int tx = MapX + (99 * KeypadDirectionXOffset[dir]);
+        int ty = MapY + (99 * KeypadDirectionYOffset[dir]);
         if (dir == 5 && TargetOkay())
         {
             flg &= ~ProjectionFlag.ProjectStop;
@@ -15722,12 +15725,12 @@ internal class SaveGame
         for (int i = 0; i < 10; i++)
         {
             const int d = 1;
-            Level.Scatter(out int y, out int x, MapY, MapX, d);
-            if (!Level.GridPassableNoCreature(y, x))
+            Scatter(out int y, out int x, MapY, MapX, d);
+            if (!GridPassableNoCreature(y, x))
             {
                 continue;
             }
-            if (Level.PlaceMonsterByIndex(y, x, rIdx, slp, true, false))
+            if (PlaceMonsterByIndex(y, x, rIdx, slp, true, false))
             {
                 break;
             }
@@ -15743,12 +15746,12 @@ internal class SaveGame
         for (int i = 0; i < 10; i++)
         {
             const int d = 1;
-            Level.Scatter(out int y, out int x, MapY, MapX, d);
-            if (!Level.GridPassableNoCreature(y, x))
+            Scatter(out int y, out int x, MapY, MapX, d);
+            if (!GridPassableNoCreature(y, x))
             {
                 continue;
             }
-            if (Level.PlaceMonsterByIndex(y, x, rIdx, slp, true, true))
+            if (PlaceMonsterByIndex(y, x, rIdx, slp, true, true))
             {
                 break;
             }
@@ -15759,22 +15762,22 @@ internal class SaveGame
     {
         for (int i = 0; i < num; i++)
         {
-            Level.SummonSpecific(MapY, MapX, Difficulty, null);
+            SummonSpecific(MapY, MapX, Difficulty, null);
         }
     }
 
     public void DoCmdWizZap()
     {
-        for (int i = 1; i < Level.MMax; i++)
+        for (int i = 1; i < MMax; i++)
         {
-            Monster mPtr = Level.Monsters[i];
+            Monster mPtr = Monsters[i];
             if (mPtr.Race == null)
             {
                 continue;
             }
             if (mPtr.DistanceFromPlayer <= Constants.MaxSight)
             {
-                Level.DeleteMonsterByIndex(i, true);
+                DeleteMonsterByIndex(i, true);
             }
         }
     }
@@ -15819,7 +15822,7 @@ internal class SaveGame
             qPtr.IdentCursed = true;
         }
         qPtr.GetFixedArtifactResistances();
-        Level.DropNear(qPtr, -1, MapY, MapX);
+        DropNear(qPtr, -1, MapY, MapX);
         MsgPrint("Allocated.");
     }
 
@@ -15871,7 +15874,7 @@ internal class SaveGame
     }
 
     /// <summary>
-    /// Returns the quest number for the current dungeon and the current level.
+    /// Returns the quest number for the current dungeon and the current 
     /// </summary>
     /// <returns></returns>
     public int GetQuestNumber()
@@ -16198,8 +16201,8 @@ internal class SaveGame
     {
         int y = MapY;
         int x = MapX;
-        int maxProwMin = Level.MaxPanelRows * (Constants.PlayableScreenHeight / 2);
-        int maxPcolMin = Level.MaxPanelCols * (Constants.PlayableScreenWidth / 2);
+        int maxProwMin = MaxPanelRows * (Constants.PlayableScreenHeight / 2);
+        int maxPcolMin = MaxPanelCols * (Constants.PlayableScreenWidth / 2);
         int prowMin = y - (Constants.PlayableScreenHeight / 2);
         if (prowMin > maxProwMin)
         {
@@ -16218,13 +16221,13 @@ internal class SaveGame
         {
             pcolMin = 0;
         }
-        if (prowMin == Level.PanelRowMin && pcolMin == Level.PanelColMin)
+        if (prowMin == PanelRowMin && pcolMin == PanelColMin)
         {
             return;
         }
-        Level.PanelRowMin = prowMin;
-        Level.PanelColMin = pcolMin;
-        Level.PanelBoundsCenter();
+        PanelRowMin = prowMin;
+        PanelColMin = pcolMin;
+        PanelBoundsCenter();
         UpdateMonstersFlaggedAction.Set();
         RedrawMapFlaggedAction.Set();
     }
@@ -16292,7 +16295,7 @@ internal class SaveGame
         while (ExperienceLevel > 1 && ExperiencePoints < Constants.PlayerExp[ExperienceLevel - 2] * ExperienceMultiplier / 100L)
         {
             ExperienceLevel--;
-            Level.RedrawSingleLocation(MapY, MapX);
+            RedrawSingleLocation(MapY, MapX);
             UpdateHealthFlaggedAction.Set();
             UpdateManaFlaggedAction.Set();
             UpdateSpellsFlaggedAction.Set();
@@ -16304,7 +16307,7 @@ internal class SaveGame
         while (ExperienceLevel < Constants.PyMaxLevel && ExperiencePoints >= Constants.PlayerExp[ExperienceLevel - 1] * ExperienceMultiplier / 100L)
         {
             ExperienceLevel++;
-            Level.RedrawSingleLocation(MapY, MapX);
+            RedrawSingleLocation(MapY, MapX);
             if (ExperienceLevel > MaxLevelGained)
             {
                 MaxLevelGained = ExperienceLevel;
@@ -16865,7 +16868,7 @@ internal class SaveGame
                         MsgPrint($"You turn into {newRace.IndefiniteArticleForTitle} {newRace.Title}!");
                         ChangeRace(newRace);
                     }
-                    Level.RedrawSingleLocation(MapY, MapX);
+                    RedrawSingleLocation(MapY, MapX);
                     moreEffects = false;
                     break;
 
@@ -17701,7 +17704,7 @@ internal class SaveGame
         Item qPtr = oPtr.Clone(amt);
         string oName = qPtr.Description(true, 3);
         MsgPrint($"You drop {oName} ({oPtr.Label}).");
-        Level.DropNear(qPtr, 0, MapY, MapX);
+        DropNear(qPtr, 0, MapY, MapX);
         oPtr.ItemIncrease(-amt);
         oPtr.ItemDescribe();
         oPtr.ItemOptimize();
@@ -17961,4 +17964,2880 @@ internal class SaveGame
     //////////////////////////////////////////////
     // PLAYER END
     //////////////////////////////////////////////
+
+    //////////////////////////////////////////////
+    // LEVEL START
+    //////////////////////////////////////////////
+
+    /// <summary>
+    /// Returns the maximum height of any level.
+    /// </summary>
+    public const int MaxHgt = 126;
+
+    /// <summary>
+    /// Returns the maximum width of any level.
+    /// </summary>
+    public const int MaxWid = 198;
+
+    public readonly GridTile[][] Grid = new GridTile[MaxHgt][];
+    public readonly int[] KeypadDirectionXOffset = { 0, -1, 0, 1, -1, 0, 1, -1, 0, 1 };
+    public readonly int[] KeypadDirectionYOffset = { 0, 1, 1, 1, 0, 0, 0, -1, -1, -1 };
+    public readonly int[] OrderedDirection = { 2, 8, 6, 4, 3, 1, 9, 7, 5 };
+    public readonly int[] OrderedDirectionXOffset = { 0, 0, 1, -1, 1, -1, 1, -1, 0 };
+    public readonly int[] OrderedDirectionYOffset = { 1, -1, 0, 0, 1, 1, -1, -1, 0 };
+    public readonly int[] TempX = new int[Constants.TempMax]; // TODO: Use CursorPositon and combine TempX and TempY into a list to absolve TempN
+    public readonly int[] TempY = new int[Constants.TempMax];
+
+    /// <summary>
+    /// Appears to be the height of the level.
+    /// </summary>
+    public int CurHgt;
+
+    /// <summary>
+    /// Appears to be the width of the level.
+    /// </summary>
+    public int CurWid;
+
+    public int DangerFeeling;
+    public int DangerRating;
+    public int MaxPanelCols;
+    public int MaxPanelRows;
+    public int MCnt;
+    public int MMax = 1;
+    public int MonsterLevel;
+    public int ObjectLevel;
+
+    /// <summary>
+    /// Returns the map sector.
+    /// </summary>
+    public int PanelCol;
+
+    /// <summary>
+    /// Returns the map sector.
+    /// </summary>
+    public int PanelRow;
+
+    /// <summary>
+    /// Returns the last level column of the playable area that is visible in the viewport.
+    /// </summary>
+    public int PanelColMax;
+
+    /// <summary>
+    /// Returns the first level column of the playable area that is visible in the viewport.
+    /// </summary>
+    public int PanelColMin;
+
+    /// <summary>
+    /// Returns the last level row of the playable area that is visible in the viewport.
+    /// </summary>
+    public int PanelRowMax;
+
+    /// <summary>
+    /// Returns the first level row of the playable area that is visible in the viewport.
+    /// </summary>
+    public int PanelRowMin;
+
+    /// <summary>
+    /// Returns the first level row that is visible in the viewport.
+    /// </summary>
+    public int PanelRowPrt;
+
+    /// <summary>
+    /// Returns the first level column that is visible in the viewport.
+    /// </summary>
+    public int PanelColPrt;
+
+    public bool SpecialDanger;
+    public bool SpecialTreasure;
+    public int TempN;
+    public int TreasureFeeling;
+    public int TreasureRating;
+
+    private const string _imageMonsterHack = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private const string _imageObjectHack = "?/|\\\"!$()_-=[]{},~";
+    private const int _mapHgt = MaxHgt / _ratio;
+    private const int _mapWid = MaxWid / _ratio;
+    private const int _ratio = 3;
+
+    public readonly List<GridCoordinate> Light = new List<GridCoordinate>(); // TODO: This belongs to UpdateLightFlaggedActions and should be private.
+    public readonly List<GridCoordinate> View = new List<GridCoordinate>(); // TODO: This belongs to UpdateViewFlaggedActions and should be private.
+    public int CurrentlyActingMonster;
+    public MonsterSelector? DunBias = null; // The dungeon does not have a bias for monsters.
+    public int NumRepro;
+    public bool RepairMonsters;
+    public bool ShimmerMonsters;
+
+    public Monster[] Monsters;
+    private int _hackMIdxIi;
+
+
+    public void InitializeLevel()
+    {
+        for (int y = 0; y < MaxHgt; y++)
+        {
+            Grid[y] = new GridTile[MaxWid];
+            for (int x = 0; x < MaxWid; x++)
+            {
+                Grid[y][x] = new GridTile(this, x, y);
+            }
+        }
+        Monsters = new Monster[Constants.MaxMIdx];
+        for (int j = 0; j < Constants.MaxMIdx; j++)
+        {
+            Monsters[j] = new Monster(this);
+        }
+    }
+
+    public void PanelBounds()
+    {
+        PanelRowMin = PanelRow * (Constants.PlayableScreenHeight / 2);
+        PanelRowMax = PanelRowMin + Constants.PlayableScreenHeight - 1;
+        PanelRowPrt = PanelRowMin - 1;
+        PanelColMin = PanelCol * (Constants.PlayableScreenWidth / 2);
+        PanelColMax = PanelColMin + Constants.PlayableScreenWidth - 1;
+        PanelColPrt = PanelColMin - 13;
+    }
+
+    public void PanelBoundsCenter()
+    {
+        PanelRow = PanelRowMin / (Constants.PlayableScreenHeight / 2);
+        PanelRowMax = PanelRowMin + Constants.PlayableScreenHeight - 1;
+        PanelRowPrt = PanelRowMin - 1;
+        PanelCol = PanelColMin / (Constants.PlayableScreenWidth / 2);
+        PanelColMax = PanelColMin + Constants.PlayableScreenWidth - 1;
+        PanelColPrt = PanelColMin - 13;
+    }
+
+    public void Acquirement(int y1, int x1, int num, bool great)
+    {
+        while (num-- != 0)
+        {
+            Item? qPtr = MakeObject(true, great, false);
+            if (qPtr == null)
+            {
+                continue;
+            }
+            DropNear(qPtr, -1, y1, x1);
+        }
+    }
+
+    public void CaveSetBackground(int y, int x, string feat)
+    {
+        GridTile cPtr = Grid[y][x];
+        cPtr.BackgroundFeature = SingletonRepository.FloorTileTypes[feat];
+    }
+
+    public void CaveSetFeat(int y, int x, string feat)
+    {
+        GridTile cPtr = Grid[y][x];
+        cPtr.FeatureType = SingletonRepository.FloorTileTypes[feat];
+        NoteSpot(y, x);
+        RedrawSingleLocation(y, x);
+    }
+
+    public bool CaveValidBold(int y, int x)
+    {
+        GridTile cPtr = Grid[y][x];
+        if (cPtr.FeatureType.IsPermanent)
+        {
+            return false;
+        }
+        foreach (Item oPtr in cPtr.Items)
+        {
+            if (!string.IsNullOrEmpty(oPtr.RandartName) || oPtr.FixedArtifact != null)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// Checks the stack of items at a grid coordinate for a chest and returns the first chest item found.   Returns null, if no chest is found.
+    /// </summary>
+    /// <param name="y"></param>
+    /// <param name="x"></param>
+    /// <returns></returns>
+    public Item? ChestCheck(int y, int x)
+    {
+        GridTile cPtr = Grid[y][x];
+        foreach (Item oPtr in cPtr.Items)
+        {
+            if (oPtr.Category == ItemTypeEnum.Chest)
+            {
+                return oPtr;
+            }
+        }
+        return null;
+    }
+
+    public int CoordsToDir(int y, int x)
+    {
+        int[][] d = { new[] { 7, 4, 1 }, new[] { 8, 5, 2 }, new[] { 9, 6, 3 } };
+        int dy = y - MapY;
+        int dx = x - MapX;
+        if (Math.Abs(dx) > 1 || Math.Abs(dy) > 1)
+        {
+            return 0;
+        }
+        return d[dx + 1][dy + 1];
+    }
+
+    public void DeleteMonster(int y, int x)
+    {
+        if (!InBounds(y, x))
+        {
+            return;
+        }
+        GridTile cPtr = Grid[y][x];
+        if (cPtr.MonsterIndex != 0)
+        {
+            DeleteMonsterByIndex(cPtr.MonsterIndex, true);
+        }
+    }
+
+    public void DeleteObject(Item jPtr)
+    {
+        ExciseObject(jPtr);
+        if (jPtr.HoldingMonsterIndex == 0)
+        {
+            int y = jPtr.Y;
+            int x = jPtr.X;
+            RedrawSingleLocation(y, x);
+        }
+    }
+
+    public void DisplayMap(out int cy, out int cx)
+    {
+        int x, y, maxy;
+        ColourEnum ta;
+        char tc;
+        ColourEnum[][] ma = new ColourEnum[_mapHgt + 2][];
+        for (int i = 0; i < _mapHgt + 2; i++)
+        {
+            ma[i] = new ColourEnum[_mapWid + 2];
+        }
+        char[][] mc = new char[_mapHgt + 2][];
+        for (int i = 0; i < _mapHgt + 2; i++)
+        {
+            mc[i] = new char[_mapWid + 2];
+        }
+        int[][] mp = new int[_mapHgt + 2][];
+        for (int i = 0; i < _mapHgt + 2; i++)
+        {
+            mp[i] = new int[_mapWid + 2];
+        }
+        for (y = 0; y < _mapHgt + 2; ++y)
+        {
+            for (x = 0; x < _mapWid + 2; ++x)
+            {
+                ma[y][x] = ColourEnum.White;
+                mc[y][x] = ' ';
+                mp[y][x] = 0;
+            }
+        }
+        int maxx = maxy = 0;
+        for (int i = 0; i < CurWid; ++i)
+        {
+            for (int j = 0; j < CurHgt; ++j)
+            {
+                x = (i / _ratio) + 1;
+                y = (j / _ratio) + 1;
+                if (x > maxx)
+                {
+                    maxx = x;
+                }
+                if (y > maxy)
+                {
+                    maxy = y;
+                }
+                MapInfo(j, i, out ta, out tc);
+                int tp = Grid[j][i].FeatureType.MapPriority;
+                if (ta == ColourEnum.Background)
+                {
+                    tp = 0;
+                }
+                if (mp[y][x] < tp)
+                {
+                    mc[y][x] = tc;
+                    ma[y][x] = ta;
+                    mp[y][x] = tp;
+                }
+            }
+        }
+        x = maxx + 1;
+        y = maxy + 1;
+        int xOffset = (Screen.Width - x) / 2;
+        int yOffset = (Screen.Height - 1 - y) / 2;
+        mc[0][0] = '+';
+        ma[0][0] = ColourEnum.Purple;
+        mc[0][x] = '+';
+        ma[0][x] = ColourEnum.Purple;
+        mc[y][0] = '+';
+        ma[y][0] = ColourEnum.Purple;
+        mc[y][x] = '+';
+        ma[y][x] = ColourEnum.Purple;
+        for (x = 1; x <= maxx; x++)
+        {
+            mc[0][x] = '-';
+            ma[0][x] = ColourEnum.Purple;
+            mc[maxy + 1][x] = '-';
+            ma[maxy + 1][x] = ColourEnum.Purple;
+        }
+        for (y = 1; y <= maxy; y++)
+        {
+            mc[y][0] = '|';
+            ma[y][0] = ColourEnum.Purple;
+            mc[y][maxx + 1] = '|';
+            ma[y][maxx + 1] = ColourEnum.Purple;
+        }
+        for (y = 0; y < maxy + 2; ++y)
+        {
+            Screen.Goto(yOffset + y, xOffset);
+            for (x = 0; x < maxx + 2; ++x)
+            {
+                ta = ma[y][x];
+                tc = mc[y][x];
+                if (TimedInvulnerability.TurnsRemaining != 0)
+                {
+                    ta = ColourEnum.White;
+                }
+                else if (TimedEtherealness.TurnsRemaining != 0)
+                {
+                    ta = ColourEnum.Black;
+                }
+                Screen.Print(ta, tc.ToString());
+            }
+        }
+        cy = yOffset + (MapY / _ratio) + 1;
+        cx = xOffset + (MapX / _ratio) + 1;
+    }
+
+    public int Distance(int y1, int x1, int y2, int x2)
+    {
+        int dy = y1 > y2 ? y1 - y2 : y2 - y1;
+        int dx = x1 > x2 ? x1 - x2 : x2 - x1;
+        int d = dy > dx ? dy + (dx >> 1) : dx + (dy >> 1);
+        return d;
+    }
+
+    public void DropNear(Item jPtr, int chance, int y, int x)
+    {
+        int ty, tx;
+        GridTile cPtr;
+        bool flag = false;
+        bool done = false;
+        bool plural = jPtr.Count != 1;
+        string oName = jPtr.Description(false, 0);
+        if (!(!string.IsNullOrEmpty(jPtr.RandartName) || jPtr.FixedArtifact != null) && Program.Rng.RandomLessThan(100) < chance)
+        {
+            string p = plural ? "" : "s";
+            MsgPrint($"The {oName} disappear{p}.");
+            return;
+        }
+        int bs = -1;
+        int bn = 0;
+        int by = y;
+        int bx = x;
+        for (int dy = -3; dy <= 3; dy++)
+        {
+            for (int dx = -3; dx <= 3; dx++)
+            {
+                bool comb = false;
+                int d = (dy * dy) + (dx * dx);
+                if (d > 10)
+                {
+                    continue;
+                }
+                ty = y + dy;
+                tx = x + dx;
+                if (!InBounds(ty, tx))
+                {
+                    continue;
+                }
+                if (!Los(y, x, ty, tx))
+                {
+                    continue;
+                }
+                cPtr = Grid[ty][tx];
+                if (!cPtr.FeatureType.IsOpenFloor)
+                {
+                    continue;
+                }
+                int k = 0;
+                foreach (Item oPtr in cPtr.Items)
+                {
+                    if (oPtr.CanAbsorb(jPtr))
+                    {
+                        comb = true;
+                    }
+                    k++;
+                }
+                if (!comb)
+                {
+                    k++;
+                }
+                if (k > 99)
+                {
+                    continue;
+                }
+                int s = 1000 - (d + (k * 5));
+                if (s < bs)
+                {
+                    continue;
+                }
+                if (s > bs)
+                {
+                    bn = 0;
+                }
+                if (++bn >= 2 && Program.Rng.RandomLessThan(bn) != 0)
+                {
+                    continue;
+                }
+                bs = s;
+                by = ty;
+                bx = tx;
+                flag = true;
+            }
+        }
+        if (!flag && !(jPtr.FixedArtifact != null || !string.IsNullOrEmpty(jPtr.RandartName)))
+        {
+            string p = plural ? "" : "s";
+            MsgPrint($"The {oName} disappear{p}.");
+            return;
+        }
+        for (int i = 0; !flag; i++)
+        {
+            if (i < 1000)
+            {
+                ty = Program.Rng.RandomSpread(by, 1);
+                tx = Program.Rng.RandomSpread(bx, 1);
+            }
+            else
+            {
+                ty = Program.Rng.RandomLessThan(CurHgt);
+                tx = Program.Rng.RandomLessThan(CurWid);
+            }
+            cPtr = Grid[ty][tx];
+            if (!cPtr.FeatureType.IsOpenFloor)
+            {
+                continue;
+            }
+            by = ty;
+            bx = tx;
+            if (!GridOpenNoItem(by, bx))
+            {
+                continue;
+            }
+            flag = true;
+        }
+        cPtr = Grid[by][bx];
+        foreach (Item oPtr in cPtr.Items)
+        {
+            if (oPtr.CanAbsorb(jPtr))
+            {
+                oPtr.Absorb(jPtr);
+                done = true;
+                break;
+            }
+        }
+
+        if (!done)
+        {
+            Item oPtr = jPtr.Clone();
+            if (!AddItemToGrid(oPtr, bx, by))
+            {
+                string p = plural ? "" : "s";
+                MsgPrint($"The {oName} disappear{p}.");
+                if (jPtr.FixedArtifact != null)
+                {
+                    jPtr.FixedArtifact.CurNum = 0;
+                }
+                return;
+            }
+        }
+        NoteSpot(by, bx);
+        RedrawSingleLocation(by, bx);
+        PlaySound(SoundEffectEnum.Drop);
+        if (chance != 0 && by == MapY && bx == MapX)
+        {
+            MsgPrint("You feel something roll beneath your feet.");
+        }
+    }
+
+    public void ExciseObject(Item jPtr)
+    {
+        // Check to see if the object is being held by a monster.
+        if (jPtr.HoldingMonsterIndex != 0)
+        {
+            // It is.  Get the monster.
+            Monster mPtr = Monsters[jPtr.HoldingMonsterIndex];
+
+            mPtr.Items.Remove(jPtr);
+        }
+        else
+        {
+            // The object is not being held by a monster.
+            int y = jPtr.Y;
+            int x = jPtr.X;
+            GridTile cPtr = Grid[y][x];
+            cPtr.Items.Remove(jPtr);
+        }
+    }
+
+    public bool GridOpenNoItem(int y, int x)
+    {
+        return Grid[y][x].FeatureType.IsOpenFloor && Grid[y][x].Items.Count == 0;
+    }
+
+    public bool GridOpenNoItemOrCreature(int y, int x)
+    {
+        return Grid[y][x].FeatureType.IsOpenFloor && Grid[y][x].Items.Count == 0 && Grid[y][x].MonsterIndex == 0 && !(y == MapY && x == MapX);
+    }
+
+    public bool GridPassable(int y, int x)
+    {
+        return Grid[y][x].FeatureType.IsPassable;
+    }
+
+    public bool GridPassableNoCreature(int y, int x)
+    {
+        return GridPassable(y, x) && Grid[y][x].MonsterIndex == 0 && !(y == MapY && x == MapX);
+    }
+
+    public bool InBounds(int y, int x)
+    {
+        return y > 0 && x > 0 && y < CurHgt - 1 && x < CurWid - 1;
+    }
+
+    public bool InBounds2(int y, int x)
+    {
+        return y >= 0 && x >= 0 && y < CurHgt && x < CurWid;
+    }
+
+    public bool Los(int y1, int x1, int y2, int x2)
+    {
+        int tx, ty;
+        int m;
+        int dy = y2 - y1;
+        int dx = x2 - x1;
+        int ay = Math.Abs(dy);
+        int ax = Math.Abs(dx);
+        if (ax < 2 && ay < 2)
+        {
+            return true;
+        }
+        if (dx == 0)
+        {
+            if (dy > 0)
+            {
+                for (ty = y1 + 1; ty < y2; ty++)
+                {
+                    if (GridBlocksLos(ty, x1))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                for (ty = y1 - 1; ty > y2; ty--)
+                {
+                    if (GridBlocksLos(ty, x1))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        if (dy == 0)
+        {
+            if (dx > 0)
+            {
+                for (tx = x1 + 1; tx < x2; tx++)
+                {
+                    if (GridBlocksLos(y1, tx))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                for (tx = x1 - 1; tx > x2; tx--)
+                {
+                    if (GridBlocksLos(y1, tx))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        int sx = dx < 0 ? -1 : 1;
+        int sy = dy < 0 ? -1 : 1;
+        if (ax == 1)
+        {
+            if (ay == 2)
+            {
+                if (!GridBlocksLos(y1 + sy, x1))
+                {
+                    return true;
+                }
+            }
+        }
+        else if (ay == 1)
+        {
+            if (ax == 2)
+            {
+                if (!GridBlocksLos(y1, x1 + sx))
+                {
+                    return true;
+                }
+            }
+        }
+        int f2 = ax * ay;
+        int f1 = f2 << 1;
+        if (ax >= ay)
+        {
+            int qy = ay * ay;
+            m = qy << 1;
+            tx = x1 + sx;
+            if (qy == f2)
+            {
+                ty = y1 + sy;
+                qy -= f1;
+            }
+            else
+            {
+                ty = y1;
+            }
+            while (x2 - tx != 0)
+            {
+                if (GridBlocksLos(ty, tx))
+                {
+                    return false;
+                }
+                qy += m;
+                if (qy < f2)
+                {
+                    tx += sx;
+                }
+                else if (qy > f2)
+                {
+                    ty += sy;
+                    if (GridBlocksLos(ty, tx))
+                    {
+                        return false;
+                    }
+                    qy -= f1;
+                    tx += sx;
+                }
+                else
+                {
+                    ty += sy;
+                    qy -= f1;
+                    tx += sx;
+                }
+            }
+        }
+        else
+        {
+            int qx = ax * ax;
+            m = qx << 1;
+            ty = y1 + sy;
+            if (qx == f2)
+            {
+                tx = x1 + sx;
+                qx -= f1;
+            }
+            else
+            {
+                tx = x1;
+            }
+            while (y2 - ty != 0)
+            {
+                if (GridBlocksLos(ty, tx))
+                {
+                    return false;
+                }
+                qx += m;
+                if (qx < f2)
+                {
+                    ty += sy;
+                }
+                else if (qx > f2)
+                {
+                    tx += sx;
+                    if (GridBlocksLos(ty, tx))
+                    {
+                        return false;
+                    }
+                    qx -= f1;
+                    ty += sy;
+                }
+                else
+                {
+                    tx += sx;
+                    qx -= f1;
+                    ty += sy;
+                }
+            }
+        }
+        return true;
+    }
+
+    public void MapArea()
+    {
+        int y1 = PanelRowMin - Program.Rng.DieRoll(10);
+        int y2 = PanelRowMax + Program.Rng.DieRoll(10);
+        int x1 = PanelColMin - Program.Rng.DieRoll(20);
+        int x2 = PanelColMax + Program.Rng.DieRoll(20);
+        if (y1 < 1)
+        {
+            y1 = 1;
+        }
+        if (y2 > CurHgt - 2)
+        {
+            y2 = CurHgt - 2;
+        }
+        if (x1 < 1)
+        {
+            x1 = 1;
+        }
+        if (x2 > CurWid - 2)
+        {
+            x2 = CurWid - 2;
+        }
+        for (int y = y1; y <= y2; y++)
+        {
+            for (int x = x1; x <= x2; x++)
+            {
+                GridTile cPtr = Grid[y][x];
+                if (!cPtr.FeatureType.IsWall)
+                {
+                    if (!cPtr.FeatureType.IsOpenFloor)
+                    {
+                        cPtr.TileFlags.Set(GridTile.PlayerMemorized);
+                    }
+                    for (int i = 0; i < 8; i++)
+                    {
+                        cPtr = Grid[y + OrderedDirectionYOffset[i]][x + OrderedDirectionXOffset[i]];
+                        if (cPtr.FeatureType.IsWall)
+                        {
+                            cPtr.TileFlags.Set(GridTile.PlayerMemorized);
+                        }
+                    }
+                }
+            }
+        }
+        RedrawMapFlaggedAction.Set();
+    }
+
+    /// <summary>
+    /// Locate the cursor in the viewport at a specific level grid x, y coordinate.
+    /// </summary>
+    /// <param name="row"></param>
+    /// <param name="col"></param>
+    public void MoveCursorRelative(int row, int col)
+    {
+        Screen.Goto(row - PanelRowPrt, col - PanelColPrt);
+    }
+
+    public void MoveOneStepTowards(out int newY, out int newX, int currentY, int currentX, int startY, int startX, int targetY, int targetX)
+    {
+        newY = currentY;
+        newX = currentX;
+        int shift;
+        int dY = newY < startY ? startY - newY : newY - startY;
+        int dX = newX < startX ? startX - newX : newX - startX;
+        int distance = dY > dX ? dY : dX;
+        distance++;
+        dY = targetY < startY ? startY - targetY : targetY - startY;
+        dX = targetX < startX ? startX - targetX : targetX - startX;
+        if (dY == 0 && dX == 0)
+        {
+            return;
+        }
+        if (dY > dX)
+        {
+            shift = ((distance * dX) + ((dY - 1) / 2)) / dY;
+            newX = targetX < startX ? startX - shift : startX + shift;
+            newY = targetY < startY ? startY - distance : startY + distance;
+        }
+        else
+        {
+            shift = ((distance * dY) + ((dX - 1) / 2)) / dX;
+            newY = targetY < startY ? startY - shift : startY + shift;
+            newX = targetX < startX ? startX - distance : startX + distance;
+        }
+    }
+
+    public bool NoLight()
+    {
+        return !PlayerCanSeeBold(MapY, MapX);
+    }
+
+    public void NoteSpot(int y, int x)
+    {
+        GridTile cPtr = Grid[y][x];
+        if (TimedBlindness.TurnsRemaining != 0)
+        {
+            return;
+        }
+        if (cPtr.TileFlags.IsClear(GridTile.PlayerLit))
+        {
+            if (cPtr.TileFlags.IsClear(GridTile.IsVisible))
+            {
+                return;
+            }
+            if (cPtr.TileFlags.IsClear(GridTile.SelfLit))
+            {
+                return;
+            }
+        }
+        foreach (Item oPtr in cPtr.Items)
+        {
+            oPtr.Marked = true;
+        }
+        if (cPtr.TileFlags.IsClear(GridTile.PlayerMemorized))
+        {
+            if (cPtr.FeatureType.IsOpenFloor)
+            {
+                cPtr.TileFlags.Set(GridTile.PlayerMemorized);
+            }
+            else if (cPtr.FeatureType.IsPassable)
+            {
+                cPtr.TileFlags.Set(GridTile.PlayerMemorized);
+            }
+            else if (cPtr.TileFlags.IsSet(GridTile.PlayerLit))
+            {
+                cPtr.TileFlags.Set(GridTile.PlayerMemorized);
+            }
+            else
+            {
+                int yy = y < MapY ? y + 1 : y > MapY ? y - 1 : y;
+                int xx = x < MapX ? x + 1 : x > MapX ? x - 1 : x;
+                if (Grid[yy][xx].TileFlags.IsSet(GridTile.SelfLit))
+                {
+                    cPtr.TileFlags.Set(GridTile.PlayerMemorized);
+                }
+            }
+        }
+    }
+
+    public bool PanelContains(int y, int x)
+    {
+        return y >= PanelRowMin && y <= PanelRowMax && x >= PanelColMin && x <= PanelColMax;
+    }
+
+    public void PickTrap(int y, int x)
+    {
+        string feat;
+        GridTile cPtr = Grid[y][x];
+        if (cPtr.FeatureType.Name != "Invis")
+        {
+            return;
+        }
+        int trapType = Program.Rng.DieRoll(16);
+        if (IsQuest(CurrentDepth))
+        {
+            trapType = Program.Rng.DieRoll(15);
+        }
+        if (CurrentDepth >= CurDungeon.MaxLevel)
+        {
+            trapType = Program.Rng.DieRoll(15);
+        }
+        switch (trapType)
+        {
+            case 1:
+                feat = "AcidTrap";
+                break;
+
+            case 2:
+                feat = "FireTrap";
+                break;
+
+            case 3:
+                feat = "StrDart";
+                break;
+
+            case 4:
+                feat = "ConDart";
+                break;
+
+            case 5:
+                feat = "DexDart";
+                break;
+
+            case 6:
+                feat = "SlowDart";
+                break;
+
+            case 7:
+                feat = "PoisonGas";
+                break;
+
+            case 8:
+                feat = "ConfuseGas";
+                break;
+
+            case 9:
+                feat = "SleepGas";
+                break;
+
+            case 10:
+                feat = "BlindGas";
+                break;
+
+            case 11:
+                feat = "SummonRune";
+                break;
+
+            case 12:
+                feat = "TeleportRune";
+                break;
+
+            case 13:
+                feat = "Pit";
+                break;
+
+            case 14:
+                feat = "SpikedPit";
+                break;
+
+            case 15:
+                feat = "PoisonPit";
+                break;
+
+            default:
+                feat = "TrapDoor";
+                break;
+        }
+        CaveSetFeat(y, x, feat);
+    }
+
+    public void PlaceGold(int y, int x)
+    {
+        if (!InBounds(y, x))
+        {
+            return;
+        }
+        if (!GridOpenNoItem(y, x))
+        {
+            return;
+        }
+        Item oPtr = MakeGold();
+        if (AddItemToGrid(oPtr, x, y))
+        {
+            NoteSpot(y, x);
+            RedrawSingleLocation(y, x);
+        }
+    }
+
+    public void PlaceObject(int y, int x, bool good, bool great)
+    {
+        if (!InBounds(y, x))
+        {
+            return;
+        }
+        if (!GridOpenNoItem(y, x))
+        {
+            return;
+        }
+        Item? qPtr = MakeObject(good, great, false);
+        if (qPtr == null)
+        {
+            return;
+        }
+
+        if (AddItemToGrid(qPtr, x, y))
+        {
+            NoteSpot(y, x);
+            RedrawSingleLocation(y, x);
+        }
+        else
+        {
+            if (qPtr.FixedArtifact != null)
+            {
+                qPtr.FixedArtifact.CurNum = 0;
+            }
+        }
+    }
+
+    public void PlaceTrap(int y, int x)
+    {
+        if (!InBounds(y, x))
+        {
+            return;
+        }
+        if (!GridOpenNoItemOrCreature(y, x))
+        {
+            return;
+        }
+        CaveSetFeat(y, x, "Invis");
+    }
+
+    public bool PlayerCanSeeBold(int y, int x)
+    {
+        if (TimedBlindness.TurnsRemaining != 0)
+        {
+            return false;
+        }
+        GridTile cPtr = Grid[y][x];
+        if (cPtr.TileFlags.IsSet(GridTile.PlayerLit))
+        {
+            return true;
+        }
+        if (!PlayerHasLosBold(y, x))
+        {
+            return false;
+        }
+        if (cPtr.TileFlags.IsClear(GridTile.SelfLit))
+        {
+            return false;
+        }
+        if (GridPassable(y, x))
+        {
+            return true;
+        }
+        int yy = y < MapY ? y + 1 : y > MapY ? y - 1 : y;
+        int xx = x < MapX ? x + 1 : x > MapX ? x - 1 : x;
+        return Grid[yy][xx].TileFlags.IsSet(GridTile.SelfLit);
+    }
+
+    public bool PlayerHasLosBold(int y, int x)
+    {
+        return Grid[y][x].TileFlags.IsSet(GridTile.IsVisible);
+    }
+
+    public void PrintCharacterAtMapLocation(char c, ColourEnum a, int y, int x)
+    {
+        if (PanelContains(y, x))
+        {
+            if (TimedInvulnerability.TurnsRemaining != 0)
+            {
+                a = ColourEnum.White;
+            }
+            else if (TimedEtherealness.TurnsRemaining != 0)
+            {
+                a = ColourEnum.Black;
+            }
+            Screen.PutChar(a, c, y - PanelRowPrt, x - PanelColPrt);
+        }
+    }
+
+    public bool Projectable(int y1, int x1, int y2, int x2)
+    {
+        int y = y1;
+        int x = x1;
+        for (int dist = 0; dist <= Constants.MaxRange; dist++)
+        {
+            if (x == x2 && y == y2)
+            {
+                return true;
+            }
+            if (dist != 0 && !GridPassable(y, x) && Grid[y][x].FeatureType.Name != "YellowSign")
+            {
+                break;
+            }
+            MoveOneStepTowards(out y, out x, y, x, y1, x1, y2, x2);
+        }
+        return false;
+    }
+
+    public void PutQuestMonster(int rIdx)
+    {
+        int y, x;
+        if (SingletonRepository.MonsterRaces[rIdx].MaxNum == 0)
+        {
+            SingletonRepository.MonsterRaces[rIdx].MaxNum++;
+            MsgPrint("Resurrecting guardian to fix corrupted savefile...");
+        }
+        do
+        {
+            while (true)
+            {
+                y = Program.Rng.RandomLessThan(MaxHgt);
+                x = Program.Rng.RandomLessThan(MaxWid);
+                if (!GridOpenNoItemOrCreature(y, x))
+                {
+                    continue;
+                }
+                {
+                    if (Distance(y, x, MapY, MapX) > 15)
+                    {
+                        break;
+                    }
+                }
+            }
+        } while (!PlaceMonsterByIndex(y, x, rIdx, false, false, false));
+    }
+
+    public void RedrawSingleLocation(int y, int x)
+    {
+        if (PanelContains(y, x))
+        {
+            MapInfo(y, x, out ColourEnum a, out char c);
+            if (TimedInvulnerability.TurnsRemaining != 0)
+            {
+                a = ColourEnum.White;
+            }
+            else if (TimedEtherealness.TurnsRemaining != 0)
+            {
+                a = ColourEnum.Black;
+            }
+            Screen.Print(a, c, y - PanelRowPrt, x - PanelColPrt);
+        }
+    }
+
+    public void ReplacePets(int y, int x, List<Monster> petList)
+    {
+        foreach (Monster monster in petList)
+        {
+            ReplacePet(y, x, monster);
+        }
+    }
+
+    public void ReplaceSecretDoor(int y, int x)
+    {
+        int tmp = Program.Rng.RandomLessThan(400);
+        if (tmp < 300)
+        {
+            CaveSetFeat(y, x, "LockedDoor0");
+        }
+        else if (tmp < 999)
+        {
+            CaveSetFeat(y, x, $"LockedDoor{Program.Rng.DieRoll(7)}");
+        }
+        else
+        {
+            CaveSetFeat(y, x, $"JammedDoor{Program.Rng.RandomLessThan(8)}");
+        }
+    }
+
+    public void RevertTileToBackground(int y, int x)
+    {
+        GridTile cPtr = Grid[y][x];
+        cPtr.RevertToBackground();
+        NoteSpot(y, x);
+        RedrawSingleLocation(y, x);
+    }
+
+    public void Scatter(out int yp, out int xp, int y, int x, int d)
+    {
+        int nx = 0;
+        int ny = 0;
+        yp = y;
+        xp = x;
+        int attemptsLeft = 5000;
+        while (--attemptsLeft != 0)
+        {
+            ny = Program.Rng.RandomSpread(y, d);
+            nx = Program.Rng.RandomSpread(x, d);
+            if (!InBounds(y, x))
+            {
+                continue;
+            }
+            if (d > 1 && Distance(y, x, ny, nx) > d)
+            {
+                continue;
+            }
+            if (Los(y, x, ny, nx))
+            {
+                break;
+            }
+        }
+        if (attemptsLeft > 0)
+        {
+            yp = ny;
+            xp = nx;
+        }
+    }
+
+    public void WizDark()
+    {
+        for (int y = 0; y < CurHgt; y++)
+        {
+            for (int x = 0; x < CurWid; x++)
+            {
+                GridTile cPtr = Grid[y][x];
+                cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
+                foreach (Item oPtr in cPtr.Items)
+                {
+                    oPtr.Marked = false;
+                }
+            }
+        }
+        RemoveLightFlaggedAction.Set();
+        RemoveViewFlaggedAction.Set();
+        UpdateLightFlaggedAction.Set();
+        UpdateViewFlaggedAction.Set();
+        UpdateMonstersFlaggedAction.Set();
+        RedrawMapFlaggedAction.Set();
+    }
+
+    public void WizLight()
+    {
+        for (int y = 1; y < CurHgt - 1; y++)
+        {
+            for (int x = 1; x < CurWid - 1; x++)
+            {
+                GridTile cPtr = Grid[y][x];
+                if (!cPtr.FeatureType.IsWall)
+                {
+                    for (int i = 0; i < 9; i++)
+                    {
+                        int yy = y + OrderedDirectionYOffset[i];
+                        int xx = x + OrderedDirectionXOffset[i];
+                        cPtr = Grid[yy][xx];
+                        cPtr.TileFlags.Set(GridTile.SelfLit);
+                        if (!cPtr.FeatureType.IsOpenFloor)
+                        {
+                            cPtr.TileFlags.Set(GridTile.PlayerMemorized);
+                        }
+                        cPtr.TileFlags.Set(GridTile.PlayerMemorized);
+                    }
+                }
+                foreach (Item oPtr in cPtr.Items)
+                {
+                    oPtr.Marked = true;
+                }
+            }
+        }
+        UpdateMonstersFlaggedAction.Set();
+        RedrawMapFlaggedAction.Set();
+    }
+
+    private ColourEnum DimColour(ColourEnum a)
+    {
+        switch (a)
+        {
+            case ColourEnum.BrightBlue:
+                return ColourEnum.Blue;
+
+            case ColourEnum.BrightGreen:
+                return ColourEnum.Green;
+
+            case ColourEnum.BrightRed:
+                return ColourEnum.Red;
+
+            case ColourEnum.BrightWhite:
+                return ColourEnum.White;
+
+            case ColourEnum.BrightBeige:
+                return ColourEnum.Beige;
+
+            case ColourEnum.BrightChartreuse:
+                return ColourEnum.Chartreuse;
+
+            case ColourEnum.BrightGrey:
+                return ColourEnum.Grey;
+
+            case ColourEnum.BrightOrange:
+                return ColourEnum.Orange;
+
+            case ColourEnum.BrightYellow:
+                return ColourEnum.Yellow;
+
+            case ColourEnum.BrightBrown:
+                return ColourEnum.Brown;
+
+            case ColourEnum.BrightTurquoise:
+                return ColourEnum.Turquoise;
+
+            case ColourEnum.BrightPink:
+                return ColourEnum.Pink;
+
+            case ColourEnum.Grey:
+                return ColourEnum.Black;
+
+            case ColourEnum.White:
+                return ColourEnum.Grey;
+
+            case ColourEnum.Yellow:
+                return ColourEnum.BrightBrown;
+
+            default:
+                return a;
+        }
+    }
+
+    private bool GridBlocksLos(int y, int x)
+    {
+        return Grid[y][x].FeatureType.BlocksLos;
+    }
+
+    private void ImageMonster(out ColourEnum ap, out char cp)
+    {
+        cp = SingletonRepository.MonsterRaces[Program.Rng.DieRoll(SingletonRepository.MonsterRaces.Count - 2)].Symbol.Character;
+        ap = SingletonRepository.MonsterRaces[Program.Rng.DieRoll(SingletonRepository.MonsterRaces.Count - 2)].Colour;
+    }
+
+    private void ImageObject(out ColourEnum ap, out char cp)
+    {
+        cp = SingletonRepository.ItemFactories[Program.Rng.DieRoll(SingletonRepository.ItemFactories.Count - 1)].FlavorSymbol.Character;
+        ap = SingletonRepository.ItemFactories[Program.Rng.DieRoll(SingletonRepository.ItemFactories.Count - 1)].FlavorColour;
+    }
+
+    private void ImageRandom(out ColourEnum ap, out char cp)
+    {
+        if (Program.Rng.RandomLessThan(100) < 75)
+        {
+            ImageMonster(out ap, out cp);
+        }
+        else
+        {
+            ImageObject(out ap, out cp);
+        }
+    }
+
+    public void MapInfo(int y, int x, out ColourEnum ap, out char cp)
+    {
+        ColourEnum a;
+        char c;
+        GridTile cPtr = Grid[y][x];
+        Tile feat = cPtr.FeatureType;
+        if (feat.IsOpenFloor)
+        {
+            if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized) ||
+                ((cPtr.TileFlags.IsSet(GridTile.PlayerLit) || (cPtr.TileFlags.IsSet(GridTile.SelfLit) &&
+                 cPtr.TileFlags.IsSet(GridTile.IsVisible))) && TimedBlindness.TurnsRemaining == 0))
+            {
+                c = feat.Symbol.Character;
+                a = feat.Colour;
+                if (feat.DimsOutsideLOS)
+                {
+                    if (TimedBlindness.TurnsRemaining != 0)
+                    {
+                        a = ColourEnum.Black;
+                    }
+                    else if (cPtr.TileFlags.IsSet(GridTile.PlayerLit))
+                    {
+                        if (feat.YellowInTorchlight)
+                        {
+                            a = ColourEnum.BrightYellow;
+                        }
+                    }
+                    else if (cPtr.TileFlags.IsClear(GridTile.SelfLit))
+                    {
+                        a = ColourEnum.Black;
+                    }
+                    else if (cPtr.TileFlags.IsClear(GridTile.IsVisible))
+                    {
+                        a = DimColour(a);
+                    }
+                    if (cPtr.TileFlags.IsSet(GridTile.TrapsDetected))
+                    {
+                        int count = 0;
+                        if (Grid[y - 1][x].TileFlags.IsSet(GridTile.TrapsDetected))
+                        {
+                            count++;
+                        }
+                        if (Grid[y + 1][x].TileFlags.IsSet(GridTile.TrapsDetected))
+                        {
+                            count++;
+                        }
+                        if (Grid[y][x - 1].TileFlags.IsSet(GridTile.TrapsDetected))
+                        {
+                            count++;
+                        }
+                        if (Grid[y][x + 1].TileFlags.IsSet(GridTile.TrapsDetected))
+                        {
+                            count++;
+                        }
+                        if (count != 4)
+                        {
+                            a = ColourEnum.BrightChartreuse;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                a = SingletonRepository.FloorTileTypes["Nothing"].Colour;
+                c = SingletonRepository.FloorTileTypes["Nothing"].Symbol.Character;
+            }
+        }
+        else
+        {
+            if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized))
+            {
+                feat = string.IsNullOrEmpty(feat.AppearAs)
+                    ? SingletonRepository.FloorTileTypes[cPtr.BackgroundFeature.AppearAs]
+                    : SingletonRepository.FloorTileTypes[feat.AppearAs];
+                c = feat.Symbol.Character;
+                a = feat.Colour;
+                if (feat.DimsOutsideLOS)
+                {
+                    if (TimedBlindness.TurnsRemaining != 0)
+                    {
+                        a = ColourEnum.Black;
+                    }
+                    else if (cPtr.TileFlags.IsSet(GridTile.PlayerLit))
+                    {
+                        if (feat.YellowInTorchlight)
+                        {
+                            a = ColourEnum.Yellow;
+                        }
+                    }
+                    else
+                    {
+                        if (cPtr.TileFlags.IsClear(GridTile.IsVisible))
+                        {
+                            a = DimColour(a);
+                        }
+                        else if (cPtr.TileFlags.IsClear(GridTile.SelfLit))
+                        {
+                            a = DimColour(a);
+                        }
+                        else
+                        {
+                            int yy = y < MapY ? y + 1 : y > MapY ? y - 1 : y;
+                            int xx = x < MapX ? x + 1 : x > MapX ? x - 1 : x;
+                            if (Grid[yy][xx].TileFlags.IsClear(GridTile.SelfLit))
+                            {
+                                a = DimColour(a);
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                a = SingletonRepository.FloorTileTypes["Nothing"].Colour;
+                c = SingletonRepository.FloorTileTypes["Nothing"].Symbol.Character;
+            }
+        }
+        if (TimedHallucinations.TurnsRemaining != 0 && Program.Rng.RandomLessThan(256) == 0 && (!cPtr.FeatureType.IsWall))
+        {
+            ImageRandom(out ap, out cp);
+        }
+        else
+        {
+            ap = a;
+            cp = c;
+        }
+        foreach (Item oPtr in cPtr.Items)
+        {
+            if (oPtr.Marked)
+            {
+                cp = oPtr.Factory.FlavorSymbol.Character;
+                ap = oPtr.Factory.FlavorColour;
+                if (TimedHallucinations.TurnsRemaining != 0)
+                {
+                    ImageObject(out ap, out cp);
+                }
+                break;
+            }
+        }
+        if (cPtr.MonsterIndex != 0)
+        {
+            Monster mPtr = Monsters[cPtr.MonsterIndex];
+            if (mPtr.IsVisible)
+            {
+                MonsterRace rPtr = mPtr.Race;
+                a = rPtr.Colour;
+                c = rPtr.Symbol.Character;
+                if (rPtr.AttrMulti)
+                {
+                    if (rPtr.Shapechanger)
+                    {
+                        cp = Program.Rng.DieRoll(25) == 1
+                            ? _imageObjectHack[Program.Rng.RandomLessThan(_imageObjectHack.Length)]
+                            : _imageMonsterHack[Program.Rng.RandomLessThan(_imageMonsterHack.Length)];
+                    }
+                    else
+                    {
+                        cp = c;
+                    }
+                    if (rPtr.AttrAny)
+                    {
+                        ap = (ColourEnum)Program.Rng.DieRoll(15);
+                    }
+                    else
+                    {
+                        switch (Program.Rng.DieRoll(7))
+                        {
+                            case 1:
+                                ap = ColourEnum.Red;
+                                break;
+
+                            case 2:
+                                ap = ColourEnum.BrightRed;
+                                break;
+
+                            case 3:
+                                ap = ColourEnum.White;
+                                break;
+
+                            case 4:
+                                ap = ColourEnum.BrightGreen;
+                                break;
+
+                            case 5:
+                                ap = ColourEnum.Blue;
+                                break;
+
+                            case 6:
+                                ap = ColourEnum.Black;
+                                break;
+
+                            case 7:
+                                ap = ColourEnum.Green;
+                                break;
+                        }
+                    }
+                }
+                else if (!rPtr.AttrClear && !rPtr.CharClear)
+                {
+                    cp = c;
+                    ap = a;
+                }
+                else
+                {
+                    if (!rPtr.CharClear)
+                    {
+                        cp = c;
+                    }
+                    else if (!rPtr.AttrClear)
+                    {
+                        ap = a;
+                    }
+                }
+                if (TimedHallucinations.TurnsRemaining != 0)
+                {
+                    ImageMonster(out ap, out cp);
+                }
+            }
+        }
+        if (y == MapY && x == MapX)
+        {
+            MonsterRace rPtr = SingletonRepository.MonsterRaces[0];
+            a = rPtr.Colour;
+            c = rPtr.Symbol.Character;
+            ap = a;
+            cp = c;
+        }
+    }
+
+    /// <summary>
+    /// Returns the index of this monster in the monster list.  This method is provided for backwards compatability and should NOT be used.  Will be deleted when no longer needed.
+    /// </summary>
+    /// <param name="monster"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    public int GetMonsterIndex(Monster monster) // TODO: Needs to be removed.
+    {
+        for (int i = 0; i < Monsters.Length; i++)
+        {
+            if (Monsters[i] == monster)
+                return i;
+        }
+        throw new Exception("Internal error monster not found for get monster index.");
+    }
+    public bool AllocHorde(int y, int x)
+    {
+        MonsterRace rPtr = null;
+        int attempts = 1000;
+        while (--attempts != 0)
+        {
+            int rIdx = GetMonNum(MonsterLevel, null);
+            if (rIdx == 0)
+            {
+                return false;
+            }
+            rPtr = SingletonRepository.MonsterRaces[rIdx];
+            if (!rPtr.Unique && !rPtr.EscortsGroup)
+            {
+                break;
+            }
+        }
+        if (attempts < 1)
+        {
+            return false;
+        }
+        attempts = 1000;
+        while (--attempts == 0)
+        {
+            if (PlaceMonsterAux(y, x, rPtr, false, false, false))
+            {
+                break;
+            }
+        }
+        if (attempts < 1)
+        {
+            return false;
+        }
+        Monster mPtr = Monsters[_hackMIdxIi];
+        for (attempts = Program.Rng.DieRoll(10) + 5; attempts != 0; attempts--)
+        {
+            SummonSpecific(mPtr.MapY, mPtr.MapX, Difficulty, new KinMonsterSelector(rPtr.Symbol.Character));
+        }
+        return true;
+    }
+
+    public void AllocMonster(int dis, bool slp)
+    {
+        int y = 0;
+        int x = 0;
+        int attemptsLeft = 10000;
+        while (attemptsLeft != 0)
+        {
+            y = Program.Rng.RandomLessThan(CurHgt);
+            x = Program.Rng.RandomLessThan(CurWid);
+            if (!GridOpenNoItemOrCreature(y, x))
+            {
+                continue;
+            }
+            if (Distance(y, x, MapY, MapX) > dis)
+            {
+                break;
+            }
+            attemptsLeft--;
+        }
+        if (attemptsLeft == 0)
+        {
+            return;
+        }
+        if (Program.Rng.DieRoll(5000) <= Difficulty)
+        {
+            if (AllocHorde(y, x))
+            {
+            }
+        }
+        else
+        {
+            if (DunBias != null && Program.Rng.RandomBetween(1, 10) > 6)
+            {
+                if (SummonSpecific(y, x, Difficulty, DunBias))
+                {
+                }
+            }
+            else
+            {
+                if (PlaceMonster(y, x, slp, true))
+                {
+                }
+            }
+        }
+    }
+
+    public void CompactMonsters(int size)
+    {
+        int i, num, cnt;
+        if (size != 0)
+        {
+            MsgPrint("Compacting monsters...");
+        }
+        for (num = 0, cnt = 1; num < size; cnt++)
+        {
+            int curLev = 5 * cnt;
+            int curDis = 5 * (20 - cnt);
+            for (i = 1; i < MMax; i++)
+            {
+                Monster mPtr = Monsters[i];
+                MonsterRace rPtr = mPtr.Race;
+                if (mPtr.Race == null)
+                {
+                    continue;
+                }
+                if (rPtr.Level > curLev)
+                {
+                    continue;
+                }
+                if (curDis > 0 && mPtr.DistanceFromPlayer < curDis)
+                {
+                    continue;
+                }
+                int chance = 90;
+                if (rPtr.Unique)
+                {
+                    chance = 99;
+                }
+                if (rPtr.Guardian && cnt < 1000)
+                {
+                    chance = 100;
+                }
+                if (Program.Rng.RandomLessThan(100) < chance)
+                {
+                    continue;
+                }
+                DeleteMonsterByIndex(i, true);
+                num++;
+            }
+        }
+        for (i = MMax - 1; i >= 1; i--)
+        {
+            Monster mPtr = Monsters[i];
+            if (mPtr.Race != null)
+            {
+                continue;
+            }
+            CompactMonstersAux(MMax - 1, i);
+            MMax--;
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="mIdx"></param>
+    /// <param name="dam"></param>
+    /// <param name="fear"></param>
+    /// <param name="note"></param>
+    /// <returns>True, if the monster dies; false, otherwise.</returns>
+    public bool DamageMonster(int mIdx, int dam, out bool fear, string note)
+    {
+        fear = false;
+        Monster mPtr = Monsters[mIdx];
+        MonsterRace rPtr = mPtr.Race;
+        if (TrackedMonsterIndex == mIdx)
+        {
+            RedrawHealthFlaggedAction.Set();
+        }
+        mPtr.SleepLevel = 0;
+        mPtr.Health -= dam;
+        if (mPtr.Health < 0)
+        {
+            string mName = mPtr.Name;
+            if (rPtr.GreatOldOne && Program.Rng.DieRoll(2) == 1)
+            {
+                MsgPrint($"{mName} retreats into another dimension!");
+                if (Program.Rng.DieRoll(5) == 1)
+                {
+                    int curses = 1 + Program.Rng.DieRoll(3);
+                    MsgPrint("Nyarlathotep puts a terrible curse on you!");
+                    CurseEquipment(100, 50);
+                    do
+                    {
+                        ActivateDreadCurse();
+                    } while (--curses != 0);
+                }
+            }
+            PlaySound(SoundEffectEnum.MonsterDies);
+            if (string.IsNullOrEmpty(note) == false)
+            {
+                MsgPrint($"{mName}{note}");
+            }
+            else if (!mPtr.IsVisible)
+            {
+                MsgPrint($"You have killed {mName}.");
+            }
+            else if (rPtr.Demon || rPtr.Undead ||
+                     rPtr.Cthuloid || rPtr.Stupid ||
+                     rPtr.Nonliving || "Evg".Contains(rPtr.Symbol.Character.ToString()))
+            {
+                MsgPrint($"You have destroyed {mName}.");
+            }
+            else
+            {
+                MsgPrint($"You have slain {mName}.");
+            }
+            int div = 10 * MaxLevelGained;
+            if (rPtr.Knowledge.RPkills >= 19)
+            {
+                div *= 2;
+            }
+            if (rPtr.Knowledge.RPkills == 0)
+            {
+                div /= 3;
+            }
+            if (rPtr.Knowledge.RPkills == 1)
+            {
+                div /= 2;
+            }
+            if (rPtr.Knowledge.RPkills == 2)
+            {
+                div /= 2;
+            }
+            if (div < 1)
+            {
+                div = 1;
+            }
+            int newExp = rPtr.Mexp * rPtr.Level * 10 / div;
+            int newExpFrac = (rPtr.Mexp * rPtr.Level % div * 0x10000 / div) + FractionalExperiencePoints;
+            if (newExpFrac >= 0x10000)
+            {
+                newExp++;
+                FractionalExperiencePoints = newExpFrac - 0x10000;
+            }
+            else
+            {
+                FractionalExperiencePoints = newExpFrac;
+            }
+            GainExperience(newExp);
+            MonsterDeath(mIdx);
+            if (rPtr.Unique)
+            {
+                rPtr.MaxNum = 0;
+            }
+            if (mPtr.IsVisible || rPtr.Unique)
+            {
+                if (rPtr.Knowledge.RPkills < int.MaxValue)
+                {
+                    rPtr.Knowledge.RPkills++;
+                }
+                if (rPtr.Knowledge.RTkills < int.MaxValue)
+                {
+                    rPtr.Knowledge.RTkills++;
+                }
+            }
+            DeleteMonsterByIndex(mIdx, true);
+            fear = false;
+            return true;
+        }
+        if (mPtr.FearLevel != 0 && dam > 0)
+        {
+            int tmp = Program.Rng.DieRoll(dam);
+            if (tmp < mPtr.FearLevel)
+            {
+                mPtr.FearLevel -= tmp;
+            }
+            else
+            {
+                mPtr.FearLevel = 0;
+                fear = false;
+            }
+        }
+        if (mPtr.FearLevel == 0 && !rPtr.ImmuneFear)
+        {
+            int percentage = 100 * mPtr.Health / mPtr.MaxHealth;
+            if ((percentage <= 10 && Program.Rng.RandomLessThan(10) < percentage) || (dam >= mPtr.Health && Program.Rng.RandomLessThan(100) < 80))
+            {
+                fear = true;
+                mPtr.FearLevel = Program.Rng.DieRoll(10) + (dam >= mPtr.Health && percentage > 7 ? 20 : (11 - percentage) * 5);
+            }
+        }
+        return false;
+    }
+
+    public void DeleteMonsterByIndex(int i, bool visibly)
+    {
+        Monster mPtr = Monsters[i];
+        MonsterRace rPtr = mPtr.Race;
+        if (rPtr == null)
+        {
+            return;
+        }
+        int y = mPtr.MapY;
+        int x = mPtr.MapX;
+        rPtr.CurNum--;
+        if (rPtr.Multiply)
+        {
+            NumRepro--;
+        }
+        if (i == TargetWho)
+        {
+            TargetWho = 0;
+        }
+        if (i == TrackedMonsterIndex)
+        {
+            HealthTrack(0);
+        }
+        Grid[y][x].MonsterIndex = 0;
+        mPtr.Items.Clear();
+        Monsters[i] = new Monster(this);
+        MCnt--;
+        if (visibly)
+        {
+            RedrawSingleLocation(y, x);
+        }
+    }
+
+    /// <summary>
+    /// Returns the index of a monster.
+    /// </summary>
+    /// <param name="level"></param>
+    /// <param name="getMonNumHook"></param>
+    /// <returns></returns>
+    public int GetMonNum(int level, MonsterSelector? getMonNumHook)
+    {
+        int i, j;
+        AllocationEntry[] table = AllocRaceTable;
+        if (level > 0)
+        {
+            if (Program.Rng.RandomLessThan(Constants.NastyMon) == 0)
+            {
+                int d = (level / 4) + 2;
+                level += d < 5 ? d : 5;
+            }
+            if (Program.Rng.RandomLessThan(Constants.NastyMon) == 0)
+            {
+                int d = (level / 4) + 2;
+                level += d < 5 ? d : 5;
+            }
+        }
+        int total = 0;
+        for (i = 0; i < AllocRaceSize; i++)
+        {
+            if (table[i].Level > level)
+            {
+                break;
+            }
+            table[i].FinalProbability = 0;
+            if (level > 0 && table[i].Level <= 0)
+            {
+                continue;
+            }
+            int rIdx = table[i].Index;
+            MonsterRace rPtr = SingletonRepository.MonsterRaces[rIdx];
+
+            // Do not allow more than 1 unique of this type to be created.
+            if (rPtr.Unique && rPtr.CurNum >= rPtr.MaxNum)
+            {
+                continue;
+            }
+
+            if (getMonNumHook == null || getMonNumHook.Matches(this, rPtr))
+            {
+                table[i].FinalProbability = table[i].BaseProbability;
+            }
+            else
+            {
+                table[i].FinalProbability = 0;
+            }
+
+            total += table[i].FinalProbability;
+        }
+        if (total <= 0)
+        {
+            return 0;
+        }
+        long value = Program.Rng.RandomLessThan(total);
+        for (i = 0; i < AllocRaceSize; i++)
+        {
+            if (value < table[i].FinalProbability)
+            {
+                break;
+            }
+            value -= table[i].FinalProbability;
+        }
+        int p = Program.Rng.RandomLessThan(100);
+        if (p < 60)
+        {
+            j = i;
+            value = Program.Rng.RandomLessThan(total);
+            for (i = 0; i < AllocRaceSize; i++)
+            {
+                if (value < table[i].FinalProbability)
+                {
+                    break;
+                }
+                value -= table[i].FinalProbability;
+            }
+            if (table[i].Level < table[j].Level)
+            {
+                i = j;
+            }
+        }
+        if (p < 10)
+        {
+            j = i;
+            value = Program.Rng.RandomLessThan(total);
+            for (i = 0; i < AllocRaceSize; i++)
+            {
+                if (value < table[i].FinalProbability)
+                {
+                    break;
+                }
+                value -= table[i].FinalProbability;
+            }
+            if (table[i].Level < table[j].Level)
+            {
+                i = j;
+            }
+        }
+        return table[i].Index;
+    }
+
+    public List<Monster> GetPets()
+    {
+        List<Monster> list = new List<Monster>();
+        foreach (Monster monster in Monsters)
+        {
+            if (monster.SmFriendly)
+            {
+                list.Add(monster);
+            }
+        }
+        return list;
+    }
+
+    public void LoreDoProbe(int mIdx)
+    {
+        Monster mPtr = Monsters[mIdx];
+        MonsterRace rPtr = mPtr.Race;
+        var knowledge = rPtr.Knowledge;
+        if (rPtr.Attacks != null)
+        {
+            for (var m = 0; m < rPtr.Attacks.Length; m++)
+            {
+                if (rPtr.Attacks[m].Effect != null || rPtr.Attacks[m].Method != null)
+                {
+                    knowledge.RBlows[m] = Constants.MaxUchar;
+                }
+            }
+        }
+        knowledge.RProbed = true;
+        knowledge.RWake = Constants.MaxUchar;
+        knowledge.RIgnore = Constants.MaxUchar;
+        knowledge.RDropItem = (rPtr.Drop_4D2 ? 8 : 0) +
+                              (rPtr.Drop_3D2 ? 6 : 0) +
+                              (rPtr.Drop_2D2 ? 4 : 0) +
+                              (rPtr.Drop_1D2 ? 2 : 0) +
+                              (rPtr.Drop90 ? 1 : 0) +
+                              (rPtr.Drop60 ? 1 : 0);
+        knowledge.RDropGold = knowledge.RDropItem;
+        if (rPtr.OnlyDropGold)
+        {
+            knowledge.RDropItem = 0;
+        }
+        if (rPtr.OnlyDropItem)
+        {
+            knowledge.RDropGold = 0;
+        }
+        knowledge.RCastInate = Constants.MaxUchar;
+        knowledge.RCastSpell = Constants.MaxUchar;
+        knowledge.Characteristics = new MonsterCharacteristics(rPtr);
+        knowledge.RSpells = rPtr.Spells;
+    }
+
+    public void LoreTreasure(int mIdx, int numItem, int numGold)
+    {
+        Monster mPtr = Monsters[mIdx];
+        MonsterRace rPtr = mPtr.Race;
+        if (numItem > rPtr.Knowledge.RDropItem)
+        {
+            rPtr.Knowledge.RDropItem = numItem;
+        }
+        if (numGold > rPtr.Knowledge.RDropGold)
+        {
+            rPtr.Knowledge.RDropGold = numGold;
+        }
+        if (rPtr.DropGood)
+        {
+            rPtr.Knowledge.Characteristics.DropGood = true;
+        }
+        if (rPtr.DropGreat)
+        {
+            rPtr.Knowledge.Characteristics.DropGreat = true;
+        }
+    }
+
+    public void MessagePain(int mIdx, int dam)
+    {
+        Monster mPtr = Monsters[mIdx];
+        MonsterRace rPtr = mPtr.Race;
+        string mName = mPtr.Name;
+        if (dam == 0)
+        {
+            MsgPrint($"{mName} is unharmed.");
+            return;
+        }
+        long newhp = mPtr.Health;
+        long oldhp = newhp + dam;
+        long tmp = newhp * 100L / oldhp;
+        int percentage = (int)tmp;
+        if ("jmvQ".Contains(rPtr.Symbol.Character.ToString()))
+        {
+            if (percentage > 95)
+            {
+                MsgPrint($"{mName} barely notices.");
+            }
+            else if (percentage > 75)
+            {
+                MsgPrint($"{mName} flinches.");
+            }
+            else if (percentage > 50)
+            {
+                MsgPrint($"{mName} squelches.");
+            }
+            else if (percentage > 35)
+            {
+                MsgPrint($"{mName} quivers in pain.");
+            }
+            else if (percentage > 20)
+            {
+                MsgPrint($"{mName} writhes about.");
+            }
+            else if (percentage > 10)
+            {
+                MsgPrint($"{mName} writhes in agony.");
+            }
+            else
+            {
+                MsgPrint($"{mName} jerks limply.");
+            }
+        }
+        else if ("CZ".Contains(rPtr.Symbol.Character.ToString()))
+        {
+            if (percentage > 95)
+            {
+                MsgPrint($"{mName} shrugs off the attack.");
+            }
+            else if (percentage > 75)
+            {
+                MsgPrint($"{mName} snarls with pain.");
+            }
+            else if (percentage > 50)
+            {
+                MsgPrint($"{mName} yelps in pain.");
+            }
+            else if (percentage > 35)
+            {
+                MsgPrint($"{mName} howls in pain.");
+            }
+            else if (percentage > 20)
+            {
+                MsgPrint($"{mName} howls in agony.");
+            }
+            else if (percentage > 10)
+            {
+                MsgPrint($"{mName} writhes in agony.");
+            }
+            else
+            {
+                MsgPrint($"{mName} yelps feebly.");
+            }
+        }
+        else if ("FIKMRSXabclqrst".Contains(rPtr.Symbol.Character.ToString()))
+        {
+            if (percentage > 95)
+            {
+                MsgPrint($"{mName} ignores the attack.");
+            }
+            else if (percentage > 75)
+            {
+                MsgPrint($"{mName} grunts with pain.");
+            }
+            else if (percentage > 50)
+            {
+                MsgPrint($"{mName} squeals in pain.");
+            }
+            else if (percentage > 35)
+            {
+                MsgPrint($"{mName} shrieks in pain.");
+            }
+            else if (percentage > 20)
+            {
+                MsgPrint($"{mName} shrieks in agony.");
+            }
+            else if (percentage > 10)
+            {
+                MsgPrint($"{mName} writhes in agony.");
+            }
+            else
+            {
+                MsgPrint($"{mName} cries out feebly.");
+            }
+        }
+        else
+        {
+            if (percentage > 95)
+            {
+                MsgPrint($"{mName} shrugs off the attack.");
+            }
+            else if (percentage > 75)
+            {
+                MsgPrint($"{mName} grunts with pain.");
+            }
+            else if (percentage > 50)
+            {
+                MsgPrint($"{mName} cries out in pain.");
+            }
+            else if (percentage > 35)
+            {
+                MsgPrint($"{mName} screams in pain.");
+            }
+            else if (percentage > 20)
+            {
+                MsgPrint($"{mName} screams in agony.");
+            }
+            else if (percentage > 10)
+            {
+                MsgPrint($"{mName} writhes in agony.");
+            }
+            else
+            {
+                MsgPrint($"{mName} cries out feebly.");
+            }
+        }
+    }
+
+    public bool MultiplyMonster(Monster mPtr, bool charm, bool clone)
+    {
+        bool result = false;
+        for (int i = 0; i < 18; i++)
+        {
+            int d = 1;
+            Scatter(out int y, out int x, mPtr.MapY, mPtr.MapX, d);
+            if (!GridPassableNoCreature(y, x))
+            {
+                continue;
+            }
+            result = PlaceMonsterAux(y, x, mPtr.Race, false, false, charm);
+            break;
+        }
+        if (clone && result)
+        {
+            Monsters[_hackMIdxIi].SmCloned = true;
+        }
+        mPtr.Generation++;
+        Monsters[_hackMIdxIi].Generation = mPtr.Generation;
+        return result;
+    }
+
+    public bool PlaceMonster(int y, int x, bool slp, bool grp)
+    {
+        int rIdx = GetMonNum(MonsterLevel, null);
+        if (rIdx == 0)
+        {
+            return false;
+        }
+        if (PlaceMonsterByIndex(y, x, rIdx, slp, grp, false))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool PlaceMonsterAux(int y, int x, MonsterRace rPtr, bool slp, bool grp, bool charm)
+    {
+        if (!PlaceMonsterOne(y, x, rPtr, slp, charm))
+        {
+            return false;
+        }
+        if (rPtr.Escorted)
+        {
+            for (int i = 0; i < 50; i++)
+            {
+                int d = 3;
+                Scatter(out int ny, out int nx, y, x, d);
+                if (!GridPassableNoCreature(ny, nx))
+                {
+                    continue;
+                }
+                int z = GetMonNum(rPtr.Level, new PlaceMonsterOkayMonsterSelector(rPtr.Index));
+                if (z == 0)
+                {
+                    break;
+                }
+                MonsterRace race = SingletonRepository.MonsterRaces[z];
+                PlaceMonsterOne(ny, nx, race, slp, charm);
+                if (race.Friends ||
+                    rPtr.EscortsGroup)
+                {
+                    PlaceMonsterGroup(ny, nx, z, slp, charm);
+                }
+            }
+        }
+        if (!grp)
+        {
+            return true;
+        }
+        if (rPtr.Friends)
+        {
+            PlaceMonsterGroup(y, x, rPtr.Index, slp, charm);
+        }
+        return true;
+    }
+
+    public bool PlaceMonsterByIndex(int y, int x, int index, bool slp, bool grp, bool charm)
+    {
+        return PlaceMonsterAux(y, x, SingletonRepository.MonsterRaces[index], slp, grp, charm);
+    }
+
+    public void ReplacePet(int y1, int x1, Monster monster)
+    {
+        int i;
+        int x = x1;
+        int y = y1;
+        for (i = 0; i < 20; ++i)
+        {
+            int d = (i / 15) + 1;
+            Scatter(out y, out x, y1, x1, d);
+            if (!GridPassableNoCreature(y, x))
+            {
+                continue;
+            }
+            if (!Grid[y][x].FeatureType.AllowMonsterToOccupy)
+            {
+                continue;
+            }
+            break;
+        }
+        if (i == 20)
+        {
+            MsgPrint($"You lose sight of {monster.Name}.");
+            return;
+        }
+        GridTile cPtr = Grid[y][x];
+        cPtr.MonsterIndex = MPop();
+        if (cPtr.MonsterIndex == 0)
+        {
+            MsgPrint($"You lose sight of {monster.Name}.");
+            return;
+        }
+        Monsters[cPtr.MonsterIndex] = monster;
+        monster.MapY = y;
+        monster.MapX = x;
+        MonsterRace rPtr = monster.Race;
+        if (rPtr.Multiply)
+        {
+            NumRepro++;
+        }
+        if (rPtr.AttrMulti)
+        {
+            ShimmerMonsters = true;
+        }
+    }
+
+    public bool SummonSpecific(int y1, int x1, int lev, MonsterSelector? monsterSelector, bool groupOk = true)
+    {
+        int i;
+        int x = x1;
+        int y = y1;
+        for (i = 0; i < 20; ++i)
+        {
+            int d = (i / 15) + 1;
+            Scatter(out y, out x, y1, x1, d);
+            if (!GridPassableNoCreature(y, x))
+            {
+                continue;
+            }
+            if (!Grid[y][x].FeatureType.AllowMonsterToOccupy)
+            {
+                continue;
+            }
+            break;
+        }
+        if (i == 20)
+        {
+            return false;
+        }
+        int rIdx = GetMonNum(((Difficulty + lev) / 2) + 5, monsterSelector);
+        if (rIdx == 0)
+        {
+            return false;
+        }
+        MonsterRace race = SingletonRepository.MonsterRaces[rIdx];
+        if (!PlaceMonsterAux(y, x, race, false, groupOk, false))
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public bool SummonSpecificFriendly(int y1, int x1, int lev, MonsterSelector? monsterSelector, bool groupOk) // TODO: The floor Sigil and Charm are the only differences from SummonSpecific.
+    {
+        int i;
+        int x = 0;
+        int y = 0;
+        for (i = 0; i < 20; ++i)
+        {
+            int d = (i / 15) + 1;
+            Scatter(out y, out x, y1, x1, d);
+            if (!GridPassableNoCreature(y, x))
+            {
+                continue;
+            }
+            if (Grid[y][x].FeatureType.Name == "ElderSign")
+            {
+                continue;
+            }
+            if (Grid[y][x].FeatureType.Name == "YellowSign")
+            {
+                continue;
+            }
+            break;
+        }
+        if (i == 20)
+        {
+            return false;
+        }
+        int rIdx = GetMonNum(((Difficulty + lev) / 2) + 5, monsterSelector);
+        if (rIdx == 0)
+        {
+            return false;
+        }
+        MonsterRace race = SingletonRepository.MonsterRaces[rIdx];
+        if (!PlaceMonsterAux(y, x, race, false, groupOk, true))
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public void UpdateMonsterVisibility(int mIdx, bool full)
+    {
+        Monster mPtr = Monsters[mIdx];
+        MonsterRace rPtr = mPtr.Race;
+        if (rPtr == null)
+        {
+            return;
+        }
+        int fy = mPtr.MapY;
+        int fx = mPtr.MapX;
+        if (full)
+        {
+            int dy = MapY > fy
+                ? MapY - fy
+                : fy - MapY;
+            int dx = MapX > fx
+                ? MapX - fx
+                : fx - MapX;
+            int d = dy > dx ? dy + (dx >> 1) : dx + (dy >> 1);
+            mPtr.DistanceFromPlayer = d < 255 ? d : 255;
+        }
+        bool flag = false;
+        bool easy = false;
+        bool hard = false;
+        bool doEmptyMind = false;
+        bool doWeirdMind = false;
+        bool doInvisible = false;
+        bool doColdBlood = false;
+        bool oldMl = mPtr.IsVisible;
+        if (mPtr.DistanceFromPlayer > Constants.MaxSight)
+        {
+            if (!mPtr.IsVisible)
+            {
+                return;
+            }
+            if ((mPtr.IndividualMonsterFlags & Constants.MflagMark) != 0)
+            {
+                flag = true;
+            }
+        }
+        else if (PanelContains(fy, fx))
+        {
+            GridTile cPtr = Grid[fy][fx];
+            if (cPtr.TileFlags.IsSet(GridTile.IsVisible) && TimedBlindness.TurnsRemaining == 0)
+            {
+                if (mPtr.DistanceFromPlayer <= InfravisionRange)
+                {
+                    if (rPtr.ColdBlood)
+                    {
+                        doColdBlood = true;
+                    }
+                    if (!doColdBlood)
+                    {
+                        easy = true;
+                        flag = true;
+                    }
+                }
+                if (cPtr.TileFlags.IsSet(GridTile.PlayerLit | GridTile.SelfLit))
+                {
+                    if (rPtr.Invisible)
+                    {
+                        doInvisible = true;
+                    }
+                    if (!doInvisible || HasSeeInvisibility)
+                    {
+                        easy = true;
+                        flag = true;
+                    }
+                }
+            }
+            if (HasTelepathy)
+            {
+                if (rPtr.EmptyMind)
+                {
+                    doEmptyMind = true;
+                }
+                else if (rPtr.WeirdMind)
+                {
+                    doWeirdMind = true;
+                    if (Program.Rng.RandomLessThan(100) < 10)
+                    {
+                        hard = true;
+                        flag = true;
+                    }
+                }
+                else
+                {
+                    hard = true;
+                    flag = true;
+                }
+            }
+            if ((mPtr.IndividualMonsterFlags & Constants.MflagMark) != 0)
+            {
+                flag = true;
+            }
+            if (IsWizard)
+            {
+                flag = true;
+            }
+        }
+        if (flag)
+        {
+            if (!mPtr.IsVisible)
+            {
+                mPtr.IsVisible = true;
+                RedrawSingleLocation(fy, fx);
+                if (TrackedMonsterIndex == mIdx)
+                {
+                    RedrawHealthFlaggedAction.Set();
+                }
+                if (rPtr.Knowledge.RSights < Constants.MaxShort)
+                {
+                    rPtr.Knowledge.RSights++;
+                }
+            }
+            if (hard)
+            {
+                if (rPtr.Smart)
+                {
+                    rPtr.Knowledge.Characteristics.Smart = true;
+                }
+                if (rPtr.Stupid)
+                {
+                    rPtr.Knowledge.Characteristics.Stupid = true;
+                }
+            }
+            if (doEmptyMind)
+            {
+                rPtr.Knowledge.Characteristics.EmptyMind = true;
+            }
+            if (doWeirdMind)
+            {
+                rPtr.Knowledge.Characteristics.WeirdMind = true;
+            }
+            if (doColdBlood)
+            {
+                rPtr.Knowledge.Characteristics.ColdBlood = true;
+            }
+            if (doInvisible)
+            {
+                rPtr.Knowledge.Characteristics.Invisible = true;
+            }
+        }
+        else
+        {
+            if (mPtr.IsVisible)
+            {
+                mPtr.IsVisible = false;
+                RedrawSingleLocation(fy, fx);
+                if (TrackedMonsterIndex == mIdx)
+                {
+                    RedrawHealthFlaggedAction.Set();
+                }
+            }
+        }
+        if (easy)
+        {
+            if (mPtr.IsVisible != oldMl)
+            {
+                if (rPtr.EldritchHorror)
+                {
+                    mPtr.SanityBlast(false);
+                }
+            }
+            if ((mPtr.IndividualMonsterFlags & Constants.MflagView) == 0)
+            {
+                mPtr.IndividualMonsterFlags |= Constants.MflagView;
+                if (!mPtr.SmFriendly)
+                {
+                    Disturb(true);
+                }
+            }
+        }
+        else
+        {
+            if ((mPtr.IndividualMonsterFlags & Constants.MflagView) != 0)
+            {
+                mPtr.IndividualMonsterFlags &= ~Constants.MflagView;
+                if (!mPtr.SmFriendly)
+                {
+                    Disturb(true);
+                }
+            }
+        }
+    }
+
+    public void UpdateSmartLearn(Monster monster, SpellResistantDetection what)
+    {
+        MonsterRace rPtr = monster.Race;
+        if (rPtr == null)
+        {
+            return;
+        }
+        if (rPtr.Stupid)
+        {
+            return;
+        }
+        if (!rPtr.Smart && Program.Rng.RandomLessThan(100) < 50)
+        {
+            return;
+        }
+        what.Learn(this, monster);
+    }
+
+    public void WipeMList()
+    {
+        for (int i = MMax - 1; i >= 1; i--)
+        {
+            Monster mPtr = Monsters[i];
+            MonsterRace rPtr = mPtr.Race;
+            if (mPtr.Race == null)
+            {
+                continue;
+            }
+            rPtr.CurNum--;
+            Grid[mPtr.MapY][mPtr.MapX].MonsterIndex = 0;
+            Monsters[i] = new Monster(this);
+        }
+        MMax = 1;
+        MCnt = 0;
+        NumRepro = 0;
+        TargetWho = 0;
+        HealthTrack(0);
+    }
+
+    private void CompactMonstersAux(int i1, int i2)
+    {
+        if (i1 == i2)
+        {
+            return;
+        }
+        Monster mPtr = Monsters[i1];
+        int y = mPtr.MapY;
+        int x = mPtr.MapX;
+        GridTile cPtr = Grid[y][x];
+        cPtr.MonsterIndex = i2;
+        Monster mPtr2 = Monsters[i2];
+        mPtr2.Items.AddRange(mPtr.Items);
+        if (TargetWho == i1)
+        {
+            TargetWho = i2;
+        }
+        if (TrackedMonsterIndex == i1)
+        {
+            HealthTrack(i2);
+        }
+        Monsters[i2] = Monsters[i1];
+        Monsters[i1] = new Monster(this);
+    }
+
+    private int MPop()
+    {
+        int i;
+        if (MMax < Constants.MaxMIdx)
+        {
+            i = MMax;
+            MMax++;
+            MCnt++;
+            return i;
+        }
+        for (i = 1; i < MMax; i++)
+        {
+            Monster mPtr = Monsters[i];
+            if (mPtr.Race != null)
+            {
+                continue;
+            }
+            MCnt++;
+            return i;
+        }
+        if (Level != null)
+        {
+            MsgPrint("Too many monsters!");
+        }
+        return 0;
+    }
+
+    private void PlaceMonsterGroup(int y, int x, int rIdx, bool slp, bool charm)
+    {
+        MonsterRace rPtr = SingletonRepository.MonsterRaces[rIdx];
+        int extra = 0;
+        int[] hackY = new int[Constants.GroupMax];
+        int[] hackX = new int[Constants.GroupMax];
+        int total = Program.Rng.DieRoll(13);
+        if (rPtr.Level > Difficulty)
+        {
+            extra = rPtr.Level - Difficulty;
+            extra = 0 - Program.Rng.DieRoll(extra);
+        }
+        else if (rPtr.Level < Difficulty)
+        {
+            extra = Difficulty - rPtr.Level;
+            extra = Program.Rng.DieRoll(extra);
+        }
+        if (extra > 12)
+        {
+            extra = 12;
+        }
+        total += extra;
+        if (total < 1)
+        {
+            total = 1;
+        }
+        if (total > Constants.GroupMax)
+        {
+            total = Constants.GroupMax;
+        }
+        int old = DangerRating;
+        int hackN = 1;
+        hackX[0] = x;
+        hackY[0] = y;
+        for (int n = 0; n < hackN && hackN < total; n++)
+        {
+            int hx = hackX[n];
+            int hy = hackY[n];
+            for (int i = 0; i < 8 && hackN < total; i++)
+            {
+                int mx = hx + OrderedDirectionXOffset[i];
+                int my = hy + OrderedDirectionYOffset[i];
+                if (!GridPassableNoCreature(my, mx))
+                {
+                    continue;
+                }
+                if (PlaceMonsterOne(my, mx, rPtr, slp, charm))
+                {
+                    hackY[hackN] = my;
+                    hackX[hackN] = mx;
+                    hackN++;
+                }
+            }
+        }
+        DangerRating = old;
+    }
+
+    private bool PlaceMonsterOne(int y, int x, MonsterRace rPtr, bool slp, bool charm)
+    {
+        // Monster must be provided.
+        if (rPtr == null)
+        {
+            return false;
+        }
+
+        // Monster cannot be the player.
+        if (rPtr.Name.StartsWith("Player"))
+        {
+            return false;
+        }
+
+        // Ensure the placement is within the bounds of the level.
+        if (!InBounds(y, x))
+        {
+            return false;
+        }
+
+        // Ensure the grid level is open.
+        if (!GridPassableNoCreature(y, x))
+        {
+            return false;
+        }
+
+        // Do not place monster on a sigil.
+        if (!Grid[y][x].FeatureType.AllowMonsterToOccupy)
+        {
+            return false;
+        }
+
+        // Ensure the monster name is not empty or null.
+        string name = rPtr.Name;
+        if (string.IsNullOrEmpty(rPtr.Name))
+        {
+            return false;
+        }
+
+        // Do not place more than one if the monster is unique and already allocated.
+        if (rPtr.Unique && rPtr.CurNum >= rPtr.MaxNum)
+        {
+            return false;
+        }
+
+        // Check to see if this is a quest guardian.
+        if (rPtr.OnlyGuardian || rPtr.Guardian)
+        {
+            int qIdx = GetQuestNumber();
+            if (qIdx < 0)
+            {
+                return false;
+            }
+            if (rPtr.Index != Quests[qIdx].RIdx)
+            {
+                return false;
+            }
+            if (rPtr.CurNum >= Quests[qIdx].ToKill - Quests[qIdx].Killed)
+            {
+                return false;
+            }
+        }
+        if (rPtr.Level > Difficulty)
+        {
+            if (rPtr.Unique)
+            {
+                DangerRating += (rPtr.Level - Difficulty) * 2;
+            }
+            else
+            {
+                DangerRating += rPtr.Level - Difficulty;
+            }
+        }
+        GridTile cPtr = Grid[y][x];
+        cPtr.MonsterIndex = MPop();
+        _hackMIdxIi = cPtr.MonsterIndex;
+        if (cPtr.MonsterIndex == 0)
+        {
+            return false;
+        }
+        Monster mPtr = Monsters[cPtr.MonsterIndex];
+        mPtr.Race = rPtr;
+        mPtr.MapY = y;
+        mPtr.MapX = x;
+        mPtr.Generation = 1;
+        mPtr.StunLevel = 0;
+        mPtr.ConfusionLevel = 0;
+        mPtr.FearLevel = 0;
+        if (charm)
+        {
+            mPtr.SmFriendly = true;
+        }
+        mPtr.SleepLevel = 0;
+        if (slp && rPtr.Sleep != 0)
+        {
+            int val = rPtr.Sleep;
+            mPtr.SleepLevel = (val * 2) + Program.Rng.DieRoll(val * 10);
+        }
+        mPtr.DistanceFromPlayer = 0;
+        mPtr.IndividualMonsterFlags = 0;
+        mPtr.IsVisible = false;
+        mPtr.MaxHealth = rPtr.ForceMaxHp
+            ? Program.Rng.DiceRollMax(rPtr.Hdice, rPtr.Hside)
+            : Program.Rng.DiceRoll(rPtr.Hdice, rPtr.Hside);
+        mPtr.Health = mPtr.MaxHealth;
+        mPtr.Speed = rPtr.Speed;
+        if (!rPtr.Unique)
+        {
+            int i = Constants.ExtractEnergy[rPtr.Speed] / 10;
+            if (i != 0)
+            {
+                mPtr.Speed += Program.Rng.RandomSpread(0, i);
+            }
+        }
+        mPtr.Energy = Program.Rng.RandomLessThan(100);
+        if (rPtr.ForceSleep)
+        {
+            mPtr.IndividualMonsterFlags |= Constants.MflagNice;
+            RepairMonsters = true;
+        }
+        if (cPtr.MonsterIndex < CurrentlyActingMonster)
+        {
+            mPtr.IndividualMonsterFlags |= Constants.MflagBorn;
+        }
+        UpdateMonsterVisibility(cPtr.MonsterIndex, true);
+        rPtr.CurNum++;
+        if (rPtr.Multiply)
+        {
+            NumRepro++;
+        }
+        if (rPtr.AttrMulti)
+        {
+            ShimmerMonsters = true;
+        }
+        return true;
+    }
 }

@@ -14,7 +14,7 @@ internal class SerMonsReward : Reward
     public override void GetReward(Patron patron)
     {
         SaveGame.MsgPrint($"{patron.ShortName} rewards you with a servant!");
-        if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, new NoUniquesMonsterSelector(), false))
+        if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, new NoUniquesMonsterSelector(), false))
         {
             SaveGame.MsgPrint("Nobody ever turns up...");
         }

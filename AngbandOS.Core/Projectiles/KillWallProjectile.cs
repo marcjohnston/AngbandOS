@@ -16,9 +16,9 @@ internal class KillWallProjectile : Projectile
 
     protected override bool AffectFloor(int y, int x)
     {
-        GridTile cPtr = SaveGame.Level.Grid[y][x];
+        GridTile cPtr = SaveGame.Grid[y][x];
         bool obvious = false;
-        if (SaveGame.Level.GridPassable(y, x))
+        if (SaveGame.GridPassable(y, x))
         {
             return false;
         }
@@ -35,8 +35,8 @@ internal class KillWallProjectile : Projectile
                 obvious = true;
             }
             cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
-            SaveGame.Level.RevertTileToBackground(y, x);
-            SaveGame.Level.PlaceGold(y, x);
+            SaveGame.RevertTileToBackground(y, x);
+            SaveGame.PlaceGold(y, x);
         }
         else if (cPtr.FeatureType.Name.Contains("Magma") || cPtr.FeatureType.Name.Contains("Quartz"))
         {
@@ -46,7 +46,7 @@ internal class KillWallProjectile : Projectile
                 obvious = true;
             }
             cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
-            SaveGame.Level.RevertTileToBackground(y, x);
+            SaveGame.RevertTileToBackground(y, x);
         }
         else if (cPtr.FeatureType.IsWall)
         {
@@ -56,7 +56,7 @@ internal class KillWallProjectile : Projectile
                 obvious = true;
             }
             cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
-            SaveGame.Level.RevertTileToBackground(y, x);
+            SaveGame.RevertTileToBackground(y, x);
         }
         else if (cPtr.FeatureType.Name == "Rubble")
         {
@@ -66,15 +66,15 @@ internal class KillWallProjectile : Projectile
                 obvious = true;
             }
             cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
-            SaveGame.Level.RevertTileToBackground(y, x);
+            SaveGame.RevertTileToBackground(y, x);
             if (Program.Rng.RandomLessThan(100) < 10)
             {
-                if (SaveGame.Level.PlayerCanSeeBold(y, x))
+                if (SaveGame.PlayerCanSeeBold(y, x))
                 {
                     SaveGame.MsgPrint("There was something buried in the rubble!");
                     obvious = true;
                 }
-                SaveGame.Level.PlaceObject(y, x, false, false);
+                SaveGame.PlaceObject(y, x, false, false);
             }
         }
         else
@@ -85,7 +85,7 @@ internal class KillWallProjectile : Projectile
                 obvious = true;
             }
             cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
-            SaveGame.Level.RevertTileToBackground(y, x);
+            SaveGame.RevertTileToBackground(y, x);
         }
         SaveGame.UpdateScentFlaggedAction.Set();
         SaveGame.UpdateMonstersFlaggedAction.Set();

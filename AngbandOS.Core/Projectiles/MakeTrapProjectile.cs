@@ -16,11 +16,11 @@ internal class MakeTrapProjectile : Projectile
 
     protected override bool AffectFloor(int y, int x)
     {
-        if (!SaveGame.Level.GridOpenNoItemOrCreature(y, x))
+        if (!SaveGame.GridOpenNoItemOrCreature(y, x))
         {
             return false;
         }
-        SaveGame.Level.PlaceTrap(y, x);
+        SaveGame.PlaceTrap(y, x);
         return false;
     }
 

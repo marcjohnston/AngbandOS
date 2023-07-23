@@ -25,9 +25,9 @@ internal class DimDoorActivation : Activation
             return false;
         }
         SaveGame.Energy -= 60 - SaveGame.ExperienceLevel;
-        if (!SaveGame.Level.GridPassableNoCreature(ij, ii) ||
-            SaveGame.Level.Grid[ij][ii].TileFlags.IsSet(GridTile.InVault) ||
-            SaveGame.Level.Distance(ij, ii, SaveGame.MapY, SaveGame.MapX) > SaveGame.ExperienceLevel + 2 ||
+        if (!SaveGame.GridPassableNoCreature(ij, ii) ||
+            SaveGame.Grid[ij][ii].TileFlags.IsSet(GridTile.InVault) ||
+            SaveGame.Distance(ij, ii, SaveGame.MapY, SaveGame.MapX) > SaveGame.ExperienceLevel + 2 ||
             Program.Rng.RandomLessThan(SaveGame.ExperienceLevel * SaveGame.ExperienceLevel / 2) == 0)
         {
             SaveGame.MsgPrint("You fail to exit the astral plane correctly!");

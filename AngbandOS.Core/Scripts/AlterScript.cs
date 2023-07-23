@@ -24,9 +24,9 @@ internal class AlterScript : Script
         // Get the direction in which to alter something
         if (SaveGame.GetDirectionNoAim(out int dir))
         {
-            int y = SaveGame.MapY + SaveGame.Level.KeypadDirectionYOffset[dir];
-            int x = SaveGame.MapX + SaveGame.Level.KeypadDirectionXOffset[dir];
-            GridTile tile = SaveGame.Level.Grid[y][x];
+            int y = SaveGame.MapY + SaveGame.KeypadDirectionYOffset[dir];
+            int x = SaveGame.MapX + SaveGame.KeypadDirectionXOffset[dir];
+            GridTile tile = SaveGame.Grid[y][x];
             // Altering a tile will take a turn
             SaveGame.EnergyUse = 100;
             // We 'alter' a tile by attacking it

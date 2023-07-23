@@ -169,11 +169,11 @@ internal abstract class Item : IComparable<Item>
 
         if (HoldingMonsterIndex != 0)
         {
-            return SaveGame.Level.Monsters[HoldingMonsterIndex];
+            return SaveGame.Monsters[HoldingMonsterIndex];
         } 
         else if (X != 0 && Y != 0)
         {
-            return SaveGame.Level.Grid[Y][X];
+            return SaveGame.Grid[Y][X];
         }
         else
         {
@@ -2143,12 +2143,12 @@ internal abstract class Item : IComparable<Item>
             }
             if (SaveGame.Level != null)
             {
-                SaveGame.Level.TreasureRating += 10;
+                SaveGame.TreasureRating += 10;
                 if (FixedArtifact.Cost > 50000)
                 {
-                    SaveGame.Level.TreasureRating += 10;
+                    SaveGame.TreasureRating += 10;
                 }
-                SaveGame.Level.SpecialTreasure = true;
+                SaveGame.SpecialTreasure = true;
             }
             return;
         }
@@ -2157,7 +2157,7 @@ internal abstract class Item : IComparable<Item>
         {
             if (SaveGame.Level != null)
             {
-                SaveGame.Level.TreasureRating += 40;
+                SaveGame.TreasureRating += 40;
             }
         }
         else if (RareItemTypeIndex != RareItemTypeEnum.None)
@@ -2261,7 +2261,7 @@ internal abstract class Item : IComparable<Item>
             }
             if (SaveGame.Level != null)
             {
-                SaveGame.Level.TreasureRating += ePtr.Rating;
+                SaveGame.TreasureRating += ePtr.Rating;
             }
             return;
         }

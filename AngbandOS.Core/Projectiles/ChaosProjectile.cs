@@ -22,7 +22,7 @@ internal class ChaosProjectile : Projectile
 
     protected override bool AffectItem(int who, int y, int x)
     {
-        GridTile cPtr = SaveGame.Level.Grid[y][x];
+        GridTile cPtr = SaveGame.Grid[y][x];
         bool obvious = false;
         string oName = "";
         foreach (Item oPtr in cPtr.Items)
@@ -64,13 +64,13 @@ internal class ChaosProjectile : Projectile
                     SaveGame.MsgPrint($"The {oName}{noteKill}");
                 }
                 bool isPotion = oPtr.Factory.CategoryEnum == ItemTypeEnum.Potion;
-                SaveGame.Level.DeleteObject(oPtr);
+                SaveGame.DeleteObject(oPtr);
                 if (isPotion)
                 {
                     PotionItemFactory potion = (PotionItemFactory)oPtr.Factory;
                     potion.Smash(who, y, x);
                 }
-                SaveGame.Level.RedrawSingleLocation(y, x);
+                SaveGame.RedrawSingleLocation(y, x);
             }
         }
         return obvious;
@@ -78,7 +78,7 @@ internal class ChaosProjectile : Projectile
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
-        GridTile cPtr = SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX];
+        GridTile cPtr = SaveGame.Grid[mPtr.MapY][mPtr.MapX];
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
         bool obvious = false;
@@ -114,10 +114,10 @@ internal class ChaosProjectile : Projectile
             {
                 note = " changes!";
                 dam = 0;
-                SaveGame.Level.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
+                SaveGame.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                 MonsterRace race = SaveGame.SingletonRepository.MonsterRaces[tmp];
-                SaveGame.Level.PlaceMonsterAux(mPtr.MapY, mPtr.MapX, race, false, false, charm);
-                mPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex];
+                SaveGame.PlaceMonsterAux(mPtr.MapY, mPtr.MapX, race, false, false, charm);
+                mPtr = SaveGame.Monsters[cPtr.MonsterIndex];
             }
         }
         else if (doConf != 0 && !rPtr.ImmuneConfusion && !rPtr.BreatheConfusion && !rPtr.BreatheChaos)
@@ -147,7 +147,7 @@ internal class ChaosProjectile : Projectile
             dam = 1600;
         }
         dam = (dam + r) / (r + 1);
-        Monster mPtr = SaveGame.Level.Monsters[who];
+        Monster mPtr = SaveGame.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
         if (blind)
         {

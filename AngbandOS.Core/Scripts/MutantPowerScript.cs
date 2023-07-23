@@ -36,9 +36,9 @@ internal class MutantPowerScript : Script
             SaveGame.EnergyUse = 0;
             return false;
         }
-        for (petCtr = SaveGame.Level.MMax - 1; petCtr >= 1; petCtr--)
+        for (petCtr = SaveGame.MMax - 1; petCtr >= 1; petCtr--)
         {
-            monster = SaveGame.Level.Monsters[petCtr];
+            monster = SaveGame.Monsters[petCtr];
             if (monster.SmFriendly)
             {
                 pets++;
@@ -140,9 +140,9 @@ internal class MutantPowerScript : Script
             {
                 allPets = true;
             }
-            for (petCtr = SaveGame.Level.MMax - 1; petCtr >= 1; petCtr--)
+            for (petCtr = SaveGame.MMax - 1; petCtr >= 1; petCtr--)
             {
-                monster = SaveGame.Level.Monsters[petCtr];
+                monster = SaveGame.Monsters[petCtr];
                 if (monster.SmFriendly)
                 {
                     bool deleteThis = false;
@@ -161,7 +161,7 @@ internal class MutantPowerScript : Script
                     }
                     if (deleteThis)
                     {
-                        SaveGame.Level.DeleteMonsterByIndex(petCtr, true);
+                        SaveGame.DeleteMonsterByIndex(petCtr, true);
                         dismissed++;
                     }
                 }

@@ -16,12 +16,12 @@ internal class TarotSpellSummonGreaterUndead : Spell
         SaveGame.MsgPrint("You concentrate on the image of a greater undead being...");
         if (Program.Rng.DieRoll(10) > 3)
         {
-            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new HiUndeadNoUniquesMonsterSelector(), true))
+            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new HiUndeadNoUniquesMonsterSelector(), true))
             {
                 SaveGame.MsgPrint("No-one ever turns up.");
             }
         }
-        else if (SaveGame.Level.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new HiUndeadNoUniquesMonsterSelector()))
+        else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new HiUndeadNoUniquesMonsterSelector()))
         {
             SaveGame.MsgPrint("The summoned undead creature gets angry!");
         }

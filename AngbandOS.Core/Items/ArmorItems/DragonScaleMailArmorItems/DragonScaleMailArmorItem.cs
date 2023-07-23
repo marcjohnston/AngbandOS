@@ -28,7 +28,7 @@ internal abstract class DragonScaleMailArmorItem : ArmourItem
 
             if (SaveGame.Level != null)
             {
-                SaveGame.Level.TreasureRating += 30;
+                SaveGame.TreasureRating += 30;
             }
         }
     }

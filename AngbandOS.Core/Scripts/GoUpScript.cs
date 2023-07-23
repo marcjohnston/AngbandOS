@@ -15,7 +15,7 @@ internal class GoUpScript : Script
     public override bool Execute()
     {
         // We need to actually be on an up staircase
-        GridTile tile = SaveGame.Level.Grid[SaveGame.MapY][SaveGame.MapX];
+        GridTile tile = SaveGame.Grid[SaveGame.MapY][SaveGame.MapX];
         if (tile.FeatureType.Name != "UpStair")
         {
             SaveGame.MsgPrint("I see no up staircase here.");

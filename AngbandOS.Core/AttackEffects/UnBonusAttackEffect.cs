@@ -23,7 +23,7 @@ internal class UnBonusAttackEffect : AttackEffect
                 obvious = true;
             }
         }
-        saveGame.Level.UpdateSmartLearn(monster, new DisenSpellResistantDetection());
+        saveGame.UpdateSmartLearn(monster, new DisenSpellResistantDetection());
     }
     public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {

@@ -24,7 +24,7 @@ internal class RoomType8 : RoomType
                 var maxX = xval + (vPtr.Width / 2);
                 var minY = yval - (vPtr.Height / 2);
                 var maxY = yval + (vPtr.Height / 2);
-                if (minX >= 1 && minY >= 1 && maxX < saveGame.Level.CurWid - 1 && maxY < saveGame.Level.CurHgt - 1)
+                if (minX >= 1 && minY >= 1 && maxX < saveGame.CurWid - 1 && maxY < saveGame.CurHgt - 1)
                 {
                     break;
                 }
@@ -34,10 +34,10 @@ internal class RoomType8 : RoomType
         {
             return;
         }
-        saveGame.Level.DangerRating += vPtr.Rating;
+        saveGame.DangerRating += vPtr.Rating;
         if (saveGame.Difficulty <= 50 || Program.Rng.DieRoll(((saveGame.Difficulty - 40) * (saveGame.Difficulty - 40)) + 50) < 400)
         {
-            saveGame.Level.SpecialDanger = true;
+            saveGame.SpecialDanger = true;
         }
         BuildVault(saveGame, yval, xval, vPtr.Height, vPtr.Width, vPtr.Text);
     }

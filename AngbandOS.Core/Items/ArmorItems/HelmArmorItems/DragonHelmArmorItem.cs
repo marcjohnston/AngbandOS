@@ -25,7 +25,7 @@ internal class DragonHelmArmorItem : HelmArmorItem
 
         if (SaveGame.Level != null)
         {
-            SaveGame.Level.TreasureRating += 5;
+            SaveGame.TreasureRating += 5;
         }
         ApplyDragonscaleResistance();
     }

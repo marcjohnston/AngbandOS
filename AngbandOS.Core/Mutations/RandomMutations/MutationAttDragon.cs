@@ -24,11 +24,11 @@ internal class MutationAttDragon : Mutation
         bool dSummon;
         if (Program.Rng.DieRoll(5) == 1)
         {
-            dSummon = saveGame.Level.SummonSpecificFriendly(saveGame.MapY, saveGame.MapX, saveGame.Difficulty, new DragonMonsterSelector(), true);
+            dSummon = saveGame.SummonSpecificFriendly(saveGame.MapY, saveGame.MapX, saveGame.Difficulty, new DragonMonsterSelector(), true);
         }
         else
         {
-            dSummon = saveGame.Level.SummonSpecific(saveGame.MapY, saveGame.MapX, saveGame.Difficulty, new DragonMonsterSelector());
+            dSummon = saveGame.SummonSpecific(saveGame.MapY, saveGame.MapX, saveGame.Difficulty, new DragonMonsterSelector());
         }
         if (!dSummon)
         {

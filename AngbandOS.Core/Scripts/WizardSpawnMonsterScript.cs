@@ -85,8 +85,8 @@ internal class WizardSpawnMonsterScript : Script
                         break;
                     case '\r':
                         MonsterRace monsterRace = monsterRaces[selectedIndex];
-                        SaveGame.Level.Scatter(out int y, out int x, SaveGame.MapY, SaveGame.MapX, 1);
-                        SaveGame.Level.PlaceMonsterAux(y, x, monsterRace, false, false, false);
+                        SaveGame.Scatter(out int y, out int x, SaveGame.MapY, SaveGame.MapX, 1);
+                        SaveGame.PlaceMonsterAux(y, x, monsterRace, false, false, false);
                         return false;
                 }
             }

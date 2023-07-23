@@ -29,7 +29,7 @@ internal class ViewMapScript : Script
         {
             // We're not on the surface, so draw the level map
             SaveGame.SetBackground(BackgroundImageEnum.Map);
-            SaveGame.Level.DisplayMap(out cy, out cx);
+            SaveGame.DisplayMap(out cy, out cx);
         }
         // Give us a prompt, and display the cursor in the player's location
         SaveGame.Screen.Print(ColourEnum.Orange, "[Press any key to continue]", 43, 26);

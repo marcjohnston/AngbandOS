@@ -16,12 +16,12 @@ internal class TarotSpellSummonUndead : Spell
         SaveGame.MsgPrint("You concentrate on the image of an undead creature...");
         if (Program.Rng.DieRoll(10) > 3)
         {
-            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new UndeadMonsterSelector(), true))
+            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new UndeadMonsterSelector(), true))
             {
                 SaveGame.MsgPrint("No-one ever turns up.");
             }
         }
-        else if (SaveGame.Level.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new UndeadMonsterSelector()))
+        else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new UndeadMonsterSelector()))
         {
             SaveGame.MsgPrint("The summoned undead creature gets angry!");
         }

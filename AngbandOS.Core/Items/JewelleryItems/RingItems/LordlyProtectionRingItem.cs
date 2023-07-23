@@ -21,7 +21,7 @@ internal class LordlyProtectionRingItem : RingItem
         BonusArmorClass = 10 + Program.Rng.DieRoll(5) + GetBonusValue(10, level);
         if (SaveGame.Level != null)
         {
-            SaveGame.Level.TreasureRating += 5;
+            SaveGame.TreasureRating += 5;
         }
     }
 }

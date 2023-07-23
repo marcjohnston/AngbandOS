@@ -16,13 +16,13 @@ internal class MakeDoorProjectile : Projectile
 
     protected override bool AffectFloor(int y, int x)
     {
-        GridTile cPtr = SaveGame.Level.Grid[y][x];
+        GridTile cPtr = SaveGame.Grid[y][x];
         bool obvious = false;
-        if (!SaveGame.Level.GridOpenNoItemOrCreature(y, x))
+        if (!SaveGame.GridOpenNoItemOrCreature(y, x))
         {
             return false;
         }
-        SaveGame.Level.CaveSetFeat(y, x, "LockedDoor0");
+        SaveGame.CaveSetFeat(y, x, "LockedDoor0");
         if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized))
         {
             obvious = true;

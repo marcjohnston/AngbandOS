@@ -20,7 +20,7 @@ internal class MapLightActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.Level.MapArea();
+        SaveGame.MapArea();
         SaveGame.LightArea(Program.Rng.DiceRoll(2, 15), 3);
         return true;
     }

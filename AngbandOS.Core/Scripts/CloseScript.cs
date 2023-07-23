@@ -18,14 +18,14 @@ internal class CloseScript : Script
         // If there's only one door, assume we mean that one and don't ask for a direction
         if (SaveGame.CountOpenDoors(out GridCoordinate? coord) == 1)
         {
-            SaveGame.CommandDirection = SaveGame.Level.CoordsToDir(coord.Y, coord.X);
+            SaveGame.CommandDirection = SaveGame.CoordsToDir(coord.Y, coord.X);
         }
         // Get the location to close
         if (SaveGame.GetDirectionNoAim(out int dir))
         {
-            int y = SaveGame.MapY + SaveGame.Level.KeypadDirectionYOffset[dir];
-            int x = SaveGame.MapX + SaveGame.Level.KeypadDirectionXOffset[dir];
-            GridTile tile = SaveGame.Level.Grid[y][x];
+            int y = SaveGame.MapY + SaveGame.KeypadDirectionYOffset[dir];
+            int x = SaveGame.MapX + SaveGame.KeypadDirectionXOffset[dir];
+            GridTile tile = SaveGame.Grid[y][x];
             // Can only close actual open doors
             if (!tile.FeatureType.IsOpenDoor)
             {

@@ -20,7 +20,7 @@ internal class SearchScript : Script
         // The basic chance is equal to our searching skill
         int chance = SaveGame.SkillSearching;
         // If we can't see it's hard to search
-        if (SaveGame.TimedBlindness.TurnsRemaining != 0 || SaveGame.Level.NoLight())
+        if (SaveGame.TimedBlindness.TurnsRemaining != 0 || SaveGame.NoLight())
         {
             chance /= 10;
         }
@@ -38,11 +38,11 @@ internal class SearchScript : Script
                 if (Program.Rng.RandomLessThan(100) < chance)
                 {
                     // If there's a trap, then find it
-                    GridTile tile = SaveGame.Level.Grid[y][x];
+                    GridTile tile = SaveGame.Grid[y][x];
                     if (tile.FeatureType.Name == "Invis")
                     {
                         // Pick a random trap to replace the undetected one with
-                        SaveGame.Level.PickTrap(y, x);
+                        SaveGame.PickTrap(y, x);
                         SaveGame.MsgPrint("You have found a trap.");
                         SaveGame.Disturb(false);
                     }
@@ -51,7 +51,7 @@ internal class SearchScript : Script
                         // Replace the secret door with a visible door
                         SaveGame.MsgPrint("You have found a secret door.");
                         SaveGame.GainExperience(1);
-                        SaveGame.Level.ReplaceSecretDoor(y, x);
+                        SaveGame.ReplaceSecretDoor(y, x);
                         SaveGame.Disturb(false);
                     }
                     // Check the items on the tile

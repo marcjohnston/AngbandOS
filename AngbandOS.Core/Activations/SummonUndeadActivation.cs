@@ -20,7 +20,7 @@ internal class SummonUndeadActivation : Activation
     {
         if (Program.Rng.DieRoll(3) == 1)
         {
-            if (SaveGame.Level.SummonSpecific(SaveGame.MapY, SaveGame.MapX, (int)(SaveGame.ExperienceLevel * 1.5), SaveGame.ExperienceLevel > 47 ? new HiUndeadMonsterSelector() : new UndeadMonsterSelector()))
+            if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, (int)(SaveGame.ExperienceLevel * 1.5), SaveGame.ExperienceLevel > 47 ? new HiUndeadMonsterSelector() : new UndeadMonsterSelector()))
             {
                 SaveGame.MsgPrint("Cold winds begin to Attack around you, carrying with them the stench of decay...");
                 SaveGame.MsgPrint("'The dead arise... to punish you for disturbing them!'");
@@ -28,7 +28,7 @@ internal class SummonUndeadActivation : Activation
         }
         else
         {
-            if (SaveGame.Level.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, (int)(SaveGame.ExperienceLevel * 1.5), SaveGame.ExperienceLevel > 47 ? new HiUndeadNoUniquesMonsterSelector() : new UndeadMonsterSelector(), SaveGame.ExperienceLevel > 24 && Program.Rng.DieRoll(3) == 1))
+            if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, (int)(SaveGame.ExperienceLevel * 1.5), SaveGame.ExperienceLevel > 47 ? new HiUndeadNoUniquesMonsterSelector() : new UndeadMonsterSelector(), SaveGame.ExperienceLevel > 24 && Program.Rng.DieRoll(3) == 1))
             {
                 SaveGame.MsgPrint("Cold winds begin to Attack around you, carrying with them the stench of decay...");
                 SaveGame.MsgPrint("Ancient, long-dead forms arise from the ground to serve you!");

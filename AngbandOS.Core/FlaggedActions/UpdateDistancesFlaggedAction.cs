@@ -13,14 +13,14 @@ internal class UpdateDistancesFlaggedAction : FlaggedAction
     public UpdateDistancesFlaggedAction(SaveGame saveGame) : base(saveGame) { }
     protected override void Execute()
     {
-        for (int i = 1; i < SaveGame.Level.MMax; i++)
+        for (int i = 1; i < SaveGame.MMax; i++)
         {
-            Monster mPtr = SaveGame.Level.Monsters[i];
+            Monster mPtr = SaveGame.Monsters[i];
             if (mPtr.Race == null)
             {
                 continue;
             }
-            SaveGame.Level.UpdateMonsterVisibility(i, true);
+            SaveGame.UpdateMonsterVisibility(i, true);
         }
     }
 }

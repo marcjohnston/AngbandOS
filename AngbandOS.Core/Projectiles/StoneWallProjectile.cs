@@ -16,11 +16,11 @@ internal class StoneWallProjectile : Projectile
 
     protected override bool AffectFloor(int y, int x)
     {
-        if (!SaveGame.Level.GridOpenNoItemOrCreature(y, x))
+        if (!SaveGame.GridOpenNoItemOrCreature(y, x))
         {
             return false;
         }
-        SaveGame.Level.CaveSetFeat(y, x, "WallBasic");
+        SaveGame.CaveSetFeat(y, x, "WallBasic");
         return false;
     }
 

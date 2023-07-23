@@ -57,7 +57,7 @@ internal abstract class SummonMonsterSpell : MonsterSpell
         int playerX = saveGame.MapX;
         int playerY = saveGame.MapY;
 
-        return saveGame.Level.SummonSpecific(playerY, playerX, SummonLevel(monster), MonsterSelector(monster));
+        return saveGame.SummonSpecific(playerY, playerX, SummonLevel(monster), MonsterSelector(monster));
     }
 
     public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
@@ -94,7 +94,7 @@ internal abstract class SummonMonsterSpell : MonsterSpell
         {
             if (friendly)
             {
-                if (saveGame.Level.SummonSpecificFriendly(target.MapY, target.MapX, SummonLevel(monster), FriendlyMonsterSelector(monster), true))
+                if (saveGame.SummonSpecificFriendly(target.MapY, target.MapX, SummonLevel(monster), FriendlyMonsterSelector(monster), true))
                 {
                     count++;
                 }

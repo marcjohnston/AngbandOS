@@ -20,10 +20,10 @@ internal class MutationEatRock : Mutation
         {
             return;
         }
-        int y = saveGame.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
-        int x = saveGame.MapX + saveGame.Level.KeypadDirectionXOffset[dir];
-        GridTile cPtr = saveGame.Level.Grid[y][x];
-        if (saveGame.Level.GridPassable(y, x))
+        int y = saveGame.MapY + saveGame.KeypadDirectionYOffset[dir];
+        int x = saveGame.MapX + saveGame.KeypadDirectionXOffset[dir];
+        GridTile cPtr = saveGame.Grid[y][x];
+        if (saveGame.GridPassable(y, x))
         {
             saveGame.MsgPrint("You bite into thin air!");
             return;
@@ -61,8 +61,8 @@ internal class MutationEatRock : Mutation
         int ox = saveGame.MapX;
         saveGame.MapY = y;
         saveGame.MapX = x;
-        saveGame.Level.RedrawSingleLocation(saveGame.MapY, saveGame.MapX);
-        saveGame.Level.RedrawSingleLocation(oy, ox);
+        saveGame.RedrawSingleLocation(saveGame.MapY, saveGame.MapX);
+        saveGame.RedrawSingleLocation(oy, ox);
         saveGame.RecenterScreenAroundPlayer();
         saveGame.UpdateScentFlaggedAction.Set();
         saveGame.UpdateLightFlaggedAction.Set();

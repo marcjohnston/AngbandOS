@@ -23,7 +23,7 @@ internal class RoomType4 : RoomType
         {
             for (x = x1 - 1; x <= x2 + 1; x++)
             {
-                cPtr = saveGame.Level.Grid[y][x];
+                cPtr = saveGame.Grid[y][x];
                 cPtr.RevertToBackground();
                 cPtr.TileFlags.Set(GridTile.InRoom);
                 if (light)
@@ -34,16 +34,16 @@ internal class RoomType4 : RoomType
         }
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
-            cPtr = saveGame.Level.Grid[y][x1 - 1];
+            cPtr = saveGame.Grid[y][x1 - 1];
             cPtr.SetFeature("WallOuter");
-            cPtr = saveGame.Level.Grid[y][x2 + 1];
+            cPtr = saveGame.Grid[y][x2 + 1];
             cPtr.SetFeature("WallOuter");
         }
         for (x = x1 - 1; x <= x2 + 1; x++)
         {
-            cPtr = saveGame.Level.Grid[y1 - 1][x];
+            cPtr = saveGame.Grid[y1 - 1][x];
             cPtr.SetFeature("WallOuter");
-            cPtr = saveGame.Level.Grid[y2 + 1][x];
+            cPtr = saveGame.Grid[y2 + 1][x];
             cPtr.SetFeature("WallOuter");
         }
         y1 += 2;
@@ -52,16 +52,16 @@ internal class RoomType4 : RoomType
         x2 -= 2;
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
-            cPtr = saveGame.Level.Grid[y][x1 - 1];
+            cPtr = saveGame.Grid[y][x1 - 1];
             cPtr.SetFeature("WallInner");
-            cPtr = saveGame.Level.Grid[y][x2 + 1];
+            cPtr = saveGame.Grid[y][x2 + 1];
             cPtr.SetFeature("WallInner");
         }
         for (x = x1 - 1; x <= x2 + 1; x++)
         {
-            cPtr = saveGame.Level.Grid[y1 - 1][x];
+            cPtr = saveGame.Grid[y1 - 1][x];
             cPtr.SetFeature("WallInner");
-            cPtr = saveGame.Level.Grid[y2 + 1][x];
+            cPtr = saveGame.Grid[y2 + 1][x];
             cPtr.SetFeature("WallInner");
         }
         switch (Program.Rng.DieRoll(5))
@@ -115,7 +115,7 @@ internal class RoomType4 : RoomType
                         {
                             continue;
                         }
-                        cPtr = saveGame.Level.Grid[y][x];
+                        cPtr = saveGame.Grid[y][x];
                         cPtr.SetFeature("WallInner");
                     }
                 }
@@ -140,7 +140,7 @@ internal class RoomType4 : RoomType
                 VaultMonsters(saveGame, yval, xval, Program.Rng.DieRoll(3) + 2);
                 if (Program.Rng.RandomLessThan(100) < 80)
                 {
-                    saveGame.Level.PlaceObject(yval, xval, false, false);
+                    saveGame.PlaceObject(yval, xval, false, false);
                 }
                 else
                 {
@@ -172,7 +172,7 @@ internal class RoomType4 : RoomType
                 {
                     for (x = xval - 1; x <= xval + 1; x++)
                     {
-                        cPtr = saveGame.Level.Grid[y][x];
+                        cPtr = saveGame.Grid[y][x];
                         cPtr.SetFeature("WallInner");
                     }
                 }
@@ -183,12 +183,12 @@ internal class RoomType4 : RoomType
                     {
                         for (x = xval - 5 - tmp; x <= xval - 3 - tmp; x++)
                         {
-                            cPtr = saveGame.Level.Grid[y][x];
+                            cPtr = saveGame.Grid[y][x];
                             cPtr.SetFeature("WallInner");
                         }
                         for (x = xval + 3 + tmp; x <= xval + 5 + tmp; x++)
                         {
-                            cPtr = saveGame.Level.Grid[y][x];
+                            cPtr = saveGame.Grid[y][x];
                             cPtr.SetFeature("WallInner");
                         }
                     }
@@ -197,14 +197,14 @@ internal class RoomType4 : RoomType
                 {
                     for (x = xval - 5; x <= xval + 5; x++)
                     {
-                        cPtr = saveGame.Level.Grid[yval - 1][x];
+                        cPtr = saveGame.Grid[yval - 1][x];
                         cPtr.SetFeature("WallInner");
-                        cPtr = saveGame.Level.Grid[yval + 1][x];
+                        cPtr = saveGame.Grid[yval + 1][x];
                         cPtr.SetFeature("WallInner");
                     }
-                    cPtr = saveGame.Level.Grid[yval][xval - 5];
+                    cPtr = saveGame.Grid[yval][xval - 5];
                     cPtr.SetFeature("WallInner");
-                    cPtr = saveGame.Level.Grid[yval][xval + 5];
+                    cPtr = saveGame.Grid[yval][xval + 5];
                     cPtr.SetFeature("WallInner");
                     PlaceSecretDoor(saveGame, yval - 3 + (Program.Rng.DieRoll(2) * 2), xval - 3);
                     PlaceSecretDoor(saveGame, yval - 3 + (Program.Rng.DieRoll(2) * 2), xval + 3);
@@ -212,11 +212,11 @@ internal class RoomType4 : RoomType
                     VaultMonsters(saveGame, yval, xval + 2, Program.Rng.DieRoll(2));
                     if (Program.Rng.RandomLessThan(3) == 0)
                     {
-                        saveGame.Level.PlaceObject(yval, xval - 2, false, false);
+                        saveGame.PlaceObject(yval, xval - 2, false, false);
                     }
                     if (Program.Rng.RandomLessThan(3) == 0)
                     {
-                        saveGame.Level.PlaceObject(yval, xval + 2, false, false);
+                        saveGame.PlaceObject(yval, xval + 2, false, false);
                     }
                 }
                 break;
@@ -246,7 +246,7 @@ internal class RoomType4 : RoomType
                     {
                         if ((1 & (x + y)) != 0)
                         {
-                            cPtr = saveGame.Level.Grid[y][x];
+                            cPtr = saveGame.Grid[y][x];
                             cPtr.SetFeature("WallInner");
                         }
                     }
@@ -261,12 +261,12 @@ internal class RoomType4 : RoomType
             case 5:
                 for (y = y1; y <= y2; y++)
                 {
-                    cPtr = saveGame.Level.Grid[y][xval];
+                    cPtr = saveGame.Grid[y][xval];
                     cPtr.SetFeature("WallInner");
                 }
                 for (x = x1; x <= x2; x++)
                 {
-                    cPtr = saveGame.Level.Grid[yval][x];
+                    cPtr = saveGame.Grid[yval][x];
                     cPtr.SetFeature("WallInner");
                 }
                 if (Program.Rng.RandomLessThan(100) < 50)
@@ -296,7 +296,7 @@ internal class RoomType4 : RoomType
 
     private void PlaceRandomStairs(SaveGame saveGame, int y, int x)
     {
-        if (!saveGame.Level.GridOpenNoItem(y, x))
+        if (!saveGame.GridOpenNoItem(y, x))
         {
             return;
         }
@@ -326,13 +326,13 @@ internal class RoomType4 : RoomType
 
     private void PlaceDownStairs(SaveGame saveGame, int y, int x)
     {
-        GridTile cPtr = saveGame.Level.Grid[y][x];
+        GridTile cPtr = saveGame.Grid[y][x];
         cPtr.SetFeature("DownStair");
     }
 
     private void PlaceUpStairs(SaveGame saveGame, int y, int x)
     {
-        GridTile cPtr = saveGame.Level.Grid[y][x];
+        GridTile cPtr = saveGame.Grid[y][x];
         cPtr.SetFeature("UpStair");
     }
 
@@ -350,23 +350,23 @@ internal class RoomType4 : RoomType
                     j = Program.Rng.RandomSpread(y, 2);
                     k = Program.Rng.RandomSpread(x, 3);
                     dummy++;
-                    if (!saveGame.Level.InBounds(j, k))
+                    if (!saveGame.InBounds(j, k))
                     {
                         continue;
                     }
                     break;
                 }
-                if (!saveGame.Level.GridOpenNoItem(j, k))
+                if (!saveGame.GridOpenNoItem(j, k))
                 {
                     continue;
                 }
                 if (Program.Rng.RandomLessThan(100) < 75)
                 {
-                    saveGame.Level.PlaceObject(j, k, false, false);
+                    saveGame.PlaceObject(j, k, false, false);
                 }
                 else
                 {
-                    saveGame.Level.PlaceGold(j, k);
+                    saveGame.PlaceGold(j, k);
                 }
                 break;
             }
@@ -374,7 +374,7 @@ internal class RoomType4 : RoomType
     }
     private void PlaceLockedDoor(SaveGame saveGame, int y, int x)
     {
-        GridTile cPtr = saveGame.Level.Grid[y][x];
+        GridTile cPtr = saveGame.Grid[y][x];
         cPtr.SetFeature($"LockedDoor{Program.Rng.DieRoll(7)}");
     }
 }

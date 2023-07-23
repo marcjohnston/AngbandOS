@@ -18,7 +18,7 @@ internal class NukeProjectile : Projectile
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
-        GridTile cPtr = SaveGame.Level.Grid[mPtr.MapY][mPtr.MapX];
+        GridTile cPtr = SaveGame.Grid[mPtr.MapY][mPtr.MapX];
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
         bool obvious = false;
@@ -59,10 +59,10 @@ internal class NukeProjectile : Projectile
             {
                 note = " changes!";
                 dam = 0;
-                SaveGame.Level.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
+                SaveGame.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                 MonsterRace race = SaveGame.SingletonRepository.MonsterRaces[tmp];
-                SaveGame.Level.PlaceMonsterAux(mPtr.MapY, mPtr.MapX, race, false, false, charm);
-                mPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex];
+                SaveGame.PlaceMonsterAux(mPtr.MapY, mPtr.MapX, race, false, false, charm);
+                mPtr = SaveGame.Monsters[cPtr.MonsterIndex];
             }
         }
         ApplyProjectileDamageToMonster(who, mPtr, dam, note);
@@ -77,7 +77,7 @@ internal class NukeProjectile : Projectile
             dam = 1600;
         }
         dam = (dam + r) / (r + 1);
-        Monster mPtr = SaveGame.Level.Monsters[who];
+        Monster mPtr = SaveGame.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
         if (blind)
         {

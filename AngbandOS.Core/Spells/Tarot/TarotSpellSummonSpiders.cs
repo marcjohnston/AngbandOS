@@ -16,12 +16,12 @@ internal class TarotSpellSummonSpiders : Spell
         SaveGame.MsgPrint("You concentrate on the image of a spider...");
         if (Program.Rng.DieRoll(5) > 2)
         {
-            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new SpiderMonsterSelector(), true))
+            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new SpiderMonsterSelector(), true))
             {
                 SaveGame.MsgPrint("No-one ever turns up.");
             }
         }
-        else if (SaveGame.Level.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new SpiderMonsterSelector()))
+        else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new SpiderMonsterSelector()))
         {
             SaveGame.MsgPrint("The summoned spiders get angry!");
         }

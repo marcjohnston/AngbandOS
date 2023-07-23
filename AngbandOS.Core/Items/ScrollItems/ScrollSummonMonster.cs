@@ -25,7 +25,7 @@ internal class ScrollSummonMonster : ScrollItemClass
     {
         for (int i = 0; i < Program.Rng.DieRoll(3); i++)
         {
-            if (SaveGame.Level.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, null))
+            if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, null))
             {
                 eventArgs.Identified = true;
             }

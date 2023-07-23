@@ -13,8 +13,8 @@ internal class UpdateLightFlaggedAction : FlaggedAction
     public UpdateLightFlaggedAction(SaveGame saveGame) : base(saveGame) { }
     private void CaveLightHack(int y, int x)
     {
-        SaveGame.Level.Grid[y][x].TileFlags.Set(GridTile.PlayerLit);
-        SaveGame.Level.Light.Add(new GridCoordinate(x, y));
+        SaveGame.Grid[y][x].TileFlags.Set(GridTile.PlayerLit);
+        SaveGame.Light.Add(new GridCoordinate(x, y));
     }
 
     protected override void Execute()
@@ -22,18 +22,18 @@ internal class UpdateLightFlaggedAction : FlaggedAction
         if (SaveGame.LightLevel <= 0)
         {
             SaveGame.RemoveLightFlaggedAction.Check(true);
-            SaveGame.Level.RedrawSingleLocation(SaveGame.MapY, SaveGame.MapX);
+            SaveGame.RedrawSingleLocation(SaveGame.MapY, SaveGame.MapX);
             return;
         }
-        foreach (GridCoordinate gridCoordinate in SaveGame.Level.Light)
+        foreach (GridCoordinate gridCoordinate in SaveGame.Light)
         {
-            SaveGame.Level.Grid[gridCoordinate.Y][gridCoordinate.X].TileFlags.Clear(GridTile.PlayerLit);
-            SaveGame.Level.Grid[gridCoordinate.Y][gridCoordinate.X].TileFlags.Set(GridTile.TempFlag);
-            SaveGame.Level.TempY[SaveGame.Level.TempN] = gridCoordinate.Y;
-            SaveGame.Level.TempX[SaveGame.Level.TempN] = gridCoordinate.X;
-            SaveGame.Level.TempN++;
+            SaveGame.Grid[gridCoordinate.Y][gridCoordinate.X].TileFlags.Clear(GridTile.PlayerLit);
+            SaveGame.Grid[gridCoordinate.Y][gridCoordinate.X].TileFlags.Set(GridTile.TempFlag);
+            SaveGame.TempY[SaveGame.TempN] = gridCoordinate.Y;
+            SaveGame.TempX[SaveGame.TempN] = gridCoordinate.X;
+            SaveGame.TempN++;
         }
-        SaveGame.Level.Light.Clear();
+        SaveGame.Light.Clear();
         CaveLightHack(SaveGame.MapY, SaveGame.MapX);
         if (SaveGame.LightLevel >= 1)
         {
@@ -48,25 +48,25 @@ internal class UpdateLightFlaggedAction : FlaggedAction
         }
         if (SaveGame.LightLevel >= 2)
         {
-            if (SaveGame.Level.GridPassable(SaveGame.MapY + 1, SaveGame.MapX))
+            if (SaveGame.GridPassable(SaveGame.MapY + 1, SaveGame.MapX))
             {
                 CaveLightHack(SaveGame.MapY + 2, SaveGame.MapX);
                 CaveLightHack(SaveGame.MapY + 2, SaveGame.MapX + 1);
                 CaveLightHack(SaveGame.MapY + 2, SaveGame.MapX - 1);
             }
-            if (SaveGame.Level.GridPassable(SaveGame.MapY - 1, SaveGame.MapX))
+            if (SaveGame.GridPassable(SaveGame.MapY - 1, SaveGame.MapX))
             {
                 CaveLightHack(SaveGame.MapY - 2, SaveGame.MapX);
                 CaveLightHack(SaveGame.MapY - 2, SaveGame.MapX + 1);
                 CaveLightHack(SaveGame.MapY - 2, SaveGame.MapX - 1);
             }
-            if (SaveGame.Level.GridPassable(SaveGame.MapY, SaveGame.MapX + 1))
+            if (SaveGame.GridPassable(SaveGame.MapY, SaveGame.MapX + 1))
             {
                 CaveLightHack(SaveGame.MapY, SaveGame.MapX + 2);
                 CaveLightHack(SaveGame.MapY + 1, SaveGame.MapX + 2);
                 CaveLightHack(SaveGame.MapY - 1, SaveGame.MapX + 2);
             }
-            if (SaveGame.Level.GridPassable(SaveGame.MapY, SaveGame.MapX - 1))
+            if (SaveGame.GridPassable(SaveGame.MapY, SaveGame.MapX - 1))
             {
                 CaveLightHack(SaveGame.MapY, SaveGame.MapX - 2);
                 CaveLightHack(SaveGame.MapY + 1, SaveGame.MapX - 2);
@@ -80,19 +80,19 @@ internal class UpdateLightFlaggedAction : FlaggedAction
             {
                 p = 5;
             }
-            if (SaveGame.Level.GridPassable(SaveGame.MapY + 1, SaveGame.MapX + 1))
+            if (SaveGame.GridPassable(SaveGame.MapY + 1, SaveGame.MapX + 1))
             {
                 CaveLightHack(SaveGame.MapY + 2, SaveGame.MapX + 2);
             }
-            if (SaveGame.Level.GridPassable(SaveGame.MapY + 1, SaveGame.MapX - 1))
+            if (SaveGame.GridPassable(SaveGame.MapY + 1, SaveGame.MapX - 1))
             {
                 CaveLightHack(SaveGame.MapY + 2, SaveGame.MapX - 2);
             }
-            if (SaveGame.Level.GridPassable(SaveGame.MapY - 1, SaveGame.MapX + 1))
+            if (SaveGame.GridPassable(SaveGame.MapY - 1, SaveGame.MapX + 1))
             {
                 CaveLightHack(SaveGame.MapY - 2, SaveGame.MapX + 2);
             }
-            if (SaveGame.Level.GridPassable(SaveGame.MapY - 1, SaveGame.MapX - 1))
+            if (SaveGame.GridPassable(SaveGame.MapY - 1, SaveGame.MapX - 1))
             {
                 CaveLightHack(SaveGame.MapY - 2, SaveGame.MapX - 2);
             }
@@ -102,9 +102,9 @@ internal class UpdateLightFlaggedAction : FlaggedAction
                 minY = 0;
             }
             int maxY = SaveGame.MapY + p;
-            if (maxY > SaveGame.Level.CurHgt - 1)
+            if (maxY > SaveGame.CurHgt - 1)
             {
-                maxY = SaveGame.Level.CurHgt - 1;
+                maxY = SaveGame.CurHgt - 1;
             }
             int minX = SaveGame.MapX - p;
             if (minX < 0)
@@ -112,9 +112,9 @@ internal class UpdateLightFlaggedAction : FlaggedAction
                 minX = 0;
             }
             int maxX = SaveGame.MapX + p;
-            if (maxX > SaveGame.Level.CurWid - 1)
+            if (maxX > SaveGame.CurWid - 1)
             {
-                maxX = SaveGame.Level.CurWid - 1;
+                maxX = SaveGame.CurWid - 1;
             }
             for (int y = minY; y <= maxY; y++)
             {
@@ -131,33 +131,33 @@ internal class UpdateLightFlaggedAction : FlaggedAction
                     {
                         continue;
                     }
-                    if (SaveGame.Level.PlayerHasLosBold(y, x))
+                    if (SaveGame.PlayerHasLosBold(y, x))
                     {
                         CaveLightHack(y, x);
                     }
                 }
             }
         }
-        foreach (GridCoordinate gridCoordinate in SaveGame.Level.Light)
+        foreach (GridCoordinate gridCoordinate in SaveGame.Light)
         {
-            if (SaveGame.Level.Grid[gridCoordinate.Y][gridCoordinate.X].TileFlags.IsSet(GridTile.TempFlag))
+            if (SaveGame.Grid[gridCoordinate.Y][gridCoordinate.X].TileFlags.IsSet(GridTile.TempFlag))
             {
                 continue;
             }
-            SaveGame.Level.NoteSpot(gridCoordinate.Y, gridCoordinate.X);
-            SaveGame.Level.RedrawSingleLocation(gridCoordinate.Y, gridCoordinate.X);
+            SaveGame.NoteSpot(gridCoordinate.Y, gridCoordinate.X);
+            SaveGame.RedrawSingleLocation(gridCoordinate.Y, gridCoordinate.X);
         }
-        for (int i = 0; i < SaveGame.Level.TempN; i++)
+        for (int i = 0; i < SaveGame.TempN; i++)
         {
-            int y = SaveGame.Level.TempY[i];
-            int x = SaveGame.Level.TempX[i];
-            SaveGame.Level.Grid[y][x].TileFlags.Clear(GridTile.TempFlag);
-            if (SaveGame.Level.Grid[y][x].TileFlags.IsSet(GridTile.PlayerLit))
+            int y = SaveGame.TempY[i];
+            int x = SaveGame.TempX[i];
+            SaveGame.Grid[y][x].TileFlags.Clear(GridTile.TempFlag);
+            if (SaveGame.Grid[y][x].TileFlags.IsSet(GridTile.PlayerLit))
             {
                 continue;
             }
-            SaveGame.Level.RedrawSingleLocation(y, x);
+            SaveGame.RedrawSingleLocation(y, x);
         }
-        SaveGame.Level.TempN = 0;
+        SaveGame.TempN = 0;
     }
 }

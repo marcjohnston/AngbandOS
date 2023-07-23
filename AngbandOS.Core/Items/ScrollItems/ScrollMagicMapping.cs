@@ -24,7 +24,7 @@ internal class ScrollMagicMapping : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        SaveGame.Level.MapArea();
+        SaveGame.MapArea();
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new MagicMappingScrollItem(SaveGame);

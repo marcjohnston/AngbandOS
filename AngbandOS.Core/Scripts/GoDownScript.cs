@@ -15,7 +15,7 @@ internal class GoDownScript : Script
     public override bool Execute()
     {
         bool isTrapDoor = false;
-        GridTile tile = SaveGame.Level.Grid[SaveGame.MapY][SaveGame.MapX];
+        GridTile tile = SaveGame.Grid[SaveGame.MapY][SaveGame.MapX];
         if (tile.FeatureType.IsTrapDoor)
         {
             isTrapDoor = true;

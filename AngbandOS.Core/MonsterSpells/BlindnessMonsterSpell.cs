@@ -39,7 +39,7 @@ internal class BlindnessMonsterSpell : MonsterSpell
         {
             saveGame.TimedBlindness.SetTimer(12 + Program.Rng.RandomLessThan(4));
         }
-        saveGame.Level.UpdateSmartLearn(monster, new BlindSpellResistantDetection());
+        saveGame.UpdateSmartLearn(monster, new BlindSpellResistantDetection());
     }
 
     public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)

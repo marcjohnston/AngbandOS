@@ -20,7 +20,7 @@ internal class ReadScrollScript : Script
             SaveGame.MsgPrint("You can't see anything.");
             return false;
         }
-        if (SaveGame.Level.NoLight())
+        if (SaveGame.NoLight())
         {
             SaveGame.MsgPrint("You have no light to read by.");
             return false;

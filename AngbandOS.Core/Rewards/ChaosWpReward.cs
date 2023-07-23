@@ -104,6 +104,6 @@ internal class ChaosWpReward : Reward
         qPtr.BonusDamage = 3 + (Program.Rng.DieRoll(SaveGame.Difficulty) % 10);
         qPtr.ApplyRandomResistance(Program.Rng.DieRoll(34) + 4);
         qPtr.RareItemTypeIndex = RareItemTypeEnum.WeaponChaotic;
-        SaveGame.Level.DropNear(qPtr, -1, SaveGame.MapY, SaveGame.MapX);
+        SaveGame.DropNear(qPtr, -1, SaveGame.MapY, SaveGame.MapX);
     }
 }

@@ -16,11 +16,11 @@ internal class KillDoorProjectile : Projectile
 
     protected override bool AffectFloor(int y, int x)
     {
-        GridTile cPtr = SaveGame.Level.Grid[y][x];
+        GridTile cPtr = SaveGame.Grid[y][x];
         bool obvious = false;
         if (cPtr.FeatureType.IsClosedDoor || cPtr.FeatureType.IsOpenDoor || cPtr.FeatureType.IsUnidentifiedTrap || cPtr.FeatureType.IsTrap)
         {
-            if (SaveGame.Level.PlayerHasLosBold(y, x))
+            if (SaveGame.PlayerHasLosBold(y, x))
             {
                 SaveGame.MsgPrint("There is a bright flash of light!");
                 obvious = true;
@@ -32,14 +32,14 @@ internal class KillDoorProjectile : Projectile
                 }
             }
             cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
-            SaveGame.Level.RevertTileToBackground(y, x);
+            SaveGame.RevertTileToBackground(y, x);
         }
         return obvious;
     }
 
     protected override bool AffectItem(int who, int y, int x)
     {
-        GridTile cPtr = SaveGame.Level.Grid[y][x];
+        GridTile cPtr = SaveGame.Grid[y][x];
         bool obvious = false;
         foreach (Item oPtr in cPtr.Items)
         {

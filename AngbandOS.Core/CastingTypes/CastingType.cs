@@ -62,7 +62,7 @@ internal class CastingType
             SaveGame.MsgPrint("You cannot cast spells!");
             return;
         }
-        if (SaveGame.TimedBlindness.TurnsRemaining != 0 || SaveGame.Level.NoLight())
+        if (SaveGame.TimedBlindness.TurnsRemaining != 0 || SaveGame.NoLight())
         {
             SaveGame.MsgPrint("You cannot see!");
             return;

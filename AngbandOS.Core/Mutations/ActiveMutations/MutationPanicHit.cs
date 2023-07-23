@@ -20,9 +20,9 @@ internal class MutationPanicHit : Mutation
         {
             return;
         }
-        int y = saveGame.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
-        int x = saveGame.MapX + saveGame.Level.KeypadDirectionXOffset[dir];
-        if (saveGame.Level.Grid[y][x].MonsterIndex != 0)
+        int y = saveGame.MapY + saveGame.KeypadDirectionYOffset[dir];
+        int x = saveGame.MapX + saveGame.KeypadDirectionXOffset[dir];
+        if (saveGame.Grid[y][x].MonsterIndex != 0)
         {
             saveGame.PlayerAttackMonster(y, x);
             saveGame.TeleportPlayer(30);

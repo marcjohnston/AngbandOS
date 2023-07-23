@@ -766,10 +766,9 @@ internal class JournalScript : Script
     {
         List<string> petNames = new List<string>();
         int pets = 0;
-        Level level = SaveGame.Level;
-        for (int petCtr = level.MMax - 1; petCtr >= 1; petCtr--)
+        for (int petCtr = SaveGame.MMax - 1; petCtr >= 1; petCtr--)
         {
-            Monster mPtr = level.Monsters[petCtr];
+            Monster mPtr = SaveGame.Monsters[petCtr];
             if (!mPtr.SmFriendly)
             {
                 continue;

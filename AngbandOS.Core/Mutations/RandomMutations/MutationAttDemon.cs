@@ -24,11 +24,11 @@ internal class MutationAttDemon : Mutation
         bool dSummon;
         if (Program.Rng.DieRoll(6) == 1)
         {
-            dSummon = saveGame.Level.SummonSpecificFriendly(saveGame.MapY, saveGame.MapX, saveGame.Difficulty, new DemonMonsterSelector(), true);
+            dSummon = saveGame.SummonSpecificFriendly(saveGame.MapY, saveGame.MapX, saveGame.Difficulty, new DemonMonsterSelector(), true);
         }
         else
         {
-            dSummon = saveGame.Level.SummonSpecific(saveGame.MapY, saveGame.MapX, saveGame.Difficulty, new DemonMonsterSelector());
+            dSummon = saveGame.SummonSpecific(saveGame.MapY, saveGame.MapX, saveGame.Difficulty, new DemonMonsterSelector());
         }
         if (!dSummon)
         {

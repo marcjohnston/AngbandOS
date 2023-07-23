@@ -669,7 +669,7 @@ internal class Monster : IItemContainer
         int oldY = MapY;
         int oldX = MapX;
         // If it's suitable for us to reproduce
-        if (Race.Multiply && SaveGame.Level.NumRepro < Constants.MaxRepro && Generation < 10)
+        if (Race.Multiply && SaveGame.NumRepro < Constants.MaxRepro && Generation < 10)
         {
             // Find how many spaces we've got near us
             int k;
@@ -678,7 +678,7 @@ internal class Monster : IItemContainer
             {
                 for (int x = oldX - 1; x <= oldX + 1; x++)
                 {
-                    if (SaveGame.Level.Grid[y][x].MonsterIndex != 0)
+                    if (SaveGame.Grid[y][x].MonsterIndex != 0)
                     {
                         k++;
                     }
@@ -689,7 +689,7 @@ internal class Monster : IItemContainer
             // If there's lots of space, then pop out a baby
             if (k < 4 && (k == 0 || Program.Rng.RandomLessThan(k * Constants.MonMultAdj) == 0))
             {
-                if (SaveGame.Level.MultiplyMonster(this, isFriend, false))
+                if (SaveGame.MultiplyMonster(this, isFriend, false))
                 {
                     // If the player saw this, they now know we can multiply
                     if (IsVisible)
@@ -815,20 +815,20 @@ internal class Monster : IItemContainer
             // Moves of '5' (i.e. 'stay still') are placeholders for random moves
             if (d == 5)
             {
-                d = SaveGame.Level.OrderedDirection[Program.Rng.RandomLessThan(8)];
+                d = SaveGame.OrderedDirection[Program.Rng.RandomLessThan(8)];
             }
             // Work out where the move will take us
-            int newY = oldY + SaveGame.Level.KeypadDirectionYOffset[d];
-            int newX = oldX + SaveGame.Level.KeypadDirectionXOffset[d];
-            GridTile tile = SaveGame.Level.Grid[newY][newX];
-            Monster monsterInTargetTile = SaveGame.Level.Monsters[tile.MonsterIndex];
+            int newY = oldY + SaveGame.KeypadDirectionYOffset[d];
+            int newX = oldX + SaveGame.KeypadDirectionXOffset[d];
+            GridTile tile = SaveGame.Grid[newY][newX];
+            Monster monsterInTargetTile = SaveGame.Monsters[tile.MonsterIndex];
             // If we can simply move there, then we will do so
-            if (SaveGame.Level.GridPassable(newY, newX))
+            if (SaveGame.GridPassable(newY, newX))
             {
                 doMove = true;
             }
             // Bushes don't actually block us, so we can move there too
-            else if (SaveGame.Level.Grid[newY][newX].FeatureType.Name == "Bush")
+            else if (SaveGame.Grid[newY][newX].FeatureType.Name == "Bush")
             {
                 doMove = true;
             }
@@ -866,8 +866,8 @@ internal class Monster : IItemContainer
                 // Remove the wall (and the player's memory of it) and remind ourselves to
                 // update the view if the player can see it
                 tile.TileFlags.Clear(GridTile.PlayerMemorized);
-                SaveGame.Level.RevertTileToBackground(newY, newX);
-                if (SaveGame.Level.PlayerHasLosBold(newY, newX))
+                SaveGame.RevertTileToBackground(newY, newX);
+                if (SaveGame.PlayerHasLosBold(newY, newX))
                 {
                     doView = true;
                 }
@@ -892,7 +892,7 @@ internal class Monster : IItemContainer
                         int k = int.Parse(tile.FeatureType.Name.Substring(10));
                         if (Program.Rng.RandomLessThan(Health / 10) > k)
                         {
-                            SaveGame.Level.CaveSetFeat(newY, newX, "LockedDoor0");
+                            SaveGame.CaveSetFeat(newY, newX, "LockedDoor0");
                             mayBash = false;
                         }
                     }
@@ -915,14 +915,14 @@ internal class Monster : IItemContainer
                 {
                     if (didBashDoor && Program.Rng.RandomLessThan(100) < 50)
                     {
-                        SaveGame.Level.CaveSetFeat(newY, newX, "BrokenDoor");
+                        SaveGame.CaveSetFeat(newY, newX, "BrokenDoor");
                     }
                     else
                     {
-                        SaveGame.Level.CaveSetFeat(newY, newX, "OpenDoor");
+                        SaveGame.CaveSetFeat(newY, newX, "OpenDoor");
                     }
                     // If the player can see, remind ourselves to update the view later
-                    if (SaveGame.Level.PlayerHasLosBold(newY, newX))
+                    if (SaveGame.PlayerHasLosBold(newY, newX))
                     {
                         doView = true;
                     }
@@ -942,7 +942,7 @@ internal class Monster : IItemContainer
                         SaveGame.MsgPrint("The Elder Sign is broken!");
                     }
                     tile.TileFlags.Clear(GridTile.PlayerMemorized);
-                    SaveGame.Level.RevertTileToBackground(newY, newX);
+                    SaveGame.RevertTileToBackground(newY, newX);
                     // Breaking the sign means we can move after all
                     doMove = true;
                 }
@@ -971,7 +971,7 @@ internal class Monster : IItemContainer
                         }
                     }
                     tile.TileFlags.Clear(GridTile.PlayerMemorized);
-                    SaveGame.Level.RevertTileToBackground(newY, newX);
+                    SaveGame.RevertTileToBackground(newY, newX);
                     // We can do the move after all
                     doMove = true;
                 }
@@ -996,13 +996,13 @@ internal class Monster : IItemContainer
                 doMove = false;
                 // If we can trample other monsters on our team and we're tougher than the one
                 // that's in our way...
-                if (Race.KillBody && Race.Mexp > targetMonsterRace.Mexp && SaveGame.Level.GridPassable(newY, newX) && !(SmFriendly && monsterInTargetTile.SmFriendly))
+                if (Race.KillBody && Race.Mexp > targetMonsterRace.Mexp && SaveGame.GridPassable(newY, newX) && !(SmFriendly && monsterInTargetTile.SmFriendly))
                 {
                     // Remove the other monster and replace it
                     doMove = true;
                     didKillBody = true;
-                    SaveGame.Level.DeleteMonster(newY, newX);
-                    monsterInTargetTile = SaveGame.Level.Monsters[tile.MonsterIndex];
+                    SaveGame.DeleteMonster(newY, newX);
+                    monsterInTargetTile = SaveGame.Monsters[tile.MonsterIndex];
                 }
                 // If we're not on the same team as the other monster or we're confused
                 else if (SmFriendly != monsterInTargetTile.SmFriendly || ConfusionLevel != 0)
@@ -1019,7 +1019,7 @@ internal class Monster : IItemContainer
                 }
                 // If the other monster is on our team and we can't trample it, maybe we can
                 // push past
-                else if (Race.MoveBody && Race.Mexp > targetMonsterRace.Mexp && SaveGame.Level.GridPassable(newY, newX) && SaveGame.Level.GridPassable(MapY, MapX))
+                else if (Race.MoveBody && Race.Mexp > targetMonsterRace.Mexp && SaveGame.GridPassable(newY, newX) && SaveGame.GridPassable(MapY, MapX))
                 {
                     doMove = true;
                     didMoveBody = true;
@@ -1035,23 +1035,23 @@ internal class Monster : IItemContainer
             {
                 doTurn = true;
                 // Swap positions with the monster that is in the tile we're aiming for
-                SaveGame.Level.Grid[oldY][oldX].MonsterIndex = tile.MonsterIndex;
+                SaveGame.Grid[oldY][oldX].MonsterIndex = tile.MonsterIndex;
                 // If it was actually a monster then update it accordingly
                 if (tile.MonsterIndex != 0)
                 {
                     monsterInTargetTile.MapY = oldY;
                     monsterInTargetTile.MapX = oldX;
-                    SaveGame.Level.UpdateMonsterVisibility(tile.MonsterIndex, true);
+                    SaveGame.UpdateMonsterVisibility(tile.MonsterIndex, true);
                     // Pushing past something wakes it up
-                    SaveGame.Level.Monsters[tile.MonsterIndex].SleepLevel = 0;
+                    SaveGame.Monsters[tile.MonsterIndex].SleepLevel = 0;
                 }
                 // Update our position
                 tile.MonsterIndex = GetMonsterIndex();
                 MapY = newY;
                 MapX = newX;
-                SaveGame.Level.UpdateMonsterVisibility(GetMonsterIndex(), true);
-                SaveGame.Level.RedrawSingleLocation(oldY, oldX);
-                SaveGame.Level.RedrawSingleLocation(newY, newX);
+                SaveGame.UpdateMonsterVisibility(GetMonsterIndex(), true);
+                SaveGame.RedrawSingleLocation(oldY, oldX);
+                SaveGame.RedrawSingleLocation(newY, newX);
                 // If we are hostile and the player saw us move, then saveGame.Disturb them
                 if (IsVisible && (IndividualMonsterFlags & Constants.MflagView) != 0)
                 {
@@ -1117,7 +1117,7 @@ internal class Monster : IItemContainer
                             if (Race.TakeItem)
                             {
                                 didTakeItem = true;
-                                if (IsVisible && SaveGame.Level.PlayerHasLosBold(newY, newX))
+                                if (IsVisible && SaveGame.PlayerHasLosBold(newY, newX))
                                 {
                                     SaveGame.MsgPrint($"{monsterName} tries to pick up {itemName}, but fails.");
                                 }
@@ -1127,12 +1127,12 @@ internal class Monster : IItemContainer
                         else if (Race.TakeItem)
                         {
                             didTakeItem = true;
-                            if (SaveGame.Level.PlayerHasLosBold(newY, newX))
+                            if (SaveGame.PlayerHasLosBold(newY, newX))
                             {
                                 SaveGame.MsgPrint($"{monsterName} picks up {itemName}.");
                             }
                             // And pick up the actual item
-                            SaveGame.Level.ExciseObject(item);
+                            SaveGame.ExciseObject(item);
                             item.Marked = false;
                             item.Y = 0;
                             item.X = 0;
@@ -1144,11 +1144,11 @@ internal class Monster : IItemContainer
                             // We can't pick up the item, so just stomp on it
                             didKillItem = true;
                             // If the player saw us, let them know
-                            if (SaveGame.Level.PlayerHasLosBold(newY, newX))
+                            if (SaveGame.PlayerHasLosBold(newY, newX))
                             {
                                 SaveGame.MsgPrint($"{monsterName} crushes {itemName}.");
                             }
-                            SaveGame.Level.DeleteObject(item);
+                            SaveGame.DeleteObject(item);
                         }
                     }
                 }
@@ -1230,7 +1230,7 @@ internal class Monster : IItemContainer
     /// <returns> True if the attack happened, false if not </returns>
     private bool AttackAnotherMonster(SaveGame saveGame, int targetIndex)
     {
-        Monster target = saveGame.Level.Monsters[targetIndex];
+        Monster target = saveGame.Monsters[targetIndex];
         MonsterRace targetRace = target.Race;
         int ySaver = target.MapY;
         int xSaver = target.MapX;
@@ -1430,7 +1430,7 @@ internal class Monster : IItemContainer
         }
 
         // If we have no line of sight to the player, don't cast a spell
-        if (!SaveGame.Level.Projectable(MapY, MapX, SaveGame.MapY, SaveGame.MapX))
+        if (!SaveGame.Projectable(MapY, MapX, SaveGame.MapY, SaveGame.MapX))
         {
             return false;
         }
@@ -1536,7 +1536,7 @@ internal class Monster : IItemContainer
         // Learn from the spell.
         foreach (SpellResistantDetection smartLearn in thrownSpell.SmartLearn)
         {
-            SaveGame.Level.UpdateSmartLearn(this, smartLearn);
+            SaveGame.UpdateSmartLearn(this, smartLearn);
         }
 
         // If the player saw us cast the spell, let them learn we can do that
@@ -1591,10 +1591,10 @@ internal class Monster : IItemContainer
         MonsterSpellList monsterSpells = Race.Spells;
 
         // Look through the monster list to find a potential target
-        for (int i = 1; i < saveGame.Level.MMax; i++)
+        for (int i = 1; i < saveGame.MMax; i++)
         {
             int targetIndex = i;
-            Monster target = saveGame.Level.Monsters[targetIndex];
+            Monster target = saveGame.Monsters[targetIndex];
             MonsterRace targetRace = target.Race;
 
             // Can't cast spells on ourself
@@ -1622,7 +1622,7 @@ internal class Monster : IItemContainer
             }
 
             // If we don't have line of sight to the target, don't cast a spell
-            if (!saveGame.Level.Projectable(MapY, MapX, target.MapY, target.MapX))
+            if (!saveGame.Projectable(MapY, MapX, target.MapY, target.MapX))
             {
                 continue;
             }
@@ -1849,7 +1849,7 @@ internal class Monster : IItemContainer
                 // Let the save game know we've died
                 saveGame.MonsterDeath(GetMonsterIndex());
                 // Delete us from the monster list
-                saveGame.Level.DeleteMonsterByIndex(GetMonsterIndex(), true);
+                saveGame.DeleteMonsterByIndex(GetMonsterIndex(), true);
                 fear = false;
                 return;
             }
@@ -2167,7 +2167,7 @@ internal class Monster : IItemContainer
                 // Check if the player is in a room by counting the room tiles around them
                 for (int i = 0; i < 8; i++)
                 {
-                    if (saveGame.Level.Grid[saveGame.MapY + saveGame.Level.OrderedDirectionYOffset[i]][saveGame.MapX + saveGame.Level.OrderedDirectionXOffset[i]].TileFlags.IsSet(GridTile.InRoom))
+                    if (saveGame.Grid[saveGame.MapY + saveGame.OrderedDirectionYOffset[i]][saveGame.MapX + saveGame.OrderedDirectionXOffset[i]].TileFlags.IsSet(GridTile.InRoom))
                     {
                         room++;
                     }
@@ -2189,7 +2189,7 @@ internal class Monster : IItemContainer
                 for (int i = 0; i < 8; i++)
                 {
                     int monsterIndex = GetMonsterIndex();
-                    targetLocation = new GridCoordinate(saveGame.MapX + saveGame.Level.OrderedDirectionXOffset[(monsterIndex + i) & 7], saveGame.MapY + saveGame.Level.OrderedDirectionYOffset[(monsterIndex + i) & 7]);
+                    targetLocation = new GridCoordinate(saveGame.MapX + saveGame.OrderedDirectionXOffset[(monsterIndex + i) & 7], saveGame.MapY + saveGame.OrderedDirectionYOffset[(monsterIndex + i) & 7]);
                     // We might have got a '5' meaning stay where we are, so replace that with
                     // moving towards the player
                     if (MapY == targetLocation.Y && MapX == targetLocation.X)
@@ -2198,7 +2198,7 @@ internal class Monster : IItemContainer
                         break;
                     }
                     // Repeat till we get a direction we can move in
-                    if (!saveGame.Level.GridPassableNoCreature(targetLocation.Y, targetLocation.X))
+                    if (!saveGame.GridPassableNoCreature(targetLocation.Y, targetLocation.X))
                     {
                         continue;
                     }
@@ -2427,15 +2427,15 @@ internal class Monster : IItemContainer
         int dY = monsterY - coord.Y;
         int dX = monsterX - coord.X;
         // If the scent too strong, keep going where we were going
-        if (saveGame.Level.Grid[monsterY][monsterX].ScentAge < saveGame.Level.Grid[saveGame.MapY][saveGame.MapX].ScentAge)
+        if (saveGame.Grid[monsterY][monsterX].ScentAge < saveGame.Grid[saveGame.MapY][saveGame.MapX].ScentAge)
         {
             return;
         }
-        if (saveGame.Level.Grid[monsterY][monsterX].ScentStrength > Constants.MonsterFlowDepth)
+        if (saveGame.Grid[monsterY][monsterX].ScentStrength > Constants.MonsterFlowDepth)
         {
             return;
         }
-        if (saveGame.Level.Grid[monsterY][monsterX].ScentStrength > Race.NoticeRange)
+        if (saveGame.Grid[monsterY][monsterX].ScentStrength > Race.NoticeRange)
         {
             return;
         }
@@ -2446,20 +2446,20 @@ internal class Monster : IItemContainer
         // Check each of the eight directions
         for (int i = 7; i >= 0; i--)
         {
-            int y = monsterY + saveGame.Level.OrderedDirectionYOffset[i];
-            int x = monsterX + saveGame.Level.OrderedDirectionXOffset[i];
+            int y = monsterY + saveGame.OrderedDirectionYOffset[i];
+            int x = monsterX + saveGame.OrderedDirectionXOffset[i];
             // If we have no scent there, or the scent is too recent, ignore it
-            if (saveGame.Level.Grid[y][x].ScentAge == 0)
+            if (saveGame.Grid[y][x].ScentAge == 0)
             {
                 continue;
             }
-            if (saveGame.Level.Grid[y][x].ScentAge < when)
+            if (saveGame.Grid[y][x].ScentAge < when)
             {
                 continue;
             }
             // If the scent is weaker than in the other directions, go that way
-            int dis = saveGame.Level.Distance(y, x, dY, dX);
-            int s = (5000 / (dis + 3)) - (500 / (saveGame.Level.Grid[y][x].ScentStrength + 1));
+            int dis = saveGame.Distance(y, x, dY, dX);
+            int s = (5000 / (dis + 3)) - (500 / (saveGame.Grid[y][x].ScentStrength + 1));
             if (s < 0)
             {
                 s = 0;
@@ -2468,7 +2468,7 @@ internal class Monster : IItemContainer
             {
                 continue;
             }
-            when = saveGame.Level.Grid[y][x].ScentAge;
+            when = saveGame.Grid[y][x].ScentAge;
             score = s;
             gy = y;
             gx = x;
@@ -2500,9 +2500,9 @@ internal class Monster : IItemContainer
         }
         int y1 = MapY;
         int x1 = MapX;
-        GridTile cPtr = saveGame.Level.Grid[y1][x1];
+        GridTile cPtr = saveGame.Grid[y1][x1];
         // If we have no scent of the player then don't change where we were going
-        if (cPtr.ScentAge < saveGame.Level.Grid[saveGame.MapY][saveGame.MapX].ScentAge)
+        if (cPtr.ScentAge < saveGame.Grid[saveGame.MapY][saveGame.MapX].ScentAge)
         {
             if (cPtr.ScentAge == 0)
             {
@@ -2518,7 +2518,7 @@ internal class Monster : IItemContainer
             return;
         }
         // If we can actually see the player then don't change where we are going
-        if (saveGame.Level.PlayerHasLosBold(y1, x1))
+        if (saveGame.PlayerHasLosBold(y1, x1))
         {
             return;
         }
@@ -2527,24 +2527,24 @@ internal class Monster : IItemContainer
         // Check the eight directions we can move to see which has the most recent or strongest scent
         for (int i = 7; i >= 0; i--)
         {
-            int y = y1 + saveGame.Level.OrderedDirectionYOffset[i];
-            int x = x1 + saveGame.Level.OrderedDirectionXOffset[i];
-            if (saveGame.Level.Grid[y][x].ScentAge == 0)
+            int y = y1 + saveGame.OrderedDirectionYOffset[i];
+            int x = x1 + saveGame.OrderedDirectionXOffset[i];
+            if (saveGame.Grid[y][x].ScentAge == 0)
             {
                 continue;
             }
-            if (saveGame.Level.Grid[y][x].ScentAge < when)
+            if (saveGame.Grid[y][x].ScentAge < when)
             {
                 continue;
             }
-            if (saveGame.Level.Grid[y][x].ScentStrength > cost)
+            if (saveGame.Grid[y][x].ScentStrength > cost)
             {
                 continue;
             }
-            when = saveGame.Level.Grid[y][x].ScentAge;
-            cost = saveGame.Level.Grid[y][x].ScentStrength;
+            when = saveGame.Grid[y][x].ScentAge;
+            cost = saveGame.Grid[y][x].ScentStrength;
             // Give us a target in the general direction of the strongest scent
-            target = new GridCoordinate(saveGame.MapX + (16 * saveGame.Level.OrderedDirectionXOffset[i]), saveGame.MapY + (16 * saveGame.Level.OrderedDirectionYOffset[i]));
+            target = new GridCoordinate(saveGame.MapX + (16 * saveGame.OrderedDirectionXOffset[i]), saveGame.MapY + (16 * saveGame.OrderedDirectionYOffset[i]));
         }
     }
 
@@ -2563,7 +2563,7 @@ internal class Monster : IItemContainer
         int hidingSpotY = 0;
         int hidingSpotX = 0;
         int shortestDistance = 999;
-        int tooCloseToPlayer = (saveGame.Level.Distance(saveGame.MapY, saveGame.MapX, fy, fx) * 3 / 4) + 2;
+        int tooCloseToPlayer = (saveGame.Distance(saveGame.MapY, saveGame.MapX, fy, fx) * 3 / 4) + 2;
         // Start with a short search radius and slowly increase
         for (int d = 1; d < 10; d++)
         {
@@ -2574,25 +2574,25 @@ internal class Monster : IItemContainer
                 for (x = fx - d; x <= fx + d; x++)
                 {
                     // Make sure the spot is valid
-                    if (!saveGame.Level.InBounds(y, x))
+                    if (!saveGame.InBounds(y, x))
                     {
                         continue;
                     }
-                    if (!saveGame.Level.GridPassable(y, x))
+                    if (!saveGame.GridPassable(y, x))
                     {
                         continue;
                     }
                     // Make sure the spot is the right distance
-                    if (saveGame.Level.Distance(y, x, fy, fx) != d)
+                    if (saveGame.Distance(y, x, fy, fx) != d)
                     {
                         continue;
                     }
                     // Make sure the spot is actually hidden
-                    if (!saveGame.Level.PlayerCanSeeBold(y, x) && saveGame.CleanShot(fy, fx, y, x))
+                    if (!saveGame.PlayerCanSeeBold(y, x) && saveGame.CleanShot(fy, fx, y, x))
                     {
                         // If the spot is closer to the player than any previously found spot
                         // (but not too close), remember it
-                        int dis = saveGame.Level.Distance(y, x, saveGame.MapY, saveGame.MapX);
+                        int dis = saveGame.Distance(y, x, saveGame.MapY, saveGame.MapX);
                         if (dis < shortestDistance && dis >= tooCloseToPlayer)
                         {
                             hidingSpotY = y;
@@ -2669,7 +2669,7 @@ internal class Monster : IItemContainer
     /// </summary>
     public int GetMonsterIndex() // TODO: Needs to be removed.
     {
-        return SaveGame.Level.GetMonsterIndex(this);
+        return SaveGame.GetMonsterIndex(this);
     }
 
     /// <summary>
@@ -2874,7 +2874,7 @@ internal class Monster : IItemContainer
                             if (!Race.ImmuneFire)
                             {
                                 saveGame.MsgPrint($"{monsterName} is suddenly very hot!");
-                                if (saveGame.Level.DamageMonster(GetMonsterIndex(), Program.Rng.DiceRoll(2, 6), out fear,
+                                if (saveGame.DamageMonster(GetMonsterIndex(), Program.Rng.DiceRoll(2, 6), out fear,
                                     " turns into a pile of ash."))
                                 {
                                     blinked = false;
@@ -2895,7 +2895,7 @@ internal class Monster : IItemContainer
                             if (!Race.ImmuneLightning)
                             {
                                 saveGame.MsgPrint($"{monsterName} gets zapped!");
-                                if (saveGame.Level.DamageMonster(GetMonsterIndex(), Program.Rng.DiceRoll(2, 6), out fear,
+                                if (saveGame.DamageMonster(GetMonsterIndex(), Program.Rng.DiceRoll(2, 6), out fear,
                                     " turns into a pile of cinder."))
                                 {
                                     blinked = false;
@@ -2979,25 +2979,25 @@ internal class Monster : IItemContainer
                 {
                     ny = Program.Rng.RandomSpread(oy, dis);
                     nx = Program.Rng.RandomSpread(ox, dis);
-                    int d = saveGame.Level.Distance(oy, ox, ny, nx);
+                    int d = saveGame.Distance(oy, ox, ny, nx);
                     if (d >= min && d <= dis)
                     {
                         break;
                     }
                 }
-                if (!saveGame.Level.InBounds(ny, nx))
+                if (!saveGame.InBounds(ny, nx))
                 {
                     continue;
                 }
-                if (!saveGame.Level.GridPassableNoCreature(ny, nx))
+                if (!saveGame.GridPassableNoCreature(ny, nx))
                 {
                     continue;
                 }
-                if (saveGame.Level.Grid[ny][nx].FeatureType.Name == "ElderSign")
+                if (saveGame.Grid[ny][nx].FeatureType.Name == "ElderSign")
                 {
                     continue;
                 }
-                if (saveGame.Level.Grid[ny][nx].FeatureType.Name == "YellowSign")
+                if (saveGame.Grid[ny][nx].FeatureType.Name == "YellowSign")
                 {
                     continue;
                 }
@@ -3008,13 +3008,13 @@ internal class Monster : IItemContainer
             min /= 2;
         }
         saveGame.PlaySound(SoundEffectEnum.Teleport);
-        saveGame.Level.Grid[ny][nx].MonsterIndex = GetMonsterIndex();
-        saveGame.Level.Grid[oy][ox].MonsterIndex = 0;
+        saveGame.Grid[ny][nx].MonsterIndex = GetMonsterIndex();
+        saveGame.Grid[oy][ox].MonsterIndex = 0;
         MapY = ny;
         MapX = nx;
-        saveGame.Level.UpdateMonsterVisibility(GetMonsterIndex(), true);
-        saveGame.Level.RedrawSingleLocation(oy, ox);
-        saveGame.Level.RedrawSingleLocation(ny, nx);
+        saveGame.UpdateMonsterVisibility(GetMonsterIndex(), true);
+        saveGame.RedrawSingleLocation(oy, ox);
+        saveGame.RedrawSingleLocation(ny, nx);
     }
 
     /// <summary>
@@ -3046,11 +3046,11 @@ internal class Monster : IItemContainer
             int y = MapY + spiralGridOffsets[i][0];
             int x = MapX + spiralGridOffsets[i][1];
             // Check if we're in bounds and have a monster
-            if (saveGame.Level.InBounds(y, x))
+            if (saveGame.InBounds(y, x))
             {
-                if (saveGame.Level.Grid[y][x].MonsterIndex != 0)
+                if (saveGame.Grid[y][x].MonsterIndex != 0)
                 {
-                    Monster enemy = saveGame.Level.Monsters[saveGame.Level.Grid[y][x].MonsterIndex];
+                    Monster enemy = saveGame.Monsters[saveGame.Grid[y][x].MonsterIndex];
                     // Only go for monsters who are awake and on the opposing side
                     if (enemy.SmFriendly != SmFriendly && enemy.SleepLevel == 0)
                     {
@@ -3170,7 +3170,7 @@ internal class Monster : IItemContainer
         // tactical spell
         MonsterSpellList attackSpells = spells.Where((_spell) => _spell.IsAttack);
         MonsterSpellList tacticalSpells = spells.Where((_spell) => _spell.IsTactical);
-        if (saveGame.Level.Distance(saveGame.MapY, saveGame.MapX, MapY, MapX) < 4 && attackSpells.Count > 0 && Program.Rng.RandomLessThan(100) < 75)
+        if (saveGame.Distance(saveGame.MapY, saveGame.MapX, MapY, MapX) < 4 && attackSpells.Count > 0 && Program.Rng.RandomLessThan(100) < 75)
         {
             if (tacticalSpells.Count > 0)
             {
@@ -3247,34 +3247,34 @@ internal class Monster : IItemContainer
                 for (x = MapY - d; x <= MapY + d; x++)
                 {
                     // Make sure the spot is valid
-                    if (!saveGame.Level.InBounds(y, x))
+                    if (!saveGame.InBounds(y, x))
                     {
                         continue;
                     }
-                    if (!saveGame.Level.GridPassable(y, x))
+                    if (!saveGame.GridPassable(y, x))
                     {
                         continue;
                     }
                     // Make sure the spot is the right distance
-                    if (saveGame.Level.Distance(y, x, MapY, MapY) != d)
+                    if (saveGame.Distance(y, x, MapY, MapY) != d)
                     {
                         continue;
                     }
                     // Reject spots that smell too strongly of the player
-                    if (saveGame.Level.Grid[y][x].ScentAge < saveGame.Level.Grid[saveGame.MapY][saveGame.MapX].ScentAge)
+                    if (saveGame.Grid[y][x].ScentAge < saveGame.Grid[saveGame.MapY][saveGame.MapX].ScentAge)
                     {
                         continue;
                     }
-                    if (saveGame.Level.Grid[y][x].ScentStrength > saveGame.Level.Grid[MapY][MapY].ScentStrength + (2 * d))
+                    if (saveGame.Grid[y][x].ScentStrength > saveGame.Grid[MapY][MapY].ScentStrength + (2 * d))
                     {
                         continue;
                     }
                     // Make sure the spot is actually hidden
-                    if (!saveGame.Level.Projectable(y, x, saveGame.MapY, saveGame.MapX))
+                    if (!saveGame.Projectable(y, x, saveGame.MapY, saveGame.MapX))
                     {
                         // If the spot is further from the player than any previously found
                         // spot, remember it
-                        int dis = saveGame.Level.Distance(y, x, saveGame.MapY, saveGame.MapX);
+                        int dis = saveGame.Distance(y, x, saveGame.MapY, saveGame.MapX);
                         if (dis > longestDistance)
                         {
                             safeSpotY = y;

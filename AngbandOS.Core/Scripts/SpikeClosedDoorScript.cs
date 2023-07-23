@@ -17,9 +17,9 @@ internal class SpikeClosedDoorScript : Script
         // Get the location to be spiked
         if (SaveGame.GetDirectionNoAim(out int dir))
         {
-            int y = SaveGame.MapY + SaveGame.Level.KeypadDirectionYOffset[dir];
-            int x = SaveGame.MapX + SaveGame.Level.KeypadDirectionXOffset[dir];
-            GridTile tile = SaveGame.Level.Grid[y][x];
+            int y = SaveGame.MapY + SaveGame.KeypadDirectionYOffset[dir];
+            int x = SaveGame.MapX + SaveGame.KeypadDirectionXOffset[dir];
+            GridTile tile = SaveGame.Grid[y][x];
             // Make sure it can be spiked and we have spikes to do it with
             if (!tile.FeatureType.IsClosedDoor)
             {

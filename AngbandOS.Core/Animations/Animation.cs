@@ -32,10 +32,10 @@ internal abstract class Animation
         {
             for (int j = 0; j < grids; j++)
             {
-                if (SaveGame.Level.PlayerHasLosBold(y[j], x[j]) && SaveGame.Level.PanelContains(y[j], x[j]))
+                if (SaveGame.PlayerHasLosBold(y[j], x[j]) && SaveGame.PanelContains(y[j], x[j]))
                 {
                     ColourEnum colour = oddFrame ? Colour : AlternateColour;
-                    SaveGame.Level.PrintCharacterAtMapLocation(character, colour, y[j], x[j]);
+                    SaveGame.PrintCharacterAtMapLocation(character, colour, y[j], x[j]);
                     drawn = true;
                 }
             }
@@ -50,9 +50,9 @@ internal abstract class Animation
         {
             for (int j = 0; j < grids; j++)
             {
-                if (SaveGame.Level.PlayerHasLosBold(y[j], x[j]) && SaveGame.Level.PanelContains(y[j], x[j]))
+                if (SaveGame.PlayerHasLosBold(y[j], x[j]) && SaveGame.PanelContains(y[j], x[j]))
                 {
-                    SaveGame.Level.RedrawSingleLocation(y[j], x[j]);
+                    SaveGame.RedrawSingleLocation(y[j], x[j]);
                 }
             }
             SaveGame.UpdateScreen();

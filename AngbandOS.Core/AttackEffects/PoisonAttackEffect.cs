@@ -28,7 +28,7 @@ internal class PoisonAttackEffect : AttackEffect
                 obvious = true;
             }
         }
-        saveGame.Level.UpdateSmartLearn(monster, new PoisSpellResistantDetection());
+        saveGame.UpdateSmartLearn(monster, new PoisSpellResistantDetection());
     }
     public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {

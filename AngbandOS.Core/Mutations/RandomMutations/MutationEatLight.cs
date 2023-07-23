@@ -23,7 +23,7 @@ internal class MutationEatLight : Mutation
         }
         saveGame.MsgPrint("A shadow passes over you.");
         saveGame.MsgPrint(null);
-        if (saveGame.Level.Grid[saveGame.MapY][saveGame.MapX].TileFlags.IsSet(GridTile.SelfLit))
+        if (saveGame.Grid[saveGame.MapY][saveGame.MapX].TileFlags.IsSet(GridTile.SelfLit))
         {
             saveGame.RestoreHealth(10);
         }

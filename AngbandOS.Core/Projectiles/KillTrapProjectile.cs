@@ -16,22 +16,22 @@ internal class KillTrapProjectile : Projectile
 
     protected override bool AffectFloor(int y, int x)
     {
-        GridTile cPtr = SaveGame.Level.Grid[y][x];
+        GridTile cPtr = SaveGame.Grid[y][x];
         bool obvious = false;
         if (cPtr.FeatureType.IsUnidentifiedTrap || cPtr.FeatureType.IsTrap)
         {
-            if (SaveGame.Level.PlayerHasLosBold(y, x))
+            if (SaveGame.PlayerHasLosBold(y, x))
             {
                 SaveGame.MsgPrint("There is a bright flash of light!");
                 obvious = true;
             }
             cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
-            SaveGame.Level.RevertTileToBackground(y, x);
+            SaveGame.RevertTileToBackground(y, x);
         }
         else if (cPtr.FeatureType.IsSecretDoor || cPtr.FeatureType.IsLockedDoor)
         {
-            SaveGame.Level.CaveSetFeat(y, x, "LockedDoor0");
-            if (SaveGame.Level.PlayerHasLosBold(y, x))
+            SaveGame.CaveSetFeat(y, x, "LockedDoor0");
+            if (SaveGame.PlayerHasLosBold(y, x))
             {
                 SaveGame.MsgPrint("Click!");
                 obvious = true;
@@ -42,7 +42,7 @@ internal class KillTrapProjectile : Projectile
 
     protected override bool AffectItem(int who, int y, int x)
     {
-        GridTile cPtr = SaveGame.Level.Grid[y][x];
+        GridTile cPtr = SaveGame.Grid[y][x];
         bool obvious = false;
         foreach (Item oPtr in cPtr.Items)
         {

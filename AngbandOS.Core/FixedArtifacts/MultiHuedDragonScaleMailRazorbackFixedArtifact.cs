@@ -22,7 +22,7 @@ internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact, I
         saveGame.MsgPrint("Your armor is surrounded by lightning...");
         for (int i = 0; i < 8; i++)
         {
-            saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), saveGame.Level.OrderedDirection[i], 150, 3);
+            saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), saveGame.OrderedDirection[i], 150, 3);
         }
         item.RechargeTimeLeft = 1000;
     }

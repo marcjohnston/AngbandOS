@@ -13,12 +13,12 @@ internal class RemoveLightFlaggedAction : FlaggedAction
     public RemoveLightFlaggedAction(SaveGame saveGame) : base(saveGame) { }
     protected override void Execute()
     {
-        foreach (GridCoordinate gridCoordinate in SaveGame.Level.Light)
+        foreach (GridCoordinate gridCoordinate in SaveGame.Light)
         {
-            SaveGame.Level.Grid[gridCoordinate.Y][gridCoordinate.X].TileFlags.Clear(GridTile.PlayerLit);
-            SaveGame.Level.RedrawSingleLocation(gridCoordinate.Y, gridCoordinate.X);
+            SaveGame.Grid[gridCoordinate.Y][gridCoordinate.X].TileFlags.Clear(GridTile.PlayerLit);
+            SaveGame.RedrawSingleLocation(gridCoordinate.Y, gridCoordinate.X);
 
         }
-        SaveGame.Level.Light.Clear();
+        SaveGame.Light.Clear();
     }
 }

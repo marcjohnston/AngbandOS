@@ -22,7 +22,7 @@ internal class MagiAmuletJeweleryItem : AmuletJeweleryItem
         }
         if (SaveGame.Level != null)
         {
-            SaveGame.Level.TreasureRating += 25;
+            SaveGame.TreasureRating += 25;
         }
     }
 }

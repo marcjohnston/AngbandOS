@@ -30,7 +30,7 @@ internal class SpeedRingItem : RingItem
         }
         else if (SaveGame.Level != null)
         {
-            SaveGame.Level.TreasureRating += 25;
+            SaveGame.TreasureRating += 25;
         }
     }
 }

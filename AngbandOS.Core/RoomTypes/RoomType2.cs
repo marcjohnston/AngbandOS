@@ -27,7 +27,7 @@ internal class RoomType2 : RoomType
         {
             for (x = x1A - 1; x <= x2A + 1; x++)
             {
-                cPtr = saveGame.Level.Grid[y][x];
+                cPtr = saveGame.Grid[y][x];
                 cPtr.RevertToBackground();
                 cPtr.TileFlags.Set(GridTile.InRoom);
                 if (light)
@@ -40,7 +40,7 @@ internal class RoomType2 : RoomType
         {
             for (x = x1B - 1; x <= x2B + 1; x++)
             {
-                cPtr = saveGame.Level.Grid[y][x];
+                cPtr = saveGame.Grid[y][x];
                 cPtr.RevertToBackground();
                 cPtr.TileFlags.Set(GridTile.InRoom);
                 if (light)
@@ -51,37 +51,37 @@ internal class RoomType2 : RoomType
         }
         for (y = y1A - 1; y <= y2A + 1; y++)
         {
-            cPtr = saveGame.Level.Grid[y][x1A - 1];
+            cPtr = saveGame.Grid[y][x1A - 1];
             cPtr.SetFeature("WallOuter");
-            cPtr = saveGame.Level.Grid[y][x2A + 1];
+            cPtr = saveGame.Grid[y][x2A + 1];
             cPtr.SetFeature("WallOuter");
         }
         for (x = x1A - 1; x <= x2A + 1; x++)
         {
-            cPtr = saveGame.Level.Grid[y1A - 1][x];
+            cPtr = saveGame.Grid[y1A - 1][x];
             cPtr.SetFeature("WallOuter");
-            cPtr = saveGame.Level.Grid[y2A + 1][x];
+            cPtr = saveGame.Grid[y2A + 1][x];
             cPtr.SetFeature("WallOuter");
         }
         for (y = y1B - 1; y <= y2B + 1; y++)
         {
-            cPtr = saveGame.Level.Grid[y][x1B - 1];
+            cPtr = saveGame.Grid[y][x1B - 1];
             cPtr.SetFeature("WallOuter");
-            cPtr = saveGame.Level.Grid[y][x2B + 1];
+            cPtr = saveGame.Grid[y][x2B + 1];
             cPtr.SetFeature("WallOuter");
         }
         for (x = x1B - 1; x <= x2B + 1; x++)
         {
-            cPtr = saveGame.Level.Grid[y1B - 1][x];
+            cPtr = saveGame.Grid[y1B - 1][x];
             cPtr.SetFeature("WallOuter");
-            cPtr = saveGame.Level.Grid[y2B + 1][x];
+            cPtr = saveGame.Grid[y2B + 1][x];
             cPtr.SetFeature("WallOuter");
         }
         for (y = y1A; y <= y2A; y++)
         {
             for (x = x1A; x <= x2A; x++)
             {
-                cPtr = saveGame.Level.Grid[y][x];
+                cPtr = saveGame.Grid[y][x];
                 cPtr.RevertToBackground();
             }
         }
@@ -89,7 +89,7 @@ internal class RoomType2 : RoomType
         {
             for (x = x1B; x <= x2B; x++)
             {
-                cPtr = saveGame.Level.Grid[y][x];
+                cPtr = saveGame.Grid[y][x];
                 cPtr.RevertToBackground();
             }
         }

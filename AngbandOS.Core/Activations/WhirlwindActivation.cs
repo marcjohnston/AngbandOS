@@ -24,11 +24,11 @@ internal class WhirlwindActivation : Activation
     {
         for (int direction = 0; direction <= 9; direction++)
         {
-            int y = SaveGame.MapY + SaveGame.Level.KeypadDirectionYOffset[direction];
-            int x = SaveGame.MapX + SaveGame.Level.KeypadDirectionXOffset[direction];
-            GridTile cPtr = SaveGame.Level.Grid[y][x];
-            Monster mPtr = SaveGame.Level.Monsters[cPtr.MonsterIndex];
-            if (cPtr.MonsterIndex != 0 && (mPtr.IsVisible || SaveGame.Level.GridPassable(y, x)))
+            int y = SaveGame.MapY + SaveGame.KeypadDirectionYOffset[direction];
+            int x = SaveGame.MapX + SaveGame.KeypadDirectionXOffset[direction];
+            GridTile cPtr = SaveGame.Grid[y][x];
+            Monster mPtr = SaveGame.Monsters[cPtr.MonsterIndex];
+            if (cPtr.MonsterIndex != 0 && (mPtr.IsVisible || SaveGame.GridPassable(y, x)))
             {
                 SaveGame.PlayerAttackMonster(y, x);
             }

@@ -20,19 +20,19 @@ internal class MutationBanish : Mutation
         {
             return;
         }
-        int y = saveGame.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
-        int x = saveGame.MapX + saveGame.Level.KeypadDirectionXOffset[dir];
-        GridTile cPtr = saveGame.Level.Grid[y][x];
+        int y = saveGame.MapY + saveGame.KeypadDirectionYOffset[dir];
+        int x = saveGame.MapX + saveGame.KeypadDirectionXOffset[dir];
+        GridTile cPtr = saveGame.Grid[y][x];
         if (cPtr.MonsterIndex == 0)
         {
             saveGame.MsgPrint("You sense no evil there!");
             return;
         }
-        Monster mPtr = saveGame.Level.Monsters[cPtr.MonsterIndex];
+        Monster mPtr = saveGame.Monsters[cPtr.MonsterIndex];
         MonsterRace rPtr = mPtr.Race;
         if (rPtr.Evil)
         {
-            saveGame.Level.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
+            saveGame.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
             saveGame.MsgPrint("The evil creature vanishes in a puff of sulfurous smoke!");
         }
         else

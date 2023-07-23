@@ -13,7 +13,7 @@ internal class NatureSpellNatureAwareness : Spell
     private NatureSpellNatureAwareness(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Level.MapArea();
+        SaveGame.MapArea();
         SaveGame.DetectTraps();
         SaveGame.DetectDoors();
         SaveGame.DetectStairs();

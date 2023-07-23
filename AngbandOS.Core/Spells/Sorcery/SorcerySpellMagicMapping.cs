@@ -13,7 +13,7 @@ internal class SorcerySpellMagicMapping : Spell
     private SorcerySpellMagicMapping(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Level.MapArea();
+        SaveGame.MapArea();
     }
 
     public override string Name => "Magic Mapping";

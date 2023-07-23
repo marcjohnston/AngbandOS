@@ -20,9 +20,9 @@ internal class MutationColdTouch : Mutation
         {
             return;
         }
-        int y = saveGame.MapY + saveGame.Level.KeypadDirectionYOffset[dir];
-        int x = saveGame.MapX + saveGame.Level.KeypadDirectionXOffset[dir];
-        GridTile cPtr = saveGame.Level.Grid[y][x];
+        int y = saveGame.MapY + saveGame.KeypadDirectionYOffset[dir];
+        int x = saveGame.MapX + saveGame.KeypadDirectionXOffset[dir];
+        GridTile cPtr = saveGame.Grid[y][x];
         if (cPtr.MonsterIndex == 0)
         {
             saveGame.MsgPrint("You wave your hands in the air.");

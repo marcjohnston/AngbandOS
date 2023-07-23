@@ -13,7 +13,7 @@ internal class FolkSpellClairvoyance : Spell
     private FolkSpellClairvoyance(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Level.WizLight();
+        SaveGame.WizLight();
         if (!SaveGame.HasTelepathy)
         {
             SaveGame.TimedTelepathy.AddTimer(Program.Rng.DieRoll(30) + 25);

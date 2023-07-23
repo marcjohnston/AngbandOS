@@ -31,7 +31,7 @@ internal class TarotSpellTarotDraw : Spell
         else if (die < 14)
         {
             SaveGame.MsgPrint("Oh no! It's the Devil!");
-            SaveGame.Level.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, new DemonMonsterSelector());
+            SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, new DemonMonsterSelector());
         }
         else if (die < 18)
         {
@@ -53,7 +53,7 @@ internal class TarotSpellTarotDraw : Spell
         {
             SaveGame.MsgPrint("It's a picture of a strange monster.");
 
-            if (!SaveGame.Level.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty * 3 / 2, MonsterSelector.RandomBizarre()))
+            if (!SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty * 3 / 2, MonsterSelector.RandomBizarre()))
             {
                 noneCame = true;
             }
@@ -106,7 +106,7 @@ internal class TarotSpellTarotDraw : Spell
         else if (die < 82)
         {
             SaveGame.MsgPrint("It's a picture of a friendly monster.");
-            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty * 3 / 2, new Bizarre1MonsterSelector(), false))
+            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty * 3 / 2, new Bizarre1MonsterSelector(), false))
             {
                 noneCame = true;
             }
@@ -114,7 +114,7 @@ internal class TarotSpellTarotDraw : Spell
         else if (die < 84)
         {
             SaveGame.MsgPrint("It's a picture of a friendly monster.");
-            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty * 3 / 2, new Bizarre2MonsterSelector(), false))
+            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty * 3 / 2, new Bizarre2MonsterSelector(), false))
             {
                 noneCame = true;
             }
@@ -122,7 +122,7 @@ internal class TarotSpellTarotDraw : Spell
         else if (die < 86)
         {
             SaveGame.MsgPrint("It's a picture of a friendly monster.");
-            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty * 3 / 2, new Bizarre4MonsterSelector(), false))
+            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty * 3 / 2, new Bizarre4MonsterSelector(), false))
             {
                 noneCame = true;
             }
@@ -130,7 +130,7 @@ internal class TarotSpellTarotDraw : Spell
         else if (die < 88)
         {
             SaveGame.MsgPrint("It's a picture of a friendly monster.");
-            if (!SaveGame.Level.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty * 3 / 2, new Bizarre5MonsterSelector(), false))
+            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty * 3 / 2, new Bizarre5MonsterSelector(), false))
             {
                 noneCame = true;
             }
@@ -164,7 +164,7 @@ internal class TarotSpellTarotDraw : Spell
         else if (die < 120)
         {
             SaveGame.MsgPrint("It's the Sun.");
-            SaveGame.Level.WizLight();
+            SaveGame.WizLight();
         }
         else
         {
@@ -286,7 +286,7 @@ internal class TarotSpellTarotDraw : Spell
                 int counter = 0;
                 while (counter++ < 8)
                 {
-                    SaveGame.Level.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty * 3 / 2, MonsterSelector.RandomBizarre());
+                    SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty * 3 / 2, MonsterSelector.RandomBizarre());
                 }
                 break;
 

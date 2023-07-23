@@ -22,7 +22,7 @@ internal class RedrawHealthFlaggedAction : FlaggedAction
             SaveGame.Screen.Erase(RowInfo - 2, ColInfo, 12);
             SaveGame.Screen.Erase(RowInfo - 1, ColInfo, 12);
         }
-        else if (!SaveGame.Level.Monsters[SaveGame.TrackedMonsterIndex].IsVisible)
+        else if (!SaveGame.Monsters[SaveGame.TrackedMonsterIndex].IsVisible)
         {
             SaveGame.Screen.Print(ColourEnum.White, "[----------]", RowInfo, ColInfo);
         }
@@ -30,13 +30,13 @@ internal class RedrawHealthFlaggedAction : FlaggedAction
         {
             SaveGame.Screen.Print(ColourEnum.White, "[----------]", RowInfo, ColInfo);
         }
-        else if (SaveGame.Level.Monsters[SaveGame.TrackedMonsterIndex].Health < 0)
+        else if (SaveGame.Monsters[SaveGame.TrackedMonsterIndex].Health < 0)
         {
             SaveGame.Screen.Print(ColourEnum.White, "[----------]", RowInfo, ColInfo);
         }
         else
         {
-            Monster mPtr = SaveGame.Level.Monsters[SaveGame.TrackedMonsterIndex];
+            Monster mPtr = SaveGame.Monsters[SaveGame.TrackedMonsterIndex];
             ColourEnum attr = ColourEnum.Red;
             string smb = "**********";
             int pct = 100 * mPtr.Health / mPtr.MaxHealth;

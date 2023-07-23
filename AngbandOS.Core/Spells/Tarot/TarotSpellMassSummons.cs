@@ -19,12 +19,12 @@ internal class TarotSpellMassSummons : Spell
         {
             if (Program.Rng.DieRoll(10) > 3)
             {
-                if (SaveGame.Level.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new NoUniquesMonsterSelector(), false))
+                if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new NoUniquesMonsterSelector(), false))
                 {
                     noneCame = false;
                 }
             }
-            else if (SaveGame.Level.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, null))
+            else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, null))
             {
                 SaveGame.MsgPrint("A summoned creature gets angry!");
                 noneCame = false;

@@ -25,23 +25,23 @@ internal class RoomType5 : RoomType
         {
             for (x = x1 - 1; x <= x2 + 1; x++)
             {
-                cPtr = saveGame.Level.Grid[y][x];
+                cPtr = saveGame.Grid[y][x];
                 cPtr.RevertToBackground();
                 cPtr.TileFlags.Set(GridTile.InRoom);
             }
         }
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
-            cPtr = saveGame.Level.Grid[y][x1 - 1];
+            cPtr = saveGame.Grid[y][x1 - 1];
             cPtr.SetFeature("WallOuter");
-            cPtr = saveGame.Level.Grid[y][x2 + 1];
+            cPtr = saveGame.Grid[y][x2 + 1];
             cPtr.SetFeature("WallOuter");
         }
         for (x = x1 - 1; x <= x2 + 1; x++)
         {
-            cPtr = saveGame.Level.Grid[y1 - 1][x];
+            cPtr = saveGame.Grid[y1 - 1][x];
             cPtr.SetFeature("WallOuter");
-            cPtr = saveGame.Level.Grid[y2 + 1][x];
+            cPtr = saveGame.Grid[y2 + 1][x];
             cPtr.SetFeature("WallOuter");
         }
         y1 += 2;
@@ -50,16 +50,16 @@ internal class RoomType5 : RoomType
         x2 -= 2;
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
-            cPtr = saveGame.Level.Grid[y][x1 - 1];
+            cPtr = saveGame.Grid[y][x1 - 1];
             cPtr.SetFeature("WallInner");
-            cPtr = saveGame.Level.Grid[y][x2 + 1];
+            cPtr = saveGame.Grid[y][x2 + 1];
             cPtr.SetFeature("WallInner");
         }
         for (x = x1 - 1; x <= x2 + 1; x++)
         {
-            cPtr = saveGame.Level.Grid[y1 - 1][x];
+            cPtr = saveGame.Grid[y1 - 1][x];
             cPtr.SetFeature("WallInner");
-            cPtr = saveGame.Level.Grid[y2 + 1][x];
+            cPtr = saveGame.Grid[y2 + 1][x];
             cPtr.SetFeature("WallInner");
         }
         switch (Program.Rng.DieRoll(4))
@@ -132,7 +132,7 @@ internal class RoomType5 : RoomType
         }
         for (int i = 0; i < 64; i++)
         {
-            what[i] = saveGame.Level.GetMonNum(saveGame.Difficulty + 10, getMonNumHook);
+            what[i] = saveGame.GetMonNum(saveGame.Difficulty + 10, getMonNumHook);
             if (what[i] == 0)
             {
                 empty = true;
@@ -142,10 +142,10 @@ internal class RoomType5 : RoomType
         {
             return;
         }
-        saveGame.Level.DangerRating += 10;
+        saveGame.DangerRating += 10;
         if (saveGame.Difficulty <= 40 && Program.Rng.DieRoll((saveGame.Difficulty * saveGame.Difficulty) + 50) < 300)
         {
-            saveGame.Level.SpecialDanger = true;
+            saveGame.SpecialDanger = true;
         }
         for (y = yval - 2; y <= yval + 2; y++)
         {
@@ -153,7 +153,7 @@ internal class RoomType5 : RoomType
             {
                 int rIdx = what[Program.Rng.RandomLessThan(64)];
                 MonsterRace race = saveGame.SingletonRepository.MonsterRaces[rIdx];
-                saveGame.Level.PlaceMonsterAux(y, x, race, false, false, false);
+                saveGame.PlaceMonsterAux(y, x, race, false, false, false);
             }
         }
     }

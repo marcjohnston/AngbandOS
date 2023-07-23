@@ -24,6 +24,6 @@ internal class GenerateGoodObjectWizardCommand : WizardCommand
         {
             SaveGame.CommandArgument = 1;
         }
-        SaveGame.Level.Acquirement(SaveGame.MapY, SaveGame.MapX, SaveGame.CommandArgument, false);
+        SaveGame.Acquirement(SaveGame.MapY, SaveGame.MapX, SaveGame.CommandArgument, false);
     }
 }

@@ -25,23 +25,23 @@ internal class RoomType6 : RoomType
         {
             for (x = x1 - 1; x <= x2 + 1; x++)
             {
-                cPtr = saveGame.Level.Grid[y][x];
+                cPtr = saveGame.Grid[y][x];
                 cPtr.RevertToBackground();
                 cPtr.TileFlags.Set(GridTile.InRoom);
             }
         }
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
-            cPtr = saveGame.Level.Grid[y][x1 - 1];
+            cPtr = saveGame.Grid[y][x1 - 1];
             cPtr.SetFeature("WallOuter");
-            cPtr = saveGame.Level.Grid[y][x2 + 1];
+            cPtr = saveGame.Grid[y][x2 + 1];
             cPtr.SetFeature("WallOuter");
         }
         for (x = x1 - 1; x <= x2 + 1; x++)
         {
-            cPtr = saveGame.Level.Grid[y1 - 1][x];
+            cPtr = saveGame.Grid[y1 - 1][x];
             cPtr.SetFeature("WallOuter");
-            cPtr = saveGame.Level.Grid[y2 + 1][x];
+            cPtr = saveGame.Grid[y2 + 1][x];
             cPtr.SetFeature("WallOuter");
         }
         y1 += 2;
@@ -50,16 +50,16 @@ internal class RoomType6 : RoomType
         x2 -= 2;
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
-            cPtr = saveGame.Level.Grid[y][x1 - 1];
+            cPtr = saveGame.Grid[y][x1 - 1];
             cPtr.SetFeature("WallInner");
-            cPtr = saveGame.Level.Grid[y][x2 + 1];
+            cPtr = saveGame.Grid[y][x2 + 1];
             cPtr.SetFeature("WallInner");
         }
         for (x = x1 - 1; x <= x2 + 1; x++)
         {
-            cPtr = saveGame.Level.Grid[y1 - 1][x];
+            cPtr = saveGame.Grid[y1 - 1][x];
             cPtr.SetFeature("WallInner");
-            cPtr = saveGame.Level.Grid[y2 + 1][x];
+            cPtr = saveGame.Grid[y2 + 1][x];
             cPtr.SetFeature("WallInner");
         }
         switch (Program.Rng.DieRoll(4))
@@ -160,7 +160,7 @@ internal class RoomType6 : RoomType
         }
         for (i = 0; i < 16; i++)
         {
-            what[i] = saveGame.Level.GetMonNum(saveGame.Difficulty + 10, getMonNumHook);
+            what[i] = saveGame.GetMonNum(saveGame.Difficulty + 10, getMonNumHook);
             if (what[i] == 0)
             {
                 empty = true;
@@ -190,43 +190,43 @@ internal class RoomType6 : RoomType
         {
             what[i] = what[i * 2];
         }
-        saveGame.Level.DangerRating += 10;
+        saveGame.DangerRating += 10;
         if (saveGame.Difficulty <= 40 &&
             Program.Rng.DieRoll((saveGame.Difficulty * saveGame.Difficulty) + 50) < 300)
         {
-            saveGame.Level.SpecialDanger = true;
+            saveGame.SpecialDanger = true;
         }
         for (x = xval - 9; x <= xval + 9; x++)
         {
-            saveGame.Level.PlaceMonsterByIndex(yval - 2, x, what[0], false, false, false);
-            saveGame.Level.PlaceMonsterByIndex(yval + 2, x, what[0], false, false, false);
+            saveGame.PlaceMonsterByIndex(yval - 2, x, what[0], false, false, false);
+            saveGame.PlaceMonsterByIndex(yval + 2, x, what[0], false, false, false);
         }
         for (y = yval - 1; y <= yval + 1; y++)
         {
-            saveGame.Level.PlaceMonsterByIndex(y, xval - 9, what[0], false, false, false);
-            saveGame.Level.PlaceMonsterByIndex(y, xval + 9, what[0], false, false, false);
-            saveGame.Level.PlaceMonsterByIndex(y, xval - 8, what[1], false, false, false);
-            saveGame.Level.PlaceMonsterByIndex(y, xval + 8, what[1], false, false, false);
-            saveGame.Level.PlaceMonsterByIndex(y, xval - 7, what[1], false, false, false);
-            saveGame.Level.PlaceMonsterByIndex(y, xval + 7, what[1], false, false, false);
-            saveGame.Level.PlaceMonsterByIndex(y, xval - 6, what[2], false, false, false);
-            saveGame.Level.PlaceMonsterByIndex(y, xval + 6, what[2], false, false, false);
-            saveGame.Level.PlaceMonsterByIndex(y, xval - 5, what[2], false, false, false);
-            saveGame.Level.PlaceMonsterByIndex(y, xval + 5, what[2], false, false, false);
-            saveGame.Level.PlaceMonsterByIndex(y, xval - 4, what[3], false, false, false);
-            saveGame.Level.PlaceMonsterByIndex(y, xval + 4, what[3], false, false, false);
-            saveGame.Level.PlaceMonsterByIndex(y, xval - 3, what[3], false, false, false);
-            saveGame.Level.PlaceMonsterByIndex(y, xval + 3, what[3], false, false, false);
-            saveGame.Level.PlaceMonsterByIndex(y, xval - 2, what[4], false, false, false);
-            saveGame.Level.PlaceMonsterByIndex(y, xval + 2, what[4], false, false, false);
+            saveGame.PlaceMonsterByIndex(y, xval - 9, what[0], false, false, false);
+            saveGame.PlaceMonsterByIndex(y, xval + 9, what[0], false, false, false);
+            saveGame.PlaceMonsterByIndex(y, xval - 8, what[1], false, false, false);
+            saveGame.PlaceMonsterByIndex(y, xval + 8, what[1], false, false, false);
+            saveGame.PlaceMonsterByIndex(y, xval - 7, what[1], false, false, false);
+            saveGame.PlaceMonsterByIndex(y, xval + 7, what[1], false, false, false);
+            saveGame.PlaceMonsterByIndex(y, xval - 6, what[2], false, false, false);
+            saveGame.PlaceMonsterByIndex(y, xval + 6, what[2], false, false, false);
+            saveGame.PlaceMonsterByIndex(y, xval - 5, what[2], false, false, false);
+            saveGame.PlaceMonsterByIndex(y, xval + 5, what[2], false, false, false);
+            saveGame.PlaceMonsterByIndex(y, xval - 4, what[3], false, false, false);
+            saveGame.PlaceMonsterByIndex(y, xval + 4, what[3], false, false, false);
+            saveGame.PlaceMonsterByIndex(y, xval - 3, what[3], false, false, false);
+            saveGame.PlaceMonsterByIndex(y, xval + 3, what[3], false, false, false);
+            saveGame.PlaceMonsterByIndex(y, xval - 2, what[4], false, false, false);
+            saveGame.PlaceMonsterByIndex(y, xval + 2, what[4], false, false, false);
         }
         for (x = xval - 1; x <= xval + 1; x++)
         {
-            saveGame.Level.PlaceMonsterByIndex(yval + 1, x, what[5], false, false, false);
-            saveGame.Level.PlaceMonsterByIndex(yval - 1, x, what[5], false, false, false);
+            saveGame.PlaceMonsterByIndex(yval + 1, x, what[5], false, false, false);
+            saveGame.PlaceMonsterByIndex(yval - 1, x, what[5], false, false, false);
         }
-        saveGame.Level.PlaceMonsterByIndex(yval, xval + 1, what[6], false, false, false);
-        saveGame.Level.PlaceMonsterByIndex(yval, xval - 1, what[6], false, false, false);
-        saveGame.Level.PlaceMonsterByIndex(yval, xval, what[7], false, false, false);
+        saveGame.PlaceMonsterByIndex(yval, xval + 1, what[6], false, false, false);
+        saveGame.PlaceMonsterByIndex(yval, xval - 1, what[6], false, false, false);
+        saveGame.PlaceMonsterByIndex(yval, xval, what[7], false, false, false);
     }
 }
