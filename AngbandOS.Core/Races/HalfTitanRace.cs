@@ -59,18 +59,18 @@ internal class HalfTitanRace : Race
         }
         return null;
     }
-    public override void CalcBonuses(SaveGame saveGame)
+    public override void CalcBonuses()
     {
-        saveGame.HasChaosResistance = true;
+        SaveGame.HasChaosResistance = true;
     }
 
-    public override void UseRacialPower(SaveGame saveGame)
+    public override void UseRacialPower()
     {
         // Half-Titans can probe enemies
-        if (saveGame.CheckIfRacialPowerWorks(35, 20, Ability.Intelligence, 12))
+        if (SaveGame.CheckIfRacialPowerWorks(35, 20, Ability.Intelligence, 12))
         {
-            saveGame.MsgPrint("You examine your foes...");
-            saveGame.Probing();
+            SaveGame.MsgPrint("You examine your foes...");
+            SaveGame.Probing();
         }
     }
 }

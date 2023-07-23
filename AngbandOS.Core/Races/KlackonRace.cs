@@ -62,27 +62,27 @@ internal class KlackonRace : Race
         }
         return null;
     }
-    public override void CalcBonuses(SaveGame saveGame)
+    public override void CalcBonuses()
     {
-        saveGame.HasConfusionResistance = true;
-        saveGame.HasAcidResistance = true;
-        saveGame.Speed += saveGame.ExperienceLevel / 10;
+        SaveGame.HasConfusionResistance = true;
+        SaveGame.HasAcidResistance = true;
+        SaveGame.Speed += SaveGame.ExperienceLevel / 10;
     }
-    public override void UseRacialPower(SaveGame saveGame)
+    public override void UseRacialPower()
     {
         // Klackons can spit acid
-        if (saveGame.CheckIfRacialPowerWorks(9, 9, Ability.Dexterity, 14))
+        if (SaveGame.CheckIfRacialPowerWorks(9, 9, Ability.Dexterity, 14))
         {
-            if (saveGame.GetDirectionWithAim(out int direction))
+            if (SaveGame.GetDirectionWithAim(out int direction))
             {
-                saveGame.MsgPrint("You spit acid.");
-                if (saveGame.ExperienceLevel < 25)
+                SaveGame.MsgPrint("You spit acid.");
+                if (SaveGame.ExperienceLevel < 25)
                 {
-                    saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), direction, saveGame.ExperienceLevel);
+                    SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), direction, SaveGame.ExperienceLevel);
                 }
                 else
                 {
-                    saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), direction, saveGame.ExperienceLevel, 2);
+                    SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), direction, SaveGame.ExperienceLevel, 2);
                 }
             }
         }

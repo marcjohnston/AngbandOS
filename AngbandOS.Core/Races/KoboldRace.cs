@@ -58,20 +58,20 @@ internal class KoboldRace : Race
         }
         return null;
     }
-    public override void CalcBonuses(SaveGame saveGame)
+    public override void CalcBonuses()
     {
-        saveGame.HasPoisonResistance = true;
+        SaveGame.HasPoisonResistance = true;
     }
 
-    public override void UseRacialPower(SaveGame saveGame)
+    public override void UseRacialPower()
     {
         // Kobolds can throw poison darts
-        if (saveGame.CheckIfRacialPowerWorks(12, 8, Ability.Dexterity, 14))
+        if (SaveGame.CheckIfRacialPowerWorks(12, 8, Ability.Dexterity, 14))
         {
-            if (saveGame.GetDirectionWithAim(out int direction))
+            if (SaveGame.GetDirectionWithAim(out int direction))
             {
-                saveGame.MsgPrint("You throw a dart of poison.");
-                saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), direction, saveGame.ExperienceLevel);
+                SaveGame.MsgPrint("You throw a dart of poison.");
+                SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), direction, SaveGame.ExperienceLevel);
             }
         }
     }

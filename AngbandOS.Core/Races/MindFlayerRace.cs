@@ -67,29 +67,29 @@ internal class MindFlayerRace : Race
         }
         return null;
     }
-    public override void CalcBonuses(SaveGame saveGame)
+    public override void CalcBonuses()
     {
-        saveGame.HasSustainIntelligence = true;
-        saveGame.HasSustainWisdom = true;
-        if (saveGame.ExperienceLevel > 14)
+        SaveGame.HasSustainIntelligence = true;
+        SaveGame.HasSustainWisdom = true;
+        if (SaveGame.ExperienceLevel > 14)
         {
-            saveGame.HasSeeInvisibility = true;
+            SaveGame.HasSeeInvisibility = true;
         }
-        if (saveGame.ExperienceLevel > 29)
+        if (SaveGame.ExperienceLevel > 29)
         {
-            saveGame.HasTelepathy = true;
+            SaveGame.HasTelepathy = true;
         }
     }
 
-    public override void UseRacialPower(SaveGame saveGame)
+    public override void UseRacialPower()
     {
         // Mind Flayers can shoot psychic bolts
-        if (saveGame.CheckIfRacialPowerWorks(15, 12, Ability.Intelligence, 14))
+        if (SaveGame.CheckIfRacialPowerWorks(15, 12, Ability.Intelligence, 14))
         {
-            if (saveGame.GetDirectionWithAim(out int direction))
+            if (SaveGame.GetDirectionWithAim(out int direction))
             {
-                saveGame.MsgPrint("You concentrate and your eyes glow red...");
-                saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), direction, saveGame.ExperienceLevel);
+                SaveGame.MsgPrint("You concentrate and your eyes glow red...");
+                SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), direction, SaveGame.ExperienceLevel);
             }
         }
     }

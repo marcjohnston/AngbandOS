@@ -58,18 +58,18 @@ internal class TchoTchoRace : Race
         }
         return null;
     }
-    public override void CalcBonuses(SaveGame saveGame)
+    public override void CalcBonuses()
     {
-        saveGame.HasFearResistance = true;
+        SaveGame.HasFearResistance = true;
     }
 
-    public override void UseRacialPower(SaveGame saveGame)
+    public override void UseRacialPower()
     {
         // Tcho-Tcho can create The Yellow Sign
-        if (saveGame.CheckIfRacialPowerWorks(25, 35, Ability.Intelligence, 15))
+        if (SaveGame.CheckIfRacialPowerWorks(25, 35, Ability.Intelligence, 15))
         {
-            saveGame.MsgPrint("You carefully draw The Yellow Sign...");
-            saveGame.YellowSign();
+            SaveGame.MsgPrint("You carefully draw The Yellow Sign...");
+            SaveGame.YellowSign();
         }
     }
 

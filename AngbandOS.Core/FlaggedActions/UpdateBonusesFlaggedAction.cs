@@ -273,7 +273,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 SaveGame.HasNetherResistance = true;
             }
         }
-        SaveGame.Race.CalcBonuses(SaveGame);
+        SaveGame.Race.CalcBonuses();
         SaveGame.Speed = 110;
         SaveGame.MeleeAttacksPerRound = 1;
         SaveGame.MissileAttacksPerRound = 1;

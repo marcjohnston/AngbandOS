@@ -63,14 +63,14 @@ internal class VampireRace : Race
         }
         return null;
     }
-    public override void CalcBonuses(SaveGame saveGame)
+    public override void CalcBonuses()
     {
-        saveGame.HasDarkResistance = true;
-        saveGame.HasHoldLife = true;
-        saveGame.HasNetherResistance = true;
-        saveGame.HasColdResistance = true;
-        saveGame.HasPoisonResistance = true;
-        saveGame.HasGlow = true;
+        SaveGame.HasDarkResistance = true;
+        SaveGame.HasHoldLife = true;
+        SaveGame.HasNetherResistance = true;
+        SaveGame.HasColdResistance = true;
+        SaveGame.HasPoisonResistance = true;
+        SaveGame.HasGlow = true;
     }
     public override bool RestsTillDuskInsteadOfDawn => true;
 
@@ -89,43 +89,43 @@ internal class VampireRace : Race
         }
     }
 
-    public override void UseRacialPower(SaveGame saveGame)
+    public override void UseRacialPower()
     {
         // Vampires can drain health
-        if (saveGame.CheckIfRacialPowerWorks(2, 1 + (saveGame.ExperienceLevel / 3), Ability.Constitution, 9))
+        if (SaveGame.CheckIfRacialPowerWorks(2, 1 + (SaveGame.ExperienceLevel / 3), Ability.Constitution, 9))
         {
-            if (saveGame.GetDirectionNoAim(out int direction))
+            if (SaveGame.GetDirectionNoAim(out int direction))
             {
-                int y = saveGame.MapY + saveGame.KeypadDirectionYOffset[direction];
-                int x = saveGame.MapX + saveGame.KeypadDirectionXOffset[direction];
-                GridTile tile = saveGame.Grid[y][x];
+                int y = SaveGame.MapY + SaveGame.KeypadDirectionYOffset[direction];
+                int x = SaveGame.MapX + SaveGame.KeypadDirectionXOffset[direction];
+                GridTile tile = SaveGame.Grid[y][x];
                 if (tile.MonsterIndex == 0)
                 {
-                    saveGame.MsgPrint("You bite into thin air!");
+                    SaveGame.MsgPrint("You bite into thin air!");
                 }
                 else
                 {
-                    saveGame.MsgPrint("You grin and bare your fangs...");
-                    int dummy = saveGame.ExperienceLevel + (Program.Rng.DieRoll(saveGame.ExperienceLevel) * Math.Max(1, saveGame.ExperienceLevel / 10));
-                    if (saveGame.DrainLife(direction, dummy))
+                    SaveGame.MsgPrint("You grin and bare your fangs...");
+                    int dummy = SaveGame.ExperienceLevel + (Program.Rng.DieRoll(SaveGame.ExperienceLevel) * Math.Max(1, SaveGame.ExperienceLevel / 10));
+                    if (SaveGame.DrainLife(direction, dummy))
                     {
-                        if (saveGame.Food < Constants.PyFoodFull)
+                        if (SaveGame.Food < Constants.PyFoodFull)
                         {
-                            saveGame.RestoreHealth(dummy);
+                            SaveGame.RestoreHealth(dummy);
                         }
                         else
                         {
-                            saveGame.MsgPrint("You were not hungry.");
+                            SaveGame.MsgPrint("You were not hungry.");
                         }
-                        dummy = saveGame.Food + Math.Min(5000, 100 * dummy);
-                        if (saveGame.Food < Constants.PyFoodMax)
+                        dummy = SaveGame.Food + Math.Min(5000, 100 * dummy);
+                        if (SaveGame.Food < Constants.PyFoodMax)
                         {
-                            saveGame.SetFood(dummy >= Constants.PyFoodMax ? Constants.PyFoodMax - 1 : dummy);
+                            SaveGame.SetFood(dummy >= Constants.PyFoodMax ? Constants.PyFoodMax - 1 : dummy);
                         }
                     }
                     else
                     {
-                        saveGame.MsgPrint("Yechh. That tastes foul.");
+                        SaveGame.MsgPrint("Yechh. That tastes foul.");
                     }
                 }
             }

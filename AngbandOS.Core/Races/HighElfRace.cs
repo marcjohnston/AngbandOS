@@ -49,8 +49,8 @@ internal class HighElfRace : Race
         }
     }
     public override string CreateRandomName() => CreateRandomNameFromSyllables(new ElvishSyllables());
-    public override void CalcBonuses(SaveGame saveGame)
+    public override void CalcBonuses()
     {
-        saveGame.HasSeeInvisibility = true;
+        SaveGame.HasSeeInvisibility = true;
     }
 }

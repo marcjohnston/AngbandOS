@@ -10,8 +10,8 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal abstract class Race
 {
-    protected SaveGame SaveGame { get; }
-    public Race(SaveGame saveGame)
+    protected readonly SaveGame SaveGame;
+    protected Race(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
@@ -104,7 +104,7 @@ internal abstract class Race
     /// <returns></returns>
     public virtual string[]? SelfKnowledge(int level) => null;
 
-    public virtual void CalcBonuses(SaveGame saveGame)
+    public virtual void CalcBonuses()
     {
     }
 
@@ -145,7 +145,7 @@ internal abstract class Race
     /// </summary>
     /// <param name="saveGame"></param>
     /// <param name="item"></param>
-    public virtual void Quaff(SaveGame saveGame, PotionItemFactory potion)
+    public virtual void Quaff(PotionItemFactory potion)
     {
     }
 
@@ -171,11 +171,11 @@ internal abstract class Race
     /// </summary>
     public virtual bool IsEthereal => false;
 
-    public virtual void UseRacialPower(SaveGame saveGame)
+    public virtual void UseRacialPower()
     {
         // Other races don't have powers
-        saveGame.MsgPrint("This race has no bonus power.");
-        saveGame.EnergyUse = 0;
+        SaveGame.MsgPrint("This race has no bonus power.");
+        SaveGame.EnergyUse = 0;
     }
 
     /// <summary>

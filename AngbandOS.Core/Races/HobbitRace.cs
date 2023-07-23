@@ -60,20 +60,20 @@ internal class HobbitRace : Race
         return null;
     }
 
-    public override void CalcBonuses(SaveGame saveGame)
+    public override void CalcBonuses()
     {
-        saveGame.HasSustainDexterity = true;
+        SaveGame.HasSustainDexterity = true;
     }
 
-    public override void UseRacialPower(SaveGame saveGame)
+    public override void UseRacialPower()
     {
         // Hobbits can cook food
-        if (saveGame.CheckIfRacialPowerWorks(15, 10, Ability.Intelligence, 10))
+        if (SaveGame.CheckIfRacialPowerWorks(15, 10, Ability.Intelligence, 10))
         {
-            ItemFactory foodItemClass = saveGame.SingletonRepository.ItemFactories.Get<RationFoodItemFactory>();
+            ItemFactory foodItemClass = SaveGame.SingletonRepository.ItemFactories.Get<RationFoodItemFactory>();
             Item item = foodItemClass.CreateItem();
-            saveGame.DropNear(item, -1, saveGame.MapY, saveGame.MapX);
-            saveGame.MsgPrint("You cook some food.");
+            SaveGame.DropNear(item, -1, SaveGame.MapY, SaveGame.MapX);
+            SaveGame.MsgPrint("You cook some food.");
         }
     }
 }

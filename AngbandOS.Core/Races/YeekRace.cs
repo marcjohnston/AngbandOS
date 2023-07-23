@@ -61,24 +61,24 @@ internal class YeekRace : Race
         }
         return null;
     }
-    public override void CalcBonuses(SaveGame saveGame)
+    public override void CalcBonuses()
     {
-        saveGame.HasAcidResistance = true;
-        if (saveGame.ExperienceLevel > 19)
+        SaveGame.HasAcidResistance = true;
+        if (SaveGame.ExperienceLevel > 19)
         {
-            saveGame.HasAcidImmunity = true;
+            SaveGame.HasAcidImmunity = true;
         }
     }
 
-    public override void UseRacialPower(SaveGame saveGame)
+    public override void UseRacialPower()
     {
         // Yeeks can scream
-        if (saveGame.CheckIfRacialPowerWorks(15, 15, Ability.Wisdom, 10))
+        if (SaveGame.CheckIfRacialPowerWorks(15, 15, Ability.Wisdom, 10))
         {
-            if (saveGame.GetDirectionWithAim(out int direction))
+            if (SaveGame.GetDirectionWithAim(out int direction))
             {
-                saveGame.MsgPrint("You make a horrible scream!");
-                saveGame.FearMonster(direction, saveGame.ExperienceLevel);
+                SaveGame.MsgPrint("You make a horrible scream!");
+                SaveGame.FearMonster(direction, SaveGame.ExperienceLevel);
             }
         }
     }

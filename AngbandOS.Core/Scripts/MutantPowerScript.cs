@@ -183,7 +183,7 @@ internal class MutantPowerScript : Script
     public void UseRacialPower()
     {
         // Check the player's race to see what their power is
-        SaveGame.Race.UseRacialPower(SaveGame);
+        SaveGame.Race.UseRacialPower();
         SaveGame.RedrawHpFlaggedAction.Set();
         SaveGame.RedrawManaFlaggedAction.Set();
     }

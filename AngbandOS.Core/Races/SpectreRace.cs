@@ -68,19 +68,19 @@ internal class SpectreRace : Race
         }
         return null;
     }
-    public override void CalcBonuses(SaveGame saveGame)
+    public override void CalcBonuses()
     {
-        saveGame.HasFeatherFall = true;
-        saveGame.HasNetherResistance = true;
-        saveGame.HasHoldLife = true;
-        saveGame.HasSeeInvisibility = true;
-        saveGame.HasPoisonResistance = true;
-        saveGame.HasSlowDigestion = true;
-        saveGame.HasColdResistance = true;
-        saveGame.HasGlow = true;
-        if (saveGame.ExperienceLevel > 34)
+        SaveGame.HasFeatherFall = true;
+        SaveGame.HasNetherResistance = true;
+        SaveGame.HasHoldLife = true;
+        SaveGame.HasSeeInvisibility = true;
+        SaveGame.HasPoisonResistance = true;
+        SaveGame.HasSlowDigestion = true;
+        SaveGame.HasColdResistance = true;
+        SaveGame.HasGlow = true;
+        if (SaveGame.ExperienceLevel > 34)
         {
-            saveGame.HasTelepathy = true;
+            SaveGame.HasTelepathy = true;
         }
     }
     public override bool RestsTillDuskInsteadOfDawn => true;
@@ -96,15 +96,15 @@ internal class SpectreRace : Race
 
     public override bool ProjectingNetherRestoresHealth => true;
 
-    public override void UseRacialPower(SaveGame saveGame)
+    public override void UseRacialPower()
     {
         // Spectres can howl
-        if (saveGame.CheckIfRacialPowerWorks(4, 6, Ability.Intelligence, 3))
+        if (SaveGame.CheckIfRacialPowerWorks(4, 6, Ability.Intelligence, 3))
         {
-            saveGame.MsgPrint("You emit an eldritch howl!");
-            if (saveGame.GetDirectionWithAim(out int direction))
+            SaveGame.MsgPrint("You emit an eldritch howl!");
+            if (SaveGame.GetDirectionWithAim(out int direction))
             {
-                saveGame.FearMonster(direction, saveGame.ExperienceLevel);
+                SaveGame.FearMonster(direction, SaveGame.ExperienceLevel);
             }
         }
     }

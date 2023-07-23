@@ -61,21 +61,21 @@ internal class HalfOgreRace : Race
         return null;
     }
 
-    public override void CalcBonuses(SaveGame saveGame)
+    public override void CalcBonuses()
     {
-        saveGame.HasDarkResistance = true;
-        saveGame.HasSustainStrength = true;
+        SaveGame.HasDarkResistance = true;
+        SaveGame.HasSustainStrength = true;
     }
 
-    public override void UseRacialPower(SaveGame saveGame)
+    public override void UseRacialPower()
     {
         // Half-Ogres can go berserk
-        if (saveGame.CheckIfRacialPowerWorks(8, 10, Ability.Wisdom, saveGame.BaseCharacterClass.ID == CharacterClass.Warrior ? 6 : 12))
+        if (SaveGame.CheckIfRacialPowerWorks(8, 10, Ability.Wisdom, SaveGame.BaseCharacterClass.ID == CharacterClass.Warrior ? 6 : 12))
         {
-            saveGame.MsgPrint("Raaagh!");
-            saveGame.TimedFear.ResetTimer();
-            saveGame.TimedSuperheroism.AddTimer(10 + Program.Rng.DieRoll(saveGame.ExperienceLevel));
-            saveGame.RestoreHealth(30);
+            SaveGame.MsgPrint("Raaagh!");
+            SaveGame.TimedFear.ResetTimer();
+            SaveGame.TimedSuperheroism.AddTimer(10 + Program.Rng.DieRoll(SaveGame.ExperienceLevel));
+            SaveGame.RestoreHealth(30);
         }
     }
 }

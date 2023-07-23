@@ -72,36 +72,36 @@ internal class ImpRace : Race
             return null;
         return values.ToArray();
     }
-    public override void CalcBonuses(SaveGame saveGame)
+    public override void CalcBonuses()
     {
-        saveGame.HasFireResistance = true;
-        if (saveGame.ExperienceLevel > 9)
+        SaveGame.HasFireResistance = true;
+        if (SaveGame.ExperienceLevel > 9)
         {
-            saveGame.HasSeeInvisibility = true;
+            SaveGame.HasSeeInvisibility = true;
         }
-        if (saveGame.ExperienceLevel > 19)
+        if (SaveGame.ExperienceLevel > 19)
         {
-            saveGame.HasFireImmunity = true;
+            SaveGame.HasFireImmunity = true;
         }
     }
 
-    public override void UseRacialPower(SaveGame saveGame)
+    public override void UseRacialPower()
     {
         // Imps can cast fire bolt/ball
-        if (saveGame.CheckIfRacialPowerWorks(9, 15, Ability.Wisdom, 15))
+        if (SaveGame.CheckIfRacialPowerWorks(9, 15, Ability.Wisdom, 15))
         {
-            if (saveGame.GetDirectionWithAim(out int direction))
+            if (SaveGame.GetDirectionWithAim(out int direction))
             {
-                if (saveGame.ExperienceLevel >= 30)
+                if (SaveGame.ExperienceLevel >= 30)
                 {
-                    saveGame.MsgPrint("You cast a ball of fire.");
-                    saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), direction, saveGame.ExperienceLevel,
+                    SaveGame.MsgPrint("You cast a ball of fire.");
+                    SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), direction, SaveGame.ExperienceLevel,
                         2);
                 }
                 else
                 {
-                    saveGame.MsgPrint("You cast a bolt of fire.");
-                    saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), direction, saveGame.ExperienceLevel);
+                    SaveGame.MsgPrint("You cast a bolt of fire.");
+                    SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), direction, SaveGame.ExperienceLevel);
                 }
             }
         }

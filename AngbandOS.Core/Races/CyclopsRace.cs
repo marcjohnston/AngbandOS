@@ -60,20 +60,20 @@ internal class CyclopsRace : Race
         }
         return null;
     }
-    public override void CalcBonuses(SaveGame saveGame)
+    public override void CalcBonuses()
     {
-        saveGame.HasSoundResistance = true;
+        SaveGame.HasSoundResistance = true;
     }
 
-    public override void UseRacialPower(SaveGame saveGame)
+    public override void UseRacialPower()
     {
         // Cyclopes can throw boulders
-        if (saveGame.CheckIfRacialPowerWorks(20, 15, Ability.Strength, 12))
+        if (SaveGame.CheckIfRacialPowerWorks(20, 15, Ability.Strength, 12))
         {
-            if (saveGame.GetDirectionWithAim(out int direction))
+            if (SaveGame.GetDirectionWithAim(out int direction))
             {
-                saveGame.MsgPrint("You throw a huge boulder.");
-                saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), direction, 3 * saveGame.ExperienceLevel / 2);
+                SaveGame.MsgPrint("You throw a huge boulder.");
+                SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), direction, 3 * SaveGame.ExperienceLevel / 2);
             }
         }
     }

@@ -58,24 +58,24 @@ internal class DarkElfRace : Race
         }
         return null;
     }
-    public override void CalcBonuses(SaveGame saveGame)
+    public override void CalcBonuses()
     {
-        saveGame.HasDarkResistance = true;
-        if (saveGame.ExperienceLevel > 19)
+        SaveGame.HasDarkResistance = true;
+        if (SaveGame.ExperienceLevel > 19)
         {
-            saveGame.HasSeeInvisibility = true;
+            SaveGame.HasSeeInvisibility = true;
         }
     }
 
-    public override void UseRacialPower(SaveGame saveGame)
+    public override void UseRacialPower()
     {
         // Dark elves can cast magic missile
-        if (saveGame.CheckIfRacialPowerWorks(2, 2, Ability.Intelligence, 9))
+        if (SaveGame.CheckIfRacialPowerWorks(2, 2, Ability.Intelligence, 9))
         {
-            if (saveGame.GetDirectionWithAim(out int direction))
+            if (SaveGame.GetDirectionWithAim(out int direction))
             {
-                saveGame.MsgPrint("You cast a magic missile.");
-                saveGame.FireBoltOrBeam(10, saveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), direction, Program.Rng.DiceRoll(3 + ((saveGame.ExperienceLevel - 1) / 5), 4));
+                SaveGame.MsgPrint("You cast a magic missile.");
+                SaveGame.FireBoltOrBeam(10, SaveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), direction, Program.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 4));
             }
         }
     }

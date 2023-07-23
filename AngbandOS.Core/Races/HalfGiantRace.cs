@@ -60,21 +60,21 @@ internal class HalfGiantRace : Race
         return null;
     }
 
-    public override void CalcBonuses(SaveGame saveGame)
+    public override void CalcBonuses()
     {
-        saveGame.HasSustainStrength = true;
-        saveGame.HasShardResistance = true;
+        SaveGame.HasSustainStrength = true;
+        SaveGame.HasShardResistance = true;
     }
 
-    public override void UseRacialPower(SaveGame saveGame)
+    public override void UseRacialPower()
     {
         // Half-giants can bash through stone walls
-        if (saveGame.CheckIfRacialPowerWorks(20, 10, Ability.Strength, 12))
+        if (SaveGame.CheckIfRacialPowerWorks(20, 10, Ability.Strength, 12))
         {
-            if (saveGame.GetDirectionWithAim(out int direction))
+            if (SaveGame.GetDirectionWithAim(out int direction))
             {
-                saveGame.MsgPrint("You bash at a stone wall.");
-                saveGame.WallToMud(direction);
+                SaveGame.MsgPrint("You bash at a stone wall.");
+                SaveGame.WallToMud(direction);
             }
         }
     }

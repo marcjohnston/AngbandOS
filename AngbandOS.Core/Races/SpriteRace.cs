@@ -63,27 +63,27 @@ internal class SpriteRace : Race
         }
         return null;
     }
-    public override void CalcBonuses(SaveGame saveGame)
+    public override void CalcBonuses()
     {
-        saveGame.HasFeatherFall = true;
-        saveGame.HasGlow = true;
-        saveGame.HasLightResistance = true;
-        saveGame.Speed += saveGame.ExperienceLevel / 10;
+        SaveGame.HasFeatherFall = true;
+        SaveGame.HasGlow = true;
+        SaveGame.HasLightResistance = true;
+        SaveGame.Speed += SaveGame.ExperienceLevel / 10;
     }
 
-    public override void UseRacialPower(SaveGame saveGame)
+    public override void UseRacialPower()
     {
         // Sprites can sleep monsters
-        if (saveGame.CheckIfRacialPowerWorks(12, 12, Ability.Intelligence, 15))
+        if (SaveGame.CheckIfRacialPowerWorks(12, 12, Ability.Intelligence, 15))
         {
-            saveGame.MsgPrint("You throw some magic dust...");
-            if (saveGame.ExperienceLevel < 25)
+            SaveGame.MsgPrint("You throw some magic dust...");
+            if (SaveGame.ExperienceLevel < 25)
             {
-                saveGame.SleepMonstersTouch();
+                SaveGame.SleepMonstersTouch();
             }
             else
             {
-                saveGame.SleepMonsters();
+                SaveGame.SleepMonsters();
             }
         }
     }

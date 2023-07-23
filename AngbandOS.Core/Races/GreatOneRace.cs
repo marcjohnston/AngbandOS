@@ -68,19 +68,19 @@ internal class GreatOneRace : Race
         return values.ToArray();
     }
 
-    public override void CalcBonuses(SaveGame saveGame)
+    public override void CalcBonuses()
     {
-        saveGame.HasSustainConstitution = true;
-        saveGame.HasRegeneration = true;
+        SaveGame.HasSustainConstitution = true;
+        SaveGame.HasRegeneration = true;
     }
 
-    public override void UseRacialPower(SaveGame saveGame)
+    public override void UseRacialPower()
     {
         // Great ones can heal themselves or swap to a new level
         int dreamPower;
         while (true)
         {
-            if (!saveGame.GetCom("Use Dream [T]ravel or [D]reaming? ", out char ch))
+            if (!SaveGame.GetCom("Use Dream [T]ravel or [D]reaming? ", out char ch))
             {
                 dreamPower = 0;
                 break;
@@ -98,32 +98,32 @@ internal class GreatOneRace : Race
         }
         if (dreamPower == 1)
         {
-            if (saveGame.CheckIfRacialPowerWorks(40, 75, Ability.Wisdom, 50))
+            if (SaveGame.CheckIfRacialPowerWorks(40, 75, Ability.Wisdom, 50))
             {
-                saveGame.MsgPrint("You dream of a time of health and peace...");
-                saveGame.TimedPoison.ResetTimer();
-                saveGame.TimedHallucinations.ResetTimer();
-                saveGame.TimedStun.ResetTimer();
-                saveGame.TimedBleeding.ResetTimer();
-                saveGame.TimedBlindness.ResetTimer();
-                saveGame.TimedFear.ResetTimer();
-                saveGame.TryRestoringAbilityScore(Ability.Strength);
-                saveGame.TryRestoringAbilityScore(Ability.Intelligence);
-                saveGame.TryRestoringAbilityScore(Ability.Wisdom);
-                saveGame.TryRestoringAbilityScore(Ability.Dexterity);
-                saveGame.TryRestoringAbilityScore(Ability.Constitution);
-                saveGame.TryRestoringAbilityScore(Ability.Charisma);
-                saveGame.RestoreLevel();
+                SaveGame.MsgPrint("You dream of a time of health and peace...");
+                SaveGame.TimedPoison.ResetTimer();
+                SaveGame.TimedHallucinations.ResetTimer();
+                SaveGame.TimedStun.ResetTimer();
+                SaveGame.TimedBleeding.ResetTimer();
+                SaveGame.TimedBlindness.ResetTimer();
+                SaveGame.TimedFear.ResetTimer();
+                SaveGame.TryRestoringAbilityScore(Ability.Strength);
+                SaveGame.TryRestoringAbilityScore(Ability.Intelligence);
+                SaveGame.TryRestoringAbilityScore(Ability.Wisdom);
+                SaveGame.TryRestoringAbilityScore(Ability.Dexterity);
+                SaveGame.TryRestoringAbilityScore(Ability.Constitution);
+                SaveGame.TryRestoringAbilityScore(Ability.Charisma);
+                SaveGame.RestoreLevel();
             }
         }
         else if (dreamPower == 2)
         {
-            if (saveGame.CheckIfRacialPowerWorks(30, 50, Ability.Intelligence, 50))
+            if (SaveGame.CheckIfRacialPowerWorks(30, 50, Ability.Intelligence, 50))
             {
-                saveGame.MsgPrint("You start walking around. Your surroundings change.");
-                saveGame.DoCmdSaveGame(true);
-                saveGame.NewLevelFlag = true;
-                saveGame.CameFrom = LevelStart.StartRandom;
+                SaveGame.MsgPrint("You start walking around. Your surroundings change.");
+                SaveGame.DoCmdSaveGame(true);
+                SaveGame.NewLevelFlag = true;
+                SaveGame.CameFrom = LevelStart.StartRandom;
             }
         }
     }

@@ -65,25 +65,25 @@ internal class HalfTrollRace : Race
         return null;
     }
 
-    public override void CalcBonuses(SaveGame saveGame)
+    public override void CalcBonuses()
     {
-        saveGame.HasSustainStrength = true;
-        if (saveGame.ExperienceLevel > 14)
+        SaveGame.HasSustainStrength = true;
+        if (SaveGame.ExperienceLevel > 14)
         {
-            saveGame.HasRegeneration = true;
-            saveGame.HasSlowDigestion = true;
+            SaveGame.HasRegeneration = true;
+            SaveGame.HasSlowDigestion = true;
         }
     }
 
-    public override void UseRacialPower(SaveGame saveGame)
+    public override void UseRacialPower()
     {
         // Half-trolls can go berserk, which also heals them
-        if (saveGame.CheckIfRacialPowerWorks(10, 12, Ability.Wisdom, saveGame.BaseCharacterClass.ID == CharacterClass.Warrior ? 6 : 12))
+        if (SaveGame.CheckIfRacialPowerWorks(10, 12, Ability.Wisdom, SaveGame.BaseCharacterClass.ID == CharacterClass.Warrior ? 6 : 12))
         {
-            saveGame.MsgPrint("RAAAGH!");
-            saveGame.TimedFear.ResetTimer();
-            saveGame.TimedSuperheroism.AddTimer(10 + Program.Rng.DieRoll(saveGame.ExperienceLevel));
-            saveGame.RestoreHealth(30);
+            SaveGame.MsgPrint("RAAAGH!");
+            SaveGame.TimedFear.ResetTimer();
+            SaveGame.TimedSuperheroism.AddTimer(10 + Program.Rng.DieRoll(SaveGame.ExperienceLevel));
+            SaveGame.RestoreHealth(30);
         }
     }
 }

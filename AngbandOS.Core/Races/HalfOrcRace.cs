@@ -60,18 +60,18 @@ internal class HalfOrcRace : Race
         return null;
     }
 
-    public override void CalcBonuses(SaveGame saveGame)
+    public override void CalcBonuses()
     {
-        saveGame.HasDarkResistance = true;
+        SaveGame.HasDarkResistance = true;
     }
 
-    public override void UseRacialPower(SaveGame saveGame)
+    public override void UseRacialPower()
     {
         // Half-orcs can remove fear
-        if (saveGame.CheckIfRacialPowerWorks(3, 5, Ability.Wisdom, saveGame.BaseCharacterClass.ID == CharacterClass.Warrior ? 5 : 10))
+        if (SaveGame.CheckIfRacialPowerWorks(3, 5, Ability.Wisdom, SaveGame.BaseCharacterClass.ID == CharacterClass.Warrior ? 5 : 10))
         {
-            saveGame.MsgPrint("You play tough.");
-            saveGame.TimedFear.ResetTimer();
+            SaveGame.MsgPrint("You play tough.");
+            SaveGame.TimedFear.ResetTimer();
         }
     }
 }

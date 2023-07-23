@@ -61,21 +61,21 @@ internal class NibelungRace : Race
         return null;
     }
 
-    public override void CalcBonuses(SaveGame saveGame)
+    public override void CalcBonuses()
     {
-        saveGame.HasDisenchantResistance = true;
-        saveGame.HasDarkResistance = true;
+        SaveGame.HasDisenchantResistance = true;
+        SaveGame.HasDarkResistance = true;
     }
 
-    public override void UseRacialPower(SaveGame saveGame)
+    public override void UseRacialPower()
     {
         // Nibelungen can detect traps, doors, and stairs
-        if (saveGame.CheckIfRacialPowerWorks(5, 5, Ability.Wisdom, 10))
+        if (SaveGame.CheckIfRacialPowerWorks(5, 5, Ability.Wisdom, 10))
         {
-            saveGame.MsgPrint("You examine your surroundings.");
-            saveGame.DetectTraps();
-            saveGame.DetectDoors();
-            saveGame.DetectStairs();
+            SaveGame.MsgPrint("You examine your surroundings.");
+            SaveGame.DetectTraps();
+            SaveGame.DetectDoors();
+            SaveGame.DetectStairs();
         }
     }
 }

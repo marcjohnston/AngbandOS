@@ -58,19 +58,19 @@ internal class DwarfRace : Race
         return null;
     }
 
-    public override void CalcBonuses(SaveGame saveGame)
+    public override void CalcBonuses()
     {
-        saveGame.HasBlindnessResistance = true;
+        SaveGame.HasBlindnessResistance = true;
     }
-    public override void UseRacialPower(SaveGame saveGame)
+    public override void UseRacialPower()
     {
         // Dwarves can detect traps, doors, and stairs
-        if (saveGame.CheckIfRacialPowerWorks(5, 5, Ability.Wisdom, 12))
+        if (SaveGame.CheckIfRacialPowerWorks(5, 5, Ability.Wisdom, 12))
         {
-            saveGame.MsgPrint("You examine your surroundings.");
-            saveGame.DetectTraps();
-            saveGame.DetectDoors();
-            saveGame.DetectStairs();
+            SaveGame.MsgPrint("You examine your surroundings.");
+            SaveGame.DetectTraps();
+            SaveGame.DetectDoors();
+            SaveGame.DetectStairs();
         }
     }
 }

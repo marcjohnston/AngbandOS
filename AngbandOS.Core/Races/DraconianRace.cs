@@ -74,32 +74,32 @@ internal class DraconianRace : Race
     {
         return new string[] { $"You can breathe, dam. {2 * level} (cost {level})." };
     }
-    public override void CalcBonuses(SaveGame saveGame)
+    public override void CalcBonuses()
     {
-        saveGame.HasFeatherFall = true;
-        if (saveGame.ExperienceLevel > 4)
+        SaveGame.HasFeatherFall = true;
+        if (SaveGame.ExperienceLevel > 4)
         {
-            saveGame.HasFireResistance = true;
+            SaveGame.HasFireResistance = true;
         }
-        if (saveGame.ExperienceLevel > 9)
+        if (SaveGame.ExperienceLevel > 9)
         {
-            saveGame.HasColdResistance = true;
+            SaveGame.HasColdResistance = true;
         }
-        if (saveGame.ExperienceLevel > 14)
+        if (SaveGame.ExperienceLevel > 14)
         {
-            saveGame.HasAcidResistance = true;
+            SaveGame.HasAcidResistance = true;
         }
-        if (saveGame.ExperienceLevel > 19)
+        if (SaveGame.ExperienceLevel > 19)
         {
-            saveGame.HasLightningResistance = true;
+            SaveGame.HasLightningResistance = true;
         }
-        if (saveGame.ExperienceLevel > 34)
+        if (SaveGame.ExperienceLevel > 34)
         {
-            saveGame.HasPoisonResistance = true;
+            SaveGame.HasPoisonResistance = true;
         }
     }
 
-    public override void UseRacialPower(SaveGame saveGame)
+    public override void UseRacialPower()
     {
         // Draconians can breathe an element based on their class and level
         Projectile projectile;
@@ -108,19 +108,19 @@ internal class DraconianRace : Race
         // Default to being randomly fire (66% chance) or cold (33% chance)
         if (Program.Rng.DieRoll(3) == 1)
         {
-            projectile = saveGame.SingletonRepository.Projectiles.Get<ColdProjectile>();
+            projectile = SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>();
             projectileDescription = "cold";
         }
         else
         {
-            projectile = saveGame.SingletonRepository.Projectiles.Get<FireProjectile>();
+            projectile = SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>();
             projectileDescription = "fire";
         }
 
         // Chance of replacing the default fire/cold element with a special one
-        if (Program.Rng.DieRoll(100) < saveGame.ExperienceLevel)
+        if (Program.Rng.DieRoll(100) < SaveGame.ExperienceLevel)
         {
-            switch (saveGame.BaseCharacterClass.ID)
+            switch (SaveGame.BaseCharacterClass.ID)
             {
                 case CharacterClass.Warrior:
                 case CharacterClass.Ranger:
@@ -128,12 +128,12 @@ internal class DraconianRace : Race
                 case CharacterClass.ChosenOne:
                     if (Program.Rng.DieRoll(3) == 1)
                     {
-                        projectile = saveGame.SingletonRepository.Projectiles.Get<MissileProjectile>();
+                        projectile = SaveGame.SingletonRepository.Projectiles.Get<MissileProjectile>();
                         projectileDescription = "the elements";
                     }
                     else
                     {
-                        projectile = saveGame.SingletonRepository.Projectiles.Get<ExplodeProjectile>();
+                        projectile = SaveGame.SingletonRepository.Projectiles.Get<ExplodeProjectile>();
                         projectileDescription = "shards";
                     }
                     break;
@@ -144,12 +144,12 @@ internal class DraconianRace : Race
                 case CharacterClass.Channeler:
                     if (Program.Rng.DieRoll(3) == 1)
                     {
-                        projectile = saveGame.SingletonRepository.Projectiles.Get<ManaProjectile>();
+                        projectile = SaveGame.SingletonRepository.Projectiles.Get<ManaProjectile>();
                         projectileDescription = "mana";
                     }
                     else
                     {
-                        projectile = saveGame.SingletonRepository.Projectiles.Get<DisenchantProjectile>();
+                        projectile = SaveGame.SingletonRepository.Projectiles.Get<DisenchantProjectile>();
                         projectileDescription = "disenchantment";
                     }
                     break;
@@ -158,12 +158,12 @@ internal class DraconianRace : Race
                 case CharacterClass.Cultist:
                     if (Program.Rng.DieRoll(3) != 1)
                     {
-                        projectile = saveGame.SingletonRepository.Projectiles.Get<ConfusionProjectile>();
+                        projectile = SaveGame.SingletonRepository.Projectiles.Get<ConfusionProjectile>();
                         projectileDescription = "confusion";
                     }
                     else
                     {
-                        projectile = saveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>();
+                        projectile = SaveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>();
                         projectileDescription = "chaos";
                     }
                     break;
@@ -171,12 +171,12 @@ internal class DraconianRace : Race
                 case CharacterClass.Monk:
                     if (Program.Rng.DieRoll(3) != 1)
                     {
-                        projectile = saveGame.SingletonRepository.Projectiles.Get<ConfusionProjectile>();
+                        projectile = SaveGame.SingletonRepository.Projectiles.Get<ConfusionProjectile>();
                         projectileDescription = "confusion";
                     }
                     else
                     {
-                        projectile = saveGame.SingletonRepository.Projectiles.Get<SoundProjectile>();
+                        projectile = SaveGame.SingletonRepository.Projectiles.Get<SoundProjectile>();
                         projectileDescription = "sound";
                     }
                     break;
@@ -185,12 +185,12 @@ internal class DraconianRace : Race
                 case CharacterClass.Mystic:
                     if (Program.Rng.DieRoll(3) != 1)
                     {
-                        projectile = saveGame.SingletonRepository.Projectiles.Get<ConfusionProjectile>();
+                        projectile = SaveGame.SingletonRepository.Projectiles.Get<ConfusionProjectile>();
                         projectileDescription = "confusion";
                     }
                     else
                     {
-                        projectile = saveGame.SingletonRepository.Projectiles.Get<PsiProjectile>();
+                        projectile = SaveGame.SingletonRepository.Projectiles.Get<PsiProjectile>();
                         projectileDescription = "mental energy";
                     }
                     break;
@@ -199,12 +199,12 @@ internal class DraconianRace : Race
                 case CharacterClass.Paladin:
                     if (Program.Rng.DieRoll(3) == 1)
                     {
-                        projectile = saveGame.SingletonRepository.Projectiles.Get<HellFireProjectile>();
+                        projectile = SaveGame.SingletonRepository.Projectiles.Get<HellFireProjectile>();
                         projectileDescription = "hellfire";
                     }
                     else
                     {
-                        projectile = saveGame.SingletonRepository.Projectiles.Get<HolyFireProjectile>();
+                        projectile = SaveGame.SingletonRepository.Projectiles.Get<HolyFireProjectile>();
                         projectileDescription = "holy fire";
                     }
                     break;
@@ -212,23 +212,23 @@ internal class DraconianRace : Race
                 case CharacterClass.Rogue:
                     if (Program.Rng.DieRoll(3) == 1)
                     {
-                        projectile = saveGame.SingletonRepository.Projectiles.Get<DarkProjectile>();
+                        projectile = SaveGame.SingletonRepository.Projectiles.Get<DarkProjectile>();
                         projectileDescription = "darkness";
                     }
                     else
                     {
-                        projectile = saveGame.SingletonRepository.Projectiles.Get<PoisProjectile>();
+                        projectile = SaveGame.SingletonRepository.Projectiles.Get<PoisProjectile>();
                         projectileDescription = "poison";
                     }
                     break;
             }
         }
-        if (saveGame.CheckIfRacialPowerWorks(1, saveGame.ExperienceLevel, Ability.Constitution, 12))
+        if (SaveGame.CheckIfRacialPowerWorks(1, SaveGame.ExperienceLevel, Ability.Constitution, 12))
         {
-            if (saveGame.GetDirectionWithAim(out int direction))
+            if (SaveGame.GetDirectionWithAim(out int direction))
             {
-                saveGame.MsgPrint($"You breathe {projectileDescription}.");
-                saveGame.FireBall(projectile, direction, saveGame.ExperienceLevel * 2, -(saveGame.ExperienceLevel / 15) + 1);
+                SaveGame.MsgPrint($"You breathe {projectileDescription}.");
+                SaveGame.FireBall(projectile, direction, SaveGame.ExperienceLevel * 2, -(SaveGame.ExperienceLevel / 15) + 1);
             }
         }
     }

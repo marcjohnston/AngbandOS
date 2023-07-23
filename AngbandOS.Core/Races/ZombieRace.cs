@@ -66,16 +66,16 @@ internal class ZombieRace : Race
         }
         return null;
     }
-    public override void CalcBonuses(SaveGame saveGame)
+    public override void CalcBonuses()
     {
-        saveGame.HasNetherResistance = true;
-        saveGame.HasHoldLife = true;
-        saveGame.HasSeeInvisibility = true;
-        saveGame.HasPoisonResistance = true;
-        saveGame.HasSlowDigestion = true;
-        if (saveGame.ExperienceLevel > 4)
+        SaveGame.HasNetherResistance = true;
+        SaveGame.HasHoldLife = true;
+        SaveGame.HasSeeInvisibility = true;
+        SaveGame.HasPoisonResistance = true;
+        SaveGame.HasSlowDigestion = true;
+        if (SaveGame.ExperienceLevel > 4)
         {
-            saveGame.HasColdResistance = true;
+            SaveGame.HasColdResistance = true;
         }
     }
     public override bool RestsTillDuskInsteadOfDawn => true;
@@ -87,13 +87,13 @@ internal class ZombieRace : Race
     }
     public override bool CanBleed(int level) => (level > 11);
 
-    public override void UseRacialPower(SaveGame saveGame)
+    public override void UseRacialPower()
     {
         // Skeletons and zombies can restore their life energy
-        if (saveGame.CheckIfRacialPowerWorks(30, 30, Ability.Wisdom, 18))
+        if (SaveGame.CheckIfRacialPowerWorks(30, 30, Ability.Wisdom, 18))
         {
-            saveGame.MsgPrint("You attempt to restore your lost energies.");
-            saveGame.RestoreLevel();
+            SaveGame.MsgPrint("You attempt to restore your lost energies.");
+            SaveGame.RestoreLevel();
         }
     }
 

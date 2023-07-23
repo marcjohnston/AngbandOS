@@ -48,8 +48,8 @@ internal class ElfRace : Race
     }
     public override string CreateRandomName() => CreateRandomNameFromSyllables(new ElvishSyllables());
 
-    public override void CalcBonuses(SaveGame saveGame)
+    public override void CalcBonuses()
     {
-        saveGame.HasLightResistance = true;
+        SaveGame.HasLightResistance = true;
     }
 }

@@ -38,7 +38,7 @@ internal class QuaffScript : Script
         bool identified = potion.Quaff();
 
         // Skeletons are messy drinkers
-        SaveGame.Race.Quaff(SaveGame, potion);
+        SaveGame.Race.Quaff(potion);
         SaveGame.NoticeCombineAndReorderFlaggedAction.Set();
         // We may now know the potion's type
         item.ObjectTried();
