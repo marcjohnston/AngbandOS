@@ -13,10 +13,10 @@ internal class LoseStrAttackEffect : AttackEffect
     private LoseStrAttackEffect(SaveGame saveGame) : base(saveGame) { }
     public override int Power => 0;
     public override string Description => "reduce strength";
-    public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
-        saveGame.TakeHit(damage, monsterDescription);
-        if (saveGame.TryDecreasingAbilityScore(Ability.Strength))
+        SaveGame.TakeHit(damage, monsterDescription);
+        if (SaveGame.TryDecreasingAbilityScore(Ability.Strength))
         {
             obvious = true;
         }

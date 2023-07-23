@@ -13,30 +13,30 @@ internal class TerrifyAttackEffect : AttackEffect
     private TerrifyAttackEffect(SaveGame saveGame) : base(saveGame) { }
     public override int Power => 10;
     public override string Description => "terrify";
-    public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
-        saveGame.TakeHit(damage, monsterDescription);
-        if (saveGame.HasFearResistance)
+        SaveGame.TakeHit(damage, monsterDescription);
+        if (SaveGame.HasFearResistance)
         {
-            saveGame.MsgPrint("You stand your ground!");
+            SaveGame.MsgPrint("You stand your ground!");
             obvious = true;
         }
-        else if (Program.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
+        else if (Program.Rng.RandomLessThan(100) < SaveGame.SkillSavingThrow)
         {
-            saveGame.MsgPrint("You stand your ground!");
+            SaveGame.MsgPrint("You stand your ground!");
             obvious = true;
         }
         else
         {
-            if (saveGame.TimedFear.AddTimer(3 + Program.Rng.DieRoll(monsterLevel)))
+            if (SaveGame.TimedFear.AddTimer(3 + Program.Rng.DieRoll(monsterLevel)))
             {
                 obvious = true;
             }
         }
-        saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<FearSpellResistantDetection>());
+        SaveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<FearSpellResistantDetection>());
     }
-    public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
+    public override void ApplyToMonster(Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
-        pt = saveGame.SingletonRepository.Projectiles.Get<TurnAllProjectile>();
+        pt = SaveGame.SingletonRepository.Projectiles.Get<TurnAllProjectile>();
     }
 }

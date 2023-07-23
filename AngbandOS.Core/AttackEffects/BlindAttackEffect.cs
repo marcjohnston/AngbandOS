@@ -13,16 +13,16 @@ internal class BlindAttackEffect : AttackEffect
     private BlindAttackEffect(SaveGame saveGame) : base(saveGame) { }
     public override int Power => 2;
     public override string Description => "blind";
-    public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
-        saveGame.TakeHit(damage, monsterDescription);
-        if (!saveGame.HasBlindnessResistance)
+        SaveGame.TakeHit(damage, monsterDescription);
+        if (!SaveGame.HasBlindnessResistance)
         {
-            if (saveGame.TimedBlindness.AddTimer(10 + Program.Rng.DieRoll(monsterLevel)))
+            if (SaveGame.TimedBlindness.AddTimer(10 + Program.Rng.DieRoll(monsterLevel)))
             {
                 obvious = true;
             }
         }
-        saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<BlindSpellResistantDetection>());
+        SaveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<BlindSpellResistantDetection>());
     }
 }

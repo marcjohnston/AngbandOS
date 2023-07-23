@@ -13,20 +13,20 @@ internal class ConfuseAttackEffect : AttackEffect
     private ConfuseAttackEffect(SaveGame saveGame) : base(saveGame) { }
     public override int Power => 10;
     public override string Description => "confuse";
-    public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
-        saveGame.TakeHit(damage, monsterDescription);
-        if (!saveGame.HasConfusionResistance)
+        SaveGame.TakeHit(damage, monsterDescription);
+        if (!SaveGame.HasConfusionResistance)
         {
-            if (saveGame.TimedConfusion.AddTimer(3 + Program.Rng.DieRoll(monsterLevel)))
+            if (SaveGame.TimedConfusion.AddTimer(3 + Program.Rng.DieRoll(monsterLevel)))
             {
                 obvious = true;
             }
         }
-        saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<ConfSpellResistantDetection>());
+        SaveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<ConfSpellResistantDetection>());
     }
-    public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
+    public override void ApplyToMonster(Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
-        pt = saveGame.SingletonRepository.Projectiles.Get<ConfusionProjectile>();
+        pt = SaveGame.SingletonRepository.Projectiles.Get<ConfusionProjectile>();
     }
 }

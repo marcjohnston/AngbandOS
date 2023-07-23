@@ -13,14 +13,14 @@ internal class EatGoldAttackEffect : AttackEffect
     private EatGoldAttackEffect(SaveGame saveGame) : base(saveGame) { }
     public override int Power => 5;
     public override string Description => "steal gold";
-    public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         // Steal some money
-        saveGame.TakeHit(damage, monsterDescription);
+        SaveGame.TakeHit(damage, monsterDescription);
         obvious = true;
-        if ((saveGame.TimedParalysis.TurnsRemaining == 0 && Program.Rng.RandomLessThan(100) < saveGame.AbilityScores[Ability.Dexterity].DexTheftAvoidance + saveGame.ExperienceLevel) || saveGame.HasAntiTheft)
+        if ((SaveGame.TimedParalysis.TurnsRemaining == 0 && Program.Rng.RandomLessThan(100) < SaveGame.AbilityScores[Ability.Dexterity].DexTheftAvoidance + SaveGame.ExperienceLevel) || SaveGame.HasAntiTheft)
         {
-            saveGame.MsgPrint("You quickly protect your money pouch!");
+            SaveGame.MsgPrint("You quickly protect your money pouch!");
             if (Program.Rng.RandomLessThan(3) != 0)
             {
                 blinked = true;
@@ -29,43 +29,43 @@ internal class EatGoldAttackEffect : AttackEffect
         else
         {
             // The amount of gold taken depends on how much you're carrying
-            int gold = (saveGame.Gold / 10) + Program.Rng.DieRoll(25);
+            int gold = (SaveGame.Gold / 10) + Program.Rng.DieRoll(25);
             if (gold < 2)
             {
                 gold = 2;
             }
             if (gold > 5000)
             {
-                gold = (saveGame.Gold / 20) + Program.Rng.DieRoll(3000);
+                gold = (SaveGame.Gold / 20) + Program.Rng.DieRoll(3000);
             }
-            if (gold > saveGame.Gold)
+            if (gold > SaveGame.Gold)
             {
-                gold = saveGame.Gold;
+                gold = SaveGame.Gold;
             }
-            saveGame.Gold -= gold;
+            SaveGame.Gold -= gold;
             // The monster gets the gold it stole, in case you kill it
             // before leaving the level
             monster.StolenGold += gold;
             // Inform the player what happened
             if (gold <= 0)
             {
-                saveGame.MsgPrint("Nothing was stolen.");
+                SaveGame.MsgPrint("Nothing was stolen.");
             }
-            else if (saveGame.Gold != 0)
+            else if (SaveGame.Gold != 0)
             {
-                saveGame.MsgPrint("Your purse feels lighter.");
-                saveGame.MsgPrint($"{gold} coins were stolen!");
+                SaveGame.MsgPrint("Your purse feels lighter.");
+                SaveGame.MsgPrint($"{gold} coins were stolen!");
             }
             else
             {
-                saveGame.MsgPrint("Your purse feels lighter.");
-                saveGame.MsgPrint("All of your coins were stolen!");
+                SaveGame.MsgPrint("Your purse feels lighter.");
+                SaveGame.MsgPrint("All of your coins were stolen!");
             }
-            saveGame.RedrawGoldFlaggedAction.Set();
+            SaveGame.RedrawGoldFlaggedAction.Set();
             blinked = true;
         }
     }
-    public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
+    public override void ApplyToMonster(Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
         // Monsters don't actually steal from other monsters
         pt = null;

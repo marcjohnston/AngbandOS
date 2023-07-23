@@ -13,15 +13,15 @@ internal class AcidAttackEffect : AttackEffect
     private AcidAttackEffect(SaveGame saveGame) : base(saveGame) { }
     public override int Power => 0;
     public override string Description => "shoot acid";
-    public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         obvious = true;
-        saveGame.MsgPrint("You are covered in acid!");
-        saveGame.AcidDam(damage, monsterDescription);
-        saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<AcidSpellResistantDetection>());
+        SaveGame.MsgPrint("You are covered in acid!");
+        SaveGame.AcidDam(damage, monsterDescription);
+        SaveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<AcidSpellResistantDetection>());
     }
-    public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
+    public override void ApplyToMonster(Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
-        pt = saveGame.SingletonRepository.Projectiles.Get<AcidProjectile>();
+        pt = SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>();
     }
 }

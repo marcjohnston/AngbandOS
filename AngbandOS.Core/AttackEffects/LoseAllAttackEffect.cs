@@ -13,31 +13,31 @@ internal class LoseAllAttackEffect : AttackEffect
     private LoseAllAttackEffect(SaveGame saveGame) : base(saveGame) { }
     public override int Power => 2;
     public override string Description => "reduce all stats";
-    public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         // Try to decrease all six ability scores
-        saveGame.TakeHit(damage, monsterDescription);
-        if (saveGame.TryDecreasingAbilityScore(Ability.Strength))
+        SaveGame.TakeHit(damage, monsterDescription);
+        if (SaveGame.TryDecreasingAbilityScore(Ability.Strength))
         {
             obvious = true;
         }
-        if (saveGame.TryDecreasingAbilityScore(Ability.Dexterity))
+        if (SaveGame.TryDecreasingAbilityScore(Ability.Dexterity))
         {
             obvious = true;
         }
-        if (saveGame.TryDecreasingAbilityScore(Ability.Constitution))
+        if (SaveGame.TryDecreasingAbilityScore(Ability.Constitution))
         {
             obvious = true;
         }
-        if (saveGame.TryDecreasingAbilityScore(Ability.Intelligence))
+        if (SaveGame.TryDecreasingAbilityScore(Ability.Intelligence))
         {
             obvious = true;
         }
-        if (saveGame.TryDecreasingAbilityScore(Ability.Wisdom))
+        if (SaveGame.TryDecreasingAbilityScore(Ability.Wisdom))
         {
             obvious = true;
         }
-        if (saveGame.TryDecreasingAbilityScore(Ability.Charisma))
+        if (SaveGame.TryDecreasingAbilityScore(Ability.Charisma))
         {
             obvious = true;
         }

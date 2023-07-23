@@ -13,10 +13,10 @@ internal class LoseConAttackEffect : AttackEffect
     private LoseConAttackEffect(SaveGame saveGame) : base(saveGame) { }
     public override int Power => 0;
     public override string Description => "reduce constitution";
-    public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
-        saveGame.TakeHit(damage, monsterDescription);
-        if (saveGame.TryDecreasingAbilityScore(Ability.Constitution))
+        SaveGame.TakeHit(damage, monsterDescription);
+        if (SaveGame.TryDecreasingAbilityScore(Ability.Constitution))
         {
             obvious = true;
         }

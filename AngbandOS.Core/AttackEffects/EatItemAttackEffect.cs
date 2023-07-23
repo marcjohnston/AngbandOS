@@ -13,13 +13,13 @@ internal class EatItemAttackEffect : AttackEffect
     private EatItemAttackEffect(SaveGame saveGame) : base(saveGame) { }
     public override int Power => 5;
     public override string Description => "steal items";
-    public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         // Steal an item
-        saveGame.TakeHit(damage, monsterDescription);
-        if ((saveGame.TimedParalysis.TurnsRemaining == 0 && Program.Rng.RandomLessThan(100) < saveGame.AbilityScores[Ability.Dexterity].DexTheftAvoidance + saveGame.ExperienceLevel) || saveGame.HasAntiTheft)
+        SaveGame.TakeHit(damage, monsterDescription);
+        if ((SaveGame.TimedParalysis.TurnsRemaining == 0 && Program.Rng.RandomLessThan(100) < SaveGame.AbilityScores[Ability.Dexterity].DexTheftAvoidance + SaveGame.ExperienceLevel) || SaveGame.HasAntiTheft)
         {
-            saveGame.MsgPrint("You grab hold of your backpack!");
+            SaveGame.MsgPrint("You grab hold of your backpack!");
             blinked = true;
             obvious = true;
             return;
@@ -27,31 +27,31 @@ internal class EatItemAttackEffect : AttackEffect
         // Have ten tries at picking a suitable item to steal
         for (int k = 0; k < 10; k++)
         {
-            BaseInventorySlot packInventorySlot = saveGame.SingletonRepository.InventorySlots.Get<PackInventorySlot>();
+            BaseInventorySlot packInventorySlot = SaveGame.SingletonRepository.InventorySlots.Get<PackInventorySlot>();
             int i = packInventorySlot.WeightedRandom.Choose();
-            Item? item = saveGame.GetInventoryItem(i);
+            Item? item = SaveGame.GetInventoryItem(i);
             if (item != null && item.FixedArtifact == null && string.IsNullOrEmpty(item.RandartName))
             {
                 string itemName = item.Description(false, 3);
                 string y = item.Count > 1 ? "One of y" : "Y";
-                saveGame.MsgPrint($"{y}our {itemName} ({i.IndexToLabel()}) was stolen!");
+                SaveGame.MsgPrint($"{y}our {itemName} ({i.IndexToLabel()}) was stolen!");
 
                 // Give the item to the thief so it can later drop it
                 Item stolenItem = item.Clone();
                 stolenItem.Count = 1;
                 stolenItem.Marked = false;
 
-                saveGame.AddItemToMonster(item.Clone(), monster);
+                SaveGame.AddItemToMonster(item.Clone(), monster);
 
-                saveGame.InvenItemIncrease(i, -1);
-                saveGame.InvenItemOptimize(i);
+                SaveGame.InvenItemIncrease(i, -1);
+                SaveGame.InvenItemOptimize(i);
                 obvious = true;
                 blinked = true;
                 return;
             }
         }
     }
-    public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
+    public override void ApplyToMonster(Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
         // Monsters don't actually steal from other monsters
         pt = null;

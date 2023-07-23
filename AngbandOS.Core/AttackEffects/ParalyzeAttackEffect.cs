@@ -13,35 +13,35 @@ internal class ParalyzeAttackEffect : AttackEffect
     private ParalyzeAttackEffect(SaveGame saveGame) : base(saveGame) { }
     public override int Power => 2;
     public override string Description => "paralyze";
-    public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         if (damage == 0)
         {
             damage = 1;
         }
-        saveGame.TakeHit(damage, monsterDescription);
-        if (saveGame.HasFreeAction)
+        SaveGame.TakeHit(damage, monsterDescription);
+        if (SaveGame.HasFreeAction)
         {
-            saveGame.MsgPrint("You are unaffected!");
+            SaveGame.MsgPrint("You are unaffected!");
             obvious = true;
         }
-        else if (Program.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
+        else if (Program.Rng.RandomLessThan(100) < SaveGame.SkillSavingThrow)
         {
-            saveGame.MsgPrint("You resist the effects!");
+            SaveGame.MsgPrint("You resist the effects!");
             obvious = true;
         }
         else
         {
-            if (saveGame.TimedParalysis.AddTimer(3 + Program.Rng.DieRoll(monsterLevel)))
+            if (SaveGame.TimedParalysis.AddTimer(3 + Program.Rng.DieRoll(monsterLevel)))
             {
                 obvious = true;
             }
         }
-        saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<FreeSpellResistantDetection>());
+        SaveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<FreeSpellResistantDetection>());
     }
-    public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
+    public override void ApplyToMonster(Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
-        pt = saveGame.SingletonRepository.Projectiles.Get<OldSleepProjectile>();
+        pt = SaveGame.SingletonRepository.Projectiles.Get<OldSleepProjectile>();
         damage = monster.Race.Level;
     }
 }

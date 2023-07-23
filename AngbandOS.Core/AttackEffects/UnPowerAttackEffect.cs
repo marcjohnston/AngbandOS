@@ -13,18 +13,18 @@ internal class UnPowerAttackEffect : AttackEffect
     private UnPowerAttackEffect(SaveGame saveGame) : base(saveGame) { }
     public override int Power => 15;
     public override string Description => "drain charges";
-    public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         // Unpower might drain charges from our items
-        saveGame.TakeHit(damage, monsterDescription);
+        SaveGame.TakeHit(damage, monsterDescription);
         for (int k = 0; k < 10; k++)
         {
-            BaseInventorySlot packInventorySlot = saveGame.SingletonRepository.InventorySlots.Get<PackInventorySlot>();
+            BaseInventorySlot packInventorySlot = SaveGame.SingletonRepository.InventorySlots.Get<PackInventorySlot>();
             int i = packInventorySlot.WeightedRandom.Choose();
-            Item? item = saveGame.GetInventoryItem(i);
+            Item? item = SaveGame.GetInventoryItem(i);
             if (item != null && (item.Category == ItemTypeEnum.Staff || item.Category == ItemTypeEnum.Wand) && item.TypeSpecificValue != 0)
             {
-                saveGame.MsgPrint("Energy drains from your pack!");
+                SaveGame.MsgPrint("Energy drains from your pack!");
                 obvious = true;
                 int j = monsterLevel;
                 monster.Health += j * item.TypeSpecificValue * item.Count;
@@ -32,18 +32,18 @@ internal class UnPowerAttackEffect : AttackEffect
                 {
                     monster.Health = monster.MaxHealth;
                 }
-                if (saveGame.TrackedMonsterIndex == monsterIndex)
+                if (SaveGame.TrackedMonsterIndex == monsterIndex)
                 {
-                    saveGame.RedrawHealthFlaggedAction.Set();
+                    SaveGame.RedrawHealthFlaggedAction.Set();
                 }
                 item.TypeSpecificValue = 0;
-                saveGame.NoticeCombineAndReorderFlaggedAction.Set();
+                SaveGame.NoticeCombineAndReorderFlaggedAction.Set();
                 return;
             }
         }
     }
-    public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
+    public override void ApplyToMonster(Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
-        pt = saveGame.SingletonRepository.Projectiles.Get<DisenchantProjectile>();
+        pt = SaveGame.SingletonRepository.Projectiles.Get<DisenchantProjectile>();
     }
 }

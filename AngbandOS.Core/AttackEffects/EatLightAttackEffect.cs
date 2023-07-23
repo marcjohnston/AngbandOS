@@ -13,12 +13,12 @@ internal class EatLightAttackEffect : AttackEffect
     private EatLightAttackEffect(SaveGame saveGame) : base(saveGame) { }
     public override int Power => 5;
     public override string Description => "absorb light";
-    public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
-        saveGame.TakeHit(damage, monsterDescription);
+        SaveGame.TakeHit(damage, monsterDescription);
 
         // Choose an inventory slot for lights.
-        BaseInventorySlot? chosenLightSourceInventorySlot = saveGame.SingletonRepository.InventorySlots.ToWeightedRandom(inventorySlot => inventorySlot.ProvidesLight).Choose();
+        BaseInventorySlot? chosenLightSourceInventorySlot = SaveGame.SingletonRepository.InventorySlots.ToWeightedRandom(inventorySlot => inventorySlot.ProvidesLight).Choose();
 
         // Check to see if there are no slots.
         if (chosenLightSourceInventorySlot == null)
@@ -43,7 +43,7 @@ internal class EatLightAttackEffect : AttackEffect
             return;
         }
 
-        Item? item = saveGame.GetInventoryItem(i.Value);
+        Item? item = SaveGame.GetInventoryItem(i.Value);
         if (item == null)
         {
             return;
@@ -57,14 +57,14 @@ internal class EatLightAttackEffect : AttackEffect
             {
                 item.TypeSpecificValue = 1;
             }
-            if (saveGame.TimedBlindness.TurnsRemaining == 0)
+            if (SaveGame.TimedBlindness.TurnsRemaining == 0)
             {
-                saveGame.MsgPrint("Your light dims.");
+                SaveGame.MsgPrint("Your light dims.");
                 obvious = true;
             }
         }
     }
-    public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
+    public override void ApplyToMonster(Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
         pt = null;
         damage = 0;

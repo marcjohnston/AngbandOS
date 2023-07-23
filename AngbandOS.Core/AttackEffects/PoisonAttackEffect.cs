@@ -13,26 +13,26 @@ internal class PoisonAttackEffect : AttackEffect
     private PoisonAttackEffect(SaveGame saveGame) : base(saveGame) { }
     public override int Power => 5;
     public override string Description => "poison";
-    public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         // Poison does additional damage
-        saveGame.TakeHit(damage, monsterDescription);
-        if (!(saveGame.HasPoisonResistance || saveGame.TimedPoisonResistance.TurnsRemaining != 0))
+        SaveGame.TakeHit(damage, monsterDescription);
+        if (!(SaveGame.HasPoisonResistance || SaveGame.TimedPoisonResistance.TurnsRemaining != 0))
         {
             // Hagarg Ryonis might save us from the additional damage
-            if (Program.Rng.DieRoll(10) <= saveGame.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+            if (Program.Rng.DieRoll(10) <= SaveGame.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
             {
-                saveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
+                SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
             }
-            else if (saveGame.TimedPoison.AddTimer(Program.Rng.DieRoll(monsterLevel) + 5))
+            else if (SaveGame.TimedPoison.AddTimer(Program.Rng.DieRoll(monsterLevel) + 5))
             {
                 obvious = true;
             }
         }
-        saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<PoisSpellResistantDetection>());
+        SaveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<PoisSpellResistantDetection>());
     }
-    public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
+    public override void ApplyToMonster(Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
-        pt = saveGame.SingletonRepository.Projectiles.Get<PoisProjectile>();
+        pt = SaveGame.SingletonRepository.Projectiles.Get<PoisProjectile>();
     }
 }

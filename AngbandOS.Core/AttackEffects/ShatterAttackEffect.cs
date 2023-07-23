@@ -13,22 +13,22 @@ internal class ShatterAttackEffect : AttackEffect
     private ShatterAttackEffect(SaveGame saveGame) : base(saveGame) { }
     public override int Power => 60;
     public override string Description => "shatter";
-    public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         obvious = true;
         damage -= damage * (armourClass < 150 ? armourClass : 150) / 250;
-        saveGame.TakeHit(damage, monsterDescription);
+        SaveGame.TakeHit(damage, monsterDescription);
         // Do an earthquake only if we did enough damage on the hit
         if (damage > 23)
         {
-            saveGame.Earthquake(monster.MapY, monster.MapX, 8);
+            SaveGame.Earthquake(monster.MapY, monster.MapX, 8);
         }
     }
-    public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
+    public override void ApplyToMonster(Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
         if (damage > 23)
         {
-            saveGame.Earthquake(monster.MapY, monster.MapX, 8);
+            SaveGame.Earthquake(monster.MapY, monster.MapX, 8);
         }
     }
 }

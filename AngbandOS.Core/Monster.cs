@@ -1307,7 +1307,7 @@ internal class Monster : IItemContainer
                         pt = null;
                     }
                     else
-                        effect.ApplyToMonster(saveGame, this, armourClass, ref damage, ref pt, ref blinked);
+                        effect.ApplyToMonster(this, armourClass, ref damage, ref pt, ref blinked);
 
                     // Implement the attack as a projectile
                     if (pt != null)
@@ -2760,7 +2760,7 @@ internal class Monster : IItemContainer
                     }
                     else
                     {
-                        effect.ApplyToPlayer(saveGame, monsterLevel, GetMonsterIndex(), armourClass, monsterDescription, this, ref obvious, ref damage, ref blinked);
+                        effect.ApplyToPlayer(monsterLevel, GetMonsterIndex(), armourClass, monsterDescription, this, ref obvious, ref damage, ref blinked);
                     }
 
                     // Be nice and don't let us be both stunned and cut by the same blow
