@@ -290,7 +290,7 @@ internal abstract class Spell
                 int counter = 0;
                 while (counter++ < 8)
                 {
-                    SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty * 3 / 2, MonsterSelector.RandomBizarre());
+                    SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty * 3 / 2, SaveGame.GetRandomBizarreMonsterSelector());
                 }
                 break;
 

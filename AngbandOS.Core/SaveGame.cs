@@ -638,6 +638,26 @@ internal class SaveGame
         return (SaveGame)formatter.Deserialize(memoryStream);
     }
 
+
+    public MonsterSelector GetRandomBizarreMonsterSelector()
+    {
+        switch (Rng.DieRoll(6))
+        {
+            case 1:
+                return new Bizarre1MonsterSelector();
+            case 2:
+                return new Bizarre2MonsterSelector();
+            case 3:
+                return new Bizarre3MonsterSelector();
+            case 4:
+                return new Bizarre4MonsterSelector();
+            case 5:
+                return new Bizarre5MonsterSelector();
+            default:
+                return new Bizarre6MonsterSelector();
+        }
+    }
+
     // PROFILE MESSAGING START
     /// <summary>
     /// Returns the queue that stores all of the messages.  An actual Queue isn't being used because the Count property for the last item 
