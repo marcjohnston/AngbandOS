@@ -96,7 +96,7 @@ internal class SkeletonRace : Race
 
     public override void Quaff(PotionItemFactory potion)
     {
-        if (Program.Rng.DieRoll(12) == 1)
+        if (SaveGame.Rng.DieRoll(12) == 1)
         {
             SaveGame.MsgPrint("Some of the fluid falls through your jaws!");
             potion.Smash(0, SaveGame.MapY, SaveGame.MapX);

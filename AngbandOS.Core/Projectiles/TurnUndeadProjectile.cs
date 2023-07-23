@@ -40,8 +40,8 @@ internal class TurnUndeadProjectile : Projectile
             {
                 obvious = true;
             }
-            doFear = Program.Rng.DiceRoll(3, dam / 2) + 1;
-            if (rPtr.Level > Program.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+            doFear = SaveGame.Rng.DiceRoll(3, dam / 2) + 1;
+            if (rPtr.Level > SaveGame.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
             {
                 note = " is unaffected!";
                 obvious = false;

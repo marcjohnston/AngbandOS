@@ -17,7 +17,7 @@ internal class ChaosSpellDoomBolt : Spell
         {
             return;
         }
-        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), dir, Program.Rng.DiceRoll(11 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), dir, SaveGame.Rng.DiceRoll(11 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
     }
 
     public override void CastFailed()

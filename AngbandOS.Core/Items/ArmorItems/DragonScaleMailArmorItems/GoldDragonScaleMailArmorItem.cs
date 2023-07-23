@@ -19,6 +19,6 @@ internal class GoldDragonScaleMailArmorItem : DragonScaleMailArmorItem, IItemAct
         }
         SaveGame.MsgPrint("You breathe sound.");
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<SoundProjectile>(), dir, 130, -2);
-        RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+        RechargeTimeLeft = SaveGame.Rng.RandomLessThan(450) + 450;
     }
 }

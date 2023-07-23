@@ -30,7 +30,7 @@ internal abstract class AmmunitionItem : Item
         base.ApplyMagic(level, power, null);
         if (power > 1)
         {
-            switch (Program.Rng.DieRoll(12))
+            switch (SaveGame.Rng.DieRoll(12))
             {
                 case 1:
                 case 2:
@@ -62,7 +62,7 @@ internal abstract class AmmunitionItem : Item
                     DamageDice++;
                     break;
             }
-            while (Program.Rng.RandomLessThan(10 * DamageDice * DamageDiceSides) == 0)
+            while (SaveGame.Rng.RandomLessThan(10 * DamageDice * DamageDiceSides) == 0)
             {
                 DamageDice++;
             }
@@ -73,7 +73,7 @@ internal abstract class AmmunitionItem : Item
         }
         else if (power < -1)
         {
-            if (Program.Rng.RandomLessThan(Constants.MaxDepth) < level)
+            if (SaveGame.Rng.RandomLessThan(Constants.MaxDepth) < level)
             {
                 RareItemTypeIndex = RareItemTypeEnum.AmmoOfBackbiting;
             }

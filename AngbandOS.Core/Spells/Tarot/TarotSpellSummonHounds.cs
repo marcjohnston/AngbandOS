@@ -14,7 +14,7 @@ internal class TarotSpellSummonHounds : Spell
     public override void Cast()
     {
         SaveGame.MsgPrint("You concentrate on the image of a hound...");
-        if (Program.Rng.DieRoll(5) > 2)
+        if (SaveGame.Rng.DieRoll(5) > 2)
         {
             if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new HoundMonsterSelector(), true))
             {

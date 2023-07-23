@@ -17,15 +17,15 @@ internal abstract class CrownArmorItem : ArmourItem
     protected override void ApplyRandomGoodRareCharacteristics()
     {
         IArtifactBias artifactBias = null;
-        switch (Program.Rng.DieRoll(8))
+        switch (SaveGame.Rng.DieRoll(8))
         {
             case 1:
                 RareItemTypeIndex = RareItemTypeEnum.HatOfTheMagi;
-                ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
+                ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
                 break;
             case 2:
                 RareItemTypeIndex = RareItemTypeEnum.HatOfMight;
-                ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
+                ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
                 break;
             case 3:
                 RareItemTypeIndex = RareItemTypeEnum.HatOfTelepathy;
@@ -36,12 +36,12 @@ internal abstract class CrownArmorItem : ArmourItem
             case 5:
             case 6:
                 RareItemTypeIndex = RareItemTypeEnum.HatOfLordliness;
-                ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
+                ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
                 break;
             case 7:
             case 8:
                 RareItemTypeIndex = RareItemTypeEnum.HatOfSeeing;
-                if (Program.Rng.DieRoll(3) == 1)
+                if (SaveGame.Rng.DieRoll(3) == 1)
                 {
                     RandartItemCharacteristics.Telepathy = true;
                 }
@@ -51,7 +51,7 @@ internal abstract class CrownArmorItem : ArmourItem
 
     protected override void ApplyRandomPoorRareCharacteristics()
     {
-        switch (Program.Rng.DieRoll(7))
+        switch (SaveGame.Rng.DieRoll(7))
         {
             case 1:
             case 2:
@@ -88,7 +88,7 @@ internal abstract class CrownArmorItem : ArmourItem
 
             if (power > 1)
             {
-                if (Program.Rng.DieRoll(20) == 1)
+                if (SaveGame.Rng.DieRoll(20) == 1)
                 {
                     CreateRandart(false);
                 }

@@ -13,7 +13,7 @@ internal class DeathSpellRaiseTheDead : Spell
     private DeathSpellRaiseTheDead(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (Program.Rng.DieRoll(3) == 1)
+        if (SaveGame.Rng.DieRoll(3) == 1)
         {
             if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel * 3 / 2, SaveGame.ExperienceLevel > 47 ? new HiUndeadMonsterSelector() : new UndeadMonsterSelector()))
             {
@@ -29,7 +29,7 @@ internal class DeathSpellRaiseTheDead : Spell
         else
         {
             if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel * 3 / 2,
-                SaveGame.ExperienceLevel > 47 ? new HiUndeadNoUniquesMonsterSelector() : new UndeadMonsterSelector(), SaveGame.ExperienceLevel > 24 && Program.Rng.DieRoll(3) == 1))
+                SaveGame.ExperienceLevel > 47 ? new HiUndeadNoUniquesMonsterSelector() : new UndeadMonsterSelector(), SaveGame.ExperienceLevel > 24 && SaveGame.Rng.DieRoll(3) == 1))
             {
                 SaveGame.MsgPrint(
                     "Cold winds begin to swirl around you, carrying with them the stench of decay...");

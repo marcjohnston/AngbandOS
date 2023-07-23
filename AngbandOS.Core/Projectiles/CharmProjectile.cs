@@ -30,7 +30,7 @@ internal class CharmProjectile : Projectile
         {
             obvious = true;
         }
-        if (rPtr.Unique || rPtr.ImmuneConfusion || rPtr.Level > Program.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 5)
+        if (rPtr.Unique || rPtr.ImmuneConfusion || rPtr.Level > SaveGame.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 5)
         {
             if (rPtr.ImmuneConfusion)
             {

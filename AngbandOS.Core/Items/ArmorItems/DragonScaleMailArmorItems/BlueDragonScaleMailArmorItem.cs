@@ -19,7 +19,7 @@ internal class BlueDragonScaleMailArmorItem : DragonScaleMailArmorItem, IItemAct
         }
         SaveGame.MsgPrint("You breathe lightning.");
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, 100, -2);
-        RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+        RechargeTimeLeft = SaveGame.Rng.RandomLessThan(450) + 450;
     }
 
 }

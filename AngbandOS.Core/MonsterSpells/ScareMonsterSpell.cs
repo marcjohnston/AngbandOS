@@ -28,13 +28,13 @@ internal class ScareMonsterSpell : MonsterSpell
         {
             saveGame.MsgPrint("You refuse to be frightened.");
         }
-        else if (Program.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
+        else if (SaveGame.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
         {
             saveGame.MsgPrint("You refuse to be frightened.");
         }
         else
         {
-            saveGame.TimedFear.AddTimer(Program.Rng.RandomLessThan(4) + 4);
+            saveGame.TimedFear.AddTimer(SaveGame.Rng.RandomLessThan(4) + 4);
         }
         saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<FearSpellResistantDetection>());
     }
@@ -54,7 +54,7 @@ internal class ScareMonsterSpell : MonsterSpell
                 saveGame.MsgPrint($"{targetName} refuses to be frightened.");
             }
         }
-        else if (targetRace.Level > Program.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
+        else if (targetRace.Level > SaveGame.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
         {
             if (seeTarget)
             {
@@ -67,7 +67,7 @@ internal class ScareMonsterSpell : MonsterSpell
             {
                 saveGame.MsgPrint($"{targetName} flees in terror!");
             }
-            target.FearLevel += Program.Rng.RandomLessThan(4) + 4;
+            target.FearLevel += SaveGame.Rng.RandomLessThan(4) + 4;
         }
 
         // Most spells will wake up the target if it's asleep

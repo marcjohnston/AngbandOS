@@ -24,17 +24,17 @@ internal abstract class ArmourItem : Item
     {
         do
         {
-            if (Program.Rng.DieRoll(4) == 1)
+            if (SaveGame.Rng.DieRoll(4) == 1)
             {
                 IArtifactBias artifactBias = null;
-                ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(14) + 4);
+                ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(14) + 4);
             }
             else
             {
                 IArtifactBias artifactBias = null;
-                ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
+                ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
             }
-        } while (Program.Rng.DieRoll(2) == 1);
+        } while (SaveGame.Rng.DieRoll(2) == 1);
     }
 
     /// <summary>
@@ -43,7 +43,7 @@ internal abstract class ArmourItem : Item
     /// <param name="item"></param>
     protected virtual void ApplyRandomGoodRareCharacteristics()
     {
-        switch (Program.Rng.DieRoll(21))
+        switch (SaveGame.Rng.DieRoll(21))
         {
             case 1:
             case 2:
@@ -73,11 +73,11 @@ internal abstract class ArmourItem : Item
             case 18:
                 IArtifactBias artifactBias = null;
                 RareItemTypeIndex = RareItemTypeEnum.ArmourOfResistance;
-                if (Program.Rng.DieRoll(4) == 1)
+                if (SaveGame.Rng.DieRoll(4) == 1)
                 {
                     RandartItemCharacteristics.ResPois = true;
                 }
-                ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
+                ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
                 break;
             case 19:
                 CreateRandart(false);
@@ -107,7 +107,7 @@ internal abstract class ArmourItem : Item
     /// <param name="power"></param>
     protected override void ApplyMagic(int level, int power, Store? store)
     {
-        int toac1 = Program.Rng.DieRoll(5) + GetBonusValue(5, level);
+        int toac1 = SaveGame.Rng.DieRoll(5) + GetBonusValue(5, level);
         int toac2 = GetBonusValue(10, level);
         if (power > 0)
         {
@@ -133,7 +133,7 @@ internal abstract class ArmourItem : Item
 
     public override void ApplyRandartBonus()
     {
-        BonusArmorClass += Program.Rng.DieRoll(BonusArmorClass > 19 ? 1 : 20 - BonusArmorClass);
+        BonusArmorClass += SaveGame.Rng.DieRoll(BonusArmorClass > 19 ? 1 : 20 - BonusArmorClass);
     }
 
     protected override bool FactoryCanAbsorbItem(Item other)

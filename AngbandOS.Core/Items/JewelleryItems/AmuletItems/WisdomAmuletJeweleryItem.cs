@@ -15,7 +15,7 @@ internal class WisdomAmuletJeweleryItem : AmuletJeweleryItem
     protected override void ApplyMagic(int level, int power, Store? store)
     {
         TypeSpecificValue = 1 + GetBonusValue(5, level);
-        if (power < 0 || (power == 0 && Program.Rng.RandomLessThan(100) < 50))
+        if (power < 0 || (power == 0 && SaveGame.Rng.RandomLessThan(100) < 50))
         {
             IdentBroken = true;
             IdentCursed = true;

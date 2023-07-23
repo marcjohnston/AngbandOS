@@ -18,7 +18,7 @@ internal class FolkSpellElementalBall : Spell
             return;
         }
         Projectile dummy;
-        switch (Program.Rng.DieRoll(4))
+        switch (SaveGame.Rng.DieRoll(4))
         {
             case 1:
                 dummy = SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>();

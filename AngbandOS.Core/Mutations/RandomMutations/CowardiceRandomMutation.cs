@@ -19,7 +19,7 @@ internal class CowardiceRandomMutation : Mutation
 
     public override void OnProcessWorld(SaveGame saveGame)
     {
-        if (Program.Rng.DieRoll(3000) != 13)
+        if (SaveGame.Rng.DieRoll(3000) != 13)
         {
             return;
         }
@@ -30,6 +30,6 @@ internal class CowardiceRandomMutation : Mutation
         saveGame.Disturb(false);
         saveGame.MsgPrint("It's so dark... so scary!");
         saveGame.RedrawAfraidFlaggedAction.Set();
-        saveGame.TimedFear.AddTimer(13 + Program.Rng.DieRoll(26));
+        saveGame.TimedFear.AddTimer(13 + SaveGame.Rng.DieRoll(26));
     }
 }

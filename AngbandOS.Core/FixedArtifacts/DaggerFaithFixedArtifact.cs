@@ -24,14 +24,14 @@ internal class DaggerFaithFixedArtifact : FixedArtifact, IFixedArtifactActivatib
         {
             return;
         }
-        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, Program.Rng.DiceRoll(9, 8));
-        item.RechargeTimeLeft = Program.Rng.RandomLessThan(8) + 8;
+        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, SaveGame.Rng.DiceRoll(9, 8));
+        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(8) + 8;
     }
 
     public override void ApplyResistances(SaveGame saveGame, Item item)
     {
         IArtifactBias artifactBias = null;
-        item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
+        item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
     }
     public string DescribeActivationEffect() => "fire bolt (9d8) every 8+d8 turns";
 

@@ -13,7 +13,7 @@ internal class SorcerySpellEnchantWeapon : Spell
     private SorcerySpellEnchantWeapon(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.EnchantItem(Program.Rng.RandomLessThan(4) + 1, Program.Rng.RandomLessThan(4) + 1, 0);
+        SaveGame.EnchantItem(SaveGame.Rng.RandomLessThan(4) + 1, SaveGame.Rng.RandomLessThan(4) + 1, 0);
     }
 
     public override string Name => "Enchant Weapon";

@@ -16,15 +16,15 @@ internal class ColdArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.ResCold)
         {
             item.RandartItemCharacteristics.ResCold = true;
-            if (Program.Rng.DieRoll(2) == 1)
+            if (SaveGame.Rng.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (Program.Rng.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandartItemCharacteristics.ImCold)
+        if (SaveGame.Rng.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandartItemCharacteristics.ImCold)
         {
             item.RandartItemCharacteristics.ImCold = true;
-            if (Program.Rng.DieRoll(2) == 1)
+            if (SaveGame.Rng.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -39,7 +39,7 @@ internal class ColdArtifactBias : ArtifactBias
             if (!item.RandartItemCharacteristics.BrandCold)
             {
                 item.RandartItemCharacteristics.BrandCold = true;
-                if (Program.Rng.DieRoll(2) == 1)
+                if (SaveGame.Rng.DieRoll(2) == 1)
                 {
                     return true;
                 }
@@ -50,15 +50,15 @@ internal class ColdArtifactBias : ArtifactBias
 
     public override Activation GetActivationPowerType(Item item)
     {
-        if (Program.Rng.DieRoll(3) != 1)
+        if (SaveGame.Rng.DieRoll(3) != 1)
         {
             return SaveGame.SingletonRepository.Activations.Get<BoCold1Activation>();
         }
-        else if (Program.Rng.DieRoll(3) != 1)
+        else if (SaveGame.Rng.DieRoll(3) != 1)
         {
             return SaveGame.SingletonRepository.Activations.Get<BaCold1Activation>();
         }
-        else if (Program.Rng.DieRoll(3) != 1)
+        else if (SaveGame.Rng.DieRoll(3) != 1)
         {
             return SaveGame.SingletonRepository.Activations.Get<BaCold2Activation>();
         }

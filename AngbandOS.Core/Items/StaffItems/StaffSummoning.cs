@@ -24,7 +24,7 @@ internal class StaffSummoning : StaffItemClass
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        for (int k = 0; k < Program.Rng.DieRoll(4); k++)
+        for (int k = 0; k < SaveGame.Rng.DieRoll(4); k++)
         {
             if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, null))
             {

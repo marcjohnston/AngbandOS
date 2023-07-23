@@ -64,7 +64,7 @@ internal class Type5RoomLayout : RoomLayout
             cPtr = SaveGame.Grid[y2 + 1][x];
             cPtr.SetFeature("WallInner");
         }
-        switch (Program.Rng.DieRoll(4))
+        switch (SaveGame.Rng.DieRoll(4))
         {
             case 1:
                 PlaceSecretDoor(y1 - 1, xval);
@@ -82,18 +82,18 @@ internal class Type5RoomLayout : RoomLayout
                 PlaceSecretDoor(yval, x2 + 1);
                 break;
         }
-        int tmp = Program.Rng.DieRoll(SaveGame.Difficulty);
-        if (tmp < 25 && Program.Rng.DieRoll(2) != 1)
+        int tmp = SaveGame.Rng.DieRoll(SaveGame.Difficulty);
+        if (tmp < 25 && SaveGame.Rng.DieRoll(2) != 1)
         {
             int _templateRace;
 
             do
             {
-                _templateRace = Program.Rng.DieRoll(SaveGame.SingletonRepository.MonsterRaces.Count - 2);
+                _templateRace = SaveGame.Rng.DieRoll(SaveGame.SingletonRepository.MonsterRaces.Count - 2);
             } while (SaveGame.SingletonRepository.MonsterRaces[_templateRace].Unique ||
-                     SaveGame.SingletonRepository.MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
-                     SaveGame.Difficulty + Program.Rng.DieRoll(5));
-            if (Program.Rng.DieRoll(2) != 1 && SaveGame.Difficulty >= 25 + Program.Rng.DieRoll(15))
+                     SaveGame.SingletonRepository.MonsterRaces[_templateRace].Level + SaveGame.Rng.DieRoll(5) >
+                     SaveGame.Difficulty + SaveGame.Rng.DieRoll(5));
+            if (SaveGame.Rng.DieRoll(2) != 1 && SaveGame.Difficulty >= 25 + SaveGame.Rng.DieRoll(15))
             {
                 getMonNumHook = new SymbolMonsterSelector(SaveGame.SingletonRepository.MonsterRaces[_templateRace].Symbol.Character);
             }
@@ -112,7 +112,7 @@ internal class Type5RoomLayout : RoomLayout
         }
         else if (tmp < 65)
         {
-            if (Program.Rng.DieRoll(3) == 1)
+            if (SaveGame.Rng.DieRoll(3) == 1)
             {
                 getMonNumHook = new KennelMonsterSelector();
             }
@@ -123,7 +123,7 @@ internal class Type5RoomLayout : RoomLayout
         }
         else
         {
-            if (Program.Rng.DieRoll(3) == 1)
+            if (SaveGame.Rng.DieRoll(3) == 1)
             {
                 getMonNumHook = new ChapelMonsterSelector();
             }
@@ -145,7 +145,7 @@ internal class Type5RoomLayout : RoomLayout
             return;
         }
         SaveGame.DangerRating += 10;
-        if (SaveGame.Difficulty <= 40 && Program.Rng.DieRoll((SaveGame.Difficulty * SaveGame.Difficulty) + 50) < 300)
+        if (SaveGame.Difficulty <= 40 && SaveGame.Rng.DieRoll((SaveGame.Difficulty * SaveGame.Difficulty) + 50) < 300)
         {
             SaveGame.SpecialDanger = true;
         }
@@ -153,7 +153,7 @@ internal class Type5RoomLayout : RoomLayout
         {
             for (x = xval - 9; x <= xval + 9; x++)
             {
-                int rIdx = what[Program.Rng.RandomLessThan(64)];
+                int rIdx = what[SaveGame.Rng.RandomLessThan(64)];
                 MonsterRace race = SaveGame.SingletonRepository.MonsterRaces[rIdx];
                 SaveGame.PlaceMonsterAux(y, x, race, false, false, false);
             }

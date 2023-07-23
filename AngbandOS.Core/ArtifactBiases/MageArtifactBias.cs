@@ -16,7 +16,7 @@ internal class MageArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.Int)
         {
             item.RandartItemCharacteristics.Int = true;
-            if (Program.Rng.DieRoll(2) == 1)
+            if (SaveGame.Rng.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -28,15 +28,15 @@ internal class MageArtifactBias : ArtifactBias
 
     public override Activation GetActivationPowerType(Item item)
     {
-        if (Program.Rng.DieRoll(20) == 1)
+        if (SaveGame.Rng.DieRoll(20) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get<SummonElementalActivation>();
         }
-        else if (Program.Rng.DieRoll(10) == 1)
+        else if (SaveGame.Rng.DieRoll(10) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get<SummonPhantomActivation>();
         }
-        else if (Program.Rng.DieRoll(5) == 1)
+        else if (SaveGame.Rng.DieRoll(5) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get<RuneExploActivation>();
         }

@@ -330,7 +330,7 @@ internal abstract class Store : IItemFilter
             return;
         }
         int j = _storeInventoryList.Count;
-        j -= Program.Rng.DieRoll(StoreTurnover);
+        j -= SaveGame.Rng.DieRoll(StoreTurnover);
         if (j > StoreMaxKeep)
         {
             j = StoreMaxKeep;
@@ -348,7 +348,7 @@ internal abstract class Store : IItemFilter
             StoreDelete();
         }
         j = _storeInventoryList.Count;
-        j += Program.Rng.DieRoll(StoreTurnover);
+        j += SaveGame.Rng.DieRoll(StoreTurnover);
         if (j > StoreMaxKeep)
         {
             j = StoreMaxKeep;
@@ -370,7 +370,7 @@ internal abstract class Store : IItemFilter
 
     private StoreOwner GetRandomOwner()
     {
-        return StoreOwners[Program.Rng.RandomLessThan(StoreOwners.Length)];
+        return StoreOwners[SaveGame.Rng.RandomLessThan(StoreOwners.Length)];
     }
 
     public virtual void StoreShuffle()
@@ -736,19 +736,19 @@ internal abstract class Store : IItemFilter
         {
             discount = 0;
         }
-        else if (Program.Rng.RandomLessThan(25) == 0)
+        else if (SaveGame.Rng.RandomLessThan(25) == 0)
         {
             discount = 25;
         }
-        else if (Program.Rng.RandomLessThan(150) == 0)
+        else if (SaveGame.Rng.RandomLessThan(150) == 0)
         {
             discount = 50;
         }
-        else if (Program.Rng.RandomLessThan(300) == 0)
+        else if (SaveGame.Rng.RandomLessThan(300) == 0)
         {
             discount = 75;
         }
-        else if (Program.Rng.RandomLessThan(500) == 0)
+        else if (SaveGame.Rng.RandomLessThan(500) == 0)
         {
             discount = 90;
         }
@@ -1045,10 +1045,10 @@ internal abstract class Store : IItemFilter
     protected virtual Item CreateItem()
     {
         // Pick an item to create from the inventory.
-        int i = _table[Program.Rng.RandomLessThan(_table.Length)];
+        int i = _table[SaveGame.Rng.RandomLessThan(_table.Length)];
 
         // Generate a level for the item.
-        int level = Program.Rng.RandomBetween(1, Constants.StoreObjLevel);
+        int level = SaveGame.Rng.RandomBetween(1, Constants.StoreObjLevel);
 
         // Retrieve the item class.
         ItemFactory itemType = SaveGame.SingletonRepository.ItemFactories[i];
@@ -1091,13 +1091,13 @@ internal abstract class Store : IItemFilter
 
     private void StoreDelete()
     {
-        int what = Program.Rng.RandomLessThan(_storeInventoryList.Count);
+        int what = SaveGame.Rng.RandomLessThan(_storeInventoryList.Count);
         int num = _storeInventoryList[what].Count;
-        if (Program.Rng.RandomLessThan(100) < 50)
+        if (SaveGame.Rng.RandomLessThan(100) < 50)
         {
             num = (num + 1) / 2;
         }
-        if (Program.Rng.RandomLessThan(100) < 50)
+        if (SaveGame.Rng.RandomLessThan(100) < 50)
         {
             num = 1;
         }
@@ -1330,7 +1330,7 @@ internal abstract class Store : IItemFilter
                 if (SaveGame.SpellOkay(sPtr, false))
                 {
                     k++;
-                    if (Program.Rng.RandomLessThan(k) == 0)
+                    if (SaveGame.Rng.RandomLessThan(k) == 0)
                     {
                         spell = sPtr;
                     }
@@ -1747,7 +1747,7 @@ internal abstract class Store : IItemFilter
                     {
                         if (MaintainsStockLevels)
                         {
-                            if (Program.Rng.RandomLessThan(Constants.StoreShuffle) == 0)
+                            if (SaveGame.Rng.RandomLessThan(Constants.StoreShuffle) == 0)
                             {
                                 SaveGame.MsgPrint("The shopkeeper retires.");
                                 StoreShuffle();

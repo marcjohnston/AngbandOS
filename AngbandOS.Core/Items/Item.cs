@@ -2086,18 +2086,18 @@ internal abstract class Item : IComparable<Item>
             f2 = 20;
         }
         int power = 0;
-        if (good || Program.Rng.PercentileRoll(f1))
+        if (good || SaveGame.Rng.PercentileRoll(f1))
         {
             power = 1;
-            if (great || Program.Rng.PercentileRoll(f2))
+            if (great || SaveGame.Rng.PercentileRoll(f2))
             {
                 power = 2;
             }
         }
-        else if (Program.Rng.PercentileRoll(f1))
+        else if (SaveGame.Rng.PercentileRoll(f1))
         {
             power = -1;
-            if (Program.Rng.PercentileRoll(f2))
+            if (SaveGame.Rng.PercentileRoll(f2))
             {
                 power = -2;
             }
@@ -2176,7 +2176,7 @@ internal abstract class Item : IComparable<Item>
                     }
                 case RareItemTypeEnum.WeaponPlanarWeapon:
                     {
-                        if (Program.Rng.DieRoll(7) == 1)
+                        if (SaveGame.Rng.DieRoll(7) == 1)
                         {
                             BonusPowerType = RareItemTypeEnum.SpecialAbility;
                         }
@@ -2219,38 +2219,38 @@ internal abstract class Item : IComparable<Item>
             {
                 if (ePtr.MaxToH != 0)
                 {
-                    BonusToHit -= Program.Rng.DieRoll(ePtr.MaxToH);
+                    BonusToHit -= SaveGame.Rng.DieRoll(ePtr.MaxToH);
                 }
                 if (ePtr.MaxToD != 0)
                 {
-                    BonusDamage -= Program.Rng.DieRoll(ePtr.MaxToD);
+                    BonusDamage -= SaveGame.Rng.DieRoll(ePtr.MaxToD);
                 }
                 if (ePtr.MaxToA != 0)
                 {
-                    BonusArmorClass -= Program.Rng.DieRoll(ePtr.MaxToA);
+                    BonusArmorClass -= SaveGame.Rng.DieRoll(ePtr.MaxToA);
                 }
                 if (ePtr.MaxPval != 0)
                 {
-                    TypeSpecificValue -= Program.Rng.DieRoll(ePtr.MaxPval);
+                    TypeSpecificValue -= SaveGame.Rng.DieRoll(ePtr.MaxPval);
                 }
             }
             else
             {
                 if (ePtr.MaxToH != 0)
                 {
-                    BonusToHit += Program.Rng.DieRoll(ePtr.MaxToH);
+                    BonusToHit += SaveGame.Rng.DieRoll(ePtr.MaxToH);
                 }
                 if (ePtr.MaxToD != 0)
                 {
-                    BonusDamage += Program.Rng.DieRoll(ePtr.MaxToD);
+                    BonusDamage += SaveGame.Rng.DieRoll(ePtr.MaxToD);
                 }
                 if (ePtr.MaxToA != 0)
                 {
-                    BonusArmorClass += Program.Rng.DieRoll(ePtr.MaxToA);
+                    BonusArmorClass += SaveGame.Rng.DieRoll(ePtr.MaxToA);
                 }
                 if (ePtr.MaxPval != 0)
                 {
-                    TypeSpecificValue += Program.Rng.DieRoll(ePtr.MaxPval);
+                    TypeSpecificValue += SaveGame.Rng.DieRoll(ePtr.MaxPval);
                 }
             }
             SaveGame.TreasureRating += ePtr.Rating;
@@ -2287,10 +2287,10 @@ internal abstract class Item : IComparable<Item>
             }
 
         }
-        switch (specific != 0 ? specific : Program.Rng.DieRoll(41))
+        switch (specific != 0 ? specific : SaveGame.Rng.DieRoll(41))
         {
             case 1:
-                if (Program.Rng.DieRoll(Constants.WeirdLuck) != 1)
+                if (SaveGame.Rng.DieRoll(Constants.WeirdLuck) != 1)
                 {
                     ApplyRandomResistance(ref artifactBias, 0);
                 }
@@ -2305,7 +2305,7 @@ internal abstract class Item : IComparable<Item>
                 break;
 
             case 2:
-                if (Program.Rng.DieRoll(Constants.WeirdLuck) != 1)
+                if (SaveGame.Rng.DieRoll(Constants.WeirdLuck) != 1)
                 {
                     ApplyRandomResistance(ref artifactBias, 0);
                 }
@@ -2320,7 +2320,7 @@ internal abstract class Item : IComparable<Item>
                 break;
 
             case 3:
-                if (Program.Rng.DieRoll(Constants.WeirdLuck) != 1)
+                if (SaveGame.Rng.DieRoll(Constants.WeirdLuck) != 1)
                 {
                     ApplyRandomResistance(ref artifactBias, 0);
                 }
@@ -2335,7 +2335,7 @@ internal abstract class Item : IComparable<Item>
                 break;
 
             case 4:
-                if (Program.Rng.DieRoll(Constants.WeirdLuck) != 1)
+                if (SaveGame.Rng.DieRoll(Constants.WeirdLuck) != 1)
                 {
                     ApplyRandomResistance(ref artifactBias, 0);
                 }
@@ -2392,15 +2392,15 @@ internal abstract class Item : IComparable<Item>
             case 17:
             case 18:
                 RandartItemCharacteristics.ResPois = true;
-                if (artifactBias == null && Program.Rng.DieRoll(4) != 1)
+                if (artifactBias == null && SaveGame.Rng.DieRoll(4) != 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<PoisonArtifactBias>();
                 }
-                else if (artifactBias == null && Program.Rng.DieRoll(2) == 1)
+                else if (artifactBias == null && SaveGame.Rng.DieRoll(2) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<NecromanticArtifactBias>();
                 }
-                else if (artifactBias == null && Program.Rng.DieRoll(2) == 1)
+                else if (artifactBias == null && SaveGame.Rng.DieRoll(2) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RogueArtifactBias>();
                 }
@@ -2409,7 +2409,7 @@ internal abstract class Item : IComparable<Item>
             case 19:
             case 20:
                 RandartItemCharacteristics.ResFear = true;
-                if (artifactBias == null && Program.Rng.DieRoll(3) == 1)
+                if (artifactBias == null && SaveGame.Rng.DieRoll(3) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<WarriorArtifactBias>();
                 }
@@ -2431,7 +2431,7 @@ internal abstract class Item : IComparable<Item>
             case 25:
             case 26:
                 RandartItemCharacteristics.ResConf = true;
-                if (artifactBias == null && Program.Rng.DieRoll(6) == 1)
+                if (artifactBias == null && SaveGame.Rng.DieRoll(6) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ChaosArtifactBias>();
                 }
@@ -2450,7 +2450,7 @@ internal abstract class Item : IComparable<Item>
             case 31:
             case 32:
                 RandartItemCharacteristics.ResNether = true;
-                if (artifactBias == null && Program.Rng.DieRoll(3) == 1)
+                if (artifactBias == null && SaveGame.Rng.DieRoll(3) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<NecromanticArtifactBias>();
                 }
@@ -2464,7 +2464,7 @@ internal abstract class Item : IComparable<Item>
             case 35:
             case 36:
                 RandartItemCharacteristics.ResChaos = true;
-                if (artifactBias == null && Program.Rng.DieRoll(2) == 1)
+                if (artifactBias == null && SaveGame.Rng.DieRoll(2) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ChaosArtifactBias>();
                 }
@@ -2522,29 +2522,29 @@ internal abstract class Item : IComparable<Item>
     {
         const int ArtifactCurseChance = 13;
         bool hasPval = false;
-        int powers = Program.Rng.DieRoll(5) + 1;
+        int powers = SaveGame.Rng.DieRoll(5) + 1;
         bool aCursed = false;
         int warriorArtifactBias = 0;
         IArtifactBias? artifactBias = null;
-        if (fromScroll && Program.Rng.DieRoll(4) == 1)
+        if (fromScroll && SaveGame.Rng.DieRoll(4) == 1)
         {
             artifactBias = SaveGame.BaseCharacterClass.ArtifactBias;
             warriorArtifactBias = SaveGame.BaseCharacterClass.FromScrollWarriorArtifactBiasPercentageChance;
         }
-        if (Program.Rng.DieRoll(100) <= warriorArtifactBias && fromScroll)
+        if (SaveGame.Rng.DieRoll(100) <= warriorArtifactBias && fromScroll)
         {
             artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<WarriorArtifactBias>();
         }
         string newName;
-        if (!fromScroll && Program.Rng.DieRoll(ArtifactCurseChance) == 1)
+        if (!fromScroll && SaveGame.Rng.DieRoll(ArtifactCurseChance) == 1)
         {
             aCursed = true;
         }
-        while (Program.Rng.DieRoll(powers) == 1 || Program.Rng.DieRoll(7) == 1 || Program.Rng.DieRoll(10) == 1)
+        while (SaveGame.Rng.DieRoll(powers) == 1 || SaveGame.Rng.DieRoll(7) == 1 || SaveGame.Rng.DieRoll(10) == 1)
         {
             powers++;
         }
-        if (!aCursed && Program.Rng.DieRoll(Constants.WeirdLuck) == 1)
+        if (!aCursed && SaveGame.Rng.DieRoll(Constants.WeirdLuck) == 1)
         {
             powers *= 2;
         }
@@ -2555,7 +2555,7 @@ internal abstract class Item : IComparable<Item>
         while (powers-- != 0)
         {
             int maxType = (Factory.CanApplySlayingBonus ? 7 : 5);
-            switch (Program.Rng.DieRoll(maxType))
+            switch (SaveGame.Rng.DieRoll(maxType))
             {
                 case 1:
                 case 2:
@@ -2586,17 +2586,17 @@ internal abstract class Item : IComparable<Item>
         {
             if (RandartItemCharacteristics.Blows)
             {
-                TypeSpecificValue = Program.Rng.DieRoll(2) + 1;
+                TypeSpecificValue = SaveGame.Rng.DieRoll(2) + 1;
             }
             else
             {
                 do
                 {
                     TypeSpecificValue++;
-                } while (TypeSpecificValue < Program.Rng.DieRoll(5) ||
-                         Program.Rng.DieRoll(TypeSpecificValue) == 1);
+                } while (TypeSpecificValue < SaveGame.Rng.DieRoll(5) ||
+                         SaveGame.Rng.DieRoll(TypeSpecificValue) == 1);
             }
-            if (TypeSpecificValue > 4 && Program.Rng.DieRoll(Constants.WeirdLuck) != 1)
+            if (TypeSpecificValue > 4 && SaveGame.Rng.DieRoll(Constants.WeirdLuck) != 1)
             {
                 TypeSpecificValue = 4;
             }
@@ -2611,7 +2611,7 @@ internal abstract class Item : IComparable<Item>
         {
             CurseRandart();
         }
-        if (!aCursed && Program.Rng.DieRoll(Factory.RandartActivationChance) == 1)
+        if (!aCursed && SaveGame.Rng.DieRoll(Factory.RandartActivationChance) == 1)
         {
             BonusPowerSubType = null;
             GiveActivationPower(ref artifactBias);
@@ -2674,12 +2674,12 @@ internal abstract class Item : IComparable<Item>
             if (aPtr.Level > SaveGame.Difficulty)
             {
                 int d = (aPtr.Level - SaveGame.Difficulty) * 2;
-                if (Program.Rng.RandomLessThan(d) != 0)
+                if (SaveGame.Rng.RandomLessThan(d) != 0)
                 {
                     continue;
                 }
             }
-            if (Program.Rng.RandomLessThan(aPtr.Rarity) != 0)
+            if (SaveGame.Rng.RandomLessThan(aPtr.Rarity) != 0)
             {
                 continue;
             }
@@ -2699,16 +2699,16 @@ internal abstract class Item : IComparable<Item>
                 return;
             }
         }
-        switch (Program.Rng.DieRoll(23))
+        switch (SaveGame.Rng.DieRoll(23))
         {
             case 1:
             case 2:
                 RandartItemCharacteristics.Str = true;
-                if (artifactBias == null && Program.Rng.DieRoll(13) != 1)
+                if (artifactBias == null && SaveGame.Rng.DieRoll(13) != 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<StrengthArtifactBias>();
                 }
-                else if (artifactBias == null && Program.Rng.DieRoll(7) == 1)
+                else if (artifactBias == null && SaveGame.Rng.DieRoll(7) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<WarriorArtifactBias>();
                 }
@@ -2717,11 +2717,11 @@ internal abstract class Item : IComparable<Item>
             case 3:
             case 4:
                 RandartItemCharacteristics.Int = true;
-                if (artifactBias == null && Program.Rng.DieRoll(13) != 1)
+                if (artifactBias == null && SaveGame.Rng.DieRoll(13) != 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<IntelligenceArtifactBias>();
                 }
-                else if (artifactBias == null && Program.Rng.DieRoll(7) == 1)
+                else if (artifactBias == null && SaveGame.Rng.DieRoll(7) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<MageArtifactBias>();
                 }
@@ -2730,11 +2730,11 @@ internal abstract class Item : IComparable<Item>
             case 5:
             case 6:
                 RandartItemCharacteristics.Wis = true;
-                if (artifactBias == null && Program.Rng.DieRoll(13) != 1)
+                if (artifactBias == null && SaveGame.Rng.DieRoll(13) != 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<WisdomArtifactBias>();
                 }
-                else if (artifactBias == null && Program.Rng.DieRoll(7) == 1)
+                else if (artifactBias == null && SaveGame.Rng.DieRoll(7) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<PriestlyArtifactBias>();
                 }
@@ -2743,11 +2743,11 @@ internal abstract class Item : IComparable<Item>
             case 7:
             case 8:
                 RandartItemCharacteristics.Dex = true;
-                if (artifactBias == null && Program.Rng.DieRoll(13) != 1)
+                if (artifactBias == null && SaveGame.Rng.DieRoll(13) != 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<DexterityArtifactBias>();
                 }
-                else if (artifactBias == null && Program.Rng.DieRoll(7) == 1)
+                else if (artifactBias == null && SaveGame.Rng.DieRoll(7) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RogueArtifactBias>();
                 }
@@ -2756,11 +2756,11 @@ internal abstract class Item : IComparable<Item>
             case 9:
             case 10:
                 RandartItemCharacteristics.Con = true;
-                if (artifactBias == null && Program.Rng.DieRoll(13) != 1)
+                if (artifactBias == null && SaveGame.Rng.DieRoll(13) != 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ConstitutionArtifactBias>();
                 }
-                else if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
+                else if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RangerArtifactBias>();
                 }
@@ -2769,7 +2769,7 @@ internal abstract class Item : IComparable<Item>
             case 11:
             case 12:
                 RandartItemCharacteristics.Cha = true;
-                if (artifactBias == null && Program.Rng.DieRoll(13) != 1)
+                if (artifactBias == null && SaveGame.Rng.DieRoll(13) != 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<CharismaArtifactBias>();
                 }
@@ -2778,7 +2778,7 @@ internal abstract class Item : IComparable<Item>
             case 13:
             case 14:
                 RandartItemCharacteristics.Stealth = true;
-                if (artifactBias == null && Program.Rng.DieRoll(3) == 1)
+                if (artifactBias == null && SaveGame.Rng.DieRoll(3) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RogueArtifactBias>();
                 }
@@ -2787,7 +2787,7 @@ internal abstract class Item : IComparable<Item>
             case 15:
             case 16:
                 RandartItemCharacteristics.Search = true;
-                if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
+                if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RangerArtifactBias>();
                 }
@@ -2800,7 +2800,7 @@ internal abstract class Item : IComparable<Item>
 
             case 19:
                 RandartItemCharacteristics.Speed = true;
-                if (artifactBias == null && Program.Rng.DieRoll(11) == 1)
+                if (artifactBias == null && SaveGame.Rng.DieRoll(11) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RogueArtifactBias>();
                 }
@@ -2827,7 +2827,7 @@ internal abstract class Item : IComparable<Item>
                 else
                 {
                     RandartItemCharacteristics.Blows = true;
-                    if (artifactBias == null && Program.Rng.DieRoll(11) == 1)
+                    if (artifactBias == null && SaveGame.Rng.DieRoll(11) == 1)
                     {
                         artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<WarriorArtifactBias>();
                     }
@@ -2842,7 +2842,7 @@ internal abstract class Item : IComparable<Item>
         {
             artifactBias.ApplyMiscPowers(this);
         }
-        switch (Program.Rng.DieRoll(31))
+        switch (SaveGame.Rng.DieRoll(31))
         {
             case 1:
                 RandartItemCharacteristics.SustStr = true;
@@ -2900,11 +2900,11 @@ internal abstract class Item : IComparable<Item>
 
             case 9:
                 RandartItemCharacteristics.HoldLife = true;
-                if (artifactBias == null && Program.Rng.DieRoll(5) == 1)
+                if (artifactBias == null && SaveGame.Rng.DieRoll(5) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<PriestlyArtifactBias>();
                 }
-                else if (artifactBias == null && Program.Rng.DieRoll(6) == 1)
+                else if (artifactBias == null && SaveGame.Rng.DieRoll(6) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<NecromanticArtifactBias>();
                 }
@@ -2928,7 +2928,7 @@ internal abstract class Item : IComparable<Item>
 
             case 18:
                 RandartItemCharacteristics.Telepathy = true;
-                if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
+                if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<MageArtifactBias>();
                 }
@@ -2958,7 +2958,7 @@ internal abstract class Item : IComparable<Item>
                 else
                 {
                     RandartItemCharacteristics.ShowMods = true;
-                    BonusArmorClass = 4 + Program.Rng.DieRoll(11);
+                    BonusArmorClass = 4 + SaveGame.Rng.DieRoll(11);
                 }
                 break;
 
@@ -2966,8 +2966,8 @@ internal abstract class Item : IComparable<Item>
             case 28:
             case 29:
                 RandartItemCharacteristics.ShowMods = true;
-                BonusToHit += 4 + Program.Rng.DieRoll(11);
-                BonusDamage += 4 + Program.Rng.DieRoll(11);
+                BonusToHit += 4 + SaveGame.Rng.DieRoll(11);
+                BonusDamage += 4 + SaveGame.Rng.DieRoll(11);
                 break;
 
             case 30:
@@ -2990,7 +2990,7 @@ internal abstract class Item : IComparable<Item>
             }
         }
 
-        switch (Program.Rng.DieRoll(34))
+        switch (SaveGame.Rng.DieRoll(34))
         {
             case 1:
             case 2:
@@ -3000,11 +3000,11 @@ internal abstract class Item : IComparable<Item>
             case 3:
             case 4:
                 RandartItemCharacteristics.SlayEvil = true;
-                if (artifactBias == null && Program.Rng.DieRoll(2) == 1)
+                if (artifactBias == null && SaveGame.Rng.DieRoll(2) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<LawArtifactBias>();
                 }
-                else if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
+                else if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<PriestlyArtifactBias>();
                 }
@@ -3013,7 +3013,7 @@ internal abstract class Item : IComparable<Item>
             case 5:
             case 6:
                 RandartItemCharacteristics.SlayUndead = true;
-                if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
+                if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<PriestlyArtifactBias>();
                 }
@@ -3022,7 +3022,7 @@ internal abstract class Item : IComparable<Item>
             case 7:
             case 8:
                 RandartItemCharacteristics.SlayDemon = true;
-                if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
+                if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<PriestlyArtifactBias>();
                 }
@@ -3057,7 +3057,7 @@ internal abstract class Item : IComparable<Item>
                 if (CanVorpalSlay)
                 {
                     RandartItemCharacteristics.Vorpal = true;
-                    if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
+                    if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
                     {
                         artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<WarriorArtifactBias>();
                     }
@@ -3111,11 +3111,11 @@ internal abstract class Item : IComparable<Item>
             case 29:
             case 30:
                 RandartItemCharacteristics.BrandPois = true;
-                if (artifactBias == null && Program.Rng.DieRoll(3) != 1)
+                if (artifactBias == null && SaveGame.Rng.DieRoll(3) != 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<PoisonArtifactBias>();
                 }
-                else if (artifactBias == null && Program.Rng.DieRoll(6) == 1)
+                else if (artifactBias == null && SaveGame.Rng.DieRoll(6) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<NecromanticArtifactBias>();
                 }
@@ -3148,47 +3148,47 @@ internal abstract class Item : IComparable<Item>
     {
         if (TypeSpecificValue != 0)
         {
-            TypeSpecificValue = 0 - (TypeSpecificValue + Program.Rng.DieRoll(4));
+            TypeSpecificValue = 0 - (TypeSpecificValue + SaveGame.Rng.DieRoll(4));
         }
         if (BonusArmorClass != 0)
         {
-            BonusArmorClass = 0 - (BonusArmorClass + Program.Rng.DieRoll(4));
+            BonusArmorClass = 0 - (BonusArmorClass + SaveGame.Rng.DieRoll(4));
         }
         if (BonusToHit != 0)
         {
-            BonusToHit = 0 - (BonusToHit + Program.Rng.DieRoll(4));
+            BonusToHit = 0 - (BonusToHit + SaveGame.Rng.DieRoll(4));
         }
         if (BonusDamage != 0)
         {
-            BonusDamage = 0 - (BonusDamage + Program.Rng.DieRoll(4));
+            BonusDamage = 0 - (BonusDamage + SaveGame.Rng.DieRoll(4));
         }
         RandartItemCharacteristics.HeavyCurse = true;
         RandartItemCharacteristics.Cursed = true;
-        if (Program.Rng.DieRoll(4) == 1)
+        if (SaveGame.Rng.DieRoll(4) == 1)
         {
             RandartItemCharacteristics.PermaCurse = true;
         }
-        if (Program.Rng.DieRoll(3) == 1)
+        if (SaveGame.Rng.DieRoll(3) == 1)
         {
             RandartItemCharacteristics.DreadCurse = true;
         }
-        if (Program.Rng.DieRoll(2) == 1)
+        if (SaveGame.Rng.DieRoll(2) == 1)
         {
             RandartItemCharacteristics.Aggravate = true;
         }
-        if (Program.Rng.DieRoll(3) == 1)
+        if (SaveGame.Rng.DieRoll(3) == 1)
         {
             RandartItemCharacteristics.DrainExp = true;
         }
-        if (Program.Rng.DieRoll(2) == 1)
+        if (SaveGame.Rng.DieRoll(2) == 1)
         {
             RandartItemCharacteristics.Teleport = true;
         }
-        else if (Program.Rng.DieRoll(3) == 1)
+        else if (SaveGame.Rng.DieRoll(3) == 1)
         {
             RandartItemCharacteristics.NoTele = true;
         }
-        if (SaveGame.BaseCharacterClass.ID != CharacterClass.Warrior && Program.Rng.DieRoll(3) == 1)
+        if (SaveGame.BaseCharacterClass.ID != CharacterClass.Warrior && SaveGame.Rng.DieRoll(3) == 1)
         {
             RandartItemCharacteristics.NoMagic = true;
         }
@@ -3197,18 +3197,18 @@ internal abstract class Item : IComparable<Item>
 
     private string GetTableName()
     {
-        int testcounter = Program.Rng.DieRoll(3) + 1;
+        int testcounter = SaveGame.Rng.DieRoll(3) + 1;
         string outString = "";
-        if (Program.Rng.DieRoll(3) == 2)
+        if (SaveGame.Rng.DieRoll(3) == 2)
         {
             while (testcounter-- != 0)
             {
-                outString += BaseScrollFlavour.Syllables[Program.Rng.RandomLessThan(BaseScrollFlavour.Syllables.Length)];
+                outString += BaseScrollFlavour.Syllables[SaveGame.Rng.RandomLessThan(BaseScrollFlavour.Syllables.Length)];
             }
         }
         else
         {
-            testcounter = Program.Rng.DieRoll(2) + 1;
+            testcounter = SaveGame.Rng.DieRoll(2) + 1;
             while (testcounter-- != 0)
             {
                 outString += SaveGame.SingletonRepository.ElvishText.ToWeightedRandom().Choose();
@@ -3222,7 +3222,7 @@ internal abstract class Item : IComparable<Item>
         Activation type = null;
         if (artifactBias != null)
         {
-            if (Program.Rng.DieRoll(100) < artifactBias.ActivationPowerChance)
+            if (SaveGame.Rng.DieRoll(100) < artifactBias.ActivationPowerChance)
             {
                 type = artifactBias.GetActivationPowerType(this);
             }
@@ -3230,7 +3230,7 @@ internal abstract class Item : IComparable<Item>
         if (type == null)
         {
             int chance = 0;
-            while (type == null || Program.Rng.DieRoll(100) >= chance)
+            while (type == null || SaveGame.Rng.DieRoll(100) >= chance)
             {
                 type = SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
                 chance = type.RandomChance;
@@ -3257,17 +3257,17 @@ internal abstract class Item : IComparable<Item>
         }
         int bonus = max * level / Constants.MaxDepth;
         int extra = max * level % Constants.MaxDepth;
-        if (Program.Rng.RandomLessThan(Constants.MaxDepth) < extra)
+        if (SaveGame.Rng.RandomLessThan(Constants.MaxDepth) < extra)
         {
             bonus++;
         }
         int stand = max / 4;
         extra = max % 4;
-        if (Program.Rng.RandomLessThan(4) < extra)
+        if (SaveGame.Rng.RandomLessThan(4) < extra)
         {
             stand++;
         }
-        int value = Program.Rng.RandomNormal(bonus, stand);
+        int value = SaveGame.Rng.RandomNormal(bonus, stand);
         if (value < 0)
         {
             return 0;
@@ -3370,7 +3370,7 @@ internal abstract class Item : IComparable<Item>
         int t = 0;
         for (int i = 0; i < num; i++)
         {
-            t += Program.Rng.RandomLessThan(max);
+            t += SaveGame.Rng.RandomLessThan(max);
         }
         return t;
     }

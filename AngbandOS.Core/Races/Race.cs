@@ -84,9 +84,9 @@ internal abstract class Race
         string name = "";
         do
         {
-            name = syllables.BeginningSyllables[Program.Rng.RandomLessThan(syllables.BeginningSyllables.Length)];
-            name += syllables.MiddleSyllables[Program.Rng.RandomLessThan(syllables.MiddleSyllables.Length)];
-            name += syllables.EndingSyllables[Program.Rng.RandomLessThan(syllables.EndingSyllables.Length)];
+            name = syllables.BeginningSyllables[SaveGame.Rng.RandomLessThan(syllables.BeginningSyllables.Length)];
+            name += syllables.MiddleSyllables[SaveGame.Rng.RandomLessThan(syllables.MiddleSyllables.Length)];
+            name += syllables.EndingSyllables[SaveGame.Rng.RandomLessThan(syllables.EndingSyllables.Length)];
         } while (name.Length > 12);
 
         return name;

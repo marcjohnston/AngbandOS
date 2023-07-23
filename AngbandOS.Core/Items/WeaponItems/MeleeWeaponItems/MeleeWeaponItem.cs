@@ -23,26 +23,26 @@ internal abstract class MeleeWeaponItem : WeaponItem
         if (power > 1)
         {
             IArtifactBias artifactBias = null;
-            switch (Program.Rng.DieRoll(CanBeWeaponOfLaw || CanBeWeaponOfSharpness ? 42 : 40))
+            switch (SaveGame.Rng.DieRoll(CanBeWeaponOfLaw || CanBeWeaponOfSharpness ? 42 : 40))
             {
                 case 1:
                     RareItemTypeIndex = RareItemTypeEnum.WeaponElderSign;
-                    if (Program.Rng.DieRoll(4) == 1)
+                    if (SaveGame.Rng.DieRoll(4) == 1)
                     {
                         RandartItemCharacteristics.Blows = true;
                         if (TypeSpecificValue > 2)
                         {
-                            TypeSpecificValue -= Program.Rng.DieRoll(2);
+                            TypeSpecificValue -= SaveGame.Rng.DieRoll(2);
                         }
                     }
                     break;
                 case 2:
                     RareItemTypeIndex = RareItemTypeEnum.WeaponDefender;
-                    if (Program.Rng.DieRoll(3) == 1)
+                    if (SaveGame.Rng.DieRoll(3) == 1)
                     {
                         RandartItemCharacteristics.ResPois = true;
                     }
-                    ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
+                    ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
                     break;
                 case 3:
                     RareItemTypeIndex = RareItemTypeEnum.WeaponOfVitriol;
@@ -59,7 +59,7 @@ internal abstract class MeleeWeaponItem : WeaponItem
                 case 7:
                 case 8:
                     RareItemTypeIndex = RareItemTypeEnum.WeaponOfSlayAnimal;
-                    if (Program.Rng.RandomLessThan(100) < 20)
+                    if (SaveGame.Rng.RandomLessThan(100) < 20)
                     {
                         RareItemTypeIndex = RareItemTypeEnum.WeaponOfAnimalBane;
                     }
@@ -67,21 +67,21 @@ internal abstract class MeleeWeaponItem : WeaponItem
                 case 9:
                 case 10:
                     RareItemTypeIndex = RareItemTypeEnum.WeaponOfSlayDragon;
-                    ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(12) + 4);
-                    if (Program.Rng.RandomLessThan(100) < 20)
+                    ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(12) + 4);
+                    if (SaveGame.Rng.RandomLessThan(100) < 20)
                     {
-                        if (Program.Rng.DieRoll(3) == 1)
+                        if (SaveGame.Rng.DieRoll(3) == 1)
                         {
                             RandartItemCharacteristics.ResPois = true;
                         }
-                        ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(14) + 4);
+                        ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(14) + 4);
                         RareItemTypeIndex = RareItemTypeEnum.WeaponOfDragonBane;
                     }
                     break;
                 case 11:
                 case 12:
                     RareItemTypeIndex = RareItemTypeEnum.WeaponOfSlayEvil;
-                    if (Program.Rng.RandomLessThan(100) < 20)
+                    if (SaveGame.Rng.RandomLessThan(100) < 20)
                     {
                         RandartItemCharacteristics.ResFear = true;
                         RandartItemCharacteristics.Blessed = true;
@@ -92,7 +92,7 @@ internal abstract class MeleeWeaponItem : WeaponItem
                 case 14:
                     RareItemTypeIndex = RareItemTypeEnum.WeaponOfSlayUndead;
                     RandartItemCharacteristics.HoldLife = true;
-                    if (Program.Rng.RandomLessThan(100) < 20)
+                    if (SaveGame.Rng.RandomLessThan(100) < 20)
                     {
                         RandartItemCharacteristics.ResNether = true;
                         RareItemTypeIndex = RareItemTypeEnum.WeaponOfUndeadBane;
@@ -120,7 +120,7 @@ internal abstract class MeleeWeaponItem : WeaponItem
                     break;
                 case 27:
                     RareItemTypeIndex = RareItemTypeEnum.WeaponOfKadath;
-                    if (Program.Rng.DieRoll(3) == 1)
+                    if (SaveGame.Rng.DieRoll(3) == 1)
                     {
                         RandartItemCharacteristics.ResFear = true;
                     }
@@ -141,7 +141,7 @@ internal abstract class MeleeWeaponItem : WeaponItem
                     break;
                 case 34:
                     RareItemTypeIndex = RareItemTypeEnum.WeaponChaotic;
-                    ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(34) + 4);
+                    ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(34) + 4);
                     break;
                 case 35:
                     CreateRandart(false);
@@ -149,7 +149,7 @@ internal abstract class MeleeWeaponItem : WeaponItem
                 case 36:
                 case 37:
                     RareItemTypeIndex = RareItemTypeEnum.WeaponOfSlaying;
-                    if (Program.Rng.DieRoll(3) == 1)
+                    if (SaveGame.Rng.DieRoll(3) == 1)
                     {
                         DamageDice *= 2;
                     }
@@ -158,17 +158,17 @@ internal abstract class MeleeWeaponItem : WeaponItem
                         do
                         {
                             DamageDice++;
-                        } while (Program.Rng.DieRoll(DamageDice) == 1);
+                        } while (SaveGame.Rng.DieRoll(DamageDice) == 1);
                         do
                         {
                             DamageDiceSides++;
-                        } while (Program.Rng.DieRoll(DamageDiceSides) == 1);
+                        } while (SaveGame.Rng.DieRoll(DamageDiceSides) == 1);
                     }
-                    if (Program.Rng.DieRoll(5) == 1)
+                    if (SaveGame.Rng.DieRoll(5) == 1)
                     {
                         RandartItemCharacteristics.BrandPois = true;
                     }
-                    if (CapableOfVorpalSlaying && Program.Rng.DieRoll(3) == 1)
+                    if (CapableOfVorpalSlaying && SaveGame.Rng.DieRoll(3) == 1)
                     {
                         RandartItemCharacteristics.Vorpal = true;
                     }
@@ -176,27 +176,27 @@ internal abstract class MeleeWeaponItem : WeaponItem
                 case 38:
                 case 39:
                     RareItemTypeIndex = RareItemTypeEnum.WeaponPlanarWeapon;
-                    ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
-                    if (Program.Rng.DieRoll(5) == 1)
+                    ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
+                    if (SaveGame.Rng.DieRoll(5) == 1)
                     {
                         RandartItemCharacteristics.SlayDemon = true;
                     }
                     break;
                 case 40:
                     RareItemTypeIndex = RareItemTypeEnum.WeaponOfLaw;
-                    if (Program.Rng.DieRoll(3) == 1)
+                    if (SaveGame.Rng.DieRoll(3) == 1)
                     {
                         RandartItemCharacteristics.HoldLife = true;
                     }
-                    if (Program.Rng.DieRoll(3) == 1)
+                    if (SaveGame.Rng.DieRoll(3) == 1)
                     {
                         RandartItemCharacteristics.Dex = true;
                     }
-                    if (Program.Rng.DieRoll(5) == 1)
+                    if (SaveGame.Rng.DieRoll(5) == 1)
                     {
                         RandartItemCharacteristics.ResFear = true;
                     }
-                    ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
+                    ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
                     break;
                 case 41:
                 case 42:
@@ -208,7 +208,7 @@ internal abstract class MeleeWeaponItem : WeaponItem
                     else
                     {
                         RareItemTypeIndex = RareItemTypeEnum.WeaponOfEarthquakes;
-                        if (Program.Rng.DieRoll(3) == 1)
+                        if (SaveGame.Rng.DieRoll(3) == 1)
                         {
                             RandartItemCharacteristics.Blows = true;
                         }
@@ -216,7 +216,7 @@ internal abstract class MeleeWeaponItem : WeaponItem
                     }
                     break;
             }
-            while (Program.Rng.RandomLessThan(10 * DamageDice * DamageDiceSides) == 0)
+            while (SaveGame.Rng.RandomLessThan(10 * DamageDice * DamageDiceSides) == 0)
             {
                 DamageDice++;
             }
@@ -227,10 +227,10 @@ internal abstract class MeleeWeaponItem : WeaponItem
         }
         else if (power < -1)
         {
-            if (Program.Rng.RandomLessThan(Constants.MaxDepth) < level)
+            if (SaveGame.Rng.RandomLessThan(Constants.MaxDepth) < level)
             {
                 RareItemTypeIndex = RareItemTypeEnum.WeaponOfLeng;
-                if (Program.Rng.DieRoll(6) == 1)
+                if (SaveGame.Rng.DieRoll(6) == 1)
                 {
                     RandartItemCharacteristics.DreadCurse = true;
                 }

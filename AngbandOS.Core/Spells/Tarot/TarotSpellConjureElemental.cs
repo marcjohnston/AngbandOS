@@ -13,7 +13,7 @@ internal class TarotSpellConjureElemental : Spell
     private TarotSpellConjureElemental(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (Program.Rng.DieRoll(6) > 3)
+        if (SaveGame.Rng.DieRoll(6) > 3)
         {
             if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new ElementalMonsterSelector(), false))
             {

@@ -24,7 +24,7 @@ internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact, IFixedArtifactAc
             item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
 
             IArtifactBias artifactBias = null;
-            item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
+            item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
         }
         else
         {

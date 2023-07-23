@@ -18,7 +18,7 @@ internal class FlatulentRandomMutation : Mutation
 
     public override void OnProcessWorld(SaveGame saveGame)
     {
-        if (Program.Rng.DieRoll(3000) == 13)
+        if (SaveGame.Rng.DieRoll(3000) == 13)
         {
             saveGame.Disturb(false);
             saveGame.MsgPrint("BRRAAAP! Oops.");

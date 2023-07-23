@@ -30,7 +30,7 @@ internal class RodDisarming : RodItemFactory
         {
             zapRodEvent.Identified = true;
         }
-        zapRodEvent.Item.TypeSpecificValue = 15 + Program.Rng.DieRoll(15);
+        zapRodEvent.Item.TypeSpecificValue = 15 + SaveGame.Rng.DieRoll(15);
     }
     public override Item CreateItem() => new DisarmingRodItem(SaveGame);
 }

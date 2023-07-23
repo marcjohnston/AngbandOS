@@ -16,7 +16,7 @@ internal class NecromanticArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.ResNether)
         {
             item.RandartItemCharacteristics.ResNether = true;
-            if (Program.Rng.DieRoll(2) == 1)
+            if (SaveGame.Rng.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -24,7 +24,7 @@ internal class NecromanticArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.ResPois)
         {
             item.RandartItemCharacteristics.ResPois = true;
-            if (Program.Rng.DieRoll(2) == 1)
+            if (SaveGame.Rng.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -32,7 +32,7 @@ internal class NecromanticArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.ResDark)
         {
             item.RandartItemCharacteristics.ResDark = true;
-            if (Program.Rng.DieRoll(2) == 1)
+            if (SaveGame.Rng.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -47,15 +47,15 @@ internal class NecromanticArtifactBias : ArtifactBias
             if (!item.RandartItemCharacteristics.Vampiric)
             {
                 item.RandartItemCharacteristics.Vampiric = true;
-                if (Program.Rng.DieRoll(2) == 1)
+                if (SaveGame.Rng.DieRoll(2) == 1)
                 {
                     return true;
                 }
             }
-            if (!item.RandartItemCharacteristics.BrandPois && Program.Rng.DieRoll(2) == 1)
+            if (!item.RandartItemCharacteristics.BrandPois && SaveGame.Rng.DieRoll(2) == 1)
             {
                 item.RandartItemCharacteristics.BrandPois = true;
-                if (Program.Rng.DieRoll(2) == 1)
+                if (SaveGame.Rng.DieRoll(2) == 1)
                 {
                     return true;
                 }
@@ -66,31 +66,31 @@ internal class NecromanticArtifactBias : ArtifactBias
 
     public override Activation GetActivationPowerType(Item item)
     {
-        if (Program.Rng.DieRoll(66) == 1)
+        if (SaveGame.Rng.DieRoll(66) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get<WraithActivation>();
         }
-        else if (Program.Rng.DieRoll(13) == 1)
+        else if (SaveGame.Rng.DieRoll(13) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get<DispGoodActivation>();
         }
-        else if (Program.Rng.DieRoll(9) == 1)
+        else if (SaveGame.Rng.DieRoll(9) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get<MassGenoActivation>();
         }
-        else if (Program.Rng.DieRoll(8) == 1)
+        else if (SaveGame.Rng.DieRoll(8) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get<CarnageActivation>();
         }
-        else if (Program.Rng.DieRoll(13) == 1)
+        else if (SaveGame.Rng.DieRoll(13) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get<SummonUndeadActivation>();
         }
-        else if (Program.Rng.DieRoll(9) == 1)
+        else if (SaveGame.Rng.DieRoll(9) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get<Vampire2Activation>();
         }
-        else if (Program.Rng.DieRoll(6) == 1)
+        else if (SaveGame.Rng.DieRoll(6) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get<CharmUndeadActivation>();
         }

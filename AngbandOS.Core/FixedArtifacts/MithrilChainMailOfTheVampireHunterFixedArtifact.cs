@@ -25,7 +25,7 @@ internal class MithrilChainMailOfTheVampireHunterFixedArtifact : FixedArtifact, 
         saveGame.TimedStun.ResetTimer();
         saveGame.TimedConfusion.ResetTimer();
         saveGame.TimedBlindness.ResetTimer();
-        saveGame.TimedHeroism.AddTimer(Program.Rng.DieRoll(25) + 25);
+        saveGame.TimedHeroism.AddTimer(SaveGame.Rng.DieRoll(25) + 25);
         saveGame.RestoreHealth(777);
         item.RechargeTimeLeft = 300;
     }

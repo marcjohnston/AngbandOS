@@ -36,7 +36,7 @@ internal class WaterProjectile : Projectile
         {
             note = " resists.";
             dam *= 3;
-            dam /= Program.Rng.DieRoll(6) + 6;
+            dam /= SaveGame.Rng.DieRoll(6) + 6;
             if (seen)
             {
                 rPtr.Knowledge.Characteristics.ResistWater = true;
@@ -62,13 +62,13 @@ internal class WaterProjectile : Projectile
         }
         if (!SaveGame.HasSoundResistance)
         {
-            SaveGame.TimedStun.AddTimer(Program.Rng.DieRoll(40));
+            SaveGame.TimedStun.AddTimer(SaveGame.Rng.DieRoll(40));
         }
         if (!SaveGame.HasConfusionResistance)
         {
-            SaveGame.TimedConfusion.AddTimer(Program.Rng.DieRoll(5) + 5);
+            SaveGame.TimedConfusion.AddTimer(SaveGame.Rng.DieRoll(5) + 5);
         }
-        if (Program.Rng.DieRoll(5) == 1)
+        if (SaveGame.Rng.DieRoll(5) == 1)
         {
             SaveGame.InvenDamage(SaveGame.SetColdDestroy, 3);
         }

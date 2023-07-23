@@ -18,12 +18,12 @@ internal class AttDemonRandomMutation : Mutation
 
     public override void OnProcessWorld(SaveGame saveGame)
     {
-        if (saveGame.HasAntiMagic || Program.Rng.DieRoll(6666) != 666)
+        if (saveGame.HasAntiMagic || SaveGame.Rng.DieRoll(6666) != 666)
         {
             return;
         }
         bool dSummon;
-        if (Program.Rng.DieRoll(6) == 1)
+        if (SaveGame.Rng.DieRoll(6) == 1)
         {
             dSummon = saveGame.SummonSpecificFriendly(saveGame.MapY, saveGame.MapX, saveGame.Difficulty, new DemonMonsterSelector(), true);
         }

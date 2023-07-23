@@ -24,7 +24,7 @@ internal abstract class DiggingWeaponItem : WeaponItem
         }
         else if (power < -1)
         {
-            TypeSpecificValue = 0 - (5 + Program.Rng.DieRoll(5));
+            TypeSpecificValue = 0 - (5 + SaveGame.Rng.DieRoll(5));
         }
         else if (power < 0)
         {

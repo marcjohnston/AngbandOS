@@ -16,7 +16,7 @@ internal class ConstitutionArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.Con)
         {
             item.RandartItemCharacteristics.Con = true;
-            if (Program.Rng.DieRoll(2) == 1)
+            if (SaveGame.Rng.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -29,7 +29,7 @@ internal class ConstitutionArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.SustCon)
         {
             item.RandartItemCharacteristics.SustCon = true;
-            if (Program.Rng.DieRoll(2) == 1)
+            if (SaveGame.Rng.DieRoll(2) == 1)
             {
                 return true;
             }

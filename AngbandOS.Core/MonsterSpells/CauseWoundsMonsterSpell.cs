@@ -41,7 +41,7 @@ internal abstract class CauseWoundsMonsterSpell : MonsterSpell
     protected virtual int TimedBleeding => 0;
     public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
     {
-        if (Program.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
+        if (SaveGame.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
         {
             saveGame.MsgPrint("You resist the effects!");
         }
@@ -67,7 +67,7 @@ internal abstract class CauseWoundsMonsterSpell : MonsterSpell
         bool seeTarget = !blind && target.IsVisible;
         MonsterRace targetRace = target.Race;
 
-        if (targetRace.Level > Program.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
+        if (targetRace.Level > SaveGame.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
         {
             if (seeTarget)
             {

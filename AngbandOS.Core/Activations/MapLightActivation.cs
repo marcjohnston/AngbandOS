@@ -21,11 +21,11 @@ internal class MapLightActivation : Activation
     public override bool Activate()
     {
         SaveGame.MapArea();
-        SaveGame.LightArea(Program.Rng.DiceRoll(2, 15), 3);
+        SaveGame.LightArea(SaveGame.Rng.DiceRoll(2, 15), 3);
         return true;
     }
 
-    public override int RechargeTime() => Program.Rng.RandomLessThan(50) + 50;
+    public override int RechargeTime() => SaveGame.Rng.RandomLessThan(50) + 50;
 
     public override int Value => 500;
 

@@ -14,7 +14,7 @@ internal class TarotSpellSummonAnimal : Spell
     public override void Cast()
     {
         SaveGame.MsgPrint("You concentrate on the image of an animal...");
-        if (Program.Rng.DieRoll(5) > 2)
+        if (SaveGame.Rng.DieRoll(5) > 2)
         {
             if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new AnimalRangerMonsterSelector(), false))
             {

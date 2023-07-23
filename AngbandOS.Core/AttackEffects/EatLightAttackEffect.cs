@@ -52,7 +52,7 @@ internal class EatLightAttackEffect : AttackEffect
         // Only dim lights that consume fuel
         if (item.TypeSpecificValue > 0 && item.FixedArtifact == null)
         {
-            item.TypeSpecificValue -= 250 + Program.Rng.DieRoll(250);
+            item.TypeSpecificValue -= 250 + SaveGame.Rng.DieRoll(250);
             if (item.TypeSpecificValue < 1)
             {
                 item.TypeSpecificValue = 1;

@@ -16,7 +16,7 @@ internal class DoomAmuletJeweleryItem : AmuletJeweleryItem
     {
         IdentBroken = true;
         IdentCursed = true;
-        TypeSpecificValue = 0 - (Program.Rng.DieRoll(5) + GetBonusValue(5, level));
-        BonusArmorClass = 0 - (Program.Rng.DieRoll(5) + GetBonusValue(5, level));
+        TypeSpecificValue = 0 - (SaveGame.Rng.DieRoll(5) + GetBonusValue(5, level));
+        BonusArmorClass = 0 - (SaveGame.Rng.DieRoll(5) + GetBonusValue(5, level));
     }
 }

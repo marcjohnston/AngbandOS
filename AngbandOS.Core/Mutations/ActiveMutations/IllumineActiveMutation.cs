@@ -15,7 +15,7 @@ internal class IllumineActiveMutation : Mutation
     {
         if (saveGame.CheckIfRacialPowerWorks(3, 2, Ability.Intelligence, 10))
         {
-            saveGame.LightArea(Program.Rng.DiceRoll(2, saveGame.ExperienceLevel / 2), (saveGame.ExperienceLevel / 10) + 1);
+            saveGame.LightArea(SaveGame.Rng.DiceRoll(2, saveGame.ExperienceLevel / 2), (saveGame.ExperienceLevel / 10) + 1);
         }
     }
 

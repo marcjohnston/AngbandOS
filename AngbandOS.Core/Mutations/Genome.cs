@@ -173,7 +173,7 @@ internal class Genome // TODO: This is just a container
         {
             total += mutation.Frequency;
         }
-        int roll = Program.Rng.DieRoll(total);
+        int roll = SaveGame.Rng.DieRoll(total);
         for (int i = 0; i < _notPossessed.Count; i++)
         {
             roll -= _notPossessed[i].Frequency;
@@ -257,7 +257,7 @@ internal class Genome // TODO: This is just a container
         {
             total += mutation.Frequency;
         }
-        int roll = Program.Rng.DieRoll(total);
+        int roll = SaveGame.Rng.DieRoll(total);
         for (int i = 0; i < _possessed.Count; i++)
         {
             roll -= _possessed[i].Frequency;

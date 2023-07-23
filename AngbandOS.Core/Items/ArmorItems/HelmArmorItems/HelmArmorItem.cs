@@ -16,7 +16,7 @@ internal abstract class HelmArmorItem : ArmourItem
 
     protected override void ApplyRandomGoodRareCharacteristics()
     {
-        switch (Program.Rng.DieRoll(14))
+        switch (SaveGame.Rng.DieRoll(14))
         {
             case 1:
             case 2:
@@ -33,7 +33,7 @@ internal abstract class HelmArmorItem : ArmourItem
             case 7:
             case 8:
                 RareItemTypeIndex = RareItemTypeEnum.HatOfSeeing;
-                if (Program.Rng.DieRoll(7) == 1)
+                if (SaveGame.Rng.DieRoll(7) == 1)
                 {
                     RandartItemCharacteristics.Telepathy = true;
                 }
@@ -54,7 +54,7 @@ internal abstract class HelmArmorItem : ArmourItem
 
     protected override void ApplyRandomPoorRareCharacteristics()
     {
-        switch (Program.Rng.DieRoll(7))
+        switch (SaveGame.Rng.DieRoll(7))
         {
             case 1:
             case 2:
@@ -91,7 +91,7 @@ internal abstract class HelmArmorItem : ArmourItem
 
             if (power > 1)
             {
-                if (Program.Rng.DieRoll(20) == 1)
+                if (SaveGame.Rng.DieRoll(20) == 1)
                 {
                     CreateRandart(false);
                 }

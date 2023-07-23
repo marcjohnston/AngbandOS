@@ -27,7 +27,7 @@ internal class ConfusionMushroomFoodItemFactory : MushroomFoodItemFactory
         SaveGame.PlaySound(SoundEffectEnum.Eat);
         if (!SaveGame.HasConfusionResistance)
         {
-            if (SaveGame.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(10) + 10))
+            if (SaveGame.TimedConfusion.AddTimer(SaveGame.Rng.RandomLessThan(10) + 10))
             {
                 return true;
             }

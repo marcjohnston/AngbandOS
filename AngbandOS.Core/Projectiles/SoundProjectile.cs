@@ -86,12 +86,12 @@ internal class SoundProjectile : Projectile
         {
             obvious = true;
         }
-        int doStun = (10 + Program.Rng.DieRoll(15) + r) / (r + 1);
+        int doStun = (10 + SaveGame.Rng.DieRoll(15) + r) / (r + 1);
         if (rPtr.BreatheSound)
         {
             note = " resists.";
             dam *= 2;
-            dam /= Program.Rng.DieRoll(6) + 6;
+            dam /= SaveGame.Rng.DieRoll(6) + 6;
         }
         if (doStun != 0 && !rPtr.BreatheSound && !rPtr.BreatheForce)
         {
@@ -129,14 +129,14 @@ internal class SoundProjectile : Projectile
         if (SaveGame.HasSoundResistance)
         {
             dam *= 5;
-            dam /= Program.Rng.DieRoll(6) + 6;
+            dam /= SaveGame.Rng.DieRoll(6) + 6;
         }
         else
         {
-            int kk = Program.Rng.DieRoll(dam > 90 ? 35 : (dam / 3) + 5);
+            int kk = SaveGame.Rng.DieRoll(dam > 90 ? 35 : (dam / 3) + 5);
             SaveGame.TimedStun.AddTimer(kk);
         }
-        if (!SaveGame.HasSoundResistance || Program.Rng.DieRoll(13) == 1)
+        if (!SaveGame.HasSoundResistance || SaveGame.Rng.DieRoll(13) == 1)
         {
             SaveGame.InvenDamage(SaveGame.SetColdDestroy, 2);
         }

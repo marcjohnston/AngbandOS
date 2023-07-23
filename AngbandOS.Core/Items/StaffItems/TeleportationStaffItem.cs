@@ -13,6 +13,6 @@ internal class TeleportationStaffItem : StaffItem
     public TeleportationStaffItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<StaffTeleportation>()) { }
     protected override void ApplyMagic(int level, int power, Store? store)
     {
-        TypeSpecificValue = Program.Rng.DieRoll(4) + 5;
+        TypeSpecificValue = SaveGame.Rng.DieRoll(4) + 5;
     }
 }

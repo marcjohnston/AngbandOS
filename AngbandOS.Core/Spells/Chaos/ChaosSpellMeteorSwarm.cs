@@ -16,7 +16,7 @@ internal class ChaosSpellMeteorSwarm : Spell
         int x = SaveGame.MapX;
         int y = SaveGame.MapY;
         int count = 0;
-        int b = 10 + Program.Rng.DieRoll(10);
+        int b = 10 + SaveGame.Rng.DieRoll(10);
         for (int i = 0; i < b; i++)
         {
             int d;
@@ -27,8 +27,8 @@ internal class ChaosSpellMeteorSwarm : Spell
                 {
                     break;
                 }
-                x = SaveGame.MapX - 5 + Program.Rng.DieRoll(10);
-                y = SaveGame.MapY - 5 + Program.Rng.DieRoll(10);
+                x = SaveGame.MapX - 5 + SaveGame.Rng.DieRoll(10);
+                y = SaveGame.MapY - 5 + SaveGame.Rng.DieRoll(10);
                 int dx = SaveGame.MapX > x ? SaveGame.MapX - x : x - SaveGame.MapX;
                 int dy = SaveGame.MapY > y ? SaveGame.MapY - y : y - SaveGame.MapY;
                 d = dy > dx ? dy + (dx >> 1) : dx + (dy >> 1);

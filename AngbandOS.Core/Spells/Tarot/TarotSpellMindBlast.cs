@@ -33,7 +33,7 @@ internal class TarotSpellMindBlast : Spell
             return;
         }
         SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir,
-            Program.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 3));
+            SaveGame.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 3));
     }
 
     public override string Name => "Mind Blast";

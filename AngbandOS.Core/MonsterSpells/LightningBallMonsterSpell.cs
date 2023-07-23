@@ -18,7 +18,7 @@ internal class LightningBallMonsterSpell : BallProjectileMonsterSpell
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return Program.Rng.DieRoll(monsterLevel * 3 / 2) + 8;
+        return SaveGame.Rng.DieRoll(monsterLevel * 3 / 2) + 8;
     }
     public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get<ElecSpellResistantDetection>() };
 }

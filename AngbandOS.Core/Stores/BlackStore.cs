@@ -70,7 +70,7 @@ internal class BlackStore : Store
     protected override Item CreateItem()
     {
         int level;
-        level = 35 + Program.Rng.RandomLessThan(35);
+        level = 35 + SaveGame.Rng.RandomLessThan(35);
         ItemFactory itemType = SaveGame.RandomItemType(level, false, false);
         if (itemType == null)
         {

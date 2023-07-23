@@ -13,7 +13,7 @@ internal class ChaosSpellSummonDemon : Spell
     private ChaosSpellSummonDemon(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (Program.Rng.DieRoll(3) == 1)
+        if (SaveGame.Rng.DieRoll(3) == 1)
         {
             if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel * 3 / 2, new DemonMonsterSelector()))
             {

@@ -25,7 +25,7 @@ internal class DetectAllActivation : Activation
         return true;
     }
 
-    public override int RechargeTime() => Program.Rng.RandomLessThan(55) + 55;
+    public override int RechargeTime() => SaveGame.Rng.RandomLessThan(55) + 55;
 
     public override int Value => 1000;
 

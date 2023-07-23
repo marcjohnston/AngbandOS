@@ -17,10 +17,10 @@ internal class PseudoDragonScaleMailArmorItem : DragonScaleMailArmorItem, IItemA
         {
             return;
         }
-        int chance = Program.Rng.RandomLessThan(2);
+        int chance = SaveGame.Rng.RandomLessThan(2);
         string element = chance == 0 ? "light" : "darkness";
         SaveGame.MsgPrint($"You breathe {element}.");
         SaveGame.FireBall(chance == 0 ? (Projectile)SaveGame.SingletonRepository.Projectiles.Get<LightProjectile>() : SaveGame.SingletonRepository.Projectiles.Get<DarkProjectile>(), dir, 200, -2);
-        RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
+        RechargeTimeLeft = SaveGame.Rng.RandomLessThan(300) + 300;
     }
 }

@@ -61,12 +61,12 @@ internal class ZapRodScript : Script
         }
         chance -= itemLevel > 50 ? 50 : itemLevel;
         // There's always a small chance of success
-        if (chance < Constants.UseDevice && Program.Rng.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
+        if (chance < Constants.UseDevice && SaveGame.Rng.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
         {
             chance = Constants.UseDevice;
         }
         // Do the actual check
-        if (chance < Constants.UseDevice || Program.Rng.DieRoll(chance) < Constants.UseDevice)
+        if (chance < Constants.UseDevice || SaveGame.Rng.DieRoll(chance) < Constants.UseDevice)
         {
             SaveGame.MsgPrint("You failed to use the rod properly.");
             return false;

@@ -28,7 +28,7 @@ internal class ScrollIce : ScrollItemClass
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<IceProjectile>(), 0, 175, 4);
         if (!(SaveGame.TimedColdResistance.TurnsRemaining != 0 || SaveGame.HasColdResistance || SaveGame.HasColdImmunity))
         {
-            SaveGame.TakeHit(100 + Program.Rng.DieRoll(100), "a Scroll of Ice");
+            SaveGame.TakeHit(100 + SaveGame.Rng.DieRoll(100), "a Scroll of Ice");
         }
         eventArgs.Identified = true;
     }

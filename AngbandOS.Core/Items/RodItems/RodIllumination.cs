@@ -26,11 +26,11 @@ internal class RodIllumination : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        if (SaveGame.LightArea(Program.Rng.DiceRoll(2, 8), 2))
+        if (SaveGame.LightArea(SaveGame.Rng.DiceRoll(2, 8), 2))
         {
             zapRodEvent.Identified = true;
         }
-        zapRodEvent.Item.TypeSpecificValue = 10 + Program.Rng.DieRoll(11);
+        zapRodEvent.Item.TypeSpecificValue = 10 + SaveGame.Rng.DieRoll(11);
     }
     public override Item CreateItem() => new IlluminationRodItem(SaveGame);
 }

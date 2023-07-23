@@ -18,13 +18,13 @@ internal class DreadCurseMonsterSpell : MonsterSpell
 
     public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
     {
-        if (Program.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
+        if (SaveGame.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
         {
             saveGame.MsgPrint("You resist the effects!");
         }
         else
         {
-            int dummy = (65 + Program.Rng.DieRoll(25)) * saveGame.Health / 100;
+            int dummy = (65 + SaveGame.Rng.DieRoll(25)) * saveGame.Health / 100;
             saveGame.MsgPrint("Your feel your life fade away!");
             saveGame.TakeHit(dummy, monster.Name);
             saveGame.CurseEquipment(100, 20);
@@ -51,9 +51,9 @@ internal class DreadCurseMonsterSpell : MonsterSpell
         }
         else
         {
-            if (monster.Race.Level + Program.Rng.DieRoll(20) > targetRace.Level + 10 + Program.Rng.DieRoll(20))
+            if (monster.Race.Level + SaveGame.Rng.DieRoll(20) > targetRace.Level + 10 + SaveGame.Rng.DieRoll(20))
             {
-                target.Health -= (65 + Program.Rng.DieRoll(25)) * target.Health / 100;
+                target.Health -= (65 + SaveGame.Rng.DieRoll(25)) * target.Health / 100;
                 if (target.Health < 1)
                 {
                     target.Health = 1;

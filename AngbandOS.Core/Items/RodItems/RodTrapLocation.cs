@@ -30,7 +30,7 @@ internal class RodTrapLocation : RodItemFactory
         {
             zapRodEvent.Identified = true;
         }
-        zapRodEvent.Item.TypeSpecificValue = 10 + Program.Rng.DieRoll(10);
+        zapRodEvent.Item.TypeSpecificValue = 10 + SaveGame.Rng.DieRoll(10);
     }
     public override Item CreateItem() => new TrapLocationRodItem(SaveGame);
 }

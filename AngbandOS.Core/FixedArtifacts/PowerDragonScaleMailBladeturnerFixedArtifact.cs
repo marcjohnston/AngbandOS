@@ -27,14 +27,14 @@ internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact, IFi
         saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), dir, 300, 4);
         saveGame.MsgPrint("Your armor glows many colors...");
         saveGame.TimedFear.ResetTimer();
-        saveGame.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(50) + 50);
+        saveGame.TimedSuperheroism.AddTimer(SaveGame.Rng.DieRoll(50) + 50);
         saveGame.RestoreHealth(30);
-        saveGame.TimedBlessing.AddTimer(Program.Rng.DieRoll(50) + 50);
-        saveGame.TimedAcidResistance.AddTimer(Program.Rng.DieRoll(50) + 50);
-        saveGame.TimedLightningResistance.AddTimer(Program.Rng.DieRoll(50) + 50);
-        saveGame.TimedFireResistance.AddTimer(Program.Rng.DieRoll(50) + 50);
-        saveGame.TimedColdResistance.AddTimer(Program.Rng.DieRoll(50) + 50);
-        saveGame.TimedPoisonResistance.AddTimer(Program.Rng.DieRoll(50) + 50);
+        saveGame.TimedBlessing.AddTimer(SaveGame.Rng.DieRoll(50) + 50);
+        saveGame.TimedAcidResistance.AddTimer(SaveGame.Rng.DieRoll(50) + 50);
+        saveGame.TimedLightningResistance.AddTimer(SaveGame.Rng.DieRoll(50) + 50);
+        saveGame.TimedFireResistance.AddTimer(SaveGame.Rng.DieRoll(50) + 50);
+        saveGame.TimedColdResistance.AddTimer(SaveGame.Rng.DieRoll(50) + 50);
+        saveGame.TimedPoisonResistance.AddTimer(SaveGame.Rng.DieRoll(50) + 50);
         item.RechargeTimeLeft = 400;
     }
     public string DescribeActivationEffect() => "breathe elements (300), berserk rage, bless, and resistance";

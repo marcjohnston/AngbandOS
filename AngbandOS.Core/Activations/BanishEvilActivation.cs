@@ -27,7 +27,7 @@ internal class BanishEvilActivation : Activation
         return true;
     }
 
-    public override int RechargeTime() => 250 + Program.Rng.DieRoll(250);
+    public override int RechargeTime() => 250 + SaveGame.Rng.DieRoll(250);
 
     public override int Value => 3000;
 

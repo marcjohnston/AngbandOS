@@ -39,9 +39,9 @@ internal class DeathRayProjectile : Projectile
             obvious = false;
             dam = 0;
         }
-        else if ((rPtr.Unique && Program.Rng.DieRoll(888) != 666) ||
-                 (rPtr.Level + Program.Rng.DieRoll(20) >
-                 Program.Rng.DieRoll(dam + Program.Rng.DieRoll(10)) && Program.Rng.DieRoll(100) != 66))
+        else if ((rPtr.Unique && SaveGame.Rng.DieRoll(888) != 666) ||
+                 (rPtr.Level + SaveGame.Rng.DieRoll(20) >
+                 SaveGame.Rng.DieRoll(dam + SaveGame.Rng.DieRoll(10)) && SaveGame.Rng.DieRoll(100) != 66))
         {
             note = " resists!";
             obvious = false;

@@ -16,7 +16,7 @@ internal class FolkSpellClairvoyance : Spell
         SaveGame.WizLight();
         if (!SaveGame.HasTelepathy)
         {
-            SaveGame.TimedTelepathy.AddTimer(Program.Rng.DieRoll(30) + 25);
+            SaveGame.TimedTelepathy.AddTimer(SaveGame.Rng.DieRoll(30) + 25);
         }
     }
 

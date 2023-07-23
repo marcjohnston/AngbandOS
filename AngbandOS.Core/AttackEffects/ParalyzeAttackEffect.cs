@@ -25,14 +25,14 @@ internal class ParalyzeAttackEffect : AttackEffect
             SaveGame.MsgPrint("You are unaffected!");
             obvious = true;
         }
-        else if (Program.Rng.RandomLessThan(100) < SaveGame.SkillSavingThrow)
+        else if (SaveGame.Rng.RandomLessThan(100) < SaveGame.SkillSavingThrow)
         {
             SaveGame.MsgPrint("You resist the effects!");
             obvious = true;
         }
         else
         {
-            if (SaveGame.TimedParalysis.AddTimer(3 + Program.Rng.DieRoll(monsterLevel)))
+            if (SaveGame.TimedParalysis.AddTimer(3 + SaveGame.Rng.DieRoll(monsterLevel)))
             {
                 obvious = true;
             }

@@ -22,13 +22,13 @@ internal class RingOfBastFixedArtifact : FixedArtifact, IFixedArtifactActivatibl
         saveGame.MsgPrint("The ring glows brightly...");
         if (saveGame.TimedHaste.TurnsRemaining == 0)
         {
-            saveGame.TimedHaste.SetTimer(Program.Rng.DieRoll(75) + 75);
+            saveGame.TimedHaste.SetTimer(SaveGame.Rng.DieRoll(75) + 75);
         }
         else
         {
             saveGame.TimedHaste.AddTimer(5);
         }
-        item.RechargeTimeLeft = Program.Rng.RandomLessThan(150) + 150;
+        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(150) + 150;
     }
     public string DescribeActivationEffect() => "haste self (75+d75 turns) every 150+d150 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

@@ -31,7 +31,7 @@ internal class TheLucerneHammerJusticeFixedArtifact : FixedArtifact, IFixedArtif
     public override void ApplyResistances(SaveGame saveGame, Item item)
     {
         IArtifactBias artifactBias = null;
-        item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
+        item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
     }
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 

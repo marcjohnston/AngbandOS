@@ -33,7 +33,7 @@ internal class DeathSpellNetherBolt : Spell
             return;
         }
         SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get<NetherProjectile>(), dir,
-            Program.Rng.DiceRoll(6 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+            SaveGame.Rng.DiceRoll(6 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
     }
 
     public override void CastFailed()

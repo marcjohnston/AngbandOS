@@ -17,15 +17,15 @@ internal class AcidArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.ResAcid)
         {
             item.RandartItemCharacteristics.ResAcid = true;
-            if (Program.Rng.DieRoll(2) == 1)
+            if (SaveGame.Rng.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (Program.Rng.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandartItemCharacteristics.ImAcid)
+        if (SaveGame.Rng.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandartItemCharacteristics.ImAcid)
         {
             item.RandartItemCharacteristics.ImAcid = true;
-            if (Program.Rng.DieRoll(2) == 1)
+            if (SaveGame.Rng.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -40,7 +40,7 @@ internal class AcidArtifactBias : ArtifactBias
             if (!item.RandartItemCharacteristics.BrandAcid)
             {
                 item.RandartItemCharacteristics.BrandAcid = true;
-                if (Program.Rng.DieRoll(2) == 1)
+                if (SaveGame.Rng.DieRoll(2) == 1)
                 {
                     return true;
                 }

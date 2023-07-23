@@ -52,7 +52,7 @@ internal class GoDownScript : Script
         // If we're in a tower, a down staircase reduces our level number
         if (SaveGame.CurDungeon.Tower)
         {
-            int stairLength = Program.Rng.DieRoll(5);
+            int stairLength = SaveGame.Rng.DieRoll(5);
             if (stairLength > SaveGame.CurrentDepth)
             {
                 stairLength = 1;
@@ -73,7 +73,7 @@ internal class GoDownScript : Script
         else
         {
             // We're not in a tower, so a down staircase increases our level number
-            int stairLength = Program.Rng.DieRoll(5);
+            int stairLength = SaveGame.Rng.DieRoll(5);
             if (stairLength > SaveGame.CurrentDepth)
             {
                 stairLength = 1;

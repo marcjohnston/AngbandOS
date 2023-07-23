@@ -13,7 +13,7 @@ internal class LifeSpellPrayer : Spell
     private LifeSpellPrayer(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.TimedBlessing.AddTimer(Program.Rng.DieRoll(48) + 48);
+        SaveGame.TimedBlessing.AddTimer(SaveGame.Rng.DieRoll(48) + 48);
     }
 
     public override string Name => "Prayer";

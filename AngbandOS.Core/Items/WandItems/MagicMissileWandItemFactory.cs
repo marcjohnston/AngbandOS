@@ -25,7 +25,7 @@ internal class MagicMissileWandItemFactory : WandItemFactory
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {
-        saveGame.FireBoltOrBeam(20, saveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), dir, Program.Rng.DiceRoll(2, 6));
+        saveGame.FireBoltOrBeam(20, saveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), dir, SaveGame.Rng.DiceRoll(2, 6));
         return true;
     }
     public override Item CreateItem() => new MagicMissileWandItem(SaveGame);

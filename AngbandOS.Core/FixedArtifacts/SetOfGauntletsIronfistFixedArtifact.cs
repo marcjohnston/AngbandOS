@@ -24,8 +24,8 @@ internal class SetOfGauntletsIronfistFixedArtifact : FixedArtifact, IFixedArtifa
         {
             return;
         }
-        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, Program.Rng.DiceRoll(9, 8));
-        item.RechargeTimeLeft = Program.Rng.RandomLessThan(8) + 8;
+        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, SaveGame.Rng.DiceRoll(9, 8));
+        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(8) + 8;
     }
     public string DescribeActivationEffect() => "fire bolt (9d8) every 8+d8 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

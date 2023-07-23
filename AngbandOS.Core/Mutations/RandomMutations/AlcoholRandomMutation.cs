@@ -18,7 +18,7 @@ internal class AlcoholRandomMutation : Mutation
 
     public override void OnProcessWorld(SaveGame saveGame)
     {
-        if (Program.Rng.DieRoll(6400) != 321)
+        if (SaveGame.Rng.DieRoll(6400) != 321)
         {
             return;
         }
@@ -29,10 +29,10 @@ internal class AlcoholRandomMutation : Mutation
         saveGame.Disturb(false);
         saveGame.PrExtraRedrawAction.Set();
         saveGame.MsgPrint("You feel a SSSCHtupor cOmINg over yOu... *HIC*!");
-        if (Program.Rng.DieRoll(20) == 1)
+        if (SaveGame.Rng.DieRoll(20) == 1)
         {
             saveGame.MsgPrint(null);
-            if (Program.Rng.DieRoll(3) == 1)
+            if (SaveGame.Rng.DieRoll(3) == 1)
             {
                 saveGame.LoseAllInfo();
             }
@@ -49,12 +49,12 @@ internal class AlcoholRandomMutation : Mutation
         {
             if (!saveGame.HasConfusionResistance)
             {
-                saveGame.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(20) + 15);
+                saveGame.TimedConfusion.AddTimer(SaveGame.Rng.RandomLessThan(20) + 15);
             }
-            if (Program.Rng.DieRoll(3) == 1 && !saveGame.HasChaosResistance)
+            if (SaveGame.Rng.DieRoll(3) == 1 && !saveGame.HasChaosResistance)
             {
                 saveGame.MsgPrint("Thishcischs GooDSChtuff!");
-                saveGame.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(150) + 150);
+                saveGame.TimedHallucinations.AddTimer(SaveGame.Rng.RandomLessThan(150) + 150);
             }
         }
     }

@@ -64,7 +64,7 @@ internal class Type6RoomLayout : RoomLayout
             cPtr = SaveGame.Grid[y2 + 1][x];
             cPtr.SetFeature("WallInner");
         }
-        switch (Program.Rng.DieRoll(4))
+        switch (SaveGame.Rng.DieRoll(4))
         {
             case 1:
                 PlaceSecretDoor(y1 - 1, xval);
@@ -82,7 +82,7 @@ internal class Type6RoomLayout : RoomLayout
                 PlaceSecretDoor(yval, x2 + 1);
                 break;
         }
-        int tmp = Program.Rng.DieRoll(SaveGame.Difficulty);
+        int tmp = SaveGame.Rng.DieRoll(SaveGame.Difficulty);
         if (tmp < 20)
         {
             getMonNumHook = new OrcMonsterSelector();
@@ -97,20 +97,20 @@ internal class Type6RoomLayout : RoomLayout
         }
         else if (tmp < 70)
         {
-            if (Program.Rng.DieRoll(4) != 1)
+            if (SaveGame.Rng.DieRoll(4) != 1)
             {
                 int _templateRace;
                 do
                 {
-                    _templateRace = Program.Rng.DieRoll(SaveGame.SingletonRepository.MonsterRaces.Count - 2);
+                    _templateRace = SaveGame.Rng.DieRoll(SaveGame.SingletonRepository.MonsterRaces.Count - 2);
                 } while (SaveGame.SingletonRepository.MonsterRaces[_templateRace].Unique ||
-                         SaveGame.SingletonRepository.MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
-                         SaveGame.Difficulty + Program.Rng.DieRoll(5));
+                         SaveGame.SingletonRepository.MonsterRaces[_templateRace].Level + SaveGame.Rng.DieRoll(5) >
+                         SaveGame.Difficulty + SaveGame.Rng.DieRoll(5));
                 getMonNumHook = new SymbolMonsterSelector(SaveGame.SingletonRepository.MonsterRaces[_templateRace].Symbol.Character);
             }
             else
             {
-                if (Program.Rng.DieRoll(2) == 1)
+                if (SaveGame.Rng.DieRoll(2) == 1)
                 {
                     getMonNumHook = new CultMonsterSelector();
                 }
@@ -122,7 +122,7 @@ internal class Type6RoomLayout : RoomLayout
         }
         else if (tmp < 80)
         {
-            switch (Program.Rng.RandomLessThan(6))
+            switch (SaveGame.Rng.RandomLessThan(6))
             {
                 case 0:
                     {
@@ -194,7 +194,7 @@ internal class Type6RoomLayout : RoomLayout
         }
         SaveGame.DangerRating += 10;
         if (SaveGame.Difficulty <= 40 &&
-            Program.Rng.DieRoll((SaveGame.Difficulty * SaveGame.Difficulty) + 50) < 300)
+            SaveGame.Rng.DieRoll((SaveGame.Difficulty * SaveGame.Difficulty) + 50) < 300)
         {
             SaveGame.SpecialDanger = true;
         }

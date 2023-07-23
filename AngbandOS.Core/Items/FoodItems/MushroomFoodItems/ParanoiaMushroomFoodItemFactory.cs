@@ -27,7 +27,7 @@ internal class ParanoiaMushroomFoodItemFactory : MushroomFoodItemFactory
         SaveGame.PlaySound(SoundEffectEnum.Eat);
         if (!SaveGame.HasFearResistance)
         {
-            if (SaveGame.TimedFear.AddTimer(Program.Rng.RandomLessThan(10) + 10))
+            if (SaveGame.TimedFear.AddTimer(SaveGame.Rng.RandomLessThan(10) + 10))
             {
                 return true;
             }

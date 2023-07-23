@@ -24,7 +24,7 @@ internal class ScrollHolyChant : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (SaveGame.TimedBlessing.AddTimer(Program.Rng.DieRoll(24) + 12))
+        if (SaveGame.TimedBlessing.AddTimer(SaveGame.Rng.DieRoll(24) + 12))
         {
             eventArgs.Identified = true;
         }

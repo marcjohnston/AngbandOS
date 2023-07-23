@@ -33,7 +33,7 @@ internal class ChaosSpellMagicMissile : Spell
             return;
         }
         SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), dir,
-            Program.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 4));
+            SaveGame.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 4));
     }
 
     public override void CastFailed()

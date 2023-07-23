@@ -18,7 +18,7 @@ internal class LawArtifactBias : ArtifactBias
             if (!item.RandartItemCharacteristics.SlayEvil)
             {
                 item.RandartItemCharacteristics.SlayEvil = true;
-                if (Program.Rng.DieRoll(2) == 1)
+                if (SaveGame.Rng.DieRoll(2) == 1)
                 {
                     return true;
                 }
@@ -26,7 +26,7 @@ internal class LawArtifactBias : ArtifactBias
             if (!item.RandartItemCharacteristics.SlayUndead)
             {
                 item.RandartItemCharacteristics.SlayUndead = true;
-                if (Program.Rng.DieRoll(2) == 1)
+                if (SaveGame.Rng.DieRoll(2) == 1)
                 {
                     return true;
                 }
@@ -34,7 +34,7 @@ internal class LawArtifactBias : ArtifactBias
             if (!item.RandartItemCharacteristics.SlayDemon)
             {
                 item.RandartItemCharacteristics.SlayDemon = true;
-                if (Program.Rng.DieRoll(2) == 1)
+                if (SaveGame.Rng.DieRoll(2) == 1)
                 {
                     return true;
                 }
@@ -45,11 +45,11 @@ internal class LawArtifactBias : ArtifactBias
 
     public override Activation GetActivationPowerType(Item item)
     {
-        if (Program.Rng.DieRoll(8) == 1)
+        if (SaveGame.Rng.DieRoll(8) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get<BanishEvilActivation>();
         }
-        else if (Program.Rng.DieRoll(4) == 1)
+        else if (SaveGame.Rng.DieRoll(4) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get<DispEvilActivation>();
         }

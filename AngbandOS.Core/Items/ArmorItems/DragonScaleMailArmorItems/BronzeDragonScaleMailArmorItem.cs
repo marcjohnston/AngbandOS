@@ -19,6 +19,6 @@ internal class BronzeDragonScaleMailArmorItem : DragonScaleMailArmorItem, IItemA
         }
         SaveGame.MsgPrint("You breathe confusion.");
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ConfusionProjectile>(), dir, 120, -2);
-        RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+        RechargeTimeLeft = SaveGame.Rng.RandomLessThan(450) + 450;
     }
 }

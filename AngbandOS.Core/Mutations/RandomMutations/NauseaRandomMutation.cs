@@ -18,7 +18,7 @@ internal class NauseaRandomMutation : Mutation
 
     public override void OnProcessWorld(SaveGame saveGame)
     {
-        if (saveGame.HasSlowDigestion || Program.Rng.DieRoll(9000) != 1)
+        if (saveGame.HasSlowDigestion || SaveGame.Rng.DieRoll(9000) != 1)
         {
             return;
         }

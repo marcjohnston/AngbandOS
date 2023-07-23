@@ -27,7 +27,7 @@ internal class CureLightWoundsPotionItemFactory : PotionItemFactory
     {
         bool identified = false;
         // Cure light wounds heals you 2d8 health and reduces bleeding
-        if (SaveGame.RestoreHealth(Program.Rng.DiceRoll(2, 8)))
+        if (SaveGame.RestoreHealth(SaveGame.Rng.DiceRoll(2, 8)))
         {
             identified = true;
         }
@@ -40,7 +40,7 @@ internal class CureLightWoundsPotionItemFactory : PotionItemFactory
 
     public override bool Smash(int who, int y, int x)
     {
-        SaveGame.Project(who, 2, y, x, Program.Rng.DiceRoll(2, 3), SaveGame.SingletonRepository.Projectiles.Get<OldHealProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        SaveGame.Project(who, 2, y, x, SaveGame.Rng.DiceRoll(2, 3), SaveGame.SingletonRepository.Projectiles.Get<OldHealProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return false;
     }
     public override Item CreateItem() => new CureLightWoundsPotionItem(SaveGame);

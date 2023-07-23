@@ -16,9 +16,9 @@ internal class LordlyProtectionRingItem : RingItem
         IArtifactBias artifactBias = null;
         do
         {
-            ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(20) + 18);
-        } while (Program.Rng.DieRoll(4) == 1);
-        BonusArmorClass = 10 + Program.Rng.DieRoll(5) + GetBonusValue(10, level);
+            ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(20) + 18);
+        } while (SaveGame.Rng.DieRoll(4) == 1);
+        BonusArmorClass = 10 + SaveGame.Rng.DieRoll(5) + GetBonusValue(10, level);
         SaveGame.TreasureRating += 5;
     }
 }

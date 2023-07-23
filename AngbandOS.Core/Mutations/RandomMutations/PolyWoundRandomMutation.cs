@@ -18,7 +18,7 @@ internal class PolyWoundRandomMutation : Mutation
 
     public override void OnProcessWorld(SaveGame saveGame)
     {
-        if (Program.Rng.DieRoll(3000) == 1)
+        if (SaveGame.Rng.DieRoll(3000) == 1)
         {
             saveGame.PolymorphWounds();
         }

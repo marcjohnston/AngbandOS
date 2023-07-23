@@ -29,11 +29,11 @@ internal class PieceOfWarpstoneFoodItemFactory : FoodItemFactory
         SaveGame.PlaySound(SoundEffectEnum.Eat);
         SaveGame.MsgPrint("That tastes... funky.");
         SaveGame.Dna.GainMutation();
-        if (Program.Rng.DieRoll(3) == 1)
+        if (SaveGame.Rng.DieRoll(3) == 1)
         {
             SaveGame.Dna.GainMutation();
         }
-        if (Program.Rng.DieRoll(3) == 1)
+        if (SaveGame.Rng.DieRoll(3) == 1)
         {
             SaveGame.Dna.GainMutation();
         }

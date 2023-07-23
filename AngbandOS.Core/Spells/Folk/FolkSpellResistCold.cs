@@ -13,7 +13,7 @@ internal class FolkSpellResistCold : Spell
     private FolkSpellResistCold(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.TimedColdResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
+        SaveGame.TimedColdResistance.AddTimer(SaveGame.Rng.DieRoll(20) + 20);
     }
 
     public override string Name => "Resist Cold";

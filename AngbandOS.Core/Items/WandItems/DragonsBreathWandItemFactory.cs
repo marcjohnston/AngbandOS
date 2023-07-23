@@ -29,7 +29,7 @@ internal class DragonsBreathWandItemFactory : WandItemFactory
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {
-        switch (Program.Rng.RandomLessThan(5))
+        switch (SaveGame.Rng.RandomLessThan(5))
         {
             case 0:
                 saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir, 100, -3);

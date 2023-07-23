@@ -50,12 +50,12 @@ internal class UseStaffScript : Script
         }
         chance -= itemLevel > 50 ? 50 : itemLevel;
         // Always a small chance of it working
-        if (chance < Constants.UseDevice && Program.Rng.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
+        if (chance < Constants.UseDevice && SaveGame.Rng.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
         {
             chance = Constants.UseDevice;
         }
         // Check to see if we use it properly
-        if (chance < Constants.UseDevice || Program.Rng.DieRoll(chance) < Constants.UseDevice)
+        if (chance < Constants.UseDevice || SaveGame.Rng.DieRoll(chance) < Constants.UseDevice)
         {
             SaveGame.MsgPrint("You failed to use the staff properly.");
             return false;

@@ -34,8 +34,8 @@ internal abstract class WeaponItem : Item
             return;
         }
 
-        int tohit1 = Program.Rng.DieRoll(5) + GetBonusValue(5, level);
-        int todam1 = Program.Rng.DieRoll(5) + GetBonusValue(5, level);
+        int tohit1 = SaveGame.Rng.DieRoll(5) + GetBonusValue(5, level);
+        int todam1 = SaveGame.Rng.DieRoll(5) + GetBonusValue(5, level);
         int tohit2 = GetBonusValue(10, level);
         int todam2 = GetBonusValue(10, level);
         if (power > 0)
@@ -66,8 +66,8 @@ internal abstract class WeaponItem : Item
 
     public override void ApplyRandartBonus()
     {
-        BonusToHit += Program.Rng.DieRoll(BonusToHit > 19 ? 1 : 20 - BonusToHit);
-        BonusDamage += Program.Rng.DieRoll(BonusDamage > 19 ? 1 : 20 - BonusDamage);
+        BonusToHit += SaveGame.Rng.DieRoll(BonusToHit > 19 ? 1 : 20 - BonusToHit);
+        BonusDamage += SaveGame.Rng.DieRoll(BonusDamage > 19 ? 1 : 20 - BonusDamage);
     }
 
     protected override bool FactoryCanAbsorbItem(Item other)

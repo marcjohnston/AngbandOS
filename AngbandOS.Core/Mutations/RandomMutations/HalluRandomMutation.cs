@@ -18,7 +18,7 @@ internal class HalluRandomMutation : Mutation
 
     public override void OnProcessWorld(SaveGame saveGame)
     {
-        if (Program.Rng.DieRoll(6400) != 42)
+        if (SaveGame.Rng.DieRoll(6400) != 42)
         {
             return;
         }
@@ -28,6 +28,6 @@ internal class HalluRandomMutation : Mutation
         }
         saveGame.Disturb(false);
         saveGame.PrExtraRedrawAction.Set();
-        saveGame.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(50) + 20);
+        saveGame.TimedHallucinations.AddTimer(SaveGame.Rng.RandomLessThan(50) + 20);
     }
 }

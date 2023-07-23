@@ -13,7 +13,7 @@ internal abstract class GoldItem : Item
     public GoldItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass)
     {
         int cost = Factory.Cost;
-        TypeSpecificValue = cost + (8 * Program.Rng.DieRoll(cost)) + Program.Rng.DieRoll(8);
+        TypeSpecificValue = cost + (8 * SaveGame.Rng.DieRoll(cost)) + SaveGame.Rng.DieRoll(8);
     }
 
     public override bool IsIgnoredByMonsters => true;

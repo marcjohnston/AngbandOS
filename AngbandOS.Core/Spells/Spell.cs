@@ -173,17 +173,17 @@ internal abstract class Spell
 
     protected void DoWildDeathMagic(int spell, int subCategory)
     {
-        if (Program.Rng.DieRoll(100) < spell)
+        if (SaveGame.Rng.DieRoll(100) < spell)
         {
-            if (subCategory == 3 && Program.Rng.DieRoll(2) == 1)
+            if (subCategory == 3 && SaveGame.Rng.DieRoll(2) == 1)
             {
                 SaveGame.Monsters[0].SanityBlast(true);
             }
             else
             {
                 SaveGame.MsgPrint("It hurts!");
-                SaveGame.TakeHit(Program.Rng.DiceRoll(subCategory + 1, 6), "a miscast Death spell");
-                if (spell > 15 && Program.Rng.DieRoll(6) == 1 && !SaveGame.HasHoldLife)
+                SaveGame.TakeHit(SaveGame.Rng.DiceRoll(subCategory + 1, 6), "a miscast Death spell");
+                if (spell > 15 && SaveGame.Rng.DieRoll(6) == 1 && !SaveGame.HasHoldLife)
                 {
                     SaveGame.LoseExperience(spell * 250);
                 }
@@ -193,13 +193,13 @@ internal abstract class Spell
 
     protected void DoWildChaoticMagic(int spell)
     {
-        if (Program.Rng.DieRoll(100) >= spell)
+        if (SaveGame.Rng.DieRoll(100) >= spell)
         {
             return;
         }
 
         SaveGame.MsgPrint("You produce a chaotic effect!");
-        switch (Program.Rng.DieRoll(spell) + Program.Rng.DieRoll(8) + 1) // TODO: Convert this to WeightedRandom
+        switch (SaveGame.Rng.DieRoll(spell) + SaveGame.Rng.DieRoll(8) + 1) // TODO: Convert this to WeightedRandom
         {
             case 1:
             case 2:
@@ -227,7 +227,7 @@ internal abstract class Spell
             case 12:
             case 13:
             case 14:
-                SaveGame.LightArea(Program.Rng.DiceRoll(2, 3), 2);
+                SaveGame.LightArea(SaveGame.Rng.DiceRoll(2, 3), 2);
                 break;
 
             case 15:

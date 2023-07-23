@@ -25,7 +25,7 @@ internal class ScrollProtectionFromEvil : ScrollItemClass
     public override void Read(ReadScrollEvent eventArgs)
     {
         int i = 3 * SaveGame.ExperienceLevel;
-        if (SaveGame.TimedProtectionFromEvil.AddTimer(Program.Rng.DieRoll(25) + i))
+        if (SaveGame.TimedProtectionFromEvil.AddTimer(SaveGame.Rng.DieRoll(25) + i))
         {
             eventArgs.Identified = true;
         }

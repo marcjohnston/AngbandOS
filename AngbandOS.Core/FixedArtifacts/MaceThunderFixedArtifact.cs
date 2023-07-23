@@ -22,13 +22,13 @@ internal class MaceThunderFixedArtifact : FixedArtifact, IFixedArtifactActivatib
         saveGame.MsgPrint("Your mace glows bright green...");
         if (saveGame.TimedHaste.TurnsRemaining == 0)
         {
-            saveGame.TimedHaste.SetTimer(Program.Rng.DieRoll(20) + 20);
+            saveGame.TimedHaste.SetTimer(SaveGame.Rng.DieRoll(20) + 20);
         }
         else
         {
             saveGame.TimedHaste.AddTimer(5);
         }
-        item.RechargeTimeLeft = Program.Rng.RandomLessThan(100) + 100;
+        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(100) + 100;
     }
     public string DescribeActivationEffect() => "haste self (20+d20 turns) every 100+d100 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

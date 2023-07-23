@@ -23,7 +23,7 @@ internal class ScrollSummonMonster : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        for (int i = 0; i < Program.Rng.DieRoll(3); i++)
+        for (int i = 0; i < SaveGame.Rng.DieRoll(3); i++)
         {
             if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, null))
             {

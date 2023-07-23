@@ -63,7 +63,7 @@ internal class SlimeMoldJuicePotionItemFactory : PotionItemFactory
         //Ruination = 15,
         //SlimeMold = 2,
 
-        switch (Program.Rng.DieRoll(48))
+        switch (SaveGame.Rng.DieRoll(48))
         {
             case 1:
                 return (PotionItemFactory)saveGame.SingletonRepository.ItemFactories.Get<WaterPotionItemFactory>();

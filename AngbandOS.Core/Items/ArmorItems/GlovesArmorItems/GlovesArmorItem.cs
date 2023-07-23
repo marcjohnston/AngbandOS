@@ -19,7 +19,7 @@ internal abstract class GlovesArmorItem : ArmourItem
     /// <param name="item"></param>
     protected override void ApplyRandomGoodRareCharacteristics()
     {
-        switch (Program.Rng.DieRoll(10))
+        switch (SaveGame.Rng.DieRoll(10))
         {
             case 1:
             case 2:
@@ -39,7 +39,7 @@ internal abstract class GlovesArmorItem : ArmourItem
             case 10:
                 IArtifactBias artifactBias = null;
                 RareItemTypeIndex = RareItemTypeEnum.GlovesOfPower;
-                ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
+                ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
                 break;
         }
     }
@@ -50,7 +50,7 @@ internal abstract class GlovesArmorItem : ArmourItem
     /// <param name="item"></param>
     protected override void ApplyRandomPoorRareCharacteristics()
     {
-        switch (Program.Rng.DieRoll(2))
+        switch (SaveGame.Rng.DieRoll(2))
         {
             case 1:
                 {
@@ -80,7 +80,7 @@ internal abstract class GlovesArmorItem : ArmourItem
 
             if (power > 1)
             {
-                if (Program.Rng.DieRoll(20) == 1)
+                if (SaveGame.Rng.DieRoll(20) == 1)
                 {
                     CreateRandart(false);
                 }

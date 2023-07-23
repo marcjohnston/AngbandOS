@@ -28,7 +28,7 @@ internal class DeathSpellInvokeSpirits : Spell
                 beam = SaveGame.ExperienceLevel / 2;
                 break;
         }
-        int die = Program.Rng.DieRoll(100) + (SaveGame.ExperienceLevel / 5);
+        int die = SaveGame.Rng.DieRoll(100) + (SaveGame.ExperienceLevel / 5);
         if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
@@ -46,12 +46,12 @@ internal class DeathSpellInvokeSpirits : Spell
         if (die < 14)
         {
             SaveGame.MsgPrint("An unnamable evil brushes against your mind...");
-            SaveGame.TimedFear.AddTimer(Program.Rng.DieRoll(4) + 4);
+            SaveGame.TimedFear.AddTimer(SaveGame.Rng.DieRoll(4) + 4);
         }
         if (die < 26)
         {
             SaveGame.MsgPrint("Your head is invaded by a horde of gibbering spectral voices...");
-            SaveGame.TimedConfusion.AddTimer(Program.Rng.DieRoll(4) + 4);
+            SaveGame.TimedConfusion.AddTimer(SaveGame.Rng.DieRoll(4) + 4);
         }
         if (die < 31)
         {
@@ -60,7 +60,7 @@ internal class DeathSpellInvokeSpirits : Spell
         if (die < 36)
         {
             SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), dir,
-                Program.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 4));
+                SaveGame.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 4));
         }
         if (die < 41)
         {
@@ -77,22 +77,22 @@ internal class DeathSpellInvokeSpirits : Spell
         if (die < 56)
         {
             SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir,
-                Program.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+                SaveGame.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
         }
         if (die < 61)
         {
             SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir,
-                Program.Rng.DiceRoll(5 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+                SaveGame.Rng.DiceRoll(5 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
         }
         if (die < 66)
         {
             SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir,
-                Program.Rng.DiceRoll(6 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+                SaveGame.Rng.DiceRoll(6 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
         }
         if (die < 71)
         {
             SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir,
-                Program.Rng.DiceRoll(8 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+                SaveGame.Rng.DiceRoll(8 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
         }
         if (die < 76)
         {

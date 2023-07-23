@@ -21,7 +21,7 @@ internal class LongSwordOfTheDawnFixedArtifact : FixedArtifact, IFixedArtifactAc
     {
         saveGame.MsgPrint("Your sword flickers black for a moment...");
         saveGame.SummonSpecificFriendly(saveGame.MapY, saveGame.MapX, saveGame.Difficulty, new ReaverMonsterSelector(), true);
-        item.RechargeTimeLeft = 500 + Program.Rng.DieRoll(500);
+        item.RechargeTimeLeft = 500 + SaveGame.Rng.DieRoll(500);
     }
     public string DescribeActivationEffect() => "summon a Black Reaver every 500+d500 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

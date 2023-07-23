@@ -15,13 +15,13 @@ internal class GainAblReward : Reward
     {
         SaveGame.MsgPrint($"The voice of {patron.ShortName} rings out:");
         SaveGame.MsgPrint("'Stay, mortal, and let me mould thee.'");
-        if (Program.Rng.DieRoll(3) == 1 && !(patron.PreferredAbility < 0))
+        if (SaveGame.Rng.DieRoll(3) == 1 && !(patron.PreferredAbility < 0))
         {
             SaveGame.TryIncreasingAbilityScore(patron.PreferredAbility);
         }
         else
         {
-            SaveGame.TryIncreasingAbilityScore(Program.Rng.DieRoll(6) - 1);
+            SaveGame.TryIncreasingAbilityScore(SaveGame.Rng.DieRoll(6) - 1);
         }
     }
 }

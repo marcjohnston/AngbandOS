@@ -21,8 +21,8 @@ internal class StarEssenceOfXothFixedArtifact : FixedArtifact, IFixedArtifactAct
     {
         saveGame.MsgPrint("The essence shines brightly...");
         saveGame.MapArea();
-        saveGame.LightArea(Program.Rng.DiceRoll(2, 15), 3);
-        item.RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
+        saveGame.LightArea(SaveGame.Rng.DiceRoll(2, 15), 3);
+        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(50) + 50;
     }
     public string DescribeActivationEffect() => "magic mapping and light every 50+d50 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

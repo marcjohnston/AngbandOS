@@ -18,11 +18,11 @@ internal class BoAcid1Activation : DirectionalActivation
 
     public override string? PreActivationMessage => "It is covered in acid...";
 
-    public override int RechargeTime() => Program.Rng.RandomLessThan(5) + 5;
+    public override int RechargeTime() => SaveGame.Rng.RandomLessThan(5) + 5;
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), direction, Program.Rng.DiceRoll(5, 8));
+        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), direction, SaveGame.Rng.DiceRoll(5, 8));
         return true;
     }
 

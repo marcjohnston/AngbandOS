@@ -157,9 +157,9 @@ internal abstract class Dungeon
         // Maximum offset is the dungeon's base offset or 10, whichever is less (but since we're
         // using 'less than', we add one to both values here)
         int range = Math.Min((BaseOffset + 1), 11);
-        int offsetChange = Program.Rng.RandomLessThan(range);
+        int offsetChange = SaveGame.Rng.RandomLessThan(range);
         // Dungeons are equally likely to be more or less difficult
-        if (Program.Rng.DieRoll(6) >= 4)
+        if (SaveGame.Rng.DieRoll(6) >= 4)
         {
             Offset = BaseOffset + offsetChange;
         }

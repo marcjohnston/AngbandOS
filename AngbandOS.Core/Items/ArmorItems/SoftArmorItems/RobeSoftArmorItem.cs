@@ -28,7 +28,7 @@ internal class RobeSoftArmorItem : SoftArmorItem
             if (power > 1)
             {
                 // Robes have a chance of having the armour of permanence instead of a random characteristic.
-                if (Program.Rng.RandomLessThan(100) < 10)
+                if (SaveGame.Rng.RandomLessThan(100) < 10)
                 {
                     RareItemTypeIndex = RareItemTypeEnum.ArmourOfPermanence;
                 }

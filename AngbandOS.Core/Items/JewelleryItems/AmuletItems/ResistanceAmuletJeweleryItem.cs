@@ -14,12 +14,12 @@ internal class ResistanceAmuletJeweleryItem : AmuletJeweleryItem
 
     protected override void ApplyMagic(int level, int power, Store? store)
     {
-        if (Program.Rng.DieRoll(3) == 1)
+        if (SaveGame.Rng.DieRoll(3) == 1)
         {
             IArtifactBias? artifactBias = null;
-            ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(34) + 4);
+            ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(34) + 4);
         }
-        if (Program.Rng.DieRoll(5) == 1)
+        if (SaveGame.Rng.DieRoll(5) == 1)
         {
             RandartItemCharacteristics.ResPois = true;
         }

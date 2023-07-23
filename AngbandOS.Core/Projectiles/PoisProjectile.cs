@@ -64,20 +64,20 @@ internal class PoisProjectile : Projectile
             dam = (dam + 2) / 3;
         }
         if (!(SaveGame.TimedPoisonResistance.TurnsRemaining != 0 || SaveGame.HasPoisonResistance) &&
-            Program.Rng.DieRoll(SaveGame.HurtChance) == 1)
+            SaveGame.Rng.DieRoll(SaveGame.HurtChance) == 1)
         {
             SaveGame.TryDecreasingAbilityScore(Ability.Constitution);
         }
         SaveGame.TakeHit(dam, killer);
         if (!(SaveGame.HasPoisonResistance || SaveGame.TimedPoisonResistance.TurnsRemaining != 0))
         {
-            if (Program.Rng.DieRoll(10) <= SaveGame.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+            if (SaveGame.Rng.DieRoll(10) <= SaveGame.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
             {
                 SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
             }
             else
             {
-                SaveGame.TimedPoison.AddTimer(Program.Rng.RandomLessThan(dam) + 10);
+                SaveGame.TimedPoison.AddTimer(SaveGame.Rng.RandomLessThan(dam) + 10);
             }
         }
         return true;

@@ -22,7 +22,7 @@ internal class XtraSpeedActivation : Activation
     {
         if (SaveGame.TimedHaste.TurnsRemaining == 0)
         {
-            SaveGame.TimedHaste.SetTimer(Program.Rng.DieRoll(75) + 75);
+            SaveGame.TimedHaste.SetTimer(SaveGame.Rng.DieRoll(75) + 75);
         }
         else
         {
@@ -31,7 +31,7 @@ internal class XtraSpeedActivation : Activation
         return true;
     }
 
-    public override int RechargeTime() => Program.Rng.RandomLessThan(200) + 200;
+    public override int RechargeTime() => SaveGame.Rng.RandomLessThan(200) + 200;
 
     public override int Value => 25000;
 

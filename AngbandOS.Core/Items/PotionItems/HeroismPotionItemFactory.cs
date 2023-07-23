@@ -31,7 +31,7 @@ internal class HeroismPotionItemFactory : PotionItemFactory
         {
             identified = true;
         }
-        if (SaveGame.TimedHeroism.AddTimer(Program.Rng.DieRoll(25) + 25))
+        if (SaveGame.TimedHeroism.AddTimer(SaveGame.Rng.DieRoll(25) + 25))
         {
             identified = true;
         }

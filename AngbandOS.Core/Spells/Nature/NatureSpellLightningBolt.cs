@@ -33,7 +33,7 @@ internal class NatureSpellLightningBolt : Spell
             return;
         }
         SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir,
-            Program.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+            SaveGame.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
     }
 
     public override string Name => "Lightning Bolt";

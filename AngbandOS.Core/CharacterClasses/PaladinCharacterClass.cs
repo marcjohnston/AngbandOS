@@ -58,7 +58,7 @@ internal class PaladinCharacterClass : BaseCharacterClass
     public override int AttackSpeedMultiplier => 4;
     public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get<PriestlyArtifactBias>();
     public override int FromScrollWarriorArtifactBiasPercentageChance => 40;
-    public override bool SenseInventoryTest(int level) => (0 != Program.Rng.RandomLessThan(77777 / ((level * level) + 40)));
+    public override bool SenseInventoryTest(int level) => (0 != SaveGame.Rng.RandomLessThan(77777 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
         SaveGame.SingletonRepository.Realms.Get<LifeRealm>(),

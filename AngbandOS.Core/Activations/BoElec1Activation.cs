@@ -18,11 +18,11 @@ internal class BoElec1Activation : DirectionalActivation
 
     public override string? PreActivationMessage => "It is covered in sparks...";
 
-    public override int RechargeTime() => Program.Rng.RandomLessThan(6) + 6;
+    public override int RechargeTime() => SaveGame.Rng.RandomLessThan(6) + 6;
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), direction, Program.Rng.DiceRoll(4, 8));
+        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), direction, SaveGame.Rng.DiceRoll(4, 8));
         return true;
     }
 

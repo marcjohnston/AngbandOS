@@ -27,12 +27,12 @@ internal abstract class ChestItem : Item
     {
         if (Factory.Level > 0)
         {
-            TypeSpecificValue = Program.Rng.DieRoll(Factory.Level);
+            TypeSpecificValue = SaveGame.Rng.DieRoll(Factory.Level);
             if (TypeSpecificValue > 55)
             {
                 int chestTrapConfigurationCount = SaveGame.SingletonRepository.ChestTrapConfigurations.Count;
                 int randomRemaining = chestTrapConfigurationCount - 55;
-                TypeSpecificValue = (55 + Program.Rng.RandomLessThan(randomRemaining));
+                TypeSpecificValue = (55 + SaveGame.Rng.RandomLessThan(randomRemaining));
             }
         }
     }

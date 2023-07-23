@@ -90,7 +90,7 @@ internal class ExplodeProjectile : Projectile
         {
             note = " resists.";
             dam *= 3;
-            dam /= Program.Rng.DieRoll(6) + 6;
+            dam /= SaveGame.Rng.DieRoll(6) + 6;
         }
         ApplyProjectileDamageToMonster(who, mPtr, dam, note);
         return obvious;
@@ -113,13 +113,13 @@ internal class ExplodeProjectile : Projectile
         if (SaveGame.HasShardResistance)
         {
             dam *= 6;
-            dam /= Program.Rng.DieRoll(6) + 6;
+            dam /= SaveGame.Rng.DieRoll(6) + 6;
         }
         else
         {
             SaveGame.TimedBleeding.AddTimer(dam);
         }
-        if (!SaveGame.HasShardResistance || Program.Rng.DieRoll(13) == 1)
+        if (!SaveGame.HasShardResistance || SaveGame.Rng.DieRoll(13) == 1)
         {
             SaveGame.InvenDamage(SaveGame.SetColdDestroy, 2);
         }

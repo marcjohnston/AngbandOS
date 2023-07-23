@@ -26,38 +26,38 @@ internal class BrainSmashMonsterSpell : MonsterSpell
         bool playerIsBlind = saveGame.TimedBlindness.TurnsRemaining != 0;
         string monsterDescription = monster.IndefiniteVisibleName;
 
-        if (Program.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
+        if (SaveGame.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
         {
             saveGame.MsgPrint("You resist the effects!");
         }
         else
         {
             saveGame.MsgPrint("Your mind is blasted by psionic energy.");
-            saveGame.TakeHit(Program.Rng.DiceRoll(12, 15), monsterDescription);
+            saveGame.TakeHit(SaveGame.Rng.DiceRoll(12, 15), monsterDescription);
             if (!saveGame.HasBlindnessResistance)
             {
-                saveGame.TimedBlindness.AddTimer(8 + Program.Rng.RandomLessThan(8));
+                saveGame.TimedBlindness.AddTimer(8 + SaveGame.Rng.RandomLessThan(8));
             }
             if (!saveGame.HasConfusionResistance)
             {
-                saveGame.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(4) + 4);
+                saveGame.TimedConfusion.AddTimer(SaveGame.Rng.RandomLessThan(4) + 4);
             }
             if (!saveGame.HasFreeAction)
             {
-                saveGame.TimedParalysis.AddTimer(Program.Rng.RandomLessThan(4) + 4);
+                saveGame.TimedParalysis.AddTimer(SaveGame.Rng.RandomLessThan(4) + 4);
             }
-            saveGame.TimedSlow.AddTimer(Program.Rng.RandomLessThan(4) + 4);
-            while (Program.Rng.RandomLessThan(100) > saveGame.SkillSavingThrow)
+            saveGame.TimedSlow.AddTimer(SaveGame.Rng.RandomLessThan(4) + 4);
+            while (SaveGame.Rng.RandomLessThan(100) > saveGame.SkillSavingThrow)
             {
                 saveGame.TryDecreasingAbilityScore(Ability.Intelligence);
             }
-            while (Program.Rng.RandomLessThan(100) > saveGame.SkillSavingThrow)
+            while (SaveGame.Rng.RandomLessThan(100) > saveGame.SkillSavingThrow)
             {
                 saveGame.TryDecreasingAbilityScore(Ability.Wisdom);
             }
             if (!saveGame.HasChaosResistance)
             {
-                saveGame.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(250) + 150);
+                saveGame.TimedHallucinations.AddTimer(SaveGame.Rng.RandomLessThan(250) + 150);
             }
         }
     }
@@ -72,7 +72,7 @@ internal class BrainSmashMonsterSpell : MonsterSpell
         MonsterRace targetRace = target.Race;
 
         if (targetRace.Unique || targetRace.ImmuneConfusion ||
-            targetRace.Level > Program.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
+            targetRace.Level > SaveGame.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
         {
             if (targetRace.ImmuneConfusion && seen)
             {
@@ -89,10 +89,10 @@ internal class BrainSmashMonsterSpell : MonsterSpell
             {
                 saveGame.MsgPrint($"{targetName} is blasted by psionic energy.");
             }
-            target.ConfusionLevel += Program.Rng.RandomLessThan(4) + 4;
-            target.Speed -= Program.Rng.RandomLessThan(4) + 4;
-            target.StunLevel += Program.Rng.RandomLessThan(4) + 4;
-            target.TakeDamageFromAnotherMonster(saveGame, Program.Rng.DiceRoll(12, 15), out _, " collapses, a mindless husk.");
+            target.ConfusionLevel += SaveGame.Rng.RandomLessThan(4) + 4;
+            target.Speed -= SaveGame.Rng.RandomLessThan(4) + 4;
+            target.StunLevel += SaveGame.Rng.RandomLessThan(4) + 4;
+            target.TakeDamageFromAnotherMonster(saveGame, SaveGame.Rng.DiceRoll(12, 15), out _, " collapses, a mindless husk.");
         }
     }
 }

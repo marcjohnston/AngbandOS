@@ -36,7 +36,7 @@ internal class WoodenTorchLightSourceItem : LightSourceItem
         }
         else if (TypeSpecificValue != 0)
         {
-            TypeSpecificValue = Program.Rng.DieRoll(TypeSpecificValue);
+            TypeSpecificValue = SaveGame.Rng.DieRoll(TypeSpecificValue);
         }
     }
 }

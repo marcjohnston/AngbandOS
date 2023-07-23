@@ -36,7 +36,7 @@ internal abstract class LightSourceItem : ArmourItem
     {
         if (power < 0) // Cursed
         {
-            switch (Program.Rng.DieRoll(2)) // Cursed
+            switch (SaveGame.Rng.DieRoll(2)) // Cursed
             {
                 case 1:
                     {

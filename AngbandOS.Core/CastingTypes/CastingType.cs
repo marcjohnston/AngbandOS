@@ -107,7 +107,7 @@ internal class CastingType
             }
         }
         int chance = sPtr.FailureChance();
-        if (Program.Rng.RandomLessThan(100) < chance)
+        if (SaveGame.Rng.RandomLessThan(100) < chance)
         {
             SaveGame.MsgPrint($"You failed to get the {prayer} off!");
             sPtr.CastFailed();
@@ -133,12 +133,12 @@ internal class CastingType
             SaveGame.Mana = 0;
             SaveGame.FractionalMana = 0;
             SaveGame.MsgPrint("You faint from the effort!");
-            SaveGame.TimedParalysis.AddTimer(Program.Rng.DieRoll((5 * oops) + 1));
-            if (Program.Rng.RandomLessThan(100) < 50)
+            SaveGame.TimedParalysis.AddTimer(SaveGame.Rng.DieRoll((5 * oops) + 1));
+            if (SaveGame.Rng.RandomLessThan(100) < 50)
             {
-                bool perm = Program.Rng.RandomLessThan(100) < 25;
+                bool perm = SaveGame.Rng.RandomLessThan(100) < 25;
                 SaveGame.MsgPrint("You have damaged your health!");
-                SaveGame.DecreaseAbilityScore(Ability.Constitution, 15 + Program.Rng.DieRoll(10), perm);
+                SaveGame.DecreaseAbilityScore(Ability.Constitution, 15 + SaveGame.Rng.DieRoll(10), perm);
             }
         }
         SaveGame.RedrawManaFlaggedAction.Set();

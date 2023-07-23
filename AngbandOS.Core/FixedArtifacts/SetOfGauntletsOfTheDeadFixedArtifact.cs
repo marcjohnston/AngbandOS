@@ -24,8 +24,8 @@ internal class SetOfGauntletsOfTheDeadFixedArtifact : FixedArtifact, IFixedArtif
         {
             return;
         }
-        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir, Program.Rng.DiceRoll(5, 8));
-        item.RechargeTimeLeft = Program.Rng.RandomLessThan(5) + 5;
+        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir, SaveGame.Rng.DiceRoll(5, 8));
+        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(5) + 5;
     }
     public string DescribeActivationEffect() => "acid bolt (5d8) every 5+d5 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

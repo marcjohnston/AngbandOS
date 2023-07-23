@@ -24,7 +24,7 @@ internal class ScrollSpecialEnchantArmor : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (!SaveGame.EnchantItem(0, 0, Program.Rng.DieRoll(3) + 2))
+        if (!SaveGame.EnchantItem(0, 0, SaveGame.Rng.DieRoll(3) + 2))
         {
             eventArgs.UsedUp = false;
         }

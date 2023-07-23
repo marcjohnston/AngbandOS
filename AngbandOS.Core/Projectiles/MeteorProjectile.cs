@@ -120,7 +120,7 @@ internal class MeteorProjectile : Projectile
             SaveGame.MsgPrint("Something falls from the sky on you!");
         }
         SaveGame.TakeHit(dam, killer);
-        if (!SaveGame.HasShardResistance || Program.Rng.DieRoll(13) == 1)
+        if (!SaveGame.HasShardResistance || SaveGame.Rng.DieRoll(13) == 1)
         {
             if (!SaveGame.HasFireImmunity)
             {

@@ -96,7 +96,7 @@ internal class OpenScript : Script
                 j = 2;
             }
             // See if we succeeded
-            if (Program.Rng.RandomLessThan(100) < j)
+            if (SaveGame.Rng.RandomLessThan(100) < j)
             {
                 SaveGame.MsgPrint("You have picked the lock.");
                 SaveGame.GainExperience(1);

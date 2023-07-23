@@ -15,11 +15,11 @@ internal class SorcerySpellHasteSelf : Spell
     {
         if (SaveGame.TimedHaste.TurnsRemaining == 0)
         {
-            SaveGame.TimedHaste.SetTimer(Program.Rng.DieRoll(20 + SaveGame.ExperienceLevel) + SaveGame.ExperienceLevel);
+            SaveGame.TimedHaste.SetTimer(SaveGame.Rng.DieRoll(20 + SaveGame.ExperienceLevel) + SaveGame.ExperienceLevel);
         }
         else
         {
-            SaveGame.TimedHaste.AddTimer(Program.Rng.DieRoll(5));
+            SaveGame.TimedHaste.AddTimer(SaveGame.Rng.DieRoll(5));
         }
     }
 

@@ -20,12 +20,12 @@ internal class CureMwActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.RestoreHealth(Program.Rng.DiceRoll(4, 8));
+        SaveGame.RestoreHealth(SaveGame.Rng.DiceRoll(4, 8));
         SaveGame.TimedBleeding.SetTimer((SaveGame.TimedBleeding.TurnsRemaining / 2) - 50);
         return true;
     }
 
-    public override int RechargeTime() => Program.Rng.RandomLessThan(3) + 3;
+    public override int RechargeTime() => SaveGame.Rng.RandomLessThan(3) + 3;
 
     public override int Value => 750;
 

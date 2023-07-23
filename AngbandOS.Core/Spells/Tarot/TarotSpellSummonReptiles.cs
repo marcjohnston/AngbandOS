@@ -14,7 +14,7 @@ internal class TarotSpellSummonReptiles : Spell
     public override void Cast()
     {
         SaveGame.MsgPrint("You concentrate on the image of a reptile...");
-        if (Program.Rng.DieRoll(5) > 2)
+        if (SaveGame.Rng.DieRoll(5) > 2)
         {
             if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new HydraMonsterSelector(), true))
             {

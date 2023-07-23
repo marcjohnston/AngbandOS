@@ -24,7 +24,7 @@ internal class WarHammerMjolnirFixedArtifact : FixedArtifact
         item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
 
         IArtifactBias artifactBias = null;
-        item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
+        item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
     }
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<BackSlashSymbol>();
     public override ColourEnum Colour => ColourEnum.Black;

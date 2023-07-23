@@ -25,13 +25,13 @@ internal abstract class BowWeaponItem : WeaponItem
             }
         }
 
-        switch (Program.Rng.DieRoll(6))
+        switch (SaveGame.Rng.DieRoll(6))
         {
             case 1:
             case 2:
             case 3:
                 RandartItemCharacteristics.XtraMight = true;
-                if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
+                if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RangerArtifactBias>();
                 }
@@ -39,7 +39,7 @@ internal abstract class BowWeaponItem : WeaponItem
 
             default:
                 RandartItemCharacteristics.XtraShots = true;
-                if (artifactBias == null && Program.Rng.DieRoll(9) == 1)
+                if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RangerArtifactBias>();
                 }
@@ -57,13 +57,13 @@ internal abstract class BowWeaponItem : WeaponItem
         base.ApplyMagic(level, power, null);
         if (power > 1)
         {
-            switch (Program.Rng.DieRoll(21))
+            switch (SaveGame.Rng.DieRoll(21))
             {
                 case 1:
                 case 11:
                     RareItemTypeIndex = RareItemTypeEnum.BowOfExtraMight;
                     IArtifactBias artifactBias = null;
-                    ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(34) + 4);
+                    ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(34) + 4);
                     break;
                 case 2:
                 case 12:

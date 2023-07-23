@@ -17,10 +17,10 @@ internal class LawDragonScaleMailArmorItem : DragonScaleMailArmorItem, IItemActi
         {
             return;
         }
-        int chance = Program.Rng.RandomLessThan(2);
+        int chance = SaveGame.Rng.RandomLessThan(2);
         string element = chance == 1 ? "sound" : "shards";
         SaveGame.MsgPrint($"You breathe {element}.");
         SaveGame.FireBall(chance == 1 ? (Projectile)SaveGame.SingletonRepository.Projectiles.Get<SoundProjectile>() : SaveGame.SingletonRepository.Projectiles.Get<ExplodeProjectile>(), dir, 230, -2);
-        RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
+        RechargeTimeLeft = SaveGame.Rng.RandomLessThan(300) + 300;
     }
 }

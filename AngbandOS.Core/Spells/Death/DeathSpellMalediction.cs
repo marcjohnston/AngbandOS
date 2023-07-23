@@ -18,12 +18,12 @@ internal class DeathSpellMalediction : Spell
             return;
         }
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<HellFireProjectile>(), dir,
-            Program.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 3), 0);
-        if (Program.Rng.DieRoll(5) != 1)
+            SaveGame.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 3), 0);
+        if (SaveGame.Rng.DieRoll(5) != 1)
         {
             return;
         }
-        int dummy = Program.Rng.DieRoll(1000);
+        int dummy = SaveGame.Rng.DieRoll(1000);
         if (dummy == 666)
         {
             SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<DeathRayProjectile>(), dir, SaveGame.ExperienceLevel);

@@ -24,13 +24,13 @@ internal class DaggerCharityFixedArtifact : FixedArtifact, IFixedArtifactActivat
         {
             return;
         }
-        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, Program.Rng.DiceRoll(4, 8));
-        item.RechargeTimeLeft = Program.Rng.RandomLessThan(6) + 6;
+        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, SaveGame.Rng.DiceRoll(4, 8));
+        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(6) + 6;
     }
     public override void ApplyResistances(SaveGame saveGame, Item item)
     {
         IArtifactBias artifactBias = null;
-        item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
+        item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
     }
     public string DescribeActivationEffect() => "lightning bolt (4d8) every 6+d6 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

@@ -27,7 +27,7 @@ internal abstract class CloakArmorItem : ArmourItem
 
     protected override void ApplyRandomPoorRareCharacteristics()
     {
-        switch (Program.Rng.DieRoll(3))
+        switch (SaveGame.Rng.DieRoll(3))
         {
             case 1:
                 RareItemTypeIndex = RareItemTypeEnum.CloakOfIrritation;
@@ -50,7 +50,7 @@ internal abstract class CloakArmorItem : ArmourItem
 
             if (power > 1)
             {
-                if (Program.Rng.DieRoll(20) == 1)
+                if (SaveGame.Rng.DieRoll(20) == 1)
                 {
                     CreateRandart(false);
                 }

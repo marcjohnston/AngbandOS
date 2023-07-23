@@ -12,5 +12,5 @@ internal class Arrow5D6MonsterSpell : ArrowProjectileMonsterSpell
 {
     private Arrow5D6MonsterSpell(SaveGame saveGame) : base(saveGame) { }
     protected override string ActionName => "fires a missile";
-    protected override int Damage(Monster monster) => Program.Rng.DiceRoll(5, 6);
+    protected override int Damage(Monster monster) => SaveGame.Rng.DiceRoll(5, 6);
 }

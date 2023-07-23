@@ -27,7 +27,7 @@ internal class SlownessPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Slowness slows you down.
-        return SaveGame.TimedSlow.AddTimer(Program.Rng.DieRoll(25) + 15);
+        return SaveGame.TimedSlow.AddTimer(SaveGame.Rng.DieRoll(25) + 15);
     }
 
     public override bool Smash(int who, int y, int x)

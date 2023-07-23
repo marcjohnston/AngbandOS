@@ -31,13 +31,13 @@ internal class BlindnessMonsterSpell : MonsterSpell
         {
             saveGame.MsgPrint("You are unaffected!");
         }
-        else if (Program.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
+        else if (SaveGame.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
         {
             saveGame.MsgPrint("You resist the effects!");
         }
         else
         {
-            saveGame.TimedBlindness.SetTimer(12 + Program.Rng.RandomLessThan(4));
+            saveGame.TimedBlindness.SetTimer(12 + SaveGame.Rng.RandomLessThan(4));
         }
         saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<BlindSpellResistantDetection>());
     }
@@ -57,7 +57,7 @@ internal class BlindnessMonsterSpell : MonsterSpell
                 saveGame.MsgPrint($"{targetName} is unaffected.");
             }
         }
-        else if (targetRace.Level > Program.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
+        else if (targetRace.Level > SaveGame.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
         {
             if (seeTarget)
             {
@@ -70,7 +70,7 @@ internal class BlindnessMonsterSpell : MonsterSpell
             {
                 saveGame.MsgPrint($"{targetName} is blinded!");
             }
-            target.ConfusionLevel += 12 + Program.Rng.RandomLessThan(4);
+            target.ConfusionLevel += 12 + SaveGame.Rng.RandomLessThan(4);
         }
     }
 }

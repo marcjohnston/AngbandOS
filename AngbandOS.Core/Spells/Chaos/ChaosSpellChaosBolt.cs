@@ -33,7 +33,7 @@ internal class ChaosSpellChaosBolt : Spell
             return;
         }
         SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>(), dir,
-            Program.Rng.DiceRoll(10 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+            SaveGame.Rng.DiceRoll(10 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
     }
 
     public override void CastFailed()

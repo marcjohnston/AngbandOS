@@ -18,7 +18,7 @@ internal class WeirdMindRandomMutation : Mutation
 
     public override void OnProcessWorld(SaveGame saveGame)
     {
-        if (saveGame.HasAntiMagic || Program.Rng.DieRoll(3000) != 1)
+        if (saveGame.HasAntiMagic || SaveGame.Rng.DieRoll(3000) != 1)
         {
             return;
         }

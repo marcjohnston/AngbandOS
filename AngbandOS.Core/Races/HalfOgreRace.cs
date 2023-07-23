@@ -74,7 +74,7 @@ internal class HalfOgreRace : Race
         {
             SaveGame.MsgPrint("Raaagh!");
             SaveGame.TimedFear.ResetTimer();
-            SaveGame.TimedSuperheroism.AddTimer(10 + Program.Rng.DieRoll(SaveGame.ExperienceLevel));
+            SaveGame.TimedSuperheroism.AddTimer(10 + SaveGame.Rng.DieRoll(SaveGame.ExperienceLevel));
             SaveGame.RestoreHealth(30);
         }
     }

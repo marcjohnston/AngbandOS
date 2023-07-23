@@ -25,7 +25,7 @@ internal class RingOfElementalPowerFireFixedArtifact : FixedArtifact, IFixedArti
             return;
         }
         saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, 120, 3);
-        item.RechargeTimeLeft = Program.Rng.RandomLessThan(225) + 225;
+        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(225) + 225;
     }
     public string DescribeActivationEffect() => "large fire ball (120) every 225+d225 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

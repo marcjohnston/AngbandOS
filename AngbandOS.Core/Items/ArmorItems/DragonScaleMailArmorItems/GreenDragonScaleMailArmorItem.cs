@@ -19,6 +19,6 @@ internal class GreenDragonScaleMailArmorItem : DragonScaleMailArmorItem, IItemAc
         }
         SaveGame.MsgPrint("You breathe poison gas.");
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), dir, 150, -2);
-        RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+        RechargeTimeLeft = SaveGame.Rng.RandomLessThan(450) + 450;
     }
 }

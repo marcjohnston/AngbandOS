@@ -20,12 +20,12 @@ internal class BerserkActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.TimedSuperheroism.AddTimer(Program.Rng.DieRoll(50) + 50);
-        SaveGame.TimedBlessing.AddTimer(Program.Rng.DieRoll(50) + 50);
+        SaveGame.TimedSuperheroism.AddTimer(SaveGame.Rng.DieRoll(50) + 50);
+        SaveGame.TimedBlessing.AddTimer(SaveGame.Rng.DieRoll(50) + 50);
         return true;
     }
 
-    public override int RechargeTime() => 100 + Program.Rng.DieRoll(100);
+    public override int RechargeTime() => 100 + SaveGame.Rng.DieRoll(100);
 
     public override int Value => 800;
 

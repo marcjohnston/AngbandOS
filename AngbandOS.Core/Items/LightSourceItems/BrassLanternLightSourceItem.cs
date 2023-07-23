@@ -30,7 +30,7 @@ internal class BrassLanternLightSourceItem : LightSourceItem
         }
         else if (TypeSpecificValue != 0)
         {
-            TypeSpecificValue = Program.Rng.DieRoll(TypeSpecificValue);
+            TypeSpecificValue = SaveGame.Rng.DieRoll(TypeSpecificValue);
         }
     }
 }

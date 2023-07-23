@@ -17,7 +17,7 @@ internal class MultiHuedDragonScaleMailArmorItem : DragonScaleMailArmorItem, IIt
         {
             return;
         }
-        int chance = Program.Rng.RandomLessThan(5);
+        int chance = SaveGame.Rng.RandomLessThan(5);
         string element = chance == 1 ? "lightning" : (chance == 2 ? "frost" : (chance == 3 ? "acid" : (chance == 4 ? "poison gas" : "fire")));
         SaveGame.MsgPrint($"You breathe {element}.");
         switch (chance)
@@ -41,6 +41,6 @@ internal class MultiHuedDragonScaleMailArmorItem : DragonScaleMailArmorItem, IIt
                 SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), dir, 250, -2);
                 return;
         }
-        RechargeTimeLeft = Program.Rng.RandomLessThan(225) + 225;
+        RechargeTimeLeft = SaveGame.Rng.RandomLessThan(225) + 225;
     }
 }

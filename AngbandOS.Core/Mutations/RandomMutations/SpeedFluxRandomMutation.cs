@@ -18,10 +18,10 @@ internal class SpeedFluxRandomMutation : Mutation
 
     public override void OnProcessWorld(SaveGame saveGame)
     {
-        if (Program.Rng.DieRoll(6000) == 1)
+        if (SaveGame.Rng.DieRoll(6000) == 1)
         {
             saveGame.Disturb(false);
-            if (Program.Rng.DieRoll(2) == 1)
+            if (SaveGame.Rng.DieRoll(2) == 1)
             {
                 saveGame.MsgPrint("Everything around you speeds up.");
                 if (saveGame.TimedHaste.TurnsRemaining > 0)
@@ -30,7 +30,7 @@ internal class SpeedFluxRandomMutation : Mutation
                 }
                 else
                 {
-                    saveGame.TimedSlow.AddTimer(Program.Rng.DieRoll(30) + 10);
+                    saveGame.TimedSlow.AddTimer(SaveGame.Rng.DieRoll(30) + 10);
                 }
             }
             else
@@ -42,7 +42,7 @@ internal class SpeedFluxRandomMutation : Mutation
                 }
                 else
                 {
-                    saveGame.TimedHaste.AddTimer(Program.Rng.DieRoll(30) + 10);
+                    saveGame.TimedHaste.AddTimer(SaveGame.Rng.DieRoll(30) + 10);
                 }
             }
             saveGame.MsgPrint(null);

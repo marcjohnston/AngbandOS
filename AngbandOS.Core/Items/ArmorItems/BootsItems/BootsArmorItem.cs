@@ -16,7 +16,7 @@ internal abstract class BootsArmorItem : ArmourItem
 
     protected override void ApplyRandomGoodRareCharacteristics()
     {
-        switch (Program.Rng.DieRoll(24))
+        switch (SaveGame.Rng.DieRoll(24))
         {
             case 1:
                 RareItemTypeIndex = RareItemTypeEnum.BootsOfSpeed;
@@ -49,10 +49,10 @@ internal abstract class BootsArmorItem : ArmourItem
             case 23:
             case 24:
                 RareItemTypeIndex = RareItemTypeEnum.BootsWinged;
-                if (Program.Rng.DieRoll(2) == 1)
+                if (SaveGame.Rng.DieRoll(2) == 1)
                 {
                     IArtifactBias artifactBias = null;
-                    ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
+                    ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
                 }
                 break;
         }
@@ -65,7 +65,7 @@ internal abstract class BootsArmorItem : ArmourItem
     /// <param name="item"></param>
     protected override void ApplyRandomPoorRareCharacteristics()
     {
-        switch (Program.Rng.DieRoll(3))
+        switch (SaveGame.Rng.DieRoll(3))
         {
             case 1:
                 RareItemTypeIndex = RareItemTypeEnum.BootsOfNoise;
@@ -94,7 +94,7 @@ internal abstract class BootsArmorItem : ArmourItem
 
             if (power > 1)
             {
-                if (Program.Rng.DieRoll(20) == 1)
+                if (SaveGame.Rng.DieRoll(20) == 1)
                 {
                     CreateRandart(false);
                 }

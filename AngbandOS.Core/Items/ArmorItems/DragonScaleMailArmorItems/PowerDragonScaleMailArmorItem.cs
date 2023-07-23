@@ -19,6 +19,6 @@ internal class PowerDragonScaleMailArmorItem : DragonScaleMailArmorItem, IItemAc
         }
         SaveGame.MsgPrint("You breathe the elements.");
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), dir, 300, -3);
-        RechargeTimeLeft = Program.Rng.RandomLessThan(300) + 300;
+        RechargeTimeLeft = SaveGame.Rng.RandomLessThan(300) + 300;
     }
 }

@@ -13,11 +13,11 @@ internal class SummonChestTrap : ChestTrap
     private SummonChestTrap(SaveGame saveGame) : base(saveGame) { }
     public override void Activate(ActivateChestTrapEventArgs eventArgs)
     {
-        int num = 2 + Program.Rng.DieRoll(3);
+        int num = 2 + SaveGame.Rng.DieRoll(3);
         SaveGame.MsgPrint("You are enveloped in a cloud of smoke!");
         for (int i = 0; i < num; i++)
         {
-            if (Program.Rng.DieRoll(100) < SaveGame.Difficulty)
+            if (SaveGame.Rng.DieRoll(100) < SaveGame.Difficulty)
             {
                 SaveGame.ActivateHiSummon();
             }

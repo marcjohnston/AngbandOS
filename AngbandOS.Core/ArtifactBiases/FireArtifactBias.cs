@@ -16,7 +16,7 @@ internal class FireArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.ResFire)
         {
             item.RandartItemCharacteristics.ResFire = true;
-            if (Program.Rng.DieRoll(2) == 1)
+            if (SaveGame.Rng.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -24,15 +24,15 @@ internal class FireArtifactBias : ArtifactBias
         if (item.Factory.CanApplyArtifactBiasResistance && !item.RandartItemCharacteristics.ShFire)
         {
             item.RandartItemCharacteristics.ShFire = true;
-            if (Program.Rng.DieRoll(2) == 1)
+            if (SaveGame.Rng.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (Program.Rng.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandartItemCharacteristics.ImFire)
+        if (SaveGame.Rng.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandartItemCharacteristics.ImFire)
         {
             item.RandartItemCharacteristics.ImFire = true;
-            if (Program.Rng.DieRoll(2) == 1)
+            if (SaveGame.Rng.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -56,7 +56,7 @@ internal class FireArtifactBias : ArtifactBias
             if (!item.RandartItemCharacteristics.BrandFire)
             {
                 item.RandartItemCharacteristics.BrandFire = true;
-                if (Program.Rng.DieRoll(2) == 1)
+                if (SaveGame.Rng.DieRoll(2) == 1)
                 {
                     return true;
                 }
@@ -67,11 +67,11 @@ internal class FireArtifactBias : ArtifactBias
 
     public override Activation GetActivationPowerType(Item item)
     {
-        if (Program.Rng.DieRoll(3) != 1)
+        if (SaveGame.Rng.DieRoll(3) != 1)
         {
             return SaveGame.SingletonRepository.Activations.Get<BoFire1Activation>();
         }
-        else if (Program.Rng.DieRoll(5) != 1)
+        else if (SaveGame.Rng.DieRoll(5) != 1)
         {
             return SaveGame.SingletonRepository.Activations.Get<BaFire1Activation>();
         }

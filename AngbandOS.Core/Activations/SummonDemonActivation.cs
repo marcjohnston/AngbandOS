@@ -18,7 +18,7 @@ internal class SummonDemonActivation : Activation
 
     public override bool Activate()
     {
-        if (Program.Rng.DieRoll(3) == 1)
+        if (SaveGame.Rng.DieRoll(3) == 1)
         {
             if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, (int)(SaveGame.ExperienceLevel * 1.5), new DemonMonsterSelector()))
             {
@@ -37,7 +37,7 @@ internal class SummonDemonActivation : Activation
         return true;
     }
 
-    public override int RechargeTime() => 666 + Program.Rng.DieRoll(333);
+    public override int RechargeTime() => 666 + SaveGame.Rng.DieRoll(333);
 
     public override int Value => 20000;
 

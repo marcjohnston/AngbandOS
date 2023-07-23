@@ -13,6 +13,6 @@ internal class CauseLightWoundsMonsterSpell : CauseWoundsMonsterSpell
     private CauseLightWoundsMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     protected override int CurseEquipmentChance => 33;
     protected override int HeavyCurseEquipmentChance => 0;
-    protected override int Damage => Program.Rng.DiceRoll(3, 8);
+    protected override int Damage => SaveGame.Rng.DiceRoll(3, 8);
     public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} points at {target.Name} and curses horribly.";
 }

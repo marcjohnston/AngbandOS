@@ -25,7 +25,7 @@ internal class CureSeriousWoundsMushroomFoodItemFactory : MushroomFoodItemFactor
     public override bool Eat()
     {
         SaveGame.PlaySound(SoundEffectEnum.Eat);
-        if (SaveGame.RestoreHealth(Program.Rng.DiceRoll(4, 8)))
+        if (SaveGame.RestoreHealth(SaveGame.Rng.DiceRoll(4, 8)))
         {
             return true;
         }

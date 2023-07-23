@@ -19,7 +19,7 @@ internal class LongSwordOfKarakalFixedArtifact : FixedArtifact, IFixedArtifactAc
     // Karakal teleports you randomly
     public void ActivateItem(SaveGame saveGame, Item item)
     {
-        switch (Program.Rng.DieRoll(13))
+        switch (SaveGame.Rng.DieRoll(13))
         {
             case 1:
             case 2:

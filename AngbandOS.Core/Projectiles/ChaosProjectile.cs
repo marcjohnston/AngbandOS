@@ -88,13 +88,13 @@ internal class ChaosProjectile : Projectile
             obvious = true;
         }
         bool doPoly = true;
-        int doConf = (5 + Program.Rng.DieRoll(11) + r) / (r + 1);
+        int doConf = (5 + SaveGame.Rng.DieRoll(11) + r) / (r + 1);
         if (rPtr.BreatheChaos ||
-            (rPtr.Demon && Program.Rng.DieRoll(3) == 1))
+            (rPtr.Demon && SaveGame.Rng.DieRoll(3) == 1))
         {
             note = " resists.";
             dam *= 3;
-            dam /= Program.Rng.DieRoll(6) + 6;
+            dam /= SaveGame.Rng.DieRoll(6) + 6;
             doPoly = false;
         }
         if (rPtr.Unique)
@@ -105,7 +105,7 @@ internal class ChaosProjectile : Projectile
         {
             doPoly = false;
         }
-        if (doPoly && Program.Rng.DieRoll(90) > rPtr.Level)
+        if (doPoly && SaveGame.Rng.DieRoll(90) > rPtr.Level)
         {
             note = " is unaffected!";
             bool charm = mPtr.SmFriendly;
@@ -156,16 +156,16 @@ internal class ChaosProjectile : Projectile
         if (SaveGame.HasChaosResistance)
         {
             dam *= 6;
-            dam /= Program.Rng.DieRoll(6) + 6;
+            dam /= SaveGame.Rng.DieRoll(6) + 6;
         }
         if (!SaveGame.HasConfusionResistance)
         {
-            SaveGame.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(20) + 10);
+            SaveGame.TimedConfusion.AddTimer(SaveGame.Rng.RandomLessThan(20) + 10);
         }
         if (!SaveGame.HasChaosResistance)
         {
-            SaveGame.TimedHallucinations.AddTimer(Program.Rng.DieRoll(10));
-            if (Program.Rng.DieRoll(3) == 1)
+            SaveGame.TimedHallucinations.AddTimer(SaveGame.Rng.DieRoll(10));
+            if (SaveGame.Rng.DieRoll(3) == 1)
             {
                 SaveGame.MsgPrint("Your body is twisted by chaos!");
                 SaveGame.Dna.GainMutation();
@@ -173,11 +173,11 @@ internal class ChaosProjectile : Projectile
         }
         if (!SaveGame.HasNetherResistance && !SaveGame.HasChaosResistance)
         {
-            if (SaveGame.HasHoldLife && Program.Rng.RandomLessThan(100) < 75)
+            if (SaveGame.HasHoldLife && SaveGame.Rng.RandomLessThan(100) < 75)
             {
                 SaveGame.MsgPrint("You keep hold of your life force!");
             }
-            else if (Program.Rng.DieRoll(10) <= SaveGame.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+            else if (SaveGame.Rng.DieRoll(10) <= SaveGame.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
             {
                 SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
             }
@@ -192,7 +192,7 @@ internal class ChaosProjectile : Projectile
                 SaveGame.LoseExperience(5000 + (SaveGame.ExperiencePoints / 100 * Constants.MonDrainLife));
             }
         }
-        if (!SaveGame.HasChaosResistance || Program.Rng.DieRoll(9) == 1)
+        if (!SaveGame.HasChaosResistance || SaveGame.Rng.DieRoll(9) == 1)
         {
             SaveGame.InvenDamage(SaveGame.SetElecDestroy, 2);
             SaveGame.InvenDamage(SaveGame.SetFireDestroy, 2);

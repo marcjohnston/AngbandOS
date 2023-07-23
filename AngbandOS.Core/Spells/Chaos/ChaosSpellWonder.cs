@@ -28,7 +28,7 @@ internal class ChaosSpellWonder : Spell
                 beam = SaveGame.ExperienceLevel / 2;
                 break;
         }
-        int die = Program.Rng.DieRoll(100) + (SaveGame.ExperienceLevel / 5);
+        int die = SaveGame.Rng.DieRoll(100) + (SaveGame.ExperienceLevel / 5);
         if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
@@ -56,7 +56,7 @@ internal class ChaosSpellWonder : Spell
         else if (die < 36)
         {
             SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), dir,
-                Program.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 4));
+                SaveGame.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 4));
         }
         else if (die < 41)
         {
@@ -73,22 +73,22 @@ internal class ChaosSpellWonder : Spell
         else if (die < 56)
         {
             SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir,
-                Program.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+                SaveGame.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
         }
         else if (die < 61)
         {
             SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir,
-                Program.Rng.DiceRoll(5 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+                SaveGame.Rng.DiceRoll(5 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
         }
         else if (die < 66)
         {
             SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir,
-                Program.Rng.DiceRoll(6 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+                SaveGame.Rng.DiceRoll(6 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
         }
         else if (die < 71)
         {
             SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir,
-                Program.Rng.DiceRoll(8 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+                SaveGame.Rng.DiceRoll(8 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
         }
         else if (die < 76)
         {

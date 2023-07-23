@@ -21,14 +21,14 @@ internal class TerrifyAttackEffect : AttackEffect
             SaveGame.MsgPrint("You stand your ground!");
             obvious = true;
         }
-        else if (Program.Rng.RandomLessThan(100) < SaveGame.SkillSavingThrow)
+        else if (SaveGame.Rng.RandomLessThan(100) < SaveGame.SkillSavingThrow)
         {
             SaveGame.MsgPrint("You stand your ground!");
             obvious = true;
         }
         else
         {
-            if (SaveGame.TimedFear.AddTimer(3 + Program.Rng.DieRoll(monsterLevel)))
+            if (SaveGame.TimedFear.AddTimer(3 + SaveGame.Rng.DieRoll(monsterLevel)))
             {
                 obvious = true;
             }

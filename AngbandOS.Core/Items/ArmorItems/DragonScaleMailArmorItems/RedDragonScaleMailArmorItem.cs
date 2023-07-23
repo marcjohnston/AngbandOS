@@ -19,6 +19,6 @@ internal class RedDragonScaleMailArmorItem : DragonScaleMailArmorItem, IItemActi
         }
         SaveGame.MsgPrint("You breathe fire.");
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, 200, -2);
-        RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+        RechargeTimeLeft = SaveGame.Rng.RandomLessThan(450) + 450;
     }
 }

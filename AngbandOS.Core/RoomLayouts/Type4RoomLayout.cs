@@ -16,7 +16,7 @@ internal class Type4RoomLayout : RoomLayout
     {
         int y, x;
         GridTile cPtr;
-        bool light = SaveGame.Difficulty <= Program.Rng.DieRoll(25);
+        bool light = SaveGame.Difficulty <= SaveGame.Rng.DieRoll(25);
         int y1 = yval - 4;
         int y2 = yval + 4;
         int x1 = xval - 11;
@@ -66,10 +66,10 @@ internal class Type4RoomLayout : RoomLayout
             cPtr = SaveGame.Grid[y2 + 1][x];
             cPtr.SetFeature("WallInner");
         }
-        switch (Program.Rng.DieRoll(5))
+        switch (SaveGame.Rng.DieRoll(5))
         {
             case 1:
-                switch (Program.Rng.DieRoll(4))
+                switch (SaveGame.Rng.DieRoll(4))
                 {
                     case 1:
                         PlaceSecretDoor(y1 - 1, xval);
@@ -91,7 +91,7 @@ internal class Type4RoomLayout : RoomLayout
                 break;
 
             case 2:
-                switch (Program.Rng.DieRoll(4))
+                switch (SaveGame.Rng.DieRoll(4))
                 {
                     case 1:
                         PlaceSecretDoor(y1 - 1, xval);
@@ -121,7 +121,7 @@ internal class Type4RoomLayout : RoomLayout
                         cPtr.SetFeature("WallInner");
                     }
                 }
-                switch (Program.Rng.DieRoll(4))
+                switch (SaveGame.Rng.DieRoll(4))
                 {
                     case 1:
                         PlaceLockedDoor(yval - 1, xval);
@@ -139,8 +139,8 @@ internal class Type4RoomLayout : RoomLayout
                         PlaceLockedDoor(yval, xval + 1);
                         break;
                 }
-                VaultMonsters(yval, xval, Program.Rng.DieRoll(3) + 2);
-                if (Program.Rng.RandomLessThan(100) < 80)
+                VaultMonsters(yval, xval, SaveGame.Rng.DieRoll(3) + 2);
+                if (SaveGame.Rng.RandomLessThan(100) < 80)
                 {
                     SaveGame.PlaceObject(yval, xval, false, false);
                 }
@@ -148,11 +148,11 @@ internal class Type4RoomLayout : RoomLayout
                 {
                     PlaceRandomStairs(yval, xval);
                 }
-                VaultTraps(yval, xval, 4, 10, 2 + Program.Rng.DieRoll(3));
+                VaultTraps(yval, xval, 4, 10, 2 + SaveGame.Rng.DieRoll(3));
                 break;
 
             case 3:
-                switch (Program.Rng.DieRoll(4))
+                switch (SaveGame.Rng.DieRoll(4))
                 {
                     case 1:
                         PlaceSecretDoor(y1 - 1, xval);
@@ -178,9 +178,9 @@ internal class Type4RoomLayout : RoomLayout
                         cPtr.SetFeature("WallInner");
                     }
                 }
-                if (Program.Rng.RandomLessThan(2) == 0)
+                if (SaveGame.Rng.RandomLessThan(2) == 0)
                 {
-                    int tmp = Program.Rng.DieRoll(2);
+                    int tmp = SaveGame.Rng.DieRoll(2);
                     for (y = yval - 1; y <= yval + 1; y++)
                     {
                         for (x = xval - 5 - tmp; x <= xval - 3 - tmp; x++)
@@ -195,7 +195,7 @@ internal class Type4RoomLayout : RoomLayout
                         }
                     }
                 }
-                if (Program.Rng.RandomLessThan(3) == 0)
+                if (SaveGame.Rng.RandomLessThan(3) == 0)
                 {
                     for (x = xval - 5; x <= xval + 5; x++)
                     {
@@ -208,15 +208,15 @@ internal class Type4RoomLayout : RoomLayout
                     cPtr.SetFeature("WallInner");
                     cPtr = SaveGame.Grid[yval][xval + 5];
                     cPtr.SetFeature("WallInner");
-                    PlaceSecretDoor(yval - 3 + (Program.Rng.DieRoll(2) * 2), xval - 3);
-                    PlaceSecretDoor(yval - 3 + (Program.Rng.DieRoll(2) * 2), xval + 3);
-                    VaultMonsters(yval, xval - 2, Program.Rng.DieRoll(2));
-                    VaultMonsters(yval, xval + 2, Program.Rng.DieRoll(2));
-                    if (Program.Rng.RandomLessThan(3) == 0)
+                    PlaceSecretDoor(yval - 3 + (SaveGame.Rng.DieRoll(2) * 2), xval - 3);
+                    PlaceSecretDoor(yval - 3 + (SaveGame.Rng.DieRoll(2) * 2), xval + 3);
+                    VaultMonsters(yval, xval - 2, SaveGame.Rng.DieRoll(2));
+                    VaultMonsters(yval, xval + 2, SaveGame.Rng.DieRoll(2));
+                    if (SaveGame.Rng.RandomLessThan(3) == 0)
                     {
                         SaveGame.PlaceObject(yval, xval - 2, false, false);
                     }
-                    if (Program.Rng.RandomLessThan(3) == 0)
+                    if (SaveGame.Rng.RandomLessThan(3) == 0)
                     {
                         SaveGame.PlaceObject(yval, xval + 2, false, false);
                     }
@@ -224,7 +224,7 @@ internal class Type4RoomLayout : RoomLayout
                 break;
 
             case 4:
-                switch (Program.Rng.DieRoll(4))
+                switch (SaveGame.Rng.DieRoll(4))
                 {
                     case 1:
                         PlaceSecretDoor(y1 - 1, xval);
@@ -253,10 +253,10 @@ internal class Type4RoomLayout : RoomLayout
                         }
                     }
                 }
-                VaultMonsters(yval, xval - 5, Program.Rng.DieRoll(3));
-                VaultMonsters(yval, xval + 5, Program.Rng.DieRoll(3));
-                VaultTraps(yval, xval - 3, 2, 8, Program.Rng.DieRoll(3));
-                VaultTraps(yval, xval + 3, 2, 8, Program.Rng.DieRoll(3));
+                VaultMonsters(yval, xval - 5, SaveGame.Rng.DieRoll(3));
+                VaultMonsters(yval, xval + 5, SaveGame.Rng.DieRoll(3));
+                VaultTraps(yval, xval - 3, 2, 8, SaveGame.Rng.DieRoll(3));
+                VaultTraps(yval, xval + 3, 2, 8, SaveGame.Rng.DieRoll(3));
                 VaultObjects(yval, xval, 3);
                 break;
 
@@ -271,9 +271,9 @@ internal class Type4RoomLayout : RoomLayout
                     cPtr = SaveGame.Grid[yval][x];
                     cPtr.SetFeature("WallInner");
                 }
-                if (Program.Rng.RandomLessThan(100) < 50)
+                if (SaveGame.Rng.RandomLessThan(100) < 50)
                 {
-                    int i = Program.Rng.DieRoll(10);
+                    int i = SaveGame.Rng.DieRoll(10);
                     PlaceSecretDoor(y1 - 1, xval - i);
                     PlaceSecretDoor(y1 - 1, xval + i);
                     PlaceSecretDoor(y2 + 1, xval - i);
@@ -281,17 +281,17 @@ internal class Type4RoomLayout : RoomLayout
                 }
                 else
                 {
-                    int i = Program.Rng.DieRoll(3);
+                    int i = SaveGame.Rng.DieRoll(3);
                     PlaceSecretDoor(yval + i, x1 - 1);
                     PlaceSecretDoor(yval - i, x1 - 1);
                     PlaceSecretDoor(yval + i, x2 + 1);
                     PlaceSecretDoor(yval - i, x2 + 1);
                 }
-                VaultObjects(yval, xval, 2 + Program.Rng.DieRoll(2));
-                VaultMonsters(yval + 1, xval - 4, Program.Rng.DieRoll(4));
-                VaultMonsters(yval + 1, xval + 4, Program.Rng.DieRoll(4));
-                VaultMonsters(yval - 1, xval - 4, Program.Rng.DieRoll(4));
-                VaultMonsters(yval - 1, xval + 4, Program.Rng.DieRoll(4));
+                VaultObjects(yval, xval, 2 + SaveGame.Rng.DieRoll(2));
+                VaultMonsters(yval + 1, xval - 4, SaveGame.Rng.DieRoll(4));
+                VaultMonsters(yval + 1, xval + 4, SaveGame.Rng.DieRoll(4));
+                VaultMonsters(yval - 1, xval - 4, SaveGame.Rng.DieRoll(4));
+                VaultMonsters(yval - 1, xval + 4, SaveGame.Rng.DieRoll(4));
                 break;
         }
     }
@@ -316,7 +316,7 @@ internal class Type4RoomLayout : RoomLayout
                 PlaceUpStairs(y, x);
             }
         }
-        else if (Program.Rng.RandomLessThan(100) < 50)
+        else if (SaveGame.Rng.RandomLessThan(100) < 50)
         {
             PlaceDownStairs(y, x);
         }
@@ -349,8 +349,8 @@ internal class Type4RoomLayout : RoomLayout
             {
                 while (dummy < SaveGame.SafeMaxAttempts)
                 {
-                    j = Program.Rng.RandomSpread(y, 2);
-                    k = Program.Rng.RandomSpread(x, 3);
+                    j = SaveGame.Rng.RandomSpread(y, 2);
+                    k = SaveGame.Rng.RandomSpread(x, 3);
                     dummy++;
                     if (!SaveGame.InBounds(j, k))
                     {
@@ -362,7 +362,7 @@ internal class Type4RoomLayout : RoomLayout
                 {
                     continue;
                 }
-                if (Program.Rng.RandomLessThan(100) < 75)
+                if (SaveGame.Rng.RandomLessThan(100) < 75)
                 {
                     SaveGame.PlaceObject(j, k, false, false);
                 }
@@ -377,6 +377,6 @@ internal class Type4RoomLayout : RoomLayout
     private void PlaceLockedDoor(int y, int x)
     {
         GridTile cPtr = SaveGame.Grid[y][x];
-        cPtr.SetFeature($"LockedDoor{Program.Rng.DieRoll(7)}");
+        cPtr.SetFeature($"LockedDoor{SaveGame.Rng.DieRoll(7)}");
     }
 }

@@ -20,11 +20,11 @@ internal class ResistAllActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.TimedAcidResistance.AddTimer(Program.Rng.DieRoll(40) + 40);
-        SaveGame.TimedLightningResistance.AddTimer(Program.Rng.DieRoll(40) + 40);
-        SaveGame.TimedFireResistance.AddTimer(Program.Rng.DieRoll(40) + 40);
-        SaveGame.TimedColdResistance.AddTimer(Program.Rng.DieRoll(40) + 40);
-        SaveGame.TimedPoisonResistance.AddTimer(Program.Rng.DieRoll(40) + 40);
+        SaveGame.TimedAcidResistance.AddTimer(SaveGame.Rng.DieRoll(40) + 40);
+        SaveGame.TimedLightningResistance.AddTimer(SaveGame.Rng.DieRoll(40) + 40);
+        SaveGame.TimedFireResistance.AddTimer(SaveGame.Rng.DieRoll(40) + 40);
+        SaveGame.TimedColdResistance.AddTimer(SaveGame.Rng.DieRoll(40) + 40);
+        SaveGame.TimedPoisonResistance.AddTimer(SaveGame.Rng.DieRoll(40) + 40);
         return true;
     }
 

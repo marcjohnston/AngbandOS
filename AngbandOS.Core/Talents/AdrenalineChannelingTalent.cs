@@ -25,7 +25,7 @@ internal class AdrenalineChannelingTalent : Talent
         SaveGame.TimedFear.ResetTimer();
         SaveGame.TimedStun.ResetTimer();
         SaveGame.RestoreHealth(SaveGame.ExperienceLevel);
-        int i = 10 + Program.Rng.DieRoll(SaveGame.ExperienceLevel * 3 / 2);
+        int i = 10 + SaveGame.Rng.DieRoll(SaveGame.ExperienceLevel * 3 / 2);
         if (SaveGame.ExperienceLevel < 35)
         {
             SaveGame.TimedHeroism.AddTimer(i);

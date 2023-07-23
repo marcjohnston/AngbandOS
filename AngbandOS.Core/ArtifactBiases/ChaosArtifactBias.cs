@@ -17,7 +17,7 @@ internal class ChaosArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.ResChaos)
         {
             item.RandartItemCharacteristics.ResChaos = true;
-            if (Program.Rng.DieRoll(2) == 1)
+            if (SaveGame.Rng.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -25,7 +25,7 @@ internal class ChaosArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.ResConf)
         {
             item.RandartItemCharacteristics.ResConf = true;
-            if (Program.Rng.DieRoll(2) == 1)
+            if (SaveGame.Rng.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -33,7 +33,7 @@ internal class ChaosArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.ResDisen)
         {
             item.RandartItemCharacteristics.ResDisen = false;
-            if (Program.Rng.DieRoll(2) == 1)
+            if (SaveGame.Rng.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -46,7 +46,7 @@ internal class ChaosArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.Teleport)
         {
             item.RandartItemCharacteristics.Teleport = true;
-            if (Program.Rng.DieRoll(2) == 1)
+            if (SaveGame.Rng.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -60,7 +60,7 @@ internal class ChaosArtifactBias : ArtifactBias
             if (!item.RandartItemCharacteristics.Chaotic)
             {
                 item.RandartItemCharacteristics.Chaotic = true;
-                if (Program.Rng.DieRoll(2) == 1)
+                if (SaveGame.Rng.DieRoll(2) == 1)
                 {
                     return true;
                 }
@@ -73,7 +73,7 @@ internal class ChaosArtifactBias : ArtifactBias
 
     public override Activation GetActivationPowerType(Item item)
     {
-        if (Program.Rng.DieRoll(6) == 1)
+        if (SaveGame.Rng.DieRoll(6) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get<SummonDemonActivation>();
         }

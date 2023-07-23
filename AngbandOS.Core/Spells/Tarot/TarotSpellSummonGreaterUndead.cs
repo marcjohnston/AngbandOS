@@ -14,7 +14,7 @@ internal class TarotSpellSummonGreaterUndead : Spell
     public override void Cast()
     {
         SaveGame.MsgPrint("You concentrate on the image of a greater undead being...");
-        if (Program.Rng.DieRoll(10) > 3)
+        if (SaveGame.Rng.DieRoll(10) > 3)
         {
             if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new HiUndeadNoUniquesMonsterSelector(), true))
             {

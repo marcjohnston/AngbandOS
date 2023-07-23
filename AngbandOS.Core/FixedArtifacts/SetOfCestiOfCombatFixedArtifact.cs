@@ -25,7 +25,7 @@ internal class SetOfCestiOfCombatFixedArtifact : FixedArtifact, IFixedArtifactAc
             return;
         }
         saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<ArrowProjectile>(), dir, 150);
-        item.RechargeTimeLeft = Program.Rng.RandomLessThan(90) + 90;
+        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(90) + 90;
     }
     public override void ApplyResistances(SaveGame saveGame, Item item)
     {

@@ -19,6 +19,6 @@ internal class WhiteDragonScaleMailArmorItem : DragonScaleMailArmorItem, IItemAc
         }
         SaveGame.MsgPrint("You breathe frost.");
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 110, -2);
-        RechargeTimeLeft = Program.Rng.RandomLessThan(450) + 450;
+        RechargeTimeLeft = SaveGame.Rng.RandomLessThan(450) + 450;
     }
 }

@@ -39,7 +39,7 @@ internal class NetherProjectile : Projectile
         {
             note = " resists.";
             dam *= 3;
-            dam /= Program.Rng.DieRoll(6) + 6;
+            dam /= SaveGame.Rng.DieRoll(6) + 6;
             if (seen)
             {
                 rPtr.Knowledge.Characteristics.ResistNether = true;
@@ -78,15 +78,15 @@ internal class NetherProjectile : Projectile
             {
                 dam *= 6;
             }
-            dam /= Program.Rng.DieRoll(6) + 6;
+            dam /= SaveGame.Rng.DieRoll(6) + 6;
         }
         else
         {
-            if (SaveGame.HasHoldLife && Program.Rng.RandomLessThan(100) < 75)
+            if (SaveGame.HasHoldLife && SaveGame.Rng.RandomLessThan(100) < 75)
             {
                 SaveGame.MsgPrint("You keep hold of your life force!");
             }
-            else if (Program.Rng.DieRoll(10) <= SaveGame.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+            else if (SaveGame.Rng.DieRoll(10) <= SaveGame.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
             {
                 SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
             }

@@ -35,7 +35,7 @@ internal class DominationProjectile : Projectile
         {
             obvious = true;
         }
-        if (rPtr.Unique || rPtr.ImmuneConfusion || rPtr.Level > Program.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+        if (rPtr.Unique || rPtr.ImmuneConfusion || rPtr.Level > SaveGame.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
         {
             if (rPtr.ImmuneConfusion)
             {
@@ -45,17 +45,17 @@ internal class DominationProjectile : Projectile
                 }
             }
             doConf = 0;
-            if ((rPtr.Undead || rPtr.Demon) && rPtr.Level > SaveGame.ExperienceLevel / 2 && Program.Rng.DieRoll(2) == 1)
+            if ((rPtr.Undead || rPtr.Demon) && rPtr.Level > SaveGame.ExperienceLevel / 2 && SaveGame.Rng.DieRoll(2) == 1)
             {
                 string s = seen ? "'s" : "s";
                 SaveGame.MsgPrint($"{mName}{s} corrupted mind backlashes your attack!");
-                if (Program.Rng.RandomLessThan(100) < SaveGame.SkillSavingThrow)
+                if (SaveGame.Rng.RandomLessThan(100) < SaveGame.SkillSavingThrow)
                 {
                     SaveGame.MsgPrint("You resist the effects!");
                 }
                 else
                 {
-                    switch (Program.Rng.DieRoll(4))
+                    switch (SaveGame.Rng.DieRoll(4))
                     {
                         case 1:
                             SaveGame.TimedStun.AddTimer((dam / 2));
@@ -94,14 +94,14 @@ internal class DominationProjectile : Projectile
             }
             else
             {
-                if (dam > 29 && Program.Rng.DieRoll(100) < dam)
+                if (dam > 29 && SaveGame.Rng.DieRoll(100) < dam)
                 {
                     note = " is in your thrall!";
                     mPtr.SmFriendly = true;
                 }
                 else
                 {
-                    switch (Program.Rng.DieRoll(4))
+                    switch (SaveGame.Rng.DieRoll(4))
                     {
                         case 1:
                             doStun = dam / 2;

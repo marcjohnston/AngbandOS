@@ -54,7 +54,7 @@ internal abstract class RoomLayout
                         break;
 
                     case '*':
-                        if (Program.Rng.RandomLessThan(100) < 75)
+                        if (SaveGame.Rng.RandomLessThan(100) < 75)
                         {
                             SaveGame.PlaceObject(y, x, false, false);
                         }
@@ -125,13 +125,13 @@ internal abstract class RoomLayout
                         }
                     case ',':
                         {
-                            if (Program.Rng.RandomLessThan(100) < 50)
+                            if (SaveGame.Rng.RandomLessThan(100) < 50)
                             {
                                 SaveGame.MonsterLevel = SaveGame.Difficulty + 3;
                                 SaveGame.PlaceMonster(y, x, true, true);
                                 SaveGame.MonsterLevel = SaveGame.Difficulty;
                             }
-                            if (Program.Rng.RandomLessThan(100) < 50)
+                            if (SaveGame.Rng.RandomLessThan(100) < 50)
                             {
                                 SaveGame.ObjectLevel = SaveGame.Difficulty + 7;
                                 SaveGame.PlaceObject(y, x, false, false);
@@ -167,8 +167,8 @@ internal abstract class RoomLayout
         {
             while (dummy < SaveGame.SafeMaxAttempts)
             {
-                y1 = Program.Rng.RandomSpread(y, yd);
-                x1 = Program.Rng.RandomSpread(x, xd);
+                y1 = SaveGame.Rng.RandomSpread(y, yd);
+                x1 = SaveGame.Rng.RandomSpread(x, xd);
                 dummy++;
                 if (!SaveGame.InBounds(y1, x1))
                 {

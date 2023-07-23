@@ -18,13 +18,13 @@ internal class WraithRandomMutation : Mutation
 
     public override void OnProcessWorld(SaveGame saveGame)
     {
-        if (saveGame.HasAntiMagic || Program.Rng.DieRoll(3000) != 13)
+        if (saveGame.HasAntiMagic || SaveGame.Rng.DieRoll(3000) != 13)
         {
             return;
         }
         saveGame.Disturb(false);
         saveGame.MsgPrint("You feel insubstantial!");
         saveGame.MsgPrint(null);
-        saveGame.TimedEtherealness.AddTimer(Program.Rng.DieRoll(saveGame.ExperienceLevel / 2) + saveGame.ExperienceLevel / 2);
+        saveGame.TimedEtherealness.AddTimer(SaveGame.Rng.DieRoll(saveGame.ExperienceLevel / 2) + saveGame.ExperienceLevel / 2);
     }
 }

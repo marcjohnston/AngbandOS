@@ -24,7 +24,7 @@ internal class DispGoodActivation : Activation
         return true;
     }
 
-    public override int RechargeTime() => Program.Rng.RandomLessThan(300) + 300;
+    public override int RechargeTime() => SaveGame.Rng.RandomLessThan(300) + 300;
 
     public override int Value => 3500;
 

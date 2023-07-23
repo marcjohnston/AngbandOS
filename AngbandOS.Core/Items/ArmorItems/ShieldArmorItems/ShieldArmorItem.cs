@@ -19,7 +19,7 @@ internal abstract class ShieldArmorItem : ArmourItem
     /// </summary>
     protected override void ApplyRandomGoodRareCharacteristics()
     {
-        switch (Program.Rng.DieRoll(23))
+        switch (SaveGame.Rng.DieRoll(23))
         {
             case 1:
             case 11:
@@ -50,8 +50,8 @@ internal abstract class ShieldArmorItem : ArmourItem
             case 10:
             case 20:
                 IArtifactBias artifactBias = null;
-                ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(34) + 4);
-                if (Program.Rng.DieRoll(4) == 1)
+                ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(34) + 4);
+                if (SaveGame.Rng.DieRoll(4) == 1)
                 {
                     RandartItemCharacteristics.ResPois = true;
                 }

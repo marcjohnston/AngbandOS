@@ -25,10 +25,10 @@ internal class LightCrossbowOfDeathFixedArtifact : FixedArtifact, IFixedArtifact
     }
     public override void ApplyResistances(SaveGame saveGame, Item item)
     {
-        if (Program.Rng.DieRoll(2) == 1)
+        if (SaveGame.Rng.DieRoll(2) == 1)
         {
             IArtifactBias artifactBias = null;
-            item.ApplyRandomResistance(ref artifactBias, Program.Rng.DieRoll(22) + 16);
+            item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
         }
         else
         {

@@ -30,11 +30,11 @@ internal class PoisonMushroomFoodItemFactory : MushroomFoodItemFactory
         if (!(SaveGame.HasPoisonResistance || SaveGame.TimedPoisonResistance.TurnsRemaining != 0))
         {
             // Hagarg Ryonis may protect us from poison
-            if (Program.Rng.DieRoll(10) <= SaveGame.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+            if (SaveGame.Rng.DieRoll(10) <= SaveGame.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
             {
                 SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
             }
-            else if (SaveGame.TimedPoison.AddTimer(Program.Rng.RandomLessThan(10) + 10))
+            else if (SaveGame.TimedPoison.AddTimer(SaveGame.Rng.RandomLessThan(10) + 10))
             {
                 return true;
             }

@@ -15,7 +15,7 @@ internal class SummonMReward : Reward
     {
         SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
         SaveGame.MsgPrint("'My pets, destroy the arrogant mortal!'");
-        for (int dummy = 0; dummy < Program.Rng.DieRoll(5) + 1; dummy++)
+        for (int dummy = 0; dummy < SaveGame.Rng.DieRoll(5) + 1; dummy++)
         {
             SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, null);
         }

@@ -27,7 +27,7 @@ internal class RuinationPotionItemFactory : PotionItemFactory
         // Ruination does 10d10 damage and reduces all your ability scores, bypassing
         // sustains and divine protection
         SaveGame.MsgPrint("Your nerves and muscles feel weak and lifeless!");
-        SaveGame.TakeHit(Program.Rng.DiceRoll(10, 10), "a potion of Ruination");
+        SaveGame.TakeHit(SaveGame.Rng.DiceRoll(10, 10), "a potion of Ruination");
         SaveGame.DecreaseAbilityScore(Ability.Dexterity, 25, true);
         SaveGame.DecreaseAbilityScore(Ability.Wisdom, 25, true);
         SaveGame.DecreaseAbilityScore(Ability.Constitution, 25, true);
@@ -39,7 +39,7 @@ internal class RuinationPotionItemFactory : PotionItemFactory
 
     public override bool Smash(int who, int y, int x)
     {
-        SaveGame.Project(who, 2, y, x, Program.Rng.DiceRoll(25, 25), SaveGame.SingletonRepository.Projectiles.Get<ExplodeProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        SaveGame.Project(who, 2, y, x, SaveGame.Rng.DiceRoll(25, 25), SaveGame.SingletonRepository.Projectiles.Get<ExplodeProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return true;
     }
     public override Item CreateItem() => new RuinationPotionItem(SaveGame);

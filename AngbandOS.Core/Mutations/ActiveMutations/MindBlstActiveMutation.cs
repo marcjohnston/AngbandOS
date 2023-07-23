@@ -22,7 +22,7 @@ internal class MindBlstActiveMutation : Mutation
         {
             return;
         }
-        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir, Program.Rng.DiceRoll(3 + ((saveGame.ExperienceLevel - 1) / 5), 3));
+        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir, SaveGame.Rng.DiceRoll(3 + ((saveGame.ExperienceLevel - 1) / 5), 3));
     }
 
     public override string ActivationSummary(int lvl)

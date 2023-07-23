@@ -18,12 +18,12 @@ internal class AcidRingItem : RingItem, IItemActivatable
             return;
         }
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir, 50, 2);
-        SaveGame.TimedAcidResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
-        RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
+        SaveGame.TimedAcidResistance.AddTimer(SaveGame.Rng.DieRoll(20) + 20);
+        RechargeTimeLeft = SaveGame.Rng.RandomLessThan(50) + 50;
     }
 
     protected override void ApplyMagic(int level, int power, Store? store)
     {
-        BonusArmorClass = 5 + Program.Rng.DieRoll(5) + GetBonusValue(10, level);
+        BonusArmorClass = 5 + SaveGame.Rng.DieRoll(5) + GetBonusValue(10, level);
     }
 }

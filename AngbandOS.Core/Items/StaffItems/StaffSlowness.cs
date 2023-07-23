@@ -25,7 +25,7 @@ internal class StaffSlowness : StaffItemClass
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.TimedSlow.AddTimer(Program.Rng.DieRoll(30) + 15))
+        if (SaveGame.TimedSlow.AddTimer(SaveGame.Rng.DieRoll(30) + 15))
         {
             eventArgs.Identified = true;
         }

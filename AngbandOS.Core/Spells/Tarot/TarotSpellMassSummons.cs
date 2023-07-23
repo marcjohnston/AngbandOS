@@ -17,7 +17,7 @@ internal class TarotSpellMassSummons : Spell
         SaveGame.MsgPrint("You concentrate on several images at once...");
         for (int dummy = 0; dummy < 3 + (SaveGame.ExperienceLevel / 10); dummy++)
         {
-            if (Program.Rng.DieRoll(10) > 3)
+            if (SaveGame.Rng.DieRoll(10) > 3)
             {
                 if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new NoUniquesMonsterSelector(), false))
                 {

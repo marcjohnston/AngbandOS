@@ -27,7 +27,7 @@ internal class StaffDarkness : StaffItemClass
     {
         if (!SaveGame.HasBlindnessResistance && !SaveGame.HasDarkResistance)
         {
-            if (SaveGame.TimedBlindness.AddTimer(3 + Program.Rng.DieRoll(5)))
+            if (SaveGame.TimedBlindness.AddTimer(3 + SaveGame.Rng.DieRoll(5)))
             {
                 eventArgs.Identified = true;
             }

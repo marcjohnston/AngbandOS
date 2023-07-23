@@ -22,7 +22,7 @@ internal class SpeedActivation : Activation
     {
         if (SaveGame.TimedHaste.TurnsRemaining == 0)
         {
-            SaveGame.TimedHaste.SetTimer(Program.Rng.DieRoll(20) + 20);
+            SaveGame.TimedHaste.SetTimer(SaveGame.Rng.DieRoll(20) + 20);
         }
         else
         {

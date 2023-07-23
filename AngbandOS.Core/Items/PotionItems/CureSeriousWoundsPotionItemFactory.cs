@@ -30,7 +30,7 @@ internal class CureSeriousWoundsPotionItemFactory : PotionItemFactory
 
         // Cure serious wounds heals you 4d8 health, cures blindness and confusion, and
         // reduces bleeding
-        if (SaveGame.RestoreHealth(Program.Rng.DiceRoll(4, 8)))
+        if (SaveGame.RestoreHealth(SaveGame.Rng.DiceRoll(4, 8)))
         {
             identified = true;
         }
@@ -51,7 +51,7 @@ internal class CureSeriousWoundsPotionItemFactory : PotionItemFactory
 
     public override bool Smash(int who, int y, int x)
     {
-        SaveGame.Project(who, 2, y, x, Program.Rng.DiceRoll(4, 3), SaveGame.SingletonRepository.Projectiles.Get<OldHealProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        SaveGame.Project(who, 2, y, x, SaveGame.Rng.DiceRoll(4, 3), SaveGame.SingletonRepository.Projectiles.Get<OldHealProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return false;
     }
     public override Item CreateItem() => new CureSeriousWoundsPotionItem(SaveGame);

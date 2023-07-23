@@ -44,7 +44,7 @@ internal class TeleportAwayMonsterSpell : MonsterSpell
                 }
                 resistsTele = true;
             }
-            else if (targetRace.Level > Program.Rng.DieRoll(100))
+            else if (targetRace.Level > SaveGame.Rng.DieRoll(100))
             {
                 if (seeTarget)
                 {

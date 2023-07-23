@@ -22,7 +22,7 @@ internal class IronHelmSkullkeeperFixedArtifact : FixedArtifact, IFixedArtifactA
         saveGame.MsgPrint("Your helm glows bright white...");
         saveGame.MsgPrint("An image forms in your mind...");
         saveGame.DetectAll();
-        item.RechargeTimeLeft = Program.Rng.RandomLessThan(55) + 55;
+        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(55) + 55;
     }
     public string DescribeActivationEffect() => "detection every 55+d55 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

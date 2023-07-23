@@ -13,7 +13,7 @@ internal class LifeSpellSenseUnseen : Spell
     private LifeSpellSenseUnseen(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.TimedSeeInvisibility.AddTimer(Program.Rng.DieRoll(24) + 24);
+        SaveGame.TimedSeeInvisibility.AddTimer(SaveGame.Rng.DieRoll(24) + 24);
     }
 
     public override string Name => "Sense Unseen";

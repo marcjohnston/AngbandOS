@@ -16,7 +16,7 @@ internal class ChaosWpReward : Reward
         SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
         SaveGame.MsgPrint("'Thy deed hath earned thee a worthy blade.'");
         ItemFactory reward;
-        switch (Program.Rng.DieRoll(SaveGame.ExperienceLevel))
+        switch (SaveGame.Rng.DieRoll(SaveGame.ExperienceLevel))
         {
             case 1:
             case 2:
@@ -100,9 +100,9 @@ internal class ChaosWpReward : Reward
                 break;
         }
         Item qPtr = reward.CreateItem();
-        qPtr.BonusToHit = 3 + (Program.Rng.DieRoll(SaveGame.Difficulty) % 10);
-        qPtr.BonusDamage = 3 + (Program.Rng.DieRoll(SaveGame.Difficulty) % 10);
-        qPtr.ApplyRandomResistance(Program.Rng.DieRoll(34) + 4);
+        qPtr.BonusToHit = 3 + (SaveGame.Rng.DieRoll(SaveGame.Difficulty) % 10);
+        qPtr.BonusDamage = 3 + (SaveGame.Rng.DieRoll(SaveGame.Difficulty) % 10);
+        qPtr.ApplyRandomResistance(SaveGame.Rng.DieRoll(34) + 4);
         qPtr.RareItemTypeIndex = RareItemTypeEnum.WeaponChaotic;
         SaveGame.DropNear(qPtr, -1, SaveGame.MapY, SaveGame.MapX);
     }

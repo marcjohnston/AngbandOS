@@ -14,9 +14,9 @@ internal class MagiAmuletJeweleryItem : AmuletJeweleryItem
 
     protected override void ApplyMagic(int level, int power, Store? store)
     {
-        TypeSpecificValue = Program.Rng.DieRoll(5) + GetBonusValue(5, level);
-        BonusArmorClass = Program.Rng.DieRoll(5) + GetBonusValue(5, level);
-        if (Program.Rng.DieRoll(3) == 1)
+        TypeSpecificValue = SaveGame.Rng.DieRoll(5) + GetBonusValue(5, level);
+        BonusArmorClass = SaveGame.Rng.DieRoll(5) + GetBonusValue(5, level);
+        if (SaveGame.Rng.DieRoll(3) == 1)
         {
             RandartItemCharacteristics.SlowDigest = true;
         }

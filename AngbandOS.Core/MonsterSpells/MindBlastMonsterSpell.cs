@@ -26,7 +26,7 @@ internal class MindBlastMonsterSpell : MonsterSpell
 
     public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
     {
-        if (Program.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
+        if (SaveGame.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
         {
             saveGame.MsgPrint("You resist the effects!");
         }
@@ -35,15 +35,15 @@ internal class MindBlastMonsterSpell : MonsterSpell
             saveGame.MsgPrint("Your mind is blasted by psionic energy.");
             if (!saveGame.HasConfusionResistance)
             {
-                saveGame.TimedConfusion.AddTimer(Program.Rng.RandomLessThan(4) + 4);
+                saveGame.TimedConfusion.AddTimer(SaveGame.Rng.RandomLessThan(4) + 4);
             }
-            if (!saveGame.HasChaosResistance && Program.Rng.DieRoll(3) == 1)
+            if (!saveGame.HasChaosResistance && SaveGame.Rng.DieRoll(3) == 1)
             {
-                saveGame.TimedHallucinations.AddTimer(Program.Rng.RandomLessThan(250) + 150);
+                saveGame.TimedHallucinations.AddTimer(SaveGame.Rng.RandomLessThan(250) + 150);
             }
 
             string monsterDescription = monster.IndefiniteVisibleName;
-            saveGame.TakeHit(Program.Rng.DiceRoll(8, 8), monsterDescription);
+            saveGame.TakeHit(SaveGame.Rng.DiceRoll(8, 8), monsterDescription);
         }
     }
 
@@ -57,7 +57,7 @@ internal class MindBlastMonsterSpell : MonsterSpell
         bool blind = saveGame.TimedBlindness.TurnsRemaining != 0;
         MonsterRace targetRace = target.Race;
 
-        if (targetRace.Unique || targetRace.ImmuneConfusion || targetRace.Level > Program.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
+        if (targetRace.Unique || targetRace.ImmuneConfusion || targetRace.Level > SaveGame.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
         {
             if (targetRace.ImmuneConfusion && seen)
             {
@@ -71,8 +71,8 @@ internal class MindBlastMonsterSpell : MonsterSpell
         else
         {
             saveGame.MsgPrint($"{targetName} is blasted by psionic energy.");
-            target.ConfusionLevel += Program.Rng.RandomLessThan(4) + 4;
-            target.TakeDamageFromAnotherMonster(saveGame, Program.Rng.DiceRoll(8, 8), out _, " collapses, a mindless husk.");
+            target.ConfusionLevel += SaveGame.Rng.RandomLessThan(4) + 4;
+            target.TakeDamageFromAnotherMonster(saveGame, SaveGame.Rng.DiceRoll(8, 8), out _, " collapses, a mindless husk.");
         }
     }
 }

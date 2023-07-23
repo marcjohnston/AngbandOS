@@ -16,13 +16,13 @@ internal class PoisonChestTrap : ChestTrap
         SaveGame.MsgPrint("A puff of green gas surrounds you!");
         if (!(SaveGame.HasPoisonResistance || SaveGame.TimedPoisonResistance.TurnsRemaining != 0))
         {
-            if (Program.Rng.DieRoll(10) <= SaveGame.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+            if (SaveGame.Rng.DieRoll(10) <= SaveGame.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
             {
                 SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
             }
             else
             {
-                SaveGame.TimedPoison.AddTimer(10 + Program.Rng.DieRoll(20));
+                SaveGame.TimedPoison.AddTimer(10 + SaveGame.Rng.DieRoll(20));
             }
         }
     }

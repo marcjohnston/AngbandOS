@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Items;
 internal abstract class SpikeItem : Item
 {
     public SpikeItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    public override int MakeObjectCount => Program.Rng.DiceRoll(6, 7);
+    public override int MakeObjectCount => SaveGame.Rng.DiceRoll(6, 7);
     public override int GetAdditionalMassProduceCount()
     {
         int cost = Value();

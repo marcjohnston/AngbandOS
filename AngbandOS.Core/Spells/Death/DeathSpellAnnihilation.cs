@@ -31,7 +31,7 @@ internal class DeathSpellAnnihilation : Spell
                 continue;
             }
             SaveGame.DeleteMonsterByIndex(i, true);
-            SaveGame.TakeHit(Program.Rng.DieRoll(4), "the strain of casting Annihilation");
+            SaveGame.TakeHit(SaveGame.Rng.DieRoll(4), "the strain of casting Annihilation");
             SaveGame.Mana++;
             SaveGame.MoveCursorRelative(SaveGame.MapY, SaveGame.MapX);
             SaveGame.RedrawHpFlaggedAction.Set();

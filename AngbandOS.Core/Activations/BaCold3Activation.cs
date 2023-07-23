@@ -18,7 +18,7 @@ internal class BaCold3Activation : DirectionalActivation
 
     public override string? PreActivationMessage => "It glows bright white...";
 
-    public override int RechargeTime() => Program.Rng.RandomLessThan(325) + 325;
+    public override int RechargeTime() => SaveGame.Rng.RandomLessThan(325) + 325;
 
     protected override bool Activate(int direction)
     {

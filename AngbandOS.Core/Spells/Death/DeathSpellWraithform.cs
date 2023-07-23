@@ -13,7 +13,7 @@ internal class DeathSpellWraithform : Spell
     private DeathSpellWraithform(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.TimedEtherealness.AddTimer(Program.Rng.DieRoll(SaveGame.ExperienceLevel / 2) + (SaveGame.ExperienceLevel / 2));
+        SaveGame.TimedEtherealness.AddTimer(SaveGame.Rng.DieRoll(SaveGame.ExperienceLevel / 2) + (SaveGame.ExperienceLevel / 2));
     }
 
     public override void CastFailed()

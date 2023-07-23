@@ -18,7 +18,7 @@ internal class SpToHpRandomMutation : Mutation
 
     public override void OnProcessWorld(SaveGame saveGame)
     {
-        if (Program.Rng.DieRoll(2000) != 1)
+        if (SaveGame.Rng.DieRoll(2000) != 1)
         {
             return;
         }

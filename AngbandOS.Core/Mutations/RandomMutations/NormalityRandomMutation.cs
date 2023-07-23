@@ -18,7 +18,7 @@ internal class NormalityRandomMutation : Mutation
 
     public override void OnProcessWorld(SaveGame saveGame)
     {
-        if (Program.Rng.DieRoll(5000) == 1)
+        if (SaveGame.Rng.DieRoll(5000) == 1)
         {
             saveGame.Dna.LoseMutation();
         }

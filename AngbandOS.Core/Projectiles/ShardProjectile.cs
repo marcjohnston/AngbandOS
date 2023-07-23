@@ -30,7 +30,7 @@ internal class ShardProjectile : Projectile
         {
             note = " resists.";
             dam *= 3;
-            dam /= Program.Rng.DieRoll(6) + 6;
+            dam /= SaveGame.Rng.DieRoll(6) + 6;
         }
         ApplyProjectileDamageToMonster(who, mPtr, dam, note);
         return obvious;
@@ -52,7 +52,7 @@ internal class ShardProjectile : Projectile
         }
         if (!SaveGame.HasSoundResistance)
         {
-            SaveGame.TimedStun.AddTimer(Program.Rng.DieRoll(20));
+            SaveGame.TimedStun.AddTimer(SaveGame.Rng.DieRoll(20));
         }
         if (SaveGame.HasShardResistance)
         {
@@ -62,7 +62,7 @@ internal class ShardProjectile : Projectile
         {
             SaveGame.TimedBleeding.AddTimer((dam / 2));
         }
-        if (!SaveGame.HasShardResistance || Program.Rng.DieRoll(12) == 1)
+        if (!SaveGame.HasShardResistance || SaveGame.Rng.DieRoll(12) == 1)
         {
             SaveGame.InvenDamage(SaveGame.SetColdDestroy, 3);
         }

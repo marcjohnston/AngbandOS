@@ -20,11 +20,11 @@ internal class LightActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.LightArea(Program.Rng.DiceRoll(2, 15), 3);
+        SaveGame.LightArea(SaveGame.Rng.DiceRoll(2, 15), 3);
         return true;
     }
 
-    public override int RechargeTime() => Program.Rng.RandomLessThan(10) + 10;
+    public override int RechargeTime() => SaveGame.Rng.RandomLessThan(10) + 10;
 
     public override int Value => 150;
 

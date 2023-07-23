@@ -18,11 +18,11 @@ internal class IceRingItem : RingItem, IItemActivatable
             return;
         }
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 50, 2);
-        SaveGame.TimedColdResistance.AddTimer(Program.Rng.DieRoll(20) + 20);
-        RechargeTimeLeft = Program.Rng.RandomLessThan(50) + 50;
+        SaveGame.TimedColdResistance.AddTimer(SaveGame.Rng.DieRoll(20) + 20);
+        RechargeTimeLeft = SaveGame.Rng.RandomLessThan(50) + 50;
     }
     protected override void ApplyMagic(int level, int power, Store? store)
     {
-        BonusArmorClass = 5 + Program.Rng.DieRoll(5) + GetBonusValue(10, level);
+        BonusArmorClass = 5 + SaveGame.Rng.DieRoll(5) + GetBonusValue(10, level);
     }
 }
