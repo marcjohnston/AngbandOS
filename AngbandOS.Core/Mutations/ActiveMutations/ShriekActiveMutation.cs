@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 [Serializable]
 internal class ShriekActiveMutation : Mutation
 {
+    private ShriekActiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override void Activate(SaveGame saveGame)
     {
         if (!saveGame.CheckIfRacialPowerWorks(4, 4, Ability.Constitution, 6))

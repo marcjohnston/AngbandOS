@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class HalluRandomMutation : Mutation
 {
+    private HalluRandomMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 1;
     public override string GainMessage => "You are afflicted by a hallucinatory insanity!";
     public override string HaveMessage => "You have a hallucinatory insanity.";

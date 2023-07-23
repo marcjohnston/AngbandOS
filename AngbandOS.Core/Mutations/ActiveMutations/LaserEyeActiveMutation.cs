@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 [Serializable]
 internal class LaserEyeActiveMutation : Mutation
 {
+    private LaserEyeActiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override void Activate(SaveGame saveGame)
     {
         if (!saveGame.CheckIfRacialPowerWorks(7, 10, Ability.Wisdom, 9))

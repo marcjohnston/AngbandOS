@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class WeirdMindRandomMutation : Mutation
 {
+    private WeirdMindRandomMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 2;
     public override string GainMessage => "Your thoughts suddenly take off in strange directions.";
     public override string HaveMessage => "Your mind randomly expands and contracts.";

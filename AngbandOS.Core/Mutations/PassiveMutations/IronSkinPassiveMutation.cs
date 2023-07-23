@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class IronSkinPassiveMutation : Mutation
 {
+    private IronSkinPassiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 2;
     public override string GainMessage => "Your skin turns to steel!";
     public override string HaveMessage => "Your skin is made of steel (-1 DEX, +25 AC).";

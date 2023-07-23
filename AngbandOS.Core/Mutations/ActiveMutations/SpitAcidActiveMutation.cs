@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 [Serializable]
 internal class SpitAcidActiveMutation : Mutation
 {
+    private SpitAcidActiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override void Activate(SaveGame saveGame)
     {
         if (!saveGame.CheckIfRacialPowerWorks(9, 9, Ability.Dexterity, 15))

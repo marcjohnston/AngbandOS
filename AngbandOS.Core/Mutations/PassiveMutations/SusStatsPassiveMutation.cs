@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class SusStatsPassiveMutation : Mutation
 {
+    private SusStatsPassiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 2;
     public override string GainMessage => "You feel like you can recover from anything.";
     public override string HaveMessage => "Your body resists serious damage.";

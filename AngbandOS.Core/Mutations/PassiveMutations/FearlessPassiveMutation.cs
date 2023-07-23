@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class FearlessPassiveMutation : Mutation
 {
+    private FearlessPassiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 3;
     public override string GainMessage => "You become completely fearless.";
     public override string HaveMessage => "You are completely fearless.";

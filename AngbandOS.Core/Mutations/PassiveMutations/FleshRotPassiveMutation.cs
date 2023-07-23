@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class FleshRotPassiveMutation : Mutation
 {
+    private FleshRotPassiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 3;
     public override string GainMessage => "Your flesh is afflicted by a rotting disease!";
     public override string HaveMessage => "Your flesh is rotting (-2 CON, -1 CHR).";

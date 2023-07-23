@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class InvulnRandomMutation : Mutation
 {
+    private InvulnRandomMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 1;
     public override string GainMessage => "You are blessed with fits of invulnerability.";
     public override string HaveMessage => "You occasionally feel invincible.";

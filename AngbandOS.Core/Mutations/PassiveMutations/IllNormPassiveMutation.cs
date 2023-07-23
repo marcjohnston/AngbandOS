@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class IllNormPassiveMutation : Mutation
 {
+    private IllNormPassiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 1;
     public override string GainMessage => "You start projecting a reassuring image.";
     public override string HaveMessage => "Your appearance is masked with illusion.";

@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class TrunkRandomMutation : Mutation
 {
+    private TrunkRandomMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 2;
     public override string GainMessage => "Your nose grows into an elephant-like trunk.";
     public override string HaveMessage => "You have an elephantine trunk (dam 1d4).";

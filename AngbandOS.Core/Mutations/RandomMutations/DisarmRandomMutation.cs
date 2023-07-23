@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class DisarmRandomMutation : Mutation
 {
+    private DisarmRandomMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 1;
     public override string GainMessage => "Your feet grow to four times their former size.";
     public override string HaveMessage => "You occasionally stumble and drop things.";

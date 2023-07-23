@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class EspPassiveMutation : Mutation
 {
+    private EspPassiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 2;
     public override string GainMessage => "You develop a telepathic ability!";
     public override string HaveMessage => "You are telepathic.";

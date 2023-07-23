@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class EatLightRandomMutation : Mutation
 {
+    private EatLightRandomMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 1;
     public override string GainMessage => "You feel a strange kinship with Nyogtha.";
     public override string HaveMessage => "You sometimes feed off of the light around you.";

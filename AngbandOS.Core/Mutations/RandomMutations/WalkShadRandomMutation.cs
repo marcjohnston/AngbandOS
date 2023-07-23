@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class WalkShadRandomMutation : Mutation
 {
+    private WalkShadRandomMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 1;
     public override string GainMessage => "You feel like reality is as thin as paper.";
     public override string HaveMessage => "You occasionally stumble into other shadows.";

@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class SpeedFluxRandomMutation : Mutation
 {
+    private SpeedFluxRandomMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 2;
     public override string GainMessage => "You have become unstuck in time.";
     public override string HaveMessage => "You move faster or slower randomly.";

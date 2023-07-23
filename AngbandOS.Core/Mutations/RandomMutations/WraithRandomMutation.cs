@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class WraithRandomMutation : Mutation
 {
+    private WraithRandomMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 1;
     public override string GainMessage => "You start to fade in and out of the physical world.";
     public override string HaveMessage => "You fade in and out of physical reality.";

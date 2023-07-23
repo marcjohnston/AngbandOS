@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class HyperIntPassiveMutation : Mutation
 {
+    private HyperIntPassiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 3;
     public override string GainMessage => "Your brain evolves into a living computer!";
     public override string HaveMessage => "Your brain is a living computer (+4 INT/WIS).";

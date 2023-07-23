@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class ChaosGiftRandomMutation : Mutation
 {
+    private ChaosGiftRandomMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 2;
     public override string GainMessage => "You attract the notice of a chaos deity!";
     public override string HaveMessage => "Chaos deities give you gifts.";

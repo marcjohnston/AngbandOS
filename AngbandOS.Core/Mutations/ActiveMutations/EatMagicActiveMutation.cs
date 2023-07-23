@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 [Serializable]
 internal class EatMagicActiveMutation : Mutation
 {
+    private EatMagicActiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override void Activate(SaveGame saveGame)
     {
         if (!saveGame.SelectItem(out Item? oPtr, "Drain which item? ", false, true, true, new RechargableItemFilter()))

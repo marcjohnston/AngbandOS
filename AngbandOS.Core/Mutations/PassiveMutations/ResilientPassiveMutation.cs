@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class ResilientPassiveMutation : Mutation
 {
+    private ResilientPassiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 2;
     public override string GainMessage => "You become extraordinarily resilient.";
     public override string HaveMessage => "You are very resilient (+4 CON).";

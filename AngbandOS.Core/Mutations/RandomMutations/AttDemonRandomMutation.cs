@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class AttDemonRandomMutation : Mutation
 {
+    private AttDemonRandomMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 2;
     public override string GainMessage => "You start attracting demons.";
     public override string HaveMessage => "You attract demons.";

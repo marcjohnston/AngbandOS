@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class RegenPassiveMutation : Mutation
 {
+    private RegenPassiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 2;
     public override string GainMessage => "You start regenerating.";
     public override string HaveMessage => "You are regenerating.";

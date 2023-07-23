@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class AlcoholRandomMutation : Mutation
 {
+    private AlcoholRandomMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 1;
     public override string GainMessage => "Your body starts producing alcohol!";
     public override string HaveMessage => "Your body produces alcohol.";

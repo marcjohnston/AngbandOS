@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class WartSkinPassiveMutation : Mutation
 {
+    private WartSkinPassiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 1;
     public override string GainMessage => "Disgusting warts appear everywhere on you!";
     public override string HaveMessage => "Your skin is covered with warts (-2 CHR, +5 AC).";

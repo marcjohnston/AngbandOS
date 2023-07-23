@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class WingsPassiveMutation : Mutation
 {
+    private WingsPassiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 2;
     public override string GainMessage => "You grow a pair of wings.";
     public override string HaveMessage => "You have wings.";

@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class ShortLegPassiveMutation : Mutation
 {
+    private ShortLegPassiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 2;
     public override string GainMessage => "Your legs turn into short stubs!";
     public override string HaveMessage => "Your legs are short stubs (-3 speed).";

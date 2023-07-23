@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class TentaclesRandomMutation : Mutation
 {
+    private TentaclesRandomMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 2;
     public override string GainMessage => "Evil-looking tentacles sprout from your sides.";
     public override string HaveMessage => "You have evil looking tentacles (dam 2d5).";

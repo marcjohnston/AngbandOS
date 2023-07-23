@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class AlbinoPassiveMutation : Mutation
 {
+    private AlbinoPassiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 2;
     public override string GainMessage => "You turn into an albino! You feel frail...";
     public override string HaveMessage => "You are albino (-4 CON).";

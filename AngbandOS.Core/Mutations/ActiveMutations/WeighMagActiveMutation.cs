@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 [Serializable]
 internal class WeighMagActiveMutation : Mutation
 {
+    private WeighMagActiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override void Activate(SaveGame saveGame)
     {
         if (saveGame.CheckIfRacialPowerWorks(6, 6, Ability.Intelligence, 10))

@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 [Serializable]
 internal class IllumineActiveMutation : Mutation
 {
+    private IllumineActiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override void Activate(SaveGame saveGame)
     {
         if (saveGame.CheckIfRacialPowerWorks(3, 2, Ability.Intelligence, 10))

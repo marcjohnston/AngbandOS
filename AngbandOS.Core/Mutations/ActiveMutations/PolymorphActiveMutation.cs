@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 [Serializable]
 internal class PolymorphActiveMutation : Mutation
 {
+    private PolymorphActiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override void Activate(SaveGame saveGame)
     {
         if (saveGame.CheckIfRacialPowerWorks(18, 20, Ability.Constitution, 18))

@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class XtraLegsPassiveMutation : Mutation
 {
+    private XtraLegsPassiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 2;
     public override string GainMessage => "You grow an extra pair of legs!";
     public override string HaveMessage => "You have an extra pair of legs (+3 speed).";

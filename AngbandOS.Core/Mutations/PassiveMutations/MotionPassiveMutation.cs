@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MotionPassiveMutation : Mutation
 {
+    private MotionPassiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 3;
     public override string GainMessage => "You move with new assurance.";
     public override string HaveMessage => "Your movements are precise and forceful (+1 STL).";

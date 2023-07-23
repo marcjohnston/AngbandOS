@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class XtraEyesPassiveMutation : Mutation
 {
+    private XtraEyesPassiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 3;
     public override string GainMessage => "You grow an extra pair of eyes!";
     public override string HaveMessage => "You have an extra pair of eyes (+15 search).";

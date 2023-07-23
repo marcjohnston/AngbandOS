@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class VulnElemPassiveMutation : Mutation
 {
+    private VulnElemPassiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 1;
     public override string GainMessage => "You feel strangely exposed.";
     public override string HaveMessage => "You are susceptible to damage from the elements.";

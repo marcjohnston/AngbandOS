@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class NormalityRandomMutation : Mutation
 {
+    private NormalityRandomMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 3;
     public override string GainMessage => "You feel strangely normal.";
     public override string HaveMessage => "You may be chaotic, but you're recovering.";

@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class ElecToucPassiveMutation : Mutation
 {
+    private ElecToucPassiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 2;
     public override string GainMessage => "Electricity starts running through you!";
     public override string HaveMessage => "Electricity is running through your veins.";

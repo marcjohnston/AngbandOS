@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MoronicPassiveMutation : Mutation
 {
+    private MoronicPassiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 3;
     public override string GainMessage => "Your brain withers away...";
     public override string HaveMessage => "You are moronic (-4 INT/WIS).";

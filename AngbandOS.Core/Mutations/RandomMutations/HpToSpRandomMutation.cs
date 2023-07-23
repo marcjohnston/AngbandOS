@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class HpToSpRandomMutation : Mutation
 {
+    private HpToSpRandomMutation(SaveGame saveGame) : base(saveGame) { }
     public override int Frequency => 1;
     public override string GainMessage => "You are subject to fits of painful clarity.";
     public override string HaveMessage => "Your blood sometimes rushes to your head.";
