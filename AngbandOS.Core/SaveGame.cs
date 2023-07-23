@@ -122,18 +122,6 @@ internal class SaveGame
     public int DungeonDifficulty;
     public int EnergyUse;
     public bool HackMind;
-    private Level _level;
-    public Level Level
-    {
-        get
-        {
-            return _level;
-        }
-        set
-        {
-            _level = value;
-        }
-    }
     public bool NewLevelFlag;
     public bool Playing;
     public Dungeon RecallDungeon;
@@ -1095,7 +1083,6 @@ internal class SaveGame
         int option = 0;
         int option2 = 0;
         int previousDirection = _previousRunDirection;
-        var level = Level;
         // Set our search width to 1 if we're moving diagonally, or two if we're moving orthogonally
         int searchWidth = (previousDirection & 0x01) + 1;
         // Search to either side from right to left with a width equal to the search width
@@ -1404,10 +1391,7 @@ internal class SaveGame
         item.Count = item.MakeObjectCount;
         if (!item.IsCursed() && !item.IsBroken() && item.Factory.Level > Difficulty)
         {
-            if (Level != null)
-            {
-                TreasureRating += item.Factory.Level - Difficulty;
-            }
+            TreasureRating += item.Factory.Level - Difficulty;
         }
         return item;
     }
@@ -1674,7 +1658,6 @@ internal class SaveGame
                     store.StoreMaint();
                 }
             }
-            Level = null;
             _seedFlavor = Program.Rng.RandomLessThan(int.MaxValue);
             CreateWorld();
             foreach (var dungeon in SingletonRepository.Dungeons)
@@ -1695,6 +1678,7 @@ internal class SaveGame
             WildernessX = CurTown.X;
             WildernessY = CurTown.Y;
             CameFrom = LevelStart.StartRandom;
+            GenerateNewLevel();
         }
         ConsoleViewPort.GameStarted();
         //MessageAppendNextMessage = false;
@@ -1702,11 +1686,6 @@ internal class SaveGame
         UpdateScreen();
         FlavorInit();
         ApplyFlavourVisuals();
-        if (Level == null)
-        {
-            InitializeLevel();
-            GenerateNewLevel();
-        }
         FullScreenOverlay = false;
         SetBackground(BackgroundImageEnum.Overhead);
         Playing = true;
@@ -1747,7 +1726,6 @@ internal class SaveGame
                     ExPlayer = new ExPlayer(Gender, Race, RaceAtBirth, BaseCharacterClass?.GetType().Name, PrimaryRealm, SecondaryRealm, Name, ExperienceLevel, Generation);
                     break;
                 }
-                InitializeLevel();
                 GenerateNewLevel();
                 ReplacePets(MapY, MapX, _petList);
             }
@@ -12175,6 +12153,20 @@ internal class SaveGame
 
     public void GenerateNewLevel()
     {
+        for (int y = 0; y < MaxHgt; y++)
+        {
+            Grid[y] = new GridTile[MaxWid];
+            for (int x = 0; x < MaxWid; x++)
+            {
+                Grid[y][x] = new GridTile(this, x, y);
+            }
+        }
+        Monsters = new Monster[Constants.MaxMIdx];
+        for (int j = 0; j < Constants.MaxMIdx; j++)
+        {
+            Monsters[j] = new Monster(this);
+        }
+
         // Loop until we are able to build the   Keep track of the number of attempts.
         for (int generateAttemptNumber = 0; ; generateAttemptNumber++)
         {
@@ -18070,24 +18062,6 @@ internal class SaveGame
     public Monster[] Monsters;
     private int _hackMIdxIi;
 
-
-    public void InitializeLevel()
-    {
-        for (int y = 0; y < MaxHgt; y++)
-        {
-            Grid[y] = new GridTile[MaxWid];
-            for (int x = 0; x < MaxWid; x++)
-            {
-                Grid[y][x] = new GridTile(this, x, y);
-            }
-        }
-        Monsters = new Monster[Constants.MaxMIdx];
-        for (int j = 0; j < Constants.MaxMIdx; j++)
-        {
-            Monsters[j] = new Monster(this);
-        }
-    }
-
     public void PanelBounds()
     {
         PanelRowMin = PanelRow * (Constants.PlayableScreenHeight / 2);
@@ -20640,10 +20614,7 @@ internal class SaveGame
             MCnt++;
             return i;
         }
-        if (Level != null)
-        {
-            MsgPrint("Too many monsters!");
-        }
+        MsgPrint("Too many monsters!");
         return 0;
     }
 

@@ -44,6 +44,10 @@ internal static class Constants
     public const int MaxMa = 17;
     public const int MaxMAllocChance = 160;
     public const int MaxMetals = 39;
+
+    /// <summary>
+    /// Returns the maximum number of monsters.
+    /// </summary>
     public const int MaxMIdx = 512;
     public const int MaxMindcraftPowers = 12;
     public const int MaxPatron = 16;

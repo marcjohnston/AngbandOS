@@ -23,10 +23,7 @@ internal class DragonHelmArmorItem : HelmArmorItem
         // Apply the standard armour characteristics, regardless of the power.
         base.ApplyMagic(level, power, null);
 
-        if (SaveGame.Level != null)
-        {
-            SaveGame.TreasureRating += 5;
-        }
+        SaveGame.TreasureRating += 5;
         ApplyDragonscaleResistance();
     }
 }

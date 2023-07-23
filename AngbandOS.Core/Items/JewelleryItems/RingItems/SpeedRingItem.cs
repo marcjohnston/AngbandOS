@@ -28,7 +28,7 @@ internal class SpeedRingItem : RingItem
             IdentCursed = true;
             TypeSpecificValue = 0 - TypeSpecificValue;
         }
-        else if (SaveGame.Level != null)
+        else
         {
             SaveGame.TreasureRating += 25;
         }

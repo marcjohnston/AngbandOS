@@ -324,10 +324,7 @@ internal abstract class Store : IItemFilter
     public virtual void StoreMaint()
     {
         int oldRating = 0;
-        if (SaveGame.Level != null)
-        {
-            oldRating = SaveGame.TreasureRating;
-        }
+        oldRating = SaveGame.TreasureRating;
         if (!MaintainsStockLevels)
         {
             return;
@@ -368,10 +365,7 @@ internal abstract class Store : IItemFilter
         {
             StoreCreate();
         }
-        if (SaveGame.Level != null)
-        {
-            SaveGame.TreasureRating = oldRating;
-        }
+        SaveGame.TreasureRating = oldRating;
     }
 
     private StoreOwner GetRandomOwner()

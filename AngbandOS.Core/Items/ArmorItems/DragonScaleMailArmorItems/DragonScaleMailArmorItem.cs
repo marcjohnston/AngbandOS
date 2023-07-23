@@ -26,10 +26,7 @@ internal abstract class DragonScaleMailArmorItem : ArmourItem
             // Apply the standard armour characteristics.
             base.ApplyMagic(level, power, null);
 
-            if (SaveGame.Level != null)
-            {
-                SaveGame.TreasureRating += 30;
-            }
+            SaveGame.TreasureRating += 30;
         }
     }
 }

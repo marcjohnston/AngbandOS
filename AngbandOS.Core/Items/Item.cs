@@ -2141,24 +2141,18 @@ internal abstract class Item : IComparable<Item>
             {
                 IdentCursed = true;
             }
-            if (SaveGame.Level != null)
+            SaveGame.TreasureRating += 10;
+            if (FixedArtifact.Cost > 50000)
             {
                 SaveGame.TreasureRating += 10;
-                if (FixedArtifact.Cost > 50000)
-                {
-                    SaveGame.TreasureRating += 10;
-                }
-                SaveGame.SpecialTreasure = true;
             }
+            SaveGame.SpecialTreasure = true;
             return;
         }
         ApplyMagic(lev, power, store);
         if (!string.IsNullOrEmpty(RandartName))
         {
-            if (SaveGame.Level != null)
-            {
-                SaveGame.TreasureRating += 40;
-            }
+            SaveGame.TreasureRating += 40;
         }
         else if (RareItemTypeIndex != RareItemTypeEnum.None)
         {
@@ -2259,10 +2253,7 @@ internal abstract class Item : IComparable<Item>
                     TypeSpecificValue += Program.Rng.DieRoll(ePtr.MaxPval);
                 }
             }
-            if (SaveGame.Level != null)
-            {
-                SaveGame.TreasureRating += ePtr.Rating;
-            }
+            SaveGame.TreasureRating += ePtr.Rating;
             return;
         }
         if (Factory != null)

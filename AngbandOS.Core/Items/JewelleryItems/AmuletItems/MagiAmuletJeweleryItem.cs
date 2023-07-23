@@ -20,9 +20,6 @@ internal class MagiAmuletJeweleryItem : AmuletJeweleryItem
         {
             RandartItemCharacteristics.SlowDigest = true;
         }
-        if (SaveGame.Level != null)
-        {
-            SaveGame.TreasureRating += 25;
-        }
+        SaveGame.TreasureRating += 25;
     }
 }
