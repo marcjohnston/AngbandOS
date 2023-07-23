@@ -16,6 +16,9 @@ internal class SaveGame
     public Configuration Configuration;
     public bool IsDead;
 
+    [NonSerialized]
+    public readonly Rng Rng = new Rng();
+
     public const int OneInChanceUpStairsReturnsToTownLevel = 5;
     public FlaggedAction RedrawMapFlaggedAction { get; }
     public FlaggedAction RedrawEquippyFlaggedAction { get; }
