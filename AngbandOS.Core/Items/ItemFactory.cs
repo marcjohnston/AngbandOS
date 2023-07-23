@@ -15,7 +15,7 @@ namespace AngbandOS.Core.ItemClasses;
 
 internal abstract class ItemFactory : IItemCharacteristics
 {
-    public SaveGame SaveGame { get; }
+    public readonly SaveGame SaveGame;
 
     public ItemFactory(SaveGame saveGame)
     {
