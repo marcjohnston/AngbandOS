@@ -11,17 +11,17 @@ namespace AngbandOS.Core.SpellResistantDetections;
 internal class ColdSpellResistantDetection : SpellResistantDetection
 {
     private ColdSpellResistantDetection(SaveGame saveGame) : base(saveGame) { }
-    public override void Learn(SaveGame saveGame, Monster monster)
+    public override void Learn(Monster monster)
     {
-        if (saveGame.HasColdResistance)
+        if (SaveGame.HasColdResistance)
         {
             monster.SmResCold = true;
         }
-        if (saveGame.TimedColdResistance.TurnsRemaining != 0)
+        if (SaveGame.TimedColdResistance.TurnsRemaining != 0)
         {
             monster.SmOppCold = true;
         }
-        if (saveGame.HasColdImmunity)
+        if (SaveGame.HasColdImmunity)
         {
             monster.SmImmCold = true;
         }

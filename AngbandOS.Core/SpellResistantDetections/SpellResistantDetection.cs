@@ -15,5 +15,5 @@ internal abstract class SpellResistantDetection
     {
         SaveGame = saveGame;
     }
-    public abstract void Learn(SaveGame saveGame, Monster monster);
+    public abstract void Learn(Monster monster);
 }

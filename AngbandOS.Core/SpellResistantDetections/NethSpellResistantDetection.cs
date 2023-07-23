@@ -11,9 +11,9 @@ namespace AngbandOS.Core.SpellResistantDetections;
 internal class NethSpellResistantDetection : SpellResistantDetection
 {
     private NethSpellResistantDetection(SaveGame saveGame) : base(saveGame) { }
-    public override void Learn(SaveGame saveGame, Monster monster)
+    public override void Learn(Monster monster)
     {
-        if (saveGame.HasNetherResistance)
+        if (SaveGame.HasNetherResistance)
         {
             monster.SmResNeth = true;
         }

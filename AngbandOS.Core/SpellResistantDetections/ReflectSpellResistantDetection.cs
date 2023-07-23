@@ -11,9 +11,9 @@ namespace AngbandOS.Core.SpellResistantDetections;
 internal class ReflectSpellResistantDetection : SpellResistantDetection
 {
     private ReflectSpellResistantDetection(SaveGame saveGame) : base(saveGame) { }
-    public override void Learn(SaveGame saveGame, Monster monster)
+    public override void Learn(Monster monster)
     {
-        if (saveGame.HasReflection)
+        if (SaveGame.HasReflection)
         {
             monster.SmImmReflect = true;
         }

@@ -11,9 +11,9 @@ namespace AngbandOS.Core.SpellResistantDetections;
 internal class DisenSpellResistantDetection : SpellResistantDetection
 {
     private DisenSpellResistantDetection(SaveGame saveGame) : base(saveGame) { }
-    public override void Learn(SaveGame saveGame, Monster monster)
+    public override void Learn(Monster monster)
     {
-        if (saveGame.HasDisenchantResistance)
+        if (SaveGame.HasDisenchantResistance)
         {
             monster.SmResDisen = true;
         }

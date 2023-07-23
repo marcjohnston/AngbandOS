@@ -11,9 +11,9 @@ namespace AngbandOS.Core.SpellResistantDetections;
 internal class NexusSpellResistantDetection : SpellResistantDetection
 {
     private NexusSpellResistantDetection(SaveGame saveGame) : base(saveGame) { }
-    public override void Learn(SaveGame saveGame, Monster monster)
+    public override void Learn(Monster monster)
     {
-        if (saveGame.HasNexusResistance)
+        if (SaveGame.HasNexusResistance)
         {
             monster.SmResNexus = true;
         }

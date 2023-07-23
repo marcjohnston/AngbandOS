@@ -11,9 +11,9 @@ namespace AngbandOS.Core.SpellResistantDetections;
 internal class ChaosSpellResistantDetection : SpellResistantDetection
 {
     private ChaosSpellResistantDetection(SaveGame saveGame) : base(saveGame) { }
-    public override void Learn(SaveGame saveGame, Monster monster)
+    public override void Learn(Monster monster)
     {
-        if (saveGame.HasChaosResistance)
+        if (SaveGame.HasChaosResistance)
         {
             monster.SmResChaos = true;
         }

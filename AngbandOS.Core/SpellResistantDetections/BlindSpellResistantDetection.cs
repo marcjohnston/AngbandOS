@@ -11,9 +11,9 @@ namespace AngbandOS.Core.SpellResistantDetections;
 internal class BlindSpellResistantDetection : SpellResistantDetection
 {
     private BlindSpellResistantDetection(SaveGame saveGame) : base(saveGame) { }
-    public override void Learn(SaveGame saveGame, Monster monster)
+    public override void Learn(Monster monster)
     {
-        if (saveGame.HasBlindnessResistance)
+        if (SaveGame.HasBlindnessResistance)
         {
             monster.SmResBlind = true;
         }

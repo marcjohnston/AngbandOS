@@ -11,17 +11,17 @@ namespace AngbandOS.Core.SpellResistantDetections;
 internal class AcidSpellResistantDetection : SpellResistantDetection 
 {
     private AcidSpellResistantDetection(SaveGame saveGame) : base(saveGame) { }
-    public override void Learn(SaveGame saveGame, Monster monster)
+    public override void Learn(Monster monster)
     {
-        if (saveGame.HasAcidResistance)
+        if (SaveGame.HasAcidResistance)
         {
             monster.SmResAcid = true;
         }
-        if (saveGame.TimedAcidResistance.TurnsRemaining != 0)
+        if (SaveGame.TimedAcidResistance.TurnsRemaining != 0)
         {
             monster.SmOppAcid = true;
         }
-        if (saveGame.HasAcidImmunity)
+        if (SaveGame.HasAcidImmunity)
         {
             monster.SmImmAcid = true;
         }

@@ -20548,7 +20548,7 @@ internal class SaveGame
         {
             return;
         }
-        what.Learn(this, monster);
+        what.Learn(monster);
     }
 
     public void WipeMList()
