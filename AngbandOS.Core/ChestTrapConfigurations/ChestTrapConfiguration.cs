@@ -41,12 +41,12 @@ internal abstract class ChestTrapConfiguration
     {
         foreach (ChestTrap trap in Traps)
         {
-            ActivateChestTrapEventArgs eventArgs = new ActivateChestTrapEventArgs(saveGame, saveGame.MapX, saveGame.MapY);
+            ActivateChestTrapEventArgs eventArgs = new ActivateChestTrapEventArgs(saveGame.MapX, saveGame.MapY);
             trap.Activate(eventArgs);
 
             if (eventArgs.DestroysContents)
             {
-                eventArgs.SaveGame.MsgPrint("Everything inside the chest is destroyed!");
+                SaveGame.MsgPrint("Everything inside the chest is destroyed!");
                 chestItem.TypeSpecificValue = 0;
             }
         }

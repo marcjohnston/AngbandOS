@@ -15,6 +15,7 @@ namespace AngbandOS.Core;
 /// </summary>
 internal class SingletonRepository
 {
+    public SingletonDictionary<ChestTrap> ChestTraps;
     public SingletonDictionary<Attack> Attacks;
     public SingletonDictionary<AttackEffect> AttackEffects;
     public SingletonDictionary<SpellResistantDetection> SpellResistantDetections;
@@ -107,6 +108,7 @@ internal class SingletonRepository
 
     public void Initialize(SaveGame saveGame)
     {
+        ChestTraps = new SingletonDictionary<ChestTrap>(saveGame, LoadTypesFromAssembly<ChestTrap>(saveGame));
         Attacks = new SingletonDictionary<Attack>(saveGame, LoadTypesFromAssembly<Attack>(saveGame));
         AttackEffects = new SingletonDictionary<AttackEffect>(saveGame, LoadTypesFromAssembly<AttackEffect>(saveGame));
         SpellResistantDetections = new SingletonDictionary<SpellResistantDetection>(saveGame, LoadTypesFromAssembly<SpellResistantDetection>(saveGame));

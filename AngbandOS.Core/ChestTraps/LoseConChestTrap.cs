@@ -7,13 +7,15 @@
 
 namespace AngbandOS.Core.ChestTraps;
 
+[Serializable]
 internal class LoseConChestTrap : ChestTrap
 {
+    private LoseConChestTrap(SaveGame saveGame) : base(saveGame) { }
     public override void Activate(ActivateChestTrapEventArgs eventArgs)
     {
-        eventArgs.SaveGame.MsgPrint("A small needle has pricked you!");
-        eventArgs.SaveGame.TakeHit(Program.Rng.DiceRoll(1, 4), "a poison needle");
-        eventArgs.SaveGame.TryDecreasingAbilityScore(Ability.Constitution);
+        SaveGame.MsgPrint("A small needle has pricked you!");
+        SaveGame.TakeHit(Program.Rng.DiceRoll(1, 4), "a poison needle");
+        SaveGame.TryDecreasingAbilityScore(Ability.Constitution);
     }
     public override string Description => "(Poison Needle)";
 }

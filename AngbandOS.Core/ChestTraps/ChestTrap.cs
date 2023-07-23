@@ -11,8 +11,15 @@ namespace AngbandOS.Core.ChestTraps;
 /// Represents a trap on a chest.  Can be layered with multiple traps.  The base class implements the layering.  Derived classes only
 /// need concern themselves with their own implementation and not sub-traps.
 /// </summary>
+[Serializable]
 internal abstract class ChestTrap
 {
+    protected readonly SaveGame SaveGame;
+    protected ChestTrap(SaveGame saveGame)
+    {
+        SaveGame = saveGame;
+    }
+
     /// <summary>
     /// Activate the trap.
     /// </summary>

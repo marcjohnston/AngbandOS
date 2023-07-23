@@ -5,15 +5,10 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ChestTraps;
+namespace AngbandOS.Core.EventArgs;
 
 internal class ActivateChestTrapEventArgs
 {
-    /// <summary>
-    /// Returns a reference to the save game so that the trap has access to the entire game structure.
-    /// </summary>
-    public SaveGame SaveGame { get; }
-
     /// <summary>
     /// Returns the X grid position of trap.
     /// </summary>
@@ -29,9 +24,8 @@ internal class ActivateChestTrapEventArgs
     /// </summary>
     public bool DestroysContents = false;
 
-    public ActivateChestTrapEventArgs(SaveGame saveGame, int x, int y)
+    public ActivateChestTrapEventArgs(int x, int y)
     {
-        SaveGame = saveGame;
         X = x;
         Y = y;
     }
