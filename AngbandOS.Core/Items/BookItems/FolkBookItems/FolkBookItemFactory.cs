@@ -11,6 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class FolkBookItemFactory : BookItemFactory
 {
     public FolkBookItemFactory(SaveGame saveGame) : base(saveGame) { }
+    public override string Description => "Folk Spellbooks";
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.FolkBook;
     public override int PackSort => 2;
     public override bool HatesFire => true;

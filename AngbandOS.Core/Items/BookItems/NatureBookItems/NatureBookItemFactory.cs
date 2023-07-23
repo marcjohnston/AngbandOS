@@ -11,6 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class NatureBookItemFactory : BookItemFactory
 {
     public NatureBookItemFactory(SaveGame saveGame) : base(saveGame) { }
+    public override string Description => "Nature Spellbooks";
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.NatureBook;
 
     public override int PackSort => 6;

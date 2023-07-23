@@ -11,6 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class ShieldItemClass : ArmourItemFactory
 {
     public ShieldItemClass(SaveGame saveGame) : base(saveGame) { }
+    public override string Description => "Shields";
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<ArmInventorySlot>();
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Shield;
     public override int PackSort => 23;

@@ -11,6 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class FoodItemFactory : ItemFactory
 {
     public FoodItemFactory(SaveGame saveGame) : base(saveGame) { }
+    public override string Description => "Food";
     public override bool EasyKnow => true;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Food;
     public override int PackSort => 9;

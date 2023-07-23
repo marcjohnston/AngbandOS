@@ -11,6 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class SorceryBookItemFactory : BookItemFactory
 {
     public SorceryBookItemFactory(SaveGame saveGame) : base(saveGame) { }
+    public override string Description => "Sorcery Spellbooks";
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.SorceryBook;
     public override bool HatesFire => true;
     public override int PackSort => 7;

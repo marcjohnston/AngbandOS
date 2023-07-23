@@ -11,6 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class CloakArmorItemFactory : ArmourItemFactory
 {
     public CloakArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
+    public override string Description => "Cloaks";
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<CloakInventorySlot>();
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Cloak;
     public override bool HatesFire => true;

@@ -11,6 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class BoltAmmunitionItemFactory : AmmunitionItemFactory
 {
     public BoltAmmunitionItemFactory(SaveGame saveGame) : base(saveGame) { }
+    public override string Description => "Bolts";
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Bolt;
     public override int PackSort => 33;
     public override ColourEnum Colour => ColourEnum.BrightBrown;

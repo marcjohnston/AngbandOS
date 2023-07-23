@@ -11,6 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class RingItemFactory : JewelleryItemFactory, IFlavour
 {
     public RingItemFactory(SaveGame saveGame) : base(saveGame) { }
+    public override string Description => "Rings";
 
     /// <summary>
     /// Returns the ring flavours repository because rings have flavours that need to be identified.

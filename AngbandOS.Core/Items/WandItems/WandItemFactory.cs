@@ -11,6 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class WandItemFactory : ItemFactory, IFlavour
 {
     public WandItemFactory(SaveGame saveGame) : base(saveGame) { }
+    public override string Description => "Wands";
 
     /// <summary>
     /// Returns the want flavours repository because wands have flavours that need to be identified.

@@ -11,6 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class DiggingItemClass : WeaponItemClass
 {
     public DiggingItemClass(SaveGame saveGame) : base(saveGame) { }
+    public override string Description => "Diggers";
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<DiggerInventorySlot>();
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Digging;
     public override int PackSort => 31;
