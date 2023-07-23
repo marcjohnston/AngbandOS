@@ -13206,7 +13206,7 @@ internal class SaveGame
             }
             if (destroyed)
             {
-                if (RoomBuild(y, x, new RoomType1()))
+                if (RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type1RoomLayout>()))
                 {
                 }
                 continue;
@@ -13220,7 +13220,7 @@ internal class SaveGame
                     {
                         if (maxVaultOk > 1)
                         {
-                            if (RoomBuild(y, x, new RoomType8()))
+                            if (RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type8RoomLayout>()))
                             {
                                 continue;
                             }
@@ -13230,35 +13230,35 @@ internal class SaveGame
                     {
                         if (maxVaultOk > 0)
                         {
-                            if (RoomBuild(y, x, new RoomType7()))
+                            if (RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type7RoomLayout>()))
                             {
                                 continue;
                             }
                         }
                     }
-                    if (k < 40 && RoomBuild(y, x, new RoomType5()))
+                    if (k < 40 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type5RoomLayout>()))
                     {
                         continue;
                     }
-                    if (k < 55 && RoomBuild(y, x, new RoomType6()))
+                    if (k < 55 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type6RoomLayout>()))
                     {
                         continue;
                     }
                 }
-                if (k < 25 && RoomBuild(y, x, new RoomType4()))
+                if (k < 25 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type4RoomLayout>()))
                 {
                     continue;
                 }
-                if (k < 50 && RoomBuild(y, x, new RoomType3()))
+                if (k < 50 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type3RoomLayout>()))
                 {
                     continue;
                 }
-                if (k < 100 && RoomBuild(y, x, new RoomType2()))
+                if (k < 100 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type2RoomLayout>()))
                 {
                     continue;
                 }
             }
-            if (RoomBuild(y, x, new RoomType1()))
+            if (RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type1RoomLayout>()))
             {
             }
         }
@@ -14568,7 +14568,7 @@ internal class SaveGame
         }
     }
 
-    private bool RoomBuild(int y0, int x0, RoomType roomType)
+    private bool RoomBuild(int y0, int x0, RoomLayout roomType)
     {
         if (Difficulty < _room[roomType.Type].Level)
         {

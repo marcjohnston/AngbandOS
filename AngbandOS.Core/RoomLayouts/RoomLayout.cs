@@ -7,8 +7,15 @@
 
 namespace AngbandOS.Core.RoomTypes;
 
-internal abstract class RoomType
+[Serializable]
+internal abstract class RoomLayout
 {
+    protected readonly SaveGame SaveGame;
+    protected RoomLayout(SaveGame saveGame)
+    {
+        SaveGame = saveGame;
+    }
+
     public abstract int Type { get; }
     public abstract void Build(SaveGame saveGame, int yval, int xval);
 

@@ -7,8 +7,10 @@
 
 namespace AngbandOS.Core.RoomTypes;
 
-internal class RoomType1 : RoomType
+[Serializable]
+internal class Type1RoomLayout : RoomLayout
 {
+    private Type1RoomLayout(SaveGame save) : base(save) { }
     public override int Type => 1;
     public override void Build(SaveGame saveGame, int yval, int xval)
     {

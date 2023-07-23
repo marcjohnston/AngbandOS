@@ -7,9 +7,11 @@
 
 namespace AngbandOS.Core.RoomTypes;
 
-internal class RoomType7 : RoomType
+[Serializable]
+internal class Type8RoomLayout : RoomLayout
 {
-    public override int Type => 7;
+    private Type8RoomLayout(SaveGame save) : base(save) { }
+    public override int Type => 8;
     public override void Build(SaveGame saveGame, int yval, int xval)
     {
         Vault vPtr = saveGame.SingletonRepository.Vaults[0];
@@ -18,7 +20,7 @@ internal class RoomType7 : RoomType
         {
             dummy++;
             vPtr = saveGame.SingletonRepository.Vaults.ToWeightedRandom().Choose();
-            if (vPtr.Category == 7)
+            if (vPtr.Category == 8)
             {
                 var minX = xval - (vPtr.Width / 2);
                 var maxX = xval + (vPtr.Width / 2);
