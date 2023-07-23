@@ -10,6 +10,12 @@ namespace AngbandOS.Core.Mutations;
 [Serializable]
 internal abstract class Mutation
 {
+    //protected readonly SaveGame SaveGame;
+    //protected Mutation(SaveGame saveGame)
+    //{
+    //    SaveGame = saveGame;
+    //}
+
     public virtual string AttackDescription => "";
     public virtual int DamageDiceNumber => 0;
     public virtual int DamageDiceSize => 0;
