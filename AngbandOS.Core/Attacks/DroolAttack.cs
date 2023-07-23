@@ -7,11 +7,12 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal class HitAttackType : AttackType
+[Serializable]
+internal class DroolAttack : Attack
 {
-    public override string MonsterAction(Monster monster) => $"hits {monster.Name}";
-    public override string PlayerAction(SaveGame saveGame) => $"hits you";
-    public override string KnowledgeAction => "hit";
-    public override bool AttackStunsTarget => true;
-    public override bool AttackCutsTarget => true;
+    private DroolAttack(SaveGame saveGame) : base(saveGame) { }
+    public override string MonsterAction(Monster monster) => $"drools on {monster.Name}";
+    public override string PlayerAction => $"drools on you";
+    public override string KnowledgeAction => "drool on you";
+    public override bool AttackTouchesTarget => false;
 }

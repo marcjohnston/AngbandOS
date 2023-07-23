@@ -20,7 +20,7 @@ internal class QuiverSlotMonsterRace : MonsterRace
 
     public override int ArmourClass => 1;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new SporeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ConfuseAttackEffect>(), 1, 1),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<SporeAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<ConfuseAttackEffect>(), 1, 1),
     };
     public override bool ColdBlood => true;
     public override string Description => "An arrow hole in the floor, covered in fungal tendrils.";

@@ -20,9 +20,9 @@ internal class ChimeraMonsterRace : MonsterRace
 
     public override int ArmourClass => 15;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 10),
-        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 1, 3),
-        new MonsterAttack(new ButtAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 3),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 10),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 1, 3),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<ButtAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 3),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a strange concoction of lion, dragon and goat. It looks very odd but very avoidable.";

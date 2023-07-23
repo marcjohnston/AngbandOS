@@ -18,8 +18,8 @@ internal class FireGiantMonsterRace : MonsterRace
 
     public override int ArmourClass => 60;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 3, 7),
-        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 7),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 3, 7),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 7),
     };
     public override bool BashDoor => true;
     public override string Description => "A glowing fourteen foot tall giant. Flames drip from its red skin.";

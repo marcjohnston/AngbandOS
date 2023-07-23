@@ -23,9 +23,9 @@ internal class HuntingHorrorMonsterRace : MonsterRace
 
     public override int ArmourClass => 90;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseDexAttackEffect>(), 1, 3),
-        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 1, 3),
-        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 9, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseDexAttackEffect>(), 1, 3),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 1, 3),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<CrushAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 9, 4),
     };
     public override bool BashDoor => true;
     public override bool Cthuloid => true;

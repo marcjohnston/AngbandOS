@@ -7,11 +7,13 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal class ShowAttackType : AttackType
+[Serializable]
+internal class BegAttack : Attack
 {
-    public override string MonsterAction(Monster monster) => $"sings to {monster.Name}";
-    public override string PlayerAction(SaveGame saveGame) => saveGame.SingletonRepository.SingingPlayerAttacks.ToWeightedRandom().Choose();
-    public override string KnowledgeAction => "sing";
+    private BegAttack(SaveGame saveGame) : base(saveGame) { }
+    public override string MonsterAction(Monster monster) => $"begs {monster.Name} for money";
+    public override string PlayerAction => $"begs you for money";
+    public override string KnowledgeAction => "beg";
     public override bool AttackTouchesTarget => false;
     public override bool AttackAwakensTarget => true;
 }

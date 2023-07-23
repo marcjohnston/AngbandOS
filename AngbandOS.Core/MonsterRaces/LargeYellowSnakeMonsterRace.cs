@@ -19,8 +19,8 @@ internal class LargeYellowSnakeMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 38;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 4),
-        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<CrushAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "It is about ten feet long.";

@@ -30,10 +30,10 @@ internal class BeholderMonsterRace : MonsterRace
 
     public override int ArmourClass => 80;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp20AttackEffect>(), 2, 4),
-        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ParalyzeAttackEffect>(), 2, 4),
-        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseIntAttackEffect>(), 2, 6),
-        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<UnPowerAttackEffect>(), 2, 6)
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<GazeAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<Exp20AttackEffect>(), 2, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<GazeAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<ParalyzeAttackEffect>(), 2, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<GazeAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseIntAttackEffect>(), 2, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<GazeAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<UnPowerAttackEffect>(), 2, 6)
     };
     public override bool BashDoor => true;
     public override string Description => "A disembodied eye, surrounded by twelve smaller eyes on stalks.";

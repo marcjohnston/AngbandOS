@@ -18,8 +18,8 @@ internal class NightStalkerMonsterRace : MonsterRace
 
     public override int ArmourClass => 46;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 6, 6),
-        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 6, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<GazeAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 6, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<GazeAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 6, 6),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

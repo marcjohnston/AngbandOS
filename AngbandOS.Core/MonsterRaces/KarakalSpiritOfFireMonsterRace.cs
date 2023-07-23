@@ -21,10 +21,10 @@ internal class KarakalSpiritOfFireMonsterRace : MonsterRace
 
     public override int ArmourClass => 50;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 6, 6),
-        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 6, 6),
-        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 6, 6),
-        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 6, 6)
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 6, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 6, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 6, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 6, 6)
     };
     public override bool BashDoor => true;
     public override string Description => "A towering fire elemental, Karakal burns everything beyond recognition.";

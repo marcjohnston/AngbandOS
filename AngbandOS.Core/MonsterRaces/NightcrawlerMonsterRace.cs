@@ -27,10 +27,10 @@ internal class NightcrawlerMonsterRace : MonsterRace
 
     public override int ArmourClass => 160;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new StingAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseConAttackEffect>(), 8, 8),
-        new MonsterAttack(new StingAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseConAttackEffect>(), 8, 8),
-        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 10, 10),
-        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 10, 10)
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<StingAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseConAttackEffect>(), 8, 8),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<StingAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseConAttackEffect>(), 8, 8),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 10, 10),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 10, 10)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

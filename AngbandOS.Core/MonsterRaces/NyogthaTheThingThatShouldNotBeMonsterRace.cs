@@ -31,10 +31,10 @@ internal class NyogthaTheThingThatShouldNotBeMonsterRace : MonsterRace
 
     public override int ArmourClass => 120;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 10, 6),
-        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ColdAttackEffect>(), 10, 6),
-        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 10, 6),
-        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 16, 6)
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<CrushAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 10, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<CrushAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<ColdAttackEffect>(), 10, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<CrushAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 10, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<CrushAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 16, 6)
     };
     public override bool BashDoor => true;
     public override string Description => "A nightmarish fetid, black irididescence oozing towards you.";

@@ -18,7 +18,7 @@ internal class GreyIckyThingMonsterRace : MonsterRace
 
     public override int ArmourClass => 12;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 5),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<TouchAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 5),
     };
     public override string Description => "It is a smallish, slimy, icky, nasty creature.";
     public override bool EmptyMind => true;

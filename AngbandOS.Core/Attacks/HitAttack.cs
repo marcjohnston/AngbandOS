@@ -7,10 +7,13 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal class MoanAttackType : AttackType
+[Serializable]
+internal class HitAttack : Attack
 {
-    public override string MonsterAction(Monster monster) => $"moans at {monster.Name}";
-    public override string PlayerAction(SaveGame saveGame) => saveGame.SingletonRepository.MoanPlayerAttacks.ToWeightedRandom().Choose();
-    public override string KnowledgeAction => "moan";
-    public override bool AttackAwakensTarget => true;
+    private HitAttack(SaveGame saveGame) : base(saveGame) { }
+    public override string MonsterAction(Monster monster) => $"hits {monster.Name}";
+    public override string PlayerAction => $"hits you";
+    public override string KnowledgeAction => "hit";
+    public override bool AttackStunsTarget => true;
+    public override bool AttackCutsTarget => true;
 }

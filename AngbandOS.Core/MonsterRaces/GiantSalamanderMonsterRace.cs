@@ -21,7 +21,7 @@ internal class GiantSalamanderMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 40;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 3, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 3, 6),
     };
     public override string Description => "A large black and yellow lizard. You'd better run away!";
     public override bool ForceSleep => true;

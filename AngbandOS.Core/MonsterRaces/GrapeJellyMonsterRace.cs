@@ -20,7 +20,7 @@ internal class GrapeJellyMonsterRace : MonsterRace
 
     public override int ArmourClass => 1;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp10AttackEffect>(), 0, 0),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<TouchAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<Exp10AttackEffect>(), 0, 0),
     };
     public override string Description => "It is a pulsing mound of glowing flesh.";
     public override bool EmptyMind => true;

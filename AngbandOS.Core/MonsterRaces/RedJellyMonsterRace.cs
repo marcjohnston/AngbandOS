@@ -18,7 +18,7 @@ internal class RedJellyMonsterRace : MonsterRace
 
     public override int ArmourClass => 1;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseStrAttackEffect>(), 1, 5),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<TouchAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseStrAttackEffect>(), 1, 5),
     };
     public override string Description => "It is a large pulsating mound of red flesh.";
     public override bool EmptyMind => true;

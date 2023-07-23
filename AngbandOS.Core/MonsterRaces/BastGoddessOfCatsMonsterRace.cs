@@ -22,10 +22,10 @@ internal class BastGoddessOfCatsMonsterRace : MonsterRace
 
     public override int ArmourClass => 200;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ConfuseAttackEffect>(), 12, 12),
-        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseDexAttackEffect>(), 2, 12),
-        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<BlindAttackEffect>(), 10, 5),
-        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ParalyzeAttackEffect>(), 15, 1)
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<ConfuseAttackEffect>(), 12, 12),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<TouchAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseDexAttackEffect>(), 2, 12),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<BlindAttackEffect>(), 10, 5),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<ParalyzeAttackEffect>(), 15, 1)
     };
     public override bool BashDoor => true;
     public override string Description => "She looks like a mortal female with a cat's head.";

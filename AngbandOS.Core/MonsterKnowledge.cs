@@ -1240,7 +1240,7 @@ internal class MonsterKnowledge
                 {
                     continue;
                 }
-                AttackType method = _monsterType.Attacks[m].Method;
+                Attack method = _monsterType.Attacks[m].Method;
                 AttackEffect? effect = _monsterType.Attacks[m].Effect;
                 int d1 = _monsterType.Attacks[m].DDice;
                 int d2 = _monsterType.Attacks[m].DSide;

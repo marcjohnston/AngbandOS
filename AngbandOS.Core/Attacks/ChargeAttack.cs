@@ -7,10 +7,11 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal class ButtAttackType : AttackType
+[Serializable]
+internal class ChargeAttack : Attack
 {
-    public override string MonsterAction(Monster monster) => $"butts {monster.Name}";
-    public override string PlayerAction(SaveGame saveGame) => $"butts you";
-    public override bool AttackStunsTarget => true;
-    public override string KnowledgeAction => "butt";
+    private ChargeAttack(SaveGame saveGame) : base(saveGame) { }
+    public override string MonsterAction(Monster monster) => $"charges {monster.Name}";
+    public override string PlayerAction => $"charges you";
+    public override string KnowledgeAction => "charge";
 }

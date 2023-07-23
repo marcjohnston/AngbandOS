@@ -7,10 +7,11 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal class CrawlAttackType : AttackType
+[Serializable]
+internal class TouchAttack : Attack
 {
-    public override string MonsterAction(Monster monster) => $"crawls on {monster.Name}";
-    public override string PlayerAction(SaveGame saveGame) => $"crawls on you";
-    public override string KnowledgeAction => "crawl on you";
-    public override bool RendersMissMessage => false;
+    private TouchAttack(SaveGame saveGame) : base(saveGame) { }
+    public override string MonsterAction(Monster monster) => $"touches {monster.Name}";
+    public override string PlayerAction => $"touches you";
+    public override string KnowledgeAction => "touch";
 }

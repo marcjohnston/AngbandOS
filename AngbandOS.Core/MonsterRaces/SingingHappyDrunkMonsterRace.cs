@@ -18,7 +18,7 @@ internal class SingingHappyDrunkMonsterRace : MonsterRace
 
     public override int ArmourClass => 1;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new BegAttackType(), null, 0, 0),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BegAttack>(), null, 0, 0),
     };
     public override bool BashDoor => true;
     public override string Description => "He makes you glad to be sober.";

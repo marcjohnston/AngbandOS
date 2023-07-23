@@ -7,11 +7,12 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal class SpitAttackType : AttackType
+[Serializable]
+internal class CrushAttack : Attack
 {
-    public override string MonsterAction(Monster monster) => $"spits on {monster.Name}";
-    public override string PlayerAction(SaveGame saveGame) => $"spits on you";
-    public override string KnowledgeAction => "spit";
-
-    public override bool AttackTouchesTarget => false;
+    private CrushAttack(SaveGame saveGame) : base(saveGame) { }
+    public override string MonsterAction(Monster monster) => $"crushes {monster.Name}";
+    public override string PlayerAction => $"crushes you";
+    public override string KnowledgeAction => "crush";
+    public override bool AttackStunsTarget => true;
 }

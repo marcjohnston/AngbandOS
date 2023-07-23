@@ -18,7 +18,7 @@ internal class RavingLunaticMonsterRace : MonsterRace
 
     public override int ArmourClass => 1;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new DroolAttackType(), null, 0, 0),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<DroolAttack>(), null, 0, 0),
     };
     public override string Description => "Drooling and comical, but then, what do you expect?";
     public override int FreqInate => 0;

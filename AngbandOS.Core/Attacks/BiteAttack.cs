@@ -7,9 +7,12 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal class TouchAttackType : AttackType
+[Serializable]
+internal class BiteAttack : Attack
 {
-    public override string MonsterAction(Monster monster) => $"touches {monster.Name}";
-    public override string PlayerAction(SaveGame saveGame) => $"touches you";
-    public override string KnowledgeAction => "touch";
+    private BiteAttack(SaveGame saveGame) : base(saveGame) { }
+    public override string MonsterAction(Monster monster) => $"bites {monster.Name}";
+    public override string PlayerAction => $"bites you";
+    public override string KnowledgeAction => "bite";
+    public override bool AttackCutsTarget => true;
 }

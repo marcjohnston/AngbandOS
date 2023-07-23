@@ -7,10 +7,12 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal class PunchAttackType : AttackType
+[Serializable]
+internal class GazeAttack : Attack
 {
-    public override string MonsterAction(Monster monster) => $"punches {monster.Name}";
-    public override string PlayerAction(SaveGame saveGame) => $"punches you";
-    public override string KnowledgeAction => "punch";
-    public override bool AttackStunsTarget => true;
+    private GazeAttack(SaveGame saveGame) : base(saveGame) { }
+    public override string MonsterAction(Monster monster) => $"gazes at {monster.Name}";
+    public override string PlayerAction => $"gazes at you";
+    public override string KnowledgeAction => "gaze";
+    public override bool AttackTouchesTarget => false;
 }

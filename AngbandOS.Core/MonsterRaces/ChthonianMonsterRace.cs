@@ -28,10 +28,10 @@ internal class ChthonianMonsterRace : MonsterRace
 
     public override int ArmourClass => 90;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ShatterAttackEffect>(), 3, 11),
-        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ShatterAttackEffect>(), 3, 11),
-        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseConAttackEffect>(), 1, 2),
-        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseConAttackEffect>(), 1, 2)
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<CrushAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<ShatterAttackEffect>(), 3, 11),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<CrushAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<ShatterAttackEffect>(), 3, 11),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<TouchAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseConAttackEffect>(), 1, 2),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<TouchAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseConAttackEffect>(), 1, 2)
     };
     public override bool Cthuloid => true;
     public override string Description => "A huge subterranean worm whose body ends in a mass of groping tentacles.";

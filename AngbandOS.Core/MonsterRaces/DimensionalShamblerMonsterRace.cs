@@ -26,7 +26,7 @@ internal class DimensionalShamblerMonsterRace : MonsterRace
 
     public override int ArmourClass => 68;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 5),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 5),
     };
     public override bool BashDoor => true;
     public override bool Cthuloid => true;

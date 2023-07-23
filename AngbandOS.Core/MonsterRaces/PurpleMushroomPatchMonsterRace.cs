@@ -18,9 +18,9 @@ internal class PurpleMushroomPatchMonsterRace : MonsterRace
 
     public override int ArmourClass => 1;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new SporeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseConAttackEffect>(), 1, 2),
-        new MonsterAttack(new SporeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseConAttackEffect>(), 1, 2),
-        new MonsterAttack(new SporeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseConAttackEffect>(), 1, 2),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<SporeAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseConAttackEffect>(), 1, 2),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<SporeAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseConAttackEffect>(), 1, 2),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<SporeAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseConAttackEffect>(), 1, 2),
     };
     public override string Description => "Yum! It looks quite tasty.";
     public override bool EmptyMind => true;

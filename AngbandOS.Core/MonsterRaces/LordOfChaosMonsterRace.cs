@@ -25,10 +25,10 @@ internal class LordOfChaosMonsterRace : MonsterRace
 
     public override int ArmourClass => 80;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new KickAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 20, 2),
-        new MonsterAttack(new KickAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 10, 2),
-        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 20, 1),
-        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseAllAttackEffect>(), 15, 1)
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<KickAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 20, 2),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<KickAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 10, 2),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 20, 1),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseAllAttackEffect>(), 15, 1)
     };
     public override bool AttrAny => true;
     public override bool AttrMulti => true;

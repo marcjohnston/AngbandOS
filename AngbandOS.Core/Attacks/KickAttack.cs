@@ -7,10 +7,12 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal class SporeAttackType : AttackType
+[Serializable]
+internal class KickAttack : Attack
 {
-    public override string MonsterAction(Monster monster) => $"releases spores at {monster.Name}";
-    public override string PlayerAction(SaveGame saveGame) => $"releases spores at you";
-    public override string KnowledgeAction => "release spores";
-    public override bool AttackTouchesTarget => false;
+    private KickAttack(SaveGame saveGame) : base(saveGame) { }
+    public override string MonsterAction(Monster monster) => $"kicks {monster.Name}";
+    public override string PlayerAction => $"kicks you";
+    public override string KnowledgeAction => "kick";
+    public override bool AttackStunsTarget => true;
 }

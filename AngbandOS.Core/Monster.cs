@@ -1258,7 +1258,7 @@ internal class Monster : IItemContainer
                 bool obvious = false;
                 int damage = 0;
                 AttackEffect? effect = Race.Attacks[attackNumber].Effect;
-                AttackType method = Race.Attacks[attackNumber].Method;
+                Attack method = Race.Attacks[attackNumber].Method;
                 int dDice = Race.Attacks[attackNumber].DDice;
                 int dSide = Race.Attacks[attackNumber].DSide;
                 // Can't attack ourselves
@@ -2708,7 +2708,7 @@ internal class Monster : IItemContainer
                 int power = 0;
                 int damage = 0;
                 AttackEffect? effect = Race.Attacks[attackNumber].Effect;
-                AttackType method = Race.Attacks[attackNumber].Method;
+                Attack method = Race.Attacks[attackNumber].Method;
                 int damageDice = Race.Attacks[attackNumber].DDice;
                 int damageSides = Race.Attacks[attackNumber].DSide;
 
@@ -2744,7 +2744,7 @@ internal class Monster : IItemContainer
                     }
 
                     // Print the message
-                    string action = method.PlayerAction(saveGame);
+                    string action = method.PlayerAction;
                     if (!string.IsNullOrEmpty(action))
                     {
                         saveGame.MsgPrint($"{monsterName} {action}.");

@@ -18,7 +18,7 @@ internal class PitifulLookingBeggarMonsterRace : MonsterRace
 
     public override int ArmourClass => 1;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new BegAttackType(), null, 0, 0),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BegAttack>(), null, 0, 0),
     };
     public override string Description => "You just can't help feeling sorry for him.";
     public override int FreqInate => 0;

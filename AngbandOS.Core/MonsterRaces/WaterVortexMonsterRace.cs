@@ -20,7 +20,7 @@ internal class WaterVortexMonsterRace : MonsterRace
 
     public override int ArmourClass => 30;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new EngulfAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 3, 3),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<EngulfAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 3, 3),
     };
     public override bool BashDoor => true;
     public override string Description => "A caustic spinning whirlpool of water.";

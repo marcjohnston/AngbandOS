@@ -7,10 +7,11 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal  class DroolAttackType : AttackType
+[Serializable]
+internal class StingAttack : Attack
 {
-    public override string MonsterAction(Monster monster) => $"drools on {monster.Name}";
-    public override string PlayerAction(SaveGame saveGame) => $"drools on you";
-    public override string KnowledgeAction => "drool on you";
-    public override bool AttackTouchesTarget => false;
+    private StingAttack(SaveGame saveGame) : base(saveGame) { }
+    public override string MonsterAction(Monster monster) => $"stings {monster.Name}";
+    public override string PlayerAction => $"stings you";
+    public override string KnowledgeAction => "string";
 }

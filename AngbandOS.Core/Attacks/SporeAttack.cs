@@ -7,9 +7,12 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal class StingAttackType : AttackType
+[Serializable]
+internal class SporeAttack : Attack
 {
-    public override string MonsterAction(Monster monster) => $"stings {monster.Name}";
-    public override string PlayerAction(SaveGame saveGame) => $"stings you";
-    public override string KnowledgeAction => "string";
+    private SporeAttack(SaveGame saveGame) : base(saveGame) { }
+    public override string MonsterAction(Monster monster) => $"releases spores at {monster.Name}";
+    public override string PlayerAction => $"releases spores at you";
+    public override string KnowledgeAction => "release spores";
+    public override bool AttackTouchesTarget => false;
 }

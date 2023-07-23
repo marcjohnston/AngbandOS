@@ -18,7 +18,7 @@ internal class HairyMoldMonsterRace : MonsterRace
 
     public override int ArmourClass => 15;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 1, 3),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 1, 3),
     };
     public override string Description => "It is a strange hairy growth on the dungeon floor.";
     public override bool EmptyMind => true;

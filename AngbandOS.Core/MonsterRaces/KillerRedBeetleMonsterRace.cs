@@ -19,8 +19,8 @@ internal class KillerRedBeetleMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 45;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 4),
-        new MonsterAttack(new SpitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 4, 5),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<SpitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 4, 5),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a giant beetle wreathed in flames.";

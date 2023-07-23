@@ -7,8 +7,15 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal abstract class AttackType
+[Serializable]
+internal abstract class Attack
 {
+    protected readonly SaveGame SaveGame;
+    protected Attack(SaveGame saveGame)
+    {
+        SaveGame = saveGame;
+    }
+
     /// <summary>
     /// Returns the action message to be displayed, when the attack targets another monster.
     /// </summary>
@@ -19,7 +26,7 @@ internal abstract class AttackType
     /// </summary>
     /// <param name="saveGame"></param>
     /// <returns></returns>
-    public abstract string PlayerAction(SaveGame saveGame);
+    public abstract string PlayerAction { get; }
 
     /// <summary>
     /// Returns the action message to be displayed, when a description of the attack is being rendered to the player viewing

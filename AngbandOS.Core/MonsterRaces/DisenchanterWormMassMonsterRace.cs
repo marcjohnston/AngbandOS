@@ -19,7 +19,7 @@ internal class DisenchanterWormMassMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 5;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new CrawlAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<UnBonusAttackEffect>(), 1, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<CrawlAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<UnBonusAttackEffect>(), 1, 4),
     };
     public override bool AttrMulti => true;
     public override bool BashDoor => true;

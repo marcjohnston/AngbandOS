@@ -20,7 +20,7 @@ internal class PlasmaVortexMonsterRace : MonsterRace
 
     public override int ArmourClass => 40;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new EngulfAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 8, 8),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<EngulfAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 8, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "A whirlpool of intense flame, charring the stones at your feet.";

@@ -7,9 +7,11 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal class ChargeAttackType : AttackType
+[Serializable]
+internal class EngulfAttack : Attack
 {
-    public override string MonsterAction(Monster monster) => $"charges {monster.Name}";
-    public override string PlayerAction(SaveGame saveGame) => $"charges you";
-    public override string KnowledgeAction => "charge";
+    private EngulfAttack(SaveGame saveGame) : base(saveGame) { }
+    public override string MonsterAction(Monster monster) => $"engulfs {monster.Name}";
+    public override string PlayerAction => $"engulfs you";
+    public override string KnowledgeAction => "engulf";
 }

@@ -18,10 +18,10 @@ internal class SlimeMoldMonsterRace : MonsterRace
 
     public override int ArmourClass => 4;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new CrawlAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 1, 4),
-        new MonsterAttack(new CrawlAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<EatFoodAttackEffect>(), 0, 0),
-        new MonsterAttack(new DroolAttackType(), null, 0, 0),
-        new MonsterAttack(new DroolAttackType(), null, 0, 0)
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<CrawlAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 1, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<CrawlAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<EatFoodAttackEffect>(), 0, 0),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<DroolAttack>(), null, 0, 0),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<DroolAttack>(), null, 0, 0)
     };
     public override string Description => "It is a smallish, slimy, icky, hungry creature.";
     public override bool Drop90 => true;

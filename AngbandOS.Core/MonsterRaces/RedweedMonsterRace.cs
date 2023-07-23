@@ -20,7 +20,7 @@ internal class RedweedMonsterRace : MonsterRace
 
     public override int ArmourClass => 3;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 1),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<TouchAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 1),
     };
     public override string Description => "A strange fibrous growth springing up everywhere.";
     public override bool EmptyMind => true;

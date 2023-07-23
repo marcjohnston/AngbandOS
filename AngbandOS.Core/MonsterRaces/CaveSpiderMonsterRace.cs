@@ -19,7 +19,7 @@ internal class CaveSpiderMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 16;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 4),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a black spider that moves in fits and starts.";

@@ -20,7 +20,7 @@ internal class BlackOozeMonsterRace : MonsterRace
 
     public override int ArmourClass => 6;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 2, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<TouchAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 2, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a strangely moving puddle.";

@@ -18,7 +18,7 @@ internal class RedMoldMonsterRace : MonsterRace
 
     public override int ArmourClass => 16;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 4, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<TouchAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 4, 4),
     };
     public override string Description => "It is a strange red growth on the dungeon floor; it seems to burn with flame.";
     public override bool EmptyMind => true;

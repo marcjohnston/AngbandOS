@@ -18,7 +18,7 @@ internal class BlueOozeMonsterRace : MonsterRace
 
     public override int ArmourClass => 16;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new CrawlAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ColdAttackEffect>(), 1, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<CrawlAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<ColdAttackEffect>(), 1, 4),
     };
     public override string Description => "It's blue and it's oozing.";
     public override bool Drop60 => true;

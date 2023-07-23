@@ -28,9 +28,9 @@ internal class IronLichMonsterRace : MonsterRace
 
     public override int ArmourClass => 100;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new ButtAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ColdAttackEffect>(), 3, 6),
-        new MonsterAttack(new ButtAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 3, 6),
-        new MonsterAttack(new ButtAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ElectricityAttackEffect>(), 3, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<ButtAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<ColdAttackEffect>(), 3, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<ButtAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 3, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<ButtAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<ElectricityAttackEffect>(), 3, 6),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

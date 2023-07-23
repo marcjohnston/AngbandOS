@@ -23,7 +23,7 @@ internal class NoviceMageMonsterRace : MonsterRace
 
     public override int ArmourClass => 6;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 4),
     };
     public override bool BashDoor => true;
     public override string Description => "He is leaving behind a trail of dropped spell components.";

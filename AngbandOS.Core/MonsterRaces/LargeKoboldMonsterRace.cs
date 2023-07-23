@@ -17,7 +17,7 @@ internal class LargeKoboldMonsterRace : MonsterRace
 
     public override int ArmourClass => 32;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 10),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 10),
     };
     public override bool BashDoor => true;
     public override string Description => "It a man-sized figure with the all too recognizable face of a kobold.";

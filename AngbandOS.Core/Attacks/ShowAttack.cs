@@ -7,10 +7,13 @@
 
 namespace AngbandOS.Core.AttackTypes;
 
-internal class GazeAttackType : AttackType
+[Serializable]
+internal class ShowAttack : Attack
 {
-    public override string MonsterAction(Monster monster) => $"gazes at {monster.Name}";
-    public override string PlayerAction(SaveGame saveGame) => $"gazes at you";
-    public override string KnowledgeAction => "gaze";
+    private ShowAttack(SaveGame saveGame) : base(saveGame) { }
+    public override string MonsterAction(Monster monster) => $"sings to {monster.Name}";
+    public override string PlayerAction => SaveGame.SingletonRepository.SingingPlayerAttacks.ToWeightedRandom().Choose();
+    public override string KnowledgeAction => "sing";
     public override bool AttackTouchesTarget => false;
+    public override bool AttackAwakensTarget => true;
 }
