@@ -19,7 +19,7 @@ internal class MangyLookingLeperMonsterRace : MonsterRace
     public override int ArmourClass => 1;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(new BegAttackType(), null, 0, 0),
-        new MonsterAttack(new TouchAttackType(), new LoseConAttackEffect(), 0, 0),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseConAttackEffect>(), 0, 0),
     };
     public override string Description => "You feel it isn't safe to touch him.";
     public override int FreqInate => 0;

@@ -26,8 +26,8 @@ internal class LengSpiderMonsterRace : MonsterRace
 
     public override int ArmourClass => 68;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 4, 3),
-        new MonsterAttack(new BiteAttackType(), new PoisonAttackEffect(), 3, 10),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 4, 3),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 3, 10),
     };
     public override bool BashDoor => true;
     public override bool Cthuloid => true;

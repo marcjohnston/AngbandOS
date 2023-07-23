@@ -18,10 +18,10 @@ internal class ShoggothMonsterRace : MonsterRace
 
     public override int ArmourClass => 80;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new CrushAttackType(), new AcidAttackEffect(), 5, 6),
-        new MonsterAttack(new CrushAttackType(), new AcidAttackEffect(), 5, 6),
-        new MonsterAttack(new CrushAttackType(), new AcidAttackEffect(), 5, 6),
-        new MonsterAttack(new CrushAttackType(), new HurtAttackEffect(), 6, 6)
+        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 5, 6),
+        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 5, 6),
+        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 5, 6),
+        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 6, 6)
     };
     public override bool BashDoor => true;
     public override bool Cthuloid => true;

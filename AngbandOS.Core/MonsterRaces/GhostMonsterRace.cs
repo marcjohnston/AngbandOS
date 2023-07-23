@@ -21,10 +21,10 @@ internal class GhostMonsterRace : MonsterRace
 
     public override int ArmourClass => 30;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new WailAttackType(), new TerrifyAttackEffect(), 0, 0),
-        new MonsterAttack(new TouchAttackType(), new Exp20AttackEffect(), 0, 0),
-        new MonsterAttack(new ClawAttackType(), new LoseIntAttackEffect(), 1, 6),
-        new MonsterAttack(new ClawAttackType(), new LoseWisAttackEffect(), 1, 6)
+        new MonsterAttack(new WailAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<TerrifyAttackEffect>(), 0, 0),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp20AttackEffect>(), 0, 0),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseIntAttackEffect>(), 1, 6),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseWisAttackEffect>(), 1, 6)
     };
     public override bool ColdBlood => true;
     public override string Description => "You don't believe in them.";

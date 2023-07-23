@@ -20,9 +20,9 @@ internal class MatureWhiteDragonMonsterRace : MonsterRace
 
     public override int ArmourClass => 65;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 8),
-        new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 8),
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 8),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 8),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 8),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 2, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "A large dragon, scales gleaming bright white.";

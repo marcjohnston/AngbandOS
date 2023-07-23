@@ -26,9 +26,9 @@ internal class SilentWatcherMonsterRace : MonsterRace
 
     public override int ArmourClass => 80;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new GazeAttackType(), new TerrifyAttackEffect(), 0, 0),
-        new MonsterAttack(new GazeAttackType(), new ParalyzeAttackEffect(), 0, 0),
-        new MonsterAttack(new GazeAttackType(), new LoseStrAttackEffect(), 0, 0),
+        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<TerrifyAttackEffect>(), 0, 0),
+        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ParalyzeAttackEffect>(), 0, 0),
+        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseStrAttackEffect>(), 0, 0),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

@@ -10,6 +10,7 @@ namespace AngbandOS.Core.AttackEffects;
 [Serializable]
 internal class LoseChaAttackEffect : AttackEffect
 {
+    private LoseChaAttackEffect(SaveGame saveGame) : base(saveGame) { }
     public override int Power => 0;
     public override string Description => "reduce charisma";
     public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)

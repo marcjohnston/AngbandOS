@@ -19,7 +19,7 @@ internal class GiantFleaMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 7;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 2),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 2),
     };
     public override string Description => "It makes you itch just to look at it. ";
     public override int FreqInate => 0;

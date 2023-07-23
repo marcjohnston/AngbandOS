@@ -25,10 +25,10 @@ internal class AncalagonTheBlackMonsterRace : MonsterRace
 
     public override int ArmourClass => 125;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 5, 12),
-        new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 6, 12),
-        new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 8, 12),
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 10, 14)
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 5, 12),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 6, 12),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 8, 12),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 10, 14)
     };
     public override bool BashDoor => true;
     public override string Description => "'Rushing Jaws' is his name, and death is his game. No dragon of the brood of Glaurung can match him.";

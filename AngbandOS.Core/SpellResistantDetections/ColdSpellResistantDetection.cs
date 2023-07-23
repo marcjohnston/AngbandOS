@@ -7,8 +7,10 @@
 
 namespace AngbandOS.Core.SpellResistantDetections;
 
+[Serializable]
 internal class ColdSpellResistantDetection : SpellResistantDetection
 {
+    private ColdSpellResistantDetection(SaveGame saveGame) : base(saveGame) { }
     public override void Learn(SaveGame saveGame, Monster monster)
     {
         if (saveGame.HasColdResistance)

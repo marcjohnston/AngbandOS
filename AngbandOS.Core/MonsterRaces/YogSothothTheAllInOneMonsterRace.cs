@@ -30,9 +30,9 @@ internal class YogSothothTheAllInOneMonsterRace : MonsterRace
 
     public override int ArmourClass => 100;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new TouchAttackType(), new HurtAttackEffect(), 40, 5),
-        new MonsterAttack(new TouchAttackType(), new LoseConAttackEffect(), 16, 2),
-        new MonsterAttack(new TouchAttackType(), new LoseConAttackEffect(), 16, 2),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 40, 5),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseConAttackEffect>(), 16, 2),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseConAttackEffect>(), 16, 2),
     };
     public override bool AttrAny => true;
     public override bool AttrMulti => true;

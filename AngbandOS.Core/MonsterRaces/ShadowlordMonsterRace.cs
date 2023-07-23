@@ -31,10 +31,10 @@ internal class ShadowlordMonsterRace : MonsterRace
 
     public override int ArmourClass => 150;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new Exp40AttackEffect(), 6, 6),
-        new MonsterAttack(new HitAttackType(), new Exp40AttackEffect(), 6, 6),
-        new MonsterAttack(new HitAttackType(), new LoseStrAttackEffect(), 4, 6),
-        new MonsterAttack(new GazeAttackType(), new TerrifyAttackEffect(), 4, 6)
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp40AttackEffect>(), 6, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp40AttackEffect>(), 6, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseStrAttackEffect>(), 4, 6),
+        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<TerrifyAttackEffect>(), 4, 6)
     };
     public override bool ColdBlood => true;
     public override string Description => "An aura of hatred, cowardice and falsehood surrounds you as this cloaked figure floats towards you.";

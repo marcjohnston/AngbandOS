@@ -20,5 +20,5 @@ internal class WaterBoltMonsterSpell : BoltProjectileMonsterSpell
         return Program.Rng.DiceRoll(10, 10) + monsterLevel;
     }
     protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get<WaterProjectile>();
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { new ReflectSpellResistantDetection() };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get<ReflectSpellResistantDetection>() };
 }

@@ -10,6 +10,7 @@ namespace AngbandOS.Core.AttackEffects;
 [Serializable]
 internal class BlindAttackEffect : AttackEffect
 {
+    private BlindAttackEffect(SaveGame saveGame) : base(saveGame) { }
     public override int Power => 2;
     public override string Description => "blind";
     public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
@@ -22,6 +23,6 @@ internal class BlindAttackEffect : AttackEffect
                 obvious = true;
             }
         }
-        saveGame.UpdateSmartLearn(monster, new BlindSpellResistantDetection());
+        saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<BlindSpellResistantDetection>());
     }
 }

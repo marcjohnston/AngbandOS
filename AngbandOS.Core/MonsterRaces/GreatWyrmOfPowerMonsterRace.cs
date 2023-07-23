@@ -44,10 +44,10 @@ internal class GreatWyrmOfPowerMonsterRace : MonsterRace
 
     public override int ArmourClass => 111;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new CrushAttackType(), new PoisonAttackEffect(), 8, 12),
-        new MonsterAttack(new CrushAttackType(), new FireAttackEffect(), 8, 12),
-        new MonsterAttack(new CrushAttackType(), new ElectricityAttackEffect(), 8, 12),
-        new MonsterAttack(new CrushAttackType(), new HurtAttackEffect(), 10, 18)
+        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 8, 12),
+        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 8, 12),
+        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ElectricityAttackEffect>(), 8, 12),
+        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 10, 18)
     };
     public override bool BashDoor => true;
     public override string Description => "The mightiest of all dragonkind, a great wyrm of power is seldom encountered in our world. It can crush stars with its might.";

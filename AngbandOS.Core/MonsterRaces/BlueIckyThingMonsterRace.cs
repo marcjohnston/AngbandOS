@@ -22,10 +22,10 @@ internal class BlueIckyThingMonsterRace : MonsterRace
 
     public override int ArmourClass => 20;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new CrawlAttackType(), new PoisonAttackEffect(), 1, 4),
-        new MonsterAttack(new CrawlAttackType(), new EatFoodAttackEffect(), 0, 0),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 4),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 4)
+        new MonsterAttack(new CrawlAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 1, 4),
+        new MonsterAttack(new CrawlAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<EatFoodAttackEffect>(), 0, 0),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 4),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 4)
     };
     public override bool BashDoor => true;
     public override string Description => "It is a strange, slimy, icky creature, with rudimentary intelligence, but evil cunning. It hungers for food, and you look tasty.";

@@ -18,8 +18,8 @@ internal class GreyMoldMonsterRace : MonsterRace
 
     public override int ArmourClass => 1;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 4),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 4),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 4),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 4),
     };
     public override string Description => "A small strange growth.";
     public override bool EmptyMind => true;

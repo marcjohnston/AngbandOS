@@ -18,9 +18,9 @@ internal class GuardianNagaMonsterRace : MonsterRace
 
     public override int ArmourClass => 65;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new CrushAttackType(), new HurtAttackEffect(), 2, 8),
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 8),
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 8),
+        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 2, 8),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 8),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "A giant snake-like figure with a woman's torso.";

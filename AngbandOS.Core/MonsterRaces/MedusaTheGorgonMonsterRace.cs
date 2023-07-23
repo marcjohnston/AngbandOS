@@ -26,10 +26,10 @@ internal class MedusaTheGorgonMonsterRace : MonsterRace
 
     public override int ArmourClass => 100;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new GazeAttackType(), new Exp80AttackEffect(), 0, 0),
-        new MonsterAttack(new GazeAttackType(), new ParalyzeAttackEffect(), 0, 0),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 8, 6),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 8, 6)
+        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp80AttackEffect>(), 0, 0),
+        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ParalyzeAttackEffect>(), 0, 0),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 8, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 8, 6)
     };
     public override bool BashDoor => true;
     public override string Description => "Her face could sink a thousand ships.";

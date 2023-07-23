@@ -18,8 +18,8 @@ internal class HillGiantMonsterRace : MonsterRace
 
     public override int ArmourClass => 45;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 3, 6),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 3, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "A ten foot tall humanoid with powerful muscles.";

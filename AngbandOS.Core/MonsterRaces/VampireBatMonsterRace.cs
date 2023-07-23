@@ -19,8 +19,8 @@ internal class VampireBatMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 40;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new BiteAttackType(), new Exp40AttackEffect(), 1, 4),
-        new MonsterAttack(new BiteAttackType(), new Exp40AttackEffect(), 1, 4),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp40AttackEffect>(), 1, 4),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp40AttackEffect>(), 1, 4),
     };
     public override bool ColdBlood => true;
     public override string Description => "An undead bat that flies at your neck hungrily.";

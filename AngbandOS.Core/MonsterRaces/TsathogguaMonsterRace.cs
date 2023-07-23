@@ -25,10 +25,10 @@ internal class TsathogguaMonsterRace : MonsterRace
 
     public override int ArmourClass => 150;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 35, 5),
-        new MonsterAttack(new TouchAttackType(), new AcidAttackEffect(), 35, 5),
-        new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 35, 5),
-        new MonsterAttack(new TouchAttackType(), new AcidAttackEffect(), 35, 5)
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 35, 5),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 35, 5),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 35, 5),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 35, 5)
     };
     public override bool AttrAny => true;
     public override bool AttrMulti => true;

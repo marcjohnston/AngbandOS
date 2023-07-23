@@ -24,10 +24,10 @@ internal class DracoliskMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 120;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 5, 12),
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 5, 12),
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 8, 8),
-        new MonsterAttack(new GazeAttackType(), new ParalyzeAttackEffect(), 0, 0)
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 5, 12),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 5, 12),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 8, 8),
+        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ParalyzeAttackEffect>(), 0, 0)
     };
     public override bool BashDoor => true;
     public override string Description => "A mixture of dragon and basilisk, the dracolisk stares at you with deep piercing eyes, its evil breath burning the ground where it stands.";

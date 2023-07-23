@@ -19,7 +19,7 @@ internal class ScruffyLittleDogMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 1;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 1),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 1),
     };
     public override string Description => "A thin flea-ridden mutt, growling as you get close.";
     public override int FreqInate => 0;

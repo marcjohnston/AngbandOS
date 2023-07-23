@@ -36,7 +36,7 @@ internal class ScareMonsterSpell : MonsterSpell
         {
             saveGame.TimedFear.AddTimer(Program.Rng.RandomLessThan(4) + 4);
         }
-        saveGame.UpdateSmartLearn(monster, new FearSpellResistantDetection());
+        saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<FearSpellResistantDetection>());
     }
 
     public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)

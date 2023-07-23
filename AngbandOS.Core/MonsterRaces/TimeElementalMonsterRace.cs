@@ -21,10 +21,10 @@ internal class TimeElementalMonsterRace : MonsterRace
 
     public override int ArmourClass => 70;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new TouchAttackType(), new LoseAllAttackEffect(), 3, 4),
-        new MonsterAttack(new TouchAttackType(), new Exp40AttackEffect(), 3, 4),
-        new MonsterAttack(new TouchAttackType(), new LoseAllAttackEffect(), 3, 4),
-        new MonsterAttack(new TouchAttackType(), new Exp40AttackEffect(), 3, 4)
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseAllAttackEffect>(), 3, 4),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp40AttackEffect>(), 3, 4),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseAllAttackEffect>(), 3, 4),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp40AttackEffect>(), 3, 4)
     };
     public override string Description => "You have not seen it yet.";
     public override bool EmptyMind => true;

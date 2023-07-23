@@ -29,10 +29,10 @@ internal class CantorasTheSkeletalLordMonsterRace : MonsterRace
 
     public override int ArmourClass => 120;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new GazeAttackType(), new Exp80AttackEffect(), 0, 0),
-        new MonsterAttack(new GazeAttackType(), new Exp80AttackEffect(), 0, 0),
-        new MonsterAttack(new TouchAttackType(), new PoisonAttackEffect(), 3, 5),
-        new MonsterAttack(new TouchAttackType(), new PoisonAttackEffect(), 3, 5)
+        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp80AttackEffect>(), 0, 0),
+        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp80AttackEffect>(), 0, 0),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 3, 5),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 3, 5)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

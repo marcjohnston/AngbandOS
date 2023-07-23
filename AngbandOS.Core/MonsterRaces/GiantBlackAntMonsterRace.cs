@@ -19,7 +19,7 @@ internal class GiantBlackAntMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 20;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 4),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 4),
     };
     public override bool BashDoor => true;
     public override string Description => "It is about three feet long.";

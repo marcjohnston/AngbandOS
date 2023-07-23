@@ -27,10 +27,10 @@ internal class ElderThingMonsterRace : MonsterRace
 
     public override int ArmourClass => 70;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new CrushAttackType(), new HurtAttackEffect(), 4, 6),
-        new MonsterAttack(new CrushAttackType(), new HurtAttackEffect(), 4, 6),
-        new MonsterAttack(new CrushAttackType(), new HurtAttackEffect(), 4, 6),
-        new MonsterAttack(new TouchAttackType(), new LoseWisAttackEffect(), 0, 0)
+        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 4, 6),
+        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 4, 6),
+        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 4, 6),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseWisAttackEffect>(), 0, 0)
     };
     public override bool BashDoor => true;
     public override bool Cthuloid => true;

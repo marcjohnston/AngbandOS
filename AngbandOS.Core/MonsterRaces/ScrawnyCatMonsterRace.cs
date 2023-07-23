@@ -19,7 +19,7 @@ internal class ScrawnyCatMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 1;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 1),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 1),
     };
     public override string Description => "A skinny little furball with sharp claws and a menacing look.";
     public override int FreqInate => 0;

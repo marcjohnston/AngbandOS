@@ -22,10 +22,10 @@ internal class StraashaQueenOfAirMonsterRace : MonsterRace
 
     public override int ArmourClass => 50;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 4, 6),
-        new MonsterAttack(new HitAttackType(), new ConfuseAttackEffect(), 1, 4),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 4, 6),
-        new MonsterAttack(new HitAttackType(), new ConfuseAttackEffect(), 1, 4)
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 4, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ConfuseAttackEffect>(), 1, 4),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 4, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ConfuseAttackEffect>(), 1, 4)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

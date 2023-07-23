@@ -21,10 +21,10 @@ internal class TheQueenAntMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 100;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 12),
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 12),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 2, 8),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 2, 8)
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 2, 12),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 2, 12),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 2, 8),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 2, 8)
     };
     public override bool BashDoor => true;
     public override string Description => "She's upset because you hurt her children.";

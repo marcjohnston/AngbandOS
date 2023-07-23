@@ -46,10 +46,10 @@ internal class NyarlathotepMonsterRace : MonsterRace
 
     public override int ArmourClass => 165;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new UnBonusAttackEffect(), 12, 12),
-        new MonsterAttack(new HitAttackType(), new UnPowerAttackEffect(), 12, 12),
-        new MonsterAttack(new HitAttackType(), new ConfuseAttackEffect(), 10, 2),
-        new MonsterAttack(new HitAttackType(), new BlindAttackEffect(), 3, 2)
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<UnBonusAttackEffect>(), 12, 12),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<UnPowerAttackEffect>(), 12, 12),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ConfuseAttackEffect>(), 10, 2),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<BlindAttackEffect>(), 3, 2)
     };
     public override bool AttrMulti => true;
     public override bool BashDoor => true;

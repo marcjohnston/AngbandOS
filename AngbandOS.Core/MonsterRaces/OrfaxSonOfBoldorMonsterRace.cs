@@ -26,8 +26,8 @@ internal class OrfaxSonOfBoldorMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 20;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 9),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 8),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 9),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 8),
         new MonsterAttack(new InsultAttackType(), null, 0, 0),
         new MonsterAttack(new InsultAttackType(), null, 0, 0)
     };

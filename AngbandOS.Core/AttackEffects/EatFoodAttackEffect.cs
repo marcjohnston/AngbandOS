@@ -10,6 +10,7 @@ namespace AngbandOS.Core.AttackEffects;
 [Serializable]
 internal class EatFoodAttackEffect : AttackEffect
 {
+    private EatFoodAttackEffect(SaveGame saveGame) : base(saveGame) { }
     public override int Power => 5;
     public override string Description => "eat your food";
     public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)

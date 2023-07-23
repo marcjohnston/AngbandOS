@@ -29,10 +29,10 @@ internal class LichMonsterRace : MonsterRace
 
     public override int ArmourClass => 60;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new TouchAttackType(), new Exp40AttackEffect(), 0, 0),
-        new MonsterAttack(new TouchAttackType(), new UnPowerAttackEffect(), 0, 0),
-        new MonsterAttack(new TouchAttackType(), new LoseDexAttackEffect(), 2, 8),
-        new MonsterAttack(new TouchAttackType(), new LoseDexAttackEffect(), 2, 8)
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp40AttackEffect>(), 0, 0),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<UnPowerAttackEffect>(), 0, 0),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseDexAttackEffect>(), 2, 8),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseDexAttackEffect>(), 2, 8)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

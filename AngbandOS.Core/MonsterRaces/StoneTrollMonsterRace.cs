@@ -18,9 +18,9 @@ internal class StoneTrollMonsterRace : MonsterRace
 
     public override int ArmourClass => 40;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 6),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 6),
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 3, 4),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 6),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 4),
     };
     public override bool BashDoor => true;
     public override string Description => "He is a giant troll with scabrous black skin.";

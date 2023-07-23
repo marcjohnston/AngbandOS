@@ -21,5 +21,5 @@ internal class ColdBallMonsterSpell : BallProjectileMonsterSpell
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         return Program.Rng.DieRoll(monsterLevel * 3 / 2) + 10;
     }
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { new ColdSpellResistantDetection() };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get<ColdSpellResistantDetection>() };
 }

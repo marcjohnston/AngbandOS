@@ -18,10 +18,10 @@ internal class BolgSonOfAzogMonsterRace : MonsterRace
 
     public override int ArmourClass => 50;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 3, 6),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 3, 6),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 3, 6),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 3, 6)
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 6)
     };
     public override bool BashDoor => true;
     public override string Description => "A large and powerful orc. He looks just like his daddy. He is tall and fast, but fortunately blessed with orcish brains.";

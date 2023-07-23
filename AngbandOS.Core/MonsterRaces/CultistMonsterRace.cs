@@ -23,8 +23,8 @@ internal class CultistMonsterRace : MonsterRace
 
     public override int ArmourClass => 22;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 2, 3),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 2, 3),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 2, 3),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 2, 3),
     };
     public override bool BashDoor => true;
     public override string Description => "A robed humanoid dedicated to his outer god.";

@@ -17,8 +17,8 @@ internal class IceTrollMonsterRace : MonsterRace
 
     public override int ArmourClass => 56;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 5),
-        new MonsterAttack(new BiteAttackType(), new ColdAttackEffect(), 3, 6),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 5),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ColdAttackEffect>(), 3, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "He is a white troll with powerfully clawed hands.";

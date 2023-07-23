@@ -10,6 +10,7 @@ namespace AngbandOS.Core.AttackEffects;
 [Serializable]
 internal class ElectricityAttackEffect : AttackEffect
 {
+    private ElectricityAttackEffect(SaveGame saveGame) : base(saveGame) { }
     public override int Power => 10;
     public override string Description => "electrocute";
     public override void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
@@ -17,7 +18,7 @@ internal class ElectricityAttackEffect : AttackEffect
         obvious = true;
         saveGame.MsgPrint("You are struck by electricity!");
         saveGame.ElecDam(damage, monsterDescription);
-        saveGame.UpdateSmartLearn(monster, new ElecSpellResistantDetection());
+        saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<ElecSpellResistantDetection>());
     }
     public override void ApplyToMonster(SaveGame saveGame, Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {

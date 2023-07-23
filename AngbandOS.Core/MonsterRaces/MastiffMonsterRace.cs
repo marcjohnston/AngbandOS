@@ -19,8 +19,8 @@ internal class MastiffMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 20;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 5),
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 5),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 5),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 5),
     };
     public override string Description => "Well-trained watchdogs, obedient to death.";
     public override int FreqInate => 0;

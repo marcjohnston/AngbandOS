@@ -18,8 +18,8 @@ internal class PhantomBeastMonsterRace : MonsterRace
 
     public override int ArmourClass => 10;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 2, 34),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 2, 34),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 2, 34),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 2, 34),
     };
     public override bool ColdBlood => true;
     public override string Description => "A creature that is half real, half illusion.";

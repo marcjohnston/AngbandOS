@@ -23,8 +23,8 @@ internal class MaliciousLeprechaunMonsterRace : MonsterRace
 
     public override int ArmourClass => 13;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new TouchAttackType(), new EatGoldAttackEffect(), 0, 0),
-        new MonsterAttack(new TouchAttackType(), new EatItemAttackEffect(), 0, 0),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<EatGoldAttackEffect>(), 0, 0),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<EatItemAttackEffect>(), 0, 0),
     };
     public override bool ColdBlood => true;
     public override string Description => "This little creature has a fiendish gleam in its eyes.";

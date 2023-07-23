@@ -27,9 +27,9 @@ internal class CultHighPriestMonsterRace : MonsterRace
 
     public override int ArmourClass => 60;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 3, 4),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 3, 5),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 3, 5),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 4),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 5),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 5),
     };
     public override bool BashDoor => true;
     public override string Description => "A dark priest of the highest order. Powerful and evil, beware his many spells.";

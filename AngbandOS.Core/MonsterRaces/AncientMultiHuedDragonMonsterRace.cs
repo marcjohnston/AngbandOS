@@ -27,9 +27,9 @@ internal class AncientMultiHuedDragonMonsterRace : MonsterRace
 
     public override int ArmourClass => 100;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 4, 12),
-        new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 4, 12),
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 6, 12),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 4, 12),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 4, 12),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 6, 12),
     };
     public override bool AttrMulti => true;
     public override bool BashDoor => true;

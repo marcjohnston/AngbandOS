@@ -19,7 +19,7 @@ internal class YellowWormMassMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 4;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new CrawlAttackType(), new LoseDexAttackEffect(), 1, 3),
+        new MonsterAttack(new CrawlAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseDexAttackEffect>(), 1, 3),
     };
     public override string Description => "It is a large slimy mass of worms.";
     public override int FreqInate => 0;

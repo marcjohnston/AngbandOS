@@ -18,9 +18,9 @@ internal class VermiciousKnidMonsterRace : MonsterRace
 
     public override int ArmourClass => 55;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new TouchAttackType(), new TerrifyAttackEffect(), 4, 6),
-        new MonsterAttack(new CrawlAttackType(), new HurtAttackEffect(), 4, 6),
-        new MonsterAttack(new EngulfAttackType(), new HurtAttackEffect(), 4, 6),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<TerrifyAttackEffect>(), 4, 6),
+        new MonsterAttack(new CrawlAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 4, 6),
+        new MonsterAttack(new EngulfAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 4, 6),
     };
     public override bool ColdBlood => true;
     public override string Description => "An amorphous shape that looks like wet grey clay with two pale eyes. It is totally silent as it oozes towards you.";

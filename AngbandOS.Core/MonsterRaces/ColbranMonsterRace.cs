@@ -20,8 +20,8 @@ internal class ColbranMonsterRace : MonsterRace
 
     public override int ArmourClass => 80;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new ElectricityAttackEffect(), 3, 8),
-        new MonsterAttack(new HitAttackType(), new ElectricityAttackEffect(), 3, 8),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ElectricityAttackEffect>(), 3, 8),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ElectricityAttackEffect>(), 3, 8),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

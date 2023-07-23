@@ -20,7 +20,7 @@ internal class FireVampireMonsterRace : MonsterRace
 
     public override int ArmourClass => 6;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new TouchAttackType(), new FireAttackEffect(), 1, 4),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 1, 4),
     };
     public override bool BashDoor => true;
     public override bool Cthuloid => true;

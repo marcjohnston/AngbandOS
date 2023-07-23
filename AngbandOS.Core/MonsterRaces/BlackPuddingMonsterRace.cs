@@ -18,10 +18,10 @@ internal class BlackPuddingMonsterRace : MonsterRace
 
     public override int ArmourClass => 18;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new TouchAttackType(), new AcidAttackEffect(), 1, 10),
-        new MonsterAttack(new TouchAttackType(), new AcidAttackEffect(), 1, 10),
-        new MonsterAttack(new TouchAttackType(), new AcidAttackEffect(), 1, 10),
-        new MonsterAttack(new TouchAttackType(), new AcidAttackEffect(), 1, 10)
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 1, 10),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 1, 10),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 1, 10),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 1, 10)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

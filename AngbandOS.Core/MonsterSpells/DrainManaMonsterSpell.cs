@@ -70,7 +70,7 @@ internal class DrainManaMonsterSpell : MonsterSpell
                 }
             }
         }
-        saveGame.UpdateSmartLearn(monster, new ManaSpellResistantDetection());
+        saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<ManaSpellResistantDetection>());
     }
 
     public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)

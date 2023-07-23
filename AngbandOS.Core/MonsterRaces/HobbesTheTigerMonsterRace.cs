@@ -19,9 +19,9 @@ internal class HobbesTheTigerMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 30;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 11),
-        new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 11),
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 4),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 11),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 11),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 4),
     };
     public override bool BashDoor => true;
     public override string Description => "Fast-moving, with a taste for tuna sandwiches.";

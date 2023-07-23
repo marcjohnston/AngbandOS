@@ -21,9 +21,9 @@ internal class YoungBlackDragonMonsterRace : MonsterRace
 
     public override int ArmourClass => 60;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 5),
-        new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 5),
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 6),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 5),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 5),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "It has a form that legends are made of. Its still-tender scales are a darkest black hue. Acid drips from its body.";

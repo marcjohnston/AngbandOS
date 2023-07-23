@@ -18,9 +18,9 @@ internal class AzogKingOfTheUrukHaiMonsterRace : MonsterRace
 
     public override int ArmourClass => 80;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 5, 5),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 5, 5),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 5, 5),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 5, 5),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 5, 5),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 5, 5),
     };
     public override bool BashDoor => true;
     public override string Description => "He is also known as the King of Khazad-dum. His ego is renowned to be bigger than his head.";

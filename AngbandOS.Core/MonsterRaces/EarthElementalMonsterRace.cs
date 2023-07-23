@@ -20,9 +20,9 @@ internal class EarthElementalMonsterRace : MonsterRace
 
     public override int ArmourClass => 60;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 4, 6),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 4, 6),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 4, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 4, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 4, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 4, 6),
     };
     public override bool ColdBlood => true;
     public override string Description => "It is a towering form composed of rock with fists of awesome power.";

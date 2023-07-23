@@ -19,7 +19,7 @@ internal class SalamanderMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 20;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new BiteAttackType(), new FireAttackEffect(), 1, 3),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 1, 3),
     };
     public override string Description => "A small black and orange lizard.";
     public override int FreqInate => 0;

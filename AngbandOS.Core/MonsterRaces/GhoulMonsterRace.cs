@@ -21,9 +21,9 @@ internal class GhoulMonsterRace : MonsterRace
 
     public override int ArmourClass => 30;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new ClawAttackType(), new PoisonAttackEffect(), 1, 4),
-        new MonsterAttack(new BiteAttackType(), new PoisonAttackEffect(), 1, 4),
-        new MonsterAttack(new BiteAttackType(), new ParalyzeAttackEffect(), 1, 5),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 1, 4),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 1, 4),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ParalyzeAttackEffect>(), 1, 5),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

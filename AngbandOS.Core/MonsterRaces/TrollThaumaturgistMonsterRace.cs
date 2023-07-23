@@ -24,9 +24,9 @@ internal class TrollThaumaturgistMonsterRace : MonsterRace
 
     public override int ArmourClass => 50;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 8),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 8),
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 3, 4),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 8),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 8),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 4),
     };
     public override bool BashDoor => true;
     public override string Description => "A troll who is so bright he knows how to read.";

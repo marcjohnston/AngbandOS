@@ -21,10 +21,10 @@ internal class VibrationHoundMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 30;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 6),
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 6),
-        new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 3, 3),
-        new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 3, 3)
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 2, 6),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 2, 6),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 3),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 3)
     };
     public override bool BashDoor => true;
     public override string Description => "A blurry canine form which seems to be moving as fast as the eye can follow. You can feel the earth resonating beneath your feet.";

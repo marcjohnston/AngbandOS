@@ -17,8 +17,8 @@ internal class FrostGiantMonsterRace : MonsterRace
 
     public override int ArmourClass => 50;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new ColdAttackEffect(), 3, 6),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 2, 8),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ColdAttackEffect>(), 3, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 2, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "A twelve foot tall giant covered in furs.";

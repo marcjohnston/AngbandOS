@@ -20,9 +20,9 @@ internal class IceElementalMonsterRace : MonsterRace
 
     public override int ArmourClass => 60;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new BiteAttackType(), new ColdAttackEffect(), 1, 3),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 4, 6),
-        new MonsterAttack(new BiteAttackType(), new ColdAttackEffect(), 1, 3),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ColdAttackEffect>(), 1, 3),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 4, 6),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ColdAttackEffect>(), 1, 3),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

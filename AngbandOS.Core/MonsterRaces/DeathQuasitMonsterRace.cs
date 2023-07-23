@@ -24,9 +24,9 @@ internal class DeathQuasitMonsterRace : MonsterRace
 
     public override int ArmourClass => 80;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new BiteAttackType(), new LoseDexAttackEffect(), 3, 6),
-        new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 3, 3),
-        new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 3, 3),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseDexAttackEffect>(), 3, 6),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 3),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 3),
     };
     public override bool Demon => true;
     public override string Description => "It is a demon of small stature, but its armoured frame moves with lightning speed and its powers make it a tornado of death and destruction.";

@@ -18,10 +18,10 @@ internal class DeathSwordMonsterRace : MonsterRace
 
     public override int ArmourClass => 40;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 5, 5),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 5, 5),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 5, 5),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 5, 5)
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 5, 5),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 5, 5),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 5, 5),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 5, 5)
     };
     public override bool CharMulti => true;
     public override bool ColdBlood => true;

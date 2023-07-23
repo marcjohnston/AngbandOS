@@ -21,9 +21,9 @@ internal class DholeMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 64;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new SpitAttackType(), new AcidAttackEffect(), 1, 8),
-        new MonsterAttack(new EngulfAttackType(), new AcidAttackEffect(), 2, 8),
-        new MonsterAttack(new CrushAttackType(), new HurtAttackEffect(), 4, 8),
+        new MonsterAttack(new SpitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 1, 8),
+        new MonsterAttack(new EngulfAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 2, 8),
+        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 4, 8),
     };
     public override bool Cthuloid => true;
     public override string Description => "A gigantic worm dripping with acid.";

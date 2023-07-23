@@ -7,7 +7,13 @@
 
 namespace AngbandOS.Core.SpellResistantDetections;
 
+[Serializable]
 internal abstract class SpellResistantDetection
 {
+    protected readonly SaveGame SaveGame;
+    protected SpellResistantDetection(SaveGame saveGame)
+    {
+        SaveGame = saveGame;
+    }
     public abstract void Learn(SaveGame saveGame, Monster monster);
 }

@@ -26,10 +26,10 @@ internal class TselakusTheDreadlordMonsterRace : MonsterRace
 
     public override int ArmourClass => 150;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 10, 10),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 10, 10),
-        new MonsterAttack(new HitAttackType(), new LoseStrAttackEffect(), 4, 6),
-        new MonsterAttack(new HitAttackType(), new LoseStrAttackEffect(), 4, 6)
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 10, 10),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 10, 10),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseStrAttackEffect>(), 4, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseStrAttackEffect>(), 4, 6)
     };
     public override bool ColdBlood => true;
     public override string Description => "This huge affront to existence twists and tears at the fabric of space.Darkness itself recoils from the touch of Tselakus as he leaves a trailof death and destruction. Mighty claws rend reality as heannihilates all in his path to your soul!";

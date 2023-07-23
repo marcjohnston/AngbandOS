@@ -21,9 +21,9 @@ internal class EnchantressMonsterRace : MonsterRace
 
     public override int ArmourClass => 60;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 2, 6),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 2, 6),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 2, 8),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 2, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 2, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 2, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "This elusive female spellcaster has a special affinity for dragons, whom she rarely fights without.";

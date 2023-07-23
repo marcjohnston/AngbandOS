@@ -10,6 +10,11 @@ namespace AngbandOS.Core.AttackEffects;
 [Serializable]
 internal abstract class AttackEffect
 {
+    protected readonly SaveGame SaveGame;
+    protected AttackEffect(SaveGame saveGame)
+    {
+        SaveGame = saveGame;
+    }
     public abstract string Description { get; }
     public abstract int Power { get; }
     public abstract void ApplyToPlayer(SaveGame saveGame, int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked);

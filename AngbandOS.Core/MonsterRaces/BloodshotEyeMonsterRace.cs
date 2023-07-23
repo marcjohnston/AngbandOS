@@ -20,7 +20,7 @@ internal class BloodshotEyeMonsterRace : MonsterRace
 
     public override int ArmourClass => 6;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new GazeAttackType(), new BlindAttackEffect(), 2, 6),
+        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<BlindAttackEffect>(), 2, 6),
     };
     public override string Description => "A disembodied eye, bloodshot and nasty.";
     public override int FreqInate => 7;

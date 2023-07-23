@@ -32,7 +32,7 @@ internal class HoldMonsterSpell : MonsterSpell
         {
             saveGame.TimedParalysis.AddTimer(Program.Rng.RandomLessThan(4) + 4);
         }
-        saveGame.UpdateSmartLearn(monster, new FreeSpellResistantDetection());
+        saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<FreeSpellResistantDetection>());
     }
 
     public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)

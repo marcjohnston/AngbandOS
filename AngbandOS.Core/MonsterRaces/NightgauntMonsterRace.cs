@@ -22,8 +22,8 @@ internal class NightgauntMonsterRace : MonsterRace
 
     public override int ArmourClass => 50;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new CrushAttackType(), new LoseStrAttackEffect(), 1, 5),
-        new MonsterAttack(new TouchAttackType(), new ParalyzeAttackEffect(), 3, 4),
+        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseStrAttackEffect>(), 1, 5),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ParalyzeAttackEffect>(), 3, 4),
     };
     public override bool BashDoor => true;
     public override bool Demon => true;

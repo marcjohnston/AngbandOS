@@ -30,10 +30,10 @@ internal class AtlachNachaTheSpiderGodMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 160;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new BiteAttackType(), new PoisonAttackEffect(), 3, 9),
-        new MonsterAttack(new BiteAttackType(), new LoseStrAttackEffect(), 3, 9),
-        new MonsterAttack(new StingAttackType(), new PoisonAttackEffect(), 2, 5),
-        new MonsterAttack(new StingAttackType(), new LoseStrAttackEffect(), 2, 5)
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 3, 9),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseStrAttackEffect>(), 3, 9),
+        new MonsterAttack(new StingAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 2, 5),
+        new MonsterAttack(new StingAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseStrAttackEffect>(), 2, 5)
     };
     public override bool BashDoor => true;
     public override string Description => "'...there was a kind of face on the squat ebon body, low down amid the several-jointed legs. The face peered up with a weird expression of doubt and inquiry...'";

@@ -33,10 +33,10 @@ internal class TheCollectorMonsterRace : MonsterRace
 
     public override int ArmourClass => 100;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new LoseChaAttackEffect(), 5, 5),
-        new MonsterAttack(new TouchAttackType(), new EatItemAttackEffect(), 0, 0),
-        new MonsterAttack(new TouchAttackType(), new LoseAllAttackEffect(), 10, 1),
-        new MonsterAttack(new TouchAttackType(), new EatGoldAttackEffect(), 0, 0)
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseChaAttackEffect>(), 5, 5),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<EatItemAttackEffect>(), 0, 0),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseAllAttackEffect>(), 10, 1),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<EatGoldAttackEffect>(), 0, 0)
     };
     public override bool ColdBlood => true;
     public override string Description => "A strange little gnome, he's been collecting toys and friends and doesn't want to give them up.";

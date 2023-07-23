@@ -41,10 +41,10 @@ internal class AbhothSourceOfUncleannessMonsterRace : MonsterRace
 
     public override int ArmourClass => 100;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new CrushAttackType(), new LoseConAttackEffect(), 30, 4),
-        new MonsterAttack(new HitAttackType(), new LoseStrAttackEffect(), 30, 4),
-        new MonsterAttack(new TouchAttackType(), new LoseIntAttackEffect(), 1, 50),
-        new MonsterAttack(new CrawlAttackType(), new LoseWisAttackEffect(), 1, 50)
+        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseConAttackEffect>(), 30, 4),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseStrAttackEffect>(), 30, 4),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseIntAttackEffect>(), 1, 50),
+        new MonsterAttack(new CrawlAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseWisAttackEffect>(), 1, 50)
     };
     public override bool AttrAny => true;
     public override bool AttrMulti => true;

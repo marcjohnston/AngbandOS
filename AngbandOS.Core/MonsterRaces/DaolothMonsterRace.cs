@@ -23,10 +23,10 @@ internal class DaolothMonsterRace : MonsterRace
 
     public override int ArmourClass => 180;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new UnBonusAttackEffect(), 6, 8),
-        new MonsterAttack(new HitAttackType(), new AcidAttackEffect(), 4, 6),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 10, 10),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 10, 10)
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<UnBonusAttackEffect>(), 6, 8),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 4, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 10, 10),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 10, 10)
     };
     public override bool BashDoor => true;
     public override string Description => "'Not shapeless, but so complex that the eye could recognise no discernable shape.' J.Ramsey Campbell - 'The Render of the Veils'.";

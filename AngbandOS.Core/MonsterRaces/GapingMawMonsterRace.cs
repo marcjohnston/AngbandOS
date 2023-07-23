@@ -17,7 +17,7 @@ internal class GapingMawMonsterRace : MonsterRace
 
     public override int ArmourClass => 14;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new TerrifyAttackEffect(), 1, 4),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<TerrifyAttackEffect>(), 1, 4),
     };
     public override string Description => "A hole in the fabric of reality, leading to who knows what plane... ";
     public override int FreqInate => 0;

@@ -19,8 +19,8 @@ internal class CreepingSilverCoinsMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 30;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 6),
-        new MonsterAttack(new TouchAttackType(), new PoisonAttackEffect(), 2, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 6),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 2, 6),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

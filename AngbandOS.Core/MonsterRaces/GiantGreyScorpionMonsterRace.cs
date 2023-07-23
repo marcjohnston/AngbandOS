@@ -19,8 +19,8 @@ internal class GiantGreyScorpionMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 50;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 6),
-        new MonsterAttack(new StingAttackType(), new PoisonAttackEffect(), 1, 4),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 6),
+        new MonsterAttack(new StingAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 1, 4),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a giant grey scorpion. It looks poisonous.";

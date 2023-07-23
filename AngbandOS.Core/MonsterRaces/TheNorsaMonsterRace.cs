@@ -29,10 +29,10 @@ internal class TheNorsaMonsterRace : MonsterRace
 
     public override int ArmourClass => 125;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new CrushAttackType(), new AcidAttackEffect(), 8, 12),
-        new MonsterAttack(new CrushAttackType(), new FireAttackEffect(), 8, 12),
-        new MonsterAttack(new CrushAttackType(), new ElectricityAttackEffect(), 8, 12),
-        new MonsterAttack(new CrushAttackType(), new PoisonAttackEffect(), 10, 14)
+        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 8, 12),
+        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 8, 12),
+        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ElectricityAttackEffect>(), 8, 12),
+        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 10, 14)
     };
     public override bool AttrMulti => true;
     public override bool BashDoor => true;

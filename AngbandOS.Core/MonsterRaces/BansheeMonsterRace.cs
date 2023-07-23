@@ -21,8 +21,8 @@ internal class BansheeMonsterRace : MonsterRace
 
     public override int ArmourClass => 24;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new WailAttackType(), new TerrifyAttackEffect(), 0, 0),
-        new MonsterAttack(new TouchAttackType(), new Exp20AttackEffect(), 0, 0),
+        new MonsterAttack(new WailAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<TerrifyAttackEffect>(), 0, 0),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp20AttackEffect>(), 0, 0),
     };
     public override bool ColdBlood => true;
     public override string Description => "It is a ghostly woman's form that wails mournfully.";

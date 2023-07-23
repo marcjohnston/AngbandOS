@@ -27,8 +27,8 @@ internal class ServitorOfTheOuterGodsMonsterRace : MonsterRace
 
     public override int ArmourClass => 140;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new GazeAttackType(), new TerrifyAttackEffect(), 4, 4),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 8, 6),
+        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<TerrifyAttackEffect>(), 4, 4),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 8, 6),
     };
     public override bool BashDoor => true;
     public override bool Cthuloid => true;

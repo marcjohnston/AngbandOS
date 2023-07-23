@@ -21,10 +21,10 @@ internal class LawGhostMonsterRace : MonsterRace
 
     public override int ArmourClass => 30;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new TouchAttackType(), new Exp80AttackEffect(), 0, 0),
-        new MonsterAttack(new TouchAttackType(), new Exp40AttackEffect(), 0, 0),
-        new MonsterAttack(new ClawAttackType(), new LoseIntAttackEffect(), 1, 10),
-        new MonsterAttack(new ClawAttackType(), new LoseWisAttackEffect(), 1, 10)
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp80AttackEffect>(), 0, 0),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp40AttackEffect>(), 0, 0),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseIntAttackEffect>(), 1, 10),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseWisAttackEffect>(), 1, 10)
     };
     public override bool ColdBlood => true;
     public override string Description => "An almost life-like creature which is nothing more than a phantom created by the law.";

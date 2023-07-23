@@ -23,8 +23,8 @@ internal class MiGoMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 30;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new StingAttackType(), new PoisonAttackEffect(), 1, 4),
-        new MonsterAttack(new BiteAttackType(), new LoseStrAttackEffect(), 1, 2),
+        new MonsterAttack(new StingAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 1, 4),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseStrAttackEffect>(), 1, 2),
     };
     public override bool ColdBlood => true;
     public override bool Cthuloid => true;

@@ -18,10 +18,10 @@ internal class ChaosSpawnMonsterRace : MonsterRace
 
     public override int ArmourClass => 50;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new GazeAttackType(), new ParalyzeAttackEffect(), 0, 0),
-        new MonsterAttack(new GazeAttackType(), new UnBonusAttackEffect(), 0, 0),
-        new MonsterAttack(new GazeAttackType(), new Exp40AttackEffect(), 0, 0),
-        new MonsterAttack(new GazeAttackType(), new HurtAttackEffect(), 10, 6)
+        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ParalyzeAttackEffect>(), 0, 0),
+        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<UnBonusAttackEffect>(), 0, 0),
+        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp40AttackEffect>(), 0, 0),
+        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 10, 6)
     };
     public override bool BashDoor => true;
     public override string Description => "It has two eyestalks and a large central eye. Its gaze can kill.";

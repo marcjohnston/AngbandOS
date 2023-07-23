@@ -20,8 +20,8 @@ internal class MemoryMossMonsterRace : MonsterRace
 
     public override int ArmourClass => 1;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new ConfuseAttackEffect(), 1, 4),
-        new MonsterAttack(new HitAttackType(), new ConfuseAttackEffect(), 1, 4),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ConfuseAttackEffect>(), 1, 4),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ConfuseAttackEffect>(), 1, 4),
     };
     public override string Description => "A mass of green vegetation. You don't remember seeing anything like it before.";
     public override bool EmptyMind => true;

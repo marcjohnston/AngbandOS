@@ -22,10 +22,10 @@ internal class YigFatherOfSerpentsMonsterRace : MonsterRace
 
     public override int ArmourClass => 185;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new ClawAttackType(), new PoisonAttackEffect(), 5, 10),
-        new MonsterAttack(new ClawAttackType(), new PoisonAttackEffect(), 5, 10),
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 20, 10),
-        new MonsterAttack(new CrushAttackType(), new UnBonusAttackEffect(), 5, 12)
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 5, 10),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 5, 10),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 20, 10),
+        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<UnBonusAttackEffect>(), 5, 12)
     };
     public override bool BashDoor => true;
     public override string Description => "A humanoid snake, Yig is one of the most poisonous entities in existance.";

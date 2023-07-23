@@ -18,9 +18,9 @@ internal class GremlinMonsterRace : MonsterRace
 
     public override int ArmourClass => 30;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new ClawAttackType(), new EatFoodAttackEffect(), 1, 2),
-        new MonsterAttack(new ClawAttackType(), new EatFoodAttackEffect(), 1, 2),
-        new MonsterAttack(new BiteAttackType(), new EatFoodAttackEffect(), 1, 3),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<EatFoodAttackEffect>(), 1, 2),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<EatFoodAttackEffect>(), 1, 2),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<EatFoodAttackEffect>(), 1, 3),
     };
     public override bool Demon => true;
     public override string Description => "Don't feed them after midnight!";

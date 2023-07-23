@@ -10,6 +10,7 @@ namespace AngbandOS.Core.AttackEffects;
 [Serializable]
 internal abstract class ExpAttackEffect : AttackEffect
 {
+    protected ExpAttackEffect(SaveGame saveGame) : base(saveGame) { }
     protected abstract int HoldLifePercentChange { get; }
     protected abstract int DiceCount { get; }
 

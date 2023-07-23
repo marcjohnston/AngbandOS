@@ -22,8 +22,8 @@ internal class ByakheeMonsterRace : MonsterRace
 
     public override int ArmourClass => 40;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new ClawAttackType(), new LoseStrAttackEffect(), 3, 4),
-        new MonsterAttack(new BiteAttackType(), new Exp20AttackEffect(), 3, 4),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseStrAttackEffect>(), 3, 4),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp20AttackEffect>(), 3, 4),
     };
     public override bool BashDoor => true;
     public override bool Demon => true;

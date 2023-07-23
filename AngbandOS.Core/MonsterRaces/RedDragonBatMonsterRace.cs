@@ -21,7 +21,7 @@ internal class RedDragonBatMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 28;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new BiteAttackType(), new FireAttackEffect(), 1, 3),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 1, 3),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a sharp-tailed bat, wreathed in fire.";

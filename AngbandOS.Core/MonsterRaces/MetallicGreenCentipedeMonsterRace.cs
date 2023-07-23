@@ -19,7 +19,7 @@ internal class MetallicGreenCentipedeMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 4;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new CrawlAttackType(), new HurtAttackEffect(), 1, 1),
+        new MonsterAttack(new CrawlAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 1),
     };
     public override bool BashDoor => true;
     public override string Description => "It is about four feet long and carnivorous.";

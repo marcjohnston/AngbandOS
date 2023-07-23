@@ -23,10 +23,10 @@ internal class LesserTitanMonsterRace : MonsterRace
 
     public override int ArmourClass => 80;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new ConfuseAttackEffect(), 6, 6),
-        new MonsterAttack(new HitAttackType(), new ConfuseAttackEffect(), 6, 6),
-        new MonsterAttack(new HitAttackType(), new ConfuseAttackEffect(), 6, 6),
-        new MonsterAttack(new HitAttackType(), new ConfuseAttackEffect(), 6, 6)
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ConfuseAttackEffect>(), 6, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ConfuseAttackEffect>(), 6, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ConfuseAttackEffect>(), 6, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ConfuseAttackEffect>(), 6, 6)
     };
     public override bool BashDoor => true;
     public override string Description => "It is a humanoid figure thirty feet tall that gives off an aura of power and hate.";

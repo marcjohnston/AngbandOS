@@ -26,7 +26,7 @@ internal class MasterYeekMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 24;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 8),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "A small humanoid that radiates some power.";

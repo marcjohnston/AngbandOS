@@ -18,10 +18,10 @@ internal class TheStormbringerMonsterRace : MonsterRace
 
     public override int ArmourClass => 99;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new WailAttackType(), new TerrifyAttackEffect(), 0, 0),
-        new MonsterAttack(new HitAttackType(), new Exp80AttackEffect(), 8, 8),
-        new MonsterAttack(new HitAttackType(), new Exp80AttackEffect(), 8, 8),
-        new MonsterAttack(new HitAttackType(), new Exp80AttackEffect(), 8, 8)
+        new MonsterAttack(new WailAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<TerrifyAttackEffect>(), 0, 0),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp80AttackEffect>(), 8, 8),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp80AttackEffect>(), 8, 8),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp80AttackEffect>(), 8, 8)
     };
     public override bool BashDoor => true;
     public override bool CharMulti => true;

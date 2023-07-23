@@ -20,7 +20,7 @@ internal class BlinkingDotMonsterRace : MonsterRace
 
     public override int ArmourClass => 1;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new SporeAttackType(), new ConfuseAttackEffect(), 1, 4),
+        new MonsterAttack(new SporeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ConfuseAttackEffect>(), 1, 4),
     };
     public override string Description => "Is it there or is it not?";
     public override bool EmptyMind => true;

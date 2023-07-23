@@ -23,9 +23,9 @@ internal class SpectatorMonsterRace : MonsterRace
 
     public override int ArmourClass => 1;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new GazeAttackType(), new ParalyzeAttackEffect(), 1, 4),
-        new MonsterAttack(new GazeAttackType(), new ConfuseAttackEffect(), 1, 4),
-        new MonsterAttack(new GazeAttackType(), new UnBonusAttackEffect(), 0, 0),
+        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ParalyzeAttackEffect>(), 1, 4),
+        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ConfuseAttackEffect>(), 1, 4),
+        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<UnBonusAttackEffect>(), 0, 0),
     };
     public override string Description => "It has three small eyestalks and a large central eye.";
     public override bool EmptyMind => true;

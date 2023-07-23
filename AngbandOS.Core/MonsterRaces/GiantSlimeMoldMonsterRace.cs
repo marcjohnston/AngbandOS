@@ -20,8 +20,8 @@ internal class GiantSlimeMoldMonsterRace : MonsterRace
 
     public override int ArmourClass => 16;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 8),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 8),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 8),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "A pile of rotting vegetation that slides towards you with a disgusting stench, waking all it nears.";

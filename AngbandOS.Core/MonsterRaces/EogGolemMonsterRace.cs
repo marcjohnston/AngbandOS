@@ -18,10 +18,10 @@ internal class EogGolemMonsterRace : MonsterRace
 
     public override int ArmourClass => 125;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 8, 6),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 8, 6),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 6, 6),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 6, 6)
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 8, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 8, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 6, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 6, 6)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

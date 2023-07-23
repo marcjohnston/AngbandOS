@@ -23,8 +23,8 @@ internal class EyeDrujMonsterRace : MonsterRace
 
     public override int ArmourClass => 90;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new GazeAttackType(), new Exp80AttackEffect(), 0, 0),
-        new MonsterAttack(new GazeAttackType(), new Exp80AttackEffect(), 0, 0),
+        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp80AttackEffect>(), 0, 0),
+        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp80AttackEffect>(), 0, 0),
     };
     public override bool ColdBlood => true;
     public override string Description => "A bloodshot eyeball floating in the air, you'd be forgiven for assuming it harmless.";

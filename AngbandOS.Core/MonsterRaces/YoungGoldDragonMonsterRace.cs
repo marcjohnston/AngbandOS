@@ -21,9 +21,9 @@ internal class YoungGoldDragonMonsterRace : MonsterRace
 
     public override int ArmourClass => 63;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 8),
-        new MonsterAttack(new ClawAttackType(), new HurtAttackEffect(), 1, 8),
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 8),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 8),
+        new MonsterAttack(new ClawAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 8),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 2, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "It has a form that legends are made of. Its still-tender scales are a tarnished gold hue, and light is reflected from its form.";

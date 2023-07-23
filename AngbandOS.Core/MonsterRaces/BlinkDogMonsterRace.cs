@@ -22,7 +22,7 @@ internal class BlinkDogMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 20;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 1, 8),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "A strange magical member of the canine race, its form seems to shimmer and fade in front of your very eyes.";

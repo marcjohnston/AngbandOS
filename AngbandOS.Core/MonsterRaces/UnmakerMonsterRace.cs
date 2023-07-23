@@ -20,9 +20,9 @@ internal class UnmakerMonsterRace : MonsterRace
 
     public override int ArmourClass => 50;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new TouchAttackType(), new LoseAllAttackEffect(), 10, 10),
-        new MonsterAttack(new TouchAttackType(), new UnBonusAttackEffect(), 10, 10),
-        new MonsterAttack(new TouchAttackType(), new UnPowerAttackEffect(), 10, 10),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<LoseAllAttackEffect>(), 10, 10),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<UnBonusAttackEffect>(), 10, 10),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<UnPowerAttackEffect>(), 10, 10),
     };
     public override bool AttrAny => true;
     public override bool AttrMulti => true;

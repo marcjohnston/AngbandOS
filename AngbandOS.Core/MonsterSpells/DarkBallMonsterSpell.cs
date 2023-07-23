@@ -29,5 +29,5 @@ internal class DarkBallMonsterSpell : BallProjectileMonsterSpell
         return (monsterLevel * 5) + Program.Rng.DiceRoll(10, 10);
     }
     protected override int Radius => 4;
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { new DarkSpellResistantDetection() };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get<DarkSpellResistantDetection>() };
 }

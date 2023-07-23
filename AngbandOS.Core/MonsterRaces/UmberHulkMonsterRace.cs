@@ -19,10 +19,10 @@ internal class UmberHulkMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 50;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new GazeAttackType(), new ConfuseAttackEffect(), 0, 0),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 6),
-        new MonsterAttack(new HitAttackType(), new HurtAttackEffect(), 1, 6),
-        new MonsterAttack(new BiteAttackType(), new HurtAttackEffect(), 2, 6)
+        new MonsterAttack(new GazeAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<ConfuseAttackEffect>(), 0, 0),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 6),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 6),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 2, 6)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

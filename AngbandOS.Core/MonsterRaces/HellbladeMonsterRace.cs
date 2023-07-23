@@ -18,8 +18,8 @@ internal class HellbladeMonsterRace : MonsterRace
 
     public override int ArmourClass => 40;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new Exp20AttackEffect(), 1, 8),
-        new MonsterAttack(new HitAttackType(), new Exp20AttackEffect(), 1, 8),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp20AttackEffect>(), 1, 8),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp20AttackEffect>(), 1, 8),
     };
     public override bool BashDoor => true;
     public override bool CharMulti => true;

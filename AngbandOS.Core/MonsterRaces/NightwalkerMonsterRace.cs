@@ -26,10 +26,10 @@ internal class NightwalkerMonsterRace : MonsterRace
 
     public override int ArmourClass => 175;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new HitAttackType(), new UnBonusAttackEffect(), 10, 10),
-        new MonsterAttack(new HitAttackType(), new UnBonusAttackEffect(), 10, 10),
-        new MonsterAttack(new HitAttackType(), new UnBonusAttackEffect(), 7, 7),
-        new MonsterAttack(new HitAttackType(), new UnBonusAttackEffect(), 7, 7)
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<UnBonusAttackEffect>(), 10, 10),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<UnBonusAttackEffect>(), 10, 10),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<UnBonusAttackEffect>(), 7, 7),
+        new MonsterAttack(new HitAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<UnBonusAttackEffect>(), 7, 7)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

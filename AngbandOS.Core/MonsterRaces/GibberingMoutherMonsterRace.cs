@@ -22,7 +22,7 @@ internal class GibberingMoutherMonsterRace : MonsterRace
 
     public override int ArmourClass => 20;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new CrawlAttackType(), new PoisonAttackEffect(), 1, 4),
+        new MonsterAttack(new CrawlAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 1, 4),
     };
     public override string Description => "A chaotic mass of pulsating flesh, mouths and eyes.";
     public override bool EmptyMind => true;

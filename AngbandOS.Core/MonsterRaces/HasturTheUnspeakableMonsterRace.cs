@@ -34,10 +34,10 @@ internal class HasturTheUnspeakableMonsterRace : MonsterRace
 
     public override int ArmourClass => 150;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new CrushAttackType(), new HurtAttackEffect(), 14, 8),
-        new MonsterAttack(new CrushAttackType(), new HurtAttackEffect(), 14, 8),
-        new MonsterAttack(new BiteAttackType(), new Exp80AttackEffect(), 6, 6),
-        new MonsterAttack(new BiteAttackType(), new Exp80AttackEffect(), 6, 6)
+        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 14, 8),
+        new MonsterAttack(new CrushAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 14, 8),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp80AttackEffect>(), 6, 6),
+        new MonsterAttack(new BiteAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<Exp80AttackEffect>(), 6, 6)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

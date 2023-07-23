@@ -20,7 +20,7 @@ internal class DisenchanterMoldMonsterRace : MonsterRace
 
     public override int ArmourClass => 20;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(new TouchAttackType(), new UnBonusAttackEffect(), 1, 6),
+        new MonsterAttack(new TouchAttackType(), SaveGame.SingletonRepository.AttackEffects.Get<UnBonusAttackEffect>(), 1, 6),
     };
     public override bool AttrMulti => true;
     public override string Description => "It is a strange glowing growth on the dungeon floor.";
