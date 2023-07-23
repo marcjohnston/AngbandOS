@@ -10,23 +10,23 @@ namespace AngbandOS.Core.RoomTypes;
 [Serializable]
 internal class Type7RoomLayout : RoomLayout
 {
-    private Type7RoomLayout(SaveGame save) : base(save) { }
+    private Type7RoomLayout(SaveGame saveGame) : base(saveGame) { }
     public override int Type => 7;
-    public override void Build(SaveGame saveGame, int yval, int xval)
+    public override void Build(int yval, int xval)
     {
-        Vault vPtr = saveGame.SingletonRepository.Vaults[0];
+        Vault vPtr = SaveGame.SingletonRepository.Vaults[0];
         int dummy = 0;
         while (dummy < SaveGame.SafeMaxAttempts)
         {
             dummy++;
-            vPtr = saveGame.SingletonRepository.Vaults.ToWeightedRandom().Choose();
+            vPtr = SaveGame.SingletonRepository.Vaults.ToWeightedRandom().Choose();
             if (vPtr.Category == 7)
             {
                 var minX = xval - (vPtr.Width / 2);
                 var maxX = xval + (vPtr.Width / 2);
                 var minY = yval - (vPtr.Height / 2);
                 var maxY = yval + (vPtr.Height / 2);
-                if (minX >= 1 && minY >= 1 && maxX < saveGame.CurWid - 1 && maxY < saveGame.CurHgt - 1)
+                if (minX >= 1 && minY >= 1 && maxX < SaveGame.CurWid - 1 && maxY < SaveGame.CurHgt - 1)
                 {
                     break;
                 }
@@ -36,11 +36,11 @@ internal class Type7RoomLayout : RoomLayout
         {
             return;
         }
-        saveGame.DangerRating += vPtr.Rating;
-        if (saveGame.Difficulty <= 50 || Program.Rng.DieRoll(((saveGame.Difficulty - 40) * (saveGame.Difficulty - 40)) + 50) < 400)
+        SaveGame.DangerRating += vPtr.Rating;
+        if (SaveGame.Difficulty <= 50 || Program.Rng.DieRoll(((SaveGame.Difficulty - 40) * (SaveGame.Difficulty - 40)) + 50) < 400)
         {
-            saveGame.SpecialDanger = true;
+            SaveGame.SpecialDanger = true;
         }
-        BuildVault(saveGame, yval, xval, vPtr.Height, vPtr.Width, vPtr.Text);
+        BuildVault(yval, xval, vPtr.Height, vPtr.Width, vPtr.Text);
     }
 }

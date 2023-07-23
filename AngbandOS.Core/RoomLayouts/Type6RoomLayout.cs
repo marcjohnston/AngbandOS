@@ -10,9 +10,9 @@ namespace AngbandOS.Core.RoomTypes;
 [Serializable]
 internal class Type6RoomLayout : RoomLayout
 {
-    private Type6RoomLayout(SaveGame save) : base(save) { }
+    private Type6RoomLayout(SaveGame saveGame) : base(saveGame) { }
     public override int Type => 6;
-    public override void Build(SaveGame saveGame, int yval, int xval)
+    public override void Build(int yval, int xval)
     {
         int[] what = new int[16];
         int i, y, x;
@@ -27,23 +27,23 @@ internal class Type6RoomLayout : RoomLayout
         {
             for (x = x1 - 1; x <= x2 + 1; x++)
             {
-                cPtr = saveGame.Grid[y][x];
+                cPtr = SaveGame.Grid[y][x];
                 cPtr.RevertToBackground();
                 cPtr.TileFlags.Set(GridTile.InRoom);
             }
         }
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
-            cPtr = saveGame.Grid[y][x1 - 1];
+            cPtr = SaveGame.Grid[y][x1 - 1];
             cPtr.SetFeature("WallOuter");
-            cPtr = saveGame.Grid[y][x2 + 1];
+            cPtr = SaveGame.Grid[y][x2 + 1];
             cPtr.SetFeature("WallOuter");
         }
         for (x = x1 - 1; x <= x2 + 1; x++)
         {
-            cPtr = saveGame.Grid[y1 - 1][x];
+            cPtr = SaveGame.Grid[y1 - 1][x];
             cPtr.SetFeature("WallOuter");
-            cPtr = saveGame.Grid[y2 + 1][x];
+            cPtr = SaveGame.Grid[y2 + 1][x];
             cPtr.SetFeature("WallOuter");
         }
         y1 += 2;
@@ -52,37 +52,37 @@ internal class Type6RoomLayout : RoomLayout
         x2 -= 2;
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
-            cPtr = saveGame.Grid[y][x1 - 1];
+            cPtr = SaveGame.Grid[y][x1 - 1];
             cPtr.SetFeature("WallInner");
-            cPtr = saveGame.Grid[y][x2 + 1];
+            cPtr = SaveGame.Grid[y][x2 + 1];
             cPtr.SetFeature("WallInner");
         }
         for (x = x1 - 1; x <= x2 + 1; x++)
         {
-            cPtr = saveGame.Grid[y1 - 1][x];
+            cPtr = SaveGame.Grid[y1 - 1][x];
             cPtr.SetFeature("WallInner");
-            cPtr = saveGame.Grid[y2 + 1][x];
+            cPtr = SaveGame.Grid[y2 + 1][x];
             cPtr.SetFeature("WallInner");
         }
         switch (Program.Rng.DieRoll(4))
         {
             case 1:
-                PlaceSecretDoor(saveGame, y1 - 1, xval);
+                PlaceSecretDoor(y1 - 1, xval);
                 break;
 
             case 2:
-                PlaceSecretDoor(saveGame, y2 + 1, xval);
+                PlaceSecretDoor(y2 + 1, xval);
                 break;
 
             case 3:
-                PlaceSecretDoor(saveGame, yval, x1 - 1);
+                PlaceSecretDoor(yval, x1 - 1);
                 break;
 
             case 4:
-                PlaceSecretDoor(saveGame, yval, x2 + 1);
+                PlaceSecretDoor(yval, x2 + 1);
                 break;
         }
-        int tmp = Program.Rng.DieRoll(saveGame.Difficulty);
+        int tmp = Program.Rng.DieRoll(SaveGame.Difficulty);
         if (tmp < 20)
         {
             getMonNumHook = new OrcMonsterSelector();
@@ -102,11 +102,11 @@ internal class Type6RoomLayout : RoomLayout
                 int _templateRace;
                 do
                 {
-                    _templateRace = Program.Rng.DieRoll(saveGame.SingletonRepository.MonsterRaces.Count - 2);
-                } while (saveGame.SingletonRepository.MonsterRaces[_templateRace].Unique ||
-                         saveGame.SingletonRepository.MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
-                         saveGame.Difficulty + Program.Rng.DieRoll(5));
-                getMonNumHook = new SymbolMonsterSelector(saveGame.SingletonRepository.MonsterRaces[_templateRace].Symbol.Character);
+                    _templateRace = Program.Rng.DieRoll(SaveGame.SingletonRepository.MonsterRaces.Count - 2);
+                } while (SaveGame.SingletonRepository.MonsterRaces[_templateRace].Unique ||
+                         SaveGame.SingletonRepository.MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
+                         SaveGame.Difficulty + Program.Rng.DieRoll(5));
+                getMonNumHook = new SymbolMonsterSelector(SaveGame.SingletonRepository.MonsterRaces[_templateRace].Symbol.Character);
             }
             else
             {
@@ -162,7 +162,7 @@ internal class Type6RoomLayout : RoomLayout
         }
         for (i = 0; i < 16; i++)
         {
-            what[i] = saveGame.GetMonNum(saveGame.Difficulty + 10, getMonNumHook);
+            what[i] = SaveGame.GetMonNum(SaveGame.Difficulty + 10, getMonNumHook);
             if (what[i] == 0)
             {
                 empty = true;
@@ -178,8 +178,8 @@ internal class Type6RoomLayout : RoomLayout
             {
                 int i1 = j;
                 int i2 = j + 1;
-                int p1 = saveGame.SingletonRepository.MonsterRaces[what[i1]].Level;
-                int p2 = saveGame.SingletonRepository.MonsterRaces[what[i2]].Level;
+                int p1 = SaveGame.SingletonRepository.MonsterRaces[what[i1]].Level;
+                int p2 = SaveGame.SingletonRepository.MonsterRaces[what[i2]].Level;
                 if (p1 > p2)
                 {
                     tmp = what[i1];
@@ -192,43 +192,43 @@ internal class Type6RoomLayout : RoomLayout
         {
             what[i] = what[i * 2];
         }
-        saveGame.DangerRating += 10;
-        if (saveGame.Difficulty <= 40 &&
-            Program.Rng.DieRoll((saveGame.Difficulty * saveGame.Difficulty) + 50) < 300)
+        SaveGame.DangerRating += 10;
+        if (SaveGame.Difficulty <= 40 &&
+            Program.Rng.DieRoll((SaveGame.Difficulty * SaveGame.Difficulty) + 50) < 300)
         {
-            saveGame.SpecialDanger = true;
+            SaveGame.SpecialDanger = true;
         }
         for (x = xval - 9; x <= xval + 9; x++)
         {
-            saveGame.PlaceMonsterByIndex(yval - 2, x, what[0], false, false, false);
-            saveGame.PlaceMonsterByIndex(yval + 2, x, what[0], false, false, false);
+            SaveGame.PlaceMonsterByIndex(yval - 2, x, what[0], false, false, false);
+            SaveGame.PlaceMonsterByIndex(yval + 2, x, what[0], false, false, false);
         }
         for (y = yval - 1; y <= yval + 1; y++)
         {
-            saveGame.PlaceMonsterByIndex(y, xval - 9, what[0], false, false, false);
-            saveGame.PlaceMonsterByIndex(y, xval + 9, what[0], false, false, false);
-            saveGame.PlaceMonsterByIndex(y, xval - 8, what[1], false, false, false);
-            saveGame.PlaceMonsterByIndex(y, xval + 8, what[1], false, false, false);
-            saveGame.PlaceMonsterByIndex(y, xval - 7, what[1], false, false, false);
-            saveGame.PlaceMonsterByIndex(y, xval + 7, what[1], false, false, false);
-            saveGame.PlaceMonsterByIndex(y, xval - 6, what[2], false, false, false);
-            saveGame.PlaceMonsterByIndex(y, xval + 6, what[2], false, false, false);
-            saveGame.PlaceMonsterByIndex(y, xval - 5, what[2], false, false, false);
-            saveGame.PlaceMonsterByIndex(y, xval + 5, what[2], false, false, false);
-            saveGame.PlaceMonsterByIndex(y, xval - 4, what[3], false, false, false);
-            saveGame.PlaceMonsterByIndex(y, xval + 4, what[3], false, false, false);
-            saveGame.PlaceMonsterByIndex(y, xval - 3, what[3], false, false, false);
-            saveGame.PlaceMonsterByIndex(y, xval + 3, what[3], false, false, false);
-            saveGame.PlaceMonsterByIndex(y, xval - 2, what[4], false, false, false);
-            saveGame.PlaceMonsterByIndex(y, xval + 2, what[4], false, false, false);
+            SaveGame.PlaceMonsterByIndex(y, xval - 9, what[0], false, false, false);
+            SaveGame.PlaceMonsterByIndex(y, xval + 9, what[0], false, false, false);
+            SaveGame.PlaceMonsterByIndex(y, xval - 8, what[1], false, false, false);
+            SaveGame.PlaceMonsterByIndex(y, xval + 8, what[1], false, false, false);
+            SaveGame.PlaceMonsterByIndex(y, xval - 7, what[1], false, false, false);
+            SaveGame.PlaceMonsterByIndex(y, xval + 7, what[1], false, false, false);
+            SaveGame.PlaceMonsterByIndex(y, xval - 6, what[2], false, false, false);
+            SaveGame.PlaceMonsterByIndex(y, xval + 6, what[2], false, false, false);
+            SaveGame.PlaceMonsterByIndex(y, xval - 5, what[2], false, false, false);
+            SaveGame.PlaceMonsterByIndex(y, xval + 5, what[2], false, false, false);
+            SaveGame.PlaceMonsterByIndex(y, xval - 4, what[3], false, false, false);
+            SaveGame.PlaceMonsterByIndex(y, xval + 4, what[3], false, false, false);
+            SaveGame.PlaceMonsterByIndex(y, xval - 3, what[3], false, false, false);
+            SaveGame.PlaceMonsterByIndex(y, xval + 3, what[3], false, false, false);
+            SaveGame.PlaceMonsterByIndex(y, xval - 2, what[4], false, false, false);
+            SaveGame.PlaceMonsterByIndex(y, xval + 2, what[4], false, false, false);
         }
         for (x = xval - 1; x <= xval + 1; x++)
         {
-            saveGame.PlaceMonsterByIndex(yval + 1, x, what[5], false, false, false);
-            saveGame.PlaceMonsterByIndex(yval - 1, x, what[5], false, false, false);
+            SaveGame.PlaceMonsterByIndex(yval + 1, x, what[5], false, false, false);
+            SaveGame.PlaceMonsterByIndex(yval - 1, x, what[5], false, false, false);
         }
-        saveGame.PlaceMonsterByIndex(yval, xval + 1, what[6], false, false, false);
-        saveGame.PlaceMonsterByIndex(yval, xval - 1, what[6], false, false, false);
-        saveGame.PlaceMonsterByIndex(yval, xval, what[7], false, false, false);
+        SaveGame.PlaceMonsterByIndex(yval, xval + 1, what[6], false, false, false);
+        SaveGame.PlaceMonsterByIndex(yval, xval - 1, what[6], false, false, false);
+        SaveGame.PlaceMonsterByIndex(yval, xval, what[7], false, false, false);
     }
 }

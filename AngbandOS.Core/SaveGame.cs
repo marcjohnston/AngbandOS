@@ -14604,7 +14604,7 @@ internal class SaveGame
         }
         y = (y1 + y2 + 1) * _blockHgt / 2;
         x = (x1 + x2 + 1) * _blockWid / 2;
-        roomType.Build(this, y, x);
+        roomType.Build(y, x);
         if (CentN < CentMax)
         {
             Cent[CentN] = new GridCoordinate(x, y);

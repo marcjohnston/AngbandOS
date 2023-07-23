@@ -10,13 +10,13 @@ namespace AngbandOS.Core.RoomTypes;
 [Serializable]
 internal class Type2RoomLayout : RoomLayout
 {
-    private Type2RoomLayout(SaveGame save) : base(save) { }
+    private Type2RoomLayout(SaveGame saveGame) : base(saveGame) { }
     public override int Type => 2;
-    public override void Build(SaveGame saveGame, int yval, int xval)
+    public override void Build(int yval, int xval)
     {
         int y, x;
         GridTile cPtr;
-        bool light = saveGame.Difficulty <= Program.Rng.DieRoll(25);
+        bool light = SaveGame.Difficulty <= Program.Rng.DieRoll(25);
         int y1A = yval - Program.Rng.DieRoll(4);
         int y2A = yval + Program.Rng.DieRoll(3);
         int x1A = xval - Program.Rng.DieRoll(11);
@@ -29,7 +29,7 @@ internal class Type2RoomLayout : RoomLayout
         {
             for (x = x1A - 1; x <= x2A + 1; x++)
             {
-                cPtr = saveGame.Grid[y][x];
+                cPtr = SaveGame.Grid[y][x];
                 cPtr.RevertToBackground();
                 cPtr.TileFlags.Set(GridTile.InRoom);
                 if (light)
@@ -42,7 +42,7 @@ internal class Type2RoomLayout : RoomLayout
         {
             for (x = x1B - 1; x <= x2B + 1; x++)
             {
-                cPtr = saveGame.Grid[y][x];
+                cPtr = SaveGame.Grid[y][x];
                 cPtr.RevertToBackground();
                 cPtr.TileFlags.Set(GridTile.InRoom);
                 if (light)
@@ -53,37 +53,37 @@ internal class Type2RoomLayout : RoomLayout
         }
         for (y = y1A - 1; y <= y2A + 1; y++)
         {
-            cPtr = saveGame.Grid[y][x1A - 1];
+            cPtr = SaveGame.Grid[y][x1A - 1];
             cPtr.SetFeature("WallOuter");
-            cPtr = saveGame.Grid[y][x2A + 1];
+            cPtr = SaveGame.Grid[y][x2A + 1];
             cPtr.SetFeature("WallOuter");
         }
         for (x = x1A - 1; x <= x2A + 1; x++)
         {
-            cPtr = saveGame.Grid[y1A - 1][x];
+            cPtr = SaveGame.Grid[y1A - 1][x];
             cPtr.SetFeature("WallOuter");
-            cPtr = saveGame.Grid[y2A + 1][x];
+            cPtr = SaveGame.Grid[y2A + 1][x];
             cPtr.SetFeature("WallOuter");
         }
         for (y = y1B - 1; y <= y2B + 1; y++)
         {
-            cPtr = saveGame.Grid[y][x1B - 1];
+            cPtr = SaveGame.Grid[y][x1B - 1];
             cPtr.SetFeature("WallOuter");
-            cPtr = saveGame.Grid[y][x2B + 1];
+            cPtr = SaveGame.Grid[y][x2B + 1];
             cPtr.SetFeature("WallOuter");
         }
         for (x = x1B - 1; x <= x2B + 1; x++)
         {
-            cPtr = saveGame.Grid[y1B - 1][x];
+            cPtr = SaveGame.Grid[y1B - 1][x];
             cPtr.SetFeature("WallOuter");
-            cPtr = saveGame.Grid[y2B + 1][x];
+            cPtr = SaveGame.Grid[y2B + 1][x];
             cPtr.SetFeature("WallOuter");
         }
         for (y = y1A; y <= y2A; y++)
         {
             for (x = x1A; x <= x2A; x++)
             {
-                cPtr = saveGame.Grid[y][x];
+                cPtr = SaveGame.Grid[y][x];
                 cPtr.RevertToBackground();
             }
         }
@@ -91,7 +91,7 @@ internal class Type2RoomLayout : RoomLayout
         {
             for (x = x1B; x <= x2B; x++)
             {
-                cPtr = saveGame.Grid[y][x];
+                cPtr = SaveGame.Grid[y][x];
                 cPtr.RevertToBackground();
             }
         }

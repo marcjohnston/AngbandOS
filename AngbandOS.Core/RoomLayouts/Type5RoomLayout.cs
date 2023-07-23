@@ -10,9 +10,9 @@ namespace AngbandOS.Core.RoomTypes;
 [Serializable]
 internal class Type5RoomLayout : RoomLayout
 {
-    private Type5RoomLayout(SaveGame save) : base(save) { }
+    private Type5RoomLayout(SaveGame saveGame) : base(saveGame) { }
     public override int Type => 5;
-    public override void Build(SaveGame saveGame, int yval, int xval)
+    public override void Build(int yval, int xval)
     {
         int y, x;
         int[] what = new int[64];
@@ -27,23 +27,23 @@ internal class Type5RoomLayout : RoomLayout
         {
             for (x = x1 - 1; x <= x2 + 1; x++)
             {
-                cPtr = saveGame.Grid[y][x];
+                cPtr = SaveGame.Grid[y][x];
                 cPtr.RevertToBackground();
                 cPtr.TileFlags.Set(GridTile.InRoom);
             }
         }
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
-            cPtr = saveGame.Grid[y][x1 - 1];
+            cPtr = SaveGame.Grid[y][x1 - 1];
             cPtr.SetFeature("WallOuter");
-            cPtr = saveGame.Grid[y][x2 + 1];
+            cPtr = SaveGame.Grid[y][x2 + 1];
             cPtr.SetFeature("WallOuter");
         }
         for (x = x1 - 1; x <= x2 + 1; x++)
         {
-            cPtr = saveGame.Grid[y1 - 1][x];
+            cPtr = SaveGame.Grid[y1 - 1][x];
             cPtr.SetFeature("WallOuter");
-            cPtr = saveGame.Grid[y2 + 1][x];
+            cPtr = SaveGame.Grid[y2 + 1][x];
             cPtr.SetFeature("WallOuter");
         }
         y1 += 2;
@@ -52,54 +52,54 @@ internal class Type5RoomLayout : RoomLayout
         x2 -= 2;
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
-            cPtr = saveGame.Grid[y][x1 - 1];
+            cPtr = SaveGame.Grid[y][x1 - 1];
             cPtr.SetFeature("WallInner");
-            cPtr = saveGame.Grid[y][x2 + 1];
+            cPtr = SaveGame.Grid[y][x2 + 1];
             cPtr.SetFeature("WallInner");
         }
         for (x = x1 - 1; x <= x2 + 1; x++)
         {
-            cPtr = saveGame.Grid[y1 - 1][x];
+            cPtr = SaveGame.Grid[y1 - 1][x];
             cPtr.SetFeature("WallInner");
-            cPtr = saveGame.Grid[y2 + 1][x];
+            cPtr = SaveGame.Grid[y2 + 1][x];
             cPtr.SetFeature("WallInner");
         }
         switch (Program.Rng.DieRoll(4))
         {
             case 1:
-                PlaceSecretDoor(saveGame, y1 - 1, xval);
+                PlaceSecretDoor(y1 - 1, xval);
                 break;
 
             case 2:
-                PlaceSecretDoor(saveGame, y2 + 1, xval);
+                PlaceSecretDoor(y2 + 1, xval);
                 break;
 
             case 3:
-                PlaceSecretDoor(saveGame, yval, x1 - 1);
+                PlaceSecretDoor(yval, x1 - 1);
                 break;
 
             case 4:
-                PlaceSecretDoor(saveGame, yval, x2 + 1);
+                PlaceSecretDoor(yval, x2 + 1);
                 break;
         }
-        int tmp = Program.Rng.DieRoll(saveGame.Difficulty);
+        int tmp = Program.Rng.DieRoll(SaveGame.Difficulty);
         if (tmp < 25 && Program.Rng.DieRoll(2) != 1)
         {
             int _templateRace;
 
             do
             {
-                _templateRace = Program.Rng.DieRoll(saveGame.SingletonRepository.MonsterRaces.Count - 2);
-            } while (saveGame.SingletonRepository.MonsterRaces[_templateRace].Unique ||
-                     saveGame.SingletonRepository.MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
-                     saveGame.Difficulty + Program.Rng.DieRoll(5));
-            if (Program.Rng.DieRoll(2) != 1 && saveGame.Difficulty >= 25 + Program.Rng.DieRoll(15))
+                _templateRace = Program.Rng.DieRoll(SaveGame.SingletonRepository.MonsterRaces.Count - 2);
+            } while (SaveGame.SingletonRepository.MonsterRaces[_templateRace].Unique ||
+                     SaveGame.SingletonRepository.MonsterRaces[_templateRace].Level + Program.Rng.DieRoll(5) >
+                     SaveGame.Difficulty + Program.Rng.DieRoll(5));
+            if (Program.Rng.DieRoll(2) != 1 && SaveGame.Difficulty >= 25 + Program.Rng.DieRoll(15))
             {
-                getMonNumHook = new SymbolMonsterSelector(saveGame.SingletonRepository.MonsterRaces[_templateRace].Symbol.Character);
+                getMonNumHook = new SymbolMonsterSelector(SaveGame.SingletonRepository.MonsterRaces[_templateRace].Symbol.Character);
             }
             else
             {
-                getMonNumHook = new CloneMonsterSelector(saveGame.SingletonRepository.MonsterRaces[_templateRace]);
+                getMonNumHook = new CloneMonsterSelector(SaveGame.SingletonRepository.MonsterRaces[_templateRace]);
             }
         }
         else if (tmp < 25)
@@ -134,7 +134,7 @@ internal class Type5RoomLayout : RoomLayout
         }
         for (int i = 0; i < 64; i++)
         {
-            what[i] = saveGame.GetMonNum(saveGame.Difficulty + 10, getMonNumHook);
+            what[i] = SaveGame.GetMonNum(SaveGame.Difficulty + 10, getMonNumHook);
             if (what[i] == 0)
             {
                 empty = true;
@@ -144,18 +144,18 @@ internal class Type5RoomLayout : RoomLayout
         {
             return;
         }
-        saveGame.DangerRating += 10;
-        if (saveGame.Difficulty <= 40 && Program.Rng.DieRoll((saveGame.Difficulty * saveGame.Difficulty) + 50) < 300)
+        SaveGame.DangerRating += 10;
+        if (SaveGame.Difficulty <= 40 && Program.Rng.DieRoll((SaveGame.Difficulty * SaveGame.Difficulty) + 50) < 300)
         {
-            saveGame.SpecialDanger = true;
+            SaveGame.SpecialDanger = true;
         }
         for (y = yval - 2; y <= yval + 2; y++)
         {
             for (x = xval - 9; x <= xval + 9; x++)
             {
                 int rIdx = what[Program.Rng.RandomLessThan(64)];
-                MonsterRace race = saveGame.SingletonRepository.MonsterRaces[rIdx];
-                saveGame.PlaceMonsterAux(y, x, race, false, false, false);
+                MonsterRace race = SaveGame.SingletonRepository.MonsterRaces[rIdx];
+                SaveGame.PlaceMonsterAux(y, x, race, false, false, false);
             }
         }
     }

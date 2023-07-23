@@ -10,13 +10,13 @@ namespace AngbandOS.Core.RoomTypes;
 [Serializable]
 internal class Type1RoomLayout : RoomLayout
 {
-    private Type1RoomLayout(SaveGame save) : base(save) { }
+    private Type1RoomLayout(SaveGame saveGame) : base(saveGame) { }
     public override int Type => 1;
-    public override void Build(SaveGame saveGame, int yval, int xval)
+    public override void Build(int yval, int xval)
     {
         int y, x;
         GridTile cPtr;
-        bool light = saveGame.Difficulty <= Program.Rng.DieRoll(25);
+        bool light = SaveGame.Difficulty <= Program.Rng.DieRoll(25);
         int y1 = yval - Program.Rng.DieRoll(4);
         int y2 = yval + Program.Rng.DieRoll(3);
         int x1 = xval - Program.Rng.DieRoll(11);
@@ -25,7 +25,7 @@ internal class Type1RoomLayout : RoomLayout
         {
             for (x = x1 - 1; x <= x2 + 1; x++)
             {
-                cPtr = saveGame.Grid[y][x];
+                cPtr = SaveGame.Grid[y][x];
                 cPtr.RevertToBackground();
                 cPtr.TileFlags.Set(GridTile.InRoom);
                 if (light)
@@ -36,16 +36,16 @@ internal class Type1RoomLayout : RoomLayout
         }
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
-            cPtr = saveGame.Grid[y][x1 - 1];
+            cPtr = SaveGame.Grid[y][x1 - 1];
             cPtr.SetFeature("WallOuter");
-            cPtr = saveGame.Grid[y][x2 + 1];
+            cPtr = SaveGame.Grid[y][x2 + 1];
             cPtr.SetFeature("WallOuter");
         }
         for (x = x1 - 1; x <= x2 + 1; x++)
         {
-            cPtr = saveGame.Grid[y1 - 1][x];
+            cPtr = SaveGame.Grid[y1 - 1][x];
             cPtr.SetFeature("WallOuter");
-            cPtr = saveGame.Grid[y2 + 1][x];
+            cPtr = SaveGame.Grid[y2 + 1][x];
             cPtr.SetFeature("WallOuter");
         }
         if (Program.Rng.RandomLessThan(20) == 0)
@@ -54,7 +54,7 @@ internal class Type1RoomLayout : RoomLayout
             {
                 for (x = x1; x <= x2; x += 2)
                 {
-                    cPtr = saveGame.Grid[y][x];
+                    cPtr = SaveGame.Grid[y][x];
                     cPtr.SetFeature("Pillar");
                 }
             }
@@ -63,16 +63,16 @@ internal class Type1RoomLayout : RoomLayout
         {
             for (y = y1 + 2; y <= y2 - 2; y += 2)
             {
-                cPtr = saveGame.Grid[y][x1];
+                cPtr = SaveGame.Grid[y][x1];
                 cPtr.SetFeature("Pillar");
-                cPtr = saveGame.Grid[y][x2];
+                cPtr = SaveGame.Grid[y][x2];
                 cPtr.SetFeature("Pillar");
             }
             for (x = x1 + 2; x <= x2 - 2; x += 2)
             {
-                cPtr = saveGame.Grid[y1][x];
+                cPtr = SaveGame.Grid[y1][x];
                 cPtr.SetFeature("Pillar");
-                cPtr = saveGame.Grid[y2][x];
+                cPtr = SaveGame.Grid[y2][x];
                 cPtr.SetFeature("Pillar");
             }
         }

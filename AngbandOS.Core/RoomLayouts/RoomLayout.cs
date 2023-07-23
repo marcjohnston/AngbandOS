@@ -17,9 +17,9 @@ internal abstract class RoomLayout
     }
 
     public abstract int Type { get; }
-    public abstract void Build(SaveGame saveGame, int yval, int xval);
+    public abstract void Build(int yval, int xval);
 
-    protected void BuildVault(SaveGame saveGame, int yval, int xval, int ymax, int xmax, string data)
+    protected void BuildVault(int yval, int xval, int ymax, int xmax, string data)
     {
         int dx, dy, x, y;
         char t;
@@ -36,7 +36,7 @@ internal abstract class RoomLayout
                 {
                     continue;
                 }
-                GridTile cPtr = saveGame.Grid[y][x];
+                GridTile cPtr = SaveGame.Grid[y][x];
                 cPtr.RevertToBackground();
                 cPtr.TileFlags.Set(GridTile.InRoom | GridTile.InVault);
                 switch (t)
@@ -56,20 +56,20 @@ internal abstract class RoomLayout
                     case '*':
                         if (Program.Rng.RandomLessThan(100) < 75)
                         {
-                            saveGame.PlaceObject(y, x, false, false);
+                            SaveGame.PlaceObject(y, x, false, false);
                         }
                         else
                         {
-                            saveGame.PlaceTrap(y, x);
+                            SaveGame.PlaceTrap(y, x);
                         }
                         break;
 
                     case '+':
-                        PlaceSecretDoor(saveGame, y, x);
+                        PlaceSecretDoor(y, x);
                         break;
 
                     case '^':
-                        saveGame.PlaceTrap(y, x);
+                        SaveGame.PlaceTrap(y, x);
                         break;
                 }
             }
@@ -91,59 +91,59 @@ internal abstract class RoomLayout
                 {
                     case '&':
                         {
-                            saveGame.MonsterLevel = saveGame.Difficulty + 5;
-                            saveGame.PlaceMonster(y, x, true, true);
-                            saveGame.MonsterLevel = saveGame.Difficulty;
+                            SaveGame.MonsterLevel = SaveGame.Difficulty + 5;
+                            SaveGame.PlaceMonster(y, x, true, true);
+                            SaveGame.MonsterLevel = SaveGame.Difficulty;
                             break;
                         }
                     case '@':
                         {
-                            saveGame.MonsterLevel = saveGame.Difficulty + 11;
-                            saveGame.PlaceMonster(y, x, true, true);
-                            saveGame.MonsterLevel = saveGame.Difficulty;
+                            SaveGame.MonsterLevel = SaveGame.Difficulty + 11;
+                            SaveGame.PlaceMonster(y, x, true, true);
+                            SaveGame.MonsterLevel = SaveGame.Difficulty;
                             break;
                         }
                     case '9':
                         {
-                            saveGame.MonsterLevel = saveGame.Difficulty + 9;
-                            saveGame.PlaceMonster(y, x, true, true);
-                            saveGame.MonsterLevel = saveGame.Difficulty;
-                            saveGame.ObjectLevel = saveGame.Difficulty + 7;
-                            saveGame.PlaceObject(y, x, true, false);
-                            saveGame.ObjectLevel = saveGame.Difficulty;
+                            SaveGame.MonsterLevel = SaveGame.Difficulty + 9;
+                            SaveGame.PlaceMonster(y, x, true, true);
+                            SaveGame.MonsterLevel = SaveGame.Difficulty;
+                            SaveGame.ObjectLevel = SaveGame.Difficulty + 7;
+                            SaveGame.PlaceObject(y, x, true, false);
+                            SaveGame.ObjectLevel = SaveGame.Difficulty;
                             break;
                         }
                     case '8':
                         {
-                            saveGame.MonsterLevel = saveGame.Difficulty + 40;
-                            saveGame.PlaceMonster(y, x, true, true);
-                            saveGame.MonsterLevel = saveGame.Difficulty;
-                            saveGame.ObjectLevel = saveGame.Difficulty + 20;
-                            saveGame.PlaceObject(y, x, true, true);
-                            saveGame.ObjectLevel = saveGame.Difficulty;
+                            SaveGame.MonsterLevel = SaveGame.Difficulty + 40;
+                            SaveGame.PlaceMonster(y, x, true, true);
+                            SaveGame.MonsterLevel = SaveGame.Difficulty;
+                            SaveGame.ObjectLevel = SaveGame.Difficulty + 20;
+                            SaveGame.PlaceObject(y, x, true, true);
+                            SaveGame.ObjectLevel = SaveGame.Difficulty;
                             break;
                         }
                     case ',':
                         {
                             if (Program.Rng.RandomLessThan(100) < 50)
                             {
-                                saveGame.MonsterLevel = saveGame.Difficulty + 3;
-                                saveGame.PlaceMonster(y, x, true, true);
-                                saveGame.MonsterLevel = saveGame.Difficulty;
+                                SaveGame.MonsterLevel = SaveGame.Difficulty + 3;
+                                SaveGame.PlaceMonster(y, x, true, true);
+                                SaveGame.MonsterLevel = SaveGame.Difficulty;
                             }
                             if (Program.Rng.RandomLessThan(100) < 50)
                             {
-                                saveGame.ObjectLevel = saveGame.Difficulty + 7;
-                                saveGame.PlaceObject(y, x, false, false);
-                                saveGame.ObjectLevel = saveGame.Difficulty;
+                                SaveGame.ObjectLevel = SaveGame.Difficulty + 7;
+                                SaveGame.PlaceObject(y, x, false, false);
+                                SaveGame.ObjectLevel = SaveGame.Difficulty;
                             }
                             break;
                         }
                     case 'A':
                         {
-                            saveGame.ObjectLevel = saveGame.Difficulty + 12;
-                            saveGame.PlaceObject(y, x, true, false);
-                            saveGame.ObjectLevel = saveGame.Difficulty;
+                            SaveGame.ObjectLevel = SaveGame.Difficulty + 12;
+                            SaveGame.PlaceObject(y, x, true, false);
+                            SaveGame.ObjectLevel = SaveGame.Difficulty;
                         }
                         break;
                 }
@@ -151,15 +151,15 @@ internal abstract class RoomLayout
         }
     }
 
-    protected void VaultTraps(SaveGame saveGame, int y, int x, int yd, int xd, int num)
+    protected void VaultTraps(int y, int x, int yd, int xd, int num)
     {
         for (int i = 0; i < num; i++)
         {
-            VaultTrapAux(saveGame, y, x, yd, xd);
+            VaultTrapAux(y, x, yd, xd);
         }
     }
 
-    private void VaultTrapAux(SaveGame saveGame, int y, int x, int yd, int xd)
+    private void VaultTrapAux(int y, int x, int yd, int xd)
     {
         int count, y1 = y, x1 = x;
         int dummy = 0;
@@ -170,43 +170,43 @@ internal abstract class RoomLayout
                 y1 = Program.Rng.RandomSpread(y, yd);
                 x1 = Program.Rng.RandomSpread(x, xd);
                 dummy++;
-                if (!saveGame.InBounds(y1, x1))
+                if (!SaveGame.InBounds(y1, x1))
                 {
                     continue;
                 }
                 break;
             }
-            if (!saveGame.GridOpenNoItemOrCreature(y1, x1))
+            if (!SaveGame.GridOpenNoItemOrCreature(y1, x1))
             {
                 continue;
             }
-            saveGame.PlaceTrap(y1, x1);
+            SaveGame.PlaceTrap(y1, x1);
             break;
         }
     }
 
-    protected void VaultMonsters(SaveGame saveGame, int y1, int x1, int num)
+    protected void VaultMonsters(int y1, int x1, int num)
     {
         for (int k = 0; k < num; k++)
         {
             for (int i = 0; i < 9; i++)
             {
                 const int d = 1;
-                saveGame.Scatter(out int y, out int x, y1, x1, d);
-                if (!saveGame.GridPassableNoCreature(y, x))
+                SaveGame.Scatter(out int y, out int x, y1, x1, d);
+                if (!SaveGame.GridPassableNoCreature(y, x))
                 {
                     continue;
                 }
-                saveGame.MonsterLevel = saveGame.Difficulty + 2;
-                saveGame.PlaceMonster(y, x, true, true);
-                saveGame.MonsterLevel = saveGame.Difficulty;
+                SaveGame.MonsterLevel = SaveGame.Difficulty + 2;
+                SaveGame.PlaceMonster(y, x, true, true);
+                SaveGame.MonsterLevel = SaveGame.Difficulty;
             }
         }
     }
 
-    protected void PlaceSecretDoor(SaveGame saveGame, int y, int x)
+    protected void PlaceSecretDoor(int y, int x)
     {
-        GridTile cPtr = saveGame.Grid[y][x];
+        GridTile cPtr = SaveGame.Grid[y][x];
         cPtr.SetFeature("SecretDoor");
     }
 
