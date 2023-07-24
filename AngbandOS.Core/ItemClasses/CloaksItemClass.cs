@@ -1,0 +1,6 @@
+[Serializable]
+internal class CloaksItemClass : ItemClass
+{
+    private CloaksItemClass(SaveGame saveGame) : base(saveGame) { }
+    public override string Description => "Cloaks";
+}
