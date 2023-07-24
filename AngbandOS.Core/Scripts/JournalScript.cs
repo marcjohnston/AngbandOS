@@ -957,12 +957,17 @@ internal class JournalScript : Script
         text += "inventory. Items you are wielding will never be destroyed (giving you chance to improve their ";
         text += "quality to a non-worthless level).";
         SaveGame.Screen.PrintWrap(ColourEnum.Blue, text);
-        for (int i = 0; i < TvalDescriptionPair.Tvals.Length - 1; i++)
+        _menuLength = 0;
+        for (int i = 0; i < SaveGame.SingletonRepository.ItemClasses.Count - 1; i++)
         {
-            _menuItem[i] = TvalDescriptionPair.Tvals[i].Desc;
-            _menuColours[i] = ColourEnum.Blue;
+            ItemClass itemClass = SaveGame.SingletonRepository.ItemClasses[i];
+            if (itemClass.AllowStomp)
+            {
+                _menuItem[_menuLength] = SaveGame.SingletonRepository.ItemClasses[i].Description;
+                _menuColours[_menuLength] = ColourEnum.Blue;
+                _menuLength++;
+            }
         }
-        _menuLength = TvalDescriptionPair.Tvals.Length - 1;
         int menu = _menuLength / 2;
         while (!SaveGame.Shutdown)
         {
@@ -983,13 +988,13 @@ internal class JournalScript : Script
                 }
                 if (c == '6')
                 {
-                    WorthlessItemTypeSelection(TvalDescriptionPair.Tvals[menu].Tval);
-                    for (int i = 0; i < TvalDescriptionPair.Tvals.Length - 1; i++)
+                    WorthlessItemTypeSelection(SaveGame.SingletonRepository.ItemClasses[menu]);
+                    for (int i = 0; i < SaveGame.SingletonRepository.ItemClasses.Count - 1; i++)
                     {
-                        _menuItem[i] = TvalDescriptionPair.Tvals[i].Desc;
+                        _menuItem[i] = SaveGame.SingletonRepository.ItemClasses[i].Description;
                         _menuColours[i] = ColourEnum.Blue;
                     }
-                    _menuLength = TvalDescriptionPair.Tvals.Length - 1;
+                    _menuLength = SaveGame.SingletonRepository.ItemClasses.Count - 1;
                     break;
                 }
                 if (c == '4')
@@ -1132,13 +1137,13 @@ internal class JournalScript : Script
         }
     }
 
-    private void WorthlessItemTypeSelection(ItemTypeEnum tval)
+    private void WorthlessItemTypeSelection(ItemClass tval)
     {
         _menuLength = 0;
         for (int i = 0; i < SaveGame.SingletonRepository.ItemFactories.Count; i++)
         {
             ItemFactory kPtr = SaveGame.SingletonRepository.ItemFactories[i];
-            if (kPtr.CategoryEnum == tval)
+            if (kPtr.ItemClass == tval)
             {
                 if (kPtr.InstaArt)
                 {
@@ -1185,7 +1190,7 @@ internal class JournalScript : Script
                         for (int i = 0; i < SaveGame.SingletonRepository.ItemFactories.Count; i++)
                         {
                             kPtr = SaveGame.SingletonRepository.ItemFactories[i];
-                            if (kPtr.CategoryEnum == tval)
+                            if (kPtr.ItemClass == tval)
                             {
                                 if (kPtr.InstaArt)
                                 {
@@ -1212,7 +1217,7 @@ internal class JournalScript : Script
                         for (int i = 0; i < SaveGame.SingletonRepository.ItemFactories.Count; i++)
                         {
                             kPtr = SaveGame.SingletonRepository.ItemFactories[i];
-                            if (kPtr.CategoryEnum == tval)
+                            if (kPtr.ItemClass == tval)
                             {
                                 if (kPtr.InstaArt)
                                 {

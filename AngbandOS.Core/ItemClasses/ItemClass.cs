@@ -7,4 +7,5 @@ internal abstract class ItemClass
         SaveGame = saveGame;
     }
     public abstract string Description { get; }
+    public virtual bool AllowStomp => true;
 }

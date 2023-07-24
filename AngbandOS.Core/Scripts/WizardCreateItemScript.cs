@@ -45,12 +45,13 @@ internal class WizardCreateItemScript : Script
         char ch;
         int[] choice = new int[60];
         SaveGame.Screen.Clear();
-        for (num = 0; num < 60 && TvalDescriptionPair.Tvals[num].Tval != 0; num++)
+        for (num = 0; num < 60 && num < SaveGame.SingletonRepository.ItemClasses.Count; num++)
         {
+            ItemClass itemClass = SaveGame.SingletonRepository.ItemClasses[num];
             row = 2 + (num % 20);
             col = 30 * (num / 20);
             ch = (char)(_head[num / 20] + (char)(num % 20));
-            SaveGame.Screen.PrintLine($"[{ch}] {TvalDescriptionPair.Tvals[num].Desc}", row, col);
+            SaveGame.Screen.PrintLine($"[{ch}] {itemClass.Description}", row, col);
         }
         int maxNum = num;
         if (!SaveGame.GetCom("Get what type of object? ", out ch))
@@ -74,8 +75,8 @@ internal class WizardCreateItemScript : Script
         {
             return 0;
         }
-        ItemTypeEnum tval = TvalDescriptionPair.Tvals[num].Tval;
-        string tvalDesc = TvalDescriptionPair.Tvals[num].Desc;
+        ItemClass selectedItemClass = SaveGame.SingletonRepository.ItemClasses[num];
+        string tvalDesc = selectedItemClass.Description;
         SaveGame.Screen.Clear();
         const int maxLetters = 26;
         const int maxNumbers = 10;
@@ -83,7 +84,7 @@ internal class WizardCreateItemScript : Script
         for (num = 0, i = 1; num < maxCount && i < SaveGame.SingletonRepository.ItemFactories.Count; i++)
         {
             ItemFactory kPtr = SaveGame.SingletonRepository.ItemFactories[i];
-            if (kPtr.CategoryEnum == tval)
+            if (kPtr.ItemClass == selectedItemClass)
             {
                 row = 2 + (num % maxLetters);
                 col = 30 * (num / maxLetters);
