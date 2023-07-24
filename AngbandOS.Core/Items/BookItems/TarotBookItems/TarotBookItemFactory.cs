@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class TarotBookItemFactory : BookItemFactory
 {
     public TarotBookItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override string Description => "Tarot Spellbooks";
+    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get<TarotSpellBooksItemClass>();
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.TarotBook;
     public override int PackSort => 3;
     public override bool HatesFire => true;

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class SpikeItemClass : ItemFactory
 {
     public SpikeItemClass(SaveGame saveGame) : base(saveGame) { }
-    public override string Description => "Spikes";
+    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get<SpikesItemClass>();
     public override bool EasyKnow => true;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Spike;
     public override int PackSort => 37;

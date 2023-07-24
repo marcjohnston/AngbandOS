@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.ItemClasses;
 
 [Serializable]
-internal abstract class SoftArmorItemClass : ArmourItemFactory
+internal abstract class SoftArmorItemFactory : ArmourItemFactory
 {
-    public SoftArmorItemClass(SaveGame saveGame) : base(saveGame) { }
-    public override string Description => "Soft Armours";
+    public SoftArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
+    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get<SoftArmorsItemClass>();
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<BodyInventorySlot>();
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.SoftArmor;
     public override int PackSort => 21;

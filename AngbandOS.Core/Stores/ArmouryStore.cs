@@ -82,7 +82,7 @@ internal class ArmouryStore : Store
             case HelmItemClass _:
             case ShieldItemClass _:
             case CloakArmorItemFactory _:
-            case SoftArmorItemClass _:
+            case SoftArmorItemFactory _:
             case HardArmorItemFactory _:
             case DragonScaleMailArmorItemFactory _:
                 return item.Value() > 0;

@@ -24,7 +24,7 @@ internal abstract class ItemFactory : IItemCharacteristics
         FlavorColour = Colour;
     }
 
-    public abstract string Description { get; }
+    public abstract ItemClass ItemClass { get; }
 
     /// <summary>
     /// Returns a description of the activation effect for the item or null, if the item cannot be activated.  Returns null by default.

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class ArrowAmmunitionItemFactory : AmmunitionItemFactory
 {
     public ArrowAmmunitionItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override string Description => "Arrows";
+    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get<ArrowsItemClass>();
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Arrow;
     public override int PackSort => 34;
     public override bool HatesFire => true;

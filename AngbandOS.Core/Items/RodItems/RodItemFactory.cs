@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class RodItemFactory : ItemFactory, IFlavour
 {
     public RodItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override string Description => "Rods";
+    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get<RodsItemClass>();
 
     /// <summary>
     /// Returns the rod flavours repository because rods have flavours that need to be identified.

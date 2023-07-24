@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class DeathBookItemFactory : BookItemFactory
 {
     public DeathBookItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override string Description => "Death Spellbooks";
+    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get<DeathSpellBooksItemClass>();
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.DeathBook;
     public override bool HatesFire => true;
     public override int PackSort => 4;

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemCategories;
 
 [Serializable]
-internal class LeatherScaleMailSoftArmorItemFactory : SoftArmorItemClass
+internal class LeatherScaleMailSoftArmorItemFactory : SoftArmorItemFactory
 {
     private LeatherScaleMailSoftArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 

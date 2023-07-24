@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemCategories;
 
 [Serializable]
-internal class GoldGold : GoldItemClass
+internal class GoldGold : GoldItemFactory
 {
     private GoldGold(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 

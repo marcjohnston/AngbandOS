@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.ItemClasses;
 
 [Serializable]
-internal abstract class GoldItemClass : ItemFactory
+internal abstract class GoldItemFactory : ItemFactory
 {
-    public GoldItemClass(SaveGame saveGame) : base(saveGame) { }
-    public override string Description => "Gold";
+    public GoldItemFactory(SaveGame saveGame) : base(saveGame) { }
+    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get<GoldItemClass>();
     public override int PackSort => 0;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Gold;
     //public override bool IgnoredByMonsters => true;

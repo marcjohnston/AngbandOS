@@ -1438,7 +1438,7 @@ internal class SaveGame
         }
 
         // Get a list of all of the item classes that are considered gold.  Sort them by the cost.
-        ItemFactory[] goldItemClasses = SingletonRepository.ItemFactories.Where(_itemClass => _itemClass.TryCast<GoldItemClass>() != null).OrderBy(_goldItemClass => _goldItemClass.Cost).ToArray();
+        ItemFactory[] goldItemClasses = SingletonRepository.ItemFactories.Where(_itemClass => _itemClass.TryCast<GoldItemFactory>() != null).OrderBy(_goldItemClass => _goldItemClass.Cost).ToArray();
 
         if (goldType >= goldItemClasses.Length)
         {
@@ -2500,7 +2500,7 @@ internal class SaveGame
 
     public void OpenChest(int y, int x, Item chestItem)
     {
-        ChestItemClass chest = (ChestItemClass)chestItem.Factory;
+        ChestItemFactory chest = (ChestItemFactory)chestItem.Factory;
         bool small = chest.IsSmall;
         int number = chest.NumberOfItemsContained;
 

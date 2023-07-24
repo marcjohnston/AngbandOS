@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemCategories;
 
 [Serializable]
-internal class JunkShardOfPottery : JunkItemClass
+internal class JunkShardOfPottery : JunkItemFactory
 {
     private JunkShardOfPottery(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 

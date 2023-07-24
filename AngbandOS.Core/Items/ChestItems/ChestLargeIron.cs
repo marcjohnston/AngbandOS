@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemCategories;
 
 [Serializable]
-internal class ChestLargeIron : ChestItemClass
+internal class ChestLargeIron : ChestItemFactory
 {
     private ChestLargeIron(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
