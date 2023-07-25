@@ -494,5 +494,10 @@ namespace Cthangband
         public void InputReceived()
         {
         }
+
+        public void MessagesReceived(IGameMessage[] gameMessages)
+        {
+
+        }
     }
 }

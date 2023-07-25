@@ -46,4 +46,6 @@ public interface IConsoleViewPort : IViewPort
     void PlayMusic(MusicTrackEnum music);
 
     bool KeyQueueIsEmpty();
+
+    void MessagesReceived(IGameMessage[] gameMessages);
 }

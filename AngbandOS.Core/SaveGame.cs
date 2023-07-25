@@ -772,6 +772,7 @@ internal class SaveGame
                 // Same as last - just increment the count
                 lastMessage.Count++;
                 ConsoleViewPort.MessagesUpdated();
+                RecentMessages.Add(message);
                 return;
             }
         }
@@ -812,6 +813,8 @@ internal class SaveGame
     {
         // Batch all of the message together from the last command and store them as the previous messages.
         PreviousMessages = RecentMessages.ToArray();
+
+        ConsoleViewPort.MessagesReceived(PreviousMessages);
 
         // Empty the recent list of messages to prepare for the next command.
         RecentMessages.Clear();
@@ -3273,6 +3276,7 @@ internal class SaveGame
                 MoveCursorRelative(MapY, MapX);
                 RequestCommand(false);
                 ProcessCommand(false);
+                MessageFlush();
             }
             if (EnergyUse != 0)
             {
@@ -11088,7 +11092,6 @@ internal class SaveGame
             }
             else
             {
-                MessageFlush();
                 //MessageAppendNextMessage = false;
                 HideCursorOnFullScreenInkey = true;
                 cmd = Inkey();
