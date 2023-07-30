@@ -303,6 +303,11 @@ internal class SaveGame
     public int DisplayedDamageBonus;
     public int Energy;
     public int ExperienceMultiplier;
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <remarks>borg: This was player->exp</remarks>
     public int ExperiencePoints;
     public int Food;
     public int FractionalExperiencePoints;
@@ -313,6 +318,11 @@ internal class SaveGame
     public int Generation; // This is how many times the character name has changed.
     public bool GetFirstLevelMutation;
     private int _gold;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>borg: player->au</remarks>
     public int Gold
     {
         get
@@ -389,7 +399,7 @@ internal class SaveGame
     /// <summary>
     /// 
     /// </summary>
-    /// <borg>player->total_winner</borg>
+    /// <remarks>borg: player->total_winner</remarks>
     public bool IsWinner;
     public bool IsWizard;
     private int _experienceLevel;
@@ -397,7 +407,7 @@ internal class SaveGame
     /// <summary>
     /// 
     /// </summary>
-    /// <borg>player->lev</borg>
+    /// <remarks>borg: player->lev</remarks>
     public int ExperienceLevel
     {
         get
@@ -424,13 +434,17 @@ internal class SaveGame
     /// </summary>
     public int MapY;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>borg: player->max_exp</remarks>
     public int MaxExperienceGained;
     public int MaxHealth;
 
     /// <summary>
     ///
     /// </summary>
-    /// <borg>player->max_lev</borg>
+    /// <remarks>borg: player->max_lev</remarks>
     public int MaxLevelGained;
     public int MaxMana;
     public int MeleeAttacksPerRound;
@@ -502,6 +516,11 @@ internal class SaveGame
     public int SkillUseDevice;
     public int SocialClass;
     public int SpareSpellSlots;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>state->speed</remarks>
     public int Speed;
     public TimedAction TimedAcidResistance;
     public TimedAction TimedBleeding;
@@ -530,7 +549,13 @@ internal class SaveGame
     public TimedAction TimedTelepathy;
     public int TownWithHouse;
     public int Weight;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>borg: player->upkeep->total_weight</remarks>
     public int WeightCarried;
+
     public int WildernessX;
     public int WildernessY;
     public int WordOfRecallDelay;

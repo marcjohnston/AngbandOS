@@ -38,7 +38,7 @@ internal static class borg_skill
     //BI_CURLITE,
     //BI_RECALL,
     //BI_FOOD,
-    //BI_SPEED,
+    public static int BI_SPEED;
     //BI_MOD_MOVES,
     //BI_DAM_RED,
     //BI_SDIG,
@@ -104,8 +104,11 @@ internal static class borg_skill
     //BI_SFRACT,
 
     //BI_DEPTH,
-    //BI_CDEPTH,
+
+    public static int BI_CDEPTH;
+
     //BI_MAXDEPTH,
+
     public static bool BI_KING;
 
     //BI_ISWEAK,
@@ -124,8 +127,10 @@ internal static class borg_skill
     //BI_ISFORGET,
     //BI_ISENCUMB,
     //BI_ISSTUDY,
+
     public static bool BI_ISFIXLEV;
     public static bool BI_ISFIXEXP;
+
     //BI_ISFIXSTR,
     //BI_ISFIXINT,
     //BI_ISFIXWIS,
@@ -230,7 +235,8 @@ internal static class borg_skill
     //BI_AROD1,       /* Attack rods */
     //BI_AROD2,       /* Attack rods */
     //BI_DINV,    /* See Inv Spell Legal */
-    //BI_WEIGHT,
+
+    public static int BI_WEIGHT; 
 
     //BI_MAX
 }

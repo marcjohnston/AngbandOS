@@ -4312,7 +4312,7 @@ internal static class borg8c
         int b_j = -1;
 
         /* Delay Factor */
-        int msec = ((playeroptions.delay_factor * playeroptions.delay_factor) + (borgcfg.BORG_DELAY_FACTOR * borgcfg.BORG_DELAY_FACTOR));
+        int msec = ((playeroptions.delay_factor * playeroptions.delay_factor) + (borg_cfg.BORG_DELAY_FACTOR * borg_cfg.BORG_DELAY_FACTOR));
 
         /* HACK allows user to stop the borg on certain levels */
         //     if (borg_skill[BI_CDEPTH] == borg_cfg[BORG_STOP_DLEVEL]) 

@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core.Borg;
 
-internal static class borgcfg
+internal static class borg_cfg
 {
     //# This file will allow you to customize your APWBorg along certain themes.
     //# The borg is fairly successful, having won the game several times.

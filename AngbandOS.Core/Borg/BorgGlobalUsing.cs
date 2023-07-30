@@ -5,7 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-//global using static AngbandOS.Core.Borg.playeroptions;
 global using static AngbandOS.Core.Borg.borg1c;
 global using static AngbandOS.Core.Borg.borg1h;
 global using static AngbandOS.Core.Borg.borg2c;
@@ -26,5 +25,13 @@ global using static AngbandOS.Core.Borg.borg9c;
 global using static AngbandOS.Core.Borg.borg9h;
 
 global using static AngbandOS.Core.Borg.borg_skill;
+global using static AngbandOS.Core.Borg.borg_cfg;
 
+global using int8_t = System.SByte;
 global using uint8_t = System.Byte;
+global using int16_t = System.Int16;
+global using uint16_t = System.UInt16;
+global using int32_t = System.Int32;
+global using uint32_t = System.UInt32;
+global using int64_t = System.Int64;
+global using uint64_t = System.UInt64;

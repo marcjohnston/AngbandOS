@@ -778,9 +778,9 @@ internal static class borg1c
     //  * State variables extracted from the screen
     //  */
 
-    // int32_t borg_exp;      /* Current experience */
+    public static int32_t borg_exp;      /* Current experience */
 
-    // int32_t borg_gold;     /* Current gold */
+    public static int32_t borg_gold;     /* Current gold */
 
     // int     borg_stat[6];   /* Current stat values */
 
@@ -1934,30 +1934,39 @@ internal static class borg1c
         /* Assume experience is fine */
         borg_skill.BI_ISFIXEXP = false;
 
-        //     /* Note "Exp" vs "EXP" and am I lower than level 50*/
-        //     if (player->exp < player->max_exp)
-        //     {
-        //         /* fix it if in town */
-        //         if (borg_skill[BI_CLEVEL] == 50 && borg_skill[BI_CDEPTH] == 0) borg_skill[BI_ISFIXEXP] = true;
+        /* Note "Exp" vs "EXP" and am I lower than level 50*/
+        if (saveGame.ExperiencePoints < saveGame.MaxExperienceGained)
+        {
+            /* fix it if in town */
+            if (borg_skill.BI_CLEVEL == 50 && borg_skill.BI_CDEPTH == 0)
+            {
+                borg_skill.BI_ISFIXEXP = true;
+            }
 
-        //         /* dont worry about fixing it in the dungeon */
-        //         if (borg_skill[BI_CLEVEL] == 50 && borg_skill[BI_CDEPTH] >= 1) borg_skill[BI_ISFIXEXP] = false;
+            /* dont worry about fixing it in the dungeon */
+            if (borg_skill.BI_CLEVEL == 50 && borg_skill.BI_CDEPTH >= 1) 
+            {
+                borg_skill.BI_ISFIXEXP = false;
+            }
 
-        //         /* Not at Max Level */
-        //         if (borg_skill[BI_CLEVEL] != 50) borg_skill[BI_ISFIXEXP] = true;
-        //     }
+            /* Not at Max Level */
+            if (borg_skill.BI_CLEVEL != 50)
+            {
+                borg_skill.BI_ISFIXEXP = true;
+            }
+        }
 
-        //     /* Extract "EXP xxxxxxxx" */
-        //     borg_exp = player->exp;
+        /* Extract "EXP xxxxxxxx" */
+        borg_exp = saveGame.ExperiencePoints;
 
 
-        //     /* Extract "AU xxxxxxxxx" */
-        //     borg_gold = player->au;
+        /* Extract "AU xxxxxxxxx" */
+        borg_gold = saveGame.Gold;
 
-        //     borg_skill[BI_WEIGHT] = player->upkeep->total_weight;
+        borg_skill.BI_WEIGHT = saveGame.WeightCarried;
 
-        //     /* Extract "Fast (+x)" or "Slow (-x)" */
-        //     borg_skill[BI_SPEED] = state->speed;
+        /* Extract "Fast (+x)" or "Slow (-x)" */
+        borg_skill.BI_SPEED = saveGame.Speed;
 
         //     /* Check my float for decrementing variables */
         //     if (borg_skill[BI_SPEED] > 110)
