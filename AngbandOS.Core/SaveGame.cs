@@ -522,27 +522,67 @@ internal class SaveGame
     /// </summary>
     /// <remarks>state->speed</remarks>
     public int Speed;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>borg: player->timed[TMD_OPP_ACID]</remarks>
     public TimedAction TimedAcidResistance;
     public TimedAction TimedBleeding;
     public TimedAction TimedBlessing;
     public TimedAction TimedBlindness;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>borg: player->timed[TMD_OPP_COLD]</remarks>
     public TimedAction TimedColdResistance;
     public TimedAction TimedConfusion;
     public TimedAction TimedEtherealness;
     public TimedAction TimedFear;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>borg: player->timed[TMD_OPP_FIRE]</remakrs>
     public TimedAction TimedFireResistance;
     public TimedAction TimedHallucinations;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>borg: player->timed[TMD_FAST]</remarks>
     public TimedAction TimedHaste;
     public TimedAction TimedHeroism;
     public TimedAction TimedInfravision;
     public TimedAction TimedInvulnerability;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>borg: player->timed[TMD_OPP_ELEC]</remarks>
     public TimedAction TimedLightningResistance;
     public TimedAction TimedParalysis;
     public TimedAction TimedPoison;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>borg: player->timed[TMD_OPP_POIS]</remarks>
     public TimedAction TimedPoisonResistance;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>borg:player->timed[TMD_PROTEVIL]</remarks>
     public TimedAction TimedProtectionFromEvil;
     public TimedAction TimedSeeInvisibility;
     public TimedAction TimedSlow;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>borg: player->timed[TMD_STONESKIN]</remarks>
     public TimedAction TimedStoneskin;
     public TimedAction TimedStun;
     public TimedAction TimedSuperheroism;
@@ -558,6 +598,11 @@ internal class SaveGame
 
     public int WildernessX;
     public int WildernessY;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>borg: player->word_recall</remarks>
     public int WordOfRecallDelay;
 
     /// <summary>

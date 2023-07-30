@@ -402,7 +402,7 @@ internal static class borg1c
     // bool    goal_fleeing_to_town; /* Currently fleeing the level to return to town */
     // bool    goal_ignoring;     /* Currently ignoring monsters */
 
-    // int     goal_recalling;     /* Currently waiting for recall, guessing the turns left */
+    public static bool     goal_recalling;     /* Currently waiting for recall, guessing the turns left */
 
     // bool    goal_less;         /* return to, but dont use, the next up stairs */
 
@@ -432,20 +432,20 @@ internal static class borg1c
     // int16_t borg_oldcsp;		/* mana points last game turn */
 
     // /* defence flags */
-    // bool    borg_prot_from_evil;
-    // bool    borg_speed;
-    // bool    borg_bless;
+    public static bool borg_prot_from_evil;
+    public static bool borg_speed;
+    public static bool borg_bless;
     // bool    borg_hero;
     // bool    borg_berserk;
     // bool    borg_fastcast;
     // bool    borg_regen;
     // bool    borg_smite_evil;
     // bool    borg_venom;
-    // int16_t borg_game_ratio;  /* the ratio of borg time to game time */
+    public static int16_t borg_game_ratio;  /* the ratio of borg time to game time */
     // int16_t borg_resistance;  /* borg is Resistant to all elements */
     // int16_t borg_no_rest_prep; /* borg wont rest for a few turns */
 
-    // bool    borg_shield;
+    public static bool borg_shield;
     // bool    borg_on_glyph;    /* borg is standing on a glyph of warding */
     // bool    borg_create_door;    /* borg is going to create doors */
     // bool    borg_sleep_spell;
@@ -1968,36 +1968,44 @@ internal static class borg1c
         /* Extract "Fast (+x)" or "Slow (-x)" */
         borg_skill.BI_SPEED = saveGame.Speed;
 
-        //     /* Check my float for decrementing variables */
-        //     if (borg_skill[BI_SPEED] > 110)
-        //     {
-        //         borg_game_ratio = 100000 / (((borg_skill[BI_SPEED] - 110) * 10) + 100);
-        //     }
-        //     else
-        //     {
-        //         borg_game_ratio = 1000;
-        //     }
+        /* Check my float for decrementing variables */
+        if (borg_skill.BI_SPEED > 110)
+        {
+            borg_game_ratio = (short)(100000 / (((borg_skill.BI_SPEED - 110) * 10) + 100));
+        }
+        else
+        {
+            borg_game_ratio = 1000;
+        }
 
-
-        //     /* A quick cheat to see if I missed a message about my status on some timed spells */
-        //     if (!goal_recalling && player->word_recall) goal_recalling = true;
-        //     if (!borg_prot_from_evil && player->timed[TMD_PROTEVIL]) borg_prot_from_evil = (player->timed[TMD_PROTEVIL] ? true : false);
-        //     if (!borg_speed && (player->timed[TMD_FAST] || player->timed[TMD_SPRINT] || player->timed[TMD_TERROR]))
-        //         (borg_speed = (player->timed[TMD_FAST] || player->timed[TMD_SPRINT] || player->timed[TMD_TERROR]) ? true : false);
-        //     borg_skill[BI_TRACID] = (player->timed[TMD_OPP_ACID] ? true : false);
-        //     borg_skill[BI_TRELEC] = (player->timed[TMD_OPP_ELEC] ? true : false);
-        //     borg_skill[BI_TRFIRE] = (player->timed[TMD_OPP_FIRE] ? true : false);
-        //     borg_skill[BI_TRCOLD] = (player->timed[TMD_OPP_COLD] ? true : false);
-        //     borg_skill[BI_TRPOIS] = (player->timed[TMD_OPP_POIS] ? true : false);
-        //     borg_bless = (player->timed[TMD_BLESSED] ? true : false);
-        //     borg_shield = (player->timed[TMD_SHIELD] ? true : false);
-        //     borg_shield = (player->timed[TMD_STONESKIN] ? true : false);
-        //     borg_fastcast = (player->timed[TMD_FASTCAST] ? true : false);
-        //     borg_hero = (player->timed[TMD_HERO] ? true : false);
-        //     borg_berserk = (player->timed[TMD_SHERO] ? true : false);
-        //     borg_regen = (player->timed[TMD_HEAL] ? true : false);
-        //     borg_venom = (player->timed[TMD_ATT_POIS] ? true : false);
-        //     borg_smite_evil = (player->timed[TMD_ATT_EVIL] ? true : false);
+        /* A quick cheat to see if I missed a message about my status on some timed spells */
+        if (!goal_recalling && saveGame.WordOfRecallDelay != 0)
+        {
+            goal_recalling = true;
+        }
+        if (!borg_prot_from_evil)
+        {
+            borg_prot_from_evil = (saveGame.TimedProtectionFromEvil.TurnsRemaining != 0);
+        }
+        if (!borg_speed)
+        {
+            // Borg code set borg_speed true when haste, sprint or terror.  We don't have sprint and terror doesn't give us speed.
+            borg_speed = saveGame.TimedHaste.TurnsRemaining != 0;
+        }
+        borg_skill.BI_TRACID = saveGame.TimedAcidResistance.TurnsRemaining != 0;
+        borg_skill.BI_TRELEC = saveGame.TimedLightningResistance.TurnsRemaining != 0;
+        borg_skill.BI_TRFIRE = saveGame.TimedFireResistance.TurnsRemaining != 0;
+        borg_skill.BI_TRCOLD = saveGame.TimedColdResistance.TurnsRemaining != 0;
+        borg_skill.BI_TRPOIS = saveGame.TimedPoisonResistance.TurnsRemaining != 0;
+        borg_bless = saveGame.TimedBlessing.TurnsRemaining != 0;;
+        //borg_shield = (player->timed[TMD_SHIELD] ? true : false);
+        borg_shield = saveGame.TimedStoneskin.TurnsRemaining != 0;
+        borg_fastcast = (player->timed[TMD_FASTCAST] ? true : false);
+        borg_hero = (player->timed[TMD_HERO] ? true : false);
+        borg_berserk = (player->timed[TMD_SHERO] ? true : false);
+        borg_regen = (player->timed[TMD_HEAL] ? true : false);
+        borg_venom = (player->timed[TMD_ATT_POIS] ? true : false);
+        borg_smite_evil = (player->timed[TMD_ATT_EVIL] ? true : false);
 
 
         //     /* if hasting, it doesn't count as 'borg_speed'.  The speed */

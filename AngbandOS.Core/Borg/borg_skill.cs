@@ -61,11 +61,11 @@ internal static class borg_skill
     //BI_ICOLD,
     //BI_IELEC,
     //BI_IPOIS,
-    //BI_TRFIRE,
-    //BI_TRCOLD,
-    //BI_TRACID,
-    //BI_TRPOIS,
-    //BI_TRELEC,
+    public static bool BI_TRFIRE;
+    public static bool BI_TRCOLD;
+    public static bool BI_TRACID;
+    public static bool BI_TRPOIS;
+    public static bool BI_TRELEC;
     //BI_RFIRE,
     //BI_RCOLD,
     //BI_RELEC,
