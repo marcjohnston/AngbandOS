@@ -385,9 +385,19 @@ internal class SaveGame
     public int HitDie;
     public int InfravisionRange;
     public bool IsSearching;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <borg>player->total_winner</borg>
     public bool IsWinner;
     public bool IsWizard;
     private int _experienceLevel;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <borg>player->lev</borg>
     public int ExperienceLevel
     {
         get
@@ -416,6 +426,11 @@ internal class SaveGame
 
     public int MaxExperienceGained;
     public int MaxHealth;
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <borg>player->max_lev</borg>
     public int MaxLevelGained;
     public int MaxMana;
     public int MeleeAttacksPerRound;
