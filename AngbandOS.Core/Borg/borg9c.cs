@@ -252,9 +252,9 @@ internal static class borg9c
         /* Fill up the borg_skill[] array */
         borg_update_frame(saveGame);
 
-        //     /*** Process inventory/equipment ***/
+        /*** Process inventory/equipment ***/
 
-        //     /* Cheat */
+        /* Cheat */
         //     if (borg_do_equip)
         //     {
         //         /* Only do it once */

@@ -435,10 +435,10 @@ internal static class borg1c
     public static bool borg_prot_from_evil;
     public static bool borg_speed;
     public static bool borg_bless;
-    // bool    borg_hero;
-    // bool    borg_berserk;
+    public static bool borg_hero;
+    public static bool borg_berserk;
     // bool    borg_fastcast;
-    // bool    borg_regen;
+    public static bool borg_regen;
     // bool    borg_smite_evil;
     // bool    borg_venom;
     public static int16_t borg_game_ratio;  /* the ratio of borg time to game time */
@@ -1998,23 +1998,25 @@ internal static class borg1c
         borg_skill.BI_TRCOLD = saveGame.TimedColdResistance.TurnsRemaining != 0;
         borg_skill.BI_TRPOIS = saveGame.TimedPoisonResistance.TurnsRemaining != 0;
         borg_bless = saveGame.TimedBlessing.TurnsRemaining != 0;;
-        //borg_shield = (player->timed[TMD_SHIELD] ? true : false);
+        //borg_shield = (player->timed[TMD_SHIELD] ? true : false); // No equivalent in AngbandOS
         borg_shield = saveGame.TimedStoneskin.TurnsRemaining != 0;
-        borg_fastcast = (player->timed[TMD_FASTCAST] ? true : false);
-        borg_hero = (player->timed[TMD_HERO] ? true : false);
-        borg_berserk = (player->timed[TMD_SHERO] ? true : false);
-        borg_regen = (player->timed[TMD_HEAL] ? true : false);
-        borg_venom = (player->timed[TMD_ATT_POIS] ? true : false);
-        borg_smite_evil = (player->timed[TMD_ATT_EVIL] ? true : false);
+        //borg_fastcast = (player->timed[TMD_FASTCAST] ? true : false); // No equivalent in AngbandOS
+        borg_hero = saveGame.TimedHeroism.TurnsRemaining != 0;
+        borg_berserk = saveGame.TimedSuperheroism.TurnsRemaining != 0;
+        //borg_regen =  (player->.timed (player->timed[TMD_HEAL] ? true : false); // No equivalent in AngbandOS
+        //borg_venom = (player->timed[TMD_ATT_POIS] ? true : false); // No equivalent in AngbandOS
+        //borg_smite_evil = (player->timed[TMD_ATT_EVIL] ? true : false); // No equivalent in AngbandOS
 
 
-        //     /* if hasting, it doesn't count as 'borg_speed'.  The speed */
-        //     /* gained from hasting is counted seperately. */
-        //     if (borg_speed)
-        //     {
-        //         if (player->timed[TMD_FAST] || player->timed[TMD_SPRINT]) borg_skill[BI_SPEED] -= 10;
-        //         else if (player->timed[TMD_TERROR]) borg_skill[BI_SPEED] -= 5;
-        //     }
+        /* if hasting, it doesn't count as 'borg_speed'.  The speed */
+        /* gained from hasting is counted seperately. */
+        if (borg_speed)
+        {
+            if (saveGame.TimedHaste.TurnsRemaining != 0)
+            {
+                borg_skill.BI_SPEED -= 10;
+            }
+        }
 
         //     /* Extract "Cur AC xxxxx" */
         //     borg_skill[BI_ARMOR] = state->ac + state->to_a;

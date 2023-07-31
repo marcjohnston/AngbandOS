@@ -553,6 +553,11 @@ internal class SaveGame
     /// </summary>
     /// <remarks>borg: player->timed[TMD_FAST]</remarks>
     public TimedAction TimedHaste;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>borg: player->timed[TMD_HERO]</remarks>
     public TimedAction TimedHeroism;
     public TimedAction TimedInfravision;
     public TimedAction TimedInvulnerability;
@@ -585,6 +590,11 @@ internal class SaveGame
     /// <remarks>borg: player->timed[TMD_STONESKIN]</remarks>
     public TimedAction TimedStoneskin;
     public TimedAction TimedStun;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>borg: player->timed[TMD_SHERO]</remarks>
     public TimedAction TimedSuperheroism;
     public TimedAction TimedTelepathy;
     public int TownWithHouse;
