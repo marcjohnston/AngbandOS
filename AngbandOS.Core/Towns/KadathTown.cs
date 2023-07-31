@@ -10,26 +10,22 @@ namespace AngbandOS.Core.Towns;
 [Serializable]
 internal class KadathTown : Town
 {
-    private Store[] _stores;
-    private KadathTown(SaveGame saveGame) : base(saveGame)
-    {
-        _stores = new Store[]
+    private KadathTown(SaveGame saveGame) : base(saveGame) { }
+    public override Store[] Stores => new Store[]
         {
-            new EmptyLotStore(SaveGame),
-            new EmptyLotStore(SaveGame),
-            new EmptyLotStore(SaveGame),
-            new EmptyLotStore(SaveGame),
-            new EmptyLotStore(SaveGame),
-            new EmptyLotStore(SaveGame),
-            new EmptyLotStore(SaveGame),
-            new EmptyLotStore(SaveGame),
-            new EmptyLotStore(SaveGame),
-            new EmptyLotStore(SaveGame),
-            new EmptyLotStore(SaveGame),
-            new EmptyLotStore(SaveGame)
+            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
+            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
+            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
+            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
+            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
+            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
+            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
+            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
+            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
+            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
+            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
+            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>()
         };
-    }
-    public override Store[] Stores => _stores;
 
     public override int HousePrice => 0;
     public override string Name => "Kadath, home of the Gods";

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Stores;
 [Serializable]
 internal class TempleStore : Store
 {
-    public TempleStore(SaveGame saveGame) : base(saveGame) { }
+    private TempleStore(SaveGame saveGame) : base(saveGame) { }
 
     public override string FeatureType => "Temple";
     public override ColourEnum Colour => ColourEnum.Green;

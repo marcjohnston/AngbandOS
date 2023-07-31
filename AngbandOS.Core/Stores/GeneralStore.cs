@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Stores;
 [Serializable]
 internal class GeneralStore : Store
 {
-    public GeneralStore(SaveGame saveGame) : base(saveGame) { }
+    private GeneralStore(SaveGame saveGame) : base(saveGame) { }
 
     protected override StoreOwner[] StoreOwners => new StoreOwner[]
     {

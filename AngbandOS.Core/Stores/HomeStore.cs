@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Stores;
 [Serializable]
 internal class HomeStore : Store
 {
-    public HomeStore(SaveGame saveGame) : base(saveGame) { }
+    private HomeStore(SaveGame saveGame) : base(saveGame) { }
 
     public override int MaxInventory => 100;
     protected override StoreOwner[] StoreOwners => new StoreOwner[]

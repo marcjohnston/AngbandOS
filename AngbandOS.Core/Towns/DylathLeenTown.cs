@@ -10,26 +10,22 @@ namespace AngbandOS.Core.Towns;
 [Serializable]
 internal class DylathLeenTown : Town
 {
-    private Store[] _stores;
-    private DylathLeenTown(SaveGame saveGame) : base(saveGame) 
-    {
-        _stores = new Store[]
+    private DylathLeenTown(SaveGame saveGame) : base(saveGame) { }
+    public override Store[] Stores => new Store[]
         {
-            new GeneralStore(SaveGame),
-            new ArmouryStore(SaveGame),
-            new WeaponStore(SaveGame),
-            new BlackStore(SaveGame),
-            new BlackStore(SaveGame),
-            new BlackStore(SaveGame),
-            new HomeStore(SaveGame),
-            new LibraryStore(SaveGame),
-            new EmptyLotStore(SaveGame),
-            new InnStore(SaveGame),
-            new HallStore(SaveGame),
-            new PawnStore(SaveGame)
+            SaveGame.SingletonRepository.Stores.Get<GeneralStore>(),
+            SaveGame.SingletonRepository.Stores.Get<ArmouryStore>(),
+            SaveGame.SingletonRepository.Stores.Get<WeaponStore>(),
+            SaveGame.SingletonRepository.Stores.Get<BlackStore>(),
+            SaveGame.SingletonRepository.Stores.Get<BlackStore>(),
+            SaveGame.SingletonRepository.Stores.Get<BlackStore>(),
+            SaveGame.SingletonRepository.Stores.Get<HomeStore>(),
+            SaveGame.SingletonRepository.Stores.Get<LibraryStore>(),
+            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
+            SaveGame.SingletonRepository.Stores.Get<InnStore>(),
+            SaveGame.SingletonRepository.Stores.Get<HallStore>(),
+            SaveGame.SingletonRepository.Stores.Get<PawnStore>()
         };
-    }
-    public override Store[] Stores => _stores; 
 
     public override int HousePrice => 25000;
     public override string Name => "the unwholesome city of Dylath-Leen";

@@ -15,6 +15,7 @@ namespace AngbandOS.Core;
 /// </summary>
 internal class SingletonRepository
 {
+    public SingletonDictionary<Store> Stores;
     public SingletonDictionary<ItemClass> ItemClasses;
     public SingletonDictionary<Mutation> Mutations;
     public SingletonDictionary<ChestTrap> ChestTraps;
@@ -135,6 +136,7 @@ internal class SingletonRepository
         GameCommands = new SingletonDictionary<GameCommand>(saveGame, LoadTypesFromAssembly<GameCommand>(saveGame));
         WizardCommands = new SingletonDictionary<WizardCommand>(saveGame, LoadTypesFromAssembly<WizardCommand>(saveGame));
         ItemFactories = new SingletonDictionary<ItemFactory>(saveGame, LoadTypesFromAssembly<ItemFactory>(saveGame));
+        Stores = new SingletonDictionary<Store>(saveGame, LoadTypesFromAssembly<Store>(saveGame)); // Stores must be loaded after ItemFactories.
         InventorySlots = new SingletonDictionary<BaseInventorySlot>(saveGame, LoadTypesFromAssembly<BaseInventorySlot>(saveGame));
         StoreCommands = new SingletonDictionary<StoreCommand>(saveGame, LoadTypesFromAssembly<StoreCommand>(saveGame));
         ArtifactBiases = new SingletonDictionary<ArtifactBias>(saveGame, LoadTypesFromAssembly<ArtifactBias>(saveGame));

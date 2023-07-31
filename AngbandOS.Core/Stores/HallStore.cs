@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Stores;
 [Serializable]
 internal class HallStore : Store
 {
-    public HallStore(SaveGame saveGame) : base(saveGame) { }
+    private HallStore(SaveGame saveGame) : base(saveGame) { }
 
     protected override StoreOwner[] StoreOwners => new StoreOwner[]
     {

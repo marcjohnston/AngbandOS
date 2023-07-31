@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Stores;
 [Serializable]
 internal class BlackStore : Store
 {
-    public BlackStore(SaveGame saveGame) : base(saveGame) { }
+    private BlackStore(SaveGame saveGame) : base(saveGame) { }
 
     public override int MaxInventory => 75;
     public override int StoreMinKeep => 35;
