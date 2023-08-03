@@ -59,37 +59,3 @@ internal class DbStore : Store
         _colour = colour;
     }
 }
-
-internal class JsonTown
-{
-    public char Char { get; set; }
-
-    public int HousePrice { get; set; }
-
-    public string Name { get; set; }
-
-    public string[] StoreNames { get; set; }
-}
-
-[Serializable]
-internal class DbTown : Town
-{
-    private char _char;
-    private int _housePrice;
-    private string _name;
-    private Store[] _stores;
-    public override char Char => _char;
-
-    public override int HousePrice => _housePrice;
-
-    public override string Name => _name;
-
-    public override Store[] Stores => _stores;
-    public DbTown(SaveGame saveGame, JsonTown town) : base(saveGame)
-    {
-        _char = town.Char;
-        _housePrice = town.HousePrice;
-        _name = town.Name;
-        //_stores = town.Stores;
-    }
-}

@@ -11,7 +11,7 @@ namespace AngbandOS.Core;
 
 [Obsolete("Use SingletonDictionary ... need to add the ISingletonDictionary<T> interface functionality for the GetKey method to the SingletonDictionary first.")]
 [Serializable]
-internal class SingletonKeyedDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>> where TValue : ISingletonDictionary<TKey>
+internal class SingletonKeyedDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>> where TValue : ISingletonKeyedDictionary<TKey>
 {
     private SaveGame SaveGame;
     Dictionary<TKey, TValue> instances = new Dictionary<TKey, TValue>();

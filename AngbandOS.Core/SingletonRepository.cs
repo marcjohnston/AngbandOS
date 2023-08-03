@@ -5,8 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using System.Reflection;
-
 namespace AngbandOS.Core;
 
 [Serializable]
@@ -15,204 +13,289 @@ namespace AngbandOS.Core;
 /// </summary>
 internal class SingletonRepository
 {
-    public SingletonDictionary<Store> Stores;
-    public SingletonDictionary<ItemClass> ItemClasses;
-    public SingletonDictionary<Mutation> Mutations;
-    public SingletonDictionary<ChestTrap> ChestTraps;
-    public SingletonDictionary<Attack> Attacks;
-    public SingletonDictionary<AttackEffect> AttackEffects;
-    public SingletonDictionary<SpellResistantDetection> SpellResistantDetections;
-    public SingletonDictionary<RoomLayout> RoomLayouts;
-    public SingletonDictionary<MonsterSpell> MonsterSpells;
-    public SingletonDictionary<Talent> Talents;
-    public SingletonDictionary<AlterAction> AlterActions;
-    public SingletonDictionary<Symbol> Symbols;
-    public SingletonDictionary<MartialArtsAttack> MartialArtsAttacks;
-    public SingletonDictionary<Script> Scripts;
-    public SingletonDictionary<Dungeon> Dungeons;
-    public SingletonDictionary<Gender> Genders;
-    public SingletonDictionary<BirthStage> BirthStages;
-    public SingletonDictionary<Projectile> Projectiles;
-    public SingletonDictionary<Patron> Patrons;
-    public SingletonDictionary<Animation> Animations;
-    public SingletonDictionary<FixedArtifact> FixedArtifacts;
-    [Obsolete("Needs to be non-keyed")]
-    public SingletonKeyedDictionary<string, Tile> FloorTileTypes;
-    public SingletonDictionary<GameCommand> GameCommands;
-    public SingletonDictionary<ArtifactBias> ArtifactBiases;
-    public SingletonDictionary<BaseInventorySlot> InventorySlots;
-    public SingletonDictionary<ItemFactory> ItemFactories;
-    public SingletonDictionary<MonsterRace> MonsterRaces;
-    public SingletonDictionary<ProjectileGraphic> ProjectileGraphics;
-    public SingletonDictionary<Activation> Activations;
-    public SingletonDictionary<Race> Races;
-    [Obsolete("Needs to be non-keyed")]
-    public SingletonKeyedDictionary<RareItemTypeEnum, RareItem> RareItems;
-    public SingletonDictionary<StoreCommand> StoreCommands;
-    public SingletonDictionary<Vault> Vaults;
-    public SingletonDictionary<WizardCommand> WizardCommands;
-    public SingletonDictionary<TimedAction> TimedActions;
-    public SingletonDictionary<BaseCharacterClass> CharacterClasses;
-    public SingletonDictionary<Realm> Realms;
-    public SingletonDictionary<Town> Towns;
-    public SingletonDictionary<AmuletFlavour> AmuletFlavours;
-    public SingletonDictionary<MushroomFlavour> MushroomFlavours;
-    public SingletonDictionary<PotionFlavour> PotionFlavours;
-    public SingletonDictionary<RingFlavour> RingFlavours;
-    public SingletonDictionary<RodFlavour> RodFlavours;
-    public SingletonDictionary<BaseScrollFlavour> ScrollFlavours;
-    public SingletonDictionary<StaffFlavour> StaffFlavours;
-    public SingletonDictionary<WandFlavour> WandFlavours;
-    public SingletonDictionary<ChestTrapConfiguration> ChestTrapConfigurations;
-    public SingletonDictionary<HelpGroup> HelpGroups;
-    public SingletonDictionary<StoreOwner> StoreOwners;
-    public SingletonList<ClassSpell> ClassSpells; // TODO: This needs to use a DualDictionary
-    public SingletonDictionary<Spell> Spells;
-    public SingletonDictionary<CastingType> CastingTypes;
-    public SingletonDictionary<Reward> Rewards;
+    public TownsRepositoryCollection Towns;
+    public ItemFactoriesRepositoryCollection ItemFactories;
+    public StoresRepositoryCollection Stores;
+    public ItemClassesRepositoryCollection ItemClasses;
+    public MutationsRepositoryCollection Mutations;
+    public ChestTrapsRepositoryCollection ChestTraps;
+    public AttacksRepositoryCollection Attacks;
+    public AttackEffectsRepositoryCollection AttackEffects;
+    public SpellResistantDetectionsRepositoryCollection SpellResistantDetections;
+    public RoomLayoutsRepositoryCollection RoomLayouts;
+    public MonsterSpellsRepositoryCollection MonsterSpells;
+    public TalentsRepositoryCollection Talents;
+    public AlterActionsRepositoryCollection AlterActions;
+    public SymbolsRepositoryCollection Symbols;
+    public MartialArtsAttacksRepositoryCollection MartialArtsAttacks;
+    public ScriptsRepositoryCollection Scripts;
+    public DungeonsRepositoryCollection Dungeons;
+    public GendersRepositoryCollection Genders;
+    public BirthStagesRepositoryCollection BirthStages;
+    public ProjectilesRepositoryCollection Projectiles;
+    public PatronsRepositoryCollection Patrons;
+    public AnimationsRepositoryCollection Animations;
+    public FixedArtifactsRepositoryCollection FixedArtifacts;
+    public GameCommandsRepositoryCollection GameCommands;
+    public ArtifactBiasesRepositoryCollection ArtifactBiases;
+    public InventorySlotsRepositoryCollection InventorySlots;
+    public MonsterRacesRepositoryCollection MonsterRaces;
+    public ProjectileGraphicsRepositoryCollection ProjectileGraphics;
+    public ActivationsRepositoryCollection Activations;
+    public RacesRepositoryCollection Races;
+    public StoreCommandsRepositoryCollection StoreCommands;
+    public VaultsRepositoryCollection Vaults;
+    public WizardCommandsRepositoryCollection WizardCommands;
+    public TimedActionsRepositoryCollection TimedActions;
+    public CharacterClassesRepositoryCollection CharacterClasses;
+    public RealmsRepositoryCollection Realms;
+    public AmuletFlavoursRepositoryCollection AmuletFlavours;
+    public MushroomFlavoursRepositoryCollection MushroomFlavours;
+    public PotionFlavoursRepositoryCollection PotionFlavours;
+    public RingFlavoursRepositoryCollection RingFlavours;
+    public RodFlavoursRepositoryCollection RodFlavours;
+    public ScrollFlavoursRepositoryCollection ScrollFlavours;
+    public StaffFlavoursRepositoryCollection StaffFlavours;
+    public WandFlavoursRepositoryCollection WandFlavours;
+    public ChestTrapConfigurationsRepositoryCollection ChestTrapConfigurations;
+    public HelpGroupsRepositoryCollection HelpGroups;
+    public StoreOwnersRepositoryCollection StoreOwners;
+    public SpellsRepositoryCollection Spells;
+    public CastingTypesRepositoryCollection CastingTypes;
+    public RewardsRepositoryCollection Rewards;
+    public FloorTileTypesRepositoryCollection FloorTileTypes;
+    public RareItemsRepositoryCollection RareItems;
+    public ClassSpellsRepositoryCollection ClassSpells;
+    public ShopKeeperGoodCommentsRepositoryCollection ShopKeeperGoodComments;
+    public ShopKeeperBargainCommentsRepositoryCollection ShopKeeperBargainComments;
+    public ElvishTextRepositoryCollection ElvishText;
+    public FunnyDescriptionsRepositoryCollection FunnyDescriptions;
+    public FunnyCommentsRepositoryCollection FunnyComments;
+    public HorrificDescriptionsRepositoryCollection HorrificDescriptions;
+    public InsultPlayerAttacksRepositoryCollection InsultPlayerAttacks;
+    public MoanPlayerAttacksRepositoryCollection MoanPlayerAttacks;                    
+    public ShopKeeperLessThanGuessCommentsRepositoryCollection ShopKeeperLessThanGuessComments;
+    public ShopKeeperWorthlessCommentsRepositoryCollection ShopKeeperWorthlessComments;
+    public SingingPlayerAttacksRepositoryCollection SingingPlayerAttacks;
+    public StoreOwnerAcceptedCommentsRepositoryCollection StoreOwnerAcceptedComments;
+    public WorshipPlayerAttacksRepositoryCollection WorshipPlayerAttacks;
+    public FindQuestsRepositoryCollection FindQuests;
 
-    public SingletonList<string> ShopKeeperGoodComments;
-    public SingletonList<string> ShopKeeperBargainComments;
-    public SingletonList<string> ElvishText;
-    public SingletonList<string> FunnyComments;
-    public SingletonList<string> FunnyDescriptions;
-    public SingletonList<string> HorrificDescriptions;
-    public SingletonList<string> InsultPlayerAttacks;
-    public SingletonList<string> MoanPlayerAttacks;
-                    
-    public SingletonList<string> ShopKeeperLessThanGuessComments;
-    public SingletonList<string> ShopKeeperWorthlessComments;
-    public SingletonList<string> SingingPlayerAttacks;
-    public SingletonList<string> StoreOwnerAcceptedComments;
-    public SingletonList<string> WorshipPlayerAttacks;
-    public SingletonList<string> FindQuests;
-
-    private T[] LoadTypesFromAssembly<T>(SaveGame saveGame)
+    /// <summary>
+    /// Performs the load phase of the singleton repository.  This phase reads all of the types from the assembly and adds it into its respective
+    /// collection--if the ExcludeFromRepository property returns false.  If the ExcludeFromRepository is true, the singleton object will be discarded.
+    /// </summary>
+    /// <param name="saveGame"></param>
+    public void Load(SaveGame saveGame)
     {
-        List<T> typeList = new List<T>();
-        Assembly assembly = Assembly.GetExecutingAssembly();
-        foreach (Type type in assembly.GetTypes())
-        {
-            // Load Commands.
-            if (!type.IsAbstract && typeof(T).IsAssignableFrom(type))
-            {
-                ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
-                if (constructors.Length == 1)
-                {
-                    T command = (T)constructors[0].Invoke(new object[] { saveGame });
-                    typeList.Add(command);
-                }
-            }
-        }
-        return typeList.ToArray();
-    }
+        Towns = new TownsRepositoryCollection(saveGame);
+        ItemFactories = new ItemFactoriesRepositoryCollection(saveGame);
+        Stores = new StoresRepositoryCollection(saveGame);
+        ItemClasses = new ItemClassesRepositoryCollection(saveGame);
+        Mutations = new MutationsRepositoryCollection(saveGame);
+        ChestTraps = new ChestTrapsRepositoryCollection(saveGame);
+        Attacks = new AttacksRepositoryCollection(saveGame);
+        AttackEffects = new AttackEffectsRepositoryCollection(saveGame);
+        SpellResistantDetections = new SpellResistantDetectionsRepositoryCollection(saveGame);
+        RoomLayouts = new RoomLayoutsRepositoryCollection(saveGame);
+        MonsterSpells = new MonsterSpellsRepositoryCollection(saveGame);
+        Talents = new TalentsRepositoryCollection(saveGame);
+        AlterActions = new AlterActionsRepositoryCollection(saveGame);
+        Symbols = new SymbolsRepositoryCollection(saveGame);
+        MartialArtsAttacks = new MartialArtsAttacksRepositoryCollection(saveGame);
+        Scripts = new ScriptsRepositoryCollection(saveGame);
+        Dungeons = new DungeonsRepositoryCollection(saveGame);
+        Genders = new GendersRepositoryCollection(saveGame);
+        BirthStages = new BirthStagesRepositoryCollection(saveGame);
+        Projectiles = new ProjectilesRepositoryCollection(saveGame);
+        Patrons = new PatronsRepositoryCollection(saveGame);
+        Animations = new AnimationsRepositoryCollection(saveGame);
+        FixedArtifacts = new FixedArtifactsRepositoryCollection(saveGame);
+        GameCommands = new GameCommandsRepositoryCollection(saveGame);
+        ArtifactBiases = new ArtifactBiasesRepositoryCollection(saveGame);
+        InventorySlots = new InventorySlotsRepositoryCollection(saveGame);
+        MonsterRaces = new MonsterRacesRepositoryCollection(saveGame);
+        ProjectileGraphics = new ProjectileGraphicsRepositoryCollection(saveGame);
+        Activations = new ActivationsRepositoryCollection(saveGame);
+        Races = new RacesRepositoryCollection(saveGame);
+        StoreCommands = new StoreCommandsRepositoryCollection(saveGame);
+        Vaults = new VaultsRepositoryCollection(saveGame);
+        WizardCommands = new WizardCommandsRepositoryCollection(saveGame);
+        TimedActions = new TimedActionsRepositoryCollection(saveGame);
+        CharacterClasses = new CharacterClassesRepositoryCollection(saveGame);
+        Realms = new RealmsRepositoryCollection(saveGame);
+        AmuletFlavours = new AmuletFlavoursRepositoryCollection(saveGame);
+        MushroomFlavours = new MushroomFlavoursRepositoryCollection(saveGame);
+        PotionFlavours = new PotionFlavoursRepositoryCollection(saveGame);
+        RingFlavours = new RingFlavoursRepositoryCollection(saveGame);
+        RodFlavours = new RodFlavoursRepositoryCollection(saveGame);
+        ScrollFlavours = new ScrollFlavoursRepositoryCollection(saveGame);
+        StaffFlavours = new StaffFlavoursRepositoryCollection(saveGame);
+        WandFlavours = new WandFlavoursRepositoryCollection(saveGame);
+        ChestTrapConfigurations = new ChestTrapConfigurationsRepositoryCollection(saveGame);
+        HelpGroups = new HelpGroupsRepositoryCollection(saveGame);
+        StoreOwners = new StoreOwnersRepositoryCollection(saveGame);
+        Spells = new SpellsRepositoryCollection(saveGame);
+        CastingTypes = new CastingTypesRepositoryCollection(saveGame);
+        Rewards = new RewardsRepositoryCollection(saveGame);
 
-    private T[] Shuffle<T>(IEnumerable<T> items) => items.OrderBy(_item => Program.Rng.RandomLessThan(int.MaxValue)).ToArray();
+        FloorTileTypes = new FloorTileTypesRepositoryCollection(saveGame);
+        RareItems = new RareItemsRepositoryCollection(saveGame);
 
-    public void Initialize(SaveGame saveGame)
-    {
-        ItemClasses = new SingletonDictionary<ItemClass>(saveGame, LoadTypesFromAssembly<ItemClass>(saveGame));
-        Mutations = new SingletonDictionary<Mutation>(saveGame, LoadTypesFromAssembly<Mutation>(saveGame));
-        ChestTraps = new SingletonDictionary<ChestTrap>(saveGame, LoadTypesFromAssembly<ChestTrap>(saveGame));
-        Attacks = new SingletonDictionary<Attack>(saveGame, LoadTypesFromAssembly<Attack>(saveGame));
-        AttackEffects = new SingletonDictionary<AttackEffect>(saveGame, LoadTypesFromAssembly<AttackEffect>(saveGame));
-        SpellResistantDetections = new SingletonDictionary<SpellResistantDetection>(saveGame, LoadTypesFromAssembly<SpellResistantDetection>(saveGame));
-        RoomLayouts = new SingletonDictionary<RoomLayout>(saveGame, LoadTypesFromAssembly<RoomLayout>(saveGame));
-        MonsterSpells = new SingletonDictionary<MonsterSpell>(saveGame, LoadTypesFromAssembly<MonsterSpell>(saveGame));
-        Talents = new SingletonDictionary<Talent>(saveGame, LoadTypesFromAssembly<Talent>(saveGame));
-        AlterActions = new SingletonDictionary<AlterAction>(saveGame, LoadTypesFromAssembly<AlterAction>(saveGame));
-        Symbols = new SingletonDictionary<Symbol>(saveGame, LoadTypesFromAssembly<Symbol>(saveGame));
-        MartialArtsAttacks = new SingletonDictionary<MartialArtsAttack>(saveGame, LoadTypesFromAssembly<MartialArtsAttack>(saveGame));
-        Scripts = new SingletonDictionary<Script>(saveGame, LoadTypesFromAssembly<Script>(saveGame));
-        Dungeons = new SingletonDictionary<Dungeon>(saveGame, LoadTypesFromAssembly<Dungeon>(saveGame));
-        Genders = new SingletonDictionary<Gender>(saveGame, LoadTypesFromAssembly<Gender>(saveGame));
-        BirthStages = new SingletonDictionary<BirthStage>(saveGame, LoadTypesFromAssembly<BirthStage>(saveGame));
-        ClassSpells = new SingletonList<ClassSpell>(saveGame, LoadTypesFromAssembly<ClassSpell>(saveGame));
-        Rewards = new SingletonDictionary<Reward>(saveGame, LoadTypesFromAssembly<Reward>(saveGame));
-        Projectiles = new SingletonDictionary<Projectile>(saveGame, LoadTypesFromAssembly<Projectile>(saveGame));
-        Patrons = new SingletonDictionary<Patron>(saveGame, LoadTypesFromAssembly<Patron>(saveGame));
-        Spells = new SingletonDictionary<Spell>(saveGame, LoadTypesFromAssembly<Spell>(saveGame));
-        CastingTypes = new SingletonDictionary<CastingType>(saveGame, LoadTypesFromAssembly<CastingType>(saveGame));
-        GameCommands = new SingletonDictionary<GameCommand>(saveGame, LoadTypesFromAssembly<GameCommand>(saveGame));
-        WizardCommands = new SingletonDictionary<WizardCommand>(saveGame, LoadTypesFromAssembly<WizardCommand>(saveGame));
-        ItemFactories = new SingletonDictionary<ItemFactory>(saveGame, LoadTypesFromAssembly<ItemFactory>(saveGame));
-        Stores = new SingletonDictionary<Store>(saveGame, LoadTypesFromAssembly<Store>(saveGame)); // Stores must be loaded after ItemFactories.
-        InventorySlots = new SingletonDictionary<BaseInventorySlot>(saveGame, LoadTypesFromAssembly<BaseInventorySlot>(saveGame));
-        StoreCommands = new SingletonDictionary<StoreCommand>(saveGame, LoadTypesFromAssembly<StoreCommand>(saveGame));
-        ArtifactBiases = new SingletonDictionary<ArtifactBias>(saveGame, LoadTypesFromAssembly<ArtifactBias>(saveGame));
-        Activations = new SingletonDictionary<Activation>(saveGame, LoadTypesFromAssembly<Activation>(saveGame));
-        CharacterClasses = new SingletonDictionary<BaseCharacterClass>(saveGame, LoadTypesFromAssembly<BaseCharacterClass>(saveGame));
-        Realms = new SingletonDictionary<Realm>(saveGame, LoadTypesFromAssembly<Realm>(saveGame));
-        Towns = new SingletonDictionary<Town>(saveGame, LoadTypesFromAssembly<Town>(saveGame));
-        AmuletFlavours = new SingletonDictionary<AmuletFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<AmuletFlavour>(saveGame)));
-        MushroomFlavours = new SingletonDictionary<MushroomFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<MushroomFlavour>(saveGame)));
-        PotionFlavours = new SingletonDictionary<PotionFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<PotionFlavour>(saveGame)));
-        RingFlavours = new SingletonDictionary<RingFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<RingFlavour>(saveGame)));
-        RodFlavours = new SingletonDictionary<RodFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<RodFlavour>(saveGame)));
-        ScrollFlavours = new SingletonDictionary<BaseScrollFlavour>(saveGame, LoadTypesFromAssembly<BaseScrollFlavour>(saveGame));
-        StaffFlavours = new SingletonDictionary<StaffFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<StaffFlavour>(saveGame)));
-        WandFlavours = new SingletonDictionary<WandFlavour>(saveGame, Shuffle(LoadTypesFromAssembly<WandFlavour>(saveGame)));
-        ChestTrapConfigurations = new SingletonDictionary<ChestTrapConfiguration>(saveGame, LoadTypesFromAssembly<ChestTrapConfiguration>(saveGame));
-        ProjectileGraphics = new SingletonDictionary<ProjectileGraphic>(saveGame, LoadTypesFromAssembly<ProjectileGraphic>(saveGame));
-        Animations = new SingletonDictionary<Animation>(saveGame, LoadTypesFromAssembly<Animation>(saveGame));
-        Vaults = new SingletonDictionary<Vault>(saveGame, LoadTypesFromAssembly<Vault>(saveGame));
-        FloorTileTypes = new SingletonKeyedDictionary<string, Tile>(saveGame, LoadTypesFromAssembly<Tile>(saveGame));
-        RareItems = new SingletonKeyedDictionary<RareItemTypeEnum, RareItem>(saveGame, LoadTypesFromAssembly<RareItem>(saveGame));
-        FixedArtifacts = new SingletonDictionary<FixedArtifact>(saveGame, LoadTypesFromAssembly<FixedArtifact>(saveGame));
-        MonsterRaces = new SingletonDictionary<MonsterRace>(saveGame, LoadTypesFromAssembly<MonsterRace>(saveGame).OrderBy(_monsterRace => _monsterRace.LevelFound));
-        Races = new SingletonDictionary<Race>(saveGame, LoadTypesFromAssembly<Race>(saveGame));
-        HelpGroups = new SingletonDictionary<HelpGroup>(saveGame, LoadTypesFromAssembly<HelpGroup>(saveGame));
-        StoreOwners = new SingletonDictionary<StoreOwner>(saveGame, LoadTypesFromAssembly<StoreOwner>(saveGame));
-        ShopKeeperGoodComments = new SingletonList<string>(saveGame, "Cool!", "You've made my day!", "The shopkeeper giggles.", "The shopkeeper laughs loudly.");
-        ShopKeeperBargainComments = new SingletonList<string>(saveGame, "Yipee!", "I think I'll retire!", "The shopkeeper jumps for joy.", "The shopkeeper smiles gleefully.");
-        ElvishText = new SingletonList<string>(saveGame,
-            "adan", "ael", "in", "agl", "ar", "aina", "alda", "al", "qua", "am", "arth", "amon", "anca", "an", "dune",
-            "anga", "anna", "ann", "on", "ar", "ien", "atar", "band", "bar", "ad", "bel", "eg", "brag", "ol", "breth",
-            "il", "brith", "cal", "en", "gal", "en", "cam", "car", "ak", "cel", "eb", "cor", "on", "cu", "cui", "vie",
-            "cul", "curu", "dae", "dag", "or", "del", "din", "dol", "dor", "draug", "du", "duin", "dur", "ear", "ech",
-            "or", "edh", "el", "eith", "elen", "er", "ereg", "es", "gal", "fal", "as", "far", "oth", "faug", "fea",
-            "fin", "for", "men", "fuin", "gaer", "gaur", "gil", "gir", "ith", "glin", "gol", "odh", "gond", "gor",
-            "groth", "grod", "gul", "gurth", "gwaith", "gwath", "wath", "had", "hod", "haudh", "heru", "him", "hini",
-            "hith", "hoth", "hyar", "men", "ia", "iant", "iath", "iaur", "ilm", "iluve", "kal", "gal", "kano", "kel",
-            "kemen", "khel", "ek", "khil", "kir", "lad", "laure", "lhach", "lin", "lith", "lok", "lom", "lome", "londe",
-            "los", "loth", "luin", "maeg", "mal", "man", "mel", "men", "menel", "mer", "eth", "min", "as", "mir",
-            "mith", "mor", "moth", "nan", "nar", "naug", "dil", "dur", "nel", "dor", "nen", "nim", "orn", "orod", "os",
-            "pal", "an", "pel", "quen", "quet", "ram", "ran", "rant", "ras", "rauko", "ril", "rim", "ring", "ris",
-            "roch", "rom", "rond", "ros", "ruin", "ruth", "sarn", "ser", "eg", "sil", "sir", "sul", "tal", "dal", "tal",
-            "ath", "tar", "tath", "ar", "taur", "tel", "thal", "thang", "thar", "thaur", "thin", "thol", "thon", "thor",
-            "on", "til", "tin", "tir", "tol", "tum", "tur", "uial", "ur", "val", "wen", "wing", "yave");
-        FunnyComments = new SingletonList<string>(saveGame, "Wow, cosmic, man!", "Rad!", "Groovy!", "Cool!", "Far out!");
-        FunnyDescriptions = new SingletonList<string>(saveGame, 
-            "silly", "hilarious", "absurd", "insipid", "ridiculous", "laughable", "ludicrous", "far-out", "groovy",
-            "postmodern", "fantastic", "dadaistic", "cubistic", "cosmic", "awesome", "incomprehensible", "fabulous",
-            "amazing", "incredible", "chaotic", "wild", "preposterous");
-        HorrificDescriptions = new SingletonList<string>(saveGame, 
-            "abominable", "abysmal", "appalling", "baleful", "blasphemous", "disgusting", "dreadful", "filthy",
-            "grisly", "hideous", "hellish", "horrible", "infernal", "loathsome", "nightmarish", "repulsive",
-            "sacrilegious", "terrible", "unclean", "unspeakable");
-        InsultPlayerAttacks = new SingletonList<string>(saveGame, 
-            "insults you!", "insults your mother!", "gives you the finger!", "humiliates you!", "defiles you!",
-            "dances around you!", "makes obscene gestures!", "moons you!");
-        MoanPlayerAttacks = new SingletonList<string>(saveGame, "seems sad about something.", "asks if you have seen his dogs.", "tells you to get off his land.", "mumbles something about mushrooms.");
-        ShopKeeperLessThanGuessComments = new SingletonList<string>(saveGame, "Damn!", "You bastard!", "The shopkeeper curses at you.", "The shopkeeper glares at you.");
-        ShopKeeperWorthlessComments = new SingletonList<string>(saveGame, "Arrgghh!", "You bastard!", "You hear someone sobbing...", "The shopkeeper howls in agony!");
-        SingingPlayerAttacks = new SingletonList<string>(saveGame, "sings 'We are a happy family.'", "sings 'I love you, you love me.'");
-        StoreOwnerAcceptedComments = new SingletonList<string>(saveGame, "Okay.", "Fine.", "Accepted!", "Agreed!", "Done!", "Taken!");
-        WorshipPlayerAttacks = new SingletonList<string>(saveGame, 
-            "looks up at you!", "asks how many dragons you've killed!", "asks for your autograph!", "tries to shake your hand!", "pretends to be you!",
-            "dances around you!", "tugs at your clothing!", "asks if you will adopt him!");
-        FindQuests = new SingletonList<string>(saveGame,
-            "You find the following inscription in the floor",
-            "You see a message inscribed in the wall",
-            "There is a sign saying",
-            "Something is written on the staircase",
-            "You find a scroll with the following message");
+        ClassSpells = new ClassSpellsRepositoryCollection(saveGame);
+        ShopKeeperGoodComments = new ShopKeeperGoodCommentsRepositoryCollection(saveGame);
+        ShopKeeperBargainComments = new ShopKeeperBargainCommentsRepositoryCollection(saveGame);
+        ElvishText = new ElvishTextRepositoryCollection(saveGame);
+        FunnyDescriptions = new FunnyDescriptionsRepositoryCollection(saveGame);
+        FunnyComments = new FunnyCommentsRepositoryCollection(saveGame);
+        HorrificDescriptions = new HorrificDescriptionsRepositoryCollection(saveGame);
+        InsultPlayerAttacks = new InsultPlayerAttacksRepositoryCollection(saveGame);
+        MoanPlayerAttacks = new MoanPlayerAttacksRepositoryCollection(saveGame);
+        ShopKeeperLessThanGuessComments = new ShopKeeperLessThanGuessCommentsRepositoryCollection(saveGame);
+        ShopKeeperWorthlessComments = new ShopKeeperWorthlessCommentsRepositoryCollection(saveGame);
+        SingingPlayerAttacks = new SingingPlayerAttacksRepositoryCollection(saveGame);
+        StoreOwnerAcceptedComments = new StoreOwnerAcceptedCommentsRepositoryCollection(saveGame);
+        WorshipPlayerAttacks = new WorshipPlayerAttacksRepositoryCollection(saveGame);
+        FindQuests = new FindQuestsRepositoryCollection(saveGame);
 
-        // We need to initialize the monster race indexes.
-        for (int i = 0; i < MonsterRaces.Count; i++)
-        {
-            MonsterRace monsterRace = MonsterRaces[i];
-            monsterRace.Index = i;
-        }
+        Towns.Load();
+        ItemFactories.Load();
+        Stores.Load();
+        ItemClasses.Load();
+        Mutations.Load();
+        ChestTraps.Load();
+        Attacks.Load();
+        AttackEffects.Load();
+        SpellResistantDetections.Load();
+        RoomLayouts.Load();
+        MonsterSpells.Load();
+        Talents.Load();
+        AlterActions.Load();
+        Symbols.Load();
+        MartialArtsAttacks.Load();
+        Scripts.Load();
+        Dungeons.Load();
+        Genders.Load();
+        BirthStages.Load();
+        Projectiles.Load();
+        Patrons.Load();
+        Animations.Load();
+        FixedArtifacts.Load();
+        GameCommands.Load();
+        ArtifactBiases.Load();
+        InventorySlots.Load();
+        MonsterRaces.Load();
+        ProjectileGraphics.Load();
+        Activations.Load();
+        Races.Load();
+        StoreCommands.Load();
+        Vaults.Load();
+        WizardCommands.Load();
+        TimedActions.Load();
+        CharacterClasses.Load();
+        Realms.Load();
+        AmuletFlavours.Load();
+        MushroomFlavours.Load();
+        PotionFlavours.Load();
+        RingFlavours.Load();
+        RodFlavours.Load();
+        ScrollFlavours.Load();
+        StaffFlavours.Load();
+        WandFlavours.Load();
+        ChestTrapConfigurations.Load();
+        HelpGroups.Load();
+        StoreOwners.Load();
+        Spells.Load();
+        CastingTypes.Load();
+        Rewards.Load();
+
+        FloorTileTypes.Load();
+        RareItems.Load();
+
+        ClassSpells.Load();
+        ShopKeeperGoodComments.Load();
+        ShopKeeperBargainComments.Load();
+        ElvishText.Load();
+        FunnyDescriptions.Load();
+        FunnyComments.Load();
+        HorrificDescriptions.Load();
+        InsultPlayerAttacks.Load();
+        MoanPlayerAttacks.Load();
+        ShopKeeperLessThanGuessComments.Load();
+        ShopKeeperWorthlessComments.Load();
+        SingingPlayerAttacks.Load();
+        StoreOwnerAcceptedComments.Load();
+        WorshipPlayerAttacks.Load();
+        FindQuests.Load();
+
+        Towns.Loaded();
+        ItemFactories.Loaded();
+        Stores.Loaded();
+        ItemClasses.Loaded();
+        Mutations.Loaded();
+        ChestTraps.Loaded();
+        Attacks.Loaded();
+        AttackEffects.Loaded();
+        SpellResistantDetections.Loaded();
+        RoomLayouts.Loaded();
+        MonsterSpells.Loaded();
+        Talents.Loaded();
+        AlterActions.Loaded();
+        Symbols.Loaded();
+        MartialArtsAttacks.Loaded();
+        Scripts.Loaded();
+        Dungeons.Loaded();
+        Genders.Loaded();
+        BirthStages.Loaded();
+        Projectiles.Loaded();
+        Patrons.Loaded();
+        Animations.Loaded();
+        FixedArtifacts.Loaded();
+        GameCommands.Loaded();
+        ArtifactBiases.Loaded();
+        InventorySlots.Loaded();
+        MonsterRaces.Loaded();
+        ProjectileGraphics.Loaded();
+        Activations.Loaded();
+        Races.Loaded();
+        StoreCommands.Loaded();
+        Vaults.Loaded();
+        WizardCommands.Loaded();
+        TimedActions.Loaded();
+        CharacterClasses.Loaded();
+        Realms.Loaded();
+        AmuletFlavours.Loaded();
+        MushroomFlavours.Loaded();
+        PotionFlavours.Loaded();
+        RingFlavours.Loaded();
+        RodFlavours.Loaded();
+        ScrollFlavours.Loaded();
+        StaffFlavours.Loaded();
+        WandFlavours.Loaded();
+        ChestTrapConfigurations.Loaded();
+        HelpGroups.Loaded();
+        StoreOwners.Loaded();
+        Spells.Loaded();
+        CastingTypes.Loaded();
+        Rewards.Loaded();
+
+        FloorTileTypes.Loaded();
+        RareItems.Loaded();
+
+        ClassSpells.Loaded();
+        ShopKeeperGoodComments.Loaded();
+        ShopKeeperBargainComments.Loaded();
+        ElvishText.Loaded();
+        FunnyDescriptions.Loaded();
+        FunnyComments.Loaded();
+        HorrificDescriptions.Loaded();
+        InsultPlayerAttacks.Loaded();
+        MoanPlayerAttacks.Loaded();
+        ShopKeeperLessThanGuessComments.Loaded();
+        ShopKeeperWorthlessComments.Loaded();
+        SingingPlayerAttacks.Loaded();
+        StoreOwnerAcceptedComments.Loaded();
+        WorshipPlayerAttacks.Loaded();
+        FindQuests.Loaded();
     }
 }

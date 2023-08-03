@@ -686,7 +686,7 @@ internal class SaveGame
         }
 
         // Load all of the predefined objects.
-        SingletonRepository.Initialize(this);
+        SingletonRepository.Load(this);
 
         // Configure the game.
         Configure(configuration);
@@ -16080,12 +16080,16 @@ internal class SaveGame
                 SingletonRepository.MonsterRaces[Quests[index].RIdx].OnlyGuardian = true;
             }
             j = Rng.RandomBetween(1, DungeonCount) - 1;
+
+            // Find a dungeon that matches the criteria for the quest:
+            // 1. The dungeon cannot start at a level that is past the quest level
+            // 2. The dungeon has to have enough levels that it includes the quest level
+            // 3. 
+            // For this algorithm to work, the MonsterRaces repository collection must be sorted by the LevelFound property.
             while (Quests[index].Level <= SingletonRepository.Dungeons[j].Offset ||
-                   Quests[index].Level >
-                   SingletonRepository.Dungeons[j].MaxLevel + SingletonRepository.Dungeons[j].Offset ||
-                   Quests[index].Level == SingletonRepository.Dungeons[j].FirstLevel +
-                   SingletonRepository.Dungeons[j].Offset || Quests[index].Level ==
-                   SingletonRepository.Dungeons[j].SecondLevel + SingletonRepository.Dungeons[j].Offset)
+                   Quests[index].Level > SingletonRepository.Dungeons[j].MaxLevel + SingletonRepository.Dungeons[j].Offset ||
+                   Quests[index].Level == SingletonRepository.Dungeons[j].FirstLevel + SingletonRepository.Dungeons[j].Offset || 
+                   Quests[index].Level == SingletonRepository.Dungeons[j].SecondLevel + SingletonRepository.Dungeons[j].Offset)
             {
                 j = Rng.RandomBetween(1, DungeonCount) - 1;
             }

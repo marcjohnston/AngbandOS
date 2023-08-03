@@ -1,6 +1,0 @@
-[Serializable]
-internal class BoltsItemClass : ItemClass
-{
-    private BoltsItemClass(SaveGame saveGame) : base(saveGame) { }
-    public override string Description => "Bolts";
-}

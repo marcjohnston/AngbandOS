@@ -26,6 +26,17 @@ internal class SingletonDictionary<T> : SingletonList<T>, IEnumerable<T> // TODO
         return dictionary[typename];
     }
 
+    public T? TryGet(string typename)
+    {
+        if (!dictionary.ContainsKey(typename))
+        {
+            return default;
+        }
+        else
+        {
+            return dictionary[typename];
+        }
+    }
     /// <summary>
     /// Adds an item to the repository.  This is often used to add configured objects.
     /// </summary>
