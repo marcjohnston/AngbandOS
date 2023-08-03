@@ -20,51 +20,6 @@ internal class SaveGame
     public Rng Rng = new Rng();
 
     public const int OneInChanceUpStairsReturnsToTownLevel = 5;
-    public FlaggedAction RedrawMapFlaggedAction { get; }
-    public FlaggedAction RedrawEquippyFlaggedAction { get; }
-    public FlaggedAction RedrawTitleFlaggedAction { get; }
-    public FlaggedAction RedrawLevelFlaggedAction { get; }
-    public FlaggedAction RedrawArmorFlaggedAction { get; }
-    public FlaggedAction RedrawHpFlaggedAction { get; }
-    public FlaggedAction RedrawExpFlaggedAction { get; }
-    public FlaggedAction RedrawCutFlaggedAction { get; }
-    public FlaggedAction RedrawHealthFlaggedAction { get; }
-    public FlaggedAction RedrawManaFlaggedAction { get; }
-    public FlaggedAction RedrawGoldFlaggedAction { get; }
-    public FlaggedAction RedrawDepthFlaggedAction { get; }
-    public FlaggedAction RedrawStunFlaggedAction { get; }
-    public FlaggedAction RedrawHungerFlaggedAction { get; }
-    public FlaggedAction RedrawDTrapFlaggedAction { get; }
-    public FlaggedAction RedrawBlindFlaggedAction { get; }
-    public FlaggedAction RedrawConfusedFlaggedAction { get; }
-    public FlaggedAction RedrawAfraidFlaggedAction { get; }
-    public FlaggedAction RedrawPoisonedFlaggedAction { get; }
-    public FlaggedAction RedrawStateFlaggedAction { get; }
-    public FlaggedAction RedrawSpeedFlaggedAction { get; }
-    public FlaggedAction RedrawStatsFlaggedAction { get; }
-    public FlaggedAction RedrawStudyFlaggedAction { get; }
-    public FlaggedAction RedrawTimeFlaggedAction { get; }
-    public FlaggedAction RedrawPlayerFlaggedAction { get; }
-
-    public FlaggedAction PrExtraRedrawAction { get; }
-    public FlaggedAction PrBasicRedrawAction { get; }
-    public FlaggedAction RedrawAllFlaggedAction { get; }
-
-    public FlaggedAction UpdateBonusesFlaggedAction { get; }
-    public FlaggedAction UpdateDistancesFlaggedAction { get; }
-    public FlaggedAction UpdateHealthFlaggedAction { get; }
-    public FlaggedAction UpdateLightFlaggedAction { get; }
-    public FlaggedAction UpdateManaFlaggedAction { get; }
-    public FlaggedAction UpdateMonstersFlaggedAction { get; }
-    public FlaggedAction RemoveLightFlaggedAction { get; }
-    public FlaggedAction RemoveViewFlaggedAction { get; }
-    public FlaggedAction UpdateScentFlaggedAction { get; }
-    public FlaggedAction UpdateSpellsFlaggedAction { get; }
-    public FlaggedAction UpdateTorchRadiusFlaggedAction { get; }
-    public FlaggedAction UpdateViewFlaggedAction { get; }
-    public FlaggedAction NoticeCombineFlaggedAction { get; }
-    public FlaggedAction NoticeReorderFlaggedAction { get; }
-    public FlaggedAction NoticeCombineAndReorderFlaggedAction { get; }
 
     public SingletonRepository SingletonRepository = new SingletonRepository();
 
@@ -622,57 +577,6 @@ internal class SaveGame
     public SaveGame(Configuration? configuration)
     {
         IsDead = true;
-
-        RedrawMapFlaggedAction = new RedrawMapFlaggedAction(this);
-        RedrawEquippyFlaggedAction = new RedrawEquippyFlaggedAction(this);
-        RedrawTitleFlaggedAction = new RedrawTitleFlaggedAction(this);
-        RedrawLevelFlaggedAction = new RedrawLevelFlaggedAction(this);
-        RedrawArmorFlaggedAction = new RedrawArmorFlaggedAction(this);
-        RedrawHpFlaggedAction = new RedrawHpFlaggedAction(this);
-        RedrawExpFlaggedAction = new RedrawExpFlaggedAction(this);
-        RedrawCutFlaggedAction = new RedrawCutFlaggedAction(this);
-        RedrawHealthFlaggedAction = new RedrawHealthFlaggedAction(this);
-        RedrawManaFlaggedAction = new RedrawManaFlaggedAction(this);
-        RedrawGoldFlaggedAction = new RedrawGoldFlaggedAction(this);
-        RedrawDepthFlaggedAction = new RedrawDepthFlaggedAction(this);
-        RedrawStunFlaggedAction = new RedrawStunFlaggedAction(this);
-        RedrawHungerFlaggedAction = new RedrawHungerFlaggedAction(this);
-        RedrawDTrapFlaggedAction = new RedrawDTrapFlaggedAction(this);
-        RedrawBlindFlaggedAction = new RedrawBlindFlaggedAction(this);
-        RedrawConfusedFlaggedAction = new RedrawConfusedFlaggedAction(this);
-        RedrawAfraidFlaggedAction = new RedrawAfraidFlaggedAction(this);
-        RedrawPoisonedFlaggedAction = new RedrawPoisonedFlaggedAction(this);
-        RedrawStateFlaggedAction = new RedrawStateFlaggedAction(this);
-        RedrawSpeedFlaggedAction = new RedrawSpeedFlaggedAction(this);
-        RedrawStatsFlaggedAction = new RedrawStatsFlaggedAction(this);
-        RedrawStudyFlaggedAction = new RedrawStudyFlaggedAction(this);
-        RedrawTimeFlaggedAction = new RedrawTimeFlaggedAction(this);
-        RedrawPlayerFlaggedAction = new RedrawPlayerFlaggedAction(this);
-        RedrawAllFlaggedAction = new RedrawAllFlaggedAction(this);
-
-        UpdateBonusesFlaggedAction = new UpdateBonusesFlaggedAction(this);
-        UpdateDistancesFlaggedAction = new UpdateDistancesFlaggedAction(this);
-        UpdateHealthFlaggedAction = new UpdateHealthFlaggedAction(this);
-        UpdateLightFlaggedAction = new UpdateLightFlaggedAction(this);
-        UpdateManaFlaggedAction = new UpdateManaFlaggedAction(this);
-        UpdateMonstersFlaggedAction = new UpdateMonstersFlaggedAction(this);
-        RemoveLightFlaggedAction = new RemoveLightFlaggedAction(this);
-        RemoveViewFlaggedAction = new RemoveViewFlaggedAction(this);
-        UpdateScentFlaggedAction = new UpdateScentFlaggedAction(this);
-        UpdateSpellsFlaggedAction = new UpdateSpellsFlaggedAction(this);
-        UpdateTorchRadiusFlaggedAction = new UpdateTorchRadiusFlaggedAction(this);
-        UpdateViewFlaggedAction = new UpdateViewFlaggedAction(this);
-
-        NoticeCombineFlaggedAction = new NoticeCombineFlaggedAction(this);
-        NoticeReorderFlaggedAction = new NoticeReorderFlaggedAction(this);
-
-        NoticeCombineAndReorderFlaggedAction = new GroupSetFlaggedAction(this, NoticeCombineFlaggedAction, NoticeReorderFlaggedAction);
-        PrExtraRedrawAction = new GroupSetFlaggedAction(this,
-            RedrawCutFlaggedAction, RedrawHungerFlaggedAction, RedrawDTrapFlaggedAction, RedrawBlindFlaggedAction, RedrawConfusedFlaggedAction,
-            RedrawAfraidFlaggedAction, RedrawPoisonedFlaggedAction, RedrawStateFlaggedAction, RedrawSpeedFlaggedAction, RedrawStudyFlaggedAction);
-        PrBasicRedrawAction = new GroupSetFlaggedAction(this,
-            RedrawPlayerFlaggedAction, RedrawTitleFlaggedAction, RedrawStatsFlaggedAction, RedrawLevelFlaggedAction, RedrawExpFlaggedAction, RedrawGoldFlaggedAction,
-            RedrawArmorFlaggedAction, RedrawHpFlaggedAction, RedrawManaFlaggedAction, RedrawDepthFlaggedAction, RedrawHealthFlaggedAction, RedrawSpeedFlaggedAction);
 
         // Create the wilderness regions.
         Wilderness = new WildernessRegion[12][];
@@ -1831,8 +1735,8 @@ internal class SaveGame
                 RedrawStuff();
                 TargetWho = 0;
                 HealthTrack(0);
-                RemoveLightFlaggedAction.Check(true);
-                RemoveViewFlaggedAction.Check(true);
+                SingletonRepository.FlaggedActions.Get<RemoveLightFlaggedAction>().Check(true);
+                SingletonRepository.FlaggedActions.Get<RemoveViewFlaggedAction>().Check(true);
                 if (!Playing && !IsDead)
                 {
                     break;
@@ -2047,23 +1951,23 @@ internal class SaveGame
         if (CommandRepeat != 0)
         {
             CommandRepeat = 0;
-            RedrawStateFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<RedrawStateFlaggedAction>().Set();
         }
         if (Resting != 0)
         {
             Resting = 0;
-            RedrawStateFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<RedrawStateFlaggedAction>().Set();
         }
         if (Running != 0)
         {
             Running = 0;
-            UpdateTorchRadiusFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<UpdateTorchRadiusFlaggedAction>().Set();
         }
         if (stopSearch && IsSearching)
         {
             IsSearching = false;
-            UpdateBonusesFlaggedAction.Set();
-            RedrawStateFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<RedrawStateFlaggedAction>().Set();
         }
     }
 
@@ -2427,7 +2331,7 @@ internal class SaveGame
     public void HealthTrack(int mIdx)
     {
         TrackedMonsterIndex = mIdx;
-        RedrawHealthFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
     }
 
     public void MonsterDeath(int mIdx)
@@ -2573,10 +2477,10 @@ internal class SaveGame
                 DeleteObject(y, x);
                 MsgPrint("A magical stairway appears...");
                 CaveSetFeat(y, x, CurDungeon.Tower ? "UpStair" : "DownStair");
-                UpdateScentFlaggedAction.Set();
-                UpdateMonstersFlaggedAction.Set();
-                UpdateLightFlaggedAction.Set();
-                UpdateViewFlaggedAction.Set();
+                SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
+                SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+                SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
+                SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
             }
         }
     }
@@ -2584,7 +2488,7 @@ internal class SaveGame
     public void Winner()
     {
         IsWinner = true;
-        RedrawTitleFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<RedrawTitleFlaggedAction>().Set();
         MsgPrint("*** CONGRATULATIONS ***");
         MsgPrint("You have won the game!");
         MsgPrint("You may retire ('Q') when you are ready.");
@@ -2592,8 +2496,8 @@ internal class SaveGame
 
     public void NoticeStuff()
     {
-        NoticeCombineFlaggedAction.Check();
-        NoticeReorderFlaggedAction.Check();
+        SingletonRepository.FlaggedActions.Get<NoticeCombineFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<NoticeReorderFlaggedAction>().Check();
     }
 
     public void OpenChest(int y, int x, Item chestItem)
@@ -2631,22 +2535,22 @@ internal class SaveGame
 
     public void UpdateStuff()
     {
-        UpdateBonusesFlaggedAction.Check();
-        UpdateTorchRadiusFlaggedAction.Check();
-        UpdateHealthFlaggedAction.Check();
-        UpdateManaFlaggedAction.Check();
-        UpdateSpellsFlaggedAction.Check();
+        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<UpdateTorchRadiusFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<UpdateHealthFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<UpdateSpellsFlaggedAction>().Check();
         if (FullScreenOverlay)
         {
             return;
         }
-        RemoveLightFlaggedAction.Check();
-        RemoveViewFlaggedAction.Check();
-        UpdateViewFlaggedAction.Check();
-        UpdateLightFlaggedAction.Check();
-        UpdateScentFlaggedAction.Check();
-        UpdateDistancesFlaggedAction.Check();
-        UpdateMonstersFlaggedAction.Check();
+        SingletonRepository.FlaggedActions.Get<RemoveLightFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<RemoveViewFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<UpdateDistancesFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Check();
     }
 
     private void ApplyFlavourVisuals()
@@ -2947,30 +2851,30 @@ internal class SaveGame
         PanelBoundsCenter();
         MsgPrint(null);
         CharacterXtra = true;
-        RedrawEquippyFlaggedAction.Set();
-        PrExtraRedrawAction.Set();
-        PrBasicRedrawAction.Set();
-        RedrawAllFlaggedAction.Set(); // TODO: special case ... should be some form of invalidateclient
-        RedrawMapFlaggedAction.Set();
-        UpdateHealthFlaggedAction.Set();
-        UpdateManaFlaggedAction.Set();
-        UpdateSpellsFlaggedAction.Set();
-        UpdateBonusesFlaggedAction.Set();
-        UpdateTorchRadiusFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<RedrawEquippyFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<PrExtraRedrawActionGroupSetFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<PrBasicRedrawActionGroupSetFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<RedrawAllFlaggedAction>().Set(); // TODO: special case ... should be some form of invalidateclient
+        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateHealthFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateSpellsFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateTorchRadiusFlaggedAction>().Set();
         UpdateStuff();
         RedrawStuff();
-        UpdateScentFlaggedAction.Set();
-        UpdateDistancesFlaggedAction.Set();
-        UpdateLightFlaggedAction.Set();
-        UpdateViewFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateDistancesFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
         UpdateStuff();
         RedrawStuff();
         CharacterXtra = false;
-        UpdateHealthFlaggedAction.Set();
-        UpdateManaFlaggedAction.Set();
-        UpdateSpellsFlaggedAction.Set();
-        UpdateBonusesFlaggedAction.Set();
-        NoticeCombineAndReorderFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<UpdateHealthFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateSpellsFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
         NoticeStuff();
         UpdateStuff();
         RedrawStuff();
@@ -3313,7 +3217,7 @@ internal class SaveGame
         }
         while (Energy >= 100 && !Shutdown)
         {
-            RedrawDTrapFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<RedrawDTrapFlaggedAction>().Set();
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
@@ -3349,7 +3253,7 @@ internal class SaveGame
                 if (Resting > 0)
                 {
                     Resting--;
-                    RedrawStateFlaggedAction.Set();
+                    SingletonRepository.FlaggedActions.Get<RedrawStateFlaggedAction>().Set();
                 }
                 EnergyUse = 100;
             }
@@ -3360,7 +3264,7 @@ internal class SaveGame
             else if (CommandRepeat != 0)
             {
                 CommandRepeat--;
-                RedrawStateFlaggedAction.Set();
+                SingletonRepository.FlaggedActions.Get<RedrawStateFlaggedAction>().Set();
                 RedrawStuff();
                 //MessageAppendNextMessage = false;
                 Screen.PrintLine("", 0, 0);
@@ -3485,14 +3389,14 @@ internal class SaveGame
                     }
                 }
             }
-            UpdateMonstersFlaggedAction.Set();
-            RedrawMapFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
         }
         if (GameTime.IsMidnight)
         {
             Religion.DecayFavour();
-            UpdateHealthFlaggedAction.Set();
-            UpdateManaFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<UpdateHealthFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
             foreach (Town town in SingletonRepository.Towns)
             {
                 foreach (Store store in town.Stores)
@@ -3732,7 +3636,7 @@ internal class SaveGame
         TimedBleeding.ProcessWorld();
         TimedHallucinations.ProcessWorld();
 
-        UpdateTorchRadiusFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<UpdateTorchRadiusFlaggedAction>().Set();
         if (HasExperienceDrain)
         {
             if (Rng.RandomLessThan(100) < 10 && ExperiencePoints > 0)
@@ -3798,7 +3702,7 @@ internal class SaveGame
         }
         if (combineFlags)
         {
-            NoticeCombineFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<NoticeCombineFlaggedAction>().Set();
         }
         SenseInventory();
         for (int y = 1; y < CurHgt - 1; y++)
@@ -3869,33 +3773,33 @@ internal class SaveGame
         }
 
         // The Wipe refresh is a special RedrawAction that occurs before all other RedrawActions.
-        RedrawAllFlaggedAction.Check();
+        SingletonRepository.FlaggedActions.Get<RedrawAllFlaggedAction>().Check();
 
-        RedrawMapFlaggedAction.Check();
-        RedrawPlayerFlaggedAction.Check();
-        RedrawEquippyFlaggedAction.Check();
-        RedrawTitleFlaggedAction.Check();
-        RedrawLevelFlaggedAction.Check();
-        RedrawExpFlaggedAction.Check();
-        RedrawStatsFlaggedAction.Check();
-        RedrawArmorFlaggedAction.Check();
-        RedrawHpFlaggedAction.Check();
-        RedrawManaFlaggedAction.Check();
-        RedrawGoldFlaggedAction.Check();
-        RedrawDepthFlaggedAction.Check();
-        RedrawHealthFlaggedAction.Check();
-        RedrawCutFlaggedAction.Check();
-        RedrawStunFlaggedAction.Check();
-        RedrawHungerFlaggedAction.Check();
-        RedrawDTrapFlaggedAction.Check();
-        RedrawBlindFlaggedAction.Check();
-        RedrawConfusedFlaggedAction.Check();
-        RedrawAfraidFlaggedAction.Check();
-        RedrawPoisonedFlaggedAction.Check();
-        RedrawStateFlaggedAction.Check();
-        RedrawSpeedFlaggedAction.Check();
-        RedrawStudyFlaggedAction.Check();
-        RedrawTimeFlaggedAction.Check(true); // TODO: Trigger this from GameTime
+        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<RedrawPlayerFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<RedrawEquippyFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<RedrawTitleFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<RedrawLevelFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<RedrawExpFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<RedrawStatsFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<RedrawArmorFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<RedrawHpFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<RedrawManaFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<RedrawGoldFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<RedrawDepthFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<RedrawCutFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<RedrawStunFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<RedrawHungerFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<RedrawDTrapFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<RedrawBlindFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<RedrawConfusedFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<RedrawAfraidFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<RedrawPoisonedFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<RedrawStateFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<RedrawSpeedFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<RedrawStudyFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get<RedrawTimeFlaggedAction>().Check(true); // TODO: Trigger this from GameTime
     }
 
     private void RegenMonsters()
@@ -3926,7 +3830,7 @@ internal class SaveGame
                 }
                 if (TrackedMonsterIndex == i)
                 {
-                    RedrawHealthFlaggedAction.Set();
+                    SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
                 }
             }
         }
@@ -4149,7 +4053,7 @@ internal class SaveGame
             }
             oPtr.Inscription = feel;
             oPtr.IdentSense = true;
-            NoticeCombineFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<NoticeCombineFlaggedAction>().Set();
             return;
         }
         int price = oPtr.RealValue();
@@ -4170,7 +4074,7 @@ internal class SaveGame
             }
             MsgPrint($"You turn {oName} to {price} coins worth of gold.");
             Gold += price;
-            RedrawGoldFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<RedrawGoldFlaggedAction>().Set();
         }
         oPtr.ItemIncrease(-amt);
         oPtr.ItemDescribe();
@@ -4242,7 +4146,7 @@ internal class SaveGame
         }
         s = oPtr.Count != 1 ? "were" : "was";
         MsgPrint($"Your {oName} ({i.IndexToLabel()}) {s} disenchanted!");
-        UpdateBonusesFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
         return true;
     }
 
@@ -4369,7 +4273,7 @@ internal class SaveGame
             oPtr.IdentCursed = false;
             oPtr.IdentSense = true;
             oPtr.Inscription = "uncursed";
-            UpdateBonusesFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
         }
         if (oPtr.Characteristics.Blessed)
         {
@@ -4421,7 +4325,7 @@ internal class SaveGame
                 MsgPrint($"{your} {oName} {s} disenchanted!");
             }
         }
-        UpdateBonusesFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
         return true;
     }
 
@@ -4535,7 +4439,7 @@ internal class SaveGame
                 TakeHit(Rng.DieRoll(4), "the strain of casting Carnage");
             }
             MoveCursorRelative(MapY, MapX);
-            RedrawHpFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<RedrawHpFlaggedAction>().Set();
             HandleStuff();
             UpdateScreen();
             Pause(msec);
@@ -4684,13 +4588,13 @@ internal class SaveGame
                 TimedBlindness.AddTimer(10 + Rng.DieRoll(10));
             }
         }
-        RemoveLightFlaggedAction.Set();
-        RemoveViewFlaggedAction.Set();
-        UpdateScentFlaggedAction.Set();
-        UpdateLightFlaggedAction.Set();
-        UpdateViewFlaggedAction.Set();
-        UpdateMonstersFlaggedAction.Set();
-        RedrawMapFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<RemoveLightFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<RemoveViewFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
     }
 
     public bool DestroyDoor(int dir)
@@ -5028,8 +4932,8 @@ internal class SaveGame
                 }
             }
         }
-        RedrawDTrapFlaggedAction.Set();
-        RedrawMapFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<RedrawDTrapFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
         if (detect)
         {
             MsgPrint("You sense the presence of traps!");
@@ -5371,14 +5275,14 @@ internal class SaveGame
                 }
             }
         }
-        RemoveLightFlaggedAction.Set();
-        RemoveViewFlaggedAction.Set();
-        UpdateScentFlaggedAction.Set();
-        UpdateLightFlaggedAction.Set();
-        UpdateViewFlaggedAction.Set();
-        UpdateDistancesFlaggedAction.Set();
-        RedrawHealthFlaggedAction.Set();
-        RedrawMapFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<RemoveLightFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<RemoveViewFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateDistancesFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
     }
 
     public void ElderSign()
@@ -5557,8 +5461,8 @@ internal class SaveGame
         {
             return false;
         }
-        UpdateBonusesFlaggedAction.Set();
-        NoticeCombineAndReorderFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
         return true;
     }
 
@@ -5696,8 +5600,8 @@ internal class SaveGame
         oPtr.BecomeFlavourAware();
         oPtr.BecomeKnown();
         oPtr.IdentMental = true;
-        UpdateBonusesFlaggedAction.Set();
-        NoticeCombineAndReorderFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
         HandleStuff();
         string oName = oPtr.Description(true, 3);
 
@@ -5730,8 +5634,8 @@ internal class SaveGame
         }
         oPtr.BecomeFlavourAware();
         oPtr.BecomeKnown();
-        UpdateBonusesFlaggedAction.Set();
-        NoticeCombineAndReorderFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
         string oName = oPtr.Description(true, 3);
 
         MsgPrint($"{oPtr.DescribeLocation()}: {oName} ({oPtr.Label}).");
@@ -5816,8 +5720,8 @@ internal class SaveGame
             oPtr.IdentKnown = false;
             oPtr.IdentSense = false;
         }
-        UpdateBonusesFlaggedAction.Set();
-        NoticeCombineAndReorderFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
         WizDark();
         return true;
     }
@@ -5851,7 +5755,7 @@ internal class SaveGame
                 TakeHit(Rng.DieRoll(3), "the strain of casting Mass Carnage");
             }
             MoveCursorRelative(MapY, MapX);
-            RedrawHpFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<RedrawHpFlaggedAction>().Set();
             HandleStuff();
             UpdateScreen();
             Pause(msec);
@@ -6014,7 +5918,7 @@ internal class SaveGame
                 oPtr.IdentEmpty = false;
             }
         }
-        NoticeCombineAndReorderFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
         return true;
     }
 
@@ -6843,10 +6747,10 @@ internal class SaveGame
         }
         RedrawSingleLocation(MapY, MapX);
         RecenterScreenAroundPlayer();
-        UpdateScentFlaggedAction.Set();
-        UpdateLightFlaggedAction.Set();
-        UpdateViewFlaggedAction.Set();
-        UpdateDistancesFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateDistancesFlaggedAction>().Set();
         HandleStuff();
     }
 
@@ -6932,10 +6836,10 @@ internal class SaveGame
         RedrawSingleLocation(oy, ox);
         RedrawSingleLocation(MapY, MapX);
         RecenterScreenAroundPlayer();
-        UpdateScentFlaggedAction.Set();
-        UpdateLightFlaggedAction.Set();
-        UpdateViewFlaggedAction.Set();
-        UpdateDistancesFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateDistancesFlaggedAction>().Set();
         HandleStuff();
     }
 
@@ -6980,10 +6884,10 @@ internal class SaveGame
                 RedrawSingleLocation(ty, tx);
                 RedrawSingleLocation(MapY, MapX);
                 RecenterScreenAroundPlayer();
-                UpdateScentFlaggedAction.Set();
-                UpdateLightFlaggedAction.Set();
-                UpdateViewFlaggedAction.Set();
-                UpdateDistancesFlaggedAction.Set();
+                SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
+                SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
+                SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
+                SingletonRepository.FlaggedActions.Get<UpdateDistancesFlaggedAction>().Set();
                 HandleStuff();
             }
         }
@@ -7071,11 +6975,11 @@ internal class SaveGame
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
         _ = Project(0, 1, MapY, MapX, 0, SingletonRepository.Projectiles.Get<StoneWallProjectile>(), flg);
-        UpdateScentFlaggedAction.Set();
-        UpdateLightFlaggedAction.Set();
-        UpdateViewFlaggedAction.Set();
-        UpdateMonstersFlaggedAction.Set();
-        RedrawMapFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
     }
 
     public bool WallToMud(int dir)
@@ -7272,7 +7176,7 @@ internal class SaveGame
         }
         MsgPrint($"Your {oName} is damaged!");
         oPtr.BonusArmorClass--;
-        UpdateBonusesFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
         return true;
     }
 
@@ -7335,7 +7239,7 @@ internal class SaveGame
                 oPtr.RandartItemCharacteristics.HeavyCurse = false;
             }
             oPtr.Inscription = "uncursed";
-            UpdateBonusesFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
             cnt++;
         }
         return cnt > 0;
@@ -7521,7 +7425,7 @@ internal class SaveGame
                 if (CommandArgument > 0)
                 {
                     CommandRepeat = CommandArgument - 1;
-                    RedrawStateFlaggedAction.Set();
+                    SingletonRepository.FlaggedActions.Get<RedrawStateFlaggedAction>().Set();
                     CommandArgument = 0;
                 }
 
@@ -7557,9 +7461,9 @@ internal class SaveGame
             CaveSetFeat(y, x, Rng.RandomLessThan(100) < 50 ? "BrokenDoor" : "OpenDoor");
             PlaySound(SoundEffectEnum.OpenDoor);
             MovePlayer(y, x, false);
-            UpdateLightFlaggedAction.Set();
-            UpdateViewFlaggedAction.Set();
-            UpdateDistancesFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<UpdateDistancesFlaggedAction>().Set();
         }
         else if (Rng.RandomLessThan(100) < AbilityScores[Ability.Dexterity].DexTheftAvoidance + ExperienceLevel)
         {
@@ -7792,8 +7696,8 @@ internal class SaveGame
             Mana -= (cost / 2) + Rng.DieRoll(cost / 2);
         }
         // We'll need to redraw
-        RedrawHpFlaggedAction.Set();
-        RedrawManaFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<RedrawHpFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<RedrawManaFlaggedAction>().Set();
         // Check to see if we were successful
         if (Rng.DieRoll(AbilityScores[useStat].Innate) >=
             (difficulty / 2) + Rng.DieRoll(difficulty / 2))
@@ -7822,9 +7726,9 @@ internal class SaveGame
         else
         {
             CaveSetFeat(y, x, "LockedDoor0");
-            UpdateMonstersFlaggedAction.Set();
-            UpdateLightFlaggedAction.Set();
-            UpdateViewFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
             PlaySound(SoundEffectEnum.ShutDoor);
         }
         return false;
@@ -8017,7 +7921,7 @@ internal class SaveGame
         }
 
         // We need to update our light after this
-        UpdateTorchRadiusFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<UpdateTorchRadiusFlaggedAction>().Set();
     }
 
     /// <summary>
@@ -8063,8 +7967,8 @@ internal class SaveGame
             item.RandartItemCharacteristics.Clear();
             item.IdentCursed = true;
             item.IdentBroken = true;
-            UpdateBonusesFlaggedAction.Set();
-            UpdateManaFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
         }
         return true;
     }
@@ -8104,8 +8008,8 @@ internal class SaveGame
             item.RandartItemCharacteristics.Clear();
             item.IdentCursed = true;
             item.IdentBroken = true;
-            UpdateBonusesFlaggedAction.Set();
-            UpdateManaFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
         }
         return true;
     }
@@ -8280,13 +8184,13 @@ internal class SaveGame
         {
             MsgPrint("You channel mana to power the effect.");
             Mana -= cost;
-            RedrawManaFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<RedrawManaFlaggedAction>().Set();
             return true;
         }
         // Use some mana in the attempt, even if we failed
         MsgPrint("You mana is insufficient to power the effect.");
         Mana -= Rng.RandomLessThan(Mana / 2);
-        RedrawManaFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<RedrawManaFlaggedAction>().Set();
         return false;
     }
 
@@ -8598,7 +8502,7 @@ internal class SaveGame
         // the notification
         if (oldTrapsDetected != newTrapsDetected)
         {
-            RedrawDTrapFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<RedrawDTrapFlaggedAction>().Set();
         }
         // If we're leaving an area where we've detected traps at a run, then stop running
         if (Running != 0 && oldTrapsDetected && !newTrapsDetected)
@@ -8621,11 +8525,11 @@ internal class SaveGame
         // Recenter the screen if we have to
         RecenterScreenAroundPlayer();
         // We'll need to update and redraw various things
-        UpdateScentFlaggedAction.Set();
-        UpdateLightFlaggedAction.Set();
-        UpdateViewFlaggedAction.Set();
-        UpdateDistancesFlaggedAction.Set();
-        RedrawMapFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateDistancesFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
         // If we're not actively searching, then have a chance of doing it passively
         if (SkillSearchFrequency >= 50 || 0 == Rng.RandomLessThan(50 - SkillSearchFrequency))
         {
@@ -8704,9 +8608,9 @@ internal class SaveGame
             {
                 MsgPrint("You have picked the lock.");
                 CaveSetFeat(y, x, "OpenDoor");
-                UpdateMonstersFlaggedAction.Set();
-                UpdateLightFlaggedAction.Set();
-                UpdateViewFlaggedAction.Set();
+                SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+                SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
+                SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
                 PlaySound(SoundEffectEnum.LockpickSuccess);
                 // Picking a lock gains you an experience point
                 GainExperience(1);
@@ -8721,9 +8625,9 @@ internal class SaveGame
         else
         {
             CaveSetFeat(y, x, "OpenDoor");
-            UpdateMonstersFlaggedAction.Set();
-            UpdateLightFlaggedAction.Set();
-            UpdateViewFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
             PlaySound(SoundEffectEnum.OpenDoor);
         }
         return more;
@@ -8747,7 +8651,7 @@ internal class SaveGame
             {
                 MsgPrint($"You collect {item.TypeSpecificValue} gold pieces worth of {itemName}.");
                 Gold += item.TypeSpecificValue;
-                RedrawGoldFlaggedAction.Set();
+                SingletonRepository.FlaggedActions.Get<RedrawGoldFlaggedAction>().Set();
                 DeleteObject(item);
             }
             else
@@ -9271,7 +9175,7 @@ internal class SaveGame
                 Disturb(false);
                 return;
             }
-            UpdateTorchRadiusFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<UpdateTorchRadiusFlaggedAction>().Set();
             // Initialise our navigation state
             StartRun(direction);
         }
@@ -9407,15 +9311,15 @@ internal class SaveGame
         if (IsSearching)
         {
             IsSearching = false;
-            UpdateBonusesFlaggedAction.Set();
-            RedrawStateFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<RedrawStateFlaggedAction>().Set();
         }
         else
         {
             IsSearching = true;
-            UpdateBonusesFlaggedAction.Set();
-            RedrawStateFlaggedAction.Set();
-            RedrawSpeedFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<RedrawStateFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<RedrawSpeedFlaggedAction>().Set();
         }
     }
 
@@ -9729,15 +9633,15 @@ internal class SaveGame
                 PanelRow = currentRow;
                 PanelCol = currentCol;
                 PanelBounds();
-                UpdateMonstersFlaggedAction.Set();
-                RedrawMapFlaggedAction.Set();
+                SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+                SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
                 HandleStuff();
             }
         }
         // We've finished, so snap back to the player's location
         RecenterScreenAroundPlayer();
-        UpdateMonstersFlaggedAction.Set();
-        RedrawMapFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
         HandleStuff();
     }
 
@@ -9773,7 +9677,7 @@ internal class SaveGame
         EnergyUse = 50;
         // Drop it
         InvenDrop(item, amount);
-        RedrawEquippyFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<RedrawEquippyFlaggedAction>().Set();
     }
 
     public void DoCmdRun()
@@ -9967,7 +9871,7 @@ internal class SaveGame
         item.Y = MapY;
         item.X = MapX;
         NoteSpot(MapY, MapX);
-        RedrawMapFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
     }
 
     /// <summary>
@@ -10111,10 +10015,10 @@ internal class SaveGame
         // If we successfully made the tunnel,
         if (!GridPassable(y, x))
         {
-            UpdateScentFlaggedAction.Set();
-            UpdateMonstersFlaggedAction.Set();
-            UpdateLightFlaggedAction.Set();
-            UpdateViewFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
         }
         if (!more)
         {
@@ -10167,9 +10071,9 @@ internal class SaveGame
             {
                 MsgPrint("You have picked the lock.");
                 CaveSetFeat(y, x, "OpenDoor");
-                UpdateMonstersFlaggedAction.Set();
-                UpdateLightFlaggedAction.Set();
-                UpdateViewFlaggedAction.Set();
+                SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+                SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
+                SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
                 PlaySound(SoundEffectEnum.LockpickSuccess);
                 GainExperience(1);
             }
@@ -10183,9 +10087,9 @@ internal class SaveGame
         else
         {
             CaveSetFeat(y, x, "OpenDoor");
-            UpdateMonstersFlaggedAction.Set();
-            UpdateLightFlaggedAction.Set();
-            UpdateViewFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
             PlaySound(SoundEffectEnum.OpenDoor);
         }
         return true;
@@ -10347,10 +10251,10 @@ internal class SaveGame
         // Clear the tile
         tile.TileFlags.Clear(GridTile.PlayerMemorized);
         RevertTileToBackground(y, x);
-        UpdateScentFlaggedAction.Set();
-        UpdateMonstersFlaggedAction.Set();
-        UpdateLightFlaggedAction.Set();
-        UpdateViewFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
         return true;
     }
 
@@ -15689,22 +15593,22 @@ internal class SaveGame
     public void DoCmdRedraw()
     {
         Screen.Clear();
-        NoticeCombineAndReorderFlaggedAction.Set();
-        UpdateTorchRadiusFlaggedAction.Set();
-        UpdateHealthFlaggedAction.Set();
-        UpdateManaFlaggedAction.Set();
-        UpdateSpellsFlaggedAction.Set();
-        UpdateBonusesFlaggedAction.Set();
-        RemoveLightFlaggedAction.Set();
-        RemoveViewFlaggedAction.Set();
-        UpdateLightFlaggedAction.Set();
-        UpdateViewFlaggedAction.Set();
-        UpdateMonstersFlaggedAction.Set();
-        RedrawMapFlaggedAction.Set();
-        RedrawEquippyFlaggedAction.Set();
-        PrExtraRedrawAction.Set();
-        PrBasicRedrawAction.Set();
-        RedrawAllFlaggedAction.Set(); // TODO: Special case ... should be some form of invalidateclient
+        SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateTorchRadiusFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateHealthFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateSpellsFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<RemoveLightFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<RemoveViewFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<RedrawEquippyFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<PrExtraRedrawActionGroupSetFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<PrBasicRedrawActionGroupSetFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<RedrawAllFlaggedAction>().Set(); // TODO: Special case ... should be some form of invalidateclient
         HandleStuff();
         UpdateScreen();
     }
@@ -15968,7 +15872,7 @@ internal class SaveGame
         {
             SetInventoryItem(i, null);
         }
-        NoticeReorderFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<NoticeReorderFlaggedAction>().Set();
     }
 
     private const int _maxQuests = 50;
@@ -16346,8 +16250,8 @@ internal class SaveGame
         PanelRowMin = prowMin;
         PanelColMin = pcolMin;
         PanelBoundsCenter();
-        UpdateMonstersFlaggedAction.Set();
-        RedrawMapFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
     }
 
     public void ChangeRace(Race newRace)
@@ -16379,8 +16283,8 @@ internal class SaveGame
         }
         CheckExperience();
         MaxLevelGained = ExperienceLevel;
-        PrBasicRedrawAction.Set();
-        UpdateBonusesFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<PrBasicRedrawActionGroupSetFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
         HandleStuff();
     }
 
@@ -16408,18 +16312,18 @@ internal class SaveGame
         {
             MaxExperienceGained = ExperiencePoints;
         }
-        RedrawExpFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<RedrawExpFlaggedAction>().Set();
         HandleStuff();
         while (ExperienceLevel > 1 && ExperiencePoints < Constants.PlayerExp[ExperienceLevel - 2] * ExperienceMultiplier / 100L)
         {
             ExperienceLevel--;
             RedrawSingleLocation(MapY, MapX);
-            UpdateHealthFlaggedAction.Set();
-            UpdateManaFlaggedAction.Set();
-            UpdateSpellsFlaggedAction.Set();
-            UpdateBonusesFlaggedAction.Set();
-            RedrawTitleFlaggedAction.Set();
-            RedrawLevelFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<UpdateHealthFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<UpdateSpellsFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<RedrawTitleFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<RedrawLevelFlaggedAction>().Set();
             HandleStuff();
         }
         while (ExperienceLevel < Constants.PyMaxLevel && ExperiencePoints >= Constants.PlayerExp[ExperienceLevel - 1] * ExperienceMultiplier / 100L)
@@ -16447,13 +16351,13 @@ internal class SaveGame
             }
             PlaySound(SoundEffectEnum.LevelGain);
             MsgPrint($"Welcome to level {ExperienceLevel}.");
-            UpdateHealthFlaggedAction.Set();
-            UpdateManaFlaggedAction.Set();
-            UpdateSpellsFlaggedAction.Set();
-            UpdateBonusesFlaggedAction.Set();
-            RedrawTitleFlaggedAction.Set();
-            RedrawLevelFlaggedAction.Set();
-            RedrawExpFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<UpdateHealthFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<UpdateSpellsFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<RedrawTitleFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<RedrawLevelFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<RedrawExpFlaggedAction>().Set();
             HandleStuff();
             if (levelReward)
             {
@@ -16618,7 +16522,7 @@ internal class SaveGame
         {
             AbilityScores[stat].Innate = cur;
             AbilityScores[stat].InnateMax = max;
-            UpdateBonusesFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
         }
         return res;
     }
@@ -17093,7 +16997,7 @@ internal class SaveGame
         }
         if (oldHealth != Health)
         {
-            RedrawHpFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<RedrawHpFlaggedAction>().Set();
         }
     }
 
@@ -17123,7 +17027,7 @@ internal class SaveGame
         }
         if (oldMana != Mana)
         {
-            RedrawManaFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<RedrawManaFlaggedAction>().Set();
         }
     }
 
@@ -17152,8 +17056,8 @@ internal class SaveGame
         {
             PlayerHp[i] = PlayerHp[i - 1] + PlayerHp[i];
         }
-        UpdateHealthFlaggedAction.Set();
-        RedrawHpFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<UpdateHealthFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<RedrawHpFlaggedAction>().Set();
         HandleStuff();
     }
 
@@ -17162,7 +17066,7 @@ internal class SaveGame
         if (AbilityScores[stat].Innate != AbilityScores[stat].InnateMax)
         {
             AbilityScores[stat].Innate = AbilityScores[stat].InnateMax;
-            UpdateBonusesFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
             return true;
         }
         return false;
@@ -17178,7 +17082,7 @@ internal class SaveGame
                 Health = MaxHealth;
                 FractionalHealth = 0;
             }
-            RedrawHpFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<RedrawHpFlaggedAction>().Set();
             if (num < 5)
             {
                 MsgPrint("You feel a little better.");
@@ -17266,7 +17170,7 @@ internal class SaveGame
                 {
                     item.Inscription = feel;
                 }
-                NoticeCombineAndReorderFlaggedAction.Set();
+                SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
             }
         }
     }
@@ -17382,8 +17286,8 @@ internal class SaveGame
             return false;
         }
         Disturb(false);
-        UpdateBonusesFlaggedAction.Set();
-        RedrawHungerFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<RedrawHungerFlaggedAction>().Set();
         HandleStuff();
         return true;
     }
@@ -17403,7 +17307,7 @@ internal class SaveGame
         AbilityScores[ii].Innate = cur2;
         AbilityScores[jj].InnateMax = max1;
         AbilityScores[jj].Innate = cur1;
-        UpdateBonusesFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
     }
 
     public bool SpellOkay(Spell sPtr, bool known)
@@ -17472,7 +17376,7 @@ internal class SaveGame
             }
         }
         Health -= damage;
-        RedrawHpFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<RedrawHpFlaggedAction>().Set();
         if (penInvuln)
         {
             MsgPrint("The attack penetrates your shield of invulnerability!");
@@ -17652,7 +17556,7 @@ internal class SaveGame
             {
                 AbilityScores[which].InnateMax = value;
             }
-            UpdateBonusesFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
             return true;
         }
         return false;
@@ -17683,7 +17587,7 @@ internal class SaveGame
             {
                 jPtr.Absorb(oPtr);
                 WeightCarried += oPtr.Count * oPtr.Weight;
-                UpdateBonusesFlaggedAction.Set();
+                SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
                 return j;
             }
         }
@@ -17730,8 +17634,8 @@ internal class SaveGame
         oPtr.HoldingMonsterIndex = 0;
         WeightCarried += oPtr.Count * oPtr.Weight;
         _invenCnt++;
-        UpdateBonusesFlaggedAction.Set();
-        NoticeCombineAndReorderFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
         return i;
     }
 
@@ -17871,9 +17775,9 @@ internal class SaveGame
         {
             oPtr.Count += num;
             WeightCarried += num * oPtr.Weight;
-            UpdateBonusesFlaggedAction.Set();
-            UpdateManaFlaggedAction.Set();
-            NoticeCombineAndReorderFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
         }
     }
 
@@ -17901,9 +17805,9 @@ internal class SaveGame
         else
         {
             SetInventoryItem(item, null);
-            UpdateBonusesFlaggedAction.Set();
-            UpdateTorchRadiusFlaggedAction.Set();
-            UpdateManaFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<UpdateTorchRadiusFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
         }
     }
 
@@ -18832,7 +18736,7 @@ internal class SaveGame
                 }
             }
         }
-        RedrawMapFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
     }
 
     /// <summary>
@@ -19270,12 +19174,12 @@ internal class SaveGame
                 }
             }
         }
-        RemoveLightFlaggedAction.Set();
-        RemoveViewFlaggedAction.Set();
-        UpdateLightFlaggedAction.Set();
-        UpdateViewFlaggedAction.Set();
-        UpdateMonstersFlaggedAction.Set();
-        RedrawMapFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<RemoveLightFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<RemoveViewFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
     }
 
     public void WizLight()
@@ -19306,8 +19210,8 @@ internal class SaveGame
                 }
             }
         }
-        UpdateMonstersFlaggedAction.Set();
-        RedrawMapFlaggedAction.Set();
+        SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
     }
 
     private ColourEnum DimColour(ColourEnum a)
@@ -19795,7 +19699,7 @@ internal class SaveGame
         MonsterRace rPtr = mPtr.Race;
         if (TrackedMonsterIndex == mIdx)
         {
-            RedrawHealthFlaggedAction.Set();
+            SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
         }
         mPtr.SleepLevel = 0;
         mPtr.Health -= dam;
@@ -20578,7 +20482,7 @@ internal class SaveGame
                 RedrawSingleLocation(fy, fx);
                 if (TrackedMonsterIndex == mIdx)
                 {
-                    RedrawHealthFlaggedAction.Set();
+                    SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
                 }
                 if (rPtr.Knowledge.RSights < Constants.MaxShort)
                 {
@@ -20621,7 +20525,7 @@ internal class SaveGame
                 RedrawSingleLocation(fy, fx);
                 if (TrackedMonsterIndex == mIdx)
                 {
-                    RedrawHealthFlaggedAction.Set();
+                    SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
                 }
             }
         }

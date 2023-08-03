@@ -41,11 +41,11 @@ internal class ViewCharacterScript : Script
         SaveGame.SetBackground(BackgroundImageEnum.Overhead);
         SaveGame.Screen.Restore(savedScreen);
         SaveGame.FullScreenOverlay = false;
-        SaveGame.RedrawMapFlaggedAction.Set();
-        SaveGame.RedrawEquippyFlaggedAction.Set();
-        SaveGame.PrExtraRedrawAction.Set();
-        SaveGame.PrBasicRedrawAction.Set();
-        SaveGame.RedrawAllFlaggedAction.Set(); // TODO: special case ... should be some form of invalidate
+        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawEquippyFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<PrExtraRedrawActionGroupSetFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<PrBasicRedrawActionGroupSetFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawAllFlaggedAction>().Set(); // TODO: special case ... should be some form of invalidate
         SaveGame.HandleStuff();
         return false;
     }

@@ -27,7 +27,7 @@ internal class HalluRandomMutation : Mutation
             return;
         }
         saveGame.Disturb(false);
-        saveGame.PrExtraRedrawAction.Set();
+        saveGame.SingletonRepository.FlaggedActions.Get<PrExtraRedrawActionGroupSetFlaggedAction>().Set();
         saveGame.TimedHallucinations.AddTimer(SaveGame.Rng.RandomLessThan(50) + 20);
     }
 }

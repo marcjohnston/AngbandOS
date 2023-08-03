@@ -34,10 +34,10 @@ internal class UnPowerAttackEffect : AttackEffect
                 }
                 if (SaveGame.TrackedMonsterIndex == monsterIndex)
                 {
-                    SaveGame.RedrawHealthFlaggedAction.Set();
+                    SaveGame.SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
                 }
                 item.TypeSpecificValue = 0;
-                SaveGame.NoticeCombineAndReorderFlaggedAction.Set();
+                SaveGame.SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
                 return;
             }
         }

@@ -33,7 +33,7 @@ internal class TakeOffScript : Script
         // Take off the item
         SaveGame.EnergyUse = 50;
         SaveGame.InvenTakeoff(item, 255);
-        SaveGame.RedrawEquippyFlaggedAction.Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawEquippyFlaggedAction>().Set();
         return false;
     }
 }

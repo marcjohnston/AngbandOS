@@ -57,7 +57,7 @@ internal class EatMagicActiveMutation : Mutation
         {
             saveGame.Mana = saveGame.MaxMana;
         }
-        saveGame.NoticeCombineAndReorderFlaggedAction.Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
     }
 
     public override string ActivationSummary(int lvl)

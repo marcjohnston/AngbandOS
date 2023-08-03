@@ -30,9 +30,9 @@ internal abstract class EquipmentInventorySlot : BaseInventorySlot
         }
         int foundSlot = FindInventorySlot(oPtr);
         SaveGame.SetInventoryItem(foundSlot, null);
-        SaveGame.UpdateBonusesFlaggedAction.Set();
-        SaveGame.UpdateTorchRadiusFlaggedAction.Set();
-        SaveGame.UpdateManaFlaggedAction.Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateTorchRadiusFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
     }
 
     /// <summary>

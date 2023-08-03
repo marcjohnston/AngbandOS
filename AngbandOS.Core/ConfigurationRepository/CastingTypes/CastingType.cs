@@ -148,7 +148,7 @@ internal class CastingType : IConfigurationRepository
                 SaveGame.DecreaseAbilityScore(Ability.Constitution, 15 + SaveGame.Rng.DieRoll(10), perm);
             }
         }
-        SaveGame.RedrawManaFlaggedAction.Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawManaFlaggedAction>().Set();
     }
 
     /// <summary>

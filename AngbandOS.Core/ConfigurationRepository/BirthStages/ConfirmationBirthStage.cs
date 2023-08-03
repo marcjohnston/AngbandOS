@@ -41,8 +41,8 @@ internal class ConfirmationBirthStage : BirthStage
         SaveGame.SpellOrder.Clear();
 
         SaveGame.GooPatron = SaveGame.SingletonRepository.Patrons.ToWeightedRandom().Choose();
-        SaveGame.UpdateHealthFlaggedAction.Set();
-        SaveGame.UpdateBonusesFlaggedAction.Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateHealthFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
         SaveGame.UpdateStuff();
         SaveGame.Health = SaveGame.MaxHealth;
         SaveGame.Mana = SaveGame.MaxMana;

@@ -253,10 +253,10 @@ internal abstract class Projectile : IConfigurationRepository
                                 {
                                     SaveGame.RevertTileToBackground(y, x);
                                 }
-                                SaveGame.UpdateScentFlaggedAction.Set();
-                                SaveGame.UpdateMonstersFlaggedAction.Set();
-                                SaveGame.UpdateLightFlaggedAction.Set();
-                                SaveGame.UpdateViewFlaggedAction.Set();
+                                SaveGame.SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
+                                SaveGame.SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+                                SaveGame.SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
+                                SaveGame.SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
                             }
                             else
                             {
@@ -676,7 +676,7 @@ internal abstract class Projectile : IConfigurationRepository
         {
             if (SaveGame.TrackedMonsterIndex == cPtr.MonsterIndex)
             {
-                SaveGame.RedrawHealthFlaggedAction.Set();
+                SaveGame.SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
             }
             mPtr.SleepLevel = 0;
             mPtr.Health -= dam;

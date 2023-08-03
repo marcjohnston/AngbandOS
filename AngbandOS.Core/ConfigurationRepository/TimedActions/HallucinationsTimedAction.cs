@@ -22,8 +22,8 @@ internal class HallucinationsTimedAction : TimedAction
     }
     protected override void Noticed()
     {
-        SaveGame.RedrawMapFlaggedAction.Set();
-        SaveGame.UpdateMonstersFlaggedAction.Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
         base.Noticed();
     }
 }

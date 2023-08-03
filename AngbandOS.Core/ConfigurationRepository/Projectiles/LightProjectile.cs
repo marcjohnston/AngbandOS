@@ -102,8 +102,8 @@ internal class LightProjectile : Projectile
         {
             SaveGame.TimedEtherealness.SetValue();
             SaveGame.MsgPrint("The light forces you out of your incorporeal shadow form.");
-            SaveGame.RedrawMapFlaggedAction.Set();
-            SaveGame.UpdateMonstersFlaggedAction.Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
         }
         return true;
     }

@@ -21,7 +21,7 @@ internal class FearTimedAction : TimedAction
     }
     protected override void Noticed()
     {
-        SaveGame.RedrawAfraidFlaggedAction.Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawAfraidFlaggedAction>().Set();
         base.Noticed();
     }
 }

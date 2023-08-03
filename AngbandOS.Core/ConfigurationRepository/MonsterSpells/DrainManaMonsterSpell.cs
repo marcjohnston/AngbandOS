@@ -52,7 +52,7 @@ internal class DrainManaMonsterSpell : MonsterSpell
             {
                 saveGame.Mana -= r1;
             }
-            saveGame.RedrawManaFlaggedAction.Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawManaFlaggedAction>().Set();
             if (monster.Health < monster.MaxHealth)
             {
                 monster.Health += 6 * r1;
@@ -62,7 +62,7 @@ internal class DrainManaMonsterSpell : MonsterSpell
                 }
                 if (saveGame.TrackedMonsterIndex == monster.GetMonsterIndex())
                 {
-                    saveGame.RedrawHealthFlaggedAction.Set();
+                    SaveGame.SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
                 }
                 if (seenByPlayer)
                 {
@@ -104,7 +104,7 @@ internal class DrainManaMonsterSpell : MonsterSpell
                 }
                 if (saveGame.TrackedMonsterIndex == monster.GetMonsterIndex())
                 {
-                    saveGame.RedrawHealthFlaggedAction.Set();
+                    SaveGame.SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
                 }
                 if (seen)
                 {

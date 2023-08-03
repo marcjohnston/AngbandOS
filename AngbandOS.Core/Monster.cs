@@ -508,7 +508,7 @@ internal class Monster : IItemContainer
         }
         this.SaveGame.MsgPrint("The exposure to eldritch forces warps you.");
         SaveGame.Dna.GainMutation();
-        this.SaveGame.UpdateBonusesFlaggedAction.Set();
+        this.SaveGame.SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
         this.SaveGame.HandleStuff();
     }
 
@@ -1170,10 +1170,10 @@ internal class Monster : IItemContainer
         // Update the view if necessary
         if (doView)
         {
-            SaveGame.UpdateScentFlaggedAction.Set();
-            SaveGame.UpdateMonstersFlaggedAction.Set();
-            SaveGame.UpdateLightFlaggedAction.Set();
-            SaveGame.UpdateViewFlaggedAction.Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
         }
         // If we did something unusual and the player saw, let them remember we can do that
         if (IsVisible)
@@ -1808,7 +1808,7 @@ internal class Monster : IItemContainer
         // Track the monster that has just taken damage
         if (saveGame.TrackedMonsterIndex == GetMonsterIndex())
         {
-            saveGame.RedrawHealthFlaggedAction.Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
         }
         SleepLevel = 0;
         // Take the damage

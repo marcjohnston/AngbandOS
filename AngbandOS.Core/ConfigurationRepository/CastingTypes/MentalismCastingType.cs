@@ -89,7 +89,7 @@ internal class MentalismCastingType : CastingType
                 SaveGame.DecreaseAbilityScore(Ability.Wisdom, 15 + SaveGame.Rng.DieRoll(10), perm);
             }
         }
-        SaveGame.RedrawManaFlaggedAction.Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawManaFlaggedAction>().Set();
     }
 
     private bool GetMentalismTalent(out int sn)

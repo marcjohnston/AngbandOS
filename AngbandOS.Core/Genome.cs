@@ -205,7 +205,7 @@ internal class Genome // TODO: This is just a container
             _possessed.Add(mutation);
             mutation.OnGain(this);
             SaveGame.MsgPrint(mutation.GainMessage);
-            SaveGame.UpdateBonusesFlaggedAction.Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
             SaveGame.HandleStuff();
             return;
         }
@@ -241,7 +241,7 @@ internal class Genome // TODO: This is just a container
             _notPossessed.Add(mutation);
             SaveGame.MsgPrint(mutation.LoseMessage);
         } while (_possessed.Count > 0);
-        SaveGame.UpdateBonusesFlaggedAction.Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
         SaveGame.HandleStuff();
     }
 
@@ -273,7 +273,7 @@ internal class Genome // TODO: This is just a container
             return;
         }
         SaveGame.MsgPrint("Oops! Fell out of mutation list!");
-        SaveGame.UpdateBonusesFlaggedAction.Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
         SaveGame.HandleStuff();
     }
 

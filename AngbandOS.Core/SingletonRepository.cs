@@ -13,6 +13,7 @@ namespace AngbandOS.Core;
 /// </summary>
 internal class SingletonRepository
 {
+    public FlaggedActionsRepositoryCollection FlaggedActions;
     public TownsRepositoryCollection Towns;
     public ItemFactoriesRepositoryCollection ItemFactories;
     public StoresRepositoryCollection Stores;
@@ -88,6 +89,7 @@ internal class SingletonRepository
     /// <param name="saveGame"></param>
     public void Load(SaveGame saveGame)
     {
+        FlaggedActions = new FlaggedActionsRepositoryCollection(saveGame);
         Towns = new TownsRepositoryCollection(saveGame);
         ItemFactories = new ItemFactoriesRepositoryCollection(saveGame);
         Stores = new StoresRepositoryCollection(saveGame);
@@ -158,6 +160,7 @@ internal class SingletonRepository
         WorshipPlayerAttacks = new WorshipPlayerAttacksRepositoryCollection(saveGame);
         FindQuests = new FindQuestsRepositoryCollection(saveGame);
 
+        FlaggedActions.Load();
         Towns.Load();
         ItemFactories.Load();
         Stores.Load();
@@ -228,6 +231,7 @@ internal class SingletonRepository
         WorshipPlayerAttacks.Load();
         FindQuests.Load();
 
+        FlaggedActions.Loaded();
         Towns.Loaded();
         ItemFactories.Loaded();
         Stores.Loaded();

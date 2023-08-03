@@ -27,9 +27,9 @@ internal class MakeDoorProjectile : Projectile
         {
             obvious = true;
         }
-        SaveGame.UpdateMonstersFlaggedAction.Set();
-        SaveGame.UpdateLightFlaggedAction.Set();
-        SaveGame.UpdateViewFlaggedAction.Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
         return obvious;
     }
 

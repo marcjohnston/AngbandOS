@@ -36,7 +36,7 @@ internal class HealMonsterSpell : MonsterSpell
         }
         if (saveGame.TrackedMonsterIndex == monster.GetMonsterIndex())
         {
-            saveGame.RedrawHealthFlaggedAction.Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
         }
         if (monster.FearLevel != 0)
         {
@@ -64,7 +64,7 @@ internal class HealMonsterSpell : MonsterSpell
         }
         if (saveGame.TrackedMonsterIndex == monster.GetMonsterIndex())
         {
-            saveGame.RedrawHealthFlaggedAction.Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
         }
         if (monster.FearLevel != 0)
         {

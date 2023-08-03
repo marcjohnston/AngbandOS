@@ -58,9 +58,9 @@ internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IS
         {
             oPtr.Count += num;
             SaveGame.WeightCarried += num * oPtr.Weight;
-            SaveGame.UpdateBonusesFlaggedAction.Set();
-            SaveGame.UpdateManaFlaggedAction.Set();
-            SaveGame.NoticeCombineAndReorderFlaggedAction.Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
         }
     }
 

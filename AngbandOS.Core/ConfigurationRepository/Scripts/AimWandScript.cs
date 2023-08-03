@@ -77,7 +77,7 @@ internal class AimWandScript : Script
             ident = true;
         }
 
-        SaveGame.NoticeCombineAndReorderFlaggedAction.Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
         // Mark the wand as having been tried
         item.ObjectTried();
         // If we just discovered the item's flavour, mark it as so

@@ -26,9 +26,9 @@ internal class KillDoorProjectile : Projectile
                 obvious = true;
                 if (cPtr.FeatureType.IsClosedDoor)
                 {
-                    SaveGame.UpdateMonstersFlaggedAction.Set();
-                    SaveGame.UpdateLightFlaggedAction.Set();
-                    SaveGame.UpdateViewFlaggedAction.Set();
+                    SaveGame.SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+                    SaveGame.SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
+                    SaveGame.SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
                 }
             }
             cPtr.TileFlags.Clear(GridTile.PlayerMemorized);

@@ -39,7 +39,7 @@ internal class OldHealProjectile : Projectile
         }
         if (SaveGame.TrackedMonsterIndex == cPtr.MonsterIndex)
         {
-            SaveGame.RedrawHealthFlaggedAction.Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
         }
         string? note = " looks healthier.";
         dam = 0;

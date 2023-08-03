@@ -73,7 +73,7 @@ internal class UseStaffScript : Script
         // Do the specific effect for the type of staff
         staffItem.UseStaff(useStaffEventArgs);
 
-        SaveGame.NoticeCombineAndReorderFlaggedAction.Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
         // We might now know what the staff does
         item.ObjectTried();
         if (useStaffEventArgs.Identified && !item.IsFlavourAware())

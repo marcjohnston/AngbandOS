@@ -61,7 +61,7 @@ internal class EatGoldAttackEffect : AttackEffect
                 SaveGame.MsgPrint("Your purse feels lighter.");
                 SaveGame.MsgPrint("All of your coins were stolen!");
             }
-            SaveGame.RedrawGoldFlaggedAction.Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawGoldFlaggedAction>().Set();
             blinked = true;
         }
     }

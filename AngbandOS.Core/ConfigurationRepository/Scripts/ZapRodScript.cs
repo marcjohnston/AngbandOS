@@ -83,7 +83,7 @@ internal class ZapRodScript : Script
         RodItemFactory rodItem = (RodItemFactory)item.Factory;
         ZapRodEvent zapRodEvent = new ZapRodEvent(item, dir);
         rodItem.Execute(zapRodEvent);
-        SaveGame.NoticeCombineAndReorderFlaggedAction.Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
         // We may have just discovered what the rod does
         item.ObjectTried();
         if (identified && !item.IsFlavourAware())

@@ -157,7 +157,7 @@ internal class TarotSpellTarotDraw : Spell
             {
                 SaveGame.MsgPrint("You are cured of all mutations.");
                 SaveGame.Dna.LoseAllMutations();
-                SaveGame.UpdateBonusesFlaggedAction.Set();
+                SaveGame.SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
                 SaveGame.HandleStuff();
             }
         }

@@ -312,13 +312,13 @@ internal abstract class Store : IItemFilter, IConfigurationRepository
         SaveGame.MsgPrint(null); // TODO: This is a PrWipeRedrawAction
         SaveGame.Screen.Clear();// TODO: This is a PrWipeRedrawAction
         SaveGame.SetBackground(BackgroundImageEnum.Overhead);
-        SaveGame.UpdateLightFlaggedAction.Set();
-        SaveGame.UpdateViewFlaggedAction.Set();
-        SaveGame.UpdateMonstersFlaggedAction.Set();
-        SaveGame.PrExtraRedrawAction.Set();
-        SaveGame.PrBasicRedrawAction.Set();
-        SaveGame.RedrawMapFlaggedAction.Set();
-        SaveGame.RedrawEquippyFlaggedAction.Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<PrExtraRedrawActionGroupSetFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<PrBasicRedrawActionGroupSetFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawEquippyFlaggedAction>().Set();
     }
 
     public virtual void StoreInit()
@@ -861,8 +861,8 @@ internal abstract class Store : IItemFilter, IConfigurationRepository
             SaveGame.MsgPrint("You eat a hearty breakfast.");
         }
         SaveGame.Religion.DecayFavour();
-        SaveGame.UpdateHealthFlaggedAction.Set();
-        SaveGame.UpdateManaFlaggedAction.Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateHealthFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
         SaveGame.SetFood(Constants.PyFoodMax - 1);
         foreach (Town town in SaveGame.SingletonRepository.Towns)
         {
@@ -981,8 +981,8 @@ internal abstract class Store : IItemFilter, IConfigurationRepository
         {
             SaveGame.MsgPrint($"{deityName} is delighted by your sacrifice!");
         }
-        SaveGame.UpdateHealthFlaggedAction.Set();
-        SaveGame.UpdateManaFlaggedAction.Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateHealthFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
     }
 
     protected void SayComment_1()
@@ -1367,7 +1367,7 @@ internal abstract class Store : IItemFilter, IConfigurationRepository
             SaveGame.MsgPrint($"You can learn {SaveGame.SpareSpellSlots} more {spellType}{plural}.");
         }
         SaveGame.OldSpareSpellSlots = SaveGame.SpareSpellSlots;
-        SaveGame.RedrawStudyFlaggedAction.Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawStudyFlaggedAction>().Set();
     }
 
     private void StoreProcessCommand()
@@ -1900,7 +1900,7 @@ internal abstract class Store : IItemFilter, IConfigurationRepository
                     oPtr.BecomeFlavourAware();
                     oPtr.BecomeKnown();
                 }
-                SaveGame.NoticeCombineAndReorderFlaggedAction.Set();
+                SaveGame.SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
                 qPtr = oPtr.Clone();
                 qPtr.Count = amt;
                 int value;
