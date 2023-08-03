@@ -496,7 +496,7 @@ internal abstract class Store : IItemFilter, IConfigurationRepository
     {
         get
         {
-            string storeName = SaveGame.SingletonRepository.FloorTileTypes[FeatureType].Description;
+            string storeName = SaveGame.SingletonRepository.Tiles[FeatureType].Description;
             return $"{storeName} ({_owner.MaxCost})";
         }
     }

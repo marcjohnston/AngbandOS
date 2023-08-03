@@ -64,7 +64,7 @@ internal class SingletonRepository
     public SpellsRepositoryCollection Spells;
     public CastingTypesRepositoryCollection CastingTypes;
     public RewardsRepositoryCollection Rewards;
-    public TilesRepositoryCollection FloorTileTypes;
+    public TilesRepositoryCollection Tiles;
     public RareItemsRepositoryCollection RareItems;
     public ClassSpellsRepositoryCollection ClassSpells;
     public ShopKeeperGoodCommentsRepositoryCollection ShopKeeperGoodComments;
@@ -141,7 +141,7 @@ internal class SingletonRepository
         CastingTypes = new CastingTypesRepositoryCollection(saveGame);
         Rewards = new RewardsRepositoryCollection(saveGame);
 
-        FloorTileTypes = new TilesRepositoryCollection(saveGame);
+        Tiles = new TilesRepositoryCollection(saveGame);
         RareItems = new RareItemsRepositoryCollection(saveGame);
 
         ClassSpells = new ClassSpellsRepositoryCollection(saveGame);
@@ -212,7 +212,7 @@ internal class SingletonRepository
         CastingTypes.Load();
         Rewards.Load();
 
-        FloorTileTypes.Load();
+        Tiles.Load();
         RareItems.Load();
 
         ClassSpells.Load();
@@ -283,7 +283,7 @@ internal class SingletonRepository
         CastingTypes.Loaded();
         Rewards.Loaded();
 
-        FloorTileTypes.Loaded();
+        Tiles.Loaded();
         RareItems.Loaded();
 
         ClassSpells.Loaded();

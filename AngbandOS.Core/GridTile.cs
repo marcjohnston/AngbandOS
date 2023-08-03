@@ -21,8 +21,8 @@ internal class GridTile : IItemContainer
         SaveGame = saveGame;
         X = x;
         Y = y;
-        BackgroundFeature = SaveGame.SingletonRepository.FloorTileTypes["Nothing"];
-        FeatureType = SaveGame.SingletonRepository.FloorTileTypes["Nothing"];
+        BackgroundFeature = SaveGame.SingletonRepository.Tiles["Nothing"];
+        FeatureType = SaveGame.SingletonRepository.Tiles["Nothing"];
     }
 
     /// <summary>
@@ -185,7 +185,7 @@ internal class GridTile : IItemContainer
 
     public void SetBackgroundFeature(string name)
     {
-        BackgroundFeature = SaveGame.SingletonRepository.FloorTileTypes[name];
+        BackgroundFeature = SaveGame.SingletonRepository.Tiles[name];
     }
 
     /// <summary>
@@ -194,7 +194,7 @@ internal class GridTile : IItemContainer
     /// <param name="name"> </param>
     public void SetFeature(string name)
     {
-        FeatureType = SaveGame.SingletonRepository.FloorTileTypes[name];
+        FeatureType = SaveGame.SingletonRepository.Tiles[name];
     }
 
     public override string ToString()
