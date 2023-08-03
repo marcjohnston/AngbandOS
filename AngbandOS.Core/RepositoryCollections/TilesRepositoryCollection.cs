@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class FloorTileTypesRepositoryCollection : KeyedDictionaryRepositoryCollection<string, Tile>
+internal class TilesRepositoryCollection : KeyedDictionaryRepositoryCollection<string, Tile>
 {
-    public FloorTileTypesRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
+    public TilesRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 }

@@ -63,7 +63,7 @@ internal class SingletonRepository
     public SpellsRepositoryCollection Spells;
     public CastingTypesRepositoryCollection CastingTypes;
     public RewardsRepositoryCollection Rewards;
-    public FloorTileTypesRepositoryCollection FloorTileTypes;
+    public TilesRepositoryCollection FloorTileTypes;
     public RareItemsRepositoryCollection RareItems;
     public ClassSpellsRepositoryCollection ClassSpells;
     public ShopKeeperGoodCommentsRepositoryCollection ShopKeeperGoodComments;
@@ -139,7 +139,7 @@ internal class SingletonRepository
         CastingTypes = new CastingTypesRepositoryCollection(saveGame);
         Rewards = new RewardsRepositoryCollection(saveGame);
 
-        FloorTileTypes = new FloorTileTypesRepositoryCollection(saveGame);
+        FloorTileTypes = new TilesRepositoryCollection(saveGame);
         RareItems = new RareItemsRepositoryCollection(saveGame);
 
         ClassSpells = new ClassSpellsRepositoryCollection(saveGame);
