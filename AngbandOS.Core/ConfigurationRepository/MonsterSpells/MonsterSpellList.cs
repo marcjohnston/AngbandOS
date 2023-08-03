@@ -31,13 +31,12 @@ internal class MonsterSpellList
     }
 
     /// <summary>
-    /// Returns a random spell from the list.
+    /// Returns a weighted random list from the spells.
     /// </summary>
     /// <returns></returns>
-    public MonsterSpell ChooseRandom()
+    public WeightedRandom<MonsterSpell> ToWeightedRandom()
     {
-        return _spells[Program.Rng.RandomLessThan(Count)];
-
+        return new WeightedRandom<MonsterSpell>(_spells);
     }
 
     /// <summary>

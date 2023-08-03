@@ -12179,21 +12179,14 @@ internal class SaveGame
 
     public void GenerateNewLevel()
     {
-        for (int y = 0; y < MaxHgt; y++)
-        {
-            Grid[y] = new GridTile[MaxWid];
-            for (int x = 0; x < MaxWid; x++)
-            {
-                Grid[y][x] = new GridTile(this, x, y);
-            }
-        }
+        // Reset all of the monsters.
         Monsters = new Monster[Constants.MaxMIdx];
         for (int j = 0; j < Constants.MaxMIdx; j++)
         {
             Monsters[j] = new Monster(this);
         }
 
-        // Loop until we are able to build the   Keep track of the number of attempts.
+        // Loop until we are able to build the level and keep track of the number of attempts.
         for (int generateAttemptNumber = 0; ; generateAttemptNumber++)
         {
             bool okay = true;
@@ -12225,6 +12218,12 @@ internal class SaveGame
             PanelRowMax = 0;
             PanelColMin = 0;
             PanelColMax = 0;
+            MonsterLevel = Difficulty;
+            ObjectLevel = Difficulty;
+            SpecialTreasure = false;
+            SpecialDanger = false;
+            TreasureRating = 0;
+            DangerRating = 0;
             if (CurrentDepth == 0)
             {
                 if (Wilderness[WildernessY][WildernessX].Town != null)
@@ -12252,20 +12251,6 @@ internal class SaveGame
                     DungeonDifficulty = 2;
                     DunBias = new AnimalMonsterSelector();
                 }
-            }
-            else
-            {
-                DungeonDifficulty = CurDungeon.Offset;
-                DunBias = CurDungeon.Bias;
-            }
-            MonsterLevel = Difficulty;
-            ObjectLevel = Difficulty;
-            SpecialTreasure = false;
-            SpecialDanger = false;
-            TreasureRating = 0;
-            DangerRating = 0;
-            if (CurrentDepth == 0)
-            {
                 CurHgt = Constants.PlayableScreenHeight;
                 CurWid = Constants.PlayableScreenWidth;
                 MaxPanelRows = (CurHgt / Constants.PlayableScreenHeight * 2) - 2;
@@ -12283,6 +12268,8 @@ internal class SaveGame
             }
             else
             {
+                DungeonDifficulty = CurDungeon.Offset;
+                DunBias = CurDungeon.Bias;
                 if (CurDungeon.Tower)
                 {
                     CurHgt = Constants.PlayableScreenHeight;
@@ -12951,6 +12938,9 @@ internal class SaveGame
         }
     }
 
+    /// <summary>
+    /// Generates a cavern level.
+    /// </summary>
     private void MakeCavernLevel()
     {
         PerlinNoise perlinNoise = new PerlinNoise(Rng.RandomBetween(0, int.MaxValue - 1));
@@ -14708,6 +14698,10 @@ internal class SaveGame
         }
     }
 
+    /// <summary>
+    /// Generates an underground level.
+    /// </summary>
+    /// <returns></returns>
     private bool UndergroundGen()
     {
         int i;
@@ -14725,12 +14719,19 @@ internal class SaveGame
         {
             MakeDungeonLevel();
         }
+
+        // Generate downstairs.
         AllocStairs("DownStair", Rng.RandomBetween(3, 4), 3);
+
+        // Generate upstairs.
         AllocStairs("UpStair", Rng.RandomBetween(1, 2), 3);
+
+        // Choose a spot for the player.
         if (!NewPlayerSpot())
         {
             return false;
         }
+
         k = Difficulty / 3;
         if (k > 10)
         {

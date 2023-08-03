@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 
 internal class WeightedRandom<T>
 {
-    Dictionary<int, T> dictionary = new Dictionary<int, T>();
+    private Dictionary<int, T> dictionary = new Dictionary<int, T>();
 
     public WeightedRandom() { }
 
