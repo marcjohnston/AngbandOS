@@ -11,13 +11,13 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class RecallActiveMutation : Mutation
 {
     private RecallActiveMutation(SaveGame saveGame) : base(saveGame) { }
-    public override void Activate(SaveGame saveGame)
+    public override void Activate()
     {
-        if (!saveGame.CheckIfRacialPowerWorks(17, 50, Ability.Intelligence, 16))
+        if (!SaveGame.CheckIfRacialPowerWorks(17, 50, Ability.Intelligence, 16))
         {
             return;
         }
-        saveGame.ToggleRecall();
+        SaveGame.ToggleRecall();
     }
 
     public override string ActivationSummary(int lvl)

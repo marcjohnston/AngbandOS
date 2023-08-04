@@ -11,15 +11,15 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class DazzleActiveMutation : Mutation
 {
     private DazzleActiveMutation(SaveGame saveGame) : base(saveGame) { }
-    public override void Activate(SaveGame saveGame)
+    public override void Activate()
     {
-        if (!saveGame.CheckIfRacialPowerWorks(7, 15, Ability.Charisma, 8))
+        if (!SaveGame.CheckIfRacialPowerWorks(7, 15, Ability.Charisma, 8))
         {
             return;
         }
-        saveGame.StunMonsters(saveGame.ExperienceLevel * 4);
-        saveGame.ConfuseMonsters(saveGame.ExperienceLevel * 4);
-        saveGame.TurnMonsters(saveGame.ExperienceLevel * 4);
+        SaveGame.StunMonsters(SaveGame.ExperienceLevel * 4);
+        SaveGame.ConfuseMonsters(SaveGame.ExperienceLevel * 4);
+        SaveGame.TurnMonsters(SaveGame.ExperienceLevel * 4);
     }
 
     public override string ActivationSummary(int lvl)

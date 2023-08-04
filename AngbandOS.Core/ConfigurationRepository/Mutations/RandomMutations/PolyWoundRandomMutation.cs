@@ -16,11 +16,11 @@ internal class PolyWoundRandomMutation : Mutation
     public override string HaveMessage => "Your health is subject to chaotic forces.";
     public override string LoseMessage => "You feel forces of chaos departing your old scars.";
 
-    public override void OnProcessWorld(SaveGame saveGame)
+    public override void OnProcessWorld()
     {
-        if (SaveGame.Rng.DieRoll(3000) == 1)
+        if (base.SaveGame.Rng.DieRoll(3000) == 1)
         {
-            saveGame.PolymorphWounds();
+            SaveGame.PolymorphWounds();
         }
     }
 }

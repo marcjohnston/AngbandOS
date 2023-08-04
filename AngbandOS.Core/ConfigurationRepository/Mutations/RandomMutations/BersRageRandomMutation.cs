@@ -16,15 +16,15 @@ internal class BersRageRandomMutation : Mutation
     public override string HaveMessage => "You are subject to berserker fits.";
     public override string LoseMessage => "You are no longer subject to fits of berserk rage!";
 
-    public override void OnProcessWorld(SaveGame saveGame)
+    public override void OnProcessWorld()
     {
-        if (SaveGame.Rng.DieRoll(3000) != 1)
+        if (base.SaveGame.Rng.DieRoll(3000) != 1)
         {
             return;
         }
-        saveGame.Disturb(false);
-        saveGame.MsgPrint("RAAAAGHH!");
-        saveGame.MsgPrint("You feel a fit of rage coming over you!");
-        saveGame.TimedSuperheroism.AddTimer(10 + SaveGame.Rng.DieRoll(saveGame.ExperienceLevel));
+        SaveGame.Disturb(false);
+        SaveGame.MsgPrint("RAAAAGHH!");
+        SaveGame.MsgPrint("You feel a fit of rage coming over you!");
+        SaveGame.TimedSuperheroism.AddTimer(10 + base.SaveGame.Rng.DieRoll(SaveGame.ExperienceLevel));
     }
 }

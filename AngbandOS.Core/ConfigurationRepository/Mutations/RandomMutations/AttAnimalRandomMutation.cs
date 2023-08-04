@@ -16,26 +16,26 @@ internal class AttAnimalRandomMutation : Mutation
     public override string HaveMessage => "You attract animals.";
     public override string LoseMessage => "You stop attracting animals.";
 
-    public override void OnProcessWorld(SaveGame saveGame)
+    public override void OnProcessWorld()
     {
-        if (saveGame.HasAntiMagic || SaveGame.Rng.DieRoll(7000) != 1)
+        if (SaveGame.HasAntiMagic || base.SaveGame.Rng.DieRoll(7000) != 1)
         {
             return;
         }
         bool aSummon;
-        if (SaveGame.Rng.DieRoll(3) == 1)
+        if (base.SaveGame.Rng.DieRoll(3) == 1)
         {
-            aSummon = saveGame.SummonSpecificFriendly(saveGame.MapY, saveGame.MapX, saveGame.Difficulty, new AnimalMonsterSelector(), true);
+            aSummon = SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, new AnimalMonsterSelector(), true);
         }
         else
         {
-            aSummon = saveGame.SummonSpecific(saveGame.MapY, saveGame.MapX, saveGame.Difficulty, new AnimalMonsterSelector());
+            aSummon = SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, new AnimalMonsterSelector());
         }
         if (!aSummon)
         {
             return;
         }
-        saveGame.MsgPrint("You have attracted an animal!");
-        saveGame.Disturb(false);
+        SaveGame.MsgPrint("You have attracted an animal!");
+        SaveGame.Disturb(false);
     }
 }

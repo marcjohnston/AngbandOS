@@ -33,24 +33,16 @@ internal abstract class Mutation : IConfigurationRepository
     public abstract string LoseMessage { get; }
     public virtual MutationAttackType MutationAttackType => MutationAttackType.Physical;
 
-    public virtual void Activate(SaveGame saveGame)
-    {
-    }
+    public virtual void Activate() { }
 
     public virtual string ActivationSummary(int lvl)
     {
         return string.Empty;
     }
 
-    public virtual void OnGain(Genome genome)
-    {
-    }
+    public virtual void OnGain(Genome genome) { }
 
-    public virtual void OnLose(Genome genome)
-    {
-    }
+    public virtual void OnLose(Genome genome) { }
 
-    public virtual void OnProcessWorld(SaveGame saveGame)
-    {
-    }
+    public virtual void OnProcessWorld() { }
 }

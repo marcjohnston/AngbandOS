@@ -16,21 +16,21 @@ internal class WeirdMindRandomMutation : Mutation
     public override string HaveMessage => "Your mind randomly expands and contracts.";
     public override string LoseMessage => "Your thoughts return to boring paths.";
 
-    public override void OnProcessWorld(SaveGame saveGame)
+    public override void OnProcessWorld()
     {
-        if (saveGame.HasAntiMagic || SaveGame.Rng.DieRoll(3000) != 1)
+        if (SaveGame.HasAntiMagic || base.SaveGame.Rng.DieRoll(3000) != 1)
         {
             return;
         }
-        if (saveGame.TimedTelepathy.TurnsRemaining > 0)
+        if (SaveGame.TimedTelepathy.TurnsRemaining > 0)
         {
-            saveGame.MsgPrint("Your mind feels cloudy!");
-            saveGame.TimedTelepathy.ResetTimer();
+            SaveGame.MsgPrint("Your mind feels cloudy!");
+            SaveGame.TimedTelepathy.ResetTimer();
         }
         else
         {
-            saveGame.MsgPrint("Your mind expands!");
-            saveGame.TimedTelepathy.SetTimer(saveGame.ExperienceLevel);
+            SaveGame.MsgPrint("Your mind expands!");
+            SaveGame.TimedTelepathy.SetTimer(SaveGame.ExperienceLevel);
         }
     }
 }

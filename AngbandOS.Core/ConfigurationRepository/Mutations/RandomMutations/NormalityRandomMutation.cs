@@ -16,11 +16,11 @@ internal class NormalityRandomMutation : Mutation
     public override string HaveMessage => "You may be chaotic, but you're recovering.";
     public override string LoseMessage => "You feel normally strange.";
 
-    public override void OnProcessWorld(SaveGame saveGame)
+    public override void OnProcessWorld()
     {
-        if (SaveGame.Rng.DieRoll(5000) == 1)
+        if (base.SaveGame.Rng.DieRoll(5000) == 1)
         {
-            saveGame.Dna.LoseMutation();
+            SaveGame.Dna.LoseMutation();
         }
     }
 }

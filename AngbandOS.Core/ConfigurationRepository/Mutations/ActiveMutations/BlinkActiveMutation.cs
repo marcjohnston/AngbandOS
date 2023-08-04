@@ -11,11 +11,11 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class BlinkActiveMutation : Mutation
 {
     private BlinkActiveMutation(SaveGame saveGame) : base(saveGame) { }
-    public override void Activate(SaveGame saveGame)
+    public override void Activate()
     {
-        if (saveGame.CheckIfRacialPowerWorks(3, 3, Ability.Wisdom, 12))
+        if (SaveGame.CheckIfRacialPowerWorks(3, 3, Ability.Wisdom, 12))
         {
-            saveGame.TeleportPlayer(10);
+            SaveGame.TeleportPlayer(10);
         }
     }
 

@@ -11,27 +11,27 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class PanicHitActiveMutation : Mutation
 {
     private PanicHitActiveMutation(SaveGame saveGame) : base(saveGame) { }
-    public override void Activate(SaveGame saveGame)
+    public override void Activate()
     {
-        if (!saveGame.CheckIfRacialPowerWorks(10, 12, Ability.Dexterity, 14))
+        if (!SaveGame.CheckIfRacialPowerWorks(10, 12, Ability.Dexterity, 14))
         {
             return;
         }
-        if (!saveGame.GetDirectionNoAim(out int dir))
+        if (!SaveGame.GetDirectionNoAim(out int dir))
         {
             return;
         }
-        int y = saveGame.MapY + saveGame.KeypadDirectionYOffset[dir];
-        int x = saveGame.MapX + saveGame.KeypadDirectionXOffset[dir];
-        if (saveGame.Grid[y][x].MonsterIndex != 0)
+        int y = SaveGame.MapY + SaveGame.KeypadDirectionYOffset[dir];
+        int x = SaveGame.MapX + SaveGame.KeypadDirectionXOffset[dir];
+        if (SaveGame.Grid[y][x].MonsterIndex != 0)
         {
-            saveGame.PlayerAttackMonster(y, x);
-            saveGame.TeleportPlayer(30);
+            SaveGame.PlayerAttackMonster(y, x);
+            SaveGame.TeleportPlayer(30);
         }
         else
         {
-            saveGame.MsgPrint("You don't see any monster in this direction");
-            saveGame.MsgPrint(null);
+            SaveGame.MsgPrint("You don't see any monster in this direction");
+            SaveGame.MsgPrint(null);
         }
     }
 

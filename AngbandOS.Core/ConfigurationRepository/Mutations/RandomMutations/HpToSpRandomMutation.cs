@@ -16,23 +16,23 @@ internal class HpToSpRandomMutation : Mutation
     public override string HaveMessage => "Your blood sometimes rushes to your head.";
     public override string LoseMessage => "You are no longer subject to fits of painful clarity.";
 
-    public override void OnProcessWorld(SaveGame saveGame)
+    public override void OnProcessWorld()
     {
-        if (saveGame.HasAntiMagic || SaveGame.Rng.DieRoll(4000) != 1)
+        if (SaveGame.HasAntiMagic || base.SaveGame.Rng.DieRoll(4000) != 1)
         {
             return;
         }
-        int wounds = saveGame.MaxMana - saveGame.Mana;
+        int wounds = SaveGame.MaxMana - SaveGame.Mana;
         if (wounds <= 0)
         {
             return;
         }
-        int healing = saveGame.Health;
+        int healing = SaveGame.Health;
         if (healing > wounds)
         {
             healing = wounds;
         }
-        saveGame.Mana += healing;
-        saveGame.TakeHit(healing, "blood rushing to the head");
+        SaveGame.Mana += healing;
+        SaveGame.TakeHit(healing, "blood rushing to the head");
     }
 }

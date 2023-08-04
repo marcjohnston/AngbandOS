@@ -16,45 +16,45 @@ internal class AlcoholRandomMutation : Mutation
     public override string HaveMessage => "Your body produces alcohol.";
     public override string LoseMessage => "Your body stops producing alcohol!";
 
-    public override void OnProcessWorld(SaveGame saveGame)
+    public override void OnProcessWorld()
     {
-        if (SaveGame.Rng.DieRoll(6400) != 321)
+        if (base.SaveGame.Rng.DieRoll(6400) != 321)
         {
             return;
         }
-        if (saveGame.HasChaosResistance && saveGame.HasConfusionResistance)
+        if (SaveGame.HasChaosResistance && SaveGame.HasConfusionResistance)
         {
             return;
         }
-        saveGame.Disturb(false);
-        saveGame.SingletonRepository.FlaggedActions.Get<PrExtraRedrawActionGroupSetFlaggedAction>().Set();
-        saveGame.MsgPrint("You feel a SSSCHtupor cOmINg over yOu... *HIC*!");
-        if (SaveGame.Rng.DieRoll(20) == 1)
+        SaveGame.Disturb(false);
+        SaveGame.SingletonRepository.FlaggedActions.Get<PrExtraRedrawActionGroupSetFlaggedAction>().Set();
+        SaveGame.MsgPrint("You feel a SSSCHtupor cOmINg over yOu... *HIC*!");
+        if (base.SaveGame.Rng.DieRoll(20) == 1)
         {
-            saveGame.MsgPrint(null);
-            if (SaveGame.Rng.DieRoll(3) == 1)
+            SaveGame.MsgPrint(null);
+            if (base.SaveGame.Rng.DieRoll(3) == 1)
             {
-                saveGame.LoseAllInfo();
+                SaveGame.LoseAllInfo();
             }
             else
             {
-                saveGame.WizDark();
+                SaveGame.WizDark();
             }
-            saveGame.TeleportPlayer(100);
-            saveGame.WizDark();
-            saveGame.MsgPrint("You wake up somewhere with a sore head...");
-            saveGame.MsgPrint("You can't remember a thing, or how you got here!");
+            SaveGame.TeleportPlayer(100);
+            SaveGame.WizDark();
+            SaveGame.MsgPrint("You wake up somewhere with a sore head...");
+            SaveGame.MsgPrint("You can't remember a thing, or how you got here!");
         }
         else
         {
-            if (!saveGame.HasConfusionResistance)
+            if (!SaveGame.HasConfusionResistance)
             {
-                saveGame.TimedConfusion.AddTimer(SaveGame.Rng.RandomLessThan(20) + 15);
+                SaveGame.TimedConfusion.AddTimer(base.SaveGame.Rng.RandomLessThan(20) + 15);
             }
-            if (SaveGame.Rng.DieRoll(3) == 1 && !saveGame.HasChaosResistance)
+            if (base.SaveGame.Rng.DieRoll(3) == 1 && !SaveGame.HasChaosResistance)
             {
-                saveGame.MsgPrint("Thishcischs GooDSChtuff!");
-                saveGame.TimedHallucinations.AddTimer(SaveGame.Rng.RandomLessThan(150) + 150);
+                SaveGame.MsgPrint("Thishcischs GooDSChtuff!");
+                SaveGame.TimedHallucinations.AddTimer(base.SaveGame.Rng.RandomLessThan(150) + 150);
             }
         }
     }

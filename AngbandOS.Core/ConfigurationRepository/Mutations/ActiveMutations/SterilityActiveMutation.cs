@@ -11,15 +11,15 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class SterilityActiveMutation : Mutation
 {
     private SterilityActiveMutation(SaveGame saveGame) : base(saveGame) { }
-    public override void Activate(SaveGame saveGame)
+    public override void Activate()
     {
-        if (!saveGame.CheckIfRacialPowerWorks(20, 40, Ability.Charisma, 18))
+        if (!SaveGame.CheckIfRacialPowerWorks(20, 40, Ability.Charisma, 18))
         {
             return;
         }
-        saveGame.MsgPrint("You suddenly have a headache!");
-        saveGame.TakeHit(SaveGame.Rng.DieRoll(30) + 30, "the strain of forcing abstinence");
-        saveGame.NumRepro += Constants.MaxRepro;
+        SaveGame.MsgPrint("You suddenly have a headache!");
+        SaveGame.TakeHit(base.SaveGame.Rng.DieRoll(30) + 30, "the strain of forcing abstinence");
+        SaveGame.NumRepro += Constants.MaxRepro;
     }
 
     public override string ActivationSummary(int lvl)

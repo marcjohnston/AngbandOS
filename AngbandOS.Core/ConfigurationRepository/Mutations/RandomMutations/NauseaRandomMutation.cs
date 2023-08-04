@@ -16,15 +16,15 @@ internal class NauseaRandomMutation : Mutation
     public override string HaveMessage => "You have a seriously upset stomach.";
     public override string LoseMessage => "Your stomach stops roiling.";
 
-    public override void OnProcessWorld(SaveGame saveGame)
+    public override void OnProcessWorld()
     {
-        if (saveGame.HasSlowDigestion || SaveGame.Rng.DieRoll(9000) != 1)
+        if (SaveGame.HasSlowDigestion || base.SaveGame.Rng.DieRoll(9000) != 1)
         {
             return;
         }
-        saveGame.Disturb(false);
-        saveGame.MsgPrint("Your stomach roils, and you lose your lunch!");
-        saveGame.MsgPrint(null);
-        saveGame.SetFood(Constants.PyFoodWeak);
+        SaveGame.Disturb(false);
+        SaveGame.MsgPrint("Your stomach roils, and you lose your lunch!");
+        SaveGame.MsgPrint(null);
+        SaveGame.SetFood(Constants.PyFoodWeak);
     }
 }

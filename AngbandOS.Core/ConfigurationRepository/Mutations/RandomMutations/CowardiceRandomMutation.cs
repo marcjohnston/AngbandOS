@@ -17,19 +17,19 @@ internal class CowardiceRandomMutation : Mutation
     public override string LoseMessage => "You are no longer an incredible coward!";
     public override MutationGroup Group => MutationGroup.Bravery;
 
-    public override void OnProcessWorld(SaveGame saveGame)
+    public override void OnProcessWorld()
     {
-        if (SaveGame.Rng.DieRoll(3000) != 13)
+        if (base.SaveGame.Rng.DieRoll(3000) != 13)
         {
             return;
         }
-        if (saveGame.HasFearResistance || saveGame.TimedHeroism.TurnsRemaining != 0 || saveGame.TimedSuperheroism.TurnsRemaining != 0)
+        if (SaveGame.HasFearResistance || SaveGame.TimedHeroism.TurnsRemaining != 0 || SaveGame.TimedSuperheroism.TurnsRemaining != 0)
         {
             return;
         }
-        saveGame.Disturb(false);
-        saveGame.MsgPrint("It's so dark... so scary!");
-        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawAfraidFlaggedAction>().Set();
-        saveGame.TimedFear.AddTimer(13 + SaveGame.Rng.DieRoll(26));
+        SaveGame.Disturb(false);
+        SaveGame.MsgPrint("It's so dark... so scary!");
+        base.SaveGame.SingletonRepository.FlaggedActions.Get<RedrawAfraidFlaggedAction>().Set();
+        SaveGame.TimedFear.AddTimer(13 + base.SaveGame.Rng.DieRoll(26));
     }
 }

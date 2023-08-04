@@ -11,11 +11,11 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class WeighMagActiveMutation : Mutation
 {
     private WeighMagActiveMutation(SaveGame saveGame) : base(saveGame) { }
-    public override void Activate(SaveGame saveGame)
+    public override void Activate()
     {
-        if (saveGame.CheckIfRacialPowerWorks(6, 6, Ability.Intelligence, 10))
+        if (SaveGame.CheckIfRacialPowerWorks(6, 6, Ability.Intelligence, 10))
         {
-            saveGame.ReportMagics();
+            SaveGame.ReportMagics();
         }
     }
 

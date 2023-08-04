@@ -11,13 +11,13 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class LauncherActiveMutation : Mutation
 {
     private LauncherActiveMutation(SaveGame saveGame) : base(saveGame) { }
-    public override void Activate(SaveGame saveGame)
+    public override void Activate()
     {
-        if (!saveGame.CheckIfRacialPowerWorks(1, saveGame.ExperienceLevel, Ability.Strength, 6))
+        if (!SaveGame.CheckIfRacialPowerWorks(1, SaveGame.ExperienceLevel, Ability.Strength, 6))
         {
             return;
         }
-        saveGame.DoCmdThrow(2 + (saveGame.ExperienceLevel / 16));
+        SaveGame.DoCmdThrow(2 + (SaveGame.ExperienceLevel / 16));
     }
 
     public override string ActivationSummary(int lvl)

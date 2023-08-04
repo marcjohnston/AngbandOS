@@ -11,35 +11,35 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class ResistActiveMutation : Mutation
 {
     private ResistActiveMutation(SaveGame saveGame) : base(saveGame) { }
-    public override void Activate(SaveGame saveGame)
+    public override void Activate()
     {
-        if (saveGame.CheckIfRacialPowerWorks(10, 12, Ability.Constitution, 12))
+        if (SaveGame.CheckIfRacialPowerWorks(10, 12, Ability.Constitution, 12))
         {
-            int num = saveGame.ExperienceLevel / 10;
-            int dur = SaveGame.Rng.DieRoll(20) + 20;
-            if (SaveGame.Rng.RandomLessThan(5) < num)
+            int num = SaveGame.ExperienceLevel / 10;
+            int dur = base.SaveGame.Rng.DieRoll(20) + 20;
+            if (base.SaveGame.Rng.RandomLessThan(5) < num)
             {
-                saveGame.TimedAcidResistance.AddTimer(dur);
+                SaveGame.TimedAcidResistance.AddTimer(dur);
                 num--;
             }
-            if (SaveGame.Rng.RandomLessThan(4) < num)
+            if (base.SaveGame.Rng.RandomLessThan(4) < num)
             {
-                saveGame.TimedLightningResistance.AddTimer(dur);
+                SaveGame.TimedLightningResistance.AddTimer(dur);
                 num--;
             }
-            if (SaveGame.Rng.RandomLessThan(3) < num)
+            if (base.SaveGame.Rng.RandomLessThan(3) < num)
             {
-                saveGame.TimedFireResistance.AddTimer(dur);
+                SaveGame.TimedFireResistance.AddTimer(dur);
                 num--;
             }
-            if (SaveGame.Rng.RandomLessThan(2) < num)
+            if (base.SaveGame.Rng.RandomLessThan(2) < num)
             {
-                saveGame.TimedColdResistance.AddTimer(dur);
+                SaveGame.TimedColdResistance.AddTimer(dur);
                 num--;
             }
             if (num != 0)
             {
-                saveGame.TimedPoisonResistance.AddTimer(dur);
+                SaveGame.TimedPoisonResistance.AddTimer(dur);
             }
         }
     }

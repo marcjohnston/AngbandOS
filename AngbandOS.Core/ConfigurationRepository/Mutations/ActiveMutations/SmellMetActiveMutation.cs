@@ -11,11 +11,11 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class SmellMetActiveMutation : Mutation
 {
     private SmellMetActiveMutation(SaveGame saveGame) : base(saveGame) { }
-    public override void Activate(SaveGame saveGame)
+    public override void Activate()
     {
-        if (saveGame.CheckIfRacialPowerWorks(3, 2, Ability.Intelligence, 12))
+        if (SaveGame.CheckIfRacialPowerWorks(3, 2, Ability.Intelligence, 12))
         {
-            saveGame.DetectTreasure();
+            SaveGame.DetectTreasure();
         }
     }
 

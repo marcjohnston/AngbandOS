@@ -11,15 +11,15 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class EarthquakeActiveMutation : Mutation
 {
     private EarthquakeActiveMutation(SaveGame saveGame) : base(saveGame) { }
-    public override void Activate(SaveGame saveGame)
+    public override void Activate()
     {
-        if (!saveGame.CheckIfRacialPowerWorks(12, 12, Ability.Strength, 16))
+        if (!SaveGame.CheckIfRacialPowerWorks(12, 12, Ability.Strength, 16))
         {
             return;
         }
-        if (!saveGame.IsQuest(saveGame.CurrentDepth) && saveGame.CurrentDepth != 0)
+        if (!SaveGame.IsQuest(SaveGame.CurrentDepth) && SaveGame.CurrentDepth != 0)
         {
-            saveGame.Earthquake(saveGame.MapY, saveGame.MapX, 10);
+            SaveGame.Earthquake(SaveGame.MapY, SaveGame.MapX, 10);
         }
     }
 

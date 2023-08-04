@@ -16,26 +16,26 @@ internal class AttDemonRandomMutation : Mutation
     public override string HaveMessage => "You attract demons.";
     public override string LoseMessage => "You stop attracting demons.";
 
-    public override void OnProcessWorld(SaveGame saveGame)
+    public override void OnProcessWorld()
     {
-        if (saveGame.HasAntiMagic || SaveGame.Rng.DieRoll(6666) != 666)
+        if (SaveGame.HasAntiMagic || base.SaveGame.Rng.DieRoll(6666) != 666)
         {
             return;
         }
         bool dSummon;
-        if (SaveGame.Rng.DieRoll(6) == 1)
+        if (base.SaveGame.Rng.DieRoll(6) == 1)
         {
-            dSummon = saveGame.SummonSpecificFriendly(saveGame.MapY, saveGame.MapX, saveGame.Difficulty, new DemonMonsterSelector(), true);
+            dSummon = SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, new DemonMonsterSelector(), true);
         }
         else
         {
-            dSummon = saveGame.SummonSpecific(saveGame.MapY, saveGame.MapX, saveGame.Difficulty, new DemonMonsterSelector());
+            dSummon = SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, new DemonMonsterSelector());
         }
         if (!dSummon)
         {
             return;
         }
-        saveGame.MsgPrint("You have attracted a demon!");
-        saveGame.Disturb(false);
+        SaveGame.MsgPrint("You have attracted a demon!");
+        SaveGame.Disturb(false);
     }
 }

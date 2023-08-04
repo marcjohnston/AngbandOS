@@ -16,19 +16,19 @@ internal class RteleportRandomMutation : Mutation
     public override string HaveMessage => "You are teleporting randomly.";
     public override string LoseMessage => "Your position seems more certain.";
 
-    public override void OnProcessWorld(SaveGame saveGame)
+    public override void OnProcessWorld()
     {
-        if (SaveGame.Rng.DieRoll(5000) != 88)
+        if (base.SaveGame.Rng.DieRoll(5000) != 88)
         {
             return;
         }
-        if (saveGame.HasNexusResistance || saveGame.HasAntiTeleport)
+        if (SaveGame.HasNexusResistance || SaveGame.HasAntiTeleport)
         {
             return;
         }
-        saveGame.Disturb(false);
-        saveGame.MsgPrint("Your position suddenly seems very uncertain...");
-        saveGame.MsgPrint(null);
-        saveGame.TeleportPlayer(40);
+        SaveGame.Disturb(false);
+        SaveGame.MsgPrint("Your position suddenly seems very uncertain...");
+        SaveGame.MsgPrint(null);
+        SaveGame.TeleportPlayer(40);
     }
 }

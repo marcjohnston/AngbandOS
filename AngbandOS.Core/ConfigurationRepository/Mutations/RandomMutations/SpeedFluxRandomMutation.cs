@@ -16,36 +16,36 @@ internal class SpeedFluxRandomMutation : Mutation
     public override string HaveMessage => "You move faster or slower randomly.";
     public override string LoseMessage => "You are firmly anchored in time.";
 
-    public override void OnProcessWorld(SaveGame saveGame)
+    public override void OnProcessWorld()
     {
-        if (SaveGame.Rng.DieRoll(6000) == 1)
+        if (base.SaveGame.Rng.DieRoll(6000) == 1)
         {
-            saveGame.Disturb(false);
-            if (SaveGame.Rng.DieRoll(2) == 1)
+            SaveGame.Disturb(false);
+            if (base.SaveGame.Rng.DieRoll(2) == 1)
             {
-                saveGame.MsgPrint("Everything around you speeds up.");
-                if (saveGame.TimedHaste.TurnsRemaining > 0)
+                SaveGame.MsgPrint("Everything around you speeds up.");
+                if (SaveGame.TimedHaste.TurnsRemaining > 0)
                 {
-                    saveGame.TimedHaste.ResetTimer();
+                    SaveGame.TimedHaste.ResetTimer();
                 }
                 else
                 {
-                    saveGame.TimedSlow.AddTimer(SaveGame.Rng.DieRoll(30) + 10);
+                    SaveGame.TimedSlow.AddTimer(base.SaveGame.Rng.DieRoll(30) + 10);
                 }
             }
             else
             {
-                saveGame.MsgPrint("Everything around you slows down.");
-                if (saveGame.TimedSlow.TurnsRemaining > 0)
+                SaveGame.MsgPrint("Everything around you slows down.");
+                if (SaveGame.TimedSlow.TurnsRemaining > 0)
                 {
-                    saveGame.TimedSlow.ResetTimer();
+                    SaveGame.TimedSlow.ResetTimer();
                 }
                 else
                 {
-                    saveGame.TimedHaste.AddTimer(SaveGame.Rng.DieRoll(30) + 10);
+                    SaveGame.TimedHaste.AddTimer(base.SaveGame.Rng.DieRoll(30) + 10);
                 }
             }
-            saveGame.MsgPrint(null);
+            SaveGame.MsgPrint(null);
         }
     }
 }

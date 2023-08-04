@@ -16,26 +16,26 @@ internal class AttDragonRandomMutation : Mutation
     public override string HaveMessage => "You attract dragons.";
     public override string LoseMessage => "You stop attracting dragons.";
 
-    public override void OnProcessWorld(SaveGame saveGame)
+    public override void OnProcessWorld()
     {
-        if (saveGame.HasAntiMagic || SaveGame.Rng.DieRoll(3000) != 13)
+        if (SaveGame.HasAntiMagic || base.SaveGame.Rng.DieRoll(3000) != 13)
         {
             return;
         }
         bool dSummon;
-        if (SaveGame.Rng.DieRoll(5) == 1)
+        if (base.SaveGame.Rng.DieRoll(5) == 1)
         {
-            dSummon = saveGame.SummonSpecificFriendly(saveGame.MapY, saveGame.MapX, saveGame.Difficulty, new DragonMonsterSelector(), true);
+            dSummon = SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, new DragonMonsterSelector(), true);
         }
         else
         {
-            dSummon = saveGame.SummonSpecific(saveGame.MapY, saveGame.MapX, saveGame.Difficulty, new DragonMonsterSelector());
+            dSummon = SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, new DragonMonsterSelector());
         }
         if (!dSummon)
         {
             return;
         }
-        saveGame.MsgPrint("You have attracted a dragon!");
-        saveGame.Disturb(false);
+        SaveGame.MsgPrint("You have attracted a dragon!");
+        SaveGame.Disturb(false);
     }
 }

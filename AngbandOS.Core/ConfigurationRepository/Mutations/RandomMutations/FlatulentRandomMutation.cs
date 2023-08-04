@@ -16,14 +16,14 @@ internal class FlatulentRandomMutation : Mutation
     public override string HaveMessage => "You are subject to uncontrollable flatulence.";
     public override string LoseMessage => "You are no longer subject to uncontrollable flatulence.";
 
-    public override void OnProcessWorld(SaveGame saveGame)
+    public override void OnProcessWorld()
     {
-        if (SaveGame.Rng.DieRoll(3000) == 13)
+        if (base.SaveGame.Rng.DieRoll(3000) == 13)
         {
-            saveGame.Disturb(false);
-            saveGame.MsgPrint("BRRAAAP! Oops.");
-            saveGame.MsgPrint(null);
-            saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), 0, saveGame.ExperienceLevel, 3);
+            SaveGame.Disturb(false);
+            SaveGame.MsgPrint("BRRAAAP! Oops.");
+            SaveGame.MsgPrint(null);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), 0, SaveGame.ExperienceLevel, 3);
         }
     }
 }

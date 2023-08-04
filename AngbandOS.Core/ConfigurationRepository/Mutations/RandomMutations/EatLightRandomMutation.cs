@@ -16,34 +16,34 @@ internal class EatLightRandomMutation : Mutation
     public override string HaveMessage => "You sometimes feed off of the light around you.";
     public override string LoseMessage => "You feel the world's a brighter place.";
 
-    public override void OnProcessWorld(SaveGame saveGame)
+    public override void OnProcessWorld()
     {
-        if (SaveGame.Rng.DieRoll(3000) != 1)
+        if (base.SaveGame.Rng.DieRoll(3000) != 1)
         {
             return;
         }
-        saveGame.MsgPrint("A shadow passes over you.");
-        saveGame.MsgPrint(null);
-        if (saveGame.Grid[saveGame.MapY][saveGame.MapX].TileFlags.IsSet(GridTile.SelfLit))
+        SaveGame.MsgPrint("A shadow passes over you.");
+        SaveGame.MsgPrint(null);
+        if (SaveGame.Grid[SaveGame.MapY][SaveGame.MapX].TileFlags.IsSet(GridTile.SelfLit))
         {
-            saveGame.RestoreHealth(10);
+            SaveGame.RestoreHealth(10);
         }
-        BaseInventorySlot? inventorySlot = saveGame.SingletonRepository.InventorySlots.ToWeightedRandom(_inventorySlot => _inventorySlot.ProvidesLight).Choose();
+        BaseInventorySlot? inventorySlot = SaveGame.SingletonRepository.InventorySlots.ToWeightedRandom(_inventorySlot => _inventorySlot.ProvidesLight).Choose();
         if (inventorySlot == null)
         {
             return;
         }
         int index = inventorySlot.WeightedRandom.Choose();
-        Item? oPtr = saveGame.GetInventoryItem(index);
+        Item? oPtr = SaveGame.GetInventoryItem(index);
         if (oPtr != null)
         {
             LightSourceItem? lightSourceItem = oPtr.TryCast<LightSourceItem>();
             if (lightSourceItem != null && lightSourceItem.Factory.BurnRate > 0 && oPtr.TypeSpecificValue > 0)
             {
-                saveGame.RestoreHealth(oPtr.TypeSpecificValue / 20);
+                SaveGame.RestoreHealth(oPtr.TypeSpecificValue / 20);
                 oPtr.TypeSpecificValue /= 2;
-                saveGame.MsgPrint("You absorb energy from your light!");
-                if (saveGame.TimedBlindness.TurnsRemaining != 0)
+                SaveGame.MsgPrint("You absorb energy from your light!");
+                if (SaveGame.TimedBlindness.TurnsRemaining != 0)
                 {
                     if (oPtr.TypeSpecificValue == 0)
                     {
@@ -52,15 +52,15 @@ internal class EatLightRandomMutation : Mutation
                 }
                 else if (oPtr.TypeSpecificValue == 0)
                 {
-                    saveGame.Disturb(false);
-                    saveGame.MsgPrint("Your light has gone out!");
+                    SaveGame.Disturb(false);
+                    SaveGame.MsgPrint("Your light has gone out!");
                 }
                 else if (oPtr.TypeSpecificValue < 100 && oPtr.TypeSpecificValue % 10 == 0)
                 {
-                    saveGame.MsgPrint("Your light is growing faint.");
+                    SaveGame.MsgPrint("Your light is growing faint.");
                 }
             }
         }
-        saveGame.UnlightArea(50, 10);
+        SaveGame.UnlightArea(50, 10);
     }
 }

@@ -16,16 +16,16 @@ internal class ProdManaRandomMutation : Mutation
     public override string HaveMessage => "You are producing magical energy uncontrollably.";
     public override string LoseMessage => "You stop producing magical energy uncontrollably.";
 
-    public override void OnProcessWorld(SaveGame saveGame)
+    public override void OnProcessWorld()
     {
-        if (saveGame.HasAntiMagic || SaveGame.Rng.DieRoll(9000) != 1)
+        if (SaveGame.HasAntiMagic || base.SaveGame.Rng.DieRoll(9000) != 1)
         {
             return;
         }
-        saveGame.Disturb(false);
-        saveGame.MsgPrint("Magical energy flows through you! You must release it!");
-        saveGame.MsgPrint(null);
-        saveGame.GetDirectionNoAutoAim(out int dire);
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), dire, saveGame.ExperienceLevel * 2, 3);
+        SaveGame.Disturb(false);
+        SaveGame.MsgPrint("Magical energy flows through you! You must release it!");
+        SaveGame.MsgPrint(null);
+        SaveGame.GetDirectionNoAutoAim(out int dire);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), dire, SaveGame.ExperienceLevel * 2, 3);
     }
 }

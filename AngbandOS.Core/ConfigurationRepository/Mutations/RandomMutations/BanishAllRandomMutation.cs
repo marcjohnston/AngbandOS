@@ -16,15 +16,15 @@ internal class BanishAllRandomMutation : Mutation
     public override string HaveMessage => "You sometimes cause nearby creatures to vanish.";
     public override string LoseMessage => "You no longer feel a terrifying power lurking behind you.";
 
-    public override void OnProcessWorld(SaveGame saveGame)
+    public override void OnProcessWorld()
     {
-        if (SaveGame.Rng.DieRoll(9000) != 1)
+        if (base.SaveGame.Rng.DieRoll(9000) != 1)
         {
             return;
         }
-        saveGame.Disturb(false);
-        saveGame.MsgPrint("You suddenly feel almost lonely.");
-        saveGame.BanishMonsters(100);
-        saveGame.MsgPrint(null);
+        SaveGame.Disturb(false);
+        SaveGame.MsgPrint("You suddenly feel almost lonely.");
+        SaveGame.BanishMonsters(100);
+        SaveGame.MsgPrint(null);
     }
 }

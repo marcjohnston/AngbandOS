@@ -11,16 +11,16 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class HypnGazeActiveMutation : Mutation
 {
     private HypnGazeActiveMutation(SaveGame saveGame) : base(saveGame) { }
-    public override void Activate(SaveGame saveGame)
+    public override void Activate()
     {
-        if (!saveGame.CheckIfRacialPowerWorks(12, 12, Ability.Charisma, 18))
+        if (!SaveGame.CheckIfRacialPowerWorks(12, 12, Ability.Charisma, 18))
         {
             return;
         }
-        saveGame.MsgPrint("Your eyes look mesmerizing...");
-        if (saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("Your eyes look mesmerizing...");
+        if (SaveGame.GetDirectionWithAim(out int dir))
         {
-            saveGame.CharmMonster(dir, saveGame.ExperienceLevel);
+            SaveGame.CharmMonster(dir, SaveGame.ExperienceLevel);
         }
     }
 

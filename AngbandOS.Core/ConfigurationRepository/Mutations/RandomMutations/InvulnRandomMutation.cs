@@ -16,14 +16,14 @@ internal class InvulnRandomMutation : Mutation
     public override string HaveMessage => "You occasionally feel invincible.";
     public override string LoseMessage => "You are no longer blessed with fits of invulnerability.";
 
-    public override void OnProcessWorld(SaveGame saveGame)
+    public override void OnProcessWorld()
     {
-        if (!saveGame.HasAntiMagic && SaveGame.Rng.DieRoll(5000) == 1)
+        if (!SaveGame.HasAntiMagic && base.SaveGame.Rng.DieRoll(5000) == 1)
         {
-            saveGame.Disturb(false);
-            saveGame.MsgPrint("You feel invincible!");
-            saveGame.MsgPrint(null);
-            saveGame.TimedInvulnerability.AddTimer(SaveGame.Rng.DieRoll(8) + 8);
+            SaveGame.Disturb(false);
+            SaveGame.MsgPrint("You feel invincible!");
+            SaveGame.MsgPrint(null);
+            SaveGame.TimedInvulnerability.AddTimer(base.SaveGame.Rng.DieRoll(8) + 8);
         }
     }
 }

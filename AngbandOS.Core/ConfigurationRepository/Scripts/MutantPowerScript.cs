@@ -172,7 +172,7 @@ internal class MutantPowerScript : Script
         else
         {
             SaveGame.EnergyUse = 100;
-            activeMutations[powers[i] - 100].Activate(SaveGame);
+            activeMutations[powers[i] - 100].Activate();
         }
         return false;
     }

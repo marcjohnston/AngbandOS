@@ -11,14 +11,14 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class EatMagicActiveMutation : Mutation
 {
     private EatMagicActiveMutation(SaveGame saveGame) : base(saveGame) { }
-    public override void Activate(SaveGame saveGame)
+    public override void Activate()
     {
-        if (!saveGame.SelectItem(out Item? oPtr, "Drain which item? ", false, true, true, new RechargableItemFilter()))
+        if (!SaveGame.SelectItem(out Item? oPtr, "Drain which item? ", false, true, true, new RechargableItemFilter()))
         {
-            saveGame.MsgPrint("You have nothing appropriate to eat.");
+            SaveGame.MsgPrint("You have nothing appropriate to eat.");
             return;
         }
-        if (!saveGame.CheckIfRacialPowerWorks(17, 1, Ability.Wisdom, 15))
+        if (!SaveGame.CheckIfRacialPowerWorks(17, 1, Ability.Wisdom, 15))
         {
             return;
         }
@@ -32,11 +32,11 @@ internal class EatMagicActiveMutation : Mutation
         {
             if (oPtr.TypeSpecificValue > 0)
             {
-                saveGame.MsgPrint("You can't absorb energy from a discharged rod.");
+                SaveGame.MsgPrint("You can't absorb energy from a discharged rod.");
             }
             else
             {
-                saveGame.Mana += 2 * lev;
+                SaveGame.Mana += 2 * lev;
                 oPtr.TypeSpecificValue = 500;
             }
         }
@@ -44,20 +44,20 @@ internal class EatMagicActiveMutation : Mutation
         {
             if (oPtr.TypeSpecificValue > 0)
             {
-                saveGame.Mana += oPtr.TypeSpecificValue * lev;
+                SaveGame.Mana += oPtr.TypeSpecificValue * lev;
                 oPtr.TypeSpecificValue = 0;
             }
             else
             {
-                saveGame.MsgPrint("There's no energy there to absorb!");
+                SaveGame.MsgPrint("There's no energy there to absorb!");
             }
             oPtr.IdentEmpty = true;
         }
-        if (saveGame.Mana > saveGame.MaxMana)
+        if (SaveGame.Mana > SaveGame.MaxMana)
         {
-            saveGame.Mana = saveGame.MaxMana;
+            SaveGame.Mana = SaveGame.MaxMana;
         }
-        SaveGame.SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
+        base.SaveGame.SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
     }
 
     public override string ActivationSummary(int lvl)

@@ -11,17 +11,17 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class SwapPosActiveMutation : Mutation
 {
     private SwapPosActiveMutation(SaveGame saveGame) : base(saveGame) { }
-    public override void Activate(SaveGame saveGame)
+    public override void Activate()
     {
-        if (!saveGame.CheckIfRacialPowerWorks(15, 12, Ability.Dexterity, 16))
+        if (!SaveGame.CheckIfRacialPowerWorks(15, 12, Ability.Dexterity, 16))
         {
             return;
         }
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        saveGame.TeleportSwap(dir);
+        SaveGame.TeleportSwap(dir);
     }
 
     public override string ActivationSummary(int lvl)

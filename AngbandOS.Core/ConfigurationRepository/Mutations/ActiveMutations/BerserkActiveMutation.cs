@@ -11,15 +11,15 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class BerserkActiveMutation : Mutation
 {
     private BerserkActiveMutation(SaveGame saveGame) : base(saveGame) { }
-    public override void Activate(SaveGame saveGame)
+    public override void Activate()
     {
-        if (!saveGame.CheckIfRacialPowerWorks(8, 8, Ability.Strength, 14))
+        if (!SaveGame.CheckIfRacialPowerWorks(8, 8, Ability.Strength, 14))
         {
             return;
         }
-        saveGame.TimedSuperheroism.AddTimer(SaveGame.Rng.DieRoll(25) + 25);
-        saveGame.RestoreHealth(30);
-        saveGame.TimedFear.ResetTimer();
+        SaveGame.TimedSuperheroism.AddTimer(base.SaveGame.Rng.DieRoll(25) + 25);
+        SaveGame.RestoreHealth(30);
+        SaveGame.TimedFear.ResetTimer();
     }
 
     public override string ActivationSummary(int lvl)

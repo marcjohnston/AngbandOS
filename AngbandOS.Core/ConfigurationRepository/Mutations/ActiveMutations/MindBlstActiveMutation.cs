@@ -11,18 +11,18 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class MindBlstActiveMutation : Mutation
 {
     private MindBlstActiveMutation(SaveGame saveGame) : base(saveGame) { }
-    public override void Activate(SaveGame saveGame)
+    public override void Activate()
     {
-        if (!saveGame.CheckIfRacialPowerWorks(5, 3, Ability.Wisdom, 15))
+        if (!SaveGame.CheckIfRacialPowerWorks(5, 3, Ability.Wisdom, 15))
         {
             return;
         }
-        saveGame.MsgPrint("You concentrate...");
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("You concentrate...");
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir, SaveGame.Rng.DiceRoll(3 + ((saveGame.ExperienceLevel - 1) / 5), 3));
+        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir, base.SaveGame.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 3));
     }
 
     public override string ActivationSummary(int lvl)

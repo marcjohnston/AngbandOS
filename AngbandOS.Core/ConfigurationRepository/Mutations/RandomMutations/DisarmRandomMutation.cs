@@ -16,22 +16,22 @@ internal class DisarmRandomMutation : Mutation
     public override string HaveMessage => "You occasionally stumble and drop things.";
     public override string LoseMessage => "Your feet shrink to their former size.";
 
-    public override void OnProcessWorld(SaveGame saveGame)
+    public override void OnProcessWorld()
     {
-        if (SaveGame.Rng.DieRoll(10000) != 1)
+        if (base.SaveGame.Rng.DieRoll(10000) != 1)
         {
             return;
         }
-        saveGame.Disturb(false);
-        saveGame.MsgPrint("You trip over your own feet!");
-        saveGame.TakeHit(SaveGame.Rng.DieRoll(saveGame.Weight / 6), "tripping");
-        saveGame.MsgPrint(null);
-        Item? oPtr = saveGame.GetInventoryItem(InventorySlot.MeleeWeapon);
+        SaveGame.Disturb(false);
+        SaveGame.MsgPrint("You trip over your own feet!");
+        SaveGame.TakeHit(base.SaveGame.Rng.DieRoll(SaveGame.Weight / 6), "tripping");
+        SaveGame.MsgPrint(null);
+        Item? oPtr = SaveGame.GetInventoryItem(InventorySlot.MeleeWeapon);
         if (oPtr == null)
         {
             return;
         }
-        saveGame.MsgPrint("You drop your weapon!");
-        saveGame.InvenDrop(InventorySlot.MeleeWeapon, 1);
+        SaveGame.MsgPrint("You drop your weapon!");
+        SaveGame.InvenDrop(InventorySlot.MeleeWeapon, 1);
     }
 }

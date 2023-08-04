@@ -16,15 +16,15 @@ internal class RawChaosRandomMutation : Mutation
     public override string HaveMessage => "You occasionally are surrounded with raw chaos.";
     public override string LoseMessage => "You feel the universe is more stable around you.";
 
-    public override void OnProcessWorld(SaveGame saveGame)
+    public override void OnProcessWorld()
     {
-        if (saveGame.HasAntiMagic || SaveGame.Rng.DieRoll(8000) != 1)
+        if (SaveGame.HasAntiMagic || base.SaveGame.Rng.DieRoll(8000) != 1)
         {
             return;
         }
-        saveGame.Disturb(false);
-        saveGame.MsgPrint("You feel the world warping around you!");
-        saveGame.MsgPrint(null);
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>(), 0, saveGame.ExperienceLevel, 8);
+        SaveGame.Disturb(false);
+        SaveGame.MsgPrint("You feel the world warping around you!");
+        SaveGame.MsgPrint(null);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>(), 0, SaveGame.ExperienceLevel, 8);
     }
 }

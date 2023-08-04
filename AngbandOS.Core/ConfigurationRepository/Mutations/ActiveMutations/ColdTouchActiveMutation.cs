@@ -11,25 +11,25 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class ColdTouchActiveMutation : Mutation
 {
     private ColdTouchActiveMutation(SaveGame saveGame) : base(saveGame) { }
-    public override void Activate(SaveGame saveGame)
+    public override void Activate()
     {
-        if (!saveGame.CheckIfRacialPowerWorks(2, 2, Ability.Constitution, 11))
+        if (!SaveGame.CheckIfRacialPowerWorks(2, 2, Ability.Constitution, 11))
         {
             return;
         }
-        if (!saveGame.GetDirectionNoAim(out int dir))
+        if (!SaveGame.GetDirectionNoAim(out int dir))
         {
             return;
         }
-        int y = saveGame.MapY + saveGame.KeypadDirectionYOffset[dir];
-        int x = saveGame.MapX + saveGame.KeypadDirectionXOffset[dir];
-        GridTile cPtr = saveGame.Grid[y][x];
+        int y = SaveGame.MapY + SaveGame.KeypadDirectionYOffset[dir];
+        int x = SaveGame.MapX + SaveGame.KeypadDirectionXOffset[dir];
+        GridTile cPtr = SaveGame.Grid[y][x];
         if (cPtr.MonsterIndex == 0)
         {
-            saveGame.MsgPrint("You wave your hands in the air.");
+            SaveGame.MsgPrint("You wave your hands in the air.");
             return;
         }
-        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 2 * saveGame.ExperienceLevel);
+        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 2 * SaveGame.ExperienceLevel);
     }
 
     public override string ActivationSummary(int lvl)

@@ -16,23 +16,23 @@ internal class SpToHpRandomMutation : Mutation
     public override string HaveMessage => "Your blood sometimes rushes to your muscles.";
     public override string LoseMessage => "You are no longer subject to fits of magical healing.";
 
-    public override void OnProcessWorld(SaveGame saveGame)
+    public override void OnProcessWorld()
     {
-        if (SaveGame.Rng.DieRoll(2000) != 1)
+        if (base.SaveGame.Rng.DieRoll(2000) != 1)
         {
             return;
         }
-        int wounds = saveGame.MaxHealth - saveGame.Health;
+        int wounds = SaveGame.MaxHealth - SaveGame.Health;
         if (wounds <= 0)
         {
             return;
         }
-        int healing = saveGame.Mana;
+        int healing = SaveGame.Mana;
         if (healing > wounds)
         {
             healing = wounds;
         }
-        saveGame.RestoreHealth(healing);
-        saveGame.Mana -= healing;
+        SaveGame.RestoreHealth(healing);
+        SaveGame.Mana -= healing;
     }
 }

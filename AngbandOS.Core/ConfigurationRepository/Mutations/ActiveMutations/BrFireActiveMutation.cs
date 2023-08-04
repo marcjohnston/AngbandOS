@@ -11,16 +11,16 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class BrFireActiveMutation : Mutation
 {
     private BrFireActiveMutation(SaveGame saveGame) : base(saveGame) { }
-    public override void Activate(SaveGame saveGame)
+    public override void Activate()
     {
-        if (!saveGame.CheckIfRacialPowerWorks(20, saveGame.ExperienceLevel, Ability.Constitution, 18))
+        if (!SaveGame.CheckIfRacialPowerWorks(20, SaveGame.ExperienceLevel, Ability.Constitution, 18))
         {
             return;
         }
-        saveGame.MsgPrint("You breathe fire...");
-        if (saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("You breathe fire...");
+        if (SaveGame.GetDirectionWithAim(out int dir))
         {
-            saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, saveGame.ExperienceLevel * 2, -(1 + (saveGame.ExperienceLevel / 20)));
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, SaveGame.ExperienceLevel * 2, -(1 + (SaveGame.ExperienceLevel / 20)));
         }
     }
 
