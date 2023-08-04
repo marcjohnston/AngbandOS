@@ -17,7 +17,7 @@ internal class SaveGame
     public bool IsDead;
 
     [NonSerialized]
-    public Rng Rng = new Rng();
+    public Rng Rng;
 
     public const int OneInChanceUpStairsReturnsToTownLevel = 5;
 
