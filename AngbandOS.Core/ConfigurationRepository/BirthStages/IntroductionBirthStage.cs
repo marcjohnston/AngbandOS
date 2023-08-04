@@ -100,10 +100,10 @@ internal class IntroductionBirthStage : BirthStage
             while ((SaveGame.Race.Choice & (1L << SaveGame.BaseCharacterClass.ID)) == 0);
 
             // Use a weighted random to choose a the realms.
-            SaveGame.PrimaryRealm = new WeightedRandom<Realm>(SaveGame.BaseCharacterClass.AvailablePrimaryRealms).Choose();
+            SaveGame.PrimaryRealm = new WeightedRandom<Realm>(SaveGame, SaveGame.BaseCharacterClass.AvailablePrimaryRealms).Choose();
 
             // We need to get the available secondary realms.  Note that we need to exclude the primary realm.
-            SaveGame.SecondaryRealm = new WeightedRandom<Realm>(SaveGame.BaseCharacterClass.RemainingAvailableSecondaryRealms()).Choose();
+            SaveGame.SecondaryRealm = new WeightedRandom<Realm>(SaveGame, SaveGame.BaseCharacterClass.RemainingAvailableSecondaryRealms()).Choose();
             if (SaveGame.BaseCharacterClass.WorshipsADeity)
             {
                 SaveGame.Religion.Deity = SaveGame.BaseCharacterClass.DefaultDeity(SaveGame.SecondaryRealm);

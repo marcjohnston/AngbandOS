@@ -15,7 +15,7 @@ internal abstract class CloakArmorItem : ArmourItem
 
     protected override void ApplyRandomGoodRareCharacteristics()
     {
-        WeightedRandom<RareItemTypeEnum> weightedRandom = new WeightedRandom<RareItemTypeEnum>();
+        WeightedRandom<RareItemTypeEnum> weightedRandom = new WeightedRandom<RareItemTypeEnum>(SaveGame);
         weightedRandom.Add(8, RareItemTypeEnum.CloakOfProtection);
         weightedRandom.Add(8, RareItemTypeEnum.CloakOfStealth);
         weightedRandom.Add(1, RareItemTypeEnum.CloakOfAman);

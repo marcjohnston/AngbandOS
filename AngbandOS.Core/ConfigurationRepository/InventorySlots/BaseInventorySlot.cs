@@ -149,7 +149,7 @@ internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IS
     /// <summary>
     /// Returns a weighted random chooser for an item in the slot.  Each item has an equal weight.
     /// </summary>
-    public WeightedRandom<int> WeightedRandom => new WeightedRandom<int>(InventorySlots);
+    public WeightedRandom<int> WeightedRandom => new WeightedRandom<int>(SaveGame, InventorySlots);
 
     /// <summary>
     /// Returns true, if the inventory slot provides light; false, otherwise.  Returns false, by default.

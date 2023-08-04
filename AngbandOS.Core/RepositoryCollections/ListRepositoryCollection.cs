@@ -46,7 +46,7 @@ internal abstract class ListRepositoryCollection<T> : RepositoryCollection<T>
     /// </summary>
     /// <param name="predicate"></param>
     /// <returns></returns>
-    public WeightedRandom<T> ToWeightedRandom(Func<T, bool>? predicate = null) => new WeightedRandom<T>(this, predicate);
+    public WeightedRandom<T> ToWeightedRandom(Func<T, bool>? predicate = null) => new WeightedRandom<T>(SaveGame, this, predicate);
 
     /// <summary>
     /// Adds an item to the repository.  This is often used to add configured objects.

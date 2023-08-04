@@ -56,7 +56,7 @@ internal abstract class LightSourceItem : ArmourItem
         }
         else if (power == 1) // Good
         {
-            WeightedRandom<RareItemTypeEnum> weightedRandom = new WeightedRandom<RareItemTypeEnum>();
+            WeightedRandom<RareItemTypeEnum> weightedRandom = new WeightedRandom<RareItemTypeEnum>(SaveGame);
             weightedRandom.Add(1, RareItemTypeEnum.OrbOfFlame);
             weightedRandom.Add(1, RareItemTypeEnum.OrbOfFrost);
             weightedRandom.Add(1, RareItemTypeEnum.OrbOfAcid);

@@ -9,12 +9,17 @@ namespace AngbandOS.Core;
 
 internal class WeightedRandom<T>
 {
+    private readonly SaveGame SaveGame;
     private Dictionary<int, T> dictionary = new Dictionary<int, T>();
 
-    public WeightedRandom() { }
-
-    public WeightedRandom(IEnumerable<T> values, Func<T, bool>? predicate)
+    public WeightedRandom(SaveGame saveGame)
     {
+        SaveGame = saveGame;
+    }
+
+    public WeightedRandom(SaveGame saveGame, IEnumerable<T> values, Func<T, bool>? predicate)
+    {
+        SaveGame = saveGame;
         foreach (T value in values)
         {
             if (predicate == null || predicate(value))
@@ -24,8 +29,9 @@ internal class WeightedRandom<T>
         }
     }
 
-    public WeightedRandom(IEnumerable<T> values)
+    public WeightedRandom(SaveGame saveGame, IEnumerable<T> values)
     {
+        SaveGame = saveGame;
         foreach (T value in values)
         {
             Add(1, value);
@@ -48,7 +54,7 @@ internal class WeightedRandom<T>
         {
             return default;
         }
-        int choice = Program.Rng.RandomLessThan(dictionary.Count);
+        int choice = SaveGame.Rng.RandomLessThan(dictionary.Count);
         return dictionary[choice];
     }
 }

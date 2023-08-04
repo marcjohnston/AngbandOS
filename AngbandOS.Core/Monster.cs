@@ -707,7 +707,7 @@ internal class Monster : IItemContainer
             return;
         }
         // If we can usefully cast a spell against another monster, then that's our turn
-        if (TryCastingASpellAgainstAnotherMonster(SaveGame))
+        if (TryCastingASpellAgainstAnotherMonster())
         {
             return;
         }
@@ -1567,7 +1567,7 @@ internal class Monster : IItemContainer
     /// </summary>
     /// <param name="monsterIndex"> The index of the monster casting the spell </param>
     /// <returns> True if we cast a spell, false otherwise </returns>
-    private bool TryCastingASpellAgainstAnotherMonster(SaveGame saveGame)
+    private bool TryCastingASpellAgainstAnotherMonster()
     {
         bool friendly = SmFriendly;
 
@@ -1583,7 +1583,7 @@ internal class Monster : IItemContainer
         {
             return false;
         }
-        if (SaveGame.Rng.RandomLessThan(100) >= chance)
+        if (this.SaveGame.Rng.RandomLessThan(100) >= chance)
         {
             return false;
         }
@@ -1591,10 +1591,10 @@ internal class Monster : IItemContainer
         MonsterSpellList monsterSpells = Race.Spells;
 
         // Look through the monster list to find a potential target
-        for (int i = 1; i < saveGame.MMax; i++)
+        for (int i = 1; i < SaveGame.MMax; i++)
         {
             int targetIndex = i;
-            Monster target = saveGame.Monsters[targetIndex];
+            Monster target = SaveGame.Monsters[targetIndex];
             MonsterRace targetRace = target.Race;
 
             // Can't cast spells on ourself
@@ -1622,14 +1622,14 @@ internal class Monster : IItemContainer
             }
 
             // If we don't have line of sight to the target, don't cast a spell
-            if (!saveGame.Projectable(MapY, MapX, target.MapY, target.MapX))
+            if (!SaveGame.Projectable(MapY, MapX, target.MapY, target.MapX))
             {
                 continue;
             }
 
             // If we're smart and badly injured, we may want to prioritise spells that disable
             // the target, summon help, or let us escape over spells that do direct damage
-            if (Race.Smart && Health < MaxHealth / 10 && SaveGame.Rng.RandomLessThan(100) < 50)
+            if (Race.Smart && Health < MaxHealth / 10 && this.SaveGame.Rng.RandomLessThan(100) < 50)
             {
                 monsterSpells = monsterSpells.Where((MonsterSpell _monsterSpell) => _monsterSpell.IsIntelligent);
 
@@ -1641,7 +1641,7 @@ internal class Monster : IItemContainer
             }
             // If there's nowhere around the target to put a summoned creature, then remove
             // summoning spells
-            if (monsterSpells.Contains((MonsterSpell _monsterSpell) => _monsterSpell.SummonsHelp) && !Race.Stupid && !saveGame.SummonPossible(target.MapY, target.MapX))
+            if (monsterSpells.Contains((MonsterSpell _monsterSpell) => _monsterSpell.SummonsHelp) && !Race.Stupid && !SaveGame.SummonPossible(target.MapY, target.MapX))
             {
                 monsterSpells = monsterSpells.Remove((MonsterSpell _monsterSpell) => _monsterSpell.SummonsHelp);
             }
@@ -1653,14 +1653,14 @@ internal class Monster : IItemContainer
             }
 
             // If the player's already dead or off the level, don't cast
-            if (!saveGame.Playing || saveGame.IsDead || saveGame.NewLevelFlag)
+            if (!SaveGame.Playing || SaveGame.IsDead || SaveGame.NewLevelFlag)
             {
                 return false;
             }
 
             // Against other monsters we pick spells randomly
-            MonsterSpell thrownSpell = Race.Spells.ToWeightedRandom().Choose();
-            bool blind = saveGame.TimedBlindness.TurnsRemaining != 0;
+            MonsterSpell thrownSpell = Race.Spells.ToWeightedRandom(SaveGame).Choose();
+            bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
             bool seeTarget = !blind && target.IsVisible;
             bool seen = !blind && IsVisible;
             bool seeEither = seen || seeTarget;
@@ -1668,18 +1668,18 @@ internal class Monster : IItemContainer
             // If the player can see either monster, disturb the player.
             if (seeEither)
             {
-                saveGame.Disturb(true);
+                SaveGame.Disturb(true);
             }
 
             // Render a message to the player.
             string? message = !seeEither ? thrownSpell.VsMonsterUnseenMessage : thrownSpell.VsMonsterSeenMessage(this, target);
             if (message != null)
             {
-                saveGame.MsgPrint(message);
+                SaveGame.MsgPrint(message);
             }
 
             // Execute the action on the monster.
-            thrownSpell.ExecuteOnMonster(saveGame, this, target);
+            thrownSpell.ExecuteOnMonster(SaveGame, this, target);
 
             // Spells will wake up the target if it's asleep
             if (thrownSpell.WakesSleepingMonsters)
@@ -1710,7 +1710,7 @@ internal class Monster : IItemContainer
                 }
             }
             // If we killed the player, let their descendants remember that
-            if (saveGame.IsDead && Race.Knowledge.RDeaths < Constants.MaxShort)
+            if (SaveGame.IsDead && Race.Knowledge.RDeaths < Constants.MaxShort)
             {
                 Race.Knowledge.RDeaths++;
             }
@@ -3145,7 +3145,7 @@ internal class Monster : IItemContainer
         // If the monster is stupid, cast a random spell
         if (Race.Stupid)
         {
-            return spells.ToWeightedRandom().Choose();
+            return spells.ToWeightedRandom(SaveGame).Choose();
         }
 
         // Priority One: If we're afraid or hurt, always use a random escape spell if we have one
@@ -3154,7 +3154,7 @@ internal class Monster : IItemContainer
             MonsterSpellList escapeSpells = spells.Where((_spell) => _spell.ProvidesEscape);
             if (escapeSpells.Count > 0)
             {
-                return escapeSpells.ToWeightedRandom().Choose();
+                return escapeSpells.ToWeightedRandom(SaveGame).Choose();
             }
         }
         // Priority Two: If we're hurt, always use a random healing spell if we have one
@@ -3163,7 +3163,7 @@ internal class Monster : IItemContainer
             MonsterSpellList healingSpells = spells.Where((_spell) => _spell.Heals);
             if (healingSpells.Count > 0)
             {
-                return healingSpells.ToWeightedRandom().Choose();
+                return healingSpells.ToWeightedRandom(SaveGame).Choose();
             }
         }
         // Priority Three: If we're near the player and have no attack spells, probably use a
@@ -3174,7 +3174,7 @@ internal class Monster : IItemContainer
         {
             if (tacticalSpells.Count > 0)
             {
-                return tacticalSpells.ToWeightedRandom().Choose();
+                return tacticalSpells.ToWeightedRandom(SaveGame).Choose();
             }
         }
 
@@ -3184,40 +3184,40 @@ internal class Monster : IItemContainer
             MonsterSpellList healingSpells = spells.Where((_spell) => _spell.Heals);
             if (healingSpells.Count > 0)
             {
-                return healingSpells.ToWeightedRandom().Choose();
+                return healingSpells.ToWeightedRandom(SaveGame).Choose();
             }
         }
         // Priority Five: If we have a summoning spell, maybe use it
         MonsterSpellList summonSpells = spells.Where((_spell) => _spell.SummonsHelp);
         if (summonSpells.Count > 0 && this.SaveGame.Rng.RandomLessThan(100) < 50)
         {
-            return summonSpells.ToWeightedRandom().Choose();
+            return summonSpells.ToWeightedRandom(SaveGame).Choose();
         }
 
         // Priority Six: If we have a direct attack spell, probably use it
         if (attackSpells.Count > 0 && this.SaveGame.Rng.RandomLessThan(100) < 85)
         {
-            return attackSpells.ToWeightedRandom().Choose();
+            return attackSpells.ToWeightedRandom(SaveGame).Choose();
         }
 
         // Priority Seven: If we have a tactical spell, maybe use it
         if (tacticalSpells.Count > 0 && this.SaveGame.Rng.RandomLessThan(100) < 50)
         {
-            return tacticalSpells.ToWeightedRandom().Choose();
+            return tacticalSpells.ToWeightedRandom(SaveGame).Choose();
         }
 
         // Priority Eight: If we have a haste spell, maybe use it
         MonsterSpellList hasteSpells = spells.Where((_spell) => _spell.Hastens);
         if (hasteSpells.Count > 0 && this.SaveGame.Rng.RandomLessThan(100) < 20 + Race.Speed - Speed)
         {
-            return hasteSpells.ToWeightedRandom().Choose();
+            return hasteSpells.ToWeightedRandom(SaveGame).Choose();
         }
 
         // Priority Nine: If we have an annoying spell, probably use it
         MonsterSpellList annoyanceSpells = spells.Where((_spell) => _spell.Annoys);
         if (annoyanceSpells.Count > 0 && this.SaveGame.Rng.RandomLessThan(100) < 85)
         {
-            return annoyanceSpells.ToWeightedRandom().Choose();
+            return annoyanceSpells.ToWeightedRandom(SaveGame).Choose();
         }
 
         // Priority Ten: Give up on using a spell
