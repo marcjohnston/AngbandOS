@@ -14,6 +14,6 @@ internal class _template : Script
 
     public override bool Execute()
     {
-        throw new NotImplementedException();
+        return false;
     }
 }

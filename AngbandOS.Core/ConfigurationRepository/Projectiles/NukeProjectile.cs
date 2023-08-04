@@ -100,7 +100,7 @@ internal class NukeProjectile : Projectile
                 SaveGame.MsgPrint("You undergo a freakish metamorphosis!");
                 if (SaveGame.Rng.DieRoll(4) == 1)
                 {
-                    SaveGame.PolymorphSelf(SaveGame);
+                    SaveGame.RunScript<PolymorphSelfScript>();
                 }
                 else
                 {

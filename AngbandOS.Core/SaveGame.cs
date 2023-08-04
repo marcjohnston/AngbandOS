@@ -16857,66 +16857,6 @@ internal class SaveGame
         CheckExperience();
     }
 
-    public void PolymorphSelf(SaveGame saveGame)
-    {
-        int effects = Rng.DieRoll(2);
-        int tmp = 0;
-        bool moreEffects = true;
-        MsgPrint("You feel a change coming over you...");
-        while (effects-- != 0 && moreEffects)
-        {
-            switch (Rng.DieRoll(12))
-            {
-                case 1:
-                case 2:
-                case 3:
-                    PolymorphWounds();
-                    break;
-
-                case 4:
-                case 5:
-                case 6:
-                    Dna.GainMutation();
-                    break;
-
-                case 7:
-                    {
-                        int newRaceIndex;
-                        Race newRace;
-                        do
-                        {
-                            newRaceIndex = Rng.RandomLessThan(SingletonRepository.Races.Count);
-                            newRace = SingletonRepository.Races[newRaceIndex];
-                        } while (newRace is Race);
-                        MsgPrint($"You turn into {newRace.IndefiniteArticleForTitle} {newRace.Title}!");
-                        ChangeRace(newRace);
-                    }
-                    RedrawSingleLocation(MapY, MapX);
-                    moreEffects = false;
-                    break;
-
-                case 8:
-                    MsgPrint("You polymorph into an abomination!");
-                    while (tmp < 6)
-                    {
-                        DecreaseAbilityScore(tmp, Rng.FixedSeed + 6, Rng.DieRoll(3) == 1);
-                        tmp++;
-                    }
-                    if (Rng.DieRoll(6) == 1)
-                    {
-                        MsgPrint("You find living difficult in your present form!");
-                        TakeHit(Rng.DiceRoll(Rng.DieRoll(ExperienceLevel), ExperienceLevel), "a lethal mutation");
-                    }
-                    ShuffleAbilityScores();
-                    break;
-
-                default:
-                    ShuffleAbilityScores();
-                    break;
-            }
-        }
-    }
-
     public void PolymorphWounds()
     {
         int wounds = TimedBleeding.TurnsRemaining;
