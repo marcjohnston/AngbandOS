@@ -93,7 +93,7 @@ internal abstract class LightSourceItem : ArmourItem
             RareItemTypeIndex = RareItemTypeEnum.OrbOfPower;
             for (int i = 0; i < 3; i++)
             {
-                WeightedRandomAction weightedRandomAction = new WeightedRandomAction();
+                WeightedRandomAction weightedRandomAction = new WeightedRandomAction(SaveGame);
                 weightedRandomAction.Add(2, () => RandartItemCharacteristics.ResDark = true);
                 weightedRandomAction.Add(1, () => RandartItemCharacteristics.ResLight = true);
                 weightedRandomAction.Add(1, () => RandartItemCharacteristics.ResBlind = true);
