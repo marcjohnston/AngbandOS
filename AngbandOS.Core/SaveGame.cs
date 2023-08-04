@@ -16859,26 +16859,6 @@ internal class SaveGame
 
     public void PolymorphWounds()
     {
-        int wounds = TimedBleeding.TurnsRemaining;
-        int hitP = MaxHealth - Health;
-        int change = Rng.DiceRoll(ExperienceLevel, 5);
-        bool nastyEffect = Rng.DieRoll(5) == 1;
-        if (!(wounds != 0 || hitP != 0 || nastyEffect))
-        {
-            return;
-        }
-        if (nastyEffect)
-        {
-            MsgPrint("A new wound was created!");
-            TakeHit(change, "a polymorphed wound");
-            TimedBleeding.SetTimer(change);
-        }
-        else
-        {
-            MsgPrint("Your wounds are polymorphed into less serious ones.");
-            RestoreHealth(change);
-            TimedBleeding.SetTimer(TimedBleeding.TurnsRemaining - (change / 2));
-        }
     }
 
     [Obsolete("Use PrintSpells(Spell[], int, int)")]

@@ -25,7 +25,7 @@ internal class PolymorphSelfScript : Script
                 case 1:
                 case 2:
                 case 3:
-                    SaveGame.PolymorphWounds();
+                    SaveGame.RunScript<PolymorphWoundsScript>();
                     break;
 
                 case 4:
