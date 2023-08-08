@@ -27,9 +27,13 @@ public class GameServer
         get
         {
             if (SaveGame == null || SaveGame.IsDead)
+            {
                 return null;
+            }
             else
+            {
                 return SaveGame.ExperienceLevel;
+            }
         }
     }
 
@@ -42,9 +46,13 @@ public class GameServer
         get
         {
             if (SaveGame == null || SaveGame.IsDead)
+            {
                 return null;
+            }
             else
+            {
                 return SaveGame.Gold;
+            }
         }
     }
 
@@ -57,9 +65,13 @@ public class GameServer
         get
         {
             if (SaveGame == null || SaveGame.IsDead)
+            {
                 return null;
+            }
             else
+            {
                 return SaveGame.Name;
+            }
         }
     }
 
