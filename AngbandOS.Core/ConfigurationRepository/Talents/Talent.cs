@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Talents;
 
 [Serializable]
-internal abstract class Talent : IConfigurationRepository
+internal abstract class Talent : IConfigurationItem
 {
     protected readonly SaveGame SaveGame;
     protected Talent(SaveGame saveGame)

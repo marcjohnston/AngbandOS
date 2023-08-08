@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.CharacterClasses;
 
 [Serializable]
-internal abstract class BaseCharacterClass : IConfigurationRepository
+internal abstract class BaseCharacterClass : IConfigurationItem
 {
     protected SaveGame SaveGame { get; }
     protected BaseCharacterClass(SaveGame saveGame)

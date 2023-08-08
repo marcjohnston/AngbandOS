@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.MonsterSpells;
 
 [Serializable]
-internal abstract class MonsterSpell : IConfigurationRepository
+internal abstract class MonsterSpell : IConfigurationItem
 {
     protected readonly SaveGame SaveGame;
     protected MonsterSpell(SaveGame saveGame) 

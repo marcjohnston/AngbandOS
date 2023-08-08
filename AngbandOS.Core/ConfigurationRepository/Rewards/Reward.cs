@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Rewards;
 
 [Serializable]
-internal abstract class Reward : IConfigurationRepository
+internal abstract class Reward : IConfigurationItem
 {
     protected readonly SaveGame SaveGame;
     protected Reward(SaveGame saveGame)

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Races;
 
 [Serializable]
-internal abstract class Race : IConfigurationRepository
+internal abstract class Race : IConfigurationItem
 {
     protected readonly SaveGame SaveGame;
     protected Race(SaveGame saveGame)

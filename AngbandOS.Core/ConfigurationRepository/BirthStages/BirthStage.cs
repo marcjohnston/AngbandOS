@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.BirthStages;
 
 [Serializable]
-internal abstract class BirthStage : IConfigurationRepository
+internal abstract class BirthStage : IConfigurationItem
 {
     protected readonly SaveGame SaveGame;
     protected BirthStage(SaveGame saveGame)

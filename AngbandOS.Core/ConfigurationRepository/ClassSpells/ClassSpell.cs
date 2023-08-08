@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ClassSpells;
 
 [Serializable]
-internal abstract class ClassSpell : IConfigurationRepository
+internal abstract class ClassSpell : IConfigurationItem
 {
     protected readonly SaveGame SaveGame;
     protected ClassSpell(SaveGame saveGame)

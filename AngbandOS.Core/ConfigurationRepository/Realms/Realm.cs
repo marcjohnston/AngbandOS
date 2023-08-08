@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Realms;
 
 [Serializable]
-internal abstract class Realm : IConfigurationRepository
+internal abstract class Realm : IConfigurationItem
 {
     protected SaveGame SaveGame { get; }
     protected Realm(SaveGame saveGame)

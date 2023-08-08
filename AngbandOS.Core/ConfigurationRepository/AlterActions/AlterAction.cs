@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.AlterActions;
 
 [Serializable]
-internal abstract class AlterAction : IConfigurationRepository
+internal abstract class AlterAction : IConfigurationItem
 {
     protected readonly SaveGame SaveGame;
     protected AlterAction(SaveGame saveGame)

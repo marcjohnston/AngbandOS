@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ChestTrapConfigurations;
 
 [Serializable]
-internal abstract class ChestTrapConfiguration : IConfigurationRepository
+internal abstract class ChestTrapConfiguration : IConfigurationItem
 {
     protected SaveGame SaveGame;
     protected ChestTrapConfiguration(SaveGame saveGame)

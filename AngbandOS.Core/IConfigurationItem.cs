@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents the interface an object needs to implement for it to participate in a ConfigurationRepository.
 /// </summary>
-internal interface IConfigurationRepository
+internal interface IConfigurationItem
 {
 
     /// <summary>

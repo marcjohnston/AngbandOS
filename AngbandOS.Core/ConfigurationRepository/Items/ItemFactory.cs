@@ -13,7 +13,7 @@ namespace AngbandOS.Core.ItemClasses;
 /// </summary>
 [Serializable]
 
-internal abstract class ItemFactory : IItemCharacteristics, IConfigurationRepository
+internal abstract class ItemFactory : IItemCharacteristics, IConfigurationItem
 {
     protected readonly SaveGame SaveGame;
 

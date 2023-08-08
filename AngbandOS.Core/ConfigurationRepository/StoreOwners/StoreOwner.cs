@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.StoreOwners;
 
 [Serializable]
-internal abstract class StoreOwner : IConfigurationRepository
+internal abstract class StoreOwner : IConfigurationItem
 {
     protected SaveGame SaveGame { get; }
     protected StoreOwner(SaveGame saveGame)

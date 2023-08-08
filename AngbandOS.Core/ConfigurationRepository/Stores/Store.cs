@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Stores;
 
 [Serializable]
-internal abstract class Store : IItemFilter, IConfigurationRepository
+internal abstract class Store : IItemFilter, IConfigurationItem
 {
     private int _x;
     private int _y;

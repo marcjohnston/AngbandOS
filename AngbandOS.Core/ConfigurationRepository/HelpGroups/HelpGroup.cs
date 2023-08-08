@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.HelpGroups;
 
 [Serializable]
-internal abstract class HelpGroup : IConfigurationRepository
+internal abstract class HelpGroup : IConfigurationItem
 {
     protected SaveGame SaveGame { get; }
     protected HelpGroup(SaveGame saveGame) 

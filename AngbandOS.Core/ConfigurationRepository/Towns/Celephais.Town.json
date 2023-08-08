@@ -2,7 +2,7 @@
     "Char": "C",
     "HousePrice": 50000,
     "Name": "the beautiful city of Celephais",
-    "StoreNames": [
+    "Stores": [
         "GeneralStore",
         "ArmouryStore",
         "WeaponStore",

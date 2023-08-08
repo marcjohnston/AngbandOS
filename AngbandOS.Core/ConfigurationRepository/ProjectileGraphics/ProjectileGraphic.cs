@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ProjectileGraphics;
 
 [Serializable]
-internal abstract class ProjectileGraphic : IConfigurationRepository
+internal abstract class ProjectileGraphic : IConfigurationItem
 {
     protected SaveGame SaveGame;
     protected ProjectileGraphic(SaveGame saveGame)

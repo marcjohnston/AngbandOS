@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Towns;
 
 [Serializable]
-internal abstract class Town : IConfigurationRepository
+internal abstract class Town : IConfigurationItem
 {
-    protected SaveGame SaveGame;
+    protected readonly SaveGame SaveGame;
 
     protected Town(SaveGame saveGame)
     {

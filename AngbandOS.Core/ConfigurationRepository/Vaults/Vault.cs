@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Vaults;
 
 [Serializable]
-internal abstract class Vault : IConfigurationRepository
+internal abstract class Vault : IConfigurationItem
 {
     protected SaveGame SaveGame;
     protected Vault(SaveGame saveGame)

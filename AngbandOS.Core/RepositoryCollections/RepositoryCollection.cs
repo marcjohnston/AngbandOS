@@ -42,9 +42,9 @@ internal abstract class RepositoryCollection<T> : IEnumerable<T>
                 {
                     T item = (T)constructors[0].Invoke(new object[] { SaveGame });
                     bool exclude = false;
-                    if (typeof(IConfigurationRepository).IsAssignableFrom(type))
+                    if (typeof(IConfigurationItem).IsAssignableFrom(type))
                     {
-                        IConfigurationRepository singletonType = (IConfigurationRepository)item;
+                        IConfigurationItem singletonType = (IConfigurationItem)item;
                         exclude = singletonType.ExcludeFromRepository;
                     }
                     if (!exclude)
@@ -88,7 +88,14 @@ internal abstract class RepositoryCollection<T> : IEnumerable<T>
         return default;
     }
 
+    /// <summary>
+    /// Processes the load phase for the configuration repository items.  This phase creates instances of all objects that have a private constructor.  An instance of the SaveGame is
+    /// sent to the constructor for every configuration repository item created.  The configuration repository item cannot assume other repository items are available during this phase.
+    /// </summary>
     public abstract void Load();
 
+    /// <summary>
+    /// Processes the loaded phase for configuration repository items.  This phase allows each object to bind to other configuration repository objects.
+    /// </summary>
     public virtual void Loaded() { }
 }

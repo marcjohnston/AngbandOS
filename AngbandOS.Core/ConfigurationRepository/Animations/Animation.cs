@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Animations;
 
 [Serializable]
-internal abstract class Animation : IConfigurationRepository
+internal abstract class Animation : IConfigurationItem
 {
     protected SaveGame SaveGame;
     protected Animation(SaveGame saveGame)

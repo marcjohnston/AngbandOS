@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.AttackTypes;
 
 [Serializable]
-internal abstract class Attack : IConfigurationRepository
+internal abstract class Attack : IConfigurationItem
 {
     protected readonly SaveGame SaveGame;
     protected Attack(SaveGame saveGame)

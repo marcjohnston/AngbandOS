@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Tiles;
 
 [Serializable]
-internal abstract class Tile : ISingletonKeyedDictionary<string>, IConfigurationRepository
+internal abstract class Tile : ISingletonKeyedDictionary<string>, IConfigurationItem
 {
     protected SaveGame SaveGame;
     protected Tile(SaveGame saveGame)

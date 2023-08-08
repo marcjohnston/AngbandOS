@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Patrons;
 
 [Serializable]
-internal abstract class Patron : IConfigurationRepository
+internal abstract class Patron : IConfigurationItem
 {
     protected readonly SaveGame SaveGame;
     protected Patron(SaveGame saveGame)

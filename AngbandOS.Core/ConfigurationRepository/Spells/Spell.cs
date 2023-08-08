@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Spells;
 
 [Serializable]
-internal abstract class Spell : IConfigurationRepository
+internal abstract class Spell : IConfigurationItem
 {
     protected readonly SaveGame SaveGame;
 

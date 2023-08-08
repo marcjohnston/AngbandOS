@@ -11,7 +11,7 @@ namespace AngbandOS.Core.TimedActions;
 /// Represents an action that occurs over a period of time.
 /// </summary>
 [Serializable]
-internal abstract class TimedAction : IConfigurationRepository
+internal abstract class TimedAction : IConfigurationItem
 {
     protected SaveGame SaveGame { get; }
 

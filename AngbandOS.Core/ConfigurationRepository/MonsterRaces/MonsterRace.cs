@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.MonsterRaces;
 
 [Serializable]
-internal abstract class MonsterRace : IMonsterCharacteristics, IConfigurationRepository
+internal abstract class MonsterRace : IMonsterCharacteristics, IConfigurationItem
 {
     protected readonly SaveGame SaveGame;
     protected MonsterRace(SaveGame saveGame)

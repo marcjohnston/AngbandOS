@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.MartialArtsAttacks;
 
 [Serializable]
-internal abstract class MartialArtsAttack : IConfigurationRepository
+internal abstract class MartialArtsAttack : IConfigurationItem
 {
     protected readonly SaveGame SaveGame;
 

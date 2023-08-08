@@ -1,7 +1,7 @@
 namespace AngbandOS.Core.ItemClasses;
 
 [Serializable]
-internal abstract class ItemClass : IConfigurationRepository
+internal abstract class ItemClass : IConfigurationItem
 {
     protected readonly SaveGame SaveGame;
     protected ItemClass(SaveGame saveGame)

@@ -5,8 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.Stores;
-using System.Xml.Linq;
+using System.Text.Json;
 
 namespace AngbandOS.Core.Towns;
 
@@ -25,7 +24,7 @@ internal class GenericTown : Town
 
     public GenericTown(SaveGame saveGame, string serializedJson) : base(saveGame)
     {
-        TownJsonDefinition? jsonDefinition = System.Text.Json.JsonSerializer.Deserialize<TownJsonDefinition>(serializedJson);
+        JsonTown? jsonDefinition = JsonSerializer.Deserialize<JsonTown>(serializedJson);
         if (jsonDefinition == null)
         {
             throw new Exception("The singleton object failed to deserialize.");
@@ -34,7 +33,7 @@ internal class GenericTown : Town
         {
             throw new Exception("The Town.Char property failed to deserialize.");
         }
-        if (jsonDefinition.HousePrice == null || jsonDefinition.Name == null || jsonDefinition.StoreNames == null)
+        if (jsonDefinition.HousePrice == null || jsonDefinition.Name == null || jsonDefinition.Stores == null)
         {
             throw new Exception("The Town.HousePrice property failed to deserialize.");
         }
@@ -42,14 +41,14 @@ internal class GenericTown : Town
         {
             throw new Exception("The Town.Name property failed to deserialize.");
         }
-        if (jsonDefinition.StoreNames == null)
+        if (jsonDefinition.Stores == null)
         {
             throw new Exception("The Town.StoreNames property failed to deserialize.");
         }
         _housePrice = jsonDefinition.HousePrice.Value;
         _name = jsonDefinition.Name;
         _character = jsonDefinition.Char.Value;
-        _storeNames = jsonDefinition.StoreNames;
+        _storeNames = jsonDefinition.Stores;
     }
 
     public override Store[] Stores => _stores;
@@ -57,6 +56,10 @@ internal class GenericTown : Town
     public override string Name => _name;
     public override char Char => _character;
 
+    /// <summary>
+    /// Performs the binding for generic towns to bind to stores.
+    /// </summary>
+    /// <exception cref="Exception"></exception>
     public override void Loaded()
     {
         List<Store> stores = new List<Store>();

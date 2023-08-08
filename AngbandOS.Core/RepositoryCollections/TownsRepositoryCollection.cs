@@ -5,17 +5,42 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Reflection;
+using System.Text.Json;
+
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
 internal class TownsRepositoryCollection : DictionaryRepositoryCollection<Town>
 {
     public TownsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
+
     public override void Load()
     {
         base.Load();
 
-        Town? celephaisTown = LoadFromJson<GenericTown>("Celephais.json");
+        Town? celephaisTown = LoadFromJson<GenericTown>("Town.json");
         Add(celephaisTown);
+    }
+
+    public override void Loaded()
+    {
+        base.Loaded();
+
+        //var serializeOptions = new JsonSerializerOptions
+        //{
+        //    WriteIndented = true,
+        //    Converters = {
+        //        new ArrayOfStoreJsonConverter(SaveGame)
+        //    }
+        //};
+        //foreach (Town town in this)
+        //{
+        //    Assembly assembly = Assembly.GetAssembly(this.GetType());
+        //    string json = JsonSerializer.Serialize<Town>(town, serializeOptions);
+        //    string path = "D:\\OneDrive\\Programming\\AngbandOS\\AngbandOS.Core\\ConfigurationRepository\\Towns\\";
+        //    File.WriteAllText(path, json);
+
+        //}
     }
 }

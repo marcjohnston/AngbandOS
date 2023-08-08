@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Genders;
 
 [Serializable]
-internal abstract class Gender : IConfigurationRepository
+internal abstract class Gender : IConfigurationItem
 {
     protected readonly SaveGame SaveGame;
     protected Gender(SaveGame saveGame)

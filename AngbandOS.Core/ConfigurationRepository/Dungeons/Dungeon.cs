@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Dungeons;
 /// A dungeon that the player can explore
 /// </summary>
 [Serializable]
-internal abstract class Dungeon : IConfigurationRepository
+internal abstract class Dungeon : IConfigurationItem
 {
     protected readonly SaveGame SaveGame;
 

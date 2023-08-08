@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RareItems;
 
 [Serializable]
-internal abstract class RareItem : IItemCharacteristics, ISingletonKeyedDictionary<RareItemTypeEnum>, IConfigurationRepository
+internal abstract class RareItem : IItemCharacteristics, ISingletonKeyedDictionary<RareItemTypeEnum>, IConfigurationItem
 {
     protected SaveGame SaveGame;
     protected RareItem(SaveGame saveGame)

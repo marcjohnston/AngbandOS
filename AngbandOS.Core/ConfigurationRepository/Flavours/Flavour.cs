@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Flavours;
 /// Represents a single flavour for a group of items that participate in the IFlavour interface.
 /// </summary>
 [Serializable]
-internal abstract class Flavour : IConfigurationRepository
+internal abstract class Flavour : IConfigurationItem
 {
     protected SaveGame SaveGame;
     protected Flavour(SaveGame saveGame)

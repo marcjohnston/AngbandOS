@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal abstract class KeyedDictionaryRepositoryCollection<TKey, TValue> : ListRepositoryCollection<TValue> where TValue : IConfigurationRepository, ISingletonKeyedDictionary<TKey>
+internal abstract class KeyedDictionaryRepositoryCollection<TKey, TValue> : ListRepositoryCollection<TValue> where TValue : IConfigurationItem, ISingletonKeyedDictionary<TKey>
 {
     Dictionary<TKey, TValue> instances = new Dictionary<TKey, TValue>();
     protected KeyedDictionaryRepositoryCollection(SaveGame saveGame) : base(saveGame) { }

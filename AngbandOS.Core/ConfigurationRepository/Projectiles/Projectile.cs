@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Projection;
 
 [Serializable]
-internal abstract class Projectile : IConfigurationRepository
+internal abstract class Projectile : IConfigurationItem
 {
     protected readonly SaveGame SaveGame;
     protected int ProjectMn;

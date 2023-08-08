@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.AttackEffects;
 
 [Serializable]
-internal abstract class AttackEffect : IConfigurationRepository
+internal abstract class AttackEffect : IConfigurationItem
 {
     protected readonly SaveGame SaveGame;
     protected AttackEffect(SaveGame saveGame)

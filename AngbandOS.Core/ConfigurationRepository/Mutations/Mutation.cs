@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Mutations;
 
 [Serializable]
-internal abstract class Mutation : IConfigurationRepository
+internal abstract class Mutation : IConfigurationItem
 {
     protected readonly SaveGame SaveGame;
     protected Mutation(SaveGame saveGame)

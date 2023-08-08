@@ -14,7 +14,7 @@ namespace AngbandOS.Core.RepositoryCollections;
 /// </summary>
 /// <typeparam name="T"></typeparam>
 [Serializable]
-internal abstract class DictionaryRepositoryCollection<T> : ListRepositoryCollection<T> where T : IConfigurationRepository
+internal abstract class DictionaryRepositoryCollection<T> : ListRepositoryCollection<T> where T : IConfigurationItem
 {
     Dictionary<string, T> dictionary = new Dictionary<string, T>();
 

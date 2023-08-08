@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal abstract class Script : IConfigurationRepository
+internal abstract class Script : IConfigurationItem
 {
     protected readonly SaveGame SaveGame;
     protected Script(SaveGame saveGame)

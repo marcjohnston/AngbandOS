@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.Symbols;
 
 [Serializable]
-internal abstract class Symbol : IConfigurationRepository
+internal abstract class Symbol : IConfigurationItem
 {
     protected readonly SaveGame SaveGame;
     protected Symbol(SaveGame saveGame)

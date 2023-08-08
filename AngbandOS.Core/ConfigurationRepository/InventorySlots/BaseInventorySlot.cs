@@ -10,7 +10,7 @@ using System.Collections;
 namespace AngbandOS.Core.InventorySlots;
 
 [Serializable]
-internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, ISingletonKeyedDictionary<string>, IConfigurationRepository // TODO: Rename to InventorySlot when the enumeration is refactored out of existence
+internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, ISingletonKeyedDictionary<string>, IConfigurationItem // TODO: Rename to InventorySlot when the enumeration is refactored out of existence
 {
     protected const string alphabet = "abcdefghijklmnopqrstuvwxyz";
     public SaveGame SaveGame { get; }
