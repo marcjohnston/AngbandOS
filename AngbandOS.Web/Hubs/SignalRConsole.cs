@@ -466,6 +466,16 @@ namespace AngbandOS.Web.Hubs
         {
             return _gameServer.GetPageOfGameMessages(firstIndex, lastIndex, maximumMessagesToRetrieve);
         }
+
+        /// <summary>
+        /// Receives an event from the active game that messages from the previous command have been received.
+        /// </summary>
+        /// <param name="gameMessages"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        public void MessagesReceived(IGameMessage[] gameMessages)
+        {
+            // TODO: We need to implement this for the client.
+        }
         #endregion
     }
 }

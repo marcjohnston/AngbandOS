@@ -47,5 +47,10 @@ public interface IConsoleViewPort : IViewPort
 
     bool KeyQueueIsEmpty();
 
+    /// <summary>
+    /// Messages from the previous command have been received.
+    /// </summary>
+    /// <param name="gameMessages"></param>
+    /// <exception cref="NotImplementedException"></exception>
     void MessagesReceived(IGameMessage[] gameMessages);
 }
