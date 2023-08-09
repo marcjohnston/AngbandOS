@@ -16,14 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ConfigurationRepository\Towns\Celephais.Town.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="ConfigurationRepository\Towns\Celephais.Town.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="5.0.1" />
   </ItemGroup>
 

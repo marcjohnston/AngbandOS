@@ -17,19 +17,10 @@ public class Configuration
     /// <summary>
     /// Returns the number of log items that the message history is allowed to store.  A null value indicates that there is no limit.  The default value is 2048.
     /// </summary>
-    public virtual int? MaxMessageLogLength => 2048;
+    public int? MaxMessageLogLength => 2048;
+
+    /// <summary>
+    /// Returns null, if Towns should be loaded from the assembly.  Otherwise, returns an array of Towns to be loaded into the SingletonRepository.
+    /// </summary>
+    public TownDefinition[]? Towns = null;
 }
-
-//public class StoreConfiguration
-//{
-//    public string Name { get; set; } = default!;
-//    public string[] StoreOwnerNames { get; set; } = default!;
-//}
-
-//public class StoreOwnerConfiguration
-//{
-//    public string Name { get; set; } = default!;
-//    public int MaxCost { get; set; } = default!;
-//    public int MinInflate { get; set; } = default!;
-//    public string RaceName { get; set; } = default!;
-//}

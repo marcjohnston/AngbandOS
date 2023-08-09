@@ -18,6 +18,7 @@
     <None Remove="Backgrounds\Sunset.png" />
     <None Remove="Backgrounds\Tomb.png" />
     <None Remove="Backgrounds\WildMap.png" />
+    <None Remove="Celephais.Town.json" />
     <None Remove="Music\come-play-with-me-by-kevin-macleod-from-filmmusic-io.mp3" />
     <None Remove="Music\controlled-chaos---no-percussion-by-kevin-macleod-from-filmmusic-io.mp3" />
     <None Remove="Music\final-count-by-kevin-macleod-from-filmmusic-io.mp3" />
@@ -940,6 +941,10 @@
     <Content Include="Sounds\sum_piano_scrape.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Celephais.Town.json" />
   </ItemGroup>
 
   <ItemGroup>

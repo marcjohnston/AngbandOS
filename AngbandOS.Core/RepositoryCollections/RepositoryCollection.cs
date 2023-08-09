@@ -57,37 +57,6 @@ internal abstract class RepositoryCollection<T> : IEnumerable<T>
         return typeList.ToArray();
     }
 
-    protected T? LoadFromJson<T>(string fuzzyResourceName)
-    {
-        Assembly assembly = Assembly.GetExecutingAssembly();
-
-        // Get all of the resource names.  We are going to perform a fuzzy lookup.
-        string[] actualResourceNames = assembly.GetManifestResourceNames();
-
-        // Now get the actual matching resource names.
-        string[] resourceNames = actualResourceNames.Where(_resourceName => _resourceName.EndsWith(fuzzyResourceName, StringComparison.OrdinalIgnoreCase)).ToArray();
-
-        // Load each of those resources.
-        foreach (string resourceName in resourceNames)
-        {
-            using (Stream? stream = assembly.GetManifestResourceStream(resourceName))
-            {
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    string serializedJson = reader.ReadToEnd();
-                    object? item = Activator.CreateInstance(typeof(T), new object?[] { SaveGame, serializedJson });
-                    if (item == null)
-                    {
-                        throw new Exception($"Failed to create an instance of {typeof(T).Name} when loading the {resourceName} resource for the matching {fuzzyResourceName} resource.");
-                    }
-                    return (T)item;
-                }
-            }
-        }
-
-        return default;
-    }
-
     /// <summary>
     /// Processes the load phase for the configuration repository items.  This phase creates instances of all objects that have a private constructor.  An instance of the SaveGame is
     /// sent to the constructor for every configuration repository item created.  The configuration repository item cannot assume other repository items are available during this phase.

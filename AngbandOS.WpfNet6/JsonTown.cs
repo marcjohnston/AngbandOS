@@ -5,9 +5,9 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Towns;
+namespace Cthangband;
 
-internal class JsonTown
+public class JsonTown
 {
     public char? Char { get; set; }
     public int? HousePrice { get; set; }

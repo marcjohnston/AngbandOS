@@ -5,9 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using System.Reflection;
-using System.Text.Json;
-
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
@@ -17,15 +14,24 @@ internal class TownsRepositoryCollection : DictionaryRepositoryCollection<Town>
 
     public override void Load()
     {
-        base.Load();
-
-        Town? celephaisTown = LoadFromJson<GenericTown>("Town.json");
-        Add(celephaisTown);
+        if (SaveGame.Configuration.Towns == null)
+        {
+            base.Load();
+        }
+        else
+        {
+            foreach (TownDefinition townDefinition in SaveGame.Configuration.Towns)
+            {
+                Add(new GenericTown(SaveGame, townDefinition));
+            }
+        }
     }
 
     public override void Loaded()
     {
         base.Loaded();
+
+        // THIS IS USED TO CREATE A TOWN.JSON FILE
 
         //var serializeOptions = new JsonSerializerOptions
         //{

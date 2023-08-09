@@ -576,6 +576,15 @@ internal class SaveGame
     /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
     public SaveGame(Configuration? configuration)
     {
+        // We need a default configuration, if one isn't provided.
+        if (configuration == null)
+        {
+            configuration = new Configuration();
+        }
+
+        // Save the configuration.  This configuration becomes permanent.
+        Configuration = configuration;
+
         IsDead = true;
 
         // Create the wilderness regions.
@@ -589,13 +598,11 @@ internal class SaveGame
             }
         }
 
+        // Create an instance of the SingletonRepository.  This allows repositories that are loading access to the SingletonRepository object.
         SingletonRepository = new SingletonRepository(this);
 
         // Load all of the predefined objects.  The singleton repository must already be created.
         SingletonRepository.Load();
-
-        // Configure the game.
-        Configure(configuration);
 
         Quests = new List<Quest>();
         InitializeAllocationTables();
@@ -1449,36 +1456,6 @@ internal class SaveGame
             goldType = goldItemClasses.Length - 1;
         }
         return (GoldItem)goldItemClasses[goldType.Value].CreateItem();
-    }
-
-    private void Configure(Configuration? configuration)
-    {
-        // We need a default configuration, if one isn't provided.
-        if (configuration == null)
-        {
-            configuration = new Configuration();
-        }
-
-        Configuration = configuration;
-
-        //// Stores repo.
-        //if (configuration.StoresRepo != null)
-        //{
-        //    foreach (StoreConfiguration storeConfiguration in configuration.StoresRepo)
-        //    {
-
-        //    }
-        //}
-
-        //// Stores.
-        //if (configuration.StoresRepo != null)
-        //{
-        //    //SingletonRepository.sto
-        //    foreach (string storeName in configuration.StoreNames)
-        //    {
-
-        //    }
-        //}
     }
 
     public int GetMonsterIndexFromName(string name)
