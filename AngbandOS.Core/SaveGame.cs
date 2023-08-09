@@ -21,7 +21,7 @@ internal class SaveGame
 
     public const int OneInChanceUpStairsReturnsToTownLevel = 5;
 
-    public SingletonRepository SingletonRepository = new SingletonRepository();
+    public SingletonRepository SingletonRepository;
 
     /// <summary>
     /// Maximum amount of health that can be drained from an opponent in one turn
@@ -589,8 +589,10 @@ internal class SaveGame
             }
         }
 
-        // Load all of the predefined objects.
-        SingletonRepository.Load(this);
+        SingletonRepository = new SingletonRepository(this);
+
+        // Load all of the predefined objects.  The singleton repository must already be created.
+        SingletonRepository.Load();
 
         // Configure the game.
         Configure(configuration);

@@ -15,6 +15,8 @@ namespace AngbandOS.Core;
 /// </summary>
 internal class SingletonRepository
 {
+    private readonly SaveGame SaveGame;
+
     public FlaggedActionsRepositoryCollection FlaggedActions;
     public TownsRepositoryCollection Towns;
     public ItemFactoriesRepositoryCollection ItemFactories;
@@ -84,83 +86,88 @@ internal class SingletonRepository
     public WorshipPlayerAttacksRepositoryCollection WorshipPlayerAttacks;
     public FindQuestsRepositoryCollection FindQuests;
 
+    public SingletonRepository(SaveGame saveGame)
+    {
+        SaveGame = saveGame;
+    }
+
     /// <summary>
     /// Performs the load phase of the singleton repository.  This phase reads all of the types from the assembly and adds it into its respective
     /// collection--if the ExcludeFromRepository property returns false.  If the ExcludeFromRepository is true, the singleton object will be discarded.
     /// </summary>
     /// <param name="saveGame"></param>
-    public void Load(SaveGame saveGame)
+    public void Load()
     {
-        FlaggedActions = new FlaggedActionsRepositoryCollection(saveGame);
-        Towns = new TownsRepositoryCollection(saveGame);
-        ItemFactories = new ItemFactoriesRepositoryCollection(saveGame);
-        Stores = new StoresRepositoryCollection(saveGame);
-        ItemClasses = new ItemClassesRepositoryCollection(saveGame);
-        Mutations = new MutationsRepositoryCollection(saveGame);
-        ChestTraps = new ChestTrapsRepositoryCollection(saveGame);
-        Attacks = new AttacksRepositoryCollection(saveGame);
-        AttackEffects = new AttackEffectsRepositoryCollection(saveGame);
-        SpellResistantDetections = new SpellResistantDetectionsRepositoryCollection(saveGame);
-        RoomLayouts = new RoomLayoutsRepositoryCollection(saveGame);
-        MonsterSpells = new MonsterSpellsRepositoryCollection(saveGame);
-        Talents = new TalentsRepositoryCollection(saveGame);
-        AlterActions = new AlterActionsRepositoryCollection(saveGame);
-        Symbols = new SymbolsRepositoryCollection(saveGame);
-        MartialArtsAttacks = new MartialArtsAttacksRepositoryCollection(saveGame);
-        Scripts = new ScriptsRepositoryCollection(saveGame);
-        Dungeons = new DungeonsRepositoryCollection(saveGame);
-        Genders = new GendersRepositoryCollection(saveGame);
-        BirthStages = new BirthStagesRepositoryCollection(saveGame);
-        Projectiles = new ProjectilesRepositoryCollection(saveGame);
-        Patrons = new PatronsRepositoryCollection(saveGame);
-        Animations = new AnimationsRepositoryCollection(saveGame);
-        FixedArtifacts = new FixedArtifactsRepositoryCollection(saveGame);
-        GameCommands = new GameCommandsRepositoryCollection(saveGame);
-        ArtifactBiases = new ArtifactBiasesRepositoryCollection(saveGame);
-        InventorySlots = new InventorySlotsRepositoryCollection(saveGame);
-        MonsterRaces = new MonsterRacesRepositoryCollection(saveGame);
-        ProjectileGraphics = new ProjectileGraphicsRepositoryCollection(saveGame);
-        Activations = new ActivationsRepositoryCollection(saveGame);
-        Races = new RacesRepositoryCollection(saveGame);
-        StoreCommands = new StoreCommandsRepositoryCollection(saveGame);
-        Vaults = new VaultsRepositoryCollection(saveGame);
-        WizardCommands = new WizardCommandsRepositoryCollection(saveGame);
-        TimedActions = new TimedActionsRepositoryCollection(saveGame);
-        CharacterClasses = new CharacterClassesRepositoryCollection(saveGame);
-        Realms = new RealmsRepositoryCollection(saveGame);
-        AmuletFlavours = new AmuletFlavoursRepositoryCollection(saveGame);
-        MushroomFlavours = new MushroomFlavoursRepositoryCollection(saveGame);
-        PotionFlavours = new PotionFlavoursRepositoryCollection(saveGame);
-        RingFlavours = new RingFlavoursRepositoryCollection(saveGame);
-        RodFlavours = new RodFlavoursRepositoryCollection(saveGame);
-        ScrollFlavours = new ScrollFlavoursRepositoryCollection(saveGame);
-        StaffFlavours = new StaffFlavoursRepositoryCollection(saveGame);
-        WandFlavours = new WandFlavoursRepositoryCollection(saveGame);
-        ChestTrapConfigurations = new ChestTrapConfigurationsRepositoryCollection(saveGame);
-        HelpGroups = new HelpGroupsRepositoryCollection(saveGame);
-        StoreOwners = new StoreOwnersRepositoryCollection(saveGame);
-        Spells = new SpellsRepositoryCollection(saveGame);
-        CastingTypes = new CastingTypesRepositoryCollection(saveGame);
-        Rewards = new RewardsRepositoryCollection(saveGame);
+        FlaggedActions = new FlaggedActionsRepositoryCollection(SaveGame);
+        Towns = new TownsRepositoryCollection(SaveGame);
+        ItemFactories = new ItemFactoriesRepositoryCollection(SaveGame);
+        Stores = new StoresRepositoryCollection(SaveGame);
+        ItemClasses = new ItemClassesRepositoryCollection(SaveGame);
+        Mutations = new MutationsRepositoryCollection(SaveGame);
+        ChestTraps = new ChestTrapsRepositoryCollection(SaveGame);
+        Attacks = new AttacksRepositoryCollection(SaveGame);
+        AttackEffects = new AttackEffectsRepositoryCollection(SaveGame);
+        SpellResistantDetections = new SpellResistantDetectionsRepositoryCollection(SaveGame);
+        RoomLayouts = new RoomLayoutsRepositoryCollection(SaveGame);
+        MonsterSpells = new MonsterSpellsRepositoryCollection(SaveGame);
+        Talents = new TalentsRepositoryCollection(SaveGame);
+        AlterActions = new AlterActionsRepositoryCollection(SaveGame);
+        Symbols = new SymbolsRepositoryCollection(SaveGame);
+        MartialArtsAttacks = new MartialArtsAttacksRepositoryCollection(SaveGame);
+        Scripts = new ScriptsRepositoryCollection(SaveGame);
+        Dungeons = new DungeonsRepositoryCollection(SaveGame);
+        Genders = new GendersRepositoryCollection(SaveGame);
+        BirthStages = new BirthStagesRepositoryCollection(SaveGame);
+        Projectiles = new ProjectilesRepositoryCollection(SaveGame);
+        Patrons = new PatronsRepositoryCollection(SaveGame);
+        Animations = new AnimationsRepositoryCollection(SaveGame);
+        FixedArtifacts = new FixedArtifactsRepositoryCollection(SaveGame);
+        GameCommands = new GameCommandsRepositoryCollection(SaveGame);
+        ArtifactBiases = new ArtifactBiasesRepositoryCollection(SaveGame);
+        InventorySlots = new InventorySlotsRepositoryCollection(SaveGame);
+        MonsterRaces = new MonsterRacesRepositoryCollection(SaveGame);
+        ProjectileGraphics = new ProjectileGraphicsRepositoryCollection(SaveGame);
+        Activations = new ActivationsRepositoryCollection(SaveGame);
+        Races = new RacesRepositoryCollection(SaveGame);
+        StoreCommands = new StoreCommandsRepositoryCollection(SaveGame);
+        Vaults = new VaultsRepositoryCollection(SaveGame);
+        WizardCommands = new WizardCommandsRepositoryCollection(SaveGame);
+        TimedActions = new TimedActionsRepositoryCollection(SaveGame);
+        CharacterClasses = new CharacterClassesRepositoryCollection(SaveGame);
+        Realms = new RealmsRepositoryCollection(SaveGame);
+        AmuletFlavours = new AmuletFlavoursRepositoryCollection(SaveGame);
+        MushroomFlavours = new MushroomFlavoursRepositoryCollection(SaveGame);
+        PotionFlavours = new PotionFlavoursRepositoryCollection(SaveGame);
+        RingFlavours = new RingFlavoursRepositoryCollection(SaveGame);
+        RodFlavours = new RodFlavoursRepositoryCollection(SaveGame);
+        ScrollFlavours = new ScrollFlavoursRepositoryCollection(SaveGame);
+        StaffFlavours = new StaffFlavoursRepositoryCollection(SaveGame);
+        WandFlavours = new WandFlavoursRepositoryCollection(SaveGame);
+        ChestTrapConfigurations = new ChestTrapConfigurationsRepositoryCollection(SaveGame);
+        HelpGroups = new HelpGroupsRepositoryCollection(SaveGame);
+        StoreOwners = new StoreOwnersRepositoryCollection(SaveGame);
+        Spells = new SpellsRepositoryCollection(SaveGame);
+        CastingTypes = new CastingTypesRepositoryCollection(SaveGame);
+        Rewards = new RewardsRepositoryCollection(SaveGame);
 
-        Tiles = new TilesRepositoryCollection(saveGame);
-        RareItems = new RareItemsRepositoryCollection(saveGame);
+        Tiles = new TilesRepositoryCollection(SaveGame);
+        RareItems = new RareItemsRepositoryCollection(SaveGame);
 
-        ClassSpells = new ClassSpellsRepositoryCollection(saveGame);
-        ShopKeeperGoodComments = new ShopKeeperGoodCommentsRepositoryCollection(saveGame);
-        ShopKeeperBargainComments = new ShopKeeperBargainCommentsRepositoryCollection(saveGame);
-        ElvishText = new ElvishTextRepositoryCollection(saveGame);
-        FunnyDescriptions = new FunnyDescriptionsRepositoryCollection(saveGame);
-        FunnyComments = new FunnyCommentsRepositoryCollection(saveGame);
-        HorrificDescriptions = new HorrificDescriptionsRepositoryCollection(saveGame);
-        InsultPlayerAttacks = new InsultPlayerAttacksRepositoryCollection(saveGame);
-        MoanPlayerAttacks = new MoanPlayerAttacksRepositoryCollection(saveGame);
-        ShopKeeperLessThanGuessComments = new ShopKeeperLessThanGuessCommentsRepositoryCollection(saveGame);
-        ShopKeeperWorthlessComments = new ShopKeeperWorthlessCommentsRepositoryCollection(saveGame);
-        SingingPlayerAttacks = new SingingPlayerAttacksRepositoryCollection(saveGame);
-        StoreOwnerAcceptedComments = new StoreOwnerAcceptedCommentsRepositoryCollection(saveGame);
-        WorshipPlayerAttacks = new WorshipPlayerAttacksRepositoryCollection(saveGame);
-        FindQuests = new FindQuestsRepositoryCollection(saveGame);
+        ClassSpells = new ClassSpellsRepositoryCollection(SaveGame);
+        ShopKeeperGoodComments = new ShopKeeperGoodCommentsRepositoryCollection(SaveGame);
+        ShopKeeperBargainComments = new ShopKeeperBargainCommentsRepositoryCollection(SaveGame);
+        ElvishText = new ElvishTextRepositoryCollection(SaveGame);
+        FunnyDescriptions = new FunnyDescriptionsRepositoryCollection(SaveGame);
+        FunnyComments = new FunnyCommentsRepositoryCollection(SaveGame);
+        HorrificDescriptions = new HorrificDescriptionsRepositoryCollection(SaveGame);
+        InsultPlayerAttacks = new InsultPlayerAttacksRepositoryCollection(SaveGame);
+        MoanPlayerAttacks = new MoanPlayerAttacksRepositoryCollection(SaveGame);
+        ShopKeeperLessThanGuessComments = new ShopKeeperLessThanGuessCommentsRepositoryCollection(SaveGame);
+        ShopKeeperWorthlessComments = new ShopKeeperWorthlessCommentsRepositoryCollection(SaveGame);
+        SingingPlayerAttacks = new SingingPlayerAttacksRepositoryCollection(SaveGame);
+        StoreOwnerAcceptedComments = new StoreOwnerAcceptedCommentsRepositoryCollection(SaveGame);
+        WorshipPlayerAttacks = new WorshipPlayerAttacksRepositoryCollection(SaveGame);
+        FindQuests = new FindQuestsRepositoryCollection(SaveGame);
 
         FlaggedActions.Load();
         Towns.Load();
