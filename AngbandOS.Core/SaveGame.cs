@@ -23,6 +23,8 @@ internal class SaveGame
 
     public SingletonRepository SingletonRepository;
 
+    private DungeonGenerator DungeonGenerator;
+
     /// <summary>
     /// Maximum amount of health that can be drained from an opponent in one turn
     /// </summary>
@@ -183,63 +185,7 @@ internal class SaveGame
     public bool Shutdown = false;
 
     /// GUI
-    public const int CentMax = 100;
-    public const int DoorMax = 200;
-    public const int MaxRoomsCol = MaxWid / _blockWid;
-    public const int MaxRoomsRow = MaxHgt / _blockHgt;
     public const int SafeMaxAttempts = 5000;
-    public const int TunnMax = 900;
-    public const int WallMax = 500;
-
-    private const int _allocSetBoth = 3;
-    private const int _allocSetCorr = 1;
-    private const int _allocSetRoom = 2;
-    private const int _allocTypGold = 4;
-    private const int _allocTypObject = 5;
-    private const int _allocTypRubble = 1;
-    private const int _allocTypTrap = 3;
-    private const int _blockHgt = 21;
-    private const int _blockWid = 11;
-    private const int _darkEmpty = 5;
-    private const int _dunAmtGold = 3;
-    private const int _dunAmtItem = 3;
-    private const int _dunAmtRoom = 9;
-    private const int _dunDest = 18;
-    private const int _dunRooms = 50;
-    private const int _dunStrDen = 5;
-    private const int _dunStrMag = 3;
-    private const int _dunStrMc = 90;
-    private const int _dunStrQc = 40;
-    private const int _dunStrQua = 2;
-    private const int _dunStrRng = 2;
-    private const int _dunTunChg = 30;
-    private const int _dunTunCon = 15;
-    private const int _dunTunJct = 90;
-    private const int _dunTunPen = 25;
-    private const int _dunTunRnd = 10;
-    private const int _dunUnusual = 194;
-    private const int _emptyLevel = 15;
-    private const int _smallLevel = 3;
-
-    private readonly Room[] _room =
-    {
-        new Room(0, 0, 0, 0, 0), new Room(0, 0, -1, 1, 1), new Room(0, 0, -1, 1, 1), new Room(0, 0, -1, 1, 3),
-        new Room(0, 0, -1, 1, 3), new Room(0, 0, -1, 1, 5), new Room(0, 0, -1, 1, 5), new Room(0, 1, -1, 1, 5),
-        new Room(-1, 2, -2, 3, 10), new Room(0, 1, -1, 1, 1)
-    };
-
-    private GridCoordinate[] Cent;
-    private GridCoordinate[] Door;
-    private bool[][] RoomMap;
-    private GridCoordinate[] Tunn;
-    private GridCoordinate[] Wall;
-    private int CentN;
-    private int ColRooms;
-    private bool Crowded;
-    private int DoorN;
-    private int RowRooms;
-    private int TunnN;
-    private int WallN;
 
     public readonly AbilityScore[] AbilityScores = new AbilityScore[6];
     public Genome Dna;
@@ -258,6 +204,7 @@ internal class SaveGame
     public int DisplayedDamageBonus;
     public int Energy;
     public int ExperienceMultiplier;
+    private const int _smallLevel = 3;
 
     /// <summary>
     ///
@@ -586,6 +533,8 @@ internal class SaveGame
         Configuration = configuration;
 
         IsDead = true;
+
+        DungeonGenerator = new StandardDungeonGenerator(this);
 
         // Create the wilderness regions.
         Wilderness = new WildernessRegion[12][];
@@ -1468,14 +1417,6 @@ internal class SaveGame
             }
         }
         return 0;
-    }
-
-    public void ResetGuardians()
-    {
-        foreach (MonsterRace race in SingletonRepository.MonsterRaces)
-        {
-            race.Guardian = false;
-        }
     }
 
     public void ResetUniqueOnlyGuardianStatus()
@@ -12281,7 +12222,7 @@ internal class SaveGame
                         PanelCol = MaxPanelCols;
                     }
                 }
-                if (!UndergroundGen())
+                if (!DungeonGenerator.GenerateDungeon())
                 {
                     okay = false;
                 }
@@ -12396,105 +12337,6 @@ internal class SaveGame
             WipeMList();
         }
         GameTime.MarkLevelEntry();
-    }
-
-    private void AllocObject(int set, int typ, int num)
-    {
-        int y = 0;
-        int x = 0;
-        int dummy = 0;
-        for (int k = 0; k < num; k++)
-        {
-            while (dummy < SafeMaxAttempts)
-            {
-                dummy++;
-                y = Rng.RandomLessThan(CurHgt);
-                x = Rng.RandomLessThan(CurWid);
-                if (!GridOpenNoItemOrCreature(y, x))
-                {
-                    continue;
-                }
-                bool isRoom = Grid[y][x].TileFlags.IsSet(GridTile.InRoom);
-                if (set == _allocSetCorr && isRoom)
-                {
-                    continue;
-                }
-                if (set == _allocSetRoom && !isRoom)
-                {
-                    continue;
-                }
-                break;
-            }
-            if (dummy >= SafeMaxAttempts)
-            {
-                return;
-            }
-            switch (typ)
-            {
-                case _allocTypRubble:
-                    {
-                        PlaceRubble(y, x);
-                        break;
-                    }
-                case _allocTypTrap:
-                    {
-                        PlaceTrap(y, x);
-                        break;
-                    }
-                case _allocTypGold:
-                    {
-                        PlaceGold(y, x);
-                        break;
-                    }
-                case _allocTypObject:
-                    {
-                        PlaceObject(y, x, false, false);
-                        break;
-                    }
-            }
-        }
-    }
-
-    private void AllocStairs(string feat, int num, int walls)
-    {
-        for (int i = 0; i < num; i++)
-        {
-            for (bool flag = false; !flag;)
-            {
-                for (int j = 0; !flag && j <= 3000; j++)
-                {
-                    int y = Rng.RandomLessThan(CurHgt);
-                    int x = Rng.RandomLessThan(CurWid);
-                    if (!GridOpenNoItemOrCreature(y, x))
-                    {
-                        continue;
-                    }
-                    if (NextToWalls(y, x) < walls)
-                    {
-                        continue;
-                    }
-                    GridTile cPtr = Grid[y][x];
-                    if (CurrentDepth <= 0)
-                    {
-                        cPtr.SetFeature("DownStair");
-                    }
-                    else if (IsQuest(CurrentDepth) ||
-                             CurrentDepth == CurDungeon.MaxLevel)
-                    {
-                        cPtr.SetFeature(CurDungeon.Tower ? "DownStair" : "UpStair");
-                    }
-                    else
-                    {
-                        cPtr.SetFeature(feat);
-                    }
-                    flag = true;
-                }
-                if (walls != 0)
-                {
-                    walls--;
-                }
-            }
-        }
     }
 
     private void BuildField(int yy, int xx)
@@ -12644,347 +12486,6 @@ internal class SaveGame
         }
     }
 
-    private void BuildStreamer(string feat, int chance)
-    {
-        int dummy = 0;
-        int y = Rng.RandomSpread(CurHgt / 2, 10);
-        int x = Rng.RandomSpread(CurWid / 2, 15);
-        int dir = OrderedDirection[Rng.RandomLessThan(8)];
-        while (dummy < SafeMaxAttempts)
-        {
-            dummy++;
-            for (int i = 0; i < _dunStrDen; i++)
-            {
-                const int d = _dunStrRng;
-                int tx;
-                int ty;
-                while (true)
-                {
-                    ty = Rng.RandomSpread(y, d);
-                    tx = Rng.RandomSpread(x, d);
-                    if (!InBounds2(ty, tx))
-                    {
-                        continue;
-                    }
-                    break;
-                }
-                GridTile cPtr = Grid[ty][tx];
-
-                if (!cPtr.FeatureType.IsBasicWall)
-                {
-                    continue;
-                }
-                cPtr.SetFeature(feat);
-                if (Rng.RandomLessThan(chance) == 0)
-                {
-                    cPtr.SetFeature(cPtr.FeatureType.Name + "VisTreas");
-                }
-            }
-            if (dummy >= SafeMaxAttempts)
-            {
-                return;
-            }
-            y += KeypadDirectionYOffset[dir];
-            x += KeypadDirectionXOffset[dir];
-            if (!InBounds(y, x))
-            {
-                break;
-            }
-        }
-    }
-
-    private void BuildTunnel(int row1, int col1, int row2, int col2)
-    {
-        int i, y, x;
-        int mainLoopCount = 0;
-        bool doorFlag = false;
-        GridTile cPtr;
-        TunnN = 0;
-        WallN = 0;
-        int startRow = row1;
-        int startCol = col1;
-        CorrectDir(out int rowDir, out int colDir, row1, col1, row2, col2);
-        while (row1 != row2 || col1 != col2)
-        {
-            if (mainLoopCount++ > 2000)
-            {
-                break;
-            }
-            if (Rng.RandomLessThan(100) < _dunTunChg)
-            {
-                CorrectDir(out rowDir, out colDir, row1, col1, row2, col2);
-                if (Rng.RandomLessThan(100) < _dunTunRnd)
-                {
-                    RandDir(out rowDir, out colDir);
-                }
-            }
-            int tmpRow = row1 + rowDir;
-            int tmpCol = col1 + colDir;
-            while (!InBounds(tmpRow, tmpCol))
-            {
-                CorrectDir(out rowDir, out colDir, row1, col1, row2, col2);
-                if (Rng.RandomLessThan(100) < _dunTunRnd)
-                {
-                    RandDir(out rowDir, out colDir);
-                }
-                tmpRow = row1 + rowDir;
-                tmpCol = col1 + colDir;
-            }
-            cPtr = Grid[tmpRow][tmpCol];
-            if (cPtr.FeatureType.Name == "WallPermSolid")
-            {
-                continue;
-            }
-            if (cPtr.FeatureType.Name == "WallPermOuter")
-            {
-                continue;
-            }
-            if (cPtr.FeatureType.Name == "WallSolid")
-            {
-                continue;
-            }
-            if (cPtr.FeatureType.Name == "WallOuter")
-            {
-                y = tmpRow + rowDir;
-                x = tmpCol + colDir;
-                if (Grid[y][x].FeatureType.Name == "WallPermSolid")
-                {
-                    continue;
-                }
-                if (Grid[y][x].FeatureType.Name == "WallPermOuter")
-                {
-                    continue;
-                }
-                if (Grid[y][x].FeatureType.Name == "WallOuter")
-                {
-                    continue;
-                }
-                if (Grid[y][x].FeatureType.Name == "WallSolid")
-                {
-                    continue;
-                }
-                row1 = tmpRow;
-                col1 = tmpCol;
-                if (WallN < WallMax)
-                {
-                    Wall[WallN] = new GridCoordinate(col1, row1);
-                    WallN++;
-                }
-                for (y = row1 - 1; y <= row1 + 1; y++)
-                {
-                    for (x = col1 - 1; x <= col1 + 1; x++)
-                    {
-                        if (Grid[y][x].FeatureType.Name == "WallOuter")
-                        {
-                            Grid[y][x].SetFeature("WallSolid");
-                        }
-                    }
-                }
-            }
-            else if (cPtr.TileFlags.IsSet(GridTile.InRoom))
-            {
-                row1 = tmpRow;
-                col1 = tmpCol;
-            }
-            else if (cPtr.FeatureType.IsWall)
-            {
-                row1 = tmpRow;
-                col1 = tmpCol;
-                if (TunnN < TunnMax)
-                {
-                    Tunn[TunnN] = new GridCoordinate(col1, row1);
-                    TunnN++;
-                }
-                doorFlag = false;
-            }
-            else
-            {
-                row1 = tmpRow;
-                col1 = tmpCol;
-                if (!doorFlag)
-                {
-                    if (DoorN < DoorMax)
-                    {
-                        Door[DoorN] = new GridCoordinate(col1, row1);
-                        DoorN++;
-                    }
-                    doorFlag = true;
-                }
-                if (Rng.RandomLessThan(100) >= _dunTunCon)
-                {
-                    tmpRow = row1 - startRow;
-                    if (tmpRow < 0)
-                    {
-                        tmpRow = -tmpRow;
-                    }
-                    tmpCol = col1 - startCol;
-                    if (tmpCol < 0)
-                    {
-                        tmpCol = -tmpCol;
-                    }
-                    if (tmpRow > 10 || tmpCol > 10)
-                    {
-                        break;
-                    }
-                }
-            }
-        }
-        for (i = 0; i < TunnN; i++)
-        {
-            y = Tunn[i].Y;
-            x = Tunn[i].X;
-            cPtr = Grid[y][x];
-            cPtr.RevertToBackground();
-        }
-        for (i = 0; i < WallN; i++)
-        {
-            y = Wall[i].Y;
-            x = Wall[i].X;
-            cPtr = Grid[y][x];
-            cPtr.RevertToBackground();
-            if (Rng.RandomLessThan(100) < _dunTunPen)
-            {
-                PlaceRandomDoor(y, x);
-            }
-        }
-    }
-
-    private void CorrectDir(out int rdir, out int cdir, int y1, int x1, int y2, int x2)
-    {
-        rdir = y1 == y2 ? 0 : y1 < y2 ? 1 : -1;
-        cdir = x1 == x2 ? 0 : x1 < x2 ? 1 : -1;
-        if (rdir != 0 && cdir != 0)
-        {
-            if (Rng.RandomLessThan(100) < 50)
-            {
-                rdir = 0;
-            }
-            else
-            {
-                cdir = 0;
-            }
-        }
-    }
-
-    private void DestroyLevel()
-    {
-        for (int n = 0; n < Rng.DieRoll(5); n++)
-        {
-            int x1 = Rng.RandomBetween(5, CurWid - 1 - 5);
-            int y1 = Rng.RandomBetween(5, CurHgt - 1 - 5);
-            int y;
-            for (y = y1 - 15; y <= y1 + 15; y++)
-            {
-                int x;
-                for (x = x1 - 15; x <= x1 + 15; x++)
-                {
-                    if (!InBounds(y, x))
-                    {
-                        continue;
-                    }
-                    int k = Distance(y1, x1, y, x);
-                    if (k >= 16)
-                    {
-                        continue;
-                    }
-                    DeleteMonster(y, x);
-                    if (CaveValidBold(y, x))
-                    {
-                        DeleteObject(y, x);
-                        GridTile cPtr = Grid[y][x];
-                        int t = Rng.RandomLessThan(200);
-                        if (t < 20)
-                        {
-                            cPtr.SetFeature("WallBasic");
-                        }
-                        else if (t < 70)
-                        {
-                            cPtr.SetFeature("Quartz");
-                        }
-                        else if (t < 100)
-                        {
-                            cPtr.SetFeature("Magma");
-                        }
-                        else
-                        {
-                            cPtr.RevertToBackground();
-                        }
-                        cPtr.TileFlags.Clear(GridTile.InRoom | GridTile.InVault);
-                        cPtr.TileFlags.Clear(GridTile.PlayerMemorized | GridTile.SelfLit);
-                    }
-                }
-            }
-        }
-    }
-
-    /// <summary>
-    /// Generates a cavern level.
-    /// </summary>
-    private void MakeCavernLevel()
-    {
-        PerlinNoise perlinNoise = new PerlinNoise(Rng.RandomBetween(0, int.MaxValue - 1));
-        double widthDivisor = 1 / (double)CurWid;
-        double heightDivisor = 1 / (double)CurHgt;
-        for (int y = 0; y < CurHgt; y++)
-        {
-            for (int x = 0; x < CurWid; x++)
-            {
-                GridTile cPtr = Grid[y][x];
-                double v = perlinNoise.Noise(10 * x * widthDivisor, 10 * y * heightDivisor, -0.5);
-                v = (v + 1) / 2;
-                double dX = Math.Abs(x - (CurWid / 2)) * widthDivisor;
-                double dY = Math.Abs(y - (CurHgt / 2)) * heightDivisor;
-                double d = Math.Max(dX, dY);
-                const double elevation = 0.05;
-                const double steepness = 6.0;
-                const double dropoff = 50.0;
-                v += elevation - (dropoff * Math.Pow(d, steepness));
-                v = Math.Min(1, Math.Max(0, v));
-                int rounded = (int)(v * 10);
-                if (rounded < 2 || rounded > 5)
-                {
-                    cPtr.SetFeature("WallBasic");
-                }
-                else
-                {
-                    cPtr.SetFeature("DungeonFloor");
-                }
-            }
-        }
-        for (int i = 0; i < _dunStrMag; i++)
-        {
-            BuildStreamer("Magma", _dunStrMc);
-        }
-        for (int i = 0; i < _dunStrQua; i++)
-        {
-            BuildStreamer("Quartz", _dunStrQc);
-        }
-        for (int x = 0; x < CurWid; x++)
-        {
-            GridTile cPtr = Grid[0][x];
-            cPtr.SetFeature("WallPermSolid");
-        }
-        for (int x = 0; x < CurWid; x++)
-        {
-            GridTile cPtr = Grid[CurHgt - 1][x];
-            cPtr.SetFeature("WallPermSolid");
-        }
-        for (int y = 0; y < CurHgt; y++)
-        {
-            GridTile cPtr = Grid[y][0];
-            cPtr.SetFeature("WallPermSolid");
-        }
-        for (int y = 0; y < CurHgt; y++)
-        {
-            GridTile cPtr = Grid[y][CurWid - 1];
-            cPtr.SetFeature("WallPermSolid");
-        }
-        if (Rng.DieRoll(_darkEmpty) != 1 || Rng.DieRoll(100) > Difficulty)
-        {
-            WizLight();
-        }
-    }
-
     private void MakeCornerTowers(int wildX, int wildY)
     {
         int height = CurHgt;
@@ -13103,222 +12604,222 @@ internal class SaveGame
         Grid[y + 2][x].RevertToBackground();
     }
 
-    private void MakeDungeonLevel()
-    {
-        int k;
-        int y;
-        int x;
-        int maxVaultOk = 2;
-        bool destroyed = false;
-        bool emptyLevel = false;
+    //private void MakeDungeonLevel()
+    //{
+    //    int k;
+    //    int y;
+    //    int x;
+    //    int maxVaultOk = 2;
+    //    bool destroyed = false;
+    //    bool emptyLevel = false;
 
-        Cent = new GridCoordinate[CentMax];
-        //for (int i = 0; i < CentMax; i++)
-        //{
-        //    Cent[i] = new MapCoordinate();
-        //}
-        Door = new GridCoordinate[DoorMax];
-        //for (int i = 0; i < DoorMax; i++)
-        //{
-        //    Door[i] = new MapCoordinate();
-        //}
-        Wall = new GridCoordinate[WallMax];
-        //for (int i = 0; i < WallMax; i++)
-        //{
-        //    Wall[i] = new MapCoordinate();
-        //}
-        Tunn = new GridCoordinate[TunnMax];
-        //for (int i = 0; i < TunnMax; i++)
-        //{
-        //    Tunn[i] = new MapCoordinate();
-        //}
-        RoomMap = new bool[MaxRoomsRow][];
-        for (int i = 0; i < MaxRoomsRow; i++)
-        {
-            RoomMap[i] = new bool[MaxRoomsCol];
-        }
+    //    Cent = new GridCoordinate[CentMax];
+    //    //for (int i = 0; i < CentMax; i++)
+    //    //{
+    //    //    Cent[i] = new MapCoordinate();
+    //    //}
+    //    Door = new GridCoordinate[DoorMax];
+    //    //for (int i = 0; i < DoorMax; i++)
+    //    //{
+    //    //    Door[i] = new MapCoordinate();
+    //    //}
+    //    Wall = new GridCoordinate[WallMax];
+    //    //for (int i = 0; i < WallMax; i++)
+    //    //{
+    //    //    Wall[i] = new MapCoordinate();
+    //    //}
+    //    Tunn = new GridCoordinate[TunnMax];
+    //    //for (int i = 0; i < TunnMax; i++)
+    //    //{
+    //    //    Tunn[i] = new MapCoordinate();
+    //    //}
+    //    RoomMap = new bool[MaxRoomsRow][];
+    //    for (int i = 0; i < MaxRoomsRow; i++)
+    //    {
+    //        RoomMap[i] = new bool[MaxRoomsCol];
+    //    }
 
-        if (MaxPanelRows == 0)
-        {
-            maxVaultOk--;
-        }
-        if (MaxPanelCols == 0)
-        {
-            maxVaultOk--;
-        }
-        if (Rng.DieRoll(_emptyLevel) == 1)
-        {
-            emptyLevel = true;
-        }
-        for (y = 0; y < CurHgt; y++)
-        {
-            for (x = 0; x < CurWid; x++)
-            {
-                GridTile cPtr = Grid[y][x];
-                if (emptyLevel)
-                {
-                    cPtr.RevertToBackground();
-                }
-                else
-                {
-                    cPtr.SetFeature("WallBasic");
-                }
-            }
-        }
-        if (Difficulty > 10 && Rng.RandomLessThan(_dunDest) == 0)
-        {
-            destroyed = true;
-        }
-        if (IsQuest(CurrentDepth))
-        {
-            destroyed = false;
-        }
-        RowRooms = CurHgt / _blockHgt;
-        ColRooms = CurWid / _blockWid;
-        for (y = 0; y < RowRooms; y++)
-        {
-            for (x = 0; x < ColRooms; x++)
-            {
-                RoomMap[y][x] = false;
-            }
-        }
-        Crowded = false;
-        CentN = 0;
-        for (int i = 0; i < _dunRooms; i++)
-        {
-            y = Rng.RandomLessThan(RowRooms);
-            x = Rng.RandomLessThan(ColRooms);
-            if (x % 3 == 0)
-            {
-                x++;
-            }
-            if (x % 3 == 2)
-            {
-                x--;
-            }
-            if (destroyed)
-            {
-                if (RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type1RoomLayout>()))
-                {
-                }
-                continue;
-            }
-            if (Rng.RandomLessThan(_dunUnusual) < Difficulty)
-            {
-                k = Rng.RandomLessThan(100);
-                if (Rng.RandomLessThan(_dunUnusual) < Difficulty)
-                {
-                    if (k < 10)
-                    {
-                        if (maxVaultOk > 1)
-                        {
-                            if (RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type8RoomLayout>()))
-                            {
-                                continue;
-                            }
-                        }
-                    }
-                    if (k < 25)
-                    {
-                        if (maxVaultOk > 0)
-                        {
-                            if (RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type7RoomLayout>()))
-                            {
-                                continue;
-                            }
-                        }
-                    }
-                    if (k < 40 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type5RoomLayout>()))
-                    {
-                        continue;
-                    }
-                    if (k < 55 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type6RoomLayout>()))
-                    {
-                        continue;
-                    }
-                }
-                if (k < 25 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type4RoomLayout>()))
-                {
-                    continue;
-                }
-                if (k < 50 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type3RoomLayout>()))
-                {
-                    continue;
-                }
-                if (k < 100 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type2RoomLayout>()))
-                {
-                    continue;
-                }
-            }
-            if (RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type1RoomLayout>()))
-            {
-            }
-        }
-        for (x = 0; x < CurWid; x++)
-        {
-            GridTile cPtr = Grid[0][x];
-            cPtr.SetFeature("WallPermSolid");
-        }
-        for (x = 0; x < CurWid; x++)
-        {
-            GridTile cPtr = Grid[CurHgt - 1][x];
-            cPtr.SetFeature("WallPermSolid");
-        }
-        for (y = 0; y < CurHgt; y++)
-        {
-            GridTile cPtr = Grid[y][0];
-            cPtr.SetFeature("WallPermSolid");
-        }
-        for (y = 0; y < CurHgt; y++)
-        {
-            GridTile cPtr = Grid[y][CurWid - 1];
-            cPtr.SetFeature("WallPermSolid");
-        }
-        for (int i = 0; i < CentN; i++)
-        {
-            int pick1 = Rng.RandomLessThan(CentN);
-            int pick2 = Rng.RandomLessThan(CentN);
-            int y1 = Cent[pick1].Y;
-            int x1 = Cent[pick1].X;
-            Cent[pick1] = Cent[pick2].Clone();
-            Cent[pick2] = new GridCoordinate(x1, y1);
-        }
-        DoorN = 0;
-        y = Cent[CentN - 1].Y;
-        x = Cent[CentN - 1].X;
-        for (int i = 0; i < CentN; i++)
-        {
-            BuildTunnel(Cent[i].Y, Cent[i].X, y, x);
-            y = Cent[i].Y;
-            x = Cent[i].X;
-        }
-        for (int i = 0; i < DoorN; i++)
-        {
-            y = Door[i].Y;
-            x = Door[i].X;
-            TryDoor(y, x - 1);
-            TryDoor(y, x + 1);
-            TryDoor(y - 1, x);
-            TryDoor(y + 1, x);
-        }
-        for (int i = 0; i < _dunStrMag; i++)
-        {
-            BuildStreamer("Magma", _dunStrMc);
-        }
-        for (int i = 0; i < _dunStrQua; i++)
-        {
-            BuildStreamer("Quartz", _dunStrQc);
-        }
-        if (destroyed)
-        {
-            DestroyLevel();
-        }
-        if (emptyLevel && (Rng.DieRoll(_darkEmpty) != 1 ||
-                           Rng.DieRoll(100) > Difficulty))
-        {
-            WizLight();
-        }
-    }
+    //    if (MaxPanelRows == 0)
+    //    {
+    //        maxVaultOk--;
+    //    }
+    //    if (MaxPanelCols == 0)
+    //    {
+    //        maxVaultOk--;
+    //    }
+    //    if (Rng.DieRoll(_emptyLevel) == 1)
+    //    {
+    //        emptyLevel = true;
+    //    }
+    //    for (y = 0; y < CurHgt; y++)
+    //    {
+    //        for (x = 0; x < CurWid; x++)
+    //        {
+    //            GridTile cPtr = Grid[y][x];
+    //            if (emptyLevel)
+    //            {
+    //                cPtr.RevertToBackground();
+    //            }
+    //            else
+    //            {
+    //                cPtr.SetFeature("WallBasic");
+    //            }
+    //        }
+    //    }
+    //    if (Difficulty > 10 && Rng.RandomLessThan(_dunDest) == 0)
+    //    {
+    //        destroyed = true;
+    //    }
+    //    if (IsQuest(CurrentDepth))
+    //    {
+    //        destroyed = false;
+    //    }
+    //    RowRooms = CurHgt / _blockHgt;
+    //    ColRooms = CurWid / _blockWid;
+    //    for (y = 0; y < RowRooms; y++)
+    //    {
+    //        for (x = 0; x < ColRooms; x++)
+    //        {
+    //            RoomMap[y][x] = false;
+    //        }
+    //    }
+    //    Crowded = false;
+    //    CentN = 0;
+    //    for (int i = 0; i < _dunRooms; i++)
+    //    {
+    //        y = Rng.RandomLessThan(RowRooms);
+    //        x = Rng.RandomLessThan(ColRooms);
+    //        if (x % 3 == 0)
+    //        {
+    //            x++;
+    //        }
+    //        if (x % 3 == 2)
+    //        {
+    //            x--;
+    //        }
+    //        if (destroyed)
+    //        {
+    //            if (RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type1RoomLayout>()))
+    //            {
+    //            }
+    //            continue;
+    //        }
+    //        if (Rng.RandomLessThan(_dunUnusual) < Difficulty)
+    //        {
+    //            k = Rng.RandomLessThan(100);
+    //            if (Rng.RandomLessThan(_dunUnusual) < Difficulty)
+    //            {
+    //                if (k < 10)
+    //                {
+    //                    if (maxVaultOk > 1)
+    //                    {
+    //                        if (RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type8RoomLayout>()))
+    //                        {
+    //                            continue;
+    //                        }
+    //                    }
+    //                }
+    //                if (k < 25)
+    //                {
+    //                    if (maxVaultOk > 0)
+    //                    {
+    //                        if (RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type7RoomLayout>()))
+    //                        {
+    //                            continue;
+    //                        }
+    //                    }
+    //                }
+    //                if (k < 40 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type5RoomLayout>()))
+    //                {
+    //                    continue;
+    //                }
+    //                if (k < 55 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type6RoomLayout>()))
+    //                {
+    //                    continue;
+    //                }
+    //            }
+    //            if (k < 25 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type4RoomLayout>()))
+    //            {
+    //                continue;
+    //            }
+    //            if (k < 50 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type3RoomLayout>()))
+    //            {
+    //                continue;
+    //            }
+    //            if (k < 100 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type2RoomLayout>()))
+    //            {
+    //                continue;
+    //            }
+    //        }
+    //        if (RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type1RoomLayout>()))
+    //        {
+    //        }
+    //    }
+    //    for (x = 0; x < CurWid; x++)
+    //    {
+    //        GridTile cPtr = Grid[0][x];
+    //        cPtr.SetFeature("WallPermSolid");
+    //    }
+    //    for (x = 0; x < CurWid; x++)
+    //    {
+    //        GridTile cPtr = Grid[CurHgt - 1][x];
+    //        cPtr.SetFeature("WallPermSolid");
+    //    }
+    //    for (y = 0; y < CurHgt; y++)
+    //    {
+    //        GridTile cPtr = Grid[y][0];
+    //        cPtr.SetFeature("WallPermSolid");
+    //    }
+    //    for (y = 0; y < CurHgt; y++)
+    //    {
+    //        GridTile cPtr = Grid[y][CurWid - 1];
+    //        cPtr.SetFeature("WallPermSolid");
+    //    }
+    //    for (int i = 0; i < CentN; i++)
+    //    {
+    //        int pick1 = Rng.RandomLessThan(CentN);
+    //        int pick2 = Rng.RandomLessThan(CentN);
+    //        int y1 = Cent[pick1].Y;
+    //        int x1 = Cent[pick1].X;
+    //        Cent[pick1] = Cent[pick2].Clone();
+    //        Cent[pick2] = new GridCoordinate(x1, y1);
+    //    }
+    //    DoorN = 0;
+    //    y = Cent[CentN - 1].Y;
+    //    x = Cent[CentN - 1].X;
+    //    for (int i = 0; i < CentN; i++)
+    //    {
+    //        BuildTunnel(Cent[i].Y, Cent[i].X, y, x);
+    //        y = Cent[i].Y;
+    //        x = Cent[i].X;
+    //    }
+    //    for (int i = 0; i < DoorN; i++)
+    //    {
+    //        y = Door[i].Y;
+    //        x = Door[i].X;
+    //        TryDoor(y, x - 1);
+    //        TryDoor(y, x + 1);
+    //        TryDoor(y - 1, x);
+    //        TryDoor(y + 1, x);
+    //    }
+    //    for (int i = 0; i < _dunStrMag; i++)
+    //    {
+    //        BuildStreamer("Magma", _dunStrMc);
+    //    }
+    //    for (int i = 0; i < _dunStrQua; i++)
+    //    {
+    //        BuildStreamer("Quartz", _dunStrQc);
+    //    }
+    //    if (destroyed)
+    //    {
+    //        DestroyLevel();
+    //    }
+    //    if (emptyLevel && (Rng.DieRoll(_darkEmpty) != 1 ||
+    //                       Rng.DieRoll(100) > Difficulty))
+    //    {
+    //        WizLight();
+    //    }
+    //}
 
     private void MakeHenge(int left, int top, int width, int height)
     {
@@ -14375,7 +13876,7 @@ internal class SaveGame
         }
     }
 
-    private bool NewPlayerSpot()
+    public bool NewPlayerSpot()
     {
         int y = 0;
         int x = 0;
@@ -14403,54 +13904,7 @@ internal class SaveGame
         return true;
     }
 
-    private int NextToCorr(int y1, int x1)
-    {
-        int k = 0;
-        for (int i = 0; i < 4; i++)
-        {
-            int y = y1 + OrderedDirectionYOffset[i];
-            int x = x1 + OrderedDirectionXOffset[i];
-            if (!GridPassable(y, x))
-            {
-                continue;
-            }
-            GridTile cPtr = Grid[y][x];
-            if (!cPtr.FeatureType.IsOpenFloor)
-            {
-                continue;
-            }
-            if (cPtr.TileFlags.IsSet(GridTile.InRoom))
-            {
-                continue;
-            }
-            k++;
-        }
-        return k;
-    }
-
-    private int NextToWalls(int y, int x)
-    {
-        int k = 0;
-        if (Grid[y + 1][x].FeatureType.IsWall)
-        {
-            k++;
-        }
-        if (Grid[y - 1][x].FeatureType.IsWall)
-        {
-            k++;
-        }
-        if (Grid[y][x + 1].FeatureType.IsWall)
-        {
-            k++;
-        }
-        if (Grid[y][x - 1].FeatureType.IsWall)
-        {
-            k++;
-        }
-        return k;
-    }
-
-    private void PlaceRandomDoor(int y, int x)
+    public void PlaceRandomDoor(int y, int x)
     {
         GridTile cPtr = Grid[y][x];
         int tmp = Rng.RandomLessThan(1000);
@@ -14478,37 +13932,6 @@ internal class SaveGame
         {
             cPtr.SetFeature($"JammedDoor{Rng.RandomLessThan(8)}");
         }
-    }
-
-    private void PlaceRubble(int y, int x)
-    {
-        GridTile cPtr = Grid[y][x];
-        cPtr.SetFeature("Rubble");
-    }
-
-    private bool PossibleDoorway(int y, int x)
-    {
-        if (NextToCorr(y, x) >= 2)
-        {
-            if (Grid[y - 1][x].FeatureType.IsWall &&
-                Grid[y + 1][x].FeatureType.IsWall)
-            {
-                return true;
-            }
-            if (Grid[y][x - 1].FeatureType.IsWall &&
-                Grid[y][x + 1].FeatureType.IsWall)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void RandDir(out int rdir, out int cdir)
-    {
-        int i = Rng.RandomLessThan(4);
-        rdir = OrderedDirectionYOffset[i];
-        cdir = OrderedDirectionXOffset[i];
     }
 
     private void ResolvePaths()
@@ -14560,61 +13983,61 @@ internal class SaveGame
         }
     }
 
-    private bool RoomBuild(int y0, int x0, RoomLayout roomType)
-    {
-        if (Difficulty < _room[roomType.Type].Level)
-        {
-            return false;
-        }
-        if (Crowded && (roomType.Type == 5 || roomType.Type == 6))
-        {
-            return false;
-        }
-        int y1 = y0 + _room[roomType.Type].Dy1;
-        int y2 = y0 + _room[roomType.Type].Dy2;
-        int x1 = x0 + _room[roomType.Type].Dx1;
-        int x2 = x0 + _room[roomType.Type].Dx2;
-        if (y1 < 0 || y2 >= RowRooms)
-        {
-            return false;
-        }
-        if (x1 < 0 || x2 >= ColRooms)
-        {
-            return false;
-        }
-        int y;
-        int x;
-        for (y = y1; y <= y2; y++)
-        {
-            for (x = x1; x <= x2; x++)
-            {
-                if (RoomMap[y][x])
-                {
-                    return false;
-                }
-            }
-        }
-        y = (y1 + y2 + 1) * _blockHgt / 2;
-        x = (x1 + x2 + 1) * _blockWid / 2;
-        roomType.Build(y, x);
-        if (CentN < CentMax)
-        {
-            Cent[CentN] = new GridCoordinate(x, y);
-            CentN++;
-        }
-        for (y = y1; y <= y2; y++)
-        {
-            for (x = x1; x <= x2; x++)
-            {
-                RoomMap[y][x] = true;
-            }
-        }
-        if (roomType.Type == 5 || roomType.Type == 6)
-        {
-            Crowded = true;
-        }
-        return true;
-    }
+    //private bool RoomBuild(int y0, int x0, RoomLayout roomType)
+    //{
+    //    if (Difficulty < _room[roomType.Type].Level)
+    //    {
+    //        return false;
+    //    }
+    //    if (Crowded && (roomType.Type == 5 || roomType.Type == 6))
+    //    {
+    //        return false;
+    //    }
+    //    int y1 = y0 + _room[roomType.Type].Dy1;
+    //    int y2 = y0 + _room[roomType.Type].Dy2;
+    //    int x1 = x0 + _room[roomType.Type].Dx1;
+    //    int x2 = x0 + _room[roomType.Type].Dx2;
+    //    if (y1 < 0 || y2 >= RowRooms)
+    //    {
+    //        return false;
+    //    }
+    //    if (x1 < 0 || x2 >= ColRooms)
+    //    {
+    //        return false;
+    //    }
+    //    int y;
+    //    int x;
+    //    for (y = y1; y <= y2; y++)
+    //    {
+    //        for (x = x1; x <= x2; x++)
+    //        {
+    //            if (RoomMap[y][x])
+    //            {
+    //                return false;
+    //            }
+    //        }
+    //    }
+    //    y = (y1 + y2 + 1) * _blockHgt / 2;
+    //    x = (x1 + x2 + 1) * _blockWid / 2;
+    //    roomType.Build(y, x);
+    //    if (CentN < CentMax)
+    //    {
+    //        Cent[CentN] = new GridCoordinate(x, y);
+    //        CentN++;
+    //    }
+    //    for (y = y1; y <= y2; y++)
+    //    {
+    //        for (x = x1; x <= x2; x++)
+    //        {
+    //            RoomMap[y][x] = true;
+    //        }
+    //    }
+    //    if (roomType.Type == 5 || roomType.Type == 6)
+    //    {
+    //        Crowded = true;
+    //    }
+    //    return true;
+    //}
 
     private void TownGen()
     {
@@ -14655,103 +14078,6 @@ internal class SaveGame
                 AllocMonster(3, true);
             }
         }
-    }
-
-    private void TryDoor(int y, int x)
-    {
-        if (!InBounds(y, x))
-        {
-            return;
-        }
-        if (Grid[y][x].FeatureType.IsWall)
-        {
-            return;
-        }
-        if (Grid[y][x].TileFlags.IsSet(GridTile.InRoom))
-        {
-            return;
-        }
-        if (Rng.RandomLessThan(100) < _dunTunJct && PossibleDoorway(y, x))
-        {
-            PlaceRandomDoor(y, x);
-        }
-    }
-
-    /// <summary>
-    /// Generates an underground level.
-    /// </summary>
-    /// <returns></returns>
-    private bool UndergroundGen()
-    {
-        int i;
-        int k;
-        ResetGuardians();
-        if (IsQuest(CurrentDepth))
-        {
-            SingletonRepository.MonsterRaces[GetQuestMonster()].Guardian = true;
-        }
-        if (Rng.PercentileRoll(4) && !CurDungeon.Tower)
-        {
-            MakeCavernLevel();
-        }
-        else
-        {
-            MakeDungeonLevel();
-        }
-
-        // Generate downstairs.
-        AllocStairs("DownStair", Rng.RandomBetween(3, 4), 3);
-
-        // Generate upstairs.
-        AllocStairs("UpStair", Rng.RandomBetween(1, 2), 3);
-
-        // Choose a spot for the player.
-        if (!NewPlayerSpot())
-        {
-            return false;
-        }
-
-        k = Difficulty / 3;
-        if (k > 10)
-        {
-            k = 10;
-        }
-        if (k < 2)
-        {
-            k = 2;
-        }
-        if (IsQuest(CurrentDepth))
-        {
-            int rIdx = GetQuestMonster();
-            int qIdx = GetQuestNumber();
-            while (SingletonRepository.MonsterRaces[rIdx].CurNum < (Quests[qIdx].ToKill - Quests[qIdx].Killed))
-            {
-                PutQuestMonster(Quests[qIdx].RIdx);
-            }
-        }
-        i = Constants.MinMAllocLevel;
-        if (CurHgt < MaxHgt || CurWid < MaxWid)
-        {
-            int smallTester = i;
-            i = i * CurHgt / MaxHgt;
-            i = i * CurWid / MaxWid;
-            i++;
-            if (i > smallTester)
-            {
-                i = smallTester;
-            }
-        }
-        i += Rng.DieRoll(8);
-        for (i += k; i > 0; i--)
-        {
-            AllocMonster(0, true);
-        }
-        AllocObject(_allocSetBoth, _allocTypTrap, Rng.DieRoll(k));
-        AllocObject(_allocSetCorr, _allocTypRubble, Rng.DieRoll(k));
-        AllocObject(_allocSetRoom, _allocTypObject, Rng.RandomNormal(_dunAmtRoom, 3));
-        AllocObject(_allocSetBoth, _allocTypObject, Rng.RandomNormal(_dunAmtItem, 3));
-        AllocObject(_allocSetBoth, _allocTypGold, Rng.RandomNormal(_dunAmtGold, 3));
-        return true;
     }
 
     private void WildernessGen()
@@ -15858,18 +15184,6 @@ internal class SaveGame
     private const int _maxQuests = 50;
 
     public int ActiveQuests => Quests.Where(q => q.IsActive).Count();
-
-    public int GetQuestMonster()
-    {
-        for (int i = 0; i < Quests.Count; i++)
-        {
-            if (Quests[i].Level == CurrentDepth && Quests[i].Dungeon == CurDungeon)
-            {
-                return Quests[i].RIdx;
-            }
-        }
-        return 0;
-    }
 
     /// <summary>
     /// Returns the quest number for the current dungeon and the current 
@@ -18409,11 +17723,26 @@ internal class SaveGame
         return GridPassable(y, x) && Grid[y][x].MonsterIndex == 0 && !(y == MapY && x == MapX);
     }
 
+    // TODO: Convert to zero based
+    // TODO: Rename to InboundsOneBased
+    /// <summary>
+    /// Check coordinates for being inbounds based on a one-based coordinate system.
+    /// </summary>
+    /// <param name="y"></param>
+    /// <param name="x"></param>
+    /// <returns></returns>
     public bool InBounds(int y, int x)
     {
         return y > 0 && x > 0 && y < CurHgt - 1 && x < CurWid - 1;
     }
 
+    // TODO: Rename to InboundsZeroBased
+    /// <summary>
+    /// Check coordinates for being inbounds based on a zero-based coordinate system.
+    /// </summary>
+    /// <param name="y"></param>
+    /// <param name="x"></param>
+    /// <returns></returns>
     public bool InBounds2(int y, int x)
     {
         return y >= 0 && x >= 0 && y < CurHgt && x < CurWid;
@@ -18949,34 +18278,6 @@ internal class SaveGame
             MoveOneStepTowards(out y, out x, y, x, y1, x1, y2, x2);
         }
         return false;
-    }
-
-    public void PutQuestMonster(int rIdx)
-    {
-        int y, x;
-        if (SingletonRepository.MonsterRaces[rIdx].MaxNum == 0)
-        {
-            SingletonRepository.MonsterRaces[rIdx].MaxNum++;
-            MsgPrint("Resurrecting guardian to fix corrupted savefile...");
-        }
-        do
-        {
-            while (true)
-            {
-                y = Rng.RandomLessThan(MaxHgt);
-                x = Rng.RandomLessThan(MaxWid);
-                if (!GridOpenNoItemOrCreature(y, x))
-                {
-                    continue;
-                }
-                {
-                    if (Distance(y, x, MapY, MapX) > 15)
-                    {
-                        break;
-                    }
-                }
-            }
-        } while (!PlaceMonsterByIndex(y, x, rIdx, false, false, false));
     }
 
     public void RedrawSingleLocation(int y, int x)
