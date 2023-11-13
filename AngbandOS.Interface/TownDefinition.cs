@@ -7,6 +7,7 @@
 
 namespace AngbandOS.Core.Interface;
 
+[Serializable]
 public class TownDefinition
 {
     public char Char { get; set; }
