@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthenticationService } from '../accounts/authentication-service/authentication.service';
 import { Subscription } from 'rxjs';
 import { UserDetails } from '../accounts/authentication-service/user-details';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-menu',
@@ -16,6 +17,8 @@ export class LoginMenuComponent implements OnInit, OnDestroy {
 
   constructor(
     private _authenticationService: AuthenticationService,
+    private _router: Router,
+    private _activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -35,5 +38,10 @@ export class LoginMenuComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this._initSubscriptions.unsubscribe();
+  }
+
+  public onWikiClick() {
+    // We need to redirect to the /wiki folder.  This will be a virtual directory that is not under the control of the Angular router.
+    window.open(`http://angbandos.skarstech.com/wiki`, '_blank');
   }
 }
