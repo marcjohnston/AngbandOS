@@ -7,6 +7,9 @@
 
 namespace AngbandOS.Core.Animations;
 
+/// <summary>
+/// Represents an animation that occurs when a projectile is launched.
+/// </summary>
 [Serializable]
 internal abstract class Animation : IConfigurationItem
 {

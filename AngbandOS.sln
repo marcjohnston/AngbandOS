@@ -22,6 +22,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{3727C295-9A2A-44DB-80F5-85923B90032F}"
 	ProjectSection(SolutionItems) = preProject
 		Documents\AngbandOS.Web Topology.pptx = Documents\AngbandOS.Web Topology.pptx
+		Documents\Cthangband.xlsx = Documents\Cthangband.xlsx
 	EndProjectSection
 EndProject
 Global

@@ -13,10 +13,11 @@
   </SpellChecker>
 <HelpConfigurations selected="HelpFile">
   <HelpConfiguration name="HelpFile">
-    <OutputPath>D:\Team Services\AngbandOS.Core.GhostDoc</OutputPath>
+    <OutputPath>..\..\..\Team Services\AngbandOS.Core.GhostDoc</OutputPath>
     <CleanupOutputPath>true</CleanupOutputPath>
     <HelpFileName>AngbandOS</HelpFileName>
     <HelpFileNamingMethod>MemberName</HelpFileNamingMethod>
+    <HelpFileLoadIndexPanelOnDemand>true</HelpFileLoadIndexPanelOnDemand>
     <ImageFolderPath />
     <Theme>FlatGray</Theme>
     <HtmlFormats>
@@ -40,8 +41,8 @@
     </IncludeScopes>
     <SyntaxLanguages>
       <CSharp>true</CSharp>
-      <VisualBasic>true</VisualBasic>
-      <CPlusPlus>true</CPlusPlus>
+      <VisualBasic>false</VisualBasic>
+      <CPlusPlus>false</CPlusPlus>
     </SyntaxLanguages>
     <ResolveCrefLinks>true</ResolveCrefLinks>
     <HeaderText />

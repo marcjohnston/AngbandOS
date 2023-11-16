@@ -7,6 +7,9 @@
 
 namespace AngbandOS.Core.AlterActions;
 
+/// <summary>
+/// Represents an action that occurs when the player bumps into a feature.
+/// </summary>
 [Serializable]
 internal abstract class AlterAction : IConfigurationItem
 {
