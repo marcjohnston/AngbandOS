@@ -42,6 +42,11 @@ export class LoginMenuComponent implements OnInit, OnDestroy {
 
   public onWikiClick() {
     // We need to redirect to the /wiki folder.  This will be a virtual directory that is not under the control of the Angular router.
-    window.open(`http://angbandos.skarstech.com/wiki`, '_blank');
+    window.open(`https://angbandos.skarstech.com/wiki`, '_blank');
+  }
+
+  public onDeveloperClick() {
+    // We need to redirect to the /wiki folder.  This will be a virtual directory that is not under the control of the Angular router.
+    window.open(`https://angbandos.skarstech.com/developer`, '_blank');
   }
 }
