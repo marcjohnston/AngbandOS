@@ -20,7 +20,6 @@ const idleTimeIntervalInMilliseconds = 5000;
   ]
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  private readonly serviceConnection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/service-hub").build();
   public savedGames: SavedGameDetails[] | undefined = undefined;
   public activeGames: ActiveGameDetails[] | undefined = undefined;
   public savedGamesDisplayedColumns: string[] = ["character-name", "gold", "level", "is-alive", "last-saved", "actions"];
@@ -30,8 +29,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   public selectedActiveUser: UserDetails | null = null;
   public selectedSavedGame: SavedGameDetails | null = null;
   public isAuthenticated: boolean = false;
-  private _initSubscriptions = new Subscription();
   public isAdministrator: boolean = false;
+  private readonly _initSubscriptions = new Subscription();
+  private readonly _serviceConnection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/service-hub").build();
 
   constructor(
     private _httpClient: HttpClient,
@@ -162,9 +162,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Start a signal-r connection to receive updates to the list.
-    this.serviceConnection.start().then(() => {
-      if (this.serviceConnection !== undefined) {
-        this.serviceConnection.on("ActiveGamesUpdated", (_activeGames: ActiveGameDetails[]) => {
+    this._serviceConnection.start().then(() => {
+      if (this._serviceConnection !== undefined) {
+        this._serviceConnection.on("ActiveGamesUpdated", (_activeGames: ActiveGameDetails[]) => {
           this._ngZone.run(() => {
             this.activeGames = _activeGames;
             if (this.activeGames.length > 0) {
@@ -172,11 +172,14 @@ export class HomeComponent implements OnInit, OnDestroy {
             }
           })
         });
-        this.serviceConnection.send("RefreshActiveGames");
+        this._serviceConnection.send("RefreshActiveGames");
       }
+    }, (reason: any) => {
+      console.log(`Service hub rejected connection.  ${reason}`);
     });
 
-    this._initSubscriptions.add(this._authenticationService.currentUser.subscribe((_userDetails: UserDetails | null) => {
+    // Subscribe to the authenticated user.
+    const currentUserSubscription = this._authenticationService.currentUser.subscribe((_userDetails: UserDetails | null) => {
       if (_userDetails !== null && _userDetails.username !== null) {
         this.isAuthenticated = true;
         this.isAdministrator = (_userDetails.isAdmin === true);
@@ -193,17 +196,25 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.isAuthenticated = false;
         this._authenticationService.autoLogin();
       }
-    }));
+    });
+
+    // Track the subscription so that it can be unsubscribed.
+    this._initSubscriptions.add(currentUserSubscription);
+  }
+
+  private showMessage(message: string) {
+    this._ngZone.run(() => {
+      this._snackBar.open(message, "", {
+        duration: 5000
+      });
+    });
   }
 
   public killActiveGame(activeGame: ActiveGameDetails) {
     this._httpClient.delete(`/apiv1/games/${activeGame.connectionId}`).toPromise().then((_savedGames) => {
-      this._ngZone.run(() => {
-        this._snackBar.open("Game killed.", "", {
-          duration: 5000
-        });
-      });
+      this.showMessage("Game killed.");
     }, (_errorResponse: HttpErrorResponse) => {
+      // No ngZone needed here.
       this._snackBar.open(ErrorMessages.getMessage(_errorResponse).join('\n'), "", {
         duration: 5000
       });
@@ -211,9 +222,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.serviceConnection !== undefined) {
-      this.serviceConnection.off("ActiveGamesUpdated");
-      this.serviceConnection.stop();
+    if (this._serviceConnection !== undefined) {
+      this._serviceConnection.off("ActiveGamesUpdated");
+      this._serviceConnection.stop();
     }
   }
 
