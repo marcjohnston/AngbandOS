@@ -18,8 +18,7 @@ internal class ItemFactoriesRepositoryCollection : DictionaryRepositoryCollectio
     {
         foreach (ItemFactory itemFactory in this)
         {
-            itemFactory.FlavorSymbol = itemFactory.Symbol;
-            itemFactory.FlavorColour = itemFactory.Colour;
+            itemFactory.Loaded();
         }
     }
 }

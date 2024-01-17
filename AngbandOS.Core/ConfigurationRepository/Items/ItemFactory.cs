@@ -22,6 +22,12 @@ internal abstract class ItemFactory : IItemCharacteristics
         SaveGame = saveGame;
     }
 
+    public virtual void Loaded()
+    {
+        FlavorSymbol = Symbol;
+        FlavorColour = Colour;
+    }
+
     public abstract ItemClass ItemClass { get; }
 
     /// <summary>
