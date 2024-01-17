@@ -98,6 +98,7 @@ internal class SingletonRepository
     /// <param name="saveGame"></param>
     public void Load()
     {
+        // Create all of the repositories.  All of the repositories will be empty and have an instance to the save game.
         FlaggedActions = new FlaggedActionsRepositoryCollection(SaveGame);
         Towns = new TownsRepositoryCollection(SaveGame);
         ItemFactories = new ItemFactoriesRepositoryCollection(SaveGame);
@@ -169,6 +170,7 @@ internal class SingletonRepository
         WorshipPlayerAttacks = new WorshipPlayerAttacksRepositoryCollection(SaveGame);
         FindQuests = new FindQuestsRepositoryCollection(SaveGame);
 
+        // Load all of the objects into each repository.  This is where the assembly will be scanned or the database will be read.
         FlaggedActions.Load();
         Towns.Load();
         ItemFactories.Load();
@@ -240,6 +242,7 @@ internal class SingletonRepository
         WorshipPlayerAttacks.Load();
         FindQuests.Load();
 
+        // Allow objects that refer to other objects to be processed.  Now that all of the repository items exist, references will succeed.
         FlaggedActions.Loaded();
         Towns.Loaded();
         ItemFactories.Loaded();
@@ -310,5 +313,10 @@ internal class SingletonRepository
         StoreOwnerAcceptedComments.Loaded();
         WorshipPlayerAttacks.Loaded();
         FindQuests.Loaded();
+    }
+
+    public void Persist(ICorePersistentStorage corePersistentStorage)
+    {
+        StoreOwners.Persist(corePersistentStorage);
     }
 }

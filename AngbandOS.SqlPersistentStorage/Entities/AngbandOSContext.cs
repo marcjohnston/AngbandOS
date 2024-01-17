@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace AngbandOS.PersistentStorage.Sql.Entities
 {
@@ -24,6 +27,7 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
         public virtual DbSet<Key> Keys { get; set; } = null!;
         public virtual DbSet<Message> Messages { get; set; } = null!;
         public virtual DbSet<PersistedGrant> PersistedGrants { get; set; } = null!;
+        public virtual DbSet<RepositoryEntity> RepositoryEntities { get; set; } = null!;
         public virtual DbSet<SavedGame> SavedGames { get; set; } = null!;
         public virtual DbSet<SavedGameContent> SavedGameContents { get; set; } = null!;
         public virtual DbSet<UserSetting> UserSettings { get; set; } = null!;
@@ -225,6 +229,19 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
                 entity.Property(e => e.SubjectId).HasMaxLength(200);
 
                 entity.Property(e => e.Type).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<RepositoryEntity>(entity =>
+            {
+                entity.HasKey(e => e.Guid);
+
+                entity.Property(e => e.Guid).ValueGeneratedNever();
+
+                entity.Property(e => e.JsonData).IsUnicode(false);
+
+                entity.Property(e => e.RepositoryName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<SavedGame>(entity =>

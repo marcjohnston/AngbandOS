@@ -24,4 +24,6 @@ public interface ICorePersistentStorage
     /// </summary>
     /// <returns></returns>
     bool GameExists();
+
+    void PersistEntities(string repositoryName, string[] jsonEntities);
 }

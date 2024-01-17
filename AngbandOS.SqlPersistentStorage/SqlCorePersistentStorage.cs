@@ -1,5 +1,6 @@
 ﻿using AngbandOS.Core.Interface;
 using AngbandOS.PersistentStorage.Sql.Entities;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace AngbandOS.PersistentStorage
@@ -90,9 +91,32 @@ namespace AngbandOS.PersistentStorage
 
         public bool GameExists()
         {
-            using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
+            using AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString);
+            return context.SavedGames.Any(_savedGame => _savedGame.Username == Username && _savedGame.Guid.ToString() == GameGuid);
+        }
+        public void PersistEntities(string repositoryName, string[] jsonEntities)
+        {
+            using AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString);
+
+            using var transaction = context.Database.BeginTransaction();
+            try
             {
-                return context.SavedGames.Any(_savedGame => _savedGame.Username == Username && _savedGame.Guid.ToString() == GameGuid);
+                context.Database.ExecuteSqlRaw("DELETE FROM [RepositoryEntities] WHERE [RepositoryName]=@RepositoryName", new SqlParameter("@RepositoryName", repositoryName));
+                foreach (string jsonEntity in jsonEntities)
+                {
+                    context.RepositoryEntities.Add(new RepositoryEntity()
+                    {
+                        Guid = Guid.NewGuid(),
+                        RepositoryName = repositoryName,
+                        JsonData = jsonEntity
+                    }) ;
+                }
+                context.SaveChanges();
+                transaction.Commit();
+            }
+            catch
+            {
+                transaction.Rollback();
             }
         }
     }

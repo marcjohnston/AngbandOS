@@ -10,11 +10,11 @@ using System.Collections.Generic;
 namespace AngbandOS.Core.RepositoryCollections;
 
 /// <summary>
-/// Represents a RepositoryCollection that uses a Dictionary<> object to quickly retrieve objects from the repository by its' Type.
+/// Represents a RepositoryCollection that uses a Dictionary<> object to quickly retrieve objects from the repository by either the item Type or the item type name.
 /// </summary>
 /// <typeparam name="T"></typeparam>
 [Serializable]
-internal abstract class DictionaryRepositoryCollection<T> : ListRepositoryCollection<T> where T : IConfigurationItem
+internal abstract class DictionaryRepositoryCollection<T> : ListRepositoryCollection<T>
 {
     Dictionary<string, T> dictionary = new Dictionary<string, T>();
 
@@ -58,17 +58,11 @@ internal abstract class DictionaryRepositoryCollection<T> : ListRepositoryCollec
         dictionary.Add(key, item);
     }
 
+    /// <summary>
+    /// Loads the entities from the assembly.
+    /// </summary>
     public override void Load()
     {
         Add(LoadTypesFromAssembly<T>());
-    }
-
-
-    public override void Loaded()
-    {
-        foreach (T item in this)
-        {
-            item.Loaded();
-        }
     }
 }

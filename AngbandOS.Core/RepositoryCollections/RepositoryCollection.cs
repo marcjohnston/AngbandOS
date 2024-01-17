@@ -10,6 +10,10 @@ using System.Reflection;
 
 namespace AngbandOS.Core.RepositoryCollections;
 
+/// <summary>
+/// Represents a repository of singleton entities.  Entities must implement the IConfigurationItem interface.
+/// </summary>
+/// <typeparam name="T"></typeparam>
 [Serializable]
 internal abstract class RepositoryCollection<T> : IEnumerable<T>
 {
@@ -41,16 +45,7 @@ internal abstract class RepositoryCollection<T> : IEnumerable<T>
                 if (constructors.Length == 1)
                 {
                     T item = (T)constructors[0].Invoke(new object[] { SaveGame });
-                    bool exclude = false;
-                    if (typeof(IConfigurationItem).IsAssignableFrom(type))
-                    {
-                        IConfigurationItem singletonType = (IConfigurationItem)item;
-                        exclude = singletonType.ExcludeFromRepository;
-                    }
-                    if (!exclude)
-                    {
-                        typeList.Add(item);
-                    }
+                    typeList.Add(item);
                 }
             }
         }
@@ -67,4 +62,34 @@ internal abstract class RepositoryCollection<T> : IEnumerable<T>
     /// Processes the loaded phase for configuration repository items.  This phase allows each object to bind to other configuration repository objects.
     /// </summary>
     public virtual void Loaded() { }
+
+    protected virtual string? SerializeEntity(T t) => null;
+
+    protected virtual string? PersistedEntityName => null;
+
+    /// <summary>
+    /// Persist the entities to the core persistent storage medium.  This method is only being used to generate database entities from objects.
+    /// </summary>
+    /// <param name="corePersistentStorage"></param>
+    public virtual void Persist(ICorePersistentStorage corePersistentStorage)
+    {
+        // Retrieve the name to be used for the repository entities.
+        string? name = PersistedEntityName;
+
+        // Check to see if there is a name.  If not, then the persist isn't enabled for this repository.
+        if (name != null)
+        {
+            List<string> jsonEntityList = new();
+            foreach (T item in this)
+            {
+                string serializedEntity = SerializeEntity(item);
+                if (serializedEntity == null)
+                {
+                    throw new Exception("Entity did not serialize.");
+                }
+                jsonEntityList.Add(serializedEntity);
+            }
+            corePersistentStorage.PersistEntities(name, jsonEntityList.ToArray());
+        }
+    }
 }

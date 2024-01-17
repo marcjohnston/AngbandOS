@@ -27,8 +27,6 @@ internal class CelephaisTown : Town
         SaveGame.SingletonRepository.Stores.Get<HallStore>(),
         SaveGame.SingletonRepository.Stores.Get<PawnStore>()
     };
-
-    public override bool ExcludeFromRepository => true;
     public override int HousePrice => 50000;
     public override string Name => "the beautiful city of Celephais";
     public override char Char => 'C';

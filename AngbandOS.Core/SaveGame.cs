@@ -130,7 +130,7 @@ internal class SaveGame
     /// Represents the object responsible for saving the game, when needed.  If null, the game cannot be saved.
     /// </summary>
     [NonSerialized]
-    private ICorePersistentStorage? PersistentStorage;
+    private ICorePersistentStorage? CorePersistentStorage;
 
     /// <summary>
     /// Returns the object that the calling application provided to be used to connect the game input and output to the calling application.
@@ -1541,7 +1541,7 @@ internal class SaveGame
             IsAlive = !IsDead, // If the player is dead, then the savegame Player will be null.
             Comments = ""
         };
-        PersistentStorage?.WriteGame(gameDetails, memoryStream.ToArray());
+        CorePersistentStorage?.WriteGame(gameDetails, memoryStream.ToArray());
     }
 
     private void ResetStompability()
@@ -1577,11 +1577,18 @@ internal class SaveGame
         ConsoleViewPort = consoleViewPort;
         Shutdown = false;
         LastInputReceived = DateTime.Now;
-        PersistentStorage = persistentStorage;
+        CorePersistentStorage = persistentStorage;
         KeySize = ConsoleViewPort.MaximumKeyQueueLength;
         KeyQueue = new char[ConsoleViewPort.MaximumKeyQueueLength];
         Screen = new Screen(consoleViewPort);
         MapMovementKeys();
+
+        // Write the entities to persistent storage.
+        if (CorePersistentStorage != null)
+        {
+            // TODO: Comment the persistance of the entities.
+            SingletonRepository.Persist(CorePersistentStorage);
+        }
 
         FullScreenOverlay = true;
         SetBackground(BackgroundImageEnum.Normal);

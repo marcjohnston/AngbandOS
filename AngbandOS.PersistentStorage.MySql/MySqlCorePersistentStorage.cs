@@ -25,6 +25,11 @@ namespace AngbandOS.PersistentStorage
         /// </summary>
         protected string GameGuid { get; }
 
+        public void PersistEntities(string repositoryName, string[] jsonEntities)
+        {
+            throw new NotImplementedException();
+        }
+
         public MySqlCorePersistentStorage(string connectionString, string username, string guid)
         {
             if (connectionString == null)

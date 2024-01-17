@@ -16,6 +16,11 @@ namespace AngbandOS.PersistentStorage
             return File.Exists(SaveFilename);
         }
 
+        public void PersistEntities(string repositoryName, string[] jsonEntities)
+        {
+            throw new NotImplementedException();
+        }
+
         public byte[]? ReadGame()
         {
             byte[]? data = null;
