@@ -5,18 +5,18 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using System.Text.Json;
-
 namespace AngbandOS.Core.StoreOwners;
 
 [Serializable]
-internal abstract class StoreOwner
+internal abstract class StoreOwner : IGetKey<string>
 {
     protected SaveGame SaveGame { get; }
     protected StoreOwner(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
+
+    public virtual void Loaded() { }
 
     public abstract int MaxCost { get; }
     public abstract int MinInflate { get; }
@@ -26,8 +26,12 @@ internal abstract class StoreOwner
     /// </summary>
     public abstract string OwnerName { get; }
 
+    public virtual string Key => GetType().Name;
+
     /// <summary>
     /// Returns the race of the store owner.  Null, if there is no store owner.
     /// </summary>
     public abstract Race? OwnerRace { get; }
+
+    public string GetKey => Key;
 }

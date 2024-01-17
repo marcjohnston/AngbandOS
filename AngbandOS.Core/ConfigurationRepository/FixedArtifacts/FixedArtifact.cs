@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal abstract class FixedArtifact : IItemCharacteristics, IConfigurationItem
+internal abstract class FixedArtifact : IItemCharacteristics
 {
     protected readonly SaveGame SaveGame;
 
@@ -17,12 +17,8 @@ internal abstract class FixedArtifact : IItemCharacteristics, IConfigurationItem
         SaveGame = saveGame;
     }
 
-    /// <inheritdoc />
-    public virtual void Loaded() { }
+    public abstract void Loaded();
 
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
-    
     /// <summary>
     /// Represents the quantity of this artifact currently in existence.
     /// </summary>

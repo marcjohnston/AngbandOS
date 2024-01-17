@@ -5,10 +5,21 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Drawing;
+
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
 internal class ItemFactoriesRepositoryCollection : DictionaryRepositoryCollection<ItemFactory>
 {
     public ItemFactoriesRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
+
+    public override void Loaded()
+    {
+        foreach (ItemFactory itemFactory in this)
+        {
+            itemFactory.FlavorSymbol = itemFactory.Symbol;
+            itemFactory.FlavorColour = itemFactory.Colour;
+        }
+    }
 }

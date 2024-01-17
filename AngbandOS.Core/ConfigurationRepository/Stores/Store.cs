@@ -8,18 +8,12 @@
 namespace AngbandOS.Core.Stores;
 
 [Serializable]
-internal abstract class Store : IItemFilter, IConfigurationItem
+internal abstract class Store : IItemFilter
 {
     private int _x;
     private int _y;
 
     protected readonly SaveGame SaveGame;
-
-    /// <inheritdoc />
-    public virtual void Loaded() { }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
 
     public virtual int PageSize => 26;
 
@@ -496,7 +490,7 @@ internal abstract class Store : IItemFilter, IConfigurationItem
     {
         get
         {
-            string storeName = SaveGame.SingletonRepository.Tiles[FeatureType].Description;
+            string storeName = SaveGame.SingletonRepository.Tiles.Get(FeatureType).Description;
             return $"{storeName} ({_owner.MaxCost})";
         }
     }

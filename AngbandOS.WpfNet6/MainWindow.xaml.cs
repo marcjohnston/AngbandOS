@@ -1,5 +1,6 @@
 ﻿using AngbandOS.Core;
 using AngbandOS.Core.Interface;
+using AngbandOS.Core.Interface.Definitions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -270,7 +271,7 @@ public partial class MainWindow : Window, IConsoleViewPort
             Char = jsonTown.Char.Value,
             HousePrice = jsonTown.HousePrice.Value,
             Name = jsonTown.Name,
-            Stores = jsonTown.Stores
+            StoreNames = jsonTown.Stores
         };
 
         configuration.Towns = new TownDefinition[] { townDefinition };

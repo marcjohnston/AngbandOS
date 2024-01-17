@@ -8,19 +8,13 @@
 namespace AngbandOS.Core.Rewards;
 
 [Serializable]
-internal abstract class Reward : IConfigurationItem
+internal abstract class Reward
 {
     protected readonly SaveGame SaveGame;
     protected Reward(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
-
-    /// <inheritdoc />
-    public virtual void Loaded() { }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
 
     public abstract void GetReward(Patron patron);
 }

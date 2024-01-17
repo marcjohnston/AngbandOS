@@ -8,19 +8,13 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal abstract class Script : IConfigurationItem
+internal abstract class Script
 {
     protected readonly SaveGame SaveGame;
     protected Script(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
-
-    /// <inheritdoc />
-    public virtual void Loaded() { }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
 
     /// <summary>
     /// Execute the script and return true, if the script fails due to chance.  A true return value indicates to the parent, that if the process is repeated, the process may succeed.

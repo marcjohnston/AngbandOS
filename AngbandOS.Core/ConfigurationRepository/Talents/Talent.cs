@@ -8,19 +8,13 @@
 namespace AngbandOS.Core.Talents;
 
 [Serializable]
-internal abstract class Talent : IConfigurationItem
+internal abstract class Talent
 {
     protected readonly SaveGame SaveGame;
     protected Talent(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
-
-    /// <inheritdoc />
-    public virtual void Loaded() { }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
 
     public abstract string Name { get; }
 

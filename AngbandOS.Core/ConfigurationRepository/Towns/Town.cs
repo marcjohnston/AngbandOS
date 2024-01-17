@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Towns;
 
 [Serializable]
-internal abstract class Town : IConfigurationItem
+internal abstract class Town
 {
     protected readonly SaveGame SaveGame;
 
@@ -16,12 +16,6 @@ internal abstract class Town : IConfigurationItem
     {
         SaveGame = saveGame;
     }
-
-    /// <inheritdoc />
-    public virtual void Loaded() { }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
 
     public abstract char Char { get; }
     public abstract int HousePrice { get; }

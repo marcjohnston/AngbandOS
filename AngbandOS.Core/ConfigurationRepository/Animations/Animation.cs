@@ -11,19 +11,13 @@ namespace AngbandOS.Core.Animations;
 /// Represents an animation that occurs when a projectile is launched.
 /// </summary>
 [Serializable]
-internal abstract class Animation : IConfigurationItem
+internal abstract class Animation
 {
     protected SaveGame SaveGame;
     protected Animation(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
-
-    /// <inheritdoc />
-    public virtual void Loaded() { }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
 
     public abstract char Character { get; }
     public abstract ColourEnum Colour { get; }

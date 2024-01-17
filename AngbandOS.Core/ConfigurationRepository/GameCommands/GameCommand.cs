@@ -8,19 +8,13 @@
 namespace AngbandOS.Core.Commands;
 
 [Serializable]
-internal abstract class GameCommand : IConfigurationItem
+internal abstract class GameCommand
 {
     protected SaveGame SaveGame { get; }
     protected GameCommand(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
-
-    /// <inheritdoc />
-    public virtual void Loaded() { }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
 
     public abstract char Key { get; }
 

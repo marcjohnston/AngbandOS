@@ -119,5 +119,11 @@ namespace AngbandOS.PersistentStorage
                 transaction.Rollback();
             }
         }
+
+        public string[] RetrieveEntities(string repositoryName)
+        {
+            using AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString);
+            return context.RepositoryEntities.Select(_repositoryEntity => _repositoryEntity.JsonData).ToArray();
+        }
     }
 }

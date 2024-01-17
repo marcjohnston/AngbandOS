@@ -5,17 +5,13 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using System.Text.Json.Serialization;
-
-namespace AngbandOS.Core.RepositoryCollections;
+namespace AngbandOS.Core.Interface.Definitions;
 
 [Serializable]
-internal class JsonConvertersRepositoryCollection : ListRepositoryCollection<JsonConverter>
+public class TownDefinition
 {
-    public JsonConvertersRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
-
-    public override void Load()
-    {
-        Add(new ArrayOfStoreJsonConverter(SaveGame));
-    }
+    public char Char { get; set; }
+    public int HousePrice { get; set; }
+    public string Name { get; set; }
+    public string[]? StoreNames { get; set; }
 }

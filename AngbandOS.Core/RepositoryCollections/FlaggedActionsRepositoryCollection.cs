@@ -11,4 +11,14 @@ namespace AngbandOS.Core.RepositoryCollections;
 internal class FlaggedActionsRepositoryCollection : DictionaryRepositoryCollection<FlaggedAction>
 {
     public FlaggedActionsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
+
+    // Allow the flagged actions to load.  This is needed because some of them are grouped on other flagged actions.
+    public override void Loaded()
+    {
+        foreach (FlaggedAction flaggedAction in this)
+        {
+            flaggedAction.Loaded();
+        }
+    }
+
 }

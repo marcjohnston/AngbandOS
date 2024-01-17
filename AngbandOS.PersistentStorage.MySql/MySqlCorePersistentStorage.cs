@@ -30,6 +30,11 @@ namespace AngbandOS.PersistentStorage
             throw new NotImplementedException();
         }
 
+        public string[] RetrieveEntities(string repositoryName)
+        {
+            throw new NotImplementedException();
+        }
+
         public MySqlCorePersistentStorage(string connectionString, string username, string guid)
         {
             if (connectionString == null)

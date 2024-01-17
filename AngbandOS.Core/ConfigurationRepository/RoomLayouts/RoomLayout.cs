@@ -8,19 +8,13 @@
 namespace AngbandOS.Core.RoomTypes;
 
 [Serializable]
-internal abstract class RoomLayout : IConfigurationItem
+internal abstract class RoomLayout
 {
     protected readonly SaveGame SaveGame;
     protected RoomLayout(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
-
-    /// <inheritdoc />
-    public virtual void Loaded() { }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
 
     public abstract int Type { get; }
     public abstract void Build(int yval, int xval);

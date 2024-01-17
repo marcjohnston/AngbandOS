@@ -8,19 +8,13 @@
 namespace AngbandOS.Core.Realms;
 
 [Serializable]
-internal abstract class Realm : IConfigurationItem
+internal abstract class Realm
 {
     protected SaveGame SaveGame { get; }
     protected Realm(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
-
-    /// <inheritdoc />
-    public virtual void Loaded() { }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
 
     /// <summary>
     /// Returns the spells books that belong to the realm.

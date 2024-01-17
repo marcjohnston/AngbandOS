@@ -8,19 +8,13 @@
 namespace AngbandOS.Core.AttackTypes;
 
 [Serializable]
-internal abstract class Attack : IConfigurationItem
+internal abstract class Attack
 {
     protected readonly SaveGame SaveGame;
     protected Attack(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
-
-    /// <inheritdoc />
-    public virtual void Loaded() { }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
 
     /// <summary>
     /// Returns the action message to be displayed, when the attack targets another monster.

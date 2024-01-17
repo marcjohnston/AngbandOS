@@ -21,6 +21,11 @@ namespace AngbandOS.PersistentStorage
             throw new NotImplementedException();
         }
 
+        public string[] RetrieveEntities(string repositoryName) 
+        {  
+            throw new NotImplementedException();
+        }
+
         public byte[]? ReadGame()
         {
             byte[]? data = null;

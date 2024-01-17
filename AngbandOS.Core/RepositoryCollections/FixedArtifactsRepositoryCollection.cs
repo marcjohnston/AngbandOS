@@ -11,4 +11,13 @@ namespace AngbandOS.Core.RepositoryCollections;
 internal class FixedArtifactsRepositoryCollection : DictionaryRepositoryCollection<FixedArtifact>
 {
     public FixedArtifactsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
+
+    // Allow the fixed artifacts to load.  This is needed because they are all based on other items.
+    public override void Loaded()
+    {
+        foreach (FixedArtifact fixedArtifact in this)
+        {
+            fixedArtifact.Loaded();
+        }
+    }
 }

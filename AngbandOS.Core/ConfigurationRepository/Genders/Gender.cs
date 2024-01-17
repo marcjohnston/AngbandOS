@@ -8,19 +8,13 @@
 namespace AngbandOS.Core.Genders;
 
 [Serializable]
-internal abstract class Gender : IConfigurationItem
+internal abstract class Gender
 {
     protected readonly SaveGame SaveGame;
     protected Gender(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
-
-    /// <inheritdoc />
-    public virtual void Loaded() { }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
 
     public abstract string Title { get; }
     public abstract string Winner { get; }

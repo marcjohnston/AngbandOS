@@ -13,7 +13,7 @@ namespace AngbandOS.Core.ItemClasses;
 /// </summary>
 [Serializable]
 
-internal abstract class ItemFactory : IItemCharacteristics, IConfigurationItem
+internal abstract class ItemFactory : IItemCharacteristics
 {
     protected readonly SaveGame SaveGame;
 
@@ -21,16 +21,6 @@ internal abstract class ItemFactory : IItemCharacteristics, IConfigurationItem
     {
         SaveGame = saveGame;
     }
-
-    /// <inheritdoc />
-    public virtual void Loaded() 
-    {
-        FlavorSymbol = Symbol;
-        FlavorColour = Colour;
-    }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
 
     public abstract ItemClass ItemClass { get; }
 

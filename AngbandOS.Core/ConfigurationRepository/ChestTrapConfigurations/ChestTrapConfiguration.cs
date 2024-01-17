@@ -8,19 +8,13 @@
 namespace AngbandOS.Core.ChestTrapConfigurations;
 
 [Serializable]
-internal abstract class ChestTrapConfiguration : IConfigurationItem
+internal abstract class ChestTrapConfiguration
 {
     protected SaveGame SaveGame;
     protected ChestTrapConfiguration(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
-
-    /// <inheritdoc />
-    public virtual void Loaded() { }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
 
     public abstract ChestTrap[] Traps { get; }
     public bool NotTrapped => Traps.Length == 0;

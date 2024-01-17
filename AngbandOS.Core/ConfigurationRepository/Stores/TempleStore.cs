@@ -18,26 +18,26 @@ internal class TempleStore : Store
 
     protected override StoreOwner[] StoreOwners => new StoreOwner[]
     {
-        SaveGame.SingletonRepository.StoreOwners.Get<LudwigTheHumbleStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<GunnarThePaladinStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<SirParsivalThePureStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<AsenathTheHolyStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<McKinnonStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<MistressChastityStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<HashnikTheDruidStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<FinakStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<KrikkikStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<MorivalTheWildStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<HoshakTheDarkStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<AtalTheWiseStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<IbeniddTheChasteStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<EridishStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<VrudushTheShamanStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<HaobTheBerserkerStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<ProogdishTheYouthfullStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<LumwiseTheMadStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<MuirtTheVirtuousStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<DardobardTheWeakStoreOwner>()
+        SaveGame.SingletonRepository.StoreOwners.Get("LudwigTheHumbleStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("GunnarThePaladinStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("SirParsivalThePureStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("AsenathTheHolyStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("McKinnonStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("MistressChastityStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("HashnikTheDruidStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("FinakStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("KrikkikStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("MorivalTheWildStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("HoshakTheDarkStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("AtalTheWiseStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("IbeniddTheChasteStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("EridishStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("VrudushTheShamanStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("HaobTheBerserkerStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("ProogdishTheYouthfullStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("LumwiseTheMadStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("MuirtTheVirtuousStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("DardobardTheWeakStoreOwner")
     };
 
     protected override StockStoreInventoryItem[] GetStoreTable()

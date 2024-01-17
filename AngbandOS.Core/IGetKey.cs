@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core;
 
-internal interface ISingletonKeyedDictionary<TKey>
+internal interface IGetKey<TKey>
 {
     TKey GetKey { get; }
 }

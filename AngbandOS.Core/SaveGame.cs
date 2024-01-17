@@ -14774,7 +14774,7 @@ internal class SaveGame
             {
                 break;
             }
-            string feat = string.IsNullOrEmpty(cPtr.FeatureType.AppearAs) ? SingletonRepository.Tiles[cPtr.BackgroundFeature.AppearAs].Name : SingletonRepository.Tiles[cPtr.FeatureType.AppearAs].Name;
+            string feat = string.IsNullOrEmpty(cPtr.FeatureType.AppearAs) ? SingletonRepository.Tiles.Get(cPtr.BackgroundFeature.AppearAs).Name : SingletonRepository.Tiles.Get(cPtr.FeatureType.AppearAs).Name;
             if (cPtr.TileFlags.IsClear(GridTile.PlayerMemorized) && !PlayerCanSeeBold(y, x))
             {
                 feat = string.Empty;
@@ -14784,7 +14784,7 @@ internal class SaveGame
                 string name = "unknown grid";
                 if (feat != string.Empty)
                 {
-                    name = SingletonRepository.Tiles[feat].Description;
+                    name = SingletonRepository.Tiles.Get(feat).Description;
                     if (s2 != "" && cPtr.FeatureType.BlocksLos)
                     {
                         s2 = "in ";
@@ -17349,13 +17349,13 @@ internal class SaveGame
     public void CaveSetBackground(int y, int x, string feat)
     {
         GridTile cPtr = Grid[y][x];
-        cPtr.BackgroundFeature = SingletonRepository.Tiles[feat];
+        cPtr.BackgroundFeature = SingletonRepository.Tiles.Get(feat);
     }
 
     public void CaveSetFeat(int y, int x, string feat)
     {
         GridTile cPtr = Grid[y][x];
-        cPtr.FeatureType = SingletonRepository.Tiles[feat];
+        cPtr.FeatureType = SingletonRepository.Tiles.Get(feat);
         NoteSpot(y, x);
         RedrawSingleLocation(y, x);
     }
@@ -18568,8 +18568,8 @@ internal class SaveGame
             }
             else
             {
-                a = SingletonRepository.Tiles["Nothing"].Colour;
-                c = SingletonRepository.Tiles["Nothing"].Symbol.Character;
+                a = SingletonRepository.Tiles.Get("Nothing").Colour;
+                c = SingletonRepository.Tiles.Get("Nothing").Symbol.Character;
             }
         }
         else
@@ -18577,8 +18577,8 @@ internal class SaveGame
             if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized))
             {
                 feat = string.IsNullOrEmpty(feat.AppearAs)
-                    ? SingletonRepository.Tiles[cPtr.BackgroundFeature.AppearAs]
-                    : SingletonRepository.Tiles[feat.AppearAs];
+                    ? SingletonRepository.Tiles.Get(cPtr.BackgroundFeature.AppearAs)
+                    : SingletonRepository.Tiles.Get(feat.AppearAs);
                 c = feat.Symbol.Character;
                 a = feat.Colour;
                 if (feat.DimsOutsideLOS)
@@ -18618,8 +18618,8 @@ internal class SaveGame
             }
             else
             {
-                a = SingletonRepository.Tiles["Nothing"].Colour;
-                c = SingletonRepository.Tiles["Nothing"].Symbol.Character;
+                a = SingletonRepository.Tiles.Get("Nothing").Colour;
+                c = SingletonRepository.Tiles.Get("Nothing").Symbol.Character;
             }
         }
         if (TimedHallucinations.TurnsRemaining != 0 && Rng.RandomLessThan(256) == 0 && (!cPtr.FeatureType.IsWall))

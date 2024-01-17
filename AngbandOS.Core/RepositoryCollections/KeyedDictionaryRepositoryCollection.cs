@@ -8,44 +8,31 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal abstract class KeyedDictionaryRepositoryCollection<TKey, TValue> : ListRepositoryCollection<TValue> where TValue : IConfigurationItem, ISingletonKeyedDictionary<TKey>
+internal abstract class KeyedDictionaryRepositoryCollection<TKey, TValue> : ListRepositoryCollection<TValue> where TValue : IGetKey<TKey> where TKey : notnull
 {
-    Dictionary<TKey, TValue> instances = new Dictionary<TKey, TValue>();
+    private Dictionary<TKey, TValue> dictionary = new Dictionary<TKey, TValue>();
     protected KeyedDictionaryRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 
-    public int Count => instances.Count;
-    public TValue this[TKey index]
+     public bool Contains(TValue item) => dictionary.ContainsKey(item.GetKey);
+
+     public TValue Get(TKey key)
     {
-        get
+        if (!dictionary.TryGetValue(key, out TValue? value))
         {
-            return instances[index];
+            throw new Exception("Item missing from keyed dictionary.");
         }
+        return value;
     }
 
-    public bool Contains(TValue item) => instances.ContainsKey(item.GetKey);
-
-    public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
-    {
-        return instances.GetEnumerator();
-    }
-
-    public void Add(TValue item)
+    /// <summary>
+    /// Add a value to the keyed dictionary.
+    /// </summary>
+    /// <param name="item"></param>
+    public override void Add(TValue item)
     {
         TKey key = item.GetKey;
-        instances.Add(key, item);
-    }
-
-    public void Add(TValue[] items)
-    {
-        foreach (TValue item in items)
-        {
-            Add(item);
-        }
-    }
-
-    public void Add(Dictionary<TKey, TValue> dictionary)
-    {
-        instances = dictionary;
+        dictionary.Add(key, item);
+        base.Add(item);
     }
 
     public override void Load()

@@ -922,7 +922,7 @@ internal abstract class Item : IComparable<Item>
             }
             else if (RareItemTypeIndex != RareItemTypeEnum.None)
             {
-                RareItem ePtr = SaveGame.SingletonRepository.RareItems[RareItemTypeIndex];
+                RareItem ePtr = SaveGame.SingletonRepository.RareItems.Get(RareItemTypeIndex);
                 basenm += ' ';
                 basenm += ePtr.FriendlyName; // This used to be oPtr.Name ... but Long Bow Bow of Velocity is wrong
             }
@@ -1399,7 +1399,7 @@ internal abstract class Item : IComparable<Item>
         // Now merge the characteristics from the rare item type, if there is one.
         if (RareItemTypeIndex != RareItemTypeEnum.None)
         {
-            RareItem ePtr = SaveGame.SingletonRepository.RareItems[RareItemTypeIndex];
+            RareItem ePtr = SaveGame.SingletonRepository.RareItems.Get(RareItemTypeIndex);
             Characteristics.Merge(ePtr);
         }
 
@@ -1932,7 +1932,7 @@ internal abstract class Item : IComparable<Item>
         }
         else if (RareItemTypeIndex != RareItemTypeEnum.None)
         {
-            RareItem ePtr = SaveGame.SingletonRepository.RareItems[RareItemTypeIndex];
+            RareItem ePtr = SaveGame.SingletonRepository.RareItems.Get(RareItemTypeIndex);
             if (ePtr.Cost == 0)
             {
                 return 0;
@@ -2156,7 +2156,7 @@ internal abstract class Item : IComparable<Item>
         }
         else if (RareItemTypeIndex != RareItemTypeEnum.None)
         {
-            RareItem ePtr = SaveGame.SingletonRepository.RareItems[RareItemTypeIndex];
+            RareItem ePtr = SaveGame.SingletonRepository.RareItems.Get(RareItemTypeIndex);
             switch (RareItemTypeIndex)
             {
                 case RareItemTypeEnum.WeaponElderSign:

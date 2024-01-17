@@ -12,19 +12,13 @@ namespace AngbandOS.Core.ChestTraps;
 /// need concern themselves with their own implementation and not sub-traps.
 /// </summary>
 [Serializable]
-internal abstract class ChestTrap : IConfigurationItem
+internal abstract class ChestTrap
 {
     protected readonly SaveGame SaveGame;
     protected ChestTrap(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
-
-    /// <inheritdoc />
-    public virtual void Loaded() { }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
 
     /// <summary>
     /// Activate the trap.

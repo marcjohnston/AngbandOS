@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FlaggedActions;
 
 [Serializable]
-internal abstract class FlaggedAction: IConfigurationItem
+internal abstract class FlaggedAction
 {
     protected readonly SaveGame SaveGame;
     protected FlaggedAction(SaveGame saveGame)
@@ -16,10 +16,6 @@ internal abstract class FlaggedAction: IConfigurationItem
         SaveGame = saveGame;
     }
 
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
-
-    /// <inheritdoc />
     public virtual void Loaded() { }
 
     private bool _flag;

@@ -8,19 +8,13 @@
 namespace AngbandOS.Core.StoreCommands;
 
 [Serializable]
-internal abstract class StoreCommand : IConfigurationItem
+internal abstract class StoreCommand
 {
     protected SaveGame SaveGame { get; }
     protected StoreCommand(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
-
-    /// <inheritdoc />
-    public virtual void Loaded() { }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
 
     public abstract char Key { get; }
     public virtual bool IsEnabled(Store store) => true;

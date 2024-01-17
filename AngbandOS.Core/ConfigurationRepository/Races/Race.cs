@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Races;
 
 [Serializable]
-internal abstract class Race : IConfigurationItem
+internal abstract class Race : IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
     protected Race(SaveGame saveGame)
@@ -16,11 +16,7 @@ internal abstract class Race : IConfigurationItem
         SaveGame = saveGame;
     }
 
-    /// <inheritdoc />
-    public virtual void Loaded() { }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
+    public string GetKey => GetType().Name;
 
     public abstract int[] AbilityBonus { get; }
     public abstract int AgeRange { get; }

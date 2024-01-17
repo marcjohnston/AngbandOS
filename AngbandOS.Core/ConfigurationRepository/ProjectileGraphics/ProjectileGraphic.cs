@@ -8,19 +8,13 @@
 namespace AngbandOS.Core.ProjectileGraphics;
 
 [Serializable]
-internal abstract class ProjectileGraphic : IConfigurationItem
+internal abstract class ProjectileGraphic
 {
     protected SaveGame SaveGame;
     protected ProjectileGraphic(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
-
-    /// <inheritdoc />
-    public virtual void Loaded() { }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
 
     /// <summary>
     /// The column from which to take the graphical tile.

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.MartialArtsAttacks;
 
 [Serializable]
-internal abstract class MartialArtsAttack : IConfigurationItem
+internal abstract class MartialArtsAttack
 {
     protected readonly SaveGame SaveGame;
 
@@ -16,11 +16,6 @@ internal abstract class MartialArtsAttack : IConfigurationItem
     {
         SaveGame = saveGame;
     }
-    /// <inheritdoc />
-    public virtual void Loaded() { }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
 
     public abstract int Chance { get; }
     public abstract int Dd { get; }

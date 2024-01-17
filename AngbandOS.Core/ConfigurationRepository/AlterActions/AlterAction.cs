@@ -11,19 +11,13 @@ namespace AngbandOS.Core.AlterActions;
 /// Represents an action that occurs when the player bumps into a feature.
 /// </summary>
 [Serializable]
-internal abstract class AlterAction : IConfigurationItem
+internal abstract class AlterAction
 {
     protected readonly SaveGame SaveGame;
     protected AlterAction(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
-
-    /// <inheritdoc />
-    public virtual void Loaded() { }
 
     public abstract void Execute(AlterEventArgs alterEventArgs);
 }

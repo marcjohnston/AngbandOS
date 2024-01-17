@@ -5,12 +5,14 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.ConfigurationRepository.StoreOwners;
+using AngbandOS.Core.Interface.Definitions;
 using System.Text.Json;
 
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class StoreOwnersRepositoryCollection : DictionaryRepositoryCollection<StoreOwner>
+internal class StoreOwnersRepositoryCollection : KeyedDictionaryRepositoryCollection<string, StoreOwner>
 {
     public StoreOwnersRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 
@@ -18,57 +20,37 @@ internal class StoreOwnersRepositoryCollection : DictionaryRepositoryCollection<
 
     protected override string? SerializeEntity(StoreOwner storeOwner)
     {
-        ModelStoreOwner modelStoreOwner = new()
+        StoreOwnerDefinition storeOwnerDefinition = new()
         {
+            Key = storeOwner.Key,
             MaxCost = storeOwner.MaxCost,
             MinInflate = storeOwner.MinInflate,
             OwnerName = storeOwner.OwnerName,
-            OwnerRaceName = storeOwner.OwnerRace?.Title
+            OwnerRaceName = storeOwner.OwnerRace?.GetKey
         };
-        return JsonSerializer.Serialize<ModelStoreOwner>(modelStoreOwner);
+        return JsonSerializer.Serialize<StoreOwnerDefinition>(storeOwnerDefinition);
     }
-}
 
-internal class ModelStoreOwner
-{
-    public int? MaxCost { get; set; }
-
-    public int? MinInflate { get; set; }
-
-    public string? OwnerName { get; set; }
-
-    public string? OwnerRaceName { get; set; }
-}
-
-internal class DbStoreOwner : StoreOwner
-{
-    private int _maxCost { get; set; }
-
-    private int _minInflate { get; set; }
-
-    private string _ownerName { get; set; }
-
-    private Race? _ownerRace { get; set; }
-
-    public DbStoreOwner(SaveGame saveGame, string json) : base(saveGame)
+    public override void Load()
     {
-        ModelStoreOwner? modelStoreOwner = JsonSerializer.Deserialize<ModelStoreOwner>(json);
-        if (modelStoreOwner == null || modelStoreOwner.MaxCost == null || modelStoreOwner.MinInflate == null || modelStoreOwner.OwnerName == null)
-            throw new Exception("Invalid store owner json.");
-        _maxCost = modelStoreOwner.MaxCost.Value;
-        _minInflate = modelStoreOwner.MinInflate.Value;
-        _ownerName = modelStoreOwner.OwnerName;
-        if (modelStoreOwner.OwnerRaceName != null)
+        if (SaveGame.Configuration.StoreOwners == null)
         {
-            _ownerRace = SaveGame.SingletonRepository.Races.Get(modelStoreOwner.OwnerRaceName);
+            base.Load();
+        }
+        else
+        {
+            foreach (StoreOwnerDefinition storeOwnerDefinition in SaveGame.Configuration.StoreOwners)
+            {
+                Add(new GenericStoreOwner(SaveGame, storeOwnerDefinition));
+            }
         }
     }
 
-    public override int MaxCost => _maxCost;
-
-    public override int MinInflate => _minInflate;
-
-    public override string OwnerName => _ownerName;
-
-    public override Race? OwnerRace => _ownerRace;
+    public override void Loaded()
+    {
+        foreach (StoreOwner storeOwner in this)
+        {
+            storeOwner.Loaded();
+        } 
+    }
 }

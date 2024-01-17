@@ -5,6 +5,10 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Interface.Definitions;
+using AngbandOS.Core.JsonModels;
+using System.Text.Json;
+
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -169,6 +173,32 @@ public class GameServer
         if (console == null)
         {
             throw new ArgumentNullException("console", "A console object must be provided and cannot be null.");
+        }
+
+        // TODO: Remove this hard-coded configuration
+        if (persistentStorage != null) {
+            string[] serializedJsonStoreOwners = persistentStorage.RetrieveEntities("StoreOwner");
+            List<StoreOwnerDefinition> storeOwnersList = new();
+            foreach (string serializedJsonStoreOwner in serializedJsonStoreOwners)
+            {
+                // Store owners will be loaded from the database.
+                JsonStoreOwner? jsonStoreOwner = JsonSerializer.Deserialize<JsonStoreOwner>(serializedJsonStoreOwner);
+                if (jsonStoreOwner == null || jsonStoreOwner.MaxCost == null || jsonStoreOwner.MinInflate == null || jsonStoreOwner.OwnerName == null || jsonStoreOwner.Key == null)
+                    throw new Exception("Invalid store owner json.");
+                storeOwnersList.Add(new StoreOwnerDefinition()
+                {
+                    Key = jsonStoreOwner.Key,
+                    MaxCost = jsonStoreOwner.MaxCost.Value,
+                    MinInflate = jsonStoreOwner.MinInflate.Value,
+                    OwnerName = jsonStoreOwner.OwnerName,
+                    OwnerRaceName = jsonStoreOwner.OwnerRaceName
+                });
+            }
+
+            configuration = new Configuration()
+            {
+                StoreOwners = storeOwnersList.ToArray()
+            };
         }
 
         try

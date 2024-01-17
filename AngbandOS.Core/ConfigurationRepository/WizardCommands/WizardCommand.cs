@@ -8,19 +8,13 @@
 namespace AngbandOS.Core.WizardCommands;
 
 [Serializable]
-internal abstract class WizardCommand : IHelpCommand, IConfigurationItem
+internal abstract class WizardCommand : IHelpCommand
 {
     protected SaveGame SaveGame { get; }
     protected WizardCommand(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
-
-    /// <inheritdoc />
-    public virtual void Loaded() { }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
 
     public abstract char Key { get; }
 

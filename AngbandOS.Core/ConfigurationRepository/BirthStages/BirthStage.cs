@@ -8,19 +8,13 @@
 namespace AngbandOS.Core.BirthStages;
 
 [Serializable]
-internal abstract class BirthStage : IConfigurationItem
+internal abstract class BirthStage
 {
     protected readonly SaveGame SaveGame;
     protected BirthStage(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
-
-    /// <inheritdoc />
-    public virtual void Loaded() { }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
 
     /// <summary>
     /// Renders the birth stage and returns the next birth stage to render or null when either the birth stage is complete or the SaveGame.Shutdown is true.

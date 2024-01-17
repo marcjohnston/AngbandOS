@@ -14,26 +14,26 @@ internal class PawnStore : Store
 
     protected override StoreOwner[] StoreOwners => new StoreOwner[]
     {
-        SaveGame.SingletonRepository.StoreOwners.Get<MagdTheRuthlessStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<DrakoFairdealStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<FeatherwingStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<XochinagguaStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<OdThePennilessStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<XaxStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<JakeSmallStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<HelgaTheLostStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<GloomThePhlegmaticStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<QuickArmVollaireStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<AsenathStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<LordFilbertStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<HerranythTheRuthlessStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<GagrinMoneylenderStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<ThramborTheGrubbyStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<DerigrinTheHonestStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<MunkTheBartererStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<GadrialdurTheFairStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<NinarTheStoopedStoreOwner>(),
-        SaveGame.SingletonRepository.StoreOwners.Get<AdirathTheUnmagicalStoreOwner>()
+        SaveGame.SingletonRepository.StoreOwners.Get("MagdTheRuthlessStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("DrakoFairdealStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("FeatherwingStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("XochinagguaStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("OdThePennilessStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("XaxStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("JakeSmallStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("HelgaTheLostStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("GloomThePhlegmaticStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("QuickArmVollaireStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("AsenathStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("LordFilbertStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("HerranythTheRuthlessStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("GagrinMoneylenderStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("ThramborTheGrubbyStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("DerigrinTheHonestStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("MunkTheBartererStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("GadrialdurTheFairStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("NinarTheStoopedStoreOwner"),
+        SaveGame.SingletonRepository.StoreOwners.Get("AdirathTheUnmagicalStoreOwner")
     };
 
     public override string FeatureType => "Pawnbrokers";

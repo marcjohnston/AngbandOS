@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Projection;
 
 [Serializable]
-internal abstract class Projectile : IConfigurationItem
+internal abstract class Projectile
 {
     protected readonly SaveGame SaveGame;
     protected int ProjectMn;
@@ -19,12 +19,6 @@ internal abstract class Projectile : IConfigurationItem
     {
         SaveGame = saveGame;
     }
-
-    /// <inheritdoc />
-    public virtual void Loaded() { }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
 
     protected virtual ProjectileGraphic? BoltProjectileGraphic { get; }
 

@@ -11,19 +11,13 @@ namespace AngbandOS.Core.Activations;
 /// <summary>
 /// Represents a power that can be assigned to a random artifact that can be activated.
 /// </summary>
-internal abstract class Activation : IConfigurationItem
+internal abstract class Activation
 {
     protected readonly SaveGame SaveGame;
     protected Activation(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
-
-    /// <inheritdoc />
-    public virtual void Loaded() { }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
 
     /// <summary>
     /// Returns the unique name for this activation power.

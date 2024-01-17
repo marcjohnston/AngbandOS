@@ -11,6 +11,7 @@ namespace AngbandOS.Core.FlaggedActions;
 internal class NoticeCombineFlaggedAction : FlaggedAction
 {
     private NoticeCombineFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+
     protected override void Execute()
     {
         bool flag = false;

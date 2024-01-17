@@ -8,19 +8,13 @@
 namespace AngbandOS.Core.Vaults;
 
 [Serializable]
-internal abstract class Vault : IConfigurationItem
+internal abstract class Vault
 {
     protected SaveGame SaveGame;
     protected Vault(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
-
-    /// <inheritdoc />
-    public virtual void Loaded() { }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
 
     /// <summary>
     /// Returns the symbol to use for rendering.

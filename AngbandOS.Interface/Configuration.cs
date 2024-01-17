@@ -1,4 +1,6 @@
-﻿namespace AngbandOS.Core.Interface;
+﻿using AngbandOS.Core.Interface.Definitions;
+
+namespace AngbandOS.Core.Interface;
 
 /// <summary>
 /// Represents an interface that describes the configuration data that the GameServer.Play method accepts.  This configuration data is used to completely
@@ -23,4 +25,6 @@ public class Configuration
     /// Returns null, if Towns should be loaded from the assembly.  Otherwise, returns an array of Towns to be loaded into the SingletonRepository.
     /// </summary>
     public TownDefinition[]? Towns = null;
+
+    public StoreOwnerDefinition[]? StoreOwners = null;
 }

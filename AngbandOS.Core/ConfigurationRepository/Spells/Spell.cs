@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Spells;
 
 [Serializable]
-internal abstract class Spell : IConfigurationItem
+internal abstract class Spell
 {
     protected readonly SaveGame SaveGame;
 
@@ -16,12 +16,6 @@ internal abstract class Spell : IConfigurationItem
     {
         SaveGame = saveGame;
     }
-
-    /// <inheritdoc />
-    public virtual void Loaded() { }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
 
     /// <summary>
     /// Returns true, if the spell has been forgotten because the players level dropped to low.  When true, Learned is set to false.

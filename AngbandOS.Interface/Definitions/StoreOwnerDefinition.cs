@@ -5,13 +5,18 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Interface;
+namespace AngbandOS.Core.Interface.Definitions;
 
 [Serializable]
-public class TownDefinition
+public class StoreOwnerDefinition
 {
-    public char Char { get; set; }
-    public int HousePrice { get; set; }
-    public string Name { get; set; }
-    public string[]? Stores { get; set; }
+    public string Key { get; set; }
+
+    public int MaxCost { get; set; }
+
+    public int MinInflate { get; set; }
+
+    public string OwnerName { get; set; }
+
+    public string? OwnerRaceName { get; set; }
 }

@@ -8,19 +8,13 @@
 namespace AngbandOS.Core.ClassSpells;
 
 [Serializable]
-internal abstract class ClassSpell : IConfigurationItem
+internal abstract class ClassSpell
 {
     protected readonly SaveGame SaveGame;
     protected ClassSpell(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
-
-    /// <inheritdoc />
-    public virtual void Loaded() { }    
-    
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
 
     public abstract Type Spell { get; }
     public abstract Type CharacterClass { get; }

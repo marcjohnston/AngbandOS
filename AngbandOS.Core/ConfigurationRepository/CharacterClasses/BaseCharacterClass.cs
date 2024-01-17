@@ -8,19 +8,13 @@
 namespace AngbandOS.Core.CharacterClasses;
 
 [Serializable]
-internal abstract class BaseCharacterClass : IConfigurationItem
+internal abstract class BaseCharacterClass
 {
     protected SaveGame SaveGame { get; }
     protected BaseCharacterClass(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
-
-    /// <inheritdoc />
-    public virtual void Loaded() { }
-
-    /// <inheritdoc />
-    public virtual bool ExcludeFromRepository => false;
 
     /// <summary>
     /// Returns the deprecated CharacterClass constant for backwards compatibility.
