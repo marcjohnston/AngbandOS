@@ -15,7 +15,7 @@ internal class YoungWhiteDragonMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         SaveGame.SingletonRepository.MonsterSpells.Get<BreatheColdMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerDSymbol));
     public override string Name => "Young white dragon";
 
     public override int ArmourClass => 50;

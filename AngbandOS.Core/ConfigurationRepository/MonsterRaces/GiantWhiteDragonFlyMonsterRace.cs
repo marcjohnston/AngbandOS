@@ -14,7 +14,7 @@ internal class GiantWhiteDragonFlyMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         SaveGame.SingletonRepository.MonsterSpells.Get<BreatheColdMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperFSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperFSymbol));
     public override string Name => "Giant white dragon fly";
 
     public override bool Animal => true;

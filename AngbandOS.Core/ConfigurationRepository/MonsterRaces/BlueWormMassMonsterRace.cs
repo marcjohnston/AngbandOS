@@ -12,7 +12,7 @@ internal class BlueWormMassMonsterRace : MonsterRace
 {
     protected BlueWormMassMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerWSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerWSymbol));
     public override ColourEnum Colour => ColourEnum.Blue;
     public override string Name => "Blue worm mass";
 

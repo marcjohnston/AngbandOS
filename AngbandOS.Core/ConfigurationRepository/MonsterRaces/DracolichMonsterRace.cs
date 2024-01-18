@@ -17,7 +17,7 @@ internal class DracolichMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<BreatheNetherMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperDSymbol));
     public override ColourEnum Colour => ColourEnum.BrightBeige;
     public override string Name => "Dracolich";
 

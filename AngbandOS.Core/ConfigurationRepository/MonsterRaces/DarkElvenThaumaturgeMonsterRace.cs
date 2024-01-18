@@ -27,7 +27,7 @@ internal class DarkElvenThaumaturgeMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonsterMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonUndeadMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerHSymbol));
     public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Dark elven thaumaturge";
 

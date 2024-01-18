@@ -25,7 +25,7 @@ internal class TheWitchKingOfAngmarMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonKinMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonstersMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<TeleportAwayMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperWSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperWSymbol));
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "The Witch-King of Angmar";
 

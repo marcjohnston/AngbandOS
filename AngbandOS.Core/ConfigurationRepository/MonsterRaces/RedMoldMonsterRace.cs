@@ -12,7 +12,7 @@ internal class RedMoldMonsterRace : MonsterRace
 {
     protected RedMoldMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerMSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerMSymbol));
     public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Red mold";
 

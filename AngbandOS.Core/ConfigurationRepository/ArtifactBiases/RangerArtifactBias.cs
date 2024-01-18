@@ -72,27 +72,27 @@ internal class RangerArtifactBias : ArtifactBias
     {
         if (SaveGame.Rng.DieRoll(20) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<CharmAnimalsActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(CharmAnimalsActivation));
         }
         else if (SaveGame.Rng.DieRoll(7) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<SummonAnimalActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(SummonAnimalActivation));
         }
         else if (SaveGame.Rng.DieRoll(6) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<CharmAnimalActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(CharmAnimalActivation));
         }
         else if (SaveGame.Rng.DieRoll(4) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<ResistAllActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(ResistAllActivation));
         }
         else if (SaveGame.Rng.DieRoll(3) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<SatiateActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(SatiateActivation));
         }
         else
         {
-            return SaveGame.SingletonRepository.Activations.Get<CurePoisonActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(CurePoisonActivation));
         }
     }
 }

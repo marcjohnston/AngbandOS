@@ -33,7 +33,7 @@ internal class SetOfGauntletsIronfistFixedArtifact : FixedArtifact, IFixedArtifa
     public string DescribeActivationEffect() => "fire bolt (9d8) every 8+d8 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBraceSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
     public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "The Set of Gauntlets 'Ironfist'";
     public override int Ac => 2;

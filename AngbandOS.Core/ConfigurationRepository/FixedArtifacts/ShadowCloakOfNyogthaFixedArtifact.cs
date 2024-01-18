@@ -34,7 +34,7 @@ internal class ShadowCloakOfNyogthaFixedArtifact : FixedArtifact, IFixedArtifact
     }
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenParenthesisSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "The Shadow Cloak of Nyogtha";
     public override int Ac => 6;

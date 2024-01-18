@@ -19,7 +19,7 @@ internal class MasterYeekMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonsterMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<TeleportSelfMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerYSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerYSymbol));
     public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "Master yeek";
 

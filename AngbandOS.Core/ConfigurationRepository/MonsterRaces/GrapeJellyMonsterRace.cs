@@ -14,7 +14,7 @@ internal class GrapeJellyMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         SaveGame.SingletonRepository.MonsterSpells.Get<DrainManaMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerJSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerJSymbol));
     public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Grape jelly";
 

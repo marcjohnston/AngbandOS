@@ -25,7 +25,7 @@ internal class SorcererMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonsterMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonUndeadMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
     public override ColourEnum Colour => ColourEnum.Gold;
     public override string Name => "Sorcerer";
 

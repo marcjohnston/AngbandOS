@@ -28,7 +28,7 @@ internal class DragonHelmOfPowerFixedArtifact : FixedArtifact, IFixedArtifactAct
     public string DescribeActivationEffect() => "rays of fear in every direction";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBraceSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
     public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "The Dragon Helm of Power";
     public override int Ac => 8;

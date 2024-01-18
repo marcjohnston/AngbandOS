@@ -12,7 +12,7 @@ internal class ScrollTrapCreation : ScrollItemClass
 {
     private ScrollTrapCreation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<QuestionMarkSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "Trap Creation";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

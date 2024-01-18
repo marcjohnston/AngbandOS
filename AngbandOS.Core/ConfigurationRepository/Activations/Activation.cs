@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Activations;
 /// <summary>
 /// Represents a power that can be assigned to a random artifact that can be activated.
 /// </summary>
-internal abstract class Activation
+internal abstract class Activation : IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
     protected Activation(SaveGame saveGame)
@@ -19,6 +19,9 @@ internal abstract class Activation
         SaveGame = saveGame;
     }
 
+    public virtual string Key => GetType().Name;
+
+    
     /// <summary>
     /// Returns the unique name for this activation power.
     /// </summary>
@@ -76,4 +79,6 @@ internal abstract class Activation
     /// Applies a special ability to ItemCharacteristics.
     /// </summary>
     public abstract Action<IItemCharacteristics> ActivateSpecialAbility { get; }
+
+    public string GetKey => Key;
 }

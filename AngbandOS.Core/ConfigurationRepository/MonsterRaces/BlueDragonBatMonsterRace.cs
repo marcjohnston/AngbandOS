@@ -14,7 +14,7 @@ internal class BlueDragonBatMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         SaveGame.SingletonRepository.MonsterSpells.Get<BreatheLightningMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerBSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerBSymbol));
     public override ColourEnum Colour => ColourEnum.Blue;
     public override string Name => "Blue dragon bat";
 

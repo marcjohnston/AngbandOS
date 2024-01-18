@@ -17,7 +17,7 @@ internal class BlackKnightMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<CauseCriticalWoundsMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<DarknessMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
     public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Black knight";
 

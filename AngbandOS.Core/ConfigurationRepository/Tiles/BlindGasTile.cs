@@ -11,10 +11,10 @@ namespace AngbandOS.Core.Tiles;
 internal class BlindGasTile : Tile
 {
     private BlindGasTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CaretSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CaretSymbol));
     public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "BlindGas";
-    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<DisarmAlterAction>();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(DisarmAlterAction));
     public override string AppearAs => "BlindGas";
     public override string Description => "gas trap";
     public override bool IsInteresting => true;

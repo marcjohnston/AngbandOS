@@ -16,7 +16,7 @@ internal class YigFatherOfSerpentsMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<BreatheAcidMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<BreatheDisenchantMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<BreathePoisonMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperJSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperJSymbol));
     public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "Yig, Father of Serpents";
 

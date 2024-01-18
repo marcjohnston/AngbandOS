@@ -40,7 +40,7 @@ internal class NyarlathotepMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<TeleportLevelMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<TeleportSelfMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperXSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperXSymbol));
     public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Nyarlathotep";
 

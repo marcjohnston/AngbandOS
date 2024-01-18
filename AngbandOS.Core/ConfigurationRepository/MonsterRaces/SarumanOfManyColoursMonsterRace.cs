@@ -32,7 +32,7 @@ internal class SarumanOfManyColoursMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonUndeadMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<TeleportAwayMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<TeleportSelfMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
     public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Saruman of Many Colours";
 

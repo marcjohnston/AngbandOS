@@ -24,7 +24,7 @@ internal class YogSothothTheAllInOneMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonHoundMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonstersMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonReaverMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperXSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperXSymbol));
     public override ColourEnum Colour => ColourEnum.Orange;
     public override string Name => "Yog-Sothoth, the All-in-One";
 

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Tiles;
 internal class WaterTile : Tile
 {
     private WaterTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<TildeSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(TildeSymbol));
     public override ColourEnum Colour => ColourEnum.Blue;
     public override string Name => "Water";
     public override string AppearAs => "Water";

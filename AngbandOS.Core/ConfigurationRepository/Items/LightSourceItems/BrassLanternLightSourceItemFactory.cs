@@ -27,7 +27,7 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
     /// </summary>
     public override bool IsFuelForLantern => true;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<TildeSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(TildeSymbol));
     public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Brass Lantern";
 

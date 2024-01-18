@@ -19,7 +19,7 @@ internal class TsathogguaMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<BreatheManaMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<WaterBallMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonCthuloidMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperXSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperXSymbol));
     public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Tsathoggua";
 

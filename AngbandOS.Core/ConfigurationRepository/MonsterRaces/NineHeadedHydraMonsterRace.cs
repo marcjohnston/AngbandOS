@@ -16,7 +16,7 @@ internal class NineHeadedHydraMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<BreatheFireMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<FireBoltMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperMSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperMSymbol));
     public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "9-headed hydra";
 

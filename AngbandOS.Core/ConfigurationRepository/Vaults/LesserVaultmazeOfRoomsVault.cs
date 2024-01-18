@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Vaults;
 internal class LesserVaultmazeOfRoomsVault : Vault
 {
     private LesserVaultmazeOfRoomsVault(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PoundSignSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PoundSignSymbol));
     public override string Name => "Lesser vault (maze of rooms)";
     public override int Category => 7;
     public override int Height => 16;

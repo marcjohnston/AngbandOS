@@ -36,7 +36,7 @@ internal class MaceThunderFixedArtifact : FixedArtifact, IFixedArtifactActivatib
     public string DescribeActivationEffect() => "haste self (20+d20 turns) every 100+d100 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<BackSlashSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "The Mace 'Thunder'";
     public override int Ac => 0;

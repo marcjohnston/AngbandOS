@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Flavours;
 internal class HemlockStaffFlavour : StaffFlavour
 {
     private HemlockStaffFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UnderscoreSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
     public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Hemlock";
 }

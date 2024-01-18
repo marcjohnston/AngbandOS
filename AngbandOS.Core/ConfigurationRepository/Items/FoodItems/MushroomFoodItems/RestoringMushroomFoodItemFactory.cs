@@ -12,7 +12,7 @@ internal class RestoringMushroomFoodItemFactory : MushroomFoodItemFactory
 {
     private RestoringMushroomFoodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CommaSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
     public override string Name => "Restoring";
 
     public override int[] Chance => new int[] { 8, 4, 1, 0 };

@@ -12,7 +12,7 @@ internal class CeleanoFragmentsTarotBookItemFactory : TarotBookItemFactory
 {
     private CeleanoFragmentsTarotBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<QuestionMarkSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override ColourEnum Colour => ColourEnum.Pink;
     public override string Name => "[Celeano Fragments]";
 

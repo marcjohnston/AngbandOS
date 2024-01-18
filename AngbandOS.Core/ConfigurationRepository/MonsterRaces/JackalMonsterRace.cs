@@ -12,7 +12,7 @@ internal class JackalMonsterRace : MonsterRace
 {
     protected JackalMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperCSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperCSymbol));
     public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Jackal";
 

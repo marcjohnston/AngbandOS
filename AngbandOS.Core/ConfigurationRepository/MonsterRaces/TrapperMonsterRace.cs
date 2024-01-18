@@ -12,7 +12,7 @@ internal class TrapperMonsterRace : MonsterRace
 {
     protected TrapperMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PeriodSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PeriodSymbol));
     public override string Name => "Trapper";
 
     public override int ArmourClass => 75;

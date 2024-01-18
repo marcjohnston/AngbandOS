@@ -17,7 +17,7 @@ internal class WillOTheWispMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<TeleportSelfMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperESymbol));
     public override ColourEnum Colour => ColourEnum.BrightTurquoise;
     public override string Name => "Will o' the wisp";
 

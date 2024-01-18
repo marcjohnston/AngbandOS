@@ -15,7 +15,7 @@ internal class YoungBlueDragonMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         SaveGame.SingletonRepository.MonsterSpells.Get<BreatheLightningMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerDSymbol));
     public override ColourEnum Colour => ColourEnum.Blue;
     public override string Name => "Young blue dragon";
 

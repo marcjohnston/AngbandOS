@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Vaults;
 internal class GreaterVaultDivisiVault : Vault
 {
     private GreaterVaultDivisiVault(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PoundSignSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PoundSignSymbol));
     public override string Name => "Greater Vault (Divisi)";
     public override int Category => 8;
     public override int Height => 31;

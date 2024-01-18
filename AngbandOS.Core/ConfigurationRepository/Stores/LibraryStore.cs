@@ -42,7 +42,7 @@ internal class LibraryStore : Store
 
     public override string FeatureType => "Bookstore";
     public override ColourEnum Colour => ColourEnum.Orange;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<NumberNineSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberNineSymbol));
 
     protected override StockStoreInventoryItem[] GetStoreTable()
     {

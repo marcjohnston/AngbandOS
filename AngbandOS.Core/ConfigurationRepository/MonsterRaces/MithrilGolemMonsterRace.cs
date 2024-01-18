@@ -12,7 +12,7 @@ internal class MithrilGolemMonsterRace : MonsterRace
 {
     protected MithrilGolemMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerGSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerGSymbol));
     public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "Mithril golem";
 

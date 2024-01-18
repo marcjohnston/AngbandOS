@@ -12,7 +12,7 @@ internal class GremlinMonsterRace : MonsterRace
 {
     protected GremlinMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerUSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerUSymbol));
     public override ColourEnum Colour => ColourEnum.BrightChartreuse;
     public override string Name => "Gremlin";
 

@@ -12,7 +12,7 @@ internal class ScrollIce : ScrollItemClass
 {
     private ScrollIce(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<QuestionMarkSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "Ice";
 
     public override int[] Chance => new int[] { 6, 0, 0, 0 };

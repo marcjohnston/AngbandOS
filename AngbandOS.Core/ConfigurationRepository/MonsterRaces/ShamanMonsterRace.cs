@@ -20,7 +20,7 @@ internal class ShamanMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<SlowMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<HasteMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
     public override ColourEnum Colour => ColourEnum.Blue;
     public override string Name => "Shaman";
 

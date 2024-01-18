@@ -60,15 +60,15 @@ internal class ElectricityArtifactBias : ArtifactBias
     {
         if (SaveGame.Rng.DieRoll(3) != 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<BoElec1Activation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(BoElec1Activation));
         }
         else if (SaveGame.Rng.DieRoll(5) != 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<BaElec2Activation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(BaElec2Activation));
         }
         else
         {
-            return SaveGame.SingletonRepository.Activations.Get<BaElec3Activation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(BaElec3Activation));
         }
     }
 }

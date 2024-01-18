@@ -12,7 +12,7 @@ internal class UndeadMassMonsterRace : MonsterRace
 {
     protected UndeadMassMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerJSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerJSymbol));
     public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Undead mass";
 

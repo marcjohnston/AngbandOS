@@ -15,7 +15,7 @@ internal class ClubberDemonMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperUSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperUSymbol));
     public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Clubber demon";
 

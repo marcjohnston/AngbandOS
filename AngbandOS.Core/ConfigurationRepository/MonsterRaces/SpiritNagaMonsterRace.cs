@@ -17,7 +17,7 @@ internal class SpiritNagaMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<MindBlastMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<DarknessMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<HealMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerNSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerNSymbol));
     public override ColourEnum Colour => ColourEnum.Turquoise;
     public override string Name => "Spirit naga";
 

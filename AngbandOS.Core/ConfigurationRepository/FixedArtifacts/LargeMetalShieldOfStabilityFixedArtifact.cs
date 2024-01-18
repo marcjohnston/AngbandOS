@@ -26,7 +26,7 @@ internal class LargeMetalShieldOfStabilityFixedArtifact : FixedArtifact
     }
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseParenthesisSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseParenthesisSymbol));
     public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "The Large Metal Shield of Stability";
     public override int Ac => 5;

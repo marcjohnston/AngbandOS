@@ -33,7 +33,7 @@ internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact, I
     public string DescribeActivationEffect() => "star ball (150) every 1000 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenBraceSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "The Multi-Hued Dragon Scale Mail 'Razorback'";
     public override int Ac => 30;

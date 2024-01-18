@@ -21,7 +21,7 @@ internal class DreadmasterMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<NetherBoltMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonUndeadMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<TeleportLevelMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperGSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperGSymbol));
     public override ColourEnum Colour => ColourEnum.Orange;
     public override string Name => "Dreadmaster";
 

@@ -17,7 +17,7 @@ internal class DaolothMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<ManaBoltMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonKinMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperXSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperXSymbol));
     public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "Daoloth";
 

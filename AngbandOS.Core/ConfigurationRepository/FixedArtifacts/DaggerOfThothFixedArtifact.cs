@@ -33,7 +33,7 @@ internal class DaggerOfThothFixedArtifact : FixedArtifact, IFixedArtifactActivat
     public string DescribeActivationEffect() => "stinking cloud (12) every 4+d4 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "The Dagger of Thoth";
     public override int Ac => 0;

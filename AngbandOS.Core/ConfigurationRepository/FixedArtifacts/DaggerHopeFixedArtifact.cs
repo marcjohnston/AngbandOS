@@ -38,7 +38,7 @@ internal class DaggerHopeFixedArtifact : FixedArtifact, IFixedArtifactActivatibl
     }
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "The Dagger 'Hope'";
     public override int Ac => 0;

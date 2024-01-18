@@ -16,7 +16,7 @@ internal class BastGoddessOfCatsMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<HealMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonKinMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerFSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerFSymbol));
     public override ColourEnum Colour => ColourEnum.Orange;
     public override string Name => "Bast, Goddess of Cats";
 

@@ -12,7 +12,7 @@ internal class FireGiantMonsterRace : MonsterRace
 {
     protected FireGiantMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperPSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperPSymbol));
     public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Fire giant";
 

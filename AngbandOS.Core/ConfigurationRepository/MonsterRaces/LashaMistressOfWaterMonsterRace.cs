@@ -17,7 +17,7 @@ internal class LashaMistressOfWaterMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<IceBoltMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<WaterBallMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<WaterBoltMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperESymbol));
     public override ColourEnum Colour => ColourEnum.Blue;
     public override string Name => "Lasha, Mistress of Water";
 

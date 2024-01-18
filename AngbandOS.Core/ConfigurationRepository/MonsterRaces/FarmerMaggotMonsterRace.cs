@@ -12,7 +12,7 @@ internal class FarmerMaggotMonsterRace : MonsterRace
 {
     protected FarmerMaggotMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerTSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerTSymbol));
     public override ColourEnum Colour => ColourEnum.BrightPink;
     public override string Name => "Farmer Maggot";
 

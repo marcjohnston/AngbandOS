@@ -23,7 +23,7 @@ internal class TheNorsaMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonHiDragonMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonstersMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperHSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperHSymbol));
     public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "The Norsa";
 

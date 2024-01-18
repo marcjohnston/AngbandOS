@@ -12,7 +12,7 @@ internal class PolearmLochaberAxe : PolearmItemClass
 {
     private PolearmLochaberAxe(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ForwardSlashSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ForwardSlashSymbol));
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Lochaber Axe";
 

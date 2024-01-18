@@ -22,7 +22,7 @@ internal class OrientalVampireMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<DarknessMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<ForgetMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperVSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperVSymbol));
     public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "Oriental vampire";
 

@@ -18,7 +18,7 @@ internal class OgreMageMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<CreateTrapsMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<HealMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonsterMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperOSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperOSymbol));
     public override ColourEnum Colour => ColourEnum.Orange;
     public override string Name => "Ogre mage";
 

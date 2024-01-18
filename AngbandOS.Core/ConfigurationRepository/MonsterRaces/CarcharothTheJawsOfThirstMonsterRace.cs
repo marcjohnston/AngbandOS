@@ -18,7 +18,7 @@ internal class CarcharothTheJawsOfThirstMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<HealMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonHoundMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperCSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperCSymbol));
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Carcharoth, the Jaws of Thirst";
 

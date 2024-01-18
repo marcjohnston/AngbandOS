@@ -11,6 +11,6 @@ namespace AngbandOS.Core.Flavours;
 internal class NickelRodFlavour : RodFlavour
 {
     private NickelRodFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<MinusSignSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Nickel";
 }

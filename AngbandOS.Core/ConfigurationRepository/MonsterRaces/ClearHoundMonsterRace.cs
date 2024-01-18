@@ -12,7 +12,7 @@ internal class ClearHoundMonsterRace : MonsterRace
 {
     protected ClearHoundMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperZSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperZSymbol));
     public override ColourEnum Colour => ColourEnum.Diamond;
     public override string Name => "Clear hound";
 

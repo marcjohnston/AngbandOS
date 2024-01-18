@@ -12,7 +12,7 @@ internal class SlimeMoldMonsterRace : MonsterRace
 {
     protected SlimeMoldMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CommaSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
     public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "Slime mold";
 

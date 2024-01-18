@@ -12,7 +12,7 @@ internal class FilthyStreetUrchinMonsterRace : MonsterRace
 {
     protected FilthyStreetUrchinMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerTSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerTSymbol));
     public override ColourEnum Colour => ColourEnum.BrightGrey;
     public override string Name => "Filthy street urchin";
 

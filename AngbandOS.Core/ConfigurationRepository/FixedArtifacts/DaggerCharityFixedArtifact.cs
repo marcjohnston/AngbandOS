@@ -38,7 +38,7 @@ internal class DaggerCharityFixedArtifact : FixedArtifact, IFixedArtifactActivat
     public string DescribeActivationEffect() => "lightning bolt (4d8) every 6+d6 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "The Dagger 'Charity'";
     public override int Ac => 0;

@@ -12,7 +12,7 @@ internal class HuntingHawkMonsterRace : MonsterRace
 {
     protected HuntingHawkMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperBSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperBSymbol));
     public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Hunting hawk";
 

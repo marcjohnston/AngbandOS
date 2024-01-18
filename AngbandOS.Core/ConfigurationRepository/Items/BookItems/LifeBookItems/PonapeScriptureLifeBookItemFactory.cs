@@ -12,7 +12,7 @@ internal class PonapeScriptureLifeBookItemFactory : LifeBookItemFactory
 {
     private PonapeScriptureLifeBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<QuestionMarkSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "[Ponape Scripture]";
 

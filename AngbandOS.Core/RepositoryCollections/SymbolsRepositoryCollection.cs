@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class SymbolsRepositoryCollection : DictionaryRepositoryCollection<Symbol>
+internal class SymbolsRepositoryCollection : KeyedDictionaryRepositoryCollection<string, Symbol>
 {
     public SymbolsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 }

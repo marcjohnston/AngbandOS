@@ -33,7 +33,7 @@ internal class SpearGungnirFixedArtifact : FixedArtifact, IFixedArtifactActivati
     public string DescribeActivationEffect() => "lightning ball (100) every 500 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ForwardSlashSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ForwardSlashSymbol));
     public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "The Spear 'Gungnir'";
     public override int Ac => 0;

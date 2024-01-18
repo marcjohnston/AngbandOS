@@ -16,7 +16,7 @@ internal class GreaterTitanMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<HealMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonstersMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperPSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperPSymbol));
     public override ColourEnum Colour => ColourEnum.BrightYellow;
     public override string Name => "Greater titan";
 

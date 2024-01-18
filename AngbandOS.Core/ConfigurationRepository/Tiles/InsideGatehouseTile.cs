@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Tiles;
 internal class InsideGatehouseTile : Tile
 {
     private InsideGatehouseTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PeriodSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PeriodSymbol));
     public override string Name => "InsideGatehouse";
     public override string AppearAs => "InsideGatehouse";
     public override string Description => "open floor";

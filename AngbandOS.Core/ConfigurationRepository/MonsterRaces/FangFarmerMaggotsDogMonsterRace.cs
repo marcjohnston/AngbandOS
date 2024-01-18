@@ -12,7 +12,7 @@ internal class FangFarmerMaggotsDogMonsterRace : MonsterRace
 {
     protected FangFarmerMaggotsDogMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperCSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperCSymbol));
     public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "Fang, Farmer Maggot's dog";
 

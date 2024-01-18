@@ -17,7 +17,7 @@ internal class SpectreMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<DrainManaMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<HoldMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<ForgetMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperGSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperGSymbol));
     public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Spectre";
 

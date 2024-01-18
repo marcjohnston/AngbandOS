@@ -12,7 +12,7 @@ internal class HippogriffMonsterRace : MonsterRace
 {
     protected HippogriffMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperHSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperHSymbol));
     public override ColourEnum Colour => ColourEnum.BrightGrey;
     public override string Name => "Hippogriff";
 

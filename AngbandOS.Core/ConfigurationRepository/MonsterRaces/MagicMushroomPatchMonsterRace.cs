@@ -17,7 +17,7 @@ internal class MagicMushroomPatchMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<SlowMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<DarknessMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CommaSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
     public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "Magic mushroom patch";
 

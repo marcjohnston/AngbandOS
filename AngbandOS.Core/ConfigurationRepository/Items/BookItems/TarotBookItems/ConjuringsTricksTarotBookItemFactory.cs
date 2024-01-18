@@ -12,7 +12,7 @@ internal class ConjuringsTricksTarotBookItemFactory : TarotBookItemFactory
 {
     private ConjuringsTricksTarotBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<QuestionMarkSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override ColourEnum Colour => ColourEnum.BrightPink;
     public override string Name => "[Conjurings  Tricks]";
 

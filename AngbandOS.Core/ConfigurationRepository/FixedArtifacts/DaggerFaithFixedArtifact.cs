@@ -40,7 +40,7 @@ internal class DaggerFaithFixedArtifact : FixedArtifact, IFixedArtifactActivatib
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "The Dagger 'Faith'";
     public override int Ac => 0;

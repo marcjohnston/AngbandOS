@@ -18,7 +18,7 @@ internal class ShadowDrakeMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<SlowMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<DarknessMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<HasteMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerDSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerDSymbol));
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Shadow drake";
 

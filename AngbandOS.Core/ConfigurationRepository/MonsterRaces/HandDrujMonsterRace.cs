@@ -20,7 +20,7 @@ internal class HandDrujMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<DarknessMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<ForgetMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<TeleportAwayMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerSSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerSSymbol));
     public override ColourEnum Colour => ColourEnum.BrightGrey;
     public override string Name => "Hand druj";
 

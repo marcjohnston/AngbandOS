@@ -29,7 +29,7 @@ internal class VecnaTheEmperorLichMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonstersMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonUndeadMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperLSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperLSymbol));
     public override ColourEnum Colour => ColourEnum.Gold;
     public override string Name => "Vecna, the Emperor Lich";
 

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Flavours;
 internal class BeigeScrollFlavour : BaseScrollFlavour
 {
     private BeigeScrollFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<QuestionMarkSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override ColourEnum Colour => ColourEnum.Beige;
 
     public override string Name => "Beige";

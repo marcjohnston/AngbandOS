@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Tiles;
 internal class PathJunctionTile : Tile
 {
     private PathJunctionTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PlusSignSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PlusSignSymbol));
     public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "PathJunction";
     public override string AppearAs => "PathJunction";

@@ -12,7 +12,7 @@ internal class LivingstoneMonsterRace : MonsterRace
 {
     protected LivingstoneMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PoundSignSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PoundSignSymbol));
     public override string Name => "Livingstone";
 
     public override int ArmourClass => 28;

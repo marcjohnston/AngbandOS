@@ -12,7 +12,7 @@ internal class AimlessLookingMerchantMonsterRace : MonsterRace
 {
     protected AimlessLookingMerchantMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerTSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerTSymbol));
     public override ColourEnum Colour => ColourEnum.Orange;
     public override string Name => "Aimless looking merchant";
 

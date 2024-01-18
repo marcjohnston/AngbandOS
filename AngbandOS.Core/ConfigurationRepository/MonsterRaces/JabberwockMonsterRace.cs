@@ -15,7 +15,7 @@ internal class JabberwockMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         SaveGame.SingletonRepository.MonsterSpells.Get<BreatheChaosMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<CauseMortalWoundsMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperHSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperHSymbol));
     public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Jabberwock";
 

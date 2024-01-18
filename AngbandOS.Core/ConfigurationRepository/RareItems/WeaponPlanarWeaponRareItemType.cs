@@ -11,7 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class WeaponPlanarWeaponRareItem : RareItem
 {
     private WeaponPlanarWeaponRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "Weapon (Planar Weapon)";
     public override bool Activate => true;

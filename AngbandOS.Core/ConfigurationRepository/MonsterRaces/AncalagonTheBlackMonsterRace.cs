@@ -19,7 +19,7 @@ internal class AncalagonTheBlackMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonDragonMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonHiDragonMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperDSymbol));
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Ancalagon the Black";
 

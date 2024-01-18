@@ -16,7 +16,7 @@ internal class SmaugTheGoldenMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<BreatheFireMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<CauseCriticalWoundsMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperDSymbol));
     public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Smaug the Golden";
 

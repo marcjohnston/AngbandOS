@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Flavours;
 internal class RunedRodFlavour : RodFlavour
 {
     private RunedRodFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<MinusSignSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Runed";
 }

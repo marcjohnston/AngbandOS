@@ -12,7 +12,7 @@ internal class NewtMonsterRace : MonsterRace
 {
     protected NewtMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperRSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperRSymbol));
     public override ColourEnum Colour => ColourEnum.Orange;
     public override string Name => "Newt";
 

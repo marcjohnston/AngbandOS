@@ -12,7 +12,7 @@ internal class CarlammasAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 {
     private CarlammasAmuletJeweleryItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<DoubleQuoteSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
     public override string Name => "Carlammas";
 
     public override int Cost => 60000;

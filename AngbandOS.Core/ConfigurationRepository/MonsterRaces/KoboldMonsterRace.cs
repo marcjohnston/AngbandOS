@@ -12,7 +12,7 @@ internal class KoboldMonsterRace : MonsterRace
 {
     protected KoboldMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerKSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerKSymbol));
     public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "Kobold";
 

@@ -17,7 +17,7 @@ internal class BarrowWightMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<HoldMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<DarknessMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperWSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperWSymbol));
     public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "Barrow wight";
 

@@ -12,7 +12,7 @@ internal class AutoRollerMonsterRace : MonsterRace
 {
     protected AutoRollerMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerGSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerGSymbol));
     public override string Name => "Auto-roller";
 
     public override int ArmourClass => 80;

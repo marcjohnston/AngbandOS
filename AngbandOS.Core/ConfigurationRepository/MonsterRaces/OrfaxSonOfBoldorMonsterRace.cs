@@ -19,7 +19,7 @@ internal class OrfaxSonOfBoldorMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<HealMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonsterMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerYSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerYSymbol));
     public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "Orfax, Son of Boldor";
 

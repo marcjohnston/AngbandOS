@@ -12,7 +12,7 @@ internal class BlackMassDeathBookItemFactory : DeathBookItemFactory
 {
     private BlackMassDeathBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<QuestionMarkSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "[Black Mass]";
 

@@ -12,7 +12,7 @@ internal class ShieldShieldOfDeflection : ShieldItemClass
 {
     private ShieldShieldOfDeflection(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenBraceSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "Shield of Deflection";
 

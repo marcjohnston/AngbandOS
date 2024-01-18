@@ -11,10 +11,10 @@ namespace AngbandOS.Core.Tiles;
 internal class JammedDoor4Tile : Tile
 {
     private JammedDoor4Tile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PlusSignSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PlusSignSymbol));
     public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "JammedDoor4";
-    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<BashAlterAction>();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(BashAlterAction));
     public override string AppearAs => "LockedDoor0";
     public override bool BlocksLos => true;
     public override string Description => "jammed door";

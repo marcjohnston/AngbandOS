@@ -17,7 +17,7 @@ internal class ChaosMasterMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<HealMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonDemonMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonSpiderMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
     public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Chaos master";
 

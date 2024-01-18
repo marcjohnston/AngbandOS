@@ -12,7 +12,7 @@ internal class HoboMonsterRace : MonsterRace
 {
     protected HoboMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerTSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerTSymbol));
     public override ColourEnum Colour => ColourEnum.Green;
     public override string Name => "Hobo";
 

@@ -29,7 +29,7 @@ internal class LongSwordOfTheDawnFixedArtifact : FixedArtifact, IFixedArtifactAc
     public string DescribeActivationEffect() => "summon a Black Reaver every 500+d500 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "The Long Sword of the Dawn";
     public override int Ac => 0;

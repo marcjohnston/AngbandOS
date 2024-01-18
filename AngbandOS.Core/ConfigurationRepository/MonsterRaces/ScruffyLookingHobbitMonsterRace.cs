@@ -12,7 +12,7 @@ internal class ScruffyLookingHobbitMonsterRace : MonsterRace
 {
     protected ScruffyLookingHobbitMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerHSymbol));
     public override ColourEnum Colour => ColourEnum.BrightOrange;
     public override string Name => "Scruffy looking hobbit";
 

@@ -16,7 +16,7 @@ internal class MiGoMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonCthuloidMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonsterMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperASymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperASymbol));
     public override ColourEnum Colour => ColourEnum.BrightPink;
     public override string Name => "Mi-Go";
 

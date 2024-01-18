@@ -11,9 +11,9 @@ namespace AngbandOS.Core.Tiles;
 internal class GraveTile : Tile
 {
     private GraveTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PlusSignSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PlusSignSymbol));
     public override string Name => "Grave";
-    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<TunnelAlterAction>();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
     public override string AppearAs => "Grave";
     public override bool BlocksLos => true;
     public override string Description => "grave";

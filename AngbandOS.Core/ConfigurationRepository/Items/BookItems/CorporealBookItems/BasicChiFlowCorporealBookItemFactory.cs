@@ -12,7 +12,7 @@ internal class BasicChiFlowCorporealBookItemFactory : CorporealBookItemFactory
 {
     private BasicChiFlowCorporealBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<QuestionMarkSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "[Basic Chi Flow]";
 

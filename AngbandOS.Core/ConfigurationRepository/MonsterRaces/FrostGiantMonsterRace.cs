@@ -12,7 +12,7 @@ internal class FrostGiantMonsterRace : MonsterRace
 {
     protected FrostGiantMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperPSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperPSymbol));
     public override string Name => "Frost giant";
 
     public override int ArmourClass => 50;

@@ -12,7 +12,7 @@ internal class IceTrollMonsterRace : MonsterRace
 {
     protected IceTrollMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperTSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperTSymbol));
     public override string Name => "Ice troll";
 
     public override int ArmourClass => 56;

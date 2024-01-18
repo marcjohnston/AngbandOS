@@ -12,7 +12,7 @@ internal class DiggingPick : DiggingItemClass
 {
     private DiggingPick(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<BackSlashSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
     public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Pick";
 

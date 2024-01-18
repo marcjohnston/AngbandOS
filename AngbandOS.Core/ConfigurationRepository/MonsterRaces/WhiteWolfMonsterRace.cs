@@ -12,7 +12,7 @@ internal class WhiteWolfMonsterRace : MonsterRace
 {
     protected WhiteWolfMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperCSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperCSymbol));
     public override string Name => "White wolf";
 
     public override bool Animal => true;

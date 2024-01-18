@@ -21,7 +21,7 @@ internal class TheLerneanHydraMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<PoisonBallMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonHydraMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperMSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperMSymbol));
     public override ColourEnum Colour => ColourEnum.BrightTurquoise;
     public override string Name => "The Lernean Hydra";
 

@@ -13,9 +13,9 @@ internal abstract class KeyedDictionaryRepositoryCollection<TKey, TValue> : List
     private Dictionary<TKey, TValue> dictionary = new Dictionary<TKey, TValue>();
     protected KeyedDictionaryRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 
-     public bool Contains(TValue item) => dictionary.ContainsKey(item.GetKey);
+    public bool Contains(TValue item) => dictionary.ContainsKey(item.GetKey);
 
-     public TValue Get(TKey key)
+    public TValue Get(TKey key)
     {
         if (!dictionary.TryGetValue(key, out TValue? value))
         {

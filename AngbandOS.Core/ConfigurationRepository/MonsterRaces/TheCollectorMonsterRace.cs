@@ -27,7 +27,7 @@ internal class TheCollectorMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonUndeadMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonUniqueMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<TeleportAwayMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerHSymbol));
     public override ColourEnum Colour => ColourEnum.Copper;
     public override string Name => "The Collector";
 

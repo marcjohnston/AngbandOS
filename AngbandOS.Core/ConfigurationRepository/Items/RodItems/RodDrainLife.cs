@@ -13,7 +13,7 @@ internal class RodDrainLife : RodItemFactory
     private RodDrainLife(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override bool RequiresAiming => true;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<MinusSignSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Drain Life";
 
     public override int[] Chance => new int[] { 4, 0, 0, 0 };

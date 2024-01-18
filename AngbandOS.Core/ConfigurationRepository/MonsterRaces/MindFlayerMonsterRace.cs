@@ -19,7 +19,7 @@ internal class MindFlayerMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<MindBlastMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<ForgetMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerHSymbol));
     public override ColourEnum Colour => ColourEnum.Pink;
     public override string Name => "Mind flayer";
 

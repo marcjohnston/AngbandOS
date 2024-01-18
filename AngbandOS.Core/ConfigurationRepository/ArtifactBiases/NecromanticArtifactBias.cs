@@ -68,35 +68,35 @@ internal class NecromanticArtifactBias : ArtifactBias
     {
         if (SaveGame.Rng.DieRoll(66) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<WraithActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(WraithActivation));
         }
         else if (SaveGame.Rng.DieRoll(13) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<DispGoodActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(DispGoodActivation));
         }
         else if (SaveGame.Rng.DieRoll(9) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<MassGenoActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(MassGenoActivation));
         }
         else if (SaveGame.Rng.DieRoll(8) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<CarnageActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(CarnageActivation));
         }
         else if (SaveGame.Rng.DieRoll(13) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<SummonUndeadActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(SummonUndeadActivation));
         }
         else if (SaveGame.Rng.DieRoll(9) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<Vampire2Activation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(Vampire2Activation));
         }
         else if (SaveGame.Rng.DieRoll(6) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<CharmUndeadActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(CharmUndeadActivation));
         }
         else
         {
-            return SaveGame.SingletonRepository.Activations.Get<Vampire1Activation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(Vampire1Activation));
         }
     }
 }

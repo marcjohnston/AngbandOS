@@ -23,7 +23,7 @@ internal class AtlachNachaTheSpiderGodMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<DarknessMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonCthuloidMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonSpiderMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperSSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperSSymbol));
     public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Atlach-Nacha, the Spider God";
 

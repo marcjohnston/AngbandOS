@@ -18,7 +18,7 @@ internal class DeathKnightMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<NetherBoltMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonstersMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
     public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Death knight";
 

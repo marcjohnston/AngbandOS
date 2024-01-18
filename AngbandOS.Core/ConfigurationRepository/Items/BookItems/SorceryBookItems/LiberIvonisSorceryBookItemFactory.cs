@@ -12,7 +12,7 @@ internal class LiberIvonisSorceryBookItemFactory : SorceryBookItemFactory
 {
     private LiberIvonisSorceryBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<QuestionMarkSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override ColourEnum Colour => ColourEnum.Blue;
     public override string Name => "[Liber Ivonis]";
 

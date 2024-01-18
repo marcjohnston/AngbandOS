@@ -18,7 +18,7 @@ internal class BlackWraithMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<HoldMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<NetherBoltMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperWSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperWSymbol));
     public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Black wraith";
 

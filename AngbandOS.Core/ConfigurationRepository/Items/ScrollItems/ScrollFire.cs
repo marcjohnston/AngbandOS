@@ -12,7 +12,7 @@ internal class ScrollFire : ScrollItemClass
 {
     private ScrollFire(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<QuestionMarkSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "Fire";
 
     public override int[] Chance => new int[] { 4, 0, 0, 0 };

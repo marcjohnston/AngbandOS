@@ -18,7 +18,7 @@ internal class DarkElvenMageMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<MagicMissileMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<PoisonBallMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<DarknessMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerHSymbol));
     public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Dark elven mage";
 

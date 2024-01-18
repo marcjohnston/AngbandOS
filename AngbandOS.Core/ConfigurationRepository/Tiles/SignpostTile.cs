@@ -11,10 +11,10 @@ namespace AngbandOS.Core.Tiles;
 internal class SignpostTile : Tile
 {
     private SignpostTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ColonSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ColonSymbol));
     public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Signpost";
-    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<TunnelAlterAction>();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
     public override string AppearAs => "Signpost";
     public override string Description => "signpost";
     public override bool DimsOutsideLOS => true;

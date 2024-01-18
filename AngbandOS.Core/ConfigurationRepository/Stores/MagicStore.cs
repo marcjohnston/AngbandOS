@@ -42,7 +42,7 @@ internal class MagicStore : Store
 
     public override string FeatureType => "MagicShop";
     public override ColourEnum Colour => ColourEnum.Red;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<NumberSixSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberSixSymbol));
     public override string Description => "Magic Shop";
 
     protected override StockStoreInventoryItem[] GetStoreTable()

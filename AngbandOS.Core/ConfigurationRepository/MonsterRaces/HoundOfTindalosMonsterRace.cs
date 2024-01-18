@@ -17,7 +17,7 @@ internal class HoundOfTindalosMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<BreatheTimeMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperCSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperCSymbol));
     public override ColourEnum Colour => ColourEnum.Chartreuse;
     public override string Name => "Hound of Tindalos";
 

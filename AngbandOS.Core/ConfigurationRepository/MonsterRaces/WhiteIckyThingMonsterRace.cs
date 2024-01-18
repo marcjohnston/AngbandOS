@@ -12,7 +12,7 @@ internal class WhiteIckyThingMonsterRace : MonsterRace
 {
     protected WhiteIckyThingMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerISymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerISymbol));
     public override string Name => "White icky thing";
 
     public override int ArmourClass => 7;

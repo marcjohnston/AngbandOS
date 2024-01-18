@@ -12,7 +12,7 @@ internal class LagdufTheSnagaMonsterRace : MonsterRace
 {
     protected LagdufTheSnagaMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerOSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerOSymbol));
     public override ColourEnum Colour => ColourEnum.Chartreuse;
     public override string Name => "Lagduf, the Snaga";
 

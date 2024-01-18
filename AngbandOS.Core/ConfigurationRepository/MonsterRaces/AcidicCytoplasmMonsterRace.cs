@@ -12,7 +12,7 @@ internal class AcidicCytoplasmMonsterRace : MonsterRace
 {
     protected AcidicCytoplasmMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerJSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerJSymbol));
     public override ColourEnum Colour => ColourEnum.Chartreuse;
     public override string Name => "Acidic cytoplasm";
 

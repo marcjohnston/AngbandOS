@@ -38,7 +38,7 @@ internal class GreatWyrmOfPowerMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonDragonMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonHiDragonMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonKinMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperDSymbol));
     public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "Great Wyrm of Power";
 

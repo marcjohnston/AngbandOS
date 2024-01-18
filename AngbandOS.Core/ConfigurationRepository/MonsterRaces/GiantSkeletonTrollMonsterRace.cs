@@ -12,7 +12,7 @@ internal class GiantSkeletonTrollMonsterRace : MonsterRace
 {
     protected GiantSkeletonTrollMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerSSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerSSymbol));
     public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "Giant skeleton troll";
 

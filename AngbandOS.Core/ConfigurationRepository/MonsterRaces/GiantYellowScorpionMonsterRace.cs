@@ -12,7 +12,7 @@ internal class GiantYellowScorpionMonsterRace : MonsterRace
 {
     protected GiantYellowScorpionMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperSSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperSSymbol));
     public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "Giant yellow scorpion";
 

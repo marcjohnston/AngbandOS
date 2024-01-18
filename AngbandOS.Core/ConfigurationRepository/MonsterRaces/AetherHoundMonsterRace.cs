@@ -32,7 +32,7 @@ internal class AetherHoundMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<BreatheShardsMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<BreatheSoundMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<BreatheTimeMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperZSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperZSymbol));
     public override ColourEnum Colour => ColourEnum.BrightGrey;
     public override string Name => "Aether hound";
 

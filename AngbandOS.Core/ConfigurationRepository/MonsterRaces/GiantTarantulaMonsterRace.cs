@@ -12,7 +12,7 @@ internal class GiantTarantulaMonsterRace : MonsterRace
 {
     protected GiantTarantulaMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperSSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperSSymbol));
     public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Giant tarantula";
 

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Flavours;
 internal class ClearPotionFlavour : PotionFlavour
 {
     private ClearPotionFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ExclamationPointSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Clear";
 
     /// <summary>

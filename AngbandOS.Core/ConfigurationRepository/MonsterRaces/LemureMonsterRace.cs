@@ -12,7 +12,7 @@ internal class LemureMonsterRace : MonsterRace
 {
     protected LemureMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerUSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerUSymbol));
     public override ColourEnum Colour => ColourEnum.Orange;
     public override string Name => "Lemure";
 

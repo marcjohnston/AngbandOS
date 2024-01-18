@@ -11,10 +11,10 @@ namespace AngbandOS.Core.Tiles;
 internal class RoofTile : Tile
 {
     private RoofTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PoundSignSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PoundSignSymbol));
     public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Roof";
-    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<TunnelAlterAction>();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
     public override string AppearAs => "Roof";
     public override bool BlocksLos => true;
     public override string Description => "building";

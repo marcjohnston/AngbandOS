@@ -12,7 +12,7 @@ internal class BlackMambaMonsterRace : MonsterRace
 {
     protected BlackMambaMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperJSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperJSymbol));
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Black mamba";
 

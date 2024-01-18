@@ -12,7 +12,7 @@ internal class GiantWhiteMouseMonsterRace : MonsterRace
 {
     protected GiantWhiteMouseMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerRSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerRSymbol));
     public override string Name => "Giant white mouse";
 
     public override bool Animal => true;

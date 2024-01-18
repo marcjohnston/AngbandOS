@@ -12,7 +12,7 @@ internal class PieceOfWarpstoneFoodItemFactory : FoodItemFactory
 {
     private PieceOfWarpstoneFoodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<AsteriskSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(AsteriskSymbol));
     public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Piece of Warpstone";
 

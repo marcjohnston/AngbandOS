@@ -13,7 +13,7 @@ internal class BronzeDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemF
     private BronzeDragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override string? DescribeActivationEffect => "breathe confusion (120) every 450+d450 turns";
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenBraceSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Bronze Dragon Scale Mail";
 

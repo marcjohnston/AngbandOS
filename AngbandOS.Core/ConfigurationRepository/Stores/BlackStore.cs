@@ -18,7 +18,7 @@ internal class BlackStore : Store
     public override int StoreTurnover => 5;
     public override string FeatureType => "BlackMarket";
     public override ColourEnum Colour => ColourEnum.Black;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<NumberSevenSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberSevenSymbol));
     public override string Description => "Black Market";
 
     protected override StoreOwner[] StoreOwners => new StoreOwner[]

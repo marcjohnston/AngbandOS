@@ -12,7 +12,7 @@ internal class RavingLunaticMonsterRace : MonsterRace
 {
     protected RavingLunaticMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerTSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerTSymbol));
     public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Raving lunatic";
 

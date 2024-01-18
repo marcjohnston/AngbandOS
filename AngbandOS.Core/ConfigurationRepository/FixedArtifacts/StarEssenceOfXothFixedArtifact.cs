@@ -30,7 +30,7 @@ internal class StarEssenceOfXothFixedArtifact : FixedArtifact, IFixedArtifactAct
     public string DescribeActivationEffect() => "magic mapping and light every 50+d50 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<AsteriskSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(AsteriskSymbol));
     public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "The Star Essence of Xoth";
     public override int Ac => 0;

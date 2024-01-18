@@ -66,12 +66,12 @@ internal class WarriorArtifactBias : ArtifactBias
     {
         if (SaveGame.Rng.DieRoll(100) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<InvulnActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(InvulnActivation));
 
         }
         else
         {
-            return SaveGame.SingletonRepository.Activations.Get<BerserkActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(BerserkActivation));
         }
     }
 }

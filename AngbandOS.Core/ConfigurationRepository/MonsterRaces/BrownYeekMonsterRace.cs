@@ -12,7 +12,7 @@ internal class BrownYeekMonsterRace : MonsterRace
 {
     protected BrownYeekMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerYSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerYSymbol));
     public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Brown yeek";
 

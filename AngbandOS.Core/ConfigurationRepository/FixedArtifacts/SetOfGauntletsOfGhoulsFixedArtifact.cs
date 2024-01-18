@@ -33,7 +33,7 @@ internal class SetOfGauntletsOfGhoulsFixedArtifact : FixedArtifact, IFixedArtifa
     public string DescribeActivationEffect() => "frost bolt (6d8) every 7+d7 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBraceSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
     public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "The Set of Gauntlets of Ghouls";
     public override int Ac => 2;

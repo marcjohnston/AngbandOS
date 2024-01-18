@@ -29,7 +29,7 @@ internal class AmuletOfAbdulAlhazredFixedArtifact : FixedArtifact, IFixedArtifac
     public string DescribeActivationEffect() => "dispel evil (x5) every 300+d300 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<DoubleQuoteSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
     public override string Name => "The Amulet of Abdul Alhazred";
     public override int Ac => 0;
     public override bool Activate => true;

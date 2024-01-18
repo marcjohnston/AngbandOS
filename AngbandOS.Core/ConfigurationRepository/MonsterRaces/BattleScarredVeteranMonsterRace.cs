@@ -12,7 +12,7 @@ internal class BattleScarredVeteranMonsterRace : MonsterRace
 {
     protected BattleScarredVeteranMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerTSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerTSymbol));
     public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Battle scarred veteran";
 

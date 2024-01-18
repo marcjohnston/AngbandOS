@@ -29,7 +29,7 @@ internal class HypnosMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<TeleportLevelMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<TeleportSelfMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
     public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "Hypnos";
 

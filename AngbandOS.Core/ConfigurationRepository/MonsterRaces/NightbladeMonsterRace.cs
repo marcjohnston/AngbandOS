@@ -12,7 +12,7 @@ internal class NightbladeMonsterRace : MonsterRace
 {
     protected NightbladeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerHSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerHSymbol));
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Nightblade";
 

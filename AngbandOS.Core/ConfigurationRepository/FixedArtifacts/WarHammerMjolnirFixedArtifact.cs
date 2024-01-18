@@ -29,7 +29,7 @@ internal class WarHammerMjolnirFixedArtifact : FixedArtifact
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
     }
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<BackSlashSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "The War Hammer 'Mjolnir'";
     public override int Ac => 0;

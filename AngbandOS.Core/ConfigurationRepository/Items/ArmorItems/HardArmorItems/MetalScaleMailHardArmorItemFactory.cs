@@ -12,7 +12,7 @@ internal class MetalScaleMailHardArmorItemFactory : HardArmorItemFactory
 {
     private MetalScaleMailHardArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenBraceSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Metal Scale Mail";
 

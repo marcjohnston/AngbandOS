@@ -12,7 +12,7 @@ internal class BlackPuddingMonsterRace : MonsterRace
 {
     protected BlackPuddingMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerJSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerJSymbol));
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Black pudding";
 

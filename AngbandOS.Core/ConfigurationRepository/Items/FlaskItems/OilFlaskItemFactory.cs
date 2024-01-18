@@ -16,7 +16,7 @@ internal class OilFlaskItemFactory : FlaskItemFactory
     /// Returns true because a flask of oil is valid as fuel for lanterns.
     /// </summary>
     public override bool IsFuelForLantern => true;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ExclamationPointSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "Flask of oil";
 

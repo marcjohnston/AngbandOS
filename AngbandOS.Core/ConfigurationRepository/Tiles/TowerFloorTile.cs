@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Tiles;
 internal class TowerFloorTile : Tile
 {
     private TowerFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PeriodSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PeriodSymbol));
     public override string Name => "TowerFloor";
     public override string AppearAs => "TowerFloor";
     public override string Description => "open floor";

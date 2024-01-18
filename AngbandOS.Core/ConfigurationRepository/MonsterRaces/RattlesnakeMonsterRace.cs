@@ -12,7 +12,7 @@ internal class RattlesnakeMonsterRace : MonsterRace
 {
     protected RattlesnakeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperJSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperJSymbol));
     public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Rattlesnake";
 

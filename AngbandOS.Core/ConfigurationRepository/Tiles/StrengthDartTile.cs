@@ -11,10 +11,10 @@ namespace AngbandOS.Core.Tiles;
 internal class StrengthDartTile : Tile
 {
     private StrengthDartTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CaretSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CaretSymbol));
     public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "StrDart";
-    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<DisarmAlterAction>();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(DisarmAlterAction));
     public override string AppearAs => "StrDart";
     public override string Description => "dart trap";
     public override bool IsInteresting => true;

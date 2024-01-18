@@ -22,7 +22,7 @@ internal class BalrogMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonDemonMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonHiUndeadMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonUndeadMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperUSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperUSymbol));
     public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Balrog";
 

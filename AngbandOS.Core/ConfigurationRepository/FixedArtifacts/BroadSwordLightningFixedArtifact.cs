@@ -21,7 +21,7 @@ internal class BroadSwordLightningFixedArtifact : FixedArtifact
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "The Broad Sword 'Lightning'";
     public override int Ac => 0;

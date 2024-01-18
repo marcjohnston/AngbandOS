@@ -16,7 +16,7 @@ internal class NightgauntMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<FireBoltMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperUSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperUSymbol));
     public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Nightgaunt";
 

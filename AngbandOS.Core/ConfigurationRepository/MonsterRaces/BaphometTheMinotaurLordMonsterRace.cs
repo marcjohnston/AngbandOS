@@ -19,7 +19,7 @@ internal class BaphometTheMinotaurLordMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<ManaBoltMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<PlasmaBoltMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SlowMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperHSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperHSymbol));
     public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Baphomet, the Minotaur Lord";
 

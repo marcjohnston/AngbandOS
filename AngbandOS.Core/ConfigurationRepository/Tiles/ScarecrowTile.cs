@@ -11,10 +11,10 @@ namespace AngbandOS.Core.Tiles;
 internal class ScarecrowTile : Tile
 {
     private ScarecrowTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerTSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerTSymbol));
     public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Scarecrow";
-    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<TunnelAlterAction>();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
     public override string AppearAs => "Scarecrow";
     public override bool BlocksLos => true;
     public override string Description => "scarecrow";

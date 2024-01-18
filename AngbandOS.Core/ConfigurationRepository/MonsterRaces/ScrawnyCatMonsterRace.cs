@@ -12,7 +12,7 @@ internal class ScrawnyCatMonsterRace : MonsterRace
 {
     protected ScrawnyCatMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerFSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerFSymbol));
     public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Scrawny cat";
 

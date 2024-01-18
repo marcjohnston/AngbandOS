@@ -12,7 +12,7 @@ internal class GriffonMonsterRace : MonsterRace
 {
     protected GriffonMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperHSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperHSymbol));
     public override ColourEnum Colour => ColourEnum.BrightYellow;
     public override string Name => "Griffon";
 

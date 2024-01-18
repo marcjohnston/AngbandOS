@@ -12,7 +12,7 @@ internal class StaffHoliness : StaffItemClass
 {
     private StaffHoliness(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UnderscoreSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
     public override string Name => "Holiness";
 
     public override int[] Chance => new int[] { 2, 0, 0, 0 };

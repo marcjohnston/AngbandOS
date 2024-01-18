@@ -11,9 +11,9 @@ namespace AngbandOS.Core.Tiles;
 internal class WallPermentSolidTile : Tile
 {
     private WallPermentSolidTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PoundSignSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PoundSignSymbol));
     public override string Name => "WallPermSolid";
-    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<TunnelAlterAction>();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
     public override string AppearAs => "WallPermInner";
     public override bool BlocksLos => true;
     public override string Description => "magically reinforced wall";

@@ -30,7 +30,7 @@ internal class AmuletOfLobonFixedArtifact : FixedArtifact, IFixedArtifactActivat
     public string DescribeActivationEffect() => "protection from evil every 225+d225 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<DoubleQuoteSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
     public override string Name => "The Amulet of Lobon";
     public override int Ac => 0;
     public override bool Activate => true;

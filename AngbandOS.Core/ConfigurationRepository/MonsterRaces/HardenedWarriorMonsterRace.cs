@@ -12,7 +12,7 @@ internal class HardenedWarriorMonsterRace : MonsterRace
 {
     protected HardenedWarriorMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
     public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Hardened warrior";
 

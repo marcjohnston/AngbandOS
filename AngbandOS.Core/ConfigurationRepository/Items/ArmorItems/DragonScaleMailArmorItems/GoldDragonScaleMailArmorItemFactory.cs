@@ -13,7 +13,7 @@ internal class GoldDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFac
     private GoldDragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override string? DescribeActivationEffect => "breathe sound (130) every 450+d450 turns";
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenBraceSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColourEnum Colour => ColourEnum.Gold;
     public override string Name => "Gold Dragon Scale Mail";
 

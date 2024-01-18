@@ -12,7 +12,7 @@ internal class GuardianNagaMonsterRace : MonsterRace
 {
     protected GuardianNagaMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerNSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerNSymbol));
     public override ColourEnum Colour => ColourEnum.Pink;
     public override string Name => "Guardian naga";
 

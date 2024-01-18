@@ -29,7 +29,7 @@ internal class ScytheOfGharneFixedArtifact : FixedArtifact, IFixedArtifactActiva
     public string DescribeActivationEffect() => "word of recall every 200 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ForwardSlashSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ForwardSlashSymbol));
     public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "The Scythe of G'harne";
     public override int Ac => 0;

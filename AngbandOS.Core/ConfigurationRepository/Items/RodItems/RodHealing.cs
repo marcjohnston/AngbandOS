@@ -13,7 +13,7 @@ internal class RodHealing : RodItemFactory
     private RodHealing(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override bool RequiresAiming => false;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<MinusSignSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Healing";
 
     public override int[] Chance => new int[] { 8, 0, 0, 0 };

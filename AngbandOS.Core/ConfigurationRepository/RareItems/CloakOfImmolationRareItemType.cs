@@ -11,7 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class CloakOfImmolationRareItem : RareItem
 {
     private CloakOfImmolationRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenParenthesisSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
     public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "Cloak of Immolation";
     public override int Cost => 4000;

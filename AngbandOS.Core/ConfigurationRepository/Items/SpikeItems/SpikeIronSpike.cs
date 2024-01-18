@@ -12,7 +12,7 @@ internal class SpikeIronSpike : SpikeItemClass
 {
     private SpikeIronSpike(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<TildeSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(TildeSymbol));
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Iron Spike";
 

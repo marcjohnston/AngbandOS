@@ -18,7 +18,7 @@ internal class FirePhantomMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<HoldMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<MindBlastMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperGSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperGSymbol));
     public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Fire Phantom";
 

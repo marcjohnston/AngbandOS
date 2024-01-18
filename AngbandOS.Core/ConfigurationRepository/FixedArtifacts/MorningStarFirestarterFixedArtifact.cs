@@ -33,7 +33,7 @@ internal class MorningStarFirestarterFixedArtifact : FixedArtifact, IFixedArtifa
     public string DescribeActivationEffect() => "large fire ball (72) every 100 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<BackSlashSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "The Morning Star 'Firestarter'";
     public override int Ac => 0;

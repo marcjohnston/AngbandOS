@@ -37,39 +37,39 @@ internal class PriestlyArtifactBias : ArtifactBias
     {
         if (SaveGame.Rng.DieRoll(13) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<CharmUndeadActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(CharmUndeadActivation));
         }
         else if (SaveGame.Rng.DieRoll(12) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<BanishEvilActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(BanishEvilActivation));
         }
         else if (SaveGame.Rng.DieRoll(11) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<DispEvilActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(DispEvilActivation));
         }
         else if (SaveGame.Rng.DieRoll(10) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<ProtEvilActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(ProtEvilActivation));
         }
         else if (SaveGame.Rng.DieRoll(9) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<Cure1000Activation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(Cure1000Activation));
         }
         else if (SaveGame.Rng.DieRoll(8) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<Cure700Activation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(Cure700Activation));
         }
         else if (SaveGame.Rng.DieRoll(7) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<RestAllActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(RestAllActivation));
         }
         else if (SaveGame.Rng.DieRoll(6) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<RestLifeActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(RestLifeActivation));
         }
         else
         {
-            return SaveGame.SingletonRepository.Activations.Get<CureMwActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(CureMwActivation));
         }
     }
 }

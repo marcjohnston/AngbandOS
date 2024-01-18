@@ -41,7 +41,7 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
     }
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<EqualSignSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
     public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "The Ring of Set";
     public override int Ac => 0;

@@ -12,7 +12,7 @@ internal class GiantCockroachMonsterRace : MonsterRace
 {
     protected GiantCockroachMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperISymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperISymbol));
     public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Giant cockroach";
 

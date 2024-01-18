@@ -16,7 +16,7 @@ internal class ScathaTheWormMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<BreatheColdMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<CauseCriticalWoundsMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperDSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperDSymbol));
     public override ColourEnum Colour => ColourEnum.BrightPink;
     public override string Name => "Scatha the Worm";
 

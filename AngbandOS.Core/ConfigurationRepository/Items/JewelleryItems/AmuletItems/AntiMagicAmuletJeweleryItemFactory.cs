@@ -12,7 +12,7 @@ internal class AntiMagicAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 {
     private AntiMagicAmuletJeweleryItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<DoubleQuoteSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
     public override string Name => "Anti-Magic";
 
     public override int[] Chance => new int[] { 4, 0, 0, 0 };

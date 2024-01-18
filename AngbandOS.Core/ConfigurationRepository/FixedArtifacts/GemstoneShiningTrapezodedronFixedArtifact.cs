@@ -39,7 +39,7 @@ internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact, IFixed
     public string DescribeActivationEffect() => "clairvoyance and recall, draining you";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<AsteriskSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(AsteriskSymbol));
     public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "The Gemstone 'Shining Trapezodedron'";
     public override int Ac => 0;

@@ -22,7 +22,7 @@ internal class ShuddeMellMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<HasteMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<HealMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonCthuloidMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperXSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperXSymbol));
     public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Shudde M'ell";
 

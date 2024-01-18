@@ -12,7 +12,7 @@ internal class TheEmissaryMonsterRace : MonsterRace
 {
     protected TheEmissaryMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
     public override ColourEnum Colour => ColourEnum.Orange;
     public override string Name => "The Emissary";
 

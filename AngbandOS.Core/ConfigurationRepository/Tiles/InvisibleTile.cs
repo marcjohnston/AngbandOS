@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Tiles;
 internal class InvisibleTile : Tile
 {
     private InvisibleTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PeriodSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PeriodSymbol));
     public override string Name => "Invis";
     public override string AppearAs => "Invis";
     public override string Description => "invisible trap";

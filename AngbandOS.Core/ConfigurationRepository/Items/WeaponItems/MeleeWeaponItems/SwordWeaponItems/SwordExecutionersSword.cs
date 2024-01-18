@@ -12,7 +12,7 @@ internal class SwordExecutionersSword : SwordItemClass
 {
     private SwordExecutionersSword(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Executioner's Sword";
 

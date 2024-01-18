@@ -16,7 +16,7 @@ internal class ChaosShapechangerMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<ColdBoltMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<FireBoltMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperHSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperHSymbol));
     public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Chaos shapechanger";
 

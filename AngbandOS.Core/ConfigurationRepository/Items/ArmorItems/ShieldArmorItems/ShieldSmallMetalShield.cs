@@ -12,7 +12,7 @@ internal class ShieldSmallMetalShield : ShieldItemClass
 {
     private ShieldSmallMetalShield(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseParenthesisSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseParenthesisSymbol));
     public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Small Metal Shield";
 

@@ -12,7 +12,7 @@ internal class LargeKoboldMonsterRace : MonsterRace
 {
     protected LargeKoboldMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerKSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerKSymbol));
     public override string Name => "Large kobold";
 
     public override int ArmourClass => 32;

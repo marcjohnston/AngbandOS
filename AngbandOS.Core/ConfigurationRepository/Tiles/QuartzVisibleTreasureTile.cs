@@ -11,10 +11,10 @@ namespace AngbandOS.Core.Tiles;
 internal class QuartzVisibleTreasureTile : Tile
 {
     private QuartzVisibleTreasureTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<AsteriskSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(AsteriskSymbol));
     public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "QuartzVisTreas";
-    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<TunnelAlterAction>();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
     public override string AppearAs => "QuartzVisTreas";
     public override bool BlocksLos => true;
     public override bool IsVisibleTreasure => true;

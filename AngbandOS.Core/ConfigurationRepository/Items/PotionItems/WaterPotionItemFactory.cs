@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemCategories;
 internal class WaterPotionItemFactory : PotionItemFactory
 {
     private WaterPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ExclamationPointSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Water";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

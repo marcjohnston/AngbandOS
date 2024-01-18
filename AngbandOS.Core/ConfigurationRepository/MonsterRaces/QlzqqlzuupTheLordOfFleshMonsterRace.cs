@@ -28,7 +28,7 @@ internal class QlzqqlzuupTheLordOfFleshMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonSpiderMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonUndeadMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonUniqueMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperQSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperQSymbol));
     public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "Qlzqqlzuup, the Lord of Flesh";
 

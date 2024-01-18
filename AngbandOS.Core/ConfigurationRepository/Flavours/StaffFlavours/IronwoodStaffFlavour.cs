@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Flavours;
 internal class IronwoodStaffFlavour : StaffFlavour
 {
     private IronwoodStaffFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UnderscoreSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
     public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Ironwood";
 }

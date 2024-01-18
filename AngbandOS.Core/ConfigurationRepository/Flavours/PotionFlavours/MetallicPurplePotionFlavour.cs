@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Flavours;
 internal class MetallicPurplePotionFlavour : PotionFlavour
 {
     private MetallicPurplePotionFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ExclamationPointSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Metallic Purple";
 }

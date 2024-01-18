@@ -21,7 +21,7 @@ internal class TridentOfWrathFixedArtifact : FixedArtifact
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ForwardSlashSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ForwardSlashSymbol));
     public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "The Trident of Wrath";
     public override int Ac => 0;

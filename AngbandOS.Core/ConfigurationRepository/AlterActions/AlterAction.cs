@@ -11,7 +11,7 @@ namespace AngbandOS.Core.AlterActions;
 /// Represents an action that occurs when the player bumps into a feature.
 /// </summary>
 [Serializable]
-internal abstract class AlterAction
+internal abstract class AlterAction : IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
     protected AlterAction(SaveGame saveGame)
@@ -20,4 +20,8 @@ internal abstract class AlterAction
     }
 
     public abstract void Execute(AlterEventArgs alterEventArgs);
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 }

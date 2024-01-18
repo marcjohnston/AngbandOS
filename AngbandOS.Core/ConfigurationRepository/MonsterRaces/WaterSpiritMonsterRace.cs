@@ -12,7 +12,7 @@ internal class WaterSpiritMonsterRace : MonsterRace
 {
     protected WaterSpiritMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperESymbol));
     public override ColourEnum Colour => ColourEnum.Turquoise;
     public override string Name => "Water spirit";
 

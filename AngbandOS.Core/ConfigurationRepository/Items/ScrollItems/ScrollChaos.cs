@@ -12,7 +12,7 @@ internal class ScrollChaos : ScrollItemClass
 {
     private ScrollChaos(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<QuestionMarkSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "Chaos";
 
     public override int[] Chance => new int[] { 8, 0, 0, 0 };

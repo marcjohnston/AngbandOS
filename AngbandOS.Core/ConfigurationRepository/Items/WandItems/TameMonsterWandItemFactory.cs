@@ -12,7 +12,7 @@ internal class TameMonsterWandItemFactory : WandItemFactory
 {
     private TameMonsterWandItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<MinusSignSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Tame Monster";
 
     public override int[] Chance => new int[] { 2, 0, 0, 0 };

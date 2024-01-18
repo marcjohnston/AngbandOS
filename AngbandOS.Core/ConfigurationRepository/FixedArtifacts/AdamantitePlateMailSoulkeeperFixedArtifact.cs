@@ -31,7 +31,7 @@ internal class AdamantitePlateMailSoulkeeperFixedArtifact : FixedArtifact, IFixe
     public string DescribeActivationEffect() => "heal (1000) every 888 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenBraceSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "The Adamantite Plate Mail 'Soulkeeper'";
     public override int Ac => 40;

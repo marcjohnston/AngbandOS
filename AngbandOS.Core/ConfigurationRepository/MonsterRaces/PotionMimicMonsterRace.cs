@@ -18,7 +18,7 @@ internal class PotionMimicMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<ColdBoltMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ExclamationPointSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Potion mimic";
 
     public override int ArmourClass => 30;

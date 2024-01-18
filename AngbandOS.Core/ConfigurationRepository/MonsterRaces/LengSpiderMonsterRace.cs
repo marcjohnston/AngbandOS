@@ -20,7 +20,7 @@ internal class LengSpiderMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<HasteMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<HealMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonSpiderMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperSSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperSSymbol));
     public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Leng spider";
 

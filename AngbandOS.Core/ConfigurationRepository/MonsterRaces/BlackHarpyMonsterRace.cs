@@ -12,7 +12,7 @@ internal class BlackHarpyMonsterRace : MonsterRace
 {
     protected BlackHarpyMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperHSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperHSymbol));
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Black harpy";
 

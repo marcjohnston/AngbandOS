@@ -11,10 +11,10 @@ namespace AngbandOS.Core.Tiles;
 internal class AcidTrapTile : Tile
 {
     private AcidTrapTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CaretSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CaretSymbol));
     public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "AcidTrap";
-    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<DisarmAlterAction>();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(DisarmAlterAction));
     public override string AppearAs => "AcidTrap";
     public override string Description => "discolored spot";
     public override bool IsInteresting => true;

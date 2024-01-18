@@ -34,7 +34,7 @@ internal class TwoHandedSwordFiretongueFixedArtifact : FixedArtifact
             item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
         }
     }
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "The Two-Handed Sword 'Firetongue'";
     public override int Ac => 0;

@@ -12,7 +12,7 @@ internal class BlackReaverMonsterRace : MonsterRace
 {
     protected BlackReaverMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperUSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperUSymbol));
     public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Black reaver";
 

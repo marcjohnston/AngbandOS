@@ -15,7 +15,7 @@ internal class WhiteDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
     private WhiteDragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override string? DescribeActivationEffect => "breathe frost (110) every 450+d450 turns";
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<OpenBraceSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override string Name => "White Dragon Scale Mail";
 
     public override int Ac => 30;

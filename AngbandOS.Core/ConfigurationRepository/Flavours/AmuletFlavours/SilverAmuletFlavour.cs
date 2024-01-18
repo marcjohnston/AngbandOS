@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Flavours;
 internal class SilverAmuletFlavour : AmuletFlavour
 {
     private SilverAmuletFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<DoubleQuoteSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
     public override ColourEnum Colour => ColourEnum.Silver;
     public override string Name => "Silver";
 }

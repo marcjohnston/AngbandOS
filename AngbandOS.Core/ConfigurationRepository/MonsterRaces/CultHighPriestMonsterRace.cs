@@ -21,7 +21,7 @@ internal class CultHighPriestMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonCthuloidMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonstersMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonUndeadMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
     public override ColourEnum Colour => ColourEnum.Diamond;
     public override string Name => "Cult high priest";
 

@@ -21,7 +21,7 @@ internal class LongBowSureshotFixedArtifact : FixedArtifact
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBracketSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBracketSymbol));
     public override ColourEnum Colour => ColourEnum.BrightBrown;
     public override string Name => "The Long Bow 'Sureshot'";
     public override int Ac => 0;

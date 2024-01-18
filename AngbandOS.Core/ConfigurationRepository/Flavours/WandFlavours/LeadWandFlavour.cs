@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Flavours;
 internal class LeadWandFlavour : WandFlavour
 {
     private LeadWandFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<MinusSignSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Lead";
 }

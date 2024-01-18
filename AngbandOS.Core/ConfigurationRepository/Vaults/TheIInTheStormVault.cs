@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Vaults;
 internal class TheIInTheStormVault : Vault
 {
     private TheIInTheStormVault(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PoundSignSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PoundSignSymbol));
     public override string Name => "The I in the Storm";
     public override int Category => 8;
     public override int Height => 25;

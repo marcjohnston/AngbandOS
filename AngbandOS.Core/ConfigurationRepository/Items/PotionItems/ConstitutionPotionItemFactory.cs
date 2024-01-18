@@ -12,7 +12,7 @@ internal class ConstitutionPotionItemFactory : PotionItemFactory
 {
     private ConstitutionPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<ExclamationPointSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Constitution";
 
     public override int[] Chance => new int[] { 6, 3, 1, 0 };

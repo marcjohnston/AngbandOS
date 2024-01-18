@@ -11,10 +11,10 @@ namespace AngbandOS.Core.Tiles;
 internal class SummonRuneTile : Tile
 {
     private SummonRuneTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CaretSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CaretSymbol));
     public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "SummonRune";
-    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<DisarmAlterAction>();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(DisarmAlterAction));
     public override string AppearAs => "SummonRune";
     public override string Description => "strange rune";
     public override bool IsInteresting => true;

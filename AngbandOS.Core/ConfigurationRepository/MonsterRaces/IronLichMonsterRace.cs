@@ -22,7 +22,7 @@ internal class IronLichMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<LightningBallMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<WaterBallMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonUndeadMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperLSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperLSymbol));
     public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Iron lich";
 

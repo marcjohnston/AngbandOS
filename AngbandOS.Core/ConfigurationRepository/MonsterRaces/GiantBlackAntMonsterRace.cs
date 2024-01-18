@@ -12,7 +12,7 @@ internal class GiantBlackAntMonsterRace : MonsterRace
 {
     protected GiantBlackAntMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerASymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerASymbol));
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Giant black ant";
 

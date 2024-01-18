@@ -13,7 +13,7 @@ internal class RodColdBalls : RodItemFactory
     private RodColdBalls(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override bool RequiresAiming => true;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<MinusSignSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Cold Balls";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

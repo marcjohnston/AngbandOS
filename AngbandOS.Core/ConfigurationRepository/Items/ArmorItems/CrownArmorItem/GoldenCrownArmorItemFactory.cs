@@ -12,7 +12,7 @@ internal class GoldenCrownArmorItemFactory : CrownArmorItemFactory
 {
     private GoldenCrownArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CloseBraceSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
     public override ColourEnum Colour => ColourEnum.Gold;
     public override string Name => "Golden Crown";
 

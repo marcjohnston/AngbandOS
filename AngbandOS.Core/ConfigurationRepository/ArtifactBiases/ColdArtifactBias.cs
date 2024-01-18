@@ -52,19 +52,19 @@ internal class ColdArtifactBias : ArtifactBias
     {
         if (SaveGame.Rng.DieRoll(3) != 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<BoCold1Activation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(BoCold1Activation));
         }
         else if (SaveGame.Rng.DieRoll(3) != 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<BaCold1Activation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(BaCold1Activation));
         }
         else if (SaveGame.Rng.DieRoll(3) != 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<BaCold2Activation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(BaCold2Activation));
         }
         else
         {
-            return SaveGame.SingletonRepository.Activations.Get<BaCold3Activation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(BaCold3Activation));
         }
     }
 }

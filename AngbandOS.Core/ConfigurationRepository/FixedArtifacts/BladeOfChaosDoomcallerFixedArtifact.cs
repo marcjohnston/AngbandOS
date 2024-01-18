@@ -21,7 +21,7 @@ internal class BladeOfChaosDoomcallerFixedArtifact : FixedArtifact
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<VerticalBarSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "The Blade of Chaos 'Doomcaller'";
     public override int Ac => 0;

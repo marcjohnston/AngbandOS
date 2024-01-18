@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Flavours;
 internal class AdamantiteWandFlavour : WandFlavour
 {
     private AdamantiteWandFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<MinusSignSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override ColourEnum Colour => ColourEnum.Chartreuse;
     public override string Name => "Adamantite";
 }

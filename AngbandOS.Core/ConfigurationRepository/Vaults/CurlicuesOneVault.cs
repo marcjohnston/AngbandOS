@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Vaults;
 internal class CurlicuesOneVault : Vault
 {
     private CurlicuesOneVault(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PoundSignSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PoundSignSymbol));
     public override string Name => "Curlicues One";
     public override int Category => 8;
     public override int Height => 23;

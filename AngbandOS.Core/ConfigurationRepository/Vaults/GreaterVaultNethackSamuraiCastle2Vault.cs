@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Vaults;
 internal class GreaterVaultNethackSamuraiCastle2Vault : Vault
 {
     private GreaterVaultNethackSamuraiCastle2Vault(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<PoundSignSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PoundSignSymbol));
     public override string Name => "Greater vault (nethack samurai castle #2)";
     public override int Category => 8;
     public override int Height => 20;

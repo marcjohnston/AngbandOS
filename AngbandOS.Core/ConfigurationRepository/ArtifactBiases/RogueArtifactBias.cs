@@ -44,23 +44,23 @@ internal class RogueArtifactBias : ArtifactBias
     {
         if (SaveGame.Rng.DieRoll(50) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<SpeedActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(SpeedActivation));
         }
         else if (SaveGame.Rng.DieRoll(4) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<SleepActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(SleepActivation));
         }
         else if (SaveGame.Rng.DieRoll(3) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<DetectAllActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(DetectAllActivation));
         }
         else if (SaveGame.Rng.DieRoll(8) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get<IdFullActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(IdFullActivation));
         }
         else
         {
-            return SaveGame.SingletonRepository.Activations.Get<IdPlainActivation>();
+            return SaveGame.SingletonRepository.Activations.Get(nameof(IdPlainActivation));
         }
     }
 }

@@ -12,7 +12,7 @@ internal class PieceOfDwarfBreadFoodItemFactory : FoodItemFactory
 {
     private PieceOfDwarfBreadFoodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CommaSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
     public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Piece of Dwarf Bread";
 

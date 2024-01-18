@@ -12,7 +12,7 @@ internal class HillOrcMonsterRace : MonsterRace
 {
     protected HillOrcMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerOSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerOSymbol));
     public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Hill orc";
 

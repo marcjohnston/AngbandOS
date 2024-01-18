@@ -12,7 +12,7 @@ internal class MasterRogueMonsterRace : MonsterRace
 {
     protected MasterRogueMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<LowerPSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Master rogue";
 

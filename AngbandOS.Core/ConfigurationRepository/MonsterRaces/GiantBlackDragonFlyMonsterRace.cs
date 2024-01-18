@@ -14,7 +14,7 @@ internal class GiantBlackDragonFlyMonsterRace : MonsterRace
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         SaveGame.SingletonRepository.MonsterSpells.Get<BreatheAcidMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperFSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperFSymbol));
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Giant black dragon fly";
 

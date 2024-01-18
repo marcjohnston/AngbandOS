@@ -11,10 +11,10 @@ namespace AngbandOS.Core.Tiles;
 internal class ConstitutionDartTile : Tile
 {
     private ConstitutionDartTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<CaretSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CaretSymbol));
     public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "ConDart";
-    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get<DisarmAlterAction>();
+    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(DisarmAlterAction));
     public override string AppearAs => "ConDart";
     public override string Description => "dart trap";
     public override bool IsInteresting => true;

@@ -22,7 +22,7 @@ internal class ThuringwethilMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<NetherBallMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<SummonKinMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperVSymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperVSymbol));
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Thuringwethil";
 

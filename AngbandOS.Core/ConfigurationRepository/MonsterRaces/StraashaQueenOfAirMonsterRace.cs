@@ -16,7 +16,7 @@ internal class StraashaQueenOfAirMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get<ColdBallMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<LightningBallMonsterSpell>(),
         SaveGame.SingletonRepository.MonsterSpells.Get<LightningBoltMonsterSpell>());
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get<UpperESymbol>();
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperESymbol));
     public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "Straasha, Queen of Air";
 
