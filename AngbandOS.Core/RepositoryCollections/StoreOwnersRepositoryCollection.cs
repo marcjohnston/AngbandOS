@@ -18,7 +18,7 @@ internal class StoreOwnersRepositoryCollection : KeyedDictionaryRepositoryCollec
 
     protected override string? PersistedEntityName => "StoreOwner";
 
-    protected override string? SerializeEntity(StoreOwner storeOwner)
+    protected override string SerializeEntity(StoreOwner storeOwner)
     {
         StoreOwnerDefinition storeOwnerDefinition = new()
         {

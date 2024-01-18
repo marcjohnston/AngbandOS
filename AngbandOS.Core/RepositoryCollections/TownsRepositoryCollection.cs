@@ -42,7 +42,7 @@ internal class TownsRepositoryCollection : KeyedDictionaryRepositoryCollection<s
 
     protected override string? PersistedEntityName => "Town";
 
-    protected override string? SerializeEntity(Town town)
+    protected override string SerializeEntity(Town town)
     {
         TownDefinition townDefinition = new()
         {

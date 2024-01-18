@@ -63,7 +63,7 @@ internal abstract class RepositoryCollection<T> : IEnumerable<T>
     /// </summary>
     public virtual void Loaded() { }
 
-    protected virtual string? SerializeEntity(T t) => null;
+    protected virtual string SerializeEntity(T t) => null;
 
     protected virtual string? PersistedEntityName => null;
 
