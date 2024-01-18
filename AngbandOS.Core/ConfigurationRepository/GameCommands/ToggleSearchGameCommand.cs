@@ -17,9 +17,8 @@ internal class ToggleSearchGameCommand : GameCommand
 
     public override char KeyChar => 'S';
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        SaveGame.DoToggleSearch();
-        return false;
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(ToggleSearchScript));
     }
 }

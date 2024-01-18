@@ -17,8 +17,8 @@ internal class GoUpGameCommand : GameCommand
 
     public override char KeyChar => '<';
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        return SaveGame.RunScript(nameof(GoUpScript));
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(GoUpScript));
     }
 }

@@ -17,8 +17,8 @@ internal class SpikeGameCommand : GameCommand
 
     public override char KeyChar => 'j';
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        return SaveGame.RunScript(nameof(SpikeClosedDoorScript));
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(SpikeClosedDoorScript));
     }
 }

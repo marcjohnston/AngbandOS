@@ -17,11 +17,8 @@ internal class RestGameCommand : GameCommand
 
     public override char KeyChar => 'R';
 
-    public override bool Execute() // TODO: Why can't this command take in a count?
+    public override void Loaded()
     {
-        SaveGame.RunScript(nameof(RestScript));
-
-        // Do not disturb our rest.
-        return true;
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(RestScript));
     }
 }

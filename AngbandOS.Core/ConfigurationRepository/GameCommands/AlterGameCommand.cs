@@ -20,8 +20,8 @@ internal class AlterGameCommand : GameCommand
 
     public override int? Repeat => 99;
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        return SaveGame.RunScript(nameof(AlterScript));
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(AlterScript));
     }
 }

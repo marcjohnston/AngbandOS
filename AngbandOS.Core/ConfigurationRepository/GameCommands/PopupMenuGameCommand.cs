@@ -17,9 +17,8 @@ internal class PopupMenuGameCommand : GameCommand
 
     public override char KeyChar => '\x1b';
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        SaveGame.DoCmdPopup();
-        return false;
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(PopupMenuScript));
     }
 }

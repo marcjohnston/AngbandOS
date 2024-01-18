@@ -14,25 +14,8 @@ internal class WizardModeGameCommand : GameCommand
 
     public override char KeyChar => 'W';
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        if (SaveGame.IsWizard)
-        {
-            SaveGame.GetCom("Wizard Command: ", out char cmd);
-            foreach (WizardCommand wizardCommand in SaveGame.SingletonRepository.WizardCommands)
-            {
-                if (wizardCommand.IsEnabled && wizardCommand.KeyChar == cmd)
-                {
-                    wizardCommand.Execute();
-                    return false;
-                }
-            }
-            SaveGame.MsgPrint("That is not a valid wizard command.");
-        }
-        else
-        {
-            SaveGame.RunScript(nameof(EnterWizardModeScript));
-        }
-        return false;
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(EnterWizardModeScript));
     }
 }

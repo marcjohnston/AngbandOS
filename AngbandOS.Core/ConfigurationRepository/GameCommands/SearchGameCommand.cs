@@ -19,9 +19,8 @@ internal class SearchGameCommand : GameCommand
 
     public override int? Repeat => null;
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        SaveGame.DoCmdSearch();
-        return false;
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(SearchScript));
     }
 }

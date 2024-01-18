@@ -17,8 +17,8 @@ internal class MessageOneGameCommand : GameCommand
 
     public override char KeyChar => 'O';
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        return SaveGame.RunScript(nameof(MessageOneScript));
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(MessageOneScript));
     }
 }

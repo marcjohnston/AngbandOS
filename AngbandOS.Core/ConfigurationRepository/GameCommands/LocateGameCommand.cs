@@ -17,9 +17,8 @@ internal class LocateGameCommand : GameCommand
 
     public override char KeyChar => 'L';
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        SaveGame.DoCmdLocate();
-        return false;
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(LocateScript));
     }
 }

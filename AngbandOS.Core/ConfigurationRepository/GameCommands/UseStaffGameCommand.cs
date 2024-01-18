@@ -18,8 +18,8 @@ internal class UseStaffGameCommand : GameCommand
 
     public override char KeyChar => 'u';
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        return SaveGame.RunScript(nameof(UseStaffScript));
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(UseStaffScript));
     }
 }

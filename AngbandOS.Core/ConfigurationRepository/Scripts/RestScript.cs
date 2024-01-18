@@ -19,7 +19,7 @@ internal class RestScript : Script
             const string prompt = "Rest (0-9999, '*' for HP/SP, '&' as needed): ";
             if (!SaveGame.GetString(prompt, out string choice, "&", 4))
             {
-                return false;
+                return false; // We are not returning by chance.  The user opted out.
             }
             // Default to resting until we're fine
             if (string.IsNullOrEmpty(choice))
@@ -44,10 +44,11 @@ internal class RestScript : Script
                 {
                     SaveGame.CommandArgument = i;
                 }
+
                 // The player might not have put a number in - so abandon if they didn't
                 if (SaveGame.CommandArgument <= 0)
                 {
-                    return false;
+                    return false; // We are not returning by chance.  The user entered an invalid count.
                 }
             }
         }
@@ -64,6 +65,6 @@ internal class RestScript : Script
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
         SaveGame.HandleStuff();
         SaveGame.UpdateScreen();
-        return false;
+        return true; // This can and should repeated.
     }
 }

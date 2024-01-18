@@ -17,8 +17,8 @@ internal class MutantPowerGameCommand : GameCommand
 
     public override char KeyChar => 'p';
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        return SaveGame.RunScript(nameof(MutantPowerScript));
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(MutantPowerScript));
     }
 }

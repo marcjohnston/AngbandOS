@@ -5,19 +5,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Commands;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WalkAndPickupGameCommand : GameCommand
+internal class LookScript : Script
 {
-    private WalkAndPickupGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LookScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override char KeyChar => ';';
-
-    public override int? Repeat => null;
-
-    public override void Loaded()
+    public override bool Execute()
     {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(WalkAndPickupScript));
+        if (SaveGame.TargetSet(Constants.TargetLook))
+        {
+            SaveGame.MsgPrint(SaveGame.TargetWho > 0 ? "Target Selected." : "Location Targeted.");
+        }
+        return false;
     }
 }

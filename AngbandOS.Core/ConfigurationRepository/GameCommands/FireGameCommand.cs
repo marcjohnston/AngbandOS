@@ -17,8 +17,8 @@ internal class FireGameCommand : GameCommand
 
     public override char KeyChar => 'f';
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        return SaveGame.RunScript(nameof(FireScript));
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(FireScript));
     }
 }

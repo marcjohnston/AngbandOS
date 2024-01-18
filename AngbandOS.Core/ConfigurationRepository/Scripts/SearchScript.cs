@@ -17,6 +17,9 @@ internal class SearchScript : Script
 
     public override bool Execute()
     {
+        // Searching costs 100.
+        SaveGame.EnergyUse = 100;
+
         // The basic chance is equal to our searching skill
         int chance = SaveGame.SkillSearching;
         // If we can't see it's hard to search

@@ -14,18 +14,34 @@ internal class EnterWizardModeScript : Script
 
     public override bool Execute()
     {
-        SaveGame.Screen.PrintLine("Enter Wizard Code: ", 0, 0);
-        if (!SaveGame.AskforAux(out string tmp, "", 31))
+        if (SaveGame.IsWizard)
         {
-            SaveGame.Screen.Erase(0, 0);
-            return false;
+            SaveGame.GetCom("Wizard Command: ", out char cmd);
+            foreach (WizardCommand wizardCommand in SaveGame.SingletonRepository.WizardCommands)
+            {
+                if (wizardCommand.IsEnabled && wizardCommand.KeyChar == cmd)
+                {
+                    wizardCommand.Execute();
+                    return false;
+                }
+            }
+            SaveGame.MsgPrint("That is not a valid wizard command.");
         }
-        SaveGame.Screen.Erase(0, 0);
-        if (tmp == "Dumbledore")
+        else
         {
-            SaveGame.IsWizard = true;
-            SaveGame.MsgPrint("Wizard mode activated.");
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawTitleFlaggedAction)).Set();
+            SaveGame.Screen.PrintLine("Enter Wizard Code: ", 0, 0);
+            if (!SaveGame.AskforAux(out string tmp, "", 31))
+            {
+                SaveGame.Screen.Erase(0, 0);
+                return false;
+            }
+            SaveGame.Screen.Erase(0, 0);
+            if (tmp == "Dumbledore")
+            {
+                SaveGame.IsWizard = true;
+                SaveGame.MsgPrint("Wizard mode activated.");
+                SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawTitleFlaggedAction)).Set();
+            }
         }
         return false;
     }

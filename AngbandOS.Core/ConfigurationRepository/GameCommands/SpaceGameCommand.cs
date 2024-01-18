@@ -14,8 +14,8 @@ internal class SpaceGameCommand : GameCommand
 
     public override char KeyChar => ' ';
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        return false;
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(FalseScript));
     }
 }

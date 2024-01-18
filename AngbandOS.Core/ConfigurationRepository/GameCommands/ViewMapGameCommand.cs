@@ -17,8 +17,8 @@ internal class ViewMapGameCommand : GameCommand
 
     public override char KeyChar => 'M';
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        return SaveGame.RunScript(nameof(ViewMapScript));
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(ViewMapScript));
     }
 }

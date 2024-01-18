@@ -17,8 +17,8 @@ internal class RefillGameCommand : GameCommand
 
     public override char KeyChar => 'F';
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        return SaveGame.RunScript(nameof(RefillScript));
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(RefillScript));
     }
 }

@@ -17,8 +17,8 @@ internal class WieldGameCommand : GameCommand
 
     public override char KeyChar => 'w';
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        return SaveGame.RunScript(nameof(WieldScript));
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(WieldScript));
     }
 }

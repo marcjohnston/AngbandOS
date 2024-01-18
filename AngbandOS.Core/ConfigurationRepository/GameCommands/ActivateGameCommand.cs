@@ -22,8 +22,8 @@ internal class ActivateGameCommand : GameCommand
 
     public override int? Repeat => 0;
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        return SaveGame.RunScript(nameof(ActivateScript));
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(ActivateScript));
     }
 }

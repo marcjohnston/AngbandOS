@@ -17,9 +17,8 @@ internal class ThrowGameCommand : GameCommand
 
     public override char KeyChar => 'v';
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        SaveGame.DoCmdThrow(1);
-        return false;
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(ThrowScript));
     }
 }

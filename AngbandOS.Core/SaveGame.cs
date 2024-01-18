@@ -2881,7 +2881,7 @@ internal class SaveGame
             }
             if (CurrentDepth > 0)
             {
-                DoCmdFeeling(true);
+                RunScript(nameof(SayFeelingScript));
             }
         }
     }
@@ -7285,31 +7285,6 @@ internal class SaveGame
         RedrawSingleLocation(ny, nx);
     }
 
-    public void DoCmdEquip()
-    {
-        // We're viewing equipment
-        ViewingEquipment = true;
-        ScreenBuffer savedScreen = Screen.Clone();
-        // We're interested in seeing everything
-        ShowEquip(null);
-        // Get a command
-        string outVal = $"Equipment: carrying {WeightCarried / 10}.{WeightCarried % 10} pounds ({WeightCarried * 100 / (AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
-        Screen.PrintLine(outVal, 0, 0);
-        QueuedCommand = Inkey();
-        Screen.Restore(savedScreen);
-        // Display details if the player wants
-        if (QueuedCommand == '\x1b')
-        {
-            QueuedCommand = (char)0;
-        }
-        else
-        {
-            // If the player selects a command that uses getitem, it will automatically show the
-            // inventory
-            ViewingItemList = true;
-        }
-    }
-
     // CommandHandler
     /// <summary>
     /// Process the player's latest command
@@ -8169,7 +8144,7 @@ internal class SaveGame
     /// </summary>
     /// <param name="direction"> The direction in which to move </param>
     /// <param name="dontPickup"> Whether or not to skip picking up any objects we step on </param>
-    private void MovePlayer(int direction, bool dontPickup)
+    public void MovePlayer(int direction, bool dontPickup)
     {
         int newY = MapY + KeypadDirectionYOffset[direction];
         int newX = MapX + KeypadDirectionXOffset[direction];
@@ -8457,7 +8432,7 @@ internal class SaveGame
             RunScript(nameof(SearchScript));
         }
         // Pick up an object on our tile if there is one
-        PickUpItems(!dontPickup);
+        StepOnGrid(!dontPickup);
         // If we've just entered a shop tile, then enter the actual shop
         if (tile.FeatureType.IsShop)
         {
@@ -8556,7 +8531,7 @@ internal class SaveGame
     /// <param name="pickup">
     /// True if we should pick up the object, or false if we should leave it where it is
     /// </param>
-    public void PickUpItems(bool pickup)
+    public void StepOnGrid(bool pickup)
     {
         GridTile tile = Grid[MapY][MapX];
         foreach (Item item in tile.Items.ToArray()) // We need a ToArray to prevent the collection from being modified error
@@ -8596,7 +8571,7 @@ internal class SaveGame
                     Item? inventoryItem = GetInventoryItem(slot);
                     if (inventoryItem == null)
                     {
-                        throw new Exception("Picked up item should have been found."); // TODO: Clean this up
+                        throw new Exception("Unable to locate picked up item in the inventory."); // TODO: Clean this up
                     }
                     itemName = inventoryItem.Description(true, 3);
                     MsgPrint($"You have {itemName} ({slot.IndexToLabel()}).");
@@ -9223,23 +9198,6 @@ internal class SaveGame
         return true;
     }
 
-    public void DoToggleSearch()
-    {
-        if (IsSearching)
-        {
-            IsSearching = false;
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
-        }
-        else
-        {
-            IsSearching = true;
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)).Set();
-        }
-    }
-
     public void DoCmdThrow(int damageMultiplier)
     {
         // Get an item to throw
@@ -9418,203 +9376,6 @@ internal class SaveGame
         DropNear(missile, chanceToBreak, y, x);
     }
 
-    public bool DoCmdWalk(bool dontPickup)
-    {
-        bool more = false;
-        // If we don't already have a direction, get one
-        if (GetDirectionNoAim(out int dir))
-        {
-            // Walking takes a full turn
-            EnergyUse = 100;
-            MovePlayer(dir, dontPickup);
-            more = true;
-        }
-        return more;
-    }
-
-    /// <param name="pickup"> Whether or not we should pick up an object in our location </param>
-    public void DoCmdStay(bool pickup) // TODO: Move to SaveGame or Commands
-    {
-        // Standing still takes a turn
-        EnergyUse = 100;
-        // Periodically search if we're not actively in search mode
-        if (SkillSearchFrequency >= 50 || 0 == Rng.RandomLessThan(50 - SkillSearchFrequency))
-        {
-            RunScript(nameof(SearchScript));
-        }
-        else if (IsSearching) // Always search if we are actively in search mode
-        {
-            RunScript(nameof(SearchScript));
-        }
-        // Pick up items if we should
-        PickUpItems(pickup);
-        // If we're in a shop doorway, enter the shop
-        GridTile tile = Grid[MapY][MapX];
-        if (tile.FeatureType.IsShop)
-        {
-            Disturb(false);
-            QueuedCommand = '_';
-        }
-    }
-
-    public void DoCmdPopup()
-    {
-        List<string> menuItems = new List<string>() { "Resume Game", "Save and Quit" };
-        PopupMenu menu = new PopupMenu(menuItems);
-        int result = menu.Show(this);
-        switch (result)
-        {
-            // Escape or Resume Game
-            case -1:
-            case 0:
-                break;
-            // Save and Quit
-            case 1:
-                Playing = false; // TODO: Need to use event arguments
-                break;
-        }
-    }
-
-    public void DoCmdSearch()
-    {
-        EnergyUse = 100;
-        RunScript(nameof(SearchScript));
-    }
-
-    public void DoCmdLook()
-    {
-        if (TargetSet(Constants.TargetLook))
-        {
-            MsgPrint(TargetWho > 0 ? "Target Selected." : "Location Targeted.");
-        }
-    }
-
-    public void DoCmdLocate()
-    {
-        int startRow = PanelRow;
-        int startCol = PanelCol;
-        int currentRow = startRow;
-        int currentCol = startCol;
-        // Enter a loop so the player can browse the level
-        while (true)
-        {
-            // Describe the location being viewed
-            string offsetText;
-            if (currentRow == startRow && currentCol == startCol)
-            {
-                offsetText = "";
-            }
-            else
-            {
-                string northSouth = currentRow < startRow ? " North" : currentRow > startRow ? " South" : "";
-                string eastWest = currentCol < startCol ? " West" : currentCol > startCol ? " East" : "";
-                offsetText = $"{northSouth}{eastWest} of";
-            }
-            string message = $"Map sector [{currentRow},{currentCol}], which is{offsetText} your sector. Direction?";
-            // Get a direction command or escape
-            int dir = 0;
-            while (dir == 0)
-            {
-                if (!GetCom(message, out char command))
-                {
-                    break;
-                }
-                dir = GetKeymapDir(command);
-            }
-            if (dir == 0)
-            {
-                break;
-            }
-            // Move the view based on the direction
-            currentRow += KeypadDirectionYOffset[dir];
-            currentCol += KeypadDirectionXOffset[dir];
-            if (currentRow > MaxPanelRows)
-            {
-                currentRow = MaxPanelRows;
-            }
-            else if (currentRow < 0)
-            {
-                currentRow = 0;
-            }
-            if (currentCol > MaxPanelCols)
-            {
-                currentCol = MaxPanelCols;
-            }
-            else if (currentCol < 0)
-            {
-                currentCol = 0;
-            }
-            // Update the view if necessary
-            if (currentRow != PanelRow || currentCol != PanelCol)
-            {
-                PanelRow = currentRow;
-                PanelCol = currentCol;
-                PanelBounds();
-                SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-                SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
-                HandleStuff();
-            }
-        }
-        // We've finished, so snap back to the player's location
-        RecenterScreenAroundPlayer();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
-        HandleStuff();
-    }
-
-    public void DoDropCmd()
-    {
-        int amount = 1;
-        // Get an item from the inventory/equipment
-        if (!SelectItem(out Item? item, "Drop which item? ", true, true, false, null))
-        {
-            MsgPrint("You have nothing to drop.");
-            return;
-        }
-        if (item == null)
-        {
-            return;
-        }
-        // Can't drop a cursed item
-        if (item.IsInEquipment && item.IsCursed())
-        {
-            MsgPrint("Hmmm, it seems to be cursed.");
-            return;
-        }
-        // It's a stack, so find out how many to drop
-        if (item.Count > 1)
-        {
-            amount = GetQuantity(null, item.Count, true);
-            if (amount <= 0)
-            {
-                return;
-            }
-        }
-        // Dropping things takes half a turn
-        EnergyUse = 50;
-        // Drop it
-        InvenDrop(item, amount);
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
-    }
-
-    public void DoCmdRun()
-    {
-        // Can't run if we're confused
-        if (TimedConfusion.TurnsRemaining != 0)
-        {
-            MsgPrint("You are too confused!");
-            return;
-        }
-        // Get a direction if we don't already have one
-        if (GetDirectionNoAim(out int dir))
-        {
-            // If we don't have a distance, assume we'll run for 1,000 steps
-            Running = CommandArgument != 0 ? CommandArgument : 1000;
-            // Run one step in the chosen direction
-            RunOneStep(dir);
-        }
-    }
-
     public void ReportChargeUsage(Item item)
     {
         if (item.IsKnown())
@@ -9627,92 +9388,6 @@ internal class SaveGame
             {
                 MsgPrint(item.TypeSpecificValue != 1 ? $"There are {item.TypeSpecificValue} charges remaining." : $"There is {item.TypeSpecificValue} charge remaining.");
             }
-        }
-    }
-
-    public void DoCmdFeeling(bool feelingOnly)
-    {
-        string[] DangerFeelingText =
-        {
-            "You're not sure about this level yet", "You feel there is something special about this ",
-            "You nearly faint as horrible visions of death fill your mind", "This level looks very dangerous",
-            "You have a very bad feeling", "You have a bad feeling", "You feel nervous",
-            "You feel unsafe", "You don't like the look of this place",
-            "This level looks reasonably safe", "What a boring place"
-        };
-
-
-        string[] TreasureFeelingText = {
-            "You're not sure about this level yet.", "you feel it contains something special",
-            "treasure galore!", "with a veritable hoard.",
-            "powerful magic can be found here.", "there's magic in the air.", "there's wealth to be found.",
-            "with significant treasure.", "there's not much of value here.",
-            "with nothing of worth.", "what meagre pickings..."
-        };
-
-        // Some sanity checks
-        if (DangerFeeling < 0)
-        {
-            DangerFeeling = 0;
-        }
-        if (DangerFeeling > 10)
-        {
-            DangerFeeling = 10;
-        }
-        if (TreasureFeeling < 0)
-        {
-            TreasureFeeling = 0;
-        }
-        if (TreasureFeeling > 10)
-        {
-            TreasureFeeling = 10;
-        }
-        if (CurrentDepth <= 0)
-        {
-            // If we need to say where we are, do so
-            if (!feelingOnly)
-            {
-                if (Wilderness[WildernessY][WildernessX].Town != null)
-                {
-                    MsgPrint($"You are in {CurTown.Name}.");
-                }
-                else if (Wilderness[WildernessY][WildernessX].Dungeon != null)
-                {
-                    MsgPrint($"You are outside {Wilderness[WildernessY][WildernessX].Dungeon.Name}.");
-                }
-                else
-                {
-                    MsgPrint("You are wandering around outside.");
-                }
-            }
-            // If we're not in a dungeon, there's no feeling to be had
-            return;
-        }
-        // If we need to say where we are, do so
-        if (!feelingOnly)
-        {
-            MsgPrint($"You are in {CurDungeon.Name}.");
-            if (IsQuest(CurrentDepth))
-            {
-                PrintQuestMessage();
-            }
-        }
-        // Special feeling overrides the normal two-part feeling
-        if (DangerFeeling == 1 || TreasureFeeling == 1)
-        {
-            string message = DangerFeelingText[1];
-            MsgPrint(GameTime.LevelFeel ? message : DangerFeelingText[0]);
-        }
-        else
-        {
-            // Make the two-part feeling make a bit more sense by using the correct conjunction
-            string conjunction = ", and ";
-            if ((DangerFeeling > 5 && TreasureFeeling < 6) || (DangerFeeling < 6 && TreasureFeeling > 5))
-            {
-                conjunction = ", but ";
-            }
-            string message = DangerFeelingText[DangerFeeling] + conjunction + TreasureFeelingText[TreasureFeeling];
-            MsgPrint(GameTime.LevelFeel ? message : DangerFeelingText[0]);
         }
     }
 

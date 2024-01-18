@@ -17,8 +17,8 @@ internal class ExamineGameCommand : GameCommand
 
     public override char KeyChar => 'x';
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        return SaveGame.RunScript(nameof(ExamineScript));
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(ExamineScript));
     }
 }

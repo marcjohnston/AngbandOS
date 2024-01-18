@@ -19,8 +19,8 @@ internal class TunnelGameCommand : GameCommand
 
     public override int? Repeat => 99;
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        return SaveGame.RunScript(nameof(TunnelScript));
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(TunnelScript));
     }
 }

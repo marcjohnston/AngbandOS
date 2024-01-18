@@ -17,8 +17,8 @@ internal class DestroyGameCommand : GameCommand
 
     public override char KeyChar => 'k';
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        return SaveGame.RunScript(nameof(DestroyScript));
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(DestroyScript));
     }
 }

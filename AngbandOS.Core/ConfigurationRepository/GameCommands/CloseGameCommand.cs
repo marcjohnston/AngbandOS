@@ -22,8 +22,8 @@ internal class CloseGameCommand : GameCommand
     /// </summary>
     public override int? Repeat => 99;
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        return SaveGame.RunScript(nameof(CloseScript));
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(CloseScript));
     }
 }

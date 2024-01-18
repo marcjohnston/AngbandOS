@@ -17,8 +17,8 @@ internal class RetireGameCommand : GameCommand
 
     public override char KeyChar => 'Q';
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        return SaveGame.RunScript(nameof(RetireScript));
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(RetireScript));
     }
 }

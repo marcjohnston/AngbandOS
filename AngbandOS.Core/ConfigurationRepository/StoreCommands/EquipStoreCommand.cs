@@ -20,6 +20,6 @@ internal class EquipStoreCommand : StoreCommand
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {
-        SaveGame.DoCmdEquip();
+        SaveGame.RunScript(nameof(EquipScript));
     }
 }

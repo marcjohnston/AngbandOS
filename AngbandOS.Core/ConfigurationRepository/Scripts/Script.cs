@@ -22,7 +22,7 @@ internal abstract class Script : IGetKey<string>
     public virtual void Loaded() { }
 
     /// <summary>
-    /// Execute the script and return true, if the script fails due to chance.  A true return value indicates to the parent, that if the process is repeated, the process may succeed.
+    /// Execute the script and return true, if the script fails due to chance; otherwise, false is returned.  A true return value indicates to the parent, that if the script/process is repeated, the process may succeed.
     /// </summary>
     /// <returns></returns>
     public abstract bool Execute();

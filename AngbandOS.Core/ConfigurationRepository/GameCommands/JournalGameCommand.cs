@@ -17,8 +17,8 @@ internal class JournalGameCommand : GameCommand
 
     public override char KeyChar => 'J';
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        return SaveGame.RunScript(nameof(JournalScript));
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(JournalScript));
     }
 }

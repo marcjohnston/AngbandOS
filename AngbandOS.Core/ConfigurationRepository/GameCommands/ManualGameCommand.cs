@@ -17,8 +17,8 @@ internal class ManualGameCommand : GameCommand
 
     public override char KeyChar => 'h';
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        return SaveGame.RunScript(nameof(ShowManualScript));
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(ShowManualScript));
     }
 }

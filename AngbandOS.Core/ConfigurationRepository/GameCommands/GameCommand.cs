@@ -32,10 +32,15 @@ internal abstract class GameCommand : IGetKey<string>
 
     public virtual bool IsEnabled => true;
 
+    public Script ExecuteScript { get; protected set; }
+
     /// <summary>
     /// 
     /// </summary>
     /// <param name="saveGame"></param>
     /// <returns>Returns true, if the command can/should be repeated; false, if the command succeeded or is futile.</returns>
-    public abstract bool Execute();
+    public bool Execute()
+    {
+        return ExecuteScript.Execute();
+    }
 }

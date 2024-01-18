@@ -17,9 +17,8 @@ internal class DropGameCommand : GameCommand
 
     public override char KeyChar => 'd';
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        SaveGame.DoDropCmd();
-        return false;
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(DropScript));
     }
 }

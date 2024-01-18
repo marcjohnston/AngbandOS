@@ -17,8 +17,8 @@ internal class BrowseGameCommand : GameCommand
 
     public override char KeyChar => 'b';
 
-    public override bool Execute()
+    public override void Loaded()
     {
-        return SaveGame.RunScript(nameof(BrowseScript));
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(BrowseScript));
     }
 }
