@@ -15,7 +15,7 @@ internal class HardLeatherCapOfTheMindcrafterFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<HelmHardLeatherCap>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(HelmHardLeatherCap));
     }
 
 

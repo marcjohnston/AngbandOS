@@ -12,5 +12,5 @@ internal class LuminTheBlueStoreOwner : StoreOwner
     public override string OwnerName => "Lumin the Blue";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  108;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<SpectreRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(SpectreRace));
 }

@@ -13,14 +13,14 @@ internal class RadiationEyeMonsterRace : MonsterRace
     protected RadiationEyeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<DrainManaMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DrainManaMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerESymbol));
     public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Radiation eye";
 
     public override int ArmourClass => 6;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<GazeAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseStrAttackEffect>(), 1, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(GazeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseStrAttackEffect)), 1, 6),
     };
     public override string Description => "A disembodied eye, crackling with energy.";
     public override int FreqInate => 11;

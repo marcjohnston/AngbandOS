@@ -16,10 +16,10 @@ internal class LearnAboutObjectsWizardCommand : WizardCommand
 
     public override string HelpDescription => "Learn About Objects";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardObjectCommandsHelpGroup>();
+    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardObjectCommandsHelpGroup));
 
     public override void Execute()
     {
-        SaveGame.RunScript<WizardLearnScript>();
+        SaveGame.RunScript(nameof(WizardLearnScript));
     }
 }

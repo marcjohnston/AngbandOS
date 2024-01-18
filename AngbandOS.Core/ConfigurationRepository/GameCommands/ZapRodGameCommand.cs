@@ -20,6 +20,6 @@ internal class ZapRodGameCommand : GameCommand
 
     public override bool Execute()
     {
-        return SaveGame.RunScript<ZapRodScript>();
+        return SaveGame.RunScript(nameof(ZapRodScript));
     }
 }

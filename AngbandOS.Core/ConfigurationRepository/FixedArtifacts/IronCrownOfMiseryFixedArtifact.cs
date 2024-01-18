@@ -15,7 +15,7 @@ internal class IronCrownOfMiseryFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<IronCrownArmorItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(IronCrownArmorItemFactory));
     }
 
 

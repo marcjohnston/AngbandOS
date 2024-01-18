@@ -13,7 +13,7 @@ internal class BasiliskMonsterRace : MonsterRace
     protected BasiliskMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreathePoisonMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreathePoisonMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperRSymbol));
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Basilisk";
@@ -21,10 +21,10 @@ internal class BasiliskMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 90;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<GazeAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<ParalyzeAttackEffect>(), 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 2, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 2, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 2, 12)
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(GazeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ParalyzeAttackEffect)), 0, 0),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 12),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 12),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 12)
     };
     public override bool BashDoor => true;
     public override string Description => "An evil reptile whose eyes stare deeply at you and your soul starts to wilt!";

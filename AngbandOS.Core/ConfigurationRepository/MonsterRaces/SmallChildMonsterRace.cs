@@ -18,7 +18,7 @@ internal class SmallChildMonsterRace : MonsterRace
 
     public override int ArmourClass => 1;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<WorshipAttack>(), null, 0, 0),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(WorshipAttack)), null, 0, 0),
     };
     public override string Description => "A rather cute child with large trusting eyes.";
     public override int FreqInate => 0;

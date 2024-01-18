@@ -13,20 +13,20 @@ internal class DimensionalShamblerMonsterRace : MonsterRace
     protected DimensionalShamblerMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<HasteMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<HealMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportSelfMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlindnessMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ConfuseMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlinkMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HasteMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HealMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportSelfMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperASymbol));
     public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "Dimensional shambler";
 
     public override int ArmourClass => 68;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 5),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 5),
     };
     public override bool BashDoor => true;
     public override bool Cthuloid => true;

@@ -14,7 +14,7 @@ internal class BlueDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFac
 {
     private BlueDragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    //public override Activation? ActivationPower => SaveGame.SingletonRepository.Activations.Get<BreatheLightingActivation>();
+    //public override Activation? ActivationPower => SaveGame.SingletonRepository.Activations.Get(nameof(BreatheLightingActivation));
     public override string? DescribeActivationEffect =>"breathe lightning (100) every 450+d450 turns";
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));

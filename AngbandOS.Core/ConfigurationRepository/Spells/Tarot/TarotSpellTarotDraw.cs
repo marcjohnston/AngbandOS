@@ -157,7 +157,7 @@ internal class TarotSpellTarotDraw : Spell
             {
                 SaveGame.MsgPrint("You are cured of all mutations.");
                 SaveGame.Dna.LoseAllMutations();
-                SaveGame.SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+                SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
                 SaveGame.HandleStuff();
             }
         }
@@ -274,7 +274,7 @@ internal class TarotSpellTarotDraw : Spell
                 break;
 
             case 32:
-                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>(), 0, spell + 5, 1 + (spell / 10));
+                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), 0, spell + 5, 1 + (spell / 10));
                 break;
 
             case 33:

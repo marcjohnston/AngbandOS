@@ -13,16 +13,16 @@ internal class IceElementalMonsterRace : MonsterRace
     protected IceElementalMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<ColdBallMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<IceBoltMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ColdBallMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(IceBoltMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperESymbol));
     public override string Name => "Ice elemental";
 
     public override int ArmourClass => 60;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<ColdAttackEffect>(), 1, 3),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 4, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<ColdAttackEffect>(), 1, 3),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ColdAttackEffect)), 1, 3),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 4, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ColdAttackEffect)), 1, 3),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

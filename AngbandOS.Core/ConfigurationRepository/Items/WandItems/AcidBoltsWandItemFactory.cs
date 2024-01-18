@@ -25,7 +25,7 @@ internal class AcidBoltsWandItemFactory : WandItemFactory
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {
-        saveGame.FireBoltOrBeam(20, saveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir, SaveGame.Rng.DiceRoll(3, 8));
+        saveGame.FireBoltOrBeam(20, saveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, SaveGame.Rng.DiceRoll(3, 8));
         return true;
     }
     public override Item CreateItem() => new AcidBoltsWandItem(SaveGame);

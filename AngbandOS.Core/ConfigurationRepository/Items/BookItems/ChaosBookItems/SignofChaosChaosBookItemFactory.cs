@@ -28,14 +28,14 @@ internal class SignOfChaosChaosBookItemFactory : ChaosBookItemFactory
 
     public override Spell[] Spells => new Spell[]
     {
-        SaveGame.SingletonRepository.Spells.Get<ChaosSpellMagicMissile>(),
-        SaveGame.SingletonRepository.Spells.Get<ChaosSpellTrapAndDoorDestruction>(),
-        SaveGame.SingletonRepository.Spells.Get<ChaosSpellFlashOfLight>(),
-        SaveGame.SingletonRepository.Spells.Get<ChaosSpellTouchOfConfusion>(),
-        SaveGame.SingletonRepository.Spells.Get<ChaosSpellManaBurst>(),
-        SaveGame.SingletonRepository.Spells.Get<ChaosSpellFireBolt>(),
-        SaveGame.SingletonRepository.Spells.Get<ChaosSpellFistOfForce>(),
-        SaveGame.SingletonRepository.Spells.Get<ChaosSpellTeleportSelf>()
+        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellMagicMissile)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellTrapAndDoorDestruction)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellFlashOfLight)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellTouchOfConfusion)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellManaBurst)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellFireBolt)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellFistOfForce)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellTeleportSelf))
     };
 
     public override Item CreateItem() => new SignOfChaosChaosBookItem(SaveGame);

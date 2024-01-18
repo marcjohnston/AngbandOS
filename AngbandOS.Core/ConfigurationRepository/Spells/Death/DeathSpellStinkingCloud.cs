@@ -17,7 +17,7 @@ internal class DeathSpellStinkingCloud : Spell
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), dir, 10 + (SaveGame.ExperienceLevel / 2), 2);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), dir, 10 + (SaveGame.ExperienceLevel / 2), 2);
     }
 
     public override void CastFailed()

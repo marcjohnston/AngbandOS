@@ -15,7 +15,7 @@ internal class AmuletOfAbdulAlhazredFixedArtifact : FixedArtifact, IFixedArtifac
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<IngweAmuletJeweleryItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(IngweAmuletJeweleryItemFactory));
     }
 
 

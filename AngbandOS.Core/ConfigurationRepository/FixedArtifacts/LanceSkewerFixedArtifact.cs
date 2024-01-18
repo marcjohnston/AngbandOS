@@ -15,7 +15,7 @@ internal class LanceSkewerFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<PolearmLance>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(PolearmLance));
     }
 
 

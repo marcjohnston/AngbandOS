@@ -18,10 +18,10 @@ internal class FireAttackEffect : AttackEffect
         obvious = true;
         SaveGame.MsgPrint("You are enveloped in flames!");
         SaveGame.FireDam(damage, monsterDescription);
-        SaveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<FireSpellResistantDetection>());
+        SaveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(FireSpellResistantDetection)));
     }
     public override void ApplyToMonster(Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
-        pt = SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>();
+        pt = SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile));
     }
 }

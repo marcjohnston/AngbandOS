@@ -29,13 +29,13 @@ internal class NatureMasteryNatureBookItemFactory : NatureBookItemFactory
 
     public override Spell[] Spells => new Spell[]
     {
-        SaveGame.SingletonRepository.Spells.Get<NatureSpellStoneToMud>(),
-        SaveGame.SingletonRepository.Spells.Get<NatureSpellLightningBolt>(),
-        SaveGame.SingletonRepository.Spells.Get<NatureSpellNatureAwareness>(),
-        SaveGame.SingletonRepository.Spells.Get<NatureSpellFrostBolt>(),
-        SaveGame.SingletonRepository.Spells.Get<NatureSpellRayOfSunlight>(),
-        SaveGame.SingletonRepository.Spells.Get<NatureSpellEntangle>(),
-        SaveGame.SingletonRepository.Spells.Get<NatureSpellSummonAnimal>(),
-        SaveGame.SingletonRepository.Spells.Get<NatureSpellHerbalHealing>()
+        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellStoneToMud)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellLightningBolt)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellNatureAwareness)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellFrostBolt)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellRayOfSunlight)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellEntangle)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellSummonAnimal)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellHerbalHealing))
     };
 }

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class ChestTrapsRepositoryCollection : DictionaryRepositoryCollection<ChestTrap>
+internal class ChestTrapsRepositoryCollection : KeyedDictionaryRepositoryCollection<string, ChestTrap>
 {
     public ChestTrapsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 }

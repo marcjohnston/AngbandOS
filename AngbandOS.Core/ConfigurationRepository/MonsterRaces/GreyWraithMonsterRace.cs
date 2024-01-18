@@ -13,19 +13,19 @@ internal class GreyWraithMonsterRace : MonsterRace
     protected GreyWraithMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<CauseCriticalWoundsMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<HoldMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<DarknessMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseCriticalWoundsMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HoldMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DarknessMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperWSymbol));
     public override ColourEnum Colour => ColourEnum.BrightGrey;
     public override string Name => "Grey wraith";
 
     public override int ArmourClass => 50;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 10),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 10),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<TouchAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<Exp40AttackEffect>(), 0, 0),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 10),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 10),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp40AttackEffect)), 0, 0),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

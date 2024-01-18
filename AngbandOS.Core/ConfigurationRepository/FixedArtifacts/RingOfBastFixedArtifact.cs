@@ -15,7 +15,7 @@ internal class RingOfBastFixedArtifact : FixedArtifact, IFixedArtifactActivatibl
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<TulkasRingItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(TulkasRingItemFactory));
     }
 
 

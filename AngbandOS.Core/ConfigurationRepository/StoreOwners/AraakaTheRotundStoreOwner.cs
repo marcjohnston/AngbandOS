@@ -12,5 +12,5 @@ internal class AraakaTheRotundStoreOwner : StoreOwner
     public override string OwnerName => "Araaka the Rotund";
     public override int MaxCost =>  1000;
     public override int MinInflate =>  107;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<DraconianRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(DraconianRace));
 }

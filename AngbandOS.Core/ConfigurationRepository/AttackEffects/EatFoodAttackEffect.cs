@@ -19,7 +19,7 @@ internal class EatFoodAttackEffect : AttackEffect
         // Have ten tries at grabbing a food item from the player
         for (int k = 0; k < 10; k++)
         {
-            BaseInventorySlot packInventorySlot = SaveGame.SingletonRepository.InventorySlots.Get<PackInventorySlot>();
+            BaseInventorySlot packInventorySlot = SaveGame.SingletonRepository.InventorySlots.Get(nameof(PackInventorySlot));
             int i = packInventorySlot.WeightedRandom.Choose();
             Item? item = SaveGame.GetInventoryItem(i);
             if (item != null && item.Factory.CanBeEatenByMonsters)

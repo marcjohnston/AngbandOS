@@ -32,7 +32,7 @@ internal class NewLifePotionItemFactory : PotionItemFactory
         {
             SaveGame.MsgPrint("You are cured of all mutations.");
             SaveGame.Dna.LoseAllMutations();
-            SaveGame.SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
             SaveGame.HandleStuff();
         }
         if (!(SaveGame.Race.GetType() == SaveGame.RaceAtBirth.GetType()))

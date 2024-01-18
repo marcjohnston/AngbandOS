@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Dungeons;
 /// A dungeon that the player can explore
 /// </summary>
 [Serializable]
-internal abstract class Dungeon
+internal abstract class Dungeon : IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
 
@@ -22,6 +22,10 @@ internal abstract class Dungeon
         SaveGame = saveGame;
         Offset = BaseOffset;
     }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     /// <summary>
     /// Returns the deepest level the player has achieved for Word of Recall.

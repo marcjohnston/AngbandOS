@@ -20,6 +20,6 @@ internal class WieldStoreCommand : StoreCommand
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {
-        SaveGame.RunScript<WieldScript>();
+        SaveGame.RunScript(nameof(WieldScript));
     }
 }

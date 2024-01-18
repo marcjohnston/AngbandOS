@@ -18,7 +18,7 @@ internal class GreenIckyThingMonsterRace : MonsterRace
 
     public override int ArmourClass => 12;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<TouchAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<AcidAttackEffect>(), 2, 5),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 2, 5),
     };
     public override string Description => "It is a smallish, slimy, icky, acidic creature.";
     public override bool EmptyMind => true;

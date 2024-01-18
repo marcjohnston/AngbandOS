@@ -12,5 +12,5 @@ internal class FasgulStoreOwner : StoreOwner
     public override string OwnerName => "Fasgul";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  112;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<ZombieRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(ZombieRace));
 }

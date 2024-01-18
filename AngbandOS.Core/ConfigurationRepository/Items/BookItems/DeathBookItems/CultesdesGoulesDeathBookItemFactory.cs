@@ -38,13 +38,13 @@ internal class CultesdesGoulesDeathBookItemFactory : DeathBookItemFactory
 
     public override Spell[] Spells => new Spell[]
     {
-        SaveGame.SingletonRepository.Spells.Get<DeathSpellBerserk>(),
-        SaveGame.SingletonRepository.Spells.Get<DeathSpellInvokeSpirits>(),
-        SaveGame.SingletonRepository.Spells.Get<DeathSpellDarkBolt>(),
-        SaveGame.SingletonRepository.Spells.Get<DeathSpellBattleFrenzy>(),
-        SaveGame.SingletonRepository.Spells.Get<DeathSpellVampirismTrue>(),
-        SaveGame.SingletonRepository.Spells.Get<DeathSpellVampiricBranding>(),
-        SaveGame.SingletonRepository.Spells.Get<DeathSpellDarknessStorm>(),
-        SaveGame.SingletonRepository.Spells.Get<DeathSpellMassCarnage>()
+        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellBerserk)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellInvokeSpirits)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellDarkBolt)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellBattleFrenzy)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellVampirismTrue)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellVampiricBranding)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellDarknessStorm)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellMassCarnage))
     };
 }

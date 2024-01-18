@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class ColdBallsRodItem : RodItem
 {
-    public ColdBallsRodItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<RodColdBalls>()) { }
+    public ColdBallsRodItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(RodColdBalls))) { }
 }

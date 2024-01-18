@@ -19,6 +19,6 @@ internal class MessageOneGameCommand : GameCommand
 
     public override bool Execute()
     {
-        return SaveGame.RunScript<MessageOneScript>();
+        return SaveGame.RunScript(nameof(MessageOneScript));
     }
 }

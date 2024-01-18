@@ -15,7 +15,7 @@ internal class LargeMetalShieldOfStabilityFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<ShieldLargeMetalShield>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(ShieldLargeMetalShield));
     }
 
 

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class PseudoDragonScaleMailArmorItem : DragonScaleMailArmorItem, IItemActivatable
 {
-    public PseudoDragonScaleMailArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<PseudoDragonScaleMailArmorItemFactory>()) { }
+    public PseudoDragonScaleMailArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(PseudoDragonScaleMailArmorItemFactory))) { }
     public void DoActivate()
     {
         if (!SaveGame.GetDirectionWithAim(out int dir))
@@ -20,7 +20,7 @@ internal class PseudoDragonScaleMailArmorItem : DragonScaleMailArmorItem, IItemA
         int chance = SaveGame.Rng.RandomLessThan(2);
         string element = chance == 0 ? "light" : "darkness";
         SaveGame.MsgPrint($"You breathe {element}.");
-        SaveGame.FireBall(chance == 0 ? (Projectile)SaveGame.SingletonRepository.Projectiles.Get<LightProjectile>() : SaveGame.SingletonRepository.Projectiles.Get<DarkProjectile>(), dir, 200, -2);
+        SaveGame.FireBall(chance == 0 ? (Projectile)SaveGame.SingletonRepository.Projectiles.Get(nameof(LightProjectile)) : SaveGame.SingletonRepository.Projectiles.Get(nameof(DarkProjectile)), dir, 200, -2);
         RechargeTimeLeft = SaveGame.Rng.RandomLessThan(300) + 300;
     }
 }

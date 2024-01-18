@@ -12,11 +12,11 @@ internal class PoisProjectile : Projectile
 {
     private PoisProjectile(SaveGame saveGame) : base(saveGame) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<GreenBulletProjectileGraphic>();
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(GreenBulletProjectileGraphic));
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<GreenSplatProjectileGraphic>();
+    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(GreenSplatProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<GreenCloudAnimation>();
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(GreenCloudAnimation));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {

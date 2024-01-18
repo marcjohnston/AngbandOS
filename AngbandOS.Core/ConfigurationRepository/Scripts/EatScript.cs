@@ -39,7 +39,7 @@ internal class EatScript : Script
         // Allow the food item to process the consumption.
         bool ident = foodItem.Factory.Eat();
 
-        SaveGame.SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
 
         // We've tried this type of object
         item.ObjectTried();

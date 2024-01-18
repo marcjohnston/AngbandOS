@@ -15,7 +15,7 @@ internal class SetOfGauntletsOfThanosFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<GauntletGlovesArmorItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(GauntletGlovesArmorItemFactory));
     }
 
 

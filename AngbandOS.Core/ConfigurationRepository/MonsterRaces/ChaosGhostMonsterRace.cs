@@ -13,19 +13,19 @@ internal class ChaosGhostMonsterRace : MonsterRace
     protected ChaosGhostMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<DrainManaMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<HoldMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<ForgetMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlindnessMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DrainManaMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HoldMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ForgetMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperGSymbol));
     public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Chaos ghost";
 
     public override int ArmourClass => 30;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<WailAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<TerrifyAttackEffect>(), 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<TouchAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<Exp40AttackEffect>(), 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<ClawAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseIntAttackEffect>(), 1, 10),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(WailAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(TerrifyAttackEffect)), 0, 0),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp40AttackEffect)), 0, 0),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseIntAttackEffect)), 1, 10),
     };
     public override bool AttrAny => true;
     public override bool AttrMulti => true;

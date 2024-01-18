@@ -12,5 +12,5 @@ internal class GlarunaBrandybreathStoreOwner : StoreOwner
     public override string OwnerName => "Glaruna Brandybreath";
     public override int MaxCost =>  20000;
     public override int MinInflate =>  105;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<DwarfRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(DwarfRace));
 }

@@ -38,13 +38,13 @@ internal class CeleanoFragmentsTarotBookItemFactory : TarotBookItemFactory
 
     public override Spell[] Spells => new Spell[]
     {
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellEtherealDivination>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellAstralLore>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellSummonUndead>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellSummonDragon>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellMassSummons>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellSummonDemon>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellSummonAncientDragon>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellSummonGreaterUndead>()
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellEtherealDivination)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellAstralLore)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellSummonUndead)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellSummonDragon)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellMassSummons)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellSummonDemon)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellSummonAncientDragon)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellSummonGreaterUndead))
     };
 }

@@ -13,17 +13,17 @@ internal class NoviceMageMonsterRace : MonsterRace
     protected NoviceMageMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<MagicMissileMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlindnessMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ConfuseMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(MagicMissileMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlinkMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
     public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Novice mage";
 
     public override int ArmourClass => 6;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 4),
     };
     public override bool BashDoor => true;
     public override string Description => "He is leaving behind a trail of dropped spell components.";

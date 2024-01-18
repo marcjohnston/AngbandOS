@@ -24,7 +24,7 @@ internal class BaMiss3Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), direction, 300, -4);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), direction, 300, -4);
         return true;
     }
 

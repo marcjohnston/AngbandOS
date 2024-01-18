@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class ElvenCloakArmorItem : CloakArmorItem
 {
-    public ElvenCloakArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ElvenCloakArmorItemFactory>()) { }
+    public ElvenCloakArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(ElvenCloakArmorItemFactory))) { }
 
     protected override void ApplyMagic(int level, int power, Store? store)
     {

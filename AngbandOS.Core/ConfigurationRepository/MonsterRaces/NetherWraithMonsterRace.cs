@@ -13,22 +13,22 @@ internal class NetherWraithMonsterRace : MonsterRace
     protected NetherWraithMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<CauseCriticalWoundsMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<MindBlastMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<NetherBoltMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<DarknessMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlindnessMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseCriticalWoundsMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(MindBlastMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(NetherBoltMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DarknessMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperWSymbol));
     public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Nether wraith";
 
     public override int ArmourClass => 55;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<TouchAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<Exp80AttackEffect>(), 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<TouchAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<Exp80AttackEffect>(), 0, 0)
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 12),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 12),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp80AttackEffect)), 0, 0),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp80AttackEffect)), 0, 0)
     };
     public override bool ColdBlood => true;
     public override string Description => "A form that hurts the eye, death permeates the air around it. As it nears you, a coldness saps your soul.";

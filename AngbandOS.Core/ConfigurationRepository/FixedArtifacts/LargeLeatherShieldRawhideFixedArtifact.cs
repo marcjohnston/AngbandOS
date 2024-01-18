@@ -15,7 +15,7 @@ internal class LargeLeatherShieldRawhideFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<ShieldLargeLeatherShield>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(ShieldLargeLeatherShield));
     }
 
 

@@ -12,5 +12,5 @@ internal class GranthusStoreOwner : StoreOwner
     public override string OwnerName => "Granthus";
     public override int MaxCost =>  750;
     public override int MinInflate =>  107;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<SkeletonRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(SkeletonRace));
 }

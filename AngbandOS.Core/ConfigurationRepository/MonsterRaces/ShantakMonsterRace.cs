@@ -13,8 +13,8 @@ internal class ShantakMonsterRace : MonsterRace
     protected ShantakMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<HasteMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HasteMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperBSymbol));
     public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "Shantak";
@@ -22,9 +22,9 @@ internal class ShantakMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 55;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 6),
     };
     public override bool Cthuloid => true;
     public override string Description => "A scaly bird larger than an elephant, with a horse-like head.";

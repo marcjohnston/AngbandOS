@@ -13,10 +13,10 @@ internal class HoundOfTindalosMonsterRace : MonsterRace
     protected HoundOfTindalosMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheNetherMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheTimeMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheNetherMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheTimeMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlinkMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportToMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperCSymbol));
     public override ColourEnum Colour => ColourEnum.Chartreuse;
     public override string Name => "Hound of Tindalos";
@@ -24,10 +24,10 @@ internal class HoundOfTindalosMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 100;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseWisAttackEffect>(), 2, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseWisAttackEffect>(), 2, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseWisAttackEffect>(), 2, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<ClawAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 3)
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseWisAttackEffect)), 2, 12),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseWisAttackEffect)), 2, 12),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseWisAttackEffect)), 2, 12),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 3)
     };
     public override bool Cthuloid => true;
     public override string Description => "'They are lean and athirst!'";

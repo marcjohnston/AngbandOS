@@ -27,12 +27,12 @@ internal class NeuralBlastTalent : Talent
         }
         if (SaveGame.Rng.DieRoll(100) < SaveGame.ExperienceLevel * 2)
         {
-            SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir,
+            SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get(nameof(PsiProjectile)), dir,
                 SaveGame.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 4), 3 + (SaveGame.ExperienceLevel / 15)));
         }
         else
         {
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir,
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(PsiProjectile)), dir,
                 SaveGame.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 4), 3 + (SaveGame.ExperienceLevel / 15)), 0);
         }
     }

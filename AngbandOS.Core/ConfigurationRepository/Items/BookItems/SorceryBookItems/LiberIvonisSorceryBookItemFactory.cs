@@ -38,13 +38,13 @@ internal class LiberIvonisSorceryBookItemFactory : SorceryBookItemFactory
 
     public override Spell[] Spells => new Spell[]
     {
-        SaveGame.SingletonRepository.Spells.Get<SorcerySpellStasis>(),
-        SaveGame.SingletonRepository.Spells.Get<SorcerySpellTelekinesis>(),
-        SaveGame.SingletonRepository.Spells.Get<SorcerySpellYellowSign>(),
-        SaveGame.SingletonRepository.Spells.Get<SorcerySpellClairvoyance>(),
-        SaveGame.SingletonRepository.Spells.Get<SorcerySpellEnchantWeapon>(),
-        SaveGame.SingletonRepository.Spells.Get<SorcerySpellEnchantArmour>(),
-        SaveGame.SingletonRepository.Spells.Get<SorcerySpellAlchemy>(),
-        SaveGame.SingletonRepository.Spells.Get<SorcerySpellGlobeOfInvulnerability>()
+        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellStasis)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellTelekinesis)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellYellowSign)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellClairvoyance)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellEnchantWeapon)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellEnchantArmour)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellAlchemy)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellGlobeOfInvulnerability))
     };
 }

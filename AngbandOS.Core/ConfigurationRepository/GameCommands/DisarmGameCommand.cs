@@ -21,6 +21,6 @@ internal class DisarmGameCommand : GameCommand
 
     public override bool Execute()
     {
-        return SaveGame.RunScript<DisarmScript>();
+        return SaveGame.RunScript(nameof(DisarmScript));
     }
 }

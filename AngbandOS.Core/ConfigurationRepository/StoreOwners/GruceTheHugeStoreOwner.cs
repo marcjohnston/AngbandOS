@@ -12,5 +12,5 @@ internal class GruceTheHugeStoreOwner : StoreOwner
     public override string OwnerName => "Gruce the Huge";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  111;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<HalfGiantRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HalfGiantRace));
 }

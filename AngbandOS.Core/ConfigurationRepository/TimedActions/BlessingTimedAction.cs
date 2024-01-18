@@ -21,7 +21,7 @@ internal class BlessingTimedAction : TimedAction
     }
     protected override void Noticed()
     {
-        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         base.Noticed();
     }
 }

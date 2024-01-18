@@ -12,9 +12,9 @@ internal class NexusProjectile : Projectile
 {
     private NexusProjectile(SaveGame saveGame) : base(saveGame) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<PinkBulletProjectileGraphic>();
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(PinkBulletProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<PinkSwirlAnimation>();
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(PinkSwirlAnimation));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {

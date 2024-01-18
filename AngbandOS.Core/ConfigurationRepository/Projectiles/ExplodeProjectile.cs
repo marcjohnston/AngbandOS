@@ -12,9 +12,9 @@ internal class ExplodeProjectile : Projectile
 {
     private ExplodeProjectile(SaveGame saveGame) : base(saveGame) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<BrightRedSplatProjectileGraphic>();
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BrightRedSplatProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<RedOrangeFlashAnimation>();
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(RedOrangeFlashAnimation));
 
     protected override bool AffectItem(int who, int y, int x)
     {

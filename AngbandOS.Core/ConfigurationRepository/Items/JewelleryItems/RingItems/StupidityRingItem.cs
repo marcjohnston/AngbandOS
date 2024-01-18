@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class StupidityRingItem : RingItem
 {
-    public StupidityRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<StupidityRingItemFactory>()) { }
+    public StupidityRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(StupidityRingItemFactory))) { }
     protected override void ApplyMagic(int level, int power, Store? store)
     {
         IdentBroken = true;

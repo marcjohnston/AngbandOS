@@ -13,41 +13,41 @@ internal class GreatWyrmOfPowerMonsterRace : MonsterRace
     protected GreatWyrmOfPowerMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheAcidMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheChaosMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheColdMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheConfusionMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheDarkMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheDisenchantMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheDisintegrationMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheLightningMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheFireMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheForceMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheGravityMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheInertiaMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheLightMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheManaMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheNetherMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheNexusMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreathePlasmaMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreathePoisonMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheRadiationMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheShardsMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheSoundMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheTimeMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<SummonDragonMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<SummonHiDragonMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<SummonKinMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheAcidMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheChaosMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheColdMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheConfusionMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheDarkMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheDisenchantMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheDisintegrationMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheLightningMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheFireMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheForceMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheGravityMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheInertiaMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheLightMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheManaMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheNetherMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheNexusMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreathePlasmaMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreathePoisonMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheRadiationMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheShardsMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheSoundMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheTimeMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonDragonMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonHiDragonMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonKinMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperDSymbol));
     public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "Great Wyrm of Power";
 
     public override int ArmourClass => 111;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<CrushAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 8, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<CrushAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 8, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<CrushAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<ElectricityAttackEffect>(), 8, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<CrushAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 10, 18)
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 8, 12),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 8, 12),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ElectricityAttackEffect)), 8, 12),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 10, 18)
     };
     public override bool BashDoor => true;
     public override string Description => "The mightiest of all dragonkind, a great wyrm of power is seldom encountered in our world. It can crush stars with its might.";

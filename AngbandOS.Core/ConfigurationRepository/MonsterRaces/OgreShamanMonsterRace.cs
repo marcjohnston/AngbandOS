@@ -13,22 +13,22 @@ internal class OgreShamanMonsterRace : MonsterRace
     protected OgreShamanMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<CauseSeriousWoundsMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<FireBoltMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<HoldMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<CreateTrapsMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonsterMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportSelfMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseSeriousWoundsMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(FireBoltMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HoldMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CreateTrapsMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonMonsterMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportSelfMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperOSymbol));
     public override ColourEnum Colour => ColourEnum.Blue;
     public override string Name => "Ogre shaman";
 
     public override int ArmourClass => 55;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "It is an ogre wrapped in furs and covered in grotesque body paints.";

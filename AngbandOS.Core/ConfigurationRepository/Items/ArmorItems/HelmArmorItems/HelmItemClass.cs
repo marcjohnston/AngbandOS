@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class HelmItemClass : ArmourItemFactory
 {
     public HelmItemClass(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get<HelmsItemClass>();
-    public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<HeadInventorySlot>();
+    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(HelmsItemClass));
+    public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(HeadInventorySlot));
     public override int PackSort => 25;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Helm;
     public override bool HatesAcid => true;

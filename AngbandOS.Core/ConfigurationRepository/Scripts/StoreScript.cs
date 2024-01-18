@@ -29,8 +29,8 @@ internal class StoreScript : Script
             return false;
         }
         // Switch from the normal game interface to the store interface
-        SaveGame.SingletonRepository.FlaggedActions.Get<RemoveLightFlaggedAction>().Check(true);
-        SaveGame.SingletonRepository.FlaggedActions.Get<RemoveViewFlaggedAction>().Check(true);
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Check(true);
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RemoveViewFlaggedAction)).Check(true);
         SaveGame.FullScreenOverlay = true;
         SaveGame.CommandArgument = 0;
         //            CommandRepeat = 0; TODO: Confirm this is not needed

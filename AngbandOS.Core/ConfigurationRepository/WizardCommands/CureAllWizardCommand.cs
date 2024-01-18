@@ -16,10 +16,10 @@ internal class CureAllWizardCommand : WizardCommand
 
     public override string HelpDescription => "Cure All";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardCharacterEditingHelpGroup>();
+    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardCharacterEditingHelpGroup));
 
     public override void Execute()
     {
-        SaveGame.RunScript<WizardCureAllScript>();
+        SaveGame.RunScript(nameof(WizardCureAllScript));
     }
 }

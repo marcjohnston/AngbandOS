@@ -59,23 +59,23 @@ internal class MonkCharacterClass : BaseCharacterClass
         "WIS based casters using Chaos, Tarot or Corporeal magic."
     };
     public override int SpellWeight => 300;
-    public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get<DivineCastingType>();
+    public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get(nameof(DivineCastingType));
     public override int SpellStat => Ability.Wisdom;
     public override int MaximumMeleeAttacksPerRound(int level) => level < 40 ? 3 : 4;
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 4;
-    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get<PriestlyArtifactBias>();
+    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
     public override bool SenseInventoryTest(int level) => (0 != SaveGame.Rng.RandomLessThan(20000 / ((level * level) + 40)));
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        SaveGame.SingletonRepository.Realms.Get<ChaosRealm>(),
-        SaveGame.SingletonRepository.Realms.Get<TarotRealm>(),
-        SaveGame.SingletonRepository.Realms.Get<CorporealRealm>()
+        SaveGame.SingletonRepository.Realms.Get(nameof(ChaosRealm)),
+        SaveGame.SingletonRepository.Realms.Get(nameof(TarotRealm)),
+        SaveGame.SingletonRepository.Realms.Get(nameof(CorporealRealm))
     };
 
     protected override ItemFactory[] Outfit => new ItemFactory[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get<BeginnersHandbookSorceryBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<HealingPotionItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<SoftLeatherSoftArmorItemFactory>()
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(BeginnersHandbookSorceryBookItemFactory)),
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(HealingPotionItemFactory)),
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SoftLeatherSoftArmorItemFactory))
     };
 }

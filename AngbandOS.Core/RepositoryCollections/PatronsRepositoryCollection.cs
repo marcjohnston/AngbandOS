@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class PatronsRepositoryCollection : DictionaryRepositoryCollection<Patron>
+internal class PatronsRepositoryCollection : KeyedDictionaryRepositoryCollection<string, Patron>
 {
     public PatronsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 }

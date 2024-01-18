@@ -39,13 +39,13 @@ internal class AzathothChaosBookItemFactory : ChaosBookItemFactory
 
     public override Spell[] Spells => new Spell[]
     {
-        SaveGame.SingletonRepository.Spells.Get<ChaosSpellGravityBeam>(),
-        SaveGame.SingletonRepository.Spells.Get<ChaosSpellMeteorSwarm>(),
-        SaveGame.SingletonRepository.Spells.Get<ChaosSpellFlameStrike>(),
-        SaveGame.SingletonRepository.Spells.Get<ChaosSpellCallChaos>(),
-        SaveGame.SingletonRepository.Spells.Get<ChaosSpellShardBall>(),
-        SaveGame.SingletonRepository.Spells.Get<ChaosSpellManaStorm>(),
-        SaveGame.SingletonRepository.Spells.Get<ChaosSpellBreatheChaos>(),
-        SaveGame.SingletonRepository.Spells.Get<ChaosSpellCallTheVoid>()
+        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellGravityBeam)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellMeteorSwarm)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellFlameStrike)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellCallChaos)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellShardBall)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellManaStorm)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellBreatheChaos)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellCallTheVoid))
     };
 }

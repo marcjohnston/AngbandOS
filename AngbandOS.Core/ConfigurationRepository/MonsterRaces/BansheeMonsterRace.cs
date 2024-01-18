@@ -13,16 +13,16 @@ internal class BansheeMonsterRace : MonsterRace
     protected BansheeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<DrainManaMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportSelfMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DrainManaMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportSelfMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperGSymbol));
     public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "Banshee";
 
     public override int ArmourClass => 24;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<WailAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<TerrifyAttackEffect>(), 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<TouchAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<Exp20AttackEffect>(), 0, 0),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(WailAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(TerrifyAttackEffect)), 0, 0),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp20AttackEffect)), 0, 0),
     };
     public override bool ColdBlood => true;
     public override string Description => "It is a ghostly woman's form that wails mournfully.";

@@ -15,7 +15,7 @@ internal class SpearGungnirFixedArtifact : FixedArtifact, IFixedArtifactActivati
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<PolearmSpear>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(PolearmSpear));
     }
 
 
@@ -27,7 +27,7 @@ internal class SpearGungnirFixedArtifact : FixedArtifact, IFixedArtifactActivati
         {
             return;
         }
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, 100, 3);
+        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, 100, 3);
         item.RechargeTimeLeft = 500;
     }
     public string DescribeActivationEffect() => "lightning ball (100) every 500 turns";

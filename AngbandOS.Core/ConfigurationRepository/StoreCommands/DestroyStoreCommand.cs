@@ -20,6 +20,6 @@ internal class DestroyStoreCommand : StoreCommand
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {
-        SaveGame.RunScript<DestroyScript>();
+        SaveGame.RunScript(nameof(DestroyScript));
     }
 }

@@ -13,19 +13,19 @@ internal class MimeTheNibelungMonsterRace : MonsterRace
     protected MimeTheNibelungMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<FireBoltMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<HasteMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<HealMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(FireBoltMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HasteMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HealMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerHSymbol));
     public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "Mime, the Nibelung";
 
     public override int ArmourClass => 80;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 3, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<TouchAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<UnBonusAttackEffect>(), 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<TouchAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<EatGoldAttackEffect>(), 0, 0)
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnBonusAttackEffect)), 0, 0),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(EatGoldAttackEffect)), 0, 0)
     };
     public override bool BashDoor => true;
     public override string Description => "This tiny night dwarf is as greedy for gold as his brother, Alberich.";

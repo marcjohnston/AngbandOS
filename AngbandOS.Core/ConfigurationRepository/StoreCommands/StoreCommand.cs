@@ -8,13 +8,17 @@
 namespace AngbandOS.Core.StoreCommands;
 
 [Serializable]
-internal abstract class StoreCommand
+internal abstract class StoreCommand : IGetKey<string>
 {
     protected SaveGame SaveGame { get; }
     protected StoreCommand(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
+
+    public virtual string UniqueKey => GetType().Name;
+
+    public string GetKey => UniqueKey;
 
     public abstract char Key { get; }
     public virtual bool IsEnabled(Store store) => true;

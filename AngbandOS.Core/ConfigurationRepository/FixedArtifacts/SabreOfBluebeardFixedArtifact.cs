@@ -15,7 +15,7 @@ internal class SabreOfBluebeardFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<SwordSabre>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordSabre));
     }
 
 

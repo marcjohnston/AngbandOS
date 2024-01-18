@@ -13,17 +13,17 @@ internal class ByakheeMonsterRace : MonsterRace
     protected ByakheeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<FireBoltMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<SummonDemonMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ConfuseMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(FireBoltMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonDemonMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperBSymbol));
     public override ColourEnum Colour => ColourEnum.Black;
     public override string Name => "Byakhee";
 
     public override int ArmourClass => 40;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<ClawAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseStrAttackEffect>(), 3, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<Exp20AttackEffect>(), 3, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseStrAttackEffect)), 3, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp20AttackEffect)), 3, 4),
     };
     public override bool BashDoor => true;
     public override bool Demon => true;

@@ -15,7 +15,7 @@ internal class BladeOfChaosDoomcallerFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<SwordBladeOfChaos>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordBladeOfChaos));
     }
 
 

@@ -16,7 +16,7 @@ internal class CarnageTrueWizardCommand : WizardCommand
 
     public override string HelpDescription => "Carnage True";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardMonstersHelpGroup>();
+    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardMonstersHelpGroup));
 
     public override void Execute()
     {

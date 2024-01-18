@@ -12,5 +12,5 @@ internal class OrraxDragonsonStoreOwner : StoreOwner
     public override string OwnerName => "Orrax Dragonson";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  110;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<DraconianRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(DraconianRace));
 }

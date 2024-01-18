@@ -12,5 +12,5 @@ internal class FalilmawenTheFriendlyStoreOwner : StoreOwner
     public override string OwnerName => "Falilmawen the Friendly";
     public override int MaxCost =>  250;
     public override int MinInflate =>  108;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<HobbitRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HobbitRace));
 }

@@ -12,9 +12,9 @@ internal class ColdProjectile : Projectile
 {
     private ColdProjectile(SaveGame saveGame) : base(saveGame) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<WhiteSplatProjectileGraphic>();
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(WhiteSplatProjectileGraphic));
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<WhiteSplatProjectileGraphic>();
+    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(WhiteSplatProjectileGraphic));
 
     protected override bool AffectItem(int who, int y, int x)
     {

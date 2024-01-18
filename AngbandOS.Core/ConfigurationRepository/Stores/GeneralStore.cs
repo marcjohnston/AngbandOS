@@ -92,5 +92,5 @@ internal class GeneralStore : Store
         }
     }
 
-    protected override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get<HireEscortStoreCommand>();
+    protected override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(HireEscortStoreCommand));
 }

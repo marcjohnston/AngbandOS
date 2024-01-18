@@ -13,18 +13,18 @@ internal class StairwayToHellMonsterRace : MonsterRace
     protected StairwayToHellMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<ShriekMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<SummonDemonMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ShriekMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonDemonMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(GreaterThanSymbol));
     public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Stairway to hell";
 
     public override int ArmourClass => 40;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<WailAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<UnBonusAttackEffect>(), 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<WailAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<Exp20AttackEffect>(), 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<WailAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<EatGoldAttackEffect>(), 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<WailAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<EatItemAttackEffect>(), 0, 0)
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(WailAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnBonusAttackEffect)), 0, 0),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(WailAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp20AttackEffect)), 0, 0),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(WailAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(EatGoldAttackEffect)), 0, 0),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(WailAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(EatItemAttackEffect)), 0, 0)
     };
     public override bool CharMulti => true;
     public override bool ColdBlood => true;

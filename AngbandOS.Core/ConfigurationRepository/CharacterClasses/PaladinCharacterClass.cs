@@ -52,17 +52,17 @@ internal class PaladinCharacterClass : BaseCharacterClass
         "(at lvl 40)."
     };
     public override int SpellWeight => 400;
-    public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get<DivineCastingType>();
+    public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get(nameof(DivineCastingType));
     public override int SpellStat => Ability.Wisdom;
     public override int MaximumWeight => 30;
     public override int AttackSpeedMultiplier => 4;
-    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get<PriestlyArtifactBias>();
+    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
     public override int FromScrollWarriorArtifactBiasPercentageChance => 40;
     public override bool SenseInventoryTest(int level) => (0 != SaveGame.Rng.RandomLessThan(77777 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        SaveGame.SingletonRepository.Realms.Get<LifeRealm>(),
-        SaveGame.SingletonRepository.Realms.Get<DeathRealm>()
+        SaveGame.SingletonRepository.Realms.Get(nameof(LifeRealm)),
+        SaveGame.SingletonRepository.Realms.Get(nameof(DeathRealm))
     };
 
     public override void ItemDestroyed(Item item, int amount)
@@ -90,8 +90,8 @@ internal class PaladinCharacterClass : BaseCharacterClass
 
     protected override ItemFactory[] Outfit => new ItemFactory[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get<BeginnersHandbookSorceryBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<SwordBroadSword>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<ScrollProtectionFromEvil>()
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(BeginnersHandbookSorceryBookItemFactory)),
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordBroadSword)),
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(ScrollProtectionFromEvil))
     };
 }

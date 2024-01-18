@@ -21,7 +21,7 @@ internal class ConfusionTimedAction : TimedAction
     }
     protected override void Noticed()
     {
-        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawConfusedFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawConfusedFlaggedAction)).Set();
         base.Noticed();
     }
 }

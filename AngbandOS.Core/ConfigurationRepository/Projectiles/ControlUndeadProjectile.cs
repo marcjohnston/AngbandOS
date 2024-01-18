@@ -12,9 +12,9 @@ internal class ControlUndeadProjectile : Projectile
 {
     private ControlUndeadProjectile(SaveGame saveGame) : base(saveGame) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<BlackBulletProjectileGraphic>();
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BlackBulletProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<BlackControlAnimation>();
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(BlackControlAnimation));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {

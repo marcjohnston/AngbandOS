@@ -13,19 +13,19 @@ internal class SpectatorMonsterRace : MonsterRace
     protected SpectatorMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<CauseSeriousWoundsMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<HoldMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<SlowMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<ForgetMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseSeriousWoundsMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HoldMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SlowMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ForgetMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerESymbol));
     public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Spectator";
 
     public override int ArmourClass => 1;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<GazeAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<ParalyzeAttackEffect>(), 1, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<GazeAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<ConfuseAttackEffect>(), 1, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<GazeAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<UnBonusAttackEffect>(), 0, 0),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(GazeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ParalyzeAttackEffect)), 1, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(GazeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ConfuseAttackEffect)), 1, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(GazeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnBonusAttackEffect)), 0, 0),
     };
     public override string Description => "It has three small eyestalks and a large central eye.";
     public override bool EmptyMind => true;

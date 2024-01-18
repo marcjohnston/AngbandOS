@@ -12,9 +12,9 @@ internal class HellFireProjectile : Projectile
 {
     private HellFireProjectile(SaveGame saveGame) : base(saveGame) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<RedSplatProjectileGraphic>();
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(RedSplatProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<RedBlackFlashAnimation>();
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(RedBlackFlashAnimation));
 
     protected override bool AffectItem(int who, int y, int x)
     {

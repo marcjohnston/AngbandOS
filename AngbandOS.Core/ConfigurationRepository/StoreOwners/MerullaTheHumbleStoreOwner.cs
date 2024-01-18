@@ -12,5 +12,5 @@ internal class MerullaTheHumbleStoreOwner : StoreOwner
     public override string OwnerName => "Merulla the Humble";
     public override int MaxCost =>  1000;
     public override int MinInflate =>  107;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<ElfRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(ElfRace));
 }

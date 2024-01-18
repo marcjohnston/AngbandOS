@@ -60,8 +60,8 @@ internal class RestScript : Script
         SaveGame.EnergyUse = 100;
         SaveGame.Resting = SaveGame.CommandArgument;
         SaveGame.IsSearching = false;
-        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawStateFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
         SaveGame.HandleStuff();
         SaveGame.UpdateScreen();
         return false;

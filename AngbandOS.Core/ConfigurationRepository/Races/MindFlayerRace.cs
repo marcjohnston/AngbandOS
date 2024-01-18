@@ -89,7 +89,7 @@ internal class MindFlayerRace : Race
             if (SaveGame.GetDirectionWithAim(out int direction))
             {
                 SaveGame.MsgPrint("You concentrate and your eyes glow red...");
-                SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), direction, SaveGame.ExperienceLevel);
+                SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(PsiProjectile)), direction, SaveGame.ExperienceLevel);
             }
         }
     }

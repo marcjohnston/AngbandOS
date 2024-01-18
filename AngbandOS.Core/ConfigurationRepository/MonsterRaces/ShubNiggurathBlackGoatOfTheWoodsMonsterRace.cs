@@ -13,30 +13,30 @@ internal class ShubNiggurathBlackGoatOfTheWoodsMonsterRace : MonsterRace
     protected ShubNiggurathBlackGoatOfTheWoodsMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheChaosMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheConfusionMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreathePoisonMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheRadiationMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<ChaosBallMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BrainSmashMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<CauseMortalWoundsMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<DarkBallMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<ManaBoltMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<HealMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<SummonCthuloidMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<SummonHiUndeadMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonstersMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<SummonUniqueMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheChaosMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheConfusionMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreathePoisonMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheRadiationMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ChaosBallMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BrainSmashMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseMortalWoundsMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DarkBallMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ManaBoltMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HealMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonCthuloidMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonHiUndeadMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonMonstersMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonUniqueMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperXSymbol));
     public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Shub-Niggurath, Black Goat of the Woods";
 
     public override int ArmourClass => 100;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<CrushAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseWisAttackEffect>(), 20, 5),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<CrushAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseIntAttackEffect>(), 20, 5),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseStrAttackEffect>(), 10, 2),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseConAttackEffect>(), 10, 2)
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseWisAttackEffect)), 20, 5),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseIntAttackEffect)), 20, 5),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseStrAttackEffect)), 10, 2),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseConAttackEffect)), 10, 2)
     };
     public override bool AttrAny => true;
     public override bool AttrMulti => true;

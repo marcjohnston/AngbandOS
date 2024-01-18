@@ -13,25 +13,25 @@ internal class GlaryssaSuccubusQueenMonsterRace : MonsterRace
     protected GlaryssaSuccubusQueenMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<AcidBoltMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<CauseCriticalWoundsMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<HoldMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<MindBlastMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<NetherBoltMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<DarknessMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<ForgetMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<SummonDemonMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(AcidBoltMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlindnessMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseCriticalWoundsMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HoldMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(MindBlastMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(NetherBoltMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DarknessMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ForgetMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonDemonMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperUSymbol));
     public override ColourEnum Colour => ColourEnum.BrightPink;
     public override string Name => "Glaryssa, Succubus Queen";
 
     public override int ArmourClass => 60;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<ClawAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 5, 5),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<ClawAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 5, 5),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseStrAttackEffect>(), 4, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<TouchAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<Exp80AttackEffect>(), 8, 1)
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 5, 5),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 5, 5),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseStrAttackEffect)), 4, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp80AttackEffect)), 8, 1)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

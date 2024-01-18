@@ -13,26 +13,26 @@ internal class MandorMasterOfChaosMonsterRace : MonsterRace
     protected MandorMasterOfChaosMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<ChaosBallMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<ColdBoltMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<FireBoltMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<HoldMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<IceBoltMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<ManaBoltMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<PlasmaBoltMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<CreateTrapsMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<HealMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<SummonMonsterMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ChaosBallMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ColdBoltMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(FireBoltMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HoldMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(IceBoltMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ManaBoltMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(PlasmaBoltMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CreateTrapsMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HealMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonMonsterMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
     public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Mandor, Master of Chaos";
 
     public override int ArmourClass => 90;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 5, 5),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 5, 5),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<UnPowerAttackEffect>(), 5, 5),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<UnBonusAttackEffect>(), 5, 5)
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 5, 5),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 5, 5),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnPowerAttackEffect)), 5, 5),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnBonusAttackEffect)), 5, 5)
     };
     public override bool BashDoor => true;
     public override string Description => "Mandor is one of the greatest chaos Masters, a formidable magician.";

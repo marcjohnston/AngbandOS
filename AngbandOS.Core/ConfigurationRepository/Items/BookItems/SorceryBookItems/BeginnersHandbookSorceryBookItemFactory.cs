@@ -29,13 +29,13 @@ internal class BeginnersHandbookSorceryBookItemFactory : SorceryBookItemFactory
 
     public override Spell[] Spells => new Spell[]
     {
-        SaveGame.SingletonRepository.Spells.Get<SorcerySpellDetectMonsters>(),
-        SaveGame.SingletonRepository.Spells.Get<SorcerySpellPhaseDoor>(),
-        SaveGame.SingletonRepository.Spells.Get<SorcerySpellDetectDoorsAndTraps>(),
-        SaveGame.SingletonRepository.Spells.Get<SorcerySpellLightArea>(),
-        SaveGame.SingletonRepository.Spells.Get<SorcerySpellConfuseMonster>(),
-        SaveGame.SingletonRepository.Spells.Get<SorcerySpellTeleport>(),
-        SaveGame.SingletonRepository.Spells.Get<SorcerySpellSleepMonster>(),
-        SaveGame.SingletonRepository.Spells.Get<SorcerySpellRecharging>()
+        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellDetectMonsters)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellPhaseDoor)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellDetectDoorsAndTraps)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellLightArea)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellConfuseMonster)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellTeleport)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellSleepMonster)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellRecharging))
     };
 }

@@ -17,7 +17,7 @@ internal class DeathSpellDarknessStorm : Spell
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<DarkProjectile>(), dir, 120, 4);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(DarkProjectile)), dir, 120, 4);
     }
 
     public override void CastFailed()

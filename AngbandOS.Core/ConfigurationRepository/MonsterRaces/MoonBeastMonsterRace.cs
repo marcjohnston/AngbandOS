@@ -13,11 +13,11 @@ internal class MoonBeastMonsterRace : MonsterRace
     protected MoonBeastMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<CauseSeriousWoundsMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<DarknessMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<HealMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlindnessMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseSeriousWoundsMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ConfuseMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DarknessMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HealMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperASymbol));
     public override ColourEnum Colour => ColourEnum.BrightWhite;
     public override string Name => "Moon beast";
@@ -25,9 +25,9 @@ internal class MoonBeastMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 30;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<ClawAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 3),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<ClawAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 3),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<ButtAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 3),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 3),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ButtAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "A great greyish-white slippery toad-creature with a mass of pink tentacles on the end of its snout.";

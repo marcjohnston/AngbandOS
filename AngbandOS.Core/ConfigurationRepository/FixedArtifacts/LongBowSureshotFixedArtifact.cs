@@ -15,7 +15,7 @@ internal class LongBowSureshotFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<LongBowWeaponItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(LongBowWeaponItemFactory));
     }
 
 

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class RingItemFactory : JewelleryItemFactory, IFlavour
 {
     public RingItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get<RingsItemClass>();
+    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(RingsItemClass));
 
     /// <summary>
     /// Returns the ring flavours repository because rings have flavours that need to be identified.
@@ -25,12 +25,12 @@ internal abstract class RingItemFactory : JewelleryItemFactory, IFlavour
     {
         get
         {
-            BaseInventorySlot rightHand = SaveGame.SingletonRepository.InventorySlots.Get<RightHandInventorySlot>();
+            BaseInventorySlot rightHand = SaveGame.SingletonRepository.InventorySlots.Get(nameof(RightHandInventorySlot));
             if (rightHand.Count == 0)
             {
                 return rightHand;
             }
-            return SaveGame.SingletonRepository.InventorySlots.Get<LeftHandInventorySlot>();
+            return SaveGame.SingletonRepository.InventorySlots.Get(nameof(LeftHandInventorySlot));
         }
     }
     public override int PackSort => 16;

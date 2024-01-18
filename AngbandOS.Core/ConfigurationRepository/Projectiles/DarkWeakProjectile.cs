@@ -12,9 +12,9 @@ internal class DarkWeakProjectile : Projectile
 {
     private DarkWeakProjectile(SaveGame saveGame) : base(saveGame) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<GreyBoltProjectileGraphic>();
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(GreyBoltProjectileGraphic));
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<GreySplatProjectileGraphic>();
+    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(GreySplatProjectileGraphic));
 
     protected override bool AffectFloor(int y, int x)
     {

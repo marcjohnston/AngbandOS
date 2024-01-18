@@ -25,7 +25,7 @@ internal class StinkingCloudWandItemFactory : WandItemFactory
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), dir, 12, 2);
+        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), dir, 12, 2);
         return true;
     }
     public override Item CreateItem() => new StinkingCloudWandItem(SaveGame);

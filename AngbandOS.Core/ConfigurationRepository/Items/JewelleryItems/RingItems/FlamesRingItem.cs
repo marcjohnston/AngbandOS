@@ -10,14 +10,14 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class FlamesRingItem : RingItem, IItemActivatable
 {
-    public FlamesRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<FlamesRingItemFactory>()) { }
+    public FlamesRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(FlamesRingItemFactory))) { }
     public void DoActivate()
     {
         if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, 50, 2);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 50, 2);
         SaveGame.TimedFireResistance.AddTimer(SaveGame.Rng.DieRoll(20) + 20);
         RechargeTimeLeft = SaveGame.Rng.RandomLessThan(50) + 50;
     }

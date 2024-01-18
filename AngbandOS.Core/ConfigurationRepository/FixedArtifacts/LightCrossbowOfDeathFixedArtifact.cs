@@ -15,7 +15,7 @@ internal class LightCrossbowOfDeathFixedArtifact : FixedArtifact, IFixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<LightCrossbowBowWeaponItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(LightCrossbowBowWeaponItemFactory));
     }
 
 

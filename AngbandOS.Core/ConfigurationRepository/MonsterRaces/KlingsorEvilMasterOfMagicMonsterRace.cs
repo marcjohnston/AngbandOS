@@ -13,30 +13,30 @@ internal class KlingsorEvilMasterOfMagicMonsterRace : MonsterRace
     protected KlingsorEvilMasterOfMagicMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<ChaosBallMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<CauseCriticalWoundsMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<DarkBallMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<DrainManaMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<FireBallMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<HoldMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<ManaBallMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<NetherBallMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<PlasmaBoltMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<WaterBallMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<CreateTrapsMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<DreadCurseMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<SummonHiUndeadMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ChaosBallMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseCriticalWoundsMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DarkBallMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DrainManaMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(FireBallMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HoldMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ManaBallMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(NetherBallMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(PlasmaBoltMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(WaterBallMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CreateTrapsMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DreadCurseMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonHiUndeadMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportToMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
     public override ColourEnum Colour => ColourEnum.Yellow;
     public override string Name => "Klingsor, Evil Master of Magic";
 
     public override int ArmourClass => 100;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<UnBonusAttackEffect>(), 6, 8),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<UnBonusAttackEffect>(), 6, 8),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<TouchAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<UnPowerAttackEffect>(), 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<TouchAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<UnPowerAttackEffect>(), 0, 0)
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnBonusAttackEffect)), 6, 8),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnBonusAttackEffect)), 6, 8),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnPowerAttackEffect)), 0, 0),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnPowerAttackEffect)), 0, 0)
     };
     public override bool BashDoor => true;
     public override string Description => "Klingsor, whose hopeless effort to join the Knights of the Grail was thwarted, turned to black magic and became a deadly necromancer.";

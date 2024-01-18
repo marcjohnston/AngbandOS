@@ -13,19 +13,19 @@ internal class DarkElvenMageMonsterRace : MonsterRace
     protected DarkElvenMageMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<ConfuseMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<MagicMissileMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<PoisonBallMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<DarknessMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlindnessMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ConfuseMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(MagicMissileMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(PoisonBallMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DarknessMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerHSymbol));
     public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Dark elven mage";
 
     public override int ArmourClass => 16;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "A dark elven figure, dressed all in black, hurling spells at you.";

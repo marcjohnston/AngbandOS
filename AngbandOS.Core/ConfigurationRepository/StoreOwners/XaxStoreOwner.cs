@@ -12,5 +12,5 @@ internal class XaxStoreOwner : StoreOwner
     public override string OwnerName => "Xax";
     public override int MaxCost =>  4000;
     public override int MinInflate =>  100;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<GolemRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(GolemRace));
 }

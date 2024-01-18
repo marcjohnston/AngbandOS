@@ -26,7 +26,7 @@ internal class ColdBallsWandItemFactory : WandItemFactory
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 48, 2);
+        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 48, 2);
         return true;
     }
     public override Item CreateItem() => new ColdBallsWandItem(SaveGame);

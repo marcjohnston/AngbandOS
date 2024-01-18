@@ -21,7 +21,7 @@ internal class ParalysisTimedAction : TimedAction
     }
     protected override void Noticed()
     {
-        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawStateFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
         base.Noticed();
     }
 }

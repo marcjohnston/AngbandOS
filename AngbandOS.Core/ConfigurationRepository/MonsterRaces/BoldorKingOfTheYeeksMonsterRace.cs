@@ -13,12 +13,12 @@ internal class BoldorKingOfTheYeeksMonsterRace : MonsterRace
     protected BoldorKingOfTheYeeksMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<BlindnessMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<SlowMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<HealMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<SummonKinMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportSelfMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlindnessMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SlowMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlinkMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HealMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonKinMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportSelfMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerYSymbol));
     public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "Boldor, King of the Yeeks";
@@ -26,9 +26,9 @@ internal class BoldorKingOfTheYeeksMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 24;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 9),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 9),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 8),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 9),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 9),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "A great yeek, powerful in magic and sorcery, but a yeek all the same.";

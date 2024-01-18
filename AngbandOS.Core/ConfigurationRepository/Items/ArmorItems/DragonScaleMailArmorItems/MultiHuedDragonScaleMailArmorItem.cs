@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class MultiHuedDragonScaleMailArmorItem : DragonScaleMailArmorItem, IItemActivatable
 {
-    public MultiHuedDragonScaleMailArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<MultiHuedDragonScaleMailArmorItemFactory>()) { }
+    public MultiHuedDragonScaleMailArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(MultiHuedDragonScaleMailArmorItemFactory))) { }
     public void DoActivate()
     {
         if (!SaveGame.GetDirectionWithAim(out int dir))
@@ -23,22 +23,22 @@ internal class MultiHuedDragonScaleMailArmorItem : DragonScaleMailArmorItem, IIt
         switch (chance)
         {
             case 0:
-                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, 250, -2);
+                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 250, -2);
                 return;
             case 1:
-                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, 250, -2);
+                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, 250, -2);
                 return;
 
             case 2:
-                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 250, -2);
+                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 250, -2);
                 return;
 
             case 3:
-                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir, 250, -2);
+                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, 250, -2);
                 return;
 
             case 4:
-                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), dir, 250, -2);
+                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), dir, 250, -2);
                 return;
         }
         RechargeTimeLeft = SaveGame.Rng.RandomLessThan(225) + 225;

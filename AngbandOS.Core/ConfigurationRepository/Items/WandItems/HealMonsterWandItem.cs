@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class HealMonsterWandItem : WandItem
 {
-    public HealMonsterWandItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<HealMonsterWandItemFactory>()) { }
+    public HealMonsterWandItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(HealMonsterWandItemFactory))) { }
     protected override void ApplyMagic(int level, int power, Store? store)
     {
         TypeSpecificValue = SaveGame.Rng.DieRoll(20) + 8;

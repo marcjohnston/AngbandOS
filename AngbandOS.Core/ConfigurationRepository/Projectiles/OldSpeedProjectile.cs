@@ -12,9 +12,9 @@ internal class OldSpeedProjectile : Projectile
 {
     private OldSpeedProjectile(SaveGame saveGame) : base(saveGame) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<BrightBlueBulletProjectileGraphic>();
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BrightBlueBulletProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<BrightBlueSwirlAnimation>();
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(BrightBlueSwirlAnimation));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {

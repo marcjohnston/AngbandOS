@@ -15,7 +15,7 @@ internal class SetOfLeatherGlovesOfLightFixedArtifact : FixedArtifact, IFixedArt
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<LeatherGlovesArmorItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(LeatherGlovesArmorItemFactory));
     }
 
 
@@ -27,7 +27,7 @@ internal class SetOfLeatherGlovesOfLightFixedArtifact : FixedArtifact, IFixedArt
         {
             return;
         }
-        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), dir, SaveGame.Rng.DiceRoll(2, 6));
+        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), dir, SaveGame.Rng.DiceRoll(2, 6));
         item.RechargeTimeLeft = 2;
     }
     public string DescribeActivationEffect() => "magic missile (2d6) every 2 turns";

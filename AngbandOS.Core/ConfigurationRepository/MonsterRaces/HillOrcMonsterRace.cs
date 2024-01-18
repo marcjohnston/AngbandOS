@@ -18,7 +18,7 @@ internal class HillOrcMonsterRace : MonsterRace
 
     public override int ArmourClass => 32;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 10),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 10),
     };
     public override bool BashDoor => true;
     public override string Description => "He is a hardy well-weathered survivor.";

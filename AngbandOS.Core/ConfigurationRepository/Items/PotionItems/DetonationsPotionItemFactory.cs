@@ -35,7 +35,7 @@ internal class DetonationsPotionItemFactory : PotionItemFactory
 
     public override bool Smash(int who, int y, int x)
     {
-        SaveGame.Project(who, 2, y, x, SaveGame.Rng.DiceRoll(25, 25), SaveGame.SingletonRepository.Projectiles.Get<ExplodeProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        SaveGame.Project(who, 2, y, x, SaveGame.Rng.DiceRoll(25, 25), SaveGame.SingletonRepository.Projectiles.Get(nameof(ExplodeProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return true;
     }
     public override Item CreateItem() => new DetonationsPotionItem(SaveGame);

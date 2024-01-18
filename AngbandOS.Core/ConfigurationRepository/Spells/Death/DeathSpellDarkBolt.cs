@@ -32,7 +32,7 @@ internal class DeathSpellDarkBolt : Spell
         {
             return;
         }
-        SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get<DarkProjectile>(), dir, SaveGame.Rng.DiceRoll(4 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+        SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get(nameof(DarkProjectile)), dir, SaveGame.Rng.DiceRoll(4 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
     }
 
     public override void CastFailed()

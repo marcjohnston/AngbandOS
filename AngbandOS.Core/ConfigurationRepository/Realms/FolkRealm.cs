@@ -26,10 +26,10 @@ internal class FolkRealm : Realm
     /// </summary>
     public override BookItemFactory[] SpellBooks => new BookItemFactory[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get<CantripsforBeginnersFolkBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<MinorMagicksFolkBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<MajorMagicksFolkBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<MagicksOfMasteryFolkBookItemFactory>()
+        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(CantripsforBeginnersFolkBookItemFactory)),
+        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(MinorMagicksFolkBookItemFactory)),
+        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(MajorMagicksFolkBookItemFactory)),
+        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(MagicksOfMasteryFolkBookItemFactory))
     };
 
     public override string Name => "Folk";

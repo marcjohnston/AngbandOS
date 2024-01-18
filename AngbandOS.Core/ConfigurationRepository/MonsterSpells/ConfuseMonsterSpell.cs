@@ -33,7 +33,7 @@ internal class ConfuseMonsterSpell : MonsterSpell
         {
             saveGame.TimedConfusion.AddTimer(SaveGame.Rng.RandomLessThan(4) + 4);
         }
-        saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<ConfSpellResistantDetection>());
+        saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(ConfSpellResistantDetection)));
     }
 
     public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)

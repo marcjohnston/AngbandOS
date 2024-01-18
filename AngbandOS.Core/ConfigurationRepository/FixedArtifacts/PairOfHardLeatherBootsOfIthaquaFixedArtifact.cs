@@ -15,7 +15,7 @@ internal class PairOfHardLeatherBootsOfIthaquaFixedArtifact : FixedArtifact, IFi
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<HardLeatherBootsArmorItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(HardLeatherBootsArmorItemFactory));
     }
 
 

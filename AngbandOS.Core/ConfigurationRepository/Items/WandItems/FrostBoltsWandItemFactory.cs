@@ -25,7 +25,7 @@ internal class FrostBoltsWandItemFactory : WandItemFactory
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {
-        saveGame.FireBoltOrBeam(20, saveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, SaveGame.Rng.DiceRoll(3, 8));
+        saveGame.FireBoltOrBeam(20, saveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, SaveGame.Rng.DiceRoll(3, 8));
         return true;
     }
     public override Item CreateItem() => new FrostBoltsWandItem(SaveGame);

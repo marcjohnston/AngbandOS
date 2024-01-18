@@ -15,7 +15,7 @@ internal class TridentOfTheGnorriFixedArtifact : FixedArtifact, IFixedArtifactAc
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<PolearmTrident>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(PolearmTrident));
     }
 
 

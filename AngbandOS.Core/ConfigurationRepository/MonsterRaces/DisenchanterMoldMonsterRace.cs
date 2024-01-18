@@ -13,14 +13,14 @@ internal class DisenchanterMoldMonsterRace : MonsterRace
     protected DisenchanterMoldMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<DrainManaMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DrainManaMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerMSymbol));
     public override ColourEnum Colour => ColourEnum.Chartreuse;
     public override string Name => "Disenchanter mold";
 
     public override int ArmourClass => 20;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<TouchAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<UnBonusAttackEffect>(), 1, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnBonusAttackEffect)), 1, 6),
     };
     public override bool AttrMulti => true;
     public override string Description => "It is a strange glowing growth on the dungeon floor.";

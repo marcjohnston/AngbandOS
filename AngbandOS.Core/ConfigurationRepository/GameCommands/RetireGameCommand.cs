@@ -19,6 +19,6 @@ internal class RetireGameCommand : GameCommand
 
     public override bool Execute()
     {
-        return SaveGame.RunScript<RetireScript>();
+        return SaveGame.RunScript(nameof(RetireScript));
     }
 }

@@ -13,25 +13,25 @@ internal class SkullDrujMonsterRace : MonsterRace
     protected SkullDrujMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<BrainSmashMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<CauseMortalWoundsMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<MindBlastMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<NetherBoltMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<PlasmaBoltMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<SlowMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<WaterBallMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<CreateTrapsMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<SummonUndeadMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BrainSmashMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseMortalWoundsMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(MindBlastMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(NetherBoltMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(PlasmaBoltMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SlowMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(WaterBallMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CreateTrapsMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonUndeadMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerSSymbol));
     public override ColourEnum Colour => ColourEnum.BrightGrey;
     public override string Name => "Skull druj";
 
     public override int ArmourClass => 120;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<Exp80AttackEffect>(), 4, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<ParalyzeAttackEffect>(), 4, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseIntAttackEffect>(), 4, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseWisAttackEffect>(), 4, 4)
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp80AttackEffect)), 4, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ParalyzeAttackEffect)), 4, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseIntAttackEffect)), 4, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseWisAttackEffect)), 4, 4)
     };
     public override bool ColdBlood => true;
     public override string Description => "A glowing skull possessed by sorcerous power. It need not move, but merely blast you with mighty magic.";

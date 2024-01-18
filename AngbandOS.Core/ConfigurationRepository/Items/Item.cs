@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Items;
 
 [Serializable]
-internal abstract class Item : IComparable<Item>
+internal abstract class Item : IComparable<Item>, IGetKey<string>
 {
     /// <summary>
     /// Returns true, if the item can be used as fuel for a torch.
@@ -73,6 +73,10 @@ internal abstract class Item : IComparable<Item>
             return 0;
         }
     }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     /// <summary>
     /// Returns the inventory slot where the item is wielded.  Returns the pack, by default.
@@ -2299,7 +2303,7 @@ internal abstract class Item : IComparable<Item>
                     RandartItemCharacteristics.ImAcid = true;
                     if (artifactBias == null)
                     {
-                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<AcidArtifactBias>();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(AcidArtifactBias));
                     }
                 }
                 break;
@@ -2314,7 +2318,7 @@ internal abstract class Item : IComparable<Item>
                     RandartItemCharacteristics.ImElec = true;
                     if (artifactBias == null)
                     {
-                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ElectricityArtifactBias>();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ElectricityArtifactBias));
                     }
                 }
                 break;
@@ -2329,7 +2333,7 @@ internal abstract class Item : IComparable<Item>
                     RandartItemCharacteristics.ImCold = true;
                     if (artifactBias == null)
                     {
-                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ColdArtifactBias>();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ColdArtifactBias));
                     }
                 }
                 break;
@@ -2344,7 +2348,7 @@ internal abstract class Item : IComparable<Item>
                     RandartItemCharacteristics.ImFire = true;
                     if (artifactBias == null)
                     {
-                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<FireArtifactBias>();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(FireArtifactBias));
                     }
                 }
                 break;
@@ -2355,7 +2359,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.ResAcid = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<AcidArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(AcidArtifactBias));
                 }
                 break;
 
@@ -2365,7 +2369,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.ResElec = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ElectricityArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ElectricityArtifactBias));
                 }
                 break;
 
@@ -2375,7 +2379,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.ResFire = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<FireArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(FireArtifactBias));
                 }
                 break;
 
@@ -2385,7 +2389,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.ResCold = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ColdArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ColdArtifactBias));
                 }
                 break;
 
@@ -2394,15 +2398,15 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.ResPois = true;
                 if (artifactBias == null && SaveGame.Rng.DieRoll(4) != 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<PoisonArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PoisonArtifactBias));
                 }
                 else if (artifactBias == null && SaveGame.Rng.DieRoll(2) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<NecromanticArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(NecromanticArtifactBias));
                 }
                 else if (artifactBias == null && SaveGame.Rng.DieRoll(2) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RogueArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RogueArtifactBias));
                 }
                 break;
 
@@ -2411,7 +2415,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.ResFear = true;
                 if (artifactBias == null && SaveGame.Rng.DieRoll(3) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<WarriorArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(WarriorArtifactBias));
                 }
                 break;
 
@@ -2433,7 +2437,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.ResConf = true;
                 if (artifactBias == null && SaveGame.Rng.DieRoll(6) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ChaosArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ChaosArtifactBias));
                 }
                 break;
 
@@ -2452,7 +2456,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.ResNether = true;
                 if (artifactBias == null && SaveGame.Rng.DieRoll(3) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<NecromanticArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(NecromanticArtifactBias));
                 }
                 break;
 
@@ -2466,7 +2470,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.ResChaos = true;
                 if (artifactBias == null && SaveGame.Rng.DieRoll(2) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ChaosArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ChaosArtifactBias));
                 }
                 break;
 
@@ -2486,7 +2490,7 @@ internal abstract class Item : IComparable<Item>
                 }
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ElectricityArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ElectricityArtifactBias));
                 }
                 break;
 
@@ -2501,7 +2505,7 @@ internal abstract class Item : IComparable<Item>
                 }
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<FireArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(FireArtifactBias));
                 }
                 break;
 
@@ -2533,7 +2537,7 @@ internal abstract class Item : IComparable<Item>
         }
         if (SaveGame.Rng.DieRoll(100) <= warriorArtifactBias && fromScroll)
         {
-            artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<WarriorArtifactBias>();
+            artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(WarriorArtifactBias));
         }
         string newName;
         if (!fromScroll && SaveGame.Rng.DieRoll(ArtifactCurseChance) == 1)
@@ -2706,11 +2710,11 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.Str = true;
                 if (artifactBias == null && SaveGame.Rng.DieRoll(13) != 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<StrengthArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(StrengthArtifactBias));
                 }
                 else if (artifactBias == null && SaveGame.Rng.DieRoll(7) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<WarriorArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(WarriorArtifactBias));
                 }
                 break;
 
@@ -2719,11 +2723,11 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.Int = true;
                 if (artifactBias == null && SaveGame.Rng.DieRoll(13) != 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<IntelligenceArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(IntelligenceArtifactBias));
                 }
                 else if (artifactBias == null && SaveGame.Rng.DieRoll(7) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<MageArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(MageArtifactBias));
                 }
                 break;
 
@@ -2732,11 +2736,11 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.Wis = true;
                 if (artifactBias == null && SaveGame.Rng.DieRoll(13) != 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<WisdomArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(WisdomArtifactBias));
                 }
                 else if (artifactBias == null && SaveGame.Rng.DieRoll(7) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<PriestlyArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
                 }
                 break;
 
@@ -2745,11 +2749,11 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.Dex = true;
                 if (artifactBias == null && SaveGame.Rng.DieRoll(13) != 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<DexterityArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(DexterityArtifactBias));
                 }
                 else if (artifactBias == null && SaveGame.Rng.DieRoll(7) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RogueArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RogueArtifactBias));
                 }
                 break;
 
@@ -2758,11 +2762,11 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.Con = true;
                 if (artifactBias == null && SaveGame.Rng.DieRoll(13) != 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ConstitutionArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ConstitutionArtifactBias));
                 }
                 else if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RangerArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RangerArtifactBias));
                 }
                 break;
 
@@ -2771,7 +2775,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.Cha = true;
                 if (artifactBias == null && SaveGame.Rng.DieRoll(13) != 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<CharismaArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(CharismaArtifactBias));
                 }
                 break;
 
@@ -2780,7 +2784,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.Stealth = true;
                 if (artifactBias == null && SaveGame.Rng.DieRoll(3) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RogueArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RogueArtifactBias));
                 }
                 break;
 
@@ -2789,7 +2793,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.Search = true;
                 if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RangerArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RangerArtifactBias));
                 }
                 break;
 
@@ -2802,7 +2806,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.Speed = true;
                 if (artifactBias == null && SaveGame.Rng.DieRoll(11) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RogueArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RogueArtifactBias));
                 }
                 break;
 
@@ -2829,7 +2833,7 @@ internal abstract class Item : IComparable<Item>
                     RandartItemCharacteristics.Blows = true;
                     if (artifactBias == null && SaveGame.Rng.DieRoll(11) == 1)
                     {
-                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<WarriorArtifactBias>();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(WarriorArtifactBias));
                     }
                 }
                 break;
@@ -2848,7 +2852,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.SustStr = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<StrengthArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(StrengthArtifactBias));
                 }
                 break;
 
@@ -2856,7 +2860,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.SustInt = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<IntelligenceArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(IntelligenceArtifactBias));
                 }
                 break;
 
@@ -2864,7 +2868,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.SustWis = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<WisdomArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(WisdomArtifactBias));
                 }
                 break;
 
@@ -2872,7 +2876,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.SustDex = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<DexterityArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(DexterityArtifactBias));
                 }
                 break;
 
@@ -2880,7 +2884,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.SustCon = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ConstitutionArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ConstitutionArtifactBias));
                 }
                 break;
 
@@ -2888,7 +2892,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.SustCha = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<CharismaArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(CharismaArtifactBias));
                 }
                 break;
 
@@ -2902,11 +2906,11 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.HoldLife = true;
                 if (artifactBias == null && SaveGame.Rng.DieRoll(5) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<PriestlyArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
                 }
                 else if (artifactBias == null && SaveGame.Rng.DieRoll(6) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<NecromanticArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(NecromanticArtifactBias));
                 }
                 break;
 
@@ -2930,7 +2934,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.Telepathy = true;
                 if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<MageArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(MageArtifactBias));
                 }
                 break;
 
@@ -3002,11 +3006,11 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.SlayEvil = true;
                 if (artifactBias == null && SaveGame.Rng.DieRoll(2) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<LawArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(LawArtifactBias));
                 }
                 else if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<PriestlyArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
                 }
                 break;
 
@@ -3015,7 +3019,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.SlayUndead = true;
                 if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<PriestlyArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
                 }
                 break;
 
@@ -3024,7 +3028,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.SlayDemon = true;
                 if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<PriestlyArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
                 }
                 break;
 
@@ -3059,7 +3063,7 @@ internal abstract class Item : IComparable<Item>
                     RandartItemCharacteristics.Vorpal = true;
                     if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
                     {
-                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<WarriorArtifactBias>();
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(WarriorArtifactBias));
                     }
                 }
                 else
@@ -3077,7 +3081,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.BrandFire = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<FireArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(FireArtifactBias));
                 }
                 break;
 
@@ -3086,7 +3090,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.BrandCold = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ColdArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ColdArtifactBias));
                 }
                 break;
 
@@ -3095,7 +3099,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.BrandElec = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ElectricityArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ElectricityArtifactBias));
                 }
                 break;
 
@@ -3104,7 +3108,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.BrandAcid = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<AcidArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(AcidArtifactBias));
                 }
                 break;
 
@@ -3113,15 +3117,15 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.BrandPois = true;
                 if (artifactBias == null && SaveGame.Rng.DieRoll(3) != 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<PoisonArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PoisonArtifactBias));
                 }
                 else if (artifactBias == null && SaveGame.Rng.DieRoll(6) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<NecromanticArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(NecromanticArtifactBias));
                 }
                 else if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RogueArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RogueArtifactBias));
                 }
                 break;
 
@@ -3130,7 +3134,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.Vampiric = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<NecromanticArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(NecromanticArtifactBias));
                 }
                 break;
 
@@ -3138,7 +3142,7 @@ internal abstract class Item : IComparable<Item>
                 RandartItemCharacteristics.Chaotic = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<ChaosArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ChaosArtifactBias));
                 }
                 break;
         }

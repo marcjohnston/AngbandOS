@@ -8,13 +8,18 @@
 namespace AngbandOS.Core.Patrons;
 
 [Serializable]
-internal abstract class Patron
+internal abstract class Patron : IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
     protected Patron(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+
     public abstract string LongName { get; }
     public bool MultiRew;
 

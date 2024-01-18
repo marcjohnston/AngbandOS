@@ -13,20 +13,20 @@ internal class LashaMistressOfWaterMonsterRace : MonsterRace
     protected LashaMistressOfWaterMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<ColdBallMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<IceBoltMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<WaterBallMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<WaterBoltMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ColdBallMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(IceBoltMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(WaterBallMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(WaterBoltMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperESymbol));
     public override ColourEnum Colour => ColourEnum.Blue;
     public override string Name => "Lasha, Mistress of Water";
 
     public override int ArmourClass => 40;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 5, 5),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 5, 5),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 5, 5),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 5, 5)
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 5, 5),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 5, 5),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 5, 5),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 5, 5)
     };
     public override bool BashDoor => true;
     public override string Description => "With the body of a beautiful mermaid, she hides her cruelnature well, until it is too late.";

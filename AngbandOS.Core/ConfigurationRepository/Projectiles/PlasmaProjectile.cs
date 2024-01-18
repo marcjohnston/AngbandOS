@@ -12,9 +12,9 @@ internal class PlasmaProjectile : Projectile
 {
     private PlasmaProjectile(SaveGame saveGame) : base(saveGame) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<BrightRedBoltProjectileGraphic>();
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BrightRedBoltProjectileGraphic));
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<BrightRedSplatProjectileGraphic>();
+    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BrightRedSplatProjectileGraphic));
 
     protected override bool AffectItem(int who, int y, int x)
     {

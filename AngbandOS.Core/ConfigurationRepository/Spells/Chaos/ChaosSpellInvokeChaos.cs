@@ -17,7 +17,7 @@ internal class ChaosSpellInvokeChaos : Spell
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>(), dir, 66 + SaveGame.ExperienceLevel, SaveGame.ExperienceLevel / 5);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), dir, 66 + SaveGame.ExperienceLevel, SaveGame.ExperienceLevel / 5);
     }
 
     public override void CastFailed()

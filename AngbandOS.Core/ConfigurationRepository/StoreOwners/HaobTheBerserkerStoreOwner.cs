@@ -12,5 +12,5 @@ internal class HaobTheBerserkerStoreOwner : StoreOwner
     public override string OwnerName => "Haob the Berserker";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  109;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<TchoTchoRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(TchoTchoRace));
 }

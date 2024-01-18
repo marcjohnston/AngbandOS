@@ -16,6 +16,6 @@ internal class CastGameCommand : GameCommand
 
     public override bool Execute()
     {
-        return SaveGame.RunScript<CastScript>();
+        return SaveGame.RunScript(nameof(CastScript));
     }
 }

@@ -12,5 +12,5 @@ internal class ShortAlStoreOwner : StoreOwner
     public override string OwnerName => "Short Al";
     public override int MaxCost =>  20000;
     public override int MinInflate =>  105;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<ZombieRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(ZombieRace));
 }

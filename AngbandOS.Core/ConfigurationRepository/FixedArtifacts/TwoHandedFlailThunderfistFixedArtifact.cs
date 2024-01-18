@@ -15,7 +15,7 @@ internal class TwoHandedFlailThunderfistFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<HaftedTwoHandedFlail>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(HaftedTwoHandedFlail));
     }
 
 

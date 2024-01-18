@@ -12,5 +12,5 @@ internal class OlvarBookwormStoreOwner : StoreOwner
     public override string OwnerName => "Olvar Bookworm";
     public override int MaxCost =>  20000;
     public override int MinInflate =>  105;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<VampireRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(VampireRace));
 }

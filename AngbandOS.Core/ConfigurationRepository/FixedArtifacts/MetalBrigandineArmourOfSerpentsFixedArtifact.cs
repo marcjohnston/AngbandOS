@@ -15,7 +15,7 @@ internal class MetalBrigandineArmourOfSerpentsFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<MetalBrigandineHardArmorItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(MetalBrigandineHardArmorItemFactory));
     }
 
 

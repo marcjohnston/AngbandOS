@@ -16,10 +16,10 @@ internal class HelpWizardCommand : WizardCommand
 
     public override string HelpDescription => "Render Wizard Help";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardGeneralCommandsHelpGroup>();
+    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardGeneralCommandsHelpGroup));
 
     public override void Execute()
     {
-        SaveGame.RunScript<WizardHelpScript>();
+        SaveGame.RunScript(nameof(WizardHelpScript));
     }
 }

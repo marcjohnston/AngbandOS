@@ -13,14 +13,14 @@ internal class BlinkingDotMonsterRace : MonsterRace
     protected BlinkingDotMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlinkMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
     public override ColourEnum Colour => ColourEnum.Grey;
     public override string Name => "Blinking dot";
 
     public override int ArmourClass => 1;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<SporeAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<ConfuseAttackEffect>(), 1, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(SporeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ConfuseAttackEffect)), 1, 4),
     };
     public override string Description => "Is it there or is it not?";
     public override bool EmptyMind => true;

@@ -12,5 +12,5 @@ internal class AlliaTheServileStoreOwner : StoreOwner
     public override string OwnerName => "Allia the Servile";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  105;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<HumanRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HumanRace));
 }

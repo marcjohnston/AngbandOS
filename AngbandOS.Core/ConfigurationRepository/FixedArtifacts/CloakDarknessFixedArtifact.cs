@@ -15,7 +15,7 @@ internal class CloakDarknessFixedArtifact : FixedArtifact, IFixedArtifactActivat
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<ClothCloakCloakArmorItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(ClothCloakCloakArmorItemFactory));
     }
 
 

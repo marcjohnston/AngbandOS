@@ -8,13 +8,17 @@
 namespace AngbandOS.Core.HelpGroups;
 
 [Serializable]
-internal abstract class HelpGroup
+internal abstract class HelpGroup : IGetKey<string>
 {
     protected SaveGame SaveGame { get; }
     protected HelpGroup(SaveGame saveGame) 
     {
         SaveGame = saveGame;
     }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     public abstract string Title { get; }
     public abstract int SortIndex { get; }

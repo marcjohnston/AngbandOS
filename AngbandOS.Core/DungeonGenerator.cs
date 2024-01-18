@@ -875,7 +875,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
             }
             if (destroyed)
             {
-                if (RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get<Type1RoomLayout>(), SaveGame.Difficulty))
+                if (RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get(nameof(Type1RoomLayout)), SaveGame.Difficulty))
                 {
                 }
                 continue;
@@ -889,7 +889,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     {
                         if (maxVaultOk > 1)
                         {
-                            if (RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get<Type8RoomLayout>(), SaveGame.Difficulty))
+                            if (RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get(nameof(Type8RoomLayout)), SaveGame.Difficulty))
                             {
                                 continue;
                             }
@@ -899,35 +899,35 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     {
                         if (maxVaultOk > 0)
                         {
-                            if (RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get<Type7RoomLayout>(), SaveGame.Difficulty))
+                            if (RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get(nameof(Type7RoomLayout)), SaveGame.Difficulty))
                             {
                                 continue;
                             }
                         }
                     }
-                    if (k < 40 && RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get<Type5RoomLayout>(), SaveGame.Difficulty))
+                    if (k < 40 && RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get(nameof(Type5RoomLayout)), SaveGame.Difficulty))
                     {
                         continue;
                     }
-                    if (k < 55 && RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get<Type6RoomLayout>(), SaveGame.Difficulty))
+                    if (k < 55 && RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get(nameof(Type6RoomLayout)), SaveGame.Difficulty))
                     {
                         continue;
                     }
                 }
-                if (k < 25 && RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get<Type4RoomLayout>(), SaveGame.Difficulty))
+                if (k < 25 && RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get(nameof(Type4RoomLayout)), SaveGame.Difficulty))
                 {
                     continue;
                 }
-                if (k < 50 && RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get<Type3RoomLayout>(), SaveGame.Difficulty))
+                if (k < 50 && RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get(nameof(Type3RoomLayout)), SaveGame.Difficulty))
                 {
                     continue;
                 }
-                if (k < 100 && RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get<Type2RoomLayout>(), SaveGame.Difficulty))
+                if (k < 100 && RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get(nameof(Type2RoomLayout)), SaveGame.Difficulty))
                 {
                     continue;
                 }
             }
-            if (RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get<Type1RoomLayout>(), SaveGame.Difficulty))
+            if (RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get(nameof(Type1RoomLayout)), SaveGame.Difficulty))
             {
             }
         }

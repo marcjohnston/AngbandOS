@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class CureLightWoundsStaffItem : StaffItem
 {
-    public CureLightWoundsStaffItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<StaffCureLightWounds>()) { }
+    public CureLightWoundsStaffItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(StaffCureLightWounds))) { }
     protected override void ApplyMagic(int level, int power, Store? store)
     {
         TypeSpecificValue = SaveGame.Rng.DieRoll(5) + 6;

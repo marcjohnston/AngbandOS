@@ -32,7 +32,7 @@ internal class TarotSpellMindBlast : Spell
         {
             return;
         }
-        SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), dir,
+        SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(PsiProjectile)), dir,
             SaveGame.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 3));
     }
 

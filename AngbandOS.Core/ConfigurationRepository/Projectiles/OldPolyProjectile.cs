@@ -12,9 +12,9 @@ internal class OldPolyProjectile : Projectile
 {
     private OldPolyProjectile(SaveGame saveGame) : base(saveGame) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<PurpleSplatProjectileGraphic>();
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(PurpleSplatProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<PurpleSparkleAnimation>();
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(PurpleSparkleAnimation));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {

@@ -90,5 +90,5 @@ internal class ArmouryStore : Store
                 return false;
         }
     }
-    protected override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get<EnchantArmorStoreCommand>();
+    protected override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(EnchantArmorStoreCommand));
 }

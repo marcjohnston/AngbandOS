@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class PotionItemFactory : ItemFactory, IFlavour
 {
     public PotionItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get<PotionsItemClass>();
+    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(PotionsItemClass));
 
     /// <summary>
     /// Returns the potions flavours repository because potions have flavours that need to be identified.  The Apple Juice, Water and Slime-Mold

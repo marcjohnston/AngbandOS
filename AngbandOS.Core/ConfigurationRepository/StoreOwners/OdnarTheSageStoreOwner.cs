@@ -12,5 +12,5 @@ internal class OdnarTheSageStoreOwner : StoreOwner
     public override string OwnerName => "Odnar the Sage";
     public override int MaxCost =>  20000;
     public override int MinInflate =>  105;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<HighElfRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HighElfRace));
 }

@@ -38,13 +38,13 @@ internal class PonapeScriptureLifeBookItemFactory : LifeBookItemFactory
 
     public override Spell[] Spells => new Spell[]
     {
-        SaveGame.SingletonRepository.Spells.Get<LifeSpellHeroism>(),
-        SaveGame.SingletonRepository.Spells.Get<LifeSpellPrayer>(),
-        SaveGame.SingletonRepository.Spells.Get<LifeSpellBlessWeapon>(),
-        SaveGame.SingletonRepository.Spells.Get<LifeSpellRestoration>(),
-        SaveGame.SingletonRepository.Spells.Get<LifeSpellHealingTrue>(),
-        SaveGame.SingletonRepository.Spells.Get<LifeSpellHolyVision>(),
-        SaveGame.SingletonRepository.Spells.Get<LifeSpellDivineIntervention>(),
-        SaveGame.SingletonRepository.Spells.Get<LifeSpellHolyInvulnerability>()
+        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellHeroism)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellPrayer)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellBlessWeapon)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellRestoration)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellHealingTrue)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellHolyVision)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellDivineIntervention)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellHolyInvulnerability))
     };
 }

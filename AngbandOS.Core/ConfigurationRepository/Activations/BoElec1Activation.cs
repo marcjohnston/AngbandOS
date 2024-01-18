@@ -22,7 +22,7 @@ internal class BoElec1Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), direction, SaveGame.Rng.DiceRoll(4, 8));
+        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), direction, SaveGame.Rng.DiceRoll(4, 8));
         return true;
     }
 

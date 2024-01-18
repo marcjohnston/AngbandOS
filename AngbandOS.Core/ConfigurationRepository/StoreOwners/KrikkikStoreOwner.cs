@@ -12,5 +12,5 @@ internal class KrikkikStoreOwner : StoreOwner
     public override string OwnerName => "Krikkik";
     public override int MaxCost =>  10000;
     public override int MinInflate =>  109;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<KlackonRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(KlackonRace));
 }

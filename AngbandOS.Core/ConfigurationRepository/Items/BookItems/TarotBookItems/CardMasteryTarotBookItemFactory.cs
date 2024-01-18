@@ -30,13 +30,13 @@ internal class CardMasteryTarotBookItemFactory : TarotBookItemFactory
 
     public override Spell[] Spells => new Spell[]
     {
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellSummonObject>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellSummonAnimal>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellPhantasmalServant>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellSummonMonster>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellConjureElemental>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellTeleportLevel>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellWordOfRecall>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellBanish>()
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellSummonObject)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellSummonAnimal)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellPhantasmalServant)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellSummonMonster)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellConjureElemental)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellTeleportLevel)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellWordOfRecall)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellBanish))
     };
 }

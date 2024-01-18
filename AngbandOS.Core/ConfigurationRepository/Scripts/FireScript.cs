@@ -15,7 +15,7 @@ internal class FireScript : Script
     public override bool Execute()
     {
         // Check that we're actually wielding a ranged weapon
-        RangedWeaponInventorySlot rangedWeaponInventorySlot = SaveGame.SingletonRepository.InventorySlots.Get<RangedWeaponInventorySlot>();
+        RangedWeaponInventorySlot rangedWeaponInventorySlot = (RangedWeaponInventorySlot)SaveGame.SingletonRepository.InventorySlots.Get(nameof(RangedWeaponInventorySlot));
         WeightedRandom<int> weightedRandom = rangedWeaponInventorySlot.WeightedRandom;
         Item? missileWeapon = SaveGame.GetInventoryItem(weightedRandom.Choose());
         if (missileWeapon == null || missileWeapon.Category == 0)

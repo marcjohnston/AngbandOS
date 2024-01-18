@@ -19,6 +19,6 @@ internal class WieldGameCommand : GameCommand
 
     public override bool Execute()
     {
-        return SaveGame.RunScript<WieldScript>();
+        return SaveGame.RunScript(nameof(WieldScript));
     }
 }

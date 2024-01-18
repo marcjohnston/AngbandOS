@@ -15,7 +15,7 @@ internal class SpearGaeBulgFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<PolearmSpear>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(PolearmSpear));
     }
 
 

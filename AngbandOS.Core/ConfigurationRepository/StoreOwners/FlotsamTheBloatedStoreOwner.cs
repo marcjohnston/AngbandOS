@@ -12,5 +12,5 @@ internal class FlotsamTheBloatedStoreOwner : StoreOwner
     public override string OwnerName => "Flotsam the Bloated";
     public override int MaxCost =>  20000;
     public override int MinInflate =>  150;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<ZombieRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(ZombieRace));
 }

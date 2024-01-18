@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.MartialArtsAttacks;
 
 [Serializable]
-internal abstract class MartialArtsAttack
+internal abstract class MartialArtsAttack : IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
 
@@ -16,6 +16,10 @@ internal abstract class MartialArtsAttack
     {
         SaveGame = saveGame;
     }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     public abstract int Chance { get; }
     public abstract int Dd { get; }

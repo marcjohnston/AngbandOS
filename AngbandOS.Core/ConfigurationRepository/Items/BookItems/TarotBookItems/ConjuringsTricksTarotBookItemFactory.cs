@@ -29,13 +29,13 @@ internal class ConjuringsTricksTarotBookItemFactory : TarotBookItemFactory
 
     public override Spell[] Spells => new Spell[]
     {
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellPhaseDoor>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellMindBlast>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellTarotDraw>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellResetRecall>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellTeleport>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellDimensionDoor>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellAstralSpying>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellTeleportAway>()
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellPhaseDoor)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellMindBlast)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellTarotDraw)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellResetRecall)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellTeleport)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellDimensionDoor)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellAstralSpying)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellTeleportAway))
     };
 }

@@ -15,7 +15,7 @@ internal class GreatAxeOfTheTrollsFixedArtifact : FixedArtifact, IFixedArtifactA
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<PolearmGreatAxe>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(PolearmGreatAxe));
     }
 
 

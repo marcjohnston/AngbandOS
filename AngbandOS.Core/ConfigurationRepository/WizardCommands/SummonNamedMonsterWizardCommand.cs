@@ -16,7 +16,7 @@ internal class SummonNamedMonsterWizardCommand : WizardCommand
 
     public override string HelpDescription => "Summon Named Monster";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardMonstersHelpGroup>();
+    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardMonstersHelpGroup));
 
     public override void Execute()
     {

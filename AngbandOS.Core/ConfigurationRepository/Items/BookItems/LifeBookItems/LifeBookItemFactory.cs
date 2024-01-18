@@ -11,10 +11,10 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class LifeBookItemFactory : BookItemFactory
 {
     public LifeBookItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get<LifeSpellBooksItemClass>();
+    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(LifeSpellBooksItemClass));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.LifeBook;
     public override bool HatesFire => true;
     public override int PackSort => 8;
     public override ColourEnum Colour => ColourEnum.BrightWhite;
-    public override Realm? ToRealm => SaveGame.SingletonRepository.Realms.Get<LifeRealm>();
+    public override Realm? ToRealm => SaveGame.SingletonRepository.Realms.Get(nameof(LifeRealm));
 }

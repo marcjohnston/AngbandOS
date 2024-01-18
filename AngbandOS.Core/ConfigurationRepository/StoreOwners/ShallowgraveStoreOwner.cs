@@ -12,5 +12,5 @@ internal class ShallowgraveStoreOwner : StoreOwner
     public override string OwnerName => "Shallowgrave";
     public override int MaxCost =>  25000;
     public override int MinInflate =>  110;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<ZombieRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(ZombieRace));
 }

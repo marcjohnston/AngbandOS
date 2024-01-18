@@ -32,7 +32,7 @@ internal class NatureSpellLightningBolt : Spell
         {
             return;
         }
-        SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir,
+        SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir,
             SaveGame.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
     }
 

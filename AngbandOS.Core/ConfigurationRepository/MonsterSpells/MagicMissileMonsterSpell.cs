@@ -22,7 +22,7 @@ internal class MagicMissileMonsterSpell : BoltProjectileMonsterSpell
         return SaveGame.Rng.DiceRoll(2, 6) + (monsterLevel / 3);
     }
 
-    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get<MissileProjectile>();
+    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile));
 
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get<ReflectSpellResistantDetection>() };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(ReflectSpellResistantDetection)) };
 }

@@ -15,7 +15,7 @@ internal class DaggerHopeFixedArtifact : FixedArtifact, IFixedArtifactActivatibl
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<SwordDagger>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordDagger));
     }
 
 
@@ -27,7 +27,7 @@ internal class DaggerHopeFixedArtifact : FixedArtifact, IFixedArtifactActivatibl
         {
             return;
         }
-        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, SaveGame.Rng.DiceRoll(6, 8));
+        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, SaveGame.Rng.DiceRoll(6, 8));
         item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(7) + 7;
     }
     public string DescribeActivationEffect() => "frost bolt (6d8) every 7+d7 turns";

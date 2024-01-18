@@ -21,19 +21,19 @@ internal class FolkSpellElementalBall : Spell
         switch (SaveGame.Rng.DieRoll(4))
         {
             case 1:
-                dummy = SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>();
+                dummy = SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile));
                 break;
 
             case 2:
-                dummy = SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>();
+                dummy = SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile));
                 break;
 
             case 3:
-                dummy = SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>();
+                dummy = SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile));
                 break;
 
             default:
-                dummy = SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>();
+                dummy = SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile));
                 break;
         }
         SaveGame.FireBall(dummy, dir, 75 + SaveGame.ExperienceLevel, 2);

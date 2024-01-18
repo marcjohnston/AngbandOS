@@ -13,7 +13,7 @@ namespace AngbandOS.Core.ItemClasses;
 /// </summary>
 [Serializable]
 
-internal abstract class ItemFactory : IItemCharacteristics
+internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
 
@@ -21,6 +21,9 @@ internal abstract class ItemFactory : IItemCharacteristics
     {
         SaveGame = saveGame;
     }
+    public virtual string UniqueKey => GetType().Name;
+
+    public string GetKey => UniqueKey;
 
     public virtual void Loaded()
     {
@@ -55,7 +58,7 @@ internal abstract class ItemFactory : IItemCharacteristics
     /// <summary>
     /// Returns the inventory slot where the item is wielded.  Returns the pack, by default.
     /// </summary>
-    public virtual BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<PackInventorySlot>();
+    public virtual BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(PackInventorySlot));
 
     /// <summary>
     /// Returns true, if items of this type are stompable (based on the known "feeling" of (Broken, Average, Good & Excellent)).

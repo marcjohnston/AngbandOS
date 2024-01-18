@@ -15,7 +15,7 @@ internal class PolymorphActiveMutation : Mutation
     {
         if (SaveGame.CheckIfRacialPowerWorks(18, 20, Ability.Constitution, 18))
         {
-            SaveGame.RunScript<PolymorphSelfScript>();
+            SaveGame.RunScript(nameof(PolymorphSelfScript));
         }
     }
 

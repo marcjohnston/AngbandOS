@@ -12,7 +12,7 @@ internal class OldSleepProjectile : Projectile
 {
     private OldSleepProjectile(SaveGame saveGame) : base(saveGame) { }
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<YellowSparkleAnimation>();
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(YellowSparkleAnimation));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {

@@ -38,13 +38,13 @@ internal class RevelationsOfGlaakiNatureBookItemFactory : NatureBookItemFactory
 
     public override Spell[] Spells => new Spell[]
     {
-        SaveGame.SingletonRepository.Spells.Get<NatureSpellDoorCreation>(),
-        SaveGame.SingletonRepository.Spells.Get<NatureSpellStairBuilding>(),
-        SaveGame.SingletonRepository.Spells.Get<NatureSpellStoneSkin>(),
-        SaveGame.SingletonRepository.Spells.Get<NatureSpellResistanceTrue>(),
-        SaveGame.SingletonRepository.Spells.Get<NatureSpellAnimalFriendship>(),
-        SaveGame.SingletonRepository.Spells.Get<NatureSpellStoneTell>(),
-        SaveGame.SingletonRepository.Spells.Get<NatureSpellWallOfStone>(),
-        SaveGame.SingletonRepository.Spells.Get<NatureSpellProtectFromCorrosion>()
+        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellDoorCreation)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellStairBuilding)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellStoneSkin)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellResistanceTrue)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellAnimalFriendship)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellStoneTell)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellWallOfStone)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellProtectFromCorrosion))
     };
 }

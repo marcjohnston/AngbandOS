@@ -15,16 +15,16 @@ internal class PrExtraRedrawActionGroupSetFlaggedAction : GroupSetFlaggedAction
     public override void Loaded()
     {
         RedrawActions = new FlaggedAction[] {
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawCutFlaggedAction>(),
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawHungerFlaggedAction>(),
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawDTrapFlaggedAction>(),
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawBlindFlaggedAction>(),
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawConfusedFlaggedAction>(),
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawAfraidFlaggedAction>(),
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawPoisonedFlaggedAction>(),
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawStateFlaggedAction>(),
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawSpeedFlaggedAction>(),
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawStudyFlaggedAction>()
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawCutFlaggedAction)),
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHungerFlaggedAction)),
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawDTrapFlaggedAction)),
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawBlindFlaggedAction)),
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawConfusedFlaggedAction)),
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawAfraidFlaggedAction)),
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawPoisonedFlaggedAction)),
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)),
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)),
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStudyFlaggedAction))
         };
     }
 }

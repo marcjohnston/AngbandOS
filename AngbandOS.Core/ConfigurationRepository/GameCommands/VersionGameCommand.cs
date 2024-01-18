@@ -19,6 +19,6 @@ internal class VersionGameCommand : GameCommand
 
     public override bool Execute()
     {
-        return SaveGame.RunScript<VersionScript>();
+        return SaveGame.RunScript(nameof(VersionScript));
     }
 }

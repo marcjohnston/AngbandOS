@@ -15,7 +15,7 @@ internal class ChainMailHeartguardFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<ChainMailHardArmorItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(ChainMailHardArmorItemFactory));
     }
 
 

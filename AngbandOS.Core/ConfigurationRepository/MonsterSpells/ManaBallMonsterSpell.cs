@@ -26,7 +26,7 @@ internal class ManaBallMonsterSpell : BallProjectileMonsterSpell
     public override string? VsMonsterUnseenMessage => "You hear someone mumble powerfully.";
 
     protected override string ActionName => "invokes a mana storm";
-    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get<ManaProjectile>();
+    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile));
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;

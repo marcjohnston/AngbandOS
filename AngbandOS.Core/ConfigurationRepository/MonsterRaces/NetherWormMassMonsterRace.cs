@@ -19,7 +19,7 @@ internal class NetherWormMassMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 15;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<TouchAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<Exp10AttackEffect>(), 0, 0),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp10AttackEffect)), 0, 0),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a disgusting mass of dark worms, eating each other, the floor, the air, you....";

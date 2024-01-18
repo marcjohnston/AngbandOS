@@ -27,7 +27,7 @@ internal class DominationTalent : Talent
             {
                 return;
             }
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<DominationProjectile>(), dir, SaveGame.ExperienceLevel, 0);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(DominationProjectile)), dir, SaveGame.ExperienceLevel, 0);
         }
         else
         {

@@ -15,7 +15,7 @@ internal class DaggerIcicleFixedArtifact : FixedArtifact, IFixedArtifactActivati
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<SwordDagger>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordDagger));
     }
 
 
@@ -27,7 +27,7 @@ internal class DaggerIcicleFixedArtifact : FixedArtifact, IFixedArtifactActivati
         {
             return;
         }
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 48, 2);
+        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 48, 2);
         item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(5) + 5;
     }
     public string DescribeActivationEffect() => "frost ball (48) every 5+d5 turns";

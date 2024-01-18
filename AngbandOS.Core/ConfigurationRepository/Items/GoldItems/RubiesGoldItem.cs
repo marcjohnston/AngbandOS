@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class RubiesGoldItem : GoldItem
 {
-    public RubiesGoldItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<GoldRubies>()) { }
+    public RubiesGoldItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(GoldRubies))) { }
 }

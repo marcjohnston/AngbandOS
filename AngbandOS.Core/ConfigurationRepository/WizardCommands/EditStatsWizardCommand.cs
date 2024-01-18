@@ -16,7 +16,7 @@ internal class EditStatsWizardCommand : WizardCommand
 
     public override string HelpDescription => "Edit Stats";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardCharacterEditingHelpGroup>();
+    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardCharacterEditingHelpGroup));
 
     public override void Execute()
     {

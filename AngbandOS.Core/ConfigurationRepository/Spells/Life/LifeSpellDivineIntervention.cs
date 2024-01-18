@@ -13,7 +13,7 @@ internal class LifeSpellDivineIntervention : Spell
     private LifeSpellDivineIntervention(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Project(0, 1, SaveGame.MapY, SaveGame.MapX, 777, SaveGame.SingletonRepository.Projectiles.Get<HolyFireProjectile>(),
+        SaveGame.Project(0, 1, SaveGame.MapY, SaveGame.MapX, 777, SaveGame.SingletonRepository.Projectiles.Get(nameof(HolyFireProjectile)),
             ProjectionFlag.ProjectKill);
         SaveGame.DispelMonsters(SaveGame.ExperienceLevel * 4);
         SaveGame.SlowMonsters();

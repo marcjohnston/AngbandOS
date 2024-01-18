@@ -13,14 +13,14 @@ internal class IronGolemMonsterRace : MonsterRace
     protected IronGolemMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<SlowMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SlowMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerGSymbol));
     public override ColourEnum Colour => ColourEnum.BrightGrey;
     public override string Name => "Iron golem";
 
     public override int ArmourClass => 80;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<HitAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 12),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 12),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

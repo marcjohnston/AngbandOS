@@ -12,5 +12,5 @@ internal class OglignDragonSlayerStoreOwner : StoreOwner
     public override string OwnerName => "Oglign Dragon-Slayer";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  112;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<DwarfRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(DwarfRace));
 }

@@ -13,7 +13,7 @@ internal class BreatheLightMonsterSpell : BreatheProjectileMonsterSpell
     private BreatheLightMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool UsesLight => true;
     protected override string ElementName => "light";
-    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get<LightProjectile>();
+    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get(nameof(LightProjectile));
     protected override int Damage(Monster monster) => monster.Health / 6 > 400 ? 400 : monster.Health / 6;
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get<LightSpellResistantDetection>() };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(LightSpellResistantDetection)) };
 }

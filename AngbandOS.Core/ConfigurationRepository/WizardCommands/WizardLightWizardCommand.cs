@@ -16,7 +16,7 @@ internal class WizardLightWizardCommand : WizardCommand
 
     public override string HelpDescription => "Wizard Light";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardGeneralCommandsHelpGroup>();
+    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardGeneralCommandsHelpGroup));
 
     public override void Execute()
     {

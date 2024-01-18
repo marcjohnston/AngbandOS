@@ -22,6 +22,6 @@ internal class AlterGameCommand : GameCommand
 
     public override bool Execute()
     {
-        return SaveGame.RunScript<AlterScript>();
+        return SaveGame.RunScript(nameof(AlterScript));
     }
 }

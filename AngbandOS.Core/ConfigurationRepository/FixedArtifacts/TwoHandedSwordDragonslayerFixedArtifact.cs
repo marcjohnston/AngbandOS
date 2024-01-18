@@ -15,7 +15,7 @@ internal class TwoHandedSwordDragonslayerFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<SwordTwoHandedSword>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordTwoHandedSword));
     }
 
 

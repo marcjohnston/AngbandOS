@@ -22,7 +22,7 @@ internal class BaElec3Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), direction, 250, 3);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), direction, 250, 3);
         return true;
     }
 

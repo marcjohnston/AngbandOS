@@ -13,14 +13,14 @@ internal class PlasmaVortexMonsterRace : MonsterRace
     protected PlasmaVortexMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreathePlasmaMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreathePlasmaMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerVSymbol));
     public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Plasma vortex";
 
     public override int ArmourClass => 40;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<EngulfAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 8, 8),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(EngulfAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 8, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "A whirlpool of intense flame, charring the stones at your feet.";

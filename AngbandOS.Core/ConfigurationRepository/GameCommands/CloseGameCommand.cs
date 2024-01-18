@@ -24,6 +24,6 @@ internal class CloseGameCommand : GameCommand
 
     public override bool Execute()
     {
-        return SaveGame.RunScript<CloseScript>();
+        return SaveGame.RunScript(nameof(CloseScript));
     }
 }

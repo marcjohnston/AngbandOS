@@ -8,13 +8,17 @@
 namespace AngbandOS.Core.WizardCommands;
 
 [Serializable]
-internal abstract class WizardCommand : IHelpCommand
+internal abstract class WizardCommand : IHelpCommand, IGetKey<string>
 {
     protected SaveGame SaveGame { get; }
     protected WizardCommand(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
+
+    public virtual string UniqueKey => GetType().Name;
+
+    public string GetKey => UniqueKey;
 
     public abstract char Key { get; }
 

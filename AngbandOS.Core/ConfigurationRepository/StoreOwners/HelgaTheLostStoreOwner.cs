@@ -12,5 +12,5 @@ internal class HelgaTheLostStoreOwner : StoreOwner
     public override string OwnerName => "Helga the Lost";
     public override int MaxCost =>  10000;
     public override int MinInflate =>  100;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<HumanRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HumanRace));
 }

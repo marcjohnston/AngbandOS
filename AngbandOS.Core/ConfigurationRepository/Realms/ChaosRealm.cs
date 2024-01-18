@@ -27,9 +27,9 @@ internal class ChaosRealm : Realm
     /// </summary>
     public override BookItemFactory[] SpellBooks => new BookItemFactory[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get<SignOfChaosChaosBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<MasteryChaosBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<GharneFragmentsChaosBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<AzathothChaosBookItemFactory>()
+        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(SignOfChaosChaosBookItemFactory)),
+        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(MasteryChaosBookItemFactory)),
+        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(GharneFragmentsChaosBookItemFactory)),
+        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(AzathothChaosBookItemFactory))
     };
 }

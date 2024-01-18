@@ -25,7 +25,7 @@ internal class EnterWizardModeScript : Script
         {
             SaveGame.IsWizard = true;
             SaveGame.MsgPrint("Wizard mode activated.");
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawTitleFlaggedAction>().Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawTitleFlaggedAction)).Set();
         }
         return false;
     }

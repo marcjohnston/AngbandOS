@@ -15,7 +15,7 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<PowerRingItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(PowerRingItemFactory));
     }
 
 
@@ -127,7 +127,7 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
             case 6:
                 {
                     // Do a 300 damage mana ball
-                    SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), direction, 300, 3);
+                    SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), direction, 300, 3);
                     break;
                 }
             case 7:
@@ -136,7 +136,7 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
             case 10:
                 {
                     // Do a 250 damage mana bolt
-                    SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), direction, 250);
+                    SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), direction, 250);
                     break;
                 }
         }

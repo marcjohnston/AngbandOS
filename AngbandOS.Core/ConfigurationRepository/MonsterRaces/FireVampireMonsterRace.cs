@@ -13,14 +13,14 @@ internal class FireVampireMonsterRace : MonsterRace
     protected FireVampireMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlinkMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperASymbol));
     public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Fire vampire";
 
     public override int ArmourClass => 6;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<TouchAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 1, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 1, 4),
     };
     public override bool BashDoor => true;
     public override bool Cthuloid => true;

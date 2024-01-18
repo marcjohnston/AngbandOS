@@ -73,18 +73,18 @@ internal class Realm1SelectionBirthStage : BirthStage
         if (remainingAvailableSecondaryRealmCount == 0)
         {
             SaveGame.SecondaryRealm = null;
-            return SaveGame.SingletonRepository.BirthStages.Get<GenderSelectionBirthStage>();
+            return SaveGame.SingletonRepository.BirthStages.Get(nameof(GenderSelectionBirthStage));
         }
         else if (remainingAvailableSecondaryRealmCount == 1)
         {
             SaveGame.SecondaryRealm = remainingAvailableSecondaryRealms[0];
-            return SaveGame.SingletonRepository.BirthStages.Get<GenderSelectionBirthStage>();
+            return SaveGame.SingletonRepository.BirthStages.Get(nameof(GenderSelectionBirthStage));
         }
-        return SaveGame.SingletonRepository.BirthStages.Get<Realm2SelectionBirthStage>();
+        return SaveGame.SingletonRepository.BirthStages.Get(nameof(Realm2SelectionBirthStage));
     }
 
     private BirthStage? GoBack()
     {
-        return SaveGame.SingletonRepository.BirthStages.Get<RaceSelectionBirthStage>();
+        return SaveGame.SingletonRepository.BirthStages.Get(nameof(RaceSelectionBirthStage));
     }
 }

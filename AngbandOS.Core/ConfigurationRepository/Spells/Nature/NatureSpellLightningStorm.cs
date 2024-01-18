@@ -17,7 +17,7 @@ internal class NatureSpellLightningStorm : Spell
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, 90 + SaveGame.ExperienceLevel, (SaveGame.ExperienceLevel / 12) + 1);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, 90 + SaveGame.ExperienceLevel, (SaveGame.ExperienceLevel / 12) + 1);
     }
 
     public override string Name => "Lightning Storm";

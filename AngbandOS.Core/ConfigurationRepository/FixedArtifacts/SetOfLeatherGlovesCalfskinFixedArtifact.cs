@@ -15,7 +15,7 @@ internal class SetOfLeatherGlovesCalfskinFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<LeatherGlovesArmorItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(LeatherGlovesArmorItemFactory));
     }
 
 

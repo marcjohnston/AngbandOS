@@ -19,7 +19,7 @@ internal class BlueWormMassMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 12;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<CrawlAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<ColdAttackEffect>(), 1, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrawlAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ColdAttackEffect)), 1, 4),
     };
     public override bool ColdBlood => true;
     public override string Description => "It is a large slimy mass of worms.";

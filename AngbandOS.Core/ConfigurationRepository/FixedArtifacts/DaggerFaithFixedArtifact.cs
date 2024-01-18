@@ -15,7 +15,7 @@ internal class DaggerFaithFixedArtifact : FixedArtifact, IFixedArtifactActivatib
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<SwordDagger>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordDagger));
     }
 
 
@@ -27,7 +27,7 @@ internal class DaggerFaithFixedArtifact : FixedArtifact, IFixedArtifactActivatib
         {
             return;
         }
-        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, SaveGame.Rng.DiceRoll(9, 8));
+        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, SaveGame.Rng.DiceRoll(9, 8));
         item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(8) + 8;
     }
 

@@ -38,7 +38,7 @@ internal class ChaosSpellMeteorSwarm : Spell
                 break;
             }
             count = 0;
-            SaveGame.Project(0, 2, y, x, SaveGame.ExperienceLevel * 3 / 2, SaveGame.SingletonRepository.Projectiles.Get<MeteorProjectile>(),
+            SaveGame.Project(0, 2, y, x, SaveGame.ExperienceLevel * 3 / 2, SaveGame.SingletonRepository.Projectiles.Get(nameof(MeteorProjectile)),
                 ProjectionFlag.ProjectKill | ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem);
         }
     }

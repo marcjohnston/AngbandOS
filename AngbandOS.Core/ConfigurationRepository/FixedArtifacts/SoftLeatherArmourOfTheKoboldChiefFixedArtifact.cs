@@ -15,7 +15,7 @@ internal class SoftLeatherArmourOfTheKoboldChiefFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<SoftLeatherSoftArmorItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SoftLeatherSoftArmorItemFactory));
     }
 
 

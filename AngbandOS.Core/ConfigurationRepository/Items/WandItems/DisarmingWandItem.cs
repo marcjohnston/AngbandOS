@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class DisarmingWandItem : WandItem
 {
-    public DisarmingWandItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<DisarmingWandItemFactory>()) { }
+    public DisarmingWandItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(DisarmingWandItemFactory))) { }
     protected override void ApplyMagic(int level, int power, Store? store)
     {
         TypeSpecificValue = SaveGame.Rng.DieRoll(5) + 4;

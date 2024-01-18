@@ -40,29 +40,29 @@ internal class RangerCharacterClass : BaseCharacterClass
         "choice from Death, Corporeal, Tarot, Chaos, and Folk."
     };
     public override int SpellWeight => 400;
-    public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get<DivineCastingType>();
+    public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get(nameof(DivineCastingType));
     public override int SpellStat => Ability.Intelligence;
     public override int AttackSpeedMultiplier => 4;
-    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get<RangerArtifactBias>();
+    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RangerArtifactBias));
     public override int FromScrollWarriorArtifactBiasPercentageChance => 30;
     public override bool SenseInventoryTest(int level) => (0 != SaveGame.Rng.RandomLessThan(95000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        SaveGame.SingletonRepository.Realms.Get<NatureRealm>()
+        SaveGame.SingletonRepository.Realms.Get(nameof(NatureRealm))
     };
     public override Realm[] AvailableSecondaryRealms => new Realm[] {
-        SaveGame.SingletonRepository.Realms.Get<ChaosRealm>(),
-        SaveGame.SingletonRepository.Realms.Get<DeathRealm>(),
-        SaveGame.SingletonRepository.Realms.Get<TarotRealm>(),
-        SaveGame.SingletonRepository.Realms.Get<FolkRealm>(),
-        SaveGame.SingletonRepository.Realms.Get<CorporealRealm>()
+        SaveGame.SingletonRepository.Realms.Get(nameof(ChaosRealm)),
+        SaveGame.SingletonRepository.Realms.Get(nameof(DeathRealm)),
+        SaveGame.SingletonRepository.Realms.Get(nameof(TarotRealm)),
+        SaveGame.SingletonRepository.Realms.Get(nameof(FolkRealm)),
+        SaveGame.SingletonRepository.Realms.Get(nameof(CorporealRealm))
     };
     public override bool WorshipsADeity => true;
 
     protected override ItemFactory[] Outfit => new ItemFactory[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get<CallOfTheWildNatureBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<SwordBroadSword>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<BlackPrayersDeathBookItemFactory>()
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(CallOfTheWildNatureBookItemFactory)),
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordBroadSword)),
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(BlackPrayersDeathBookItemFactory))
     };
 }

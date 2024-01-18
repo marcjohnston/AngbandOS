@@ -15,7 +15,7 @@ internal class IronHelmSkullkeeperFixedArtifact : FixedArtifact, IFixedArtifactA
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<HelmIronHelm>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(HelmIronHelm));
     }
 
 

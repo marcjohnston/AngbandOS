@@ -17,7 +17,7 @@ internal class ChaosSpellBreatheChaos : Spell
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>(), dir, SaveGame.Health, -2);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), dir, SaveGame.Health, -2);
     }
 
     public override void CastFailed()

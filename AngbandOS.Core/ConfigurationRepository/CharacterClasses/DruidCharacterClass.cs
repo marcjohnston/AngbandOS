@@ -40,18 +40,18 @@ internal class DruidCharacterClass : BaseCharacterClass
         "wear heavy armour without it disrupting their casting."
     };
     public override int SpellWeight => 350;
-    public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get<DivineCastingType>();
+    public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get(nameof(DivineCastingType));
     public override int SpellStat => Ability.Wisdom;
-    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get<PriestlyArtifactBias>();
+    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
     public override bool SenseInventoryTest(int level) => (0 != SaveGame.Rng.RandomLessThan(10000 / ((level * level) + 40)));
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        SaveGame.SingletonRepository.Realms.Get<NatureRealm>()
+        SaveGame.SingletonRepository.Realms.Get(nameof(NatureRealm))
     };
 
     protected override ItemFactory[] Outfit => new ItemFactory[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get<BeginnersHandbookSorceryBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<HaftedQuarterstaff>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<SustainWisdomRingItemFactory>()
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(BeginnersHandbookSorceryBookItemFactory)),
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(HaftedQuarterstaff)),
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SustainWisdomRingItemFactory))
     };
 }

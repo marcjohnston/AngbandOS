@@ -14,5 +14,5 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class MeleeWeaponItemClass : WeaponItemClass
 {
     public MeleeWeaponItemClass(SaveGame saveGame) : base(saveGame) { }
-    public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get<MeleeWeaponInventorySlot>();
+    public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(MeleeWeaponInventorySlot));
 }

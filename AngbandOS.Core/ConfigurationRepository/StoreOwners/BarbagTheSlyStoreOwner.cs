@@ -12,5 +12,5 @@ internal class BarbagTheSlyStoreOwner : StoreOwner
     public override string OwnerName => "Barbag the Sly";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  105;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<KoboldRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(KoboldRace));
 }

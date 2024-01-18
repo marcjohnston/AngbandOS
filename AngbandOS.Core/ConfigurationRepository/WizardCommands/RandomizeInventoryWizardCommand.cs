@@ -16,7 +16,7 @@ internal class RandomizeInventoryWizardCommand : WizardCommand
 
     public override string HelpDescription => "Randomize Inventory";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardGeneralCommandsHelpGroup>();
+    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardGeneralCommandsHelpGroup));
 
     public override void Execute()
     {

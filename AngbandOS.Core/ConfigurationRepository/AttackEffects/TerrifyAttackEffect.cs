@@ -33,10 +33,10 @@ internal class TerrifyAttackEffect : AttackEffect
                 obvious = true;
             }
         }
-        SaveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<FearSpellResistantDetection>());
+        SaveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(FearSpellResistantDetection)));
     }
     public override void ApplyToMonster(Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
-        pt = SaveGame.SingletonRepository.Projectiles.Get<TurnAllProjectile>();
+        pt = SaveGame.SingletonRepository.Projectiles.Get(nameof(TurnAllProjectile));
     }
 }

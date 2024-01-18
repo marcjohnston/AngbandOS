@@ -8,13 +8,17 @@
 namespace AngbandOS.Core.Vaults;
 
 [Serializable]
-internal abstract class Vault
+internal abstract class Vault : IGetKey<string>
 {
     protected SaveGame SaveGame;
     protected Vault(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     /// <summary>
     /// Returns the symbol to use for rendering.

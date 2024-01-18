@@ -16,7 +16,7 @@ internal class MapAreaWizardCommand : WizardCommand
 
     public override string HelpDescription => "Map Area";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardGeneralCommandsHelpGroup>();
+    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardGeneralCommandsHelpGroup));
 
     public override void Execute()
     {

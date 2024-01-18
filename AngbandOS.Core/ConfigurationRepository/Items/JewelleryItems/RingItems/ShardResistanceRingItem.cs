@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class ShardResistanceRingItem : RingItem
 {
-    public ShardResistanceRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ShardResistanceRingItemFactory>()) { }
+    public ShardResistanceRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(ShardResistanceRingItemFactory))) { }
 }

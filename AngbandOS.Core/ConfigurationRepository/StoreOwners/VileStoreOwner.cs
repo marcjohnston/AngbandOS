@@ -12,5 +12,5 @@ internal class VileStoreOwner : StoreOwner
     public override string OwnerName => "Vile";
     public override int MaxCost =>  20000;
     public override int MinInflate =>  150;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<SkeletonRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(SkeletonRace));
 }

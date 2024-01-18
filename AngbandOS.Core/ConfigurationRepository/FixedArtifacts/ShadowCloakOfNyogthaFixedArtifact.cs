@@ -15,7 +15,7 @@ internal class ShadowCloakOfNyogthaFixedArtifact : FixedArtifact, IFixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<ShadowCloakArmorItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(ShadowCloakArmorItemFactory));
     }
 
 

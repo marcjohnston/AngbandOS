@@ -29,13 +29,13 @@ internal class BasicChiFlowCorporealBookItemFactory : CorporealBookItemFactory
 
     public override Spell[] Spells => new Spell[]
     {
-        SaveGame.SingletonRepository.Spells.Get<CorporealSpellBlink>(),
-        SaveGame.SingletonRepository.Spells.Get<CorporealSpellBravery>(),
-        SaveGame.SingletonRepository.Spells.Get<CorporealSpellBatsSense>(),
-        SaveGame.SingletonRepository.Spells.Get<CorporealSpellEaglesVision>(),
-        SaveGame.SingletonRepository.Spells.Get<CorporealSpellMindVision>(),
-        SaveGame.SingletonRepository.Spells.Get<CorporealSpellCureMediumWounds>(),
-        SaveGame.SingletonRepository.Spells.Get<CorporealSpellCureLightWounds>(),
-        SaveGame.SingletonRepository.Spells.Get<CorporealSpellSatisfyHunger>()
+        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellBlink)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellBravery)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellBatsSense)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellEaglesVision)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellMindVision)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellCureMediumWounds)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellCureLightWounds)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellSatisfyHunger))
     };
 }

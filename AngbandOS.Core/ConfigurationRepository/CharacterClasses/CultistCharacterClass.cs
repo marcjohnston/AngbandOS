@@ -41,32 +41,32 @@ internal class CultistCharacterClass : BaseCharacterClass
         "punishments as they increase in level."
     };
     public override int SpellWeight => 300;
-    public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get<ArcaneCastingType>();
+    public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get(nameof(ArcaneCastingType));
     public override int SpellStat => Ability.Intelligence;
     public override int MaximumMeleeAttacksPerRound(int level) => 4;
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 2;
-    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get<MageArtifactBias>();
+    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(MageArtifactBias));
     public override bool SenseInventoryTest(int level) => (0 != SaveGame.Rng.RandomLessThan(240000 / (level + 5)));
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        SaveGame.SingletonRepository.Realms.Get<ChaosRealm>()
+        SaveGame.SingletonRepository.Realms.Get(nameof(ChaosRealm))
     };
     public override Realm[] AvailableSecondaryRealms => new Realm[] {
-        SaveGame.SingletonRepository.Realms.Get<LifeRealm>(),
-        SaveGame.SingletonRepository.Realms.Get<SorceryRealm>(),
-        SaveGame.SingletonRepository.Realms.Get<NatureRealm>(),
-        SaveGame.SingletonRepository.Realms.Get<DeathRealm>(),
-        SaveGame.SingletonRepository.Realms.Get<TarotRealm>(),
-        SaveGame.SingletonRepository.Realms.Get<FolkRealm>(),
-        SaveGame.SingletonRepository.Realms.Get<CorporealRealm>()
+        SaveGame.SingletonRepository.Realms.Get(nameof(LifeRealm)),
+        SaveGame.SingletonRepository.Realms.Get(nameof(SorceryRealm)),
+        SaveGame.SingletonRepository.Realms.Get(nameof(NatureRealm)),
+        SaveGame.SingletonRepository.Realms.Get(nameof(DeathRealm)),
+        SaveGame.SingletonRepository.Realms.Get(nameof(TarotRealm)),
+        SaveGame.SingletonRepository.Realms.Get(nameof(FolkRealm)),
+        SaveGame.SingletonRepository.Realms.Get(nameof(CorporealRealm))
     };
     public override bool WorshipsADeity => true;
 
     protected override ItemFactory[] Outfit => new ItemFactory[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get<BeginnersHandbookSorceryBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<SustainIntelligenceRingItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<BlackPrayersDeathBookItemFactory>()
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(BeginnersHandbookSorceryBookItemFactory)),
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SustainIntelligenceRingItemFactory)),
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(BlackPrayersDeathBookItemFactory))
     };
 
     public override void UpdateBonusesForMeleeWeapon(Item? oPtr)

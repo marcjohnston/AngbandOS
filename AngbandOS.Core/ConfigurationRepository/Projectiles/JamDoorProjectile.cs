@@ -12,7 +12,7 @@ internal class JamDoorProjectile : Projectile
 {
     private JamDoorProjectile(SaveGame saveGame) : base(saveGame) { }
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<YellowSwirlAnimation>();
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(YellowSwirlAnimation));
 
     protected override bool AffectFloor(int y, int x)
     {

@@ -15,7 +15,7 @@ internal class SetOfGauntletsIronfistFixedArtifact : FixedArtifact, IFixedArtifa
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<GauntletGlovesArmorItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(GauntletGlovesArmorItemFactory));
     }
 
 
@@ -27,7 +27,7 @@ internal class SetOfGauntletsIronfistFixedArtifact : FixedArtifact, IFixedArtifa
         {
             return;
         }
-        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, SaveGame.Rng.DiceRoll(9, 8));
+        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, SaveGame.Rng.DiceRoll(9, 8));
         item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(8) + 8;
     }
     public string DescribeActivationEffect() => "fire bolt (9d8) every 8+d8 turns";

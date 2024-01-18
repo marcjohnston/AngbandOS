@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class LordlyProtectionRingItem : RingItem
 {
-    public LordlyProtectionRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<LordlyProtectionRingItemFactory>()) { }
+    public LordlyProtectionRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(LordlyProtectionRingItemFactory))) { }
     protected override void ApplyMagic(int level, int power, Store? store)
     {
         IArtifactBias artifactBias = null;

@@ -15,7 +15,7 @@ internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact, IFixedArtif
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<MetalScaleMailHardArmorItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(MetalScaleMailHardArmorItemFactory));
     }
 
 

@@ -12,13 +12,17 @@ namespace AngbandOS.Core.ChestTraps;
 /// need concern themselves with their own implementation and not sub-traps.
 /// </summary>
 [Serializable]
-internal abstract class ChestTrap
+internal abstract class ChestTrap : IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
     protected ChestTrap(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     /// <summary>
     /// Activate the trap.

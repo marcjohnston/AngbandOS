@@ -20,6 +20,6 @@ internal class ManualStoreCommand : StoreCommand
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {
-        SaveGame.RunScript<ShowManualScript>();
+        SaveGame.RunScript(nameof(ShowManualScript));
     }
 }

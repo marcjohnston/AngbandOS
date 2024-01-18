@@ -12,5 +12,5 @@ internal class DryBonesStoreOwner : StoreOwner
     public override string OwnerName => "Dry-Bones";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  105;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<SkeletonRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(SkeletonRace));
 }

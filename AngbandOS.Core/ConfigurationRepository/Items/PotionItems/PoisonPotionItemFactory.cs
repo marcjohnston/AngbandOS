@@ -43,7 +43,7 @@ internal class PoisonPotionItemFactory : PotionItemFactory
 
     public override bool Smash(int who, int y, int x)
     {
-        SaveGame.Project(who, 2, y, x, 3, SaveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        SaveGame.Project(who, 2, y, x, 3, SaveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return true;
     }
     public override Item CreateItem() => new PoisonPotionItem(SaveGame);

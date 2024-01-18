@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class WizardCommandsRepositoryCollection : DictionaryRepositoryCollection<WizardCommand>
+internal class WizardCommandsRepositoryCollection : KeyedDictionaryRepositoryCollection<string, WizardCommand>
 {
     public WizardCommandsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 }

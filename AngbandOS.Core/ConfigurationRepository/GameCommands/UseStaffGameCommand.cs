@@ -20,6 +20,6 @@ internal class UseStaffGameCommand : GameCommand
 
     public override bool Execute()
     {
-        return SaveGame.RunScript<UseStaffScript>();
+        return SaveGame.RunScript(nameof(UseStaffScript));
     }
 }

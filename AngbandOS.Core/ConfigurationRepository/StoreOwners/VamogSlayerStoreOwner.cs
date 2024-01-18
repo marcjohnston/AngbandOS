@@ -12,5 +12,5 @@ internal class VamogSlayerStoreOwner : StoreOwner
     public override string OwnerName => "Vamog Slayer";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  110;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<HalfOgreRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HalfOgreRace));
 }

@@ -19,13 +19,13 @@ internal class DarknessMonsterSpell : BallProjectileMonsterSpell
     protected override ProjectionFlag ProjectionFlags => ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill;
 
     protected override string ActionName => "gestures in shadow";
-    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get<AcidProjectile>();
+    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile));
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         return SaveGame.Rng.DieRoll(monsterLevel * 3) + 15;
     }
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get<AcidSpellResistantDetection>() };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(AcidSpellResistantDetection)) };
 
     public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
     {

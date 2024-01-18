@@ -13,8 +13,8 @@ internal class BlinkDogMonsterRace : MonsterRace
     protected BlinkDogMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<BlinkMonsterSpell>(),
-        SaveGame.SingletonRepository.MonsterSpells.Get<TeleportToMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlinkMonsterSpell)),
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportToMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperCSymbol));
     public override ColourEnum Colour => ColourEnum.BrightBlue;
     public override string Name => "Blink dog";
@@ -22,7 +22,7 @@ internal class BlinkDogMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 20;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 8),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "A strange magical member of the canine race, its form seems to shimmer and fade in front of your very eyes.";

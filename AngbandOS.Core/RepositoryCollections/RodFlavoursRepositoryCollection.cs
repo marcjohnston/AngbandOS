@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class RodFlavoursRepositoryCollection : DictionaryRepositoryCollection<RodFlavour>
+internal class RodFlavoursRepositoryCollection : KeyedDictionaryRepositoryCollection<string, RodFlavour>
 {
     public RodFlavoursRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 }

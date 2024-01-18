@@ -18,7 +18,7 @@ internal class HoboMonsterRace : MonsterRace
 
     public override int ArmourClass => 1;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<DroolAttack>(), null, 0, 0),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(DroolAttack)), null, 0, 0),
     };
     public override bool BashDoor => true;
     public override string Description => "Ugly doesn't begin to describe him.";

@@ -19,6 +19,6 @@ internal class MutantPowerGameCommand : GameCommand
 
     public override bool Execute()
     {
-        return SaveGame.RunScript<MutantPowerScript>();
+        return SaveGame.RunScript(nameof(MutantPowerScript));
     }
 }

@@ -12,5 +12,5 @@ internal class DeathMaskStoreOwner : StoreOwner
     public override string OwnerName => "Death Mask";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  105;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<ZombieRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(ZombieRace));
 }

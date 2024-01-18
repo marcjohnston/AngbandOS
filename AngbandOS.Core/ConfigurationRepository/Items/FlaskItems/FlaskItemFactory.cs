@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class FlaskItemFactory : ItemFactory
 {
     public FlaskItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get<FlasksItemClass>();
+    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(FlasksItemClass));
     public override bool EasyKnow => true;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Flask;
     public override bool HatesCold => true;

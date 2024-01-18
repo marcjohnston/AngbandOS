@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class StaffItemClass : ItemFactory, IFlavour
 {
     public StaffItemClass(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get<StaffsItemClass>();
+    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(StaffsItemClass));
 
     /// <summary>
     /// Returns the staff flavours repository because staves have flavours that need to be identified.

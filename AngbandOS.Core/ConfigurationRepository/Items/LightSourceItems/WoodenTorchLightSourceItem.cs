@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class WoodenTorchLightSourceItem : LightSourceItem
 {
-    public WoodenTorchLightSourceItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<WoodenTorchLightSourceItemFactory>()) { }
+    public WoodenTorchLightSourceItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(WoodenTorchLightSourceItemFactory))) { }
 
     /// <summary>
     /// Returns true because a torch can be used as fuel for another torch.

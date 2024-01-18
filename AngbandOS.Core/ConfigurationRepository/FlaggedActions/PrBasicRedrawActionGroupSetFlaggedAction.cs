@@ -15,18 +15,18 @@ internal class PrBasicRedrawActionGroupSetFlaggedAction : GroupSetFlaggedAction
     public override void Loaded()
     {
         RedrawActions = new FlaggedAction[] {
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawPlayerFlaggedAction>(),
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawTitleFlaggedAction>(),
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawStatsFlaggedAction>(),
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawLevelFlaggedAction>(),
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawExpFlaggedAction>(),
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawGoldFlaggedAction>(),
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawArmorFlaggedAction>(),
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawHpFlaggedAction>(),
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawManaFlaggedAction>(),
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawDepthFlaggedAction>(),
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>(),
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawSpeedFlaggedAction>()
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawPlayerFlaggedAction)),
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawTitleFlaggedAction)),
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStatsFlaggedAction)),
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawLevelFlaggedAction)),
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawExpFlaggedAction)),
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawGoldFlaggedAction)),
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawArmorFlaggedAction)),
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)),
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)),
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawDepthFlaggedAction)),
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthFlaggedAction)),
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction))
         };
     }
 }

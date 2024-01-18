@@ -170,7 +170,7 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
                 }
             }
             SaveGame.OldSpareSpellSlots = SaveGame.SpareSpellSlots;
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawStudyFlaggedAction>().Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStudyFlaggedAction)).Set();
         }
     }
 }

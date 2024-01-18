@@ -21,13 +21,13 @@ internal class BlindnessTimedAction : TimedAction
     }
     protected override void Noticed()
     {
-        SaveGame.SingletonRepository.FlaggedActions.Get<RemoveLightFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<RemoveViewFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawBlindFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RemoveViewFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawBlindFlaggedAction)).Set();
         base.Noticed();
     }
 }

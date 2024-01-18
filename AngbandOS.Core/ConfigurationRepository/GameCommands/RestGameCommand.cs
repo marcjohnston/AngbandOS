@@ -19,7 +19,7 @@ internal class RestGameCommand : GameCommand
 
     public override bool Execute() // TODO: Why can't this command take in a count?
     {
-        SaveGame.RunScript<RestScript>();
+        SaveGame.RunScript(nameof(RestScript));
 
         // Do not disturb our rest.
         return true;

@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class DetectInvisibleScrollItem : ScrollItem
 {
-    public DetectInvisibleScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ScrollDetectInvisible>()) { }
+    public DetectInvisibleScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(ScrollDetectInvisible))) { }
 }

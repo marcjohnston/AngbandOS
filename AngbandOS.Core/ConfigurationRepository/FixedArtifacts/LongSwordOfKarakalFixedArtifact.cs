@@ -15,7 +15,7 @@ internal class LongSwordOfKarakalFixedArtifact : FixedArtifact, IFixedArtifactAc
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<SwordLongSword>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordLongSword));
     }
 
 

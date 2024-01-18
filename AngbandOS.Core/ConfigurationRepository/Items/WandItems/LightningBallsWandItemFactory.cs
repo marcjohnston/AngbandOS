@@ -26,7 +26,7 @@ internal class LightningBallsWandItemFactory : WandItemFactory
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, 32, 2);
+        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, 32, 2);
         return true;
     }
     public override Item CreateItem() => new LightningBallsWandItem(SaveGame);

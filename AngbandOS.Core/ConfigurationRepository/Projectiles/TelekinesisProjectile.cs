@@ -12,9 +12,9 @@ internal class TelekinesisProjectile : Projectile
 {
     private TelekinesisProjectile(SaveGame saveGame) : base(saveGame) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<TurquoiseBoltProjectileGraphic>();
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(TurquoiseBoltProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<TurquoiseSwirlAnimation>();
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(TurquoiseSwirlAnimation));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {

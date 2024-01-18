@@ -21,7 +21,7 @@ internal class UpdateLightFlaggedAction : FlaggedAction
     {
         if (SaveGame.LightLevel <= 0)
         {
-            SaveGame.SingletonRepository.FlaggedActions.Get<RemoveLightFlaggedAction>().Check(true);
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Check(true);
             SaveGame.RedrawSingleLocation(SaveGame.MapY, SaveGame.MapX);
             return;
         }

@@ -26,6 +26,6 @@ internal class ProdManaRandomMutation : Mutation
         SaveGame.MsgPrint("Magical energy flows through you! You must release it!");
         SaveGame.MsgPrint(null);
         SaveGame.GetDirectionNoAutoAim(out int dire);
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), dire, SaveGame.ExperienceLevel * 2, 3);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), dire, SaveGame.ExperienceLevel * 2, 3);
     }
 }

@@ -8,13 +8,17 @@
 namespace AngbandOS.Core.FlaggedActions;
 
 [Serializable]
-internal abstract class FlaggedAction
+internal abstract class FlaggedAction : IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
     protected FlaggedAction(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     public virtual void Loaded() { }
 

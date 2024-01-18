@@ -28,13 +28,13 @@ internal class CantripsforBeginnersFolkBookItemFactory : FolkBookItemFactory
     public override Item CreateItem() => new CantripsforBeginnersFolkBookItem(SaveGame);
     public override Spell[] Spells => new Spell[]
     {
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellZap>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellWizardLock>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellDetectInvisibility>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellDetectMonsters>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellBlink>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellLightArea>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellTrapAndDoorDestruction>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellCureLightWounds>(),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellZap)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellWizardLock)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellDetectInvisibility)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellDetectMonsters)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellBlink)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellLightArea)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellTrapAndDoorDestruction)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellCureLightWounds)),
     };
 }

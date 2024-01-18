@@ -20,7 +20,7 @@ internal class PolyWoundRandomMutation : Mutation
     {
         if (base.SaveGame.Rng.DieRoll(3000) == 1)
         {
-            SaveGame.RunScript<PolymorphWoundsScript>();
+            SaveGame.RunScript(nameof(PolymorphWoundsScript));
         }
     }
 }

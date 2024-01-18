@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class RedDragonScaleMailArmorItem : DragonScaleMailArmorItem, IItemActivatable
 {
-    public RedDragonScaleMailArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<RedDragonScaleMailArmorItemFactory>()) { }
+    public RedDragonScaleMailArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(RedDragonScaleMailArmorItemFactory))) { }
     public void DoActivate()
     {
         if (!SaveGame.GetDirectionWithAim(out int dir))
@@ -18,7 +18,7 @@ internal class RedDragonScaleMailArmorItem : DragonScaleMailArmorItem, IItemActi
             return;
         }
         SaveGame.MsgPrint("You breathe fire.");
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, 200, -2);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 200, -2);
         RechargeTimeLeft = SaveGame.Rng.RandomLessThan(450) + 450;
     }
 }

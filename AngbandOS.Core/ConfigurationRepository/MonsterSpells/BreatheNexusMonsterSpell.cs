@@ -13,7 +13,7 @@ internal class BreatheNexusMonsterSpell : BreatheProjectileMonsterSpell
     private BreatheNexusMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     public override bool UsesNexus => true;
     protected override string ElementName => "nexus";
-    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get<NexusProjectile>();
+    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get(nameof(NexusProjectile));
     protected override int Damage(Monster monster) => monster.Health / 3 > 250 ? 250 : monster.Health / 3;
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get<NexusSpellResistantDetection>() };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(NexusSpellResistantDetection)) };
 }

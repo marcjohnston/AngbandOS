@@ -12,5 +12,5 @@ internal class SkidneyTheSorcererStoreOwner : StoreOwner
     public override string OwnerName => "Skidney the Sorcerer";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  110;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<HalfElfRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HalfElfRace));
 }

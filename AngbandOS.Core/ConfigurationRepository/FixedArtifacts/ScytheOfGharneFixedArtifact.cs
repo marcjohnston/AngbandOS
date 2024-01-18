@@ -15,7 +15,7 @@ internal class ScytheOfGharneFixedArtifact : FixedArtifact, IFixedArtifactActiva
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<PolearmScythe>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(PolearmScythe));
     }
 
 

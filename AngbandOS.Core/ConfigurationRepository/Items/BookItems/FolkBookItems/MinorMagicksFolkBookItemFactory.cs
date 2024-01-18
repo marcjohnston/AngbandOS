@@ -28,14 +28,14 @@ internal class MinorMagicksFolkBookItemFactory : FolkBookItemFactory
 
     public override Spell[] Spells => new Spell[]
     {
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellDetectDoorsAndTraps>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellPhlogiston>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellDetectTreasure>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellDetectEnchantment>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellDetectObjects>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellCurePoison>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellResistCold>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellResistFire>()
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellDetectDoorsAndTraps)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellPhlogiston)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellDetectTreasure)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellDetectEnchantment)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellDetectObjects)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellCurePoison)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellResistCold)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellResistFire))
     };
 
     public override Item CreateItem() => new MinorMagicksFolkBookItem(SaveGame);

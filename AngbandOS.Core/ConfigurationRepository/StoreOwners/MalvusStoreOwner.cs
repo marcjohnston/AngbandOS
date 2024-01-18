@@ -12,5 +12,5 @@ internal class MalvusStoreOwner : StoreOwner
     public override string OwnerName => "Malvus";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  112;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<HalfTitanRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HalfTitanRace));
 }

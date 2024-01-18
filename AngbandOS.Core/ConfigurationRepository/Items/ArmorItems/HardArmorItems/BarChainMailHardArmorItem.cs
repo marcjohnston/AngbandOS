@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class BarChainMailHardArmorItem : HardArmorItem
 {
-    public BarChainMailHardArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<BarChainMailHardArmorItemFactory>()) { }
+    public BarChainMailHardArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(BarChainMailHardArmorItemFactory))) { }
 }

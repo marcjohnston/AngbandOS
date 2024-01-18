@@ -114,7 +114,7 @@ internal class IntroductionBirthStage : BirthStage
             SaveGame.Gender = availableRandomGenders[genderIndex];
             SaveGame.Name = SaveGame.Race.CreateRandomName();
             SaveGame.Generation = 1;
-            return SaveGame.SingletonRepository.BirthStages.Get<ConfirmationBirthStage>();
+            return SaveGame.SingletonRepository.BirthStages.Get(nameof(ConfirmationBirthStage));
         }
         else if (index == 2) // Previous
         {
@@ -127,7 +127,7 @@ internal class IntroductionBirthStage : BirthStage
             SaveGame.Gender = SaveGame._prevSex;
             SaveGame.Name = SaveGame._prevName;
             SaveGame.Generation = SaveGame._prevGeneration + 1;
-            return SaveGame.SingletonRepository.BirthStages.Get<ConfirmationBirthStage>();
+            return SaveGame.SingletonRepository.BirthStages.Get(nameof(ConfirmationBirthStage));
         }
         else
         {
@@ -139,6 +139,6 @@ internal class IntroductionBirthStage : BirthStage
             SaveGame.PrimaryRealm = null; // Wait until the player has selected a primary realm.
             SaveGame.SecondaryRealm = null; // Wait until the player has selected secondary realm.
         }
-        return SaveGame.SingletonRepository.BirthStages.Get<ClassSelectionBirthStage>();
+        return SaveGame.SingletonRepository.BirthStages.Get(nameof(ClassSelectionBirthStage));
     }
 }

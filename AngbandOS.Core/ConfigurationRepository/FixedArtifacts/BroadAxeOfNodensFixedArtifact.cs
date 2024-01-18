@@ -15,7 +15,7 @@ internal class BroadAxeOfNodensFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<PolearmBroadAxe>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(PolearmBroadAxe));
     }
 
 

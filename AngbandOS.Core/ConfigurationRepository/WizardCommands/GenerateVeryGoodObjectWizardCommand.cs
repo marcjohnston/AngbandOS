@@ -16,7 +16,7 @@ internal class GenerateVeryGoodObjectWizardCommand : WizardCommand
 
     public override string HelpDescription => "Generate Very Good Object";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardObjectCommandsHelpGroup>();
+    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardObjectCommandsHelpGroup));
 
     public override void Execute()
     {

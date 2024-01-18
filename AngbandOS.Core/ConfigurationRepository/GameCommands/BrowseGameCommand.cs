@@ -19,6 +19,6 @@ internal class BrowseGameCommand : GameCommand
 
     public override bool Execute()
     {
-        return SaveGame.RunScript<BrowseScript>();
+        return SaveGame.RunScript(nameof(BrowseScript));
     }
 }

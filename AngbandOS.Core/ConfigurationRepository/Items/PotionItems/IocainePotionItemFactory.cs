@@ -32,7 +32,7 @@ internal class IocainePotionItemFactory : PotionItemFactory
 
     public override bool Smash(int who, int y, int x)
     {
-        SaveGame.Project(who, 1, y, x, 0, SaveGame.SingletonRepository.Projectiles.Get<DeathRayProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        SaveGame.Project(who, 1, y, x, 0, SaveGame.SingletonRepository.Projectiles.Get(nameof(DeathRayProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return true;
     }
     public override Item CreateItem() => new IocainePotionItem(SaveGame);

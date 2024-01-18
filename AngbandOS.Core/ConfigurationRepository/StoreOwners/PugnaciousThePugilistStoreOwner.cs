@@ -12,5 +12,5 @@ internal class PugnaciousThePugilistStoreOwner : StoreOwner
     public override string OwnerName => "Pugnacious the Pugilist";
     public override int MaxCost =>  20000;
     public override int MinInflate =>  150;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<HalfOrcRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HalfOrcRace));
 }

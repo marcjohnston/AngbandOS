@@ -25,10 +25,10 @@ internal class DeathRealm : Realm
     /// </summary>
     public override BookItemFactory[] SpellBooks => new BookItemFactory[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get<BlackPrayersDeathBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<BlackMassDeathBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<CultesdesGoulesDeathBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<NecronomiconDeathBookItemFactory>()
+        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(BlackPrayersDeathBookItemFactory)),
+        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(BlackMassDeathBookItemFactory)),
+        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(CultesdesGoulesDeathBookItemFactory)),
+        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(NecronomiconDeathBookItemFactory))
     };
     public override bool ResistantToHolyAndHellProjectiles => true;
 }

@@ -15,7 +15,7 @@ internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact, IFi
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<PowerDragonScaleMailArmorItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(PowerDragonScaleMailArmorItemFactory));
     }
 
 
@@ -27,7 +27,7 @@ internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact, IFi
             return;
         }
         saveGame.MsgPrint("You breathe the elements.");
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), dir, 300, 4);
+        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), dir, 300, 4);
         saveGame.MsgPrint("Your armor glows many colors...");
         saveGame.TimedFear.ResetTimer();
         saveGame.TimedSuperheroism.AddTimer(SaveGame.Rng.DieRoll(50) + 50);

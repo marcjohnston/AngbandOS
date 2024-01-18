@@ -12,5 +12,5 @@ internal class AngelStoreOwner : StoreOwner
     public override string OwnerName => "Angel";
     public override int MaxCost =>  20000;
     public override int MinInflate =>  150;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<VampireRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(VampireRace));
 }

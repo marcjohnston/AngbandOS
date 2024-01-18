@@ -17,7 +17,7 @@ internal class SorcerySpellTeleportAway : Spell
         {
             return;
         }
-        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get<TeleportAwayAllProjectile>(), dir, SaveGame.ExperienceLevel);
+        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get(nameof(TeleportAwayAllProjectile)), dir, SaveGame.ExperienceLevel);
     }
 
     public override string Name => "Teleport Away";

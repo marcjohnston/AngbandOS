@@ -19,7 +19,7 @@ internal class UnPowerAttackEffect : AttackEffect
         SaveGame.TakeHit(damage, monsterDescription);
         for (int k = 0; k < 10; k++)
         {
-            BaseInventorySlot packInventorySlot = SaveGame.SingletonRepository.InventorySlots.Get<PackInventorySlot>();
+            BaseInventorySlot packInventorySlot = SaveGame.SingletonRepository.InventorySlots.Get(nameof(PackInventorySlot));
             int i = packInventorySlot.WeightedRandom.Choose();
             Item? item = SaveGame.GetInventoryItem(i);
             if (item != null && (item.Category == ItemTypeEnum.Staff || item.Category == ItemTypeEnum.Wand) && item.TypeSpecificValue != 0)
@@ -34,16 +34,16 @@ internal class UnPowerAttackEffect : AttackEffect
                 }
                 if (SaveGame.TrackedMonsterIndex == monsterIndex)
                 {
-                    SaveGame.SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
+                    SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthFlaggedAction)).Set();
                 }
                 item.TypeSpecificValue = 0;
-                SaveGame.SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
+                SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
                 return;
             }
         }
     }
     public override void ApplyToMonster(Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
-        pt = SaveGame.SingletonRepository.Projectiles.Get<DisenchantProjectile>();
+        pt = SaveGame.SingletonRepository.Projectiles.Get(nameof(DisenchantProjectile));
     }
 }

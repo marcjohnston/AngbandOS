@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class RevelationsOfGlaakiNatureBookItem : NatureBookItem
 {
-    public RevelationsOfGlaakiNatureBookItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<RevelationsOfGlaakiNatureBookItemFactory>()) { }
+    public RevelationsOfGlaakiNatureBookItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(RevelationsOfGlaakiNatureBookItemFactory))) { }
 }

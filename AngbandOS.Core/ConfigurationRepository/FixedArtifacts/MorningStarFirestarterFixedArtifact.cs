@@ -15,7 +15,7 @@ internal class MorningStarFirestarterFixedArtifact : FixedArtifact, IFixedArtifa
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<HaftedMorningStar>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(HaftedMorningStar));
     }
 
 
@@ -27,7 +27,7 @@ internal class MorningStarFirestarterFixedArtifact : FixedArtifact, IFixedArtifa
         {
             return;
         }
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, 72, 3);
+        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 72, 3);
         item.RechargeTimeLeft = 100;
     }
     public string DescribeActivationEffect() => "large fire ball (72) every 100 turns";

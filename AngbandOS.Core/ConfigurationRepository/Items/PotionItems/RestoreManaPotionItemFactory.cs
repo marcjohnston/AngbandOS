@@ -31,7 +31,7 @@ internal class RestoreManaPotionItemFactory : PotionItemFactory
             SaveGame.Mana = SaveGame.MaxMana;
             SaveGame.FractionalMana = 0;
             SaveGame.MsgPrint("Your feel your head clear.");
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawManaFlaggedAction>().Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
             return true;
         }
         return false;
@@ -39,7 +39,7 @@ internal class RestoreManaPotionItemFactory : PotionItemFactory
 
     public override bool Smash(int who, int y, int x)
     {
-        SaveGame.Project(who, 1, y, x, SaveGame.Rng.DiceRoll(10, 10), SaveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        SaveGame.Project(who, 1, y, x, SaveGame.Rng.DiceRoll(10, 10), SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return false;
     }
     public override Item CreateItem() => new RestoreManaPotionItem(SaveGame);

@@ -58,25 +58,25 @@ internal class RogueCharacterClass : BaseCharacterClass
         "from the Tarot, Sorcery, Death, or Folk realms."
    };
     public override int SpellWeight => 350;
-    public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get<ArcaneCastingType>();
+    public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get(nameof(ArcaneCastingType));
     public override int SpellStat => Ability.Intelligence;
     public override int MaximumWeight => 30;
-    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get<RogueArtifactBias>();
+    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RogueArtifactBias));
     public override int FromScrollWarriorArtifactBiasPercentageChance => 25;
     public override bool SenseInventoryTest(int level) => (0 != SaveGame.Rng.RandomLessThan(20000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        SaveGame.SingletonRepository.Realms.Get<SorceryRealm>(),
-        SaveGame.SingletonRepository.Realms.Get<DeathRealm>(),
-        SaveGame.SingletonRepository.Realms.Get<TarotRealm>(),
-        SaveGame.SingletonRepository.Realms.Get<FolkRealm>()
+        SaveGame.SingletonRepository.Realms.Get(nameof(SorceryRealm)),
+        SaveGame.SingletonRepository.Realms.Get(nameof(DeathRealm)),
+        SaveGame.SingletonRepository.Realms.Get(nameof(TarotRealm)),
+        SaveGame.SingletonRepository.Realms.Get(nameof(FolkRealm))
     };
 
     protected override ItemFactory[] Outfit => new ItemFactory[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get<BeginnersHandbookSorceryBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<SwordDagger>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<SoftLeatherSoftArmorItemFactory>()
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(BeginnersHandbookSorceryBookItemFactory)),
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordDagger)),
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SoftLeatherSoftArmorItemFactory))
     };
 
     protected override void OutfitItem(Item item)

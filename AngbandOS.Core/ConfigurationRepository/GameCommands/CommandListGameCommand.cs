@@ -19,6 +19,6 @@ internal class CommandListGameCommand : GameCommand
 
     public override bool Execute()
     {
-        return SaveGame.RunScript<ListCommandsScript>();
+        return SaveGame.RunScript(nameof(ListCommandsScript));
     }
 }

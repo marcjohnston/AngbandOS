@@ -16,10 +16,10 @@ internal class ActivatePowerWizardCommand : WizardCommand
 
     public override string HelpDescription => "Activate Power";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardGeneralCommandsHelpGroup>();
+    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardGeneralCommandsHelpGroup));
 
     public override void Execute()
     {
-        SaveGame.RunScript<WizardActivatePowerScript>();
+        SaveGame.RunScript(nameof(WizardActivatePowerScript));
     }
 }

@@ -37,11 +37,11 @@ internal class ParalyzeAttackEffect : AttackEffect
                 obvious = true;
             }
         }
-        SaveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<FreeSpellResistantDetection>());
+        SaveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(FreeSpellResistantDetection)));
     }
     public override void ApplyToMonster(Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
-        pt = SaveGame.SingletonRepository.Projectiles.Get<OldSleepProjectile>();
+        pt = SaveGame.SingletonRepository.Projectiles.Get(nameof(OldSleepProjectile));
         damage = monster.Race.Level;
     }
 }

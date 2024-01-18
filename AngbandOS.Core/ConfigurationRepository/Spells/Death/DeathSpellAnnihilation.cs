@@ -34,8 +34,8 @@ internal class DeathSpellAnnihilation : Spell
             SaveGame.TakeHit(SaveGame.Rng.DieRoll(4), "the strain of casting Annihilation");
             SaveGame.Mana++;
             SaveGame.MoveCursorRelative(SaveGame.MapY, SaveGame.MapX);
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawHpFlaggedAction>().Set();
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawManaFlaggedAction>().Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
             SaveGame.HandleStuff();
             SaveGame.UpdateScreen();
             SaveGame.Pause(Constants.DelayFactorInMilliseconds);

@@ -13,7 +13,7 @@ internal class TwoHeadedHydraMonsterRace : MonsterRace
     protected TwoHeadedHydraMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<ScareMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperMSymbol));
     public override ColourEnum Colour => ColourEnum.BrightChartreuse;
     public override string Name => "2-headed hydra";
@@ -21,7 +21,7 @@ internal class TwoHeadedHydraMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 60;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 2, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "A strange reptilian hybrid with two heads, guarding its hoard.";

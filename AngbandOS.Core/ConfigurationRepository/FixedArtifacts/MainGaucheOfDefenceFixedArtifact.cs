@@ -15,7 +15,7 @@ internal class MainGaucheOfDefenceFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<SwordMainGauche>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordMainGauche));
     }
 
 

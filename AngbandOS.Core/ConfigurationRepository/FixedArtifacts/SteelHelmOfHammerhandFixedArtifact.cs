@@ -15,7 +15,7 @@ internal class SteelHelmOfHammerhandFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<HelmSteelHelm>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(HelmSteelHelm));
     }
 
 

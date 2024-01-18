@@ -12,5 +12,5 @@ internal class KeldornTheGrandStoreOwner : StoreOwner
     public override string OwnerName => "Keldorn the Grand";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  110;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<DwarfRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(DwarfRace));
 }

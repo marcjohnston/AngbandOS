@@ -32,19 +32,19 @@ internal class DragonsBreathWandItemFactory : WandItemFactory
         switch (SaveGame.Rng.RandomLessThan(5))
         {
             case 0:
-                saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir, 100, -3);
+                saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, 100, -3);
                 break;
             case 1:
-                saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, 80, -3);
+                saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, 80, -3);
                 break;
             case 2:
-                saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, 100, -3);
+                saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 100, -3);
                 break;
             case 3:
-                saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 80, -3);
+                saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 80, -3);
                 break;
             case 4:
-                saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), dir, 60, -3);
+                saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), dir, 60, -3);
                 break;
             default:
                 throw new Exception("Internal error.");

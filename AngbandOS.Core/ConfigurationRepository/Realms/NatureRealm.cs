@@ -24,10 +24,10 @@ internal class NatureRealm : Realm
     /// </summary>
     public override BookItemFactory[] SpellBooks => new BookItemFactory[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get<CallOfTheWildNatureBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<NatureMasteryNatureBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<RevelationsOfGlaakiNatureBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<CthaatAquadingenNatureBookItemFactory>()
+        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(CallOfTheWildNatureBookItemFactory)),
+        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(NatureMasteryNatureBookItemFactory)),
+        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(RevelationsOfGlaakiNatureBookItemFactory)),
+        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(CthaatAquadingenNatureBookItemFactory))
     };
     public override string Name => "Nature";
     public override ItemTypeEnum SpellBookItemCategory => ItemTypeEnum.NatureBook;

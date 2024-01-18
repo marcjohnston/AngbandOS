@@ -26,7 +26,7 @@ internal class RodFireBalls : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), zapRodEvent.Dir.Value, 72, 2);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), zapRodEvent.Dir.Value, 72, 2);
         zapRodEvent.Identified = true;
         zapRodEvent.Item.TypeSpecificValue = 30;
     }

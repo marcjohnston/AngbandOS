@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class ChestItemFactory : ItemFactory
 {
     public ChestItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get<ChestsItemClass>();
+    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(ChestsItemClass));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Chest;
     public override bool HatesFire => true;
     public override bool HatesAcid => true;

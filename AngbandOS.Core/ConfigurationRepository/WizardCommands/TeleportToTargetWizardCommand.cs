@@ -16,7 +16,7 @@ internal class TeleportToTargetWizardCommand : WizardCommand
 
     public override string HelpDescription => "Teleport to Target";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardMovementHelpGroup>();
+    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardMovementHelpGroup));
 
     public override void Execute()
     {

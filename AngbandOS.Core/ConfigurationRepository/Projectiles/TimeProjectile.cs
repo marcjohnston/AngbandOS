@@ -12,9 +12,9 @@ internal class TimeProjectile : Projectile
 {
     private TimeProjectile(SaveGame saveGame) : base(saveGame) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<BrightGreenBoltProjectileGraphic>();
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BrightGreenBoltProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<BrightGreenCloudAnimation>();
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(BrightGreenCloudAnimation));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
@@ -115,7 +115,7 @@ internal class TimeProjectile : Projectile
                         {
                             SaveGame.AbilityScores[k].Innate = 3;
                         }
-                        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+                        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
                         break;
                     }
                 case 10:
@@ -129,7 +129,7 @@ internal class TimeProjectile : Projectile
                                 SaveGame.AbilityScores[k].Innate = 3;
                             }
                         }
-                        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+                        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
                         break;
                     }
             }

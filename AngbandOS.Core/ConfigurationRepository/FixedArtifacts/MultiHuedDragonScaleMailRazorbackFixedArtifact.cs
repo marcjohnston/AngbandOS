@@ -15,7 +15,7 @@ internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact, I
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<MultiHuedDragonScaleMailArmorItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(MultiHuedDragonScaleMailArmorItemFactory));
     }
 
 
@@ -25,7 +25,7 @@ internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact, I
         saveGame.MsgPrint("Your armor is surrounded by lightning...");
         for (int i = 0; i < 8; i++)
         {
-            saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), saveGame.OrderedDirection[i], 150, 3);
+            saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), saveGame.OrderedDirection[i], 150, 3);
         }
         item.RechargeTimeLeft = 1000;
     }

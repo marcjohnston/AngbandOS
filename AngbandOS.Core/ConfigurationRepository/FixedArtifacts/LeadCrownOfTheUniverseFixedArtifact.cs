@@ -15,7 +15,7 @@ internal class LeadCrownOfTheUniverseFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<LeadCrownArmorItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(LeadCrownArmorItemFactory));
     }
 
 

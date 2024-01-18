@@ -12,5 +12,5 @@ internal class FinakStoreOwner : StoreOwner
     public override string OwnerName => "Finak";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  109;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<YeekRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(YeekRace));
 }

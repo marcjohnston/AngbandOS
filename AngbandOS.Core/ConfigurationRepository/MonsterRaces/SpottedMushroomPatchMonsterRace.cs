@@ -18,7 +18,7 @@ internal class SpottedMushroomPatchMonsterRace : MonsterRace
 
     public override int ArmourClass => 1;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<SporeAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 2, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(SporeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 2, 4),
     };
     public override string Description => "Yum! It looks quite tasty.";
     public override bool EmptyMind => true;

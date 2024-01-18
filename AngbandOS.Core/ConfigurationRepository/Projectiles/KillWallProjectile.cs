@@ -12,7 +12,7 @@ internal class KillWallProjectile : Projectile
 {
     private KillWallProjectile(SaveGame saveGame) : base(saveGame) { }
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<BrownSwirlAnimation>();
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(BrownSwirlAnimation));
 
     protected override bool AffectFloor(int y, int x)
     {
@@ -87,10 +87,10 @@ internal class KillWallProjectile : Projectile
             cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
             SaveGame.RevertTileToBackground(y, x);
         }
-        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
         return obvious;
     }
 

@@ -12,5 +12,5 @@ internal class GrumbleworthStoreOwner : StoreOwner
     public override string OwnerName => "Grumbleworth";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  116;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<GnomeRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(GnomeRace));
 }

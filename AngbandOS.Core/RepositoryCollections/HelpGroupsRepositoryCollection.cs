@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class HelpGroupsRepositoryCollection : DictionaryRepositoryCollection<HelpGroup>
+internal class HelpGroupsRepositoryCollection : KeyedDictionaryRepositoryCollection<string, HelpGroup>
 {
     public HelpGroupsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 }

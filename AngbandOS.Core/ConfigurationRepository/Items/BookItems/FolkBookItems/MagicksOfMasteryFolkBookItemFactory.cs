@@ -33,13 +33,13 @@ internal class MagicksOfMasteryFolkBookItemFactory : FolkBookItemFactory
     public override Item CreateItem() => new MagicksOfMasteryFolkBookItem(SaveGame);
     public override Spell[] Spells => new Spell[]
     {
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellRecharging>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellTeleportLevel>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellIdentify>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellTeleportAway>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellElementalBall>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellDetection>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellWordOfRecall>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellClairvoyance>()
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellRecharging)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellTeleportLevel)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellIdentify)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellTeleportAway)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellElementalBall)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellDetection)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellWordOfRecall)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellClairvoyance))
     };
 }

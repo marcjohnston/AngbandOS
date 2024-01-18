@@ -22,7 +22,7 @@ internal class BoAcid1Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), direction, SaveGame.Rng.DiceRoll(5, 8));
+        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), direction, SaveGame.Rng.DiceRoll(5, 8));
         return true;
     }
 

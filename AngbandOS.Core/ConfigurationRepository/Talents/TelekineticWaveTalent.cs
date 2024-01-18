@@ -23,7 +23,7 @@ internal class TelekineticWaveTalent : Talent
     {
         SaveGame.MsgPrint("A wave of pure physical force radiates out from your body!");
         SaveGame.Project(0, 3 + (SaveGame.ExperienceLevel / 10), SaveGame.MapY, SaveGame.MapX,
-            SaveGame.ExperienceLevel * (SaveGame.ExperienceLevel > 39 ? 4 : 3), SaveGame.SingletonRepository.Projectiles.Get<TelekinesisProjectile>(),
+            SaveGame.ExperienceLevel * (SaveGame.ExperienceLevel > 39 ? 4 : 3), SaveGame.SingletonRepository.Projectiles.Get(nameof(TelekinesisProjectile)),
             ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectGrid);
     }
 

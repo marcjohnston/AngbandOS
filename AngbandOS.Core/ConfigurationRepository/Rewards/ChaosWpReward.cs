@@ -20,83 +20,83 @@ internal class ChaosWpReward : Reward
         {
             case 1:
             case 2:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get<SwordDagger>();
+                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordDagger));
                 break;
 
             case 3:
             case 4:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get<SwordMainGauche>();
+                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordMainGauche));
                 break;
 
             case 5:
             case 6:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get<SwordRapier>();
+                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordRapier));
                 break;
 
             case 7:
             case 8:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get<SwordSmallSword>();
+                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordSmallSword));
                 break;
 
             case 9:
             case 10:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get<SwordShortSword>();
+                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordShortSword));
                 break;
 
             case 11:
             case 12:
             case 13:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get<SwordSabre>();
+                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordSabre));
                 break;
 
             case 14:
             case 15:
             case 16:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get<SwordCutlass>();
+                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordCutlass));
                 break;
 
             case 17:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get<SwordTulwar>();
+                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordTulwar));
                 break;
 
             case 18:
             case 19:
             case 20:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get<SwordBroadSword>();
+                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordBroadSword));
                 break;
 
             case 21:
             case 22:
             case 23:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get<SwordLongSword>();
+                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordLongSword));
                 break;
 
             case 24:
             case 25:
             case 26:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get<SwordScimitar>();
+                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordScimitar));
                 break;
 
             case 27:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get<SwordKatana>();
+                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordKatana));
                 break;
 
             case 28:
             case 29:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get<SwordBastardSword>();
+                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordBastardSword));
                 break;
 
             case 30:
             case 31:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get<SwordTwoHandedSword>();
+                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordTwoHandedSword));
                 break;
 
             case 32:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get<SwordExecutionersSword>();
+                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordExecutionersSword));
                 break;
 
             default:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get<SwordBladeOfChaos>();
+                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordBladeOfChaos));
                 break;
         }
         Item qPtr = reward.CreateItem();

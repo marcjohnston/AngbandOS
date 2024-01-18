@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class GreenDragonScaleMailArmorItem : DragonScaleMailArmorItem, IItemActivatable
 {
-    public GreenDragonScaleMailArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<GreenDragonScaleMailArmorItemFactory>()) { }
+    public GreenDragonScaleMailArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(GreenDragonScaleMailArmorItemFactory))) { }
     public void DoActivate()
     {
         if (!SaveGame.GetDirectionWithAim(out int dir))
@@ -18,7 +18,7 @@ internal class GreenDragonScaleMailArmorItem : DragonScaleMailArmorItem, IItemAc
             return;
         }
         SaveGame.MsgPrint("You breathe poison gas.");
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), dir, 150, -2);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), dir, 150, -2);
         RechargeTimeLeft = SaveGame.Rng.RandomLessThan(450) + 450;
     }
 }

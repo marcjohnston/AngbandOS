@@ -12,5 +12,5 @@ internal class LumwiseTheMadStoreOwner : StoreOwner
     public override string OwnerName => "Lumwise the Mad";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  110;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<YeekRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(YeekRace));
 }

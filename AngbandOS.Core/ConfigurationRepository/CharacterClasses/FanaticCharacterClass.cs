@@ -40,22 +40,22 @@ internal class FanaticCharacterClass : BaseCharacterClass
         "(at lvl 30) and fear (at lvl 40)."
     };
     public override int SpellWeight => 400;
-    public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get<DivineCastingType>();
+    public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get(nameof(DivineCastingType));
     public override int SpellStat => Ability.Intelligence;
     public override int MaximumWeight => 30;
     public override int AttackSpeedMultiplier => 4;
-    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get<ChaosArtifactBias>();
+    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ChaosArtifactBias));
     public override int FromScrollWarriorArtifactBiasPercentageChance => 40;
     public override bool SenseInventoryTest(int level) => (0 != SaveGame.Rng.RandomLessThan(80000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        SaveGame.SingletonRepository.Realms.Get<ChaosRealm>()
+        SaveGame.SingletonRepository.Realms.Get(nameof(ChaosRealm))
     };
 
     protected override ItemFactory[] Outfit => new ItemFactory[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get<BeginnersHandbookSorceryBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<SwordBroadSword>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<MetalScaleMailHardArmorItemFactory>()
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(BeginnersHandbookSorceryBookItemFactory)),
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordBroadSword)),
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(MetalScaleMailHardArmorItemFactory))
     };
 }

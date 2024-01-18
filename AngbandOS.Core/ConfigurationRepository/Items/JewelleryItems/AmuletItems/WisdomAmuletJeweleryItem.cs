@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class WisdomAmuletJeweleryItem : AmuletJeweleryItem
 {
-    public WisdomAmuletJeweleryItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<WisdomAmuletJeweleryItemFactory>()) { }
+    public WisdomAmuletJeweleryItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(WisdomAmuletJeweleryItemFactory))) { }
 
     protected override void ApplyMagic(int level, int power, Store? store)
     {

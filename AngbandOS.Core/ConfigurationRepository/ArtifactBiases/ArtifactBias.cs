@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ArtifactBiases;
 /// Represents the bias used when applying special abilities to an artifact.
 /// </summary>
 [Serializable]
-internal abstract class ArtifactBias : IArtifactBias
+internal abstract class ArtifactBias : IArtifactBias, IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
 
@@ -19,6 +19,10 @@ internal abstract class ArtifactBias : IArtifactBias
     {
         SaveGame = saveGame;
     }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     /// <inheritdoc/>
     public virtual int ImmunityLuckOneInChance => 20;

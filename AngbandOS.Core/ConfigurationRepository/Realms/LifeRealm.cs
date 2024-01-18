@@ -24,10 +24,10 @@ internal class LifeRealm : Realm
     /// </summary>
     public override BookItemFactory[] SpellBooks => new BookItemFactory[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get<CommonPrayerLifeBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<HighMassLifeBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<DholChantsLifeBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<PonapeScriptureLifeBookItemFactory>()
+        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(CommonPrayerLifeBookItemFactory)),
+        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(HighMassLifeBookItemFactory)),
+        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(DholChantsLifeBookItemFactory)),
+        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(PonapeScriptureLifeBookItemFactory))
     };
     public override string Name => "Life";
 

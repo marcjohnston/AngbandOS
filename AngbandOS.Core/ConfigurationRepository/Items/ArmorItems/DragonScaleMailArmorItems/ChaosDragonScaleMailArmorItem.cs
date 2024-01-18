@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class ChaosDragonScaleMailArmorItem : DragonScaleMailArmorItem, IItemActivatable
 {
-    public ChaosDragonScaleMailArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ChaosDragonScaleMailArmorItemFactory>()) { }
+    public ChaosDragonScaleMailArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(ChaosDragonScaleMailArmorItemFactory))) { }
     public void DoActivate()
     {
         if (!SaveGame.GetDirectionWithAim(out int dir))
@@ -20,7 +20,7 @@ internal class ChaosDragonScaleMailArmorItem : DragonScaleMailArmorItem, IItemAc
         int chance = SaveGame.Rng.RandomLessThan(2);
         string element = chance == 1 ? "chaos" : "disenchantment";
         SaveGame.MsgPrint($"You breathe {element}.");
-        SaveGame.FireBall(projectile: chance == 1 ? (Projectile)SaveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>() : SaveGame.SingletonRepository.Projectiles.Get<DisenchantProjectile>(), dir: dir, dam: 220, rad: -2);
+        SaveGame.FireBall(projectile: chance == 1 ? (Projectile)SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)) : SaveGame.SingletonRepository.Projectiles.Get(nameof(DisenchantProjectile)), dir: dir, dam: 220, rad: -2);
         RechargeTimeLeft = SaveGame.Rng.RandomLessThan(300) + 300;
     }
 }

@@ -12,5 +12,5 @@ internal class RoshaThePatientStoreOwner : StoreOwner
     public override string OwnerName => "Ro-sha the Patient";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  105;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<GolemRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(GolemRace));
 }

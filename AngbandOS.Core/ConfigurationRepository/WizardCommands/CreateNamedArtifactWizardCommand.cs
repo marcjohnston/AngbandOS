@@ -16,7 +16,7 @@ internal class CreateNamedArtifactWizardCommand : WizardCommand
 
     public override string HelpDescription => "Create Named Artifact";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardObjectCommandsHelpGroup>();
+    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardObjectCommandsHelpGroup));
 
     public override void Execute()
     {

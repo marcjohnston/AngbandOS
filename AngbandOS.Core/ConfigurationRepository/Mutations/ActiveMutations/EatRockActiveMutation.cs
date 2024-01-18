@@ -65,10 +65,10 @@ internal class EatRockActiveMutation : Mutation
         SaveGame.RedrawSingleLocation(SaveGame.MapY, SaveGame.MapX);
         SaveGame.RedrawSingleLocation(oy, ox);
         SaveGame.RecenterScreenAroundPlayer();
-        base.SaveGame.SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
-        base.SaveGame.SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-        base.SaveGame.SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
-        base.SaveGame.SingletonRepository.FlaggedActions.Get<UpdateDistancesFlaggedAction>().Set();
+        base.SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
+        base.SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+        base.SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+        base.SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
     }
 
     public override string ActivationSummary(int lvl)

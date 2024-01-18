@@ -29,13 +29,13 @@ internal class BlackPrayersDeathBookItemFactory : DeathBookItemFactory
 
     public override Spell[] Spells => new Spell[]
     {
-        SaveGame.SingletonRepository.Spells.Get<DeathSpellDetectUnlife>(),
-        SaveGame.SingletonRepository.Spells.Get<DeathSpellMalediction>(),
-        SaveGame.SingletonRepository.Spells.Get<DeathSpellDetectEvil>(),
-        SaveGame.SingletonRepository.Spells.Get<DeathSpellStinkingCloud>(),
-        SaveGame.SingletonRepository.Spells.Get<DeathSpellBlackSleep>(),
-        SaveGame.SingletonRepository.Spells.Get<DeathSpellResistPoison>(),
-        SaveGame.SingletonRepository.Spells.Get<DeathSpellHorrify>(),
-        SaveGame.SingletonRepository.Spells.Get<DeathSpellEnslaveUndead>()
+        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellDetectUnlife)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellMalediction)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellDetectEvil)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellStinkingCloud)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellBlackSleep)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellResistPoison)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellHorrify)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellEnslaveUndead))
     };
 }

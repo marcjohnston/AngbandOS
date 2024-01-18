@@ -21,8 +21,8 @@ internal class HeroismTimedAction : TimedAction
     }
     protected override void Noticed()
     {
-        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateHealthFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
         base.Noticed();
     }
 }

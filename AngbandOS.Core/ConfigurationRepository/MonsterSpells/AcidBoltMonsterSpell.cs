@@ -20,6 +20,6 @@ internal class AcidBoltMonsterSpell : BoltProjectileMonsterSpell
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         return SaveGame.Rng.DiceRoll(7, 8) + (monsterLevel / 3);
     }
-    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get<AcidProjectile>();
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get<AcidSpellResistantDetection>(), SaveGame.SingletonRepository.SpellResistantDetections.Get<ReflectSpellResistantDetection>() };
+    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile));
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(AcidSpellResistantDetection)), SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(ReflectSpellResistantDetection)) };
 }

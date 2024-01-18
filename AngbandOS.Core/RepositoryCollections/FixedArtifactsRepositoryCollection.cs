@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class FixedArtifactsRepositoryCollection : DictionaryRepositoryCollection<FixedArtifact>
+internal class FixedArtifactsRepositoryCollection : KeyedDictionaryRepositoryCollection<string, FixedArtifact>
 {
     public FixedArtifactsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 

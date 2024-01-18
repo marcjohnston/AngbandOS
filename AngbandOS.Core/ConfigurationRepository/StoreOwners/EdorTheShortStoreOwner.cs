@@ -12,5 +12,5 @@ internal class EdorTheShortStoreOwner : StoreOwner
     public override string OwnerName => "Edor the Short";
     public override int MaxCost =>  25000;
     public override int MinInflate =>  115;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<HobbitRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HobbitRace));
 }

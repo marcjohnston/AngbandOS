@@ -12,5 +12,5 @@ internal class AgnarTheEnchantressStoreOwner : StoreOwner
     public override string OwnerName => "Agnar the Enchantress";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  110;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<HumanRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HumanRace));
 }

@@ -52,7 +52,7 @@ internal class DrainManaMonsterSpell : MonsterSpell
             {
                 saveGame.Mana -= r1;
             }
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawManaFlaggedAction>().Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
             if (monster.Health < monster.MaxHealth)
             {
                 monster.Health += 6 * r1;
@@ -62,7 +62,7 @@ internal class DrainManaMonsterSpell : MonsterSpell
                 }
                 if (saveGame.TrackedMonsterIndex == monster.GetMonsterIndex())
                 {
-                    SaveGame.SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
+                    SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthFlaggedAction)).Set();
                 }
                 if (seenByPlayer)
                 {
@@ -70,7 +70,7 @@ internal class DrainManaMonsterSpell : MonsterSpell
                 }
             }
         }
-        saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<ManaSpellResistantDetection>());
+        saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(ManaSpellResistantDetection)));
     }
 
     public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
@@ -104,7 +104,7 @@ internal class DrainManaMonsterSpell : MonsterSpell
                 }
                 if (saveGame.TrackedMonsterIndex == monster.GetMonsterIndex())
                 {
-                    SaveGame.SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
+                    SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthFlaggedAction)).Set();
                 }
                 if (seen)
                 {

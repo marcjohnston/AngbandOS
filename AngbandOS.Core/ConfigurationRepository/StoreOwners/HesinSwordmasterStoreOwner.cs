@@ -12,5 +12,5 @@ internal class HesinSwordmasterStoreOwner : StoreOwner
     public override string OwnerName => "Hesin Swordmaster";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  111;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<NibelungRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(NibelungRace));
 }

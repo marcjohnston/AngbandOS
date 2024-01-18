@@ -12,5 +12,5 @@ internal class DargLowTheGrimStoreOwner : StoreOwner
     public override string OwnerName => "Darg-Low the Grim";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  111;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<HumanRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HumanRace));
 }

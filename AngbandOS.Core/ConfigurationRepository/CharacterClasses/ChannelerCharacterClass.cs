@@ -40,19 +40,19 @@ internal class ChannelerCharacterClass : BaseCharacterClass
         "without depleting them."
     };
     public override int SpellWeight => 400;
-    public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get<ChannelingCastingType>();
+    public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get(nameof(ChannelingCastingType));
     public override int SpellStat => Ability.Charisma;
     public override int MaximumMeleeAttacksPerRound(int level) => 4;
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 2;
-    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get<MageArtifactBias>();
+    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(MageArtifactBias));
     public override bool SenseInventoryTest(int level) => (0 != SaveGame.Rng.RandomLessThan(9000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
 
     protected override ItemFactory[] Outfit => new ItemFactory[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get<MagicMissileWandItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<SwordDagger>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<SustainCharismaRingItemFactory>()
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(MagicMissileWandItemFactory)),
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordDagger)),
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SustainCharismaRingItemFactory))
    };
 }

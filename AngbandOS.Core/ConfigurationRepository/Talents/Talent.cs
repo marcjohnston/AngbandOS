@@ -8,13 +8,17 @@
 namespace AngbandOS.Core.Talents;
 
 [Serializable]
-internal abstract class Talent
+internal abstract class Talent : IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
     protected Talent(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     public abstract string Name { get; }
 

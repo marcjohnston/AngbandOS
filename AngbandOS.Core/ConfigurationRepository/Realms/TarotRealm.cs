@@ -25,9 +25,9 @@ internal class TarotRealm : Realm
     /// </summary>
     public override BookItemFactory[] SpellBooks => new BookItemFactory[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get<ConjuringsTricksTarotBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<CardMasteryTarotBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<EltdownShardsTarotBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<CeleanoFragmentsTarotBookItemFactory>()
+        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(ConjuringsTricksTarotBookItemFactory)),
+        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(CardMasteryTarotBookItemFactory)),
+        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(EltdownShardsTarotBookItemFactory)),
+        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(CeleanoFragmentsTarotBookItemFactory))
     };
 }

@@ -12,5 +12,5 @@ internal class HorbagTheUncleanStoreOwner : StoreOwner
     public override string OwnerName => "Horbag the Unclean";
     public override int MaxCost =>  10000;
     public override int MinInflate =>  115;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<HalfOrcRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HalfOrcRace));
 }

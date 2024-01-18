@@ -42,7 +42,7 @@ internal class WarriorCharacterClass : BaseCharacterClass
     public override int MaximumMeleeAttacksPerRound(int level) => 6;
     public override int MaximumWeight => 30;
     public override int AttackSpeedMultiplier => 5;
-    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get<WarriorArtifactBias>();
+    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(WarriorArtifactBias));
     public override bool SenseInventoryTest(int level) => (0 != SaveGame.Rng.RandomLessThan(9000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
 
@@ -63,8 +63,8 @@ internal class WarriorCharacterClass : BaseCharacterClass
 
     protected override ItemFactory[] Outfit => new ItemFactory[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get<FearResistanceRingItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<SwordBroadSword>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<ChainMailHardArmorItemFactory>()
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(FearResistanceRingItemFactory)),
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordBroadSword)),
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(ChainMailHardArmorItemFactory))
     };
 }

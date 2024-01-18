@@ -20,6 +20,6 @@ internal class LightningBoltMonsterSpell : BoltProjectileMonsterSpell
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         return SaveGame.Rng.DiceRoll(4, 8) + (monsterLevel / 3);
     }
-    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get<ElecProjectile>();
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get<ElecSpellResistantDetection>(), SaveGame.SingletonRepository.SpellResistantDetections.Get<ReflectSpellResistantDetection>() };
+    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile));
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(ElecSpellResistantDetection)), SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(ReflectSpellResistantDetection)) };
 }

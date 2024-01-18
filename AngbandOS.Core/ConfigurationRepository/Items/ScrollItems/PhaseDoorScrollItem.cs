@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class PhaseDoorScrollItem : ScrollItem
 {
-    public PhaseDoorScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ScrollPhaseDoor>()) { }
+    public PhaseDoorScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(ScrollPhaseDoor))) { }
 }

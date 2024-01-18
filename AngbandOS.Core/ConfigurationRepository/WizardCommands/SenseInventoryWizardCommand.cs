@@ -16,7 +16,7 @@ internal class SenseInventoryWizardCommand : WizardCommand
 
     public override string HelpDescription => "Sense Inventory";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardObjectCommandsHelpGroup>();
+    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardObjectCommandsHelpGroup));
 
     public override void Execute()
     {

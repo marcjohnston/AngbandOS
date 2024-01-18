@@ -17,7 +17,7 @@ internal class ChaosSpellDisintegrate : Spell
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<DisintegrateProjectile>(), dir, 80 + SaveGame.ExperienceLevel,
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(DisintegrateProjectile)), dir, 80 + SaveGame.ExperienceLevel,
             3 + (SaveGame.ExperienceLevel / 40));
     }
 

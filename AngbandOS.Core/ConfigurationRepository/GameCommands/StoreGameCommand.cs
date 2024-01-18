@@ -19,6 +19,6 @@ internal class StoreGameCommand : GameCommand
 
     public override bool Execute()
     {
-        return SaveGame.RunScript<StoreScript>();
+        return SaveGame.RunScript(nameof(StoreScript));
     }
 }

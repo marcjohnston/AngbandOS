@@ -15,7 +15,7 @@ internal class SetOfGauntletsWhiteSparkFixedArtifact : FixedArtifact, IFixedArti
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<GauntletGlovesArmorItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(GauntletGlovesArmorItemFactory));
     }
 
 
@@ -27,7 +27,7 @@ internal class SetOfGauntletsWhiteSparkFixedArtifact : FixedArtifact, IFixedArti
         {
             return;
         }
-        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, SaveGame.Rng.DiceRoll(4, 8));
+        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, SaveGame.Rng.DiceRoll(4, 8));
         item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(6) + 6;
     }
     public string DescribeActivationEffect() => "lightning bolt (4d8) every 6+d6 turns";

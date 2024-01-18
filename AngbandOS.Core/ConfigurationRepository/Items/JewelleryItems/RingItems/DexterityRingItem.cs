@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class DexterityRingItem : RingItem
 {
-    public DexterityRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<DexterityRingItemFactory>()) { }
+    public DexterityRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(DexterityRingItemFactory))) { }
     protected override void ApplyMagic(int level, int power, Store? store)
     {
         if (power == 0 && SaveGame.Rng.RandomLessThan(100) < 50)

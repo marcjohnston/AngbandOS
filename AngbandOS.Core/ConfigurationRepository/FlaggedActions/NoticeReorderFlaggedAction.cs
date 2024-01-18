@@ -21,7 +21,7 @@ internal class NoticeReorderFlaggedAction : FlaggedAction
     }
     private bool SortPack()
     {
-        PackInventorySlot packInventorySlot = SaveGame.SingletonRepository.InventorySlots.Get<PackInventorySlot>();
+        PackInventorySlot packInventorySlot = (PackInventorySlot)SaveGame.SingletonRepository.InventorySlots.Get(nameof(PackInventorySlot));
 
         // Create a list for all of the pack items.
         List<Item> packItems = new List<Item>();

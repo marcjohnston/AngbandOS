@@ -15,7 +15,7 @@ internal class MaceOfDisruptionDeathwreakerFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<HaftedMace>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(HaftedMace));
     }
 
 

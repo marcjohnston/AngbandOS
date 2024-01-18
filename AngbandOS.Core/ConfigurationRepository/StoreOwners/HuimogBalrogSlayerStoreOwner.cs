@@ -12,5 +12,5 @@ internal class HuimogBalrogSlayerStoreOwner : StoreOwner
     public override string OwnerName => "Huimog Balrog-Slayer";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  112;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<HalfOrcRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HalfOrcRace));
 }

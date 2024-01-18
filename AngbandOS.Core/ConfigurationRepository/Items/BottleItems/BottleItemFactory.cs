@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class BottleItemFactory : ItemFactory
 {
     public BottleItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get<BottlesItemClass>();
+    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(BottlesItemClass));
     public override bool EasyKnow => true;
     public override int PackSort => 39;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Bottle;

@@ -32,7 +32,7 @@ internal class ChaosSpellChaosBolt : Spell
         {
             return;
         }
-        SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>(), dir,
+        SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), dir,
             SaveGame.Rng.DiceRoll(10 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
     }
 

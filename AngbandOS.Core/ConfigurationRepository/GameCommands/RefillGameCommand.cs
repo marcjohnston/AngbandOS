@@ -19,6 +19,6 @@ internal class RefillGameCommand : GameCommand
 
     public override bool Execute()
     {
-        return SaveGame.RunScript<RefillScript>();
+        return SaveGame.RunScript(nameof(RefillScript));
     }
 }

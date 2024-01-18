@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class ConstitutionRingItem : RingItem
 {
-    public ConstitutionRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ConstitutionRingItemFactory>()) { }
+    public ConstitutionRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(ConstitutionRingItemFactory))) { }
     protected override void ApplyMagic(int level, int power, Store? store)
     {
         if (power == 0 && SaveGame.Rng.RandomLessThan(100) < 50)

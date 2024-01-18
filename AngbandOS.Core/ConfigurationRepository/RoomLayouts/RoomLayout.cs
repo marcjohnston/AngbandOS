@@ -8,13 +8,17 @@
 namespace AngbandOS.Core.RoomTypes;
 
 [Serializable]
-internal abstract class RoomLayout
+internal abstract class RoomLayout : IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
     protected RoomLayout(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     public abstract int Type { get; }
     public abstract void Build(int yval, int xval);

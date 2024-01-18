@@ -16,7 +16,10 @@ internal abstract class Race : IGetKey<string>
         SaveGame = saveGame;
     }
 
-    public string GetKey => GetType().Name;
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     public abstract int[] AbilityBonus { get; }
     public abstract int AgeRange { get; }

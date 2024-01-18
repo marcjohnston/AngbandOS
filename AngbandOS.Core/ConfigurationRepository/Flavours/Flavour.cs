@@ -11,13 +11,17 @@ namespace AngbandOS.Core.Flavours;
 /// Represents a single flavour for a group of items that participate in the IFlavour interface.
 /// </summary>
 [Serializable]
-internal abstract class Flavour
+internal abstract class Flavour : IGetKey<string>
 {
     protected SaveGame SaveGame;
     protected Flavour(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     /// <summary>
     /// Returns the symbol to use for rendering.

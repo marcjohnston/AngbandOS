@@ -12,5 +12,5 @@ internal class PorcinaTheObeseStoreOwner : StoreOwner
     public override string OwnerName => "Porcina the Obese";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  108;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<HalfOrcRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HalfOrcRace));
 }

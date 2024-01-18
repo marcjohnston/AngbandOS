@@ -17,7 +17,7 @@ internal class ChaosSpellFistOfForce : Spell
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<DisintegrateProjectile>(), dir,
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(DisintegrateProjectile)), dir,
             SaveGame.Rng.DiceRoll(8 + ((SaveGame.ExperienceLevel - 5) / 4), 8), 0);
     }
 

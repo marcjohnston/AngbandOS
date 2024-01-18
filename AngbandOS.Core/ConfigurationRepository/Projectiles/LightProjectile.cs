@@ -12,9 +12,9 @@ internal class LightProjectile : Projectile
 {
     private LightProjectile(SaveGame saveGame) : base(saveGame) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<BrightWhiteBoltProjectileGraphic>();
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BrightWhiteBoltProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<BrightWhiteCloudAnimation>();
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(BrightWhiteCloudAnimation));
 
     protected override bool AffectFloor(int y, int x)
     {
@@ -102,8 +102,8 @@ internal class LightProjectile : Projectile
         {
             SaveGame.TimedEtherealness.SetValue();
             SaveGame.MsgPrint("The light forces you out of your incorporeal shadow form.");
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
-            SaveGame.SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
         }
         return true;
     }

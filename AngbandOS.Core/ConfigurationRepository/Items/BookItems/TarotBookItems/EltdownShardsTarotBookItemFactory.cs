@@ -38,13 +38,13 @@ internal class EltdownShardsTarotBookItemFactory : TarotBookItemFactory
 
     public override Spell[] Spells => new Spell[]
     {
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellTheFool>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellSummonSpiders>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellSummonReptiles>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellSummonHounds>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellAstralBranding>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellExtradimensionalBeing>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellDeathDealing>(),
-        SaveGame.SingletonRepository.Spells.Get<TarotSpellSummonReaver>()
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellTheFool)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellSummonSpiders)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellSummonReptiles)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellSummonHounds)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellAstralBranding)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellExtradimensionalBeing)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellDeathDealing)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellSummonReaver))
     };
 }

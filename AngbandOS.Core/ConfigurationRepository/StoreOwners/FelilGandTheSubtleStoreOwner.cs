@@ -12,5 +12,5 @@ internal class FelilGandTheSubtleStoreOwner : StoreOwner
     public override string OwnerName => "Felil-Gand the Subtle";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  110;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<DarkElfRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(DarkElfRace));
 }

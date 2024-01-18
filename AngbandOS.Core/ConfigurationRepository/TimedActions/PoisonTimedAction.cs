@@ -29,7 +29,7 @@ internal class PoisonTimedAction : TimedAction
     }   
     protected override void Noticed()
     {
-        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawPoisonedFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawPoisonedFlaggedAction)).Set();
         base.Noticed();
     }
 }

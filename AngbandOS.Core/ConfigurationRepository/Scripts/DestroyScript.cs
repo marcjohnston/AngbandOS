@@ -77,8 +77,8 @@ internal class DestroyScript : Script
             }
             item.Inscription = feel;
             item.IdentSense = true;
-            SaveGame.SingletonRepository.FlaggedActions.Get<NoticeCombineFlaggedAction>().Set();
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawEquippyFlaggedAction>().Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineFlaggedAction)).Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
             return false;
         }
         SaveGame.MsgPrint($"You destroy {itemName}.");

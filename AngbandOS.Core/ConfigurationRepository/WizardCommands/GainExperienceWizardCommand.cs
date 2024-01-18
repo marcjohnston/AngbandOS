@@ -16,7 +16,7 @@ internal class GainExperienceWizardCommand : WizardCommand
 
     public override string HelpDescription => "Gain Experience";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardCharacterEditingHelpGroup>();
+    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardCharacterEditingHelpGroup));
 
     public override void Execute()
     {

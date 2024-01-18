@@ -22,7 +22,7 @@ internal class BoCold1Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), direction, SaveGame.Rng.DiceRoll(6, 8));
+        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), direction, SaveGame.Rng.DiceRoll(6, 8));
         return true;
     }
 

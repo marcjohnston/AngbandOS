@@ -20,6 +20,6 @@ internal class ExamineInventoryStoreCommand : StoreCommand
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {
-        SaveGame.RunScript<ExamineScript>();
+        SaveGame.RunScript(nameof(ExamineScript));
     }
 }

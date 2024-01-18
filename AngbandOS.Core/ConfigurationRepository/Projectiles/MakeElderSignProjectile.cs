@@ -12,7 +12,7 @@ internal class MakeElderSignProjectile : Projectile
 {
     private MakeElderSignProjectile(SaveGame saveGame) : base(saveGame) { }
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<BrightGreenSparkleAnimation>();
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(BrightGreenSparkleAnimation));
 
     protected override bool AffectFloor(int y, int x)
     {

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class SwordItemClass : MeleeWeaponItemClass
 {
     public SwordItemClass(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get<SwordsItemClass>();
+    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(SwordsItemClass));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Sword;
     public override bool HatesAcid => true;
     public override int PackSort => 28;

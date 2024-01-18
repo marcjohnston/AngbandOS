@@ -13,7 +13,7 @@ internal class GiantGreenDragonFlyMonsterRace : MonsterRace
     protected GiantGreenDragonFlyMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreathePoisonMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreathePoisonMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperFSymbol));
     public override ColourEnum Colour => ColourEnum.BrightGreen;
     public override string Name => "Giant green dragon fly";
@@ -21,7 +21,7 @@ internal class GiantGreenDragonFlyMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 20;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 1, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 1, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "A vast, foul-smelling dragonfly.";

@@ -41,8 +41,8 @@ internal class ConfirmationBirthStage : BirthStage
         SaveGame.SpellOrder.Clear();
 
         SaveGame.GooPatron = SaveGame.SingletonRepository.Patrons.ToWeightedRandom().Choose();
-        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateHealthFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         SaveGame.UpdateStuff();
         SaveGame.Health = SaveGame.MaxHealth;
         SaveGame.Mana = SaveGame.MaxMana;
@@ -50,15 +50,15 @@ internal class ConfirmationBirthStage : BirthStage
         while (!SaveGame.Shutdown)
         {
             SaveGame.Screen.Print(ColourEnum.Orange, "[Use return to confirm, or left to go back.]", 43, 1);
-            RenderCharacterScript showCharacterSheet = SaveGame.SingletonRepository.Scripts.Get<RenderCharacterScript>();
+            RenderCharacterScript showCharacterSheet = (RenderCharacterScript)SaveGame.SingletonRepository.Scripts.Get(nameof(RenderCharacterScript));
             showCharacterSheet.Execute();
             char c = SaveGame.Inkey();
             switch (c)
             {
                 case (char)13:
-                    return SaveGame.SingletonRepository.BirthStages.Get<NamingBirthStage>();
+                    return SaveGame.SingletonRepository.BirthStages.Get(nameof(NamingBirthStage));
                 case '4':
-                    return SaveGame.SingletonRepository.BirthStages.Get<GenderSelectionBirthStage>();
+                    return SaveGame.SingletonRepository.BirthStages.Get(nameof(GenderSelectionBirthStage));
                 case 'h':
                     SaveGame.ShowManual();
                     break;

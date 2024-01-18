@@ -12,5 +12,5 @@ internal class VrudushTheShamanStoreOwner : StoreOwner
     public override string OwnerName => "Vrudush the Shaman";
     public override int MaxCost =>  25000;
     public override int MinInflate =>  107;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<HalfOgreRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HalfOgreRace));
 }

@@ -17,7 +17,7 @@ internal class NatureSpellBlizzard : Spell
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 70 + SaveGame.ExperienceLevel, (SaveGame.ExperienceLevel / 12) + 1);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 70 + SaveGame.ExperienceLevel, (SaveGame.ExperienceLevel / 12) + 1);
     }
 
     public override string Name => "Blizzard";

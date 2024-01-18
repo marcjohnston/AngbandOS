@@ -12,5 +12,5 @@ internal class GloomThePhlegmaticStoreOwner : StoreOwner
     public override string OwnerName => "Gloom the Phlegmatic";
     public override int MaxCost =>  2000;
     public override int MinInflate =>  100;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<ZombieRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(ZombieRace));
 }

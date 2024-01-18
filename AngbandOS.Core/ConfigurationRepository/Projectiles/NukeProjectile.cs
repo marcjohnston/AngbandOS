@@ -12,9 +12,9 @@ internal class NukeProjectile : Projectile
 {
     private NukeProjectile(SaveGame saveGame) : base(saveGame) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<BrightChartreuseSplatProjectileGraphic>();
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BrightChartreuseSplatProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<ChartreuseFlashAnimation>();
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(ChartreuseFlashAnimation));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
@@ -100,7 +100,7 @@ internal class NukeProjectile : Projectile
                 SaveGame.MsgPrint("You undergo a freakish metamorphosis!");
                 if (SaveGame.Rng.DieRoll(4) == 1)
                 {
-                    SaveGame.RunScript<PolymorphSelfScript>();
+                    SaveGame.RunScript(nameof(PolymorphSelfScript));
                 }
                 else
                 {

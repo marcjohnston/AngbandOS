@@ -12,5 +12,5 @@ internal class ZzathathTheImpStoreOwner : StoreOwner
     public override string OwnerName => "Zzathath the Imp";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  112;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<ImpRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(ImpRace));
 }

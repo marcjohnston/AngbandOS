@@ -29,7 +29,7 @@ internal class ColdTouchActiveMutation : Mutation
             SaveGame.MsgPrint("You wave your hands in the air.");
             return;
         }
-        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 2 * SaveGame.ExperienceLevel);
+        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 2 * SaveGame.ExperienceLevel);
     }
 
     public override string ActivationSummary(int lvl)

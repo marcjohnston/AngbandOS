@@ -12,11 +12,11 @@ internal class ChaosProjectile : Projectile
 {
     private ChaosProjectile(SaveGame saveGame) : base(saveGame) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<PurpleBulletProjectileGraphic>();
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(PurpleBulletProjectileGraphic));
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<PurpleSplatProjectileGraphic>();
+    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(PurpleSplatProjectileGraphic));
 
-    protected override Animation? EffectAnimation => SaveGame.SingletonRepository.Animations.Get<PinkPurpleFlashAnimation>();
+    protected override Animation? EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(PinkPurpleFlashAnimation));
 
     protected override bool AffectFloor(int y, int x) => true;
 

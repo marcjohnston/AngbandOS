@@ -19,6 +19,6 @@ internal class TargetGameCommand : GameCommand
 
     public override bool Execute()
     {
-        return SaveGame.RunScript<TargetScript>();
+        return SaveGame.RunScript(nameof(TargetScript));
     }
 }

@@ -67,6 +67,6 @@ internal class InnStore : Store
     }
 
     public override int StoreMaxKeep => 4;
-    protected override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get<HireRoomStoreCommand>();
+    protected override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(HireRoomStoreCommand));
     protected override bool PerformsMaintenanceWhenResting => false;
 }

@@ -12,5 +12,5 @@ internal class NarlockStoreOwner : StoreOwner
     public override string OwnerName => "Narlock";
     public override int MaxCost =>  1000;
     public override int MinInflate =>  107;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<DwarfRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(DwarfRace));
 }

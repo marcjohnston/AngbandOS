@@ -15,7 +15,7 @@ internal class BattleAxeOfNKaiFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<PolearmBattleAxe>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(PolearmBattleAxe));
     }
 
 

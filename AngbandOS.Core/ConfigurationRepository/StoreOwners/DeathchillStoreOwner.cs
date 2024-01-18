@@ -12,5 +12,5 @@ internal class DeathchillStoreOwner : StoreOwner
     public override string OwnerName => "Deathchill";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  111;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<SpectreRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(SpectreRace));
 }

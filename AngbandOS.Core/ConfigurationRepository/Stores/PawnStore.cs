@@ -77,7 +77,7 @@ internal class PawnStore : Store
             return price / 3;
         }
     }
-    protected override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get<IdentifyAllStoreCommand>();
+    protected override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(IdentifyAllStoreCommand));
     protected override string GetItemDescription(Item oPtr) => oPtr.Description(true, 3);
 
     protected override bool StoreIdentifiesItems => false;

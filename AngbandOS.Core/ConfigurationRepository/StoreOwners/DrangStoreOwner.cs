@@ -12,5 +12,5 @@ internal class DrangStoreOwner : StoreOwner
     public override string OwnerName => "Drang";
     public override int MaxCost =>  25000;
     public override int MinInflate =>  110;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<HalfOgreRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HalfOgreRace));
 }

@@ -12,5 +12,5 @@ internal class ThramborTheGrubbyStoreOwner : StoreOwner
     public override string OwnerName => "Thrambor the Grubby";
     public override int MaxCost =>  5000;
     public override int MinInflate =>  100;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<HalfElfRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HalfElfRace));
 }

@@ -28,13 +28,13 @@ internal class HighMassLifeBookItemFactory : LifeBookItemFactory
 
     public override Spell[] Spells => new Spell[]
     {
-        SaveGame.SingletonRepository.Spells.Get<LifeSpellRemoveCurse>(),
-        SaveGame.SingletonRepository.Spells.Get<LifeSpellCurePoison>(),
-        SaveGame.SingletonRepository.Spells.Get<LifeSpellCureCriticalWounds>(),
-        SaveGame.SingletonRepository.Spells.Get<LifeSpellSenseUnseen>(),
-        SaveGame.SingletonRepository.Spells.Get<LifeSpellHolyOrb>(),
-        SaveGame.SingletonRepository.Spells.Get<LifeSpellProtectionFromEvil>(),
-        SaveGame.SingletonRepository.Spells.Get<LifeSpellHealing>(),
-        SaveGame.SingletonRepository.Spells.Get<LifeSpellElderSign>()
+        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellRemoveCurse)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellCurePoison)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellCureCriticalWounds)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellSenseUnseen)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellHolyOrb)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellProtectionFromEvil)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellHealing)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellElderSign))
     };
 }

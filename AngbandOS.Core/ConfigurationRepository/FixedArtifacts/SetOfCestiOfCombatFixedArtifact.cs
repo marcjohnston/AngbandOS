@@ -15,7 +15,7 @@ internal class SetOfCestiOfCombatFixedArtifact : FixedArtifact, IFixedArtifactAc
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<CestiGlovesArmorItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(CestiGlovesArmorItemFactory));
     }
 
 
@@ -27,7 +27,7 @@ internal class SetOfCestiOfCombatFixedArtifact : FixedArtifact, IFixedArtifactAc
         {
             return;
         }
-        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get<ArrowProjectile>(), dir, 150);
+        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get(nameof(ArrowProjectile)), dir, 150);
         item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(90) + 90;
     }
     public override void ApplyResistances(SaveGame saveGame, Item item)

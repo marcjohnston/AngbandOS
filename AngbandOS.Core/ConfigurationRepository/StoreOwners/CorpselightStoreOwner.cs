@@ -12,5 +12,5 @@ internal class CorpselightStoreOwner : StoreOwner
     public override string OwnerName => "Corpselight";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  150;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<SpectreRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(SpectreRace));
 }

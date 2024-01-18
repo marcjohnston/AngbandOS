@@ -22,7 +22,7 @@ internal class BaFire2Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), direction, 120, 3);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), direction, 120, 3);
         return true;
     }
 

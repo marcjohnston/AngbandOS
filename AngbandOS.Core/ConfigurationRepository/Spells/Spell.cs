@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Spells;
 
 [Serializable]
-internal abstract class Spell
+internal abstract class Spell : IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
 
@@ -16,6 +16,10 @@ internal abstract class Spell
     {
         SaveGame = saveGame;
     }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     /// <summary>
     /// Returns true, if the spell has been forgotten because the players level dropped to low.  When true, Learned is set to false.
@@ -278,7 +282,7 @@ internal abstract class Spell
                 break;
 
             case 32:
-                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>(), 0, spell + 5, 1 + (spell / 10));
+                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), 0, spell + 5, 1 + (spell / 10));
                 break;
 
             case 33:

@@ -20,6 +20,6 @@ internal class ReadScrollGameCommand : GameCommand
 
     public override bool Execute()
     {
-        return SaveGame.RunScript<ReadScrollScript>();
+        return SaveGame.RunScript(nameof(ReadScrollScript));
     }
 }

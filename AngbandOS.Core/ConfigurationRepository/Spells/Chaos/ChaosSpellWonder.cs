@@ -55,7 +55,7 @@ internal class ChaosSpellWonder : Spell
         }
         else if (die < 36)
         {
-            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<MissileProjectile>(), dir,
+            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), dir,
                 SaveGame.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 4));
         }
         else if (die < 41)
@@ -64,7 +64,7 @@ internal class ChaosSpellWonder : Spell
         }
         else if (die < 46)
         {
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), dir, 20 + (SaveGame.ExperienceLevel / 2), 3);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), dir, 20 + (SaveGame.ExperienceLevel / 2), 3);
         }
         else if (die < 51)
         {
@@ -72,22 +72,22 @@ internal class ChaosSpellWonder : Spell
         }
         else if (die < 56)
         {
-            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir,
+            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir,
                 SaveGame.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
         }
         else if (die < 61)
         {
-            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir,
+            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir,
                 SaveGame.Rng.DiceRoll(5 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
         }
         else if (die < 66)
         {
-            SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir,
+            SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir,
                 SaveGame.Rng.DiceRoll(6 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
         }
         else if (die < 71)
         {
-            SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir,
+            SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir,
                 SaveGame.Rng.DiceRoll(8 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
         }
         else if (die < 76)
@@ -96,19 +96,19 @@ internal class ChaosSpellWonder : Spell
         }
         else if (die < 81)
         {
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), dir, 30 + (SaveGame.ExperienceLevel / 2), 2);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, 30 + (SaveGame.ExperienceLevel / 2), 2);
         }
         else if (die < 86)
         {
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir, 40 + SaveGame.ExperienceLevel, 2);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, 40 + SaveGame.ExperienceLevel, 2);
         }
         else if (die < 91)
         {
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<IceProjectile>(), dir, 70 + SaveGame.ExperienceLevel, 3);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(IceProjectile)), dir, 70 + SaveGame.ExperienceLevel, 3);
         }
         else if (die < 96)
         {
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, 80 + SaveGame.ExperienceLevel, 3);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 80 + SaveGame.ExperienceLevel, 3);
         }
         else if (die < 101)
         {

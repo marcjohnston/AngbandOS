@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class PartialPlateHardArmorItem : HardArmorItem
 {
-    public PartialPlateHardArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<PartialPlateHardArmorItemFactory>()) { }
+    public PartialPlateHardArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(PartialPlateHardArmorItemFactory))) { }
 }

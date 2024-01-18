@@ -22,7 +22,7 @@ internal class BaCold3Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), direction, 200, 3);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), direction, 200, 3);
         return true;
     }
 

@@ -17,7 +17,7 @@ internal class DeathSpellOrbOfEntropy : Spell
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<OldDrainProjectile>(), dir,
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(OldDrainProjectile)), dir,
             SaveGame.Rng.DiceRoll(3, 6) + SaveGame.ExperienceLevel + (SaveGame.ExperienceLevel /
             (SaveGame.BaseCharacterClass.ID == CharacterClass.Mage || SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)),
             SaveGame.ExperienceLevel < 30 ? 2 : 3);

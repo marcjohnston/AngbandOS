@@ -15,7 +15,7 @@ internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact, IFixedArtifactA
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<GoldenCrownArmorItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(GoldenCrownArmorItemFactory));
     }
 
 

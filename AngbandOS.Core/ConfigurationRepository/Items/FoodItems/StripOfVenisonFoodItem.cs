@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class StripOfVenisonFoodItem : FoodItem
 {
-    public StripOfVenisonFoodItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<StripOfVenisonFoodItemFactory>()) { }
+    public StripOfVenisonFoodItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(StripOfVenisonFoodItemFactory))) { }
 }

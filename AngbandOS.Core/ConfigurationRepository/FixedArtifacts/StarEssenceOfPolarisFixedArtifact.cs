@@ -15,7 +15,7 @@ internal class StarEssenceOfPolarisFixedArtifact : FixedArtifact, IFixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<StarEssenceGaladrielLightSourceItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(StarEssenceGaladrielLightSourceItemFactory));
     }
 
 

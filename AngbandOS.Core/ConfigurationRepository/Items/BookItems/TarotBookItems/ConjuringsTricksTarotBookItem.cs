@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class ConjuringsTricksTarotBookItem : TarotBookItem
 {
-    public ConjuringsTricksTarotBookItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ConjuringsTricksTarotBookItemFactory>()) { }
+    public ConjuringsTricksTarotBookItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(ConjuringsTricksTarotBookItemFactory))) { }
 }

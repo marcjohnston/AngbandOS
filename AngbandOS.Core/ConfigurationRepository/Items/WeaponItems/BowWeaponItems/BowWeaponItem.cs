@@ -33,7 +33,7 @@ internal abstract class BowWeaponItem : WeaponItem
                 RandartItemCharacteristics.XtraMight = true;
                 if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RangerArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RangerArtifactBias));
                 }
                 break;
 
@@ -41,7 +41,7 @@ internal abstract class BowWeaponItem : WeaponItem
                 RandartItemCharacteristics.XtraShots = true;
                 if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get<RangerArtifactBias>();
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RangerArtifactBias));
                 }
                 break;
         }

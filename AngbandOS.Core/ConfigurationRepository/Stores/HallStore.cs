@@ -36,9 +36,9 @@ internal class HallStore : Store
     protected override string OwnerName => "";
     protected override string Title => "Hall Of Records";
     protected override StoreInventoryDisplayTypeEnum ShowInventoryDisplayType => StoreInventoryDisplayTypeEnum.DoNotShowInventory;
-    protected override StoreCommand AdvertisedStoreCommand1 => SaveGame.SingletonRepository.StoreCommands.Get<ViewRacialHeroesStoreCommand>();
-    protected override StoreCommand AdvertisedStoreCommand2 => SaveGame.SingletonRepository.StoreCommands.Get<ViewClassHeroesStoreCommand>();
+    protected override StoreCommand AdvertisedStoreCommand1 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(ViewRacialHeroesStoreCommand));
+    protected override StoreCommand AdvertisedStoreCommand2 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(ViewClassHeroesStoreCommand));
     protected override StoreCommand AdvertisedStoreCommand3 => null; // The examine command does not work here because there is no inventory.
-    protected override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get<BuyHouseStoreCommand>();
+    protected override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(BuyHouseStoreCommand));
     protected override bool PerformsMaintenanceWhenResting => false;
 }

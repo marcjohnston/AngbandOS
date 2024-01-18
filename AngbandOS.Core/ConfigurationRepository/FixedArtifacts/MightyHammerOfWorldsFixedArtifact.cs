@@ -15,7 +15,7 @@ internal class MightyHammerOfWorldsFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<HaftedMightyHammer>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(HaftedMightyHammer));
     }
 
 

@@ -15,7 +15,7 @@ internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : FixedArtifact, IF
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<BrillianceAmuletJeweleryItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(BrillianceAmuletJeweleryItemFactory));
     }
 
 

@@ -15,7 +15,7 @@ internal class PairOfMetalShodBootsOfTheBlackReaverFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<MetalShodBootsArmorItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(MetalShodBootsArmorItemFactory));
     }
 
 

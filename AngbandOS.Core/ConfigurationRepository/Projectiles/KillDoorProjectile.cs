@@ -12,7 +12,7 @@ internal class KillDoorProjectile : Projectile
 {
     private KillDoorProjectile(SaveGame saveGame) : base(saveGame) { }
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<BrightYellowSwirlAnimation>();
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(BrightYellowSwirlAnimation));
 
     protected override bool AffectFloor(int y, int x)
     {
@@ -26,9 +26,9 @@ internal class KillDoorProjectile : Projectile
                 obvious = true;
                 if (cPtr.FeatureType.IsClosedDoor)
                 {
-                    SaveGame.SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
-                    SaveGame.SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-                    SaveGame.SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
+                    SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+                    SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+                    SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
                 }
             }
             cPtr.TileFlags.Clear(GridTile.PlayerMemorized);

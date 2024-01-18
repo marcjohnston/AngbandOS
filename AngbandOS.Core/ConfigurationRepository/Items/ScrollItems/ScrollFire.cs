@@ -25,7 +25,7 @@ internal class ScrollFire : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), 0, 150, 4);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), 0, 150, 4);
         if (!(SaveGame.TimedFireResistance.TurnsRemaining != 0 || SaveGame.HasFireResistance || SaveGame.HasFireImmunity))
         {
             SaveGame.TakeHit(50 + SaveGame.Rng.DieRoll(50), "a Scroll of Fire");

@@ -8,13 +8,17 @@
 namespace AngbandOS.Core.CharacterClasses;
 
 [Serializable]
-internal abstract class BaseCharacterClass
+internal abstract class BaseCharacterClass : IGetKey<string>
 {
     protected SaveGame SaveGame { get; }
     protected BaseCharacterClass(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     /// <summary>
     /// Returns the deprecated CharacterClass constant for backwards compatibility.
@@ -78,7 +82,7 @@ internal abstract class BaseCharacterClass
     /// <value>The spell weight.</value>
     public virtual int SpellWeight => 0;
 
-    public virtual CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get<CastingType>();
+    public virtual CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get(nameof(CastingType));
 
     public virtual int SpellStat => Ability.Strength;
 

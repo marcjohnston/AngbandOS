@@ -8,13 +8,17 @@
 namespace AngbandOS.Core.Commands;
 
 [Serializable]
-internal abstract class GameCommand
+internal abstract class GameCommand : IGetKey<string>
 {
     protected SaveGame SaveGame { get; }
     protected GameCommand(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
+
+    public virtual string UniqueKey => GetType().Name;
+
+    public string GetKey => UniqueKey;
 
     public abstract char Key { get; }
 

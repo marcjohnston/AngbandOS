@@ -26,7 +26,7 @@ internal class RodAcidBolts : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        SaveGame.FireBoltOrBeam(10, SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), zapRodEvent.Dir.Value, SaveGame.Rng.DiceRoll(6, 8));
+        SaveGame.FireBoltOrBeam(10, SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), zapRodEvent.Dir.Value, SaveGame.Rng.DiceRoll(6, 8));
         zapRodEvent.Identified = true;
         zapRodEvent.Item.TypeSpecificValue = 12;
     }

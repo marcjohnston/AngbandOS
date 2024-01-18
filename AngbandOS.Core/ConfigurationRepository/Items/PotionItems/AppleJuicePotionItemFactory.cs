@@ -33,7 +33,7 @@ internal class AppleJuicePotionItemFactory : PotionItemFactory
     /// </summary>
     public override IEnumerable<Flavour>? GetFlavorRepository()
     {
-        Flavor = SaveGame.SingletonRepository.PotionFlavours.Get<LightBrownPotionFlavour>();
+        Flavor = SaveGame.SingletonRepository.PotionFlavours.Get(nameof(LightBrownPotionFlavour));
         return null;
     }
 

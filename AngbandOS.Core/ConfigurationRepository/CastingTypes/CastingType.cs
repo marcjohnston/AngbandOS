@@ -11,13 +11,17 @@ namespace AngbandOS.Core.CastingTypes;
 /// Represents basic spell casting properties.
 /// </summary>
 [Serializable]
-internal class CastingType
+internal class CastingType : IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
     protected CastingType(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     public virtual int Levels => SaveGame.ExperienceLevel;
 
@@ -142,7 +146,7 @@ internal class CastingType
                 SaveGame.DecreaseAbilityScore(Ability.Constitution, 15 + SaveGame.Rng.DieRoll(10), perm);
             }
         }
-        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawManaFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
     }
 
     /// <summary>

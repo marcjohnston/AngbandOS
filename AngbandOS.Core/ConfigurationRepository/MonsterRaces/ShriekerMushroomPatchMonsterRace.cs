@@ -13,7 +13,7 @@ internal class ShriekerMushroomPatchMonsterRace : MonsterRace
     protected ShriekerMushroomPatchMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<ShriekMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ShriekMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
     public override ColourEnum Colour => ColourEnum.BrightRed;
     public override string Name => "Shrieker mushroom patch";

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class BirthStagesRepositoryCollection : DictionaryRepositoryCollection<BirthStage>
+internal class BirthStagesRepositoryCollection : KeyedDictionaryRepositoryCollection<string, BirthStage>
 {
     public BirthStagesRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 }

@@ -21,6 +21,6 @@ internal class OpenGameCommand : GameCommand
 
     public override bool Execute()
     {
-        return SaveGame.RunScript<OpenScript>();
+        return SaveGame.RunScript(nameof(OpenScript));
     }
 }

@@ -33,13 +33,13 @@ internal class MajorMagicksFolkBookItemFactory : FolkBookItemFactory
     public override Item CreateItem() => new MajorMagicksFolkBookItem(SaveGame);
     public override Spell[] Spells => new Spell[]
     {
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellResistLightning>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellResistAcid>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellCureMediumWounds>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellTeleport>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellStoneToMud>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellRayOfLight>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellSatisfyHunger>(),
-        SaveGame.SingletonRepository.Spells.Get<FolkSpellSeeInvisible>()
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellResistLightning)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellResistAcid)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellCureMediumWounds)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellTeleport)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellStoneToMud)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellRayOfLight)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellSatisfyHunger)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellSeeInvisible))
     };
 }

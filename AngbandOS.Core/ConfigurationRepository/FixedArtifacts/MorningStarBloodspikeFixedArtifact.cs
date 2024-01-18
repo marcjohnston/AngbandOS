@@ -15,7 +15,7 @@ internal class MorningStarBloodspikeFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<HaftedMorningStar>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(HaftedMorningStar));
     }
 
 

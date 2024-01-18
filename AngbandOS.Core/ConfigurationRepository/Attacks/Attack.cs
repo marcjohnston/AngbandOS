@@ -8,13 +8,17 @@
 namespace AngbandOS.Core.AttackTypes;
 
 [Serializable]
-internal abstract class Attack
+internal abstract class Attack : IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
     protected Attack(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     /// <summary>
     /// Returns the action message to be displayed, when the attack targets another monster.

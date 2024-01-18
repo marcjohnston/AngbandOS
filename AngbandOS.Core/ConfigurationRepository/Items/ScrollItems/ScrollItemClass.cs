@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class ScrollItemClass : ItemFactory, IFlavour
 {
     public ScrollItemClass(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get<ScrollsItemClass>();
+    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(ScrollsItemClass));
 
     /// <summary>
     /// Returns the scroll flavours repository because scrolls have flavours that need to be identified.

@@ -39,8 +39,8 @@ internal class UpdateTorchRadiusFlaggedAction : FlaggedAction
         }
         if (OldLightLevel != SaveGame.LightLevel)
         {
-            SaveGame.SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-            SaveGame.SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
             OldLightLevel = SaveGame.LightLevel;
         }
     }

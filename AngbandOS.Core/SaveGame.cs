@@ -1662,8 +1662,8 @@ internal class SaveGame
                 RedrawStuff();
                 TargetWho = 0;
                 HealthTrack(0);
-                SingletonRepository.FlaggedActions.Get<RemoveLightFlaggedAction>().Check(true);
-                SingletonRepository.FlaggedActions.Get<RemoveViewFlaggedAction>().Check(true);
+                SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Check(true);
+                SingletonRepository.FlaggedActions.Get(nameof(RemoveViewFlaggedAction)).Check(true);
                 if (!Playing && !IsDead)
                 {
                     break;
@@ -1878,23 +1878,23 @@ internal class SaveGame
         if (CommandRepeat != 0)
         {
             CommandRepeat = 0;
-            SingletonRepository.FlaggedActions.Get<RedrawStateFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
         }
         if (Resting != 0)
         {
             Resting = 0;
-            SingletonRepository.FlaggedActions.Get<RedrawStateFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
         }
         if (Running != 0)
         {
             Running = 0;
-            SingletonRepository.FlaggedActions.Get<UpdateTorchRadiusFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
         }
         if (stopSearch && IsSearching)
         {
             IsSearching = false;
-            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<RedrawStateFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
         }
     }
 
@@ -2258,7 +2258,7 @@ internal class SaveGame
     public void HealthTrack(int mIdx)
     {
         TrackedMonsterIndex = mIdx;
-        SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthFlaggedAction)).Set();
     }
 
     public void MonsterDeath(int mIdx)
@@ -2404,10 +2404,10 @@ internal class SaveGame
                 DeleteObject(y, x);
                 MsgPrint("A magical stairway appears...");
                 CaveSetFeat(y, x, CurDungeon.Tower ? "UpStair" : "DownStair");
-                SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
-                SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
-                SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-                SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
+                SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
+                SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+                SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+                SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
             }
         }
     }
@@ -2415,7 +2415,7 @@ internal class SaveGame
     public void Winner()
     {
         IsWinner = true;
-        SingletonRepository.FlaggedActions.Get<RedrawTitleFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawTitleFlaggedAction)).Set();
         MsgPrint("*** CONGRATULATIONS ***");
         MsgPrint("You have won the game!");
         MsgPrint("You may retire ('Q') when you are ready.");
@@ -2423,8 +2423,8 @@ internal class SaveGame
 
     public void NoticeStuff()
     {
-        SingletonRepository.FlaggedActions.Get<NoticeCombineFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<NoticeReorderFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(NoticeReorderFlaggedAction)).Check();
     }
 
     public void OpenChest(int y, int x, Item chestItem)
@@ -2462,22 +2462,22 @@ internal class SaveGame
 
     public void UpdateStuff()
     {
-        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<UpdateTorchRadiusFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<UpdateHealthFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<UpdateSpellsFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Check();
         if (FullScreenOverlay)
         {
             return;
         }
-        SingletonRepository.FlaggedActions.Get<RemoveLightFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<RemoveViewFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<UpdateDistancesFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RemoveViewFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Check();
     }
 
     private void ApplyFlavourVisuals()
@@ -2778,30 +2778,30 @@ internal class SaveGame
         PanelBoundsCenter();
         MsgPrint(null);
         CharacterXtra = true;
-        SingletonRepository.FlaggedActions.Get<RedrawEquippyFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<PrExtraRedrawActionGroupSetFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<PrBasicRedrawActionGroupSetFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<RedrawAllFlaggedAction>().Set(); // TODO: special case ... should be some form of invalidateclient
-        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateHealthFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateSpellsFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateTorchRadiusFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawAllFlaggedAction)).Set(); // TODO: special case ... should be some form of invalidateclient
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
         UpdateStuff();
         RedrawStuff();
-        SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateDistancesFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
         UpdateStuff();
         RedrawStuff();
         CharacterXtra = false;
-        SingletonRepository.FlaggedActions.Get<UpdateHealthFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateSpellsFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         NoticeStuff();
         UpdateStuff();
         RedrawStuff();
@@ -2819,7 +2819,7 @@ internal class SaveGame
         HackMind = true;
         if (CameFrom == LevelStart.StartHouse)
         {
-            RunScript<StoreScript>();
+            RunScript(nameof(StoreScript));
             CameFrom = LevelStart.StartRandom;
         }
         if (CurrentDepth == 0)
@@ -3144,7 +3144,7 @@ internal class SaveGame
         }
         while (Energy >= 100 && !Shutdown)
         {
-            SingletonRepository.FlaggedActions.Get<RedrawDTrapFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawDTrapFlaggedAction)).Set();
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
@@ -3180,7 +3180,7 @@ internal class SaveGame
                 if (Resting > 0)
                 {
                     Resting--;
-                    SingletonRepository.FlaggedActions.Get<RedrawStateFlaggedAction>().Set();
+                    SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
                 }
                 EnergyUse = 100;
             }
@@ -3191,7 +3191,7 @@ internal class SaveGame
             else if (CommandRepeat != 0)
             {
                 CommandRepeat--;
-                SingletonRepository.FlaggedActions.Get<RedrawStateFlaggedAction>().Set();
+                SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
                 RedrawStuff();
                 //MessageAppendNextMessage = false;
                 Screen.PrintLine("", 0, 0);
@@ -3316,14 +3316,14 @@ internal class SaveGame
                     }
                 }
             }
-            SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
         }
         if (GameTime.IsMidnight)
         {
             Religion.DecayFavour();
-            SingletonRepository.FlaggedActions.Get<UpdateHealthFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
             foreach (Town town in SingletonRepository.Towns)
             {
                 foreach (Store store in town.Stores)
@@ -3563,7 +3563,7 @@ internal class SaveGame
         TimedBleeding.ProcessWorld();
         TimedHallucinations.ProcessWorld();
 
-        SingletonRepository.FlaggedActions.Get<UpdateTorchRadiusFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
         if (HasExperienceDrain)
         {
             if (Rng.RandomLessThan(100) < 10 && ExperiencePoints > 0)
@@ -3629,7 +3629,7 @@ internal class SaveGame
         }
         if (combineFlags)
         {
-            SingletonRepository.FlaggedActions.Get<NoticeCombineFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineFlaggedAction)).Set();
         }
         SenseInventory();
         for (int y = 1; y < CurHgt - 1; y++)
@@ -3700,33 +3700,33 @@ internal class SaveGame
         }
 
         // The Wipe refresh is a special RedrawAction that occurs before all other RedrawActions.
-        SingletonRepository.FlaggedActions.Get<RedrawAllFlaggedAction>().Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawAllFlaggedAction)).Check();
 
-        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<RedrawPlayerFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<RedrawEquippyFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<RedrawTitleFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<RedrawLevelFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<RedrawExpFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<RedrawStatsFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<RedrawArmorFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<RedrawHpFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<RedrawManaFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<RedrawGoldFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<RedrawDepthFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<RedrawCutFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<RedrawStunFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<RedrawHungerFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<RedrawDTrapFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<RedrawBlindFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<RedrawConfusedFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<RedrawAfraidFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<RedrawPoisonedFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<RedrawStateFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<RedrawSpeedFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<RedrawStudyFlaggedAction>().Check();
-        SingletonRepository.FlaggedActions.Get<RedrawTimeFlaggedAction>().Check(true); // TODO: Trigger this from GameTime
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawPlayerFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawTitleFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawLevelFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawExpFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawStatsFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawArmorFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawGoldFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawDepthFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawCutFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawStunFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawHungerFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawDTrapFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawBlindFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawConfusedFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawAfraidFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawPoisonedFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawStudyFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawTimeFlaggedAction)).Check(true); // TODO: Trigger this from GameTime
     }
 
     private void RegenMonsters()
@@ -3757,7 +3757,7 @@ internal class SaveGame
                 }
                 if (TrackedMonsterIndex == i)
                 {
-                    SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
+                    SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthFlaggedAction)).Set();
                 }
             }
         }
@@ -3980,7 +3980,7 @@ internal class SaveGame
             }
             oPtr.Inscription = feel;
             oPtr.IdentSense = true;
-            SingletonRepository.FlaggedActions.Get<NoticeCombineFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineFlaggedAction)).Set();
             return;
         }
         int price = oPtr.RealValue();
@@ -4001,7 +4001,7 @@ internal class SaveGame
             }
             MsgPrint($"You turn {oName} to {price} coins worth of gold.");
             Gold += price;
-            SingletonRepository.FlaggedActions.Get<RedrawGoldFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawGoldFlaggedAction)).Set();
         }
         oPtr.ItemIncrease(-amt);
         oPtr.ItemDescribe();
@@ -4073,7 +4073,7 @@ internal class SaveGame
         }
         s = oPtr.Count != 1 ? "were" : "was";
         MsgPrint($"Your {oName} ({i.IndexToLabel()}) {s} disenchanted!");
-        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         return true;
     }
 
@@ -4167,12 +4167,12 @@ internal class SaveGame
 
     public bool BanishEvil(int dist)
     {
-        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get<TeleportAwayEvilProjectile>(), dist);
+        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(TeleportAwayEvilProjectile)), dist);
     }
 
     public void BanishMonsters(int dist)
     {
-        ProjectAtAllInLos(SingletonRepository.Projectiles.Get<TeleportAwayAllProjectile>(), dist);
+        ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(TeleportAwayAllProjectile)), dist);
     }
 
     public bool BlessWeapon()
@@ -4200,7 +4200,7 @@ internal class SaveGame
             oPtr.IdentCursed = false;
             oPtr.IdentSense = true;
             oPtr.Inscription = "uncursed";
-            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         }
         if (oPtr.Characteristics.Blessed)
         {
@@ -4252,7 +4252,7 @@ internal class SaveGame
                 MsgPrint($"{your} {oName} {s} disenchanted!");
             }
         }
-        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         return true;
     }
 
@@ -4262,36 +4262,36 @@ internal class SaveGame
         bool lineChaos = false;
         Projectile[] hurtTypes =
         {
-            SingletonRepository.Projectiles.Get<ElecProjectile>(), 
-            SingletonRepository.Projectiles.Get<PoisProjectile>(), 
-            SingletonRepository.Projectiles.Get<AcidProjectile>(), 
-            SingletonRepository.Projectiles.Get<ColdProjectile>(),
-            SingletonRepository.Projectiles.Get<FireProjectile>(), 
-            SingletonRepository.Projectiles.Get<MissileProjectile>(), 
-            SingletonRepository.Projectiles.Get<ArrowProjectile>(), 
-            SingletonRepository.Projectiles.Get<PlasmaProjectile>(),
-            SingletonRepository.Projectiles.Get<HolyFireProjectile>(), 
-            SingletonRepository.Projectiles.Get<WaterProjectile>(), 
-            SingletonRepository.Projectiles.Get<LightProjectile>(), 
-            SingletonRepository.Projectiles.Get<DarkProjectile>(),
-            SingletonRepository.Projectiles.Get<ForceProjectile>(), 
-            SingletonRepository.Projectiles.Get<InertiaProjectile>(), 
-            SingletonRepository.Projectiles.Get<ManaProjectile>(), 
-            SingletonRepository.Projectiles.Get<MeteorProjectile>(),
-            SingletonRepository.Projectiles.Get<IceProjectile>(), 
-            SingletonRepository.Projectiles.Get<ChaosProjectile>(), 
-            SingletonRepository.Projectiles.Get<NetherProjectile>(), 
-            SingletonRepository.Projectiles.Get<DisenchantProjectile>(),
-            SingletonRepository.Projectiles.Get<ExplodeProjectile>(), 
-            SingletonRepository.Projectiles.Get<SoundProjectile>(), 
-            SingletonRepository.Projectiles.Get<NexusProjectile>(), 
-            SingletonRepository.Projectiles.Get<ConfusionProjectile>(),
-            SingletonRepository.Projectiles.Get<TimeProjectile>(), 
-            SingletonRepository.Projectiles.Get<GravityProjectile>(), 
-            SingletonRepository.Projectiles.Get<ShardProjectile>(), 
-            SingletonRepository.Projectiles.Get<NukeProjectile>(),
-            SingletonRepository.Projectiles.Get<HellFireProjectile>(), 
-            SingletonRepository.Projectiles.Get<DisintegrateProjectile>()
+            SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), 
+            SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), 
+            SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), 
+            SingletonRepository.Projectiles.Get(nameof(ColdProjectile)),
+            SingletonRepository.Projectiles.Get(nameof(FireProjectile)), 
+            SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), 
+            SingletonRepository.Projectiles.Get(nameof(ArrowProjectile)), 
+            SingletonRepository.Projectiles.Get(nameof(PlasmaProjectile)),
+            SingletonRepository.Projectiles.Get(nameof(HolyFireProjectile)), 
+            SingletonRepository.Projectiles.Get(nameof(WaterProjectile)), 
+            SingletonRepository.Projectiles.Get(nameof(LightProjectile)), 
+            SingletonRepository.Projectiles.Get(nameof(DarkProjectile)),
+            SingletonRepository.Projectiles.Get(nameof(ForceProjectile)), 
+            SingletonRepository.Projectiles.Get(nameof(InertiaProjectile)), 
+            SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), 
+            SingletonRepository.Projectiles.Get(nameof(MeteorProjectile)),
+            SingletonRepository.Projectiles.Get(nameof(IceProjectile)), 
+            SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), 
+            SingletonRepository.Projectiles.Get(nameof(NetherProjectile)), 
+            SingletonRepository.Projectiles.Get(nameof(DisenchantProjectile)),
+            SingletonRepository.Projectiles.Get(nameof(ExplodeProjectile)), 
+            SingletonRepository.Projectiles.Get(nameof(SoundProjectile)), 
+            SingletonRepository.Projectiles.Get(nameof(NexusProjectile)), 
+            SingletonRepository.Projectiles.Get(nameof(ConfusionProjectile)),
+            SingletonRepository.Projectiles.Get(nameof(TimeProjectile)), 
+            SingletonRepository.Projectiles.Get(nameof(GravityProjectile)), 
+            SingletonRepository.Projectiles.Get(nameof(ShardProjectile)), 
+            SingletonRepository.Projectiles.Get(nameof(NukeProjectile)),
+            SingletonRepository.Projectiles.Get(nameof(HellFireProjectile)), 
+            SingletonRepository.Projectiles.Get(nameof(DisintegrateProjectile))
         };
         Projectile chaosType = hurtTypes[Rng.DieRoll(30) - 1];
         if (Rng.DieRoll(4) == 1)
@@ -4366,7 +4366,7 @@ internal class SaveGame
                 TakeHit(Rng.DieRoll(4), "the strain of casting Carnage");
             }
             MoveCursorRelative(MapY, MapX);
-            SingletonRepository.FlaggedActions.Get<RedrawHpFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Set();
             HandleStuff();
             UpdateScreen();
             Pause(msec);
@@ -4376,29 +4376,29 @@ internal class SaveGame
     public void CharmAnimal(int dir, int plev)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        TargetedProject(SingletonRepository.Projectiles.Get<ControlAnimalProjectile>(), dir, plev, flg);
+        TargetedProject(SingletonRepository.Projectiles.Get(nameof(ControlAnimalProjectile)), dir, plev, flg);
     }
 
     public void CharmAnimals(int dam)
     {
-        ProjectAtAllInLos(SingletonRepository.Projectiles.Get<ControlAnimalProjectile>(), dam);
+        ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(ControlAnimalProjectile)), dam);
     }
 
     public bool CharmMonster(int dir, int plev)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get<CharmProjectile>(), dir, plev, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(CharmProjectile)), dir, plev, flg);
     }
 
     public void CharmMonsters(int dam)
     {
-        ProjectAtAllInLos(SingletonRepository.Projectiles.Get<CharmProjectile>(), dam);
+        ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(CharmProjectile)), dam);
     }
 
     public bool CloneMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get<OldCloneProjectile>(), dir, 0, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldCloneProjectile)), dir, 0, flg);
     }
 
     public void ColdDam(int dam, string kbStr)
@@ -4434,24 +4434,24 @@ internal class SaveGame
     public bool ConfuseMonster(int dir, int plev)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get<OldConfProjectile>(), dir, plev, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldConfProjectile)), dir, plev, flg);
     }
 
     public void ConfuseMonsters(int dam)
     {
-        ProjectAtAllInLos(SingletonRepository.Projectiles.Get<OldConfProjectile>(), dam);
+        ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(OldConfProjectile)), dam);
     }
 
     public void ControlOneUndead(int dir, int plev)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        TargetedProject(SingletonRepository.Projectiles.Get<ControlUndeadProjectile>(), dir, plev, flg);
+        TargetedProject(SingletonRepository.Projectiles.Get(nameof(ControlUndeadProjectile)), dir, plev, flg);
     }
 
     public void DeathRay(int dir, int plev)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        TargetedProject(SingletonRepository.Projectiles.Get<DeathRayProjectile>(), dir, plev, flg);
+        TargetedProject(SingletonRepository.Projectiles.Get(nameof(DeathRayProjectile)), dir, plev, flg);
     }
 
     public void DestroyArea(int y1, int x1, int r)
@@ -4515,25 +4515,25 @@ internal class SaveGame
                 TimedBlindness.AddTimer(10 + Rng.DieRoll(10));
             }
         }
-        SingletonRepository.FlaggedActions.Get<RemoveLightFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<RemoveViewFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RemoveViewFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
     }
 
     public bool DestroyDoor(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
-        return TargetedProject(SingletonRepository.Projectiles.Get<KillDoorProjectile>(), dir, 0, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(KillDoorProjectile)), dir, 0, flg);
     }
 
     public bool DestroyDoorsTouch()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-        return Project(0, 1, MapY, MapX, 0, SingletonRepository.Projectiles.Get<KillDoorProjectile>(), flg);
+        return Project(0, 1, MapY, MapX, 0, SingletonRepository.Projectiles.Get(nameof(KillDoorProjectile)), flg);
     }
 
     public bool DetectAll()
@@ -4859,8 +4859,8 @@ internal class SaveGame
                 }
             }
         }
-        SingletonRepository.FlaggedActions.Get<RedrawDTrapFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawDTrapFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
         if (detect)
         {
             MsgPrint("You sense the presence of traps!");
@@ -4898,43 +4898,43 @@ internal class SaveGame
     public bool DisarmTrap(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
-        return TargetedProject(SingletonRepository.Projectiles.Get<KillTrapProjectile>(), dir, 0, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(KillTrapProjectile)), dir, 0, flg);
     }
 
     public void DispelDemons(int dam)
     {
-        ProjectAtAllInLos(SingletonRepository.Projectiles.Get<DispDemonProjectile>(), dam);
+        ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(DispDemonProjectile)), dam);
     }
 
     public bool DispelEvil(int dam)
     {
-        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get<DispEvilProjectile>(), dam);
+        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(DispEvilProjectile)), dam);
     }
 
     public void DispelGood(int dam)
     {
-        ProjectAtAllInLos(SingletonRepository.Projectiles.Get<DispGoodProjectile>(), dam);
+        ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(DispGoodProjectile)), dam);
     }
 
     public void DispelLiving(int dam)
     {
-        ProjectAtAllInLos(SingletonRepository.Projectiles.Get<DispLivingProjectile>(), dam);
+        ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(DispLivingProjectile)), dam);
     }
 
     public bool DispelMonsters(int dam)
     {
-        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get<DispAllProjectile>(), dam);
+        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(DispAllProjectile)), dam);
     }
 
     public bool DispelUndead(int dam)
     {
-        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get<DispUndeadProjectile>(), dam);
+        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(DispUndeadProjectile)), dam);
     }
 
     public void DoorCreation()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-        Project(0, 1, MapY, MapX, 0, SingletonRepository.Projectiles.Get<MakeDoorProjectile>(), flg);
+        Project(0, 1, MapY, MapX, 0, SingletonRepository.Projectiles.Get(nameof(MakeDoorProjectile)), flg);
     }
 
     /// <summary>
@@ -4946,7 +4946,7 @@ internal class SaveGame
     public bool DrainLife(int dir, int dam)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get<OldDrainProjectile>(), dir, dam, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldDrainProjectile)), dir, dam, flg);
     }
 
     public void Earthquake(int cy, int cx, int r)
@@ -5202,14 +5202,14 @@ internal class SaveGame
                 }
             }
         }
-        SingletonRepository.FlaggedActions.Get<RemoveLightFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<RemoveViewFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateDistancesFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RemoveViewFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
     }
 
     public void ElderSign()
@@ -5225,7 +5225,7 @@ internal class SaveGame
     public void ElderSignCreation()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
-        Project(0, 1, MapY, MapX, 0, SingletonRepository.Projectiles.Get<MakeElderSignProjectile>(), flg);
+        Project(0, 1, MapY, MapX, 0, SingletonRepository.Projectiles.Get(nameof(MakeElderSignProjectile)), flg);
     }
 
     public void ElecDam(int dam, string kbStr)
@@ -5388,8 +5388,8 @@ internal class SaveGame
         {
             return false;
         }
-        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         return true;
     }
 
@@ -5431,7 +5431,7 @@ internal class SaveGame
     public bool FearMonster(int dir, int plev)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get<TurnAllProjectile>(), dir, plev, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(TurnAllProjectile)), dir, plev, flg);
     }
 
     public bool FireBall(Projectile projectile, int dir, int dam, int rad)
@@ -5504,13 +5504,13 @@ internal class SaveGame
 
     public bool HasteMonsters()
     {
-        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get<OldSpeedProjectile>(), ExperienceLevel);
+        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(OldSpeedProjectile)), ExperienceLevel);
     }
 
     public bool HealMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get<OldHealProjectile>(), dir, Rng.DiceRoll(4, 6), flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldHealProjectile)), dir, Rng.DiceRoll(4, 6), flg);
     }
 
     public bool IdentifyFully()
@@ -5527,8 +5527,8 @@ internal class SaveGame
         oPtr.BecomeFlavourAware();
         oPtr.BecomeKnown();
         oPtr.IdentMental = true;
-        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         HandleStuff();
         string oName = oPtr.Description(true, 3);
 
@@ -5561,8 +5561,8 @@ internal class SaveGame
         }
         oPtr.BecomeFlavourAware();
         oPtr.BecomeKnown();
-        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         string oName = oPtr.Description(true, 3);
 
         MsgPrint($"{oPtr.DescribeLocation()}: {oName} ({oPtr.Label}).");
@@ -5610,7 +5610,7 @@ internal class SaveGame
         {
             MsgPrint("You are surrounded by a white light.");
         }
-        Project(0, rad, MapY, MapX, dam, SingletonRepository.Projectiles.Get<LightWeakProjectile>(), flg);
+        Project(0, rad, MapY, MapX, dam, SingletonRepository.Projectiles.Get(nameof(LightWeakProjectile)), flg);
         LightRoom(MapY, MapX);
         return true;
     }
@@ -5618,7 +5618,7 @@ internal class SaveGame
     public void LightLine(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill;
-        TargetedProject(SingletonRepository.Projectiles.Get<LightWeakProjectile>(), dir, Rng.DiceRoll(6, 8), flg);
+        TargetedProject(SingletonRepository.Projectiles.Get(nameof(LightWeakProjectile)), dir, Rng.DiceRoll(6, 8), flg);
     }
 
     public bool LoseAllInfo()
@@ -5647,8 +5647,8 @@ internal class SaveGame
             oPtr.IdentKnown = false;
             oPtr.IdentSense = false;
         }
-        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         WizDark();
         return true;
     }
@@ -5682,7 +5682,7 @@ internal class SaveGame
                 TakeHit(Rng.DieRoll(3), "the strain of casting Mass Carnage");
             }
             MoveCursorRelative(MapY, MapX);
-            SingletonRepository.FlaggedActions.Get<RedrawHpFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Set();
             HandleStuff();
             UpdateScreen();
             Pause(msec);
@@ -5691,13 +5691,13 @@ internal class SaveGame
 
     public void MindblastMonsters(int dam)
     {
-        ProjectAtAllInLos(SingletonRepository.Projectiles.Get<PsiProjectile>(), dam);
+        ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(PsiProjectile)), dam);
     }
 
     public bool PolyMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get<OldPolyProjectile>(), dir, ExperienceLevel, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldPolyProjectile)), dir, ExperienceLevel, flg);
     }
 
     public int PolymorphMonster(MonsterRace rPtr)
@@ -5845,7 +5845,7 @@ internal class SaveGame
                 oPtr.IdentEmpty = false;
             }
         }
-        SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         return true;
     }
 
@@ -6493,35 +6493,35 @@ internal class SaveGame
     public bool SleepMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get<OldSleepProjectile>(), dir, ExperienceLevel, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldSleepProjectile)), dir, ExperienceLevel, flg);
     }
 
     public bool SleepMonsters()
     {
-        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get<OldSleepProjectile>(), ExperienceLevel);
+        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(OldSleepProjectile)), ExperienceLevel);
     }
 
     public void SleepMonstersTouch()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectKill | ProjectionFlag.ProjectHide;
-        Project(0, 1, MapY, MapX, ExperienceLevel, SingletonRepository.Projectiles.Get<OldSleepProjectile>(), flg);
+        Project(0, 1, MapY, MapX, ExperienceLevel, SingletonRepository.Projectiles.Get(nameof(OldSleepProjectile)), flg);
     }
 
     public bool SlowMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get<OldSlowProjectile>(), dir, ExperienceLevel, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldSlowProjectile)), dir, ExperienceLevel, flg);
     }
 
     public bool SlowMonsters()
     {
-        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get<OldSlowProjectile>(), ExperienceLevel);
+        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(OldSlowProjectile)), ExperienceLevel);
     }
 
     public bool SpeedMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get<OldSpeedProjectile>(), dir, ExperienceLevel, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldSpeedProjectile)), dir, ExperienceLevel, flg);
     }
 
     public void StairCreation()
@@ -6555,23 +6555,23 @@ internal class SaveGame
     public void StasisMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        TargetedProject(SingletonRepository.Projectiles.Get<StasisProjectile>(), dir, ExperienceLevel, flg);
+        TargetedProject(SingletonRepository.Projectiles.Get(nameof(StasisProjectile)), dir, ExperienceLevel, flg);
     }
 
     public void StasisMonsters(int dam)
     {
-        ProjectAtAllInLos(SingletonRepository.Projectiles.Get<StasisProjectile>(), dam);
+        ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(StasisProjectile)), dam);
     }
 
     public void StunMonster(int dir, int plev)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        TargetedProject(SingletonRepository.Projectiles.Get<StunProjectile>(), dir, plev, flg);
+        TargetedProject(SingletonRepository.Projectiles.Get(nameof(StunProjectile)), dir, plev, flg);
     }
 
     public void StunMonsters(int dam)
     {
-        ProjectAtAllInLos(SingletonRepository.Projectiles.Get<StunProjectile>(), dam);
+        ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(StunProjectile)), dam);
     }
 
     public void SummonReaver()
@@ -6586,7 +6586,7 @@ internal class SaveGame
     public bool TeleportMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get<TeleportAwayAllProjectile>(), dir, Constants.MaxSight * 5, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(TeleportAwayAllProjectile)), dir, Constants.MaxSight * 5, flg);
     }
 
     public void TeleportPlayer(int dis)
@@ -6674,10 +6674,10 @@ internal class SaveGame
         }
         RedrawSingleLocation(MapY, MapX);
         RecenterScreenAroundPlayer();
-        SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateDistancesFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
         HandleStuff();
     }
 
@@ -6763,10 +6763,10 @@ internal class SaveGame
         RedrawSingleLocation(oy, ox);
         RedrawSingleLocation(MapY, MapX);
         RecenterScreenAroundPlayer();
-        SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateDistancesFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
         HandleStuff();
     }
 
@@ -6811,10 +6811,10 @@ internal class SaveGame
                 RedrawSingleLocation(ty, tx);
                 RedrawSingleLocation(MapY, MapX);
                 RecenterScreenAroundPlayer();
-                SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
-                SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-                SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
-                SingletonRepository.FlaggedActions.Get<UpdateDistancesFlaggedAction>().Set();
+                SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
+                SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+                SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+                SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
                 HandleStuff();
             }
         }
@@ -6823,17 +6823,17 @@ internal class SaveGame
     public bool TrapCreation()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-        return Project(0, 1, MapY, MapX, 0, SingletonRepository.Projectiles.Get<MakeTrapProjectile>(), flg);
+        return Project(0, 1, MapY, MapX, 0, SingletonRepository.Projectiles.Get(nameof(MakeTrapProjectile)), flg);
     }
 
     public void TurnEvil(int dam)
     {
-        ProjectAtAllInLos(SingletonRepository.Projectiles.Get<TurnEvilProjectile>(), dam);
+        ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(TurnEvilProjectile)), dam);
     }
 
     public void TurnMonsters(int dam)
     {
-        ProjectAtAllInLos(SingletonRepository.Projectiles.Get<TurnAllProjectile>(), dam);
+        ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(TurnAllProjectile)), dam);
     }
 
     public bool UnlightArea(int dam, int rad)
@@ -6843,7 +6843,7 @@ internal class SaveGame
         {
             MsgPrint("Darkness surrounds you.");
         }
-        Project(0, rad, MapY, MapX, dam, SingletonRepository.Projectiles.Get<DarkWeakProjectile>(), flg);
+        Project(0, rad, MapY, MapX, dam, SingletonRepository.Projectiles.Get(nameof(DarkWeakProjectile)), flg);
         UnlightRoom(MapY, MapX);
         return true;
     }
@@ -6901,26 +6901,26 @@ internal class SaveGame
     public void WallStone()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
-        _ = Project(0, 1, MapY, MapX, 0, SingletonRepository.Projectiles.Get<StoneWallProjectile>(), flg);
-        SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
+        _ = Project(0, 1, MapY, MapX, 0, SingletonRepository.Projectiles.Get(nameof(StoneWallProjectile)), flg);
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
     }
 
     public bool WallToMud(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem |
                   ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get<KillWallProjectile>(), dir, 20 + Rng.DieRoll(30), flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(KillWallProjectile)), dir, 20 + Rng.DieRoll(30), flg);
     }
 
     public void WizardLock(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem |
                   ProjectionFlag.ProjectKill;
-        TargetedProject(SingletonRepository.Projectiles.Get<JamDoorProjectile>(), dir, 20 + Rng.DieRoll(30), flg);
+        TargetedProject(SingletonRepository.Projectiles.Get(nameof(JamDoorProjectile)), dir, 20 + Rng.DieRoll(30), flg);
     }
 
     public void YellowSign()
@@ -7103,7 +7103,7 @@ internal class SaveGame
         }
         MsgPrint($"Your {oName} is damaged!");
         oPtr.BonusArmorClass--;
-        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         return true;
     }
 
@@ -7166,7 +7166,7 @@ internal class SaveGame
                 oPtr.RandartItemCharacteristics.HeavyCurse = false;
             }
             oPtr.Inscription = "uncursed";
-            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
             cnt++;
         }
         return cnt > 0;
@@ -7352,7 +7352,7 @@ internal class SaveGame
                 if (CommandArgument > 0)
                 {
                     CommandRepeat = CommandArgument - 1;
-                    SingletonRepository.FlaggedActions.Get<RedrawStateFlaggedAction>().Set();
+                    SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
                     CommandArgument = 0;
                 }
 
@@ -7388,9 +7388,9 @@ internal class SaveGame
             CaveSetFeat(y, x, Rng.RandomLessThan(100) < 50 ? "BrokenDoor" : "OpenDoor");
             PlaySound(SoundEffectEnum.OpenDoor);
             MovePlayer(y, x, false);
-            SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<UpdateDistancesFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
         }
         else if (Rng.RandomLessThan(100) < AbilityScores[Ability.Dexterity].DexTheftAvoidance + ExperienceLevel)
         {
@@ -7525,21 +7525,21 @@ internal class SaveGame
             {
                 if (i - 5 != 0)
                 {
-                    FireBall(SingletonRepository.Projectiles.Get<ShardProjectile>(), i, 175, 2);
+                    FireBall(SingletonRepository.Projectiles.Get(nameof(ShardProjectile)), i, 175, 2);
                 }
             }
             for (i = 1; i < 10; i++)
             {
                 if (i - 5 != 0)
                 {
-                    FireBall(SingletonRepository.Projectiles.Get<ManaProjectile>(), i, 175, 3);
+                    FireBall(SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), i, 175, 3);
                 }
             }
             for (i = 1; i < 10; i++)
             {
                 if (i - 5 != 0)
                 {
-                    FireBall(SingletonRepository.Projectiles.Get<NukeProjectile>(), i, 175, 4);
+                    FireBall(SingletonRepository.Projectiles.Get(nameof(NukeProjectile)), i, 175, 4);
                 }
             }
         }
@@ -7623,8 +7623,8 @@ internal class SaveGame
             Mana -= (cost / 2) + Rng.DieRoll(cost / 2);
         }
         // We'll need to redraw
-        SingletonRepository.FlaggedActions.Get<RedrawHpFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<RedrawManaFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
         // Check to see if we were successful
         if (Rng.DieRoll(AbilityScores[useStat].Innate) >=
             (difficulty / 2) + Rng.DieRoll(difficulty / 2))
@@ -7653,9 +7653,9 @@ internal class SaveGame
         else
         {
             CaveSetFeat(y, x, "LockedDoor0");
-            SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
             PlaySound(SoundEffectEnum.ShutDoor);
         }
         return false;
@@ -7807,7 +7807,7 @@ internal class SaveGame
     /// </summary>
     public void CreatePhlogiston()
     {
-        LightsourceInventorySlot lightsourceInventorySlot = SingletonRepository.InventorySlots.Get<LightsourceInventorySlot>();
+        LightsourceInventorySlot lightsourceInventorySlot = (LightsourceInventorySlot)SingletonRepository.InventorySlots.Get(nameof(LightsourceInventorySlot));
         Item? item = GetInventoryItem(lightsourceInventorySlot.WeightedRandom.Choose());
         if (item == null)
         {
@@ -7848,7 +7848,7 @@ internal class SaveGame
         }
 
         // We need to update our light after this
-        SingletonRepository.FlaggedActions.Get<UpdateTorchRadiusFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
     }
 
     /// <summary>
@@ -7894,8 +7894,8 @@ internal class SaveGame
             item.RandartItemCharacteristics.Clear();
             item.IdentCursed = true;
             item.IdentBroken = true;
-            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
         }
         return true;
     }
@@ -7935,8 +7935,8 @@ internal class SaveGame
             item.RandartItemCharacteristics.Clear();
             item.IdentCursed = true;
             item.IdentBroken = true;
-            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
         }
         return true;
     }
@@ -8111,13 +8111,13 @@ internal class SaveGame
         {
             MsgPrint("You channel mana to power the effect.");
             Mana -= cost;
-            SingletonRepository.FlaggedActions.Get<RedrawManaFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
             return true;
         }
         // Use some mana in the attempt, even if we failed
         MsgPrint("You mana is insufficient to power the effect.");
         Mana -= Rng.RandomLessThan(Mana / 2);
-        SingletonRepository.FlaggedActions.Get<RedrawManaFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
         return false;
     }
 
@@ -8429,7 +8429,7 @@ internal class SaveGame
         // the notification
         if (oldTrapsDetected != newTrapsDetected)
         {
-            SingletonRepository.FlaggedActions.Get<RedrawDTrapFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawDTrapFlaggedAction)).Set();
         }
         // If we're leaving an area where we've detected traps at a run, then stop running
         if (Running != 0 && oldTrapsDetected && !newTrapsDetected)
@@ -8452,19 +8452,19 @@ internal class SaveGame
         // Recenter the screen if we have to
         RecenterScreenAroundPlayer();
         // We'll need to update and redraw various things
-        SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateDistancesFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
         // If we're not actively searching, then have a chance of doing it passively
         if (SkillSearchFrequency >= 50 || 0 == Rng.RandomLessThan(50 - SkillSearchFrequency))
         {
-            RunScript<SearchScript>();
+            RunScript(nameof(SearchScript));
         }        
         else if (IsSearching) // If we're actively searching then always do it
         {
-            RunScript<SearchScript>();
+            RunScript(nameof(SearchScript));
         }
         // Pick up an object on our tile if there is one
         PickUpItems(!dontPickup);
@@ -8535,9 +8535,9 @@ internal class SaveGame
             {
                 MsgPrint("You have picked the lock.");
                 CaveSetFeat(y, x, "OpenDoor");
-                SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
-                SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-                SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
+                SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+                SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+                SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
                 PlaySound(SoundEffectEnum.LockpickSuccess);
                 // Picking a lock gains you an experience point
                 GainExperience(1);
@@ -8552,9 +8552,9 @@ internal class SaveGame
         else
         {
             CaveSetFeat(y, x, "OpenDoor");
-            SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
             PlaySound(SoundEffectEnum.OpenDoor);
         }
         return more;
@@ -8578,7 +8578,7 @@ internal class SaveGame
             {
                 MsgPrint($"You collect {item.TypeSpecificValue} gold pieces worth of {itemName}.");
                 Gold += item.TypeSpecificValue;
-                SingletonRepository.FlaggedActions.Get<RedrawGoldFlaggedAction>().Set();
+                SingletonRepository.FlaggedActions.Get(nameof(RedrawGoldFlaggedAction)).Set();
                 DeleteObject(item);
             }
             else
@@ -9102,7 +9102,7 @@ internal class SaveGame
                 Disturb(false);
                 return;
             }
-            SingletonRepository.FlaggedActions.Get<UpdateTorchRadiusFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
             // Initialise our navigation state
             StartRun(direction);
         }
@@ -9238,15 +9238,15 @@ internal class SaveGame
         if (IsSearching)
         {
             IsSearching = false;
-            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<RedrawStateFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
         }
         else
         {
             IsSearching = true;
-            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<RedrawStateFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<RedrawSpeedFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)).Set();
         }
     }
 
@@ -9450,11 +9450,11 @@ internal class SaveGame
         // Periodically search if we're not actively in search mode
         if (SkillSearchFrequency >= 50 || 0 == Rng.RandomLessThan(50 - SkillSearchFrequency))
         {
-            RunScript<SearchScript>();
+            RunScript(nameof(SearchScript));
         }
         else if (IsSearching) // Always search if we are actively in search mode
         {
-            RunScript<SearchScript>();
+            RunScript(nameof(SearchScript));
         }
         // Pick up items if we should
         PickUpItems(pickup);
@@ -9488,7 +9488,7 @@ internal class SaveGame
     public void DoCmdSearch()
     {
         EnergyUse = 100;
-        RunScript<SearchScript>();
+        RunScript(nameof(SearchScript));
     }
 
     public void DoCmdLook()
@@ -9560,15 +9560,15 @@ internal class SaveGame
                 PanelRow = currentRow;
                 PanelCol = currentCol;
                 PanelBounds();
-                SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
-                SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
+                SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+                SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
                 HandleStuff();
             }
         }
         // We've finished, so snap back to the player's location
         RecenterScreenAroundPlayer();
-        SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
         HandleStuff();
     }
 
@@ -9604,7 +9604,7 @@ internal class SaveGame
         EnergyUse = 50;
         // Drop it
         InvenDrop(item, amount);
-        SingletonRepository.FlaggedActions.Get<RedrawEquippyFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
     }
 
     public void DoCmdRun()
@@ -9726,9 +9726,9 @@ internal class SaveGame
         }
     }
 
-    public bool RunScript<T>() where T : Script
+    public bool RunScript(string scriptName)
     {
-        Script script = SingletonRepository.Scripts.Get<T>();
+        Script script = SingletonRepository.Scripts.Get(scriptName);
         return script.Execute();
     }
 
@@ -9798,7 +9798,7 @@ internal class SaveGame
         item.Y = MapY;
         item.X = MapX;
         NoteSpot(MapY, MapX);
-        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
     }
 
     /// <summary>
@@ -9937,15 +9937,15 @@ internal class SaveGame
         {
             MsgPrint($"The {tile.FeatureType.Description} resists your attempts to tunnel through it.");
             more = true;
-            RunScript<SearchScript>();
+            RunScript(nameof(SearchScript));
         }
         // If we successfully made the tunnel,
         if (!GridPassable(y, x))
         {
-            SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
         }
         if (!more)
         {
@@ -9998,9 +9998,9 @@ internal class SaveGame
             {
                 MsgPrint("You have picked the lock.");
                 CaveSetFeat(y, x, "OpenDoor");
-                SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
-                SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-                SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
+                SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+                SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+                SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
                 PlaySound(SoundEffectEnum.LockpickSuccess);
                 GainExperience(1);
             }
@@ -10014,9 +10014,9 @@ internal class SaveGame
         else
         {
             CaveSetFeat(y, x, "OpenDoor");
-            SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
             PlaySound(SoundEffectEnum.OpenDoor);
         }
         return true;
@@ -10142,12 +10142,12 @@ internal class SaveGame
 
                 case MutationAttackType.Poison:
                     Project(0, 0, monster.MapY, monster.MapX, damage,
-                        SingletonRepository.Projectiles.Get<PoisProjectile>(), ProjectionFlag.ProjectKill);
+                        SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), ProjectionFlag.ProjectKill);
                     break;
 
                 case MutationAttackType.Hellfire:
                     Project(0, 0, monster.MapY, monster.MapX, damage,
-                        SingletonRepository.Projectiles.Get<HellFireProjectile>(), ProjectionFlag.ProjectKill);
+                        SingletonRepository.Projectiles.Get(nameof(HellFireProjectile)), ProjectionFlag.ProjectKill);
                     break;
             }
             // The monster might hurt when we touch it
@@ -10178,10 +10178,10 @@ internal class SaveGame
         // Clear the tile
         tile.TileFlags.Clear(GridTile.PlayerMemorized);
         RevertTileToBackground(y, x);
-        SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
         return true;
     }
 
@@ -11402,9 +11402,9 @@ internal class SaveGame
     {
         if (ExPlayer == null)
         {
-            _prevSex = SingletonRepository.Genders.Get<FemaleGender>();
-            _prevRace = SingletonRepository.Races.Get<HumanRace>();
-            _prevCharacterClass = SingletonRepository.CharacterClasses.Get<WarriorCharacterClass>();
+            _prevSex = SingletonRepository.Genders.Get(nameof(FemaleGender));
+            _prevRace = SingletonRepository.Races.Get(nameof(HumanRace));
+            _prevCharacterClass = SingletonRepository.CharacterClasses.Get(nameof(WarriorCharacterClass));
             _prevPrimaryRealm = null;
             _prevSecondaryRealm = null;
             _prevName = "Xena";
@@ -11434,7 +11434,7 @@ internal class SaveGame
     private bool PlayerBirthAux()
     {
         Screen.Clear();
-        BirthStage? birthStage = SingletonRepository.BirthStages.Get<IntroductionBirthStage>();
+        BirthStage? birthStage = SingletonRepository.BirthStages.Get(nameof(IntroductionBirthStage));
         while (birthStage != null && !Shutdown)
         {
             birthStage = birthStage.Render();
@@ -11446,7 +11446,7 @@ internal class SaveGame
     {
         if (Race.OutfitsWithScrollsOfSatisfyHunger)
         {
-            ItemFactory scrollSatisfyHungerItemClass = SingletonRepository.ItemFactories.Get<ScrollSatisfyHunger>();
+            ItemFactory scrollSatisfyHungerItemClass = SingletonRepository.ItemFactories.Get(nameof(ScrollSatisfyHunger));
             Item item = scrollSatisfyHungerItemClass.CreateItem();
             item.Count = (char)Rng.RandomBetween(2, 5);
             item.BecomeFlavourAware();
@@ -11456,7 +11456,7 @@ internal class SaveGame
         }
         else
         {
-            ItemFactory rationFoodItemClass = SingletonRepository.ItemFactories.Get<RationFoodItemFactory>();
+            ItemFactory rationFoodItemClass = SingletonRepository.ItemFactories.Get(nameof(RationFoodItemFactory));
             Item item = rationFoodItemClass.CreateItem();
             item.Count = Rng.RandomBetween(3, 7);
             item.BecomeFlavourAware();
@@ -11465,7 +11465,7 @@ internal class SaveGame
         }
         if (Race.OutfitsWithScrollsOfLight || BaseCharacterClass.OutfitsWithScrollsOfLight)
         {
-            ItemFactory scrollLightItemClass = SingletonRepository.ItemFactories.Get<ScrollLight>();
+            ItemFactory scrollLightItemClass = SingletonRepository.ItemFactories.Get(nameof(ScrollLight));
             Item item = scrollLightItemClass .CreateItem();
             item.Count = Rng.RandomBetween(3, 7);
             item.BecomeFlavourAware();
@@ -11475,7 +11475,7 @@ internal class SaveGame
         }
         else
         {
-            ItemFactory woodenTorchItemClass = SingletonRepository.ItemFactories.Get<WoodenTorchLightSourceItemFactory>();
+            ItemFactory woodenTorchItemClass = SingletonRepository.ItemFactories.Get(nameof(WoodenTorchLightSourceItemFactory));
             Item item = woodenTorchItemClass.CreateItem();
             item.Count = Rng.RandomBetween(3, 7);
             item.TypeSpecificValue = Rng.RandomBetween(3, 7) * 500;
@@ -11483,7 +11483,7 @@ internal class SaveGame
             item.BecomeKnown();
             InvenCarry(item);
             Item carried = item.Clone(1);
-            LightsourceInventorySlot lightsourceInventorySlot = SingletonRepository.InventorySlots.Get<LightsourceInventorySlot>();
+            LightsourceInventorySlot lightsourceInventorySlot = (LightsourceInventorySlot)SingletonRepository.InventorySlots.Get(nameof(LightsourceInventorySlot));
             SetInventoryItem(lightsourceInventorySlot.WeightedRandom.Choose(), carried);
             WeightCarried += carried.Weight;
         }
@@ -12706,7 +12706,7 @@ internal class SaveGame
     //        }
     //        if (destroyed)
     //        {
-    //            if (RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type1RoomLayout>()))
+    //            if (RoomBuild(y, x, SingletonRepository.RoomLayouts.Get(nameof(Type1RoomLayout))))
     //            {
     //            }
     //            continue;
@@ -12720,7 +12720,7 @@ internal class SaveGame
     //                {
     //                    if (maxVaultOk > 1)
     //                    {
-    //                        if (RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type8RoomLayout>()))
+    //                        if (RoomBuild(y, x, SingletonRepository.RoomLayouts.Get(nameof(Type8RoomLayout))))
     //                        {
     //                            continue;
     //                        }
@@ -12730,35 +12730,35 @@ internal class SaveGame
     //                {
     //                    if (maxVaultOk > 0)
     //                    {
-    //                        if (RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type7RoomLayout>()))
+    //                        if (RoomBuild(y, x, SingletonRepository.RoomLayouts.Get(nameof(Type7RoomLayout))))
     //                        {
     //                            continue;
     //                        }
     //                    }
     //                }
-    //                if (k < 40 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type5RoomLayout>()))
+    //                if (k < 40 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get(nameof(Type5RoomLayout))))
     //                {
     //                    continue;
     //                }
-    //                if (k < 55 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type6RoomLayout>()))
+    //                if (k < 55 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get(nameof(Type6RoomLayout))))
     //                {
     //                    continue;
     //                }
     //            }
-    //            if (k < 25 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type4RoomLayout>()))
+    //            if (k < 25 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get(nameof(Type4RoomLayout))))
     //            {
     //                continue;
     //            }
-    //            if (k < 50 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type3RoomLayout>()))
+    //            if (k < 50 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get(nameof(Type3RoomLayout))))
     //            {
     //                continue;
     //            }
-    //            if (k < 100 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type2RoomLayout>()))
+    //            if (k < 100 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get(nameof(Type2RoomLayout))))
     //            {
     //                continue;
     //            }
     //        }
-    //        if (RoomBuild(y, x, SingletonRepository.RoomLayouts.Get<Type1RoomLayout>()))
+    //        if (RoomBuild(y, x, SingletonRepository.RoomLayouts.Get(nameof(Type1RoomLayout))))
     //        {
     //        }
     //    }
@@ -14906,22 +14906,22 @@ internal class SaveGame
     public void DoCmdRedraw()
     {
         Screen.Clear();
-        SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateTorchRadiusFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateHealthFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateSpellsFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<RemoveLightFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<RemoveViewFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<RedrawEquippyFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<PrExtraRedrawActionGroupSetFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<PrBasicRedrawActionGroupSetFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<RedrawAllFlaggedAction>().Set(); // TODO: Special case ... should be some form of invalidateclient
+        SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RemoveViewFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawAllFlaggedAction)).Set(); // TODO: Special case ... should be some form of invalidateclient
         HandleStuff();
         UpdateScreen();
     }
@@ -14956,7 +14956,7 @@ internal class SaveGame
             tx = TargetCol;
             ty = TargetRow;
         }
-        Project(0, 0, ty, tx, 1000000, SingletonRepository.Projectiles.Get<WizardBoltProjectile>(), flg);
+        Project(0, 0, ty, tx, 1000000, SingletonRepository.Projectiles.Get(nameof(WizardBoltProjectile)), flg);
     }
 
     public void DoCmdWizBamf()
@@ -15185,7 +15185,7 @@ internal class SaveGame
         {
             SetInventoryItem(i, null);
         }
-        SingletonRepository.FlaggedActions.Get<NoticeReorderFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(NoticeReorderFlaggedAction)).Set();
     }
 
     private const int _maxQuests = 50;
@@ -15551,8 +15551,8 @@ internal class SaveGame
         PanelRowMin = prowMin;
         PanelColMin = pcolMin;
         PanelBoundsCenter();
-        SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
     }
 
     public void ChangeRace(Race newRace)
@@ -15584,8 +15584,8 @@ internal class SaveGame
         }
         CheckExperience();
         MaxLevelGained = ExperienceLevel;
-        SingletonRepository.FlaggedActions.Get<PrBasicRedrawActionGroupSetFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         HandleStuff();
     }
 
@@ -15613,18 +15613,18 @@ internal class SaveGame
         {
             MaxExperienceGained = ExperiencePoints;
         }
-        SingletonRepository.FlaggedActions.Get<RedrawExpFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawExpFlaggedAction)).Set();
         HandleStuff();
         while (ExperienceLevel > 1 && ExperiencePoints < Constants.PlayerExp[ExperienceLevel - 2] * ExperienceMultiplier / 100L)
         {
             ExperienceLevel--;
             RedrawSingleLocation(MapY, MapX);
-            SingletonRepository.FlaggedActions.Get<UpdateHealthFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<UpdateSpellsFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<RedrawTitleFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<RedrawLevelFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawTitleFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawLevelFlaggedAction)).Set();
             HandleStuff();
         }
         while (ExperienceLevel < Constants.PyMaxLevel && ExperiencePoints >= Constants.PlayerExp[ExperienceLevel - 1] * ExperienceMultiplier / 100L)
@@ -15652,13 +15652,13 @@ internal class SaveGame
             }
             PlaySound(SoundEffectEnum.LevelGain);
             MsgPrint($"Welcome to level {ExperienceLevel}.");
-            SingletonRepository.FlaggedActions.Get<UpdateHealthFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<UpdateSpellsFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<RedrawTitleFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<RedrawLevelFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<RedrawExpFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawTitleFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawLevelFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawExpFlaggedAction)).Set();
             HandleStuff();
             if (levelReward)
             {
@@ -15823,7 +15823,7 @@ internal class SaveGame
         {
             AbilityScores[stat].Innate = cur;
             AbilityScores[stat].InnateMax = max;
-            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         }
         return res;
     }
@@ -16218,7 +16218,7 @@ internal class SaveGame
         }
         if (oldHealth != Health)
         {
-            SingletonRepository.FlaggedActions.Get<RedrawHpFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Set();
         }
     }
 
@@ -16248,7 +16248,7 @@ internal class SaveGame
         }
         if (oldMana != Mana)
         {
-            SingletonRepository.FlaggedActions.Get<RedrawManaFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
         }
     }
 
@@ -16277,8 +16277,8 @@ internal class SaveGame
         {
             PlayerHp[i] = PlayerHp[i - 1] + PlayerHp[i];
         }
-        SingletonRepository.FlaggedActions.Get<UpdateHealthFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<RedrawHpFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Set();
         HandleStuff();
     }
 
@@ -16287,7 +16287,7 @@ internal class SaveGame
         if (AbilityScores[stat].Innate != AbilityScores[stat].InnateMax)
         {
             AbilityScores[stat].Innate = AbilityScores[stat].InnateMax;
-            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
             return true;
         }
         return false;
@@ -16303,7 +16303,7 @@ internal class SaveGame
                 Health = MaxHealth;
                 FractionalHealth = 0;
             }
-            SingletonRepository.FlaggedActions.Get<RedrawHpFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Set();
             if (num < 5)
             {
                 MsgPrint("You feel a little better.");
@@ -16391,7 +16391,7 @@ internal class SaveGame
                 {
                     item.Inscription = feel;
                 }
-                SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
+                SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
             }
         }
     }
@@ -16507,8 +16507,8 @@ internal class SaveGame
             return false;
         }
         Disturb(false);
-        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<RedrawHungerFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawHungerFlaggedAction)).Set();
         HandleStuff();
         return true;
     }
@@ -16528,7 +16528,7 @@ internal class SaveGame
         AbilityScores[ii].Innate = cur2;
         AbilityScores[jj].InnateMax = max1;
         AbilityScores[jj].Innate = cur1;
-        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
     }
 
     public bool SpellOkay(Spell sPtr, bool known)
@@ -16597,7 +16597,7 @@ internal class SaveGame
             }
         }
         Health -= damage;
-        SingletonRepository.FlaggedActions.Get<RedrawHpFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Set();
         if (penInvuln)
         {
             MsgPrint("The attack penetrates your shield of invulnerability!");
@@ -16777,7 +16777,7 @@ internal class SaveGame
             {
                 AbilityScores[which].InnateMax = value;
             }
-            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
             return true;
         }
         return false;
@@ -16808,7 +16808,7 @@ internal class SaveGame
             {
                 jPtr.Absorb(oPtr);
                 WeightCarried += oPtr.Count * oPtr.Weight;
-                SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+                SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
                 return j;
             }
         }
@@ -16855,8 +16855,8 @@ internal class SaveGame
         oPtr.HoldingMonsterIndex = 0;
         WeightCarried += oPtr.Count * oPtr.Weight;
         _invenCnt++;
-        SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         return i;
     }
 
@@ -16996,9 +16996,9 @@ internal class SaveGame
         {
             oPtr.Count += num;
             WeightCarried += num * oPtr.Weight;
-            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         }
     }
 
@@ -17026,9 +17026,9 @@ internal class SaveGame
         else
         {
             SetInventoryItem(item, null);
-            SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<UpdateTorchRadiusFlaggedAction>().Set();
-            SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
         }
     }
 
@@ -17972,7 +17972,7 @@ internal class SaveGame
                 }
             }
         }
-        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
     }
 
     /// <summary>
@@ -18382,12 +18382,12 @@ internal class SaveGame
                 }
             }
         }
-        SingletonRepository.FlaggedActions.Get<RemoveLightFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<RemoveViewFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RemoveViewFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
     }
 
     public void WizLight()
@@ -18418,8 +18418,8 @@ internal class SaveGame
                 }
             }
         }
-        SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
-        SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
     }
 
     private ColourEnum DimColour(ColourEnum a)
@@ -18907,7 +18907,7 @@ internal class SaveGame
         MonsterRace rPtr = mPtr.Race;
         if (TrackedMonsterIndex == mIdx)
         {
-            SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthFlaggedAction)).Set();
         }
         mPtr.SleepLevel = 0;
         mPtr.Health -= dam;
@@ -19690,7 +19690,7 @@ internal class SaveGame
                 RedrawSingleLocation(fy, fx);
                 if (TrackedMonsterIndex == mIdx)
                 {
-                    SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
+                    SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthFlaggedAction)).Set();
                 }
                 if (rPtr.Knowledge.RSights < Constants.MaxShort)
                 {
@@ -19733,7 +19733,7 @@ internal class SaveGame
                 RedrawSingleLocation(fy, fx);
                 if (TrackedMonsterIndex == mIdx)
                 {
-                    SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
+                    SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthFlaggedAction)).Set();
                 }
             }
         }

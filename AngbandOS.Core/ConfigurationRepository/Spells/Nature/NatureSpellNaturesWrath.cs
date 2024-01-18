@@ -16,7 +16,7 @@ internal class NatureSpellNaturesWrath : Spell
         SaveGame.DispelMonsters(SaveGame.ExperienceLevel * 4);
         SaveGame.Earthquake(SaveGame.MapY, SaveGame.MapX, 20 + (SaveGame.ExperienceLevel / 2));
         SaveGame.Project(0, 1 + (SaveGame.ExperienceLevel / 12), SaveGame.MapY, SaveGame.MapX, 100 + SaveGame.ExperienceLevel,
-            SaveGame.SingletonRepository.Projectiles.Get<DisintegrateProjectile>(), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
+            SaveGame.SingletonRepository.Projectiles.Get(nameof(DisintegrateProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
     }
 
     public override string Name => "Nature's Wrath";

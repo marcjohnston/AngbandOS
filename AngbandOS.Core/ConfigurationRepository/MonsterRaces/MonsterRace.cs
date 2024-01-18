@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.MonsterRaces;
 
 [Serializable]
-internal abstract class MonsterRace : IMonsterCharacteristics
+internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
     protected MonsterRace(SaveGame saveGame)
@@ -21,6 +21,10 @@ internal abstract class MonsterRace : IMonsterCharacteristics
 
         Level = (LevelFound < 0 || LevelFound > 100) ? 0 : LevelFound;
     }
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+
     public virtual MonsterSpellList Spells => new MonsterSpellList();
     public bool BreatheAcid => Spells.Contains(typeof(BreatheAcidMonsterSpell));
     public bool BreatheCold => Spells.Contains(typeof(BreatheColdMonsterSpell));

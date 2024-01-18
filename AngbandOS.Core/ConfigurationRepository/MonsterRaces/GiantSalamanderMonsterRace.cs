@@ -13,7 +13,7 @@ internal class GiantSalamanderMonsterRace : MonsterRace
     protected GiantSalamanderMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get<BreatheFireMonsterSpell>());
+        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheFireMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperRSymbol));
     public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "Giant salamander";
@@ -21,7 +21,7 @@ internal class GiantSalamanderMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 40;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<FireAttackEffect>(), 3, 6),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 3, 6),
     };
     public override string Description => "A large black and yellow lizard. You'd better run away!";
     public override bool ForceSleep => true;

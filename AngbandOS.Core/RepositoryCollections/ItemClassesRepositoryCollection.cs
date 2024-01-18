@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class ItemClassesRepositoryCollection : DictionaryRepositoryCollection<ItemClass>
+internal class ItemClassesRepositoryCollection : KeyedDictionaryRepositoryCollection<string, ItemClass>
 {
     public ItemClassesRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 }

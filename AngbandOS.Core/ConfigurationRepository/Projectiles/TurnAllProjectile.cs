@@ -12,7 +12,7 @@ internal class TurnAllProjectile : Projectile
 {
     private TurnAllProjectile(SaveGame saveGame) : base(saveGame) { }
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<WhiteControlAnimation>();
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(WhiteControlAnimation));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {

@@ -12,5 +12,5 @@ internal class EramogTheWeakStoreOwner : StoreOwner
     public override string OwnerName => "Eramog the Weak";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  110;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<KoboldRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(KoboldRace));
 }

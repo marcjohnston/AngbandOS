@@ -28,7 +28,7 @@ internal class ScrollChaos : ScrollItemClass
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ChaosProjectile>(), 0, 222, 4);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), 0, 222, 4);
         if (!SaveGame.HasChaosResistance)
         {
             SaveGame.TakeHit(111 + SaveGame.Rng.DieRoll(111), "a Scroll of Chaos");

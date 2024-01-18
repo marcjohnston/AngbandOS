@@ -38,15 +38,15 @@ internal class ChosenOneCharacterClass : BaseCharacterClass
         "gain a large number of passive magical abilities (too long",
         "to list here) as they increase in level."
     };
-    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get<WarriorArtifactBias>();
+    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(WarriorArtifactBias));
     public override bool SenseInventoryTest(int level) => (0 != SaveGame.Rng.RandomLessThan(9000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
     public override bool OutfitsWithScrollsOfLight => true;
 
     protected override ItemFactory[] Outfit => new ItemFactory[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get<SwordSmallSword>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<HealingPotionItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<SoftLeatherSoftArmorItemFactory>()
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordSmallSword)),
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(HealingPotionItemFactory)),
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SoftLeatherSoftArmorItemFactory))
     };
 }

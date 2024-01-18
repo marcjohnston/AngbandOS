@@ -19,7 +19,7 @@ internal class KillerCrimsonBeetleMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 50;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<LoseStrAttackEffect>(), 4, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseStrAttackEffect)), 4, 4),
     };
     public override bool BashDoor => true;
     public override string Description => "A giant beetle with poisonous mandibles.";

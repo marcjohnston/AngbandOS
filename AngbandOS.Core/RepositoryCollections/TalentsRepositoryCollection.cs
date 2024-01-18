@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class TalentsRepositoryCollection : DictionaryRepositoryCollection<Talent>
+internal class TalentsRepositoryCollection : KeyedDictionaryRepositoryCollection<string, Talent>
 {
     public TalentsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 }

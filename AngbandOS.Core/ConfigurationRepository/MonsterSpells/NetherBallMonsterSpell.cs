@@ -14,11 +14,11 @@ internal class NetherBallMonsterSpell : BallProjectileMonsterSpell
     public override bool UsesNether => true;
     public override bool IsAttack => true;
     protected override string ActionName => "casts an nether ball";
-    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get<NetherProjectile>();
+    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get(nameof(NetherProjectile));
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         return 50 + SaveGame.Rng.DiceRoll(10, 10) + monsterLevel;
     }
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get<NethSpellResistantDetection>() };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(NethSpellResistantDetection)) };
 }

@@ -19,6 +19,6 @@ internal class GoUpGameCommand : GameCommand
 
     public override bool Execute()
     {
-        return SaveGame.RunScript<GoUpScript>();
+        return SaveGame.RunScript(nameof(GoUpScript));
     }
 }

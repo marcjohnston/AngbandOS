@@ -20,6 +20,6 @@ internal class MessagesStoreCommand : StoreCommand
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {
-        SaveGame.RunScript<MessagesScript>();
+        SaveGame.RunScript(nameof(MessagesScript));
     }
 }

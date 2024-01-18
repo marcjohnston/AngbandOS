@@ -38,13 +38,13 @@ internal class UnaussprechlichenKultenSorceryBookItemFactory : SorceryBookItemFa
 
     public override Spell[] Spells => new Spell[]
     {
-        SaveGame.SingletonRepository.Spells.Get<SorcerySpellDetectObjectsAndTreasure>(),
-        SaveGame.SingletonRepository.Spells.Get<SorcerySpellDetectEnchantment>(),
-        SaveGame.SingletonRepository.Spells.Get<SorcerySpellCharmMonster>(),
-        SaveGame.SingletonRepository.Spells.Get<SorcerySpellDimensionDoor>(),
-        SaveGame.SingletonRepository.Spells.Get<SorcerySpellSenseMinds>(),
-        SaveGame.SingletonRepository.Spells.Get<SorcerySpellSelfKnowledge>(),
-        SaveGame.SingletonRepository.Spells.Get<SorcerySpellTeleportLevel>(),
-        SaveGame.SingletonRepository.Spells.Get<SorcerySpellWordOfRecall>()
+        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellDetectObjectsAndTreasure)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellDetectEnchantment)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellCharmMonster)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellDimensionDoor)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellSenseMinds)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellSelfKnowledge)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellTeleportLevel)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellWordOfRecall))
     };
 }

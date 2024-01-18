@@ -38,13 +38,13 @@ internal class PnakoticManuscriptsCorporealBookItemFactory : CorporealBookItemFa
 
     public override Spell[] Spells => new Spell[]
     {
-        SaveGame.SingletonRepository.Spells.Get<CorporealSpellHeroism>(),
-        SaveGame.SingletonRepository.Spells.Get<CorporealSpellWraithform>(),
-        SaveGame.SingletonRepository.Spells.Get<CorporealSpellAttunement>(),
-        SaveGame.SingletonRepository.Spells.Get<CorporealSpellRestoreBody>(),
-        SaveGame.SingletonRepository.Spells.Get<CorporealSpellHealingTrue>(),
-        SaveGame.SingletonRepository.Spells.Get<CorporealSpellHypnoticEyes>(),
-        SaveGame.SingletonRepository.Spells.Get<CorporealSpellRestoreSoul>(),
-        SaveGame.SingletonRepository.Spells.Get<CorporealSpellInvulnerability>()
+        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellHeroism)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellWraithform)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellAttunement)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellRestoreBody)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellHealingTrue)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellHypnoticEyes)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellRestoreSoul)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellInvulnerability))
    };
 }

@@ -116,11 +116,11 @@ internal class ClassSelectionBirthStage : BirthStage
             .ToArray();
 
         SaveGame.BaseCharacterClass = classes[index];
-        return SaveGame.SingletonRepository.BirthStages.Get<RaceSelectionBirthStage>();
+        return SaveGame.SingletonRepository.BirthStages.Get(nameof(RaceSelectionBirthStage));
     }
 
     private BirthStage? GoBack()
     {
-        return SaveGame.SingletonRepository.BirthStages.Get<IntroductionBirthStage>();
+        return SaveGame.SingletonRepository.BirthStages.Get(nameof(IntroductionBirthStage));
     }
 }

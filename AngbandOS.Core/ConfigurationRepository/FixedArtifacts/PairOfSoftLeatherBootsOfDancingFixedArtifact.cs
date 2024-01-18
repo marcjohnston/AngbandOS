@@ -15,7 +15,7 @@ internal class PairOfSoftLeatherBootsOfDancingFixedArtifact : FixedArtifact, IFi
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<SoftLeatherBootsArmorItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SoftLeatherBootsArmorItemFactory));
     }
 
 

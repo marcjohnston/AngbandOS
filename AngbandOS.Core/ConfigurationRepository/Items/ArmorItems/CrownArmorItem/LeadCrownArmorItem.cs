@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class LeadCrownArmorItem : CrownArmorItem
 {
-    public LeadCrownArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<LeadCrownArmorItemFactory>()) { }
+    public LeadCrownArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(LeadCrownArmorItemFactory))) { }
 }

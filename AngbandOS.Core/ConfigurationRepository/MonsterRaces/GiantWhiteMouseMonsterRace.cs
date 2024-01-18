@@ -18,7 +18,7 @@ internal class GiantWhiteMouseMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 4;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<HurtAttackEffect>(), 1, 2),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 2),
     };
     public override string Description => "It is about three feet long with large teeth.";
     public override int FreqInate => 0;

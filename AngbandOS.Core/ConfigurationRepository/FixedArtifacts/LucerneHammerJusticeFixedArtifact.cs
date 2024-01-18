@@ -15,7 +15,7 @@ internal class TheLucerneHammerJusticeFixedArtifact : FixedArtifact, IFixedArtif
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<HaftedLucerneHammer>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(HaftedLucerneHammer));
     }
 
 

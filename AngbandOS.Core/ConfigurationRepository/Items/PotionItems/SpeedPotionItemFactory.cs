@@ -42,7 +42,7 @@ internal class SpeedPotionItemFactory : PotionItemFactory
 
     public override bool Smash(int who, int y, int x)
     {
-        SaveGame.Project(who, 2, y, x, 0, SaveGame.SingletonRepository.Projectiles.Get<OldSpeedProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        SaveGame.Project(who, 2, y, x, 0, SaveGame.SingletonRepository.Projectiles.Get(nameof(OldSpeedProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return false;
     }
     public override Item CreateItem() => new SpeedPotionItem(SaveGame);

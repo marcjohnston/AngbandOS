@@ -12,5 +12,5 @@ internal class ElberethTheBeautifulStoreOwner : StoreOwner
     public override string OwnerName => "Elbereth the Beautiful";
     public override int MaxCost =>  500;
     public override int MinInflate =>  108;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<HighElfRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HighElfRace));
 }

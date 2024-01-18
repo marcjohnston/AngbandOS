@@ -10,14 +10,14 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class IceRingItem : RingItem, IItemActivatable
 {
-    public IceRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<IceRingItemFactory>()) { }
+    public IceRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(IceRingItemFactory))) { }
     public void DoActivate()
     {
         if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 50, 2);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 50, 2);
         SaveGame.TimedColdResistance.AddTimer(SaveGame.Rng.DieRoll(20) + 20);
         RechargeTimeLeft = SaveGame.Rng.RandomLessThan(50) + 50;
     }

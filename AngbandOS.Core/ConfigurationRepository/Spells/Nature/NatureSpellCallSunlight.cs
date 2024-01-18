@@ -13,7 +13,7 @@ internal class NatureSpellCallSunlight : Spell
     private NatureSpellCallSunlight(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<LightProjectile>(), 0, 150, 8);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(LightProjectile)), 0, 150, 8);
         SaveGame.WizLight();
         if (!SaveGame.Race.IsBurnedBySunlight || SaveGame.HasLightResistance)
         {

@@ -12,9 +12,9 @@ internal class OldHealProjectile : Projectile
 {
     private OldHealProjectile(SaveGame saveGame) : base(saveGame) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get<WhiteBulletProjectileGraphic>();
+    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(WhiteBulletProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<WhiteSparkleAnimation>();
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(WhiteSparkleAnimation));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {
@@ -39,7 +39,7 @@ internal class OldHealProjectile : Projectile
         }
         if (SaveGame.TrackedMonsterIndex == cPtr.MonsterIndex)
         {
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthFlaggedAction)).Set();
         }
         string? note = " looks healthier.";
         dam = 0;

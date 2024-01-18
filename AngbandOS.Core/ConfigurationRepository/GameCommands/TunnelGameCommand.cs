@@ -21,6 +21,6 @@ internal class TunnelGameCommand : GameCommand
 
     public override bool Execute()
     {
-        return SaveGame.RunScript<TunnelScript>();
+        return SaveGame.RunScript(nameof(TunnelScript));
     }
 }

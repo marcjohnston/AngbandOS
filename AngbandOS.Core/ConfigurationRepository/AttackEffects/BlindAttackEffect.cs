@@ -23,6 +23,6 @@ internal class BlindAttackEffect : AttackEffect
                 obvious = true;
             }
         }
-        SaveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<BlindSpellResistantDetection>());
+        SaveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(BlindSpellResistantDetection)));
     }
 }

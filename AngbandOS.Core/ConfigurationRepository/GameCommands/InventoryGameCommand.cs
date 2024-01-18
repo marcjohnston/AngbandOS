@@ -19,6 +19,6 @@ internal class InventoryGameCommand : GameCommand
 
     public override bool Execute()
     {
-        return SaveGame.RunScript<InventoryScript>();
+        return SaveGame.RunScript(nameof(InventoryScript));
     }
 }

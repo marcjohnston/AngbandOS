@@ -11,7 +11,7 @@ namespace AngbandOS.Core.TimedActions;
 /// Represents an action that occurs over a period of time.
 /// </summary>
 [Serializable]
-internal abstract class TimedAction
+internal abstract class TimedAction : IGetKey<string>
 {
     protected SaveGame SaveGame { get; }
 
@@ -19,7 +19,11 @@ internal abstract class TimedAction
     {
         SaveGame = saveGame;
     }
-    
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+
     protected int _turnsRemaining;
     public int TurnsRemaining => _turnsRemaining;
 

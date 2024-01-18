@@ -10,14 +10,14 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class AcidRingItem : RingItem, IItemActivatable
 {
-    public AcidRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<AcidRingItemFactory>()) { }
+    public AcidRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(AcidRingItemFactory))) { }
     public void DoActivate()
     {
         if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<AcidProjectile>(), dir, 50, 2);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, 50, 2);
         SaveGame.TimedAcidResistance.AddTimer(SaveGame.Rng.DieRoll(20) + 20);
         RechargeTimeLeft = SaveGame.Rng.RandomLessThan(50) + 50;
     }

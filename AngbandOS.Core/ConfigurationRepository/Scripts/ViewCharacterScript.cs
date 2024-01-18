@@ -21,7 +21,7 @@ internal class ViewCharacterScript : Script
         // Load the character viewer
         while (!SaveGame.Shutdown)
         {
-            RenderCharacterScript showCharacterSheet = SaveGame.SingletonRepository.Scripts.Get<RenderCharacterScript>();
+            RenderCharacterScript showCharacterSheet = (RenderCharacterScript)SaveGame.SingletonRepository.Scripts.Get(nameof(RenderCharacterScript));
             showCharacterSheet.Execute();
             SaveGame.Screen.Print(ColourEnum.Orange, "[Press 'c' to change name, or ESC]", 43, 23);
             char keyPress = SaveGame.Inkey();
@@ -41,11 +41,11 @@ internal class ViewCharacterScript : Script
         SaveGame.SetBackground(BackgroundImageEnum.Overhead);
         SaveGame.Screen.Restore(savedScreen);
         SaveGame.FullScreenOverlay = false;
-        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawEquippyFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<PrExtraRedrawActionGroupSetFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<PrBasicRedrawActionGroupSetFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawAllFlaggedAction>().Set(); // TODO: special case ... should be some form of invalidate
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawAllFlaggedAction)).Set(); // TODO: special case ... should be some form of invalidate
         SaveGame.HandleStuff();
         return false;
     }

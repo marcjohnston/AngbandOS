@@ -80,10 +80,10 @@ internal class WieldScript : Script
             SaveGame.MsgPrint("Oops! It feels deathly cold!");
             wornItem.IdentSense = true;
         }
-        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateTorchRadiusFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawEquippyFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
         return false;
     }
 }

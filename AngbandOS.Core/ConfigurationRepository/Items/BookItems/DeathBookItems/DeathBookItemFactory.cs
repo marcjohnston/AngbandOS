@@ -11,11 +11,11 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class DeathBookItemFactory : BookItemFactory
 {
     public DeathBookItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get<DeathSpellBooksItemClass>();
+    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(DeathSpellBooksItemClass));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.DeathBook;
     public override bool HatesFire => true;
     public override int PackSort => 4;
     public override ColourEnum Colour => ColourEnum.Black;
 
-    public override Realm? ToRealm => SaveGame.SingletonRepository.Realms.Get<DeathRealm>();
+    public override Realm? ToRealm => SaveGame.SingletonRepository.Realms.Get(nameof(DeathRealm));
 }

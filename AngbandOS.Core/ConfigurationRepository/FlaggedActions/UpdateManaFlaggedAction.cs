@@ -100,7 +100,7 @@ internal class UpdateManaFlaggedAction : FlaggedAction
                 SaveGame.FractionalMana = 0;
             }
             SaveGame.MaxMana = msp;
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawManaFlaggedAction>().Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
         }
     }
 }

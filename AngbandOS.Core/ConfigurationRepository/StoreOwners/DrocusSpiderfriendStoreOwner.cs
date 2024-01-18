@@ -12,5 +12,5 @@ internal class DrocusSpiderfriendStoreOwner : StoreOwner
     public override string OwnerName => "Drocus Spiderfriend";
     public override int MaxCost =>  25000;
     public override int MinInflate =>  115;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<DarkElfRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(DarkElfRace));
 }

@@ -508,7 +508,7 @@ internal class Monster : IItemContainer
         }
         this.SaveGame.MsgPrint("The exposure to eldritch forces warps you.");
         SaveGame.Dna.GainMutation();
-        this.SaveGame.SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
+        this.SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         this.SaveGame.HandleStuff();
     }
 
@@ -963,7 +963,7 @@ internal class Monster : IItemContainer
                         if (newY == SaveGame.MapY && newX == SaveGame.MapX)
                         {
                             SaveGame.MsgPrint("The rune explodes!");
-                            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), 0, 2 * ((SaveGame.ExperienceLevel / 2) + SaveGame.Rng.DiceRoll(7, 7)), 2);
+                            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), 0, 2 * ((SaveGame.ExperienceLevel / 2) + SaveGame.Rng.DiceRoll(7, 7)), 2);
                         }
                         else
                         {
@@ -1170,10 +1170,10 @@ internal class Monster : IItemContainer
         // Update the view if necessary
         if (doView)
         {
-            SaveGame.SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
-            SaveGame.SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
-            SaveGame.SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-            SaveGame.SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
         }
         // If we did something unusual and the player saw, let them remember we can do that
         if (IsVisible)
@@ -1298,7 +1298,7 @@ internal class Monster : IItemContainer
                     obvious = true;
                     damage = SaveGame.Rng.DiceRoll(dDice, dSide);
                     // Default to a missile attack
-                    Projectile pt = saveGame.SingletonRepository.Projectiles.Get<MissileProjectile>();
+                    Projectile pt = saveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile));
                     // Choose the correct type of attack to display, as well as any other special
                     // effects for the attack
                     if (effect == null)
@@ -1329,7 +1329,7 @@ internal class Monster : IItemContainer
                                         targetRace.Knowledge.Characteristics.FireAura = true;
                                     }
                                 }
-                                saveGame.Project(targetIndex, 0, MapY, MapX, SaveGame.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), saveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                                saveGame.Project(targetIndex, 0, MapY, MapX, SaveGame.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), saveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
                             }
                             if (targetRace.LightningAura && !Race.ImmuneLightning)
                             {
@@ -1345,7 +1345,7 @@ internal class Monster : IItemContainer
                                     }
                                 }
                                 saveGame.Project(targetIndex, 0, MapY, MapX, SaveGame.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)),
-                                    saveGame.SingletonRepository.Projectiles.Get<ElecProjectile>(), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                                    saveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
                             }
                         }
                     }
@@ -1808,7 +1808,7 @@ internal class Monster : IItemContainer
         // Track the monster that has just taken damage
         if (saveGame.TrackedMonsterIndex == GetMonsterIndex())
         {
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthFlaggedAction)).Set();
         }
         SleepLevel = 0;
         // Take the damage

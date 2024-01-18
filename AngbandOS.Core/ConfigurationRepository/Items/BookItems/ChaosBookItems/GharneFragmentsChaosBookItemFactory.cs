@@ -39,13 +39,13 @@ internal class GharneFragmentsChaosBookItemFactory : ChaosBookItemFactory
 
     public override Spell[] Spells => new Spell[]
     {
-        SaveGame.SingletonRepository.Spells.Get<ChaosSpellPolymorphOther>(),
-        SaveGame.SingletonRepository.Spells.Get<ChaosSpellChainLightning>(),
-        SaveGame.SingletonRepository.Spells.Get<ChaosSpellArcaneBinding>(),
-        SaveGame.SingletonRepository.Spells.Get<ChaosSpellDisintegrate>(),
-        SaveGame.SingletonRepository.Spells.Get<ChaosSpellAlterReality>(),
-        SaveGame.SingletonRepository.Spells.Get<ChaosSpellPolymorphSelf>(),
-        SaveGame.SingletonRepository.Spells.Get<ChaosSpellChaosBranding>(),
-        SaveGame.SingletonRepository.Spells.Get<ChaosSpellSummonDemon>()
+        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellPolymorphOther)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellChainLightning)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellArcaneBinding)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellDisintegrate)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellAlterReality)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellPolymorphSelf)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellChaosBranding)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellSummonDemon))
     };
 }

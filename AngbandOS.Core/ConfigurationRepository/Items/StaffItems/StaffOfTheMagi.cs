@@ -36,7 +36,7 @@ internal class StaffOfTheMagi : StaffItemClass
             SaveGame.FractionalMana = 0;
             eventArgs.Identified = true;
             SaveGame.MsgPrint("Your feel your head clear.");
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawManaFlaggedAction>().Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
         }
     }
     public override Item CreateItem() => new OfTheMagiStaffItem(SaveGame);

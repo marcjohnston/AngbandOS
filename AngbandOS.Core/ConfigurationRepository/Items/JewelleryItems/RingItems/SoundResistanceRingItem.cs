@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class SoundResistanceRingItem : RingItem
 {
-    public SoundResistanceRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<SoundResistanceRingItemFactory>()) { }
+    public SoundResistanceRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(SoundResistanceRingItemFactory))) { }
 }

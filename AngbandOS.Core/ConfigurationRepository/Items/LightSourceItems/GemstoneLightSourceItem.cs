@@ -21,5 +21,5 @@ internal class GemstoneLightSourceItem : LightSourceItem
             }
         }
     }
-    public GemstoneLightSourceItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<GemstoneLightSourceItemFactory>()) { }
+    public GemstoneLightSourceItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(GemstoneLightSourceItemFactory))) { }
 }

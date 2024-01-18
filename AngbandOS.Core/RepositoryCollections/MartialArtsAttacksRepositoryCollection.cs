@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class MartialArtsAttacksRepositoryCollection : DictionaryRepositoryCollection<MartialArtsAttack>
+internal class MartialArtsAttacksRepositoryCollection : KeyedDictionaryRepositoryCollection<string, MartialArtsAttack>
 {
     public MartialArtsAttacksRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 }

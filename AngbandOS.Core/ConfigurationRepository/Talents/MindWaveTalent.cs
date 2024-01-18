@@ -25,7 +25,7 @@ internal class MindWaveTalent : Talent
         if (SaveGame.ExperienceLevel < 25)
         {
             SaveGame.Project(0, 2 + (SaveGame.ExperienceLevel / 10), SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel * 3 / 2,
-                SaveGame.SingletonRepository.Projectiles.Get<PsiProjectile>(), ProjectionFlag.ProjectKill);
+                SaveGame.SingletonRepository.Projectiles.Get(nameof(PsiProjectile)), ProjectionFlag.ProjectKill);
         }
         else
         {

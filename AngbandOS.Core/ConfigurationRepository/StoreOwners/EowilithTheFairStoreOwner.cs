@@ -12,5 +12,5 @@ internal class EowilithTheFairStoreOwner : StoreOwner
     public override string OwnerName => "Eowilith the Fair";
     public override int MaxCost =>  25000;
     public override int MinInflate =>  115;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<VampireRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(VampireRace));
 }

@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class SustainDexterityRingItem : RingItem
 {
-    public SustainDexterityRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<SustainDexterityRingItemFactory>()) { }
+    public SustainDexterityRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(SustainDexterityRingItemFactory))) { }
 }

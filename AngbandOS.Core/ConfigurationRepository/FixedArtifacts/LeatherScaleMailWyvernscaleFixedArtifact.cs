@@ -15,7 +15,7 @@ internal class LeatherScaleMailWyvernscaleFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<LeatherScaleMailSoftArmorItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(LeatherScaleMailSoftArmorItemFactory));
     }
 
 

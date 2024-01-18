@@ -19,7 +19,7 @@ internal class GiantBlackRatMonsterRace : MonsterRace
     public override bool Animal => true;
     public override int ArmourClass => 12;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<BiteAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<PoisonAttackEffect>(), 1, 4),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 1, 4),
     };
     public override string Description => "It is a rodent of unusual size.";
     public override int FreqInate => 0;

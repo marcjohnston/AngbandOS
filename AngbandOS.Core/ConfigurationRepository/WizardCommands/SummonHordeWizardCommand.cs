@@ -16,7 +16,7 @@ internal class SummonHordeWizardCommand : WizardCommand
 
     public override string HelpDescription => "Summon Horde";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardMonstersHelpGroup>();
+    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardMonstersHelpGroup));
 
     public override void Execute()
     {

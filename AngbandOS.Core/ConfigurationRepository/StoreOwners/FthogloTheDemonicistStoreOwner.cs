@@ -12,5 +12,5 @@ internal class FthogloTheDemonicistStoreOwner : StoreOwner
     public override string OwnerName => "Fthoglo the Demonicist";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  116;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<ImpRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(ImpRace));
 }

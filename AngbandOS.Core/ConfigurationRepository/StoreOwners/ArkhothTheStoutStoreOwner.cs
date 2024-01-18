@@ -12,5 +12,5 @@ internal class ArkhothTheStoutStoreOwner : StoreOwner
     public override string OwnerName => "Arkhoth the Stout";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  112;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<DwarfRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(DwarfRace));
 }

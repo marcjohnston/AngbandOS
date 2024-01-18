@@ -15,7 +15,7 @@ internal class SmallMetalShieldVitriolFixedArtifact : FixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<ShieldSmallMetalShield>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(ShieldSmallMetalShield));
     }
 
 

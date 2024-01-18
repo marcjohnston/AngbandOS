@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class WhiteDragonScaleMailArmorItem : DragonScaleMailArmorItem, IItemActivatable
 {
-    public WhiteDragonScaleMailArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<WhiteDragonScaleMailArmorItemFactory>()) { }
+    public WhiteDragonScaleMailArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(WhiteDragonScaleMailArmorItemFactory))) { }
     public void DoActivate()
     {
         if (!SaveGame.GetDirectionWithAim(out int dir))
@@ -18,7 +18,7 @@ internal class WhiteDragonScaleMailArmorItem : DragonScaleMailArmorItem, IItemAc
             return;
         }
         SaveGame.MsgPrint("You breathe frost.");
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 110, -2);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 110, -2);
         RechargeTimeLeft = SaveGame.Rng.RandomLessThan(450) + 450;
     }
 }

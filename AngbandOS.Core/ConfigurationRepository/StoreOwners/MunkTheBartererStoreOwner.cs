@@ -12,5 +12,5 @@ internal class MunkTheBartererStoreOwner : StoreOwner
     public override string OwnerName => "Munk the Barterer";
     public override int MaxCost =>  2000;
     public override int MinInflate =>  100;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<HalfOgreRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HalfOgreRace));
 }

@@ -17,7 +17,7 @@ internal class FloatingEyeMonsterRace : MonsterRace
 
     public override int ArmourClass => 6;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get<GazeAttack>(), SaveGame.SingletonRepository.AttackEffects.Get<ParalyzeAttackEffect>(), 0, 0),
+        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(GazeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ParalyzeAttackEffect)), 0, 0),
     };
     public override string Description => "A disembodied eye, floating a few feet above the ground.";
     public override int FreqInate => 0;

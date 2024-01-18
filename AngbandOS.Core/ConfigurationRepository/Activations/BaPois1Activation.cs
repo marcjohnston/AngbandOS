@@ -22,7 +22,7 @@ internal class BaPois1Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), direction, 12, 3);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), direction, 12, 3);
         return true;
     }
 

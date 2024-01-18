@@ -15,7 +15,7 @@ internal class RingOfMagicFixedArtifact : FixedArtifact, IFixedArtifactActivatib
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<BarahirRingItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(BarahirRingItemFactory));
     }
 
 

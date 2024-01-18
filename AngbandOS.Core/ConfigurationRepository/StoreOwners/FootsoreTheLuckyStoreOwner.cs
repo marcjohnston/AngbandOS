@@ -12,5 +12,5 @@ internal class FootsoreTheLuckyStoreOwner : StoreOwner
     public override string OwnerName => "Footsore the Lucky";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  150;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<MiriNigriRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(MiriNigriRace));
 }

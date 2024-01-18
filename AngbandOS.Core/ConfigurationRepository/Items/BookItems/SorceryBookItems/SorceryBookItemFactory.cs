@@ -11,10 +11,10 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class SorceryBookItemFactory : BookItemFactory
 {
     public SorceryBookItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get<SorcerySpellBooksItemClass>();
+    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(SorcerySpellBooksItemClass));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.SorceryBook;
     public override bool HatesFire => true;
     public override int PackSort => 7;
     public override ColourEnum Colour => ColourEnum.BrightBlue;
-    public override Realm? ToRealm => SaveGame.SingletonRepository.Realms.Get<SorceryRealm>();
+    public override Realm? ToRealm => SaveGame.SingletonRepository.Realms.Get(nameof(SorceryRealm));
 }

@@ -116,7 +116,7 @@ internal abstract class Store : IItemFilter, IGetKey<string>
     /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
     /// won't affect game play.
     /// </remarks>
-    protected virtual StoreCommand AdvertisedStoreCommand1 => SaveGame.SingletonRepository.StoreCommands.Get<PurchaseStoreCommand>();
+    protected virtual StoreCommand AdvertisedStoreCommand1 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(PurchaseStoreCommand));
 
     /// <summary>
     /// Returns the store command that should be advertised to the player @ position 43, 31.
@@ -125,7 +125,7 @@ internal abstract class Store : IItemFilter, IGetKey<string>
     /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
     /// won't affect game play.
     /// </remarks>
-    protected virtual StoreCommand AdvertisedStoreCommand2 => SaveGame.SingletonRepository.StoreCommands.Get<SellStoreCommand>();
+    protected virtual StoreCommand AdvertisedStoreCommand2 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(SellStoreCommand));
 
     /// <summary>
     /// Returns the store command that should be advertised to the player @ position 42, 56.
@@ -134,7 +134,7 @@ internal abstract class Store : IItemFilter, IGetKey<string>
     /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
     /// won't affect game play.
     /// </remarks>
-    protected virtual StoreCommand AdvertisedStoreCommand3 => SaveGame.SingletonRepository.StoreCommands.Get<ExamineStoreCommand>();
+    protected virtual StoreCommand AdvertisedStoreCommand3 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(ExamineStoreCommand));
 
     /// <summary>
     /// Returns the store command that should be advertised to the player @ position 43, 56.
@@ -310,13 +310,13 @@ internal abstract class Store : IItemFilter, IGetKey<string>
         SaveGame.MsgPrint(null); // TODO: This is a PrWipeRedrawAction
         SaveGame.Screen.Clear();// TODO: This is a PrWipeRedrawAction
         SaveGame.SetBackground(BackgroundImageEnum.Overhead);
-        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<PrExtraRedrawActionGroupSetFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<PrBasicRedrawActionGroupSetFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawMapFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawEquippyFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
     }
 
     public virtual void StoreInit()
@@ -859,8 +859,8 @@ internal abstract class Store : IItemFilter, IGetKey<string>
             SaveGame.MsgPrint("You eat a hearty breakfast.");
         }
         SaveGame.Religion.DecayFavour();
-        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateHealthFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
         SaveGame.SetFood(Constants.PyFoodMax - 1);
         foreach (Town town in SaveGame.SingletonRepository.Towns)
         {
@@ -979,8 +979,8 @@ internal abstract class Store : IItemFilter, IGetKey<string>
         {
             SaveGame.MsgPrint($"{deityName} is delighted by your sacrifice!");
         }
-        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateHealthFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
     }
 
     protected void SayComment_1()
@@ -1365,7 +1365,7 @@ internal abstract class Store : IItemFilter, IGetKey<string>
             SaveGame.MsgPrint($"You can learn {SaveGame.SpareSpellSlots} more {spellType}{plural}.");
         }
         SaveGame.OldSpareSpellSlots = SaveGame.SpareSpellSlots;
-        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawStudyFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStudyFlaggedAction)).Set();
     }
 
     private void StoreProcessCommand()
@@ -1898,7 +1898,7 @@ internal abstract class Store : IItemFilter, IGetKey<string>
                     oPtr.BecomeFlavourAware();
                     oPtr.BecomeKnown();
                 }
-                SaveGame.SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
+                SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
                 qPtr = oPtr.Clone();
                 qPtr.Count = amt;
                 int value;

@@ -12,7 +12,7 @@ internal class CharmProjectile : Projectile
 {
     private CharmProjectile(SaveGame saveGame) : base(saveGame) { }
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get<GreyControlAnimation>();
+    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(GreyControlAnimation));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {

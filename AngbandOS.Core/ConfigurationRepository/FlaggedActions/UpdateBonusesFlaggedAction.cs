@@ -641,7 +641,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             if (SaveGame.AbilityScores[i].AdjustedMax != top)
             {
                 SaveGame.AbilityScores[i].AdjustedMax = top;
-                SaveGame.SingletonRepository.FlaggedActions.Get<RedrawStatsFlaggedAction>().Set();
+                SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStatsFlaggedAction)).Set();
             }
             int use = SaveGame.AbilityScores[i]
                 .ModifyStatValue(SaveGame.AbilityScores[i].Innate, SaveGame.AbilityScores[i].Bonus);
@@ -655,7 +655,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             if (SaveGame.AbilityScores[i].Adjusted != use)
             {
                 SaveGame.AbilityScores[i].Adjusted = use;
-                SaveGame.SingletonRepository.FlaggedActions.Get<RedrawStatsFlaggedAction>().Set();
+                SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStatsFlaggedAction)).Set();
             }
             if (use <= 18)
             {
@@ -674,30 +674,30 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 SaveGame.AbilityScores[i].TableIndex = ind;
                 if (i == Ability.Constitution)
                 {
-                    SaveGame.SingletonRepository.FlaggedActions.Get<UpdateHealthFlaggedAction>().Set();
+                    SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
                 }
                 else if (i == Ability.Intelligence)
                 {
                     if (SaveGame.BaseCharacterClass.SpellStat == Ability.Intelligence)
                     {
-                        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
-                        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateSpellsFlaggedAction>().Set();
+                        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
+                        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
                     }
                 }
                 else if (i == Ability.Wisdom)
                 {
                     if (SaveGame.BaseCharacterClass.SpellStat == Ability.Wisdom)
                     {
-                        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
-                        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateSpellsFlaggedAction>().Set();
+                        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
+                        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
                     }
                 }
                 else if (i == Ability.Charisma)
                 {
                     if (SaveGame.BaseCharacterClass.SpellStat == Ability.Charisma)
                     {
-                        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
-                        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateSpellsFlaggedAction>().Set();
+                        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
+                        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
                     }
                 }
             }
@@ -785,11 +785,11 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         }
         if (SaveGame.HasTelepathy != oldTelepathy)
         {
-            SaveGame.SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
         }
         if (SaveGame.HasSeeInvisibility != oldSeeInv)
         {
-            SaveGame.SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
         }
         int j = SaveGame.WeightCarried;
 
@@ -810,7 +810,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         }
         if (SaveGame.Speed != oldSpeed)
         {
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawSpeedFlaggedAction>().Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)).Set();
         }
         SaveGame.ArmourClassBonus += SaveGame.AbilityScores[Ability.Dexterity].DexArmourClassBonus;
         SaveGame.DamageBonus += SaveGame.AbilityScores[Ability.Strength].StrDamageBonus;
@@ -822,7 +822,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         SaveGame.DisplayedAttackBonus += SaveGame.AbilityScores[Ability.Strength].StrAttackBonus;
         if (SaveGame.DisplayedBaseArmourClass != oldDisAc || SaveGame.DisplayedArmourClassBonus != oldDisToA)
         {
-            SaveGame.SingletonRepository.FlaggedActions.Get<RedrawArmorFlaggedAction>().Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawArmorFlaggedAction)).Set();
         }
         int hold = SaveGame.AbilityScores[Ability.Strength].StrMaxWeaponWeight;
         foreach (BaseInventorySlot rangedWeaponInventorySlot in SaveGame.SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsRangedWeapon))
@@ -1033,7 +1033,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             {
                 SaveGame.MsgPrint("You have trouble wielding such a heavy bow.");
             }
-            else if (SaveGame.SingletonRepository.InventorySlots.Get<RangedWeaponInventorySlot>().Count > 0)
+            else if (SaveGame.SingletonRepository.InventorySlots.Get(nameof(RangedWeaponInventorySlot)).Count > 0)
             {
                 SaveGame.MsgPrint("You have no trouble wielding your bow.");
             }
@@ -1049,7 +1049,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             {
                 SaveGame.MsgPrint("You have trouble wielding such a heavy weapon.");
             }
-            else if (SaveGame.SingletonRepository.InventorySlots.Get<MeleeWeaponInventorySlot>().Count > 0)
+            else if (SaveGame.SingletonRepository.InventorySlots.Get(nameof(MeleeWeaponInventorySlot)).Count > 0)
             {
                 SaveGame.MsgPrint("You have no trouble wielding your weapon.");
             }

@@ -17,7 +17,7 @@ internal class DeathSpellMalediction : Spell
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<HellFireProjectile>(), dir,
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(HellFireProjectile)), dir,
             SaveGame.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 3), 0);
         if (SaveGame.Rng.DieRoll(5) != 1)
         {
@@ -26,17 +26,17 @@ internal class DeathSpellMalediction : Spell
         int dummy = SaveGame.Rng.DieRoll(1000);
         if (dummy == 666)
         {
-            SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<DeathRayProjectile>(), dir, SaveGame.ExperienceLevel);
+            SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(DeathRayProjectile)), dir, SaveGame.ExperienceLevel);
         }
         if (dummy < 500)
         {
-            SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<TurnAllProjectile>(), dir, SaveGame.ExperienceLevel);
+            SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(TurnAllProjectile)), dir, SaveGame.ExperienceLevel);
         }
         if (dummy < 800)
         {
-            SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<OldConfProjectile>(), dir, SaveGame.ExperienceLevel);
+            SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(OldConfProjectile)), dir, SaveGame.ExperienceLevel);
         }
-        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<StunProjectile>(), dir, SaveGame.ExperienceLevel);
+        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(StunProjectile)), dir, SaveGame.ExperienceLevel);
     }
 
     public override void CastFailed()

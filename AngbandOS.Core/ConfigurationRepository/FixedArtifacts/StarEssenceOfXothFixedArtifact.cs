@@ -15,7 +15,7 @@ internal class StarEssenceOfXothFixedArtifact : FixedArtifact, IFixedArtifactAct
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<StarEssenceElendilLightSourceItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(StarEssenceElendilLightSourceItemFactory));
     }
 
 

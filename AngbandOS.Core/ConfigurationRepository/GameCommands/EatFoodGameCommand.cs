@@ -20,6 +20,6 @@ internal class EatFoodGameCommand : GameCommand
 
     public override bool Execute()
     {
-        return SaveGame.RunScript<EatScript>();
+        return SaveGame.RunScript(nameof(EatScript));
     }
 }

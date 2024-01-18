@@ -15,7 +15,7 @@ internal class RingOfElementalPowerFireFixedArtifact : FixedArtifact, IFixedArti
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<NaryaRingItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(NaryaRingItemFactory));
     }
 
 
@@ -27,7 +27,7 @@ internal class RingOfElementalPowerFireFixedArtifact : FixedArtifact, IFixedArti
         {
             return;
         }
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, 120, 3);
+        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 120, 3);
         item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(225) + 225;
     }
     public string DescribeActivationEffect() => "large fire ball (120) every 225+d225 turns";

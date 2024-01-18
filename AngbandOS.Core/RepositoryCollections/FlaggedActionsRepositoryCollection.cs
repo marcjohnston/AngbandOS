@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class FlaggedActionsRepositoryCollection : DictionaryRepositoryCollection<FlaggedAction>
+internal class FlaggedActionsRepositoryCollection : KeyedDictionaryRepositoryCollection<string, FlaggedAction>
 {
     public FlaggedActionsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 

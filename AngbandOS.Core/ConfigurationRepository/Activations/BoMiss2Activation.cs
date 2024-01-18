@@ -22,7 +22,7 @@ internal class BoMiss2Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<ArrowProjectile>(), direction, 150);
+        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(ArrowProjectile)), direction, 150);
         return true;
     }
 

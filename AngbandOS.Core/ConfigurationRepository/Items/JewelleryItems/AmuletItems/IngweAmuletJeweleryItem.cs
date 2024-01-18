@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class IngweAmuletJeweleryItem : AmuletJeweleryItem
 {
-    public IngweAmuletJeweleryItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<IngweAmuletJeweleryItemFactory>()) { }
+    public IngweAmuletJeweleryItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(IngweAmuletJeweleryItemFactory))) { }
 }

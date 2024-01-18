@@ -12,5 +12,5 @@ internal class AchsheTheTentacledStoreOwner : StoreOwner
     public override string OwnerName => "Achshe the Tentacled";
     public override int MaxCost =>  20000;
     public override int MinInflate =>  113;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<MindFlayerRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(MindFlayerRace));
 }

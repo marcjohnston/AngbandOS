@@ -15,7 +15,7 @@ internal class RingOfElementalPowerIceFixedArtifact : FixedArtifact, IFixedArtif
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<NenyaRingItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(NenyaRingItemFactory));
     }
 
 
@@ -27,7 +27,7 @@ internal class RingOfElementalPowerIceFixedArtifact : FixedArtifact, IFixedArtif
         {
             return;
         }
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<ColdProjectile>(), dir, 200, 3);
+        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 200, 3);
         item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(325) + 325;
     }
     public string DescribeActivationEffect() => "large frost ball (200) every 325+d325 turns";

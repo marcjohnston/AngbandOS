@@ -50,20 +50,20 @@ internal class PriestCharacterClass : BaseCharacterClass
         "weapons unless they are blessed, but can use any armour."
     };
     public override int SpellWeight => 350;
-    public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get<DivineCastingType>();
+    public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get(nameof(DivineCastingType));
     public override int SpellStat => Ability.Wisdom;
-    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get<PriestlyArtifactBias>();
+    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
     public override bool SenseInventoryTest(int level) => (0 != SaveGame.Rng.RandomLessThan(10000 / ((level * level) + 40)));
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        SaveGame.SingletonRepository.Realms.Get<LifeRealm>(),
-        SaveGame.SingletonRepository.Realms.Get<DeathRealm>()
+        SaveGame.SingletonRepository.Realms.Get(nameof(LifeRealm)),
+        SaveGame.SingletonRepository.Realms.Get(nameof(DeathRealm))
     };
     public override Realm[] AvailableSecondaryRealms => new Realm[] {
-        SaveGame.SingletonRepository.Realms.Get<NatureRealm>(),
-        SaveGame.SingletonRepository.Realms.Get<ChaosRealm>(),
-        SaveGame.SingletonRepository.Realms.Get<TarotRealm>(),
-        SaveGame.SingletonRepository.Realms.Get<FolkRealm>(),
-        SaveGame.SingletonRepository.Realms.Get<CorporealRealm>()
+        SaveGame.SingletonRepository.Realms.Get(nameof(NatureRealm)),
+        SaveGame.SingletonRepository.Realms.Get(nameof(ChaosRealm)),
+        SaveGame.SingletonRepository.Realms.Get(nameof(TarotRealm)),
+        SaveGame.SingletonRepository.Realms.Get(nameof(FolkRealm)),
+        SaveGame.SingletonRepository.Realms.Get(nameof(CorporealRealm))
     };
     public override bool WorshipsADeity => true;
 
@@ -93,8 +93,8 @@ internal class PriestCharacterClass : BaseCharacterClass
 
     protected override ItemFactory[] Outfit => new ItemFactory[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get<BeginnersHandbookSorceryBookItemFactory>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<HaftedMace>(),
-        SaveGame.SingletonRepository.ItemFactories.Get<BlackPrayersDeathBookItemFactory>()
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(BeginnersHandbookSorceryBookItemFactory)),
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(HaftedMace)),
+        SaveGame.SingletonRepository.ItemFactories.Get(nameof(BlackPrayersDeathBookItemFactory))
     };
 }

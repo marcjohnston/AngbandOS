@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class WoodenArrowAmmunitionItem : ArrowAmmunitionItem
 {
-    public WoodenArrowAmmunitionItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<WoodenArrowAmmunitionItemFactory>()) { }
+    public WoodenArrowAmmunitionItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(WoodenArrowAmmunitionItemFactory))) { }
 }

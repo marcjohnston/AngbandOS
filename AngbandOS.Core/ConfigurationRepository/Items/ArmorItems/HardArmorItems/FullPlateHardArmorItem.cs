@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class FullPlateHardArmorItem : HardArmorItem
 {
-    public FullPlateHardArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<FullPlateHardArmorItemFactory>()) { }
+    public FullPlateHardArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(FullPlateHardArmorItemFactory))) { }
 }

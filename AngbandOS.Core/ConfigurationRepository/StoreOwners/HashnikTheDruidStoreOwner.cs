@@ -12,5 +12,5 @@ internal class HashnikTheDruidStoreOwner : StoreOwner
     public override string OwnerName => "Hashnik the Druid";
     public override int MaxCost =>  25000;
     public override int MinInflate =>  107;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<HobbitRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HobbitRace));
 }

@@ -38,13 +38,13 @@ internal class CthaatAquadingenNatureBookItemFactory : NatureBookItemFactory
 
     public override Spell[] Spells => new Spell[]
     {
-        SaveGame.SingletonRepository.Spells.Get<NatureSpellEarthquake>(),
-        SaveGame.SingletonRepository.Spells.Get<NatureSpellWhirlwindAttack>(),
-        SaveGame.SingletonRepository.Spells.Get<NatureSpellBlizzard>(),
-        SaveGame.SingletonRepository.Spells.Get<NatureSpellLightningStorm>(),
-        SaveGame.SingletonRepository.Spells.Get<NatureSpellWhirlpool>(),
-        SaveGame.SingletonRepository.Spells.Get<NatureSpellCallSunlight>(),
-        SaveGame.SingletonRepository.Spells.Get<NatureSpellElementalBranding>(),
-        SaveGame.SingletonRepository.Spells.Get<NatureSpellNaturesWrath>()
+        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellEarthquake)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellWhirlwindAttack)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellBlizzard)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellLightningStorm)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellWhirlpool)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellCallSunlight)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellElementalBranding)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellNaturesWrath))
     };
 }

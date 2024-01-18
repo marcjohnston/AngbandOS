@@ -12,5 +12,5 @@ internal class RanalarTheSweetStoreOwner : StoreOwner
     public override string OwnerName => "Ranalar the Sweet";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  112;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<GreatOneRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(GreatOneRace));
 }

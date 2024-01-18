@@ -15,7 +15,7 @@ internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact, IFixed
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<GemstoneLightSourceItemFactory>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(GemstoneLightSourceItemFactory));
     }
 
 

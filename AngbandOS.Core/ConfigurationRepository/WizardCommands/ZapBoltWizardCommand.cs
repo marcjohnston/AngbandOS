@@ -16,7 +16,7 @@ internal class ZapBoltWizardCommand : WizardCommand
 
     public override string HelpDescription => "Zap (Wizard Bolt)";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get<WizardMonstersHelpGroup>();
+    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardMonstersHelpGroup));
 
     public override void Execute()
     {

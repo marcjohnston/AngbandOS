@@ -71,7 +71,7 @@ internal class KoboldRace : Race
             if (SaveGame.GetDirectionWithAim(out int direction))
             {
                 SaveGame.MsgPrint("You throw a dart of poison.");
-                SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get<PoisProjectile>(), direction, SaveGame.ExperienceLevel);
+                SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), direction, SaveGame.ExperienceLevel);
             }
         }
     }

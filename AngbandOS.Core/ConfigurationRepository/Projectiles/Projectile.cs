@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Projection;
 
 [Serializable]
-internal abstract class Projectile
+internal abstract class Projectile : IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
     protected int ProjectMn;
@@ -19,6 +19,10 @@ internal abstract class Projectile
     {
         SaveGame = saveGame;
     }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     protected virtual ProjectileGraphic? BoltProjectileGraphic { get; }
 
@@ -247,10 +251,10 @@ internal abstract class Projectile
                                 {
                                     SaveGame.RevertTileToBackground(y, x);
                                 }
-                                SaveGame.SingletonRepository.FlaggedActions.Get<UpdateScentFlaggedAction>().Set();
-                                SaveGame.SingletonRepository.FlaggedActions.Get<UpdateMonstersFlaggedAction>().Set();
-                                SaveGame.SingletonRepository.FlaggedActions.Get<UpdateLightFlaggedAction>().Set();
-                                SaveGame.SingletonRepository.FlaggedActions.Get<UpdateViewFlaggedAction>().Set();
+                                SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
+                                SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+                                SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+                                SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
                             }
                             else
                             {
@@ -670,7 +674,7 @@ internal abstract class Projectile
         {
             if (SaveGame.TrackedMonsterIndex == cPtr.MonsterIndex)
             {
-                SaveGame.SingletonRepository.FlaggedActions.Get<RedrawHealthFlaggedAction>().Set();
+                SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthFlaggedAction)).Set();
             }
             mPtr.SleepLevel = 0;
             mPtr.Health -= dam;

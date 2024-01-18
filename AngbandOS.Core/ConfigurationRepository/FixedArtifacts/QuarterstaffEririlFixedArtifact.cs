@@ -15,7 +15,7 @@ internal class QuarterstaffEririlFixedArtifact : FixedArtifact, IFixedArtifactAc
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<HaftedQuarterstaff>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(HaftedQuarterstaff));
     }
 
 

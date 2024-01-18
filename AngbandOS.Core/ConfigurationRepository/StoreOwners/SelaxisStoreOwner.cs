@@ -12,5 +12,5 @@ internal class SelaxisStoreOwner : StoreOwner
     public override string OwnerName => "Selaxis";
     public override int MaxCost =>  10000;
     public override int MinInflate =>  115;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<ZombieRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(ZombieRace));
 }

@@ -12,5 +12,5 @@ internal class FanelathTheCautiousStoreOwner : StoreOwner
     public override string OwnerName => "Fanelath the Cautious";
     public override int MaxCost =>  10000;
     public override int MinInflate =>  111;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<DwarfRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(DwarfRace));
 }

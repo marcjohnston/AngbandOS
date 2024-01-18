@@ -66,6 +66,6 @@ internal class PsychometryTalent : Talent
         {
             oPtr.Inscription = feel;
         }
-        SaveGame.SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
     }
 }

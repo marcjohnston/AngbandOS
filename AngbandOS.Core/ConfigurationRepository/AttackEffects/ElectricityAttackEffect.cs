@@ -18,10 +18,10 @@ internal class ElectricityAttackEffect : AttackEffect
         obvious = true;
         SaveGame.MsgPrint("You are struck by electricity!");
         SaveGame.ElecDam(damage, monsterDescription);
-        SaveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get<ElecSpellResistantDetection>());
+        SaveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(ElecSpellResistantDetection)));
     }
     public override void ApplyToMonster(Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
-        pt = SaveGame.SingletonRepository.Projectiles.Get<ElecProjectile>();
+        pt = SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile));
     }
 }

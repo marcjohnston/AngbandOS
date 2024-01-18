@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class MasterSorcerersHandbookSorceryBookItem : SorceryBookItem
 {
-    public MasterSorcerersHandbookSorceryBookItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<MasterSorcerersHandbookSorceryBookItemFactory>()) { }
+    public MasterSorcerersHandbookSorceryBookItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(MasterSorcerersHandbookSorceryBookItemFactory))) { }
 }

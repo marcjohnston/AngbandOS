@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class ResistancePotionItem : PotionItem
 {
-    public ResistancePotionItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<ResistancePotionItemFactory>()) { }
+    public ResistancePotionItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(ResistancePotionItemFactory))) { }
 }

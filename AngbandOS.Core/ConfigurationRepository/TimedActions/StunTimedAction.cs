@@ -90,8 +90,8 @@ internal class StunTimedAction : TimedAction
     }
     protected override void Noticed()
     {
-        SaveGame.SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawStunFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStunFlaggedAction)).Set();
         base.Noticed();
     }
 }

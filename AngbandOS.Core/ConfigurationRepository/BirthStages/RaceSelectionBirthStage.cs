@@ -126,7 +126,7 @@ internal class RaceSelectionBirthStage : BirthStage
             // The player cannot study any realms.
             SaveGame.PrimaryRealm = null;
             SaveGame.SecondaryRealm = null;
-            return SaveGame.SingletonRepository.BirthStages.Get<GenderSelectionBirthStage>();
+            return SaveGame.SingletonRepository.BirthStages.Get(nameof(GenderSelectionBirthStage));
         }
         else if (availablePrimaryRealmCount == 1)
         {
@@ -137,25 +137,25 @@ internal class RaceSelectionBirthStage : BirthStage
             if (remainingAvailableSecondaryRealmCount == 0)
             {
                 SaveGame.SecondaryRealm = null;
-                return SaveGame.SingletonRepository.BirthStages.Get<GenderSelectionBirthStage>();
+                return SaveGame.SingletonRepository.BirthStages.Get(nameof(GenderSelectionBirthStage));
             }
             else if (remainingAvailableSecondaryRealmCount == 1)
             {
                 // There is only one realm, auto select it.
                 SaveGame.SecondaryRealm = remainingAvailableSecondaryRealms[0];
-                return SaveGame.SingletonRepository.BirthStages.Get<GenderSelectionBirthStage>();
+                return SaveGame.SingletonRepository.BirthStages.Get(nameof(GenderSelectionBirthStage));
             }
             else
             {
-                return SaveGame.SingletonRepository.BirthStages.Get<Realm2SelectionBirthStage>();
+                return SaveGame.SingletonRepository.BirthStages.Get(nameof(Realm2SelectionBirthStage));
             }
         }
 
-        return SaveGame.SingletonRepository.BirthStages.Get<Realm1SelectionBirthStage>();
+        return SaveGame.SingletonRepository.BirthStages.Get(nameof(Realm1SelectionBirthStage));
     }
 
     private BirthStage? GoBack()
     {
-        return SaveGame.SingletonRepository.BirthStages.Get<ClassSelectionBirthStage>();
+        return SaveGame.SingletonRepository.BirthStages.Get(nameof(ClassSelectionBirthStage));
     }
 }

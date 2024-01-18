@@ -61,7 +61,7 @@ internal class MentalismCastingType : CastingType
                 else
                 {
                     SaveGame.MsgPrint("Your mind unleashes its power in an uncontrollable storm!");
-                    SaveGame.Project(1, 2 + (plev / 10), SaveGame.MapY, SaveGame.MapX, plev * 2, SaveGame.SingletonRepository.Projectiles.Get<ManaProjectile>(), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectKill | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem);
+                    SaveGame.Project(1, 2 + (plev / 10), SaveGame.MapY, SaveGame.MapX, plev * 2, SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectKill | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem);
                     SaveGame.Mana = Math.Max(0, SaveGame.Mana - (plev * Math.Max(1, plev / 10)));
                 }
             }
@@ -89,7 +89,7 @@ internal class MentalismCastingType : CastingType
                 SaveGame.DecreaseAbilityScore(Ability.Wisdom, 15 + SaveGame.Rng.DieRoll(10), perm);
             }
         }
-        SaveGame.SingletonRepository.FlaggedActions.Get<RedrawManaFlaggedAction>().Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
     }
 
     private bool GetMentalismTalent(out int sn)

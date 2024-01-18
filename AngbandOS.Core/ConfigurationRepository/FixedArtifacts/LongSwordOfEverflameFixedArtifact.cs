@@ -15,7 +15,7 @@ internal class LongSwordOfEverflameFixedArtifact : FixedArtifact, IFixedArtifact
 
     public override void Loaded()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get<SwordLongSword>();
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordLongSword));
     }
 
 
@@ -27,7 +27,7 @@ internal class LongSwordOfEverflameFixedArtifact : FixedArtifact, IFixedArtifact
         {
             return;
         }
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get<FireProjectile>(), dir, 72, 2);
+        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 72, 2);
         item.RechargeTimeLeft = 400;
     }
     public string DescribeActivationEffect() => "fire ball (72) every 400 turns";

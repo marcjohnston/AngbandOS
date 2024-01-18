@@ -52,9 +52,9 @@ internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IG
         {
             oPtr.Count += num;
             SaveGame.WeightCarried += num * oPtr.Weight;
-            SaveGame.SingletonRepository.FlaggedActions.Get<UpdateBonusesFlaggedAction>().Set();
-            SaveGame.SingletonRepository.FlaggedActions.Get<UpdateManaFlaggedAction>().Set();
-            SaveGame.SingletonRepository.FlaggedActions.Get<NoticeCombineAndReorderGroupSetFlaggedAction>().Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         }
     }
 
@@ -264,5 +264,8 @@ internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IG
     /// </summary>
     public virtual int BareArmourClassBonus => 0;
 
-    public string GetKey => GetType().Name;
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 }

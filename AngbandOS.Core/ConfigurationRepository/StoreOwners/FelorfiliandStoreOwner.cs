@@ -12,5 +12,5 @@ internal class FelorfiliandStoreOwner : StoreOwner
     public override string OwnerName => "Felorfiliand";
     public override int MaxCost =>  500;
     public override int MinInflate =>  108;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get<ElfRace>();
+    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(ElfRace));
 }

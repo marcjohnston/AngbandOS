@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class LawDragonScaleMailArmorItem : DragonScaleMailArmorItem, IItemActivatable
 {
-    public LawDragonScaleMailArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get<LawDragonScaleMailArmorItemFactory>()) { }
+    public LawDragonScaleMailArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(LawDragonScaleMailArmorItemFactory))) { }
     public void DoActivate()
     {
         if (!SaveGame.GetDirectionWithAim(out int dir))
@@ -20,7 +20,7 @@ internal class LawDragonScaleMailArmorItem : DragonScaleMailArmorItem, IItemActi
         int chance = SaveGame.Rng.RandomLessThan(2);
         string element = chance == 1 ? "sound" : "shards";
         SaveGame.MsgPrint($"You breathe {element}.");
-        SaveGame.FireBall(chance == 1 ? (Projectile)SaveGame.SingletonRepository.Projectiles.Get<SoundProjectile>() : SaveGame.SingletonRepository.Projectiles.Get<ExplodeProjectile>(), dir, 230, -2);
+        SaveGame.FireBall(chance == 1 ? (Projectile)SaveGame.SingletonRepository.Projectiles.Get(nameof(SoundProjectile)) : SaveGame.SingletonRepository.Projectiles.Get(nameof(ExplodeProjectile)), dir, 230, -2);
         RechargeTimeLeft = SaveGame.Rng.RandomLessThan(300) + 300;
     }
 }

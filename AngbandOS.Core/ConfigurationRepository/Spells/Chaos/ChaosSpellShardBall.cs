@@ -17,7 +17,7 @@ internal class ChaosSpellShardBall : Spell
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get<ShardProjectile>(), dir, 120 + SaveGame.ExperienceLevel, 2);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ShardProjectile)), dir, 120 + SaveGame.ExperienceLevel, 2);
     }
 
     public override void CastFailed()
