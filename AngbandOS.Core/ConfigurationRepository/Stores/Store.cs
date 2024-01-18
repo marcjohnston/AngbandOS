@@ -8,12 +8,16 @@
 namespace AngbandOS.Core.Stores;
 
 [Serializable]
-internal abstract class Store : IItemFilter
+internal abstract class Store : IItemFilter, IGetKey<string>
 {
     private int _x;
     private int _y;
 
     protected readonly SaveGame SaveGame;
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     public virtual int PageSize => 26;
 

@@ -10,8 +10,9 @@ namespace AngbandOS.Core.Interface.Definitions;
 [Serializable]
 public class TownDefinition
 {
+    public string Key { get; set; }
     public char Char { get; set; }
     public int HousePrice { get; set; }
     public string Name { get; set; }
-    public string[]? StoreNames { get; set; }
+    public string[] StoreNames { get; set; }
 }

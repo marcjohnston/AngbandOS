@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Towns;
 
 [Serializable]
-internal abstract class Town
+internal abstract class Town : IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
 
@@ -17,10 +17,16 @@ internal abstract class Town
         SaveGame = saveGame;
     }
 
+    public virtual void Loaded() { }
+
     public abstract char Char { get; }
     public abstract int HousePrice { get; }
     public abstract string Name { get; }
     public abstract Store[] Stores { get; }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     public int Index;
 

@@ -12,35 +12,37 @@ namespace AngbandOS.Core.Towns;
 [Serializable]
 internal class GenericTown : Town
 {
-    private int _housePrice;
-    private string _name;
-    private char _character;
+    private readonly string _key;
+    private readonly int _housePrice;
+    private readonly string _name;
+    private readonly char _char;
+    private readonly string[] _storeNames;
+
     private Store[] _stores;
 
     public GenericTown(SaveGame saveGame, TownDefinition townDefinition) : base(saveGame)
     {
+        _key = townDefinition.Key;
         _housePrice = townDefinition.HousePrice;
         _name = townDefinition.Name;
-        _character = townDefinition.Char;
-
-        List<Store> stores = new List<Store>();
-        if (townDefinition.StoreNames != null)
-        {
-            foreach (string storeName in townDefinition.StoreNames)
-            {
-                Store? store = SaveGame.SingletonRepository.Stores.TryGet(storeName);
-                if (store == null)
-                {
-                    throw new Exception($"Town '{Name}' cannot find store '{storeName}'.");
-                }
-                stores.Add(store);
-            }
-        }
-        _stores = stores.ToArray();
+        _char = townDefinition.Char;
+        _storeNames = townDefinition.StoreNames;
     }
 
+    public override string Key => _key;
     public override Store[] Stores => _stores;
     public override int HousePrice => _housePrice;
     public override string Name => _name;
-    public override char Char => _character;
+    public override char Char => _char;
+
+    public override void Loaded()
+    {
+        List<Store> stores = new List<Store>();
+        foreach (string storeName in _storeNames)
+        {
+            Store store = SaveGame.SingletonRepository.Stores.Get(storeName);
+            stores.Add(store);
+        }
+        _stores = stores.ToArray();
+    }
 }

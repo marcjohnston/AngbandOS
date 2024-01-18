@@ -13,18 +13,18 @@ internal class NirTown : Town
     private NirTown(SaveGame saveGame) : base(saveGame) { }
     public override Store[] Stores => new Store[]
         {
-            SaveGame.SingletonRepository.Stores.Get<GeneralStore>(),
-            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
-            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
-            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
-            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
-            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
-            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
-            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
-            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
-            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
-            SaveGame.SingletonRepository.Stores.Get<InnStore>(),
-            SaveGame.SingletonRepository.Stores.Get<PawnStore>()
+            SaveGame.SingletonRepository.Stores.Get(nameof(GeneralStore)),
+            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
+            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
+            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
+            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
+            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
+            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
+            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
+            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
+            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
+            SaveGame.SingletonRepository.Stores.Get(nameof(InnStore)),
+            SaveGame.SingletonRepository.Stores.Get(nameof(PawnStore))
         };
 
     public override int HousePrice => 0;

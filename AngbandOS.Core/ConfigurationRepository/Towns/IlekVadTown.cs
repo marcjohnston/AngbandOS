@@ -14,18 +14,18 @@ internal class IlekVadTown : Town
 
     public override Store[] Stores => new Store[]
         {
-            SaveGame.SingletonRepository.Stores.Get<GeneralStore>(),
-            SaveGame.SingletonRepository.Stores.Get<ArmouryStore>(),
-            SaveGame.SingletonRepository.Stores.Get<WeaponStore>(),
-            SaveGame.SingletonRepository.Stores.Get<TempleStore>(),
-            SaveGame.SingletonRepository.Stores.Get<AlchemistStore>(),
-            SaveGame.SingletonRepository.Stores.Get<MagicStore>(),
-            SaveGame.SingletonRepository.Stores.Get<BlackStore>(),
-            SaveGame.SingletonRepository.Stores.Get<HomeStore>(),
-            SaveGame.SingletonRepository.Stores.Get<LibraryStore>(),
-            SaveGame.SingletonRepository.Stores.Get<EmptyLotStore>(),
-            SaveGame.SingletonRepository.Stores.Get<InnStore>(),
-            SaveGame.SingletonRepository.Stores.Get<HallStore>()
+            SaveGame.SingletonRepository.Stores.Get(nameof(GeneralStore)),
+            SaveGame.SingletonRepository.Stores.Get(nameof(ArmouryStore)),
+            SaveGame.SingletonRepository.Stores.Get(nameof(WeaponStore)),
+            SaveGame.SingletonRepository.Stores.Get(nameof(TempleStore)),
+            SaveGame.SingletonRepository.Stores.Get(nameof(AlchemistStore)),
+            SaveGame.SingletonRepository.Stores.Get(nameof(MagicStore)),
+            SaveGame.SingletonRepository.Stores.Get(nameof(BlackStore)),
+            SaveGame.SingletonRepository.Stores.Get(nameof(HomeStore)),
+            SaveGame.SingletonRepository.Stores.Get(nameof(LibraryStore)),
+            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
+            SaveGame.SingletonRepository.Stores.Get(nameof(InnStore)),
+            SaveGame.SingletonRepository.Stores.Get(nameof(HallStore))
         };
 
     public override int HousePrice => 60000;

@@ -15,7 +15,7 @@ internal class HomeStore : Store
     public override int MaxInventory => 100;
     protected override StoreOwner[] StoreOwners => new StoreOwner[]
     {
-        SaveGame.SingletonRepository.StoreOwners.Get("YourHomeStoreOwner")
+        SaveGame.SingletonRepository.StoreOwners.Get(nameof(YourHomeStoreOwner))
     };
 
     public override string FeatureType => "Home";

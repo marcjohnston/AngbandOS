@@ -160,6 +160,27 @@ public class GameServer
         }
     }
 
+    private TDefinition[] RetrieveEntities<TDefinition, TJsonModel>(ICorePersistentStorage persistentStorage, string repositoryName) where TJsonModel : IJsonModel<TDefinition>
+    {
+        string[] serializedEntities = persistentStorage.RetrieveEntities(repositoryName);
+        List<TDefinition> entities = new List<TDefinition>();
+        foreach (string serializedEntity in serializedEntities)
+        {
+            TJsonModel? deserializedEntity = JsonSerializer.Deserialize<TJsonModel>(serializedEntity);
+            if (deserializedEntity == null)
+            {
+                throw new Exception($"Invalid {repositoryName} json.");
+            }
+            TDefinition? definition = deserializedEntity.ToDefinition();
+            if (definition == null)
+            {
+                throw new Exception($"Invalid {repositoryName} json.");
+            }
+            entities.Add(definition);
+        }
+        return entities.ToArray();
+    }
+
     /// <summary>
     /// Plays a game.  If the game cannot be played false is immediately returned; otherwise, the game is played out and true is returned when the game is over.
     /// </summary>
@@ -177,27 +198,10 @@ public class GameServer
 
         // TODO: Remove this hard-coded configuration
         if (persistentStorage != null) {
-            string[] serializedJsonStoreOwners = persistentStorage.RetrieveEntities("StoreOwner");
-            List<StoreOwnerDefinition> storeOwnersList = new();
-            foreach (string serializedJsonStoreOwner in serializedJsonStoreOwners)
-            {
-                // Store owners will be loaded from the database.
-                JsonStoreOwner? jsonStoreOwner = JsonSerializer.Deserialize<JsonStoreOwner>(serializedJsonStoreOwner);
-                if (jsonStoreOwner == null || jsonStoreOwner.MaxCost == null || jsonStoreOwner.MinInflate == null || jsonStoreOwner.OwnerName == null || jsonStoreOwner.Key == null)
-                    throw new Exception("Invalid store owner json.");
-                storeOwnersList.Add(new StoreOwnerDefinition()
-                {
-                    Key = jsonStoreOwner.Key,
-                    MaxCost = jsonStoreOwner.MaxCost.Value,
-                    MinInflate = jsonStoreOwner.MinInflate.Value,
-                    OwnerName = jsonStoreOwner.OwnerName,
-                    OwnerRaceName = jsonStoreOwner.OwnerRaceName
-                });
-            }
-
             configuration = new Configuration()
             {
-                StoreOwners = storeOwnersList.ToArray()
+                StoreOwners = RetrieveEntities<StoreOwnerDefinition, JsonStoreOwner>(persistentStorage, "StoreOwner"),
+                Towns = RetrieveEntities<TownDefinition, JsonTown>(persistentStorage, "Town")
             };
         }
 

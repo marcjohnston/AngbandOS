@@ -14,7 +14,7 @@ internal class HallStore : Store
 
     protected override StoreOwner[] StoreOwners => new StoreOwner[]
     {
-        SaveGame.SingletonRepository.StoreOwners.Get("HallOfRecordsStoreOwner")
+        SaveGame.SingletonRepository.StoreOwners.Get(nameof(HallOfRecordsStoreOwner))
     };
 
     public override string FeatureType => "HallOfRecords";

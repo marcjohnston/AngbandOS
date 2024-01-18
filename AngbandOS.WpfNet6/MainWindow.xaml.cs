@@ -268,7 +268,7 @@ public partial class MainWindow : Window, IConsoleViewPort
         }
         TownDefinition townDefinition = new TownDefinition()
         {
-            Char = jsonTown.Char.Value,
+            Character = jsonTown.Char.Value,
             HousePrice = jsonTown.HousePrice.Value,
             Name = jsonTown.Name,
             StoreNames = jsonTown.Stores

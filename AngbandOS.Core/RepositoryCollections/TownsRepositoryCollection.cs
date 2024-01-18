@@ -6,11 +6,14 @@
 // copies. Other copyrights may also apply.”
 
 using AngbandOS.Core.Interface.Definitions;
+using System.Security.Cryptography.X509Certificates;
+using System.Text.Json;
+using System.Xml.Linq;
 
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class TownsRepositoryCollection : DictionaryRepositoryCollection<Town>
+internal class TownsRepositoryCollection : KeyedDictionaryRepositoryCollection<string, Town>
 {
     public TownsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 
@@ -31,24 +34,24 @@ internal class TownsRepositoryCollection : DictionaryRepositoryCollection<Town>
 
     public override void Loaded()
     {
-        base.Loaded();
+        foreach (Town town in this)
+        {
+            town.Loaded();
+        }
+    }
 
-        // THIS IS USED TO CREATE A TOWN.JSON FILE
+    protected override string? PersistedEntityName => "Town";
 
-        //var serializeOptions = new JsonSerializerOptions
-        //{
-        //    WriteIndented = true,
-        //    Converters = {
-        //        new ArrayOfStoreJsonConverter(SaveGame)
-        //    }
-        //};
-        //foreach (Town town in this)
-        //{
-        //    Assembly assembly = Assembly.GetAssembly(this.GetType());
-        //    string json = JsonSerializer.Serialize<Town>(town, serializeOptions);
-        //    string path = "D:\\OneDrive\\Programming\\AngbandOS\\AngbandOS.Core\\ConfigurationRepository\\Towns\\";
-        //    File.WriteAllText(path, json);
-
-        //}
+    protected override string? SerializeEntity(Town town)
+    {
+        TownDefinition townDefinition = new()
+        {
+            Key = town.Key,
+            HousePrice = town.HousePrice,
+            Name = town.Name,
+            Char = town.Char,
+            StoreNames = town.Stores.Select(_store => _store.Key).ToArray(),
+        };
+        return JsonSerializer.Serialize<TownDefinition>(townDefinition);
     }
 }

@@ -14,7 +14,7 @@ internal class EmptyLotStore : Store
 
     protected override StoreOwner[] StoreOwners => new StoreOwner[]
     {
-        SaveGame.SingletonRepository.StoreOwners.Get("EmptyLotStoreOwner")
+        SaveGame.SingletonRepository.StoreOwners.Get(nameof(EmptyLotStoreOwner))
     };
 
     public override string FeatureType => "";

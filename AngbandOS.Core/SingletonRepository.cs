@@ -317,6 +317,7 @@ internal class SingletonRepository
 
     public void Persist(ICorePersistentStorage corePersistentStorage)
     {
-        //StoreOwners.Persist(corePersistentStorage);
+        StoreOwners.Persist(corePersistentStorage);
+        Towns.Persist(corePersistentStorage);
     }
 }

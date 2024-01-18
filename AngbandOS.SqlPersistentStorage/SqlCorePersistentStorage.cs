@@ -123,7 +123,10 @@ namespace AngbandOS.PersistentStorage
         public string[] RetrieveEntities(string repositoryName)
         {
             using AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString);
-            return context.RepositoryEntities.Select(_repositoryEntity => _repositoryEntity.JsonData).ToArray();
+            return context.RepositoryEntities
+                .Where(_repositoryEntity => _repositoryEntity.RepositoryName == repositoryName)
+                .Select(_repositoryEntity => _repositoryEntity.JsonData)
+                .ToArray();
         }
     }
 }
