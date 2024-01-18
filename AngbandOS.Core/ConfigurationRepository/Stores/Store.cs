@@ -171,6 +171,10 @@ internal abstract class Store : IItemFilter, IGetKey<string>
     public abstract Symbol Symbol { get; }
 
     public abstract ColourEnum Colour { get; }
+
+    /// <summary>
+    /// Returns a description of the store.   By default, the feature type is returned.
+    /// </summary>
     public virtual string Description => FeatureType;
 
     public StoreFloorTile CreateFloorTileType() => new StoreFloorTile(SaveGame, Symbol, Colour, FeatureType, FeatureType, Description);

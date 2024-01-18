@@ -207,7 +207,7 @@ public class GameServer
 
         try
         {
-            SaveGame = SaveGame.CreateNew(configuration);
+            SaveGame = new SaveGame(configuration);
             SaveGame.Play(console, persistentStorage);
         }
         catch (Exception ex)

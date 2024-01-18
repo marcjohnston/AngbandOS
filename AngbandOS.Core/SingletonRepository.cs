@@ -198,7 +198,7 @@ internal class SingletonRepository
     /// Persist the entities to the core persistent storage medium.  This method is only being used to generate database entities from objects.
     /// </summary>
     /// <param name="corePersistentStorage"></param>
-    public void Persist<T>(ICorePersistentStorage corePersistentStorage, RepositoryCollection<T> repository, string name) where T : IToJson
+    private void Persist<T>(ICorePersistentStorage corePersistentStorage, RepositoryCollection<T> repository, string name) where T : IToJson
     {
         // Check to see if there is a name.  If not, then the persist isn't enabled for this repository.
         if (name != null)
@@ -216,6 +216,7 @@ internal class SingletonRepository
             corePersistentStorage.PersistEntities(name, jsonEntityList.ToArray());
         }
     }
+
     public void Persist(ICorePersistentStorage corePersistentStorage)
     {
         Persist<StoreOwner>(corePersistentStorage, StoreOwners, "StoreOwner");

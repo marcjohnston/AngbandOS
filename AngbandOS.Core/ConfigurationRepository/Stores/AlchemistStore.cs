@@ -7,11 +7,6 @@
 
 namespace AngbandOS.Core.Stores;
 
-public class StoreDefinition
-{
-
-}
-
 [Serializable]
 internal class AlchemistStore : Store
 {

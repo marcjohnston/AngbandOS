@@ -558,16 +558,6 @@ internal class SaveGame
     }
 
     /// <summary>
-    /// Creates a new game that can be played.
-    /// </summary>
-    /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
-    /// <returns></returns>
-    public static SaveGame CreateNew(Configuration? configuration)
-    {
-        return new SaveGame(configuration);
-    }
-
-    /// <summary>
     /// Retrieves a save game from persistent storage.  If no persistent storage is specified, a new game is created. This static method is used as a factory
     /// to generate the SaveGame object that can be played using the Play method.  This is the only static method.
     /// </summary>
