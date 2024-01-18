@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class ArtifactBiasesRepositoryCollection : KeyedDictionaryRepositoryCollection<string, ArtifactBias>
+internal class ArtifactBiasesRepositoryCollection : DictionaryRepositoryCollection<string, ArtifactBias>
 {
     public ArtifactBiasesRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 }

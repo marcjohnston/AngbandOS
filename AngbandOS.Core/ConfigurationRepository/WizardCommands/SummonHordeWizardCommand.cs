@@ -12,7 +12,7 @@ internal class SummonHordeWizardCommand : WizardCommand
 {
     private SummonHordeWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'H';
+    public override char KeyChar => 'H';
 
     public override string HelpDescription => "Summon Horde";
 

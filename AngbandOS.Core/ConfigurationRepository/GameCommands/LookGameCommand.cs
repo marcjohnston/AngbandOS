@@ -16,7 +16,7 @@ internal class LookGameCommand : GameCommand
 {
     private LookGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'l';
+    public override char KeyChar => 'l';
 
     public override bool Execute()
     {

@@ -15,7 +15,7 @@ internal class MutantPowerGameCommand : GameCommand
 {
     private MutantPowerGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'p';
+    public override char KeyChar => 'p';
 
     public override bool Execute()
     {

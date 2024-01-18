@@ -240,7 +240,7 @@ internal abstract class Store : IItemFilter, IGetKey<string>
     {
         if (command != null)
         {
-            SaveGame.Screen.PrintLine($" {command.Key}) {command.Description}.", row, col);
+            SaveGame.Screen.PrintLine($" {command.KeyChar}) {command.Description}.", row, col);
         }
     }
 
@@ -1378,7 +1378,7 @@ internal abstract class Store : IItemFilter, IGetKey<string>
         {
             // TODO: The IF statement below can be converted into a dictionary with the applicable object 
             // attached for improved performance.
-            if (command.Key == c)
+            if (command.KeyChar == c)
             {
                 matchingCommandFound = true;
 

@@ -12,7 +12,7 @@ using System.Text.Json;
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class StoreOwnersRepositoryCollection : KeyedDictionaryRepositoryCollection<string, StoreOwner>
+internal class StoreOwnersRepositoryCollection : DictionaryRepositoryCollection<string, StoreOwner>
 {
     public StoreOwnersRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.StoreCommands;
 internal class PurchaseStoreCommand : StoreCommand
 {
     private PurchaseStoreCommand(SaveGame saveGame) : base(saveGame) { }
-    public override char Key => 'p';
+    public override char KeyChar => 'p';
 
     public override string Description => "Purchase an item";
 

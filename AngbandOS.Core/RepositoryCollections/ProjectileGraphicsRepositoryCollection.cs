@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class ProjectileGraphicsRepositoryCollection : KeyedDictionaryRepositoryCollection<string, ProjectileGraphic>
+internal class ProjectileGraphicsRepositoryCollection : DictionaryRepositoryCollection<string, ProjectileGraphic>
 {
     public ProjectileGraphicsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 }

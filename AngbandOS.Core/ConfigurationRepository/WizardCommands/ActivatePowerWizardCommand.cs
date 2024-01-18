@@ -12,7 +12,7 @@ internal class ActivatePowerWizardCommand : WizardCommand
 {
     private ActivatePowerWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'A';
+    public override char KeyChar => 'A';
 
     public override string HelpDescription => "Activate Power";
 

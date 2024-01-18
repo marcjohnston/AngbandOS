@@ -21,7 +21,8 @@ internal abstract class Activation : IGetKey<string>
 
     public virtual string Key => GetType().Name;
 
-    
+    public string GetKey => Key;
+
     /// <summary>
     /// Returns the unique name for this activation power.
     /// </summary>
@@ -79,6 +80,4 @@ internal abstract class Activation : IGetKey<string>
     /// Applies a special ability to ItemCharacteristics.
     /// </summary>
     public abstract Action<IItemCharacteristics> ActivateSpecialAbility { get; }
-
-    public string GetKey => Key;
 }

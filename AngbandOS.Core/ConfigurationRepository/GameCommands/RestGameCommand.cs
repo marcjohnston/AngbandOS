@@ -15,7 +15,7 @@ internal class RestGameCommand : GameCommand
 {
     private RestGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'R';
+    public override char KeyChar => 'R';
 
     public override bool Execute() // TODO: Why can't this command take in a count?
     {

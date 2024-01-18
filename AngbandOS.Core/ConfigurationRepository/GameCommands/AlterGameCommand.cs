@@ -16,7 +16,7 @@ internal class AlterGameCommand : GameCommand
 {
     private AlterGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => '+';
+    public override char KeyChar => '+';
 
     public override int? Repeat => 99;
 

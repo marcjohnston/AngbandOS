@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class RareItemsRepositoryCollection : KeyedDictionaryRepositoryCollection<RareItemTypeEnum, RareItem>
+internal class RareItemsRepositoryCollection : DictionaryRepositoryCollection<RareItemTypeEnum, RareItem>
 {
     public RareItemsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 }

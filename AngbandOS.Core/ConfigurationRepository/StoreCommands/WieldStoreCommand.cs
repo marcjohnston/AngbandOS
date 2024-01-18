@@ -14,7 +14,7 @@ namespace AngbandOS.Core.StoreCommands;
 internal class WieldStoreCommand : StoreCommand
 {
     private WieldStoreCommand(SaveGame saveGame) : base(saveGame) { }
-    public override char Key => 'w';
+    public override char KeyChar => 'w';
 
     public override string Description => "";
 

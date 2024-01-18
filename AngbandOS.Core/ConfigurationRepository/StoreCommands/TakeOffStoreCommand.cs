@@ -14,7 +14,7 @@ namespace AngbandOS.Core.StoreCommands;
 internal class TakeOffStoreCommand : StoreCommand
 {
     private TakeOffStoreCommand(SaveGame saveGame) : base(saveGame) { }
-    public override char Key => 't';
+    public override char KeyChar => 't';
 
     public override string Description => "";
 

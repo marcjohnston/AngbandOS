@@ -15,7 +15,7 @@ internal class CloseGameCommand : GameCommand
 {
     private CloseGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'c';
+    public override char KeyChar => 'c';
 
     /// <summary>
     /// The close door command is repeatable, until the door is closed.

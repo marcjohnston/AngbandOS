@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class AnimationsRepositoryCollection : KeyedDictionaryRepositoryCollection<string, Animation>
+internal class AnimationsRepositoryCollection : DictionaryRepositoryCollection<string, Animation>
 {
     public AnimationsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 }

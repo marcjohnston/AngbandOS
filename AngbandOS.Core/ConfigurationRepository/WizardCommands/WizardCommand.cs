@@ -16,11 +16,11 @@ internal abstract class WizardCommand : IHelpCommand, IGetKey<string>
         SaveGame = saveGame;
     }
 
-    public virtual string UniqueKey => GetType().Name;
+    public virtual string Key => GetType().Name;
 
-    public string GetKey => UniqueKey;
+    public string GetKey => Key;
 
-    public abstract char Key { get; }
+    public abstract char KeyChar { get; }
 
     public virtual bool IsEnabled => true;
 

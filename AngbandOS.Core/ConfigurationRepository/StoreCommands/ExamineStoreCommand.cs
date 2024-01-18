@@ -11,7 +11,7 @@ namespace AngbandOS.Core.StoreCommands;
 internal class ExamineStoreCommand : StoreCommand
 {
     private ExamineStoreCommand(SaveGame saveGame) : base(saveGame) { }
-    public override char Key => 'x';
+    public override char KeyChar => 'x';
 
     public override string Description => "eXamine an item";
 

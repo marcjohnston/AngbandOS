@@ -16,7 +16,7 @@ internal class AimWandGameCommand : GameCommand
 {
     private AimWandGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'a';
+    public override char KeyChar => 'a';
 
     public override bool Execute()
     {

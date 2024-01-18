@@ -13,7 +13,7 @@ using System.Xml.Linq;
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class TownsRepositoryCollection : KeyedDictionaryRepositoryCollection<string, Town>
+internal class TownsRepositoryCollection : DictionaryRepositoryCollection<string, Town>
 {
     public TownsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 

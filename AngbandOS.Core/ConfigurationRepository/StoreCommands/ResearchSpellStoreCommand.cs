@@ -12,7 +12,7 @@ internal class ResearchSpellStoreCommand : StoreCommand
 
 {
     private ResearchSpellStoreCommand(SaveGame saveGame) : base(saveGame) { }
-    public override char Key => 'r';
+    public override char KeyChar => 'r';
 
     public override string Description => "Research a spell";
 

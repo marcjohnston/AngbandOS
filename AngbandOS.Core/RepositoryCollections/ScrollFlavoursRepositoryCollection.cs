@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class ScrollFlavoursRepositoryCollection : KeyedDictionaryRepositoryCollection<string, BaseScrollFlavour>
+internal class ScrollFlavoursRepositoryCollection : DictionaryRepositoryCollection<string, BaseScrollFlavour>
 {
     public ScrollFlavoursRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 }

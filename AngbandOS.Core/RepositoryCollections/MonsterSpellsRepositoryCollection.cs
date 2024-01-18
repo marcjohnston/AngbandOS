@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class MonsterSpellsRepositoryCollection : KeyedDictionaryRepositoryCollection<string, MonsterSpell>
+internal class MonsterSpellsRepositoryCollection : DictionaryRepositoryCollection<string, MonsterSpell>
 {
     public MonsterSpellsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 }

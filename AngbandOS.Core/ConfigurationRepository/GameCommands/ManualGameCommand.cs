@@ -15,7 +15,7 @@ internal class ManualGameCommand : GameCommand
 {
     private ManualGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'h';
+    public override char KeyChar => 'h';
 
     public override bool Execute()
     {

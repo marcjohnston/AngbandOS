@@ -12,7 +12,7 @@ internal class EditStatsWizardCommand : WizardCommand
 {
     private EditStatsWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'e';
+    public override char KeyChar => 'e';
 
     public override string HelpDescription => "Edit Stats";
 

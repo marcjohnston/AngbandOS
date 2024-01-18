@@ -15,7 +15,7 @@ internal class TunnelGameCommand : GameCommand
 {
     private TunnelGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'T';
+    public override char KeyChar => 'T';
 
     public override int? Repeat => 99;
 

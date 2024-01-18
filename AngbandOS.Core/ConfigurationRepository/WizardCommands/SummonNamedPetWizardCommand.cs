@@ -12,7 +12,7 @@ internal class SummonNamedPetWizardCommand : WizardCommand
 {
     private SummonNamedPetWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'N';
+    public override char KeyChar => 'N';
 
     public override string HelpDescription => "Summon Named Pet";
 

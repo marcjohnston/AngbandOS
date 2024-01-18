@@ -12,7 +12,7 @@ internal class CreateItemWizardCommand : WizardCommand
 {
     private CreateItemWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'c';
+    public override char KeyChar => 'c';
 
     public override string HelpDescription => "Create Item";
 

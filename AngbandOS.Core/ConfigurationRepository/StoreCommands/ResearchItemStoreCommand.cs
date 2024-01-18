@@ -12,7 +12,7 @@ internal class ResearchItemStoreCommand : StoreCommand
 
 {
     private ResearchItemStoreCommand(SaveGame saveGame) : base(saveGame) { }
-    public override char Key => 'r';
+    public override char KeyChar => 'r';
 
     public override string Description => "Research an item";
 

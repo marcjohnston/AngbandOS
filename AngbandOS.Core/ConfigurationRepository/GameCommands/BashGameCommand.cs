@@ -15,7 +15,7 @@ internal class BashGameCommand : GameCommand
 {
     private BashGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'B';
+    public override char KeyChar => 'B';
 
     public override int? Repeat => 99;
 

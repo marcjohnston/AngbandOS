@@ -11,7 +11,7 @@ namespace AngbandOS.Core.StoreCommands;
 internal class PageStoreCommand : StoreCommand
 {
     private PageStoreCommand(SaveGame saveGame) : base(saveGame) { }
-    public override char Key => ';';
+    public override char KeyChar => ';';
 
     public override string Description => "scroll ";
 

@@ -12,7 +12,7 @@ internal class RestorationStoreCommand : StoreCommand
 
 {
     private RestorationStoreCommand(SaveGame saveGame) : base(saveGame) { }
-    public override char Key => 'r';
+    public override char KeyChar => 'r';
 
     public override string Description => "buy Restoration";
 

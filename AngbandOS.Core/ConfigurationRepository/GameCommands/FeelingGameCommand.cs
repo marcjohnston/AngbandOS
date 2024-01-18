@@ -15,7 +15,7 @@ internal class FeelingAndLocationCommand : GameCommand
 {
     private FeelingAndLocationCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'H';
+    public override char KeyChar => 'H';
 
     public override bool Execute()
     {

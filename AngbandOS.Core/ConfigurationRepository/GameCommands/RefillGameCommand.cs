@@ -15,7 +15,7 @@ internal class RefillGameCommand : GameCommand
 {
     private RefillGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'F';
+    public override char KeyChar => 'F';
 
     public override bool Execute()
     {

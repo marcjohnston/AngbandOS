@@ -15,7 +15,7 @@ internal class JournalGameCommand : GameCommand
 {
     private JournalGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'J';
+    public override char KeyChar => 'J';
 
     public override bool Execute()
     {

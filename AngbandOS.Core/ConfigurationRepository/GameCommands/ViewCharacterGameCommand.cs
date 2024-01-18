@@ -15,7 +15,7 @@ internal class ViewCharacterGameCommand : GameCommand
 {
     private ViewCharacterGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'C';
+    public override char KeyChar => 'C';
 
     public override bool Execute()
     {

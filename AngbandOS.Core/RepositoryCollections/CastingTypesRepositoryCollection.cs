@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class CastingTypesRepositoryCollection : KeyedDictionaryRepositoryCollection<string, CastingType>
+internal class CastingTypesRepositoryCollection : DictionaryRepositoryCollection<string, CastingType>
 {
     public CastingTypesRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 }

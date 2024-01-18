@@ -11,7 +11,7 @@ namespace AngbandOS.Core.StoreCommands;
 internal class EnchantArmorStoreCommand : StoreCommand
 {
     private EnchantArmorStoreCommand(SaveGame saveGame) : base(saveGame) { }
-    public override char Key => 'r';
+    public override char KeyChar => 'r';
 
     public override string Description => "Enchant your armour";
 

@@ -12,7 +12,7 @@ internal class CarriageReturnGameCommand : GameCommand
 {
     private CarriageReturnGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => '\r';
+    public override char KeyChar => '\r';
 
     public override bool Execute()
     {

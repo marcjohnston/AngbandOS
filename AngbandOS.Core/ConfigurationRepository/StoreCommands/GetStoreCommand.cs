@@ -11,7 +11,7 @@ namespace AngbandOS.Core.StoreCommands;
 internal class GetStoreCommand : StoreCommand
 {
     private GetStoreCommand(SaveGame saveGame) : base(saveGame) { }
-    public override char Key => 'g';
+    public override char KeyChar => 'g';
 
     public override string Description => "Get an item";
 

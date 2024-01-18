@@ -12,7 +12,7 @@ internal class CarnageTrueWizardCommand : WizardCommand
 {
     private CarnageTrueWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'Z';
+    public override char KeyChar => 'Z';
 
     public override string HelpDescription => "Carnage True";
 

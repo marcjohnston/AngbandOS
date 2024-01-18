@@ -16,7 +16,7 @@ internal class EatFoodGameCommand : GameCommand
 {
     private EatFoodGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'E';
+    public override char KeyChar => 'E';
 
     public override bool Execute()
     {

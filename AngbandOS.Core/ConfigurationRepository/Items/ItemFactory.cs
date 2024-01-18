@@ -21,9 +21,9 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     {
         SaveGame = saveGame;
     }
-    public virtual string UniqueKey => GetType().Name;
+    public virtual string Key => GetType().Name;
 
-    public string GetKey => UniqueKey;
+    public string GetKey => Key;
 
     public virtual void Loaded()
     {

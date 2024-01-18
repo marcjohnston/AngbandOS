@@ -12,7 +12,7 @@ internal class GenerateVeryGoodObjectWizardCommand : WizardCommand
 {
     private GenerateVeryGoodObjectWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'v';
+    public override char KeyChar => 'v';
 
     public override string HelpDescription => "Generate Very Good Object";
 

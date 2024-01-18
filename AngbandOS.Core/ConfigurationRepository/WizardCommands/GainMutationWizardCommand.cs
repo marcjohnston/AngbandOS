@@ -12,7 +12,7 @@ internal class GainMutationWizardCommand : WizardCommand
 {
     private GainMutationWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'M';
+    public override char KeyChar => 'M';
 
     public override string HelpDescription => "Gain Mutation";
 

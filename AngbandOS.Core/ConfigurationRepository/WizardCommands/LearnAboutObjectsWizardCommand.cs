@@ -12,7 +12,7 @@ internal class LearnAboutObjectsWizardCommand : WizardCommand
 {
     private LearnAboutObjectsWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'l';
+    public override char KeyChar => 'l';
 
     public override string HelpDescription => "Learn About Objects";
 

@@ -12,7 +12,7 @@ internal class PhaseDoorWizardCommand : WizardCommand
 {
     private PhaseDoorWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'p';
+    public override char KeyChar => 'p';
 
     public override string HelpDescription => "Phase Door";
 

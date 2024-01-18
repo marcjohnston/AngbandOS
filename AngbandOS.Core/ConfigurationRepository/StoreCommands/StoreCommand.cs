@@ -16,11 +16,11 @@ internal abstract class StoreCommand : IGetKey<string>
         SaveGame = saveGame;
     }
 
-    public virtual string UniqueKey => GetType().Name;
+    public virtual string Key => GetType().Name;
 
-    public string GetKey => UniqueKey;
+    public string GetKey => Key;
 
-    public abstract char Key { get; }
+    public abstract char KeyChar { get; }
     public virtual bool IsEnabled(Store store) => true;
     public abstract void Execute(StoreCommandEvent storeCommandEvent);
     public abstract string Description { get; }

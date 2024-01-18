@@ -12,7 +12,7 @@ internal class TeleportToTargetWizardCommand : WizardCommand
 {
     private TeleportToTargetWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'b';
+    public override char KeyChar => 'b';
 
     public override string HelpDescription => "Teleport to Target";
 

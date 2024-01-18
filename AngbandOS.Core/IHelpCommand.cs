@@ -15,7 +15,7 @@ internal interface IHelpCommand
     /// <summary>
     /// Represents the keystroke for the player to press to be activate the command.
     /// </summary>
-    char Key { get; }
+    char KeyChar { get; }
 
     /// <summary>
     /// Represents whether or not the command is available.  If the command isn't available, it won't be rendered on the help screen.

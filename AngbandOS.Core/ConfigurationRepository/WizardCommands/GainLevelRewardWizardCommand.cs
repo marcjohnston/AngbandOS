@@ -12,7 +12,7 @@ internal class GainLevelRewardWizardCommand : WizardCommand
 {
     private GainLevelRewardWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'r';
+    public override char KeyChar => 'r';
 
     public override string HelpDescription => "Gain Level Reward";
 

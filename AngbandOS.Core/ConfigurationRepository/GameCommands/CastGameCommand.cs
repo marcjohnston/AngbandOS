@@ -12,7 +12,7 @@ internal class CastGameCommand : GameCommand
 {
     private CastGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'm';
+    public override char KeyChar => 'm';
 
     public override bool Execute()
     {

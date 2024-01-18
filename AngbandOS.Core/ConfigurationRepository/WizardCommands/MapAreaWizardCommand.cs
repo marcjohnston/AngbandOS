@@ -12,7 +12,7 @@ internal class MapAreaWizardCommand : WizardCommand
 {
     private MapAreaWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'm';
+    public override char KeyChar => 'm';
 
     public override string HelpDescription => "Map Area";
 

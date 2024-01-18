@@ -15,7 +15,7 @@ internal class DestroyGameCommand : GameCommand
 {
     private DestroyGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'k';
+    public override char KeyChar => 'k';
 
     public override bool Execute()
     {

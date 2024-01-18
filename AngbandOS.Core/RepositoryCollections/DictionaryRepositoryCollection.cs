@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal abstract class KeyedDictionaryRepositoryCollection<TKey, TValue> : ListRepositoryCollection<TValue> where TValue : IGetKey<TKey> where TKey : notnull
+internal abstract class DictionaryRepositoryCollection<TKey, TValue> : ListRepositoryCollection<TValue> where TValue : IGetKey<TKey> where TKey : notnull
 {
     private Dictionary<TKey, TValue> dictionary = new Dictionary<TKey, TValue>();
-    protected KeyedDictionaryRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
+    protected DictionaryRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 
     public bool Contains(TValue item) => dictionary.ContainsKey(item.GetKey);
 

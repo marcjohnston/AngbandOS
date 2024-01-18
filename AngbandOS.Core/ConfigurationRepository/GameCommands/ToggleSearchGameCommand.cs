@@ -15,7 +15,7 @@ internal class ToggleSearchGameCommand : GameCommand
 {
     private ToggleSearchGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'S';
+    public override char KeyChar => 'S';
 
     public override bool Execute()
     {

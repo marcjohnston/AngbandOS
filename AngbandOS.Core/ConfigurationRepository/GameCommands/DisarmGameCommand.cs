@@ -15,7 +15,7 @@ internal class DisarmGameCommand : GameCommand
 {
     private DisarmGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'D';
+    public override char KeyChar => 'D';
 
     public override int? Repeat => 99;
 

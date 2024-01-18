@@ -10,7 +10,7 @@ using System.Drawing;
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class ItemFactoriesRepositoryCollection : KeyedDictionaryRepositoryCollection<string, ItemFactory>
+internal class ItemFactoriesRepositoryCollection : DictionaryRepositoryCollection<string, ItemFactory>
 {
     public ItemFactoriesRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 

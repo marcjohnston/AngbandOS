@@ -12,7 +12,7 @@ internal class ApplyDisenchantWizardCommand : WizardCommand
 {
     private ApplyDisenchantWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'D';
+    public override char KeyChar => 'D';
 
     public override string HelpDescription => "Disenchant an Item";
 

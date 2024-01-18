@@ -16,7 +16,7 @@ internal class ZapRodGameCommand : GameCommand
 {
     private ZapRodGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'z';
+    public override char KeyChar => 'z';
 
     public override bool Execute()
     {

@@ -12,7 +12,7 @@ internal class WizardLightWizardCommand : WizardCommand
 {
     private WizardLightWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'w';
+    public override char KeyChar => 'w';
 
     public override string HelpDescription => "Wizard Light";
 

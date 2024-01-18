@@ -15,7 +15,7 @@ internal class FireGameCommand : GameCommand
 {
     private FireGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'f';
+    public override char KeyChar => 'f';
 
     public override bool Execute()
     {

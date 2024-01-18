@@ -12,7 +12,7 @@ internal class SpawnMonsterWizardCommand : WizardCommand
 {
     private SpawnMonsterWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'O';
+    public override char KeyChar => 'O';
 
     public override string HelpDescription => "Spawn Monster";
 

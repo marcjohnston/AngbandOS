@@ -16,7 +16,7 @@ internal class QuaffPotionGameCommand : GameCommand
 {
     private QuaffPotionGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'q';
+    public override char KeyChar => 'q';
 
     public override bool Execute()
     {

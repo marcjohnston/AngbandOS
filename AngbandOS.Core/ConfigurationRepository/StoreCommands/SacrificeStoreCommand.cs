@@ -11,7 +11,7 @@ namespace AngbandOS.Core.StoreCommands;
 internal class SacrificeStoreCommand : StoreCommand
 {
     private SacrificeStoreCommand(SaveGame saveGame) : base(saveGame) { }
-    public override char Key => 'v';
+    public override char KeyChar => 'v';
 
     public override string Description => "Sacrifice Item";
 

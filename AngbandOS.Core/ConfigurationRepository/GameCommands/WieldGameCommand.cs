@@ -15,7 +15,7 @@ internal class WieldGameCommand : GameCommand
 {
     private WieldGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'w';
+    public override char KeyChar => 'w';
 
     public override bool Execute()
     {

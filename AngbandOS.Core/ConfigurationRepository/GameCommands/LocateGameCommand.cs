@@ -15,7 +15,7 @@ internal class LocateGameCommand : GameCommand
 {
     private LocateGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'L';
+    public override char KeyChar => 'L';
 
     public override bool Execute()
     {

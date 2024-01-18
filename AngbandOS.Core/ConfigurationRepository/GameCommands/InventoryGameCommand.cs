@@ -15,7 +15,7 @@ internal class InventoryGameCommand : GameCommand
 {
     private InventoryGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'i';
+    public override char KeyChar => 'i';
 
     public override bool Execute()
     {

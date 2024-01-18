@@ -14,7 +14,7 @@ internal class RerollHitPointsWizardCommand : WizardCommand
 {
     private RerollHitPointsWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'h';
+    public override char KeyChar => 'h';
 
     public override string HelpDescription => "Reroll Hitpoints";
 

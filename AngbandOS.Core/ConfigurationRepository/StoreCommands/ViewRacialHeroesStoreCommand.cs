@@ -11,7 +11,7 @@ namespace AngbandOS.Core.StoreCommands;
 internal class ViewRacialHeroesStoreCommand : StoreCommand
 {
     private ViewRacialHeroesStoreCommand(SaveGame saveGame) : base(saveGame) { }
-    public override char Key => 'v';
+    public override char KeyChar => 'v';
 
     public override string Description => "view racial Heroes";
 

@@ -14,7 +14,7 @@ namespace AngbandOS.Core.StoreCommands;
 internal class DestroyAllStoreCommand : StoreCommand
 {
     private DestroyAllStoreCommand(SaveGame saveGame) : base(saveGame) { }
-    public override char Key => 'K';
+    public override char KeyChar => 'K';
 
     public override string Description => "";
 

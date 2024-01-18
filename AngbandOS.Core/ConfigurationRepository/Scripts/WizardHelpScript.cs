@@ -49,7 +49,7 @@ internal class WizardHelpScript : Script
             {
                 List<IHelpCommand> groupCommands = allCommands
                     .Where(_command => _command.HelpGroup == helpGroup)
-                    .OrderBy(_command => _command.Key)
+                    .OrderBy(_command => _command.KeyChar)
                     .ToList();
 
                 ConsoleCard card = new ConsoleCard();
@@ -58,7 +58,7 @@ internal class WizardHelpScript : Script
                 int row = 3;
                 foreach (IHelpCommand command in groupCommands)
                 {
-                    card.Print(0, row, ColourEnum.White, $"{command.Key} = {command.HelpDescription}");
+                    card.Print(0, row, ColourEnum.White, $"{command.KeyChar} = {command.HelpDescription}");
                     row++;
                 }
                 consoleGrid.AddCard(card);

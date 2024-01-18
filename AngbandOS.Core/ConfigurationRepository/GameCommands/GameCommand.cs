@@ -16,11 +16,11 @@ internal abstract class GameCommand : IGetKey<string>
         SaveGame = saveGame;
     }
 
-    public virtual string UniqueKey => GetType().Name;
+    public virtual string Key => GetType().Name;
 
-    public string GetKey => UniqueKey;
+    public string GetKey => Key;
 
-    public abstract char Key { get; }
+    public abstract char KeyChar { get; }
 
     /// <summary>
     /// Return 0, if the command should not be repeatable via a CommandArgument/Count; otherwise, return null, to indicate that the command allows

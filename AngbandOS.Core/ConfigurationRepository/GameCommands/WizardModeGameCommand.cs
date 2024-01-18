@@ -12,7 +12,7 @@ internal class WizardModeGameCommand : GameCommand
 {
     private WizardModeGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'W';
+    public override char KeyChar => 'W';
 
     public override bool Execute()
     {
@@ -21,7 +21,7 @@ internal class WizardModeGameCommand : GameCommand
             SaveGame.GetCom("Wizard Command: ", out char cmd);
             foreach (WizardCommand wizardCommand in SaveGame.SingletonRepository.WizardCommands)
             {
-                if (wizardCommand.IsEnabled && wizardCommand.Key == cmd)
+                if (wizardCommand.IsEnabled && wizardCommand.KeyChar == cmd)
                 {
                     wizardCommand.Execute();
                     return false;

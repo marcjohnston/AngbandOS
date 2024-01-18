@@ -12,7 +12,7 @@ internal class IdentifyFullyWizardCommand : WizardCommand
 {
     private IdentifyFullyWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'f';
+    public override char KeyChar => 'f';
 
     public override string HelpDescription => "Identify Fully";
 

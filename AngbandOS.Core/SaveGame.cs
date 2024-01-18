@@ -7334,7 +7334,7 @@ internal class SaveGame
         {
             // TODO: The IF statement below can be converted into a dictionary with the applicable object 
             // attached for improved performance.
-            if (command.IsEnabled && command.Key == c)
+            if (command.IsEnabled && command.KeyChar == c)
             {
                 bool more = command.Execute();
 

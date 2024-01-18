@@ -12,7 +12,7 @@ internal class WinTheGameWizardCommand : WizardCommand
 {
     private WinTheGameWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'W';
+    public override char KeyChar => 'W';
 
     public override string HelpDescription => "Win the Game";
 

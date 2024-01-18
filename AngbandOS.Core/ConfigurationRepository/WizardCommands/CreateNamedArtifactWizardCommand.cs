@@ -12,7 +12,7 @@ internal class CreateNamedArtifactWizardCommand : WizardCommand
 {
     private CreateNamedArtifactWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => 'C';
+    public override char KeyChar => 'C';
 
     public override string HelpDescription => "Create Named Artifact";
 

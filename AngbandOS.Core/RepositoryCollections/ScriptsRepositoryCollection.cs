@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class ScriptsRepositoryCollection : KeyedDictionaryRepositoryCollection<string, Script>
+internal class ScriptsRepositoryCollection : DictionaryRepositoryCollection<string, Script>
 {
     public ScriptsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 }

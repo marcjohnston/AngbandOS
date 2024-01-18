@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class RealmsRepositoryCollection : KeyedDictionaryRepositoryCollection<string, Realm>
+internal class RealmsRepositoryCollection : DictionaryRepositoryCollection<string, Realm>
 {
     public RealmsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 }

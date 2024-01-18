@@ -12,7 +12,7 @@ internal class HelpWizardCommand : WizardCommand
 {
     private HelpWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
-    public override char Key => '?';
+    public override char KeyChar => '?';
 
     public override string HelpDescription => "Render Wizard Help";
 

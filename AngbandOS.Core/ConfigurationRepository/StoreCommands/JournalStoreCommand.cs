@@ -14,7 +14,7 @@ namespace AngbandOS.Core.StoreCommands;
 internal class JournalStoreCommand : StoreCommand
 {
     private JournalStoreCommand(SaveGame saveGame) : base(saveGame) { }
-    public override char Key => 'J';
+    public override char KeyChar => 'J';
 
     public override string Description => "";
 

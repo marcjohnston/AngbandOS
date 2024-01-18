@@ -12,7 +12,7 @@ internal class EnchantWeaponStoreCommand : StoreCommand
 
 {
     private EnchantWeaponStoreCommand(SaveGame saveGame) : base(saveGame) { }
-    public override char Key => 'r';
+    public override char KeyChar => 'r';
 
     public override string Description => "Enchant your weapon";
 

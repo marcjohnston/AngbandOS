@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class GendersRepositoryCollection : KeyedDictionaryRepositoryCollection<string, Gender>
+internal class GendersRepositoryCollection : DictionaryRepositoryCollection<string, Gender>
 {
     public GendersRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 }

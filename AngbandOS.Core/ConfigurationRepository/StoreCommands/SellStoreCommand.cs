@@ -11,7 +11,7 @@ namespace AngbandOS.Core.StoreCommands;
 internal class SellStoreCommand : StoreCommand
 {
     private SellStoreCommand(SaveGame saveGame) : base(saveGame) { }
-    public override char Key => 's';
+    public override char KeyChar => 's';
 
     public override string Description => "Sell an item";
 
