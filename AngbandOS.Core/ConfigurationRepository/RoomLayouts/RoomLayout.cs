@@ -19,6 +19,7 @@ internal abstract class RoomLayout : IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
+    public virtual void Loaded() { }
 
     public abstract int Type { get; }
     public abstract void Build(int yval, int xval);

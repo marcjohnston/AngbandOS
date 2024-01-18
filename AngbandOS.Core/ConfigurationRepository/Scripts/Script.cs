@@ -19,6 +19,7 @@ internal abstract class Script : IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
+    public virtual void Loaded() { }
 
     /// <summary>
     /// Execute the script and return true, if the script fails due to chance.  A true return value indicates to the parent, that if the process is repeated, the process may succeed.

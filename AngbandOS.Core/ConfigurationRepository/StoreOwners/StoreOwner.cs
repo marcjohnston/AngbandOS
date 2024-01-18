@@ -5,10 +5,13 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Interface.Definitions;
+using System.Text.Json;
+
 namespace AngbandOS.Core.StoreOwners;
 
 [Serializable]
-internal abstract class StoreOwner : IGetKey<string>
+internal abstract class StoreOwner : IGetKey<string>, IToJson
 {
     protected SaveGame SaveGame { get; }
     protected StoreOwner(SaveGame saveGame)
@@ -34,4 +37,17 @@ internal abstract class StoreOwner : IGetKey<string>
     public abstract Race? OwnerRace { get; }
 
     public string GetKey => Key;
+
+    public string ToJson()
+    {
+        StoreOwnerDefinition storeOwnerDefinition = new()
+        {
+            Key = Key,
+            MaxCost = MaxCost,
+            MinInflate = MinInflate,
+            OwnerName = OwnerName,
+            OwnerRaceName = OwnerRace?.GetKey
+        };
+        return JsonSerializer.Serialize<StoreOwnerDefinition>(storeOwnerDefinition);
+    }
 }

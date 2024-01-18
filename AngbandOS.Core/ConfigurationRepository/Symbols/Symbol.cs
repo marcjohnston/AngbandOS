@@ -14,6 +14,7 @@ internal abstract class Symbol : IGetKey<string>
     public abstract string Name { get; }
 
     public virtual string Key => GetType().Name;
+    public virtual void Loaded() { }
 
     public string GetKey => Key;
 }

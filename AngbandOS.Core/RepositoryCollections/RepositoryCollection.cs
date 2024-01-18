@@ -15,7 +15,7 @@ namespace AngbandOS.Core.RepositoryCollections;
 /// </summary>
 /// <typeparam name="T"></typeparam>
 [Serializable]
-internal abstract class RepositoryCollection<T> : IEnumerable<T>
+internal abstract class RepositoryCollection<T> : IEnumerable<T>, ILoadable
 {
     protected readonly SaveGame SaveGame;
 
@@ -59,37 +59,8 @@ internal abstract class RepositoryCollection<T> : IEnumerable<T>
     public abstract void Load();
 
     /// <summary>
-    /// Processes the loaded phase for configuration repository items.  This phase allows each object to bind to other configuration repository objects.
+    /// Processes the loaded phase for configuration repository items.  This phase allows each object to bind to other configuration repository objects.  Does nothing, by
+    /// default.  ListRepositoryCollections won't handle this phase.  DictionaryRepositoryCollections will process this Loaded phase.
     /// </summary>
     public virtual void Loaded() { }
-
-    protected virtual string SerializeEntity(T t) => null;
-
-    protected virtual string? PersistedEntityName => null;
-
-    /// <summary>
-    /// Persist the entities to the core persistent storage medium.  This method is only being used to generate database entities from objects.
-    /// </summary>
-    /// <param name="corePersistentStorage"></param>
-    public virtual void Persist(ICorePersistentStorage corePersistentStorage)
-    {
-        // Retrieve the name to be used for the repository entities.
-        string? name = PersistedEntityName;
-
-        // Check to see if there is a name.  If not, then the persist isn't enabled for this repository.
-        if (name != null)
-        {
-            List<string> jsonEntityList = new();
-            foreach (T item in this)
-            {
-                string serializedEntity = SerializeEntity(item);
-                if (serializedEntity == null)
-                {
-                    throw new Exception("Entity did not serialize.");
-                }
-                jsonEntityList.Add(serializedEntity);
-            }
-            corePersistentStorage.PersistEntities(name, jsonEntityList.ToArray());
-        }
-    }
 }

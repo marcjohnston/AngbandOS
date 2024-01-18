@@ -23,6 +23,8 @@ internal abstract class Activation : IGetKey<string>
 
     public string GetKey => Key;
 
+    public virtual void Loaded() { }
+
     /// <summary>
     /// Returns the unique name for this activation power.
     /// </summary>

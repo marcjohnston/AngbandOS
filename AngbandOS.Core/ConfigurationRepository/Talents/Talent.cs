@@ -19,6 +19,7 @@ internal abstract class Talent : IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
+    public virtual void Loaded() { }
 
     public abstract string Name { get; }
 

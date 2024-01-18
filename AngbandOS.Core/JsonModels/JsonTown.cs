@@ -6,6 +6,7 @@
 // copies. Other copyrights may also apply.”
 
 using AngbandOS.Core.Interface.Definitions;
+using System.Text.Json;
 
 namespace AngbandOS.Core.JsonModels;
 

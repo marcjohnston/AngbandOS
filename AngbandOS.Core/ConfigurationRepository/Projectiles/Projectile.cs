@@ -23,6 +23,7 @@ internal abstract class Projectile : IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
+    public virtual void Loaded() { }
 
     protected virtual ProjectileGraphic? BoltProjectileGraphic { get; }
 

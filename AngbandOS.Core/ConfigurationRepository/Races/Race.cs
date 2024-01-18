@@ -20,6 +20,7 @@ internal abstract class Race : IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
+    public virtual void Loaded() { }
 
     public abstract int[] AbilityBonus { get; }
     public abstract int AgeRange { get; }

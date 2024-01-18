@@ -20,6 +20,7 @@ internal abstract class Spell : IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
+    public virtual void Loaded() { }
 
     /// <summary>
     /// Returns true, if the spell has been forgotten because the players level dropped to low.  When true, Learned is set to false.

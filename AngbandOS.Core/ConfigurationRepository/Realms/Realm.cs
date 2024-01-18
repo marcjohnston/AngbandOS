@@ -19,6 +19,7 @@ internal abstract class Realm : IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
+    public virtual void Loaded() { }
 
     /// <summary>
     /// Returns the spells books that belong to the realm.

@@ -5,10 +5,13 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Interface.Definitions;
+using System.Text.Json;
+
 namespace AngbandOS.Core.Towns;
 
 [Serializable]
-internal abstract class Town : IGetKey<string>
+internal abstract class Town : IGetKey<string>, IToJson
 {
     protected readonly SaveGame SaveGame;
 
@@ -37,4 +40,18 @@ internal abstract class Town : IGetKey<string>
     public bool Visited = false;
     public int X = 0;
     public int Y = 0;
+
+    public string ToJson()
+    {
+        TownDefinition townDefinition = new()
+        {
+            Key = Key,
+            HousePrice = HousePrice,
+            Name = Name,
+            Char = Char,
+            StoreNames = Stores.Select(_store => _store.Key).ToArray(),
+        };
+        return JsonSerializer.Serialize<TownDefinition>(townDefinition);
+    }
+
 }

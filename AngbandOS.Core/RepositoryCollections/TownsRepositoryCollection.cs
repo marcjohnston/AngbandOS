@@ -39,19 +39,4 @@ internal class TownsRepositoryCollection : DictionaryRepositoryCollection<string
             town.Loaded();
         }
     }
-
-    protected override string? PersistedEntityName => "Town";
-
-    protected override string SerializeEntity(Town town)
-    {
-        TownDefinition townDefinition = new()
-        {
-            Key = town.Key,
-            HousePrice = town.HousePrice,
-            Name = town.Name,
-            Char = town.Char,
-            StoreNames = town.Stores.Select(_store => _store.Key).ToArray(),
-        };
-        return JsonSerializer.Serialize<TownDefinition>(townDefinition);
-    }
 }

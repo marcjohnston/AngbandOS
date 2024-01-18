@@ -23,6 +23,8 @@ internal abstract class Flavour : IGetKey<string>
 
     public string GetKey => Key;
 
+    public virtual void Loaded() { }
+
     /// <summary>
     /// Returns the symbol to use for rendering.
     /// </summary>

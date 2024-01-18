@@ -5,21 +5,10 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Rewards;
+namespace AngbandOS.Core;
 
-[Serializable]
-internal abstract class Reward : IGetKey<string>
+internal interface ILoadable
 {
-    protected readonly SaveGame SaveGame;
-    protected Reward(SaveGame saveGame)
-    {
-        SaveGame = saveGame;
-    }
-
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public virtual void Loaded() { }
-
-    public abstract void GetReward(Patron patron);
+    void Load();
+    void Loaded();
 }

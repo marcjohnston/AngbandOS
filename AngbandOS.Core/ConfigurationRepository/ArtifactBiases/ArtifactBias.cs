@@ -24,6 +24,8 @@ internal abstract class ArtifactBias : IArtifactBias, IGetKey<string>
 
     public string GetKey => Key;
 
+    public virtual void Loaded() { }
+
     /// <inheritdoc/>
     public virtual int ImmunityLuckOneInChance => 20;
 

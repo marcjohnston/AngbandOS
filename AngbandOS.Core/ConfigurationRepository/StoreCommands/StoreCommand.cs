@@ -19,6 +19,7 @@ internal abstract class StoreCommand : IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
+    public virtual void Loaded() { }
 
     public abstract char KeyChar { get; }
     public virtual bool IsEnabled(Store store) => true;

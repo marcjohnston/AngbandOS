@@ -20,6 +20,7 @@ internal abstract class MartialArtsAttack : IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
+    public virtual void Loaded() { }
 
     public abstract int Chance { get; }
     public abstract int Dd { get; }

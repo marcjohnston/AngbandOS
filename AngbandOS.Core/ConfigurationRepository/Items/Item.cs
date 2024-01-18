@@ -77,6 +77,7 @@ internal abstract class Item : IComparable<Item>, IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
+    public virtual void Loaded() { }
 
     /// <summary>
     /// Returns the inventory slot where the item is wielded.  Returns the pack, by default.

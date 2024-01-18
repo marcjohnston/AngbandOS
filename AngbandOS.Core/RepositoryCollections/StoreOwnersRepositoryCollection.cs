@@ -16,21 +16,6 @@ internal class StoreOwnersRepositoryCollection : DictionaryRepositoryCollection<
 {
     public StoreOwnersRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 
-    protected override string? PersistedEntityName => "StoreOwner";
-
-    protected override string SerializeEntity(StoreOwner storeOwner)
-    {
-        StoreOwnerDefinition storeOwnerDefinition = new()
-        {
-            Key = storeOwner.Key,
-            MaxCost = storeOwner.MaxCost,
-            MinInflate = storeOwner.MinInflate,
-            OwnerName = storeOwner.OwnerName,
-            OwnerRaceName = storeOwner.OwnerRace?.GetKey
-        };
-        return JsonSerializer.Serialize<StoreOwnerDefinition>(storeOwnerDefinition);
-    }
-
     public override void Load()
     {
         if (SaveGame.Configuration.StoreOwners == null)
@@ -44,13 +29,5 @@ internal class StoreOwnersRepositoryCollection : DictionaryRepositoryCollection<
                 Add(new GenericStoreOwner(SaveGame, storeOwnerDefinition));
             }
         }
-    }
-
-    public override void Loaded()
-    {
-        foreach (StoreOwner storeOwner in this)
-        {
-            storeOwner.Loaded();
-        } 
     }
 }

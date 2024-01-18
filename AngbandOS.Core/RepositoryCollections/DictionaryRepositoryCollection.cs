@@ -35,8 +35,23 @@ internal abstract class DictionaryRepositoryCollection<TKey, TValue> : ListRepos
         base.Add(item);
     }
 
+    /// <summary>
+    /// Loads the repository with a instance of types that inherit from the TValue type in the assembly.
+    /// </summary>
     public override void Load()
     {
         Add(LoadTypesFromAssembly<TValue>());
+    }
+
+    /// <summary>
+    /// Processes the loaded event from the RepositoryCollection by calling the Loaded event for all items in the collection.  Since this is a dictionary repository, all
+    /// items must implement the IGetKey interface which also includes the Loaded event handler.
+    /// </summary>
+    public override void Loaded()
+    {
+        foreach (TValue item in this)
+        {
+            item.Loaded();
+        }
     }
 }
