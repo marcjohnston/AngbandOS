@@ -5,10 +5,13 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Interface.Definitions;
+using System.Text.Json;
+
 namespace AngbandOS.Core.Commands;
 
 [Serializable]
-internal abstract class GameCommand : IGetKey<string>
+internal abstract class GameCommand : IGetKey<string>, IToJson
 {
     protected SaveGame SaveGame { get; }
     protected GameCommand(SaveGame saveGame)
@@ -42,5 +45,18 @@ internal abstract class GameCommand : IGetKey<string>
     public bool Execute()
     {
         return ExecuteScript.Execute();
+    }
+
+    public string ToJson()
+    {
+        GameCommandDefinition definition = new()
+        {
+            Key = Key,
+            KeyChar = KeyChar,
+            Repeat = Repeat,
+            IsEnabled = IsEnabled,
+            ScriptName = ExecuteScript.GetKey
+        };
+        return JsonSerializer.Serialize(definition);
     }
 }

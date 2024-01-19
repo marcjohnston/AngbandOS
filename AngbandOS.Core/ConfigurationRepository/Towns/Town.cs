@@ -6,6 +6,7 @@
 // copies. Other copyrights may also apply.”
 
 using AngbandOS.Core.Interface.Definitions;
+using System.Runtime.Serialization;
 using System.Text.Json;
 
 namespace AngbandOS.Core.Towns;
@@ -53,5 +54,4 @@ internal abstract class Town : IGetKey<string>, IToJson
         };
         return JsonSerializer.Serialize<TownDefinition>(townDefinition);
     }
-
 }
