@@ -17,8 +17,5 @@ internal class GoDownGameCommand : GameCommand
 
     public override char KeyChar => '>';
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(GoDownScript));
-    }
+    protected override string ExecuteScriptName => nameof(GoDownScript);
 }

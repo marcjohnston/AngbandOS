@@ -17,8 +17,5 @@ internal class EquipGameCommand : GameCommand
 
     public override char KeyChar => 'e';
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(EquipScript));
-    }
+    protected override string ExecuteScriptName => nameof(EquipScript);
 }

@@ -18,8 +18,5 @@ internal class ReadScrollGameCommand : GameCommand
 
     public override char KeyChar => 'r';
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(ReadScrollScript));
-    }
+    protected override string ExecuteScriptName => nameof(ReadScrollScript);
 }

@@ -19,8 +19,5 @@ internal class BashGameCommand : GameCommand
 
     public override int? Repeat => 99;
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(BashScript));
-    }
+    protected override string ExecuteScriptName => nameof(BashScript);
 }

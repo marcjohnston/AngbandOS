@@ -17,8 +17,5 @@ internal class RunGameCommand : GameCommand
 
     public override char KeyChar => '.';
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(RunScript));
-    }
+    protected override string ExecuteScriptName => nameof(RunScript);
 }

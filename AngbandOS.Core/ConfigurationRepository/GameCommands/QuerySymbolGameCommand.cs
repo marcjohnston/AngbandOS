@@ -17,8 +17,5 @@ internal class QuerySymbolGameCommand : GameCommand
 
     public override char KeyChar => '/';
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(QuerySymbolScript));
-    }
+    protected override string ExecuteScriptName => nameof(QuerySymbolScript);
 }

@@ -6,9 +6,6 @@
 // copies. Other copyrights may also apply.”
 
 using AngbandOS.Core.Interface.Definitions;
-using AngbandOS.Core.Stores;
-using System.Runtime.Serialization;
-using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 
 namespace AngbandOS.Core.Towns;
@@ -42,7 +39,7 @@ internal abstract class Town : IGetKey<string>, IToJson
         SaveGame = saveGame;
     }
 
-    public virtual void Loaded()
+    public void Loaded()
     {
         List<Store> stores = new List<Store>();
         foreach (string storeName in StoreNames)

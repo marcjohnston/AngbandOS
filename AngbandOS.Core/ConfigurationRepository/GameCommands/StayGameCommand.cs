@@ -19,8 +19,5 @@ internal class StayGameCommand : GameCommand
 
     public override int? Repeat => null;
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(StayScript));
-    }
+    protected override string ExecuteScriptName => nameof(StayScript);
 }

@@ -27,4 +27,6 @@ public class Configuration
     public TownDefinition[]? Towns = null;
 
     public StoreOwnerDefinition[]? StoreOwners = null;
+
+    public GameCommandDefinition[]? GameCommands = null;
 }

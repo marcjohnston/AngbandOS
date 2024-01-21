@@ -17,8 +17,5 @@ internal class TakeOffGameCommand : GameCommand
 
     public override char KeyChar => 't';
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(TakeOffScript));
-    }
+    protected override string ExecuteScriptName => nameof(TakeOffScript);
 }

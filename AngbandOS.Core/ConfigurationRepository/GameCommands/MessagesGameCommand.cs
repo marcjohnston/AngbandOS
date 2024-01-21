@@ -17,8 +17,5 @@ internal class MessagesGameCommand : GameCommand
 
     public override char KeyChar => 'P';
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(MessagesScript));
-    }
+    protected override string ExecuteScriptName => nameof(MessagesScript);
 }

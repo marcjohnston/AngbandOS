@@ -18,8 +18,5 @@ internal class LookGameCommand : GameCommand
 
     public override char KeyChar => 'l';
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(LookScript));
-    }
+    protected override string ExecuteScriptName => nameof(LookScript);
 }

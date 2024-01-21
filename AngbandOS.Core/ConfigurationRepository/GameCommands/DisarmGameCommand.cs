@@ -19,8 +19,5 @@ internal class DisarmGameCommand : GameCommand
 
     public override int? Repeat => 99;
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(DisarmScript));
-    }
+    protected override string ExecuteScriptName => nameof(DisarmScript);
 }

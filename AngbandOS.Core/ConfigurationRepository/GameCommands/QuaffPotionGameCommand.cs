@@ -18,8 +18,5 @@ internal class QuaffPotionGameCommand : GameCommand
 
     public override char KeyChar => 'q';
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(QuaffScript));
-    }
+    protected override string ExecuteScriptName => nameof(QuaffScript);
 }

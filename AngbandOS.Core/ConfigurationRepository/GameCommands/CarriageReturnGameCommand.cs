@@ -14,8 +14,5 @@ internal class CarriageReturnGameCommand : GameCommand
 
     public override char KeyChar => '\r';
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(FalseScript));
-    }
+    protected override string ExecuteScriptName => nameof(FalseScript);
 }

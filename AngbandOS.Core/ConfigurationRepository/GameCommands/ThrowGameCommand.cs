@@ -17,8 +17,5 @@ internal class ThrowGameCommand : GameCommand
 
     public override char KeyChar => 'v';
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(ThrowScript));
-    }
+    protected override string ExecuteScriptName => nameof(ThrowScript);
 }

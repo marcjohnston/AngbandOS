@@ -1937,3 +1937,8 @@ internal abstract class Store : IItemFilter, IGetKey<string>
         }
     }
 }
+
+internal abstract class StoreFactory
+{
+
+}

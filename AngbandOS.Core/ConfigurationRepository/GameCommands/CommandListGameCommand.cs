@@ -17,8 +17,5 @@ internal class CommandListGameCommand : GameCommand
 
     public override char KeyChar => '?';
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(ListCommandsScript));
-    }
+    protected override string ExecuteScriptName => nameof(ListCommandsScript);
 }

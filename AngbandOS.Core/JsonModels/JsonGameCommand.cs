@@ -16,11 +16,11 @@ internal class JsonGameCommand : IJsonModel<GameCommandDefinition>
     public char? KeyChar { get; set; }
     public int? Repeat { get; set; } = 0;
     public bool? IsEnabled { get; set; } = true;
-    public string? ScriptName { get; set; }
+    public string? ExecuteScriptName { get; set; }
 
     public GameCommandDefinition? ToDefinition()
     {
-        if (Key == null || KeyChar == null || IsEnabled == null || ScriptName == null)
+        if (Key == null || KeyChar == null || IsEnabled == null || ExecuteScriptName == null)
             return null;
 
         return new GameCommandDefinition()
@@ -29,7 +29,7 @@ internal class JsonGameCommand : IJsonModel<GameCommandDefinition>
             KeyChar = KeyChar.Value,
             Repeat = Repeat,
             IsEnabled = IsEnabled.Value,
-            ScriptName = ScriptName
+            ExecuteScriptName = ExecuteScriptName
         };
     }
 }

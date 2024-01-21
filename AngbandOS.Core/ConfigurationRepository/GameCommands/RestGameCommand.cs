@@ -17,8 +17,5 @@ internal class RestGameCommand : GameCommand
 
     public override char KeyChar => 'R';
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(RestScript));
-    }
+    protected override string ExecuteScriptName => nameof(RestScript);
 }

@@ -18,8 +18,5 @@ internal class AimWandGameCommand : GameCommand
 
     public override char KeyChar => 'a';
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(AimWandScript));
-    }
+    protected override string ExecuteScriptName => nameof(AimWandScript);
 }

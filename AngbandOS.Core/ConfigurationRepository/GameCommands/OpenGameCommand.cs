@@ -19,8 +19,5 @@ internal class OpenGameCommand : GameCommand
 
     public override int? Repeat => 99;
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(OpenScript));
-    }
+    protected override string ExecuteScriptName => nameof(OpenScript);
 }

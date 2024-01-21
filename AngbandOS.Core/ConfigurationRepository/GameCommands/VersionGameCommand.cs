@@ -17,8 +17,5 @@ internal class VersionGameCommand : GameCommand
 
     public override char KeyChar => 'V';
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(VersionScript));
-    }
+    protected override string ExecuteScriptName => nameof(VersionScript);
 }

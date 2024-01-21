@@ -16,8 +16,5 @@ internal class WalkWithoutGamePickupCommand : GameCommand
 
     public override int? Repeat => null;
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(WalkWithoutPickupScript));
-    }
+    protected override string ExecuteScriptName => nameof(WalkWithoutPickupScript);
 }

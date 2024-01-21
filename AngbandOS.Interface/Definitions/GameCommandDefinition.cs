@@ -7,5 +7,5 @@ public class GameCommandDefinition
     public char KeyChar { get; set; }
     public int? Repeat { get; set; } = 0;
     public bool IsEnabled { get; set; } = true;
-    public string ScriptName { get; set; }
+    public string ExecuteScriptName { get; set; }
 }

@@ -18,8 +18,5 @@ internal class ZapRodGameCommand : GameCommand
 
     public override char KeyChar => 'z';
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(ZapRodScript));
-    }
+    protected override string ExecuteScriptName => nameof(ZapRodScript);
 }

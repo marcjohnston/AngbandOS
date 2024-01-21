@@ -17,8 +17,5 @@ internal class DestroyAllGameCommand : GameCommand
 
     public override char KeyChar => 'K';
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(DestroyAllScript));
-    }
+    protected override string ExecuteScriptName => nameof(DestroyAllScript);
 }

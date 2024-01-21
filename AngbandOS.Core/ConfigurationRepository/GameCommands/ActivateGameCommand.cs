@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Interface.Definitions;
+
 namespace AngbandOS.Core.Commands;
 
 /// <summary>
@@ -22,8 +24,6 @@ internal class ActivateGameCommand : GameCommand
 
     public override int? Repeat => 0;
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(ActivateScript));
-    }
+    protected override string ExecuteScriptName => nameof(ActivateScript);
 }
+

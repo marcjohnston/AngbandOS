@@ -14,8 +14,5 @@ internal class CastGameCommand : GameCommand
 
     public override char KeyChar => 'm';
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(CastScript));
-    }
+    protected override string ExecuteScriptName => nameof(CastScript);
 }

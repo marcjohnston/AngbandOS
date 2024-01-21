@@ -19,8 +19,5 @@ internal class StayAndPickupGameCommand : GameCommand
 
     public override int? Repeat => null;
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(StayAndPickupScript));
-    }
+    protected override string ExecuteScriptName => nameof(StayAndPickupScript);
 }

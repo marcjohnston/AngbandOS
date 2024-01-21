@@ -17,8 +17,5 @@ internal class InventoryGameCommand : GameCommand
 
     public override char KeyChar => 'i';
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(InventoryScript));
-    }
+    protected override string ExecuteScriptName => nameof(InventoryScript);
 }

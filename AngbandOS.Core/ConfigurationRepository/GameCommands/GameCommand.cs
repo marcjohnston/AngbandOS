@@ -22,7 +22,10 @@ internal abstract class GameCommand : IGetKey<string>, IToJson
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Loaded() { }
+    public void Loaded()
+    {
+        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(ExecuteScriptName);
+    }
 
     public abstract char KeyChar { get; }
 
@@ -34,6 +37,7 @@ internal abstract class GameCommand : IGetKey<string>, IToJson
     public virtual int? Repeat => 0;
 
     public virtual bool IsEnabled => true;
+    protected virtual string ExecuteScriptName { get; }
 
     public Script ExecuteScript { get; protected set; }
 
@@ -55,7 +59,7 @@ internal abstract class GameCommand : IGetKey<string>, IToJson
             KeyChar = KeyChar,
             Repeat = Repeat,
             IsEnabled = IsEnabled,
-            ScriptName = ExecuteScript.GetKey
+            ExecuteScriptName = ExecuteScript.GetKey
         };
         return JsonSerializer.Serialize(definition);
     }

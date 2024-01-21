@@ -17,8 +17,5 @@ internal class ViewCharacterGameCommand : GameCommand
 
     public override char KeyChar => 'C';
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(ViewCharacterScript));
-    }
+    protected override string ExecuteScriptName => nameof(ViewCharacterScript);
 }

@@ -17,8 +17,5 @@ internal class FeelingAndLocationCommand : GameCommand
 
     public override char KeyChar => 'H';
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(SayLocationAndFeelingScript));
-    }
+    protected override string ExecuteScriptName => nameof(SayLocationAndFeelingScript);
 }

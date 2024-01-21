@@ -38,7 +38,7 @@ internal abstract class StoreOwner : IGetKey<string>, IToJson
         SaveGame = saveGame;
     }
 
-    public virtual void Loaded()
+    public void Loaded()
     {
         if (OwnerRaceName == null)
         {

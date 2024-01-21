@@ -17,8 +17,5 @@ internal class StoreGameCommand : GameCommand
 
     public override char KeyChar => '_';
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(StoreScript));
-    }
+    protected override string ExecuteScriptName => nameof(StoreScript);
 }

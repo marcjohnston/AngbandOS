@@ -18,8 +18,5 @@ internal class EatFoodGameCommand : GameCommand
 
     public override char KeyChar => 'E';
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(EatScript));
-    }
+    protected override string ExecuteScriptName => nameof(EatScript);
 }

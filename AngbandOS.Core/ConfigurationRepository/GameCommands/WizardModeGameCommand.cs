@@ -14,8 +14,5 @@ internal class WizardModeGameCommand : GameCommand
 
     public override char KeyChar => 'W';
 
-    public override void Loaded()
-    {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(nameof(EnterWizardModeScript));
-    }
+    protected override string ExecuteScriptName => nameof(EnterWizardModeScript);
 }
