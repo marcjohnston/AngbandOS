@@ -12,21 +12,20 @@ internal class IlekVadTown : Town
 {
     private IlekVadTown(SaveGame saveGame) : base(saveGame) { }
 
-    public override Store[] Stores => new Store[]
-        {
-            SaveGame.SingletonRepository.Stores.Get(nameof(GeneralStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(ArmouryStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(WeaponStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(TempleStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(AlchemistStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(MagicStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(BlackStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(HomeStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(LibraryStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(InnStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(HallStore))
-        };
+    protected override string[] StoreNames => new string[] {
+        nameof(GeneralStore),
+        nameof(ArmouryStore),
+        nameof(WeaponStore),
+        nameof(TempleStore),
+        nameof(AlchemistStore),
+        nameof(MagicStore),
+        nameof(BlackStore),
+        nameof(HomeStore),
+        nameof(LibraryStore),
+        nameof(EmptyLotStore),
+        nameof(InnStore),
+        nameof(HallStore)
+    };
 
     public override int HousePrice => 60000;
     public override string Name => "the city of Ilek-Vad";

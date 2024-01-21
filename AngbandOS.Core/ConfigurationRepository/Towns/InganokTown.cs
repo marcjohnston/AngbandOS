@@ -11,21 +11,20 @@ namespace AngbandOS.Core.Towns;
 internal class InganokTown : Town
 {
     private InganokTown(SaveGame saveGame) : base(saveGame) { }
-    public override Store[] Stores => new Store[]
-        {
-            SaveGame.SingletonRepository.Stores.Get(nameof(GeneralStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(ArmouryStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(WeaponStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(TempleStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(AlchemistStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(MagicStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(BlackStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(LibraryStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(InnStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(PawnStore))
-        };
+    protected override string[] StoreNames => new string[] {
+        nameof(GeneralStore),
+        nameof(ArmouryStore),
+        nameof(WeaponStore),
+        nameof(TempleStore),
+        nameof(AlchemistStore),
+        nameof(EmptyLotStore),
+        nameof(MagicStore),
+        nameof(BlackStore),
+        nameof(EmptyLotStore),
+        nameof(LibraryStore),
+        nameof(InnStore),
+        nameof(PawnStore)
+    };
 
     public override int HousePrice => 0;
     public override string Name => "the industrious town of Inganok";

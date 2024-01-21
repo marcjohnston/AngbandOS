@@ -6,7 +6,9 @@
 // copies. Other copyrights may also apply.”
 
 using AngbandOS.Core.Interface.Definitions;
+using AngbandOS.Core.Stores;
 using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 
 namespace AngbandOS.Core.Towns;
@@ -16,24 +18,6 @@ internal abstract class Town : IGetKey<string>, IToJson
 {
     protected readonly SaveGame SaveGame;
 
-    protected Town(SaveGame saveGame)
-    {
-        SaveGame = saveGame;
-    }
-
-    public virtual void Loaded() { }
-
-    public abstract char Char { get; }
-    public abstract int HousePrice { get; }
-    public abstract string Name { get; }
-    public abstract Store[] Stores { get; }
-
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-
-    public int Index;
-
     /// <summary>
     /// Represents the RND seed that is used to generate the town.  This ensures the town is regenerated the same when the player returns.
     /// </summary>
@@ -41,6 +25,33 @@ internal abstract class Town : IGetKey<string>, IToJson
     public bool Visited = false;
     public int X = 0;
     public int Y = 0;
+    public int Index;
+
+    public abstract char Char { get; }
+    public abstract int HousePrice { get; }
+    public abstract string Name { get; }
+    public Store[] Stores { get; private set; }
+    protected abstract string[] StoreNames { get; }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+
+    protected Town(SaveGame saveGame)
+    {
+        SaveGame = saveGame;
+    }
+
+    public virtual void Loaded()
+    {
+        List<Store> stores = new List<Store>();
+        foreach (string storeName in StoreNames)
+        {
+            Store store = SaveGame.SingletonRepository.Stores.Get(storeName);
+            stores.Add(store);
+        }
+        Stores = stores.ToArray();
+    }
 
     public string ToJson()
     {

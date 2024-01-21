@@ -14,16 +14,6 @@ namespace AngbandOS.Core.StoreOwners;
 internal abstract class StoreOwner : IGetKey<string>, IToJson
 {
     protected SaveGame SaveGame { get; }
-    protected StoreOwner(SaveGame saveGame)
-    {
-        SaveGame = saveGame;
-    }
-
-    public virtual void Loaded()
-    {
-        OwnerRace = SaveGame.SingletonRepository.Races.Get(OwnerRaceName);
-    }
-
     public abstract int MaxCost { get; }
     public abstract int MinInflate { get; }
 
@@ -42,6 +32,23 @@ internal abstract class StoreOwner : IGetKey<string>, IToJson
     protected abstract string? OwnerRaceName { get; }
 
     public string GetKey => Key;
+
+    protected StoreOwner(SaveGame saveGame)
+    {
+        SaveGame = saveGame;
+    }
+
+    public virtual void Loaded()
+    {
+        if (OwnerRaceName == null)
+        {
+            OwnerRace = null;
+        }
+        else
+        {
+            OwnerRace = SaveGame.SingletonRepository.Races.Get(OwnerRaceName);
+        }
+    }
 
     public string ToJson()
     {

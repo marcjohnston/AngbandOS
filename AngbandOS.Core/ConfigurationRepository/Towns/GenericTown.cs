@@ -18,8 +18,6 @@ internal class GenericTown : Town
     private readonly char _char;
     private readonly string[] _storeNames;
 
-    private Store[] _stores;
-
     public GenericTown(SaveGame saveGame, TownDefinition townDefinition) : base(saveGame)
     {
         _key = townDefinition.Key;
@@ -30,19 +28,8 @@ internal class GenericTown : Town
     }
 
     public override string Key => _key;
-    public override Store[] Stores => _stores;
     public override int HousePrice => _housePrice;
     public override string Name => _name;
     public override char Char => _char;
-
-    public override void Loaded()
-    {
-        List<Store> stores = new List<Store>();
-        foreach (string storeName in _storeNames)
-        {
-            Store store = SaveGame.SingletonRepository.Stores.Get(storeName);
-            stores.Add(store);
-        }
-        _stores = stores.ToArray();
-    }
+    protected override string[] StoreNames => _storeNames;
 }

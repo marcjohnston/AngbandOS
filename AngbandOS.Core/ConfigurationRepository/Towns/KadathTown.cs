@@ -11,21 +11,20 @@ namespace AngbandOS.Core.Towns;
 internal class KadathTown : Town
 {
     private KadathTown(SaveGame saveGame) : base(saveGame) { }
-    public override Store[] Stores => new Store[]
-        {
-            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore))
-        };
+    protected override string[] StoreNames => new string[] {
+        nameof(EmptyLotStore),
+        nameof(EmptyLotStore),
+        nameof(EmptyLotStore),
+        nameof(EmptyLotStore),
+        nameof(EmptyLotStore),
+        nameof(EmptyLotStore),
+        nameof(EmptyLotStore),
+        nameof(EmptyLotStore),
+        nameof(EmptyLotStore),
+        nameof(EmptyLotStore),
+        nameof(EmptyLotStore),
+        nameof(EmptyLotStore)
+    };
 
     public override int HousePrice => 0;
     public override string Name => "Kadath, home of the Gods";

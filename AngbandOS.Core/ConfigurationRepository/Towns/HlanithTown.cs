@@ -11,21 +11,20 @@ namespace AngbandOS.Core.Towns;
 internal class HlanithTown : Town
 {
     private HlanithTown(SaveGame saveGame) : base(saveGame) { }
-    public override Store[] Stores => new Store[]
-        {
-            SaveGame.SingletonRepository.Stores.Get(nameof(GeneralStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(ArmouryStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(WeaponStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(AlchemistStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(MagicStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(BlackStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(HomeStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(LibraryStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(InnStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(HallStore))
-        };
+    protected override string[] StoreNames => new string[] {
+        nameof(GeneralStore),
+        nameof(ArmouryStore),
+        nameof(EmptyLotStore),
+        nameof(WeaponStore),
+        nameof(EmptyLotStore),
+        nameof(AlchemistStore),
+        nameof(MagicStore),
+        nameof(BlackStore),
+        nameof(HomeStore),
+        nameof(LibraryStore),
+        nameof(InnStore),
+        nameof(HallStore)
+    };
 
     public override int HousePrice => 45000;
     public override string Name => "the market town of Hlanith";

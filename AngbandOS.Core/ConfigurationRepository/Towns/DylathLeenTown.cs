@@ -11,21 +11,20 @@ namespace AngbandOS.Core.Towns;
 internal class DylathLeenTown : Town
 {
     private DylathLeenTown(SaveGame saveGame) : base(saveGame) { }
-    public override Store[] Stores => new Store[]
-        {
-            SaveGame.SingletonRepository.Stores.Get(nameof(GeneralStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(ArmouryStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(WeaponStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(BlackStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(BlackStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(BlackStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(HomeStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(LibraryStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(EmptyLotStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(InnStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(HallStore)),
-            SaveGame.SingletonRepository.Stores.Get(nameof(PawnStore))
-        };
+    protected override string[] StoreNames => new string[] {
+        nameof(GeneralStore),
+        nameof(ArmouryStore),
+        nameof(WeaponStore),
+        nameof(BlackStore),
+        nameof(BlackStore),
+        nameof(BlackStore),
+        nameof(HomeStore),
+        nameof(LibraryStore),
+        nameof(EmptyLotStore),
+        nameof(InnStore),
+        nameof(HallStore),
+        nameof(PawnStore)
+    };
 
     public override int HousePrice => 25000;
     public override string Name => "the unwholesome city of Dylath-Leen";
