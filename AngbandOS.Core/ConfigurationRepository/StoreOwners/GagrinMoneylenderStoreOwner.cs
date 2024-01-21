@@ -12,5 +12,5 @@ internal class GagrinMoneylenderStoreOwner : StoreOwner
     public override string OwnerName => "Gagrin Moneylender";
     public override int MaxCost =>  4000;
     public override int MinInflate =>  100;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(YeekRace));
+    protected override string? OwnerRaceName => nameof(YeekRace);
 }

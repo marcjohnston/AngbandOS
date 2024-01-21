@@ -12,5 +12,5 @@ internal class ProogdishTheYouthfullStoreOwner : StoreOwner
     public override string OwnerName => "Proogdish the Youthfull";
     public override int MaxCost =>  10000;
     public override int MinInflate =>  109;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HalfOgreRace));
+    protected override string? OwnerRaceName => nameof(HalfOgreRace);
 }

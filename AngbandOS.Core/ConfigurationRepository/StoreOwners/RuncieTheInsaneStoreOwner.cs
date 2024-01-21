@@ -12,5 +12,5 @@ internal class RuncieTheInsaneStoreOwner : StoreOwner
     public override string OwnerName => "Runcie the Insane";
     public override int MaxCost =>  10000;
     public override int MinInflate =>  110;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HumanRace));
+    protected override string? OwnerRaceName => nameof(HumanRace);
 }

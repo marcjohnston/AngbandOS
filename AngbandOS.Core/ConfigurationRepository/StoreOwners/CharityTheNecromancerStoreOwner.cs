@@ -12,5 +12,5 @@ internal class CharityTheNecromancerStoreOwner : StoreOwner
     public override string OwnerName => "Charity the Necromancer";
     public override int MaxCost =>  20000;
     public override int MinInflate =>  150;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(DarkElfRace));
+    protected override string? OwnerRaceName => nameof(DarkElfRace);
 }

@@ -12,5 +12,5 @@ internal class BodrilTheSeerStoreOwner : StoreOwner
     public override string OwnerName => "Bodril the Seer";
     public override int MaxCost =>  20000;
     public override int MinInflate =>  105;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HighElfRace));
+    protected override string? OwnerRaceName => nameof(HighElfRace);
 }

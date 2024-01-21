@@ -12,5 +12,5 @@ internal class OsseinTheLiterateStoreOwner : StoreOwner
     public override string OwnerName => "Ossein the Literate";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  108;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(SkeletonRace));
+    protected override string? OwnerRaceName => nameof(SkeletonRace);
 }

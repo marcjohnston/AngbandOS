@@ -12,5 +12,5 @@ internal class HoshakTheDarkStoreOwner : StoreOwner
     public override string OwnerName => "Hoshak the Dark";
     public override int MaxCost =>  25000;
     public override int MinInflate =>  107;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(ImpRace));
+    protected override string? OwnerRaceName => nameof(ImpRace);
 }

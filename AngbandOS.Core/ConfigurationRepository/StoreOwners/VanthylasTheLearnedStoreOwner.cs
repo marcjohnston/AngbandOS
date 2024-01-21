@@ -12,5 +12,5 @@ internal class VanthylasTheLearnedStoreOwner : StoreOwner
     public override string OwnerName => "Vanthylas the Learned";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  105;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(MindFlayerRace));
+    protected override string? OwnerRaceName => nameof(MindFlayerRace);
 }

@@ -12,5 +12,5 @@ internal class VegnarOneEyeStoreOwner : StoreOwner
     public override string OwnerName => "Vegnar One-eye";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  112;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(CyclopsRace));
+    protected override string? OwnerRaceName => nameof(CyclopsRace);
 }

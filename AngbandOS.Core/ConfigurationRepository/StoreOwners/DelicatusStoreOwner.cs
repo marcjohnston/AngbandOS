@@ -12,5 +12,5 @@ internal class DelicatusStoreOwner : StoreOwner
     public override string OwnerName => "Delicatus";
     public override int MaxCost =>  10000;
     public override int MinInflate =>  115;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(SpriteRace));
+    protected override string? OwnerRaceName => nameof(SpriteRace);
 }

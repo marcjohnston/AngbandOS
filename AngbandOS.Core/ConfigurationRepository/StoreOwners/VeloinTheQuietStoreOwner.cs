@@ -12,5 +12,5 @@ internal class VeloinTheQuietStoreOwner : StoreOwner
     public override string OwnerName => "Veloin the Quiet";
     public override int MaxCost =>  25000;
     public override int MinInflate =>  110;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(ZombieRace));
+    protected override string? OwnerRaceName => nameof(ZombieRace);
 }

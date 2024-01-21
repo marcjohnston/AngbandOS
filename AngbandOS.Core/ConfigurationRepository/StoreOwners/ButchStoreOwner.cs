@@ -12,5 +12,5 @@ internal class ButchStoreOwner : StoreOwner
     public override string OwnerName => "Butch";
     public override int MaxCost =>  250;
     public override int MinInflate =>  108;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HalfOrcRace));
+    protected override string? OwnerRaceName => nameof(HalfOrcRace);
 }

@@ -12,5 +12,5 @@ internal class RorbagBookEaterStoreOwner : StoreOwner
     public override string OwnerName => "Rorbag Book-Eater";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  108;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(KoboldRace));
+    protected override string? OwnerRaceName => nameof(KoboldRace);
 }

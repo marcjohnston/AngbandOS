@@ -12,5 +12,5 @@ internal class SarlethTheSneakyStoreOwner : StoreOwner
     public override string OwnerName => "Sarleth the Sneaky";
     public override int MaxCost =>  750;
     public override int MinInflate =>  107;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(GnomeRace));
+    protected override string? OwnerRaceName => nameof(GnomeRace);
 }

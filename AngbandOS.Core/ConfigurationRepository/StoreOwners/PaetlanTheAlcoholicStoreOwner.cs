@@ -12,5 +12,5 @@ internal class PaetlanTheAlcoholicStoreOwner : StoreOwner
     public override string OwnerName => "Paetlan the Alcoholic";
     public override int MaxCost =>  20000;
     public override int MinInflate =>  105;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HumanRace));
+    protected override string? OwnerRaceName => nameof(HumanRace);
 }

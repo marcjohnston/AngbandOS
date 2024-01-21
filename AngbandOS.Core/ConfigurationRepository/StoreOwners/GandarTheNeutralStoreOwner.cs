@@ -12,5 +12,5 @@ internal class GandarTheNeutralStoreOwner : StoreOwner
     public override string OwnerName => "Gandar the Neutral";
     public override int MaxCost =>  25000;
     public override int MinInflate =>  110;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(VampireRace));
+    protected override string? OwnerRaceName => nameof(VampireRace);
 }

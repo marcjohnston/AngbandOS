@@ -12,5 +12,5 @@ internal class DriosTheFaintStoreOwner : StoreOwner
     public override string OwnerName => "Drios the Faint";
     public override int MaxCost =>  25000;
     public override int MinInflate =>  112;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(SpectreRace));
+    protected override string? OwnerRaceName => nameof(SpectreRace);
 }

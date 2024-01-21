@@ -12,5 +12,5 @@ internal class DridashTheAlchemistStoreOwner : StoreOwner
     public override string OwnerName => "Dridash the Alchemist";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  111;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HalfOrcRace));
+    protected override string? OwnerRaceName => nameof(HalfOrcRace);
 }

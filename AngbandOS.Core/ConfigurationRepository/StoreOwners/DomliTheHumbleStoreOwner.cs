@@ -12,5 +12,5 @@ internal class DomliTheHumbleStoreOwner : StoreOwner
     public override string OwnerName => "Domli the Humble";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  116;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(DwarfRace));
+    protected override string? OwnerRaceName => nameof(DwarfRace);
 }

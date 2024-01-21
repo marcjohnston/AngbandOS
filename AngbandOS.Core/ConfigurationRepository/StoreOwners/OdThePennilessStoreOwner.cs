@@ -12,5 +12,5 @@ internal class OdThePennilessStoreOwner : StoreOwner
     public override string OwnerName => "Od the Penniless";
     public override int MaxCost =>  2000;
     public override int MinInflate =>  100;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(ElfRace));
+    protected override string? OwnerRaceName => nameof(ElfRace);
 }

@@ -12,5 +12,5 @@ internal class SasinTheBoldStoreOwner : StoreOwner
     public override string OwnerName => "Sasin the Bold";
     public override int MaxCost =>  1000;
     public override int MinInflate =>  107;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HalfGiantRace));
+    protected override string? OwnerRaceName => nameof(HalfGiantRace);
 }

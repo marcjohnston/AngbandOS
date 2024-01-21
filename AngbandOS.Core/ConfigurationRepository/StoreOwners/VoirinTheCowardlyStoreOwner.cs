@@ -12,5 +12,5 @@ internal class VoirinTheCowardlyStoreOwner : StoreOwner
     public override string OwnerName => "Voirin the Cowardly";
     public override int MaxCost =>  500;
     public override int MinInflate =>  108;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HumanRace));
+    protected override string? OwnerRaceName => nameof(HumanRace);
 }

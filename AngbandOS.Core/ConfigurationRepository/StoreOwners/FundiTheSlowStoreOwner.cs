@@ -12,5 +12,5 @@ internal class FundiTheSlowStoreOwner : StoreOwner
     public override string OwnerName => "Fundi the Slow";
     public override int MaxCost =>  500;
     public override int MinInflate =>  108;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(ZombieRace));
+    protected override string? OwnerRaceName => nameof(ZombieRace);
 }

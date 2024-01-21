@@ -12,5 +12,5 @@ internal class DrakoFairdealStoreOwner : StoreOwner
     public override string OwnerName => "Drako Fairdeal";
     public override int MaxCost =>  4000;
     public override int MinInflate =>  100;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(DraconianRace));
+    protected override string? OwnerRaceName => nameof(DraconianRace);
 }

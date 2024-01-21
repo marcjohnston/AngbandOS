@@ -12,5 +12,5 @@ internal class NydudusTheSlowStoreOwner : StoreOwner
     public override string OwnerName => "Nydudus the Slow";
     public override int MaxCost =>  20000;
     public override int MinInflate =>  105;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(ZombieRace));
+    protected override string? OwnerRaceName => nameof(ZombieRace);
 }

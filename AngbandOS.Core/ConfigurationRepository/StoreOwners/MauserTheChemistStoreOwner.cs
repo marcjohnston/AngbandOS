@@ -14,5 +14,5 @@ internal class MauserTheChemistStoreOwner : StoreOwner
     public override string OwnerName => "Mauser the Chemist";
     public override int MaxCost =>  10000;
     public override int MinInflate =>  111;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HalfElfRace));
+    protected override string? OwnerRaceName => nameof(HalfElfRace);
 }

@@ -18,8 +18,6 @@ internal class GenericStoreOwner : StoreOwner
     private readonly string _ownerName;
     private readonly string? _ownerRaceName;
 
-    private Race? _ownerRace;
-
     public GenericStoreOwner(SaveGame saveGame, StoreOwnerDefinition storeOwner) : base(saveGame)
     {
         _key = storeOwner.Key;
@@ -27,14 +25,6 @@ internal class GenericStoreOwner : StoreOwner
         _minInflate = storeOwner.MinInflate;
         _ownerName = storeOwner.OwnerName;
         _ownerRaceName = storeOwner.OwnerRaceName;
-    }
-
-    public override void Loaded()
-    {
-        if (_ownerRaceName != null)
-        {
-            _ownerRace = SaveGame.SingletonRepository.Races.Get(_ownerRaceName);
-        }
     }
 
     public override string Key => _key;
@@ -45,5 +35,5 @@ internal class GenericStoreOwner : StoreOwner
 
     public override string OwnerName => _ownerName;
 
-    public override Race? OwnerRace => _ownerRace;
+    protected override string? OwnerRaceName => _ownerRaceName;
 }

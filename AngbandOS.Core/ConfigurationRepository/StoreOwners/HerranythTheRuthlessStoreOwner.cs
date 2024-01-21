@@ -12,5 +12,5 @@ internal class HerranythTheRuthlessStoreOwner : StoreOwner
     public override string OwnerName => "Herranyth the Ruthless";
     public override int MaxCost =>  2000;
     public override int MinInflate =>  100;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HumanRace));
+    protected override string? OwnerRaceName => nameof(HumanRace);
 }

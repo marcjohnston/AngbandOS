@@ -19,7 +19,10 @@ internal abstract class StoreOwner : IGetKey<string>, IToJson
         SaveGame = saveGame;
     }
 
-    public virtual void Loaded() { }
+    public virtual void Loaded()
+    {
+        OwnerRace = SaveGame.SingletonRepository.Races.Get(OwnerRaceName);
+    }
 
     public abstract int MaxCost { get; }
     public abstract int MinInflate { get; }
@@ -34,7 +37,9 @@ internal abstract class StoreOwner : IGetKey<string>, IToJson
     /// <summary>
     /// Returns the race of the store owner.  Null, if there is no store owner.
     /// </summary>
-    public abstract Race? OwnerRace { get; }
+    public Race? OwnerRace { get; private set; }
+
+    protected abstract string? OwnerRaceName { get; }
 
     public string GetKey => Key;
 

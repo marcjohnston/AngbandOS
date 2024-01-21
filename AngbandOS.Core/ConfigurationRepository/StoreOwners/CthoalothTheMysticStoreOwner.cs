@@ -12,5 +12,5 @@ internal class CthoalothTheMysticStoreOwner : StoreOwner
     public override string OwnerName => "Cthoaloth the Mystic";
     public override int MaxCost =>  20000;
     public override int MinInflate =>  113;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(MindFlayerRace));
+    protected override string? OwnerRaceName => nameof(MindFlayerRace);
 }

@@ -12,5 +12,5 @@ internal class RiathoTheJugglerStoreOwner : StoreOwner
     public override string OwnerName => "Riatho the Juggler";
     public override int MaxCost =>  20000;
     public override int MinInflate =>  150;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HobbitRace));
+    protected override string? OwnerRaceName => nameof(HobbitRace);
 }

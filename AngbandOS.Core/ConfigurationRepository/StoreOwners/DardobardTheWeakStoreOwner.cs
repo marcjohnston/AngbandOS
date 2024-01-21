@@ -12,5 +12,5 @@ internal class DardobardTheWeakStoreOwner : StoreOwner
     public override string OwnerName => "Dardobard the Weak";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  109;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(SpectreRace));
+    protected override string? OwnerRaceName => nameof(SpectreRace);
 }

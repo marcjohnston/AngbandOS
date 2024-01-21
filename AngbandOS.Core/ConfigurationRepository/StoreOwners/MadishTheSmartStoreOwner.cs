@@ -12,5 +12,5 @@ internal class MadishTheSmartStoreOwner : StoreOwner
     public override string OwnerName => "Madish the Smart";
     public override int MaxCost =>  20000;
     public override int MinInflate =>  113;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(MiriNigriRace));
+    protected override string? OwnerRaceName => nameof(MiriNigriRace);
 }

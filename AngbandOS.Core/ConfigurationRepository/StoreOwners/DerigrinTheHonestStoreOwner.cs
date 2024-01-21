@@ -12,5 +12,5 @@ internal class DerigrinTheHonestStoreOwner : StoreOwner
     public override string OwnerName => "Derigrin the Honest";
     public override int MaxCost =>  10000;
     public override int MinInflate =>  100;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HobbitRace));
+    protected override string? OwnerRaceName => nameof(HobbitRace);
 }

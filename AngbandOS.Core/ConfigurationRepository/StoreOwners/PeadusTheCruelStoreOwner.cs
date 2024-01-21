@@ -12,5 +12,5 @@ internal class PeadusTheCruelStoreOwner : StoreOwner
     public override string OwnerName => "Peadus the Cruel";
     public override int MaxCost =>  10000;
     public override int MinInflate =>  115;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HumanRace));
+    protected override string? OwnerRaceName => nameof(HumanRace);
 }

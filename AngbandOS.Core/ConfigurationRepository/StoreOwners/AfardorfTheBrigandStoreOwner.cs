@@ -12,5 +12,5 @@ internal class AfardorfTheBrigandStoreOwner : StoreOwner
     public override string OwnerName => "Afardorf the Brigand";
     public override int MaxCost =>  20000;
     public override int MinInflate =>  150;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(TchoTchoRace));
+    protected override string? OwnerRaceName => nameof(TchoTchoRace);
 }

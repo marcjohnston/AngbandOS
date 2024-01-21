@@ -12,5 +12,5 @@ internal class HanekaTheSmallStoreOwner : StoreOwner
     public override string OwnerName => "Haneka the Small";
     public override int MaxCost =>  250;
     public override int MinInflate =>  108;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(GnomeRace));
+    protected override string? OwnerRaceName => nameof(GnomeRace);
 }

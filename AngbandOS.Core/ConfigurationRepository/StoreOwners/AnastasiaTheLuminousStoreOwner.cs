@@ -12,5 +12,5 @@ internal class AnastasiaTheLuminousStoreOwner : StoreOwner
     public override string OwnerName => "Anastasia the Luminous";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  150;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(SpectreRace));
+    protected override string? OwnerRaceName => nameof(SpectreRace);
 }

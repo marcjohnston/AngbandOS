@@ -12,5 +12,5 @@ internal class EtheraaTheFuriousStoreOwner : StoreOwner
     public override string OwnerName => "Etheraa the Furious";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  108;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(TchoTchoRace));
+    protected override string? OwnerRaceName => nameof(TchoTchoRace);
 }

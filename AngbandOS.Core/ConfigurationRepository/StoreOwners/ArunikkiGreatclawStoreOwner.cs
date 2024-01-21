@@ -12,5 +12,5 @@ internal class ArunikkiGreatclawStoreOwner : StoreOwner
     public override string OwnerName => "Arunikki Greatclaw";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  150;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(DraconianRace));
+    protected override string? OwnerRaceName => nameof(DraconianRace);
 }

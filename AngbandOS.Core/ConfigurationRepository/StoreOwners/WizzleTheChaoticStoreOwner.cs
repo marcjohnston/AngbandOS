@@ -14,5 +14,5 @@ internal class WizzleTheChaoticStoreOwner : StoreOwner
     public override string OwnerName => "Wizzle the Chaotic";
     public override int MaxCost =>  10000;
     public override int MinInflate =>  110;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HobbitRace));
+    protected override string? OwnerRaceName => nameof(HobbitRace);
 }

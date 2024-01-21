@@ -12,5 +12,5 @@ internal class FulirTheDarkStoreOwner : StoreOwner
     public override string OwnerName => "Fulir the Dark";
     public override int MaxCost =>  10000;
     public override int MinInflate =>  110;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(NibelungRace));
+    protected override string? OwnerRaceName => nameof(NibelungRace);
 }

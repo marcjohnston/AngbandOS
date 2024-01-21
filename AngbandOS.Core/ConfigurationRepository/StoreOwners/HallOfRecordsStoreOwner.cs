@@ -12,5 +12,6 @@ internal class HallOfRecordsStoreOwner : StoreOwner
     public override string OwnerName => "Hall of Records";
     public override int MaxCost =>  0;
     public override int MinInflate =>  100;
-    public override Race? OwnerRace =>  null;
+    protected override string? OwnerRaceName => null;
+
 }

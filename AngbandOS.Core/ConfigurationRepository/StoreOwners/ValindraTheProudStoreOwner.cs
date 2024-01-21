@@ -12,5 +12,5 @@ internal class ValindraTheProudStoreOwner : StoreOwner
     public override string OwnerName => "Valindra the Proud";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  116;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HighElfRace));
+    protected override string? OwnerRaceName => nameof(HighElfRace);
 }

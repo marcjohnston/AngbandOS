@@ -12,5 +12,5 @@ internal class GrarakTheHospitableStoreOwner : StoreOwner
     public override string OwnerName => "Grarak the Hospitable";
     public override int MaxCost =>  25000;
     public override int MinInflate =>  110;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HalfGiantRace));
+    protected override string? OwnerRaceName => nameof(HalfGiantRace);
 }

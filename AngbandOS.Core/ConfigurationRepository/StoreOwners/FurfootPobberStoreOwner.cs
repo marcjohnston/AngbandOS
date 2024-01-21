@@ -12,5 +12,5 @@ internal class FurfootPobberStoreOwner : StoreOwner
     public override string OwnerName => "Furfoot Pobber";
     public override int MaxCost =>  20000;
     public override int MinInflate =>  105;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HobbitRace));
+    protected override string? OwnerRaceName => nameof(HobbitRace);
 }

@@ -12,5 +12,5 @@ internal class GrugTheComelyStoreOwner : StoreOwner
     public override string OwnerName => "Grug the Comely";
     public override int MaxCost =>  1000;
     public override int MinInflate =>  107;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HalfTitanRace));
+    protected override string? OwnerRaceName => nameof(HalfTitanRace);
 }

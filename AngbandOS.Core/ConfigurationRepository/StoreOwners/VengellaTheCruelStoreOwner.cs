@@ -12,5 +12,5 @@ internal class VengellaTheCruelStoreOwner : StoreOwner
     public override string OwnerName => "Vengella the Cruel";
     public override int MaxCost =>  10000;
     public override int MinInflate =>  115;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HalfTrollRace));
+    protected override string? OwnerRaceName => nameof(HalfTrollRace);
 }

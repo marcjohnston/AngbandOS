@@ -12,5 +12,5 @@ internal class YourHomeStoreOwner : StoreOwner
     public override string OwnerName => "Your home";
     public override int MaxCost =>  0;
     public override int MinInflate =>  100;
-    public override Race? OwnerRace =>  null;
+    protected override string? OwnerRaceName => null;
 }

@@ -12,5 +12,5 @@ internal class EgbertTheOldStoreOwner : StoreOwner
     public override string OwnerName => "Egbert the Old";
     public override int MaxCost =>  10000;
     public override int MinInflate =>  110;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(DwarfRace));
+    protected override string? OwnerRaceName => nameof(DwarfRace);
 }

@@ -12,5 +12,5 @@ internal class FungusGiantSlayerStoreOwner : StoreOwner
     public override string OwnerName => "Fungus Giant-Slayer";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  112;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(DwarfRace));
+    protected override string? OwnerRaceName => nameof(DwarfRace);
 }

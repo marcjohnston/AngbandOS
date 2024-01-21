@@ -12,5 +12,5 @@ internal class KonDarTheUglyStoreOwner : StoreOwner
     public override string OwnerName => "Kon-Dar the Ugly";
     public override int MaxCost =>  10000;
     public override int MinInflate =>  115;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(HalfOrcRace));
+    protected override string? OwnerRaceName => nameof(HalfOrcRace);
 }

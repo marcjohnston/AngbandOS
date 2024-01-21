@@ -12,5 +12,5 @@ internal class DecadoTheHandsomeStoreOwner : StoreOwner
     public override string OwnerName => "Decado the Handsome";
     public override int MaxCost =>  25000;
     public override int MinInflate =>  112;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(GreatOneRace));
+    protected override string? OwnerRaceName => nameof(GreatOneRace);
 }

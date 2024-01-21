@@ -12,5 +12,5 @@ internal class BalennWarDancerStoreOwner : StoreOwner
     public override string OwnerName => "Balenn War-Dancer";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  112;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(TchoTchoRace));
+    protected override string? OwnerRaceName => nameof(TchoTchoRace);
 }

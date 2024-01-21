@@ -12,5 +12,5 @@ internal class BiliousTheToadStoreOwner : StoreOwner
     public override string OwnerName => "Bilious the Toad";
     public override int MaxCost =>  25000;
     public override int MinInflate =>  115;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(MiriNigriRace));
+    protected override string? OwnerRaceName => nameof(MiriNigriRace);
 }

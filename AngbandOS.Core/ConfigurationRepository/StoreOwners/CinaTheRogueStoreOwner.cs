@@ -12,5 +12,5 @@ internal class CinaTheRogueStoreOwner : StoreOwner
     public override string OwnerName => "Cina the Rogue";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  150;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(GnomeRace));
+    protected override string? OwnerRaceName => nameof(GnomeRace);
 }

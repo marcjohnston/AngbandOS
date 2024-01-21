@@ -12,5 +12,5 @@ internal class FthnarglPsathigguaStoreOwner : StoreOwner
     public override string OwnerName => "Fthnargl Psathiggua";
     public override int MaxCost =>  1000;
     public override int MinInflate =>  107;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(MindFlayerRace));
+    protected override string? OwnerRaceName => nameof(MindFlayerRace);
 }

@@ -12,5 +12,5 @@ internal class YojoIIStoreOwner : StoreOwner
     public override string OwnerName => "Yojo II";
     public override int MaxCost =>  25000;
     public override int MinInflate =>  112;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(DwarfRace));
+    protected override string? OwnerRaceName => nameof(DwarfRace);
 }

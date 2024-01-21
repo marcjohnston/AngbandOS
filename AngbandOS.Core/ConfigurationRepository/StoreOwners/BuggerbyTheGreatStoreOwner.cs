@@ -12,5 +12,5 @@ internal class BuggerbyTheGreatStoreOwner : StoreOwner
     public override string OwnerName => "Buggerby the Great";
     public override int MaxCost =>  20000;
     public override int MinInflate =>  113;
-    public override Race? OwnerRace =>  SaveGame.SingletonRepository.Races.Get(nameof(GnomeRace));
+    protected override string? OwnerRaceName => nameof(GnomeRace);
 }
