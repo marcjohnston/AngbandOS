@@ -26,7 +26,7 @@ internal abstract class Dungeon : IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Loaded() { }
+    public virtual void Bind() { }
 
     /// <summary>
     /// Returns the deepest level the player has achieved for Word of Recall.

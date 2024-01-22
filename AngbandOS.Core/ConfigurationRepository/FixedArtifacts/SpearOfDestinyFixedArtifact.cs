@@ -13,7 +13,7 @@ internal class SpearOfDestinyFixedArtifact : FixedArtifact, IFixedArtifactActiva
     private ItemFactory _baseItemCategory;
     private SpearOfDestinyFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Loaded()
+    public override void Bind()
     {
         _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(PolearmSpear));
     }

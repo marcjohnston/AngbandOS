@@ -13,7 +13,7 @@ internal class ShadowCloakOfTheShoggothFixedArtifact : FixedArtifact
     private ItemFactory _baseItemCategory;
     private ShadowCloakOfTheShoggothFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Loaded()
+    public override void Bind()
     {
         _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(ShadowCloakArmorItemFactory));
     }

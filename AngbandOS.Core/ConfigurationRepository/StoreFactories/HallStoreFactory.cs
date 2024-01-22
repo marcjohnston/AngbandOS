@@ -12,9 +12,9 @@ internal class HallStoreFactory : StoreFactory
 {
     private HallStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    public override StoreOwner[] StoreOwners => new StoreOwner[]
+    protected override string[] StoreOwnerNames => new string[]
     {
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(HallOfRecordsStoreOwner))
+        nameof(HallOfRecordsStoreOwner)
     };
 
     public override string FeatureType => "HallOfRecords";
@@ -33,9 +33,9 @@ internal class HallStoreFactory : StoreFactory
     public override string? OwnerName => "";
     public override string? Title => "Hall Of Records";
     public override StoreInventoryDisplayTypeEnum ShowInventoryDisplayType => StoreInventoryDisplayTypeEnum.DoNotShowInventory;
-    public override StoreCommand AdvertisedStoreCommand1 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(ViewRacialHeroesStoreCommand));
-    public override StoreCommand AdvertisedStoreCommand2 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(ViewClassHeroesStoreCommand));
-    public override StoreCommand AdvertisedStoreCommand3 => null; // The examine command does not work here because there is no inventory.
-    public override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(BuyHouseStoreCommand));
+    protected override string? AdvertisedStoreCommand1Name => nameof(ViewRacialHeroesStoreCommand);
+    protected override string? AdvertisedStoreCommand2Name => nameof(ViewClassHeroesStoreCommand);
+    protected override string? AdvertisedStoreCommand3Name => null; // The examine command does not work here because there is no inventory.
+    protected override string? AdvertisedStoreCommand4Name => nameof(BuyHouseStoreCommand);
     public override bool PerformsMaintenanceWhenResting => false;
 }

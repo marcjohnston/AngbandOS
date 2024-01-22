@@ -13,7 +13,7 @@ internal class WarHammerMjolnirFixedArtifact : FixedArtifact
     private ItemFactory _baseItemCategory;
     private WarHammerMjolnirFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Loaded()
+    public override void Bind()
     {
         _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(HaftedWarHammer));
     }

@@ -13,7 +13,7 @@ internal class SetOfGauntletsWhiteSparkFixedArtifact : FixedArtifact, IFixedArti
     private ItemFactory _baseItemCategory;
     private SetOfGauntletsWhiteSparkFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Loaded()
+    public override void Bind()
     {
         _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(GauntletGlovesArmorItemFactory));
     }

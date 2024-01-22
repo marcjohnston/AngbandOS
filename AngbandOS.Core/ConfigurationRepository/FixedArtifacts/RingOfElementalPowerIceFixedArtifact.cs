@@ -13,7 +13,7 @@ internal class RingOfElementalPowerIceFixedArtifact : FixedArtifact, IFixedArtif
     private ItemFactory _baseItemCategory;
     private RingOfElementalPowerIceFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Loaded()
+    public override void Bind()
     {
         _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(NenyaRingItemFactory));
     }

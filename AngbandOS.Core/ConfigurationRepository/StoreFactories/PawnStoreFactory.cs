@@ -12,28 +12,28 @@ internal class PawnStoreFactory : StoreFactory
 {
     private PawnStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    public override StoreOwner[] StoreOwners => new StoreOwner[]
+    protected override string[] StoreOwnerNames => new string[]
     {
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(MagdTheRuthlessStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(DrakoFairdealStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(FeatherwingStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(XochinagguaStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(OdThePennilessStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(XaxStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(JakeSmallStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(HelgaTheLostStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(GloomThePhlegmaticStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(QuickArmVollaireStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(AsenathStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(LordFilbertStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(HerranythTheRuthlessStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(GagrinMoneylenderStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(ThramborTheGrubbyStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(DerigrinTheHonestStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(MunkTheBartererStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(GadrialdurTheFairStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(NinarTheStoopedStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(AdirathTheUnmagicalStoreOwner))
+        nameof(MagdTheRuthlessStoreOwner),
+        nameof(DrakoFairdealStoreOwner),
+        nameof(FeatherwingStoreOwner),
+        nameof(XochinagguaStoreOwner),
+        nameof(OdThePennilessStoreOwner),
+        nameof(XaxStoreOwner),
+        nameof(JakeSmallStoreOwner),
+        nameof(HelgaTheLostStoreOwner),
+        nameof(GloomThePhlegmaticStoreOwner),
+        nameof(QuickArmVollaireStoreOwner),
+        nameof(AsenathStoreOwner),
+        nameof(LordFilbertStoreOwner),
+        nameof(HerranythTheRuthlessStoreOwner),
+        nameof(GagrinMoneylenderStoreOwner),
+        nameof(ThramborTheGrubbyStoreOwner),
+        nameof(DerigrinTheHonestStoreOwner),
+        nameof(MunkTheBartererStoreOwner),
+        nameof(GadrialdurTheFairStoreOwner),
+        nameof(NinarTheStoopedStoreOwner),
+        nameof(AdirathTheUnmagicalStoreOwner)
     };
 
     public override string FeatureType => "Pawnbrokers";
@@ -77,7 +77,7 @@ internal class PawnStoreFactory : StoreFactory
             return price / 3;
         }
     }
-    public override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(IdentifyAllStoreCommand));
+    protected override string? AdvertisedStoreCommand4Name => nameof(IdentifyAllStoreCommand);
     public override string GetItemDescription(Item oPtr) => oPtr.Description(true, 3);
 
     public override bool StoreIdentifiesItems => false;

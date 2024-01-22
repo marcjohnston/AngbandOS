@@ -13,7 +13,7 @@ internal class DaggerOfThothFixedArtifact : FixedArtifact, IFixedArtifactActivat
     private ItemFactory _baseItemCategory;
     private DaggerOfThothFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Loaded()
+    public override void Bind()
     {
         _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordDagger));
     }

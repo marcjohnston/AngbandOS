@@ -15,8 +15,8 @@ internal interface IGetKey<TKey>
     TKey GetKey { get; }
 
     /// <summary>
-    /// Process the loaded phase for addressable repository items.  The loaded phase happens once all of the repository items are created.  This allows items to link to
+    /// Process the binding phase for addressable repository items.  The loaded phase happens once all of the repository items are created.  This allows items to link to
     /// other items without needing to worry about the load order and whether the target item exists.  Most repository items will need to implement this interface.
     /// </summary>
-    void Loaded();
+    void Bind();
 }

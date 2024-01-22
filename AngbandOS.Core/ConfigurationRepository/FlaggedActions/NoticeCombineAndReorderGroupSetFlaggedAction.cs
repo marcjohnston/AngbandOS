@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FlaggedActions;
 internal class NoticeCombineAndReorderGroupSetFlaggedAction : GroupSetFlaggedAction
 {
     private NoticeCombineAndReorderGroupSetFlaggedAction(SaveGame saveGame) : base(saveGame) { }
-    public override void Loaded()
+    public override void Bind()
     {
         RedrawActions = new FlaggedAction[] {
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineFlaggedAction)),

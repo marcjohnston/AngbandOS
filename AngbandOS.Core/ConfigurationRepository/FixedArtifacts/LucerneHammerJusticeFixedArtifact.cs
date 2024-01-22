@@ -13,7 +13,7 @@ internal class TheLucerneHammerJusticeFixedArtifact : FixedArtifact, IFixedArtif
     private ItemFactory _baseItemCategory;
     private TheLucerneHammerJusticeFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Loaded()
+    public override void Bind()
     {
         _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(HaftedLucerneHammer));
     }

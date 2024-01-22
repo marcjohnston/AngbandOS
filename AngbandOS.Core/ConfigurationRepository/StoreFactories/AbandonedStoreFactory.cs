@@ -12,9 +12,9 @@ internal class AbandonedStoreFactory : StoreFactory
 {
     private AbandonedStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    public override StoreOwner[] StoreOwners => new StoreOwner[]
+    protected override string[] StoreOwnerNames => new string[]
     {
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(EmptyLotStoreOwner))
+        nameof(EmptyLotStoreOwner)
     };
 
     public override string FeatureType => "";

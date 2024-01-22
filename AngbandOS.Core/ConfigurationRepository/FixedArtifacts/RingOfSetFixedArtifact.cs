@@ -13,7 +13,7 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
     private ItemFactory _baseItemCategory;
     private RingOfSetFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Loaded()
+    public override void Bind()
     {
         _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(PowerRingItemFactory));
     }

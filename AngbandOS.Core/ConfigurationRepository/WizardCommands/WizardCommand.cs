@@ -19,7 +19,7 @@ internal abstract class WizardCommand : IHelpCommand, IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Loaded() { }
+    public virtual void Bind() { }
 
     public abstract char KeyChar { get; }
 

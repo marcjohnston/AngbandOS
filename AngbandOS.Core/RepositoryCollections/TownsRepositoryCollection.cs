@@ -36,7 +36,7 @@ internal class TownsRepositoryCollection : DictionaryRepositoryCollection<string
     {
         foreach (Town town in this)
         {
-            town.Loaded();
+            town.Bind();
         }
     }
 }

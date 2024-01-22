@@ -24,7 +24,7 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Loaded() { }
+    public virtual void Bind() { }
 
     public virtual MonsterSpellList Spells => new MonsterSpellList();
     public bool BreatheAcid => Spells.Contains(typeof(BreatheAcidMonsterSpell));

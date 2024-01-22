@@ -13,7 +13,7 @@ internal class SetOfGauntletsOfGhoulsFixedArtifact : FixedArtifact, IFixedArtifa
     private ItemFactory _baseItemCategory;
     private SetOfGauntletsOfGhoulsFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Loaded()
+    public override void Bind()
     {
         _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(GauntletGlovesArmorItemFactory));
     }

@@ -13,7 +13,7 @@ internal class AdamantitePlateMailSoulkeeperFixedArtifact : FixedArtifact, IFixe
     private ItemFactory _baseItemCategory;
     private AdamantitePlateMailSoulkeeperFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Loaded()
+    public override void Bind()
     {
         _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(AdamantitePlateMailHardArmorItemFactory));
     }

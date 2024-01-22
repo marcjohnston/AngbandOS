@@ -13,7 +13,7 @@ internal class AmuletOfLobonFixedArtifact : FixedArtifact, IFixedArtifactActivat
     private ItemFactory _baseItemCategory;
     private AmuletOfLobonFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Loaded()
+    public override void Bind()
     {
         _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(CarlammasAmuletJeweleryItemFactory));
     }

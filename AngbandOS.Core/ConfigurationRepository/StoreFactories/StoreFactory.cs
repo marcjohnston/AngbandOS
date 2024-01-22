@@ -17,7 +17,21 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
         SaveGame = saveGame;
     }
 
-    public virtual void Loaded() { }
+    public virtual void Bind()
+    {
+        AdvertisedStoreCommand1 = AdvertisedStoreCommand1Name == null ? null : SaveGame.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand1Name);
+        AdvertisedStoreCommand2 = AdvertisedStoreCommand2Name == null ? null : SaveGame.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand2Name);
+        AdvertisedStoreCommand3 = AdvertisedStoreCommand3Name == null ? null : SaveGame.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand3Name);
+        AdvertisedStoreCommand4 = AdvertisedStoreCommand4Name == null ? null : SaveGame.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand4Name);
+        AdvertisedStoreCommand5 = AdvertisedStoreCommand5Name == null ? null : SaveGame.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand5Name);
+
+        List<StoreOwner> storeOwnersList = new();
+        foreach (string storeOwnerName in StoreOwnerNames)
+        {
+            storeOwnersList.Add(SaveGame.SingletonRepository.StoreOwners.Get(storeOwnerName));
+        }
+        StoreOwners = storeOwnersList.ToArray();
+    }
 
     /// <summary>
     /// Returns true, if the store is an empty lot; false, if it is a store.  Empty lots render as either grave yards or fields.
@@ -50,7 +64,6 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     /// <summary>
     /// Returns true, if the doors to the store are locked; false, if the store is open.  Returns false, by default.
     /// </summary>
-    /// <param name="saveGame"></param>
     /// <returns></returns>
     public virtual bool DoorsLocked() => false;
 
@@ -96,55 +109,62 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     /// </summary>
     public virtual bool ShufflesOwnersAndPricing => true;
 
+    protected abstract string[] StoreOwnerNames { get; }
+
     /// <summary>
     /// Represents a pool of possible store owners for the store.
     /// </summary>
-    public abstract StoreOwner[] StoreOwners { get; }
+    public StoreOwner[] StoreOwners { get; private set; }
 
+    protected virtual string? AdvertisedStoreCommand1Name => nameof(PurchaseStoreCommand);
+    protected virtual string? AdvertisedStoreCommand2Name => nameof(SellStoreCommand);
+    protected virtual string? AdvertisedStoreCommand3Name => nameof(ExamineStoreCommand);
+    protected virtual string? AdvertisedStoreCommand4Name => null;
+    protected virtual string? AdvertisedStoreCommand5Name => null;
     /// <summary>
-    /// Returns the store command that should be advertised to the player @ position 42, 31.
+    /// Returns the store command that should be advertised to the player @ position 42, 31; or null, if there is no command to render.
     /// </summary>
     /// <remarks>
     /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
     /// won't affect game play.
     /// </remarks>
-    public virtual StoreCommand AdvertisedStoreCommand1 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(PurchaseStoreCommand));
+    public StoreCommand? AdvertisedStoreCommand1 { get; private set; }
 
     /// <summary>
-    /// Returns the store command that should be advertised to the player @ position 43, 31.
+    /// Returns the store command that should be advertised to the player @ position 43, 31; or null, if there is no command to render.
     /// </summary>
     /// <remarks>
     /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
     /// won't affect game play.
     /// </remarks>
-    public virtual StoreCommand AdvertisedStoreCommand2 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(SellStoreCommand));
+    public StoreCommand? AdvertisedStoreCommand2 { get; private set; }
 
     /// <summary>
-    /// Returns the store command that should be advertised to the player @ position 42, 56.
+    /// Returns the store command that should be advertised to the player @ position 42, 56; or null, if there is no command to render.
     /// </summary>
     /// <remarks>
     /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
     /// won't affect game play.
     /// </remarks>
-    public virtual StoreCommand AdvertisedStoreCommand3 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(ExamineStoreCommand));
+    public StoreCommand? AdvertisedStoreCommand3 { get; private set; }
 
     /// <summary>
-    /// Returns the store command that should be advertised to the player @ position 43, 56.
+    /// Returns the store command that should be advertised to the player @ position 43, 56; or null, if there is no command to render.
     /// </summary>
     /// <remarks>
     /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
     /// won't affect game play.
     /// </remarks>
-    public virtual StoreCommand AdvertisedStoreCommand4 => null;
+    public StoreCommand? AdvertisedStoreCommand4 { get; private set; }
 
     /// <summary>
-    /// Returns the store command that should be advertised to the player @ position 43, 0.
+    /// Returns the store command that should be advertised to the player @ position 43, 0; or null, if there is no command to render.
     /// </summary>
     /// <remarks>
     /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
     /// won't affect game play.
     /// </remarks>
-    public virtual StoreCommand AdvertisedStoreCommand5 => null;
+    public virtual StoreCommand? AdvertisedStoreCommand5 { get; private set; }
 
     /// <summary>
     /// Returns the width of the description column for rendering items in the store inventory.  The HomeStore defines a wider column for the description.

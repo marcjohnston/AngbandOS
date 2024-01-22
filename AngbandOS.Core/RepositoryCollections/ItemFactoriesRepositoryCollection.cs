@@ -18,7 +18,7 @@ internal class ItemFactoriesRepositoryCollection : DictionaryRepositoryCollectio
     {
         foreach (ItemFactory itemFactory in this)
         {
-            itemFactory.Loaded();
+            itemFactory.Bind();
         }
     }
 }

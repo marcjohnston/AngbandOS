@@ -50,7 +50,7 @@ internal abstract class Town : IGetKey<string>, IToJson
     /// </summary>
     public virtual bool CanBeEscortedHere => true;
 
-    public void Loaded()
+    public void Bind()
     {
         List<Store> stores = new List<Store>();
         foreach (string storeName in StoreFactoryNames)

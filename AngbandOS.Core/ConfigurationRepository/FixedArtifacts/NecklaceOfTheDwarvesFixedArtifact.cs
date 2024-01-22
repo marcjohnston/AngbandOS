@@ -13,7 +13,7 @@ internal class NecklaceOfTheDwarvesFixedArtifact : FixedArtifact
     private ItemFactory _baseItemCategory;
     private NecklaceOfTheDwarvesFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Loaded()
+    public override void Bind()
     {
         _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(NecklaceAmuletJeweleryItemFactory));
     }

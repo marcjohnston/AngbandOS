@@ -19,7 +19,7 @@ internal abstract class Vault : IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Loaded() { }
+    public virtual void Bind() { }
 
     /// <summary>
     /// Returns the symbol to use for rendering.

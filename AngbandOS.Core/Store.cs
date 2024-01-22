@@ -110,11 +110,11 @@ internal class Store
         _y = y;
     }
 
-    private void RenderAdvertisedCommand(StoreCommand command, int row, int col)
+    private void RenderAdvertisedCommand(StoreCommand? storeCommand, int row, int col)
     {
-        if (command != null)
+        if (storeCommand != null)
         {
-            SaveGame.Screen.PrintLine($" {command.KeyChar}) {command.Description}.", row, col);
+            SaveGame.Screen.PrintLine($" {storeCommand.KeyChar}) {storeCommand.Description}.", row, col);
         }
     }
 

@@ -13,7 +13,7 @@ internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact, IFi
     private ItemFactory _baseItemCategory;
     private PowerDragonScaleMailBladeturnerFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Loaded()
+    public override void Bind()
     {
         _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(PowerDragonScaleMailArmorItemFactory));
     }

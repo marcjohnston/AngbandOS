@@ -21,28 +21,28 @@ internal class BlackStoreFactory : StoreFactory
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberSevenSymbol));
     public override string Description => "Black Market";
 
-    public override StoreOwner[] StoreOwners => new StoreOwner[]
+    protected override string[] StoreOwnerNames => new string[]
     {
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(VhassaTheDeadStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(KynTheTreacherousStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(BatrachianBelleStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(CorpselightStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(ParrishTheBloodthirstyStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(VileStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(PrenticeTheTrustedStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(GriellaHumanslayerStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(CharityTheNecromancerStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(PugnaciousThePugilistStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(FootsoreTheLuckyStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(SidriaLighfingeredStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(RiathoTheJugglerStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(JanaakaTheShiftyStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(CinaTheRogueStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(ArunikkiGreatclawStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(ChaeandThePoorStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(AfardorfTheBrigandStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(LathaxlTheGreedyStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(FalarewynStoreOwner))
+        nameof(VhassaTheDeadStoreOwner),
+        nameof(KynTheTreacherousStoreOwner),
+        nameof(BatrachianBelleStoreOwner),
+        nameof(CorpselightStoreOwner),
+        nameof(ParrishTheBloodthirstyStoreOwner),
+        nameof(VileStoreOwner),
+        nameof(PrenticeTheTrustedStoreOwner),
+        nameof(GriellaHumanslayerStoreOwner),
+        nameof(CharityTheNecromancerStoreOwner),
+        nameof(PugnaciousThePugilistStoreOwner),
+        nameof(FootsoreTheLuckyStoreOwner),
+        nameof(SidriaLighfingeredStoreOwner),
+        nameof(RiathoTheJugglerStoreOwner),
+        nameof(JanaakaTheShiftyStoreOwner),
+        nameof(CinaTheRogueStoreOwner),
+        nameof(ArunikkiGreatclawStoreOwner),
+        nameof(ChaeandThePoorStoreOwner),
+        nameof(AfardorfTheBrigandStoreOwner),
+        nameof(LathaxlTheGreedyStoreOwner),
+        nameof(FalarewynStoreOwner)
     };
 
     public override StockStoreInventoryItem[] GetStoreTable() => null;

@@ -17,7 +17,7 @@ internal abstract class RareItem : IItemCharacteristics, IGetKey<RareItemTypeEnu
     }
 
     public RareItemTypeEnum GetKey => RareItemType;
-    public virtual void Loaded() { }
+    public virtual void Bind() { }
 
     /// <summary>
     /// Returns the symbol to use for rendering.

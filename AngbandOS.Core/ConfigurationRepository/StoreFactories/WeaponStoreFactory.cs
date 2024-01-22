@@ -12,32 +12,32 @@ internal class WeaponStoreFactory : StoreFactory
 {
     private WeaponStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    public override StoreOwner[] StoreOwners => new StoreOwner[]
+    protected override string[] StoreOwnerNames => new string[]
     {
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(ArnoldTheBeastlyStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(ArndalBeastSlayerStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(EdorTheShortStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(OglignDragonSlayerStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(DrewTheSkilledStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(OrraxDragonsonStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(BobStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(ArkhothTheStoutStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(SarlyasTheRottenStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(TuethicBareBonesStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(BiliousTheToadStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(FasgulStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(EllefrisThePaladinStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(KtrrikkStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(DrocusSpiderfriendStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(FungusGiantSlayerStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(NadocTheStrongStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(EramogTheWeakStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(EowilithTheFairStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(HuimogBalrogSlayerStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(PeadusTheCruelStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(VamogSlayerStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(HooshnakTheViciousStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(BalennWarDancerStoreOwner))
+        nameof(ArnoldTheBeastlyStoreOwner),
+        nameof(ArndalBeastSlayerStoreOwner),
+        nameof(EdorTheShortStoreOwner),
+        nameof(OglignDragonSlayerStoreOwner),
+        nameof(DrewTheSkilledStoreOwner),
+        nameof(OrraxDragonsonStoreOwner),
+        nameof(BobStoreOwner),
+        nameof(ArkhothTheStoutStoreOwner),
+        nameof(SarlyasTheRottenStoreOwner),
+        nameof(TuethicBareBonesStoreOwner),
+        nameof(BiliousTheToadStoreOwner),
+        nameof(FasgulStoreOwner),
+        nameof(EllefrisThePaladinStoreOwner),
+        nameof(KtrrikkStoreOwner),
+        nameof(DrocusSpiderfriendStoreOwner),
+        nameof(FungusGiantSlayerStoreOwner),
+        nameof(NadocTheStrongStoreOwner),
+        nameof(EramogTheWeakStoreOwner),
+        nameof(EowilithTheFairStoreOwner),
+        nameof(HuimogBalrogSlayerStoreOwner),
+        nameof(PeadusTheCruelStoreOwner),
+        nameof(VamogSlayerStoreOwner),
+        nameof(HooshnakTheViciousStoreOwner),
+        nameof(BalennWarDancerStoreOwner)
     };
 
     public override string FeatureType => "Weaponsmiths";
@@ -97,5 +97,5 @@ internal class WeaponStoreFactory : StoreFactory
                 return false;
         }
     }
-    public override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(EnchantWeaponStoreCommand));
+    protected override string? AdvertisedStoreCommand4Name => nameof(EnchantWeaponStoreCommand);
 }

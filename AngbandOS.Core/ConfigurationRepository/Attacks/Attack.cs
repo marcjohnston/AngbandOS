@@ -19,7 +19,7 @@ internal abstract class Attack : IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Loaded() { }
+    public virtual void Bind() { }
 
     /// <summary>
     /// Returns the action message to be displayed, when the attack targets another monster.

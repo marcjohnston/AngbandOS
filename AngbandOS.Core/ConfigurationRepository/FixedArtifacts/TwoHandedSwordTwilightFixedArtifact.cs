@@ -13,7 +13,7 @@ internal class TwoHandedSwordTwilightFixedArtifact : FixedArtifact
     private ItemFactory _baseItemCategory;
     private TwoHandedSwordTwilightFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Loaded()
+    public override void Bind()
     {
         _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordTwoHandedSword));
     }

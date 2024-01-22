@@ -12,32 +12,32 @@ internal class LibraryStoreFactory : StoreFactory
 {
     private LibraryStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    public override StoreOwner[] StoreOwners => new StoreOwner[]
+    protected override string[] StoreOwnerNames => new string[]
     {
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(RandolphCarterStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(OdnarTheSageStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(GandarTheNeutralStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(RoshaThePatientStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(SaraiTheSwiftStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(BodrilTheSeerStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(VeloinTheQuietStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(VanthylasTheLearnedStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(OsseinTheLiterateStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(OlvarBookwormStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(ShallowgraveStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(DeathMaskStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(PorcinaTheObeseStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(GlarunaBrandybreathStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(FurfaceYeekStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(BaldOgginStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(AsuunuTheLearnedStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(PrirandTheDeadStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(RonarTheIronStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(GalilGamirStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(RorbagBookEaterStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(KiriarikirkStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(RilinTheQuietStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(IsungTheLordStoreOwner))
+        nameof(RandolphCarterStoreOwner),
+        nameof(OdnarTheSageStoreOwner),
+        nameof(GandarTheNeutralStoreOwner),
+        nameof(RoshaThePatientStoreOwner),
+        nameof(SaraiTheSwiftStoreOwner),
+        nameof(BodrilTheSeerStoreOwner),
+        nameof(VeloinTheQuietStoreOwner),
+        nameof(VanthylasTheLearnedStoreOwner),
+        nameof(OsseinTheLiterateStoreOwner),
+        nameof(OlvarBookwormStoreOwner),
+        nameof(ShallowgraveStoreOwner),
+        nameof(DeathMaskStoreOwner),
+        nameof(PorcinaTheObeseStoreOwner),
+        nameof(GlarunaBrandybreathStoreOwner),
+        nameof(FurfaceYeekStoreOwner),
+        nameof(BaldOgginStoreOwner),
+        nameof(AsuunuTheLearnedStoreOwner),
+        nameof(PrirandTheDeadStoreOwner),
+        nameof(RonarTheIronStoreOwner),
+        nameof(GalilGamirStoreOwner),
+        nameof(RorbagBookEaterStoreOwner),
+        nameof(KiriarikirkStoreOwner),
+        nameof(RilinTheQuietStoreOwner),
+        nameof(IsungTheLordStoreOwner)
     };
 
     public override string FeatureType => "Bookstore";
@@ -86,5 +86,5 @@ internal class LibraryStoreFactory : StoreFactory
                 return false;
         }
     }
-    public override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(ResearchSpellStoreCommand));
+    protected override string? AdvertisedStoreCommand4Name => nameof(ResearchSpellStoreCommand);
 }

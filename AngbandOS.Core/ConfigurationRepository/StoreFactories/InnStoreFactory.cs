@@ -12,36 +12,36 @@ internal class InnStoreFactory : StoreFactory
 {
     private InnStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    public override StoreOwner[] StoreOwners => new StoreOwner[]
+    protected override string[] StoreOwnerNames => new string[]
     {
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(MordsanStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(FurfootPobberStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(OddoYeeksonStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(DryBonesStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(KleibonsStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(PrendegastStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(StraashaStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(AlliaTheServileStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(LuminTheBlueStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(ShortAlStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(SilentFaldusStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(QuirmbyTheStrangeStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(AldousTheSleepyStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(GrundyTheTallStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(GobblegutsThunderbreathStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(SilverscaleStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(EtheraaTheFuriousStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(PaetlanTheAlcoholicStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(DrangStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(BarbagTheSlyStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(KirakakStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(NafurTheWoodenStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(GrarakTheHospitableStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(LonaTheCharismaticStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(CrediricTheBrewerStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(NydudusTheSlowStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(BaurkTheBusyStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(SevirasTheMindcrafterStoreOwner))
+        nameof(MordsanStoreOwner),
+        nameof(FurfootPobberStoreOwner),
+        nameof(OddoYeeksonStoreOwner),
+        nameof(DryBonesStoreOwner),
+        nameof(KleibonsStoreOwner),
+        nameof(PrendegastStoreOwner),
+        nameof(StraashaStoreOwner),
+        nameof(AlliaTheServileStoreOwner),
+        nameof(LuminTheBlueStoreOwner),
+        nameof(ShortAlStoreOwner),
+        nameof(SilentFaldusStoreOwner),
+        nameof(QuirmbyTheStrangeStoreOwner),
+        nameof(AldousTheSleepyStoreOwner),
+        nameof(GrundyTheTallStoreOwner),
+        nameof(GobblegutsThunderbreathStoreOwner),
+        nameof(SilverscaleStoreOwner),
+        nameof(EtheraaTheFuriousStoreOwner),
+        nameof(PaetlanTheAlcoholicStoreOwner),
+        nameof(DrangStoreOwner),
+        nameof(BarbagTheSlyStoreOwner),
+        nameof(KirakakStoreOwner),
+        nameof(NafurTheWoodenStoreOwner),
+        nameof(GrarakTheHospitableStoreOwner),
+        nameof(LonaTheCharismaticStoreOwner),
+        nameof(CrediricTheBrewerStoreOwner),
+        nameof(NydudusTheSlowStoreOwner),
+        nameof(BaurkTheBusyStoreOwner),
+        nameof(SevirasTheMindcrafterStoreOwner)
     };
 
     public override string FeatureType => "Inn";
@@ -67,6 +67,6 @@ internal class InnStoreFactory : StoreFactory
     }
 
     public override int StoreMaxKeep => 4;
-    public override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(HireRoomStoreCommand));
+    protected override string? AdvertisedStoreCommand4Name => nameof(HireRoomStoreCommand);
     public override bool PerformsMaintenanceWhenResting => false;
 }

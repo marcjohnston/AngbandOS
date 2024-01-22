@@ -12,32 +12,32 @@ internal class ArmouryStoreFactory : StoreFactory
 {
     private ArmouryStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    public override StoreOwner[] StoreOwners => new StoreOwner[]
+    protected override string[] StoreOwnerNames => new string[]
     {
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(KonDarTheUglyStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(DargLowTheGrimStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(DecadoTheHandsomeStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(EloDragonscaleStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(DelicatusStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(GruceTheHugeStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(AnimusStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(MalvusStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(SelaxisStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(DeathchillStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(DriosTheFaintStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(BathricTheColdStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(VengellaTheCruelStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(WyranaTheMightyStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(YojoIIStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(RanalarTheSweetStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(HorbagTheUncleanStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(ElelenTheTelepathStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(IsedreliasStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(VegnarOneEyeStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(RodishTheChaoticStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(HesinSwordmasterStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(ElvererithTheCheatStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(ZzathathTheImpStoreOwner))
+        nameof(KonDarTheUglyStoreOwner),
+        nameof(DargLowTheGrimStoreOwner),
+        nameof(DecadoTheHandsomeStoreOwner),
+        nameof(EloDragonscaleStoreOwner),
+        nameof(DelicatusStoreOwner),
+        nameof(GruceTheHugeStoreOwner),
+        nameof(AnimusStoreOwner),
+        nameof(MalvusStoreOwner),
+        nameof(SelaxisStoreOwner),
+        nameof(DeathchillStoreOwner),
+        nameof(DriosTheFaintStoreOwner),
+        nameof(BathricTheColdStoreOwner),
+        nameof(VengellaTheCruelStoreOwner),
+        nameof(WyranaTheMightyStoreOwner),
+        nameof(YojoIIStoreOwner),
+        nameof(RanalarTheSweetStoreOwner),
+        nameof(HorbagTheUncleanStoreOwner),
+        nameof(ElelenTheTelepathStoreOwner),
+        nameof(IsedreliasStoreOwner),
+        nameof(VegnarOneEyeStoreOwner),
+        nameof(RodishTheChaoticStoreOwner),
+        nameof(HesinSwordmasterStoreOwner),
+        nameof(ElvererithTheCheatStoreOwner),
+        nameof(ZzathathTheImpStoreOwner)
     };
 
     public override string FeatureType => "Armoury";
@@ -90,5 +90,5 @@ internal class ArmouryStoreFactory : StoreFactory
                 return false;
         }
     }
-    public override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(EnchantArmorStoreCommand));
+    protected override string? AdvertisedStoreCommand4Name => nameof(EnchantArmorStoreCommand);
 }

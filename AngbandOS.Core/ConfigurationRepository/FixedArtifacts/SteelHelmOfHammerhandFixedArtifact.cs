@@ -13,7 +13,7 @@ internal class SteelHelmOfHammerhandFixedArtifact : FixedArtifact
     private ItemFactory _baseItemCategory;
     private SteelHelmOfHammerhandFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Loaded()
+    public override void Bind()
     {
         _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(HelmSteelHelm));
     }

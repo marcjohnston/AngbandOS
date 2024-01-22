@@ -17,7 +17,7 @@ internal class FlaggedActionsRepositoryCollection : DictionaryRepositoryCollecti
     {
         foreach (FlaggedAction flaggedAction in this)
         {
-            flaggedAction.Loaded();
+            flaggedAction.Bind();
         }
     }
 

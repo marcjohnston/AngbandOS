@@ -17,7 +17,7 @@ internal abstract class Tile : IGetKey<string>
     }
 
     public string GetKey => Name;
-    public virtual void Loaded() { }
+    public virtual void Bind() { }
 
     /// <summary>
     /// Returns the symbol to use for rendering.

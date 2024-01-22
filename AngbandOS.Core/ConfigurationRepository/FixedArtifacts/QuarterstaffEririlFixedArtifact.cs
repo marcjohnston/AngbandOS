@@ -13,7 +13,7 @@ internal class QuarterstaffEririlFixedArtifact : FixedArtifact, IFixedArtifactAc
     private ItemFactory _baseItemCategory;
     private QuarterstaffEririlFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Loaded()
+    public override void Bind()
     {
         _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(HaftedQuarterstaff));
     }

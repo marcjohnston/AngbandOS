@@ -17,7 +17,7 @@ internal class FixedArtifactsRepositoryCollection : DictionaryRepositoryCollecti
     {
         foreach (FixedArtifact fixedArtifact in this)
         {
-            fixedArtifact.Loaded();
+            fixedArtifact.Bind();
         }
     }
 }

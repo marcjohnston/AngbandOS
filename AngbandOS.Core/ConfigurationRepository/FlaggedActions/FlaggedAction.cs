@@ -20,7 +20,7 @@ internal abstract class FlaggedAction : IGetKey<string>
 
     public string GetKey => Key;
 
-    public virtual void Loaded() { }
+    public virtual void Bind() { }
 
     private bool _flag;
     public virtual void Set()

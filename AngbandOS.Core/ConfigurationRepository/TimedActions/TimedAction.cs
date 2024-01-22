@@ -23,7 +23,7 @@ internal abstract class TimedAction : IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Loaded() { }
+    public virtual void Bind() { }
 
     protected int _turnsRemaining;
     public int TurnsRemaining => _turnsRemaining;

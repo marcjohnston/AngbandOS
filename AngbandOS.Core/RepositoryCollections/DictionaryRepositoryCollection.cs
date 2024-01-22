@@ -51,7 +51,7 @@ internal abstract class DictionaryRepositoryCollection<TKey, TValue> : ListRepos
     {
         foreach (TValue item in this)
         {
-            item.Loaded();
+            item.Bind();
         }
     }
 }

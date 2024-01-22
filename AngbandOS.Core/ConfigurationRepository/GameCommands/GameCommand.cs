@@ -22,7 +22,7 @@ internal abstract class GameCommand : IGetKey<string>, IToJson
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Loaded()
+    public void Bind()
     {
         ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(ExecuteScriptName);
     }

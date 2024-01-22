@@ -16,28 +16,28 @@ internal class TempleStoreFactory : StoreFactory
     public override ColourEnum Colour => ColourEnum.Green;
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberFourSymbol));
 
-    public override StoreOwner[] StoreOwners => new StoreOwner[]
+    protected override string[] StoreOwnerNames => new string[]
     {
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(LudwigTheHumbleStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(GunnarThePaladinStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(SirParsivalThePureStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(AsenathTheHolyStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(McKinnonStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(MistressChastityStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(HashnikTheDruidStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(FinakStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(KrikkikStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(MorivalTheWildStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(HoshakTheDarkStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(AtalTheWiseStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(IbeniddTheChasteStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(EridishStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(VrudushTheShamanStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(HaobTheBerserkerStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(ProogdishTheYouthfullStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(LumwiseTheMadStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(MuirtTheVirtuousStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(DardobardTheWeakStoreOwner))
+        nameof(LudwigTheHumbleStoreOwner),
+        nameof(GunnarThePaladinStoreOwner),
+        nameof(SirParsivalThePureStoreOwner),
+        nameof(AsenathTheHolyStoreOwner),
+        nameof(McKinnonStoreOwner),
+        nameof(MistressChastityStoreOwner),
+        nameof(HashnikTheDruidStoreOwner),
+        nameof(FinakStoreOwner),
+        nameof(KrikkikStoreOwner),
+        nameof(MorivalTheWildStoreOwner),
+        nameof(HoshakTheDarkStoreOwner),
+        nameof(AtalTheWiseStoreOwner),
+        nameof(IbeniddTheChasteStoreOwner),
+        nameof(EridishStoreOwner),
+        nameof(VrudushTheShamanStoreOwner),
+        nameof(HaobTheBerserkerStoreOwner),
+        nameof(ProogdishTheYouthfullStoreOwner),
+        nameof(LumwiseTheMadStoreOwner),
+        nameof(MuirtTheVirtuousStoreOwner),
+        nameof(DardobardTheWeakStoreOwner)
     };
 
     public override StockStoreInventoryItem[] GetStoreTable()
@@ -88,6 +88,6 @@ internal class TempleStoreFactory : StoreFactory
                 return false;
         }
     }
-    public override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(RemoveCurseStoreCommand));
-    public override StoreCommand AdvertisedStoreCommand5 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(SacrificeStoreCommand));
+    protected override string? AdvertisedStoreCommand4Name => nameof(RemoveCurseStoreCommand);
+    protected override string? AdvertisedStoreCommand5Name => nameof(SacrificeStoreCommand);
 }

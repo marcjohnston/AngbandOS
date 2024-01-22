@@ -12,7 +12,7 @@ internal class PrBasicRedrawActionGroupSetFlaggedAction : GroupSetFlaggedAction
 {
     private PrBasicRedrawActionGroupSetFlaggedAction(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Loaded()
+    public override void Bind()
     {
         RedrawActions = new FlaggedAction[] {
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawPlayerFlaggedAction)),

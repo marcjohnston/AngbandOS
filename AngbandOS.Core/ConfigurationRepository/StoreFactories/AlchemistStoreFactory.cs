@@ -12,28 +12,28 @@ internal class AlchemistStoreFactory : StoreFactory
 {
     private AlchemistStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    public override StoreOwner[] StoreOwners => new StoreOwner[]
+    protected override string[] StoreOwnerNames => new string[]
     {
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(MauserTheChemistStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(WizzleTheChaoticStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(KakalrakakalStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(JalEthTheAlchemistStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(FanelathTheCautiousStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(RuncieTheInsaneStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(GrumbleworthStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(FlitterStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(XarillusStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(EgbertTheOldStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(ValindraTheProudStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(TaenTheAlchemistStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(CaydTheSweetStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(FulirTheDarkStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(DomliTheHumbleStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(YaarjukkaDemonspawnStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(GelaraldorTheHerbmasterStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(OlelaldanTheWiseStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(FthogloTheDemonicistStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(DridashTheAlchemistStoreOwner))
+        nameof(MauserTheChemistStoreOwner),
+        nameof(WizzleTheChaoticStoreOwner),
+        nameof(KakalrakakalStoreOwner),
+        nameof(JalEthTheAlchemistStoreOwner),
+        nameof(FanelathTheCautiousStoreOwner),
+        nameof(RuncieTheInsaneStoreOwner),
+        nameof(GrumbleworthStoreOwner),
+        nameof(FlitterStoreOwner),
+        nameof(XarillusStoreOwner),
+        nameof(EgbertTheOldStoreOwner),
+        nameof(ValindraTheProudStoreOwner),
+        nameof(TaenTheAlchemistStoreOwner),
+        nameof(CaydTheSweetStoreOwner),
+        nameof(FulirTheDarkStoreOwner),
+        nameof(DomliTheHumbleStoreOwner),
+        nameof(YaarjukkaDemonspawnStoreOwner),
+        nameof(GelaraldorTheHerbmasterStoreOwner),
+        nameof(OlelaldanTheWiseStoreOwner),
+        nameof(FthogloTheDemonicistStoreOwner),
+        nameof(DridashTheAlchemistStoreOwner)
     };
 
     public override string FeatureType => "Alchemist";
@@ -82,5 +82,5 @@ internal class AlchemistStoreFactory : StoreFactory
                 return false;
         }
     }
-    public override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(RestorationStoreCommand));
+    protected override string? AdvertisedStoreCommand4Name => nameof(RestorationStoreCommand);
 }

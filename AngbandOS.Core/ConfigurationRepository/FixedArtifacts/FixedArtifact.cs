@@ -21,7 +21,7 @@ internal abstract class FixedArtifact : IItemCharacteristics, IGetKey<string>
 
     public string GetKey => Key;
 
-    public abstract void Loaded();
+    public abstract void Bind();
 
     /// <summary>
     /// Represents the quantity of this artifact currently in existence.

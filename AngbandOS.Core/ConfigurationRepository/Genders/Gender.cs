@@ -19,7 +19,7 @@ internal abstract class Gender : IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Loaded() { }
+    public virtual void Bind() { }
 
     public abstract string Title { get; }
     public abstract string Winner { get; }

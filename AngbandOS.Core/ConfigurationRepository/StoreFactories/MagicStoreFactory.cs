@@ -12,32 +12,32 @@ internal class MagicStoreFactory : StoreFactory
 {
     private MagicStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    public override StoreOwner[] StoreOwners => new StoreOwner[]
+    protected override string[] StoreOwnerNames => new string[]
     {
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(SkidneyTheSorcererStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(BuggerbyTheGreatStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(KyriaTheIllusionistStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(NikkiTheNecromancerStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(SolostoranStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(AchsheTheTentacledStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(KazaTheNobleStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(FazzilTheDarkStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(AngelStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(FlotsamTheBloatedStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(NievalStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(AnastasiaTheLuminousStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(KeldornTheGrandStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(PhilanthropusStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(AgnarTheEnchantressStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(BulianceTheNecromancerStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(VuirakTheHighMageStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(MadishTheSmartStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(FalebrimborStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(FelilGandTheSubtleStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(ThalegordTheShamanStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(CthoalothTheMysticStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(IbeliTheIllusionistStoreOwner)),
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(HetoTheNecromancerStoreOwner))
+        nameof(SkidneyTheSorcererStoreOwner),
+        nameof(BuggerbyTheGreatStoreOwner),
+        nameof(KyriaTheIllusionistStoreOwner),
+        nameof(NikkiTheNecromancerStoreOwner),
+        nameof(SolostoranStoreOwner),
+        nameof(AchsheTheTentacledStoreOwner),
+        nameof(KazaTheNobleStoreOwner),
+        nameof(FazzilTheDarkStoreOwner),
+        nameof(AngelStoreOwner),
+        nameof(FlotsamTheBloatedStoreOwner),
+        nameof(NievalStoreOwner),
+        nameof(AnastasiaTheLuminousStoreOwner),
+        nameof(KeldornTheGrandStoreOwner),
+        nameof(PhilanthropusStoreOwner),
+        nameof(AgnarTheEnchantressStoreOwner),
+        nameof(BulianceTheNecromancerStoreOwner),
+        nameof(VuirakTheHighMageStoreOwner),
+        nameof(MadishTheSmartStoreOwner),
+        nameof(FalebrimborStoreOwner),
+        nameof(FelilGandTheSubtleStoreOwner),
+        nameof(ThalegordTheShamanStoreOwner),
+        nameof(CthoalothTheMysticStoreOwner),
+        nameof(IbeliTheIllusionistStoreOwner),
+        nameof(HetoTheNecromancerStoreOwner)
     };
 
     public override string FeatureType => "MagicShop";
@@ -110,5 +110,5 @@ internal class MagicStoreFactory : StoreFactory
                 return false;
         }
     }
-    public override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(ResearchItemStoreCommand));
+    protected override string? AdvertisedStoreCommand4Name => nameof(ResearchItemStoreCommand);
 }

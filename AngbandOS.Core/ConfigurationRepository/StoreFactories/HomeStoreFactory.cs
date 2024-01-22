@@ -13,9 +13,9 @@ internal class HomeStoreFactory : StoreFactory
     private HomeStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
     public override int MaxInventory => 100;
-    public override StoreOwner[] StoreOwners => new StoreOwner[]
+    protected override string[] StoreOwnerNames => new string[]
     {
-        SaveGame.SingletonRepository.StoreOwners.Get(nameof(YourHomeStoreOwner))
+        nameof(YourHomeStoreOwner)
     };
 
     public override string FeatureType => "Home";
@@ -43,9 +43,9 @@ internal class HomeStoreFactory : StoreFactory
     public override string NoStockMessage => "Your home is empty.";
     public override string PurchaseMessage => "Which item do you want to take? ";
 
-    public override StoreCommand AdvertisedStoreCommand1 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(GetStoreCommand));
-    public override StoreCommand AdvertisedStoreCommand2 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(DropStoreCommand));
-    public override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(RestStoreCommand));
+    protected override string? AdvertisedStoreCommand1Name => nameof(GetStoreCommand);
+    protected override string? AdvertisedStoreCommand2Name => nameof(DropStoreCommand);
+    protected override string? AdvertisedStoreCommand4Name => nameof(RestStoreCommand);
     public override string FleeMessage => "Your pack is so full that you flee your home...";
 
     public override string GetItemDescription(Item oPtr)
