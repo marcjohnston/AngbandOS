@@ -12,9 +12,8 @@ internal class BlackStoreFactory : StoreFactory
 {
     private BlackStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    public override int MaxInventory => 75;
-    public override int StoreMinKeep => 35;
-    public override int StoreMaxKeep => 65;
+    public override int MaxInventory => 175;
+    public override int MinInventory => 135;
     public override int StoreTurnover => 5;
     public override string FeatureType => "BlackMarket";
     public override ColourEnum Colour => ColourEnum.Black;
@@ -77,5 +76,5 @@ internal class BlackStoreFactory : StoreFactory
         qPtr.ApplyMagic(level, false, false, false, store);
         return qPtr;
     }
-    public override int MinimumItemValue => 10;
+    public override int MinimumItemValue => 110;
 }

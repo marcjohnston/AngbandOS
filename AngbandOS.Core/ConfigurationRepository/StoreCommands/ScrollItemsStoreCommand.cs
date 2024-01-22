@@ -8,31 +8,30 @@
 namespace AngbandOS.Core.StoreCommands;
 
 [Serializable]
-internal class PageStoreCommand : StoreCommand
+internal class ScrollItemsStoreCommand : StoreCommand
 {
-    private PageStoreCommand(SaveGame saveGame) : base(saveGame) { }
+    private ScrollItemsStoreCommand(SaveGame saveGame) : base(saveGame) { }
     public override char KeyChar => ';';
 
     public override string Description => "scroll ";
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {
-        int dir = SaveGame.CommandDirection;
-        while (dir == 0)
+        char ch = SaveGame.Inkey(true);
+        switch (ch)
         {
-            if (!SaveGame.GetCom("Direction (Escape to cancel)? ", out char ch))
-            {
+            case '9':
+                storeCommandEvent.Store.PageUp();
                 break;
-            }
-            dir = SaveGame.GetKeymapDir(ch);
-        }
-        if (dir == 9)
-        {
-            storeCommandEvent.Store.PageUp();
-        }
-        else if (dir == 3)
-        {
-            storeCommandEvent.Store.PageDown();
+            case '3':
+                storeCommandEvent.Store.PageDown();
+                break;
+            case '8':
+                storeCommandEvent.Store.ScrollUp();
+                break;
+            case '2':
+                storeCommandEvent.Store.ScrollDown();
+                break;
         }
     }
 }

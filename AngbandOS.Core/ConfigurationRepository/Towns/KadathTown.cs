@@ -29,7 +29,7 @@ internal class KadathTown : Town
     public override int HousePrice => 0;
     public override string Name => "Kadath, home of the Gods";
     public override char Char => 'K';
- //   public override bool AllowStartupTown => false;
+    public override bool AllowStartupTown => false;
     public override bool UnusedStoreLotsAreGraveyards => true;
     public override bool CanBeEscortedHere => false;
 }

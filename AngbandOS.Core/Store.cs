@@ -86,22 +86,37 @@ internal class Store
 
     public string FeatureType => StoreFactory.FeatureType;
 
-    public void PageUp()
+    public void ScrollInventory(int count)
     {
-        if (_storeTop > 0)
+        _storeTop += count;
+        if (_storeTop < 0)
         {
             _storeTop = 0;
-            DisplayInventory();
         }
+        if (_storeTop + StoreFactory.PageSize > _storeInventoryList.Count)
+        {
+            _storeTop = _storeInventoryList.Count - StoreFactory.PageSize;
+        }
+        DisplayInventory();
+    }
+    public void PageUp()
+    {
+        ScrollInventory(-StoreFactory.PageSize);
     }
 
     public void PageDown()
     {
-        if (_storeTop + StoreFactory.PageSize < _storeInventoryList.Count)
-        {
-            _storeTop += StoreFactory.PageSize;
-            DisplayInventory();
-        }
+        ScrollInventory(StoreFactory.PageSize);
+    }
+
+    public void ScrollDown()
+    {
+        ScrollInventory(1);
+    }
+
+    public void ScrollUp()
+    {
+        ScrollInventory(-1);
     }
 
     public void SetLocation(int x, int y)
@@ -118,26 +133,24 @@ internal class Store
         }
     }
 
-    private void DisplayEntry(int pos)
+    private void DisplayEntry(int itemIndex, char letter, int row)
     {
-        string oName;
         int maxwid = StoreFactory.WidthOfDescriptionColumn;
-        Item oPtr = _storeInventoryList[pos];
-        int i = pos % StoreFactory.PageSize;
-        string outVal = $"{i.IndexToLetter()}) ";
-        SaveGame.Screen.PrintLine(outVal, i + 6, 0);
+        Item oPtr = _storeInventoryList[itemIndex];
+        string outVal = $"{letter}) ";
+        SaveGame.Screen.PrintLine(outVal, row, 0);
         ColourEnum a = oPtr.Factory.FlavorColour;
         char c = oPtr.Factory.FlavorSymbol.Character;
-        SaveGame.Screen.Print(a, c.ToString(), i + 6, 3);
-        oName = StoreFactory.GetItemDescription(oPtr);
+        SaveGame.Screen.Print(a, c.ToString(), row, 3);
+        string oName = StoreFactory.GetItemDescription(oPtr);
         if (maxwid < oName.Length)
         {
             oName = oName.Substring(0, maxwid);
         }
-        SaveGame.Screen.Print(oPtr.Factory.Colour, oName, i + 6, 5);
+        SaveGame.Screen.Print(oPtr.Factory.Colour, oName, row, 5);
         int wgt = oPtr.Weight;
         outVal = $"{wgt / 10,3}.{wgt % 10}{(StoreFactory.RenderWeightUnitOfMeasurement ? " lb" : "")}";
-        SaveGame.Screen.Print(outVal, i + 6, 61);
+        SaveGame.Screen.Print(outVal, row, 61);
 
         if (StoreFactory.ShowInventoryDisplayType == StoreInventoryDisplayTypeEnum.InventoryWithPrice)
         {
@@ -146,38 +159,55 @@ internal class Store
             {
                 x = PriceItem(oPtr, _owner.MinInflate, false);
                 outVal = $"{x,9} F";
-                SaveGame.Screen.Print(outVal, i + 6, 68);
+                SaveGame.Screen.Print(outVal, row, 68);
             }
             else
             {
                 x = PriceItem(oPtr, _owner.MinInflate, false);
                 x += x / 10;
                 outVal = $"{x,9}  ";
-                SaveGame.Screen.Print(outVal, i + 6, 68);
+                SaveGame.Screen.Print(outVal, row, 68);
             }
         }
     }
 
     private void DisplayInventory()
     {
-        int k;
-        for (k = 0; k < StoreFactory.PageSize; k++)
+        int pageIndex = 0;
+        int itemIndex = _storeTop;
+        while (itemIndex < _storeInventoryList.Count && pageIndex < StoreFactory.PageSize)
         {
-            if (_storeTop + k >= _storeInventoryList.Count)
-            {
-                break;
-            }
-            DisplayEntry(_storeTop + k);
+            DisplayEntry(itemIndex, pageIndex.IndexToLetter(), pageIndex + 6);
+            pageIndex++;
+            itemIndex++;
         }
-        for (int i = k; i <= StoreFactory.PageSize; i++)
+
+        bool pageDownAvailable = _storeTop + StoreFactory.PageSize < _storeInventoryList.Count;
+        bool pageUpAvailable = _storeTop > 0;
+        if (pageUpAvailable && pageDownAvailable)
         {
-            SaveGame.Screen.PrintLine("", i + 6, 0);
+            SaveGame.Screen.PrintLine("-page up/down-", pageIndex + 6, 3);
+            pageIndex++;
         }
+        else if (pageDownAvailable)
+        {
+            SaveGame.Screen.PrintLine("-page down-", pageIndex + 6, 3);
+            pageIndex++;
+        }
+        else if (pageUpAvailable)
+        {
+            SaveGame.Screen.PrintLine("-page up-", pageIndex + 6, 3);
+            pageIndex++;
+        }
+
+        // For any additional inventory lines that remain, we need to clear the screen.
+        while (pageIndex < StoreFactory.PageSize)
+        {
+            SaveGame.Screen.PrintLine("", pageIndex + 6, 0);
+            pageIndex++;
+        }
+
         SaveGame.Screen.Print(new string(' ', _storeInventoryList.Count.ToString().Length * 2 + 11), 5, 20);
-        if (_storeTop + StoreFactory.PageSize < _storeInventoryList.Count)
-        {
-            SaveGame.Screen.PrintLine("-more-", k + 6, 3);
-        }
         if (_storeInventoryList.Count > StoreFactory.PageSize)
         {
             SaveGame.Screen.Print($"(Page {_storeTop / StoreFactory.PageSize + 1} of {_storeInventoryList.Count / StoreFactory.PageSize + 1})", 5, 20);
@@ -457,7 +487,9 @@ internal class Store
                     command.Execute(storeCommandEvent);
 
                     if (storeCommandEvent.RequiresRerendering)
+                    {
                         DisplayStore();
+                    }
                     _leaveStore = storeCommandEvent.LeaveStore;
 
                     return;
@@ -812,11 +844,11 @@ internal class Store
             i = StoreFactory.PageSize;
         }
         string outVal = StoreFactory.PurchaseMessage;
-        if (!GetStock(out int item, outVal, 0, i - 1))
+        if (!GetStock(out int itemIndex, outVal, 0, i - 1))
         {
             return;
         }
-        item += _storeTop;
+        int item = itemIndex + _storeTop;
         Item oPtr = _storeInventoryList[item];
         int amt = 1;
         Item jPtr = oPtr.Clone(amt);
@@ -927,7 +959,7 @@ internal class Store
                     }
                     else
                     {
-                        DisplayEntry(item);
+                        DisplayEntry(item, itemIndex.IndexToLetter(), itemIndex + 6);
                     }
                 }
                 else
@@ -952,7 +984,7 @@ internal class Store
             StoreItemOptimize(item);
             if (i == _storeInventoryList.Count)
             {
-                DisplayEntry(item);
+                DisplayEntry(item, itemIndex.IndexToLetter(), itemIndex + 6);
             }
             else
             {
@@ -1617,48 +1649,56 @@ internal class Store
 
     public void StoreMaint()
     {
-        int oldRating = 0;
-        oldRating = SaveGame.TreasureRating;
         if (!StoreFactory.MaintainsStockLevels)
         {
             return;
         }
-        int j = _storeInventoryList.Count;
-        j -= SaveGame.Rng.DieRoll(StoreFactory.StoreTurnover);
-        if (j > StoreFactory.StoreMaxKeep)
+
+        // We need to preserve the treasure rating for the level because we will be creating items that will alter the treasure rating state.  We will restore
+        // this treasure rating when we are done.
+        int oldRating = SaveGame.TreasureRating;
+
+        // First phase, is to delete some items from the store.  Get the number of inventory items and alter this count by the turnover rate.
+        int desiredTurnOverInventoryCount = _storeInventoryList.Count;
+        desiredTurnOverInventoryCount -= SaveGame.Rng.DieRoll(StoreFactory.StoreTurnover);
+
+        // Ensure the count didn't go below zero.
+        if (desiredTurnOverInventoryCount < 0)
         {
-            j = StoreFactory.StoreMaxKeep;
+            desiredTurnOverInventoryCount = 0;
         }
-        if (j < StoreFactory.StoreMinKeep)
-        {
-            j = StoreFactory.StoreMinKeep;
-        }
-        if (j < 0)
-        {
-            j = 0;
-        }
-        while (_storeInventoryList.Count > j)
+
+        // Now delete the items that are being turned over.
+        while (_storeInventoryList.Count > desiredTurnOverInventoryCount)
         {
             StoreDelete();
         }
-        j = _storeInventoryList.Count;
-        j += SaveGame.Rng.DieRoll(StoreFactory.StoreTurnover);
-        if (j > StoreFactory.StoreMaxKeep)
+
+        // Now add new items to the store to meet the store minimum and maximum counts.
+        int desiredFinalInventoryCount = _storeInventoryList.Count;
+
+        // Add a turnover rating to the count.
+        desiredFinalInventoryCount += SaveGame.Rng.DieRoll(StoreFactory.StoreTurnover);
+
+        // Ensure the new inventory level meets the store standards.
+        if (desiredFinalInventoryCount > StoreFactory.MaxInventory)
         {
-            j = StoreFactory.StoreMaxKeep;
+            desiredFinalInventoryCount = StoreFactory.MaxInventory;
         }
-        if (j < StoreFactory.StoreMinKeep)
+        if (desiredFinalInventoryCount < StoreFactory.MinInventory)
         {
-            j = StoreFactory.StoreMinKeep;
+            desiredFinalInventoryCount = StoreFactory.MinInventory;
         }
-        if (j >= StoreFactory.MaxInventory)
+        if (desiredFinalInventoryCount >= StoreFactory.MaxInventory)
         {
-            j = StoreFactory.MaxInventory - 1;
+            desiredFinalInventoryCount = StoreFactory.MaxInventory - 1;
         }
-        while (_storeInventoryList.Count < j)
+        while (_storeInventoryList.Count < desiredFinalInventoryCount)
         {
             StoreCreate();
         }
+
+        // Restore the level treasure rating.
         SaveGame.TreasureRating = oldRating;
     }
 

@@ -68,28 +68,23 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     public virtual bool DoorsLocked() => false;
 
     /// <summary>
-    /// Returns the maximum number of items the store can accomodate.  Returns one pagesize (26), by default.
-    /// </summary>
-    public virtual int MaxInventory => PageSize; // Cthangband only supports 1 page of items 
-
-    /// <summary>
     /// Returns whether or not the store should perform maintenance.  When true, which is by default, the store will automatically 
     /// maintain stock levels based on the MinKeep, MaxKeep and Turnover values.
     /// </summary>
     public virtual bool MaintainsStockLevels => true;
 
     /// <summary>
-    /// Returns the maximum number of items the store should maintain.  Applies only when MaintainsStockLevels returns true.
+    /// Returns the maximum number of items the store should maintain.  Returns one pagesize (26), by default.
     /// </summary>
-    public virtual int StoreMaxKeep => 18;
+    public virtual int MaxInventory => PageSize;
 
     /// <summary>
-    /// Returns the minimum number of items the store should maintain.  Applies only when MaintainsStockLevels returns true.
+    /// Returns the minimum number of items the store should maintain.  Applies only when MaintainsStockLevels returns true.  Returns 6, by default.
     /// </summary>
-    public virtual int StoreMinKeep => 6;
+    public virtual int MinInventory => 6;
 
     /// <summary>
-    /// Returns the number of items the store should delete during maintenance.  Applies only when MaintainsStockLevels returns true.
+    /// Returns the number of items the store should delete during maintenance.  Applies only when MaintainsStockLevels returns true.  Returns 9, by default.
     /// </summary>
     public virtual int StoreTurnover => 9;
 

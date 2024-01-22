@@ -31,6 +31,10 @@ internal abstract class DictionaryRepositoryCollection<TKey, TValue> : ListRepos
     public override void Add(TValue item)
     {
         TKey key = item.GetKey;
+        if (dictionary.TryGetValue(key, out TValue? existingSingletonRepositoryItem))
+        {
+            throw new Exception($"The {item.GetType().Name} singleton has a duplicate key value of {item.GetKey} with {existingSingletonRepositoryItem.GetType().Name}.");
+        }
         dictionary.Add(key, item);
         base.Add(item);
     }

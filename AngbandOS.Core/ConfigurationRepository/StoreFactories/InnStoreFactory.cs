@@ -66,7 +66,7 @@ internal class InnStoreFactory : StoreFactory
         };
     }
 
-    public override int StoreMaxKeep => 4;
+    public override int MaxInventory => 4;
     protected override string? AdvertisedStoreCommand4Name => nameof(HireRoomStoreCommand);
     public override bool PerformsMaintenanceWhenResting => false;
 }

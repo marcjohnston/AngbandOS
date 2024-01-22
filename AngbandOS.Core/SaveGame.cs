@@ -13,7 +13,7 @@ namespace AngbandOS.Core;
 internal class SaveGame
 {
     public const int DungeonCount = 20;
-    public Configuration Configuration;
+    public readonly Configuration Configuration;
     public bool IsDead;
 
     [NonSerialized]
@@ -845,7 +845,13 @@ internal class SaveGame
         MessageAppendNextMessage = false;
     }
 
-    public void MsgPrint(string msg)
+    /// <summary>
+    /// Renders a message on the same line, if MessageAppendNextMessage is not set to false; otherwise, a -more- prompt will be rendered and the key input buffer
+    /// is cleared prior to rendering the message on a new line.  If the message is null, any previous message is forced to render and the key input buffer is
+    /// cleared.
+    /// </summary>
+    /// <param name="msg"></param>
+    public void MsgPrint(string? msg)
     {
         if (!MessageAppendNextMessage)
         {
@@ -898,6 +904,11 @@ internal class SaveGame
         MessageAppendNextMessage = true;
         MessageXCursorPos += messageLength + 1;
     }
+
+    /// <summary>
+    /// Renders the -more- prompt and clears the key input buffer.
+    /// </summary>
+    /// <param name="cursorXPosition"></param>
     private void MsgFlush(int cursorXPosition)
     {
         Screen.Print(ColourEnum.BrightBlue, "-more-", 0, cursorXPosition);
@@ -1672,9 +1683,9 @@ internal class SaveGame
             }
             ResetStompability();
             CurrentDepth = 0;
-            if (Configuration.StartupTown != null)
+            if (Configuration.StartupTownName != null)
             {
-                Town? startupTown = SingletonRepository.Towns.Get(Configuration.StartupTown);
+                Town? startupTown = SingletonRepository.Towns.Get(Configuration.StartupTownName);
                 if (startupTown == null)
                 {
                     throw new Exception("The configured startup town does not exist.");

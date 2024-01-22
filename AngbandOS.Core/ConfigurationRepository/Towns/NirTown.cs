@@ -29,5 +29,5 @@ internal class NirTown : Town
     public override int HousePrice => 0;
     public override string Name => "the hamlet of Nir";
     public override char Char => 'N';
- //  public override bool AllowStartupTown => false;
+    public override bool AllowStartupTown => false;
 }

@@ -210,33 +210,6 @@ public partial class MainWindow : Window, IConsoleViewPort
         Mixer.Initialise(StartupMusicVolume / 100.0f, StartupSoundVolume / 100.0f);
     }
 
-    protected T? LoadFromJson<T>(string fuzzyResourceName)
-    {
-        Assembly assembly = Assembly.GetExecutingAssembly();
-
-        // Get all of the resource names.  We are going to perform a fuzzy lookup.
-        string[] actualResourceNames = assembly.GetManifestResourceNames();
-
-        // Now get the actual matching resource names.
-        string[] resourceNames = actualResourceNames.Where(_resourceName => _resourceName.EndsWith(fuzzyResourceName, StringComparison.OrdinalIgnoreCase)).ToArray();
-
-        // Load each of those resources.
-        foreach (string resourceName in resourceNames)
-        {
-            using (Stream? stream = assembly.GetManifestResourceStream(resourceName))
-            {
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    string serializedJson = reader.ReadToEnd();
-                    T? item = JsonSerializer.Deserialize<T>(serializedJson);
-                    return item;
-                }
-            }
-        }
-
-        return default;
-    }
-
     private void Thread_DoWork(object? sender, DoWorkEventArgs e)
     {
         GameServer gameServer = new GameServer();
@@ -245,7 +218,7 @@ public partial class MainWindow : Window, IConsoleViewPort
         ICorePersistentStorage persistentStorage = new AngbandOS.PersistentStorage.FileSystemPersistentStorage(saveFilename);
         Configuration configuration = new Configuration()
         {
-            StartupTown = "KadathTown"
+            StartupTownName = "DylathLeenTown"
         };
 
         if (persistentStorage.GameExists())

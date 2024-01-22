@@ -219,8 +219,8 @@ internal class SingletonRepository
 
     public void Persist(ICorePersistentStorage corePersistentStorage)
     {
-        Persist<StoreOwner>(corePersistentStorage, StoreOwners, "StoreOwner");
-        Persist<Town>(corePersistentStorage, Towns, "Town");
-        Persist<GameCommand>(corePersistentStorage, GameCommands, "GameCommand");
+        //Persist<StoreOwner>(corePersistentStorage, StoreOwners, "StoreOwner");
+        //Persist<Town>(corePersistentStorage, Towns, "Town");
+        //Persist<GameCommand>(corePersistentStorage, GameCommands, "GameCommand");
     }
 }

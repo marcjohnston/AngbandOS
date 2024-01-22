@@ -197,7 +197,7 @@ public class GameServer
         }
 
         // TODO: Remove this hard-coded configuration
-        if (persistentStorage != null) {
+        if (persistentStorage != null && configuration == null) {
             configuration = new Configuration()
             {
                 //StoreOwners = RetrieveEntities<StoreOwnerDefinition, JsonStoreOwner>(persistentStorage, "StoreOwner"),
