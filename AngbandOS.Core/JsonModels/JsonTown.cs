@@ -21,6 +21,12 @@ internal class JsonTown : IJsonModel<TownDefinition>
 
     public string[]? StoreFactoryNames { get; set; }
 
+    public bool CanBeEscortedHere { get; set; } = true;
+
+    public bool AllowStartupTown { get; set; } = true;
+
+    public bool UnusedStoreLotsAreGraveyards { get; set; } = false;
+
     public TownDefinition? ToDefinition()
     {
         if (Key == null || HousePrice == null || Name == null || Char == null || StoreFactoryNames == null)
@@ -32,7 +38,10 @@ internal class JsonTown : IJsonModel<TownDefinition>
             HousePrice = HousePrice.Value,
             Name = Name,
             Char = Char.Value,
-            StoreFactoryNames = StoreFactoryNames
+            StoreFactoryNames = StoreFactoryNames,
+            CanBeEscortedHere = CanBeEscortedHere,
+            AllowStartupTown = AllowStartupTown,
+            UnusedStoreLotsAreGraveyards = UnusedStoreLotsAreGraveyards
         };
     }
 }

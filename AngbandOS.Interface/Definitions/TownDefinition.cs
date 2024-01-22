@@ -15,4 +15,9 @@ public class TownDefinition
     public int HousePrice { get; set; }
     public string Name { get; set; }
     public string[] StoreFactoryNames { get; set; }
+    public bool CanBeEscortedHere { get; set; } = true;
+
+    public bool AllowStartupTown { get; set; } = true;
+
+    public bool UnusedStoreLotsAreGraveyards { get; set; } = false;
 }

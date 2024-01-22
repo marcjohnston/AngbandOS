@@ -28,7 +28,5 @@ internal abstract class AttackEffect : IGetKey<string>
     /// <summary>
     /// Apply the attack to another monster.  Does nothing by default.
     /// </summary>
-    public virtual void ApplyToMonster(Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
-    {
-    }
+    public virtual void ApplyToMonster(Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked) { }
 }

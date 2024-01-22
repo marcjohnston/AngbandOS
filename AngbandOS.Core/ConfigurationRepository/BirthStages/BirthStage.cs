@@ -11,6 +11,7 @@ namespace AngbandOS.Core.BirthStages;
 internal abstract class BirthStage : IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
+    public string GetKey => Key;
     protected BirthStage(SaveGame saveGame)
     {
         SaveGame = saveGame;
@@ -18,7 +19,6 @@ internal abstract class BirthStage : IGetKey<string>
 
     public virtual string Key => GetType().Name;
 
-    public string GetKey => Key;
     public virtual void Loaded() { }
 
     /// <summary>

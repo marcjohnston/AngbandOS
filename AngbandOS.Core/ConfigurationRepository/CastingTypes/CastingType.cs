@@ -14,6 +14,7 @@ namespace AngbandOS.Core.CastingTypes;
 internal class CastingType : IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
+    public string GetKey => Key;
     protected CastingType(SaveGame saveGame)
     {
         SaveGame = saveGame;
@@ -21,7 +22,6 @@ internal class CastingType : IGetKey<string>
 
     public virtual string Key => GetType().Name;
 
-    public string GetKey => Key;
     public virtual void Loaded() { }
 
     public virtual int Levels => SaveGame.ExperienceLevel;

@@ -14,6 +14,7 @@ namespace AngbandOS.Core.ArtifactBiases;
 internal abstract class ArtifactBias : IArtifactBias, IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
+    public string GetKey => Key;
 
     protected ArtifactBias(SaveGame saveGame)
     {
@@ -22,42 +23,25 @@ internal abstract class ArtifactBias : IArtifactBias, IGetKey<string>
 
     public virtual string Key => GetType().Name;
 
-    public string GetKey => Key;
-
     public virtual void Loaded() { }
 
     /// <inheritdoc/>
     public virtual int ImmunityLuckOneInChance => 20;
 
     /// <inheritdoc/>
-    public virtual bool ApplyBonuses(Item item)
-    {
-        return false;
-    }
+    public virtual bool ApplyBonuses(Item item) => false;
 
     /// <inheritdoc/>
-    public virtual bool ApplyRandomResistances(Item item)
-    {
-        return false;
-    }
+    public virtual bool ApplyRandomResistances(Item item) => false;
 
     /// <inheritdoc/>
-    public virtual bool ApplyMiscPowers(Item item)
-    {
-        return false;
-    }
+    public virtual bool ApplyMiscPowers(Item item) => false;
 
     /// <inheritdoc/>
-    public virtual bool ApplySlaying(Item item)
-    {
-        return false;
-    }
+    public virtual bool ApplySlaying(Item item) => false;
 
     /// <inheritdoc/>
-    public virtual Activation GetActivationPowerType(Item item)
-    {
-        return null;
-    }
+    public virtual Activation GetActivationPowerType(Item item) => null;
 
     /// <inheritdoc/>
     public virtual int ActivationPowerChance => 101;
