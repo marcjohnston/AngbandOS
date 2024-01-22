@@ -15,7 +15,9 @@ internal class ViewClassHeroesStoreCommand : StoreCommand
 
     public override string Description => "view Class heroes";
 
-    public override bool IsEnabled(StoreFactory storeFactory) => (storeFactory.GetType() == typeof(HallStoreFactory));
+    protected override string[]? ValidStoreNames => new string[] {
+        nameof(HallStoreFactory),
+    };
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {

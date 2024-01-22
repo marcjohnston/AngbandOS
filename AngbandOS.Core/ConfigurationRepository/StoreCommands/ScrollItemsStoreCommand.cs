@@ -13,7 +13,10 @@ internal class ScrollItemsStoreCommand : StoreCommand
     private ScrollItemsStoreCommand(SaveGame saveGame) : base(saveGame) { }
     public override char KeyChar => ';';
 
-    public override string Description => "scroll ";
+    /// <summary>
+    /// Returns the text to render, if the store command is advertised.
+    /// </summary>
+    public override string Description => "";
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {

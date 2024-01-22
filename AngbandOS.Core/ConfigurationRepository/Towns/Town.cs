@@ -55,7 +55,7 @@ internal abstract class Town : IGetKey<string>, IToJson
         List<Store> stores = new List<Store>();
         foreach (string storeName in StoreFactoryNames)
         {
-            StoreFactory storeFactory = SaveGame.SingletonRepository.Stores.Get(storeName);
+            StoreFactory storeFactory = SaveGame.SingletonRepository.StoreFactories.Get(storeName);
             stores.Add(new Store(SaveGame, storeFactory));
         }
         Stores = stores.ToArray();

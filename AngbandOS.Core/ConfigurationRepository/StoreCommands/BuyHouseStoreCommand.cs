@@ -16,7 +16,9 @@ internal class BuyHouseStoreCommand : StoreCommand
 
     public override string Description => "Buy a house";
 
-    public override bool IsEnabled(StoreFactory storeFactory) => (storeFactory.GetType() == typeof(HallStoreFactory));
+    protected override string[]? ValidStoreNames => new string[] {
+        nameof(HallStoreFactory)
+    };
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {

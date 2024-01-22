@@ -19,10 +19,42 @@ internal abstract class StoreCommand : IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Bind() { }
+    public virtual void Bind()
+    {
+        if (ValidStoreNames == null)
+        {
+            ValidStoreFactories = null;
+        }
+        else
+        {
+            List<StoreFactory> storeFactoryList = new();
+            foreach (string storeName in ValidStoreNames)
+            {
+                storeFactoryList.Add(SaveGame.SingletonRepository.StoreFactories.Get(storeName));
+            }
+        }
+    }
 
     public abstract char KeyChar { get; }
-    public virtual bool IsEnabled(StoreFactory storeFactory) => true;
+    public bool IsEnabled(StoreFactory storeFactory)
+    {
+        if (ValidStoreFactories == null)
+        {
+            return true;
+        }
+        return ValidStoreFactories.Contains(storeFactory);
+    }
+
+    /// <summary>
+    /// Returns the store factories that the command is valid for; or null, if the command is valid for all stores.
+    /// </summary>
+    public StoreFactory[]? ValidStoreFactories { get; private set; }
+
+    /// <summary>
+    /// Returns the names of the store factories that the command is valid in; or null, for all stores.  Returns null, by default.
+    /// </summary>
+    protected virtual string[]? ValidStoreNames => null;
+
     public abstract void Execute(StoreCommandEvent storeCommandEvent);
     public abstract string Description { get; }
 }

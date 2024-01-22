@@ -16,7 +16,9 @@ internal class RestorationStoreCommand : StoreCommand
 
     public override string Description => "buy Restoration";
 
-    public override bool IsEnabled(StoreFactory storeFactory) => (storeFactory.GetType() == typeof(AlchemistStoreFactory));
+    protected override string[]? ValidStoreNames => new string[] {
+        nameof(AlchemistStoreFactory)
+    };
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {

@@ -15,7 +15,19 @@ internal class GetStoreCommand : StoreCommand
 
     public override string Description => "Get an item";
 
-    public override bool IsEnabled(StoreFactory storeFactory) => (storeFactory.GetType() != typeof(HallStoreFactory));
+    protected override string[]? ValidStoreNames => new string[] {
+        nameof(AlchemistStoreFactory),
+        nameof(ArmouryStoreFactory),
+        nameof(BlackStoreFactory),
+        nameof(GeneralStoreFactory),
+        nameof(HomeStoreFactory),
+        nameof(InnStoreFactory),
+        nameof(LibraryStoreFactory),
+        nameof(MagicStoreFactory),
+        nameof(PawnStoreFactory),
+        nameof(TempleStoreFactory),
+        nameof(WeaponStoreFactory)
+    };
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {

@@ -19,7 +19,7 @@ internal class SingletonRepository
     public FlaggedActionsRepositoryCollection FlaggedActions;
     public TownsRepositoryCollection Towns;
     public ItemFactoriesRepositoryCollection ItemFactories;
-    public StoresRepositoryCollection Stores;
+    public StoresRepositoryCollection StoreFactories;
     public ItemClassesRepositoryCollection ItemClasses;
     public MutationsRepositoryCollection Mutations;
     public ChestTrapsRepositoryCollection ChestTraps;
@@ -123,7 +123,7 @@ internal class SingletonRepository
         FlaggedActions = AddRepositoryCollection<FlaggedActionsRepositoryCollection>(new FlaggedActionsRepositoryCollection(SaveGame));
         Towns = AddRepositoryCollection<TownsRepositoryCollection>(new TownsRepositoryCollection(SaveGame));
         ItemFactories = AddRepositoryCollection<ItemFactoriesRepositoryCollection>(new ItemFactoriesRepositoryCollection(SaveGame));
-        Stores = AddRepositoryCollection<StoresRepositoryCollection>(new StoresRepositoryCollection(SaveGame));
+        StoreFactories = AddRepositoryCollection<StoresRepositoryCollection>(new StoresRepositoryCollection(SaveGame));
         ItemClasses = AddRepositoryCollection<ItemClassesRepositoryCollection>(new ItemClassesRepositoryCollection(SaveGame));
         Mutations = AddRepositoryCollection<MutationsRepositoryCollection>(new MutationsRepositoryCollection(SaveGame));
         ChestTraps = AddRepositoryCollection<ChestTrapsRepositoryCollection>(new ChestTrapsRepositoryCollection(SaveGame));

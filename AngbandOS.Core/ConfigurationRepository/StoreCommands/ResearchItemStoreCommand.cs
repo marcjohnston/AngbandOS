@@ -16,7 +16,9 @@ internal class ResearchItemStoreCommand : StoreCommand
 
     public override string Description => "Research an item";
 
-    public override bool IsEnabled(StoreFactory storeFactory) => (storeFactory.GetType() == typeof(MagicStoreFactory));
+    protected override string[]? ValidStoreNames => new string[] {
+        nameof(MagicStoreFactory)
+    };
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {

@@ -16,7 +16,10 @@ internal class HireEscortStoreCommand : StoreCommand
 
     public override string Description => "Hire an escort";
 
-    public override bool IsEnabled(StoreFactory storeFactory) => (storeFactory.GetType() == typeof(GeneralStoreFactory));
+    protected override string[]? ValidStoreNames => new string[] {
+        nameof(GeneralStoreFactory)
+    };
+
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {
