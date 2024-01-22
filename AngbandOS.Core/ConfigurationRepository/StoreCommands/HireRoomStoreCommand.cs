@@ -16,7 +16,7 @@ internal class HireRoomStoreCommand : StoreCommand
 
     public override string Description => "hire a Room";
 
-    public override bool IsEnabled(Store store) => (store.GetType() == typeof(InnStore));
+    public override bool IsEnabled(StoreFactory storeFactory) => (storeFactory.GetType() == typeof(InnStoreFactory));
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {

@@ -5,14 +5,14 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Stores;
+namespace AngbandOS.Core.StoreFactories;
 
 [Serializable]
-internal class MagicStore : Store
+internal class MagicStoreFactory : StoreFactory
 {
-    private MagicStore(SaveGame saveGame) : base(saveGame) { }
+    private MagicStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    protected override StoreOwner[] StoreOwners => new StoreOwner[]
+    public override StoreOwner[] StoreOwners => new StoreOwner[]
     {
         SaveGame.SingletonRepository.StoreOwners.Get(nameof(SkidneyTheSorcererStoreOwner)),
         SaveGame.SingletonRepository.StoreOwners.Get(nameof(BuggerbyTheGreatStoreOwner)),
@@ -45,7 +45,7 @@ internal class MagicStore : Store
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberSixSymbol));
     public override string Description => "Magic Shop";
 
-    protected override StockStoreInventoryItem[] GetStoreTable()
+    public override StockStoreInventoryItem[] GetStoreTable()
     {
         return new[]
         {
@@ -110,5 +110,5 @@ internal class MagicStore : Store
                 return false;
         }
     }
-    protected override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(ResearchItemStoreCommand));
+    public override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(ResearchItemStoreCommand));
 }

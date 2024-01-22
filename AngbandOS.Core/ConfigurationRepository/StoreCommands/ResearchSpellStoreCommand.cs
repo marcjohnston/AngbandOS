@@ -16,7 +16,7 @@ internal class ResearchSpellStoreCommand : StoreCommand
 
     public override string Description => "Research a spell";
 
-    public override bool IsEnabled(Store store) => (store.GetType() == typeof(LibraryStore));
+    public override bool IsEnabled(StoreFactory storeFactory) => (storeFactory.GetType() == typeof(LibraryStoreFactory));
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {

@@ -5,18 +5,18 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Stores;
+namespace AngbandOS.Core.StoreFactories;
 
 [Serializable]
-internal class TempleStore : Store
+internal class TempleStoreFactory : StoreFactory
 {
-    private TempleStore(SaveGame saveGame) : base(saveGame) { }
+    private TempleStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
     public override string FeatureType => "Temple";
     public override ColourEnum Colour => ColourEnum.Green;
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberFourSymbol));
 
-    protected override StoreOwner[] StoreOwners => new StoreOwner[]
+    public override StoreOwner[] StoreOwners => new StoreOwner[]
     {
         SaveGame.SingletonRepository.StoreOwners.Get(nameof(LudwigTheHumbleStoreOwner)),
         SaveGame.SingletonRepository.StoreOwners.Get(nameof(GunnarThePaladinStoreOwner)),
@@ -40,7 +40,7 @@ internal class TempleStore : Store
         SaveGame.SingletonRepository.StoreOwners.Get(nameof(DardobardTheWeakStoreOwner))
     };
 
-    protected override StockStoreInventoryItem[] GetStoreTable()
+    public override StockStoreInventoryItem[] GetStoreTable()
     {
         return new[]
         {
@@ -88,6 +88,6 @@ internal class TempleStore : Store
                 return false;
         }
     }
-    protected override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(RemoveCurseStoreCommand));
-    protected override StoreCommand AdvertisedStoreCommand5 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(SacrificeStoreCommand));
+    public override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(RemoveCurseStoreCommand));
+    public override StoreCommand AdvertisedStoreCommand5 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(SacrificeStoreCommand));
 }

@@ -11,19 +11,19 @@ namespace AngbandOS.Core.Towns;
 internal class HlanithTown : Town
 {
     private HlanithTown(SaveGame saveGame) : base(saveGame) { }
-    protected override string[] StoreNames => new string[] {
-        nameof(GeneralStore),
-        nameof(ArmouryStore),
-        nameof(EmptyLotStore),
-        nameof(WeaponStore),
-        nameof(EmptyLotStore),
-        nameof(AlchemistStore),
-        nameof(MagicStore),
-        nameof(BlackStore),
-        nameof(HomeStore),
-        nameof(LibraryStore),
-        nameof(InnStore),
-        nameof(HallStore)
+    protected override string[] StoreFactoryNames => new string[] {
+        nameof(GeneralStoreFactory),
+        nameof(ArmouryStoreFactory),
+        nameof(EmptyLotStoreFactory),
+        nameof(WeaponStoreFactory),
+        nameof(EmptyLotStoreFactory),
+        nameof(AlchemistStoreFactory),
+        nameof(MagicStoreFactory),
+        nameof(BlackStoreFactory),
+        nameof(HomeStoreFactory),
+        nameof(LibraryStoreFactory),
+        nameof(InnStoreFactory),
+        nameof(HallStoreFactory)
     };
 
     public override int HousePrice => 45000;

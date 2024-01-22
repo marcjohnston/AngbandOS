@@ -12,19 +12,19 @@ internal class IlekVadTown : Town
 {
     private IlekVadTown(SaveGame saveGame) : base(saveGame) { }
 
-    protected override string[] StoreNames => new string[] {
-        nameof(GeneralStore),
-        nameof(ArmouryStore),
-        nameof(WeaponStore),
-        nameof(TempleStore),
-        nameof(AlchemistStore),
-        nameof(MagicStore),
-        nameof(BlackStore),
-        nameof(HomeStore),
-        nameof(LibraryStore),
-        nameof(EmptyLotStore),
-        nameof(InnStore),
-        nameof(HallStore)
+    protected override string[] StoreFactoryNames => new string[] {
+        nameof(GeneralStoreFactory),
+        nameof(ArmouryStoreFactory),
+        nameof(WeaponStoreFactory),
+        nameof(TempleStoreFactory),
+        nameof(AlchemistStoreFactory),
+        nameof(MagicStoreFactory),
+        nameof(BlackStoreFactory),
+        nameof(HomeStoreFactory),
+        nameof(LibraryStoreFactory),
+        nameof(EmptyLotStoreFactory),
+        nameof(InnStoreFactory),
+        nameof(HallStoreFactory)
     };
 
     public override int HousePrice => 60000;

@@ -22,7 +22,7 @@ internal abstract class StoreCommand : IGetKey<string>
     public virtual void Loaded() { }
 
     public abstract char KeyChar { get; }
-    public virtual bool IsEnabled(Store store) => true;
+    public virtual bool IsEnabled(StoreFactory storeFactory) => true;
     public abstract void Execute(StoreCommandEvent storeCommandEvent);
     public abstract string Description { get; }
 }

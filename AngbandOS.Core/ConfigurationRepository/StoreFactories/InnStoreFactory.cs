@@ -5,14 +5,14 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Stores;
+namespace AngbandOS.Core.StoreFactories;
 
 [Serializable]
-internal class InnStore : Store
+internal class InnStoreFactory : StoreFactory
 {
-    private InnStore(SaveGame saveGame) : base(saveGame) { }
+    private InnStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    protected override StoreOwner[] StoreOwners => new StoreOwner[]
+    public override StoreOwner[] StoreOwners => new StoreOwner[]
     {
         SaveGame.SingletonRepository.StoreOwners.Get(nameof(MordsanStoreOwner)),
         SaveGame.SingletonRepository.StoreOwners.Get(nameof(FurfootPobberStoreOwner)),
@@ -53,7 +53,7 @@ internal class InnStore : Store
         return false;
     }
 
-    protected override StockStoreInventoryItem[] GetStoreTable()
+    public override StockStoreInventoryItem[] GetStoreTable()
     {
         return new[]
         {
@@ -67,6 +67,6 @@ internal class InnStore : Store
     }
 
     public override int StoreMaxKeep => 4;
-    protected override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(HireRoomStoreCommand));
-    protected override bool PerformsMaintenanceWhenResting => false;
+    public override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(HireRoomStoreCommand));
+    public override bool PerformsMaintenanceWhenResting => false;
 }

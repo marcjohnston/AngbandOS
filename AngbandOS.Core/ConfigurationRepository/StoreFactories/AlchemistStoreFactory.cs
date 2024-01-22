@@ -5,14 +5,14 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Stores;
+namespace AngbandOS.Core.StoreFactories;
 
 [Serializable]
-internal class AlchemistStore : Store
+internal class AlchemistStoreFactory : StoreFactory
 {
-    private AlchemistStore(SaveGame saveGame) : base(saveGame) { }
+    private AlchemistStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    protected override StoreOwner[] StoreOwners => new StoreOwner[]
+    public override StoreOwner[] StoreOwners => new StoreOwner[]
     {
         SaveGame.SingletonRepository.StoreOwners.Get(nameof(MauserTheChemistStoreOwner)),
         SaveGame.SingletonRepository.StoreOwners.Get(nameof(WizzleTheChaoticStoreOwner)),
@@ -41,7 +41,7 @@ internal class AlchemistStore : Store
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberFiveSymbol));
     public override string Description => "Alchemy Shop";
 
-    protected override StockStoreInventoryItem[] GetStoreTable()
+    public override StockStoreInventoryItem[] GetStoreTable()
     {
         return new[]
         {
@@ -82,5 +82,5 @@ internal class AlchemistStore : Store
                 return false;
         }
     }
-    protected override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(RestorationStoreCommand));
+    public override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(RestorationStoreCommand));
 }

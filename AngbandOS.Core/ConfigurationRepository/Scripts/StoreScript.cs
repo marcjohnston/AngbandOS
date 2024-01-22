@@ -23,7 +23,7 @@ internal class StoreScript : Script
         }
         Store which = SaveGame.GetWhichStore();
         // We can't enter a house unless we own it
-        if (which.DoorsLocked(SaveGame))
+        if (which.DoorsLocked())
         {
             SaveGame.MsgPrint("The door is locked.");
             return false;

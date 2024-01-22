@@ -557,6 +557,69 @@ internal class SaveGame
         InitializeAllocationTables();
     }
 
+    public void BuyHouse()
+    {
+        int price;
+        if (TownWithHouse == CurTown.Index)
+        {
+            MsgPrint("You already have the deeds!");
+        }
+        else
+        {
+            if (!ServiceHaggle(CurTown.HousePrice, out price))
+            {
+                if (price >= Gold)
+                {
+                    MsgPrint("You do not have the gold!");
+                }
+                else
+                {
+                    Gold -= price;
+                    SayComment_1();
+                    PlaySound(SoundEffectEnum.StoreTransaction);
+                    StorePrtGold();
+                    int oldHouse = TownWithHouse;
+                    TownWithHouse = CurTown.Index;
+                    if (oldHouse == -1)
+                    {
+                        MsgPrint("You may move in at once.");
+                    }
+                    else
+                    {
+                        MsgPrint("I've sold your old house to pay for the removal service.");
+                        MoveHouse(oldHouse, TownWithHouse);
+                    }
+                }
+                HandleStuff();
+            }
+        }
+    }
+
+    public void StorePrtGold()
+    {
+        Screen.PrintLine("Gold Remaining: ", 39, 53);
+        string outVal = $"{Gold,9}";
+        Screen.PrintLine(outVal, 39, 68);
+    }
+
+    public void SayComment_1()
+    {
+        MsgPrint(SingletonRepository.StoreOwnerAcceptedComments.ToWeightedRandom().Choose());
+    }
+
+    public bool ServiceHaggle(int serviceCost, out int price)
+    {
+        int finalAsk = serviceCost;
+        MsgPrint("You quickly agree upon the price.");
+        MsgPrint(null);
+        finalAsk += finalAsk / 10;
+        price = finalAsk;
+        const string pmt = "Final Offer";
+        string outVal = $"{pmt} :  {finalAsk}";
+        Screen.Print(outVal, 1, 0);
+        return !GetCheck("Accept deal? ");
+    }
+
     /// <summary>
     /// Retrieves a save game from persistent storage.  If no persistent storage is specified, a new game is created. This static method is used as a factory
     /// to generate the SaveGame object that can be played using the Play method.  This is the only static method.
@@ -1609,10 +1672,22 @@ internal class SaveGame
             }
             ResetStompability();
             CurrentDepth = 0;
-            CurTown = SingletonRepository.Towns.ToWeightedRandom().Choose();
-            while (CurTown.Char == 'K' || CurTown.Char == 'N')
+            if (Configuration.StartupTown != null)
             {
-                CurTown = SingletonRepository.Towns[Rng.RandomLessThan(SingletonRepository.Towns.Count)];
+                Town? startupTown = SingletonRepository.Towns.Get(Configuration.StartupTown);
+                if (startupTown == null)
+                {
+                    throw new Exception("The configured startup town does not exist.");
+                }
+                CurTown = startupTown;
+            }
+            else
+            {
+                CurTown = SingletonRepository.Towns.ToWeightedRandom().Choose();
+                while (!CurTown.AllowStartupTown)
+                {
+                    CurTown = SingletonRepository.Towns[Rng.RandomLessThan(SingletonRepository.Towns.Count)];
+                }
             }
             CurDungeon = SingletonRepository.Dungeons[CurTown.Index];
             RecallDungeon = CurDungeon;
@@ -1677,12 +1752,12 @@ internal class SaveGame
         CloseGame();
     }
 
-    public HomeStore FindHomeStore(int town) => (HomeStore)Array.Find(SingletonRepository.Towns[town].Stores, store => store.GetType() == typeof(HomeStore));
+    public Store? FindHomeStore(int town) => Array.Find(SingletonRepository.Towns[town].Stores, store => store.GetType() == typeof(HomeStoreFactory));
 
     public void MoveHouse(int oldTown, int newTown)
     {
-        Store newStore = FindHomeStore(newTown);
-        Store oldStore = FindHomeStore(oldTown);
+        Store? newStore = FindHomeStore(newTown);
+        Store? oldStore = FindHomeStore(oldTown);
         if (oldStore == null)
         {
             return;
@@ -12063,28 +12138,26 @@ internal class SaveGame
             SingletonRepository.Tiles.Add(storeFloorTileType);
         }
 
-        if (CurTown.Char != 'K')
+        if (store.StoreFactory.IsEmptyLot)
         {
-            if (store.GetType() == typeof(EmptyLotStore))
+            switch (Rng.DieRoll(10))
             {
-                switch (Rng.DieRoll(10))
-                {
-                    case 3:
-                    case 7:
-                    case 9:
-                        break;
+                case 3:
+                case 7:
+                case 9:
+                    break;
 
-                    case 6:
-                        BuildGraveyard(yy, xx);
-                        break;
+                case 6:
+                    BuildGraveyard(yy, xx);
+                    break;
 
-                    default:
-                        BuildField(yy, xx);
-                        break;
-                }
-                return;
+                default:
+                    BuildField(yy, xx);
+                    break;
             }
+            return;
         }
+
         int y0 = (yy * 9) + 6;
         int x0 = (xx * 15) + 10;
         int y1 = y0 - Rng.DieRoll(2);
@@ -12100,7 +12173,7 @@ internal class SaveGame
             for (x = x1; x <= x2; x++)
             {
                 cPtr = Grid[y][x];
-                if (CurTown.Char == 'K')
+                if (!store.StoreFactory.BuildingsMadeFromPermanentRock)
                 {
                     switch (Rng.DieRoll(6))
                     {
@@ -12132,7 +12205,7 @@ internal class SaveGame
         y = y2;
         x = Rng.RandomBetween(x1 + 1, x2 - 2);
         cPtr = Grid[y][x];
-        if (CurTown.Char == 'K')
+        if (store.StoreFactory.StoreEntranceDoorsAreBlownOff)
         {
             if (Rng.DieRoll(8) == 6)
             {
@@ -12275,223 +12348,6 @@ internal class SaveGame
         Grid[y + 1][x + 1].RevertToBackground();
         Grid[y + 2][x].RevertToBackground();
     }
-
-    //private void MakeDungeonLevel()
-    //{
-    //    int k;
-    //    int y;
-    //    int x;
-    //    int maxVaultOk = 2;
-    //    bool destroyed = false;
-    //    bool emptyLevel = false;
-
-    //    Cent = new GridCoordinate[CentMax];
-    //    //for (int i = 0; i < CentMax; i++)
-    //    //{
-    //    //    Cent[i] = new MapCoordinate();
-    //    //}
-    //    Door = new GridCoordinate[DoorMax];
-    //    //for (int i = 0; i < DoorMax; i++)
-    //    //{
-    //    //    Door[i] = new MapCoordinate();
-    //    //}
-    //    Wall = new GridCoordinate[WallMax];
-    //    //for (int i = 0; i < WallMax; i++)
-    //    //{
-    //    //    Wall[i] = new MapCoordinate();
-    //    //}
-    //    Tunn = new GridCoordinate[TunnMax];
-    //    //for (int i = 0; i < TunnMax; i++)
-    //    //{
-    //    //    Tunn[i] = new MapCoordinate();
-    //    //}
-    //    RoomMap = new bool[MaxRoomsRow][];
-    //    for (int i = 0; i < MaxRoomsRow; i++)
-    //    {
-    //        RoomMap[i] = new bool[MaxRoomsCol];
-    //    }
-
-    //    if (MaxPanelRows == 0)
-    //    {
-    //        maxVaultOk--;
-    //    }
-    //    if (MaxPanelCols == 0)
-    //    {
-    //        maxVaultOk--;
-    //    }
-    //    if (Rng.DieRoll(_emptyLevel) == 1)
-    //    {
-    //        emptyLevel = true;
-    //    }
-    //    for (y = 0; y < CurHgt; y++)
-    //    {
-    //        for (x = 0; x < CurWid; x++)
-    //        {
-    //            GridTile cPtr = Grid[y][x];
-    //            if (emptyLevel)
-    //            {
-    //                cPtr.RevertToBackground();
-    //            }
-    //            else
-    //            {
-    //                cPtr.SetFeature("WallBasic");
-    //            }
-    //        }
-    //    }
-    //    if (Difficulty > 10 && Rng.RandomLessThan(_dunDest) == 0)
-    //    {
-    //        destroyed = true;
-    //    }
-    //    if (IsQuest(CurrentDepth))
-    //    {
-    //        destroyed = false;
-    //    }
-    //    RowRooms = CurHgt / _blockHgt;
-    //    ColRooms = CurWid / _blockWid;
-    //    for (y = 0; y < RowRooms; y++)
-    //    {
-    //        for (x = 0; x < ColRooms; x++)
-    //        {
-    //            RoomMap[y][x] = false;
-    //        }
-    //    }
-    //    Crowded = false;
-    //    CentN = 0;
-    //    for (int i = 0; i < _dunRooms; i++)
-    //    {
-    //        y = Rng.RandomLessThan(RowRooms);
-    //        x = Rng.RandomLessThan(ColRooms);
-    //        if (x % 3 == 0)
-    //        {
-    //            x++;
-    //        }
-    //        if (x % 3 == 2)
-    //        {
-    //            x--;
-    //        }
-    //        if (destroyed)
-    //        {
-    //            if (RoomBuild(y, x, SingletonRepository.RoomLayouts.Get(nameof(Type1RoomLayout))))
-    //            {
-    //            }
-    //            continue;
-    //        }
-    //        if (Rng.RandomLessThan(_dunUnusual) < Difficulty)
-    //        {
-    //            k = Rng.RandomLessThan(100);
-    //            if (Rng.RandomLessThan(_dunUnusual) < Difficulty)
-    //            {
-    //                if (k < 10)
-    //                {
-    //                    if (maxVaultOk > 1)
-    //                    {
-    //                        if (RoomBuild(y, x, SingletonRepository.RoomLayouts.Get(nameof(Type8RoomLayout))))
-    //                        {
-    //                            continue;
-    //                        }
-    //                    }
-    //                }
-    //                if (k < 25)
-    //                {
-    //                    if (maxVaultOk > 0)
-    //                    {
-    //                        if (RoomBuild(y, x, SingletonRepository.RoomLayouts.Get(nameof(Type7RoomLayout))))
-    //                        {
-    //                            continue;
-    //                        }
-    //                    }
-    //                }
-    //                if (k < 40 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get(nameof(Type5RoomLayout))))
-    //                {
-    //                    continue;
-    //                }
-    //                if (k < 55 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get(nameof(Type6RoomLayout))))
-    //                {
-    //                    continue;
-    //                }
-    //            }
-    //            if (k < 25 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get(nameof(Type4RoomLayout))))
-    //            {
-    //                continue;
-    //            }
-    //            if (k < 50 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get(nameof(Type3RoomLayout))))
-    //            {
-    //                continue;
-    //            }
-    //            if (k < 100 && RoomBuild(y, x, SingletonRepository.RoomLayouts.Get(nameof(Type2RoomLayout))))
-    //            {
-    //                continue;
-    //            }
-    //        }
-    //        if (RoomBuild(y, x, SingletonRepository.RoomLayouts.Get(nameof(Type1RoomLayout))))
-    //        {
-    //        }
-    //    }
-    //    for (x = 0; x < CurWid; x++)
-    //    {
-    //        GridTile cPtr = Grid[0][x];
-    //        cPtr.SetFeature("WallPermSolid");
-    //    }
-    //    for (x = 0; x < CurWid; x++)
-    //    {
-    //        GridTile cPtr = Grid[CurHgt - 1][x];
-    //        cPtr.SetFeature("WallPermSolid");
-    //    }
-    //    for (y = 0; y < CurHgt; y++)
-    //    {
-    //        GridTile cPtr = Grid[y][0];
-    //        cPtr.SetFeature("WallPermSolid");
-    //    }
-    //    for (y = 0; y < CurHgt; y++)
-    //    {
-    //        GridTile cPtr = Grid[y][CurWid - 1];
-    //        cPtr.SetFeature("WallPermSolid");
-    //    }
-    //    for (int i = 0; i < CentN; i++)
-    //    {
-    //        int pick1 = Rng.RandomLessThan(CentN);
-    //        int pick2 = Rng.RandomLessThan(CentN);
-    //        int y1 = Cent[pick1].Y;
-    //        int x1 = Cent[pick1].X;
-    //        Cent[pick1] = Cent[pick2].Clone();
-    //        Cent[pick2] = new GridCoordinate(x1, y1);
-    //    }
-    //    DoorN = 0;
-    //    y = Cent[CentN - 1].Y;
-    //    x = Cent[CentN - 1].X;
-    //    for (int i = 0; i < CentN; i++)
-    //    {
-    //        BuildTunnel(Cent[i].Y, Cent[i].X, y, x);
-    //        y = Cent[i].Y;
-    //        x = Cent[i].X;
-    //    }
-    //    for (int i = 0; i < DoorN; i++)
-    //    {
-    //        y = Door[i].Y;
-    //        x = Door[i].X;
-    //        TryDoor(y, x - 1);
-    //        TryDoor(y, x + 1);
-    //        TryDoor(y - 1, x);
-    //        TryDoor(y + 1, x);
-    //    }
-    //    for (int i = 0; i < _dunStrMag; i++)
-    //    {
-    //        BuildStreamer("Magma", _dunStrMc);
-    //    }
-    //    for (int i = 0; i < _dunStrQua; i++)
-    //    {
-    //        BuildStreamer("Quartz", _dunStrQc);
-    //    }
-    //    if (destroyed)
-    //    {
-    //        DestroyLevel();
-    //    }
-    //    if (emptyLevel && (Rng.DieRoll(_darkEmpty) != 1 ||
-    //                       Rng.DieRoll(100) > Difficulty))
-    //    {
-    //        WizLight();
-    //    }
-    //}
 
     private void MakeHenge(int left, int top, int width, int height)
     {
@@ -12819,7 +12675,7 @@ internal class SaveGame
                     } while (true);
                     occupied.Add($"{x},{y}");
 
-                    if (CurTown.Char == 'K')
+                    if (CurTown.UnusedStoreLotsAreGraveyards)
                     {
                         BuildGraveyard(y, x);
                     }
@@ -12961,7 +12817,7 @@ internal class SaveGame
             case LevelStart.StartHouse:
                 foreach (Store store in CurTown.Stores)
                 {
-                    if (store.GetType() != typeof(HomeStore))
+                    if (store.GetType() != typeof(HomeStoreFactory))
                     {
                         continue;
                     }
@@ -13655,71 +13511,13 @@ internal class SaveGame
         }
     }
 
-    //private bool RoomBuild(int y0, int x0, RoomLayout roomType)
-    //{
-    //    if (Difficulty < _room[roomType.Type].Level)
-    //    {
-    //        return false;
-    //    }
-    //    if (Crowded && (roomType.Type == 5 || roomType.Type == 6))
-    //    {
-    //        return false;
-    //    }
-    //    int y1 = y0 + _room[roomType.Type].Dy1;
-    //    int y2 = y0 + _room[roomType.Type].Dy2;
-    //    int x1 = x0 + _room[roomType.Type].Dx1;
-    //    int x2 = x0 + _room[roomType.Type].Dx2;
-    //    if (y1 < 0 || y2 >= RowRooms)
-    //    {
-    //        return false;
-    //    }
-    //    if (x1 < 0 || x2 >= ColRooms)
-    //    {
-    //        return false;
-    //    }
-    //    int y;
-    //    int x;
-    //    for (y = y1; y <= y2; y++)
-    //    {
-    //        for (x = x1; x <= x2; x++)
-    //        {
-    //            if (RoomMap[y][x])
-    //            {
-    //                return false;
-    //            }
-    //        }
-    //    }
-    //    y = (y1 + y2 + 1) * _blockHgt / 2;
-    //    x = (x1 + x2 + 1) * _blockWid / 2;
-    //    roomType.Build(y, x);
-    //    if (CentN < CentMax)
-    //    {
-    //        Cent[CentN] = new GridCoordinate(x, y);
-    //        CentN++;
-    //    }
-    //    for (y = y1; y <= y2; y++)
-    //    {
-    //        for (x = x1; x <= x2; x++)
-    //        {
-    //            RoomMap[y][x] = true;
-    //        }
-    //    }
-    //    if (roomType.Type == 5 || roomType.Type == 6)
-    //    {
-    //        Crowded = true;
-    //    }
-    //    return true;
-    //}
-
     private void TownGen()
     {
-        int i, y, x;
-        GridTile cPtr;
-        for (y = 0; y < CurHgt; y++)
+        for (int y = 0; y < CurHgt; y++)
         {
-            for (x = 0; x < CurWid; x++)
+            for (int x = 0; x < CurWid; x++)
             {
-                cPtr = Grid[y][x];
+                GridTile cPtr = Grid[y][x];
                 cPtr.RevertToBackground();
             }
         }
@@ -13729,23 +13527,23 @@ internal class SaveGame
         ResolvePaths();
         if (GameTime.IsLight)
         {
-            for (y = 0; y < CurHgt; y++)
+            for (int y = 0; y < CurHgt; y++)
             {
-                for (x = 0; x < CurWid; x++)
+                for (int x = 0; x < CurWid; x++)
                 {
-                    cPtr = Grid[y][x];
+                    GridTile cPtr = Grid[y][x];
                     cPtr.TileFlags.Set(GridTile.SelfLit);
                     cPtr.TileFlags.Set(GridTile.PlayerMemorized);
                 }
             }
-            for (i = 0; i < Constants.MinMAllocTd; i++)
+            for (int i = 0; i < Constants.MinMAllocTd; i++)
             {
                 AllocMonster(3, true);
             }
         }
         else
         {
-            for (i = 0; i < Constants.MinMAllocTn; i++)
+            for (int i = 0; i < Constants.MinMAllocTn; i++)
             {
                 AllocMonster(3, true);
             }

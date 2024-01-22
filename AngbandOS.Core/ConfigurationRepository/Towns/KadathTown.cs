@@ -11,22 +11,25 @@ namespace AngbandOS.Core.Towns;
 internal class KadathTown : Town
 {
     private KadathTown(SaveGame saveGame) : base(saveGame) { }
-    protected override string[] StoreNames => new string[] {
-        nameof(EmptyLotStore),
-        nameof(EmptyLotStore),
-        nameof(EmptyLotStore),
-        nameof(EmptyLotStore),
-        nameof(EmptyLotStore),
-        nameof(EmptyLotStore),
-        nameof(EmptyLotStore),
-        nameof(EmptyLotStore),
-        nameof(EmptyLotStore),
-        nameof(EmptyLotStore),
-        nameof(EmptyLotStore),
-        nameof(EmptyLotStore)
+    protected override string[] StoreFactoryNames => new string[] {
+        nameof(AbandonedStoreFactory),
+        nameof(AbandonedStoreFactory),
+        nameof(AbandonedStoreFactory),
+        nameof(AbandonedStoreFactory),
+        nameof(AbandonedStoreFactory),
+        nameof(AbandonedStoreFactory),
+        nameof(AbandonedStoreFactory),
+        nameof(AbandonedStoreFactory),
+        nameof(AbandonedStoreFactory),
+        nameof(AbandonedStoreFactory),
+        nameof(AbandonedStoreFactory),
+        nameof(AbandonedStoreFactory)
     };
 
     public override int HousePrice => 0;
     public override string Name => "Kadath, home of the Gods";
     public override char Char => 'K';
+ //   public override bool AllowStartupTown => false;
+    public override bool UnusedStoreLotsAreGraveyards => true;
+    public override bool CanBeEscortedHere => false;
 }

@@ -850,6 +850,11 @@ internal abstract class Item : IComparable<Item>, IGetKey<string>
         return true;
     }
 
+    /// <summary>
+    /// Returns true, if two objects can be absorbed into one for the home store.
+    /// </summary>
+    /// <param name="other"></param>
+    /// <returns></returns>
     public bool CanAbsorb(Item other)
     {
         int total = Count + other.Count;
@@ -874,8 +879,7 @@ internal abstract class Item : IComparable<Item>, IGetKey<string>
         {
             return false;
         }
-        if (!string.IsNullOrEmpty(Inscription) && !string.IsNullOrEmpty(other.Inscription) &&
-            Inscription != other.Inscription)
+        if (!string.IsNullOrEmpty(Inscription) && !string.IsNullOrEmpty(other.Inscription) && Inscription != other.Inscription)
         {
             return false;
         }

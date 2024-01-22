@@ -19,11 +19,11 @@ internal class JsonTown : IJsonModel<TownDefinition>
 
     public char? Char { get; set; }
 
-    public string[]? StoreNames { get; set; }
+    public string[]? StoreFactoryNames { get; set; }
 
     public TownDefinition? ToDefinition()
     {
-        if (Key == null || HousePrice == null || Name == null || Char == null || StoreNames == null)
+        if (Key == null || HousePrice == null || Name == null || Char == null || StoreFactoryNames == null)
             return null;
 
         return new TownDefinition()
@@ -32,7 +32,7 @@ internal class JsonTown : IJsonModel<TownDefinition>
             HousePrice = HousePrice.Value,
             Name = Name,
             Char = Char.Value,
-            StoreNames = StoreNames
+            StoreFactoryNames = StoreFactoryNames
         };
     }
 }

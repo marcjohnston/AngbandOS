@@ -5,14 +5,14 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Stores;
+namespace AngbandOS.Core.StoreFactories;
 
 [Serializable]
-internal class WeaponStore : Store
+internal class WeaponStoreFactory : StoreFactory
 {
-    private WeaponStore(SaveGame saveGame) : base(saveGame) { }
+    private WeaponStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    protected override StoreOwner[] StoreOwners => new StoreOwner[]
+    public override StoreOwner[] StoreOwners => new StoreOwner[]
     {
         SaveGame.SingletonRepository.StoreOwners.Get(nameof(ArnoldTheBeastlyStoreOwner)),
         SaveGame.SingletonRepository.StoreOwners.Get(nameof(ArndalBeastSlayerStoreOwner)),
@@ -44,7 +44,7 @@ internal class WeaponStore : Store
     public override ColourEnum Colour => ColourEnum.White;
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberThreeSymbol));
 
-    protected override StockStoreInventoryItem[] GetStoreTable()
+    public override StockStoreInventoryItem[] GetStoreTable()
     {
         return new[]
         {
@@ -97,5 +97,5 @@ internal class WeaponStore : Store
                 return false;
         }
     }
-    protected override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(EnchantWeaponStoreCommand));
+    public override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(EnchantWeaponStoreCommand));
 }

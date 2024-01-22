@@ -243,38 +243,10 @@ public partial class MainWindow : Window, IConsoleViewPort
         string savePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         string saveFilename = Path.Combine(savePath, "My Games\\angbandos.savefile");
         ICorePersistentStorage persistentStorage = new AngbandOS.PersistentStorage.FileSystemPersistentStorage(saveFilename);
-        Configuration configuration = new Configuration();
-
-        JsonTown jsonTown = LoadFromJson<JsonTown>("Town.json");
-        if (jsonTown == null)
+        Configuration configuration = new Configuration()
         {
-            throw new Exception("The singleton object failed to deserialize.");
-        }
-        if (jsonTown.Char == null)
-        {
-            throw new Exception("The Town.Char property failed to deserialize.");
-        }
-        if (jsonTown.HousePrice == null || jsonTown.Name == null || jsonTown.Stores == null)
-        {
-            throw new Exception("The Town.HousePrice property failed to deserialize.");
-        }
-        if (jsonTown.Name == null)
-        {
-            throw new Exception("The Town.Name property failed to deserialize.");
-        }
-        if (jsonTown.Stores == null)
-        {
-            throw new Exception("The Town.StoreNames property failed to deserialize.");
-        }
-        TownDefinition townDefinition = new TownDefinition()
-        {
-            Character = jsonTown.Char.Value,
-            HousePrice = jsonTown.HousePrice.Value,
-            Name = jsonTown.Name,
-            StoreNames = jsonTown.Stores
+            StartupTown = "KadathTown"
         };
-
-        configuration.Towns = new TownDefinition[] { townDefinition };
 
         if (persistentStorage.GameExists())
         {

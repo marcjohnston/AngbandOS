@@ -15,7 +15,7 @@ internal class MGetStoreCommand : StoreCommand
 
     public override string Description => "";
 
-    public override bool IsEnabled(Store store) => (store.GetType() != typeof(HallStore));
+    public override bool IsEnabled(StoreFactory storeFactory) => (storeFactory.GetType() != typeof(HallStoreFactory));
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {

@@ -5,14 +5,14 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Stores;
+namespace AngbandOS.Core.StoreFactories;
 
 [Serializable]
-internal class LibraryStore : Store
+internal class LibraryStoreFactory : StoreFactory
 {
-    private LibraryStore(SaveGame saveGame) : base(saveGame) { }
+    private LibraryStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    protected override StoreOwner[] StoreOwners => new StoreOwner[]
+    public override StoreOwner[] StoreOwners => new StoreOwner[]
     {
         SaveGame.SingletonRepository.StoreOwners.Get(nameof(RandolphCarterStoreOwner)),
         SaveGame.SingletonRepository.StoreOwners.Get(nameof(OdnarTheSageStoreOwner)),
@@ -44,7 +44,7 @@ internal class LibraryStore : Store
     public override ColourEnum Colour => ColourEnum.Orange;
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberNineSymbol));
 
-    protected override StockStoreInventoryItem[] GetStoreTable()
+    public override StockStoreInventoryItem[] GetStoreTable()
     {
         return new[]
         {
@@ -86,5 +86,5 @@ internal class LibraryStore : Store
                 return false;
         }
     }
-    protected override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(ResearchSpellStoreCommand));
+    public override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(ResearchSpellStoreCommand));
 }

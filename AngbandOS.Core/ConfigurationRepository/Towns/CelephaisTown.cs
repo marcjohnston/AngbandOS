@@ -11,19 +11,19 @@ namespace AngbandOS.Core.Towns;
 internal class CelephaisTown : Town
 {
     private CelephaisTown(SaveGame saveGame) : base(saveGame) { }
-    protected override string[] StoreNames => new string[] {
-        nameof(GeneralStore),
-        nameof(ArmouryStore),
-        nameof(WeaponStore),
-        nameof(TempleStore),
-        nameof(TempleStore),
-        nameof(AlchemistStore),
-        nameof(MagicStore),
-        nameof(HomeStore),
-        nameof(LibraryStore),
-        nameof(InnStore),
-        nameof(HallStore),
-        nameof(PawnStore)
+    protected override string[] StoreFactoryNames => new string[] {
+        nameof(GeneralStoreFactory),
+        nameof(ArmouryStoreFactory),
+        nameof(WeaponStoreFactory),
+        nameof(TempleStoreFactory),
+        nameof(TempleStoreFactory),
+        nameof(AlchemistStoreFactory),
+        nameof(MagicStoreFactory),
+        nameof(HomeStoreFactory),
+        nameof(LibraryStoreFactory),
+        nameof(InnStoreFactory),
+        nameof(HallStoreFactory),
+        nameof(PawnStoreFactory)
     };
     public override int HousePrice => 50000;
     public override string Name => "the beautiful city of Celephais";

@@ -5,14 +5,14 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Stores;
+namespace AngbandOS.Core.StoreFactories;
 
 [Serializable]
-internal class PawnStore : Store
+internal class PawnStoreFactory : StoreFactory
 {
-    private PawnStore(SaveGame saveGame) : base(saveGame) { }
+    private PawnStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    protected override StoreOwner[] StoreOwners => new StoreOwner[]
+    public override StoreOwner[] StoreOwners => new StoreOwner[]
     {
         SaveGame.SingletonRepository.StoreOwners.Get(nameof(MagdTheRuthlessStoreOwner)),
         SaveGame.SingletonRepository.StoreOwners.Get(nameof(DrakoFairdealStoreOwner)),
@@ -44,14 +44,14 @@ internal class PawnStore : Store
     {
         return item.Value() > 0;
     }
-    protected override StockStoreInventoryItem[] GetStoreTable()
+    public override StockStoreInventoryItem[] GetStoreTable()
     {
         return null;
     }
 
-    protected override bool MaintainsStockLevels => false;
+    public override bool MaintainsStockLevels => false;
     public override bool ShufflesOwnersAndPricing => false;
-    protected override string BoughtVerb => "pawn";
+    public override string BoughtVerb => "pawn";
 
     /// <summary>
     /// 
@@ -66,7 +66,7 @@ internal class PawnStore : Store
     /// them back later forTheamount you pawned them for. If retrieving your items fromThepawn shop had a
     /// markup then you'd be better off just selling them  normally and buying new ones to replace them.
     /// </remarks>
-    protected override int AdjustPrice(int price, bool trueToMarkDownFalseToMarkUp)
+    public override int AdjustPrice(int price, bool trueToMarkDownFalseToMarkUp)
     {
         if (trueToMarkDownFalseToMarkUp == true)
         {
@@ -77,13 +77,13 @@ internal class PawnStore : Store
             return price / 3;
         }
     }
-    protected override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(IdentifyAllStoreCommand));
-    protected override string GetItemDescription(Item oPtr) => oPtr.Description(true, 3);
+    public override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(IdentifyAllStoreCommand));
+    public override string GetItemDescription(Item oPtr) => oPtr.Description(true, 3);
 
-    protected override bool StoreIdentifiesItems => false;
-    protected override bool StoreAnalyzesPurchases => false;
-    protected override bool PerformsMaintenanceWhenResting => false;
-    protected override int CarryItem(Item qPtr) => HomeCarry(qPtr);
-    protected override string BoughtMessage(string oName, int price) => $"You bought back {oName} for {price} gold.";
+    public override bool StoreIdentifiesItems => false;
+    public override bool StoreAnalyzesPurchases => false;
+    public override bool PerformsMaintenanceWhenResting => false;
+    public override bool UseHomeCarry => true;
+    public override string BoughtMessage(string oName, int price) => $"You bought back {oName} for {price} gold.";
 
 }

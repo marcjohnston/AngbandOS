@@ -11,22 +11,23 @@ namespace AngbandOS.Core.Towns;
 internal class NirTown : Town
 {
     private NirTown(SaveGame saveGame) : base(saveGame) { }
-    protected override string[] StoreNames => new string[] {
-        nameof(GeneralStore),
-        nameof(EmptyLotStore),
-        nameof(EmptyLotStore),
-        nameof(EmptyLotStore),
-        nameof(EmptyLotStore),
-        nameof(EmptyLotStore),
-        nameof(EmptyLotStore),
-        nameof(EmptyLotStore),
-        nameof(EmptyLotStore),
-        nameof(EmptyLotStore),
-        nameof(InnStore),
-        nameof(PawnStore)
+    protected override string[] StoreFactoryNames => new string[] {
+        nameof(GeneralStoreFactory),
+        nameof(EmptyLotStoreFactory),
+        nameof(EmptyLotStoreFactory),
+        nameof(EmptyLotStoreFactory),
+        nameof(EmptyLotStoreFactory),
+        nameof(EmptyLotStoreFactory),
+        nameof(EmptyLotStoreFactory),
+        nameof(EmptyLotStoreFactory),
+        nameof(EmptyLotStoreFactory),
+        nameof(EmptyLotStoreFactory),
+        nameof(InnStoreFactory),
+        nameof(PawnStoreFactory)
     };
 
     public override int HousePrice => 0;
     public override string Name => "the hamlet of Nir";
     public override char Char => 'N';
+ //  public override bool AllowStartupTown => false;
 }

@@ -16,11 +16,10 @@ internal class BuyHouseStoreCommand : StoreCommand
 
     public override string Description => "Buy a house";
 
-    public override bool IsEnabled(Store store) => (store.GetType() == typeof(HallStore));
+    public override bool IsEnabled(StoreFactory storeFactory) => (storeFactory.GetType() == typeof(HallStoreFactory));
 
     public override void Execute(StoreCommandEvent storeCommandEvent)
     {
-        HomeStore homeStore = SaveGame.FindHomeStore(SaveGame.CurTown.Index);
-        homeStore.BuyHouse();
+        SaveGame.BuyHouse();
     }
 }

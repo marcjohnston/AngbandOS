@@ -5,14 +5,14 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Stores;
+namespace AngbandOS.Core.StoreFactories;
 
 [Serializable]
-internal class EmptyLotStore : Store
+internal class AbandonedStoreFactory : StoreFactory
 {
-    private EmptyLotStore(SaveGame saveGame) : base(saveGame) { }
+    private AbandonedStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    protected override StoreOwner[] StoreOwners => new StoreOwner[]
+    public override StoreOwner[] StoreOwners => new StoreOwner[]
     {
         SaveGame.SingletonRepository.StoreOwners.Get(nameof(EmptyLotStoreOwner))
     };
@@ -20,16 +20,18 @@ internal class EmptyLotStore : Store
     public override string FeatureType => "";
     public override ColourEnum Colour => ColourEnum.White;
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(SpaceBarSymbol));
+    public override bool BuildingsMadeFromPermanentRock => false;
+    public override bool StoreEntranceDoorsAreBlownOff => true;
 
+    /// <summary>
+    /// Returns true, because this store type generates as an empty lot.
+    /// </summary>
     public override bool ItemMatches(Item item)
     {
         return false;
     }
-    protected override bool MaintainsStockLevels => false;
+    public override bool MaintainsStockLevels => false;
     public override bool ShufflesOwnersAndPricing => false;
-    protected override StockStoreInventoryItem[] GetStoreTable()
-    {
-        return null;
-    }
-    protected override bool PerformsMaintenanceWhenResting => false;
+    public override StockStoreInventoryItem[] GetStoreTable() => null;
+    public override bool PerformsMaintenanceWhenResting => false;
 }

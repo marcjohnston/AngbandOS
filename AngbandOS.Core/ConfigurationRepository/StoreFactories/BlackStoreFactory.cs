@@ -5,12 +5,12 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Stores;
+namespace AngbandOS.Core.StoreFactories;
 
 [Serializable]
-internal class BlackStore : Store
+internal class BlackStoreFactory : StoreFactory
 {
-    private BlackStore(SaveGame saveGame) : base(saveGame) { }
+    private BlackStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
     public override int MaxInventory => 75;
     public override int StoreMinKeep => 35;
@@ -21,7 +21,7 @@ internal class BlackStore : Store
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberSevenSymbol));
     public override string Description => "Black Market";
 
-    protected override StoreOwner[] StoreOwners => new StoreOwner[]
+    public override StoreOwner[] StoreOwners => new StoreOwner[]
     {
         SaveGame.SingletonRepository.StoreOwners.Get(nameof(VhassaTheDeadStoreOwner)),
         SaveGame.SingletonRepository.StoreOwners.Get(nameof(KynTheTreacherousStoreOwner)),
@@ -45,17 +45,14 @@ internal class BlackStore : Store
         SaveGame.SingletonRepository.StoreOwners.Get(nameof(FalarewynStoreOwner))
     };
 
-    protected override StockStoreInventoryItem[] GetStoreTable()
-    {
-        return null;
-    }
+    public override StockStoreInventoryItem[] GetStoreTable() => null;
 
     public override bool ItemMatches(Item item)
     {
         return item.Value() > 0;
     }
 
-    protected override int AdjustPrice(int price, bool trueToMarkDownFalseToMarkUp)
+    public override int AdjustPrice(int price, bool trueToMarkDownFalseToMarkUp)
     {
         if (trueToMarkDownFalseToMarkUp == true)
         {
@@ -67,7 +64,7 @@ internal class BlackStore : Store
         }
     }
 
-    protected override Item CreateItem()
+    public override Item? CreateItem(Store store)
     {
         int level;
         level = 35 + SaveGame.Rng.RandomLessThan(35);
@@ -77,8 +74,8 @@ internal class BlackStore : Store
             return null; ;
         }
         Item qPtr = itemType.CreateItem();
-        qPtr.ApplyMagic(level, false, false, false, this);
+        qPtr.ApplyMagic(level, false, false, false, store);
         return qPtr;
     }
-    protected override int MinimumItemValue => 10;
+    public override int MinimumItemValue => 10;
 }

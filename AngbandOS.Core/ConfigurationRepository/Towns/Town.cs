@@ -24,11 +24,12 @@ internal abstract class Town : IGetKey<string>, IToJson
     public int Y = 0;
     public int Index;
 
+    public virtual bool AllowStartupTown => true;
     public abstract char Char { get; }
     public abstract int HousePrice { get; }
     public abstract string Name { get; }
     public Store[] Stores { get; private set; }
-    protected abstract string[] StoreNames { get; }
+    protected abstract string[] StoreFactoryNames { get; }
 
     public virtual string Key => GetType().Name;
 
@@ -39,13 +40,23 @@ internal abstract class Town : IGetKey<string>, IToJson
         SaveGame = saveGame;
     }
 
+    /// <summary>
+    /// Returns true, if unused store lots should be graveyards; false, for them to be fields.  In Kadath, unused fields are graveyards.
+    /// </summary>
+    public virtual bool UnusedStoreLotsAreGraveyards => false;
+
+    /// <summary>
+    /// Returns true, if inns can escort the player to this town; false, otherwise.  Inns do not provide escort services to Kadath.
+    /// </summary>
+    public virtual bool CanBeEscortedHere => true;
+
     public void Loaded()
     {
         List<Store> stores = new List<Store>();
-        foreach (string storeName in StoreNames)
+        foreach (string storeName in StoreFactoryNames)
         {
-            Store store = SaveGame.SingletonRepository.Stores.Get(storeName);
-            stores.Add(store);
+            StoreFactory storeFactory = SaveGame.SingletonRepository.Stores.Get(storeName);
+            stores.Add(new Store(SaveGame, storeFactory));
         }
         Stores = stores.ToArray();
     }
@@ -58,7 +69,7 @@ internal abstract class Town : IGetKey<string>, IToJson
             HousePrice = HousePrice,
             Name = Name,
             Char = Char,
-            StoreNames = Stores.Select(_store => _store.Key).ToArray(),
+            StoreFactoryNames = Stores.Select(_store => _store.StoreFactory.Key).ToArray(),
         };
         return JsonSerializer.Serialize<TownDefinition>(townDefinition);
     }

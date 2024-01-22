@@ -5,14 +5,14 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Stores;
+namespace AngbandOS.Core.StoreFactories;
 
 [Serializable]
-internal class GeneralStore : Store
+internal class GeneralStoreFactory : StoreFactory
 {
-    private GeneralStore(SaveGame saveGame) : base(saveGame) { }
+    private GeneralStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    protected override StoreOwner[] StoreOwners => new StoreOwner[]
+    public override StoreOwner[] StoreOwners => new StoreOwner[]
     {
         SaveGame.SingletonRepository.StoreOwners.Get(nameof(FalilmawenTheFriendlyStoreOwner)),
         SaveGame.SingletonRepository.StoreOwners.Get(nameof(VoirinTheCowardlyStoreOwner)),
@@ -49,7 +49,7 @@ internal class GeneralStore : Store
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberOneSymbol));
     public override string Description => "General Store";
 
-    protected override StockStoreInventoryItem[] GetStoreTable()
+    public override StockStoreInventoryItem[] GetStoreTable()
     {
         return new[]
         {
@@ -92,5 +92,5 @@ internal class GeneralStore : Store
         }
     }
 
-    protected override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(HireEscortStoreCommand));
+    public override StoreCommand AdvertisedStoreCommand4 => SaveGame.SingletonRepository.StoreCommands.Get(nameof(HireEscortStoreCommand));
 }

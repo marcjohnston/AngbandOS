@@ -16,7 +16,7 @@ internal class GenericTown : Town
     private readonly int _housePrice;
     private readonly string _name;
     private readonly char _char;
-    private readonly string[] _storeNames;
+    private readonly string[] _storeFactoryNames;
 
     public GenericTown(SaveGame saveGame, TownDefinition townDefinition) : base(saveGame)
     {
@@ -24,12 +24,12 @@ internal class GenericTown : Town
         _housePrice = townDefinition.HousePrice;
         _name = townDefinition.Name;
         _char = townDefinition.Char;
-        _storeNames = townDefinition.StoreNames;
+        _storeFactoryNames = townDefinition.StoreFactoryNames;
     }
 
     public override string Key => _key;
     public override int HousePrice => _housePrice;
     public override string Name => _name;
     public override char Char => _char;
-    protected override string[] StoreNames => _storeNames;
+    protected override string[] StoreFactoryNames => _storeFactoryNames;
 }
