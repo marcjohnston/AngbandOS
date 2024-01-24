@@ -14,7 +14,7 @@ internal class TempleStoreFactory : StoreFactory
 
     public override string FeatureType => "Temple";
     public override ColourEnum Colour => ColourEnum.Green;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberFourSymbol));
+    protected override string SymbolName => nameof(NumberFourSymbol);
 
     protected override string[] StoreOwnerNames => new string[]
     {

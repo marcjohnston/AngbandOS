@@ -31,6 +31,8 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
             storeOwnersList.Add(SaveGame.SingletonRepository.StoreOwners.Get(storeOwnerName));
         }
         StoreOwners = storeOwnersList.ToArray();
+
+        Symbol = SaveGame.SingletonRepository.Symbols.Get(SymbolName);
     }
 
     /// <summary>
@@ -174,7 +176,9 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     /// <summary>
     /// The symbol to use for rendering.
     /// </summary>
-    public abstract Symbol Symbol { get; }
+    public Symbol Symbol { get; private set; }
+
+    protected abstract string SymbolName { get; }
 
     public abstract ColourEnum Colour { get; }
 

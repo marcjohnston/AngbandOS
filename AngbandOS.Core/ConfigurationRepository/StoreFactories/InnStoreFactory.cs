@@ -46,7 +46,7 @@ internal class InnStoreFactory : StoreFactory
 
     public override string FeatureType => "Inn";
     public override ColourEnum Colour => ColourEnum.Purple;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(AmpersandSymbol));
+    protected override string SymbolName => nameof(AmpersandSymbol);
 
     public override bool ItemMatches(Item item)
     {

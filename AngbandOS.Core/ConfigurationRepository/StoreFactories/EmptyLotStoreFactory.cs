@@ -19,7 +19,7 @@ internal class EmptyLotStoreFactory : StoreFactory
 
     public override string FeatureType => "";
     public override ColourEnum Colour => ColourEnum.White;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(SpaceBarSymbol));
+    protected override string SymbolName => nameof(SpaceBarSymbol);
 
     /// <summary>
     /// Returns true, because this store type generates as an empty lot.

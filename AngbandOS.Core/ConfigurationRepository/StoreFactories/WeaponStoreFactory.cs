@@ -42,7 +42,7 @@ internal class WeaponStoreFactory : StoreFactory
 
     public override string FeatureType => "Weaponsmiths";
     public override ColourEnum Colour => ColourEnum.White;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberThreeSymbol));
+    protected override string SymbolName => nameof(NumberThreeSymbol);
 
     public override StockStoreInventoryItem[] GetStoreTable()
     {

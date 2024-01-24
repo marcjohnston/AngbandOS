@@ -19,7 +19,7 @@ internal class HallStoreFactory : StoreFactory
 
     public override string FeatureType => "HallOfRecords";
     public override ColourEnum Colour => ColourEnum.Yellow;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberEightSymbol));
+    protected override string SymbolName => nameof(NumberEightSymbol);
     public override string Description => "Hall of Records";
 
     public override bool ItemMatches(Item item)

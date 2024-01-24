@@ -42,7 +42,7 @@ internal class ArmouryStoreFactory : StoreFactory
 
     public override string FeatureType => "Armoury";
     public override ColourEnum Colour => ColourEnum.Grey;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberTwoSymbol));
+    protected override string SymbolName => nameof(NumberTwoSymbol);
 
     public override StockStoreInventoryItem[] GetStoreTable()
     {

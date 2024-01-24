@@ -38,7 +38,7 @@ internal class AlchemistStoreFactory : StoreFactory
 
     public override string FeatureType => "Alchemist";
     public override ColourEnum Colour => ColourEnum.Blue;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberFiveSymbol));
+    protected override string SymbolName => nameof(NumberFiveSymbol);
     public override string Description => "Alchemy Shop";
 
     public override StockStoreInventoryItem[] GetStoreTable()
