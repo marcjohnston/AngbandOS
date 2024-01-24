@@ -59,8 +59,8 @@ internal abstract class RepositoryCollection<T> : IEnumerable<T>, ILoadable
     public abstract void Load();
 
     /// <summary>
-    /// Processes the loaded phase for configuration repository items.  This phase allows each object to bind to other configuration repository objects.  Does nothing, by
-    /// default.  ListRepositoryCollections won't handle this phase.  DictionaryRepositoryCollections will process this Loaded phase.
+    /// Processes the bind phase for configuration repository items.  This phase allows each object to bind to other configuration repository objects.  Does nothing, by
+    /// default.  ListRepositoryCollections won't handle this phase.  DictionaryRepositoryCollections will pass this event the members of that collection.
     /// </summary>
-    public virtual void Loaded() { }
+    public virtual void Bind() { }
 }

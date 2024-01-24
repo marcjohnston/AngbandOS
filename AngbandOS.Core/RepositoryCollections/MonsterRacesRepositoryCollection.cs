@@ -18,8 +18,12 @@ internal class MonsterRacesRepositoryCollection : DictionaryRepositoryCollection
         Add(LoadTypesFromAssembly<MonsterRace>().OrderBy(_monsterRace => _monsterRace.LevelFound));
     }
 
-    public override void Loaded()
+    /// <summary>
+    /// Process the bind event for this repository.  Monsters need an additional step to identify their index.
+    /// </summary>
+    public override void Bind()
     {
+        base.Bind();
         // We need to initialize the monster race indexes.
         for (int i = 0; i < Count; i++)
         {

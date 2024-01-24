@@ -5,10 +5,26 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Interface.Definitions;
+
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
 internal class StoreCommandsRepositoryCollection : DictionaryRepositoryCollection<string, StoreCommand>
 {
     public StoreCommandsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
+    public override void Load()
+    {
+        if (SaveGame.Configuration.StoreCommands == null)
+        {
+            base.Load();
+        }
+        else
+        {
+            foreach (StoreCommandDefinition storeCommandDefinition in SaveGame.Configuration.StoreCommands)
+            {
+                Add(new GenericStoreCommand(SaveGame, storeCommandDefinition));
+            }
+        }
+    }
 }

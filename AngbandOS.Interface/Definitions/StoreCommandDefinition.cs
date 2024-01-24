@@ -5,10 +5,14 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core;
+namespace AngbandOS.Core.Interface.Definitions;
 
-internal interface ILoadable
+[Serializable]
+public class StoreCommandDefinition
 {
-    void Load();
-    void Bind();
+    public string Key { get; set; }
+    public char KeyChar { get; set; }
+    public string Description { get; set; }
+    public string[]? ValidStoreNames { get; set; }
+    public string ExecuteScriptName { get; set; }
 }

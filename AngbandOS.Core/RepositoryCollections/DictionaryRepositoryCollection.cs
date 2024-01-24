@@ -48,10 +48,10 @@ internal abstract class DictionaryRepositoryCollection<TKey, TValue> : ListRepos
     }
 
     /// <summary>
-    /// Processes the loaded event from the RepositoryCollection by calling the Loaded event for all items in the collection.  Since this is a dictionary repository, all
+    /// Processes the bind event from the RepositoryCollection by calling the Loaded event for all items in the collection.  Since this is a dictionary repository, all
     /// items must implement the IGetKey interface which also includes the Loaded event handler.
     /// </summary>
-    public override void Loaded()
+    public override void Bind()
     {
         foreach (TValue item in this)
         {

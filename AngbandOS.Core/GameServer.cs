@@ -200,9 +200,10 @@ public class GameServer
         if (persistentStorage != null && configuration == null) {
             configuration = new Configuration()
             {
-                //StoreOwners = RetrieveEntities<StoreOwnerDefinition, JsonStoreOwner>(persistentStorage, "StoreOwner"),
-                //Towns = RetrieveEntities<TownDefinition, JsonTown>(persistentStorage, "Town"),
-                //GameCommands = RetrieveEntities<GameCommandDefinition, JsonGameCommand>(persistentStorage, "GameCommand")
+                StoreOwners = RetrieveEntities<StoreOwnerDefinition, JsonStoreOwner>(persistentStorage, nameof(StoreOwner)),
+                Towns = RetrieveEntities<TownDefinition, JsonTown>(persistentStorage, nameof(Town)),
+                GameCommands = RetrieveEntities<GameCommandDefinition, JsonGameCommand>(persistentStorage, nameof(GameCommand)),
+                StoreCommands = RetrieveEntities<StoreCommandDefinition, JsonStoreCommand>(persistentStorage, nameof(StoreCommand))
             };
         }
 

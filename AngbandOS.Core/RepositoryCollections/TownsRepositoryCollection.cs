@@ -31,12 +31,4 @@ internal class TownsRepositoryCollection : DictionaryRepositoryCollection<string
             }
         }
     }
-
-    public override void Loaded()
-    {
-        foreach (Town town in this)
-        {
-            town.Bind();
-        }
-    }
 }

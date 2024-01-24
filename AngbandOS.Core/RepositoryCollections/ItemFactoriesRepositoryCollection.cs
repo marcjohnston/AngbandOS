@@ -13,12 +13,4 @@ namespace AngbandOS.Core.RepositoryCollections;
 internal class ItemFactoriesRepositoryCollection : DictionaryRepositoryCollection<string, ItemFactory>
 {
     public ItemFactoriesRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
-
-    public override void Loaded()
-    {
-        foreach (ItemFactory itemFactory in this)
-        {
-            itemFactory.Bind();
-        }
-    }
 }

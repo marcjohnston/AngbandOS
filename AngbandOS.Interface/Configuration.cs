@@ -35,4 +35,5 @@ public class Configuration
     public StoreOwnerDefinition[]? StoreOwners { get; set; } = null;
 
     public GameCommandDefinition[]? GameCommands { get; set; } = null;
+    public StoreCommandDefinition[]? StoreCommands { get; set; } = null;
 }

@@ -5,10 +5,13 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Interface.Definitions;
+using System.Text.Json;
+
 namespace AngbandOS.Core.StoreCommands;
 
 [Serializable]
-internal abstract class StoreCommand : IGetKey<string>
+internal abstract class StoreCommand : IGetKey<string>, IToJson
 {
     protected SaveGame SaveGame { get; }
     protected StoreCommand(SaveGame saveGame)
@@ -17,6 +20,15 @@ internal abstract class StoreCommand : IGetKey<string>
     }
 
     public virtual string Key => GetType().Name;
+
+    public abstract char KeyChar { get; }
+
+    /// <summary>
+    /// Returns the store factories that the command is valid for; or null, if the command is valid for all stores.
+    /// </summary>
+    public StoreFactory[]? ValidStoreFactories { get; private set; }
+
+    public abstract string Description { get; }
 
     public string GetKey => Key;
     public virtual void Bind()
@@ -48,7 +60,6 @@ internal abstract class StoreCommand : IGetKey<string>
         }
     }
 
-    public abstract char KeyChar { get; }
     public bool IsEnabled(StoreFactory storeFactory)
     {
         if (ValidStoreFactories == null)
@@ -57,11 +68,6 @@ internal abstract class StoreCommand : IGetKey<string>
         }
         return ValidStoreFactories.Contains(storeFactory);
     }
-
-    /// <summary>
-    /// Returns the store factories that the command is valid for; or null, if the command is valid for all stores.
-    /// </summary>
-    public StoreFactory[]? ValidStoreFactories { get; private set; }
 
     /// <summary>
     /// Returns the names of the store factories that the command is valid in; or null, for all stores.  Returns null, by default.
@@ -74,5 +80,17 @@ internal abstract class StoreCommand : IGetKey<string>
     {
         ExecuteScript.ExecuteStoreScript(storeCommandEvent);
     }
-    public abstract string Description { get; }
+
+    public string ToJson()
+    {
+        StoreCommandDefinition definition = new()
+        {
+            Key = Key,
+            KeyChar = KeyChar,
+            Description = Description,
+            ValidStoreNames = ValidStoreNames,
+            ExecuteScriptName = ExecuteScriptName
+        };
+        return JsonSerializer.Serialize(definition);
+    }
 }

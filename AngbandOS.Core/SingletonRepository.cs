@@ -104,11 +104,11 @@ internal class SingletonRepository
         }
     }
 
-    private void LoadedRepositoryItems()
+    private void BindRepositoryItems()
     {
         foreach (ILoadable repositoryCollection in _repositoryCollections)
         {
-            repositoryCollection.Loaded();
+            repositoryCollection.Bind();
         }
     }
 
@@ -191,7 +191,7 @@ internal class SingletonRepository
 
         // Load all of the objects into each repository.  This is where the assembly will be scanned or the database will be read.
         LoadRepositoryItems();
-        LoadedRepositoryItems();
+        BindRepositoryItems();
     }
 
     /// <summary>
@@ -219,8 +219,9 @@ internal class SingletonRepository
 
     public void Persist(ICorePersistentStorage corePersistentStorage)
     {
-        //Persist<StoreOwner>(corePersistentStorage, StoreOwners, "StoreOwner");
-        //Persist<Town>(corePersistentStorage, Towns, "Town");
-        //Persist<GameCommand>(corePersistentStorage, GameCommands, "GameCommand");
+        //Persist<StoreOwner>(corePersistentStorage, StoreOwners, nameof(StoreOwner));
+        //Persist<Town>(corePersistentStorage, Towns, nameof(Town));
+        //Persist<GameCommand>(corePersistentStorage, GameCommands, nameof(GameCommand));
+        //Persist<StoreCommand>(corePersistentStorage, StoreCommands,nameof(StoreCommand));
     }
 }
