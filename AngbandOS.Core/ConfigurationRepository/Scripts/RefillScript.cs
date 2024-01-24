@@ -8,11 +8,25 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RefillScript : Script
+internal class RefillScript : Script, IScript, IRepeatableScript
 {
     private RefillScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the refill script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the refill script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         // Make sure we actually have a light source to refuel.           
         BaseInventorySlot? chosenLightSourceInventorySlot = SaveGame.SingletonRepository.InventorySlots.ToWeightedRandom(inventorySlot => inventorySlot.ProvidesLight).Choose();
@@ -21,7 +35,7 @@ internal class RefillScript : Script
         if (chosenLightSourceInventorySlot == null)
         {
             SaveGame.MsgPrint("You are not wielding a light.");
-            return false;
+            return;
         }
 
         // Now choose a light source item.
@@ -29,18 +43,17 @@ internal class RefillScript : Script
         if (i == null)
         {
             SaveGame.MsgPrint("You are not wielding a light.");
-            return false;
+            return;
         }
 
         Item? lightSource = SaveGame.GetInventoryItem(i.Value);
         if (lightSource == null)
         {
             SaveGame.MsgPrint("You are not wielding a light.");
-            return false;
+            return;
         }
 
         LightSourceItemFactory lightSourceItem = (LightSourceItemFactory)lightSource.Factory;
         lightSourceItem.Refill(SaveGame, lightSource);
-        return false;
     }
 }

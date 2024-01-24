@@ -19,12 +19,5 @@ internal class ViewRacialHeroesStoreCommand : StoreCommand
         nameof(HallStoreFactory),
     };
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        //storeCommandEvent.SaveGame.SaveScreen();
-        //Program.HiScores.RaceFilter = saveGame.RaceIndex;
-        //Program.HiScores.DisplayScores(new HighScore(saveGame));
-        //Program.HiScores.RaceFilter = -1;
-        //storeCommandEvent.SaveGame.Load();
-    }
+    protected override string ExecuteScriptName => nameof(NoopScript);
 }

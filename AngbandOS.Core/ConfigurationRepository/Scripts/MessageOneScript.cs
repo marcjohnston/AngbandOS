@@ -8,13 +8,35 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class MessageOneScript : Script
+internal class MessageOneScript : Script, IScript, IRepeatableScript, IStoreScript
 {
     private MessageOneScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the message one script.  Does not modify any of the store flags.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    {
+        ExecuteScript();
+    }
+
+    /// <summary>
+    /// Executes the message one script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the message one script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         SaveGame.Screen.PrintLine($"> {SaveGame.GetMessageText(0)}", 0, 0);
-        return false;
     }
 }

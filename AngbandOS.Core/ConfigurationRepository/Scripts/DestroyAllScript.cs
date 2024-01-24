@@ -8,11 +8,34 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DestroyAllScript : Script
+internal class DestroyAllScript : Script, IScript, IRepeatableScript, IStoreScript
 {
     private DestroyAllScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the destroy all script.  Does not modify any of the store flags.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    {
+        ExecuteScript();
+    }
+
+    /// <summary>
+    /// Executes the destroy all script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Destroy all items in the inventory that are considered stompable.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         int count = 0;
         // Look for worthless items
@@ -45,6 +68,5 @@ internal class DestroyAllScript : Script
             // If we destroyed at least one thing, take a turn
             SaveGame.EnergyUse = 100;
         }
-        return false;
     }
 }

@@ -19,8 +19,5 @@ internal class SacrificeStoreCommand : StoreCommand
         nameof(TempleStoreFactory)
     };
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        storeCommandEvent.Store.SacrificeItem();
-    }
+    protected override string ExecuteScriptName => nameof(SacrificeItemScript);
 }

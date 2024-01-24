@@ -8,27 +8,50 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ExamineScript : Script
+internal class ExamineScript : Script, IScript, IRepeatableScript, IStoreScript
 {
     private ExamineScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the examine script.  Does not modify any of the store flags.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    {
+        ExecuteScript();
+    }
+
+    /// <summary>
+    /// Executes the examine script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the examine script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         // Get the item to examine
         if (!SaveGame.SelectItem(out Item? item, "Examine which item? ", true, true, true, null))
         {
             SaveGame.MsgPrint("You have nothing to examine.");
-            return false;
+            return;
         }
         if (item == null)
         {
-            return false;
+            return;
         }
         // Do we know anything about it?
         if (!item.IdentMental)
         {
             SaveGame.MsgPrint("You have no special knowledge about that item.");
-            return false;
+            return;
         }
         string itemName = item.Description(true, 3);
         SaveGame.MsgPrint($"Examining {itemName}...");
@@ -38,6 +61,5 @@ internal class ExamineScript : Script
         {
             SaveGame.MsgPrint("You see nothing special.");
         }
-        return false;
     }
 }

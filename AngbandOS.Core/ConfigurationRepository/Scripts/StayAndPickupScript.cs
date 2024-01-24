@@ -8,11 +8,25 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class StayAndPickupScript : Script
+internal class StayAndPickupScript : Script, IScript, IRepeatableScript
 {
     private StayAndPickupScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the stay and pickup script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the stay and pickup script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         // Standing still takes a turn
         SaveGame.EnergyUse = 100;
@@ -33,6 +47,5 @@ internal class StayAndPickupScript : Script
             SaveGame.Disturb(false);
             SaveGame.QueuedCommand = '_';
         }
-        return false;
     }
 }

@@ -18,8 +18,5 @@ internal class BrowseStoreCommand : StoreCommand
 
     public override string Description => "";
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        SaveGame.RunScript(nameof(BrowseScript));
-    }
+    protected override string ExecuteScriptName => nameof(BrowseScript);
 }

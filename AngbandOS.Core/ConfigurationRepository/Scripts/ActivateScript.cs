@@ -11,15 +11,33 @@ namespace AngbandOS.Core.Scripts;
 /// Activate the special feature of an item.
 /// </summary>
 [Serializable]
-internal class ActivateScript : Script
+internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulScript
 {
     private ActivateScript(SaveGame saveGame) : base(saveGame) { }
+
+    /// <summary>
+    /// Executes the activate script and disposes of the successful result.
+    /// </summary>
+    public void ExecuteScript()
+    {
+        ExecuteSuccessfulScript();
+    }
+
+    /// <summary>
+    /// Executes the activate script, disposes of the successful result and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteSuccessfulScript();
+        return false;
+    }
 
     /// <summary>
     /// Allows the user to select an item and activates the special feature of that item.  Returns false, in all cases.
     /// </summary>
     /// <returns></returns>
-    public override bool Execute()
+    public bool ExecuteSuccessfulScript()
     {
         // No item passed in, so get one; filtering to activatable items only
         if (!SaveGame.SelectItem(out Item? item, "Activate which item? ", true, true, false, new ActivatableItemFilter()))
@@ -81,7 +99,7 @@ internal class ActivateScript : Script
         if (string.IsNullOrEmpty(item.RandartName) == false)
         {
             ActivateRandomArtifact(item);
-            return false;
+            return true;
         }
 
         // If it's a fixed artifact then use its ability
@@ -98,7 +116,7 @@ internal class ActivateScript : Script
         {
             SaveGame.TeleportPlayer(100);
             item.RechargeTimeLeft = 50 + SaveGame.Rng.DieRoll(50);
-            return false;
+            return true;
         }
 
         // Check to see if the item can be activated.
@@ -106,14 +124,14 @@ internal class ActivateScript : Script
         {
             IItemActivatable activatibleItem = (IItemActivatable)item;
             activatibleItem.DoActivate();
-            return false;
+            return true;
         }
 
-        throw new Exception("Oops. That object cannot be activated.");
+        return false;
     }
 
     /// <summary>
-    /// Activate a randomly generated artifact that will therefore have been given a random power
+    /// Activate a randomly generated artifact.
     /// </summary>
     /// <param name="item"> The artifact being activated.</param>
     private void ActivateRandomArtifact(Item item)

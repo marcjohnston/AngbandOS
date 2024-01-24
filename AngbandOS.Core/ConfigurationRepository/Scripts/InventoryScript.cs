@@ -8,11 +8,34 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class InventoryScript : Script
+internal class InventoryScript : Script, IScript, IRepeatableScript, IStoreScript
 {
     private InventoryScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the inventory script.  Does not modify any of the store flags.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    {
+        ExecuteScript();
+    }
+
+    /// <summary>
+    /// Executes the inventory script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the inventory script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         // We're not viewing equipment
         SaveGame.ViewingEquipment = false;
@@ -22,7 +45,7 @@ internal class InventoryScript : Script
         if (!inventoryShown)
         {
             SaveGame.MsgPrint("You have nothing.");
-            return false;
+            return;
         }
         // Get a new command
         string outVal = $"Inventory: carrying {SaveGame.WeightCarried / 10}.{SaveGame.WeightCarried % 10} pounds ({SaveGame.WeightCarried * 100 / (SaveGame.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
@@ -40,6 +63,5 @@ internal class InventoryScript : Script
             // show the inventory
             SaveGame.ViewingItemList = true;
         }
-        return false;
     }
 }

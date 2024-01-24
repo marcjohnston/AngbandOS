@@ -8,11 +8,25 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class PolymorphSelfScript : Script
+internal class PolymorphSelfScript : Script, IScript, IRepeatableScript
 {
     private PolymorphSelfScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the polymorph-self script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the polymorh-self script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         int effects = SaveGame.Rng.DieRoll(2);
         int tmp = 0;
@@ -70,6 +84,5 @@ internal class PolymorphSelfScript : Script
                     break;
             }
         }
-        return false;
     }
 }

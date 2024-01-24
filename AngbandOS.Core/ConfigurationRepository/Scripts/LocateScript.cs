@@ -8,11 +8,25 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class LocateScript : Script
+internal class LocateScript : Script, IScript, IRepeatableScript
 {
     private LocateScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the locate script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the locate script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         int startRow = SaveGame.PanelRow;
         int startCol = SaveGame.PanelCol;
@@ -88,6 +102,5 @@ internal class LocateScript : Script
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
         SaveGame.HandleStuff();
-        return false;
     }
 }

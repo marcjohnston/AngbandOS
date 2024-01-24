@@ -21,6 +21,19 @@ internal abstract class StoreCommand : IGetKey<string>
     public string GetKey => Key;
     public virtual void Bind()
     {
+        // Get the script from the singleton repository.
+        Script? script = SaveGame.SingletonRepository.Scripts.Get(ExecuteScriptName);
+
+        if (script == null)
+        {
+            throw new Exception($"The {ExecuteScriptName} script specified by the {GetType().Name} store script does not exist.");
+        }
+        if (!typeof(IStoreScript).IsInstanceOfType(script))
+        {
+            throw new Exception($"The {ExecuteScriptName} script specified by the {GetType().Name} store script does not implement the {nameof(IStoreScript)} interface.");
+        }
+        ExecuteScript = (IStoreScript)script;
+
         if (ValidStoreNames == null)
         {
             ValidStoreFactories = null;
@@ -55,6 +68,11 @@ internal abstract class StoreCommand : IGetKey<string>
     /// </summary>
     protected virtual string[]? ValidStoreNames => null;
 
-    public abstract void Execute(StoreCommandEvent storeCommandEvent);
+    protected abstract string ExecuteScriptName { get; }
+    private IStoreScript ExecuteScript;
+    public void Execute(StoreCommandEvent storeCommandEvent)
+    {
+        ExecuteScript.ExecuteStoreScript(storeCommandEvent);
+    }
     public abstract string Description { get; }
 }

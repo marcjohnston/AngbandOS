@@ -20,9 +20,5 @@ internal class EnchantWeaponStoreCommand : StoreCommand
         nameof(WeaponStoreFactory)
     };
 
-
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        storeCommandEvent.Store.EnchantWeapon();
-    }
+    protected override string ExecuteScriptName => nameof(EnchantWeaponScript);
 }

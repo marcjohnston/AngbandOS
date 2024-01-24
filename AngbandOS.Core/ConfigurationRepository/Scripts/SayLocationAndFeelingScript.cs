@@ -8,11 +8,25 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SayLocationAndFeelingScript : Script
+internal class SayLocationAndFeelingScript : Script, IScript, IRepeatableScript
 {
     private SayLocationAndFeelingScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the say location and feeling script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the say location and feeling script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         if (SaveGame.CurrentDepth <= 0)
         {
@@ -39,6 +53,5 @@ internal class SayLocationAndFeelingScript : Script
             }
         }
         SaveGame.RunScript(nameof(SayFeelingScript));
-        return false;
     }
 }

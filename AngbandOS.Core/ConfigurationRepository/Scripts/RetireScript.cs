@@ -8,18 +8,32 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RetireScript : Script
+internal class RetireScript : Script, IScript, IRepeatableScript
 {
     private RetireScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the retire script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the retire script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         // If we're a winner it's a simple question with a more positive connotation
         if (SaveGame.IsWinner)
         {
             if (!SaveGame.GetCheck("Do you want to retire? "))
             {
-                return false;
+                return;
             }
         }
         else
@@ -30,7 +44,7 @@ internal class RetireScript : Script
             {
                 if (!SaveGame.GetCheck("Do you really want to give up? "))
                 {
-                    return false;
+                    return;
                 }
                 // Require a confirmation to make sure the player doesn't accidentally give up a
                 // long-running character
@@ -39,7 +53,7 @@ internal class RetireScript : Script
                 SaveGame.Screen.PrintLine("", 0, 0);
                 if (i != '@')
                 {
-                    return false;
+                    return;
                 }
             }
         }
@@ -47,6 +61,5 @@ internal class RetireScript : Script
         SaveGame.Playing = false;
         SaveGame.IsDead = true;
         SaveGame.DiedFrom = "quitting";
-        return false;
     }
 }

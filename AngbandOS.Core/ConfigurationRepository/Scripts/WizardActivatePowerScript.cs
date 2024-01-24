@@ -8,11 +8,15 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WizardActivatePowerScript : Script
+internal class WizardActivatePowerScript : Script, IScript
 {
     private WizardActivatePowerScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the activate power script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         SaveGame.FullScreenOverlay = true;
         ScreenBuffer savedScreen = SaveGame.Screen.Clone();
@@ -31,17 +35,17 @@ internal class WizardActivatePowerScript : Script
             }
             if (!SaveGame.GetString("Activation power?", out string selection, "", 3))
             {
-                return false;
+                return;
             }
 
             if (!Int32.TryParse(selection, out int selectedIndex))
             {
-                return false;
+                return;
             }
             selectedIndex--;
             if (selectedIndex < 0 || selectedIndex > SaveGame.SingletonRepository.Activations.Count)
             {
-                return false;
+                return;
             }
 
             Activation activation = SaveGame.SingletonRepository.Activations[selectedIndex];
@@ -53,6 +57,5 @@ internal class WizardActivatePowerScript : Script
             SaveGame.FullScreenOverlay = false;
             SaveGame.SetBackground(BackgroundImageEnum.Overhead);
         }
-        return false;
     }
 }

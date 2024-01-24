@@ -8,11 +8,35 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ViewCharacterScript : Script
+internal class ViewCharacterScript : Script, IScript, IRepeatableScript, IStoreScript
 {
     private ViewCharacterScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the view character script and sets the requires rerendering flag.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    {
+        ExecuteScript();
+        storeCommandEvent.RequiresRerendering = true;
+    }
+
+    /// <summary>
+    /// Executes the view character script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Renders details about character.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         // Save the current screen
         SaveGame.FullScreenOverlay = true;
@@ -22,7 +46,7 @@ internal class ViewCharacterScript : Script
         while (!SaveGame.Shutdown)
         {
             RenderCharacterScript showCharacterSheet = (RenderCharacterScript)SaveGame.SingletonRepository.Scripts.Get(nameof(RenderCharacterScript));
-            showCharacterSheet.Execute();
+            showCharacterSheet.ExecuteScript();
             SaveGame.Screen.Print(ColourEnum.Orange, "[Press 'c' to change name, or ESC]", 43, 23);
             char keyPress = SaveGame.Inkey();
             // Escape breaks us out of the loop
@@ -47,6 +71,5 @@ internal class ViewCharacterScript : Script
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawAllFlaggedAction)).Set(); // TODO: special case ... should be some form of invalidate
         SaveGame.HandleStuff();
-        return false;
     }
 }

@@ -8,11 +8,15 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WizardHelpScript : Script
+internal class WizardHelpScript : Script, IScript
 {
     private WizardHelpScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the wizard help script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         SaveGame.FullScreenOverlay = true;
         ScreenBuffer savedScreen = SaveGame.Screen.Clone();
@@ -73,7 +77,5 @@ internal class WizardHelpScript : Script
             SaveGame.SetBackground(BackgroundImageEnum.Overhead);
             SaveGame.FullScreenOverlay = false;
         }
-
-        return false;
     }
 }

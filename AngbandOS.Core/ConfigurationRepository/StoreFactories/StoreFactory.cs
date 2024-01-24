@@ -113,7 +113,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
 
     protected virtual string? AdvertisedStoreCommand1Name => nameof(PurchaseStoreCommand);
     protected virtual string? AdvertisedStoreCommand2Name => nameof(SellStoreCommand);
-    protected virtual string? AdvertisedStoreCommand3Name => nameof(ExamineStoreCommand);
+    protected virtual string? AdvertisedStoreCommand3Name => nameof(ExamineStoreItemCommand);
     protected virtual string? AdvertisedStoreCommand4Name => null;
     protected virtual string? AdvertisedStoreCommand5Name => null;
     /// <summary>

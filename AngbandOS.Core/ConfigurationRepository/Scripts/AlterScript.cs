@@ -8,15 +8,24 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AlterScript : Script
+internal class AlterScript : Script, IScript, IRepeatableScript
 {
     private AlterScript(SaveGame saveGame) : base(saveGame) { }
+
+    /// <summary>
+    /// Executes the alter script and disposes of the successful result.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        ExecuteRepeatableScript();
+    }
 
     /// <summary>
     /// Gets a direction from the player and alters the tile in that direction.  Returns false, if the action fails due to chance.
     /// </summary>
     /// <returns></returns>
-    public override bool Execute()
+    public bool ExecuteRepeatableScript()
     {
         // Assume we won't disturb the player
         bool more = false;

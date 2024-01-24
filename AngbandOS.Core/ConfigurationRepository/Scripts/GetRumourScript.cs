@@ -8,11 +8,25 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class GetRumourScript : Script
+internal class GetRumourScript : Script, IScript, IRepeatableScript
 {
     private GetRumourScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the get rumor script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the get rumor script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         string rumor;
         // Build an array of all the possible rumours we can get
@@ -86,6 +100,5 @@ internal class GetRumourScript : Script
             d.KnownOffset = true;
         }
         SaveGame.MsgPrint(rumor);
-        return false;
     }
 }

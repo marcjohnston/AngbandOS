@@ -8,11 +8,25 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class FireScript : Script
+internal class FireScript : Script, IScript, IRepeatableScript
 {
     private FireScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the fire script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the fire script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         // Check that we're actually wielding a ranged weapon
         RangedWeaponInventorySlot rangedWeaponInventorySlot = (RangedWeaponInventorySlot)SaveGame.SingletonRepository.InventorySlots.Get(nameof(RangedWeaponInventorySlot));
@@ -21,22 +35,22 @@ internal class FireScript : Script
         if (missileWeapon == null || missileWeapon.Category == 0)
         {
             SaveGame.MsgPrint("You have nothing to fire with.");
-            return false;
+            return;
         }
         // Get the ammunition to fire
         if (!SaveGame.SelectItem(out Item? ammunitionStack, "Fire which item? ", false, true, true, new ItemCategoryItemFilter(SaveGame.AmmunitionItemCategory)))
         {
             SaveGame.MsgPrint("You have nothing to fire.");
-            return false;
+            return;
         }
         if (ammunitionStack == null)
         {
-            return false;
+            return;
         }
         // Find out where we're aiming at
         if (!SaveGame.GetDirectionWithAim(out int dir))
         {
-            return false;
+            return;
         }
         // Copy an ammunition piece from the stack...
         Item individualAmmunition = ammunitionStack.Clone(1);
@@ -181,6 +195,5 @@ internal class FireScript : Script
         // the end of its travel
         int j = hitBody ? individualAmmunition.BreakageChance() : 0;
         SaveGame.DropNear(individualAmmunition, j, y, x);
-        return false;
     }
 }

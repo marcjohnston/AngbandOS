@@ -8,11 +8,15 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WizardJumpToLevelScript : Script
+internal class WizardJumpToLevelScript : Script, IScript
 {
     private WizardJumpToLevelScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the jump to level script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         if (SaveGame.CommandArgument <= 0)
         {
@@ -20,7 +24,7 @@ internal class WizardJumpToLevelScript : Script
             string def = $"{SaveGame.CurrentDepth}";
             if (!SaveGame.GetString(ppp, out string tmpVal, def, 10))
             {
-                return false;
+                return;
             }
             SaveGame.CommandArgument = int.TryParse(tmpVal, out int i) ? i : 0;
         }
@@ -36,6 +40,5 @@ internal class WizardJumpToLevelScript : Script
         SaveGame.DoCmdSaveGame(true);
         SaveGame.CurrentDepth = SaveGame.CommandArgument;
         SaveGame.NewLevelFlag = true;
-        return false;
     }
 }

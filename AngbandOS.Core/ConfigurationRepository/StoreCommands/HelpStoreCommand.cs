@@ -18,8 +18,5 @@ internal class HelpStoreCommand : StoreCommand
 
     public override string Description => "Get help for this store.";
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        SaveGame.RunScript(nameof(ShowManualScript));
-    }
+    protected override string ExecuteScriptName => nameof(NoopScript);
 }

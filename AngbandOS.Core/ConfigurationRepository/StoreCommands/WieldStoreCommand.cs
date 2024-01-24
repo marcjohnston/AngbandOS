@@ -18,8 +18,5 @@ internal class WieldStoreCommand : StoreCommand
 
     public override string Description => "";
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        SaveGame.RunScript(nameof(WieldScript));
-    }
+    protected override string ExecuteScriptName => nameof(WieldScript);
 }

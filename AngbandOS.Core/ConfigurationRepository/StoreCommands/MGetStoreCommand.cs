@@ -29,8 +29,5 @@ internal class MGetStoreCommand : StoreCommand
         nameof(WeaponStoreFactory)
     };
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        storeCommandEvent.Store.StorePurchase();
-    }
+    protected override string ExecuteScriptName => nameof(PurchaseStoreItemScript);
 }

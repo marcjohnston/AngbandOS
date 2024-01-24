@@ -11,11 +11,25 @@ namespace AngbandOS.Core.Scripts;
 /// Search around the player for secret doors and traps
 /// </summary>
 [Serializable]
-internal class SearchScript : Script
+internal class SearchScript : Script, IScript, IRepeatableScript
 {
     private SearchScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the search script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the search script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         // Searching costs 100.
         SaveGame.EnergyUse = 100;
@@ -84,6 +98,5 @@ internal class SearchScript : Script
                 }
             }
         }
-        return false;
     }
 }

@@ -18,8 +18,5 @@ internal class DestroyAllStoreCommand : StoreCommand
 
     public override string Description => "";
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        SaveGame.RunScript(nameof(DestroyAllScript));
-    }
+    protected override string ExecuteScriptName => nameof(DestroyAllScript);
 }

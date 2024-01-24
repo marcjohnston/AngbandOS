@@ -18,8 +18,5 @@ internal class MessagesStoreCommand : StoreCommand
 
     public override string Description => "";
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        SaveGame.RunScript(nameof(MessagesScript));
-    }
+    protected override string ExecuteScriptName => nameof(MessagesScript);
 }

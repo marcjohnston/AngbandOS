@@ -8,12 +8,42 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class _template : Script
+internal class _template : Script, IScript, IRepeatableScript, ISuccessfulScript, IStoreScript
 {
     private _template(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the script.  Does not modify any of the store flags.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    {
+    }
+
+    /// <summary>
+    /// Executes the script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the aim wand script and returns a success result.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteSuccessfulScript()
     {
         return false;
+    }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
     }
 }

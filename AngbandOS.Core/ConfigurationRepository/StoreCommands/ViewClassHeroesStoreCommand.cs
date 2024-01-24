@@ -19,12 +19,5 @@ internal class ViewClassHeroesStoreCommand : StoreCommand
         nameof(HallStoreFactory),
     };
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        //SaveGame.SaveScreen();
-        //Program.HiScores.ClassFilter = saveGame.ProfessionIndex;
-        //Program.HiScores.DisplayScores(new HighScore(saveGame));
-        //Program.HiScores.ClassFilter = -1;
-        //SaveGame.Load();
-    }
+    protected override string ExecuteScriptName => nameof(NoopScript);
 }

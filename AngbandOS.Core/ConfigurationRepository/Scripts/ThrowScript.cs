@@ -8,13 +8,26 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ThrowScript : Script
+internal class ThrowScript : Script, IScript, IRepeatableScript
 {
     private ThrowScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the throw script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the throw script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         SaveGame.DoCmdThrow(1);
-        return false;
     }
 }

@@ -15,7 +15,5 @@ internal class CarriageReturnStoreCommand : StoreCommand
 
     public override string Description => "";
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-    }
+    protected override string ExecuteScriptName => nameof(NoopScript);
 }

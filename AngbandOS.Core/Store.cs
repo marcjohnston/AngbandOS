@@ -21,7 +21,7 @@ internal class Store
         SaveGame = saveGame;
         StoreFactory = storeFactory;
 
-        _storeInventoryList.Clear();
+        StoreInventoryList.Clear();
         StockStoreInventoryItem[] master = StoreFactory.GetStoreTable();
         if (master == null)
         {
@@ -58,7 +58,7 @@ internal class Store
     /// </summary>
     public int Y => _y;
 
-    private readonly List<Item> _storeInventoryList = new List<Item>();
+    public readonly List<Item> StoreInventoryList = new List<Item>();
 
     /// <summary>
     /// Returns the index of each ItemType in the ItemTypeArray that the store carries.  Multiple instances of the same item type allows the item to have a higher
@@ -66,12 +66,12 @@ internal class Store
     /// </summary>
     private readonly int[]? _table = null;
     private bool _leaveStore;
-    private StoreOwner _owner;
+    public StoreOwner Owner { get; private set; }
 
     /// <summary>
     /// Represents the first item being displayed in a page of inventory items.
     /// </summary>
-    private int _storeTop;
+    public int StoreTop { get; private set; }
 
     public StoreFloorTile CreateFloorTileType() => new StoreFloorTile(SaveGame, StoreFactory.Symbol, StoreFactory.Colour, StoreFactory.FeatureType, StoreFactory.FeatureType, StoreFactory.Description);
 
@@ -79,23 +79,23 @@ internal class Store
 
     public void MoveInventoryToAnotherStore(Store newStore)
     {
-        newStore._storeInventoryList.Clear();
-        newStore._storeInventoryList.AddRange(_storeInventoryList);
-        _storeInventoryList.Clear();
+        newStore.StoreInventoryList.Clear();
+        newStore.StoreInventoryList.AddRange(StoreInventoryList);
+        StoreInventoryList.Clear();
     }
 
     public string FeatureType => StoreFactory.FeatureType;
 
     public void ScrollInventory(int count)
     {
-        _storeTop += count;
-        if (_storeTop < 0)
+        StoreTop += count;
+        if (StoreTop < 0)
         {
-            _storeTop = 0;
+            StoreTop = 0;
         }
-        if (_storeTop + StoreFactory.PageSize > _storeInventoryList.Count)
+        if (StoreTop + StoreFactory.PageSize > StoreInventoryList.Count)
         {
-            _storeTop = _storeInventoryList.Count - StoreFactory.PageSize;
+            StoreTop = StoreInventoryList.Count - StoreFactory.PageSize;
         }
         DisplayInventory();
     }
@@ -133,10 +133,10 @@ internal class Store
         }
     }
 
-    private void DisplayEntry(int itemIndex, char letter, int row)
+    public void DisplayEntry(int itemIndex, char letter, int row)
     {
         int maxwid = StoreFactory.WidthOfDescriptionColumn;
-        Item oPtr = _storeInventoryList[itemIndex];
+        Item oPtr = StoreInventoryList[itemIndex];
         string outVal = $"{letter}) ";
         SaveGame.Screen.PrintLine(outVal, row, 0);
         ColourEnum a = oPtr.Factory.FlavorColour;
@@ -157,13 +157,13 @@ internal class Store
             int x;
             if (oPtr.IdentFixed)
             {
-                x = PriceItem(oPtr, _owner.MinInflate, false);
+                x = PriceItem(oPtr, Owner.MinInflate, false);
                 outVal = $"{x,9} F";
                 SaveGame.Screen.Print(outVal, row, 68);
             }
             else
             {
-                x = PriceItem(oPtr, _owner.MinInflate, false);
+                x = PriceItem(oPtr, Owner.MinInflate, false);
                 x += x / 10;
                 outVal = $"{x,9}  ";
                 SaveGame.Screen.Print(outVal, row, 68);
@@ -171,19 +171,24 @@ internal class Store
         }
     }
 
-    private void DisplayInventory()
+    public void ScrollToItem(int itemPos)
+    {
+        StoreTop = itemPos; // / StoreFactory.PageSize * StoreFactory.PageSize;
+    }
+
+    public void DisplayInventory()
     {
         int pageIndex = 0;
-        int itemIndex = _storeTop;
-        while (itemIndex < _storeInventoryList.Count && pageIndex < StoreFactory.PageSize)
+        int itemIndex = StoreTop;
+        while (itemIndex < StoreInventoryList.Count && pageIndex < StoreFactory.PageSize)
         {
             DisplayEntry(itemIndex, pageIndex.IndexToLetter(), pageIndex + 6);
             pageIndex++;
             itemIndex++;
         }
 
-        bool pageDownAvailable = _storeTop + StoreFactory.PageSize < _storeInventoryList.Count;
-        bool pageUpAvailable = _storeTop > 0;
+        bool pageDownAvailable = StoreTop + StoreFactory.PageSize < StoreInventoryList.Count;
+        bool pageUpAvailable = StoreTop > 0;
         if (pageUpAvailable && pageDownAvailable)
         {
             SaveGame.Screen.PrintLine("-page up/down-", pageIndex + 6, 3);
@@ -207,10 +212,10 @@ internal class Store
             pageIndex++;
         }
 
-        SaveGame.Screen.Print(new string(' ', _storeInventoryList.Count.ToString().Length * 2 + 11), 5, 20);
-        if (_storeInventoryList.Count > StoreFactory.PageSize)
+        SaveGame.Screen.Print(new string(' ', StoreInventoryList.Count.ToString().Length * 2 + 11), 5, 20);
+        if (StoreInventoryList.Count > StoreFactory.PageSize)
         {
-            SaveGame.Screen.Print($"(Page {_storeTop / StoreFactory.PageSize + 1} of {_storeInventoryList.Count / StoreFactory.PageSize + 1})", 5, 20);
+            SaveGame.Screen.Print($"(Page {StoreTop / StoreFactory.PageSize + 1} of {StoreInventoryList.Count / StoreFactory.PageSize + 1})", 5, 20);
         }
     }
 
@@ -221,7 +226,7 @@ internal class Store
 
     private void StoreCreate()
     {
-        if (_storeInventoryList.Count >= StoreFactory.MaxInventory)
+        if (StoreInventoryList.Count >= StoreFactory.MaxInventory)
         {
             return;
         }
@@ -266,8 +271,8 @@ internal class Store
 
     private void StoreDelete()
     {
-        int what = SaveGame.Rng.RandomLessThan(_storeInventoryList.Count);
-        int num = _storeInventoryList[what].Count;
+        int what = SaveGame.Rng.RandomLessThan(StoreInventoryList.Count);
+        int num = StoreInventoryList[what].Count;
         if (SaveGame.Rng.RandomLessThan(100) < 50)
         {
             num = (num + 1) / 2;
@@ -280,54 +285,9 @@ internal class Store
         StoreItemOptimize(what);
     }
 
-    public void StoreExamine()
+    public void StoreItemIncrease(int item, int num)
     {
-        if (_storeInventoryList.Count <= 0)
-        {
-            SaveGame.MsgPrint(StoreFactory.NoStockMessage);
-            return;
-        }
-        int i = _storeInventoryList.Count - _storeTop;
-        if (i > StoreFactory.PageSize)
-        {
-            i = StoreFactory.PageSize;
-        }
-        const string outVal = "Which item do you want to examine? ";
-        if (!GetStock(out int item, outVal, 0, i - 1))
-        {
-            return;
-        }
-        item += _storeTop;
-        Item oPtr = _storeInventoryList[item];
-        BookItem? bookItem = oPtr.TryCast<BookItem>();
-        if (bookItem != null)
-        {
-            if (SaveGame.PrimaryRealm?.SpellBookItemCategory == bookItem.Category || SaveGame.SecondaryRealm?.SpellBookItemCategory == bookItem.Category)
-            {
-                DoStoreBrowse(oPtr);
-            }
-            else
-            {
-                SaveGame.MsgPrint("The spells in the book are unintelligible to you.");
-                return;
-            }
-        }
-        if (!oPtr.IdentMental)
-        {
-            SaveGame.MsgPrint("You have no special knowledge about that item.");
-            return;
-        }
-        string oName = oPtr.Description(true, 3);
-        SaveGame.MsgPrint($"Examining {oName}...");
-        if (!oPtr.IdentifyFully())
-        {
-            SaveGame.MsgPrint("You see nothing special.");
-        }
-    }
-
-    private void StoreItemIncrease(int item, int num)
-    {
-        Item oPtr = _storeInventoryList[item];
+        Item oPtr = StoreInventoryList[item];
         int cnt = oPtr.Count + num;
         if (cnt > 255)
         {
@@ -341,9 +301,9 @@ internal class Store
         oPtr.Count += num;
     }
 
-    private void StoreItemOptimize(int item)
+    public void StoreItemOptimize(int item)
     {
-        Item oPtr = _storeInventoryList[item];
+        Item oPtr = StoreInventoryList[item];
         if (oPtr.Factory == null)
         {
             return;
@@ -352,7 +312,7 @@ internal class Store
         {
             return;
         }
-        _storeInventoryList.RemoveAt(item);
+        StoreInventoryList.RemoveAt(item);
     }
 
     private void StoreObjectAbsorb(Item oPtr, Item jPtr)
@@ -361,112 +321,7 @@ internal class Store
         oPtr.Count = total > 99 ? 99 : total;
     }
 
-    private void DoCmdStudy()
-    {
-        string spellType = SaveGame.BaseCharacterClass.SpellCastingType.SpellNoun;
-        // If we don't have a realm then we can't do anything
-        if (!SaveGame.CanCastSpells)
-        {
-            SaveGame.MsgPrint("You cannot read books!");
-            return;
-        }
-        // We can't learn spells if we're blind or confused
-        if (SaveGame.TimedBlindness.TurnsRemaining != 0)
-        {
-            SaveGame.MsgPrint("You cannot see!");
-            return;
-        }
-        if (SaveGame.TimedConfusion.TurnsRemaining != 0)
-        {
-            SaveGame.MsgPrint("You are too confused!");
-            return;
-        }
-        // We can only learn new spells if we have spare slots
-        if (SaveGame.SpareSpellSlots == 0)
-        {
-            SaveGame.MsgPrint($"You cannot learn any new {spellType}s!");
-            return;
-        }
-        string plural = SaveGame.SpareSpellSlots == 1 ? "" : "s";
-        SaveGame.MsgPrint($"You can learn {SaveGame.SpareSpellSlots} new {spellType}{plural}.");
-        SaveGame.MsgPrint(null);
-        // Get the spell books we have
-        if (!SaveGame.SelectItem(out Item? item, "Study which book? ", false, true, true, new UsableSpellBookItemFilter(SaveGame)))
-        {
-            SaveGame.MsgPrint("You have no books that you can read.");
-            return;
-        }
-        // Check each book
-        if (item == null)
-        {
-            return;
-        }
-        BookItem bookItem = (BookItem)item;
-        SaveGame.HandleStuff();
-
-        // Arcane casters can choose their spell
-        Spell? spell = null;
-        if (SaveGame.BaseCharacterClass.SpellCastingType.CanChooseSpellToStudy)
-        {
-            // Allow the user to select a spell.
-            if (!SaveGame.GetSpell(out spell, "study", bookItem, false))
-            {
-                // There are no spells.
-                SaveGame.MsgPrint($"You cannot learn any {spellType}s from that book.");
-                return;
-            }
-
-            // Check to see if the user cancelled the selection.
-            if (spell == null)
-            {
-                return;
-            }
-        }
-        else
-        {
-            // We need to choose a spell at random
-            int k = 0;
-            // Gather the potential spells from the book
-            foreach (Spell sPtr in bookItem.Factory.Spells)
-            {
-                if (SaveGame.SpellOkay(sPtr, false))
-                {
-                    k++;
-                    if (SaveGame.Rng.RandomLessThan(k) == 0)
-                    {
-                        spell = sPtr;
-                    }
-                }
-            }
-        }
-        // If we failed to get a spell, return
-        if (spell == null)
-        {
-            SaveGame.MsgPrint($"You cannot learn any {spellType}s from that book.");
-            return;
-        }
-        // Learning a spell takes a turn (although that's not very relevant)
-        SaveGame.EnergyUse = 100;
-        // Mark the spell as learned
-        spell.Learned = true;
-
-        // Mark the spell as the last spell learned, in case we need to start forgetting them
-        SaveGame.SpellOrder.Add(spell);
-
-        // Let the player know they've learned a spell
-        SaveGame.MsgPrint($"You have learned the {spellType} of {spell.Name}.");
-        SaveGame.PlaySound(SoundEffectEnum.Study);
-        SaveGame.SpareSpellSlots--;
-        if (SaveGame.SpareSpellSlots != 0)
-        {
-            plural = SaveGame.SpareSpellSlots != 1 ? "s" : "";
-            SaveGame.MsgPrint($"You can learn {SaveGame.SpareSpellSlots} more {spellType}{plural}.");
-        }
-        SaveGame.OldSpareSpellSlots = SaveGame.SpareSpellSlots;
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStudyFlaggedAction)).Set();
-    }
-
-    private void StoreProcessCommand()
+    private void ProcessCommand()
     {
         char c = SaveGame.CurrentCommand;
         bool matchingCommandFound = false;
@@ -483,7 +338,7 @@ internal class Store
                 // Ensure this command works in this store.
                 if (command.IsEnabled(StoreFactory))
                 {
-                    StoreCommandEvent storeCommandEvent = new StoreCommandEvent(this);
+                    StoreCommandEvent storeCommandEvent = new(this);
                     command.Execute(storeCommandEvent);
 
                     if (storeCommandEvent.RequiresRerendering)
@@ -507,499 +362,6 @@ internal class Store
         }
     }
 
-    public void IdentifyAll()
-    {
-        int price;
-        if (!SaveGame.ServiceHaggle(500, out price))
-        {
-            if (price >= SaveGame.Gold)
-            {
-                SaveGame.MsgPrint("You do not have the gold!");
-            }
-            else
-            {
-                SaveGame.Gold -= price;
-                SaveGame.SayComment_1();
-                SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-                SaveGame.StorePrtGold();
-                SaveGame.IdentifyPack();
-                SaveGame.MsgPrint("All your goods have been identified.");
-            }
-            SaveGame.HandleStuff();
-        }
-    }
-
-    public void HireRoom()
-    {
-        int price;
-        if (SaveGame.TimedPoison.TurnsRemaining > 0 || SaveGame.TimedBleeding.TurnsRemaining > 0)
-        {
-            SaveGame.MsgPrint("You need a healer, not a room!");
-            SaveGame.MsgPrint("I'm sorry, but  I don't want anyone dying in here.");
-        }
-        else
-        {
-            if (!SaveGame.ServiceHaggle(10, out price))
-            {
-                if (price >= SaveGame.Gold)
-                {
-                    SaveGame.MsgPrint("You do not have the gold!");
-                }
-                else
-                {
-                    SaveGame.Gold -= price;
-                    SaveGame.SayComment_1();
-                    SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-                    SaveGame.StorePrtGold();
-                    RoomRest(SaveGame.Race.RestsTillDuskInsteadOfDawn);
-                }
-            }
-        }
-    }
-
-    public void ResearchSpell()
-    {
-        DoCmdStudy();
-    }
-
-    public void Rest()
-    {
-        if (SaveGame.TimedPoison.TurnsRemaining > 0 || SaveGame.TimedBleeding.TurnsRemaining > 0)
-        {
-            SaveGame.MsgPrint("Your wounds prevent you from sleeping.");
-        }
-        else
-        {
-            RoomRest(SaveGame.Race.RestsTillDuskInsteadOfDawn);
-        }
-    }
-
-    public void ResearchItem()
-    {
-        int price;
-        if (!SaveGame.ServiceHaggle(2000, out price))
-        {
-            if (price > SaveGame.Gold)
-            {
-                SaveGame.MsgPrint("You do not have the gold!");
-            }
-            else
-            {
-                SaveGame.Gold -= price;
-                SaveGame.SayComment_1();
-                SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-                SaveGame.StorePrtGold();
-                SaveGame.IdentifyFully();
-            }
-            SaveGame.HandleStuff();
-        }
-    }
-
-    public void Restoration()
-    {
-        int price;
-        if (!SaveGame.ServiceHaggle(750, out price))
-        {
-            if (price > SaveGame.Gold)
-            {
-                SaveGame.MsgPrint("You do not have the gold!");
-            }
-            else
-            {
-                SaveGame.Gold -= price;
-                SaveGame.SayComment_1();
-                SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-                SaveGame.StorePrtGold();
-                SaveGame.TryRestoringAbilityScore(Ability.Strength);
-                SaveGame.TryRestoringAbilityScore(Ability.Intelligence);
-                SaveGame.TryRestoringAbilityScore(Ability.Wisdom);
-                SaveGame.TryRestoringAbilityScore(Ability.Dexterity);
-                SaveGame.TryRestoringAbilityScore(Ability.Constitution);
-                SaveGame.TryRestoringAbilityScore(Ability.Charisma);
-                SaveGame.RestoreLevel();
-            }
-            SaveGame.HandleStuff();
-        }
-    }
-
-    public void RemoveCurse()
-    {
-        int price;
-        if (!SaveGame.ServiceHaggle(500, out price))
-        {
-            if (price > SaveGame.Gold)
-            {
-                SaveGame.MsgPrint("You do not have the gold!");
-            }
-            else
-            {
-                SaveGame.Gold -= price;
-                SaveGame.SayComment_1();
-                SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-                SaveGame.StorePrtGold();
-                SaveGame.RemoveCurse();
-            }
-            SaveGame.HandleStuff();
-        }
-    }
-
-    public void EnchantWeapon()
-    {
-        int price;
-        if (!SaveGame.ServiceHaggle(800, out price))
-        {
-            if (price > SaveGame.Gold)
-            {
-                SaveGame.MsgPrint("You do not have the gold!");
-            }
-            else
-            {
-                SaveGame.Gold -= price;
-                SaveGame.SayComment_1();
-                SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-                SaveGame.StorePrtGold();
-                SaveGame.EnchantItem(4, 4, 0);
-            }
-            SaveGame.HandleStuff();
-        }
-    }
-
-    public void EnchantArmour()
-    {
-        int price;
-        if (!SaveGame.ServiceHaggle(400, out price))
-        {
-            if (price > SaveGame.Gold)
-            {
-                SaveGame.MsgPrint("You do not have the gold!");
-            }
-            else
-            {
-                SaveGame.Gold -= price;
-                SaveGame.SayComment_1();
-                SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-                SaveGame.StorePrtGold();
-                SaveGame.EnchantItem(0, 0, 4);
-            }
-            SaveGame.HandleStuff();
-        }
-    }
-
-    public void HireAnEscort()
-    {
-        int price;
-        var escortable = new Dictionary<char, Town>();
-        foreach (Town town in SaveGame.SingletonRepository.Towns)
-        {
-            if (town.Visited && town.Name != SaveGame.CurTown.Name && town.CanBeEscortedHere)
-            {
-                escortable.Add(town.Char, town);
-            }
-        }
-        if (escortable.Count == 0)
-        {
-            SaveGame.MsgPrint("There are no valid destinations to be escorted to.");
-            SaveGame.MsgPrint("You must have visited a town before you can be escorted there.");
-        }
-        else
-        {
-            var destination = GetEscortDestination(escortable);
-            if (destination != null)
-            {
-                if (!SaveGame.ServiceHaggle(200, out price))
-                {
-                    if (price > SaveGame.Gold)
-                    {
-                        SaveGame.MsgPrint("You do not have the gold!");
-                    }
-                    else
-                    {
-                        SaveGame.Gold -= price;
-                        SaveGame.SayComment_1();
-                        SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-                        SaveGame.StorePrtGold();
-                        SaveGame.WildernessX = destination.X;
-                        SaveGame.WildernessY = destination.Y;
-                        SaveGame.CurTown = destination;
-                        SaveGame.NewLevelFlag = true;
-                        SaveGame.CameFrom = LevelStart.StartRandom;
-                        SaveGame.MsgPrint("The journey takes all day.");
-                        SaveGame.GameTime.ToNextDusk();
-                        _leaveStore = true;
-                    }
-                }
-            }
-        }
-        SaveGame.HandleStuff();
-    }
-
-    public void StoreSell()
-    {
-        int itemPos;
-        if (!SaveGame.SelectItem(out Item? oPtr, StoreFactory.SellPrompt, true, true, false, StoreFactory)) // We use the store itself as the ItemFilter because the Store implements IItemFilter.
-        {
-            SaveGame.MsgPrint("You have nothing that I want.");
-            return;
-        }
-        if (oPtr == null)
-        {
-            return;
-        }
-        if (oPtr.IsInEquipment && oPtr.IsCursed())
-        {
-            SaveGame.MsgPrint("Hmmm, it seems to be cursed.");
-            return;
-        }
-        int amt = 1;
-        if (oPtr.Count > 1)
-        {
-            amt = SaveGame.GetQuantity(null, oPtr.Count, true);
-            if (amt <= 0)
-            {
-                return;
-            }
-        }
-        Item qPtr = oPtr.Clone();
-        qPtr.Count = amt;
-        string oName = qPtr.Description(true, 3);
-        if (!StoreFactory.StoreMaintainsInscription)
-        {
-            qPtr.Inscription = "";
-        }
-        if (!StoreCanAcceptMoreItems(qPtr))
-        {
-            SaveGame.MsgPrint(StoreFactory.StoreFullMessage);
-            return;
-        }
-        if (StoreFactory.StoreBuysItems)
-        {
-            SaveGame.MsgPrint($"Selling {oName} ({oPtr.Label}).");
-            SaveGame.MsgPrint(null);
-            bool choice = SellHaggle(qPtr, out int price);
-            if (!choice)
-            {
-                SaveGame.SayComment_1();
-                SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-                SaveGame.Gold += price;
-                SaveGame.StorePrtGold();
-                int guess = qPtr.Value() * qPtr.Count;
-                if (StoreFactory.StoreIdentifiesItems)
-                {
-                    oPtr.BecomeFlavourAware();
-                    oPtr.BecomeKnown();
-                }
-                SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
-                qPtr = oPtr.Clone();
-                qPtr.Count = amt;
-                int value;
-                if (!StoreFactory.StoreAnalyzesPurchases)
-                {
-                    value = guess;
-                }
-                else
-                {
-                    value = qPtr.Value() * qPtr.Count;
-                    oName = qPtr.Description(true, 3);
-                }
-                SaveGame.MsgPrint($"You {StoreFactory.BoughtVerb} {oName} for {price} gold.");
-                PurchaseAnalyze(price, value, guess);
-            }
-        }
-        else
-        {
-            SaveGame.MsgPrint($"You drop {oName} ({oPtr.Label}).");
-        }
-
-        oPtr.ItemIncrease(-amt);
-        oPtr.ItemDescribe();
-        oPtr.ItemOptimize();
-        SaveGame.HandleStuff();
-        if (StoreFactory.UseHomeCarry)
-        {
-            itemPos = HomeCarry(qPtr);
-        }
-        else
-        {
-            itemPos = StoreCarry(qPtr);
-        }
-        if (itemPos >= 0)
-        {
-            _storeTop = itemPos / StoreFactory.PageSize * StoreFactory.PageSize;
-            DisplayInventory();
-        }
-    }
-
-    public void StorePurchase()
-    {
-        int itemNew;
-        string oName;
-        if (_storeInventoryList.Count <= 0)
-        {
-            SaveGame.MsgPrint(StoreFactory.NoStockMessage);
-            return;
-        }
-        int i = _storeInventoryList.Count - _storeTop;
-        if (i > StoreFactory.PageSize)
-        {
-            i = StoreFactory.PageSize;
-        }
-        string outVal = StoreFactory.PurchaseMessage;
-        if (!GetStock(out int itemIndex, outVal, 0, i - 1))
-        {
-            return;
-        }
-        int item = itemIndex + _storeTop;
-        Item oPtr = _storeInventoryList[item];
-        int amt = 1;
-        Item jPtr = oPtr.Clone(amt);
-        if (!SaveGame.InvenCarryOkay(jPtr))
-        {
-            SaveGame.MsgPrint("You cannot carry that many different items.");
-            return;
-        }
-        int best = PriceItem(jPtr, _owner.MinInflate, false);
-        if (oPtr.Count > 1)
-        {
-            if (StoreFactory.StoreSellsItems && oPtr.IdentFixed)
-            {
-                SaveGame.MsgPrint($"That costs {best} gold per item.");
-            }
-            int maxBuy = Math.Min(SaveGame.Gold / best, oPtr.Count);
-            if (maxBuy < 2)
-            {
-                amt = 1;
-            }
-            else
-            {
-                amt = SaveGame.GetQuantity(null, maxBuy, false);
-                if (amt <= 0)
-                {
-                    return;
-                }
-            }
-        }
-        jPtr = oPtr.Clone(amt);
-        if (!SaveGame.InvenCarryOkay(jPtr))
-        {
-            SaveGame.MsgPrint("You cannot carry that many items.");
-            return;
-        }
-        if (StoreFactory.StoreSellsItems)
-        {
-            bool choice;
-            int price;
-            if (oPtr.IdentFixed)
-            {
-                choice = false;
-                price = best * jPtr.Count;
-            }
-            else
-            {
-                oName = StoreFactory.GetItemDescription(jPtr);
-                SaveGame.MsgPrint($"Buying {oName} ({item.IndexToLetter()}).");
-                SaveGame.MsgPrint(null);
-                choice = PurchaseHaggle(jPtr, out price);
-            }
-            if (!choice)
-            {
-                if (SaveGame.Gold >= price)
-                {
-                    SaveGame.SayComment_1();
-                    SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-                    SaveGame.Gold -= price;
-                    SaveGame.StorePrtGold();
-                    if (StoreFactory.StoreIdentifiesItems)
-                    {
-                        jPtr.BecomeFlavourAware();
-                    }
-                    jPtr.IdentFixed = false;
-                    oName = jPtr.Description(true, 3);
-                    SaveGame.MsgPrint(StoreFactory.BoughtMessage(oName, price));
-                    jPtr.Inscription = "";
-                    itemNew = SaveGame.InvenCarry(jPtr);
-                    Item? newItemInInventory = SaveGame.GetInventoryItem(itemNew);
-                    if (newItemInInventory == null)
-                    {
-                        return; // TODO: This should never be.
-                    }
-                    oName = newItemInInventory.Description(true, 3);
-                    SaveGame.MsgPrint($"You have {oName} ({itemNew.IndexToLabel()}).");
-                    SaveGame.HandleStuff();
-                    i = _storeInventoryList.Count;
-                    StoreItemIncrease(item, -amt);
-                    StoreItemOptimize(item);
-                    if (_storeInventoryList.Count == 0)
-                    {
-                        if (StoreFactory.MaintainsStockLevels)
-                        {
-                            if (SaveGame.Rng.RandomLessThan(Constants.StoreShuffle) == 0)
-                            {
-                                SaveGame.MsgPrint("The shopkeeper retires.");
-                                StoreShuffle();
-                            }
-                            else
-                            {
-                                SaveGame.MsgPrint("The shopkeeper brings out some new stock.");
-                            }
-                            for (i = 0; i < 10; i++)
-                            {
-                                StoreMaint();
-                            }
-                        }
-                        _storeTop = 0;
-                        DisplayInventory();
-                    }
-                    else if (_storeInventoryList.Count != i)
-                    {
-                        if (_storeTop >= _storeInventoryList.Count)
-                        {
-                            _storeTop -= StoreFactory.PageSize;
-                        }
-                        DisplayInventory();
-                    }
-                    else
-                    {
-                        DisplayEntry(item, itemIndex.IndexToLetter(), itemIndex + 6);
-                    }
-                }
-                else
-                {
-                    SaveGame.MsgPrint("You do not have enough gold.");
-                }
-            }
-        }
-        else
-        {
-            itemNew = SaveGame.InvenCarry(jPtr);
-            Item? newItemInInventory = SaveGame.GetInventoryItem(itemNew);
-            if (newItemInInventory == null)
-            {
-                return; // TODO: This should never be.
-            }
-            oName = newItemInInventory.Description(true, 3);
-            SaveGame.MsgPrint($"You have {oName} ({itemNew.IndexToLabel()}).");
-            SaveGame.HandleStuff();
-            i = _storeInventoryList.Count;
-            StoreItemIncrease(item, -amt);
-            StoreItemOptimize(item);
-            if (i == _storeInventoryList.Count)
-            {
-                DisplayEntry(item, itemIndex.IndexToLetter(), itemIndex + 6);
-            }
-            else
-            {
-                if (_storeInventoryList.Count == 0)
-                {
-                    _storeTop = 0;
-                }
-                else if (_storeTop >= _storeInventoryList.Count)
-                {
-                    _storeTop -= StoreFactory.PageSize;
-                }
-                DisplayInventory();
-            }
-        }
-    }
     private void DisplayStore()
     {
         SaveGame.Screen.Clear();
@@ -1032,98 +394,7 @@ internal class Store
         DisplayInventory();
     }
 
-    private void DoStoreBrowse(Item oPtr)
-    {
-        ScreenBuffer savedScreen = SaveGame.Screen.Clone();
-        BookItemFactory book = (BookItemFactory)oPtr.Factory;
-        SaveGame.PrintSpells(book.Spells.ToArray(), 1, 20);
-        SaveGame.Screen.PrintLine("", 0, 0);
-        SaveGame.Screen.Print("[Press any key to continue]", 0, 23);
-        SaveGame.Inkey();
-        SaveGame.Screen.Restore(savedScreen);
-    }
-
-    private Town GetEscortDestination(Dictionary<char, Town> towns)
-    {
-        ScreenBuffer savedScreen = SaveGame.Screen.Clone();
-        try
-        {
-            var keys = towns.Keys.ToList();
-            keys.Sort();
-            string outVal = $"Destination town ({keys[0].ToString().ToLower()} to {keys[keys.Count - 1].ToString().ToLower()})? ";
-            for (int i = 0; i < keys.Count; i++)
-            {
-                SaveGame.Screen.Print(ColourEnum.White, $" {keys[i].ToString().ToLower()}) {towns[keys[i]].Name}".PadRight(60), i + 1, 20);
-            }
-            SaveGame.Screen.Print(ColourEnum.White, "".PadRight(60), keys.Count + 1, 20);
-            while (SaveGame.GetCom(outVal, out char choice))
-            {
-                choice = choice.ToString().ToUpper()[0];
-                foreach (var c in keys)
-                {
-                    if (choice == c)
-                    {
-                        return towns[c];
-                    }
-                }
-            }
-        }
-        finally
-        {
-            SaveGame.Screen.Restore(savedScreen);
-        }
-        return null;
-    }
-
-    private GodName GetSacrificeTarget()
-    {
-        ScreenBuffer savedScreen = SaveGame.Screen.Clone();
-        try
-        {
-            var deities = SaveGame.Religion.GetAllDeities();
-            var names = new List<string>();
-            var keys = new List<char>();
-            foreach (var deity in deities)
-            {
-                names.Add(deity.LongName);
-                keys.Add(deity.LongName[0]);
-            }
-            names.Sort();
-            keys.Sort();
-            string outVal = $"Destination town ({keys[0].ToString().ToLower()} to {keys[keys.Count - 1].ToString().ToLower()})? ";
-            for (int i = 0; i < keys.Count; i++)
-            {
-                SaveGame.Screen.Print(ColourEnum.White, $" {keys[i].ToString().ToLower()}) {names[i]}".PadRight(60), i + 1, 20);
-            }
-            SaveGame.Screen.Print(ColourEnum.White, "".PadRight(60), keys.Count + 1, 20);
-            while (SaveGame.GetCom(outVal, out char choice))
-            {
-                choice = choice.ToString().ToUpper()[0];
-                foreach (var c in keys)
-                {
-                    if (choice == c)
-                    {
-                        foreach (var deity in deities)
-                        {
-                            if (deity.ShortName.StartsWith(choice.ToString()))
-                            {
-                                return deity.Name;
-                            }
-                        }
-                        return GodName.None;
-                    }
-                }
-            }
-            return GodName.None;
-
-        }
-        finally
-        {
-            SaveGame.Screen.Restore(savedScreen);
-        }
-    }
-
-    private bool GetStock(out int comVal, string pmt, int i, int j)
+    public bool GetStock(out int comVal, string pmt, int i, int j)
     {
         char command;
         SaveGame.MsgPrint(null);
@@ -1142,7 +413,7 @@ internal class Store
         return command != '\x1b';
     }
 
-    private int StoreCarry(Item oPtr)
+    public int StoreCarry(Item oPtr)
     {
         int slot;
         Item jPtr;
@@ -1156,22 +427,22 @@ internal class Store
             oPtr.IdentMental = true;
             oPtr.Inscription = "";
         }
-        for (slot = 0; slot < _storeInventoryList.Count; slot++)
+        for (slot = 0; slot < StoreInventoryList.Count; slot++)
         {
-            jPtr = _storeInventoryList[slot];
+            jPtr = StoreInventoryList[slot];
             if (StoreFactory.StoreObjectSimilar(jPtr, oPtr))
             {
                 StoreObjectAbsorb(jPtr, oPtr);
                 return slot;
             }
         }
-        if (_storeInventoryList.Count >= StoreFactory.MaxInventory)
+        if (StoreInventoryList.Count >= StoreFactory.MaxInventory)
         {
             return -1;
         }
-        for (slot = 0; slot < _storeInventoryList.Count; slot++)
+        for (slot = 0; slot < StoreInventoryList.Count; slot++)
         {
-            jPtr = _storeInventoryList[slot];
+            jPtr = StoreInventoryList[slot];
             int compareResult = oPtr.CompareTo(jPtr);
             if (compareResult < 0)
             {
@@ -1182,7 +453,7 @@ internal class Store
                 continue;
             }
         }
-        _storeInventoryList.Insert(slot, oPtr);
+        StoreInventoryList.Insert(slot, oPtr);
         return slot;
     }
 
@@ -1191,27 +462,27 @@ internal class Store
     /// </summary>
     /// <param name="oPtr"></param>
     /// <returns></returns>
-    protected int HomeCarry(Item oPtr)
+    public int HomeCarry(Item oPtr)
     {
         int slot;
         Item jPtr;
-        for (slot = 0; slot < _storeInventoryList.Count; slot++)
+        for (slot = 0; slot < StoreInventoryList.Count; slot++)
         {
-            jPtr = _storeInventoryList[slot];
+            jPtr = StoreInventoryList[slot];
             if (jPtr.CanAbsorb(oPtr))
             {
                 jPtr.Absorb(oPtr);
                 return slot;
             }
         }
-        if (_storeInventoryList.Count >= StoreFactory.MaxInventory)
+        if (StoreInventoryList.Count >= StoreFactory.MaxInventory)
         {
             return -1;
         }
         int value = oPtr.Value();
-        for (slot = 0; slot < _storeInventoryList.Count; slot++)
+        for (slot = 0; slot < StoreInventoryList.Count; slot++)
         {
-            jPtr = _storeInventoryList[slot];
+            jPtr = StoreInventoryList[slot];
             int compareResult = oPtr.CompareTo(jPtr);
             if (compareResult < 0)
             {
@@ -1222,7 +493,7 @@ internal class Store
                 continue;
             }
         }
-        _storeInventoryList.Insert(slot, oPtr.Clone()); // Clone is different
+        StoreInventoryList.Insert(slot, oPtr.Clone()); // Clone is different
         return slot;
     }
 
@@ -1260,7 +531,7 @@ internal class Store
         oPtr.Count = size - size * discount / 100;
     }
 
-    private int PriceItem(Item oPtr, int greed, bool trueToMarkDownFalseToMarkUp)
+    public int PriceItem(Item oPtr, int greed, bool trueToMarkDownFalseToMarkUp)
     {
         int adjust;
         int price = oPtr.Value();
@@ -1295,237 +566,21 @@ internal class Store
         return price;
     }
 
-    private void PurchaseAnalyze(int price, int value, int guess)
+    private void RoomRest()
     {
-        if (value <= 0 && price > value)
-        {
-            SaveGame.MsgPrint(SaveGame.SingletonRepository.ShopKeeperWorthlessComments.ToWeightedRandom().Choose());
-            SaveGame.PlaySound(SoundEffectEnum.StoreSoldWorthless);
-        }
-        else if (value < guess && price > value)
-        {
-            SaveGame.MsgPrint(SaveGame.SingletonRepository.ShopKeeperLessThanGuessComments.ToWeightedRandom().Choose());
-            SaveGame.PlaySound(SoundEffectEnum.StoreSoldBargain);
-        }
-        else if (value > guess && value < 4 * guess && price < value)
-        {
-            SaveGame.MsgPrint(SaveGame.SingletonRepository.ShopKeeperGoodComments.ToWeightedRandom().Choose());
-            SaveGame.PlaySound(SoundEffectEnum.StoreSoldCheaply);
-        }
-        else if (value > guess && price < value)
-        {
-            SaveGame.MsgPrint(SaveGame.SingletonRepository.ShopKeeperBargainComments.ToWeightedRandom().Choose());
-            SaveGame.PlaySound(SoundEffectEnum.StoreSoldExtraCheaply);
-        }
     }
 
-    private bool PurchaseHaggle(Item oPtr, out int price)
-    {
-        int finalAsk = PriceItem(oPtr, _owner.MinInflate, false);
-        SaveGame.MsgPrint("You quickly agree upon the price.");
-        SaveGame.MsgPrint(null);
-        finalAsk += finalAsk / 10;
-        const string pmt = "Final Offer";
-        finalAsk *= oPtr.Count;
-        price = finalAsk;
-        string outVal = $"{pmt} :  {finalAsk}";
-        SaveGame.Screen.Print(outVal, 1, 0);
-        return !SaveGame.GetCheck("Accept deal? ");
-    }
-
-    private void RoomRest(bool toDusk)
-    {
-        if (toDusk)
-        {
-            SaveGame.GameTime.ToNextDusk();
-            SaveGame.MsgPrint("You awake, ready for the night.");
-            SaveGame.MsgPrint("You eat a tasty supper.");
-        }
-        else
-        {
-            SaveGame.GameTime.ToNextDawn();
-            SaveGame.MsgPrint("You awake refreshed for the new day.");
-            SaveGame.MsgPrint("You eat a hearty breakfast.");
-        }
-        SaveGame.Religion.DecayFavour();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
-        SaveGame.SetFood(Constants.PyFoodMax - 1);
-        foreach (Town town in SaveGame.SingletonRepository.Towns)
-        {
-            foreach (Store store in town.Stores)
-            {
-                if (StoreFactory.PerformsMaintenanceWhenResting)
-                {
-                    store.StoreMaint();
-                }
-            }
-        }
-        SaveGame.TimedHaste.SetValue();
-        SaveGame.TimedSlow.SetValue();
-        SaveGame.TimedBlindness.SetValue();
-        SaveGame.TimedParalysis.SetValue();
-        SaveGame.TimedConfusion.SetValue();
-        SaveGame.TimedFear.SetValue();
-        SaveGame.TimedHallucinations.SetValue();
-        SaveGame.TimedPoison.SetValue();
-        SaveGame.TimedBleeding.SetValue();
-        SaveGame.TimedStun.SetValue();
-        SaveGame.TimedProtectionFromEvil.SetValue();
-        SaveGame.TimedInvulnerability.SetValue();
-        SaveGame.TimedHeroism.SetValue();
-        SaveGame.TimedSuperheroism.SetValue();
-        SaveGame.TimedStoneskin.SetValue();
-        SaveGame.TimedBlessing.SetValue();
-        SaveGame.TimedSeeInvisibility.SetValue();
-        SaveGame.TimedEtherealness.SetValue();
-        SaveGame.TimedInfravision.SetValue();
-        SaveGame.TimedAcidResistance.SetValue();
-        SaveGame.TimedLightningResistance.SetValue();
-        SaveGame.TimedFireResistance.SetValue();
-        SaveGame.TimedColdResistance.SetValue();
-        SaveGame.TimedPoisonResistance.SetValue();
-        SaveGame.Health = SaveGame.MaxHealth;
-        SaveGame.Mana = SaveGame.MaxMana;
-        SaveGame.TimedBlindness.SetValue();
-        SaveGame.TimedConfusion.SetValue();
-        SaveGame.TimedStun.SetValue();
-        SaveGame.NewLevelFlag = true;
-        SaveGame.CameFrom = LevelStart.StartWalk;
-    }
-
-    public void SacrificeItem()
-    {
-        var godName = GetSacrificeTarget();
-        if (godName == GodName.None)
-        {
-            return;
-        }
-        var deity = SaveGame.Religion.GetNamedDeity(godName);
-        string pmt = "Sacrifice which item? ";
-        if (!SaveGame.SelectItem(out Item? oPtr, pmt, true, true, false, null))
-        {
-            SaveGame.MsgPrint("You have nothing to sacrifice.");
-            return;
-        }
-        if (oPtr == null)
-        {
-            return;
-        }
-        if (oPtr.IsInEquipment && oPtr.IsCursed())
-        {
-            SaveGame.MsgPrint("Hmmm, it seems to be cursed.");
-            return;
-        }
-        int amt = 1;
-        if (oPtr.Count > 1)
-        {
-            amt = SaveGame.GetQuantity(null, oPtr.Count, true);
-            if (amt <= 0)
-            {
-                return;
-            }
-        }
-        Item qPtr = oPtr.Clone(amt);
-        string oName = qPtr.Description(true, 3);
-        qPtr.Inscription = "";
-        int finalAsk = PriceItem(qPtr, _owner.MinInflate, true) * qPtr.Count;
-        oPtr.ItemIncrease(-amt);
-        oPtr.ItemDescribe();
-        oPtr.ItemOptimize();
-        SaveGame.HandleStuff();
-        var deityName = deity.ShortName;
-        if (finalAsk <= 0)
-        {
-            finalAsk = -100;
-        }
-        var favour = finalAsk / 10;
-        var oldFavour = deity.AdjustedFavour;
-        SaveGame.Religion.AddFavour(godName, favour);
-        var newFavour = deity.AdjustedFavour;
-        var change = newFavour - oldFavour;
-        if (change < 0)
-        {
-            SaveGame.MsgPrint($"{deityName} is displeased with your sacrifice!");
-        }
-        else if (change == 0)
-        {
-            SaveGame.MsgPrint($"{deityName} is indifferent to your sacrifice!");
-        }
-        else if (change == 1)
-        {
-            SaveGame.MsgPrint($"{deityName} approves of your sacrifice!");
-        }
-        else if (change == 2)
-        {
-            SaveGame.MsgPrint($"{deityName} likes your sacrifice!");
-        }
-        else if (change == 3)
-        {
-            SaveGame.MsgPrint($"{deityName} loves your sacrifice!");
-        }
-        else
-        {
-            SaveGame.MsgPrint($"{deityName} is delighted by your sacrifice!");
-        }
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
-    }
-
-    private bool SellHaggle(Item oPtr, out int price)
-    {
-        int finalAsk = PriceItem(oPtr, _owner.MinInflate, true);
-        int purse = _owner.MaxCost;
-        if (finalAsk >= purse)
-        {
-            SaveGame.MsgPrint("You instantly agree upon the price.");
-            SaveGame.MsgPrint(null);
-            finalAsk = purse;
-        }
-        else
-        {
-            SaveGame.MsgPrint("You quickly agree upon the price.");
-            SaveGame.MsgPrint(null);
-            finalAsk -= finalAsk / 10;
-        }
-        const string pmt = "Final Offer";
-        finalAsk *= oPtr.Count;
-        price = finalAsk;
-        string outVal = $"{pmt} :  {finalAsk}";
-        SaveGame.Screen.Print(outVal, 1, 0);
-        return !SaveGame.GetCheck("Accept deal? ");
-    }
-
-    ///// <summary>
-    ///// Create an item from the store tables.
-    ///// </summary>
-    ///// <returns></returns>
-    //public Item CreateItem()
-    //{
-    //    //// Allow the factory to create the item.  The black market needs this.
-    //    //Item? item = StoreFactory.CreateItem(this);
-
-    //    //// If the factory created an item, return it.
-    //    //if (item != null)
-    //    //{
-    //    //    return item;
-    //    //}
-
-
-    //    return qPtr;
-    //}
-
-    private bool StoreCanAcceptMoreItems(Item oPtr)
+    public bool StoreCanAcceptMoreItems(Item oPtr)
     {
         int i;
         Item jPtr;
-        if (_storeInventoryList.Count < StoreFactory.MaxInventory)
+        if (StoreInventoryList.Count < StoreFactory.MaxInventory)
         {
             return true;
         }
-        for (i = 0; i < _storeInventoryList.Count; i++)
+        for (i = 0; i < StoreInventoryList.Count; i++)
         {
-            jPtr = _storeInventoryList[i];
+            jPtr = StoreInventoryList[i];
             if (StoreFactory.StoreCanMergeItem(oPtr, jPtr))
             {
                 return true;
@@ -1536,7 +591,7 @@ internal class Store
 
     public void EnterStore()
     {
-        _storeTop = 0;
+        StoreTop = 0;
         DisplayStore();
         _leaveStore = false;
         while (!_leaveStore)
@@ -1552,7 +607,7 @@ internal class Store
             RenderAdvertisedCommand(StoreFactory.AdvertisedStoreCommand4, 43, 56);
             SaveGame.Screen.Print("You may: ", 41, 0);
             SaveGame.RequestCommand(true);
-            StoreProcessCommand();
+            ProcessCommand();
             SaveGame.FullScreenOverlay = true;
             SaveGame.NoticeStuff();
             SaveGame.HandleStuff();
@@ -1583,7 +638,7 @@ internal class Store
                     int itemPos = HomeCarry(qPtr);
                     if (itemPos >= 0)
                     {
-                        _storeTop = itemPos / StoreFactory.PageSize * StoreFactory.PageSize;
+                        StoreTop = itemPos / StoreFactory.PageSize * StoreFactory.PageSize;
                         DisplayInventory();
                     }
                 }
@@ -1620,7 +675,7 @@ internal class Store
             if (storeName == null)
             {
                 storeName = SaveGame.SingletonRepository.Tiles.Get(StoreFactory.FeatureType).Description;
-                storeName = $"{storeName} ({_owner.MaxCost})";
+                storeName = $"{storeName} ({Owner.MaxCost})";
             }
             return storeName;
         }
@@ -1633,18 +688,18 @@ internal class Store
     {
         get
         {
-            string ownerName = _owner.OwnerName;
-            if (_owner.OwnerRace == null)
+            string ownerName = Owner.OwnerName;
+            if (Owner.OwnerRace == null)
                 return $"{ownerName}";
             else
-                return $"{ownerName} ({_owner.OwnerRace.Title})";
+                return $"{ownerName} ({Owner.OwnerRace.Title})";
         }
     }
 
     public void StoreInit()
     {
-        _owner = GetRandomOwner();
-        _storeInventoryList.Clear();
+        Owner = GetRandomOwner();
+        StoreInventoryList.Clear();
     }
 
     public void StoreMaint()
@@ -1659,7 +714,7 @@ internal class Store
         int oldRating = SaveGame.TreasureRating;
 
         // First phase, is to delete some items from the store.  Get the number of inventory items and alter this count by the turnover rate.
-        int desiredTurnOverInventoryCount = _storeInventoryList.Count;
+        int desiredTurnOverInventoryCount = StoreInventoryList.Count;
         desiredTurnOverInventoryCount -= SaveGame.Rng.DieRoll(StoreFactory.StoreTurnover);
 
         // Ensure the count didn't go below zero.
@@ -1669,13 +724,13 @@ internal class Store
         }
 
         // Now delete the items that are being turned over.
-        while (_storeInventoryList.Count > desiredTurnOverInventoryCount)
+        while (StoreInventoryList.Count > desiredTurnOverInventoryCount)
         {
             StoreDelete();
         }
 
         // Now add new items to the store to meet the store minimum and maximum counts.
-        int desiredFinalInventoryCount = _storeInventoryList.Count;
+        int desiredFinalInventoryCount = StoreInventoryList.Count;
 
         // Add a turnover rating to the count.
         desiredFinalInventoryCount += SaveGame.Rng.DieRoll(StoreFactory.StoreTurnover);
@@ -1693,7 +748,7 @@ internal class Store
         {
             desiredFinalInventoryCount = StoreFactory.MaxInventory - 1;
         }
-        while (_storeInventoryList.Count < desiredFinalInventoryCount)
+        while (StoreInventoryList.Count < desiredFinalInventoryCount)
         {
             StoreCreate();
         }
@@ -1708,10 +763,10 @@ internal class Store
         {
             return;
         }
-        _owner = GetRandomOwner();
-        for (int i = 0; i < _storeInventoryList.Count; i++)
+        Owner = GetRandomOwner();
+        for (int i = 0; i < StoreInventoryList.Count; i++)
         {
-            Item oPtr = _storeInventoryList[i];
+            Item oPtr = StoreInventoryList[i];
             if (string.IsNullOrEmpty(oPtr.RandartName))
             {
                 oPtr.Discount = 50;

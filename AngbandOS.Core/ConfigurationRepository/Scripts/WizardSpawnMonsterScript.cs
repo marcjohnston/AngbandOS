@@ -8,11 +8,15 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WizardSpawnMonsterScript : Script
+internal class WizardSpawnMonsterScript : Script, IScript
 {
     private WizardSpawnMonsterScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the spawn monster script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         SaveGame.FullScreenOverlay = true;
         ScreenBuffer savedScreen = SaveGame.Screen.Clone();
@@ -62,7 +66,7 @@ internal class WizardSpawnMonsterScript : Script
 
                 if (!SaveGame.GetCom("Spawn Which Monster? ", out char ch))
                 {
-                    return false;
+                    return;
                 }
 
                 foreach (ConsoleChar c in s)
@@ -87,7 +91,7 @@ internal class WizardSpawnMonsterScript : Script
                         MonsterRace monsterRace = monsterRaces[selectedIndex];
                         SaveGame.Scatter(out int y, out int x, SaveGame.MapY, SaveGame.MapX, 1);
                         SaveGame.PlaceMonsterAux(y, x, monsterRace, false, false, false);
-                        return false;
+                        return;
                 }
             }
         }
@@ -97,6 +101,5 @@ internal class WizardSpawnMonsterScript : Script
             SaveGame.FullScreenOverlay = false;
             SaveGame.SetBackground(BackgroundImageEnum.Overhead);
         }
-        return false;
     }
 }

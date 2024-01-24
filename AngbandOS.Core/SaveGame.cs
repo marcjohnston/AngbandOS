@@ -557,44 +557,6 @@ internal class SaveGame
         InitializeAllocationTables();
     }
 
-    public void BuyHouse()
-    {
-        int price;
-        if (TownWithHouse == CurTown.Index)
-        {
-            MsgPrint("You already have the deeds!");
-        }
-        else
-        {
-            if (!ServiceHaggle(CurTown.HousePrice, out price))
-            {
-                if (price >= Gold)
-                {
-                    MsgPrint("You do not have the gold!");
-                }
-                else
-                {
-                    Gold -= price;
-                    SayComment_1();
-                    PlaySound(SoundEffectEnum.StoreTransaction);
-                    StorePrtGold();
-                    int oldHouse = TownWithHouse;
-                    TownWithHouse = CurTown.Index;
-                    if (oldHouse == -1)
-                    {
-                        MsgPrint("You may move in at once.");
-                    }
-                    else
-                    {
-                        MsgPrint("I've sold your old house to pay for the removal service.");
-                        MoveHouse(oldHouse, TownWithHouse);
-                    }
-                }
-                HandleStuff();
-            }
-        }
-    }
-
     public void StorePrtGold()
     {
         Screen.PrintLine("Gold Remaining: ", 39, 53);
@@ -2895,7 +2857,7 @@ internal class SaveGame
         HackMind = true;
         if (CameFrom == LevelStart.StartHouse)
         {
-            RunScript(nameof(StoreScript));
+            RunScript(nameof(EnterStoreScript));
             CameFrom = LevelStart.StartRandom;
         }
         if (CurrentDepth == 0)
@@ -9477,10 +9439,21 @@ internal class SaveGame
         }
     }
 
-    public bool RunScript(string scriptName)
+    public void RunScript(string scriptName)
     {
-        Script script = SingletonRepository.Scripts.Get(scriptName);
-        return script.Execute();
+        // Get the script from the singleton repository.
+        Script? script = SingletonRepository.Scripts.Get(scriptName);
+
+        if (script == null)
+        {
+            throw new Exception($"The {scriptName} script specified to run does not exist.");
+        }
+        if (!typeof(IScript).IsInstanceOfType(script))
+        {
+            throw new Exception($"The {scriptName} script specified to run does not implement the {nameof(IScript)} interface.");
+        }
+        IScript castedScript = (IScript)script;
+        castedScript.ExecuteScript();
     }
 
     /// <summary>

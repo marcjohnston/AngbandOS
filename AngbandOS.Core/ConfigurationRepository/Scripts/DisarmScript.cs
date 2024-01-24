@@ -8,11 +8,24 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DisarmScript : Script
+internal class DisarmScript : Script, IScript, IRepeatableScript
 {
     private DisarmScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the disarm script and disposes of the repeatable result.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        ExecuteRepeatableScript();
+    }
+
+    /// <summary>
+    /// Executes the disarm script and returns true, if the disarm fails due to chance; false, otherwise.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
     {
         bool more = false;
         int numTraps = SaveGame.CountKnownTraps(out GridCoordinate? trapCoord);

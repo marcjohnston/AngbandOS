@@ -8,30 +8,56 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SayFeelingScript : Script
+internal class SayFeelingScript : Script, IScript, IRepeatableScript
 {
     private SayFeelingScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the say feeling script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the say feeling script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         if (SaveGame.CurrentDepth > 0)
         {
             string[] DangerFeelingText =
             {
-                "You're not sure about this level yet", "You feel there is something special about this ",
-                "You nearly faint as horrible visions of death fill your mind", "This level looks very dangerous",
-                "You have a very bad feeling", "You have a bad feeling", "You feel nervous",
-                "You feel unsafe", "You don't like the look of this place",
-                "This level looks reasonably safe", "What a boring place"
+                "You're not sure about this level yet", 
+                "You feel there is something special about this ",
+                "You nearly faint as horrible visions of death fill your mind", 
+                "This level looks very dangerous",
+                "You have a very bad feeling", 
+                "You have a bad feeling", 
+                "You feel nervous",
+                "You feel unsafe", 
+                "You don't like the look of this place",
+                "This level looks reasonably safe", 
+                "What a boring place"
             };
 
 
             string[] TreasureFeelingText = {
-                "You're not sure about this level yet.", "you feel it contains something special",
-                "treasure galore!", "with a veritable hoard.",
-                "powerful magic can be found here.", "there's magic in the air.", "there's wealth to be found.",
-                "with significant treasure.", "there's not much of value here.",
-                "with nothing of worth.", "what meagre pickings..."
+                "You're not sure about this level yet.", 
+                "you feel it contains something special",
+                "treasure galore!", 
+                "with a veritable hoard.",
+                "powerful magic can be found here.", 
+                "there's magic in the air.", 
+                "there's wealth to be found.",
+                "with significant treasure.", 
+                "there's not much of value here.",
+                "with nothing of worth.", 
+                "what meagre pickings..."
             };
 
             // Some sanity checks
@@ -69,6 +95,5 @@ internal class SayFeelingScript : Script
                 SaveGame.MsgPrint(SaveGame.GameTime.LevelFeel ? message : DangerFeelingText[0]);
             }
         }
-        return false;
     }
 }

@@ -8,12 +8,16 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class FalseScript : Script
+internal class LeaveStoreScript : Script, IStoreScript
 {
-    private FalseScript(SaveGame saveGame) : base(saveGame) { }
+    private LeaveStoreScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Sets the leave store flag.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
     {
-        return false;
+        storeCommandEvent.LeaveStore = true;
     }
 }

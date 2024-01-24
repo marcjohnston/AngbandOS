@@ -18,8 +18,5 @@ internal class EquipStoreCommand : StoreCommand
 
     public override string Description => "";
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        SaveGame.RunScript(nameof(EquipScript));
-    }
+    protected override string ExecuteScriptName => nameof(EquipScript);
 }

@@ -8,11 +8,24 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TunnelScript : Script
+internal class TunnelScript : Script, IScript, IRepeatableScript
 {
     private TunnelScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the tunnel script and disposes of the repeatable result.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        ExecuteScript();
+    }
+
+    /// <summary>
+    /// Executes the stay script and returns true, if the tunnel succeeded or failed due to chance; false, otherwise.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
     {
         bool more = false;
         // Get the direction in which we wish to tunnel

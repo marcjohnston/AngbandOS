@@ -12,11 +12,15 @@ namespace AngbandOS.Core.Scripts;
 /// <summary>
 /// Give us a rumour, if possible one that we've not heard before
 /// </summary>
-internal class WizardCreateItemScript : Script
+internal class WizardCreateItemScript : Script, IScript
 {
     private WizardCreateItemScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the create item script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         SaveGame.FullScreenOverlay = true;
         ScreenBuffer savedScreen = SaveGame.Screen.Clone();
@@ -27,14 +31,14 @@ internal class WizardCreateItemScript : Script
         SaveGame.SetBackground(BackgroundImageEnum.Overhead);
         if (kIdx == 0)
         {
-            return false;
+            return;
         }
         ItemFactory itemClass = SaveGame.SingletonRepository.ItemFactories[kIdx];
         Item qPtr = itemClass.CreateItem();
         qPtr.ApplyMagic(SaveGame.Difficulty, false, false, false, null);
         SaveGame.DropNear(qPtr, -1, SaveGame.MapY, SaveGame.MapX);
         SaveGame.MsgPrint("Allocated.");
-        return false;
+        return;
     }
 
     private int WizCreateItemtype()

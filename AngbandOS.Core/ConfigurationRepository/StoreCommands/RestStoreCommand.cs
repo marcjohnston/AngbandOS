@@ -20,8 +20,5 @@ internal class RestStoreCommand : StoreCommand
         nameof(HomeStoreFactory)
     };
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        storeCommandEvent.Store.Rest();
-    }
+    protected override string ExecuteScriptName => nameof(RestInStoreScript);
 }

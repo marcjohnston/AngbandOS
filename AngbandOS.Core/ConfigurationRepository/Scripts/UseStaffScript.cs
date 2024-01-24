@@ -8,26 +8,40 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class UseStaffScript : Script
+internal class UseStaffScript : Script, IScript, IRepeatableScript
 {
     private UseStaffScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the use staff script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the use staff script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         if (!SaveGame.SelectItem(out Item? item, "Use which staff? ", false, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Staff)))
         {
             SaveGame.MsgPrint("You have no staff to use.");
-            return false;
+            return;
         }
         if (item == null)
         {
-            return false;
+            return;
         }
         // Make sure the item is actually a staff
         if (!SaveGame.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Staff)))
         {
             SaveGame.MsgPrint("That is not a staff!");
-            return false;
+            return;
         }
 
         StaffItemClass staffItem = (StaffItemClass)item.Factory;
@@ -36,7 +50,7 @@ internal class UseStaffScript : Script
         if (!item.IsInInventory && item.Count > 1)
         {
             SaveGame.MsgPrint("You must first pick up the staff.");
-            return false;
+            return;
         }
         // Using a staff costs a full turn
         SaveGame.EnergyUse = 100;
@@ -58,14 +72,14 @@ internal class UseStaffScript : Script
         if (chance < Constants.UseDevice || SaveGame.Rng.DieRoll(chance) < Constants.UseDevice)
         {
             SaveGame.MsgPrint("You failed to use the staff properly.");
-            return false;
+            return;
         }
         // Make sure it has charges left
         if (item.TypeSpecificValue <= 0)
         {
             SaveGame.MsgPrint("The staff has no charges left.");
             item.IdentEmpty = true;
-            return false;
+            return;
         }
         SaveGame.PlaySound(SoundEffectEnum.UseStaff);
         UseStaffEvent useStaffEventArgs = new UseStaffEvent();
@@ -84,7 +98,7 @@ internal class UseStaffScript : Script
         // We may not have used up a charge
         if (!useStaffEventArgs.ChargeUsed)
         {
-            return false;
+            return;
         }
         // Channelers can use mana instead of a charge
         bool channeled = false;
@@ -109,6 +123,5 @@ internal class UseStaffScript : Script
             // Let the player know what happened
             SaveGame.ReportChargeUsage(item);
         }
-        return false;
     }
 }

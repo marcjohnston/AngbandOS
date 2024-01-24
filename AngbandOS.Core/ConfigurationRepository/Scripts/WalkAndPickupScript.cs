@@ -8,11 +8,24 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WalkAndPickupScript : Script
+internal class WalkAndPickupScript : Script, IScript, IRepeatableScript
 {
     private WalkAndPickupScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the walk and pickup script and disposes of the repeatable result.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        ExecuteScript();
+    }
+
+    /// <summary>
+    /// Executes the walk and pickup script and returns true, if the walk succeeded or failed due to chance; false, otherwise.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
     {
         bool more = false;
         // If we don't already have a direction, get one

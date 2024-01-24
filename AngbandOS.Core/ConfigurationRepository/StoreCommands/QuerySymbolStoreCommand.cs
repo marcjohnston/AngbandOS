@@ -18,8 +18,5 @@ internal class QuerySymbolStoreCommand : StoreCommand
 
     public override string Description => "";
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        SaveGame.RunScript(nameof(QuerySymbolScript));
-    }
+    protected override string ExecuteScriptName => nameof(QuerySymbolScript);
 }

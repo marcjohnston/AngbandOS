@@ -8,25 +8,39 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class StoreScript : Script
+internal class EnterStoreScript : Script, IScript, IRepeatableScript
 {
-    private StoreScript(SaveGame saveGame) : base(saveGame) { }
+    private EnterStoreScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the enter store script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the enter store script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         GridTile tile = SaveGame.Grid[SaveGame.MapY][SaveGame.MapX];
         // Make sure we're actually on a shop tile
         if (!tile.FeatureType.IsShop)
         {
             SaveGame.MsgPrint("You see no Stores here.");
-            return false;
+            return;
         }
         Store which = SaveGame.GetWhichStore();
         // We can't enter a house unless we own it
         if (which.DoorsLocked())
         {
             SaveGame.MsgPrint("The door is locked.");
-            return false;
+            return;
         }
         // Switch from the normal game interface to the store interface
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Check(true);
@@ -36,6 +50,5 @@ internal class StoreScript : Script
         //            CommandRepeat = 0; TODO: Confirm this is not needed
         SaveGame.QueuedCommand = '\0';
         which.EnterStore();
-        return false;
     }
 }

@@ -8,11 +8,25 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SpikeClosedDoorScript : Script
+internal class SpikeClosedDoorScript : Script, IScript, IRepeatableScript
 {
     private SpikeClosedDoorScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the spike closed door script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the spike closed door script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         // Get the location to be spiked
         if (SaveGame.GetDirectionNoAim(out int dir))
@@ -65,6 +79,5 @@ internal class SpikeClosedDoorScript : Script
                 }
             }
         }
-        return false;
    }
 }

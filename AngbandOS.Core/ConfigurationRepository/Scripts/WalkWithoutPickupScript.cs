@@ -8,11 +8,24 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WalkWithoutPickupScript : Script
+internal class WalkWithoutPickupScript : Script, IScript, IRepeatableScript
 {
     private WalkWithoutPickupScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the stay script and disposes of the repeatable result.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        ExecuteScript();
+    }
+
+    /// <summary>
+    /// Executes the stay script.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
     {
         bool more = false;
         // If we don't already have a direction, get one

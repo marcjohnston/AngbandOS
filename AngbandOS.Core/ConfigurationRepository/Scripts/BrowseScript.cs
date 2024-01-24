@@ -8,11 +8,43 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BrowseScript : Script
+internal class BrowseScript : Script, IScript, IRepeatableScript, ISuccessfulScript, IStoreScript
 {
     private BrowseScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the browse script.  Does not modify any of the store flags.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    {
+        ExecuteScript();
+    }
+
+    /// <summary>
+    /// Executes the browse script, disposes of the successful result and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteSuccessfulScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the browse script and disposes of the successful result.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        ExecuteSuccessfulScript();
+    }
+
+    /// <summary>
+    /// Executes the activate script and returns true, if a book was rendered; false, otherwise.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteSuccessfulScript()
     {
         // Make sure we can read
         if (!SaveGame.CanCastSpells)
@@ -47,6 +79,6 @@ internal class BrowseScript : Script
         SaveGame.Screen.Print("[Press any key to continue]", 0, 23);
         SaveGame.Inkey();
         SaveGame.Screen.Restore(savedScreen);
-        return false;
+        return true;
     }
 }

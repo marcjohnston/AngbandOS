@@ -8,14 +8,24 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RenderCharacterScript : Script
+internal class RenderCharacterScript : Script, IScript, IRepeatableScript
 {
     private RenderCharacterScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
-    /// Display the player's entire character sheet.  Returns true.
+    /// Executes the render character script and returns false.
     /// </summary>
-    public override bool Execute()
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Display the player's entire character sheet.
+    /// </summary>
+    public void ExecuteScript()
     {
         SaveGame.Screen.Clear(0);
         DisplayPlayerTop();
@@ -24,7 +34,6 @@ internal class RenderCharacterScript : Script
         DisplayPlayerAbilityScoresWithModifiers();
         DisplayPlayerEssentials();
         DisplayPlayerSkills();
-        return true;
     }
 
     /// <summary>

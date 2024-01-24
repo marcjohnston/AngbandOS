@@ -19,8 +19,5 @@ internal class EnchantArmorStoreCommand : StoreCommand
         nameof(ArmouryStoreFactory)
     };
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        storeCommandEvent.Store.EnchantArmour();
-    }
+    protected override string ExecuteScriptName => nameof(EnhanceArmorScript);
 }

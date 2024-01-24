@@ -8,11 +8,25 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ListCommandsScript : Script
+internal class ListCommandsScript : Script, IScript, IRepeatableScript
 {
     private ListCommandsScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the list commands script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the list commands script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         SaveGame.FullScreenOverlay = true;
         ScreenBuffer savedScreen = SaveGame.Screen.Clone();
@@ -89,6 +103,5 @@ internal class ListCommandsScript : Script
         SaveGame.Screen.Restore(savedScreen);
         SaveGame.SetBackground(BackgroundImageEnum.Overhead);
         SaveGame.FullScreenOverlay = false;
-        return false;
     }
 }

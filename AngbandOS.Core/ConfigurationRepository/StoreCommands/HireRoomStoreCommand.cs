@@ -20,8 +20,5 @@ internal class HireRoomStoreCommand : StoreCommand
         nameof(InnStoreFactory)
     };
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        storeCommandEvent.Store.HireRoom();
-    }
+    protected override string ExecuteScriptName => nameof(HireRoomScript);
 }

@@ -14,5 +14,5 @@ internal class CarriageReturnGameCommand : GameCommand
 
     public override char KeyChar => '\r';
 
-    protected override string ExecuteScriptName => nameof(FalseScript);
+    protected override string ExecuteScriptName => nameof(NoopScript);
 }

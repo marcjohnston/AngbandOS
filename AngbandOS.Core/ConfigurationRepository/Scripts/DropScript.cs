@@ -8,11 +8,34 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DropScript : Script
+internal class DropScript : Script, IScript, IRepeatableScript, ISuccessfulScript
 {
     private DropScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the drop script, disposes of the successful result and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteSuccessfulScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the drop script and disposes of the successful result.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        ExecuteSuccessfulScript();
+    }
+
+    /// <summary>
+    /// Executes the drop script and returns true, if the player dropped an item; false, otherwise.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteSuccessfulScript()
     {
         int amount = 1;
         // Get an item from the inventory/equipment
@@ -45,6 +68,6 @@ internal class DropScript : Script
         // Drop it
         SaveGame.InvenDrop(item, amount);
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
-        return false;
+        return true;
     }
 }

@@ -8,11 +8,25 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class StayScript : Script
+internal class StayScript : Script, IScript, IRepeatableScript
 {
     private StayScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the stay script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the stay script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         // Standing still takes a turn
         SaveGame.EnergyUse = 100;
@@ -33,6 +47,5 @@ internal class StayScript : Script
             SaveGame.Disturb(false);
             SaveGame.QueuedCommand = '_';
         }
-        return false;
     }
 }

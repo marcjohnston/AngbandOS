@@ -8,20 +8,34 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EatScript : Script
+internal class EatScript : Script, IScript, IRepeatableScript
 {
     private EatScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the eat script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the eat script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         if (!SaveGame.SelectItem(out Item? item, "Eat which item? ", false, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Food)))
         {
             SaveGame.MsgPrint("You have nothing to eat.");
-            return false;
+            return;
         }
         if (item == null)
         {
-            return false;
+            return;
         }
 
         // Make sure the item is edible
@@ -29,7 +43,7 @@ internal class EatScript : Script
         if (foodItem == null)
         {
             SaveGame.MsgPrint("You can't eat that!");
-            return false;
+            return;
         }
 
         // Eating costs 100 energy
@@ -57,7 +71,7 @@ internal class EatScript : Script
         // Dwarf bread isn't actually eaten so return early
         if (!foodItem.Factory.IsConsumedWhenEaten)
         {
-            return false;
+            return;
         }
 
         // Use up the item (if it fell to the floor this will have already been dealt with)
@@ -65,6 +79,6 @@ internal class EatScript : Script
         item.ItemIncrease(-1);
         item.ItemOptimize();
         container.ItemDescribe(item);
-        return false;
+        return;
     }
 }

@@ -8,11 +8,34 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AimWandScript : Script
+internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessfulScript
 {
     private AimWandScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the aim wand script, disposes of the successful result and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteSuccessfulScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the aim wand script and disposes of the successful result.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        ExecuteSuccessfulScript();
+    }
+
+    /// <summary>
+    /// Executes the aim wand script and returns a success result.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteSuccessfulScript()
     {
         // Prompt for an item, showing only wands
         if (!SaveGame.SelectItem(out Item? item, "Aim which wand? ", true, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Wand)))
@@ -109,6 +132,6 @@ internal class AimWandScript : Script
             // Let us know we have used a charge
             SaveGame.ReportChargeUsage(item);
         }
-        return false;
+        return true;
     }
 }

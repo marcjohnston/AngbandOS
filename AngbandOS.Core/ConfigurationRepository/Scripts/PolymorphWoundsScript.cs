@@ -8,11 +8,25 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class PolymorphWoundsScript : Script
+internal class PolymorphWoundsScript : Script, IScript, IRepeatableScript
 {
     private PolymorphWoundsScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the polymorph-wounds script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the polymorph-wounds script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         int wounds = SaveGame.TimedBleeding.TurnsRemaining;
         int hitP = SaveGame.MaxHealth - SaveGame.Health;
@@ -20,7 +34,7 @@ internal class PolymorphWoundsScript : Script
         bool nastyEffect = SaveGame.Rng.DieRoll(5) == 1;
         if (!(wounds != 0 || hitP != 0 || nastyEffect))
         {
-            return false;
+            return;
         }
         if (nastyEffect)
         {
@@ -34,6 +48,6 @@ internal class PolymorphWoundsScript : Script
             SaveGame.RestoreHealth(change);
             SaveGame.TimedBleeding.SetTimer(SaveGame.TimedBleeding.TurnsRemaining - (change / 2));
         }
-        return false;
+        return;
     }
 }

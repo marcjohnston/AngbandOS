@@ -8,32 +8,46 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ZapRodScript : Script
+internal class ZapRodScript : Script, IScript, IRepeatableScript
 {
     private ZapRodScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the zap rod script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the zap rod script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         if (!SaveGame.SelectItem(out Item? item, "Zap which rod? ", false, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Rod)))
         {
             SaveGame.MsgPrint("You have no rod to zap.");
-            return false;
+            return;
         }
         if (item == null)
         {
-            return false;
+            return;
         }
         // Make sure the item is actually a rod
         if (!SaveGame.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Rod)))
         {
             SaveGame.MsgPrint("That is not a rod!");
-            return false;
+            return;
         }
         // Rods can't be used from the floor
         if (!item.IsInInventory && item.Count > 1)
         {
             SaveGame.MsgPrint("You must first pick up the rods.");
-            return false;
+            return;
         }
         // We may need to aim the rod.  If we know that the rod requires aiming, we get a direction from the player.  Otherwise, if we do not know what
         // the rod is going to do, we will get a direction from the player.  This helps prevent the player from learning what the rod does because the game
@@ -44,7 +58,7 @@ internal class ZapRodScript : Script
         {
             if (!SaveGame.GetDirectionWithAim(out int direction))
             {
-                return false;
+                return;
             }
             dir = direction;
         }
@@ -69,13 +83,13 @@ internal class ZapRodScript : Script
         if (chance < Constants.UseDevice || SaveGame.Rng.DieRoll(chance) < Constants.UseDevice)
         {
             SaveGame.MsgPrint("You failed to use the rod properly.");
-            return false;
+            return;
         }
         // Rods only have a single charge but recharge over time
         if (item.TypeSpecificValue != 0)
         {
             SaveGame.MsgPrint("The rod is still charging.");
-            return false;
+            return;
         }
         SaveGame.PlaySound(SoundEffectEnum.ZapRod);
         // Do the rod-specific effect
@@ -95,7 +109,7 @@ internal class ZapRodScript : Script
         if (!useCharge)
         {
             item.TypeSpecificValue = 0;
-            return false;
+            return ;
         }
 
         // Channelers can spend mana instead of a charge
@@ -122,6 +136,5 @@ internal class ZapRodScript : Script
                 SaveGame.MsgPrint("You unstack your rod.");
             }
         }
-        return false;
     }
 }

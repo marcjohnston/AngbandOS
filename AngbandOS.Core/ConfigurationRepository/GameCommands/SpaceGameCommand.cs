@@ -14,5 +14,5 @@ internal class SpaceGameCommand : GameCommand
 
     public override char KeyChar => ' ';
 
-    protected override string ExecuteScriptName => nameof(FalseScript);
+    protected override string ExecuteScriptName => nameof(NoopScript);
 }

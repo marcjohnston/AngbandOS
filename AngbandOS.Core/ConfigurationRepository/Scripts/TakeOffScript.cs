@@ -8,32 +8,54 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TakeOffScript : Script
+internal class TakeOffScript : Script, IScript, IRepeatableScript, IStoreScript
 {
     private TakeOffScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the take-off script.  Does not modify any of the store flags.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    {
+        ExecuteScript();
+    }
+
+    /// <summary>
+    /// Executes the take-off script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Allows an item to be taken-off from active equipment.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         // Get the item to take off
         if (!SaveGame.SelectItem(out Item? item, "Take off which item? ", true, false, false, null))
         {
             SaveGame.MsgPrint("You are not wearing anything to take off.");
-            return false;
+            return;
         }
         if (item == null)
         {
-            return false;
+            return;
         }
         // Can't take of cursed items
         if (item.IsCursed())
         {
             SaveGame.MsgPrint("Hmmm, it seems to be cursed.");
-            return false;
+            return;
         }
         // Take off the item
         SaveGame.EnergyUse = 50;
         SaveGame.InvenTakeoff(item, 255);
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
-        return false;
     }
 }

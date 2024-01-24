@@ -11,15 +11,24 @@ namespace AngbandOS.Core.Scripts;
 /// Get a direction and bash a door, returning true, if the command can be repeated; false, if the command succeeds or is futile.</returns>
 /// </summary>
 [Serializable]
-internal class BashScript : Script
+internal class BashScript : Script, IScript, IRepeatableScript
 {
     private BashScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
-    /// Allows the player to select a direction and bashes the object found in that direction.  Returns false, if the action fails due to chance.
+    /// Executes the bash script and disposes of the repeatable result.
     /// </summary>
     /// <returns></returns>
-    public override bool Execute()
+    public void ExecuteScript()
+    {
+        ExecuteRepeatableScript();
+    }
+
+    /// <summary>
+    /// Allows the player to select a direction and bashes the object found in that direction.  Returns true, if the action fails due to chance.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
     {
         // Assume it won't disturb us
         bool more = false;

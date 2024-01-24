@@ -8,11 +8,24 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RestScript : Script
+internal class RestInPlaceScript : Script, IScript, IRepeatableScript
 {
-    private RestScript(SaveGame saveGame) : base(saveGame) { }
+    private RestInPlaceScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the rest script and disposes of the repeatable result.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        ExecuteScript();
+    }
+
+    /// <summary>
+    /// Executes the rest script and returns false, if the resting is disturbed; true, if the rest was undisturbed.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
     {
         if (SaveGame.CommandArgument <= 0)
         {
@@ -21,16 +34,19 @@ internal class RestScript : Script
             {
                 return false; // We are not returning by chance.  The user opted out.
             }
+
             // Default to resting until we're fine
             if (string.IsNullOrEmpty(choice))
             {
                 choice = "&";
             }
+
             // -2 means rest until we're fine
             if (choice[0] == '&')
             {
                 SaveGame.CommandArgument = -2;
             }
+
             // -1 means rest until we're at full health, but don't worry about waiting for other
             // status effects to go away
             else if (choice[0] == '*')
@@ -52,11 +68,13 @@ internal class RestScript : Script
                 }
             }
         }
+
         // Can't rest for more than 9999 turns
         if (SaveGame.CommandArgument > 9999)
         {
             SaveGame.CommandArgument = 9999;
         }
+
         // Resting takes at least one turn (we'll also be skipping future turns)
         SaveGame.EnergyUse = 100;
         SaveGame.Resting = SaveGame.CommandArgument;

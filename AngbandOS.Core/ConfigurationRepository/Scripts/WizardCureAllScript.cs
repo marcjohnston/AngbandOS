@@ -8,11 +8,15 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WizardCureAllScript : Script
+internal class WizardCureAllScript : Script, IScript
 {
     private WizardCureAllScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the cure all script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         SaveGame.RemoveAllCurse();
         SaveGame.RestoreAbilityScore(Ability.Strength);
@@ -37,6 +41,5 @@ internal class WizardCureAllScript : Script
         SaveGame.TimedSlow.ResetTimer();
         SaveGame.SetFood(Constants.PyFoodMax - 1);
         SaveGame.DoCmdRedraw();
-        return false;
     }
 }

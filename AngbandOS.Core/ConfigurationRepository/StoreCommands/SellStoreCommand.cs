@@ -29,8 +29,5 @@ internal class SellStoreCommand : StoreCommand
         nameof(WeaponStoreFactory)
     };
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        storeCommandEvent.Store.StoreSell();
-    }
+    protected override string ExecuteScriptName => nameof(SellScript);
 }

@@ -8,13 +8,26 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ShowManualScript : Script
+internal class ShowManualScript : Script, IScript, IRepeatableScript
 {
     private ShowManualScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the show manual script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the show manual script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         SaveGame.ShowManual();
-        return false;
     }
 }

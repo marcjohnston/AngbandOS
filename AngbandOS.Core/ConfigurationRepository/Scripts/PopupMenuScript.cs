@@ -8,11 +8,25 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class PopupMenuScript : Script
+internal class PopupMenuScript : Script, IScript, IRepeatableScript
 {
     private PopupMenuScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the popup-menu script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the popup-menu script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         List<string> menuItems = new List<string>() { "Resume Game", "Save and Quit" };
         PopupMenu menu = new PopupMenu(menuItems);
@@ -28,6 +42,5 @@ internal class PopupMenuScript : Script
                 SaveGame.Playing = false; // TODO: Need to use event arguments
                 break;
         }
-        return false;
     }
 }

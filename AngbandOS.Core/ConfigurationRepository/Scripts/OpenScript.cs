@@ -8,11 +8,24 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class OpenScript : Script
+internal class OpenScript : Script, IScript, IRepeatableScript
 {
     private OpenScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the open script and disposes of the repeatable result.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        ExecuteRepeatableScript();
+    }
+
+    /// <summary>
+    /// Executes the open script and returns true, if the open fails due to chance; false, otherwise.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
     {
         bool more = false;
         // Check if there's only one thing we can open

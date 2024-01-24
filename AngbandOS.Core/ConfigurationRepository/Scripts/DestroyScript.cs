@@ -8,11 +8,34 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DestroyScript : Script
+internal class DestroyScript : Script, IScript, IRepeatableScript, IStoreScript
 {
     private DestroyScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the destroy script.  Does not modify any of the store flags.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    {
+        ExecuteScript();
+    }
+
+    /// <summary>
+    /// Executes the destroy script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Destroys an item in the inventory.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         int amount = 1;
         bool force = SaveGame.CommandArgument > 0;
@@ -20,11 +43,11 @@ internal class DestroyScript : Script
         if (!SaveGame.SelectItem(out Item? item, "Destroy which item? ", false, true, true, null))
         {
             SaveGame.MsgPrint("You have nothing to destroy.");
-            return false;
+            return;
         }
         if (item == null)
         {
-            return false;
+            return;
         }
         // If we have more than one we might not want to destroy all of them
         if (item.Count > 1)
@@ -32,7 +55,7 @@ internal class DestroyScript : Script
             amount = SaveGame.GetQuantity(null, item.Count, true);
             if (amount <= 0)
             {
-                return false;
+                return;
             }
         }
         int oldNumber = item.Count;
@@ -47,7 +70,7 @@ internal class DestroyScript : Script
                 string outVal = $"Really destroy {itemName}? ";
                 if (!SaveGame.GetCheck(outVal))
                 {
-                    return false;
+                    return;
                 }
                 // If it was something we might want to destroy again, ask
                 if (!item.Factory.HasQuality && item.Factory.CategoryEnum != ItemTypeEnum.Chest)
@@ -79,7 +102,7 @@ internal class DestroyScript : Script
             item.IdentSense = true;
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineFlaggedAction)).Set();
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
-            return false;
+            return;
         }
         SaveGame.MsgPrint($"You destroy {itemName}.");
 
@@ -89,6 +112,6 @@ internal class DestroyScript : Script
         item.ItemIncrease(-amount);
         item.ItemDescribe();
         item.ItemOptimize();
-        return false;
+        return;
     }
 }

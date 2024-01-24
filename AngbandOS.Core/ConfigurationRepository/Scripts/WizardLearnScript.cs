@@ -8,11 +8,15 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WizardLearnScript : Script
+internal class WizardLearnScript : Script, IScript
 {
     private WizardLearnScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the learn script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         foreach (ItemFactory kPtr in SaveGame.SingletonRepository.ItemFactories)
         {
@@ -21,6 +25,5 @@ internal class WizardLearnScript : Script
                 kPtr.FlavourAware = true;
             }
         }
-        return false;
     }
 }

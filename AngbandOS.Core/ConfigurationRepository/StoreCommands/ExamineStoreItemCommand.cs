@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.StoreCommands;
 
 [Serializable]
-internal class ExamineStoreCommand : StoreCommand
+internal class ExamineStoreItemCommand : StoreCommand
 {
-    private ExamineStoreCommand(SaveGame saveGame) : base(saveGame) { }
+    private ExamineStoreItemCommand(SaveGame saveGame) : base(saveGame) { }
     public override char KeyChar => 'x';
 
     public override string Description => "eXamine an item";
@@ -29,8 +29,5 @@ internal class ExamineStoreCommand : StoreCommand
         nameof(WeaponStoreFactory)
     };
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        storeCommandEvent.Store.StoreExamine();
-    }
+    protected override string ExecuteScriptName => nameof(ExamineStoreItemScript);
 }

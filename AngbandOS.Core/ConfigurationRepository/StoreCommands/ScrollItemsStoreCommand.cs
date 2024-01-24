@@ -18,24 +18,6 @@ internal class ScrollItemsStoreCommand : StoreCommand
     /// </summary>
     public override string Description => "";
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        char ch = SaveGame.Inkey(true);
-        switch (ch)
-        {
-            case '9':
-                storeCommandEvent.Store.PageUp();
-                break;
-            case '3':
-                storeCommandEvent.Store.PageDown();
-                break;
-            case '8':
-                storeCommandEvent.Store.ScrollUp();
-                break;
-            case '2':
-                storeCommandEvent.Store.ScrollDown();
-                break;
-        }
-    }
+    protected override string ExecuteScriptName => nameof(ScrollStoreInventoryScript);
 }
 

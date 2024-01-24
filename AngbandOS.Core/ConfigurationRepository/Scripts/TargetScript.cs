@@ -8,11 +8,25 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TargetScript : Script
+internal class TargetScript : Script, IScript, IRepeatableScript
 {
     private TargetScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the target script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the target script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         if (SaveGame.TargetSet(Constants.TargetKill))
         {
@@ -22,6 +36,5 @@ internal class TargetScript : Script
         {
             SaveGame.MsgPrint("Target Aborted.");
         }
-        return false;
     }
 }

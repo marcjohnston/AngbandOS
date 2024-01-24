@@ -18,9 +18,5 @@ internal class JournalStoreCommand : StoreCommand
 
     public override string Description => "";
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        SaveGame.RunScript(nameof(JournalScript));
-        storeCommandEvent.RequiresRerendering = true;
-    }
+    protected override string ExecuteScriptName => nameof(JournalScript);
 }

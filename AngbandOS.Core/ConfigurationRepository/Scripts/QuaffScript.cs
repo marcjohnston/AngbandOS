@@ -8,26 +8,40 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class QuaffScript : Script
+internal class QuaffScript : Script, IScript, IRepeatableScript
 {
     private QuaffScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the quaff script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the quaff script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         if (!SaveGame.SelectItem(out Item? item, "Quaff which potion? ", true, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Potion)))
         {
             SaveGame.MsgPrint("You have no potions to quaff.");
-            return false;
+            return;
         }
         if (item == null)
         {
-            return false;
+            return;
         }
         // Make sure the item is a potion
         if (!SaveGame.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Potion)))
         {
             SaveGame.MsgPrint("That is not a potion!");
-            return false;
+            return;
         }
         SaveGame.PlaySound(SoundEffectEnum.Quaff);
         // Drinking a potion costs a whole turn
@@ -62,6 +76,5 @@ internal class QuaffScript : Script
             item.ItemDescribe();
             item.ItemOptimize();
         }
-        return false;
     }
 }

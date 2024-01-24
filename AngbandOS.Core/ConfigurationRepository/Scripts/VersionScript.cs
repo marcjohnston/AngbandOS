@@ -10,15 +10,28 @@ using System.Reflection;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class VersionScript : Script
+internal class VersionScript : Script, IScript, IRepeatableScript
 {
 
     private VersionScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the version script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the version script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         AssemblyName assembly = Assembly.GetExecutingAssembly().GetName();
         SaveGame.MsgPrint($"You are playing {assembly.Name} {assembly.Version}.");
-        return false;
     }
 }

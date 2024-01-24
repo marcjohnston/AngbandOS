@@ -20,8 +20,5 @@ internal class BuyHouseStoreCommand : StoreCommand
         nameof(HallStoreFactory)
     };
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        SaveGame.BuyHouse();
-    }
+    protected override string ExecuteScriptName => nameof(BuyHouseScript);
 }

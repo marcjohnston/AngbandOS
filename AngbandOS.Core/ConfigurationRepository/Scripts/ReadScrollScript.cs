@@ -8,42 +8,56 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ReadScrollScript : Script
+internal class ReadScrollScript : Script, IScript, IRepeatableScript
 {
     private ReadScrollScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the read scroll script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the read scroll script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         // Make sure we're in a situation where we can read
         if (SaveGame.TimedBlindness.TurnsRemaining != 0)
         {
             SaveGame.MsgPrint("You can't see anything.");
-            return false;
+            return;
         }
         if (SaveGame.NoLight())
         {
             SaveGame.MsgPrint("You have no light to read by.");
-            return false;
+            return;
         }
         if (SaveGame.TimedConfusion.TurnsRemaining != 0)
         {
             SaveGame.MsgPrint("You are too confused!");
-            return false;
+            return;
         }
         if (!SaveGame.SelectItem(out Item? item, "Read which scroll? ", true, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Scroll)))
         {
             SaveGame.MsgPrint("You have no scrolls to read.");
-            return false;
+            return;
         }
         if (item == null)
         {
-            return false;
+            return;
         }
         // Make sure the item is actually a scroll
         if (!SaveGame.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Scroll)))
         {
             SaveGame.MsgPrint("That is not a scroll!");
-            return false;
+            return;
         }
         // Scrolls use a full turn
         SaveGame.EnergyUse = 100;
@@ -73,13 +87,12 @@ internal class ReadScrollScript : Script
         {
             if (!readScrollEventArgs.UsedUp)
             {
-                return false;
+                return;
             }
             // If it wasn't used up then decrease the amount in the stack
             item.ItemIncrease(-1);
             item.ItemDescribe();
             item.ItemOptimize();
         }
-        return false;
     }
 }

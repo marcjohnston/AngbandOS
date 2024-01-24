@@ -17,5 +17,5 @@ internal class GoUpGameCommand : GameCommand
 
     public override char KeyChar => '<';
 
-    protected override string ExecuteScriptName => nameof(GoUpScript);
+    protected override string ExecuteScriptName => nameof(GoUpStairsScript);
 }

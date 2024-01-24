@@ -24,7 +24,18 @@ internal abstract class GameCommand : IGetKey<string>, IToJson
     public string GetKey => Key;
     public void Bind()
     {
-        ExecuteScript = SaveGame.SingletonRepository.Scripts.Get(ExecuteScriptName);
+        // Get the script from the singleton repository.
+        Script? script = SaveGame.SingletonRepository.Scripts.Get(ExecuteScriptName);
+
+        if (script == null)
+        {
+            throw new Exception($"The {ExecuteScriptName} script specified by the {GetType().Name} script does not exist.");
+        }
+        if (!typeof(IRepeatableScript).IsInstanceOfType(script))
+        {
+            throw new Exception($"The {ExecuteScriptName} script specified by the {GetType().Name} script does not implement the {nameof(IRepeatableScript)} interface.");
+        }
+        ExecuteScript = (IRepeatableScript)script;
     }
 
     public abstract char KeyChar { get; }
@@ -39,7 +50,7 @@ internal abstract class GameCommand : IGetKey<string>, IToJson
     public virtual bool IsEnabled => true;
     protected virtual string ExecuteScriptName { get; }
 
-    public Script ExecuteScript { get; protected set; }
+    private IRepeatableScript ExecuteScript;
 
     /// <summary>
     /// 
@@ -48,7 +59,7 @@ internal abstract class GameCommand : IGetKey<string>, IToJson
     /// <returns>Returns true, if the command can/should be repeated; false, if the command succeeded or is futile.</returns>
     public bool Execute()
     {
-        return ExecuteScript.Execute();
+        return ExecuteScript.ExecuteRepeatableScript();
     }
 
     public string ToJson()
@@ -59,7 +70,7 @@ internal abstract class GameCommand : IGetKey<string>, IToJson
             KeyChar = KeyChar,
             Repeat = Repeat,
             IsEnabled = IsEnabled,
-            ExecuteScriptName = ExecuteScript.GetKey
+            ExecuteScriptName = ExecuteScriptName
         };
         return JsonSerializer.Serialize(definition);
     }

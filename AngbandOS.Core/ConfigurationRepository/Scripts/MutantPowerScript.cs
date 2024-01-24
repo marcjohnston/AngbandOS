@@ -8,11 +8,25 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class MutantPowerScript : Script
+internal class MutantPowerScript : Script, IScript, IRepeatableScript
 {
     private MutantPowerScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the mutant power script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the mutant power script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         int i = 0;
         int num;
@@ -34,7 +48,7 @@ internal class MutantPowerScript : Script
         {
             SaveGame.MsgPrint("You are too confused to use any powers!");
             SaveGame.EnergyUse = 0;
-            return false;
+            return;
         }
         for (petCtr = SaveGame.MMax - 1; petCtr >= 1; petCtr--)
         {
@@ -49,7 +63,7 @@ internal class MutantPowerScript : Script
         {
             SaveGame.MsgPrint("You have no powers to activate.");
             SaveGame.EnergyUse = 0;
-            return false;
+            return;
         }
         if (hasRacial)
         {
@@ -127,7 +141,7 @@ internal class MutantPowerScript : Script
         if (!flag)
         {
             SaveGame.EnergyUse = 0;
-            return false;
+            return;
         }
         if (powers[i] == int.MaxValue)
         {
@@ -174,7 +188,6 @@ internal class MutantPowerScript : Script
             SaveGame.EnergyUse = 100;
             activeMutations[powers[i] - 100].Activate();
         }
-        return false;
     }
 
     /// <summary>

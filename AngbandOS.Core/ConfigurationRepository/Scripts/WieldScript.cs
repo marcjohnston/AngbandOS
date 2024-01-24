@@ -8,21 +8,44 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WieldScript : Script
+internal class WieldScript : Script, IScript, IRepeatableScript, IStoreScript
 {
     private WieldScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the wield script.  Does not modify any of the store flags.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    {
+        ExecuteScript();
+    }
+
+    /// <summary>
+    /// Executes the wield script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Allow an item to be wielded and/or worn.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         // Only interested in wearable items
         if (!SaveGame.SelectItem(out Item? item, "Wear/Wield which item? ", false, true, true, new WearableItemFilter()))
         {
             SaveGame.MsgPrint("You have nothing you can wear or wield.");
-            return false;
+            return;
         }
         if (item == null)
         {
-            return false;
+            return;
         }
 
         // Find the inventory slot where the item is to be wielded.
@@ -34,7 +57,7 @@ internal class WieldScript : Script
         {
             string cursedItemName = wieldingItem.Description(false, 0);
             SaveGame.MsgPrint($"The {cursedItemName} you are {SaveGame.DescribeWieldLocation(slot)} appears to be cursed.");
-            return false;
+            return;
         }
 
         // If we know the item to be cursed, confirm its wearing
@@ -44,7 +67,7 @@ internal class WieldScript : Script
             string dummy = $"Really use the {cursedItemName} {{cursed}}? ";
             if (!SaveGame.GetCheck(dummy))
             {
-                return false;
+                return;
             }
         }
 
@@ -84,6 +107,5 @@ internal class WieldScript : Script
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
-        return false;
     }
 }

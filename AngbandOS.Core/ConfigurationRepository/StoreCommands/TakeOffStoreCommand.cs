@@ -18,8 +18,5 @@ internal class TakeOffStoreCommand : StoreCommand
 
     public override string Description => "";
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        SaveGame.RunScript(nameof(TakeOffScript));
-    }
+    protected override string ExecuteScriptName => nameof(TakeOffScript);
 }

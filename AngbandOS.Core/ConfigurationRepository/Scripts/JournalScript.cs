@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class JournalScript : Script
+internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
 {
     private readonly ColourEnum[] _menuColours = new ColourEnum[128];
     private readonly int[] _menuIndices = new int[128];
@@ -18,10 +18,30 @@ internal class JournalScript : Script
     private JournalScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
-    /// Renders the journal on the screen and returns false, in all cases.
+    /// Executes the journal script and sets the RequiresRerendering flag.
     /// </summary>
     /// <returns></returns>
-    public override bool Execute()
+    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    {
+        ExecuteScript();
+        storeCommandEvent.RequiresRerendering = true;
+    }
+
+    /// <summary>
+    /// Executes the journal script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Renders the journal on the screen.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         SaveGame.FullScreenOverlay = true;
         ScreenBuffer savedScreen = SaveGame.Screen.Clone();
@@ -104,7 +124,6 @@ internal class JournalScript : Script
         SaveGame.SetBackground(BackgroundImageEnum.Overhead);
         SaveGame.Screen.Restore(savedScreen);
         SaveGame.FullScreenOverlay = false;
-        return false;
     }
 
     private void DisplayStat(string title, int row, int col, Func<IItemCharacteristics, bool> getStat)

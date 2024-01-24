@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Scripts;
+
 namespace AngbandOS.Core.StoreCommands;
 
 [Serializable]
@@ -20,8 +22,5 @@ internal class ResearchSpellStoreCommand : StoreCommand
         nameof(LibraryStoreFactory)
     };
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        storeCommandEvent.Store.ResearchSpell();
-    }
+    protected override string ExecuteScriptName => nameof(ResearchSpellScript);
 }

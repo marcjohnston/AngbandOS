@@ -20,8 +20,5 @@ internal class RestorationStoreCommand : StoreCommand
         nameof(AlchemistStoreFactory)
     };
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        storeCommandEvent.Store.Restoration();
-    }
+    protected override string ExecuteScriptName => nameof(RestorationScript);
 }

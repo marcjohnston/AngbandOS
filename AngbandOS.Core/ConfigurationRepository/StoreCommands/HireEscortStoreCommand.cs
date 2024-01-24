@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Scripts;
+
 namespace AngbandOS.Core.StoreCommands;
 
 [Serializable]
@@ -20,9 +22,5 @@ internal class HireEscortStoreCommand : StoreCommand
         nameof(GeneralStoreFactory)
     };
 
-
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        storeCommandEvent.Store.HireAnEscort();
-    }
+    protected override string ExecuteScriptName => nameof(HireAnEscortScript);
 }

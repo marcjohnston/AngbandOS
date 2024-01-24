@@ -8,11 +8,24 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RunScript : Script
+internal class RunScript : Script, IScript, IRepeatableScript
 {
     private RunScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the run script and disposes of the repeatable result.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        ExecuteScript();
+    }
+
+    /// <summary>
+    /// Executes the run script and returns false, if the player is confused; true, otherwise.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
     {
         // Can't run if we're confused
         if (SaveGame.TimedConfusion.TurnsRemaining != 0)

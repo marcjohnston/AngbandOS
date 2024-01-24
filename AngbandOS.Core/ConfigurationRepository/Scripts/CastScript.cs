@@ -8,11 +8,25 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CastScript : Script
+internal class CastScript : Script, IScript, IRepeatableScript
 {
     private CastScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the cast script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the cast script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         if (SaveGame.HasAntiMagic)
         {
@@ -28,6 +42,5 @@ internal class CastScript : Script
         {
             SaveGame.BaseCharacterClass.SpellCastingType.Cast();
         }
-        return false;
     }
 }

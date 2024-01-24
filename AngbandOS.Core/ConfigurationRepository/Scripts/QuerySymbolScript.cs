@@ -8,30 +8,56 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class QuerySymbolScript : Script
+internal class QuerySymbolScript : Script, IScript, IRepeatableScript, IStoreScript
 {
     private QuerySymbolScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the query symbol script.  Does not modify any of the store flags.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    {
+        ExecuteScript();
+    }
+
+    /// <summary>
+    /// Executes the query symbol script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the query symbol script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         // Query the user for the symbol to identify.
         if (!SaveGame.GetCom("Enter character to be identified: ", out char querySymbol))
         {
-            return false;
+            return;
         }
 
         // Run through the identification array till we find the symbol.
+        bool found = false;
         foreach (Symbol symbol in SaveGame.SingletonRepository.Symbols)
         {
             if (querySymbol == symbol.Character)
             {
                 SaveGame.MsgPrint($"{querySymbol} - {symbol.Name}");
-                return false;
+                found = true;
             }
         }
 
-        // Display the symbol and its identification.
-        SaveGame.MsgPrint($"{querySymbol} - Unknown Symbol");
-        return false;
+        if (!found)
+        {
+            // Display the symbol and its identification.
+            SaveGame.MsgPrint($"{querySymbol} - Unknown Symbol");
+        }
     }
 }

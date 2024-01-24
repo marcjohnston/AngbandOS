@@ -8,11 +8,24 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CloseScript : Script
+internal class CloseScript : Script, IScript, IRepeatableScript
 {
     private CloseScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the close script and disposes of the repeatable result.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        ExecuteRepeatableScript();
+    }
+
+    /// <summary>
+    /// Executes the close script and returns true, if the close failed due to chance; false, otherwise.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
     {
         bool more = false;
         // If there's only one door, assume we mean that one and don't ask for a direction

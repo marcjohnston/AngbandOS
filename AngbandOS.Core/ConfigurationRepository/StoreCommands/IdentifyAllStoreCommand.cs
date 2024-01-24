@@ -19,8 +19,5 @@ internal class IdentifyAllStoreCommand : StoreCommand
         nameof(PawnStoreFactory)
     };
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        storeCommandEvent.Store.IdentifyAll();
-    }
+    protected override string ExecuteScriptName => nameof(IdentifyAllScript);
 }

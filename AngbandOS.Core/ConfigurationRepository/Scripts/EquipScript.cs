@@ -8,11 +8,34 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EquipScript : Script
+internal class EquipScript : Script, IScript, IRepeatableScript, IStoreScript
 {
     private EquipScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the equip script.  Does not modify any of the store flags.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    {
+        ExecuteScript();
+    }
+
+    /// <summary>
+    /// Executes the equip script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the equip script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         // We're viewing equipment
         SaveGame.ViewingEquipment = true;
@@ -38,6 +61,5 @@ internal class EquipScript : Script
             // inventory
             SaveGame.ViewingItemList = true;
         }
-        return false;
     }
 }

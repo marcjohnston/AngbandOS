@@ -8,11 +8,25 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EnterWizardModeScript : Script
+internal class EnterWizardModeScript : Script, IScript, IRepeatableScript
 {
     private EnterWizardModeScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the wizard mode script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the wizard mode script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         if (SaveGame.IsWizard)
         {
@@ -22,7 +36,7 @@ internal class EnterWizardModeScript : Script
                 if (wizardCommand.IsEnabled && wizardCommand.KeyChar == cmd)
                 {
                     wizardCommand.Execute();
-                    return false;
+                    return;
                 }
             }
             SaveGame.MsgPrint("That is not a valid wizard command.");
@@ -33,7 +47,7 @@ internal class EnterWizardModeScript : Script
             if (!SaveGame.AskforAux(out string tmp, "", 31))
             {
                 SaveGame.Screen.Erase(0, 0);
-                return false;
+                return;
             }
             SaveGame.Screen.Erase(0, 0);
             if (tmp == "Dumbledore")
@@ -43,6 +57,5 @@ internal class EnterWizardModeScript : Script
                 SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawTitleFlaggedAction)).Set();
             }
         }
-        return false;
     }
 }

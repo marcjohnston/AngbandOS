@@ -15,8 +15,5 @@ internal class LeaveStoreCommand : StoreCommand
 
     public override string Description => "";
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        storeCommandEvent.LeaveStore = true;
-    }
+    protected override string ExecuteScriptName => nameof(LeaveStoreScript);
 }

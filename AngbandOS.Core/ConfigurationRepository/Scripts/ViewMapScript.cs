@@ -8,11 +8,25 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ViewMapScript : Script
+internal class ViewMapScript : Script, IScript, IRepeatableScript
 {
     private ViewMapScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the view map script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the view map script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         int cy = -1;
         int cx = -1;
@@ -46,6 +60,5 @@ internal class ViewMapScript : Script
         SaveGame.Screen.Restore(savedScreen);
         SaveGame.FullScreenOverlay = false;
         SaveGame.SetBackground(BackgroundImageEnum.Overhead);
-        return false;
     }
 }

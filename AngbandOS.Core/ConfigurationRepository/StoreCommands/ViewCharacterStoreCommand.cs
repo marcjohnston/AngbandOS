@@ -18,9 +18,5 @@ internal class ViewCharacterStoreCommand : StoreCommand
 
     public override string Description => "";
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        SaveGame.RunScript(nameof(ViewCharacterScript));
-        storeCommandEvent.RequiresRerendering = true;
-    }
+    protected override string ExecuteScriptName => nameof(ViewCharacterScript);
 }

@@ -19,8 +19,5 @@ internal class RemoveCurseStoreCommand : StoreCommand
         nameof(TempleStoreFactory)
     };
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        storeCommandEvent.Store.RemoveCurse();
-    }
+    protected override string ExecuteScriptName => nameof(RemoveCurseScript);
 }

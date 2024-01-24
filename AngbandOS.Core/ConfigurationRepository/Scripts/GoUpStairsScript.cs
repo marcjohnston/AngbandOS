@@ -8,11 +8,25 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class GoUpScript : Script
+internal class GoUpStairsScript : Script, IScript, IRepeatableScript
 {
-    private GoUpScript(SaveGame saveGame) : base(saveGame) { }
+    private GoUpStairsScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the go up stairs script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the go up stairs script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         // We need to actually be on an up staircase
         GridTile tile = SaveGame.Grid[SaveGame.MapY][SaveGame.MapX];
@@ -20,7 +34,7 @@ internal class GoUpScript : Script
         {
             SaveGame.MsgPrint("I see no up staircase here.");
             SaveGame.EnergyUse = 0;
-            return false;
+            return;
         }
         // Use no energy, so monsters in the new level don't get to go first
         SaveGame.EnergyUse = 0;
@@ -81,6 +95,5 @@ internal class GoUpScript : Script
         }
         SaveGame.NewLevelFlag = true;
         SaveGame.CreateDownStair = true;
-        return false;
     }
 }

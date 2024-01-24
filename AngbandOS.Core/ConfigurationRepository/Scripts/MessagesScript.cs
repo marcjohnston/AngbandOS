@@ -8,11 +8,34 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class MessagesScript : Script
+internal class MessagesScript : Script, IScript, IRepeatableScript, IStoreScript
 {
     private MessagesScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override bool Execute()
+    /// <summary>
+    /// Executes the messages script.  Does not modify any of the store flags.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    {
+        ExecuteScript();
+    }
+
+    /// <summary>
+    /// Executes the messages script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteRepeatableScript()
+    {
+        ExecuteScript();
+        return false;
+    }
+
+    /// <summary>
+    /// Executes the messages script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
         int messageNumber = SaveGame.MessageNum();
         int index = 0;
@@ -80,6 +103,5 @@ internal class MessagesScript : Script
         // Tidy up after ourselves
         SaveGame.Screen.Restore(savedScreen);
         SaveGame.FullScreenOverlay = false;
-        return false;
     }
 }

@@ -20,8 +20,5 @@ internal class ResearchItemStoreCommand : StoreCommand
         nameof(MagicStoreFactory)
     };
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        storeCommandEvent.Store.ResearchItem();
-    }
+    protected override string ExecuteScriptName => nameof(ResearchItemScript);
 }

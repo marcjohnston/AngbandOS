@@ -18,8 +18,5 @@ internal class ExamineInventoryStoreCommand : StoreCommand
 
     public override string Description => "";
 
-    public override void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        SaveGame.RunScript(nameof(ExamineScript));
-    }
+    protected override string ExecuteScriptName => nameof(ExamineScript);
 }
