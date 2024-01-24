@@ -12,8 +12,8 @@ internal class GreyContractAnimation : Animation
 {
     private GreyContractAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '*';
-    public override ColourEnum Colour => ColourEnum.Grey;
+    protected override string ColorName => nameof(ColourEnum.Grey);
     public override string Name => "GreyContract";
-    public override ColourEnum AlternateColour => ColourEnum.Grey;
+    protected override string AlternateColorName => nameof(ColourEnum.Grey);
     public override string Sequence => @"Oo·";
 }

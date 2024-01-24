@@ -12,8 +12,8 @@ internal class CopperSwirlAnimation : Animation
 {
     private CopperSwirlAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '*';
-    public override ColourEnum Colour => ColourEnum.Copper;
+    protected override string ColorName => nameof(ColourEnum.Copper);
     public override string Name => "CopperSwirl";
-    public override ColourEnum AlternateColour => ColourEnum.Copper;
+    protected override string AlternateColorName => nameof(ColourEnum.Copper);
     public override string Sequence => @"|/-\|/-\|/-\|/-\";
 }

@@ -12,8 +12,8 @@ internal class BrightGreenSparkleAnimation : Animation
 {
     private BrightGreenSparkleAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '*';
-    public override ColourEnum Colour => ColourEnum.BrightGreen;
+    protected override string ColorName => nameof(ColourEnum.BrightGreen);
     public override string Name => "BrightGreenSparkle";
-    public override ColourEnum AlternateColour => ColourEnum.BrightGreen;
+    protected override string AlternateColorName => nameof(ColourEnum.BrightGreen);
     public override string Sequence => @"·+·x·+·";
 }
