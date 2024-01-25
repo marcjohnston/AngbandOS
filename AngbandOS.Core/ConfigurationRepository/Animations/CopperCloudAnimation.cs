@@ -12,8 +12,8 @@ internal class CopperCloudAnimation : Animation
 {
     private CopperCloudAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '*';
-    protected override string ColorName => nameof(ColourEnum.Copper);
+    public override ColourEnum Colour => ColourEnum.Copper;
     public override string Name => "CopperCloud";
-    protected override string AlternateColorName => nameof(ColourEnum.Copper);
+    public override ColourEnum AlternateColour => ColourEnum.Copper;
     public override string Sequence => @"+*+*+*+";
 }

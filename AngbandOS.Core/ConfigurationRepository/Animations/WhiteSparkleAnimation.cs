@@ -14,6 +14,6 @@ internal class WhiteSparkleAnimation : Animation
     public override char Character => '*';
     public override string Name => "WhiteSparkle";
     public override string Sequence => @"·+·x·+·";
-    protected override string ColorName => nameof(ColourEnum.White);
-    protected override string AlternateColorName => nameof(ColourEnum.White);
+    public override ColourEnum Colour => ColourEnum.White;
+    public override ColourEnum AlternateColour => ColourEnum.White;
 }

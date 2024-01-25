@@ -12,8 +12,8 @@ internal class RedSwirlAnimation : Animation
 {
     private RedSwirlAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '*';
-    protected override string ColorName => nameof(ColourEnum.Red);
+    public override ColourEnum Colour => ColourEnum.Red;
     public override string Name => "RedSwirl";
-    protected override string AlternateColorName => nameof(ColourEnum.Red);
+    public override ColourEnum AlternateColour => ColourEnum.Red;
     public override string Sequence => @"|/-\|/-\|/-\|/-\";
 }

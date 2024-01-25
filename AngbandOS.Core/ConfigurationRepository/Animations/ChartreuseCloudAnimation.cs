@@ -12,8 +12,8 @@ internal class ChartreuseCloudAnimation : Animation
 {
     private ChartreuseCloudAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '*';
-    protected override string ColorName => nameof(ColourEnum.Chartreuse);
+    public override ColourEnum Colour => ColourEnum.Chartreuse;
     public override string Name => "ChartreuseCloud";
-    protected override string AlternateColorName => nameof(ColourEnum.Chartreuse);
+    public override ColourEnum AlternateColour => ColourEnum.Chartreuse;
     public override string Sequence => @"+*+*+*+";
 }

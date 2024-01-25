@@ -23,18 +23,12 @@ internal abstract class Animation : IGetKey<string>
 
     public string GetKey => Key;
 
-    public virtual void Bind()
-    {
-        Colour = Enum.Parse<ColourEnum>(ColorName);
-        AlternateColour = Enum.Parse<ColourEnum>(AlternateColorName);
-    }
+    public virtual void Bind() { }
 
     public abstract char Character { get; }
-    public ColourEnum Colour { get; private set; }
-    protected abstract string ColorName { get; }
+    public abstract ColourEnum Colour { get; }
     public abstract string Name { get; }
-    public ColourEnum AlternateColour { get; private set; }
-    protected abstract string AlternateColorName { get; }
+    public abstract ColourEnum AlternateColour { get; }
     public abstract string Sequence { get; }
 
     public void Animate(int[] y, int[] x)

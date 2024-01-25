@@ -13,7 +13,7 @@ internal class WhiteQuestionAnimation : Animation
     private WhiteQuestionAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '*';
     public override string Name => "WhiteQuestion";
-    protected override string AlternateColorName => nameof(ColourEnum.BrightWhite);
+    public override ColourEnum AlternateColour => ColourEnum.BrightWhite;
     public override string Sequence => @"??????";
-    protected override string ColorName => nameof(ColourEnum.White);
+    public override ColourEnum Colour => ColourEnum.White;
 }

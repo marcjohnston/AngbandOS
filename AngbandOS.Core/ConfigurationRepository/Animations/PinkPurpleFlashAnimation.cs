@@ -12,8 +12,8 @@ internal class PinkPurpleFlashAnimation : Animation
 {
     private PinkPurpleFlashAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '*';
-    protected override string ColorName => nameof(ColourEnum.Purple);
+    public override ColourEnum Colour => ColourEnum.Purple;
     public override string Name => "PinkPurpleFlash";
-    protected override string AlternateColorName => nameof(ColourEnum.Pink);
+    public override ColourEnum AlternateColour => ColourEnum.Pink;
     public override string Sequence => @"********";
 }

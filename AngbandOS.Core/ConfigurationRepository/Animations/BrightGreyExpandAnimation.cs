@@ -12,8 +12,8 @@ internal class BrightGreyExpandAnimation : Animation
 {
     private BrightGreyExpandAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '*';
-    protected override string ColorName => nameof(ColourEnum.BrightGrey);
+    public override ColourEnum Colour => ColourEnum.BrightGrey;
     public override string Name => "BrightGreyExpand";
-    protected override string AlternateColorName => nameof(ColourEnum.BrightGrey);
+    public override ColourEnum AlternateColour => ColourEnum.BrightGrey;
     public override string Sequence => @"·oO";
 }

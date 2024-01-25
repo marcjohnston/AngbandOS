@@ -12,8 +12,8 @@ internal class BrownCloudAnimation : Animation
 {
     private BrownCloudAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '*';
-    protected override string ColorName => nameof(ColourEnum.Brown);
+    public override ColourEnum Colour => ColourEnum.Brown;
     public override string Name => "BrownCloud";
-    protected override string AlternateColorName => nameof(ColourEnum.Brown);
+    public override ColourEnum AlternateColour => ColourEnum.Brown;
     public override string Sequence => @"+*+*+*+";
 }
