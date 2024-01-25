@@ -19,12 +19,14 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
 
     public virtual void Bind()
     {
+        // Bind the advertised commands.
         AdvertisedStoreCommand1 = AdvertisedStoreCommand1Name == null ? null : SaveGame.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand1Name);
         AdvertisedStoreCommand2 = AdvertisedStoreCommand2Name == null ? null : SaveGame.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand2Name);
         AdvertisedStoreCommand3 = AdvertisedStoreCommand3Name == null ? null : SaveGame.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand3Name);
         AdvertisedStoreCommand4 = AdvertisedStoreCommand4Name == null ? null : SaveGame.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand4Name);
         AdvertisedStoreCommand5 = AdvertisedStoreCommand5Name == null ? null : SaveGame.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand5Name);
 
+        // Bind the store owners.
         List<StoreOwner> storeOwnersList = new();
         foreach (string storeOwnerName in StoreOwnerNames)
         {
@@ -32,7 +34,16 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
         }
         StoreOwners = storeOwnersList.ToArray();
 
+        // Bind the symbol.
         Symbol = SaveGame.SingletonRepository.Symbols.Get(SymbolName);
+
+        // Bind the item filters.
+        List<ItemMatchingCriteria> itemFilters = new();
+        foreach (string itemFilterName in ItemFilterNames)
+        {
+            itemFilters.Add(SaveGame.SingletonRepository.ItemFilters.Get(itemFilterName));
+        }
+        ItemFilters = itemFilters.ToArray();
     }
 
     /// <summary>
@@ -57,11 +68,31 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     public virtual bool UseHomeCarry => false;
 
     /// <summary>
-    /// Returns true, if the store will accept items from the player (e.g. sell or drop).
+    /// Returns true, if the store will accept items from the player (e.g. sell or drop).  An item matches, if any ItemFilter
+    /// matches the item.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public abstract bool ItemMatches(Item item);
+    public bool ItemMatches(Item item)
+    {
+        // Loop through all of the item filters.  If the filter matches, then the item matches.
+        foreach (ItemMatchingCriteria itemFilter in ItemFilters)
+        {
+            if (itemFilter.ItemMatches(item))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public ItemMatchingCriteria[] ItemFilters { get; private set; }
+
+    /// <summary>
+    /// Returns the names of the item matching criterion used to determine which items the store buys.  Returns an empty arrary, by default, to
+    /// indicate that the store does not buy any items.
+    /// </summary>
+    protected virtual string[] ItemFilterNames => new string[] { };
 
     /// <summary>
     /// Returns true, if the doors to the store are locked; false, if the store is open.  Returns false, by default.

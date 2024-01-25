@@ -48,10 +48,10 @@ internal class InnStoreFactory : StoreFactory
     public override ColourEnum Colour => ColourEnum.Purple;
     protected override string SymbolName => nameof(AmpersandSymbol);
 
-    public override bool ItemMatches(Item item)
-    {
-        return false;
-    }
+    /// <summary>
+    /// Returns an empty array of item criteria names because the inn doesn't buy items.
+    /// </summary>
+    protected override string[] ItemFilterNames => new string[] { };
 
     public override StockStoreInventoryItem[] GetStoreTable()
     {

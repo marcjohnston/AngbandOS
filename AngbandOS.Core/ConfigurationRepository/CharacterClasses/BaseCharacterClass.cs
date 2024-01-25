@@ -19,7 +19,15 @@ internal abstract class BaseCharacterClass : IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Bind() { }
+    public virtual void Bind()
+    {
+        List<ItemFactory> outfitItemFactories = new();
+        foreach (string outfitItemFactoryName in OutfitItemFactoryNames)
+        {
+            outfitItemFactories.Add(SaveGame.SingletonRepository.ItemFactories.Get(outfitItemFactoryName));
+        }
+        OutfitItemFactories = outfitItemFactories.ToArray();
+    }
 
     /// <summary>
     /// Returns the deprecated CharacterClass constant for backwards compatibility.
@@ -159,7 +167,7 @@ internal abstract class BaseCharacterClass : IGetKey<string>
     public virtual void OutfitPlayer()
     {
         // An an item for each item that the character classes designates the player to be outfitted with.
-        foreach (ItemFactory itemClass in Outfit)
+        foreach (ItemFactory itemClass in OutfitItemFactories)
         {
             // Allow the race to modify the item as the race sees fit.
             ItemFactory outfitItem = SaveGame.Race.OutfitItemClass(itemClass);
@@ -190,7 +198,9 @@ internal abstract class BaseCharacterClass : IGetKey<string>
     /// <summary>
     /// Represents the class of items a new player should be outfitted with.
     /// </summary>
-    protected abstract ItemFactory[] Outfit { get; }
+    protected ItemFactory[] OutfitItemFactories { get; private set; }
+    protected abstract string[] OutfitItemFactoryNames { get; }
+
 
     /// <summary>
     /// During the outfit process, derived character classes can modify outfitted items.  Does nothing by default.

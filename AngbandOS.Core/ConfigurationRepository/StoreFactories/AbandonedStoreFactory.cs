@@ -23,13 +23,6 @@ internal class AbandonedStoreFactory : StoreFactory
     public override bool BuildingsMadeFromPermanentRock => false;
     public override bool StoreEntranceDoorsAreBlownOff => true;
 
-    /// <summary>
-    /// Returns true, because this store type generates as an empty lot.
-    /// </summary>
-    public override bool ItemMatches(Item item)
-    {
-        return false;
-    }
     public override bool MaintainsStockLevels => false;
     public override bool ShufflesOwnersAndPricing => false;
     public override StockStoreInventoryItem[] GetStoreTable() => null;

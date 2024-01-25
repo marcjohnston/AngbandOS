@@ -68,10 +68,10 @@ internal class MageCharacterClass : BaseCharacterClass
     };
     public override bool WorshipsADeity => true;
 
-    protected override ItemFactory[] Outfit => new ItemFactory[]
+    protected override string[] OutfitItemFactoryNames => new string[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(BeginnersHandbookSorceryBookItemFactory)),
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordDagger)),
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(BlackPrayersDeathBookItemFactory))
+        nameof(BeginnersHandbookSorceryBookItemFactory),
+        nameof(SwordDagger),
+        nameof(BlackPrayersDeathBookItemFactory)
     };
 }

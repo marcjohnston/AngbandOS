@@ -72,25 +72,22 @@ internal class GeneralStoreFactory : StoreFactory
         };
     }
 
-    public override bool ItemMatches(Item item)
-    {
-        switch (item.Factory)
-        {
-            case FoodItemFactory _:
-            case LightSourceItemFactory _:
-            case FlaskItemFactory _:
-            case SpikeItemClass _:
-            case ShotAmmunitionItemFactory _:
-            case ArrowAmmunitionItemFactory _:
-            case BoltAmmunitionItemFactory _:
-            case DiggingItemClass _:
-            case CloakArmorItemFactory _:
-            case BottleItemFactory _:
-                return item.Value() > 0;
-            default:
-                return false;
-        }
-    }
+    /// <summary>
+    /// Returns the name of the item matching criteria for shots, bolts, arrows, bows, digging tools, hafted weapons, pole arms and swords of value.
+    /// </summary>
+    protected override string[] ItemFilterNames => new string[]
+{
+        nameof(FoodItemMatchingCriteria),
+        nameof(LightSourceItemMatchingCriteria),
+        nameof(FlaskItemMatchingCriteria),
+        nameof(SpikeItemMatchingCriteria),
+        nameof(ShotAmmunitionItemMatchingCriteria),
+        nameof(ArrowAmmunitionItemMatchingCriteria),
+        nameof(BoltAmmunitionItemMatchingCriteria),
+        nameof(DiggingItemMatchingCriteria),
+        nameof(CloakArmorItemMatchingCriteria),
+        nameof(BottleItemMatchingCriteria)
+    };
 
     protected override string? AdvertisedStoreCommand4Name => nameof(HireEscortStoreCommand);
 }

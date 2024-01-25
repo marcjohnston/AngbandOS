@@ -22,10 +22,13 @@ internal class HomeStoreFactory : StoreFactory
     public override ColourEnum Colour => ColourEnum.Pink;
     protected override string SymbolName => nameof(AtSymbol);
 
-    public override bool ItemMatches(Item item)
+    /// <summary>
+    /// Returns the name of the item matching criteria for all items of any value.
+    /// </summary>
+    protected override string[] ItemFilterNames => new string[]
     {
-        return true;
-    }
+        nameof(AllItemsItemMatchingCriteria),
+    };
 
     public override bool MaintainsStockLevels => false;
 

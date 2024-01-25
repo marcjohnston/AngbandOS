@@ -72,10 +72,10 @@ internal class MonkCharacterClass : BaseCharacterClass
         SaveGame.SingletonRepository.Realms.Get(nameof(CorporealRealm))
     };
 
-    protected override ItemFactory[] Outfit => new ItemFactory[]
+    protected override string[] OutfitItemFactoryNames => new string[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(BeginnersHandbookSorceryBookItemFactory)),
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(HealingPotionItemFactory)),
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SoftLeatherSoftArmorItemFactory))
+        nameof(BeginnersHandbookSorceryBookItemFactory),
+        nameof(HealingPotionItemFactory),
+        nameof(SoftLeatherSoftArmorItemFactory)
     };
 }

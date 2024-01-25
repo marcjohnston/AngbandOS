@@ -69,22 +69,20 @@ internal class LibraryStoreFactory : StoreFactory
         };
     }
 
-    public override bool ItemMatches(Item item)
+    /// <summary>
+    /// Returns the name of the item matching criteria for any book of value.
+    /// </summary>
+    protected override string[] ItemFilterNames => new string[]
     {
-        switch (item.Factory)
-        {
-            case SorceryBookItemFactory _:
-            case NatureBookItemFactory _:
-            case ChaosBookItemFactory _:
-            case DeathBookItemFactory _:
-            case LifeBookItemFactory _:
-            case TarotBookItemFactory _:
-            case FolkBookItemFactory _:
-            case CorporealBookItemFactory _:
-                return item.Value() > 0;
-            default:
-                return false;
-        }
-    }
+        nameof(SorceryBookItemMatchingCriteria),
+        nameof(LifeBookItemMatchingCriteria),
+        nameof(NatureBookItemMatchingCriteria),
+        nameof(ChaosBookItemMatchingCriteria),
+        nameof(DeathBookItemMatchingCriteria),
+        nameof(TarotBookItemMatchingCriteria),
+        nameof(FolkBookItemMatchingCriteria),
+        nameof(CorporealBookItemMatchingCriteria)
+    };
+
     protected override string? AdvertisedStoreCommand4Name => nameof(ResearchSpellStoreCommand);
 }

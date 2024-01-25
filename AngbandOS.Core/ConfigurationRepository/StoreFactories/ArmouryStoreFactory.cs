@@ -72,23 +72,21 @@ internal class ArmouryStoreFactory : StoreFactory
         };
     }
 
-    public override bool ItemMatches(Item item)
-    {
-        switch (item.Factory)
-        {
-            case BootsArmorItemFactory _:
-            case GlovesArmorItemFactory _:
-            case CrownArmorItemFactory _:
-            case HelmItemClass _:
-            case ShieldItemClass _:
-            case CloakArmorItemFactory _:
-            case SoftArmorItemFactory _:
-            case HardArmorItemFactory _:
-            case DragonScaleMailArmorItemFactory _:
-                return item.Value() > 0;
-            default:
-                return false;
-        }
-    }
+    /// <summary>
+    /// Returns the name of the item matching criteria for shots, bolts, arrows, bows, digging tools, hafted weapons, pole arms and swords of value.
+    /// </summary>
+    protected override string[] ItemFilterNames => new string[]
+{
+        nameof(BootsArmorItemMatchingCriteria),
+        nameof(GlovesArmorItemMatchingCriteria),
+        nameof(CrownArmorItemMatchingCriteria),
+        nameof(HelmItemMatchingCriteria),
+        nameof(ShieldItemMatchingCriteria),
+        nameof(CloakArmorItemMatchingCriteria),
+        nameof(SoftArmorItemMatchingCriteria),
+        nameof(HardArmorItemMatchingCriteria),
+        nameof(DragonScaleMailItemMatchingCriteria)
+    };
+
     protected override string? AdvertisedStoreCommand4Name => nameof(EnchantArmorStoreCommand);
 }

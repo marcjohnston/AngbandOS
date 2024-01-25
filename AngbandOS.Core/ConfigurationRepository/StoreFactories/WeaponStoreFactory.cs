@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.StoreFactories;
 
 [Serializable]
-internal class WeaponStoreFactory : StoreFactory
+internal partial class WeaponStoreFactory : StoreFactory
 {
     private WeaponStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
@@ -80,22 +80,20 @@ internal class WeaponStoreFactory : StoreFactory
         };
     }
 
-    public override bool ItemMatches(Item item)
+    /// <summary>
+    /// Returns the name of the item matching criteria for shots, bolts, arrows, bows, digging tools, hafted weapons, pole arms and swords of value.
+    /// </summary>
+    protected override string[] ItemFilterNames => new string[]
     {
-        switch (item.Factory)
-        {
-            case ShotAmmunitionItemFactory _:
-            case BoltAmmunitionItemFactory _:
-            case ArrowAmmunitionItemFactory _:
-            case BowWeaponItemFactory _:
-            case DiggingItemClass _:
-            case HaftedItemClass _:
-            case PolearmItemClass _:
-            case SwordItemClass _:
-                return item.Value() > 0;
-            default:
-                return false;
-        }
-    }
+        nameof(ShotAmmunitionItemMatchingCriteria),
+        nameof(BoltAmmunitionItemMatchingCriteria),
+        nameof(ArrowAmmunitionItemMatchingCriteria),
+        nameof(BowWeaponItemMatchingCriteria),
+        nameof(DiggingItemMatchingCriteria),
+        nameof(HaftedItemMatchingCriteria),
+        nameof(PolearmItemMatchingCriteria),
+        nameof(SwordItemMatchingCriteria)
+    };
+
     protected override string? AdvertisedStoreCommand4Name => nameof(EnchantWeaponStoreCommand);
 }

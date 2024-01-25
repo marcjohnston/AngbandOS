@@ -61,10 +61,10 @@ internal class WarriorCharacterClass : BaseCharacterClass
         }
     }
 
-    protected override ItemFactory[] Outfit => new ItemFactory[]
+    protected override string[] OutfitItemFactoryNames => new string[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(FearResistanceRingItemFactory)),
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordBroadSword)),
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(ChainMailHardArmorItemFactory))
+        nameof(FearResistanceRingItemFactory),
+        nameof(SwordBroadSword),
+        nameof(ChainMailHardArmorItemFactory)
     };
 }

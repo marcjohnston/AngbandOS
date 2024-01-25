@@ -91,10 +91,10 @@ internal class PriestCharacterClass : BaseCharacterClass
         }
     }
 
-    protected override ItemFactory[] Outfit => new ItemFactory[]
+    protected override string[] OutfitItemFactoryNames => new string[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(BeginnersHandbookSorceryBookItemFactory)),
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(HaftedMace)),
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(BlackPrayersDeathBookItemFactory))
+        nameof(BeginnersHandbookSorceryBookItemFactory),
+        nameof(HaftedMace),
+        nameof(BlackPrayersDeathBookItemFactory)
     };
 }

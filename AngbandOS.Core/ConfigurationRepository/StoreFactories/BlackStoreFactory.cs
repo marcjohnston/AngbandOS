@@ -46,10 +46,13 @@ internal class BlackStoreFactory : StoreFactory
 
     public override StockStoreInventoryItem[] GetStoreTable() => null;
 
-    public override bool ItemMatches(Item item)
+    /// <summary>
+    /// Returns the name of the item matching criteria for any item of value.
+    /// </summary>
+    protected override string[] ItemFilterNames => new string[]
     {
-        return item.Value() > 0;
-    }
+        nameof(AnythingOfValueItemMatchingCriteria)
+    };
 
     public override int AdjustPrice(int price, bool trueToMarkDownFalseToMarkUp)
     {

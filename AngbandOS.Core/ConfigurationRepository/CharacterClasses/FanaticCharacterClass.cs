@@ -52,10 +52,10 @@ internal class FanaticCharacterClass : BaseCharacterClass
         SaveGame.SingletonRepository.Realms.Get(nameof(ChaosRealm))
     };
 
-    protected override ItemFactory[] Outfit => new ItemFactory[]
+    protected override string[] OutfitItemFactoryNames => new string[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(BeginnersHandbookSorceryBookItemFactory)),
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordBroadSword)),
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(MetalScaleMailHardArmorItemFactory))
+        nameof(BeginnersHandbookSorceryBookItemFactory),
+        nameof(SwordBroadSword),
+        nameof(MetalScaleMailHardArmorItemFactory)
     };
 }

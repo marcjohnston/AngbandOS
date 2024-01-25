@@ -49,10 +49,10 @@ internal class ChannelerCharacterClass : BaseCharacterClass
     public override bool SenseInventoryTest(int level) => (0 != SaveGame.Rng.RandomLessThan(9000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
 
-    protected override ItemFactory[] Outfit => new ItemFactory[]
+    protected override string[] OutfitItemFactoryNames => new string[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(MagicMissileWandItemFactory)),
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordDagger)),
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SustainCharismaRingItemFactory))
+        nameof(MagicMissileWandItemFactory),
+        nameof(SwordDagger),
+        nameof(SustainCharismaRingItemFactory)
    };
 }

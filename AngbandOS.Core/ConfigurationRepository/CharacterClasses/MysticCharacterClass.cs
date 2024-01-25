@@ -49,10 +49,10 @@ internal class MysticCharacterClass : BaseCharacterClass
     public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
     public override bool SenseInventoryTest(int level) => (0 != SaveGame.Rng.RandomLessThan(55000 / ((level * level) + 40)));
 
-    protected override ItemFactory[] Outfit => new ItemFactory[]
+    protected override string[] OutfitItemFactoryNames => new string[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SustainWisdomRingItemFactory)),
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(HealingPotionItemFactory)),
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SoftLeatherSoftArmorItemFactory))
+        nameof(SustainWisdomRingItemFactory),
+        nameof(HealingPotionItemFactory),
+        nameof(SoftLeatherSoftArmorItemFactory)
     };
 }

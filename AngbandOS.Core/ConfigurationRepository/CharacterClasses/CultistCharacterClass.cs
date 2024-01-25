@@ -62,11 +62,11 @@ internal class CultistCharacterClass : BaseCharacterClass
     };
     public override bool WorshipsADeity => true;
 
-    protected override ItemFactory[] Outfit => new ItemFactory[]
+    protected override string[] OutfitItemFactoryNames => new string[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(BeginnersHandbookSorceryBookItemFactory)),
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SustainIntelligenceRingItemFactory)),
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(BlackPrayersDeathBookItemFactory))
+        nameof(BeginnersHandbookSorceryBookItemFactory),
+        nameof(SustainIntelligenceRingItemFactory),
+        nameof(BlackPrayersDeathBookItemFactory)
     };
 
     public override void UpdateBonusesForMeleeWeapon(Item? oPtr)

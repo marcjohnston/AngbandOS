@@ -92,10 +92,10 @@ internal class HighMageCharacterClass : BaseCharacterClass
         SaveGame.SingletonRepository.Realms.Get(nameof(CorporealRealm))
     };
 
-    protected override ItemFactory[] Outfit => new ItemFactory[]
+    protected override string[] OutfitItemFactoryNames => new string[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(BeginnersHandbookSorceryBookItemFactory)),
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordDagger)),
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SustainIntelligenceRingItemFactory))
+        nameof(BeginnersHandbookSorceryBookItemFactory),
+        nameof(SwordDagger),
+        nameof(SustainIntelligenceRingItemFactory)
     };
 }

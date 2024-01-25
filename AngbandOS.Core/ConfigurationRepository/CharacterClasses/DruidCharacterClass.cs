@@ -48,10 +48,10 @@ internal class DruidCharacterClass : BaseCharacterClass
         SaveGame.SingletonRepository.Realms.Get(nameof(NatureRealm))
     };
 
-    protected override ItemFactory[] Outfit => new ItemFactory[]
+    protected override string[] OutfitItemFactoryNames => new string[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(BeginnersHandbookSorceryBookItemFactory)),
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(HaftedQuarterstaff)),
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SustainWisdomRingItemFactory))
+        nameof(BeginnersHandbookSorceryBookItemFactory),
+        nameof(HaftedQuarterstaff),
+        nameof(SustainWisdomRingItemFactory)
     };
 }

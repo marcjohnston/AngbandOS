@@ -40,10 +40,14 @@ internal class PawnStoreFactory : StoreFactory
     public override ColourEnum Colour => ColourEnum.Turquoise;
     protected override string SymbolName => nameof(NumberZeroSymbol);
 
-    public override bool ItemMatches(Item item)
+    /// <summary>
+    /// Returns the name of the item matching criteria for any items of value.
+    /// </summary>
+    protected override string[] ItemFilterNames => new string[]
     {
-        return item.Value() > 0;
-    }
+        nameof(AnythingOfValueItemMatchingCriteria)
+    };
+
     public override StockStoreInventoryItem[] GetStoreTable()
     {
         return null;

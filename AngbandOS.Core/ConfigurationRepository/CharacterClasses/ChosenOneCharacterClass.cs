@@ -43,10 +43,10 @@ internal class ChosenOneCharacterClass : BaseCharacterClass
     public override bool DetailedSenseInventory => true;
     public override bool OutfitsWithScrollsOfLight => true;
 
-    protected override ItemFactory[] Outfit => new ItemFactory[]
+    protected override string[] OutfitItemFactoryNames => new string[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordSmallSword)),
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(HealingPotionItemFactory)),
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SoftLeatherSoftArmorItemFactory))
+        nameof(SwordSmallSword),
+        nameof(HealingPotionItemFactory),
+        nameof(SoftLeatherSoftArmorItemFactory)
     };
 }

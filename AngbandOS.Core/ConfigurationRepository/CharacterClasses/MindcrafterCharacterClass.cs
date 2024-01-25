@@ -47,10 +47,10 @@ internal class MindcrafterCharacterClass : BaseCharacterClass
     public override IArtifactBias? ArtifactBias => (SaveGame.Rng.DieRoll(5) > 2 ? SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias)) : null);
     public override bool SenseInventoryTest(int level) => (0 != SaveGame.Rng.RandomLessThan(55000 / ((level * level) + 40)));
 
-    protected override ItemFactory[] Outfit => new ItemFactory[]
+    protected override string[] OutfitItemFactoryNames => new string[]
     {
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordSmallSword)),
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(RestoreManaPotionItemFactory)),
-        SaveGame.SingletonRepository.ItemFactories.Get(nameof(SoftLeatherSoftArmorItemFactory))
+        nameof(SwordSmallSword),
+        nameof(RestoreManaPotionItemFactory),
+        nameof(SoftLeatherSoftArmorItemFactory)
     };
 }

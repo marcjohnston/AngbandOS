@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.StoreFactories;
 
 [Serializable]
-internal class TempleStoreFactory : StoreFactory
+internal partial class TempleStoreFactory : StoreFactory
 {
     private TempleStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
@@ -68,26 +68,19 @@ internal class TempleStoreFactory : StoreFactory
         };
     }
 
-    public override bool ItemMatches(Item item)
+    /// <summary>
+    /// Returns the name of the item matching criteria for life books, scrolls, potions, hafted weapons, blessed pole arms and blessed swords of value.
+    /// </summary>
+    protected override string[] ItemFilterNames => new string[]
     {
-        switch (item.Factory)
-        {
-            case LifeBookItemFactory _:
-            case ScrollItemClass _:
-            case PotionItemFactory _:
-            case HaftedItemClass _:
-                return item.Value() > 0;
-            case PolearmItemClass _:
-            case SwordItemClass _:
-                item.RefreshFlagBasedProperties();
-                if (item.Characteristics.Blessed)
-                    return item.Value() > 0;
-                else
-                    return false;
-            default:
-                return false;
-        }
-    }
+        nameof(LifeBookItemMatchingCriteria),
+        nameof(ScrollItemMatchingCriteria),
+        nameof(PotionItemMatchingCriteria),
+        nameof(HaftedItemMatchingCriteria),
+        nameof(BlessedPolearmItemMatchingCriteria),
+        nameof(BlessedSwordItemMatchingCriteria)
+    };
+
     protected override string? AdvertisedStoreCommand4Name => nameof(RemoveCurseStoreCommand);
     protected override string? AdvertisedStoreCommand5Name => nameof(SacrificeStoreCommand);
 }

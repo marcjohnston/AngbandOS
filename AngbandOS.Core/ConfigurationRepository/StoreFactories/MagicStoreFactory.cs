@@ -87,28 +87,26 @@ internal class MagicStoreFactory : StoreFactory
         };
     }
 
-    public override bool ItemMatches(Item item)
+    /// <summary>
+    /// Returns the name of the item matching criteria for any magic book, amulets, rings, staves, wands, rods, scrolls and potions of value.
+    /// </summary>
+    protected override string[] ItemFilterNames => new string[]
     {
-        switch (item.Factory)
-        {
-            case SorceryBookItemFactory _:
-            case NatureBookItemFactory _:
-            case ChaosBookItemFactory _:
-            case DeathBookItemFactory _:
-            case TarotBookItemFactory _:
-            case FolkBookItemFactory _:
-            case CorporealBookItemFactory _:
-            case AmuletJeweleryItemFactory _:
-            case RingItemFactory _:
-            case StaffItemClass _:
-            case WandItemFactory _:
-            case RodItemFactory _:
-            case ScrollItemClass _:
-            case PotionItemFactory _:
-                return item.Value() > 0;
-            default:
-                return false;
-        }
-    }
+        nameof(SorceryBookItemMatchingCriteria),
+        nameof(NatureBookItemMatchingCriteria),
+        nameof(ChaosBookItemMatchingCriteria),
+        nameof(DeathBookItemMatchingCriteria),
+        nameof(TarotBookItemMatchingCriteria),
+        nameof(FolkBookItemMatchingCriteria),
+        nameof(CorporealBookItemMatchingCriteria),
+        nameof(AmuletJeweleryItemMatchingCriteria),
+        nameof(RingItemMatchingCriteria),
+        nameof(StaffItemMatchingCriteria),
+        nameof(WandItemMatchingCriteria),
+        nameof(RodItemMatchingCriteria),
+        nameof(ScrollItemMatchingCriteria),
+        nameof(PotionItemMatchingCriteria)
+    };
+
     protected override string? AdvertisedStoreCommand4Name => nameof(ResearchItemStoreCommand);
 }

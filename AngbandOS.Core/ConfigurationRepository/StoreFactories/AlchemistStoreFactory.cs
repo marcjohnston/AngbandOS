@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.StoreFactories;
 
 [Serializable]
-internal class AlchemistStoreFactory : StoreFactory
+internal partial class AlchemistStoreFactory : StoreFactory
 {
     private AlchemistStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
@@ -71,16 +71,14 @@ internal class AlchemistStoreFactory : StoreFactory
         };
     }
 
-    public override bool ItemMatches(Item item)
+    /// <summary>
+    /// Returns the name of the item matching criteria for scrolls and potions of value.
+    /// </summary>
+    protected override string[] ItemFilterNames => new string[]
     {
-        switch (item.Factory)
-        {
-            case ScrollItemClass _:
-            case PotionItemFactory _:
-                return item.Value() > 0;
-            default:
-                return false;
-        }
-    }
+        nameof(ScrollItemMatchingCriteria),
+        nameof(PotionItemMatchingCriteria)
+    };
+
     protected override string? AdvertisedStoreCommand4Name => nameof(RestorationStoreCommand);
 }

@@ -25,10 +25,6 @@ internal class EmptyLotStoreFactory : StoreFactory
     /// Returns true, because this store type generates as an empty lot.
     /// </summary>
     public override bool IsEmptyLot => true;
-    public override bool ItemMatches(Item item)
-    {
-        return false;
-    }
     public override bool MaintainsStockLevels => false;
     public override bool ShufflesOwnersAndPricing => false;
     public override StockStoreInventoryItem[] GetStoreTable() => null;

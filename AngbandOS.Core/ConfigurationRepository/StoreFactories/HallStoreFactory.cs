@@ -22,10 +22,12 @@ internal class HallStoreFactory : StoreFactory
     protected override string SymbolName => nameof(NumberEightSymbol);
     public override string Description => "Hall of Records";
 
-    public override bool ItemMatches(Item item)
-    {
-        return false;
-    }
+    /// <summary>
+    /// Returns an empty array of item criteria names because the hall doesn't buy items.
+    /// </summary>
+    protected override string[] ItemFilterNames => new string[] { };
+
+
     public override bool MaintainsStockLevels => false;
     public override StockStoreInventoryItem[] GetStoreTable() => null;
 
