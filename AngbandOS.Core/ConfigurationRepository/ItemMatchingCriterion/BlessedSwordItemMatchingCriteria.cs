@@ -11,5 +11,5 @@ namespace AngbandOS.Core.ItemMatchingCriterion;
 internal class BlessedSwordItemMatchingCriteria : ItemMatchingCriteria<SwordItemClass>
 {
     private BlessedSwordItemMatchingCriteria(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override bool? Blessed => true;
+    public override bool? IsBlessed => true;
 }

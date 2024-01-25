@@ -5,12 +5,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.ConfigurationRepository.ItemMatchingCriterion;
+
 namespace AngbandOS.Core.ItemCategories;
 
 [Serializable]
 internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
 {
     private WoodenTorchLightSourceItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+
+    /// <summary>
+    /// Returns true because a torch can be used as fuel for another torch.
+    /// </summary>
+    public override bool IsFuelForTorch => true;
 
     /// <summary>
     /// Returns 1 because wooden torches consume a single turn of light for every world turn.
@@ -43,7 +50,7 @@ internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
     public override void Refill(SaveGame saveGame, Item item)
     {
         // Get an item if we don't already have one
-        if (!saveGame.SelectItem(out Item? fuelSource, "Refuel with which torch? ", false, true, true, new TorchFuelItemFilter()))
+        if (!saveGame.SelectItem(out Item? fuelSource, "Refuel with which torch? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(TorchFuelItemMatchingCriteria))))
         {
             saveGame.MsgPrint("You have no extra torches.");
             return;
@@ -54,7 +61,7 @@ internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
         }
 
         // Check that our fuel is suitable
-        if (!saveGame.ItemMatchesFilter(fuelSource, new TorchFuelItemFilter()))
+        if (!saveGame.ItemMatchesFilter(fuelSource, SaveGame.SingletonRepository.ItemFilters.Get(nameof(TorchFuelItemMatchingCriteria))))
         {
             saveGame.MsgPrint("You can't refill a torch with that!");
             return;

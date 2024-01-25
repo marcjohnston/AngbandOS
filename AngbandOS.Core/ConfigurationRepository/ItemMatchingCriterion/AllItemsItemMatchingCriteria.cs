@@ -11,5 +11,5 @@ namespace AngbandOS.Core.ItemMatchingCriterion;
 internal class AllItemsItemMatchingCriteria : ItemMatchingCriteria
 {
     private AllItemsItemMatchingCriteria(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override bool? Value => null;
+    public override bool? HasValue => null;
 }

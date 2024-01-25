@@ -8,7 +8,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class ItemMatchingCriteria : IGetKey<string>
+internal abstract class ItemMatchingCriteria : IGetKey<string>, IItemFilter
 {
     protected SaveGame SaveGame { get; }
     protected ItemMatchingCriteria(SaveGame saveGame)
@@ -16,31 +16,70 @@ internal abstract class ItemMatchingCriteria : IGetKey<string>
         SaveGame = saveGame;
     }
 
-    public virtual bool? Blessed => null;
-    public virtual bool? Value => true;
+    /// <summary>
+    /// Returns true, if the item must be blessed; false, if the item cannot be blessed; or null, if indifferent.  Returns null, by default.
+    /// </summary>
+    public virtual bool? IsBlessed => null;
+
+    /// <summary>
+    /// Returns true, if the item must have a value greater than zero (>0); false, if the item must have a value of zero or less (<=0); or null, 
+    /// if indifferent.  Returns true, by default.
+    /// </summary>
+    public virtual bool? HasValue => true;
+
+    /// <summary>
+    /// Returns true, if the item must be known; false, if the item cannot be known; or null, if indifferent.  Returns null, by default.
+    /// </summary>
+    public virtual bool? IsKnown => null;
+
+    /// <summary>
+    /// Returns true, if the item must be activatable; false, if the item cannot be activatable; or null, if indifferent.  Returns null, by default.
+    /// </summary>
+    public virtual bool? CanBeActivated => null;
+
+    /// <summary>
+    /// Returns true, if the item must capable of fueling a lantern; false, if the item cannot be fuel for a lantern; or null, if indifferent.  Returns null, by default.
+    /// </summary>
+    public virtual bool? IsLanternFuel => null;
+
+    /// <summary>
+    /// Returns true, if the item must capable of fueling a torch; false, if the item cannot be fuel for a torch; or null, if indifferent.  Returns null, by default.
+    /// </summary>
+    public virtual bool? IsFuelForTorch => null;
 
     public virtual string Key => GetType().Name;
     public string GetKey => Key;
 
-    public void Bind()
-    {
-    }
+    public void Bind() { }
 
     public virtual bool ItemMatches(Item item)
     {
-        if (Blessed != null)
-        {
-            item.RefreshFlagBasedProperties();
-            if (item.Characteristics.Blessed != Blessed)
-            {
-                return false;
-            }
-        }
-        if (Value == true && item.Value() <= 0)
+        item.RefreshFlagBasedProperties();
+        if (IsBlessed != null && item.Characteristics.Blessed != IsBlessed)
         {
             return false;
         }
-        if (Value == false && item.Value() > 0)
+        if (HasValue == true && item.Value() <= 0)
+        {
+            return false;
+        }
+        if (HasValue == false && item.Value() > 0)
+        {
+            return false;
+        }
+        if (IsKnown != null && item.IsKnown() != IsKnown)
+        {
+            return false;
+        }
+        if (CanBeActivated != null && item.Characteristics.Activate != CanBeActivated)
+        {
+            return false;
+        }
+        if (IsLanternFuel != null && item.Factory.IsFuelForLantern != IsLanternFuel)
+        {
+            return false;
+        }
+        if (IsFuelForTorch != null && item.Factory.IsFuelForTorch != IsFuelForTorch)
         {
             return false;
         }

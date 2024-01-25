@@ -17,6 +17,11 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
 
+    /// <summary>
+    /// Returns true, if the item can be used as fuel for a torch.
+    /// </summary>
+    public virtual bool IsFuelForTorch => false;
+
     protected ItemFactory(SaveGame saveGame)
     {
         SaveGame = saveGame;

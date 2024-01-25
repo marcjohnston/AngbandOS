@@ -5,11 +5,10 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemMatchingCriterion;
+namespace AngbandOS.Core.ConfigurationRepository.ItemMatchingCriterion;
 
-[Serializable]
-internal class BlessedPolearmItemMatchingCriteria : ItemMatchingCriteria<PolearmItemClass>
+internal class LanternFuelItemMatchingCriteria : ItemMatchingCriteria
 {
-    private BlessedPolearmItemMatchingCriteria(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override bool? IsBlessed => true;
+    private LanternFuelItemMatchingCriteria(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    public override bool? IsLanternFuel => true;
 }

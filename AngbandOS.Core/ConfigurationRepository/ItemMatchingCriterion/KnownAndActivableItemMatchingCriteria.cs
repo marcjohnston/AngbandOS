@@ -5,15 +5,11 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemFilters;
+namespace AngbandOS.Core.ConfigurationRepository.ItemMatchingCriterion;
 
-/// <summary>
-/// Represents an ItemFilter that filters items that can fuel a torch.
-/// </summary>
-internal class TorchFuelItemFilter : ItemFilter
+internal class KnownAndActivableItemMatchingCriteria : ItemMatchingCriteria
 {
-    public override bool ItemMatches(Item item)
-    {
-        return item.IsFuelForTorch;
-    }
+    private KnownAndActivableItemMatchingCriteria(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    public override bool? IsKnown => true;
+    public override bool? CanBeActivated => true;
 }

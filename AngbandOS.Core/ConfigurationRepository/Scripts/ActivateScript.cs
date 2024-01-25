@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.ConfigurationRepository.ItemMatchingCriterion;
+
 namespace AngbandOS.Core.Scripts;
 
 /// <summary>
@@ -40,7 +42,7 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulS
     public bool ExecuteSuccessfulScript()
     {
         // No item passed in, so get one; filtering to activatable items only
-        if (!SaveGame.SelectItem(out Item? item, "Activate which item? ", true, true, false, new ActivatableItemFilter()))
+        if (!SaveGame.SelectItem(out Item? item, "Activate which item? ", true, true, false, SaveGame.SingletonRepository.ItemFilters.Get(nameof(KnownAndActivableItemMatchingCriteria))))
         {
             SaveGame.MsgPrint("You have nothing to activate.");
             return false;

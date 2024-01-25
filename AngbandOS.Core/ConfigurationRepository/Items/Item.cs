@@ -11,11 +11,6 @@ namespace AngbandOS.Core.Items;
 internal abstract class Item : IComparable<Item>, IGetKey<string>
 {
     /// <summary>
-    /// Returns true, if the item can be used as fuel for a torch.
-    /// </summary>
-    public virtual bool IsFuelForTorch => false;
-
-    /// <summary>
     /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.
     /// </summary>
     public int PackSort => Factory.PackSort;

@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.ConfigurationRepository.ItemMatchingCriterion;
+
 namespace AngbandOS.Core.ItemCategories;
 
 [Serializable]
@@ -50,7 +52,7 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
     public override void Refill(SaveGame saveGame, Item item)
     {
         // Get an item if we don't already have one
-        if (!saveGame.SelectItem(out Item? fuelSource, "Refill with which flask? ", false, true, true, new LanternFuelItemFilter()))
+        if (!saveGame.SelectItem(out Item? fuelSource, "Refill with which flask? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(LanternFuelItemMatchingCriteria))))
         {
             saveGame.MsgPrint("You have no flasks of oil.");
             return;
@@ -63,7 +65,7 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
         }
 
         // Make sure our item is suitable fuel
-        if (!saveGame.ItemMatchesFilter(fuelSource, new LanternFuelItemFilter()))
+        if (!saveGame.ItemMatchesFilter(fuelSource, SaveGame.SingletonRepository.ItemFilters.Get(nameof(LanternFuelItemMatchingCriteria))))
         {
             saveGame.MsgPrint("You can't refill a lantern from that!");
             return;
