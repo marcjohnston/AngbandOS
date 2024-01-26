@@ -21,11 +21,6 @@ internal abstract class Item : IComparable<Item>, IGetKey<string>
     public virtual bool CanVorpalSlay => false;
 
     /// <summary>
-    /// Returns a count for the number of items to create during the MakeObject.  Returns 1, by default.  Spikes, shots, arrows and bolts return values greater than 1.
-    /// </summary>
-    public virtual int MakeObjectCount => 1;
-
-    /// <summary>
     /// Returns the percentage chance that an thrown or fired item breaks.  Returns 10, or 10%, by default.  A value of 101, guarantees the item will break.
     /// </summary>
     public virtual int PercentageBreakageChance => 10;

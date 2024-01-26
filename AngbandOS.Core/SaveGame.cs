@@ -1397,7 +1397,7 @@ internal class SaveGame
             item = kIdx.CreateItem();
         }
         item.ApplyMagic(ObjectLevel, true, good, great, null);
-        item.Count = item.MakeObjectCount;
+        item.Count = item.Factory.MakeObjectCount;
         if (!item.IsCursed() && !item.IsBroken() && item.Factory.Level > Difficulty)
         {
             TreasureRating += item.Factory.Level - Difficulty;

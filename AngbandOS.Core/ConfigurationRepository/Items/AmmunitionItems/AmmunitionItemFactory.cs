@@ -11,6 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class AmmunitionItemFactory : WeaponItemFactory
 {
     public AmmunitionItemFactory(SaveGame saveGame) : base(saveGame) { }
+    public override int MakeObjectCount => SaveGame.Rng.DiceRoll(6, 7);
     public override bool IsWeapon => true;
     public override bool CanBeFired => true;
     public override bool IdentityCanBeSensed => true;

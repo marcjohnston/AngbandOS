@@ -18,6 +18,11 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     protected readonly SaveGame SaveGame;
 
     /// <summary>
+    /// Returns a count for the number of items to create during the MakeObject.  Returns 1, by default.  Spikes, shots, arrows and bolts return values greater than 1.
+    /// </summary>
+    public virtual int MakeObjectCount => 1;
+
+    /// <summary>
     /// Returns true, if the item multiplies damages against a specific monster race.  Returns false, by default. Shots, arrows, bolts, hafted, polearms, swords and digging all return true.
     /// </summary>
     public virtual bool GetsDamageMultiplier => false;
