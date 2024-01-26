@@ -15,7 +15,7 @@ internal class SmallSwordStingFixedArtifact : FixedArtifact
 
     public override void Bind()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordShortSword));
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(ShortSwordWeaponItemFactory));
     }
 
 

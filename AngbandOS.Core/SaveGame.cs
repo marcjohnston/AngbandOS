@@ -11171,7 +11171,7 @@ internal class SaveGame
     {
         if (Race.OutfitsWithScrollsOfSatisfyHunger)
         {
-            ItemFactory scrollSatisfyHungerItemClass = SingletonRepository.ItemFactories.Get(nameof(ScrollSatisfyHunger));
+            ItemFactory scrollSatisfyHungerItemClass = SingletonRepository.ItemFactories.Get(nameof(SatisfyHungerScrollItemFactory));
             Item item = scrollSatisfyHungerItemClass.CreateItem();
             item.Count = (char)Rng.RandomBetween(2, 5);
             item.BecomeFlavourAware();
@@ -11190,7 +11190,7 @@ internal class SaveGame
         }
         if (Race.OutfitsWithScrollsOfLight || BaseCharacterClass.OutfitsWithScrollsOfLight)
         {
-            ItemFactory scrollLightItemClass = SingletonRepository.ItemFactories.Get(nameof(ScrollLight));
+            ItemFactory scrollLightItemClass = SingletonRepository.ItemFactories.Get(nameof(LightScrollItemFactory));
             Item item = scrollLightItemClass .CreateItem();
             item.Count = Rng.RandomBetween(3, 7);
             item.BecomeFlavourAware();

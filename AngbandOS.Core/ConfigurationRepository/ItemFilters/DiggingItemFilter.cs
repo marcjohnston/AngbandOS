@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFilters;
 
 [Serializable]
-internal class DiggingItemFilter : ItemFilter<DiggingItemClass>
+internal class DiggingItemFilter : ItemFilter<DiggingWeaponItemFactory>
 {
     private DiggingItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 }

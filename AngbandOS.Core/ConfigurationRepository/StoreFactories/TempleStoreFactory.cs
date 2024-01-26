@@ -44,15 +44,15 @@ internal partial class TempleStoreFactory : StoreFactory
     {
         return new[]
         {
-            new StockStoreInventoryItem(typeof(HaftedBallAndChain), 2),
-            new StockStoreInventoryItem(typeof(HaftedFlail)),
-            new StockStoreInventoryItem(typeof(HaftedLeadFilledMace)),
-            new StockStoreInventoryItem(typeof(HaftedLucerneHammer)),
-            new StockStoreInventoryItem(typeof(HaftedMace), 2),
-            new StockStoreInventoryItem(typeof(HaftedMorningStar)),
-            new StockStoreInventoryItem(typeof(HaftedQuarterstaff)),
-            new StockStoreInventoryItem(typeof(HaftedWarHammer), 2),
-            new StockStoreInventoryItem(typeof(HaftedWhip), 2),
+            new StockStoreInventoryItem(typeof(BallAndChainHaftedWeaponItemFactory), 2),
+            new StockStoreInventoryItem(typeof(FlailHaftedWeaponItemFactory)),
+            new StockStoreInventoryItem(typeof(LeadFilledMaceHaftedWeaponItemFactory)),
+            new StockStoreInventoryItem(typeof(LucerneHammerHaftedWeaponItemFactory)),
+            new StockStoreInventoryItem(typeof(MaceHaftedWeaponItemFactory), 2),
+            new StockStoreInventoryItem(typeof(MorningStarHaftedWeaponItemFactory)),
+            new StockStoreInventoryItem(typeof(QuarterstaffHaftedWeaponItemFactory)),
+            new StockStoreInventoryItem(typeof(WarHammerHaftedWeaponItemFactory), 2),
+            new StockStoreInventoryItem(typeof(WhipHaftedWeaponItemFactory), 2),
             new StockStoreInventoryItem(typeof(CommonPrayerLifeBookItemFactory), 4),
             new StockStoreInventoryItem(typeof(HighMassLifeBookItemFactory), 4),
             new StockStoreInventoryItem(typeof(CureCriticalWoundsPotionItemFactory), 4),
@@ -60,11 +60,11 @@ internal partial class TempleStoreFactory : StoreFactory
             new StockStoreInventoryItem(typeof(CureSeriousWoundsPotionItemFactory), 2),
             new StockStoreInventoryItem(typeof(HeroismPotionItemFactory)),
             new StockStoreInventoryItem(typeof(RestoreLifeLevelsPotionItemFactory), 6),
-            new StockStoreInventoryItem(typeof(ScrollBlessing)),
-            new StockStoreInventoryItem(typeof(ScrollHolyChant)),
-            new StockStoreInventoryItem(typeof(ScrollRemoveCurse), 3),
-            new StockStoreInventoryItem(typeof(ScrollSpecialRemoveCurse), 2),
-            new StockStoreInventoryItem(typeof(ScrollWordOfRecall), 6),
+            new StockStoreInventoryItem(typeof(BlessingScrollItemFactory)),
+            new StockStoreInventoryItem(typeof(HolyChantScrollItemFactory)),
+            new StockStoreInventoryItem(typeof(RemoveCurseScrollItemFactory), 3),
+            new StockStoreInventoryItem(typeof(SpecialRemoveCurseScrollItemFactory), 2),
+            new StockStoreInventoryItem(typeof(WordofRecallScrollItemFactory), 6),
         };
     }
 

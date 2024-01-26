@@ -71,7 +71,7 @@ internal class MageCharacterClass : BaseCharacterClass
     protected override string[] OutfitItemFactoryNames => new string[]
     {
         nameof(BeginnersHandbookSorceryBookItemFactory),
-        nameof(SwordDagger),
+        nameof(DaggerWeaponItemFactory),
         nameof(BlackPrayersDeathBookItemFactory)
     };
 }

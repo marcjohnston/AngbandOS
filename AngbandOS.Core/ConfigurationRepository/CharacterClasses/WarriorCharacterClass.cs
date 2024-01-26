@@ -64,7 +64,7 @@ internal class WarriorCharacterClass : BaseCharacterClass
     protected override string[] OutfitItemFactoryNames => new string[]
     {
         nameof(FearResistanceRingItemFactory),
-        nameof(SwordBroadSword),
+        nameof(BroadSwordWeaponItemFactory),
         nameof(ChainMailHardArmorItemFactory)
     };
 }

@@ -44,7 +44,7 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
             return;
         }
 
-        StaffItemClass staffItem = (StaffItemClass)item.Factory;
+        StaffItemFactory staffItem = (StaffItemFactory)item.Factory;
 
         // We can't use a staff from the floor
         if (!item.IsInInventory && item.Count > 1)

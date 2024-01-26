@@ -15,7 +15,7 @@ internal class ShortSwordOfMerlinFixedArtifact : FixedArtifact
 
     public override void Bind()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordShortSword));
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(ShortSwordWeaponItemFactory));
     }
 
 

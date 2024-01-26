@@ -45,7 +45,7 @@ internal class ChosenOneCharacterClass : BaseCharacterClass
 
     protected override string[] OutfitItemFactoryNames => new string[]
     {
-        nameof(SwordSmallSword),
+        nameof(SmallSwordWeaponItemFactory),
         nameof(HealingPotionItemFactory),
         nameof(SoftLeatherSoftArmorItemFactory)
     };

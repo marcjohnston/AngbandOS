@@ -15,7 +15,7 @@ internal class SpearGungnirFixedArtifact : FixedArtifact, IFixedArtifactActivati
 
     public override void Bind()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(PolearmSpear));
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SpearPolearmWeaponItemFactory));
     }
 
 

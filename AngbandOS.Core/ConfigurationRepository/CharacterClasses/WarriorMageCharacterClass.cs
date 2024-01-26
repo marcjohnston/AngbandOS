@@ -64,7 +64,7 @@ internal class WarriorMageCharacterClass : BaseCharacterClass
     protected override string[] OutfitItemFactoryNames => new string[]
     {
         nameof(BeginnersHandbookSorceryBookItemFactory),
-        nameof(SwordShortSword),
+        nameof(ShortSwordWeaponItemFactory),
         nameof(BlackPrayersDeathBookItemFactory)
     };
 }

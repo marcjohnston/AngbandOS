@@ -15,7 +15,7 @@ internal class ScimitarSoulswordFixedArtifact : FixedArtifact
 
     public override void Bind()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordScimitar));
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(ScimitarWeaponItemFactory));
     }
 
 

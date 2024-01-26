@@ -15,7 +15,7 @@ internal class BeakedAxeOfTheodenFixedArtifact : FixedArtifact, IFixedArtifactAc
 
     public override void Bind()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(PolearmBeakedAxe));
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(BeakedAxePolearmWeaponItemFactory));
     }
 
 

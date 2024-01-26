@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class SpecialRemoveCurseScrollItem : ScrollItem
 {
-    public SpecialRemoveCurseScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(ScrollSpecialRemoveCurse))) { }
+    public SpecialRemoveCurseScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(SpecialRemoveCurseScrollItemFactory))) { }
 }

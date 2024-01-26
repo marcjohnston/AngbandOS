@@ -15,7 +15,7 @@ internal class MaceThunderFixedArtifact : FixedArtifact, IFixedArtifactActivatib
 
     public override void Bind()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(HaftedMace));
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(MaceHaftedWeaponItemFactory));
     }
 
 

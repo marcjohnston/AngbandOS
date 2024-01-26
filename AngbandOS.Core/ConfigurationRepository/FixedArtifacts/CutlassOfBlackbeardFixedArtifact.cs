@@ -15,7 +15,7 @@ internal class CutlassOfBlackbeardFixedArtifact : FixedArtifact
 
     public override void Bind()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordCutlass));
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(CutlassWeaponItemFactory));
     }
 
 

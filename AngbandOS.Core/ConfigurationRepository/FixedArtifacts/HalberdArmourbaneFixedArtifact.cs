@@ -15,7 +15,7 @@ internal class HalberdArmorbaneFixedArtifact : FixedArtifact
 
     public override void Bind()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(PolearmHalberd));
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(HalberdPolearmWeaponItemFactory));
     }
 
 

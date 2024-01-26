@@ -15,7 +15,7 @@ internal class GlaiveOfPainFixedArtifact : FixedArtifact
 
     public override void Bind()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(PolearmGlaive));
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(GlaivePolearmWeaponItemFactory));
     }
 
 

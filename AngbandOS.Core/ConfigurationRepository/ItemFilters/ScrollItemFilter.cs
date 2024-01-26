@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFilters;
 
 [Serializable]
-internal class ScrollItemFilter : ItemFilter<ScrollItemClass>
+internal class ScrollItemFilter : ItemFilter<ScrollItemFactory>
 {
     private ScrollItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 }

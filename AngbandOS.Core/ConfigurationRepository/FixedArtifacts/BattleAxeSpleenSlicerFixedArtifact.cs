@@ -15,7 +15,7 @@ internal class BattleAxeSpleenSlicerFixedArtifact : FixedArtifact, IFixedArtifac
 
     public override void Bind()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(PolearmBattleAxe));
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(BattleAxePolearmWeaponItemFactory));
     }
 
 

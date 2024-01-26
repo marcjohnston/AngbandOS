@@ -51,7 +51,7 @@ internal class DruidCharacterClass : BaseCharacterClass
     protected override string[] OutfitItemFactoryNames => new string[]
     {
         nameof(BeginnersHandbookSorceryBookItemFactory),
-        nameof(HaftedQuarterstaff),
+        nameof(QuarterstaffHaftedWeaponItemFactory),
         nameof(SustainWisdomRingItemFactory)
     };
 }

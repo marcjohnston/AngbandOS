@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class TrapCreationScrollItem : ScrollItem
 {
-    public TrapCreationScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(ScrollTrapCreation))) { }
+    public TrapCreationScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(TrapCreationScrollItemFactory))) { }
 }

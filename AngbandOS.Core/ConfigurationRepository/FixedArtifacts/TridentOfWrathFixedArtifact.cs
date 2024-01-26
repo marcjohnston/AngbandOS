@@ -15,7 +15,7 @@ internal class TridentOfWrathFixedArtifact : FixedArtifact
 
     public override void Bind()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(PolearmTrident));
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(TridentPolearmWeaponItemFactory));
     }
 
 

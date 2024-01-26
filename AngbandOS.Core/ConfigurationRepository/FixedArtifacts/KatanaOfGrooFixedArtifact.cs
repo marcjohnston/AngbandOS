@@ -15,7 +15,7 @@ internal class KatanaOfGrooFixedArtifact : FixedArtifact
 
     public override void Bind()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordKatana));
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(KatanaWeaponItemFactory));
     }
 
 

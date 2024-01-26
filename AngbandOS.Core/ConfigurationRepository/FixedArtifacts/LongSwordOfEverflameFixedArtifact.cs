@@ -15,7 +15,7 @@ internal class LongSwordOfEverflameFixedArtifact : FixedArtifact, IFixedArtifact
 
     public override void Bind()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordLongSword));
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(LongSwordWeaponItemFactory));
     }
 
 

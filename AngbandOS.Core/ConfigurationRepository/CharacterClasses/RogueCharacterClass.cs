@@ -75,7 +75,7 @@ internal class RogueCharacterClass : BaseCharacterClass
     protected override string[] OutfitItemFactoryNames => new string[]
     {
         nameof(BeginnersHandbookSorceryBookItemFactory),
-        nameof(SwordDagger),
+        nameof(DaggerWeaponItemFactory),
         nameof(SoftLeatherSoftArmorItemFactory)
     };
 

@@ -15,7 +15,7 @@ internal class BroadAxeOfNodensFixedArtifact : FixedArtifact
 
     public override void Bind()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(PolearmBroadAxe));
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(BroadAxePolearmWeaponItemFactory));
     }
 
 

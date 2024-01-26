@@ -62,7 +62,7 @@ internal class RangerCharacterClass : BaseCharacterClass
     protected override string[] OutfitItemFactoryNames => new string[]
     {
         nameof(CallOfTheWildNatureBookItemFactory),
-        nameof(SwordBroadSword),
+        nameof(BroadSwordWeaponItemFactory),
         nameof(BlackPrayersDeathBookItemFactory)
     };
 }

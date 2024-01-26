@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class BrokenSwordWeaponItem : SwordWeaponItem
 {
-    public BrokenSwordWeaponItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(SwordBrokenSword))) { }
+    public BrokenSwordWeaponItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(BrokenSwordWeaponItemFactory))) { }
 }

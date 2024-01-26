@@ -15,7 +15,7 @@ internal class RapierOfMontoyaFixedArtifact : FixedArtifact
 
     public override void Bind()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordRapier));
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(RapierWeaponItemFactory));
     }
 
 

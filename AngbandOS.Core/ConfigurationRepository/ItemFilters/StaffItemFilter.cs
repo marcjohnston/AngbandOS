@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFilters;
 
 [Serializable]
-internal class StaffItemFilter : ItemFilter<StaffItemClass>
+internal class StaffItemFilter : ItemFilter<StaffItemFactory>
 {
     private StaffItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 }

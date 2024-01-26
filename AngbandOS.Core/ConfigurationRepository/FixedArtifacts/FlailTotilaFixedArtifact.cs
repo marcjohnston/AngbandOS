@@ -15,7 +15,7 @@ internal class FlailTotilaFixedArtifact : FixedArtifact, IFixedArtifactActivatib
 
     public override void Bind()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(HaftedFlail));
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(FlailHaftedWeaponItemFactory));
     }
 
 

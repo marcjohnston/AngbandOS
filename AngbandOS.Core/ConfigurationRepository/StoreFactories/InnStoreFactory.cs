@@ -62,7 +62,7 @@ internal class InnStoreFactory : StoreFactory
             new StockStoreInventoryItem(typeof(PintOfFineWineFoodItemFactory), 10),
             new StockStoreInventoryItem(typeof(RationFoodItemFactory), 18),
             new StockStoreInventoryItem(typeof(StripOfVenisonFoodItemFactory), 4),
-            new StockStoreInventoryItem(typeof(ScrollSatisfyHunger), 4),
+            new StockStoreInventoryItem(typeof(SatisfyHungerScrollItemFactory), 4),
         };
     }
 

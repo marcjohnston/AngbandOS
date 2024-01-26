@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFilters;
 
 [Serializable]
-internal class BlessedPolearmItemFilter : ItemFilter<PolearmItemClass>
+internal class BlessedPolearmItemFilter : ItemFilter<PolearmWeaponItemFactory>
 {
     private BlessedPolearmItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override bool? IsBlessed => true;

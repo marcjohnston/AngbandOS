@@ -15,7 +15,7 @@ internal class SabreOfXuraFixedArtifact : FixedArtifact
 
     public override void Bind()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordSabre));
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SabreWeaponItemFactory));
     }
 
 

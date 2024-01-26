@@ -52,7 +52,7 @@ internal class ChannelerCharacterClass : BaseCharacterClass
     protected override string[] OutfitItemFactoryNames => new string[]
     {
         nameof(MagicMissileWandItemFactory),
-        nameof(SwordDagger),
+        nameof(DaggerWeaponItemFactory),
         nameof(SustainCharismaRingItemFactory)
    };
 }

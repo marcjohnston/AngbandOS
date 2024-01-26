@@ -56,8 +56,8 @@ internal class GeneralStoreFactory : StoreFactory
             new StockStoreInventoryItem(typeof(WoodenArrowAmmunitionItemFactory), 2),
             new StockStoreInventoryItem(typeof(SteelBoltAmmunitionItemFactory), 2),
             new StockStoreInventoryItem(typeof(ClothCloakCloakArmorItemFactory), 3),
-            new StockStoreInventoryItem(typeof(DiggingPick)),
-            new StockStoreInventoryItem(typeof(DiggingShovel), 2),
+            new StockStoreInventoryItem(typeof(PickDiggingWeaponItemFactory)),
+            new StockStoreInventoryItem(typeof(ShovelDiggingWeaponItemFactory), 2),
             new StockStoreInventoryItem(typeof(OilFlaskItemFactory), 10),
             new StockStoreInventoryItem(typeof(HardBiscuitFoodItemFactory)),
             new StockStoreInventoryItem(typeof(PintOfFineAleFoodItemFactory)),
@@ -68,7 +68,7 @@ internal class GeneralStoreFactory : StoreFactory
             new StockStoreInventoryItem(typeof(OrbLightSourceItemFactory)),
             new StockStoreInventoryItem(typeof(WoodenTorchLightSourceItemFactory), 5),
             new StockStoreInventoryItem(typeof(IronShotAmmunitionItemFactory), 2),
-            new StockStoreInventoryItem(typeof(SpikeIronSpike), 2),
+            new StockStoreInventoryItem(typeof(IronSpikeItemFactory), 2),
         };
     }
 

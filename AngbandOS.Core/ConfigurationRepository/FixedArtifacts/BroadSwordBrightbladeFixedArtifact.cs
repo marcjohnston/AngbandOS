@@ -15,7 +15,7 @@ internal class BroadSwordBrightbladeFixedArtifact : FixedArtifact
 
     public override void Bind()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SwordBroadSword));
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(BroadSwordWeaponItemFactory));
     }
 
 

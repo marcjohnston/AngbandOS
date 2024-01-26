@@ -91,7 +91,7 @@ internal class PaladinCharacterClass : BaseCharacterClass
     protected override string[] OutfitItemFactoryNames => new string[]
     {
         nameof(BeginnersHandbookSorceryBookItemFactory),
-        nameof(SwordBroadSword),
-        nameof(ScrollProtectionFromEvil)
+        nameof(BroadSwordWeaponItemFactory),
+        nameof(ProtectionfromEvilScrollItemFactory)
     };
 }

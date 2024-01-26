@@ -64,7 +64,7 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
         //bool identified = false;
         //bool usedUp = true;
 
-        ScrollItemClass scrollItem = (ScrollItemClass)item.Factory;
+        ScrollItemFactory scrollItem = (ScrollItemFactory)item.Factory;
         ReadScrollEvent readScrollEventArgs = new ReadScrollEvent();
         scrollItem.Read(readScrollEventArgs);
 

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFilters;
 
 [Serializable]
-internal class SpikeItemFilter : ItemFilter<SpikeItemClass>
+internal class SpikeItemFilter : ItemFilter<SpikeItemFactory>
 {
     private SpikeItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 }

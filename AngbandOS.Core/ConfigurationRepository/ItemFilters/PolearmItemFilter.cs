@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFilters;
 
 [Serializable]
-internal class PolearmItemFilter : ItemFilter<PolearmItemClass>
+internal class PolearmItemFilter : ItemFilter<PolearmWeaponItemFactory>
 {
     private PolearmItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 }

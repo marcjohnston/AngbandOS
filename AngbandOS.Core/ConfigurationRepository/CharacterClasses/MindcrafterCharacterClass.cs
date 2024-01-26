@@ -49,7 +49,7 @@ internal class MindcrafterCharacterClass : BaseCharacterClass
 
     protected override string[] OutfitItemFactoryNames => new string[]
     {
-        nameof(SwordSmallSword),
+        nameof(SmallSwordWeaponItemFactory),
         nameof(RestoreManaPotionItemFactory),
         nameof(SoftLeatherSoftArmorItemFactory)
     };

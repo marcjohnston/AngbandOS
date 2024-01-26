@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class SpecialIdentifyScrollItem : ScrollItem
 {
-    public SpecialIdentifyScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(ScrollSpecialIdentify))) { }
+    public SpecialIdentifyScrollItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(SpecialIdentifyScrollItemFactory))) { }
 }
