@@ -862,7 +862,8 @@ internal abstract class Item : IComparable<Item>, IGetKey<string>
 
 
     /// <summary>
-    /// Returns true, if an item can absorb another item of the same type.  Returns false, by default, if either item is known.
+    /// Returns true, if an item can absorb another item of the same type.  Returns false, by default, if either item is known.  The ability for
+    /// two items to be absorbed into one is based on whether both items are known and have the same stats/characteristics.
     /// </summary>
     protected virtual bool FactoryCanAbsorbItem(Item other)
     {
@@ -3355,7 +3356,9 @@ internal abstract class Item : IComparable<Item>, IGetKey<string>
     }
 
     /// <summary>
-    /// Returns the number of additional items to be produced, when the item is mass produced for a store.  Returns 0, by default.
+    /// Returns the number of additional items to be produced, when the item is mass produced for a store.  Returns 0, by default.  When an item
+    /// is created for stores, this mass produce count can be used to create additional stores of the item based on the value of the item.  An item
+    /// with a high value may not produce as many as other items of lower value.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>

@@ -40,7 +40,7 @@ internal partial class TempleStoreFactory : StoreFactory
         nameof(DardobardTheWeakStoreOwner)
     };
 
-    public override StockStoreInventoryItem[] GetStoreTable()
+    public override StockStoreInventoryItem[]? GetStoreTable()
     {
         return new[]
         {

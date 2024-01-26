@@ -53,7 +53,7 @@ internal class InnStoreFactory : StoreFactory
     /// </summary>
     protected override string[] ItemFilterNames => new string[] { };
 
-    public override StockStoreInventoryItem[] GetStoreTable()
+    public override StockStoreInventoryItem[]? GetStoreTable()
     {
         return new[]
         {

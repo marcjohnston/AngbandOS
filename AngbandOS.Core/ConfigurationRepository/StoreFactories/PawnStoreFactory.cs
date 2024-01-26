@@ -48,7 +48,7 @@ internal class PawnStoreFactory : StoreFactory
         nameof(AnythingOfValueItemFilter)
     };
 
-    public override StockStoreInventoryItem[] GetStoreTable()
+    public override StockStoreInventoryItem[]? GetStoreTable()
     {
         return null;
     }

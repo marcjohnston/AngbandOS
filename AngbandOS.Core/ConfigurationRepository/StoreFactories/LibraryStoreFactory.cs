@@ -44,7 +44,7 @@ internal class LibraryStoreFactory : StoreFactory
     public override ColorEnum Color => ColorEnum.Orange;
     protected override string SymbolName => nameof(NumberNineSymbol);
 
-    public override StockStoreInventoryItem[] GetStoreTable()
+    public override StockStoreInventoryItem[]? GetStoreTable()
     {
         return new[]
         {

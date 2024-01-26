@@ -126,7 +126,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     /// Returns an array of item types that the store carries.  Returns null, if the store does not carry items for sale.
     /// </summary>
     /// <returns></returns>
-    public abstract StockStoreInventoryItem[] GetStoreTable();
+    public abstract StockStoreInventoryItem[]? GetStoreTable();
 
     public virtual string FleeMessage => "Your pack is so full that you flee the Stores...";
 

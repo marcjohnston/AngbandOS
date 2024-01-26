@@ -41,7 +41,7 @@ internal partial class AlchemistStoreFactory : StoreFactory
     protected override string SymbolName => nameof(NumberFiveSymbol);
     public override string Description => "Alchemy Shop";
 
-    public override StockStoreInventoryItem[] GetStoreTable()
+    public override StockStoreInventoryItem[]? GetStoreTable()
     {
         return new[]
         {

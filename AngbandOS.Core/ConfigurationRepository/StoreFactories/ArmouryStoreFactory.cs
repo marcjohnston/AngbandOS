@@ -44,7 +44,7 @@ internal class ArmoryStoreFactory : StoreFactory
     public override ColorEnum Color => ColorEnum.Grey;
     protected override string SymbolName => nameof(NumberTwoSymbol);
 
-    public override StockStoreInventoryItem[] GetStoreTable()
+    public override StockStoreInventoryItem[]? GetStoreTable()
     {
         return new[]
         {

@@ -44,7 +44,7 @@ internal partial class WeaponStoreFactory : StoreFactory
     public override ColorEnum Color => ColorEnum.White;
     protected override string SymbolName => nameof(NumberThreeSymbol);
 
-    public override StockStoreInventoryItem[] GetStoreTable()
+    public override StockStoreInventoryItem[]? GetStoreTable()
     {
         return new[]
         {

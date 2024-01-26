@@ -49,7 +49,7 @@ internal class GeneralStoreFactory : StoreFactory
     protected override string SymbolName => nameof(NumberOneSymbol);
     public override string Description => "General Store";
 
-    public override StockStoreInventoryItem[] GetStoreTable()
+    public override StockStoreInventoryItem[]? GetStoreTable()
     {
         return new[]
         {

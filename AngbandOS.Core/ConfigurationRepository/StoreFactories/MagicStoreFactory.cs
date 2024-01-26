@@ -45,7 +45,7 @@ internal class MagicStoreFactory : StoreFactory
     protected override string SymbolName => nameof(NumberSixSymbol);
     public override string Description => "Magic Shop";
 
-    public override StockStoreInventoryItem[] GetStoreTable()
+    public override StockStoreInventoryItem[]? GetStoreTable()
     {
         return new[]
         {
