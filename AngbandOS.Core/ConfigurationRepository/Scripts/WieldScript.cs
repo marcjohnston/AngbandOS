@@ -38,7 +38,7 @@ internal class WieldScript : Script, IScript, IRepeatableScript, IStoreScript
     public void ExecuteScript()
     {
         // Only interested in wearable items
-        if (!SaveGame.SelectItem(out Item? item, "Wear/Wield which item? ", false, true, true, new WearableItemFilter()))
+        if (!SaveGame.SelectItem(out Item? item, "Wear/Wield which item? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(WearableItemFilter))))
         {
             SaveGame.MsgPrint("You have nothing you can wear or wield.");
             return;

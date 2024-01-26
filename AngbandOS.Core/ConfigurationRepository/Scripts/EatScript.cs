@@ -28,7 +28,7 @@ internal class EatScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.SelectItem(out Item? item, "Eat which item? ", false, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Food)))
+        if (!SaveGame.SelectItem(out Item? item, "Eat which item? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeEatenItemFilter))))
         {
             SaveGame.MsgPrint("You have nothing to eat.");
             return;

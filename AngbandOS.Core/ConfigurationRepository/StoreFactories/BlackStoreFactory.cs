@@ -51,7 +51,7 @@ internal class BlackStoreFactory : StoreFactory
     /// </summary>
     protected override string[] ItemFilterNames => new string[]
     {
-        nameof(AnythingOfValueItemMatchingCriteria)
+        nameof(AnythingOfValueItemFilter)
     };
 
     public override int AdjustPrice(int price, bool trueToMarkDownFalseToMarkUp)

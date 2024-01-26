@@ -55,7 +55,7 @@ internal class ResearchSpellScript : Script, IScript, IStoreScript
         SaveGame.MsgPrint($"You can learn {SaveGame.SpareSpellSlots} new {spellType}{plural}.");
         SaveGame.MsgPrint(null);
         // Get the spell books we have
-        if (!SaveGame.SelectItem(out Item? item, "Study which book? ", false, true, true, new UsableSpellBookItemFilter(SaveGame)))
+        if (!SaveGame.SelectItem(out Item? item, "Study which book? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(UsableSpellBookItemFilter))))
         {
             SaveGame.MsgPrint("You have no books that you can read.");
             return;

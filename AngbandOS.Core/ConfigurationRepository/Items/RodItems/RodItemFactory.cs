@@ -17,6 +17,8 @@ internal abstract class RodItemFactory : ItemFactory, IFlavour
     /// Returns the rod flavours repository because rods have flavours that need to be identified.
     /// </summary>
     public IEnumerable<Flavour>? GetFlavorRepository() => SaveGame.SingletonRepository.RodFlavours;
+    public override bool IsRechargable => true;
+    public override bool CanBeZapped => true;
 
     /// <inheritdoc/>
     public Flavour Flavor { get; set; }

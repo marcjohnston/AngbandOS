@@ -10,7 +10,7 @@ using AngbandOS.Core.Interface.Definitions;
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class ItemFiltersRepositoryCollection : DictionaryRepositoryCollection<string, ItemMatchingCriteria>
+internal class ItemFiltersRepositoryCollection : DictionaryRepositoryCollection<string, ItemFilter>
 {
     public ItemFiltersRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 }

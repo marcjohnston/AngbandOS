@@ -16,6 +16,7 @@ internal abstract class PotionItem : Item
     {
         return true;
     }
+
     public override int GetAdditionalMassProduceCount()
     {
         int cost = Value();

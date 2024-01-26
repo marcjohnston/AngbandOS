@@ -28,7 +28,7 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.SelectItem(out Item? item, "Use which staff? ", false, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Staff)))
+        if (!SaveGame.SelectItem(out Item? item, "Use which staff? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeUsedItemFilter))))
         {
             SaveGame.MsgPrint("You have no staff to use.");
             return;
@@ -38,7 +38,7 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
             return;
         }
         // Make sure the item is actually a staff
-        if (!SaveGame.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Staff)))
+        if (!SaveGame.ItemMatchesFilter(item, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeUsedItemFilter))))
         {
             SaveGame.MsgPrint("That is not a staff!");
             return;

@@ -76,8 +76,8 @@ internal partial class AlchemistStoreFactory : StoreFactory
     /// </summary>
     protected override string[] ItemFilterNames => new string[]
     {
-        nameof(ScrollItemMatchingCriteria),
-        nameof(PotionItemMatchingCriteria)
+        nameof(ScrollItemFilter),
+        nameof(PotionItemFilter)
     };
 
     protected override string? AdvertisedStoreCommand4Name => nameof(RestorationStoreCommand);

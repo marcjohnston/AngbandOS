@@ -77,15 +77,15 @@ internal class ArmouryStoreFactory : StoreFactory
     /// </summary>
     protected override string[] ItemFilterNames => new string[]
 {
-        nameof(BootsArmorItemMatchingCriteria),
-        nameof(GlovesArmorItemMatchingCriteria),
-        nameof(CrownArmorItemMatchingCriteria),
-        nameof(HelmItemMatchingCriteria),
-        nameof(ShieldItemMatchingCriteria),
-        nameof(CloakArmorItemMatchingCriteria),
-        nameof(SoftArmorItemMatchingCriteria),
-        nameof(HardArmorItemMatchingCriteria),
-        nameof(DragonScaleMailItemMatchingCriteria)
+        nameof(BootsArmorItemFilter),
+        nameof(GlovesArmorItemFilter),
+        nameof(CrownArmorItemFilter),
+        nameof(HelmItemFilter),
+        nameof(ShieldItemFilter),
+        nameof(CloakArmorItemFilter),
+        nameof(SoftArmorItemFilter),
+        nameof(HardArmorItemFilter),
+        nameof(DragonScaleMailItemFilter)
     };
 
     protected override string? AdvertisedStoreCommand4Name => nameof(EnchantArmorStoreCommand);

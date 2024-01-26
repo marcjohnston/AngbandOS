@@ -38,7 +38,7 @@ internal class FireScript : Script, IScript, IRepeatableScript
             return;
         }
         // Get the ammunition to fire
-        if (!SaveGame.SelectItem(out Item? ammunitionStack, "Fire which item? ", false, true, true, new ItemCategoryItemFilter(SaveGame.AmmunitionItemCategory)))
+        if (!SaveGame.SelectItem(out Item? ammunitionStack, "Fire which item? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeFiredItemFilter))))
         {
             SaveGame.MsgPrint("You have nothing to fire.");
             return;

@@ -4159,7 +4159,7 @@ internal class SaveGame
     public void ArtifactScroll()
     {
         bool okay;
-        if (!SelectItem(out Item? oPtr, "Enchant which item? ", true, true, true, new WeaponItemFilter()))
+        if (!SelectItem(out Item? oPtr, "Enchant which item? ", true, true, true, SingletonRepository.ItemFilters.Get(nameof(WeaponItemFilter))))
         {
             MsgPrint("You have nothing to enchant.");
             return;
@@ -4215,7 +4215,7 @@ internal class SaveGame
 
     public bool BlessWeapon()
     {
-        if (!SelectItem(out Item? oPtr, "Bless which weapon? ", true, true, true, new WeaponItemFilter()))
+        if (!SelectItem(out Item? oPtr, "Bless which weapon? ", true, true, true, SingletonRepository.ItemFilters.Get(nameof(WeaponItemFilter))))
         {
             MsgPrint("You have no weapon to bless.");
             return false;
@@ -5434,7 +5434,8 @@ internal class SaveGame
     public bool EnchantItem(int numHit, int numDam, int numAc)
     {
         bool okay = false;
-        if (!SelectItem(out Item? oPtr, "Enchant which item? ", true, true, true, numAc != 0 ? new ArmourItemFilter() : new WeaponItemFilter()))
+        IItemFilter itemFilter = numAc != 0 ? SingletonRepository.ItemFilters.Get(nameof(ArmorItemsItemFilter)) : SingletonRepository.ItemFilters.Get(nameof(WeaponItemFilter));
+        if (!SelectItem(out Item? oPtr, "Enchant which item? ", true, true, true, itemFilter))
         {
             MsgPrint("You have nothing to enchant.");
             return false;
@@ -5820,7 +5821,7 @@ internal class SaveGame
     public bool Recharge(int num)
     {
         int i, t;
-        if (!SelectItem(out Item? oPtr, "Recharge which item? ", false, true, true, new RechargableItemFilter()))
+        if (!SelectItem(out Item? oPtr, "Recharge which item? ", false, true, true, SingletonRepository.ItemFilters.Get(nameof(CanBeRechargedItemFilter))))
         {
             MsgPrint("You have nothing to recharge.");
             return false;
@@ -9144,7 +9145,7 @@ internal class SaveGame
     public void Rustproof()
     {
         // Get a piece of armour
-        if (!SelectItem(out Item? item, "Rustproof which piece of armour? ", true, true, true, new ArmourItemFilter()))
+        if (!SelectItem(out Item? item, "Rustproof which piece of armour? ", true, true, true, SingletonRepository.ItemFilters.Get(nameof(ArmorItemsItemFilter))))
         {
             MsgPrint("You have nothing to rustproof.");
             return;

@@ -18,6 +18,8 @@ internal abstract class ScrollItemClass : ItemFactory, IFlavour
     /// </summary>
     public IEnumerable<Flavour>? GetFlavorRepository() => SaveGame.ScrollFlavours;
 
+    public override bool CanBeRead => true;
+
     /// <inheritdoc/>
     public Flavour Flavor { get; set; }
 

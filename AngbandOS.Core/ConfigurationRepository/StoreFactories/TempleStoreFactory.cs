@@ -73,12 +73,12 @@ internal partial class TempleStoreFactory : StoreFactory
     /// </summary>
     protected override string[] ItemFilterNames => new string[]
     {
-        nameof(LifeBookItemMatchingCriteria),
-        nameof(ScrollItemMatchingCriteria),
-        nameof(PotionItemMatchingCriteria),
-        nameof(HaftedItemMatchingCriteria),
-        nameof(BlessedPolearmItemMatchingCriteria),
-        nameof(BlessedSwordItemMatchingCriteria)
+        nameof(LifeBookItemFilter),
+        nameof(ScrollItemFilter),
+        nameof(PotionItemFilter),
+        nameof(HaftedItemFilter),
+        nameof(BlessedPolearmItemFilter),
+        nameof(BlessedSwordItemFilter)
     };
 
     protected override string? AdvertisedStoreCommand4Name => nameof(RemoveCurseStoreCommand);

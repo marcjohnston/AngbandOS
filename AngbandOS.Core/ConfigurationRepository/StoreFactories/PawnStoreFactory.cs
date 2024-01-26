@@ -45,7 +45,7 @@ internal class PawnStoreFactory : StoreFactory
     /// </summary>
     protected override string[] ItemFilterNames => new string[]
     {
-        nameof(AnythingOfValueItemMatchingCriteria)
+        nameof(AnythingOfValueItemFilter)
     };
 
     public override StockStoreInventoryItem[] GetStoreTable()

@@ -52,7 +52,7 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
     public override void Refill(SaveGame saveGame, Item item)
     {
         // Get an item if we don't already have one
-        if (!saveGame.SelectItem(out Item? fuelSource, "Refill with which flask? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(LanternFuelItemMatchingCriteria))))
+        if (!saveGame.SelectItem(out Item? fuelSource, "Refill with which flask? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(LanternFuelItemFilter))))
         {
             saveGame.MsgPrint("You have no flasks of oil.");
             return;
@@ -65,7 +65,7 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
         }
 
         // Make sure our item is suitable fuel
-        if (!saveGame.ItemMatchesFilter(fuelSource, SaveGame.SingletonRepository.ItemFilters.Get(nameof(LanternFuelItemMatchingCriteria))))
+        if (!saveGame.ItemMatchesFilter(fuelSource, SaveGame.SingletonRepository.ItemFilters.Get(nameof(LanternFuelItemFilter))))
         {
             saveGame.MsgPrint("You can't refill a lantern from that!");
             return;

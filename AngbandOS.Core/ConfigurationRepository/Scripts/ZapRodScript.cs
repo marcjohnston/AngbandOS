@@ -28,7 +28,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.SelectItem(out Item? item, "Zap which rod? ", false, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Rod)))
+        if (!SaveGame.SelectItem(out Item? item, "Zap which rod? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeZappedItemFilter))))
         {
             SaveGame.MsgPrint("You have no rod to zap.");
             return;
@@ -38,7 +38,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
             return;
         }
         // Make sure the item is actually a rod
-        if (!SaveGame.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Rod)))
+        if (!SaveGame.ItemMatchesFilter(item, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeZappedItemFilter))))
         {
             SaveGame.MsgPrint("That is not a rod!");
             return;

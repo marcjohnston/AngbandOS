@@ -28,7 +28,7 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.SelectItem(out Item? item, "Quaff which potion? ", true, true, true, new ItemCategoryItemFilter(ItemTypeEnum.Potion)))
+        if (!SaveGame.SelectItem(out Item? item, "Quaff which potion? ", true, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeQuaffedItemFilter))))
         {
             SaveGame.MsgPrint("You have no potions to quaff.");
             return;
@@ -38,7 +38,7 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
             return;
         }
         // Make sure the item is a potion
-        if (!SaveGame.ItemMatchesFilter(item, new ItemCategoryItemFilter(ItemTypeEnum.Potion)))
+        if (!SaveGame.ItemMatchesFilter(item, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeQuaffedItemFilter))))
         {
             SaveGame.MsgPrint("That is not a potion!");
             return;

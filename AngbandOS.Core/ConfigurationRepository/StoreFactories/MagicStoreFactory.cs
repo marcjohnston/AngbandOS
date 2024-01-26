@@ -92,20 +92,20 @@ internal class MagicStoreFactory : StoreFactory
     /// </summary>
     protected override string[] ItemFilterNames => new string[]
     {
-        nameof(SorceryBookItemMatchingCriteria),
-        nameof(NatureBookItemMatchingCriteria),
-        nameof(ChaosBookItemMatchingCriteria),
-        nameof(DeathBookItemMatchingCriteria),
-        nameof(TarotBookItemMatchingCriteria),
-        nameof(FolkBookItemMatchingCriteria),
-        nameof(CorporealBookItemMatchingCriteria),
-        nameof(AmuletJeweleryItemMatchingCriteria),
-        nameof(RingItemMatchingCriteria),
-        nameof(StaffItemMatchingCriteria),
-        nameof(WandItemMatchingCriteria),
-        nameof(RodItemMatchingCriteria),
-        nameof(ScrollItemMatchingCriteria),
-        nameof(PotionItemMatchingCriteria)
+        nameof(SorceryBookItemFilter),
+        nameof(NatureBookItemFilter),
+        nameof(ChaosBookItemFilter),
+        nameof(DeathBookItemFilter),
+        nameof(TarotBookItemFilter),
+        nameof(FolkBookItemFilter),
+        nameof(CorporealBookItemFilter),
+        nameof(AmuletJeweleryItemFilter),
+        nameof(RingItemFilter),
+        nameof(StaffItemFilter),
+        nameof(WandItemFilter),
+        nameof(RodItemFilter),
+        nameof(ScrollItemFilter),
+        nameof(PotionItemFilter)
     };
 
     protected override string? AdvertisedStoreCommand4Name => nameof(ResearchItemStoreCommand);

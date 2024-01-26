@@ -7,6 +7,7 @@
 
 namespace AngbandOS.Core.StoreFactories;
 
+[Serializable]
 internal abstract class StoreFactory : IItemFilter, IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
@@ -38,7 +39,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
         Symbol = SaveGame.SingletonRepository.Symbols.Get(SymbolName);
 
         // Bind the item filters.
-        List<ItemMatchingCriteria> itemFilters = new();
+        List<ItemFilter> itemFilters = new();
         foreach (string itemFilterName in ItemFilterNames)
         {
             itemFilters.Add(SaveGame.SingletonRepository.ItemFilters.Get(itemFilterName));
@@ -76,7 +77,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     public bool ItemMatches(Item item)
     {
         // Loop through all of the item filters.  If the filter matches, then the item matches.
-        foreach (ItemMatchingCriteria itemFilter in ItemFilters)
+        foreach (ItemFilter itemFilter in ItemFilters)
         {
             if (itemFilter.ItemMatches(item))
             {
@@ -86,7 +87,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
         return false;
     }
 
-    public ItemMatchingCriteria[] ItemFilters { get; private set; }
+    public ItemFilter[] ItemFilters { get; private set; }
 
     /// <summary>
     /// Returns the names of the item matching criterion used to determine which items the store buys.  Returns an empty arrary, by default, to

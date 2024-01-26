@@ -11,5 +11,6 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class AmmunitionItemFactory : WeaponItemClass
 {
     public AmmunitionItemFactory(SaveGame saveGame) : base(saveGame) { }
-
+    public override bool IsWeapon => true;
+    public override bool CanBeFired => true;
 }

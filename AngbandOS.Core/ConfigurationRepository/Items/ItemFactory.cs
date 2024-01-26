@@ -22,6 +22,59 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     /// </summary>
     public virtual bool IsFuelForTorch => false;
 
+    /// <summary>
+    /// Returns true, if the item can be worn.
+    /// </summary>
+    public virtual bool IsWearable => false;
+
+    /// <summary>
+    /// Returns true, if the item can be aimed.
+    /// </summary>
+    public virtual bool CanBeAimed => false;
+
+    /// <summary>
+    /// Returns true, if the item can be eaten.
+    /// </summary>
+    public virtual bool CanBeEaten => false;
+
+    /// <summary>
+    /// Returns true, if the item can be quaffed.
+    /// </summary>
+    public virtual bool CanBeQuaffed => false;
+
+    /// <summary>
+    /// Returns true, if the item can be read.
+    /// </summary>
+    public virtual bool CanBeRead => false;
+    /// <summary>
+    /// Returns true, if the item can be used.
+    /// </summary>
+    public virtual bool CanBeUsed => false;
+    /// <summary>
+    /// Returns true, if the item can be zapped.
+    /// </summary>
+    public virtual bool CanBeZapped => false;
+
+    /// <summary>
+    /// Returns true, if the item can be chosen for the Fire command.
+    /// </summary>
+    public virtual bool CanBeFired => false;
+
+    /// <summary>
+    /// Returns true, if the item is armor.
+    /// </summary>
+    public virtual bool IsArmor => false;
+
+    /// <summary>
+    /// Returns true, if the item is rechargable.
+    /// </summary>
+    public virtual bool IsRechargable => false;
+
+    /// <summary>
+    /// Returns true, if the item is a weapon.
+    /// </summary>
+    public virtual bool IsWeapon => false;
+
     protected ItemFactory(SaveGame saveGame)
     {
         SaveGame = saveGame;

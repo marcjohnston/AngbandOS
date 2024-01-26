@@ -15,7 +15,8 @@ internal abstract class ArmourItemFactory : ItemFactory
 {
     public ArmourItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override bool HasQuality => true;
-
+    public override bool IsArmor => true;
+    public override bool IsWearable => true;
     public override int RandartActivationChance => base.RandartActivationChance * 2;
 
     /// <summary>

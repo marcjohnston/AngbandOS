@@ -27,7 +27,7 @@ internal class HomeStoreFactory : StoreFactory
     /// </summary>
     protected override string[] ItemFilterNames => new string[]
     {
-        nameof(AllItemsItemMatchingCriteria),
+        nameof(AllItemsItemFilter),
     };
 
     public override bool MaintainsStockLevels => false;

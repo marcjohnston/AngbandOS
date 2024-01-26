@@ -28,4 +28,5 @@ internal abstract class FoodItemFactory : ItemFactory
 
     public abstract bool Eat();
     public override bool CanBeEatenByMonsters => true;
+    public override bool CanBeEaten => true;
 }

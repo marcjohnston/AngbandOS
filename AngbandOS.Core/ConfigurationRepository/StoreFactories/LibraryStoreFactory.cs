@@ -74,14 +74,14 @@ internal class LibraryStoreFactory : StoreFactory
     /// </summary>
     protected override string[] ItemFilterNames => new string[]
     {
-        nameof(SorceryBookItemMatchingCriteria),
-        nameof(LifeBookItemMatchingCriteria),
-        nameof(NatureBookItemMatchingCriteria),
-        nameof(ChaosBookItemMatchingCriteria),
-        nameof(DeathBookItemMatchingCriteria),
-        nameof(TarotBookItemMatchingCriteria),
-        nameof(FolkBookItemMatchingCriteria),
-        nameof(CorporealBookItemMatchingCriteria)
+        nameof(SorceryBookItemFilter),
+        nameof(LifeBookItemFilter),
+        nameof(NatureBookItemFilter),
+        nameof(ChaosBookItemFilter),
+        nameof(DeathBookItemFilter),
+        nameof(TarotBookItemFilter),
+        nameof(FolkBookItemFilter),
+        nameof(CorporealBookItemFilter)
     };
 
     protected override string? AdvertisedStoreCommand4Name => nameof(ResearchSpellStoreCommand);

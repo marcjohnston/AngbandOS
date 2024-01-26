@@ -20,11 +20,13 @@ internal abstract class WandItemFactory : ItemFactory, IFlavour
 
     /// <inheritdoc/>
     public Flavour Flavor { get; set; }
+    public override bool IsRechargable => true;
 
     public override int PackSort => 14;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Wand;
     public abstract bool ExecuteActivation(SaveGame saveGame, int dir);
     public override int BaseValue => 50;
+    public override bool CanBeAimed => true;
     public override bool HatesElectricity => true;
 
     //public override bool IsCharged => true;

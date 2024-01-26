@@ -18,8 +18,11 @@ internal abstract class StaffItemClass : ItemFactory, IFlavour
     /// </summary>
     public IEnumerable<Flavour>? GetFlavorRepository() => SaveGame.SingletonRepository.StaffFlavours;
 
+    public override bool CanBeUsed => true;
+
     /// <inheritdoc/>
     public Flavour Flavor { get; set; }
+    public override bool IsRechargable => true;
 
     /// <summary>
     /// Executes the staff action.  Returns true, if the usage identifies the staff.
