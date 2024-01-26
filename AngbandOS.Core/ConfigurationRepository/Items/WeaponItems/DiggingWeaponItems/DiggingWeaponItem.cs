@@ -12,7 +12,6 @@ internal abstract class DiggingWeaponItem : WeaponItem
 {
     public override int WieldSlot => InventorySlot.Digger;
     public DiggingWeaponItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    public override bool IdentityCanBeSensed => true;
     public override bool GetsDamageMultiplier => true;
 
     protected override void ApplyMagic(int level, int power, Store? store)

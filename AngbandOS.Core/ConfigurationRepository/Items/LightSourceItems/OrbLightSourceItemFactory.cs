@@ -16,6 +16,7 @@ internal class OrbLightSourceItemFactory : LightSourceItemFactory
     public override ColorEnum Color => ColorEnum.BrightYellow;
     public override string Name => "Orb";
 
+    public override bool IdentityCanBeSensed => true;
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 1000;
     public override int Dd => 1;

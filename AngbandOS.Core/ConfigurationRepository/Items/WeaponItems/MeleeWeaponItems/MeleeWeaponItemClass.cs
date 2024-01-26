@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 /// Represents common characteristics for melee weapons.  Hafted, polearm and swords are all melee weapons.
 /// </summary>
 [Serializable]
-internal abstract class MeleeWeaponItemClass : WeaponItemClass
+internal abstract class MeleeWeaponItemClass : WeaponItemFactory
 {
     public MeleeWeaponItemClass(SaveGame saveGame) : base(saveGame) { }
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(MeleeWeaponInventorySlot));

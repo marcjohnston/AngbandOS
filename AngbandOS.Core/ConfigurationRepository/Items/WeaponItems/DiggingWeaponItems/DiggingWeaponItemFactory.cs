@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemClasses;
 
 [Serializable]
-internal abstract class DiggingWeaponItemFactory : WeaponItemClass
+internal abstract class DiggingWeaponItemFactory : WeaponItemFactory
 {
     public DiggingWeaponItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(DiggersItemClass));

@@ -13,7 +13,6 @@ internal abstract class MeleeWeaponItem : WeaponItem
     public override int WieldSlot => InventorySlot.MeleeWeapon;
     public MeleeWeaponItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
 
-    public override bool IdentityCanBeSensed => true;
     protected virtual bool CanBeWeaponOfLaw => false;
     protected virtual bool CanBeWeaponOfSharpness => false;
     protected virtual bool CapableOfVorpalSlaying => false;

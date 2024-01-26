@@ -15809,7 +15809,7 @@ internal class SaveGame
                 {
                     continue;
                 }
-                bool okay = item.IdentityCanBeSensed;
+                bool okay = item.Factory.IdentityCanBeSensed;
                 if (!okay)
                 {
                     continue;

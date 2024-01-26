@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemClasses;
 
 [Serializable]
-internal abstract class BowWeaponItemFactory : WeaponItemClass // TODO: Should be renamed to RangedWeaponItemClass
+internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should be renamed to RangedWeaponItemClass
 {
     public BowWeaponItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(BowsItemClass));

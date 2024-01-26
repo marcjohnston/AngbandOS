@@ -18,6 +18,11 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     protected readonly SaveGame SaveGame;
 
     /// <summary>
+    /// Returns true, if the identity of the item can be sensed; false, otherwise.  Returns false, by default.
+    /// </summary>
+    public virtual bool IdentityCanBeSensed => false;
+
+    /// <summary>
     /// Returns true, if the item can be used as fuel for a torch.
     /// </summary>
     public virtual bool IsFuelForTorch => false;

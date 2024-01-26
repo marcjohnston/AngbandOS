@@ -21,5 +21,4 @@ internal class OrbLightSourceItem : LightSourceItem
     {
         return base.CalculateTorch() + 2;
     }
-    public override bool IdentityCanBeSensed => true;
 }

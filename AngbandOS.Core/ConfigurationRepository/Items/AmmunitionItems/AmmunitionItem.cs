@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Items;
 internal abstract class AmmunitionItem : Item
 {
     public AmmunitionItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    public override bool IdentityCanBeSensed => true;
     public override int? GetBonusRealValue(int value)
     {
         if (BonusToHit + BonusDamage < 0)

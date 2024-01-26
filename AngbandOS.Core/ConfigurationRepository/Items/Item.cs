@@ -46,11 +46,6 @@ internal abstract class Item : IComparable<Item>, IGetKey<string>
     public virtual bool CanApplyBlowsBonus => false;
 
     /// <summary>
-    /// Returns true, if the identity of the item can be sensed; false, otherwise.  Returns false, by default.
-    /// </summary>
-    public virtual bool IdentityCanBeSensed => false;
-
-    /// <summary>
     /// Returns the intensity of light that the object emits.  By default, a value of 1 is returned, if the item has a 
     /// light-source characteristic.
     /// </summary>
