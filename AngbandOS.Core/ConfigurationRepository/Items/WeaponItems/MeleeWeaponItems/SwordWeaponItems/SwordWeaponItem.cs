@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Items;
 internal abstract class SwordWeaponItem : MeleeWeaponItem
 {
     public SwordWeaponItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    public override bool GetsDamageMultiplier => true;
     public override bool CanVorpalSlay => true;
 
     protected override bool CanBeWeaponOfLaw => true;

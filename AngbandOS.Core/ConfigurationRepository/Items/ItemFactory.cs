@@ -18,6 +18,11 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     protected readonly SaveGame SaveGame;
 
     /// <summary>
+    /// Returns true, if the item multiplies damages against a specific monster race.  Returns false, by default. Shots, arrows, bolts, hafted, polearms, swords and digging all return true.
+    /// </summary>
+    public virtual bool GetsDamageMultiplier => false;
+
+    /// <summary>
     /// Returns true, if the identity of the item can be sensed; false, otherwise.  Returns false, by default.
     /// </summary>
     public virtual bool IdentityCanBeSensed => false;

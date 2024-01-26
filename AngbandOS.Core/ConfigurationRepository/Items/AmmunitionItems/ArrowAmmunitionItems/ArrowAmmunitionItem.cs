@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Items;
 internal abstract class ArrowAmmunitionItem : AmmunitionItem
 {
     public ArrowAmmunitionItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    public override bool GetsDamageMultiplier => true;
     public override int MakeObjectCount => SaveGame.Rng.DiceRoll(6, 7);
 
     public override int PercentageBreakageChance => 25;

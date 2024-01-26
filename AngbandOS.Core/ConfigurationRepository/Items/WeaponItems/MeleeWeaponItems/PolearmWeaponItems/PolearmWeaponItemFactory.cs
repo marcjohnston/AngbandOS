@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemClasses;
 
 [Serializable]
-internal abstract class PolearmWeaponItemFactory : MeleeWeaponItemClass
+internal abstract class PolearmWeaponItemFactory : MeleeWeaponItemFactory
 {
     public PolearmWeaponItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(PolearmsItemClass));

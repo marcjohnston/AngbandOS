@@ -16,5 +16,5 @@ internal abstract class DiggingWeaponItemFactory : WeaponItemFactory
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Digging;
     public override int PackSort => 31;
     public override ColorEnum Color => ColorEnum.Grey;
-
+    public override bool GetsDamageMultiplier => true;
 }

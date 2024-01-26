@@ -26,11 +26,6 @@ internal abstract class Item : IComparable<Item>, IGetKey<string>
     public virtual int MakeObjectCount => 1;
 
     /// <summary>
-    /// Returns true, if the item multiplies damages against a specific monster race.  Returns false, by default. Shots, arrows, bolts, hafted, polearms, swords and digging all return true.
-    /// </summary>
-    public virtual bool GetsDamageMultiplier => false;
-
-    /// <summary>
     /// Returns the percentage chance that an thrown or fired item breaks.  Returns 10, or 10%, by default.  A value of 101, guarantees the item will break.
     /// </summary>
     public virtual int PercentageBreakageChance => 10;
@@ -553,7 +548,7 @@ internal abstract class Item : IComparable<Item>, IGetKey<string>
         int mult = 1;
         MonsterRace rPtr = mPtr.Race;
         RefreshFlagBasedProperties();
-        if (GetsDamageMultiplier)
+        if (Factory.GetsDamageMultiplier)
         {
             if (Characteristics.SlayAnimal && rPtr.Animal)
             {
